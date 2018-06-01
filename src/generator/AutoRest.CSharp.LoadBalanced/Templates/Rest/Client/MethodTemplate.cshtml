@@ -99,7 +99,7 @@ public async @(Model.OperationResponseReturnTypeString) @(Model.Name)Async(@(Mod
                             {
                                 HttpVerb = verb,
                                 RestUrl = "@(endpoint)",
-                                CustomHeaders = customHeaders,
+                                CustomHeaders = _customHeaders,
                                 QueryParameters = queryParameters
                                 @(@Model.Body == null ? "" : ", Body = " + Model.RequestBody.Name)
                             };

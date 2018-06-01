@@ -37,10 +37,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                 }
                 return new DictionaryTypeCs { ValueType = base.ModelType, CodeModel = base.ModelType.CodeModel, SupportsAdditionalProperties = false };
             }
-            set
-            {
-                base.ModelType = value;
-            }
+            set => base.ModelType = value;
         }
     }
 }

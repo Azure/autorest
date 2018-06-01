@@ -71,11 +71,6 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                     format, parameter.ModelTypeName, parameter.Name, defaultValue));
             }
 
-            if (addCustomHeaderParameters)
-            {
-                declarations.Add("Dictionary<string, string> customHeaders = null");
-            }
-
             return string.Join(", ", declarations);
         }
 
