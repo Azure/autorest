@@ -25,13 +25,6 @@ namespace @Settings.Namespace
     Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
     @EmptyLine
 
-    @foreach (var property in Model.Properties)
-    {
-        @:/// <summary>@(property.Documentation.EscapeXmlComment())</summary>
-        @:@property.ModelTypeName @property.Name { get;@(property.IsReadOnly || property.IsConstant ? "" : " set;") }
-        @EmptyLine
-    }
-
     @EmptyLine
     @foreach (var operation in Model.AllOperations)
     {

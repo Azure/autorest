@@ -427,7 +427,7 @@ namespace AutoRest.Core.Utilities
 
         public static string StripControlCharacters(this string input)
         {
-            return string.IsNullOrWhiteSpace(input) ? input : Regex.Replace(input, @"[\ca-\cz-[\cj\cm\ci]]", string.Empty);
+            return string.IsNullOrWhiteSpace(input) ? input : Regex.Replace(input, @"[\ca-\cz-[\cj\cm\ci]]", string.Empty).Replace("\n","").Replace("\r", "");
         }
 
         public static string Capitalize(this string input)

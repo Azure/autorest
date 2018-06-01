@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
             {
                 if (Responses.Any())
                 {
-                    List<string> predicates = new List<string>();
+                    var predicates = new List<string>();
                     foreach (var responseStatus in Responses.Keys)
                     {
                         predicates.Add(string.Format(CultureInfo.InvariantCulture,
@@ -62,12 +62,12 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         /// <returns>Generated string of parameters</returns>
         public virtual string GetSyncMethodParameterDeclaration(bool addCustomHeaderParameters)
         {
-            List<string> declarations = new List<string>();
+            var declarations = new List<string>();
             foreach (var parameter in LocalParameters)
             {
-                string format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = {2}");
+                var format = (parameter.IsRequired ? "{0} {1}" : "{0} {1} = {2}");
 
-                string defaultValue = $"default({parameter.ModelTypeName})";
+                var defaultValue = $"default({parameter.ModelTypeName})";
                 if (!string.IsNullOrEmpty(parameter.DefaultValue) && parameter.ModelType is PrimaryType)
                 {
                     defaultValue = parameter.DefaultValue;
@@ -117,7 +117,6 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                 return
                     Parameters.Where(parameter =>
                         parameter != null &&
-                        !parameter.IsClientProperty &&
                         !string.IsNullOrWhiteSpace(parameter.Name) &&
                         !parameter.IsConstant)
                         .OrderBy(item => !item.IsRequired).Cast<ParameterCs>();
@@ -213,7 +212,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                     return "HttpOperationException";
                 }
 
-                CompositeType type = this.DefaultResponse.Body as CompositeType;
+                var type = this.DefaultResponse.Body as CompositeType;
                 if (!type.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
                 {
                     return type.Name + "Exception";
@@ -332,7 +331,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
 
         public string GetExtensionParameters(string methodParameters)
         {
-            string operationsParameter = "this I" + MethodGroup.TypeName + " operations";
+            var operationsParameter = "this I" + MethodGroup.TypeName + " operations";
             return string.IsNullOrWhiteSpace(methodParameters)
                 ? operationsParameter
                 : operationsParameter + ", " + methodParameters;
@@ -352,48 +351,41 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         {
             var builder = new IndentedStringBuilder();
 
+                builder.AppendLine("var queryParameters = new Dictionary<string,object>();");
             foreach (var pathParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Path))
             {
-                string replaceString = "{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));";
-                if (pathParameter.SkipUrlEncoding())
-                {
-                    replaceString = "{0} = {0}.Replace(\"{{{1}}}\", {2});";
-                }
+                var replaceString = "queryParameters.Add(\"{0}\",{1});";
                 var urlPathName = pathParameter.SerializedName;
                 if (pathParameter.ModelType is SequenceType)
                 {
                     builder.AppendLine(replaceString,
-                    variableName,
                     urlPathName,
                     pathParameter.GetFormattedReferenceValue(ClientReference));
                 }
                 else
                 {
                     builder.AppendLine(replaceString,
-                    variableName,
                     urlPathName,
                     pathParameter.ModelType.ToString(ClientReference, pathParameter.Name));
                 }
             }
             if (this.LogicalParameters.Any(p => p.Location == ParameterLocation.Query))
             {
-                builder.AppendLine("List<string> _queryParameters = new SList<string>();");
                 foreach (var queryParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Query))
                 {
-                    var replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));";
+                    var replaceString = "queryParameters.Add(\"{0}\",{1});";
                     if ((queryParameter as ParameterCs).IsNullable())
                     {
-                        builder.AppendLine("if ({0} != null)", queryParameter.Name)
-                            .AppendLine("{").Indent();
+                        builder.Append($"if ({queryParameter.Name} != null)");
                     }
-
-                    if (queryParameter.SkipUrlEncoding())
-                    {
-                        replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", {1}));";
-                    }
-
+                    
                     if (queryParameter.CollectionFormat == CollectionFormat.Multi)
                     {
+                        if ((queryParameter as ParameterCs).IsNullable())
+                        {
+                            builder
+                                .AppendLine("{").Indent();
+                        }
                         builder.AppendLine("if ({0}.Count == 0)", queryParameter.Name)
                            .AppendLine("{").Indent()
                            .AppendLine(replaceString, queryParameter.SerializedName, "string.Empty").Outdent()
@@ -405,32 +397,20 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                            .AppendLine(replaceString, queryParameter.SerializedName, "_item ?? string.Empty").Outdent()
                            .AppendLine("}").Outdent()
                            .AppendLine("}").Outdent();
+                        if ((queryParameter as ParameterCs).IsNullable())
+                        {
+                            builder
+                                .AppendLine("}").Indent();
+                        }
                     }
                     else
                     {
                         builder.AppendLine(replaceString,
                                 queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference));
                     }
-
-                    if ((queryParameter as ParameterCs).IsNullable())
-                    {
-                        builder.Outdent()
-                            .AppendLine("}");
-                    }
+                    
                 }
-
-                builder.AppendLine("if (_queryParameters.Count > 0)")
-                    .AppendLine("{").Indent();
-                if (this.Extensions.ContainsKey("nextLinkMethod") && (bool)this.Extensions["nextLinkMethod"])
-                {
-                    builder.AppendLine("{0} += ({0}.Contains(\"?\") ? \"&\" : \"?\") + string.Join(\"&\", _queryParameters);", variableName);
-                }
-                else
-                {
-                    builder.AppendLine("{0} += \"?\" + string.Join(\"&\", _queryParameters);", variableName);
-                }
-
-                builder.Outdent().AppendLine("}");
+                
             }
 
             return builder.ToString();

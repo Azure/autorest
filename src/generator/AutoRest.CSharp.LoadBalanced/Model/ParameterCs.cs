@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
     {
         public ParameterCs()
         {
-            Name.OnGet += value => IsClientProperty ? true == Method?.Group.IsNullOrEmpty() ? $"this.{ClientProperty.Name}" : $"this.Client.{ClientProperty.Name}" : CodeNamer.Instance.GetParameterName(value);
+            Name.OnGet += value => CodeNamer.Instance.GetParameterName(value);
         }
         /// <summary>
         /// Gets True if parameter can call .Validate method

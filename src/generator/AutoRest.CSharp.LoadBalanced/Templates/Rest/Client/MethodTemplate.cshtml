@@ -93,13 +93,7 @@ public async @(Model.OperationResponseReturnTypeString) @(Model.Name)Async(@(Mod
 @EmptyLine
     var verb = Verbs.@(Model.HttpMethod.ToString().ToUpper());
 @EmptyLine
-    var queryParameters = new Dictionary<string, object>
-        {
-    @foreach (var parameter in Model.LogicalParameters.Where(p => !p.IsClientProperty))
-    {
-@:            { "@(parameter.Name)", @(parameter.Name) },
-    }
-        };
+    @(Model.BuildUrl("_url"))
 @EmptyLine
     var requestParameters = new RequestParameters
                             {
@@ -107,7 +101,7 @@ public async @(Model.OperationResponseReturnTypeString) @(Model.Name)Async(@(Mod
                                 RestUrl = "@(endpoint)",
                                 CustomHeaders = customHeaders,
                                 QueryParameters = queryParameters
-                                @(@Model.Body == null ? "" : ", Body = body")
+                                @(@Model.Body == null ? "" : ", Body = " + Model.RequestBody.Name)
                             };
 @EmptyLine
     @if (Model.ReturnType.Body != null) {
