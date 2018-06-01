@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
             var declarations = new List<string>();
             foreach (var argument in GetConstructorArguments(parameters))
             {
-                string format = argument.IsRequired ? "{0} {1}" : "{0} {1} = default({0})";
+                var format = argument.IsRequired ? "{0} {1}" : "{0} {1} = default({0})";
 
                 var typeName = _model.PropertyTypeSelectionStrategy?.GetPropertyTypeName(argument) ?? argument.ModelTypeName;
                 var argumentName = CodeNamer.Instance.CamelCase(argument.Name);
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         {
             var declarations = new List<string>();
 
-            IEnumerable<Property> parametersWithDocumentation =
+            var parametersWithDocumentation =
                parameters.Where(p => !(string.IsNullOrEmpty(p.UnderlyingProperty.Summary) &&
                string.IsNullOrEmpty(p.UnderlyingProperty.Documentation)) &&
                !p.UnderlyingProperty.IsConstant).Select(p => p.UnderlyingProperty);
@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         {
             if (model.BaseModelType != null)
             {
-                IEnumerable<ConstructorParameterModel> parameters = (model.BaseModelType as CompositeTypeCs)?._constructorModel.Parameters;
+                var parameters = (model.BaseModelType as CompositeTypeCs)?._constructorModel.Parameters;
                 if (parameters.Any())
                 {
                     return $": base({string.Join(", ", parameters.Select(p => p.Name))})";

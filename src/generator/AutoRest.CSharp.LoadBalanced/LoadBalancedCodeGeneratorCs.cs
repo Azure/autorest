@@ -48,6 +48,11 @@ namespace AutoRest.CSharp.LoadBalanced
             project.FilePaths.Add(metricsFilePath);
             await Write(metricsTemplate, metricsFilePath);
 
+            var responseTemplate = new ResponseTemplate();
+            var responseFilePath = "Response.cs";
+            project.FilePaths.Add(responseFilePath);
+            await Write(responseTemplate, responseFilePath);
+
             usings.Add("System");
             usings.Add("System.Collections.Generic");
             usings.Add("System.Linq");

@@ -12,7 +12,7 @@
 @{ 
     var basePath = Model.CodeModel.BasePath?.Trim('/');
     var path = Model.Url.TrimStart('/');
-    var endpoint = string.Concat(basePath, '/', path);
+    var endpoint = string.Concat(basePath, path);
 }
 
 @if (!string.IsNullOrWhiteSpace(Model.Description) || !string.IsNullOrEmpty(Model.Summary))
@@ -104,8 +104,5 @@ public async @(Model.OperationResponseReturnTypeString) @(Model.Name)Async(@(Mod
                                 @(@Model.Body == null ? "" : ", Body = " + Model.RequestBody.Name)
                             };
 @EmptyLine
-    @if (Model.ReturnType.Body != null) {
-@:    return 
-    }
-    await @(Model.GetOperationResponseReturnTypeString("InvokeNewRequest"))(Metrics.@(Model.Name), requestParameters);
+    return await @(Model.GetOperationResponseReturnTypeString("InvokeNewRequest"))(Metrics.@(Model.Name), requestParameters);
 }

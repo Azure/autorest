@@ -12,6 +12,11 @@ using Microsoft.Rest.Serialization;
 @EmptyLine
 namespace @Settings.Namespace
 {
+    @EmptyLine
+    public class Version
+    {
+        public const string ApiVersion = "@(Model.ApiVersion)";
+    }
 @EmptyLine
     public interface IApiBaseConfig
     {

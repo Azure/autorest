@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
 
                 return _usings;
             }
-            set { _usings = value; }
+            set => _usings = value;
         }
 
         [JsonIgnore]

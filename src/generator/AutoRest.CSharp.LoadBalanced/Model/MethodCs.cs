@@ -32,18 +32,13 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         {
             get
             {
-                if (Responses.Any())
+                if (!Responses.Any())
                 {
-                    var predicates = new List<string>();
-                    foreach (var responseStatus in Responses.Keys)
-                    {
-                        predicates.Add(string.Format(CultureInfo.InvariantCulture,
-                            "(int)_statusCode != {0}", GetStatusCodeReference(responseStatus)));
-                    }
-
-                    return string.Join(" && ", predicates);
+                    return "!_httpResponse.IsSuccessStatusCode";
                 }
-                return "!_httpResponse.IsSuccessStatusCode";
+                var predicates = Responses.Keys.Select(responseStatus => string.Format(CultureInfo.InvariantCulture, "(int)_statusCode != {0}", GetStatusCodeReference(responseStatus))).ToList();
+
+                return string.Join(" && ", predicates);
             }
         }
 
@@ -52,7 +47,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         /// </summary>
         public virtual string GetAsyncMethodParameterDeclaration()
         {
-            return this.GetAsyncMethodParameterDeclaration(false);
+            return GetAsyncMethodParameterDeclaration(false);
         }
 
         /// <summary>
@@ -91,7 +86,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         /// <returns>Generated string of parameters</returns>
         public virtual string GetAsyncMethodParameterDeclaration(bool addCustomHeaderParameters)
         {
-            var declarations = this.GetSyncMethodParameterDeclaration(addCustomHeaderParameters);
+            var declarations = GetSyncMethodParameterDeclaration(addCustomHeaderParameters);
             return string.Join(", ", declarations);
         }
 
@@ -207,12 +202,12 @@ namespace AutoRest.CSharp.LoadBalanced.Model
         {
             get
             {
-                if (!(this.DefaultResponse.Body is CompositeType))
+                if (!(DefaultResponse.Body is CompositeType))
                 {
                     return "HttpOperationException";
                 }
 
-                var type = this.DefaultResponse.Body as CompositeType;
+                var type = DefaultResponse.Body as CompositeType;
                 if (!type.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
                 {
                     return type.Name + "Exception";
@@ -352,7 +347,7 @@ namespace AutoRest.CSharp.LoadBalanced.Model
             var builder = new IndentedStringBuilder();
 
                 builder.AppendLine("var queryParameters = new Dictionary<string,object>();");
-            foreach (var pathParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Path))
+            foreach (var pathParameter in LogicalParameters.Where(p => p.Location == ParameterLocation.Path))
             {
                 var replaceString = "queryParameters.Add(\"{0}\",{1});";
                 var urlPathName = pathParameter.SerializedName;
@@ -369,9 +364,9 @@ namespace AutoRest.CSharp.LoadBalanced.Model
                     pathParameter.ModelType.ToString(ClientReference, pathParameter.Name));
                 }
             }
-            if (this.LogicalParameters.Any(p => p.Location == ParameterLocation.Query))
+            if (LogicalParameters.Any(p => p.Location == ParameterLocation.Query))
             {
-                foreach (var queryParameter in this.LogicalParameters.Where(p => p.Location == ParameterLocation.Query))
+                foreach (var queryParameter in LogicalParameters.Where(p => p.Location == ParameterLocation.Query))
                 {
                     var replaceString = "queryParameters.Add(\"{0}\",{1});";
                     if ((queryParameter as ParameterCs).IsNullable())
