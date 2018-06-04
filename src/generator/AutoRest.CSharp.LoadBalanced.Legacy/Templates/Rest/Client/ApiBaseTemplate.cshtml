@@ -35,6 +35,7 @@ namespace @Settings.Namespace
         public Exception Exception { get; set; }
         public string RouteName { get; set; }
         public ExecuteResult ExecuteResult { get; set; }
+        public object Payload { get; set; }
     }
 @EmptyLine
 
@@ -209,7 +210,7 @@ namespace @Settings.Namespace
             }
             catch (Exception ex)
             {
-                _errorEvent?.Invoke(this, new ErrorEventArgs { Exception = ex, RouteName = metricName, ExecuteResult = executeResult });
+                _errorEvent?.Invoke(this, new ErrorEventArgs { Exception = ex, RouteName = metricName, ExecuteResult = executeResult, Payload = parameters});
                 throw;
             }
             finally
