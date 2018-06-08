@@ -854,10 +854,22 @@ Full code:
 ## x-ms-long-running-operation
 Some requests like creating/deleting a resource cannot be carried out immediately. In such a situation, the server sends a 201 (Created) or 202 (Accepted) and provides a link to monitor the status of the request. When such an operation is marked with extension `"x-ms-long-running-operation": true`, in OpenAPI, the generated code will know how to fetch the link to monitor the status. It will keep on polling at regular intervals till the request reaches one of the terminal states: Succeeded, Failed, or Canceled.
 
-**Parent element**:  [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
+### x-ms-long-running-operation-options
+When `x-ms-long-running-operation` is specified, there should also be a `x-ms-long-running-operation-options` specified.
+
+See [Azure RPC Spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations) for asynchronous operation notes.
 
 **Schema**: 
-`true|false`
+Field Name | Type | Description
+---|:---:|---
+final-state-via | `string` - one of `azure-async-operation` or `location` or `original-uri` | `final-state-via` SHOULD BE one of 
+  - `azure-async-operation` - (default if not specified) poll until terminal state, the final response will be available at the uri pointed to by the header `Azure-AsyncOperation`
+  - `location`  - poll until terminal state, the final response will be available at the uri pointed to by the header `Location`
+  - `original-uri` - poll until terminal state, the final response will be available via GET at the original resource URI. Very common for PUT operations.
+
+It will keep on polling at regular intervals till the request reaches one of the terminal states: Succeeded, Failed, or Canceled.
+
+**Parent element**:  [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
 
 **Example**:
 ```json5
@@ -866,6 +878,9 @@ Some requests like creating/deleting a resource cannot be carried out immediatel
     "put": {
       "operationId": "products_create",
       "x-ms-long-running-operation": true,
+      "x-ms-long-running-operation-options" : {
+          "final-state-via" : "location"
+      },
       "description": "A pageable list of Products."
     }
   }
