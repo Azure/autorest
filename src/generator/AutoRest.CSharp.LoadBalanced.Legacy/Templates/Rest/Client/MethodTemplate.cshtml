@@ -82,7 +82,7 @@ public async @(Model.OperationResponseReturnTypeStringForMethodName) @(Model.Nam
         RestUrl = "@(Model.FromattedUrl)",
         CustomHeaders = _defaultHeaders,
         QueryParameters = @(Model.QueryParameters.Any() ? "queryParameters" : "new Dictionary<string, object>()")
-        @(@Model.Body == null ? "" : ", Body = body")
+                                @(@Model.Body == null ? "" : ", Body = " + Model.RequestBody.Name)
     };
     @EmptyLine
     try

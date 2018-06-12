@@ -13,7 +13,6 @@ using Agoda.RoundRobin;
 using Agoda.RoundRobin.Constants;
 using Microsoft.Rest;
 using Microsoft.Rest.Serialization;
-using Agoda.Http.Client.WinHttp;
 using System.Linq;
 using AutoRest.CSharp.LoadBalanced.Json;
 
@@ -366,7 +365,13 @@ namespace @Settings.Namespace
                 //ignore body parameter when appending query parameter in URL
                 uriBuilder.Query = string.Join("&", query.Select(parameter =>
                 {
-                var name = HttpUtility.UrlEncode(parameter.Key);
+                
+#if NETSTANDARD2_0
+
+                    var name = HttpUtility.UrlEncode(parameter.Key);
+#else
+                    var name = WebUtility.UrlEncode(parameter.Key);
+#endif
                 var value = parameter.Value;
                 return $"{name}={value}";
                 }));

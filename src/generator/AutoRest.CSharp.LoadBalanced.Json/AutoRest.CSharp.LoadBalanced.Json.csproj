@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Authors>Agoda, Microsoft</Authors>
-    <TargetFramework>net451</TargetFramework>
+    <TargetFrameworks>net451;netstandard2.0</TargetFrameworks>
     <DelaySign>true</DelaySign>
     <AssemblyName>AutoRest.CSharp.LoadBalanced.Json</AssemblyName>
     <AssemblyOriginatorKeyFile>../../../Tools/MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
@@ -21,15 +21,16 @@
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\core\AutoRest.Core\AutoRest.Core.csproj" />
-    <ProjectReference Include="..\..\core\AutoRest.Extensions\AutoRest.Extensions.csproj" />
-  </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
     <Reference Include="System.Net.Http" />
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
   </ItemGroup>
 
 </Project>
