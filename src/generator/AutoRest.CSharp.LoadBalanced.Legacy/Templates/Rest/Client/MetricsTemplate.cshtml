@@ -3,7 +3,7 @@ namespace @Settings.Namespace
 {
     public static class Metrics
     {
-        public const string Prefix = "API.";
+        public const string Prefix = "@(Settings.Namespace).API.";
     @foreach (var parameter in Model)
     {
 @:        public const string @(parameter.Name) = Prefix + "@(parameter.NameWithoutRoute)";

@@ -18,6 +18,14 @@ namespace @Settings.Namespace
         public const string ApiVersion = "@(Model.ApiVersion)";
     }
 @EmptyLine
+    public class ErrorEventArgs : EventArgs
+    {
+        public Exception Exception { get; set; }
+        public string RouteName { get; set; }
+        public ExecuteResult ExecuteResult { get; set; }
+        public object Payload { get; set; }
+    }
+@EmptyLine
     public interface IApiBaseConfig
     {
         string name { get; set; }
@@ -62,6 +70,8 @@ namespace @Settings.Namespace
         private readonly bool _overrideHostHeader;
         private readonly string _name;
         public readonly Dictionary<string, string> _customHeaders;
+        private event EventHandler<MetricSendEventArgs> _metricSendEvent;
+        private event EventHandler<ErrorEventArgs> _errorEvent;
 @EmptyLine
         protected ApiBase(IApiBaseConfig apiBaseConfig)
         {
@@ -76,6 +86,17 @@ namespace @Settings.Namespace
             _customHeaders = apiBaseConfig.customHeaders;
         }
 @EmptyLine
+
+        protected ApiBase(IApiBaseConfig apiBaseConfig, EventHandler<MetricSendEventArgs> metricEvent, EventHandler<ErrorEventArgs> errorEvent) : this(apiBaseConfig)
+        {
+            if (metricEvent != null)
+                _metricSendEvent += metricEvent;
+
+            if (errorEvent != null)
+                _errorEvent += errorEvent;
+        }
+@EmptyLine
+
         public virtual JsonSerializerSettings SerializationSettings =>
             _serializationSettings ?? (_serializationSettings =
                 new JsonSerializerSettings
@@ -158,7 +179,7 @@ namespace @Settings.Namespace
             }
             catch (Exception ex)
             {
-                ErrorEvent?.Invoke(this, new ErrorEventArgs {Exception = ex});
+                _errorEvent?.Invoke(this, new ErrorEventArgs { Exception = ex, RouteName = metricName, ExecuteResult = executeResult, Payload = parameters});
                 throw;
             }
             finally
@@ -172,7 +193,7 @@ namespace @Settings.Namespace
                     tags.Add("TotalReceivedBytes", executeResult.TotalReceivedBytes);
                 }
 
-                MetricSendEvent?.Invoke(this,
+                _metricSendEvent?.Invoke(this,
                     new MetricSendEventArgs
                     {
                         Name = metricName,
@@ -182,19 +203,11 @@ namespace @Settings.Namespace
             }
         }
 @EmptyLine
-        public event EventHandler<MetricSendEventArgs> MetricSendEvent;
-        public event EventHandler<ErrorEventArgs> ErrorEvent;
-@EmptyLine
         public class MetricSendEventArgs : EventArgs
         {
             public long ElapsedMilliseconds { get; set; }
             public string Name { get; set; }
             public Dictionary<string, object> Tags { get; set; }
-        }
-@EmptyLine
-        public class ErrorEventArgs : EventArgs
-        {
-            public Exception Exception { get; set; }
         }
 @EmptyLine
         public class RequestParameters
