@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Stringify } from './ref/yaml';
+import { Stringify, ParseToAst } from './ref/yaml';
 import { Extension, ExtensionManager, LocalExtension } from "@microsoft.azure/extension";
 import { ChildProcess } from "child_process";
 
@@ -874,6 +874,14 @@ export class Configuration {
       if (content.indexOf(Constants.MagicString) > -1) {
         // the file name was passed in!
         return [configFileOrFolderUri];
+      }
+      try {
+        const ast = ParseToAst(content);
+        if (ast) {
+          return [configFileOrFolderUri];
+        }
+      } catch {
+        // nope.
       }
       // this *was* an actual file passed in, not a folder. don't make this harder than it has to be.
       throw new Error(`Specified file '${originalConfigFileOrFolderUri}' is not a valid configuration file (missing magic string, see https://github.com/Azure/autorest/blob/master/docs/user/literate-file-formats/configuration.md#the-file-format).`);
