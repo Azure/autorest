@@ -36,6 +36,11 @@ directive:
         ? ($ ? { type: "object" } : undefined)
         : $
     reason: polyfill
+  - from: swagger-document
+    where: >-
+      $..*[?(typeof @.modelAsString === "boolean" && typeof @.oldModelAsString
+      !== "boolean")]
+    transform: $.oldModelAsString = $.modelAsString
 input-file:
   - >-
     https://github.com/Azure/azure-rest-api-specs/blob/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json
@@ -56,10 +61,10 @@ try-require:
 use: []
 clear-output-folder: {}
 use-extension:
-  '@microsoft.azure/autorest.csharp': ~2.2.51
+  '@microsoft.azure/autorest.csharp': ~2.3.79
   '@microsoft.azure/classic-openapi-validator': ~1.0.9
   '@microsoft.azure/openapi-validator': ~1.0.2
-  '@microsoft.azure/autorest.modeler': 2.3.43
+  '@microsoft.azure/autorest.modeler': 2.3.55
 
 no-upgrade-check: {}
 skip-upgrade-check: {}
@@ -359,10 +364,10 @@ declare-directive:
       transform: `if ($.properties[${JSON.stringify($.from)}]) { $.properties[${JSON.stringify($.to)}] = $.properties[${JSON.stringify($.from)}]; delete $.properties[${JSON.stringify($.from)}]; }`
     }
 used-extension:
-  - '["@microsoft.azure/autorest.csharp","~2.2.51"]'
+  - '["@microsoft.azure/autorest.csharp","~2.3.79"]'
   - '["@microsoft.azure/classic-openapi-validator","~1.0.9"]'
   - '["@microsoft.azure/openapi-validator","~1.0.2"]'
-  - '["@microsoft.azure/autorest.modeler","2.3.43"]'
+  - '["@microsoft.azure/autorest.modeler","2.3.55"]'
 scope-csharp/emitter:
   input-artifact: source-file-csharp
 scope-jsonrpcclient/emitter:
@@ -428,6 +433,8 @@ help-content:
         type: string
       - key: sample-generation
         description: generate sample code from x-ms-examples (experimental)
+      - key: static-serializer
+        description: generate client serlializer settings as a static member (experimental)
 azure-validator-composed:
   merge-state: composed
 azure-validator-individual:

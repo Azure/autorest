@@ -122,6 +122,7 @@ modelTypes:
           x-ms-enum:
             name: Reason
             modelAsString: false
+            oldModelAsString: false
         isRequired: false
         isConstant: false
         name:
@@ -132,7 +133,6 @@ modelTypes:
         modelType:
           $id: '27'
           $type: EnumType
-          modelAsExtensible: false
           values:
             - $id: '28'
               name: AccountNameInvalid
@@ -140,6 +140,7 @@ modelTypes:
             - $id: '29'
               name: AlreadyExists
               serializedName: AlreadyExists
+          oldModelAsString: false
           modelAsString: false
           underlyingType:
             $id: '30'
@@ -212,6 +213,7 @@ modelTypes:
           x-ms-enum:
             name: AccountType
             modelAsString: false
+            oldModelAsString: false
         isRequired: true
         isConstant: false
         name:
@@ -222,7 +224,6 @@ modelTypes:
         modelType:
           $id: '45'
           $type: EnumType
-          modelAsExtensible: false
           values:
             - $id: '46'
               name: Standard_LRS
@@ -239,6 +240,7 @@ modelTypes:
             - $id: '50'
               name: Premium_LRS
               serializedName: Premium_LRS
+          oldModelAsString: false
           modelAsString: false
           underlyingType:
             $id: '51'
@@ -587,6 +589,7 @@ modelTypes:
           x-ms-enum:
             name: ProvisioningState
             modelAsString: false
+            oldModelAsString: false
         isRequired: false
         isConstant: false
         name:
@@ -597,7 +600,6 @@ modelTypes:
         modelType:
           $id: '120'
           $type: EnumType
-          modelAsExtensible: false
           values:
             - $id: '121'
               name: Creating
@@ -608,6 +610,7 @@ modelTypes:
             - $id: '123'
               name: Succeeded
               serializedName: Succeeded
+          oldModelAsString: false
           modelAsString: false
           underlyingType:
             $id: '124'
@@ -640,6 +643,7 @@ modelTypes:
           x-ms-enum:
             name: AccountType
             modelAsString: false
+            oldModelAsString: false
         isRequired: false
         isConstant: false
         name:
@@ -722,6 +726,7 @@ modelTypes:
           x-ms-enum:
             name: AccountStatus
             modelAsString: false
+            oldModelAsString: false
         isRequired: false
         isConstant: false
         name:
@@ -732,7 +737,6 @@ modelTypes:
         modelType:
           $id: '145'
           $type: EnumType
-          modelAsExtensible: false
           values:
             - $id: '146'
               name: Available
@@ -740,6 +744,7 @@ modelTypes:
             - $id: '147'
               name: Unavailable
               serializedName: Unavailable
+          oldModelAsString: false
           modelAsString: false
           underlyingType:
             $id: '148'
@@ -841,6 +846,7 @@ modelTypes:
           x-ms-enum:
             name: AccountStatus
             modelAsString: false
+            oldModelAsString: false
         isRequired: false
         isConstant: false
         name:
@@ -1268,6 +1274,7 @@ modelTypes:
           x-ms-enum:
             name: AccountType
             modelAsString: false
+            oldModelAsString: false
         isRequired: false
         isConstant: false
         name:
@@ -1510,6 +1517,7 @@ modelTypes:
           x-ms-enum:
             name: UsageUnit
             modelAsString: false
+            oldModelAsString: false
         isRequired: true
         isConstant: false
         name:
@@ -1520,7 +1528,6 @@ modelTypes:
         modelType:
           $id: '295'
           $type: EnumType
-          modelAsExtensible: false
           values:
             - $id: '296'
               name: Count
@@ -1540,6 +1547,7 @@ modelTypes:
             - $id: '301'
               name: BytesPerSecond
               serializedName: BytesPerSecond
+          oldModelAsString: false
           modelAsString: false
           underlyingType:
             $id: '302'
