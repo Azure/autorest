@@ -214,6 +214,9 @@
   --sample-generation           generate sample code from x-ms-examples (experimental)
   --sample-generation           generate sample code from x-ms-examples (experimental)
   --sample-generation           generate sample code from x-ms-examples (experimental)
+  --static-serializer           generate client serlializer settings as a static member (experimental)
+  --static-serializer           generate client serlializer settings as a static member (experimental)
+  --static-serializer           generate client serlializer settings as a static member (experimental)
   --sync-methods=<"essential" | "all" | "none">  determines amount of synchronous wrappers to generate; default: essential
   --sync-methods=<"essential" | "all" | "none">  determines amount of synchronous wrappers to generate; default: essential
   --sync-methods=<"essential" | "all" | "none">  determines amount of synchronous wrappers to generate; default: essential
