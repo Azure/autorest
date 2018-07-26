@@ -10,7 +10,7 @@ azure-arm: true
 azure-validator: true
 output-artifact:
  - swagger-document.json
- - code-model-v1.yaml
+ - code-model-v1.norm.yaml
  - pipeline.yaml
  - configuration.yaml
 csharp:
