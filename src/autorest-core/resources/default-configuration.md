@@ -35,13 +35,13 @@ try-require: ./readme.csharp.md
 
 ``` yaml $(csharp)
 use-extension:
-  "@microsoft.azure/autorest.csharp": "~2.2.51"
+  "@microsoft.azure/autorest.csharp": "~2.3.79"
 try-require: ./readme.csharp.md
 ```
 
 ``` yaml $(jsonrpcclient)
 use-extension:
-  "@microsoft.azure/autorest.csharp": "~2.2.51"
+  "@microsoft.azure/autorest.csharp": "~2.3.79"
 ```
 
 ``` yaml $(go) && $(preview)

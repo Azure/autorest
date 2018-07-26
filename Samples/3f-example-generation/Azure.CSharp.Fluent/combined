@@ -66,8 +66,8 @@ var parameters = new LoadBalancerInner
             FrontendIPConfiguration = new Microsoft.Rest.Azure.SubResource("/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"),
             BackendAddressPool = new Microsoft.Rest.Azure.SubResource("/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb"),
             Probe = new Microsoft.Rest.Azure.SubResource("/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb"),
-            Protocol = "Tcp",
-            LoadDistribution = "Default",
+            Protocol = Tcp,
+            LoadDistribution = Default,
             FrontendPort = 80,
             BackendPort = 80,
             IdleTimeoutInMinutes = 15,
@@ -83,7 +83,7 @@ var parameters = new LoadBalancerInner
             {
                 new Microsoft.Rest.Azure.SubResource("/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb")
             },
-            Protocol = "Http",
+            Protocol = Http,
             Port = 80,
             IntervalInSeconds = 15,
             NumberOfProbes = 2,
@@ -96,7 +96,7 @@ var parameters = new LoadBalancerInner
         new InboundNatRuleInner
         {
             FrontendIPConfiguration = new Microsoft.Rest.Azure.SubResource("/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"),
-            Protocol = "Tcp",
+            Protocol = Tcp,
             FrontendPort = 3389,
             BackendPort = 3389,
             IdleTimeoutInMinutes = 15,
@@ -242,7 +242,7 @@ var inboundNatRuleInner = await this.Client.InboundNatRules.GetAsync(
 var inboundNatRuleParameters = new InboundNatRuleInner
 {
     FrontendIPConfiguration = new Microsoft.Rest.Azure.SubResource("/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb1/frontendIPConfigurations/ip1"),
-    Protocol = "Tcp",
+    Protocol = Tcp,
     FrontendPort = 3390,
     BackendPort = 3389,
     IdleTimeoutInMinutes = 4,
@@ -532,14 +532,14 @@ var parameters = new NetworkSecurityGroupInner
     {
         new SecurityRuleInner
         {
-            Protocol = "*",
+            Protocol = *,
             SourcePortRange = "*",
             DestinationPortRange = "80",
             SourceAddressPrefix = "*",
             DestinationAddressPrefix = "*",
-            Access = "Allow",
+            Access = Allow,
             Priority = 130,
-            Direction = "Inbound",
+            Direction = Inbound,
             Name = "rule1"
         }
     }
@@ -611,14 +611,14 @@ var securityRuleInner = await this.Client.SecurityRules.GetAsync(
 
 var securityRuleParameters = new SecurityRuleInner
 {
-    Protocol = "*",
+    Protocol = *,
     SourcePortRange = "*",
     DestinationPortRange = "8080",
     SourceAddressPrefix = "10.0.0.0/8",
     DestinationAddressPrefix = "11.0.0.0/8",
-    Access = "Deny",
+    Access = Deny,
     Priority = 100,
-    Direction = "Outbound"
+    Direction = Outbound
 };
 
 var securityRuleInner = await this.Client.SecurityRules.CreateOrUpdateAsync(
@@ -718,8 +718,8 @@ var publicIPAddressInner = await this.Client.PublicIPAddresses.CreateOrUpdateAsy
 
 var parameters = new PublicIPAddressInner
 {
-    PublicIPAllocationMethod = "Static",
-    PublicIPAddressVersion = "IPv4",
+    PublicIPAllocationMethod = Static,
+    PublicIPAddressVersion = IPv4,
     IdleTimeoutInMinutes = 10
 };
 

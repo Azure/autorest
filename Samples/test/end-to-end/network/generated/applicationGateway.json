@@ -7370,7 +7370,8 @@
             ],
             "x-ms-enum": {
               "name": "ApiVersion",
-              "modelAsString": true
+              "modelAsString": true,
+              "oldModelAsString": true
             },
             "description": "Client API version."
           },
@@ -7431,7 +7432,8 @@
             ],
             "x-ms-enum": {
               "name": "ApiVersion",
-              "modelAsString": true
+              "modelAsString": true,
+              "oldModelAsString": true
             },
             "description": "Client API version."
           },
@@ -7506,7 +7508,8 @@
             ],
             "x-ms-enum": {
               "name": "ApiVersion",
-              "modelAsString": true
+              "modelAsString": true,
+              "oldModelAsString": true
             },
             "description": "Client API version."
           },
@@ -7605,7 +7608,8 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayBackendHealthServerHealth",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         }
       },
@@ -7625,7 +7629,8 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewaySkuName",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "tier": {
@@ -7637,7 +7642,8 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayTier",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "capacity": {
@@ -7662,7 +7668,8 @@
             ],
             "x-ms-enum": {
               "name": "ApplicationGatewaySslProtocol",
-              "modelAsString": true
+              "modelAsString": true,
+              "oldModelAsString": true
             }
           }
         }
@@ -7797,7 +7804,8 @@
           ],
           "x-ms-enum": {
             "name": "IPAllocationMethod",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "subnet": {
@@ -7947,7 +7955,8 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayProtocol",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "cookieBasedAffinity": {
@@ -7959,7 +7968,8 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayCookieBasedAffinity",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "requestTimeout": {
@@ -8030,7 +8040,8 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayProtocol",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "hostName": {
@@ -8131,7 +8142,8 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayProtocol",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "host": {
@@ -8197,7 +8209,8 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayRequestRoutingRuleType",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "backendAddressPool": {
@@ -8267,7 +8280,8 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayOperationalState",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "gatewayIPConfigurations": {
@@ -8457,7 +8471,8 @@
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayFirewallMode",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         }
       },
@@ -8603,7 +8618,8 @@
           ],
           "x-ms-enum": {
             "name": "RouteNextHopType",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "nextHopIpAddress": {
@@ -8797,7 +8813,8 @@
           ],
           "x-ms-enum": {
             "name": "SecurityRuleProtocol",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "sourcePortRange": {
@@ -8825,7 +8842,8 @@
           ],
           "x-ms-enum": {
             "name": "SecurityRuleAccess",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "priority": {
@@ -8842,7 +8860,8 @@
           ],
           "x-ms-enum": {
             "name": "SecurityRuleDirection",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "provisioningState": {
@@ -9013,7 +9032,8 @@
           ],
           "x-ms-enum": {
             "name": "IPAllocationMethod",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "subnet": {
@@ -9064,7 +9084,8 @@
           ],
           "x-ms-enum": {
             "name": "IPAllocationMethod",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "publicIPAddressVersion": {
@@ -9076,7 +9097,8 @@
           ],
           "x-ms-enum": {
             "name": "IPVersion",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "ipConfiguration": {
@@ -9144,7 +9166,8 @@
           ],
           "x-ms-enum": {
             "name": "TransportProtocol",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "frontendPort": {
@@ -9282,7 +9305,8 @@
           ],
           "x-ms-enum": {
             "name": "IPAllocationMethod",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "privateIPAddressVersion": {
@@ -9294,7 +9318,8 @@
           ],
           "x-ms-enum": {
             "name": "IPVersion",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "subnet": {
@@ -9359,7 +9384,8 @@
           ],
           "x-ms-enum": {
             "name": "AuthorizationUseStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "provisioningState": {
@@ -9427,7 +9453,8 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitPeeringAdvertisedPublicPrefixState",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "customerASN": {
@@ -9479,7 +9506,8 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitPeeringType",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "state": {
@@ -9491,7 +9519,8 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitPeeringState",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "azureASN": {
@@ -9609,7 +9638,8 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitSkuTier",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "family": {
@@ -9621,7 +9651,8 @@
           ],
           "x-ms-enum": {
             "name": "ExpressRouteCircuitSkuFamily",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         }
       },
@@ -9666,7 +9697,8 @@
           ],
           "x-ms-enum": {
             "name": "ServiceProviderProvisioningState",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "authorizations": {
@@ -9951,7 +9983,8 @@
           ],
           "x-ms-enum": {
             "name": "Access",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "routeFilterRuleType": {
@@ -9962,7 +9995,8 @@
           ],
           "x-ms-enum": {
             "name": "RouteFilterRuleType",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "communities": {
@@ -10109,7 +10143,8 @@
           ],
           "x-ms-enum": {
             "name": "IPAllocationMethod",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "subnet": {
@@ -10172,7 +10207,8 @@
           ],
           "x-ms-enum": {
             "name": "TransportProtocol",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "loadDistribution": {
@@ -10185,7 +10221,8 @@
           ],
           "x-ms-enum": {
             "name": "LoadDistribution",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "frontendPort": {
@@ -10259,7 +10296,8 @@
           ],
           "x-ms-enum": {
             "name": "ProbeProtocol",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "port": {
@@ -10328,7 +10366,8 @@
           ],
           "x-ms-enum": {
             "name": "TransportProtocol",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "frontendPortRangeStart": {
@@ -10574,7 +10613,8 @@
           ],
           "x-ms-enum": {
             "name": "NetworkOperationStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "error": {
@@ -10647,7 +10687,8 @@
           ],
           "x-ms-enum": {
             "name": "SecurityRuleProtocol",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "sourcePortRange": {
@@ -10689,7 +10730,8 @@
           ],
           "x-ms-enum": {
             "name": "SecurityRuleAccess",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "priority": {
@@ -10706,7 +10748,8 @@
           ],
           "x-ms-enum": {
             "name": "SecurityRuleDirection",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         }
       },
@@ -10745,7 +10788,8 @@
           ],
           "x-ms-enum": {
             "name": "EffectiveRouteSource",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "state": {
@@ -10757,7 +10801,8 @@
           ],
           "x-ms-enum": {
             "name": "EffectiveRouteState",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "addressPrefix": {
@@ -10786,7 +10831,8 @@
           ],
           "x-ms-enum": {
             "name": "RouteNextHopType",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         }
       },
@@ -10871,7 +10917,8 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           },
           "description": "The provisioning state of the resource."
         }
@@ -10971,7 +11018,8 @@
           ],
           "x-ms-enum": {
             "name": "AssociationType",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           },
           "description": "The association type of the child resource to the parent resource."
         }
@@ -11002,7 +11050,8 @@
           ],
           "x-ms-enum": {
             "name": "Direction",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           },
           "description": "The direction of the packet represented as a 5-tuple."
         },
@@ -11014,7 +11063,8 @@
           ],
           "x-ms-enum": {
             "name": "Protocol",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           },
           "description": "Protocol to be verified on."
         },
@@ -11051,7 +11101,8 @@
           ],
           "x-ms-enum": {
             "name": "Access",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           },
           "description": "Indicates whether the traffic is allowed or denied."
         },
@@ -11102,7 +11153,8 @@
           ],
           "x-ms-enum": {
             "name": "NextHopType",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           },
           "description": "Next hop type."
         },
@@ -11288,7 +11340,8 @@
           ],
           "x-ms-enum": {
             "name": "PcProtocol",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           },
           "default": "Any",
           "description": "Protocol to be filtered on."
@@ -11359,7 +11412,8 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           },
           "description": "The provisioning state of the packet capture session."
         }
@@ -11397,7 +11451,8 @@
           ],
           "x-ms-enum": {
             "name": "PcStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           },
           "description": "The status of the packet capture session."
         },
@@ -11419,7 +11474,8 @@
             ],
             "x-ms-enum": {
               "name": "PcError",
-              "modelAsString": true
+              "modelAsString": true,
+              "oldModelAsString": true
             }
           }
         }
@@ -11851,7 +11907,8 @@
           ],
           "x-ms-enum": {
             "name": "UsageUnit",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "currentValue": {
@@ -11925,7 +11982,8 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkPeeringState",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "provisioningState": {
@@ -12107,7 +12165,8 @@
           ],
           "x-ms-enum": {
             "name": "IPAllocationMethod",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "subnet": {
@@ -12166,7 +12225,8 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewayType",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "vpnType": {
@@ -12178,7 +12238,8 @@
           ],
           "x-ms-enum": {
             "name": "VpnType",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "enableBgp": {
@@ -12331,7 +12392,8 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewaySkuName",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "tier": {
@@ -12345,7 +12407,8 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewaySkuTier",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "capacity": {
@@ -12405,7 +12468,8 @@
           ],
           "x-ms-enum": {
             "name": "BgpPeerState",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "connectedDuration": {
@@ -12505,7 +12569,8 @@
           ],
           "x-ms-enum": {
             "name": "ProcessorArchitecture",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         }
       },
@@ -12573,7 +12638,8 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewayConnectionStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "ingressBytesTransferred": {
@@ -12622,7 +12688,8 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewayConnectionType",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "routingWeight": {
@@ -12646,7 +12713,8 @@
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkGatewayConnectionStatus",
-            "modelAsString": true
+            "modelAsString": true,
+            "oldModelAsString": true
           }
         },
         "tunnelConnectionStatus": {
