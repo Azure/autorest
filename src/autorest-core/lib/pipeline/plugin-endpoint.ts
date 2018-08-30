@@ -104,8 +104,10 @@ export class AutoRestExtension extends EventEmitter {
         }
       } catch (e) {
         if (e != "Cancellation requested.") {
-          console.error(`Error occurred in handler for '${fnName}' in session '${sessionId}':`);
-          console.error(e);
+          // Suppress this from hitting the console. 
+          // todo: we should see if we can put it out as an event.
+          // console.error(`Error occurred in handler for '${fnName}' in session '${sessionId}':`);
+          // console.error(e);
         }
       }
     };
