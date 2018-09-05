@@ -535,7 +535,8 @@
           ],
           "x-ms-enum": {
             "name": "Reason",
-            "modelAsString": false
+            "modelAsString": false,
+            "oldModelAsString": false
           }
         },
         "message": {
@@ -559,7 +560,8 @@
           ],
           "x-ms-enum": {
             "name": "AccountType",
-            "modelAsString": false
+            "modelAsString": false,
+            "oldModelAsString": false
           }
         }
       },
@@ -640,7 +642,8 @@
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": false
+            "modelAsString": false,
+            "oldModelAsString": false
           }
         },
         "accountType": {
@@ -655,7 +658,8 @@
           ],
           "x-ms-enum": {
             "name": "AccountType",
-            "modelAsString": false
+            "modelAsString": false,
+            "oldModelAsString": false
           }
         },
         "primaryEndpoints": {
@@ -675,7 +679,8 @@
           ],
           "x-ms-enum": {
             "name": "AccountStatus",
-            "modelAsString": false
+            "modelAsString": false,
+            "oldModelAsString": false
           }
         },
         "lastGeoFailoverTime": {
@@ -696,7 +701,8 @@
           ],
           "x-ms-enum": {
             "name": "AccountStatus",
-            "modelAsString": false
+            "modelAsString": false,
+            "oldModelAsString": false
           }
         },
         "creationTime": {
@@ -767,7 +773,8 @@
           ],
           "x-ms-enum": {
             "name": "AccountType",
-            "modelAsString": false
+            "modelAsString": false,
+            "oldModelAsString": false
           }
         },
         "customDomain": {
@@ -831,7 +838,8 @@
           ],
           "x-ms-enum": {
             "name": "UsageUnit",
-            "modelAsString": false
+            "modelAsString": false,
+            "oldModelAsString": false
           }
         },
         "currentValue": {

@@ -23,6 +23,7 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: Reason
+          oldModelAsString: false
   CorsOptions:
     description: >-
       Defines options to control Cross-Origin Resource Sharing (CORS) for an
@@ -790,6 +791,7 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: AccountType
+          oldModelAsString: false
       creationTime:
         description: Gets the creation date and time of the storage account in UTC.
         format: date-time
@@ -826,6 +828,7 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: ProvisioningState
+          oldModelAsString: false
       secondaryEndpoints:
         $ref: '#/definitions/Endpoints'
         description: >-
@@ -849,6 +852,7 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: AccountStatus
+          oldModelAsString: false
       statusOfSecondary:
         description: >-
           Gets the status indicating whether the secondary location of the
@@ -861,6 +865,7 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: AccountStatus
+          oldModelAsString: false
   StorageAccountPropertiesCreateParameters:
     properties:
       accountType:
@@ -875,6 +880,7 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: AccountType
+          oldModelAsString: false
     required:
       - accountType
   StorageAccountPropertiesUpdateParameters:
@@ -894,6 +900,7 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: AccountType
+          oldModelAsString: false
       customDomain:
         $ref: '#/definitions/CustomDomain'
         description: >-
@@ -1021,6 +1028,7 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: UsageUnit
+          oldModelAsString: false
     required:
       - unit
       - currentValue

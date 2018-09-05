@@ -20,7 +20,8 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": false,
-            "name": "Reason"
+            "name": "Reason",
+            "oldModelAsString": false
           }
         }
       }
@@ -925,7 +926,8 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": false,
-            "name": "AccountType"
+            "name": "AccountType",
+            "oldModelAsString": false
           }
         },
         "creationTime": {
@@ -960,7 +962,8 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": false,
-            "name": "ProvisioningState"
+            "name": "ProvisioningState",
+            "oldModelAsString": false
           }
         },
         "secondaryEndpoints": {
@@ -980,7 +983,8 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": false,
-            "name": "AccountStatus"
+            "name": "AccountStatus",
+            "oldModelAsString": false
           }
         },
         "statusOfSecondary": {
@@ -992,7 +996,8 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": false,
-            "name": "AccountStatus"
+            "name": "AccountStatus",
+            "oldModelAsString": false
           }
         }
       }
@@ -1011,7 +1016,8 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": false,
-            "name": "AccountType"
+            "name": "AccountType",
+            "oldModelAsString": false
           }
         }
       },
@@ -1033,7 +1039,8 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": false,
-            "name": "AccountType"
+            "name": "AccountType",
+            "oldModelAsString": false
           }
         },
         "customDomain": {
@@ -1186,7 +1193,8 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": false,
-            "name": "UsageUnit"
+            "name": "UsageUnit",
+            "oldModelAsString": false
           }
         }
       },
