@@ -21,7 +21,13 @@
       "esnext"
     ],
     "experimentalDecorators": true,
-    "newLine": "LF"
+    "newLine": "LF",
+    "plugins": [
+      {
+        "name": "tslint-language-service",
+        "configFile": "../../tslint.json"
+      }
+    ]
   },
   "exclude": [
     "node_modules",

@@ -43,6 +43,9 @@
     "dts-generator": "^2.1.0",
     "mocha": "5.2.0",
     "shx": "0.2.2",
+    "tslint": "^5.9.1",
+    "tslint-language-service": "^0.9.9",
+    "tslint-microsoft-contrib": "^5.0.3",
     "mocha-typescript": "1.1.14",
     "static-link": "^0.2.3",
     "vscode-jsonrpc": "^3.3.1"
