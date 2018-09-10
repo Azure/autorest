@@ -19,6 +19,12 @@
     ],
     "lib": [
       "esnext"
+    ],
+    "plugins": [
+      {
+        "name": "tslint-language-service",
+        "configFile": "../../tslint.json"
+      }
     ]
   },
   "exclude": [
