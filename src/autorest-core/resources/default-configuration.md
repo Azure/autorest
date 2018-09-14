@@ -337,6 +337,9 @@ pipeline:
   openapi-document/openapi-document-converter:
     input: swagger-document/identity
     output-artifact: openapi-document
+  openapi-document/transform:
+    input: openapi-document-converter
+    output-artifact: openapi-document    
 ```
 
 # Pipeline for OpenAPI 3+
@@ -345,13 +348,16 @@ pipeline:
 #pipeline:
 # add the pipeline steps here to load OpenAPI 3
 
+
+#end of the pipeline has to have this last step:
+  openapi-document/transform:
+    input: <your previous pipeline step>
+    output-artifact: openapi-document
 ```
 
 ``` yaml
 pipeline:
-  openapi-document/transform:
-    input: openapi-document-converter
-    output-artifact: openapi-document
+
   openapi-document/component-modifiers:
     input: transform
     output-artifact: openapi-document
