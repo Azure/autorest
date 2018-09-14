@@ -234,7 +234,7 @@ help-content: # type: Help as defined in autorest-core/help.ts
     settings:
     - key: help
       description: display help (combine with flags like --csharp to get further details about specific functionality)
-    - key: input-file
+    - key: input-file-swagger
       type: string | string[]
       description: OpenAPI file to use as input (use this setting repeatedly to pass multiple files at once)
     - key: output-folder
@@ -356,7 +356,7 @@ scope-swagger-document/emitter:
   output-uri-expr: |
     $config["output-file"] || 
     ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
-    $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
+    $config["input-file-swagger"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
 scope-openapi-document/emitter:
   input-artifact: openapi-document
   is-object: true
@@ -364,7 +364,7 @@ scope-openapi-document/emitter:
   output-uri-expr: |
     $config["output-file"] || 
     ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
-    $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
+    $config["input-file-swagger"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
 scope-cm/emitter: # can remove once every generator depends on recent modeler
   input-artifact: code-model-v1
   is-object: true

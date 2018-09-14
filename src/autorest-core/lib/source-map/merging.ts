@@ -67,6 +67,16 @@ function Merge(a: any, b: any, path: JsonPath = []): any {
 }
 
 export function ShallowCopy(input: any, ...filter: Array<string>): any {
+  /* TODO; replace and test with this:
+  const copy = { ...input };
+  for (const each of filter) {
+    if (copy[each]) {
+      delete copy[each];
+    }
+  }
+  return copy;
+  */
+
   if (!input) {
     return input;
   }

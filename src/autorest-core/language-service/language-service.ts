@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+//#!/usr/bin/env node
 // load modules from static linker filesystem.
 if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-loader"] === undefined) {
   require('../static-loader.js').load(`${__dirname}/../static_modules.fs`)
@@ -312,7 +312,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
       // if this is a configuration, clear it's own errors
       this.getDiagnosticCollection(documentUri).clear(true);
 
-      // and if there are no input-files open, then clear theirs too.
+      // and if there are no files open, then clear theirs too.
       const result = this.results.get(documentUri);
       if (result) {
         // make sure it's not doing anything...
@@ -673,7 +673,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
         uri: configFile,
         languageId: "markdown",
         version: 1,
-        getText: () => "#Fake config file \n> see https://aka.ms/autorest \n``` yaml \ninput-file: \n - " + documentUri,
+        getText: () => "#Fake config file \n> see https://aka.ms/autorest \n``` yaml \ninput-file-swagger: \n - " + documentUri,
         positionAt: (offset: number) => <Position>{},
         offsetAt: (position: Position) => 0,
         lineCount: 1

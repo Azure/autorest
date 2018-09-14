@@ -4,7 +4,7 @@ import { IEvent, EventEmitter } from "../lib/events";
 
 export class MyClass extends EventEmitter {
 
-  @EventEmitter.Event public Debug: IEvent<MyClass, string>;
+  @EventEmitter.Event public Debug!: IEvent<MyClass, string>;
 
   public go() {
     this.Debug.Dispatch("Hello");

@@ -17,7 +17,7 @@ import { join } from "path";
   private async generate(additionalConfig: any): Promise<{ [uri: string]: string }> {
     const autoRest = new AutoRest(new RealFileSystem());
     autoRest.AddConfiguration({
-      "input-file": join(__dirname, "..", "..", "test", "resources", "tiny.yaml"),
+      "input-file-swagger": join(__dirname, "..", "..", "test", "resources", "tiny.yaml"),
       "csharp": "true",
       "output-artifact": ["swagger-document.yaml", "openapi-document.yaml"]
     });
