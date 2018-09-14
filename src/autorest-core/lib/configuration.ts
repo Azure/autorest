@@ -376,6 +376,16 @@ export class ConfigurationView {
   }
 
   public get InputFileUris(): Array<string> {
+    return [...this.InputFileUrisOpenApi, ...this.InputFileUrisSwaggers];
+  }
+
+  public get InputFileUrisOpenApi(): Array<string> {
+    return From<string>(ValuesOf<string>(this.config['input-file-openapi']))
+      .Select(each => this.ResolveAsPath(each))
+      .ToArray();
+  }
+
+  public get InputFileUrisSwaggers(): Array<string> {
     return From<string>(ValuesOf<string>(this.config['input-file-swagger']))
       .Select(each => this.ResolveAsPath(each))
       .ToArray();

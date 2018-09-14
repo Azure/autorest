@@ -93,10 +93,6 @@ export function matches(jsonQuery: string, jsonPath: JsonPath): boolean;
 export function parseJsonPointer(jsonPointer: string): JsonPath;
 
 }
-declare module 'autorest-core/lib/ref/array' {
-export function pushAll<T>(target: T[], source: T[]): void;
-
-}
 declare module 'autorest-core/lib/artifact' {
 export interface Artifact {
     uri: string;
@@ -288,6 +284,10 @@ export class OutstandingTaskAwaiter {
 }
 
 }
+declare module 'autorest-core/lib/ref/array' {
+export function pushAll<T>(target: T[], source: T[]): void;
+
+}
 declare module 'autorest-core/lib/ref/commonmark' {
 export { Node, Parser } from "commonmark";
 
@@ -439,6 +439,8 @@ export class ConfigurationView {
     IncludedConfigurationFiles(fileSystem: IFileSystem, ignoreFiles: Set<string>): Promise<Array<string>>;
     readonly Directives: Array<DirectiveView>;
     readonly InputFileUris: Array<string>;
+    readonly InputFileUrisOpenApi: Array<string>;
+    readonly InputFileUrisSwaggers: Array<string>;
     readonly OutputFolderUri: string;
     IsOutputArtifactRequested(artifact: string): boolean;
     GetEntry(key: keyof AutoRestConfigurationImpl): any;
@@ -470,12 +472,12 @@ export {};
 
 }
 declare module 'autorest-core/lib/autorest-core' {
-import { IEvent, EventEmitter } from 'autorest-core/lib/events';
 import { ConfigurationView } from 'autorest-core/lib/configuration';
+import { EventEmitter, IEvent } from 'autorest-core/lib/events';
 export { ConfigurationView } from 'autorest-core/lib/configuration';
-import { Message } from 'autorest-core/lib/message';
 import { Artifact } from 'autorest-core/lib/artifact';
 import { DocumentType } from 'autorest-core/lib/document-type';
+import { Message } from 'autorest-core/lib/message';
 /**
  * An instance of the AutoRest generator.
  *
@@ -512,7 +514,7 @@ export class AutoRest extends EventEmitter {
      */
     Process(): {
         finish: Promise<boolean | Error>;
-        cancel: () => void;
+        cancel(): void;
     };
 }
 /** Determines the document type based on the content of the document

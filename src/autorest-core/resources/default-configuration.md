@@ -299,8 +299,9 @@ pipeline:
 ```
 
 OpenAPI definitions:
+Pipeline for Swagger (openapi2) files.
 
-``` yaml
+``` yaml $(input-file-swagger)  
 pipeline:
   swagger-document/loader:
     # plugin: loader # IMPLICIT: default to last item if split by '/'
@@ -336,6 +337,18 @@ pipeline:
   openapi-document/openapi-document-converter:
     input: swagger-document/identity
     output-artifact: openapi-document
+```
+
+# Pipeline for OpenAPI 3+
+
+``` yaml $(input-file-openapi)
+#pipeline:
+# add the pipeline steps here to load OpenAPI 3
+
+```
+
+``` yaml
+pipeline:
   openapi-document/transform:
     input: openapi-document-converter
     output-artifact: openapi-document

@@ -12,6 +12,7 @@ import * as yaml from '../ref/yaml';
 import { Mappings } from "../ref/source-map";
 import { DataHandle, DataSink } from "../data-store/data-store";
 import { ResolvePath } from '../parsing/yaml';
+import { isArray } from 'util';
 
 // // TODO: may want ASTy merge! (supporting circular structure and such?)
 function Merge(a: any, b: any, path: JsonPath = []): any {
@@ -105,6 +106,9 @@ function toJsValue(value: any) {
     case "object":
       if (value === null) {
         return "null";
+      }
+      if (isArray(value) && value.length === 0) {
+        return "false";
       }
       return "true";
   }

@@ -39,7 +39,7 @@ function GetPlugin_Identity(): PipelinePlugin {
 }
 function GetPlugin_Loader(): PipelinePlugin {
   return async (config, input, sink) => {
-    let inputs = config.InputFileUris;
+    let inputs = config.InputFileUrisSwaggers;
     const swaggers = await LoadLiterateSwaggers(
       config,
       input,
@@ -53,7 +53,7 @@ function GetPlugin_Loader(): PipelinePlugin {
 }
 function GetPlugin_MdOverrideLoader(): PipelinePlugin {
   return async (config, input, sink) => {
-    let inputs = config.InputFileUris;
+    let inputs = config.InputFileUrisSwaggers;
     const swaggers = await LoadLiterateSwaggerOverrides(
       config,
       input,
