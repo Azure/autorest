@@ -53,8 +53,7 @@
       ],
       "properties": {
         "$ref": {
-          "type": "string",
-          "format": "uriref"
+          "type": "string"
         }
       }
     },
@@ -72,8 +71,7 @@
           "type": "string"
         },
         "termsOfService": {
-          "type": "string",
-          "format": "uriref"
+          "type": "string"
         },
         "contact": {
           "$ref": "#/definitions/Contact"
@@ -97,8 +95,7 @@
           "type": "string"
         },
         "url": {
-          "type": "string",
-          "format": "uriref"
+          "type": "string"
         },
         "email": {
           "type": "string",
@@ -120,8 +117,7 @@
           "type": "string"
         },
         "url": {
-          "type": "string",
-          "format": "uriref"
+          "type": "string"
         }
       },
       "patternProperties": {
@@ -555,8 +551,7 @@
           "type": "string"
         },
         "namespace": {
-          "type": "string",
-          "format": "url"
+          "type": "string"
         },
         "prefix": {
           "type": "string"
@@ -709,8 +704,7 @@
         },
         "value": {},
         "externalValue": {
-          "type": "string",
-          "format": "uriref"
+          "type": "string"
         }
       },
       "patternProperties": {
@@ -1123,8 +1117,7 @@
           "type": "string"
         },
         "url": {
-          "type": "string",
-          "format": "uriref"
+          "type": "string"
         }
       },
       "patternProperties": {
@@ -2053,8 +2046,7 @@
           ]
         },
         "openIdConnectUrl": {
-          "type": "string",
-          "format": "url"
+          "type": "string"
         },
         "description": {
           "type": "string"
@@ -2094,12 +2086,10 @@
       ],
       "properties": {
         "authorizationUrl": {
-          "type": "string",
-          "format": "uriref"
+          "type": "string"
         },
         "refreshUrl": {
-          "type": "string",
-          "format": "uriref"
+          "type": "string"
         },
         "scopes": {
           "type": "object",
@@ -2120,12 +2110,10 @@
       ],
       "properties": {
         "tokenUrl": {
-          "type": "string",
-          "format": "uriref"
+          "type": "string"
         },
         "refreshUrl": {
-          "type": "string",
-          "format": "uriref"
+          "type": "string"
         },
         "scopes": {
           "type": "object",
@@ -2146,12 +2134,10 @@
       ],
       "properties": {
         "tokenUrl": {
-          "type": "string",
-          "format": "uriref"
+          "type": "string"
         },
         "refreshUrl": {
-          "type": "string",
-          "format": "uriref"
+          "type": "string"
         },
         "scopes": {
           "type": "object",
@@ -2173,16 +2159,13 @@
       ],
       "properties": {
         "authorizationUrl": {
-          "type": "string",
-          "format": "uriref"
+          "type": "string"
         },
         "tokenUrl": {
-          "type": "string",
-          "format": "uriref"
+          "type": "string"
         },
         "refreshUrl": {
-          "type": "string",
-          "format": "uriref"
+          "type": "string"
         },
         "scopes": {
           "type": "object",
@@ -2210,8 +2193,7 @@
       "type": "object",
       "properties": {
         "operationRef": {
-          "type": "string",
-          "format": "uriref"
+          "type": "string"
         },
         "parameters": {
           "type": "object",
