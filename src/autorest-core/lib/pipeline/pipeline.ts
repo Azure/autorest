@@ -20,7 +20,7 @@ import { ConfigurationView, GetExtension } from '../configuration';
 import { DataHandle, DataSink, DataSource, QuickDataSource } from '../data-store/data-store';
 import { IFileSystem } from "../file-system";
 import { EmitArtifacts } from "./artifact-emitter";
-import { ComposeSwaggers, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
+import { ComposeSwaggers, LoadLiterateSwaggerOverrides, LoadLiterateOpenApiOverrides, LoadLiterateSwaggers, LoadLiterateOpenApi, LoadLiterateOpenApis } from './swagger-loader';
 import { ConvertOAI2toOAI3 } from "../openapi/conversion";
 import { Help } from '../../help';
 import { GetPlugin_Help } from "./help";
@@ -37,7 +37,8 @@ interface PipelineNode {
 function GetPlugin_Identity(): PipelinePlugin {
   return async (config, input) => input;
 }
-function GetPlugin_Loader(): PipelinePlugin {
+
+function GetPlugin_LoaderSwagger(): PipelinePlugin {
   return async (config, input, sink) => {
     let inputs = config.InputFileUrisSwaggers;
     const swaggers = await LoadLiterateSwaggers(
@@ -51,7 +52,23 @@ function GetPlugin_Loader(): PipelinePlugin {
     return new QuickDataSource(result);
   };
 }
-function GetPlugin_MdOverrideLoader(): PipelinePlugin {
+
+function GetPlugin_LoaderOpenApi(): PipelinePlugin {
+  return async (config, input, sink) => {
+    let inputs = config.InputFileUrisOpenApis;
+    const openapis = await LoadLiterateOpenApis(
+      config,
+      input,
+      inputs, sink);
+    const result: DataHandle[] = [];
+    for (let i = 0; i < inputs.length; ++i) {
+      result.push(await sink.Forward(inputs[i], openapis[i]));
+    }
+    return new QuickDataSource(result);
+  };
+}
+
+function GetPlugin_MdOverrideLoaderSwagger(): PipelinePlugin {
   return async (config, input, sink) => {
     let inputs = config.InputFileUrisSwaggers;
     const swaggers = await LoadLiterateSwaggerOverrides(
@@ -66,12 +83,29 @@ function GetPlugin_MdOverrideLoader(): PipelinePlugin {
   };
 }
 
+
+function GetPlugin_MdOverrideLoaderOpenApi(): PipelinePlugin {
+  return async (config, input, sink) => {
+    let inputs = config.InputFileUrisOpenApis;
+    const openapis = await LoadLiterateOpenApiOverrides(
+      config,
+      input,
+      inputs, sink);
+    const result: DataHandle[] = [];
+    for (let i = 0; i < inputs.length; ++i) {
+      result.push(await sink.Forward(inputs[i], openapis[i]));
+    }
+    return new QuickDataSource(result);
+  };
+}
+
 function GetPlugin_OAI2toOAIx(): PipelinePlugin {
   return CreatePerFilePlugin(async config => async (fileIn, sink) => {
     const fileOut = await ConvertOAI2toOAI3(fileIn, sink);
     return await sink.Forward(fileIn.Description, fileOut);
   });
 }
+
 function GetPlugin_Yaml2Jsonx(): PipelinePlugin {
   return CreatePerFilePlugin(async config => async (fileIn, sink) => {
     let ast = fileIn.ReadYamlAst();
@@ -79,6 +113,7 @@ function GetPlugin_Yaml2Jsonx(): PipelinePlugin {
     return await sink.WriteData(fileIn.Description, StringifyAst(ast));
   });
 }
+
 function GetPlugin_Jsonx2Yaml(): PipelinePlugin {
   return CreatePerFilePlugin(async config => async (fileIn, sink) => {
     let ast = fileIn.ReadYamlAst();
@@ -97,6 +132,7 @@ function GetPlugin_Transformer(): PipelinePlugin {
     };
   });
 }
+
 function GetPlugin_TransformerImmediate(): PipelinePlugin {
   return async (config, input, sink) => {
     const isObject = config.GetEntry("is-object" as any) === false ? false : true;
@@ -109,6 +145,7 @@ function GetPlugin_TransformerImmediate(): PipelinePlugin {
     return new QuickDataSource([await sink.Forward("swagger-document", fileOut)]);
   };
 }
+
 function GetPlugin_Composer(): PipelinePlugin {
   return async (config, input, sink) => {
     const swaggers = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
@@ -119,6 +156,7 @@ function GetPlugin_Composer(): PipelinePlugin {
     return new QuickDataSource([await sink.Forward("composed", swagger)]);
   };
 }
+
 function GetPlugin_External(host: AutoRestExtension, pluginName: string): PipelinePlugin {
   return async (config, input, sink) => {
     const plugin = await host;
@@ -143,6 +181,7 @@ function GetPlugin_External(host: AutoRestExtension, pluginName: string): Pipeli
     return new QuickDataSource(results);
   };
 }
+
 function GetPlugin_CommonmarkProcessor(): PipelinePlugin {
   return async (config, input, sink) => {
     const files = await input.Enum();
@@ -156,6 +195,7 @@ function GetPlugin_CommonmarkProcessor(): PipelinePlugin {
     return new QuickDataSource(results);
   };
 }
+
 function GetPlugin_ArtifactEmitter(inputOverride?: () => Promise<DataSource>): PipelinePlugin {
   return async (config, input, sink) => {
     if (inputOverride) {
@@ -240,8 +280,8 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
           const newSuffix = configs.length === 1 ? "" : "/" + i;
           suffixes.push(suffix + newSuffix);
           const path: JsonPath = configScope.slice();
-          if (scope) path.push(scope);
-          if (configs.length !== 1) path.push(i);
+          if (scope) { path.push(scope); }
+          if (configs.length !== 1) { path.push(i); }
           configCache[stringify(path)] = configs[i];
           pipeline[stageName + suffix + newSuffix] = {
             pluginName: plugin,
@@ -283,26 +323,28 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
 export async function RunPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
   // built-in plugins
   const plugins: { [name: string]: PipelinePlugin } = {
-    "help": GetPlugin_Help(),
-    "identity": GetPlugin_Identity(),
-    "loader": GetPlugin_Loader(),
-    "md-override-loader": GetPlugin_MdOverrideLoader(),
-    "transform": GetPlugin_Transformer(),
-    "transform-immediate": GetPlugin_TransformerImmediate(),
-    "compose": GetPlugin_Composer(),
-    "schema-validator": GetPlugin_SchemaValidator(),
+    'help': GetPlugin_Help(),
+    'identity': GetPlugin_Identity(),
+    'loader-swagger': GetPlugin_LoaderSwagger(),
+    'loader-openapi': GetPlugin_LoaderOpenApi(),
+    'md-override-loader-swagger': GetPlugin_MdOverrideLoaderSwagger(),
+    'md-override-loader-openapi': GetPlugin_MdOverrideLoaderOpenApi(),
+    'transform': GetPlugin_Transformer(),
+    'transform-immediate': GetPlugin_TransformerImmediate(),
+    'compose': GetPlugin_Composer(),
+    'schema-validator': GetPlugin_SchemaValidator(),
     // TODO: replace with OAV again
-    "semantic-validator": GetPlugin_Identity(),
+    'semantic-validator': GetPlugin_Identity(),
 
-    "openapi-document-converter": GetPlugin_OAI2toOAIx(),
-    "component-modifiers": GetPlugin_ComponentModifier(),
-    "yaml2jsonx": GetPlugin_Yaml2Jsonx(),
-    "jsonx2yaml": GetPlugin_Jsonx2Yaml(),
-    "reflect-api-versions-cs": GetPlugin_ReflectApiVersion(),
-    "commonmarker": GetPlugin_CommonmarkProcessor(),
-    "emitter": GetPlugin_ArtifactEmitter(),
-    "pipeline-emitter": GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject("pipeline", pipeline.pipeline, "pipeline")])),
-    "configuration-emitter": GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject("configuration", configView.Raw, "configuration")]))
+    'openapi-document-converter': GetPlugin_OAI2toOAIx(),
+    'component-modifiers': GetPlugin_ComponentModifier(),
+    'yaml2jsonx': GetPlugin_Yaml2Jsonx(),
+    'jsonx2yaml': GetPlugin_Jsonx2Yaml(),
+    'reflect-api-versions-cs': GetPlugin_ReflectApiVersion(),
+    'commonmarker': GetPlugin_CommonmarkProcessor(),
+    'emitter': GetPlugin_ArtifactEmitter(),
+    'pipeline-emitter': GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject("pipeline", pipeline.pipeline, "pipeline")])),
+    'configuration-emitter': GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject("configuration", configView.Raw, "configuration")]))
   };
 
   // dynamically loaded, auto-discovered plugins
