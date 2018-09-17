@@ -3,7 +3,7 @@
 > see https://aka.ms/autorest
 
 ``` yaml 
-input-file: pétstöre.json # full Unicode support
+input-file-swagger: pétstöre.json # full Unicode support
 
 csharp:
   namespace: Petstore
