@@ -225,7 +225,10 @@ function FileUriToLocalPath(fileUri: string): string {
     throw new Error(`Cannot write to '${uri}'. Path not found.`);
   }
   if (sep === "\\") {
-    p = p.substr(p.startsWith("/") ? 1 : 0);
+    if(p.indexOf(':') > 0) {
+      p = p.substr(p.startsWith("/") ? 1 : 0);
+    }
+
     p = p.replace(/\//g, "\\");
   }
   return decodeURI(p);
