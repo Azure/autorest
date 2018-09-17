@@ -148,8 +148,8 @@ export class DirectiveView {
 
 export class MessageEmitter extends EventEmitter {
   /**
-  * Event: Signals when a File is generated
-  */
+   * Event: Signals when a File is generated
+   */
   @EventEmitter.Event public GeneratedFile!: IEvent<MessageEmitter, Artifact>;
   /**
    * Event: Signals when a Folder is supposed to be cleared
@@ -376,10 +376,10 @@ export class ConfigurationView {
   }
 
   public get InputFileUris(): Array<string> {
-    return [...this.InputFileUrisOpenApi, ...this.InputFileUrisSwaggers];
+    return [...this.InputFileUrisOpenApis, ...this.InputFileUrisSwaggers];
   }
 
-  public get InputFileUrisOpenApi(): Array<string> {
+  public get InputFileUrisOpenApis(): Array<string> {
     return From<string>(ValuesOf<string>(this.config['input-file-openapi']))
       .Select(each => this.ResolveAsPath(each))
       .ToArray();
