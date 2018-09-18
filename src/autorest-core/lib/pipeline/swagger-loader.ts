@@ -397,7 +397,7 @@ export async function LoadLiterateOpenApi(config: ConfigurationView, inputScope:
   }
   const data = await ParseLiterateYaml(config, handle, sink);
   const openapifound = /^3.\d.\d$/g.exec(data.ReadObject<any>().openapi);
-  if (!openapifound) {
+  if (openapifound) {
     console.error('OpenAPI 3.X.X definition found.');
   } else {
     throw new Error(`File '${inputFileUri}' is not a valid OpenAPI 3.X.X definition (expected 'openapi: 3.X.X')`);
