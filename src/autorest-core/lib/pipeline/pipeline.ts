@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { GetPlugin_ComponentModifier } from './component-modifier';
-import { GetPlugin_SchemaValidator } from './schema-validation';
+import { GetPlugin_SchemaValidatorSwagger, GetPlugin_SchemaValidatorOpenApi } from './schema-validation';
 import { ConvertJsonx2Yaml, ConvertYaml2Jsonx } from '../parsing/yaml';
 import { Descendants, FastStringify, StringifyAst } from '../ref/yaml';
 import { JsonPath, stringify } from "../ref/jsonpath";
@@ -40,7 +40,7 @@ function GetPlugin_Identity(): PipelinePlugin {
 
 function GetPlugin_LoaderSwagger(): PipelinePlugin {
   return async (config, input, sink) => {
-    let inputs = config.InputFileUrisSwaggers;
+    const inputs = config.InputFileUrisSwaggers;
     const swaggers = await LoadLiterateSwaggers(
       config,
       input,
@@ -55,7 +55,7 @@ function GetPlugin_LoaderSwagger(): PipelinePlugin {
 
 function GetPlugin_LoaderOpenApi(): PipelinePlugin {
   return async (config, input, sink) => {
-    let inputs = config.InputFileUrisOpenApis;
+    const inputs = config.InputFileUrisOpenApis;
     const openapis = await LoadLiterateOpenApis(
       config,
       input,
@@ -70,7 +70,7 @@ function GetPlugin_LoaderOpenApi(): PipelinePlugin {
 
 function GetPlugin_MdOverrideLoaderSwagger(): PipelinePlugin {
   return async (config, input, sink) => {
-    let inputs = config.InputFileUrisSwaggers;
+    const inputs = config.InputFileUrisSwaggers;
     const swaggers = await LoadLiterateSwaggerOverrides(
       config,
       input,
@@ -86,7 +86,7 @@ function GetPlugin_MdOverrideLoaderSwagger(): PipelinePlugin {
 
 function GetPlugin_MdOverrideLoaderOpenApi(): PipelinePlugin {
   return async (config, input, sink) => {
-    let inputs = config.InputFileUrisOpenApis;
+    const inputs = config.InputFileUrisOpenApis;
     const openapis = await LoadLiterateOpenApiOverrides(
       config,
       input,
@@ -233,7 +233,7 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
   //    --> commonmarker                 if such a stage exists
   //    --> THROWS                       otherwise
   const resolvePipelineStageName = (currentStageName: string, relativeName: string) => {
-    while (currentStageName !== "") {
+    while (currentStageName !== '') {
       currentStageName = currentStageName.substring(0, currentStageName.length - 1);
       currentStageName = currentStageName.substring(0, currentStageName.lastIndexOf("/") + 1);
 
@@ -332,7 +332,8 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     'transform': GetPlugin_Transformer(),
     'transform-immediate': GetPlugin_TransformerImmediate(),
     'compose': GetPlugin_Composer(),
-    'schema-validator': GetPlugin_SchemaValidator(),
+    'schema-validator-openapi': GetPlugin_SchemaValidatorOpenApi(),
+    'schema-validator-swagger': GetPlugin_SchemaValidatorSwagger(),
     // TODO: replace with OAV again
     'semantic-validator': GetPlugin_Identity(),
 
