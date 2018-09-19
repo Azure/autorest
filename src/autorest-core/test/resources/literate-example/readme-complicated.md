@@ -39,7 +39,7 @@ true4: true
 ``` yaml $(true4)
 azure-validator: true
 openapi-type: arm
-input-file:
+input-file-swagger:
 - swagger.md
 ```
 

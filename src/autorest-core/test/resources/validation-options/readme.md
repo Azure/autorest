@@ -13,7 +13,7 @@ description: Test Services Client
 api-version: 0-0-0
 azure-validator: true
 
-input-file:
+input-file-swagger:
 - specjsons/vaults.json
 - specjsons/vaultusages.json
 ```

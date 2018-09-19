@@ -87,7 +87,7 @@ export class AutoRestExtension extends EventEmitter {
     const writerProxy = new Writable({
       write: (chunk: string | Buffer, encoding: string, callback: Function) => {
         try { this.__inspectTraffic.push([Date.now(), true, chunk.toString()]); } catch (e) { }
-        return writer.write(chunk, encoding, callback);
+        return writer.write(chunk, encoding, <any>callback);
       }
     });
 

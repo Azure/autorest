@@ -17,7 +17,7 @@ my-value: $(sample-value)
 sample-value: one
 sample-other: $(sample-value)
 
-input-file:
+input-file-swagger:
   - other.md
 
 items:

@@ -4,7 +4,7 @@
 
 ## Validation Settings
 ``` yaml 
-input-file:
+input-file-swagger:
 - swagger.json 
 
 azure-validator: true

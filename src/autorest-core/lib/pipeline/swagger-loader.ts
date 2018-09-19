@@ -278,6 +278,78 @@ export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inp
   return sink.WriteObject("override-directives", { directive: directives }, undefined, mappings, [commonmark]);
 }
 
+export async function LoadLiterateOpenApiOverride(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle> {
+  const commonmark = await inputScope.ReadStrict(inputFileUri);
+  const rawCommonmark = commonmark.ReadData();
+  const commonmarkNode = await ParseCommonmark(rawCommonmark);
+
+  const directives: any[] = [];
+  const mappings: Mappings = [];
+  let transformer: string[] = [];
+  const state = [...CommonmarkSubHeadings(commonmarkNode.firstChild)].map(x => { return { node: x, query: "$" }; });
+
+  while (state.length > 0) {
+    const x = state.pop(); if (x === undefined) throw "unreachable";
+    // extract heading clue
+    // Syntax: <regular heading> (`<query>`)
+    // query syntax:
+    // - implicit prefix: "@." (omitted if starts with "$." or "@.")
+    // - "#<asd>" to obtain the object containing a string property containing "<asd>"
+    let clue: string | null = null;
+    let node = x.node.firstChild;
+    while (node) {
+      if ((node.literal || "").endsWith("(")
+        && (((node.next || <any>{}).next || {}).literal || "").startsWith(")")
+        && node.next
+        && node.next.type === "code") {
+        clue = node.next.literal;
+        break;
+      }
+      node = node.next;
+    }
+
+    // process clue
+    if (clue) {
+      // be explicit about relativity
+      if (!clue.startsWith("@.") && !clue.startsWith("$.")) {
+        clue = "@." + clue;
+      }
+
+      // make absolute
+      if (clue.startsWith("@.")) {
+        clue = x.query + clue.slice(1);
+      }
+
+      // replace queries
+      const candidProperties = ["name", "operationId", "$ref"];
+      clue = clue.replace(/\.\#(.+?)\b/g, (_, match) => `..[?(${candidProperties.map(p => `(@[${JSON.stringify(p)}] && @[${JSON.stringify(p)}].indexOf(${JSON.stringify(match)}) !== -1)`).join(" || ")})]`);
+
+      // console.log(clue);
+
+      // target field
+      const allowedTargetFields = ["description", "summary"];
+      const targetField = allowedTargetFields.filter(f => (clue || "").endsWith("." + f))[0] || "description";
+      const targetPath = clue.endsWith("." + targetField) ? clue.slice(0, clue.length - targetField.length - 1) : clue;
+
+      if (targetPath !== "$.parameters" && targetPath !== "$.definitions") {
+        // add directive
+        const headingTextRange = CommonmarkHeadingFollowingText(x.node);
+        const documentation = Lines(rawCommonmark).slice(headingTextRange[0] - 1, headingTextRange[1]).join("\n");
+        directives.push({
+          where: targetPath,
+          transform: `
+            if (typeof $.${targetField} === "string" || typeof $.${targetField} === "undefined")
+              $.${targetField} = ${JSON.stringify(documentation)};`
+        });
+      }
+    }
+
+    state.push(...[...CommonmarkSubHeadings(x.node)].map(y => { return { node: y, query: clue || x.query }; }));
+  }
+
+  return sink.WriteObject("override-directives", { directive: directives }, undefined, mappings, [commonmark]);
+}
+
 export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle> {
   const handle = await inputScope.ReadStrict(inputFileUri);
   // strict JSON check
@@ -293,9 +365,44 @@ export async function LoadLiterateSwagger(config: ConfigurationView, inputScope:
   }
   const data = await ParseLiterateYaml(config, handle, sink);
   // check OpenAPI version
-  if (data.ReadObject<any>().swagger !== "2.0") {
+  if (data.ReadObject<any>().swagger !== '2.0') {
     throw new Error(`File '${inputFileUri}' is not a valid OpenAPI 2.0 definition (expected 'swagger: 2.0')`);
   }
+  const externalFiles: { [uri: string]: DataHandle } = {};
+  externalFiles[inputFileUri] = data;
+  await EnsureCompleteDefinitionIsPresent(config,
+    inputScope,
+    sink,
+    [],
+    externalFiles,
+    inputFileUri,
+    data.ReadObject<any>(),
+    IdentitySourceMapping(data.key, data.ReadYamlAst()));
+  const result = await StripExternalReferences(externalFiles[inputFileUri], sink);
+  return result;
+}
+
+export async function LoadLiterateOpenApi(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle> {
+  const handle = await inputScope.ReadStrict(inputFileUri);
+  // strict JSON check
+  if (inputFileUri.toLowerCase().endsWith('.json')) {
+    const error = StrictJsonSyntaxCheck(handle.ReadData());
+    if (error) {
+      config.Message({
+        Channel: Channel.Error,
+        Text: `Syntax Error Encountered:  ${error.message}`,
+        Source: [<SourceLocation>{ Position: IndexToPosition(handle, error.index), document: handle.key }],
+      });
+    }
+  }
+  const data = await ParseLiterateYaml(config, handle, sink);
+  const openapifound = /^3.\d.\d$/g.exec(data.ReadObject<any>().openapi);
+  if (openapifound) {
+    console.error('OpenAPI 3.X.X definition found.');
+  } else {
+    throw new Error(`File '${inputFileUri}' is not a valid OpenAPI 3.X.X definition (expected 'openapi: 3.X.X')`);
+  }
+
   const externalFiles: { [uri: string]: DataHandle } = {};
   externalFiles[inputFileUri] = data;
   await EnsureCompleteDefinitionIsPresent(config,
@@ -321,6 +428,19 @@ export async function LoadLiterateSwaggers(config: ConfigurationView, inputScope
   }
   return rawSwaggers;
 }
+
+export async function LoadLiterateOpenApis(config: ConfigurationView, inputScope: DataSource, inputFileUris: string[], sink: DataSink): Promise<DataHandle[]> {
+  const rawOpenApis: DataHandle[] = [];
+  let i = 0;
+  for (const inputFileUri of inputFileUris) {
+    // read literate Swagger
+    const pluginInput = await LoadLiterateOpenApi(config, inputScope, inputFileUri, sink);
+    rawOpenApis.push(pluginInput);
+    i++;
+  }
+  return rawOpenApis;
+}
+
 export async function LoadLiterateSwaggerOverrides(config: ConfigurationView, inputScope: DataSource, inputFileUris: string[], sink: DataSink): Promise<DataHandle[]> {
   const rawSwaggers: DataHandle[] = [];
   let i = 0;
@@ -331,6 +451,18 @@ export async function LoadLiterateSwaggerOverrides(config: ConfigurationView, in
     i++;
   }
   return rawSwaggers;
+}
+
+export async function LoadLiterateOpenApiOverrides(config: ConfigurationView, inputScope: DataSource, inputFileUris: string[], sink: DataSink): Promise<DataHandle[]> {
+  const rawOpenApis: DataHandle[] = [];
+  let i = 0;
+  for (const inputFileUri of inputFileUris) {
+    // read literate Swagger
+    const pluginInput = await LoadLiterateOpenApiOverride(config, inputScope, inputFileUri, sink);
+    rawOpenApis.push(pluginInput);
+    i++;
+  }
+  return rawOpenApis;
 }
 
 type ObjectWithPath<T> = { obj: T, path: JsonPath };

@@ -3,41 +3,41 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { Configuration, ConfigurationView, MessageEmitter } from "./configuration";
+import { EventEmitter, IEvent } from "./events";
+import { Exception } from "./exception";
+import { IFileSystem, RealFileSystem } from "./file-system";
 import { RunPipeline } from "./pipeline/pipeline";
 import { Push } from "./ref/linq";
-import { IEvent, EventEmitter } from "./events";
-import { IFileSystem, RealFileSystem } from "./file-system";
-import { Exception } from "./exception";
-import { Configuration, ConfigurationView, MessageEmitter } from "./configuration";
-export { ConfigurationView } from "./configuration";
-import { Message, Channel } from "./message";
-import * as Constants from "./constants";
-import { Artifact } from "./artifact";
+export { ConfigurationView } from './configuration';
 import { homedir } from "os"
+import { Artifact } from "./artifact";
+import * as Constants from "./constants";
 import { DocumentType } from "./document-type";
+import { Channel, Message } from "./message";
 
 /**
- * An instance of the AutoRest generator. 
- * 
+ * An instance of the AutoRest generator.
+ *
  * Note: to create an instance of autore
  */
 export class AutoRest extends EventEmitter {
   /**
    * Event: Signals when a Process() finishes.
    */
-  @EventEmitter.Event public Finished: IEvent<AutoRest, boolean | Error>;
+  @EventEmitter.Event public Finished!: IEvent<AutoRest, boolean | Error>;
   /**
    * Event: Signals when a File is generated
    */
-  @EventEmitter.Event public GeneratedFile: IEvent<AutoRest, Artifact>;
+  @EventEmitter.Event public GeneratedFile!: IEvent<AutoRest, Artifact>;
   /**
    * Event: Signals when a Folder is supposed to be cleared
    */
-  @EventEmitter.Event public ClearFolder: IEvent<AutoRest, string>;
+  @EventEmitter.Event public ClearFolder!: IEvent<AutoRest, string>;
   /**
    * Event: Signals when a message is generated
    */
-  @EventEmitter.Event public Message: IEvent<AutoRest, Message>;
+  @EventEmitter.Event public Message!: IEvent<AutoRest, Message>;
 
   private _configurations = new Array<any>();
   private _view: ConfigurationView | undefined;
@@ -53,7 +53,7 @@ export class AutoRest extends EventEmitter {
   public constructor(private fileSystem: IFileSystem = new RealFileSystem(), public configFileOrFolderUri?: string) {
     super();
     // ensure the environment variable for the home folder is set.
-    process.env["autorest.home"] = process.env["autorest.home"] || homedir();
+    process.env['autorest.home'] = process.env['autorest.home'] || homedir();
   }
 
   public async RegenerateView(includeDefault: boolean = false): Promise<ConfigurationView> {
@@ -89,7 +89,7 @@ export class AutoRest extends EventEmitter {
   /**
    * Called to start processing of the files.
    */
-  public Process(): { finish: Promise<boolean | Error>, cancel: () => void } {
+  public Process(): { finish: Promise<boolean | Error>, cancel(): void } {
     let earlyCancel = false;
     let cancel: () => void = () => earlyCancel = true;
     const processInternal = async () => {
@@ -108,16 +108,15 @@ export class AutoRest extends EventEmitter {
             view.messageEmitter.removeAllListeners();
           }
         };
-
         if (view.InputFileUris.length === 0) {
-          if (view.GetEntry("allow-no-input")) {
+          if (view.GetEntry('allow-no-input')) {
             this.Finished.Dispatch(true);
             return true;
           } else {
             // if this is using perform-load we don't need to require files.
-            // if it's using batch, we might not have files in the main body 
-            if ((view.Raw as any)["perform-load"] !== false) {
-              return new Exception("No input files provided.\n\nUse --help to get help information.");
+            // if it's using batch, we might not have files in the main body
+            if ((view.Raw as any)['perform-load'] !== false) {
+              return new Exception('No input files provided.\n\nUse --help to get help information.');
             }
           }
         }
@@ -128,8 +127,8 @@ export class AutoRest extends EventEmitter {
         }
 
         await Promise.race([
-          RunPipeline(view, <IFileSystem>this.fileSystem),
-          new Promise((_, rej) => view.CancellationToken.onCancellationRequested(() => rej("Cancellation requested.")))]);
+          RunPipeline(view, this.fileSystem),
+          new Promise((_, rej) => view.CancellationToken.onCancellationRequested(() => rej('Cancellation requested.')))]);
 
         // finished -- return status (if cancelled, returns false.)
         this.Finished.Dispatch(!view.CancellationTokenSource.token.isCancellationRequested);
@@ -153,26 +152,26 @@ export class AutoRest extends EventEmitter {
       }
     };
     return {
-      cancel: () => cancel(),
+      cancel: cancel,
       finish: processInternal()
-    }
+    };
   }
 }
 
 /** Determines the document type based on the content of the document
- * 
+ *
  * @returns Promise<DocumentType> one of:
  *  -  DocumentType.LiterateConfiguration - contains the magic string '\n> see https://aka.ms/autorest'
  *  -  DocumentType.OpenAPI2 - $.swagger === "2.0"
  *  -  DocumentType.OpenAPI3 - $.openapi === "3.0.0"
  *  -  DocumentType.Unknown - content does not match a known document type
- * 
+ *
  * @see {@link DocumentType}
  */
 export async function IdentifyDocument(content: string): Promise<DocumentType> {
   if (content) {
 
-    // check for configuratuion 
+    // check for configuratuion
     if (await IsConfigurationDocument(content)) {
       return DocumentType.LiterateConfiguration;
     }
@@ -192,8 +191,8 @@ export async function IdentifyDocument(content: string): Promise<DocumentType> {
       }
     }
     if (doc) {
-      return (doc.swagger && doc.swagger === "2.0") ? DocumentType.OpenAPI2 :
-        (doc.openapi && doc.openapi === "3.0.0") ? DocumentType.OpenAPI3 :
+      return (doc.swagger && doc.swagger === '2.0') ? DocumentType.OpenAPI2 :
+        (doc.openapi && doc.openapi === '3.0.0') ? DocumentType.OpenAPI3 :
           DocumentType.Unknown;
     }
   }
@@ -203,17 +202,17 @@ export async function IdentifyDocument(content: string): Promise<DocumentType> {
 /**
  * Processes a document (yaml, markdown or JSON) and returns the document as a JSON-encoded document text
  * @param content - the document content
- * 
+ *
  * @returns the content as a JSON string (not a JSON DOM)
  */
 export async function LiterateToJson(content: string): Promise<string> {
   try {
-    let autorest = new AutoRest({
-      EnumerateFileUris: async function (folderUri: string): Promise<Array<string>> { return []; },
-      ReadFile: async (f: string): Promise<string> => f == "none:///empty-file.md" ? content || "# empty file" : "# empty file"
+    const autorest = new AutoRest({
+      async EnumerateFileUris(folderUri: string): Promise<Array<string>> { return []; },
+      ReadFile: async (f: string): Promise<string> => f == 'none:///empty-file.md' ? content || '# empty file' : '# empty file'
     });
-    let result = "";
-    autorest.AddConfiguration({ "input-file": "none:///empty-file.md", "output-artifact": ["swagger-document"] });
+    let result = '';
+    autorest.AddConfiguration({ 'input-file-swagger': 'none:///empty-file.md', 'output-artifact': ['swagger-document'] });
     autorest.GeneratedFile.Subscribe((source, artifact) => {
       result = artifact.content;
     });
@@ -222,13 +221,13 @@ export async function LiterateToJson(content: string): Promise<string> {
     await (await autorest.Process()).finish;
     return result;
   } catch (x) {
-    return "";
+    return '';
   }
 }
 
 /**
  * Checks to see if the document is a literate configuation document.
- * 
+ *
  * @param content the document content to check
  */
 export async function IsConfigurationDocument(content: string): Promise<boolean> {
@@ -236,7 +235,7 @@ export async function IsConfigurationDocument(content: string): Promise<boolean>
   return content.indexOf(Constants.MagicString) > -1;
 }
 
-/** 
+/**
   *  Given a document's content, does this represent a openapi document of some sort?
   *
   * @param content - the document content to evaluate
@@ -263,8 +262,8 @@ export async function Shutdown() {
  */
 export async function IsConfigurationExtension(extension: string): Promise<boolean> {
   switch (extension) {
-    case "markdown":
-    case "md":
+    case 'markdown':
+    case 'md':
       return true;
     default:
       return false;
@@ -277,11 +276,11 @@ export async function IsConfigurationExtension(extension: string): Promise<boole
  */
 export async function IsOpenApiExtension(extension: string): Promise<boolean> {
   switch (extension) {
-    case "yaml":
-    case "yml":
-    case "markdown":
-    case "md":
-    case "json":
+    case 'yaml':
+    case 'yml':
+    case 'markdown':
+    case 'md':
+    case 'json':
       return true;
     default:
       return false;
