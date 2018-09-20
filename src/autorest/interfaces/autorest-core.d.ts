@@ -197,7 +197,8 @@ export enum Channel {
     /** File represents a file output from an extension. Details are a Artifact and are required.  */
     File,
     /** content represents an update/creation of a configuration file. The final uri will be in the same folder as the primary config file. */
-    Configuration
+    Configuration,
+    Control
 }
 export interface SourceLocation {
     document: string;
@@ -344,8 +345,7 @@ import { Message } from 'autorest-core/lib/message';
 export interface AutoRestConfigurationImpl {
     __info?: string | null;
     'allow-no-input'?: boolean;
-    'input-file-swagger'?: Array<string> | string;
-    'input-file-openapi'?: Array<string> | string;
+    'input-file'?: Array<string> | string;
     'base-folder'?: string;
     'directive'?: Array<Directive> | Directive;
     'declare-directive'?: {
@@ -401,8 +401,8 @@ export class DirectiveView {
 }
 export class MessageEmitter extends EventEmitter {
     /**
-    * Event: Signals when a File is generated
-    */
+     * Event: Signals when a File is generated
+     */
     GeneratedFile: IEvent<MessageEmitter, Artifact>;
     /**
      * Event: Signals when a Folder is supposed to be cleared
@@ -439,8 +439,6 @@ export class ConfigurationView {
     IncludedConfigurationFiles(fileSystem: IFileSystem, ignoreFiles: Set<string>): Promise<Array<string>>;
     readonly Directives: Array<DirectiveView>;
     readonly InputFileUris: Array<string>;
-    readonly InputFileUrisOpenApi: Array<string>;
-    readonly InputFileUrisSwaggers: Array<string>;
     readonly OutputFolderUri: string;
     IsOutputArtifactRequested(artifact: string): boolean;
     GetEntry(key: keyof AutoRestConfigurationImpl): any;

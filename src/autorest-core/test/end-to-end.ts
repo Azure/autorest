@@ -12,7 +12,7 @@ import { PumpMessagesToConsole } from './test-utility';
     const autoRest = new AutoRest(new RealFileSystem());
     // PumpMessagesToConsole(autoRest);
     autoRest.AddConfiguration({
-      'input-file-swagger': [
+      'input-file': [
         'https://github.com/Azure/azure-rest-api-specs/blob/master/specification/network/resource-manager/Microsoft.Network/stable/2017-03-01/applicationGateway.json',
         'https://github.com/Azure/azure-rest-api-specs/blob/master/specification/network/resource-manager/Microsoft.Network/stable/2017-03-01/checkDnsAvailability.json',
         'https://github.com/Azure/azure-rest-api-specs/blob/master/specification/network/resource-manager/Microsoft.Network/stable/2017-03-01/expressRouteCircuit.json',
@@ -65,7 +65,7 @@ import { PumpMessagesToConsole } from './test-utility';
     });
 
     const config = await autoRest.view;
-    assert.strictEqual(config.InputFileUrisSwaggers.length, 1);
+    assert.strictEqual(config.InputFileUris.length, 1);
 
     const messages: Array<Message> = [];
 

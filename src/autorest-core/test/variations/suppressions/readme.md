@@ -11,7 +11,7 @@ This shows some examples of how to suppress messages from AutoRest
 ``` yaml
 version: latest     # autorest version
 azure-arm: true     # enable Azure validations and code generation features
-input-file-swagger: 
+input-file: 
   - myApi.md    # multiple swaggers 
   - yourApi.md 
 

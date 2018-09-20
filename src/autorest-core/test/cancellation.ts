@@ -12,7 +12,7 @@ import { CreateFolderUri, ResolveUri } from '../lib/ref/uri';
   private async CreateLongRunningAutoRest(): Promise<AutoRest> {
     const autoRest = new AutoRest(new RealFileSystem());
     await autoRest.AddConfiguration({
-      'input-file-swagger': [
+      'input-file': [
         'https://github.com/Azure/azure-rest-api-specs/blob/master/specification/network/resource-manager/Microsoft.Network/stable/2017-03-01/applicationGateway.json',
         'https://github.com/Azure/azure-rest-api-specs/blob/master/specification/network/resource-manager/Microsoft.Network/stable/2017-03-01/checkDnsAvailability.json',
         'https://github.com/Azure/azure-rest-api-specs/blob/master/specification/network/resource-manager/Microsoft.Network/stable/2017-03-01/expressRouteCircuit.json',

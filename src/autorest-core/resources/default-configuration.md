@@ -143,8 +143,8 @@ use-extension:
 #### Reflection
 
 ##### Input API versions (azure-rest-api-specs + C# specific)
-
-``` yaml $(csharp) && $(input-file-swagger)
+ 
+``` yaml $(csharp) 
 pipeline:
   swagger-document/reflect-api-versions-cs: # emits a *.cs file containing information about the API versions involved in this call
     input:
@@ -157,7 +157,7 @@ pipeline:
     scope: scope-reflect-api-versions-cs-emitter
 ```
 
-``` yaml $(csharp) && $(input-file-openapi)
+``` yaml $(csharp) 
 pipeline:
   openapi-document/reflect-api-versions-cs: # emits a *.cs file containing information about the API versions involved in this call
     input:
@@ -250,7 +250,7 @@ help-content: # type: Help as defined in autorest-core/help.ts
     settings:
     - key: help
       description: display help (combine with flags like --csharp to get further details about specific functionality)
-    - key: input-file-swagger
+    - key: input-file
       type: string | string[]
       description: OpenAPI file to use as input (use this setting repeatedly to pass multiple files at once)
     - key: output-folder
@@ -307,14 +307,14 @@ perform-load: true # kick off loading
 
 Markdown documentation overrides:
 
-``` yaml $(input-file-swagger)
+``` yaml 
 pipeline:
   swagger-document-override/md-override-loader-swagger:
     output-artifact: immediate-config
     scope: perform-load
 ```
 
-``` yaml $(input-file-openapi)
+``` yaml 
 pipeline:
   openapi-document-override/md-override-loader-openapi:
     output-artifact: immediate-config
@@ -324,7 +324,7 @@ pipeline:
 OpenAPI definitions:
 Pipeline for Swagger (openapi2) files.
 
-``` yaml $(input-file-swagger)  
+``` yaml
 pipeline:
   swagger-document/loader-swagger:
     # plugin: loader # IMPLICIT: default to last item if split by '/'
@@ -360,14 +360,11 @@ pipeline:
   openapi-document/openapi-document-converter:
     input: swagger-document/identity
     output-artifact: openapi-document
-  openapi-document/transform:
-    input: openapi-document-converter
-    output-artifact: openapi-document    
 ```
 
 # Pipeline for OpenAPI 3+
 
-``` yaml $(input-file-openapi)
+``` yaml
 pipeline:
   openapi-document/loader-openapi:
     # plugin: loader # IMPLICIT: default to last item if split by '/'
@@ -385,21 +382,23 @@ pipeline:
   openapi-document/compose:
     input: individual/identity
     output-artifact: openapi-document
-  openapi-document/transform-immediate:
+  openapi-document/transform-immediate: 
     input:
     - openapi-document-override/md-override-loader-openapi
     - compose
-    output-artifact: openapi-document
-  openapi-document/transform:
-    input: transform-immediate
     output-artifact: openapi-document
 ```
 
 ``` yaml
 pipeline:
+  openapi-document/transform:
+    input: 
+      - openapi-document-converter
+      - transform-immediate
+    output-artifact: openapi-document    
 
   openapi-document/component-modifiers:
-    input: transform
+    input: openapi-document/transform
     output-artifact: openapi-document
   openapi-document/identity:
     input: component-modifiers
@@ -415,10 +414,10 @@ scope-swagger-document/emitter:
   output-uri-expr: |
     $config["output-file"] || 
     ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
-    $config["input-file-swagger"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
+    $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
 ```
 
-``` yaml $(input-file-swagger)
+``` yaml 
 scope-openapi-document/emitter:
   input-artifact: openapi-document
   is-object: true
@@ -426,18 +425,8 @@ scope-openapi-document/emitter:
   output-uri-expr: |
     $config["output-file"] || 
     ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
-    $config["input-file-swagger"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
+    $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
 ``` 
-``` yaml $(input-file-openapi)
-scope-openapi-document/emitter:
-  input-artifact: openapi-document
-  is-object: true
-  # rethink that output-file part
-  output-uri-expr: |
-    $config["output-file"] || 
-    ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
-    $config["input-file-openapi"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
-```
 
 ``` yaml
 scope-cm/emitter: # can remove once every generator depends on recent modeler
@@ -484,7 +473,7 @@ directive:
 
 #### Validation
 
-``` yaml $(input-file-swagger)
+``` yaml 
 pipeline:
   swagger-document/model-validator:
     input: swagger-document/identity
@@ -494,7 +483,7 @@ pipeline:
     scope: semantic-validator
 ```
 
-``` yaml $(input-file-openapi)
+``` yaml 
 pipeline:
   openapi-document/model-validator:
     input: openapi-document/identity

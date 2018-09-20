@@ -94,8 +94,8 @@ async function legacyMain(autorestArgs: Array<string>): Promise<number> {
 
   // autorest init
   if (autorestArgs[0] === 'init') {
-    const clientNameGuess = (config['override-info'] || {}).title || Parse<any>(await ReadUri((config['input-file-swagger'] as any)[0])).info.title;
-    await autorestInit(clientNameGuess, Array.isArray(config['input-file-swagger']) ? config['input-file-swagger'] as any : []);
+    const clientNameGuess = (config['override-info'] || {}).title || Parse<any>(await ReadUri((config['input-file'] as any)[0])).info.title;
+    await autorestInit(clientNameGuess, Array.isArray(config['input-file']) ? config['input-file'] as any : []);
     return 0;
   }
   // autorest init-min
@@ -268,7 +268,7 @@ These are the global settings for the API.
 
 ~~~ yaml
 # list all the input OpenAPI files (may be YAML, JSON, or Literate- OpenAPI markdown)
-input-file-swagger:
+input-file:
 ${inputs.map(x => '  - ' + x).join('\n')}
 ~~~
 
@@ -416,7 +416,7 @@ function getRds(schema: any, path: string): Array<string> {
   const m = rx.exec(path) || [];
   const apiversion = m[1];
   const namespace = m[2];
-  const result = [];
+  const result = new Array<any>();
   if (schema.resourceDefinitions) {
     for (const name of Object.getOwnPropertyNames(schema.resourceDefinitions)) {
       result.push(`{ "$ref": "https://schema.management.azure.com/schemas/${apiversion}/${namespace}.json#/resourceDefinitions/${name}" }, `);
@@ -435,7 +435,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
   // ask for the view without
   const config = await api.RegenerateView();
   for (const batchConfig of config.GetNestedConfiguration('resource-schema-batch')) { // really, there should be only one
-    for (const eachFile of batchConfig['input-file-swagger']) {
+    for (const eachFile of batchConfig['input-file']) {
       const path = ResolveUri(config.configFileFolderUri, eachFile);
       const content = await ReadUri(path);
       if (!await IsOpenApiDocument(content)) {
@@ -471,8 +471,8 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
       subscribeMessages(instance, () => exitcode++);
 
       // set configuration for that item
-      instance.AddConfiguration(ShallowCopy(batchConfig, 'input-file-swagger'));
-      instance.AddConfiguration({ 'input-file-swagger': eachFile });
+      instance.AddConfiguration(ShallowCopy(batchConfig, 'input-file'));
+      instance.AddConfiguration({ 'input-file': eachFile });
 
       console.log(`Running autorest for *${path}* `);
 

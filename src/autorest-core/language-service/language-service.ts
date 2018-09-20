@@ -673,7 +673,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
         uri: configFile,
         languageId: "markdown",
         version: 1,
-        getText: () => "#Fake config file \n> see https://aka.ms/autorest \n``` yaml \ninput-file-swagger: \n - " + documentUri,
+        getText: () => "#Fake config file \n> see https://aka.ms/autorest \n``` yaml \ninput-file: \n - " + documentUri,
         positionAt: (offset: number) => <Position>{},
         offsetAt: (position: Position) => 0,
         lineCount: 1

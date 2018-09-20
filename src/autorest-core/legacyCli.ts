@@ -18,7 +18,7 @@ async function ParseCompositeSwagger(inputScope: DataSource, uri: string, target
   const compositeSwaggerFile = await inputScope.ReadStrict(uri);
   const data = compositeSwaggerFile.ReadObject<{ info: any, documents: string[] }>();
   const documents = data.documents;
-  targetConfig["input-file-swagger"] = documents.map(d => ResolveUri(uri, d));
+  targetConfig["input-file"] = documents.map(d => ResolveUri(uri, d));
 
   // forward info section
   targetConfig["override-info"] = data.info;
@@ -26,7 +26,7 @@ async function ParseCompositeSwagger(inputScope: DataSource, uri: string, target
 
 /* @internal */ export async function CreateConfiguration(baseFolderUri: string, inputScope: DataSource, args: string[]): Promise<AutoRestConfigurationImpl> {
   let result: AutoRestConfigurationImpl = {
-    "input-file-swagger": []
+    "input-file": []
   };
   const switches: { [key: string]: string | null } = {};
 
@@ -46,7 +46,7 @@ async function ParseCompositeSwagger(inputScope: DataSource, uri: string, target
   if (inputFile === null) {
     throw new Error("No input specified.");
   }
-  result["input-file-swagger"] = inputFile;
+  result["input-file"] = inputFile;
 
   result["output-folder"] = switches["o"] || switches["output"] || switches["outputdirectory"] || "Generated";
 

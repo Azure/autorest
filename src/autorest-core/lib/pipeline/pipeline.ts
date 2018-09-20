@@ -6,24 +6,24 @@
 import { Help } from '../../help';
 import { ConfigurationView, GetExtension } from '../configuration';
 import { DataHandle, DataSink, DataSource, QuickDataSource } from '../data-store/data-store';
-import { IFileSystem } from "../file-system";
-import { LazyPromise } from "../lazy";
-import { Channel } from "../message";
-import { ConvertOAI2toOAI3 } from "../openapi/conversion";
-import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
+import { IFileSystem } from '../file-system';
+import { LazyPromise } from '../lazy';
+import { Channel, Message } from '../message';
+import { ConvertOAI2toOAI3 } from '../openapi/conversion';
+import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
 import { ConvertJsonx2Yaml, ConvertYaml2Jsonx } from '../parsing/yaml';
-import { JsonPath, stringify } from "../ref/jsonpath";
-import { safeEval } from "../ref/safe-eval";
-import { ResolveUri } from "../ref/uri";
+import { JsonPath, stringify } from '../ref/jsonpath';
+import { safeEval } from '../ref/safe-eval';
+import { ResolveUri } from '../ref/uri';
 import { Descendants, FastStringify, StringifyAst } from '../ref/yaml';
-import { EmitArtifacts } from "./artifact-emitter";
+import { EmitArtifacts } from './artifact-emitter';
 import { CreatePerFilePlugin, PipelinePlugin } from './common';
-import { ProcessCodeModel } from "./commonmark-documentation";
+import { ProcessCodeModel } from './commonmark-documentation';
 import { GetPlugin_ComponentModifier } from './component-modifier';
-import { GetPlugin_Help } from "./help";
-import { Manipulator } from "./manipulation";
-import { GetPlugin_ReflectApiVersion } from "./metadata-generation";
-import { AutoRestExtension } from "./plugin-endpoint";
+import { GetPlugin_Help } from './help';
+import { Manipulator } from './manipulation';
+import { GetPlugin_ReflectApiVersion } from './metadata-generation';
+import { AutoRestExtension } from './plugin-endpoint';
 import { GetPlugin_SchemaValidatorOpenApi, GetPlugin_SchemaValidatorSwagger } from './schema-validation';
 import { ComposeSwaggers, LoadLiterateOpenApi, LoadLiterateOpenApiOverrides, LoadLiterateOpenApis, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
 
@@ -32,6 +32,7 @@ interface PipelineNode {
   pluginName: string;
   configScope: JsonPath;
   inputs: Array<string>;
+  skip: boolean;
 }
 
 function GetPlugin_Identity(): PipelinePlugin {
@@ -40,37 +41,41 @@ function GetPlugin_Identity(): PipelinePlugin {
 
 function GetPlugin_LoaderSwagger(): PipelinePlugin {
   return async (config, input, sink) => {
-    const inputs = config.InputFileUrisSwaggers;
+    const inputs = config.InputFileUris;
     const swaggers = await LoadLiterateSwaggers(
       config,
       input,
       inputs, sink);
     const result: Array<DataHandle> = [];
-    for (let i = 0; i < inputs.length; ++i) {
-      result.push(await sink.Forward(inputs[i], swaggers[i]));
+    if (swaggers.length === inputs.length) {
+      for (let i = 0; i < inputs.length; ++i) {
+        result.push(await sink.Forward(inputs[i], swaggers[i]));
+      }
     }
-    return new QuickDataSource(result);
+    return new QuickDataSource(result, swaggers.length !== inputs.length);
   };
 }
 
 function GetPlugin_LoaderOpenApi(): PipelinePlugin {
   return async (config, input, sink) => {
-    const inputs = config.InputFileUrisOpenApis;
+    const inputs = config.InputFileUris;
     const openapis = await LoadLiterateOpenApis(
       config,
       input,
       inputs, sink);
     const result: Array<DataHandle> = [];
-    for (let i = 0; i < inputs.length; ++i) {
-      result.push(await sink.Forward(inputs[i], openapis[i]));
+    if (openapis.length === inputs.length) {
+      for (let i = 0; i < inputs.length; ++i) {
+        result.push(await sink.Forward(inputs[i], openapis[i]));
+      }
     }
-    return new QuickDataSource(result);
+    return new QuickDataSource(result, openapis.length !== inputs.length);
   };
 }
 
 function GetPlugin_MdOverrideLoaderSwagger(): PipelinePlugin {
   return async (config, input, sink) => {
-    const inputs = config.InputFileUrisSwaggers;
+    const inputs = config.InputFileUris;
     const swaggers = await LoadLiterateSwaggerOverrides(
       config,
       input,
@@ -79,13 +84,13 @@ function GetPlugin_MdOverrideLoaderSwagger(): PipelinePlugin {
     for (let i = 0; i < inputs.length; ++i) {
       result.push(await sink.Forward(inputs[i], swaggers[i]));
     }
-    return new QuickDataSource(result);
+    return new QuickDataSource(result, input.skip);
   };
 }
 
 function GetPlugin_MdOverrideLoaderOpenApi(): PipelinePlugin {
   return async (config, input, sink) => {
-    const inputs = config.InputFileUrisOpenApis;
+    const inputs = config.InputFileUris;
     const openapis = await LoadLiterateOpenApiOverrides(
       config,
       input,
@@ -94,7 +99,7 @@ function GetPlugin_MdOverrideLoaderOpenApi(): PipelinePlugin {
     for (let i = 0; i < inputs.length; ++i) {
       result.push(await sink.Forward(inputs[i], openapis[i]));
     }
-    return new QuickDataSource(result);
+    return new QuickDataSource(result, input.skip);
   };
 }
 
@@ -141,7 +146,7 @@ function GetPlugin_TransformerImmediate(): PipelinePlugin {
     const file = files[files.length - 1];
     const fileIn = await input.ReadStrict(file);
     const fileOut = await manipulator.Process(fileIn, sink, isObject, fileIn.Description);
-    return new QuickDataSource([await sink.Forward('swagger-document', fileOut)]);
+    return new QuickDataSource([await sink.Forward('swagger-document', fileOut)], input.skip);
   };
 }
 
@@ -152,7 +157,7 @@ function GetPlugin_Composer(): PipelinePlugin {
     const overrideTitle = (overrideInfo && overrideInfo.title) || config.GetEntry('title');
     const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry('description');
     const swagger = await ComposeSwaggers(config, overrideTitle, overrideDescription, swaggers, sink);
-    return new QuickDataSource([await sink.Forward('composed', swagger)]);
+    return new QuickDataSource([await sink.Forward('composed', swagger)], input.skip);
   };
 }
 
@@ -163,6 +168,7 @@ function GetPlugin_External(host: AutoRestExtension, pluginName: string): Pipeli
     if (pluginNames.indexOf(pluginName) === -1) {
       throw new Error(`Plugin ${pluginName} not found.`);
     }
+    let shouldSkip: boolean | undefined;
 
     const results: Array<DataHandle> = [];
     const result = await plugin.Process(
@@ -172,12 +178,22 @@ function GetPlugin_External(host: AutoRestExtension, pluginName: string): Pipeli
       input,
       sink,
       f => results.push(f),
-      config.Message.bind(config),
+      (message: Message) => {
+        if (message.Channel === Channel.Control) {
+          if (message.Details && message.Details.skip !== undefined) {
+            shouldSkip = message.Details.skip;
+          }
+
+        } else {
+          return config.Message.bind(config)(message);
+        }
+      },
+
       config.CancellationToken);
     if (!result) {
       throw new Error(`Plugin ${pluginName} reported failure.`);
     }
-    return new QuickDataSource(results);
+    return new QuickDataSource(results, shouldSkip);
   };
 }
 
@@ -191,7 +207,7 @@ function GetPlugin_CommonmarkProcessor(): PipelinePlugin {
       file = file.substr(file.indexOf('/output/') + '/output/'.length);
       results.push(await sink.Forward('code-model-v1', fileOut));
     }
-    return new QuickDataSource(results);
+    return new QuickDataSource(results, input.skip);
   };
 }
 
@@ -271,7 +287,7 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
     // --> ("/1", ["a/1"], cfg of "a/1", [])
     //     --> adds node `${stageName}/1`
     // Note: inherits the config of the LAST input node (affects for example `.../generate`)
-    const addNodesAndSuffixes = (suffix: string, inputs: Array<string>, configScope: JsonPath, inputNodes: Array<{ name: string, suffixes: string[] }>) => {
+    const addNodesAndSuffixes = (suffix: string, inputs: Array<string>, configScope: JsonPath, inputNodes: Array<{ name: string, suffixes: Array<string> }>) => {
       if (inputNodes.length === 0) {
         const config = configCache[stringify(configScope)];
         const configs = scope ? [...config.GetNestedConfiguration(scope)] : [config];
@@ -286,7 +302,8 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
             pluginName: plugin,
             outputArtifact,
             configScope: path,
-            inputs
+            inputs,
+            skip: false,
           };
         }
       } else {
@@ -394,25 +411,37 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
       // get input
       const inputScopes: Array<DataSource> = await Promise.all(node.inputs.map(getTask));
+
       let inputScope: DataSource;
       if (inputScopes.length === 0) {
         inputScope = fsInput;
       } else {
+        let skip: boolean | undefined;
+
         const handles: Array<DataHandle> = [];
         for (const pscope of inputScopes) {
           const scope = await pscope;
+          if (pscope.skip !== undefined) {
+            skip = skip === undefined ? pscope.skip : skip && pscope.skip;
+          }
           for (const handle of await scope.Enum()) {
             handles.push(await scope.ReadStrict(handle));
           }
         }
-        inputScope = new QuickDataSource(handles);
+        inputScope = new QuickDataSource(handles, skip);
       }
 
       const config = pipeline.configs[stringify(node.configScope)];
       const pluginName = node.pluginName;
       const plugin = plugins[pluginName];
+
       if (!plugin) {
         throw new Error(`Plugin '${pluginName}' not found.`);
+      }
+
+      if (inputScope.skip) {
+        config.Message({ Channel: Channel.Debug, Text: `${nodeName} - SKIPPING` });
+        return inputScope;
       }
       try {
         config.Message({ Channel: Channel.Debug, Text: `${nodeName} - START` });
@@ -440,7 +469,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
   for (const name of Object.keys(pipeline.pipeline)) {
     const task = getTask(name);
-    const taskx: { _state: 'running' | 'failed' | 'complete', _result(): Array<DataHandle>, _finishedAt: number } = task as any;
+    const taskx: { _state: 'running' | 'failed' | 'complete'; _result(): Array<DataHandle>; _finishedAt: number } = task as any;
     taskx._state = 'running';
     task.then(async x => {
       const res = await Promise.all((await x.Enum()).map(key => x.ReadStrict(key)));

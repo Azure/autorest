@@ -6,7 +6,7 @@ Some information about My Sample API. It's a great API, and it's mine.
 
 ## Common Settings
    ``` yaml 
-   input-file-swagger:
+   input-file:
     - swagger.md
 
    AutoRest: 

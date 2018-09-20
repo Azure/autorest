@@ -37,8 +37,7 @@ const RESOLVE_MACROS_AT_RUNTIME = true;
 export interface AutoRestConfigurationImpl {
   __info?: string | null;
   'allow-no-input'?: boolean;
-  'input-file-swagger'?: Array<string> | string;
-  'input-file-openapi'?: Array<string> | string;
+  'input-file'?: Array<string> | string;
   'base-folder'?: string;
   'directive'?: Array<Directive> | Directive;
   'declare-directive'?: { [name: string]: string };
@@ -176,7 +175,7 @@ function ProxifyConfigurationView(cfgView: any) {
     get: (target, property) => {
       const value = (target)[property];
       if (value && value instanceof Array) {
-        const result = [];
+        const result = new Array<any>();
         for (const each of value) {
           result.push(resolveRValue(each, '', target, null));
         }
@@ -210,8 +209,7 @@ export class ConfigurationView {
     // long term, we simply gotta write a `Merge` method that adheres to the rules we need in here.
     this.rawConfig = <any>{
       'directive': [],
-      'input-file-swagger': [],
-      'input-file-openapi': [],
+      'input-file': [],
       'output-artifact': [],
       'require': [],
       'try-require': [],
@@ -376,17 +374,7 @@ export class ConfigurationView {
   }
 
   public get InputFileUris(): Array<string> {
-    return [...this.InputFileUrisOpenApis, ...this.InputFileUrisSwaggers];
-  }
-
-  public get InputFileUrisOpenApis(): Array<string> {
-    return From<string>(ValuesOf<string>(this.config['input-file-openapi']))
-      .Select(each => this.ResolveAsPath(each))
-      .ToArray();
-  }
-
-  public get InputFileUrisSwaggers(): Array<string> {
-    return From<string>(ValuesOf<string>(this.config['input-file-swagger']))
+    return From<string>(ValuesOf<string>(this.config['input-file']))
       .Select(each => this.ResolveAsPath(each))
       .ToArray();
   }

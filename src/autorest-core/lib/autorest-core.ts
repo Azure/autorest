@@ -212,7 +212,7 @@ export async function LiterateToJson(content: string): Promise<string> {
       ReadFile: async (f: string): Promise<string> => f == 'none:///empty-file.md' ? content || '# empty file' : '# empty file'
     });
     let result = '';
-    autorest.AddConfiguration({ 'input-file-swagger': 'none:///empty-file.md', 'output-artifact': ['swagger-document'] });
+    autorest.AddConfiguration({ 'input-file': 'none:///empty-file.md', 'output-artifact': ['swagger-document'] });
     autorest.GeneratedFile.Subscribe((source, artifact) => {
       result = artifact.content;
     });

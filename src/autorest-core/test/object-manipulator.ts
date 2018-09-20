@@ -37,7 +37,7 @@ definitions:
   @test async 'any hit'() {
     // setup
     const dataStore = new DataStore();
-    const input = await dataStore.WriteData('mem://input.yaml', this.exampleObject, 'input-file-swagger');
+    const input = await dataStore.WriteData('mem://input.yaml', this.exampleObject, 'input-file');
 
     const expectHit = async (jsonQuery: string, anyHit: boolean) => {
       const result = await ManipulateObject(input, dataStore.getDataSink(), jsonQuery, (_, x) => x);
@@ -61,7 +61,7 @@ definitions:
   @test async 'removal'() {
     // setup
     const dataStore = new DataStore();
-    const input = await dataStore.WriteData('mem://input.yaml', this.exampleObject, 'input-file-swagger');
+    const input = await dataStore.WriteData('mem://input.yaml', this.exampleObject, 'input-file');
 
     // remove all models that don't have a description
     const result = await ManipulateObject(input, dataStore.getDataSink(), '$.definitions[?(!@.description)]', (_, x) => undefined);
@@ -74,7 +74,7 @@ definitions:
   @test async 'update'() {
     // setup
     const dataStore = new DataStore();
-    const input = await dataStore.WriteData('mem://input.yaml', this.exampleObject, 'input-file-swagger');
+    const input = await dataStore.WriteData('mem://input.yaml', this.exampleObject, 'input-file');
 
     {
       // override all existing model descriptions

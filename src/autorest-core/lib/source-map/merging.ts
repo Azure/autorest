@@ -164,7 +164,7 @@ export function resolveRValue(value: any, propertyName: string, higherPriority: 
 
     // resolve macro values for array values
     if (value instanceof Array) {
-      const result = [];
+      const result = new Array<any>();
       for (const each of value) {
         // since we're not naming the parameter,
         // if there isn't a higher priority,

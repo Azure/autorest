@@ -8,7 +8,7 @@ This shows a set of swagger files that is processed as a merged unit by default,
 
 version: latest     # autorest version
 azure-arm: false    # no special ARM consideratons 
-input-file-swagger: 
+input-file: 
   - myApi.md    # multiple swaggers 
   - yourApi.md 
 

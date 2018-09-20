@@ -45,6 +45,7 @@ interface Store { [uri: string]: Data }
  ********************************************/
 
 export abstract class DataSource {
+  public skip: boolean | undefined;
   public abstract Enum(): Promise<Array<string>>;
   public abstract Read(uri: string): Promise<DataHandle | null>;
 
@@ -74,15 +75,19 @@ export abstract class DataSource {
 }
 
 export class QuickDataSource extends DataSource {
-  public constructor(private handles: Array<DataHandle>) {
+  public constructor(private handles: Array<DataHandle>, skip?: boolean) {
     super();
+    this.skip = skip;
   }
 
   public async Enum(): Promise<Array<string>> {
-    return this.handles.map(x => x.key);
+    return this.skip ? new Array<string>() : this.handles.map(x => x.key);
   }
 
   public async Read(key: string): Promise<DataHandle | null> {
+    if (this.skip) {
+      return null;
+    }
     const data = this.handles.filter(x => x.key === key)[0];
     return data || null;
   }
@@ -119,7 +124,7 @@ class ReadThroughDataSource extends DataSource {
             return null;
           }
         }
-        const readHandle = await this.store.WriteData(uri, data, 'input-file-swagger');
+        const readHandle = await this.store.WriteData(uri, data, 'input-file');
 
         this.uris.push(uri);
         return readHandle;

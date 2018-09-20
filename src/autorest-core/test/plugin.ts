@@ -31,7 +31,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
   // TODO: remodel if we figure out acquisition story
   @test @skip async 'Validation Tools'() {
     const autoRest = new AutoRest(new RealFileSystem());
-    autoRest.AddConfiguration({ 'input-file-swagger': 'https://github.com/olydis/azure-rest-api-specs/blob/amar-tests/arm-logic/2016-06-01/swagger/logic.json' });
+    autoRest.AddConfiguration({ 'input-file': 'https://github.com/olydis/azure-rest-api-specs/blob/amar-tests/arm-logic/2016-06-01/swagger/logic.json' });
     autoRest.AddConfiguration({ 'model-validator': true });
     autoRest.AddConfiguration({ 'semantic-validator': true });
     autoRest.AddConfiguration({ 'azure-validator': true });
@@ -56,7 +56,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
     const dataStore = config.DataStore;
 
     // load swagger
-    const swagger = await LoadLiterateSwagger(
+    const swagger = <DataHandle>await LoadLiterateSwagger(
       config,
       dataStore.GetReadThroughScope(new RealFileSystem()),
       'https://github.com/Azure/azure-rest-api-specs/blob/fa91f9109c1e9107bb92027924ec2983b067f5ec/arm-network/2016-12-01/swagger/network.json',
@@ -89,7 +89,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
     const dataStore = new DataStore(CancellationToken.None);
 
     // load swagger
-    const swagger = await LoadLiterateSwagger(
+    const swagger = <DataHandle>await LoadLiterateSwagger(
       config,
       dataStore.GetReadThroughScope(new RealFileSystem()),
       'https://github.com/Azure/azure-rest-api-specs/blob/fa91f9109c1e9107bb92027924ec2983b067f5ec/arm-network/2016-12-01/swagger/network.json',
