@@ -4,7 +4,6 @@
 
 ``` yaml 
 input-file: pétstöre.json # full Unicode support
-#input-file: petstore.oai3.yaml # full Unicode support
 
 csharp:
   namespace: Petstore
