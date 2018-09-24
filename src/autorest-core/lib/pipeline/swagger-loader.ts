@@ -3,28 +3,28 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ConfigurationView } from "../autorest-core";
+import { ConfigurationView } from '../autorest-core';
 import { DataHandle, DataSink, DataSource } from '../data-store/data-store';
-import { OperationAbortedException } from "../exception";
-import { Channel, SourceLocation } from "../message";
+import { OperationAbortedException } from '../exception';
+import { Channel, SourceLocation } from '../message';
 import {
   CommonmarkHeadingFollowingText,
   CommonmarkHeadingText,
   CommonmarkSubHeadings,
   ParseCommonmark
-} from "../parsing/literate";
-import { Parse as ParseLiterateYaml } from "../parsing/literate-yaml";
-import { IndexToPosition, Lines } from "../parsing/text-utility";
-import { ResolvePath, ResolveRelativeNode } from "../parsing/yaml";
+} from '../parsing/literate';
+import { Parse } from '../parsing/literate-yaml';
+import { IndexToPosition, Lines } from '../parsing/text-utility';
+import { ResolvePath, ResolveRelativeNode } from '../parsing/yaml';
 import { pushAll } from '../ref/array';
-import { IsPrefix, JsonPath, JsonPathComponent, stringify } from "../ref/jsonpath";
-import { From } from "../ref/linq";
-import { safeEval } from "../ref/safe-eval";
-import { Mapping, Mappings } from "../ref/source-map";
-import { ResolveUri } from "../ref/uri";
-import { Clone, CloneAst, Descendants, StrictJsonSyntaxCheck, StringifyAst, ToAst, YAMLNodeWithPath } from "../ref/yaml";
-import { IdentitySourceMapping, MergeYamls } from "../source-map/merging";
-import { CreateAssignmentMapping } from "../source-map/source-map";
+import { IsPrefix, JsonPath, JsonPathComponent, stringify } from '../ref/jsonpath';
+import { From } from '../ref/linq';
+import { safeEval } from '../ref/safe-eval';
+import { Mapping, Mappings } from '../ref/source-map';
+import { ResolveUri } from '../ref/uri';
+import { Clone, CloneAst, Descendants, StrictJsonSyntaxCheck, StringifyAst, ToAst, YAMLNodeWithPath } from '../ref/yaml';
+import { IdentitySourceMapping, MergeYamls } from '../source-map/merging';
+import { CreateAssignmentMapping } from '../source-map/source-map';
 
 const ctr = 0;
 
@@ -57,7 +57,7 @@ async function EnsureCompleteDefinitionIsPresent(
         });
         throw new OperationAbortedException();
       }
-      const externalFile = await ParseLiterateYaml(config, file, sink);
+      const externalFile = await Parse(config, file, sink);
       externalFiles[fileUri] = externalFile;
     }
   };
@@ -74,6 +74,9 @@ async function EnsureCompleteDefinitionIsPresent(
     // external references
     for (const node of Descendants(currentDocAst)) {
       if (isReferenceNode(node)) {
+        // Check that it is a external reference, by checking
+        // it does not start with '#' because just internal
+        // references start with '#'
         if (!(node.node.value as string).startsWith('#')) {
           references.push(node);
         }
@@ -213,10 +216,10 @@ export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inp
   const directives: Array<any> = [];
   const mappings: Mappings = [];
   const transformer: Array<string> = [];
-  const state = [...CommonmarkSubHeadings(commonmarkNode.firstChild)].map(x => ({ node: x, query: "$" }));
+  const state = [...CommonmarkSubHeadings(commonmarkNode.firstChild)].map(x => ({ node: x, query: '$' }));
 
   while (state.length > 0) {
-    const x = state.pop(); if (x === undefined) { throw "unreachable"; }
+    const x = state.pop(); if (x === undefined) { throw new Error("unreachable"); }
     // extract heading clue
     // Syntax: <regular heading> (`<query>`)
     // query syntax:
@@ -285,10 +288,10 @@ export async function LoadLiterateOpenApiOverride(config: ConfigurationView, inp
   const directives: Array<any> = [];
   const mappings: Mappings = [];
   const transformer: Array<string> = [];
-  const state = [...CommonmarkSubHeadings(commonmarkNode.firstChild)].map(x => ({ node: x, query: "$" }));
+  const state = [...CommonmarkSubHeadings(commonmarkNode.firstChild)].map(x => ({ node: x, query: '$' }));
 
   while (state.length > 0) {
-    const x = state.pop(); if (x === undefined) { throw "unreachable"; }
+    const x = state.pop(); if (x === undefined) { throw new Error("unreachable"); }
     // extract heading clue
     // Syntax: <regular heading> (`<query>`)
     // query syntax:
@@ -362,11 +365,11 @@ export async function LoadLiterateSwagger(config: ConfigurationView, inputScope:
       });
     }
   }
-  const data = await ParseLiterateYaml(config, handle, sink);
+  const data = await Parse(config, handle, sink);
   // check OpenAPI version
   if (data.ReadObject<any>().swagger !== '2.0') {
     return null;
-    //throw new Error(`File '${inputFileUri}' is not a valid OpenAPI 2.0 definition (expected 'swagger: 2.0')`);
+    // throw new Error(`File '${inputFileUri}' is not a valid OpenAPI 2.0 definition (expected 'swagger: 2.0')`);
   }
   const externalFiles: { [uri: string]: DataHandle } = {};
   externalFiles[inputFileUri] = data;
@@ -384,7 +387,9 @@ export async function LoadLiterateSwagger(config: ConfigurationView, inputScope:
 
 export async function LoadLiterateOpenApi(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle | null> {
   const handle = await inputScope.ReadStrict(inputFileUri);
-  // strict JSON check
+
+  // If a JSON file is provided, check that the syntax is correct.
+  // Otherwise send an error message.
   if (inputFileUri.toLowerCase().endsWith('.json')) {
     const error = StrictJsonSyntaxCheck(handle.ReadData());
     if (error) {
@@ -395,10 +400,13 @@ export async function LoadLiterateOpenApi(config: ConfigurationView, inputScope:
       });
     }
   }
-  const data = await ParseLiterateYaml(config, handle, sink);
-  const openapifound = /^3.\d.\d$/g.exec(data.ReadObject<any>().openapi);
-  if (!openapifound) {
-    // throw new Error(`File '${inputFileUri}' is not a valid OpenAPI 3.X.X definition (expected 'openapi: 3.X.X')`);
+
+  const data = await Parse(config, handle, sink);
+
+  // Read the openapi object and check if the version matches something like 3.X.X
+  const wasOpenApiVersionFound = /^3.\d.\d$/g.exec(data.ReadObject<any>().openapi);
+  if (!wasOpenApiVersionFound) {
+    // Since a version was not found we just return null. Thus, no file is loaded.
     return null;
   }
 
@@ -464,7 +472,7 @@ export async function LoadLiterateOpenApiOverrides(config: ConfigurationView, in
   return rawOpenApis;
 }
 
-interface ObjectWithPath<T> { obj: T, path: JsonPath }
+interface ObjectWithPath<T> { obj: T; path: JsonPath; }
 function getPropertyValues<T, U>(obj: ObjectWithPath<T>): Array<ObjectWithPath<U>> {
   const o: T = obj.obj || <T>{};
   return Object.getOwnPropertyNames(o).map(n => getProperty<T, U>(obj, n));
@@ -493,7 +501,7 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
   const uniqueVersion: boolean = distinct(inputSwaggerObjects.map(s => s.info).filter(i => !!i).map(i => i.version)).length === 1;
 
   if (candidateTitles.length === 0) { throw new Error(`No 'title' in provided OpenAPI definition(s).`); }
-  if (candidateTitles.length > 1) { throw new Error(`The 'title' across provided OpenAPI definitions has to match. Found: ${candidateTitles.map(x => `'${x}'`).join(", ")}. Please adjust or provide an override (--title=...).`); }
+  if (candidateTitles.length > 1) { throw new Error(`The 'title' across provided OpenAPI definitions has to match. Found: ${candidateTitles.map(x => `'${x}'`).join(', ')}. Please adjust or provide an override (--title=...).`); }
   if (candidateDescriptions.length !== 1) { candidateDescriptions.splice(0, candidateDescriptions.length); }
 
   // prepare component Swaggers (override info, lift version param, ...)
