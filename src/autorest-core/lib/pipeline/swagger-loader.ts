@@ -3,16 +3,17 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as JsonRefs from 'json-refs';
-import * as path from 'path';
+import {
+  entries,
+  StringMap
+} from '@ts-common/string-map';
+import * as JsonPointer from "json-pointer";
 import { ConfigurationView } from '../autorest-core';
-import { DataHandle, DataSink, DataSource } from '../data-store/data-store';
+import { DataHandle, DataSink, DataSource, Data } from '../data-store/data-store';
 import { OperationAbortedException } from '../exception';
 import { Channel, SourceLocation } from '../message';
-import * as JsonPointer from "json-pointer"
 import {
   CommonmarkHeadingFollowingText,
-  CommonmarkHeadingText,
   CommonmarkSubHeadings,
   ParseCommonmark
 } from '../parsing/literate';
@@ -28,18 +29,20 @@ import { ResolveUri } from '../ref/uri';
 import { Clone, CloneAst, Descendants, StrictJsonSyntaxCheck, StringifyAst, ToAst, YAMLNodeWithPath } from '../ref/yaml';
 import { IdentitySourceMapping, MergeYamls } from '../source-map/merging';
 import { CreateAssignmentMapping } from '../source-map/source-map';
-import * as utils from './utils';
-
-import { toArray } from '@ts-common/iterator';
-import {
-  entries,
-  StringMap
-} from '@ts-common/string-map';
-import { OpenAPI3Object, SpecResolver } from './spec-resolver';
-
 function isReferenceNode(node: YAMLNodeWithPath): boolean {
   const lastKey = node.path[node.path.length - 1];
   return (lastKey === '$ref' || lastKey === 'x-ms-odata') && typeof node.node.value === 'string';
+}
+
+interface OpenAPI3Object {
+  openapi?: string;
+  info?: object;
+  paths?: object;
+  components?: { schemas?: object };
+}
+
+interface FileMap {
+  [fileUri: string]: DataHandle;
 }
 
 async function EnsureCompleteDefinitionIsPresent(
@@ -54,22 +57,6 @@ async function EnsureCompleteDefinitionIsPresent(
   currentFileUri?: string,
   entityType?: string,
   modelName?: string) {
-
-  const ensureExtFilePresent: (fileUri: string, config: ConfigurationView, complaintLocation: SourceLocation) => Promise<void> = async (fileUri: string, config: ConfigurationView, complaintLocation: SourceLocation) => {
-    if (!externalFiles[fileUri]) {
-      const file = await inputScope.Read(fileUri);
-      if (file === null) {
-        config.Message({
-          Channel: Channel.Error,
-          Source: [complaintLocation],
-          Text: `Referenced file '${fileUri}' not found`
-        });
-        throw new OperationAbortedException();
-      }
-      const externalFile = await Parse(config, file, sink);
-      externalFiles[fileUri] = externalFile;
-    }
-  };
 
   const sourceDoc = externalFiles[sourceFileUri];
   if (currentFileUri == null) {
@@ -110,7 +97,7 @@ async function EnsureCompleteDefinitionIsPresent(
     if (refPath.indexOf('#') === -1) {
       // inject entire file right here
       const fileUri = ResolveUri(currentFileUri, refPath);
-      await ensureExtFilePresent(fileUri, config, complaintLocation);
+      await ensureExtFilePresent(inputScope, externalFiles, fileUri, config, complaintLocation, sink);
       // console.error("Resolving ", fileUri);
       const targetPath = path.slice(0, path.length - 1);
       const extObj = externalFiles[fileUri].ReadObject();
@@ -133,7 +120,7 @@ async function EnsureCompleteDefinitionIsPresent(
       fileUri = refPathParts[0];
       entityPath = '#' + refPathParts[1];
       fileUri = ResolveUri(currentFileUri, fileUri);
-      await ensureExtFilePresent(fileUri, config, complaintLocation);
+      await ensureExtFilePresent(inputScope, externalFiles, fileUri, config, complaintLocation, sink);
     }
 
     const entityPathParts = entityPath.split('/').filter(s => s.length > 0);
@@ -363,17 +350,7 @@ export async function LoadLiterateOpenApiOverride(config: ConfigurationView, inp
 
 export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle | null> {
   const handle = await inputScope.ReadStrict(inputFileUri);
-  // strict JSON check
-  if (inputFileUri.toLowerCase().endsWith('.json')) {
-    const error = StrictJsonSyntaxCheck(handle.ReadData());
-    if (error) {
-      config.Message({
-        Channel: Channel.Error,
-        Text: 'Syntax Error Encountered: ' + error.message,
-        Source: [<SourceLocation>{ Position: IndexToPosition(handle, error.index), document: handle.key }],
-      });
-    }
-  }
+  checkSyntaxFromData(inputFileUri, handle, config);
   const data = await Parse(config, handle, sink);
   // check OpenAPI version
   if (data.ReadObject<any>().swagger !== '2.0') {
@@ -395,239 +372,6 @@ export async function LoadLiterateSwagger(config: ConfigurationView, inputScope:
   return result;
 }
 
-export async function LoadLiterateOpenApi(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle | null> {
-  const handle = await inputScope.ReadStrict(inputFileUri);
-
-  // If a JSON file is provided, check that the syntax is correct.
-  // Otherwise send an error message.
-  if (inputFileUri.toLowerCase().endsWith('.json')) {
-    const error = StrictJsonSyntaxCheck(handle.ReadData());
-    if (error) {
-      config.Message({
-        Channel: Channel.Error,
-        Text: `Syntax Error Encountered:  ${error.message}`,
-        Source: [<SourceLocation>{ Position: IndexToPosition(handle, error.index), document: handle.key }],
-      });
-    }
-  }
-
-  const data = await Parse(config, handle, sink);
-
-  // Read the openapi object and check if the version matches something like 3.X.X
-  const wasOpenApiVersionFound = /^3.\d.\d$/g.exec(data.ReadObject<any>().openapi);
-  if (!wasOpenApiVersionFound) {
-    // Since a version was not found we just return null. Thus, no file is loaded.
-    return null;
-  }
-
-  const externalFiles: { [uri: string]: DataHandle } = {};
-  externalFiles[inputFileUri] = data;
-  await EnsureCompleteDefinitionIsPresent(config,
-    inputScope,
-    sink,
-    [],
-    externalFiles,
-    inputFileUri,
-    data.ReadObject<any>(),
-    IdentitySourceMapping(data.key, data.ReadYamlAst()));
-  const result = await StripExternalReferences(externalFiles[inputFileUri], sink);
-  return result;
-}
-
-export async function LoadLiterateOpenAPIrevised(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle | null> {
-  const handle = await inputScope.ReadStrict(inputFileUri);
-  const data = await Parse(config, handle, sink);
-  const specObject = data.ReadObject<OpenAPI3Object>();
-  // const specObject = await utils.parseJson(inputFileUri);
-  const isOpenAPI3 = isOpenAPI3Spec(specObject);
-  if (!isOpenAPI3) {
-    return null;
-  }
-
-  const externalFiles: { [uri: string]: DataHandle } = {};
-  externalFiles[inputFileUri] = data;
-  await resolveRefs(
-    config,
-    inputScope,
-    sink,
-    [],
-    externalFiles,
-    inputFileUri,
-    specObject,
-    IdentitySourceMapping(data.key, data.ReadYamlAst()),
-  );
-
-  return handle;
-}
-
-async function resolveRefs(
-  config: ConfigurationView,
-  inputScope: DataSource,
-  sink: DataSink,
-  visitedEntities: Array<string>,
-  externalFiles: { [uri: string]: DataHandle },
-  sourceFileUri: string,
-  sourceDocObj: any,
-  sourceDocMappings: Array<Mapping>,
-  currentFileUri?: string,
-  jsonPath?: string
-) {
-
-  const ensureExtFilePresent: (fileUri: string, config: ConfigurationView, complaintLocation: SourceLocation) => Promise<void> = async (fileUri: string, config: ConfigurationView, complaintLocation: SourceLocation) => {
-    if (!externalFiles[fileUri]) {
-      const file = await inputScope.Read(fileUri);
-      if (file === null) {
-        config.Message({
-          Channel: Channel.Error,
-          Source: [complaintLocation],
-          Text: `Referenced file '${fileUri}' not found`
-        });
-        throw new OperationAbortedException();
-      }
-      const externalFile = await Parse(config, file, sink);
-      externalFiles[fileUri] = externalFile;
-    }
-  };
-
-  const sourceDoc = externalFiles[sourceFileUri];
-  if (currentFileUri === undefined) {
-    currentFileUri = sourceFileUri;
-  }
-
-  const references: Array<YAMLNodeWithPath> = [];
-  const currentDoc = externalFiles[currentFileUri];
-  const currentDocAst = currentDoc.ReadYamlAst();
-  if (jsonPath === undefined) {
-    // external references
-    for (const node of Descendants(currentDocAst)) {
-      if (isReferenceNode(node)) {
-        // Check that it is a external reference, by checking
-        // it does not start with '#' because just internal
-        // references start with '#'
-        if (!(node.node.value as string).startsWith('#')) {
-          references.push(node);
-        }
-      }
-    }
-  } else {
-    const model = ResolveRelativeNode(currentDocAst, currentDocAst, jsonPath.substr(1).split('/'));
-    for (const node of Descendants(model, jsonPath.split('/'))) {
-      if (isReferenceNode(node)) {
-        references.push(node);
-      }
-    }
-  }
-
-  const inputs: Array<DataHandle> = [sourceDoc];
-  for (const { node, path } of references) {
-    const complaintLocation: SourceLocation = { document: currentDoc.key, Position: <any>{ path } };
-    const refPath = <string>node.value;
-    if (refPath.indexOf('#') === -1) {
-      // inject entire file right here
-      const fileUri = ResolveUri(currentFileUri, refPath);
-      await ensureExtFilePresent(fileUri, config, complaintLocation);
-      // console.error("Resolving ", fileUri);
-      const targetPath = path.slice(0, path.length - 1);
-      const extObj = externalFiles[fileUri].ReadObject();
-      safeEval(`${stringify(targetPath)} = extObj`, { $: sourceDocObj, extObj });
-      sourceDocMappings = sourceDocMappings.filter(m => !IsPrefix(path, (m.generated as any).path));
-      continue;
-    }
-
-    const refPathParts = refPath.split('#').filter(s => s.length > 0);
-    let fileUri: string | null = null;
-    let entityPath = refPath;
-    if (refPathParts.length === 2) {
-      fileUri = refPathParts[0];
-      entityPath = '#' + refPathParts[1];
-      fileUri = ResolveUri(currentFileUri, fileUri);
-      await ensureExtFilePresent(fileUri, config, complaintLocation);
-    }
-
-    if (visitedEntities.indexOf(entityPath) === -1) {
-      visitedEntities.push(entityPath);
-
-      // take out the '#' symbol to query
-      jsonPath = entityPath.slice(1);
-      const hasSourceEntity = JsonPointer.has(sourceDocObj, jsonPath);
-      if (!hasSourceEntity) {
-        if (fileUri != null) {
-          sourceDocMappings = await resolveRefs(
-            config,
-            inputScope,
-            sink,
-            visitedEntities,
-            externalFiles,
-            sourceFileUri,
-            sourceDocObj,
-            sourceDocMappings,
-            fileUri,
-            jsonPath
-          );
-          const externalDocObj = externalFiles[fileUri].ReadObject<any>();
-          inputs.push(externalFiles[fileUri]);
-          JsonPointer.set(sourceDocObj, jsonPath, JsonPointer.get(externalDocObj, jsonPath));
-          sourceDocMappings.push(...CreateAssignmentMapping(
-            JsonPointer.get(externalDocObj, jsonPath), externalFiles[fileUri].key,
-            jsonPath.substr(1).split('/'), jsonPath.substr(1).split('/'),
-            `resolving '${refPath}' in '${currentFileUri}'`));
-        } else {
-          sourceDocMappings = await resolveRefs(
-            config,
-            inputScope,
-            sink,
-            visitedEntities,
-            externalFiles,
-            sourceFileUri,
-            sourceDocObj,
-            sourceDocMappings,
-            currentFileUri,
-            jsonPath
-          );
-          const currentDocObj = externalFiles[currentFileUri].ReadObject<any>();
-          inputs.push(externalFiles[currentFileUri]);
-          JsonPointer.set(sourceDocObj, jsonPath, JsonPointer.get(currentDocObj, jsonPath));
-          sourceDocMappings.push(...CreateAssignmentMapping(
-            JsonPointer.get(currentDocObj, jsonPath), externalFiles[currentFileUri].key,
-            jsonPath.substr(1).split('/'), jsonPath.substr(1).split('/'),
-            `resolving '${refPath}' in '${currentFileUri}'`));
-        }
-      }
-    }
-  }
-
-  // commit back
-  externalFiles[sourceFileUri] = await sink.WriteObject('revision', sourceDocObj, undefined, sourceDocMappings, [...Object.getOwnPropertyNames(externalFiles).map(x => externalFiles[x]), sourceDoc]);
-  return sourceDocMappings;
-}
-
-function createJsonPathQuery(entityPath: string): string {
-  let query = '$';
-  const entityPathParts = entityPath.split('/');
-  entityPathParts.shift();
-
-  entityPathParts.forEach(function (part) {
-    query += `.${part}`;
-  });
-  return query;
-}
-
-async function getCompleteOpenAPIDefinitionOAV(
-  specPath: string,
-  specObject: OpenAPI3Object,
-  isOpenAPI3: boolean
-): Promise<OpenAPI3Object> {
-  const options = { shouldResolveAsOpenAPI3: isOpenAPI3 };
-  const resolver = new SpecResolver(specPath, specObject, options);
-  await resolver.resolve();
-  return resolver.specInJson;
-}
-
-function isOpenAPI3Spec(specObject: OpenAPI3Object): boolean {
-  const wasOpenApiVersionFound = /^3.\d.\d$/g.exec(<string>specObject.openapi);
-  return (wasOpenApiVersionFound) ? true : false;
-}
-
 export async function LoadLiterateSwaggers(config: ConfigurationView, inputScope: DataSource, inputFileUris: Array<string>, sink: DataSink): Promise<Array<DataHandle>> {
   const rawSwaggers: Array<DataHandle> = [];
   for (const inputFileUri of inputFileUris) {
@@ -638,18 +382,6 @@ export async function LoadLiterateSwaggers(config: ConfigurationView, inputScope
     }
   }
   return rawSwaggers;
-}
-
-export async function LoadLiterateOpenApis(config: ConfigurationView, inputScope: DataSource, inputFileUris: Array<string>, sink: DataSink): Promise<Array<DataHandle>> {
-  const rawOpenApis: Array<DataHandle> = [];
-  for (const inputFileUri of inputFileUris) {
-    // read literate Swagger
-    const pluginInput = await LoadLiterateOpenApi(config, inputScope, inputFileUri, sink);
-    if (pluginInput) {
-      rawOpenApis.push(pluginInput);
-    }
-  }
-  return rawOpenApis;
 }
 
 export async function LoadLiterateSwaggerOverrides(config: ConfigurationView, inputScope: DataSource, inputFileUris: Array<string>, sink: DataSink): Promise<Array<DataHandle>> {
@@ -805,4 +537,231 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
   hSwagger = await MergeYamls(config, [hSwagger, hInfo], sink);
 
   return hSwagger;
+}
+
+export async function LoadLiterateOpenApis(config: ConfigurationView, inputScope: DataSource, inputFileUris: Array<string>, sink: DataSink): Promise<Array<DataHandle>> {
+  const rawOpenApis: Array<DataHandle> = [];
+  for (const inputFileUri of inputFileUris) {
+    // read literate OpenAPI
+    const pluginInput = await LoadLiterateOpenApi(config, inputScope, inputFileUri, sink);
+    if (pluginInput) {
+      rawOpenApis.push(pluginInput);
+    }
+  }
+  return rawOpenApis;
+}
+
+export async function LoadLiterateOpenApi(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle | null> {
+  const handle = await inputScope.ReadStrict(inputFileUri);
+  checkSyntaxFromData(inputFileUri, handle, config);
+  const data = await Parse(config, handle, sink);
+  const specDocument = data.ReadObject<OpenAPI3Object>();
+  if (!isOpenAPI3Spec(specDocument)) {
+    return null;
+  }
+
+  const externalFiles: FileMap = {};
+  externalFiles[inputFileUri] = data;
+  await ensureCompleteOpenAPIDefinitionIsPresent(
+    config,
+    inputScope,
+    sink,
+    [],
+    externalFiles,
+    inputFileUri,
+    specDocument,
+    IdentitySourceMapping(data.key, data.ReadYamlAst()),
+  );
+
+  return StripExternalReferences(externalFiles[inputFileUri], sink);
+}
+
+async function ensureCompleteOpenAPIDefinitionIsPresent(
+  config: ConfigurationView,
+  inputScope: DataSource,
+  sink: DataSink,
+  visitedEntities: Array<string>,
+  externalFiles: FileMap,
+  sourceFileUri: string,
+  sourceDocObj: any,
+  sourceDocMappings: Array<Mapping>,
+  currentFileUri?: string,
+  jsonPointer?: string
+) {
+
+  const sourceDoc = externalFiles[sourceFileUri];
+  if (currentFileUri === undefined) {
+    currentFileUri = sourceFileUri;
+  }
+
+  const references: Array<YAMLNodeWithPath> = [];
+  const currentDoc = externalFiles[currentFileUri];
+  const currentDocAst = currentDoc.ReadYamlAst();
+  if (jsonPointer === undefined) {
+    // external references
+    for (const node of Descendants(currentDocAst)) {
+      if (isReferenceNode(node)) {
+        // Check that it is a external reference, by checking
+        // it does not start with '#' because just internal
+        // references start with '#'
+        if (!(node.node.value as string).startsWith('#')) {
+          references.push(node);
+        }
+      }
+    }
+  } else {
+    const model = ResolveRelativeNode(currentDocAst, currentDocAst, jsonPointerToJsonPathCompArray(jsonPointer));
+    for (const node of Descendants(model, jsonPointer.split('/'))) {
+      if (isReferenceNode(node)) {
+        references.push(node);
+      }
+    }
+  }
+
+  const inputs: Array<DataHandle> = [sourceDoc];
+  for (const { node, path } of references) {
+    const complaintLocation: SourceLocation = { document: currentDoc.key, Position: <any>{ path } };
+    const refPath = <string>node.value;
+    if (refPath.indexOf('#') === -1) {
+      // inject entire file right here
+      const fileUri = ResolveUri(currentFileUri, refPath);
+      await ensureExtFilePresent(inputScope, externalFiles, fileUri, config, complaintLocation, sink);
+      // console.error("Resolving ", fileUri);
+      const targetPath = path.slice(0, path.length - 1);
+      const extObj = externalFiles[fileUri].ReadObject();
+      safeEval(`${stringify(targetPath)} = extObj`, { $: sourceDocObj, extObj });
+      sourceDocMappings = sourceDocMappings.filter(m => !IsPrefix(path, (m.generated as any).path));
+      continue;
+    }
+
+    const refPathParts = refPath.split('#').filter(s => s.length > 0);
+    let fileUri: string | null = null;
+    let entityPath = refPath;
+    if (refPathParts.length === 2) {
+      fileUri = refPathParts[0];
+      entityPath = '#' + refPathParts[1];
+      fileUri = ResolveUri(currentFileUri, fileUri);
+      await ensureExtFilePresent(inputScope, externalFiles, fileUri, config, complaintLocation, sink);
+    }
+
+    if (visitedEntities.indexOf(entityPath) === -1) {
+      visitedEntities.push(entityPath);
+
+      // take out the '#' symbol to query
+      jsonPointer = entityPath.slice(1);
+      const hasSourceEntity = JsonPointer.has(sourceDocObj, jsonPointer);
+      if (!hasSourceEntity) {
+        if (fileUri != null) {
+          sourceDocMappings = await ensureCompleteOpenAPIDefinitionIsPresent(
+            config,
+            inputScope,
+            sink,
+            visitedEntities,
+            externalFiles,
+            sourceFileUri,
+            sourceDocObj,
+            sourceDocMappings,
+            fileUri,
+            jsonPointer
+          );
+          const externalDocObj = externalFiles[fileUri].ReadObject<any>();
+          inputs.push(externalFiles[fileUri]);
+          JsonPointer.set(sourceDocObj, jsonPointer, JsonPointer.get(externalDocObj, jsonPointer));
+          sourceDocMappings.push(...CreateAssignmentMapping(
+            JsonPointer.get(externalDocObj, jsonPointer), externalFiles[fileUri].key,
+            jsonPointerToJsonPathCompArray(jsonPointer), jsonPointerToJsonPathCompArray(jsonPointer),
+            `resolving '${refPath}' in '${currentFileUri}'`));
+        } else {
+          sourceDocMappings = await ensureCompleteOpenAPIDefinitionIsPresent(
+            config,
+            inputScope,
+            sink,
+            visitedEntities,
+            externalFiles,
+            sourceFileUri,
+            sourceDocObj,
+            sourceDocMappings,
+            currentFileUri,
+            jsonPointer
+          );
+          const currentDocObj = externalFiles[currentFileUri].ReadObject<any>();
+          inputs.push(externalFiles[currentFileUri]);
+          JsonPointer.set(sourceDocObj, jsonPointer, JsonPointer.get(currentDocObj, jsonPointer));
+          sourceDocMappings.push(...CreateAssignmentMapping(
+            JsonPointer.get(currentDocObj, jsonPointer), externalFiles[currentFileUri].key,
+            jsonPointerToJsonPathCompArray(jsonPointer), jsonPointerToJsonPathCompArray(jsonPointer),
+            `resolving '${refPath}' in '${currentFileUri}'`));
+        }
+      }
+    }
+  }
+
+  // commit back
+  externalFiles[sourceFileUri] = await sink.WriteObject('revision', sourceDocObj, undefined, sourceDocMappings, [...Object.getOwnPropertyNames(externalFiles).map(x => externalFiles[x]), sourceDoc]);
+  return sourceDocMappings;
+}
+
+/**
+ * If a JSON file is provided, check that the syntax is correct.
+ * If the syntax is correct continue silently otherwise put an error message.
+ */
+function checkSyntaxFromData(fileUri: string, handle: DataHandle, configView: ConfigurationView): void {
+  if (fileUri.toLowerCase().endsWith('.json')) {
+    const error = StrictJsonSyntaxCheck(handle.ReadData());
+    if (error) {
+      configView.Message({
+        Channel: Channel.Error,
+        Text: `Syntax Error Encountered:  ${error.message}`,
+        Source: [<SourceLocation>{ Position: IndexToPosition(handle, error.index), document: handle.key }],
+      });
+    }
+  }
+}
+
+/**
+ * First it checks that the file is not included in the externalFiles.
+ * If it's already included, it just returns. Otherwise, it tries to read
+ * the contents from the fileUri and then it includes the contents in the
+ * externalFiles. If the content is unreadeable, it throws.
+ *
+ * @param fileUri the uri of the file that is going to be checked
+ */
+async function ensureExtFilePresent(
+  inputScope: DataSource,
+  externalFiles: FileMap,
+  fileUri: string,
+  config: ConfigurationView,
+  complaintLocation: SourceLocation,
+  sink: DataSink): Promise<void> {
+  if (!externalFiles[fileUri]) {
+    const file = await inputScope.Read(fileUri);
+    if (file === null) {
+      config.Message({
+        Channel: Channel.Error,
+        Source: [complaintLocation],
+        Text: `Referenced file '${fileUri}' not found`
+      });
+      throw new OperationAbortedException();
+    }
+    const externalFile = await Parse(config, file, sink);
+    externalFiles[fileUri] = externalFile;
+  }
+}
+
+/**
+ * Gets the transformation of a json pointer  to a json path
+ * component array
+ * @param jsonPointer is a string with the format '/foo/bar/...'
+ */
+function jsonPointerToJsonPathCompArray(jsonPointer: string): Array<string> {
+  return jsonPointer.substr(1).split('/');
+}
+
+/**
+ * Checks that the object has the property openapi and that property has
+ * the string value matching something like "3.number.number".
+ */
+function isOpenAPI3Spec(specObject: OpenAPI3Object): boolean {
+  const wasOpenApiVersionFound = /^3.\d.\d$/g.exec(<string>specObject.openapi);
+  return (wasOpenApiVersionFound) ? true : false;
 }
