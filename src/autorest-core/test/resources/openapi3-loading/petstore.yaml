@@ -38,7 +38,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "external-oa-file#/components/schemas/Error"
+                $ref: "./external-oa-file#/components/schemas/Error"
     post:
       summary: Create a pet
       operationId: createPets
@@ -52,7 +52,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "external-oa-file#/components/schemas/Error"
+                $ref: "./external-oa-file#/components/schemas/Error"
   /pets/{petId}:
     get:
       summary: Info for a specific pet
@@ -78,7 +78,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "external-oa-file#/components/schemas/Error"
+                $ref: "./external-oa-file#/components/schemas/Error"
 components:
   schemas:
     Pet:
@@ -94,5 +94,5 @@ components:
         tag:
           type: string
     Pets:
-      $ref: "pet.yaml"
+      $ref: "./pet.yaml"
     
