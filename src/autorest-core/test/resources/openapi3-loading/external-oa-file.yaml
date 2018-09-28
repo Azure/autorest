@@ -8,15 +8,13 @@ servers:
   - url: http://petstore.swagger.io/v1
 components:
   schemas:
-    Pet:
+    Error:
       required:
-        - id
-        - name
+        - code
+        - message
       properties:
-        id:
+        code:
           type: integer
-          format: int64
-        name:
-          type: string
-        tag:
+          format: int32
+        message:
           type: string
