@@ -9,7 +9,7 @@ import {
 } from '@ts-common/string-map';
 import * as JsonPointer from "json-pointer";
 import { ConfigurationView } from '../autorest-core';
-import { DataHandle, DataSink, DataSource, Data } from '../data-store/data-store';
+import { DataHandle, DataSink, DataSource } from '../data-store/data-store';
 import { OperationAbortedException } from '../exception';
 import { Channel, SourceLocation } from '../message';
 import {
@@ -26,9 +26,10 @@ import { From } from '../ref/linq';
 import { safeEval } from '../ref/safe-eval';
 import { Mapping, Mappings } from '../ref/source-map';
 import { ResolveUri } from '../ref/uri';
-import { Clone, CloneAst, Descendants, StrictJsonSyntaxCheck, StringifyAst, ToAst, YAMLNodeWithPath } from '../ref/yaml';
+import { Clone, CloneAst, Descendants, StrictJsonSyntaxCheck, StringifyAst, ToAst, YAMLNode, YAMLNodeWithPath } from '../ref/yaml';
 import { IdentitySourceMapping, MergeYamls } from '../source-map/merging';
 import { CreateAssignmentMapping } from '../source-map/source-map';
+
 function isReferenceNode(node: YAMLNodeWithPath): boolean {
   const lastKey = node.path[node.path.length - 1];
   return (lastKey === '$ref' || lastKey === 'x-ms-odata') && typeof node.node.value === 'string';
@@ -67,19 +68,17 @@ async function EnsureCompleteDefinitionIsPresent(
   const currentDoc = externalFiles[currentFileUri];
   const currentDocAst = currentDoc.ReadYamlAst();
   if (entityType == null || modelName == null) {
-    // external references
+    // first time looking for references
     for (const node of Descendants(currentDocAst)) {
       if (isReferenceNode(node)) {
-        // Check that it is a external reference, by checking
-        // it does not start with '#' because just internal
-        // references start with '#'
+        // add just the external (i.e remote and relative) references
         if (!(node.node.value as string).startsWith('#')) {
           references.push(node);
         }
       }
     }
   } else {
-    // references within external file
+    // after the first run add all references found in the external file
     const model = ResolveRelativeNode(currentDocAst, currentDocAst, [entityType, modelName]);
     for (const node of Descendants(model, [entityType, modelName])) {
       if (isReferenceNode(node)) {
@@ -591,106 +590,86 @@ async function ensureCompleteOpenAPIDefinitionIsPresent(
 
   const sourceDoc = externalFiles[sourceFileUri];
   if (currentFileUri === undefined) {
+    // first run, so  set currentFileUri to sourceFileUri
     currentFileUri = sourceFileUri;
   }
 
-  const references: Array<YAMLNodeWithPath> = [];
   const currentDoc = externalFiles[currentFileUri];
-  const currentDocAst = currentDoc.ReadYamlAst();
-  if (jsonPointer === undefined) {
-    // external references
-    for (const node of Descendants(currentDocAst)) {
-      if (isReferenceNode(node)) {
-        // Check that it is a external reference, by checking
-        // it does not start with '#' because just internal
-        // references start with '#'
-        if (!(node.node.value as string).startsWith('#')) {
-          references.push(node);
-        }
-      }
-    }
-  } else {
-    const model = ResolveRelativeNode(currentDocAst, currentDocAst, jsonPointerToJsonPathCompArray(jsonPointer));
-    for (const node of Descendants(model, jsonPointer.split('/'))) {
-      if (isReferenceNode(node)) {
-        references.push(node);
-      }
-    }
-  }
+  const references = getReferences(jsonPointer, currentDoc.ReadYamlAst());
 
-  const inputs: Array<DataHandle> = [sourceDoc];
   for (const { node, path } of references) {
     const complaintLocation: SourceLocation = { document: currentDoc.key, Position: <any>{ path } };
     const refPath = <string>node.value;
     if (refPath.indexOf('#') === -1) {
+      // a reference to a file
+      // i.e. $ref = "./file" and not $ref = "./file#/foo/bar/..."
       // inject entire file right here
       const fileUri = ResolveUri(currentFileUri, refPath);
       await ensureExtFilePresent(inputScope, externalFiles, fileUri, config, complaintLocation, sink);
-      // console.error("Resolving ", fileUri);
       const targetPath = path.slice(0, path.length - 1);
       const extObj = externalFiles[fileUri].ReadObject();
       safeEval(`${stringify(targetPath)} = extObj`, { $: sourceDocObj, extObj });
       sourceDocMappings = sourceDocMappings.filter(m => !IsPrefix(path, (m.generated as any).path));
-      continue;
-    }
+    } else {
+      const refPathParts = refPath.split('#').filter(s => s.length > 0);
+      let fileUri: string | null = null;
+      let entityPath = refPath;
+      if (refPathParts.length === 2) {
+        fileUri = refPathParts[0];
+        entityPath = `#${refPathParts[1]}`;
+        fileUri = ResolveUri(currentFileUri, fileUri);
+        await ensureExtFilePresent(inputScope, externalFiles, fileUri, config, complaintLocation, sink);
+      }
 
-    const refPathParts = refPath.split('#').filter(s => s.length > 0);
-    let fileUri: string | null = null;
-    let entityPath = refPath;
-    if (refPathParts.length === 2) {
-      fileUri = refPathParts[0];
-      entityPath = '#' + refPathParts[1];
-      fileUri = ResolveUri(currentFileUri, fileUri);
-      await ensureExtFilePresent(inputScope, externalFiles, fileUri, config, complaintLocation, sink);
-    }
+      if (visitedEntities.indexOf(entityPath) === -1) {
+        visitedEntities.push(entityPath);
 
-    if (visitedEntities.indexOf(entityPath) === -1) {
-      visitedEntities.push(entityPath);
-
-      // take out the '#' symbol to query
-      jsonPointer = entityPath.slice(1);
-      const hasSourceEntity = JsonPointer.has(sourceDocObj, jsonPointer);
-      if (!hasSourceEntity) {
-        if (fileUri != null) {
-          sourceDocMappings = await ensureCompleteOpenAPIDefinitionIsPresent(
-            config,
-            inputScope,
-            sink,
-            visitedEntities,
-            externalFiles,
-            sourceFileUri,
-            sourceDocObj,
-            sourceDocMappings,
-            fileUri,
-            jsonPointer
-          );
-          const externalDocObj = externalFiles[fileUri].ReadObject<any>();
-          inputs.push(externalFiles[fileUri]);
-          JsonPointer.set(sourceDocObj, jsonPointer, JsonPointer.get(externalDocObj, jsonPointer));
-          sourceDocMappings.push(...CreateAssignmentMapping(
-            JsonPointer.get(externalDocObj, jsonPointer), externalFiles[fileUri].key,
-            jsonPointerToJsonPathCompArray(jsonPointer), jsonPointerToJsonPathCompArray(jsonPointer),
-            `resolving '${refPath}' in '${currentFileUri}'`));
-        } else {
-          sourceDocMappings = await ensureCompleteOpenAPIDefinitionIsPresent(
-            config,
-            inputScope,
-            sink,
-            visitedEntities,
-            externalFiles,
-            sourceFileUri,
-            sourceDocObj,
-            sourceDocMappings,
-            currentFileUri,
-            jsonPointer
-          );
-          const currentDocObj = externalFiles[currentFileUri].ReadObject<any>();
-          inputs.push(externalFiles[currentFileUri]);
-          JsonPointer.set(sourceDocObj, jsonPointer, JsonPointer.get(currentDocObj, jsonPointer));
-          sourceDocMappings.push(...CreateAssignmentMapping(
-            JsonPointer.get(currentDocObj, jsonPointer), externalFiles[currentFileUri].key,
-            jsonPointerToJsonPathCompArray(jsonPointer), jsonPointerToJsonPathCompArray(jsonPointer),
-            `resolving '${refPath}' in '${currentFileUri}'`));
+        // take out the '#' symbol to get the jsonPointer
+        jsonPointer = entityPath.slice(1);
+        const hasSourceEntity = JsonPointer.has(sourceDocObj, jsonPointer);
+        if (!hasSourceEntity) {
+          const inputs: Array<DataHandle> = [sourceDoc];
+          if (fileUri != null) {
+            sourceDocMappings = await ensureCompleteOpenAPIDefinitionIsPresent(
+              config,
+              inputScope,
+              sink,
+              visitedEntities,
+              externalFiles,
+              sourceFileUri,
+              sourceDocObj,
+              sourceDocMappings,
+              fileUri,
+              jsonPointer
+            );
+            const externalDocObj = externalFiles[fileUri].ReadObject<any>();
+            inputs.push(externalFiles[fileUri]);
+            JsonPointer.set(sourceDocObj, jsonPointer, JsonPointer.get(externalDocObj, jsonPointer));
+            sourceDocMappings.push(...CreateAssignmentMapping(
+              JsonPointer.get(externalDocObj, jsonPointer), externalFiles[fileUri].key,
+              jsonPointerToJsonPathCompArray(jsonPointer), jsonPointerToJsonPathCompArray(jsonPointer),
+              `resolving '${refPath}' in '${currentFileUri}'`));
+          } else {
+            sourceDocMappings = await ensureCompleteOpenAPIDefinitionIsPresent(
+              config,
+              inputScope,
+              sink,
+              visitedEntities,
+              externalFiles,
+              sourceFileUri,
+              sourceDocObj,
+              sourceDocMappings,
+              currentFileUri,
+              jsonPointer
+            );
+            const currentDocObj = externalFiles[currentFileUri].ReadObject<any>();
+            inputs.push(externalFiles[currentFileUri]);
+            JsonPointer.set(sourceDocObj, jsonPointer, JsonPointer.get(currentDocObj, jsonPointer));
+            sourceDocMappings.push(...CreateAssignmentMapping(
+              JsonPointer.get(currentDocObj, jsonPointer), externalFiles[currentFileUri].key,
+              jsonPointerToJsonPathCompArray(jsonPointer), jsonPointerToJsonPathCompArray(jsonPointer),
+              `resolving '${refPath}' in '${currentFileUri}'`));
+          }
         }
       }
     }
@@ -749,7 +728,7 @@ async function ensureExtFilePresent(
 }
 
 /**
- * Gets the transformation of a json pointer  to a json path
+ * Gets the transformation of a json pointer to a json path
  * component array
  * @param jsonPointer is a string with the format '/foo/bar/...'
  */
@@ -764,4 +743,36 @@ function jsonPointerToJsonPathCompArray(jsonPointer: string): Array<string> {
 function isOpenAPI3Spec(specObject: OpenAPI3Object): boolean {
   const wasOpenApiVersionFound = /^3.\d.\d$/g.exec(<string>specObject.openapi);
   return (wasOpenApiVersionFound) ? true : false;
+}
+
+/**
+ * Gets references from document, if the document was not referenced from another document,
+ * just get external references(i.e. remote and relative). If the document passed was referenced
+ * by another file, get all references.
+ * @param jsonPointer is a string with the format '/foo/bar/...'
+ */
+function getReferences(jsonPointer: string | undefined, docAst: YAMLNode): Array<YAMLNodeWithPath> {
+  const references: Array<YAMLNodeWithPath> = [];
+
+  if (jsonPointer === undefined) {
+    // first time looking for references
+    for (const node of Descendants(docAst)) {
+      if (isReferenceNode(node)) {
+        // add just the external (i.e remote and relative) references
+        if (!(node.node.value as string).startsWith('#')) {
+          references.push(node);
+        }
+      }
+    }
+  } else {
+    // this file came from a reference in another file, so get all references
+    const model = ResolveRelativeNode(docAst, docAst, jsonPointerToJsonPathCompArray(jsonPointer));
+    for (const node of Descendants(model, jsonPointer.split('/'))) {
+      if (isReferenceNode(node)) {
+        references.push(node);
+      }
+    }
+  }
+
+  return references;
 }
