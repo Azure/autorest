@@ -393,7 +393,7 @@ components:
 </code></pre>
 
 
-## <a name="conflictingSchemaNames"></a>Spec with references to schema conflicting schema in the external file. 
+## <a name="conflictingSchemaNames"></a>Spec with references to conflicting schema in the external file. 
 
 The resolved spec will result in a document with the external schema added to the document and the external $ref converted to a local reference prefixed by the name of the file it came and separated by a colon symbol.
 
