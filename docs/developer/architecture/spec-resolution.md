@@ -1,11 +1,12 @@
 # Resolution of OpenAPI spec files
 
-- Spec with just local references
-- Spec with relative schema document
-- Spec with references to schema in external OpenAPI file
+- [Spec with just local references](#localRefs)
+- [Spec with relative schema document](#relativeSchemaDoc)
+- [Spec with references to schema in external OpenAPI file](#refsExternal)
+- [Spec with references to schema conflicting schema in the external file.](#conflictingSchemaNames)
 
 
-## Spec with local references:
+## <a name="localRefs"></a>Spec with local references:
 
 The result will be the same file.
 
@@ -75,7 +76,7 @@ components:
         $ref: "#/components/schemas/Pet"
 ```
 
-## Spec with relative schema document
+## <a name="relativeSchemaDoc"></a>Spec with relative schema document
 
 The resolved spec will result in the reference being replaced by the referenced value.
 
@@ -271,7 +272,7 @@ components:
         <b>$ref: "#/components/schemas/external-openapi_yaml:Pet"</b>
 </code></pre>
 
-## Spec with references to schema in external OpenAPI file
+## <a name="refsExternal"></a>Spec with references to schema in external OpenAPI file
 
 The resolved spec will result in a document with the external schema added to the document and the external $ref converted to a local reference.
 
@@ -392,7 +393,7 @@ components:
 </code></pre>
 
 
-## Spec with references to schema in external OpenAPI file and repeated schema in the external file
+## <a name="conflictingSchemaNames"></a>Spec with references to schema conflicting schema in the external file. 
 
 The resolved spec will result in a document with the external schema added to the document and the external $ref converted to a local reference prefixed by the name of the file it came and separated by a colon symbol.
 
@@ -442,7 +443,7 @@ servers:
   - url: http://petstore.swagger.io/v1
 components:
   schemas:
-    Pet:
+    <b>Pet:
       type: object
       required:
         - pet_type
@@ -460,7 +461,7 @@ components:
               type: boolean
             breed:
               type: string
-              enum: [Dingo, Husky, Retriever, Shepherd]
+              enum: [Dingo, Husky, Retriever, Shepherd]</b>
     Cat:     
       allOf: 
         - $ref: '#/components/schemas/Pet'
@@ -502,7 +503,7 @@ components:
           type: string
         tag:
           type: string
-    external_openapi_yaml:Pet:
+    <b>external_openapi_yaml:Pet:
       type: object
       required:
         - pet_type
@@ -520,6 +521,6 @@ components:
               type: boolean
             breed:
               type: string
-              enum: [Dingo, Husky, Retriever, Shepherd]
+              enum: [Dingo, Husky, Retriever, Shepherd]</b>
 
 </code></pre>
