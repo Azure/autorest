@@ -618,35 +618,13 @@ async function ensureCompleteOpenAPIDefinitionIsPresent(
       safeEval(`${stringify(targetPath)} = extDocObj`, { $: sourceDocObj, extDocObj });
       sourceDocMappings = sourceDocMappings.filter(m => !IsPrefix(path, (<any>(m.generated)).path));
     } else {
-      // reference with a Json Pointer and possibily with a file uri
-      visitedEntities.push(referenceObj.value);
-      const newJsonPointer = getNewJsonPointerBasedOnUri(referenceObj.uri, referenceObj.jsonPointer);
-      await ensureExtFilePresent(inputScope, externalFiles, externalFileUri, config, complaintLocation, sink);
-      if (!JsonPointer.has(sourceDocObj, referenceObj.jsonPointer)) {
-        const inputs: Array<DataHandle> = [sourceDoc];
-        if (!externalFileUri) {
-          // local reference
-          sourceDocMappings = await ensureCompleteOpenAPIDefinitionIsPresent(
-            config,
-            inputScope,
-            sink,
-            visitedEntities,
-            externalFiles,
-            sourceFileUri,
-            sourceDocObj,
-            sourceDocMappings,
-            currentFileUri,
-            jsonPointer
-          );
-          const currentDocObj = externalFiles[currentFileUri].ReadObject<any>();
-          inputs.push(externalFiles[currentFileUri]);
-          JsonPointer.set(sourceDocObj, referenceObj.jsonPointer, JsonPointer.get(currentDocObj, referenceObj.jsonPointer));
-          sourceDocMappings.push(...CreateAssignmentMapping(
-            JsonPointer.get(currentDocObj, referenceObj.jsonPointer), externalFiles[currentFileUri].key,
-            jsonPointerToJsonPathCompArray(referenceObj.jsonPointer), jsonPointerToJsonPathCompArray(referenceObj.jsonPointer),
-            `resolving '${referenceObj.value}' in '${currentFileUri}'`));
-        } else {
-          // external reference
+      if (visitedEntities.indexOf(referenceObj.value) === -1) {
+        // reference with a Json Pointer and possibly with a file uri
+        visitedEntities.push(referenceObj.value);
+        await ensureExtFilePresent(inputScope, externalFiles, externalFileUri, config, complaintLocation, sink);
+        const newJsonPointer = getNewJsonPointerBasedOnUri(referenceObj.uri, referenceObj.jsonPointer);
+        node.value = newJsonPointer;
+        if (!JsonPointer.has(sourceDocObj, newJsonPointer)) {
           sourceDocMappings = await ensureCompleteOpenAPIDefinitionIsPresent(
             config,
             inputScope,
@@ -660,11 +638,10 @@ async function ensureCompleteOpenAPIDefinitionIsPresent(
             jsonPointer
           );
           const externalDocObj = externalFiles[externalFileUri].ReadObject<any>();
-          inputs.push(externalFiles[externalFileUri]);
-          JsonPointer.set(sourceDocObj, referenceObj.jsonPointer, JsonPointer.get(externalDocObj, referenceObj.jsonPointer));
+          JsonPointer.set(sourceDocObj, newJsonPointer, JsonPointer.get(externalDocObj, referenceObj.jsonPointer));
           sourceDocMappings.push(...CreateAssignmentMapping(
             JsonPointer.get(externalDocObj, referenceObj.jsonPointer), externalFiles[externalFileUri].key,
-            jsonPointerToJsonPathCompArray(referenceObj.jsonPointer), jsonPointerToJsonPathCompArray(referenceObj.jsonPointer),
+            jsonPointerToJsonPathCompArray(referenceObj.jsonPointer), jsonPointerToJsonPathCompArray(newJsonPointer),
             `resolving '${referenceObj.value}' in '${currentFileUri}'`));
         }
       }
@@ -695,9 +672,16 @@ function checkSyntaxFromData(fileUri: string, handle: DataHandle, configView: Co
 
 function getNewJsonPointerBasedOnUri(uri: string, jsonPointer: string): string {
   const jsonPointerParts = jsonPointer.split('/');
-  const originalModelName = jsonPointerParts[jsonPointerParts.length - 1];
+  const modelName = jsonPointerParts[jsonPointerParts.length - 1];
   const uriOnlyAlphaNum = uri.replace(/[^0-9a-z]/gi, '_');
-  return `${uriOnlyAlphaNum}:${originalModelName}`;
+
+  jsonPointerParts.pop();
+  let jsonPointerWithoutModelName = '';
+  if (jsonPointerParts !== undefined) {
+    jsonPointerWithoutModelName = jsonPointerParts.join('/');
+  }
+
+  return `${jsonPointerWithoutModelName}/${uriOnlyAlphaNum}:${modelName}`;
 }
 
 function getReferenceObjectFromReferenceString(referenceString: string): Reference {
