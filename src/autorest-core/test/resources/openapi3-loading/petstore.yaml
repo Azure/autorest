@@ -32,13 +32,13 @@ paths:
           content:
             application/json:    
               schema:
-                $ref: "#/components/schemas/Pets"
+                $ref: "./external-oa-file-for-pets.yaml#/components/schemas/Pets"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: "./external-oa-file.yaml#/components/schemas/Error"
+                $ref: "./external-oa-file-for-error.yaml#/components/schemas/Error"
     post:
       summary: Create a pet
       operationId: createPets
@@ -52,7 +52,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "./external-oa-file.yaml#/components/schemas/Error"
+                $ref: "./external-oa-file-for-error.yaml#/components/schemas/Error"
   /pets/{petId}:
     get:
       summary: Info for a specific pet
@@ -72,19 +72,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Pets"
+                $ref: "./external-oa-file-for-pets.yaml#/components/schemas/Pets"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: "./external-oa-file.yaml#/components/schemas/Error"
+                $ref: "./external-oa-file-for-error.yaml#/components/schemas/Error"
 components:
   schemas:
     Pet:
       $ref: "./pet.yaml"
-    Pets:
-      type: array
-      items:
-        $ref: "#/components/schemas/Pet"
     
