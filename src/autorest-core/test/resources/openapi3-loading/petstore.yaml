@@ -79,8 +79,4 @@ paths:
             application/json:
               schema:
                 $ref: "./external-oa-file-for-error.yaml#/components/schemas/Error"
-components:
-  schemas:
-    Pet:
-      $ref: "./pet.yaml"
     
