@@ -11,4 +11,4 @@ components:
     Pets:
       type: array
       items:
-        $ref: "./petstore.yaml#/components/schemas/Pet"
+        $ref: "./external-oa-file-for-pet.yaml#/components/schemas/Pet"
