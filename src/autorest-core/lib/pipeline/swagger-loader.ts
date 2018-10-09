@@ -7,7 +7,8 @@ import {
   entries,
   StringMap
 } from '@ts-common/string-map';
-import * as JsonPointer from "json-pointer";
+import * as JsonPointer from 'json-pointer';
+import * as Path from 'path';
 import { ConfigurationView } from '../autorest-core';
 import { DataHandle, DataSink, DataSource } from '../data-store/data-store';
 import { OperationAbortedException } from '../exception';
@@ -25,14 +26,13 @@ import { IsPrefix, JsonPath, JsonPathComponent, nodes, stringify } from '../ref/
 import { From } from '../ref/linq';
 import { safeEval } from '../ref/safe-eval';
 import { Mapping, Mappings } from '../ref/source-map';
-import { ResolveUri } from '../ref/uri';
+import { MakeRelativeUri, ResolveUri } from '../ref/uri';
 import { Clone, CloneAst, Descendants, StrictJsonSyntaxCheck, StringifyAst, ToAst, YAMLNode, YAMLNodeWithPath } from '../ref/yaml';
 import { IdentitySourceMapping, MergeYamls } from '../source-map/merging';
 import { CreateAssignmentMapping } from '../source-map/source-map';
-
 function isReferenceNode(node: YAMLNodeWithPath): boolean {
   const lastKey = node.path[node.path.length - 1];
-  return (lastKey === '$ref' || lastKey === 'x-ms-odata') && typeof node.node.value === 'string';
+  return (lastKey === '$ref' || lastKey === 'x-ms-odata') && typeof node.node.value === 'string' && (node.node.value.indexOf(':') === -1);
 }
 
 interface OpenAPI3Object {
@@ -47,9 +47,12 @@ interface FileMap {
 }
 
 interface Reference {
-  value: string;
-  uri: string;
-  jsonPointer: string;
+  readonly filePath: string;
+  readonly localReference?: {
+    readonly value: string;
+    readonly jsonPointer: string;
+  };
+  readonly absoluteReferenceValue: string;
 }
 
 async function EnsureCompleteDefinitionIsPresent(
@@ -577,8 +580,11 @@ export async function LoadLiterateOpenApi(config: ConfigurationView, inputScope:
     specDocument,
     IdentitySourceMapping(data.key, data.ReadYamlAst()),
   );
+  const completeData = externalFiles[inputFileUri];
+  const ast = CloneAst(completeData.ReadYamlAst());
+  const mapping = IdentitySourceMapping(completeData.key, ast);
 
-  return StripExternalReferences(externalFiles[inputFileUri], sink);
+  return sink.WriteData('result.yaml', StringifyAst(ast), undefined, mapping, [completeData]);
 }
 
 async function ensureCompleteOpenAPIDefinitionIsPresent(
@@ -591,58 +597,61 @@ async function ensureCompleteOpenAPIDefinitionIsPresent(
   sourceDocObj: any,
   sourceDocMappings: Array<Mapping>,
   currentFileUri?: string,
-  jsonPointer?: string
+  jsonPath?: Array<string>,
 ) {
 
-  const sourceDoc = externalFiles[sourceFileUri];
   if (currentFileUri === undefined) {
     // first run, so  set currentFileUri to sourceFileUri
     currentFileUri = sourceFileUri;
   }
 
   const currentDoc = externalFiles[currentFileUri];
-  const references = getReferences(jsonPointer, currentDoc.ReadYamlAst());
+  const sourceDoc = externalFiles[sourceFileUri];
+  const references = getReferences(sourceFileUri, currentFileUri, currentDoc.ReadYamlAst(), jsonPath);
 
   for (const { node, path } of references) {
+    const parsedReference = parseReferenceInOpenAPI(<string>node.value, currentFileUri, sourceFileUri);
+    const externalFileUri = ResolveUri(currentFileUri, parsedReference.filePath);
     const complaintLocation: SourceLocation = { document: currentDoc.key, Position: <any>{ path } };
-    const referenceObj = getReferenceObjectFromReferenceString(<string>node.value);
-    const externalFileUri = ResolveUri(currentFileUri, referenceObj.uri);
-    if (!referenceObj.jsonPointer) {
-      // a reference to a file with no Json Pointer b/c
-      // everything after the '#' is a Json Pointer
-      // In this case we find $ref = "./file" and not $ref = "./file#/foo/bar/..."
-      // inject contents of the file here.
-      await ensureExtFilePresent(inputScope, externalFiles, externalFileUri, config, complaintLocation, sink);
-      const targetPath = path.slice(0, path.length - 1);
-      const extDocObj = externalFiles[externalFileUri].ReadObject();
-      safeEval(`${stringify(targetPath)} = extDocObj`, { $: sourceDocObj, extDocObj });
-      sourceDocMappings = sourceDocMappings.filter(m => !IsPrefix(path, (<any>(m.generated)).path));
+    await ensureExtFilePresent(inputScope, externalFiles, externalFileUri, config, complaintLocation, sink);
+    if (!parsedReference.localReference) {
+      if (sourceFileUri === currentFileUri) {
+        // a reference containing just file uri.
+        // replace reference with the contents of the file.
+        const targetPath = path.slice(0, path.length - 1);
+        const extDocObj = externalFiles[externalFileUri].ReadObject();
+        safeEval(`${stringify(targetPath)} = extDocObj`, { $: sourceDocObj, extDocObj });
+        sourceDocMappings = sourceDocMappings.filter(m => !IsPrefix(path, (<any>(m.generated)).path));
+      } else {
+        const targetPath = path.slice(0, path.length - 1);
+        const pointer = getJsonPointerFromJsonPathCompArray(<Array<string>>targetPath);
+        const relativeCurrentFileUri = (MakeRelativeUri(sourceFileUri, currentFileUri).indexOf('/') === -1) ?
+          `./${MakeRelativeUri(sourceFileUri, currentFileUri)}` :
+          MakeRelativeUri(sourceFileUri, currentFileUri);
+        const modifiedJsonPointer = getModifiedJsonPointerBasedOnRelativeUri(sourceFileUri, currentFileUri, relativeCurrentFileUri, pointer);
+        const externalDocObj = externalFiles[externalFileUri].ReadObject();
+        JsonPointer.set(sourceDocObj, modifiedJsonPointer, externalDocObj);
+        sourceDocMappings = CreateAssignmentMapping(
+          externalDocObj, externalFiles[externalFileUri].key,
+          getJsonPathCompArrayFromJsonPointer(pointer), getJsonPathCompArrayFromJsonPointer(modifiedJsonPointer),
+          `resolving '${modifiedJsonPointer}' in '${currentFileUri}'`);
+      }
     } else {
-      if (visitedEntities.indexOf(referenceObj.value) === -1) {
-        // reference with a Json Pointer and possibly with a file uri
-        visitedEntities.push(referenceObj.value);
-        await ensureExtFilePresent(inputScope, externalFiles, externalFileUri, config, complaintLocation, sink);
-        const newJsonPointer = getNewJsonPointerBasedOnUri(referenceObj.uri, referenceObj.jsonPointer);
-        node.value = newJsonPointer;
-        if (!JsonPointer.has(sourceDocObj, newJsonPointer)) {
+      const modifiedJsonPointer = getModifiedJsonPointerBasedOnRelativeUri(sourceFileUri, externalFileUri, parsedReference.filePath, parsedReference.localReference.jsonPointer);
+      const pointerToRefNode = getJsonPointerFromJsonPathCompArray(<Array<string>>path);
+      JsonPointer.set(sourceDocObj, pointerToRefNode, `#${modifiedJsonPointer}`);
+      if (visitedEntities.indexOf(parsedReference.absoluteReferenceValue) === -1) {
+        visitedEntities.push(parsedReference.absoluteReferenceValue);
+        if (!JsonPointer.has(sourceDocObj, modifiedJsonPointer)) {
           sourceDocMappings = await ensureCompleteOpenAPIDefinitionIsPresent(
-            config,
-            inputScope,
-            sink,
-            visitedEntities,
-            externalFiles,
-            sourceFileUri,
-            sourceDocObj,
-            sourceDocMappings,
-            externalFileUri,
-            jsonPointer
+            config, inputScope, sink, visitedEntities, externalFiles, sourceFileUri, sourceDocObj, sourceDocMappings, externalFileUri, getJsonPathCompArrayFromJsonPointer(parsedReference.localReference.jsonPointer)
           );
           const externalDocObj = externalFiles[externalFileUri].ReadObject<any>();
-          JsonPointer.set(sourceDocObj, newJsonPointer, JsonPointer.get(externalDocObj, referenceObj.jsonPointer));
+          JsonPointer.set(sourceDocObj, modifiedJsonPointer, JsonPointer.get(externalDocObj, parsedReference.localReference.jsonPointer));
           sourceDocMappings.push(...CreateAssignmentMapping(
-            JsonPointer.get(externalDocObj, referenceObj.jsonPointer), externalFiles[externalFileUri].key,
-            jsonPointerToJsonPathCompArray(referenceObj.jsonPointer), jsonPointerToJsonPathCompArray(newJsonPointer),
-            `resolving '${referenceObj.value}' in '${currentFileUri}'`));
+            JsonPointer.get(externalDocObj, parsedReference.localReference.jsonPointer), externalFiles[externalFileUri].key,
+            getJsonPathCompArrayFromJsonPointer(parsedReference.localReference.jsonPointer), getJsonPathCompArrayFromJsonPointer(modifiedJsonPointer),
+            `resolving '${parsedReference.localReference.jsonPointer}' in '${currentFileUri}'`));
         }
       }
     }
@@ -670,10 +679,14 @@ function checkSyntaxFromData(fileUri: string, handle: DataHandle, configView: Co
   }
 }
 
-function getNewJsonPointerBasedOnUri(uri: string, jsonPointer: string): string {
+function getModifiedJsonPointerBasedOnRelativeUri(sourceFileUri: string, currentFileUri: string, relativeCurrentFileUri: string, jsonPointer: string): string {
+  if (sourceFileUri === currentFileUri) {
+    return jsonPointer;
+  }
+
   const jsonPointerParts = jsonPointer.split('/');
   const modelName = jsonPointerParts[jsonPointerParts.length - 1];
-  const uriOnlyAlphaNum = uri.replace(/[^0-9a-z]/gi, '_');
+  const uriOnlyAlphaNum = relativeCurrentFileUri.replace(/[^0-9a-z]/gi, '_');
 
   jsonPointerParts.pop();
   let jsonPointerWithoutModelName = '';
@@ -684,17 +697,50 @@ function getNewJsonPointerBasedOnUri(uri: string, jsonPointer: string): string {
   return `${jsonPointerWithoutModelName}/${uriOnlyAlphaNum}:${modelName}`;
 }
 
-function getReferenceObjectFromReferenceString(referenceString: string): Reference {
-  if (referenceString.indexOf('#') === -1) {
-    // just uri provided
-    return { uri: referenceString, jsonPointer: '', value: referenceString };
-  } else {
-    if (referenceString.startsWith('#')) {
-      return { uri: '', jsonPointer: referenceString, value: referenceString };
+function parseReferenceInOpenAPI(reference: string, currentFileUri: string, sourceFileUri: string): Reference {
+  if (!reference || (reference && reference.trim().length === 0)) {
+    throw new Error(
+      'reference cannot be null or undefined and it must be a non-empty string.'
+    );
+  }
+
+  if (reference.includes('#')) {
+    // local reference in the doc
+    if (reference.startsWith('#/')) {
+      const filePath = (MakeRelativeUri(sourceFileUri, currentFileUri).indexOf('/') === -1) ?
+        `./${MakeRelativeUri(sourceFileUri, currentFileUri)}` :
+        MakeRelativeUri(sourceFileUri, currentFileUri);
+      const value = reference;
+      const jsonPointer = reference.slice(1);
+      return {
+        filePath,
+        localReference: {
+          value,
+          jsonPointer
+        },
+        absoluteReferenceValue: filePath + value
+      };
     } else {
-      const referenceStringParts = referenceString.split('#').filter(s => s.length > 0);
-      return { uri: referenceStringParts[0], jsonPointer: referenceStringParts[1], value: referenceString };
+      // filePath+localReference
+      const segments = reference.split('#');
+      const filePath = segments[0];
+      const value = `#${segments[1]}`;
+      const jsonPointer = segments[1];
+      return {
+        filePath,
+        localReference: {
+          value,
+          jsonPointer
+        },
+        absoluteReferenceValue: filePath + value
+      };
     }
+  } else {
+    // we are assuming that the string is a relative filePath
+    return {
+      filePath: reference,
+      absoluteReferenceValue: reference
+    };
   }
 }
 
@@ -731,10 +777,28 @@ async function ensureExtFilePresent(
 /**
  * Gets the transformation of a json pointer to a json path
  * component array
+ * Documentation JSON Pointer: https://tools.ietf.org/html/rfc6901#section-2
  * @param jsonPointer is a string with the format '/foo/bar/...'
  */
-function jsonPointerToJsonPathCompArray(jsonPointer: string): Array<string> {
+function getJsonPathCompArrayFromJsonPointer(jsonPointer: string): Array<string> {
   return jsonPointer.substr(1).split('/');
+}
+
+/**
+ * Gets the transformation of a json path component array to
+ * a json pointer
+ * Documentation JSON Pointer: https://tools.ietf.org/html/rfc6901#section-2
+ * @param jsonPointer is a string with the format '/foo/bar/...'
+ */
+function getJsonPointerFromJsonPathCompArray(jsonPathCompArray: Array<string>): string {
+
+  jsonPathCompArray.forEach((component, i) => {
+    if (component.indexOf('/') !== -1) {
+      jsonPathCompArray[i] = component.replace(/\//g, '~1');
+    }
+  });
+
+  return `/${jsonPathCompArray.join('/')}`;
 }
 
 /**
@@ -750,25 +814,22 @@ function isOpenAPI3Spec(specObject: OpenAPI3Object): boolean {
  * Gets references from document, if the document was not referenced from another document,
  * just get external references(i.e. remote and relative). If the document passed was referenced
  * by another file, get all references.
- * @param jsonPointer is a string with the format '/foo/bar/...'
  */
-function getReferences(jsonPointer: string | undefined, docAst: YAMLNode): Array<YAMLNodeWithPath> {
+function getReferences(baseFileUri: string, externalFileUri: string, docAst: YAMLNode, jsonPath: Array<string> | undefined): Array<YAMLNodeWithPath> {
   const references: Array<YAMLNodeWithPath> = [];
 
-  if (jsonPointer === undefined) {
-    // first time looking for references
+  if (baseFileUri === externalFileUri || jsonPath === undefined) {
     for (const node of Descendants(docAst)) {
       if (isReferenceNode(node)) {
-        // add just the external (i.e remote and relative) references
         if (!(<string>(node.node.value)).startsWith('#')) {
           references.push(node);
         }
       }
     }
   } else {
-    // this file came from a reference in another file, so get all references
-    const model = ResolveRelativeNode(docAst, docAst, jsonPointerToJsonPathCompArray(jsonPointer));
-    for (const node of Descendants(model, jsonPointer.split('/'))) {
+    const model = ResolveRelativeNode(docAst, docAst, jsonPath);
+    jsonPath.pop();
+    for (const node of Descendants(model, jsonPath)) {
       if (isReferenceNode(node)) {
         references.push(node);
       }

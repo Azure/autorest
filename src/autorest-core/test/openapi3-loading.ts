@@ -22,7 +22,7 @@ import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 
     const openApiObj = openApiFile.ReadObject<any>();
 
-    assert.strictEqual(openApiObj.components.schemas.Error !== undefined, true);
+    assert.strictEqual(openApiObj.components.schemas['__external_oa_file_yaml:Error'] !== undefined, true);
   }
 
   @test async 'external reference resolving from another yaml or json file'() {
@@ -38,6 +38,6 @@ import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 
     const openApiObj = openApiFile.ReadObject<any>();
 
-    assert.strictEqual(openApiObj.components.schemas.Pet.properties !== undefined, true);
+    assert.strictEqual((openApiObj.components.schemas)['__external_oa_file_for_pets_yaml:Pet'].properties !== undefined, true);
   }
 }
