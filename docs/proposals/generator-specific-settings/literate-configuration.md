@@ -421,7 +421,7 @@ Then, once you've installed AutoRest, you can use any arbitrary version by just 
 |disable-simplifier| `disable-simplfier:true` | Disables c# post-codegeneration simplifier|
 |internal-constructors| `internal-constructors: true` | Indicates whether ctor needs to be generated with internal protection level. |
 |sync-methods| `sync-methods: true `| Specifies mode for generating sync wrappers. |
-|use-datetimeoffset| `use-datetimeoffset: true` | Indicates whether to use DateTimeOffset instead of DateTime to model date-time types |
+|use-date-time-offset| `use-date-time-offset: true` | Indicates whether to use DateTimeOffset instead of DateTime to model date-time types |
 
 #### NodeJS Settings:
 |Setting|Example|Purpose|

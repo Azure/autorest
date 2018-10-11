@@ -5,7 +5,7 @@
     "forceConsistentCasingInFileNames": false,
     "module": "commonjs",
     "noEmitOnError": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "sourceMap": true,
@@ -18,7 +18,7 @@
       "mocha"
     ],
     "lib": [
-      "esnext"
+      "es2017"
     ],
     "experimentalDecorators": true,
     "newLine": "LF",
