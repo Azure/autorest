@@ -37,6 +37,8 @@ export enum Channel {
 
   /** content represents an update/creation of a configuration file. The final uri will be in the same folder as the primary config file. */
   Configuration = <any>"configuration",
+
+  Control = <any>"Control",
 }
 
 export interface SourceLocation {

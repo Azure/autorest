@@ -14,7 +14,8 @@
       "name": "run tests",
       "program": "${workspaceRoot}/src/autorest-core/node_modules/mocha/bin/_mocha",
       "args": [
-        "dist/test/blaming.js",
+        "dist/test/openapi3-loading.js",
+        "dist/test/swagger-loading.js",
         "--timeout=2000000"
       ],
       "cwd": "${workspaceRoot}/src/autorest-core"
