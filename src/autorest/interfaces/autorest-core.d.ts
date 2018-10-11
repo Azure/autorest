@@ -1,16 +1,115 @@
 /// <reference path="./source-maps.d.ts" />
-declare module 'autorest-core/help' {
-export interface Help {
-    categoryFriendlyName: string;
-    activationScope?: string;
-    description?: string;
-    settings: SettingHelp[];
+declare module 'autorest-core/lib/artifact' {
+export interface Artifact {
+    uri: string;
+    type: string;
+    content: string;
 }
-export interface SettingHelp {
-    required?: boolean;
-    key: string;
-    type?: string;
-    description: string;
+
+}
+declare module 'autorest-core/lib/ref/safe-eval' {
+export const safeEval: <T>(expression: string, context?: any) => T;
+
+}
+declare module 'autorest-core/lib/ref/jsonpath' {
+import * as jsonpath from "jsonpath";
+export type JsonPathComponent = jsonpath.PathComponent;
+export type JsonPath = JsonPathComponent[];
+export function parse(jsonPath: string): JsonPath;
+export function stringify(jsonPath: JsonPath): string;
+export function paths<T>(obj: T, jsonQuery: string): JsonPath[];
+export function nodes<T>(obj: T, jsonQuery: string): {
+    path: JsonPath;
+    value: any;
+}[];
+export function IsPrefix(prefix: JsonPath, path: JsonPath): boolean;
+export function CreateObject(jsonPath: JsonPath, leafObject: any): any;
+export function matches(jsonQuery: string, jsonPath: JsonPath): boolean;
+export function parseJsonPointer(jsonPointer: string): JsonPath;
+
+}
+declare module 'autorest-core/lib/constants' {
+export const MagicString: string;
+export const DefaultConfiguration: string;
+
+}
+declare module 'autorest-core/lib/ref/array' {
+export function pushAll<T>(target: T[], source: T[]): void;
+
+}
+declare module 'autorest-core/lib/ref/source-map' {
+export { Position } from "source-map";
+import { Position } from "source-map";
+export { RawSourceMap } from "source-map";
+import { JsonPath } from 'autorest-core/lib/ref/jsonpath';
+export interface PositionEnhancements {
+    path?: JsonPath;
+    length?: number;
+    valueOffset?: number;
+    valueLength?: number;
+}
+export type EnhancedPosition = Position & PositionEnhancements;
+export type SmartPosition = Position | {
+    path: JsonPath;
+};
+export interface Mapping {
+    generated: SmartPosition;
+    original: SmartPosition;
+    source: string;
+    name?: string;
+}
+export type Mappings = Array<Mapping>;
+
+}
+declare module 'autorest-core/lib/message' {
+import { EnhancedPosition, Position, Mappings, RawSourceMap } from 'autorest-core/lib/ref/source-map';
+import { Artifact } from 'autorest-core/lib/artifact';
+/**
+ * The Channel that a message is registered with.
+ */
+export enum Channel {
+    /** Information is considered the mildest of responses; not necesarily actionable. */
+    Information,
+    /** Warnings are considered important for best practices, but not catastrophic in nature. */
+    Warning,
+    /** Errors are considered blocking issues that block a successful operation.  */
+    Error,
+    /** Debug messages are designed for the developer to communicate internal autorest implementation details. */
+    Debug,
+    /** Verbose messages give the user additional clarity on the process. */
+    Verbose,
+    /** Catastrophic failure, likely abending the process.  */
+    Fatal,
+    /** Hint messages offer guidance or support without forcing action. */
+    Hint,
+    /** File represents a file output from an extension. Details are a Artifact and are required.  */
+    File,
+    /** content represents an update/creation of a configuration file. The final uri will be in the same folder as the primary config file. */
+    Configuration,
+}
+export interface SourceLocation {
+    document: string;
+    Position: EnhancedPosition;
+}
+export interface Range {
+    document: string;
+    start: Position;
+    end: Position;
+}
+export interface Message {
+    Channel: Channel;
+    Key?: Iterable<string>;
+    Details?: any;
+    Text: string;
+    Source?: Array<SourceLocation>;
+    Range?: Iterable<Range>;
+    Plugin?: string;
+    FormattedMessage?: string;
+}
+export interface ArtifactMessage extends Message {
+    Details: Artifact & {
+        sourceMap?: Mappings | RawSourceMap;
+    };
 }
 
 }
@@ -72,66 +171,6 @@ export function FileUriToPath(fileUri: string): string;
 export function GetExtension(name: string): string;
 
 }
-declare module 'autorest-core/lib/ref/safe-eval' {
-export const safeEval: <T>(expression: string, context?: any) => T;
-
-}
-declare module 'autorest-core/lib/ref/jsonpath' {
-import * as jsonpath from "jsonpath";
-export type JsonPathComponent = jsonpath.PathComponent;
-export type JsonPath = JsonPathComponent[];
-export function parse(jsonPath: string): JsonPath;
-export function stringify(jsonPath: JsonPath): string;
-export function paths<T>(obj: T, jsonQuery: string): JsonPath[];
-export function nodes<T>(obj: T, jsonQuery: string): {
-    path: JsonPath;
-    value: any;
-}[];
-export function IsPrefix(prefix: JsonPath, path: JsonPath): boolean;
-export function CreateObject(jsonPath: JsonPath, leafObject: any): any;
-export function matches(jsonQuery: string, jsonPath: JsonPath): boolean;
-export function parseJsonPointer(jsonPointer: string): JsonPath;
-
-}
-declare module 'autorest-core/lib/artifact' {
-export interface Artifact {
-    uri: string;
-    type: string;
-    content: string;
-}
-
-}
-declare module 'autorest-core/lib/constants' {
-export const MagicString: string;
-export const DefaultConfiguration: string;
-
-}
-declare module 'autorest-core/lib/events' {
-/// <reference types="node" />
-import * as events from "events";
-export interface IEvent<TSender extends events.EventEmitter, TArgs> {
-    Subscribe(fn: (sender: TSender, args: TArgs) => void): () => void;
-    Unsubscribe(fn: (sender: TSender, args: TArgs) => void): void;
-    Dispatch(args: TArgs): void;
-}
-export class EventDispatcher<TSender extends EventEmitter, TArgs> implements IEvent<TSender, TArgs> {
-    private _instance;
-    private _name;
-    private _subscriptions;
-    constructor(instance: TSender, name: string);
-    UnsubscribeAll(): void;
-    Subscribe(fn: (sender: TSender, args: TArgs) => void): () => void;
-    Unsubscribe(fn: (sender: TSender, args: TArgs) => void): void;
-    Dispatch(args: TArgs): void;
-}
-export class EventEmitter extends events.EventEmitter {
-    private _subscriptions;
-    constructor();
-    protected static Event<TSender extends EventEmitter, TArgs>(target: TSender, propertyKey: string): void;
-    protected _init(t: EventEmitter): void;
-}
-
-}
 declare module 'autorest-core/lib/exception' {
 export class Exception extends Error {
     exitCode: number;
@@ -146,116 +185,6 @@ export class OutstandingTaskAlreadyCompletedException extends Exception {
 }
 export class OperationAbortedException extends Exception {
     constructor();
-}
-
-}
-declare module 'autorest-core/lib/ref/source-map' {
-export { Position } from "source-map";
-import { Position } from "source-map";
-export { RawSourceMap } from "source-map";
-import { JsonPath } from 'autorest-core/lib/ref/jsonpath';
-export interface PositionEnhancements {
-    path?: JsonPath;
-    length?: number;
-    valueOffset?: number;
-    valueLength?: number;
-}
-export type EnhancedPosition = Position & PositionEnhancements;
-export type SmartPosition = Position | {
-    path: JsonPath;
-};
-export interface Mapping {
-    generated: SmartPosition;
-    original: SmartPosition;
-    source: string;
-    name?: string;
-}
-export type Mappings = Array<Mapping>;
-
-}
-declare module 'autorest-core/lib/message' {
-import { EnhancedPosition, Position, Mappings, RawSourceMap } from 'autorest-core/lib/ref/source-map';
-import { Artifact } from 'autorest-core/lib/artifact';
-/**
- * The Channel that a message is registered with.
- */
-export enum Channel {
-    /** Information is considered the mildest of responses; not necesarily actionable. */
-    Information,
-    /** Warnings are considered important for best practices, but not catastrophic in nature. */
-    Warning,
-    /** Errors are considered blocking issues that block a successful operation.  */
-    Error,
-    /** Debug messages are designed for the developer to communicate internal autorest implementation details. */
-    Debug,
-    /** Verbose messages give the user additional clarity on the process. */
-    Verbose,
-    /** Catastrophic failure, likely abending the process.  */
-    Fatal,
-    /** Hint messages offer guidance or support without forcing action. */
-    Hint,
-    /** File represents a file output from an extension. Details are a Artifact and are required.  */
-    File,
-    /** content represents an update/creation of a configuration file. The final uri will be in the same folder as the primary config file. */
-    Configuration,
-    Control
-}
-export interface SourceLocation {
-    document: string;
-    Position: EnhancedPosition;
-}
-export interface Range {
-    document: string;
-    start: Position;
-    end: Position;
-}
-export interface Message {
-    Channel: Channel;
-    Key?: Iterable<string>;
-    Details?: any;
-    Text: string;
-    Source?: Array<SourceLocation>;
-    Range?: Iterable<Range>;
-    Plugin?: string;
-    FormattedMessage?: string;
-}
-export interface ArtifactMessage extends Message {
-    Details: Artifact & {
-        sourceMap?: Mappings | RawSourceMap;
-    };
-}
-
-}
-declare module 'autorest-core/lib/ref/linq' {
-export {};
-
-}
-declare module 'autorest-core/lib/file-system' {
-export interface IFileSystem {
-    EnumerateFileUris(folderUri: string): Promise<Array<string>>;
-    ReadFile(uri: string): Promise<string>;
-}
-export class MemoryFileSystem implements IFileSystem {
-    static readonly DefaultVirtualRootUri: string;
-    private filesByUri;
-    constructor(files: Map<string, string>);
-    readonly Outputs: Map<string, string>;
-    ReadFile(uri: string): Promise<string>;
-    EnumerateFileUris(folderUri?: string): Promise<Array<string>>;
-    WriteFile(uri: string, content: string): Promise<void>;
-}
-export class RealFileSystem implements IFileSystem {
-    constructor();
-    EnumerateFileUris(folderUri: string): Promise<string[]>;
-    ReadFile(uri: string): Promise<string>;
-    WriteFile(uri: string, content: string): Promise<void>;
-}
-export class EnhancedFileSystem implements IFileSystem {
-    private githubAuthToken?;
-    constructor(githubAuthToken?: string | undefined);
-    EnumerateFileUris(folderUri: string): Promise<string[]>;
-    ReadFile(uri: string): Promise<string>;
-    WriteFile(uri: string, content: string): Promise<void>;
 }
 
 }
@@ -285,12 +214,30 @@ export class OutstandingTaskAwaiter {
 }
 
 }
-declare module 'autorest-core/lib/ref/array' {
-export function pushAll<T>(target: T[], source: T[]): void;
-
+declare module 'autorest-core/lib/events' {
+/// <reference types="node" />
+import * as events from "events";
+export interface IEvent<TSender extends events.EventEmitter, TArgs> {
+    Subscribe(fn: (sender: TSender, args: TArgs) => void): () => void;
+    Unsubscribe(fn: (sender: TSender, args: TArgs) => void): void;
+    Dispatch(args: TArgs): void;
 }
-declare module 'autorest-core/lib/ref/commonmark' {
-export { Node, Parser } from "commonmark";
+export class EventDispatcher<TSender extends EventEmitter, TArgs> implements IEvent<TSender, TArgs> {
+    private _instance;
+    private _name;
+    private _subscriptions;
+    constructor(instance: TSender, name: string);
+    UnsubscribeAll(): void;
+    Subscribe(fn: (sender: TSender, args: TArgs) => void): () => void;
+    Unsubscribe(fn: (sender: TSender, args: TArgs) => void): void;
+    Dispatch(args: TArgs): void;
+}
+export class EventEmitter extends events.EventEmitter {
+    private _subscriptions;
+    constructor();
+    protected static Event<TSender extends EventEmitter, TArgs>(target: TSender, propertyKey: string): void;
+    protected _init(t: EventEmitter): void;
+}
 
 }
 declare module 'autorest-core/lib/ref/cancellation' {
@@ -301,18 +248,47 @@ declare module 'autorest-core/lib/ref/jsonrpc' {
 export * from "vscode-jsonrpc";
 
 }
+declare module 'autorest-core/lib/file-system' {
+export interface IFileSystem {
+    EnumerateFileUris(folderUri: string): Promise<Array<string>>;
+    ReadFile(uri: string): Promise<string>;
+}
+export class MemoryFileSystem implements IFileSystem {
+    static readonly DefaultVirtualRootUri: string;
+    private filesByUri;
+    constructor(files: Map<string, string>);
+    readonly Outputs: Map<string, string>;
+    ReadFile(uri: string): Promise<string>;
+    EnumerateFileUris(folderUri?: string): Promise<Array<string>>;
+    WriteFile(uri: string, content: string): Promise<void>;
+}
+export class RealFileSystem implements IFileSystem {
+    constructor();
+    EnumerateFileUris(folderUri: string): Promise<string[]>;
+    ReadFile(uri: string): Promise<string>;
+    WriteFile(uri: string, content: string): Promise<void>;
+}
+export class EnhancedFileSystem implements IFileSystem {
+    private githubAuthToken;
+    constructor(githubAuthToken?: string | undefined);
+    EnumerateFileUris(folderUri: string): Promise<string[]>;
+    ReadFile(uri: string): Promise<string>;
+    WriteFile(uri: string, content: string): Promise<void>;
+}
+
+}
 declare module 'autorest-core/lib/document-type' {
 export enum DocumentType {
     OpenAPI2,
     OpenAPI3,
     LiterateConfiguration,
-    Unknown
+    Unknown,
 }
 export enum DocumentFormat {
     Markdown,
     Yaml,
     Json,
-    Unknown
+    Unknown,
 }
 export const DocumentExtension: {
     "yaml": DocumentFormat;
@@ -337,145 +313,32 @@ export { AutoRest, ConfigurationView, IdentifyDocument, IsConfigurationExtension
 export { DocumentFormat, DocumentExtension, DocumentPatterns, DocumentType } from 'autorest-core/lib/document-type';
 
 }
-declare module 'autorest-core/lib/configuration' {
-import { Artifact } from 'autorest-core/lib/artifact';
-import { EventEmitter, IEvent } from 'autorest-core/lib/events';
-import { IFileSystem } from 'autorest-core/lib/file-system';
-import { Message } from 'autorest-core/lib/message';
-export interface AutoRestConfigurationImpl {
-    __info?: string | null;
-    'allow-no-input'?: boolean;
-    'input-file'?: Array<string> | string;
-    'base-folder'?: string;
-    'directive'?: Array<Directive> | Directive;
-    'declare-directive'?: {
-        [name: string]: string;
-    };
-    'output-artifact'?: Array<string> | string;
-    'message-format'?: 'json' | 'yaml' | 'regular';
-    'use-extension'?: {
-        [extensionName: string]: string;
-    };
-    'require'?: Array<string> | string;
-    'try-require'?: Array<string> | string;
-    'help'?: any;
-    'vscode'?: any;
-    'override-info'?: any;
-    'title'?: any;
-    'description'?: any;
-    'debug'?: boolean;
-    'verbose'?: boolean;
-    'output-file'?: string;
-    'output-folder'?: string;
-    'client-side-validation'?: boolean;
-    'fluent'?: boolean;
-    'azure-arm'?: boolean;
-    'namespace'?: string;
-    'license-header'?: string;
-    'add-credentials'?: boolean;
-    'package-name'?: string;
-    'package-version'?: string;
-    'sync-methods'?: 'all' | 'essential' | 'none';
-    'payload-flattening-threshold'?: number;
-    'openapi-type'?: string;
-}
-export function MergeConfigurations(...configs: Array<AutoRestConfigurationImpl>): AutoRestConfigurationImpl;
-export interface Directive {
-    from?: Array<string> | string;
-    where?: Array<string> | string;
-    reason?: string;
-    suppress?: Array<string> | string;
-    set?: Array<string> | string;
-    transform?: Array<string> | string;
-    test?: Array<string> | string;
-}
-export class DirectiveView {
-    private directive;
-    constructor(directive: Directive);
-    readonly from: Iterable<string>;
-    readonly where: Iterable<string>;
-    readonly reason: string | null;
-    readonly suppress: Iterable<string>;
-    readonly transform: Iterable<string>;
-    readonly test: Iterable<string>;
-}
-export class MessageEmitter extends EventEmitter {
-    /**
-     * Event: Signals when a File is generated
-     */
-    GeneratedFile: IEvent<MessageEmitter, Artifact>;
-    /**
-     * Event: Signals when a Folder is supposed to be cleared
-     */
-    ClearFolder: IEvent<MessageEmitter, string>;
-    /**
-     * Event: Signals when a message is generated
-     */
-    Message: IEvent<MessageEmitter, Message>;
-    private cancellationTokenSource;
-    constructor();
-}
-export class ConfigurationView {
-    configurationFiles: {
-        [key: string]: any;
-    };
-    fileSystem: IFileSystem;
-    messageEmitter: MessageEmitter;
-    configFileFolderUri: string;
-    [name: string]: any;
-    private suppressor;
-    readonly Keys: Array<string>;
-    Dump(title?: string): void;
-    private config;
-    private rawConfig;
-    private ResolveAsFolder;
-    private ResolveAsPath;
-    private readonly BaseFolderUri;
-    readonly UseExtensions: Array<{
-        name: string;
-        source: string;
-        fullyQualified: string;
-    }>;
-    IncludedConfigurationFiles(fileSystem: IFileSystem, ignoreFiles: Set<string>): Promise<Array<string>>;
-    readonly Directives: Array<DirectiveView>;
-    readonly InputFileUris: Array<string>;
-    readonly OutputFolderUri: string;
-    IsOutputArtifactRequested(artifact: string): boolean;
-    GetEntry(key: keyof AutoRestConfigurationImpl): any;
-    readonly Raw: AutoRestConfigurationImpl;
-    readonly DebugMode: boolean;
-    readonly VerboseMode: boolean;
-    readonly HelpRequested: boolean;
-    GetNestedConfiguration(pluginName: string): Iterable<ConfigurationView>;
-    GetNestedConfigurationImmediate(...scope: Array<any>): ConfigurationView;
-    Message(m: Message): void;
-}
-export class Configuration {
-    private fileSystem;
-    private configFileOrFolderUri?;
-    constructor(fileSystem?: IFileSystem, configFileOrFolderUri?: string | undefined);
-    private ParseCodeBlocks;
-    private static extensionManager;
-    private DesugarRawConfig;
-    private DesugarRawConfigs;
-    static shutdown(): Promise<void>;
-    CreateView(messageEmitter: MessageEmitter, includeDefault: boolean, ...configs: Array<any>): Promise<ConfigurationView>;
-    static DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders?: boolean): Promise<string | null>;
-    static DetectConfigurationFiles(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders?: boolean): Promise<Array<string>>;
-}
+declare module 'autorest-core/lib/ref/commonmark' {
+export { Node, Parser } from "commonmark";
 
 }
-declare module 'autorest-core/lib/openapi/conversion' {
-export {};
+declare module 'autorest-core/help' {
+export interface Help {
+    categoryFriendlyName: string;
+    activationScope?: string;
+    description?: string;
+    settings: SettingHelp[];
+}
+export interface SettingHelp {
+    required?: boolean;
+    key: string;
+    type?: string;
+    description: string;
+}
 
 }
 declare module 'autorest-core/lib/autorest-core' {
+import { IEvent, EventEmitter } from 'autorest-core/lib/events';
 import { ConfigurationView } from 'autorest-core/lib/configuration';
-import { EventEmitter, IEvent } from 'autorest-core/lib/events';
 export { ConfigurationView } from 'autorest-core/lib/configuration';
+import { Message } from 'autorest-core/lib/message';
 import { Artifact } from 'autorest-core/lib/artifact';
 import { DocumentType } from 'autorest-core/lib/document-type';
-import { Message } from 'autorest-core/lib/message';
 /**
  * An instance of the AutoRest generator.
  *
@@ -483,7 +346,7 @@ import { Message } from 'autorest-core/lib/message';
  */
 export class AutoRest extends EventEmitter {
     private fileSystem;
-    configFileOrFolderUri?: string | undefined;
+    configFileOrFolderUri: string | undefined;
     /**
      * Event: Signals when a Process() finishes.
      */
@@ -512,7 +375,7 @@ export class AutoRest extends EventEmitter {
      */
     Process(): {
         finish: Promise<boolean | Error>;
-        cancel(): void;
+        cancel: () => void;
     };
 }
 /** Determines the document type based on the content of the document
@@ -561,20 +424,132 @@ export function IsConfigurationExtension(extension: string): Promise<boolean>;
 export function IsOpenApiExtension(extension: string): Promise<boolean>;
 
 }
-declare module 'autorest-core/legacyCli' {
-export {};
-
+declare module 'autorest-core/lib/configuration' {
+import { Artifact } from 'autorest-core/lib/artifact';
+import { EventEmitter, IEvent } from 'autorest-core/lib/events';
+import { IFileSystem } from 'autorest-core/lib/file-system';
+import { Message } from 'autorest-core/lib/message';
+export interface AutoRestConfigurationImpl {
+    __info?: string | null;
+    "allow-no-input"?: boolean;
+    "input-file"?: string[] | string;
+    "base-folder"?: string;
+    "directive"?: Directive[] | Directive;
+    "declare-directive"?: {
+        [name: string]: string;
+    };
+    "output-artifact"?: string[] | string;
+    "message-format"?: "json" | "yaml" | "regular";
+    "use-extension"?: {
+        [extensionName: string]: string;
+    };
+    "require"?: string[] | string;
+    "try-require"?: string[] | string;
+    "help"?: any;
+    "vscode"?: any;
+    "override-info"?: any;
+    "title"?: any;
+    "description"?: any;
+    "debug"?: boolean;
+    "verbose"?: boolean;
+    "output-file"?: string;
+    "output-folder"?: string;
+    "client-side-validation"?: boolean;
+    "fluent"?: boolean;
+    "azure-arm"?: boolean;
+    "namespace"?: string;
+    "license-header"?: string;
+    "add-credentials"?: boolean;
+    "package-name"?: string;
+    "package-version"?: string;
+    "sync-methods"?: "all" | "essential" | "none";
+    "payload-flattening-threshold"?: number;
+    "openapi-type"?: string;
 }
-declare module 'autorest-core/app' {
-export {};
-
+export function MergeConfigurations(...configs: AutoRestConfigurationImpl[]): AutoRestConfigurationImpl;
+export interface Directive {
+    from?: string[] | string;
+    where?: string[] | string;
+    reason?: string;
+    suppress?: string[] | string;
+    set?: string[] | string;
+    transform?: string[] | string;
+    test?: string[] | string;
 }
-declare module 'autorest-core/language-service/source-map' {
-export {};
-
+export class DirectiveView {
+    private directive;
+    constructor(directive: Directive);
+    readonly from: Iterable<string>;
+    readonly where: Iterable<string>;
+    readonly reason: string | null;
+    readonly suppress: Iterable<string>;
+    readonly transform: Iterable<string>;
+    readonly test: Iterable<string>;
 }
-declare module 'autorest-core/language-service/document-analysis' {
-export {};
+export class MessageEmitter extends EventEmitter {
+    /**
+    * Event: Signals when a File is generated
+    */
+    GeneratedFile: IEvent<MessageEmitter, Artifact>;
+    /**
+     * Event: Signals when a Folder is supposed to be cleared
+     */
+    ClearFolder: IEvent<MessageEmitter, string>;
+    /**
+     * Event: Signals when a message is generated
+     */
+    Message: IEvent<MessageEmitter, Message>;
+    private cancellationTokenSource;
+    constructor();
+}
+export class ConfigurationView {
+    configurationFiles: {
+        [key: string]: any;
+    };
+    fileSystem: IFileSystem;
+    messageEmitter: MessageEmitter;
+    configFileFolderUri: string;
+    [name: string]: any;
+    private suppressor;
+    readonly Keys: Array<string>;
+    Dump(title?: string): void;
+    private config;
+    private rawConfig;
+    private ResolveAsFolder(path);
+    private ResolveAsPath(path);
+    private readonly BaseFolderUri;
+    readonly UseExtensions: Array<{
+        name: string;
+        source: string;
+        fullyQualified: string;
+    }>;
+    IncludedConfigurationFiles(fileSystem: IFileSystem, ignoreFiles: Set<string>): Promise<string[]>;
+    readonly Directives: DirectiveView[];
+    readonly InputFileUris: string[];
+    readonly OutputFolderUri: string;
+    IsOutputArtifactRequested(artifact: string): boolean;
+    GetEntry(key: keyof AutoRestConfigurationImpl): any;
+    readonly Raw: AutoRestConfigurationImpl;
+    readonly DebugMode: boolean;
+    readonly VerboseMode: boolean;
+    readonly HelpRequested: boolean;
+    GetNestedConfiguration(pluginName: string): Iterable<ConfigurationView>;
+    GetNestedConfigurationImmediate(...scope: any[]): ConfigurationView;
+    Message(m: Message): void;
+}
+export class Configuration {
+    private fileSystem;
+    private configFileOrFolderUri;
+    constructor(fileSystem?: IFileSystem, configFileOrFolderUri?: string | undefined);
+    private ParseCodeBlocks(configFile, contextConfig, scope);
+    private static extensionManager;
+    private DesugarRawConfig(configs);
+    private DesugarRawConfigs(configs);
+    static shutdown(): Promise<void>;
+    CreateView(messageEmitter: MessageEmitter, includeDefault: boolean, ...configs: Array<any>): Promise<ConfigurationView>;
+    static DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders?: boolean): Promise<string | null>;
+    static DetectConfigurationFiles(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders?: boolean): Promise<Array<string>>;
+}
 
 }
 declare module 'autorest-core/language-service/language-service' {

@@ -3,164 +3,122 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Help } from '../../help';
+import { GetPlugin_ComponentModifier } from './component-modifier';
+import { GetPlugin_SchemaValidator } from './schema-validation';
+import { ConvertJsonx2Yaml, ConvertYaml2Jsonx } from '../parsing/yaml';
+import { Descendants, FastStringify, StringifyAst } from '../ref/yaml';
+import { JsonPath, stringify } from "../ref/jsonpath";
+import { safeEval } from "../ref/safe-eval";
+import { LazyPromise } from "../lazy";
+import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
+import { AutoRestExtension } from "./plugin-endpoint";
+import { Manipulator } from "./manipulation";
+import { ProcessCodeModel } from "./commonmark-documentation";
+import { Channel } from "../message";
+import { ResolveUri } from "../ref/uri";
 import { ConfigurationView, GetExtension } from '../configuration';
 import { DataHandle, DataSink, DataSource, QuickDataSource } from '../data-store/data-store';
-import { IFileSystem } from '../file-system';
-import { LazyPromise } from '../lazy';
-import { Channel, Message } from '../message';
-import { ConvertOAI2toOAI3 } from '../openapi/conversion';
-import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
-import { ConvertJsonx2Yaml, ConvertYaml2Jsonx } from '../parsing/yaml';
-import { JsonPath, stringify } from '../ref/jsonpath';
-import { safeEval } from '../ref/safe-eval';
-import { ResolveUri } from '../ref/uri';
-import { Descendants, FastStringify, StringifyAst } from '../ref/yaml';
-import { EmitArtifacts } from './artifact-emitter';
+import { IFileSystem } from "../file-system";
+import { EmitArtifacts } from "./artifact-emitter";
+import { ComposeSwaggers, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
+import { ConvertOAI2toOAI3 } from "../openapi/conversion";
+import { Help } from '../../help';
+import { GetPlugin_Help } from "./help";
+import { GetPlugin_ReflectApiVersion } from "./metadata-generation";
 import { CreatePerFilePlugin, PipelinePlugin } from './common';
-import { ProcessCodeModel } from './commonmark-documentation';
-import { GetPlugin_ComponentModifier } from './component-modifier';
-import { GetPlugin_Help } from './help';
-import { Manipulator } from './manipulation';
-import { GetPlugin_ReflectApiVersion } from './metadata-generation';
-import { AutoRestExtension } from './plugin-endpoint';
-import { GetPlugin_SchemaValidatorOpenApi, GetPlugin_SchemaValidatorSwagger } from './schema-validation';
-import { ComposeSwaggers, LoadLiterateOpenApi, LoadLiterateOpenApiOverrides, LoadLiterateOpenApis, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
 
 interface PipelineNode {
   outputArtifact?: string;
   pluginName: string;
   configScope: JsonPath;
-  inputs: Array<string>;
-  skip: boolean;
-}
+  inputs: string[];
+};
 
 function GetPlugin_Identity(): PipelinePlugin {
   return async (config, input) => input;
 }
-
-function GetPlugin_LoaderSwagger(): PipelinePlugin {
+function GetPlugin_Loader(): PipelinePlugin {
   return async (config, input, sink) => {
-    const inputs = config.InputFileUris;
+    let inputs = config.InputFileUris;
     const swaggers = await LoadLiterateSwaggers(
       config,
       input,
       inputs, sink);
-    const result: Array<DataHandle> = [];
-    if (swaggers.length === inputs.length) {
-      for (let i = 0; i < inputs.length; ++i) {
-        result.push(await sink.Forward(inputs[i], swaggers[i]));
-      }
+    const result: DataHandle[] = [];
+    for (let i = 0; i < inputs.length; ++i) {
+      result.push(await sink.Forward(inputs[i], swaggers[i]));
     }
-    return new QuickDataSource(result, swaggers.length !== inputs.length);
+    return new QuickDataSource(result);
   };
 }
-
-function GetPlugin_LoaderOpenApi(): PipelinePlugin {
+function GetPlugin_MdOverrideLoader(): PipelinePlugin {
   return async (config, input, sink) => {
-    const inputs = config.InputFileUris;
-    const openapis = await LoadLiterateOpenApis(
-      config,
-      input,
-      inputs, sink);
-    const result: Array<DataHandle> = [];
-    if (openapis.length === inputs.length) {
-      for (let i = 0; i < inputs.length; ++i) {
-        result.push(await sink.Forward(inputs[i], openapis[i]));
-      }
-    }
-    return new QuickDataSource(result, openapis.length !== inputs.length);
-  };
-}
-
-function GetPlugin_MdOverrideLoaderSwagger(): PipelinePlugin {
-  return async (config, input, sink) => {
-    const inputs = config.InputFileUris;
+    let inputs = config.InputFileUris;
     const swaggers = await LoadLiterateSwaggerOverrides(
       config,
       input,
       inputs, sink);
-    const result: Array<DataHandle> = [];
+    const result: DataHandle[] = [];
     for (let i = 0; i < inputs.length; ++i) {
       result.push(await sink.Forward(inputs[i], swaggers[i]));
     }
-    return new QuickDataSource(result, input.skip);
-  };
-}
-
-function GetPlugin_MdOverrideLoaderOpenApi(): PipelinePlugin {
-  return async (config, input, sink) => {
-    const inputs = config.InputFileUris;
-    const openapis = await LoadLiterateOpenApiOverrides(
-      config,
-      input,
-      inputs, sink);
-    const result: Array<DataHandle> = [];
-    for (let i = 0; i < inputs.length; ++i) {
-      result.push(await sink.Forward(inputs[i], openapis[i]));
-    }
-    return new QuickDataSource(result, input.skip);
+    return new QuickDataSource(result);
   };
 }
 
 function GetPlugin_OAI2toOAIx(): PipelinePlugin {
   return CreatePerFilePlugin(async config => async (fileIn, sink) => {
     const fileOut = await ConvertOAI2toOAI3(fileIn, sink);
-    return sink.Forward(fileIn.Description, fileOut);
+    return await sink.Forward(fileIn.Description, fileOut);
   });
 }
-
 function GetPlugin_Yaml2Jsonx(): PipelinePlugin {
   return CreatePerFilePlugin(async config => async (fileIn, sink) => {
     let ast = fileIn.ReadYamlAst();
     ast = ConvertYaml2Jsonx(ast);
-    return sink.WriteData(fileIn.Description, StringifyAst(ast));
+    return await sink.WriteData(fileIn.Description, StringifyAst(ast));
   });
 }
-
 function GetPlugin_Jsonx2Yaml(): PipelinePlugin {
   return CreatePerFilePlugin(async config => async (fileIn, sink) => {
     let ast = fileIn.ReadYamlAst();
     ast = ConvertJsonx2Yaml(ast);
-    return sink.WriteData(fileIn.Description, StringifyAst(ast));
+    return await sink.WriteData(fileIn.Description, StringifyAst(ast));
   });
 }
 
 function GetPlugin_Transformer(): PipelinePlugin {
   return CreatePerFilePlugin(async config => {
-    const isObject = config.GetEntry('is-object' as any) === false ? false : true;
+    const isObject = config.GetEntry("is-object" as any) === false ? false : true;
     const manipulator = new Manipulator(config);
     return async (fileIn, sink) => {
       const fileOut = await manipulator.Process(fileIn, sink, isObject, fileIn.Description);
-      return sink.Forward(fileIn.Description, fileOut);
+      return await sink.Forward(fileIn.Description, fileOut);
     };
   });
 }
-
 function GetPlugin_TransformerImmediate(): PipelinePlugin {
   return async (config, input, sink) => {
-    const isObject = config.GetEntry('is-object' as any) === false ? false : true;
+    const isObject = config.GetEntry("is-object" as any) === false ? false : true;
     const files = await input.Enum(); // first all the immediate-configs, then a single swagger-document
     const scopes = await Promise.all(files.slice(0, files.length - 1).map(f => input.ReadStrict(f)));
     const manipulator = new Manipulator(config.GetNestedConfigurationImmediate(...scopes.map(s => s.ReadObject<any>())));
     const file = files[files.length - 1];
     const fileIn = await input.ReadStrict(file);
     const fileOut = await manipulator.Process(fileIn, sink, isObject, fileIn.Description);
-    return new QuickDataSource([await sink.Forward('swagger-document', fileOut)], input.skip);
+    return new QuickDataSource([await sink.Forward("swagger-document", fileOut)]);
   };
 }
-
 function GetPlugin_Composer(): PipelinePlugin {
   return async (config, input, sink) => {
     const swaggers = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
-    const overrideInfo = config.GetEntry('override-info');
-    const overrideTitle = (overrideInfo && overrideInfo.title) || config.GetEntry('title');
-    const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry('description');
+    const overrideInfo = config.GetEntry("override-info");
+    const overrideTitle = (overrideInfo && overrideInfo.title) || config.GetEntry("title");
+    const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry("description");
     const swagger = await ComposeSwaggers(config, overrideTitle, overrideDescription, swaggers, sink);
-    return new QuickDataSource([await sink.Forward('composed', swagger)], input.skip);
+    return new QuickDataSource([await sink.Forward("composed", swagger)]);
   };
 }
-
 function GetPlugin_External(host: AutoRestExtension, pluginName: string): PipelinePlugin {
   return async (config, input, sink) => {
     const plugin = await host;
@@ -168,9 +126,8 @@ function GetPlugin_External(host: AutoRestExtension, pluginName: string): Pipeli
     if (pluginNames.indexOf(pluginName) === -1) {
       throw new Error(`Plugin ${pluginName} not found.`);
     }
-    let shouldSkip: boolean | undefined;
 
-    const results: Array<DataHandle> = [];
+    const results: DataHandle[] = [];
     const result = await plugin.Process(
       pluginName,
       key => config.GetEntry(key as any),
@@ -178,39 +135,27 @@ function GetPlugin_External(host: AutoRestExtension, pluginName: string): Pipeli
       input,
       sink,
       f => results.push(f),
-      (message: Message) => {
-        if (message.Channel === Channel.Control) {
-          if (message.Details && message.Details.skip !== undefined) {
-            shouldSkip = message.Details.skip;
-          }
-
-        } else {
-          return config.Message.bind(config)(message);
-        }
-      },
-
+      config.Message.bind(config),
       config.CancellationToken);
     if (!result) {
       throw new Error(`Plugin ${pluginName} reported failure.`);
     }
-    return new QuickDataSource(results, shouldSkip);
+    return new QuickDataSource(results);
   };
 }
-
 function GetPlugin_CommonmarkProcessor(): PipelinePlugin {
   return async (config, input, sink) => {
     const files = await input.Enum();
-    const results: Array<DataHandle> = [];
+    const results: DataHandle[] = [];
     for (let file of files) {
       const fileIn = await input.ReadStrict(file);
       const fileOut = await ProcessCodeModel(fileIn, sink);
-      file = file.substr(file.indexOf('/output/') + '/output/'.length);
-      results.push(await sink.Forward('code-model-v1', fileOut));
+      file = file.substr(file.indexOf("/output/") + "/output/".length);
+      results.push(await sink.Forward("code-model-v1", fileOut));
     }
-    return new QuickDataSource(results, input.skip);
+    return new QuickDataSource(results);
   };
 }
-
 function GetPlugin_ArtifactEmitter(inputOverride?: () => Promise<DataSource>): PipelinePlugin {
   return async (config, input, sink) => {
     if (inputOverride) {
@@ -218,24 +163,24 @@ function GetPlugin_ArtifactEmitter(inputOverride?: () => Promise<DataSource>): P
     }
 
     // clear output-folder if requested
-    if (config.GetEntry('clear-output-folder' as any)) {
+    if (config.GetEntry("clear-output-folder" as any)) {
       config.ClearFolder.Dispatch(config.OutputFolderUri);
     }
 
     await EmitArtifacts(
       config,
-      config.GetEntry('input-artifact' as any) || null,
+      config.GetEntry("input-artifact" as any) || null,
       key => ResolveUri(
         config.OutputFolderUri,
-        safeEval<string>(config.GetEntry('output-uri-expr' as any) || '$key', { $key: key, $config: config.Raw })),
+        safeEval<string>(config.GetEntry("output-uri-expr" as any) || "$key", { $key: key, $config: config.Raw })),
       input,
-      config.GetEntry('is-object' as any));
+      config.GetEntry("is-object" as any));
     return new QuickDataSource([]);
   };
 }
 
 function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]: PipelineNode }, configs: { [jsonPath: string]: ConfigurationView } } {
-  const cfgPipeline = config.GetEntry('pipeline' as any);
+  const cfgPipeline = config.GetEntry("pipeline" as any);
   const pipeline: { [name: string]: PipelineNode } = {};
   const configCache: { [jsonPath: string]: ConfigurationView } = {};
 
@@ -248,9 +193,9 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
   //    --> commonmarker                 if such a stage exists
   //    --> THROWS                       otherwise
   const resolvePipelineStageName = (currentStageName: string, relativeName: string) => {
-    while (currentStageName !== '') {
+    while (currentStageName !== "") {
       currentStageName = currentStageName.substring(0, currentStageName.length - 1);
-      currentStageName = currentStageName.substring(0, currentStageName.lastIndexOf('/') + 1);
+      currentStageName = currentStageName.substring(0, currentStageName.lastIndexOf("/") + 1);
 
       if (cfgPipeline[currentStageName + relativeName]) {
         return currentStageName + relativeName;
@@ -262,7 +207,7 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
   // One pipeline stage can generate multiple nodes in the pipeline graph
   // if the stage is associated with a configuration scope that has multiple entries.
   // Example: multiple generator calls
-  const createNodesAndSuffixes: (stageName: string) => { name: string, suffixes: Array<string> } = stageName => {
+  const createNodesAndSuffixes: (stageName: string) => { name: string, suffixes: string[] } = stageName => {
     const cfg = cfgPipeline[stageName];
     if (!cfg) {
       throw new Error(`Cannot find pipeline stage '${stageName}'.`);
@@ -272,12 +217,12 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
     }
 
     // derive information about given pipeline stage
-    const plugin = cfg.plugin || stageName.split('/').reverse()[0];
-    const outputArtifact = cfg['output-artifact'];
+    const plugin = cfg.plugin || stageName.split("/").reverse()[0];
+    const outputArtifact = cfg["output-artifact"];
     const scope = cfg.scope;
-    const inputs: Array<string> = (!cfg.input ? [] : (Array.isArray(cfg.input) ? cfg.input : [cfg.input])).map((x: string) => resolvePipelineStageName(stageName, x));
+    const inputs: string[] = (!cfg.input ? [] : (Array.isArray(cfg.input) ? cfg.input : [cfg.input])).map((x: string) => resolvePipelineStageName(stageName, x));
 
-    const suffixes: Array<string> = [];
+    const suffixes: string[] = [];
     // adds nodes using at least suffix `suffix`, the input nodes called `inputs` using the context `config`
     // AFTER considering all the input nodes `inputNodes`
     // Example:
@@ -287,23 +232,22 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
     // --> ("/1", ["a/1"], cfg of "a/1", [])
     //     --> adds node `${stageName}/1`
     // Note: inherits the config of the LAST input node (affects for example `.../generate`)
-    const addNodesAndSuffixes = (suffix: string, inputs: Array<string>, configScope: JsonPath, inputNodes: Array<{ name: string, suffixes: Array<string> }>) => {
+    const addNodesAndSuffixes = (suffix: string, inputs: string[], configScope: JsonPath, inputNodes: { name: string, suffixes: string[] }[]) => {
       if (inputNodes.length === 0) {
         const config = configCache[stringify(configScope)];
         const configs = scope ? [...config.GetNestedConfiguration(scope)] : [config];
         for (let i = 0; i < configs.length; ++i) {
-          const newSuffix = configs.length === 1 ? '' : '/' + i;
+          const newSuffix = configs.length === 1 ? "" : "/" + i;
           suffixes.push(suffix + newSuffix);
           const path: JsonPath = configScope.slice();
-          if (scope) { path.push(scope); }
-          if (configs.length !== 1) { path.push(i); }
+          if (scope) path.push(scope);
+          if (configs.length !== 1) path.push(i);
           configCache[stringify(path)] = configs[i];
           pipeline[stageName + suffix + newSuffix] = {
             pluginName: plugin,
-            outputArtifact,
+            outputArtifact: outputArtifact,
             configScope: path,
-            inputs,
-            skip: false,
+            inputs: inputs
           };
         }
       } else {
@@ -321,7 +265,7 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
     };
 
     configCache[stringify([])] = config;
-    addNodesAndSuffixes('', [], [], inputs.map(createNodesAndSuffixes));
+    addNodesAndSuffixes("", [], [], inputs.map(createNodesAndSuffixes));
 
     return { name: stageName, suffixes: cfg.suffixes = suffixes };
   };
@@ -331,7 +275,7 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
   }
 
   return {
-    pipeline,
+    pipeline: pipeline,
     configs: configCache
   };
 }
@@ -339,34 +283,31 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
 export async function RunPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
   // built-in plugins
   const plugins: { [name: string]: PipelinePlugin } = {
-    'help': GetPlugin_Help(),
-    'identity': GetPlugin_Identity(),
-    'loader-swagger': GetPlugin_LoaderSwagger(),
-    'loader-openapi': GetPlugin_LoaderOpenApi(),
-    'md-override-loader-swagger': GetPlugin_MdOverrideLoaderSwagger(),
-    'md-override-loader-openapi': GetPlugin_MdOverrideLoaderOpenApi(),
-    'transform': GetPlugin_Transformer(),
-    'transform-immediate': GetPlugin_TransformerImmediate(),
-    'compose': GetPlugin_Composer(),
-    'schema-validator-openapi': GetPlugin_SchemaValidatorOpenApi(),
-    'schema-validator-swagger': GetPlugin_SchemaValidatorSwagger(),
+    "help": GetPlugin_Help(),
+    "identity": GetPlugin_Identity(),
+    "loader": GetPlugin_Loader(),
+    "md-override-loader": GetPlugin_MdOverrideLoader(),
+    "transform": GetPlugin_Transformer(),
+    "transform-immediate": GetPlugin_TransformerImmediate(),
+    "compose": GetPlugin_Composer(),
+    "schema-validator": GetPlugin_SchemaValidator(),
     // TODO: replace with OAV again
-    'semantic-validator': GetPlugin_Identity(),
+    "semantic-validator": GetPlugin_Identity(),
 
-    'openapi-document-converter': GetPlugin_OAI2toOAIx(),
-    'component-modifiers': GetPlugin_ComponentModifier(),
-    'yaml2jsonx': GetPlugin_Yaml2Jsonx(),
-    'jsonx2yaml': GetPlugin_Jsonx2Yaml(),
-    'reflect-api-versions-cs': GetPlugin_ReflectApiVersion(),
-    'commonmarker': GetPlugin_CommonmarkProcessor(),
-    'emitter': GetPlugin_ArtifactEmitter(),
-    'pipeline-emitter': GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('pipeline', pipeline.pipeline, 'pipeline')])),
-    'configuration-emitter': GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('configuration', configView.Raw, 'configuration')]))
+    "openapi-document-converter": GetPlugin_OAI2toOAIx(),
+    "component-modifiers": GetPlugin_ComponentModifier(),
+    "yaml2jsonx": GetPlugin_Yaml2Jsonx(),
+    "jsonx2yaml": GetPlugin_Jsonx2Yaml(),
+    "reflect-api-versions-cs": GetPlugin_ReflectApiVersion(),
+    "commonmarker": GetPlugin_CommonmarkProcessor(),
+    "emitter": GetPlugin_ArtifactEmitter(),
+    "pipeline-emitter": GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject("pipeline", pipeline.pipeline, "pipeline")])),
+    "configuration-emitter": GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject("configuration", configView.Raw, "configuration")]))
   };
 
   // dynamically loaded, auto-discovered plugins
   const __extensionExtension: { [pluginName: string]: AutoRestExtension } = {};
-  for (const useExtensionQualifiedName of configView.GetEntry('used-extension' as any) || []) {
+  for (const useExtensionQualifiedName of configView.GetEntry("used-extension" as any) || []) {
     const extension = await GetExtension(useExtensionQualifiedName);
     for (const plugin of await extension.GetPluginNames(configView.CancellationToken)) {
       if (!plugins[plugin]) {
@@ -380,18 +321,18 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   const startTime = Date.now();
   (configView.Raw as any).__status = new Proxy<any>({}, {
     get(_, key) {
-      if (key === '__info') { return false; }
-      const expr = new Buffer(key.toString(), 'base64').toString('ascii');
+      if (key === "__info") return false;
+      const expr = new Buffer(key.toString(), "base64").toString("ascii");
       try {
         return FastStringify(safeEval(expr, {
           pipeline: pipeline.pipeline,
           external: __extensionExtension,
-          tasks,
-          startTime,
+          tasks: tasks,
+          startTime: startTime,
           blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => configView.DataStore.Blame(uri, position)
         }));
       } catch (e) {
-        return '' + e;
+        return "" + e;
       }
     }
   });
@@ -410,38 +351,26 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
       }
 
       // get input
-      const inputScopes: Array<DataSource> = await Promise.all(node.inputs.map(getTask));
-
+      const inputScopes: DataSource[] = await Promise.all(node.inputs.map(getTask));
       let inputScope: DataSource;
       if (inputScopes.length === 0) {
         inputScope = fsInput;
       } else {
-        let skip: boolean | undefined;
-
-        const handles: Array<DataHandle> = [];
+        const handles: DataHandle[] = [];
         for (const pscope of inputScopes) {
           const scope = await pscope;
-          if (pscope.skip !== undefined) {
-            skip = skip === undefined ? pscope.skip : skip && pscope.skip;
-          }
           for (const handle of await scope.Enum()) {
             handles.push(await scope.ReadStrict(handle));
           }
         }
-        inputScope = new QuickDataSource(handles, skip);
+        inputScope = new QuickDataSource(handles);
       }
 
       const config = pipeline.configs[stringify(node.configScope)];
       const pluginName = node.pluginName;
       const plugin = plugins[pluginName];
-
       if (!plugin) {
         throw new Error(`Plugin '${pluginName}' not found.`);
-      }
-
-      if (inputScope.skip) {
-        config.Message({ Channel: Channel.Debug, Text: `${nodeName} - SKIPPING` });
-        return inputScope;
       }
       try {
         config.Message({ Channel: Channel.Debug, Text: `${nodeName} - START` });
@@ -469,14 +398,14 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
   for (const name of Object.keys(pipeline.pipeline)) {
     const task = getTask(name);
-    const taskx: { _state: 'running' | 'failed' | 'complete'; _result(): Array<DataHandle>; _finishedAt: number } = task as any;
-    taskx._state = 'running';
+    const taskx: { _state: "running" | "failed" | "complete", _result: () => DataHandle[], _finishedAt: number } = task as any;
+    taskx._state = "running";
     task.then(async x => {
       const res = await Promise.all((await x.Enum()).map(key => x.ReadStrict(key)));
       taskx._result = () => res;
-      taskx._state = 'complete';
+      taskx._state = "complete";
       taskx._finishedAt = Date.now();
-    }).catch(() => taskx._state = 'failed');
+    }).catch(() => taskx._state = "failed");
     barrier.Await(task);
     barrierRobust.Await(task.catch(() => { }));
   }

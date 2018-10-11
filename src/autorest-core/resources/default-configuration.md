@@ -143,8 +143,8 @@ use-extension:
 #### Reflection
 
 ##### Input API versions (azure-rest-api-specs + C# specific)
- 
-``` yaml $(csharp) 
+
+``` yaml $(csharp)
 pipeline:
   swagger-document/reflect-api-versions-cs: # emits a *.cs file containing information about the API versions involved in this call
     input:
@@ -155,23 +155,7 @@ pipeline:
   swagger-document/reflect-api-versions-cs/emitter: # emits the pipeline graph
     input: reflect-api-versions-cs
     scope: scope-reflect-api-versions-cs-emitter
-```
 
-``` yaml $(csharp) 
-pipeline:
-  openapi-document/reflect-api-versions-cs: # emits a *.cs file containing information about the API versions involved in this call
-    input:
-    - identity
-    - individual/identity
-    - csharp/emitter # ensures delay and C# scope
-    scope: reflect-api-versions
-  openapi-document/reflect-api-versions-cs/emitter: # emits the pipeline graph
-    input: reflect-api-versions-cs
-    scope: scope-reflect-api-versions-cs-emitter
-```
-
-
-``` yaml
 scope-reflect-api-versions-cs-emitter:
   input-artifact: source-file-csharp
   output-uri-expr: $key
@@ -307,44 +291,36 @@ perform-load: true # kick off loading
 
 Markdown documentation overrides:
 
-``` yaml 
+``` yaml
 pipeline:
-  swagger-document-override/md-override-loader-swagger:
-    output-artifact: immediate-config
-    scope: perform-load
-```
-
-``` yaml 
-pipeline:
-  openapi-document-override/md-override-loader-openapi:
+  swagger-document-override/md-override-loader:
     output-artifact: immediate-config
     scope: perform-load
 ```
 
 OpenAPI definitions:
-Pipeline for Swagger (openapi2) files.
 
 ``` yaml
 pipeline:
-  swagger-document/loader-swagger:
+  swagger-document/loader:
     # plugin: loader # IMPLICIT: default to last item if split by '/'
     output-artifact: swagger-document
     scope: perform-load
   swagger-document/individual/transform:
-    input: loader-swagger
+    input: loader
     output-artifact: swagger-document
-  swagger-document/individual/schema-validator-swagger:
+  swagger-document/individual/schema-validator:
     input: transform
     output-artifact: swagger-document
   swagger-document/individual/identity:
-    input: schema-validator-swagger
+    input: schema-validator
     output-artifact: swagger-document
   swagger-document/compose:
     input: individual/identity
     output-artifact: swagger-document
   swagger-document/transform-immediate:
     input:
-    - swagger-document-override/md-override-loader-swagger
+    - swagger-document-override/md-override-loader
     - compose
     output-artifact: swagger-document
   swagger-document/transform:
@@ -360,45 +336,11 @@ pipeline:
   openapi-document/openapi-document-converter:
     input: swagger-document/identity
     output-artifact: openapi-document
-```
-
-# Pipeline for OpenAPI 3+
-
-``` yaml
-pipeline:
-  openapi-document/loader-openapi:
-    # plugin: loader # IMPLICIT: default to last item if split by '/'
-    output-artifact: openapi-document
-    scope: perform-load
-  openapi-document/individual/transform:
-    input: loader-openapi
-    output-artifact: openapi-document  
-  openapi-document/individual/schema-validator-openapi:
-    input: transform
-    output-artifact: openapi-document
-  openapi-document/individual/identity:
-    input: schema-validator-openapi
-    output-artifact: openapi-document
-  openapi-document/compose:
-    input: individual/identity
-    output-artifact: openapi-document
-  openapi-document/transform-immediate: 
-    input:
-    - openapi-document-override/md-override-loader-openapi
-    - compose
-    output-artifact: openapi-document
-```
-
-``` yaml
-pipeline:
   openapi-document/transform:
-    input: 
-      - openapi-document-converter
-      - transform-immediate
-    output-artifact: openapi-document    
-
+    input: openapi-document-converter
+    output-artifact: openapi-document
   openapi-document/component-modifiers:
-    input: openapi-document/transform
+    input: transform
     output-artifact: openapi-document
   openapi-document/identity:
     input: component-modifiers
@@ -415,9 +357,6 @@ scope-swagger-document/emitter:
     $config["output-file"] || 
     ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
     $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
-```
-
-``` yaml 
 scope-openapi-document/emitter:
   input-artifact: openapi-document
   is-object: true
@@ -426,9 +365,6 @@ scope-openapi-document/emitter:
     $config["output-file"] || 
     ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
     $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
-``` 
-
-``` yaml
 scope-cm/emitter: # can remove once every generator depends on recent modeler
   input-artifact: code-model-v1
   is-object: true
@@ -444,13 +380,6 @@ scope-cm/emitter: # can remove once every generator depends on recent modeler
 ``` yaml
 directive:
 - from: swagger-document
-  where: $.definitions.*.additionalProperties
-  transform: |
-    return typeof $ === "boolean"
-      ? ($ ? { type: "object" } : undefined)
-      : $
-  reason: polyfill
-- from: openapi-document
   where: $.definitions.*.additionalProperties
   transform: |
     return typeof $ === "boolean"
@@ -473,23 +402,13 @@ directive:
 
 #### Validation
 
-``` yaml 
+``` yaml
 pipeline:
   swagger-document/model-validator:
     input: swagger-document/identity
     scope: model-validator
   swagger-document/semantic-validator:
     input: swagger-document/identity
-    scope: semantic-validator
-```
-
-``` yaml 
-pipeline:
-  openapi-document/model-validator:
-    input: openapi-document/identity
-    scope: model-validator
-  openapi-document/semantic-validator:
-    input: openapi-document/identity
     scope: semantic-validator
 ```
 

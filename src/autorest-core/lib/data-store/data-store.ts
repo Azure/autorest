@@ -3,20 +3,20 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RawSourceMap, SourceMapConsumer, SourceMapGenerator } from "source-map";
 import { ConfigurationView } from '../autorest-core';
-import { OperationCanceledException } from "../exception";
-import { IFileSystem } from "../file-system";
-import { Lazy } from "../lazy";
 import { LineIndices } from "../parsing/text-utility";
 import { CancellationToken } from "../ref/cancellation";
-import { Mapping, Mappings, Position, SmartPosition } from "../ref/source-map";
+import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
 import { EnsureIsFolderUri, ReadUri, ResolveUri, ToRawDataUrl, WriteString } from "../ref/uri";
 import { FastStringify, ParseNode, ParseToAst as parseAst, YAMLNode } from "../ref/yaml";
-import { BlameTree } from "../source-map/blaming";
+import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
 import { Compile, CompilePosition } from "../source-map/source-map";
+import { BlameTree } from "../source-map/blaming";
+import { Lazy } from "../lazy";
+import { IFileSystem } from "../file-system";
+import { OperationCanceledException } from "../exception";
 
-const FALLBACK_DEFAULT_OUTPUT_ARTIFACT = '';
+const FALLBACK_DEFAULT_OUTPUT_ARTIFACT = "";
 
 /********************************************
  * Data model section (not exposed)
@@ -26,9 +26,9 @@ export interface Metadata {
   artifact: string;
   inputSourceMap: Lazy<RawSourceMap>;
   sourceMap: Lazy<RawSourceMap>;
-  sourceMapEachMappingByLine: Lazy<Array<sourceMap.MappingItem>[]>;
+  sourceMapEachMappingByLine: Lazy<sourceMap.MappingItem[][]>;
   yamlAst: Lazy<YAMLNode>;
-  lineIndices: Lazy<Array<number>>;
+  lineIndices: Lazy<number[]>;
 }
 
 export interface Data {
@@ -36,7 +36,8 @@ export interface Data {
   metadata: Metadata;
 }
 
-interface Store { [uri: string]: Data }
+type Store = { [uri: string]: Data };
+
 
 /********************************************
  * Central data controller
@@ -45,8 +46,7 @@ interface Store { [uri: string]: Data }
  ********************************************/
 
 export abstract class DataSource {
-  public skip: boolean | undefined;
-  public abstract Enum(): Promise<Array<string>>;
+  public abstract Enum(): Promise<string[]>;
   public abstract Read(uri: string): Promise<DataHandle | null>;
 
   public async ReadStrict(uri: string): Promise<DataHandle> {
@@ -66,35 +66,31 @@ export abstract class DataSource {
       const metadata = dataHandle.ReadMetadata();
       const targetFileUri = ResolveUri(
         targetDirUri,
-        key.replace(':', '')); // make key (URI) a descriptive relative path
+        key.replace(":", "")); // make key (URI) a descriptive relative path
       await WriteString(targetFileUri, data);
-      await WriteString(targetFileUri + '.map', JSON.stringify(metadata.sourceMap.Value, null, 2));
-      await WriteString(targetFileUri + '.input.map', JSON.stringify(metadata.inputSourceMap.Value, null, 2));
+      await WriteString(targetFileUri + ".map", JSON.stringify(metadata.sourceMap.Value, null, 2));
+      await WriteString(targetFileUri + ".input.map", JSON.stringify(metadata.inputSourceMap.Value, null, 2));
     }
   }
 }
 
 export class QuickDataSource extends DataSource {
-  public constructor(private handles: Array<DataHandle>, skip?: boolean) {
+  public constructor(private handles: DataHandle[]) {
     super();
-    this.skip = skip;
   }
 
-  public async Enum(): Promise<Array<string>> {
-    return this.skip ? new Array<string>() : this.handles.map(x => x.key);
+  public async Enum(): Promise<string[]> {
+    return this.handles.map(x => x.key);
   }
 
   public async Read(key: string): Promise<DataHandle | null> {
-    if (this.skip) {
-      return null;
-    }
     const data = this.handles.filter(x => x.key === key)[0];
     return data || null;
   }
 }
 
 class ReadThroughDataSource extends DataSource {
-  private uris: Array<string> = [];
+  private uris: string[] = [];
   private cache: { [uri: string]: Promise<DataHandle | null> } = {};
 
   constructor(private store: DataStore, private fs: IFileSystem) {
@@ -124,23 +120,23 @@ class ReadThroughDataSource extends DataSource {
             return null;
           }
         }
-        const readHandle = await this.store.WriteData(uri, data, 'input-file');
+        const readHandle = await this.store.WriteData(uri, data, "input-file");
 
         this.uris.push(uri);
         return readHandle;
       })();
     }
 
-    return this.cache[uri];
+    return await this.cache[uri];
   }
 
-  public async Enum(): Promise<Array<string>> {
+  public async Enum(): Promise<string[]> {
     return this.uris;
   }
 }
 
 export class DataStore {
-  public static readonly BaseUri = 'mem://';
+  public static readonly BaseUri = "mem://";
   public readonly BaseUri = DataStore.BaseUri;
   private store: Store = {};
 
@@ -169,8 +165,8 @@ export class DataStore {
       throw new Error(`can only write '${uri}' once`);
     }
     this.store[uri] = {
-      data,
-      metadata
+      data: data,
+      metadata: metadata
     };
 
     return this.Read(uri);
@@ -199,8 +195,8 @@ export class DataStore {
 
       return sourceMap;
     });
-    metadata.sourceMapEachMappingByLine = new Lazy<Array<sourceMap.MappingItem[]>>(() => {
-      const result: Array<sourceMap.MappingItem[]> = [];
+    metadata.sourceMapEachMappingByLine = new Lazy<sourceMap.MappingItem[][]>(() => {
+      const result: sourceMap.MappingItem[][] = [];
 
       const sourceMapConsumer = new SourceMapConsumer(metadata.sourceMap.Value);
 
@@ -220,7 +216,7 @@ export class DataStore {
     });
     metadata.inputSourceMap = new Lazy(() => this.CreateInputSourceMapFor(uri));
     metadata.yamlAst = new Lazy<YAMLNode>(() => parseAst(data));
-    metadata.lineIndices = new Lazy<Array<number>>(() => LineIndices(data));
+    metadata.lineIndices = new Lazy<number[]>(() => LineIndices(data));
     return result;
   }
 
@@ -271,13 +267,13 @@ export class DataStore {
     const data = this.ReadStrictSync(absoluteUri);
 
     // retrieve all target positions
-    const targetPositions: Array<SmartPosition> = [];
+    const targetPositions: SmartPosition[] = [];
     const metadata = data.ReadMetadata();
     const sourceMapConsumer = new SourceMapConsumer(metadata.sourceMap.Value);
     sourceMapConsumer.eachMapping(m => targetPositions.push(<Position>{ column: m.generatedColumn, line: m.generatedLine }));
 
     // collect blame
-    const mappings: Array<Mapping> = [];
+    const mappings: Mapping[] = [];
     for (const targetPosition of targetPositions) {
       const blameTree = this.Blame(absoluteUri, targetPosition);
       const inputPositions = blameTree.BlameLeafs();
@@ -296,6 +292,7 @@ export class DataStore {
   }
 }
 
+
 /********************************************
  * Data handles
  * - provide well-defined access to specific data
@@ -309,18 +306,18 @@ export class DataSink {
   }
 
   public async WriteDataWithSourceMap(description: string, data: string, artifact: string | undefined, sourceMapFactory: (readHandle: DataHandle) => RawSourceMap): Promise<DataHandle> {
-    return this.write(description, data, artifact, sourceMapFactory);
+    return await this.write(description, data, artifact, sourceMapFactory);
   }
 
-  public async WriteData(description: string, data: string, artifact?: string, mappings: Mappings = [], mappingSources: Array<DataHandle> = []): Promise<DataHandle> {
-    return this.WriteDataWithSourceMap(description, data, artifact, readHandle => {
+  public async WriteData(description: string, data: string, artifact?: string, mappings: Mappings = [], mappingSources: DataHandle[] = []): Promise<DataHandle> {
+    return await this.WriteDataWithSourceMap(description, data, artifact, readHandle => {
       const sourceMapGenerator = new SourceMapGenerator({ file: readHandle.key });
       Compile(mappings, sourceMapGenerator, mappingSources.concat(readHandle));
       return sourceMapGenerator.toJSON();
     });
   }
 
-  public WriteObject<T>(description: string, obj: T, artifact?: string, mappings: Mappings = [], mappingSources: Array<DataHandle> = []): Promise<DataHandle> {
+  public WriteObject<T>(description: string, obj: T, artifact?: string, mappings: Mappings = [], mappingSources: DataHandle[] = []): Promise<DataHandle> {
     return this.WriteData(description, FastStringify(obj), artifact, mappings, mappingSources);
   }
 
@@ -366,7 +363,7 @@ export class DataHandle {
     }
   }
 
-  public Blame(position: sourceMap.Position): Array<sourceMap.MappedPosition> {
+  public Blame(position: sourceMap.Position): sourceMap.MappedPosition[] {
     const metadata = this.ReadMetadata();
     const sameLineResults = (metadata.sourceMapEachMappingByLine.Value[position.line] || [])
       .filter(mapping => mapping.generatedColumn <= position.column);

@@ -4,7 +4,7 @@ import * as assert from "assert";
 import { AutoRest } from "../lib/autorest-core";
 import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 import { CreateConfiguration } from "../legacyCli";
-import { DataStore, DataHandle } from "../lib/data-store/data-store"
+import { DataStore } from "../lib/data-store/data-store"
 import { RealFileSystem } from "../lib/file-system";
 import { Channel, Message } from "../lib/message";
 
@@ -14,7 +14,7 @@ import { Channel, Message } from "../lib/message";
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
-    const swaggerFile = <DataHandle>await LoadLiterateSwagger(
+    const swaggerFile = await LoadLiterateSwagger(
       config,
       dataStore.GetReadThroughScope(new RealFileSystem()),
       "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/087554c4480e144f715fe92f97621ff5603cd907/specification/network/resource-manager/Microsoft.Network/2016-12-01/applicationGateway.json",

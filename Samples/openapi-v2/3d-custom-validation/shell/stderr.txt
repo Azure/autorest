@@ -1,2 +1,0 @@
-    - trans_input?mem:1:0
-ERROR: we want some cowbell - found none

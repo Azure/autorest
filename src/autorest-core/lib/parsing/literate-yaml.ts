@@ -14,8 +14,8 @@ import { Channel, SourceLocation } from "../message";
 import { safeEval } from "../ref/safe-eval";
 
 export class CodeBlock {
-  info!: string | null;
-  data!: DataHandle;
+  info: string | null;
+  data: DataHandle;
 }
 
 function TryMarkdown(rawMarkdownOrYaml: string): boolean {

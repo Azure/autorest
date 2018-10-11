@@ -18,6 +18,6 @@ export function CreatePerFilePlugin(processorBuilder: (config: ConfigurationView
       const fileOut = await processor(fileIn, sink);
       result.push(fileOut);
     }
-    return new QuickDataSource(result, input.skip);
+    return new QuickDataSource(result);
   };
 }
