@@ -25,7 +25,7 @@ import { Manipulator } from './manipulation';
 import { GetPlugin_ReflectApiVersion } from './metadata-generation';
 import { AutoRestExtension } from './plugin-endpoint';
 import { GetPlugin_SchemaValidatorOpenApi, GetPlugin_SchemaValidatorSwagger } from './schema-validation';
-import { ComposeSwaggers, LoadLiterateOpenApi, LoadLiterateOpenApiOverrides, LoadLiterateOpenApis, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
+import { ComposeSwaggers, LoadLiterateOpenAPIOverrides, LoadLiterateOpenAPIs, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
 
 interface PipelineNode {
   outputArtifact?: string;
@@ -56,10 +56,10 @@ function GetPlugin_LoaderSwagger(): PipelinePlugin {
   };
 }
 
-function GetPlugin_LoaderOpenApi(): PipelinePlugin {
+function GetPlugin_LoaderOpenAPI(): PipelinePlugin {
   return async (config, input, sink) => {
     const inputs = config.InputFileUris;
-    const openapis = await LoadLiterateOpenApis(
+    const openapis = await LoadLiterateOpenAPIs(
       config,
       input,
       inputs, sink);
@@ -88,10 +88,10 @@ function GetPlugin_MdOverrideLoaderSwagger(): PipelinePlugin {
   };
 }
 
-function GetPlugin_MdOverrideLoaderOpenApi(): PipelinePlugin {
+function GetPlugin_MdOverrideLoaderOpenAPI(): PipelinePlugin {
   return async (config, input, sink) => {
     const inputs = config.InputFileUris;
-    const openapis = await LoadLiterateOpenApiOverrides(
+    const openapis = await LoadLiterateOpenAPIOverrides(
       config,
       input,
       inputs, sink);
@@ -342,9 +342,9 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     'help': GetPlugin_Help(),
     'identity': GetPlugin_Identity(),
     'loader-swagger': GetPlugin_LoaderSwagger(),
-    'loader-openapi': GetPlugin_LoaderOpenApi(),
+    'loader-openapi': GetPlugin_LoaderOpenAPI(),
     'md-override-loader-swagger': GetPlugin_MdOverrideLoaderSwagger(),
-    'md-override-loader-openapi': GetPlugin_MdOverrideLoaderOpenApi(),
+    'md-override-loader-openapi': GetPlugin_MdOverrideLoaderOpenAPI(),
     'transform': GetPlugin_Transformer(),
     'transform-immediate': GetPlugin_TransformerImmediate(),
     'compose': GetPlugin_Composer(),
