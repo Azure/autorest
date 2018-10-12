@@ -351,69 +351,33 @@ export async function LoadLiterateOpenApiOverride(config: ConfigurationView, inp
 
 export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle | null> {
   const handle = await inputScope.ReadStrict(inputFileUri);
-  // strict JSON check
-  if (inputFileUri.toLowerCase().endsWith('.json')) {
-    const error = StrictJsonSyntaxCheck(handle.ReadData());
-    if (error) {
-      config.Message({
-        Channel: Channel.Error,
-        Text: 'Syntax Error Encountered: ' + error.message,
-        Source: [<SourceLocation>{ Position: IndexToPosition(handle, error.index), document: handle.key }],
-      });
-    }
-  }
+  checkSyntaxFromData(inputFileUri, handle, config);
   const data = await ParseLiterateYaml(config, handle, sink);
   // check OpenAPI version
   if (data.ReadObject<any>().swagger !== '2.0') {
     return null;
-    //throw new Error(`File '${inputFileUri}' is not a valid OpenAPI 2.0 definition (expected 'swagger: 2.0')`);
+    // TODO: Should we throw or send an error message?
   }
-  const externalFiles: { [uri: string]: DataHandle } = {};
-  externalFiles[inputFileUri] = data;
-  await EnsureCompleteDefinitionIsPresent(config,
-    inputScope,
-    sink,
-    [],
-    externalFiles,
-    inputFileUri,
-    data.ReadObject<any>(),
-    IdentitySourceMapping(data.key, data.ReadYamlAst()));
-  const result = await StripExternalReferences(externalFiles[inputFileUri], sink);
-  return result;
+
+  const ast = CloneAst(data.ReadYamlAst());
+  const mapping = IdentitySourceMapping(data.key, ast);
+
+  return sink.WriteData('result.yaml', StringifyAst(ast), undefined, mapping, [data]);
 }
 
-export async function LoadLiterateOpenApi(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle | null> {
+export async function LoadLiterateOpenAPI(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle | null> {
   const handle = await inputScope.ReadStrict(inputFileUri);
-  // strict JSON check
-  if (inputFileUri.toLowerCase().endsWith('.json')) {
-    const error = StrictJsonSyntaxCheck(handle.ReadData());
-    if (error) {
-      config.Message({
-        Channel: Channel.Error,
-        Text: `Syntax Error Encountered:  ${error.message}`,
-        Source: [<SourceLocation>{ Position: IndexToPosition(handle, error.index), document: handle.key }],
-      });
-    }
-  }
+  checkSyntaxFromData(inputFileUri, handle, config);
   const data = await ParseLiterateYaml(config, handle, sink);
-  const openapifound = /^3.\d.\d$/g.exec(data.ReadObject<any>().openapi);
-  if (!openapifound) {
-    // throw new Error(`File '${inputFileUri}' is not a valid OpenAPI 3.X.X definition (expected 'openapi: 3.X.X')`);
+  if (!isOpenAPI3Spec(data.ReadObject<OpenAPI3Spec>())) {
     return null;
+    // TODO: Should we throw or send an error message?
   }
 
-  const externalFiles: { [uri: string]: DataHandle } = {};
-  externalFiles[inputFileUri] = data;
-  await EnsureCompleteDefinitionIsPresent(config,
-    inputScope,
-    sink,
-    [],
-    externalFiles,
-    inputFileUri,
-    data.ReadObject<any>(),
-    IdentitySourceMapping(data.key, data.ReadYamlAst()));
-  const result = await StripExternalReferences(externalFiles[inputFileUri], sink);
-  return result;
+  const ast = CloneAst(data.ReadYamlAst());
+  const mapping = IdentitySourceMapping(data.key, ast);
+
+  return sink.WriteData('result.yaml', StringifyAst(ast), undefined, mapping, [data]);
 }
 
 export async function LoadLiterateSwaggers(config: ConfigurationView, inputScope: DataSource, inputFileUris: Array<string>, sink: DataSink): Promise<Array<DataHandle>> {
@@ -428,11 +392,11 @@ export async function LoadLiterateSwaggers(config: ConfigurationView, inputScope
   return rawSwaggers;
 }
 
-export async function LoadLiterateOpenApis(config: ConfigurationView, inputScope: DataSource, inputFileUris: Array<string>, sink: DataSink): Promise<Array<DataHandle>> {
+export async function LoadLiterateOpenAPIs(config: ConfigurationView, inputScope: DataSource, inputFileUris: Array<string>, sink: DataSink): Promise<Array<DataHandle>> {
   const rawOpenApis: Array<DataHandle> = [];
   for (const inputFileUri of inputFileUris) {
     // read literate Swagger
-    const pluginInput = await LoadLiterateOpenApi(config, inputScope, inputFileUri, sink);
+    const pluginInput = await LoadLiterateOpenAPI(config, inputScope, inputFileUri, sink);
     if (pluginInput) {
       rawOpenApis.push(pluginInput);
     }
@@ -593,4 +557,37 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
   hSwagger = await MergeYamls(config, [hSwagger, hInfo], sink);
 
   return hSwagger;
+}
+
+/**
+ * If a JSON file is provided, it checks that the syntax is correct.
+ * And if the syntax is incorrect, it puts an error message .
+ */
+function checkSyntaxFromData(fileUri: string, handle: DataHandle, configView: ConfigurationView): void {
+  if (fileUri.toLowerCase().endsWith('.json')) {
+    const error = StrictJsonSyntaxCheck(handle.ReadData());
+    if (error) {
+      configView.Message({
+        Channel: Channel.Error,
+        Text: `Syntax Error Encountered:  ${error.message}`,
+        Source: [<SourceLocation>{ Position: IndexToPosition(handle, error.index), document: handle.key }],
+      });
+    }
+  }
+}
+
+/**
+ * Checks that the object has the property 'openapi' and that property has
+ * the string value matching something like "3.x.x".
+ */
+function isOpenAPI3Spec(specObject: OpenAPI3Spec): boolean {
+  const wasOpenApiVersionFound = /^3.\d.\d$/g.exec(<string>specObject.openapi);
+  return (wasOpenApiVersionFound) ? true : false;
+}
+
+interface OpenAPI3Spec {
+  openapi?: string;
+  info?: object;
+  paths?: object;
+  components?: { schemas?: object };
 }
