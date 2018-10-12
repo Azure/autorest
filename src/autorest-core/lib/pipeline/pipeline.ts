@@ -45,7 +45,9 @@ function GetPlugin_LoaderSwagger(): PipelinePlugin {
     const swaggers = await LoadLiterateSwaggers(
       config,
       input,
-      inputs, sink);
+      inputs,
+      sink
+    );
     const result: Array<DataHandle> = [];
     if (swaggers.length === inputs.length) {
       for (let i = 0; i < inputs.length; ++i) {
@@ -62,7 +64,9 @@ function GetPlugin_LoaderOpenAPI(): PipelinePlugin {
     const openapis = await LoadLiterateOpenAPIs(
       config,
       input,
-      inputs, sink);
+      inputs,
+      sink
+    );
     const result: Array<DataHandle> = [];
     if (openapis.length === inputs.length) {
       for (let i = 0; i < inputs.length; ++i) {

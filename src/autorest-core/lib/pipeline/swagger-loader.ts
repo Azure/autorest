@@ -399,10 +399,10 @@ function checkSyntaxFromData(fileUri: string, handle: DataHandle, configView: Co
 
 /**
  * Checks that the object has the property 'openapi' and that property has
- * the string value matching something like "3.x.x".
+ * the string value matching something like "3.*.*".
  */
 function isOpenAPI3Spec(specObject: OpenAPI3Spec): boolean {
-  const wasOpenApiVersionFound = /^3.\d.\d$/g.exec(<string>specObject.openapi);
+  const wasOpenApiVersionFound = /^3\.\d+\.\d+$/g.exec(<string>specObject.openapi);
   return (wasOpenApiVersionFound) ? true : false;
 }
 
