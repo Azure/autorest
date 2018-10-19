@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
+  "rushVersion": "5.3.1",
+  "pnpmVersion": "2.15.1",
+  "pnpmOptions": {},
+  "nodeSupportedVersionRange": ">=8.9.4 <11.0.0",
+  "ensureConsistentVersions": true,
+  "projectFolderMinDepth": 2,
+  "projectFolderMaxDepth": 3,
+  "repository": {},
+  "eventHooks": {
+    "preRushInstall": [],
+    "postRushInstall": [],
+    "preRushBuild": [],
+    "postRushBuild": []
+  },
+  "telemetryEnabled": false,
+  "projects": [
+    {
+      "packageName": "@microsoft.azure/tasks",
+      "projectFolder": "perks/libraries/tasks",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@microsoft.azure/async-io",
+      "projectFolder": "perks/libraries/async-io",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@microsoft.azure/eventing",
+      "projectFolder": "perks/libraries/eventing",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@microsoft.azure/extension",
+      "projectFolder": "perks/libraries/extension",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@microsoft.azure/datastore",
+      "projectFolder": "perks/libraries/datastore",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@microsoft.azure/linq",
+      "projectFolder": "perks/libraries/linq",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@microsoft.azure/openapi",
+      "projectFolder": "perks/libraries/openapi",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@microsoft.azure/uri",
+      "projectFolder": "perks/libraries/uri",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@microsoft.azure/oai2-to-oai3",
+      "projectFolder": "perks/libraries/oai2-to-oai3",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    }
+  ]
+}
