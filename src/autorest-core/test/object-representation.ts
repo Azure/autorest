@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ParseNode, ParseToAst, Stringify, StringifyAst, ToAst } from '../lib/ref/yaml';
-import { ConvertJsonx2Yaml, ConvertYaml2Jsonx } from '../lib/parsing/yaml';
+import { ParseNode, ParseToAst, Stringify, StringifyAst, ToAst } from '@microsoft.azure/datastore';
+import { ConvertJsonx2Yaml, ConvertYaml2Jsonx } from '@microsoft.azure/datastore';
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from 'assert';
 

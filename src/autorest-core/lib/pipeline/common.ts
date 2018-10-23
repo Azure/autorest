@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ConfigurationView } from "../configuration";
-import { DataHandle, DataSink, QuickDataSource, DataSource } from "../data-store/data-store";
+import { DataHandle, DataSink, QuickDataSource, DataSource } from "@microsoft.azure/datastore";
 
 export type PipelinePlugin = (config: ConfigurationView, input: DataSource, sink: DataSink) => Promise<DataSource>;
 

@@ -6,10 +6,8 @@ import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from 'assert';
 
 import { PumpMessagesToConsole } from './test-utility';
-import { matches } from "../lib/ref/jsonpath";
-import { MergeOverwriteOrAppend } from "../lib/source-map/merging";
 import { AutoRest } from "../main";
-import { RealFileSystem } from "../lib/file-system";
+import { RealFileSystem } from "@microsoft.azure/datastore";
 import { join } from "path";
 
 @suite class Modifiers {

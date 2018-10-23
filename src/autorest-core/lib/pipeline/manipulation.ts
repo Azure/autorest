@@ -3,13 +3,13 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { nodes } from "../ref/jsonpath";
-import { safeEval } from "../ref/safe-eval";
+import { nodes } from "@microsoft.azure/datastore";
+import { safeEval } from "@microsoft.azure/datastore";
 import { ManipulateObject } from "./object-manipulator";
-import { DataHandle, DataSink } from '../data-store/data-store';
+import { DataHandle, DataSink } from '@microsoft.azure/datastore';
 import { DirectiveView } from "../configuration";
 import { ConfigurationView } from "../autorest-core";
-import { From } from "../ref/linq";
+import { From } from "linq-es2015";
 import { Channel, Message, SourceLocation } from "../message";
 
 export class Manipulator {

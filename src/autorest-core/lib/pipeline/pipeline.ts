@@ -5,17 +5,17 @@
 
 import { Help } from '../../help';
 import { ConfigurationView, GetExtension } from '../configuration';
-import { DataHandle, DataSink, DataSource, QuickDataSource } from '../data-store/data-store';
-import { IFileSystem } from '../file-system';
-import { LazyPromise } from '../lazy';
+import { DataHandle, DataSink, DataSource, QuickDataSource } from '@microsoft.azure/datastore';
+import { IFileSystem } from '@microsoft.azure/datastore';
+
 import { Channel, Message } from '../message';
 import { ConvertOAI2toOAI3 } from '../openapi/conversion';
 import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
-import { ConvertJsonx2Yaml, ConvertYaml2Jsonx } from '../parsing/yaml';
-import { JsonPath, stringify } from '../ref/jsonpath';
-import { safeEval } from '../ref/safe-eval';
-import { ResolveUri } from '../ref/uri';
-import { Descendants, FastStringify, StringifyAst } from '../ref/yaml';
+import { ConvertJsonx2Yaml, ConvertYaml2Jsonx } from '@microsoft.azure/datastore';
+import { JsonPath, stringify } from '@microsoft.azure/datastore';
+import { safeEval } from '@microsoft.azure/datastore';
+import { ResolveUri } from '@microsoft.azure/uri';
+import { Descendants, FastStringify, StringifyAst } from '@microsoft.azure/datastore';
 import { EmitArtifacts } from './artifact-emitter';
 import { CreatePerFilePlugin, PipelinePlugin } from './common';
 import { ProcessCodeModel } from './commonmark-documentation';
@@ -183,6 +183,7 @@ function GetPlugin_External(host: AutoRestExtension, pluginName: string): Pipeli
       sink,
       f => results.push(f),
       (message: Message) => {
+        console.error(message.Text);
         if (message.Channel === Channel.Control) {
           if (message.Details && message.Details.skip !== undefined) {
             shouldSkip = message.Details.skip;

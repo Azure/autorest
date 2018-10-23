@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { nodes } from "../lib/ref/jsonpath";
-import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
-import { RealFileSystem } from "../lib/file-system";
+import { nodes } from "@microsoft.azure/datastore";
+import { CreateFolderUri, ResolveUri } from "@microsoft.azure/uri";
+import { RealFileSystem } from "@microsoft.azure/datastore";
 import { AutoRest } from "../lib/autorest-core";
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";

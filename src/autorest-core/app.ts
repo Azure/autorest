@@ -1,7 +1,11 @@
 // #!/usr/bin/env node
 // load modules from static linker filesystem.
-if (process.argv.indexOf('--no-static-loader') === -1 && process.env['no-static-loader'] === undefined) {
-  require('./static-loader.js').load(`${__dirname}/static_modules.fs`);
+try {
+  if (process.argv.indexOf('--no-static-loader') === -1 && process.env['no-static-loader'] === undefined) {
+    require('./static-loader.js').load(`${__dirname}/static_modules.fs`);
+  }
+} catch (e) {
+
 }
 
 /*---------------------------------------------------------------------------------------------
@@ -47,14 +51,15 @@ import { CreateConfiguration, isLegacy } from "./legacyCli";
 import { Artifact } from './lib/artifact';
 import { AutoRest, ConfigurationView, IsOpenApiDocument, Shutdown } from './lib/autorest-core';
 import { AutoRestConfigurationImpl, MergeConfigurations } from './lib/configuration';
-import { DataStore } from "./lib/data-store/data-store";
+// import { DataStore } from "./lib/data-store/data-store";
+import { DataStore } from "@microsoft.azure/datastore";
 import { Exception, OperationCanceledException } from "./lib/exception";
-import { EnhancedFileSystem, RealFileSystem } from './lib/file-system';
+import { EnhancedFileSystem, RealFileSystem } from '@microsoft.azure/datastore';
 import { Channel, Message } from "./lib/message";
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
-import { CreateObject, nodes } from "./lib/ref/jsonpath";
-import { ClearFolder, CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString } from "./lib/ref/uri";
-import { Parse, Stringify } from "./lib/ref/yaml";
+import { CreateObject, nodes } from "@microsoft.azure/datastore";
+import { ClearFolder, CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString } from "@microsoft.azure/uri";
+import { Parse, Stringify } from "@microsoft.azure/datastore";
 import { ShallowCopy } from "./lib/source-map/merging";
 
 let verbose = false;

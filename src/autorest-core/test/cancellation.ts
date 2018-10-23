@@ -4,9 +4,8 @@ import { Delay } from '../lib/sleep';
 
 import { AutoRest } from '../lib/autorest-core';
 import { Configuration } from '../lib/configuration';
-import { RealFileSystem } from '../lib/file-system';
-import { Message } from '../lib/message';
-import { CreateFolderUri, ResolveUri } from '../lib/ref/uri';
+import { RealFileSystem } from '@microsoft.azure/datastore';
+
 
 /*@suite */ class Cancellation {
   private async CreateLongRunningAutoRest(): Promise<AutoRest> {

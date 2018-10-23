@@ -4,12 +4,12 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Artifact } from '../../main';
-import { Lazy } from "../lazy";
-import { Stringify, YAMLNode, Normalize } from "../ref/yaml";
+import { Lazy } from "@microsoft.azure/datastore"
+import { Stringify, YAMLNode, Normalize } from "@microsoft.azure/datastore";
 import { IdentitySourceMapping } from "../source-map/merging";
 import { Channel } from "../message";
 import { ConfigurationView } from "../configuration";
-import { DataHandle, DataSource } from "../data-store/data-store";
+import { DataHandle, DataSource } from "@microsoft.azure/datastore";
 
 function IsOutputArtifactOrMapRequested(config: ConfigurationView, artifactType: string) {
   return config.IsOutputArtifactRequested(artifactType) || config.IsOutputArtifactRequested(artifactType + ".map");

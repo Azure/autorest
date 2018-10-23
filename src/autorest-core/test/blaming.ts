@@ -1,15 +1,15 @@
 
-import { EnhancedPosition } from '../lib/ref/source-map';
+import { EnhancedPosition } from '@microsoft.azure/datastore';
 import { PumpMessagesToConsole } from "./test-utility";
 import { Artifact } from "../lib/artifact";
 import { Channel, Message, SourceLocation } from '../lib/message';
 import { AutoRest } from "../lib/autorest-core";
-import { RealFileSystem } from "../lib/file-system";
+import { RealFileSystem } from "@microsoft.azure/datastore";
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
-import { parse } from "../lib/ref/jsonpath";
+import { CreateFolderUri, ResolveUri } from "@microsoft.azure/uri";
+import { parse } from "@microsoft.azure/datastore";
 import { Configuration } from "../lib/configuration";
 
 @suite class Blaming {

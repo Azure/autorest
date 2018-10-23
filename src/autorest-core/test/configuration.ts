@@ -1,6 +1,6 @@
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
-import { IFileSystem, MemoryFileSystem } from "../lib/file-system"
+import { IFileSystem, MemoryFileSystem } from "@microsoft.azure/datastore"
 import * as AutoRest from "../lib/autorest-core"
 
 @suite class TestConfiguration {
@@ -94,27 +94,27 @@ csharp:
 > see https://aka.ms/autorest
 
 ~~~ yaml $(foo)
-value: 
+value:
  - foo
 ~~~
 
 ~~~ yaml $(foo) && $(bar)
-value: 
+value:
   - foo_and_bar
 ~~~
 
 ~~~ yaml $(foo) && $(bar) === undefined
-value: 
+value:
  - foo_and_not_bar
 ~~~
 
 ~~~ yaml $(bar)
-value: 
+value:
  - bar
 ~~~
 
-~~~ yaml !$(bar) 
-value: 
+~~~ yaml !$(bar)
+value:
  - not_bar
 ~~~
 

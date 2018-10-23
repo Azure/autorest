@@ -4,12 +4,13 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { IdentitySourceMapping } from "../source-map/merging";
-import { Clone, CloneAst, Descendants, ParseNode, StringifyAst, ToAst, YAMLNode } from "../ref/yaml";
-import { ReplaceNode, ResolveRelativeNode } from "../parsing/yaml";
-import { DataHandle, DataSink } from "../data-store/data-store";
-import { IsPrefix, JsonPath, nodes, paths, stringify } from "../ref/jsonpath";
-import { Mapping, SmartPosition } from "../ref/source-map";
-import { From } from "../ref/linq";
+import { Clone, CloneAst, Descendants, ParseNode, StringifyAst, ToAst, YAMLNode } from "@microsoft.azure/datastore";
+import { ReplaceNode, ResolveRelativeNode } from "@microsoft.azure/datastore";
+import { DataHandle, DataSink } from '@microsoft.azure/datastore';
+import { IsPrefix, JsonPath, nodes, paths, stringify } from "@microsoft.azure/datastore";
+import { SmartPosition } from "@microsoft.azure/datastore";
+import { Mapping } from "@microsoft.azure/datastore";
+import { From } from "linq-es2015";
 
 export async function ManipulateObject(
   src: DataHandle,

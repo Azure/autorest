@@ -4,11 +4,16 @@
  *--------------------------------------------------------------------------------------------*/
 
 // load modules from static linker filesystem.
-if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-loader"] === undefined) {
+try {
+  if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-loader"] === undefined) {
     require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
+  }
+} catch (e) {
+
 }
 
-export { IFileSystem } from "./lib/file-system"
+
+export { IFileSystem } from "@microsoft.azure/datastore"
 export { Message, Channel } from "./lib/message"
 export { Artifact } from "./lib/artifact"
 export { AutoRest, ConfigurationView, IdentifyDocument, IsConfigurationExtension, IsConfigurationDocument, IsOpenApiExtension, LiterateToJson, IsOpenApiDocument } from "./lib/autorest-core"

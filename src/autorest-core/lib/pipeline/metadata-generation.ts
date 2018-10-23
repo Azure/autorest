@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { QuickDataSource } from '../data-store/data-store';
+import { QuickDataSource } from '@microsoft.azure/datastore';
 import { PipelinePlugin } from './common';
 
 export function GetPlugin_ReflectApiVersion(): PipelinePlugin {

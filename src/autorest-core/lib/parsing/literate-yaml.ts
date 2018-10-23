@@ -4,14 +4,14 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { OperationAbortedException } from "../exception";
-import { ParseNode, StrictJsonSyntaxCheck } from "../ref/yaml";
+import { ParseNode, StrictJsonSyntaxCheck } from "@microsoft.azure/datastore";
 import { MergeYamls, resolveRValue } from "../source-map/merging";
-import { DataHandle, DataSink } from "../data-store/data-store";
+import { DataHandle, DataSink } from "@microsoft.azure/datastore";
 import { Parse as ParseLiterate } from "./literate";
-import { IndexToPosition } from "./text-utility";
+import { IndexToPosition } from "@microsoft.azure/datastore";
 import { ConfigurationView } from "../autorest-core";
 import { Channel, SourceLocation } from "../message";
-import { safeEval } from "../ref/safe-eval";
+import { safeEval } from "@microsoft.azure/datastore";
 
 export class CodeBlock {
   info!: string | null;

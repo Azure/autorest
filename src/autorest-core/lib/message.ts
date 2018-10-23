@@ -3,7 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { EnhancedPosition, Position, Mappings, RawSourceMap } from "./ref/source-map";
+import { Position, RawSourceMap } from "source-map";
+import { EnhancedPosition, Mapping } from "@microsoft.azure/datastore";
 import { Artifact } from "./artifact";
 
 
@@ -66,5 +67,5 @@ export interface Message {
 };
 
 export interface ArtifactMessage extends Message {
-  Details: Artifact & { sourceMap?: Mappings | RawSourceMap };
+  Details: Artifact & { sourceMap?: Array<Mapping> | RawSourceMap };
 }

@@ -3,8 +3,8 @@ import * as assert from "assert";
 
 import { AutoRest } from "../lib/autorest-core";
 import { LoadLiterateSwaggers } from "../lib/pipeline/swagger-loader";
-import { RealFileSystem } from "../lib/file-system";
-import { CreateFolderUri, ResolveUri } from '../lib/ref/uri';
+import { RealFileSystem } from "@microsoft.azure/datastore";
+import { CreateFolderUri, ResolveUri } from '@microsoft.azure/uri';
 
 @suite class SwaggerLoading {
 

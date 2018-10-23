@@ -5,17 +5,17 @@
 
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
-
-import { DataStore } from "../lib/data-store/data-store";
+import { CancellationToken } from "vscode-jsonrpc";
+import { DataStore } from "@microsoft.azure/datastore";
 import { Message, Channel } from "../lib/message";
 import { AutoRest } from "../lib/autorest-core";
-import { MemoryFileSystem } from "../lib/file-system";
+
 import { Parse } from "../lib/parsing/literate-yaml";
 import { Configuration } from "../lib/configuration";
 
 @suite class SyntaxValidation {
   private async GetLoaderErrors(swagger: string): Promise<Message[]> {
-    const dataStore = new DataStore();
+    const dataStore = new DataStore(CancellationToken.None);
     const uri = "mem:///swagger.json";
     const h = await dataStore.WriteData(uri, swagger, "input-file");
 

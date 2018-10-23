@@ -3,7 +3,7 @@
 //  Licensed under the MIT License. See License.txt in the project root for license information.
 // ---------------------------------------------------------------------------------------------
 
-import { parseJsonPointer } from '../lib/ref/jsonpath';
+import { parseJsonPointer } from '@microsoft.azure/datastore';
 import { JsonPath, SourceMap } from './source-map';
 import { Location, Position } from 'vscode-languageserver';
 import { value, stringify, parse, nodes, paths, } from "jsonpath";

@@ -4,8 +4,8 @@ import { isAbsolute } from 'path';
 *  Licensed under the MIT License. See License.txt in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import { ResolveUri, GetFilenameWithoutExtension } from "./lib/ref/uri";
-import { DataSource } from "./lib/data-store/data-store";
+import { ResolveUri, GetFilenameWithoutExtension } from "@microsoft.azure/uri";
+import { DataSource } from "@microsoft.azure/datastore";
 import { AutoRestConfigurationImpl } from "./lib/configuration";
 
 const regexLegacyArg = /^-[^-]/;

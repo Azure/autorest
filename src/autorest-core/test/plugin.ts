@@ -10,13 +10,13 @@ import { Extension, ExtensionManager } from "@microsoft.azure/extension";
 import { homedir } from "os";
 import { join } from "path";
 import { AutoRest } from "../lib/autorest-core";
-import { DataHandle, DataStore, QuickDataSource } from '../lib/data-store/data-store';
-import { RealFileSystem } from "../lib/file-system";
+import { DataHandle, DataStore, QuickDataSource } from '@microsoft.azure/datastore';
+import { RealFileSystem } from "@microsoft.azure/datastore";
 import { Channel, Message } from "../lib/message";
 import { AutoRestExtension } from "../lib/pipeline/plugin-endpoint";
 import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 import { CancellationToken } from "../lib/ref/cancellation";
-import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
+import { CreateFolderUri, ResolveUri } from "@microsoft.azure/uri";
 
 async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtension> {
   const extMgr = await ExtensionManager.Create(join(homedir(), '.autorest'));

@@ -5,30 +5,30 @@
 
 import { Extension, ExtensionManager, LocalExtension } from "@microsoft.azure/extension";
 import { ChildProcess } from "child_process";
-import { ParseToAst, Stringify } from './ref/yaml';
+import { ParseToAst, Stringify } from '@microsoft.azure/datastore';
 
 import { basename, dirname, join } from "path";
 import { Artifact } from './artifact';
 import * as Constants from './constants';
-import { DataHandle, DataStore } from './data-store/data-store';
+import { DataHandle, DataStore } from '@microsoft.azure/datastore';
 import { EventEmitter, IEvent } from './events';
 import { OperationAbortedException } from './exception';
-import { IFileSystem, RealFileSystem } from './file-system';
-import { LazyPromise } from './lazy';
+import { IFileSystem, RealFileSystem } from '@microsoft.azure/datastore';
+import { LazyPromise } from '@microsoft.azure/datastore';
 import { Channel, Message, Range, SourceLocation } from './message';
-import { OutstandingTaskAwaiter } from "./outstanding-task-awaiter"
 import { EvaluateGuard, ParseCodeBlocks } from './parsing/literate-yaml';
 import { AutoRestExtension } from './pipeline/plugin-endpoint';
 import { Suppressor } from './pipeline/suppression';
 import { exists } from './ref/async';
 import { CancellationToken, CancellationTokenSource } from './ref/cancellation';
-import { stringify } from './ref/jsonpath';
-import { From } from './ref/linq';
-import { safeEval } from './ref/safe-eval';
-import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri } from './ref/uri';
-import { BlameTree } from './source-map/blaming';
+import { stringify } from '@microsoft.azure/datastore';
+import { From } from "linq-es2015";
+import { safeEval } from '@microsoft.azure/datastore';
+import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri } from '@microsoft.azure/uri';
+import { BlameTree } from '@microsoft.azure/datastore';
 import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
-import { TryDecodeEnhancedPositionFromName } from './source-map/source-map';
+import { TryDecodeEnhancedPositionFromName } from '@microsoft.azure/datastore';
+import { debug } from "util";
 
 const untildify: (path: string) => string = require('untildify');
 
@@ -173,6 +173,9 @@ export class MessageEmitter extends EventEmitter {
 function ProxifyConfigurationView(cfgView: any) {
   return new Proxy(cfgView, {
     get: (target, property) => {
+      if (property === 'constructor') {
+        // debugger;
+      }
       const value = (target)[property];
       if (value && value instanceof Array) {
         const result = new Array<any>();
@@ -279,6 +282,9 @@ export class ConfigurationView {
 
     return new Proxy<ConfigurationView>(this, {
       get: (target, property) => {
+        if (property === 'constructor') {
+          // debugger;
+        }
         return property in target.config ? (<any>target.config)[property] : this[<number | string>property];
       }
     });
@@ -311,6 +317,9 @@ export class ConfigurationView {
     const useExtensions = this.Indexer['use-extension'] || {};
     return Object.keys(useExtensions).map(name => {
       const source = useExtensions[name];
+      if (name === 'constructor') {
+        // debugger;
+      }
       return {
         name,
         source,
@@ -487,9 +496,11 @@ export class ConfigurationView {
         // console.log("---");
         // console.log(JSON.stringify(m.Source, null, 2));
 
-        m.Source = From(blameSources).SelectMany(x => x).ToArray();
+        const src = From(blameSources).SelectMany(x => x).ToArray();
+        m.Source = src;
+        //m.Source = From(blameSources).SelectMany(x => x).ToArray();
         // get friendly names
-        for (const source of m.Source) {
+        for (const source of src) {
           if (source.Position) {
             try {
               source.document = this.DataStore.ReadStrictSync(source.document).Description;
@@ -682,7 +693,9 @@ export class Configuration {
 
     const configurationFiles: { [key: string]: any; } = {};
     const configSegments: Array<any> = [];
-    const createView = (segments: Array<any> = configSegments) => new ConfigurationView(configurationFiles, this.fileSystem, messageEmitter, configFileFolderUri, ...segments);
+    const createView = (segments: Array<any> = configSegments) => {
+      return new ConfigurationView(configurationFiles, this.fileSystem, messageEmitter, configFileFolderUri, ...segments)
+    };
     const addSegments = async (configs: Array<any>): Promise<Array<any>> => { const segs = await this.DesugarRawConfigs(configs); configSegments.push(...segs); return segs; };
 
     // 1. overrides (CLI, ...)

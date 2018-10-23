@@ -3,9 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ReadUri, ResolveUri } from '../ref/uri';
-import { QuickDataSource } from '../data-store/data-store';
-import { Parse } from '../ref/yaml';
+import { QuickDataSource } from '@microsoft.azure/datastore';
 import { Help } from "../../help";
 import { PipelinePlugin } from "./common";
 

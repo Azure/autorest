@@ -6,8 +6,8 @@
 import { DirectiveView } from "../configuration";
 import { Message } from "../message";
 import { ConfigurationView } from "../autorest-core";
-import { JsonPath, matches } from "../ref/jsonpath";
-import { From } from "../ref/linq";
+import { JsonPath, matches } from "@microsoft.azure/datastore";
+import { From } from "linq-es2015";
 
 export class Suppressor {
   private suppressions: DirectiveView[];

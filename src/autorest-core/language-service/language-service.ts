@@ -11,7 +11,7 @@ delete process.env['ELECTRON_NO_ATTACH_CONSOLE'];
 import { Message, Channel, IFileSystem, AutoRest, Artifact, IsConfigurationExtension, IdentifyDocument, IsConfigurationDocument, IsOpenApiExtension, IsOpenApiDocument, LiterateToJson, DocumentType } from "../main"
 import { JsonPath, SourceMap } from './source-map';
 
-import { ResolveUri, FileUriToPath, GetExtension, IsUri, ParentFolderUri } from '../lib/ref/uri';
+import { ResolveUri, FileUriToPath, GetExtension, IsUri, ParentFolderUri } from '@microsoft.azure/uri';
 import { From } from "linq-es2015";
 import { safeDump } from "yaml-ast-parser";
 import { DocumentAnalysis } from "./document-analysis";

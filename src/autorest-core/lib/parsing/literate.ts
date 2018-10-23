@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as commonmark from '../ref/commonmark';
-import { Mappings } from "../ref/source-map";
-import { DataHandle, DataSink } from '../data-store/data-store';
+import { Mapping } from "@microsoft.azure/datastore";
+import { DataHandle, DataSink } from '@microsoft.azure/datastore';
 
 export async function Parse(hConfigFile: DataHandle, sink: DataSink): Promise<{ data: DataHandle, codeBlock: commonmark.Node }[]> {
   const result: { data: DataHandle, codeBlock: commonmark.Node }[] = [];
@@ -25,8 +25,8 @@ export async function Parse(hConfigFile: DataHandle, sink: DataSink): Promise<{ 
   return result;
 }
 
-function GetSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark.Node): Mappings {
-  const result: Mappings = [];
+function GetSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark.Node): Array<Mapping> {
+  const result = new Array<Mapping>();
   const numLines = codeBlock.sourcepos[1][0] - codeBlock.sourcepos[0][0] + (codeBlock.info === null ? 1 : -1);
   for (var i = 0; i < numLines; ++i) {
     result.push({

@@ -3,22 +3,21 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { LazyPromise } from "../lazy";
+import { LazyPromise } from "@microsoft.azure/datastore";
 import { EventEmitter } from "../events";
 import { fork, ChildProcess } from "child_process";
-import { Mappings, RawSourceMap, SmartPosition } from "../ref/source-map";
+import { Mapping, SmartPosition } from "@microsoft.azure/datastore";
+import { RawSourceMap } from "source-map";
 import { CancellationToken } from "../ref/cancellation";
 import { createMessageConnection, MessageConnection } from "../ref/jsonrpc";
-import { DataHandle, DataSink, DataSource } from '../data-store/data-store';
+import { DataHandle, DataSink, DataSource } from '@microsoft.azure/datastore';
 import { IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestPluginInitiator } from "./plugin-api";
 import { Exception } from "../exception";
 import { Message, Channel, ArtifactMessage } from "../message";
 import { Readable, Writable } from "stream";
 import { Artifact } from "../artifact";
-import { RealFileSystem } from "../file-system";
-import { CreateFolderUri } from "@microsoft.azure/async-io";
 import { ConfigurationView } from "../../main";
-import { EnsureIsFolderUri } from "../ref/uri";
+import { EnsureIsFolderUri } from "@microsoft.azure/uri";
 
 interface IAutoRestPluginTargetEndpoint {
   GetPluginNames(cancellationToken: CancellationToken): Promise<string[]>;
@@ -26,13 +25,13 @@ interface IAutoRestPluginTargetEndpoint {
 }
 
 interface IAutoRestPluginInitiatorEndpoint {
-  FinishNotifications(): Promise<void>; // not exposed; necessary to ensure notifications are processed before 
+  FinishNotifications(): Promise<void>; // not exposed; necessary to ensure notifications are processed before
 
   ReadFile(filename: string): Promise<string>;
   GetValue(key: string): Promise<any>;
   ListInputs(artifactType?: string): Promise<string[]>;
 
-  WriteFile(filename: string, content: string, sourceMap?: Mappings | RawSourceMap): Promise<void>;
+  WriteFile(filename: string, content: string, sourceMap?: Array<Mapping> | RawSourceMap): Promise<void>;
   Message(message: Message, path?: SmartPosition, sourceFile?: string): Promise<void>;
 }
 
@@ -104,7 +103,7 @@ export class AutoRestExtension extends EventEmitter {
         }
       } catch (e) {
         if (e != "Cancellation requested.") {
-          // Suppress this from hitting the console. 
+          // Suppress this from hitting the console.
           // todo: we should see if we can put it out as an event.
           // console.error(`Error occurred in handler for '${fnName}' in session '${sessionId}':`);
           // console.error(e);
@@ -176,7 +175,7 @@ export class AutoRestExtension extends EventEmitter {
     const friendly2internal: (name: string) => Promise<string | undefined> = async name => ((await inputFileHandles).filter(h => h.Description === name || decodeURIComponent(h.Description) === decodeURIComponent(name))[0] || {}).key;
     const internal2friendly: (name: string) => Promise<string | undefined> = async key => (await inputScope.Read(key) || <any>{}).Description;
 
-    const writeFileToSinkAndNotify = async (filename: string, content: string, artifactType?: string, sourceMap?: Mappings | RawSourceMap): Promise<Artifact> => {
+    const writeFileToSinkAndNotify = async (filename: string, content: string, artifactType?: string, sourceMap?: Array<Mapping> | RawSourceMap): Promise<Artifact> => {
       if (!sourceMap) {
         sourceMap = [];
       }
@@ -185,7 +184,7 @@ export class AutoRestExtension extends EventEmitter {
       if (typeof (sourceMap as any).mappings === "string") {
         onFile(handle = await sink.WriteDataWithSourceMap(filename, content, artifactType, () => sourceMap as any));
       } else {
-        onFile(handle = await sink.WriteData(filename, content, artifactType, sourceMap as Mappings, await inputFileHandles));
+        onFile(handle = await sink.WriteData(filename, content, artifactType, sourceMap as Array<Mapping>, await inputFileHandles));
       }
       return {
         uri: handle.key,
@@ -241,7 +240,7 @@ export class AutoRestExtension extends EventEmitter {
         return (await configurationView.fileSystem.EnumerateFileUris(EnsureIsFolderUri(`${configurationView.OutputFolderUri}${artifactType || ""}`))).map(each => each.substr(t));
       },
 
-      async WriteFile(filename: string, content: string, sourceMap?: Mappings | RawSourceMap): Promise<void> {
+      async WriteFile(filename: string, content: string, sourceMap?: Array<Mapping> | RawSourceMap): Promise<void> {
         if (!sourceMap) {
           sourceMap = [];
         }
@@ -271,7 +270,7 @@ export class AutoRestExtension extends EventEmitter {
         }
 
         if (message.Channel === Channel.Configuration) {
-          // special case. route the output to the config 
+          // special case. route the output to the config
           if (message.Key && message.Text) {
             const key = [...message.Key];
             if (key.length > 0) {

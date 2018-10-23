@@ -2,9 +2,9 @@ import * as assert from "assert";
 import { only, skip, slow, suite, test, timeout } from "mocha-typescript";
 
 import { AutoRest } from "../lib/autorest-core";
-import { RealFileSystem } from "../lib/file-system";
+import { RealFileSystem } from "@microsoft.azure/datastore";
 import { Channel, Message } from "../lib/message";
-import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
+import { CreateFolderUri, ResolveUri } from '@microsoft.azure/uri';
 import { PumpMessagesToConsole } from './test-utility';
 
 @suite class EndToEnd {

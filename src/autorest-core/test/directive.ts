@@ -2,8 +2,8 @@ import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
 import { AutoRest } from "../lib/autorest-core";
-import { RealFileSystem } from "../lib/file-system";
-import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
+import { RealFileSystem } from "@microsoft.azure/datastore";
+import { CreateFolderUri, ResolveUri } from "@microsoft.azure/uri";
 import { Message, Channel } from "../lib/message";
 
 @suite class Directive {

@@ -2,11 +2,11 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { CreateFileUri } from '../lib/ref/uri';
+import { CreateFileUri } from '@microsoft.azure/uri';
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-import * as uri from "../lib/ref/uri";
+import * as uri from "@microsoft.azure/uri";
 
 @suite class Uri {
   @test async "CreateFileUri"() {

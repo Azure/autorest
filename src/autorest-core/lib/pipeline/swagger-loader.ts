@@ -4,8 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ConfigurationView } from '../autorest-core';
-import { DataHandle, DataSink, DataSource } from '../data-store/data-store';
-import { OperationAbortedException } from '../exception';
+import { DataHandle, DataSink, DataSource } from '@microsoft.azure/datastore';
 import { Channel, SourceLocation } from '../message';
 import {
   CommonmarkHeadingFollowingText,
@@ -14,17 +13,17 @@ import {
   ParseCommonmark
 } from '../parsing/literate';
 import { Parse as ParseLiterateYaml } from '../parsing/literate-yaml';
-import { IndexToPosition, Lines } from '../parsing/text-utility';
-import { ResolvePath, ResolveRelativeNode } from '../parsing/yaml';
+import { IndexToPosition, Lines } from '@microsoft.azure/datastore';
+
 import { pushAll } from '../ref/array';
-import { IsPrefix, JsonPath, JsonPathComponent, stringify } from '../ref/jsonpath';
-import { From } from '../ref/linq';
-import { safeEval } from '../ref/safe-eval';
-import { Mapping, Mappings } from '../ref/source-map';
-import { ResolveUri } from '../ref/uri';
-import { Clone, CloneAst, Descendants, StrictJsonSyntaxCheck, StringifyAst, ToAst, YAMLNodeWithPath } from '../ref/yaml';
+import { JsonPath, JsonPathComponent } from '@microsoft.azure/datastore';
+import { From } from "linq-es2015";
+
+import { Mapping } from '@microsoft.azure/datastore';
+
+import { Clone, CloneAst, Descendants, StrictJsonSyntaxCheck, StringifyAst, ToAst } from '@microsoft.azure/datastore';
 import { IdentitySourceMapping, MergeYamls } from '../source-map/merging';
-import { CreateAssignmentMapping } from '../source-map/source-map';
+import { CreateAssignmentMapping } from '@microsoft.azure/datastore';
 
 export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle> {
   const commonmark = await inputScope.ReadStrict(inputFileUri);
@@ -32,7 +31,7 @@ export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inp
   const commonmarkNode = await ParseCommonmark(rawCommonmark);
 
   const directives: Array<any> = [];
-  const mappings: Mappings = [];
+  const mappings = new Array<Mapping>();
   const transformer: Array<string> = [];
   const state = [...CommonmarkSubHeadings(commonmarkNode.firstChild)].map(x => ({ node: x, query: '$' }));
 
@@ -104,7 +103,7 @@ export async function LoadLiterateOpenAPIOverride(config: ConfigurationView, inp
   const commonmarkNode = await ParseCommonmark(rawCommonmark);
 
   const directives: Array<any> = [];
-  const mappings: Mappings = [];
+  const mappings = new Array<Mapping>();
   const transformer: Array<string> = [];
   const state = [...CommonmarkSubHeadings(commonmarkNode.firstChild)].map(x => ({ node: x, query: '$' }));
 
@@ -285,7 +284,7 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
   for (let i = 0; i < inputSwaggers.length; ++i) {
     const inputSwagger = inputSwaggers[i];
     const swagger = inputSwaggerObjects[i];
-    const mapping: Mappings = [];
+    const mapping = new Array<Mapping>();
     const populate: Array<() => void> = []; // populate swagger; deferred in order to simplify source map generation
 
     // digest "info"

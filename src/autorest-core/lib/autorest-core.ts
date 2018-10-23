@@ -6,15 +6,28 @@
 import { Configuration, ConfigurationView, MessageEmitter } from "./configuration";
 import { EventEmitter, IEvent } from "./events";
 import { Exception } from "./exception";
-import { IFileSystem, RealFileSystem } from "./file-system";
+import { IFileSystem, RealFileSystem } from "@microsoft.azure/datastore";
 import { RunPipeline } from "./pipeline/pipeline";
-import { Push } from "./ref/linq";
 export { ConfigurationView } from './configuration';
 import { homedir } from "os"
 import { Artifact } from "./artifact";
 import * as Constants from "./constants";
 import { DocumentType } from "./document-type";
 import { Channel, Message } from "./message";
+
+function IsIterable(target: any) {
+  return target && target[Symbol.iterator] && typeof target !== "string";
+}
+
+function Push<T>(destination: Array<T>, source: any) {
+  if (source) {
+    if (IsIterable(source)) {
+      destination.push(...source);
+    } else {
+      destination.push(source)
+    }
+  }
+}
 
 /**
  * An instance of the AutoRest generator.

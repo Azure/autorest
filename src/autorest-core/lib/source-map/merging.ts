@@ -4,14 +4,14 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { pushAll } from '../ref/array';
-import { IndexToPosition } from "../parsing/text-utility";
+import { IndexToPosition } from "@microsoft.azure/datastore";
 import { ConfigurationView } from "../configuration";
 import { Channel } from "../message";
-import { JsonPath, stringify } from "../ref/jsonpath";
-import * as yaml from '../ref/yaml';
-import { Mappings } from "../ref/source-map";
-import { DataHandle, DataSink } from "../data-store/data-store";
-import { ResolvePath } from '../parsing/yaml';
+import { JsonPath, stringify } from "@microsoft.azure/datastore";
+import * as yaml from '@microsoft.azure/datastore';
+import { Mapping } from "@microsoft.azure/datastore";
+import { DataHandle, DataSink } from "@microsoft.azure/datastore";
+import { ResolvePath } from '@microsoft.azure/datastore';
 import { isArray } from 'util';
 
 // // TODO: may want ASTy merge! (supporting circular structure and such?)
@@ -223,8 +223,8 @@ export function MergeOverwriteOrAppend(higherPriority: any, lowerPriority: any, 
   return result;
 }
 
-export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst: yaml.YAMLNode): Mappings {
-  const result: Mappings = [];
+export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst: yaml.YAMLNode): Array<Mapping> {
+  const result = new Array<Mapping>();
   const descendantsWithPath = yaml.Descendants(sourceYamlAst);
   for (const descendantWithPath of descendantsWithPath) {
     const descendantPath = descendantWithPath.path;
@@ -240,7 +240,7 @@ export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst:
 
 export async function MergeYamls(config: ConfigurationView, yamlInputHandles: DataHandle[], sink: DataSink, verifyOAI2: boolean = false): Promise<DataHandle> {
   let mergedGraph: any = {};
-  const mappings: Mappings = [];
+  const mappings = new Array<Mapping>();
   let cancel = false;
   let failed = false;
 

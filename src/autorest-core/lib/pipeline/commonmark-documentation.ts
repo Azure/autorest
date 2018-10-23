@@ -2,10 +2,8 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-
-import { Mapping, SmartPosition } from "../ref/source-map";
+import { SmartPosition } from "@microsoft.azure/datastore";
 import { Parser, Node } from "../ref/commonmark";
-import { JsonPath } from "../ref/jsonpath";
 import {
   CloneAst,
   CreateYAMLMapping,
@@ -17,10 +15,10 @@ import {
   YAMLMap,
   YAMLMapping,
   YAMLNodeWithPath,
-} from '../ref/yaml';
+} from '@microsoft.azure/datastore';
 import { IdentitySourceMapping } from "../source-map/merging";
-import { From } from "../ref/linq";
-import { DataHandle, DataSink } from '../data-store/data-store';
+
+import { DataHandle, DataSink } from '@microsoft.azure/datastore';
 
 function IsDocumentationField(node: YAMLNodeWithPath) {
   if (!node || !node.node.value || !node.node.value.value || typeof node.node.value.value !== "string") {

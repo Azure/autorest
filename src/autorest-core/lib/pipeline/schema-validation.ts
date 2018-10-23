@@ -4,10 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as SchemaValidator from 'z-schema';
-import { parseJsonPointer } from '../ref/jsonpath';
-import { ReadUri, ResolveUri } from '../ref/uri';
-import { QuickDataSource } from '../data-store/data-store';
-import { Parse } from '../ref/yaml';
+import { parseJsonPointer } from '@microsoft.azure/datastore';
 import { CreatePerFilePlugin, PipelinePlugin } from "./common";
 import { Channel } from "../message";
 import { OperationAbortedException } from '../exception';

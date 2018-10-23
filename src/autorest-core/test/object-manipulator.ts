@@ -2,11 +2,14 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+import { CancellationToken } from "vscode-jsonrpc";
 import * as assert from "assert";
 import { only, skip, slow, suite, test, timeout } from "mocha-typescript";
-import { DataStore } from "../lib/data-store/data-store";
+import { DataStore } from "@microsoft.azure/datastore";
 import { ManipulateObject } from "../lib/pipeline/object-manipulator";
-import { safeEval } from "../lib/ref/safe-eval";
+import { safeEval } from "@microsoft.azure/datastore";
+require('source-map-support').install();
+
 
 @suite class ObjectManipulator {
 
@@ -36,7 +39,7 @@ definitions:
 
   @test async 'any hit'() {
     // setup
-    const dataStore = new DataStore();
+    const dataStore = new DataStore(CancellationToken.None);
     const input = await dataStore.WriteData('mem://input.yaml', this.exampleObject, 'input-file');
 
     const expectHit = async (jsonQuery: string, anyHit: boolean) => {
@@ -60,7 +63,7 @@ definitions:
 
   @test async 'removal'() {
     // setup
-    const dataStore = new DataStore();
+    const dataStore = new DataStore(CancellationToken.None);
     const input = await dataStore.WriteData('mem://input.yaml', this.exampleObject, 'input-file');
 
     // remove all models that don't have a description
@@ -73,7 +76,7 @@ definitions:
 
   @test async 'update'() {
     // setup
-    const dataStore = new DataStore();
+    const dataStore = new DataStore(CancellationToken.None);
     const input = await dataStore.WriteData('mem://input.yaml', this.exampleObject, 'input-file');
 
     {
