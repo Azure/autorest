@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as commonmark from '../ref/commonmark';
+import * as commonmark from 'commonmark';
 import { Mapping } from "@microsoft.azure/datastore";
 import { DataHandle, DataSink } from '@microsoft.azure/datastore';
 

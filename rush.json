@@ -69,6 +69,18 @@
       "projectFolder": "perks/libraries/oai2-to-oai3",
       "reviewCategory": "production",
       "shouldPublish": true
+    },
+    {
+      "packageName": "@microsoft.azure/autorest-core",
+      "projectFolder": "src/autorest-core",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "autorest",
+      "projectFolder": "src/autorest",
+      "reviewCategory": "production",
+      "shouldPublish": true
     }
   ]
 }

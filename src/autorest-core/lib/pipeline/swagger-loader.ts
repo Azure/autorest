@@ -15,7 +15,7 @@ import {
 import { Parse as ParseLiterateYaml } from '../parsing/literate-yaml';
 import { IndexToPosition, Lines } from '@microsoft.azure/datastore';
 
-import { pushAll } from '../ref/array';
+import { pushAll } from '../array';
 import { JsonPath, JsonPathComponent } from '@microsoft.azure/datastore';
 import { From } from "linq-es2015";
 

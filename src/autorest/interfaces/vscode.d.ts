@@ -7030,9 +7030,9 @@ declare module 'vscode-languageclient' {
     run: Executable;
     debug: Executable;
   } | {
-      run: NodeModule;
-      debug: NodeModule;
-    } | NodeModule | (() => Thenable<ChildProcess | StreamInfo | MessageTransports>);
+    run: NodeModule;
+    debug: NodeModule;
+  } | NodeModule | (() => Thenable<ChildProcess | StreamInfo | MessageTransports>);
   export class LanguageClient extends BaseLanguageClient {
     private _serverOptions;
     private _forceDebug;
@@ -7086,20 +7086,20 @@ declare module 'vscode-languageserver-protocol/protocol' {
     /** A glob pattern, like `*.{ts,js}`. */
     pattern?: string;
   } | {
-      /** A language id, like `typescript`. */
-      language?: string;
-      /** A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */
-      scheme: string;
-      /** A glob pattern, like `*.{ts,js}`. */
-      pattern?: string;
-    } | {
-      /** A language id, like `typescript`. */
-      language?: string;
-      /** A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */
-      scheme?: string;
-      /** A glob pattern, like `*.{ts,js}`. */
-      pattern: string;
-    };
+    /** A language id, like `typescript`. */
+    language?: string;
+    /** A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */
+    scheme: string;
+    /** A glob pattern, like `*.{ts,js}`. */
+    pattern?: string;
+  } | {
+    /** A language id, like `typescript`. */
+    language?: string;
+    /** A Uri [scheme](#Uri.scheme), like `file` or `untitled`. */
+    scheme?: string;
+    /** A glob pattern, like `*.{ts,js}`. */
+    pattern: string;
+  };
   export namespace DocumentFilter {
     function is(value: any): value is DocumentFilter;
   }

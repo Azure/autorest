@@ -8,7 +8,6 @@
     "build": "gulp build --threshold=1",
     "publish-preview": "gulp publish-preview",
     "install": "gulp npm-install --verbose",
-    "reinstall": "shx rm -rf src/autorest/node_modules & shx rm -rf src/autorest-core/node_modules & shx rm src/autorest/package-lock.json & shx rm src/autorest-core/node_modules/package-lock.json & npm install",
     "regenerate": "gulp regenerate"
   },
   "repository": {
@@ -31,7 +30,6 @@
   "devDependencies": {
     "chalk": "^1.1.2",
     "coffee-script": "^1.11.1",
-    "dts-generator": "^2.1.0",
     "gulp": "^3.9.1",
     "gulp-dependencies-changed": "^1.0.2",
     "gulp-eol": "^0.1.2",
@@ -51,8 +49,7 @@
     "tslint-language-service": "^0.9.9",
     "tslint-microsoft-contrib": "^5.0.3",
     "vinyl-fs": "^2.4.4",
-    "yargs": "^6.6.0",
-    "shx": "0.2.2"
+    "yargs": "^6.6.0"
   },
   "dependencies": {}
 }

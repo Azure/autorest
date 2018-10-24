@@ -10,7 +10,7 @@ import { AutoRest } from "../lib/autorest-core";
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-import { Node, Parser } from "../lib/ref/commonmark";
+import { Node, Parser } from "commonmark";
 import { PlainTextVersion } from "../lib/pipeline/commonmark-documentation";
 
 @suite class Commonmark {

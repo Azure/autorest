@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { pushAll } from '../ref/array';
+import { pushAll } from '../array';
 import { IndexToPosition } from "@microsoft.azure/datastore";
 import { ConfigurationView } from "../configuration";
 import { Channel } from "../message";

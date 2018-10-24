@@ -19,5 +19,5 @@ export { Artifact } from "./lib/artifact"
 export { AutoRest, ConfigurationView, IdentifyDocument, IsConfigurationExtension, IsConfigurationDocument, IsOpenApiExtension, LiterateToJson, IsOpenApiDocument } from "./lib/autorest-core"
 export { DocumentFormat, DocumentExtension, DocumentPatterns, DocumentType } from "./lib/document-type"
 
-
+export { GenerationResults } from './language-service/language-service';
 

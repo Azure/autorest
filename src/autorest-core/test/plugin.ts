@@ -15,7 +15,7 @@ import { RealFileSystem } from "@microsoft.azure/datastore";
 import { Channel, Message } from "../lib/message";
 import { AutoRestExtension } from "../lib/pipeline/plugin-endpoint";
 import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
-import { CancellationToken } from "../lib/ref/cancellation";
+import { CancellationToken } from "vscode-jsonrpc";
 import { CreateFolderUri, ResolveUri } from "@microsoft.azure/uri";
 
 async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtension> {

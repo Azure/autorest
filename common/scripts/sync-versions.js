@@ -32,15 +32,51 @@ for( const each of rush.projects ) {
   pjs[packageName] = require(`${__dirname}/../../${projectFolder}/package.json`);
 }
 
+function setPeerDependencies(dependencies) {
+  for( const dep in dependencies ) {
+    const ref = pjs[dep];
+    if( ref ) {
+      if(dependencies[dep] !== `^${ref.version}`  ) {
+        console.log(`updating peer depedency ${dep} to ^${ref.version}`);
+        dependencies[dep] = `^${ref.version}`;
+      }
+
+    }
+  }
+}
+
 // verify that peer dependencies are the same version as they are building.
 for( const pj of Object.getOwnPropertyNames(pjs) ){
   const each = pjs[pj];
+  setPeerDependencies(each.dependencies );
+  setPeerDependencies(each.devDependencies );
+  if( each['static-link']) {
+    setPeerDependencies(each['static-link'].devDependencies );
+  }
+
+  /*
   for( const dep in each.dependencies ) {
     const ref = pjs[dep];
     if( ref ) {
       each.dependencies[dep] = `^${ref.version}`;
     }
   }
+
+  for( const dep in each.devDependencies ) {
+    const ref = pjs[dep];
+    if( ref ) {
+      each.devDependencies[dep] = `^${ref.version}`;
+    }
+  }
+
+  if( each['static-link'] ) {
+    for( const dep in each['static-link'].dependencies ) {
+      const ref = pjs[dep];
+      if( ref ) {
+        each['static-link'].dependencies[dep] = `^${ref.version}`;
+      }
+    }
+  }*/
 }
 
 function recordDeps(dependencies) {
@@ -82,14 +118,21 @@ const packageList = {};
 // than everyone else.
 for( const pj of Object.getOwnPropertyNames(pjs) ){
   const each = pjs[pj];
+
   recordDeps(each.dependencies);
   recordDeps(each.devDependencies);
+  if( each['static-link']) {
+    recordDeps(each['static-link'].dependencies);
+  }
 }
 
 for( const pj of Object.getOwnPropertyNames(pjs) ){
   const each = pjs[pj];
   fixDeps(pj,each.dependencies);
   fixDeps(pj,each.devDependencies);
+  if( each['static-link']) {
+    fixDeps(pj,each['static-link'].dependencies);
+  }
 }
 
 // write out the results.

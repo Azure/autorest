@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestType0, RequestType1, RequestType2 } from "../ref/jsonrpc";
-import { NotificationType4 } from "../ref/jsonrpc";
+import { RequestType0, RequestType1, RequestType2 } from "vscode-jsonrpc";
+import { NotificationType4 } from "vscode-jsonrpc";
 import { SmartPosition } from "@microsoft.azure/datastore";
 import { Mapping, RawSourceMap } from "source-map";
 import { Message } from "../message";

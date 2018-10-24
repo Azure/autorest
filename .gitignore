@@ -1,4 +1,4 @@
-## Ignore generated code 
+## Ignore generated code
 PackageTest/NugetPackageTest/Generated
 src/generator/AutoRest.NodeJS.Tests/AcceptanceTests/*.js
 
@@ -178,7 +178,7 @@ Thumbs.db
 src/generator/AutoRest.Ruby*Tests/Gemfile.lock
 src/generator/AutoRest.Ruby*/*/RspecTests/Generated/*
 
-#netcore 
+#netcore
 /NetCore
 *.lock.json
 
@@ -293,3 +293,4 @@ temp
 # Rush files
 common/temp/**
 package-deps.json
+common/config/rush/shrinkwrap.yaml

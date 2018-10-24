@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import { SmartPosition } from "@microsoft.azure/datastore";
-import { Parser, Node } from "../ref/commonmark";
+import { Parser, Node } from "commonmark";
 import {
   CloneAst,
   CreateYAMLMapping,

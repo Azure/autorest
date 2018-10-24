@@ -1,23 +1,16 @@
-/// <reference path="interfaces/autorest-core.d.ts" />
-/// <reference path="interfaces/vscode.d.ts" />
-
 // load modules from static linker filesystem.
 if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-loader"] === undefined) {
   require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
 }
 // everything else.
-import { networkEnabled, rootFolder, extensionManager, availableVersions, corePackage, installedCores, tryRequire, resolveEntrypoint, resolvePathForLocalVersion, ensureAutorestHome, selectVersion, pkgVersion } from "./autorest-as-a-service"
+import { tryRequire, resolveEntrypoint, ensureAutorestHome, selectVersion } from "./autorest-as-a-service"
 import { resolve } from 'path';
 
-import { LanguageClient } from "vscode-languageclient";
+import { LanguageClient } from 'vscode-languageclient';
 
 // exports the public AutoRest definitions
-export { IFileSystem, Message, Artifact } from 'autorest-core/main';
-export { GenerationResults } from 'autorest-core/language-service/language-service';
-import { GenerationResults } from 'autorest-core/language-service/language-service';
-
-// the local class definition of the AutoRest Interface and the EventEmitter signatures
-import { AutoRest as IAutoRest, IFileSystem } from 'autorest-core/main';
+import { GenerationResults, IFileSystem, AutoRest as IAutoRest } from 'autorest-core';
+export { Message, Artifact, GenerationResults, IFileSystem } from 'autorest-core';
 
 /**
  * The Channel that a message is registered with.
@@ -58,12 +51,12 @@ export enum DocumentType {
   Unknown = <any>"Unknown"
 }
 
-let resolve_autorest: (value?: typeof IAutoRest | PromiseLike<typeof IAutoRest>) => void;
+let resolve_autorest: (value?: IAutoRest | PromiseLike<IAutoRest>) => void;
 let reject_autorest: (reason?: any) => void;
 
 // export the selected implementation of the AutoRest interface.
 export declare type AutoRest = IAutoRest;
-export const AutoRest: Promise<typeof IAutoRest> = new Promise((r, j) => {
+export const AutoRest: Promise<IAutoRest> = new Promise((r, j) => {
   resolve_autorest = r;
   reject_autorest = j;
 });
@@ -74,12 +67,12 @@ let modulePath: string | undefined = undefined;
 
 /**
  * Returns the language service entrypoint for autorest-core, bootstrapping the core if necessary
- * 
+ *
  * If initialize has already been called, then it returns the version that was initialized, regardless of parameters
- * 
+ *
  * @param requestedVersion an npm package reference for the version requested @see {@link https://docs.npmjs.com/cli/install#description}
  *
- * @param minimumVersion - a semver string representing the lowest autorest- core version that is considered acceptable. 
+ * @param minimumVersion - a semver string representing the lowest autorest- core version that is considered acceptable.
  *
  * @see { @link initialize }
  */
@@ -93,12 +86,12 @@ export async function getLanguageServiceEntrypoint(requestedVersion: string = "l
 
 /**
  * Returns the command-line application entrypoint for autorest-core, bootstrapping the core if necessary
- * 
+ *
  * If initialize has already been called, then it returns the version that was initialized, regardless of parameters
- * 
+ *
  * @param requestedVersion an npm package reference for the version requested @see {@link https://docs.npmjs.com/cli/install#description}
  *
- * @param minimumVersion - a semver string representing the lowest autorest-core version that is considered acceptable. 
+ * @param minimumVersion - a semver string representing the lowest autorest-core version that is considered acceptable.
  *
  * @see {@link initialize}
  * */
@@ -112,9 +105,9 @@ export async function getApplicationEntrypoint(requestedVersion: string = "lates
 
 /**
  * Initializes the AutoRest-core module, bootstrapping the core from npm if required.
- * 
+ *
  * @param requestedVersion an npm package reference for the version requested @see {@link https://docs.npmjs.com/cli/install#description}
- * 
+ *
  * a) a folder containing a program described by a package.json file
  * b) a gzipped tarball containing (a)
  * c) a url that resolves to (b)
@@ -122,7 +115,7 @@ export async function getApplicationEntrypoint(requestedVersion: string = "lates
  * e) a <name>@<tag> (see npm-dist-tag) that points to (d)
  * f) a <name> that has a "latest" tag satisfying (e)
  * g) a <git remote url> that resolves to (a)
- * 
+ *
  * @param minimumVersion - a semver string representing the lowest autorest-core version that is considered acceptable.
  */
 export async function initialize(requestedVersion: string = "latest-installed", minimumVersion?: string) {
@@ -166,7 +159,7 @@ export async function initialize(requestedVersion: string = "latest-installed", 
 }
 
 /** Bootstraps the core module if it's not already done and returns the AutoRest class. */
-async function ensureCoreLoaded(): Promise<typeof IAutoRest> {
+async function ensureCoreLoaded(): Promise<IAutoRest> {
 
   if (!modulePath && !busy) {
     // if we haven't already got autorest-core, let's do that now with the default settings.
@@ -186,14 +179,14 @@ async function ensureCoreLoaded(): Promise<typeof IAutoRest> {
 }
 
 /**
- * Creates an instance of the AutoRest engine. Will call {@link initialize} with default values to bootstrap AutoRest core if necessary. 
- * 
+ * Creates an instance of the AutoRest engine. Will call {@link initialize} with default values to bootstrap AutoRest core if necessary.
+ *
  * @param fileSystem - the {@link IFileSystem} implementation that will be used to acquire files
- * 
- * Note: http:/https:/mem: schemes are handled internally in AutoRest and the IFilesystem will not call 
+ *
+ * Note: http:/https:/mem: schemes are handled internally in AutoRest and the IFilesystem will not call
  * the IFileSystem methods.
- * 
- * 
+ *
+ *
  * @param configFileOrFolderUri - a URI pointing to the folder or autorest configuration file
  */
 export async function create(fileSystem?: IFileSystem, configFileOrFolderUri?: string): Promise<AutoRest> {
@@ -217,7 +210,7 @@ export async function create(fileSystem?: IFileSystem, configFileOrFolderUri?: s
   return new CAutoRest(fileSystem, configFileOrFolderUri);
 }
 
-/** 
+/**
   *  Given a document's content, does this represent a openapi document of some sort?
   *
   * @param content - the document content to evaluate
@@ -229,7 +222,7 @@ export async function isOpenApiDocument(content: string): Promise<boolean> {
 
 /**
  * Checks to see if the document is a literate configuation document.
- * 
+ *
  * @param content the document content to check
  */
 export async function isConfigurationDocument(content: string): Promise<boolean> {
@@ -238,13 +231,13 @@ export async function isConfigurationDocument(content: string): Promise<boolean>
 }
 
 /** Determines the document type based on the content of the document
- * 
+ *
  * @returns Promise<DocumentType> one of:
  *  -  DocumentType.LiterateConfiguration - contains the magic string '\n> see https://aka.ms/autorest'
  *  -  DocumentType.OpenAPI2 - $.swagger === "2.0"
  *  -  DocumentType.OpenAPI3 - $.openapi === "3.0.0"
  *  -  DocumentType.Unknown - content does not match a known document type
- * 
+ *
  * @see {@link DocumentType}
  */
 export async function identifyDocument(content: string): Promise<DocumentType> {
@@ -255,7 +248,7 @@ export async function identifyDocument(content: string): Promise<DocumentType> {
 /**
  * Processes a document (yaml, markdown or JSON) and returns the document as a JSON-encoded document text
  * @param content - the document content
- * 
+ *
  * @returns the content as a JSON string (not a JSON DOM)
  */
 export async function toJSON(content: string): Promise<string> {
@@ -267,12 +260,12 @@ export async function toJSON(content: string): Promise<string> {
 /** This is a convenience class for accessing the requests supported by AutoRest when used as a language service */
 export class AutoRestLanguageService {
 
-  /** 
+  /**
    * Represents a convenience layer on the remote language service functions (on top of LSP-defined functions)
    *
    * @constructor
-   * 
-   * this requires a reference to the language client so that the methods can await the onReady signal 
+   *
+   * this requires a reference to the language client so that the methods can await the onReady signal
    * before attempting to send requests.
    */
   public constructor(private languageClient: LanguageClient) {
@@ -281,15 +274,15 @@ export class AutoRestLanguageService {
 
   /**
    * Runs autorest to process a file
-   * 
+   *
    * @param documentUri The OpenApi document or AutoRest configuration file to use for the generation
-   * 
+   *
    * @param language The language to generate code for. (This is a convenience; it could have been expressed in the configuration)
-   * 
+   *
    * @param configuration Additional configuration to pass to AutoRest -- this overrides any defaults or content in the configuration file
    * @returns async: a 'generated' object containg the output from the generation run.
    *    @see generated
-   *     
+   *
    */
 
   public async generate(documentUri: string, language: string, configuration: any): Promise<GenerationResults> {
@@ -300,10 +293,10 @@ export class AutoRestLanguageService {
 
   /**
    * Determines if a file is an OpenAPI document (2.0)
-   * 
+   *
    * @param contentOrUri either a URL to a file on disk or http/s, or the content of a file itself.
    * @returns async:
-   *     true - the file is an OpenAPI 2.0 document 
+   *     true - the file is an OpenAPI 2.0 document
    *     false - the file was not recognized.
    */
   public async isOpenApiDocument(contentOrUri: string): Promise<boolean> {
@@ -315,7 +308,7 @@ export class AutoRestLanguageService {
 
   /**
    * Determines if a file is an AutoRest configuration file (checks for the magic string `\n> see https://aka.ms/autorest` )
-   * 
+   *
    * @param contentOrUri either a URL to a file on disk or http/s, or the content of a file itself.
    * @returns async:
    *     true - the file is an autorest configuration file
@@ -330,7 +323,7 @@ export class AutoRestLanguageService {
 
   /**
   * Returns the file as a JSON string. This can be a .YAML, .MD or .JSON file to begin with.
-  * 
+  *
   * @param contentOrUri either a URL to a file on disk or http/s, or the content of a file itself.
   * @returns async: string containing the file as JSON
   */
@@ -343,7 +336,7 @@ export class AutoRestLanguageService {
 
   /**
   * Finds the configuration file for a given document URI.
-  * 
+  *
   * @param documentUri the URL to a file on disk or http/s.  The passed in file can be an OpenAPI file or an AutoRest configuration file.
   * @returns async: the URI to the configuration file or an empty string if no configuration could be found.
   *
@@ -357,7 +350,7 @@ export class AutoRestLanguageService {
 
   /**
   * Determines if a file is an OpenAPI document or a configuration file in one attempt.
-  * 
+  *
   * @param contentOrUri either a URL to a file on disk or http/s, or the content of a file itself.
   * @returns async:
   *     true - the file is a configuration file or OpenAPI (2.0) file
