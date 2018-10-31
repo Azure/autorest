@@ -69,7 +69,7 @@ Running this type of validation continuously and on the fly will be very expensi
 - The user creates a new swagger or edits an existing one in VS code.
 - As the user updates the document no requests will be sent to Autorest to fire up long running validation tools.
 - When the user is ready to run a specific long running validation tools he will trigger it by:
-  - Selecting the JOSON file or giving it focus in VS Code.
+  - Selecting the JSON file or giving it focus in VS Code.
   - Clicking the tool&#39;s specific command button on the navigation as shown in figure (3) below, and yes these are **McDonalds** and **Burger King** Icons for now LOL (apologies this is the best of my photoshop skills ).
   - Alternatively the user can right click on the JSON file in the file explorer and select the tool specific command as shown in figure (4) below.
 - The request will go to Autorest and the response with all the errors and warnings will be returned and displayed in the VS code console similar to the current behavior of the linter&#39;s extension. swiggles will also be displayed under the location of the violation with hints displayed when the users hovers over them.
