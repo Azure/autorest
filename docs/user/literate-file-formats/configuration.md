@@ -1,19 +1,19 @@
-# Literate Configuration 
+# Literate Configuration
 
 ## About the Literate file formats
-The literate configuration format is a [CommonMark](http://spec.commonmark.org/) document that has embedded code 
-blocks for machine readable sections. This encourages easy-to-author documentation while permitting the specificity 
+The literate configuration format is a [CommonMark](http://spec.commonmark.org/) document that has embedded code
+blocks for machine readable sections. This encourages easy-to-author documentation while permitting the specificity
 desired when authoring and processing instructions.
 
 ### Notable Features
-- All the relavent settings for generating code for any language can be unified into a single location
-- Choose a specific version (or a valid range?) of AutoRest to run (discovery/acquring when necessary.)
+- All the relevant settings for generating code for any language can be unified into a single location
+- Choose a specific version (or a valid range?) of AutoRest to run (discovery/acquiring when necessary.)
 - Specify the OpenAPI files that it applies to.
-- Apply code generation tweaks without having to mark up the OpenAPI 
+- Apply code generation tweaks without having to mark up the OpenAPI
 
 ## The File Format
 
-The Literate configuration file is a CommonMark (aka Markdown) file that has code blocks. 
+The Literate configuration file is a CommonMark (aka Markdown) file that has code blocks.
 
 In order that AutoRest identifies a CommonMark document as a **AutoRest Configuration** file, the markdown must contain the following string (we call it the magic string) exactly (and not as the first line in the file!) :
 
@@ -25,9 +25,9 @@ In order that AutoRest identifies a CommonMark document as a **AutoRest Configur
 
 A bare minimum configuration file that contains no specific settings would look like this:
 
-``` markdown 
+``` markdown
 # My API
-> see https://aka.ms/autorest 
+> see https://aka.ms/autorest
 ```
 
 ### Naming your configuration file
@@ -37,44 +37,44 @@ When AutoRest runs, if the user does not specify the configuration file explicit
 ``` markdown
 Are there any Markdown files [*.md , *.markdown] in the current directory that contain the magic string "\n> see https://aka.ms/autorest"?
 
- -> No; Navigate to parent directory [..] and try again. 
-    If the parent folder is invalid, there is no configuration file. 
+ -> No; Navigate to parent directory [..] and try again.
+    If the parent folder is invalid, there is no configuration file.
 
- -> Yes; Is one of them called "readme.md" 
+ -> Yes; Is one of them called "readme.md"
       -> No; Choose the one with the shortest filename.
       -> Yes; Use the one called "readme.md"
 ```
-It is highly recommended that the configuration file is named `readme.md` -- it serves dual-purpose as both the documentation that a user sees in github where instructuions for use can be, as well as the storage for configuration information.
+It is highly recommended that the configuration file is named `readme.md` -- it serves dual-purpose as both the documentation that a user sees in github where instructions for use can be, as well as the storage for configuration information.
 
 
-### Best-practices 
+### Best-practices
 
 A configuration file should _document_ how to use the configuration file, without assuming that the user knows how to use any of the tools required.
 
 > Example: a configuration `readme.md` that starts off with instructions on how to use it.
 
 > ~~~ markdown
-> # My API 
-> > see https://aka.ms/autorest 
-> 
-> ## Getting Started 
+> # My API
+> > see https://aka.ms/autorest
+>
+> ## Getting Started
 > To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
 > > `autorest readme.md`
-> 
+>
 > To see additional help and options, run:
 > > `autorest --help`
-> 
+>
 > For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
-> 
+>
 > ---
-> 
-> ## Configuration 
+>
+> ## Configuration
 > The following are the settings for this using this API with AutoRest.
 >
 > ``` yaml
 > # specify the version of Autorest to use
-> version: 1.0.1-20170402 
-> 
+> version: 1.0.1-20170402
+>
 > # (more settings here...)
 > ```
 >
@@ -98,7 +98,7 @@ base-folder: c:/output/folder
 # specify a single OpenAPI file
 input-file: foo.yaml
 
-# specify a set of OpenAPI files 
+# specify a set of OpenAPI files
 input-file:
   - foo.yaml
   - bar.yaml
@@ -115,19 +115,19 @@ log-file: c:/my/output/logs.txt
 
 > *Purposes*
 > ``` yaml
-> folder: Used to specify one or more directory, folder, file container 
-> file: used for one or more files 
+> folder: Used to specify one or more directory, folder, file container
+> file: used for one or more files
 > ```
 
 > *Nouns*
-> 
+>
 
 
 #### JSONPath document reference
 
 [JSONPath](http://goessner.net/articles/JsonPath/) will be used to reference nodes in the OpenAPI document object model.
 
-JSONPath is similar to XPath, but is designed for JSON (and YAML) documents. This will be used in conjunction with the [OpenAPI DOM Query Format](#openapi-dom-query-format) 
+JSONPath is similar to XPath, but is designed for JSON (and YAML) documents. This will be used in conjunction with the [OpenAPI DOM Query Format](#openapi-dom-query-format)
 
 > ### Excerpted from the [JSONPath website](http://goessner.net/articles/JsonPath/)
 >
@@ -186,16 +186,16 @@ Or you can use a more complex expression to identify a collection of nodes:
 some-nodes: $..paths[($..operationId["blob_*"])]
 ```
 
-The applicability of the selected nodes is explained further in the section [OpenAPI DOM Query Format](#openapi-dom-query-format) 
+The applicability of the selected nodes is explained further in the section [OpenAPI DOM Query Format](#openapi-dom-query-format)
 
 ## The OpenAPI DOM
 
 In the configuration file, you can specify the list of OpenAPI documents that you wish to include.
 
 ``` yaml
-input-file: 
-  - ./2015-01-02/foo.json   # referenced documents can be JSON, YAML or Markdown. 
-  - ./2016-02-03/bar.md     
+input-file:
+  - ./2015-01-02/foo.json   # referenced documents can be JSON, YAML or Markdown.
+  - ./2016-02-03/bar.md
 ```
 Once a file is loaded, it can beereferred to in configuration by it's file name or instead by it's OpenAPI `title` value. (You can think of this as the `namespace` for the OpenAPI document)
 
@@ -203,7 +203,7 @@ Once a file is loaded, it can beereferred to in configuration by it's file name 
 
 The general layout of the Literate Configuration DOM is :
 
-### Settings 
+### Settings
 Settings are top-level key-value pairs that AutoRest uses to create the Literate OpenAPI DOM and control the pipeline.
 
 These generally include the things that have been traditionally passed on the cmdline. Ie:
@@ -225,10 +225,10 @@ At the top-level of the Literate Configuration document, you may also specify a 
 
 ``` yaml
 csharp: # just having a 'csharp' node enables the use of the csharp generator.
-  namespace: Microsoft.MyApp.MyNameSpace #override the namespace 
+  namespace: Microsoft.MyApp.MyNameSpace #override the namespace
   output-folder : generated/csharp # relative to the global value.
 
-ruby: 
+ruby:
   namespace: Microsoft::Azure::MyApp::MyNameSpace # another alternative
   output-folder : $(output-folder)/ruby/sdk # relative to the global value.
 ```
@@ -262,7 +262,7 @@ Directives are specified as a collection of `directive` objects fall under the `
 A `directive` object appears as follows:
 
 ``` yaml
-from: <OpenAPI-document-selection> 
+from: <OpenAPI-document-selection>
 where: <json-path-query>           # a JSONPath expression to select the nodes in the OpenAPI DOM
 set: <object>                      # an object that has a series of key-value settings to apply to the selected nodes.
 <other-directive-targets> : <*>    # other directives that don't set properties on the node, but rather are directed towards parts of autorest.
@@ -272,7 +272,7 @@ If the `from` isn't set, the default is to apply the directive to all the Litera
 
 If the `where` isn't set, the default is to apply the directive to all the nodes in the selected Literate OpenAPI DOMs
 
-> Example: overriding a `method-group` name 
+> Example: overriding a `method-group` name
 
 ``` yaml
 directive: # an array of directive objects
@@ -280,7 +280,7 @@ directive: # an array of directive objects
     where: $..[@operationId="blob_*"]
     set:
       method-group: Blobber # override the method-group for a given set of operations matching blob_*
-  
+
 csharp:
   directive:
     # change blob method group name to AzureBlob
