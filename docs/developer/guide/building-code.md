@@ -7,7 +7,7 @@ AutoRest is developed primarily in C# but generates code for multiple languages.
 Expected time around 100 minutes to install.
 
 - 90 minutes for VS Community
-- 10 minutes for everything else 😭 
+- 10 minutes for everything else 😭
 
 ### Software Installed/operations:
 - Windows 10 Anniversary - (has PackageManagement, developer mode and supports WSL.)
@@ -22,15 +22,15 @@ Expected time around 100 minutes to install.
 - Python 3.5
 - Tox
 - Maven
-- Go 
+- Go
 - Glide
 - Git (copies git to x86 program files too. )
 - allows java, node, ruby, go, glide thru the firewall.
-- vs community (full install) 
+- vs community (full install)
   **NOTE**: If you want a different SKU of Visual Studio, install it first, before running this script!
 - disables strong name verification on assemblies
 - vs code
-- dotnet cli 
+- dotnet cli
 - Reboot
 
 ### Process
@@ -45,7 +45,7 @@ Expected time around 100 minutes to install.
   Win-x , `cmd prompt (admin)` -- (ELEVATED!)
   start Powershell and run this command:
 
-> See the actual script at: https://github.com/Azure/autorest/blob/master/Tools/setup-developerworkstation.ps1 
+> See the actual script at: https://github.com/Azure/autorest/blob/master/Tools/setup-developerworkstation.ps1
 
 ``` powershell
    # download the install script and run it.
@@ -56,16 +56,16 @@ Expected time around 100 minutes to install.
 
 ## Manual Setup
 ### .Net
-#### on Windows 
+#### on Windows
 Install the [Microsoft Build Tools](http://go.microsoft.com/?linkid=9832060) or get them with [Visual Studio](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx).
 Ensure that msbuild is in your path by running vcvarsall.bat
 >C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat
 
 To compile the code in Visual Studio IDE,
- 
+
 - Ensure you are using Visual Studio 2015 (Update 3)
-- Ensure "Nuget Package Manager For Visual Studio" is updated to a newest version, like "2.8.60723.765", which is needed to install xunit.
-- Install [Task Runner Explorer](https://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) to run gulp tasks such as synchonize nuget version, assembly info, etc.
+- Ensure "NuGet Package Manager For Visual Studio" is updated to a newest version, like "2.8.60723.765", which is needed to install xUnit.
+- Install [Task Runner Explorer](https://visualstudiogallery.msdn.microsoft.com/8e1b4368-4afb-467a-bc13-9650572db708) to run gulp tasks such as synchonize NuGet version, assembly info, etc.
 
 Install .Net CoreCLR RTM using [these steps](https://www.microsoft.com/net/core#windows).
 
@@ -88,7 +88,7 @@ Ensure that the JDK binaries are in your `PATH`.
 Ensure that your environment includes the `JAVA_HOME`.
 >set JAVA_HOME=C:\Program Files\java\jdk1.8.0_45
 
-Install the latest Android environment from http://developer.android.com/sdk/index.html. You can either install Android Studio if you want to do actual development work in Android, or simply install the [SDK tools](http://developer.android.com/sdk/index.html#Other) that is minimally requried to build the Android code. 
+Install the latest Android environment from http://developer.android.com/sdk/index.html. You can either install Android Studio if you want to do actual development work in Android, or simply install the [SDK tools](http://developer.android.com/sdk/index.html#Other) that is minimally requried to build the Android code.
 
 In SDK Manager, make sure that build tools 23.0.1, Android Support Repository, and Google Repository are installed. Make sure ANDROID_HOME is in your environment variable. If you installed Android Studio, you can find it out from Android Studio settings. If you installed SDK tools, its default location is `C:\Program Files (x86)\Android\android-sdk` on Windows. If it is not there, it may be in your hidden `AppData\Local` directory.
 
@@ -106,7 +106,7 @@ When you read this, the available version is probably higher than 3.3.9.
 You may want a Java IDE.
 - Install Jetbrains IntelliJ IDEA from [JetBrains downloads](https://www.jetbrains.com/idea/download/.)
  OR
-- Install `Eclipse IDE for Java EE Developer` from [Eclipse downloads](http://eclipse.org/downloads/) 
+- Install `Eclipse IDE for Java EE Developer` from [Eclipse downloads](http://eclipse.org/downloads/)
 
 ### Ruby
 [RubyInstaller](http://rubyinstaller.org/downloads/) version 2+ - 32-bit version.
@@ -203,11 +203,11 @@ After building, the `AutoRest.exe` executable will be output to the `/binaries/n
 
 #### Visual Studio
 You can run (and debug) AutoRest by providing the command line parameters in the properties for the AutoRest project. To set these:
-1. Open the properties for the AutoRest project.  
-2. Select the `Debug` tab.  
-3. Set the `Command line arguments` field in the `Start Options` section.  
-4. Build the entire solution to make sure the generators and modelers are built.  
-5. F5 the project.  
+1. Open the properties for the AutoRest project.
+2. Select the `Debug` tab.
+3. Set the `Command line arguments` field in the `Start Options` section.
+4. Build the entire solution to make sure the generators and modelers are built.
+5. F5 the project.
 
 #### Troubleshooting
 
@@ -233,7 +233,7 @@ Make sure that you have built the entire `AutoRest.sln` solution.
  - [ ] Create a signed package using [automated build](http://azuresdkci.cloudapp.net/view/3-AutoRest/job/autorest-sign/) with build parameters: sha1: release branch name, scope: CodeGenerator
  - [ ] Smoke Test the signed package (Run Autorest.exe to check help and generate a sample spec for any language)
  - [ ] Publish Choco package {upload autorest.0.15.0.symbols.nupkg from the downloaded archive of the successful signing job}(Please look at the secure notebook for creds)
- - [ ] Publish nuget package [using automated build](http://azuresdkci.cloudapp.net/view/3-AutoRest/job/autorest-publish/)
+ - [ ] Publish NuGet package [using automated build](http://azuresdkci.cloudapp.net/view/3-AutoRest/job/autorest-publish/)
  - [ ] Create a github release from the release branch including a tag
  - [ ] Add -SNAPSHOT to Java Runtime versions
  - [ ] Update [Docker file](https://github.com/Azure/autorest/blob/master/Tools/dockerfiles/Dockerfile) in the release branch
