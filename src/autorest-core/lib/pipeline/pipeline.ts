@@ -33,6 +33,8 @@ interface PipelineNode {
   configScope: JsonPath;
   inputs: Array<string>;
   skip: boolean;
+  requireDrain?: boolean;
+  dependencies: Array<PipelineNode>;
 }
 
 function GetPlugin_Identity(): PipelinePlugin {
@@ -183,7 +185,7 @@ function GetPlugin_External(host: AutoRestExtension, pluginName: string): Pipeli
       sink,
       f => results.push(f),
       (message: Message) => {
-        console.error(message.Text);
+
         if (message.Channel === Channel.Control) {
           if (message.Details && message.Details.skip !== undefined) {
             shouldSkip = message.Details.skip;
@@ -308,6 +310,7 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
             outputArtifact,
             configScope: path,
             inputs,
+            dependencies: [],
             skip: false,
           };
         }
@@ -339,6 +342,18 @@ function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
     pipeline,
     configs: configCache
   };
+}
+
+function isDrainRequired(p: PipelineNode) {
+  if (p.requireDrain && p.dependencies) {
+    for (const each of p.dependencies) {
+      if (!isDrainRequired(each)) {
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
 }
 
 export async function RunPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
@@ -386,7 +401,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   (configView.Raw as any).__status = new Proxy<any>({}, {
     get(_, key) {
       if (key === '__info') { return false; }
-      const expr = new Buffer(key.toString(), 'base64').toString('ascii');
+      const expr = Buffer.from(key.toString(), 'base64').toString('ascii');
       try {
         return FastStringify(safeEval(expr, {
           pipeline: pipeline.pipeline,
@@ -473,7 +488,47 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   const barrierRobust = new OutstandingTaskAwaiter();
 
   for (const name of Object.keys(pipeline.pipeline)) {
+    const node = pipeline.pipeline[name];
+    node.dependencies = new Array<PipelineNode>();
+
+    // find nodes that list this as a antecedent
+    for (const k of Object.keys(pipeline.pipeline)) {
+      // does anyone take this as an input?
+      const candidate = pipeline.pipeline[k];
+      if (candidate.inputs.indexOf(name)) {
+        node.dependencies.push(candidate);
+      }
+    }
+  }
+  for (const name of Object.keys(pipeline.pipeline)) {
+    // walk thru the list of nodes, and if a given node is skipable beacuse nobody is consuming it
+    // we'll mark it skip: true
+    const node = pipeline.pipeline[name];
+    if (isDrainRequired(node)) {
+      console.log(`Marking ${name} skippable`);
+      node.skip = true;
+    }
+  }
+  /*
+  we should be able to look at all the tasks,
+  recursively find out who the children are of a given task
+  and then find out if they all have requireDrain === false
+  and f
+  for (const name of Object.keys(pipeline.pipeline)) {
+    const node = pipeline.pipeline[name];
+    if (node.requireDrain === true) {
+      for (const k of Object.keys(pipeline.pipeline) ) {
+        // does anyone take this as an input?
+        const candidate= pipeline.pipeline[k];
+        if( candidate.inputs.indexOf(name)  )
+      }
+    }
+  }
+*/
+  for (const name of Object.keys(pipeline.pipeline)) {
+
     const task = getTask(name);
+
     const taskx: { _state: 'running' | 'failed' | 'complete'; _result(): Array<DataHandle>; _finishedAt: number } = task as any;
     taskx._state = 'running';
     task.then(async x => {

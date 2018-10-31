@@ -53,30 +53,6 @@ for( const pj of Object.getOwnPropertyNames(pjs) ){
   if( each['static-link']) {
     setPeerDependencies(each['static-link'].devDependencies );
   }
-
-  /*
-  for( const dep in each.dependencies ) {
-    const ref = pjs[dep];
-    if( ref ) {
-      each.dependencies[dep] = `^${ref.version}`;
-    }
-  }
-
-  for( const dep in each.devDependencies ) {
-    const ref = pjs[dep];
-    if( ref ) {
-      each.devDependencies[dep] = `^${ref.version}`;
-    }
-  }
-
-  if( each['static-link'] ) {
-    for( const dep in each['static-link'].dependencies ) {
-      const ref = pjs[dep];
-      if( ref ) {
-        each['static-link'].dependencies[dep] = `^${ref.version}`;
-      }
-    }
-  }*/
 }
 
 function recordDeps(dependencies) {
