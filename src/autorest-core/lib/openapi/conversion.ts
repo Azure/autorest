@@ -4,11 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { DataHandle, DataSink } from '@microsoft.azure/datastore';
-const convertOAI2toOAI3 = async (oa2def: OpenApi2Definition): Promise<OpenApi3Definition> => (await require("swagger2openapi").convert(oa2def, { patch: true })).openapi;
+import { Oai2ToOai3 } from '@microsoft.azure/oai2-to-oai3';
 
-/* @internal */ export async function ConvertOAI2toOAI3(input: DataHandle, sink: DataSink): Promise<DataHandle> {
-  const oa2 = input.ReadObject<OpenApi2Definition>();
-  const oa3 = await convertOAI2toOAI3(oa2);
-  return await sink.WriteObject("OpenAPI", oa3);
+export async function ConvertOAI2toOAI3(input: DataHandle, sink: DataSink): Promise<DataHandle> {
+  // TODO(@NelsonDaniel): Instead of taking the input.key, it should take the metadata that contains the swagger URI.
+  const converter = new Oai2ToOai3(input.key, input.ReadObject<OpenApi2Definition>());
+  converter.convert();
+  return sink.WriteObject('OpenAPI', converter.generated);
 }
-
