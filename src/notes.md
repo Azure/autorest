@@ -47,7 +47,7 @@ ZYZ.json
 
     OUTPUT: `flat-openapi-document/identity`
 
-    - [STEP] deduplicatior
+    - [STEP] deduplicator
       walk thru all the models and consolodate duplicates.
 
 

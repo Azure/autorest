@@ -37,7 +37,7 @@
   },
   "pwsh-scripts": {
     "clean": "remove-item -recurse -ea 0 ./dist ; remove-item -ea 0 ./*.log ",
-    "before-build": "new-item -itemType directory -ea 0 -path dist/lib/pipeline ; copy-item ../../schema/*.json dist/lib/pipeline"
+    "before-build": "copy-item ../../schema/*.json dist/lib/pipeline"
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {
@@ -59,6 +59,7 @@
     "@microsoft.azure/extension": "^2.1.7",
     "@microsoft.azure/uri": "^2.1.0",
     "@microsoft.azure/datastore": "^2.1.0",
+    "@microsoft.azure/oai2-to-oai3": "^2.1.0",
     "commonmark": "^0.27.0",
     "jsonpath": "1.0.0",
     "linq-es2015": "^2.4.25",
@@ -77,6 +78,7 @@
       "@microsoft.azure/async-io": "^2.1.8",
       "@microsoft.azure/extension": "^2.1.7",
       "@microsoft.azure/datastore": "^2.1.0",
+      "@microsoft.azure/oai2-to-oai3": "^2.1.0",
       "@microsoft.azure/uri": "^2.1.0",
       "@microsoft.azure/linq": "^2.1.0",
       "commonmark": "^0.27.0",
