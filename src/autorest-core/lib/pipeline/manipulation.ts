@@ -93,9 +93,9 @@ export class Manipulator {
   }
 
   public async Process(data: DataHandle, sink: DataSink, isObject: boolean, documentId?: string): Promise<DataHandle> {
-    const trans1 = !isObject ? await sink.WriteObject(`trans_input?${data.key}`, data.ReadData()) : data;
+    const trans1 = !isObject ? await sink.WriteObject(`trans_input?${data.key}`, data.ReadData(), data.Identity) : data;
     const result = await this.ProcessInternal(trans1, sink, documentId);
-    const trans2 = !isObject ? await sink.WriteData(`trans_output?${data.key}`, result.ReadObject<string>()) : result;
+    const trans2 = !isObject ? await sink.WriteData(`trans_output?${data.key}`, result.ReadObject<string>(), data.Identity) : result;
     return trans2;
   }
 }

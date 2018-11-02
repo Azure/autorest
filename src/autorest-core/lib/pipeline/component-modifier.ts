@@ -95,7 +95,7 @@ export function GetPlugin_ComponentModifier(): PipelinePlugin {
         }
       }
 
-      return sink.WriteObject(fileIn.Description, o);
+      return sink.WriteObject(fileIn.Description, o, fileIn.Identity);
     }
     return fileIn;
   });

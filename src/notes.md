@@ -1,30 +1,45 @@
 # Pipeline:
 
   [STEP]: Load each input file  (convert OAI2 to OAI3 on the fly)
-  LOADEROAI2 => TRANSFORM => VALIDATOROAI2 => CONVERT ...
-                                                          >    TRANSFORM => VALIDATOROA3
-  LOADEROAI3 =>                                       ...
 
+  input-files: (... )
+  LOADEROAI2 => TRANSFORM => SCHEMAVALIDATOROAI2 => CONVERT ...
+                                                                 >    TRANSFORM => Tree Shaker => (merge or compose)...
+  LOADEROAI3 => TRANSFORM => SCHEMAVALIDATOROAI3 =>         ...
+
+                                                  ^...(compose-special) => linter/model-validator
+
+
+   https://github.com/Azure/azure-openapi-arm-validator
 
   [STEP] - ALL INPUTS ARE NOT OAI3
 
   [the converted file] /de => /com/schem
+/
 
-  [STEP]: Resolve references  (many-inputs)
-    - Get all the files that are $ref'd
-    - load each ref'd file (and convert to OAI3 if required)
 
-    ?? - should we clone the contents that we need from the file (ie, just things that are referenced, and the things that those reference )
-    - update cross-file references to local file references?
+abc.json
+  dog:
+    $ref: abs.vde.json#doggy
+    $ref: abs.vde.json#catty
+  cat:
+    $ref: abs.sim.json#some
 
-ABC.json
-  $ref: ZYZ.json/#...
+  get a list of references to visit.
 
-DEF.json
-  $ref: ABC.json/#..
 
-ZYZ.json
-  (pull thru...)
+vde.json
+x-ms-secondary-file:true
+  doggy:
+    $ref: fre.son#lol
+  stuff:
+    $ref: xyz.json#pop
+
+xyz.json
+    pop:
+
+
+
 
 
   [STEP]: Tree Shaker: (many-inputs)

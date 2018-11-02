@@ -182,9 +182,9 @@ export class AutoRestExtension extends EventEmitter {
       // TODO: transform mappings so friendly names are replaced by internals
       let handle: DataHandle;
       if (typeof (sourceMap as any).mappings === "string") {
-        onFile(handle = await sink.WriteDataWithSourceMap(filename, content, artifactType, () => sourceMap as any));
+        onFile(handle = await sink.WriteDataWithSourceMap(filename, content, artifactType, ['fix-me-here'], () => sourceMap as any));
       } else {
-        onFile(handle = await sink.WriteData(filename, content, artifactType, sourceMap as Array<Mapping>, await inputFileHandles));
+        onFile(handle = await sink.WriteData(filename, content, ['fix-me-here2'], artifactType, sourceMap as Array<Mapping>, await inputFileHandles));
       }
       return {
         uri: handle.key,

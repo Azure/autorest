@@ -1,4 +1,3 @@
-
 # Default Configuration - Graph emitters
 
 This has definitions to allow outputing the `Configuration` and `Pipeline` graphs

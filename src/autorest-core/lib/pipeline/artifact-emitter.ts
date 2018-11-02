@@ -58,19 +58,19 @@ async function EmitArtifact(config: ConfigurationView, uri: string, handle: Data
     const ast = new Lazy<YAMLNode>(() => handle.ReadYamlAst());
 
     if (IsOutputArtifactOrMapRequested(config, artifactType + ".yaml")) {
-      const h = await sink.WriteData(`${++emitCtr}.yaml`, Stringify(object.Value), artifactType, IdentitySourceMapping(handle.key, ast.Value), [handle]);
+      const h = await sink.WriteData(`${++emitCtr}.yaml`, Stringify(object.Value), ['fix-me'], artifactType, IdentitySourceMapping(handle.key, ast.Value), [handle]);
       await EmitArtifactInternal(config, artifactType + ".yaml", uri + ".yaml", h);
     }
     if (IsOutputArtifactOrMapRequested(config, artifactType + ".norm.yaml")) {
-      const h = await sink.WriteData(`${++emitCtr}.norm.yaml`, Stringify(Normalize(object.Value)), artifactType, IdentitySourceMapping(handle.key, ast.Value), [handle]);
+      const h = await sink.WriteData(`${++emitCtr}.norm.yaml`, Stringify(Normalize(object.Value)), ['fix-me'], artifactType, IdentitySourceMapping(handle.key, ast.Value), [handle]);
       await EmitArtifactInternal(config, artifactType + ".norm.yaml", uri + ".norm.yaml", h);
     }
     if (IsOutputArtifactOrMapRequested(config, artifactType + ".json")) {
-      const h = await sink.WriteData(`${++emitCtr}.json`, JSON.stringify(object.Value, null, 2), artifactType, IdentitySourceMapping(handle.key, ast.Value), [handle]);
+      const h = await sink.WriteData(`${++emitCtr}.json`, JSON.stringify(object.Value, null, 2), ['fix-me'], artifactType, IdentitySourceMapping(handle.key, ast.Value), [handle]);
       await EmitArtifactInternal(config, artifactType + ".json", uri + ".json", h);
     }
     if (IsOutputArtifactOrMapRequested(config, artifactType + ".norm.json")) {
-      const h = await sink.WriteData(`${++emitCtr}.norm.json`, JSON.stringify(Normalize(object.Value), null, 2), artifactType, IdentitySourceMapping(handle.key, ast.Value), [handle]);
+      const h = await sink.WriteData(`${++emitCtr}.norm.json`, JSON.stringify(Normalize(object.Value), null, 2), ['fix-me'], artifactType, IdentitySourceMapping(handle.key, ast.Value), [handle]);
       await EmitArtifactInternal(config, artifactType + ".norm.json", uri + ".norm.json", h);
     }
   }

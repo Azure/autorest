@@ -50,13 +50,30 @@ function GetPlugin_LoaderSwagger(): PipelinePlugin {
       inputs,
       sink
     );
+    const foundAllFiles = swaggers.length !== inputs.length;
+
     const result: Array<DataHandle> = [];
     if (swaggers.length === inputs.length) {
+      for (let i = 0; i < swaggers.length; i++) {
+        const cur = swaggers[i];
+        // const loc = `${cur.Location}/[filename]`;
+        // with allFiles
+
+        // get all the references
+        // create a new document, copy across, changing references to being full path. (even local ones!)
+        // if the referenced document isn't loaded, load it
+        // and then mark it 'x-ms-secondary-file' : true
+        // and then add it to the list of swaggers.
+        // swaggers.push( /*new swagger*/ );
+      };
+
+
+      // change this to just emit our copies instead.
       for (let i = 0; i < inputs.length; ++i) {
         result.push(await sink.Forward(inputs[i], swaggers[i]));
       }
     }
-    return new QuickDataSource(result, swaggers.length !== inputs.length);
+    return new QuickDataSource(result, foundAllFiles);
   };
 }
 
@@ -120,7 +137,7 @@ function GetPlugin_Yaml2Jsonx(): PipelinePlugin {
   return CreatePerFilePlugin(async config => async (fileIn, sink) => {
     let ast = fileIn.ReadYamlAst();
     ast = ConvertYaml2Jsonx(ast);
-    return sink.WriteData(fileIn.Description, StringifyAst(ast));
+    return sink.WriteData(fileIn.Description, StringifyAst(ast), fileIn.Identity);
   });
 }
 
@@ -128,7 +145,7 @@ function GetPlugin_Jsonx2Yaml(): PipelinePlugin {
   return CreatePerFilePlugin(async config => async (fileIn, sink) => {
     let ast = fileIn.ReadYamlAst();
     ast = ConvertJsonx2Yaml(ast);
-    return sink.WriteData(fileIn.Description, StringifyAst(ast));
+    return sink.WriteData(fileIn.Description, StringifyAst(ast), fileIn.Identity);
   });
 }
 
@@ -380,8 +397,8 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     'reflect-api-versions-cs': GetPlugin_ReflectApiVersion(),
     'commonmarker': GetPlugin_CommonmarkProcessor(),
     'emitter': GetPlugin_ArtifactEmitter(),
-    'pipeline-emitter': GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('pipeline', pipeline.pipeline, 'pipeline')])),
-    'configuration-emitter': GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('configuration', configView.Raw, 'configuration')]))
+    'pipeline-emitter': GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('pipeline', pipeline.pipeline, ['fix-me-3'], 'pipeline')])),
+    'configuration-emitter': GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('configuration', configView.Raw, ['fix-me-4'], 'configuration')]))
   };
 
   // dynamically loaded, auto-discovered plugins

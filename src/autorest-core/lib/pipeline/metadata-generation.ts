@@ -63,6 +63,6 @@ ${tuples.map(x => `                ${x},`).join("\n")}
       }
   }
 }
-`, "source-file-csharp")]);
+`, ['fix-me'], "source-file-csharp")]);
   };
 }

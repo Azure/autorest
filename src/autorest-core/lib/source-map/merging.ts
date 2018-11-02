@@ -244,6 +244,11 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Da
   let cancel = false;
   let failed = false;
 
+  const newIdentity = new Array<string>();
+  for (const each of yamlInputHandles) {
+    newIdentity.push(...each.Identity);
+  }
+
   for (const yamlInputHandle of yamlInputHandles) {
     const rawYaml = yamlInputHandle.ReadData();
     const inputGraph: any = yaml.Parse(rawYaml, (message, index) => {
@@ -260,6 +265,7 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Da
     mergedGraph = Merge(mergedGraph, inputGraph);
     pushAll(mappings, IdentitySourceMapping(yamlInputHandle.key, yamlInputHandle.ReadYamlAst()));
 
+
     if (verifyOAI2) {
       // check for non-identical duplicate models and parameters
       if (inputGraph.definitions) {
@@ -268,7 +274,7 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Da
           const individual = inputGraph.definitions[model];
           if (!deepCompare(individual, merged)) {
             cancel = true;
-            const mergedHandle = await sink.WriteObject("merged YAMLs", mergedGraph, undefined, mappings, yamlInputHandles);
+            const mergedHandle = await sink.WriteObject("merged YAMLs", mergedGraph, newIdentity, undefined, mappings, yamlInputHandles);
             config.Message({
               Channel: Channel.Error,
               Key: ["Fatal/DuplicateModelCollsion"],
@@ -286,7 +292,7 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Da
           const individual = inputGraph.parameters[parameter];
           if (!deepCompare(individual, merged)) {
             cancel = true;
-            const mergedHandle = await sink.WriteObject("merged YAMLs", mergedGraph, undefined, mappings, yamlInputHandles);
+            const mergedHandle = await sink.WriteObject("merged YAMLs", mergedGraph, newIdentity, undefined, mappings, yamlInputHandles);
             config.Message({
               Channel: Channel.Error,
               Key: ["Fatal/DuplicateParameterCollision"],
@@ -308,7 +314,7 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Da
     throw new Error("Operation Cancelled");
   }
 
-  return sink.WriteObject("merged YAMLs", mergedGraph, undefined, mappings, yamlInputHandles);
+  return sink.WriteObject("merged YAMLs", mergedGraph, newIdentity, undefined, mappings, yamlInputHandles);
 }
 
 function deepCompare(x: any, y: any) {

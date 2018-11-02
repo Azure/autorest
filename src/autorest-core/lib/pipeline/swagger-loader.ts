@@ -94,7 +94,7 @@ export async function LoadLiterateSwaggerOverride(config: ConfigurationView, inp
     state.push(...[...CommonmarkSubHeadings(x.node)].map(y => ({ node: y, query: clue || x.query })));
   }
 
-  return sink.WriteObject('override-directives', { directive: directives }, undefined, mappings, [commonmark]);
+  return sink.WriteObject('override-directives', { directive: directives }, [inputFileUri], undefined, mappings, [commonmark]);
 }
 
 export async function LoadLiterateOpenAPIOverride(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle> {
@@ -166,7 +166,7 @@ export async function LoadLiterateOpenAPIOverride(config: ConfigurationView, inp
     state.push(...[...CommonmarkSubHeadings(x.node)].map(y => ({ node: y, query: clue || x.query })));
   }
 
-  return sink.WriteObject('override-directives', { directive: directives }, undefined, mappings, [commonmark]);
+  return sink.WriteObject('override-directives', { directive: directives }, [inputFileUri], undefined, mappings, [commonmark]);
 }
 
 export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle | null> {
@@ -182,7 +182,7 @@ export async function LoadLiterateSwagger(config: ConfigurationView, inputScope:
   const ast = CloneAst(data.ReadYamlAst());
   const mapping = IdentitySourceMapping(data.key, ast);
 
-  return sink.WriteData('result.yaml', StringifyAst(ast), undefined, mapping, [data]);
+  return sink.WriteData('result.yaml', StringifyAst(ast), [inputFileUri], undefined, mapping, [data]);
 }
 
 export async function LoadLiterateOpenAPI(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle | null> {
@@ -197,7 +197,7 @@ export async function LoadLiterateOpenAPI(config: ConfigurationView, inputScope:
   const ast = CloneAst(data.ReadYamlAst());
   const mapping = IdentitySourceMapping(data.key, ast);
 
-  return sink.WriteData('result.yaml', StringifyAst(ast), undefined, mapping, [data]);
+  return sink.WriteData('result.yaml', StringifyAst(ast), [inputFileUri], undefined, mapping, [data]);
 }
 
 export async function LoadLiterateSwaggers(config: ConfigurationView, inputScope: DataSource, inputFileUris: Array<string>, sink: DataSink): Promise<Array<DataHandle>> {
@@ -364,7 +364,12 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
     populate.forEach(f => f());
 
     // write back
-    inputSwaggers[i] = await sink.WriteObject('prepared', swagger, undefined, mapping, [inputSwagger]);
+    const newIdentity = new Array<string>();
+    for (const each of inputSwaggers) {
+      newIdentity.push(...each.Identity);
+    }
+
+    inputSwaggers[i] = await sink.WriteObject('prepared', swagger, newIdentity, undefined, mapping, [inputSwagger]);
   }
 
   let hSwagger = await MergeYamls(config, inputSwaggers, sink, true);
@@ -372,7 +377,7 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
   // override info section
   const info: any = { title: candidateTitles[0] };
   if (candidateDescriptions[0]) { info.description = candidateDescriptions[0]; }
-  const hInfo = await sink.WriteObject('info.yaml', { info });
+  const hInfo = await sink.WriteObject('info.yaml', { info }, ['fix-me-4']);
 
   hSwagger = await MergeYamls(config, [hSwagger, hInfo], sink);
 

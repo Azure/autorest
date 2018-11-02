@@ -13,10 +13,10 @@ export async function Parse(hConfigFile: DataHandle, sink: DataSink): Promise<{ 
   for (const codeBlock of ParseCodeblocks(rawMarkdown)) {
     const codeBlockKey = `codeBlock_${codeBlock.sourcepos[0][0]}`;
 
-    const data = codeBlock.literal || "";
+    const data = codeBlock.literal || '';
     const mappings = GetSourceMapForCodeBlock(hConfigFile.key, codeBlock);
 
-    const hCodeBlock = await sink.WriteData(codeBlockKey, data, undefined, mappings, [hConfigFile]);
+    const hCodeBlock = await sink.WriteData(codeBlockKey, data, hConfigFile.Identity, undefined, mappings, [hConfigFile]);
     result.push({
       data: hCodeBlock,
       codeBlock: codeBlock

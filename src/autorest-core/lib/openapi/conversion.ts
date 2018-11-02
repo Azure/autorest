@@ -10,5 +10,5 @@ export async function ConvertOAI2toOAI3(input: DataHandle, sink: DataSink): Prom
   // TODO(@NelsonDaniel): Instead of taking the input.key, it should take the metadata that contains the swagger URI.
   const converter = new Oai2ToOai3(input.key, input.ReadObject<OpenApi2Definition>());
   converter.convert();
-  return sink.WriteObject('OpenAPI', converter.generated);
+  return sink.WriteObject('OpenAPI', converter.generated, input.Identity);
 }

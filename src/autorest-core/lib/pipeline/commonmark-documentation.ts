@@ -86,5 +86,5 @@ export async function ProcessCodeModel(codeModel: DataHandle, sink: DataSink): P
     }
   }
 
-  return await sink.WriteData("codeModel.yaml", StringifyAst(ast), undefined, mapping, [codeModel]);
+  return await sink.WriteData("codeModel.yaml", StringifyAst(ast), ['fix-me'], undefined, mapping, [codeModel]);
 }

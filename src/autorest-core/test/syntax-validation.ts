@@ -17,7 +17,7 @@ import { Configuration } from "../lib/configuration";
   private async GetLoaderErrors(swagger: string): Promise<Message[]> {
     const dataStore = new DataStore(CancellationToken.None);
     const uri = "mem:///swagger.json";
-    const h = await dataStore.WriteData(uri, swagger, "input-file");
+    const h = await dataStore.WriteData(uri, swagger, "input-file", [uri]);
 
     const autoRest = new AutoRest();
     const messages: Message[] = [];
