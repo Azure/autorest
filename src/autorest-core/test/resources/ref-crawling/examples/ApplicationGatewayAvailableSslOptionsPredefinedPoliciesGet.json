@@ -1,0 +1,9 @@
+{
+  "parameters": {
+    "api-version": "2018-08-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": { }
+  }
+}

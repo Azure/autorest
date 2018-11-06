@@ -1,0 +1,12 @@
+{
+  "parameters": {
+    "api-version": "2018-08-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "applicationGatewayName": "appgw"
+  },
+  "responses": {
+    "200": {},
+    "202": {}
+  }
+}

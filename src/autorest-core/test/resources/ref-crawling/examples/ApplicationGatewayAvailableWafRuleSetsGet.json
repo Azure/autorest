@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2018-08-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "OWASP_3.0",
+            "id": "/subscriptions//resourceGroups//providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets/",
+            "type": "Microsoft.Network/applicationGatewayAvailableWafRuleSets",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "ruleSetType": "OWASP",
+              "ruleSetVersion": "3.0",
+              "ruleGroups": [
+                {
+                  "ruleGroupName": "General",
+                  "description": "",
+                  "rules": [
+                    {
+                      "ruleId": 200004,
+                      "description": "Possible Multipart Unmatched Boundary."
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

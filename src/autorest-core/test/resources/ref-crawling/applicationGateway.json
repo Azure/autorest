@@ -1,0 +1,2163 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2018-08-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}": {
+      "delete": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_Delete",
+        "x-ms-examples": {
+          "Delete ApplicationGateway": {
+            "$ref": "./examples/ApplicationGatewayDelete.json"
+          }
+        },
+        "description": "Deletes the specified application gateway.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Request successful. Resource with the specified name does not exist"
+          },
+          "200": {
+            "description": "Delete successful."
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_Get",
+        "x-ms-examples": {
+          "Get ApplicationGateway": {
+            "$ref": "./examples/ApplicationGatewayGet.json"
+          }
+        },
+        "description": "Gets the specified application gateway.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns an ApplicationGateway resource.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGateway"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create Application Gateway": {
+            "$ref": "./examples/ApplicationGatewayCreate.json"
+          }
+        },
+        "description": "Creates or updates the specified application gateway.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationGateway"
+            },
+            "description": "Parameters supplied to the create or update application gateway operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create successful. The operation returns the resulting ApplicationGateway resource.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGateway"
+            }
+          },
+          "200": {
+            "description": "Update successful. The operation returns the resulting ApplicationGateway resource.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGateway"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_UpdateTags",
+        "x-ms-examples": {
+          "Update Application Gateway tags": {
+            "$ref": "./examples/ApplicationGatewayUpdateTags.json"
+          }
+        },
+        "description": "Updates the specified application gateway tags.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update application gateway tags."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting ApplicationGateway resource.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGateway"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways": {
+      "get": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_List",
+        "x-ms-examples": {
+          "Lists all application gateways in a resource group": {
+            "$ref": "./examples/ApplicationGatewayList.json"
+          }
+        },
+        "description": "Lists all application gateways in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of ApplicationGateway resources.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGateways": {
+      "get": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_ListAll",
+        "x-ms-examples": {
+          "Lists all application gateways in a subscription": {
+            "$ref": "./examples/ApplicationGatewayListAll.json"
+          }
+        },
+        "description": "Gets all the application gateways in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of ApplicationGateway resources.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/start": {
+      "post": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_Start",
+        "x-ms-examples": {
+          "Start Application Gateway": {
+            "$ref": "./examples/ApplicationGatewayStart.json"
+          }
+        },
+        "description": "Starts the specified application gateway.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation starts the ApplicationGateway resource."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/stop": {
+      "post": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_Stop",
+        "x-ms-examples": {
+          "Stop Application Gateway": {
+            "$ref": "./examples/ApplicationGatewayStop.json"
+          }
+        },
+        "description": "Stops the specified application gateway in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation stops the ApplicationGateway resource."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/backendhealth": {
+      "post": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_BackendHealth",
+        "description": "Gets the backend health of the specified application gateway in a resource group.",
+        "x-ms-examples": {
+          "Get Backend Health": {
+            "$ref": "./examples/ApplicationGatewayBackendHealthGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the application gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Expands BackendAddressPool and BackendHttpSettings referenced in backend health."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayBackendHealth"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets": {
+      "get": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_ListAvailableWafRuleSets",
+        "x-ms-examples": {
+          "Get Available Waf Rule Sets": {
+            "$ref": "./examples/ApplicationGatewayAvailableWafRuleSetsGet.json"
+          }
+        },
+        "description": "Lists all available web application firewall rule sets.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of all available web application firewall rule sets.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayAvailableWafRuleSetsResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableSslOptions/default": {
+      "get": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_ListAvailableSslOptions",
+        "x-ms-examples": {
+          "Get Available Ssl Options": {
+            "$ref": "./examples/ApplicationGatewayAvailableSslOptionsGet.json"
+          }
+        },
+        "description": "Lists available Ssl options for configuring Ssl policy.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns all available Ssl options for configuring Ssl policy.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayAvailableSslOptions"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies": {
+      "get": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_ListAvailableSslPredefinedPolicies",
+        "x-ms-examples": {
+          "Get Available Ssl Predefined Policies": {
+            "$ref": "./examples/ApplicationGatewayAvailableSslOptionsPredefinedPoliciesGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "Lists all SSL predefined policies for configuring Ssl policy.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a lists of all Ssl predefined policies for configuring Ssl policy.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayAvailableSslPredefinedPolicies"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies/{predefinedPolicyName}": {
+      "get": {
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "operationId": "ApplicationGateways_GetSslPredefinedPolicy",
+        "x-ms-examples": {
+          "Get Available Ssl Predefined Policy by name": {
+            "$ref": "./examples/ApplicationGatewayAvailableSslOptionsPredefinedPolicyGet.json"
+          }
+        },
+        "description": "Gets Ssl predefined policy with the specified policy name.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "predefinedPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of Ssl predefined policy."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a Ssl predefined policy with the specified policy name.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewaySslPredefinedPolicy"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationGatewayBackendHealth": {
+      "properties": {
+        "backendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendHealthPool"
+          }
+        }
+      },
+      "description": "List of ApplicationGatewayBackendHealthPool resources."
+    },
+    "ApplicationGatewayBackendHealthPool": {
+      "properties": {
+        "backendAddressPool": {
+          "$ref": "#/definitions/ApplicationGatewayBackendAddressPool",
+          "description": "Reference of an ApplicationGatewayBackendAddressPool resource."
+        },
+        "backendHttpSettingsCollection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendHealthHttpSettings"
+          },
+          "description": "List of ApplicationGatewayBackendHealthHttpSettings resources."
+        }
+      },
+      "description": "Application gateway BackendHealth pool."
+    },
+    "ApplicationGatewayBackendHealthHttpSettings": {
+      "properties": {
+        "backendHttpSettings": {
+          "$ref": "#/definitions/ApplicationGatewayBackendHttpSettings",
+          "description": "Reference of an ApplicationGatewayBackendHttpSettings resource."
+        },
+        "servers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendHealthServer"
+          },
+          "description": "List of ApplicationGatewayBackendHealthServer resources."
+        }
+      },
+      "description": "Application gateway BackendHealthHttp settings."
+    },
+    "ApplicationGatewayBackendHealthServer": {
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "IP address or FQDN of backend server."
+        },
+        "ipConfiguration": {
+          "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
+          "description": "Reference of IP configuration of backend server."
+        },
+        "health": {
+          "type": "string",
+          "description": "Health of backend server.",
+          "enum": [
+            "Unknown",
+            "Up",
+            "Down",
+            "Partial",
+            "Draining"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayBackendHealthServerHealth",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Application gateway backendhealth http settings."
+    },
+    "ApplicationGatewaySku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of an application gateway SKU.",
+          "enum": [
+            "Standard_Small",
+            "Standard_Medium",
+            "Standard_Large",
+            "WAF_Medium",
+            "WAF_Large",
+            "Standard_v2",
+            "WAF_v2"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewaySkuName",
+            "modelAsString": true
+          }
+        },
+        "tier": {
+          "type": "string",
+          "description": "Tier of an application gateway.",
+          "enum": [
+            "Standard",
+            "WAF",
+            "Standard_v2",
+            "WAF_v2"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayTier",
+            "modelAsString": true
+          }
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Capacity (instance count) of an application gateway."
+        }
+      },
+      "description": "SKU of an application gateway"
+    },
+    "ApplicationGatewaySslPolicy": {
+      "properties": {
+        "disabledSslProtocols": {
+          "type": "array",
+          "description": "Ssl protocols to be disabled on application gateway.",
+          "items": {
+            "type": "string",
+            "$ref": "#/definitions/ProtocolsEnum",
+            "x-ms-enum": {
+              "name": "ApplicationGatewaySslProtocol",
+              "modelAsString": true
+            }
+          }
+        },
+        "policyType": {
+          "type": "string",
+          "description": "Type of Ssl Policy",
+          "enum": [
+            "Predefined",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewaySslPolicyType",
+            "modelAsString": true
+          }
+        },
+        "policyName": {
+          "$ref": "#/definitions/PolicyNameEnum",
+          "description": "Name of Ssl predefined policy"
+        },
+        "cipherSuites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CipherSuitesEnum"
+          },
+          "description": "Ssl cipher suites to be enabled in the specified order to application gateway."
+        },
+        "minProtocolVersion": {
+          "$ref": "#/definitions/ProtocolsEnum",
+          "description": "Minimum version of Ssl protocol to be supported on application gateway."
+        }
+      },
+      "description": "Application Gateway Ssl policy."
+    },
+    "ApplicationGatewayIPConfigurationPropertiesFormat": {
+      "properties": {
+        "subnet": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference of the subnet resource. A subnet from where application gateway gets its private address."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the application gateway subnet resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of IP configuration of an application gateway."
+    },
+    "ApplicationGatewayIPConfiguration": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayIPConfigurationPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the IP configuration that is unique within an Application Gateway."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "IP configuration of an application gateway. Currently 1 public and 1 private IP configuration is allowed."
+    },
+    "ApplicationGatewayAuthenticationCertificatePropertiesFormat": {
+      "properties": {
+        "data": {
+          "type": "string",
+          "description": "Certificate public data."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the authentication certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Authentication certificates properties of an application gateway."
+    },
+    "ApplicationGatewayAuthenticationCertificate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayAuthenticationCertificatePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the authentication certificate that is unique within an Application Gateway."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Authentication certificates of an application gateway."
+    },
+    "ApplicationGatewayTrustedRootCertificatePropertiesFormat": {
+      "properties": {
+        "data": {
+          "type": "string",
+          "description": "Certificate public data."
+        },
+        "keyvaultSecretId": {
+          "type": "string",
+          "description": "KeyVault Secret Id for certificate."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the trusted root certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Trusted Root certificates properties of an application gateway."
+    },
+    "ApplicationGatewayTrustedRootCertificate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayTrustedRootCertificatePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the trusted root certificate that is unique within an Application Gateway."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Trusted Root certificates of an application gateway."
+    },
+    "ApplicationGatewaySslCertificatePropertiesFormat": {
+      "properties": {
+        "data": {
+          "type": "string",
+          "description": "Base-64 encoded pfx certificate. Only applicable in PUT Request."
+        },
+        "password": {
+          "type": "string",
+          "description": "Password for the pfx file specified in data. Only applicable in PUT request."
+        },
+        "publicCertData": {
+          "type": "string",
+          "description": "Base-64 encoded Public cert data corresponding to pfx specified in data. Only applicable in GET request."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the SSL certificate resource Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of SSL certificates of an application gateway."
+    },
+    "ApplicationGatewaySslCertificate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewaySslCertificatePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the SSL certificate that is unique within an Application Gateway."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "SSL certificates of an application gateway."
+    },
+    "ApplicationGatewayFrontendIPConfigurationPropertiesFormat": {
+      "properties": {
+        "privateIPAddress": {
+          "type": "string",
+          "description": "PrivateIPAddress of the network interface IP Configuration."
+        },
+        "privateIPAllocationMethod": {
+          "type": "string",
+          "description": "PrivateIP allocation method.",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "x-ms-enum": {
+            "name": "IPAllocationMethod",
+            "modelAsString": true
+          }
+        },
+        "subnet": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference of the subnet resource."
+        },
+        "publicIPAddress": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference of the PublicIP resource."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of Frontend IP configuration of an application gateway."
+    },
+    "ApplicationGatewayFrontendIPConfiguration": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayFrontendIPConfigurationPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the frontend IP configuration that is unique within an Application Gateway."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Frontend IP configuration of an application gateway."
+    },
+    "ApplicationGatewayFrontendPortPropertiesFormat": {
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frontend port"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the frontend port resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of Frontend port of an application gateway."
+    },
+    "ApplicationGatewayFrontendPort": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayFrontendPortPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the frontend port that is unique within an Application Gateway"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Frontend port of an application gateway."
+    },
+    "ApplicationGatewayBackendAddress": {
+      "properties": {
+        "fqdn": {
+          "type": "string",
+          "description": "Fully qualified domain name (FQDN)."
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "IP address"
+        }
+      },
+      "description": "Backend address of an application gateway."
+    },
+    "ApplicationGatewayBackendAddressPoolPropertiesFormat": {
+      "properties": {
+        "backendIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration"
+          },
+          "description": "Collection of references to IPs defined in network interfaces."
+        },
+        "backendAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendAddress"
+          },
+          "description": "Backend addresses"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the backend address pool resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of Backend Address Pool of an application gateway."
+    },
+    "ApplicationGatewayBackendAddressPool": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the backend address pool that is unique within an Application Gateway."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Backend Address Pool of an application gateway."
+    },
+    "ApplicationGatewayBackendHttpSettingsPropertiesFormat": {
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The destination port on the backend."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "The protocol used to communicate with the backend. Possible values are 'Http' and 'Https'.",
+          "enum": [
+            "Http",
+            "Https"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayProtocol",
+            "modelAsString": true
+          }
+        },
+        "cookieBasedAffinity": {
+          "type": "string",
+          "description": "Cookie based affinity.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayCookieBasedAffinity",
+            "modelAsString": true
+          }
+        },
+        "requestTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Request timeout in seconds. Application Gateway will fail the request if response is not received within RequestTimeout. Acceptable values are from 1 second to 86400 seconds."
+        },
+        "probe": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Probe resource of an application gateway."
+        },
+        "authenticationCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "Array of references to application gateway authentication certificates."
+        },
+        "trustedRootCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "Array of references to application gateway trusted root certificates."
+        },
+        "connectionDraining": {
+          "$ref": "#/definitions/ApplicationGatewayConnectionDraining",
+          "description": "Connection draining of the backend http settings resource."
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Host header to be sent to the backend servers."
+        },
+        "pickHostNameFromBackendAddress": {
+          "type": "boolean",
+          "description": "Whether to pick host header should be picked from the host name of the backend server. Default value is false."
+        },
+        "affinityCookieName": {
+          "type": "string",
+          "description": "Cookie name to use for the affinity cookie."
+        },
+        "probeEnabled": {
+          "type": "boolean",
+          "description": "Whether the probe is enabled. Default value is false."
+        },
+        "path": {
+          "type": "string",
+          "description": "Path which should be used as a prefix for all HTTP requests. Null means no path will be prefixed. Default value is null."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the backend http settings resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of Backend address pool settings of an application gateway."
+    },
+    "ApplicationGatewayBackendHttpSettings": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayBackendHttpSettingsPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the backend http settings that is unique within an Application Gateway."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Backend address pool settings of an application gateway."
+    },
+    "ApplicationGatewayHttpListenerPropertiesFormat": {
+      "properties": {
+        "frontendIPConfiguration": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Frontend IP configuration resource of an application gateway."
+        },
+        "frontendPort": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Frontend port resource of an application gateway."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Protocol of the HTTP listener. Possible values are 'Http' and 'Https'.",
+          "enum": [
+            "Http",
+            "Https"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayProtocol",
+            "modelAsString": true
+          }
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Host name of HTTP listener."
+        },
+        "sslCertificate": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "SSL certificate resource of an application gateway."
+        },
+        "requireServerNameIndication": {
+          "type": "boolean",
+          "description": "Applicable only if protocol is https. Enables SNI for multi-hosting."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the HTTP listener resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of HTTP listener of an application gateway."
+    },
+    "ApplicationGatewayHttpListener": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the HTTP listener that is unique within an Application Gateway."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Http listener of an application gateway."
+    },
+    "ApplicationGatewayPathRulePropertiesFormat": {
+      "properties": {
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Path rules of URL path map."
+        },
+        "backendAddressPool": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Backend address pool resource of URL path map path rule."
+        },
+        "backendHttpSettings": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Backend http settings resource of URL path map path rule."
+        },
+        "redirectConfiguration": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Redirect configuration resource of URL path map path rule."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Path rule of URL path map resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of path rule of an application gateway."
+    },
+    "ApplicationGatewayPathRule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayPathRulePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the path rule that is unique within an Application Gateway."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Path rule of URL path map of an application gateway."
+    },
+    "ApplicationGatewayProbePropertiesFormat": {
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": "The protocol used for the probe. Possible values are 'Http' and 'Https'.",
+          "enum": [
+            "Http",
+            "Https"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayProtocol",
+            "modelAsString": true
+          }
+        },
+        "host": {
+          "type": "string",
+          "description": "Host name to send the probe to."
+        },
+        "path": {
+          "type": "string",
+          "description": "Relative path of probe. Valid path starts from '/'. Probe is sent to <Protocol>://<host>:<port><path>"
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The probing interval in seconds. This is the time interval between two consecutive probes. Acceptable values are from 1 second to 86400 seconds."
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "the probe timeout in seconds. Probe marked as failed if valid response is not received with this timeout period. Acceptable values are from 1 second to 86400 seconds."
+        },
+        "unhealthyThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The probe retry count. Backend server is marked down after consecutive probe failure count reaches UnhealthyThreshold. Acceptable values are from 1 second to 20."
+        },
+        "pickHostNameFromBackendHttpSettings": {
+          "type": "boolean",
+          "description": "Whether the host header should be picked from the backend http settings. Default value is false."
+        },
+        "minServers": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum number of servers that are always marked healthy. Default value is 0."
+        },
+        "match": {
+          "$ref": "#/definitions/ApplicationGatewayProbeHealthResponseMatch",
+          "description": "Criterion for classifying a healthy probe response."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the backend http settings resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of probe of an application gateway."
+    },
+    "ApplicationGatewayProbeHealthResponseMatch": {
+      "properties": {
+        "body": {
+          "type": "string",
+          "description": "Body that must be contained in the health response. Default value is empty."
+        },
+        "statusCodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed ranges of healthy status codes. Default range of healthy status codes is 200-399."
+        }
+      },
+      "description": "Application gateway probe health response match"
+    },
+    "ApplicationGatewayProbe": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayProbePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the probe that is unique within an Application Gateway."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Probe of the application gateway."
+    },
+    "ApplicationGatewayRequestRoutingRulePropertiesFormat": {
+      "properties": {
+        "ruleType": {
+          "type": "string",
+          "description": "Rule type.",
+          "enum": [
+            "Basic",
+            "PathBasedRouting"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayRequestRoutingRuleType",
+            "modelAsString": true
+          }
+        },
+        "backendAddressPool": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Backend address pool resource of the application gateway. "
+        },
+        "backendHttpSettings": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Backend http settings resource of the application gateway."
+        },
+        "httpListener": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Http listener resource of the application gateway. "
+        },
+        "urlPathMap": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "URL path map resource of the application gateway."
+        },
+        "redirectConfiguration": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Redirect configuration resource of the application gateway."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the request routing rule resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of request routing rule of the application gateway."
+    },
+    "ApplicationGatewayRequestRoutingRule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayRequestRoutingRulePropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the request routing rule that is unique within an Application Gateway."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Request routing rule of an application gateway."
+    },
+    "ApplicationGatewayRedirectConfigurationPropertiesFormat": {
+      "properties": {
+        "redirectType": {
+          "type": "string",
+          "$ref": "#/definitions/RedirectTypeEnum",
+          "description": "Supported http redirection types - Permanent, Temporary, Found, SeeOther.",
+          "x-ms-enum": {
+            "name": "ApplicationGatewayRedirectType",
+            "modelAsString": true
+          }
+        },
+        "targetListener": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference to a listener to redirect the request to."
+        },
+        "targetUrl": {
+          "type": "string",
+          "description": "Url to redirect the request to."
+        },
+        "includePath": {
+          "type": "boolean",
+          "description": "Include path in the redirected url."
+        },
+        "includeQueryString": {
+          "type": "boolean",
+          "description": "Include query string in the redirected url."
+        },
+        "requestRoutingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "Request routing specifying redirect configuration."
+        },
+        "urlPathMaps": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "Url path maps specifying default redirect configuration."
+        },
+        "pathRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "Path rules specifying redirect configuration."
+        }
+      },
+      "description": "Properties of redirect configuration of the application gateway."
+    },
+    "ApplicationGatewayRedirectConfiguration": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayRedirectConfigurationPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the redirect configuration that is unique within an Application Gateway."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Redirect configuration of an application gateway."
+    },
+    "ApplicationGatewayPropertiesFormat": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ApplicationGatewaySku",
+          "description": "SKU of the application gateway resource."
+        },
+        "sslPolicy": {
+          "$ref": "#/definitions/ApplicationGatewaySslPolicy",
+          "description": "SSL policy of the application gateway resource."
+        },
+        "operationalState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operational state of the application gateway resource.",
+          "enum": [
+            "Stopped",
+            "Starting",
+            "Running",
+            "Stopping"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayOperationalState",
+            "modelAsString": true
+          }
+        },
+        "gatewayIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayIPConfiguration"
+          },
+          "description": "Subnets of application the gateway resource."
+        },
+        "authenticationCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayAuthenticationCertificate"
+          },
+          "description": "Authentication certificates of the application gateway resource."
+        },
+        "trustedRootCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayTrustedRootCertificate"
+          },
+          "description": "Trusted Root certificates of the application gateway resource."
+        },
+        "sslCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewaySslCertificate"
+          },
+          "description": "SSL certificates of the application gateway resource."
+        },
+        "frontendIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFrontendIPConfiguration"
+          },
+          "description": "Frontend IP addresses of the application gateway resource."
+        },
+        "frontendPorts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFrontendPort"
+          },
+          "description": "Frontend ports of the application gateway resource."
+        },
+        "probes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayProbe"
+          },
+          "description": "Probes of the application gateway resource."
+        },
+        "backendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendAddressPool"
+          },
+          "description": "Backend address pool of the application gateway resource."
+        },
+        "backendHttpSettingsCollection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendHttpSettings"
+          },
+          "description": "Backend http settings of the application gateway resource."
+        },
+        "httpListeners": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayHttpListener"
+          },
+          "description": "Http listeners of the application gateway resource."
+        },
+        "urlPathMaps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayUrlPathMap"
+          },
+          "description": "URL path map of the application gateway resource."
+        },
+        "requestRoutingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayRequestRoutingRule"
+          },
+          "description": "Request routing rules of the application gateway resource."
+        },
+        "redirectConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayRedirectConfiguration"
+          },
+          "description": "Redirect configurations of the application gateway resource."
+        },
+        "webApplicationFirewallConfiguration": {
+          "$ref": "#/definitions/ApplicationGatewayWebApplicationFirewallConfiguration",
+          "description": "Web application firewall configuration."
+        },
+        "enableHttp2": {
+          "type": "boolean",
+          "description": "Whether HTTP2 is enabled on the application gateway resource."
+        },
+        "enableFips": {
+          "type": "boolean",
+          "description": "Whether FIPS is enabled on the application gateway resource."
+        },
+        "autoscaleConfiguration": {
+          "$ref": "#/definitions/ApplicationGatewayAutoscaleConfiguration",
+          "description": "Autoscale Configuration."
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Resource GUID property of the application gateway resource."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the application gateway resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of the application gateway."
+    },
+    "ApplicationGateway": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayPropertiesFormat"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of availability zones denoting where the resource needs to come from."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "Application gateway resource"
+    },
+    "ApplicationGatewayListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGateway"
+          },
+          "description": "List of an application gateways in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListApplicationGateways API service call."
+    },
+    "ApplicationGatewayUrlPathMapPropertiesFormat": {
+      "properties": {
+        "defaultBackendAddressPool": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Default backend address pool resource of URL path map."
+        },
+        "defaultBackendHttpSettings": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Default backend http settings resource of URL path map."
+        },
+        "defaultRedirectConfiguration": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Default redirect configuration resource of URL path map."
+        },
+        "pathRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayPathRule"
+          },
+          "description": "Path rule of URL path map resource."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the backend http settings resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of UrlPathMap of the application gateway."
+    },
+    "ApplicationGatewayUrlPathMap": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayUrlPathMapPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the URL path map that is unique within an Application Gateway."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "UrlPathMaps give a url path to the backend mapping information for PathBasedRouting."
+    },
+    "ApplicationGatewayWebApplicationFirewallConfiguration": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the web application firewall is enabled or not."
+        },
+        "firewallMode": {
+          "type": "string",
+          "description": "Web application firewall mode.",
+          "enum": [
+            "Detection",
+            "Prevention"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayFirewallMode",
+            "modelAsString": true
+          }
+        },
+        "ruleSetType": {
+          "type": "string",
+          "description": "The type of the web application firewall rule set. Possible values are: 'OWASP'."
+        },
+        "ruleSetVersion": {
+          "type": "string",
+          "description": "The version of the rule set type."
+        },
+        "disabledRuleGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallDisabledRuleGroup"
+          },
+          "description": "The disabled rule groups."
+        },
+        "requestBodyCheck": {
+          "type": "boolean",
+          "description": "Whether allow WAF to check request Body."
+        },
+        "maxRequestBodySize": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 128,
+          "exclusiveMaximum": false,
+          "minimum": 8,
+          "exclusiveMinimum": false,
+          "description": "Maxium request body size for WAF."
+        }
+      },
+      "required": [
+        "enabled",
+        "firewallMode",
+        "ruleSetType",
+        "ruleSetVersion"
+      ],
+      "description": "Application gateway web application firewall configuration."
+    },
+    "ApplicationGatewayAutoscaleConfiguration": {
+      "properties": {
+        "minCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 2,
+          "exclusiveMinimum": false,
+          "description": "Lower bound on number of Application Gateway instances"
+        }
+      },
+      "required": [
+        "minCapacity"
+      ],
+      "description": "Application Gateway autoscale configuration."
+    },
+    "ApplicationGatewayConnectionDraining": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether connection draining is enabled or not."
+        },
+        "drainTimeoutInSec": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 3600,
+          "exclusiveMaximum": false,
+          "minimum": 1,
+          "exclusiveMinimum": false,
+          "description": "The number of seconds connection draining is active. Acceptable values are from 1 second to 3600 seconds."
+        }
+      },
+      "required": [
+        "enabled",
+        "drainTimeoutInSec"
+      ],
+      "description": "Connection draining allows open connections to a backend server to be active for a specified time after the backend server got removed from the configuration."
+    },
+    "ApplicationGatewayFirewallDisabledRuleGroup": {
+      "properties": {
+        "ruleGroupName": {
+          "type": "string",
+          "description": "The name of the rule group that will be disabled."
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32",
+            "x-nullable": false
+          },
+          "description": "The list of rules that will be disabled. If null, all rules of the rule group will be disabled."
+        }
+      },
+      "required": [
+        "ruleGroupName"
+      ],
+      "description": "Allows to disable rules within a rule group or an entire rule group."
+    },
+    "ApplicationGatewayAvailableWafRuleSetsResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallRuleSet"
+          },
+          "description": "The list of application gateway rule sets."
+        }
+      },
+      "description": "Response for ApplicationGatewayAvailableWafRuleSets API service call."
+    },
+    "ApplicationGatewayFirewallRuleSet": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayFirewallRuleSetPropertiesFormat"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "A web application firewall rule set."
+    },
+    "ApplicationGatewayFirewallRuleSetPropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the web application firewall rule set."
+        },
+        "ruleSetType": {
+          "type": "string",
+          "description": "The type of the web application firewall rule set."
+        },
+        "ruleSetVersion": {
+          "type": "string",
+          "description": "The version of the web application firewall rule set type."
+        },
+        "ruleGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallRuleGroup"
+          },
+          "description": "The rule groups of the web application firewall rule set."
+        }
+      },
+      "required": [
+        "ruleSetType",
+        "ruleSetVersion",
+        "ruleGroups"
+      ],
+      "description": "Properties of the web application firewall rule set."
+    },
+    "ApplicationGatewayFirewallRuleGroup": {
+      "properties": {
+        "ruleGroupName": {
+          "type": "string",
+          "description": "The name of the web application firewall rule group."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the web application firewall rule group."
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallRule"
+          },
+          "description": "The rules of the web application firewall rule group."
+        }
+      },
+      "required": [
+        "ruleGroupName",
+        "rules"
+      ],
+      "description": "A web application firewall rule group."
+    },
+    "ApplicationGatewayFirewallRule": {
+      "properties": {
+        "ruleId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The identifier of the web application firewall rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the web application firewall rule."
+        }
+      },
+      "required": [
+        "ruleId"
+      ],
+      "description": "A web application firewall rule."
+    },
+    "ApplicationGatewayAvailableSslOptions": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayAvailableSslOptionsPropertiesFormat"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "Response for ApplicationGatewayAvailableSslOptions API service call."
+    },
+    "ApplicationGatewayAvailableSslOptionsPropertiesFormat": {
+      "properties": {
+        "predefinedPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "List of available Ssl predefined policy."
+        },
+        "defaultPolicy": {
+          "$ref": "#/definitions/PolicyNameEnum",
+          "description": "Name of the Ssl predefined policy applied by default to application gateway"
+        },
+        "availableCipherSuites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CipherSuitesEnum"
+          },
+          "description": "List of available Ssl cipher suites."
+        },
+        "availableProtocols": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProtocolsEnum"
+          },
+          "description": "List of available Ssl protocols."
+        }
+      },
+      "description": "Properties of ApplicationGatewayAvailableSslOptions"
+    },
+    "ApplicationGatewayAvailableSslPredefinedPolicies": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewaySslPredefinedPolicy"
+          },
+          "description": "List of available Ssl predefined policy."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      },
+      "description": "Response for ApplicationGatewayAvailableSslOptions API service call."
+    },
+    "ApplicationGatewaySslPredefinedPolicy": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Ssl predefined policy."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewaySslPredefinedPolicyPropertiesFormat"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "An Ssl predefined policy"
+    },
+    "ApplicationGatewaySslPredefinedPolicyPropertiesFormat": {
+      "properties": {
+        "cipherSuites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CipherSuitesEnum"
+          },
+          "description": "Ssl cipher suites to be enabled in the specified order for application gateway."
+        },
+        "minProtocolVersion": {
+          "$ref": "#/definitions/ProtocolsEnum",
+          "description": "Minimum version of Ssl protocol to be supported on application gateway."
+        }
+      },
+      "description": "Properties of ApplicationGatewaySslPredefinedPolicy"
+    },
+    "PolicyNameEnum": {
+      "type": "string",
+      "description": "Ssl predefined policy name enums.",
+      "enum": [
+        "AppGwSslPolicy20150501",
+        "AppGwSslPolicy20170401",
+        "AppGwSslPolicy20170401S"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationGatewaySslPolicyName",
+        "modelAsString": true
+      }
+    },
+    "ProtocolsEnum": {
+      "type": "string",
+      "description": "Ssl protocol enums.",
+      "enum": [
+        "TLSv1_0",
+        "TLSv1_1",
+        "TLSv1_2"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationGatewaySslProtocol",
+        "modelAsString": true
+      }
+    },
+    "CipherSuitesEnum": {
+      "type": "string",
+      "description": "Ssl cipher suites enums.",
+      "enum": [
+        "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384",
+        "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256",
+        "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA",
+        "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+        "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384",
+        "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256",
+        "TLS_DHE_RSA_WITH_AES_256_CBC_SHA",
+        "TLS_DHE_RSA_WITH_AES_128_CBC_SHA",
+        "TLS_RSA_WITH_AES_256_GCM_SHA384",
+        "TLS_RSA_WITH_AES_128_GCM_SHA256",
+        "TLS_RSA_WITH_AES_256_CBC_SHA256",
+        "TLS_RSA_WITH_AES_128_CBC_SHA256",
+        "TLS_RSA_WITH_AES_256_CBC_SHA",
+        "TLS_RSA_WITH_AES_128_CBC_SHA",
+        "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+        "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+        "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384",
+        "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256",
+        "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA",
+        "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA",
+        "TLS_DHE_DSS_WITH_AES_256_CBC_SHA256",
+        "TLS_DHE_DSS_WITH_AES_128_CBC_SHA256",
+        "TLS_DHE_DSS_WITH_AES_256_CBC_SHA",
+        "TLS_DHE_DSS_WITH_AES_128_CBC_SHA",
+        "TLS_RSA_WITH_3DES_EDE_CBC_SHA"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationGatewaySslCipherSuite",
+        "modelAsString": true
+      }
+    },
+    "RedirectTypeEnum": {
+      "type": "string",
+      "enum": [
+        "Permanent",
+        "Found",
+        "SeeOther",
+        "Temporary"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationGatewayRedirectType",
+        "modelAsString": true
+      }
+    }
+  }
+}
