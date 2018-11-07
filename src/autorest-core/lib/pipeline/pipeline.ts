@@ -7,7 +7,7 @@ import { Help } from '../../help';
 import { ConfigurationView, GetExtension } from '../configuration';
 import { DataHandle, DataSink, DataSource, QuickDataSource } from '@microsoft.azure/datastore';
 import { IFileSystem } from '@microsoft.azure/datastore';
-
+import { RefCrawler } from './ref-crawler';
 import { Channel, Message } from '../message';
 import { ConvertOAI2toOAI3 } from '../openapi/conversion';
 import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
@@ -55,7 +55,10 @@ function GetPlugin_LoaderSwagger(): PipelinePlugin {
     const result: Array<DataHandle> = [];
     if (swaggers.length === inputs.length) {
       for (let i = 0; i < swaggers.length; i++) {
-        const cur = swaggers[i];
+        const currentSwagger = swaggers[i];
+        const crawler = new RefCrawler(currentSwagger);
+        const generated = crawler.output;
+        result.push(await sink.WriteObject(currentSwagger.Description, generated, currentSwagger.Identity, currentSwagger.GetArtifact(), crawler.sourceMappings));
         // const loc = `${cur.Location}/[filename]`;
         // with allFiles
 
@@ -65,8 +68,7 @@ function GetPlugin_LoaderSwagger(): PipelinePlugin {
         // and then mark it 'x-ms-secondary-file' : true
         // and then add it to the list of swaggers.
         // swaggers.push( /*new swagger*/ );
-      };
-
+      }
 
       // change this to just emit our copies instead.
       for (let i = 0; i < inputs.length; ++i) {
