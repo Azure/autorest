@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2018-08-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "appgw",
+    "applicationGatewayName": "appgw"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "backendAddressPools": [
+          {
+            "backendAddressPool": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendaddressPools/MFAnalyticsPool"
+            },
+            "backendHttpSettingsCollection": [
+              {
+                "backendHttpSettings": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/MFPoolSettings"
+                },
+                "servers": [
+                  {
+                    "address": "10.220.1.8",
+                    "health": "Up"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "backendAddressPool": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendaddressPools/MFPool"
+            },
+            "backendHttpSettingsCollection": [
+              {
+                "backendHttpSettings": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/MFPoolSettings"
+                },
+                "servers": [
+                  {
+                    "address": "10.220.1.4",
+                    "health": "Up"
+                  },
+                  {
+                    "address": "10.220.1.5",
+                    "health": "Up"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "202": {}
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "parameters": {
+    "api-version": "2018-08-01",
+    "subscriptionId": "subid",
+    "predefinedPolicyName": "AppGwSslPolicy20150501"
+  },
+  "responses": {
+    "200": { }
+  }
+}

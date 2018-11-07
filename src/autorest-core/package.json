@@ -37,7 +37,7 @@
   },
   "pwsh-scripts": {
     "clean": "remove-item -recurse -ea 0 ./dist ; remove-item -ea 0 ./*.log ",
-    "before-build": "copy-item ../../schema/*.json dist/lib/pipeline"
+    "before-build": "new-item -itemType directory -ea 0 -path dist/lib/pipeline ; copy-item ../../schema/*.json dist/lib/pipeline"
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {

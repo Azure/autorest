@@ -1,0 +1,125 @@
+{
+  "parameters": {
+    "api-version": "2018-08-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "appgw",
+            "type": "Microsoft.Network/applicationGateways",
+            "location": "southcentralus",
+            "properties": {
+              "sku": {
+                "name": "Standard_Medium",
+                "tier": "Standard",
+                "capacity": 3
+              },
+              "gatewayIPConfigurations": [
+                {
+                  "name": "appgwipc",
+                  "properties": {
+                    "subnet": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet/subnets/appgwsubnet"
+                    }
+                  }
+                }
+              ],
+              "sslCertificates": [
+                {
+                  "name": "sslcert",
+                  "properties": {
+                    "data": "base64-pfxData",
+                    "password": "pass1"
+                  }
+                }
+              ],
+              "frontendIPConfigurations": [
+                {
+                  "name": "appgwfip",
+                  "properties": {
+                    "publicIPAddress": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/appgwpip"
+                    }
+                  }
+                }
+              ],
+              "frontendPorts": [
+                {
+                  "name": "appgwfp",
+                  "properties": {
+                    "port": 443
+                  }
+                }
+              ],
+              "backendAddressPools": [
+                {
+                  "name": "appgwpool",
+                  "properties": {
+                    "backendAddresses": [
+                      {
+                        "ipAddress": "10.0.1.1"
+                      },
+                      {
+                        "ipAddress": "10.0.1.2"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "backendHttpSettingsCollection": [
+                {
+                  "name": "appgwbhs",
+                  "properties": {
+                    "port": 80,
+                    "protocol": "Http",
+                    "cookieBasedAffinity": "Disabled",
+                    "requestTimeout": 30
+                  }
+                }
+              ],
+              "httpListeners": [
+                {
+                  "name": "appgwhl",
+                  "properties": {
+                    "frontendIPConfiguration": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip"
+                    },
+                    "frontendPort": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp"
+                    },
+                    "protocol": "Https",
+                    "sslCertificate": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslCertificates/sslcert"
+                    },
+                    "requireServerNameIndication": false
+                  }
+                }
+              ],
+              "requestRoutingRules": [
+                {
+                  "name": "appgwrule",
+                  "properties": {
+                    "ruleType": "Basic",
+                    "httpListener": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhl"
+                    },
+                    "backendAddressPool": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool"
+                    },
+                    "backendHttpSettings": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
