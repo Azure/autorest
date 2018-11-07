@@ -71,6 +71,30 @@
       "shouldPublish": true
     },
     {
+      "packageName": "@microsoft.azure/autorest-extension-base",
+      "projectFolder": "perks/libraries/autorest-extension-base",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@microsoft.azure/autorest.codemodel-v3",
+      "projectFolder": "perks/libraries/codemodel-v3",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@microsoft.azure/codegen",
+      "projectFolder": "perks/libraries/codegen",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "@microsoft.azure/codegen-csharp",
+      "projectFolder": "perks/libraries/codegen-csharp",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
       "packageName": "@microsoft.azure/autorest-core",
       "projectFolder": "src/autorest-core",
       "reviewCategory": "production",
