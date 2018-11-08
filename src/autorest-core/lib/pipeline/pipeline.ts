@@ -5,9 +5,8 @@
 
 import { Help } from '../../help';
 import { ConfigurationView, GetExtension } from '../configuration';
-import { DataHandle, DataSink, DataSource, QuickDataSource } from '@microsoft.azure/datastore';
+import { DataHandle, DataSink, DataSource, QuickDataSource, Data, createGraphProxy, Mapping, CloneAst } from '@microsoft.azure/datastore';
 import { IFileSystem } from '@microsoft.azure/datastore';
-import { RefCrawler } from './ref-crawler';
 import { Channel, Message } from '../message';
 import { ConvertOAI2toOAI3 } from '../openapi/conversion';
 import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
@@ -26,6 +25,7 @@ import { GetPlugin_ReflectApiVersion } from './metadata-generation';
 import { AutoRestExtension } from './plugin-endpoint';
 import { GetPlugin_SchemaValidatorOpenApi, GetPlugin_SchemaValidatorSwagger } from './schema-validation';
 import { ComposeSwaggers, LoadLiterateOpenAPIOverrides, LoadLiterateOpenAPIs, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
+import { crawlReferences } from './ref-crawling';
 
 interface PipelineNode {
   outputArtifact?: string;
@@ -50,31 +50,13 @@ function GetPlugin_LoaderSwagger(): PipelinePlugin {
       inputs,
       sink
     );
+
     const foundAllFiles = swaggers.length !== inputs.length;
-
-    const result: Array<DataHandle> = [];
+    let result: Array<DataHandle> = [];
     if (swaggers.length === inputs.length) {
-      for (let i = 0; i < swaggers.length; i++) {
-        const currentSwagger = swaggers[i];
-        const crawler = new RefCrawler(currentSwagger);
-        const generated = crawler.output;
-        result.push(await sink.WriteObject(currentSwagger.Description, generated, currentSwagger.Identity, currentSwagger.GetArtifact(), crawler.sourceMappings));
-        // const loc = `${cur.Location}/[filename]`;
-        // with allFiles
-
-        // get all the references
-        // create a new document, copy across, changing references to being full path. (even local ones!)
-        // if the referenced document isn't loaded, load it
-        // and then mark it 'x-ms-secondary-file' : true
-        // and then add it to the list of swaggers.
-        // swaggers.push( /*new swagger*/ );
-      }
-
-      // change this to just emit our copies instead.
-      for (let i = 0; i < inputs.length; ++i) {
-        result.push(await sink.Forward(inputs[i], swaggers[i]));
-      }
+      result = await crawlReferences(input, swaggers, sink);
     }
+
     return new QuickDataSource(result, foundAllFiles);
   };
 }
@@ -88,11 +70,9 @@ function GetPlugin_LoaderOpenAPI(): PipelinePlugin {
       inputs,
       sink
     );
-    const result: Array<DataHandle> = [];
+    let result: Array<DataHandle> = [];
     if (openapis.length === inputs.length) {
-      for (let i = 0; i < inputs.length; ++i) {
-        result.push(await sink.Forward(inputs[i], openapis[i]));
-      }
+      result = await crawlReferences(input, openapis, sink);
     }
     return new QuickDataSource(result, openapis.length !== inputs.length);
   };
