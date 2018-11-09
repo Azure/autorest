@@ -3,32 +3,31 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { DataHandle, DataSink, Mapping } from '@microsoft.azure/datastore';
 import * as commonmark from 'commonmark';
-import { Mapping } from "@microsoft.azure/datastore";
-import { DataHandle, DataSink } from '@microsoft.azure/datastore';
 
-export async function Parse(hConfigFile: DataHandle, sink: DataSink): Promise<{ data: DataHandle, codeBlock: commonmark.Node }[]> {
-  const result: { data: DataHandle, codeBlock: commonmark.Node }[] = [];
+export async function parse(hConfigFile: DataHandle, sink: DataSink): Promise<Array<{ data: DataHandle, codeBlock: commonmark.Node }>> {
+  const result: Array<{ data: DataHandle, codeBlock: commonmark.Node }> = [];
   const rawMarkdown = hConfigFile.ReadData();
-  for (const codeBlock of ParseCodeblocks(rawMarkdown)) {
+  for (const codeBlock of parseCodeblocks(rawMarkdown)) {
     const codeBlockKey = `codeBlock_${codeBlock.sourcepos[0][0]}`;
 
     const data = codeBlock.literal || '';
-    const mappings = GetSourceMapForCodeBlock(hConfigFile.key, codeBlock);
+    const mappings = getSourceMapForCodeBlock(hConfigFile.key, codeBlock);
 
     const hCodeBlock = await sink.WriteData(codeBlockKey, data, hConfigFile.Identity, undefined, mappings, [hConfigFile]);
     result.push({
       data: hCodeBlock,
-      codeBlock: codeBlock
+      codeBlock
     });
   }
   return result;
 }
 
-function GetSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark.Node): Array<Mapping> {
+function getSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark.Node): Array<Mapping> {
   const result = new Array<Mapping>();
   const numLines = codeBlock.sourcepos[1][0] - codeBlock.sourcepos[0][0] + (codeBlock.info === null ? 1 : -1);
-  for (var i = 0; i < numLines; ++i) {
+  for (let i = 0; i < numLines; ++i) {
     result.push({
       generated: {
         line: i + 1,
@@ -45,26 +44,26 @@ function GetSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark.
   return result;
 }
 
-export function ParseCommonmark(markdown: string): commonmark.Node {
+export function parseCommonmark(markdown: string): commonmark.Node {
   return new commonmark.Parser().parse(markdown);
 }
 
-function* ParseCodeblocks(markdown: string): Iterable<commonmark.Node> {
-  const parsed = ParseCommonmark(markdown);
+function* parseCodeblocks(markdown: string): Iterable<commonmark.Node> {
+  const parsed = parseCommonmark(markdown);
   const walker = parsed.walker();
   let event;
   while ((event = walker.next())) {
-    var node = event.node;
-    if (event.entering && node.type === "code_block") {
+    const node = event.node;
+    if (event.entering && node.type === 'code_block') {
       yield node;
     }
   }
 }
 
-const commonmarkHeadingNodeType = "heading";
+const commonmarkHeadingNodeType = 'heading';
 const commonmarkHeadingMaxLevel = 1000;
 
-function CommonmarkParentHeading(startNode: commonmark.Node): commonmark.Node | null {
+function commonmarkParentHeading(startNode: commonmark.Node): commonmark.Node | null {
   const currentLevel = startNode.type === commonmarkHeadingNodeType
     ? startNode.level
     : commonmarkHeadingMaxLevel;
@@ -77,7 +76,7 @@ function CommonmarkParentHeading(startNode: commonmark.Node): commonmark.Node | 
   return resultNode;
 }
 
-export function* CommonmarkSubHeadings(startNode: commonmark.Node | null): Iterable<commonmark.Node> {
+export function* commonmarkSubHeadings(startNode: commonmark.Node | null): Iterable<commonmark.Node> {
   if (startNode && (startNode.type === commonmarkHeadingNodeType || !startNode.prev)) {
     const currentLevel = startNode.level;
     let maxLevel = commonmarkHeadingMaxLevel;
@@ -99,8 +98,8 @@ export function* CommonmarkSubHeadings(startNode: commonmark.Node | null): Itera
   }
 }
 
-export function CommonmarkHeadingText(headingNode: commonmark.Node): string {
-  let text = "";
+export function commonmarkHeadingText(headingNode: commonmark.Node): string {
+  let text = '';
   let node = headingNode.firstChild;
   while (node) {
     text += node.literal;
@@ -109,12 +108,12 @@ export function CommonmarkHeadingText(headingNode: commonmark.Node): string {
   return text;
 }
 
-export function CommonmarkHeadingFollowingText(headingNode: commonmark.Node): [number, number] {
+export function commonmarkHeadingFollowingText(headingNode: commonmark.Node): [number, number] {
   let subNode = headingNode.next;
-  if (subNode === null) { throw new Error("No node found after heading node"); }
+  if (subNode === null) { throw new Error('No node found after heading node'); }
   const startPos = subNode.sourcepos[0];
   while (subNode.next
-    && subNode.next.type !== "code_block"
+    && subNode.next.type !== 'code_block'
     && (subNode.next.type !== commonmarkHeadingNodeType /* || subNode.next.level > headingNode.level*/)) {
     subNode = subNode.next;
   }

@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 // since target.push(...source) is SO prone!
-export function pushAll<T>(target: T[], source: T[]) {
+export function pushAll<T>(target: Array<T>, source: Array<T>) {
   for (const x of source) {
     target.push(x);
   }

@@ -7,8 +7,8 @@ import { PipelinePlugin } from '../common';
 
 import { ConfigurationView } from '../../autorest-core';
 import { Channel, SourceLocation } from '../../message';
-import { CommonmarkHeadingFollowingText, CommonmarkSubHeadings, ParseCommonmark } from '../../parsing/literate';
-import { Parse as ParseLiterateYaml } from '../../parsing/literate-yaml';
+import { commonmarkHeadingFollowingText, commonmarkSubHeadings, parseCommonmark } from '../../parsing/literate';
+import { parse as ParseLiterateYaml } from '../../parsing/literate-yaml';
 
 import { QuickDataSource, Clone, CloneAst, CreateAssignmentMapping, DataHandle, DataSink, DataSource, IndexToPosition, JsonPath, JsonPathComponent, Lines, Mapping, StrictJsonSyntaxCheck, StringifyAst, ToAst } from '@microsoft.azure/datastore';
 import { From } from 'linq-es2015';

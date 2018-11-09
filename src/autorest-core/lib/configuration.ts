@@ -16,7 +16,7 @@ import { OperationAbortedException } from './exception';
 import { IFileSystem, RealFileSystem } from '@microsoft.azure/datastore';
 import { LazyPromise } from '@microsoft.azure/datastore';
 import { Channel, Message, Range, SourceLocation } from './message';
-import { EvaluateGuard, ParseCodeBlocks } from './parsing/literate-yaml';
+import { evaluateGuard, parseCodeBlocks } from './parsing/literate-yaml';
 import { AutoRestExtension } from './pipeline/plugin-endpoint';
 import { Suppressor } from './pipeline/suppression';
 import { exists } from '@microsoft.azure/async-io';
@@ -85,7 +85,7 @@ export function MergeConfigurations(...configs: Array<AutoRestConfigurationImpl>
 // TODO: operate on DataHandleRead and create source map!
 function MergeConfiguration(higherPriority: AutoRestConfigurationImpl, lowerPriority: AutoRestConfigurationImpl): AutoRestConfigurationImpl {
   // check guard
-  if (lowerPriority.__info && !EvaluateGuard(lowerPriority.__info, higherPriority)) {
+  if (lowerPriority.__info && !evaluateGuard(lowerPriority.__info, higherPriority)) {
     // guard false? => skip
     return higherPriority;
   }
@@ -594,7 +594,7 @@ export class Configuration {
 
   private async ParseCodeBlocks(configFile: DataHandle, contextConfig: ConfigurationView, scope: string): Promise<Array<AutoRestConfigurationImpl>> {
     // load config
-    const hConfig = await ParseCodeBlocks(
+    const hConfig = await parseCodeBlocks(
       contextConfig,
       configFile,
       contextConfig.DataStore.getDataSink());

@@ -500,10 +500,10 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
   }
 
   private * onHoverRef(docAnalysis: DocumentAnalysis, position: Position): Iterable<MarkedString> {
-    const refValueJsonPath = docAnalysis.GetJsonPathFromJsonReferenceAt(position);
+    const refValueJsonPath = docAnalysis.getJsonPathFromJsonReferenceAt(position);
     if (refValueJsonPath) {
 
-      for (const location of docAnalysis.GetDefinitionLocations(refValueJsonPath)) {
+      for (const location of docAnalysis.getDefinitionLocations(refValueJsonPath)) {
         yield {
           language: "yaml",
           value: safeDump(location.value, {})
@@ -513,10 +513,10 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
   }
 
   private * onHoverJsonPath(docAnalysis: DocumentAnalysis, position: Position): Iterable<MarkedString> {
-    const potentialQuery: string = <string>docAnalysis.GetJsonQueryAt(position);
+    const potentialQuery: string = <string>docAnalysis.getJsonQueryAt(position);
     if (potentialQuery) {
 
-      const queryNodes = [...docAnalysis.GetDefinitionLocations(potentialQuery)];
+      const queryNodes = [...docAnalysis.getDefinitionLocations(potentialQuery)];
       yield {
         language: "plaintext",
         value: `${queryNodes.length} matches\n${queryNodes.map(node => node.jsonPath).join("\n")}`
@@ -536,18 +536,18 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
   }
 
   private onDefinitionRef(docAnalysis: DocumentAnalysis, position: Position): Iterable<Location> {
-    const refValueJsonPath = docAnalysis.GetJsonPathFromJsonReferenceAt(position);
+    const refValueJsonPath = docAnalysis.getJsonPathFromJsonReferenceAt(position);
     if (refValueJsonPath) {
-      return docAnalysis.GetDocumentLocations(refValueJsonPath);
+      return docAnalysis.getDocumentLocations(refValueJsonPath);
     } // else  { console.log("found nothing that looks like a JSON reference"); }
     return [];
   }
 
   private onDefinitionJsonPath(docAnalysis: DocumentAnalysis, position: Position): Iterable<Location> {
-    const potentialQuery: string = <string>docAnalysis.GetJsonQueryAt(position);
+    const potentialQuery: string = <string>docAnalysis.getJsonQueryAt(position);
     if (potentialQuery) {
 
-      return docAnalysis.GetDocumentLocations(potentialQuery);
+      return docAnalysis.getDocumentLocations(potentialQuery);
     } // else  { console.log("found nothing that looks like a JSON path");}
     return [];
   }

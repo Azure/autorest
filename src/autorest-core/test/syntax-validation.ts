@@ -10,7 +10,7 @@ import { DataStore } from "@microsoft.azure/datastore";
 import { Message, Channel } from "../lib/message";
 import { AutoRest } from "../lib/autorest-core";
 
-import { Parse } from "../lib/parsing/literate-yaml";
+import { parse } from "../lib/parsing/literate-yaml";
 import { Configuration } from "../lib/configuration";
 
 @suite class SyntaxValidation {
@@ -24,7 +24,7 @@ import { Configuration } from "../lib/configuration";
 
     autoRest.Message.Subscribe((_, m) => { if (m.Channel == Channel.Error) { messages.push(m) } });
     try {
-      await Parse(await autoRest.view, h, dataStore.getDataSink());
+      await parse(await autoRest.view, h, dataStore.getDataSink());
     } catch (e) {
       // it'll also throw, but detailed messages are emitted first
     }

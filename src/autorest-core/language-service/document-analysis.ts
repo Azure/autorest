@@ -4,9 +4,9 @@
 // ---------------------------------------------------------------------------------------------
 
 import { parseJsonPointer } from '@microsoft.azure/datastore';
-import { JsonPath, SourceMap } from './source-map';
+import { nodes, parse, paths, stringify, value, } from 'jsonpath';
 import { Location, Position } from 'vscode-languageserver';
-import { value, stringify, parse, nodes, paths, } from "jsonpath";
+import { JsonPath, SourceMap } from './source-map';
 
 /**
  * @internal
@@ -31,8 +31,8 @@ export class DocumentAnalysis {
    *
    * @param position The position to look at for a JSON query.
    */
-  public GetJsonQueryAt(position: Position): string | null {
-    const lines = this.document.split("\n");
+  public getJsonQueryAt(position: Position): string | null {
+    const lines = this.document.split('\n');
     const potentialQuery: string = (lines[position.line].match(/\B\$[.[].+/g) || [])[0];
 
     try {
@@ -50,7 +50,7 @@ export class DocumentAnalysis {
    *
    * @param position The position to look at for a JSON reference.
    */
-  public GetJsonPathFromJsonReferenceAt(position: Position): string | null {
+  public getJsonPathFromJsonReferenceAt(position: Position): string | null {
     const fullyResolvedAndMergedDefinitionLocation = this.fullyResolvedAndMergedDefinitionMap.LookupForward(
       this.documentUri,
       position.line + 1, // VS Code deviates from the source map standard here... 0 vs. 1 based line numbers
@@ -61,7 +61,7 @@ export class DocumentAnalysis {
       if (path) {
 
         // is $ref?
-        if (path.length > 0 && path[path.length - 1] === "$ref") {
+        if (path.length > 0 && path[path.length - 1] === '$ref') {
           // lookup object
           const refValueJsonPointer: string = value(this.fullyResolvedAndMergedDefinition, stringify(path));
           const refValueJsonPath: JsonPath = parseJsonPointer(refValueJsonPointer);
@@ -76,7 +76,7 @@ export class DocumentAnalysis {
   /**
    * Retrieves all document locations (VS Code understands) corresponding with given JSON query.
    */
-  public * GetDocumentLocations(jsonQuery: string): Iterable<Location> {
+  public * getDocumentLocations(jsonQuery: string): Iterable<Location> {
     for (const path of paths(this.fullyResolvedAndMergedDefinition, jsonQuery)) {
       for (const mappingItem of this.fullyResolvedAndMergedDefinitionMap.LookupPath(path.slice(1))) {
         yield {
@@ -99,7 +99,7 @@ export class DocumentAnalysis {
   /**
    * Retrieves all locations in the entire OpenAPI definition (and corresponding values) matching given JSON query.
    */
-  public * GetDefinitionLocations(jsonQuery: string): Iterable<{ value: any, jsonPath: string }> {
+  public * getDefinitionLocations(jsonQuery: string): Iterable<{ value: any, jsonPath: string }> {
     for (const path of nodes(this.fullyResolvedAndMergedDefinition, jsonQuery)) {
       yield {
         value: path.value,

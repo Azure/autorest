@@ -3,7 +3,7 @@ export interface Help {
   categoryFriendlyName: string;  // e.g. "Output Verbosity", "C# generator"
   activationScope?: string;      // e.g. "csharp"
   description?: string;          // inline markdown allowed
-  settings: SettingHelp[];
+  settings: Array<SettingHelp>;
 }
 
 export interface SettingHelp {

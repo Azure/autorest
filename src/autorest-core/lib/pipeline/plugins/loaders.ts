@@ -7,8 +7,8 @@ import { PipelinePlugin } from '../common';
 
 import { ConfigurationView } from '../../autorest-core';
 import { Channel, SourceLocation } from '../../message';
-import { CommonmarkHeadingFollowingText, CommonmarkSubHeadings, ParseCommonmark } from '../../parsing/literate';
-import { Parse as ParseLiterateYaml } from '../../parsing/literate-yaml';
+import { commonmarkHeadingFollowingText, commonmarkSubHeadings, parseCommonmark } from '../../parsing/literate';
+import { parse as ParseLiterateYaml } from '../../parsing/literate-yaml';
 
 import { CloneAst, DataHandle, DataSink, DataSource, IndexToPosition, Lines, Mapping, QuickDataSource, StrictJsonSyntaxCheck, StringifyAst } from '@microsoft.azure/datastore';
 
@@ -18,11 +18,11 @@ import { crawlReferences } from './ref-crawling';
 async function LoadLiterateSwaggerOverride(inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle> {
   const commonmark = await inputScope.ReadStrict(inputFileUri);
   const rawCommonmark = commonmark.ReadData();
-  const commonmarkNode = await ParseCommonmark(rawCommonmark);
+  const commonmarkNode = await parseCommonmark(rawCommonmark);
 
   const directives: Array<any> = [];
   const mappings = new Array<Mapping>();
-  const state = [...CommonmarkSubHeadings(commonmarkNode.firstChild)].map(x => ({ node: x, query: '$' }));
+  const state = [...commonmarkSubHeadings(commonmarkNode.firstChild)].map(x => ({ node: x, query: '$' }));
 
   while (state.length > 0) {
     const x = state.pop(); if (x === undefined) { throw new Error('unreachable'); }
@@ -69,7 +69,7 @@ async function LoadLiterateSwaggerOverride(inputScope: DataSource, inputFileUri:
 
       if (targetPath !== '$.parameters' && targetPath !== '$.definitions') {
         // add directive
-        const headingTextRange = CommonmarkHeadingFollowingText(x.node);
+        const headingTextRange = commonmarkHeadingFollowingText(x.node);
         const documentation = Lines(rawCommonmark).slice(headingTextRange[0] - 1, headingTextRange[1]).join('\n');
         directives.push({
           where: targetPath,
@@ -80,7 +80,7 @@ async function LoadLiterateSwaggerOverride(inputScope: DataSource, inputFileUri:
       }
     }
 
-    state.push(...[...CommonmarkSubHeadings(x.node)].map(y => ({ node: y, query: clue || x.query })));
+    state.push(...[...commonmarkSubHeadings(x.node)].map(y => ({ node: y, query: clue || x.query })));
   }
 
   return sink.WriteObject('override-directives', { directive: directives }, [inputFileUri], undefined, mappings, [commonmark]);
@@ -89,11 +89,11 @@ async function LoadLiterateSwaggerOverride(inputScope: DataSource, inputFileUri:
 async function LoadLiterateOpenAPIOverride(inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle> {
   const commonmark = await inputScope.ReadStrict(inputFileUri);
   const rawCommonmark = commonmark.ReadData();
-  const commonmarkNode = await ParseCommonmark(rawCommonmark);
+  const commonmarkNode = await parseCommonmark(rawCommonmark);
 
   const directives: Array<any> = [];
   const mappings = new Array<Mapping>();
-  const state = [...CommonmarkSubHeadings(commonmarkNode.firstChild)].map(x => ({ node: x, query: '$' }));
+  const state = [...commonmarkSubHeadings(commonmarkNode.firstChild)].map(x => ({ node: x, query: '$' }));
 
   while (state.length > 0) {
     const x = state.pop(); if (x === undefined) { throw new Error('unreachable'); }
@@ -140,7 +140,7 @@ async function LoadLiterateOpenAPIOverride(inputScope: DataSource, inputFileUri:
 
       if (targetPath !== '$.parameters' && targetPath !== '$.definitions') {
         // add directive
-        const headingTextRange = CommonmarkHeadingFollowingText(x.node);
+        const headingTextRange = commonmarkHeadingFollowingText(x.node);
         const documentation = Lines(rawCommonmark).slice(headingTextRange[0] - 1, headingTextRange[1]).join('\n');
         directives.push({
           where: targetPath,
@@ -151,7 +151,7 @@ async function LoadLiterateOpenAPIOverride(inputScope: DataSource, inputFileUri:
       }
     }
 
-    state.push(...[...CommonmarkSubHeadings(x.node)].map(y => ({ node: y, query: clue || x.query })));
+    state.push(...[...commonmarkSubHeadings(x.node)].map(y => ({ node: y, query: clue || x.query })));
   }
 
   return sink.WriteObject('override-directives', { directive: directives }, [inputFileUri], undefined, mappings, [commonmark]);
