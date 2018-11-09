@@ -26,7 +26,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
   return AutoRestExtension.FromChildProcess(name, await ext.start());
 }
 
-@suite class Plugins {
+@suite export class Plugins {
   // TODO: remodel if we figure out acquisition story
   @test @skip async 'Validation Tools'() {
     const autoRest = new AutoRest(new RealFileSystem());
