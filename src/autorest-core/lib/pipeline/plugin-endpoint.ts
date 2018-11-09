@@ -3,24 +3,21 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { LazyPromise } from "@microsoft.azure/datastore";
-import { EventEmitter } from "../events";
-import { fork, ChildProcess } from "child_process";
-import { Mapping, SmartPosition } from "@microsoft.azure/datastore";
-import { RawSourceMap } from "source-map";
-import { CancellationToken } from "vscode-jsonrpc";
-import { createMessageConnection, MessageConnection } from "vscode-jsonrpc";
-import { DataHandle, DataSink, DataSource } from '@microsoft.azure/datastore';
-import { IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestPluginInitiator } from "./plugin-api";
-import { Exception } from "../exception";
-import { Message, Channel, ArtifactMessage } from "../message";
-import { Readable, Writable } from "stream";
-import { Artifact } from "../artifact";
-import { ConfigurationView } from "../../main";
-import { EnsureIsFolderUri } from "@microsoft.azure/uri";
+import { DataHandle, DataSink, DataSource, LazyPromise, Mapping, SmartPosition } from '@microsoft.azure/datastore';
+import { EnsureIsFolderUri } from '@microsoft.azure/uri';
+import { ChildProcess, fork } from 'child_process';
+import { RawSourceMap } from 'source-map';
+import { Readable, Writable } from 'stream';
+import { CancellationToken, createMessageConnection } from 'vscode-jsonrpc';
+import { ConfigurationView } from '../../main';
+import { Artifact } from '../artifact';
+import { EventEmitter } from '../events';
+import { Exception } from '../exception';
+import { ArtifactMessage, Channel, Message } from '../message';
+import { IAutoRestPluginInitiator, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types } from './plugin-api';
 
 interface IAutoRestPluginTargetEndpoint {
-  GetPluginNames(cancellationToken: CancellationToken): Promise<string[]>;
+  GetPluginNames(cancellationToken: CancellationToken): Promise<Array<string>>;
   Process(pluginName: string, sessionId: string, cancellationToken: CancellationToken): Promise<boolean>;
 }
 
@@ -29,7 +26,7 @@ interface IAutoRestPluginInitiatorEndpoint {
 
   ReadFile(filename: string): Promise<string>;
   GetValue(key: string): Promise<any>;
-  ListInputs(artifactType?: string): Promise<string[]>;
+  ListInputs(artifactType?: string): Promise<Array<string>>;
 
   WriteFile(filename: string, content: string, sourceMap?: Array<Mapping> | RawSourceMap): Promise<void>;
   Message(message: Message, path?: SmartPosition, sourceFile?: string): Promise<void>;
@@ -42,15 +39,15 @@ export class AutoRestExtension extends EventEmitter {
 
   public kill() {
     if (!this.childProcess.killed) {
-      this.childProcess.once("error", (e) => { /*shhh!*/ });
+      this.childProcess.once('error', (e) => { /*shhh!*/ });
       this.childProcess.kill();
     }
   }
   public static killAll() {
     for (const each of AutoRestExtension.processes) {
       if (!each.killed) {
-        each.once("error", (e) => { /*shhh!*/ });
-        each.kill("SIGKILL");
+        each.once('error', (e) => { /*shhh!*/ });
+        each.kill('SIGKILL');
       }
     }
     AutoRestExtension.processes.length = 0;
@@ -74,13 +71,13 @@ export class AutoRestExtension extends EventEmitter {
   }
 
   // Exposed through __status and consumed by tools like autorest-interactive.
-  private __inspectTraffic: [number, boolean /*outgoing (core => ext)*/, string][] = [];
+  private __inspectTraffic: Array<[number, boolean /*outgoing (core => ext)*/, string]> = [];
 
   public constructor(private extensionName: string, reader: Readable, writer: Writable, private childProcess: ChildProcess) {
     super();
 
     // hook in inspectors
-    reader.on("data", chunk => {
+    reader.on('data', chunk => {
       try { this.__inspectTraffic.push([Date.now(), false, chunk.toString()]); } catch (e) { }
     });
     const writerProxy = new Writable({
@@ -95,14 +92,14 @@ export class AutoRestExtension extends EventEmitter {
     channel.listen();
 
     // initiator
-    const dispatcher = (fnName: string) => async (sessionId: string, ...rest: any[]) => {
+    const dispatcher = (fnName: string) => async (sessionId: string, ...rest: Array<any>) => {
       try {
         const endpoint = this.apiInitiatorEndpoints[sessionId];
         if (endpoint) {
           return await (endpoint as any)[fnName](...rest);
         }
       } catch (e) {
-        if (e != "Cancellation requested.") {
+        if (e != 'Cancellation requested.') {
           // Suppress this from hitting the console.
           // todo: we should see if we can put it out as an event.
           // console.error(`Error occurred in handler for '${fnName}' in session '${sessionId}':`);
@@ -111,12 +108,12 @@ export class AutoRestExtension extends EventEmitter {
       }
     };
     this.apiInitiator = {
-      ReadFile: dispatcher("ReadFile"),
-      GetValue: dispatcher("GetValue"),
-      ListInputs: dispatcher("ListInputs"),
+      ReadFile: dispatcher('ReadFile'),
+      GetValue: dispatcher('GetValue'),
+      ListInputs: dispatcher('ListInputs'),
 
-      WriteFile: dispatcher("WriteFile"),
-      Message: dispatcher("Message"),
+      WriteFile: dispatcher('WriteFile'),
+      Message: dispatcher('Message'),
     };
     channel.onRequest(IAutoRestPluginInitiator_Types.ReadFile, this.apiInitiator.ReadFile);
     channel.onRequest(IAutoRestPluginInitiator_Types.GetValue, this.apiInitiator.GetValue);
@@ -129,11 +126,11 @@ export class AutoRestExtension extends EventEmitter {
 
     // target
     this.apiTarget = {
-      async GetPluginNames(cancellationToken: CancellationToken): Promise<string[]> {
-        return await Promise.race([errorPromise, terminationPromise, channel.sendRequest(IAutoRestPluginTarget_Types.GetPluginNames, cancellationToken)]);
+      async GetPluginNames(cancellationToken: CancellationToken): Promise<Array<string>> {
+        return Promise.race([errorPromise, terminationPromise, channel.sendRequest(IAutoRestPluginTarget_Types.GetPluginNames, cancellationToken)]);
       },
       async Process(pluginName: string, sessionId: string, cancellationToken: CancellationToken): Promise<boolean> {
-        return await Promise.race([errorPromise, terminationPromise, channel.sendRequest(IAutoRestPluginTarget_Types.Process, pluginName, sessionId, cancellationToken)]);
+        return Promise.race([errorPromise, terminationPromise, channel.sendRequest(IAutoRestPluginTarget_Types.Process, pluginName, sessionId, cancellationToken)]);
       }
     };
   }
@@ -142,7 +139,7 @@ export class AutoRestExtension extends EventEmitter {
   private apiInitiator: IAutoRestPluginInitiator;
   private apiInitiatorEndpoints: { [sessionId: string]: IAutoRestPluginInitiatorEndpoint } = {};
 
-  public GetPluginNames(cancellationToken: CancellationToken): Promise<string[]> {
+  public GetPluginNames(cancellationToken: CancellationToken): Promise<Array<string>> {
     return this.apiTarget.GetPluginNames(cancellationToken);
   }
 
@@ -167,7 +164,7 @@ export class AutoRestExtension extends EventEmitter {
   private static CreateEndpointFor(pluginName: string, configuration: (key: string) => any, configurationView: ConfigurationView, inputScope: DataSource, sink: DataSink, onFile: (data: DataHandle) => void, onMessage: (message: Message) => void, cancellationToken: CancellationToken): IAutoRestPluginInitiatorEndpoint {
     const inputFileHandles = new LazyPromise(async () => {
       const names = await inputScope.Enum();
-      return await Promise.all(names.map(fn => inputScope.ReadStrict(fn)));
+      return Promise.all(names.map(fn => inputScope.ReadStrict(fn)));
     });
 
     // name transformation
@@ -181,7 +178,7 @@ export class AutoRestExtension extends EventEmitter {
       }
       // TODO: transform mappings so friendly names are replaced by internals
       let handle: DataHandle;
-      if (typeof (sourceMap as any).mappings === "string") {
+      if (typeof (sourceMap as any).mappings === 'string') {
         onFile(handle = await sink.WriteDataWithSourceMap(filename, content, artifactType, ['fix-me-here'], () => sourceMap as any));
       } else {
         onFile(handle = await sink.WriteData(filename, content, ['fix-me-here2'], artifactType, sourceMap as Array<Mapping>, await inputFileHandles));
@@ -219,14 +216,14 @@ export class AutoRestExtension extends EventEmitter {
           return null;
         }
       },
-      async ListInputs(artifactType?: string): Promise<string[]> {
+      async ListInputs(artifactType?: string): Promise<Array<string>> {
 
-        if (artifactType && typeof artifactType !== "string") {
+        if (artifactType && typeof artifactType !== 'string') {
           artifactType = undefined;
         }
         const inputs = (await inputFileHandles)
           .filter(x => {
-            return typeof artifactType !== "string" || artifactType === x.GetArtifact()
+            return typeof artifactType !== 'string' || artifactType === x.GetArtifact();
           })
           .map(x => x.Description);
 
@@ -237,7 +234,7 @@ export class AutoRestExtension extends EventEmitter {
 
         // we'd like to be able to ask the host for a file directly (but only if it's supposed to be in the output-folder)
         const t = configurationView.OutputFolderUri.length;
-        return (await configurationView.fileSystem.EnumerateFileUris(EnsureIsFolderUri(`${configurationView.OutputFolderUri}${artifactType || ""}`))).map(each => each.substr(t));
+        return (await configurationView.fileSystem.EnumerateFileUris(EnsureIsFolderUri(`${configurationView.OutputFolderUri}${artifactType || ''}`))).map(each => each.substr(t));
       },
 
       async WriteFile(filename: string, content: string, sourceMap?: Array<Mapping> | RawSourceMap): Promise<void> {
@@ -249,7 +246,7 @@ export class AutoRestExtension extends EventEmitter {
         finishNotifications = new Promise<void>(res => notify = res);
 
         const artifact = await writeFileToSinkAndNotify(filename, content, undefined, sourceMap);
-        onMessage(<ArtifactMessage>{ Channel: Channel.File, Details: artifact, Text: artifact.content, Plugin: pluginName, Key: [artifact.type, artifact.uri] })
+        onMessage(<ArtifactMessage>{ Channel: Channel.File, Details: artifact, Text: artifact.content, Plugin: pluginName, Key: [artifact.type, artifact.uri] });
 
         await finishPrev;
         notify();

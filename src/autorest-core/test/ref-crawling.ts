@@ -1,13 +1,13 @@
+
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 import * as aio from "@microsoft.azure/async-io"
 import { AutoRest } from "../lib/autorest-core";
-import { LoadLiterateSwaggers } from "../lib/pipeline/swagger-loader";
 import * as datastore from '@microsoft.azure/datastore';
 import { CreateFolderUri, ResolveUri } from '@microsoft.azure/uri';
 import { readFile } from "fs";
 import { RealFileSystem, DataHandle } from "@microsoft.azure/datastore";
-import { crawlReferences } from "../lib/pipeline/ref-crawling";
+import { crawlReferences } from "../lib/pipeline/plugins/ref-crawling";
 
 @suite class RefCrawling {
 

@@ -3,29 +3,30 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Help } from '../../help';
+import { FastStringify, StringifyAst } from '@microsoft.azure/datastore';
+import { ConvertJsonx2Yaml, ConvertYaml2Jsonx, DataHandle, DataSource, IFileSystem, JsonPath, QuickDataSource, safeEval, stringify } from '@microsoft.azure/datastore';
+import { ResolveUri } from '@microsoft.azure/uri';
 import { ConfigurationView, GetExtension } from '../configuration';
-import { DataHandle, DataSink, DataSource, QuickDataSource, Data, createGraphProxy, Mapping, CloneAst } from '@microsoft.azure/datastore';
-import { IFileSystem } from '@microsoft.azure/datastore';
 import { Channel, Message } from '../message';
 import { ConvertOAI2toOAI3 } from '../openapi/conversion';
 import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
-import { ConvertJsonx2Yaml, ConvertYaml2Jsonx } from '@microsoft.azure/datastore';
-import { JsonPath, stringify } from '@microsoft.azure/datastore';
-import { safeEval } from '@microsoft.azure/datastore';
-import { ResolveUri } from '@microsoft.azure/uri';
-import { Descendants, FastStringify, StringifyAst } from '@microsoft.azure/datastore';
 import { EmitArtifacts } from './artifact-emitter';
 import { CreatePerFilePlugin, PipelinePlugin } from './common';
 import { ProcessCodeModel } from './commonmark-documentation';
 import { GetPlugin_ComponentModifier } from './component-modifier';
-import { GetPlugin_Help } from './help';
+import { GetPlugin_Help } from './plugins/help';
 import { Manipulator } from './manipulation';
 import { GetPlugin_ReflectApiVersion } from './metadata-generation';
 import { AutoRestExtension } from './plugin-endpoint';
 import { GetPlugin_SchemaValidatorOpenApi, GetPlugin_SchemaValidatorSwagger } from './schema-validation';
-import { ComposeSwaggers, LoadLiterateOpenAPIOverrides, LoadLiterateOpenAPIs, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
-import { crawlReferences } from './ref-crawling';
+
+import { GetPlugin_Deduplicator } from './plugins/deduplicator';
+import { GetPlugin_MultiAPIMerger } from './plugins/merger';
+import { GetPlugin_TreeShaker } from './plugins/tree-shaker';
+
+import { GetPlugin_Identity } from './plugins/identity';
+import { GetPlugin_LoaderSwagger, GetPlugin_LoaderOpenAPI, GetPlugin_MdOverrideLoaderSwagger, GetPlugin_MdOverrideLoaderOpenAPI } from './plugins/loaders';
+import { GetPlugin_Composer } from './plugins/composer';
 
 interface PipelineNode {
   outputArtifact?: string;
@@ -37,86 +38,17 @@ interface PipelineNode {
   dependencies: Array<PipelineNode>;
 }
 
-function GetPlugin_Identity(): PipelinePlugin {
-  return async (config, input) => input;
-}
 
-function GetPlugin_LoaderSwagger(): PipelinePlugin {
-  return async (config, input, sink) => {
-    const inputs = config.InputFileUris;
-    const swaggers = await LoadLiterateSwaggers(
-      config,
-      input,
-      inputs,
-      sink
-    );
-
-    const foundAllFiles = swaggers.length !== inputs.length;
-    let result: Array<DataHandle> = [];
-    if (swaggers.length === inputs.length) {
-      result = await crawlReferences(input, swaggers, sink);
-    }
-
-    return new QuickDataSource(result, foundAllFiles);
-  };
-}
-
-function GetPlugin_LoaderOpenAPI(): PipelinePlugin {
-  return async (config, input, sink) => {
-    const inputs = config.InputFileUris;
-    const openapis = await LoadLiterateOpenAPIs(
-      config,
-      input,
-      inputs,
-      sink
-    );
-    let result: Array<DataHandle> = [];
-    if (openapis.length === inputs.length) {
-      result = await crawlReferences(input, openapis, sink);
-    }
-    return new QuickDataSource(result, openapis.length !== inputs.length);
-  };
-}
-
-function GetPlugin_MdOverrideLoaderSwagger(): PipelinePlugin {
-  return async (config, input, sink) => {
-    const inputs = config.InputFileUris;
-    const swaggers = await LoadLiterateSwaggerOverrides(
-      config,
-      input,
-      inputs, sink);
-    const result: Array<DataHandle> = [];
-    for (let i = 0; i < inputs.length; ++i) {
-      result.push(await sink.Forward(inputs[i], swaggers[i]));
-    }
-    return new QuickDataSource(result, input.skip);
-  };
-}
-
-function GetPlugin_MdOverrideLoaderOpenAPI(): PipelinePlugin {
-  return async (config, input, sink) => {
-    const inputs = config.InputFileUris;
-    const openapis = await LoadLiterateOpenAPIOverrides(
-      config,
-      input,
-      inputs, sink);
-    const result: Array<DataHandle> = [];
-    for (let i = 0; i < inputs.length; ++i) {
-      result.push(await sink.Forward(inputs[i], openapis[i]));
-    }
-    return new QuickDataSource(result, input.skip);
-  };
-}
 
 function GetPlugin_OAI2toOAIx(): PipelinePlugin {
-  return CreatePerFilePlugin(async config => async (fileIn, sink) => {
+  return CreatePerFilePlugin(async () => async (fileIn, sink) => {
     const fileOut = await ConvertOAI2toOAI3(fileIn, sink);
     return sink.Forward(fileIn.Description, fileOut);
   });
 }
 
 function GetPlugin_Yaml2Jsonx(): PipelinePlugin {
-  return CreatePerFilePlugin(async config => async (fileIn, sink) => {
+  return CreatePerFilePlugin(async () => async (fileIn, sink) => {
     let ast = fileIn.ReadYamlAst();
     ast = ConvertYaml2Jsonx(ast);
     return sink.WriteData(fileIn.Description, StringifyAst(ast), fileIn.Identity);
@@ -124,7 +56,7 @@ function GetPlugin_Yaml2Jsonx(): PipelinePlugin {
 }
 
 function GetPlugin_Jsonx2Yaml(): PipelinePlugin {
-  return CreatePerFilePlugin(async config => async (fileIn, sink) => {
+  return CreatePerFilePlugin(async () => async (fileIn, sink) => {
     let ast = fileIn.ReadYamlAst();
     ast = ConvertJsonx2Yaml(ast);
     return sink.WriteData(fileIn.Description, StringifyAst(ast), fileIn.Identity);
@@ -155,16 +87,6 @@ function GetPlugin_TransformerImmediate(): PipelinePlugin {
   };
 }
 
-function GetPlugin_Composer(): PipelinePlugin {
-  return async (config, input, sink) => {
-    const swaggers = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
-    const overrideInfo = config.GetEntry('override-info');
-    const overrideTitle = (overrideInfo && overrideInfo.title) || config.GetEntry('title');
-    const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry('description');
-    const swagger = await ComposeSwaggers(config, overrideTitle, overrideDescription, swaggers, sink);
-    return new QuickDataSource([await sink.Forward('composed', swagger)], input.skip);
-  };
-}
 
 function GetPlugin_External(host: AutoRestExtension, pluginName: string): PipelinePlugin {
   return async (config, input, sink) => {
@@ -218,7 +140,7 @@ function GetPlugin_CommonmarkProcessor(): PipelinePlugin {
 }
 
 function GetPlugin_ArtifactEmitter(inputOverride?: () => Promise<DataSource>): PipelinePlugin {
-  return async (config, input, sink) => {
+  return async (config, input) => {
     if (inputOverride) {
       input = await inputOverride();
     }
@@ -380,7 +302,11 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     'commonmarker': GetPlugin_CommonmarkProcessor(),
     'emitter': GetPlugin_ArtifactEmitter(),
     'pipeline-emitter': GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('pipeline', pipeline.pipeline, ['fix-me-3'], 'pipeline')])),
-    'configuration-emitter': GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('configuration', configView.Raw, ['fix-me-4'], 'configuration')]))
+    'configuration-emitter': GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('configuration', configView.Raw, ['fix-me-4'], 'configuration')])),
+
+    'tree-shaker': GetPlugin_TreeShaker(),
+    'model-deduplicator': GetPlugin_Deduplicator(),
+    'multi-api-merger': GetPlugin_MultiAPIMerger()
   };
 
   // dynamically loaded, auto-discovered plugins

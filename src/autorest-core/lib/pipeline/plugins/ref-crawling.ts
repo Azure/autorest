@@ -1,4 +1,4 @@
-import { DataHandle, DataSink, DataSource, Node, Processor } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, Processor } from '@microsoft.azure/datastore';
 import { ResolveUri } from '@microsoft.azure/uri';
 
 export async function crawlReferences(inputScope: DataSource, filesToCrawl: Array<DataHandle>, sink: DataSink): Promise<Array<DataHandle>> {
@@ -35,7 +35,7 @@ class RefProcessor extends Processor<any, any> {
     this.filesToExclude = filesToExclude;
   }
 
-  process(targetParent: any, originalNodes: Iterable<Node>) {
+  process(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       if (key === '$ref') {
         const refFileName = (value.indexOf('#') === -1) ? value : value.split('#')[0];
