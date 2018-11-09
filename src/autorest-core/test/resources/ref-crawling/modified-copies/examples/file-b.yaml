@@ -1,3 +1,0 @@
-local-ref:
-  $ref: 'https://raw.githubusercontent.com/Azure/autorest/b01c27166a390771260166221545ce3af8c92c84/src/autorest-core/test/resources/ref-crawling/original-files/examples/file-b.yaml#something/some'
-x-ms-secondary-file: true

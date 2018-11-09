@@ -46,13 +46,13 @@ class RefProcessor extends Processor<any, any> {
           this.newFilesFound.push(newRefFileName);
           this.filesToExclude.push(newRefFileName);
         }
-        targetParent[key] = { value: newReference, pointer };
+        this.copy(targetParent, key, pointer, newReference);
       } else if (Array.isArray(value)) {
         this.process(this.newArray(targetParent, key, pointer), children);
       } else if (typeof (value) === 'object') {
         this.process(this.newObject(targetParent, key, pointer), children);
       } else {
-        targetParent[key] = { value, pointer };
+        this.copy(targetParent, key, pointer, value);
       }
     }
   }
@@ -62,11 +62,10 @@ class SecondaryFileMarker extends Processor<any, any> {
 
   process(targetParent: any, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer } of originalNodes) {
+      targetParent[key] = { value, pointer, recurse: true, filename: this.key };
       if (!targetParent['x-ms-secondary-file']) {
-        targetParent['x-ms-secondary-file'] = { value: true, pointer };
+        targetParent['x-ms-secondary-file'] = { value: true, pointer, filename: this.key };
       }
-
-      targetParent[key] = { value, pointer, recurse: true };
     }
   }
 }
