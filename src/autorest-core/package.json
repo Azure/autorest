@@ -70,6 +70,7 @@
     "swagger2openapi": "fearthecowboy/swagger2openapi#1c2a0039b5649fb47ef9c4583abbd3e5d0504977",
     "untildify": "^3.0.2",
     "vscode-jsonrpc": "^3.5.0",
+    "source-map-support": "0.5.9",
     "yaml-ast-parser": "0.0.40",
     "z-schema": "^3.19.0"
   },

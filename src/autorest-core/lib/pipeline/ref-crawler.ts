@@ -1,13 +1,14 @@
-import { DataHandle, DataSink, DataSource, JsonPath, JsonPointer, Node, Processor, QuickDataSource, visit, walk } from '@microsoft.azure/datastore';
+import { DataHandle, DataSink, DataSource, JsonPath, JsonPointer, Node, Processor, QuickDataSource, visit, walk, AnyObject } from '@microsoft.azure/datastore';
 import * as oai from '@microsoft.azure/openapi';
 import { ConfigurationView } from '../configuration';
 import { PipelinePlugin } from './common';
 
-export class RefCrawler extends Processor<any, any> {
+
+export class RefCrawler extends Processor<AnyObject, AnyObject> {
 
   public filesFound: Array<string> = new Array<string>();
 
-  process(targetParent: any, originalNodes: Iterable<Node>) {
+  process(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     // initialize certain things ahead of time:
     for (const { value, key, pointer, children } of originalNodes) {
       if (key === '$ref') {

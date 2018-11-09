@@ -1,15 +1,16 @@
-import { DataHandle, DataSink, DataSource, JsonPath, JsonPointer, Node, Processor, QuickDataSource, visit, parseJsonPointer } from '@microsoft.azure/datastore';
+import { DataHandle, DataSink, DataSource, JsonPath, JsonPointer, Node, Processor, QuickDataSource, visit, parseJsonPointer, AnyObject } from '@microsoft.azure/datastore';
 import { deconstruct, pascalCase, camelCase } from "@microsoft.azure/codegen";
 import * as oai from '@microsoft.azure/openapi';
 import { ConfigurationView } from '../configuration';
 import { PipelinePlugin } from './common';
 
-export class OAI3Shaker extends Processor<oai.Model, oai.Model> {
-  get components() {
+
+export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
+  get components(): AnyObject {
     if (this.generated.components) {
       return this.generated.components;
     }
-    if (this.original.components) {
+    if (this.current.components) {
       return this.newObject(this.generated, 'components', '/components');
     }
     return this.newObject(this.generated, 'components', '/');
@@ -17,40 +18,40 @@ export class OAI3Shaker extends Processor<oai.Model, oai.Model> {
 
   private componentItem(key: string) {
     return this.components[key] ? this.components[key] :
-      (this.original.components && this.original.components[key]) ?
+      (this.current.components && this.current.components[key]) ?
         this.newObject(this.components, key, `/components/${key}`) :
         this.newObject(this.components, key, '/');
   }
 
-  get schemas() {
+  get schemas(): AnyObject {
     return this.componentItem('schemas');
   }
-  get responses() {
+  get responses(): AnyObject {
     return this.componentItem('responses');
   }
-  get parameters() {
+  get parameters(): AnyObject {
     return this.componentItem('parameters');
   }
-  get examples() {
+  get examples(): AnyObject {
     return this.componentItem('examples');
   }
-  get requestBodies() {
+  get requestBodies(): AnyObject {
     return this.componentItem('requestBodies');
   }
-  get headers() {
+  get headers(): AnyObject {
     return this.componentItem('headers');
   }
-  get securitySchemes() {
+  get securitySchemes(): AnyObject {
     return this.componentItem('securitySchemes');
   }
-  get links() {
+  get links(): AnyObject {
     return this.componentItem('links');
   }
-  get callbacks() {
+  get callbacks(): AnyObject {
     return this.componentItem('callbacks');
   }
 
-  process(targetParent: any, originalNodes: Iterable<Node>) {
+  process(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     // initialize certain things ahead of time:
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
@@ -70,7 +71,7 @@ export class OAI3Shaker extends Processor<oai.Model, oai.Model> {
     }
   }
 
-  visitPaths(targetParent: any, nodes: Iterable<Node>) {
+  visitPaths(targetParent: AnyObject, nodes: Iterable<Node>) {
 
     for (const { key, pointer, children } of nodes) {
       // each path
@@ -78,7 +79,7 @@ export class OAI3Shaker extends Processor<oai.Model, oai.Model> {
     }
   }
 
-  visitPath(targetParent: any, nodes: Iterable<Node>) {
+  visitPath(targetParent: AnyObject, nodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of nodes) {
       switch (key) {
 
@@ -100,7 +101,7 @@ export class OAI3Shaker extends Processor<oai.Model, oai.Model> {
     }
   }
 
-  visitHttpOperation(targetParent: any, nodes: Iterable<Node>) {
+  visitHttpOperation(targetParent: AnyObject, nodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of nodes) {
       switch (key) {
         case 'parameters':
@@ -122,7 +123,7 @@ export class OAI3Shaker extends Processor<oai.Model, oai.Model> {
     }
   }
 
-  visitParameter(targetParent: any, nodes: Iterable<Node>) {
+  visitParameter(targetParent: AnyObject, nodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of nodes) {
       switch (key) {
         case 'schema':
@@ -139,7 +140,7 @@ export class OAI3Shaker extends Processor<oai.Model, oai.Model> {
     }
   }
 
-  visitSchema(targetParent: any, originalNodes: Iterable<Node>) {
+  visitSchema(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
 
@@ -178,13 +179,13 @@ export class OAI3Shaker extends Processor<oai.Model, oai.Model> {
     }
   }
 
-  visitContent(targetParent: any, originalNodes: Iterable<Node>) {
+  visitContent(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       this.visitMediaType(this.newObject(targetParent, key, pointer), children);
     }
   }
 
-  visitMediaType(targetParent: any, originalNodes: Iterable<Node>) {
+  visitMediaType(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
         case 'schema':
@@ -199,7 +200,7 @@ export class OAI3Shaker extends Processor<oai.Model, oai.Model> {
     }
   }
 
-  visitProperties(targetParent: any, originalNodes: Iterable<Node>) {
+  visitProperties(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
       // this.dereference(this.pro, this.visitProperties, targetParent, key, pointer, value, children);
@@ -210,7 +211,7 @@ export class OAI3Shaker extends Processor<oai.Model, oai.Model> {
     }
   }
 
-  visitRequestBody(targetParent: any, originalNodes: Iterable<Node>) {
+  visitRequestBody(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
         // everything else, just copy recursively.
@@ -224,13 +225,13 @@ export class OAI3Shaker extends Processor<oai.Model, oai.Model> {
     }
   }
 
-  dereferenceItems(baseReferencePath: string, targetCollection: any, visitor: (tp: any, on: Iterable<Node>) => void, targetParent: any, originalNodes: Iterable<Node>) {
+  dereferenceItems(baseReferencePath: string, targetCollection: any, visitor: (tp: any, on: Iterable<Node>) => void, targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       this.dereference(baseReferencePath, targetCollection, visitor, targetParent, key, pointer, value, children);
     }
   }
 
-  visitComponents(targetParent: any, originalNodes: Iterable<Node>) {
+  visitComponents(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
         case 'schemas':
@@ -277,7 +278,7 @@ export class OAI3Shaker extends Processor<oai.Model, oai.Model> {
     }
   }
 
-  visitResponse(targetParent: any, originalNodes: Iterable<Node>) {
+  visitResponse(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
         case 'content':
@@ -297,13 +298,13 @@ export class OAI3Shaker extends Processor<oai.Model, oai.Model> {
     }
   }
 
-  visitExample(targetParent: any, originalNodes: Iterable<Node>) {
+  visitExample(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer } of originalNodes) {
       this.copy(targetParent, key, pointer, value);
     }
   }
 
-  visitHeader(targetParent: any, originalNodes: Iterable<Node>) {
+  visitHeader(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
         case 'schema':
@@ -320,25 +321,25 @@ export class OAI3Shaker extends Processor<oai.Model, oai.Model> {
     }
   }
 
-  visitSecurityScheme(targetParent: any, originalNodes: Iterable<Node>) {
+  visitSecurityScheme(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer } of originalNodes) {
       this.copy(targetParent, key, pointer, value);
     }
   }
 
-  visitLink(targetParent: any, originalNodes: Iterable<Node>) {
+  visitLink(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer } of originalNodes) {
       this.copy(targetParent, key, pointer, value);
     }
   }
 
-  visitCallback(targetParent: any, originalNodes: Iterable<Node>) {
+  visitCallback(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       this.visitPath(this.newObject(targetParent, key, pointer), children);
     }
   }
 
-  dereference(baseReferencePath: string, targetCollection: any, visitor: (tp: any, on: Iterable<Node>) => void, targetParent: any, key: string, pointer: string, value: any, children: Iterable<Node>) {
+  dereference(baseReferencePath: string, targetCollection: AnyObject, visitor: (tp: any, on: Iterable<Node>) => void, targetParent: AnyObject, key: string, pointer: string, value: any, children: Iterable<Node>) {
     if (value.$ref) {
       // it's a reference already.
       this.copy(targetParent, key, pointer, value);

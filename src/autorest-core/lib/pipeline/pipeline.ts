@@ -26,6 +26,9 @@ import { GetPlugin_ReflectApiVersion } from './metadata-generation';
 import { AutoRestExtension } from './plugin-endpoint';
 import { GetPlugin_SchemaValidatorOpenApi, GetPlugin_SchemaValidatorSwagger } from './schema-validation';
 import { ComposeSwaggers, LoadLiterateOpenAPIOverrides, LoadLiterateOpenAPIs, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
+import { GetPlugin_TreeShaker } from "./plugin-tree-shaker";
+import { GetPlugin_Deduplicator } from './plugin-deduplicator';
+import { GetPlugin_MultiAPIMerger } from './plugin-merger';
 
 interface PipelineNode {
   outputArtifact?: string;
@@ -400,8 +403,12 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     'commonmarker': GetPlugin_CommonmarkProcessor(),
     'emitter': GetPlugin_ArtifactEmitter(),
     'pipeline-emitter': GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('pipeline', pipeline.pipeline, ['fix-me-3'], 'pipeline')])),
-    'configuration-emitter': GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('configuration', configView.Raw, ['fix-me-4'], 'configuration')]))
-  };
+    'configuration-emitter': GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('configuration', configView.Raw, ['fix-me-4'], 'configuration')])),
+
+    'tree-shaker': GetPlugin_TreeShaker(),
+    'model-deduplicator': GetPlugin_Deduplicator(),
+    'multi-api-merger': GetPlugin_MultiAPIMerger()
+  }
 
   // dynamically loaded, auto-discovered plugins
   const __extensionExtension: { [pluginName: string]: AutoRestExtension } = {};
