@@ -24,7 +24,7 @@ definitions:
 
 # Local reference
 local1:
-  $ref: '#/project/name't/name'
+  $ref: '#/project/name'
 
 local2:
   level2:
