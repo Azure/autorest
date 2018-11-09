@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 //#!/usr/bin/env node
 // load modules from static linker filesystem.
-if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-loader"] === undefined) {
+if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-loader"] === undefined && require('fs').existsSync('./static-loader.js')) {
     require('../static-loader.js').load(`${__dirname}/../static_modules.fs`);
 }
 // Ensure that if we're running in an electron process, that things will work as if it were node.
@@ -516,7 +516,7 @@ class OpenApiLanguageService extends vscode_languageserver_1.TextDocuments {
         // let folder = ResolveUri(documentUri, ".");
         let configFiles = [];
         try {
-            // passing a file that isn't a config file will throw now. 
+            // passing a file that isn't a config file will throw now.
             configFiles = await configuration_1.Configuration.DetectConfigurationFiles(this, documentUri, undefined, true);
             // is the document a config file?
             if (configFiles.length === 1 && configFiles[0] === documentUri) {
@@ -533,7 +533,7 @@ class OpenApiLanguageService extends vscode_languageserver_1.TextDocuments {
                 configFiles = await configuration_1.Configuration.DetectConfigurationFiles(this, uri_1.ParentFolderUri(documentUri), undefined, true);
             }
             catch (_b) {
-                // shhh. just let it go. 
+                // shhh. just let it go.
             }
         }
         // is there a config file that contains the document as an input?
@@ -573,7 +573,7 @@ class OpenApiLanguageService extends vscode_languageserver_1.TextDocuments {
             this.process(document.uri);
             return;
         }
-        // neither 
+        // neither
         // clear any results we have for this.
         const result = this.results.get(document.uri);
         if (result) {
@@ -631,14 +631,14 @@ class OpenApiLanguageService extends vscode_languageserver_1.TextDocuments {
 let connection = vscode_languageserver_1.createConnection(new vscode_languageserver_1.IPCMessageReader(process), new vscode_languageserver_1.IPCMessageWriter(process));
 let languageService = new OpenApiLanguageService(connection);
 process.on("unhandledRejection", function (err) {
-    // 
+    //
     // @Future_Garrett - only turn this on as a desperate move of last resort.
     // You'll be sorry, and you will waste another day going down this rat hole
     // looking for the reason something is failing only to find out that it's only
-    // during the detection if a file is swagger or not, and then you'll 
-    // realize why I wrote this message. Don't say I didn't warn you. 
+    // during the detection if a file is swagger or not, and then you'll
+    // realize why I wrote this message. Don't say I didn't warn you.
     // -- @Past_Garrett
-    // 
+    //
     // languageService.verboseDebug(`Unhandled Rejection Suppressed: ${err}`);
 });
 // Listen on the connection

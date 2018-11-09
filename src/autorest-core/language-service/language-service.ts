@@ -1,6 +1,6 @@
 //#!/usr/bin/env node
 // load modules from static linker filesystem.
-if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-loader"] === undefined) {
+if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-loader"] === undefined && require('fs').existsSync('./static-loader.js')) {
   require('../static-loader.js').load(`${__dirname}/../static_modules.fs`)
 }
 
@@ -232,21 +232,21 @@ class Diagnostics {
 
 /**
  * The results from calling the 'generate' method via the {@link AutoRestLanguageService/generate}
- * 
+ *
  */
 export interface GenerationResults {
   /** the array of messages produced from the run. */
 
   messages: Array<string>;
-  /** the collection of outputted files. 
-   * 
-   * Member keys are the file names 
-   * Member values are the file contents 
-   * 
+  /** the collection of outputted files.
+   *
+   * Member keys are the file names
+   * Member values are the file contents
+   *
    * To Access the files:
    * for( const filename in generated.files ) {
    *   const content = generated.files[filename];
-   *   /// ... 
+   *   /// ...
    * }
    */
   files: Map<string, string>;
@@ -634,7 +634,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     let configFiles: Array<string> = [];
 
     try {
-      // passing a file that isn't a config file will throw now. 
+      // passing a file that isn't a config file will throw now.
       configFiles = await Configuration.DetectConfigurationFiles(this, documentUri, undefined, true);
 
       // is the document a config file?
@@ -651,7 +651,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
       try {
         configFiles = await Configuration.DetectConfigurationFiles(this, ParentFolderUri(documentUri), undefined, true);
       } catch {
-        // shhh. just let it go. 
+        // shhh. just let it go.
       }
     }
 
@@ -699,7 +699,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
       return;
     }
 
-    // neither 
+    // neither
     // clear any results we have for this.
     const result = this.results.get(document.uri);
     if (result) {
@@ -763,14 +763,14 @@ let connection: IConnection = createConnection(new IPCMessageReader(process), ne
 let languageService = new OpenApiLanguageService(connection);
 
 process.on("unhandledRejection", function (err) {
-  // 
+  //
   // @Future_Garrett - only turn this on as a desperate move of last resort.
   // You'll be sorry, and you will waste another day going down this rat hole
   // looking for the reason something is failing only to find out that it's only
-  // during the detection if a file is swagger or not, and then you'll 
-  // realize why I wrote this message. Don't say I didn't warn you. 
+  // during the detection if a file is swagger or not, and then you'll
+  // realize why I wrote this message. Don't say I didn't warn you.
   // -- @Past_Garrett
-  // 
+  //
   // languageService.verboseDebug(`Unhandled Rejection Suppressed: ${err}`);
 });
 

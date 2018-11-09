@@ -1,5 +1,5 @@
 // load modules from static linker filesystem.
-if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-loader"] === undefined) {
+if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-loader"] === undefined && require('fs').existsSync('./static-loader.js')) {
   require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
 }
 // everything else.

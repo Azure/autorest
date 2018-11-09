@@ -38,7 +38,7 @@ function getProperty<T, U>(obj: ObjectWithPath<T>, key: string): ObjectWithPath<
 }
 
 
-export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTitle: any, overrideInfoDescription: any, inputSwaggers: Array<DataHandle>, sink: DataSink): Promise<DataHandle> {
+async function ComposeSwaggers(config: ConfigurationView, overrideInfoTitle: any, overrideInfoDescription: any, inputSwaggers: Array<DataHandle>, sink: DataSink): Promise<DataHandle> {
   const inputSwaggerObjects = inputSwaggers.map(sw => sw.ReadObject<any>());
   const candidateTitles: Array<string> = overrideInfoTitle
     ? [overrideInfoTitle]
