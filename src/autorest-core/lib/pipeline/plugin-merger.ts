@@ -1,13 +1,9 @@
 import { DataSink, DataSource, MultiProcessor, Node, ProxyObject, QuickDataSource, visit, } from '@microsoft.azure/datastore';
+import { Dictionary } from '@microsoft.azure/linq';
 
 import * as oai from '@microsoft.azure/openapi';
 import { ConfigurationView } from '../configuration';
 import { PipelinePlugin } from './common';
-interface Dictionary<T> {
-  [key: string]: T;
-}
-class Dictionary<T> implements Dictionary<T> {
-}
 
 /**
  * Takes multiple input OAI3 files and creates one merged one.
@@ -217,7 +213,6 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
       this.refs[originalLocation] = `#/components/${type}/${uid}`;
       // for testing with local refs
       this.refs[`#${pointer}`] = `#/components/${type}/${uid}`;
-      console.log(`'#${pointer}' =>'#/components/${type}/${uid}' `)
 
       const component = this.newObject(container, `${uid}`, pointer);
       component['x-ms-metadata'] = {

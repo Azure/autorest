@@ -62,6 +62,7 @@
     "@microsoft.azure/oai2-to-oai3": "^2.1.55",
     "@microsoft.azure/codegen": "^1.0.36",
     "@microsoft.azure/openapi": "^2.1.16",
+    "@microsoft.azure/linq": "^2.1.14",
     "commonmark": "^0.27.0",
     "jsonpath": "1.0.0",
     "linq-es2015": "^2.4.25",
