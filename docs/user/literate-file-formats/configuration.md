@@ -15,7 +15,7 @@ desired when authoring and processing instructions.
 
 The Literate configuration file is a CommonMark (aka Markdown) file that has code blocks. 
 
-In order that AutoRest identifies a CommonMark document as a **AutoRest Configuration** file, the markdown must contain the following string exactly (and not as the first line in the file!) :
+In order that AutoRest identifies a CommonMark document as a **AutoRest Configuration** file, the markdown must contain the following string (we call it the magic string) exactly (and not as the first line in the file!) :
 
 ``` markdown
 > see https://aka.ms/autorest

@@ -6,7 +6,7 @@ LABEL maintainer="fearthecowboy"
 RUN apt-get update && apt-get install -y curl libunwind8 libicu55
 
 # NodeJS
-RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
 	apt-get update && apt-get install -y nodejs && \
 	npm install npm@latest -g
 
