@@ -3,7 +3,7 @@ import { CreatePerFilePlugin, PipelinePlugin } from '../common';
 import { Manipulator } from '../manipulation';
 
 /* @internal */
-export function GetPlugin_Yaml2Jsonx(): PipelinePlugin {
+export function createYamlToJsonPlugin(): PipelinePlugin {
   return CreatePerFilePlugin(async () => async (fileIn, sink) => {
     let ast = fileIn.ReadYamlAst();
     ast = ConvertYaml2Jsonx(ast);
@@ -12,7 +12,7 @@ export function GetPlugin_Yaml2Jsonx(): PipelinePlugin {
 }
 
 /* @internal */
-export function GetPlugin_Jsonx2Yaml(): PipelinePlugin {
+export function createJsonToYamlPlugin(): PipelinePlugin {
   return CreatePerFilePlugin(async () => async (fileIn, sink) => {
     let ast = fileIn.ReadYamlAst();
     ast = ConvertJsonx2Yaml(ast);

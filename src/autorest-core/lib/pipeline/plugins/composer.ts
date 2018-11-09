@@ -157,7 +157,7 @@ export async function ComposeSwaggers(config: ConfigurationView, overrideInfoTit
 }
 
 /* @internal */
-export function GetPlugin_Composer(): PipelinePlugin {
+export function createComposerPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
     const swaggers = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
     const overrideInfo = config.GetEntry('override-info');

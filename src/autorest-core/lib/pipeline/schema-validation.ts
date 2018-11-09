@@ -9,7 +9,7 @@ import { OperationAbortedException } from '../exception';
 import { Channel } from "../message";
 import { CreatePerFilePlugin, PipelinePlugin } from "./common";
 
-export function GetPlugin_SchemaValidatorSwagger(): PipelinePlugin {
+export function createSwaggerSchemaValidatorPlugin(): PipelinePlugin {
   const validator = new SchemaValidator({ breakOnFirstError: false });
 
   const extendedSwaggerSchema = require('./swagger-extensions.json');
@@ -35,7 +35,7 @@ export function GetPlugin_SchemaValidatorSwagger(): PipelinePlugin {
 }
 
 /* @internal */
-export function GetPlugin_SchemaValidatorOpenApi(): PipelinePlugin {
+export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
   const validator = new SchemaValidator({ breakOnFirstError: false });
 
   const extendedOpenApiSchema = require('./openapi3-schema.json');

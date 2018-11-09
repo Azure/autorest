@@ -7,7 +7,7 @@ import { QuickDataSource } from '@microsoft.azure/datastore';
 import { PipelinePlugin } from './common';
 
 /* @internal */
-export function GetPlugin_ReflectApiVersion(): PipelinePlugin {
+export function createCSharpReflectApiVersionPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
     const files = await input.Enum();
 

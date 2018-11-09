@@ -1,6 +1,6 @@
 import { PipelinePlugin } from '../common';
 
 /*@internal */
-export function GetPlugin_Identity(): PipelinePlugin {
+export function createIdentityPlugin(): PipelinePlugin {
   return async (config, input) => input;
 }

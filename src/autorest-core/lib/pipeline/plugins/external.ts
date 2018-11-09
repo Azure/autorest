@@ -4,17 +4,17 @@ import { PipelinePlugin } from '../common';
 import { AutoRestExtension } from '../plugin-endpoint';
 
 /* @internal */
-export function GetPlugin_External(host: AutoRestExtension, pluginName: string): PipelinePlugin {
+export function createExternalPlugin(host: AutoRestExtension, pluginName: string): PipelinePlugin {
   return async (config, input, sink) => {
-    const plugin = await host;
-    const pluginNames = await plugin.GetPluginNames(config.CancellationToken);
+    const extension = await host;
+    const pluginNames = await extension.GetPluginNames(config.CancellationToken);
     if (pluginNames.indexOf(pluginName) === -1) {
       throw new Error(`Plugin ${pluginName} not found.`);
     }
     let shouldSkip: boolean | undefined;
 
     const results: Array<DataHandle> = [];
-    const result = await plugin.Process(
+    const result = await extension.Process(
       pluginName,
       key => config.GetEntry(key as any),
       config,

@@ -28,6 +28,6 @@ async function deduplicate(config: ConfigurationView, input: DataSource, sink: D
 }
 
 /* @internal */
-export function GetPlugin_Deduplicator(): PipelinePlugin {
+export function createDeduplicatorPlugin(): PipelinePlugin {
   return deduplicate;
 }

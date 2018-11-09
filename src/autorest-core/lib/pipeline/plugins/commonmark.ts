@@ -3,7 +3,7 @@ import { PipelinePlugin } from '../common';
 import { ProcessCodeModel } from '../commonmark-documentation';
 
 /* @internal */
-export function GetPlugin_CommonmarkProcessor(): PipelinePlugin {
+export function createCommonmarkProcessorPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
     const files = await input.Enum();
     const results: Array<DataHandle> = [];

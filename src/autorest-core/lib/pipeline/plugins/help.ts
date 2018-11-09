@@ -8,7 +8,7 @@ import { Help } from '../../../help';
 import { PipelinePlugin } from '../common';
 
 /* @internal */
-export function GetPlugin_Help(): PipelinePlugin {
+export function createHelpPlugin(): PipelinePlugin {
   return async config => {
     const help: { [helpKey: string]: Help } = config.GetEntry(<any>'help-content');
     for (const helpKey of Object.keys(help).sort()) {

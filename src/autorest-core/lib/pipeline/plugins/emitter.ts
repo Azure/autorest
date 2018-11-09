@@ -89,7 +89,7 @@ export async function EmitArtifacts(config: ConfigurationView, artifactTypeFilte
 }
 
 /* @internal */
-export function GetPlugin_ArtifactEmitter(inputOverride?: () => Promise<DataSource>): PipelinePlugin {
+export function createArtifactEmitterPlugin(inputOverride?: () => Promise<DataSource>): PipelinePlugin {
   return async (config, input) => {
     if (inputOverride) {
       input = await inputOverride();

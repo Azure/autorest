@@ -8,25 +8,25 @@ import { ConfigurationView, GetExtension } from '../configuration';
 import { Channel } from '../message';
 import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
 import { PipelinePlugin } from './common';
-import { GetPlugin_ComponentModifier } from './component-modifier';
-import { GetPlugin_ReflectApiVersion } from './metadata-generation';
+import { createComponentModifierPlugin } from './component-modifier';
+import { createCSharpReflectApiVersionPlugin } from './metadata-generation';
 import { AutoRestExtension } from './plugin-endpoint';
-import { GetPlugin_Help } from './plugins/help';
-import { GetPlugin_SchemaValidatorOpenApi, GetPlugin_SchemaValidatorSwagger } from './schema-validation';
+import { createHelpPlugin } from './plugins/help';
+import { createSwaggerSchemaValidatorPlugin, createOpenApiSchemaValidatorPlugin } from './schema-validation';
 
-import { GetPlugin_Deduplicator } from './plugins/deduplicator';
-import { GetPlugin_MultiAPIMerger } from './plugins/merger';
-import { GetPlugin_TreeShaker } from './plugins/tree-shaker';
+import { createDeduplicatorPlugin } from './plugins/deduplicator';
+import { createMultiApiMergerPlugin } from './plugins/merger';
+import { createTreeShakerPlugin } from './plugins/tree-shaker';
 
-import { GetPlugin_CommonmarkProcessor } from './plugins/commonmark';
-import { GetPlugin_Composer } from './plugins/composer';
-import { GetPlugin_OAI2toOAIx } from './plugins/conversion';
-import { GetPlugin_ArtifactEmitter } from './plugins/emitter';
-import { GetPlugin_External } from './plugins/external';
-import { GetPlugin_Identity } from './plugins/identity';
-import { GetPlugin_LoaderOpenAPI, GetPlugin_LoaderSwagger, GetPlugin_MdOverrideLoaderOpenAPI, GetPlugin_MdOverrideLoaderSwagger } from './plugins/loaders';
-import { GetPlugin_Transformer, GetPlugin_TransformerImmediate } from './plugins/transformer';
-import { GetPlugin_Jsonx2Yaml, GetPlugin_Yaml2Jsonx } from './plugins/yaml-and-json';
+import { createCommonmarkProcessorPlugin } from './plugins/commonmark';
+import { createComposerPlugin } from './plugins/composer';
+import { createSwaggerToOpenApi3Plugin } from './plugins/conversion';
+import { createArtifactEmitterPlugin } from './plugins/emitter';
+import { createExternalPlugin } from './plugins/external';
+import { createIdentityPlugin } from './plugins/identity';
+import { createOpenApiLoaderPlugin, createSwaggerLoaderPlugin, createMarkdownOverrideOpenApiLoaderPlugin, createMarkdownOverrideSwaggerLoaderPlugin } from './plugins/loaders';
+import { createTransformerPlugin, createImmediateTransformerPlugin } from './plugins/transformer';
+import { createJsonToYamlPlugin, createYamlToJsonPlugin } from './plugins/yaml-and-json';
 
 interface PipelineNode {
   outputArtifact?: string;
@@ -156,33 +156,33 @@ function isDrainRequired(p: PipelineNode) {
 export async function RunPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
   // built-in plugins
   const plugins: { [name: string]: PipelinePlugin } = {
-    'help': GetPlugin_Help(),
-    'identity': GetPlugin_Identity(),
-    'loader-swagger': GetPlugin_LoaderSwagger(),
-    'loader-openapi': GetPlugin_LoaderOpenAPI(),
-    'md-override-loader-swagger': GetPlugin_MdOverrideLoaderSwagger(),
-    'md-override-loader-openapi': GetPlugin_MdOverrideLoaderOpenAPI(),
-    'transform': GetPlugin_Transformer(),
-    'transform-immediate': GetPlugin_TransformerImmediate(),
-    'compose': GetPlugin_Composer(),
-    'schema-validator-openapi': GetPlugin_SchemaValidatorOpenApi(),
-    'schema-validator-swagger': GetPlugin_SchemaValidatorSwagger(),
+    'help': createHelpPlugin(),
+    'identity': createIdentityPlugin(),
+    'loader-swagger': createSwaggerLoaderPlugin(),
+    'loader-openapi': createOpenApiLoaderPlugin(),
+    'md-override-loader-swagger': createMarkdownOverrideSwaggerLoaderPlugin(),
+    'md-override-loader-openapi': createMarkdownOverrideOpenApiLoaderPlugin(),
+    'transform': createTransformerPlugin(),
+    'transform-immediate': createImmediateTransformerPlugin(),
+    'compose': createComposerPlugin(),
+    'schema-validator-openapi': createOpenApiSchemaValidatorPlugin(),
+    'schema-validator-swagger': createSwaggerSchemaValidatorPlugin(),
     // TODO: replace with OAV again
-    'semantic-validator': GetPlugin_Identity(),
+    'semantic-validator': createIdentityPlugin(),
 
-    'openapi-document-converter': GetPlugin_OAI2toOAIx(),
-    'component-modifiers': GetPlugin_ComponentModifier(),
-    'yaml2jsonx': GetPlugin_Yaml2Jsonx(),
-    'jsonx2yaml': GetPlugin_Jsonx2Yaml(),
-    'reflect-api-versions-cs': GetPlugin_ReflectApiVersion(),
-    'commonmarker': GetPlugin_CommonmarkProcessor(),
-    'emitter': GetPlugin_ArtifactEmitter(),
-    'pipeline-emitter': GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('pipeline', pipeline.pipeline, ['fix-me-3'], 'pipeline')])),
-    'configuration-emitter': GetPlugin_ArtifactEmitter(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('configuration', configView.Raw, ['fix-me-4'], 'configuration')])),
+    'openapi-document-converter': createSwaggerToOpenApi3Plugin(),
+    'component-modifiers': createComponentModifierPlugin(),
+    'yaml2jsonx': createYamlToJsonPlugin(),
+    'jsonx2yaml': createJsonToYamlPlugin(),
+    'reflect-api-versions-cs': createCSharpReflectApiVersionPlugin(),
+    'commonmarker': createCommonmarkProcessorPlugin(),
+    'emitter': createArtifactEmitterPlugin(),
+    'pipeline-emitter': createArtifactEmitterPlugin(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('pipeline', pipeline.pipeline, ['fix-me-3'], 'pipeline')])),
+    'configuration-emitter': createArtifactEmitterPlugin(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('configuration', configView.Raw, ['fix-me-4'], 'configuration')])),
 
-    'tree-shaker': GetPlugin_TreeShaker(),
-    'model-deduplicator': GetPlugin_Deduplicator(),
-    'multi-api-merger': GetPlugin_MultiAPIMerger()
+    'tree-shaker': createTreeShakerPlugin(),
+    'model-deduplicator': createDeduplicatorPlugin(),
+    'multi-api-merger': createMultiApiMergerPlugin()
   };
 
   // dynamically loaded, auto-discovered plugins
@@ -191,7 +191,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     const extension = await GetExtension(useExtensionQualifiedName);
     for (const plugin of await extension.GetPluginNames(configView.CancellationToken)) {
       if (!plugins[plugin]) {
-        plugins[plugin] = GetPlugin_External(extension, plugin);
+        plugins[plugin] = createExternalPlugin(extension, plugin);
         __extensionExtension[plugin] = extension;
       }
     }

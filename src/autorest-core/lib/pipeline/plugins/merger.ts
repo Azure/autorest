@@ -234,6 +234,6 @@ async function merge(config: ConfigurationView, input: DataSource, sink: DataSin
 }
 
 /* @internal */
-export function GetPlugin_MultiAPIMerger(): PipelinePlugin {
+export function createMultiApiMergerPlugin(): PipelinePlugin {
   return merge;
 }

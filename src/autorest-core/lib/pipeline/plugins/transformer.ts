@@ -3,7 +3,7 @@ import { CreatePerFilePlugin, PipelinePlugin } from '../common';
 import { Manipulator } from '../manipulation';
 
 /* @internal */
-export function GetPlugin_Transformer(): PipelinePlugin {
+export function createTransformerPlugin(): PipelinePlugin {
   return CreatePerFilePlugin(async config => {
     const isObject = config.GetEntry('is-object' as any) === false ? false : true;
     const manipulator = new Manipulator(config);
@@ -15,7 +15,7 @@ export function GetPlugin_Transformer(): PipelinePlugin {
 }
 
 /* @internal */
-export function GetPlugin_TransformerImmediate(): PipelinePlugin {
+export function createImmediateTransformerPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
     const isObject = config.GetEntry('is-object' as any) === false ? false : true;
     const files = await input.Enum(); // first all the immediate-configs, then a single swagger-document

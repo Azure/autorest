@@ -19,7 +19,7 @@ function decorateSpecialProperties(o: any): void {
 }
 
 /* @internal */
-export function GetPlugin_ComponentModifier(): PipelinePlugin {
+export function createComponentModifierPlugin(): PipelinePlugin {
   const noWireExtension = 'x-ms-no-wire';
 
   return CreatePerFilePlugin(async config => async (fileIn, sink) => {

@@ -271,7 +271,7 @@ interface OpenAPI3Spec {
 }
 
 /* @internal */
-export function GetPlugin_LoaderSwagger(): PipelinePlugin {
+export function createSwaggerLoaderPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
     const inputs = config.InputFileUris;
     const swaggers = await LoadLiterateSwaggers(
@@ -292,7 +292,7 @@ export function GetPlugin_LoaderSwagger(): PipelinePlugin {
 }
 
 /* @internal */
-export function GetPlugin_LoaderOpenAPI(): PipelinePlugin {
+export function createOpenApiLoaderPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
     const inputs = config.InputFileUris;
     const openapis = await LoadLiterateOpenAPIs(
@@ -311,7 +311,7 @@ export function GetPlugin_LoaderOpenAPI(): PipelinePlugin {
 
 
 /* @internal */
-export function GetPlugin_MdOverrideLoaderSwagger(): PipelinePlugin {
+export function createMarkdownOverrideSwaggerLoaderPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
     const inputs = config.InputFileUris;
     const swaggers = await LoadLiterateSwaggerOverrides(
@@ -326,7 +326,7 @@ export function GetPlugin_MdOverrideLoaderSwagger(): PipelinePlugin {
 }
 
 /* @internal */
-export function GetPlugin_MdOverrideLoaderOpenAPI(): PipelinePlugin {
+export function createMarkdownOverrideOpenApiLoaderPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
     const inputs = config.InputFileUris;
     const openapis = await LoadLiterateOpenAPIOverrides(
