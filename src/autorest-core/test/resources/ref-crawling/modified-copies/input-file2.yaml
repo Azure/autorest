@@ -1,0 +1,3 @@
+# to test that a primary file does not get tagged as secondary or loaded twice
+root:
+  $ref: 'https://raw.githubusercontent.com/Azure/autorest/0ba85dfc92d80dad5a30be7321ef373a1ffcf19c/src/autorest-core/test/resources/ref-crawling/original-files/input-file1.yaml'

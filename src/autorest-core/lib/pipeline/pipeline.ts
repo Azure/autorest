@@ -3,19 +3,13 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Help } from '../../help';
+import { FastStringify, StringifyAst } from '@microsoft.azure/datastore';
+import { ConvertJsonx2Yaml, ConvertYaml2Jsonx, DataHandle, DataSource, IFileSystem, JsonPath, QuickDataSource, safeEval, stringify } from '@microsoft.azure/datastore';
+import { ResolveUri } from '@microsoft.azure/uri';
 import { ConfigurationView, GetExtension } from '../configuration';
-import { DataHandle, DataSink, DataSource, QuickDataSource } from '@microsoft.azure/datastore';
-import { IFileSystem } from '@microsoft.azure/datastore';
-import { RefCrawler } from './ref-crawler';
 import { Channel, Message } from '../message';
 import { ConvertOAI2toOAI3 } from '../openapi/conversion';
 import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
-import { ConvertJsonx2Yaml, ConvertYaml2Jsonx } from '@microsoft.azure/datastore';
-import { JsonPath, stringify } from '@microsoft.azure/datastore';
-import { safeEval } from '@microsoft.azure/datastore';
-import { ResolveUri } from '@microsoft.azure/uri';
-import { Descendants, FastStringify, StringifyAst } from '@microsoft.azure/datastore';
 import { EmitArtifacts } from './artifact-emitter';
 import { CreatePerFilePlugin, PipelinePlugin } from './common';
 import { ProcessCodeModel } from './commonmark-documentation';
@@ -26,9 +20,12 @@ import { GetPlugin_ReflectApiVersion } from './metadata-generation';
 import { AutoRestExtension } from './plugin-endpoint';
 import { GetPlugin_SchemaValidatorOpenApi, GetPlugin_SchemaValidatorSwagger } from './schema-validation';
 import { ComposeSwaggers, LoadLiterateOpenAPIOverrides, LoadLiterateOpenAPIs, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
-import { GetPlugin_TreeShaker } from "./plugin-tree-shaker";
+
 import { GetPlugin_Deduplicator } from './plugin-deduplicator';
 import { GetPlugin_MultiAPIMerger } from './plugin-merger';
+import { GetPlugin_TreeShaker } from './plugin-tree-shaker';
+
+import { crawlReferences } from './ref-crawling';
 
 interface PipelineNode {
   outputArtifact?: string;
@@ -53,31 +50,13 @@ function GetPlugin_LoaderSwagger(): PipelinePlugin {
       inputs,
       sink
     );
+
     const foundAllFiles = swaggers.length !== inputs.length;
-
-    const result: Array<DataHandle> = [];
+    let result: Array<DataHandle> = [];
     if (swaggers.length === inputs.length) {
-      for (let i = 0; i < swaggers.length; i++) {
-        const currentSwagger = swaggers[i];
-        const crawler = new RefCrawler(currentSwagger);
-        const generated = crawler.output;
-        result.push(await sink.WriteObject(currentSwagger.Description, generated, currentSwagger.Identity, currentSwagger.GetArtifact(), crawler.sourceMappings));
-        // const loc = `${cur.Location}/[filename]`;
-        // with allFiles
-
-        // get all the references
-        // create a new document, copy across, changing references to being full path. (even local ones!)
-        // if the referenced document isn't loaded, load it
-        // and then mark it 'x-ms-secondary-file' : true
-        // and then add it to the list of swaggers.
-        // swaggers.push( /*new swagger*/ );
-      }
-
-      // change this to just emit our copies instead.
-      for (let i = 0; i < inputs.length; ++i) {
-        result.push(await sink.Forward(inputs[i], swaggers[i]));
-      }
+      result = await crawlReferences(input, swaggers, sink);
     }
+
     return new QuickDataSource(result, foundAllFiles);
   };
 }
@@ -91,11 +70,9 @@ function GetPlugin_LoaderOpenAPI(): PipelinePlugin {
       inputs,
       sink
     );
-    const result: Array<DataHandle> = [];
+    let result: Array<DataHandle> = [];
     if (openapis.length === inputs.length) {
-      for (let i = 0; i < inputs.length; ++i) {
-        result.push(await sink.Forward(inputs[i], openapis[i]));
-      }
+      result = await crawlReferences(input, openapis, sink);
     }
     return new QuickDataSource(result, openapis.length !== inputs.length);
   };
@@ -132,14 +109,14 @@ function GetPlugin_MdOverrideLoaderOpenAPI(): PipelinePlugin {
 }
 
 function GetPlugin_OAI2toOAIx(): PipelinePlugin {
-  return CreatePerFilePlugin(async config => async (fileIn, sink) => {
+  return CreatePerFilePlugin(async () => async (fileIn, sink) => {
     const fileOut = await ConvertOAI2toOAI3(fileIn, sink);
     return sink.Forward(fileIn.Description, fileOut);
   });
 }
 
 function GetPlugin_Yaml2Jsonx(): PipelinePlugin {
-  return CreatePerFilePlugin(async config => async (fileIn, sink) => {
+  return CreatePerFilePlugin(async () => async (fileIn, sink) => {
     let ast = fileIn.ReadYamlAst();
     ast = ConvertYaml2Jsonx(ast);
     return sink.WriteData(fileIn.Description, StringifyAst(ast), fileIn.Identity);
@@ -147,7 +124,7 @@ function GetPlugin_Yaml2Jsonx(): PipelinePlugin {
 }
 
 function GetPlugin_Jsonx2Yaml(): PipelinePlugin {
-  return CreatePerFilePlugin(async config => async (fileIn, sink) => {
+  return CreatePerFilePlugin(async () => async (fileIn, sink) => {
     let ast = fileIn.ReadYamlAst();
     ast = ConvertJsonx2Yaml(ast);
     return sink.WriteData(fileIn.Description, StringifyAst(ast), fileIn.Identity);
@@ -241,7 +218,7 @@ function GetPlugin_CommonmarkProcessor(): PipelinePlugin {
 }
 
 function GetPlugin_ArtifactEmitter(inputOverride?: () => Promise<DataSource>): PipelinePlugin {
-  return async (config, input, sink) => {
+  return async (config, input) => {
     if (inputOverride) {
       input = await inputOverride();
     }
@@ -408,7 +385,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
     'tree-shaker': GetPlugin_TreeShaker(),
     'model-deduplicator': GetPlugin_Deduplicator(),
     'multi-api-merger': GetPlugin_MultiAPIMerger()
-  }
+  };
 
   // dynamically loaded, auto-discovered plugins
   const __extensionExtension: { [pluginName: string]: AutoRestExtension } = {};

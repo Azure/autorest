@@ -3,5 +3,8 @@
 > see https://aka.ms/autorest
 
 ``` yaml 
-input-file: applicationGateway.json # full Unicode support
+input-file: 
+  - input-file1.yaml
+  - input-file2.yaml
+
 ```
