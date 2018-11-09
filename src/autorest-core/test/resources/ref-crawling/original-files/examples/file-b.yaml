@@ -1,4 +1,2 @@
 local-ref:
   $ref: '#something/some'
-local-ref:
-  $ref: '#someone/some'
