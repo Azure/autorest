@@ -27,6 +27,7 @@ import { GetPlugin_TreeShaker } from './plugins/tree-shaker';
 import { GetPlugin_Identity } from './plugins/identity';
 import { GetPlugin_LoaderSwagger, GetPlugin_LoaderOpenAPI, GetPlugin_MdOverrideLoaderSwagger, GetPlugin_MdOverrideLoaderOpenAPI } from './plugins/loaders';
 import { GetPlugin_Composer } from './plugins/composer';
+import { GetPlugin_External } from './plugins/external';
 
 interface PipelineNode {
   outputArtifact?: string;
@@ -84,44 +85,6 @@ function GetPlugin_TransformerImmediate(): PipelinePlugin {
     const fileIn = await input.ReadStrict(file);
     const fileOut = await manipulator.Process(fileIn, sink, isObject, fileIn.Description);
     return new QuickDataSource([await sink.Forward('swagger-document', fileOut)], input.skip);
-  };
-}
-
-
-function GetPlugin_External(host: AutoRestExtension, pluginName: string): PipelinePlugin {
-  return async (config, input, sink) => {
-    const plugin = await host;
-    const pluginNames = await plugin.GetPluginNames(config.CancellationToken);
-    if (pluginNames.indexOf(pluginName) === -1) {
-      throw new Error(`Plugin ${pluginName} not found.`);
-    }
-    let shouldSkip: boolean | undefined;
-
-    const results: Array<DataHandle> = [];
-    const result = await plugin.Process(
-      pluginName,
-      key => config.GetEntry(key as any),
-      config,
-      input,
-      sink,
-      f => results.push(f),
-      (message: Message) => {
-
-        if (message.Channel === Channel.Control) {
-          if (message.Details && message.Details.skip !== undefined) {
-            shouldSkip = message.Details.skip;
-          }
-
-        } else {
-          return config.Message.bind(config)(message);
-        }
-      },
-
-      config.CancellationToken);
-    if (!result) {
-      throw new Error(`Plugin ${pluginName} reported failure.`);
-    }
-    return new QuickDataSource(results, shouldSkip);
   };
 }
 
