@@ -13,7 +13,7 @@ export async function crawlReferences(inputScope: DataSource, filesToCrawl: Arra
     const currentSwagger = filesToCrawl[i];
     const refProcessor = new RefProcessor(currentSwagger, filesToExcludeInSearch);
     result.push(await sink.WriteObject(currentSwagger.Description, refProcessor.output, currentSwagger.Identity, currentSwagger.GetArtifact(), refProcessor.sourceMappings));
-    filesToExcludeInSearch = [...filesToExcludeInSearch, ...refProcessor.newFilesFound];
+    filesToExcludeInSearch = [...new Set([...filesToExcludeInSearch, ...refProcessor.newFilesFound])];
     for (let j = 0; j < refProcessor.newFilesFound.length; j++) {
       const originalSecondaryFile = await inputScope.ReadStrict(refProcessor.newFilesFound[j]);
       const fileMarker = new SecondaryFileMarker(originalSecondaryFile);
