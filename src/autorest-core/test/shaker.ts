@@ -9,7 +9,7 @@ import * as datastore from '@microsoft.azure/datastore';
 import * as assert from 'assert';
 import { only, skip, slow, suite, test, timeout } from 'mocha-typescript';
 
-import { OAI3Shaker } from '../lib/pipeline/plugin-tree-shaker';
+import { OAI3Shaker } from '../lib/pipeline/plugins/tree-shaker';
 import { FastStringify } from '@microsoft.azure/datastore';
 
 require('source-map-support').install();

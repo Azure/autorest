@@ -2,8 +2,8 @@ import { DataSink, DataSource, MultiProcessor, Node, ProxyObject, QuickDataSourc
 import { Dictionary } from '@microsoft.azure/linq';
 
 import * as oai from '@microsoft.azure/openapi';
-import { ConfigurationView } from '../configuration';
-import { PipelinePlugin } from './common';
+import { ConfigurationView } from '../../configuration';
+import { PipelinePlugin } from '../common';
 
 /**
  * Takes multiple input OAI3 files and creates one merged one.

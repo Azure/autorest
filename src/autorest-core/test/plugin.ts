@@ -3,20 +3,19 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import * as assert from 'assert';
-import { only, skip, slow, suite, test, timeout } from "mocha-typescript";
+import { only, skip, slow, suite, test, timeout } from 'mocha-typescript';
 import { PumpMessagesToConsole } from './test-utility';
 
-import { Extension, ExtensionManager } from "@microsoft.azure/extension";
-import { homedir } from "os";
-import { join } from "path";
-import { AutoRest } from "../lib/autorest-core";
-import { DataHandle, DataStore, QuickDataSource } from '@microsoft.azure/datastore';
-import { RealFileSystem } from "@microsoft.azure/datastore";
-import { Channel, Message } from "../lib/message";
-import { AutoRestExtension } from "../lib/pipeline/plugin-endpoint";
-import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
-import { CancellationToken } from "vscode-jsonrpc";
-import { CreateFolderUri, ResolveUri } from "@microsoft.azure/uri";
+import { DataHandle, DataStore, QuickDataSource, RealFileSystem } from '@microsoft.azure/datastore';
+import { Extension, ExtensionManager } from '@microsoft.azure/extension';
+import { CreateFolderUri, ResolveUri } from '@microsoft.azure/uri';
+import { homedir } from 'os';
+import { join } from 'path';
+import { CancellationToken } from 'vscode-jsonrpc';
+import { AutoRest } from '../lib/autorest-core';
+import { Channel, Message } from '../lib/message';
+import { AutoRestExtension } from '../lib/pipeline/plugin-endpoint';
+import { LoadLiterateSwagger } from '../lib/pipeline/plugins/loaders';
 
 async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtension> {
   const extMgr = await ExtensionManager.Create(join(homedir(), '.autorest'));
@@ -65,7 +64,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
     // call modeler
     const autorestPlugin = await GetAutoRestDotNetPlugin('modeler');
     const results: Array<DataHandle> = [];
-    const result = await autorestPlugin.Process('modeler', key => ({ namespace: "SomeNamespace" } as any)[key], config, new QuickDataSource([swagger]), dataStore.getDataSink(), f => results.push(f), m => null, CancellationToken.None);
+    const result = await autorestPlugin.Process('modeler', key => ({ namespace: 'SomeNamespace' } as any)[key], config, new QuickDataSource([swagger]), dataStore.getDataSink(), f => results.push(f), m => null, CancellationToken.None);
     assert.strictEqual(result, true);
     if (results.length !== 1) {
       throw new Error(`Modeler plugin produced '${results.length}' items. Only expected one (the code model).`);

@@ -3,7 +3,7 @@ import { suite, test } from 'mocha-typescript';
 
 import { AutoRest } from '../lib/autorest-core';
 import { RealFileSystem } from '@microsoft.azure/datastore';
-import { LoadLiterateOpenAPIs } from '../lib/pipeline/swagger-loader';
+import { LoadLiterateOpenAPIs } from '../lib/pipeline/plugins/loaders';
 import { CreateFolderUri, ResolveUri } from '@microsoft.azure/uri';
 
 @suite class OpenAPI3Loading {

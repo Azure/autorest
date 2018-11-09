@@ -14,18 +14,19 @@ import { EmitArtifacts } from './artifact-emitter';
 import { CreatePerFilePlugin, PipelinePlugin } from './common';
 import { ProcessCodeModel } from './commonmark-documentation';
 import { GetPlugin_ComponentModifier } from './component-modifier';
-import { GetPlugin_Help } from './help';
+import { GetPlugin_Help } from './plugins/help';
 import { Manipulator } from './manipulation';
 import { GetPlugin_ReflectApiVersion } from './metadata-generation';
 import { AutoRestExtension } from './plugin-endpoint';
 import { GetPlugin_SchemaValidatorOpenApi, GetPlugin_SchemaValidatorSwagger } from './schema-validation';
-import { ComposeSwaggers, LoadLiterateOpenAPIOverrides, LoadLiterateOpenAPIs, LoadLiterateSwaggerOverrides, LoadLiterateSwaggers } from './swagger-loader';
 
-import { GetPlugin_Deduplicator } from './plugin-deduplicator';
-import { GetPlugin_MultiAPIMerger } from './plugin-merger';
-import { GetPlugin_TreeShaker } from './plugin-tree-shaker';
+import { GetPlugin_Deduplicator } from './plugins/deduplicator';
+import { GetPlugin_MultiAPIMerger } from './plugins/merger';
+import { GetPlugin_TreeShaker } from './plugins/tree-shaker';
 
-import { crawlReferences } from './ref-crawling';
+import { GetPlugin_Identity } from './plugins/identity';
+import { GetPlugin_LoaderSwagger, GetPlugin_LoaderOpenAPI, GetPlugin_MdOverrideLoaderSwagger, GetPlugin_MdOverrideLoaderOpenAPI } from './plugins/loaders';
+import { GetPlugin_Composer } from './plugins/composer';
 
 interface PipelineNode {
   outputArtifact?: string;
@@ -37,76 +38,7 @@ interface PipelineNode {
   dependencies: Array<PipelineNode>;
 }
 
-function GetPlugin_Identity(): PipelinePlugin {
-  return async (config, input) => input;
-}
 
-function GetPlugin_LoaderSwagger(): PipelinePlugin {
-  return async (config, input, sink) => {
-    const inputs = config.InputFileUris;
-    const swaggers = await LoadLiterateSwaggers(
-      config,
-      input,
-      inputs,
-      sink
-    );
-
-    const foundAllFiles = swaggers.length !== inputs.length;
-    let result: Array<DataHandle> = [];
-    if (swaggers.length === inputs.length) {
-      result = await crawlReferences(input, swaggers, sink);
-    }
-
-    return new QuickDataSource(result, foundAllFiles);
-  };
-}
-
-function GetPlugin_LoaderOpenAPI(): PipelinePlugin {
-  return async (config, input, sink) => {
-    const inputs = config.InputFileUris;
-    const openapis = await LoadLiterateOpenAPIs(
-      config,
-      input,
-      inputs,
-      sink
-    );
-    let result: Array<DataHandle> = [];
-    if (openapis.length === inputs.length) {
-      result = await crawlReferences(input, openapis, sink);
-    }
-    return new QuickDataSource(result, openapis.length !== inputs.length);
-  };
-}
-
-function GetPlugin_MdOverrideLoaderSwagger(): PipelinePlugin {
-  return async (config, input, sink) => {
-    const inputs = config.InputFileUris;
-    const swaggers = await LoadLiterateSwaggerOverrides(
-      config,
-      input,
-      inputs, sink);
-    const result: Array<DataHandle> = [];
-    for (let i = 0; i < inputs.length; ++i) {
-      result.push(await sink.Forward(inputs[i], swaggers[i]));
-    }
-    return new QuickDataSource(result, input.skip);
-  };
-}
-
-function GetPlugin_MdOverrideLoaderOpenAPI(): PipelinePlugin {
-  return async (config, input, sink) => {
-    const inputs = config.InputFileUris;
-    const openapis = await LoadLiterateOpenAPIOverrides(
-      config,
-      input,
-      inputs, sink);
-    const result: Array<DataHandle> = [];
-    for (let i = 0; i < inputs.length; ++i) {
-      result.push(await sink.Forward(inputs[i], openapis[i]));
-    }
-    return new QuickDataSource(result, input.skip);
-  };
-}
 
 function GetPlugin_OAI2toOAIx(): PipelinePlugin {
   return CreatePerFilePlugin(async () => async (fileIn, sink) => {
@@ -155,16 +87,6 @@ function GetPlugin_TransformerImmediate(): PipelinePlugin {
   };
 }
 
-function GetPlugin_Composer(): PipelinePlugin {
-  return async (config, input, sink) => {
-    const swaggers = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
-    const overrideInfo = config.GetEntry('override-info');
-    const overrideTitle = (overrideInfo && overrideInfo.title) || config.GetEntry('title');
-    const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry('description');
-    const swagger = await ComposeSwaggers(config, overrideTitle, overrideDescription, swaggers, sink);
-    return new QuickDataSource([await sink.Forward('composed', swagger)], input.skip);
-  };
-}
 
 function GetPlugin_External(host: AutoRestExtension, pluginName: string): PipelinePlugin {
   return async (config, input, sink) => {

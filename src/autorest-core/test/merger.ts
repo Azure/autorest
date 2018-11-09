@@ -9,7 +9,7 @@ import * as datastore from '@microsoft.azure/datastore';
 import * as assert from 'assert';
 import { only, skip, slow, suite, test, timeout } from 'mocha-typescript';
 
-import { MultiAPIMerger } from '../lib/pipeline/plugin-merger';
+import { MultiAPIMerger } from '../lib/pipeline/plugins/merger';
 import { FastStringify } from '@microsoft.azure/datastore';
 
 require('source-map-support').install();

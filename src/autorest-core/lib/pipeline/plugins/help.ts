@@ -4,15 +4,15 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { QuickDataSource } from '@microsoft.azure/datastore';
-import { Help } from "../../help";
-import { PipelinePlugin } from "./common";
+import { Help } from '../../../help';
+import { PipelinePlugin } from '../common';
 
 export function GetPlugin_Help(): PipelinePlugin {
   return async config => {
-    const help: { [helpKey: string]: Help } = config.GetEntry("help-content" as any);
+    const help: { [helpKey: string]: Help } = config.GetEntry(<any>'help-content');
     for (const helpKey of Object.keys(help).sort()) {
       config.GeneratedFile.Dispatch({
-        type: "help",
+        type: 'help',
         uri: `${helpKey}.json`,
         content: JSON.stringify(help[helpKey])
       });

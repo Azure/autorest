@@ -1,9 +1,6 @@
-import { DataHandle, DataSink, DataSource, JsonPath, JsonPointer, Node, Processor, QuickDataSource, visit, parseJsonPointer, AnyObject } from '@microsoft.azure/datastore';
-import { deconstruct, pascalCase, camelCase } from "@microsoft.azure/codegen";
-import * as oai from '@microsoft.azure/openapi';
-import { ConfigurationView } from '../configuration';
-import { PipelinePlugin } from './common';
-
+import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Processor, QuickDataSource } from '@microsoft.azure/datastore';
+import { ConfigurationView } from '../../configuration';
+import { PipelinePlugin } from '../common';
 
 export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
   get components(): AnyObject {
@@ -170,7 +167,6 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
           this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
           break;
 
-
         // everything else, just copy recursively.
         default:
           this.copy(targetParent, key, pointer, value);
@@ -180,7 +176,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
   }
 
   visitContent(targetParent: AnyObject, originalNodes: Iterable<Node>) {
-    for (const { value, key, pointer, children } of originalNodes) {
+    for (const { key, pointer, children } of originalNodes) {
       this.visitMediaType(this.newObject(targetParent, key, pointer), children);
     }
   }
@@ -206,7 +202,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
       // this.dereference(this.pro, this.visitProperties, targetParent, key, pointer, value, children);
       // the property has a description with it, we should tag it here too.
       if (value.description) {
-        //targetParent[key].description = { value: value.description, pointer, };
+        // targetParent[key].description = { value: value.description, pointer, };
       }
     }
   }
@@ -334,7 +330,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
   }
 
   visitCallback(targetParent: AnyObject, originalNodes: Iterable<Node>) {
-    for (const { value, key, pointer, children } of originalNodes) {
+    for (const { key, pointer, children } of originalNodes) {
       this.visitPath(this.newObject(targetParent, key, pointer), children);
     }
   }

@@ -1,8 +1,8 @@
 import { DataHandle, DataSink, DataSource, Node, Processor, QuickDataSource, } from '@microsoft.azure/datastore';
 
 import * as oai from '@microsoft.azure/openapi';
-import { ConfigurationView } from '../configuration';
-import { PipelinePlugin } from './common';
+import { ConfigurationView } from '../../configuration';
+import { PipelinePlugin } from '../common';
 
 export class Deduplicator extends Processor<oai.Model, oai.Model> {
 
