@@ -3,31 +3,30 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { FastStringify, StringifyAst } from '@microsoft.azure/datastore';
-import { ConvertJsonx2Yaml, ConvertYaml2Jsonx, DataHandle, DataSource, IFileSystem, JsonPath, QuickDataSource, safeEval, stringify } from '@microsoft.azure/datastore';
-import { ResolveUri } from '@microsoft.azure/uri';
+import { DataHandle, DataSource, FastStringify, IFileSystem, JsonPath, QuickDataSource, safeEval, stringify } from '@microsoft.azure/datastore';
 import { ConfigurationView, GetExtension } from '../configuration';
-import { Channel, Message } from '../message';
-import { ConvertOAI2toOAI3 } from '../openapi/conversion';
+import { Channel } from '../message';
 import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
-import { EmitArtifacts } from './artifact-emitter';
-import { CreatePerFilePlugin, PipelinePlugin } from './common';
-import { ProcessCodeModel } from './commonmark-documentation';
+import { PipelinePlugin } from './common';
 import { GetPlugin_ComponentModifier } from './component-modifier';
-import { GetPlugin_Help } from './plugins/help';
-import { Manipulator } from './manipulation';
 import { GetPlugin_ReflectApiVersion } from './metadata-generation';
 import { AutoRestExtension } from './plugin-endpoint';
+import { GetPlugin_Help } from './plugins/help';
 import { GetPlugin_SchemaValidatorOpenApi, GetPlugin_SchemaValidatorSwagger } from './schema-validation';
 
 import { GetPlugin_Deduplicator } from './plugins/deduplicator';
 import { GetPlugin_MultiAPIMerger } from './plugins/merger';
 import { GetPlugin_TreeShaker } from './plugins/tree-shaker';
 
-import { GetPlugin_Identity } from './plugins/identity';
-import { GetPlugin_LoaderSwagger, GetPlugin_LoaderOpenAPI, GetPlugin_MdOverrideLoaderSwagger, GetPlugin_MdOverrideLoaderOpenAPI } from './plugins/loaders';
+import { GetPlugin_CommonmarkProcessor } from './plugins/commonmark';
 import { GetPlugin_Composer } from './plugins/composer';
+import { GetPlugin_OAI2toOAIx } from './plugins/conversion';
+import { GetPlugin_ArtifactEmitter } from './plugins/emitter';
 import { GetPlugin_External } from './plugins/external';
+import { GetPlugin_Identity } from './plugins/identity';
+import { GetPlugin_LoaderOpenAPI, GetPlugin_LoaderSwagger, GetPlugin_MdOverrideLoaderOpenAPI, GetPlugin_MdOverrideLoaderSwagger } from './plugins/loaders';
+import { GetPlugin_Transformer, GetPlugin_TransformerImmediate } from './plugins/transformer';
+import { GetPlugin_Jsonx2Yaml, GetPlugin_Yaml2Jsonx } from './plugins/yaml-and-json';
 
 interface PipelineNode {
   outputArtifact?: string;
@@ -37,92 +36,6 @@ interface PipelineNode {
   skip: boolean;
   requireDrain?: boolean;
   dependencies: Array<PipelineNode>;
-}
-
-
-
-function GetPlugin_OAI2toOAIx(): PipelinePlugin {
-  return CreatePerFilePlugin(async () => async (fileIn, sink) => {
-    const fileOut = await ConvertOAI2toOAI3(fileIn, sink);
-    return sink.Forward(fileIn.Description, fileOut);
-  });
-}
-
-function GetPlugin_Yaml2Jsonx(): PipelinePlugin {
-  return CreatePerFilePlugin(async () => async (fileIn, sink) => {
-    let ast = fileIn.ReadYamlAst();
-    ast = ConvertYaml2Jsonx(ast);
-    return sink.WriteData(fileIn.Description, StringifyAst(ast), fileIn.Identity);
-  });
-}
-
-function GetPlugin_Jsonx2Yaml(): PipelinePlugin {
-  return CreatePerFilePlugin(async () => async (fileIn, sink) => {
-    let ast = fileIn.ReadYamlAst();
-    ast = ConvertJsonx2Yaml(ast);
-    return sink.WriteData(fileIn.Description, StringifyAst(ast), fileIn.Identity);
-  });
-}
-
-function GetPlugin_Transformer(): PipelinePlugin {
-  return CreatePerFilePlugin(async config => {
-    const isObject = config.GetEntry('is-object' as any) === false ? false : true;
-    const manipulator = new Manipulator(config);
-    return async (fileIn, sink) => {
-      const fileOut = await manipulator.Process(fileIn, sink, isObject, fileIn.Description);
-      return sink.Forward(fileIn.Description, fileOut);
-    };
-  });
-}
-
-function GetPlugin_TransformerImmediate(): PipelinePlugin {
-  return async (config, input, sink) => {
-    const isObject = config.GetEntry('is-object' as any) === false ? false : true;
-    const files = await input.Enum(); // first all the immediate-configs, then a single swagger-document
-    const scopes = await Promise.all(files.slice(0, files.length - 1).map(f => input.ReadStrict(f)));
-    const manipulator = new Manipulator(config.GetNestedConfigurationImmediate(...scopes.map(s => s.ReadObject<any>())));
-    const file = files[files.length - 1];
-    const fileIn = await input.ReadStrict(file);
-    const fileOut = await manipulator.Process(fileIn, sink, isObject, fileIn.Description);
-    return new QuickDataSource([await sink.Forward('swagger-document', fileOut)], input.skip);
-  };
-}
-
-function GetPlugin_CommonmarkProcessor(): PipelinePlugin {
-  return async (config, input, sink) => {
-    const files = await input.Enum();
-    const results: Array<DataHandle> = [];
-    for (let file of files) {
-      const fileIn = await input.ReadStrict(file);
-      const fileOut = await ProcessCodeModel(fileIn, sink);
-      file = file.substr(file.indexOf('/output/') + '/output/'.length);
-      results.push(await sink.Forward('code-model-v1', fileOut));
-    }
-    return new QuickDataSource(results, input.skip);
-  };
-}
-
-function GetPlugin_ArtifactEmitter(inputOverride?: () => Promise<DataSource>): PipelinePlugin {
-  return async (config, input) => {
-    if (inputOverride) {
-      input = await inputOverride();
-    }
-
-    // clear output-folder if requested
-    if (config.GetEntry('clear-output-folder' as any)) {
-      config.ClearFolder.Dispatch(config.OutputFolderUri);
-    }
-
-    await EmitArtifacts(
-      config,
-      config.GetEntry('input-artifact' as any) || null,
-      key => ResolveUri(
-        config.OutputFolderUri,
-        safeEval<string>(config.GetEntry('output-uri-expr' as any) || '$key', { $key: key, $config: config.Raw })),
-      input,
-      config.GetEntry('is-object' as any));
-    return new QuickDataSource([]);
-  };
 }
 
 function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]: PipelineNode }, configs: { [jsonPath: string]: ConfigurationView } } {
@@ -286,7 +199,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
   // __status scope
   const startTime = Date.now();
-  (configView.Raw as any).__status = new Proxy<any>({}, {
+  (<any>configView.Raw).__status = new Proxy<any>({}, {
     get(_, key) {
       if (key === '__info') { return false; }
       const expr = Buffer.from(key.toString(), 'base64').toString('ascii');

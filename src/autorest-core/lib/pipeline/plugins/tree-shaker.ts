@@ -375,6 +375,7 @@ async function shakeTree(config: ConfigurationView, input: DataSource, sink: Dat
   return new QuickDataSource(result, input.skip);
 }
 
+/* @internal */
 export function GetPlugin_TreeShaker(): PipelinePlugin {
   return shakeTree;
 }

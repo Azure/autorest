@@ -233,6 +233,7 @@ async function merge(config: ConfigurationView, input: DataSource, sink: DataSin
   return new QuickDataSource([await sink.WriteObject('merged oai3 doc...', processor.output, [].concat.apply([], inputs.map(each => each.Identity)), 'merged-oai3', processor.sourceMappings)], input.skip);
 }
 
+/* @internal */
 export function GetPlugin_MultiAPIMerger(): PipelinePlugin {
   return merge;
 }

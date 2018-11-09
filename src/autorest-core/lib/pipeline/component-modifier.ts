@@ -18,6 +18,7 @@ function decorateSpecialProperties(o: any): void {
   }
 }
 
+/* @internal */
 export function GetPlugin_ComponentModifier(): PipelinePlugin {
   const noWireExtension = 'x-ms-no-wire';
 

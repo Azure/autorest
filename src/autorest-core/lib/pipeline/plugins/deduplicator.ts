@@ -1,3 +1,8 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
 import { DataHandle, DataSink, DataSource, Node, Processor, QuickDataSource, } from '@microsoft.azure/datastore';
 
 import * as oai from '@microsoft.azure/openapi';
@@ -22,6 +27,7 @@ async function deduplicate(config: ConfigurationView, input: DataSource, sink: D
   return new QuickDataSource(result, input.skip);
 }
 
+/* @internal */
 export function GetPlugin_Deduplicator(): PipelinePlugin {
   return deduplicate;
 }
