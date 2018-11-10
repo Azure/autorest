@@ -39,6 +39,10 @@
     "trailing-comma": false,
     "switch-default": false,
     "member-access": false,
+    "prefer-template": [
+      true,
+      "allow-single-concat"
+    ],
     "no-this-assignment": false,
     "object-literal-sort-keys": false,
     "completed-docs": false,

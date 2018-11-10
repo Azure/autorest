@@ -1,17 +1,17 @@
 
-import { DataSource, Lazy, Normalize, Stringify, YAMLNode, DataHandle, safeEval, QuickDataSource } from '@microsoft.azure/datastore';
+import { DataHandle, DataSource, Lazy, Normalize, QuickDataSource, safeEval, Stringify, YAMLNode } from '@microsoft.azure/datastore';
+import { ResolveUri } from '@microsoft.azure/uri';
 import { Artifact } from '../../../main';
 import { ConfigurationView } from '../../configuration';
 import { Channel } from '../../message';
 import { IdentitySourceMapping } from '../../source-map/merging';
 import { PipelinePlugin } from '../common';
-import { ResolveUri } from '@microsoft.azure/uri';
 
-function IsOutputArtifactOrMapRequested(config: ConfigurationView, artifactType: string) {
+function isOutputArtifactOrMapRequested(config: ConfigurationView, artifactType: string) {
   return config.IsOutputArtifactRequested(artifactType) || config.IsOutputArtifactRequested(artifactType + '.map');
 }
 
-async function EmitArtifactInternal(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandle): Promise<void> {
+async function emitArtifactInternal(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandle): Promise<void> {
   config.Message({ Channel: Channel.Debug, Text: `Emitting '${artifactType}' at ${uri}` });
   const emitArtifact = (artifact: Artifact): void => {
     if (artifact.uri.startsWith('stdout://')) {
@@ -44,35 +44,35 @@ async function EmitArtifactInternal(config: ConfigurationView, artifactType: str
   }
 }
 let emitCtr = 0;
-async function EmitArtifact(config: ConfigurationView, uri: string, handle: DataHandle, isObject: boolean): Promise<void> {
+async function emitArtifact(config: ConfigurationView, uri: string, handle: DataHandle, isObject: boolean): Promise<void> {
   const artifactType = handle.GetArtifact();
-  await EmitArtifactInternal(config, artifactType, uri, handle);
+  await emitArtifactInternal(config, artifactType, uri, handle);
 
   if (isObject) {
     const sink = config.DataStore.getDataSink();
     const object = new Lazy<any>(() => handle.ReadObject<any>());
     const ast = new Lazy<YAMLNode>(() => handle.ReadYamlAst());
 
-    if (IsOutputArtifactOrMapRequested(config, artifactType + '.yaml')) {
+    if (isOutputArtifactOrMapRequested(config, artifactType + '.yaml')) {
       const h = await sink.WriteData(`${++emitCtr}.yaml`, Stringify(object.Value), ['fix-me'], artifactType, IdentitySourceMapping(handle.key, ast.Value), [handle]);
-      await EmitArtifactInternal(config, artifactType + '.yaml', uri + '.yaml', h);
+      await emitArtifactInternal(config, artifactType + '.yaml', uri + '.yaml', h);
     }
-    if (IsOutputArtifactOrMapRequested(config, artifactType + '.norm.yaml')) {
+    if (isOutputArtifactOrMapRequested(config, artifactType + '.norm.yaml')) {
       const h = await sink.WriteData(`${++emitCtr}.norm.yaml`, Stringify(Normalize(object.Value)), ['fix-me'], artifactType, IdentitySourceMapping(handle.key, ast.Value), [handle]);
-      await EmitArtifactInternal(config, artifactType + '.norm.yaml', uri + '.norm.yaml', h);
+      await emitArtifactInternal(config, artifactType + '.norm.yaml', uri + '.norm.yaml', h);
     }
-    if (IsOutputArtifactOrMapRequested(config, artifactType + '.json')) {
+    if (isOutputArtifactOrMapRequested(config, artifactType + '.json')) {
       const h = await sink.WriteData(`${++emitCtr}.json`, JSON.stringify(object.Value, null, 2), ['fix-me'], artifactType, IdentitySourceMapping(handle.key, ast.Value), [handle]);
-      await EmitArtifactInternal(config, artifactType + '.json', uri + '.json', h);
+      await emitArtifactInternal(config, artifactType + '.json', uri + '.json', h);
     }
-    if (IsOutputArtifactOrMapRequested(config, artifactType + '.norm.json')) {
+    if (isOutputArtifactOrMapRequested(config, artifactType + '.norm.json')) {
       const h = await sink.WriteData(`${++emitCtr}.norm.json`, JSON.stringify(Normalize(object.Value), null, 2), ['fix-me'], artifactType, IdentitySourceMapping(handle.key, ast.Value), [handle]);
-      await EmitArtifactInternal(config, artifactType + '.norm.json', uri + '.norm.json', h);
+      await emitArtifactInternal(config, artifactType + '.norm.json', uri + '.norm.json', h);
     }
   }
 }
 
-export async function EmitArtifacts(config: ConfigurationView, artifactTypeFilter: string | Array<string> | null /* what's set on the emitter */, uriResolver: (key: string) => string, scope: DataSource, isObject: boolean): Promise<void> {
+export async function emitArtifacts(config: ConfigurationView, artifactTypeFilter: string | Array<string> | null /* what's set on the emitter */, uriResolver: (key: string) => string, scope: DataSource, isObject: boolean): Promise<void> {
   for (const key of await scope.Enum()) {
     const file = await scope.ReadStrict(key);
     const fileArtifact = file.GetArtifact();
@@ -83,7 +83,7 @@ export async function EmitArtifacts(config: ConfigurationView, artifactTypeFilte
       true; // if it's null, just emit it.
 
     if (ok) {
-      await EmitArtifact(config, uriResolver(file.Description), file, isObject);
+      await emitArtifact(config, uriResolver(file.Description), file, isObject);
     }
   }
 }
@@ -96,18 +96,18 @@ export function createArtifactEmitterPlugin(inputOverride?: () => Promise<DataSo
     }
 
     // clear output-folder if requested
-    if (config.GetEntry('clear-output-folder' as any)) {
+    if (config.GetEntry(<any>'clear-output-folder')) {
       config.ClearFolder.Dispatch(config.OutputFolderUri);
     }
 
-    await EmitArtifacts(
+    await emitArtifacts(
       config,
-      config.GetEntry('input-artifact' as any) || null,
+      config.GetEntry(<any>'input-artifact') || null,
       key => ResolveUri(
         config.OutputFolderUri,
-        safeEval<string>(config.GetEntry('output-uri-expr' as any) || '$key', { $key: key, $config: config.Raw })),
+        safeEval<string>(config.GetEntry(<any>'output-uri-expr') || '$key', { $key: key, $config: config.Raw })),
       input,
-      config.GetEntry('is-object' as any));
+      config.GetEntry(<any>'is-object'));
     return new QuickDataSource([]);
   };
 }

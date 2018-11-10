@@ -16,7 +16,7 @@ export function createExternalPlugin(host: AutoRestExtension, pluginName: string
     const results: Array<DataHandle> = [];
     const result = await extension.Process(
       pluginName,
-      key => config.GetEntry(key as any),
+      key => config.GetEntry(<any>key),
       config,
       input,
       sink,

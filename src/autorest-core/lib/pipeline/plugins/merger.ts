@@ -45,12 +45,11 @@ import { PipelinePlugin } from '../common';
  *
  *  - rewrite all $refs to point to the new locaiton.
  *
- *  */
+ */
 export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
   opCount: number = 0;
   cCount = new Dictionary<number>();
   refs = new Dictionary<string>();
-
 
   public process(target: ProxyObject<oai.Model>, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {

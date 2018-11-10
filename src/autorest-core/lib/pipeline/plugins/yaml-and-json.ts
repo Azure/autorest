@@ -1,4 +1,4 @@
-import { QuickDataSource, ConvertYaml2Jsonx, StringifyAst, ConvertJsonx2Yaml } from '@microsoft.azure/datastore';
+import { ConvertJsonx2Yaml, ConvertYaml2Jsonx, QuickDataSource, StringifyAst } from '@microsoft.azure/datastore';
 import { CreatePerFilePlugin, PipelinePlugin } from '../common';
 import { Manipulator } from '../manipulation';
 

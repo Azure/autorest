@@ -3,20 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PipelinePlugin } from '../common';
-
-import { ConfigurationView } from '../../autorest-core';
-import { Channel, SourceLocation } from '../../message';
-import { commonmarkHeadingFollowingText, commonmarkSubHeadings, parseCommonmark } from '../../parsing/literate';
-import { parse as ParseLiterateYaml } from '../../parsing/literate-yaml';
-
-import { QuickDataSource, Clone, CloneAst, CreateAssignmentMapping, DataHandle, DataSink, DataSource, IndexToPosition, JsonPath, JsonPathComponent, Lines, Mapping, StrictJsonSyntaxCheck, StringifyAst, ToAst } from '@microsoft.azure/datastore';
+import { Clone, CreateAssignmentMapping, DataHandle, DataSink, JsonPath, JsonPathComponent, Mapping, QuickDataSource, ToAst } from '@microsoft.azure/datastore';
 import { From } from 'linq-es2015';
 import { pushAll } from '../../array';
-
+import { ConfigurationView } from '../../autorest-core';
 import { IdentitySourceMapping, MergeYamls } from '../../source-map/merging';
-import { crawlReferences } from './ref-crawling';
-
+import { PipelinePlugin } from '../common';
 
 function getArrayValues<T>(obj: ObjectWithPath<Array<T>>): Array<ObjectWithPath<T>> {
   const o: Array<T> = obj.obj || [];
@@ -34,11 +26,10 @@ function getPropertyValues<T, U>(obj: ObjectWithPath<T>): Array<ObjectWithPath<U
   return Object.getOwnPropertyNames(o).map(n => getProperty<T, U>(obj, n));
 }
 function getProperty<T, U>(obj: ObjectWithPath<T>, key: string): ObjectWithPath<U> {
-  return { obj: (obj.obj as any)[key], path: obj.path.concat([key]) };
+  return { obj: (<any>obj.obj)[key], path: obj.path.concat([key]) };
 }
 
-
-async function ComposeSwaggers(config: ConfigurationView, overrideInfoTitle: any, overrideInfoDescription: any, inputSwaggers: Array<DataHandle>, sink: DataSink): Promise<DataHandle> {
+async function composeSwaggers(config: ConfigurationView, overrideInfoTitle: any, overrideInfoDescription: any, inputSwaggers: Array<DataHandle>, sink: DataSink): Promise<DataHandle> {
   const inputSwaggerObjects = inputSwaggers.map(sw => sw.ReadObject<any>());
   const candidateTitles: Array<string> = overrideInfoTitle
     ? [overrideInfoTitle]
@@ -117,8 +108,8 @@ async function ComposeSwaggers(config: ConfigurationView, overrideInfoTitle: any
       const clientPC = swagger[pc];
       if (clientPC) {
         for (const method of methods) {
-          if (typeof method.obj === 'object' && !Array.isArray(method.obj) && !(method.obj as any)[pc]) {
-            populate.push(() => (method.obj as any)[pc] = Clone(clientPC));
+          if (typeof method.obj === 'object' && !Array.isArray(method.obj) && !(<any>method.obj)[pc]) {
+            populate.push(() => (<any>method.obj)[pc] = Clone(clientPC));
             mapping.push(...CreateAssignmentMapping(
               clientPC, inputSwagger.key,
               [pc], method.path.concat([pc]),
@@ -163,7 +154,7 @@ export function createComposerPlugin(): PipelinePlugin {
     const overrideInfo = config.GetEntry('override-info');
     const overrideTitle = (overrideInfo && overrideInfo.title) || config.GetEntry('title');
     const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry('description');
-    const swagger = await ComposeSwaggers(config, overrideTitle, overrideDescription, swaggers, sink);
+    const swagger = await composeSwaggers(config, overrideTitle, overrideDescription, swaggers, sink);
     return new QuickDataSource([await sink.Forward('composed', swagger)], input.skip);
   };
 }
