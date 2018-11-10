@@ -7,7 +7,7 @@ import { Configuration, ConfigurationView, MessageEmitter } from "./configuratio
 import { EventEmitter, IEvent } from "./events";
 import { Exception } from "./exception";
 import { IFileSystem, RealFileSystem } from "@microsoft.azure/datastore";
-import { RunPipeline } from "./pipeline/pipeline";
+import { runPipeline } from "./pipeline/pipeline";
 export { ConfigurationView } from './configuration';
 import { homedir } from "os"
 import { Artifact } from "./artifact";
@@ -140,7 +140,7 @@ export class AutoRest extends EventEmitter {
         }
 
         await Promise.race([
-          RunPipeline(view, this.fileSystem),
+          runPipeline(view, this.fileSystem),
           new Promise((_, rej) => view.CancellationToken.onCancellationRequested(() => rej('Cancellation requested.')))]);
 
         // finished -- return status (if cancelled, returns false.)

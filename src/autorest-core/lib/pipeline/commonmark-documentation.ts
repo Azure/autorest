@@ -2,78 +2,74 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { SmartPosition } from "@microsoft.azure/datastore";
-import { Parser, Node } from "commonmark";
 import {
   CloneAst,
-  CreateYAMLMapping,
   CreateYAMLScalar,
+  DataHandle,
+  DataSink,
   Descendants,
   Kind,
-  ParseNode,
+  SmartPosition,
   StringifyAst,
-  YAMLMap,
-  YAMLMapping,
-  YAMLNodeWithPath,
+  YAMLMap, YAMLMapping, YAMLNodeWithPath
 } from '@microsoft.azure/datastore';
-import { IdentitySourceMapping } from "../source-map/merging";
+import { Node, Parser } from 'commonmark';
+import { IdentitySourceMapping } from '../source-map/merging';
 
-import { DataHandle, DataSink } from '@microsoft.azure/datastore';
-
-function IsDocumentationField(node: YAMLNodeWithPath) {
-  if (!node || !node.node.value || !node.node.value.value || typeof node.node.value.value !== "string") {
+function isDocumentationField(node: YAMLNodeWithPath) {
+  if (!node || !node.node.value || !node.node.value.value || typeof node.node.value.value !== 'string') {
     return false;
   }
   const path = node.path;
   if (path.length < 2) {
     return false;
   }
-  if (path[path.length - 2] === "x-ms-examples") {
+  if (path[path.length - 2] === 'x-ms-examples') {
     return false;
   }
   const last = path[path.length - 1];
-  return last === "Description" || last === "Summary";
+  return last === 'Description' || last === 'Summary';
 }
 
-export function PlainTextVersion(commonmarkAst: Node): string {
-  let result = "";
+export function plainTextVersion(commonmarkAst: Node): string {
+  let result = '';
   const walker = commonmarkAst.walker();
   let event;
   while ((event = walker.next())) {
     const node = event.node;
     // console.log(node);
     switch (node.type) {
-      case "text": result += node.literal; break;
-      case "code": result += node.literal; break;
-      case "softbreak": result += " "; break;
-      case "paragraph": if (!event.entering) { result += "\n"; } break;
-      case "heading": if (!event.entering) { result += "\n"; } break;
+      case 'text': result += node.literal; break;
+      case 'code': result += node.literal; break;
+      case 'softbreak': result += ' '; break;
+      case 'paragraph': if (!event.entering) { result += '\n'; } break;
+      case 'heading': if (!event.entering) { result += '\n'; } break;
     }
   }
   return result.trim();
 }
 
-export async function ProcessCodeModel(codeModel: DataHandle, sink: DataSink): Promise<DataHandle> {
+export async function processCodeModel(codeModel: DataHandle, sink: DataSink): Promise<DataHandle> {
   const ast = CloneAst(codeModel.ReadYamlAst());
-  let mapping = IdentitySourceMapping(codeModel.key, ast);
+  const mapping = IdentitySourceMapping(codeModel.key, ast);
 
   const cmParser = new Parser();
 
   // transform
   for (const d of Descendants(ast, [], true)) {
-    if (d.node.kind === Kind.MAPPING && IsDocumentationField(d)) {
-      const node = d.node as YAMLMapping;
+    if (d.node.kind === Kind.MAPPING && isDocumentationField(d)) {
+      const node = <YAMLMapping>d.node;
       const rawMarkdown = node.value.value;
 
       // inject new child for original value into parent
-      const parent = node.parent as YAMLMap;
+      const parent = <YAMLMap>node.parent;
       const nodeOriginal = CloneAst(node);
       const key = nodeOriginal.key.value;
-      const origKey = key + "_Original";
+      const origKey = key + '_Original';
       nodeOriginal.key.value = origKey;
       parent.mappings.push(nodeOriginal);
       mapping.push({
-        name: "original gfm",
+        name: 'original gfm',
         generated: <SmartPosition>{ path: d.path.map((x, i) => i === d.path.length - 1 ? origKey : x) },
         original: <SmartPosition>{ path: d.path },
         source: codeModel.key
@@ -81,10 +77,10 @@ export async function ProcessCodeModel(codeModel: DataHandle, sink: DataSink): P
 
       // sanitize
       const parsed = cmParser.parse(rawMarkdown);
-      const plainText = PlainTextVersion(parsed);
+      const plainText = plainTextVersion(parsed);
       node.value = CreateYAMLScalar(plainText);
     }
   }
 
-  return await sink.WriteData("codeModel.yaml", StringifyAst(ast), ['fix-me'], undefined, mapping, [codeModel]);
+  return sink.WriteData('codeModel.yaml', StringifyAst(ast), ['fix-me'], undefined, mapping, [codeModel]);
 }

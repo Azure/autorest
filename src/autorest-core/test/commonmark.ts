@@ -11,7 +11,7 @@ import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
 import { Node, Parser } from "commonmark";
-import { PlainTextVersion } from "../lib/pipeline/commonmark-documentation";
+import { plainTextVersion } from "../lib/pipeline/commonmark-documentation";
 
 @suite class Commonmark {
 
@@ -21,7 +21,7 @@ import { PlainTextVersion } from "../lib/pipeline/commonmark-documentation";
 
   @test async "PlainTextVersion"() {
     const compare = (raw: string, expected: string) =>
-      assert.strictEqual(PlainTextVersion(this.Parse(raw)), expected);
+      assert.strictEqual(plainTextVersion(this.Parse(raw)), expected);
 
     compare("Hello World", "Hello World");
     compare("this\ntest\ncould\nuse\nmore\ncowbell", "this test could use more cowbell");

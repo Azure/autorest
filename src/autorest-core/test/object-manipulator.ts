@@ -6,7 +6,7 @@ import { CancellationToken } from "vscode-jsonrpc";
 import * as assert from "assert";
 import { only, skip, slow, suite, test, timeout } from "mocha-typescript";
 import { DataStore } from "@microsoft.azure/datastore";
-import { ManipulateObject } from "../lib/pipeline/object-manipulator";
+import { manipulateObject } from "../lib/pipeline/object-manipulator";
 import { safeEval } from "@microsoft.azure/datastore";
 require('source-map-support').install();
 
@@ -43,7 +43,7 @@ definitions:
     const input = await dataStore.WriteData('mem://input.yaml', this.exampleObject, 'input-file', ['input.yaml']);
 
     const expectHit = async (jsonQuery: string, anyHit: boolean) => {
-      const result = await ManipulateObject(input, dataStore.getDataSink(), jsonQuery, (_, x) => x);
+      const result = await manipulateObject(input, dataStore.getDataSink(), jsonQuery, (_, x) => x);
       assert.strictEqual(result.anyHit, anyHit, jsonQuery);
     };
 
@@ -67,7 +67,7 @@ definitions:
     const input = await dataStore.WriteData('mem://input.yaml', this.exampleObject, 'input-file', ['input.yaml']);
 
     // remove all models that don't have a description
-    const result = await ManipulateObject(input, dataStore.getDataSink(), '$.definitions[?(!@.description)]', (_, x) => undefined);
+    const result = await manipulateObject(input, dataStore.getDataSink(), '$.definitions[?(!@.description)]', (_, x) => undefined);
     assert.strictEqual(result.anyHit, true);
     const resultRaw = result.result.ReadData();
     assert.ok(resultRaw.indexOf('NodeA') !== -1);
@@ -82,7 +82,7 @@ definitions:
     {
       // override all existing model descriptions
       const bestDescriptionEver = 'best description ever';
-      const result = await ManipulateObject(input, dataStore.getDataSink(), '$.definitions.*.description', (_, x) => bestDescriptionEver);
+      const result = await manipulateObject(input, dataStore.getDataSink(), '$.definitions.*.description', (_, x) => bestDescriptionEver);
       assert.strictEqual(result.anyHit, true);
       const resultObject = result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, bestDescriptionEver);
@@ -90,7 +90,7 @@ definitions:
     {
       // override & insert all model descriptions
       const bestDescriptionEver = 'best description ever';
-      const result = await ManipulateObject(input, dataStore.getDataSink(), '$.definitions.*', (_, x) => { x.description = bestDescriptionEver; return x; });
+      const result = await manipulateObject(input, dataStore.getDataSink(), '$.definitions.*', (_, x) => { x.description = bestDescriptionEver; return x; });
       assert.strictEqual(result.anyHit, true);
       const resultObject = result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, bestDescriptionEver);
@@ -99,7 +99,7 @@ definitions:
     {
       // make all descriptions upper case
       const bestDescriptionEver = 'best description ever';
-      const result = await ManipulateObject(input, dataStore.getDataSink(), '$..description', (_, x) => (x as string).toUpperCase());
+      const result = await manipulateObject(input, dataStore.getDataSink(), '$..description', (_, x) => (x as string).toUpperCase());
       assert.strictEqual(result.anyHit, true);
       const resultObject = result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, 'DESCRIPTION');
@@ -108,7 +108,7 @@ definitions:
     {
       // make all descriptions upper case by using safe-eval
       const bestDescriptionEver = 'best description ever';
-      const result = await ManipulateObject(input, dataStore.getDataSink(), '$..description', (_, x) => safeEval('$.toUpperCase()', { $: x }));
+      const result = await manipulateObject(input, dataStore.getDataSink(), '$..description', (_, x) => safeEval('$.toUpperCase()', { $: x }));
       assert.strictEqual(result.anyHit, true);
       const resultObject = result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, 'DESCRIPTION');

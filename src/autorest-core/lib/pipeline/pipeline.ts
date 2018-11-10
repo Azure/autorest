@@ -11,22 +11,20 @@ import { PipelinePlugin } from './common';
 import { createComponentModifierPlugin } from './component-modifier';
 import { createCSharpReflectApiVersionPlugin } from './metadata-generation';
 import { AutoRestExtension } from './plugin-endpoint';
-import { createHelpPlugin } from './plugins/help';
-import { createSwaggerSchemaValidatorPlugin, createOpenApiSchemaValidatorPlugin } from './schema-validation';
-
-import { createDeduplicatorPlugin } from './plugins/deduplicator';
-import { createMultiApiMergerPlugin } from './plugins/merger';
-import { createTreeShakerPlugin } from './plugins/tree-shaker';
-
 import { createCommonmarkProcessorPlugin } from './plugins/commonmark';
 import { createComposerPlugin } from './plugins/composer';
 import { createSwaggerToOpenApi3Plugin } from './plugins/conversion';
+import { createDeduplicatorPlugin } from './plugins/deduplicator';
 import { createArtifactEmitterPlugin } from './plugins/emitter';
 import { createExternalPlugin } from './plugins/external';
+import { createHelpPlugin } from './plugins/help';
 import { createIdentityPlugin } from './plugins/identity';
-import { createOpenApiLoaderPlugin, createSwaggerLoaderPlugin, createMarkdownOverrideOpenApiLoaderPlugin, createMarkdownOverrideSwaggerLoaderPlugin } from './plugins/loaders';
-import { createTransformerPlugin, createImmediateTransformerPlugin } from './plugins/transformer';
+import { createMarkdownOverrideOpenApiLoaderPlugin, createMarkdownOverrideSwaggerLoaderPlugin, createOpenApiLoaderPlugin, createSwaggerLoaderPlugin } from './plugins/loaders';
+import { createMultiApiMergerPlugin } from './plugins/merger';
+import { createImmediateTransformerPlugin, createTransformerPlugin } from './plugins/transformer';
+import { createTreeShakerPlugin } from './plugins/tree-shaker';
 import { createJsonToYamlPlugin, createYamlToJsonPlugin } from './plugins/yaml-and-json';
+import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from './schema-validation';
 
 interface PipelineNode {
   outputArtifact?: string;
@@ -38,8 +36,8 @@ interface PipelineNode {
   dependencies: Array<PipelineNode>;
 }
 
-function BuildPipeline(config: ConfigurationView): { pipeline: { [name: string]: PipelineNode }, configs: { [jsonPath: string]: ConfigurationView } } {
-  const cfgPipeline = config.GetEntry('pipeline' as any);
+function buildPipeline(config: ConfigurationView): { pipeline: { [name: string]: PipelineNode }, configs: { [jsonPath: string]: ConfigurationView } } {
+  const cfgPipeline = config.GetEntry(<any>'pipeline');
   const pipeline: { [name: string]: PipelineNode } = {};
   const configCache: { [jsonPath: string]: ConfigurationView } = {};
 
@@ -153,7 +151,7 @@ function isDrainRequired(p: PipelineNode) {
   return false;
 }
 
-export async function RunPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
+export async function runPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
   // built-in plugins
   const plugins: { [name: string]: PipelinePlugin } = {
     'help': createHelpPlugin(),
@@ -187,7 +185,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
 
   // dynamically loaded, auto-discovered plugins
   const __extensionExtension: { [pluginName: string]: AutoRestExtension } = {};
-  for (const useExtensionQualifiedName of configView.GetEntry('used-extension' as any) || []) {
+  for (const useExtensionQualifiedName of configView.GetEntry(<any>'used-extension') || []) {
     const extension = await GetExtension(useExtensionQualifiedName);
     for (const plugin of await extension.GetPluginNames(configView.CancellationToken)) {
       if (!plugins[plugin]) {
@@ -212,7 +210,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
           blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => configView.DataStore.Blame(uri, position)
         }));
       } catch (e) {
-        return '' + e;
+        return `${e}`;
       }
     }
   });
@@ -220,7 +218,7 @@ export async function RunPipeline(configView: ConfigurationView, fileSystem: IFi
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
 
   const fsInput = configView.DataStore.GetReadThroughScope(fileSystem);
-  const pipeline = BuildPipeline(configView);
+  const pipeline = buildPipeline(configView);
 
   const ScheduleNode: (nodeName: string) => Promise<DataSource> =
     async (nodeName) => {

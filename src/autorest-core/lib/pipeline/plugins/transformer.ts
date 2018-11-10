@@ -1,14 +1,14 @@
 import { QuickDataSource } from '@microsoft.azure/datastore';
-import { CreatePerFilePlugin, PipelinePlugin } from '../common';
+import { createPerFilePlugin, PipelinePlugin } from '../common';
 import { Manipulator } from '../manipulation';
 
 /* @internal */
 export function createTransformerPlugin(): PipelinePlugin {
-  return CreatePerFilePlugin(async config => {
+  return createPerFilePlugin(async config => {
     const isObject = config.GetEntry(<any>'is-object') === false ? false : true;
     const manipulator = new Manipulator(config);
     return async (fileIn, sink) => {
-      const fileOut = await manipulator.Process(fileIn, sink, isObject, fileIn.Description);
+      const fileOut = await manipulator.process(fileIn, sink, isObject, fileIn.Description);
       return sink.Forward(fileIn.Description, fileOut);
     };
   });
@@ -23,7 +23,7 @@ export function createImmediateTransformerPlugin(): PipelinePlugin {
     const manipulator = new Manipulator(config.GetNestedConfigurationImmediate(...scopes.map(s => s.ReadObject<any>())));
     const file = files[files.length - 1];
     const fileIn = await input.ReadStrict(file);
-    const fileOut = await manipulator.Process(fileIn, sink, isObject, fileIn.Description);
+    const fileOut = await manipulator.process(fileIn, sink, isObject, fileIn.Description);
     return new QuickDataSource([await sink.Forward('swagger-document', fileOut)], input.skip);
   };
 }

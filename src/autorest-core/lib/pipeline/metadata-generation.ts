@@ -12,15 +12,15 @@ export function createCSharpReflectApiVersionPlugin(): PipelinePlugin {
     const files = await input.Enum();
 
     // get resolved Swagger to determine title
-    const resolvedSwagger = await input.ReadStrict(files.shift() as any);
-    const title: string = resolvedSwagger.ReadObject<any>().info.title.replace(/[^a-zA-Z]/g, "");
+    const resolvedSwagger = await input.ReadStrict(<any>files.shift());
+    const title: string = resolvedSwagger.ReadObject<any>().info.title.replace(/[^a-zA-Z]/g, '');
 
     // collect metadata
-    const data: { namespace: string, group: string, apiVersion: string }[] = [];
-    for (let file of files) {
+    const data: Array<{ namespace: string; group: string; apiVersion: string }> = [];
+    for (const file of files) {
       const swagger = (await input.ReadStrict(file)).ReadObject<any>();
       const apiVersion = swagger.info.version;
-      const paths = { ...swagger["paths"], ...swagger["x-ms-paths"] };
+      const paths = { ...swagger['paths'], ...swagger['x-ms-paths'] };
       for (const path of Object.keys(paths)) {
         const namespace: string = (/\/Microsoft\.(.*?)\//i.exec(path) || [])[1] || title;
         const groups = Object.values(paths[path])
@@ -44,7 +44,7 @@ export function createCSharpReflectApiVersionPlugin(): PipelinePlugin {
 // regenerated.
 // </auto-generated>
 
-namespace ${config.GetEntry("namespace")}
+namespace ${config.GetEntry('namespace')}
 {
   using System;
   using System.Collections.Generic;
@@ -58,12 +58,12 @@ namespace ${config.GetEntry("namespace")}
           {
               return new Tuple<string, string, string>[]
               {
-${tuples.map(x => `                ${x},`).join("\n")}
+${tuples.map(x => `                ${x},`).join('\n')}
               }.AsEnumerable();
           }
       }
   }
 }
-`, ['fix-me'], "source-file-csharp")]);
+`, ['fix-me'], 'source-file-csharp')]);
   };
 }

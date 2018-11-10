@@ -529,7 +529,7 @@ export class ConfigurationView {
       }
 
       // filter
-      const mx = this.suppressor.Filter(m);
+      const mx = this.suppressor.filter(m);
 
       // forward
       if (mx !== null) {

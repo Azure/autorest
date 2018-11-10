@@ -3,16 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { IdentitySourceMapping } from "../source-map/merging";
-import { Clone, CloneAst, Descendants, ParseNode, StringifyAst, ToAst, YAMLNode } from "@microsoft.azure/datastore";
-import { ReplaceNode, ResolveRelativeNode } from "@microsoft.azure/datastore";
-import { DataHandle, DataSink } from '@microsoft.azure/datastore';
-import { IsPrefix, JsonPath, nodes, paths, stringify } from "@microsoft.azure/datastore";
-import { SmartPosition } from "@microsoft.azure/datastore";
-import { Mapping } from "@microsoft.azure/datastore";
-import { From } from "linq-es2015";
+import { Clone, CloneAst, DataHandle, DataSink, Descendants, IsPrefix, JsonPath, Mapping, nodes, ParseNode, paths, ReplaceNode, ResolveRelativeNode, SmartPosition, stringify, StringifyAst, ToAst, YAMLNode } from '@microsoft.azure/datastore';
+import { From } from 'linq-es2015';
+import { IdentitySourceMapping } from '../source-map/merging';
 
-export async function ManipulateObject(
+export async function manipulateObject(
   src: DataHandle,
   target: DataSink,
   whereJsonQuery: string,
@@ -35,18 +30,18 @@ export async function ManipulateObject(
   const mapping = IdentitySourceMapping(src.key, ast).filter(m => !hits.some(hit => IsPrefix(hit.path, (m.generated as any).path)));
   for (const hit of hits) {
     if (ast === undefined) {
-      throw new Error("Cannot remove root node.");
+      throw new Error('Cannot remove root node.');
     }
     const newObject = transformer(doc, Clone(hit.value), hit.path);
     const newAst = newObject === undefined
       ? undefined
       : ToAst(newObject); // <- can extend ToAst to also take an "ambient" object with AST, in order to create anchor refs for existing stuff!
     const oldAst = ResolveRelativeNode(ast, ast, hit.path);
-    ast = ReplaceNode(ast, oldAst, newAst) || (() => { throw new Error("Cannot remove root node."); })();
+    ast = ReplaceNode(ast, oldAst, newAst) || (() => { throw new Error('Cannot remove root node.'); })();
 
     // patch source map
     if (newAst !== undefined) {
-      const reasonSuffix = mappingInfo ? ` (${mappingInfo.reason})` : "";
+      const reasonSuffix = mappingInfo ? ` (${mappingInfo.reason})` : '';
       if (mappingInfo) {
         mapping.push(
           ...From(Descendants(newAst)).Select((descendant: any) => {
@@ -75,7 +70,7 @@ export async function ManipulateObject(
   }
 
   // write back
-  const resultHandle = await target.WriteData("manipulated", StringifyAst(ast), src.Identity, undefined, mapping, mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src]);
+  const resultHandle = await target.WriteData('manipulated', StringifyAst(ast), src.Identity, undefined, mapping, mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src]);
   return {
     anyHit: true,
     result: resultHandle

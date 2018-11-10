@@ -5,7 +5,7 @@
 
 import { Clone } from '@microsoft.azure/datastore';
 import { MergeOverwriteOrAppend } from '../source-map/merging';
-import { CreatePerFilePlugin, PipelinePlugin } from './common';
+import { createPerFilePlugin, PipelinePlugin } from './common';
 
 function decorateSpecialProperties(o: any): void {
   if (o['implementation']) {
@@ -22,7 +22,7 @@ function decorateSpecialProperties(o: any): void {
 export function createComponentModifierPlugin(): PipelinePlugin {
   const noWireExtension = 'x-ms-no-wire';
 
-  return CreatePerFilePlugin(async config => async (fileIn, sink) => {
+  return createPerFilePlugin(async config => async (fileIn, sink) => {
     const componentModifier = Clone((config.Raw as any).components);
     if (componentModifier) {
       const o = fileIn.ReadObject<any>();
@@ -76,7 +76,7 @@ export function createComponentModifierPlugin(): PipelinePlugin {
         return null;
       };
       const getDummyPath = (): string => {
-        let path = '/dummy?' + Object.keys(operationsTarget2).length;
+        let path = `/dummy?${Object.keys(operationsTarget2).length}`;
         while (path in operationsTarget2) {
           path += '0';
         }
