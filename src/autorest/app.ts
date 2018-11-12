@@ -25,14 +25,14 @@ if (!String.prototype.padEnd) {
 
 import { isFile } from '@microsoft.azure/async-io';
 import { Exception, LazyPromise } from '@microsoft.azure/tasks';
-import chalk from 'chalk'
+import chalk from 'chalk';
 import { join } from 'path';
 import { gt } from 'semver';
-import { availableVersions, corePackage, ensureAutorestHome, extensionManager, installedCores, networkEnabled, pkgVersion, resolvePathForLocalVersion, rootFolder, selectVersion, tryRequire } from './autorest-as-a-service'
-import { color } from './coloring'
+import { availableVersions, corePackage, ensureAutorestHome, extensionManager, installedCores, networkEnabled, pkgVersion, resolvePathForLocalVersion, rootFolder, selectVersion, tryRequire } from './autorest-as-a-service';
+import { color } from './coloring';
 
 // aliases, round one.
-if (process.argv.indexOf('--no-upgrade-check') != -1) {
+if (process.argv.indexOf('--no-upgrade-check') !== -1) {
   process.argv.push('--skip-upgrade-check');
 }
 
