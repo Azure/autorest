@@ -1,34 +1,30 @@
 // Ensure that if we're running in an electron process, that things will work as if it were node.
-process.env['ELECTRON_RUN_AS_NODE'] = "1";
+process.env['ELECTRON_RUN_AS_NODE'] = '1';
 delete process.env['ELECTRON_NO_ATTACH_CONSOLE'];
 
-import { Message, Channel, IFileSystem, AutoRest, Artifact, IsConfigurationExtension, IdentifyDocument, IsConfigurationDocument, IsOpenApiExtension, IsOpenApiDocument, LiterateToJson, DocumentType } from "../exports"
-import { JsonPath, SourceMap } from './source-map';
+import { Artifact, AutoRest, Channel, DocumentType, IdentifyDocument, IFileSystem, IsConfigurationDocument, IsConfigurationExtension, IsOpenApiDocument, IsOpenApiExtension, LiterateToJson, Message } from '../exports';
+import { SourceMap } from './source-map';
 
-import { ResolveUri, FileUriToPath, GetExtension, IsUri, ParentFolderUri } from '@microsoft.azure/uri';
-import { From } from "linq-es2015";
-import { safeDump } from "yaml-ast-parser";
-import { DocumentAnalysis } from "./document-analysis";
-import { isFile, writeFile, isDirectory, readdir, readFile } from "@microsoft.azure/async-io"
+import { isDirectory, readdir, readFile } from '@microsoft.azure/async-io';
+import { FileUriToPath, GetExtension, IsUri, ParentFolderUri, ResolveUri } from '@microsoft.azure/uri';
 import { createHash } from 'crypto';
-import { Configuration } from "../lib/configuration"
+import { From } from 'linq-es2015';
+import { safeDump } from 'yaml-ast-parser';
+import { Configuration } from '../lib/configuration';
+import { DocumentAnalysis } from './document-analysis';
 
 import {
-  IConnection,
-  TextDocuments, DiagnosticSeverity, InitializedParams, TextDocument,
-  InitializeParams, TextDocumentPositionParams, DidChangeConfigurationParams,
-  Range, Position, DidChangeWatchedFilesParams, TextDocumentChangeEvent, Hover, Location,
-  MarkedString, FileEvent, Diagnostic, createConnection,
-  InitializeResult, DidChangeConfigurationNotification,
-  TextDocumentSyncKind, IPCMessageReader, IPCMessageWriter
+  createConnection,
+  Diagnostic, DiagnosticSeverity, FileEvent, Hover,
+  IConnection, InitializeParams, InitializeResult, IPCMessageReader, IPCMessageWriter,
+  Location, MarkedString, Position, Range,
+  TextDocument, TextDocumentPositionParams, TextDocuments, TextDocumentSyncKind
 } from 'vscode-languageserver';
 
+// TODO: adding URL here temporarily, this should be coming either in the message coming from autorest or the plugin
+const azureValidatorRulesDocUrl = 'https://github.com/Azure/azure-rest-api-specs/blob/current/documentation/openapi-authoring-automated-guidelines.md';
 
-
-//TODO: adding URL here temporarily, this should be coming either in the message coming from autorest or the plugin
-const azureValidatorRulesDocUrl = "https://github.com/Azure/azure-rest-api-specs/blob/current/documentation/openapi-authoring-automated-guidelines.md";
-
-const md5 = (content: any) => content ? createHash('md5').update(JSON.stringify(content)).digest("hex") : null;
+const md5 = (content: any) => content ? createHash('md5').update(JSON.stringify(content)).digest('hex') : null;
 
 /** private per-configuration run state */
 class Result {
@@ -40,11 +36,6 @@ class Result {
   private readonly AutoRest: AutoRest;
   private static active = 0;
 
-  private dispose() {
-    for (const each of this.onDispose) {
-      each();
-    }
-  }
   public cancel: () => Promise<void> = async () => { };
   public ready = () => { };
 
@@ -115,10 +106,10 @@ class Result {
 
   private updateStatus() {
     if (Result.active === 0) {
-      this.service.endActivity("autorest")
+      this.service.endActivity('autorest');
       return;
     }
-    this.service.startActivity("autorest", "AutoRest is running", this.service.settings.debug ? `Validating ${Result.active} ` : "Validating");
+    this.service.startActivity('autorest', 'AutoRest is running', this.service.settings.debug ? `Validating ${Result.active} ` : 'Validating');
   }
 
   public async process() {
@@ -131,7 +122,7 @@ class Result {
     await this.busy;
 
     // reset the busy flag
-    this.busy = new Promise((r, j) => this.ready = r);
+    this.busy = new Promise((r) => this.ready = r);
 
     // ensure that we have nothing left over from before
     this.clear();
@@ -141,7 +132,7 @@ class Result {
     this.updateStatus();
     try {
       // set configuration
-      await this.resetConfiguration(this.service.settings.configuration)
+      await this.resetConfiguration(this.service.settings.configuration);
 
       // get the list of files this is running on
       this.files = (await this.AutoRest.view).InputFileUris;
@@ -177,7 +168,7 @@ class Result {
 
     // set the basic defaults we need
     this.AutoRest.AddConfiguration({
-      "output-artifact": ["swagger-document.json", "swagger-document.json.map"]
+      'output-artifact': ['swagger-document.json', 'swagger-document.json.map']
       // debug and verbose messages are not sent by default, turn them on so client settings can decide to show or not.
       , debug: true,
       verbose: true
@@ -213,7 +204,7 @@ class Diagnostics {
   }
 
   public push(diagnostic: Diagnostic, send: boolean = true) {
-    const hash = md5(diagnostic) || "";
+    const hash = md5(diagnostic) || '';
     if (!this.diagnostics.has(hash)) {
       this.diagnostics.set(hash, diagnostic);
       if (send) {
@@ -222,7 +213,6 @@ class Diagnostics {
     }
   }
 }
-
 
 /**
  * The results from calling the 'generate' method via the {@link AutoRestLanguageService/generate}
@@ -272,10 +262,10 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     this.onDidOpen((p) => this.onDocumentChanged(p.document));
     this.onDidChangeContent((p) => this.onDocumentChanged(p.document));
     this.onDidClose((p) => this.onClosed(p.document.uri));
-    this.onDidSave((p) => this.onSaving(p.document));
+    this.onDidSave((p) => this.onSaving());
 
     // subscribe to client settings changes
-    connection.onDidChangeConfiguration(config => config.settings && config.settings.autorest ? this.onSettingsChanged(config.settings.autorest) : null)
+    connection.onDidChangeConfiguration(config => config.settings && config.settings.autorest ? this.onSettingsChanged(config.settings.autorest) : null);
 
     // we also get change notifications of files on disk:
     connection.onDidChangeWatchedFiles((changes) => this.onFileEvents(changes.changes));
@@ -286,16 +276,16 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
 
     connection.onInitialize(params => this.onInitialize(params));
 
-    this.setStatus("Starting Up.");
+    this.setStatus('Starting Up.');
 
     // expose the features that we want to give to the client
-    connection.onRequest("generate", (p) => this.generate(p.documentUri, p.language, p.configuration));
-    connection.onRequest("isOpenApiDocument", (p) => this.isOpenApiDocument(p.contentOrUri));
-    connection.onRequest("identifyDocument", (p) => this.identifyDocument(p.contentOrUri));
-    connection.onRequest("isConfigurationDocument", (p) => this.isConfigurationDocument(p.contentOrUri));
-    connection.onRequest("isSupportedDocument", (p) => this.isSupportedDocument(p.languageId, p.contentOrUri));
-    connection.onRequest("toJSON", (p) => this.toJSON(p.contentOrUri));
-    connection.onRequest("detectConfigurationFile", p => this.detectConfigurationFile(p.documentUri));
+    connection.onRequest('generate', (p) => this.generate(p.documentUri, p.language, p.configuration));
+    connection.onRequest('isOpenApiDocument', (p) => this.isOpenApiDocument(p.contentOrUri));
+    connection.onRequest('identifyDocument', (p) => this.identifyDocument(p.contentOrUri));
+    connection.onRequest('isConfigurationDocument', (p) => this.isConfigurationDocument(p.contentOrUri));
+    connection.onRequest('isSupportedDocument', (p) => this.isSupportedDocument(p.languageId, p.contentOrUri));
+    connection.onRequest('toJSON', (p) => this.toJSON(p.contentOrUri));
+    connection.onRequest('detectConfigurationFile', p => this.detectConfigurationFile(p.documentUri));
 
     this.listen(connection);
   }
@@ -324,7 +314,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     }
 
     // just closing a file.
-    const configuration = await this.getConfiguration(documentUri, false);
+    const configuration = await this.getConfiguration(documentUri);
     if (!this.get(configuration)) {
       // is the configuration file for this closed?
       this.getDiagnosticCollection(documentUri).clear(true);
@@ -336,7 +326,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     const autorest = new AutoRest(this, cfgFile);
     const cfg: any = {};
     cfg[language] = {
-      "output-folder": "/generated"
+      'output-folder': '/generated'
     };
     autorest.AddConfiguration(cfg);
     autorest.AddConfiguration(configuration);
@@ -347,7 +337,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     };
     autorest.GeneratedFile.Subscribe((a, artifact) => result.files[artifact.uri] = artifact.content);
     autorest.Message.Subscribe((a, message) => result.messages.push(JSON.stringify(message, null, 2)));
-    autorest.Finished.Subscribe((a, success) => { });
+    autorest.Finished.Subscribe(() => { });
     const done = autorest.Process();
     await done.finish;
 
@@ -389,23 +379,23 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     try {
       return IsUri(contentOrUri) ? await LiterateToJson(await this.ReadFile(contentOrUri)) : await LiterateToJson(contentOrUri);
     } catch { }
-    return "";
+    return '';
   }
 
   public async detectConfigurationFile(documentUri: string): Promise<string> {
-    return await this.getConfiguration(documentUri, false);
+    return this.getConfiguration(documentUri);
   }
 
   public setStatus(message: string) {
-    this.connection.sendNotification("status", message);
+    this.connection.sendNotification('status', message);
   }
 
   public startActivity(id: string, title: string, message: string) {
-    this.connection.sendNotification("startActivity", { id: id, title: title, message: message });
+    this.connection.sendNotification('startActivity', { id, title, message });
   }
 
   public endActivity(id: string) {
-    this.connection.sendNotification("endActivity", id);
+    this.connection.sendNotification('endActivity', id);
   }
   private async onSettingsChanged(serviceSettings: any) {
     // snapshot the current autorest configuration from the client
@@ -432,10 +422,10 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
         // Tell the client that the server works in FULL text document sync mode
         textDocumentSync: TextDocumentSyncKind.Full,
       }
-    }
+    };
   }
 
-  private async onSaving(document: TextDocument) {
+  private async onSaving() {
 
   }
 
@@ -445,8 +435,8 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     if (result) {
       await result.busy; // wait for any current process to finish.
       const outputs = result.artifacts;
-      const openapiDefinition = From(outputs).Where(x => x.type === "swagger-document.json").Select(x => JSON.parse(x.content)).FirstOrDefault();
-      const openapiDefinitionMap = From(outputs).Where(x => x.type === "swagger-document.json.map").Select(x => JSON.parse(x.content)).FirstOrDefault();
+      const openapiDefinition = From(outputs).Where(x => x.type === 'swagger-document.json').Select(x => JSON.parse(x.content)).FirstOrDefault();
+      const openapiDefinitionMap = From(outputs).Where(x => x.type === 'swagger-document.json.map').Select(x => JSON.parse(x.content)).FirstOrDefault();
 
       if (openapiDefinition && openapiDefinitionMap) {
         return new DocumentAnalysis(
@@ -466,25 +456,24 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
   }
 
   public pushDiagnostic(message: Message, severity: DiagnosticSeverity) {
-    let moreInfo = "";
-    if (message.Plugin === "azure-validator") {
+    let moreInfo = '';
+    if (message.Plugin === 'azure-validator') {
       if (message.Key) {
-        moreInfo = "\n More info: " + azureValidatorRulesDocUrl + "#" + [...message.Key][1].toLowerCase() + "-" + [...message.Key][0].toLowerCase() + "\n";
+        moreInfo = '\n More info: ' + azureValidatorRulesDocUrl + '#' + [...message.Key][1].toLowerCase() + '-' + [...message.Key][0].toLowerCase() + '\n';
       }
     }
     if (message.Range) {
       for (const each of message.Range) {
         // get the file reference first
 
-
         const file = this.getDiagnosticCollection(each.document);
 
         if (file) {
           file.push({
-            severity: severity,
+            severity,
             range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
             message: message.Text + moreInfo,
-            source: message.Key ? [...message.Key].join("/") : ""
+            source: message.Key ? [...message.Key].join('/') : ''
           });
         } else {
           // console.log(each.document)
@@ -499,7 +488,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
 
       for (const location of docAnalysis.getDefinitionLocations(refValueJsonPath)) {
         yield {
-          language: "yaml",
+          language: 'yaml',
           value: safeDump(location.value, {})
         };
       }
@@ -512,12 +501,11 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
 
       const queryNodes = [...docAnalysis.getDefinitionLocations(potentialQuery)];
       yield {
-        language: "plaintext",
-        value: `${queryNodes.length} matches\n${queryNodes.map(node => node.jsonPath).join("\n")}`
+        language: 'plaintext',
+        value: `${queryNodes.length} matches\n${queryNodes.map(node => node.jsonPath).join('\n')}`
       };
     } // else { console.log("found nothing that looks like a JSON path"); return null; }
   }
-
 
   private async onHover(position: TextDocumentPositionParams): Promise<Hover> {
     const docAnalysis = await this.getDocumentAnalysis(position.textDocument.uri);
@@ -526,7 +514,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
         ...this.onHoverRef(docAnalysis, position.position),
         ...this.onHoverJsonPath(docAnalysis, position.position)
       ]
-    } : <Hover><any>null
+    } : <Hover><any>null;
   }
 
   private onDefinitionRef(docAnalysis: DocumentAnalysis, position: Position): Iterable<Location> {
@@ -546,7 +534,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     return [];
   }
 
-  private async onDefinition(position: TextDocumentPositionParams): Promise<Location[]> {
+  private async onDefinition(position: TextDocumentPositionParams): Promise<Array<Location>> {
     const docAnalysis = await this.getDocumentAnalysis(position.textDocument.uri);
     return docAnalysis ? [
       ...this.onDefinitionRef(docAnalysis, position.position),
@@ -554,8 +542,8 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     ] : [];
   }
 
-  private async onFileEvents(changes: FileEvent[]) {
-    this.debug(`onFileEvents: ${JSON.stringify(changes, null, "  ")}`);
+  private async onFileEvents(changes: Array<FileEvent>) {
+    this.debug(`onFileEvents: ${JSON.stringify(changes, null, '  ')}`);
     for (const each of changes) {
 
       const doc = this.get(each.uri);
@@ -564,17 +552,17 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
         return;
       }
 
-      let documentUri = each.uri;
+      const documentUri = each.uri;
       const txt = await this.ReadFile(each.uri);
-      if (documentUri.startsWith("file://")) {
+      if (documentUri.startsWith('file://')) {
         // fake out a document for us to play with
         this.onDocumentChanged({
           uri: each.uri,
-          languageId: "",
+          languageId: '',
           version: 1,
           getText: () => txt,
-          positionAt: (offset: number) => <Position>{},
-          offsetAt: (position: Position) => 0,
+          positionAt: () => <Position>{},
+          offsetAt: () => 0,
           lineCount: 1
         });
       }
@@ -582,7 +570,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
   }
   // IFileSystem Implementation
   public async EnumerateFileUris(folderUri: string): Promise<Array<string>> {
-    if (folderUri && folderUri.startsWith("file:")) {
+    if (folderUri && folderUri.startsWith('file:')) {
       const folderPath = FileUriToPath(folderUri);
       if (await isDirectory(folderPath)) {
         const items = await readdir(folderPath);
@@ -623,7 +611,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     await result.process();
   }
 
-  private async getConfiguration(documentUri: string, generateFake: boolean = true): Promise<string> {
+  private async getConfiguration(documentUri: string): Promise<string> {
     // let folder = ResolveUri(documentUri, ".");
     let configFiles: Array<string> = [];
 
@@ -652,7 +640,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     // is there a config file that contains the document as an input?
     for (const configFile of configFiles) {
       const a = new AutoRest(this, configFile);
-      const inputs = (await a.view).InputFileUris
+      const inputs = (await a.view).InputFileUris;
       for (const input of inputs) {
         if (input === documentUri || decodeURIComponent(input) == decodeURIComponent(documentUri)) {
           return configFile;
@@ -665,11 +653,11 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     if (!this.virtualFile.get(configFile)) {
       this.virtualFile.set(configFile, {
         uri: configFile,
-        languageId: "markdown",
+        languageId: 'markdown',
         version: 1,
-        getText: () => "#Fake config file \n> see https://aka.ms/autorest \n``` yaml \ninput-file: \n - " + documentUri,
-        positionAt: (offset: number) => <Position>{},
-        offsetAt: (position: Position) => 0,
+        getText: () => '#Fake config file \n> see https://aka.ms/autorest \n``` yaml \ninput-file: \n - ' + documentUri,
+        positionAt: () => <Position>{},
+        offsetAt: () => 0,
         lineCount: 1
       });
     }
@@ -679,7 +667,6 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
 
   private async onDocumentChanged(document: TextDocument) {
     this.debug(`onDocumentChanged: ${document.uri}`);
-
 
     if (await IsOpenApiExtension(document.languageId) && await IsOpenApiDocument(document.getText())) {
       // find the configuration file and activate that.
@@ -716,11 +703,11 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
         const content = await this.ReadFile(configFile);
         const document = {
           uri: configFile,
-          languageId: "markdown",
+          languageId: 'markdown',
           version: 1,
           getText: () => content,
-          positionAt: (offset: number) => <Position>{},
-          offsetAt: (position: Position) => 0,
+          positionAt: () => <Position>{},
+          offsetAt: () => 0,
           lineCount: 1
         };
         this.virtualFile.set(configFile, document);
@@ -753,10 +740,9 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
 }
 
 // Create the IPC Channel for the lanaguage service.
-let connection: IConnection = createConnection(new IPCMessageReader(process), new IPCMessageWriter(process));
-let languageService = new OpenApiLanguageService(connection);
+const connection: IConnection = createConnection(new IPCMessageReader(process), new IPCMessageWriter(process));
 
-process.on("unhandledRejection", function (err) {
+process.on('unhandledRejection', function () {
   //
   // @Future_Garrett - only turn this on as a desperate move of last resort.
   // You'll be sorry, and you will waste another day going down this rat hole
@@ -767,7 +753,6 @@ process.on("unhandledRejection", function (err) {
   //
   // languageService.verboseDebug(`Unhandled Rejection Suppressed: ${err}`);
 });
-
 
 // Listen on the connection
 connection.listen();
