@@ -21,9 +21,9 @@
     "url": "https://github.com/Azure/autorest/issues"
   },
   "homepage": "https://github.com/Azure/autorest/blob/master/README.md",
-  "main": "./dist/main.js",
+  "main": "./dist/exports.js",
   "bin": {
-    "autorest": "./dist/app.js"
+    "autorest": "./entrypoints/app.js"
   },
   "scripts": {
     "start": "node ./dist/app.js",

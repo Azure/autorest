@@ -1,7 +1,7 @@
 
 import { DataHandle, DataSource, Lazy, Normalize, QuickDataSource, safeEval, Stringify, YAMLNode } from '@microsoft.azure/datastore';
 import { ResolveUri } from '@microsoft.azure/uri';
-import { Artifact } from '../../../main';
+import { Artifact } from '../../../exports';
 import { ConfigurationView } from '../../configuration';
 import { Channel } from '../../message';
 import { IdentitySourceMapping } from '../../source-map/merging';

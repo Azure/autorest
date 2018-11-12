@@ -9,7 +9,7 @@ import { ChildProcess, fork } from 'child_process';
 import { RawSourceMap } from 'source-map';
 import { Readable, Writable } from 'stream';
 import { CancellationToken, createMessageConnection } from 'vscode-jsonrpc';
-import { ConfigurationView } from '../../main';
+import { ConfigurationView } from '../../exports';
 import { Artifact } from '../artifact';
 import { EventEmitter } from '../events';
 import { Exception } from '../exception';
