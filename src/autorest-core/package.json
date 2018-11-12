@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "description": "AutoRest core module",
   "engines": {
-    "node": ">=8.11.0"
+    "node": ">=10.13.0"
   },
   "repository": {
     "type": "git",

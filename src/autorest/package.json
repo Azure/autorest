@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is an OpenAPI spec that describes the REST API.",
   "engines": {
-    "node": ">=7.10.0"
+    "node": ">=10.13.0"
   },
   "repository": {
     "type": "git",
@@ -31,10 +31,9 @@
     "build": "npm run before-build && tsc -p .",
     "watch": "npm run before-build && tsc -p . --watch",
     "set-version": "node -e \"let pkg = require('./package.json'); require('child_process').exec('git rev-list --parents HEAD --count --full-history .', (o,stdout) => { const v = pkg.version.split('.'); v[v.length-1] = parseInt(stdout.trim()); const orig=JSON.stringify(pkg,null,2);  pkg.version = v.join('.'); const delta = JSON.stringify(pkg,null,2 ); if( orig !== delta) require('fs').writeFileSync('./package.json',delta)})\"",
-    "static-link": "static-link --no-node-modules",
-    "prepare": "node ./.scripts/post-install --force --no-node-modules",
+    "static-link": "static-link --force --no-node-modules",
     "preinstall": "node ./.scripts/preinstall-check",
-    "prepack": "static-link && npm run build",
+    "prepack": "static-link --force --no-node-modules && npm run build",
     "run-pwsh": "pwsh -command \"& {param($script) pwsh -command ((convertfrom-json (get-content -raw ./package.json)).'pwsh-scripts'.$script) }\"",
     "clean": "npm run run-pwsh clean",
     "before-build": "npm run run-pwsh before-build"
