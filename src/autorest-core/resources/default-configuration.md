@@ -12,8 +12,8 @@ openapi-type: arm
 # Load additional configurations.
 require:
   - $(this-folder)/directives.md
-  - $(this-folder)/identity-flat-openapi-document.md
-  - $(this-folder)/identity-openapi-document.md
+  - $(this-folder)/pipeline-merger.md
+  - $(this-folder)/pipeline-composer.md
   - $(this-folder)/loader-openapi2.md
   - $(this-folder)/loader-openapi3.md
   - $(this-folder)/markdown-documentation.md
