@@ -1,14 +1,8 @@
-//#!/usr/bin/env node
-// load modules from static linker filesystem.
-if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-loader"] === undefined && require('fs').existsSync('./static-loader.js')) {
-  require('../static-loader.js').load(`${__dirname}/../static_modules.fs`)
-}
-
 // Ensure that if we're running in an electron process, that things will work as if it were node.
 process.env['ELECTRON_RUN_AS_NODE'] = "1";
 delete process.env['ELECTRON_NO_ATTACH_CONSOLE'];
 
-import { Message, Channel, IFileSystem, AutoRest, Artifact, IsConfigurationExtension, IdentifyDocument, IsConfigurationDocument, IsOpenApiExtension, IsOpenApiDocument, LiterateToJson, DocumentType } from "../main"
+import { Message, Channel, IFileSystem, AutoRest, Artifact, IsConfigurationExtension, IdentifyDocument, IsConfigurationDocument, IsOpenApiExtension, IsOpenApiDocument, LiterateToJson, DocumentType } from "../exports"
 import { JsonPath, SourceMap } from './source-map';
 
 import { ResolveUri, FileUriToPath, GetExtension, IsUri, ParentFolderUri } from '@microsoft.azure/uri';

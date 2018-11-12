@@ -18,10 +18,10 @@
     "url": "https://github.com/Azure/autorest/issues"
   },
   "homepage": "https://github.com/Azure/autorest/readme.md",
-  "main": "./dist/main.js",
+  "main": "./dist/exports.js",
   "bin": {
-    "autorest-core": "./binaries/app.js",
-    "autorest-language-service": "./binaries/language-service.js"
+    "autorest-core": "./entrypoints/app.js",
+    "autorest-language-service": "./entrypoints/language-service.js"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha ./dist/test --timeout 100000",
