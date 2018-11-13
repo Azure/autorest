@@ -11,21 +11,19 @@ pipeline:
     # plugin: loader # IMPLICIT: default to last item if split by '/'
     output-artifact: openapi-document
     scope: perform-load
+
   openapi-document/individual/transform:
     input: loader-openapi
-    output-artifact: openapi-document
+    output-artifact: openapi-document 
   openapi-document/individual/schema-validator-openapi:
-    input: transform
+    input: individual/transform
     output-artifact: openapi-document
   openapi-document/individual/identity:
-    input: schema-validator-openapi
-    output-artifact: openapi-document
-  openapi-document/compose:
-    input: individual/identity
-    output-artifact: openapi-document
+    input: individual/schema-validator-openapi
+    output-artifact: openapi-document 
   openapi-document/transform-immediate:
     input:
     - openapi-document-override/md-override-loader-openapi
-    - compose
+    - individual/identity
     output-artifact: openapi-document
 ```

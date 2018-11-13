@@ -170,7 +170,7 @@ export async function LoadLiterateSwagger(config: ConfigurationView, inputScope:
   const ast = CloneAst(data.ReadYamlAst());
   const mapping = IdentitySourceMapping(data.key, ast);
 
-  return sink.WriteData('result.yaml', StringifyAst(ast), [inputFileUri], undefined, mapping, [data]);
+  return sink.WriteData(handle.Description, StringifyAst(ast), [inputFileUri], undefined, mapping, [data]);
 }
 
 export async function LoadLiterateOpenAPI(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle | null> {
@@ -185,7 +185,7 @@ export async function LoadLiterateOpenAPI(config: ConfigurationView, inputScope:
   const ast = CloneAst(data.ReadYamlAst());
   const mapping = IdentitySourceMapping(data.key, ast);
 
-  return sink.WriteData('result.yaml', StringifyAst(ast), [inputFileUri], undefined, mapping, [data]);
+  return sink.WriteData(handle.Description, StringifyAst(ast), [inputFileUri], undefined, mapping, [data]);
 }
 
 export async function LoadLiterateSwaggers(config: ConfigurationView, inputScope: DataSource, inputFileUris: Array<string>, sink: DataSink): Promise<Array<DataHandle>> {
@@ -235,7 +235,6 @@ export async function LoadLiterateOpenAPIOverrides(inputScope: DataSource, input
   }
   return rawOpenApis;
 }
-
 
 /**
  * If a JSON file is provided, it checks that the syntax is correct.

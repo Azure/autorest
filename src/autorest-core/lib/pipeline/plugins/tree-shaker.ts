@@ -366,7 +366,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
 }
 
 async function shakeTree(config: ConfigurationView, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
+  const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
     const shaker = new OAI3Shaker(each);

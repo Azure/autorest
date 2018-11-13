@@ -8,21 +8,18 @@ for Single-API version generators (ie, based using `imodeler1` ).
 
 
 ``` yaml
-pipeline:
-  openapi-document/transform:
-    input:
-      - openapi-document-converter	  # openapi-document/openapi-document-converter comes from the OAI2 loader
-      - transform-immediate           # openapi-document/transform-immediate comes from the OAI3 loader
-    output-artifact: openapi-document
-
+pipeline:  
+  openapi-document/compose:
+    input: tree-shaker
+    output-artifact: openapi-document  
   openapi-document/component-modifiers:
-    input: openapi-document/transform
+    input: compose
     output-artifact: openapi-document
   openapi-document/identity:
-    input: component-modifiers
+    input: openapi-document/component-modifiers
     output-artifact: openapi-document
   openapi-document/emitter:
-    input: identity
+    input: openapi-document/identity
     scope: scope-openapi-document/emitter
 
 scope-swagger-document/emitter:

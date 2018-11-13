@@ -13,7 +13,8 @@ openapi-type: arm
 require:
   - $(this-folder)/directives.md
   - $(this-folder)/pipeline-merger.md
-  - $(this-folder)/pipeline-composer.md
+  - $(this-folder)/pipeline-composer.md  
+  - $(this-folder)/pipeline-tree-shaker.md
   - $(this-folder)/loader-openapi2.md
   - $(this-folder)/loader-openapi3.md
   - $(this-folder)/markdown-documentation.md

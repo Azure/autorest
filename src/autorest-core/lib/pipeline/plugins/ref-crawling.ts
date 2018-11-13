@@ -12,12 +12,12 @@ export async function crawlReferences(inputScope: DataSource, filesToCrawl: Arra
   for (let i = 0; i < filesToCrawl.length; i++) {
     const currentSwagger = filesToCrawl[i];
     const refProcessor = new RefProcessor(currentSwagger, filesToExcludeInSearch);
-    result.push(await sink.WriteObject(currentSwagger.Description, refProcessor.output, currentSwagger.Identity, currentSwagger.GetArtifact(), refProcessor.sourceMappings));
+    result.push(await sink.WriteObject(currentSwagger.Description, refProcessor.output, currentSwagger.Identity, currentSwagger.GetArtifact(), refProcessor.sourceMappings, [currentSwagger]));
     filesToExcludeInSearch = [...new Set([...filesToExcludeInSearch, ...refProcessor.newFilesFound])];
     for (let j = 0; j < refProcessor.newFilesFound.length; j++) {
       const originalSecondaryFile = await inputScope.ReadStrict(refProcessor.newFilesFound[j]);
       const fileMarker = new SecondaryFileMarker(originalSecondaryFile);
-      filesToCrawl.push(await sink.WriteObject(originalSecondaryFile.Description, fileMarker.output, originalSecondaryFile.Identity, originalSecondaryFile.GetArtifact(), fileMarker.sourceMappings));
+      filesToCrawl.push(await sink.WriteObject(originalSecondaryFile.Description, fileMarker.output, originalSecondaryFile.Identity, originalSecondaryFile.GetArtifact(), fileMarker.sourceMappings, [originalSecondaryFile]));
     }
   }
   return result;
@@ -49,7 +49,7 @@ class RefProcessor extends Processor<any, any> {
         this.copy(targetParent, key, pointer, newReference);
       } else if (Array.isArray(value)) {
         this.process(this.newArray(targetParent, key, pointer), children);
-      } else if (typeof (value) === 'object') {
+      } else if (value && typeof (value) === 'object') {
         this.process(this.newObject(targetParent, key, pointer), children);
       } else {
         this.copy(targetParent, key, pointer, value);
@@ -60,7 +60,7 @@ class RefProcessor extends Processor<any, any> {
 
 class SecondaryFileMarker extends Processor<any, any> {
 
-  process(targetParent: any, originalNodes: Iterable<Node>) {
+  process(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer } of originalNodes) {
       targetParent[key] = { value, pointer, recurse: true, filename: this.key };
       if (!targetParent['x-ms-secondary-file']) {

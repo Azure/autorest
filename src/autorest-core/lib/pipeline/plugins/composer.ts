@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Clone, CreateAssignmentMapping, DataHandle, DataSink, JsonPath, JsonPathComponent, Mapping, QuickDataSource, ToAst } from '@microsoft.azure/datastore';
+import { Clone, CreateAssignmentMapping, DataHandle, DataSink, JsonPath, JsonPathComponent, Mapping, QuickDataSource, ToAst, Processor, AnyObject, Node } from '@microsoft.azure/datastore';
 import { From } from 'linq-es2015';
 import { pushAll } from '../../array';
 import { ConfigurationView } from '../../autorest-core';
@@ -147,6 +147,24 @@ async function composeSwaggers(config: ConfigurationView, overrideInfoTitle: any
   return hSwagger;
 }
 
+class ExternalRefCleaner extends Processor<any, any> {
+
+  process(targetParent: AnyObject, originalNodes: Iterable<Node>) {
+    for (const { value, key, pointer, children } of originalNodes) {
+      if (key === '$ref') {
+        const newReference = value.replace(/^.+#/g, '#');
+        this.copy(targetParent, key, pointer, newReference);
+      } else if (Array.isArray(value)) {
+        this.process(this.newArray(targetParent, key, pointer), children);
+      } else if (value && typeof (value) === 'object') {
+        this.process(this.newObject(targetParent, key, pointer), children);
+      } else {
+        this.copy(targetParent, key, pointer, value);
+      }
+    }
+  }
+}
+
 /* @internal */
 export function createComposerPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
@@ -155,6 +173,9 @@ export function createComposerPlugin(): PipelinePlugin {
     const overrideTitle = (overrideInfo && overrideInfo.title) || config.GetEntry('title');
     const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry('description');
     const swagger = await composeSwaggers(config, overrideTitle, overrideDescription, swaggers, sink);
-    return new QuickDataSource([await sink.Forward('composed', swagger)], input.skip);
+    const refCleaner = new ExternalRefCleaner(swagger);
+    const result = await sink.WriteObject(swagger.Description, refCleaner.output, swagger.Identity, swagger.GetArtifact(), refCleaner.sourceMappings, [swagger]);
+
+    return new QuickDataSource([result], input.skip);
   };
 }
