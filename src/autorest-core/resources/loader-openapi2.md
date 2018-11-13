@@ -19,19 +19,24 @@ pipeline:
     output-artifact: swagger-document
   swagger-document/individual/schema-validator-swagger:
     input: individual/transform
-    output-artifact: swagger-document 
+    output-artifact: swagger-document
   swagger-document/individual/identity:
     input: individual/schema-validator-swagger
-    output-artifact: swagger-document 
-  swagger-document/transform-immediate:
-    input:
-    - swagger-document-override/md-override-loader-swagger
-    - individual/identity
     output-artifact: swagger-document
+
+
+#  swagger-document/transform-immediate:
+#    input:
+#    - swagger-document-override/md-override-loader-swagger
+#    - individual/identity
+#    output-artifact: swagger-document
+
+
   swagger-document/identity:
-    input: swagger-document/transform-immediate
+    # input: swagger-document/transform-immediate
+    input: individual/schema-validator-swagger
     output-artifact: swagger-document
-  
+
 
   # OpenAPI
   openapi-document/openapi-document-converter:

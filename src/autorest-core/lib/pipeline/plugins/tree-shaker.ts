@@ -62,7 +62,9 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
 
         // copy these over without worrying about moving things down to components.
         default:
-          this.copy(targetParent, key, pointer, value);
+          if (!this.original['x-ms-secondary-file']) {
+            this.copy(targetParent, key, pointer, value);
+          }
           break;
       }
     }

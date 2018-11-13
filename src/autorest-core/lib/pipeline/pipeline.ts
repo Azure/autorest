@@ -263,7 +263,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
         return inputScope;
       }
       try {
-        config.Message({ Channel: Channel.Debug, Text: `${nodeName} - START` });
+        config.Message({ Channel: Channel.Debug, Text: `${nodeName} - START inputs = ${(await inputScope.Enum()).length}` });
 
         const scopeResult = await plugin(config, inputScope, config.DataStore.getDataSink(node.outputArtifact));
 

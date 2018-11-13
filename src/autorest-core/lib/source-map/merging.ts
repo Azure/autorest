@@ -13,6 +13,7 @@ import { Mapping } from "@microsoft.azure/datastore";
 import { DataHandle, DataSink } from "@microsoft.azure/datastore";
 import { ResolvePath } from '@microsoft.azure/datastore';
 import { isArray } from 'util';
+import { length } from '../../../../perks/libraries/linq/dist/main';
 
 // // TODO: may want ASTy merge! (supporting circular structure and such?)
 function Merge(a: any, b: any, path: JsonPath = []): any {
@@ -28,6 +29,15 @@ function Merge(a: any, b: any, path: JsonPath = []): any {
   // mapping nodes
   if (typeof a === "object" && typeof b === "object") {
     if (a instanceof Array && b instanceof Array) {
+      if (a.length === 0) {
+        return b;
+      }
+      if (b.length === 0) {
+        return a;
+      }
+      // both sides gave a sequence, and they are not identical.
+      // this is currently not a good thing.
+      throw new Error(`'${stringify(path)}' has two arrays that are incompatible (${yaml.Stringify(a)}, ${yaml.Stringify(b)}).`);
       // // sequence nodes
       // const result = a.slice();
       // for (const belem of b) {
