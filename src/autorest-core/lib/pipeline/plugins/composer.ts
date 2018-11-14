@@ -57,28 +57,44 @@ async function composeSwaggers(config: ConfigurationView, overrideInfoTitle: any
     delete info.description;
     if (!uniqueVersion) { delete info.version; }
 
+
+    const root = { obj: swagger, path: [] };
+    const paths = getPropertyValues(getProperty(root, 'paths'));
+    const xmspaths = getPropertyValues(getProperty(root, 'x-ms-paths'));
+
     // extract interesting nodes
-    const paths = From<ObjectWithPath<any>>([])
-      .Concat(getPropertyValues(getProperty({ obj: swagger, path: [] }, 'paths')))
-      .Concat(getPropertyValues(getProperty({ obj: swagger, path: [] }, 'x-ms-paths')));
-    const methods = paths.SelectMany(getPropertyValues);
+    const allPaths = From<ObjectWithPath<any>>([]).Concat(paths).Concat(xmspaths);
+
+    const methods = allPaths.SelectMany(getPropertyValues);
+
     const parameters =
       methods.SelectMany((method: any) => getArrayValues<any>(getProperty<any, any>(method, 'parameters'))).Concat(
-        paths.SelectMany((path: any) => getArrayValues<any>(getProperty<any, any>(path, 'parameters'))));
+        allPaths.SelectMany((path: any) => getArrayValues<any>(getProperty<any, any>(path, 'parameters'))));
 
     // inline api-version params
     if (!uniqueVersion) {
-      const clientParams = swagger.parameters || {};
+      const clientParams = swagger.components.parameters || {};
       const apiVersionClientParamName = Object.getOwnPropertyNames(clientParams).filter(n => clientParams[n].name === 'api-version')[0];
       const apiVersionClientParam = apiVersionClientParamName ? clientParams[apiVersionClientParamName] : null;
       if (apiVersionClientParam) {
         const apiVersionClientParam = clientParams[apiVersionClientParamName];
-        const apiVersionParameters = parameters.Where((p: any) => p.obj.$ref === `#/parameters/${apiVersionClientParamName}`);
+        const apiVersionParameters = parameters.Where((p: any) => p.obj.$ref.endsWith(`#/components/parameters/${apiVersionClientParamName}`));
         for (const apiVersionParameter of apiVersionParameters) {
           delete apiVersionParameter.obj.$ref;
 
+          // this inlines the apiversion parameter as a constant.
+          for (const each of Object.keys(apiVersionClientParam)) {
+            if (each === 'schema') {
+              apiVersionParameter.obj[each] = {
+                type: 'string',
+                enum: [version]
+              };
+            } else {
+              apiVersionParameter.obj[each] = apiVersionClientParam[each];
+            }
+          }
           // forward client param
-          populate.push(() => ({ ...apiVersionParameter.obj, ...apiVersionClientParam }));
+          //populate.push(() => ({ ...apiVersionParameter.obj, ...apiVersionClientParam }));
           mapping.push(...CreateAssignmentMapping(
             apiVersionClientParam, inputSwagger.key,
             ['parameters', apiVersionClientParamName], apiVersionParameter.path,
@@ -91,6 +107,7 @@ async function composeSwaggers(config: ConfigurationView, overrideInfoTitle: any
             original: { path: [<JsonPathComponent>'info', 'version'] },
             generated: { path: apiVersionParameter.path.concat('enum') }
           });
+
           mapping.push({
             name: 'inlining api-version', source: inputSwagger.key,
             original: { path: [<JsonPathComponent>'info', 'version'] },
@@ -100,6 +117,23 @@ async function composeSwaggers(config: ConfigurationView, overrideInfoTitle: any
 
         // remove api-version client param
         delete clientParams[apiVersionClientParamName];
+      }
+    }
+
+
+    // Massive Hack:
+    // inline schema $refs for operation parameters because the existing modeler doesn't unwrap $ref'd schemas for parameters
+    // this is required to keep existing generators working with the newer loader pipeline without updating the modeler
+    for (const p of Object.keys(swagger.components.parameters)) {
+      const parameter = swagger.components.parameters[p];
+      if (parameter.schema && parameter.schema.$ref) {
+        const schemaName = parameter.schema.$ref.replace(/.*\//g, '');
+        const schema = swagger.components.schemas[schemaName];
+
+        delete parameter.schema.$ref;
+        for (const item of Object.keys(schema)) {
+          parameter.schema[item] = schema[item];
+        }
       }
     }
 
@@ -175,7 +209,6 @@ export function createComposerPlugin(): PipelinePlugin {
     const swagger = await composeSwaggers(config, overrideTitle, overrideDescription, swaggers, sink);
     const refCleaner = new ExternalRefCleaner(swagger);
     const result = await sink.WriteObject(swagger.Description, refCleaner.output, swagger.Identity, swagger.GetArtifact(), refCleaner.sourceMappings, [swagger]);
-
     return new QuickDataSource([result], input.skip);
   };
 }

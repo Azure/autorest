@@ -278,6 +278,7 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Da
 
     if (verifyOAI2) {
       // check for non-identical duplicate models and parameters
+
       if (inputGraph.definitions) {
         for (const model in inputGraph.definitions) {
           const merged = mergedGraph.definitions[model];
