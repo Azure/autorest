@@ -1,4 +1,4 @@
-import { DataSink, DataSource, MultiProcessor, Node, ProxyObject, QuickDataSource, visit, } from '@microsoft.azure/datastore';
+import { DataSink, DataSource, MultiProcessor, Node, ProxyObject, QuickDataSource, visit, AnyObject, } from '@microsoft.azure/datastore';
 import { Dictionary } from '@microsoft.azure/linq';
 
 import * as oai from '@microsoft.azure/openapi';
@@ -198,8 +198,12 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
   visitComponents(components: ProxyObject<Dictionary<oai.Components>>, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
       this.cCount[key] = this.cCount[key] || 0;
+      if (components[key] === undefined) {
+        this.newObject(components, key, pointer);
+      }
 
-      this.visitComponent(key, this.newObject(components, key, pointer), children);
+      this.visitComponent(key, components[key], children);
+      // this.visitComponent(key, this.newObject(components, key, pointer), children);
     }
   }
   visitComponent<T>(type: string, container: ProxyObject<Dictionary<T>>, nodes: Iterable<Node>) {
@@ -213,15 +217,19 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
       // for testing with local refs
       this.refs[`#${pointer}`] = `#/components/${type}/${uid}`;
 
-      const component = this.newObject(container, `${uid}`, pointer);
+      const component: AnyObject = this.newObject(container, `${uid}`, pointer);
       component['x-ms-metadata'] = {
         value: {
-          apiVersions: [this.current.info.version], // track the API version this came from
+          apiVersions: [this.current.info && this.current.info.version ? this.current.info.version : ''], // track the API version this came from
           filename: [this.key],                       // and the filename
           name: key,	                                // and here is the name of the component.
           originalLocations: [originalLocation]
         }, pointer
       };
+
+      for (const child of children) {
+        this.copy(component, child.key, child.pointer, child.value);
+      }
     }
   }
 }

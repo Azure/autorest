@@ -21,32 +21,40 @@ const resources = `${__dirname}../../../test/resources/merger`;
   @test async 'Test Merger'() {
 
     const inputUri = 'mem://input.yaml';
+    const inputUri2 = 'mem://input2.yaml';
     // const outputUri = 'mem://output.yaml';
 
     const input = await aio.readFile(`${resources}/input.yaml`);
+    const input2 = await aio.readFile(`${resources}/input2.yaml`);
     // const output = await aio.readFile(`${resources}/output.yaml`);
 
     const map = new Map<string, string>([[inputUri, input]]);
+    const map2 = new Map<string, string>([[inputUri2, input2]]);
     //const map = new Map<string, string>([[inputUri, input], [outputUri, output]]);
     const mfs = new datastore.MemoryFileSystem(map);
+    const mfs2 = new datastore.MemoryFileSystem(map2);
 
     const cts: datastore.CancellationTokenSource = { cancel() { }, dispose() { }, token: { isCancellationRequested: false, onCancellationRequested: <any>null } };
     const ds = new datastore.DataStore(cts.token);
     const scope = ds.GetReadThroughScope(mfs);
+    const scope2 = ds.GetReadThroughScope(mfs2);
     const inputDataHandle = await scope.Read(inputUri);
+    const inputDataHandle2 = await scope2.Read(inputUri2);
     // const outputDataHandle = await scope.Read(outputUri);
 
     assert(inputDataHandle != null);
+    assert(inputDataHandle2 != null);
     // assert(outputDataHandle != null);
 
     // if (inputDataHandle && outputDataHandle) {
-    if (inputDataHandle) {
+    if (inputDataHandle && inputDataHandle2) {
       // const outputObject = outputDataHandle.ReadObject();
-      const processor = new MultiAPIMerger([inputDataHandle]);
+      const processor = new MultiAPIMerger([inputDataHandle, inputDataHandle2]);
 
       const sink = ds.getDataSink();
+      const output = processor.output;
 
-      const data = await sink.WriteObject('merged oai3 doc...', processor.output, inputDataHandle.Identity, 'merged-oai3', processor.sourceMappings, [inputDataHandle]);
+      const data = await sink.WriteObject('merged oai3 doc...', processor.output, inputDataHandle.Identity, 'merged-oai3', processor.sourceMappings, [inputDataHandle, inputDataHandle2]);
 
 
 
