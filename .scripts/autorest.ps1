@@ -73,8 +73,10 @@ function read-from($filename) {
 function autorest() {
   write-host -fore gray "> autorest --version=${root}/src/autorest-core --no-upgrade-check $args"
   $r = Invoke-Executable (get-command node).Source ${root}/src/autorest/dist/app.js --version=${root}/src/autorest-core --no-upgrade-check $args
+  write-host -fore yellow "> done ... $args"
+
   if ( $r.ExitCode -ne 0  ) {
-    write-host -fore green $r.Output
+    write-host -fore red $r.Output
     # write-host -fore red $r.Error
     # return # write-error "[FAILED]"
   }

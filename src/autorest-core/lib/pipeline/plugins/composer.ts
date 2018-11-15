@@ -137,6 +137,32 @@ async function composeSwaggers(config: ConfigurationView, overrideInfoTitle: any
       }
     }
 
+    for (const r of Object.keys(swagger.components.responses)) {
+      const response = swagger.components.responses[r];
+      if (response.headers) {
+        for (const h of Object.keys(response.headers)) {
+          const header = response.headers[h];
+          if (header.$ref) {
+
+            const headerName = header.$ref.replace(/.*\//g, '');
+            const actual = swagger.components.headers[headerName];
+
+            delete header.$ref;
+            for (const item of Object.keys(actual)) {
+              header[item] = actual[item];
+            }
+          }
+
+
+
+
+
+        }
+      }
+    }
+
+
+
     // inline produces/consumes
     for (const pc of ['produces', 'consumes']) {
       const clientPC = swagger[pc];

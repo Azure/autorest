@@ -26,22 +26,12 @@
       "name": "run bootstrapper",
       "program": "${workspaceRoot}/src/autorest/dist/app.js",
       "args": [
-        "--version=c:/work/github/autorest/autorest/src/autorest-core",
+        "--version=${workspaceRoot}/src/autorest-core",
         "--verbose",
-        "--debug"
+        "--debug",
+        "--use:C:/work/2018/autorest.modeler"
       ],
-      "cwd": "${workspaceRoot}"
-    },
-    {
-      "type": "node",
-      "protocol": "inspector",
-      "request": "launch",
-      "name": "run autorest",
-      "program": "${workspaceRoot}/src/autorest-core/app.js",
-      "args": [
-        "C:/work/github/azure-rest-api-specs/profile/all.md"
-      ],
-      "cwd": "${workspaceRoot}"
+      "cwd": "${workspaceRoot}/Samples/openapi-v2/1c-multiple-input-swaggers"
     },
     {
       "name": ".NET Core Attach",
