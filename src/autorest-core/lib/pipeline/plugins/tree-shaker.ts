@@ -63,7 +63,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
         // copy these over without worrying about moving things down to components.
         default:
           if (!this.original['x-ms-secondary-file']) {
-            this.copy(targetParent, key, pointer, value);
+            this.clone(targetParent, key, pointer, value);
           }
           break;
       }
@@ -94,7 +94,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
           break;
 
         default:
-          this.copy(targetParent, key, pointer, value);
+          this.clone(targetParent, key, pointer, value);
           break;
       }
     }
@@ -104,8 +104,15 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
     for (const { value, key, pointer, children } of nodes) {
       switch (key) {
         case 'parameters':
-          this.dereferenceItems('/components/parameters', this.parameters, this.visitParameter, this.newArray(targetParent, key, pointer), children);
+          // parameters are a small special case, because they have to be tweaked when they are moved to the global parameter section.
+          const newArray = this.newArray(targetParent, key, pointer);
+          for (const child of children) {
+            const p = this.dereference('/components/parameters', this.parameters, this.visitParameter, newArray, child.key, child.pointer, child.value, child.children);
+            // tag it as a method parameter. (default is 'client', so we have to tag it when we move it.)
+            p['x-ms-parameter-location'] = { value: 'method', pointer: '' };
+          }
           break;
+
         case 'requestbody':
           this.dereference(`/components/requestBodies`, this.requestBodies, this.visitRequestBody, targetParent, key, pointer, value, children);
           break;
@@ -116,7 +123,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
           this.dereferenceItems(`/components/callbacks`, this.callbacks, this.visitCallback, this.newObject(targetParent, key, pointer), children);
           break;
         default:
-          this.copy(targetParent, key, pointer, value);
+          this.clone(targetParent, key, pointer, value);
           break;
       }
     }
@@ -133,7 +140,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
           break;
         // everything else, just copy recursively.
         default:
-          this.copy(targetParent, key, pointer, value);
+          this.clone(targetParent, key, pointer, value);
           break;
       }
     }
@@ -160,7 +167,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
             this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
           } else {
             // otherwise, just copy it across.
-            this.copy(targetParent, key, pointer, value);
+            this.clone(targetParent, key, pointer, value);
           }
           break;
 
@@ -171,7 +178,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
 
         // everything else, just copy recursively.
         default:
-          this.copy(targetParent, key, pointer, value);
+          this.clone(targetParent, key, pointer, value);
           break;
       }
     }
@@ -192,7 +199,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
 
         // everything else, just copy recursively.
         default:
-          this.copy(targetParent, key, pointer, value);
+          this.clone(targetParent, key, pointer, value);
           break;
       }
     }
@@ -201,11 +208,6 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
   visitProperties(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
-      // this.dereference(this.pro, this.visitProperties, targetParent, key, pointer, value, children);
-      // the property has a description with it, we should tag it here too.
-      if (value.description) {
-        // targetParent[key].description = { value: value.description, pointer, };
-      }
     }
   }
 
@@ -217,7 +219,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
           this.visitContent(this.newObject(targetParent, key, pointer), children);
           break;
         default:
-          this.copy(targetParent, key, pointer, value);
+          this.clone(targetParent, key, pointer, value);
           break;
       }
     }
@@ -270,7 +272,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
 
         // everything else, just copy recursively.
         default:
-          this.copy(targetParent, key, pointer, value);
+          this.clone(targetParent, key, pointer, value);
           break;
       }
     }
@@ -290,7 +292,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
           break;
         // everything else, just copy recursively.
         default:
-          this.copy(targetParent, key, pointer, value);
+          this.clone(targetParent, key, pointer, value);
           break;
       }
     }
@@ -298,7 +300,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
 
   visitExample(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer } of originalNodes) {
-      this.copy(targetParent, key, pointer, value);
+      this.clone(targetParent, key, pointer, value);
     }
   }
 
@@ -313,7 +315,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
           break;
         // everything else, just copy recursively.
         default:
-          this.copy(targetParent, key, pointer, value);
+          this.clone(targetParent, key, pointer, value);
           break;
       }
     }
@@ -321,13 +323,13 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
 
   visitSecurityScheme(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer } of originalNodes) {
-      this.copy(targetParent, key, pointer, value);
+      this.clone(targetParent, key, pointer, value);
     }
   }
 
   visitLink(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer } of originalNodes) {
-      this.copy(targetParent, key, pointer, value);
+      this.clone(targetParent, key, pointer, value);
     }
   }
 
@@ -340,30 +342,36 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
   dereference(baseReferencePath: string, targetCollection: AnyObject, visitor: (tp: any, on: Iterable<Node>) => void, targetParent: AnyObject, key: string, pointer: string, value: any, children: Iterable<Node>) {
     if (value.$ref) {
       // it's a reference already.
-      this.copy(targetParent, key, pointer, value);
-      return value.$ref;
+      return this.clone(targetParent, key, pointer, value);
     }
 
     if (targetParent === targetCollection) {
+      const obj = this.newObject(targetParent, key, pointer);
       // it's actually in the right spot already.
-      visitor.bind(this)(this.newObject(targetParent, key, pointer), children);
-      return pointer;
+      visitor.bind(this)(obj, children);
+      return obj;
     }
 
-    // not a reference, move the parameter
+    // not a reference, move the item
 
-    // generate a unique id for the shaken parameter.
+    // generate a unique id for the shaken item.
     const id = `${parseJsonPointer(pointer).map(each => `${each}`.toLowerCase().replace(/\W+/g, '-').split('-').filter(each => each).join('-')).filter(each => each).join('·')}`.replace(/\·+/g, '·');
 
     // set the current location's object to be a $ref
-    targetParent[key] = { value: { $ref: `#${baseReferencePath}/${id}` }, pointer };
+    targetParent[key] = {
+      value: {
+        $ref: `#${baseReferencePath}/${id}`,
+        description: value.description,  // we violate spec to allow a unique description at the $ref spot, (ie: there are two fields that are of type 'color' -- one is 'borderColor' and one is 'fillColor' -- may be differen descriptions.)
+        readOnly: value.readOnly
+      }, pointer
+    };
 
     // const tc = targetCollection[key] || this.newObject(targetCollection, id, pointer);
     const tc = this.newObject(targetCollection, id, pointer);
 
     // copy the parts of the parameter across
     visitor.bind(this)(tc, children);
-    return id;
+    return tc;
   }
 }
 
