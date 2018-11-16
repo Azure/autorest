@@ -14,7 +14,7 @@
       "name": "run tests",
       "program": "${workspaceRoot}/src/autorest-core/node_modules/mocha/bin/_mocha",
       "args": [
-        "dist/test/merger.js",
+        "dist/test/deduplicator.js",
         "--timeout=2000000"
       ],
       "cwd": "${workspaceRoot}/src/autorest-core"
