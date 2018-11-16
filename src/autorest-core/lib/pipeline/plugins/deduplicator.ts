@@ -4,10 +4,12 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AnyObject, DataHandle, DataSink, DataSource, Node, Processor, ProxyObject, QuickDataSource, Data, visit, Mapping, } from '@microsoft.azure/datastore';
+import * as oai from '@microsoft.azure/openapi';
 import * as deepEqual from "deep-equal";
-import { Dictionary, values, items } from '../../../../../perks/libraries/linq/dist/main';
+import { Dictionary, values, items } from '@microsoft.azure/linq';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
+import { type } from 'os';
 export class DeduplicatorProcessor extends Processor<oai.Model, oai.Model> {
 
   process(targetParent: AnyObject, nodes: Iterable<Node>) {
@@ -94,29 +96,63 @@ export function createDeduplicatorPlugin(): PipelinePlugin {
 }
 
 export class Deduplicator {
-
-  private original;
   private refs = new Dictionary<string>();
-  public deduplicated;
+  private target;
   public mappings = new Dictionary<string>();
   private schemasVisited = new Array<string>();
+  private hasRun = false;
+  private deduplicatedSchemas = Array<string>();
+  private crawledSchemas = Array<string>();
+  private visitedSchemas = Array<string>(); // to handle circular references
   constructor(originalFile: DataHandle) {
-    this.original = originalFile.ReadObject();
+    this.target = originalFile.ReadObject();
   }
 
-  public deduplicate() {
-    for (const { key, value, pointer } of visit(this.original)) {
-      this.copy(this.original, key, pointer, value);
+  init() {
+    if (this.target.components.schemas !== undefined) {
+      this.deduplicateSchemas();
     }
   }
 
-  private copy(target: any, member: string, pointer: string, value: any) {
-    for (const { key, value: v } of visit(target[member])) {
-      this.copy(target[member], key, v.pointer, v);
+
+  deduplicateSchemas() {
+    for (const schema of visit(this.target.components.schemas)) {
+      if (!this.deduplicatedSchemas.includes(schema.key)) {
+        if (!this.crawledSchemas.includes(schema.key)) {
+          // crawl the schema first.
+          this.crawlSchema(schema.value, schema.key, schema.children);
+        }
+        // after crawled deduplicate.
+        // update references
+        // update mappings
+        this.deduplicatedSchemas.push(schema.key);
+      }
     }
-    target[member] = value;
-    this.updateMappings(pointer, value.pointer);
   }
+
+  crawlSchema(targetParent: AnyObject, uid: string, originalNodes: Iterable<Node>) {
+    if (!this.visitedSchemas.includes(uid)) {
+      this.visitedSchemas.push(uid);
+      this.crawlObject(targetParent, originalNodes);
+    }
+
+    this.crawledSchemas.push(uid);
+  }
+
+  crawlObject(targetParent: AnyObject, originalNodes: Iterable<Node>) {
+    for (const { key, value, children } of originalNodes) {
+      if (key === '$ref' && value.match(/#\/components\/schemas\/.+/g)) {
+        const refParts = value.split('/');
+        const schemaUid = refParts.pop();
+        this.crawlSchema(this.target.components.schemas[schemaUid], schemaUid, visit(this.target.components.schemas[schemaUid]));
+        // deduplicate schema.
+        // update references.
+      } else if (Array.isArray(key) || typeof (value) === 'object') {
+        this.crawlObject(value, children);
+      }
+    }
+  }
+
 
   private updateMappings(oldPointer: string, newPointer: string) {
     this.mappings[oldPointer] = newPointer;
@@ -125,5 +161,13 @@ export class Deduplicator {
         this.mappings[key] = newPointer;
       }
     }
+  }
+
+  public get output() {
+    if (!this.hasRun) {
+      this.init();
+      this.hasRun = true;
+    }
+    return this.target;
   }
 }

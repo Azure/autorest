@@ -5,12 +5,8 @@
 
 import * as aio from '@microsoft.azure/async-io';
 import * as datastore from '@microsoft.azure/datastore';
-
 import * as assert from 'assert';
 import { only, skip, slow, suite, test, timeout } from 'mocha-typescript';
-
-import { MultiAPIMerger } from '../lib/pipeline/plugins/merger';
-import { FastStringify } from '@microsoft.azure/datastore';
 import { Deduplicator } from '../lib/pipeline/plugins/deduplicator';
 
 require('source-map-support').install();
@@ -42,11 +38,11 @@ const resources = `${__dirname}../../../test/resources/deduplicator`;
 
     if (inputDataHandle && outputDataHandle) {
       const outputObject = outputDataHandle.ReadObject();
-      const processor = new Deduplicator(inputDataHandle);
+      const deduplicator = new Deduplicator(inputDataHandle);
 
-      const sink = ds.getDataSink();
+      //const sink = ds.getDataSink();
 
-      const data = await sink.WriteObject('deduplicated oai3 doc...', processor.output, inputDataHandle.Identity, 'deduplicated-oai3', processor.sourceMappings, [inputDataHandle]);
+      // const data = await sink.WriteObject('deduplicated oai3 doc...', processor.output, inputDataHandle.Identity, 'deduplicated-oai3', processor.sourceMappings, [inputDataHandle]);
 
 
 
@@ -54,10 +50,10 @@ const resources = `${__dirname}../../../test/resources/deduplicator`;
       //console.log(FastStringify(processor.output));
 
       // console.log(JSON.stringify(data.ReadMetadata().sourceMap.Value));
-
-      await aio.writeFile("c:/tmp/input.yaml", input);
-      await aio.writeFile("c:/tmp/output.yaml", FastStringify(processor.output));
-      await aio.writeFile("c:/tmp/output.yaml.map", JSON.stringify(data.ReadMetadata().sourceMap.Value));
+      console.error(datastore.FastStringify(deduplicator.output));
+      // await aio.writeFile("c:/tmp/input.yaml", input);
+      // await aio.writeFile("c:/tmp/output.yaml", datastore.FastStringify(processor.deduplicated));
+      //await aio.writeFile("c:/tmp/output.yaml.map", JSON.stringify(data.ReadMetadata().sourceMap.Value));
 
 
       // assert.deepEqual(shaker.output, outputObject, 'Should be the same');
