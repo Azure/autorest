@@ -44,7 +44,7 @@ async function deduplicate(config: ConfigurationView, input: DataSource, sink: D
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
     const processor = new Deduplicator(each);
-    result.push(await sink.WriteObject(each.Description, processor.output, each.Identity, each.GetArtifact(), processor.sourceMappings));
+    result.push(await sink.WriteObject(each.Description, processor.output, each.identity, each.artifactType, processor.sourceMappings));
   }
   return new QuickDataSource(result, input.skip);
 }

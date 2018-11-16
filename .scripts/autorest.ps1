@@ -63,6 +63,7 @@ try {
 function write-to($filename, $content) {
   $text =  [system.String]::Join( "`n", $content)
   return [System.IO.File]::WriteAllText($filename, $text, (New-Object System.Text.UTF8Encoding($false)));
+  # write-host -fore cyan "WRITING $filename"
 }
 
 function read-from($filename) {
@@ -72,13 +73,14 @@ function read-from($filename) {
 
 function autorest() {
   write-host -fore gray "> autorest --version=${root}/src/autorest-core --no-upgrade-check $args"
+  # write-host -fore cyan INVOKING (get-command node).Source ${root}/src/autorest/dist/app.js --version=${root}/src/autorest-core --no-upgrade-check $args
   $r = Invoke-Executable (get-command node).Source ${root}/src/autorest/dist/app.js --version=${root}/src/autorest-core --no-upgrade-check $args
-  write-host -fore yellow "> done ... $args"
+  # write-host -fore yellow "> done ... $args"
 
   if ( $r.ExitCode -ne 0  ) {
     write-host -fore red $r.Output
-    # write-host -fore red $r.Error
-    # return # write-error "[FAILED]"
+    write-host -fore red $r.Error
+    return write-error "[FAILED]"
   }
   return $r
 }

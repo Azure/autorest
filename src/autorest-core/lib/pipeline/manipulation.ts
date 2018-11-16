@@ -28,7 +28,7 @@ export class Manipulator {
   private async processInternal(data: DataHandle, sink: DataSink, documentId?: string): Promise<DataHandle> {
     for (const trans of this.transformations) {
       // matches filter?
-      if (this.matchesSourceFilter(documentId || data.key, trans, data.GetArtifact())) {
+      if (this.matchesSourceFilter(documentId || data.key, trans, data.artifactType)) {
         for (const w of trans.where) {
           // transform
           for (const t of trans.transform) {
@@ -84,8 +84,8 @@ export class Manipulator {
   }
 
   public async process(data: DataHandle, sink: DataSink, isObject: boolean, documentId?: string): Promise<DataHandle> {
-    const trans1 = !isObject ? await sink.WriteObject(`trans_input?${data.key}`, data.ReadData(), data.Identity) : data;
+    const trans1 = !isObject ? await sink.WriteObject(`trans_input?${data.key}`, data.ReadData(), data.identity) : data;
     const result = await this.processInternal(trans1, sink, documentId);
-    return (!isObject) ? sink.WriteData(`trans_output?${data.key}`, result.ReadObject<string>(), data.Identity) : result;
+    return (!isObject) ? sink.WriteData(`trans_output?${data.key}`, result.ReadObject<string>(), data.identity) : result;
   }
 }

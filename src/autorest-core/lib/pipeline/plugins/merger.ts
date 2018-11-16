@@ -1,5 +1,5 @@
 import { DataSink, DataSource, MultiProcessor, Node, ProxyObject, QuickDataSource, visit, AnyObject, } from '@microsoft.azure/datastore';
-import { Dictionary } from '@microsoft.azure/linq';
+import { clone, Dictionary } from '@microsoft.azure/linq';
 
 import * as oai from '@microsoft.azure/openapi';
 import { ConfigurationView } from '../../configuration';
@@ -45,18 +45,29 @@ import { PipelinePlugin } from '../common';
  *
  *  - rewrite all $refs to point to the new locaiton.
  *
+ *  - on files that are marked 'x-ms-secondary', this will only pull in things in /components (and it marks them x-ms-secondary-file: true)
+ *
  */
 export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
   opCount: number = 0;
   cCount = new Dictionary<number>();
   refs = new Dictionary<string>();
 
+  /**
+   * returns true when the current source file is marked x-ms-secondary-file: true
+   */
+  protected get isSecondaryFile(): boolean {
+    return this.current['x-ms-secondary-file'] === true;
+  }
+
   public process(target: ProxyObject<oai.Model>, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
 
       switch (key) {
         case 'paths':
-          this.visitPaths(this.newObject(target, 'paths', pointer), children);
+          if (!this.isSecondaryFile) {
+            this.visitPaths(this.newObject(target, 'paths', pointer), children);
+          }
           break;
 
         case 'components':
@@ -67,58 +78,65 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
         case 'servers':
         case 'security':
         case 'tags':
-          const array = <any>target[key] || this.newArray(target, key, pointer);
-          for (const item of children) {
-            array.__push__({
-              value: item.value,
-              pointer: item.pointer,
-              recurse: true
-            });
+          if (!this.isSecondaryFile) {
+            const array = <any>target[key] || this.newArray(target, key, pointer);
+            for (const item of children) {
+              array.__push__({
+                value: item.value,
+                pointer: item.pointer,
+                recurse: true
+              });
+            }
           }
-
           break;
 
         case 'info':
-          if (!target.info) {
-            this.newObject(target, 'info', pointer);
-            for (const child of children) {
-              this.copy(<oai.Info>target.info, child.key, child.pointer, child.value, true);
+          if (!this.isSecondaryFile) {
+            if (!target.info) {
+              this.newObject(target, 'info', pointer);
+              for (const child of children) {
+                this.copy(<oai.Info>target.info, child.key, child.pointer, child.value, true);
+              }
             }
+            const metadata = target.info['x-ms-metadata'] || this.newArray(<oai.Info>target.info, 'x-ms-metadata', pointer);
+            metadata.__push__({
+              value: clone(value),
+              pointer,
+              recurse: true
+            });
           }
-          const metadata = target.info['x-ms-metadata'] || this.newArray(<oai.Info>target.info, 'x-ms-metadata', pointer);
-          metadata.__push__({
-            value: JSON.parse(JSON.stringify(value)),
-            pointer,
-            recurse: true
-          });
-
           break;
 
         case 'externalDocs':
-          if (!target.externalDocs) {
-            const docs = this.newObject(target, 'externalDocs', pointer);
-            for (const child of children) {
-              this.copy(docs, child.key, child.pointer, child.value, true);
+          if (!this.isSecondaryFile) {
+            if (!target.externalDocs) {
+              const docs = this.newObject(target, 'externalDocs', pointer);
+              for (const child of children) {
+                this.copy(docs, child.key, child.pointer, child.value, true);
+              }
             }
+            const docsMetadata = (<oai.ExternalDocumentation>target.externalDocs)['x-ms-metadata'] || this.newArray(<oai.ExternalDocumentation>target.externalDocs, 'x-ms-metadata', pointer);
+            docsMetadata.__push__({
+              value: clone(value),
+              pointer,
+              recurse: true
+            });
           }
-          const docsMetadata = (<oai.ExternalDocumentation>target.externalDocs)['x-ms-metadata'] || this.newArray(<oai.ExternalDocumentation>target.externalDocs, 'x-ms-metadata', pointer);
-          docsMetadata.__push__({
-            value: JSON.parse(JSON.stringify(value)),
-            pointer,
-            recurse: true
-          });
-
           break;
 
         case 'openapi':
-          if (!target.openApi) {
-            this.copy(target, key, pointer, value);
+          if (!this.isSecondaryFile) {
+            if (!target.openApi) {
+              this.copy(target, key, pointer, value);
+            }
           }
           break;
 
         default:
-          if (!target[key]) {
-            this.copy(target, key, pointer, value);
+          if (!this.isSecondaryFile) {
+            if (!target[key]) {
+              this.copy(target, key, pointer, value);
+            }
           }
           break;
       }
@@ -203,7 +221,6 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
       }
 
       this.visitComponent(key, components[key], children);
-      // this.visitComponent(key, this.newObject(components, key, pointer), children);
     }
   }
   visitComponent<T>(type: string, container: ProxyObject<Dictionary<T>>, nodes: Iterable<Node>) {
@@ -223,7 +240,8 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
           apiVersions: [this.current.info && this.current.info.version ? this.current.info.version : ''], // track the API version this came from
           filename: [this.key],                       // and the filename
           name: key,	                                // and here is the name of the component.
-          originalLocations: [originalLocation]
+          originalLocations: [originalLocation],
+          'x-ms-secondary-file': this.isSecondaryFile
         }, pointer
       };
 
@@ -237,7 +255,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
 async function merge(config: ConfigurationView, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
   const processor = new MultiAPIMerger(inputs);
-  return new QuickDataSource([await sink.WriteObject('merged oai3 doc...', processor.output, [].concat.apply([], inputs.map(each => each.Identity)), 'merged-oai3', processor.sourceMappings)], input.skip);
+  return new QuickDataSource([await sink.WriteObject('merged oai3 doc...', processor.output, [].concat.apply([], inputs.map(each => each.identity)), 'merged-oai3', processor.sourceMappings)], input.skip);
 }
 
 /* @internal */

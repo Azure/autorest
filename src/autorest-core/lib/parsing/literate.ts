@@ -15,7 +15,7 @@ export async function parse(hConfigFile: DataHandle, sink: DataSink): Promise<Ar
     const data = codeBlock.literal || '';
     const mappings = getSourceMapForCodeBlock(hConfigFile.key, codeBlock);
 
-    const hCodeBlock = await sink.WriteData(codeBlockKey, data, hConfigFile.Identity, undefined, mappings, [hConfigFile]);
+    const hCodeBlock = await sink.WriteData(codeBlockKey, data, hConfigFile.identity, undefined, mappings, [hConfigFile]);
     result.push({
       data: hCodeBlock,
       codeBlock

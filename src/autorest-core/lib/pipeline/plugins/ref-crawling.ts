@@ -5,19 +5,19 @@ export async function crawlReferences(inputScope: DataSource, filesToCrawl: Arra
   const result: Array<DataHandle> = [];
   let filesToExcludeInSearch: Array<string> = [];
   for (let i = 0; i < filesToCrawl.length; i++) {
-    const fileUri = ResolveUri(filesToCrawl[i].Location, filesToCrawl[i].Identity[0]);
+    const fileUri = ResolveUri(filesToCrawl[i].location, filesToCrawl[i].identity[0]);
     filesToExcludeInSearch.push(fileUri);
   }
 
   for (let i = 0; i < filesToCrawl.length; i++) {
     const currentSwagger = filesToCrawl[i];
     const refProcessor = new RefProcessor(currentSwagger, filesToExcludeInSearch);
-    result.push(await sink.WriteObject(currentSwagger.Description, refProcessor.output, currentSwagger.Identity, currentSwagger.GetArtifact(), refProcessor.sourceMappings, [currentSwagger]));
+    result.push(await sink.WriteObject(currentSwagger.Description, refProcessor.output, currentSwagger.identity, currentSwagger.artifactType, refProcessor.sourceMappings, [currentSwagger]));
     filesToExcludeInSearch = [...new Set([...filesToExcludeInSearch, ...refProcessor.newFilesFound])];
     for (let j = 0; j < refProcessor.newFilesFound.length; j++) {
       const originalSecondaryFile = await inputScope.ReadStrict(refProcessor.newFilesFound[j]);
       const fileMarker = new SecondaryFileMarker(originalSecondaryFile);
-      filesToCrawl.push(await sink.WriteObject(originalSecondaryFile.Description, fileMarker.output, originalSecondaryFile.Identity, originalSecondaryFile.GetArtifact(), fileMarker.sourceMappings, [originalSecondaryFile]));
+      filesToCrawl.push(await sink.WriteObject(originalSecondaryFile.Description, fileMarker.output, originalSecondaryFile.identity, originalSecondaryFile.artifactType, fileMarker.sourceMappings, [originalSecondaryFile]));
     }
   }
   return result;
@@ -31,7 +31,7 @@ class RefProcessor extends Processor<any, any> {
 
   constructor(originalFile: DataHandle, filesToExclude: Array<string>) {
     super(originalFile);
-    this.originalFileLocation = ResolveUri(originalFile.Location, originalFile.Identity[0]);
+    this.originalFileLocation = ResolveUri(originalFile.location, originalFile.identity[0]);
     this.filesToExclude = filesToExclude;
   }
 

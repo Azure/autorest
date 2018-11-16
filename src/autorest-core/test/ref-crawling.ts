@@ -33,7 +33,7 @@ import { crawlReferences } from '../lib/pipeline/plugins/ref-crawling';
     assert.strictEqual(result.length, expectedFilesUris.length);
 
     for (const resultFile of result) {
-      const resultFileName = resultFile.Identity[0].split('/').pop();
+      const resultFileName = resultFile.identity[0].split('/').pop();
       assert(resultFileName);
       const expectedFileUri = expectedFilesUris.find((element) => {
         return element.endsWith(resultFileName || '');

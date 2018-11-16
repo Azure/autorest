@@ -54,18 +54,18 @@ const resources = `${__dirname}../../../test/resources/merger`;
       const sink = ds.getDataSink();
       const output = processor.output;
 
-      const data = await sink.WriteObject('merged oai3 doc...', processor.output, inputDataHandle.Identity, 'merged-oai3', processor.sourceMappings, [inputDataHandle, inputDataHandle2]);
+      const data = await sink.WriteObject('merged oai3 doc...', processor.output, inputDataHandle.identity, 'merged-oai3', processor.sourceMappings, [inputDataHandle, inputDataHandle2]);
 
 
 
       // testing: dump out the converted file
       //console.log(FastStringify(processor.output));
 
-      // console.log(JSON.stringify(data.ReadMetadata().sourceMap.Value));
+      // console.log(JSON.stringify(data.ReadMetadata.sourceMap.Value));
 
       await aio.writeFile("c:/tmp/input.yaml", input);
       await aio.writeFile("c:/tmp/output.yaml", FastStringify(processor.output));
-      await aio.writeFile("c:/tmp/output.yaml.map", JSON.stringify(data.ReadMetadata().sourceMap.Value));
+      await aio.writeFile("c:/tmp/output.yaml.map", JSON.stringify(data.metadata.sourceMap.Value));
 
 
       // assert.deepEqual(shaker.output, outputObject, 'Should be the same');

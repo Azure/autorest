@@ -214,24 +214,20 @@ export async function LoadLiterateOpenAPIs(config: ConfigurationView, inputScope
 
 export async function LoadLiterateSwaggerOverrides(inputScope: DataSource, inputFileUris: Array<string>, sink: DataSink): Promise<Array<DataHandle>> {
   const rawSwaggers: Array<DataHandle> = [];
-  let i = 0;
   for (const inputFileUri of inputFileUris) {
     // read literate Swagger
     const pluginInput = await LoadLiterateSwaggerOverride(inputScope, inputFileUri, sink);
     rawSwaggers.push(pluginInput);
-    i++;
   }
   return rawSwaggers;
 }
 
 export async function LoadLiterateOpenAPIOverrides(inputScope: DataSource, inputFileUris: Array<string>, sink: DataSink): Promise<Array<DataHandle>> {
   const rawOpenApis: Array<DataHandle> = [];
-  let i = 0;
   for (const inputFileUri of inputFileUris) {
     // read literate OpenAPI
     const pluginInput = await LoadLiterateOpenAPIOverride(inputScope, inputFileUri, sink);
     rawOpenApis.push(pluginInput);
-    i++;
   }
   return rawOpenApis;
 }

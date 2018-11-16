@@ -39,13 +39,13 @@ async function emitArtifactInternal(config: ConfigurationView, artifactType: str
     emitArtifact({
       type: artifactType + '.map',
       uri: uri + '.map',
-      content: JSON.stringify(handle.ReadMetadata().inputSourceMap.Value, null, 2)
+      content: JSON.stringify(handle.metadata.inputSourceMap.Value, null, 2)
     });
   }
 }
 let emitCtr = 0;
 async function emitArtifact(config: ConfigurationView, uri: string, handle: DataHandle, isObject: boolean): Promise<void> {
-  const artifactType = handle.GetArtifact();
+  const artifactType = handle.artifactType;
   await emitArtifactInternal(config, artifactType, uri, handle);
 
   if (isObject) {
@@ -75,7 +75,7 @@ async function emitArtifact(config: ConfigurationView, uri: string, handle: Data
 export async function emitArtifacts(config: ConfigurationView, artifactTypeFilter: string | Array<string> | null /* what's set on the emitter */, uriResolver: (key: string) => string, scope: DataSource, isObject: boolean): Promise<void> {
   for (const key of await scope.Enum()) {
     const file = await scope.ReadStrict(key);
-    const fileArtifact = file.GetArtifact();
+    const fileArtifact = file.artifactType;
     const ok = artifactTypeFilter ?
       typeof artifactTypeFilter === 'string' ? fileArtifact === artifactTypeFilter : // A string filter is a singular type
         Array.isArray(artifactTypeFilter) ? artifactTypeFilter.includes(fileArtifact) : // an array is any one of the types

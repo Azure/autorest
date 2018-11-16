@@ -7,7 +7,7 @@ export function createYamlToJsonPlugin(): PipelinePlugin {
   return createPerFilePlugin(async () => async (fileIn, sink) => {
     let ast = fileIn.ReadYamlAst();
     ast = ConvertYaml2Jsonx(ast);
-    return sink.WriteData(fileIn.Description, StringifyAst(ast), fileIn.Identity);
+    return sink.WriteData(fileIn.Description, StringifyAst(ast), fileIn.identity);
   });
 }
 
@@ -16,6 +16,6 @@ export function createJsonToYamlPlugin(): PipelinePlugin {
   return createPerFilePlugin(async () => async (fileIn, sink) => {
     let ast = fileIn.ReadYamlAst();
     ast = ConvertJsonx2Yaml(ast);
-    return sink.WriteData(fileIn.Description, StringifyAst(ast), fileIn.Identity);
+    return sink.WriteData(fileIn.Description, StringifyAst(ast), fileIn.identity);
   });
 }

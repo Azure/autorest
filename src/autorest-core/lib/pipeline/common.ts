@@ -8,6 +8,7 @@ import { ConfigurationView } from '../configuration';
 
 export type PipelinePlugin = (config: ConfigurationView, input: DataSource, sink: DataSink) => Promise<DataSource>;
 
+/** @internal */
 export function createPerFilePlugin(processorBuilder: (config: ConfigurationView) => Promise<(input: DataHandle, sink: DataSink) => Promise<DataHandle>>): PipelinePlugin {
   return async (config, input, sink) => {
     const processor = await processorBuilder(config);

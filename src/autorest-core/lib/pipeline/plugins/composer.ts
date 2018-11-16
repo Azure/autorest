@@ -31,180 +31,201 @@ function getProperty<T, U>(obj: ObjectWithPath<T>, key: string): ObjectWithPath<
 
 async function composeSwaggers(config: ConfigurationView, overrideInfoTitle: any, overrideInfoDescription: any, inputSwaggers: Array<DataHandle>, sink: DataSink): Promise<DataHandle> {
   const inputSwaggerObjects = inputSwaggers.map(sw => sw.ReadObject<any>());
-  const candidateTitles: Array<string> = overrideInfoTitle
-    ? [overrideInfoTitle]
-    : distinct(inputSwaggerObjects.map(s => s.info).filter(i => !!i).map(i => i.title));
-  const candidateDescriptions: Array<string> = overrideInfoDescription
-    ? [overrideInfoDescription]
-    : distinct(inputSwaggerObjects.map(s => s.info).filter(i => !!i).map(i => i.description).filter(i => !!i));
-  const uniqueVersion: boolean = distinct(inputSwaggerObjects.map(s => s.info).filter(i => !!i).map(i => i.version)).length === 1;
-
-  if (candidateTitles.length === 0) { throw new Error(`No 'title' in provided OpenAPI definition(s).`); }
-  if (candidateTitles.length > 1) { throw new Error(`The 'title' across provided OpenAPI definitions has to match. Found: ${candidateTitles.map(x => `'${x}'`).join(', ')}. Please adjust or provide an override (--title=...).`); }
-  if (candidateDescriptions.length !== 1) { candidateDescriptions.splice(0, candidateDescriptions.length); }
-
-  // prepare component Swaggers (override info, lift version param, ...)
-  for (let i = 0; i < inputSwaggers.length; ++i) {
-    const inputSwagger = inputSwaggers[i];
-    const swagger = inputSwaggerObjects[i];
-    const mapping = new Array<Mapping>();
-    const populate: Array<() => void> = []; // populate swagger; deferred in order to simplify source map generation
-
-    // digest "info"
-    const info = swagger.info;
-    const version = info.version;
-    delete info.title;
-    delete info.description;
-    if (!uniqueVersion) { delete info.version; }
-
-
-    const root = { obj: swagger, path: [] };
-    const paths = getPropertyValues(getProperty(root, 'paths'));
-    const xmspaths = getPropertyValues(getProperty(root, 'x-ms-paths'));
-
-    // extract interesting nodes
-    const allPaths = From<ObjectWithPath<any>>([]).Concat(paths).Concat(xmspaths);
-
-    const methods = allPaths.SelectMany(getPropertyValues);
-
-    const parameters =
-      methods.SelectMany((method: any) => getArrayValues<any>(getProperty<any, any>(method, 'parameters'))).Concat(
-        allPaths.SelectMany((path: any) => getArrayValues<any>(getProperty<any, any>(path, 'parameters'))));
-
-    // inline api-version params
-    if (!uniqueVersion) {
-      const clientParams = swagger.components.parameters || {};
-      const apiVersionClientParamName = Object.getOwnPropertyNames(clientParams).filter(n => clientParams[n].name === 'api-version')[0];
-      const apiVersionClientParam = apiVersionClientParamName ? clientParams[apiVersionClientParamName] : null;
-      if (apiVersionClientParam) {
-        const apiVersionClientParam = clientParams[apiVersionClientParamName];
-        const apiVersionParameters = parameters.Where((p: any) => p.obj.$ref.endsWith(`#/components/parameters/${apiVersionClientParamName}`));
-        for (const apiVersionParameter of apiVersionParameters) {
-          delete apiVersionParameter.obj.$ref;
-
-          // this inlines the apiversion parameter as a constant.
-          for (const each of Object.keys(apiVersionClientParam)) {
-            if (each === 'schema') {
-              apiVersionParameter.obj[each] = {
-                type: 'string',
-                enum: [version]
-              };
-            } else {
-              apiVersionParameter.obj[each] = apiVersionClientParam[each];
-            }
+  try {
+    for (let i = 0; i < inputSwaggers.length; ++i) {
+      const swagger = inputSwaggerObjects[i];
+      // in x-ms-secondary-file files, remove everything not in components
+      if (swagger['x-ms-secondary-file']) {
+        for (const key of Object.keys(swagger)) {
+          if (!key.startsWith('x-') && key !== 'components') {
+            delete swagger[key];
           }
-          // forward client param
-          //populate.push(() => ({ ...apiVersionParameter.obj, ...apiVersionClientParam }));
-          mapping.push(...CreateAssignmentMapping(
-            apiVersionClientParam, inputSwagger.key,
-            ['parameters', apiVersionClientParamName], apiVersionParameter.path,
-            'inlining api-version'));
-
-          // make constant
-          populate.push(() => apiVersionParameter.obj.enum = [version]);
-          mapping.push({
-            name: 'inlining api-version', source: inputSwagger.key,
-            original: { path: [<JsonPathComponent>'info', 'version'] },
-            generated: { path: apiVersionParameter.path.concat('enum') }
-          });
-
-          mapping.push({
-            name: 'inlining api-version', source: inputSwagger.key,
-            original: { path: [<JsonPathComponent>'info', 'version'] },
-            generated: { path: apiVersionParameter.path.concat('enum', 0) }
-          });
-        }
-
-        // remove api-version client param
-        delete clientParams[apiVersionClientParamName];
-      }
-    }
-
-
-    // Massive Hack:
-    // inline schema $refs for operation parameters because the existing modeler doesn't unwrap $ref'd schemas for parameters
-    // this is required to keep existing generators working with the newer loader pipeline without updating the modeler
-    for (const p of Object.keys(swagger.components.parameters)) {
-      const parameter = swagger.components.parameters[p];
-      if (parameter.schema && parameter.schema.$ref) {
-        const schemaName = parameter.schema.$ref.replace(/.*\//g, '');
-        const schema = swagger.components.schemas[schemaName];
-
-        delete parameter.schema.$ref;
-        for (const item of Object.keys(schema)) {
-          parameter.schema[item] = schema[item];
         }
       }
     }
 
-    for (const r of Object.keys(swagger.components.responses)) {
-      const response = swagger.components.responses[r];
-      if (response.headers) {
-        for (const h of Object.keys(response.headers)) {
-          const header = response.headers[h];
-          if (header.$ref) {
+    const candidateTitles: Array<string> = overrideInfoTitle
+      ? [overrideInfoTitle]
+      : distinct(inputSwaggerObjects.map(s => s.info).filter(i => !!i).map(i => i.title));
+    const candidateDescriptions: Array<string> = overrideInfoDescription
+      ? [overrideInfoDescription]
+      : distinct(inputSwaggerObjects.map(s => s.info).filter(i => !!i).map(i => i.description).filter(i => !!i));
+    const uniqueVersion: boolean = distinct(inputSwaggerObjects.map(s => s.info).filter(i => !!i).map(i => i.version)).length === 1;
 
-            const headerName = header.$ref.replace(/.*\//g, '');
-            const actual = swagger.components.headers[headerName];
 
-            delete header.$ref;
-            for (const item of Object.keys(actual)) {
-              header[item] = actual[item];
+    if (candidateTitles.length === 0) { throw new Error(`No 'title' in provided OpenAPI definition(s).`); }
+    if (candidateTitles.length > 1) { throw new Error(`The 'title' across provided OpenAPI definitions has to match. Found: ${candidateTitles.map(x => `'${x}'`).join(', ')}. Please adjust or provide an override (--title=...).`); }
+    if (candidateDescriptions.length !== 1) { candidateDescriptions.splice(0, candidateDescriptions.length); }
+
+    // prepare component Swaggers (override info, lift version param, ...)
+    for (let i = 0; i < inputSwaggers.length; ++i) {
+      const inputSwagger = inputSwaggers[i];
+      const swagger = inputSwaggerObjects[i];
+      const mapping = new Array<Mapping>();
+      const populate: Array<() => void> = []; // populate swagger; deferred in order to simplify source map generation
+
+      // digest "info"
+      const info = swagger.info;
+      const version = (info ? info.version : '') || '';
+      if (info) {
+        delete info.title;
+        delete info.description;
+
+        if (!uniqueVersion) { delete info.version; }
+      }
+
+      const root = { obj: swagger, path: [] };
+      const paths = getPropertyValues(getProperty(root, 'paths'));
+      const xmspaths = getPropertyValues(getProperty(root, 'x-ms-paths'));
+
+      // extract interesting nodes
+      const allPaths = From<ObjectWithPath<any>>([]).Concat(paths).Concat(xmspaths);
+
+      const methods = allPaths.SelectMany(getPropertyValues);
+
+      const parameters =
+        methods.SelectMany((method: any) => getArrayValues<any>(getProperty<any, any>(method, 'parameters'))).Concat(
+          allPaths.SelectMany((path: any) => getArrayValues<any>(getProperty<any, any>(path, 'parameters'))));
+
+      // inline api-version params
+      if (!uniqueVersion) {
+        const clientParams = swagger.components.parameters || {};
+        const apiVersionClientParamName = Object.getOwnPropertyNames(clientParams).filter(n => clientParams[n].name === 'api-version')[0];
+        const apiVersionClientParam = apiVersionClientParamName ? clientParams[apiVersionClientParamName] : null;
+        if (apiVersionClientParam) {
+          const apiVersionClientParam = clientParams[apiVersionClientParamName];
+          const apiVersionParameters = parameters.Where((p: any) => p.obj.$ref.endsWith(`#/components/parameters/${apiVersionClientParamName}`));
+          for (const apiVersionParameter of apiVersionParameters) {
+            delete apiVersionParameter.obj.$ref;
+
+            // this inlines the apiversion parameter as a constant.
+            for (const each of Object.keys(apiVersionClientParam)) {
+              if (each === 'schema') {
+                apiVersionParameter.obj[each] = {
+                  type: 'string',
+                  enum: [version]
+                };
+              } else {
+                apiVersionParameter.obj[each] = apiVersionClientParam[each];
+              }
             }
-          }
-
-
-
-
-
-        }
-      }
-    }
-
-
-
-    // inline produces/consumes
-    for (const pc of ['produces', 'consumes']) {
-      const clientPC = swagger[pc];
-      if (clientPC) {
-        for (const method of methods) {
-          if (typeof method.obj === 'object' && !Array.isArray(method.obj) && !(<any>method.obj)[pc]) {
-            populate.push(() => (<any>method.obj)[pc] = Clone(clientPC));
+            // forward client param
+            //populate.push(() => ({ ...apiVersionParameter.obj, ...apiVersionClientParam }));
             mapping.push(...CreateAssignmentMapping(
-              clientPC, inputSwagger.key,
-              [pc], method.path.concat([pc]),
-              `inlining ${pc}`));
+              apiVersionClientParam, inputSwagger.key,
+              ['parameters', apiVersionClientParamName], apiVersionParameter.path,
+              'inlining api-version'));
+
+            // make constant
+            populate.push(() => apiVersionParameter.obj.enum = [version]);
+            mapping.push({
+              name: 'inlining api-version', source: inputSwagger.key,
+              original: { path: [<JsonPathComponent>'info', 'version'] },
+              generated: { path: apiVersionParameter.path.concat('enum') }
+            });
+
+            mapping.push({
+              name: 'inlining api-version', source: inputSwagger.key,
+              original: { path: [<JsonPathComponent>'info', 'version'] },
+              generated: { path: apiVersionParameter.path.concat('enum', 0) }
+            });
+          }
+
+          // remove api-version client param
+          delete clientParams[apiVersionClientParamName];
+        }
+      }
+
+
+      // Massive Hack:
+      // inline schema $refs for operation parameters because the existing modeler doesn't unwrap $ref'd schemas for parameters
+      // this is required to keep existing generators working with the newer loader pipeline without updating the modeler
+      if (swagger.components.parameters) {
+        for (const p of Object.keys(swagger.components.parameters)) {
+          const parameter = swagger.components.parameters[p];
+          if (parameter.schema && parameter.schema.$ref) {
+            const schemaName = parameter.schema.$ref.replace(/.*\//g, '');
+            const schema = swagger.components.schemas[schemaName];
+            if (schema) {
+              delete parameter.schema.$ref;
+              for (const item of Object.keys(schema)) {
+                parameter.schema[item] = schema[item];
+              }
+            }
           }
         }
       }
-      delete swagger[pc];
+      if (swagger.components.responses) {
+        for (const r of Object.keys(swagger.components.responses)) {
+          const response = swagger.components.responses[r];
+          if (response.headers) {
+            for (const h of Object.keys(response.headers)) {
+              const header = response.headers[h];
+              if (header.$ref) {
+
+                const headerName = header.$ref.replace(/.*\//g, '');
+                const actual = swagger.components.headers[headerName];
+
+                delete header.$ref;
+                for (const item of Object.keys(actual)) {
+                  header[item] = actual[item];
+                }
+              }
+            }
+          }
+        }
+      }
+
+
+
+
+
+      // inline produces/consumes
+      for (const pc of ['produces', 'consumes']) {
+        const clientPC = swagger[pc];
+        if (clientPC) {
+          for (const method of methods) {
+            if (typeof method.obj === 'object' && !Array.isArray(method.obj) && !(<any>method.obj)[pc]) {
+              populate.push(() => (<any>method.obj)[pc] = Clone(clientPC));
+              mapping.push(...CreateAssignmentMapping(
+                clientPC, inputSwagger.key,
+                [pc], method.path.concat([pc]),
+                `inlining ${pc}`));
+            }
+          }
+        }
+        delete swagger[pc];
+      }
+
+      // finish source map
+      pushAll(mapping, IdentitySourceMapping(inputSwagger.key, ToAst(swagger)));
+
+      // populate object
+      populate.forEach(f => f());
+
+      // write back
+      const newIdentity = new Array<string>();
+      for (const each of inputSwaggers) {
+        newIdentity.push(...each.identity);
+      }
+
+      inputSwaggers[i] = await sink.WriteObject('prepared', swagger, newIdentity, undefined, mapping, [inputSwagger]);
     }
 
-    // finish source map
-    pushAll(mapping, IdentitySourceMapping(inputSwagger.key, ToAst(swagger)));
+    let hSwagger = await MergeYamls(config, inputSwaggers, sink, true);
 
-    // populate object
-    populate.forEach(f => f());
+    // override info section
+    const info: any = { title: candidateTitles[0] };
+    if (candidateDescriptions[0]) { info.description = candidateDescriptions[0]; }
+    const hInfo = await sink.WriteObject('info.yaml', { info }, ['fix-me-4']);
 
-    // write back
-    const newIdentity = new Array<string>();
-    for (const each of inputSwaggers) {
-      newIdentity.push(...each.Identity);
-    }
+    hSwagger = await MergeYamls(config, [hSwagger, hInfo], sink);
 
-    inputSwaggers[i] = await sink.WriteObject('prepared', swagger, newIdentity, undefined, mapping, [inputSwagger]);
+    return hSwagger;
+  } catch (E) {
+    console.error(E);
+    throw E;
   }
-
-  let hSwagger = await MergeYamls(config, inputSwaggers, sink, true);
-
-  // override info section
-  const info: any = { title: candidateTitles[0] };
-  if (candidateDescriptions[0]) { info.description = candidateDescriptions[0]; }
-  const hInfo = await sink.WriteObject('info.yaml', { info }, ['fix-me-4']);
-
-  hSwagger = await MergeYamls(config, [hSwagger, hInfo], sink);
-
-  return hSwagger;
 }
 
 class ExternalRefCleaner extends Processor<any, any> {
@@ -234,7 +255,7 @@ export function createComposerPlugin(): PipelinePlugin {
     const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry('description');
     const swagger = await composeSwaggers(config, overrideTitle, overrideDescription, swaggers, sink);
     const refCleaner = new ExternalRefCleaner(swagger);
-    const result = await sink.WriteObject(swagger.Description, refCleaner.output, swagger.Identity, swagger.GetArtifact(), refCleaner.sourceMappings, [swagger]);
+    const result = await sink.WriteObject(swagger.Description, refCleaner.output, swagger.identity, swagger.artifactType, refCleaner.sourceMappings, [swagger]);
     return new QuickDataSource([result], input.skip);
   };
 }

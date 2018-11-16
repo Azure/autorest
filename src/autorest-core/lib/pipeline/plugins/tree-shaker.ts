@@ -62,7 +62,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
 
         // copy these over without worrying about moving things down to components.
         default:
-          if (!this.original['x-ms-secondary-file']) {
+          if (!this.current['x-ms-secondary-file']) {
             this.clone(targetParent, key, pointer, value);
           }
           break;
@@ -380,7 +380,7 @@ async function shakeTree(config: ConfigurationView, input: DataSource, sink: Dat
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
     const shaker = new OAI3Shaker(each);
-    result.push(await sink.WriteObject(each.Description, shaker.output, each.Identity, each.GetArtifact(), shaker.sourceMappings));
+    result.push(await sink.WriteObject(each.Description, shaker.output, each.identity, each.artifactType, shaker.sourceMappings));
   }
   return new QuickDataSource(result, input.skip);
 }

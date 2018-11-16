@@ -8,20 +8,20 @@ for Single-API version generators (ie, based using `imodeler1` ).
 
 
 ``` yaml
-pipeline:  
+pipeline:
   openapi-document/compose:
-    input: tree-shaker
-    output-artifact: openapi-document  
-  openapi-document/component-modifiers:
+    input: openapi-document/multi-api/emitter
+    output-artifact: openapi-document
+
+  openapi-document/identity:
     input: compose
     output-artifact: openapi-document
-  openapi-document/identity:
-    input: openapi-document/component-modifiers
-    output-artifact: openapi-document
+
   openapi-document/emitter:
     input: openapi-document/identity
     scope: scope-openapi-document/emitter
 
+# todo/hack: not sure what this is here for,
 scope-swagger-document/emitter:
   input-artifact: swagger-document
   is-object: true

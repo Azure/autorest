@@ -70,7 +70,7 @@ export async function manipulateObject(
   }
 
   // write back
-  const resultHandle = await target.WriteData('manipulated', StringifyAst(ast), src.Identity, undefined, mapping, mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src]);
+  const resultHandle = await target.WriteData('manipulated', StringifyAst(ast), src.identity, undefined, mapping, mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src]);
   return {
     anyHit: true,
     result: resultHandle

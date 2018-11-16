@@ -185,7 +185,7 @@ export class AutoRestExtension extends EventEmitter {
       }
       return {
         uri: handle.key,
-        type: handle.GetArtifact(),
+        type: handle.artifactType,
         content: handle.ReadData()
       };
     };
@@ -223,7 +223,7 @@ export class AutoRestExtension extends EventEmitter {
         }
         const inputs = (await inputFileHandles)
           .filter(x => {
-            return typeof artifactType !== 'string' || artifactType === x.GetArtifact();
+            return typeof artifactType !== 'string' || artifactType === x.artifactType;
           })
           .map(x => x.Description);
 

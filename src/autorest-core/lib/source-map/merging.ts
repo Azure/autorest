@@ -256,7 +256,7 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Da
 
   const newIdentity = new Array<string>();
   for (const each of yamlInputHandles) {
-    newIdentity.push(...each.Identity);
+    newIdentity.push(...each.identity);
   }
 
   for (const yamlInputHandle of yamlInputHandles) {

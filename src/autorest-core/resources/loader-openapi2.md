@@ -17,13 +17,14 @@ pipeline:
   swagger-document/individual/transform:
     input: loader-swagger
     output-artifact: swagger-document
+
   swagger-document/individual/schema-validator-swagger:
     input: individual/transform
     output-artifact: swagger-document
+
   swagger-document/individual/identity:
     input: individual/schema-validator-swagger
     output-artifact: swagger-document
-
 
 #  swagger-document/transform-immediate:
 #    input:
