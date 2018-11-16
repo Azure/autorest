@@ -50,10 +50,9 @@ const resources = `${__dirname}../../../test/resources/deduplicator`;
       //console.log(FastStringify(processor.output));
 
       // console.log(JSON.stringify(data.ReadMetadata().sourceMap.Value));
-      console.error(datastore.FastStringify(deduplicator.output));
-      // await aio.writeFile("c:/tmp/input.yaml", input);
-      // await aio.writeFile("c:/tmp/output.yaml", datastore.FastStringify(processor.deduplicated));
-      //await aio.writeFile("c:/tmp/output.yaml.map", JSON.stringify(data.ReadMetadata().sourceMap.Value));
+      await aio.writeFile("c:/tmp/input.yaml", input);
+      await aio.writeFile("c:/tmp/output.yaml", datastore.FastStringify(deduplicator.output));
+      await aio.writeFile("c:/tmp/output.yaml.map", datastore.FastStringify(deduplicator.mappings));
 
 
       // assert.deepEqual(shaker.output, outputObject, 'Should be the same');

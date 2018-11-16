@@ -89,12 +89,12 @@
      "content": {
       "application/json": {
        "schema": {
-        "$ref": "#/components/schemas/4"
+        "$ref": "#/components/schemas/10"
        }
       },
       "application/xml": {
        "schema": {
-        "$ref": "#/components/schemas/4"
+        "$ref": "#/components/schemas/10"
        }
       }
      },
@@ -134,12 +134,12 @@
      "content": {
       "application/json": {
        "schema": {
-        "$ref": "#/components/schemas/4"
+        "$ref": "#/components/schemas/10"
        }
       },
       "application/xml": {
        "schema": {
-        "$ref": "#/components/schemas/4"
+        "$ref": "#/components/schemas/10"
        }
       }
      },
@@ -198,7 +198,7 @@
         "schema": {
          "type": "array",
          "items": {
-          "$ref": "#/components/schemas/4"
+          "$ref": "#/components/schemas/10"
          }
         }
        },
@@ -206,7 +206,7 @@
         "schema": {
          "type": "array",
          "items": {
-          "$ref": "#/components/schemas/4"
+          "$ref": "#/components/schemas/10"
          }
         }
        }
@@ -269,7 +269,7 @@
         "schema": {
          "type": "array",
          "items": {
-          "$ref": "#/components/schemas/4"
+          "$ref": "#/components/schemas/10"
          }
         }
        },
@@ -277,7 +277,7 @@
         "schema": {
          "type": "array",
          "items": {
-          "$ref": "#/components/schemas/4"
+          "$ref": "#/components/schemas/10"
          }
         }
        }
@@ -336,12 +336,12 @@
       "content": {
        "application/xml": {
         "schema": {
-         "$ref": "#/components/schemas/4"
+         "$ref": "#/components/schemas/10"
         }
        },
        "application/json": {
         "schema": {
-         "$ref": "#/components/schemas/4"
+         "$ref": "#/components/schemas/10"
         }
        }
       }
@@ -497,7 +497,7 @@
       "content": {
        "application/json": {
         "schema": {
-         "$ref": "#/components/schemas/5"
+         "$ref": "#/components/schemas/11"
         }
        }
       }
