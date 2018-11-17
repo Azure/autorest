@@ -7,8 +7,8 @@ and joins the collections back into a single pipeline (it splits at load time.)
 pipeline:
   openapi-document/transform:
     input:
-      - openapi-document/openapi-document-converter	                               # openapi-document/openapi-document-converter comes from the OAI2 loader
-      - openapi-document/transform-immediate                                                   # openapi-document/transform-immediate comes from the OAI3 loader
+      - openapi-document/openapi-document-converter	          # openapi-document/openapi-document-converter comes from the OAI2 loader
+      - openapi-document/transform-immediate                  # openapi-document/transform-immediate comes from the OAI3 loader
     output-artifact: openapi-document
 
   openapi-document/tree-shaker:

@@ -3,89 +3,18 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AnyObject, DataHandle, DataSink, DataSource, Node, Processor, ProxyObject, QuickDataSource, Data, visit, Mapping, } from '@microsoft.azure/datastore';
-import * as oai from '@microsoft.azure/openapi';
-import * as deepEqual from "deep-equal";
-import { Dictionary, values, items } from '@microsoft.azure/linq';
+import { AnyObject, Data, DataHandle, DataSink, DataSource, Mapping, Node, Processor, ProxyObject, QuickDataSource, visit, } from '@microsoft.azure/datastore';
+import { Dictionary, items, values } from '@microsoft.azure/linq';
+import * as deepEqual from 'deep-equal';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
-import { type } from 'os';
-// export class DeduplicatorProcessor extends Processor<oai.Model, oai.Model> {
-
-//   process(targetParent: AnyObject, nodes: Iterable<Node>) {
-//     for (const { key, value, pointer, children } of nodes) {
-//       switch (key) {
-//         case 'components':
-//           this.visitComponents(this.newObject(targetParent, key, pointer), children);
-//           break;
-//         default:
-//           this.clone(targetParent, key, pointer, value);
-//           break;
-//       }
-//     }
-//   }
-
-//   visitComponents(components: ProxyObject<Dictionary<oai.Components>>, nodes: Iterable<Node>) {
-
-//     for (const { key, value, pointer, childIterator } of nodes) {
-//       switch (key) {
-//         case 'schemas':
-//           this.visitComponent(key, this.newObject(components, key, pointer), childIterator);
-//           break;
-//         default:
-//           this.clone(components, key, pointer, value);
-//           break;
-//       }
-
-//     }
-//   }
-
-//   visitComponent<T>(type: string, container: ProxyObject<Dictionary<T>>, nodes: () => Iterable<Node>) {
-//     const deduplicatedSchemaKeys: Array<string> = [];
-//     for (const { key, value: currentSchema, pointer, children } of nodes()) {
-//       if (!deduplicatedSchemaKeys.includes(key)) {
-//         let apiVersions = currentSchema['x-ms-metadata'].apiVersions;
-//         let filename = currentSchema['x-ms-metadata'].filename;
-//         let originalLocations = currentSchema['x-ms-metadata'].originalLocations;
-//         const name = currentSchema['x-ms-metadata'].name;
-//         const { 'x-ms-metadata': metadataCurrent, ...filteredCurrentSchema } = currentSchema;
-//         for (const { key: k, value: schema } of nodes()) {
-//           const { 'x-ms-metadata': metadataSchema, ...filteredSchema } = schema;
-//           if (deepEqual(filteredSchema, filteredCurrentSchema) && schema['x-ms-metadata'].name === currentSchema['x-ms-metadata'].name) {
-//             deduplicatedSchemaKeys.push(k);
-//             apiVersions = apiVersions.concat(schema['x-ms-metadata'].apiVersions);
-//             filename = filename.concat(schema['x-ms-metadata'].filename);
-//             originalLocations = originalLocations.concat(schema['x-ms-metadata'].originalLocations);
-//           }
-//         }
-
-//         const component: AnyObject = this.newObject(container, key, pointer);
-
-//         component['x-ms-metadata'] = {
-//           value: {
-//             apiVersions: [...new Set([...apiVersions])],
-//             filename: [...new Set([...filename])],
-//             name,
-//             originalLocations: [...new Set([...originalLocations])]
-//           }, pointer
-//         };
-
-//         for (const child of children) {
-//           if (child.key !== 'x-ms-metadata') {
-//             this.clone(component, child.key, child.pointer, child.value);
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
 
 async function deduplicate(config: ConfigurationView, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
     // const processor = new DeduplicatorProcessor(each);
-    // result.push(await sink.WriteObject(each.Description, processor.output, each.identity, each.artifactType, processor.sourceMappings));
+    // result.push(await sink.WriteObject(each.Description, processor.output, each.Identity, each.GetArtifact(), processor.sourceMappings));
   }
   return new QuickDataSource(result, input.skip);
 }
@@ -106,15 +35,15 @@ export class Deduplicator {
   // oldRefs -> newRef
   private schemaRefs = new Dictionary<string>();
 
-  // array containing uids of deduplicated schemas
-  private deduplicatedSchemas = Array<string>();
+  // Set containing uids of deduplicated schemas
+  private deduplicatedSchemas = new Set<string>();
 
   // array containing uids of schemas already crawled
-  private crawledSchemas = Array<string>();
+  private crawledSchemas = new Set<string>();
 
   // array containing uids of schemas already visited, but not necessarily crawled.
   // this prevents circular reference locks
-  private visitedSchemas = Array<string>();
+  private visitedSchemas = new Set<string>();
 
   // initially the target is the same as the original object
   private target;
@@ -124,7 +53,7 @@ export class Deduplicator {
 
   init() {
     if (this.target.components.schemas !== undefined) {
-      // construct initial table of refs
+      // construct initial table of schemaRefs
       for (const child of visit(this.target.components.schemas)) {
         this.schemaRefs[`#/components/schemas/${child.key}`] = `#/components/schemas/${child.key}`;
       }
@@ -135,8 +64,8 @@ export class Deduplicator {
 
   private deduplicateSchemas() {
     for (const { key: schemaUid } of visit(this.target.components.schemas)) {
-      if (!this.deduplicatedSchemas.includes(schemaUid)) {
-        if (!this.crawledSchemas.includes(schemaUid)) {
+      if (!this.deduplicatedSchemas.has(schemaUid)) {
+        if (!this.crawledSchemas.has(schemaUid)) {
           this.crawlSchema(schemaUid);
         }
         this.deduplicateSchema(schemaUid);
@@ -145,12 +74,13 @@ export class Deduplicator {
   }
 
   private crawlSchema(uid: string) {
-    if (!this.visitedSchemas.includes(uid)) {
-      this.visitedSchemas.push(uid);
+    if (!this.visitedSchemas.has(uid)) {
+      // use a set instead of array for all visited stuff
+      this.visitedSchemas.add(uid);
       this.crawlObject(this.target.components.schemas[uid]);
     }
 
-    this.crawledSchemas.push(uid);
+    this.crawledSchemas.add(uid);
   }
 
   private crawlObject(obj: AnyObject) {
@@ -158,8 +88,8 @@ export class Deduplicator {
       if (key === '$ref' && value.match(/#\/components\/schemas\/.+/g)) {
         const refParts = value.split('/');
         const schemaUid = refParts.pop();
-        if (!this.deduplicatedSchemas.includes(schemaUid)) {
-          if (!this.crawledSchemas.includes(schemaUid)) {
+        if (!this.deduplicatedSchemas.has(schemaUid)) {
+          if (!this.crawledSchemas.has(schemaUid)) {
             this.crawlSchema(schemaUid);
           }
           this.deduplicateSchema(schemaUid);
@@ -188,7 +118,7 @@ export class Deduplicator {
           this.schemaRefs[`#/components/schemas/${key}`] = `#/components/schemas/${uid}`;
           this.updateRefs(this.target);
           this.updateMappings(`/components/schemas/${key}`, `/components/schemas/${uid}`);
-          this.deduplicatedSchemas.push(key);
+          this.deduplicatedSchemas.add(key);
         }
       }
     }
@@ -199,7 +129,7 @@ export class Deduplicator {
       name,
       originalLocations: [...new Set([...originalLocations])]
     };
-    this.deduplicatedSchemas.push(uid);
+    this.deduplicatedSchemas.add(uid);
   }
 
   private updateMappings(oldPointer: string, newPointer: string) {
@@ -211,12 +141,11 @@ export class Deduplicator {
     }
   }
 
-  // TODO: change this to handle just schema refs.
   private updateRefs(node: any) {
     for (const { key, value } of visit(node)) {
       if (typeof value === 'object') {
         const ref = value.$ref;
-        if (ref) {
+        if (ref && ref.match(/#\/components\/schemas\/.+/g)) {
           // see if this object has a $ref
           const newRef = this.schemaRefs[ref];
           if (newRef) {

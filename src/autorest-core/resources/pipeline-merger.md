@@ -21,8 +21,12 @@ pipeline:
     input: multi-api-merger
     output-artifact: openapi-document
 
+  openapi-document/model-deduplicator:
+    input: component-modifiers
+    output-artifact: openapi-document
+
   openapi-document/multi-api/identity:
-    input: openapi-document/component-modifiers
+    input: model-deduplicator
     output-artifact: openapi-document
 
   openapi-document/multi-api/emitter:
