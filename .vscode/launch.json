@@ -28,8 +28,7 @@
       "args": [
         "--version=${workspaceRoot}/src/autorest-core",
         "--verbose",
-        "--debug",
-        "--use:C:/work/2018/autorest.modeler"
+        "--debug"
       ],
       "cwd": "${workspaceRoot}/Samples/openapi-v2/1c-multiple-input-swaggers"
     },

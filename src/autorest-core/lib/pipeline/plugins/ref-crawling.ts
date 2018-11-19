@@ -1,4 +1,4 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, Processor } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, Processor, ProxyObject, ProxyNode, visit } from '@microsoft.azure/datastore';
 import { ResolveUri } from '@microsoft.azure/uri';
 
 export async function crawlReferences(inputScope: DataSource, filesToCrawl: Array<DataHandle>, sink: DataSink): Promise<Array<DataHandle>> {
@@ -26,8 +26,8 @@ export async function crawlReferences(inputScope: DataSource, filesToCrawl: Arra
 class RefProcessor extends Processor<any, any> {
 
   public newFilesFound: Array<string> = new Array<string>();
-  public originalFileLocation: string;
-  public filesToExclude: Array<string>;
+  private originalFileLocation: string;
+  private filesToExclude: Array<string>;
 
   constructor(originalFile: DataHandle, filesToExclude: Array<string>) {
     super(originalFile);
@@ -46,13 +46,13 @@ class RefProcessor extends Processor<any, any> {
           this.newFilesFound.push(newRefFileName);
           this.filesToExclude.push(newRefFileName);
         }
-        this.copy(targetParent, key, pointer, newReference);
+        this.clone(targetParent, key, pointer, newReference);
       } else if (Array.isArray(value)) {
         this.process(this.newArray(targetParent, key, pointer), children);
       } else if (value && typeof (value) === 'object') {
         this.process(this.newObject(targetParent, key, pointer), children);
       } else {
-        this.copy(targetParent, key, pointer, value);
+        this.clone(targetParent, key, pointer, value);
       }
     }
   }
@@ -62,7 +62,7 @@ class SecondaryFileMarker extends Processor<any, any> {
 
   process(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer } of originalNodes) {
-      targetParent[key] = { value, pointer, recurse: true, filename: this.key };
+      this.clone(targetParent, key, pointer, value);
       if (!targetParent['x-ms-secondary-file']) {
         targetParent['x-ms-secondary-file'] = { value: true, pointer, filename: this.key };
       }
