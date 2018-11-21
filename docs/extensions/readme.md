@@ -33,7 +33,7 @@ The following documents describes AutoRest specific vendor extensions for [OpenA
 
 **Parent element**: [Info Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#infoObject)
 
-**Schema**: 
+**Schema**:
 
 Field Name | Type | Description
 ---|:---:|---
@@ -55,7 +55,7 @@ By default, `path` parameters will be URL-encoded automatically. This is a good 
 
 **Parent element**: [Parameter Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#parameterObject)
 
-**Schema**: 
+**Schema**:
 `true|false`
 
 **Example**:
@@ -72,7 +72,7 @@ By default, `path` parameters will be URL-encoded automatically. This is a good 
 ```
 
 ## x-ms-enum
-Enum definitions in OpenAPI indicate that only a particular set of values may be used for a property or parameter. When the property is represented on the wire as a string, it would be a natural choice to represent the property type in C# and Java as an enum. However, not all enumeration values should necessarily be represented as strongly typed enums - there are additional considerations, such as how often expected values might change, since adding a new value to a strongly typed enum is a breaking change requiring an updated API version. Additionally, there is some metadata that is required to create a useful enum, such as a descriptive name, which is not represented in vanilla OpenAPI. For this reason, enums are not automatically turned into strongly typed enum types - instead they are rendered in the documentation comments for the property or parameter to indicate allowed values. To indicate that an enum will rarely change and that C#/Java enum semantics are desired, use the `x-ms-enum` exension. Note that depending on the code generation language the behavior of this extension may differ.
+Enum definitions in OpenAPI indicate that only a particular set of values may be used for a property or parameter. When the property is represented on the wire as a string, it would be a natural choice to represent the property type in C# and Java as an enum. However, not all enumeration values should necessarily be represented as strongly typed enums - there are additional considerations, such as how often expected values might change, since adding a new value to a strongly typed enum is a breaking change requiring an updated API version. Additionally, there is some metadata that is required to create a useful enum, such as a descriptive name, which is not represented in vanilla OpenAPI. For this reason, enums are not automatically turned into strongly typed enum types - instead they are rendered in the documentation comments for the property or parameter to indicate allowed values. To indicate that an enum will rarely change and that C#/Java enum semantics are desired, use the `x-ms-enum` extension. Note that depending on the code generation language the behavior of this extension may differ.
 
 In C# and Java, an enum type is generated and is declared as the type of the related request/response object. The enum is serialized as the string expected by the REST API.
 
@@ -112,7 +112,7 @@ accountType:
 ```
 
 ### Single value enum as a constant
-- If the **single value** enum is a **required** model property or a **required** parameter then it is always treated as a constant. The `x-ms-enum` extension **is ignored**. 
+- If the **single value** enum is a **required** model property or a **required** parameter then it is always treated as a constant. The `x-ms-enum` extension **is ignored**.
   - Explanation: The above condition specifies that the server always expects the model property or the parameter and with a specific value. Hence, it makes sense to treat it as a constant. In the future, if more values are added to the enum then, it is a breaking change to the API provided by the client library.
 - If the **single value** enum is an **optional** model property or an **optional** parameter and if `x-ms-enum` extension is provided then it will be honoured.
 
@@ -170,8 +170,8 @@ Above OpenAPI definition will produce a type CustomParameterGroup with 3 propert
 
 ## x-ms-parameter-location
 
-By default Autorest processes global parameters as properties on the client. For example `subscriptionId` and `apiVersion` which are defined in the global parameters section end up being properties of the client. It would be natural to define resourceGroupName once in the global parameters section and then reference it everywhere, rather than repeating the same definition inline everywhere. One **may not** want resourceGroupName as a property on the client, just because it is defined in the global parameters section. This extension helps you achieve that. You can add this extension with value "method" 
-`"x-ms-parameter-location": "method"` and resourceGroupName will not be a client property. 
+By default Autorest processes global parameters as properties on the client. For example `subscriptionId` and `apiVersion` which are defined in the global parameters section end up being properties of the client. It would be natural to define resourceGroupName once in the global parameters section and then reference it everywhere, rather than repeating the same definition inline everywhere. One **may not** want resourceGroupName as a property on the client, just because it is defined in the global parameters section. This extension helps you achieve that. You can add this extension with value "method"
+`"x-ms-parameter-location": "method"` and resourceGroupName will not be a client property.
 
 Note:
 - Valid values for this extension are: **"client", "method"**.
@@ -314,7 +314,7 @@ x-ms-paths:
             parameters:
               - name: color
                 in: query
-                # Declaring this parameter is still necessary! 
+                # Declaring this parameter is still necessary!
                 # The `?color={color}` part of the path is
                 # completely ignored and only serves the purpose
                 # of disambiguation and documentation.
@@ -332,7 +332,7 @@ For example, a header like 'x-ms-version' would turn out like xMsVersion, or x_m
 It may be better to allow a code generator to use 'version' as the name of the parameter in client code.
 
 By using the 'x-ms-client-name' extension, a name can be defined for use specifically in code generation, separately from the name on the wire.
-It can be used for query parameters and header parameters, as well as properties of schemas.  
+It can be used for query parameters and header parameters, as well as properties of schemas.
 
 **Parameter Example**:
 ```json5
@@ -368,15 +368,15 @@ It can be used for query parameters and header parameters, as well as properties
       "properties": {
         "product_id": {
           "type": "string"
-		  "x-ms-client-name": "SKU"          
+		  "x-ms-client-name": "SKU"
         }
      }
   }
-}        
+}
 ```
 
 ## x-ms-external
-To allow generated clients to share models via shared libraries an `x-ms-external` extension was introduced. When a [Definition Objects](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#definitionsObject) contains this extensions it's definition will be excluded from generated library. Note that in strongly typed languages the code will not compile unless the assembly containing the type is referenced with the project/library. 
+To allow generated clients to share models via shared libraries an `x-ms-external` extension was introduced. When a [Definition Objects](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#definitionsObject) contains this extensions it's definition will be excluded from generated library. Note that in strongly typed languages the code will not compile unless the assembly containing the type is referenced with the project/library.
 
 **Parent element**: [Definition Objects](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#definitionsObject)
 
@@ -391,11 +391,11 @@ To allow generated clients to share models via shared libraries an `x-ms-externa
       "x-ms-external" : true,
       "properties": {
         "product_id": {
-          "type": "string"          
+          "type": "string"
         }
      }
   }
-}        
+}
 ```
 
 ## x-ms-discriminator-value
@@ -431,14 +431,14 @@ This extension allows to flatten deeply nested payloads into a more user friendl
       "prop2": "value2",
       "url": {
         "value": "http://myurl"
-      }    
-    } 
+      }
+    }
   }
 }
 ```
 can be transformed into the following client model:
 ```cs
-public class Template 
+public class Template
 {
     public string Name {get;set;}
     public string Prop1 {get;set;}
@@ -457,7 +457,7 @@ by using the following OpenAPI definition:
       "properties": {
         "x-ms-client-flatten": true,
         "$ref": "#/definitions/templateProperties"
-      } 
+      }
     }
   }
 }
@@ -469,7 +469,7 @@ client.DeployTemplate("some name", "value1", "value2", "http://myurl");
 by using the following OpenAPI definition:
 ```json5
 "post": {
-  "operationId": "DeployTemplate",        
+  "operationId": "DeployTemplate",
   "parameters": [
   {
      "name": "body",
@@ -499,7 +499,7 @@ by using the following OpenAPI definition:
       "properties": {
         "x-ms-client-flatten": true,
         "$ref": "#/definitions/templateProperties"
-	    } 
+	    }
     }
   }
 }
@@ -507,7 +507,7 @@ by using the following OpenAPI definition:
 and
 ```json5
 "post": {
-  "operationId": "DeployTemplate",        
+  "operationId": "DeployTemplate",
   "parameters": [
   {
      "name": "body",
@@ -526,13 +526,13 @@ When used, replaces the standard OpenAPI "host" attribute with a host that conta
 
 **Parent element**:  [Info Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#infoObject)
 
-**Schema**: 
+**Schema**:
 
 Field Name | Type | Description
 ---|:---:|---
 hostTemplate | `string` | **Required**. Specifies the parameterized template for the host.
-useSchemePrefix | `boolean` | **Optional, Default: true**. Specifes whether to prepend the default scheme a.k.a protocol to the base uri of client.
-positionInOperation | `string` | **Optional, Default: first**. Specifies whether the list of parameters will appear in the beginning or in the end, in the method signature for every operation. The order within the parameters provided in the below mentioned array will be preserved. Either the array of parameters will be prepended or appended, based on the value provided over here. Valid values are **"first", "last"**. Every method/operation in any programming language has parameters categorized into two buckets **"required"** and **"optional"**. It is natural for optional parameters to appear in the end in a method signature. **This aspect will be preserved, while prepending(first) or appending(last) hostTemplate parameters .** 
+useSchemePrefix | `boolean` | **Optional, Default: true**. Specifies whether to prepend the default scheme a.k.a protocol to the base uri of client.
+positionInOperation | `string` | **Optional, Default: first**. Specifies whether the list of parameters will appear in the beginning or in the end, in the method signature for every operation. The order within the parameters provided in the below mentioned array will be preserved. Either the array of parameters will be prepended or appended, based on the value provided over here. Valid values are **"first", "last"**. Every method/operation in any programming language has parameters categorized into two buckets **"required"** and **"optional"**. It is natural for optional parameters to appear in the end in a method signature. **This aspect will be preserved, while prepending(first) or appending(last) hostTemplate parameters .**
 parameters | [Array of Parameter Objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#parameterObject) | The list of parameters that are used within the hostTemplate. This can include both reference parameters as well as explicit parameters. Note that "in" is **required** and **must be** set to **"path"**. The reference parameters will be treated as **global parameters** and will end up as property of the client.
 
 **Example**:
@@ -569,7 +569,7 @@ parameters | [Array of Parameter Objects](https://github.com/OAI/OpenAPI-Specifi
       "description": "Gets the DNS suffix used as the base for all Azure Data Lake Analytics Job service requests."
     }
 ```
-- Using explicit parameters and specifying the positionInOperation and schemePrefix. 
+- Using explicit parameters and specifying the positionInOperation and schemePrefix.
    - This means that accountName will be the first required parameter in all the methods and the user is expected to provide a url (protocol + accountName), since "useSchemePrfix" is set to false.
 ```json5
 "x-ms-parameterized-host": {
@@ -603,13 +603,13 @@ Field Name | Description
 ### Rules:
 - When the extension is applied with all the three values; `"x-ms-mutability": ["create", "read", "update"]` (order of the values is not important) **OR** when this extension is not applied on a model property; it has the same effect in both the cases. Thus applying this extension with all the three values on all the settable properties is not required. This will ensure the spec is visibly cleaner.
 - When a property is modeled as `"readonly": true` then,
-  - if the x-ms-mutability extension is applied then it can **only have "read" value in the array**. 
+  - if the x-ms-mutability extension is applied then it can **only have "read" value in the array**.
   - applying the extension as `"x-ms-mutability": ["read"]` or not applying it will have the same effect.
 - When the property is modeled as **`"readonly": false`** then,
   - applying the extension as `"x-ms-mutability": ["read"]` is not allowed.
   - applying the extension as `"x-ms-mutability": ["create", "read", "update"]` or not applying it will have the same effect.
-  - applying the extension with anyother **permissible valid combination** should be fine.
-- When this extension is applied on a collection (array, dictionary) then this will have effects on the mutability (adding/removing elements) of the collection. Mutabiility of the collection cannot be applied on its elements. The mutability of the element will be governed based on the mutability defined in the element's definition.
+  - applying the extension with another **permissible valid combination** should be fine.
+- When this extension is applied on a collection (array, dictionary) then this will have effects on the mutability (adding/removing elements) of the collection. Mutability of the collection cannot be applied on its elements. The mutability of the element will be governed based on the mutability defined in the element's definition.
 
 Examples:
 - Mutability on a model definition
@@ -657,7 +657,7 @@ Examples:
 - Mutability of the object property; which is a collection of items
 ```json5
 "definitions": {
-  "ResounceCollection": {
+  "ResourceCollection": {
     "description": "Collection of Resource objects. Resource is defined in the above example.",
     "properties": {
       "value": {
@@ -666,7 +666,7 @@ Examples:
         "x-ms-mutability": ["create", "read", "update"], //This means that the array is mutable
         "items": {
           "type": object,
-          "x-ms-mutability": ["create", "read"] // X - Applying mutability on the itemType of the array or vauleType of the dictionary is not allowed.
+          "x-ms-mutability": ["create", "read"] // X - Applying mutability on the itemType of the array or valueType of the dictionary is not allowed.
           "schema": {
             "$ref": "#/definitions/Resource" // The mutability of the properties of the Resource object is governed by the mutability defined in it's model definition.
           }
@@ -685,7 +685,7 @@ More information about this extension can be found [here](https://github.com/Azu
 # Microsoft Azure Extensions (available in most generators only when using `--azure-arm`)
 
 ## x-ms-odata
-When present the `x-ms-odata` extensions indicates the operation includes one or more [OData](http://www.odata.org/) query parameters. These parameters inlude `$filter`, `$top`, `$orderby`,  `$skip`,  and `$expand`. In some languages the generated method will expose these parameters as strongly types OData type.
+When present the `x-ms-odata` extensions indicates the operation includes one or more [OData](http://www.odata.org/) query parameters. These parameters include `$filter`, `$top`, `$orderby`,  `$skip`,  and `$expand`. In some languages the generated method will expose these parameters as strongly types OData type.
 
 **Schema**:
 [`ref`](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#referenceObject) to the definition that describes object used in filter.
@@ -694,7 +694,7 @@ When present the `x-ms-odata` extensions indicates the operation includes one or
 
 **Example**:
 ```json5
-"paths": {    
+"paths": {
   "/subscriptions/resource": {
     "get": {
       "x-ms-odata": "#/definitions/Product"
@@ -859,10 +859,10 @@ When `x-ms-long-running-operation` is specified, there should also be a `x-ms-lo
 
 See [Azure RPC Spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations) for asynchronous operation notes.
 
-**Schema**: 
+**Schema**:
 Field Name | Type | Description
 ---|:---:|---
-final-state-via | `string` - one of `azure-async-operation` or `location` or `original-uri` | `final-state-via` SHOULD BE one of 
+final-state-via | `string` - one of `azure-async-operation` or `location` or `original-uri` | `final-state-via` SHOULD BE one of
   - `azure-async-operation` - (default if not specified) poll until terminal state, the final response will be available at the uri pointed to by the header `Azure-AsyncOperation`
   - `location`  - poll until terminal state, the final response will be available at the uri pointed to by the header `Location`
   - `original-uri` - poll until terminal state, the final response will be available via GET at the original resource URI. Very common for PUT operations.
@@ -892,7 +892,7 @@ Resource types as defined by the [Resource Manager API](https://msdn.microsoft.c
 
 **Parent element**:  [Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schemaObject)
 
-**Schema**: 
+**Schema**:
 `true|false`
 
 **Example**:
@@ -914,7 +914,7 @@ When set, allows to overwrite the `x-ms-request-id` response header (default is 
 
 **Parent element**:  [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
 
-**Schema**: 
+**Schema**:
 `string` - the name of the request id header to use when setting Response.RequestId property.
 
 **Example**:
@@ -934,7 +934,7 @@ When set, specifies the header parameter to be used instead of `x-ms-client-requ
 
 **Parent element**:  [Header Parameter Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#parameterObject)
 
-**Schema**: 
+**Schema**:
 `string` - the name of the client request id header to use when setting sending request.
 
 **Example**:

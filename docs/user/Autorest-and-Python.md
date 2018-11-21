@@ -2,13 +2,13 @@ This page explains how to use Autorest to generate Python code from a Swagger fi
 
 # Autorest availability
 
-Autorest release can be found on Nuget: https://www.myget.org/gallery/autorest
+Autorest release can be found on NuGet: https://www.myget.org/gallery/autorest
 
 Source code is on Github: https://github.com/Azure/autorest/
 
 For Python, I currently suggest the nightly build.
 
-## Ubuntu 
+## Ubuntu
 
 Add repo from here
 http://www.mono-project.com/docs/getting-started/install/linux
@@ -99,6 +99,6 @@ This parameter is actually a threshold based of the number of parameters. If `ft
 
 Typical value is 2.
 
-# Mainteners
+# Maintainers
 
 @lmazuel @annatisch

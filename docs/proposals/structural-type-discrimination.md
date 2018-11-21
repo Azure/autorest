@@ -8,7 +8,7 @@ This is a proposal for realizing structural type discrimination in order to enab
 It is not uncommon for an operation's response to match a selection of potential schemas.
 So far we have established the following, deterministic, straight-forward way to derive the correct schema (⇒ runtime type) for a given response:
 1. switch on *status code* (according to OpenAPI 2.0 definition)
-2. switch on `Content-Type` (clear treatment in OpenAPI 3.0; hand-wavy treatment in OpenAPI 2.0, today we effectively hardcode something based on `produces`, after all one can also send `Accept` to nail the type)
+2. switch on `Content-Type` (clear treatment in OpenAPI 3.0; hand-wavy treatment in OpenAPI 2.0, today we effectively hard code something based on `produces`, after all one can also send `Accept` to nail the type)
 3. switch on `discriminator` field, if present
 
 ### Limitations
@@ -18,7 +18,7 @@ The approach proposed here will generalize step 3.
 > A real world example: There's a service that returns 400 errors under different circumstances. It could be ASP.NET (before even calling the actual service), it could be the service. Schemas are different in both cases but can't be distinguished with our existing discrimination strategy.
 
 ### OpenAPI 2.0
-While it is also not possible to *model* the above scenario using OpenAPI 2.0: no discriminator means no obligation to try resolving to a subschema - actually, the spec makes no call about that at all, but then again, why would it, since this is exclusively a code generation issue! For our part, we could agree that even without a discriminator, we wanna look for subschemas if the base schema has `additionalProperties: { type: object }` (which we, controversially, treat in the spirit of JSON schema's `additionalProperties: true`).
+While it is also not possible to *model* the above scenario using OpenAPI 2.0: no discriminator means no obligation to try resolving to a subschema - actually, the spec makes no call about that at all, but then again, why would it, since this is exclusively a code generation issue! For our part, we could agree that even without a discriminator, we wanna look for subschemas if the base schema has `additionalProperties: { type: object }` (which we, controversially, treat in the spirit of JSON schemas `additionalProperties: true`).
 
 ### OpenAPI 3.0
 The problem becomes very real when moving to OpenAPI 3.0, which can trivially model the above scenario using `oneOf`/`anyOf` (e.g. `oneOf: [ Cat, Dog ]`, no discriminator and even no base schema a.k.a. "`Animal`" required). So when/if we're moving to OpenAPI 3.0, we will be *forced* to address the above limitations of our discrimination strategy. We may as well think about it now, potentially delivering some of the OpenAPI 3.0 goodness to our customers sooner.
@@ -48,9 +48,9 @@ In certain cases we need a reliable way to **structurally discriminate objects**
 >   properties:
 >     y: { type: number }
 >     z: { type: number }
->   additionalProperties: true 
+>   additionalProperties: true
 > ```
-> 
+>
 > Which schema/type should be chosen at runtime given static type `oneOf: [A, B, C]` when given:
 > ``` HASKELL
 > 0) x: 42
@@ -63,11 +63,11 @@ In certain cases we need a reliable way to **structurally discriminate objects**
 > 7) z: 42
 > 8) {}
 > ```
-> 
+>
 > Following the specification, the answer is:
 > ``` HASKELL
 > 0) err (no schema matches)
-> 1) err (A & B match, violating oneOf)   
+> 1) err (A & B match, violating oneOf)
 > 2) A
 > 3) err (A & C match, violating oneOf)
 > 4) err (no schema matches)
@@ -155,7 +155,7 @@ In other words: it's really in the hands of the API/OpenAPI author - if there ju
 
 Given disjoint schemas (solution 1 or 2), we *may* optimize/reduce them (as in, it is not *required* for correctness, but improves the performance of schema checking as motivated above).
 
-While there are certainly scientifically more well-founded solutions, I'd propose the following heuristics (which would totally optimize the `discriminator` example back to exactly what we currently do for disctiminators):
+While there are certainly scientifically more well-founded solutions, I'd propose the following heuristics (which would totally optimize the `discriminator` example back to exactly what we currently do for discriminators):
 
 0) given schema `S`
 1) weaken the schema `S` at some spot (more about that later), yielding `S'` with `S' ⊃ S`
