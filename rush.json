@@ -105,6 +105,12 @@
       "projectFolder": "src/autorest",
       "reviewCategory": "production",
       "shouldPublish": true
+    },
+    {
+      "packageName": "@microsoft.azure/object-comparison",
+      "projectFolder": "perks/libraries/object-comparison",
+      "reviewCategory": "production",
+      "shouldPublish": true
     }
   ]
 }

@@ -5,6 +5,7 @@
 
 import { AnyObject, Data, DataHandle, DataSink, DataSource, Mapping, Node, Processor, ProxyObject, QuickDataSource, visit, } from '@microsoft.azure/datastore';
 import { Dictionary, items, values } from '@microsoft.azure/linq';
+import { areSimilar } from '@microsoft.azure/object-comparison';
 import * as deepEqual from 'deep-equal';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
@@ -110,7 +111,7 @@ export class Deduplicator {
     for (const { key, value: schema } of visit(this.target.components.schemas)) {
       if (uid !== key) {
         const { 'x-ms-metadata': metadataSchema, ...filteredSchema } = schema;
-        if (deepEqual(filteredSchema, filteredReferencedSchema) && schema['x-ms-metadata'].name === currentSchema['x-ms-metadata'].name) {
+        if (areSimilar(filteredSchema, filteredReferencedSchema) && schema['x-ms-metadata'].name === currentSchema['x-ms-metadata'].name) {
           apiVersions = apiVersions.concat(schema['x-ms-metadata'].apiVersions);
           filename = filename.concat(schema['x-ms-metadata'].filename);
           originalLocations = originalLocations.concat(schema['x-ms-metadata'].originalLocations);
