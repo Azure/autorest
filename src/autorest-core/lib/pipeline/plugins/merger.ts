@@ -66,7 +66,8 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
       switch (key) {
         case 'paths':
           if (!this.isSecondaryFile) {
-            this.visitPaths(this.newObject(target, 'paths', pointer), children);
+            const paths = <oai.PathItem>target.paths || this.newObject(target, 'paths', pointer);
+            this.visitPaths(paths, children);
           }
           break;
 
@@ -126,7 +127,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
 
         case 'openapi':
           if (!this.isSecondaryFile) {
-            if (!target.openApi) {
+            if (!target.openapi) {
               this.copy(target, key, pointer, value);
             }
           }
