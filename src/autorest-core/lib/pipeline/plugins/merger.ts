@@ -150,7 +150,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
 
   protected expandRefs(node: any) {
     for (const { value } of visit(node)) {
-      if (typeof value === 'object') {
+      if (value && typeof value === 'object') {
         const ref = value.$ref;
         if (ref && ref.startsWith('#')) {
           // change local refs to full ref
