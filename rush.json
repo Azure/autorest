@@ -111,6 +111,12 @@
       "projectFolder": "perks/libraries/object-comparison",
       "reviewCategory": "production",
       "shouldPublish": true
+    },
+    {
+      "packageName": "@microsoft.azure/deduplication",
+      "projectFolder": "perks/libraries/deduplication",
+      "reviewCategory": "production",
+      "shouldPublish": true
     }
   ]
 }
