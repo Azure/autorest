@@ -61,8 +61,8 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
   }
 
   public process(target: ProxyObject<oai.Model>, nodes: Iterable<Node>) {
-    for (const { key, value, pointer, children } of nodes) {
 
+    for (const { key, value, pointer, children } of nodes) {
       switch (key) {
         case 'paths':
           if (!this.isSecondaryFile) {
@@ -156,6 +156,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
           // change local refs to full ref
           value.$ref = `${this.key}${ref}`;
         }
+
         // now, recurse into this object
         this.expandRefs(value);
       }
@@ -169,7 +170,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
 
   protected updateRefs(node: any) {
     for (const { key, value } of visit(node)) {
-      if (typeof value === 'object') {
+      if (value && typeof value === 'object') {
         const ref = value.$ref;
         if (ref) {
           // see if this object has a $ref
