@@ -1,11 +1,11 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, Processor, ProxyObject, ProxyNode, visit } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, Processor } from '@microsoft.azure/datastore';
 import { ResolveUri } from '@microsoft.azure/uri';
 
 export async function crawlReferences(inputScope: DataSource, filesToCrawl: Array<DataHandle>, sink: DataSink): Promise<Array<DataHandle>> {
   const result: Array<DataHandle> = [];
   let filesToExcludeInSearch: Array<string> = [];
   for (let i = 0; i < filesToCrawl.length; i++) {
-    const fileUri = ResolveUri(filesToCrawl[i].location, filesToCrawl[i].identity[0]);
+    const fileUri = ResolveUri(filesToCrawl[i].originalDirectory, filesToCrawl[i].identity[0]);
     filesToExcludeInSearch.push(fileUri);
   }
 
@@ -31,7 +31,7 @@ class RefProcessor extends Processor<any, any> {
 
   constructor(originalFile: DataHandle, filesToExclude: Array<string>) {
     super(originalFile);
-    this.originalFileLocation = ResolveUri(originalFile.location, originalFile.identity[0]);
+    this.originalFileLocation = ResolveUri(originalFile.originalDirectory, originalFile.identity[0]);
     this.filesToExclude = filesToExclude;
   }
 

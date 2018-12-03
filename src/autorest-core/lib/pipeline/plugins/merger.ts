@@ -154,7 +154,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
         const ref = value.$ref;
         if (ref && ref.startsWith('#')) {
           // change local refs to full ref
-          value.$ref = `${this.key}${ref}`;
+          value.$ref = `${this.currentInput.originalFullPath}${ref}`;
         }
 
         // now, recurse into this object
@@ -192,7 +192,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
       const uid = this.opCount++;
 
       // tag the current pointer with a the new location
-      const originalLocation = `${this.key}#${pointer}`;
+      const originalLocation = `${this.currentInput.originalFullPath}#${pointer}`;
       this.refs[originalLocation] = `#/paths/${uid}`;
 
       // for testing with local refs
@@ -231,7 +231,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
       const uid = this.cCount[type]++;
 
       // tag the current pointer with a the new location
-      const originalLocation = `${this.key}#${pointer}`;
+      const originalLocation = `${this.currentInput.originalFullPath}#${pointer}`;
       this.refs[originalLocation] = `#/components/${type}/${uid}`;
       // for testing with local refs
       this.refs[`#${pointer}`] = `#/components/${type}/${uid}`;
