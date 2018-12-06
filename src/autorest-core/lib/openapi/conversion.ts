@@ -7,7 +7,7 @@ import { DataHandle, DataSink } from '@microsoft.azure/datastore';
 import { Oai2ToOai3 } from '@microsoft.azure/oai2-to-oai3';
 
 export async function convertOAI2toOAI3(input: DataHandle, sink: DataSink): Promise<DataHandle> {
-  const converter = new Oai2ToOai3(input.key, input.ReadObject<OpenApi2Definition>());
+  const converter = new Oai2ToOai3(input.key, input.ReadObject());
   converter.convert();
   return sink.WriteObject('OpenAPI', converter.generated, input.identity);
 }
