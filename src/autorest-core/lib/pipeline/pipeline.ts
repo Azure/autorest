@@ -26,6 +26,7 @@ import { createTreeShakerPlugin } from './plugins/tree-shaker';
 import { createJsonToYamlPlugin, createYamlToJsonPlugin } from './plugins/yaml-and-json';
 import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from './schema-validation';
 import { createNewComposerPlugin } from './plugins/new-composer';
+import { createComponentCleanerPlugin } from './plugins/component-cleaner';
 
 interface PipelineNode {
   outputArtifact?: string;
@@ -182,7 +183,8 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
 
     'tree-shaker': createTreeShakerPlugin(),
     'model-deduplicator': createDeduplicatorPlugin(),
-    'multi-api-merger': createMultiApiMergerPlugin()
+    'multi-api-merger': createMultiApiMergerPlugin(),
+    'component-cleaner': createComponentCleanerPlugin(),
   };
 
   // dynamically loaded, auto-discovered plugins
