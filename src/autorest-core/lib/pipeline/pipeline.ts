@@ -212,13 +212,13 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
           tasks,
           startTime,
           blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => {
-            console.error(`Blame Calculation:${uri}, ${position}`);
+            // console.error(`Blame Calculation:${uri}, ${position}`);
             return configView.DataStore.Blame(uri, position);
           }
 
         }), (k, v) => k === 'dependencies' ? undefined : v, 2);
       } catch (e) {
-        console.error(e);
+        //console.error(e);
         return `${e}`;
       }
     }
