@@ -1,4 +1,4 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, Processor } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, Processor, ProxyObject, ProxyNode, visit } from '@microsoft.azure/datastore';
 import { ResolveUri } from '@microsoft.azure/uri';
 
 export async function crawlReferences(inputScope: DataSource, filesToCrawl: Array<DataHandle>, sink: DataSink): Promise<Array<DataHandle>> {

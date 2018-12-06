@@ -3,17 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { DataHandle, DataSink, IndexToPosition, JsonPath, Mapping, ResolvePath, stringify, Stringify, YAMLNode, Descendants, Parse } from '@microsoft.azure/datastore';
 import { pushAll } from '../array';
-import { IndexToPosition } from "@microsoft.azure/datastore";
-import { ConfigurationView } from "../configuration";
-import { Channel } from "../message";
-import { JsonPath, stringify } from "@microsoft.azure/datastore";
-import * as yaml from '@microsoft.azure/datastore';
-import { Mapping } from "@microsoft.azure/datastore";
-import { DataHandle, DataSink } from "@microsoft.azure/datastore";
-import { ResolvePath } from '@microsoft.azure/datastore';
+import { ConfigurationView } from '../configuration';
+import { Channel } from '../message';
 import { isArray } from 'util';
-import { length } from '../../../../perks/libraries/linq/dist/main';
 
 // // TODO: may want ASTy merge! (supporting circular structure and such?)
 function Merge(a: any, b: any, path: JsonPath = []): any {
@@ -27,7 +21,7 @@ function Merge(a: any, b: any, path: JsonPath = []): any {
   }
 
   // mapping nodes
-  if (typeof a === "object" && typeof b === "object") {
+  if (typeof a === 'object' && typeof b === 'object') {
     if (a instanceof Array && b instanceof Array) {
       if (a.length === 0) {
         return b;
@@ -37,7 +31,7 @@ function Merge(a: any, b: any, path: JsonPath = []): any {
       }
       // both sides gave a sequence, and they are not identical.
       // this is currently not a good thing.
-      throw new Error(`'${stringify(path)}' has two arrays that are incompatible (${yaml.Stringify(a)}, ${yaml.Stringify(b)}).`);
+      throw new Error(`'${stringify(path)}' has two arrays that are incompatible (${Stringify(a)}, ${Stringify(b)}).`);
       // // sequence nodes
       // const result = a.slice();
       // for (const belem of b) {
@@ -74,7 +68,7 @@ function Merge(a: any, b: any, path: JsonPath = []): any {
     }
   }
 
-  throw new Error(`'${stringify(path)}' has incompatible values (${yaml.Stringify(a)}, ${yaml.Stringify(b)}).`);
+  throw new Error(`'${stringify(path)}' has incompatible values (${Stringify(a)}, ${Stringify(b)}).`);
 }
 
 export function ShallowCopy(input: any, ...filter: Array<string>): any {
@@ -105,22 +99,21 @@ export function ShallowCopy(input: any, ...filter: Array<string>): any {
   return result;
 }
 
-
 function toJsValue(value: any) {
   switch (typeof (value)) {
     case 'undefined':
-      return "undefined";
-    case "boolean":
-    case "number":
+      return 'undefined';
+    case 'boolean':
+    case 'number':
       return value;
-    case "object":
+    case 'object':
       if (value === null) {
-        return "null";
+        return 'null';
       }
       if (isArray(value) && value.length === 0) {
-        return "false";
+        return 'false';
       }
-      return "true";
+      return 'true';
   }
   return `'${value}'`;
 
@@ -128,7 +121,7 @@ function toJsValue(value: any) {
 // Note: I am not convinced this works precisely as it should
 // but it works well enough for my needs right now
 // I will revisit it later.
-const macroRegEx = () => /\$\(([a-zA-Z0-9_-]*)\)/ig
+const macroRegEx = () => /\$\(([a-zA-Z0-9_-]*)\)/ig;
 export function resolveRValue(value: any, propertyName: string, higherPriority: any, lowerPriority: any, jsAware: number = 0): any {
   if (value) {
     // resolves the actual macro value.
@@ -155,7 +148,7 @@ export function resolveRValue(value: any, propertyName: string, higherPriority: 
     };
 
     // resolve the macro value for strings
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       const match = macroRegEx().exec(value.trim());
       if (match) {
         if (match[0] === match.input) {
@@ -168,7 +161,7 @@ export function resolveRValue(value: any, propertyName: string, higherPriority: 
           return resolve(match[0], match[1]);
         }
         // it looks like we should do a string replace.
-        return value.replace(macroRegEx(), resolve)
+        return value.replace(macroRegEx(), resolve);
       }
     }
 
@@ -179,7 +172,7 @@ export function resolveRValue(value: any, propertyName: string, higherPriority: 
         // since we're not naming the parameter,
         // if there isn't a higher priority,
         // we can fall back to a wide-lookup in lowerPriority.
-        result.push(resolveRValue(each, "", higherPriority || lowerPriority, null));
+        result.push(resolveRValue(each, '', higherPriority || lowerPriority, null));
       }
       return result;
     }
@@ -197,8 +190,8 @@ export function MergeOverwriteOrAppend(higherPriority: any, lowerPriority: any, 
   }
 
   // scalars/arrays involved
-  if (typeof higherPriority !== "object" || higherPriority instanceof Array ||
-    typeof lowerPriority !== "object" || lowerPriority instanceof Array) {
+  if (typeof higherPriority !== 'object' || higherPriority instanceof Array ||
+    typeof lowerPriority !== 'object' || lowerPriority instanceof Array) {
     if (!(higherPriority instanceof Array) && !(lowerPriority instanceof Array) && !concatListPathFilter(path)) {
       return higherPriority;
     }
@@ -233,9 +226,9 @@ export function MergeOverwriteOrAppend(higherPriority: any, lowerPriority: any, 
   return result;
 }
 
-export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst: yaml.YAMLNode): Array<Mapping> {
+export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst: YAMLNode): Array<Mapping> {
   const result = new Array<Mapping>();
-  const descendantsWithPath = yaml.Descendants(sourceYamlAst);
+  const descendantsWithPath = Descendants(sourceYamlAst);
   for (const descendantWithPath of descendantsWithPath) {
     const descendantPath = descendantWithPath.path;
     result.push({
@@ -248,7 +241,7 @@ export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst:
   return result;
 }
 
-export async function MergeYamls(config: ConfigurationView, yamlInputHandles: DataHandle[], sink: DataSink, verifyOAI2: boolean = false): Promise<DataHandle> {
+export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Array<DataHandle>, sink: DataSink, verifyOAI2: boolean = false): Promise<DataHandle> {
   let mergedGraph: any = {};
   const mappings = new Array<Mapping>();
   let cancel = false;
@@ -261,7 +254,7 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Da
 
   for (const yamlInputHandle of yamlInputHandles) {
     const rawYaml = yamlInputHandle.ReadData();
-    const inputGraph: any = yaml.Parse(rawYaml, (message, index) => {
+    const inputGraph: any = Parse(rawYaml, (message, index) => {
       failed = true;
       if (config) {
         config.Message({
@@ -275,7 +268,6 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Da
     mergedGraph = Merge(mergedGraph, inputGraph);
     pushAll(mappings, IdentitySourceMapping(yamlInputHandle.key, yamlInputHandle.ReadYamlAst()));
 
-
     if (verifyOAI2) {
       // check for non-identical duplicate models and parameters
 
@@ -285,10 +277,10 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Da
           const individual = inputGraph.definitions[model];
           if (!deepCompare(individual, merged)) {
             cancel = true;
-            const mergedHandle = await sink.WriteObject("merged YAMLs", mergedGraph, newIdentity, undefined, mappings, yamlInputHandles);
+            const mergedHandle = await sink.WriteObject('merged YAMLs', mergedGraph, newIdentity, undefined, mappings, yamlInputHandles);
             config.Message({
               Channel: Channel.Error,
-              Key: ["Fatal/DuplicateModelCollsion"],
+              Key: ['Fatal/DuplicateModelCollsion'],
               Text: `Duplicated model name with non-identical definitions`,
               Source: [{ document: mergedHandle.key, Position: ResolvePath(mergedHandle, ['definitions', model]) }]
 
@@ -303,10 +295,10 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Da
           const individual = inputGraph.parameters[parameter];
           if (!deepCompare(individual, merged)) {
             cancel = true;
-            const mergedHandle = await sink.WriteObject("merged YAMLs", mergedGraph, newIdentity, undefined, mappings, yamlInputHandles);
+            const mergedHandle = await sink.WriteObject('merged YAMLs', mergedGraph, newIdentity, undefined, mappings, yamlInputHandles);
             config.Message({
               Channel: Channel.Error,
-              Key: ["Fatal/DuplicateParameterCollision"],
+              Key: ['Fatal/DuplicateParameterCollision'],
               Text: `Duplicated global non-identical parameter definitions`,
               Source: [{ document: mergedHandle.key, Position: ResolvePath(mergedHandle, ['parameters', parameter]) }]
             });
@@ -317,15 +309,15 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Da
   }
 
   if (failed) {
-    throw new Error("Syntax errors encountered.");
+    throw new Error('Syntax errors encountered.');
   }
 
   if (cancel) {
     config.CancellationTokenSource.cancel();
-    throw new Error("Operation Cancelled");
+    throw new Error('Operation Cancelled');
   }
 
-  return sink.WriteObject("merged YAMLs", mergedGraph, newIdentity, undefined, mappings, yamlInputHandles);
+  return sink.WriteObject('merged YAMLs', mergedGraph, newIdentity, undefined, mappings, yamlInputHandles);
 }
 
 function deepCompare(x: any, y: any) {
@@ -339,7 +331,7 @@ function deepCompare(x: any, y: any) {
     return false;
   }
 
-  for (var p in x) {
+  for (const p in x) {
     // other properties were tested using x.constructor === y.constructor
     if (!x.hasOwnProperty(p)) {
       continue;
@@ -356,7 +348,7 @@ function deepCompare(x: any, y: any) {
     }
 
     // Numbers, Strings, Functions, Booleans must be strictly equal
-    if (typeof (x[p]) !== "object") {
+    if (typeof (x[p]) !== 'object') {
       return false;
     }
 
@@ -366,7 +358,7 @@ function deepCompare(x: any, y: any) {
     }
   }
 
-  for (p in y) {
+  for (const p in y) {
     // allows x[ p ] to be set to undefined
     if (y.hasOwnProperty(p) && !x.hasOwnProperty(p)) {
       return false;

@@ -28,7 +28,9 @@
       "args": [
         "--version=${workspaceRoot}/src/autorest-core",
         "--verbose",
-        "--debug"
+        "--debug",
+        "--csharp.output-folder=./new",
+        "--use:c:/work/2018/autorest-interactive"
       ],
       "cwd": "${workspaceRoot}/Samples/openapi-v2/1c-multiple-input-swaggers"
     },
@@ -36,7 +38,7 @@
       "name": ".NET Core Attach",
       "type": "coreclr",
       "request": "attach",
-      "processId": "${command:pickProcess}"
+      "processId": "16016"
     }
   ]
 }
