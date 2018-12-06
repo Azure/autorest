@@ -3,32 +3,22 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Extension, ExtensionManager, LocalExtension } from "@microsoft.azure/extension";
-import { ChildProcess } from "child_process";
-import { ParseToAst, Stringify } from '@microsoft.azure/datastore';
-
-import { basename, dirname, join } from "path";
+import { exists } from '@microsoft.azure/async-io';
+import { BlameTree, DataHandle, DataStore, IFileSystem, LazyPromise, ParseToAst, RealFileSystem, safeEval, Stringify, stringify, TryDecodeEnhancedPositionFromName } from '@microsoft.azure/datastore';
+import { Extension, ExtensionManager, LocalExtension } from '@microsoft.azure/extension';
+import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri } from '@microsoft.azure/uri';
+import { From } from 'linq-es2015';
+import { basename, dirname, join } from 'path';
+import { CancellationToken, CancellationTokenSource } from 'vscode-jsonrpc';
 import { Artifact } from './artifact';
 import * as Constants from './constants';
-import { DataHandle, DataStore } from '@microsoft.azure/datastore';
 import { EventEmitter, IEvent } from './events';
 import { OperationAbortedException } from './exception';
-import { IFileSystem, RealFileSystem } from '@microsoft.azure/datastore';
-import { LazyPromise } from '@microsoft.azure/datastore';
 import { Channel, Message, Range, SourceLocation } from './message';
 import { evaluateGuard, parseCodeBlocks } from './parsing/literate-yaml';
 import { AutoRestExtension } from './pipeline/plugin-endpoint';
 import { Suppressor } from './pipeline/suppression';
-import { exists } from '@microsoft.azure/async-io';
-import { CancellationToken, CancellationTokenSource } from 'vscode-jsonrpc';
-import { stringify } from '@microsoft.azure/datastore';
-import { From } from "linq-es2015";
-import { safeEval } from '@microsoft.azure/datastore';
-import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri } from '@microsoft.azure/uri';
-import { BlameTree } from '@microsoft.azure/datastore';
 import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
-import { TryDecodeEnhancedPositionFromName } from '@microsoft.azure/datastore';
-import { debug } from "util";
 
 const untildify: (path: string) => string = require('untildify');
 
@@ -498,7 +488,7 @@ export class ConfigurationView {
 
         const src = From(blameSources).SelectMany(x => x).ToArray();
         m.Source = src;
-        //m.Source = From(blameSources).SelectMany(x => x).ToArray();
+        // m.Source = From(blameSources).SelectMany(x => x).ToArray();
         // get friendly names
         for (const source of src) {
           if (source.Position) {
@@ -694,7 +684,7 @@ export class Configuration {
     const configurationFiles: { [key: string]: any; } = {};
     const configSegments: Array<any> = [];
     const createView = (segments: Array<any> = configSegments) => {
-      return new ConfigurationView(configurationFiles, this.fileSystem, messageEmitter, configFileFolderUri, ...segments)
+      return new ConfigurationView(configurationFiles, this.fileSystem, messageEmitter, configFileFolderUri, ...segments);
     };
     const addSegments = async (configs: Array<any>): Promise<Array<any>> => { const segs = await this.DesugarRawConfigs(configs); configSegments.push(...segs); return segs; };
 

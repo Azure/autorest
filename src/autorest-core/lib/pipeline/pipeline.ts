@@ -25,6 +25,7 @@ import { createImmediateTransformerPlugin, createTransformerPlugin } from './plu
 import { createTreeShakerPlugin } from './plugins/tree-shaker';
 import { createJsonToYamlPlugin, createYamlToJsonPlugin } from './plugins/yaml-and-json';
 import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from './schema-validation';
+import { createNewComposerPlugin } from './plugins/new-composer';
 
 interface PipelineNode {
   outputArtifact?: string;
@@ -162,7 +163,8 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     'md-override-loader-openapi': createMarkdownOverrideOpenApiLoaderPlugin(),
     'transform': createTransformerPlugin(),
     'transform-immediate': createImmediateTransformerPlugin(),
-    'compose': createComposerPlugin(),
+    // 'compose': createComposerPlugin(),
+    'compose': createNewComposerPlugin(),
     'schema-validator-openapi': createOpenApiSchemaValidatorPlugin(),
     'schema-validator-swagger': createSwaggerSchemaValidatorPlugin(),
     // TODO: replace with OAV again
@@ -202,14 +204,19 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
       if (key === '__info') { return false; }
       const expr = Buffer.from(key.toString(), 'base64').toString('ascii');
       try {
-        return FastStringify(safeEval(expr, {
+        return JSON.stringify(safeEval(expr, {
           pipeline: pipeline.pipeline,
           external: __extensionExtension,
           tasks,
           startTime,
-          blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => configView.DataStore.Blame(uri, position)
-        }));
+          blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => {
+            console.error(`Blame Calculation:${uri}, ${position}`);
+            return configView.DataStore.Blame(uri, position);
+          }
+
+        }), (k, v) => k === 'dependencies' ? undefined : v, 2);
       } catch (e) {
+        console.error(e);
         return `${e}`;
       }
     }
@@ -270,6 +277,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
         config.Message({ Channel: Channel.Debug, Text: `${nodeName} - END` });
         return scopeResult;
       } catch (e) {
+        console.error(e);
         config.Message({ Channel: Channel.Fatal, Text: `${nodeName} - FAILED` });
         config.Message({ Channel: Channel.Fatal, Text: `${e}` });
         throw e;

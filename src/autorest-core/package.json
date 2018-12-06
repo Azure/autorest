@@ -65,6 +65,7 @@
     "@microsoft.azure/openapi": "^2.1.16",
     "@microsoft.azure/linq": "^2.1.14",
     "@microsoft.azure/deduplication": "^1.0.0",
+    "@microsoft.azure/object-comparison": "^2.1.0",
     "commonmark": "^0.27.0",
     "jsonpath": "1.0.0",
     "linq-es2015": "^2.4.25",
