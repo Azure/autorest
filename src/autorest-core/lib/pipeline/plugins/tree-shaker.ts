@@ -48,7 +48,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
     return this.componentItem('callbacks');
   }
 
-  process(targetParent: AnyObject, originalNodes: Iterable<Node>) {
+  async process(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     // initialize certain things ahead of time:
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
@@ -380,7 +380,7 @@ async function shakeTree(config: ConfigurationView, input: DataSource, sink: Dat
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
     const shaker = new OAI3Shaker(each);
-    result.push(await sink.WriteObject(each.Description, shaker.output, each.identity, each.artifactType, shaker.sourceMappings));
+    result.push(await sink.WriteObject(each.Description, await shaker.getOutput(), each.identity, each.artifactType, await shaker.getSourceMappings()));
   }
   return new QuickDataSource(result, input.skip);
 }

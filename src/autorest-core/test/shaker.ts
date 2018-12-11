@@ -46,7 +46,7 @@ const resources = `${__dirname}../../../test/resources/shaker`;
       // testing: dump out the converted file
       // console.log(FastStringify(shaken));
 
-      assert.deepEqual(shaker.output, outputObject, 'Should be the same');
+      assert.deepEqual(await shaker.getOutput(), outputObject, 'Should be the same');
     }
   }
 }

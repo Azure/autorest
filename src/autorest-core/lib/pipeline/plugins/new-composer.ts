@@ -31,12 +31,13 @@ function distinct<T>(list: Array<T>): Array<T> {
  *
  */
 
-export class NewComposer extends MultiProcessor<AnyObject, AnyObject> {
+export class NewComposer extends Processor<AnyObject, AnyObject> {
   private uniqueVersion!: boolean;
+  refs = new Dictionary<string>();
 
 
-  constructor(inputs: Array<DataHandle>, protected overrideTitle: string | undefined, protected overrideDescription: string | undefined) {
-    super(inputs);
+  constructor(input: DataHandle, protected overrideTitle: string | undefined, protected overrideDescription: string | undefined) {
+    super(input);
   }
 
   get components(): AnyObject {
@@ -101,58 +102,48 @@ export class NewComposer extends MultiProcessor<AnyObject, AnyObject> {
     return this.current['x-ms-secondary-file'] === true;
   }
 
-  public init() {
-    const allDocuments = [...this.inputs].map(each => each.ReadObject<AnyObject>());
+  public async process(target: ProxyObject<AnyObject>, nodes: Iterable<Node>) {
+    const metadata = this.current.info ? this.current.info['x-ms-metadata'] : [];
 
     this.generated.openapi = { value: '3.0.0', pointer: '', filename: this.key };
     this.newObject(this.generated, 'info', '/info');
-    const allInfos = allDocuments.map(each => each.info).filter(i => !!i);
 
     // title for the document.
     if (this.overrideTitle) {
-      this.generated.info.title = { value: this.overrideTitle, pointer: '/info/title' };
+      this.generated.info.title = { value: this.overrideTitle, pointer: '/info/title', filename: this.key };
     } else {
       // iterate thru the files to get a list of titles.
-      const titles = distinct(allInfos.map(each => each.title).filter(i => !!i));
+      const titles = distinct(metadata.map(each => each.title).filter(i => !!i));
+
       if (titles.length === 0) {
         throw new Error(`No 'title' in provided OpenAPI definition(s).`);
       }
       if (titles.length > 1) {
         throw new Error(`The 'title' across provided OpenAPI definitions has to match. Found: ${titles.map(x => `'${x}'`).join(', ')}. Please adjust or provide an override (--title=...).`);
       }
-      this.generated.info.title = { value: titles[0], pointer: '/info/title' };
+      this.generated.info.title = { value: titles[0], pointer: '/info/title', filename: this.key };
     }
 
     // description for the document.
     if (this.overrideDescription) {
-      this.generated.info.description = { value: this.overrideDescription, pointer: '/info/description' };
+      this.generated.info.description = { value: this.overrideDescription, pointer: '/info/description', filename: this.key };
     } else {
-      const descriptions = distinct(allInfos.map(each => each.description).filter(i => !!i));
+      const descriptions = distinct(metadata.map(each => each.description).filter(i => !!i));
       if (descriptions[0]) {
-        this.generated.info.description = { value: descriptions[0], pointer: '/info/description' };
+        this.generated.info.description = { value: descriptions[0], pointer: '/info/description', filename: this.key };
       }
     }
 
-    const versions = distinct(allInfos.map(each => each.version).filter(i => !!i));
+    const versions = distinct(metadata.map(each => each.version).filter(i => !!i));
     this.uniqueVersion = versions.length > 1 ? false : true;
 
     // version for the document
     this.generated.info.version = { value: versions[0], pointer: '/info/version' };
 
-    // servers collection
-    const servers = distinct(allDocuments.map(each => each.servers).filter(i => !!i).reduce((a, b) => a.concat(b)));
-    this.generated.servers = {
-      value: servers, pointer: '/servers', filename: this.key
-    };
-  }
-
-
-  public process(target: ProxyObject<AnyObject>, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
 
       switch (key) {
         case 'paths':
-
           break;
 
         case 'components':
@@ -161,8 +152,11 @@ export class NewComposer extends MultiProcessor<AnyObject, AnyObject> {
 
         case 'openapi':
         case 'info':
-        case 'servers':
           // ignore these. We've already handled them.
+          break;
+
+        case 'servers':
+          this.clone(target, key, pointer, value);
           break;
 
         default:
@@ -176,7 +170,7 @@ export class NewComposer extends MultiProcessor<AnyObject, AnyObject> {
     }
   }
 
-  public finish() {
+  public async finish() {
     // now go thru the paths in each one of the inputs and process them.
     for (const input of values(this.inputs)) {
       this.currentInput = input;
@@ -185,15 +179,37 @@ export class NewComposer extends MultiProcessor<AnyObject, AnyObject> {
         this.visitPaths(this.paths, visit(this.current.paths));
       }
     }
+
+    // and update refs to match the re-written ones (since the key has to be the actual name for older modeler)
+    this.updateRefs(this.generated);
   }
 
+  protected updateRefs(node: any) {
+    for (const { key, value } of visit(node)) {
+      if (value && typeof value === 'object') {
+        const ref = value.$ref;
+        if (ref) {
+          // see if this object has a $ref
+          const newRef = this.refs[ref];
+          if (newRef) {
+            value.$ref = newRef;
+          } else {
+            // throw new Error(`$ref to original location '${ref}' is not found in the new refs collection`);
+          }
+        }
+        // now, recurse into this object
+        this.updateRefs(value);
+      }
+    }
+  }
   protected visitPaths(target: AnyObject, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
-      if (target[key] === undefined) {
+      const actualPath = value['x-ms-metadata'] && value['x-ms-metadata'].path ? value['x-ms-metadata'].path : key;
+      if (target[actualPath] === undefined) {
         // new object
-        this.visitPath(this.newObject(target, key, pointer), children);
+        this.visitPath(this.newObject(target, actualPath, pointer), children);
       } else {
-        if (!areSimilar(value, target[key], 'x-ms-metadata', 'description', 'summary')) {
+        if (!areSimilar(value, target[actualPath], 'x-ms-metadata', 'description', 'summary')) {
           throw new Error(`Incompatible paths conflicting: ${pointer}`);
         }
       }
@@ -202,14 +218,20 @@ export class NewComposer extends MultiProcessor<AnyObject, AnyObject> {
 
   protected visitPath(target: AnyObject, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
-      // we have to pull thru $refs  on properties and
+      this.visitOperation(this.newObject(target, key, pointer), children);
+    }
+  }
+  protected visitOperation(target: AnyObject, nodes: Iterable<Node>) {
+    for (const { key, value, pointer, children } of nodes) {
+
+      // we have to pull thru $refs on properties' *schema* and
       switch (key) {
         case 'parameters':
-          this.visitAndDeref(this.newObject(target, key, pointer), children);
+          this.visitAndDerefArray(this.newArray(target, key, pointer), children);
           break;
 
         case 'responses':
-          this.visitAndDeref(this.newObject(target, key, pointer), children);
+          this.visitAndDerefObject(this.newObject(target, key, pointer), children);
           break;
 
         default:
@@ -222,13 +244,57 @@ export class NewComposer extends MultiProcessor<AnyObject, AnyObject> {
   protected lookupRef(reference: string): AnyObject {
     // since we know that the references are all in this file
     // we should be able to find the referenced item.
-
-    return {};
+    const [, path] = reference.split('#/');
+    const [components, component, location] = path.split('/');
+    return this.current[components][component][location];
   }
 
-  protected visitAndDeref(target: AnyObject, nodes: Iterable<Node>) {
+  protected visitAndDerefArray(target: AnyObject, nodes: Iterable<Node>) {
+    // for each parameter
+    for (const { key, value, pointer, children } of nodes) {
+      // if we have more than one active api-version parameter
+      // we have to remove the global one from each method
+      // and implement a new one.
+      if (!this.uniqueVersion) {
+        // go grab the parameter from global
+        if (value.$ref) {
+          const param = this.lookupRef(value.$ref);
+
+          if (param.name === 'api-version') {
+            const p = JSON.parse(JSON.stringify(param));
+
+            p.schema = {
+              type: 'string',
+              enum: [p['x-ms-metadata']['apiVersions'][0]]
+            };
+            target.__push__({ value: p, pointer, recurse: true, filename: this.key });
+            continue;
+          }
+        }
+      }
+      target.__push__({ value: JSON.parse(JSON.stringify(value)), pointer, recurse: true, filename: this.key });
+
+      /*
+        if (value.$ref) {
+          const parameter = this.lookupRef(value.$ref);
+          if( parameter.schema && parameter.schema.$ref ) {
+            // the parameter has a referenced schema.
+            let's pull i
+          }
+
+          // look up the ref and clone it.
+          target.__push__({ value: JSON.parse(JSON.stringify(parameter)), pointer, recurse: true, filename: this.key });
+        } else {
+
+        }
+        */
+    }
+  }
+
+  protected visitAndDerefObject(target: AnyObject, nodes: Iterable<Node>) {
     // for each parameter, we have to pull thru the $ref'd parameter
     for (const { key, value, pointer, children } of nodes) {
+
       if (value.$ref) {
         // look up the ref and clone it.
         this.clone(target, key, pointer, this.lookupRef(value.$ref));
@@ -265,15 +331,13 @@ export class NewComposer extends MultiProcessor<AnyObject, AnyObject> {
     for (const { key, value, pointer } of originalNodes) {
       // schemas have to keep their name
 
-      const schemaName = (!value['type'] || value['type'] === 'object') ? value['x-ms-metadata'].name :key;
+      const schemaName = (!value['type'] || value['type'] === 'object') ? value['x-ms-metadata'].name : key;
 
       if (target[schemaName] === undefined) {
         // the value isn't in the target. We can take it from the source
         const schema = this.clone(target, schemaName, pointer, value).value;
 
-        if (schema['x-ms-metadata'] && schema['x-ms-metadata'].name && !schema['x-ms-client-name']) {
-          schema['x-ms-client-name'] = schema['x-ms-metadata'].name;
-        }
+        this.refs[`#/components/schemas/${key}`] = `#/components/schemas/${schemaName}`;
 
         if (this.isSecondaryFile) {
           // tag this as secondary, since we may end up deleting it later.
@@ -291,12 +355,40 @@ export class NewComposer extends MultiProcessor<AnyObject, AnyObject> {
     return target;
   }
 
+  protected visitParameter(parameter: ProxyObject<AnyObject>, originalNodes: Iterable<Node>) {
+    for (const { key, value, pointer, children } of originalNodes) {
+      switch (key) {
+        case 'schema':
+          if (value.$ref) {
+            this.clone(parameter, key, pointer, this.lookupRef(value.$ref));
+          } else {
+            this.clone(parameter, key, pointer, value);
+          }
+          break;
+
+        default:
+          this.clone(parameter, key, pointer, value);
+          break;
+      }
+    }
+  }
+
+  protected visitParameters(target: ProxyObject<AnyObject>, originalNodes: Iterable<Node>) {
+    for (const { key, value, pointer, children } of originalNodes) {
+      if (!this.uniqueVersion && value.name === 'api-version') {
+        // strip out the api version parameter when we inlined them.
+        continue;
+      }
+      this.visitParameter(this.newObject(target, key, pointer), children);
+    }
+    return target;
+  }
+
   visitComponents(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
         case 'schemas':
           this.visitSchemas(this.schemas, children);
-
           break;
 
         case 'responses':
@@ -304,7 +396,7 @@ export class NewComposer extends MultiProcessor<AnyObject, AnyObject> {
           break;
 
         case 'parameters':
-          this.cloneInto(this.parameters, children);
+          this.visitParameters(this.parameters, children);
           break;
 
         case 'examples':
@@ -349,8 +441,8 @@ async function compose(config: ConfigurationView, input: DataSource, sink: DataS
   const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry('description');
 
   // compose-a-vous!
-  const composer = new NewComposer(inputs, overrideTitle, overrideDescription);
-  return new QuickDataSource([await sink.WriteObject('composed oai3 doc...', composer.output, [].concat.apply([], inputs.map(each => each.identity)), 'merged-oai3', composer.sourceMappings)], input.skip);
+  const composer = new NewComposer(inputs[0], overrideTitle, overrideDescription);
+  return new QuickDataSource([await sink.WriteObject('composed oai3 doc...', await composer.getOutput(), [].concat.apply([], inputs.map(each => each.identity)), 'merged-oai3', await composer.getSourceMappings())], input.skip);
 }
 
 /* @internal */

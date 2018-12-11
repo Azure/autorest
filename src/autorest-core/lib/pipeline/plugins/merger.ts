@@ -60,7 +60,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
     return this.current['x-ms-secondary-file'] === true;
   }
 
-  public process(target: ProxyObject<oai.Model>, nodes: Iterable<Node>) {
+  public async process(target: ProxyObject<oai.Model>, nodes: Iterable<Node>) {
 
     for (const { key, value, pointer, children } of nodes) {
       switch (key) {
@@ -163,7 +163,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
     }
   }
 
-  public finish() {
+  public async finish() {
     // walk thru the generated document, find all the $refs and update them to the new location
     this.updateRefs(this.generated);
   }
@@ -257,7 +257,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
 async function merge(config: ConfigurationView, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
   const processor = new MultiAPIMerger(inputs);
-  return new QuickDataSource([await sink.WriteObject('merged oai3 doc...', processor.output, [].concat.apply([], inputs.map(each => each.identity)), 'merged-oai3', processor.sourceMappings)], input.skip);
+  return new QuickDataSource([await sink.WriteObject('merged oai3 doc...', await processor.getOutput(), [].concat.apply([], inputs.map(each => each.identity)), 'merged-oai3', await processor.getSourceMappings())], input.skip);
 }
 
 /* @internal */

@@ -52,9 +52,9 @@ const resources = `${__dirname}../../../test/resources/merger`;
       const processor = new MultiAPIMerger([inputDataHandle, inputDataHandle2]);
 
       const sink = ds.getDataSink();
-      const output = processor.output;
+      const output = await processor.getOutput();
 
-      const data = await sink.WriteObject('merged oai3 doc...', processor.output, inputDataHandle.identity, 'merged-oai3', processor.sourceMappings, [inputDataHandle, inputDataHandle2]);
+      const data = await sink.WriteObject('merged oai3 doc...', await processor.getOutput(), inputDataHandle.identity, 'merged-oai3', await processor.getSourceMappings(), [inputDataHandle, inputDataHandle2]);
 
 
 
@@ -64,7 +64,7 @@ const resources = `${__dirname}../../../test/resources/merger`;
       // console.log(JSON.stringify(data.ReadMetadata.sourceMap.Value));
 
       await aio.writeFile("c:/tmp/input.yaml", input);
-      await aio.writeFile("c:/tmp/output.yaml", FastStringify(processor.output));
+      await aio.writeFile("c:/tmp/output.yaml", FastStringify(await processor.getOutput()));
       await aio.writeFile("c:/tmp/output.yaml.map", JSON.stringify(data.metadata.sourceMap.Value));
 
 

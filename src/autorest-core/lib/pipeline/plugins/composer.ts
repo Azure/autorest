@@ -230,15 +230,15 @@ async function composeSwaggers(config: ConfigurationView, overrideInfoTitle: any
 
 class ExternalRefCleaner extends Processor<any, any> {
 
-  process(targetParent: AnyObject, originalNodes: Iterable<Node>) {
+  async process(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       if (key === '$ref') {
         const newReference = value.replace(/^.+#/g, '#');
         this.copy(targetParent, key, pointer, newReference);
       } else if (Array.isArray(value)) {
-        this.process(this.newArray(targetParent, key, pointer), children);
+        await this.process(this.newArray(targetParent, key, pointer), children);
       } else if (value && typeof (value) === 'object') {
-        this.process(this.newObject(targetParent, key, pointer), children);
+        await this.process(this.newObject(targetParent, key, pointer), children);
       } else {
         this.copy(targetParent, key, pointer, value);
       }
@@ -255,7 +255,7 @@ export function createComposerPlugin(): PipelinePlugin {
     const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry('description');
     const swagger = await composeSwaggers(config, overrideTitle, overrideDescription, swaggers, sink);
     const refCleaner = new ExternalRefCleaner(swagger);
-    const result = await sink.WriteObject(swagger.Description, refCleaner.output, swagger.identity, swagger.artifactType, refCleaner.sourceMappings, [swagger]);
+    const result = await sink.WriteObject(swagger.Description, await refCleaner.getOutput(), swagger.identity, swagger.artifactType, await refCleaner.getSourceMappings(), [swagger]);
     return new QuickDataSource([result], input.skip);
   };
 }
