@@ -1,0 +1,2206 @@
+{
+  "servers": [
+    {
+      "url": "http://petstore.swagger.io/v2"
+    }
+  ],
+  "openapi": "3.0.0",
+  "info": {
+    "description": "This is a sample server Petstore server.  You can find out more about Swagger at <a href=\"http://swagger.io\">http://swagger.io</a> or on irc.freenode.net, #swagger.  For this sample, you can use the api key \"special-key\" to test the authorization filters",
+    "version": "1.0.0",
+    "title": "Swagger Petstore",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "x-ms-metadata": [
+      {
+        "description": "This is a sample server Petstore server.  You can find out more about Swagger at <a href=\"http://swagger.io\">http://swagger.io</a> or on irc.freenode.net, #swagger.  For this sample, you can use the api key \"special-key\" to test the authorization filters",
+        "version": "1.0.0",
+        "title": "Swagger Petstore",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+          "email": "apiteam@swagger.io"
+        },
+        "license": {
+          "name": "Apache 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+      }
+    ]
+  },
+  "paths": {
+    "0": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+        ],
+        "path": "/pet?testing_byte_array=true",
+        "originalLocations": [
+          "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/paths/~1pet?testing_byte_array=true"
+        ]
+      },
+      "post": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "Fake endpoint to test byte array in body parameter for adding a new pet to the store",
+        "description": "",
+        "operationId": "addPetUsingByteArray",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          },
+          "description": "Pet object in the form of byte array",
+          "x-ms-requestBody-name": "body"
+        },
+        "x-ms-requestBody-index": 0,
+        "responses": {
+          "405": {
+            "$ref": "#/components/responses/0",
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      }
+    },
+    "1": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+        ],
+        "path": "/pet",
+        "originalLocations": [
+          "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/paths/~1pet"
+        ]
+      },
+      "post": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "Add a new pet to the store",
+        "description": "Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.",
+        "operationId": "addPet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/41"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/41"
+              }
+            }
+          },
+          "description": "Pet object that needs to be added to the store",
+          "x-ms-requestBody-name": "body"
+        },
+        "x-ms-requestBody-index": 0,
+        "responses": {
+          "405": {
+            "$ref": "#/components/responses/1",
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "Update an existing pet",
+        "description": "",
+        "operationId": "updatePet",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/41"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/41"
+              }
+            }
+          },
+          "description": "Pet object that needs to be added to the store",
+          "x-ms-requestBody-name": "body"
+        },
+        "x-ms-requestBody-index": 0,
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/2",
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "$ref": "#/components/responses/3",
+            "description": "Pet not found"
+          },
+          "405": {
+            "$ref": "#/components/responses/4",
+            "description": "Validation exception"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      }
+    },
+    "2": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+        ],
+        "path": "/pet/findByStatus",
+        "originalLocations": [
+          "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/paths/~1pet~1findByStatus"
+        ]
+      },
+      "get": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "Finds Pets by status",
+        "description": "Multiple status values can be provided with comma seperated strings",
+        "operationId": "findPetsByStatus",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/0",
+            "description": "Status values that need to be considered for filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/5",
+            "description": "successful operation"
+          },
+          "400": {
+            "$ref": "#/components/responses/6",
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      }
+    },
+    "3": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+        ],
+        "path": "/pet/findByTags",
+        "originalLocations": [
+          "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/paths/~1pet~1findByTags"
+        ]
+      },
+      "get": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "Finds Pets by tags",
+        "description": "Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.",
+        "operationId": "findPetsByTags",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/1",
+            "description": "Tags to filter by"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/7",
+            "description": "successful operation"
+          },
+          "400": {
+            "$ref": "#/components/responses/8",
+            "description": "Invalid tag value"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      }
+    },
+    "4": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+        ],
+        "path": "/pet/{petId}?testing_byte_array=true",
+        "originalLocations": [
+          "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/paths/~1pet~1{petId}?testing_byte_array=true"
+        ]
+      },
+      "get": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "Fake endpoint to test byte array return by 'Find pet by ID'",
+        "description": "Returns a pet when ID < 10.  ID > 10 or nonintegers will simulate API error conditions",
+        "operationId": "findPetsWithByteArray",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/2",
+            "description": "ID of pet that needs to be fetched"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/9",
+            "description": "successful operation"
+          },
+          "400": {
+            "$ref": "#/components/responses/10",
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "$ref": "#/components/responses/11",
+            "description": "Pet not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      }
+    },
+    "5": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+        ],
+        "path": "/pet/{petId}",
+        "originalLocations": [
+          "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/paths/~1pet~1{petId}"
+        ]
+      },
+      "get": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "Find pet by ID",
+        "description": "Returns a pet when ID < 10.  ID > 10 or nonintegers will simulate API error conditions",
+        "operationId": "getPetById",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/3",
+            "description": "ID of pet that needs to be fetched"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/12",
+            "description": "successful operation"
+          },
+          "400": {
+            "$ref": "#/components/responses/13",
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "$ref": "#/components/responses/14",
+            "description": "Pet not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "Updates a pet in the store with form data",
+        "description": "",
+        "operationId": "updatePetWithForm",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/4",
+            "description": "ID of pet that needs to be updated"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "Updated name of the pet",
+                    "type": "string"
+                  },
+                  "status": {
+                    "description": "Updated status of the pet",
+                    "type": "string"
+                  }
+                },
+                "required": []
+              }
+            }
+          },
+          "x-ms-requestBody-name": "status"
+        },
+        "x-ms-requestBody-index": 2,
+        "responses": {
+          "405": {
+            "$ref": "#/components/responses/15",
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "Deletes a pet",
+        "description": "",
+        "operationId": "deletePet",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/5",
+            "description": ""
+          },
+          {
+            "$ref": "#/components/parameters/6",
+            "description": "Pet id to delete"
+          }
+        ],
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/16",
+            "description": "Invalid pet value"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      }
+    },
+    "6": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+        ],
+        "path": "/pet/{petId}/uploadImage",
+        "originalLocations": [
+          "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/paths/~1pet~1{petId}~1uploadImage"
+        ]
+      },
+      "post": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "uploads an image",
+        "description": "",
+        "operationId": "uploadFile",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/7",
+            "description": "ID of pet to update"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "additionalMetadata": {
+                    "description": "Additional data to pass to server",
+                    "type": "string"
+                  },
+                  "file": {
+                    "description": "file to upload",
+                    "type": "file"
+                  }
+                },
+                "required": []
+              }
+            }
+          },
+          "x-ms-requestBody-name": "file"
+        },
+        "x-ms-requestBody-index": 2,
+        "responses": {
+          "default": {
+            "$ref": "#/components/responses/17",
+            "description": "successful operation"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      }
+    },
+    "7": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+        ],
+        "path": "/store/inventory",
+        "originalLocations": [
+          "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/paths/~1store~1inventory"
+        ]
+      },
+      "get": {
+        "tags": [
+          "store"
+        ],
+        "summary": "Returns pet inventories by status",
+        "description": "Returns a map of status codes to quantities",
+        "operationId": "getInventory",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/18",
+            "description": "successful operation"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "8": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+        ],
+        "path": "/store/order",
+        "originalLocations": [
+          "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/paths/~1store~1order"
+        ]
+      },
+      "post": {
+        "tags": [
+          "store"
+        ],
+        "summary": "Place an order for a pet",
+        "description": "",
+        "operationId": "placeOrder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/51"
+              }
+            }
+          },
+          "description": "order placed for purchasing the pet",
+          "x-ms-requestBody-name": "body"
+        },
+        "x-ms-requestBody-index": 0,
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/19",
+            "description": "successful operation"
+          },
+          "400": {
+            "$ref": "#/components/responses/20",
+            "description": "Invalid Order"
+          }
+        },
+        "security": [
+          {
+            "test_api_client_id": [],
+            "test_api_client_secret": []
+          }
+        ]
+      }
+    },
+    "9": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+        ],
+        "path": "/store/order/{orderId}",
+        "originalLocations": [
+          "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/paths/~1store~1order~1{orderId}"
+        ]
+      },
+      "get": {
+        "tags": [
+          "store"
+        ],
+        "summary": "Find purchase order by ID",
+        "description": "For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions",
+        "operationId": "getOrderById",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/8",
+            "description": "ID of pet that needs to be fetched"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/21",
+            "description": "successful operation"
+          },
+          "400": {
+            "$ref": "#/components/responses/22",
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "$ref": "#/components/responses/23",
+            "description": "Order not found"
+          }
+        },
+        "security": [
+          {
+            "test_api_key_header": []
+          },
+          {
+            "test_api_key_query": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "store"
+        ],
+        "summary": "Delete purchase order by ID",
+        "description": "For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors",
+        "operationId": "deleteOrder",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/9",
+            "description": "ID of the order that needs to be deleted"
+          }
+        ],
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/24",
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "$ref": "#/components/responses/25",
+            "description": "Order not found"
+          }
+        }
+      }
+    },
+    "10": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+        ],
+        "path": "/user",
+        "originalLocations": [
+          "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/paths/~1user"
+        ]
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Create user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "createUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/29"
+              }
+            }
+          },
+          "description": "Created user object",
+          "x-ms-requestBody-name": "body"
+        },
+        "x-ms-requestBody-index": 0,
+        "responses": {
+          "default": {
+            "$ref": "#/components/responses/26",
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "11": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+        ],
+        "path": "/user/createWithArray",
+        "originalLocations": [
+          "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/paths/~1user~1createWithArray"
+        ]
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Creates list of users with given input array",
+        "description": "",
+        "operationId": "createUsersWithArrayInput",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/29"
+                }
+              }
+            }
+          },
+          "description": "List of user object",
+          "x-ms-requestBody-name": "body"
+        },
+        "x-ms-requestBody-index": 0,
+        "responses": {
+          "default": {
+            "$ref": "#/components/responses/27",
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "12": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+        ],
+        "path": "/user/createWithList",
+        "originalLocations": [
+          "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/paths/~1user~1createWithList"
+        ]
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Creates list of users with given input array",
+        "description": "",
+        "operationId": "createUsersWithListInput",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/29"
+                }
+              }
+            }
+          },
+          "description": "List of user object",
+          "x-ms-requestBody-name": "body"
+        },
+        "x-ms-requestBody-index": 0,
+        "responses": {
+          "default": {
+            "$ref": "#/components/responses/28",
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "13": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+        ],
+        "path": "/user/login",
+        "originalLocations": [
+          "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/paths/~1user~1login"
+        ]
+      },
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Logs user into the system",
+        "description": "",
+        "operationId": "loginUser",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/10",
+            "description": "The user name for login"
+          },
+          {
+            "$ref": "#/components/parameters/11",
+            "description": "The password for login in clear text"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/29",
+            "description": "successful operation"
+          },
+          "400": {
+            "$ref": "#/components/responses/30",
+            "description": "Invalid username/password supplied"
+          }
+        }
+      }
+    },
+    "14": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+        ],
+        "path": "/user/logout",
+        "originalLocations": [
+          "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/paths/~1user~1logout"
+        ]
+      },
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Logs out current logged in user session",
+        "description": "",
+        "operationId": "logoutUser",
+        "responses": {
+          "default": {
+            "$ref": "#/components/responses/31",
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "15": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+        ],
+        "path": "/user/{username}",
+        "originalLocations": [
+          "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/paths/~1user~1{username}"
+        ]
+      },
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get user by user name",
+        "description": "",
+        "operationId": "getUserByName",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/12",
+            "description": "The name that needs to be fetched. Use user1 for testing. "
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/32",
+            "description": "successful operation"
+          },
+          "400": {
+            "$ref": "#/components/responses/33",
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "$ref": "#/components/responses/34",
+            "description": "User not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Updated user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/13",
+            "description": "name that need to be deleted"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/29"
+              }
+            }
+          },
+          "description": "Updated user object",
+          "x-ms-requestBody-name": "body"
+        },
+        "x-ms-requestBody-index": 1,
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/35",
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "$ref": "#/components/responses/36",
+            "description": "User not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/14",
+            "description": "The name that needs to be deleted"
+          }
+        ],
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/37",
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "$ref": "#/components/responses/38",
+            "description": "User not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "0": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-testing_byte_array-true·post·responses·405",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·pet-testing_byte_array-true·post·responses·405"
+          ]
+        },
+        "description": "Invalid input"
+      },
+      "1": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet·post·responses·405",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·pet·post·responses·405"
+          ]
+        },
+        "description": "Invalid input"
+      },
+      "2": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet·put·responses·400",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·pet·put·responses·400"
+          ]
+        },
+        "description": "Invalid ID supplied"
+      },
+      "3": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet·put·responses·404",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·pet·put·responses·404"
+          ]
+        },
+        "description": "Pet not found"
+      },
+      "4": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet·put·responses·405",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·pet·put·responses·405"
+          ]
+        },
+        "description": "Validation exception"
+      },
+      "5": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-findbystatus·get·responses·200",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·pet-findbystatus·get·responses·200"
+          ]
+        },
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/2"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/3"
+            }
+          }
+        }
+      },
+      "6": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-findbystatus·get·responses·400",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·pet-findbystatus·get·responses·400"
+          ]
+        },
+        "description": "Invalid status value"
+      },
+      "7": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-findbytags·get·responses·200",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·pet-findbytags·get·responses·200"
+          ]
+        },
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/6"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/7"
+            }
+          }
+        }
+      },
+      "8": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-findbytags·get·responses·400",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·pet-findbytags·get·responses·400"
+          ]
+        },
+        "description": "Invalid tag value"
+      },
+      "9": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-petid-testing_byte_array-true·get·responses·200",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·pet-petid-testing_byte_array-true·get·responses·200"
+          ]
+        },
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/9"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/10"
+            }
+          }
+        }
+      },
+      "10": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-petid-testing_byte_array-true·get·responses·400",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·pet-petid-testing_byte_array-true·get·responses·400"
+          ]
+        },
+        "description": "Invalid ID supplied"
+      },
+      "11": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-petid-testing_byte_array-true·get·responses·404",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·pet-petid-testing_byte_array-true·get·responses·404"
+          ]
+        },
+        "description": "Pet not found"
+      },
+      "12": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-petid·get·responses·200",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·pet-petid·get·responses·200"
+          ]
+        },
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/41"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/41"
+            }
+          }
+        }
+      },
+      "13": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-petid·get·responses·400",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·pet-petid·get·responses·400"
+          ]
+        },
+        "description": "Invalid ID supplied"
+      },
+      "14": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-petid·get·responses·404",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·pet-petid·get·responses·404"
+          ]
+        },
+        "description": "Pet not found"
+      },
+      "15": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-petid·post·responses·405",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·pet-petid·post·responses·405"
+          ]
+        },
+        "description": "Invalid input"
+      },
+      "16": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-petid·delete·responses·400",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·pet-petid·delete·responses·400"
+          ]
+        },
+        "description": "Invalid pet value"
+      },
+      "17": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-petid-uploadimage·post·responses·default",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·pet-petid-uploadimage·post·responses·default"
+          ]
+        },
+        "description": "successful operation"
+      },
+      "18": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·store-inventory·get·responses·200",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·store-inventory·get·responses·200"
+          ]
+        },
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/16"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/18"
+            }
+          }
+        }
+      },
+      "19": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·store-order·post·responses·200",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·store-order·post·responses·200"
+          ]
+        },
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/51"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/51"
+            }
+          }
+        }
+      },
+      "20": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·store-order·post·responses·400",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·store-order·post·responses·400"
+          ]
+        },
+        "description": "Invalid Order"
+      },
+      "21": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·store-order-orderid·get·responses·200",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·store-order-orderid·get·responses·200"
+          ]
+        },
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/51"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/51"
+            }
+          }
+        }
+      },
+      "22": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·store-order-orderid·get·responses·400",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·store-order-orderid·get·responses·400"
+          ]
+        },
+        "description": "Invalid ID supplied"
+      },
+      "23": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·store-order-orderid·get·responses·404",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·store-order-orderid·get·responses·404"
+          ]
+        },
+        "description": "Order not found"
+      },
+      "24": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·store-order-orderid·delete·responses·400",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·store-order-orderid·delete·responses·400"
+          ]
+        },
+        "description": "Invalid ID supplied"
+      },
+      "25": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·store-order-orderid·delete·responses·404",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·store-order-orderid·delete·responses·404"
+          ]
+        },
+        "description": "Order not found"
+      },
+      "26": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·user·post·responses·default",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·user·post·responses·default"
+          ]
+        },
+        "description": "successful operation"
+      },
+      "27": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·user-createwitharray·post·responses·default",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·user-createwitharray·post·responses·default"
+          ]
+        },
+        "description": "successful operation"
+      },
+      "28": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·user-createwithlist·post·responses·default",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·user-createwithlist·post·responses·default"
+          ]
+        },
+        "description": "successful operation"
+      },
+      "29": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·user-login·get·responses·200",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·user-login·get·responses·200"
+          ]
+        },
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/24"
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/25"
+            }
+          }
+        }
+      },
+      "30": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·user-login·get·responses·400",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·user-login·get·responses·400"
+          ]
+        },
+        "description": "Invalid username/password supplied"
+      },
+      "31": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·user-logout·get·responses·default",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·user-logout·get·responses·default"
+          ]
+        },
+        "description": "successful operation"
+      },
+      "32": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·user-username·get·responses·200",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·user-username·get·responses·200"
+          ]
+        },
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/29"
+            },
+            "examples": {
+              "response": {
+                "value": {
+                  "id": 1,
+                  "username": "johnp",
+                  "firstName": "John",
+                  "lastName": "Public",
+                  "email": "johnp@swagger.io",
+                  "password": "-secret-",
+                  "phone": "0123456789",
+                  "userStatus": 0
+                }
+              }
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/29"
+            }
+          }
+        }
+      },
+      "33": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·user-username·get·responses·400",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·user-username·get·responses·400"
+          ]
+        },
+        "description": "Invalid username supplied"
+      },
+      "34": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·user-username·get·responses·404",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·user-username·get·responses·404"
+          ]
+        },
+        "description": "User not found"
+      },
+      "35": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·user-username·put·responses·400",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·user-username·put·responses·400"
+          ]
+        },
+        "description": "Invalid user supplied"
+      },
+      "36": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·user-username·put·responses·404",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·user-username·put·responses·404"
+          ]
+        },
+        "description": "User not found"
+      },
+      "37": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·user-username·delete·responses·400",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·user-username·delete·responses·400"
+          ]
+        },
+        "description": "Invalid username supplied"
+      },
+      "38": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·user-username·delete·responses·404",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/responses/paths·user-username·delete·responses·404"
+          ]
+        },
+        "description": "User not found"
+      }
+    },
+    "parameters": {
+      "0": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-findbystatus·get·parameters·0",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/parameters/paths·pet-findbystatus·get·parameters·0"
+          ]
+        },
+        "name": "status",
+        "in": "query",
+        "description": "Status values that need to be considered for filter",
+        "required": false,
+        "style": "form",
+        "schema": {
+          "$ref": "#/components/schemas/0"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "1": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-findbytags·get·parameters·0",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/parameters/paths·pet-findbytags·get·parameters·0"
+          ]
+        },
+        "name": "tags",
+        "in": "query",
+        "description": "Tags to filter by",
+        "required": false,
+        "style": "form",
+        "schema": {
+          "$ref": "#/components/schemas/4"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "2": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-petid-testing_byte_array-true·get·parameters·0",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/parameters/paths·pet-petid-testing_byte_array-true·get·parameters·0"
+          ]
+        },
+        "name": "petId",
+        "in": "path",
+        "description": "ID of pet that needs to be fetched",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/8"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "3": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-petid·get·parameters·0",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/parameters/paths·pet-petid·get·parameters·0"
+          ]
+        },
+        "name": "petId",
+        "in": "path",
+        "description": "ID of pet that needs to be fetched",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/11"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "4": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-petid·post·parameters·0",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/parameters/paths·pet-petid·post·parameters·0"
+          ]
+        },
+        "name": "petId",
+        "in": "path",
+        "description": "ID of pet that needs to be updated",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/12"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "5": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-petid·delete·parameters·0",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/parameters/paths·pet-petid·delete·parameters·0"
+          ]
+        },
+        "name": "api_key",
+        "in": "header",
+        "description": "",
+        "required": false,
+        "schema": {
+          "$ref": "#/components/schemas/13"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "6": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-petid·delete·parameters·1",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/parameters/paths·pet-petid·delete·parameters·1"
+          ]
+        },
+        "name": "petId",
+        "in": "path",
+        "description": "Pet id to delete",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/14"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "7": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·pet-petid-uploadimage·post·parameters·0",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/parameters/paths·pet-petid-uploadimage·post·parameters·0"
+          ]
+        },
+        "name": "petId",
+        "in": "path",
+        "description": "ID of pet to update",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/15"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "8": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·store-order-orderid·get·parameters·0",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/parameters/paths·store-order-orderid·get·parameters·0"
+          ]
+        },
+        "name": "orderId",
+        "in": "path",
+        "description": "ID of pet that needs to be fetched",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/20"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "9": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·store-order-orderid·delete·parameters·0",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/parameters/paths·store-order-orderid·delete·parameters·0"
+          ]
+        },
+        "name": "orderId",
+        "in": "path",
+        "description": "ID of the order that needs to be deleted",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/21"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "10": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·user-login·get·parameters·0",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/parameters/paths·user-login·get·parameters·0"
+          ]
+        },
+        "name": "username",
+        "in": "query",
+        "description": "The user name for login",
+        "required": false,
+        "schema": {
+          "$ref": "#/components/schemas/22"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "11": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·user-login·get·parameters·1",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/parameters/paths·user-login·get·parameters·1"
+          ]
+        },
+        "name": "password",
+        "in": "query",
+        "description": "The password for login in clear text",
+        "required": false,
+        "schema": {
+          "$ref": "#/components/schemas/23"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "12": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·user-username·get·parameters·0",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/parameters/paths·user-username·get·parameters·0"
+          ]
+        },
+        "name": "username",
+        "in": "path",
+        "description": "The name that needs to be fetched. Use user1 for testing. ",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/26"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "13": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·user-username·put·parameters·0",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/parameters/paths·user-username·put·parameters·0"
+          ]
+        },
+        "name": "username",
+        "in": "path",
+        "description": "name that need to be deleted",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/27"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "14": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "paths·user-username·delete·parameters·0",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/parameters/paths·user-username·delete·parameters·0"
+          ]
+        },
+        "name": "username",
+        "in": "path",
+        "description": "The name that needs to be deleted",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/28"
+        },
+        "x-ms-parameter-location": "method"
+      }
+    },
+    "schemas": {
+      "Tag": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "Tag",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/schemas/Tag"
+          ]
+        },
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/components·schemas·tag·properties·id"
+          },
+          "name": {
+            "$ref": "#/components/schemas/components·schemas·tag·properties·name"
+          }
+        },
+        "xml": {
+          "name": "Tag"
+        }
+      },
+      "components·schemas·tag·properties·id": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "components·schemas·tag·properties·id",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/schemas/components·schemas·tag·properties·id"
+          ]
+        },
+        "type": "integer",
+        "format": "int64"
+      },
+      "components·schemas·tag·properties·name": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "components·schemas·tag·properties·name",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/schemas/components·schemas·tag·properties·name"
+          ]
+        },
+        "type": "string"
+      }
+    },
+    "securitySchemes": {
+      "0": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "api_key",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/securitySchemes/api_key"
+          ]
+        },
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      },
+      "1": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "petstore_auth",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/securitySchemes/petstore_auth"
+          ]
+        },
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "http://petstore.swagger.io/api/oauth/dialog",
+            "scopes": {
+              "write:pets": "modify pets in your account",
+              "read:pets": "read your pets"
+            }
+          }
+        }
+      },
+      "2": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "test_api_client_id",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/securitySchemes/test_api_client_id"
+          ]
+        },
+        "type": "apiKey",
+        "name": "x-test_api_client_id",
+        "in": "header"
+      },
+      "3": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "test_api_client_secret",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/securitySchemes/test_api_client_secret"
+          ]
+        },
+        "type": "apiKey",
+        "name": "x-test_api_client_secret",
+        "in": "header"
+      },
+      "4": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "test_api_key_header",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/securitySchemes/test_api_key_header"
+          ]
+        },
+        "type": "apiKey",
+        "name": "test_api_key_header",
+        "in": "header"
+      },
+      "5": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem:///102?file%3A%2F%2F%2FC%3A%2FWork%2Fautorest%2FSamples%2Fopenapi-v2%2F1a-code-generation-minimal%2Fp%25C3%25A9tst%25C3%25B6re.json"
+          ],
+          "name": "test_api_key_query",
+          "originalLocations": [
+            "file:///C:/Work/autorest/Samples/openapi-v2/1a-code-generation-minimal/p%C3%A9tst%C3%B6re.json#/components/securitySchemes/test_api_key_query"
+          ]
+        },
+        "type": "apiKey",
+        "name": "test_api_key_query",
+        "in": "query"
+      }
+    }
+  }
+}

@@ -27,6 +27,7 @@ import { createJsonToYamlPlugin, createYamlToJsonPlugin } from './plugins/yaml-a
 import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from './schema-validation';
 import { createNewComposerPlugin } from './plugins/new-composer';
 import { createComponentCleanerPlugin } from './plugins/component-cleaner';
+import { createComponentKeyRenamerPlugin } from './plugins/component-key-renamer';
 
 interface PipelineNode {
   outputArtifact?: string;
@@ -185,6 +186,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     'model-deduplicator': createDeduplicatorPlugin(),
     'multi-api-merger': createMultiApiMergerPlugin(),
     'component-cleaner': createComponentCleanerPlugin(),
+    'component-key-renamer': createComponentKeyRenamerPlugin()
   };
 
   // dynamically loaded, auto-discovered plugins
