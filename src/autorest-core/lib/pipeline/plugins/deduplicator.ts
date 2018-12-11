@@ -15,7 +15,7 @@ async function deduplicate(config: ConfigurationView, input: DataSource, sink: D
     const deduplicator = new Deduplicator(each.ReadObject());
 
     // TODO: Construct source map from the mappings returned by the deduplicator.
-    result.push(await sink.WriteObject(each.Description, deduplicator.output, each.identity, each.artifactType, [/*fix-me*/]));
+    result.push(await sink.WriteObject('deduplicated-oai3-doc...', deduplicator.output, each.identity, 'deduplicated-oai3', [/*fix-me*/]));
   }
   return new QuickDataSource(result, input.skip);
 }
