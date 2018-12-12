@@ -28,6 +28,7 @@ import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin 
 import { createNewComposerPlugin } from './plugins/new-composer';
 import { createComponentCleanerPlugin } from './plugins/component-cleaner';
 import { createComponentKeyRenamerPlugin } from './plugins/component-key-renamer';
+import { createApiVersionParameterHandlerPlugin } from './plugins/version-param-handler';
 
 interface PipelineNode {
   outputArtifact?: string;
@@ -186,7 +187,8 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     'model-deduplicator': createDeduplicatorPlugin(),
     'multi-api-merger': createMultiApiMergerPlugin(),
     'component-cleaner': createComponentCleanerPlugin(),
-    'component-key-renamer': createComponentKeyRenamerPlugin()
+    'component-key-renamer': createComponentKeyRenamerPlugin(),
+    'api-version-parameter-handler': createApiVersionParameterHandlerPlugin(),
   };
 
   // dynamically loaded, auto-discovered plugins
