@@ -8,7 +8,7 @@ export class ApiVersionParameterHandler extends Processor<any, oai.Model> {
   // oldRefs -> newRefs;
   apiVersionReferences = new Set<string>();
 
-  public init() {
+  public async init() {
     const allDocuments = [...this.inputs].map(each => each.ReadObject<AnyObject>());
     const currentDoc = allDocuments[0];
 
@@ -21,7 +21,7 @@ export class ApiVersionParameterHandler extends Processor<any, oai.Model> {
     }
   }
 
-  public process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {
+  public async process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
         case 'components':
@@ -144,7 +144,7 @@ async function handleApiVersionParameter(config: ConfigurationView, input: DataS
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
     const processor = new ApiVersionParameterHandler(each);
-    result.push(await sink.WriteObject('oai3 without api-version parameters...', processor.output, each.identity, 'oi3-apiVersion-parameter-free', processor.sourceMappings));
+    result.push(await sink.WriteObject('oai3 without api-version parameters...', await processor.getOutput(), each.identity, 'oi3-apiVersion-parameter-free', await processor.getSourceMappings()));
   }
   return new QuickDataSource(result, input.skip);
 }
