@@ -8,7 +8,7 @@ export class ComponentKeyRenamer extends Processor<any, oai.Model> {
   // oldRefs -> newRefs;
   newRefs = new Dictionary<string>();
 
-  public process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {
+  public async process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {
     // initialize certain things ahead of time:
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
@@ -59,7 +59,7 @@ export class ComponentKeyRenamer extends Processor<any, oai.Model> {
     }
   }
 
-  public finish() {
+  public async finish() {
     // walk thru the generated document, find all the $refs and update them to the new location
     this.updateRefs(this.generated);
   }
@@ -87,7 +87,7 @@ async function renameComponentsKeys(config: ConfigurationView, input: DataSource
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
     const processor = new ComponentKeyRenamer(each);
-    result.push(await sink.WriteObject('oai3-component-renamed doc...', processor.output, each.identity, 'oi3-component-renamed', processor.sourceMappings));
+    result.push(await sink.WriteObject('oai3-component-renamed doc...', await processor.getOutput(), each.identity, 'oi3-component-renamed', await processor.getSourceMappings()));
   }
   return new QuickDataSource(result, input.skip);
 }

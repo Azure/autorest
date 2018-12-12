@@ -10,7 +10,7 @@ for Single-API version generators (ie, based using `imodeler1` ).
 ``` yaml
 pipeline:
   openapi-document/compose:
-    input: openapi-document/component-modifiers # just before deduplication.
+    input: openapi-document/model-deduplicator # just before deduplication.
     output-artifact: openapi-document
 
   openapi-document/identity:

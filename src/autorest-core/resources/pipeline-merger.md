@@ -20,6 +20,12 @@ pipeline:
   openapi-document/component-modifiers:
     input: multi-api-merger
     output-artifact: openapi-document
+
+  openapi-document/model-deduplicator:
+    input: component-modifiers
+    output-artifact: openapi-document
+
+
 ```
 # shh
   openapi-document/model-deduplicator:

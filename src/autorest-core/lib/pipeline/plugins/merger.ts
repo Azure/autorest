@@ -189,7 +189,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
 
   visitPaths(paths: ProxyObject<Dictionary<oai.PathItem>>, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
-      const uid = this.opCount++;
+      const uid = `path:${this.opCount++}`;
 
       // tag the current pointer with a the new location
       const originalLocation = `${this.currentInput.originalFullPath}#${pointer}`;
@@ -228,7 +228,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
   visitComponent<T>(type: string, container: ProxyObject<Dictionary<T>>, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
 
-      const uid = this.cCount[type]++;
+      const uid = `${type}:${this.cCount[type]++}`;
 
       // tag the current pointer with a the new location
       const originalLocation = `${this.currentInput.originalFullPath}#${pointer}`;

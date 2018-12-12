@@ -207,7 +207,27 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
 
   visitProperties(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
-      this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
+      // if the property has a schema that type 'string', 'boolean', 'integer', 'number' then we'll just leave it inline
+      switch (value.type) {
+        case 'string':
+        case 'boolean':
+        case 'integer':
+        case 'number':
+        case 'array':
+          this.clone(targetParent, key, pointer, value);
+          break;
+
+        default:
+          // inline objects had a name of '<Class><PropertyName>'
+          // the dereference method will use the full path to build a name, and we should ask it to use the same thing that
+          // we were using before..
+          const pc = parseJsonPointer(pointer);
+          const nameHint = `${pc[pc.length - 3]} ${pc[pc.length - 1]}`;
+
+          this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children, nameHint);
+          break;
+      }
+
     }
   }
 
@@ -339,7 +359,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
     }
   }
 
-  dereference(baseReferencePath: string, targetCollection: AnyObject, visitor: (tp: any, on: Iterable<Node>) => void, targetParent: AnyObject, key: string, pointer: string, value: any, children: Iterable<Node>) {
+  dereference(baseReferencePath: string, targetCollection: AnyObject, visitor: (tp: any, on: Iterable<Node>) => void, targetParent: AnyObject, key: string, pointer: string, value: any, children: Iterable<Node>, nameHint?: string) {
     if (value.$ref) {
       // it's a reference already.
       return this.clone(targetParent, key, pointer, value);
@@ -355,7 +375,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
     // not a reference, move the item
 
     // generate a unique id for the shaken item.
-    const id = `${parseJsonPointer(pointer).map(each => `${each}`.toLowerCase().replace(/\W+/g, '-').split('-').filter(each => each).join('-')).filter(each => each).join('·')}`.replace(/\·+/g, '·');
+    const id = nameHint || `${parseJsonPointer(pointer).map(each => `${each}`.toLowerCase().replace(/\W+/g, '-').split('-').filter(each => each).join('-')).filter(each => each).join('·')}`.replace(/\·+/g, '·');
 
     // set the current location's object to be a $ref
     targetParent[key] = {

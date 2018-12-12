@@ -1,6 +1,6 @@
 import { AnyObject, DataHandle, DataSink, DataSource, MultiProcessor, Node, ProxyObject, QuickDataSource, visit, Processor, ProxyNode } from '@microsoft.azure/datastore';
-import { values, Dictionary, keys } from '@microsoft.azure/linq';
-
+import { values, Dictionary, keys, clone } from '@microsoft.azure/linq';
+import * as assert from 'assert';
 import * as oai from '@microsoft.azure/openapi';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
@@ -320,6 +320,7 @@ export class NewComposer extends Processor<AnyObject, AnyObject> {
         }
       } else {
         if (!areSimilar(value, target[key], 'x-ms-metadata', 'description', 'summary')) {
+
           throw new Error(`Incompatible models conflicting: ${pointer}`);
         }
       }
@@ -332,6 +333,10 @@ export class NewComposer extends Processor<AnyObject, AnyObject> {
       // schemas have to keep their name
 
       const schemaName = (!value['type'] || value['type'] === 'object') ? value['x-ms-metadata'].name : key;
+
+      // this is pulling up the name of the schema back from the x-ms-metadata.
+      // we do this because we don't want to alter the modeler
+      // this is being added to the merger, since it looks like we want this behavior there too.
 
       if (target[schemaName] === undefined) {
         // the value isn't in the target. We can take it from the source
@@ -348,7 +353,17 @@ export class NewComposer extends Processor<AnyObject, AnyObject> {
         }
       } else {
         if (!areSimilar(value, target[schemaName], 'x-ms-metadata', 'description', 'summary')) {
+          try {
+            const a = clone(value, false, undefined, ['x-ms-metadata', 'description', 'summary']);
+            const b = clone(target[schemaName], false, undefined, ['x-ms-metadata', 'description', 'summary']);
+            assert.deepStrictEqual(a, b);
+          } catch (E) {
+            console.error(E);
+          }
+
+
           throw new Error(`Incompatible models conflicting: ${schemaName}`);
+
         }
       }
     }
