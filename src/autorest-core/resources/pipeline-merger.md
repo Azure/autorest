@@ -21,23 +21,24 @@ pipeline:
     input: multi-api-merger
     output-artifact: openapi-document
 
-  openapi-document/model-deduplicator:
+  openapi-document/api-version-parameter-handler:
     input: component-modifiers
     output-artifact: openapi-document
 
-
-```
-# shh
   openapi-document/model-deduplicator:
-    input: component-modifiers
+    input: api-version-parameter-handler
+    output-artifact: openapi-document
+
+  openapi-document/component-key-renamer:
+    input: model-deduplicator
     output-artifact: openapi-document
 
   openapi-document/multi-api/identity:
-    input: model-deduplicator
+    input: component-key-renamer
     output-artifact: openapi-document
 
   openapi-document/multi-api/emitter:
     input: openapi-document/multi-api/identity
     scope: scope-openapi-document/emitter
 
-# ```
+```
