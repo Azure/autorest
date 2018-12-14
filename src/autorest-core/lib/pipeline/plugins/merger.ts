@@ -1,5 +1,5 @@
-import { DataSink, DataSource, MultiProcessor, Node, ProxyObject, QuickDataSource, visit, AnyObject, } from '@microsoft.azure/datastore';
-import { clone, Dictionary } from '@microsoft.azure/linq';
+import { DataSink, DataSource, MultiProcessor, Node, ProxyObject, QuickDataSource, visit, AnyObject, DataHandle } from '@microsoft.azure/datastore';
+import { clone, Dictionary, values } from '@microsoft.azure/linq';
 
 import * as oai from '@microsoft.azure/openapi';
 import { ConfigurationView } from '../../configuration';
@@ -53,11 +53,27 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
   cCount = new Dictionary<number>();
   refs = new Dictionary<string>();
 
+  descriptions = new Set();
+  apiVersions = new Set();
+  titles = new Set();
+
+  constructor(input: Array<DataHandle>, protected overrideTitle: string | undefined, protected overrideDescription: string | undefined) {
+    super(input);
+  }
+
   /**
    * returns true when the current source file is marked x-ms-secondary-file: true
    */
   protected get isSecondaryFile(): boolean {
     return this.current['x-ms-secondary-file'] === true;
+  }
+
+  protected get info() {
+    return <AnyObject>this.getOrCreateObject(this.generated, 'info', '/info');
+  }
+
+  protected get metadata() {
+    return <AnyObject>this.getOrCreateObject(this.info, 'x-ms-metadata', '/');
   }
 
   public async process(target: ProxyObject<oai.Model>, nodes: Iterable<Node>) {
@@ -93,19 +109,43 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
 
         case 'info':
           if (!this.isSecondaryFile) {
-            if (!target.info) {
-              this.newObject(target, 'info', pointer);
-              for (const child of children) {
-                this.copy(<oai.Info>target.info, child.key, child.pointer, child.value, true);
-              }
+            const info = <AnyObject>this.getOrCreateObject(target, 'info', pointer);
+
+            // things we need to play with...
+            if (value.title) {
+              this.titles.add(value.title);
             }
-            const metadata = target.info['x-ms-metadata'] || this.newArray(<oai.Info>target.info, 'x-ms-metadata', pointer);
+            if (value.description) {
+              this.descriptions.add(value.description);
+            }
+            if (value.version) {
+              this.apiVersions.add(value.version);
+            }
+
+            // set these based on what we got first.
+            if (value.termsOfService && !info.termsOfService) {
+              info.termsOfService = { value: value.termsOfService, pointer: `${pointer}/termsOfService` };
+            }
+            if (value.contact && !info.contact) {
+              this.clone(info, 'contact', pointer, value.contact);
+            }
+            if (value.license && !info.license) {
+              this.clone(info, 'license', pointer, value.contact);
+            }
+
+            /*
+            // create a metadata array
+            const metadata = this.getOrCreateArray(info, 'x-ms-metadata', pointer);
+
+            // and push this info to that array.
             metadata.__push__({
               value: clone(value),
               pointer,
               recurse: true
             });
+            */
           }
+
           break;
 
         case 'externalDocs':
@@ -164,6 +204,34 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
   }
 
   public async finish() {
+    const info = <AnyObject>this.generated.info;
+    // set the document's info that we haven't processed yet.
+    if (this.overrideTitle) {
+      info.title = { value: this.overrideTitle, pointer: '/info/title', filename: this.key };
+    } else {
+      const titles = [...this.titles.values()];
+
+      if (titles.length === 0) {
+        throw new Error(`No 'title' in provided OpenAPI definition(s).`);
+      }
+      if (titles.length > 1) {
+        throw new Error(`The 'title' across provided OpenAPI definitions has to match. Found: ${titles.map(x => `'${x}'`).join(', ')}. Please adjust or provide an override (--title=...).`);
+      }
+      info.title = { value: titles[0], pointer: '/info/title', filename: this.key };
+    }
+
+    if (this.overrideDescription) {
+      info.description = { value: this.overrideDescription, pointer: '/info/description', filename: this.key };
+    } else {
+      const descriptions = [...this.descriptions.values()];
+      if (descriptions[0]) {
+        info.description = { value: descriptions[0], pointer: '/info/description', filename: this.key };
+      }
+    }
+    const versions = [...this.apiVersions.values()];
+    this.metadata.apiVersions = { value: versions, pointer: '/' };
+    info.version = { value: versions[0], pointer: '/info/version' } // todo: should this be the max version?
+
     // walk thru the generated document, find all the $refs and update them to the new location
     this.updateRefs(this.generated);
   }
@@ -256,7 +324,15 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
 
 async function merge(config: ConfigurationView, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
-  const processor = new MultiAPIMerger(inputs);
+
+
+  const overrideInfo = config.GetEntry('override-info');
+  const overrideTitle = (overrideInfo && overrideInfo.title) || config.GetEntry('title');
+  const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry('description');
+
+  const processor = new MultiAPIMerger(inputs, overrideTitle, overrideDescription);
+
+
   return new QuickDataSource([await sink.WriteObject('merged oai3 doc...', await processor.getOutput(), [].concat.apply([], inputs.map(each => each.identity)), 'merged-oai3', await processor.getSourceMappings())], input.skip);
 }
 

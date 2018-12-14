@@ -49,7 +49,7 @@ const resources = `${__dirname}../../../test/resources/merger`;
     // if (inputDataHandle && outputDataHandle) {
     if (inputDataHandle && inputDataHandle2) {
       // const outputObject = outputDataHandle.ReadObject();
-      const processor = new MultiAPIMerger([inputDataHandle, inputDataHandle2]);
+      const processor = new MultiAPIMerger([inputDataHandle, inputDataHandle2], undefined, undefined);
 
       const sink = ds.getDataSink();
       const output = await processor.getOutput();
