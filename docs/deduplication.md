@@ -541,7 +541,7 @@ From Compute 2016-03-30 -> 2017-03-30
 
 "HardwareProfile": {
       "properties": {
-        "vmSize": {
+        "vmSize": { 
           "type": "string",
           "description": "Specifies the size of the virtual ...",
           "enum": [
@@ -699,6 +699,8 @@ From Compute 2016-03-30 -> 2017-03-30
 
 
 ### **'allOf' reference removed**
+
+From /2017-12-01/Compute.json -> /2018-04-01/Compute.json
 
 ### Conflict:
 
@@ -1175,3 +1177,114 @@ Keep the latest.
       ...
     }
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+Notes:
+
+
+Subseting():
+1. Sort schemas by api-version from latest to oldest
+2. For currentSchema of Schemas:
+      For anotherSchema  of Schemas *ignoring the current of course*:
+        if anotherSchemas has the same metadataname as currentSchema and anotherSchema isSubset(currentSchema):
+          Transform the currentSchema into a schema that contains an allOf relation
+            This means, replace properties that are in anotherSchema with an allOf reference,
+            and keep the properties that are not in anotherSchema.
+          Replace antherSchema overlaping properties with currentSchema properties
+          Continue
+
+
+<!-- isSubset(oldSchema, newSchema, skipList):
+  Check that every property with the same name between the oldSchema and newSchema areSimilar() // ignoring description, readOnly, enum, etc.
+  if there is a subset relation, return an object with {isSubset: true/false, similarPropertiesOfNew: Array<string>()} -->
+
+
+Interface subsetData
+{
+  isSubset: boolean:
+  expandableFieldsNewValues: Dictionary<fieldName, newFieldValues: Dictionary<string, values>>
+  newFields: Dictionary<string, values>
+}
+
+
+isSubsetUber(oldSchema, newSchema, expandableFields, skipList):
+  For every field from old that can be expanded (e.g. properies, required)
+    if oldField is expandable:
+      if oldField is subset of newField
+        add matching values of newField to subsetData
+      else 
+        return subsetData with false
+    else if oldField is not in newSchema and is not in skipList
+      return subsetData with false
+
+    return subsetData with true and add skipListFields that are in newSchema in subsetData's newFields
+    
+  
+
+
+
+Renaming():
+  namesAssigned = new Set<string>()
+  1. Sort components from old to new
+  2. For component of Components:
+        extract name from metadata
+        if !namesAssigned.has(name):
+          replace key for name
+          namesAssigned.add(name)
+        else:
+          construct a newName
+          replace key for newName
+          namesAssigned.add(newName)
+
+0:             
+  a:
+  b:
+
+1: 
+  a:
+  b:
+  c:
+
+2:
+  a:
+  b:
+  c:
+  y:
+  x:
+
+3: 
+  a:
+  b:
+  c:
+  d:
+
+4:
+  a:
+  b:
+  c:
+  x:
+
+5:
+  a:
+  b:
+  d:
+
+
+                0
+              /   \
+              1    5
+            /   \ nope
+            4    3
+
+           
