@@ -71,10 +71,6 @@ From Compute 2015-06-15 -> 2016-03-30 -> 2017-03-30
             "$ref": "#/definitions/VirtualMachineExtension"
           },
           "description": "The virtual machine child extension resources."
-        },
-        "identity": {
-          "$ref": "#/definitions/VirtualMachineIdentity",
-          "description": "The identity of the virtual machine, if configured."
         }
       },
       "allOf": [
@@ -251,7 +247,7 @@ From Compute 2015-06-15 -> 2016-03-30
     }
 ```
 ### Resolution:
-(TBD) Keep both (?)
+Keep latest.
 
 ```json
 
@@ -305,7 +301,7 @@ From Compute 2015-06-15 -> 2016-03-30
 ```
 
 ### Resolution:
-(TBD) Keep both (?)
+Keep latest.
 
 ```json
 "DiskEncryptionSettings": {
@@ -357,7 +353,7 @@ From Compute 2015-06-15 -> 2016-03-30
 ```
 
 ### Resolution:
-(TBD) Keep the latest model.
+Keep latest.
 
 ```json
 "VirtualMachineScaleSetProperties": {
@@ -429,7 +425,7 @@ From Compute 2016-03-30 -> 2017-03-03
 
 Resolution: 
 
-(TBD) The model after allOf is resolved is equivalent to a model with additional properties and one extra field. So we can use composition: 
+The model after allOf is resolved is equivalent to a model with additional properties and one extra field. So we can use composition: 
 
 ```json 
 "ImageReference": {
@@ -501,7 +497,7 @@ From Compute 2016-03-30 -> 2017-03-30
 ```
 
 ### Resolution:
-(TBD) Keep the newest model(?) 
+Keep latest.
 
 ```json
 "OSDisk": {
@@ -654,7 +650,7 @@ From Compute 2016-03-30 -> 2017-03-30
 ```
 
 ### Resolution:
- (TBD) If after resolution they refer to similar models, then just take the latest, and if they refer to non-similar models, keep both:
+If after resolution they refer to similar models, then just take the latest, and if they refer to non-similar models, keep both:
 
 ```json
 "VirtualMachineScaleSetExtension___OLD___": {
@@ -723,8 +719,7 @@ From /2017-12-01/Compute.json -> /2018-04-01/Compute.json
 ```
 
 ### Resolution:
-
- (TBD) Keep both (?)
+Keep both.
 
 ### **'modelAsString' changed**
 
@@ -748,7 +743,6 @@ From Compute 2017-03-30 -> 2017-12-01
 ```
 
 ### Resolution:
-
 Keep the latest. 
 
 ### **'properties' of 'properties' of model changed
@@ -964,7 +958,7 @@ From DNS 2015-05-4-preview -> 2018-03-01-preview
 
 ### Resolution:
 
-(TBD) Keep both (?)
+Keep both.
 
 ```json
 "Zone": {
@@ -1028,7 +1022,7 @@ From DNS 2015-05-4-preview -> 2018-03-01-preview
 
 ### Resolution: 
 
-(TBD) Keep both (?)
+Keep both.
 
 ```json
 "RecordSetProperties": {
@@ -1065,7 +1059,7 @@ From DNS 2015-05-4-preview -> 2018-03-01-preview
 ```
 
 
-### **change in  capitalization for properties**
+### **change in  capitalization of property names**
 
 From iothub 2017-07-01 to 2018-01-22
 
@@ -1090,7 +1084,7 @@ From iothub 2017-07-01 to 2018-01-22
 
 ### Resolution:
 
-(TBD) Keep both. 
+Keep both. 
 
 ```json
 "OperationInputs": {
