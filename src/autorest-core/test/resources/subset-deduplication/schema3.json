@@ -1,0 +1,37 @@
+{
+  "properties": {
+    "plan": {
+      "$ref": "#/definitions/Plan",
+      "description": "Specifies information about the marketplace image used to create the virtual machine..."
+    },
+    "properties": {
+      "x-ms-client-flatten": true,
+      "$ref": "#/definitions/VirtualMachineProperties"
+    },
+    "resources": {
+      "readOnly": true,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/VirtualMachineExtension"
+      },
+      "description": "NEWEST: The virtual machine child extension resources."
+    },
+    "identity": {
+      "$ref": "#/definitions/VirtualMachineIdentity",
+      "description": "The identity of the virtual machine, if configured."
+    },
+    "zones": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The virtual machine zones."
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/Resource"
+    }
+  ],
+  "description": "Describes a Virtual Machine."
+}

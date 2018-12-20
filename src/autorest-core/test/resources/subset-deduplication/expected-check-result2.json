@@ -1,0 +1,33 @@
+{
+  "isSubset": true,
+  "nonExpandableFieldsUpdates": {},
+  "expandableFieldsMatches": {
+    "properties": {
+      "plan": {
+        "$ref": "#/definitions/Plan",
+        "description": "Specifies information about the marketplace image used to create the virtual machine..."
+      },
+      "properties": {
+        "x-ms-client-flatten": true,
+        "$ref": "#/definitions/VirtualMachineProperties"
+      },
+      "resources": {
+        "readOnly": true,
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/VirtualMachineExtension"
+        },
+        "description": "NEWEST: The virtual machine child extension resources."
+      },
+      "identity": {
+        "$ref": "#/definitions/VirtualMachineIdentity",
+        "description": "The identity of the virtual machine, if configured."
+      }
+    },
+    "allOf": [
+      {
+        "$ref": "#/definitions/Resource"
+      }
+    ]
+  }
+}
