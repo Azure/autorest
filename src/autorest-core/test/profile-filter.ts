@@ -3,20 +3,22 @@ import * as aio from '@microsoft.azure/async-io';
 import * as datastore from '@microsoft.azure/datastore';
 import * as assert from 'assert';
 import { suite, test } from 'mocha-typescript';
-import { ObjectFilter } from '../lib/pipeline/plugins/version-filter';
+import { ProfileFilter } from '../lib/pipeline/plugins/profile-filter';
 
 const resources = `${__dirname}../../../test/resources/version-filter`;
 
-@suite class VersionFiltering {
+@suite class ProfileFiltering {
 
   @test async 'filter paths and schemas based on API version'() {
     const inputUri = 'mem://input1.json';
     const outputUri = 'mem://output1.json';
+    const profilesUri = 'mem://profiles.yaml';
 
     const input = await aio.readFile(`${resources}/input1.json`);
     const output = await aio.readFile(`${resources}/output1.json`);
+    const profiles = await aio.readFile(`${resources}/profiles.yaml`);
 
-    const map = new Map<string, string>([[inputUri, input], [outputUri, output]]);
+    const map = new Map<string, string>([[inputUri, input], [outputUri, output], [profilesUri, profiles]]);
     const mfs = new datastore.MemoryFileSystem(map);
 
     const cts: datastore.CancellationTokenSource = { cancel() { }, dispose() { }, token: { isCancellationRequested: false, onCancellationRequested: <any>null } };
@@ -24,13 +26,15 @@ const resources = `${__dirname}../../../test/resources/version-filter`;
     const scope = ds.GetReadThroughScope(mfs);
     const inputDataHandle = await scope.Read(inputUri);
     const outputDataHandle = await scope.Read(outputUri);
+    const profilesDataHandle = await scope.Read(profilesUri);
 
     assert(inputDataHandle != null);
     assert(outputDataHandle != null);
+    assert(profilesDataHandle != null);
 
-    if (inputDataHandle && outputDataHandle) {
+    if (inputDataHandle && outputDataHandle && profilesDataHandle) {
       const outputObject = outputDataHandle.ReadObject();
-      const processor = new ObjectFilter(inputDataHandle);
+      const processor = new ProfileFilter(inputDataHandle, profilesDataHandle.ReadObject());
       const processorOutput = await processor.getOutput();
       assert.deepEqual(processorOutput, outputObject, 'Should be the same');
     }
