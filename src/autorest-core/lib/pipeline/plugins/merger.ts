@@ -333,7 +333,7 @@ async function merge(config: ConfigurationView, input: DataSource, sink: DataSin
   const processor = new MultiAPIMerger(inputs, overrideTitle, overrideDescription);
 
 
-  return new QuickDataSource([await sink.WriteObject('merged oai3 doc...', await processor.getOutput(), [].concat.apply([], inputs.map(each => each.identity)), 'merged-oai3', await processor.getSourceMappings())], input.skip);
+  return new QuickDataSource([await sink.WriteObject('merged oai3 doc...', await processor.getOutput(), [].concat.apply([], <any>inputs.map(each => each.identity)), 'merged-oai3', await processor.getSourceMappings())], input.skip);
 }
 
 /* @internal */
