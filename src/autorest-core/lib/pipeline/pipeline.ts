@@ -29,6 +29,7 @@ import { createNewComposerPlugin } from './plugins/new-composer';
 import { createComponentCleanerPlugin } from './plugins/component-cleaner';
 import { createComponentKeyRenamerPlugin } from './plugins/component-key-renamer';
 import { createApiVersionParameterHandlerPlugin } from './plugins/version-param-handler';
+import { createProfileFilterPlugin } from './plugins/profile-filter';
 
 interface PipelineNode {
   outputArtifact?: string;
@@ -172,7 +173,6 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     'schema-validator-swagger': createSwaggerSchemaValidatorPlugin(),
     // TODO: replace with OAV again
     'semantic-validator': createIdentityPlugin(),
-
     'openapi-document-converter': createSwaggerToOpenApi3Plugin(),
     'component-modifiers': createComponentModifierPlugin(),
     'yaml2jsonx': createYamlToJsonPlugin(),
@@ -182,13 +182,13 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     'emitter': createArtifactEmitterPlugin(),
     'pipeline-emitter': createArtifactEmitterPlugin(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('pipeline', pipeline.pipeline, ['fix-me-3'], 'pipeline')])),
     'configuration-emitter': createArtifactEmitterPlugin(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('configuration', configView.Raw, ['fix-me-4'], 'configuration')])),
-
     'tree-shaker': createTreeShakerPlugin(),
     'model-deduplicator': createDeduplicatorPlugin(),
     'multi-api-merger': createMultiApiMergerPlugin(),
     'component-cleaner': createComponentCleanerPlugin(),
     'component-key-renamer': createComponentKeyRenamerPlugin(),
     'api-version-parameter-handler': createApiVersionParameterHandlerPlugin(),
+    'profile-filter': createProfileFilterPlugin()
   };
 
   // dynamically loaded, auto-discovered plugins
