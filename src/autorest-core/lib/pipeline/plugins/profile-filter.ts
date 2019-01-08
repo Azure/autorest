@@ -1,5 +1,4 @@
 import { AnyObject, DataHandle, DataSink, DataSource, Node, Processor, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
-import { any, clone, Dictionary } from '@microsoft.azure/linq';
 import * as oai from '@microsoft.azure/openapi';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
@@ -11,7 +10,7 @@ export interface ApiData {
 
 type componentType = 'schemas' | 'responses' | 'parameters' | 'examples' | 'requestBodies' | 'headers' | 'securitySchemes' | 'links' | 'callbacks';
 
-export class ObjectFilter extends Processor<any, oai.Model> {
+export class ProfileFilter extends Processor<any, oai.Model> {
   filterTargets: Array<{ apiVersion: string; pathRegex: RegExp }> = [];
 
   // sets containing the UIDs of components already visited.
@@ -30,11 +29,29 @@ export class ObjectFilter extends Processor<any, oai.Model> {
 
   private components: any;
 
+  constructor(input: DataHandle, private profiles: any) {
+    super(input);
+  }
+
   async init() {
     const currentDoc = this.inputs[0].ReadObject();
     this.components = currentDoc['components'];
-    const currentDocTargets = currentDoc['x-ms-targets'];
-    for (const target of currentDocTargets) {
+    const targets: Array<ApiData> = [];
+    for (const { value: profile } of visit(this.profiles)) {
+      for (const { key: namespace, value: namespaceValue } of visit(profile)) {
+        for (const { key: version, value: resourceTypes } of visit(namespaceValue)) {
+          if (resourceTypes.length === 0) {
+            targets.push({ apiVersion: version, matches: [namespace] });
+          } else {
+            for (const resourceType of resourceTypes) {
+              targets.push({ apiVersion: version, matches: [namespace, ...resourceType.split('/')] });
+            }
+          }
+        }
+      }
+    }
+
+    for (const target of targets) {
       const apiVersion = target.apiVersion;
       const pathRegex = this.getPathRegex(target.matches);
       this.filterTargets.push({ apiVersion, pathRegex });
@@ -85,7 +102,7 @@ export class ObjectFilter extends Processor<any, oai.Model> {
       if (key === '$ref') {
         const refParts = value.split('/');
         const componentUid = refParts.pop();
-        const type = refParts.pop();
+        const type: componentType = refParts.pop();
         if (!this.visitedComponents[type].has(componentUid)) {
           this.visitedComponents[type].add(componentUid);
           if (type === 'schemas') {
@@ -139,4 +156,22 @@ export class ObjectFilter extends Processor<any, oai.Model> {
 
     return RegExp(`${regexString}$`);
   }
+}
+
+async function filter(config: ConfigurationView, input: DataSource, sink: DataSink) {
+  const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
+  const result: Array<DataHandle> = [];
+
+  for (const each of inputs) {
+    const profileData = config.GetEntry('profiles');
+    const processor = new ProfileFilter(each, profileData);
+    result.push(await sink.WriteObject(each.Description, await processor.getOutput(), each.identity, each.artifactType, await processor.getSourceMappings()));
+  }
+
+  return new QuickDataSource(result, input.skip);
+}
+
+/* @internal */
+export function createMultiApiMergerPlugin(): PipelinePlugin {
+  return filter;
 }

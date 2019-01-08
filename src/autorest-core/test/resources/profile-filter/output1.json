@@ -1,27 +1,4 @@
 {
-  "x-ms-targets": [
-    {
-      "apiVersion": "2017-10-01-preview",
-      "matches": [
-        "Microsoft.Sql"
-      ]
-    },
-    {
-      "apiVersion": "2015-05-01-preview",
-      "matches": [
-        "Microsoft.Sql",
-        "servers",
-        "failoverGroups"
-      ]
-    },
-    {
-      "apiVersion": "2015-05-01-preview",
-      "matches": [
-        "Microsoft.Sql",
-        "logs"
-      ]
-    }
-  ],
   "openapi": "3.0.0",
   "info": {
     "title": "SqlManagementClient",
