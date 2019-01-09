@@ -5,7 +5,7 @@ import * as assert from 'assert';
 import { suite, test } from 'mocha-typescript';
 import { ProfileFilter } from '../lib/pipeline/plugins/profile-filter';
 
-const resources = `${__dirname}../../../test/resources/version-filter`;
+const resources = `${__dirname}../../../test/resources/profile-filter`;
 
 @suite class ProfileFiltering {
 
@@ -13,6 +13,7 @@ const resources = `${__dirname}../../../test/resources/version-filter`;
     const inputUri = 'mem://input1.json';
     const outputUri = 'mem://output1.json';
     const profilesUri = 'mem://profiles.yaml';
+    const profilesToUse = ['2017-03-09-profile'];
 
     const input = await aio.readFile(`${resources}/input1.json`);
     const output = await aio.readFile(`${resources}/output1.json`);
@@ -34,7 +35,7 @@ const resources = `${__dirname}../../../test/resources/version-filter`;
 
     if (inputDataHandle && outputDataHandle && profilesDataHandle) {
       const outputObject = outputDataHandle.ReadObject();
-      const processor = new ProfileFilter(inputDataHandle, profilesDataHandle.ReadObject());
+      const processor = new ProfileFilter(inputDataHandle, profilesDataHandle.ReadObject(), profilesToUse);
       const processorOutput = await processor.getOutput();
       assert.deepEqual(processorOutput, outputObject, 'Should be the same');
     }

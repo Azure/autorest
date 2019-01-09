@@ -29,7 +29,7 @@ export class ProfileFilter extends Processor<any, oai.Model> {
 
   private components: any;
 
-  constructor(input: DataHandle, private profiles: any) {
+  constructor(input: DataHandle, private profiles: any, private profilesToUse: Array<string>) {
     super(input);
   }
 
@@ -37,14 +37,16 @@ export class ProfileFilter extends Processor<any, oai.Model> {
     const currentDoc = this.inputs[0].ReadObject();
     this.components = currentDoc['components'];
     const targets: Array<ApiData> = [];
-    for (const { value: profile } of visit(this.profiles)) {
-      for (const { key: namespace, value: namespaceValue } of visit(profile)) {
-        for (const { key: version, value: resourceTypes } of visit(namespaceValue)) {
-          if (resourceTypes.length === 0) {
-            targets.push({ apiVersion: version, matches: [namespace] });
-          } else {
-            for (const resourceType of resourceTypes) {
-              targets.push({ apiVersion: version, matches: [namespace, ...resourceType.split('/')] });
+    for (const { key: profileName, value: profile } of visit(this.profiles)) {
+      if (this.profilesToUse.includes(profileName)) {
+        for (const { key: namespace, value: namespaceValue } of visit(profile)) {
+          for (const { key: version, value: resourceTypes } of visit(namespaceValue)) {
+            if (resourceTypes.length === 0) {
+              targets.push({ apiVersion: version, matches: [namespace] });
+            } else {
+              for (const resourceType of resourceTypes) {
+                targets.push({ apiVersion: version, matches: [namespace, ...resourceType.split('/')] });
+              }
             }
           }
         }
@@ -164,14 +166,19 @@ async function filter(config: ConfigurationView, input: DataSource, sink: DataSi
 
   for (const each of inputs) {
     const profileData = config.GetEntry('profiles');
-    const processor = new ProfileFilter(each, profileData);
-    result.push(await sink.WriteObject(each.Description, await processor.getOutput(), each.identity, each.artifactType, await processor.getSourceMappings()));
+    const profilesToUse = config.GetEntry('use-profile');
+    if (profilesToUse) {
+      const processor = new ProfileFilter(each, profileData, profilesToUse);
+      result.push(await sink.WriteObject(each.Description, await processor.getOutput(), each.identity, each.artifactType, await processor.getSourceMappings()));
+    } else {
+      result.push(each);
+    }
   }
 
   return new QuickDataSource(result, input.skip);
 }
 
 /* @internal */
-export function createMultiApiMergerPlugin(): PipelinePlugin {
+export function createProfileFilterPlugin(): PipelinePlugin {
   return filter;
 }

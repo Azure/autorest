@@ -62,6 +62,10 @@ export interface AutoRestConfigurationImpl {
   'sync-methods'?: 'all' | 'essential' | 'none';
   'payload-flattening-threshold'?: number;
   'openapi-type'?: string; // the specification type (ARM/Data-Plane/Default)
+
+  // multi-api specific
+  'profiles'?: any;
+  'use-profile'?: Array<string>;
 }
 
 export function MergeConfigurations(...configs: Array<AutoRestConfigurationImpl>): AutoRestConfigurationImpl {
