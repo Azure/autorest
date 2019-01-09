@@ -139,7 +139,7 @@ export class NewComposer extends Processor<AnyObject, AnyObject> {
         value: {
           'name': 'api-version',
           'in': 'query',
-          'description': 'Client Api Version.',
+          'description': 'Client API version.',
           'required': true,
           'schema': {
             'type': 'string',
