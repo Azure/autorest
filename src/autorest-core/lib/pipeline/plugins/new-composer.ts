@@ -271,6 +271,82 @@ export class NewComposer extends Processor<AnyObject, AnyObject> {
     return target;
   }
 
+  protected visitResponses(responses: AnyObject, originalNodes: Iterable<Node>) {
+    for (const { key, value, pointer, children } of originalNodes) {
+      this.visitResponse(this.newObject(responses, key, pointer), children);
+    }
+  }
+
+  protected visitResponse(target: AnyObject, originalNodes: Iterable<Node>) {
+    for (const { key, value, pointer, children } of originalNodes) {
+      switch (key) {
+        case 'headers':
+          // headers that are  $ref'd and we need to inline it 
+          // because the imodeler1 doesn't know how to deal with that.
+          this.inlineHeaders(this.newObject(target, key, pointer), children);
+          break;
+
+        default:
+          this.clone(target, key, pointer, value);
+          break;
+      }
+    }
+  }
+
+  protected inlineHeaders(target: AnyObject, originalNodes: Iterable<Node>) {
+    for (const { key, value, pointer, children } of originalNodes) {
+      if (value.$ref) {
+        const actualHeader = this.lookupRef(value.$ref);
+        this.inlineHeaderCorrectly(this.newObject(target, key, pointer), visit(actualHeader));
+
+        console.error(`inlineing: ${key}/${value.ref}`)
+        // it's specified as a reference
+        const o = this.clone(target, key, pointer, this.lookupRef(value.$ref));
+        console.error(o);
+      } else {
+        this.clone(target, key, pointer, value);
+      }
+      // this.inlineHeader(this.newObject(target, key, pointer), children);
+
+    }
+  }
+
+  protected inlineHeaderCorrectly(target: AnyObject, originalNodes: Iterable<Node>) {
+
+  }
+
+  protected inlineHeader(target: AnyObject, originalNodes: Iterable<Node>) {
+    for (const { key, value, pointer, children } of originalNodes) {
+      if (value.$ref) {
+        console.error(`inlineing: ${key}/${value}`)
+        // it's specified as a reference
+        this.visitAndDerefObject(this.newObject(target, key, pointer), children);
+      } else {
+        this.clone(target, key, pointer, value);
+      }
+
+    }
+  }
+  protected inlineHeaderSchema(header: AnyObject, originalNodes: Iterable<Node>) {
+    for (const { key, value, pointer, children } of originalNodes) {
+      switch (key) {
+        case 'schema':
+          if (value.$ref) {
+            console.error(`inlining ${value.$ref}`);
+            // header schemas have to be inlined because the imodeler1 can't handle them
+            this.clone(header, key, pointer, this.lookupRef(value.$ref));
+          } else {
+            this.clone(header, key, pointer, value);
+          }
+          break;
+
+        default:
+          this.clone(header, key, pointer, value);
+          break;
+      }
+    }
+  }
+
   protected visitSchemas(target: AnyObject, originalNodes: Iterable<Node>) {
     for (const { key, value, pointer } of originalNodes) {
       // schemas have to keep their name
@@ -341,7 +417,7 @@ export class NewComposer extends Processor<AnyObject, AnyObject> {
           break;
 
         case 'responses':
-          this.cloneInto(this.responses, children);
+          this.visitResponses(this.responses, children);
           break;
 
         case 'parameters':
