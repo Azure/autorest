@@ -109,7 +109,9 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
           for (const child of children) {
             const p = this.dereference('/components/parameters', this.parameters, this.visitParameter, newArray, child.key, child.pointer, child.value, child.children);
             // tag it as a method parameter. (default is 'client', so we have to tag it when we move it.)
-            p['x-ms-parameter-location'] = { value: 'method', pointer: '' };
+            if (p['x-ms-parameter-location'] === undefined) {
+              p['x-ms-parameter-location'] = { value: 'method', pointer: '' };
+            }
           }
           break;
 

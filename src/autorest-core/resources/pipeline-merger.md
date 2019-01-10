@@ -28,9 +28,15 @@ pipeline:
   openapi-document/model-deduplicator:
     input: api-version-parameter-handler
     output-artifact: openapi-document
+```
+
+``` yaml $(enable-multi-api)
+  openapi-document/profile-filter:
+    input: model-deduplicator
+    output-artifact: openapi-document
 
   openapi-document/component-key-renamer:
-    input: model-deduplicator
+    input: profile-filter
     output-artifact: openapi-document
 
   openapi-document/multi-api/identity:
@@ -40,5 +46,4 @@ pipeline:
   openapi-document/multi-api/emitter:
     input: openapi-document/multi-api/identity
     scope: scope-openapi-document/emitter
-
 ```
