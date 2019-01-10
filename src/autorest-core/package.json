@@ -76,6 +76,7 @@
     "vscode-jsonrpc": "^3.5.0",
     "source-map-support": "0.5.9",
     "yaml-ast-parser": "0.0.40",
+    "compare-versions": "^3.4.0",
     "z-schema": "^3.19.0"
   },
   "static-link": {

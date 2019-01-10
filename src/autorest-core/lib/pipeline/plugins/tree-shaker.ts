@@ -224,7 +224,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
           // the dereference method will use the full path to build a name, and we should ask it to use the same thing that
           // we were using before..
           const pc = parseJsonPointer(pointer);
-          const nameHint = `${pc[pc.length - 3]} ${pc[pc.length - 1]}`;
+          const nameHint = `${pc[pc.length - 3]}-${pc[pc.length - 1]}`;
 
           this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children, nameHint);
           break;
