@@ -332,6 +332,27 @@ pipeline:
   swagger-document/emitter:
     input: identity
     scope: scope-swagger-document/emitter
+
+
+scope-swagger-document/emitter:
+  input-artifact: swagger-document
+  is-object: true
+  # rethink that output-file part
+  output-uri-expr: |
+    $config["output-file"] || 
+    ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
+    $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")    
+
+scope-cm/emitter: # can remove once every generator depends on recent modeler
+  input-artifact: code-model-v1
+  is-object: true
+  output-uri-expr: |
+    "code-model-v1"
+
+```
+
+``` yaml ! $(NoOaiConverter)
+pipeline:    
   # OpenAPI
   openapi-document/openapi-document-converter:
     input: swagger-document/identity
@@ -349,14 +370,6 @@ pipeline:
     input: identity
     scope: scope-openapi-document/emitter
 
-scope-swagger-document/emitter:
-  input-artifact: swagger-document
-  is-object: true
-  # rethink that output-file part
-  output-uri-expr: |
-    $config["output-file"] || 
-    ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
-    $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
 scope-openapi-document/emitter:
   input-artifact: openapi-document
   is-object: true
@@ -365,11 +378,6 @@ scope-openapi-document/emitter:
     $config["output-file"] || 
     ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
     $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
-scope-cm/emitter: # can remove once every generator depends on recent modeler
-  input-artifact: code-model-v1
-  is-object: true
-  output-uri-expr: |
-    "code-model-v1"
 ```
 
 #### Polyfills
