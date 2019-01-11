@@ -149,11 +149,12 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
   }
 
   visitSchema(targetParent: AnyObject, originalNodes: Iterable<Node>) {
+    const object = 'object';
+
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
 
         case 'anyOf':
-        case 'allOf':
         case 'oneOf':
           // an array of schemas to dereference
           this.dereferenceItems(`/components/schemas`, this.schemas, this.visitSchema, this.newArray(targetParent, key, pointer), children);
@@ -164,12 +165,29 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
           break;
 
         case 'additionalProperties':
-          if (typeof value === 'object') {
+          if (typeof value === object) {
             // it should be a schema
             this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
           } else {
             // otherwise, just copy it across.
             this.clone(targetParent, key, pointer, value);
+          }
+          break;
+
+        case 'allOf':
+          // an array of schemas to dereference
+          // this is a fix to the bad practice of putting the actual properties of the model inside one of the allOf's
+          // Without this, the generator would create superClasses with 'random names' (not exactly random, they would be unique by the tree-shaking procedure)
+          // to derive the current class from. 
+          const allOf = this.newArray(targetParent, key, pointer);
+          for (const { value: allOfItemVal, children: allOfItemChildren, pointer: allOfItemPointer, key: allOfItemKey } of children) {
+            if (allOfItemVal.$ref !== undefined) {
+              this.dereference(`/components/schemas`, this.schemas, this.visitSchema, allOf, allOfItemKey, allOfItemPointer, allOfItemVal, allOfItemChildren);
+            } else {
+              for (const { value: v, key: k, pointer: p } of allOfItemChildren) {
+                this.clone(targetParent, k, p, v);
+              }
+            }
           }
           break;
 
@@ -224,7 +242,11 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
           // the dereference method will use the full path to build a name, and we should ask it to use the same thing that
           // we were using before..
           const pc = parseJsonPointer(pointer);
-          const nameHint = `${pc[pc.length - 3]}-${pc[pc.length - 1]}`;
+          let nameHint = '';
+          // get nameHint
+          for (let i = 2; i < pc.length; i += 2) {
+            nameHint += (i === 2) ? `${pc[i]}` : `-${pc[i]}`;
+          }
 
           this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children, nameHint);
           break;

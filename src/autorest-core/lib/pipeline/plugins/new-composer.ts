@@ -381,18 +381,21 @@ export class NewComposer extends Processor<AnyObject, AnyObject> {
         const schema = this.clone(target, schemaName, pointer, value).value;
         this.refs[`#/components/schemas/${key}`] = `#/components/schemas/${schemaName}`;
       } else {
-        if (!areSimilar(value, target[schemaName], 'x-ms-metadata', 'description', 'summary')) {
-          try {
-            const a = clone(value, false, undefined, ['x-ms-metadata', 'description', 'summary']);
-            const b = clone(target[schemaName], false, undefined, ['x-ms-metadata', 'description', 'summary']);
-            assert.deepStrictEqual(a, b);
-          } catch (E) {
-            console.error(E);
-          }
+        this.refs[`#/components/schemas/${key}`] = `#/components/schemas/${schemaName}`;
+        // console.error(JSON.stringify(value, null, 4));
+        // console.error(JSON.stringify(target[schemaName], null, 4));
+        // if (!areSimilar(value, target[schemaName], 'x-ms-metadata', 'description', 'summary')) {
+        //   try {
+        //     const a = clone(value, false, undefined, ['x-ms-metadata', 'description', 'summary']);
+        //     const b = clone(target[schemaName], false, undefined, ['x-ms-metadata', 'description', 'summary']);
+        //     assert.deepStrictEqual(a, b);
+        //   } catch (E) {
+        //     console.error(E);
+        //   }
 
-          throw new Error(`Incompatible models conflicting: ${schemaName}`);
+        //   throw new Error(`Incompatible models conflicting: ${schemaName}`);
 
-        }
+        // }
       }
     }
     return target;
