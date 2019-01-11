@@ -270,12 +270,13 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
       const operation = this.newObject(paths, `${uid}`, pointer);
       operation['x-ms-metadata'] = {
         value: {
-          apiVersions: [this.current.info.version], // track the API version this came from
+          apiVersions: [this.current.info && this.current.info.version ? this.current.info.version : ''], // track the API version this came from
           filename: [this.key],                       // and the filename
           path: key,	                                // and here is the path from the operation.
           originalLocations: [originalLocation]
         }, pointer
       };
+
 
       // now, let's copy the rest of the operation into the operation object
       for (const child of children) {
