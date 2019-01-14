@@ -21,8 +21,11 @@ import { createHelpPlugin } from './plugins/help';
 import { createIdentityPlugin } from './plugins/identity';
 import { createMarkdownOverrideOpenApiLoaderPlugin, createMarkdownOverrideSwaggerLoaderPlugin, createOpenApiLoaderPlugin, createSwaggerLoaderPlugin } from './plugins/loaders';
 import { createMultiApiMergerPlugin } from './plugins/merger';
+import { subsetSchemaDeduplicatorPlugin } from './plugins/subset-schemas-deduplicator';
+import { createEnumDeduplicator } from './plugins/enum-deduplication';
 import { createImmediateTransformerPlugin, createTransformerPlugin } from './plugins/transformer';
 import { createTreeShakerPlugin } from './plugins/tree-shaker';
+import { createQuickCheckPlugin } from './plugins/quick-check';
 import { createJsonToYamlPlugin, createYamlToJsonPlugin } from './plugins/yaml-and-json';
 import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from './schema-validation';
 import { createNewComposerPlugin } from './plugins/new-composer';
@@ -183,7 +186,10 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     'pipeline-emitter': createArtifactEmitterPlugin(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('pipeline', pipeline.pipeline, ['fix-me-3'], 'pipeline')])),
     'configuration-emitter': createArtifactEmitterPlugin(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('configuration', configView.Raw, ['fix-me-4'], 'configuration')])),
     'tree-shaker': createTreeShakerPlugin(),
+    'enum-deduplicator': createEnumDeduplicator(),
+    'quick-check': createQuickCheckPlugin(),
     'model-deduplicator': createDeduplicatorPlugin(),
+    'subset-reducer': subsetSchemaDeduplicatorPlugin(),
     'multi-api-merger': createMultiApiMergerPlugin(),
     'component-cleaner': createComponentCleanerPlugin(),
     'component-key-renamer': createComponentKeyRenamerPlugin(),

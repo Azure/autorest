@@ -45,12 +45,18 @@ export class SubsetSchemaDeduplicator extends Processor<any, oai.Model> {
 
   visitSchemas<T>(container: ProxyObject<Dictionary<T>>, originalNodes: () => Iterable<Node>) {
     const xMsMetadata = 'x-ms-metadata';
+    const updatedSchemas = {};
 
     // get all the schemas and associate them with their uid
     // this will allow us to place the value in the right place at the end
     const schemas: Array<AnyObject> = [];
     for (const { key, value } of originalNodes()) {
-      schemas.push({ value, uid: key });
+      if (value.type === 'object' || value.type === undefined) {
+        // only do subset reduction on objects
+        schemas.push({ value, uid: key });
+      } else {
+        updatedSchemas[key] = value;
+      }
     }
 
     // sort by apiVersion from latest to oldest
@@ -87,7 +93,7 @@ export class SubsetSchemaDeduplicator extends Processor<any, oai.Model> {
     }
 
     // get back updated schemas
-    const updatedSchemas = {};
+
     for (const schema of schemas) {
       updatedSchemas[schema.uid] = schema.value;
     }

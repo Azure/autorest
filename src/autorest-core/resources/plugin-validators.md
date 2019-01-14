@@ -27,7 +27,7 @@ pipeline:
     scope: semantic-validator
 ```
 
-``` yaml
+``` yaml $(notnow)
 pipeline:
   openapi-document/model-validator:
     input: openapi-document/identity

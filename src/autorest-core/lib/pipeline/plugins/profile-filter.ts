@@ -29,34 +29,38 @@ export class ProfileFilter extends Processor<any, oai.Model> {
 
   private components: any;
 
-  constructor(input: DataHandle, private profiles: any, private profilesToUse: Array<string>) {
+  constructor(input: DataHandle, private profiles: any, private profilesToUse: Array<string>, private apiVersions: Array<string>) {
     super(input);
   }
 
   async init() {
     const currentDoc = this.inputs[0].ReadObject();
     this.components = currentDoc['components'];
-    const targets: Array<ApiData> = [];
-    for (const { key: profileName, value: profile } of visit(this.profiles)) {
-      if (this.profilesToUse.includes(profileName)) {
-        for (const { key: namespace, value: namespaceValue } of visit(profile)) {
-          for (const { key: version, value: resourceTypes } of visit(namespaceValue)) {
-            if (resourceTypes.length === 0) {
-              targets.push({ apiVersion: version, matches: [namespace] });
-            } else {
-              for (const resourceType of resourceTypes) {
-                targets.push({ apiVersion: version, matches: [namespace, ...resourceType.split('/')] });
+    if (this.profilesToUse.length > 0) {
+      const targets: Array<ApiData> = [];
+      for (const { key: profileName, value: profile } of visit(this.profiles)) {
+        if (this.profilesToUse.includes(profileName)) {
+          for (const { key: namespace, value: namespaceValue } of visit(profile)) {
+            for (const { key: version, value: resourceTypes } of visit(namespaceValue)) {
+              if (resourceTypes.length === 0) {
+                targets.push({ apiVersion: version, matches: [namespace] });
+              } else {
+                for (const resourceType of resourceTypes) {
+                  targets.push({ apiVersion: version, matches: [namespace, ...resourceType.split('/')] });
+                }
               }
             }
           }
         }
       }
-    }
 
-    for (const target of targets) {
-      const apiVersion = target.apiVersion;
-      const pathRegex = this.getPathRegex(target.matches);
-      this.filterTargets.push({ apiVersion, pathRegex });
+      for (const target of targets) {
+        const apiVersion = target.apiVersion;
+        const pathRegex = this.getPathRegex(target.matches);
+        this.filterTargets.push({ apiVersion, pathRegex });
+      }
+    } else if (this.apiVersions.length > 0) {
+      //
     }
   }
 
@@ -85,9 +89,20 @@ export class ProfileFilter extends Processor<any, oai.Model> {
     for (const { value, key, pointer } of nodes) {
       const path: string = value['x-ms-metadata'].path;
       const apiVersions: Array<string> = value['x-ms-metadata'].apiVersions;
-      for (const each of this.filterTargets) {
-        if (path.match(each.pathRegex) && apiVersions.includes(each.apiVersion)) {
-          this.clone(targetParent, key, pointer, value);
+
+      if (this.filterTargets.length > 0) {
+        // Profile Mode
+        for (const each of this.filterTargets) {
+          if (path.match(each.pathRegex) && apiVersions.includes(each.apiVersion)) {
+            this.clone(targetParent, key, pointer, value);
+          }
+        }
+      } else {
+        // apiversion mode
+        for (const each of this.apiVersions) {
+          if (apiVersions.includes(each)) {
+            this.clone(targetParent, key, pointer, value);
+          }
         }
       }
     }
@@ -166,9 +181,10 @@ async function filter(config: ConfigurationView, input: DataSource, sink: DataSi
 
   for (const each of inputs) {
     const profileData = config.GetEntry('profiles');
-    const profilesToUse = config.GetEntry('use-profile');
-    if (profilesToUse) {
-      const processor = new ProfileFilter(each, profileData, profilesToUse);
+    const apiVersions = config.GetEntry('api-version') || [];
+    const profilesToUse = config.GetEntry('use-profile') || [];
+    if (profilesToUse.length > 0 || apiVersions.length > 0) {
+      const processor = new ProfileFilter(each, profileData, profilesToUse, apiVersions);
       result.push(await sink.WriteObject(each.Description, await processor.getOutput(), each.identity, each.artifactType, await processor.getSourceMappings()));
     } else {
       result.push(each);

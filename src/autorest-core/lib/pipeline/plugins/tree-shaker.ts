@@ -229,7 +229,7 @@ export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
     for (const { value, key, pointer, children } of originalNodes) {
       // if the property has a schema that type 'string', 'boolean', 'integer', 'number' then we'll just leave it inline
       switch (value.type) {
-        case 'string':
+        //case 'string':
         case 'boolean':
         case 'integer':
         case 'number':

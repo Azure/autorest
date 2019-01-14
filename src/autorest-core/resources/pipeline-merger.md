@@ -25,22 +25,41 @@ pipeline:
     input: component-modifiers
     output-artifact: openapi-document
 
-  openapi-document/model-deduplicator:
+  openapi-document/profile-filter:
     input: api-version-parameter-handler
+    output-artifact: openapi-document
+
+  openapi-document/model-deduplicator:
+    input: profile-filter
     output-artifact: openapi-document
 ```
 
 ``` yaml $(enable-multi-api)
-  openapi-document/profile-filter:
+pipeline:
+
+  openapi-document/enum-deduplicator:
     input: model-deduplicator
     output-artifact: openapi-document
 
-  openapi-document/component-key-renamer:
-    input: profile-filter
+  openapi-document/subset-reducer:
+    input: enum-deduplicator
     output-artifact: openapi-document
 
+  openapi-document/quick-check:
+    input: subset-reducer
+    output-artifact: openapi-document
+
+  openapi-document/profile-filter:
+    input: subset-reducer
+    output-artifact: openapi-document
+
+  #openapi-document/component-key-renamer:
+  #  input: profile-filter
+  #  output-artifact: openapi-document
+
   openapi-document/multi-api/identity:
-    input: component-key-renamer
+    input: subset-reducer
+   # input: component-key-renamer
     output-artifact: openapi-document
 
   openapi-document/multi-api/emitter:

@@ -7,7 +7,7 @@ The final step is the `openapi-document/identity`, which is the pipeline input
 for Single-API version generators (ie, based using `imodeler1` ).
 
 
-``` yaml
+``` yaml $(use-compose)
 pipeline:
   openapi-document/compose:
     input: openapi-document/model-deduplicator # just before deduplication.

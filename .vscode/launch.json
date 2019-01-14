@@ -23,14 +23,18 @@
       "type": "node",
       "protocol": "inspector",
       "request": "launch",
-      "name": "run bootstrapper",
+      "name": "run autorest",
       "program": "${workspaceRoot}/src/autorest/dist/app.js",
       "args": [
         "--version=${workspaceRoot}/src/autorest-core",
         "--verbose",
         "--debug",
-        "--csharp.output-folder=./new",
-        "--use:c:/work/2018/autorest-interactive"
+        "--enable-multi-api",
+        "--use=C:/work/2019/autorest.azureresourceschema",
+        "--azureresourceschema",
+        "--all",
+        "C:/work/2019/azure-rest-api-specs/specification/redis/resource-manager/readme.md",
+        "--output-folder=c:/tmp/schemas"
       ],
       "cwd": "${workspaceRoot}/Samples/openapi-v2/1c-multiple-input-swaggers"
     },

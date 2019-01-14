@@ -66,6 +66,7 @@ export interface AutoRestConfigurationImpl {
   // multi-api specific
   'profiles'?: any;
   'use-profile'?: Array<string>;
+  'api-version'?: Array<string>;
 }
 
 export function MergeConfigurations(...configs: Array<AutoRestConfigurationImpl>): AutoRestConfigurationImpl {
