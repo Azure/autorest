@@ -35,7 +35,7 @@ const resources = `${__dirname}../../../test/resources/profile-filter`;
 
     if (inputDataHandle && outputDataHandle && profilesDataHandle) {
       const outputObject = outputDataHandle.ReadObject();
-      const processor = new ProfileFilter(inputDataHandle, profilesDataHandle.ReadObject(), profilesToUse);
+      const processor = new ProfileFilter(inputDataHandle, profilesDataHandle.ReadObject(), profilesToUse, []);
       const processorOutput = await processor.getOutput();
       assert.deepEqual(processorOutput, outputObject, 'Should be the same');
     }
