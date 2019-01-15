@@ -1,4 +1,4 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, visit, Processor, QuickDataSource } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, visit, SimpleProcessor, QuickDataSource } from '@microsoft.azure/datastore';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 import { Dictionary, items } from '@microsoft.azure/linq';
@@ -39,44 +39,9 @@ function getSemverEquivalent(version: string) {
   return result;
 }
 
-export class SimpleProcessor extends Processor<AnyObject, AnyObject> {
-  protected refs = new Map<string, Array<{ target: AnyObject, pointer: string }>>();
-
-  async process(target: AnyObject, originalNodes: Iterable<Node>) {
-    for (const { value, key, pointer, children } of originalNodes) {
-      if (!await this.visitLeaf(target, value, key, pointer, children)) {
-        await this.defaultCopy(target, value, key, pointer, children);
-      }
-    }
-  }
-
-  async visitLeaf(target: AnyObject, value: AnyObject, key: string, pointer: string, originalNodes: Iterable<Node>): Promise<boolean> {
-    return false;
-  }
-
-  async defaultCopy(target: AnyObject, ivalue: AnyObject, ikey: string, ipointer: string, originalNodes: Iterable<Node>) {
-    switch (typeOf(ivalue)) {
-      case 'object':
-        // objects recurse
-        const newTarget = this.newObject(target, ikey, ipointer);
-        for (const { value, key, pointer, children } of originalNodes) {
-          if (!await this.visitLeaf(newTarget, value, key, pointer, children)) {
-            await this.defaultCopy(newTarget, value, key, pointer, children);
-          }
-        }
-        break;
-
-      default:
-        /// console.error(`Cloning ${ipointer}`);
-        // everything else, just clone.
-        this.clone(target, ikey, ipointer, ivalue);
-    }
-  }
-}
 
 export class EnumDeduplicator extends SimpleProcessor {
-
-
+  protected refs = new Map<string, Array<{ target: AnyObject, pointer: string }>>();
   protected enums = new Map<string, Array<{ target: AnyObject, value: AnyObject, key: string, pointer: string, originalNodes: Iterable<Node> }>>();
   async visitLeaf(target: AnyObject, value: AnyObject, key: string, pointer: string, originalNodes: Iterable<Node>) {
     //console.error(`Visit Leaf: ${pointer}`);
