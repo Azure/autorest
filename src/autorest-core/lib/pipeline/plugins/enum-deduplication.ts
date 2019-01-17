@@ -4,14 +4,6 @@ import { PipelinePlugin } from '../common';
 import { Dictionary, items } from '@microsoft.azure/linq';
 import * as compareVersions from 'compare-versions';
 
-export function typeOf(obj: any) {
-  const t = typeof (obj);
-  return t === 'object' ?
-    Array.isArray(obj) ?
-      'array' :
-      'object' :
-    t;
-}
 
 function getMaxApiVersion(apiVersions: Array<string>): string {
   let result = '0';
