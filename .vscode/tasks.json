@@ -8,7 +8,22 @@
       "command": "rush",
       "label": "Rebuild",
       "args": [
-        "rebuild"
+        "rebuild",
+        "--verbose"
+      ],
+      "group": "build",
+      "isBackground": false,
+      "problemMatcher": [
+        "$msCompile",
+        "$tsc"
+      ]
+    },
+    {
+      "type": "shell",
+      "command": "rush",
+      "label": "watch",
+      "args": [
+        "watch"
       ],
       "group": {
         "kind": "build",

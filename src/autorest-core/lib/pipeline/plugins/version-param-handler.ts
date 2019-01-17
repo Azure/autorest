@@ -1,10 +1,10 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, Processor, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
 import { clone, Dictionary } from '@microsoft.azure/linq';
 import * as oai from '@microsoft.azure/openapi';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 
-export class ApiVersionParameterHandler extends Processor<any, oai.Model> {
+export class ApiVersionParameterHandler extends Transformer<any, oai.Model> {
   // oldRefs -> newRefs;
   apiVersionReferences = new Set<string>();
 

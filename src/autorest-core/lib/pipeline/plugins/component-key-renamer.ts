@@ -1,10 +1,10 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, Processor, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
 import { clone, Dictionary } from '@microsoft.azure/linq';
 import * as oai from '@microsoft.azure/openapi';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 
-export class ComponentKeyRenamer extends Processor<any, oai.Model> {
+export class ComponentKeyRenamer extends Transformer<any, oai.Model> {
   // oldRefs -> newRefs;
   newRefs = new Dictionary<string>();
 

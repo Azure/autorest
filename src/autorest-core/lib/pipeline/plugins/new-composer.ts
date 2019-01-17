@@ -1,4 +1,4 @@
-import { AnyObject, DataHandle, DataSink, DataSource, MultiProcessor, Node, Processor, ProxyNode, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Transformer, Node, ProxyNode, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
 import { clone, Dictionary, keys, values } from '@microsoft.azure/linq';
 import { areSimilar } from "@microsoft.azure/object-comparison";
 import * as oai from '@microsoft.azure/openapi';
@@ -31,13 +31,9 @@ function distinct<T>(list: Array<T>): Array<T> {
  *
  */
 
-export class NewComposer extends Processor<AnyObject, AnyObject> {
+export class NewComposer extends Transformer<AnyObject, AnyObject> {
   private uniqueVersion!: boolean;
   refs = new Dictionary<string>();
-
-  constructor(input: DataHandle) {
-    super(input);
-  }
 
   get components(): AnyObject {
     if (this.generated.components) {
@@ -226,7 +222,7 @@ export class NewComposer extends Processor<AnyObject, AnyObject> {
 
     // for each parameter
     for (const { key, value, pointer, children } of nodes) {
-      paramarray.__push__({ value: JSON.parse(JSON.stringify(value)), pointer, recurse: true, filename: this.key });
+      paramarray.__push__({ value: JSON.parse(JSON.stringify(value)), pointer, recurse: true, filename: this.currentInputFilename });
     }
 
     // if we have more than one api-version in this client
@@ -243,7 +239,7 @@ export class NewComposer extends Processor<AnyObject, AnyObject> {
       }
     };
 
-    paramarray.__push__({ value: p, pointer: ptr, recurse: true, filename: this.key });
+    paramarray.__push__({ value: p, pointer: ptr, recurse: true, filename: this.currentInputFilename });
     // }
   }
 

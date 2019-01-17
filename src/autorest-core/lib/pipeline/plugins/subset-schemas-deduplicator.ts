@@ -1,4 +1,4 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, Processor, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
 import { clone, Dictionary } from '@microsoft.azure/linq';
 import { areSimilar } from '@microsoft.azure/object-comparison';
 import * as oai from '@microsoft.azure/openapi';
@@ -6,7 +6,7 @@ import * as compareVersions from 'compare-versions';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 
-export class SubsetSchemaDeduplicator extends Processor<any, oai.Model> {
+export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
 
   public async process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {
     // initialize certain things ahead of time:

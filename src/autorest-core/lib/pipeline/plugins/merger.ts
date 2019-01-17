@@ -1,4 +1,4 @@
-import { DataSink, DataSource, MultiProcessor, Node, ProxyObject, QuickDataSource, visit, AnyObject, DataHandle } from '@microsoft.azure/datastore';
+import { DataSink, DataSource, Transformer, Node, ProxyObject, QuickDataSource, visit, AnyObject, DataHandle } from '@microsoft.azure/datastore';
 import { clone, Dictionary, values } from '@microsoft.azure/linq';
 
 import * as oai from '@microsoft.azure/openapi';
@@ -48,7 +48,7 @@ import { PipelinePlugin } from '../common';
  *  - on files that are marked 'x-ms-secondary', this will only pull in things in /components (and it marks them x-ms-secondary-file: true)
  *
  */
-export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
+export class MultiAPIMerger extends Transformer<any, oai.Model> {
   opCount: number = 0;
   cCount = new Dictionary<number>();
   refs = new Dictionary<string>();
@@ -194,7 +194,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
         const ref = value.$ref;
         if (ref && ref.startsWith('#')) {
           // change local refs to full ref
-          value.$ref = `${this.currentInput.originalFullPath}${ref}`;
+          value.$ref = `${(<DataHandle>this.currentInput).originalFullPath}${ref}`;
         }
 
         // now, recurse into this object
@@ -207,7 +207,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
     const info = <AnyObject>this.generated.info;
     // set the document's info that we haven't processed yet.
     if (this.overrideTitle) {
-      info.title = { value: this.overrideTitle, pointer: '/info/title', filename: this.key };
+      info.title = { value: this.overrideTitle, pointer: '/info/title', filename: this.currentInputFilename };
     } else {
       const titles = [...this.titles.values()];
 
@@ -217,15 +217,15 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
       if (titles.length > 1) {
         throw new Error(`The 'title' across provided OpenAPI definitions has to match. Found: ${titles.map(x => `'${x}'`).join(', ')}. Please adjust or provide an override (--title=...).`);
       }
-      info.title = { value: titles[0], pointer: '/info/title', filename: this.key };
+      info.title = { value: titles[0], pointer: '/info/title', filename: this.currentInputFilename };
     }
 
     if (this.overrideDescription) {
-      info.description = { value: this.overrideDescription, pointer: '/info/description', filename: this.key };
+      info.description = { value: this.overrideDescription, pointer: '/info/description', filename: this.currentInputFilename };
     } else {
       const descriptions = [...this.descriptions.values()];
       if (descriptions[0]) {
-        info.description = { value: descriptions[0], pointer: '/info/description', filename: this.key };
+        info.description = { value: descriptions[0], pointer: '/info/description', filename: this.currentInputFilename };
       }
     }
     const versions = [...this.apiVersions.values()];
@@ -260,7 +260,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
       const uid = `path:${this.opCount++}`;
 
       // tag the current pointer with a the new location
-      const originalLocation = `${this.currentInput.originalFullPath}#${pointer}`;
+      const originalLocation = `${(<DataHandle>this.currentInput).originalFullPath}#${pointer}`;
       this.refs[originalLocation] = `#/paths/${uid}`;
 
       // for testing with local refs
@@ -271,7 +271,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
       operation['x-ms-metadata'] = {
         value: {
           apiVersions: [this.current.info && this.current.info.version ? this.current.info.version : ''], // track the API version this came from
-          filename: [this.key],                       // and the filename
+          filename: [this.currentInputFilename],                       // and the filename
           path: key,	                                // and here is the path from the operation.
           originalLocations: [originalLocation]
         }, pointer
@@ -300,7 +300,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
       const uid = `${type}:${this.cCount[type]++}`;
 
       // tag the current pointer with a the new location
-      const originalLocation = `${this.currentInput.originalFullPath}#${pointer}`;
+      const originalLocation = `${(<DataHandle>this.currentInput).originalFullPath}#${pointer}`;
       this.refs[originalLocation] = `#/components/${type}/${uid}`;
       // for testing with local refs
       this.refs[`#${pointer}`] = `#/components/${type}/${uid}`;
@@ -309,7 +309,7 @@ export class MultiAPIMerger extends MultiProcessor<any, oai.Model> {
       component['x-ms-metadata'] = {
         value: {
           apiVersions: [this.current.info && this.current.info.version ? this.current.info.version : ''], // track the API version this came from
-          filename: [this.key],                       // and the filename
+          filename: [this.currentInputFilename],                       // and the filename
           name: key,	                                // and here is the name of the component.
           originalLocations: [originalLocation],
           'x-ms-secondary-file': this.isSecondaryFile

@@ -1,4 +1,4 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, Processor, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
 import { clone, Dictionary, values } from '@microsoft.azure/linq';
 import * as oai from '@microsoft.azure/openapi';
 import * as compareVersions from 'compare-versions';
@@ -37,7 +37,7 @@ function getSemverEquivalent(version: string) {
   return result;
 }
 
-export class ProfileFilter extends Processor<any, oai.Model> {
+export class ProfileFilter extends Transformer<any, oai.Model> {
   filterTargets: Array<{ apiVersion: string; pathRegex: RegExp }> = [];
 
   // sets containing the UIDs of components already visited.

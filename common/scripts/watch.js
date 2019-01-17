@@ -1,5 +1,7 @@
 var fs = require('fs');
 var cp = require('child_process');
+var pt = require('path');
+
 
 function read(filename) {
   const txt  =fs.readFileSync(filename, 'utf8')
@@ -23,10 +25,12 @@ for( const each of rush.projects ) {
   if( project.scripts.watch ) {
     console.log(`npm.cmd run watch {cwd: ${__dirname}/../../${projectFolder}}`);
     const proc = cp.spawn('npm.cmd', ['run','watch'],{cwd: `${__dirname}/../../${projectFolder}`,shell:true,stdio:"inherit"});
+    const root = pt.resolve(`${__dirname}/../../${projectFolder}`);
+
     proc.on("error", (c,s) => {
       console.log(packageName);
-      console.error( c);
-      console.error( s);
+      console.error( c.replace(/(\w*.*\.ts:)/g, `${root}/$1`));
+      console.error( s.replace(/(\w*.*\.ts:)/g, `${root}/$1`));
     });
     proc.on('exit',(c,s)=> {
       console.log(packageName);
@@ -35,8 +39,8 @@ for( const each of rush.projects ) {
     });
     proc.on('message',(c,s)=> {
       console.log(packageName);
-      console.error( c);
-      console.error( s);
+      console.error( c.replace(/(\w*.*\.ts:)/g, `${root}/$1`));
+      console.error( s.replace(/(\w*.*\.ts:)/g, `${root}/$1`));
     })
   }
 }

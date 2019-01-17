@@ -1,4 +1,4 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, Processor, ProxyObject, ProxyNode, visit } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, ProxyNode, visit } from '@microsoft.azure/datastore';
 import { ResolveUri } from '@microsoft.azure/uri';
 
 export async function crawlReferences(inputScope: DataSource, filesToCrawl: Array<DataHandle>, sink: DataSink): Promise<Array<DataHandle>> {
@@ -23,7 +23,7 @@ export async function crawlReferences(inputScope: DataSource, filesToCrawl: Arra
   return result;
 }
 
-class RefProcessor extends Processor<any, any> {
+class RefProcessor extends Transformer<any, any> {
 
   public newFilesFound: Array<string> = new Array<string>();
   private originalFileLocation: string;
@@ -74,13 +74,13 @@ class RefProcessor extends Processor<any, any> {
   }
 }
 
-class SecondaryFileMarker extends Processor<any, any> {
+class SecondaryFileMarker extends Transformer<any, any> {
 
   async process(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer } of originalNodes) {
       this.clone(targetParent, key, pointer, value);
       if (!targetParent['x-ms-secondary-file']) {
-        targetParent['x-ms-secondary-file'] = { value: true, pointer, filename: this.key };
+        targetParent['x-ms-secondary-file'] = { value: true, pointer, filename: this.currentInputFilename };
       }
     }
   }

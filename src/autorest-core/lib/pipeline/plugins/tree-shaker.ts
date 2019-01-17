@@ -1,8 +1,8 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Processor, QuickDataSource } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Transformer, QuickDataSource } from '@microsoft.azure/datastore';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 
-export class OAI3Shaker extends Processor<AnyObject, AnyObject> {
+export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   get components(): AnyObject {
     if (this.generated.components) {
       return this.generated.components;

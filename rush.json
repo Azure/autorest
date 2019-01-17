@@ -95,18 +95,6 @@
       "shouldPublish": true
     },
     {
-      "packageName": "@microsoft.azure/autorest-core",
-      "projectFolder": "src/autorest-core",
-      "reviewCategory": "production",
-      "shouldPublish": true
-    },
-    {
-      "packageName": "autorest",
-      "projectFolder": "src/autorest",
-      "reviewCategory": "production",
-      "shouldPublish": true
-    },
-    {
       "packageName": "@microsoft.azure/object-comparison",
       "projectFolder": "perks/libraries/object-comparison",
       "reviewCategory": "production",
@@ -115,6 +103,19 @@
     {
       "packageName": "@microsoft.azure/deduplication",
       "projectFolder": "perks/libraries/deduplication",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    }, 
+    /* --- project packages --- */ 
+    {
+      "packageName": "@microsoft.azure/autorest-core",
+      "projectFolder": "src/autorest-core",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
+      "packageName": "autorest",
+      "projectFolder": "src/autorest",
       "reviewCategory": "production",
       "shouldPublish": true
     }

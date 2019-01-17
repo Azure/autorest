@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "dist",
+    "noErrorTruncation": true,
     "noImplicitAny": false,
     "module": "commonjs",
     "sourceMap": true,

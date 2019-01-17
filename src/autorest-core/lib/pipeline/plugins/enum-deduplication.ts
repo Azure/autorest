@@ -1,4 +1,4 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, visit, SimpleProcessor, QuickDataSource } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, visit, TransformerViaPointer, QuickDataSource } from '@microsoft.azure/datastore';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 import { Dictionary, items } from '@microsoft.azure/linq';
@@ -31,8 +31,7 @@ function getSemverEquivalent(version: string) {
   return result;
 }
 
-
-export class EnumDeduplicator extends SimpleProcessor {
+export class EnumDeduplicator extends TransformerViaPointer {
   protected refs = new Map<string, Array<{ target: AnyObject, pointer: string }>>();
   protected enums = new Map<string, Array<{ target: AnyObject, value: AnyObject, key: string, pointer: string, originalNodes: Iterable<Node> }>>();
   async visitLeaf(target: AnyObject, value: AnyObject, key: string, pointer: string, originalNodes: Iterable<Node>) {
