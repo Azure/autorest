@@ -80,7 +80,7 @@ export class ApiVersionParameterHandler extends Transformer<any, oai.Model> {
                 case 'parameters':
                   const parameters: any = this.newArray(operation, k, p);
                   for (const { value: paramValue, pointer: paramPointer } of c) {
-                    if (this.apiVersionReferences.has(paramValue.$ref)) {
+                    if (this.apiVersionReferences.has(paramValue.$ref) || paramValue.name === 'api-version') {
                       hasApiVersion = true;
                     } else {
                       parameters.__push__({
@@ -100,7 +100,7 @@ export class ApiVersionParameterHandler extends Transformer<any, oai.Model> {
           case 'parameters':
             const externalOperation: any = this.newArray(path, key, pointer);
             for (const { value: paramValue, pointer: paramPointer } of children) {
-              if (this.apiVersionReferences.has(paramValue.$ref)) {
+              if (this.apiVersionReferences.has(paramValue.$ref) || paramValue.name === 'api-version') {
                 hasApiVersion = true;
               } else {
                 externalOperation.__push__({
@@ -144,7 +144,8 @@ async function handleApiVersionParameter(config: ConfigurationView, input: DataS
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
     const processor = new ApiVersionParameterHandler(each);
-    result.push(await sink.WriteObject('oai3 without api-version parameters...', await processor.getOutput(), each.identity, 'oi3-apiVersion-parameter-free', await processor.getSourceMappings()));
+    const output = await processor.getOutput();
+    result.push(await sink.WriteObject('oai3 without api-version parameters...', output, each.identity, 'oi3-apiVersion-parameter-free', await processor.getSourceMappings()));
   }
   return new QuickDataSource(result, input.skip);
 }

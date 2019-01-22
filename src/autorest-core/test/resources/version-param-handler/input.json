@@ -226,6 +226,55 @@
           }
         }
       }
+    },
+    "2": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "2015-02-28"
+        ],
+        "filename": [
+          "mem:///122?https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-rest-api-specs%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Fsearch%2F2015-02-28%2Fswagger%2Fsearchservice.json"
+        ],
+        "path": "/datasources",
+        "originalLocations": [
+          "https://github.com/Azure/azure-rest-api-specs/blob/d374d03801e97737ddb32e01f20513e7b2bbd9c3/search/2015-02-28/swagger/searchservice.json#/paths/~1datasources"
+        ]
+      },
+      "get": {
+        "tags": [
+          "DataSources"
+        ],
+        "operationId": "DataSources_List",
+        "description": "Lists all datasources available for an Azure Search service.",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/library/azure/dn946878.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/6",
+            "description": "Tracking ID sent with the request to help with debugging."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for the request.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "2017-04-19"
+              ]
+            }
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/5",
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
