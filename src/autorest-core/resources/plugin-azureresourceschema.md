@@ -8,9 +8,12 @@ use-extension:
 try-require: ./readme.azureresourceschema.md
 ```
 
-
 ``` yaml $(azureresourceschema)
+enable-multi-api: true
+
 use-extension:
   "@microsoft.azure/autorest.azureresourceschema": "~2.0.14"
 try-require: ./readme.azureresourceschema.md
+
+
 ```

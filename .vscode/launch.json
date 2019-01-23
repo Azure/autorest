@@ -28,13 +28,10 @@
       "args": [
         "--version=${workspaceRoot}/src/autorest-core",
         "--verbose",
-        "--use=@microsoft.azure/autorest-interactive@latest",
         "--debug",
-        "--enable-multi-api",
         "--use=C:/work/2019/autorest.azureresourceschema",
         "--azureresourceschema",
-        "--all",
-        "C:/work/2019/azure-rest-api-specs/specification/redis/resource-manager/readme.md",
+        "C:\\work\\2019\\generated-schemas\\tmp\\azure-rest-api-specs\\specification\\redis\\resource-manager\\readme.md",
         "--output-folder=c:/tmp/schemas",
         "--api-version:2017-10-01"
       ],

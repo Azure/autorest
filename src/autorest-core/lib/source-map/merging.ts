@@ -195,15 +195,15 @@ export function MergeOverwriteOrAppend(higherPriority: any, lowerPriority: any, 
     if (!(higherPriority instanceof Array) && !(lowerPriority instanceof Array) && !concatListPathFilter(path)) {
       return higherPriority;
     }
-    return higherPriority instanceof Array
-      ? higherPriority.concat(lowerPriority)
-      : [higherPriority].concat(lowerPriority);
+
+    return [...new Set((higherPriority instanceof Array ? higherPriority : [higherPriority]).concat(lowerPriority))]
   }
 
   // object nodes - iterate all members
   const result: any = {};
-  let keys = Object.getOwnPropertyNames(higherPriority).concat(Object.getOwnPropertyNames(lowerPriority));
-  keys = keys.filter((v, i) => { const idx = keys.indexOf(v); return idx === -1 || idx >= i; }); // distinct
+
+  let keys = [...new Set(Object.getOwnPropertyNames(higherPriority).concat(Object.getOwnPropertyNames(lowerPriority)))];
+  // keys = keys.filter((v, i) => { const idx = keys.indexOf(v); return idx === -1 || idx >= i; }); // distinct
 
   for (const key of keys) {
     const subpath = path.concat(key);

@@ -62,18 +62,26 @@ export interface AutoRestConfigurationImpl {
   'sync-methods'?: 'all' | 'essential' | 'none';
   'payload-flattening-threshold'?: number;
   'openapi-type'?: string; // the specification type (ARM/Data-Plane/Default)
+  'tag'?: string;
 
   // multi-api specific
   'profiles'?: any;
   'use-profile'?: Array<string>;
   'api-version'?: Array<string>;
+
+  'enable-multi-api'?: boolean;
+  'load-priority'?: number;
 }
+
 
 export function MergeConfigurations(...configs: Array<AutoRestConfigurationImpl>): AutoRestConfigurationImpl {
   let result: AutoRestConfigurationImpl = {};
+  configs = configs.map((each, i, a) => ({ ...each, 'load-priority': each['load-priority'] || -i })).sort((a, b) => (<number>b['load-priority']) - (<number>a['load-priority']));
+
   for (const config of configs) {
     result = MergeConfiguration(result, config);
   }
+  result['load-priority'] = undefined;
   return result;
 }
 
@@ -166,18 +174,16 @@ export class MessageEmitter extends EventEmitter {
 }
 
 function ProxifyConfigurationView(cfgView: any) {
+
   return new Proxy(cfgView, {
     get: (target, property) => {
       if (property === 'constructor') {
         // debugger;
       }
       const value = (target)[property];
+
       if (value && value instanceof Array) {
-        const result = new Array<any>();
-        for (const each of value) {
-          result.push(resolveRValue(each, '', target, null));
-        }
-        return result;
+        return value.map(each => resolveRValue(each, '', target, null));
       }
       return resolveRValue(value, <string>property, null, cfgView);
     }
@@ -688,25 +694,33 @@ export class Configuration {
 
     const configurationFiles: { [key: string]: any; } = {};
     const configSegments: Array<any> = [];
+    const secondPass: Array<any> = [];
+
     const createView = (segments: Array<any> = configSegments) => {
       return new ConfigurationView(configurationFiles, this.fileSystem, messageEmitter, configFileFolderUri, ...segments);
     };
-    const addSegments = async (configs: Array<any>): Promise<Array<any>> => { const segs = await this.DesugarRawConfigs(configs); configSegments.push(...segs); return segs; };
+    const addSegments = async (configs: Array<any>, keepInSecondPass = true): Promise<Array<any>> => {
+      const segs = await this.DesugarRawConfigs(configs);
+      configSegments.push(...segs);
+      if (keepInSecondPass) {
+        secondPass.push(...segs)
+      }
+      return segs;
+    };
+    const fsInputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
 
     // 1. overrides (CLI, ...)
-    await addSegments(configs);
+    await addSegments(configs, false);
     // 2. file
     if (configFileUri !== null) {
-      const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
-
       // add loaded files to the input files.
-      configurationFiles[configFileUri] = (await inputView.ReadStrict(configFileUri)).ReadData();
+      configurationFiles[configFileUri] = (await fsInputView.ReadStrict(configFileUri)).ReadData();
 
       const blocks = await this.ParseCodeBlocks(
-        await inputView.ReadStrict(configFileUri),
+        await fsInputView.ReadStrict(configFileUri),
         createView(),
         'config');
-      await addSegments(blocks);
+      await addSegments(blocks, false);
     }
     // 3. resolve 'require'd configuration
     const addedConfigs = new Set<string>();
@@ -728,10 +742,10 @@ export class Configuration {
             });
             addedConfigs.add(additionalConfig);
             // merge config
-            const inputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
-            configurationFiles[additionalConfig] = (await inputView.ReadStrict(additionalConfig)).ReadData();
+
+            configurationFiles[additionalConfig] = (await fsInputView.ReadStrict(additionalConfig)).ReadData();
             const blocks = await this.ParseCodeBlocks(
-              await inputView.ReadStrict(additionalConfig),
+              await fsInputView.ReadStrict(additionalConfig),
               tmpView,
               `require-config-${additionalConfig}`);
             await addSegments(blocks);
@@ -848,6 +862,27 @@ export class Configuration {
           });
           throw e;
         }
+      }
+
+      // re-acquire CLI and configuration files at a lower priority
+      // this enables the configuration of a plugin to specify stuff like `enable-multi-api`
+      // which would unlock a guarded section that has $(enable-mulit-api) in the yaml block.
+      // doing so would allow the configuration to load input-files that have that guard on 
+
+      // and because this comes in at a lower-priority, it won't overwrite values that have been already 
+      // set in a meaningful way. 
+
+      // it's only marginally hackey...
+
+      // reload files 
+      if (configFileUri !== null) {
+        const blocks = await this.ParseCodeBlocks(
+          await fsInputView.ReadStrict(configFileUri),
+          createView(),
+          'config');
+        await addSegments(blocks, false);
+        await includeFn();
+        return createView([...configs, ...blocks, ...secondPass]).Indexer;
       }
     }
     return createView().Indexer;

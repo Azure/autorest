@@ -49,20 +49,21 @@ pipeline:
     input: subset-reducer
     output-artifact: openapi-document
 
-  openapi-document/profile-filter:
-    input: subset-reducer
-    output-artifact: openapi-document
-
-  #openapi-document/component-key-renamer:
-  #  input: profile-filter
-  #  output-artifact: openapi-document
 
   openapi-document/multi-api/identity:
     input: subset-reducer
-   # input: component-key-renamer
     output-artifact: openapi-document
 
   openapi-document/multi-api/emitter:
     input: openapi-document/multi-api/identity
     scope: scope-openapi-document/emitter
+```
+
+# more stuff
+
+``` yaml  $(enable-multi-api)
+# this forces the 'tag' property to not work when `enable-multi-api` is active.
+load-priority: 1000
+tag: null
+
 ```

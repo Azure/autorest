@@ -4,6 +4,7 @@
 Some kind of last-second tweaking to output the openapi document as a file?
 If someone really needs to know what this is all about, ask @olydis (find him on github...)
 
+
 ``` yaml
 scope-openapi-document/emitter:
   input-artifact: openapi-document
@@ -33,4 +34,11 @@ Any files that are marked as 'preserved-files' are output back to disk again.
 # preserve files that have been asked to preserve
 output-artifact:
   - preserved-files
+```
+
+
+## Autorest Interactive
+``` yaml $(interactive) 
+use-extension:
+  "@microsoft.azure/autorest-interactive": "latest"
 ```

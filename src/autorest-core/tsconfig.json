@@ -12,7 +12,7 @@
     "strict": true,
     "declaration": true,
     "stripInternal": true,
-    "target": "es2017",
+    "target": "esnext",
     "types": [
       "node",
       "mocha"

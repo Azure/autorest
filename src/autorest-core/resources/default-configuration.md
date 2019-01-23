@@ -11,6 +11,7 @@ openapi-type: arm
 
 # Load additional configurations.
 require:
+  - $(this-folder)/plugin-azureresourceschema.md
   - $(this-folder)/directives.md
   - $(this-folder)/pipeline-merger.md
   - $(this-folder)/pipeline-composer.md  
@@ -20,7 +21,7 @@ require:
   - $(this-folder)/markdown-documentation.md
   - $(this-folder)/miscellaneous.md
   - $(this-folder)/patches.md
-  - $(this-folder)/plugin-azureresourceschema.md
+  
   - $(this-folder)/plugin-csharp.md
   - $(this-folder)/plugin-go.md
   - $(this-folder)/plugin-java.md
