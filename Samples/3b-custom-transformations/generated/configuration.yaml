@@ -286,7 +286,12 @@ scope-swagger-document/emitter:
     ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
 
     $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/,
-    "")
+    "")    
+scope-cm/emitter:
+  input-artifact: code-model-v1
+  is-object: true
+  output-uri-expr: |
+    "code-model-v1"
 scope-openapi-document/emitter:
   input-artifact: openapi-document
   is-object: true
@@ -297,11 +302,6 @@ scope-openapi-document/emitter:
 
     $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/,
     "")
-scope-cm/emitter:
-  input-artifact: code-model-v1
-  is-object: true
-  output-uri-expr: |
-    "code-model-v1"
 client-side-validation: true
 declare-directive:
   set: '{ transform: `return ${JSON.stringify($)}` }'
@@ -368,6 +368,8 @@ used-extension:
   - '["@microsoft.azure/classic-openapi-validator","~1.0.9"]'
   - '["@microsoft.azure/openapi-validator","~1.0.2"]'
   - '["@microsoft.azure/autorest.modeler","2.3.55"]'
+skip-simplifier-on-namespace:
+  - System.Security.Permissions
 scope-csharp/emitter:
   input-artifact: source-file-csharp
 scope-jsonrpcclient/emitter:
