@@ -13,7 +13,7 @@ modelTypes:
           $id: '4'
           fixed: false
           raw: '42'
-        deprecated: false
+
         documentation:
           $id: '5'
           fixed: false
@@ -29,7 +29,7 @@ modelTypes:
           $type: PrimaryType
           format: int64
           knownPrimaryType: long
-          deprecated: false
+
           name:
             $id: '8'
             fixed: false
@@ -43,7 +43,7 @@ modelTypes:
           $id: '10'
           fixed: false
           raw: shiny
-        deprecated: false
+
         documentation:
           $id: '11'
           fixed: false
@@ -58,7 +58,7 @@ modelTypes:
           $id: '13'
           $type: PrimaryType
           knownPrimaryType: string
-          deprecated: false
+
           name:
             $id: '14'
             fixed: false
@@ -70,7 +70,7 @@ modelTypes:
       $id: '15'
       fixed: false
       raw: Cowbell
-    deprecated: false
+
 name: CowbellFactory
 namespace: ''
 modelsName: Models
@@ -88,7 +88,7 @@ operations:
             defaultValue:
               $id: '19'
               fixed: false
-            deprecated: false
+
             documentation:
               $id: '20'
               fixed: false
@@ -131,7 +131,7 @@ operations:
           - application/json
         extensions:
           x-ms-requestBody-index: '0'
-        deprecated: false
+
         hidden: true
     name:
       $id: '27'
