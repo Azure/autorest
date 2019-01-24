@@ -38,6 +38,21 @@
       "cwd": "${workspaceRoot}/Samples/openapi-v2/1c-multiple-input-swaggers"
     },
     {
+      "type": "node",
+      "protocol": "inspector",
+      "request": "launch",
+      "name": "run autorest (loader)",
+      "program": "${workspaceRoot}/src/autorest/dist/app.js",
+      "args": [
+        "--version=${workspaceRoot}/src/autorest-core",
+        "--verbose",
+        "--debug",
+        "C:/work/2019/autorest/Samples/openapi-v2/3a-literate-swagger/readme.md",
+        "--output-folder=c:/tmp/output",
+      ],
+      "cwd": "${workspaceRoot}/Samples/openapi-v2/1c-multiple-input-swaggers"
+    },
+    {
       "name": ".NET Core Attach",
       "type": "coreclr",
       "request": "attach",

@@ -864,26 +864,27 @@ export class Configuration {
         }
       }
 
-      // re-acquire CLI and configuration files at a lower priority
-      // this enables the configuration of a plugin to specify stuff like `enable-multi-api`
-      // which would unlock a guarded section that has $(enable-mulit-api) in the yaml block.
-      // doing so would allow the configuration to load input-files that have that guard on 
 
-      // and because this comes in at a lower-priority, it won't overwrite values that have been already 
-      // set in a meaningful way. 
+    }
+    // re-acquire CLI and configuration files at a lower priority
+    // this enables the configuration of a plugin to specify stuff like `enable-multi-api`
+    // which would unlock a guarded section that has $(enable-mulit-api) in the yaml block.
+    // doing so would allow the configuration to load input-files that have that guard on 
 
-      // it's only marginally hackey...
+    // and because this comes in at a lower-priority, it won't overwrite values that have been already 
+    // set in a meaningful way. 
 
-      // reload files 
-      if (configFileUri !== null) {
-        const blocks = await this.ParseCodeBlocks(
-          await fsInputView.ReadStrict(configFileUri),
-          createView(),
-          'config');
-        await addSegments(blocks, false);
-        await includeFn();
-        return createView([...configs, ...blocks, ...secondPass]).Indexer;
-      }
+    // it's only marginally hackey...
+
+    // reload files 
+    if (configFileUri !== null) {
+      const blocks = await this.ParseCodeBlocks(
+        await fsInputView.ReadStrict(configFileUri),
+        createView(),
+        'config');
+      await addSegments(blocks, false);
+      await includeFn();
+      return createView([...configs, ...blocks, ...secondPass]).Indexer;
     }
     return createView().Indexer;
   }

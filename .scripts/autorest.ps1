@@ -41,12 +41,18 @@ try {
   [Void]$oProcess.Start()
   $oProcess.BeginOutputReadLine()
   $oProcess.BeginErrorReadLine()
-  [Void]$oProcess.WaitForExit()
+  while( (-not ($oProcess.WaitForExit(1000)) ) -and (-not ($oProcess.HasExited) ))  {
+    
+    write-host -NoNewline '.'
+  }
 
 } finally {
+  write-host -NoNewline '!'
   # Unregistering events to retrieve process output.
   Unregister-Event -SourceIdentifier $oStdOutEvent.Name
+  write-host -NoNewline '#'
   Unregister-Event -SourceIdentifier $oStdErrEvent.Name
+  write-host -NoNewline '$' 
 }
   $oResult = New-Object -TypeName PSObject -Property ([Ordered]@{
       "ExeFile"  = $sExeFile;
@@ -55,7 +61,7 @@ try {
       "Output"   = $oStdOutBuilder.ToString().Trim();
       "Error"    = $oStdErrBuilder.ToString().Trim()
     })
-
+    write-host -NoNewline '?'
   return $oResult
 }
 

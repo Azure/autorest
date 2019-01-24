@@ -130,7 +130,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
               this.clone(info, 'contact', pointer, value.contact);
             }
             if (value.license && !info.license) {
-              this.clone(info, 'license', pointer, value.contact);
+              this.clone(info, 'license', pointer, value.license);
             }
 
             /*
