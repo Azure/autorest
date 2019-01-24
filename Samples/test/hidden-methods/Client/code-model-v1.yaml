@@ -13,7 +13,6 @@ modelTypes:
           $id: '4'
           fixed: false
           raw: '42'
-
         documentation:
           $id: '5'
           fixed: false
@@ -29,7 +28,6 @@ modelTypes:
           $type: PrimaryType
           format: int64
           knownPrimaryType: long
-
           name:
             $id: '8'
             fixed: false
@@ -43,7 +41,6 @@ modelTypes:
           $id: '10'
           fixed: false
           raw: shiny
-
         documentation:
           $id: '11'
           fixed: false
@@ -58,7 +55,6 @@ modelTypes:
           $id: '13'
           $type: PrimaryType
           knownPrimaryType: string
-
           name:
             $id: '14'
             fixed: false
@@ -66,7 +62,6 @@ modelTypes:
     serializedName: Cowbell
     documentation: A cowbell.
     containsConstantProperties: false
-
     name:
       $id: '15'
       fixed: false
@@ -88,7 +83,6 @@ operations:
             defaultValue:
               $id: '19'
               fixed: false
-
             documentation:
               $id: '20'
               fixed: false
@@ -131,7 +125,6 @@ operations:
           - application/json
         extensions:
           x-ms-requestBody-index: '0'
-
         hidden: false
     name:
       $id: '27'
