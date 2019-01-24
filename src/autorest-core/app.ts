@@ -504,11 +504,13 @@ async function batch(api: AutoRest): Promise<void> {
   const batchTaskConfigReference: any = {};
   api.AddConfiguration(batchTaskConfigReference);
   for (const batchTaskConfig of config.GetEntry("batch" as any)) {
-    outputMessage(api, {
-      Channel: Channel.Information,
-      Text: `Processing batch task - ${JSON.stringify(batchTaskConfig)} .`
-    }, () => { });
-
+    const isjson = (args.rawSwitches["message-format"] === "json" || args.rawSwitches["message-format"] === "yaml");
+    if (!isjson) {
+      outputMessage(api, {
+        Channel: Channel.Information,
+        Text: `Processing batch task - ${JSON.stringify(batchTaskConfig)} .`
+      }, () => { });
+    }
     // update batch task config section
     for (const key of Object.keys(batchTaskConfigReference)) delete batchTaskConfigReference[key];
     Object.assign(batchTaskConfigReference, batchTaskConfig);
