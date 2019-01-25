@@ -28,6 +28,9 @@ batch:
     output-folder: output1
   - java: true
     output-folder: output2
+```
+
+``` removed
   - ruby: true
     # the following input will be added to the existing one
     input-file: https://github.com/Azure/azure-rest-api-specs/blob/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-advisor/2017-04-19/swagger/advisor.json
