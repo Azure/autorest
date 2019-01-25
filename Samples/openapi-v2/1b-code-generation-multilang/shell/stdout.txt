@@ -1,1 +1,5 @@
 https://aka.ms/autorest
+INFORMATION: Getting the package version from the pre-existing package.json file in the output folder.
+INFORMATION: Getting the package version from the pre-existing package.json file in the output folder.
+INFORMATION: Pre-existing package.json file in the output folder didn't contain a non-empty version property.
+INFORMATION: Pre-existing package.json file in the output folder didn't contain a non-empty version property.

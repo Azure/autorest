@@ -74,7 +74,7 @@ pyhton:
 ```
 
 ### Ruby
-``` yaml 
+``` removed
 ruby:
   - output-folder: Ruby
   - output-folder: Azure.Ruby

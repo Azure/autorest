@@ -1,24 +1,5 @@
-
-
-
-
-
-
-
-    - /Samples/3a-literate-swagger/swagger.md:137:0 ($.paths)
-    - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)
-    - /Samples/3a-literate-swagger/swagger.md:139:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].put)
-    - /Samples/3a-literate-swagger/swagger.md:176:0 ($.paths)
-    - /Samples/3a-literate-swagger/swagger.md:178:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}"].delete)
-    - /Samples/3a-literate-swagger/swagger.md:205:0 ($.paths)
-    - /Samples/3a-literate-swagger/swagger.md:207:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices"].get)
-    - /Samples/3a-literate-swagger/swagger.md:283:2 ($.definitions.SearchServiceResource)
-    - /Samples/3a-literate-swagger/swagger.md:50:0 ($.paths)
-    - /Samples/3a-literate-swagger/swagger.md:52:4 ($.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/listQueryKeys"].get)
-ERROR (OperationsAPIImplementation/R3023/ARMViolation): Operations API must be implemented for '/providers/Microsoft.Search/operations'.
-ERROR (RequiredPropertiesMissingInResourceModel/R2020/ARMViolation): Model definition 'SearchServiceResource' must have the properties 'name', 'id' and 'type' in its hierarchy and these properties must be marked as readonly.
-ERROR (XmsExamplesRequired/D5001/Documentation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'QueryKeys_List'
-ERROR (XmsExamplesRequired/D5001/Documentation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Services_CreateOrUpdate'
-ERROR (XmsExamplesRequired/D5001/Documentation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Services_Delete'
-ERROR (XmsExamplesRequired/D5001/Documentation): Please provide x-ms-examples describing minimum/maximum property set for response/request payloads for operations. Operation: 'Services_List'
-ERROR (XmsResourceInPutResponse/R2062/ARMViolation): The 200 response model for an ARM PUT operation must have x-ms-azure-resource extension set to true in its hierarchy. Operation: 'Services_CreateOrUpdate' Model: 'SearchServiceResource'.
+   at ...
+  Error: $ref to original location '/Samples/openapi-v2/3a-literate-swagger/swagger.md#/components/responses//Samples/openapi-v2/3a-literate-swagger/swagger.mderror' is not found in the new refs collection
+Error: $ref to original location '/Samples/openapi-v2/3a-literate-swagger/swagger.md#/components/responses//Samples/openapi-v2/3a-literate-swagger/swagger.mderror' is not found in the new refs collection
+FATAL: Error: $ref to original location '/Samples/openapi-v2/3a-literate-swagger/swagger.md#/components/responses//Samples/openapi-v2/3a-literate-swagger/swagger.mderror' is not found in the new refs collection
+FATAL: openapi-document/multi-api-merger - FAILED

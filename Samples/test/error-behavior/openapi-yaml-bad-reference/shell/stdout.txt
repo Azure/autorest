@@ -1,2 +1,2 @@
 https://aka.ms/autorest
-Process() cancelled due to exception : Could not resolve reference #/definitions/Cowball
+Process() cancelled due to exception : $ref to original location '/Samples/test/error-behavior/openapi-yaml-bad-reference/tiny.yaml#/components/schemas/Cowball' is not found in the new refs collection

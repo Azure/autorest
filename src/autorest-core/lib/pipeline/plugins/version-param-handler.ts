@@ -12,7 +12,7 @@ export class ApiVersionParameterHandler extends Transformer<any, oai.Model> {
     const allDocuments = [...this.inputs].map(each => each.ReadObject<AnyObject>());
     const currentDoc = allDocuments[0];
 
-    if (currentDoc.components.parameters) {
+    if (currentDoc.components && currentDoc.components.parameters) {
       for (const { key, value } of visit(currentDoc.components.parameters)) {
         if (value.name && value.name === 'api-version') {
           this.apiVersionReferences.add(`#/components/parameters/${key}`);

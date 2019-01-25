@@ -771,7 +771,7 @@ export class Configuration {
     }
 
     await includeFn();
-
+    const mf = createView().GetEntry('message-format');
     // 5. resolve extensions
     const extMgr = await Configuration.extensionManager;
     const addedExtensions = new Set<string>();
@@ -802,11 +802,14 @@ export class Configuration {
             } catch (e) { }
 
             if (await exists(localPath)) {
-              // local package
-              messageEmitter.Message.Dispatch({
-                Channel: Channel.Information,
-                Text: `> Loading local AutoRest extension '${additionalExtension.name}' (${localPath})`
-              });
+              if (mf !== 'json' && mf !== 'yaml') {
+                // local package
+                messageEmitter.Message.Dispatch({
+                  Channel: Channel.Information,
+                  Text: `> Loading local AutoRest extension '${additionalExtension.name}' (${localPath})`
+                });
+
+              }
 
               const pack = await extMgr.findPackage(additionalExtension.name, localPath);
               const extension = new LocalExtension(pack, localPath);
@@ -819,10 +822,12 @@ export class Configuration {
               // remote package
               const installedExtension = await extMgr.getInstalledExtension(additionalExtension.name, additionalExtension.source);
               if (installedExtension) {
-                messageEmitter.Message.Dispatch({
-                  Channel: Channel.Information,
-                  Text: `> Loading AutoRest extension '${additionalExtension.name}' (${additionalExtension.source}->${installedExtension.version})`
-                });
+                if (mf !== 'json' && mf !== 'yaml') {
+                  messageEmitter.Message.Dispatch({
+                    Channel: Channel.Information,
+                    Text: `> Loading AutoRest extension '${additionalExtension.name}' (${additionalExtension.source}->${installedExtension.version})`
+                  });
+                }
                 // start extension
                 ext = loadedExtensions[additionalExtension.fullyQualified] = {
                   extension: installedExtension,

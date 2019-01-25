@@ -18,7 +18,6 @@ modelTypes:
   - $id: '2'
     $type: CompositeType
     containsConstantProperties: false
-    deprecated: false
     extensions:
       x-ms-metadata:
         apiVersions:
@@ -40,7 +39,6 @@ modelTypes:
         defaultValue:
           $id: '4'
           fixed: false
-        deprecated: false
         documentation:
           $id: '5'
           fixed: false
@@ -50,7 +48,6 @@ modelTypes:
         modelType:
           $id: '7'
           $type: PrimaryType
-          deprecated: false
           knownPrimaryType: string
           name:
             $id: '8'
@@ -68,7 +65,6 @@ modelTypes:
         defaultValue:
           $id: '10'
           fixed: false
-        deprecated: false
         documentation:
           $id: '11'
           fixed: false
@@ -78,7 +74,6 @@ modelTypes:
         modelType:
           $id: '13'
           $type: PrimaryType
-          deprecated: false
           knownPrimaryType: string
           name:
             $id: '14'
@@ -95,7 +90,6 @@ modelTypes:
   - $id: '16'
     $type: CompositeType
     containsConstantProperties: false
-    deprecated: false
     documentation: The CheckNameAvailability operation response.
     extensions:
       x-ms-metadata:
@@ -118,7 +112,6 @@ modelTypes:
         defaultValue:
           $id: '18'
           fixed: false
-        deprecated: false
         documentation:
           $id: '19'
           fixed: false
@@ -132,7 +125,6 @@ modelTypes:
         modelType:
           $id: '21'
           $type: PrimaryType
-          deprecated: false
           knownPrimaryType: boolean
           name:
             $id: '22'
@@ -150,7 +142,6 @@ modelTypes:
         defaultValue:
           $id: '24'
           fixed: false
-        deprecated: false
         documentation:
           $id: '25'
           fixed: false
@@ -178,7 +169,6 @@ modelTypes:
         modelType:
           $id: '27'
           $type: EnumType
-          deprecated: false
           modelAsString: false
           name:
             $id: '32'
@@ -188,7 +178,6 @@ modelTypes:
           underlyingType:
             $id: '30'
             $type: PrimaryType
-            deprecated: false
             knownPrimaryType: string
             name:
               $id: '31'
@@ -213,7 +202,6 @@ modelTypes:
         defaultValue:
           $id: '34'
           fixed: false
-        deprecated: false
         documentation:
           $id: '35'
           fixed: false
@@ -224,7 +212,6 @@ modelTypes:
         modelType:
           $id: '37'
           $type: PrimaryType
-          deprecated: false
           knownPrimaryType: string
           name:
             $id: '38'
@@ -241,7 +228,6 @@ modelTypes:
   - $id: '40'
     $type: CompositeType
     containsConstantProperties: false
-    deprecated: false
     extensions:
       x-ms-metadata:
         apiVersions:
@@ -263,7 +249,6 @@ modelTypes:
         defaultValue:
           $id: '42'
           fixed: false
-        deprecated: false
         documentation:
           $id: '43'
           fixed: false
@@ -289,7 +274,6 @@ modelTypes:
         modelType:
           $id: '45'
           $type: EnumType
-          deprecated: false
           modelAsString: false
           name:
             $id: '53'
@@ -299,7 +283,6 @@ modelTypes:
           underlyingType:
             $id: '51'
             $type: PrimaryType
-            deprecated: false
             knownPrimaryType: string
             name:
               $id: '52'
@@ -332,7 +315,6 @@ modelTypes:
   - $id: '55'
     $type: CompositeType
     containsConstantProperties: false
-    deprecated: false
     documentation: The parameters to provide for the account.
     extensions:
       x-ms-azure-resource: true
@@ -356,7 +338,6 @@ modelTypes:
         defaultValue:
           $id: '57'
           fixed: false
-        deprecated: false
         documentation:
           $id: '58'
           fixed: false
@@ -367,7 +348,6 @@ modelTypes:
         modelType:
           $id: '60'
           $type: PrimaryType
-          deprecated: false
           knownPrimaryType: string
           name:
             $id: '61'
@@ -385,7 +365,6 @@ modelTypes:
         defaultValue:
           $id: '63'
           fixed: false
-        deprecated: false
         documentation:
           $id: '64'
           fixed: false
@@ -396,7 +375,6 @@ modelTypes:
         modelType:
           $id: '66'
           $type: DictionaryType
-          deprecated: false
           name:
             $id: '69'
             fixed: false
@@ -404,7 +382,6 @@ modelTypes:
           valueType:
             $id: '67'
             $type: PrimaryType
-            deprecated: false
             knownPrimaryType: string
             name:
               $id: '68'
@@ -422,7 +399,6 @@ modelTypes:
         defaultValue:
           $id: '71'
           fixed: false
-        deprecated: false
         documentation:
           $id: '72'
           fixed: false
@@ -444,7 +420,6 @@ modelTypes:
   - $id: '75'
     $type: CompositeType
     containsConstantProperties: false
-    deprecated: false
     documentation: >-
       The URIs that are used to perform a retrieval of a public blob, queue or
       table object.
@@ -469,7 +444,6 @@ modelTypes:
         defaultValue:
           $id: '77'
           fixed: false
-        deprecated: false
         documentation:
           $id: '78'
           fixed: false
@@ -480,7 +454,6 @@ modelTypes:
         modelType:
           $id: '80'
           $type: PrimaryType
-          deprecated: false
           knownPrimaryType: string
           name:
             $id: '81'
@@ -498,7 +471,6 @@ modelTypes:
         defaultValue:
           $id: '83'
           fixed: false
-        deprecated: false
         documentation:
           $id: '84'
           fixed: false
@@ -509,7 +481,6 @@ modelTypes:
         modelType:
           $id: '86'
           $type: PrimaryType
-          deprecated: false
           knownPrimaryType: string
           name:
             $id: '87'
@@ -527,7 +498,6 @@ modelTypes:
         defaultValue:
           $id: '89'
           fixed: false
-        deprecated: false
         documentation:
           $id: '90'
           fixed: false
@@ -538,7 +508,6 @@ modelTypes:
         modelType:
           $id: '92'
           $type: PrimaryType
-          deprecated: false
           knownPrimaryType: string
           name:
             $id: '93'
@@ -556,7 +525,6 @@ modelTypes:
         defaultValue:
           $id: '95'
           fixed: false
-        deprecated: false
         documentation:
           $id: '96'
           fixed: false
@@ -567,7 +535,6 @@ modelTypes:
         modelType:
           $id: '98'
           $type: PrimaryType
-          deprecated: false
           knownPrimaryType: string
           name:
             $id: '99'
@@ -584,7 +551,6 @@ modelTypes:
   - $id: '101'
     $type: CompositeType
     containsConstantProperties: false
-    deprecated: false
     documentation: >-
       The custom domain assigned to this storage account. This can be set via
       Update.
@@ -609,7 +575,6 @@ modelTypes:
         defaultValue:
           $id: '103'
           fixed: false
-        deprecated: false
         documentation:
           $id: '104'
           fixed: false
@@ -620,7 +585,6 @@ modelTypes:
         modelType:
           $id: '106'
           $type: PrimaryType
-          deprecated: false
           knownPrimaryType: string
           name:
             $id: '107'
@@ -638,7 +602,6 @@ modelTypes:
         defaultValue:
           $id: '109'
           fixed: false
-        deprecated: false
         documentation:
           $id: '110'
           fixed: false
@@ -651,7 +614,6 @@ modelTypes:
         modelType:
           $id: '112'
           $type: PrimaryType
-          deprecated: false
           knownPrimaryType: boolean
           name:
             $id: '113'
@@ -668,7 +630,6 @@ modelTypes:
   - $id: '115'
     $type: CompositeType
     containsConstantProperties: false
-    deprecated: false
     extensions:
       x-ms-metadata:
         apiVersions:
@@ -690,7 +651,6 @@ modelTypes:
         defaultValue:
           $id: '117'
           fixed: false
-        deprecated: false
         documentation:
           $id: '118'
           fixed: false
@@ -718,7 +678,6 @@ modelTypes:
         modelType:
           $id: '120'
           $type: EnumType
-          deprecated: false
           modelAsString: false
           name:
             $id: '126'
@@ -728,7 +687,6 @@ modelTypes:
           underlyingType:
             $id: '124'
             $type: PrimaryType
-            deprecated: false
             knownPrimaryType: string
             name:
               $id: '125'
@@ -756,7 +714,6 @@ modelTypes:
         defaultValue:
           $id: '128'
           fixed: false
-        deprecated: false
         documentation:
           $id: '129'
           fixed: false
@@ -793,7 +750,6 @@ modelTypes:
         defaultValue:
           $id: '132'
           fixed: false
-        deprecated: false
         documentation:
           $id: '133'
           fixed: false
@@ -818,7 +774,6 @@ modelTypes:
         defaultValue:
           $id: '136'
           fixed: false
-        deprecated: false
         documentation:
           $id: '137'
           fixed: false
@@ -829,7 +784,6 @@ modelTypes:
         modelType:
           $id: '139'
           $type: PrimaryType
-          deprecated: false
           knownPrimaryType: string
           name:
             $id: '140'
@@ -847,7 +801,6 @@ modelTypes:
         defaultValue:
           $id: '142'
           fixed: false
-        deprecated: false
         documentation:
           $id: '143'
           fixed: false
@@ -875,7 +828,6 @@ modelTypes:
         modelType:
           $id: '145'
           $type: EnumType
-          deprecated: false
           modelAsString: false
           name:
             $id: '150'
@@ -885,7 +837,6 @@ modelTypes:
           underlyingType:
             $id: '148'
             $type: PrimaryType
-            deprecated: false
             knownPrimaryType: string
             name:
               $id: '149'
@@ -910,7 +861,6 @@ modelTypes:
         defaultValue:
           $id: '152'
           fixed: false
-        deprecated: false
         documentation:
           $id: '153'
           fixed: false
@@ -925,7 +875,6 @@ modelTypes:
         modelType:
           $id: '155'
           $type: PrimaryType
-          deprecated: false
           format: date-time
           knownPrimaryType: dateTime
           name:
@@ -944,7 +893,6 @@ modelTypes:
         defaultValue:
           $id: '158'
           fixed: false
-        deprecated: false
         documentation:
           $id: '159'
           fixed: false
@@ -958,7 +906,6 @@ modelTypes:
         modelType:
           $id: '161'
           $type: PrimaryType
-          deprecated: false
           knownPrimaryType: string
           name:
             $id: '162'
@@ -976,7 +923,6 @@ modelTypes:
         defaultValue:
           $id: '164'
           fixed: false
-        deprecated: false
         documentation:
           $id: '165'
           fixed: false
@@ -1016,7 +962,6 @@ modelTypes:
         defaultValue:
           $id: '168'
           fixed: false
-        deprecated: false
         documentation:
           $id: '169'
           fixed: false
@@ -1027,7 +972,6 @@ modelTypes:
         modelType:
           $id: '171'
           $type: PrimaryType
-          deprecated: false
           format: date-time
           knownPrimaryType: dateTime
           name:
@@ -1046,7 +990,6 @@ modelTypes:
         defaultValue:
           $id: '174'
           fixed: false
-        deprecated: false
         documentation:
           $id: '175'
           fixed: false
@@ -1070,7 +1013,6 @@ modelTypes:
         defaultValue:
           $id: '178'
           fixed: false
-        deprecated: false
         documentation:
           $id: '179'
           fixed: false
@@ -1097,7 +1039,6 @@ modelTypes:
       $id: '187'
       $type: CompositeType
       containsConstantProperties: false
-      deprecated: false
       extensions:
         x-ms-azure-resource: true
         x-ms-metadata:
@@ -1120,7 +1061,6 @@ modelTypes:
           defaultValue:
             $id: '189'
             fixed: false
-          deprecated: false
           documentation:
             $id: '190'
             fixed: false
@@ -1131,7 +1071,6 @@ modelTypes:
           modelType:
             $id: '192'
             $type: PrimaryType
-            deprecated: false
             knownPrimaryType: string
             name:
               $id: '193'
@@ -1149,7 +1088,6 @@ modelTypes:
           defaultValue:
             $id: '195'
             fixed: false
-          deprecated: false
           documentation:
             $id: '196'
             fixed: false
@@ -1160,7 +1098,6 @@ modelTypes:
           modelType:
             $id: '198'
             $type: PrimaryType
-            deprecated: false
             knownPrimaryType: string
             name:
               $id: '199'
@@ -1178,7 +1115,6 @@ modelTypes:
           defaultValue:
             $id: '201'
             fixed: false
-          deprecated: false
           documentation:
             $id: '202'
             fixed: false
@@ -1189,7 +1125,6 @@ modelTypes:
           modelType:
             $id: '204'
             $type: PrimaryType
-            deprecated: false
             knownPrimaryType: string
             name:
               $id: '205'
@@ -1207,7 +1142,6 @@ modelTypes:
           defaultValue:
             $id: '207'
             fixed: false
-          deprecated: false
           documentation:
             $id: '208'
             fixed: false
@@ -1218,7 +1152,6 @@ modelTypes:
           modelType:
             $id: '210'
             $type: PrimaryType
-            deprecated: false
             knownPrimaryType: string
             name:
               $id: '211'
@@ -1236,7 +1169,6 @@ modelTypes:
           defaultValue:
             $id: '213'
             fixed: false
-          deprecated: false
           documentation:
             $id: '214'
             fixed: false
@@ -1247,7 +1179,6 @@ modelTypes:
           modelType:
             $id: '216'
             $type: DictionaryType
-            deprecated: false
             name:
               $id: '219'
               fixed: false
@@ -1255,7 +1186,6 @@ modelTypes:
             valueType:
               $id: '217'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '218'
@@ -1270,7 +1200,6 @@ modelTypes:
           serializedName: tags
       serializedName: Resource
     containsConstantProperties: false
-    deprecated: false
     documentation: The storage account.
     extensions:
       x-ms-metadata:
@@ -1293,7 +1222,6 @@ modelTypes:
         defaultValue:
           $id: '184'
           fixed: false
-        deprecated: false
         documentation:
           $id: '185'
           fixed: false
@@ -1315,7 +1243,6 @@ modelTypes:
   - $id: '222'
     $type: CompositeType
     containsConstantProperties: false
-    deprecated: false
     documentation: The access keys for the storage account.
     extensions:
       x-ms-metadata:
@@ -1338,7 +1265,6 @@ modelTypes:
         defaultValue:
           $id: '224'
           fixed: false
-        deprecated: false
         documentation:
           $id: '225'
           fixed: false
@@ -1349,7 +1275,6 @@ modelTypes:
         modelType:
           $id: '227'
           $type: PrimaryType
-          deprecated: false
           knownPrimaryType: string
           name:
             $id: '228'
@@ -1367,7 +1292,6 @@ modelTypes:
         defaultValue:
           $id: '230'
           fixed: false
-        deprecated: false
         documentation:
           $id: '231'
           fixed: false
@@ -1378,7 +1302,6 @@ modelTypes:
         modelType:
           $id: '233'
           $type: PrimaryType
-          deprecated: false
           knownPrimaryType: string
           name:
             $id: '234'
@@ -1395,7 +1318,6 @@ modelTypes:
   - $id: '236'
     $type: CompositeType
     containsConstantProperties: false
-    deprecated: false
     documentation: The list storage accounts operation response.
     extensions:
       x-ms-metadata:
@@ -1418,7 +1340,6 @@ modelTypes:
         defaultValue:
           $id: '238'
           fixed: false
-        deprecated: false
         documentation:
           $id: '239'
           fixed: false
@@ -1429,7 +1350,6 @@ modelTypes:
         modelType:
           $id: '241'
           $type: SequenceType
-          deprecated: false
           elementType:
             $ref: '182'
           name:
@@ -1446,7 +1366,6 @@ modelTypes:
   - $id: '244'
     $type: CompositeType
     containsConstantProperties: false
-    deprecated: false
     extensions:
       x-ms-metadata:
         apiVersions:
@@ -1468,7 +1387,6 @@ modelTypes:
         defaultValue:
           $id: '246'
           fixed: false
-        deprecated: false
         documentation:
           $id: '247'
           fixed: false
@@ -1508,7 +1426,6 @@ modelTypes:
         defaultValue:
           $id: '250'
           fixed: false
-        deprecated: false
         documentation:
           $id: '251'
           fixed: false
@@ -1533,7 +1450,6 @@ modelTypes:
   - $id: '254'
     $type: CompositeType
     containsConstantProperties: false
-    deprecated: false
     documentation: The parameters to update on the account.
     extensions:
       x-ms-azure-resource: true
@@ -1557,7 +1473,6 @@ modelTypes:
         defaultValue:
           $id: '256'
           fixed: false
-        deprecated: false
         documentation:
           $id: '257'
           fixed: false
@@ -1568,7 +1483,6 @@ modelTypes:
         modelType:
           $id: '259'
           $type: DictionaryType
-          deprecated: false
           name:
             $id: '262'
             fixed: false
@@ -1576,7 +1490,6 @@ modelTypes:
           valueType:
             $id: '260'
             $type: PrimaryType
-            deprecated: false
             knownPrimaryType: string
             name:
               $id: '261'
@@ -1594,7 +1507,6 @@ modelTypes:
         defaultValue:
           $id: '264'
           fixed: false
-        deprecated: false
         documentation:
           $id: '265'
           fixed: false
@@ -1616,7 +1528,6 @@ modelTypes:
   - $id: '268'
     $type: CompositeType
     containsConstantProperties: false
-    deprecated: false
     extensions:
       x-ms-metadata:
         apiVersions:
@@ -1638,7 +1549,6 @@ modelTypes:
         defaultValue:
           $id: '270'
           fixed: false
-        deprecated: false
         documentation:
           $id: '271'
           fixed: false
@@ -1648,7 +1558,6 @@ modelTypes:
         modelType:
           $id: '273'
           $type: PrimaryType
-          deprecated: false
           knownPrimaryType: string
           name:
             $id: '274'
@@ -1665,7 +1574,6 @@ modelTypes:
   - $id: '276'
     $type: CompositeType
     containsConstantProperties: false
-    deprecated: false
     documentation: The Usage Names.
     extensions:
       x-ms-metadata:
@@ -1688,7 +1596,6 @@ modelTypes:
         defaultValue:
           $id: '278'
           fixed: false
-        deprecated: false
         documentation:
           $id: '279'
           fixed: false
@@ -1699,7 +1606,6 @@ modelTypes:
         modelType:
           $id: '281'
           $type: PrimaryType
-          deprecated: false
           knownPrimaryType: string
           name:
             $id: '282'
@@ -1717,7 +1623,6 @@ modelTypes:
         defaultValue:
           $id: '284'
           fixed: false
-        deprecated: false
         documentation:
           $id: '285'
           fixed: false
@@ -1728,7 +1633,6 @@ modelTypes:
         modelType:
           $id: '287'
           $type: PrimaryType
-          deprecated: false
           knownPrimaryType: string
           name:
             $id: '288'
@@ -1745,7 +1649,6 @@ modelTypes:
   - $id: '290'
     $type: CompositeType
     containsConstantProperties: false
-    deprecated: false
     documentation: DESCRIBES STORAGE RESOURCE USAGE.
     extensions:
       x-ms-metadata:
@@ -1768,7 +1671,6 @@ modelTypes:
         defaultValue:
           $id: '292'
           fixed: false
-        deprecated: false
         documentation:
           $id: '293'
           fixed: false
@@ -1794,7 +1696,6 @@ modelTypes:
         modelType:
           $id: '295'
           $type: EnumType
-          deprecated: false
           modelAsString: false
           name:
             $id: '304'
@@ -1804,7 +1705,6 @@ modelTypes:
           underlyingType:
             $id: '302'
             $type: PrimaryType
-            deprecated: false
             knownPrimaryType: string
             name:
               $id: '303'
@@ -1841,7 +1741,6 @@ modelTypes:
         defaultValue:
           $id: '306'
           fixed: false
-        deprecated: false
         documentation:
           $id: '307'
           fixed: false
@@ -1854,7 +1753,6 @@ modelTypes:
         modelType:
           $id: '309'
           $type: PrimaryType
-          deprecated: false
           format: int32
           knownPrimaryType: int
           name:
@@ -1873,7 +1771,6 @@ modelTypes:
         defaultValue:
           $id: '312'
           fixed: false
-        deprecated: false
         documentation:
           $id: '313'
           fixed: false
@@ -1886,7 +1783,6 @@ modelTypes:
         modelType:
           $id: '315'
           $type: PrimaryType
-          deprecated: false
           format: int32
           knownPrimaryType: int
           name:
@@ -1905,7 +1801,6 @@ modelTypes:
         defaultValue:
           $id: '318'
           fixed: false
-        deprecated: false
         documentation:
           $id: '319'
           fixed: false
@@ -1926,7 +1821,6 @@ modelTypes:
   - $id: '322'
     $type: CompositeType
     containsConstantProperties: false
-    deprecated: false
     documentation: The List Usages operation response.
     extensions:
       x-ms-metadata:
@@ -1949,7 +1843,6 @@ modelTypes:
         defaultValue:
           $id: '324'
           fixed: false
-        deprecated: false
         documentation:
           $id: '325'
           fixed: false
@@ -1960,7 +1853,6 @@ modelTypes:
         modelType:
           $id: '327'
           $type: SequenceType
-          deprecated: false
           elementType:
             $ref: '290'
           name:
@@ -1985,7 +1877,6 @@ operations:
         defaultResponse:
           $id: '442'
           isNullable: true
-        deprecated: false
         description: >-
           Checks that the account name has sufficient cowbell (in order to
           prevent fevers).
@@ -2008,7 +1899,6 @@ operations:
             defaultValue:
               $id: '423'
               fixed: false
-            deprecated: false
             documentation:
               $id: '424'
               fixed: false
@@ -2035,7 +1925,6 @@ operations:
             defaultValue:
               $id: '427'
               fixed: false
-            deprecated: false
             documentation:
               $id: '428'
               fixed: false
@@ -2060,7 +1949,6 @@ operations:
             modelType:
               $id: '430'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '431'
@@ -2077,7 +1965,6 @@ operations:
               $id: '433'
               fixed: false
               raw: '2015-06-15'
-            deprecated: false
             documentation:
               $id: '434'
               fixed: false
@@ -2088,7 +1975,6 @@ operations:
             modelType:
               $id: '436'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '437'
@@ -2134,7 +2020,6 @@ operations:
         defaultResponse:
           $id: '479'
           isNullable: true
-        deprecated: false
         description: >-
           Asynchronously creates a new storage account with the specified
           parameters. Existing accounts cannot be updated with this API and
@@ -2164,7 +2049,6 @@ operations:
             defaultValue:
               $id: '446'
               fixed: false
-            deprecated: false
             documentation:
               $id: '447'
               fixed: false
@@ -2188,7 +2072,6 @@ operations:
             modelType:
               $id: '449'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '450'
@@ -2209,7 +2092,6 @@ operations:
             defaultValue:
               $id: '452'
               fixed: false
-            deprecated: false
             documentation:
               $id: '453'
               fixed: false
@@ -2236,7 +2118,6 @@ operations:
             modelType:
               $id: '455'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '456'
@@ -2252,7 +2133,6 @@ operations:
             defaultValue:
               $id: '458'
               fixed: false
-            deprecated: false
             documentation:
               $id: '459'
               fixed: false
@@ -2276,7 +2156,6 @@ operations:
             defaultValue:
               $id: '462'
               fixed: false
-            deprecated: false
             documentation:
               $id: '463'
               fixed: false
@@ -2301,7 +2180,6 @@ operations:
             modelType:
               $id: '465'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '466'
@@ -2318,7 +2196,6 @@ operations:
               $id: '468'
               fixed: false
               raw: '2015-06-15'
-            deprecated: false
             documentation:
               $id: '469'
               fixed: false
@@ -2329,7 +2206,6 @@ operations:
             modelType:
               $id: '471'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '472'
@@ -2391,7 +2267,6 @@ operations:
         defaultResponse:
           $id: '512'
           isNullable: true
-        deprecated: false
         description: Deletes a storage account in Microsoft Azure.
         group:
           $id: '507'
@@ -2412,7 +2287,6 @@ operations:
             defaultValue:
               $id: '483'
               fixed: false
-            deprecated: false
             documentation:
               $id: '484'
               fixed: false
@@ -2436,7 +2310,6 @@ operations:
             modelType:
               $id: '486'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '487'
@@ -2457,7 +2330,6 @@ operations:
             defaultValue:
               $id: '489'
               fixed: false
-            deprecated: false
             documentation:
               $id: '490'
               fixed: false
@@ -2484,7 +2356,6 @@ operations:
             modelType:
               $id: '492'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '493'
@@ -2502,7 +2373,6 @@ operations:
             defaultValue:
               $id: '495'
               fixed: false
-            deprecated: false
             documentation:
               $id: '496'
               fixed: false
@@ -2527,7 +2397,6 @@ operations:
             modelType:
               $id: '498'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '499'
@@ -2544,7 +2413,6 @@ operations:
               $id: '501'
               fixed: false
               raw: '2015-06-15'
-            deprecated: false
             documentation:
               $id: '502'
               fixed: false
@@ -2555,7 +2423,6 @@ operations:
             modelType:
               $id: '504'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '505'
@@ -2612,7 +2479,6 @@ operations:
         defaultResponse:
           $id: '543'
           isNullable: true
-        deprecated: false
         description: >-
           Returns the properties for the specified storage account including but
           not limited to name, account type, location, and account status. The
@@ -2636,7 +2502,6 @@ operations:
             defaultValue:
               $id: '516'
               fixed: false
-            deprecated: false
             documentation:
               $id: '517'
               fixed: false
@@ -2660,7 +2525,6 @@ operations:
             modelType:
               $id: '519'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '520'
@@ -2681,7 +2545,6 @@ operations:
             defaultValue:
               $id: '522'
               fixed: false
-            deprecated: false
             documentation:
               $id: '523'
               fixed: false
@@ -2708,7 +2571,6 @@ operations:
             modelType:
               $id: '525'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '526'
@@ -2726,7 +2588,6 @@ operations:
             defaultValue:
               $id: '528'
               fixed: false
-            deprecated: false
             documentation:
               $id: '529'
               fixed: false
@@ -2751,7 +2612,6 @@ operations:
             modelType:
               $id: '531'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '532'
@@ -2768,7 +2628,6 @@ operations:
               $id: '534'
               fixed: false
               raw: '2015-06-15'
-            deprecated: false
             documentation:
               $id: '535'
               fixed: false
@@ -2779,7 +2638,6 @@ operations:
             modelType:
               $id: '537'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '538'
@@ -2825,7 +2683,6 @@ operations:
         defaultResponse:
           $id: '578'
           isNullable: true
-        deprecated: false
         description: >-
           Updates the account type or tags for a storage account. It can also be
           used to add a custom domain (note that custom domains cannot be added
@@ -2861,7 +2718,6 @@ operations:
             defaultValue:
               $id: '547'
               fixed: false
-            deprecated: false
             documentation:
               $id: '548'
               fixed: false
@@ -2885,7 +2741,6 @@ operations:
             modelType:
               $id: '550'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '551'
@@ -2906,7 +2761,6 @@ operations:
             defaultValue:
               $id: '553'
               fixed: false
-            deprecated: false
             documentation:
               $id: '554'
               fixed: false
@@ -2933,7 +2787,6 @@ operations:
             modelType:
               $id: '556'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '557'
@@ -2949,7 +2802,6 @@ operations:
             defaultValue:
               $id: '559'
               fixed: false
-            deprecated: false
             documentation:
               $id: '560'
               fixed: false
@@ -2975,7 +2827,6 @@ operations:
             defaultValue:
               $id: '563'
               fixed: false
-            deprecated: false
             documentation:
               $id: '564'
               fixed: false
@@ -3000,7 +2851,6 @@ operations:
             modelType:
               $id: '566'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '567'
@@ -3017,7 +2867,6 @@ operations:
               $id: '569'
               fixed: false
               raw: '2015-06-15'
-            deprecated: false
             documentation:
               $id: '570'
               fixed: false
@@ -3028,7 +2877,6 @@ operations:
             modelType:
               $id: '572'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '573'
@@ -3074,7 +2922,6 @@ operations:
         defaultResponse:
           $id: '609'
           isNullable: true
-        deprecated: false
         description: Lists the access keys for the specified storage account.
         group:
           $id: '606'
@@ -3095,7 +2942,6 @@ operations:
             defaultValue:
               $id: '582'
               fixed: false
-            deprecated: false
             documentation:
               $id: '583'
               fixed: false
@@ -3119,7 +2965,6 @@ operations:
             modelType:
               $id: '585'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '586'
@@ -3140,7 +2985,6 @@ operations:
             defaultValue:
               $id: '588'
               fixed: false
-            deprecated: false
             documentation:
               $id: '589'
               fixed: false
@@ -3164,7 +3008,6 @@ operations:
             modelType:
               $id: '591'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '592'
@@ -3182,7 +3025,6 @@ operations:
             defaultValue:
               $id: '594'
               fixed: false
-            deprecated: false
             documentation:
               $id: '595'
               fixed: false
@@ -3207,7 +3049,6 @@ operations:
             modelType:
               $id: '597'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '598'
@@ -3224,7 +3065,6 @@ operations:
               $id: '600'
               fixed: false
               raw: '2015-06-15'
-            deprecated: false
             documentation:
               $id: '601'
               fixed: false
@@ -3235,7 +3075,6 @@ operations:
             modelType:
               $id: '603'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '604'
@@ -3281,7 +3120,6 @@ operations:
         defaultResponse:
           $id: '628'
           isNullable: true
-        deprecated: false
         description: >-
           Lists all the storage accounts available under the subscription. Note
           that storage keys are not returned; use the ListKeys operation for
@@ -3308,7 +3146,6 @@ operations:
             defaultValue:
               $id: '613'
               fixed: false
-            deprecated: false
             documentation:
               $id: '614'
               fixed: false
@@ -3333,7 +3170,6 @@ operations:
             modelType:
               $id: '616'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '617'
@@ -3350,7 +3186,6 @@ operations:
               $id: '619'
               fixed: false
               raw: '2015-06-15'
-            deprecated: false
             documentation:
               $id: '620'
               fixed: false
@@ -3361,7 +3196,6 @@ operations:
             modelType:
               $id: '622'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '623'
@@ -3407,7 +3241,6 @@ operations:
         defaultResponse:
           $id: '653'
           isNullable: true
-        deprecated: false
         description: >-
           Lists all the storage accounts available under the given resource
           group. Note that storage keys are not returned; use the ListKeys
@@ -3434,7 +3267,6 @@ operations:
             defaultValue:
               $id: '632'
               fixed: false
-            deprecated: false
             documentation:
               $id: '633'
               fixed: false
@@ -3458,7 +3290,6 @@ operations:
             modelType:
               $id: '635'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '636'
@@ -3476,7 +3307,6 @@ operations:
             defaultValue:
               $id: '638'
               fixed: false
-            deprecated: false
             documentation:
               $id: '639'
               fixed: false
@@ -3501,7 +3331,6 @@ operations:
             modelType:
               $id: '641'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '642'
@@ -3518,7 +3347,6 @@ operations:
               $id: '644'
               fixed: false
               raw: '2015-06-15'
-            deprecated: false
             documentation:
               $id: '645'
               fixed: false
@@ -3529,7 +3357,6 @@ operations:
             modelType:
               $id: '647'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '648'
@@ -3575,7 +3402,6 @@ operations:
         defaultResponse:
           $id: '688'
           isNullable: true
-        deprecated: false
         description: Regenerates the access keys for the specified storage account.
         extensions:
           x-ms-requestBody-index: '2'
@@ -3598,7 +3424,6 @@ operations:
             defaultValue:
               $id: '657'
               fixed: false
-            deprecated: false
             documentation:
               $id: '658'
               fixed: false
@@ -3622,7 +3447,6 @@ operations:
             modelType:
               $id: '660'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '661'
@@ -3643,7 +3467,6 @@ operations:
             defaultValue:
               $id: '663'
               fixed: false
-            deprecated: false
             documentation:
               $id: '664'
               fixed: false
@@ -3670,7 +3493,6 @@ operations:
             modelType:
               $id: '666'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '667'
@@ -3686,7 +3508,6 @@ operations:
             defaultValue:
               $id: '669'
               fixed: false
-            deprecated: false
             documentation:
               $id: '670'
               fixed: false
@@ -3712,7 +3533,6 @@ operations:
             defaultValue:
               $id: '673'
               fixed: false
-            deprecated: false
             documentation:
               $id: '674'
               fixed: false
@@ -3737,7 +3557,6 @@ operations:
             modelType:
               $id: '676'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '677'
@@ -3754,7 +3573,6 @@ operations:
               $id: '679'
               fixed: false
               raw: '2015-06-15'
-            deprecated: false
             documentation:
               $id: '680'
               fixed: false
@@ -3765,7 +3583,6 @@ operations:
             modelType:
               $id: '682'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '683'
@@ -3827,7 +3644,6 @@ operations:
                   "$id": "423",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "424",
                   "fixed": false,
@@ -3859,7 +3675,6 @@ operations:
                   "$id": "427",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "428",
                   "fixed": false,
@@ -3896,7 +3711,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -3908,7 +3722,6 @@ operations:
                   "fixed": false,
                   "raw": "2015-06-15"
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "434",
                   "fixed": false,
@@ -3931,7 +3744,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               }
             ],
@@ -3993,7 +3805,6 @@ operations:
             "extensions": {
               "x-ms-requestBody-index": "0"
             },
-            "deprecated": false,
             "hidden": false
           },
           {
@@ -4010,7 +3821,6 @@ operations:
                   "$id": "446",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "447",
                   "fixed": false,
@@ -4048,7 +3858,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -4066,7 +3875,6 @@ operations:
                   "$id": "452",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "453",
                   "fixed": false,
@@ -4104,7 +3912,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -4115,7 +3922,6 @@ operations:
                   "$id": "458",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "459",
                   "fixed": false,
@@ -4147,7 +3953,6 @@ operations:
                   "$id": "462",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "463",
                   "fixed": false,
@@ -4184,7 +3989,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -4196,7 +4000,6 @@ operations:
                   "fixed": false,
                   "raw": "2015-06-15"
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "469",
                   "fixed": false,
@@ -4219,7 +4022,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               }
             ],
@@ -4301,7 +4103,6 @@ operations:
               "x-ms-requestBody-index": "2",
               "x-ms-long-running-operation": true
             },
-            "deprecated": false,
             "hidden": false
           },
           {
@@ -4318,7 +4119,6 @@ operations:
                   "$id": "483",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "484",
                   "fixed": false,
@@ -4356,7 +4156,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -4374,7 +4173,6 @@ operations:
                   "$id": "489",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "490",
                   "fixed": false,
@@ -4412,7 +4210,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -4426,7 +4223,6 @@ operations:
                   "$id": "495",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "496",
                   "fixed": false,
@@ -4463,7 +4259,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -4475,7 +4270,6 @@ operations:
                   "fixed": false,
                   "raw": "2015-06-15"
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "502",
                   "fixed": false,
@@ -4498,7 +4292,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               }
             ],
@@ -4569,7 +4362,6 @@ operations:
             "responseContentTypes": [
               "application/json"
             ],
-            "deprecated": false,
             "hidden": false
           },
           {
@@ -4586,7 +4378,6 @@ operations:
                   "$id": "516",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "517",
                   "fixed": false,
@@ -4624,7 +4415,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -4642,7 +4432,6 @@ operations:
                   "$id": "522",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "523",
                   "fixed": false,
@@ -4680,7 +4469,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -4694,7 +4482,6 @@ operations:
                   "$id": "528",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "529",
                   "fixed": false,
@@ -4731,7 +4518,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -4743,7 +4529,6 @@ operations:
                   "fixed": false,
                   "raw": "2015-06-15"
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "535",
                   "fixed": false,
@@ -4766,7 +4551,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               }
             ],
@@ -4825,7 +4609,6 @@ operations:
               "application/json",
               "text/json"
             ],
-            "deprecated": false,
             "hidden": false
           },
           {
@@ -4842,7 +4625,6 @@ operations:
                   "$id": "547",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "548",
                   "fixed": false,
@@ -4880,7 +4662,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -4898,7 +4679,6 @@ operations:
                   "$id": "553",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "554",
                   "fixed": false,
@@ -4936,7 +4716,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -4947,7 +4726,6 @@ operations:
                   "$id": "559",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "560",
                   "fixed": false,
@@ -4979,7 +4757,6 @@ operations:
                   "$id": "563",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "564",
                   "fixed": false,
@@ -5016,7 +4793,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -5028,7 +4804,6 @@ operations:
                   "fixed": false,
                   "raw": "2015-06-15"
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "570",
                   "fixed": false,
@@ -5051,7 +4826,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               }
             ],
@@ -5113,7 +4887,6 @@ operations:
             "extensions": {
               "x-ms-requestBody-index": "2"
             },
-            "deprecated": false,
             "hidden": false
           },
           {
@@ -5130,7 +4903,6 @@ operations:
                   "$id": "582",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "583",
                   "fixed": false,
@@ -5168,7 +4940,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -5186,7 +4957,6 @@ operations:
                   "$id": "588",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "589",
                   "fixed": false,
@@ -5224,7 +4994,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -5238,7 +5007,6 @@ operations:
                   "$id": "594",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "595",
                   "fixed": false,
@@ -5275,7 +5043,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -5287,7 +5054,6 @@ operations:
                   "fixed": false,
                   "raw": "2015-06-15"
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "601",
                   "fixed": false,
@@ -5310,7 +5076,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               }
             ],
@@ -5369,7 +5134,6 @@ operations:
               "application/json",
               "text/json"
             ],
-            "deprecated": false,
             "hidden": false
           },
           {
@@ -5386,7 +5150,6 @@ operations:
                   "$id": "613",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "614",
                   "fixed": false,
@@ -5423,7 +5186,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -5435,7 +5197,6 @@ operations:
                   "fixed": false,
                   "raw": "2015-06-15"
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "620",
                   "fixed": false,
@@ -5458,7 +5219,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               }
             ],
@@ -5522,7 +5282,6 @@ operations:
                 "nextLinkName": null
               }
             },
-            "deprecated": false,
             "hidden": false
           },
           {
@@ -5539,7 +5298,6 @@ operations:
                   "$id": "632",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "633",
                   "fixed": false,
@@ -5577,7 +5335,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -5591,7 +5348,6 @@ operations:
                   "$id": "638",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "639",
                   "fixed": false,
@@ -5628,7 +5384,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -5640,7 +5395,6 @@ operations:
                   "fixed": false,
                   "raw": "2015-06-15"
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "645",
                   "fixed": false,
@@ -5663,7 +5417,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               }
             ],
@@ -5727,7 +5480,6 @@ operations:
                 "nextLinkName": null
               }
             },
-            "deprecated": false,
             "hidden": false
           },
           {
@@ -5744,7 +5496,6 @@ operations:
                   "$id": "657",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "658",
                   "fixed": false,
@@ -5782,7 +5533,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -5800,7 +5550,6 @@ operations:
                   "$id": "663",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "664",
                   "fixed": false,
@@ -5838,7 +5587,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -5849,7 +5597,6 @@ operations:
                   "$id": "669",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "670",
                   "fixed": false,
@@ -5881,7 +5628,6 @@ operations:
                   "$id": "673",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "674",
                   "fixed": false,
@@ -5918,7 +5664,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -5930,7 +5675,6 @@ operations:
                   "fixed": false,
                   "raw": "2015-06-15"
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "680",
                   "fixed": false,
@@ -5953,7 +5697,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               }
             ],
@@ -6015,7 +5758,6 @@ operations:
             "extensions": {
               "x-ms-requestBody-index": "2"
             },
-            "deprecated": false,
             "hidden": false
           }
         ],
@@ -6039,7 +5781,6 @@ operations:
         defaultResponse:
           $id: '710'
           isNullable: true
-        deprecated: false
         description: >-
           Gets the current usage count and the limit for the resources under the
           subscription.
@@ -6065,7 +5806,6 @@ operations:
             defaultValue:
               $id: '695'
               fixed: false
-            deprecated: false
             documentation:
               $id: '696'
               fixed: false
@@ -6090,7 +5830,6 @@ operations:
             modelType:
               $id: '698'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '699'
@@ -6107,7 +5846,6 @@ operations:
               $id: '701'
               fixed: false
               raw: '2015-06-15'
-            deprecated: false
             documentation:
               $id: '702'
               fixed: false
@@ -6118,7 +5856,6 @@ operations:
             modelType:
               $id: '704'
               $type: PrimaryType
-              deprecated: false
               knownPrimaryType: string
               name:
                 $id: '705'
@@ -6182,7 +5919,6 @@ operations:
                   "$id": "695",
                   "fixed": false
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "696",
                   "fixed": false,
@@ -6219,7 +5955,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               },
               {
@@ -6231,7 +5966,6 @@ operations:
                   "fixed": false,
                   "raw": "2015-06-15"
                 },
-                "deprecated": false,
                 "documentation": {
                   "$id": "702",
                   "fixed": false,
@@ -6254,7 +5988,6 @@ operations:
                     "fixed": false,
                     "raw": "String"
                   },
-                  "deprecated": false
                 }
               }
             ],
@@ -6318,7 +6051,6 @@ operations:
                 "nextLinkName": null
               }
             },
-            "deprecated": false,
             "hidden": false
           }
         ],
@@ -6342,7 +6074,6 @@ properties:
     defaultValue:
       $id: '331'
       fixed: false
-    deprecated: false
     documentation:
       $id: '332'
       fixed: false
@@ -6367,7 +6098,6 @@ properties:
     modelType:
       $id: '334'
       $type: PrimaryType
-      deprecated: false
       knownPrimaryType: string
       name:
         $id: '335'
@@ -6385,7 +6115,6 @@ properties:
     defaultValue:
       $id: '337'
       fixed: false
-    deprecated: false
     documentation:
       $id: '338'
       fixed: false
@@ -6409,7 +6138,6 @@ properties:
     modelType:
       $id: '340'
       $type: PrimaryType
-      deprecated: false
       knownPrimaryType: string
       name:
         $id: '341'
@@ -6430,7 +6158,6 @@ properties:
     defaultValue:
       $id: '343'
       fixed: false
-    deprecated: false
     documentation:
       $id: '344'
       fixed: false
@@ -6457,7 +6184,6 @@ properties:
     modelType:
       $id: '346'
       $type: PrimaryType
-      deprecated: false
       knownPrimaryType: string
       name:
         $id: '347'
@@ -6475,7 +6201,6 @@ properties:
     defaultValue:
       $id: '349'
       fixed: false
-    deprecated: false
     documentation:
       $id: '350'
       fixed: false
@@ -6499,7 +6224,6 @@ properties:
     modelType:
       $id: '352'
       $type: PrimaryType
-      deprecated: false
       knownPrimaryType: string
       name:
         $id: '353'
@@ -6520,7 +6244,6 @@ properties:
     defaultValue:
       $id: '355'
       fixed: false
-    deprecated: false
     documentation:
       $id: '356'
       fixed: false
@@ -6547,7 +6270,6 @@ properties:
     modelType:
       $id: '358'
       $type: PrimaryType
-      deprecated: false
       knownPrimaryType: string
       name:
         $id: '359'
@@ -6565,7 +6287,6 @@ properties:
     defaultValue:
       $id: '361'
       fixed: false
-    deprecated: false
     documentation:
       $id: '362'
       fixed: false
@@ -6589,7 +6310,6 @@ properties:
     modelType:
       $id: '364'
       $type: PrimaryType
-      deprecated: false
       knownPrimaryType: string
       name:
         $id: '365'
@@ -6610,7 +6330,6 @@ properties:
     defaultValue:
       $id: '367'
       fixed: false
-    deprecated: false
     documentation:
       $id: '368'
       fixed: false
@@ -6637,7 +6356,6 @@ properties:
     modelType:
       $id: '370'
       $type: PrimaryType
-      deprecated: false
       knownPrimaryType: string
       name:
         $id: '371'
@@ -6655,7 +6373,6 @@ properties:
     defaultValue:
       $id: '373'
       fixed: false
-    deprecated: false
     documentation:
       $id: '374'
       fixed: false
@@ -6679,7 +6396,6 @@ properties:
     modelType:
       $id: '376'
       $type: PrimaryType
-      deprecated: false
       knownPrimaryType: string
       name:
         $id: '377'
@@ -6700,7 +6416,6 @@ properties:
     defaultValue:
       $id: '379'
       fixed: false
-    deprecated: false
     documentation:
       $id: '380'
       fixed: false
@@ -6727,7 +6442,6 @@ properties:
     modelType:
       $id: '382'
       $type: PrimaryType
-      deprecated: false
       knownPrimaryType: string
       name:
         $id: '383'
@@ -6745,7 +6459,6 @@ properties:
     defaultValue:
       $id: '385'
       fixed: false
-    deprecated: false
     documentation:
       $id: '386'
       fixed: false
@@ -6769,7 +6482,6 @@ properties:
     modelType:
       $id: '388'
       $type: PrimaryType
-      deprecated: false
       knownPrimaryType: string
       name:
         $id: '389'
@@ -6790,7 +6502,6 @@ properties:
     defaultValue:
       $id: '391'
       fixed: false
-    deprecated: false
     documentation:
       $id: '392'
       fixed: false
@@ -6814,7 +6525,6 @@ properties:
     modelType:
       $id: '394'
       $type: PrimaryType
-      deprecated: false
       knownPrimaryType: string
       name:
         $id: '395'
@@ -6832,7 +6542,6 @@ properties:
     defaultValue:
       $id: '397'
       fixed: false
-    deprecated: false
     documentation:
       $id: '398'
       fixed: false
@@ -6856,7 +6565,6 @@ properties:
     modelType:
       $id: '400'
       $type: PrimaryType
-      deprecated: false
       knownPrimaryType: string
       name:
         $id: '401'
@@ -6874,7 +6582,6 @@ properties:
     defaultValue:
       $id: '403'
       fixed: false
-    deprecated: false
     documentation:
       $id: '404'
       fixed: false
@@ -6898,7 +6605,6 @@ properties:
     modelType:
       $id: '406'
       $type: PrimaryType
-      deprecated: false
       knownPrimaryType: string
       name:
         $id: '407'
@@ -6919,7 +6625,6 @@ properties:
     defaultValue:
       $id: '409'
       fixed: false
-    deprecated: false
     documentation:
       $id: '410'
       fixed: false
@@ -6946,7 +6651,6 @@ properties:
     modelType:
       $id: '412'
       $type: PrimaryType
-      deprecated: false
       knownPrimaryType: string
       name:
         $id: '413'
@@ -6965,7 +6669,6 @@ properties:
       $id: '415'
       fixed: false
       raw: '2015-06-15'
-    deprecated: false
     documentation:
       $id: '416'
       fixed: false
@@ -6976,7 +6679,6 @@ properties:
     modelType:
       $id: '418'
       $type: PrimaryType
-      deprecated: false
       knownPrimaryType: string
       name:
         $id: '419'
