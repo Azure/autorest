@@ -18,8 +18,7 @@ batch:
     azure-arm: true # could provide customized help for this!
     fluent: true
   # combination (let's list everything *we* own to make sure it works)
-  - azureresourceschema: true
-    csharp: true
+  - csharp: true
     go: true
     java: true
     nodejs: true
@@ -31,3 +30,5 @@ batch:
     model-validator: true
     semantic-validator: true
 ```
+
+# azureresourceschema
