@@ -1,209 +1,1369 @@
 ---
-swagger-document-override/md-override-loader:
-  pluginName: md-override-loader
-  outputArtifact: immediate-config
-  configScope:
-    - perform-load
-  inputs: []
-swagger-document/loader:
-  pluginName: loader
+swagger-document/loader-swagger: &ref_0
+  pluginName: loader-swagger
   outputArtifact: swagger-document
   configScope:
     - perform-load
   inputs: []
-swagger-document/individual/transform:
-  pluginName: transform
-  outputArtifact: swagger-document
-  configScope:
-    - perform-load
-  inputs:
-    - swagger-document/loader
-swagger-document/individual/schema-validator:
-  pluginName: schema-validator
-  outputArtifact: swagger-document
-  configScope:
-    - perform-load
-  inputs:
-    - swagger-document/individual/transform
-swagger-document/individual/identity:
-  pluginName: identity
-  outputArtifact: swagger-document
-  configScope:
-    - perform-load
-  inputs:
-    - swagger-document/individual/schema-validator
-swagger-document/compose:
-  pluginName: compose
-  outputArtifact: swagger-document
-  configScope:
-    - perform-load
-  inputs:
-    - swagger-document/individual/identity
-swagger-document/transform-immediate:
-  pluginName: transform-immediate
-  outputArtifact: swagger-document
-  configScope:
-    - perform-load
-  inputs:
-    - swagger-document-override/md-override-loader
-    - swagger-document/compose
-swagger-document/transform:
-  pluginName: transform
-  outputArtifact: swagger-document
-  configScope:
-    - perform-load
-  inputs:
-    - swagger-document/transform-immediate
-swagger-document/identity:
-  pluginName: identity
-  outputArtifact: swagger-document
-  configScope:
-    - perform-load
-  inputs:
-    - swagger-document/transform
-openapi-document/openapi-document-converter:
-  pluginName: openapi-document-converter
-  outputArtifact: openapi-document
-  configScope:
-    - perform-load
-  inputs:
-    - swagger-document/identity
-openapi-document/transform:
-  pluginName: transform
-  outputArtifact: openapi-document
-  configScope:
-    - perform-load
-  inputs:
-    - openapi-document/openapi-document-converter
-openapi-document/component-modifiers:
-  pluginName: component-modifiers
-  outputArtifact: openapi-document
-  configScope:
-    - perform-load
-  inputs:
-    - openapi-document/transform
-openapi-document/identity:
-  pluginName: identity
-  outputArtifact: openapi-document
-  configScope:
-    - perform-load
-  inputs:
-    - openapi-document/component-modifiers
-csharp/imodeler1:
-  pluginName: imodeler1
-  outputArtifact: code-model-v1
-  configScope:
-    - perform-load
-    - csharp
-  inputs:
-    - openapi-document/identity
-csharp/commonmarker:
-  pluginName: commonmarker
-  outputArtifact: code-model-v1
-  configScope:
-    - perform-load
-    - csharp
-  inputs:
-    - csharp/imodeler1
-csharp/cm/transform:
-  pluginName: transform
-  outputArtifact: code-model-v1
-  configScope:
-    - perform-load
-    - csharp
-  inputs:
-    - csharp/commonmarker
-csharp/generate:
-  pluginName: csharp
-  outputArtifact: source-file-csharp
-  configScope:
-    - perform-load
-    - csharp
-  inputs:
-    - csharp/cm/transform
-csharp/simplifier:
-  pluginName: csharp-simplifier
-  outputArtifact: source-file-csharp
-  configScope:
-    - perform-load
-    - csharp
-  inputs:
-    - csharp/generate
-csharp/transform:
-  pluginName: transform
-  outputArtifact: source-file-csharp
-  configScope:
-    - perform-load
-    - csharp
-    - scope-transform-string
-  inputs:
-    - csharp/simplifier
-csharp/emitter:
-  pluginName: emitter
-  configScope:
-    - perform-load
-    - csharp
-    - scope-transform-string
-    - scope-csharp/emitter
-  inputs:
-    - csharp/transform
-pipeline-emitter:
-  pluginName: pipeline-emitter
-  configScope:
-    - scope-pipeline-emitter
-  inputs: []
-configuration-emitter:
-  pluginName: configuration-emitter
-  configScope:
-    - scope-configuration-emitter
-  inputs: []
-swagger-document/emitter:
-  pluginName: emitter
-  configScope:
-    - perform-load
-    - scope-swagger-document/emitter
-  inputs:
-    - swagger-document/identity
-openapi-document/emitter:
-  pluginName: emitter
-  configScope:
-    - perform-load
-    - scope-openapi-document/emitter
-  inputs:
-    - openapi-document/identity
-csharp/cm/emitter:
-  pluginName: emitter
-  configScope:
-    - perform-load
-    - csharp
-    - scope-cm/emitter
-  inputs:
-    - csharp/cm/transform
-swagger-document/classic-openapi-validator:
-  pluginName: classic-openapi-validator
-  configScope:
-    - perform-load
-    - azure-validator-composed
-  inputs:
-    - swagger-document/identity
-swagger-document/individual/classic-openapi-validator:
-  pluginName: classic-openapi-validator
-  configScope:
-    - perform-load
-    - azure-validator-individual
-  inputs:
-    - swagger-document/individual/identity
-swagger-document/openapi-validator:
-  pluginName: openapi-validator
-  configScope:
-    - perform-load
-    - azure-validator-composed
-  inputs:
-    - swagger-document/identity
-swagger-document/individual/openapi-validator:
-  pluginName: openapi-validator
-  configScope:
-    - perform-load
-    - azure-validator-individual
-  inputs:
-    - swagger-document/individual/identity
+  dependencies:
+    - *ref_0
+    - &ref_2
+      pluginName: schema-validator-swagger
+      outputArtifact: swagger-document
+      configScope:
+        - perform-load
+      inputs:
+        - swagger-document/individual/transform
+      dependencies:
+        - *ref_0
+        - &ref_1
+          pluginName: transform
+          outputArtifact: swagger-document
+          configScope:
+            - perform-load
+          inputs:
+            - swagger-document/loader-swagger
+          dependencies:
+            - *ref_0
+            - *ref_1
+            - &ref_3
+              pluginName: identity
+              outputArtifact: swagger-document
+              configScope:
+                - perform-load
+              inputs:
+                - swagger-document/individual/schema-validator-swagger
+              dependencies:
+                - *ref_0
+                - *ref_1
+                - *ref_2
+                - *ref_3
+                - &ref_5
+                  pluginName: md-override-loader-openapi
+                  outputArtifact: immediate-config
+                  configScope:
+                    - perform-load
+                  inputs: []
+                  dependencies:
+                    - *ref_0
+                    - *ref_1
+                    - *ref_2
+                    - *ref_3
+                    - &ref_4
+                      pluginName: openapi-document-converter
+                      outputArtifact: openapi-document
+                      configScope:
+                        - perform-load
+                      inputs:
+                        - swagger-document/identity
+                      dependencies:
+                        - *ref_0
+                        - *ref_1
+                        - *ref_2
+                        - *ref_3
+                        - *ref_4
+                        - *ref_5
+                        - &ref_6
+                          pluginName: loader-openapi
+                          outputArtifact: openapi-document
+                          configScope:
+                            - perform-load
+                          inputs: []
+                          dependencies:
+                            - *ref_0
+                            - *ref_1
+                            - *ref_2
+                            - *ref_3
+                            - *ref_4
+                            - *ref_5
+                            - *ref_6
+                            - &ref_8
+                              pluginName: schema-validator-openapi
+                              outputArtifact: openapi-document
+                              configScope:
+                                - perform-load
+                              inputs:
+                                - openapi-document/individual/transform
+                              dependencies:
+                                - *ref_0
+                                - *ref_1
+                                - *ref_2
+                                - *ref_3
+                                - *ref_4
+                                - *ref_5
+                                - *ref_6
+                                - &ref_7
+                                  pluginName: transform
+                                  outputArtifact: openapi-document
+                                  configScope:
+                                    - perform-load
+                                  inputs:
+                                    - openapi-document/loader-openapi
+                                  dependencies:
+                                    - *ref_0
+                                    - *ref_1
+                                    - *ref_2
+                                    - *ref_3
+                                    - *ref_4
+                                    - *ref_5
+                                    - *ref_6
+                                    - *ref_7
+                                    - &ref_9
+                                      pluginName: identity
+                                      outputArtifact: openapi-document
+                                      configScope:
+                                        - perform-load
+                                      inputs:
+                                        - >-
+                                          openapi-document/individual/schema-validator-openapi
+                                      dependencies:
+                                        - *ref_0
+                                        - *ref_1
+                                        - *ref_2
+                                        - *ref_3
+                                        - *ref_4
+                                        - *ref_5
+                                        - *ref_6
+                                        - *ref_7
+                                        - *ref_8
+                                        - *ref_9
+                                        - &ref_10
+                                          pluginName: transform-immediate
+                                          outputArtifact: openapi-document
+                                          configScope:
+                                            - perform-load
+                                          inputs:
+                                            - >-
+                                              openapi-document-override/md-override-loader-openapi
+                                            - openapi-document/individual/identity
+                                          dependencies:
+                                            - *ref_0
+                                            - *ref_1
+                                            - *ref_2
+                                            - *ref_3
+                                            - *ref_4
+                                            - *ref_5
+                                            - *ref_6
+                                            - *ref_7
+                                            - *ref_8
+                                            - *ref_9
+                                            - *ref_10
+                                            - &ref_11
+                                              pluginName: transform
+                                              outputArtifact: openapi-document
+                                              configScope:
+                                                - perform-load
+                                              inputs:
+                                                - >-
+                                                  openapi-document/openapi-document-converter
+                                                - openapi-document/transform-immediate
+                                              dependencies:
+                                                - *ref_0
+                                                - *ref_1
+                                                - *ref_2
+                                                - *ref_3
+                                                - *ref_4
+                                                - *ref_5
+                                                - *ref_6
+                                                - *ref_7
+                                                - *ref_8
+                                                - *ref_9
+                                                - *ref_10
+                                                - *ref_11
+                                                - &ref_13
+                                                  pluginName: multi-api-merger
+                                                  outputArtifact: openapi-document
+                                                  configScope:
+                                                    - perform-load
+                                                  inputs:
+                                                    - openapi-document/tree-shaker
+                                                  dependencies:
+                                                    - *ref_0
+                                                    - *ref_1
+                                                    - *ref_2
+                                                    - *ref_3
+                                                    - *ref_4
+                                                    - *ref_5
+                                                    - *ref_6
+                                                    - *ref_7
+                                                    - *ref_8
+                                                    - *ref_9
+                                                    - *ref_10
+                                                    - *ref_11
+                                                    - &ref_12
+                                                      pluginName: tree-shaker
+                                                      outputArtifact: openapi-document
+                                                      configScope:
+                                                        - perform-load
+                                                      inputs:
+                                                        - openapi-document/transform
+                                                      dependencies:
+                                                        - *ref_0
+                                                        - *ref_1
+                                                        - *ref_2
+                                                        - *ref_3
+                                                        - *ref_4
+                                                        - *ref_5
+                                                        - *ref_6
+                                                        - *ref_7
+                                                        - *ref_8
+                                                        - *ref_9
+                                                        - *ref_10
+                                                        - *ref_11
+                                                        - *ref_12
+                                                        - &ref_14
+                                                          pluginName: component-modifiers
+                                                          outputArtifact: openapi-document
+                                                          configScope:
+                                                            - perform-load
+                                                          inputs:
+                                                            - openapi-document/multi-api-merger
+                                                          dependencies:
+                                                            - *ref_0
+                                                            - *ref_1
+                                                            - *ref_2
+                                                            - *ref_3
+                                                            - *ref_4
+                                                            - *ref_5
+                                                            - *ref_6
+                                                            - *ref_7
+                                                            - *ref_8
+                                                            - *ref_9
+                                                            - *ref_10
+                                                            - *ref_11
+                                                            - *ref_12
+                                                            - *ref_13
+                                                            - *ref_14
+                                                            - &ref_16
+                                                              pluginName: profile-filter
+                                                              outputArtifact: openapi-document
+                                                              configScope:
+                                                                - perform-load
+                                                              inputs:
+                                                                - >-
+                                                                  openapi-document/api-version-parameter-handler
+                                                              dependencies:
+                                                                - *ref_0
+                                                                - *ref_1
+                                                                - *ref_2
+                                                                - *ref_3
+                                                                - *ref_4
+                                                                - *ref_5
+                                                                - *ref_6
+                                                                - *ref_7
+                                                                - *ref_8
+                                                                - *ref_9
+                                                                - *ref_10
+                                                                - *ref_11
+                                                                - *ref_12
+                                                                - *ref_13
+                                                                - *ref_14
+                                                                - &ref_15
+                                                                  pluginName: api-version-parameter-handler
+                                                                  outputArtifact: openapi-document
+                                                                  configScope:
+                                                                    - perform-load
+                                                                  inputs:
+                                                                    - openapi-document/component-modifiers
+                                                                  dependencies:
+                                                                    - *ref_0
+                                                                    - *ref_1
+                                                                    - *ref_2
+                                                                    - *ref_3
+                                                                    - *ref_4
+                                                                    - *ref_5
+                                                                    - *ref_6
+                                                                    - *ref_7
+                                                                    - *ref_8
+                                                                    - *ref_9
+                                                                    - *ref_10
+                                                                    - *ref_11
+                                                                    - *ref_12
+                                                                    - *ref_13
+                                                                    - *ref_14
+                                                                    - *ref_15
+                                                                    - &ref_17
+                                                                      pluginName: model-deduplicator
+                                                                      outputArtifact: openapi-document
+                                                                      configScope:
+                                                                        - perform-load
+                                                                      inputs:
+                                                                        - openapi-document/profile-filter
+                                                                      dependencies:
+                                                                        - *ref_0
+                                                                        - *ref_1
+                                                                        - *ref_2
+                                                                        - *ref_3
+                                                                        - *ref_4
+                                                                        - *ref_5
+                                                                        - *ref_6
+                                                                        - *ref_7
+                                                                        - *ref_8
+                                                                        - *ref_9
+                                                                        - *ref_10
+                                                                        - *ref_11
+                                                                        - *ref_12
+                                                                        - *ref_13
+                                                                        - *ref_14
+                                                                        - *ref_15
+                                                                        - *ref_16
+                                                                        - *ref_17
+                                                                        - &ref_19
+                                                                          pluginName: identity
+                                                                          outputArtifact: openapi-document
+                                                                          configScope:
+                                                                            - perform-load
+                                                                          inputs:
+                                                                            - openapi-document/compose
+                                                                          dependencies:
+                                                                            - *ref_0
+                                                                            - *ref_1
+                                                                            - *ref_2
+                                                                            - *ref_3
+                                                                            - *ref_4
+                                                                            - *ref_5
+                                                                            - *ref_6
+                                                                            - *ref_7
+                                                                            - *ref_8
+                                                                            - *ref_9
+                                                                            - *ref_10
+                                                                            - *ref_11
+                                                                            - *ref_12
+                                                                            - *ref_13
+                                                                            - *ref_14
+                                                                            - *ref_15
+                                                                            - *ref_16
+                                                                            - *ref_17
+                                                                            - &ref_18
+                                                                              pluginName: compose
+                                                                              outputArtifact: openapi-document
+                                                                              configScope:
+                                                                                - perform-load
+                                                                              inputs:
+                                                                                - openapi-document/model-deduplicator
+                                                                              dependencies:
+                                                                                - *ref_0
+                                                                                - *ref_1
+                                                                                - *ref_2
+                                                                                - *ref_3
+                                                                                - *ref_4
+                                                                                - *ref_5
+                                                                                - *ref_6
+                                                                                - *ref_7
+                                                                                - *ref_8
+                                                                                - *ref_9
+                                                                                - *ref_10
+                                                                                - *ref_11
+                                                                                - *ref_12
+                                                                                - *ref_13
+                                                                                - *ref_14
+                                                                                - *ref_15
+                                                                                - *ref_16
+                                                                                - *ref_17
+                                                                                - *ref_18
+                                                                                - &ref_20
+                                                                                  pluginName: emitter
+                                                                                  configScope:
+                                                                                    - perform-load
+                                                                                    - scope-openapi-document/emitter
+                                                                                  inputs:
+                                                                                    - openapi-document/identity
+                                                                                  dependencies:
+                                                                                    - *ref_0
+                                                                                    - *ref_1
+                                                                                    - *ref_2
+                                                                                    - *ref_3
+                                                                                    - *ref_4
+                                                                                    - *ref_5
+                                                                                    - *ref_6
+                                                                                    - *ref_7
+                                                                                    - *ref_8
+                                                                                    - *ref_9
+                                                                                    - *ref_10
+                                                                                    - *ref_11
+                                                                                    - *ref_12
+                                                                                    - *ref_13
+                                                                                    - *ref_14
+                                                                                    - *ref_15
+                                                                                    - *ref_16
+                                                                                    - *ref_17
+                                                                                    - *ref_18
+                                                                                    - *ref_19
+                                                                                    - *ref_20
+                                                                                    - &ref_21
+                                                                                      pluginName: identity
+                                                                                      outputArtifact: swagger-document
+                                                                                      configScope:
+                                                                                        - perform-load
+                                                                                      inputs:
+                                                                                        - >-
+                                                                                          swagger-document/individual/schema-validator-swagger
+                                                                                      dependencies:
+                                                                                        - *ref_0
+                                                                                        - *ref_1
+                                                                                        - *ref_2
+                                                                                        - *ref_3
+                                                                                        - *ref_4
+                                                                                        - *ref_5
+                                                                                        - *ref_6
+                                                                                        - *ref_7
+                                                                                        - *ref_8
+                                                                                        - *ref_9
+                                                                                        - *ref_10
+                                                                                        - *ref_11
+                                                                                        - *ref_12
+                                                                                        - *ref_13
+                                                                                        - *ref_14
+                                                                                        - *ref_15
+                                                                                        - *ref_16
+                                                                                        - *ref_17
+                                                                                        - *ref_18
+                                                                                        - *ref_19
+                                                                                        - *ref_20
+                                                                                        - *ref_21
+                                                                                        - &ref_22
+                                                                                          pluginName: md-override-loader-swagger
+                                                                                          outputArtifact: immediate-config
+                                                                                          configScope:
+                                                                                            - perform-load
+                                                                                          inputs: []
+                                                                                          dependencies:
+                                                                                            - *ref_0
+                                                                                            - *ref_1
+                                                                                            - *ref_2
+                                                                                            - *ref_3
+                                                                                            - *ref_4
+                                                                                            - *ref_5
+                                                                                            - *ref_6
+                                                                                            - *ref_7
+                                                                                            - *ref_8
+                                                                                            - *ref_9
+                                                                                            - *ref_10
+                                                                                            - *ref_11
+                                                                                            - *ref_12
+                                                                                            - *ref_13
+                                                                                            - *ref_14
+                                                                                            - *ref_15
+                                                                                            - *ref_16
+                                                                                            - *ref_17
+                                                                                            - *ref_18
+                                                                                            - *ref_19
+                                                                                            - *ref_20
+                                                                                            - *ref_21
+                                                                                            - *ref_22
+                                                                                            - &ref_23
+                                                                                              pluginName: imodeler1
+                                                                                              outputArtifact: code-model-v1
+                                                                                              configScope:
+                                                                                                - perform-load
+                                                                                                - csharp
+                                                                                              inputs:
+                                                                                                - openapi-document/identity
+                                                                                              dependencies:
+                                                                                                - *ref_0
+                                                                                                - *ref_1
+                                                                                                - *ref_2
+                                                                                                - *ref_3
+                                                                                                - *ref_4
+                                                                                                - *ref_5
+                                                                                                - *ref_6
+                                                                                                - *ref_7
+                                                                                                - *ref_8
+                                                                                                - *ref_9
+                                                                                                - *ref_10
+                                                                                                - *ref_11
+                                                                                                - *ref_12
+                                                                                                - *ref_13
+                                                                                                - *ref_14
+                                                                                                - *ref_15
+                                                                                                - *ref_16
+                                                                                                - *ref_17
+                                                                                                - *ref_18
+                                                                                                - *ref_19
+                                                                                                - *ref_20
+                                                                                                - *ref_21
+                                                                                                - *ref_22
+                                                                                                - *ref_23
+                                                                                                - &ref_25
+                                                                                                  pluginName: transform
+                                                                                                  outputArtifact: code-model-v1
+                                                                                                  configScope:
+                                                                                                    - perform-load
+                                                                                                    - csharp
+                                                                                                  inputs:
+                                                                                                    - csharp/commonmarker
+                                                                                                  dependencies:
+                                                                                                    - *ref_0
+                                                                                                    - *ref_1
+                                                                                                    - *ref_2
+                                                                                                    - *ref_3
+                                                                                                    - *ref_4
+                                                                                                    - *ref_5
+                                                                                                    - *ref_6
+                                                                                                    - *ref_7
+                                                                                                    - *ref_8
+                                                                                                    - *ref_9
+                                                                                                    - *ref_10
+                                                                                                    - *ref_11
+                                                                                                    - *ref_12
+                                                                                                    - *ref_13
+                                                                                                    - *ref_14
+                                                                                                    - *ref_15
+                                                                                                    - *ref_16
+                                                                                                    - *ref_17
+                                                                                                    - *ref_18
+                                                                                                    - *ref_19
+                                                                                                    - *ref_20
+                                                                                                    - *ref_21
+                                                                                                    - *ref_22
+                                                                                                    - *ref_23
+                                                                                                    - &ref_24
+                                                                                                      pluginName: commonmarker
+                                                                                                      outputArtifact: code-model-v1
+                                                                                                      configScope:
+                                                                                                        - perform-load
+                                                                                                        - csharp
+                                                                                                      inputs:
+                                                                                                        - csharp/imodeler1
+                                                                                                      dependencies:
+                                                                                                        - *ref_0
+                                                                                                        - *ref_1
+                                                                                                        - *ref_2
+                                                                                                        - *ref_3
+                                                                                                        - *ref_4
+                                                                                                        - *ref_5
+                                                                                                        - *ref_6
+                                                                                                        - *ref_7
+                                                                                                        - *ref_8
+                                                                                                        - *ref_9
+                                                                                                        - *ref_10
+                                                                                                        - *ref_11
+                                                                                                        - *ref_12
+                                                                                                        - *ref_13
+                                                                                                        - *ref_14
+                                                                                                        - *ref_15
+                                                                                                        - *ref_16
+                                                                                                        - *ref_17
+                                                                                                        - *ref_18
+                                                                                                        - *ref_19
+                                                                                                        - *ref_20
+                                                                                                        - *ref_21
+                                                                                                        - *ref_22
+                                                                                                        - *ref_23
+                                                                                                        - *ref_24
+                                                                                                        - &ref_26
+                                                                                                          pluginName: csharp
+                                                                                                          outputArtifact: source-file-csharp
+                                                                                                          configScope:
+                                                                                                            - perform-load
+                                                                                                            - csharp
+                                                                                                          inputs:
+                                                                                                            - csharp/cm/transform
+                                                                                                          dependencies:
+                                                                                                            - *ref_0
+                                                                                                            - *ref_1
+                                                                                                            - *ref_2
+                                                                                                            - *ref_3
+                                                                                                            - *ref_4
+                                                                                                            - *ref_5
+                                                                                                            - *ref_6
+                                                                                                            - *ref_7
+                                                                                                            - *ref_8
+                                                                                                            - *ref_9
+                                                                                                            - *ref_10
+                                                                                                            - *ref_11
+                                                                                                            - *ref_12
+                                                                                                            - *ref_13
+                                                                                                            - *ref_14
+                                                                                                            - *ref_15
+                                                                                                            - *ref_16
+                                                                                                            - *ref_17
+                                                                                                            - *ref_18
+                                                                                                            - *ref_19
+                                                                                                            - *ref_20
+                                                                                                            - *ref_21
+                                                                                                            - *ref_22
+                                                                                                            - *ref_23
+                                                                                                            - *ref_24
+                                                                                                            - *ref_25
+                                                                                                            - *ref_26
+                                                                                                            - &ref_28
+                                                                                                              pluginName: transform
+                                                                                                              outputArtifact: source-file-csharp
+                                                                                                              configScope:
+                                                                                                                - perform-load
+                                                                                                                - csharp
+                                                                                                                - scope-transform-string
+                                                                                                              inputs:
+                                                                                                                - csharp/simplifier
+                                                                                                              dependencies:
+                                                                                                                - *ref_0
+                                                                                                                - *ref_1
+                                                                                                                - *ref_2
+                                                                                                                - *ref_3
+                                                                                                                - *ref_4
+                                                                                                                - *ref_5
+                                                                                                                - *ref_6
+                                                                                                                - *ref_7
+                                                                                                                - *ref_8
+                                                                                                                - *ref_9
+                                                                                                                - *ref_10
+                                                                                                                - *ref_11
+                                                                                                                - *ref_12
+                                                                                                                - *ref_13
+                                                                                                                - *ref_14
+                                                                                                                - *ref_15
+                                                                                                                - *ref_16
+                                                                                                                - *ref_17
+                                                                                                                - *ref_18
+                                                                                                                - *ref_19
+                                                                                                                - *ref_20
+                                                                                                                - *ref_21
+                                                                                                                - *ref_22
+                                                                                                                - *ref_23
+                                                                                                                - *ref_24
+                                                                                                                - *ref_25
+                                                                                                                - *ref_26
+                                                                                                                - &ref_27
+                                                                                                                  pluginName: csharp-simplifier
+                                                                                                                  outputArtifact: source-file-csharp
+                                                                                                                  configScope:
+                                                                                                                    - perform-load
+                                                                                                                    - csharp
+                                                                                                                  inputs:
+                                                                                                                    - csharp/generate
+                                                                                                                  dependencies:
+                                                                                                                    - *ref_0
+                                                                                                                    - *ref_1
+                                                                                                                    - *ref_2
+                                                                                                                    - *ref_3
+                                                                                                                    - *ref_4
+                                                                                                                    - *ref_5
+                                                                                                                    - *ref_6
+                                                                                                                    - *ref_7
+                                                                                                                    - *ref_8
+                                                                                                                    - *ref_9
+                                                                                                                    - *ref_10
+                                                                                                                    - *ref_11
+                                                                                                                    - *ref_12
+                                                                                                                    - *ref_13
+                                                                                                                    - *ref_14
+                                                                                                                    - *ref_15
+                                                                                                                    - *ref_16
+                                                                                                                    - *ref_17
+                                                                                                                    - *ref_18
+                                                                                                                    - *ref_19
+                                                                                                                    - *ref_20
+                                                                                                                    - *ref_21
+                                                                                                                    - *ref_22
+                                                                                                                    - *ref_23
+                                                                                                                    - *ref_24
+                                                                                                                    - *ref_25
+                                                                                                                    - *ref_26
+                                                                                                                    - *ref_27
+                                                                                                                    - &ref_29
+                                                                                                                      pluginName: emitter
+                                                                                                                      configScope:
+                                                                                                                        - perform-load
+                                                                                                                        - csharp
+                                                                                                                        - scope-transform-string
+                                                                                                                        - scope-csharp/emitter
+                                                                                                                      inputs:
+                                                                                                                        - csharp/transform
+                                                                                                                      dependencies:
+                                                                                                                        - *ref_0
+                                                                                                                        - *ref_1
+                                                                                                                        - *ref_2
+                                                                                                                        - *ref_3
+                                                                                                                        - *ref_4
+                                                                                                                        - *ref_5
+                                                                                                                        - *ref_6
+                                                                                                                        - *ref_7
+                                                                                                                        - *ref_8
+                                                                                                                        - *ref_9
+                                                                                                                        - *ref_10
+                                                                                                                        - *ref_11
+                                                                                                                        - *ref_12
+                                                                                                                        - *ref_13
+                                                                                                                        - *ref_14
+                                                                                                                        - *ref_15
+                                                                                                                        - *ref_16
+                                                                                                                        - *ref_17
+                                                                                                                        - *ref_18
+                                                                                                                        - *ref_19
+                                                                                                                        - *ref_20
+                                                                                                                        - *ref_21
+                                                                                                                        - *ref_22
+                                                                                                                        - *ref_23
+                                                                                                                        - *ref_24
+                                                                                                                        - *ref_25
+                                                                                                                        - *ref_26
+                                                                                                                        - *ref_27
+                                                                                                                        - *ref_28
+                                                                                                                        - *ref_29
+                                                                                                                        - &ref_30
+                                                                                                                          pluginName: pipeline-emitter
+                                                                                                                          configScope:
+                                                                                                                            - scope-pipeline-emitter
+                                                                                                                          inputs: []
+                                                                                                                          dependencies:
+                                                                                                                            - *ref_0
+                                                                                                                            - *ref_1
+                                                                                                                            - *ref_2
+                                                                                                                            - *ref_3
+                                                                                                                            - *ref_4
+                                                                                                                            - *ref_5
+                                                                                                                            - *ref_6
+                                                                                                                            - *ref_7
+                                                                                                                            - *ref_8
+                                                                                                                            - *ref_9
+                                                                                                                            - *ref_10
+                                                                                                                            - *ref_11
+                                                                                                                            - *ref_12
+                                                                                                                            - *ref_13
+                                                                                                                            - *ref_14
+                                                                                                                            - *ref_15
+                                                                                                                            - *ref_16
+                                                                                                                            - *ref_17
+                                                                                                                            - *ref_18
+                                                                                                                            - *ref_19
+                                                                                                                            - *ref_20
+                                                                                                                            - *ref_21
+                                                                                                                            - *ref_22
+                                                                                                                            - *ref_23
+                                                                                                                            - *ref_24
+                                                                                                                            - *ref_25
+                                                                                                                            - *ref_26
+                                                                                                                            - *ref_27
+                                                                                                                            - *ref_28
+                                                                                                                            - *ref_29
+                                                                                                                            - *ref_30
+                                                                                                                            - &ref_31
+                                                                                                                              pluginName: configuration-emitter
+                                                                                                                              configScope:
+                                                                                                                                - scope-configuration-emitter
+                                                                                                                              inputs: []
+                                                                                                                              dependencies:
+                                                                                                                                - *ref_0
+                                                                                                                                - *ref_1
+                                                                                                                                - *ref_2
+                                                                                                                                - *ref_3
+                                                                                                                                - *ref_4
+                                                                                                                                - *ref_5
+                                                                                                                                - *ref_6
+                                                                                                                                - *ref_7
+                                                                                                                                - *ref_8
+                                                                                                                                - *ref_9
+                                                                                                                                - *ref_10
+                                                                                                                                - *ref_11
+                                                                                                                                - *ref_12
+                                                                                                                                - *ref_13
+                                                                                                                                - *ref_14
+                                                                                                                                - *ref_15
+                                                                                                                                - *ref_16
+                                                                                                                                - *ref_17
+                                                                                                                                - *ref_18
+                                                                                                                                - *ref_19
+                                                                                                                                - *ref_20
+                                                                                                                                - *ref_21
+                                                                                                                                - *ref_22
+                                                                                                                                - *ref_23
+                                                                                                                                - *ref_24
+                                                                                                                                - *ref_25
+                                                                                                                                - *ref_26
+                                                                                                                                - *ref_27
+                                                                                                                                - *ref_28
+                                                                                                                                - *ref_29
+                                                                                                                                - *ref_30
+                                                                                                                                - *ref_31
+                                                                                                                                - &ref_32
+                                                                                                                                  pluginName: emitter
+                                                                                                                                  configScope:
+                                                                                                                                    - perform-load
+                                                                                                                                    - csharp
+                                                                                                                                    - scope-cm/emitter
+                                                                                                                                  inputs:
+                                                                                                                                    - csharp/cm/transform
+                                                                                                                                  dependencies:
+                                                                                                                                    - *ref_0
+                                                                                                                                    - *ref_1
+                                                                                                                                    - *ref_2
+                                                                                                                                    - *ref_3
+                                                                                                                                    - *ref_4
+                                                                                                                                    - *ref_5
+                                                                                                                                    - *ref_6
+                                                                                                                                    - *ref_7
+                                                                                                                                    - *ref_8
+                                                                                                                                    - *ref_9
+                                                                                                                                    - *ref_10
+                                                                                                                                    - *ref_11
+                                                                                                                                    - *ref_12
+                                                                                                                                    - *ref_13
+                                                                                                                                    - *ref_14
+                                                                                                                                    - *ref_15
+                                                                                                                                    - *ref_16
+                                                                                                                                    - *ref_17
+                                                                                                                                    - *ref_18
+                                                                                                                                    - *ref_19
+                                                                                                                                    - *ref_20
+                                                                                                                                    - *ref_21
+                                                                                                                                    - *ref_22
+                                                                                                                                    - *ref_23
+                                                                                                                                    - *ref_24
+                                                                                                                                    - *ref_25
+                                                                                                                                    - *ref_26
+                                                                                                                                    - *ref_27
+                                                                                                                                    - *ref_28
+                                                                                                                                    - *ref_29
+                                                                                                                                    - *ref_30
+                                                                                                                                    - *ref_31
+                                                                                                                                    - *ref_32
+                                                                                                                                  skip: false
+                                                                                                                              skip: false
+                                                                                                                            - *ref_32
+                                                                                                                          skip: false
+                                                                                                                        - *ref_31
+                                                                                                                        - *ref_32
+                                                                                                                      skip: false
+                                                                                                                    - *ref_30
+                                                                                                                    - *ref_31
+                                                                                                                    - *ref_32
+                                                                                                                  skip: false
+                                                                                                                - *ref_28
+                                                                                                                - *ref_30
+                                                                                                                - *ref_31
+                                                                                                                - *ref_32
+                                                                                                              skip: false
+                                                                                                            - *ref_29
+                                                                                                            - *ref_30
+                                                                                                            - *ref_31
+                                                                                                            - *ref_32
+                                                                                                          skip: false
+                                                                                                        - *ref_27
+                                                                                                        - *ref_28
+                                                                                                        - *ref_29
+                                                                                                        - *ref_30
+                                                                                                        - *ref_31
+                                                                                                        - *ref_32
+                                                                                                      skip: false
+                                                                                                    - *ref_25
+                                                                                                    - *ref_27
+                                                                                                    - *ref_28
+                                                                                                    - *ref_29
+                                                                                                    - *ref_30
+                                                                                                    - *ref_31
+                                                                                                  skip: false
+                                                                                                - *ref_26
+                                                                                                - *ref_27
+                                                                                                - *ref_28
+                                                                                                - *ref_29
+                                                                                                - *ref_30
+                                                                                                - *ref_31
+                                                                                                - *ref_32
+                                                                                              skip: false
+                                                                                            - *ref_24
+                                                                                            - *ref_25
+                                                                                            - *ref_26
+                                                                                            - *ref_27
+                                                                                            - *ref_28
+                                                                                            - *ref_29
+                                                                                            - *ref_30
+                                                                                            - *ref_31
+                                                                                            - *ref_32
+                                                                                          skip: false
+                                                                                        - *ref_23
+                                                                                        - *ref_24
+                                                                                        - *ref_25
+                                                                                        - *ref_26
+                                                                                        - *ref_27
+                                                                                        - *ref_28
+                                                                                        - *ref_29
+                                                                                        - *ref_30
+                                                                                        - *ref_31
+                                                                                        - *ref_32
+                                                                                      skip: false
+                                                                                    - *ref_22
+                                                                                    - *ref_23
+                                                                                    - *ref_24
+                                                                                    - *ref_25
+                                                                                    - *ref_26
+                                                                                    - *ref_27
+                                                                                    - *ref_28
+                                                                                    - *ref_29
+                                                                                    - *ref_30
+                                                                                    - *ref_31
+                                                                                    - *ref_32
+                                                                                  skip: false
+                                                                                - *ref_21
+                                                                                - *ref_22
+                                                                                - *ref_23
+                                                                                - *ref_24
+                                                                                - *ref_25
+                                                                                - *ref_26
+                                                                                - *ref_27
+                                                                                - *ref_28
+                                                                                - *ref_29
+                                                                                - *ref_30
+                                                                                - *ref_31
+                                                                                - *ref_32
+                                                                              skip: false
+                                                                            - *ref_19
+                                                                            - *ref_21
+                                                                            - *ref_22
+                                                                            - *ref_24
+                                                                            - *ref_25
+                                                                            - *ref_26
+                                                                            - *ref_27
+                                                                            - *ref_28
+                                                                            - *ref_29
+                                                                            - *ref_30
+                                                                            - *ref_31
+                                                                            - *ref_32
+                                                                          skip: false
+                                                                        - *ref_20
+                                                                        - *ref_21
+                                                                        - *ref_22
+                                                                        - *ref_23
+                                                                        - *ref_24
+                                                                        - *ref_25
+                                                                        - *ref_26
+                                                                        - *ref_27
+                                                                        - *ref_28
+                                                                        - *ref_29
+                                                                        - *ref_30
+                                                                        - *ref_31
+                                                                        - *ref_32
+                                                                      skip: false
+                                                                    - *ref_18
+                                                                    - *ref_19
+                                                                    - *ref_20
+                                                                    - *ref_21
+                                                                    - *ref_22
+                                                                    - *ref_23
+                                                                    - *ref_24
+                                                                    - *ref_25
+                                                                    - *ref_26
+                                                                    - *ref_27
+                                                                    - *ref_28
+                                                                    - *ref_29
+                                                                    - *ref_30
+                                                                    - *ref_31
+                                                                    - *ref_32
+                                                                  skip: false
+                                                                - *ref_16
+                                                                - *ref_18
+                                                                - *ref_19
+                                                                - *ref_20
+                                                                - *ref_21
+                                                                - *ref_22
+                                                                - *ref_23
+                                                                - *ref_24
+                                                                - *ref_25
+                                                                - *ref_26
+                                                                - *ref_27
+                                                                - *ref_28
+                                                                - *ref_29
+                                                                - *ref_30
+                                                                - *ref_31
+                                                                - *ref_32
+                                                              skip: false
+                                                            - *ref_17
+                                                            - *ref_18
+                                                            - *ref_19
+                                                            - *ref_20
+                                                            - *ref_21
+                                                            - *ref_22
+                                                            - *ref_23
+                                                            - *ref_24
+                                                            - *ref_25
+                                                            - *ref_26
+                                                            - *ref_27
+                                                            - *ref_28
+                                                            - *ref_29
+                                                            - *ref_30
+                                                            - *ref_31
+                                                            - *ref_32
+                                                          skip: false
+                                                        - *ref_15
+                                                        - *ref_16
+                                                        - *ref_17
+                                                        - *ref_18
+                                                        - *ref_19
+                                                        - *ref_20
+                                                        - *ref_21
+                                                        - *ref_22
+                                                        - *ref_23
+                                                        - *ref_24
+                                                        - *ref_25
+                                                        - *ref_26
+                                                        - *ref_27
+                                                        - *ref_28
+                                                        - *ref_29
+                                                        - *ref_30
+                                                        - *ref_31
+                                                        - *ref_32
+                                                      skip: false
+                                                    - *ref_13
+                                                    - *ref_15
+                                                    - *ref_16
+                                                    - *ref_17
+                                                    - *ref_18
+                                                    - *ref_19
+                                                    - *ref_20
+                                                    - *ref_21
+                                                    - *ref_22
+                                                    - *ref_23
+                                                    - *ref_24
+                                                    - *ref_25
+                                                    - *ref_26
+                                                    - *ref_27
+                                                    - *ref_28
+                                                    - *ref_29
+                                                    - *ref_30
+                                                    - *ref_31
+                                                    - *ref_32
+                                                  skip: false
+                                                - *ref_14
+                                                - *ref_15
+                                                - *ref_16
+                                                - *ref_17
+                                                - *ref_18
+                                                - *ref_19
+                                                - *ref_20
+                                                - *ref_21
+                                                - *ref_22
+                                                - *ref_23
+                                                - *ref_24
+                                                - *ref_25
+                                                - *ref_26
+                                                - *ref_27
+                                                - *ref_28
+                                                - *ref_29
+                                                - *ref_30
+                                                - *ref_31
+                                                - *ref_32
+                                              skip: false
+                                            - *ref_12
+                                            - *ref_13
+                                            - *ref_14
+                                            - *ref_15
+                                            - *ref_16
+                                            - *ref_17
+                                            - *ref_18
+                                            - *ref_19
+                                            - *ref_20
+                                            - *ref_21
+                                            - *ref_22
+                                            - *ref_23
+                                            - *ref_24
+                                            - *ref_25
+                                            - *ref_26
+                                            - *ref_27
+                                            - *ref_28
+                                            - *ref_29
+                                            - *ref_30
+                                            - *ref_31
+                                            - *ref_32
+                                          skip: false
+                                        - *ref_11
+                                        - *ref_12
+                                        - *ref_13
+                                        - *ref_14
+                                        - *ref_15
+                                        - *ref_16
+                                        - *ref_17
+                                        - *ref_18
+                                        - *ref_19
+                                        - *ref_20
+                                        - *ref_21
+                                        - *ref_22
+                                        - *ref_23
+                                        - *ref_24
+                                        - *ref_25
+                                        - *ref_26
+                                        - *ref_27
+                                        - *ref_28
+                                        - *ref_29
+                                        - *ref_30
+                                        - *ref_31
+                                        - *ref_32
+                                      skip: false
+                                    - *ref_10
+                                    - *ref_11
+                                    - *ref_12
+                                    - *ref_13
+                                    - *ref_14
+                                    - *ref_15
+                                    - *ref_16
+                                    - *ref_17
+                                    - *ref_18
+                                    - *ref_19
+                                    - *ref_20
+                                    - *ref_21
+                                    - *ref_22
+                                    - *ref_23
+                                    - *ref_24
+                                    - *ref_25
+                                    - *ref_26
+                                    - *ref_27
+                                    - *ref_28
+                                    - *ref_29
+                                    - *ref_30
+                                    - *ref_31
+                                    - *ref_32
+                                  skip: false
+                                - *ref_8
+                                - *ref_10
+                                - *ref_11
+                                - *ref_12
+                                - *ref_13
+                                - *ref_14
+                                - *ref_15
+                                - *ref_16
+                                - *ref_17
+                                - *ref_18
+                                - *ref_19
+                                - *ref_20
+                                - *ref_21
+                                - *ref_22
+                                - *ref_23
+                                - *ref_24
+                                - *ref_25
+                                - *ref_26
+                                - *ref_27
+                                - *ref_28
+                                - *ref_29
+                                - *ref_30
+                                - *ref_31
+                                - *ref_32
+                              skip: false
+                            - *ref_9
+                            - *ref_10
+                            - *ref_11
+                            - *ref_12
+                            - *ref_13
+                            - *ref_14
+                            - *ref_15
+                            - *ref_16
+                            - *ref_17
+                            - *ref_18
+                            - *ref_19
+                            - *ref_20
+                            - *ref_21
+                            - *ref_22
+                            - *ref_23
+                            - *ref_24
+                            - *ref_25
+                            - *ref_26
+                            - *ref_27
+                            - *ref_28
+                            - *ref_29
+                            - *ref_30
+                            - *ref_31
+                            - *ref_32
+                          skip: false
+                        - *ref_7
+                        - *ref_8
+                        - *ref_9
+                        - *ref_10
+                        - *ref_12
+                        - *ref_13
+                        - *ref_14
+                        - *ref_15
+                        - *ref_16
+                        - *ref_17
+                        - *ref_18
+                        - *ref_19
+                        - *ref_20
+                        - *ref_21
+                        - *ref_22
+                        - *ref_23
+                        - *ref_24
+                        - *ref_25
+                        - *ref_26
+                        - *ref_27
+                        - *ref_28
+                        - *ref_29
+                        - *ref_30
+                        - *ref_31
+                        - *ref_32
+                      skip: false
+                    - *ref_5
+                    - *ref_6
+                    - *ref_7
+                    - *ref_8
+                    - *ref_9
+                    - *ref_11
+                    - *ref_12
+                    - *ref_13
+                    - *ref_14
+                    - *ref_15
+                    - *ref_16
+                    - *ref_17
+                    - *ref_18
+                    - *ref_19
+                    - *ref_20
+                    - *ref_21
+                    - *ref_22
+                    - *ref_23
+                    - *ref_24
+                    - *ref_25
+                    - *ref_26
+                    - *ref_27
+                    - *ref_28
+                    - *ref_29
+                    - *ref_30
+                    - *ref_31
+                    - *ref_32
+                  skip: false
+                - *ref_6
+                - *ref_7
+                - *ref_8
+                - *ref_9
+                - *ref_10
+                - *ref_11
+                - *ref_12
+                - *ref_13
+                - *ref_14
+                - *ref_15
+                - *ref_16
+                - *ref_17
+                - *ref_18
+                - *ref_19
+                - *ref_20
+                - *ref_21
+                - *ref_22
+                - *ref_23
+                - *ref_24
+                - *ref_25
+                - *ref_26
+                - *ref_27
+                - *ref_28
+                - *ref_29
+                - *ref_30
+                - *ref_31
+                - *ref_32
+              skip: false
+            - *ref_4
+            - *ref_5
+            - *ref_6
+            - *ref_7
+            - *ref_8
+            - *ref_9
+            - *ref_10
+            - *ref_11
+            - *ref_12
+            - *ref_13
+            - *ref_14
+            - *ref_15
+            - *ref_16
+            - *ref_17
+            - *ref_18
+            - *ref_19
+            - *ref_20
+            - *ref_21
+            - *ref_22
+            - *ref_23
+            - *ref_24
+            - *ref_25
+            - *ref_26
+            - *ref_27
+            - *ref_28
+            - *ref_29
+            - *ref_30
+            - *ref_31
+            - *ref_32
+          skip: false
+        - *ref_2
+        - *ref_4
+        - *ref_5
+        - *ref_6
+        - *ref_7
+        - *ref_8
+        - *ref_9
+        - *ref_10
+        - *ref_11
+        - *ref_12
+        - *ref_13
+        - *ref_14
+        - *ref_15
+        - *ref_16
+        - *ref_17
+        - *ref_18
+        - *ref_19
+        - *ref_20
+        - *ref_22
+        - *ref_23
+        - *ref_24
+        - *ref_25
+        - *ref_26
+        - *ref_27
+        - *ref_28
+        - *ref_29
+        - *ref_30
+        - *ref_31
+        - *ref_32
+      skip: false
+    - *ref_3
+    - *ref_4
+    - *ref_5
+    - *ref_6
+    - *ref_7
+    - *ref_8
+    - *ref_9
+    - *ref_10
+    - *ref_11
+    - *ref_12
+    - *ref_13
+    - *ref_14
+    - *ref_15
+    - *ref_16
+    - *ref_17
+    - *ref_18
+    - *ref_19
+    - *ref_20
+    - *ref_21
+    - *ref_22
+    - *ref_23
+    - *ref_24
+    - *ref_25
+    - *ref_26
+    - *ref_27
+    - *ref_28
+    - *ref_29
+    - *ref_30
+    - *ref_31
+    - *ref_32
+  skip: false
+swagger-document/individual/transform: *ref_1
+swagger-document/individual/schema-validator-swagger: *ref_2
+swagger-document/identity: *ref_3
+openapi-document/openapi-document-converter: *ref_4
+openapi-document-override/md-override-loader-openapi: *ref_5
+openapi-document/loader-openapi: *ref_6
+openapi-document/individual/transform: *ref_7
+openapi-document/individual/schema-validator-openapi: *ref_8
+openapi-document/individual/identity: *ref_9
+openapi-document/transform-immediate: *ref_10
+openapi-document/transform: *ref_11
+openapi-document/tree-shaker: *ref_12
+openapi-document/multi-api-merger: *ref_13
+openapi-document/component-modifiers: *ref_14
+openapi-document/api-version-parameter-handler: *ref_15
+openapi-document/profile-filter: *ref_16
+openapi-document/model-deduplicator: *ref_17
+openapi-document/compose: *ref_18
+openapi-document/identity: *ref_19
+openapi-document/emitter: *ref_20
+swagger-document/individual/identity: *ref_21
+swagger-document-override/md-override-loader-swagger: *ref_22
+csharp/imodeler1: *ref_23
+csharp/commonmarker: *ref_24
+csharp/cm/transform: *ref_25
+csharp/generate: *ref_26
+csharp/simplifier: *ref_27
+csharp/transform: *ref_28
+csharp/emitter: *ref_29
+pipeline-emitter: *ref_30
+configuration-emitter: *ref_31
+csharp/cm/emitter: *ref_32

@@ -36,6 +36,13 @@ directive:
         ? ($ ? { type: "object" } : undefined)
         : $
     reason: polyfill
+  - from: openapi-document
+    where: $.definitions.*.additionalProperties
+    transform: |
+      return typeof $ === "boolean"
+        ? ($ ? { type: "object" } : undefined)
+        : $
+    reason: polyfill
   - from: swagger-document
     where: >-
       $..*[?(typeof @.modelAsString === "boolean" && typeof @.oldModelAsString
@@ -52,7 +59,38 @@ output-artifact:
   - preserved-files
   - source-file-csharp
   - source-file-jsonrpcclient
-require: []
+require:
+  - >-
+
+
+  - >-
+
+  - >-
+
+  - >-
+
+  - >-
+
+  - >-
+
+  - >-
+
+
+
+
+
+
+
+
+
+
+  - >-
+
+  - >-
+
+
+  - >-
+
 try-require:
   - readme.clear-output-folder.md
   - readme.no-upgrade-check.md
@@ -60,11 +98,6 @@ try-require:
   - ./readme.csharp.md
 use: []
 clear-output-folder: {}
-use-extension:
-  '@microsoft.azure/autorest.csharp': ~2.3.79
-  '@microsoft.azure/classic-openapi-validator': ~1.0.9
-  '@microsoft.azure/openapi-validator': ~1.0.2
-  '@microsoft.azure/autorest.modeler': 2.3.55
 
 no-upgrade-check: {}
 skip-upgrade-check: {}
@@ -75,7 +108,190 @@ csharp:
 __info: yaml
 output-folder: generated
 openapi-type: arm
+use-extension:
+  '@microsoft.azure/autorest.csharp': ~2.3.79
+  '@microsoft.azure/autorest.modeler': 2.3.55
+perform-load: true
+declare-directive:
+  set: '{ transform: `return ${JSON.stringify($)}` }'
+  where-operation: |-
+    (() => {
+      switch ($context.from) {
+        case "code-model-v1":
+          return { from: "code-model-v1", where: `$.operations[*].methods[?(@.serializedName == ${JSON.stringify($)})]` };
+        case "swagger-document":
+        default:
+          return { from: "swagger-document", where: `$.paths.*[?(@.operationId == ${JSON.stringify($)})]` };
+      }
+    })()
+  where-model: |-
+    (() => {
+      switch ($context.from) {
+        case "code-model-v1":
+          throw "not implemented";
+        case "swagger-document":
+        default:
+          return { from: "swagger-document", where: `$.definitions[${JSON.stringify($)}]` };
+      }
+    })()
+  remove-operation: |-
+    {
+      from: 'swagger-document',
+      "where-operation": $,
+      transform: 'return undefined'
+    }
+  rename-operation: |-
+    {
+      from: 'swagger-document',
+      "where-operation": $.from,
+      transform: `$.operationId = ${JSON.stringify($.to)}`
+    }
+  remove-model: |-
+    {
+      from: 'swagger-document',
+      "where-model": $,
+      transform: 'return undefined'
+    }
+  rename-model: |-
+    [{
+      from: 'swagger-document',
+      where: '$.definitions',
+      transform: `if ($[${JSON.stringify($.from)}]) { $[${JSON.stringify($.to)}] = $[${JSON.stringify($.from)}]; delete $[${JSON.stringify($.from)}]; }`
+    }, {
+      from: 'swagger-document',
+      where: `$..['$ref']`,
+      transform: `$ = $ === "#/definitions/${$.from}" ? "#/definitions/${$.to}" : $`
+    }]
+  remove-property: |-
+    {
+      from: 'swagger-document',
+      transform: `delete $.properties[${JSON.stringify($)}]`
+    }
+  rename-property: |-
+    {
+      from: 'swagger-document',
+      transform: `if ($.properties[${JSON.stringify($.from)}]) { $.properties[${JSON.stringify($.to)}] = $.properties[${JSON.stringify($.from)}]; delete $.properties[${JSON.stringify($.from)}]; }`
+    }
 pipeline:
+  openapi-document/multi-api-merger:
+    input: tree-shaker
+    output-artifact: openapi-document
+    suffixes:
+      - ''
+  openapi-document/component-modifiers:
+    input: multi-api-merger
+    output-artifact: openapi-document
+    suffixes:
+      - ''
+  openapi-document/api-version-parameter-handler:
+    input: component-modifiers
+    output-artifact: openapi-document
+    suffixes:
+      - ''
+  openapi-document/profile-filter:
+    input: api-version-parameter-handler
+    output-artifact: openapi-document
+    suffixes:
+      - ''
+  openapi-document/model-deduplicator:
+    input: profile-filter
+    output-artifact: openapi-document
+    suffixes:
+      - ''
+  openapi-document/compose:
+    input: openapi-document/model-deduplicator
+    output-artifact: openapi-document
+    suffixes:
+      - ''
+  openapi-document/identity:
+    input: compose
+    output-artifact: openapi-document
+    suffixes:
+      - ''
+  openapi-document/emitter:
+    input: openapi-document/identity
+    scope: scope-openapi-document/emitter
+    suffixes:
+      - ''
+  openapi-document/transform:
+    input:
+      - openapi-document/openapi-document-converter
+      - openapi-document/transform-immediate
+    output-artifact: openapi-document
+    suffixes:
+      - ''
+  openapi-document/tree-shaker:
+    input: openapi-document/transform
+    output-artifact: openapi-document
+    suffixes:
+      - ''
+  swagger-document/loader-swagger:
+    output-artifact: swagger-document
+    scope: perform-load
+    suffixes:
+      - ''
+  swagger-document/individual/transform:
+    input: loader-swagger
+    output-artifact: swagger-document
+    suffixes:
+      - ''
+  swagger-document/individual/schema-validator-swagger:
+    input: individual/transform
+    output-artifact: swagger-document
+    suffixes:
+      - ''
+  swagger-document/individual/identity:
+    input: individual/schema-validator-swagger
+    output-artifact: swagger-document
+    suffixes:
+      - ''
+  swagger-document/identity:
+    input: individual/schema-validator-swagger
+    output-artifact: swagger-document
+    suffixes:
+      - ''
+  openapi-document/openapi-document-converter:
+    input: swagger-document/identity
+    output-artifact: openapi-document
+    suffixes:
+      - ''
+  openapi-document/loader-openapi:
+    output-artifact: openapi-document
+    scope: perform-load
+    suffixes:
+      - ''
+  openapi-document/individual/transform:
+    input: loader-openapi
+    output-artifact: openapi-document
+    suffixes:
+      - ''
+  openapi-document/individual/schema-validator-openapi:
+    input: individual/transform
+    output-artifact: openapi-document
+    suffixes:
+      - ''
+  openapi-document/individual/identity:
+    input: individual/schema-validator-openapi
+    output-artifact: openapi-document
+    suffixes:
+      - ''
+  openapi-document/transform-immediate:
+    input:
+      - openapi-document-override/md-override-loader-openapi
+      - individual/identity
+    output-artifact: openapi-document
+    suffixes:
+      - ''
+  swagger-document-override/md-override-loader-swagger:
+    output-artifact: immediate-config
+    scope: perform-load
+    suffixes:
+      - ''
+  openapi-document-override/md-override-loader-openapi:
+    output-artifact: immediate-config
+    scope: perform-load
+    suffixes:
+      - ''
   swagger-document/reflect-api-versions-cs:
     input:
       - identity
@@ -87,91 +303,17 @@ pipeline:
     input: reflect-api-versions-cs
     scope: scope-reflect-api-versions-cs-emitter
     suffixes: []
-  pipeline-emitter:
-    scope: scope-pipeline-emitter
-    suffixes:
-      - ''
-  configuration-emitter:
-    scope: scope-configuration-emitter
-    suffixes:
-      - ''
-  swagger-document-override/md-override-loader:
-    output-artifact: immediate-config
-    scope: perform-load
-    suffixes:
-      - ''
-  swagger-document/loader:
-    output-artifact: swagger-document
-    scope: perform-load
-    suffixes:
-      - ''
-  swagger-document/individual/transform:
-    input: loader
-    output-artifact: swagger-document
-    suffixes:
-      - ''
-  swagger-document/individual/schema-validator:
-    input: transform
-    output-artifact: swagger-document
-    suffixes:
-      - ''
-  swagger-document/individual/identity:
-    input: schema-validator
-    output-artifact: swagger-document
-    suffixes:
-      - ''
-  swagger-document/compose:
-    input: individual/identity
-    output-artifact: swagger-document
-    suffixes:
-      - ''
-  swagger-document/transform-immediate:
+  openapi-document/reflect-api-versions-cs:
     input:
-      - swagger-document-override/md-override-loader
-      - compose
-    output-artifact: swagger-document
-    suffixes:
-      - ''
-  swagger-document/transform:
-    input: transform-immediate
-    output-artifact: swagger-document
-    suffixes:
-      - ''
-  swagger-document/identity:
-    input: transform
-    output-artifact: swagger-document
-    suffixes:
-      - ''
-  swagger-document/emitter:
-    input: identity
-    scope: scope-swagger-document/emitter
-    suffixes:
-      - ''
-  openapi-document/openapi-document-converter:
-    input: swagger-document/identity
-    output-artifact: openapi-document
-    suffixes:
-      - ''
-  openapi-document/transform:
-    input: openapi-document-converter
-    output-artifact: openapi-document
-    suffixes:
-      - ''
-  openapi-document/component-modifiers:
-    input: transform
-    output-artifact: openapi-document
-    suffixes:
-      - ''
-  openapi-document/identity:
-    input: component-modifiers
-    output-artifact: openapi-document
-    suffixes:
-      - ''
-  openapi-document/emitter:
-    input: identity
-    scope: scope-openapi-document/emitter
-    suffixes:
-      - ''
+      - identity
+      - individual/identity
+      - csharp/emitter
+    scope: reflect-api-versions
+    suffixes: []
+  openapi-document/reflect-api-versions-cs/emitter:
+    input: reflect-api-versions-cs
+    scope: scope-reflect-api-versions-cs-emitter
+    suffixes: []
   swagger-document/model-validator:
     input: swagger-document/identity
     scope: model-validator
@@ -180,6 +322,14 @@ pipeline:
     input: swagger-document/identity
     scope: semantic-validator
     suffixes: []
+  pipeline-emitter:
+    scope: scope-pipeline-emitter
+    suffixes:
+      - ''
+  configuration-emitter:
+    scope: scope-configuration-emitter
+    suffixes:
+      - ''
   csharp/imodeler1:
     input: openapi-document/identity
     output-artifact: code-model-v1
@@ -243,29 +393,35 @@ pipeline:
     input: transform
     scope: scope-jsonrpcclient/emitter
     suffixes: []
-  swagger-document/classic-openapi-validator:
-    input: swagger-document/identity
-    scope: azure-validator-composed
-    suffixes:
-      - ''
-  swagger-document/individual/classic-openapi-validator:
-    input: swagger-document/individual/identity
-    scope: azure-validator-individual
-    suffixes:
-      - ''
-  swagger-document/openapi-validator:
-    input: swagger-document/identity
-    scope: azure-validator-composed
-    suffixes:
-      - ''
-  swagger-document/individual/openapi-validator:
-    input: swagger-document/individual/identity
-    scope: azure-validator-individual
-    suffixes:
-      - ''
+scope-swagger-document/emitter:
+  input-artifact: swagger-document
+  is-object: true
+  output-uri-expr: >
+    $config["output-file"] ||
+
+    ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) ||
+
+    $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/,
+    "")
+scope-openapi-document/emitter:
+  input-artifact: openapi-document
+  is-object: true
+  output-uri-expr: >
+    $config["output-file"] ||
+
+    ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) ||
+
+    $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/,
+    "")
+scope-cm/emitter:
+  input-artifact: code-model-v1
+  is-object: true
+  output-uri-expr: |
+    "code-model-v1"
 scope-reflect-api-versions-cs-emitter:
   input-artifact: source-file-csharp
   output-uri-expr: $key
+client-side-validation: true
 scope-pipeline-emitter:
   input-artifact: pipeline
   is-object: true
@@ -276,98 +432,11 @@ scope-configuration-emitter:
   is-object: true
   output-uri-expr: |
     "configuration"
-perform-load: true
-scope-swagger-document/emitter:
-  input-artifact: swagger-document
-  is-object: true
-  output-uri-expr: >
-    $config["output-file"] || 
-
-    ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
-
-    $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/,
-    "")
-scope-openapi-document/emitter:
-  input-artifact: openapi-document
-  is-object: true
-  output-uri-expr: >
-    $config["output-file"] || 
-
-    ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
-
-    $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/,
-    "")
-scope-cm/emitter:
-  input-artifact: code-model-v1
-  is-object: true
-  output-uri-expr: |
-    "code-model-v1"
-client-side-validation: true
-declare-directive:
-  set: '{ transform: `return ${JSON.stringify($)}` }'
-  where-operation: |-
-    (() => {
-      switch ($context.from) {
-        case "code-model-v1":
-          return { from: "code-model-v1", where: `$.operations[*].methods[?(@.serializedName == ${JSON.stringify($)})]` };
-        case "swagger-document":
-        default:
-          return { from: "swagger-document", where: `$.paths.*[?(@.operationId == ${JSON.stringify($)})]` };
-      }
-    })()
-  where-model: |-
-    (() => {
-      switch ($context.from) {
-        case "code-model-v1":
-          throw "not implemented";
-        case "swagger-document":
-        default:
-          return { from: "swagger-document", where: `$.definitions[${JSON.stringify($)}]` };
-      }
-    })()
-  remove-operation: |-
-    {
-      from: 'swagger-document',
-      "where-operation": $,
-      transform: 'return undefined'
-    }
-  rename-operation: |-
-    {
-      from: 'swagger-document',
-      "where-operation": $.from,
-      transform: `$.operationId = ${JSON.stringify($.to)}`
-    }
-  remove-model: |-
-    {
-      from: 'swagger-document',
-      "where-model": $,
-      transform: 'return undefined'
-    }
-  rename-model: |-
-    [{
-      from: 'swagger-document',
-      where: '$.definitions',
-      transform: `if ($[${JSON.stringify($.from)}]) { $[${JSON.stringify($.to)}] = $[${JSON.stringify($.from)}]; delete $[${JSON.stringify($.from)}]; }`
-    }, {
-      from: 'swagger-document',
-      where: `$..['$ref']`,
-      transform: `$ = $ === "#/definitions/${$.from}" ? "#/definitions/${$.to}" : $`
-    }]
-  remove-property: |-
-    {
-      from: 'swagger-document',
-      transform: `delete $.properties[${JSON.stringify($)}]`
-    }
-  rename-property: |-
-    {
-      from: 'swagger-document',
-      transform: `if ($.properties[${JSON.stringify($.from)}]) { $.properties[${JSON.stringify($.to)}] = $.properties[${JSON.stringify($.from)}]; delete $.properties[${JSON.stringify($.from)}]; }`
-    }
 used-extension:
   - '["@microsoft.azure/autorest.csharp","~2.3.79"]'
-  - '["@microsoft.azure/classic-openapi-validator","~1.0.9"]'
-  - '["@microsoft.azure/openapi-validator","~1.0.2"]'
   - '["@microsoft.azure/autorest.modeler","2.3.55"]'
+skip-simplifier-on-namespace:
+  - System.Security.Permissions
 scope-csharp/emitter:
   input-artifact: source-file-csharp
 scope-jsonrpcclient/emitter:
@@ -435,10 +504,6 @@ help-content:
         description: generate sample code from x-ms-examples (experimental)
       - key: static-serializer
         description: generate client serlializer settings as a static member (experimental)
-azure-validator-composed:
-  merge-state: composed
-azure-validator-individual:
-  merge-state: individual
 scope-cm-yaml/emitter:
   input-artifact: code-model-v1-yaml
   is-object: true
@@ -451,5 +516,1098 @@ debug: false
 verbose: false
 disable-validation: false
 configurationFiles:
-  '
+  'file:///C:/work/2019/autorest/Samples/openapi-v2/3b-custom-transformations/readme.md': >
+    # Scenario: Custom transformations
+
+
+    > see https://aka.ms/autorest
+
+
+    ## Configuration
+
+
+    ``` yaml 
+
+    input-file:
+    https://github.com/Azure/azure-rest-api-specs/blob/d374d03801e97737ddb32e01f20513e7b2bbd9c3/arm-storage/2015-06-15/swagger/storage.json
+
+    azure-arm: true
+
+    azure-validator: true
+
+    output-artifact:
+     - swagger-document.json
+     - code-model-v1.norm.yaml
+     - pipeline.yaml
+     - configuration.yaml
+    csharp:
+      output-folder: Client
+    ```
+
+
+    ## Transformations
+
+
+    ### OpenAPI definition: Override a description
+
+
+    ``` yaml 
+
+    directive:
+      from: storage.json
+      where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability"].post.description
+      # The description will be set to the following:
+      set: Checks that the account name has sufficient cowbell (in order to prevent fevers).
+      reason: We've experienced a lack of cowbell in storage account names.
+    ```
+
+
+    ### OpenAPI definition: Mutate descriptions
+
+
+    ``` yaml 
+
+    directive:
+
+    - from: storage.json
+      where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}"].put.description
+      # The following can be arbitrary JavaScript code that will be evaluated to determine the new value.
+      # The original value is accessible via variable "$".
+      # Here: We append a string to the existing value.
+      transform: $ += " Make sure you add that extra cowbell."
+      reason: Make sure people know.
+    - from: storage.json
+      where: $.definitions.Usage.description
+      transform: return $.toUpperCase()
+      reason: Our new guidelines require upper case descriptions here. Customers love it.
+    ```
+
+
+    ### OpenAPI definition: Rename methods
+
+
+    ``` yaml 
+
+    directive:
+      from: swagger-document # do it globally (in case there are multiple input OpenAPI definitions)
+      where: $.paths..operationId
+      # Replace operation IDs ending in "...ies" with "...y", because that's the safest way to make stuff singular.
+      transform: return $.replace(/ies$/, "y")
+      reason: I don't like plural.
+    ```
+
+
+    ### CodeModel: Use endpoint URIs to determine operation group names
+
+
+    By default (without an explicit return statement), `$` is considered the
+    result of the transformation.
+
+
+    ``` yaml 
+
+    directive:
+      from: code-model-v1
+      where: $.operations[*]
+      transform: >
+          const url = $.methods[0]["url"];
+          const res = url.split("/Microsoft.Storage/")[1].split("/")[0];
+          $.name.raw = res;
+          $.summary = JSON.stringify($, null, 2);
+      reason: We wanna group methods by URI.
+    ```
+
+    # Default Configuration - Azure Resource Schema Generator
+
+
+    The Azure Resource Schema Generator will generate Azure Resource Schemas for
+    use with Resource Templates.
+
+
+    ``` yaml $(azureresourceschema) && $(preview)
+
+    use-extension:
+      "@microsoft.azure/autorest.azureresourceschema": "preview"
+    try-require: ./readme.azureresourceschema.md
+
+    ```
+
+
+    ``` yaml $(azureresourceschema)
+
+    enable-multi-api: true
+
+
+    use-extension:
+      "@microsoft.azure/autorest.azureresourceschema": "~2.0.14"
+    try-require: ./readme.azureresourceschema.md
+
+
+
+    ```
+
+
+    # Default Configuration - Directives
+
+
+    The built-in `transform` directive with its filters `from` and `where` are
+    very powerful, but can become verbose and thus hard to reuse for common
+    patterns (e.g. rename an operation).
+
+    Furthermore, they usually rely on precise data formats (e.g. where to find
+    operations in the `code-model-v1`) and thus break once the data format
+    changes.
+
+    We propose the following mechanism of declaring directives similar to
+    macros, which allows capturing commonly used directives in a more high-level
+    way.
+
+    Configuration files using these macros instead of "low-level" directives are
+    robust against changes in the data format as the declaration in here will be
+    adjusted accordingly.
+
+
+    ## How it works
+
+
+    A declaration such as
+
+
+    ``` yaml false
+
+    declare-directive:
+      my-directive: >-
+        [
+          {
+            transform: `some transformer, parameterized with '${JSON.stringify($)}'`
+          },
+          {
+            from: "code-model-v1"
+            transform: `some other transformer, parameterized with '${JSON.stringify($)}'`
+          }
+        ]
+    ```
+
+
+    can be used by naming it in a `directive` section:
+
+
+    ``` yaml false
+
+    directive:
+      - my-directive: # as a standalone, with an object as parameter
+          foo: bar
+          baz: 42
+      - from: a
+        where: b
+        my-directive: 42 # together with other stuff, with a number as parameter
+    ```
+
+
+    Each `directive` entry that names `my-directive` will be expanded with the
+    whatever the declaration evaluates to, where `$` is substituted with the
+    value provided to the directive when used.
+
+    If the declaration evaluates to an array, the directives are duplicated
+    accordingly (this enables directive declarations that transform data on
+    multiple stages).
+
+    In the above example, `directive` gets expanded to:
+
+
+    ``` yaml false
+
+    directive:
+      - transform: >-
+          some transformer, parameterized with '{ "foo": \"bar\", "baz": 42 }'
+      - from: code-model-v1
+        transform: >-
+          some other transformer, parameterized with '{ "foo": \"bar\", "baz": 42 }'
+      - from: a
+        where: b
+        transform: >-
+          some transformer, parameterized with '42'
+      - from: a
+        where: b
+        transform: >-
+          some other transformer, parameterized with '42'
+    ```
+
+
+    As can be seen in the last `directive`, `from` as specified originally was
+    not overridden by `code-model-v1`, i.e. what was specified by the user is
+    given higher priority.
+
+
+
+    ## `set`
+
+
+    Formerly implemented in the AutoRest core itself, `set` is now just
+    syntactic sugar for `transform`.
+
+
+    ``` yaml
+
+    declare-directive:
+      set: >-
+        { transform: `return ${JSON.stringify($)}` }
+    ```
+
+
+    ## Operations
+
+
+    ### Selection
+
+
+    Select operations by ID at different stages of the pipeline.
+
+
+    ``` yaml
+
+    declare-directive:
+      where-operation: >-
+        (() => {
+          switch ($context.from) {
+            case "code-model-v1":
+              return { from: "code-model-v1", where: `$.operations[*].methods[?(@.serializedName == ${JSON.stringify($)})]` };
+            case "swagger-document":
+            default:
+              return { from: "swagger-document", where: `$.paths.*[?(@.operationId == ${JSON.stringify($)})]` };
+          }
+        })()
+      where-model: >-
+        (() => {
+          switch ($context.from) {
+            case "code-model-v1":
+              throw "not implemented";
+            case "swagger-document":
+            default:
+              return { from: "swagger-document", where: `$.definitions[${JSON.stringify($)}]` };
+          }
+        })()
+    ```
+
+
+    ## Removal
+
+
+    Removes an operation by ID.
+
+
+    ``` yaml
+
+    declare-directive:
+      remove-operation: >-
+        {
+          from: 'swagger-document',
+          "where-operation": $,
+          transform: 'return undefined'
+        }
+      rename-operation: >-
+        {
+          from: 'swagger-document',
+          "where-operation": $.from,
+          transform: `$.operationId = ${JSON.stringify($.to)}`
+        }
+      remove-model: >-
+        {
+          from: 'swagger-document',
+          "where-model": $,
+          transform: 'return undefined'
+        }
+      rename-model: >-
+        [{
+          from: 'swagger-document',
+          where: '$.definitions',
+          transform: `if ($[${JSON.stringify($.from)}]) { $[${JSON.stringify($.to)}] = $[${JSON.stringify($.from)}]; delete $[${JSON.stringify($.from)}]; }`
+        },
+        {
+          from: 'swagger-document',
+          where: `$..['$ref']`,
+          transform: `$ = $ === "#/definitions/${$.from}" ? "#/definitions/${$.to}" : $`
+        }]
+      remove-property: >-
+        {
+          from: 'swagger-document',
+          transform: `delete $.properties[${JSON.stringify($)}]`
+        }
+      rename-property: >-
+        {
+          from: 'swagger-document',
+          transform: `if ($.properties[${JSON.stringify($.from)}]) { $.properties[${JSON.stringify($.to)}] = $.properties[${JSON.stringify($.from)}]; delete $.properties[${JSON.stringify($.from)}]; }`
+        }
+    ```
+
+    # Default Configuration - Multi API Version Pipeline
+
+
+    This takes the output of the openapi2/openapi3 loaded documents,
+
+    and joins the collections back into a single pipeline (it splits at load
+    time.)
+
+
+    The final step is the `openapi-document/multi-api/identity`, which is the
+    pipeline input
+
+    for Multi-API version generators (ie, based using `imodeler2` ).
+
+
+    Avoiding conflicts is done thru additional metadata specified in the
+
+    `x-ms-metadata` extension node.
+
+
+
+
+    ``` yaml
+
+    pipeline:
+      openapi-document/multi-api-merger:
+        input: tree-shaker
+        output-artifact: openapi-document
+
+      openapi-document/component-modifiers:
+        input: multi-api-merger
+        output-artifact: openapi-document
+
+      openapi-document/api-version-parameter-handler:
+        input: component-modifiers
+        output-artifact: openapi-document
+
+      openapi-document/profile-filter:
+        input: api-version-parameter-handler
+        output-artifact: openapi-document
+
+      openapi-document/model-deduplicator:
+        input: profile-filter
+        output-artifact: openapi-document
+    ```
+
+
+    ``` yaml $(enable-multi-api)
+
+    pipeline:
+
+      openapi-document/enum-deduplicator:
+        input: model-deduplicator
+        output-artifact: openapi-document
+
+      openapi-document/subset-reducer:
+        input: enum-deduplicator
+        output-artifact: openapi-document
+
+      openapi-document/quick-check:
+        input: subset-reducer
+        output-artifact: openapi-document
+
+
+      openapi-document/multi-api/identity:
+        input: subset-reducer
+        output-artifact: openapi-document
+
+      openapi-document/multi-api/emitter:
+        input: openapi-document/multi-api/identity
+        scope: scope-openapi-document/emitter
+    ```
+
+
+    # more stuff
+
+
+    ``` yaml  $(enable-multi-api)
+
+    # this forces the 'tag' property to not work when `enable-multi-api` is
+    active.
+
+    load-priority: 1000
+
+    tag: null
+
+
+    ```
+
+    # Default Configuration - Single API Version Pipeline
+
+
+    This takes the output of the openapi2/openapi3 loaded documents,
+
+    and joins the collections back into a single pipeline (it splits at load
+    time.)
+
+
+    The final step is the `openapi-document/identity`, which is the pipeline
+    input
+
+    for Single-API version generators (ie, based using `imodeler1` ).
+
+
+
+    ``` yaml !$(enable-multi-api)
+
+    pipeline:
+      openapi-document/compose:
+        input: openapi-document/model-deduplicator # just before deduplication.
+        output-artifact: openapi-document
+
+      openapi-document/identity:
+        input: compose
+        output-artifact: openapi-document
+
+      openapi-document/emitter:
+        input: openapi-document/identity
+        scope: scope-openapi-document/emitter
+
+    # todo/hack: not sure what this is here for,
+
+    scope-swagger-document/emitter:
+      input-artifact: swagger-document
+      is-object: true
+      # rethink that output-file part
+      output-uri-expr: |
+        $config["output-file"] ||
+        ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) ||
+        $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
+    ```
+
+
+    # Default Configuration -- OpenAPI2 loader
+
+
+    This loads OpenAPI2 documents from the values in the configuration
+    `input-file`.
+
+
+    It converts the files to OpenAPI3 and processes them to normalization as
+
+    `openapi-document` artifacts.
+
+
+
+    ``` yaml
+
+
+    pipeline:
+      swagger-document/loader-swagger:
+        # plugin: loader # IMPLICIT: default to last item if split by '/'
+        output-artifact: swagger-document
+        scope: perform-load
+
+      swagger-document/individual/transform:
+        input: loader-swagger
+        output-artifact: swagger-document
+
+      swagger-document/individual/schema-validator-swagger:
+        input: individual/transform
+        output-artifact: swagger-document
+
+      swagger-document/individual/identity:
+        input: individual/schema-validator-swagger
+        output-artifact: swagger-document
+
+    #  swagger-document/transform-immediate:
+
+    #    input:
+
+    #    - swagger-document-override/md-override-loader-swagger
+
+    #    - individual/identity
+
+    #    output-artifact: swagger-document
+
+
+      swagger-document/identity:
+        # input: swagger-document/transform-immediate
+        input: individual/schema-validator-swagger
+        output-artifact: swagger-document
+
+
+      # OpenAPI
+      openapi-document/openapi-document-converter:
+        input: swagger-document/identity
+        output-artifact: openapi-document
+    ```
+
+    # Default Configuration - OpenAPI 3 loader
+
+
+    This loads OpenAPI3 documents from the values in the configuration
+    `input-file`.
+
+
+    It requires no normalization, and will pass out the `openapi-document`
+    artifacts.
+
+
+
+    ``` yaml
+
+    pipeline:
+
+      openapi-document/loader-openapi:
+        output-artifact: openapi-document
+        scope: perform-load
+
+      openapi-document/individual/transform:
+        input: loader-openapi
+        output-artifact: openapi-document
+
+      openapi-document/individual/schema-validator-openapi:
+        input: individual/transform
+        output-artifact: openapi-document
+
+      openapi-document/individual/identity:
+        input: individual/schema-validator-openapi
+        output-artifact: openapi-document
+
+      openapi-document/transform-immediate:
+        input:
+        - openapi-document-override/md-override-loader-openapi
+        - individual/identity
+        output-artifact: openapi-document
+    ```
+
+    # Default Configuration - Markdown overrides
+
+
+    Literate YAML files (markdowns) can have additional syntax that let you
+    dynamically pick up
+
+    Markdown for descriptions, etc.
+
+
+
+    ``` yaml
+
+    pipeline:
+      swagger-document-override/md-override-loader-swagger:
+        output-artifact: immediate-config
+        scope: perform-load
+    ```
+
+
+    ``` yaml
+
+    pipeline:
+      openapi-document-override/md-override-loader-openapi:
+        output-artifact: immediate-config
+        scope: perform-load
+    ```
+
+
+    # Default Configuration - Configuration Bits...
+
+
+    Some kind of last-second tweaking to output the openapi document as a file?
+
+    If someone really needs to know what this is all about, ask @olydis (find
+    him on github...)
+
+
+
+    ``` yaml
+
+    scope-openapi-document/emitter:
+      input-artifact: openapi-document
+      is-object: true
+      # rethink that output-file part
+      output-uri-expr: |
+        $config["output-file"] ||
+        ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) ||
+        $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
+    ```
+
+
+    This is a 'legacy' bit ... really not sure what this is for.
+
+    Doesn't seem all that dangerous either way, so I'll leave this here.
+
+    If someone really needs to know what this is all about, ask @olydis (find
+    him on github...)
+
+
+    ``` yaml
+
+    scope-cm/emitter: # can remove once every generator depends on recent
+    modeler
+      input-artifact: code-model-v1
+      is-object: true
+      output-uri-expr: |
+        "code-model-v1"
+    ```
+
+
+    Any files that are marked as 'preserved-files' are output back to disk
+    again.
+
+
+    ``` yaml
+
+    # preserve files that have been asked to preserve
+
+    output-artifact:
+      - preserved-files
+    ```
+
+
+
+    ## Autorest Interactive
+
+    ``` yaml $(interactive) 
+
+    use-extension:
+      "@microsoft.azure/autorest-interactive": "latest"
+    ```
+
+    # Default Configuration - Patches
+
+
+    These are directives that make patches to documents in the pipeline
+
+    Rather than changing the generators directly.
+
+
+
+    ##### `additionalProperties: true/false` in definitions section
+
+
+    ``` yaml
+
+    directive:
+
+    - from: swagger-document
+      where: $.definitions.*.additionalProperties
+      transform: |
+        return typeof $ === "boolean"
+          ? ($ ? { type: "object" } : undefined)
+          : $
+      reason: polyfill
+    - from: openapi-document
+      where: $.definitions.*.additionalProperties
+      transform: |
+        return typeof $ === "boolean"
+          ? ($ ? { type: "object" } : undefined)
+          : $
+      reason: polyfill
+    ```
+
+
+    ##### Reproduce old buggy behavior of ignoring `required`ness of properties
+    in nested schemas (anything outside `definitions` section)
+
+    See https://github.com/Azure/autorest/issues/2688
+
+
+    ``` yaml $(ignore-nested-required)
+
+    directive:
+
+    - from: openapi-document
+      where: $..*[?(Array.isArray(@.required) && @.properties)]
+      transform: |
+        if ($path.length > 3) delete $.required;
+      reason: see issue https://github.com/Azure/autorest/issues/2688
+    ```
+
+    # Default Configuration - CSharp
+
+    The V2 version of the C# Generator.
+
+    ``` yaml $(csharp) && $(preview)
+    use-extension:
+      "@microsoft.azure/autorest.csharp": "preview"
+    try-require: ./readme.csharp.md
+    ```
+
+    ``` yaml $(csharp)
+    use-extension:
+      "@microsoft.azure/autorest.csharp": "~2.3.79"
+    try-require: ./readme.csharp.md
+    ```
+
+    ``` yaml $(jsonrpcclient)
+    use-extension:
+      "@microsoft.azure/autorest.csharp": "~2.3.79"
+    ```
+
+    ##### Input API versions (azure-rest-api-specs + C# specific)
+
+    ``` yaml $(csharp)
+    pipeline:
+      swagger-document/reflect-api-versions-cs: # emits a *.cs file containing information about the API versions involved in this call
+        input:
+        - identity
+        - individual/identity
+        - csharp/emitter # ensures delay and C# scope
+        scope: reflect-api-versions
+      swagger-document/reflect-api-versions-cs/emitter: # emits the pipeline graph
+        input: reflect-api-versions-cs
+        scope: scope-reflect-api-versions-cs-emitter
+    ```
+
+    ``` yaml $(csharp)
+    pipeline:
+      openapi-document/reflect-api-versions-cs: # emits a *.cs file containing information about the API versions involved in this call
+        input:
+        - identity
+        - individual/identity
+        - csharp/emitter # ensures delay and C# scope
+        scope: reflect-api-versions
+      openapi-document/reflect-api-versions-cs/emitter: # emits the pipeline graph
+        input: reflect-api-versions-cs
+        scope: scope-reflect-api-versions-cs-emitter
+    ```
+
+
+    ``` yaml
+    scope-reflect-api-versions-cs-emitter:
+      input-artifact: source-file-csharp
+      output-uri-expr: $key
+    ```
+
+    # Default Configuration - Go
+
+    The V2 version of the Go Generator.
+
+    ``` yaml $(go) && $(preview)
+    use-extension:
+      "@microsoft.azure/autorest.go": "preview"
+    try-require: ./readme.go.md
+    ```
+
+    ``` yaml $(go)
+    use-extension:
+      "@microsoft.azure/autorest.go": "~2.1.47"
+    try-require: ./readme.go.md
+    ```
+
+    # Default Configuration - Java
+
+    The V2 version of the Java Generator.
+
+    ``` yaml $(java) && $(preview)
+    use-extension:
+      "@microsoft.azure/autorest.java": "~2.1.32"
+    try-require: ./readme.java.md
+    ```
+
+    ``` yaml $(java)
+    use-extension:
+      "@microsoft.azure/autorest.java": "~2.1.32"
+    try-require: ./readme.java.md
+    ```
+
+    # Default Configuration - NodeJS
+
+    The V2 version of the NodeJS Generator.
+
+
+    ``` yaml $(nodejs) && $(preview)
+    use-extension:
+      "@microsoft.azure/autorest.nodejs": "preview"
+    try-require: ./readme.nodejs.md
+    ```
+
+    ``` yaml $(nodejs)
+    use-extension:
+      "@microsoft.azure/autorest.nodejs": "~2.1.25"
+    try-require: ./readme.nodejs.md
+    ```
+
+    # Default Configuration - PHP
+
+    The V2 version of the PHP Generator.
+
+
+    ``` yaml $(php) && preview
+    use-extension:
+      "@microsoft.azure/autorest.php": "~2.0.12"
+    try-require: ./readme.php.md
+    ```
+
+    ``` yaml $(php)
+    use-extension:
+      "@microsoft.azure/autorest.php": "~2.0.12"
+    try-require: ./readme.php.md
+    ```
+
+    # Default Configuration - Pythong
+
+    The V2 version of the Python Generator.
+
+
+
+    ``` yaml $(python) && $(preview)
+    use-extension:
+      "@microsoft.azure/autorest.python": "preview"
+    try-require: ./readme.python.md
+    ```
+
+    ``` yaml $(python)
+    use-extension:
+      "@microsoft.azure/autorest.python": "~2.1.26"
+    try-require: ./readme.python.md
+    ```
+
+
+    # Default Configuration - Ruby
+
+    The V2 version of the Ruby Generator.
+
+
+    ``` yaml $(ruby) && $(preview)
+    use-extension:
+      "@microsoft.azure/autorest.ruby": "preview"
+    try-require: ./readme.ruby.md
+    ```
+    ``` yaml $(ruby)
+    use-extension:
+      "@microsoft.azure/autorest.ruby": "~3.1.26"
+    try-require: ./readme.ruby.md
+    ```
+
+    # Default Configuration - Typescript
+
+    The V2 version of the Typescript Generator.
+
+    ``` yaml $(typescript) && $(preview)
+    use-extension:
+      "@microsoft.azure/autorest.typescript": "preview"
+    try-require: ./readme.typescript.md
+    ```
+
+    ``` yaml $(typescript)
+    use-extension:
+      "@microsoft.azure/autorest.typescript": "~2.0.12"
+    try-require: ./readme.typescript.md
+    ```
+
+    # Default Configuration - Validators
+
+
+    The Azure and Model validators
+
+
+
+    ``` yaml $(azure-validator)
+
+    # use-extension:
+
+    #  "@microsoft.azure/classic-openapi-validator": "~1.0.9"
+
+    #  "@microsoft.azure/openapi-validator": "~1.0.2"
+
+    ```
+
+
+    ``` yaml $(model-validator)
+
+    #use-extension:
+     #"oav": "~0.4.20"
+    ```
+
+
+
+    #### Validation
+
+
+    ``` yaml
+
+    pipeline:
+      swagger-document/model-validator:
+        input: swagger-document/identity
+        scope: model-validator
+      swagger-document/semantic-validator:
+        input: swagger-document/identity
+        scope: semantic-validator
+    ```
+
+
+    ``` yaml $(notnow)
+
+    pipeline:
+      openapi-document/model-validator:
+        input: openapi-document/identity
+        scope: model-validator
+      openapi-document/semantic-validator:
+        input: openapi-document/identity
+        scope: semantic-validator
+    ```
+
+
+    # Validation
+
+
+    ## Client Side Validation
+
+
+    On by default for backwards compatibility, but see
+    https://github.com/Azure/autorest/issues/2100
+
+
+    ``` yaml
+
+    client-side-validation: true
+
+    ```
+
+    # Default Configuration - Graph emitters
+
+
+    This has definitions to allow outputing the `Configuration` and `Pipeline`
+    graphs
+
+    as an object (instead of serializing them to text)
+
+
+    ##### Pipeline Graph
+
+
+    This configures the emitter that will emit the pipeline graph itself.
+
+    Used by the autorest-interactive tool to show what the pipeline graph looks
+    like.
+
+
+    ``` yaml
+
+    pipeline:
+      pipeline-emitter: # emits the pipeline graph
+        scope: scope-pipeline-emitter
+
+    scope-pipeline-emitter:
+      input-artifact: pipeline
+      is-object: true
+      output-uri-expr: |
+        "pipeline"
+    ```
+
+
+    ##### Configuration Graph
+
+
+    This configures the emitter that will emit the configuration graph itself.
+
+    It allows the configuration graph itself to be retrieved.
+
+
+    ``` yaml
+
+    pipeline:
+      configuration-emitter: # emits the configuration graph
+        scope: scope-configuration-emitter
+
+    scope-configuration-emitter:
+      input-artifact: configuration
+      is-object: true
+      output-uri-expr: |
+        "configuration"
+    ```
+
+    # Default Configuration - Help Configuration
+
+
+    This contains the definitions for the command line help.
+
+
+    #### Help
+
+
+    ``` yaml $(help)
+
+    input-file: dummy # trick "no input file" checks... may wanna refactor at
+    some point
+
+
+    pipeline:
+      help:
+        scope: help
+
+    output-artifact:
+      - help
+
+    help-content: # type: Help as defined in autorest-core/help.ts
+      _autorest-0:
+        categoryFriendlyName: Overall Verbosity
+        settings:
+        # - key: quiet
+        #   description: suppress most output information
+        - key: verbose
+          description: display verbose logging information
+        - key: debug
+          description: display debug logging information
+      _autorest-1:
+        categoryFriendlyName: Manage Installation
+        settings:
+        - key: info # list-installed
+          description: display information about the installed version of autorest and its extensions
+        - key: list-available
+          description: display available AutoRest versions
+        - key: reset
+          description: removes all autorest extensions and downloads the latest version of the autorest-core extension
+        - key: preview
+          description: enables using autorest extensions that are not yet released
+        - key: latest
+          description: installs the latest autorest-core extension
+        - key: force
+          description: force the re-installation of the autorest-core extension and frameworks
+        - key: version
+          description: use the specified version of the autorest-core extension
+          type: string
+      _autorest-core-0:
+        categoryFriendlyName: Core Settings and Switches
+        settings:
+        - key: help
+          description: display help (combine with flags like --csharp to get further details about specific functionality)
+        - key: input-file
+          type: string | string[]
+          description: OpenAPI file to use as input (use this setting repeatedly to pass multiple files at once)
+        - key: output-folder
+          type: string
+          description: "target folder for generated artifacts; default: \"<base folder>/generated\""
+        - key: clear-output-folder
+          description: clear the output folder before writing generated artifacts to disk (use with extreme caution!)
+        - key: base-folder
+          type: string
+          description: "path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise"
+        - key: message-format
+          type: "\"regular\" | \"json\""
+          description: "format of messages (e.g. from OpenAPI validation); default: \"regular\""
+        - key: github-auth-token
+          type: string
+          description: OAuth token to use when pointing AutoRest at files living in a private GitHub repository
+      _autorest-core-1:
+        categoryFriendlyName: Core Functionality
+        description: "> While AutoRest can be extended arbitrarily by 3rd parties (say, with a custom generator),\n> we officially support and maintain the following functionality.\n> More specific help is shown when combining the following switches with `--help` ."
+        settings:
+        - key: csharp
+          description: generate C# client code
+        - key: go
+          description: generate Go client code
+        - key: java
+          description: generate Java client code
+        - key: python
+          description: generate Python client code
+        - key: nodejs
+          description: generate NodeJS client code
+        - key: typescript
+          description: generate TypeScript client code
+        - key: ruby
+          description: generate Ruby client code
+        - key: php
+          description: generate PHP client code
+        - key: azureresourceschema
+          description: generate Azure resource schemas
+        - key: model-validator
+          description: validates an OpenAPI document against linked examples (see https://github.com/Azure/azure-rest-api-specs/search?q=x-ms-examples )
+        # - key: semantic-validator
+        #   description: validates an OpenAPI document semantically
+        - key: azure-validator
+          description: validates an OpenAPI document against guidelines to improve quality (and optionally Azure guidelines)
+    ```
+
+
+    Note: We don't load anything if `--help` is specified.
 __status: {}
