@@ -48,6 +48,7 @@ nodejs:
   - output-folder: ClientNode
 python:
   - output-folder: ClientPython
-ruby:
-  - output-folder: ClientRuby
+
+#ruby: #disabled -- v3 not supported.
+#  - output-folder: ClientRuby
 ```
