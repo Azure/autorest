@@ -1,2 +1,1 @@
 https://aka.ms/autorest
-Process() cancelled due to exception : File '/Samples/test/error-behavior/openapi-not-swagger/tiny.json' is not a valid OpenAPI 2.0 definition (expected 'swagger: 2.0')
