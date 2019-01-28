@@ -33,7 +33,10 @@ export class Manipulator {
           // transform
           for (const t of trans.transform) {
             const result = await manipulateObject(data, sink, w,
-              (doc, obj, path) => safeEval<any>(`(() => { { ${t} }; return $; })()`, { $: obj, $doc: doc, $path: path })
+              (doc, obj, path) => {
+                return safeEval<any>(`(() => { { ${t} }; return $; })()`, { $: obj, $doc: doc, $path: path, $documentPath: data.originalFullPath });
+              }
+
               /*,
               {
                 reason: trans.reason,

@@ -24,7 +24,7 @@ modelTypes:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: StorageAccountCheckNameAvailabilityParameters
         originalLocations:
           - >-
@@ -97,7 +97,7 @@ modelTypes:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: CheckNameAvailabilityResult
         originalLocations:
           - >-
@@ -158,7 +158,7 @@ modelTypes:
               - '2015-06-15'
             filename:
               - >-
-                mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
             name: CheckNameAvailabilityResult-reason
             originalLocations:
               - >-
@@ -234,7 +234,7 @@ modelTypes:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: StorageAccountPropertiesCreateParameters
         originalLocations:
           - >-
@@ -263,7 +263,7 @@ modelTypes:
               - '2015-06-15'
             filename:
               - >-
-                mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
             name: StorageAccountPropertiesCreateParameters-accountType
             originalLocations:
               - >-
@@ -323,7 +323,7 @@ modelTypes:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: StorageAccountCreateParameters
         originalLocations:
           - >-
@@ -429,7 +429,7 @@ modelTypes:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: Endpoints
         originalLocations:
           - >-
@@ -560,7 +560,7 @@ modelTypes:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: CustomDomain
         originalLocations:
           - >-
@@ -636,7 +636,7 @@ modelTypes:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: StorageAccountProperties
         originalLocations:
           - >-
@@ -667,7 +667,7 @@ modelTypes:
               - '2015-06-15'
             filename:
               - >-
-                mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
             name: StorageAccountProperties-provisioningState
             originalLocations:
               - >-
@@ -728,7 +728,7 @@ modelTypes:
               - '2015-06-15'
             filename:
               - >-
-                mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
             name: StorageAccountProperties-accountType
             originalLocations:
               - >-
@@ -817,7 +817,7 @@ modelTypes:
               - '2015-06-15'
             filename:
               - >-
-                mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
             name: StorageAccountProperties-statusOfPrimary
             originalLocations:
               - >-
@@ -940,7 +940,7 @@ modelTypes:
               - '2015-06-15'
             filename:
               - >-
-                mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
             name: StorageAccountProperties-statusOfSecondary
             originalLocations:
               - >-
@@ -1046,7 +1046,7 @@ modelTypes:
             - '2015-06-15'
           filename:
             - >-
-              mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+              mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
           name: Resource
           originalLocations:
             - >-
@@ -1207,7 +1207,7 @@ modelTypes:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: StorageAccount
         originalLocations:
           - >-
@@ -1250,7 +1250,7 @@ modelTypes:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: StorageAccountKeys
         originalLocations:
           - >-
@@ -1325,7 +1325,7 @@ modelTypes:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: StorageAccountListResult
         originalLocations:
           - >-
@@ -1372,7 +1372,7 @@ modelTypes:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: StorageAccountPropertiesUpdateParameters
         originalLocations:
           - >-
@@ -1404,7 +1404,7 @@ modelTypes:
               - '2015-06-15'
             filename:
               - >-
-                mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
             name: StorageAccountPropertiesUpdateParameters-accountType
             originalLocations:
               - >-
@@ -1458,7 +1458,7 @@ modelTypes:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: StorageAccountUpdateParameters
         originalLocations:
           - >-
@@ -1534,7 +1534,7 @@ modelTypes:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: StorageAccountRegenerateKeyParameters
         originalLocations:
           - >-
@@ -1581,7 +1581,7 @@ modelTypes:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: UsageName
         originalLocations:
           - >-
@@ -1656,7 +1656,7 @@ modelTypes:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: Usage
         originalLocations:
           - >-
@@ -1685,7 +1685,7 @@ modelTypes:
               - '2015-06-15'
             filename:
               - >-
-                mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
             name: Usage-unit
             originalLocations:
               - >-
@@ -1828,7 +1828,7 @@ modelTypes:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: UsageListResult
         originalLocations:
           - >-
@@ -1938,7 +1938,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: SubscriptionIdParameter
                 originalLocations:
                   - >-
@@ -2001,7 +2001,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-providers-microsoft-storage-checknameavailability·post·responses·200
                 originalLocations:
@@ -2059,7 +2059,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·put·parameters·0
                 originalLocations:
@@ -2105,7 +2105,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·put·parameters·1
                 originalLocations:
@@ -2169,7 +2169,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: SubscriptionIdParameter
                 originalLocations:
                   - >-
@@ -2230,7 +2230,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·put·responses·202
                 originalLocations:
@@ -2248,7 +2248,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·put·responses·200
                 originalLocations:
@@ -2297,7 +2297,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·delete·parameters·0
                 originalLocations:
@@ -2343,7 +2343,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·delete·parameters·1
                 originalLocations:
@@ -2386,7 +2386,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: SubscriptionIdParameter
                 originalLocations:
                   - >-
@@ -2446,7 +2446,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·delete·responses·204
                 originalLocations:
@@ -2462,7 +2462,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·delete·responses·200
                 originalLocations:
@@ -2512,7 +2512,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·get·parameters·0
                 originalLocations:
@@ -2558,7 +2558,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·get·parameters·1
                 originalLocations:
@@ -2601,7 +2601,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: SubscriptionIdParameter
                 originalLocations:
                   - >-
@@ -2664,7 +2664,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·get·responses·200
                 originalLocations:
@@ -2728,7 +2728,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·patch·parameters·0
                 originalLocations:
@@ -2774,7 +2774,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·patch·parameters·1
                 originalLocations:
@@ -2840,7 +2840,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: SubscriptionIdParameter
                 originalLocations:
                   - >-
@@ -2903,7 +2903,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·patch·responses·200
                 originalLocations:
@@ -2952,7 +2952,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname-listkeys·post·parameters·0
                 originalLocations:
@@ -2995,7 +2995,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname-listkeys·post·parameters·1
                 originalLocations:
@@ -3038,7 +3038,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: SubscriptionIdParameter
                 originalLocations:
                   - >-
@@ -3101,7 +3101,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname-listkeys·post·responses·200
                 originalLocations:
@@ -3159,7 +3159,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: SubscriptionIdParameter
                 originalLocations:
                   - >-
@@ -3222,7 +3222,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-providers-microsoft-storage-storageaccounts·get·responses·200
                 originalLocations:
@@ -3277,7 +3277,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts·get·parameters·0
                 originalLocations:
@@ -3320,7 +3320,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: SubscriptionIdParameter
                 originalLocations:
                   - >-
@@ -3383,7 +3383,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts·get·responses·200
                 originalLocations:
@@ -3434,7 +3434,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname-regeneratekey·post·parameters·0
                 originalLocations:
@@ -3480,7 +3480,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname-regeneratekey·post·parameters·1
                 originalLocations:
@@ -3546,7 +3546,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: SubscriptionIdParameter
                 originalLocations:
                   - >-
@@ -3609,7 +3609,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname-regeneratekey·post·responses·200
                 originalLocations:
@@ -3686,7 +3686,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "SubscriptionIdParameter",
                     "originalLocations": [
@@ -3774,7 +3774,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-providers-microsoft-storage-checknameavailability·post·responses·200",
                     "originalLocations": [
@@ -3832,7 +3832,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·put·parameters·0",
                     "originalLocations": [
@@ -3886,7 +3886,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·put·parameters·1",
                     "originalLocations": [
@@ -3964,7 +3964,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "SubscriptionIdParameter",
                     "originalLocations": [
@@ -4052,7 +4052,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·put·responses·200",
                     "originalLocations": [
@@ -4071,7 +4071,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·put·responses·202",
                     "originalLocations": [
@@ -4130,7 +4130,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·delete·parameters·0",
                     "originalLocations": [
@@ -4184,7 +4184,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·delete·parameters·1",
                     "originalLocations": [
@@ -4234,7 +4234,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "SubscriptionIdParameter",
                     "originalLocations": [
@@ -4319,7 +4319,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·delete·responses·200",
                     "originalLocations": [
@@ -4338,7 +4338,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·delete·responses·204",
                     "originalLocations": [
@@ -4389,7 +4389,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·get·parameters·0",
                     "originalLocations": [
@@ -4443,7 +4443,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·get·parameters·1",
                     "originalLocations": [
@@ -4493,7 +4493,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "SubscriptionIdParameter",
                     "originalLocations": [
@@ -4581,7 +4581,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·get·responses·200",
                     "originalLocations": [
@@ -4636,7 +4636,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·patch·parameters·0",
                     "originalLocations": [
@@ -4690,7 +4690,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·patch·parameters·1",
                     "originalLocations": [
@@ -4768,7 +4768,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "SubscriptionIdParameter",
                     "originalLocations": [
@@ -4856,7 +4856,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·patch·responses·200",
                     "originalLocations": [
@@ -4914,7 +4914,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname-listkeys·post·parameters·0",
                     "originalLocations": [
@@ -4968,7 +4968,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname-listkeys·post·parameters·1",
                     "originalLocations": [
@@ -5018,7 +5018,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "SubscriptionIdParameter",
                     "originalLocations": [
@@ -5106,7 +5106,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname-listkeys·post·responses·200",
                     "originalLocations": [
@@ -5161,7 +5161,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "SubscriptionIdParameter",
                     "originalLocations": [
@@ -5249,7 +5249,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-providers-microsoft-storage-storageaccounts·get·responses·200",
                     "originalLocations": [
@@ -5309,7 +5309,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts·get·parameters·0",
                     "originalLocations": [
@@ -5359,7 +5359,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "SubscriptionIdParameter",
                     "originalLocations": [
@@ -5447,7 +5447,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts·get·responses·200",
                     "originalLocations": [
@@ -5507,7 +5507,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname-regeneratekey·post·parameters·0",
                     "originalLocations": [
@@ -5561,7 +5561,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname-regeneratekey·post·parameters·1",
                     "originalLocations": [
@@ -5639,7 +5639,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "SubscriptionIdParameter",
                     "originalLocations": [
@@ -5727,7 +5727,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname-regeneratekey·post·responses·200",
                     "originalLocations": [
@@ -5819,7 +5819,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: SubscriptionIdParameter
                 originalLocations:
                   - >-
@@ -5882,7 +5882,7 @@ operations:
                   - '2015-06-15'
                 filename:
                   - >-
-                    mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+                    mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
                 name: >-
                   paths·subscriptions-subscriptionid-providers-microsoft-storage-usages·get·responses·200
                 originalLocations:
@@ -5930,7 +5930,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "SubscriptionIdParameter",
                     "originalLocations": [
@@ -6018,7 +6018,7 @@ operations:
                       "2015-06-15"
                     ],
                     "filename": [
-                      "mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
+                      "mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json"
                     ],
                     "name": "paths·subscriptions-subscriptionid-providers-microsoft-storage-usages·get·responses·200",
                     "originalLocations": [
@@ -6087,7 +6087,7 @@ properties:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: SubscriptionIdParameter
         originalLocations:
           - >-
@@ -6125,7 +6125,7 @@ properties:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: >-
           paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·put·parameters·0
         originalLocations:
@@ -6171,7 +6171,7 @@ properties:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: >-
           paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·put·parameters·1
         originalLocations:
@@ -6211,7 +6211,7 @@ properties:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: >-
           paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·delete·parameters·0
         originalLocations:
@@ -6257,7 +6257,7 @@ properties:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: >-
           paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·delete·parameters·1
         originalLocations:
@@ -6297,7 +6297,7 @@ properties:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: >-
           paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·get·parameters·0
         originalLocations:
@@ -6343,7 +6343,7 @@ properties:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: >-
           paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·get·parameters·1
         originalLocations:
@@ -6383,7 +6383,7 @@ properties:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: >-
           paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·patch·parameters·0
         originalLocations:
@@ -6429,7 +6429,7 @@ properties:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: >-
           paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname·patch·parameters·1
         originalLocations:
@@ -6469,7 +6469,7 @@ properties:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: >-
           paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname-listkeys·post·parameters·0
         originalLocations:
@@ -6512,7 +6512,7 @@ properties:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: >-
           paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname-listkeys·post·parameters·1
         originalLocations:
@@ -6552,7 +6552,7 @@ properties:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: >-
           paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts·get·parameters·0
         originalLocations:
@@ -6592,7 +6592,7 @@ properties:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: >-
           paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname-regeneratekey·post·parameters·0
         originalLocations:
@@ -6638,7 +6638,7 @@ properties:
           - '2015-06-15'
         filename:
           - >-
-            mem:///121?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
+            mem:///142?https%3A%2F%2Fgithub.com%2FAzure%2Fazure-rest-api-specs%2Fblob%2Fd374d03801e97737ddb32e01f20513e7b2bbd9c3%2Farm-storage%2F2015-06-15%2Fswagger%2Fstorage.json
         name: >-
           paths·subscriptions-subscriptionid-resourcegroups-resourcegroupname-providers-microsoft-storage-storageaccounts-accountname-regeneratekey·post·parameters·1
         originalLocations:

@@ -134,6 +134,11 @@ declare-directive:
       from: 'swagger-document',
       where: `$..['$ref']`,
       transform: `$ = $ === "#/definitions/${$.from}" ? "#/definitions/${$.to}" : $`
+    }, 
+    {
+      from: 'swagger-document',
+      where: `$..['$ref']`,
+      transform: `$ = $ === ($documentPath + "#/definitions/${$.from}") ? ($documentPath + "#/definitions/${$.to}") : $`
     }]
   remove-property: >-
     {

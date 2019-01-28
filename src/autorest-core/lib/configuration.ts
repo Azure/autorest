@@ -722,14 +722,15 @@ export class Configuration {
         'config');
       await addSegments(blocks, false);
     }
+
     // 3. resolve 'require'd configuration
     const addedConfigs = new Set<string>();
-    const includeFn = async () => {
+    const includeFn = async (fsToUse: IFileSystem) => {
       while (true) {
         const tmpView = createView();
 
         // add loaded files to the input files.
-        const additionalConfigs = (await tmpView.IncludedConfigurationFiles(this.fileSystem, addedConfigs));
+        const additionalConfigs = (await tmpView.IncludedConfigurationFiles(fsToUse, addedConfigs));
         if (additionalConfigs.length === 0) {
           break;
         }
@@ -743,9 +744,11 @@ export class Configuration {
             addedConfigs.add(additionalConfig);
             // merge config
 
-            configurationFiles[additionalConfig] = (await fsInputView.ReadStrict(additionalConfig)).ReadData();
+            const inputView = messageEmitter.DataStore.GetReadThroughScope(fsToUse);
+
+            configurationFiles[additionalConfig] = (await inputView.ReadStrict(additionalConfig)).ReadData();
             const blocks = await this.ParseCodeBlocks(
-              await fsInputView.ReadStrict(additionalConfig),
+              await inputView.ReadStrict(additionalConfig),
               tmpView,
               `require-config-${additionalConfig}`);
             await addSegments(blocks);
@@ -759,10 +762,12 @@ export class Configuration {
         }
       }
     };
-    await includeFn();
+    await includeFn(this.fileSystem);
+
     // 4. default configuration
+    const fsLocal = new RealFileSystem();
     if (includeDefault) {
-      const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
+      const inputView = messageEmitter.DataStore.GetReadThroughScope(fsLocal);
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(ResolveUri(CreateFolderUri(__dirname), '../../resources/default-configuration.md')),
         createView(),
@@ -770,7 +775,7 @@ export class Configuration {
       await addSegments(blocks);
     }
 
-    await includeFn();
+    await includeFn(fsLocal);
     const mf = createView().GetEntry('message-format');
     // 5. resolve extensions
     const extMgr = await Configuration.extensionManager;
@@ -851,7 +856,7 @@ export class Configuration {
               }
             }
           }
-          await includeFn();
+          await includeFn(fsLocal);
 
           // merge config
           const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
@@ -888,7 +893,7 @@ export class Configuration {
         createView(),
         'config');
       await addSegments(blocks, false);
-      await includeFn();
+      await includeFn(this.fileSystem);
       return createView([...configs, ...blocks, ...secondPass]).Indexer;
     }
     return createView().Indexer;

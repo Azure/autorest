@@ -4,9 +4,8 @@ require './common.iced'
 semver = require 'semver'
 
 # tasks required for this build 
-Tasks "typescript",  # compiling typescript
-  "regeneration" # regenerating expected files
-  "publishing"   # publishing binaries to npm registry
+Tasks  "regeneration" # regenerating expected files
+ 
 
 # Settings
 Import
@@ -59,29 +58,6 @@ Import
   Dependencies:
     "autorest" : ['autorest-core']
 
-task 'install/binaries', '', (done)->
-  done()
-
-task 'install/bootstrapper', 'Build and install the bootstrapper into the global node.js', (done) ->
-  run [ 'build/typescript' ],
-    ->
-      execute "npm version patch", {cwd:"#{basefolder}/src/autorest"}, (c,o,e) -> 
-        execute "npm install -g .", {cwd:"#{basefolder}/src/autorest"}, (c,o,e) -> 
-          done()
-
-task 'install', 'build and install the dev version of autorest',(done)->
-  run [ 'build/typescript' ],
-    'install/binaries',
-    -> done()
-
-task 'nuke' , '' , (done)->
-  # remove the copied dts files
-  rm "#{basefolder}/package-lock.json"
-  rmdir  "#{basefolder}/src/autorest/lib/core", ->
-    rmdir "#{basefolder}/node_modules", done
-
-task 'init-deps', '', (done) ->
-  done()
 
 task 'autorest', 'Runs AutoRest', (done)-> 
   node = process.argv.shift()
@@ -99,32 +75,7 @@ task 'autorest', 'Runs AutoRest', (done)->
 
 task 'init', "" ,(done)->
   Fail "YOU MUST HAVE NODEJS VERSION GREATER THAN 7.10.0" if semver.lt( process.versions.node , "7.10.0" )
-
-  if (! test "-d","#{basefolder}/src/autorest-core") 
-    echo warning "\n#{ error 'NOTE:' } #{ info 'src/autorest-core'} appears to be missing \n      fixing with #{ info 'git checkout src/autorest-core'}"
-    echo warning "      in the future do a #{ info 'gulp clean'} before using #{ info 'git clean'} .\n"
-    exec "git checkout #{basefolder}/src/autorest-core"
-
-  return done() if initialized
-  global.initialized = true
-  # if the node_modules isn't created, do it.
-  if fileExists "#{basefolder}/package-lock.json" 
-    if (newer "#{basefolder}/package.json",  "#{basefolder}/package-lock.json") or (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules")  
-      echo warning "\n#{ info 'NOTE:' } '#{basefolder}/node_modules' may be out of date #{ info "- consider running 'npm install'" }\n"
-  
-  typescriptProjectFolders()
-    .on 'end', -> 
-      done null
-
-    .pipe foreach (each,next) -> 
-      # is any of the TS projects node_modules out of date?
-      if (! test "-d", "#{each.path}/node_modules") or (newer "#{each.path}/package.json",  "#{each.path}/package-lock.json")
-        echo warning "#{ info 'NOTE:' } '#{each.path}/node_modules' may be out of date. #{ info "- consider running 'npm install'" }\n"
-      next null
-
-    return null
-  return null
-
+  done()
 
 # CI job
 task 'testci', "more", [], (done) ->

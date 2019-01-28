@@ -14,6 +14,17 @@ scope-openapi-document/emitter:
     $config["output-file"] ||
     ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) ||
     $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
+
+
+scope-swagger-document/emitter:
+  input-artifact: swagger-document
+  is-object: true
+  # rethink that output-file part
+  output-uri-expr: |
+    $config["output-file"] || 
+    ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
+    $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")    
+
 ```
 
 This is a 'legacy' bit ... really not sure what this is for.

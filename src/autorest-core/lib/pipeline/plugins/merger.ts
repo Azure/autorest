@@ -193,8 +193,12 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
       if (value && typeof value === 'object') {
         const ref = value.$ref;
         if (ref && ref.startsWith('#')) {
+          const fullRef = `${(<DataHandle>this.currentInput).originalFullPath}${ref}`;
           // change local refs to full ref
-          value.$ref = `${(<DataHandle>this.currentInput).originalFullPath}${ref}`;
+          value.$ref = fullRef;
+          if (this.refs[ref]) {
+            this.refs[fullRef] = this.refs[ref];
+          }
         }
 
         // now, recurse into this object

@@ -1,2 +1,1 @@
 https://aka.ms/autorest
-Process() cancelled due to exception : $ref to original location '/Samples/openapi-v2/3a-literate-swagger/swagger.md#/components/responses//Samples/openapi-v2/3a-literate-swagger/swagger.mderror' is not found in the new refs collection

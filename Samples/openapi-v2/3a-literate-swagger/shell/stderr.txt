@@ -1,5 +1,1 @@
-   at ...
-  Error: $ref to original location '/Samples/openapi-v2/3a-literate-swagger/swagger.md#/components/responses//Samples/openapi-v2/3a-literate-swagger/swagger.mderror' is not found in the new refs collection
-Error: $ref to original location '/Samples/openapi-v2/3a-literate-swagger/swagger.md#/components/responses//Samples/openapi-v2/3a-literate-swagger/swagger.mderror' is not found in the new refs collection
-FATAL: Error: $ref to original location '/Samples/openapi-v2/3a-literate-swagger/swagger.md#/components/responses//Samples/openapi-v2/3a-literate-swagger/swagger.mderror' is not found in the new refs collection
-FATAL: openapi-document/multi-api-merger - FAILED
+

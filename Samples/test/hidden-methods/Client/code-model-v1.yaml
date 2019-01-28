@@ -71,7 +71,7 @@ modelTypes:
           - 1.0.0
         filename:
           - >-
-            mem:///108?file%3A%2F%2F%2FC%3A%2Fwork%2F2019%2Fautorest%2FSamples%2Ftest%2Fhidden-methods%2Fhidden-methods.yaml
+            mem:///129?file%3A%2F%2F%2FC%3A%2Fwork%2F2019%2Fautorest%2FSamples%2Ftest%2Fhidden-methods%2Fhidden-methods.yaml
         name: Cowbell
         originalLocations:
           - >-
@@ -158,7 +158,7 @@ operations:
                   - 1.0.0
                 filename:
                   - >-
-                    mem:///108?file%3A%2F%2F%2FC%3A%2Fwork%2F2019%2Fautorest%2FSamples%2Ftest%2Fhidden-methods%2Fhidden-methods.yaml
+                    mem:///129?file%3A%2F%2F%2FC%3A%2Fwork%2F2019%2Fautorest%2FSamples%2Ftest%2Fhidden-methods%2Fhidden-methods.yaml
                 name: paths·cowbell·post·responses·200
                 originalLocations:
                   - >-

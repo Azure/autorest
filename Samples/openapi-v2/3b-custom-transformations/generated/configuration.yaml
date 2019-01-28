@@ -161,6 +161,10 @@ declare-directive:
       from: 'swagger-document',
       where: `$..['$ref']`,
       transform: `$ = $ === "#/definitions/${$.from}" ? "#/definitions/${$.to}" : $`
+    },  {
+      from: 'swagger-document',
+      where: `$..['$ref']`,
+      transform: `$ = $ === ($documentPath + "#/definitions/${$.from}") ? ($documentPath + "#/definitions/${$.to}") : $`
     }]
   remove-property: |-
     {
@@ -827,6 +831,11 @@ configurationFiles:
           from: 'swagger-document',
           where: `$..['$ref']`,
           transform: `$ = $ === "#/definitions/${$.from}" ? "#/definitions/${$.to}" : $`
+        }, 
+        {
+          from: 'swagger-document',
+          where: `$..['$ref']`,
+          transform: `$ = $ === ($documentPath + "#/definitions/${$.from}") ? ($documentPath + "#/definitions/${$.to}") : $`
         }]
       remove-property: >-
         {
@@ -1117,6 +1126,17 @@ configurationFiles:
         $config["output-file"] ||
         ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) ||
         $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")
+
+
+    scope-swagger-document/emitter:
+      input-artifact: swagger-document
+      is-object: true
+      # rethink that output-file part
+      output-uri-expr: |
+        $config["output-file"] || 
+        ($config.namespace ? $config.namespace.replace(/:/g,'_') : undefined) || 
+        $config["input-file"][0].split('/').reverse()[0].split('\\').reverse()[0].replace(/\.json$/, "")    
+
     ```
 
 

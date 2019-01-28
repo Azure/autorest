@@ -374,16 +374,6 @@ module.exports =
 for key, value of module.exports
   global[key] = value 
 
-# build task for global build
-task 'build', 'builds project', -> 
-  echo "Building project in #{basefolder}"
-
-task 'clean', 'cleans the project files', -> 
-
-# task for vs code
-task 'code', 'launches vs code', -> 
-  exec "code #{basefolder}"
-
 configString = (s)->
   "#{s.charAt 0 .toUpperCase()}#{s.slice 1 .toLowerCase() }"
 
@@ -411,23 +401,3 @@ task 'default','', ->
 
 #{switches}
 """
-
-task 'test', "Run Tests", ->
-  
-task 'fix-line-endings', 'Fixes line endings to file-type appropriate values.', ->
-  source "**/*.iced"
-    .pipe eol {eolc: 'LF', encoding:'utf8'}
-    .pipe destination '.'
-
-package_json = require("#{basefolder}/package.json")
-
-task 'version-number', '!', (done)->
-  if argv.version
-    global.version =  argv.version if argv.version
-    done();
-  else 
-    # git rev-list --parents HEAD --count --full-history
-    execute "git rev-list --parents HEAD --count --full-history" , {silent:true}, (c,o,e)->
-      pv = (package_json.version).trim()
-      global.version = "#{semver.major(pv)}.#{semver.minor(pv)}.#{o.trim()}"
-      done();
