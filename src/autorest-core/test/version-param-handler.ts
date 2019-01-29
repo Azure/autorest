@@ -34,7 +34,7 @@ const resources = `${__dirname}../../../test/resources/version-param-handler`;
       const outputObject = outputDataHandle.ReadObject();
       const paramHandler = new ApiVersionParameterHandler(inputDataHandle);
 
-      assert.deepEqual(paramHandler.getOutput(), outputObject, 'Should be the same');
+      assert.deepEqual(await paramHandler.getOutput(), outputObject, 'Should be the same');
     }
   }
 }
