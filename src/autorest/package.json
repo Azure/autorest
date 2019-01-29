@@ -34,13 +34,8 @@
     "static-link": "static-link --force --no-node-modules",
     "preinstall": "node ./.scripts/preinstall-check",
     "prepack": "static-link --force --no-node-modules && npm run build",
-    "run-pwsh": "pwsh -command \"& {param($script) pwsh -command ((convertfrom-json (get-content -raw ./package.json)).'pwsh-scripts'.$script) }\"",
-    "clean": "npm run run-pwsh clean",
-    "before-build": "npm run run-pwsh before-build"
-  },
-  "pwsh-scripts": {
-    "clean": "remove-item -recurse -ea 0 ./dist ; remove-item -ea 0 ./*.log ",
-    "before-build": "$shh= new-item -type directory -ea 0 ./dist/interfaces; copy-item -ea 0 ./interfaces/*.d.ts dist/interfaces"
+    "clean": "pwsh -command remove-item -recurse -ea 0 ./dist ; remove-item -ea 0 ./*.log",
+    "before-build": "pwsh -command new-item -type directory -ea 0 ./dist/interfaces; copy-item -ea 0 ./interfaces/*.d.ts dist/interfaces "
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {
