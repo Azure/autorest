@@ -1,4 +1,4 @@
-// #!/usr/bin/env node
+#!/usr/bin/env node
 // load modules from static linker filesystem.
 try {
   if (process.argv.indexOf('--no-static-loader') === -1 &&
