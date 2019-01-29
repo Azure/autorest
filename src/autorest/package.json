@@ -34,8 +34,8 @@
     "static-link": "static-link --force --no-node-modules",
     "preinstall": "node ./.scripts/preinstall-check",
     "prepack": "static-link --force --no-node-modules && npm run build",
-    "clean": "pwsh -command remove-item -recurse -ea 0 ./dist ; remove-item -ea 0 ./*.log",
-    "before-build": "pwsh -command new-item -type directory -ea 0 ./dist/interfaces; copy-item -ea 0 ./interfaces/*.d.ts dist/interfaces "
+    "clean": "pwsh -command \"remove-item -recurse -ea 0 ./dist ; remove-item -ea 0 ./*.log\"",
+    "before-build": "pwsh -command \"new-item -type directory -ea 0 ./dist/interfaces; copy-item -ea 0 ./interfaces/*.d.ts dist/interfaces\""
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {
@@ -55,7 +55,8 @@
     "@microsoft.azure/extension": "^2.1.40",
     "@microsoft.azure/tasks": "^2.1.42",
     "semver": "^5.5.1",
-    "chalk": "2.3.0"
+    "chalk": "2.3.0",
+    "pwsh": "0.2.0"
   },
   "static-link": {
     "entrypoints": [],

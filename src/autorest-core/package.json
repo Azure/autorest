@@ -32,8 +32,8 @@
     "prepare": "node ./.scripts/post-install --force --no-node-modules",
     "prepack": "static-link && npm run build",
     "run-pwsh": "pwsh -command \"& {param($script) pwsh -command ((convertfrom-json (get-content -raw ./package.json)).'pwsh-scripts'.$script) }\"",
-    "clean": "pwsh -command remove-item -recurse -ea 0 ./dist ; remove-item -ea 0 ./*.log",
-    "before-build": "pwsh -command new-item -itemType directory -ea 0 -path dist/lib/pipeline ; copy-item ../../schema/*.json dist/lib/pipeline"
+    "clean": "pwsh -command \"remove-item -recurse -ea 0 ./dist ; remove-item -ea 0 ./*.log\"",
+    "before-build": "pwsh -command \"new-item -itemType directory -ea 0 -path dist/lib/pipeline ; copy-item ../../schema/*.json dist/lib/pipeline\""
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {
@@ -72,6 +72,7 @@
     "vscode-jsonrpc": "^3.5.0",
     "source-map-support": "0.5.9",
     "yaml-ast-parser": "0.0.40",
+    "pwsh": "0.2.0",
     "z-schema": "^3.19.0"
   },
   "static-link": {
