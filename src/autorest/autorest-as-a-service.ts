@@ -74,7 +74,10 @@ export function resolvePathForLocalVersion(requestedVersion: string | null): str
 
 export async function tryRequire(localPath: string | null, entrypoint: string): Promise<any> {
   try {
-    return require(await resolveEntrypoint(localPath, entrypoint));
+    const ep = await resolveEntrypoint(localPath, entrypoint);
+    if (ep) {
+      return require(await resolveEntrypoint(localPath, entrypoint));
+    }
   } catch (E) {
     console.log(E);
   }
