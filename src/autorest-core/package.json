@@ -1,6 +1,6 @@
 {
   "name": "@microsoft.azure/autorest-core",
-  "version": "3.0.0",
+  "version": "3.0.5316",
   "description": "AutoRest core module",
   "engines": {
     "node": ">=10.13.0"
@@ -26,7 +26,7 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha ./dist/test --timeout 100000",
     "watch": "tsc -p . --watch",
-    "set-version": "node -e \"let pkg = require('./package.json'); require('child_process').exec('git rev-list --parents HEAD --count --full-history .', (o,stdout) => { const v = pkg.version.split('.'); v[v.length-1] = parseInt(stdout.trim()); const orig=JSON.stringify(pkg,null,2);  pkg.version = v.join('.'); const delta = JSON.stringify(pkg,null,2 ); if( orig !== delta) require('fs').writeFileSync('./package.json',delta)})\"",
+    "set-version": "node -e \"let pkg = require('./package.json'); require('child_process').exec('git rev-list --parents HEAD --count --full-history .', (o,stdout) => { const v = pkg.version.split('.'); v[v.length-1] = (parseInt(stdout.trim())+4000); const orig=JSON.stringify(pkg,null,2);  pkg.version = v.join('.'); const delta = JSON.stringify(pkg,null,2 ); if( orig !== delta) require('fs').writeFileSync('./package.json',delta)})\"",
     "build": "npm run before-build && tsc -p .",
     "static-link": "static-link --no-node-modules",
     "prepare": "node ./.scripts/post-install --force --no-node-modules",
@@ -56,16 +56,16 @@
     "tslint-microsoft-contrib": "^5.2.1",
     "static-link": "^0.2.4",
     "vscode-languageserver": "3.5.1",
-    "@microsoft.azure/async-io": "^2.1.40",
-    "@microsoft.azure/extension": "^2.1.37",
-    "@microsoft.azure/uri": "^2.1.33",
-    "@microsoft.azure/datastore": "^2.1.61",
-    "@microsoft.azure/oai2-to-oai3": "^2.1.81",
+    "@microsoft.azure/async-io": "^2.1.43",
+    "@microsoft.azure/extension": "^2.1.40",
+    "@microsoft.azure/uri": "^2.1.38",
+    "@microsoft.azure/datastore": "^2.1.70",
+    "@microsoft.azure/oai2-to-oai3": "^2.1.85",
     "@microsoft.azure/codegen": "^1.0.36",
-    "@microsoft.azure/openapi": "^2.1.35",
-    "@microsoft.azure/linq": "^2.1.37",
-    "@microsoft.azure/deduplication": "^1.0.0",
-    "@microsoft.azure/object-comparison": "^2.1.32",
+    "@microsoft.azure/openapi": "^2.1.38",
+    "@microsoft.azure/linq": "^2.1.40",
+    "@microsoft.azure/deduplication": "^1.0.46",
+    "@microsoft.azure/object-comparison": "^2.1.34",
     "compare-versions": "^3.4.0",
     "commonmark": "^0.27.0",
     "jsonpath": "1.0.0",
@@ -82,15 +82,16 @@
     "entrypoints": [],
     "dependencies": {
       "vscode-languageserver": "3.5.1",
-      "@microsoft.azure/async-io": "^2.1.40",
-      "@microsoft.azure/extension": "^2.1.37",
-      "@microsoft.azure/datastore": "^2.1.61",
-      "@microsoft.azure/oai2-to-oai3": "^2.1.81",
-      "@microsoft.azure/uri": "^2.1.33",
-      "@microsoft.azure/linq": "^2.1.37",
+      "@microsoft.azure/async-io": "^2.1.43",
+      "@microsoft.azure/extension": "^2.1.40",
+      "@microsoft.azure/uri": "^2.1.38",
+      "@microsoft.azure/datastore": "^2.1.70",
+      "@microsoft.azure/oai2-to-oai3": "^2.1.85",
       "@microsoft.azure/codegen": "^1.0.36",
-      "@microsoft.azure/openapi": "^2.1.35",
-      "@microsoft.azure/deduplication": "^1.0.0",
+      "@microsoft.azure/openapi": "^2.1.38",
+      "@microsoft.azure/linq": "^2.1.40",
+      "@microsoft.azure/deduplication": "^1.0.46",
+      "@microsoft.azure/object-comparison": "^2.1.34",
       "commonmark": "^0.27.0",
       "jsonpath": "1.0.0",
       "compare-versions": "^3.4.0",
@@ -100,9 +101,8 @@
       "untildify": "^3.0.2",
       "vscode-jsonrpc": "^3.5.0",
       "yaml-ast-parser": "0.0.40",
-      "z-schema": "3.19.0"
-    },
-    "patch": "const fs = require(`fs`); let txt = fs.readFileSync('./node_modules/npm/lib/install/action/extract.js','utf8').replace(`const ENABLE_WORKERS = process.platform === 'darwin'`, `const ENABLE_WORKERS = false;`); fs.writeFileSync('./node_modules/npm/lib/install/action/extract.js', txt ); txt = fs.readFileSync(`./node_modules/npm/lib/npm.js`,`utf8`).replace(`var j = parseJSON(fs.readFileSync(`, `var j = require(path.join(__dirname, '../package.json'));` ).replace(`path.join(__dirname, '../package.json')) + '')`,``); fs.writeFileSync(`./node_modules/npm/lib/npm.js`, txt );  txt = fs.readFileSync('./node_modules/npm/lib/pack.js','utf8').replace(`require.main.filename`, `require.resolve('../bin/npm-cli.js')`); fs.writeFileSync('./node_modules/npm/lib/pack.js', txt );"
+      "z-schema": "^3.19.0"
+    }
   },
   "dependencies": {}
 }

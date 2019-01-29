@@ -32,7 +32,7 @@
     "tslint-language-service-ts3": "1.0.0",
     "tslint-microsoft-contrib": "^5.2.1",
     "tslint-sonarts": "^1.8.0",
-    "pwsh": "https://github.com/fearthecowboy/npm-get-powershell/releases/download/0.2.0/pwsh-0.2.0.tgz",
+    "pwsh": "0.2.0",
     "chalk": "^1.1.2",
     "coffee-script": "^1.11.1",
     "dts-generator": "^2.1.0",

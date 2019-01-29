@@ -1,6 +1,6 @@
 {
   "name": "autorest",
-  "version": "3.0.0",
+  "version": "3.0.5124",
   "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is an OpenAPI spec that describes the REST API.",
   "engines": {
     "node": ">=10.13.0"
@@ -30,7 +30,7 @@
     "test": "./node_modules/.bin/mocha ./dist/test",
     "build": "npm run before-build && tsc -p .",
     "watch": "npm run before-build && tsc -p . --watch",
-    "set-version": "node -e \"let pkg = require('./package.json'); require('child_process').exec('git rev-list --parents HEAD --count --full-history .', (o,stdout) => { const v = pkg.version.split('.'); v[v.length-1] = parseInt(stdout.trim()); const orig=JSON.stringify(pkg,null,2);  pkg.version = v.join('.'); const delta = JSON.stringify(pkg,null,2 ); if( orig !== delta) require('fs').writeFileSync('./package.json',delta)})\"",
+    "set-version": "node -e \"let pkg = require('./package.json'); require('child_process').exec('git rev-list --parents HEAD --count --full-history .', (o,stdout) => { const v = pkg.version.split('.'); v[v.length-1] = (parseInt(stdout.trim()) + 4000); const orig=JSON.stringify(pkg,null,2);  pkg.version = v.join('.'); const delta = JSON.stringify(pkg,null,2 ); if( orig !== delta) require('fs').writeFileSync('./package.json',delta)})\"",
     "static-link": "static-link --force --no-node-modules",
     "preinstall": "node ./.scripts/preinstall-check",
     "prepack": "static-link --force --no-node-modules && npm run build",
@@ -55,22 +55,21 @@
     "tslint-language-service": "^0.9.9",
     "tslint-microsoft-contrib": "^5.2.1",
     "static-link": "^0.2.4",
-    "@microsoft.azure/autorest-core": "^3.0.0",
-    "@microsoft.azure/async-io": "^2.1.40",
-    "@microsoft.azure/extension": "^2.1.37",
-    "@microsoft.azure/tasks": "^2.1.39",
+    "@microsoft.azure/autorest-core": "^3.0.5316",
+    "@microsoft.azure/async-io": "^2.1.43",
+    "@microsoft.azure/extension": "^2.1.40",
+    "@microsoft.azure/tasks": "^2.1.42",
     "semver": "^5.5.1",
     "chalk": "2.3.0"
   },
   "static-link": {
     "entrypoints": [],
     "dependencies": {
-      "@microsoft.azure/async-io": "^2.1.40",
-      "@microsoft.azure/extension": "^2.1.37",
-      "@microsoft.azure/tasks": "^2.1.39",
+      "@microsoft.azure/async-io": "^2.1.43",
+      "@microsoft.azure/extension": "^2.1.40",
+      "@microsoft.azure/tasks": "^2.1.42",
       "semver": "^5.5.1",
       "chalk": "2.3.0"
-    },
-    "patch": "const fs = require(`fs`); let txt = fs.readFileSync('./node_modules/npm/lib/install/action/extract.js','utf8').replace(`const ENABLE_WORKERS = process.platform === 'darwin'`, `const ENABLE_WORKERS = false;`); fs.writeFileSync('./node_modules/npm/lib/install/action/extract.js', txt ); txt = fs.readFileSync(`./node_modules/npm/lib/npm.js`,`utf8`).replace(`var j = parseJSON(fs.readFileSync(`, `var j = require(path.join(__dirname, '../package.json'));` ).replace(`path.join(__dirname, '../package.json')) + '')`,``); fs.writeFileSync(`./node_modules/npm/lib/npm.js`, txt );   txt = fs.readFileSync('./node_modules/npm/lib/pack.js','utf8').replace(`require.main.filename`, `require.resolve('../bin/npm-cli.js')`); fs.writeFileSync('./node_modules/npm/lib/pack.js', txt ); "
+    }
   }
 }
