@@ -11,9 +11,11 @@ import { only, skip, slow, suite, test, timeout } from 'mocha-typescript';
 
 import { MultiAPIMerger } from '../lib/pipeline/plugins/merger';
 import { FastStringify } from '@microsoft.azure/datastore';
+try {
+  require('source-map-support').install();
+} catch {
 
-require('source-map-support').install();
-
+}
 const resources = `${__dirname}../../../test/resources/merger`;
 
 @suite class TestShaker {
