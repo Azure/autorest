@@ -61,7 +61,6 @@
   "static-link": {
     "entrypoints": [],
     "dependencies": {
-      "@microsoft.azure/autorest-core": "^3.0.5316",
       "@microsoft.azure/async-io": "^2.1.43",
       "@microsoft.azure/extension": "^2.1.40",
       "@microsoft.azure/tasks": "^2.1.42",
