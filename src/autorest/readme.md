@@ -7,7 +7,6 @@ This is the autorest cmdline tool.
 ``` bash
 # Install autorest globally
 npm install -g autorest 
-
 ```
 
 ## Usage 
