@@ -12,7 +12,11 @@ import { only, skip, slow, suite, test, timeout } from 'mocha-typescript';
 import { OAI3Shaker } from '../lib/pipeline/plugins/tree-shaker';
 import { FastStringify } from '@microsoft.azure/datastore';
 
-require('source-map-support').install();
+try {
+  require('source-map-support').install();
+} catch {
+
+}
 
 const resources = `${__dirname}../../../test/resources/shaker`;
 

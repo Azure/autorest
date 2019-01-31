@@ -6,7 +6,11 @@ import * as assert from 'assert';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 
-require('source-map-support').install();
+try {
+  require('source-map-support').install();
+} catch {
+
+}
 
 function distinct<T>(list: Array<T>): Array<T> {
   const sorted = list.slice().sort();

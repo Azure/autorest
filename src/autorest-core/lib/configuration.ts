@@ -71,6 +71,8 @@ export interface AutoRestConfigurationImpl {
 
   'enable-multi-api'?: boolean;
   'load-priority'?: number;
+
+  'debugger'?: any;
 }
 
 
@@ -627,6 +629,7 @@ export class Configuration {
     // shallow copy
     configs = { ...configs };
     configs['use-extension'] = { ...configs['use-extension'] };
+    configs['requesting-extensions'] = configs['requesting-extensions'] ? typeof configs['requesting-extensions'] === 'string' ? [configs['requesting-extensions']] : [...configs['requesting-extensions']] : [];
 
     if (configs.hasOwnProperty('licence-header')) {
       configs['license-header'] = configs['licence-header'];
@@ -639,6 +642,7 @@ export class Configuration {
       use = [use];
     }
     if (Array.isArray(use)) {
+      configs['requesting-extensions'].push(...use);
       const extMgr = await Configuration.extensionManager;
       for (const useEntry of use) {
         if (typeof useEntry === 'string') {
@@ -777,6 +781,7 @@ export class Configuration {
 
     await includeFn(fsLocal);
     const mf = createView().GetEntry('message-format');
+
     // 5. resolve extensions
     const extMgr = await Configuration.extensionManager;
     const addedExtensions = new Set<string>();
@@ -806,6 +811,12 @@ export class Configuration {
               localPath = localPath.slice(0, localPath.length - fileProbe.length);
             } catch (e) { }
 
+            const shortname = additionalExtension.name.startsWith('autorest.') ? additionalExtension.name.substr(9) : additionalExtension.name;
+            const view = [...createView().GetNestedConfiguration(shortname)];
+            const enableDebugger = view.length > 0 ? <boolean>(view[0].GetEntry('debugger')) : false;
+
+
+
             if (await exists(localPath)) {
               if (mf !== 'json' && mf !== 'yaml') {
                 // local package
@@ -818,13 +829,16 @@ export class Configuration {
 
               const pack = await extMgr.findPackage(additionalExtension.name, localPath);
               const extension = new LocalExtension(pack, localPath);
+
+
+
               // start extension
               ext = loadedExtensions[additionalExtension.fullyQualified] = {
                 extension,
-                autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await extension.start()))
+                autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await extension.start(enableDebugger)))
               };
             } else {
-              // remote package
+              // remote package`
               const installedExtension = await extMgr.getInstalledExtension(additionalExtension.name, additionalExtension.source);
               if (installedExtension) {
                 if (mf !== 'json' && mf !== 'yaml') {
@@ -833,10 +847,11 @@ export class Configuration {
                     Text: `> Loading AutoRest extension '${additionalExtension.name}' (${additionalExtension.source}->${installedExtension.version})`
                   });
                 }
+
                 // start extension
                 ext = loadedExtensions[additionalExtension.fullyQualified] = {
                   extension: installedExtension,
-                  autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await installedExtension.start()))
+                  autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await installedExtension.start(enableDebugger)))
                 };
               } else {
                 // acquire extension
@@ -849,9 +864,10 @@ export class Configuration {
                 const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, (progressInit: any) => progressInit.Message.Subscribe((s: any, m: any) => tmpView.Message({ Text: m, Channel: Channel.Verbose })));
                 process.chdir(cwd);
                 // start extension
+
                 ext = loadedExtensions[additionalExtension.fullyQualified] = {
                   extension,
-                  autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await extension.start()))
+                  autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await extension.start(enableDebugger)))
                 };
               }
             }

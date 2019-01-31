@@ -8,7 +8,11 @@ import { only, skip, slow, suite, test, timeout } from "mocha-typescript";
 import { DataStore } from "@microsoft.azure/datastore";
 import { manipulateObject } from "../lib/pipeline/object-manipulator";
 import { safeEval } from "@microsoft.azure/datastore";
-require('source-map-support').install();
+try {
+  require('source-map-support').install();
+} catch {
+
+}
 
 
 @suite class ObjectManipulator {

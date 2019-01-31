@@ -51,10 +51,10 @@
     "tslint-language-service": "^0.9.9",
     "tslint-microsoft-contrib": "^5.2.1",
     "static-link": "^0.2.4",
-    "@microsoft.azure/autorest-core": "^3.0.5316",
-    "@microsoft.azure/async-io": "^2.1.43",
-    "@microsoft.azure/extension": "^2.1.40",
-    "@microsoft.azure/tasks": "^2.1.42",
+    "@microsoft.azure/autorest-core": "^3.0.0",
+    "@microsoft.azure/async-io": "^2.1.0",
+    "@microsoft.azure/extension": "^2.2.0",
+    "@microsoft.azure/tasks": "^2.1.0",
     "semver": "^5.5.1",
     "chalk": "2.3.0",
     "pwsh": "0.2.0"
@@ -62,9 +62,9 @@
   "static-link": {
     "entrypoints": [],
     "dependencies": {
-      "@microsoft.azure/async-io": "^2.1.43",
-      "@microsoft.azure/extension": "^2.1.40",
-      "@microsoft.azure/tasks": "^2.1.42",
+      "@microsoft.azure/async-io": "^2.1.0",
+      "@microsoft.azure/extension": "^2.2.0",
+      "@microsoft.azure/tasks": "^2.1.0",
       "semver": "^5.5.1",
       "chalk": "2.3.0"
     }
