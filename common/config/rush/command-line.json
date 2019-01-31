@@ -15,6 +15,12 @@
       "name": "set-version",
       "summary": "set the version in the package.json files",
       "enableParallelism": true
+    },
+    {
+      "commandKind": "bulk",
+      "name": "reset-version",
+      "summary": "reset the version in the package.json files to .0",
+      "enableParallelism": true
     }
     // {
     //   /**

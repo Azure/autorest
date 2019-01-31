@@ -142,12 +142,15 @@ export class ApiVersionParameterHandler extends Transformer<any, oai.Model> {
 async function handleApiVersionParameter(config: ConfigurationView, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
-  for (const each of inputs) {
-    const processor = new ApiVersionParameterHandler(each);
-    const output = await processor.getOutput();
-    result.push(await sink.WriteObject('oai3 without api-version parameters...', output, each.identity, 'oi3-apiVersion-parameter-free', await processor.getSourceMappings()));
+  if (config.GetEntry('azure-arm')) {
+    for (const each of inputs) {
+      const processor = new ApiVersionParameterHandler(each);
+      const output = await processor.getOutput();
+      result.push(await sink.WriteObject('oai3 without api-version parameters...', output, each.identity, 'oi3-apiVersion-parameter-free', await processor.getSourceMappings()));
+    }
+    return new QuickDataSource(result, input.skip);
   }
-  return new QuickDataSource(result, input.skip);
+  return new QuickDataSource(inputs, input.skip);
 }
 
 /* @internal */

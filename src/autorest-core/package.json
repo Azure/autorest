@@ -1,6 +1,6 @@
 {
   "name": "@microsoft.azure/autorest-core",
-  "version": "3.0.5316",
+  "version": "3.0.0",
   "description": "AutoRest core module",
   "engines": {
     "node": ">=10.13.0"
@@ -27,6 +27,7 @@
     "test": "./node_modules/.bin/mocha ./dist/test --timeout 100000",
     "watch": "tsc -p . --watch",
     "set-version": "node -e \"let pkg = require('./package.json'); require('child_process').exec('git rev-list --parents HEAD --count --full-history .', (o,stdout) => { const v = pkg.version.split('.'); v[v.length-1] = (parseInt(stdout.trim())+4000); const orig=JSON.stringify(pkg,null,2);  pkg.version = v.join('.'); const delta = JSON.stringify(pkg,null,2 ); if( orig !== delta) require('fs').writeFileSync('./package.json',delta)})\"",
+    "reset-version": "node -e \"let pkg = require('./package.json'); const v = pkg.version.split('.'); v[v.length-1] = 0; const orig=JSON.stringify(pkg,null,2);  pkg.version = v.join('.'); const delta = JSON.stringify(pkg,null,2 ); if( orig !== delta) require('fs').writeFileSync('./package.json',delta)\"",
     "build": "npm run before-build && tsc -p .",
     "static-link": "static-link --no-node-modules",
     "prepare": "node ./.scripts/post-install --force --no-node-modules",
