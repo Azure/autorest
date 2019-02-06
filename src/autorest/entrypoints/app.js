@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --max_old_space_size=16384
 // load modules from static linker filesystem.
 try {
   if (process.argv.indexOf('--no-static-loader') === -1 && process.env['no-static-loader'] === undefined && require('fs').existsSync(`${__dirname}/../dist/static-loader.js`)) {

@@ -198,6 +198,10 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
         // everything else, just copy recursively.
         default:
+          if (targetParent[key] && targetParent[key] === value) {
+            // properties that are already there and the same...
+            break;
+          }
           this.clone(targetParent, key, pointer, value);
           break;
       }
@@ -410,8 +414,9 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
       }, pointer
     };
 
+    // Q: I removed the 'targetCollection[key] ||' from this before. Why did I do that?
     // const tc = targetCollection[key] || this.newObject(targetCollection, id, pointer);
-    const tc = this.newObject(targetCollection, id, pointer);
+    const tc = targetCollection[id] || this.newObject(targetCollection, id, pointer);
 
     // copy the parts of the parameter across
     visitor.bind(this)(tc, children);
