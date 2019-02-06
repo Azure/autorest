@@ -485,11 +485,16 @@ export class ConfigurationView {
               }
             }
           } catch (e) {
+
+            /*
+              GS01: This should be restored when we go 'release'
+
             this.Message({
               Channel: Channel.Warning,
               Text: `Failed to blame ${JSON.stringify(s.Position)} in '${JSON.stringify(s.document)}' (${e})`,
               Details: e
             });
+            */
             return [s];
           }
 
