@@ -32,9 +32,9 @@
     "static-link": "static-link --no-node-modules",
     "prepare": "node ./.scripts/post-install --force --no-node-modules",
     "prepack": "static-link && npm run build",
-    "run-pwsh": "pwsh -command \"& {param($script) pwsh -command ((convertfrom-json (get-content -raw ./package.json)).'pwsh-scripts'.$script) }\"",
-    "clean": "pwsh -command \"remove-item -recurse -ea 0 ./dist ; remove-item -ea 0 ./*.log\"",
-    "before-build": "pwsh -command \"new-item -itemType directory -ea 0 -path dist/lib/pipeline ; copy-item ../../schema/*.json dist/lib/pipeline\""
+    "run-pwsh": "pwsh -noprofile -command \"& {param($script) pwsh -noprofile -command ((convertfrom-json (get-content -raw ./package.json)).'pwsh-scripts'.$script) }\"",
+    "clean": "pwsh -noprofile -command \"remove-item -recurse -ea 0 ./dist ; remove-item -ea 0 ./*.log\"",
+    "before-build": "pwsh -noprofile -command \"new-item -itemType directory -ea 0 -path dist/lib/pipeline ; copy-item ../../schema/*.json dist/lib/pipeline\""
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {
