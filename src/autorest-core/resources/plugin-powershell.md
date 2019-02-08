@@ -2,10 +2,9 @@
 
 The beta version of the PowerShell Generator.
 
+Note: if the --powershell is mentioned, but they are using autorest.powershell, don't try to load the autorest.powershell from npm.
 
-Note: if the --powershell is mentioned, but they are using autorest.incubator, don't try to load the autorest.powershell from npm.
-
-``` yaml $(powershell) && ( "$(requesting-extensions)".indexOf('autorest.incubator') === -1 ) 
+``` yaml $(powershell) && ( "$(requesting-extensions)".indexOf('autorest.powershell') === -1 ) 
 # requires multi-api merger
 enable-multi-api: true
 
