@@ -122,7 +122,9 @@ function* valuesOf<T>(value: any): Iterable<T> {
       break;
 
     default:
-      yield value;
+      if (value) {
+        yield value;
+      }
   }
   /* rewrite 
   if (value === undefined) {
@@ -393,7 +395,6 @@ export class ConfigurationView {
       delete (dir as any)[makro];
       // call makro
       const makroResults: any = From(parameters).SelectMany(parameter => {
-        // console.log(new Error().stack);
         const result = safeEval(declarations[makro], { $: parameter, $context: dir });
         return Array.isArray(result) ? result : [result];
       }).ToArray();
@@ -519,9 +520,6 @@ export class ConfigurationView {
           return blameTree.BlameLeafs().map(r => <SourceLocation>{ document: r.source, Position: { ...TryDecodeEnhancedPositionFromName(r.name), line: r.line, column: r.column } });
         });
 
-        // console.log("---");
-        // console.log(JSON.stringify(m.Source, null, 2));
-
         const src = From(blameSources).SelectMany(x => x).ToArray();
         m.Source = src;
         // m.Source = From(blameSources).SelectMany(x => x).ToArray();
@@ -535,9 +533,6 @@ export class ConfigurationView {
             }
           }
         }
-
-        // console.log(JSON.stringify(m.Source, null, 2));
-        // console.log("---");
       }
 
       // set range (dummy)
@@ -883,6 +878,10 @@ export class Configuration {
                 });
                 const cwd = process.cwd(); // TODO: fix extension?
                 const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, (progressInit: any) => progressInit.Message.Subscribe((s: any, m: any) => tmpView.Message({ Text: m, Channel: Channel.Verbose })));
+                messageEmitter.Message.Dispatch({
+                  Channel: Channel.Information,
+                  Text: `> Installed AutoRest extension '${additionalExtension.name}' (${additionalExtension.source}->${extension.version})`
+                });
                 process.chdir(cwd);
                 // start extension
 

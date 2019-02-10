@@ -405,7 +405,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     // generate a unique id for the shaken item.
     if (nameHint) {
       // fix namehint to not have unexpected characters.
-      nameHint = nameHint.replace(/[\/\\]*/g, '-');
+      nameHint = nameHint.replace(/[\/\\]+/g, '-');
     }
     const id = nameHint || `${parseJsonPointer(pointer).map(each => `${each}`.toLowerCase().replace(/\W+/g, '-').split('-').filter(each => each).join('-')).filter(each => each).join('·')}`.replace(/\·+/g, '·');
 

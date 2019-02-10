@@ -10,7 +10,7 @@ import { Message, Channel } from "../lib/message";
 
   @test async "suppression"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/"));
-    autoRest.Message.Subscribe((_, m) => m.Channel === Channel.Fatal ? console.error(m.Text) : "");
+    autoRest.Message.Subscribe((_, m) => m.Channel === Channel.Fatal ? console.error(`!!!>${m.Text}`) : "");
 
     // reference run
     await autoRest.ResetConfiguration();
@@ -60,8 +60,6 @@ import { Message, Channel } from "../lib/message";
         }
         assert.notEqual(messages.length, 0);
         assert.notEqual(messages.length, numWarningsRef);
-
-        // console.log(directive, messages.length);
 
         dispose();
       }

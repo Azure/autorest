@@ -37,7 +37,6 @@ export function plainTextVersion(commonmarkAst: Node): string {
   let event;
   while ((event = walker.next())) {
     const node = event.node;
-    // console.log(node);
     switch (node.type) {
       case 'text': result += node.literal; break;
       case 'code': result += node.literal; break;

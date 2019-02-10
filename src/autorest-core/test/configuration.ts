@@ -44,8 +44,6 @@ csharp:
     const autorest = new AutoRest.AutoRest(f, MemoryFileSystem.DefaultVirtualRootUri + "readme.md");
     let cfg = await autorest.view;
 
-    // console.log(cfg.Raw);
-
     // output folder should be 'foo'
     assert.equal(cfg['output-folder'], "foo");
 
@@ -59,8 +57,6 @@ csharp:
     assert.equal(cfg['items'][3], "one/two");
 
     for (const each of cfg.GetNestedConfiguration("csharp")) {
-      // console.log(each.Raw);
-
       // verify the output folder is relative
       assert.equal(each.GetEntry('output-folder'), "foo/csharp");
 
