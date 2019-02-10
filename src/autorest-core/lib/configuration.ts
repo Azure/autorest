@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { exists } from '@microsoft.azure/async-io';
+import { exists, filePath } from '@microsoft.azure/async-io';
 import { BlameTree, DataHandle, DataStore, IFileSystem, LazyPromise, ParseToAst, RealFileSystem, safeEval, Stringify, stringify, TryDecodeEnhancedPositionFromName } from '@microsoft.azure/datastore';
 import { Extension, ExtensionManager, LocalExtension } from '@microsoft.azure/extension';
 import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri } from '@microsoft.azure/uri';
@@ -99,7 +99,32 @@ function MergeConfiguration(higherPriority: AutoRestConfigurationImpl, lowerPrio
   return MergeOverwriteOrAppend(higherPriority, lowerPriority);
 }
 
-function ValuesOf<T>(value: any): Iterable<T> {
+function isIterable(target: any): target is Iterable<any> {
+  return !!target && typeof (target[Symbol.iterator]) === 'function';
+}
+
+function* valuesOf<T>(value: any): Iterable<T> {
+
+  switch (typeof value) {
+    case 'string':
+      yield <T><any>value;
+      break;
+
+    case 'object':
+      if (value) {
+        if (isIterable(value)) {
+          yield* value;
+        } else {
+          yield value;
+        }
+        return;
+      }
+      break;
+
+    default:
+      yield value;
+  }
+  /* rewrite 
   if (value === undefined) {
     return [];
   }
@@ -107,6 +132,7 @@ function ValuesOf<T>(value: any): Iterable<T> {
     return value;
   }
   return [value];
+  // */
 }
 
 export interface Directive {
@@ -126,11 +152,11 @@ export class DirectiveView {
   }
 
   public get from(): Iterable<string> {
-    return ValuesOf<string>(this.directive['from']);
+    return valuesOf<string>(this.directive['from']);
   }
 
   public get where(): Iterable<string> {
-    return ValuesOf<string>(this.directive['where']);
+    return valuesOf<string>(this.directive['where']);
   }
 
   public get reason(): string | null {
@@ -138,15 +164,15 @@ export class DirectiveView {
   }
 
   public get suppress(): Iterable<string> {
-    return ValuesOf<string>(this.directive['suppress']);
+    return valuesOf<string>(this.directive['suppress']);
   }
 
   public get transform(): Iterable<string> {
-    return ValuesOf<string>(this.directive['transform']);
+    return valuesOf<string>(this.directive['transform']);
   }
 
   public get test(): Iterable<string> {
-    return ValuesOf<string>(this.directive['test']);
+    return valuesOf<string>(this.directive['test']);
   }
 }
 
@@ -179,9 +205,6 @@ function ProxifyConfigurationView(cfgView: any) {
 
   return new Proxy(cfgView, {
     get: (target, property) => {
-      if (property === 'constructor') {
-        // debugger;
-      }
       const value = (target)[property];
 
       if (value && value instanceof Array) {
@@ -193,7 +216,8 @@ function ProxifyConfigurationView(cfgView: any) {
 }
 
 const loadedExtensions: { [fullyQualified: string]: { extension: Extension, autorestExtension: LazyPromise<AutoRestExtension> } } = {};
-/*@internal*/ export async function GetExtension(fullyQualified: string): Promise<AutoRestExtension> {
+/*@internal*/
+export async function getExtension(fullyQualified: string): Promise<AutoRestExtension> {
   return loadedExtensions[fullyQualified].autorestExtension;
 }
 
@@ -285,9 +309,6 @@ export class ConfigurationView {
 
     return new Proxy<ConfigurationView>(this, {
       get: (target, property) => {
-        if (property === 'constructor') {
-          // debugger;
-        }
         return property in target.config ? (<any>target.config)[property] : this[<number | string>property];
       }
     });
@@ -320,9 +341,6 @@ export class ConfigurationView {
     const useExtensions = this.Indexer['use-extension'] || {};
     return Object.keys(useExtensions).map(name => {
       const source = useExtensions[name];
-      if (name === 'constructor') {
-        // debugger;
-      }
       return {
         name,
         source,
@@ -331,9 +349,9 @@ export class ConfigurationView {
     });
   }
 
-  public async IncludedConfigurationFiles(fileSystem: IFileSystem, ignoreFiles: Set<string>): Promise<Array<string>> {
+  public async getIncludedConfigurationFiles(fileSystem: IFileSystem, ignoreFiles: Set<string>): Promise<Array<string>> {
     const result = new Array<string>();
-    for (const each of From<string>(ValuesOf<string>(this.config['require']))) {
+    for (const each of valuesOf<string>(this.config['require'])) {
       const path = this.ResolveAsPath(each);
       if (!ignoreFiles.has(path)) {
         result.push(this.ResolveAsPath(each));
@@ -341,7 +359,7 @@ export class ConfigurationView {
     }
 
     // for try require, see if it exists before including it in the list.
-    for (const each of From<string>(ValuesOf<string>(this.config['try-require']))) {
+    for (const each of valuesOf<string>(this.config['try-require'])) {
       const path = this.ResolveAsPath(each);
       try {
         if (!ignoreFiles.has(path) && await fileSystem.ReadFile(path)) {
@@ -359,7 +377,7 @@ export class ConfigurationView {
   }
 
   public get Directives(): Array<DirectiveView> {
-    const plainDirectives = ValuesOf<Directive>(this.config['directive']);
+    const plainDirectives = valuesOf<Directive>(this.config['directive']);
     const declarations = this.config['declare-directive'] || {};
     const expandDirective = (dir: Directive): Iterable<Directive> => {
       const makro = Object.keys(dir).filter(m => declarations[m])[0];
@@ -386,7 +404,7 @@ export class ConfigurationView {
   }
 
   public get InputFileUris(): Array<string> {
-    return From<string>(ValuesOf<string>(this.config['input-file']))
+    return From<string>(valuesOf<string>(this.config['input-file']))
       .Select(each => this.ResolveAsPath(each))
       .ToArray();
   }
@@ -396,7 +414,7 @@ export class ConfigurationView {
   }
 
   public IsOutputArtifactRequested(artifact: string): boolean {
-    return From(ValuesOf<string>(this.config['output-artifact'])).Contains(artifact);
+    return From(valuesOf<string>(this.config['output-artifact'])).Contains(artifact);
   }
 
   public GetEntry(key: keyof AutoRestConfigurationImpl): any {
@@ -424,7 +442,7 @@ export class ConfigurationView {
   }
 
   public * GetNestedConfiguration(pluginName: string): Iterable<ConfigurationView> {
-    for (const section of ValuesOf<any>((this.config as any)[pluginName])) {
+    for (const section of valuesOf<any>((this.config as any)[pluginName])) {
       if (section) {
         yield this.GetNestedConfigurationImmediate(section === true ? {} : section);
       }
@@ -634,6 +652,8 @@ export class Configuration {
     // shallow copy
     configs = { ...configs };
     configs['use-extension'] = { ...configs['use-extension'] };
+
+    // this keeps --use parameters in the configuration so that we can check if someone tried pull it in (powershell needed this)
     configs['requesting-extensions'] = configs['requesting-extensions'] ? typeof configs['requesting-extensions'] === 'string' ? [configs['requesting-extensions']] : [...configs['requesting-extensions']] : [];
 
     if (configs.hasOwnProperty('licence-header')) {
@@ -665,11 +685,10 @@ export class Configuration {
       }
       delete configs.use;
     }
-
     return configs;
   }
 
-  private async DesugarRawConfigs(configs: Array<any>): Promise<Array<any>> {
+  private async desugarRawConfigs(configs: Array<any>): Promise<Array<any>> {
     return Promise.all(configs.map(c => this.DesugarRawConfig(c)));
   }
 
@@ -709,7 +728,7 @@ export class Configuration {
       return new ConfigurationView(configurationFiles, this.fileSystem, messageEmitter, configFileFolderUri, ...segments);
     };
     const addSegments = async (configs: Array<any>, keepInSecondPass = true): Promise<Array<any>> => {
-      const segs = await this.DesugarRawConfigs(configs);
+      const segs = await this.desugarRawConfigs(configs);
       configSegments.push(...segs);
       if (keepInSecondPass) {
         secondPass.push(...segs)
@@ -735,11 +754,12 @@ export class Configuration {
     // 3. resolve 'require'd configuration
     const addedConfigs = new Set<string>();
     const includeFn = async (fsToUse: IFileSystem) => {
+      // tslint:disable-next-line: no-constant-condition
       while (true) {
         const tmpView = createView();
 
         // add loaded files to the input files.
-        const additionalConfigs = (await tmpView.IncludedConfigurationFiles(fsToUse, addedConfigs));
+        const additionalConfigs = (await tmpView.getIncludedConfigurationFiles(fsToUse, addedConfigs));
         if (additionalConfigs.length === 0) {
           break;
         }
@@ -785,7 +805,7 @@ export class Configuration {
     }
 
     await includeFn(fsLocal);
-    const mf = createView().GetEntry('message-format');
+    const messageFormat = createView().GetEntry('message-format');
 
     // 5. resolve extensions
     const extMgr = await Configuration.extensionManager;
@@ -820,22 +840,18 @@ export class Configuration {
             const view = [...createView().GetNestedConfiguration(shortname)];
             const enableDebugger = view.length > 0 ? <boolean>(view[0].GetEntry('debugger')) : false;
 
-
-
             if (await exists(localPath)) {
-              if (mf !== 'json' && mf !== 'yaml') {
+              localPath = filePath(localPath);
+              if (messageFormat !== 'json' && messageFormat !== 'yaml') {
                 // local package
                 messageEmitter.Message.Dispatch({
                   Channel: Channel.Information,
                   Text: `> Loading local AutoRest extension '${additionalExtension.name}' (${localPath})`
                 });
-
               }
 
               const pack = await extMgr.findPackage(additionalExtension.name, localPath);
               const extension = new LocalExtension(pack, localPath);
-
-
 
               // start extension
               ext = loadedExtensions[additionalExtension.fullyQualified] = {
@@ -846,7 +862,7 @@ export class Configuration {
               // remote package`
               const installedExtension = await extMgr.getInstalledExtension(additionalExtension.name, additionalExtension.source);
               if (installedExtension) {
-                if (mf !== 'json' && mf !== 'yaml') {
+                if (messageFormat !== 'json' && messageFormat !== 'yaml') {
                   messageEmitter.Message.Dispatch({
                     Channel: Channel.Information,
                     Text: `> Loading AutoRest extension '${additionalExtension.name}' (${additionalExtension.source}->${installedExtension.version})`
