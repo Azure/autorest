@@ -6,6 +6,7 @@
   ],
   "jsRules": {},
   "rules": {
+    "no-string-literal": false,
     "switch-final-break": false,
     "no-empty-interface": false,
     "no-object-literal-type-assertion": false,
