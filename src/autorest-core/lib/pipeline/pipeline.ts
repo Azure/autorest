@@ -225,13 +225,11 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
           tasks,
           startTime,
           blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => {
-            // console.error(`Blame Calculation:${uri}, ${position}`);
             return configView.DataStore.Blame(uri, position);
           }
 
         }), (k, v) => k === 'dependencies' ? undefined : v, 2);
       } catch (e) {
-        //console.error(e);
         return `${e}`;
       }
     }
@@ -294,7 +292,9 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
         config.Message({ Channel: Channel.Debug, Text: `${nodeName} - END` });
         return scopeResult;
       } catch (e) {
-        console.error(e);
+        console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);
+        throw e;
+
         config.Message({ Channel: Channel.Fatal, Text: `${nodeName} - FAILED` });
         config.Message({ Channel: Channel.Fatal, Text: `${e}` });
         throw e;

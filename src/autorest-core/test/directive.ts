@@ -61,8 +61,6 @@ import { Message, Channel } from "../lib/message";
         assert.notEqual(messages.length, 0);
         assert.notEqual(messages.length, numWarningsRef);
 
-        // console.log(directive, messages.length);
-
         dispose();
       }
     };

@@ -61,8 +61,7 @@ const resources = `${__dirname}../../../test/resources/merger`;
 
 
       // testing: dump out the converted file
-      //console.log(FastStringify(processor.output));
-
+      // console.log(FastStringify(processor.output));
       // console.log(JSON.stringify(data.ReadMetadata.sourceMap.Value));
 
       await aio.writeFile("c:/tmp/input.yaml", input);

@@ -446,14 +446,12 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
         if (file.uri.endsWith('.json')) {
           const more = JSON.parse(file.content);
           if (!outputs.has(file.uri)) {
-            // Console.Log(`  Writing  *${file.uri}*`);
             outputs.set(file.uri, file.content);
             outstanding = outstanding.then(() => WriteString(file.uri, file.content));
             schemas.push(...getRds(more, file.uri));
             return;
           } else {
             const existing = JSON.parse(<string>outputs.get(file.uri));
-            // Console.Log(`  Updating *${file.uri}*`);
 
             schemas.push(...getRds(more, file.uri));
             existing.resourceDefinitions = shallowMerge(existing.resourceDefinitions, more.resourceDefinitions);
@@ -534,7 +532,7 @@ async function mainImpl(): Promise<number> {
     // - doing the inversion (instanceof Error) doesn't reliably work since that seems to return false on Errors marshalled from safeEval
     if (e instanceof Exception) {
       if (autorestArgs.indexOf('--debug') !== -1) {
-        console.log(e);
+        console.log(`${__filename} - FAILURE ${JSON.stringify(e)}`);
       } else {
         console.log(e.message);
       }

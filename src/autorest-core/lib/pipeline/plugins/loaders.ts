@@ -60,8 +60,6 @@ async function LoadLiterateSwaggerOverride(inputScope: DataSource, inputFileUri:
       const candidProperties = ['name', 'operationId', '$ref'];
       clue = clue.replace(/\.\#(.+?)\b/g, (_, match) => `..[?(${candidProperties.map(p => `(@[${JSON.stringify(p)}] && @[${JSON.stringify(p)}].indexOf(${JSON.stringify(match)}) !== -1)`).join(' || ')})]`);
 
-      // console.log(clue);
-
       // target field
       const allowedTargetFields = ['description', 'summary'];
       const targetField = allowedTargetFields.filter(f => (clue || '').endsWith('.' + f))[0] || 'description';
@@ -130,8 +128,6 @@ async function LoadLiterateOpenAPIOverride(inputScope: DataSource, inputFileUri:
       // replace queries
       const candidProperties = ['name', 'operationId', '$ref'];
       clue = clue.replace(/\.\#(.+?)\b/g, (_, match) => `..[?(${candidProperties.map(p => `(@[${JSON.stringify(p)}] && @[${JSON.stringify(p)}].indexOf(${JSON.stringify(match)}) !== -1)`).join(' || ')})]`);
-
-      // console.log(clue);
 
       // target field
       const allowedTargetFields = ['description', 'summary'];

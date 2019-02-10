@@ -132,7 +132,7 @@ export function evaluateGuard(rawFenceGuard: string, contextObject: any): boolea
     // Nope. this isn't an old style expression.
     // at best, it can be an expression that doesn't have all the values resolved.
     // let's resolve them to undefined and see what happens.
-    // console.log(`${fence} => ${expressionFence.replace(/\$\(.*?\)/g, 'undefined')}`)
+
     try {
       return safeEval<boolean>(expressionFence.replace(/\$\(.*?\)/g, 'undefined'));
     } catch {
@@ -144,7 +144,6 @@ export function evaluateGuard(rawFenceGuard: string, contextObject: any): boolea
   const context = { $: contextObject, ...contextObject };
 
   try {
-    // console.log(`${fence} => ${guardExpression}`);
     guardResult = safeEval<boolean>(guardExpression, context);
   } catch (e) {
     try {
