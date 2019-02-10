@@ -2,7 +2,7 @@
 The x-ms-discriminator-value extension is an add-on to the discriminator feature in swagger. This allows us to provide an alias for the base class type using which one can polymorphically capture from the data. For a detailed explanation about polymorphism in swagger, click [here](https://gist.github.com/leedm777/5730877#polymorphism)
 
 ### Example
-Consider the petstore example as described in [x-ms-discriminator.yaml]() The service addPet accepts any model of the kind "petKind". The model "Pet" is inherited by models "Cat" and "Dog" which in turn specify the x-ms-discriminator-value as "Microsoft.PetStore.PetType". This translates as types "Cat" and "Dog" will be polymorphically represented by "Microsoft.PetStore.PetType" instead of "petKind"
+Consider the petstore example as described in [x-ms-discriminator.yaml](x-ms-discriminator.yaml) The service addPet accepts any model of the kind "petKind". The model "Pet" is inherited by models "Cat" and "Dog" which in turn specify the x-ms-discriminator-value as "Microsoft.PetStore.PetType". This translates as types "Cat" and "Dog" will be polymorphically represented by "Microsoft.PetStore.PetType" instead of "petKind"
 
  	
 
