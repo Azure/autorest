@@ -10,7 +10,7 @@ namespace Times.Wire.Search
     /// <summary>A class that contains the module-common code and data.</summary>
     /// <notes>
     /// This class is where you can add things to modify the module.
-    /// As long as it's in the 'private/custom' folder, it won't get deleted
+    /// As long as it's in the 'custom' folder, it won't get deleted
     /// when you use --clear-output-folder in autorest.
     /// </notes>
     public partial class Module
@@ -36,7 +36,7 @@ namespace Times.Wire.Search
             request.RequestUri = new System.Uri(
                 request.RequestUri.AbsoluteUri +
                 sepChar +
-                "apikey=" +
+                "api-key=" +
                 // we'll cheat and pull it from the environment :D
                 System.Environment.GetEnvironmentVariable("TimesApiKey")
                 );
