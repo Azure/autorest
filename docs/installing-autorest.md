@@ -3,8 +3,8 @@
 
 Installing AutoRest on Windows, MacOS or Linux involves two steps:
 
-1. __Install [Node.js](https://nodejs.org/en/)__ (8.11.x LTS preferred. Will not function with Node < 7.10. Be Wary of 9.x and 10.x builds until they are LTS) 
-> for more help, check out [Installing Node.JS on different platforms](./developer/workstation.md#nodejs)
+1. __Install [Node.js](https://nodejs.org/en/)__ (10.15.x LTS preferred. Will not function with Node < 10.x Be Wary of 11.x builds as they may introduce instability or breaking changes. ) 
+> for more help, check out [Installing Node.JS on different platforms](FIXME! ./developer/workstation.md#nodejs)
 
 2. __Install AutoRest__ using `npm`
 
