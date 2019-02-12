@@ -1,11 +1,10 @@
 # AutoRest PowerShell Specific Options
 
-
 ## Controlling the output folder layout
 
 ## Tweaking the way it generates cmdlets
 
-To change the way AutoRest generates cmdlets you can use one of the built-in directives, or you can declare your own directives. You may specify the directives you want to use at the top-level of the Literate Configuration document. For example:
+To change the way AutoRest generates cmdlets you can use one of the built-in directives outlined below, or you can [declare your own directives](https://github.com/Azure/autorest/blob/new-documentation/src/autorest-core/resources/default-configuration.md#directives). You may specify the directives you want to use at the top-level of the Literate Configuration document. For example:
 
 
 ```yaml 
@@ -20,11 +19,11 @@ directive:
 
 The following directives cover the most common tweaking scenarios for cmdlet generation:
 
-- Cmdlet Suppression
-- Cmdlet Renaming
-- Parameter Renaming
-- Model Renaming
-- Property Renaming
+- [Cmdlet Suppression](#Cmdlet-Suppression)
+- [Cmdlet Rename](#Cmdlet-Rename)
+- [Parameter Rename](#Parameter-Rename)
+- [Model Rename](#Model-Rename)
+- [Property Rename](#Property-Rename)
 
 Note: If you have feedback about these directives, or you would like additional built-in directives, feel free to open an issue at https://github.com/Azure/autorest. 
 
