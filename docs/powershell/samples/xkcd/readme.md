@@ -2,11 +2,16 @@
 
 ### Example: XKCD 
 
-Download the [XKCD swagger](https://raw.githubusercontent.com/Azure/autorest.powershell/v3/samples/Xkcd/xkcd.yaml) file.
+Download the [XKCD swagger](https://raw.githubusercontent.com/Azure/autorest/master/docs/powershell/samples/xkcd/xkcd.yaml) file.
 
-``` 
-> autorest --powershell --input-file:./xkcd.yaml 
+> `iwr https://raw.githubusercontent.com/Azure/autorest/master/docs/powershell/samples/xkcd/xkcd.yaml -outfile xkcd.yaml`
 
+Then run AutoRest PowerShell:
+
+> `autorest --powershell --input-file:./xkcd.yaml `
+
+
+```  text
 AutoRest code generation utility [version: 3.0.5135; node: v10.15.0]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
@@ -24,9 +29,9 @@ Inside that, you'll find a `build-module.ps1` script that will compile up the mo
 
 If you add `-test` to the `build-module` script, it will launch a new instance of `pwsh` and load the module so you can test it.
 
-``` powershell
-> ./generated/build-module.ps1 -test
+> `./generated/build-module.ps1 -test`
 
+``` text
 Spawning in isolated process.
 Cleaning folders...
 Compiling private module code
@@ -43,10 +48,9 @@ Now you can try out the cmdlets that have been generated:
 
 List the commands from the module:
 
+> `get-command -module XKCD`
+
 ``` powershell
-> get-command -module XKCD
-
-
 CommandType     Name                                               Version    Source
 -----------     ----                                               -------    ------
 Function        Get-XkcdComic                                      1.0        XKCD
@@ -54,10 +58,10 @@ Function        Get-XkcdComicForToday                              1.0        XK
 ```
 
 Try out a command
+
+> `Get-XkcdComicForToday | fl`
+
 ``` powershell
-> Get-XkcdComicForToday | fl 
-
-
 Alt        : Theres one person in Missouri who says "carbo bev" who the entire rest of the country HATES.
 Day        : 6
 Img        : https://imgs.xkcd.com/comics/carbonated_beverage_language_map.png
@@ -75,11 +79,8 @@ Nifty!
 
 A bit of fun:
 
-``` powershell
+> `invoke-webrequest (Get-XkcdComicForToday).url -outfile image.png ; & ./image.png` 
 
-> invoke-webrequest (Get-XkcdComicForToday).url -outfile image.png ; & ./image.png 
-
-```
 
 ![Today's Comic](./pic.png)
 
