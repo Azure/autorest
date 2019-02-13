@@ -72,12 +72,12 @@ To use the locally built version of the plugin, add `--use:<path>` to the comman
 ```
 
 ### Debugging 
-When using the local 
+
+COMING SOON.
 
 ### Testing
 
-
-
+COMING SOON.
 
 # Contributing
 
