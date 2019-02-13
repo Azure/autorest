@@ -1,3 +1,4 @@
+# DEPRECATED 
 # Building AutoRest
 
 ## Build Prerequisites
@@ -199,7 +200,7 @@ It means you need to disable strong name validation on your dev box:
 
 ### Running AutoRest
 #### Command Line
-After building, the `AutoRest.exe` executable will be output to the `/binaries/net45/` folder. You can run it with the command line options specified in the [Command Line Interface](../../user/cli.md) documentation.
+After building, the `AutoRest.exe` executable will be output to the `/binaries/net45/` folder. You can run it with the command line options specified in the [Command Line Interface](../../user/command-line-interface.md) documentation.
 
 #### Visual Studio
 You can run (and debug) AutoRest by providing the command line parameters in the properties for the AutoRest project. To set these:

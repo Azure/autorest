@@ -3,11 +3,11 @@
 1. Installing AutoRest. 
     - You can [install AutoRest](./installing-autorest.md) on Windows, Mac, or Linux.
 
-1. [Defining Clients With OpenAPI](developer/guide/defining-clients-swagger.md)
+1. [Defining Clients With OpenAPI](developer/guide/how-autorest-generates-code-from-swagger.md)
     - AutoRest-specific [OpenAPI Extensions](extensions/readme.md)
 
 2. Generating Clients
-    - [Command Line Interface](user/cli.md) - using AutoRest from the command line.
+    - [Command Line Interface](user/command-line-interface.md) - using AutoRest from the command line.
     - using AutoRest in Visual Studio.
 
 3. Using a Generated Client (C#) - overview of the generated code and extensibility points.
