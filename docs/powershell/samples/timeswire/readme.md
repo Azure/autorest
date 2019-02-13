@@ -35,7 +35,7 @@ Then you can compile the module:
 Spawning in isolated process.
 Cleaning folders...
 Compiling private module code
-Private Module loaded (C:\tmp\sample\generated\bin\TimesNewswire.private.dll).
+Private Module loaded (C:\...\sample\generated\bin\TimesNewswire.private.dll).
 Processing cmdlet variants
 Generating unified cmdlet proxies
 Done.
@@ -49,7 +49,7 @@ But really, you want to build the module and then load it in a new instance of `
 Spawning in isolated process.
 Cleaning folders...
 Compiling private module code
-Private Module loaded (C:\tmp\sample\generated\bin\TimesNewswire.private.dll).
+Private Module loaded (C:\...\sample\generated\bin\TimesNewswire.private.dll).
 Processing cmdlet variants
 Generating unified cmdlet proxies
 Done.
