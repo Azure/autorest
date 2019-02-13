@@ -43,8 +43,6 @@ Done.
 
 But really, you want to build the module and then load it in a new instance of `pwsh`, so add `-test`:
 
-```
-
 > `./generated/build-module.ps1 -test `
 
 ``` text
@@ -56,7 +54,7 @@ Processing cmdlet variants
 Generating unified cmdlet proxies
 Done.
 
-PS C:\...\sample\generated [ testing TimesNewswire ] > $env: get-history article  
+PS C:\...\sample\generated [ testing TimesNewswire ] >
 ```
 
 Set your Api Key 
