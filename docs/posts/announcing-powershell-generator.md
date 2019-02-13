@@ -1,4 +1,4 @@
-# <img align="center" src="https://github.com/azure/autorest/docs/images/logo.png"> Generating cmdlets from OpenAPI/Swagger with AutoRest
+# <img align="center" src="https://github.com/Azure/autorest/raw/master/docs/images/logo.png"> Generating cmdlets from OpenAPI/Swagger with AutoRest
 
 A long time coming, but I'm now announcing the availability of the first beta of the [AutoRest](https://aka.ms/autorest) PowerShell cmdlet generator.
 
