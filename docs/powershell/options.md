@@ -28,7 +28,7 @@ Contains the low-level c# cmdlet files. By default, AutoRest will create a folde
 cmdlet-folder: <path> 
 ```
 
-#### cmdlets folder
+#### models cmdlets folder
 
 Contains the  low-level c# model-cmdlet files. By default, AutoRest will create a folder called 'model-cmdlet' inside the module folder. If you want to tweak the location use:
 
