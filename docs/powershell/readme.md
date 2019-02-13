@@ -7,10 +7,7 @@
 ## Developers Quick Links
 - Compiling and using the generator yourself - see [PowerShell Generator Development](./development.md) 
 - [AutoRest PowerShell Source Code](https://github.com/azure/autorest.powershell) -- the source code to the generator. (Work-in-progress)
- 
 
-
-NOTE: If you are using a locally compiled version, see instructions in [Development](./development.md)
 
 ## Requirements
 
@@ -21,7 +18,9 @@ Use of the released version of `autorest.powershell` requires the following:
 - PowerShell 6.0 - If you dont have it installed, you can use the cross-platform npm package <br> `npm install -g pwsh` <br>&nbsp;
 - Dotnet SDK 2 or greater - If you dont have it installed, you can use the cross-platform npm package <br> `npm install -g dotnet-sdk-2.1 ` <br>&nbsp;
 
-## Installing 
+## Installing AutoRest Beta and the PowerShell generator
+
+To use the PowerShell generator, you have to first install the AutoRest v3 beta:
 
 ``` powershell
 # Installing AutoRest (beta)
@@ -31,10 +30,25 @@ Use of the released version of `autorest.powershell` requires the following:
 > autorest --reset
 ```
 
+## Returning to the release version of the generator
+
+If you run into a problem, and need to return to the release version of the generator
+
+
+``` powershell
+# Installing AutoRest (release)
+> npm install -g autorest
+
+# remove all the installed plugins
+> autorest --reset
+```
 
 ## Using AutoRest Powershell
 
-At a bare minimum, you can generate a powershell module from the 
+At a bare minimum, you can generate a powershell module using a swagger or openapi file and using `--powershell`.
+
+The output will be in the `./generated` folder by default
+
 ``` powershell
 # AutoRest command line
 > autorest --powershell --input-file:<path-to-swagger-file> [...options]
@@ -49,9 +63,4 @@ At a bare minimum, you can generate a powershell module from the
 - `--debug` - get debug information from autorest as to what is going on
 - `--clear-output-folder` - to clear out previous generated files in the output folder (except files in the custom folder)
 
-
-# Examples:
-
-Check out some examples:
- - Simple usage: [XCKD](./usage-simple) 
 

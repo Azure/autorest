@@ -6,7 +6,7 @@ This is the AutoRest configuration file for TimesWire Search.
 
 ---
 ## Getting Started
-To build the SDK for TimesWire Search, simply [Install AutoRest Beta](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for TimesWire Search, simply [Install AutoRest Beta](../../readme.md#installing) and in this folder, run:
 
 > `autorest`
 
@@ -15,17 +15,10 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Configuration
-
-
 ### Basic Information
 These are the global settings for the  API.
 
-
-
-
 ``` yaml
-
 input-file: timeswire.yaml
 namespace: Times.Wire.Search
 
@@ -43,15 +36,12 @@ powershell:
           type: integer
           description: The *time* period. Get it ? "TIME"
         Source: null # delete this parameter entirely.
-
-
-
-
 ```
 
+# PowerShell
+This configuration block pulls in the powershell generator automatically. 
 
 ``` yaml
-
 use:
 - "@microsoft.azure/autorest.powershell@beta"
 
