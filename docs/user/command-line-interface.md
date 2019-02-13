@@ -6,11 +6,11 @@ The AutoRest command line has been vastly simplified, with the preference to mov
 
 ### Command-line Usage
 
-> `autorest [config-file.md] [additional options]`
+> `autorest [config-file.md | config-file.json | config-file.yaml] [additional options]`
 
 ### Configuration file
 
-AutoRest will use a [configuration file](literate-file-formats/configuration.md) to control the code generation process. By default, AutoRest will look for a file called `readme.md` or it can be passed on the command line. 
+AutoRest will use a [configuration file](./configuration.md) to control the code generation process. By default, AutoRest will look for a file called `readme.md` or it can be passed on the command line. 
 
 This is the preferred method, instead of passing all the information on the command line. 
 
