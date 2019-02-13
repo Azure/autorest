@@ -85,6 +85,6 @@ namespace: MyCompany.Special.Rest
 ```
 ~~~
 
-For more details, see [Literate File Formats](./literate-file-formats/readme.md) (Note: documentation needs updating...)
+For more details, see [Literate File Formats](./literate-file-formats/readme.md) and [autorest configuration files](literate-file-formats/configuration.md) (Note: documentation needs updating...)
 
 
