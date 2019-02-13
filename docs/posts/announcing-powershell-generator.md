@@ -1,4 +1,4 @@
-# <img align="center" src="https://github.com/Azure/autorest/raw/master/docs/images/logo.png"> Generating cmdlets from OpenAPI/Swagger with AutoRest
+# <img align="center" src="https://github.com/Azure/autorest/raw/master/docs/images/logo.png"> Generating PowerShell Cmdlets from OpenAPI/Swagger with AutoRest
 
 A long time coming, but I'm now announcing the availability of the first beta of the [AutoRest](https://aka.ms/autorest) PowerShell cmdlet generator.
 
@@ -18,8 +18,8 @@ Use of the beta version of `autorest.powershell` requires the following:
 > if you want an easy way to install and update Node, I recommend [NVS - Node Version Switcher](https://github.com/Azure/autorest/blob/master/docs/nodejs/installing-via-nvs.md) or [NVM - Node Version Manager](https://github.com/Azure/autorest/blob/master/docs/nodejs/installing-via-nvm.md)
 
 - [AutoRest](https://aka.ms/autorest) v3 beta <br> `npm install -g autorest@beta ` <br>&nbsp;
-- PowerShell 6.0 - If you dont have it installed, you can use the cross-platform npm package <br> `npm install -g pwsh` <br>&nbsp;
-- Dotnet SDK 2 or greater - If you dont have it installed, you can use the cross-platform npm package <br> `npm install -g dotnet-sdk-2.1 ` <br>&nbsp;
+- PowerShell 6.1 - If you dont have it installed, you can use the cross-platform npm package <br> `npm install -g pwsh` <br>&nbsp;
+- Dotnet SDK 2 or greater - If you dont have it installed, you can use the cross-platform .NET 2.1 npm package <br> `npm install -g dotnet-sdk-2.1 ` <br>&nbsp;
 
 ### Using AutoRest Powershell
 
