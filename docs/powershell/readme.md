@@ -72,5 +72,6 @@ The output will be in the `./generated` folder by default
 - [Fileing Bugs](https://githunb.com/azure/autorest) make sure that you tag it with the 'powershell' label.
 - [Command-line-interface](../user/command-line-interface.md) - about the autorest command line
 - [Configuration Files](../user/configuration.md)
-- **Coming Soon**: [Debugging](./debugging-modules) modules with VSCode made easy.
-- **Coming Soon**: [Testing](./testing-with-pester) modules with [Pester](https://github.com/pester/Pester/wiki/Pester)
+- **Coming Soon**: [Debugging](./debugging-modules.md) modules with VSCode made easy.
+- **Coming Soon**: [Testing](./testing-with-pester.md) modules with [Pester](https://github.com/pester/Pester/wiki/Pester)
+- **Coming Soon**: [Packaging](./packaging-the-module.md) modules 
