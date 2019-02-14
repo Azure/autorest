@@ -1,6 +1,10 @@
 # AutoRest PowerShell Specific Options
 
-## Controlling the output folder layout
+There are a couple of PowerShell specific things you may want to do:
+- [Control The Module Output Folder Layout](#Control-The-Module-Output-Folder-Layout)
+- [Tweak The Way It Generates Cmdlets](#Tweak-The-Way-It-Generates-Cmdlets)
+
+## Control The Module Output Folder Layout
 
 By default, AutoRest's PowerShell Generator will place all the files under [this directory layout](./default-directory-layout.md). However, if you want to customize the directory layout, you may specify the following nodes at the top-level of the Literate Configuration document:
 
@@ -63,7 +67,7 @@ api-extensions-folder: <path>
 ```
 
 
-#### file ranames
+#### file renames
 
 In addition, if you desire to rename the module name or specific file names, you may use:
 
@@ -77,9 +81,9 @@ psm1: <name>  # module file
 Note: By default these files will be named after the module-name. For example, the manifest file will be \<module-name>.psd1.
 
 
-## Tweaking the way it generates cmdlets
+## Tweak The Way It Generates Cmdlets
 
-To change the way AutoRest generates cmdlets you can use one of the built-in directives outlined below, or you can [declare your own directives](https://github.com/Azure/autorest/blob/new-documentation/src/autorest-core/resources/default-configuration.md#directives). You may specify the directives you want to use at the top-level of the Literate Configuration document. For example:
+To change the way AutoRest generates cmdlets you can use one of the built-in directives outlined below, or you can [declare your own directives](https://github.com/Azure/autorest/blob/master/src/autorest-core/resources/default-configuration.md#directives). You may specify the directives you want to use at the top-level of the Literate Configuration document. For example:
 
 
 ```yaml 
@@ -102,9 +106,9 @@ The following directives cover the most common tweaking scenarios for cmdlet gen
 
 Note: If you have feedback about these directives, or you would like additional built-in directives, feel free to open an issue at https://github.com/Azure/autorest. 
 
-#### Cmdlet Suppression 
+#### Cmdlet Generation Suppression 
 
-For cmdlet suppression we support both string literals and regex patterns. 
+For cmdlet generation suppression we support both string literals and regex patterns. 
 
 To remove a specific cmdlet, provide the name of the cmdlet. For example:
 
