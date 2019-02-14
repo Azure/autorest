@@ -64,7 +64,7 @@ The generated cmdlets have a large number of ways to be customized and enhanced,
 Behind-the-scenes, many different flavors of a cmdlet can get created, and these are tied together into a single cmdlet with multiple parameter sets. These can be joined with manually-written cmdlets that are written in `.ps1` scripts or c# classes.
 
 ### No reflection for Serialization
-The generated module has custom-created JSON serialization (using an embedded copy of [Carbon.JSON](https://github.com/carbon/Data/tree/master/Carbon.Json)) This significantly improves serialization performance.
+The generated module has custom-created JSON serialization (using an embedded copy of [Carbon.JSON](https://github.com/carbon/Data/tree/master/Carbon.Json) This significantly improves serialization performance.
 
 <hr>
 
