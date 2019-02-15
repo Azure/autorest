@@ -223,7 +223,7 @@ async function composeSwaggers(config: ConfigurationView, overrideInfoTitle: any
 
     return hSwagger;
   } catch (E) {
-    console.error(E);
+    console.error(`${__filename} - FAILURE ${JSON.stringify(E)}`);
     throw E;
   }
 }

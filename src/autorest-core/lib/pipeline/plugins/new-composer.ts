@@ -303,15 +303,11 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
         const actualHeader = this.lookupRef(value.$ref);
 
         if (actualHeader.schema && actualHeader.schema.$ref) {
-          //console.error(`inlining actual header that has schema/$ref :${actualHeader.name} : ${actualHeader.schema.$ref} `)
           // this has a schema that has to be derefed too.
           // this.clone(target, key, pointer, actualHeader);
           this.inlineHeaderCorrectly(this.newObject(target, key, pointer), visit(actualHeader));
         }
         else {
-
-          //console.error(`inlining header without $ref schema (b): ${key}/${value.$ref}`)
-
           // it's specified as a reference
           this.clone(target, key, pointer, actualHeader);
         }
@@ -324,7 +320,6 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
   protected inlineHeaderCorrectly(target: AnyObject, originalNodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of originalNodes) {
       if (value.$ref) {
-        //console.error(`inlining schema (c): ${key}/${value.$ref}`)
         // it's specified as a reference
         this.clone(target, key, pointer, this.lookupRef(value.$ref));
       } else {
@@ -337,7 +332,6 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
   protected inlineHeader(target: AnyObject, originalNodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of originalNodes) {
       if (value.$ref) {
-        //console.error(`inlining header (a): ${key}/${value}`)
         // it's specified as a reference
         this.visitAndDerefObject(this.newObject(target, key, pointer), children);
       } else {
@@ -351,7 +345,6 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
       switch (key) {
         case 'schema':
           if (value.$ref) {
-            //console.error(`inlining ${value.$ref}`);
             // header schemas have to be inlined because the imodeler1 can't handle them
             this.clone(header, key, pointer, this.lookupRef(value.$ref));
           } else {
@@ -382,8 +375,6 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
         this.refs[`#/components/schemas/${key}`] = `#/components/schemas/${schemaName}`;
       } else {
         this.refs[`#/components/schemas/${key}`] = `#/components/schemas/${schemaName}`;
-        // console.error(JSON.stringify(value, null, 4));
-        // console.error(JSON.stringify(target[schemaName], null, 4));
         // if (!areSimilar(value, target[schemaName], 'x-ms-metadata', 'description', 'summary')) {
         //   try {
         //     const a = clone(value, false, undefined, ['x-ms-metadata', 'description', 'summary']);

@@ -35,7 +35,6 @@ export class EnumDeduplicator extends TransformerViaPointer {
   protected refs = new Map<string, Array<{ target: AnyObject, pointer: string }>>();
   protected enums = new Map<string, Array<{ target: AnyObject, value: AnyObject, key: string, pointer: string, originalNodes: Iterable<Node> }>>();
   async visitLeaf(target: AnyObject, value: AnyObject, key: string, pointer: string, originalNodes: Iterable<Node>) {
-    //console.error(`Visit Leaf: ${pointer}`);
     if (value) {
       if (pointer.startsWith('/components/schemas/') && value.enum) {
         // it's an enum 
@@ -50,7 +49,6 @@ export class EnumDeduplicator extends TransformerViaPointer {
       }
 
       if (key === '$ref') {
-        //console.error(`Deferring $ref at ${pointer}`);
         const ref = value.toString();
         // let's hold onto the $ref object until we're done.
         const r = this.refs.get(ref) || this.refs.set(ref, []).get(ref) || []

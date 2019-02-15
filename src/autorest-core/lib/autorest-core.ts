@@ -16,7 +16,7 @@ import { DocumentType } from "./document-type";
 import { Channel, Message } from "./message";
 
 function IsIterable(target: any) {
-  return target && target[Symbol.iterator] && typeof target !== "string";
+  return !!target && typeof target !== 'string' && typeof (target[Symbol.iterator]) === 'function';
 }
 
 function Push<T>(destination: Array<T>, source: any) {
@@ -149,7 +149,7 @@ export class AutoRest extends EventEmitter {
         view.messageEmitter.removeAllListeners();
         return true;
       } catch (e) {
-        const message = { Channel: Channel.Information, Text: `Process() cancelled due to exception : ${e.message ? e.message : e}` };
+        const message = { Channel: Channel.Information, Text: `Process() cancelled due to exception : ${e.message ? e.message : e} / ${e.stack ? e.stack : ''}` };
         if (e instanceof Exception) {
           // idea: don't throw exceptions, just visibly log them and return false
           message.Channel = Channel.Fatal;

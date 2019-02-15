@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { DataHandle, DataSource, FastStringify, IFileSystem, JsonPath, QuickDataSource, safeEval, stringify } from '@microsoft.azure/datastore';
-import { ConfigurationView, GetExtension } from '../configuration';
+import { ConfigurationView, getExtension } from '../configuration';
 import { Channel } from '../message';
 import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
 import { PipelinePlugin } from './common';
@@ -197,10 +197,13 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     'profile-filter': createProfileFilterPlugin()
   };
 
+
+
+
   // dynamically loaded, auto-discovered plugins
   const __extensionExtension: { [pluginName: string]: AutoRestExtension } = {};
   for (const useExtensionQualifiedName of configView.GetEntry(<any>'used-extension') || []) {
-    const extension = await GetExtension(useExtensionQualifiedName);
+    const extension = await getExtension(useExtensionQualifiedName);
     for (const plugin of await extension.GetPluginNames(configView.CancellationToken)) {
       if (!plugins[plugin]) {
         plugins[plugin] = createExternalPlugin(extension, plugin);
@@ -222,13 +225,11 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
           tasks,
           startTime,
           blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => {
-            // console.error(`Blame Calculation:${uri}, ${position}`);
             return configView.DataStore.Blame(uri, position);
           }
 
         }), (k, v) => k === 'dependencies' ? undefined : v, 2);
       } catch (e) {
-        //console.error(e);
         return `${e}`;
       }
     }
@@ -273,6 +274,8 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
       const pluginName = node.pluginName;
       const plugin = plugins[pluginName];
 
+
+
       if (!plugin) {
         throw new Error(`Plugin '${pluginName}' not found.`);
       }
@@ -289,7 +292,9 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
         config.Message({ Channel: Channel.Debug, Text: `${nodeName} - END` });
         return scopeResult;
       } catch (e) {
-        console.error(e);
+        console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);
+        throw e;
+
         config.Message({ Channel: Channel.Fatal, Text: `${nodeName} - FAILED` });
         config.Message({ Channel: Channel.Fatal, Text: `${e}` });
         throw e;

@@ -475,8 +475,6 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
             message: message.Text + moreInfo,
             source: message.Key ? [...message.Key].join('/') : ''
           });
-        } else {
-          // console.log(each.document)
         }
       }
     }
