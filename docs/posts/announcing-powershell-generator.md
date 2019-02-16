@@ -23,7 +23,7 @@ Use of the beta version of `autorest.powershell` requires the following:
 
 ### Using AutoRest Powershell
 
-At a bare minimum, you can generate a powershell module using a swagger or openapi file and using `--powershell`.
+At a bare minimum, you can generate a PowerShell module using a Swagger or OpenAPI file and using `--powershell`.
 
 The output will be in the `./generated` folder by default:
 
