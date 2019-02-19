@@ -1,6 +1,6 @@
 # <img align="center" src="https://github.com/Azure/autorest/raw/master/docs/images/logo.png"> Generating PowerShell Cmdlets from OpenAPI/Swagger with AutoRest
 
-A long time coming, but I'm now announcing the availability of the first beta of the [AutoRest](https://aka.ms/autorest) PowerShell cmdlet generator.
+Today, we're announcing beta support for PowerShell in [AutoRest](https://aka.ms/autorest), so that you can now generate PowerShell modules from Swagger/OpenAPI JSON documents.
 
 > [AutoRest](http://github.com/Azure/autorest) is the SDK generation tool that we use in Azure to produce SDKS for 90+ management services across 7+ languages. <br>Its pluggable architecture allows fine-grained control over the generation process, and allows extensions to be written in any language that can read/write JSON via stdin/stdout (we use the [JSON-RPC](https://www.npmjs.com/package/vscode-jsonrpc) protocol that [Visual Studio Code uses](https://code.visualstudio.com) )
 
