@@ -56,7 +56,7 @@ See [dotnet/core/release-notes/2.0/2.0-supported-os.md](https://github.com/dotne
 Start by reading the documentation for using AutoRest:
 - [Managing AutoRest](./docs/managing-autorest.md) - shows how to get new updates to AutoRest and choose which version to use for code generation
 - [Generating a Client using AutoRest](./docs/examples/generating-a-client.md) - shows simple command line usage for generating a client library.
-- [Command Line Interface Documentation](./docs/user/cli.md) - explains common command line arguments
+- [Command Line Interface Documentation](./docs/user/command-line-interface.md) - explains common command line arguments
 - [Examples](./Samples) - full, walkthrough-style scenarios for using AutoRest
 
 # Developers ![image](./docs/images/glasses.png)
