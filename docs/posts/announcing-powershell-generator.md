@@ -42,13 +42,13 @@ If you run into problems, you can post an issue on the [github repo](https://git
 
 ## Features
 
+### Modules work on both Windows PowerShell and PowerShell 
+Due to the use of `netstandard2.0` and `PowerShellStandard.Library`, once compiled, the cmdlets work on both Windows PowerShell 5.1 and PowerShell 6.x.
+
 ### Generates modules from OpenAPI files without any external dependencies
 Most language SDKs generated with AutoRest required the use of at least a 'client runtime' package, and often pulls in a few other libraries (ie, `JSON.NET`) that are required to compile the output of the generator.
 
 The new PowerShell generator creates modules that require _no dependencies_ outside of `netstandard2.0` and the `PowerShellStandard.Library` which drastically reduces the chances of having assembly loading conflicts.
-
-### Modules work on both Windows PowerShell and PowerShell 
-Due to the use of `netstandard2.0` and `PowerShellStandard.Library`, once compiled, the cmdlets work on both Windows PowerShell 5.1 and PowerShell 6.x.
 
 ### Cmdlets have no weird base-classes or force hierarchy
 All the generated cmdlets inherit `PSCmdlet` and are fairly straightforward. For ARM resources, we already support generating `-AsJob` support for long-running-operations, and this can be expanded in the future to support more patterns.
