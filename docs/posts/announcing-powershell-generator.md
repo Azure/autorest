@@ -16,7 +16,7 @@ Use of the beta version of `autorest.powershell` requires the following:
 - [Node.js LTS](https://nodejs.org) (10.15.x LTS preferred. Will not function with a Node version less than 10.x. Be wary of 11.x builds as they may introduce instability or breaking changes. ) 
 > If you want an easy way to install and update Node, I recommend [NVS - Node Version Switcher](https://github.com/Azure/autorest/blob/master/docs/nodejs/installing-via-nvs.md) or [NVM - Node Version Manager](https://github.com/Azure/autorest/blob/master/docs/nodejs/installing-via-nvm.md)
 
-- [AutoRest](https://aka.ms/autorest) v3 beta: `npm install -g autorest@beta`
+- [AutoRest](https://aka.ms/autorest) v3 beta: <br>`npm install -g autorest@beta`
 - PowerShell 6.1 - If you don't have it installed, you can use the cross-platform npm package <br> `npm install -g pwsh` <br>&nbsp;
 - Dotnet SDK 2 or greater - If you don't have it installed, you can use the cross-platform .NET 2.1 npm package <br> `npm install -g dotnet-sdk-2.1 ` <br>&nbsp;
 
