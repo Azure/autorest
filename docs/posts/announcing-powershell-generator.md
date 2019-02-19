@@ -30,16 +30,6 @@ The output will be in the `./generated` folder by default:
 
 Be sure to check out [these additional samples that use the PowerShell generator](https://github.com/Azure/autorest/blob/master/docs/powershell/samples/readme.md).
 
-### Known Issues
-As with all `beta` software, there are bound to be a few glitches or things that are not working. 
-
-We've cataloged some [known issues](https://github.com/Azure/autorest/blob/master/docs/powershell/release-notes.md#caveats-and-known-issues) with this first beta we encourage you to read before reporting any issues you experience.
-
-### Support 
-We're working as fast as we can to finish up the generator, as we have a lot of modules to generate internally. 
-
-If you run into problems, you can post an issue on the [github repo](https://github.com/Azure/autorest/issues) and tag it with the `powershell` label, and we'll try to take a look.
-
 ## Features
 
 ### Modules work on both Windows PowerShell and PowerShell 
@@ -68,7 +58,7 @@ The generated module has custom-created JSON serialization (using an embedded co
 ### What happened to 'PSSwagger'?
 In order to get to the point where we can generate the [Az](https://azure.microsoft.com/en-us/blog/azure-powershell-az-module-version-1/) 
 modules for all the Azure management services, we needed more control in the fine-grained details of the resulting cmdlets.
-After consulting with the PowerShell team, the decision was made to integrate more closely with the existing mechanism for generating Azure SDKs (AutoRest) and build a full-featured generator extension to create PowerShell cmdlets.
+After consulting with the PowerShell team, the decision was made to integrate more closely with the existing mechanism for generating Azure SDKs (AutoRest) and build a full-featured generator extension to create PowerShell cmdlets. All future work to generate cmdlets be done in the AutoRest PowerShell generator, as we've discontinued work on PSSwagger.
 
 ### Source code?
 Of course! Get started with the source code by reading [the developer documentation](https://github.com/Azure/autorest/blob/master/docs/powershell/development.md)
@@ -76,6 +66,17 @@ Of course! Get started with the source code by reading [the developer documentat
 ### Are there any PowerShell specific generation options?
 
 Yes! You can modify the entire output folder layout, and tweak the way it generates cmdlets, including cmdlet names, parameters, etc. (Check out [our additional documentation on these options](https://github.com/Azure/autorest/blob/master/docs/powershell/options.md)). If you have feedback about these code generation options, feel free to post an issue on the [AutoRest GitHub repo](https://github.com/Azure/autorest/issues).
+
+### Known Issues
+As with all `beta` software, there are bound to be a few glitches or things that are not working. 
+
+We've cataloged some [known issues](https://github.com/Azure/autorest/blob/master/docs/powershell/release-notes.md#caveats-and-known-issues) with this first beta we encourage you to read before reporting any issues you experience.
+
+### Support 
+We're working as fast as we can to finish up the generator, as we have a lot of modules to generate internally. 
+
+If you run into problems, you can post an issue on the [github repo](https://github.com/Azure/autorest/issues) and tag it with the `powershell` label, and we'll try to take a look.
+
 
 # Quick Links
 - [AutoRest GitHub repository](https://github.com/Azure/autorest/blob/master/README.md)
