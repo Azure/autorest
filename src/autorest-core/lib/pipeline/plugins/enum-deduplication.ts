@@ -42,7 +42,7 @@ export class EnumDeduplicator extends TransformerViaPointer {
         if (!value['x-ms-metadata']) {
           return false;
         }
-        const name = value['x-ms-enum'].name;
+        const name = value['x-ms-enum'].name || value['x-ms-metadata'].name;
         const e = this.enums.get(name) || this.enums.set(name, []).get(name) || [];
         e.push({ target, value, key, pointer, originalNodes });
         return true;
@@ -82,7 +82,9 @@ export class EnumDeduplicator extends TransformerViaPointer {
       // combine all the values into a single enum
       const mergedEnum = this.newObject(first.target, name, first.pointer);
       this.clone(mergedEnum, 'x-ms-metadata', first.pointer, first.value['x-ms-metadata']);
-      this.clone(mergedEnum, 'description', first.pointer, first.value.description);
+      if (first.value.description) {
+        this.clone(mergedEnum, 'description', first.pointer, first.value.description);
+      }
       this.clone(mergedEnum, 'x-ms-enum', first.pointer, first.value['x-ms-enum']);
       this.clone(mergedEnum, 'type', first.pointer, 'string');
       const newRef = `#/components/schemas/${name}`;

@@ -1,5 +1,5 @@
 # Initialization
-AutoRest generates a client type based on command-line inputs and the specification (see [Defining Clients with Swagger](../developer/guide/defining-clients-swagger.md). The generated client inherits from the [ServiceClient<T>](https://github.com/Azure/azure-sdk-for-net/blob/psSdkJson6/src/SdkCommon/ClientRuntime/ClientRuntime/ServiceClient.cs) base type which is in the *Microsoft.Rest.ClientRuntime* nuget package. 
+AutoRest generates a client type based on command-line inputs and the specification (see [Defining Clients with Swagger](../developer/guide/how-autorest-generates-code-from-swagger.md). The generated client inherits from the [ServiceClient<T>](https://github.com/Azure/azure-sdk-for-net/blob/psSdkJson6/src/SdkCommon/ClientRuntime/ClientRuntime/ServiceClient.cs) base type which is in the *Microsoft.Rest.ClientRuntime* nuget package. 
 
 The client type has several  constructors: 
 ## Default Constructor
