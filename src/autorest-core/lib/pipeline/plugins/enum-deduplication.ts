@@ -42,7 +42,8 @@ export class EnumDeduplicator extends TransformerViaPointer {
         if (!value['x-ms-metadata']) {
           return false;
         }
-        const name = value['x-ms-enum'].name || value['x-ms-metadata'].name;
+        // use the given name if specified, otherwise fallback to the metadata name
+        const name = value['x-ms-enum'] ? value['x-ms-enum'].name : value['x-ms-metadata'].name;
         const e = this.enums.get(name) || this.enums.set(name, []).get(name) || [];
         e.push({ target, value, key, pointer, originalNodes });
         return true;
