@@ -255,7 +255,6 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children, nameHint);
           break;
       }
-
     }
   }
 
@@ -406,6 +405,9 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     if (nameHint) {
       // fix namehint to not have unexpected characters.
       nameHint = nameHint.replace(/[\/\\]+/g, '-');
+      if (targetCollection[nameHint]) {
+        nameHint = undefined;
+      }
     }
     const id = nameHint || `${parseJsonPointer(pointer).map(each => `${each}`.toLowerCase().replace(/\W+/g, '-').split('-').filter(each => each).join('-')).filter(each => each).join('·')}`.replace(/\·+/g, '·');
 
