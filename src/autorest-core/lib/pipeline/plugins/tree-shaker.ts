@@ -1,6 +1,7 @@
 import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Transformer, QuickDataSource } from '@microsoft.azure/datastore';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
+import { clone } from '@microsoft.azure/linq';
 
 export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   get components(): AnyObject {
@@ -185,7 +186,8 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
               this.dereference(`/components/schemas`, this.schemas, this.visitSchema, allOf, allOfItemKey, allOfItemPointer, allOfItemVal, allOfItemChildren);
             } else {
               for (const { value: v, key: k, pointer: p } of allOfItemChildren) {
-                this.clone(targetParent, k, p, v);
+                allOf.__push__({ value: clone(v), pointer, recurse: true, filename: this.currentInputFilename });
+                // this.clone(targetParent, k, p, v);
               }
             }
           }
