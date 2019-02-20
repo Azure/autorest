@@ -82,7 +82,9 @@ export class EnumDeduplicator extends TransformerViaPointer {
       // combine all the values into a single enum
       const mergedEnum = this.newObject(first.target, name, first.pointer);
       this.clone(mergedEnum, 'x-ms-metadata', first.pointer, first.value['x-ms-metadata']);
-      this.clone(mergedEnum, 'description', first.pointer, first.value.description);
+      if (first.value.description) {
+        this.clone(mergedEnum, 'description', first.pointer, first.value.description);
+      }
       this.clone(mergedEnum, 'x-ms-enum', first.pointer, first.value['x-ms-enum']);
       this.clone(mergedEnum, 'type', first.pointer, 'string');
       const newRef = `#/components/schemas/${name}`;
