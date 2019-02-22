@@ -1,6 +1,6 @@
 # AutoRest PowerShell Generator - Sample Usage (XKCD)
 
-### Example: XKCD 
+### Example: XKCD
 
 Download the [XKCD swagger](https://raw.githubusercontent.com/Azure/autorest/master/docs/powershell/samples/xkcd/xkcd.yaml) file.
 
@@ -20,7 +20,7 @@ https://aka.ms/autorest
    Installing AutoRest extension '@microsoft.azure/autorest.remodeler' (beta)
    Installing AutoRest extension '@microsoft.azure/autorest.csharp-v2' (beta)
 
-> 
+>
 ```
 
 The generator will create a `./generated` folder where the files will be
@@ -79,7 +79,7 @@ Nifty!
 
 A bit of fun:
 
-> `invoke-webrequest (Get-XkcdComicForToday).url -outfile image.png ; & ./image.png` 
+> `invoke-webrequest (Get-XkcdComicForToday).img -outfile image.png ; & ./image.png`
 
 
 ![Today's Comic](./pic.png)
