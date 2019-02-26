@@ -4,7 +4,7 @@ The Azure Resource Schema Generator will generate Azure Resource Schemas for use
 
 ``` yaml $(azureresourceschema) && $(preview)
 use-extension:
-  "@microsoft.azure/autorest.azureresourceschema": "preview"
+  "@microsoft.azure/autorest.azureresourceschema": "v3"
 try-require: ./readme.azureresourceschema.md
 ```
 
@@ -12,7 +12,7 @@ try-require: ./readme.azureresourceschema.md
 enable-multi-api: true
 
 use-extension:
-  "@microsoft.azure/autorest.azureresourceschema": "~2.0.14"
+  "@microsoft.azure/autorest.azureresourceschema": "v3"
 try-require: ./readme.azureresourceschema.md
 
 
