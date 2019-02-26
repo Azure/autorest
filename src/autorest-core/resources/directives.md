@@ -83,6 +83,10 @@ declare-directive:
       switch ($context.from) {
         case "code-model-v1":
           return { from: "code-model-v1", where: `$.operations[*].methods[?(@.serializedName == ${JSON.stringify($)})]` };
+        
+        case "openapi-document":
+          return { from: "openapi-document", where: `$..paths.*[?(@.operationId == ${JSON.stringify($)})]` };
+          
         case "swagger-document":
         default:
           return { from: "swagger-document", where: `$.paths.*[?(@.operationId == ${JSON.stringify($)})]` };
@@ -93,11 +97,16 @@ declare-directive:
       switch ($context.from) {
         case "code-model-v1":
           throw "not implemented";
+        case "openapi-document":
+          return { from: "openapi-document", where: `$.definitions[${JSON.stringify($)}]` };
+
         case "swagger-document":
         default:
           return { from: "swagger-document", where: `$.definitions[${JSON.stringify($)}]` };
       }
     })()
+
+
 ```
 
 ## Removal
@@ -108,9 +117,9 @@ Removes an operation by ID.
 declare-directive:
   remove-operation: >-
     {
-      from: 'swagger-document',
+      from: 'openapi-document',
       "where-operation": $,
-      transform: 'return undefined'
+      transform: '$ = undefined'
     }
   rename-operation: >-
     {

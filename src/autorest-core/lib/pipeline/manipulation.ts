@@ -21,7 +21,8 @@ export class Manipulator {
   private matchesSourceFilter(document: string, transform: DirectiveView, artifact: string | null): boolean {
     document = '/' + document;
     // from
-    const from = From(transform.from);
+    const from = From([...transform.from]);
+
     return (!from.Any()) || (from.Any(d => artifact === d || document.endsWith('/' + d)));
   }
 
