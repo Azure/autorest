@@ -2,7 +2,6 @@ import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Tr
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 import { clone } from '@microsoft.azure/linq';
-import { retries } from 'mocha-typescript';
 
 export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   get components(): AnyObject {
