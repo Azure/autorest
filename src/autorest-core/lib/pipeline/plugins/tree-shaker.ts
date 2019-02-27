@@ -1,4 +1,4 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Transformer, QuickDataSource } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Transformer, QuickDataSource, JsonPath } from '@microsoft.azure/datastore';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 import { clone } from '@microsoft.azure/linq';
@@ -195,7 +195,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
         case 'not':
         case 'items':
-          this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
+          this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children, `${this.getNameHint(pointer)}Item`);
           break;
 
         // everything else, just copy recursively.
@@ -231,29 +231,61 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     }
   }
 
+  visitArrayProperty(targetParent: AnyObject, key: string, pointer: string, value: AnyObject, children: Iterable<Node>, nameHint: string) {
+    if (value.items.type === 'boolean' || value.items.type === 'integer' || value.items.type === 'number') {
+      this.clone(targetParent, key, pointer, value);
+    } else {
+      // object or string
+      this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children, nameHint);
+    }
+  }
+
+  getNameHint(pointer: string): string {
+    const getArrayItemPropertyNameHint = (jp: JsonPath) => {
+      // a unique id using the path, skipping 'properties'
+      // and converting the 'items' to 'item'.
+      let nameHint = '';
+      for (let i = 2; i < jp.length; i += 1) {
+        if (jp[i] === 'properties') {
+          continue;
+        }
+
+        const part = (jp[i] === 'items') ? 'item' : jp[i];
+        nameHint += (i === 2) ? `${part}` : `-${part}`;
+      }
+      return nameHint;
+    };
+
+    const getPropertyNameHint = (jp: JsonPath) => {
+      let nameHint = '';
+      for (let i = 2; i < jp.length; i += 2) {
+        nameHint += (i === 2) ? `${jp[i]}` : `-${jp[i]}`;
+      }
+      return nameHint;
+    };
+
+    const jsonPath = parseJsonPointer(pointer);
+    return (jsonPath[jsonPath.length - 3] === 'items') ? getArrayItemPropertyNameHint(jsonPath) : getPropertyNameHint(jsonPath);
+  }
+
   visitProperties(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
-      // if the property has a schema that type 'string', 'boolean', 'integer', 'number' then we'll just leave it inline
+      // if the property has a schema that type 'boolean', 'integer', 'number' then we'll just leave it inline
       switch (value.type) {
-        //case 'string':
+        // case 'string':
         case 'boolean':
         case 'integer':
         case 'number':
-        case 'array':
           this.clone(targetParent, key, pointer, value);
           break;
-
+        case 'array':
+          this.visitArrayProperty(targetParent, key, pointer, value, children, this.getNameHint(pointer));
+          break;
         default:
           // inline objects had a name of '<Class><PropertyName>'
           // the dereference method will use the full path to build a name, and we should ask it to use the same thing that
           // we were using before..
-          const pc = parseJsonPointer(pointer);
-          let nameHint = '';
-          // get nameHint
-          for (let i = 2; i < pc.length; i += 2) {
-            nameHint += (i === 2) ? `${pc[i]}` : `-${pc[i]}`;
-          }
-
+          const nameHint = this.getNameHint(pointer);
           this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children, nameHint);
           break;
       }
