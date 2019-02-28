@@ -34,23 +34,18 @@ const color: (text: string) => string = (<any>global).color ? (<any>global).colo
 // start of autorest-ng
 // the console app starts for real here.
 
-import { ChildProcess } from "child_process";
-import { join, resolve as currentDirectory } from "path";
-import { Help } from "./help";
-import { CreateConfiguration, isLegacy } from "./legacyCli";
+import { CreateObject, DataStore, EnhancedFileSystem, nodes, Parse, RealFileSystem, Stringify } from '@microsoft.azure/datastore';
+import { ClearFolder, CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteBinary, WriteString } from '@microsoft.azure/uri';
+import { ChildProcess } from 'child_process';
+import { join, resolve as currentDirectory } from 'path';
+import { Help } from './help';
+import { CreateConfiguration, isLegacy } from './legacyCli';
 import { Artifact } from './lib/artifact';
 import { AutoRest, ConfigurationView, IsOpenApiDocument, Shutdown } from './lib/autorest-core';
 import { AutoRestConfigurationImpl, MergeConfigurations } from './lib/configuration';
-// import { DataStore } from "./lib/data-store/data-store";
-import { DataStore } from "@microsoft.azure/datastore";
-import { Exception, OperationCanceledException } from "./lib/exception";
-import { EnhancedFileSystem, RealFileSystem } from '@microsoft.azure/datastore';
-import { Channel, Message } from "./lib/message";
-import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
-import { CreateObject, nodes } from "@microsoft.azure/datastore";
-import { ClearFolder, CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteString } from "@microsoft.azure/uri";
-import { Parse, Stringify } from "@microsoft.azure/datastore";
-import { ShallowCopy } from "./lib/source-map/merging";
+import { Exception, OperationCanceledException } from './lib/exception';
+import { Channel, Message } from './lib/message';
+import { ShallowCopy } from './lib/source-map/merging';
 
 let verbose = false;
 let debug = false;
@@ -127,12 +122,12 @@ ${Stringify(config).replace(/^---\n/, '')}
   api.AddConfiguration(config);
   const view = await api.view;
   let outstanding: Promise<void> = Promise.resolve();
-  api.GeneratedFile.Subscribe((_: AutoRest, file: Artifact) => outstanding = outstanding.then(() => WriteString(file.uri, file.content)));
+  api.GeneratedFile.Subscribe((_: AutoRest, file: Artifact) => outstanding = outstanding.then(() => file.type === 'binary-file' ? WriteBinary(file.uri, file.content) : WriteString(file.uri, file.content)));
   api.ClearFolder.Subscribe((_: AutoRest, folder: string) => outstanding = outstanding.then(async () => { try { await ClearFolder(folder); } catch (e) { } }));
   subscribeMessages(api, () => { });
 
   // warn about `--` arguments
-  for (let arg of autorestArgs) {
+  for (const arg of autorestArgs) {
     if (arg.startsWith('--')) {
       view.Message({
         Channel: Channel.Warning,
@@ -157,7 +152,7 @@ ${Stringify(config).replace(/^---\n/, '')}
  * Current AutoRest
  */
 
-interface CommandLineArgs { configFileOrFolder?: string, switches: any[], rawSwitches: any }
+interface CommandLineArgs { configFileOrFolder?: string; switches: Array<any>; rawSwitches: any; }
 
 function parseArgs(autorestArgs: Array<string>): CommandLineArgs {
   const result: CommandLineArgs = {
@@ -378,7 +373,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
       try { await ClearFolder(folder); } catch (e) { }
     }
     for (const artifact of artifacts) {
-      await WriteString(artifact.uri, artifact.content);
+      await (artifact.type === 'binary-file' ? WriteBinary(artifact.uri, artifact.content) : WriteString(artifact.uri, artifact.content));
     }
   }
 
@@ -447,7 +442,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
           const more = JSON.parse(file.content);
           if (!outputs.has(file.uri)) {
             outputs.set(file.uri, file.content);
-            outstanding = outstanding.then(() => WriteString(file.uri, file.content));
+            outstanding = outstanding.then(() => file.type === 'binary-file' ? WriteBinary(file.uri, file.content) : WriteString(file.uri, file.content));
             schemas.push(...getRds(more, file.uri));
             return;
           } else {
@@ -458,7 +453,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
             existing.definitions = shallowMerge(existing.definitions, more.definitions);
             const content = JSON.stringify(existing, null, 2);
             outputs.set(file.uri, content);
-            outstanding = outstanding.then(() => WriteString(file.uri, content));
+            outstanding = outstanding.then(() => file.type === 'binary-file' ? WriteBinary(file.uri, file.content) : WriteString(file.uri, content));
           }
         }
       });

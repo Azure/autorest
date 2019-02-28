@@ -45,6 +45,7 @@ Any files that are marked as 'preserved-files' are output back to disk again.
 # preserve files that have been asked to preserve
 output-artifact:
   - preserved-files
+  - binary-file
 ```
 
 
