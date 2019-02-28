@@ -2,7 +2,6 @@ import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Tr
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 import { clone } from '@microsoft.azure/linq';
-import { retries } from 'mocha-typescript';
 
 export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   get components(): AnyObject {
@@ -183,14 +182,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           // to derive the current class from. 
           const allOf = this.newArray(targetParent, key, pointer);
           for (const { value: allOfItemVal, children: allOfItemChildren, pointer: allOfItemPointer, key: allOfItemKey } of children) {
-            if (allOfItemVal.$ref !== undefined) {
-              this.dereference(`/components/schemas`, this.schemas, this.visitSchema, allOf, allOfItemKey, allOfItemPointer, allOfItemVal, allOfItemChildren);
-            } else {
-              for (const { value: v, key: k, pointer: p } of allOfItemChildren) {
-                allOf.__push__({ value: clone(v), pointer, recurse: true, filename: this.currentInputFilename });
-                // this.clone(targetParent, k, p, v);
-              }
-            }
+            this.dereference(`/components/schemas`, this.schemas, this.visitSchema, allOf, allOfItemKey, allOfItemPointer, allOfItemVal, allOfItemChildren);
           }
           break;
 
@@ -470,7 +462,7 @@ async function shakeTree(config: ConfigurationView, input: DataSource, sink: Dat
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
     const shaker = new OAI3Shaker(each);
-    result.push(await sink.WriteObject(each.Description, await shaker.getOutput(), each.identity, each.artifactType, await shaker.getSourceMappings()));
+    result.push(await sink.WriteObject('tree shaken doc...', await shaker.getOutput(), each.identity, 'tree-shaken-oai3', await shaker.getSourceMappings()));
   }
   return new QuickDataSource(result, input.skip);
 }
