@@ -88,8 +88,6 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
 
   constructor(input: DataHandle, private profiles: any, private profilesToUse: Array<string>, apiVersions: Array<string>) {
     super(input);
-
-    // TODO? get the max version to fix the document version 
     this.apiVersions = apiVersions;
   }
 
@@ -180,7 +178,6 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
     }
   }
 
-  // TODO? finish() modify info version to just have the highest api version from the profile config or apiversion config
   visitPaths(targetParent: AnyObject, nodes: Iterable<Node>) {
     // filter paths
     for (const { value, key, pointer, children } of nodes) {
@@ -306,7 +303,7 @@ async function filter(config: ConfigurationView, input: DataSource, sink: DataSi
     const configApiVersion = config.GetEntry('api-version');
     const apiVersions: Array<string> = configApiVersion ? (typeof (configApiVersion) === 'string') ? [configApiVersion] : configApiVersion : [];
 
-    const configUseProfile = config.GetEntry('use-profile');
+    const configUseProfile = config.GetEntry('profile');
     const profilesToUse: Array<string> = configUseProfile ? (typeof (configUseProfile) === 'string') ? [configUseProfile] : configUseProfile : [];
     if (profilesToUse.length > 0 || apiVersions.length > 0) {
       const processor = new ProfileFilter(each, profileData, profilesToUse, apiVersions);
