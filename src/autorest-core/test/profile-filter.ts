@@ -13,7 +13,7 @@ const resources = `${__dirname}../../../test/resources/profile-filter`;
     const inputUri = 'mem://input1.json';
     const outputUri = 'mem://output1.json';
     const profilesUri = 'mem://profiles.yaml';
-    const profilesToUse = ['2017-03-09-profile'];
+    const profilesToUse = ['2017-11-09-profile', '2018-01-01-hybrid'];
 
     const input = await aio.readFile(`${resources}/input1.json`);
     const output = await aio.readFile(`${resources}/output1.json`);
