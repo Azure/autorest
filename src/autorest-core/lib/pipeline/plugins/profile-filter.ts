@@ -1,11 +1,18 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
 import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
-import { clone, Dictionary, values } from '@microsoft.azure/linq';
+import { Dictionary } from '@microsoft.azure/linq';
 import * as oai from '@microsoft.azure/openapi';
 import * as compareVersions from 'compare-versions';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
-export interface ApiData {
+
+interface ApiData {
   apiVersion: string;
+  profile: string;
   matches: Array<string>;
 }
 
@@ -37,8 +44,16 @@ function getSemverEquivalent(version: string) {
   return result;
 }
 
+interface pathMetadata {
+  apiVersions: Array<string>;
+  filename: Array<string>;
+  path: string;
+  profiles: Dictionary<string>;
+  originalLocations: Array<string>;
+}
+
 export class ProfileFilter extends Transformer<any, oai.Model> {
-  filterTargets: Array<{ apiVersion: string; pathRegex: RegExp }> = [];
+  filterTargets: Array<{ apiVersion: string; profile: string; pathRegex: RegExp }> = [];
 
   // sets containing the UIDs of components already visited.
   // This is used to prevent circular references.
@@ -73,8 +88,6 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
 
   constructor(input: DataHandle, private profiles: any, private profilesToUse: Array<string>, apiVersions: Array<string>) {
     super(input);
-
-    // get the max version to fix the document version 
     this.apiVersions = apiVersions;
   }
 
@@ -83,15 +96,15 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
     this.components = currentDoc['components'];
     if (this.profilesToUse.length > 0) {
       const targets: Array<ApiData> = [];
-      for (const { key: profileName, value: profile } of visit(this.profiles)) {
+      for (const { key: profileName, value: resourceProvider } of visit(this.profiles)) {
         if (this.profilesToUse.includes(profileName)) {
-          for (const { key: namespace, value: namespaceValue } of visit(profile)) {
+          for (const { key: namespace, value: namespaceValue } of visit(resourceProvider)) {
             for (const { key: version, value: resourceTypes } of visit(namespaceValue)) {
               if (resourceTypes.length === 0) {
-                targets.push({ apiVersion: version, matches: [namespace] });
+                targets.push({ apiVersion: version, profile: profileName, matches: [namespace] });
               } else {
                 for (const resourceType of resourceTypes) {
-                  targets.push({ apiVersion: version, matches: [namespace, ...resourceType.split('/')] });
+                  targets.push({ apiVersion: version, profile: profileName, matches: [namespace, ...resourceType.split('/')] });
                 }
               }
             }
@@ -103,8 +116,9 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
         this.maxApiVersion = getMaxApiVersion([target.apiVersion, this.maxApiVersion]);
         this.profilesApiVersions.push(target.apiVersion);
         const apiVersion = target.apiVersion;
+        const profile = target.profile;
         const pathRegex = this.getPathRegex(target.matches);
-        this.filterTargets.push({ apiVersion, pathRegex });
+        this.filterTargets.push({ apiVersion, profile, pathRegex });
       }
 
     } else if (this.apiVersions.length > 0) {
@@ -127,7 +141,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
           break;
 
         case 'paths':
-          // already handled at init
+          // already handled at init()
           break;
 
         default:
@@ -150,10 +164,12 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
     }
   }
 
-  visitPath(targetParent: AnyObject, nodes: Iterable<Node>) {
+  visitPath(targetParent: AnyObject, nodes: Iterable<Node>, pathMetadata: pathMetadata) {
     for (const { value, key, pointer } of nodes) {
       switch (key) {
         case 'x-ms-metadata':
+          this.clone(targetParent, key, pointer, pathMetadata);
+          break;
         default:
           this.clone(targetParent, key, pointer, value);
           break;
@@ -162,49 +178,45 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
     }
   }
 
-  visitPathMetadata(targetParent: AnyObject, nodes: Iterable<Node>) {
-    for (const { value, key, pointer } of nodes) {
-      switch (key) {
-        case 'apiVersions':
-          // the api versions need to be cleaned
-          this.newArray(targetParent, key, pointer);
-          for (const version of value) {
-            if (this.apiVersions.includes(version) || this.profilesApiVersions.includes(version)) {
-              targetParent[key].__push__(version);
-            }
-          }
-
-        default:
-          this.clone(targetParent, key, pointer, value);
-          break;
-      }
-
-    }
-  }
-
-  // finish() modify info version to just have the highest api version from the profile config or apiversion config
   visitPaths(targetParent: AnyObject, nodes: Iterable<Node>) {
     // filter paths
-    for (const { value, key, pointer } of nodes) {
+    for (const { value, key, pointer, children } of nodes) {
       const path: string = value['x-ms-metadata'].path;
-      const apiVersions: Array<string> = value['x-ms-metadata'].apiVersions;
+      const originalApiVersions: Array<string> = value['x-ms-metadata'].apiVersions;
+      const profiles = new Dictionary<string>();
+      const apiVersions = new Set<string>();
+
+      let match = false;
 
       if (this.filterTargets.length > 0) {
         // Profile Mode
         for (const each of this.filterTargets) {
-          if (path.match(each.pathRegex) && apiVersions.includes(each.apiVersion)) {
-
-            // modify metadata so just the api versions used are included
-            this.clone(targetParent, key, pointer, value);
+          if (path.match(each.pathRegex) && originalApiVersions.includes(each.apiVersion)) {
+            match = true;
+            profiles[each.profile] = each.apiVersion;
+            apiVersions.add(each.apiVersion);
           }
         }
       } else {
         // apiversion mode
-        for (const each of this.apiVersions) {
-          if (apiVersions.includes(each)) {
-            this.clone(targetParent, key, pointer, value);
+        for (const targetApiVersion of this.apiVersions) {
+          if (originalApiVersions.includes(targetApiVersion)) {
+            match = true;
+            apiVersions.add(targetApiVersion);
           }
         }
+      }
+
+      if (match) {
+        const metadata: pathMetadata = {
+          apiVersions: [...apiVersions],
+          profiles,
+          path,
+          filename: value['x-ms-metadata'].filename,
+          originalLocations: value['x-ms-metadata'].originalLocations
+        }
+
+        this.visitPath(this.newObject(targetParent, key, pointer), children, metadata);
       }
     }
 
@@ -291,7 +303,7 @@ async function filter(config: ConfigurationView, input: DataSource, sink: DataSi
     const configApiVersion = config.GetEntry('api-version');
     const apiVersions: Array<string> = configApiVersion ? (typeof (configApiVersion) === 'string') ? [configApiVersion] : configApiVersion : [];
 
-    const configUseProfile = config.GetEntry('use-profile');
+    const configUseProfile = config.GetEntry('profile');
     const profilesToUse: Array<string> = configUseProfile ? (typeof (configUseProfile) === 'string') ? [configUseProfile] : configUseProfile : [];
     if (profilesToUse.length > 0 || apiVersions.length > 0) {
       const processor = new ProfileFilter(each, profileData, profilesToUse, apiVersions);

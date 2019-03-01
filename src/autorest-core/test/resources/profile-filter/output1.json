@@ -19,6 +19,10 @@
         "apiVersions": [
           "2015-05-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2015-05-01-preview",
+          "2018-01-01-hybrid": "2015-05-01-preview"
+        },
         "filename": [
           "mem:///862?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FfailoverGroups.json"
         ],
@@ -281,6 +285,10 @@
         "apiVersions": [
           "2015-05-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2015-05-01-preview",
+          "2018-01-01-hybrid": "2015-05-01-preview"
+        },
         "filename": [
           "mem:///862?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FfailoverGroups.json"
         ],
@@ -340,6 +348,10 @@
         "apiVersions": [
           "2015-05-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2015-05-01-preview",
+          "2018-01-01-hybrid": "2015-05-01-preview"
+        },
         "filename": [
           "mem:///862?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FfailoverGroups.json"
         ],
@@ -409,6 +421,10 @@
         "apiVersions": [
           "2015-05-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2015-05-01-preview",
+          "2018-01-01-hybrid": "2015-05-01-preview"
+        },
         "filename": [
           "mem:///862?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FfailoverGroups.json"
         ],
@@ -478,6 +494,10 @@
         "apiVersions": [
           "2015-05-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2015-05-01-preview",
+          "2018-01-01-hybrid": "2015-05-01-preview"
+        },
         "filename": [
           "mem:///868?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FsyncGroups.json"
         ],
@@ -591,6 +611,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///882?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelOperations.json"
         ],
@@ -647,6 +670,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///882?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelOperations.json"
         ],
@@ -703,6 +729,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///883?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelPoolOperations.json"
         ],
@@ -764,6 +793,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///883?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelPoolOperations.json"
         ],
@@ -825,6 +857,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
         ],
@@ -897,6 +932,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///885?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fdatabases.json"
         ],
@@ -953,6 +991,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///885?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fdatabases.json"
         ],
@@ -1006,6 +1047,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///885?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fdatabases.json"
         ],
@@ -1220,6 +1264,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///885?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fdatabases.json"
         ],
@@ -1282,6 +1329,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///885?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fdatabases.json"
         ],
@@ -1345,6 +1395,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///885?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fdatabases.json"
         ],
@@ -1408,6 +1461,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///885?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fdatabases.json"
         ],
@@ -1473,6 +1529,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///886?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FelasticPools.json"
         ],
@@ -1535,6 +1594,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///886?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FelasticPools.json"
         ],
@@ -1773,6 +1835,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///887?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FdatabaseVulnerabilityAssessmentScans.json"
         ],
@@ -1852,6 +1917,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///887?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FdatabaseVulnerabilityAssessmentScans.json"
         ],
@@ -1928,6 +1996,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///887?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FdatabaseVulnerabilityAssessmentScans.json"
         ],
@@ -2001,6 +2072,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///887?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FdatabaseVulnerabilityAssessmentScans.json"
         ],
@@ -2096,6 +2170,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///888?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssesmentRuleBaselines.json"
         ],
@@ -2401,6 +2478,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///889?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessmentScans.json"
         ],
@@ -2480,6 +2560,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///889?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessmentScans.json"
         ],
@@ -2565,6 +2648,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///889?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessmentScans.json"
         ],
@@ -2647,6 +2733,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///889?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessmentScans.json"
         ],
@@ -2748,6 +2837,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///890?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessments.json"
         ],
@@ -2982,6 +3074,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///891?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FinstanceFailoverGroups.json"
         ],
@@ -3176,6 +3271,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///891?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FinstanceFailoverGroups.json"
         ],
@@ -3235,6 +3333,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///891?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FinstanceFailoverGroups.json"
         ],
@@ -3304,6 +3405,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///891?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FinstanceFailoverGroups.json"
         ],
@@ -3373,6 +3477,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///892?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FshortTermRetentionPolicies.json"
         ],
@@ -3589,6 +3696,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///892?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FshortTermRetentionPolicies.json"
         ],
@@ -3645,6 +3755,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///893?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FTdeCertificates.json"
         ],
@@ -3705,6 +3818,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///894?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceTdeCertificates.json"
         ],
@@ -3765,6 +3881,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///895?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceKeys.json"
         ],
@@ -3827,6 +3946,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///895?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceKeys.json"
         ],
@@ -4003,6 +4125,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///896?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceEncryptionProtectors.json"
         ],
@@ -4056,6 +4181,9 @@
         "apiVersions": [
           "2017-10-01-preview"
         ],
+        "profiles": {
+          "2017-11-09-profile": "2017-10-01-preview"
+        },
         "filename": [
           "mem:///896?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceEncryptionProtectors.json"
         ],

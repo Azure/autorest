@@ -66,7 +66,7 @@ export interface AutoRestConfigurationImpl {
 
   // multi-api specific
   'profiles'?: any;
-  'use-profile'?: Array<string>;
+  'profile'?: Array<string> | string;
   'api-version'?: Array<string>;
 
   'enable-multi-api'?: boolean;
@@ -242,6 +242,7 @@ export class ConfigurationView {
     this.rawConfig = <any>{
       'directive': [],
       'input-file': [],
+      'profile': [],
       'output-artifact': [],
       'require': [],
       'try-require': [],
