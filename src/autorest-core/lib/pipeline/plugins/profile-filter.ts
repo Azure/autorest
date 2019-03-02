@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
-import { Dictionary } from '@microsoft.azure/linq';
+import { Dictionary, values, keys, items } from '@microsoft.azure/linq';
 import * as oai from '@microsoft.azure/openapi';
 import * as compareVersions from 'compare-versions';
 import { ConfigurationView } from '../../configuration';
@@ -293,20 +293,52 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   }
 }
 
+export function getLatestProfile(allProfiles: AnyObject) {
+  const allResources = new Array<Resource>();
+  for (const profile of values(allProfiles)) {
+    for (const { value: apiResources, key: resourceProviderName } of items(<AnyObject>profile)) {
+      for (const { value: resources, key: apiVersion } of items(<AnyObject>apiResources)) {
+        for (const resource of resources) {
+          allResources.push({ apiVersion, resource, resourceProviderName });
+        }
+      }
+    }
+  }
+
+  allResources.sort((a, b) => {
+    return (a.apiVersion > b.apiVersion) ? -1 : (a.apiVersion < b.apiVersion) ? 1 : 0;
+  });
+
+  const resourceIdentifiers = new Set<string>();
+  for (const resource of allResources) {
+    resourceIdentifiers.add(`${resource.resource}${resource.resourceProviderName}`);
+  }
+
+
+  return {};
+}
+
+interface Resource {
+  apiVersion: string;
+  resource: string;
+  resourceProviderName: string;
+}
+
 async function filter(config: ConfigurationView, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
 
   for (const each of inputs) {
-    const profileData = config.GetEntry('profiles');
-
+    const allProfileDefinitions = config.GetEntry('profiles');
     const configApiVersion = config.GetEntry('api-version');
     const apiVersions: Array<string> = configApiVersion ? (typeof (configApiVersion) === 'string') ? [configApiVersion] : configApiVersion : [];
+    const profilesRequested = !Array.isArray(config.GetEntry('profile')) ? [config.GetEntry('profile')] : config.GetEntry('profile');
+    if (profilesRequested.includes('latest')) {
+      const latestProfile = getLatestProfile(allProfileDefinitions);
+    }
 
-    const configUseProfile = config.GetEntry('profile');
-    const profilesToUse: Array<string> = configUseProfile ? (typeof (configUseProfile) === 'string') ? [configUseProfile] : configUseProfile : [];
-    if (profilesToUse.length > 0 || apiVersions.length > 0) {
-      const processor = new ProfileFilter(each, profileData, profilesToUse, apiVersions);
+    if (profilesRequested.length > 0 || apiVersions.length > 0) {
+      const processor = new ProfileFilter(each, allProfileDefinitions, profilesRequested, apiVersions);
       result.push(await sink.WriteObject('profile-filtered-oai-doc...', await processor.getOutput(), each.identity, 'profile-filtered-oai-doc...', await processor.getSourceMappings()));
     } else {
       result.push(each);
