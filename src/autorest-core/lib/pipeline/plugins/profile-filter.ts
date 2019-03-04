@@ -191,7 +191,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
       if (this.filterTargets.length > 0) {
         // Profile Mode
         for (const each of this.filterTargets) {
-          if (path.match(each.pathRegex) && originalApiVersions.includes(each.apiVersion)) {
+          if (path.replace(/\/*$/, '').match(each.pathRegex) && originalApiVersions.includes(each.apiVersion)) {
             match = true;
             profiles[each.profile] = each.apiVersion;
             apiVersions.add(each.apiVersion);
