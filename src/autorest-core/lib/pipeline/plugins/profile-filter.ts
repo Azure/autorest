@@ -4,13 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
-import { Dictionary, values, keys, items } from '@microsoft.azure/linq';
+import { Dictionary, values, items } from '@microsoft.azure/linq';
 import * as oai from '@microsoft.azure/openapi';
 import * as compareVersions from 'compare-versions';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
-import { Channel } from '../../message';
-
 interface ApiData {
   apiVersion: string;
   profile: string;

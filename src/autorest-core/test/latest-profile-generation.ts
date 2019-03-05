@@ -9,7 +9,7 @@ const resources = `${__dirname}../../../test/resources/latest-profile-generation
 
 @suite class LatestProfileGeneration {
 
-  @test async 'filter paths and schemas based on API version'() {
+  @test async 'get latest (virtual) profile based on profiles provided'() {
     const originalProfilesUri = 'mem://profiles.yaml';
     const latestProfileUri = 'mem://latest-profile.yaml';
 
