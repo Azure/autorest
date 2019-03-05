@@ -41,9 +41,9 @@ Generating unified cmdlet proxies
 Done.
 ```
 
-But really, you want to build the module and then load it in a new instance of `pwsh`, so add `-test`:
+But really, you want to build the module and then load it in a new instance of `pwsh`, so add `-Run`:
 
-> `./generated/build-module.ps1 -test `
+> `./generated/build-module.ps1 -Run`
 
 ``` text
 Spawning in isolated process.

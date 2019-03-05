@@ -27,9 +27,9 @@ The generator will create a `./generated` folder where the files will be
 
 Inside that, you'll find a `build-module.ps1` script that will compile up the module.
 
-If you add `-test` to the `build-module` script, it will launch a new instance of `pwsh` and load the module so you can test it.
+If you add `-Run` to the `build-module` script, it will launch a new instance of `pwsh` and load the module so you can test it.
 
-> `./generated/build-module.ps1 -test`
+> `./generated/build-module.ps1 -Run`
 
 ``` text
 Spawning in isolated process.
