@@ -182,6 +182,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     'jsonx2yaml': createJsonToYamlPlugin(),
     'reflect-api-versions-cs': createCSharpReflectApiVersionPlugin(),
     'commonmarker': createCommonmarkProcessorPlugin(),
+    'profile-definition-emitter': createArtifactEmitterPlugin(),
     'emitter': createArtifactEmitterPlugin(),
     'pipeline-emitter': createArtifactEmitterPlugin(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('pipeline', pipeline.pipeline, ['fix-me-3'], 'pipeline')])),
     'configuration-emitter': createArtifactEmitterPlugin(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('configuration', configView.Raw, ['fix-me-4'], 'configuration')])),
