@@ -32,6 +32,11 @@ pipeline:
   openapi-document/model-deduplicator:
     input: profile-filter
     output-artifact: openapi-document
+
+  openapi-document/emitter:
+    input: profile-filter
+    input-artifact: azure-profile
+    
 ```
 
 ``` yaml $(enable-multi-api)

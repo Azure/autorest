@@ -7,16 +7,17 @@ import { DataHandle, DataSink, DataSource, QuickDataSource } from '@microsoft.az
 import { Deduplicator } from '@microsoft.azure/deduplication';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
+import { Dictionary, values, keys, items } from '@microsoft.azure/linq';
 
 async function deduplicate(config: ConfigurationView, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
-  for (const each of inputs) {
+  for (const each of values(inputs).linq.where(input => input.artifactType !== 'azure-profile')) {
     const deduplicator = new Deduplicator(each.ReadObject());
 
-    // TODO: Construct source map from the mappings returned by the deduplicator.
-    result.push(await sink.WriteObject('deduplicated-oai3-doc...', deduplicator.output, each.identity, 'deduplicated-oai3', [/*fix-me*/]));
+    result.push(await sink.WriteObject('deduplicated-oai3-doc', deduplicator.output, each.identity, 'deduplicated-oai3', [/* fix-me: Construct source map from the mappings returned by the deduplicator.s*/]));
   }
+
   return new QuickDataSource(result, input.skip);
 }
 
