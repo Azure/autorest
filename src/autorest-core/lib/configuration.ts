@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { exists, filePath } from '@microsoft.azure/async-io';
+import { clone } from '@microsoft.azure/linq';
 import { BlameTree, DataHandle, DataStore, IFileSystem, LazyPromise, ParseToAst, RealFileSystem, safeEval, Stringify, stringify, TryDecodeEnhancedPositionFromName } from '@microsoft.azure/datastore';
 import { Extension, ExtensionManager, LocalExtension } from '@microsoft.azure/extension';
 import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri } from '@microsoft.azure/uri';
@@ -420,6 +421,9 @@ export class ConfigurationView {
   }
 
   public GetEntry(key: keyof AutoRestConfigurationImpl): any {
+    if (!key) {
+      return clone(this.config);
+    }
     let result = this.config as any;
     for (const keyPart of key.split('.')) {
       result = result[keyPart];
