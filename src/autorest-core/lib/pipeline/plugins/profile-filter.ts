@@ -9,6 +9,7 @@ import * as oai from '@microsoft.azure/openapi';
 import * as compareVersions from 'compare-versions';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
+import { Channel } from '../../message';
 
 interface ApiData {
   apiVersion: string;
@@ -293,13 +294,25 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   }
 }
 
-export function getLatestProfile(allProfiles: AnyObject) {
+interface Profile {
+  [resourceProvider: string]: {
+    [apiVersion: string]: Array<string>;
+  };
+}
+
+interface Resource {
+  apiVersion: string;
+  resourceName: string;
+  resourceProviderName: string;
+}
+
+export function getLatestProfile(allProfiles: AnyObject): Profile {
   const allResources = new Array<Resource>();
   for (const profile of values(allProfiles)) {
     for (const { value: apiResources, key: resourceProviderName } of items(<AnyObject>profile)) {
       for (const { value: resources, key: apiVersion } of items(<AnyObject>apiResources)) {
-        for (const resource of resources) {
-          allResources.push({ apiVersion, resource, resourceProviderName });
+        for (const resourceName of resources) {
+          allResources.push({ apiVersion, resourceName, resourceProviderName });
         }
       }
     }
@@ -309,19 +322,29 @@ export function getLatestProfile(allProfiles: AnyObject) {
     return (a.apiVersion > b.apiVersion) ? -1 : (a.apiVersion < b.apiVersion) ? 1 : 0;
   });
 
-  const resourceIdentifiers = new Set<string>();
+  const latestResources = new Dictionary<Resource>();
   for (const resource of allResources) {
-    resourceIdentifiers.add(`${resource.resource}${resource.resourceProviderName}`);
+    const resourceUid = `${resource.resourceProviderName}${resource.resourceName}`;
+    if (latestResources[resourceUid] === undefined) {
+      latestResources[resourceUid] = { apiVersion: resource.apiVersion, resourceName: resource.resourceName, resourceProviderName: resource.resourceProviderName };
+    }
   }
 
+  const latestProfile: Profile = {};
+  for (const resource of values(latestResources)) {
+    latestProfile[resource.resourceProviderName] = latestProfile[resource.resourceProviderName] || {};
+    latestProfile[resource.resourceProviderName][resource.apiVersion] = latestProfile[resource.resourceProviderName][resource.apiVersion] || [];
+    latestProfile[resource.resourceProviderName][resource.apiVersion].push(resource.resourceName);
+  }
 
-  return {};
-}
+  // sort the resources by name
+  for (const { value: apiResources } of items(<AnyObject>latestProfile)) {
+    for (const { value: resources } of items(<AnyObject>apiResources)) {
+      resources.sort();
+    }
+  }
 
-interface Resource {
-  apiVersion: string;
-  resource: string;
-  resourceProviderName: string;
+  return latestProfile;
 }
 
 async function filter(config: ConfigurationView, input: DataSource, sink: DataSink) {
@@ -335,11 +358,16 @@ async function filter(config: ConfigurationView, input: DataSource, sink: DataSi
     const profilesRequested = !Array.isArray(config.GetEntry('profile')) ? [config.GetEntry('profile')] : config.GetEntry('profile');
     if (profilesRequested.includes('latest')) {
       const latestProfile = getLatestProfile(allProfileDefinitions);
+      allProfileDefinitions['latest-azure-profile'] = latestProfile;
+    }
+
+    if (allProfileDefinitions) {
+      result.push(await sink.WriteObject('profile-definitions', allProfileDefinitions, [], 'azure-profile'));
     }
 
     if (profilesRequested.length > 0 || apiVersions.length > 0) {
       const processor = new ProfileFilter(each, allProfileDefinitions, profilesRequested, apiVersions);
-      result.push(await sink.WriteObject('profile-filtered-oai-doc...', await processor.getOutput(), each.identity, 'profile-filtered-oai-doc...', await processor.getSourceMappings()));
+      result.push(await sink.WriteObject('profile-filtered-oai-doc...', await processor.getOutput(), each.identity, 'profile-filtered-oai3', await processor.getSourceMappings()));
     } else {
       result.push(each);
     }
