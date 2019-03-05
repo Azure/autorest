@@ -272,7 +272,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
 
       // create a new pathitem (use an index# instead of the path)
       const operation = this.newObject(paths, `${uid}`, pointer);
-      operation['x-ms-metadata'] = {
+      const metadata = {
         value: {
           apiVersions: [this.current.info && this.current.info.version ? this.current.info.version : ''], // track the API version this came from
           filename: [this.currentInputFilename],                       // and the filename
@@ -281,10 +281,14 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
         }, pointer
       };
 
+      operation['x-ms-metadata'] = metadata;
 
       // now, let's copy the rest of the operation into the operation object
       for (const child of children) {
-        this.copy(operation, child.key, child.pointer, child.value);
+        const childOperation = this.newObject(paths, `${uid}.${child.key}`, pointer);
+        childOperation['x-ms-metadata'] = clone(metadata);
+
+        this.copy(childOperation, child.key, child.pointer, child.value);
       }
     }
   }
