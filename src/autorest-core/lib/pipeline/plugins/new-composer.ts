@@ -178,18 +178,24 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
         // new object
         this.visitPath(value['x-ms-metadata'], this.newObject(target, actualPath, pointer), children);
       } else {
-        if (!areSimilar(value, target[actualPath], 'x-ms-metadata', 'description', 'summary')) {
-          throw new Error(`Incompatible paths conflicting: ${pointer}`);
-        }
+        // we split up the operations when we merged in order to enable the deduplicator to work it's
+        // magic on the operations
+        // but the older modeler needs them mereged together again
+        // luckily, it won't have any $refs to the paths, so I'm not worried about fixing those up.
+        this.visitPath(value['x-ms-metadata'], target[actualPath], children);
+        // if (!areSimilar(value, target[actualPath], 'x-ms-metadata', 'description', 'summary')) {
+        //throw new Error(`Incompatible paths conflicting: ${pointer}: ${actualPath}`);
+        //}
       }
     }
   }
 
   protected visitPath(metadata: AnyObject, target: AnyObject, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
-      this.visitOperation(metadata, this.newObject(target, key, pointer), children);
+      this.visitOperation(metadata, this.getOrCreateObject(target, key, pointer), children);
     }
   }
+
   protected visitOperation(metadata: AnyObject, target: AnyObject, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
 
@@ -199,15 +205,18 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
           this.visitAndDerefArray(metadata, target, key, pointer, children);
           break;
 
+
         case 'responses':
-          //  this.visitAndDerefObject(this.newObject(target, key, pointer), children);
-
           this.visitResponses(this.newObject(target, key, pointer), children);
-
           break;
 
         default:
-          this.clone(target, key, pointer, value);
+          // @future_garrett -- this is done to allow paths to be re-integrated 
+          // after deduplication. If this gives you problems, don't say I didn't 
+          // warn you.
+          if (!target[key]) {
+            this.clone(target, key, pointer, value);
+          }
           break;
       }
     }
