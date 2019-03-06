@@ -1,6 +1,10 @@
 # AutoRest PowerShell Specific Options
 
-## Controlling the output folder layout
+There are a couple of PowerShell specific things you may want to do:
+- [Control The Module Output Folder Layout](#Control-The-Module-Output-Folder-Layout)
+- [Tweak The Way It Generates Cmdlets](#Tweak-The-Way-It-Generates-Cmdlets)
+
+## Control The Module Output Folder Layout
 
 By default, AutoRest's PowerShell Generator will place all the files under [this directory layout](./default-directory-layout.md). However, if you want to customize the directory layout, you may specify the following nodes at the top-level of the Literate Configuration document:
 
@@ -63,7 +67,7 @@ api-extensions-folder: <path>
 ```
 
 
-#### file ranames
+#### file renames
 
 In addition, if you desire to rename the module name or specific file names, you may use:
 
@@ -77,9 +81,9 @@ psm1: <name>  # module file
 Note: By default these files will be named after the module-name. For example, the manifest file will be \<module-name>.psd1.
 
 
-## Tweaking the way it generates cmdlets
+## Tweak The Way It Generates Cmdlets
 
-To change the way AutoRest generates cmdlets you can use one of the built-in directives outlined below, or you can [declare your own directives](https://github.com/Azure/autorest/blob/new-documentation/src/autorest-core/resources/default-configuration.md#directives). You may specify the directives you want to use at the top-level of the Literate Configuration document. For example:
+To change the way AutoRest generates cmdlets you can use one of the built-in directives outlined below, or you can [declare your own directives](https://github.com/Azure/autorest/blob/master/src/autorest-core/resources/default-configuration.md#directives). You may specify the directives you want to use at the top-level of the Literate Configuration document. For example:
 
 
 ```yaml 
@@ -102,9 +106,9 @@ The following directives cover the most common tweaking scenarios for cmdlet gen
 
 Note: If you have feedback about these directives, or you would like additional built-in directives, feel free to open an issue at https://github.com/Azure/autorest. 
 
-#### Cmdlet Suppression 
+#### Cmdlet Generation-Suppression 
 
-For cmdlet suppression we support both string literals and regex patterns. 
+For cmdlet generation suppression we support both string literals and regex patterns. 
 
 To remove a specific cmdlet, provide the name of the cmdlet. For example:
 
@@ -112,14 +116,15 @@ To remove a specific cmdlet, provide the name of the cmdlet. For example:
 directive:
   - remove-command: New-AzConfigurationStore
 ```
-To remove all the cmdlets that match a specific pattern, provide the regex expression. For example:
 
+(**Regex**) To remove all the cmdlets that match a specific pattern, provide the regex expression. For example:
 
 ```yaml false
 # Suppress all cmdlets that start with Get-AzOperation
 directive:
   - remove-command: Get-AzOperation.*
 ```
+
 #### Cmdlet Rename
 
 For cmdlet renaming we support both string literals and regex patterns. 
@@ -132,7 +137,7 @@ directive:
     set-name: New-AzConf
 ```
 
-To rename all the cmdlets that match a specific pattern, provide the regex expression at 'where-command' node and the replacement string at 'set-name' node. In the following example, we target all cmdlets that contain 'ConfigurationStore', use parentheses to capture three groups in the cmdlet name, and use those groups to transform the cmdlet name:
+(**Regex**) To rename all the cmdlets that match a specific pattern, provide the regex expression at 'where-command' node and the replacement string at 'set-name' node. In the following example, we target all cmdlets that contain 'ConfigurationStore', use parentheses to capture three groups in the cmdlet name, and use those groups to transform the cmdlet name:
 
 ```yaml 
 # Examples:
@@ -142,6 +147,24 @@ To rename all the cmdlets that match a specific pattern, provide the regex expre
 directive:
   - where-command: (.*)(ConfigurationStore)(.*)
     set-name: $1CStore$3
+```
+
+#### Cmdlet Exportation-Suppression
+
+It is possible to suppress the exportation of a cmdlet (i.e. **hide** it). This means that the cmdlet won't be exported with the other cmdlets; however, custom cmdlets can still use it's functionality internally.
+
+To hide a specific cmdlet, provide the name of the cmdlet. For example:
+
+```yaml false
+directive:
+  - hide-command: Get-AzResourceOperation
+```
+
+(**Regex**) To hide all the cmdlets that match a specific pattern, provide the regex expression. For example:
+
+```yaml false
+directive:
+  - hide-command: Get-(.*)Operation^
 ```
 
 #### Model Rename
@@ -155,7 +178,7 @@ directive:
   - where-model: ConfigurationStore 
     set-name:  CS
 ```
-To rename all models that match a specific pattern, provide the regex expression at 'where-model' node and the replacement string at 'set-name' node. In the following example we find every model that starts with 'Configuration', use parentheses to capture two groups in the model name, and use those groups to transform the model name:
+(**Regex**) To rename all models that match a specific pattern, provide the regex expression at 'where-model' node and the replacement string at 'set-name' node. In the following example we find every model that starts with 'Configuration', use parentheses to capture two groups in the model name, and use those groups to transform the model name:
 
 ```yaml false
 # Example:
