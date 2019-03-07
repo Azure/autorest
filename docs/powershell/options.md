@@ -106,7 +106,8 @@ The following directives cover the most common tweaking scenarios for cmdlet gen
 
 Note: If you have feedback about these directives, or you would like additional built-in directives, feel free to open an issue at https://github.com/Azure/autorest. 
 
-#### Cmdlet Generation Suppression 
+
+#### Cmdlet Generation-Suppression 
 
 For cmdlet generation suppression we support both string literals and regex patterns. 
 
@@ -116,14 +117,15 @@ To remove a specific cmdlet, provide the name of the cmdlet. For example:
 directive:
   - remove-command: New-AzConfigurationStore
 ```
-To remove all the cmdlets that match a specific pattern, provide the regex expression. For example:
 
+(**Regex**) To remove all the cmdlets that match a specific pattern, provide the regex expression. For example:
 
 ```yaml false
 # Suppress all cmdlets that start with Get-AzOperation
 directive:
   - remove-command: Get-AzOperation.*
 ```
+
 #### Cmdlet Rename
 
 For cmdlet renaming we support both string literals and regex patterns. 
@@ -136,7 +138,7 @@ directive:
     set-name: New-AzConf
 ```
 
-To rename all the cmdlets that match a specific pattern, provide the regex expression at 'where-command' node and the replacement string at 'set-name' node. In the following example, we target all cmdlets that contain 'ConfigurationStore', use parentheses to capture three groups in the cmdlet name, and use those groups to transform the cmdlet name:
+(**Regex**) To rename all the cmdlets that match a specific pattern, provide the regex expression at 'where-command' node and the replacement string at 'set-name' node. In the following example, we target all cmdlets that contain 'ConfigurationStore', use parentheses to capture three groups in the cmdlet name, and use those groups to transform the cmdlet name:
 
 ```yaml 
 # Examples:
@@ -146,6 +148,24 @@ To rename all the cmdlets that match a specific pattern, provide the regex expre
 directive:
   - where-command: (.*)(ConfigurationStore)(.*)
     set-name: $1CStore$3
+```
+
+#### Cmdlet Exportation-Suppression
+
+It is possible to suppress the exportation of a cmdlet (i.e. **hide** it). This means that the cmdlet won't be exported with the other cmdlets; however, custom cmdlets can still use it's functionality internally.
+
+To hide a specific cmdlet, provide the name of the cmdlet. For example:
+
+```yaml false
+directive:
+  - hide-command: Get-AzResourceOperation
+```
+
+(**Regex**) To hide all the cmdlets that match a specific pattern, provide the regex expression. For example:
+
+```yaml false
+directive:
+  - hide-command: Get-(.*)Operation^
 ```
 
 #### Model Rename
@@ -159,7 +179,7 @@ directive:
   - where-model: ConfigurationStore 
     set-name:  CS
 ```
-To rename all models that match a specific pattern, provide the regex expression at 'where-model' node and the replacement string at 'set-name' node. In the following example we find every model that starts with 'Configuration', use parentheses to capture two groups in the model name, and use those groups to transform the model name:
+(**Regex**) To rename all models that match a specific pattern, provide the regex expression at 'where-model' node and the replacement string at 'set-name' node. In the following example we find every model that starts with 'Configuration', use parentheses to capture two groups in the model name, and use those groups to transform the model name:
 
 ```yaml false
 # Example:
