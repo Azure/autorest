@@ -106,6 +106,7 @@ The following directives cover the most common tweaking scenarios for cmdlet gen
 
 Note: If you have feedback about these directives, or you would like additional built-in directives, feel free to open an issue at https://github.com/Azure/autorest. 
 
+
 #### Cmdlet Generation-Suppression 
 
 For cmdlet generation suppression we support both string literals and regex patterns. 
