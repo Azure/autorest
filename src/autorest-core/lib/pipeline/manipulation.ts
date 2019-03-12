@@ -30,56 +30,62 @@ export class Manipulator {
     for (const trans of this.transformations) {
       // matches filter?
       if (this.matchesSourceFilter(documentId || data.key, trans, data.artifactType)) {
-        for (const w of trans.where) {
-          // transform
-          for (const t of trans.transform) {
-            const result = await manipulateObject(data, sink, w,
-              (doc, obj, path) => {
-                return safeEval<any>(`(() => { { ${t} }; return $; })()`, { $: obj, $doc: doc, $path: path, $documentPath: data.originalFullPath });
-              }
+        try {
+          for (const w of trans.where) {
+            // transform
+            for (const t of trans.transform) {
+              const result = await manipulateObject(data, sink, w,
+                (doc, obj, path) => {
+                  return safeEval<any>(`(() => { { ${t} }; return $; })()`, { $: obj, $doc: doc, $path: path, $documentPath: data.originalFullPath });
+                }
 
               /*,
               {
                 reason: trans.reason,
                 transformerSourceHandle: // TODO
               }*/);
-            if (!result.anyHit) {
-              // this.config.Message({
-              //   Channel: Channel.Warning,
-              //   Details: trans,
-              //   Text: `Transformation directive with 'where' clause '${w}' was not used.`
-              // });
+              if (!result.anyHit) {
+                // this.config.Message({
+                //   Channel: Channel.Warning,
+                //   Details: trans,
+                //   Text: `Transformation directive with 'where' clause '${w}' was not used.`
+                // });
+              }
+              data = result.result;
             }
-            data = result.result;
-          }
-          // test
-          for (const t of trans.test) {
-            const doc = data.ReadObject<any>();
-            const allHits = nodes(doc, w);
-            for (const hit of allHits) {
-              const testResults = [...safeEval<any>(`(function* () { ${t.indexOf('yield') === -1 ? `yield (${t}\n)` : `${t}\n`} })()`, { $: hit.value, $doc: doc, $path: hit.path })];
-              for (const testResult of testResults) {
-                if (testResult === false || typeof testResult !== 'boolean') {
-                  const messageText = typeof testResult === 'string' ? testResult : 'Custom test failed';
-                  const message = (<Message>testResult).Text
-                    ? <Message>testResult
-                    : <Message>{ Text: messageText, Channel: Channel.Warning, Details: testResult };
-                  message.Source = message.Source || [<SourceLocation>{ Position: { path: hit.path } }];
-                  for (const src of message.Source) {
-                    src.document = src.document || data.key;
+
+            // test
+            for (const t of trans.test) {
+              const doc = data.ReadObject<any>();
+              const allHits = nodes(doc, w);
+              for (const hit of allHits) {
+                const testResults = [...safeEval<any>(`(function* () { ${t.indexOf('yield') === -1 ? `yield (${t}\n)` : `${t}\n`} })()`, { $: hit.value, $doc: doc, $path: hit.path })];
+                for (const testResult of testResults) {
+                  if (testResult === false || typeof testResult !== 'boolean') {
+                    const messageText = typeof testResult === 'string' ? testResult : 'Custom test failed';
+                    const message = (<Message>testResult).Text
+                      ? <Message>testResult
+                      : <Message>{ Text: messageText, Channel: Channel.Warning, Details: testResult };
+                    message.Source = message.Source || [<SourceLocation>{ Position: { path: hit.path } }];
+                    for (const src of message.Source) {
+                      src.document = src.document || data.key;
+                    }
+                    this.config.Message(message);
                   }
-                  this.config.Message(message);
                 }
               }
-            }
-            if (allHits.length === 0) {
-              // this.config.Message({
-              //   Channel: Channel.Warning,
-              //   Details: trans,
-              //   Text: `Test directive with 'where' clause '${w}' was not used.`
-              // });
+              if (allHits.length === 0) {
+                // this.config.Message({
+                //   Channel: Channel.Warning,
+                //   Details: trans,
+                //   Text: `Test directive with 'where' clause '${w}' was not used.`
+                // });
+              }
             }
           }
+        } catch {
+          // TODO: Temporary comment. First I will make the modifiers for PowerShell work. It shouldn't fail with PowerShell modifiers.
+          // throw Error(`Directive given has something wrong. - ${JSON.stringify(trans['directive'], null, 2)} - It could be badly formatted or not being declared. Please check your configuration file. `);
         }
       }
     }
