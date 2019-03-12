@@ -45,14 +45,14 @@ export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
     if (errors !== null) {
       for (const error of errors) {
         config.Message({
-          Channel: Channel.Error,
+          Channel: Channel.Warning,
           Details: error,
           Plugin: 'schema-validator-openapi',
           Source: [{ document: fileIn.key, Position: <any>{ path: parseJsonPointer(error.path) } }],
           Text: `Schema violation: ${error.message}`
         });
       }
-      throw new OperationAbortedException();
+      // throw new OperationAbortedException();
     }
     return sink.Forward(fileIn.Description, fileIn);
   });
