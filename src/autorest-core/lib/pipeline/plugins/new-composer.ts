@@ -123,7 +123,12 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
           break;
 
         default:
-          this.cloneInto(<AnyObject>this.getOrCreateObject(target, key, pointer), children);
+          if (Array.isArray(value)) {
+            this.cloneInto(<AnyObject>this.getOrCreateArray(target, key, pointer), children);
+          } else {
+            this.cloneInto(<AnyObject>this.getOrCreateObject(target, key, pointer), children);
+          }
+
           break;
 
       }
