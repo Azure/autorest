@@ -3,12 +3,13 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit, ParseToAst, ConvertJsonx2Yaml, Stringify, StringifyAst } from '@microsoft.azure/datastore';
 import { Dictionary, values, items } from '@microsoft.azure/linq';
 import * as oai from '@microsoft.azure/openapi';
 import * as compareVersions from 'compare-versions';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
+import { Channel } from '../../message';
 interface ApiData {
   apiVersion: string;
   profile: string;
@@ -288,7 +289,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
       regexString = `${regexString}/${escapedWord}${fragment}`;
     }
 
-    return RegExp(`${regexString}$`);
+    return RegExp(`${regexString}$`, 'gi');
   }
 }
 
@@ -356,11 +357,8 @@ async function filter(config: ConfigurationView, input: DataSource, sink: DataSi
     const profilesRequested = !Array.isArray(config.GetEntry('profile')) ? [config.GetEntry('profile')] : config.GetEntry('profile');
     if (profilesRequested.includes('latest')) {
       const latestProfile = getLatestProfile(allProfileDefinitions);
-      allProfileDefinitions['latest-azure-profile'] = latestProfile;
-    }
-
-    if (allProfileDefinitions) {
-      result.push(await sink.WriteObject('profile-definitions', allProfileDefinitions, [], 'azure-profile'));
+      result.push(await sink.WriteObject('latest-profile', latestProfile, [], 'azure-profile'));
+      allProfileDefinitions['latest'] = latestProfile;
     }
 
     if (profilesRequested.length > 0 || apiVersions.length > 0) {
