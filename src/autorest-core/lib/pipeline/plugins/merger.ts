@@ -285,10 +285,33 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
 
       // now, let's copy the rest of the operation into the operation object
       for (const child of children) {
-        const childOperation = this.newObject(paths, `${uid}.${child.key}`, pointer);
-        childOperation['x-ms-metadata'] = clone(metadata);
-
-        this.copy(childOperation, child.key, child.pointer, child.value);
+        // check if operation if not is common and should be put in each one.
+        switch (child.key) {
+          case 'get':
+          case 'put':
+          case 'post':
+          case 'delete':
+          case 'options':
+          case 'head':
+          case 'patch':
+          case 'trace':
+            const childOperation = this.newObject(paths, `${uid}.${child.key}`, pointer);
+            childOperation['x-ms-metadata'] = clone(metadata);
+            this.copy(childOperation, child.key, child.pointer, child.value);
+            if (value.parameters) {
+              if (childOperation[child.key].parameters) {
+                childOperation[child.key].parameters.unshift(...value.parameters);
+              } else {
+                childOperation[child.key].parameters = clone(value.parameters);
+              }
+            }
+            break;
+          case 'parameters':
+          // they are placed at the beginning of the array parameters per operation.
+          default:
+            // for now skipping until we support all OA3 features.
+            break;
+        }
       }
     }
   }
