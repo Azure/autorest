@@ -175,6 +175,8 @@ async function main() {
         }
         try {
           await (await extensionManager).reset();
+          console.log(color('\n\n## Cleared the AutoRest extension folder.\nOn the next run, extensions will be reacquired from the repository.'));
+          process.exit(0);
         } catch (e) {
           console.log(color('\n\n## The AutoRest extension folder appears to be locked.\nDo you have a process that is currently using AutoRest (perhaps the vscode extension?).\n\nUnable to reset the extension folder, exiting.'));
           process.exit(10);

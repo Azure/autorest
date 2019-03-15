@@ -61,6 +61,11 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           this.visitComponents(this.components, children);
           break;
 
+        case 'x-ms-metdata':
+        case 'info':
+          this.clone(targetParent, key, pointer, value);
+          break;
+
         // copy these over without worrying about moving things down to components.
         default:
           if (!this.current['x-ms-secondary-file']) {
