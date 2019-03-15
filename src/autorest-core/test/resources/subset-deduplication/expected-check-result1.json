@@ -1,9 +1,9 @@
 {
   "isSubset": true,
-  "nonExpandableFieldsUpdates": {
+  "nonAdditiveFieldsUpdates": {
     "description": "Describes a Virtual Machine."
   },
-  "expandableFieldsMatches": {
+  "additiveFieldsMatches": {
     "properties": {
       "plan": {
         "$ref": "#/definitions/Plan",
