@@ -73,15 +73,15 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
         const anotherSchemaName = anotherSchema.value[xMsMetadata].name;
         if (currentSchemaName === anotherSchemaName && currentSchema.uid !== anotherSchema.uid) {
           const skipList = ['description', 'enum', 'readOnly', 'required'];
-          const expandableFieldsList = ['properties', 'allOf'];
+          const additiveFieldsList = ['properties', 'allOf'];
 
           // filter out metadata
           const { 'x-ms-metadata': metadataAnotherSchema, ...filteredAnotherSchema } = anotherSchema.value;
           const { 'x-ms-metadata': metadataCurrentSchema, ...filteredCurrentSchema } = currentSchema.value;
 
-          const subsetRelation = getSubsetRelation(filteredAnotherSchema, filteredCurrentSchema, expandableFieldsList, skipList);
+          const subsetRelation = getSubsetRelation(filteredAnotherSchema, filteredCurrentSchema, additiveFieldsList, skipList);
           if (subsetRelation.isSubset !== false) {
-            const supersetEquivSchema = getSupersetSchema(filteredAnotherSchema, filteredCurrentSchema, expandableFieldsList, subsetRelation, `#/components/schemas/${anotherSchema.uid}`);
+            const supersetEquivSchema = getSupersetSchema(filteredAnotherSchema, filteredCurrentSchema, additiveFieldsList, subsetRelation, `#/components/schemas/${anotherSchema.uid}`);
             const subsetEquivSchema = getSubsetSchema(filteredAnotherSchema, subsetRelation);
 
             // replace with equivalent schema and put back metadata.
@@ -131,11 +131,11 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
   }
 }
 
-export function getSubsetRelation(oldSchema: any, newSchema: any, expandableFieldsList: Array<string>, skipList: Array<string>): SubsetCheckResult {
-  const result: SubsetCheckResult = { isSubset: true, nonExpandableFieldsUpdates: {}, expandableFieldsMatches: {} };
-  const failResult = { isSubset: false, nonExpandableFieldsUpdates: {}, expandableFieldsMatches: {} };
+export function getSubsetRelation(oldSchema: any, newSchema: any, additiveFieldsList: Array<string>, skipList: Array<string>): SubsetCheckResult {
+  const result: SubsetCheckResult = { isSubset: true, nonAdditiveFieldsUpdates: {}, additiveFieldsMatches: {} };
+  const failResult = { isSubset: false, nonAdditiveFieldsUpdates: {}, additiveFieldsMatches: {} };
   const skipSet = new Set(skipList);
-  const expandableFieldsSet = new Set(expandableFieldsList);
+  const additiveFieldsSet = new Set(additiveFieldsList);
   const oldSchemaFields = Object.keys(oldSchema);
   for (const fieldName of oldSchemaFields) {
     // if the newSchema does not contain a field from the oldSchema, it is not a subset
@@ -143,29 +143,29 @@ export function getSubsetRelation(oldSchema: any, newSchema: any, expandableFiel
       return failResult;
     }
 
-    // skip Fields have priority over expandable fields
+    // skip Fields have priority over additive fields
     if (skipSet.has(fieldName) && !areSimilar(oldSchema[fieldName], newSchema[fieldName], ...skipList)) {
       if (Array.isArray(oldSchema[fieldName])) {
         if (!Array.isArray(newSchema[fieldName])) {
           return failResult;
         }
 
-        result.nonExpandableFieldsUpdates[fieldName] = [];
-        result.nonExpandableFieldsUpdates[fieldName].push(newSchema[fieldName]);
+        result.nonAdditiveFieldsUpdates[fieldName] = [];
+        result.nonAdditiveFieldsUpdates[fieldName].push(newSchema[fieldName]);
       } else {
-        result.nonExpandableFieldsUpdates[fieldName] = {};
-        result.nonExpandableFieldsUpdates[fieldName] = newSchema[fieldName];
+        result.nonAdditiveFieldsUpdates[fieldName] = {};
+        result.nonAdditiveFieldsUpdates[fieldName] = newSchema[fieldName];
       }
-    } else if (expandableFieldsSet.has(fieldName)) {
+    } else if (additiveFieldsSet.has(fieldName)) {
 
-      // array example use case of expandable field: required and allOf fields
+      // array example use case of additive field: required and allOf fields
       if (Array.isArray(oldSchema[fieldName])) {
         if (!Array.isArray(newSchema[fieldName])) {
           return failResult;
         }
 
-        if (!result.expandableFieldsMatches[fieldName]) {
-          result.expandableFieldsMatches[fieldName] = [];
+        if (!result.additiveFieldsMatches[fieldName]) {
+          result.additiveFieldsMatches[fieldName] = [];
         }
 
         let foundMatch = false;
@@ -173,7 +173,7 @@ export function getSubsetRelation(oldSchema: any, newSchema: any, expandableFiel
           foundMatch = false;
           for (const newValue of newSchema[fieldName]) {
             if (areSimilar(oldValue, newValue, ...skipList)) {
-              result.expandableFieldsMatches[fieldName].push(newValue);
+              result.additiveFieldsMatches[fieldName].push(newValue);
               foundMatch = true;
               break;
             }
@@ -197,11 +197,11 @@ export function getSubsetRelation(oldSchema: any, newSchema: any, expandableFiel
             return failResult;
           }
 
-          if (!result.expandableFieldsMatches[fieldName]) {
-            result.expandableFieldsMatches[fieldName] = {};
+          if (!result.additiveFieldsMatches[fieldName]) {
+            result.additiveFieldsMatches[fieldName] = {};
           }
 
-          result.expandableFieldsMatches[fieldName][key] = newSchema[fieldName][key];
+          result.additiveFieldsMatches[fieldName][key] = newSchema[fieldName][key];
         }
       }
       // it can't be a subset if fields are different
@@ -210,42 +210,70 @@ export function getSubsetRelation(oldSchema: any, newSchema: any, expandableFiel
     }
   }
 
-  // Add fields from the newSchema in the skipList that were not present in the old schema.
-  // For example, a description that the latest model has but the newest does not have.
   const newSchemaFields = Object.keys(newSchema);
   for (const fieldName of newSchemaFields) {
+    // Add fields from the newSchema in the skipList that were not present in the old schema.
+    // For example, a description that the latest model has but the newest does not have.
     if (oldSchema[fieldName] === undefined &&
-      result.nonExpandableFieldsUpdates[fieldName] === undefined &&
-      result.expandableFieldsMatches[fieldName] === undefined &&
+      result.nonAdditiveFieldsUpdates[fieldName] === undefined &&
+      result.additiveFieldsMatches[fieldName] === undefined &&
       skipSet.has(fieldName)) {
-      result.nonExpandableFieldsUpdates[fieldName] = newSchema[fieldName];
+      result.nonAdditiveFieldsUpdates[fieldName] = newSchema[fieldName];
+    }
+
+    // for additive fields not in the oldmodel, we should treat them as empty objects/arrays.
+    // Example: if the newer schema has an allOf and the old doesn't we should still treat as a match.
+    // It's equivalent to saying that the old one has also an allOf, but it's an empty array.
+    if (oldSchema[fieldName] === undefined && result.additiveFieldsMatches[fieldName] === undefined && !skipSet.has(fieldName)) {
+      result.additiveFieldsMatches[fieldName] = newSchema[fieldName];
     }
   }
 
   return result;
 }
 
-export function getSupersetSchema(subset: any, superset: any, expandableFieldsList: Array<string>, subsetCheckResult: SubsetCheckResult, supersetReference: string): AnyObject {
+export function getSupersetSchema(subset: any, superset: any, additiveFieldsList: Array<string>, subsetCheckResult: SubsetCheckResult, supersetReference: string): AnyObject {
   const result: any = {};
   const supersetKeys = new Set(Object.keys(superset));
   const subsetKeys = new Set(Object.keys(subset));
-  const nonExpandableFieldsUpdates = subsetCheckResult.nonExpandableFieldsUpdates;
-  const expandableFieldsMatches = subsetCheckResult.expandableFieldsMatches;
+  const nonAdditiveFieldsUpdates = subsetCheckResult.nonAdditiveFieldsUpdates;
+  const additiveFieldsMatches = subsetCheckResult.additiveFieldsMatches;
   for (const key of subsetKeys) {
-    if (Object.keys(nonExpandableFieldsUpdates).includes(key)) {
-      result[key] = nonExpandableFieldsUpdates[key];
+    if (Object.keys(nonAdditiveFieldsUpdates).includes(key)) {
+      result[key] = nonAdditiveFieldsUpdates[key];
     }
   }
 
-  // add keep only the values that are unique to the superset
+  // keep only the values that are unique to the superset
   for (const field of supersetKeys) {
-    if (expandableFieldsList.includes(field)) {
-      for (const key of Object.keys(superset[field])) {
-        if (!Object.keys(expandableFieldsMatches[field]).includes(key)) {
-          if (result[field] === undefined) {
-            result[field] = (Array.isArray(superset[field])) ? [] : {};
+    if (additiveFieldsList.includes(field)) {
+      for (const [key, value] of Object.entries(superset[field])) {
+        // in the case of additive array fields like allOf we need to check to see if the things
+        // inside are contained, not if the property names are.
+        if (Array.isArray(additiveFieldsMatches[field])) {
+          const arrayContainsSimilarObject = (arr: Array<any>, obj: any) => {
+            for (const element of arr) {
+              if (areSimilar(element, obj)) {
+                return true;
+              }
+            }
+
+            return false;
+          };
+
+          if (!arrayContainsSimilarObject(additiveFieldsMatches[field], value)) {
+            if (result[field] === undefined) {
+              result[field] = [];
+            }
+            result[field][key] = superset[field][key];
           }
-          result[field][key] = superset[field][key];
+        } else {
+          if (!Object.keys(additiveFieldsMatches[field]).includes(key)) {
+            if (result[field] === undefined) {
+              result[field] = {};
+            }
+            result[field][key] = superset[field][key];
+          }
         }
       }
     }
@@ -264,20 +292,20 @@ export function getSupersetSchema(subset: any, superset: any, expandableFieldsLi
 export function getSubsetSchema(subset: any, subsetCheckResult: SubsetCheckResult): AnyObject {
   const result: any = {};
   const subsetKeys = new Set(Object.keys(subset));
-  const nonExpandableFieldsUpdates = subsetCheckResult.nonExpandableFieldsUpdates;
-  const expandableFieldsMatches = subsetCheckResult.expandableFieldsMatches;
+  const nonAdditiveFieldsUpdates = subsetCheckResult.nonAdditiveFieldsUpdates;
+  const additiveFieldsMatches = subsetCheckResult.additiveFieldsMatches;
   for (const key of subsetKeys) {
-    if (!Object.keys(nonExpandableFieldsUpdates).includes(key) && !Object.keys(expandableFieldsMatches).includes(key)) {
+    if (!Object.keys(nonAdditiveFieldsUpdates).includes(key) && !Object.keys(additiveFieldsMatches).includes(key)) {
       result[key] = subset[key];
     }
   }
 
-  for (const key of Object.keys(nonExpandableFieldsUpdates)) {
-    result[key] = nonExpandableFieldsUpdates[key];
+  for (const key of Object.keys(nonAdditiveFieldsUpdates)) {
+    result[key] = nonAdditiveFieldsUpdates[key];
   }
 
-  for (const field of Object.keys(expandableFieldsMatches)) {
-    result[field] = expandableFieldsMatches[field];
+  for (const field of Object.keys(additiveFieldsMatches)) {
+    result[field] = additiveFieldsMatches[field];
   }
 
   return result;
@@ -285,10 +313,10 @@ export function getSubsetSchema(subset: any, subsetCheckResult: SubsetCheckResul
 
 export interface SubsetCheckResult {
   isSubset: boolean;
-  nonExpandableFieldsUpdates: {
+  nonAdditiveFieldsUpdates: {
     [field: string]: any;
   };
-  expandableFieldsMatches: {
+  additiveFieldsMatches: {
     [field: string]: any;
   };
 }

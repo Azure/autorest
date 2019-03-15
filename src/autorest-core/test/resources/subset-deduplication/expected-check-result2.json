@@ -1,7 +1,7 @@
 {
   "isSubset": true,
-  "nonExpandableFieldsUpdates": {},
-  "expandableFieldsMatches": {
+  "nonAdditiveFieldsUpdates": {},
+  "additiveFieldsMatches": {
     "properties": {
       "plan": {
         "$ref": "#/definitions/Plan",
