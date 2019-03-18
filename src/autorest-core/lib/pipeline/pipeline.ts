@@ -170,7 +170,6 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     'md-override-loader-openapi': createMarkdownOverrideOpenApiLoaderPlugin(),
     'transform': createTransformerPlugin(),
     'transform-immediate': createImmediateTransformerPlugin(),
-    // 'compose': createComposerPlugin(),
     'compose': createNewComposerPlugin(),
     'schema-validator-openapi': createOpenApiSchemaValidatorPlugin(),
     'schema-validator-swagger': createSwaggerSchemaValidatorPlugin(),
