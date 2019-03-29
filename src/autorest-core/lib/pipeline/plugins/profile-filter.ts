@@ -9,7 +9,6 @@ import * as oai from '@microsoft.azure/openapi';
 import * as compareVersions from 'compare-versions';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
-import { Channel } from '../../message';
 interface ApiData {
   apiVersion: string;
   profile: string;
@@ -277,8 +276,11 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
     }
   }
 
+  // matches is an array where the first element is the namespace (i.e. provider),
+  // and the subsequent elements are resources_types.
+  // Regex will match anything in the form (/...)/namespace(/...)/resourceType1(/...)/resourceType2(/...).../resourceTypeN(/...)
   getPathRegex(matches: Array<string>): RegExp {
-    const fragment = '(\/([^\/?#]+))*';
+    const fragment = '(\\/([^\\/?#]+))*';
     let regexString = `^${fragment}`;
 
     for (const word of matches) {
@@ -286,7 +288,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
         return `\\${p1}`;
       });
 
-      regexString = `${regexString}/${escapedWord}${fragment}`;
+      regexString = `${regexString}\\/${escapedWord}${fragment}`;
     }
 
     return RegExp(`${regexString}$`, 'gi');
