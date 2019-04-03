@@ -196,7 +196,7 @@ export async function selectVersion(requestedVersion: string, force: boolean, mi
         console.log(`Selected package: ${pkg.name}@${pkg.version} => ${pkg.resolvedInfo.rawSpec} `);
       }
     } else {
-      throw new Exception(`Unable to find a valid AutoRest Core package for '${requestedVersion}'.`);
+      throw new Exception(`Unable to find a valid AutoRest core package for '${requestedVersion}'.`);
     }
 
     // pkg.version == the actual version 
