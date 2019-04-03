@@ -84,6 +84,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   private profilesApiVersions: Array<string> = [];
   private apiVersions: Array<string> = [];
   private maxApiVersion: string = '';
+  private profilesReferenced = new Set<string>();
 
   constructor(input: DataHandle, private profiles: any, private profilesToUse: Array<string>, apiVersions: Array<string>) {
     super(input);
@@ -150,6 +151,14 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
     }
   }
 
+  public async finish() {
+    // Put in the metadata all the profiles that were actually used. 
+    // This excludes paths that did not match any operation.
+    if (this.profilesReferenced.size !== 0) {
+      this.generated.info['x-ms-metadata'].profiles = [...this.profilesReferenced];
+    }
+  }
+
   visitInfo(targetParent: AnyObject, nodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of nodes) {
       switch (key) {
@@ -192,6 +201,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
         for (const each of this.filterTargets) {
           if (path.replace(/\/*$/, '').match(each.pathRegex) && originalApiVersions.includes(each.apiVersion)) {
             match = true;
+            this.profilesReferenced.add(each.profile);
             profiles[each.profile] = each.apiVersion;
             apiVersions.add(each.apiVersion);
           }
@@ -213,7 +223,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
           path,
           filename: value['x-ms-metadata'].filename,
           originalLocations: value['x-ms-metadata'].originalLocations
-        }
+        };
 
         this.visitPath(this.newObject(targetParent, key, pointer), children, metadata);
       }
