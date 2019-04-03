@@ -10,7 +10,7 @@
     "url": "git+https://github.com/Azure/autorest.git"
   },
   "keywords": [
-    "autorest"
+    "autorest", "swagger", "openapi"
   ],
   "author": "Microsoft Corporation",
   "license": "MIT",
