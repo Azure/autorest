@@ -86,28 +86,11 @@ directive:
 
 #### Cmdlet Suppression 
 
-For cmdlet suppression you can either suppress it by **preventing it from being generated (removal), or by preventing it from being exported at module-export time (hiding).** 
-
-##### Cmdlet Removal
-
-To remove a cmdlet, you need to provide the ```subject-prefix```, ```subject```, ```verb```, and/or ```variant``` of the cmdlet; then, set the directive property 'remove: true'. For example:
-
-```yaml false
-directive:
-  - where: 
-      verb: Get
-      subject: Operation
-    remove: true
-```
-
-(**Regex**) The following is a **Regex** example:
-
-```yaml false
-directive:
-  - where: 
-      subject: Config.*
-    remove: true
-```
+For cmdlet suppression you can either:
+ - remove it: by preventing it from being generated (removal), 
+ - hide it: by preventing it from being exported at module-export time
+ 
+Note: If a cmdlet is hidden, it still can be be used by custom cmdlets.
 
 ##### Cmdlet Hiding (Exportation Suppression)
 
@@ -130,6 +113,27 @@ directive:
       subject: PetService.*
     set: 
       hide: true
+```
+
+##### Cmdlet Removal
+
+To remove a cmdlet, you need to provide the ```subject-prefix```, ```subject```, ```verb```, and/or ```variant``` of the cmdlet; then, set the directive property 'remove: true'. For example:
+
+```yaml false
+directive:
+  - where: 
+      verb: Get
+      subject: Operation
+    remove: true
+```
+
+(**Regex**) The following is a **Regex** example:
+
+```yaml false
+directive:
+  - where: 
+      subject: Config.*
+    remove: true
 ```
 
 #### Parameter Rename
