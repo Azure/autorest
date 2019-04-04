@@ -71,7 +71,7 @@ directive:
       subject: VM       
 ```
 
-The following is a **Regex** example:
+The following is a Regex example:
 
 ```yaml $false
 # This will change every cmdlet where the subject starts with 'Configuration',
@@ -87,14 +87,14 @@ directive:
 #### Cmdlet Suppression 
 
 For cmdlet suppression you can either:
- - remove it: by preventing it from being generated (removal), 
  - hide it: by preventing it from being exported at module-export time
+ - remove it: by preventing it from being generated 
  
 Note: If a cmdlet is hidden, it still can be be used by custom cmdlets.
 
 ##### Cmdlet Hiding (Exportation Suppression)
 
-To hide a cmdlet, you need to provide ```subject-prefix```, ```subject```, ```verb```, and/or ```variant``` of the cmdlet; then set 'set.hide: true'. For example:
+To hide a cmdlet, you need to provide ```subject-prefix```, ```subject```, ```verb```, and/or ```variant``` of the cmdlet; then set ```hidden: true``` . For example:
 
 ```yaml false
 directive:
@@ -105,7 +105,7 @@ directive:
       hide: true
 ```
 
-The following is a **Regex** example:
+The following is a Regex example:
 
 ```yaml false
 directive:
@@ -117,7 +117,7 @@ directive:
 
 ##### Cmdlet Removal
 
-To remove a cmdlet, you need to provide the ```subject-prefix```, ```subject```, ```verb```, and/or ```variant``` of the cmdlet; then, set the directive property 'remove: true'. For example:
+To remove a cmdlet, you need to provide the ```subject-prefix```, ```subject```, ```verb```, and/or ```variant``` of the cmdlet; then, set ```remove: true```. For example:
 
 ```yaml false
 directive:
@@ -127,7 +127,7 @@ directive:
     remove: true
 ```
 
-(**Regex**) The following is a **Regex** example:
+The following is a Regex example:
 
 ```yaml false
 directive:
@@ -138,7 +138,7 @@ directive:
 
 #### Parameter Rename
 
-To rename a parameter we support both string literals and **regex** patterns. To select a parameter you need to provide the ```parameter-name```. Furthermore, if you want to target specific cmdlets you can provide the ```subject-prefix```, ```subject```, ```verb```, and/or ```variant``` (i.e. parameter-set). For example:
+To select a parameter you need to provide the ```parameter-name```. Furthermore, if you want to target specific cmdlets you can provide the ```subject-prefix```, ```subject```, ```verb```, and/or ```variant``` (i.e. parameter-set). For example:
 
 ```yaml false
 # This will rename the parameter 'XYZName' from the cmdlet 'Get-Operation' to 'Name'.
@@ -152,7 +152,7 @@ directive:
       parameter-name: Name
 ```
 
-The following is a **Regex** example:
+The following is a Regex example:
 
 ```yaml false
 # This will rename every parameter that ends with 'Name' to just 'Name'.
@@ -180,8 +180,6 @@ directive:
 
 #### Model Rename
 
-For model renaming we support both string literals and regex patterns. 
-
 To rename a specific model, provide the name of the model at ```model-name``` under ```where``` node and the new model name at ```model-name``` under the ```set``` node. For example:
 
 ```yaml false
@@ -194,7 +192,7 @@ directive:
      model-name: Gato
 ```
 
-The following is a **Regex** example:
+The following is a Regex example:
 
 ```yaml false
 # This will rename every model name that start with 'VirtualMachine' to start with 'VM'.
@@ -208,7 +206,7 @@ directive:
 
 #### Property Rename
 
-To rename a property we support both string literals and **regex** patterns. To select a property you need to provide the ```property-name```. Furthermore, if you want to target a specific model property, you can provide the ```model-name```. For example:
+To select a property you need to provide the ```property-name```. Furthermore, if you want to target a specific model property, you can provide the ```model-name```. For example:
 
 ```yaml false
 directive:
@@ -219,7 +217,7 @@ directive:
       property-name: Name
 ```
 
-The following is a **Regex** example:
+The following is a Regex example:
 
 ```yaml false
 directive:
