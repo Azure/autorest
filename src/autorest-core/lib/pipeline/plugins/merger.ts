@@ -332,16 +332,20 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
 
       // tag the current pointer with a the new location
       const originalLocation = `${(<DataHandle>this.currentInput).originalFullPath}#${pointer}`;
-      this.refs[originalLocation] = `#/components/${type}/${uid}`;
+      const localRef = `#/components/${type}/${uid}`;
+      this.refs[originalLocation] = localRef;
       // for testing with local refs
-      this.refs[`#${pointer}`] = `#/components/${type}/${uid}`;
+      this.refs[`#${pointer}`] = localRef;
+
+      // for enums we need to use the name from the x-ms-enum. Otherwise, we can get collisions later on.
+      const name = (type === 'schemas' && value['x-ms-enum'] !== undefined && value['x-ms-enum'].name !== undefined) ? value['x-ms-enum'].name : key;
 
       const component: AnyObject = this.newObject(container, `${uid}`, pointer);
       component['x-ms-metadata'] = {
         value: {
           apiVersions: [this.current.info && this.current.info.version ? this.current.info.version : ''], // track the API version this came from
           filename: [this.currentInputFilename],                       // and the filename
-          name: key,	                                // and here is the name of the component.
+          name,
           originalLocations: [originalLocation],
           'x-ms-secondary-file': this.isSecondaryFile
         }, pointer

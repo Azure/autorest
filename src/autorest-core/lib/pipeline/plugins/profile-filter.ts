@@ -335,9 +335,9 @@ export function getLatestProfile(allProfiles: AnyObject): Profile {
 
   const latestResources = new Dictionary<Resource>();
   for (const resource of allResources) {
-    const resourceUid = `${resource.resourceProviderName}${resource.resourceName}`;
+    const resourceUid = `${resource.resourceProviderName.toLowerCase()}${resource.resourceName.toLowerCase()}`;
     if (latestResources[resourceUid] === undefined) {
-      latestResources[resourceUid] = { apiVersion: resource.apiVersion, resourceName: resource.resourceName, resourceProviderName: resource.resourceProviderName };
+      latestResources[resourceUid] = { apiVersion: resource.apiVersion, resourceName: resource.resourceName, resourceProviderName: resource.resourceProviderName.toLowerCase() };
     }
   }
 
