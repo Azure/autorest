@@ -330,59 +330,6 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   }
 }
 
-interface Profile {
-  [resourceProvider: string]: {
-    [apiVersion: string]: Array<string>;
-  };
-}
-
-interface Resource {
-  apiVersion: string;
-  resourceName: string;
-  resourceProviderName: string;
-}
-
-export function getLatestProfile(allProfiles: AnyObject): Profile {
-  const allResources = new Array<Resource>();
-  for (const profile of values(allProfiles)) {
-    for (const { value: apiResources, key: resourceProviderName } of items(<AnyObject>profile)) {
-      for (const { value: resources, key: apiVersion } of items(<AnyObject>apiResources)) {
-        for (const resourceName of resources) {
-          allResources.push({ apiVersion, resourceName, resourceProviderName });
-        }
-      }
-    }
-  }
-
-  allResources.sort((a, b) => {
-    return (a.apiVersion > b.apiVersion) ? -1 : (a.apiVersion < b.apiVersion) ? 1 : 0;
-  });
-
-  const latestResources = new Dictionary<Resource>();
-  for (const resource of allResources) {
-    const resourceUid = `${resource.resourceProviderName.toLowerCase()}${resource.resourceName.toLowerCase()}`;
-    if (latestResources[resourceUid] === undefined) {
-      latestResources[resourceUid] = { apiVersion: resource.apiVersion, resourceName: resource.resourceName, resourceProviderName: resource.resourceProviderName.toLowerCase() };
-    }
-  }
-
-  const latestProfile: Profile = {};
-  for (const resource of values(latestResources)) {
-    latestProfile[resource.resourceProviderName] = latestProfile[resource.resourceProviderName] || {};
-    latestProfile[resource.resourceProviderName][resource.apiVersion] = latestProfile[resource.resourceProviderName][resource.apiVersion] || [];
-    latestProfile[resource.resourceProviderName][resource.apiVersion].push(resource.resourceName);
-  }
-
-  // sort the resources by name
-  for (const { value: apiResources } of items(<AnyObject>latestProfile)) {
-    for (const { value: resources } of items(<AnyObject>apiResources)) {
-      resources.sort();
-    }
-  }
-
-  return latestProfile;
-}
-
 async function filter(config: ConfigurationView, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
@@ -392,12 +339,6 @@ async function filter(config: ConfigurationView, input: DataSource, sink: DataSi
     const configApiVersion = config.GetEntry('api-version');
     const apiVersions: Array<string> = configApiVersion ? (typeof (configApiVersion) === 'string') ? [configApiVersion] : configApiVersion : [];
     const profilesRequested = !Array.isArray(config.GetEntry('profile')) ? [config.GetEntry('profile')] : config.GetEntry('profile');
-    if (profilesRequested.includes('latest')) {
-      const latestProfile = getLatestProfile(allProfileDefinitions);
-      result.push(await sink.WriteObject('latest-profile', latestProfile, [], 'azure-profile'));
-      allProfileDefinitions['latest'] = latestProfile;
-    }
-
     if (profilesRequested.length > 0 || apiVersions.length > 0) {
       const processor = new ProfileFilter(each, allProfileDefinitions, profilesRequested, apiVersions);
       result.push(await sink.WriteObject('profile-filtered-oai-doc...', await processor.getOutput(), each.identity, 'profile-filtered-oai3', await processor.getSourceMappings()));
