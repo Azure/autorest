@@ -7,13 +7,10 @@ import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyOb
 import { Dictionary, values, items } from '@microsoft.azure/linq';
 import * as oai from '@microsoft.azure/openapi';
 import * as compareVersions from 'compare-versions';
+import * as semver from 'semver';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
-interface ApiData {
-  apiVersion: string;
-  profile: string;
-  matches: Array<string>;
-}
+
 
 type componentType = 'schemas' | 'responses' | 'parameters' | 'examples' | 'requestBodies' | 'headers' | 'securitySchemes' | 'links' | 'callbacks';
 
@@ -28,27 +25,40 @@ function getMaxApiVersion(apiVersions: Array<string>): string {
   return result;
 }
 
-// azure rest specs currently use versioning of the form yyyy-mm-dd
-// to take into consideration this we convert to an equivalent of
+// azure rest specs mostly uses versioning of the form yyyy-mm-dd
+// To take into consideration this we convert to an equivalent of
 // semver for comparisons.
 function getSemverEquivalent(version: string) {
   let result = '';
-  for (const i of version.split('-')) {
+  for (const i of version.split(/[\.\-]/g)) {
     if (!result) {
       result = i;
       continue;
     }
-    result = Number.isNaN(Number.parseInt(i)) ? `${result}-${i}` : `${result}.${i}`;
+    result = Number.isNaN(Number.parseInt(i)) ? `${result}-${i}` : `${result}.${Number(i)}`;
   }
-  return result;
+
+  return semver.valid(semver.coerce(result));
 }
 
-interface pathMetadata {
+interface PathMetadata {
   apiVersions: Array<string>;
   filename: Array<string>;
   path: string;
   profiles: Dictionary<string>;
   originalLocations: Array<string>;
+}
+
+interface ResourceData {
+  apiVersion: string;
+  profile: string;
+  matches: Array<string>;
+}
+
+interface OperationData {
+  apiVersion: string;
+  profile: string;
+  path: string;
 }
 
 export class ProfileFilter extends Transformer<any, oai.Model> {
@@ -95,29 +105,44 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
     const currentDoc = this.inputs[0].ReadObject();
     this.components = currentDoc['components'];
     if (this.profilesToUse.length > 0) {
-      const targets: Array<ApiData> = [];
-      for (const { key: profileName, value: resourceProvider } of visit(this.profiles)) {
+      const resourcesTargets: Array<ResourceData> = [];
+      const operationTargets: Array<OperationData> = [];
+      for (const { key: profileName, value: profile } of visit(this.profiles)) {
         if (this.profilesToUse.includes(profileName)) {
-          for (const { key: namespace, value: namespaceValue } of visit(resourceProvider)) {
+
+          // get resources targets
+          for (const { key: namespace, value: namespaceValue } of visit(profile.resources)) {
             for (const { key: version, value: resourceTypes } of visit(namespaceValue)) {
               if (resourceTypes.length === 0) {
-                targets.push({ apiVersion: version, profile: profileName, matches: [namespace] });
+                resourcesTargets.push({ apiVersion: version, profile: profileName, matches: [namespace] });
               } else {
                 for (const resourceType of resourceTypes) {
-                  targets.push({ apiVersion: version, profile: profileName, matches: [namespace, ...resourceType.split('/')] });
+                  resourcesTargets.push({ apiVersion: version, profile: profileName, matches: [namespace, ...resourceType.split('/')] });
                 }
               }
             }
           }
+
+          // get operations targets
+          for (const { key: path, value: apiVersion } of visit(profile.operations)) {
+            operationTargets.push({ apiVersion, profile: profileName, path });
+          }
         }
       }
 
-      for (const target of targets) {
+      for (const target of resourcesTargets) {
         this.maxApiVersion = getMaxApiVersion([target.apiVersion, this.maxApiVersion]);
         this.profilesApiVersions.push(target.apiVersion);
         const apiVersion = target.apiVersion;
         const profile = target.profile;
         const pathRegex = this.getPathRegex(target.matches);
+        this.filterTargets.push({ apiVersion, profile, pathRegex });
+      }
+
+      for (const target of operationTargets) {
+        const apiVersion = target.apiVersion;
+        const profile = target.profile;
+        const pathRegex = new RegExp(target.path);
         this.filterTargets.push({ apiVersion, profile, pathRegex });
       }
 
@@ -160,7 +185,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   }
 
   visitInfo(targetParent: AnyObject, nodes: Iterable<Node>) {
-    for (const { value, key, pointer, children } of nodes) {
+    for (const { value, key, pointer } of nodes) {
       switch (key) {
         case 'version':
           this.clone(targetParent, key, pointer, this.maxApiVersion);
@@ -172,7 +197,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
     }
   }
 
-  visitPath(targetParent: AnyObject, nodes: Iterable<Node>, pathMetadata: pathMetadata) {
+  visitPath(targetParent: AnyObject, nodes: Iterable<Node>, pathMetadata: PathMetadata) {
     for (const { value, key, pointer } of nodes) {
       switch (key) {
         case 'x-ms-metadata':
@@ -217,7 +242,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
       }
 
       if (match) {
-        const metadata: pathMetadata = {
+        const metadata: PathMetadata = {
           apiVersions: [...apiVersions],
           profiles,
           path,
