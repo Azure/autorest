@@ -6,40 +6,11 @@
 import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit, ParseToAst, ConvertJsonx2Yaml, Stringify, StringifyAst } from '@microsoft.azure/datastore';
 import { Dictionary, values, items } from '@microsoft.azure/linq';
 import * as oai from '@microsoft.azure/openapi';
-import * as compareVersions from 'compare-versions';
-import * as semver from 'semver';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
-
+import { toSemver, maximum } from '@microsoft.azure/codegen';
 
 type componentType = 'schemas' | 'responses' | 'parameters' | 'examples' | 'requestBodies' | 'headers' | 'securitySchemes' | 'links' | 'callbacks';
-
-function getMaxApiVersion(apiVersions: Array<string>): string {
-  let result = '0';
-  for (const version of apiVersions) {
-    if (version && compareVersions(getSemverEquivalent(version), getSemverEquivalent(result)) >= 0) {
-      result = version;
-    }
-  }
-
-  return result;
-}
-
-// azure rest specs mostly uses versioning of the form yyyy-mm-dd
-// To take into consideration this we convert to an equivalent of
-// semver for comparisons.
-function getSemverEquivalent(version: string) {
-  let result = '';
-  for (const i of version.split(/[\.\-]/g)) {
-    if (!result) {
-      result = i;
-      continue;
-    }
-    result = Number.isNaN(Number.parseInt(i)) ? `${result}-${i}` : `${result}.${Number(i)}`;
-  }
-
-  return semver.valid(semver.coerce(result));
-}
 
 interface PathMetadata {
   apiVersions: Array<string>;
@@ -131,7 +102,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
       }
 
       for (const target of resourcesTargets) {
-        this.maxApiVersion = getMaxApiVersion([target.apiVersion, this.maxApiVersion]);
+        this.maxApiVersion = maximum([target.apiVersion, this.maxApiVersion]);
         this.profilesApiVersions.push(target.apiVersion);
         const apiVersion = target.apiVersion;
         const profile = target.profile;
@@ -147,7 +118,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
       }
 
     } else if (this.apiVersions.length > 0) {
-      this.maxApiVersion = getMaxApiVersion([this.maxApiVersion, getMaxApiVersion(this.apiVersions)]);
+      this.maxApiVersion = maximum([this.maxApiVersion, maximum(this.apiVersions)]);
     }
 
     const paths = this.newObject(this.generated, 'paths', '/paths');
