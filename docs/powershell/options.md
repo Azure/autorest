@@ -1,8 +1,231 @@
 # AutoRest PowerShell Specific Options
 
 There are a couple of PowerShell specific things you may want to do:
-- [Control The Module Output Folder Layout](#Control-The-Module-Output-Folder-Layout)
 - [Tweak The Way It Generates Cmdlets](#Tweak-The-Way-It-Generates-Cmdlets)
+- [Control The Module Output Folder Layout](#Control-The-Module-Output-Folder-Layout)
+
+## Tweak The Way It Generates Cmdlets
+
+To change the way AutoRest generates cmdlets you can use one of the built-in [directives outlined below](#Built-in-directives-for-PowerShell), or you can [declare your own directives](https://github.com/Azure/autorest/blob/master/src/autorest-core/resources/default-configuration.md#directives). You may specify the directives you want to use at the top-level of the Literate Configuration document. For example:
+
+```yaml $false
+directive:
+  - where:
+      parameter-name: Foo
+    set:
+      parameter-name: Bar
+```
+
+#### Terminology Notes
+
+#### prefix, subject-prefix and subject 
+
+To increase the granularity of cmdlet-tweaking, we divided the cmdlet NOUN into three parts, namely, prefix, subject-prefix and subject:
+
+[verb]-[noun] <-> [verb]-[prefix][subject-prefix][subject]
+
+AutoRest allows you to:
+
+- Modify the prefix (by default empty)
+  - module-wide: using ```prefix: <value>``` at the top-level of the configuration document.
+- Modify the subject-prefix (by default empty)
+  - module-wide: using ```subject-prefix: <value>``` at the top-level of the configuration document.
+  - per-cmdlet: using  ```subject-prefix: <value>``` inside a directive.
+- Modify the subject
+  - per-cmdlet: use ```subject: <value>```  inside a directive.
+
+#### variant 
+
+A variant is the same thing as the parameter-set name.
+
+#### hidden cmdlet
+
+When a cmdlet is set to ```hidden: true```, the cmdlet will be generated; however, it won't be exported at module-export time.
+
+### Built-In Directives For PowerShell
+
+The following directives cover the most common tweaking scenarios for cmdlet generation:
+
+- [Cmdlet Rename](#Cmdlet-Rename)
+- [Cmdlet Suppression (Removal and Hiding)](#Cmdlet-Suppression)
+- [Parameter Rename](#Parameter-Rename)
+- [Parameter Description](#Parameter-Description)
+- [Model Rename](#Model-Rename)
+- [Property Rename](#Property-Rename)
+
+Note: If you have feedback about these directives, or you would like additional configurations, feel free to open an issue at https://github.com/Azure/autorest.powershell. 
+
+#### Cmdlet Rename
+
+To rename a cmdlet we support both string literals and **regex** patterns. Cmdlets can be selected and modified by ```subject-prefix```, ```subject```, ```verb```, and/or ```variant```. For example:
+
+```yaml $false
+# This will rename the cmdlet 'Get-VirtualMachine' (Parameter Set: XYZParamSet) to 'Get-VM'
+
+directive:
+  - where: 
+      subject: VirtualMachine
+      verb: Get
+      variant: XYZParamSet
+    set: 
+      subject: VM       
+```
+
+The following is a Regex example:
+
+```yaml $false
+# This will change every cmdlet where the subject starts with 'Configuration',
+# to have the rest of the subject as Config<rest of the subject>
+
+directive:
+    - where:
+            subject: (^Configuration)(.*) 
+      set:
+            subject: Config$2
+```
+
+#### Cmdlet Suppression 
+
+For cmdlet suppression you can either:
+ - hide it: by preventing it from being exported at module-export time
+ - remove it: by preventing it from being generated 
+ 
+Note: If a cmdlet is hidden, it still can be be used by custom cmdlets.
+
+##### Cmdlet Hiding (Exportation Suppression)
+
+To hide a cmdlet, you need to provide ```subject-prefix```, ```subject```, ```verb```, and/or ```variant``` of the cmdlet; then set ```hidden: true``` . For example:
+
+```yaml false
+directive:
+  - where: 
+      verb: Update
+      subject: Resource
+    set: 
+      hide: true
+```
+
+The following is a Regex example:
+
+```yaml false
+directive:
+  - where: 
+      subject: PetService.*
+    set: 
+      hide: true
+```
+
+##### Cmdlet Removal
+
+To remove a cmdlet, you need to provide the ```subject-prefix```, ```subject```, ```verb```, and/or ```variant``` of the cmdlet; then, set ```remove: true```. For example:
+
+```yaml false
+directive:
+  - where: 
+      verb: Get
+      subject: Operation
+    remove: true
+```
+
+The following is a Regex example:
+
+```yaml false
+directive:
+  - where: 
+      subject: Config.*
+    remove: true
+```
+
+#### Parameter Rename
+
+To select a parameter you need to provide the ```parameter-name```. Furthermore, if you want to target specific cmdlets you can provide the ```subject-prefix```, ```subject```, ```verb```, and/or ```variant``` (i.e. parameter-set). For example:
+
+```yaml false
+# This will rename the parameter 'XYZName' from the cmdlet 'Get-Operation' to 'Name'.
+
+directive:
+  - where: 
+      parameter-name: XYZName
+      verb: Get 
+      subject: Operation
+    set:  
+      parameter-name: Name
+```
+
+The following is a Regex example:
+
+```yaml false
+# This will rename every parameter that ends with 'Name' to just 'Name'.
+
+directive:
+  - where: 
+      parameter-name: (.*)Name$
+    set: 
+      parameter-name: Name
+```
+
+#### Parameter Description
+
+To add or modify a parameter description you can use a similar pattern to renaming the parameter, but you need to set ```parameter-description```. For example:
+
+```yaml false
+directive:
+  - where: 
+      parameter-name: Name
+      verb: Get 
+      subject: Operation
+    set:  
+      parameter-description: This is the name of the Operation you want to retrieve.
+```
+
+#### Model Rename
+
+To rename a specific model, provide the name of the model at ```model-name``` under ```where``` node and the new model name at ```model-name``` under the ```set``` node. For example:
+
+```yaml false
+# This will rename the model name from 'Cat' to 'Gato'.
+
+directive:
+  - where:
+     model-name: Cat
+    set:
+     model-name: Gato
+```
+
+The following is a Regex example:
+
+```yaml false
+# This will rename every model name that start with 'VirtualMachine' to start with 'VM'.
+
+directive:
+  - where:
+     model-name: ^VirtualMachine(.*)
+    set:
+     model-name: VM$1
+```
+
+#### Property Rename
+
+To select a property you need to provide the ```property-name```. Furthermore, if you want to target a specific model property, you can provide the ```model-name```. For example:
+
+```yaml false
+directive:
+  - where: 
+      property-name: VirtualMachineName
+      model-name: VirtualMachine
+    set:  
+      property-name: Name
+```
+
+The following is a Regex example:
+
+```yaml false
+directive:
+  - where: 
+      property-name: (.*)Name
+    set:  
+      property-name: Name
+```
 
 ## Control The Module Output Folder Layout
 
@@ -79,113 +302,3 @@ psm1: <name>  # module file
 ```
 
 Note: By default these files will be named after the module-name. For example, the manifest file will be \<module-name>.psd1.
-
-
-## Tweak The Way It Generates Cmdlets
-
-To change the way AutoRest generates cmdlets you can use one of the built-in directives outlined below, or you can [declare your own directives](https://github.com/Azure/autorest/blob/master/src/autorest-core/resources/default-configuration.md#directives). You may specify the directives you want to use at the top-level of the Literate Configuration document. For example:
-
-
-```yaml 
-directive:
-  - remove-command: Get-AzOperation.*
-  - where-command: New-AzConfigurationStore
-    set-name: New-AzConf
-
-```
-
-### Built-in directives for PowerShell
-
-The following directives cover the most common tweaking scenarios for cmdlet generation:
-
-- [Cmdlet Suppression](#Cmdlet-Suppression)
-- [Cmdlet Rename](#Cmdlet-Rename)
-- [Parameter Rename](#Parameter-Rename)
-- [Model Rename](#Model-Rename)
-- [Property Rename](#Property-Rename)
-
-Note: If you have feedback about these directives, or you would like additional built-in directives, feel free to open an issue at https://github.com/Azure/autorest. 
-
-#### Cmdlet Generation Suppression 
-
-For cmdlet generation suppression we support both string literals and regex patterns. 
-
-To remove a specific cmdlet, provide the name of the cmdlet. For example:
-
-```yaml false
-directive:
-  - remove-command: New-AzConfigurationStore
-```
-To remove all the cmdlets that match a specific pattern, provide the regex expression. For example:
-
-
-```yaml false
-# Suppress all cmdlets that start with Get-AzOperation
-directive:
-  - remove-command: Get-AzOperation.*
-```
-#### Cmdlet Rename
-
-For cmdlet renaming we support both string literals and regex patterns. 
-
-To rename a specific cmdlet, provide the name of the cmdlet at 'where-command' node and the new name at 'set-name' node. For example:
-
-```yaml false
-directive:
-  - where-command: New-AzConfigurationStore
-    set-name: New-AzConf
-```
-
-To rename all the cmdlets that match a specific pattern, provide the regex expression at 'where-command' node and the replacement string at 'set-name' node. In the following example, we target all cmdlets that contain 'ConfigurationStore', use parentheses to capture three groups in the cmdlet name, and use those groups to transform the cmdlet name:
-
-```yaml 
-# Examples:
-# New-AzConfigurationStoreFoo --> New-AzCStoreFoo
-# Get-AzConfigurationStoreBar --> Get-AzCStoreBar
-
-directive:
-  - where-command: (.*)(ConfigurationStore)(.*)
-    set-name: $1CStore$3
-```
-
-#### Model Rename
-
-For model renaming we support both string literals and regex patterns. 
-
-To rename a specific model, provide the name of the model at 'where-model' node and the new model name at 'set-name' node. For example:
-
-```yaml false
-directive:
-  - where-model: ConfigurationStore 
-    set-name:  CS
-```
-To rename all models that match a specific pattern, provide the regex expression at 'where-model' node and the replacement string at 'set-name' node. In the following example we find every model that starts with 'Configuration', use parentheses to capture two groups in the model name, and use those groups to transform the model name:
-
-```yaml false
-# Example:
-# ConfigurationStoreKey ---> ConfigStoreKey
-# ConfigurationStore ---> ConfigStore
-directive:
-  - where-model: (^Configuration)(.*)
-    set-name:  Config$2
-```
-#### Parameter Rename 
-
-To rename a parameter provide the parameter name at 'where-parameter node and the new name at 'set-name' node. For example:
-
-```yaml false
-directive:
-  - where-parameter: ResourceGroupName 
-    set-name:  TheResourceGroup
-```
-
-#### Property Rename 
-
-To rename a property provide the property name at 'where-property' node and the new name at 'set-name' node. For example:
-
-```yaml false
-directive:
-  - where-property: Name 
-    set-name:  Nombre
-```
-
