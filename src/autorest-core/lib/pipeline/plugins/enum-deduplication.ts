@@ -3,7 +3,7 @@ import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 import { Dictionary, items } from '@microsoft.azure/linq';
 import * as compareVersions from 'compare-versions';
-import { toSemver, maximum } from '../../../../../perks/libraries/codegen/exports';
+import { toSemver, maximum } from '@microsoft.azure/codegen';
 
 export class EnumDeduplicator extends TransformerViaPointer {
   protected refs = new Map<string, Array<{ target: AnyObject, pointer: string }>>();

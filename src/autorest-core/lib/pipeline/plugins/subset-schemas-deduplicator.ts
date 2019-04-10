@@ -4,7 +4,7 @@ import { areSimilar } from '@microsoft.azure/object-comparison';
 import * as oai from '@microsoft.azure/openapi';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
-import { toSemver, maximum, gt, lt } from '../../../../../perks/libraries/codegen/exports';
+import { toSemver, maximum, gt, lt } from '@microsoft.azure/codegen';
 
 export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
 
