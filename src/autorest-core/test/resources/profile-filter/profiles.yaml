@@ -1,11 +1,15 @@
 2017-11-09-profile:
-  Microsoft.Sql:
-      '2017-10-01-preview': []
-      '2015-05-01-preview':
-          - servers/failoverGroups
-          - logs
+  resources:
+    Microsoft.Sql:
+        '2017-10-01-preview': []
+        '2015-05-01-preview':
+            - servers/failoverGroups
+            - logs
+  operations: {}
 2018-01-01-hybrid:
-  Microsoft.Sql:
-      '2015-05-01-preview':
-          - servers/failoverGroups
-          - logs
+  resources:
+    Microsoft.Sql:
+        '2015-05-01-preview':
+            - servers/failoverGroups
+            - logs
+  operations: {}

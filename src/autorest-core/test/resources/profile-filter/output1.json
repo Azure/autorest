@@ -4,6 +4,10 @@
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.",
     "x-ms-metadata": {
+      "profiles": [
+        "2017-11-09-profile",
+        "2018-01-01-hybrid"
+      ],
       "apiVersions": [
         "2014-04-01",
         "2015-05-01-preview",

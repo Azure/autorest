@@ -3,33 +3,7 @@ import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 import { Dictionary, items } from '@microsoft.azure/linq';
 import * as compareVersions from 'compare-versions';
-
-
-function getMaxApiVersion(apiVersions: Array<string>): string {
-  let result = '0';
-  for (const version of apiVersions) {
-    if (version && compareVersions(getSemverEquivalent(version), getSemverEquivalent(result)) >= 0) {
-      result = version;
-    }
-  }
-
-  return result;
-}
-
-// azure rest specs currently use versioning of the form yyyy-mm-dd
-// to take into consideration this we convert to an equivalent of
-// semver for comparisons.
-function getSemverEquivalent(version: string) {
-  let result = '';
-  for (const i of version.split('-')) {
-    if (!result) {
-      result = i;
-      continue;
-    }
-    result = Number.isNaN(Number.parseInt(i)) ? `${result}-${i}` : `${result}.${i}`;
-  }
-  return result;
-}
+import { toSemver, maximum } from '@microsoft.azure/codegen';
 
 export class EnumDeduplicator extends TransformerViaPointer {
   protected refs = new Map<string, Array<{ target: AnyObject, pointer: string }>>();
@@ -64,7 +38,7 @@ export class EnumDeduplicator extends TransformerViaPointer {
     // time to consolodate the enums
     for (const { key: name, value } of items(this.enums)) {
       // first sort them according to api-version order
-      const enumSet = value.sort((a, b) => compareVersions(getSemverEquivalent(getMaxApiVersion(a.value['x-ms-metadata'].apiVersions)), getSemverEquivalent(getMaxApiVersion(b.value['x-ms-metadata'].apiVersions))));
+      const enumSet = value.sort((a, b) => compareVersions(toSemver(maximum(a.value['x-ms-metadata'].apiVersions)), toSemver(maximum(b.value['x-ms-metadata'].apiVersions))));
 
       const first = enumSet[0];
       if (enumSet.length === 1) {

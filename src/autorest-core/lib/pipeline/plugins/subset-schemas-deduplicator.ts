@@ -2,9 +2,9 @@ import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyOb
 import { clone, Dictionary } from '@microsoft.azure/linq';
 import { areSimilar } from '@microsoft.azure/object-comparison';
 import * as oai from '@microsoft.azure/openapi';
-import * as compareVersions from 'compare-versions';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
+import { toSemver, maximum, gt, lt } from '@microsoft.azure/codegen';
 
 export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
 
@@ -61,9 +61,9 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
 
     // sort by apiVersion from latest to oldest
     schemas.sort((a, b) => {
-      const aMaxVersion = this.getMaxApiVersion(a.value[xMsMetadata].apiVersions);
-      const bMaxVersion = this.getMaxApiVersion(b.value[xMsMetadata].apiVersions);
-      return (aMaxVersion > bMaxVersion) ? -1 : (aMaxVersion < bMaxVersion) ? 1 : 0;
+      const aMaxVersion = maximum(a.value[xMsMetadata].apiVersions);
+      const bMaxVersion = maximum(b.value[xMsMetadata].apiVersions);
+      return gt(aMaxVersion, bMaxVersion) ? -1 : lt(aMaxVersion, bMaxVersion) ? 1 : 0;
     });
 
     // deduplicate/reduce
@@ -102,32 +102,6 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
     for (const { key, pointer } of originalNodes()) {
       container[key] = { value: updatedSchemas[key], pointer, recurse: true };
     }
-  }
-
-  private getMaxApiVersion(apiVersions: Array<string>): string {
-    let result = '0';
-    for (const version of apiVersions) {
-      if (version && compareVersions(this.getSemverEquivalent(version), this.getSemverEquivalent(result)) >= 0) {
-        result = version;
-      }
-    }
-
-    return result;
-  }
-
-  // azure rest specs currently use versioning of the form yyyy-mm-dd
-  // to take into consideration this we convert to an equivalent of
-  // semver for comparisons.
-  private getSemverEquivalent(version: string) {
-    let result = '';
-    for (const i of version.split('-')) {
-      if (!result) {
-        result = i;
-        continue;
-      }
-      result = Number.isNaN(Number.parseInt(i)) ? `${result}-${i}` : `${result}.${i}`;
-    }
-    return result;
   }
 }
 
