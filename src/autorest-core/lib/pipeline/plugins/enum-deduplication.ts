@@ -60,7 +60,9 @@ export class EnumDeduplicator extends TransformerViaPointer {
       if (first.value.description) {
         this.clone(mergedEnum, 'description', first.pointer, first.value.description);
       }
-      this.clone(mergedEnum, 'x-ms-enum', first.pointer, first.value['x-ms-enum']);
+      if (first.value['x-ms-enum']) {
+        this.clone(mergedEnum, 'x-ms-enum', first.pointer, first.value['x-ms-enum']);
+      }
       this.clone(mergedEnum, 'type', first.pointer, 'string');
       const newRef = `#/components/schemas/${name}`;
       this.newArray(mergedEnum, 'enum', '');
