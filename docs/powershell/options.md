@@ -102,7 +102,7 @@ directive:
       verb: Update
       subject: Resource
     set: 
-      hide: true
+      hidden: true
 ```
 
 The following is a Regex example:
@@ -112,7 +112,7 @@ directive:
   - where: 
       subject: PetService.*
     set: 
-      hide: true
+      hidden: true
 ```
 
 ##### Cmdlet Removal
