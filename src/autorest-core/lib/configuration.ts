@@ -353,31 +353,49 @@ export class ConfigurationView {
     });
   }
 
-  public async getIncludedConfigurationFiles(fileSystem: IFileSystem, ignoreFiles: Set<string>): Promise<Array<string>> {
-    const result = new Array<string>();
-    for (const each of valuesOf<string>(this.config['require'])) {
-      const path = this.ResolveAsPath(each);
-      if (!ignoreFiles.has(path)) {
-        result.push(this.ResolveAsPath(each));
-      }
-    }
+  public static async *getIncludedConfigurationFiles(configView: () => ConfigurationView, fileSystem: IFileSystem, ignoreFiles: Set<string>) {
 
-    // for try require, see if it exists before including it in the list.
-    for (const each of valuesOf<string>(this.config['try-require'])) {
-      const path = this.ResolveAsPath(each);
-      try {
-        if (!ignoreFiles.has(path) && await fileSystem.ReadFile(path)) {
-          result.push(path);
+    let done = false;
+
+    while (!done) {
+      // get a fresh copy of the view every time we start the loop.
+      const view = configView();
+      for (const each of valuesOf<string>(view.config['require'])) {
+        done = false;
+
+        if (ignoreFiles.has(each)) {
+          // if this is the last one, we're done
+          done = true;
           continue;
         }
-      } catch {
-        // skip it.
+
+        ignoreFiles.add(each)
+        yield view.ResolveAsPath(each);
+        break;
       }
-      ignoreFiles.add(path);
     }
 
-    // return the aggregate list of things we're supposed to include
-    return result;
+    while (!done) {
+      // get a fresh copy of the view every time we start the loop.
+      const view = configView();
+      for (const each of valuesOf<string>(view.config['try-require'])) {
+        done = false;
+
+        if (ignoreFiles.has(each)) {
+          // if this is the last one, we're done
+          done = true;
+          continue;
+        }
+
+        ignoreFiles.add(each);
+        const path = view.ResolveAsPath(each);
+        if (await fileSystem.ReadFile(path)) {
+          yield path;
+        }
+        break;
+      }
+
+    }
   }
 
   public get Directives(): Array<DirectiveView> {
@@ -512,7 +530,7 @@ export class ConfigurationView {
 
             /*
               GS01: This should be restored when we go 'release'
-
+    
             this.Message({
               Channel: Channel.Warning,
               Text: `Failed to blame ${JSON.stringify(s.Position)} in '${JSON.stringify(s.document)}' (${e})`,
@@ -754,40 +772,31 @@ export class Configuration {
     // 3. resolve 'require'd configuration
     const addedConfigs = new Set<string>();
     const includeFn = async (fsToUse: IFileSystem) => {
-      // tslint:disable-next-line: no-constant-condition
-      while (true) {
-        const tmpView = createView();
 
-        // add loaded files to the input files.
-        const additionalConfigs = (await tmpView.getIncludedConfigurationFiles(fsToUse, addedConfigs));
-        if (additionalConfigs.length === 0) {
-          break;
-        }
+      for await (const additionalConfig of ConfigurationView.getIncludedConfigurationFiles(createView, fsToUse, addedConfigs)) {
         // acquire additional configs
-        for (const additionalConfig of additionalConfigs) {
-          try {
-            messageEmitter.Message.Dispatch({
-              Channel: Channel.Verbose,
-              Text: `> Including configuration file '${additionalConfig}'`
-            });
-            addedConfigs.add(additionalConfig);
-            // merge config
+        try {
+          messageEmitter.Message.Dispatch({
+            Channel: Channel.Verbose,
+            Text: `> Including configuration file '${additionalConfig}'`
+          });
+          addedConfigs.add(additionalConfig);
+          // merge config
 
-            const inputView = messageEmitter.DataStore.GetReadThroughScope(fsToUse);
+          const inputView = messageEmitter.DataStore.GetReadThroughScope(fsToUse);
 
-            configurationFiles[additionalConfig] = (await inputView.ReadStrict(additionalConfig)).ReadData();
-            const blocks = await this.ParseCodeBlocks(
-              await inputView.ReadStrict(additionalConfig),
-              tmpView,
-              `require-config-${additionalConfig}`);
-            await addSegments(blocks);
-          } catch (e) {
-            messageEmitter.Message.Dispatch({
-              Channel: Channel.Fatal,
-              Text: `Failed to acquire 'require'd configuration '${additionalConfig}'`
-            });
-            throw e;
-          }
+          configurationFiles[additionalConfig] = (await inputView.ReadStrict(additionalConfig)).ReadData();
+          const blocks = await this.ParseCodeBlocks(
+            await inputView.ReadStrict(additionalConfig),
+            createView(),
+            `require-config-${additionalConfig}`);
+          await addSegments(blocks);
+        } catch (e) {
+          messageEmitter.Message.Dispatch({
+            Channel: Channel.Fatal,
+            Text: `Failed to acquire 'require'd configuration '${additionalConfig}'`
+          });
+          throw e;
         }
       }
     };

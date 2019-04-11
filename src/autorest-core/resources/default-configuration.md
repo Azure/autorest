@@ -12,29 +12,29 @@ openapi-type: arm
 # Load additional configurations.
 require:
   
-  - $(this-folder)/directives.md
-  - $(this-folder)/pipeline-merger.md
-  - $(this-folder)/pipeline-composer.md  
-  - $(this-folder)/pipeline-tree-shaker.md
-  - $(this-folder)/loader-openapi2.md
-  - $(this-folder)/loader-openapi3.md
-  - $(this-folder)/markdown-documentation.md
-  - $(this-folder)/miscellaneous.md
-  - $(this-folder)/patches.md
-  - $(this-folder)/plugin-powershell.md
-  - $(this-folder)/plugin-azureresourceschema.md
-  - $(this-folder)/plugin-csharp.md
-  - $(this-folder)/plugin-go.md
-  - $(this-folder)/plugin-java.md
-  - $(this-folder)/plugin-nodejs.md
-  - $(this-folder)/plugin-php.md
-  - $(this-folder)/plugin-python.md
-  - $(this-folder)/plugin-ruby.md
-  - $(this-folder)/plugin-typescript.md
-  - $(this-folder)/plugin-validators.md
+  - $(this-folder)directives.md
+  - $(this-folder)pipeline-merger.md
+  - $(this-folder)pipeline-composer.md  
+  - $(this-folder)pipeline-tree-shaker.md
+  - $(this-folder)loader-openapi2.md
+  - $(this-folder)loader-openapi3.md
+  - $(this-folder)markdown-documentation.md
+  - $(this-folder)miscellaneous.md
+  - $(this-folder)patches.md
+  - $(this-folder)plugin-powershell.md
+  - $(this-folder)plugin-azureresourceschema.md
+  - $(this-folder)plugin-csharp.md
+  - $(this-folder)plugin-go.md
+  - $(this-folder)plugin-java.md
+  - $(this-folder)plugin-nodejs.md
+  - $(this-folder)plugin-php.md
+  - $(this-folder)plugin-python.md
+  - $(this-folder)plugin-ruby.md
+  - $(this-folder)plugin-typescript.md
+  - $(this-folder)plugin-validators.md
 
-  - $(this-folder)/graphs.md
-  - $(this-folder)/help-configuration.md
+  - $(this-folder)graphs.md
+  - $(this-folder)help-configuration.md
 
 ```
 
