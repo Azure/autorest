@@ -360,15 +360,16 @@ export class ConfigurationView {
     while (!done) {
       // get a fresh copy of the view every time we start the loop.
       const view = configView();
-      for (const each of valuesOf<string>(view.config['require'])) {
-        done = false;
 
+      // if we make it thru the list, we're done.
+      done = true;
+      for (const each of valuesOf<string>(view.config['require'])) {
         if (ignoreFiles.has(each)) {
-          // if this is the last one, we're done
-          done = true;
           continue;
         }
 
+        // looks like we found one that we haven't handled yet.
+        done = false;
         ignoreFiles.add(each)
         yield view.ResolveAsPath(each);
         break;
@@ -378,15 +379,16 @@ export class ConfigurationView {
     while (!done) {
       // get a fresh copy of the view every time we start the loop.
       const view = configView();
-      for (const each of valuesOf<string>(view.config['try-require'])) {
-        done = false;
 
+      // if we make it thru the list, we're done.
+      done = true;
+      for (const each of valuesOf<string>(view.config['try-require'])) {
         if (ignoreFiles.has(each)) {
-          // if this is the last one, we're done
-          done = true;
           continue;
         }
 
+        // looks like we found one that we haven't handled yet.
+        done = false;
         ignoreFiles.add(each);
         const path = view.ResolveAsPath(each);
         if (await fileSystem.ReadFile(path)) {

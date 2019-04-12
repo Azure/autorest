@@ -134,7 +134,6 @@ async function showInstalledExtensions(): Promise<number> {
   let table = '';
   if (extensions.length > 0) {
     for (const extension of extensions) {
-
       table += `\n ${chalk.cyan((extension.name === corePackage ? 'core' : 'extension').padEnd(10))} ${chalk.cyan.bold(extension.name.padEnd(40))} ${chalk.cyan(extension.version.padEnd(12))} ${chalk.cyan(extension.location)}`;
     }
   }
