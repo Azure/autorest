@@ -18,7 +18,7 @@
       "mocha"
     ],
     "lib": [
-      "es2017"
+      "es2018"
     ],
     "experimentalDecorators": true,
     "newLine": "LF",
