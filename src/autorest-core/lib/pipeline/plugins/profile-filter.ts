@@ -363,7 +363,7 @@ function validateProfiles(profiles: Dictionary<Profile>) {
     }
   }
 
-  if (resourcesFound.size > 0) {
+  if (Object.keys(duplicatedResources).length > 0) {
     let errorMessage = 'The following resourceTypes are defined in multiple api-versions within the same providerNamespace in the same profile: ';
     for (const resourceType of items(duplicatedResources)) {
       errorMessage += `\n*${resourceType.key}:`;
