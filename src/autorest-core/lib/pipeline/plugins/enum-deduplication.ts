@@ -102,7 +102,7 @@ async function deduplicateEnums(config: ConfigurationView, input: DataSource, si
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
     const ed = new EnumDeduplicator(each);
-    result.push(await sink.WriteObject(each.Description, await ed.getOutput(), each.identity, each.artifactType, await ed.getSourceMappings()));
+    result.push(await sink.WriteObject('enum-deduplicated-oai3-doc', await ed.getOutput(), each.identity, 'enum-deduplicated-oai3', await ed.getSourceMappings()));
   }
   return new QuickDataSource(result, input.skip);
 }
