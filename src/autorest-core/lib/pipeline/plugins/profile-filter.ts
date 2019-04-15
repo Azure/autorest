@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit, ParseToAst, ConvertJsonx2Yaml, Stringify, StringifyAst } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit, ParseToAst, ConvertJsonx2Yaml, Stringify, StringifyAst, matches } from '@microsoft.azure/datastore';
 import { Dictionary, values, items } from '@microsoft.azure/linq';
 import * as oai from '@microsoft.azure/openapi';
 import { ConfigurationView } from '../../configuration';
@@ -33,7 +33,7 @@ interface OperationData {
 }
 
 export class ProfileFilter extends Transformer<any, oai.Model> {
-  filterTargets: Array<{ apiVersion: string; profile: string; pathRegex: RegExp }> = [];
+  filterTargets: Array<{ apiVersion: string; profile: string; pathRegex: RegExp; weight: number }> = [];
 
   // sets containing the UIDs of components already visited.
   // This is used to prevent circular references.
@@ -106,15 +106,16 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
         this.profilesApiVersions.push(target.apiVersion);
         const apiVersion = target.apiVersion;
         const profile = target.profile;
+        const weight = target.matches.length;
         const pathRegex = this.getPathRegex(target.matches);
-        this.filterTargets.push({ apiVersion, profile, pathRegex });
+        this.filterTargets.push({ apiVersion, profile, pathRegex, weight });
       }
 
       for (const target of operationTargets) {
         const apiVersion = target.apiVersion;
         const profile = target.profile;
         const pathRegex = new RegExp(`^${target.path}$`, `gi`);
-        this.filterTargets.push({ apiVersion, profile, pathRegex });
+        this.filterTargets.push({ apiVersion, profile, pathRegex, weight: 0 });
       }
 
     } else if (this.apiVersions.length > 0) {
@@ -183,19 +184,33 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   }
 
   visitPaths(targetParent: AnyObject, nodes: Iterable<Node>) {
+    // sort targets by priority
+    this.filterTargets.sort((a, b) => {
+      return (a.weight > b.weight) ? - 1 : (a.weight < b.weight) ? 1 : 0;
+    });
+
+    // map of '${profileName}:${value[x-ms-metadata].path}' -> '${path:uid} (no method included, like path:0.get, path:0.put, etc)'
+    const uniquePathPerProfile = new Dictionary<String>();
+
     // filter paths
-    for (const { value, key, pointer, children } of nodes) {
-      const path: string = value['x-ms-metadata'].path;
+    for (const { value, key: pathKey, pointer, children } of nodes) {
+      const path: string = value['x-ms-metadata'].path.replace(/\/*$/, '');
+      const keyWithNoMethod = pathKey.split('.')[0];
       const originalApiVersions: Array<string> = value['x-ms-metadata'].apiVersions;
       const profiles = new Dictionary<string>();
       const apiVersions = new Set<string>();
 
       let match = false;
-
       if (this.filterTargets.length > 0) {
         // Profile Mode
-        for (const each of this.filterTargets) {
-          if (path.replace(/\/*$/, '').match(each.pathRegex) && originalApiVersions.includes(each.apiVersion)) {
+        for (const each of values(this.filterTargets)) {
+          const id = `${each.profile}:${path}`;
+          if (path.match(each.pathRegex) && originalApiVersions.includes(each.apiVersion) && uniquePathPerProfile[id] === undefined) {
+            uniquePathPerProfile[id] = keyWithNoMethod;
+          }
+
+          if (path.match(each.pathRegex) && originalApiVersions.includes(each.apiVersion) && uniquePathPerProfile[id] === keyWithNoMethod) {
+            uniquePathPerProfile
             match = true;
             this.profilesReferenced.add(each.profile);
             profiles[each.profile] = each.apiVersion;
@@ -221,7 +236,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
           originalLocations: value['x-ms-metadata'].originalLocations
         };
 
-        this.visitPath(this.newObject(targetParent, key, pointer), children, metadata);
+        this.visitPath(this.newObject(targetParent, pathKey, pointer), children, metadata);
       }
     }
 
@@ -307,6 +322,7 @@ async function filter(config: ConfigurationView, input: DataSource, sink: DataSi
 
   for (const each of inputs) {
     const allProfileDefinitions = config.GetEntry('profiles');
+    validateProfiles(allProfileDefinitions);
     const configApiVersion = config.GetEntry('api-version');
     const apiVersions: Array<string> = configApiVersion ? (typeof (configApiVersion) === 'string') ? [configApiVersion] : configApiVersion : [];
     const profilesRequested = !Array.isArray(config.GetEntry('profile')) ? [config.GetEntry('profile')] : config.GetEntry('profile');
@@ -319,6 +335,53 @@ async function filter(config: ConfigurationView, input: DataSource, sink: DataSi
   }
 
   return new QuickDataSource(result, input.skip);
+}
+
+function validateProfiles(profiles: Dictionary<Profile>) {
+  // A resourceType shouldn't be included in two apiversions within the same provider namespace in the same profile.
+  const duplicatedResources = new Dictionary<Array<string>>();
+  const resourcesFound = new Set<string>();
+  for (const profile of items(profiles)) {
+    for (const namespace of items(profile.value.resources)) {
+      for (const apiVersion of items(namespace.value)) {
+        for (const resource of apiVersion.value) {
+          const uid = `profile:${profile.key.toLowerCase()}/providerNamespace:${namespace.key.toLowerCase()}/resourceType:${resource.toLowerCase()}`
+          if (!resourcesFound.has(uid)) {
+            resourcesFound.add(uid);
+          } else {
+            if (duplicatedResources[uid] === undefined) {
+              duplicatedResources[uid] = [];
+            }
+
+            duplicatedResources[uid].push(apiVersion.key);
+          }
+        }
+      }
+    }
+  }
+
+  if (resourcesFound.size > 0) {
+    let errorMessage = 'The following resourceTypes are defined in multiple api-versions within the same providerNamespace within the same profile: ';
+    for (const resourceType of items(duplicatedResources)) {
+      errorMessage += `\n*${resourceType.key}:`
+      for (const duplicateEntry of resourceType.value) {
+        errorMessage += `\n ---> conflicting api-versions: ${duplicateEntry}`
+      }
+    }
+    throw Error(errorMessage);
+  }
+
+}
+
+interface Profile {
+  resources: {
+    [providerNamespace: string]: {
+      [apiVersion: string]: Array<string>;
+    };
+  },
+  operations: {
+    [path: string]: string;
+  }
 }
 
 /* @internal */
