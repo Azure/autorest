@@ -338,16 +338,16 @@ async function filter(config: ConfigurationView, input: DataSource, sink: DataSi
 }
 
 function validateProfiles(profiles: Dictionary<Profile>) {
-  // A resourceTypr shouldn't be included in two apiversions in the same profile, and within the same provider namespace.
+  // A resourceType shouldn't be included in two apiversions within the same provider namespace in the same profile.
   const duplicatedResources = new Dictionary<Array<string>>();
-  const resourcesFound = new Dictionary<boolean>();
+  const resourcesFound = new Set<string>();
   for (const profile of items(profiles)) {
     for (const namespace of items(profile.value.resources)) {
       for (const apiVersion of items(namespace.value)) {
         for (const resource of apiVersion.value) {
           const uid = `profile:${profile.key.toLowerCase()}/providerNamespace:${namespace.key.toLowerCase()}/resourceType:${resource.toLowerCase()}`
-          if (!resourcesFound[uid]) {
-            resourcesFound[uid] = true;
+          if (!resourcesFound.has(uid)) {
+            resourcesFound.add(uid);
           } else {
             if (duplicatedResources[uid] === undefined) {
               duplicatedResources[uid] = [];
@@ -360,7 +360,7 @@ function validateProfiles(profiles: Dictionary<Profile>) {
     }
   }
 
-  if (Object.keys(duplicatedResources).length > 0) {
+  if (resourcesFound.size > 0) {
     let errorMessage = 'The following resourceTypes are defined in multiple api-versions within the same providerNamespace within the same profile: ';
     for (const resourceType of items(duplicatedResources)) {
       errorMessage += `\n*${resourceType.key}:`
