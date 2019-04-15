@@ -322,11 +322,14 @@ async function filter(config: ConfigurationView, input: DataSource, sink: DataSi
 
   for (const each of inputs) {
     const allProfileDefinitions = config.GetEntry('profiles');
-    validateProfiles(allProfileDefinitions);
     const configApiVersion = config.GetEntry('api-version');
     const apiVersions: Array<string> = configApiVersion ? (typeof (configApiVersion) === 'string') ? [configApiVersion] : configApiVersion : [];
     const profilesRequested = !Array.isArray(config.GetEntry('profile')) ? [config.GetEntry('profile')] : config.GetEntry('profile');
     if (profilesRequested.length > 0 || apiVersions.length > 0) {
+      if (profilesRequested.length > 0) {
+        validateProfiles(allProfileDefinitions);
+      }
+
       const processor = new ProfileFilter(each, allProfileDefinitions, profilesRequested, apiVersions);
       result.push(await sink.WriteObject('profile-filtered-oai-doc...', await processor.getOutput(), each.identity, 'profile-filtered-oai3', await processor.getSourceMappings()));
     } else {
@@ -361,16 +364,15 @@ function validateProfiles(profiles: Dictionary<Profile>) {
   }
 
   if (resourcesFound.size > 0) {
-    let errorMessage = 'The following resourceTypes are defined in multiple api-versions within the same providerNamespace within the same profile: ';
+    let errorMessage = 'The following resourceTypes are defined in multiple api-versions within the same providerNamespace in the same profile: ';
     for (const resourceType of items(duplicatedResources)) {
-      errorMessage += `\n*${resourceType.key}:`
+      errorMessage += `\n*${resourceType.key}:`;
       for (const duplicateEntry of resourceType.value) {
-        errorMessage += `\n ---> conflicting api-versions: ${duplicateEntry}`
+        errorMessage += `\n ---> conflicting api-versions: ${duplicateEntry}`;
       }
     }
     throw Error(errorMessage);
   }
-
 }
 
 interface Profile {
@@ -378,10 +380,10 @@ interface Profile {
     [providerNamespace: string]: {
       [apiVersion: string]: Array<string>;
     };
-  },
+  };
   operations: {
     [path: string]: string;
-  }
+  };
 }
 
 /* @internal */
