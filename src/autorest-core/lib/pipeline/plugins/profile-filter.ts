@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit, ParseToAst, ConvertJsonx2Yaml, Stringify, StringifyAst, matches } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
 import { Dictionary, values, items } from '@microsoft.azure/linq';
 import * as oai from '@microsoft.azure/openapi';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
-import { toSemver, maximum } from '@microsoft.azure/codegen';
+import { maximum } from '@microsoft.azure/codegen';
 
 type componentType = 'schemas' | 'responses' | 'parameters' | 'examples' | 'requestBodies' | 'headers' | 'securitySchemes' | 'links' | 'callbacks';
 
