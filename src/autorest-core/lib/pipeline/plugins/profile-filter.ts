@@ -114,7 +114,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
       for (const target of operationTargets) {
         const apiVersion = target.apiVersion;
         const profile = target.profile;
-        const pathRegex = new RegExp(`^${target.path}$`, `gi`);
+        const pathRegex = new RegExp(`^${target.path.replace(/[\[\$\.\?\(\)]/g, '\\$&')}$`, `gi`);
         this.filterTargets.push({ apiVersion, profile, pathRegex, weight: 0 });
       }
 
