@@ -16,7 +16,7 @@ async function quickCheck(config: ConfigurationView, input: DataSource, sink: Da
       const schema = <AnyObject>value;
       const name = value['x-ms-metadata'].name.toLowerCase();
 
-      if ((schema.type === 'string' || schema.type === undefined) && schema.enum) {
+      if ((schema.type === 'string' || schema.type === undefined) && schema.enum && schema.enum.length > 1) {
         // it's an enum
         if (!enums.has(name)) {
           enums.set(name, []);
