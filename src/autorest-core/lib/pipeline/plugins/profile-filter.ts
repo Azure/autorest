@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
-import { Dictionary, values, items } from '@microsoft.azure/linq';
+import { maximum } from '@microsoft.azure/codegen';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, ProxyObject, QuickDataSource, Transformer, visit } from '@microsoft.azure/datastore';
+import { Dictionary, items, values } from '@microsoft.azure/linq';
 import * as oai from '@microsoft.azure/openapi';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
-import { maximum } from '@microsoft.azure/codegen';
 
 type componentType = 'schemas' | 'responses' | 'parameters' | 'examples' | 'requestBodies' | 'headers' | 'securitySchemes' | 'links' | 'callbacks';
 
@@ -60,6 +60,9 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
     links: new Set<string>(),
     callbacks: new Set<string>()
   };
+
+  // This holds allOf, anyOf, oneOf, not references
+  private polymorphicReferences = new Dictionary<Set<string>>();
 
   private components: any;
   private profilesApiVersions: Array<string> = [];
@@ -122,8 +125,86 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
       this.maxApiVersion = maximum([this.maxApiVersion, maximum(this.apiVersions)]);
     }
 
+    // visit schemas and extract polymorphic references.
+    // Since the input is a tree-shaken document, anyOf, allOf, oneOf and not
+    // should be superficial fields in the schema (i.e. not nested)
+    if (this.components && this.components.schemas) {
+      for (const { value: schemaValue, key: schemaKey } of visit(this.components.schemas)) {
+        for (const { value: fieldValue, key: fieldName } of visit(schemaValue)) {
+          switch (fieldName) {
+            case 'anyOf':
+            case 'allOf':
+            case 'oneOf':
+              for (const { value } of visit(fieldValue)) {
+                if (value.$ref) {
+                  const schemaUid = value.$ref.split('/')[value.$ref.split('/').length - 1];
+                  if (this.polymorphicReferences[schemaUid] === undefined) {
+                    this.polymorphicReferences[schemaUid] = new Set<string>();
+                  }
+
+                  this.polymorphicReferences[schemaUid].add(schemaKey);
+                }
+              }
+              break;
+            case 'not':
+              if (fieldValue.$ref) {
+                const schemaUid = fieldValue.$ref.split('/')[fieldValue.$ref.split('/').length - 1]
+                if (this.polymorphicReferences[schemaUid] === undefined) {
+                  this.polymorphicReferences[schemaUid] = new Set<string>();
+                }
+
+                this.polymorphicReferences[schemaUid].add(schemaKey);
+              }
+              break;
+            default:
+              // nothing to do
+              break;
+          }
+        }
+      }
+    }
+
+    // crawl paths and keep everything referenced by them.
     const paths = this.newObject(this.generated, 'paths', '/paths');
     this.visitPaths(paths, visit(currentDoc['paths']));
+
+    // visit schemas that were marked to be kept
+    if (this.components && this.components.schemas) {
+      // create queue of stuff to check
+      const polyReferencedSchemasToCheck = new Array<string>();
+      const polyReferencedSchemasChecked = new Set<string>();
+      const prevSchemasToKeep = new Set<string>();
+      for (const schemaUid of this.componentsToKeep.schemas) {
+        // populate set and queue
+        prevSchemasToKeep.add(schemaUid);
+        if (this.polymorphicReferences[schemaUid] !== undefined) {
+          polyReferencedSchemasToCheck.push(schemaUid);
+        }
+      }
+
+      while (polyReferencedSchemasToCheck.length > 0) {
+        const referencedSchemaUid = polyReferencedSchemasToCheck.pop();
+        if (referencedSchemaUid !== undefined) {
+          polyReferencedSchemasChecked.add(referencedSchemaUid);
+          for (const polyRef of this.polymorphicReferences[referencedSchemaUid].values()) {
+            this.componentsToKeep.schemas.add(polyRef);
+            this.crawlObject(this.components.schemas[polyRef]);
+            if (prevSchemasToKeep.size !== this.componentsToKeep.schemas.size) {
+              const difference = new Set(
+                [...this.componentsToKeep.schemas].filter(x => !prevSchemasToKeep.has(x))
+              );
+
+              for (const newSchemaUid of difference) {
+                prevSchemasToKeep.add(newSchemaUid);
+                if (this.polymorphicReferences[newSchemaUid] !== undefined && !polyReferencedSchemasChecked.has(referencedSchemaUid)) {
+                  polyReferencedSchemasToCheck.push(newSchemaUid);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   public async process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {

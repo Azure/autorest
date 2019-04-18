@@ -14,9 +14,9 @@ async function quickCheck(config: ConfigurationView, input: DataSource, sink: Da
     // check to see if there are models with the same name
     for (const { key, value } of items(oai.components.schemas)) {
       const schema = <AnyObject>value;
-      const name = value['x-ms-metadata'].name;
+      const name = value['x-ms-metadata'].name.toLowerCase();
 
-      if (schema.type === 'string' && schema.enum) {
+      if ((schema.type === 'string' || schema.type === undefined) && schema.enum) {
         // it's an enum
         if (!enums.has(name)) {
           enums.set(name, []);
