@@ -197,7 +197,7 @@ input-file:
   - ./2015-01-02/foo.json   # referenced documents can be JSON, YAML or Markdown.
   - ./2016-02-03/bar.md
 ```
-Once a file is loaded, it can beereferred to in configuration by it's file name or instead by it's OpenAPI `title` value. (You can think of this as the `namespace` for the OpenAPI document)
+Once a file is loaded, it can be referred to in configuration by it's file name or instead by it's OpenAPI `title` value. (You can think of this as the `namespace` for the OpenAPI document)
 
 ## Configuration sections
 

@@ -14,7 +14,7 @@ By default, AutoRest's PowerShell Generator will place all the generated files u
   - /runtime
 - [/obj](#obj)
 - [/test](#test)
-- [/node-modules](#node-modules) (comming soon)
+- [/node-modules](#node-modules) (coming soon)
 - [.gitignore](#gitignore) 
 - [\<format-file>.format.ps1xml](#format-fileformatps1xml)
 - [\<cs-project-file>.csproj](#cs-project-filecsproj)
@@ -22,12 +22,12 @@ By default, AutoRest's PowerShell Generator will place all the generated files u
 - [\<module-file>.psm1](#module-filepsm1)
 - [build-module.ps1](#build-moduleps1)
 - [generate-help.ps1](#generate-helpps1)
-- how-to<span></span>.md (#how-tpmd) (comming soon)
+- how-to<span></span>.md (#how-tpmd) (coming soon)
 - [license.txt](#licensetxt)
 - [pack-module.ps1](#pack-moduleps1) 
 - [readme.md](#readmemd)
 - [test-module.ps1](#test-moduleps1)
-- [regen-module.ps1](#regen-moduleps1) (comming soon)
+- [regen-module.ps1](#regen-moduleps1) (coming soon)
 - [types.ps1xml](#typesps1xml) (coming soon)
 - [dll-help.ps1xml](#dll-helpps1xml) (coming soon)
 
@@ -48,7 +48,7 @@ Contains customized cmdlets.
 
 ### /docs
 
-Contains miscellanous documents from the code. For example, cmdlet documentation, code generation instructions, breaking-changes, etc.
+Contains miscellaneous documents from the code. For example, cmdlet documentation, code generation instructions, breaking-changes, etc.
 
 ### /exports
 
