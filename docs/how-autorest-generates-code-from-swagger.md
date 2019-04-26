@@ -74,7 +74,7 @@ To represent `byte` arrays in the generated code, the property of the OpenAPI de
 AutoRest generates `DateTime` typed properties in generated C# code for OpenAPI properties that have `string` as the type and `date-time` as the format. Note: it's possible to generate these properties as `DateTimeOffset` in C# when `-useDateTimeOffset` parameter is passed via command line. 
 
 - **`int` / `long`**
-Both `int` and `long` proeprties in the generated code correspond to `integer` types in OpenAPI properties. If the format of the OpenAPI property is `int32`, `int` will be generated; if the format is `int64`, `long` will be generated. If the format field of the OpenAPI property is not set, AutoRest use  format `int32`.
+Both `int` and `long` properties in the generated code correspond to `integer` types in OpenAPI properties. If the format of the OpenAPI property is `int32`, `int` will be generated; if the format is `int64`, `long` will be generated. If the format field of the OpenAPI property is not set, AutoRest use  format `int32`.
 
 **Example:**
 ```json
@@ -625,7 +625,7 @@ public async Task<HttpOperationResponse<Product>> ListWithOperationResponseAsync
 
 > Note that parameters that have field `in` as path are always required and the `required` field will be ignored.
 
-Properties in OpenAPI Schema do not contain a required field. Instead, Each definition schema can provide a `'required'` array that specifies which proeprties are required. An example is shown below.
+Properties in OpenAPI Schema do not contain a required field. Instead, Each definition schema can provide a `'required'` array that specifies which properties are required. An example is shown below.
 ```json
 "Product": {
   "required": [
