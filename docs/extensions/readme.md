@@ -570,7 +570,7 @@ parameters | [Array of Parameter Objects](https://github.com/OAI/OpenAPI-Specifi
     }
 ```
 - Using explicit parameters and specifying the positionInOperation and schemePrefix.
-   - This means that accountName will be the first required parameter in all the methods and the user is expected to provide a url (protocol + accountName), since "useSchemePrfix" is set to false.
+   - This means that accountName will be the first required parameter in all the methods and the user is expected to provide a url (protocol + accountName), since "useSchemePrefix" is set to false.
 ```json5
 "x-ms-parameterized-host": {
     "hostTemplate": "{accountName}.mystaticsuffix.com",
