@@ -48,7 +48,7 @@ Contains customized cmdlets.
 
 ### /docs
 
-Contains miscellanous documents from the code. For example, cmdlet documentation, code generation instructions, breaking-changes, etc.
+Contains miscellaneous documents from the code. For example, cmdlet documentation, code generation instructions, breaking-changes, etc.
 
 ### /exports
 
