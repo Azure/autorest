@@ -83,7 +83,7 @@ The built-in directives for PowerShell consist of three parts:
       - `model-name`
     
 
-- Actions: denoted by the fields `set`, `hide`, `remove` and `remove-alias`. These fields contain the actions to be performed in the selected objects.
+- Actions: denoted by the fields `set`, `hide`, `remove` and `clear-alias`. These fields contain the actions to be performed in the selected objects.
 
 #### Terminology Notes
 
@@ -376,12 +376,12 @@ In some instances names can have conflicts with the enum-value-names that get ge
 
 #### Alias Removal
 
-If the option `--sanitize-names` or `--azure` is provided, AutoRest will make renames to cmdlets and parameters to remove redundancies. For example in the command `Get-VirtualMachine`, the parameter `VirtualMachineName` will be renamed to `Name`, and aliased to VirtualMachineName. It is possible to eliminate that alias by providing the action `remove-alias: true`:
+If the option `--sanitize-names` or `--azure` is provided, AutoRest will make renames to cmdlets and parameters to remove redundancies. For example in the command `Get-VirtualMachine`, the parameter `VirtualMachineName` will be renamed to `Name`, and aliased to VirtualMachineName. It is possible to eliminate that alias by providing the action `clear-alias: true`:
 
 ```yaml false
 - where:
       parameter-name: ResourceGroupName
-  remove-alias: true
+  clear-alias: true
 ```
 
 The same can be done with cmdlets.
