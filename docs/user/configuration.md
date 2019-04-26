@@ -65,7 +65,7 @@ AutoRest identifies a markdown file as a literate configuration file when it con
 ~~~ markdown
 # My API 
 
-This file contains the configuratuion for generating My API from the OpenAPI specification.
+This file contains the configuration for generating My API from the OpenAPI specification.
 
 > see https://aka.ms/autorest
 

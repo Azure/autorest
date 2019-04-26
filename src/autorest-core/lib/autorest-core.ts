@@ -172,7 +172,7 @@ export class AutoRest extends EventEmitter {
 export async function IdentifyDocument(content: string): Promise<DocumentType> {
   if (content) {
 
-    // check for configuratuion 
+    // check for configuration 
     if (await IsConfigurationDocument(content)) {
       return DocumentType.LiterateConfiguration;
     }
