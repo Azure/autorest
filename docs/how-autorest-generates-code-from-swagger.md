@@ -535,7 +535,7 @@ The following example will generate a type `PetStyle`.
 ```
 
 - **Schemas in sequences and dictionaries**
-*A schema defined in the 'items' proeprty of a sequence or the 'additionalProperties' value of a dictionary.* Model types corresponding to Items of a sequence are named using the parent class's name concatenated with "Item". Model types corresponding to the 'additinalPropeties' value of a dictionary are named using the parent class's name concatenated with "Value".
+*A schema defined in the 'items' property of a sequence or the 'additionalProperties' value of a dictionary.* Model types corresponding to Items of a sequence are named using the parent class's name concatenated with "Item". Model types corresponding to the 'additinalPropeties' value of a dictionary are named using the parent class's name concatenated with "Value".
 The following example will generate types `PetFavFoodItem` and `PetFavFoodBrandValue`.
 ```json
 "Pet": {
