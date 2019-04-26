@@ -167,7 +167,7 @@ public partial class Pet
 ```
 
 ### Dictionaries
-AutoRest generates dictionaries (or hash maps in some contexts) using `additionalProperites` from [JSON-Schema Draft 4][JSON-schema-validation-properties]. The additionalProperties element should specify the OpenAPI schema of the values in the dictionary . The keys of the generated dictionary will be of type `string`.
+AutoRest generates dictionaries (or hash maps in some contexts) using `additionalProperties` from [JSON-Schema Draft 4][JSON-schema-validation-properties]. The additionalProperties element should specify the OpenAPI schema of the values in the dictionary . The keys of the generated dictionary will be of type `string`.
 
 There are two basic patterns when generating dictionaries in AutoRest. 
 
