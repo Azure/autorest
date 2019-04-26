@@ -6,21 +6,90 @@ There are a couple of PowerShell specific things you may want to do:
 
 ## Tweak The Way It Generates Cmdlets
 
-To change the way AutoRest generates cmdlets you can use one of the built-in [directives outlined below](#Built-in-directives-for-PowerShell), or you can [declare your own directives](https://github.com/Azure/autorest/blob/master/src/autorest-core/resources/default-configuration.md#directives). You may specify the directives you want to use at the top-level of the Literate Configuration document. For example:
+To change the way AutoRest generates cmdlets you can:
+- [use the built-in directives outlined below](#Built-In-Directives)
+- [declare your own directives](https://github.com/Azure/autorest/blob/master/src/autorest-core/resources/default-configuration.md#directives)
+- [automatically sanitize parameter and cmdlet names](#name-sanitization)
 
-```yaml $false
-directive:
-  - where:
-      parameter-name: Foo
-    set:
-      parameter-name: Bar
-```
+
+
+### Built-In Directives
+
+- [Structure and Terminology](#Structure-And-Terminology)
+- [Built-In Directives Scenarios](#Built-In-Directives-Scenarios)
+
+### Structure And Terminology
+The built-in directives for PowerShell consist of three parts: 
+
+- Selector: denoted by the field `select`, contains the object-type where the modification is taking place. It can be either:
+  - `command` 
+  - `parameter` 
+  - `model`
+  - `property` 
+  - `enum`
+
+  **Note**: Depending of the filters, AutoRest infers the type of object that needs to be selected. For example:
+
+  ```yaml $false
+    # This selects the parameters 
+    # ---> where the parameter-name is VirtualMachine, and the cmdlet verb is Get
+    # ---> sets the parameter alias to VM
+    directive:
+      - where:
+          parameter-name: Foo
+          verb: Get
+        set: 
+          alias: Bar
+  ```
+
+  A reason to provide the selector would be to change the scope of selection. For example, this would select a :
+
+  ```yaml $false
+    # This selects the cmdlets 
+    #  ---> where the verb is Get, and where a parameter called Foo exists
+    #  ---> sets the parameter alias to VM
+    directive:
+      - select: command
+        where:
+          parameter-name: VirtualMachine
+          verb: Get
+        set: 
+          alias: Get-VM
+  ```
+
+
+- Filter: denoted by the field `where`, contains the criteria to select the object.
+  - A `command` can be filtered by:
+    - `verb`
+    - `subject`
+    - `subject-prefix`
+    - `parameter-name`
+  - A `parameter` can be filtered by:
+    - `parameter-name`
+    
+    and, optionally by:
+    - `verb`
+    - `subject`
+    - `subject-prefix`
+    
+    from the cmdlet it belongs to.
+  - A `model` can be filtered by:
+    - `model-name`
+    - `property-name`
+  - A `model` can be filtered by:
+    - `property-name`
+    
+    and, optionally by:
+      - `model-name`
+    
+
+- Actions: denoted by the fields `set`, `hide`, `remove` and `remove-alias`. These fields contain the actions to be performed in the selected objects.
 
 #### Terminology Notes
 
-#### prefix, subject-prefix and subject 
+#### - prefix, subject-prefix and subject 
 
-To increase the granularity of cmdlet-tweaking, we divided the cmdlet NOUN into three parts, namely, prefix, subject-prefix and subject:
+To increase the granularity of cmdlet-tweaking, we divided the cmdlet NOUN into three parts: prefix, subject-prefix and subject. Where:
 
 [verb]-[noun] <-> [verb]-[prefix][subject-prefix][subject]
 
@@ -34,24 +103,27 @@ AutoRest allows you to:
 - Modify the subject
   - per-cmdlet: use ```subject: <value>```  inside a directive.
 
-#### variant 
+#### - variant 
 
 A variant is the same thing as the parameter-set name.
 
-#### hidden cmdlet
+#### - hidden cmdlet
 
-When a cmdlet is set to ```hidden: true```, the cmdlet will be generated; however, it won't be exported at module-export time.
+When a cmdlet is set to ```hide: true```, the cmdlet will be generated; however, it won't be exported at module-export time.
 
-### Built-In Directives For PowerShell
+### Built-In Directives Scenarios 
 
 The following directives cover the most common tweaking scenarios for cmdlet generation:
 
 - [Cmdlet Rename](#Cmdlet-Rename)
+- [Cmdlet Aliasing](#Cmdlet-Aliasing)
 - [Cmdlet Suppression (Removal and Hiding)](#Cmdlet-Suppression)
 - [Parameter Rename](#Parameter-Rename)
+- [Parameter Aliasing](#Parameter-Aliasing)
 - [Parameter Description](#Parameter-Description)
 - [Model Rename](#Model-Rename)
-- [Property Rename](#Property-Rename)
+- [Enum Value Rename](#Property-Rename)
+- [Alias Removal](#Alias-Removal)
 
 Note: If you have feedback about these directives, or you would like additional configurations, feel free to open an issue at https://github.com/Azure/autorest.powershell. 
 
@@ -84,6 +156,47 @@ directive:
             subject: Config$2
 ```
 
+Also, it is possible to select based in a parameter-name. However, to select by parameter, the selector `command` must be provided. For example,
+
+```yaml $false
+# This will rename the cmdlet 'Get-VirtualMachine' (Parameter Set: XYZParamSet) to 'Get-VM'
+
+directive:
+  - select: command
+    where: 
+      subject: VirtualMachine
+      verb: Get
+      parameter-name: Id
+    set: 
+      subject: VM       
+```
+
+#### Cmdlet Aliasing
+
+To alias a cmdlet, select the cmdlet and provide an alias:
+
+```yaml $false
+directive:
+  - where: 
+      verb: Get
+      subject: VirtualMachine
+    set: 
+      alias: Get-VM       
+```
+
+Or, multiple aliases:
+
+```yaml $false
+directive:
+  - where: 
+      verb: Get
+      subject: VirtualMachine
+    set: 
+      alias: 
+        - Get-VMachine
+        - Get-VM     
+```
+
 #### Cmdlet Suppression 
 
 For cmdlet suppression you can either:
@@ -94,15 +207,14 @@ Note: If a cmdlet is hidden, it still can be be used by custom cmdlets.
 
 ##### Cmdlet Hiding (Exportation Suppression)
 
-To hide a cmdlet, you need to provide ```subject-prefix```, ```subject```, ```verb```, and/or ```variant``` of the cmdlet; then set ```hidden: true``` . For example:
+To hide a cmdlet, you need to provide ```subject-prefix```, ```subject```, ```verb```, and/or ```variant``` of the cmdlet --> then set ```hide: true``` . For example:
 
 ```yaml false
 directive:
   - where: 
       verb: Update
       subject: Resource
-    set: 
-      hidden: true
+    hide: true
 ```
 
 The following is a Regex example:
@@ -111,13 +223,12 @@ The following is a Regex example:
 directive:
   - where: 
       subject: PetService.*
-    set: 
-      hidden: true
+    hide: true
 ```
 
 ##### Cmdlet Removal
 
-To remove a cmdlet, you need to provide the ```subject-prefix```, ```subject```, ```verb```, and/or ```variant``` of the cmdlet; then, set ```remove: true```. For example:
+To remove a cmdlet, you need to provide the ```subject-prefix```, ```subject```, ```verb```, and/or ```variant``` of the cmdlet ---> then, set ```remove: true```. For example:
 
 ```yaml false
 directive:
@@ -162,6 +273,30 @@ directive:
       parameter-name: (.*)Name$
     set: 
       parameter-name: Name
+```
+
+#### Parameter Aliasing
+
+To alias a parameter, select the parameter and provide an alias:
+
+```yaml $false
+directive:
+  - where: 
+      parameter-name: VirtualMachine
+    set: 
+      alias: VM       
+```
+
+Or, multiple aliases:
+
+```yaml $false
+directive:
+  - where: 
+      parameter-name: VirtualMachine
+    set: 
+      alias: 
+        - VM
+        - VMachine    
 ```
 
 #### Parameter Description
@@ -226,6 +361,38 @@ directive:
     set:  
       property-name: Name
 ```
+
+#### Enum Value Rename
+
+In some instances names can have conflicts with the enum-value-names that get generated for Enum fields. In this case, we can rename the name of the value. For example:
+
+```yaml false
+- where:
+      enum-name: ComparisonOperationType
+      enum-value-name: Equals
+    set:
+      enum-value-name: Equal 
+```
+
+#### Alias Removal
+
+If the option `--sanitize-names` or `--azure` is provided, AutoRest will make renames to cmdlets and parameters to remove redundancies. For example in the command `Get-VirtualMachine`, the parameter `VirtualMachineName` will be renamed to `Name`, and aliased to VirtualMachineName. It is possible to eliminate that alias by providing the action `remove-alias: true`:
+
+```yaml false
+- where:
+      parameter-name: ResourceGroupName
+  remove-alias: true
+```
+
+The same can be done with cmdlets.
+
+### Name Sanitization
+
+Sometimes names from cmdlets or parameters contain redundant information. For example:
+- A parameter called `VirtualMachineName` from the cmdlet `Get-VirtualMachine` is somewhat redundant. A better name for such parameter could be just `Name`. 
+- A cmdlet that has a verb `Get`, prefix `ContainerService` and subject `ContainerService`. The resulting cmdlet will then be `Get-ContainerServiceContainerService`. A better name for such cmdlet could just be `Get-ContainerService`.
+
+For these cases you can provide the option `sanitize-names: true` in the configuration file or `--sanitize-names` from the command line. 
 
 ## Control The Module Output Folder Layout
 
