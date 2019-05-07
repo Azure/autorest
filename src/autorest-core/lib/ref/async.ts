@@ -7,7 +7,7 @@ import * as fs from "fs";
 export function mkdir(path: string | Buffer): Promise<void> {
   return new Promise((r, j) => fs.mkdir(path, (err) => err ? j(err) : r()))
 }
-export const exists: (path: string | Buffer) => Promise<boolean> = path => new Promise<boolean>((r, j) => fs.stat(path, (err: NodeJS.ErrnoException, stats: fs.Stats) => err ? r(false) : r(true)));
+export const exists: (path: string | Buffer) => Promise<boolean> = path => new Promise<boolean>((r, j) => fs.stat(path, (err: NodeJS.ErrnoException | null, stats: fs.Stats) => err ? r(false) : r(true)));
 
 export function readdir(path: string): Promise<Array<string>> {
   return new Promise((r, j) => fs.readdir(path, (err, files) => err ? j(err) : r(files)));

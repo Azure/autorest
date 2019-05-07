@@ -25,19 +25,19 @@ export class AutoRest extends EventEmitter {
   /**
    * Event: Signals when a Process() finishes.
    */
-  @EventEmitter.Event public Finished: IEvent<AutoRest, boolean | Error>;
+  @EventEmitter.Event public Finished!: IEvent<AutoRest, boolean | Error>;
   /**
    * Event: Signals when a File is generated
    */
-  @EventEmitter.Event public GeneratedFile: IEvent<AutoRest, Artifact>;
+  @EventEmitter.Event public GeneratedFile!: IEvent<AutoRest, Artifact>;
   /**
    * Event: Signals when a Folder is supposed to be cleared
    */
-  @EventEmitter.Event public ClearFolder: IEvent<AutoRest, string>;
+  @EventEmitter.Event public ClearFolder!: IEvent<AutoRest, string>;
   /**
    * Event: Signals when a message is generated
    */
-  @EventEmitter.Event public Message: IEvent<AutoRest, Message>;
+  @EventEmitter.Event public Message!: IEvent<AutoRest, Message>;
 
   private _configurations = new Array<any>();
   private _view: ConfigurationView | undefined;

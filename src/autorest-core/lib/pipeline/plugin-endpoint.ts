@@ -8,15 +8,13 @@ import { EventEmitter } from "../events";
 import { fork, ChildProcess } from "child_process";
 import { Mappings, RawSourceMap, SmartPosition } from "../ref/source-map";
 import { CancellationToken } from "../ref/cancellation";
-import { createMessageConnection, MessageConnection } from "../ref/jsonrpc";
+import { createMessageConnection } from "../ref/jsonrpc";
 import { DataHandle, DataSink, DataSource } from '../data-store/data-store';
 import { IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestPluginInitiator } from "./plugin-api";
 import { Exception } from "../exception";
 import { Message, Channel, ArtifactMessage } from "../message";
 import { Readable, Writable } from "stream";
 import { Artifact } from "../artifact";
-import { RealFileSystem } from "../file-system";
-import { CreateFolderUri } from "@microsoft.azure/async-io";
 import { ConfigurationView } from "../../main";
 import { EnsureIsFolderUri } from "../ref/uri";
 

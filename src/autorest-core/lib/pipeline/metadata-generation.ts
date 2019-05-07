@@ -23,7 +23,7 @@ export function GetPlugin_ReflectApiVersion(): PipelinePlugin {
       for (const path of Object.keys(paths)) {
         const namespace: string = (/\/Microsoft\.(.*?)\//i.exec(path) || [])[1] || title;
         const groups = Object.values(paths[path])
-          .map(x => x.operationId).filter(x => !!x)
+          .map(x => (<any>x).operationId).filter(x => !!x)
           .map(x => x.split('_')[0]).filter(x => !!x);
         for (const group of groups) {
           data.push({ namespace, group, apiVersion });

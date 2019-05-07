@@ -65,7 +65,7 @@ export function GetPlugin_ComponentModifier(): PipelinePlugin {
       const operationsTarget1 = o["paths"] = o["paths"] || {};
       const operationsTarget2 = o["x-ms-paths"] = o["x-ms-paths"] || {};
       const getOperationWithId = (operationId: string): { get: () => any, set: (x: any) => void } | null => {
-        for (const path of [...Object.values(operationsTarget1), ...Object.values(operationsTarget2)]) {
+        for (const path of <any>[...Object.values(operationsTarget1), ...Object.values(operationsTarget2)]) {
           for (const method of Object.keys(path)) {
             if (path[method].operationId === operationId) {
               return { get: () => path[method], set: x => path[method] = x };
