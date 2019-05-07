@@ -149,15 +149,15 @@ export class MessageEmitter extends EventEmitter {
   /**
   * Event: Signals when a File is generated
   */
-  @EventEmitter.Event public GeneratedFile: IEvent<MessageEmitter, Artifact>;
+  @EventEmitter.Event public GeneratedFile!: IEvent<MessageEmitter, Artifact>;
   /**
    * Event: Signals when a Folder is supposed to be cleared
    */
-  @EventEmitter.Event public ClearFolder: IEvent<MessageEmitter, string>;
+  @EventEmitter.Event public ClearFolder!: IEvent<MessageEmitter, string>;
   /**
    * Event: Signals when a message is generated
    */
-  @EventEmitter.Event public Message: IEvent<MessageEmitter, Message>;
+  @EventEmitter.Event public Message!: IEvent<MessageEmitter, Message>;
   private cancellationTokenSource = new CancellationTokenSource();
 
   constructor() {
@@ -279,7 +279,7 @@ export class ConfigurationView {
 
     return new Proxy<ConfigurationView>(this, {
       get: (target, property) => {
-        return property in target.config ? (<any>target.config)[property] : this[property];
+        return property in target.config ? (<any>target.config)[property] : this[<number | string>property];
       }
     });
   }

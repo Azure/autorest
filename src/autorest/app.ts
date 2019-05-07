@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+
 // load modules from static linker filesystem.
 if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-loader"] === undefined) {
   require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
@@ -30,7 +30,7 @@ if (!String.prototype.padEnd) {
 }
 
 import { isFile } from "@microsoft.azure/async-io";
-import { Exception, LazyPromise } from "@microsoft.azure/tasks";
+import { LazyPromise, promisify } from "@microsoft.azure/tasks";
 import { networkEnabled, rootFolder, extensionManager, availableVersions, corePackage, installedCores, tryRequire, resolvePathForLocalVersion, ensureAutorestHome, selectVersion, pkgVersion } from "./autorest-as-a-service"
 import { gt } from "semver";
 import { join } from "path";

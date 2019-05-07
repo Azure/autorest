@@ -3,7 +3,6 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ConfigurationView } from '../autorest-core';
 import { LineIndices } from "../parsing/text-utility";
 import { CancellationToken } from "../ref/cancellation";
 import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";

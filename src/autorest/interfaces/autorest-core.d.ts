@@ -33,8 +33,8 @@ export const MagicString: string;
 export const DefaultConfiguration: string;
 
 }
-declare module 'autorest-core/lib/ref/array' {
-export function pushAll<T>(target: T[], source: T[]): void;
+declare module 'autorest-core/lib/ref/cancellation' {
+export { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
 
 }
 declare module 'autorest-core/lib/ref/source-map' {
@@ -59,58 +59,6 @@ export interface Mapping {
     name?: string;
 }
 export type Mappings = Array<Mapping>;
-
-}
-declare module 'autorest-core/lib/message' {
-import { EnhancedPosition, Position, Mappings, RawSourceMap } from 'autorest-core/lib/ref/source-map';
-import { Artifact } from 'autorest-core/lib/artifact';
-/**
- * The Channel that a message is registered with.
- */
-export enum Channel {
-    /** Information is considered the mildest of responses; not necesarily actionable. */
-    Information,
-    /** Warnings are considered important for best practices, but not catastrophic in nature. */
-    Warning,
-    /** Errors are considered blocking issues that block a successful operation.  */
-    Error,
-    /** Debug messages are designed for the developer to communicate internal autorest implementation details. */
-    Debug,
-    /** Verbose messages give the user additional clarity on the process. */
-    Verbose,
-    /** Catastrophic failure, likely abending the process.  */
-    Fatal,
-    /** Hint messages offer guidance or support without forcing action. */
-    Hint,
-    /** File represents a file output from an extension. Details are a Artifact and are required.  */
-    File,
-    /** content represents an update/creation of a configuration file. The final uri will be in the same folder as the primary config file. */
-    Configuration,
-}
-export interface SourceLocation {
-    document: string;
-    Position: EnhancedPosition;
-}
-export interface Range {
-    document: string;
-    start: Position;
-    end: Position;
-}
-export interface Message {
-    Channel: Channel;
-    Key?: Iterable<string>;
-    Details?: any;
-    Text: string;
-    Source?: Array<SourceLocation>;
-    Range?: Iterable<Range>;
-    Plugin?: string;
-    FormattedMessage?: string;
-}
-export interface ArtifactMessage extends Message {
-    Details: Artifact & {
-        sourceMap?: Mappings | RawSourceMap;
-    };
-}
 
 }
 declare module 'autorest-core/lib/ref/async' {
@@ -171,21 +119,8 @@ export function FileUriToPath(fileUri: string): string;
 export function GetExtension(name: string): string;
 
 }
-declare module 'autorest-core/lib/exception' {
-export class Exception extends Error {
-    exitCode: number;
-    constructor(message: string, exitCode?: number);
-}
-export class OperationCanceledException extends Exception {
-    exitCode: number;
-    constructor(message?: string, exitCode?: number);
-}
-export class OutstandingTaskAlreadyCompletedException extends Exception {
-    constructor();
-}
-export class OperationAbortedException extends Exception {
-    constructor();
-}
+declare module 'autorest-core/lib/ref/linq' {
+export {};
 
 }
 declare module 'autorest-core/lib/lazy' {
@@ -202,6 +137,79 @@ export class LazyPromise<T> implements PromiseLike<T> {
     private readonly Value;
     readonly hasValue: boolean;
     then<TResult1, TResult2>(onfulfilled: (value: T) => TResult1 | PromiseLike<TResult1>, onrejected: (reason: any) => TResult2 | PromiseLike<TResult2>): PromiseLike<TResult1 | TResult2>;
+}
+
+}
+declare module 'autorest-core/lib/ref/array' {
+export function pushAll<T>(target: T[], source: T[]): void;
+
+}
+declare module 'autorest-core/lib/message' {
+import { EnhancedPosition, Position, Mappings, RawSourceMap } from 'autorest-core/lib/ref/source-map';
+import { Artifact } from 'autorest-core/lib/artifact';
+/**
+ * The Channel that a message is registered with.
+ */
+export enum Channel {
+    /** Information is considered the mildest of responses; not necesarily actionable. */
+    Information,
+    /** Warnings are considered important for best practices, but not catastrophic in nature. */
+    Warning,
+    /** Errors are considered blocking issues that block a successful operation.  */
+    Error,
+    /** Debug messages are designed for the developer to communicate internal autorest implementation details. */
+    Debug,
+    /** Verbose messages give the user additional clarity on the process. */
+    Verbose,
+    /** Catastrophic failure, likely abending the process.  */
+    Fatal,
+    /** Hint messages offer guidance or support without forcing action. */
+    Hint,
+    /** File represents a file output from an extension. Details are a Artifact and are required.  */
+    File,
+    /** content represents an update/creation of a configuration file. The final uri will be in the same folder as the primary config file. */
+    Configuration
+}
+export interface SourceLocation {
+    document: string;
+    Position: EnhancedPosition;
+}
+export interface Range {
+    document: string;
+    start: Position;
+    end: Position;
+}
+export interface Message {
+    Channel: Channel;
+    Key?: Iterable<string>;
+    Details?: any;
+    Text: string;
+    Source?: Array<SourceLocation>;
+    Range?: Iterable<Range>;
+    Plugin?: string;
+    FormattedMessage?: string;
+}
+export interface ArtifactMessage extends Message {
+    Details: Artifact & {
+        sourceMap?: Mappings | RawSourceMap;
+    };
+}
+
+}
+declare module 'autorest-core/lib/exception' {
+export class Exception extends Error {
+    exitCode: number;
+    constructor(message: string, exitCode?: number);
+}
+export class OperationCanceledException extends Exception {
+    exitCode: number;
+    constructor(message?: string, exitCode?: number);
+}
+export class OutstandingTaskAlreadyCompletedException extends Exception {
+    constructor();
+}
+export class OperationAbortedException extends Exception {
+    constructor();
 }
 
 }
@@ -240,41 +248,8 @@ export class EventEmitter extends events.EventEmitter {
 }
 
 }
-declare module 'autorest-core/lib/ref/cancellation' {
-export { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
-
-}
 declare module 'autorest-core/lib/ref/jsonrpc' {
 export * from "vscode-jsonrpc";
-
-}
-declare module 'autorest-core/lib/file-system' {
-export interface IFileSystem {
-    EnumerateFileUris(folderUri: string): Promise<Array<string>>;
-    ReadFile(uri: string): Promise<string>;
-}
-export class MemoryFileSystem implements IFileSystem {
-    static readonly DefaultVirtualRootUri: string;
-    private filesByUri;
-    constructor(files: Map<string, string>);
-    readonly Outputs: Map<string, string>;
-    ReadFile(uri: string): Promise<string>;
-    EnumerateFileUris(folderUri?: string): Promise<Array<string>>;
-    WriteFile(uri: string, content: string): Promise<void>;
-}
-export class RealFileSystem implements IFileSystem {
-    constructor();
-    EnumerateFileUris(folderUri: string): Promise<string[]>;
-    ReadFile(uri: string): Promise<string>;
-    WriteFile(uri: string, content: string): Promise<void>;
-}
-export class EnhancedFileSystem implements IFileSystem {
-    private githubAuthToken;
-    constructor(githubAuthToken?: string | undefined);
-    EnumerateFileUris(folderUri: string): Promise<string[]>;
-    ReadFile(uri: string): Promise<string>;
-    WriteFile(uri: string, content: string): Promise<void>;
-}
 
 }
 declare module 'autorest-core/lib/document-type' {
@@ -282,13 +257,13 @@ export enum DocumentType {
     OpenAPI2,
     OpenAPI3,
     LiterateConfiguration,
-    Unknown,
+    Unknown
 }
 export enum DocumentFormat {
     Markdown,
     Yaml,
     Json,
-    Unknown,
+    Unknown
 }
 export const DocumentExtension: {
     "yaml": DocumentFormat;
@@ -315,6 +290,10 @@ export { DocumentFormat, DocumentExtension, DocumentPatterns, DocumentType } fro
 }
 declare module 'autorest-core/lib/ref/commonmark' {
 export { Node, Parser } from "commonmark";
+
+}
+declare module 'autorest-core/lib/openapi/conversion' {
+export {};
 
 }
 declare module 'autorest-core/help' {
@@ -346,7 +325,7 @@ import { DocumentType } from 'autorest-core/lib/document-type';
  */
 export class AutoRest extends EventEmitter {
     private fileSystem;
-    configFileOrFolderUri: string | undefined;
+    configFileOrFolderUri?: string | undefined;
     /**
      * Event: Signals when a Process() finishes.
      */
@@ -422,6 +401,35 @@ export function IsConfigurationExtension(extension: string): Promise<boolean>;
  * @param extension the extension to check (no leading dot)
  */
 export function IsOpenApiExtension(extension: string): Promise<boolean>;
+
+}
+declare module 'autorest-core/lib/file-system' {
+export interface IFileSystem {
+    EnumerateFileUris(folderUri: string): Promise<Array<string>>;
+    ReadFile(uri: string): Promise<string>;
+}
+export class MemoryFileSystem implements IFileSystem {
+    static readonly DefaultVirtualRootUri = "file:///";
+    private filesByUri;
+    constructor(files: Map<string, string>);
+    readonly Outputs: Map<string, string>;
+    ReadFile(uri: string): Promise<string>;
+    EnumerateFileUris(folderUri?: string): Promise<Array<string>>;
+    WriteFile(uri: string, content: string): Promise<void>;
+}
+export class RealFileSystem implements IFileSystem {
+    constructor();
+    EnumerateFileUris(folderUri: string): Promise<string[]>;
+    ReadFile(uri: string): Promise<string>;
+    WriteFile(uri: string, content: string): Promise<void>;
+}
+export class EnhancedFileSystem implements IFileSystem {
+    private githubAuthToken?;
+    constructor(githubAuthToken?: string | undefined);
+    EnumerateFileUris(folderUri: string): Promise<string[]>;
+    ReadFile(uri: string): Promise<string>;
+    WriteFile(uri: string, content: string): Promise<void>;
+}
 
 }
 declare module 'autorest-core/lib/configuration' {
@@ -503,20 +511,14 @@ export class MessageEmitter extends EventEmitter {
     constructor();
 }
 export class ConfigurationView {
-    configurationFiles: {
-        [key: string]: any;
-    };
-    fileSystem: IFileSystem;
-    messageEmitter: MessageEmitter;
-    configFileFolderUri: string;
     [name: string]: any;
     private suppressor;
     readonly Keys: Array<string>;
     Dump(title?: string): void;
     private config;
     private rawConfig;
-    private ResolveAsFolder(path);
-    private ResolveAsPath(path);
+    private ResolveAsFolder;
+    private ResolveAsPath;
     private readonly BaseFolderUri;
     readonly UseExtensions: Array<{
         name: string;
@@ -539,17 +541,33 @@ export class ConfigurationView {
 }
 export class Configuration {
     private fileSystem;
-    private configFileOrFolderUri;
+    private configFileOrFolderUri?;
     constructor(fileSystem?: IFileSystem, configFileOrFolderUri?: string | undefined);
-    private ParseCodeBlocks(configFile, contextConfig, scope);
+    private ParseCodeBlocks;
     private static extensionManager;
-    private DesugarRawConfig(configs);
-    private DesugarRawConfigs(configs);
+    private DesugarRawConfig;
+    private DesugarRawConfigs;
     static shutdown(): Promise<void>;
     CreateView(messageEmitter: MessageEmitter, includeDefault: boolean, ...configs: Array<any>): Promise<ConfigurationView>;
     static DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders?: boolean): Promise<string | null>;
     static DetectConfigurationFiles(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders?: boolean): Promise<Array<string>>;
 }
+
+}
+declare module 'autorest-core/legacyCli' {
+export {};
+
+}
+declare module 'autorest-core/app' {
+export {};
+
+}
+declare module 'autorest-core/language-service/source-map' {
+export {};
+
+}
+declare module 'autorest-core/language-service/document-analysis' {
+export {};
 
 }
 declare module 'autorest-core/language-service/language-service' {
