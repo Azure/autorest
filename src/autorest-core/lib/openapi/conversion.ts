@@ -3,12 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { Oai2ToOai3 } from '@microsoft.azure/oai2-to-oai3';
 import { DataHandle, DataSink } from '../data-store/data-store';
-const convertOAI2toOAI3 = async (oa2def: OpenApi2Definition): Promise<OpenApi3Definition> => (await require("swagger2openapi").convert(oa2def, { patch: true })).openapi;
-
 /* @internal */ export async function ConvertOAI2toOAI3(input: DataHandle, sink: DataSink): Promise<DataHandle> {
-  const oa2 = input.ReadObject<OpenApi2Definition>();
-  const oa3 = await convertOAI2toOAI3(oa2);
-  return await sink.WriteObject("OpenAPI", oa3);
+  const converter = new Oai2ToOai3(input.key, input.ReadObject());
+  converter.convert();
+  const generated = converter.generated;
+  return sink.WriteObject('OpenAPI', generated, input.GetArtifact());
 }
-
