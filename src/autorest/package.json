@@ -38,27 +38,30 @@
   "typings": "./dist/main.d.ts",
   "devDependencies": {
     "@types/commonmark": "^0.22.29",
-    "@types/node": "^7.0.48",
+    "@types/node": "^8.0.53",
     "@types/semver": "^5.3.30",
     "@types/mocha": "5.2.0",
     "mocha": "5.2.0",
     "mocha-typescript": "1.1.14",
-    "typescript": "2.6.2",
+    "typescript": "^3.1.3",
     "tslint": "^5.9.1",
     "tslint-language-service": "^0.9.9",
     "tslint-microsoft-contrib": "^5.0.3",
     "static-link": "^0.2.3",
+    "@microsoft.azure/async-io": "^2.1.0",
+    "@microsoft.azure/extension": "^2.2.0",
+    "@microsoft.azure/tasks": "^2.1.0",
     "shx": "0.2.2"
   },
   "static-link": {
     "entrypoints": [],
     "dependencies": {
-      "@microsoft.azure/async-io": "~2.0.7",
-      "@microsoft.azure/extension": "~2.0.24",
-      "@microsoft.azure/tasks": "~2.0.19",
+      "@microsoft.azure/async-io": "^2.1.0",
+      "@microsoft.azure/extension": "^2.2.0",
+      "@microsoft.azure/tasks": "^2.1.0",
       "semver": "^5.3.0",
       "chalk": "2.3.0"
-    },
-    "patch": "const fs = require(`fs`); let txt = fs.readFileSync('./node_modules/npm/lib/install/action/extract.js','utf8').replace(`const ENABLE_WORKERS = process.platform === 'darwin'`, `const ENABLE_WORKERS = false;`); fs.writeFileSync('./node_modules/npm/lib/install/action/extract.js', txt ); txt = fs.readFileSync(`./node_modules/npm/lib/npm.js`,`utf8`).replace(`var j = parseJSON(fs.readFileSync(`, `var j = require(path.join(__dirname, '../package.json'));` ).replace(`path.join(__dirname, '../package.json')) + '')`,``); fs.writeFileSync(`./node_modules/npm/lib/npm.js`, txt );   txt = fs.readFileSync('./node_modules/npm/lib/pack.js','utf8').replace(`require.main.filename`, `require.resolve('../bin/npm-cli.js')`); fs.writeFileSync('./node_modules/npm/lib/pack.js', txt ); "
-  }
+    }
+  },
+  "dependencies": {}
 }
