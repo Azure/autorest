@@ -73,11 +73,8 @@ async function ParseCompositeSwagger(inputScope: DataSource, uri: string, target
   }
 
   result["license-header"] = switches["header"] || undefined;
-
   result["payload-flattening-threshold"] = parseInt(switches["ft"] || switches["payloadflatteningthreshold"] || "0");
-
   result["sync-methods"] = <any>switches["syncmethods"] || undefined;
-
   result["add-credentials"] = switches["addcredentials"] === null || ((switches["addcredentials"] + "").toLowerCase() === "true");
 
   if (usedCodeGenerator === "ruby" || usedCodeGenerator === "python" || usedCodeGenerator === "go") {
