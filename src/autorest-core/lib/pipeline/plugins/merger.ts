@@ -317,12 +317,16 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
   }
   visitComponents(components: ProxyObject<Dictionary<oai.Components>>, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
-      this.cCount[key] = this.cCount[key] || 0;
-      if (components[key] === undefined) {
-        this.newObject(components, key, pointer);
-      }
+      // NOTE: SecuritySchemes are not being used anywhere in AutoRest.
+      // So, to reduce overhead in RPs with hundreds of swaggers we drop them.
+      if (key !== 'securitySchemes') {
+        this.cCount[key] = this.cCount[key] || 0;
+        if (components[key] === undefined) {
+          this.newObject(components, key, pointer);
+        }
 
-      this.visitComponent(key, components[key], children);
+        this.visitComponent(key, components[key], children);
+      }
     }
   }
   visitComponent<T>(type: string, container: ProxyObject<Dictionary<T>>, nodes: Iterable<Node>) {
