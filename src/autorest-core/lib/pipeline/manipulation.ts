@@ -22,7 +22,6 @@ export class Manipulator {
     document = '/' + document;
     // from
     const from = From([...transform.from]);
-
     return (!from.Any()) || (from.Any(d => artifact === d || document.endsWith('/' + d)));
   }
 
@@ -94,8 +93,8 @@ export class Manipulator {
   }
 
   public async process(data: DataHandle, sink: DataSink, isObject: boolean, documentId?: string): Promise<DataHandle> {
-    const trans1 = !isObject ? await sink.WriteObject(`trans_input?${data.key}`, data.ReadData(), data.identity) : data;
+    const trans1 = !isObject ? await sink.WriteObject(`trans_input?${data.key}`, data.ReadData(), data.identity, data.artifactType) : data;
     const result = await this.processInternal(trans1, sink, documentId);
-    return (!isObject) ? sink.WriteData(`trans_output?${data.key}`, result.ReadObject<string>(), data.identity) : result;
+    return (!isObject) ? sink.WriteData(`trans_output?${data.key}`, result.ReadObject<string>(), data.identity, data.artifactType) : result;
   }
 }

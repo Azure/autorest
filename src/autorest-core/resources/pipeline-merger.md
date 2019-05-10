@@ -49,7 +49,6 @@ pipeline:
     input: subset-reducer
     output-artifact: openapi-document
 
-
   openapi-document/multi-api/identity:
     input: subset-reducer
     output-artifact: openapi-document

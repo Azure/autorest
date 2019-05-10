@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Clone, CloneAst, DataHandle, DataSink, Descendants, IsPrefix, JsonPath, Mapping, nodes, ParseNode, paths, ReplaceNode, ResolveRelativeNode, SmartPosition, stringify, StringifyAst, ToAst, YAMLNode } from '@microsoft.azure/datastore';
+import { Clone, CloneAst, DataHandle, DataSink, Descendants, IsPrefix, JsonPath, Mapping, nodes, ParseNode, paths, ReplaceNode, ResolveRelativeNode, SmartPosition, stringify, StringifyAst, ToAst, YAMLNode, ParseToAst } from '@microsoft.azure/datastore';
 import { From } from 'linq-es2015';
 import { IdentitySourceMapping } from '../source-map/merging';
 
@@ -18,7 +18,21 @@ export async function manipulateObject(
     reason: string
   }): Promise<{ anyHit: boolean, result: DataHandle }> {
 
+  if (whereJsonQuery === '$') {
+    const data = src.ReadData();
+    const newObject = transformer(null, data, []);
+    if (newObject !== data) {
+      const resultHandle = await target.WriteData(src.Description, newObject, src.identity, src.artifactType, undefined, mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src]);
+      return {
+        anyHit: true,
+        result: resultHandle
+      };
+    }
+  }
+
+
   // find paths matched by `whereJsonQuery`
+
   let ast: YAMLNode = CloneAst(src.ReadYamlAst());
   const doc = ParseNode<any>(ast);
   const hits = nodes(doc, whereJsonQuery).sort((a, b) => a.path.length - b.path.length);
