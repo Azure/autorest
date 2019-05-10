@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { RequestType0, RequestType1, RequestType2 } from "vscode-jsonrpc";
-import { NotificationType4 } from "vscode-jsonrpc";
+import { NotificationType2, NotificationType4 } from "vscode-jsonrpc";
 import { SmartPosition } from "@microsoft.azure/datastore";
 import { Mapping, RawSourceMap } from "source-map";
 import { Message } from "../message";
@@ -22,12 +22,14 @@ export module IAutoRestPluginInitiator_Types {
   export const ReadFile = new RequestType2<string, string, string, Error, void>("ReadFile");
   export const GetValue = new RequestType2<string, string, any, Error, void>("GetValue");
   export const ListInputs = new RequestType2<string, string | undefined, string[], Error, void>("ListInputs");
+  export const ProtectFiles = new NotificationType2<string, string, void>("ProtectFiles");
   export const WriteFile = new NotificationType4<string, string, string, Mapping[] | RawSourceMap | undefined, void>("WriteFile");
   /* @internal */export const Message = new NotificationType4<string, Message, SmartPosition | undefined, string | undefined, void>("Message");
 }
 export interface IAutoRestPluginInitiator {
   ReadFile(sessionId: string, filename: string): Promise<string>;
   GetValue(sessionId: string, key: string): Promise<any>;
+  ProtectFiles(sessionId: string, fileOrFolder: string): Promise<void>;
   ListInputs(sessionId: string, artifactType?: string): Promise<string[]>;
 
   WriteFile(sessionId: string, filename: string, content: string, sourceMap?: Mapping[] | RawSourceMap): void;

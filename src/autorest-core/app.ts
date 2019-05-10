@@ -47,6 +47,7 @@ import { Exception, OperationCanceledException } from './lib/exception';
 import { Channel, Message } from './lib/message';
 import { ShallowCopy } from './lib/source-map/merging';
 
+
 let verbose = false;
 let debug = false;
 
@@ -314,9 +315,15 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   // listen for output messages and file writes
   subscribeMessages(api, () => exitcode++);
   const artifacts: Array<Artifact> = [];
-  const clearFolders: Array<string> = [];
+  const clearFolders = new Set<string>();
+  const protectFiles = new Set<string>();
   api.GeneratedFile.Subscribe((_, artifact) => artifacts.push(artifact));
-  api.ClearFolder.Subscribe((_, folder) => clearFolders.push(folder));
+  api.Message.Subscribe((_, message) => {
+    if (message.Channel === Channel.Protect && message.Details) {
+      protectFiles.add(message.Details);
+    }
+  });
+  api.ClearFolder.Subscribe((_, folder) => clearFolders.add(folder));
 
   const config = (await api.view);
 
@@ -370,7 +377,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   } else {
     // perform file system operations.
     for (const folder of clearFolders) {
-      try { await ClearFolder(folder); } catch (e) { }
+      try { ClearFolder(folder, [...protectFiles].map(each => ResolveUri(folder, each))) } catch { };
     }
     for (const artifact of artifacts) {
       await (artifact.type === 'binary-file' ? WriteBinary(artifact.uri, artifact.content) : WriteString(artifact.uri, artifact.content));

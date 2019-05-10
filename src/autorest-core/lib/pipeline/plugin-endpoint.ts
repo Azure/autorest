@@ -27,6 +27,7 @@ interface IAutoRestPluginInitiatorEndpoint {
   ReadFile(filename: string): Promise<string>;
   GetValue(key: string): Promise<any>;
   ListInputs(artifactType?: string): Promise<Array<string>>;
+  ProtectFiles(fileOrFolder: string): Promise<void>;
 
   WriteFile(filename: string, content: string, sourceMap?: Array<Mapping> | RawSourceMap): Promise<void>;
   Message(message: Message, path?: SmartPosition, sourceFile?: string): Promise<void>;
@@ -109,6 +110,7 @@ export class AutoRestExtension extends EventEmitter {
       ReadFile: dispatcher('ReadFile'),
       GetValue: dispatcher('GetValue'),
       ListInputs: dispatcher('ListInputs'),
+      ProtectFiles: dispatcher('ProtectFiles'),
 
       WriteFile: dispatcher('WriteFile'),
       Message: dispatcher('Message'),
@@ -116,6 +118,7 @@ export class AutoRestExtension extends EventEmitter {
     channel.onRequest(IAutoRestPluginInitiator_Types.ReadFile, this.apiInitiator.ReadFile);
     channel.onRequest(IAutoRestPluginInitiator_Types.GetValue, this.apiInitiator.GetValue);
     channel.onRequest(IAutoRestPluginInitiator_Types.ListInputs, this.apiInitiator.ListInputs);
+    channel.onNotification(IAutoRestPluginInitiator_Types.ProtectFiles, this.apiInitiator.ProtectFiles);
     channel.onNotification(IAutoRestPluginInitiator_Types.WriteFile, this.apiInitiator.WriteFile);
     channel.onNotification(IAutoRestPluginInitiator_Types.Message, this.apiInitiator.Message);
 
@@ -214,6 +217,18 @@ export class AutoRestExtension extends EventEmitter {
           return null;
         }
       },
+      async ProtectFiles(fileOrFolder: string): Promise<void> {
+        // protect files from being removed.
+        const finishPrev = finishNotifications;
+        let notify: () => void = () => { };
+        finishNotifications = new Promise<void>(res => notify = res);
+
+        onMessage(<Message>{ Channel: Channel.Protect, Details: fileOrFolder, Text: fileOrFolder, Plugin: pluginName, Key: [] });
+
+        await finishPrev;
+        notify();
+      },
+
       async ListInputs(artifactType?: string): Promise<Array<string>> {
 
         if (artifactType && typeof artifactType !== 'string') {

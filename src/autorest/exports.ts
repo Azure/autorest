@@ -42,6 +42,11 @@ export enum Channel {
 
   /** content represents an update/creation of a configuration file. The final uri will be in the same folder as the primary config file. */
   Configuration = <any>"configuration",
+
+  /** Protect is a path to not remove during a clear-output-folder.  */
+  Protect = <any>"protect",
+
+
 }
 
 export enum DocumentType {
