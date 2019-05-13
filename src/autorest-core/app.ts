@@ -377,7 +377,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   } else {
     // perform file system operations.
     for (const folder of clearFolders) {
-      try { ClearFolder(folder, [...protectFiles].map(each => ResolveUri(folder, each))) } catch { };
+      try { await ClearFolder(folder, [...protectFiles].map(each => ResolveUri(folder, each))) } catch { };
     }
     for (const artifact of artifacts) {
       await (artifact.type === 'binary-file' ? WriteBinary(artifact.uri, artifact.content) : WriteString(artifact.uri, artifact.content));
