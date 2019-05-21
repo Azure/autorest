@@ -2,8 +2,30 @@ import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Tr
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 import { clone } from '@microsoft.azure/linq';
+import { values } from '@microsoft.azure/codegen';
 
+
+const methods = new Set([
+  'get',
+  'put',
+  'post',
+  'delete',
+  'options',
+  'head',
+  'patch',
+  'trace'
+]);
 export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
+  private docServers?: Array<AnyObject>;
+  private pathServers?: Array<AnyObject>;
+  private operationServers?: Array<AnyObject>;
+
+  get servers() {
+    // it's not really clear according to OAI3 spec, but I'm going to assume that
+    // a servers entry at a given level, replaces a servers entry at an earlier level.
+    return this.operationServers || this.pathServers || this.docServers || [];
+  }
+
   get components(): AnyObject {
     if (this.generated.components) {
       return this.generated.components;
@@ -50,8 +72,14 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   }
 
   async process(targetParent: AnyObject, originalNodes: Iterable<Node>) {
+    // split out servers first.
+    const [servers, theNodes] = values(originalNodes).linq.bifurcate(each => each.key === 'servers');
+
+    // set the doc servers 
+    servers.forEach(s => this.docServers = s.value);
+
     // initialize certain things ahead of time:
-    for (const { value, key, pointer, children } of originalNodes) {
+    for (const { value, key, pointer, children } of theNodes) {
       switch (key) {
         case 'paths':
           this.visitPaths(this.newObject(targetParent, key, pointer), children);
@@ -77,7 +105,6 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   }
 
   visitPaths(targetParent: AnyObject, nodes: Iterable<Node>) {
-
     for (const { key, pointer, children } of nodes) {
       // each path
       this.visitPath(this.newObject(targetParent, key, pointer), children);
@@ -85,7 +112,14 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   }
 
   visitPath(targetParent: AnyObject, nodes: Iterable<Node>) {
-    for (const { value, key, pointer, children } of nodes) {
+    // split out the servers first.
+    const [servers, theNodes] = values(nodes).linq.bifurcate(each => each.key === 'servers');
+
+    // set the operationServers if they exist.
+    servers.forEach(s => this.pathServers = s.value);
+
+    // handle the rest.
+    for (const { value, key, pointer, children } of theNodes) {
       switch (key) {
 
         case 'get':
@@ -104,10 +138,22 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           break;
       }
     }
+
+    // reset at end
+    this.pathServers = undefined;
   }
 
   visitHttpOperation(targetParent: AnyObject, nodes: Iterable<Node>) {
-    for (const { value, key, pointer, children } of nodes) {
+
+    // split out the servers first.
+    const [servers, theNodes] = values(nodes).linq.bifurcate(each => each.key === 'servers');
+
+    // set the operationServers if they exist.
+    servers.forEach(s => this.operationServers = s.value);
+
+    this.clone(targetParent, "servers", '/', this.servers)
+
+    for (const { value, key, pointer, children } of theNodes) {
       switch (key) {
         case 'parameters':
           // parameters are a small special case, because they have to be tweaked when they are moved to the global parameter section.
@@ -135,6 +181,10 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           break;
       }
     }
+
+    // reset at end
+    this.operationServers = undefined;
+
   }
 
   visitParameter(targetParent: AnyObject, nodes: Iterable<Node>) {

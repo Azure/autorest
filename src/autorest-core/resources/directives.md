@@ -97,6 +97,7 @@ declare-directive:
       switch ($context.from) {
         case "code-model-v1":
           throw "not implemented";
+
         case "openapi-document":
           return { from: "openapi-document", where: `$.definitions[${JSON.stringify($)}]` };
 
@@ -122,17 +123,25 @@ declare-directive:
       transform: '$ = undefined'
     }
   rename-operation: >-
-    {
+    [{
       from: 'swagger-document',
       "where-operation": $.from,
       transform: `$.operationId = ${JSON.stringify($.to)}`
-    }
+    },{
+      from: 'openapi-document',
+      "where-operation": $.from,
+      transform: `$.operationId = ${JSON.stringify($.to)}`
+    }]
   remove-model: >-
-    {
+    [{
       from: 'swagger-document',
       "where-model": $,
       transform: 'return undefined'
-    }
+    },{
+      from: 'openapi-document',
+      "where-model": $,
+      transform: 'return undefined'
+    }]
   rename-model: >-
     [{
       from: 'swagger-document',
@@ -150,13 +159,21 @@ declare-directive:
       transform: `$ = $ === ($documentPath + "#/definitions/${$.from}") ? ($documentPath + "#/definitions/${$.to}") : $`
     }]
   remove-property: >-
-    {
+    [{
       from: 'swagger-document',
       transform: `delete $.properties[${JSON.stringify($)}]`
-    }
-  rename-property: >-
+    },
     {
+      from: 'openapi-document',
+      transform: `delete $.properties[${JSON.stringify($)}]`
+    }]
+  rename-property: >-
+    [{
       from: 'swagger-document',
       transform: `if ($.properties[${JSON.stringify($.from)}]) { $.properties[${JSON.stringify($.to)}] = $.properties[${JSON.stringify($.from)}]; delete $.properties[${JSON.stringify($.from)}]; }`
-    }
+    },
+    {
+      from: 'openapi-document',
+      transform: `if ($.properties[${JSON.stringify($.from)}]) { $.properties[${JSON.stringify($.to)}] = $.properties[${JSON.stringify($.from)}]; delete $.properties[${JSON.stringify($.from)}]; }`
+    }]
 ```
