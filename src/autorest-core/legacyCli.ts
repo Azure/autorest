@@ -46,10 +46,9 @@ async function ParseCompositeSwagger(inputScope: DataSource, uri: string, target
   if (inputFile === null) {
     throw new Error("No input specified.");
   }
+  
   result["input-file"] = inputFile;
-
   result["output-folder"] = switches["o"] || switches["output"] || switches["outputdirectory"] || "Generated";
-
   result["namespace"] = switches["n"] || switches["namespace"] || GetFilenameWithoutExtension(inputFile);
 
   const modeler = switches["m"] || switches["modeler"] || "Swagger";
