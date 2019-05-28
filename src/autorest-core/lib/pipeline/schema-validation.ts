@@ -16,7 +16,7 @@ export function createSwaggerSchemaValidatorPlugin(): PipelinePlugin {
   (<any>validator).setRemoteReference('http://json.schemastore.org/swagger-2.0', require('./swagger.json'));
   (<any>validator).setRemoteReference('https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json', require('./example-schema.json'));
   return createPerFilePlugin(async config => async (fileIn, sink) => {
-    const obj = fileIn.ReadObject<any>();
+    const obj = await fileIn.ReadObject<any>();
     const errors = await new Promise<Array<{ code: string, params: Array<string>, message: string, path: string }> | null>(res => validator.validate(obj, extendedSwaggerSchema, (err, valid) => res(valid ? null : err)));
     if (errors !== null) {
       for (const error of errors) {
@@ -40,7 +40,7 @@ export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
 
   const extendedOpenApiSchema = require('./openapi3-schema.json');
   return createPerFilePlugin(async config => async (fileIn, sink) => {
-    const obj = fileIn.ReadObject<any>();
+    const obj = await fileIn.ReadObject<any>();
     const errors = await new Promise<Array<{ code: string; params: Array<string>; message: string; path: string }> | null>(res => validator.validate(obj, extendedOpenApiSchema, (err, valid) => res(valid ? null : err)));
     if (errors !== null) {
       for (const error of errors) {

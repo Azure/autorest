@@ -9,7 +9,7 @@ export class ApiVersionParameterHandler extends Transformer<any, oai.Model> {
   apiVersionReferences = new Set<string>();
 
   public async init() {
-    const allDocuments = [...this.inputs].map(each => each.ReadObject<AnyObject>());
+    const allDocuments = await Promise.all([...this.inputs].map(each => each.ReadObject<AnyObject>()));
     const currentDoc = allDocuments[0];
 
     if (currentDoc.components && currentDoc.components.parameters) {

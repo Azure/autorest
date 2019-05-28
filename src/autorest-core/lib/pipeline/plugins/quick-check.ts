@@ -7,7 +7,7 @@ import { format } from 'path';
 async function quickCheck(config: ConfigurationView, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
   for (const each of inputs) {
-    const oai = each.ReadObject<AnyObject>();
+    const oai = await each.ReadObject<AnyObject>();
 
     const models = new Map<string, string[]>();
     const enums = new Map<string, string[]>();
@@ -36,14 +36,14 @@ async function quickCheck(config: ConfigurationView, input: DataSource, sink: Da
     for (const { key, value } of items(models)) {
       if (value.length > 1) {
         //failed = true;
-        console.error(`Model ${key} has multiple implementations: ${value.join(',')}`);
+        // console.error(`Model ${key} has multiple implementations: ${value.join(',')}`);
       }
     }
-    console.error('--------------------------------------------------------------------');
+    //    console.error('--------------------------------------------------------------------');
     for (const { key, value } of items(enums)) {
       if (value.length > 1) {
         failed = true;
-        console.error(`Enum ${key} has multiple implementations: ${value.join(',')}`);
+        // console.error(`Enum ${key} has multiple implementations: ${value.join(',')}`);
       }
     }
     if (failed) {

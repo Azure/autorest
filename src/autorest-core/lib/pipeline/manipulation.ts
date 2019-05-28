@@ -5,6 +5,7 @@
 
 import { DataHandle, DataSink, nodes, safeEval } from '@microsoft.azure/datastore';
 import { From } from 'linq-es2015';
+import { YieldCPU } from '@microsoft.azure/tasks';
 import { ConfigurationView } from '../autorest-core';
 import { DirectiveView } from '../configuration';
 import { Channel, Message, SourceLocation } from '../message';
@@ -30,9 +31,11 @@ export class Manipulator {
       // matches filter?
       if (this.matchesSourceFilter(documentId || data.key, trans, data.artifactType)) {
         try {
+
           for (const w of trans.where) {
             // transform
             for (const t of trans.transform) {
+              await YieldCPU();
               const result = await manipulateObject(data, sink, w,
                 (doc, obj, path) => {
                   return safeEval<any>(`(() => { { ${t} }; return $; })()`, { $: obj, $doc: doc, $path: path, $documentPath: data.originalFullPath });
@@ -55,7 +58,7 @@ export class Manipulator {
 
             // test
             for (const t of trans.test) {
-              const doc = data.ReadObject<any>();
+              const doc = await data.ReadObject<any>();
               const allHits = nodes(doc, w);
               for (const hit of allHits) {
                 const testResults = [...safeEval<any>(`(function* () { ${t.indexOf('yield') === -1 ? `yield (${t}\n)` : `${t}\n`} })()`, { $: hit.value, $doc: doc, $path: hit.path })];
@@ -93,8 +96,8 @@ export class Manipulator {
   }
 
   public async process(data: DataHandle, sink: DataSink, isObject: boolean, documentId?: string): Promise<DataHandle> {
-    const trans1 = !isObject ? await sink.WriteObject(`trans_input?${data.key}`, data.ReadData(), data.identity, data.artifactType) : data;
+    const trans1 = !isObject ? await sink.WriteObject(`trans_input?${data.key}`, await data.ReadData(), data.identity, data.artifactType) : data;
     const result = await this.processInternal(trans1, sink, documentId);
-    return (!isObject) ? sink.WriteData(`trans_output?${data.key}`, result.ReadObject<string>(), data.identity, data.artifactType) : result;
+    return (!isObject) ? sink.WriteData(`trans_output?${data.key}`, await result.ReadObject<string>(), data.identity, data.artifactType) : result;
   }
 }

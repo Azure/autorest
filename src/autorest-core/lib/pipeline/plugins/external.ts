@@ -29,7 +29,7 @@ export function createExternalPlugin(host: AutoRestExtension, pluginName: string
           }
 
         } else {
-          return config.Message.bind(config)(message);
+          config.Message.bind(config)(message);
         }
       },
 

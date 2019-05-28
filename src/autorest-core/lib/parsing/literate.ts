@@ -8,7 +8,7 @@ import * as commonmark from 'commonmark';
 
 export async function parse(hConfigFile: DataHandle, sink: DataSink): Promise<Array<{ data: DataHandle, codeBlock: commonmark.Node }>> {
   const result: Array<{ data: DataHandle, codeBlock: commonmark.Node }> = [];
-  const rawMarkdown = hConfigFile.ReadData();
+  const rawMarkdown = await hConfigFile.ReadData();
   for (const codeBlock of parseCodeblocks(rawMarkdown)) {
     const codeBlockKey = `codeBlock_${codeBlock.sourcepos[0][0]}`;
 

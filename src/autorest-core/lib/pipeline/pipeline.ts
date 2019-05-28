@@ -23,7 +23,7 @@ import { createMarkdownOverrideOpenApiLoaderPlugin, createMarkdownOverrideSwagge
 import { createMultiApiMergerPlugin } from './plugins/merger';
 import { subsetSchemaDeduplicatorPlugin } from './plugins/subset-schemas-deduplicator';
 import { createEnumDeduplicator } from './plugins/enum-deduplication';
-import { createImmediateTransformerPlugin, createTransformerPlugin } from './plugins/transformer';
+import { createImmediateTransformerPlugin, createTransformerPlugin, createTextTransformerPlugin } from './plugins/transformer';
 import { createTreeShakerPlugin } from './plugins/tree-shaker';
 import { createQuickCheckPlugin } from './plugins/quick-check';
 import { createJsonToYamlPlugin, createYamlToJsonPlugin } from './plugins/yaml-and-json';
@@ -169,6 +169,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     'md-override-loader-swagger': createMarkdownOverrideSwaggerLoaderPlugin(),
     'md-override-loader-openapi': createMarkdownOverrideOpenApiLoaderPlugin(),
     'transform': createTransformerPlugin(),
+    'text-transform': createTextTransformerPlugin(),
     'transform-immediate': createImmediateTransformerPlugin(),
     'compose': createNewComposerPlugin(),
     'schema-validator-openapi': createOpenApiSchemaValidatorPlugin(),
@@ -285,11 +286,13 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
         return inputScope;
       }
       try {
+        const t1 = process.uptime() * 100;
         config.Message({ Channel: Channel.Debug, Text: `${nodeName} - START inputs = ${(await inputScope.Enum()).length}` });
 
         const scopeResult = await plugin(config, inputScope, config.DataStore.getDataSink(node.outputArtifact));
+        const t2 = process.uptime() * 100;
 
-        config.Message({ Channel: Channel.Debug, Text: `${nodeName} - END` });
+        config.Message({ Channel: Channel.Debug, Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]` });
         return scopeResult;
       } catch (e) {
         console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);

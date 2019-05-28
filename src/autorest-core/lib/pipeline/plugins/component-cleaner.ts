@@ -153,7 +153,7 @@ async function cleanComponents(config: ConfigurationView, input: DataSource, sin
   const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
-    const cleaner = new ComponentCleaner(each.ReadObject());
+    const cleaner = new ComponentCleaner(await each.ReadObject());
 
     // TODO: Construct source map from the mappings returned by the deduplicator.
     result.push(await sink.WriteObject(each.Description, cleaner.output, each.identity, each.artifactType, [/*fix-me*/]));

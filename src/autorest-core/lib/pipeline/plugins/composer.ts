@@ -30,7 +30,7 @@ function getProperty<T, U>(obj: ObjectWithPath<T>, key: string): ObjectWithPath<
 }
 
 async function composeSwaggers(config: ConfigurationView, overrideInfoTitle: any, overrideInfoDescription: any, inputSwaggers: Array<DataHandle>, sink: DataSink): Promise<DataHandle> {
-  const inputSwaggerObjects = inputSwaggers.map(sw => sw.ReadObject<any>());
+  const inputSwaggerObjects = await Promise.all(inputSwaggers.map(sw => sw.ReadObject<any>()));
   try {
     for (let i = 0; i < inputSwaggers.length; ++i) {
       const swagger = inputSwaggerObjects[i];

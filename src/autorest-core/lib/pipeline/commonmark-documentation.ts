@@ -49,7 +49,7 @@ export function plainTextVersion(commonmarkAst: Node): string {
 }
 
 export async function processCodeModel(codeModel: DataHandle, sink: DataSink): Promise<DataHandle> {
-  const ast = CloneAst(codeModel.ReadYamlAst());
+  const ast = CloneAst(await codeModel.ReadYamlAst());
   const mapping = IdentitySourceMapping(codeModel.key, ast);
 
   const cmParser = new Parser();

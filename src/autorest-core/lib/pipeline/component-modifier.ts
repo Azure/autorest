@@ -25,7 +25,7 @@ export function createComponentModifierPlugin(): PipelinePlugin {
   return createPerFilePlugin(async config => async (fileIn, sink) => {
     const componentModifier = Clone((config.Raw as any).components);
     if (componentModifier) {
-      const o = fileIn.ReadObject<any>();
+      const o = await fileIn.ReadObject<any>();
 
       o.components = o.components || {};
 

@@ -13,7 +13,7 @@ async function deduplicate(config: ConfigurationView, input: DataSource, sink: D
   const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of values(inputs).linq.where(input => input.artifactType !== 'azure-profile')) {
-    const deduplicator = new Deduplicator(each.ReadObject());
+    const deduplicator = new Deduplicator(await each.ReadObject());
 
     result.push(await sink.WriteObject('model-deduplicated-oai3-doc', deduplicator.output, each.identity, 'deduplicated-oai3', [/* fix-me: Construct source map from the mappings returned by the deduplicator.s*/]));
   }

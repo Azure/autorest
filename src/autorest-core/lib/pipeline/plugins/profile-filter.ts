@@ -76,7 +76,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   }
 
   async init() {
-    const currentDoc = this.inputs[0].ReadObject();
+    const currentDoc = await this.inputs[0].ReadObject();
     this.components = currentDoc['components'];
     if (this.profilesToUse.length > 0) {
       const resourcesTargets: Array<ResourceData> = [];

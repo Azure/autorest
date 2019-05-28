@@ -34,8 +34,8 @@ const resources = `${__dirname}../../../test/resources/profile-filter`;
     assert(profilesDataHandle != null);
 
     if (inputDataHandle && outputDataHandle && profilesDataHandle) {
-      const outputObject = outputDataHandle.ReadObject();
-      const processor = new ProfileFilter(inputDataHandle, profilesDataHandle.ReadObject(), profilesToUse, []);
+      const outputObject = await outputDataHandle.ReadObject();
+      const processor = new ProfileFilter(inputDataHandle, await profilesDataHandle.ReadObject(), profilesToUse, []);
       const processorOutput = await processor.getOutput();
       assert.deepEqual(processorOutput, outputObject, 'Should be the same');
     }

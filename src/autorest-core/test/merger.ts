@@ -66,7 +66,7 @@ const resources = `${__dirname}../../../test/resources/merger`;
 
       await aio.writeFile("c:/tmp/input.yaml", input);
       await aio.writeFile("c:/tmp/output.yaml", FastStringify(await processor.getOutput()));
-      await aio.writeFile("c:/tmp/output.yaml.map", JSON.stringify(data.metadata.sourceMap.Value));
+      // await aio.writeFile("c:/tmp/output.yaml.map", JSON.stringify(await data.metadata.sourceMap));
 
 
       // assert.deepEqual(shaker.output, outputObject, 'Should be the same');

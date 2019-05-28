@@ -187,7 +187,7 @@ export class AutoRestExtension extends EventEmitter {
       return {
         uri: handle.key,
         type: handle.artifactType,
-        content: handle.ReadData()
+        content: await handle.ReadData()
       };
     };
 
@@ -197,7 +197,7 @@ export class AutoRestExtension extends EventEmitter {
       async ReadFile(filename: string): Promise<string> {
         try {
           const file = await inputScope.ReadStrict(await friendly2internal(filename) || filename);
-          return file.ReadData();
+          return await file.ReadData();
         } catch (E) {
           // try getting the file from the output-folder
           try {

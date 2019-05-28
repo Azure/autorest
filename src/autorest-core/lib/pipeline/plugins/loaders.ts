@@ -17,7 +17,7 @@ import { crawlReferences } from './ref-crawling';
 
 async function LoadLiterateSwaggerOverride(inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle> {
   const commonmark = await inputScope.ReadStrict(inputFileUri);
-  const rawCommonmark = commonmark.ReadData();
+  const rawCommonmark = await commonmark.ReadData();
   const commonmarkNode = await parseCommonmark(rawCommonmark);
 
   const directives: Array<any> = [];
@@ -86,7 +86,7 @@ async function LoadLiterateSwaggerOverride(inputScope: DataSource, inputFileUri:
 
 async function LoadLiterateOpenAPIOverride(inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle> {
   const commonmark = await inputScope.ReadStrict(inputFileUri);
-  const rawCommonmark = commonmark.ReadData();
+  const rawCommonmark = await commonmark.ReadData();
   const commonmarkNode = await parseCommonmark(rawCommonmark);
 
   const directives: Array<any> = [];
@@ -155,15 +155,15 @@ async function LoadLiterateOpenAPIOverride(inputScope: DataSource, inputFileUri:
 
 export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle | null> {
   const handle = await inputScope.ReadStrict(inputFileUri);
-  checkSyntaxFromData(inputFileUri, handle, config);
+  await checkSyntaxFromData(inputFileUri, handle, config);
   const data = await ParseLiterateYaml(config, handle, sink);
   // check OpenAPI version
-  if (data.ReadObject<any>().swagger !== '2.0') {
+  if ((await data.ReadObject<any>()).swagger !== '2.0') {
     return null;
     // TODO: Should we throw or send an error message?
   }
 
-  const ast = CloneAst(data.ReadYamlAst());
+  const ast = CloneAst(await data.ReadYamlAst());
   const mapping = IdentitySourceMapping(data.key, ast);
 
   return sink.WriteData(handle.Description, StringifyAst(ast), [inputFileUri], undefined, mapping, [data]);
@@ -171,14 +171,14 @@ export async function LoadLiterateSwagger(config: ConfigurationView, inputScope:
 
 export async function LoadLiterateOpenAPI(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle | null> {
   const handle = await inputScope.ReadStrict(inputFileUri);
-  checkSyntaxFromData(inputFileUri, handle, config);
+  await checkSyntaxFromData(inputFileUri, handle, config);
   const data = await ParseLiterateYaml(config, handle, sink);
-  if (!isOpenAPI3Spec(data.ReadObject<OpenAPI3Spec>())) {
+  if (!isOpenAPI3Spec(await data.ReadObject<OpenAPI3Spec>())) {
     return null;
     // TODO: Should we throw or send an error message?
   }
 
-  const ast = CloneAst(data.ReadYamlAst());
+  const ast = CloneAst(await data.ReadYamlAst());
   const mapping = IdentitySourceMapping(data.key, ast);
 
   return sink.WriteData(handle.Description, StringifyAst(ast), [inputFileUri], undefined, mapping, [data]);
@@ -232,9 +232,9 @@ export async function LoadLiterateOpenAPIOverrides(inputScope: DataSource, input
  * If a JSON file is provided, it checks that the syntax is correct.
  * And if the syntax is incorrect, it puts an error message .
  */
-function checkSyntaxFromData(fileUri: string, handle: DataHandle, configView: ConfigurationView): void {
+async function checkSyntaxFromData(fileUri: string, handle: DataHandle, configView: ConfigurationView): Promise<void> {
   if (fileUri.toLowerCase().endsWith('.json')) {
-    const error = StrictJsonSyntaxCheck(handle.ReadData());
+    const error = StrictJsonSyntaxCheck(await handle.ReadData());
     if (error) {
       configView.Message({
         Channel: Channel.Error,

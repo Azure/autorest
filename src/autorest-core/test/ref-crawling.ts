@@ -39,7 +39,7 @@ import { crawlReferences } from '../lib/pipeline/plugins/ref-crawling';
         return element.endsWith(resultFileName || '');
       });
       const expectedFileHandle = await scope.ReadStrict(expectedFileUri || '');
-      assert.deepStrictEqual(resultFile.ReadObject(), expectedFileHandle.ReadObject());
+      assert.deepStrictEqual(await resultFile.ReadObject(), await expectedFileHandle.ReadObject());
     }
   }
 }

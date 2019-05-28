@@ -46,6 +46,7 @@ import { AutoRestConfigurationImpl, MergeConfigurations } from './lib/configurat
 import { Exception, OperationCanceledException } from './lib/exception';
 import { Channel, Message } from './lib/message';
 import { ShallowCopy } from './lib/source-map/merging';
+import { promises } from 'fs';
 
 
 let verbose = false;
@@ -280,6 +281,17 @@ csharp:
 let exitcode = 0;
 let args: CommandLineArgs;
 
+let cleared = false;
+async function doClearFolders(protectFiles: Set<string>, clearFolders: Set<string>) {
+  if (!cleared) {
+    timestampDebugLog("Clearing Folders.")
+    cleared = true;
+    for (const folder of clearFolders) {
+      try { await ClearFolder(folder, [...protectFiles].map(each => ResolveUri(folder, each))) } catch { };
+    }
+  }
+}
+
 async function currentMain(autorestArgs: Array<string>): Promise<number> {
   if (autorestArgs[0] === 'init') {
     await autorestInit();
@@ -317,7 +329,17 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   const artifacts: Array<Artifact> = [];
   const clearFolders = new Set<string>();
   const protectFiles = new Set<string>();
-  api.GeneratedFile.Subscribe((_, artifact) => artifacts.push(artifact));
+  let fastMode = false;
+  let tasks = new Array<Promise<void>>();
+
+  api.GeneratedFile.Subscribe((_, artifact) => {
+    if (fastMode) {
+      protectFiles.add(artifact.uri);
+      tasks.push((artifact.type === 'binary-file' ? WriteBinary(artifact.uri, artifact.content) : WriteString(artifact.uri, artifact.content)))
+    } else {
+      artifacts.push(artifact)
+    }
+  });
   api.Message.Subscribe((_, message) => {
     if (message.Channel === Channel.Protect && message.Details) {
       protectFiles.add(message.Details);
@@ -331,6 +353,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   if (config['resource-schema-batch']) {
     return resourceSchemaBatch(api);
   }
+  fastMode = !!config['fast-mode'];
 
   if (config['batch']) {
     await batch(api);
@@ -339,6 +362,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     if (result !== true) {
       throw result;
     }
+    timestampLog("Generation Pipeline Complete")
   }
 
   if (config.HelpRequested) {
@@ -376,14 +400,16 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     }
   } else {
     // perform file system operations.
-    for (const folder of clearFolders) {
-      try { await ClearFolder(folder, [...protectFiles].map(each => ResolveUri(folder, each))) } catch { };
-    }
+    await doClearFolders(protectFiles, clearFolders);
+
+    timestampDebugLog("Writing Outputs.")
+    await Promise.all(tasks);
+
     for (const artifact of artifacts) {
       await (artifact.type === 'binary-file' ? WriteBinary(artifact.uri, artifact.content) : WriteString(artifact.uri, artifact.content));
     }
   }
-
+  timestampLog("Generation Complete");
   // return the exit code to the caller.
   return exitcode;
 }
@@ -547,6 +573,17 @@ async function mainImpl(): Promise<number> {
   return 1;
 }
 
+
+function timestampLog(content: string) {
+  console.log(color(`[${Math.floor(process.uptime() * 100) / 100} s] ${content}`));
+}
+function timestampDebugLog(content: string) {
+  if (debug) {
+    console.log(color(`[${Math.floor(process.uptime() * 100) / 100} s] ${content}`));
+  }
+}
+
+
 async function main() {
   let exitcode = 0;
   try {
@@ -555,9 +592,12 @@ async function main() {
     exitcode = 102;
   } finally {
     try {
+      timestampDebugLog("Shutting Down.");
       await Shutdown();
     } catch  {
+      timestampDebugLog("Shutting Down: (trouble?)");
     } finally {
+      timestampDebugLog("Exiting.");
       process.exit(exitcode);
     }
   }

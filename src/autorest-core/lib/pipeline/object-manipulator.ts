@@ -19,7 +19,7 @@ export async function manipulateObject(
   }): Promise<{ anyHit: boolean, result: DataHandle }> {
 
   if (whereJsonQuery === '$') {
-    const data = src.ReadData();
+    const data = await src.ReadData();
     const newObject = transformer(null, data, []);
     if (newObject !== data) {
       const resultHandle = await target.WriteData(src.Description, newObject, src.identity, src.artifactType, undefined, mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src]);
@@ -33,7 +33,7 @@ export async function manipulateObject(
 
   // find paths matched by `whereJsonQuery`
 
-  let ast: YAMLNode = CloneAst(src.ReadYamlAst());
+  let ast: YAMLNode = CloneAst(await src.ReadYamlAst());
   const doc = ParseNode<any>(ast);
   const hits = nodes(doc, whereJsonQuery).sort((a, b) => a.path.length - b.path.length);
   if (hits.length === 0) {

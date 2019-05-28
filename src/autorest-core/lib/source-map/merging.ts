@@ -253,7 +253,7 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Ar
   }
 
   for (const yamlInputHandle of yamlInputHandles) {
-    const rawYaml = yamlInputHandle.ReadData();
+    const rawYaml = await yamlInputHandle.ReadData();
     const inputGraph: any = Parse(rawYaml, (message, index) => {
       failed = true;
       if (config) {
@@ -266,7 +266,7 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Ar
     }) || {};
 
     mergedGraph = Merge(mergedGraph, inputGraph);
-    pushAll(mappings, IdentitySourceMapping(yamlInputHandle.key, yamlInputHandle.ReadYamlAst()));
+    pushAll(mappings, IdentitySourceMapping(yamlInputHandle.key, await yamlInputHandle.ReadYamlAst()));
 
     if (verifyOAI2) {
       // check for non-identical duplicate models and parameters
@@ -282,7 +282,7 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Ar
               Channel: Channel.Error,
               Key: ['Fatal/DuplicateModelCollsion'],
               Text: `Duplicated model name with non-identical definitions`,
-              Source: [{ document: mergedHandle.key, Position: ResolvePath(mergedHandle, ['definitions', model]) }]
+              Source: [{ document: mergedHandle.key, Position: await ResolvePath(mergedHandle, ['definitions', model]) }]
 
             });
           }
@@ -300,7 +300,7 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Ar
               Channel: Channel.Error,
               Key: ['Fatal/DuplicateParameterCollision'],
               Text: `Duplicated global non-identical parameter definitions`,
-              Source: [{ document: mergedHandle.key, Position: ResolvePath(mergedHandle, ['parameters', parameter]) }]
+              Source: [{ document: mergedHandle.key, Position: await ResolvePath(mergedHandle, ['parameters', parameter]) }]
             });
           }
         }

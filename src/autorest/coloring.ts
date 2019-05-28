@@ -41,6 +41,7 @@ function compileStyledText(text: string): string {
 export function color(text: string): string {
   return compileStyledText(text.
     replace(/\*\*(.*?)\*\*/gm, addStyle("bold", `$1`)).
+    replace(/(\[.*?s\])/gm, addStyle("yellow.bold", "$1")).
     replace(/^# (.*)/gm, addStyle("greenBright", '$1')).
     replace(/^## (.*)/gm, addStyle("green", '$1')).
     replace(/^### (.*)/gm, addStyle("cyanBright", '$1')).

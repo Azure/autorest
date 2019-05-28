@@ -13,12 +13,12 @@ export function createCSharpReflectApiVersionPlugin(): PipelinePlugin {
 
     // get resolved Swagger to determine title
     const resolvedSwagger = await input.ReadStrict(<any>files.shift());
-    const title: string = resolvedSwagger.ReadObject<any>().info.title.replace(/[^a-zA-Z]/g, '');
+    const title: string = (await resolvedSwagger.ReadObject<any>()).info.title.replace(/[^a-zA-Z]/g, '');
 
     // collect metadata
     const data: Array<{ namespace: string; group: string; apiVersion: string }> = [];
     for (const file of files) {
-      const swagger = (await input.ReadStrict(file)).ReadObject<any>();
+      const swagger = await (await input.ReadStrict(file)).ReadObject<any>();
       const apiVersion = swagger.info.version;
       const paths = { ...swagger['paths'], ...swagger['x-ms-paths'] };
       for (const path of Object.keys(paths)) {

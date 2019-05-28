@@ -82,7 +82,7 @@ const expandableFieldsList = ['properties', 'allOf'];
     assert(outputDataHandle != null);
 
     if (inputDataHandle && outputDataHandle) {
-      const outputObject = outputDataHandle.ReadObject();
+      const outputObject = await outputDataHandle.ReadObject();
       const processor = new SubsetSchemaDeduplicator(inputDataHandle);
       const processorOutput = await processor.getOutput();
       assert.deepEqual(processorOutput, outputObject, 'Should be the same');

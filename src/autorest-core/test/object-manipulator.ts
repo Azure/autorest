@@ -73,7 +73,7 @@ definitions:
     // remove all models that don't have a description
     const result = await manipulateObject(input, dataStore.getDataSink(), '$.definitions[?(!@.description)]', (_, x) => undefined);
     assert.strictEqual(result.anyHit, true);
-    const resultRaw = result.result.ReadData();
+    const resultRaw = await result.result.ReadData();
     assert.ok(resultRaw.indexOf('NodeA') !== -1);
     assert.ok(resultRaw.indexOf('NodeB') === -1);
   }
@@ -88,7 +88,7 @@ definitions:
       const bestDescriptionEver = 'best description ever';
       const result = await manipulateObject(input, dataStore.getDataSink(), '$.definitions.*.description', (_, x) => bestDescriptionEver);
       assert.strictEqual(result.anyHit, true);
-      const resultObject = result.result.ReadObject<any>();
+      const resultObject = await result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, bestDescriptionEver);
     }
     {
@@ -96,7 +96,7 @@ definitions:
       const bestDescriptionEver = 'best description ever';
       const result = await manipulateObject(input, dataStore.getDataSink(), '$.definitions.*', (_, x) => { x.description = bestDescriptionEver; return x; });
       assert.strictEqual(result.anyHit, true);
-      const resultObject = result.result.ReadObject<any>();
+      const resultObject = await result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, bestDescriptionEver);
       assert.strictEqual(resultObject.definitions.NodeB.description, bestDescriptionEver);
     }
@@ -105,7 +105,7 @@ definitions:
       const bestDescriptionEver = 'best description ever';
       const result = await manipulateObject(input, dataStore.getDataSink(), '$..description', (_, x) => (x as string).toUpperCase());
       assert.strictEqual(result.anyHit, true);
-      const resultObject = result.result.ReadObject<any>();
+      const resultObject = await result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, 'DESCRIPTION');
       assert.strictEqual(resultObject.paths['/api/circular'].get.description, 'FUN TIME');
     }
@@ -114,7 +114,7 @@ definitions:
       const bestDescriptionEver = 'best description ever';
       const result = await manipulateObject(input, dataStore.getDataSink(), '$..description', (_, x) => safeEval('$.toUpperCase()', { $: x }));
       assert.strictEqual(result.anyHit, true);
-      const resultObject = result.result.ReadObject<any>();
+      const resultObject = await result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, 'DESCRIPTION');
       assert.strictEqual(resultObject.paths['/api/circular'].get.description, 'FUN TIME');
     }

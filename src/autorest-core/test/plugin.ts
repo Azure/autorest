@@ -71,7 +71,7 @@ async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtensio
     }
 
     // check results
-    const codeModel = results[0].ReadData();
+    const codeModel = await results[0].ReadData();
     assert.notEqual(codeModel.indexOf('isConstant'), -1);
   }
 

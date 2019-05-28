@@ -16,7 +16,7 @@ const regexLegacyArg = /^-[^-]/;
 
 async function ParseCompositeSwagger(inputScope: DataSource, uri: string, targetConfig: AutoRestConfigurationImpl): Promise<void> {
   const compositeSwaggerFile = await inputScope.ReadStrict(uri);
-  const data = compositeSwaggerFile.ReadObject<{ info: any, documents: string[] }>();
+  const data = await compositeSwaggerFile.ReadObject<{ info: any, documents: string[] }>();
   const documents = data.documents;
   targetConfig["input-file"] = documents.map(d => ResolveUri(uri, d));
 

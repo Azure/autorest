@@ -2,7 +2,7 @@
 // load modules from static linker filesystem.
 // if the process was started with a low heap size (and we're not debugging!) then respawn with a bigger heap size.
 if ( (require('v8').getHeapStatistics()).heap_size_limit < 8000000000 && !(global.v8debug || /--debug|--inspect/.test(process.execArgv.join(' ')) ) )  { 
-  process.env['NODE_OPTIONS'] = `${process.env['NODE_OPTIONS'] || ''} --max-old-space-size=8192`
+  process.env['NODE_OPTIONS'] = `${process.env['NODE_OPTIONS'] || ''} --max-old-space-size=8192 --no-warnings`
   require("child_process").spawn( process.execPath, process.argv.slice(1) , { argv0:"node" , stdio :'inherit' }).on('close' , code=> { process.exit(code); });
 } else {
   try {

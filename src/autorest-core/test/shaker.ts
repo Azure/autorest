@@ -44,7 +44,7 @@ const resources = `${__dirname}../../../test/resources/shaker`;
 
     if (inputDataHandle && outputDataHandle) {
       // if (inputDataHandle) {
-      const outputObject = outputDataHandle.ReadObject();
+      const outputObject = await outputDataHandle.ReadObject();
       const shaker = new OAI3Shaker(inputDataHandle);
 
       // testing: dump out the converted file

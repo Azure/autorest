@@ -36,7 +36,7 @@ async function parseInternal(config: ConfigurationView, hLiterate: DataHandle, s
 async function parseCodeBlocksInternal(config: ConfigurationView, hLiterate: DataHandle, sink: DataSink): Promise<Array<CodeBlock>> {
   let hsConfigFileBlocks: Array<CodeBlock> = [];
 
-  const rawMarkdown = hLiterate.ReadData();
+  const rawMarkdown = await hLiterate.ReadData();
 
   // try parsing as literate YAML
   if (tryMarkdown(rawMarkdown)) {
@@ -51,7 +51,7 @@ async function parseCodeBlocksInternal(config: ConfigurationView, hLiterate: Dat
       // super-quick JSON block syntax check.
       if (/^(json)/i.test(codeBlock.info || '')) {
         // check syntax on JSON blocks with simple check first
-        const error = StrictJsonSyntaxCheck(data.ReadData());
+        const error = StrictJsonSyntaxCheck(await data.ReadData());
         if (error) {
           config.Message({
             Channel: Channel.Error,
@@ -63,7 +63,7 @@ async function parseCodeBlocksInternal(config: ConfigurationView, hLiterate: Dat
       }
 
       let failing = false;
-      const ast = data.ReadYamlAst();
+      const ast = await data.ReadYamlAst();
 
       // quick syntax check.
       ParseNode(ast, async (message, index) => {

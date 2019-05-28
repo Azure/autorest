@@ -31,7 +31,7 @@ const resources = `${__dirname}../../../test/resources/renamer`;
 
     if (inputDataHandle && outputDataHandle) {
       // if (inputDataHandle) {
-      const outputObject = outputDataHandle.ReadObject();
+      const outputObject = await outputDataHandle.ReadObject();
       const renamer = new ComponentKeyRenamer(inputDataHandle);
 
       assert.deepEqual(renamer.getOutput(), outputObject, 'Should be the same');

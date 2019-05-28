@@ -138,6 +138,23 @@ function* valuesOf<T>(value: any): Iterable<T> {
   // */
 }
 
+function arrayOf<T>(value: any): Array<T> {
+  if (value === undefined) {
+    return [];
+  }
+  switch (typeof value) {
+    case 'string':
+      return [<T><any>value];
+    case 'object':
+      if (isIterable(value)) {
+        return [...value];
+      }
+      break;
+  }
+  return [<T><any>value];
+}
+
+
 export interface Directive {
   from?: Array<string> | string;
   where?: Array<string> | string;
@@ -150,8 +167,29 @@ export interface Directive {
   test?: Array<string> | string;
 }
 
+export class StaticDirectiveView {
+  from: Array<string>;
+  where: Array<string>
+  reason?: string;
+  suppress: Array<string>;
+  transform: Array<string>;
+  test: Array<string>;
+
+  constructor(public directive: Directive) {
+    this.from = arrayOf(directive['from']);
+    this.where = arrayOf(directive['from']);
+    this.reason = directive.reason;
+    this.suppress = arrayOf(directive['suppress']);
+    this.transform = arrayOf(directive['transform']);
+    this.test = arrayOf(directive['test']);
+    this.from = arrayOf(directive['from']);
+  }
+}
+
+
 export class DirectiveView {
   constructor(private directive: Directive) {
+
   }
 
   public get from(): Iterable<string> {
@@ -426,6 +464,32 @@ export class ConfigurationView {
     return From(plainDirectives).SelectMany(expandDirective).Select(each => new DirectiveView(each)).ToArray();
   }
 
+  public get StaticDirectives(): Array<StaticDirectiveView> {
+    const plainDirectives = valuesOf<Directive>(this.config['directive']);
+    const declarations = this.config['declare-directive'] || {};
+    const expandDirective = (dir: Directive): Iterable<Directive> => {
+      const makro = Object.keys(dir).filter(m => declarations[m])[0];
+      if (!makro) {
+        return [dir]; // nothing to expand
+      }
+      // prepare directive
+      let parameters = (dir as any)[makro];
+      if (!Array.isArray(parameters)) {
+        parameters = [parameters];
+      }
+      dir = { ...dir };
+      delete (dir as any)[makro];
+      // call makro
+      const makroResults: any = From(parameters).SelectMany(parameter => {
+        const result = safeEval(declarations[makro], { $: parameter, $context: dir });
+        return Array.isArray(result) ? result : [result];
+      }).ToArray();
+      return From(makroResults).SelectMany((result: any) => expandDirective({ ...result, ...dir }));
+    };
+    // makro expansion
+    return From(plainDirectives).SelectMany(expandDirective).Select(each => new StaticDirectiveView(each)).ToArray();
+  }
+
   public get InputFileUris(): Array<string> {
     return From<string>(valuesOf<string>(this.config['input-file']))
       .Select(each => this.ResolveAsPath(each))
@@ -480,7 +544,7 @@ export class ConfigurationView {
   }
 
   // message pipeline (source map resolution, filter, ...)
-  public Message(m: Message): void {
+  public async Message(m: Message): Promise<void> {
     if (m.Channel === Channel.Debug && !this.DebugMode) {
       return;
     }
@@ -492,7 +556,7 @@ export class ConfigurationView {
     try {
       // update source locations to point to loaded Swagger
       if (m.Source && typeof (m.Source.map) === 'function') {
-        const blameSources = m.Source.map(s => {
+        const blameSources = m.Source.map(async s => {
           let blameTree: BlameTree | null = null;
 
           try {
@@ -500,7 +564,7 @@ export class ConfigurationView {
             let shouldComplain = false;
             while (blameTree === null) {
               try {
-                blameTree = this.DataStore.Blame(s.document, s.Position);
+                blameTree = await this.DataStore.Blame(s.document, s.Position);
                 if (shouldComplain) {
                   this.Message({
                     Channel: Channel.Verbose,
@@ -545,7 +609,7 @@ export class ConfigurationView {
           return blameTree.BlameLeafs().map(r => <SourceLocation>{ document: r.source, Position: { ...TryDecodeEnhancedPositionFromName(r.name), line: r.line, column: r.column } });
         });
 
-        const src = From(blameSources).SelectMany(x => x).ToArray();
+        const src = From(await Promise.all(blameSources)).SelectMany(x => x).ToArray();
         m.Source = src;
         // m.Source = From(blameSources).SelectMany(x => x).ToArray();
         // get friendly names
@@ -602,7 +666,8 @@ export class ConfigurationView {
             mx.FormattedMessage = Stringify([mx.Details || mx]).replace(/^---/, '');
             break;
           default:
-            let text = `${(mx.Channel || Channel.Information).toString().toUpperCase()}${mx.Key ? ` (${[...mx.Key].join('/')})` : ''}: ${mx.Text}`;
+            const t = mx.Channel === Channel.Debug || mx.Channel === Channel.Verbose ? ` [${Math.floor(process.uptime() * 100) / 100} s]` : '';
+            let text = `${(mx.Channel || Channel.Information).toString().toUpperCase()}${mx.Key ? ` (${[...mx.Key].join('/')})` : ''}${t}: ${mx.Text}`;
             for (const source of mx.Source || []) {
               if (source.Position) {
                 try {
@@ -650,19 +715,25 @@ export class Configuration {
       return [];
     }
 
-    const blocks = hConfig.filter(each => each).map(each => {
-      const block = each.data.ReadObject<AutoRestConfigurationImpl>() || {};
-      if (typeof block !== 'object') {
-        contextConfig.Message({
-          Channel: Channel.Error,
-          Text: 'Syntax error: Invalid YAML object.',
-          Source: [<SourceLocation>{ document: each.data.key, Position: { line: 1, column: 0 } }]
-        });
-        throw new OperationAbortedException();
-      }
-      block.__info = each.info;
-      return block;
-    });
+    const blocks = await Promise.all(hConfig.filter(each => each).map(each => {
+      const pBlock = each.data.ReadObject<AutoRestConfigurationImpl>();
+      return pBlock.then(block => {
+        if (!block) {
+          block = {};
+        }
+        if (typeof block !== 'object') {
+          contextConfig.Message({
+            Channel: Channel.Error,
+            Text: 'Syntax error: Invalid YAML object.',
+            Source: [<SourceLocation>{ document: each.data.key, Position: { line: 1, column: 0 } }]
+          });
+          throw new OperationAbortedException();
+        }
+        block.__info = each.info;
+        return block;
+      });
+
+    }));
     return blocks;
   }
 
@@ -762,7 +833,7 @@ export class Configuration {
     // 2. file
     if (configFileUri !== null) {
       // add loaded files to the input files.
-      configurationFiles[configFileUri] = (await fsInputView.ReadStrict(configFileUri)).ReadData();
+      configurationFiles[configFileUri] = await (await fsInputView.ReadStrict(configFileUri)).ReadData();
 
       const blocks = await this.ParseCodeBlocks(
         await fsInputView.ReadStrict(configFileUri),
@@ -787,7 +858,7 @@ export class Configuration {
 
           const inputView = messageEmitter.DataStore.GetReadThroughScope(fsToUse);
 
-          configurationFiles[additionalConfig] = (await inputView.ReadStrict(additionalConfig)).ReadData();
+          configurationFiles[additionalConfig] = await (await inputView.ReadStrict(additionalConfig)).ReadData();
           const blocks = await this.ParseCodeBlocks(
             await inputView.ReadStrict(additionalConfig),
             createView(),
