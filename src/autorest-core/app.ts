@@ -46,8 +46,6 @@ import { AutoRestConfigurationImpl, MergeConfigurations } from './lib/configurat
 import { Exception, OperationCanceledException } from './lib/exception';
 import { Channel, Message } from './lib/message';
 import { ShallowCopy } from './lib/source-map/merging';
-import { promises } from 'fs';
-
 
 let verbose = false;
 let debug = false;
