@@ -94,5 +94,6 @@ async function ParseCompositeSwagger(inputScope: DataSource, uri: string, target
     result["output-artifact"] = "swagger-document";
     delete (result as any)[usedCodeGenerator];
   }
+  
   return result;
 }
