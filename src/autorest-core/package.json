@@ -51,7 +51,7 @@
     "static-link": "^0.2.3",
     "@microsoft.azure/async-io": "^2.1.0",
     "@microsoft.azure/extension": "^2.2.0",
-    "@microsoft.azure/oai2-to-oai3": "^2.1.0",
+    "@microsoft.azure/oai2-to-oai3": "^3.0.0",
     "@microsoft.azure/tasks": "^2.1.0",
     "vscode-jsonrpc": "^3.3.1"
   },
@@ -60,7 +60,7 @@
     "dependencies": {
       "@microsoft.azure/async-io": "^2.1.0",
       "@microsoft.azure/extension": "^2.2.0",
-      "@microsoft.azure/oai2-to-oai3": "^2.1.0",
+      "@microsoft.azure/oai2-to-oai3": "^3.0.0",
       "@microsoft.azure/tasks": "^2.1.0",
       "vscode-languageserver": "3.5.1",
       "commonmark": "^0.27.0",
