@@ -1,4 +1,4 @@
-# <img align="center" src="./images/logo.png"> Sample : Generating a client using AutoRest
+# <img align="center" src="/docs/images/logo.png"> Sample : Generating a client using AutoRest
 
 First, download the petstore.yaml example file:
 
