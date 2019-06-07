@@ -474,7 +474,7 @@ function validateProfiles(profiles: Dictionary<Profile>) {
     for (const namespace of items(profile.value.resources)) {
       for (const apiVersion of items(namespace.value)) {
         for (const resource of apiVersion.value) {
-          const uid = `profile: ${profile.key.toLowerCase()} / providerNamespace: ${namespace.key.toLowerCase()} / resourceType: ${resource.toLowerCase()}`
+          const uid = `profile:${profile.key.toLowerCase()}/providerNamespace:${namespace.key.toLowerCase()}/resourceType:${resource.toLowerCase()}`;
           if (!resourcesFound.has(uid)) {
             resourcesFound.add(uid);
           } else {
@@ -492,9 +492,9 @@ function validateProfiles(profiles: Dictionary<Profile>) {
   if (Object.keys(duplicatedResources).length > 0) {
     let errorMessage = 'The following resourceTypes are defined in multiple api-versions within the same providerNamespace in the same profile: ';
     for (const resourceType of items(duplicatedResources)) {
-      errorMessage += `\n * ${resourceType.key}: `;
+      errorMessage += `\n*${resourceType.key}:`;
       for (const duplicateEntry of resourceType.value) {
-        errorMessage += `\n-- -> conflicting api - versions: ${duplicateEntry}`;
+        errorMessage += `\n ---> conflicting api-versions: ${duplicateEntry}`;
       }
     }
     throw Error(errorMessage);
