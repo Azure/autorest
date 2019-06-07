@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { maximum } from '@microsoft.azure/codegen';
-import { AnyObject, DataHandle, DataSink, DataSource, Node, ProxyObject, QuickDataSource, Transformer, visit } from '@microsoft.azure/datastore';
+import { maximum, serialize } from '@microsoft.azure/codegen';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, ProxyObject, QuickDataSource, Transformer, visit, ConvertJsonx2Yaml } from '@microsoft.azure/datastore';
 import { Dictionary, items, values } from '@microsoft.azure/linq';
 import * as oai from '@microsoft.azure/openapi';
 import { ConfigurationView } from '../../configuration';
@@ -76,7 +76,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   }
 
   async init() {
-    const currentDoc = await this.inputs[0].ReadObject();
+    const currentDoc = await this.inputs[0].ReadObject<AnyObject>();
     this.components = currentDoc['components'];
     if (this.profilesToUse.length > 0) {
       const resourcesTargets: Array<ResourceData> = [];
@@ -400,7 +400,6 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
 async function filter(config: ConfigurationView, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
-
   for (const each of inputs) {
     const allProfileDefinitions = config.GetEntry('profiles');
     const configApiVersion = config.GetEntry('api-version');
@@ -412,13 +411,59 @@ async function filter(config: ConfigurationView, input: DataSource, sink: DataSi
       }
 
       const processor = new ProfileFilter(each, allProfileDefinitions, profilesRequested, apiVersions);
-      result.push(await sink.WriteObject('profile-filtered-oai-doc...', await processor.getOutput(), each.identity, 'profile-filtered-oai3', await processor.getSourceMappings()));
+      const output = await processor.getOutput();
+      const specsUsed = [...getLatestFiles(visit(output))];
+      if ((Array.isArray(config.GetEntry('output-artifact')) && config.GetEntry('output-artifact').includes('specs-used')) || config.GetEntry('output-artifact') === 'specs-used') {
+        result.push(await sink.WriteData('specs-used.yaml', serialize({ count: specsUsed.length, specsUsed }), [], 'specs-used'));
+      }
+
+      result.push(await sink.WriteObject('profile-filtered-oai-doc...', output, each.identity, 'profile-filtered-oai3', await processor.getSourceMappings()));
     } else {
       result.push(each);
     }
   }
 
   return new QuickDataSource(result, input.skip);
+}
+
+function getLatestFiles(nodes: Iterable<Node>) {
+  const filesUsed = new Set<string>();
+  for (const field of nodes) {
+    switch (field.key) {
+      case 'paths':
+        for (const path of field.children) {
+          path.value['x-ms-metadata'].originalLocations.map(x => filesUsed.add(x.replace(/(.*)#\/paths.*/g, '$1')));
+        }
+        break;
+
+      case 'components':
+        for (const collection of field.children) {
+          switch (collection.key) {
+            case 'schemas':
+            case 'responses':
+            case 'parameters':
+            case 'examples':
+            case 'requestBodies':
+            case 'headers':
+            case 'links':
+            case 'callbacks':
+            case 'securitySchemes':
+              for (const component of collection.children) {
+                component.value['x-ms-metadata'].originalLocations.map(x => filesUsed.add(x.replace(/(.*)#\/components.*/g, '$1')));
+              }
+              break;
+            default:
+              break;
+          }
+        }
+
+        break;
+      default:
+        break;
+    }
+  }
+
+  return filesUsed;
 }
 
 function validateProfiles(profiles: Dictionary<Profile>) {
@@ -429,7 +474,7 @@ function validateProfiles(profiles: Dictionary<Profile>) {
     for (const namespace of items(profile.value.resources)) {
       for (const apiVersion of items(namespace.value)) {
         for (const resource of apiVersion.value) {
-          const uid = `profile:${profile.key.toLowerCase()}/providerNamespace:${namespace.key.toLowerCase()}/resourceType:${resource.toLowerCase()}`
+          const uid = `profile:${profile.key.toLowerCase()}/providerNamespace:${namespace.key.toLowerCase()}/resourceType:${resource.toLowerCase()}`;
           if (!resourcesFound.has(uid)) {
             resourcesFound.add(uid);
           } else {
