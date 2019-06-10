@@ -29,14 +29,10 @@
         "--version=${workspaceRoot}/src/autorest-core",
         "--verbose",
         "--debug",
-        "--powershell",
-        "--azure",
-        "--output-folder=c:/work/2019/temp/profile-new",
-        "--profile=2018-01-01-hybrid",
-        "--profile=2017-11-09-profile",
-        "--profile=latest"
+        "--output-artifact=specs-used",
+        "--interactive"
       ],
-      "cwd": "c:/work/2019/temp/profile-test"
+      "cwd": "c:/work/2019/azure-powershell/src/network"
     },
     {
       "type": "node",

@@ -273,7 +273,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
     // map of '${profileName}:${value[x-ms-metadata].path}' -> '${path:uid} (no method included, like path:0.get, path:0.put, etc)'
     const uniquePathPerProfile = new Dictionary<String>();
 
-    // filter paths
+    // filter paths 
     for (const { value, key: pathKey, pointer, children } of nodes) {
       const path: string = value['x-ms-metadata'].path.replace(/\/*$/, '');
       const keyWithNoMethod = pathKey.split('.')[0];
