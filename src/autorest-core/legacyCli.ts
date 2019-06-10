@@ -28,6 +28,7 @@ async function ParseCompositeSwagger(inputScope: DataSource, uri: string, target
   let result: AutoRestConfigurationImpl = {
     "input-file": []
   };
+  
   const switches: { [key: string]: string | null } = {};
 
   // parse
