@@ -12,43 +12,37 @@ function isOutputArtifactOrMapRequested(config: ConfigurationView, artifactType:
 }
 
 async function emitArtifactInternal(config: ConfigurationView, artifactType: string, uri: string, handle: DataHandle): Promise<void> {
-  config.Message({ Channel: Channel.Debug, Text: `Emitting '${artifactType}' at ${uri}` });
-  const emitArtifact = (artifact: Artifact): void => {
-    if (artifact.uri.startsWith('stdout://')) {
-      config.Message({
-        Channel: Channel.Information,
-        Details: artifact,
-        Text: `Artifact '${artifact.uri.slice('stdout://'.length)}' of type '${artifact.type}' has been emitted.`,
-        Plugin: 'emitter'
-      });
-    } else {
-      config.GeneratedFile.Dispatch(artifact);
-    }
-  };
   if (config.IsOutputArtifactRequested(artifactType)) {
     const content = await handle.ReadData(true);
     if (content !== '') {
-      emitArtifact({
-        type: artifactType,
-        uri,
-        content
-      });
+      config.Message({ Channel: Channel.Debug, Text: `Emitting '${artifactType}' at ${uri}` });
+      if (uri.startsWith('stdout://')) {
+        config.Message({
+          Channel: Channel.Information,
+          Details: { type: artifactType, uri, content },
+          Text: `Artifact '${uri.slice('stdout://'.length)}' of type '${artifactType}' has been emitted.`,
+          Plugin: 'emitter'
+        });
+      } else {
+        config.GeneratedFile.Dispatch({ type: artifactType, uri, content });
+      }
+      /* DISABLING SOURCE MAP SUPPORT
+          if (config.IsOutputArtifactRequested(artifactType + '.map')) {
+            emitArtifact({
+              type: artifactType + '.map',
+              uri: uri + '.map',
+              content: JSON.stringify(await handle.metadata.inputSourceMap, null, 2)
+            });
+          }
+          */
     }
   }
-  /* DISABLING SOURCE MAP SUPPORT 
-  if (config.IsOutputArtifactRequested(artifactType + '.map')) {
-    emitArtifact({
-      type: artifactType + '.map',
-      uri: uri + '.map',
-      content: JSON.stringify(await handle.metadata.inputSourceMap, null, 2)
-    });
-  }
-  */
 }
+
 let emitCtr = 0;
 async function emitArtifact(config: ConfigurationView, uri: string, handle: DataHandle, isObject: boolean): Promise<void> {
   const artifactType = handle.artifactType;
-  await emitArtifactInternal(config, artifactType, uri, handle);
+  const result = emitArtifactInternal(config, artifactType, uri, handle);
 
   if (isObject) {
     const sink = config.DataStore.getDataSink();
@@ -72,9 +66,11 @@ async function emitArtifact(config: ConfigurationView, uri: string, handle: Data
       await emitArtifactInternal(config, artifactType + '.norm.json', uri + '.norm.json', h);
     }
   }
+  return result;
 }
 
 export async function emitArtifacts(config: ConfigurationView, artifactTypeFilter: string | Array<string> | null /* what's set on the emitter */, uriResolver: (key: string) => string, scope: DataSource, isObject: boolean): Promise<void> {
+  const all = new Array<Promise<void>>();
   for (const key of await scope.Enum()) {
     const file = await scope.ReadStrict(key);
     const fileArtifact = file.artifactType;
@@ -85,9 +81,10 @@ export async function emitArtifacts(config: ConfigurationView, artifactTypeFilte
       true; // if it's null, just emit it.
 
     if (ok) {
-      await emitArtifact(config, uriResolver(file.Description), file, isObject);
+      all.push(emitArtifact(config, uriResolver(file.Description), file, isObject));
     }
   }
+  await Promise.all(all);
 }
 
 /* @internal */

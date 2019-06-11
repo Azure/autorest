@@ -331,12 +331,8 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   let tasks = new Array<Promise<void>>();
 
   api.GeneratedFile.Subscribe((_, artifact) => {
-    if (fastMode) {
-      protectFiles.add(artifact.uri);
-      tasks.push((artifact.type === 'binary-file' ? WriteBinary(artifact.uri, artifact.content) : WriteString(artifact.uri, artifact.content)))
-    } else {
-      artifacts.push(artifact)
-    }
+    protectFiles.add(artifact.uri);
+    tasks.push((artifact.type === 'binary-file' ? WriteBinary(artifact.uri, artifact.content) : WriteString(artifact.uri, artifact.content)))
   });
   api.Message.Subscribe((_, message) => {
     if (message.Channel === Channel.Protect && message.Details) {
@@ -360,7 +356,6 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     if (result !== true) {
       throw result;
     }
-    timestampLog("Generation Pipeline Complete")
   }
 
   if (config.HelpRequested) {
