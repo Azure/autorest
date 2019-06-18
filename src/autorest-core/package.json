@@ -29,7 +29,8 @@
     "static-link": "static-link",
     "postinstall": "node ./post-install --force",
     "reinstall": "shx rm ./package-lock.json && shx rm -rf ./node_modules && npm install",
-    "prepack": "static-link && npm run build"
+    "prepack": "static-link && npm run build",
+    "something":""
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {
