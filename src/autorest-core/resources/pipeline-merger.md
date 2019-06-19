@@ -35,7 +35,7 @@ pipeline:
 
   openapi-document/emitter:
     input: profile-filter
-    input-artifact: specs-used 
+    input-artifact: profile-filter-log 
 ```
 
 ``` yaml $(enable-multi-api)
