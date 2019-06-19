@@ -29,6 +29,7 @@ export interface AutoRestConfigurationImpl {
   __info?: string | null;
   'allow-no-input'?: boolean;
   'input-file'?: Array<string> | string;
+  'exclude-file'?: Array<string> | string;
   'base-folder'?: string;
   'directive'?: Array<Directive> | Directive;
   'declare-directive'?: { [name: string]: string };
@@ -281,6 +282,7 @@ export class ConfigurationView {
     this.rawConfig = <any>{
       'directive': [],
       'input-file': [],
+      'exclude-file': [],
       'profile': [],
       'output-artifact': [],
       'require': [],
@@ -491,9 +493,14 @@ export class ConfigurationView {
   }
 
   public get InputFileUris(): Array<string> {
-    return From<string>(valuesOf<string>(this.config['input-file']))
+    const inputFiles = From<string>(valuesOf<string>(this.config['input-file']))
       .Select(each => this.ResolveAsPath(each))
       .ToArray();
+    const filesToExclude = From<string>(valuesOf<string>(this.config['exclude-file']))
+      .Select(each => this.ResolveAsPath(each))
+      .ToArray();
+
+    return inputFiles.filter(x => !filesToExclude.includes(x));
   }
 
   public get OutputFolderUri(): string {
