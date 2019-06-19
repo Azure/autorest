@@ -416,7 +416,7 @@ async function filter(config: ConfigurationView, input: DataSource, sink: DataSi
       const specsReferencedAfterFiltering = getFilesUsed(visit(output));
       const specsNotUsed = [...specsReferencedBeforeFiltering].filter(x => !specsReferencedAfterFiltering.has(x));
       if ((Array.isArray(config.GetEntry('output-artifact')) && config.GetEntry('output-artifact').includes('profile-filter-log')) || config.GetEntry('output-artifact') === 'profile-filter-log') {
-        result.push(await sink.WriteData('profile-filter-log.yaml', serialize({ 'file-used': [...specsReferencedAfterFiltering], 'files-not-used': [...specsNotUsed] }), [], 'profile-filter-log'));
+        result.push(await sink.WriteData('profile-filter-log.yaml', serialize({ 'files-used': [...specsReferencedAfterFiltering], 'files-not-used': [...specsNotUsed] }), [], 'profile-filter-log'));
       }
 
       result.push(await sink.WriteObject('profile-filtered-oai-doc...', output, each.identity, 'profile-filtered-oai3', await processor.getSourceMappings()));
