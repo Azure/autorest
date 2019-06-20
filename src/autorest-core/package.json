@@ -52,6 +52,7 @@
     "typescript": "^3.1.3",
     "tslint": "^5.11.0",
     "tslint-language-service": "^0.9.9",
+<<<<<<< HEAD
     "tslint-microsoft-contrib": "^5.2.1",
     "static-link": "^0.2.4",
     "vscode-languageserver": "3.5.1",
@@ -78,10 +79,28 @@
     "yaml-ast-parser": "0.0.40",
     "pwsh": "0.2.0",
     "z-schema": "^3.19.0"
+=======
+    "tslint-microsoft-contrib": "^5.0.3",
+    "typescript": "^3.1.3",
+    "mocha-typescript": "1.1.14",
+    "static-link": "^0.2.3",
+    "@microsoft.azure/async-io": "^2.1.0",
+    "@microsoft.azure/extension": "^2.2.0",
+    "@microsoft.azure/oai2-to-oai3": "^3.0.0",
+    "@microsoft.azure/tasks": "^2.1.0",
+    "vscode-jsonrpc": "^3.3.1"
+>>>>>>> cc181baa981f312dba6f80d6ef89412d865248f9
   },
   "static-link": {
     "entrypoints": [],
     "dependencies": {
+<<<<<<< HEAD
+=======
+      "@microsoft.azure/async-io": "^2.1.0",
+      "@microsoft.azure/extension": "^2.2.0",
+      "@microsoft.azure/oai2-to-oai3": "^3.0.0",
+      "@microsoft.azure/tasks": "^2.1.0",
+>>>>>>> cc181baa981f312dba6f80d6ef89412d865248f9
       "vscode-languageserver": "3.5.1",
       "@microsoft.azure/async-io": "^2.1.0",
       "@microsoft.azure/extension": "^2.2.0",
@@ -100,11 +119,24 @@
       "linq-es2015": "^2.4.25",
       "safe-eval": "^0.3.0",
       "source-map": "0.5.6",
+<<<<<<< HEAD
+=======
+      "strip-bom": "^3.0.0",
+>>>>>>> cc181baa981f312dba6f80d6ef89412d865248f9
       "untildify": "^3.0.2",
       "vscode-jsonrpc": "^3.5.0",
       "yaml-ast-parser": "0.0.40",
+<<<<<<< HEAD
       "z-schema": "^3.19.0"
     }
   },
   "dependencies": {}
 }
+=======
+      "util": "0.12.0",
+"z-schema": "3.19.0"
+}
+},
+"dependencies": {}
+}
+>>>>>>> cc181baa981f312dba6f80d6ef89412d865248f9
