@@ -82,13 +82,6 @@
   "static-link": {
     "entrypoints": [],
     "dependencies": {
-<<<<<<< HEAD
-=======
-      "@microsoft.azure/async-io": "^2.1.0",
-      "@microsoft.azure/extension": "^2.2.0",
-      "@microsoft.azure/oai2-to-oai3": "^3.0.0",
-      "@microsoft.azure/tasks": "^2.1.0",
->>>>>>> cc181baa981f312dba6f80d6ef89412d865248f9
       "vscode-languageserver": "3.5.1",
       "@microsoft.azure/async-io": "^2.1.0",
       "@microsoft.azure/extension": "^2.2.0",
@@ -107,24 +100,11 @@
       "linq-es2015": "^2.4.25",
       "safe-eval": "^0.3.0",
       "source-map": "0.5.6",
-<<<<<<< HEAD
-=======
-      "strip-bom": "^3.0.0",
->>>>>>> cc181baa981f312dba6f80d6ef89412d865248f9
       "untildify": "^3.0.2",
       "vscode-jsonrpc": "^3.5.0",
       "yaml-ast-parser": "0.0.40",
-<<<<<<< HEAD
       "z-schema": "^3.19.0"
     }
   },
   "dependencies": {}
 }
-=======
-      "util": "0.12.0",
-"z-schema": "3.19.0"
-}
-},
-"dependencies": {}
-}
->>>>>>> cc181baa981f312dba6f80d6ef89412d865248f9
