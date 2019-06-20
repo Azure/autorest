@@ -22,7 +22,7 @@ Using `npm` you can upgrade to the latest stable version of AutoRest:
 
 Installing AutoRest on Windows, MacOS or Linux involves two steps:
 
-1. __Install [Node.js](https://nodejs.org/en/)__ (8.11.x LTS HIGHLY RECOMENDED)
+1. __Install [Node.js](https://nodejs.org/en/)__ (10.15.x LTS HIGHLY RECOMENDED)
 > for more help, check out [Installing Node.JS on different platforms](./docs/developer/workstation.md#nodejs)
 
 2. __Install AutoRest__ using `npm`
@@ -63,10 +63,10 @@ Start by reading the documentation for using AutoRest:
 
 Get yourself up and coding in AutoRest
 
-- [Developer Workstation Requirements](./docs/developer/workstation.md) - what do you need to install to start working with the AutoRest code
-- [AutoRest Extensibility](./docs/developer/architecture/AutoRest-extension.md) and [protocol](./docs/developer/architecture/AutoRest-extension-protocol.md) documentation
-- [Working on AutoRest core](./docs/developer/autorest-core.md) - compiling/testing AutoRest core using the build scripts
-- [Working on an AutoRest extension](./docs/developer/autorest-extension.md) - creating and testing AutoRest extensions
+- [Developer Workstation Requirements](./.attic/developer/workstation.md) - what do you need to install to start working with the AutoRest code
+- [AutoRest Extensibility](./.attic/developer/architecture/AutoRest-extension.md) and [protocol](./.attic/developer/architecture/AutoRest-extension-protocol.md) documentation
+- [Working on AutoRest core](./.attic/developer/autorest-core.md) - compiling/testing AutoRest core using the build scripts
+- [Working on an AutoRest extension](./.attic/developer/autorest-extension.md) - creating and testing AutoRest extensions
 - [AutoRest repositories and packages](./docs/trampoline.md) - all maintained repositories and packages on one page
 
 Some related information:

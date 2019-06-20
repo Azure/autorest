@@ -28,6 +28,7 @@ async function ParseCompositeSwagger(inputScope: DataSource, uri: string, target
   let result: AutoRestConfigurationImpl = {
     "input-file": []
   };
+  
   const switches: { [key: string]: string | null } = {};
 
   // parse
@@ -46,10 +47,9 @@ async function ParseCompositeSwagger(inputScope: DataSource, uri: string, target
   if (inputFile === null) {
     throw new Error("No input specified.");
   }
+  
   result["input-file"] = inputFile;
-
   result["output-folder"] = switches["o"] || switches["output"] || switches["outputdirectory"] || "Generated";
-
   result["namespace"] = switches["n"] || switches["namespace"] || GetFilenameWithoutExtension(inputFile);
 
   const modeler = switches["m"] || switches["modeler"] || "Swagger";
@@ -73,11 +73,8 @@ async function ParseCompositeSwagger(inputScope: DataSource, uri: string, target
   }
 
   result["license-header"] = switches["header"] || undefined;
-
   result["payload-flattening-threshold"] = parseInt(switches["ft"] || switches["payloadflatteningthreshold"] || "0");
-
   result["sync-methods"] = <any>switches["syncmethods"] || undefined;
-
   result["add-credentials"] = switches["addcredentials"] === null || ((switches["addcredentials"] + "").toLowerCase() === "true");
 
   if (usedCodeGenerator === "ruby" || usedCodeGenerator === "python" || usedCodeGenerator === "go") {
@@ -98,6 +95,6 @@ async function ParseCompositeSwagger(inputScope: DataSource, uri: string, target
     result["output-artifact"] = "swagger-document";
     delete (result as any)[usedCodeGenerator];
   }
-
+  
   return result;
 }

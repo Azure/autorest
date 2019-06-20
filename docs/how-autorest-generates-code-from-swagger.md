@@ -74,7 +74,7 @@ To represent `byte` arrays in the generated code, the property of the OpenAPI de
 AutoRest generates `DateTime` typed properties in generated C# code for OpenAPI properties that have `string` as the type and `date-time` as the format. Note: it's possible to generate these properties as `DateTimeOffset` in C# when `-useDateTimeOffset` parameter is passed via command line. 
 
 - **`int` / `long`**
-Both `int` and `long` proeprties in the generated code correspond to `integer` types in OpenAPI properties. If the format of the OpenAPI property is `int32`, `int` will be generated; if the format is `int64`, `long` will be generated. If the format field of the OpenAPI property is not set, AutoRest use  format `int32`.
+Both `int` and `long` properties in the generated code correspond to `integer` types in OpenAPI properties. If the format of the OpenAPI property is `int32`, `int` will be generated; if the format is `int64`, `long` will be generated. If the format field of the OpenAPI property is not set, AutoRest use  format `int32`.
 
 **Example:**
 ```json
@@ -167,7 +167,7 @@ public partial class Pet
 ```
 
 ### Dictionaries
-AutoRest generates dictionaries (or hash maps in some contexts) using `additionalProperites` from [JSON-Schema Draft 4][JSON-schema-validation-properties]. The additionalProperties element should specify the OpenAPI schema of the values in the dictionary . The keys of the generated dictionary will be of type `string`.
+AutoRest generates dictionaries (or hash maps in some contexts) using `additionalProperties` from [JSON-Schema Draft 4][JSON-schema-validation-properties]. The additionalProperties element should specify the OpenAPI schema of the values in the dictionary . The keys of the generated dictionary will be of type `string`.
 
 There are two basic patterns when generating dictionaries in AutoRest. 
 
@@ -535,7 +535,7 @@ The following example will generate a type `PetStyle`.
 ```
 
 - **Schemas in sequences and dictionaries**
-*A schema defined in the 'items' proeprty of a sequence or the 'additionalProperties' value of a dictionary.* Model types corresponding to Items of a sequence are named using the parent class's name concatenated with "Item". Model types corresponding to the 'additinalPropeties' value of a dictionary are named using the parent class's name concatenated with "Value".
+*A schema defined in the 'items' property of a sequence or the 'additionalProperties' value of a dictionary.* Model types corresponding to Items of a sequence are named using the parent class's name concatenated with "Item". Model types corresponding to the 'additionalProperties' value of a dictionary are named using the parent class's name concatenated with "Value".
 The following example will generate types `PetFavFoodItem` and `PetFavFoodBrandValue`.
 ```json
 "Pet": {
@@ -625,7 +625,7 @@ public async Task<HttpOperationResponse<Product>> ListWithOperationResponseAsync
 
 > Note that parameters that have field `in` as path are always required and the `required` field will be ignored.
 
-Properties in OpenAPI Schema do not contain a required field. Instead, Each definition schema can provide a `'required'` array that specifies which proeprties are required. An example is shown below.
+Properties in OpenAPI Schema do not contain a required field. Instead, Each definition schema can provide a `'required'` array that specifies which properties are required. An example is shown below.
 ```json
 "Product": {
   "required": [

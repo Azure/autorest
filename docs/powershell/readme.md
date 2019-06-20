@@ -69,7 +69,7 @@ The output will be in the `./generated` folder by default
 - [Samples](./samples/readme.md) demonstrate some example usage for generating cmdlets. 
 - [Options](./options.md) details about some of the configuration options for manipulating the cmdlet generation process.
 - [Release Notes](./release-notes.md) information about the current build.
-- [Fileing Bugs](https://githunb.com/azure/autorest) make sure that you tag it with the 'powershell' label.
+- [Filing Bugs](https://githunb.com/azure/autorest) make sure that you tag it with the 'powershell' label.
 - [Command-line-interface](../user/command-line-interface.md) - about the autorest command line
 - [Configuration Files](../user/configuration.md)
 - **Coming Soon**: [Debugging](./debugging-modules.md) modules with VSCode made easy.
