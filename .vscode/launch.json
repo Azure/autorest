@@ -29,10 +29,10 @@
         "--version=${workspaceRoot}/src/autorest-core",
         "--verbose",
         "--debug",
-        "--output-artifact=specs-used",
+        "--output-artifact=profile-filter-log",
         "--interactive"
       ],
-      "cwd": "c:/work/2019/azure-powershell/src/network"
+      "cwd": "c:/work/2019/azure-powershell/src/compute"
     },
     {
       "type": "node",

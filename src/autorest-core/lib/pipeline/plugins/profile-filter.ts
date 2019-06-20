@@ -412,9 +412,11 @@ async function filter(config: ConfigurationView, input: DataSource, sink: DataSi
 
       const processor = new ProfileFilter(each, allProfileDefinitions, profilesRequested, apiVersions);
       const output = await processor.getOutput();
-      const specsUsed = [...getLatestFiles(visit(output))];
-      if ((Array.isArray(config.GetEntry('output-artifact')) && config.GetEntry('output-artifact').includes('specs-used')) || config.GetEntry('output-artifact') === 'specs-used') {
-        result.push(await sink.WriteData('specs-used.yaml', serialize({ count: specsUsed.length, specsUsed }), [], 'specs-used'));
+      const specsReferencedBeforeFiltering = getFilesUsed(visit(await each.ReadObject<AnyObject>()));
+      const specsReferencedAfterFiltering = getFilesUsed(visit(output));
+      const specsNotUsed = [...specsReferencedBeforeFiltering].filter(x => !specsReferencedAfterFiltering.has(x));
+      if ((Array.isArray(config.GetEntry('output-artifact')) && config.GetEntry('output-artifact').includes('profile-filter-log')) || config.GetEntry('output-artifact') === 'profile-filter-log') {
+        result.push(await sink.WriteData('profile-filter-log.yaml', serialize({ 'files-used': [...specsReferencedAfterFiltering], 'files-not-used': [...specsNotUsed] }), [], 'profile-filter-log'));
       }
 
       result.push(await sink.WriteObject('profile-filtered-oai-doc...', output, each.identity, 'profile-filtered-oai3', await processor.getSourceMappings()));
@@ -426,7 +428,7 @@ async function filter(config: ConfigurationView, input: DataSource, sink: DataSi
   return new QuickDataSource(result, input.skip);
 }
 
-function getLatestFiles(nodes: Iterable<Node>) {
+function getFilesUsed(nodes: Iterable<Node>) {
   const filesUsed = new Set<string>();
   for (const field of nodes) {
     switch (field.key) {
