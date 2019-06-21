@@ -26,13 +26,15 @@
       "name": "run autorest",
       "program": "${workspaceRoot}/src/autorest/dist/app.js",
       "args": [
-        "--version=${workspaceRoot}/src/autorest-core",
+        "--version=${workspaceRoot}/src/autorest-core",        
+        "--use=c:/work/2019/autorest.csharp",
         "--verbose",
         "--debug",
-        "--output-artifact=profile-filter-log",
-        "--interactive"
+        "--output-folder=./new",
+        "--csharp",
+        "--interactive",
       ],
-      "cwd": "c:/work/2019/azure-powershell/src/compute"
+      "cwd": "C:/work/2019/test-generator/tmp/azure-rest-api-specs/specification/addons/resource-manager"
     },
     {
       "type": "node",
