@@ -37,6 +37,7 @@ function distinct<T>(list: Array<T>): Array<T> {
 
 export class NewComposer extends Transformer<AnyObject, AnyObject> {
   private uniqueVersion!: boolean;
+  private apiVersionParamRef: string = '';
   refs = new Dictionary<string>();
 
   get components(): AnyObject {
@@ -96,11 +97,12 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
 
   public async process(target: ProxyObject<AnyObject>, nodes: Iterable<Node>) {
     const metadata = this.current.info ? this.current.info['x-ms-metadata'] : {};
-
     this.uniqueVersion = metadata.apiVersions.length > 1 ? false : true;
-
-    // version for the document
-    // this.generated.info.version = { value: metadata.apiVersions.[0], pointer: '/info/version' };
+    for (const { value, key } of visit(this.current.components.parameters)) {
+      if (value.name === 'api-version') {
+        this.apiVersionParamRef = `#/components/parameters/${key}`;
+      }
+    }
 
     for (const { key, value, pointer, children } of nodes) {
 
@@ -136,25 +138,6 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
   }
 
   public async finish() {
-    if (this.uniqueVersion) {
-      // if this is a single-api version client
-      // let's add in a global parameter to make it so we don't do a binary break of the existing clients.
-      this.parameters.ApiVersionParameter = {
-        pointer: '/',
-        value: {
-          'name': 'api-version',
-          'in': 'query',
-          'description': 'Client API version.',
-          'required': true,
-          'schema': {
-            'type': 'string',
-            'enum': [this.current.info.version]
-          }
-        }
-
-      };
-    }
-    // and update refs to match the re-written ones (since the key has to be the actual name for older modeler)
     this.updateRefs(this.generated);
   }
 
@@ -240,7 +223,9 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
 
     // for each parameter
     for (const { key, value, pointer, children } of nodes) {
-      paramarray.__push__({ value: JSON.parse(JSON.stringify(value)), pointer, recurse: true, filename: this.currentInputFilename });
+      if (value.$ref !== this.apiVersionParamRef) {
+        paramarray.__push__({ value: JSON.parse(JSON.stringify(value)), pointer, recurse: true, filename: this.currentInputFilename });
+      }
     }
 
     // if we have more than one api-version in this client
@@ -431,6 +416,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
         // strip out the api version parameter when we inlined them.
         continue;
       }
+
       this.visitParameter(this.newObject(target, key, pointer), children);
     }
     return target;

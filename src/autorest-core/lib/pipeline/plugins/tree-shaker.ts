@@ -75,7 +75,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     // split out servers first.
     const [servers, theNodes] = values(originalNodes).linq.bifurcate(each => each.key === 'servers');
 
-    // set the doc servers 
+    // set the doc servers
     servers.forEach(s => this.docServers = s.value);
 
     // initialize certain things ahead of time:
@@ -89,7 +89,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           this.visitComponents(this.components, children);
           break;
 
-        case 'x-ms-metdata':
+        case 'x-ms-metadata':
         case 'info':
           this.clone(targetParent, key, pointer, value);
           break;
@@ -101,6 +101,10 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           }
           break;
       }
+    }
+
+    if (this.docServers !== undefined) {
+      this.clone(targetParent, 'servers', '/servers', this.docServers);
     }
   }
 
