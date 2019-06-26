@@ -65,6 +65,7 @@ export interface AutoRestConfigurationImpl {
   'payload-flattening-threshold'?: number;
   'openapi-type'?: string; // the specification type (ARM/Data-Plane/Default)
   'tag'?: string;
+  'simple-tree-shake'?: boolean;
 
   // multi-api specific
   'profiles'?: any;
