@@ -27,14 +27,16 @@
       "program": "${workspaceRoot}/src/autorest/dist/app.js",
       "args": [
         "--version=${workspaceRoot}/src/autorest-core",        
-        "--use=c:/work/2019/autorest.csharp",
+        "--use=c:/work/2019/autorest.modeler",
         "--verbose",
         "--debug",
         "--output-folder=./new",
         "--csharp",
+        "--modeler.debugger",
         "--interactive",
+        "--simple-tree-shake"
       ],
-      "cwd": "C:/work/2019/test-generator/tmp/azure-rest-api-specs/specification/addons/resource-manager"
+      "cwd": "C:/work/2019/test-generator/tmp/azure-rest-api-specs/specification/appconfiguration/resource-manager"
     },
     {
       "type": "node",

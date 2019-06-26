@@ -1,9 +1,8 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Transformer, QuickDataSource, JsonPath } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Transformer, QuickDataSource, JsonPath, Source } from '@microsoft.azure/datastore';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 import { clone } from '@microsoft.azure/linq';
 import { values } from '@microsoft.azure/codegen';
-
 
 const methods = new Set([
   'get',
@@ -16,6 +15,11 @@ const methods = new Set([
   'trace'
 ]);
 export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
+
+  constructor(originalFile: Source, private isSimpleTreeShake: boolean) {
+    super([originalFile]);
+  }
+
   private docServers?: Array<AnyObject>;
   private pathServers?: Array<AnyObject>;
   private operationServers?: Array<AnyObject>;
@@ -155,7 +159,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     // set the operationServers if they exist.
     servers.forEach(s => this.operationServers = s.value);
 
-    this.clone(targetParent, "servers", '/', this.servers)
+    this.clone(targetParent, "servers", '/', this.servers);
 
     for (const { value, key, pointer, children } of theNodes) {
       switch (key) {
@@ -192,9 +196,16 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   }
 
   visitParameter(targetParent: AnyObject, nodes: Iterable<Node>) {
-    for (const { value, key, pointer, children } of nodes) {
+    const [requiredNodes, theOtherNodes] = values(nodes).linq.bifurcate(each => each.key === 'required');
+    const isRequired = (requiredNodes.length > 0) ? !!requiredNodes[0].value : false;
+    for (const { value, key, pointer, children } of theOtherNodes) {
       switch (key) {
         case 'schema':
+          if (isRequired && value.enum && value.enum.length === 1) {
+            // if an enum has a single value and it is required, then it's just a constant. Thus, not necessary to shake it.
+            this.clone(targetParent, key, pointer, value);
+            break;
+          }
           this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
           break;
         case 'content':
@@ -206,14 +217,22 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           break;
       }
     }
+
+    if (requiredNodes[0] !== undefined) {
+      this.clone(targetParent, requiredNodes[0].key, requiredNodes[0].pointer, requiredNodes[0].value);
+    }
   }
 
   visitSchema(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     const object = 'object';
+    const [requiredField, theNodes] = values(originalNodes).linq.bifurcate(each => each.key === 'required');
+    const requiredProperties = new Array<string>();
+    if (requiredField[0] !== undefined) {
+      requiredProperties.push(...requiredField[0].value);
+    }
 
-    for (const { value, key, pointer, children } of originalNodes) {
+    for (const { value, key, pointer, children } of theNodes) {
       switch (key) {
-
         case 'anyOf':
         case 'oneOf':
           // an array of schemas to dereference
@@ -221,7 +240,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           break;
 
         case 'properties':
-          this.visitProperties(this.newObject(targetParent, key, pointer), children);
+          this.visitProperties(this.newObject(targetParent, key, pointer), children, requiredProperties);
           break;
 
         case 'additionalProperties':
@@ -259,6 +278,10 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           this.clone(targetParent, key, pointer, value);
           break;
       }
+    }
+
+    if (requiredProperties.length > 0) {
+      this.clone(targetParent, requiredField[0].key, requiredField[0].pointer, requiredProperties);
     }
   }
 
@@ -320,18 +343,35 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     return (jsonPath[jsonPath.length - 3] === 'items') ? getArrayItemPropertyNameHint(jsonPath) : getPropertyNameHint(jsonPath);
   }
 
-  visitProperties(targetParent: AnyObject, originalNodes: Iterable<Node>) {
+  visitProperties(targetParent: AnyObject, originalNodes: Iterable<Node>, requiredProperties: Array<string>) {
     for (const { value, key, pointer, children } of originalNodes) {
       // if the property has a schema that type 'boolean', 'integer', 'number' then we'll just leave it inline
+      // we will leave strings inlined only if they ask for simple-tree-shake. Also, if it's a string + enum + required + single val enum
+      // reason: old modeler does not handle non-inlined string properties.
       switch (value.type) {
-        // case 'string':
+        case 'string':
+          if (this.isSimpleTreeShake && !value.enum) {
+            this.clone(targetParent, key, pointer, value);
+          } else if (value.enum !== undefined && value.enum.length === 1 && requiredProperties.includes(key)) {
+            // this is basically a constant, so no need to shake.
+            this.clone(targetParent, key, pointer, value);
+          } else {
+            const nameHint = this.getNameHint(pointer);
+            this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children, nameHint);
+          }
+          break;
         case 'boolean':
         case 'integer':
         case 'number':
           this.clone(targetParent, key, pointer, value);
           break;
         case 'array':
-          this.visitArrayProperty(targetParent, key, pointer, value, children, this.getNameHint(pointer));
+          if (this.isSimpleTreeShake) {
+            this.clone(targetParent, key, pointer, value);
+          } else {
+            this.visitArrayProperty(targetParent, key, pointer, value, children, this.getNameHint(pointer));
+          }
+
           break;
         default:
           // inline objects had a name of '<Class><PropertyName>'
@@ -520,8 +560,9 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 async function shakeTree(config: ConfigurationView, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
+  const isSimpleTreeShake = !!config.GetEntry('simple-tree-shake');
   for (const each of inputs) {
-    const shaker = new OAI3Shaker(each);
+    const shaker = new OAI3Shaker(each, isSimpleTreeShake);
     result.push(await sink.WriteObject('tree shaken doc...', await shaker.getOutput(), each.identity, 'tree-shaken-oai3', await shaker.getSourceMappings()));
   }
   return new QuickDataSource(result, input.skip);
