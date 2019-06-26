@@ -1,10 +1,11 @@
 import { AnyObject, DataHandle, DataSink, DataSource, Transformer, Node, ProxyNode, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
-import { clone, Dictionary, keys, values } from '@microsoft.azure/linq';
+import { clone, Dictionary, keys } from '@microsoft.azure/linq';
 import { areSimilar } from "@microsoft.azure/object-comparison";
-import * as oai from '@microsoft.azure/openapi';
-import * as assert from 'assert';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
+import { maximum, toSemver } from '@microsoft.azure/codegen';
+import { values } from '@microsoft.azure/codegen';
+import * as compareVersions from 'compare-versions';
 
 try {
   require('source-map-support').install();
@@ -115,12 +116,9 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
           this.visitComponents(this.components, children);
           break;
 
-        case 'openapi':
-          // ignore these. We've already handled them.
-          break;
-
         case 'info':
         case 'servers':
+        case 'openapi':
           this.clone(target, key, pointer, value);
           break;
 
@@ -359,34 +357,25 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
   }
 
   protected visitSchemas(target: AnyObject, originalNodes: Iterable<Node>) {
-    for (const { key, value, pointer } of originalNodes) {
+    // since some models are going to be duplicated and this composer is used to mimic autorest v2
+    // the best behavior is to have the latest models.
+    const sortedNodes = values(originalNodes)
+      .linq.toArray()
+      .sort((a, b) => compareVersions(toSemver(maximum(b.value['x-ms-metadata'].apiVersions)), toSemver(maximum(a.value['x-ms-metadata'].apiVersions))))
+    for (const { key, value, pointer } of sortedNodes) {
       // schemas have to keep their name
-
       const schemaName = (!value['type'] || value['type'] === 'object') ? value['x-ms-metadata'].name : key;
 
       // this is pulling up the name of the schema back from the x-ms-metadata.
       // we do this because we don't want to alter the modeler
       // this is being added to the merger, since it looks like we want this behavior there too.
-
       if (target[schemaName] === undefined) {
-        // the value isn't in the target. We can take it from the source
-        const schema = this.clone(target, schemaName, pointer, value).value;
-        this.refs[`#/components/schemas/${key}`] = `#/components/schemas/${schemaName}`;
-      } else {
-        this.refs[`#/components/schemas/${key}`] = `#/components/schemas/${schemaName}`;
-        // if (!areSimilar(value, target[schemaName], 'x-ms-metadata', 'description', 'summary')) {
-        //   try {
-        //     const a = clone(value, false, undefined, ['x-ms-metadata', 'description', 'summary']);
-        //     const b = clone(target[schemaName], false, undefined, ['x-ms-metadata', 'description', 'summary']);
-        //     assert.deepStrictEqual(a, b);
-        //   } catch (E) {
-        //     console.error(E);
-        //   }
 
-        //   throw new Error(`Incompatible models conflicting: ${schemaName}`);
-
-        // }
+        // the value isn't in the target. We can take it from the source'
+        target[schemaName] = { value, pointer };
       }
+
+      this.refs[`#/components/schemas/${key}`] = `#/components/schemas/${schemaName}`;
     }
     return target;
   }
