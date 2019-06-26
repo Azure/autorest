@@ -179,12 +179,11 @@ export class StaticDirectiveView {
 
   constructor(public directive: Directive) {
     this.from = arrayOf(directive['from']);
-    this.where = arrayOf(directive['from']);
+    this.where = arrayOf(directive['where']);
     this.reason = directive.reason;
     this.suppress = arrayOf(directive['suppress']);
-    this.transform = arrayOf(directive['transform']);
+    this.transform = arrayOf(directive['transform'] || directive['text-transform']);
     this.test = arrayOf(directive['test']);
-    this.from = arrayOf(directive['from']);
   }
 }
 

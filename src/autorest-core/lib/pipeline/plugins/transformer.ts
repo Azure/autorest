@@ -2,7 +2,7 @@ import { QuickDataSource, DataHandle, safeEval } from '@microsoft.azure/datastor
 
 import { createPerFilePlugin, PipelinePlugin } from '../common';
 import { Manipulator } from '../manipulation';
-import { stringify } from 'querystring';
+import { Channel } from '../../message';
 
 
 /* @internal */
@@ -33,7 +33,21 @@ export function createTextTransformerPlugin(): PipelinePlugin {
               for (const transform of directive.transform) {
                 // grab the contents (don't extend the cache tho')
                 contents = contents || await inputHandle.ReadData();
-                const output = safeEval<string>(`(() => { { ${transform} }; return $; })()`, { $: contents, $doc: inputHandle, $path: [], $documentPath: inputHandle.key })
+                config.Message({ Channel: Channel.Debug, Text: `Running directive '${directive.from}/${directive.reason}' on ${inputHandle.key} ` });
+
+
+                const output = safeEval<string>(`(() => { { ${transform} }; return $; })()`, {
+                  $: contents,
+                  $doc: inputHandle,
+                  $path: [],
+                  $documentPath: inputHandle.key,
+                  $lib: {
+                    debug: (text: string) => config.Message({ Channel: Channel.Debug, Text: text }),
+                    verbose: (text: string) => config.Message({ Channel: Channel.Debug, Text: text }),
+                    log: (text: string) => console.error(text),
+                    config: config
+                  }
+                })
                 if (output != contents) {
                   modified = true;
                   contents = output;
