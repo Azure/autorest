@@ -110,40 +110,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
         case 'info':
           if (!this.isSecondaryFile) {
             const info = <AnyObject>this.getOrCreateObject(target, 'info', pointer);
-
-            // things we need to play with...
-            if (value.title) {
-              this.titles.add(value.title);
-            }
-            if (value.description) {
-              this.descriptions.add(value.description);
-            }
-            if (value.version) {
-              this.apiVersions.add(value.version);
-            }
-
-            // set these based on what we got first.
-            if (value.termsOfService && !info.termsOfService) {
-              info.termsOfService = { value: value.termsOfService, pointer: `${pointer}/termsOfService` };
-            }
-            if (value.contact && !info.contact) {
-              this.clone(info, 'contact', pointer, value.contact);
-            }
-            if (value.license && !info.license) {
-              this.clone(info, 'license', pointer, value.license);
-            }
-
-            /*
-            // create a metadata array
-            const metadata = this.getOrCreateArray(info, 'x-ms-metadata', pointer);
-
-            // and push this info to that array.
-            metadata.__push__({
-              value: clone(value),
-              pointer,
-              recurse: true
-            });
-            */
+            this.visitInfo(info, children);
           }
 
           break;
@@ -186,6 +153,32 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     // after each file, we have to go fix up local references to be absolute references
     // just in case it wasn't done before we got here.
     this.expandRefs(this.generated);
+  }
+
+  visitInfo(info: ProxyObject<Dictionary<oai.Info>>, nodes: Iterable<Node>) {
+    for (const { key, value, pointer } of nodes) {
+      switch (key) {
+        case 'title':
+          this.titles.add(value);
+          break;
+        case 'description':
+          this.descriptions.add(value);
+          break;
+        case 'version':
+          this.apiVersions.add(value);
+          break;
+        case 'x-ms-metadata':
+          // do nothing. This is handled at finish()
+          break;
+        default:
+          if (!info[key]) {
+            this.clone(info, key, pointer, value);
+          }
+
+          break;
+
+      }
+    }
   }
 
   protected expandRefs(node: any) {
@@ -329,6 +322,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
       }
     }
   }
+
   visitComponent<T>(type: string, container: ProxyObject<Dictionary<T>>, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
 
