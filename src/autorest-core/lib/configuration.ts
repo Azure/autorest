@@ -4,9 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { exists, filePath } from '@microsoft.azure/async-io';
-import { clone } from '@microsoft.azure/linq';
 import { BlameTree, DataHandle, DataStore, IFileSystem, LazyPromise, ParseToAst, RealFileSystem, safeEval, Stringify, stringify, TryDecodeEnhancedPositionFromName } from '@microsoft.azure/datastore';
 import { Extension, ExtensionManager, LocalExtension } from '@microsoft.azure/extension';
+import { clone } from '@microsoft.azure/linq';
 import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri } from '@microsoft.azure/uri';
 import { From } from 'linq-es2015';
 import { basename, dirname, join } from 'path';
@@ -78,10 +78,9 @@ export interface AutoRestConfigurationImpl {
   'debugger'?: any;
 }
 
-
 export function MergeConfigurations(...configs: Array<AutoRestConfigurationImpl>): AutoRestConfigurationImpl {
   let result: AutoRestConfigurationImpl = {};
-  configs = configs.map((each, i, a) => ({ ...each, 'load-priority': each['load-priority'] || -i })).sort((a, b) => (<number>b['load-priority']) - (<number>a['load-priority']));
+  configs = configs.map((each, i, a) => ({ ...each, 'load-priority': each['load-priority'] || -i })).sort((a, b) => (b['load-priority']) - (a['load-priority']));
 
   for (const config of configs) {
     result = MergeConfiguration(result, config);
@@ -129,7 +128,7 @@ function* valuesOf<T>(value: any): Iterable<T> {
         yield value;
       }
   }
-  /* rewrite 
+  /* rewrite
   if (value === undefined) {
     return [];
   }
@@ -153,9 +152,8 @@ function arrayOf<T>(value: any): Array<T> {
       }
       break;
   }
-  return [<T><any>value];
+  return [<T>value];
 }
-
 
 export interface Directive {
   from?: Array<string> | string;
@@ -171,7 +169,7 @@ export interface Directive {
 
 export class StaticDirectiveView {
   from: Array<string>;
-  where: Array<string>
+  where: Array<string>;
   reason?: string;
   suppress: Array<string>;
   transform: Array<string>;
@@ -186,7 +184,6 @@ export class StaticDirectiveView {
     this.test = arrayOf(directive['test']);
   }
 }
-
 
 export class DirectiveView {
   constructor(private directive: Directive) {
@@ -410,12 +407,13 @@ export class ConfigurationView {
 
         // looks like we found one that we haven't handled yet.
         done = false;
-        ignoreFiles.add(each)
+        ignoreFiles.add(each);
         yield view.ResolveAsPath(each);
         break;
       }
     }
 
+    done = false;
     while (!done) {
       // get a fresh copy of the view every time we start the loop.
       const view = configView();
@@ -431,9 +429,14 @@ export class ConfigurationView {
         done = false;
         ignoreFiles.add(each);
         const path = view.ResolveAsPath(each);
-        if (await fileSystem.ReadFile(path)) {
-          yield path;
+        try {
+          if (await fileSystem.ReadFile(path)) {
+            yield path;
+          }
+        } catch {
+          // do nothing
         }
+
         break;
       }
 
@@ -603,7 +606,7 @@ export class ConfigurationView {
 
             /*
               GS01: This should be restored when we go 'release'
-    
+
             this.Message({
               Channel: Channel.Warning,
               Text: `Failed to blame ${JSON.stringify(s.Position)} in '${JSON.stringify(s.document)}' (${e})`,
@@ -829,7 +832,7 @@ export class Configuration {
       const segs = await this.desugarRawConfigs(configs);
       configSegments.push(...segs);
       if (keepInSecondPass) {
-        secondPass.push(...segs)
+        secondPass.push(...segs);
       }
       return segs;
     };
@@ -1004,19 +1007,18 @@ export class Configuration {
         }
       }
 
-
     }
     // re-acquire CLI and configuration files at a lower priority
     // this enables the configuration of a plugin to specify stuff like `enable-multi-api`
     // which would unlock a guarded section that has $(enable-mulit-api) in the yaml block.
-    // doing so would allow the configuration to load input-files that have that guard on 
+    // doing so would allow the configuration to load input-files that have that guard on
 
-    // and because this comes in at a lower-priority, it won't overwrite values that have been already 
-    // set in a meaningful way. 
+    // and because this comes in at a lower-priority, it won't overwrite values that have been already
+    // set in a meaningful way.
 
     // it's only marginally hackey...
 
-    // reload files 
+    // reload files
     if (configFileUri !== null) {
       const blocks = await this.ParseCodeBlocks(
         await fsInputView.ReadStrict(configFileUri),
