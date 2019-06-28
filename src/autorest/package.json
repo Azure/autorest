@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is an OpenAPI spec that describes the REST API.",
   "engines": {
-    "node": ">=7.10.0"
+    "node": ">=10.12.0"
   },
   "repository": {
     "type": "git",
