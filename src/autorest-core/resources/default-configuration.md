@@ -58,13 +58,13 @@ try-require: ./readme.go.md
 
 ``` yaml $(java) && $(preview)
 use-extension:
-  "@microsoft.azure/autorest.java": "~2.1.32"
+  "@microsoft.azure/autorest.java": "~2.1.88"
 try-require: ./readme.java.md
 ```
 
 ``` yaml $(java)
 use-extension:
-  "@microsoft.azure/autorest.java": "~2.1.32"
+  "@microsoft.azure/autorest.java": "~2.1.88"
 try-require: ./readme.java.md
 ```
 
