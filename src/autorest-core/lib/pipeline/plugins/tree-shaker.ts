@@ -544,6 +544,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
       value: {
         $ref: `#${baseReferencePath}/${id}`,
         description: value.description,  // we violate spec to allow a unique description at the $ref spot, (ie: there are two fields that are of type 'color' -- one is 'borderColor' and one is 'fillColor' -- may be differen descriptions.)
+        'x-ms-client-flatten': value['x-ms-client-flatten'], // we violate spec to allow flexibility in terms of flattening
         readOnly: value.readOnly
       }, pointer
     };
