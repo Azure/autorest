@@ -359,7 +359,6 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
 async function merge(config: ConfigurationView, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
 
-
   const overrideInfo = config.GetEntry('override-info');
   const overrideTitle = (overrideInfo && overrideInfo.title) || config.GetEntry('title');
   const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry('description');

@@ -38,7 +38,9 @@ function distinct<T>(list: Array<T>): Array<T> {
 
 export class NewComposer extends Transformer<AnyObject, AnyObject> {
   private uniqueVersion!: boolean;
-  private apiVersionParamRef: string = '';
+
+  // there could be more than one global parameter called api-version
+  private apiVersionParamReferences = new Set<string>();
   refs = new Dictionary<string>();
 
   get components(): AnyObject {
@@ -101,7 +103,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
     this.uniqueVersion = metadata.apiVersions.length > 1 ? false : true;
     for (const { value, key } of visit(this.current.components.parameters)) {
       if (value.name === 'api-version') {
-        this.apiVersionParamRef = `#/components/parameters/${key}`;
+        this.apiVersionParamReferences.add(`#/components/parameters/${key}`);
       }
     }
 
@@ -188,17 +190,16 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
       // we have to pull thru $refs on properties' *schema* and
       switch (key) {
         case 'parameters':
-          this.visitAndDerefArray(metadata, target, key, pointer, children);
+          this.visitAndDereferenceArray(metadata, target, key, pointer, children);
           break;
-
 
         case 'responses':
           this.visitResponses(this.newObject(target, key, pointer), children);
           break;
 
         default:
-          // @future_garrett -- this is done to allow paths to be re-integrated 
-          // after deduplication. If this gives you problems, don't say I didn't 
+          // @future_garrett -- this is done to allow paths to be re-integrated
+          // after deduplication. If this gives you problems, don't say I didn't
           // warn you.
           if (!target[key]) {
             this.clone(target, key, pointer, value);
@@ -216,32 +217,27 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
     return this.current[components][component][location];
   }
 
-  protected visitAndDerefArray(metadata: AnyObject, target: AnyObject, k: string, ptr: string, nodes: Iterable<Node>) {
-    const paramarray = this.newArray(target, k, ptr);
+  protected visitAndDereferenceArray(metadata: AnyObject, target: AnyObject, k: string, ptr: string, nodes: Iterable<Node>) {
+    const parametersArray = this.newArray(target, k, ptr);
+    for (const { value, pointer } of nodes) {
+      if (this.apiVersionParamReferences.has(value.$ref)) {
+        const p = {
+          name: 'api-version',
+          in: 'query',
+          description: 'The API version to use for the request.',
+          required: true,
+          schema: {
+            type: 'string',
+            enum: [metadata['apiVersions'][0]]
+          }
+        };
 
-    // for each parameter
-    for (const { key, value, pointer, children } of nodes) {
-      if (value.$ref !== this.apiVersionParamRef) {
-        paramarray.__push__({ value: JSON.parse(JSON.stringify(value)), pointer, recurse: true, filename: this.currentInputFilename });
+        parametersArray.__push__({ value: p, pointer: ptr, recurse: true, filename: this.currentInputFilename });
+        continue;
       }
+
+      parametersArray.__push__({ value: JSON.parse(JSON.stringify(value)), pointer, recurse: true, filename: this.currentInputFilename });
     }
-
-    // if we have more than one api-version in this client
-    // we have to push a constant apiversion parameter into the method.
-    // if (!this.uniqueVersion) {
-    const p = {
-      name: 'api-version',
-      in: 'query',
-      description: 'The API version to use for the request.',
-      required: true,
-      schema: {
-        type: 'string',
-        enum: [metadata['apiVersions'][0]]
-      }
-    };
-
-    paramarray.__push__({ value: p, pointer: ptr, recurse: true, filename: this.currentInputFilename });
-    // }
   }
 
   protected visitAndDerefObject(target: AnyObject, nodes: Iterable<Node>) {
