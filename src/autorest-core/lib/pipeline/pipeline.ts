@@ -12,27 +12,27 @@ import { createComponentModifierPlugin } from './component-modifier';
 import { createCSharpReflectApiVersionPlugin } from './metadata-generation';
 import { AutoRestExtension } from './plugin-endpoint';
 import { createCommonmarkProcessorPlugin } from './plugins/commonmark';
+import { createComponentKeyRenamerPlugin } from './plugins/component-key-renamer';
+import { createComponentsCleanerPlugin } from './plugins/components-cleaner';
 import { createComposerPlugin } from './plugins/composer';
 import { createSwaggerToOpenApi3Plugin } from './plugins/conversion';
 import { createDeduplicatorPlugin } from './plugins/deduplicator';
 import { createArtifactEmitterPlugin } from './plugins/emitter';
+import { createEnumDeduplicator } from './plugins/enum-deduplication';
 import { createExternalPlugin } from './plugins/external';
 import { createHelpPlugin } from './plugins/help';
 import { createIdentityPlugin } from './plugins/identity';
 import { createMarkdownOverrideOpenApiLoaderPlugin, createMarkdownOverrideSwaggerLoaderPlugin, createOpenApiLoaderPlugin, createSwaggerLoaderPlugin } from './plugins/loaders';
 import { createMultiApiMergerPlugin } from './plugins/merger';
-import { subsetSchemaDeduplicatorPlugin } from './plugins/subset-schemas-deduplicator';
-import { createEnumDeduplicator } from './plugins/enum-deduplication';
-import { createImmediateTransformerPlugin, createTransformerPlugin, createTextTransformerPlugin } from './plugins/transformer';
-import { createTreeShakerPlugin } from './plugins/tree-shaker';
+import { createNewComposerPlugin } from './plugins/new-composer';
+import { createProfileFilterPlugin } from './plugins/profile-filter';
 import { createQuickCheckPlugin } from './plugins/quick-check';
+import { subsetSchemaDeduplicatorPlugin } from './plugins/subset-schemas-deduplicator';
+import { createImmediateTransformerPlugin, createTextTransformerPlugin, createTransformerPlugin } from './plugins/transformer';
+import { createTreeShakerPlugin } from './plugins/tree-shaker';
+import { createApiVersionParameterHandlerPlugin } from './plugins/version-param-handler';
 import { createJsonToYamlPlugin, createYamlToJsonPlugin } from './plugins/yaml-and-json';
 import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from './schema-validation';
-import { createNewComposerPlugin } from './plugins/new-composer';
-import { createComponentCleanerPlugin } from './plugins/component-cleaner';
-import { createComponentKeyRenamerPlugin } from './plugins/component-key-renamer';
-import { createApiVersionParameterHandlerPlugin } from './plugins/version-param-handler';
-import { createProfileFilterPlugin } from './plugins/profile-filter';
 
 interface PipelineNode {
   outputArtifact?: string;
@@ -192,14 +192,11 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     'model-deduplicator': createDeduplicatorPlugin(),
     'subset-reducer': subsetSchemaDeduplicatorPlugin(),
     'multi-api-merger': createMultiApiMergerPlugin(),
-    'component-cleaner': createComponentCleanerPlugin(),
+    'components-cleaner': createComponentsCleanerPlugin(),
     'component-key-renamer': createComponentKeyRenamerPlugin(),
     'api-version-parameter-handler': createApiVersionParameterHandlerPlugin(),
     'profile-filter': createProfileFilterPlugin()
   };
-
-
-
 
   // dynamically loaded, auto-discovered plugins
   const __extensionExtension: { [pluginName: string]: AutoRestExtension } = {};
@@ -274,8 +271,6 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
       const config = pipeline.configs[stringify(node.configScope)];
       const pluginName = node.pluginName;
       const plugin = plugins[pluginName];
-
-
 
       if (!plugin) {
         throw new Error(`Plugin '${pluginName}' not found.`);

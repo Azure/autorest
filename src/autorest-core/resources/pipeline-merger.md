@@ -16,9 +16,13 @@ pipeline:
   openapi-document/multi-api-merger:
     input: tree-shaker
     output-artifact: openapi-document
+    
+  openapi-document/components-cleaner:
+    input: multi-api-merger
+    output-artifact: openapi-document
 
   openapi-document/component-modifiers:
-    input: multi-api-merger
+    input: components-cleaner
     output-artifact: openapi-document
 
   openapi-document/api-version-parameter-handler:
