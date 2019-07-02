@@ -94,6 +94,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           break;
 
         case 'x-ms-metadata':
+        case 'x-ms-secondary-file':
         case 'info':
           this.clone(targetParent, key, pointer, value);
           break;
