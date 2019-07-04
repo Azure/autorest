@@ -234,12 +234,6 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
     for (const { value, key, pointer, children } of theNodes) {
       switch (key) {
-        case 'anyOf':
-        case 'oneOf':
-          // an array of schemas to dereference
-          this.dereferenceItems(`/components/schemas`, this.schemas, this.visitSchema, this.newArray(targetParent, key, pointer), children);
-          break;
-
         case 'properties':
           this.visitProperties(this.newObject(targetParent, key, pointer), children, requiredProperties);
           break;
@@ -255,16 +249,19 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           break;
 
         case 'allOf':
-          // an array of schemas to dereference
-          // this is a fix to the bad practice of putting the actual properties of the model inside one of the allOf's
-          // Without this, the generator would create superClasses with 'random names' (not exactly random, they would be unique by the tree-shaking procedure)
-          // to derive the current class from. 
-          const allOf = this.newArray(targetParent, key, pointer);
-          for (const { value: allOfItemVal, children: allOfItemChildren, pointer: allOfItemPointer, key: allOfItemKey } of children) {
-            this.dereference(`/components/schemas`, this.schemas, this.visitSchema, allOf, allOfItemKey, allOfItemPointer, allOfItemVal, allOfItemChildren);
+        case 'anyOf':
+        case 'oneOf':
+          if (this.isSimpleTreeShake) {
+            // this is the same behavior as AutoRest V2. Inlined allOf, anyOf, oneOf are not shaken
+            this.clone(targetParent, key, pointer, value);
+          } else {
+            const polymorphicCollection = this.newArray(targetParent, key, pointer);
+            for (const { value: itemVal, children: itemChildren, pointer: itemPointer, key: itemKey } of children) {
+              this.dereference(`/components/schemas`, this.schemas, this.visitSchema, polymorphicCollection, itemKey, itemPointer, itemVal, itemChildren);
+            }
           }
-          break;
 
+          break;
         case 'not':
         case 'items':
           this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children, `${this.getNameHint(pointer)}Item`);
@@ -351,10 +348,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
       // reason: old modeler does not handle non-inlined string properties.
       switch (value.type) {
         case 'string':
-          if (this.isSimpleTreeShake && !value.enum) {
-            this.clone(targetParent, key, pointer, value);
-          } else if (value.enum !== undefined && value.enum.length === 1 && requiredProperties.includes(key)) {
-            // this is basically a constant, so no need to shake.
+          if (this.isSimpleTreeShake) {
             this.clone(targetParent, key, pointer, value);
           } else {
             const nameHint = this.getNameHint(pointer);
