@@ -1,4 +1,4 @@
-import { DataSink, DataSource, Transformer, Node, ProxyObject, QuickDataSource, visit, AnyObject, DataHandle } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, ProxyObject, QuickDataSource, Transformer, visit } from '@microsoft.azure/datastore';
 import { clone, Dictionary, values } from '@microsoft.azure/linq';
 
 import * as oai from '@microsoft.azure/openapi';
@@ -69,11 +69,11 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
   }
 
   protected get info() {
-    return <AnyObject>this.getOrCreateObject(this.generated, 'info', '/info');
+    return this.getOrCreateObject(this.generated, 'info', '/info');
   }
 
   protected get metadata() {
-    return <AnyObject>this.getOrCreateObject(this.info, 'x-ms-metadata', '/');
+    return this.getOrCreateObject(this.info, 'x-ms-metadata', '/');
   }
 
   public async process(target: ProxyObject<oai.Model>, nodes: Iterable<Node>) {
@@ -109,7 +109,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
 
         case 'info':
           if (!this.isSecondaryFile) {
-            const info = <AnyObject>this.getOrCreateObject(target, 'info', pointer);
+            const info = this.getOrCreateObject(target, 'info', pointer);
             this.visitInfo(info, children);
           }
 
@@ -225,9 +225,10 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
         info.description = { value: descriptions[0], pointer: '/info/description', filename: this.currentInputFilename };
       }
     }
+
     const versions = [...this.apiVersions.values()];
     this.metadata.apiVersions = { value: versions, pointer: '/' };
-    info.version = { value: versions[0], pointer: '/info/version' } // todo: should this be the max version?
+    info.version = { value: versions[0], pointer: '/info/version' }; // todo: should this be the max version?
 
     // walk thru the generated document, find all the $refs and update them to the new location
     this.updateRefs(this.generated);
@@ -293,7 +294,16 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
             this.copy(childOperation, child.key, child.pointer, child.value);
             if (value.parameters) {
               if (childOperation[child.key].parameters) {
-                childOperation[child.key].parameters.unshift(...value.parameters);
+                childOperation[child.key].parameters.unshift(...clone(value.parameters).filter((x: { in: string; name: string }) => {
+                  for (const param of childOperation[child.key].parameters) {
+                    if (x.in === param.in && x.name === param.name) {
+                      return false;
+                    }
+                  }
+
+                  return true;
+                }
+                ));
               } else {
                 childOperation[child.key].parameters = clone(value.parameters);
               }
@@ -358,11 +368,9 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
 
 async function merge(config: ConfigurationView, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
-
   const overrideInfo = config.GetEntry('override-info');
   const overrideTitle = (overrideInfo && overrideInfo.title) || config.GetEntry('title');
   const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry('description');
-
   const processor = new MultiAPIMerger(inputs, overrideTitle, overrideDescription);
 
   return new QuickDataSource([await sink.WriteObject('merged oai3 doc...', await processor.getOutput(), [].concat.apply([], inputs.map(each => each.identity) as any), 'merged-oai3', await processor.getSourceMappings())], input.skip);
