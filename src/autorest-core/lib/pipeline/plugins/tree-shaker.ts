@@ -239,7 +239,8 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           break;
 
         case 'additionalProperties':
-          if (typeof value === object) {
+          // In AutoRest V2, AdditionalProperties are not dereferenced.
+          if (!this.isSimpleTreeShake && typeof value === object) {
             // it should be a schema
             this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
           } else {
