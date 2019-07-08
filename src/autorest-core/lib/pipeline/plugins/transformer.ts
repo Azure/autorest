@@ -24,7 +24,10 @@ export function createTextTransformerPlugin(): PipelinePlugin {
         let modified = false;
 
         for (const directive of directives) {
-          if (directive.from.length === 0 || directive.from.find(each => each === inputHandle.artifactType || documentId.endsWith(`/${each}`))) {
+          if (directive.from.length === 0 || directive.from.find(
+            each => each === inputHandle.artifactType ||  // artifact by type (ie, source-file-csharp)
+              documentId.endsWith(`/${each}`) ||            // by name (ie, Get_AzAdSomething.cs)
+              documentId.match(new RegExp(`/.+/${each}$`)))) { // by regex (ie, Get-AzAd.*.cs) 
             // if the file should be processed, run it thru
 
             if (directive.where.indexOf('$') > -1) {
