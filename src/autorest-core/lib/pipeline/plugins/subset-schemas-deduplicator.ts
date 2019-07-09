@@ -66,7 +66,7 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
       return gt(aMaxVersion, bMaxVersion) ? -1 : lt(aMaxVersion, bMaxVersion) ? 1 : 0;
     });
 
-    // deduplicate/reduce
+    // deduplicate/reduce 
     for (const { value: currentSchema } of visit(schemas)) {
       for (const { value: anotherSchema } of visit(schemas)) {
         const currentSchemaName = currentSchema.value[xMsMetadata].name;
@@ -83,6 +83,12 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
           if (subsetRelation.isSubset !== false) {
             const supersetEquivSchema = getSupersetSchema(filteredAnotherSchema, filteredCurrentSchema, additiveFieldsList, subsetRelation, `#/components/schemas/${anotherSchema.uid}`);
             const subsetEquivSchema = getSubsetSchema(filteredAnotherSchema, subsetRelation);
+
+            // gs: added -- ensure that properties left beg
+            if (currentSchema.value.required) {
+              const sesNames = Object.getOwnPropertyNames(supersetEquivSchema.properties);
+              supersetEquivSchema.required = currentSchema.value.required.filter(each => sesNames.indexOf(each) > - 1);
+            }
 
             // replace with equivalent schema and put back metadata.
             currentSchema.value = { 'x-ms-metadata': metadataCurrentSchema, ...supersetEquivSchema };
