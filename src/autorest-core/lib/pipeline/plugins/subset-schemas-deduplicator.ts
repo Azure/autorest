@@ -85,7 +85,7 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
             const subsetEquivSchema = getSubsetSchema(filteredAnotherSchema, subsetRelation);
 
             // gs: added -- ensure that properties left beg
-            if (currentSchema.value.required) {
+            if (currentSchema.value.required && supersetEquivSchema.properties) {
               const sesNames = Object.getOwnPropertyNames(supersetEquivSchema.properties);
               supersetEquivSchema.required = currentSchema.value.required.filter(each => sesNames.indexOf(each) > - 1);
             }
