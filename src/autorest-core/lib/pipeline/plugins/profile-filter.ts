@@ -196,7 +196,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
 
               for (const newSchemaUid of difference) {
                 prevSchemasToKeep.add(newSchemaUid);
-                if (this.polymorphicReferences[newSchemaUid] !== undefined && !polyReferencedSchemasChecked.has(referencedSchemaUid)) {
+                if (this.polymorphicReferences[newSchemaUid] !== undefined /* && !polyReferencedSchemasChecked.has(referencedSchemaUid) */) {
                   polyReferencedSchemasToCheck.push(newSchemaUid);
                 }
               }
