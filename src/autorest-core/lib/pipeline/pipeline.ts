@@ -163,7 +163,7 @@ function GetPlugin_ArtifactEmitter(inputOverride?: () => Promise<DataSource>): P
     }
 
     // clear output-folder if requested
-    if (config.GetEntry("clear-output-folder" as any)) {
+    if (config.GetEntry("clear-output-folder" as any) === true) {
       config.ClearFolder.Dispatch(config.OutputFolderUri);
     }
 

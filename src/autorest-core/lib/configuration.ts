@@ -181,7 +181,7 @@ function ProxifyConfigurationView(cfgView: any) {
         }
         return result;
       }
-      return resolveRValue(value, <string>property, null, cfgView);
+      return resolveRValue(value, <string>property, cfgView, null);
     }
   });
 }
@@ -420,7 +420,7 @@ export class ConfigurationView {
   }
 
   public GetNestedConfigurationImmediate(...scope: any[]): ConfigurationView {
-    return new ConfigurationView(this.configurationFiles, this.fileSystem, this.messageEmitter, this.configFileFolderUri, ...scope, this.config).Indexer;
+    return new ConfigurationView(this.configurationFiles, this.fileSystem, this.messageEmitter, this.configFileFolderUri, this.config, ...scope).Indexer;
   }
 
   // message pipeline (source map resolution, filter, ...)
