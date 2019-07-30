@@ -116,7 +116,6 @@ function toJsValue(value: any) {
       return 'true';
   }
   return `'${value}'`;
-
 }
 // Note: I am not convinced this works precisely as it should
 // but it works well enough for my needs right now
@@ -155,8 +154,6 @@ export function resolveRValue(value: any, propertyName: string, higherPriority: 
           // the target value should be the result without string twiddling
           if (jsAware > 0) {
             return toJsValue(resolve(match[0], match[1]));
-
-            // return `'${resolve(match[0], match[1])}'`;
           }
           return resolve(match[0], match[1]);
         }
@@ -177,10 +174,11 @@ export function resolveRValue(value: any, propertyName: string, higherPriority: 
       return result;
     }
   }
-  if (jsAware > 0) {
 
+  if (jsAware > 0) {
     return toJsValue(value);
   }
+
   return value;
 }
 

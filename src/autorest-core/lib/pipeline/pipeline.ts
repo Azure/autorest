@@ -237,6 +237,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
 
   const fsInput = configView.DataStore.GetReadThroughScope(fileSystem);
   const pipeline = buildPipeline(configView);
+  const times = !!configView['timestamp'];
 
   const ScheduleNode: (nodeName: string) => Promise<DataSource> =
     async (nodeName) => {
@@ -281,13 +282,14 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
         return inputScope;
       }
       try {
+
         const t1 = process.uptime() * 100;
-        config.Message({ Channel: Channel.Debug, Text: `${nodeName} - START inputs = ${(await inputScope.Enum()).length}` });
+        config.Message({ Channel: times ? Channel.Information : Channel.Debug, Text: `${nodeName} - START inputs = ${(await inputScope.Enum()).length}` });
 
         const scopeResult = await plugin(config, inputScope, config.DataStore.getDataSink(node.outputArtifact));
         const t2 = process.uptime() * 100;
 
-        config.Message({ Channel: Channel.Debug, Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]` });
+        config.Message({ Channel: times ? Channel.Information : Channel.Debug, Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]` });
         return scopeResult;
       } catch (e) {
         console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);

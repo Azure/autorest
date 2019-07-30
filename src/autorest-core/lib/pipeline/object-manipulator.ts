@@ -52,35 +52,36 @@ export async function manipulateObject(
       : ToAst(newObject); // <- can extend ToAst to also take an "ambient" object with AST, in order to create anchor refs for existing stuff!
     const oldAst = ResolveRelativeNode(ast, ast, hit.path);
     ast = ReplaceNode(ast, oldAst, newAst) || (() => { throw new Error('Cannot remove root node.'); })();
-
-    // patch source map
-    if (newAst !== undefined) {
-      const reasonSuffix = mappingInfo ? ` (${mappingInfo.reason})` : '';
-      if (mappingInfo) {
-        mapping.push(
-          ...From(Descendants(newAst)).Select((descendant: any) => {
-            return <Mapping>{
-              name: `Injected object at '${stringify(hit.path)}'${reasonSuffix}`,
-              source: mappingInfo.transformerSourceHandle.key,
-              original: mappingInfo.transformerSourcePosition,
-              generated: { path: hit.path.concat(descendant.path) }
-            };
-          }));
-      }
-
-      // try to be smart and assume that nodes existing in both old and new AST have a relationship
-      mapping.push(
-        ...From(Descendants(newAst))
-          .Where((descendant: any) => paths(doc, stringify(hit.path.concat(descendant.path))).length === 1)
-          .Select((descendant: any) => {
-            return <Mapping>{
-              name: `Original object at '${stringify(hit.path)}'${reasonSuffix}`,
-              source: src.key,
-              original: { path: hit.path.concat(descendant.path) },
-              generated: { path: hit.path.concat(descendant.path) }
-            };
-          }));
-    }
+    /*
+        // patch source map
+        if (newAst !== undefined) {
+          const reasonSuffix = mappingInfo ? ` (${mappingInfo.reason})` : '';
+          if (mappingInfo) {
+            mapping.push(
+              ...From(Descendants(newAst)).Select((descendant: any) => {
+                return <Mapping>{
+                  name: `Injected object at '${stringify(hit.path)}'${reasonSuffix}`,
+                  source: mappingInfo.transformerSourceHandle.key,
+                  original: mappingInfo.transformerSourcePosition,
+                  generated: { path: hit.path.concat(descendant.path) }
+                };
+              }));
+          }
+    
+          // try to be smart and assume that nodes existing in both old and new AST have a relationship
+          mapping.push(
+            ...From(Descendants(newAst))
+              .Where((descendant: any) => paths(doc, stringify(hit.path.concat(descendant.path))).length === 1)
+              .Select((descendant: any) => {
+                return <Mapping>{
+                  name: `Original object at '${stringify(hit.path)}'${reasonSuffix}`,
+                  source: src.key,
+                  original: { path: hit.path.concat(descendant.path) },
+                  generated: { path: hit.path.concat(descendant.path) }
+                };
+              }));
+        }
+        */
   }
 
   // write back

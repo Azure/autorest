@@ -4,17 +4,25 @@ import { createPerFilePlugin, PipelinePlugin } from '../common';
 import { Manipulator } from '../manipulation';
 import { Channel } from '../../message';
 
-
 /* @internal */
 export function createTextTransformerPlugin(): PipelinePlugin {
   // create a lightweight text transformer.
   return async (config, input, sink) => {
     // get directives as concrete objects.
-    const directives = config.StaticDirectives;
+
+    // text transforms are always 'where: $' or no where clause at all.
+    const directives = config.getStaticDirectives(x => !!x.transform && x.transform.length > 0 && (!x.where || x.where === '$'));
 
     if (directives.length === 0) {
       return input;
     }
+    const $lib = {
+      debug: (text: string) => config.Message({ Channel: Channel.Debug, Text: text }),
+      verbose: (text: string) => config.Message({ Channel: Channel.Debug, Text: text }),
+      log: (text: string) => console.error(text),
+      config: config
+    };
+
     const result: Array<DataHandle> = [];
     for (const file of await input.Enum()) {
       const inputHandle = await input.Read(file);
@@ -28,44 +36,34 @@ export function createTextTransformerPlugin(): PipelinePlugin {
             each => each === inputHandle.artifactType ||  // artifact by type (ie, source-file-csharp)
               documentId.endsWith(`/${each}`) ||            // by name (ie, Get_AzAdSomething.cs)
               documentId.match(new RegExp(`/.+/${each}$`)))) { // by regex (ie, Get-AzAd.*.cs) 
+
             // if the file should be processed, run it thru
+            for (const transform of directive.transform) {
+              // grab the contents (don't extend the cache tho')
+              contents = contents === undefined ? await inputHandle.ReadData(true) : contents;
 
-            if (directive.where.indexOf('$') > -1) {
-              // text transforms are always 'where: $'
+              config.Message({ Channel: Channel.Debug, Text: `Running directive '${directive.from}/${directive.reason}' on ${inputHandle.key} ` });
 
-              for (const transform of directive.transform) {
-                // grab the contents (don't extend the cache tho')
-                contents = contents || await inputHandle.ReadData();
-                config.Message({ Channel: Channel.Debug, Text: `Running directive '${directive.from}/${directive.reason}' on ${inputHandle.key} ` });
-
-
-                const output = safeEval<string>(`(() => { { ${transform} }; return $; })()`, {
-                  $: contents,
-                  $doc: inputHandle,
-                  $path: [],
-                  $documentPath: inputHandle.key,
-                  $lib: {
-                    debug: (text: string) => config.Message({ Channel: Channel.Debug, Text: text }),
-                    verbose: (text: string) => config.Message({ Channel: Channel.Debug, Text: text }),
-                    log: (text: string) => console.error(text),
-                    config: config
-                  }
-                })
-                if (output != contents) {
-                  modified = true;
-                  contents = output;
-                }
+              const output = safeEval<string>(`(() => { { ${transform} }; return $; })()`, {
+                $: contents,
+                $doc: inputHandle,
+                $path: [],
+                $documentPath: inputHandle.key,
+                $lib
+              })
+              if (output !== contents) {
+                modified = true;
+                contents = output;
               }
             }
           }
         }
+
         if (modified) {
           result.push(await sink.WriteData(inputHandle.Description, contents || '', inputHandle.identity, inputHandle.artifactType))
         } else {
           result.push(await sink.Forward(inputHandle.Description, inputHandle));
-          // result.push(inputHandle);
         }
-
       }
     }
     return new QuickDataSource(result, input.skip);

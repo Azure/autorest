@@ -6,7 +6,7 @@
 import { exists, filePath } from '@microsoft.azure/async-io';
 import { BlameTree, DataHandle, DataStore, IFileSystem, LazyPromise, ParseToAst, RealFileSystem, safeEval, Stringify, stringify, TryDecodeEnhancedPositionFromName } from '@microsoft.azure/datastore';
 import { Extension, ExtensionManager, LocalExtension } from '@microsoft.azure/extension';
-import { clone } from '@microsoft.azure/linq';
+import { clone, keys, Dictionary } from '@microsoft.azure/linq';
 import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri } from '@microsoft.azure/uri';
 import { From } from 'linq-es2015';
 import { basename, dirname, join } from 'path';
@@ -20,6 +20,7 @@ import { evaluateGuard, parseCodeBlocks } from './parsing/literate-yaml';
 import { AutoRestExtension } from './pipeline/plugin-endpoint';
 import { Suppressor } from './pipeline/suppression';
 import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
+import { values } from '@microsoft.azure/codegen';
 
 const untildify: (path: string) => string = require('untildify');
 
@@ -47,6 +48,7 @@ export interface AutoRestConfigurationImpl {
 
   'debug'?: boolean;
   'verbose'?: boolean;
+  'time'?: boolean;
 
   // plugin specific
   'output-file'?: string;
@@ -155,7 +157,7 @@ function arrayOf<T>(value: any): Array<T> {
   return [<T>value];
 }
 
-export interface Directive {
+export interface Directive extends Dictionary<any> {
   from?: Array<string> | string;
   where?: Array<string> | string;
   reason?: string;
@@ -443,11 +445,12 @@ export class ConfigurationView {
     }
   }
 
-  public get Directives(): Array<DirectiveView> {
-    const plainDirectives = valuesOf<Directive>(this.config['directive']);
+  public getStaticDirectives(predicate: (each: Directive) => boolean) {
+    const plainDirectives = values(valuesOf<Directive>(this.config['directive'])).linq.where(predicate);
     const declarations = this.config['declare-directive'] || {};
     const expandDirective = (dir: Directive): Iterable<Directive> => {
       const makro = Object.keys(dir).filter(m => declarations[m])[0];
+      // const makro = keys(dir).linq.first(m => !!declarations[m]);
       if (!makro) {
         return [dir]; // nothing to expand
       }
@@ -466,33 +469,8 @@ export class ConfigurationView {
       return From(makroResults).SelectMany((result: any) => expandDirective({ ...result, ...dir }));
     };
     // makro expansion
-    return From(plainDirectives).SelectMany(expandDirective).Select(each => new DirectiveView(each)).ToArray();
-  }
-
-  public get StaticDirectives(): Array<StaticDirectiveView> {
-    const plainDirectives = valuesOf<Directive>(this.config['directive']);
-    const declarations = this.config['declare-directive'] || {};
-    const expandDirective = (dir: Directive): Iterable<Directive> => {
-      const makro = Object.keys(dir).filter(m => declarations[m])[0];
-      if (!makro) {
-        return [dir]; // nothing to expand
-      }
-      // prepare directive
-      let parameters = (dir as any)[makro];
-      if (!Array.isArray(parameters)) {
-        parameters = [parameters];
-      }
-      dir = { ...dir };
-      delete (dir as any)[makro];
-      // call makro
-      const makroResults: any = From(parameters).SelectMany(parameter => {
-        const result = safeEval(declarations[makro], { $: parameter, $context: dir });
-        return Array.isArray(result) ? result : [result];
-      }).ToArray();
-      return From(makroResults).SelectMany((result: any) => expandDirective({ ...result, ...dir }));
-    };
-    // makro expansion
-    return From(plainDirectives).SelectMany(expandDirective).Select(each => new StaticDirectiveView(each)).ToArray();
+    return plainDirectives.linq.selectMany(expandDirective).linq.select(each => new StaticDirectiveView(each)).linq.toArray();
+    // return From(plainDirectives).SelectMany(expandDirective).Select(each => new StaticDirectiveView(each)).ToArray();
   }
 
   public get InputFileUris(): Array<string> {

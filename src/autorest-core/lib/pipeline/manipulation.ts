@@ -7,34 +7,33 @@ import { DataHandle, DataSink, nodes, safeEval } from '@microsoft.azure/datastor
 import { From } from 'linq-es2015';
 import { YieldCPU } from '@microsoft.azure/tasks';
 import { ConfigurationView } from '../autorest-core';
-import { DirectiveView } from '../configuration';
+import { StaticDirectiveView } from '../configuration';
 import { Channel, Message, SourceLocation } from '../message';
 import { manipulateObject } from './object-manipulator';
+import { values } from '@microsoft.azure/codegen';
+import { any } from '@microsoft.azure/linq';
 
 export class Manipulator {
-  private transformations: Array<DirectiveView>;
+  private transformations: Array<StaticDirectiveView>;
   private ctr = 0;
 
   public constructor(private config: ConfigurationView) {
-    this.transformations = config.Directives;
+    this.transformations = config.getStaticDirectives(x => !!x.transform && x.transform.length > 0 && !!x.where && x.where.length > 0);
   }
 
-  private matchesSourceFilter(document: string, transform: DirectiveView, artifact: string | null): boolean {
+  private matchesSourceFilter(document: string, transform: StaticDirectiveView, artifact: string | null): boolean {
     document = '/' + document;
-    // from
-    const from = From([...transform.from]);
-    return (!from.Any()) || (from.Any(d => artifact === d || document.endsWith('/' + d)));
+    return transform.from.length === 0 || values(transform.from).linq.any(each => artifact === each || document.endsWith('/' + each));
   }
 
   private async processInternal(data: DataHandle, sink: DataSink, documentId?: string): Promise<DataHandle> {
-    for (const trans of this.transformations) {
+    for (const directive of this.transformations) {
       // matches filter?
-      if (this.matchesSourceFilter(documentId || data.key, trans, data.artifactType)) {
+      if (this.matchesSourceFilter(documentId || data.key, directive, data.artifactType)) {
         try {
-
-          for (const w of trans.where) {
+          for (const w of directive.where) {
             // transform
-            for (const t of trans.transform) {
+            for (const t of directive.transform) {
               await YieldCPU();
               const result = await manipulateObject(data, sink, w,
                 (doc, obj, path) => {
@@ -57,7 +56,7 @@ export class Manipulator {
             }
 
             // test
-            for (const t of trans.test) {
+            for (const t of directive.test) {
               const doc = await data.ReadObject<any>();
               const allHits = nodes(doc, w);
               for (const hit of allHits) {
