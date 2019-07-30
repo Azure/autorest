@@ -294,10 +294,6 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
       } catch (e) {
         console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);
         throw e;
-
-        config.Message({ Channel: Channel.Fatal, Text: `${nodeName} - FAILED` });
-        config.Message({ Channel: Channel.Fatal, Text: `${e}` });
-        throw e;
       }
     };
 
