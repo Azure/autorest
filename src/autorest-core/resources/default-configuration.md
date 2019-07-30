@@ -123,7 +123,7 @@ try-require: ./readme.typescript.md
 
 ``` yaml $(typescript)
 use-extension:
-  "@microsoft.azure/autorest.typescript": "~2.0.12"
+  "@microsoft.azure/autorest.typescript": "~4.2.0"
 try-require: ./readme.typescript.md   
 ```
 
