@@ -6,11 +6,18 @@ if ( (require('v8').getHeapStatistics()).heap_size_limit < 8000000000 && !(globa
   require("child_process").spawn( process.execPath, process.argv.slice(1) , { argv0:"node" , stdio :'inherit' }).on('close' , code=> { process.exit(code); });
 } else {
   try {
+    const v = process.versions.node.split('.');
+    if( v[0] < 10 ) {
+      console.error("\nFATAL: Node v10 is required for AutoRest.\n")
+      process.exit(1);
+    }
+    if( v[0] > 10 ) {
+      console.error("\nWARNING: AutoRest has not been tested with Node versions greater than v10.\n")
+    }
     if (process.argv.indexOf('--no-static-loader') === -1 && process.env['no-static-loader'] === undefined && require('fs').existsSync(`${__dirname}/../dist/static-loader.js`)) {
         require(`${__dirname}/../dist/static-loader.js`).load(`${__dirname}/../dist/static_modules.fs`);
     }
     require (`${__dirname}/../dist/app.js`);  
-    
   } catch (e) {
     console.error(e);
   }
