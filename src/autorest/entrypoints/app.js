@@ -8,10 +8,11 @@ if ( (require('v8').getHeapStatistics()).heap_size_limit < 8000000000 && !(globa
 } else {
   try {
     const v = process.versions.node.split('.');
-    if( v[0] < 10 ) {
-      console.error("\nFATAL: Node v10 is required for AutoRest.\n")
+    if( v[0] < 10 || v[0] === 10 && v[1] < 12 ) {
+      console.error("\nFATAL: Node v10 (v10.12.x minimum, v10.16.x LTS recommended) is required for AutoRest.\n")
       process.exit(1);
     }
+    
     if( v[0] > 10 ) {
       console.error("\nWARNING: AutoRest has not been tested with Node versions greater than v10.\n")
     }
