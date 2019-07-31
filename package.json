@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/Azure/autorest/issues"
   },
-  "main": "./src/autorest-core/dist/exports.js",
+  "main": "./src/autorest/entrypoints/app.js",
   "bin": {
     "autorest-core": "./src/autorest-core/entrypoints/app.js",
     "autorest-language-service": "./src/autorest-core/entrypoints/language-service.js"

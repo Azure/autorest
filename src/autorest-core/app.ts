@@ -318,6 +318,11 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   // identify where we are starting from.
   const currentDirUri = CreateFolderUri(currentDirectory());
 
+  if (args.rawSwitches['help']) {
+    // if they are asking for help, feed a false file to config so we don't load a user's configuration 
+    args.configFileOrFolder = "invalid.filename.md";
+  }
+
   // get an instance of AutoRest and add the command line switches to the configuration.
   const api = new AutoRest(new EnhancedFileSystem((MergeConfigurations(...args.switches) as any)['github-auth-token'] || process.env.GITHUB_AUTH_TOKEN), ResolveUri(currentDirUri, args.configFileOrFolder || '.'));
   api.AddConfiguration(args.switches);
@@ -330,7 +335,14 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   let fastMode = false;
   let tasks = new Array<Promise<void>>();
 
+  const config = (await api.view);
+
   api.GeneratedFile.Subscribe((_, artifact) => {
+    if (config.HelpRequested) {
+      artifacts.push(artifact);
+      return;
+    }
+
     protectFiles.add(artifact.uri);
     tasks.push((artifact.type === 'binary-file' ? WriteBinary(artifact.uri, artifact.content) : WriteString(artifact.uri, artifact.content)))
   });
@@ -340,8 +352,6 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     }
   });
   api.ClearFolder.Subscribe((_, folder) => clearFolders.add(folder));
-
-  const config = (await api.view);
 
   // maybe a resource schema batch process
   if (config['resource-schema-batch']) {
