@@ -4,26 +4,24 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { DataHandle, DataSink, nodes, safeEval } from '@microsoft.azure/datastore';
-import { From } from 'linq-es2015';
 import { YieldCPU } from '@microsoft.azure/tasks';
 import { ConfigurationView } from '../autorest-core';
-import { StaticDirectiveView } from '../configuration';
+import { ResolvedDirective } from '../configuration';
 import { Channel, Message, SourceLocation } from '../message';
 import { manipulateObject } from './object-manipulator';
 import { values } from '@microsoft.azure/codegen';
-import { any } from '@microsoft.azure/linq';
 
 export class Manipulator {
-  private transformations: Array<StaticDirectiveView>;
+  private transformations: Array<ResolvedDirective>;
   private ctr = 0;
 
   public constructor(private config: ConfigurationView) {
-    this.transformations = config.getStaticDirectives(x => !!x.transform && x.transform.length > 0 && !!x.where && x.where.length > 0);
+    this.transformations = config.resolveDirectives(directive => directive.from.length > 0 && directive.transform.length > 0 && directive.where.length > 0);
   }
 
-  private matchesSourceFilter(document: string, transform: StaticDirectiveView, artifact: string | null): boolean {
+  private matchesSourceFilter(document: string, transform: ResolvedDirective, artifact: string | null): boolean {
     document = '/' + document;
-    return transform.from.length === 0 || values(transform.from).linq.any(each => artifact === each || document.endsWith('/' + each));
+    return values(transform.from).linq.any(each => artifact === each || document.endsWith('/' + each));
   }
 
   private async processInternal(data: DataHandle, sink: DataSink, documentId?: string): Promise<DataHandle> {

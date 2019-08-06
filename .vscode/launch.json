@@ -5,7 +5,8 @@
       "type": "node",
       "request": "attach",
       "name": "Node.js Attach",
-      "port": 9229
+      "port": 9229,
+      "smartStep": true
     },
     {
       "type": "node",
@@ -26,7 +27,7 @@
       "name": "run autorest",
       "program": "${workspaceRoot}/src/autorest/dist/app.js",
       "args": [
-        "--version=${workspaceRoot}/src/autorest-core",        
+        "--version=${workspaceRoot}/src/autorest-core",
         "--use=c:/work/2019/autorest.modeler",
         "--verbose",
         "--debug",

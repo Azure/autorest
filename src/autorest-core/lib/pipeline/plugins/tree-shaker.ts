@@ -562,7 +562,7 @@ async function shakeTree(config: ConfigurationView, input: DataSource, sink: Dat
     const shaker = new OAI3Shaker(each, isSimpleTreeShake);
     result.push(await sink.WriteObject('tree shaken doc...', await shaker.getOutput(), each.identity, 'tree-shaken-oai3', await shaker.getSourceMappings()));
   }
-  return new QuickDataSource(result, input.skip);
+  return new QuickDataSource(result, input.pipeState);
 }
 
 /* @internal */

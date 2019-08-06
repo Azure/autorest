@@ -55,7 +55,7 @@ async function quickCheck(config: ConfigurationView, input: DataSource, sink: Da
 
   const result: Array<DataHandle> = [];
 
-  return new QuickDataSource(result, input.skip);
+  return new QuickDataSource(result, input.pipeState);
 }
 
 /* @internal */

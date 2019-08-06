@@ -255,6 +255,6 @@ export function createComposerPlugin(): PipelinePlugin {
     const swagger = await composeSwaggers(config, overrideTitle, overrideDescription, swaggers, sink);
     const refCleaner = new ExternalRefCleaner(swagger);
     const result = await sink.WriteObject(swagger.Description, await refCleaner.getOutput(), swagger.identity, swagger.artifactType, await refCleaner.getSourceMappings(), [swagger]);
-    return new QuickDataSource([result], input.skip);
+    return new QuickDataSource([result], input.pipeState);
   };
 }

@@ -6,17 +6,17 @@
 import { JsonPath, matches } from '@microsoft.azure/datastore';
 import { From } from 'linq-es2015';
 import { ConfigurationView } from '../autorest-core';
-import { StaticDirectiveView } from '../configuration';
+import { ResolvedDirective } from '../configuration';
 import { Message } from '../message';
 
 export class Suppressor {
-  private suppressions: Array<StaticDirectiveView>;
+  private suppressions: Array<ResolvedDirective>;
 
   public constructor(private config: ConfigurationView) {
-    this.suppressions = config.getStaticDirectives(x => !!x.suppress && x.suppress.length > 0);
+    this.suppressions = config.resolveDirectives(x => x.suppress.length > 0);
   }
 
-  private matchesSourceFilter(document: string, path: JsonPath | undefined, supression: StaticDirectiveView): boolean {
+  private matchesSourceFilter(document: string, path: JsonPath | undefined, supression: ResolvedDirective): boolean {
     // from
     const from = From(supression.from);
     const matchesFrom = !from.Any() || from.Any(d => document.toLowerCase().endsWith(d.toLowerCase()));

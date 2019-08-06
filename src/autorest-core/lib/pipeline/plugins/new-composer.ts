@@ -460,7 +460,7 @@ async function compose(config: ConfigurationView, input: DataSource, sink: DataS
 
   // compose-a-vous!
   const composer = new NewComposer(inputs[0]);
-  return new QuickDataSource([await sink.WriteObject('composed oai3 doc...', await composer.getOutput(), [].concat.apply([], inputs.map(each => each.identity) as any), 'merged-oai3', await composer.getSourceMappings())], input.skip);
+  return new QuickDataSource([await sink.WriteObject('composed oai3 doc...', await composer.getOutput(), [].concat.apply([], inputs.map(each => each.identity) as any), 'merged-oai3', await composer.getSourceMappings())], input.pipeState);
 }
 
 /* @internal */

@@ -89,7 +89,7 @@ async function renameComponentsKeys(config: ConfigurationView, input: DataSource
     const processor = new ComponentKeyRenamer(each);
     result.push(await sink.WriteObject('oai3-component-renamed doc...', await processor.getOutput(), each.identity, 'oi3-component-renamed', await processor.getSourceMappings()));
   }
-  return new QuickDataSource(result, input.skip);
+  return new QuickDataSource(result, input.pipeState);
 }
 
 /* @internal */

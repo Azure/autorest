@@ -20,7 +20,7 @@ import { evaluateGuard, parseCodeBlocks } from './parsing/literate-yaml';
 import { AutoRestExtension } from './pipeline/plugin-endpoint';
 import { Suppressor } from './pipeline/suppression';
 import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
-import { values } from '@microsoft.azure/codegen';
+import { values, Initializer } from '@microsoft.azure/codegen';
 
 const untildify: (path: string) => string = require('untildify');
 
@@ -77,6 +77,7 @@ export interface AutoRestConfigurationImpl {
   'enable-multi-api'?: boolean;
   'load-priority'?: number;
 
+  'resolved-directive'?: any;
   'debugger'?: any;
 }
 
@@ -169,7 +170,7 @@ export interface Directive extends Dictionary<any> {
   test?: Array<string> | string;
 }
 
-export class StaticDirectiveView {
+export class ResolvedDirective extends Initializer implements Dictionary<any> {
   from: Array<string>;
   where: Array<string>;
   reason?: string;
@@ -177,43 +178,19 @@ export class StaticDirectiveView {
   transform: Array<string>;
   test: Array<string>;
 
-  constructor(public directive: Directive) {
+  constructor(directive: Directive) {
+    super();
+
+    // copy untyped content over
+    this.apply(directive);
+
+    // normalize typed content
     this.from = arrayOf(directive['from']);
     this.where = arrayOf(directive['where']);
     this.reason = directive.reason;
     this.suppress = arrayOf(directive['suppress']);
     this.transform = arrayOf(directive['transform'] || directive['text-transform']);
     this.test = arrayOf(directive['test']);
-  }
-}
-
-export class DirectiveView {
-  constructor(private directive: Directive) {
-
-  }
-
-  public get from(): Iterable<string> {
-    return valuesOf<string>(this.directive['from']);
-  }
-
-  public get where(): Iterable<string> {
-    return valuesOf<string>(this.directive['where']);
-  }
-
-  public get reason(): string | null {
-    return this.directive.reason || null;
-  }
-
-  public get suppress(): Iterable<string> {
-    return valuesOf<string>(this.directive['suppress']);
-  }
-
-  public get transform(): Iterable<string> {
-    return valuesOf<string>(this.directive['transform']);
-  }
-
-  public get test(): Iterable<string> {
-    return valuesOf<string>(this.directive['test']);
   }
 }
 
@@ -445,8 +422,11 @@ export class ConfigurationView {
     }
   }
 
-  public getStaticDirectives(predicate: (each: Directive) => boolean) {
-    const plainDirectives = values(valuesOf<Directive>(this.config['directive'])).linq.where(predicate);
+  public resolveDirectives(predicate?: (each: ResolvedDirective) => boolean) {
+    // optionally filter by predicate.
+    const plainDirectives = values(valuesOf<Directive>(this.config['directive']));
+    // predicate ? values(valuesOf<Directive>(this.config['directive'])).linq.where(predicate) : values(valuesOf<Directive>(this.config['directive']));
+
     const declarations = this.config['declare-directive'] || {};
     const expandDirective = (dir: Directive): Iterable<Directive> => {
       const makro = Object.keys(dir).filter(m => declarations[m])[0];
@@ -469,7 +449,10 @@ export class ConfigurationView {
       return From(makroResults).SelectMany((result: any) => expandDirective({ ...result, ...dir }));
     };
     // makro expansion
-    return plainDirectives.linq.selectMany(expandDirective).linq.select(each => new StaticDirectiveView(each)).linq.toArray();
+    if (predicate) {
+      return plainDirectives.linq.selectMany(expandDirective).linq.select(each => new ResolvedDirective(each)).linq.where(predicate).linq.toArray();
+    }
+    return plainDirectives.linq.selectMany(expandDirective).linq.select(each => new ResolvedDirective(each)).linq.toArray();
     // return From(plainDirectives).SelectMany(expandDirective).Select(each => new StaticDirectiveView(each)).ToArray();
   }
 
@@ -496,6 +479,9 @@ export class ConfigurationView {
     if (!key) {
       return clone(this.config);
     }
+    if (key === 'resolved-directive') {
+      return this.resolveDirectives();
+    }
     let result = this.config as any;
     for (const keyPart of key.split('.')) {
       result = result[keyPart];
@@ -509,6 +495,18 @@ export class ConfigurationView {
 
   public get DebugMode(): boolean {
     return !!this.config['debug'];
+  }
+
+  public get CacheMode(): boolean {
+    return !!this.config['cache'];
+  }
+
+  public get CacheExclude(): Array<string> {
+    const cache = this.config['cache'];
+    if (cache && cache.exclude) {
+      return [...valuesOf<string>(cache.exclude)];
+    }
+    return [];
   }
 
   public get VerboseMode(): boolean {

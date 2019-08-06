@@ -23,13 +23,14 @@ if (!String.prototype.padEnd) {
   };
 }
 
-import { isFile } from '@microsoft.azure/async-io';
+import { isFile, readdir, rmdir, isDirectory } from '@microsoft.azure/async-io';
 import { Exception, LazyPromise } from '@microsoft.azure/tasks';
 import chalk from 'chalk';
 import { join } from 'path';
 import { gt } from 'semver';
 import { availableVersions, corePackage, ensureAutorestHome, extensionManager, installedCores, networkEnabled, pkgVersion, resolvePathForLocalVersion, rootFolder, selectVersion, tryRequire } from './autorest-as-a-service';
 import { color } from './coloring';
+import { tmpdir } from 'os';
 
 // aliases, round one.
 if (process.argv.indexOf('--no-upgrade-check') !== -1) {
@@ -149,6 +150,23 @@ async function showInstalledExtensions(): Promise<number> {
   return 0;
 }
 
+async function clearTempData() {
+  const all = [];
+  const tmp = tmpdir();
+  for (const each of await readdir(tmp)) {
+    if (each.startsWith('autorest')) {
+      const name = join(tmp, each);
+      if (await isDirectory(name)) {
+        all.push(rmdir(name));
+      }
+    }
+  }
+  if (all.length > 0) {
+    console.log(chalk.grey(`Clearing ${all.length} autorest temp data folders...`));
+  }
+  await Promise.all(all);
+}
+
 /** Main Entrypoint for AutoRest Bootstrapper */
 async function main() {
   try {
@@ -166,12 +184,19 @@ async function main() {
       /* make sure we have a .autorest folder */
       await ensureAutorestHome();
 
+      if (args.reset || args['clear-temp']) {
+        // clear out all the temp-data too
+        await clearTempData();
+      }
+
       // if we have an autorest home folder, --reset may mean something.
       // if it's not there, --reset won't do anything.
       if (args.reset) {
         if (args.debug) {
           console.log(`Resetting autorest extension folder '${rootFolder}'`);
         }
+
+
         try {
           await (await extensionManager).reset();
           console.log(color('\n\n## Cleared the AutoRest extension folder.\nOn the next run, extensions will be reacquired from the repository.'));

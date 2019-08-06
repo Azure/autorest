@@ -278,7 +278,7 @@ export function createSwaggerLoaderPlugin(): PipelinePlugin {
       result = await crawlReferences(input, swaggers, sink);
     }
 
-    return new QuickDataSource(result, foundAllFiles);
+    return new QuickDataSource(result, { skipping: foundAllFiles });
   };
 }
 
@@ -296,7 +296,7 @@ export function createOpenApiLoaderPlugin(): PipelinePlugin {
     if (openapis.length === inputs.length) {
       result = await crawlReferences(input, openapis, sink);
     }
-    return new QuickDataSource(result, openapis.length !== inputs.length);
+    return new QuickDataSource(result, { skipping: openapis.length !== inputs.length });
   };
 }
 
@@ -312,7 +312,7 @@ export function createMarkdownOverrideSwaggerLoaderPlugin(): PipelinePlugin {
     for (let i = 0; i < inputs.length; ++i) {
       result.push(await sink.Forward(inputs[i], swaggers[i]));
     }
-    return new QuickDataSource(result, input.skip);
+    return new QuickDataSource(result, input.pipeState);
   };
 }
 
@@ -327,6 +327,6 @@ export function createMarkdownOverrideOpenApiLoaderPlugin(): PipelinePlugin {
     for (let i = 0; i < inputs.length; ++i) {
       result.push(await sink.Forward(inputs[i], openapis[i]));
     }
-    return new QuickDataSource(result, input.skip);
+    return new QuickDataSource(result, input.pipeState);
   };
 }

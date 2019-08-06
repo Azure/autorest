@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSource, FastStringify, IFileSystem, JsonPath, QuickDataSource, safeEval, stringify } from '@microsoft.azure/datastore';
+import { DataHandle, DataSource, FastStringify, IFileSystem, JsonPath, QuickDataSource, safeEval, stringify, PipeState, mergePipeStates } from '@microsoft.azure/datastore';
 import { ConfigurationView, getExtension } from '../configuration';
 import { Channel } from '../message';
 import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
@@ -28,11 +28,15 @@ import { createNewComposerPlugin } from './plugins/new-composer';
 import { createProfileFilterPlugin } from './plugins/profile-filter';
 import { createQuickCheckPlugin } from './plugins/quick-check';
 import { subsetSchemaDeduplicatorPlugin } from './plugins/subset-schemas-deduplicator';
-import { createImmediateTransformerPlugin, createTextTransformerPlugin, createTransformerPlugin } from './plugins/transformer';
+import { createImmediateTransformerPlugin, createTextTransformerPlugin, createTransformerPlugin, createGraphTransformerPlugin } from './plugins/transformer';
 import { createTreeShakerPlugin } from './plugins/tree-shaker';
 import { createApiVersionParameterHandlerPlugin } from './plugins/version-param-handler';
 import { createJsonToYamlPlugin, createYamlToJsonPlugin } from './plugins/yaml-and-json';
 import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from './schema-validation';
+import { createHash } from 'crypto';
+import { isCached, readCache, writeCache } from './pipeline-cache';
+
+const md5 = (content: any) => content ? createHash('md5').update(JSON.stringify(content)).digest('hex') : undefined;
 
 interface PipelineNode {
   outputArtifact?: string;
@@ -170,6 +174,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     'md-override-loader-openapi': createMarkdownOverrideOpenApiLoaderPlugin(),
     'transform': createTransformerPlugin(),
     'text-transform': createTextTransformerPlugin(),
+    'new-transform': createGraphTransformerPlugin(),
     'transform-immediate': createImmediateTransformerPlugin(),
     'compose': createNewComposerPlugin(),
     'schema-validator-openapi': createOpenApiSchemaValidatorPlugin(),
@@ -251,22 +256,27 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
       const inputScopes: Array<DataSource> = await Promise.all(node.inputs.map(getTask));
 
       let inputScope: DataSource;
-      if (inputScopes.length === 0) {
-        inputScope = fsInput;
-      } else {
-        let skip: boolean | undefined;
+      switch (inputScopes.length) {
+        case 0:
+          inputScope = fsInput;
+          break;
+        case 1:
+          inputScope = await inputScopes[0];
+          break;
+        default:
+          let pipeState: PipeState = {};
 
-        const handles: Array<DataHandle> = [];
-        for (const pscope of inputScopes) {
-          const scope = await pscope;
-          if (pscope.skip !== undefined) {
-            skip = skip === undefined ? pscope.skip : skip && pscope.skip;
+          const handles: Array<DataHandle> = [];
+          for (const pscope of inputScopes) {
+            const scope = await pscope;
+            pipeState = mergePipeStates(pipeState, scope.pipeState);
+            for (const handle of await scope.Enum()) {
+              handles.push(await scope.ReadStrict(handle));
+            }
           }
-          for (const handle of await scope.Enum()) {
-            handles.push(await scope.ReadStrict(handle));
-          }
-        }
-        inputScope = new QuickDataSource(handles, skip);
+          inputScope = new QuickDataSource(handles, pipeState);
+          break;
+
       }
 
       const config = pipeline.configs[stringify(node.configScope)];
@@ -282,14 +292,43 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
         return inputScope;
       }
       try {
+        let cacheKey: string | undefined;
+
+        if (config.CacheMode) {
+          // generate the key used to store/access cached content
+          const names = await inputScope.Enum();
+          const data = (await Promise.all(names.map(name => inputScope.ReadStrict(name).then(uri => md5(uri.ReadData()))))).sort();
+
+          cacheKey = md5(([config.configFileFolderUri, nodeName, ...data]).join('«'));
+        }
+
+        // if caching is enabled, see if we can find a scopeResult in the cache first.
+        // key = inputScope names + md5(inputScope content)
+        if (config.CacheMode && inputScope.cachable && config.CacheExclude.indexOf(nodeName) === -1 && await isCached(cacheKey)) {
+          // shortcut -- get the outputs directly from the cache.
+          config.Message({ Channel: times ? Channel.Information : Channel.Debug, Text: `${nodeName} - CACHED inputs = ${(await inputScope.Enum()).length} [0.0 s]` });
+
+          return await readCache(cacheKey, config.DataStore.getDataSink(node.outputArtifact));
+        }
 
         const t1 = process.uptime() * 100;
         config.Message({ Channel: times ? Channel.Information : Channel.Debug, Text: `${nodeName} - START inputs = ${(await inputScope.Enum()).length}` });
 
+        // creates the actual plugin.
         const scopeResult = await plugin(config, inputScope, config.DataStore.getDataSink(node.outputArtifact));
         const t2 = process.uptime() * 100;
 
         config.Message({ Channel: times ? Channel.Information : Channel.Debug, Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]` });
+
+        // if caching is enabled, let's cache this scopeResult.
+        if (config.CacheMode && cacheKey) {
+          await writeCache(cacheKey, scopeResult);
+        }
+        // if this node wasn't able to load from the cache, then subsequent nodes shall not either
+        if (!inputScope.cachable || config.CacheExclude.indexOf(nodeName) !== -1) {
+          scopeResult.cachable = false;
+        }
+
         return scopeResult;
       } catch (e) {
         console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);

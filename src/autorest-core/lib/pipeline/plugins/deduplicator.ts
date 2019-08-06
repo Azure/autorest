@@ -18,7 +18,7 @@ async function deduplicate(config: ConfigurationView, input: DataSource, sink: D
     result.push(await sink.WriteObject('model-deduplicated-oai3-doc', await deduplicator.getOutput(), each.identity, 'deduplicated-oai3', [/* fix-me: Construct source map from the mappings returned by the deduplicator.s*/]));
   }
 
-  return new QuickDataSource(result, input.skip);
+  return new QuickDataSource(result, input.pipeState);
 }
 
 /* @internal */

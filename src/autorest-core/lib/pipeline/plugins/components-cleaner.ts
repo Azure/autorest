@@ -187,7 +187,7 @@ async function clean(config: ConfigurationView, input: DataSource, sink: DataSin
     result.push(await sink.WriteObject('cleaned-oai3-doc', output, each.identity, 'clean-spec-oai3', await processor.getSourceMappings()));
   }
 
-  return new QuickDataSource(result, input.skip);
+  return new QuickDataSource(result, input.pipeState);
 }
 
 /* @internal */

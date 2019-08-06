@@ -98,6 +98,9 @@ declare-directive:
         case "code-model-v1":
           throw "not implemented";
 
+        case "code-model-v3":
+          return {from: "code-model-v3", where: `$.schemas[?(/${$}/i.exec(@.details.default.name))]`};
+
         case "openapi-document":
           return { from: "openapi-document", where: `$.definitions[${JSON.stringify($)}]` };
 

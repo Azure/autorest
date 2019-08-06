@@ -425,7 +425,7 @@ async function filter(config: ConfigurationView, input: DataSource, sink: DataSi
     }
   }
 
-  return new QuickDataSource(result, input.skip);
+  return new QuickDataSource(result, input.pipeState);
 }
 
 function getFilesUsed(nodes: Iterable<Node>) {

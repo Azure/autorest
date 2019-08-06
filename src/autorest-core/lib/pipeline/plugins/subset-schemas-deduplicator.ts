@@ -308,7 +308,7 @@ async function deduplicateSubsetSchemas(config: ConfigurationView, input: DataSo
     const processor = new SubsetSchemaDeduplicator(each);
     result.push(await sink.WriteObject('oai3-subset-schema-reduced doc...', await processor.getOutput(), each.identity, 'oi3-subset-schema-reduced', await processor.getSourceMappings()));
   }
-  return new QuickDataSource(result, input.skip);
+  return new QuickDataSource(result, input.pipeState);
 }
 
 /* @internal */

@@ -13,6 +13,6 @@ export function createCommonmarkProcessorPlugin(): PipelinePlugin {
       file = file.substr(file.indexOf('/output/') + '/output/'.length);
       results.push(await sink.Forward('code-model-v1', fileOut));
     }
-    return new QuickDataSource(results, input.skip);
+    return new QuickDataSource(results, input.pipeState);
   };
 }

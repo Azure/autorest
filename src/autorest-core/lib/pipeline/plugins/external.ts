@@ -1,4 +1,4 @@
-import { DataHandle, QuickDataSource } from '@microsoft.azure/datastore';
+import { DataHandle, QuickDataSource, mergePipeStates } from '@microsoft.azure/datastore';
 import { Channel, Message } from '../../message';
 import { PipelinePlugin } from '../common';
 import { AutoRestExtension } from '../plugin-endpoint';
@@ -37,6 +37,6 @@ export function createExternalPlugin(host: AutoRestExtension, pluginName: string
     if (!result) {
       throw new Error(`Plugin ${pluginName} reported failure.`);
     }
-    return new QuickDataSource(results, shouldSkip);
+    return new QuickDataSource(results, mergePipeStates(input.pipeState, { skipping: shouldSkip }));
   };
 }
