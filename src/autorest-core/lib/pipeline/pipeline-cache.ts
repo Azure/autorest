@@ -1,8 +1,8 @@
 import { QuickDataSource, DataSource, DataHandle, DataSink } from "@microsoft.azure/datastore";
-import { promises as fs, promises } from 'fs';
+
 import { tmpdir } from 'os';
 import { join } from 'path';
-import { isDirectory, readdir, mkdir } from "@microsoft.azure/async-io";
+import { isDirectory, readdir, mkdir, writeFile, readFile } from "@microsoft.azure/async-io";
 import { createHash } from 'crypto';
 
 const md5 = (content: any) => createHash('md5').update(JSON.stringify(content)).digest('hex');
@@ -19,7 +19,6 @@ function decode(str: string) {
 let cacheFolder: string | undefined;
 async function getCacheFolder() {
   if (!cacheFolder) {
-    // cacheFolder = await fs.mkdtemp(join(tmpdir(), 'autorest-cache'));
     cacheFolder = join(tmpdir(), 'autorest-cache');
     if (!await isDirectory(cacheFolder)) {
       await mkdir(cacheFolder);
@@ -37,9 +36,9 @@ export async function writeCache(key: string, dataSource: DataSource) {
     const content = await dataSource.Read(each);
     if (content) {
       if (! await isDirectory(folder)) {
-        await fs.mkdir(folder);
+        await mkdir(folder);
       }
-      all.push(fs.writeFile(join(folder, md5(each)), await content.serialize()));
+      all.push(writeFile(join(folder, md5(each)), await content.serialize()));
     }
   }
   await Promise.all(all);
@@ -54,7 +53,7 @@ export async function readCache(key: string | undefined, sink: DataSink): Promis
 
       if (await isDirectory(folder)) {
         for (const each of await readdir(folder)) {
-          const item = JSON.parse(await fs.readFile(join(folder, each), 'utf8'));
+          const item = JSON.parse(await readFile(join(folder, each)));
           const dh = await sink.WriteData(item.key, item.content, item.identity, item.artifactType, undefined, undefined);
           handles.push(dh);
         }
