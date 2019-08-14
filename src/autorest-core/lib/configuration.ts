@@ -22,6 +22,7 @@ import { Suppressor } from './pipeline/suppression';
 import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
 import { values, Initializer } from '@microsoft.azure/codegen';
 import { resolve as uri_resolve } from 'url'
+import { pipeline } from 'stream';
 
 
 const untildify: (path: string) => string = require('untildify');
@@ -995,7 +996,7 @@ export class Configuration {
             `extension-config-${additionalExtension.fullyQualified}`);
           // even though we load extensions after the default configuration, I want them to be able to 
           // trigger changes in the default configuration loading (ie, an extension can set a flag to use a different pipeline.)
-          viewsToHandle.push(createView(await addSegments(blocks.map(each => ({ ...each, "load-priority": 1000 })))));
+          viewsToHandle.push(createView(await addSegments(blocks.map(each => each['pipeline-model'] ? ({ ...each, "load-priority": 1000 }) : each))));
         } catch (e) {
           messageEmitter.Message.Dispatch({
             Channel: Channel.Fatal,
