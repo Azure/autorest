@@ -3,9 +3,6 @@
 The beta version of the PowerShell Generator.
 
 ``` yaml $(powershell)
-# requires multi-api merger
-enable-multi-api: true
-
 # probe from readme.powershell.md file 
 try-require: ./readme.powershell.md
 ```

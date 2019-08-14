@@ -7,7 +7,7 @@ import { exists, filePath } from '@microsoft.azure/async-io';
 import { BlameTree, DataHandle, DataStore, IFileSystem, LazyPromise, ParseToAst, RealFileSystem, safeEval, Stringify, stringify, TryDecodeEnhancedPositionFromName } from '@microsoft.azure/datastore';
 import { Extension, ExtensionManager, LocalExtension } from '@microsoft.azure/extension';
 import { clone, keys, Dictionary } from '@microsoft.azure/linq';
-import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri } from '@microsoft.azure/uri';
+import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri, simplifyUri } from '@microsoft.azure/uri';
 import { From } from 'linq-es2015';
 import { basename, dirname, join } from 'path';
 import { CancellationToken, CancellationTokenSource } from 'vscode-jsonrpc';
@@ -21,6 +21,8 @@ import { AutoRestExtension } from './pipeline/plugin-endpoint';
 import { Suppressor } from './pipeline/suppression';
 import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
 import { values, Initializer } from '@microsoft.azure/codegen';
+import { resolve as uri_resolve } from 'url'
+
 
 const untildify: (path: string) => string = require('untildify');
 
@@ -74,7 +76,7 @@ export interface AutoRestConfigurationImpl {
   'profile'?: Array<string> | string;
   'api-version'?: Array<string>;
 
-  'enable-multi-api'?: boolean;
+  'pipeline-model'?: string;
   'load-priority'?: number;
 
   'resolved-directive'?: any;
@@ -292,7 +294,6 @@ export class ConfigurationView {
       this.config = this.rawConfig;
     }
     this.suppressor = new Suppressor(this);
-    // this.Message({ Channel: Channel.Debug, Text: `Creating ConfigurationView : ${configs.length} sections.` });
 
     // treat this as a configuration property too.
     (<any>(this.rawConfig)).configurationFiles = configurationFiles;
@@ -819,6 +820,10 @@ export class Configuration {
     // 2. file
     if (configFileUri !== null) {
       // add loaded files to the input files.
+      messageEmitter.Message.Dispatch({
+        Channel: Channel.Verbose,
+        Text: `> Initial configuration file '${configFileUri}'`
+      });
       configurationFiles[configFileUri] = await (await fsInputView.ReadStrict(configFileUri)).ReadData();
 
       const blocks = await this.ParseCodeBlocks(
@@ -832,9 +837,16 @@ export class Configuration {
     const addedConfigs = new Set<string>();
     const includeFn = async (fsToUse: IFileSystem) => {
 
-      for await (const additionalConfig of ConfigurationView.getIncludedConfigurationFiles(createView, fsToUse, addedConfigs)) {
+      for await (let additionalConfig of ConfigurationView.getIncludedConfigurationFiles(createView, fsToUse, addedConfigs)) {
         // acquire additional configs
         try {
+          additionalConfig = simplifyUri(additionalConfig);
+
+          // skip ones we've aleady loaded faster.
+          if (configurationFiles[additionalConfig]) {
+            continue;
+          }
+
           messageEmitter.Message.Dispatch({
             Channel: Channel.Verbose,
             Text: `> Including configuration file '${additionalConfig}'`
@@ -967,13 +979,22 @@ export class Configuration {
           }
           await includeFn(fsLocal);
 
-          // merge config
+          // merge config from extension
           const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
+
+          const cp = simplifyUri(CreateFileUri(await ext.extension.configurationPath));
+          messageEmitter.Message.Dispatch({
+            Channel: Channel.Verbose,
+            Text: `> Including extension configuration file '${cp}'`
+          });
+
           const blocks = await this.ParseCodeBlocks(
-            await inputView.ReadStrict(CreateFileUri(await ext.extension.configurationPath)),
+            await inputView.ReadStrict(cp),
             createView(),
             `extension-config-${additionalExtension.fullyQualified}`);
-          viewsToHandle.push(createView(await addSegments(blocks)));
+          // even though we load extensions after the default configuration, I want them to be able to 
+          // trigger changes in the default configuration loading (ie, an extension can set a flag to use a different pipeline.)
+          viewsToHandle.push(createView(await addSegments(blocks.map(each => ({ ...each, "load-priority": 1000 })))));
         } catch (e) {
           messageEmitter.Message.Dispatch({
             Channel: Channel.Fatal,
@@ -985,8 +1006,8 @@ export class Configuration {
 
     }
     // re-acquire CLI and configuration files at a lower priority
-    // this enables the configuration of a plugin to specify stuff like `enable-multi-api`
-    // which would unlock a guarded section that has $(enable-mulit-api) in the yaml block.
+    // this enables the configuration of a plugin to specify stuff like `pipeline-model`
+    // which would unlock a guarded section that has $(pipeline-model) == 'v3' in the yaml block.
     // doing so would allow the configuration to load input-files that have that guard on
 
     // and because this comes in at a lower-priority, it won't overwrite values that have been already
