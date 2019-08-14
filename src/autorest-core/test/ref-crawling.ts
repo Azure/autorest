@@ -19,7 +19,7 @@ import { crawlReferences } from '../lib/pipeline/plugins/ref-crawling';
     const file2DataHandle = await scope.ReadStrict(`https://raw.githubusercontent.com/Azure/autorest/b39cc11e2577662c97a47511a08665fa6e4d712d/src/autorest-core/test/resources/ref-crawling/original-files/input-file2.yaml`);
     const files = [file1DataHandle, file2DataHandle];
 
-    const result = await crawlReferences(scope, files, sink);
+    const result = await crawlReferences(config, scope, files, sink);
 
     const expectedFilesUris = [
       ResolveUri(CreateFolderUri(__dirname), '../../test/resources/ref-crawling/expected-modified-copies/input-file1.yaml'),

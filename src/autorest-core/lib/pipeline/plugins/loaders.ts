@@ -162,6 +162,7 @@ export async function LoadLiterateSwagger(config: ConfigurationView, inputScope:
     return null;
     // TODO: Should we throw or send an error message?
   }
+  config.Message({ Channel: Channel.Verbose, Text: `Reading OpenAPI 2.0 file ${inputFileUri}` })
 
   const ast = CloneAst(await data.ReadYamlAst());
   const mapping = IdentitySourceMapping(data.key, ast);
@@ -177,6 +178,7 @@ export async function LoadLiterateOpenAPI(config: ConfigurationView, inputScope:
     return null;
     // TODO: Should we throw or send an error message?
   }
+  config.Message({ Channel: Channel.Verbose, Text: `Reading OpenAPI 3.0 file ${inputFileUri}` })
 
   const ast = CloneAst(await data.ReadYamlAst());
   const mapping = IdentitySourceMapping(data.key, ast);
@@ -188,6 +190,7 @@ export async function LoadLiterateSwaggers(config: ConfigurationView, inputScope
   const rawSwaggers: Array<DataHandle> = [];
   for (const inputFileUri of inputFileUris) {
     // read literate Swagger
+
     const pluginInput = await LoadLiterateSwagger(config, inputScope, inputFileUri, sink);
     if (pluginInput) {
       rawSwaggers.push(pluginInput);
@@ -275,7 +278,7 @@ export function createSwaggerLoaderPlugin(): PipelinePlugin {
     const foundAllFiles = swaggers.length !== inputs.length;
     let result: Array<DataHandle> = [];
     if (swaggers.length === inputs.length) {
-      result = await crawlReferences(input, swaggers, sink);
+      result = await crawlReferences(config, input, swaggers, sink);
     }
 
     return new QuickDataSource(result, { skipping: foundAllFiles });
@@ -294,7 +297,7 @@ export function createOpenApiLoaderPlugin(): PipelinePlugin {
     );
     let result: Array<DataHandle> = [];
     if (openapis.length === inputs.length) {
-      result = await crawlReferences(input, openapis, sink);
+      result = await crawlReferences(config, input, openapis, sink);
     }
     return new QuickDataSource(result, { skipping: openapis.length !== inputs.length });
   };

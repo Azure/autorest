@@ -1,7 +1,9 @@
 import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, ProxyNode, visit } from '@microsoft.azure/datastore';
 import { ResolveUri } from '@microsoft.azure/uri';
+import { ConfigurationView } from '../../configuration';
+import { Channel } from '../../message';
 
-export async function crawlReferences(inputScope: DataSource, filesToCrawl: Array<DataHandle>, sink: DataSink): Promise<Array<DataHandle>> {
+export async function crawlReferences(config: ConfigurationView, inputScope: DataSource, filesToCrawl: Array<DataHandle>, sink: DataSink): Promise<Array<DataHandle>> {
   const result: Array<DataHandle> = [];
   let filesToExcludeInSearch: Array<string> = [];
   for (const file of filesToCrawl) {
@@ -14,6 +16,7 @@ export async function crawlReferences(inputScope: DataSource, filesToCrawl: Arra
     result.push(await sink.WriteObject(currentSwagger.Description, await refProcessor.getOutput(), currentSwagger.identity, currentSwagger.artifactType, await refProcessor.getSourceMappings(), [currentSwagger]));
     filesToExcludeInSearch = [...new Set([...filesToExcludeInSearch, ...refProcessor.newFilesFound])];
     for (const fileUri of refProcessor.newFilesFound) {
+      config.Message({ Channel: Channel.Verbose, Text: `Reading $ref'd file ${fileUri}` })
       const originalSecondaryFile = await inputScope.ReadStrict(fileUri);
       const fileMarker = new SecondaryFileMarker(originalSecondaryFile);
       const fileMarkerOutput = await fileMarker.getOutput();

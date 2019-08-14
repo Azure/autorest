@@ -461,6 +461,7 @@ export class ConfigurationView {
     const inputFiles = From<string>(valuesOf<string>(this.config['input-file']))
       .Select(each => this.ResolveAsPath(each))
       .ToArray();
+
     const filesToExclude = From<string>(valuesOf<string>(this.config['exclude-file']))
       .Select(each => this.ResolveAsPath(each))
       .ToArray();
