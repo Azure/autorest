@@ -21,9 +21,6 @@ import { AutoRestExtension } from './pipeline/plugin-endpoint';
 import { Suppressor } from './pipeline/suppression';
 import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
 import { values, Initializer } from '@microsoft.azure/codegen';
-import { resolve as uri_resolve } from 'url'
-import { pipeline } from 'stream';
-
 
 const untildify: (path: string) => string = require('untildify');
 
