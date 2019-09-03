@@ -918,7 +918,9 @@ export class Configuration {
               localPath = localPath.slice(0, localPath.length - fileProbe.length);
             } catch (e) { }
 
-            const shortname = additionalExtension.name.startsWith('autorest.') ? additionalExtension.name.substr(9) : additionalExtension.name;
+
+            // trim off the '@org' and 'autorest.' from the name.
+            const shortname = additionalExtension.name.split('/').last.replace(/^autorest\./ig, '');
             const view = [...createView().GetNestedConfiguration(shortname)];
             const enableDebugger = view.length > 0 ? <boolean>(view[0].GetEntry('debugger')) : false;
 
@@ -1005,8 +1007,9 @@ export class Configuration {
           throw e;
         }
       }
-
+      await includeFn(fsLocal);
     }
+    await includeFn(fsLocal);
     // re-acquire CLI and configuration files at a lower priority
     // this enables the configuration of a plugin to specify stuff like `pipeline-model`
     // which would unlock a guarded section that has $(pipeline-model) == 'v3' in the yaml block.

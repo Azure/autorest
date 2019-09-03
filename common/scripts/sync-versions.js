@@ -36,9 +36,9 @@ function setPeerDependencies(dependencies) {
   for( const dep in dependencies ) {
     const ref = pjs[dep];
     if( ref ) {
-      if(dependencies[dep] !== `^${ref.version}`  ) {
-        console.log(`updating peer depedency ${dep} to ^${ref.version}`);
-        dependencies[dep] = `^${ref.version}`;
+      if(dependencies[dep] !== `~${ref.version}`  ) {
+        console.log(`updating peer depedency ${dep} to ~${ref.version}`);
+        dependencies[dep] = `~${ref.version}`;
       }
 
     }

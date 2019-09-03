@@ -6,7 +6,10 @@
       "request": "attach",
       "name": "Node.js Attach",
       "port": 9229,
-      "smartStep": true
+      "smartStep": true,
+      "skipFiles": [
+        "<node_internals>/**/*.js"
+      ]
     },
     {
       "type": "node",
