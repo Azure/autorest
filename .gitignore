@@ -223,7 +223,7 @@ Samples/**/*.map
 
 # npm (we do want to test for most recent versions)
 **/package-lock.json
-src/*/dist
+**/dist/
 src/*/nm
 /nm/
 *.tgz
