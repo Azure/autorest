@@ -29,7 +29,7 @@ function npmForEach(cmd) {
   const result = {};
   forEachProject((name, location, project) => {
     if (project.scripts[cmd]) {
-      const proc = cp.spawn("npm", ["run", cmd], { cwd: location, shell: true, stdio: "inherit" });
+      const proc = cp.spawn("npm", ['--silent',"run", cmd], { cwd: location, shell: true, stdio: "inherit" });
       proc.on("close", (code, signal) => {
         if (code !== 0) {
           process.exit(code);

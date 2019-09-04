@@ -1,0 +1,1 @@
+require('./for-each').npm('eslint');

@@ -24,8 +24,32 @@
     "editor.detectIndentation": false
   },
   "files.associations": {
-    "*.iced": "coffeescript"
+    "rush.json": "jsonc",
+    "command-line.json": "jsonc",
+    "common-versions.json": "jsonc"
   },
   "git.ignoreLimitWarning": true,
-  "files.eol": "\n"
+  "files.eol": "\n",
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    "javascript",
+    {
+      "language": "typescript",
+      "autoFix": true
+    },
+    {
+      "language": "typescriptreact",
+      "autoFix": false
+    }
+  ],
+  "eslint.workingDirectories": [
+    {
+      "changeProcessCWD": true,
+      "directory": "./autorest",
+    },
+    {
+      "changeProcessCWD": true,
+      "directory": "./core",
+    }
+  ]
 }

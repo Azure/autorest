@@ -1,0 +1,61 @@
+---
+parser: "@typescript-eslint/parser"
+plugins:
+- "@typescript-eslint"
+env:
+  es6: true
+  node: true
+extends:
+- eslint:recommended
+- plugin:@typescript-eslint/recommended
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+parserOptions:
+  ecmaVersion: 2018
+  sourceType: module
+  warnOnUnsupportedTypeScriptVersion : false
+rules:
+  "@typescript-eslint/no-this-alias" : 'off'
+  "@typescript-eslint/interface-name-prefix": 'off'
+  "@typescript-eslint/explicit-function-return-type": 'off'
+  "@typescript-eslint/no-explicit-any": 'off'
+  "@typescript-eslint/no-empty-interface": 'off'
+  "@typescript-eslint/no-namespace": 'off'
+  "@typescript-eslint/explicit-member-accessibility": 'off'
+  "@typescript-eslint/no-unused-vars": 'off'
+  "@typescript-eslint/no-parameter-properties": 'off'
+  "@typescript-eslint/no-angle-bracket-type-assertion" : 'off'
+  "require-atomic-updates" : 'off'
+  '@typescript-eslint/consistent-type-assertions' : 
+    - error
+    - assertionStyle: 'angle-bracket'
+    
+  "@typescript-eslint/array-type":
+  - error
+  - default: generic
+  indent:
+  - warn
+  - 2
+  - SwitchCase : 1
+  "@typescript-eslint/indent":
+  - 0
+  - 2
+  no-undef: 'off'
+  no-unused-vars: 'off'
+  linebreak-style:
+  - 'error'
+  - unix
+  quotes:
+  - error
+  - single
+  semi:
+  - error
+  - always
+  no-multiple-empty-lines: 
+  - error
+  - max: 2
+    maxBOF: 0
+    maxEOF: 1
+
+  
