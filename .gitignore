@@ -198,9 +198,8 @@ src/generator/AutoRest.Go.Tests/src/tests/generated/*
 src/generator/AutoRest.Go.Tests/src/tests/vendor/*
 src/generator/AutoRest.Go.Tests/src/tests/glide.lock
 
-src/autorest/**/*.js
-src/autorest-core/**/*.js
-src/vscode-autorest/**/*.js
+autorest/**/*.js
+core/**/*.js
 
 *.js.map
 

@@ -26,8 +26,6 @@
   "files.associations": {
     "*.iced": "coffeescript"
   },
-  "tslint.alwaysShowRuleFailuresAsWarnings": true,
   "git.ignoreLimitWarning": true,
-  "typescript.tsdk": "node_modules\\typescript\\lib",
   "files.eol": "\n"
 }

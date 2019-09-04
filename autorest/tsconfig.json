@@ -20,12 +20,6 @@
     ],
     "lib": [
       "es2018"
-    ],
-    "plugins": [
-      {
-        "name": "tslint-language-service",
-        "configFile": "../../tslint.json"
-      }
     ]
   },
   "exclude": [
