@@ -16,21 +16,21 @@
       "protocol": "inspector",
       "request": "launch",
       "name": "run tests",
-      "program": "${workspaceRoot}/src/autorest-core/node_modules/mocha/bin/_mocha",
+      "program": "${workspaceRoot}/core/node_modules/mocha/bin/_mocha",
       "args": [
         "dist/test/profile-filter.js",
         "--timeout=2000000"
       ],
-      "cwd": "${workspaceRoot}/src/autorest-core"
+      "cwd": "${workspaceRoot}/core"
     },
     {
       "type": "node",
       "protocol": "inspector",
       "request": "launch",
       "name": "run autorest",
-      "program": "${workspaceRoot}/src/autorest/dist/app.js",
+      "program": "${workspaceRoot}/autorest/dist/app.js",
       "args": [
-        "--version=${workspaceRoot}/src/autorest-core",
+        "--version=${workspaceRoot}/core",
         "--use=c:/work/2019/autorest.modeler",
         "--verbose",
         "--debug",
@@ -47,9 +47,9 @@
       "protocol": "inspector",
       "request": "launch",
       "name": "run autorest (loader)",
-      "program": "${workspaceRoot}/src/autorest/dist/app.js",
+      "program": "${workspaceRoot}/autorest/dist/app.js",
       "args": [
-        "--version=${workspaceRoot}/src/autorest-core",
+        "--version=${workspaceRoot}/core",
         "--input-file=C:/work/2019/azconfig/azconfig.json ",
         "--output-folder=c:/tmp/output",
         "--use:c:/work/2019/autorest.incubator",

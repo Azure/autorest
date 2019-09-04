@@ -8,8 +8,8 @@
     "**/*.log": true,
     "**/package-deps.json": true,
     "**/.DS_Store": true,
-    "src/autorest-core/*.js": false,
-    "src/autorest/*.js": false,
+    "core/*.js": false,
+    "autorest/*.js": false,
   },
   "[typescript]": {
     "editor.formatOnSave": true,

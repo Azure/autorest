@@ -8,7 +8,7 @@ There are a couple of PowerShell specific things you may want to do:
 
 To change the way AutoRest generates cmdlets you can:
 - [use the built-in directives outlined below](#Built-In-Directives)
-- [declare your own directives](https://github.com/Azure/autorest/blob/master/src/autorest-core/resources/default-configuration.md#directives)
+- [declare your own directives](https://github.com/Azure/autorest/blob/master/core/resources/default-configuration.md#directives)
 - [automatically sanitize parameter and cmdlet names](#name-sanitization)
 
 

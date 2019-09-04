@@ -78,9 +78,9 @@ function read-from($filename) {
 }
 
 function autorest() {
-  write-host -fore gray "> autorest --version=${root}/src/autorest-core --no-upgrade-check $args"
-  # write-host -fore cyan INVOKING (get-command node).Source ${root}/src/autorest/dist/app.js --version=${root}/src/autorest-core --no-upgrade-check $args
-  $r = Invoke-Executable (get-command node).Source ${root}/src/autorest/dist/app.js --version=${root}/src/autorest-core --no-upgrade-check $args
+  write-host -fore gray "> autorest --version=${root}/core --no-upgrade-check $args"
+  # write-host -fore cyan INVOKING (get-command node).Source ${root}/autorest/dist/app.js --version=${root}/core --no-upgrade-check $args
+  $r = Invoke-Executable (get-command node).Source ${root}/autorest/dist/app.js --version=${root}/core --no-upgrade-check $args
   # write-host -fore yellow "> done ... $args"
 
   if ( $r.ExitCode -ne 0  ) {

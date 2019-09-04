@@ -5,7 +5,7 @@
   "pnpmOptions": {},
   "nodeSupportedVersionRange": ">=8.9.4 <11.0.0",
   "ensureConsistentVersions": true,
-  "projectFolderMinDepth": 2,
+  "projectFolderMinDepth": 1,
   "projectFolderMaxDepth": 3,
   "repository": {},
   "eventHooks": {
@@ -110,13 +110,13 @@
     /* --- project packages --- */
     {
       "packageName": "@autorest/core",
-      "projectFolder": "src/autorest-core",
+      "projectFolder": "core",
       "reviewCategory": "production",
       "shouldPublish": true
     },
     {
       "packageName": "autorest",
-      "projectFolder": "src/autorest",
+      "projectFolder": "autorest",
       "reviewCategory": "production",
       "shouldPublish": true
     }

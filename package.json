@@ -24,10 +24,10 @@
   "bugs": {
     "url": "https://github.com/Azure/autorest/issues"
   },
-  "main": "./src/autorest/entrypoints/app.js",
+  "main": "./autorest/entrypoints/app.js",
   "bin": {
-    "autorest-core": "./src/autorest-core/entrypoints/app.js",
-    "autorest-language-service": "./src/autorest-core/entrypoints/language-service.js"
+    "autorest-core": "./core/entrypoints/app.js",
+    "autorest-language-service": "./autorest-core/entrypoints/language-service.js"
   },
   "homepage": "https://github.com/Azure/autorest/readme.md",
   "previouslydevDependencies": {

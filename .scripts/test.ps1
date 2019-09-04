@@ -2,8 +2,8 @@ $ErrorActionPreference = "Stop"
 $root = resolve-path $PSScriptRoot/..
 . $PSScriptRoot/autorest.ps1
 
-pushd $root/src/autorest
+pushd $root/autorest
 try { npm test } finally { popd }
 
-pushd $root/src/autorest-core
+pushd $root/core
 try { npm test } finally { popd }
