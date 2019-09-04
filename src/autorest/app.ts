@@ -25,10 +25,11 @@ if (!String.prototype.padEnd) {
 
 import { isFile, readdir, rmdir, isDirectory } from '@azure-tools/async-io';
 import { Exception, LazyPromise } from '@azure-tools/tasks';
+import { homedir } from 'os';
 import chalk from 'chalk';
 import { join } from 'path';
 import { gt } from 'semver';
-import { availableVersions, corePackage, ensureAutorestHome, extensionManager, installedCores, networkEnabled, pkgVersion, resolvePathForLocalVersion, rootFolder, selectVersion, tryRequire } from './autorest-as-a-service';
+import { availableVersions, newCorePackage, oldCorePackage, ensureAutorestHome, extensionManager, installedCores, networkEnabled, pkgVersion, resolvePathForLocalVersion, rootFolder, selectVersion, tryRequire } from './autorest-as-a-service';
 import { color } from './coloring';
 import { tmpdir } from 'os';
 
@@ -55,6 +56,11 @@ function parseArgs(autorestArgs: Array<string>): any {
       if (rawValue.startsWith('.')) {
         // starts with a . or .. -> this is a relative path to current directory
         rawValue = join(cwd, rawValue);
+      }
+
+      // untildify!
+      if (/^~[/|\\]/g.exec(rawValue)) {
+        rawValue = join(homedir(), rawValue.substring(2));
       }
 
       let value;
@@ -114,7 +120,7 @@ async function showAvailableCores(): Promise<number> {
   const cores = await availableVersions();
   for (const v of cores) {
     max--;
-    table += `\n ${chalk.cyan.bold(corePackage.padEnd(30, ' '))} ${chalk.grey.bold(v.padEnd(14, ' '))} `;
+    table += `\n ${chalk.cyan.bold(newCorePackage.padEnd(30, ' '))} ${chalk.grey.bold(v.padEnd(14, ' '))} `;
     if (!max) {
       break;
     }
@@ -135,7 +141,7 @@ async function showInstalledExtensions(): Promise<number> {
   let table = '';
   if (extensions.length > 0) {
     for (const extension of extensions) {
-      table += `\n ${chalk.cyan((extension.name === corePackage ? 'core' : 'extension').padEnd(10))} ${chalk.cyan.bold(extension.name.padEnd(40))} ${chalk.cyan(extension.version.padEnd(12))} ${chalk.cyan(extension.location)}`;
+      table += `\n ${chalk.cyan((extension.name === newCorePackage || extension.name === oldCorePackage ? 'core' : 'extension').padEnd(10))} ${chalk.cyan.bold(extension.name.padEnd(40))} ${chalk.cyan(extension.version.padEnd(12))} ${chalk.cyan(extension.location)}`;
     }
   }
   if (args.json) {
@@ -267,7 +273,7 @@ async function main() {
     }
 
     if (args.debug) {
-      console.log(`Starting ${corePackage} from ${await selectedVersion.location}`);
+      console.log(`Starting ${newCorePackage} from ${await selectedVersion.location}`);
     }
     process.chdir(cwd);
     const result = await tryRequire(await selectedVersion.modulePath, 'app.js');

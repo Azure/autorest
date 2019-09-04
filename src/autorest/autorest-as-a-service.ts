@@ -67,6 +67,10 @@ export async function installedCores() {
 
 export function resolvePathForLocalVersion(requestedVersion: string | null): string | null {
   try {
+    // untildify!
+    if (/^~[/|\\]/g.exec(requestedVersion)) {
+      requestedVersion = join(homedir(), requestedVersion.substring(2));
+    }
     return requestedVersion ? resolve(requestedVersion) : dirname(require.resolve("@autorest/core/package.json"));
   } catch (e) {
     // fallback to old-core name
@@ -97,7 +101,14 @@ export async function resolveEntrypoint(localPath: string | null, entrypoint: st
     if (await isDirectory(localPath)) {
       const pkg = require(`${localPath}/package.json`);
 
+      if (args.debug) {
+        console.log(`Examining AutoRest core package: ${pkg.name}`);
+      }
+
       if (pkg.name === oldCorePackage || pkg.name === newCorePackage) {
+        if (args.debug) {
+          console.log(`Looks like a core package.`);
+        }
         switch (entrypoint) {
           case 'main':
           case 'main.js':
@@ -121,11 +132,17 @@ export async function resolveEntrypoint(localPath: string | null, entrypoint: st
             // special case: look for the main entrypoint
             // but return the module folder
             if (await isFile(`${localPath}/${pkg.main}`)) {
+              if (args.debug) {
+                console.log(`special case: '${localPath}/${pkg.main}' .`);
+              }
               return localPath;
             }
         }
         const path = `${localPath}/${entrypoint}`;
         if (await isFile(path)) {
+          if (args.debug) {
+            console.log(`Using Entrypoing: '${localPath}/${entrypoint}' .`);
+          }
           return path;
         }
       }

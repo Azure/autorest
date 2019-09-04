@@ -60,8 +60,16 @@ export class AutoRestExtension extends EventEmitter {
   }
 
   public static async FromChildProcess(extensionName: string, childProc: ChildProcess): Promise<AutoRestExtension> {
+    if (childProc.stdout === null) {
+      throw new Error("Child Process has no stdout pipe.")
+    }
+    if (childProc.stdin === null) {
+      throw new Error("Child Process has no stdin pipe.")
+    }
     const plugin = new AutoRestExtension(extensionName, childProc.stdout, childProc.stdin, childProc);
-    childProc.stderr.pipe(process.stderr);
+    if (childProc.stderr !== null) {
+      childProc.stderr.pipe(process.stderr);
+    }
     AutoRestExtension.processes.push(childProc);
     // poke the extension to detect trivial issues like process startup failure or protocol violations, ...
     if (!Array.isArray(await plugin.GetPluginNames(CancellationToken.None))) {

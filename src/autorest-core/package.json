@@ -49,7 +49,7 @@
     "deep-equal": "^1.0.1",
     "@types/node": "12.7.2",
     "mocha": "5.2.0",
-    "typescript": "~3.5.2",
+    "typescript": "~3.6.2",
     "static-link": "^0.2.4",
     "vscode-languageserver": "3.5.1",
     "@azure-tools/async-io": "~3.0.0",

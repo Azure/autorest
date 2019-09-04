@@ -10,7 +10,7 @@
     "emitDecoratorMetadata": true,
     "declaration": true,
     "stripInternal": true,
-    "target": "esnext",
+    "target": "es2018",
     "types": [
       "node",
       "mocha"
