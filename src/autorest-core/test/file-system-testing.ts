@@ -1,5 +1,5 @@
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
-import { IFileSystem, MemoryFileSystem } from "@microsoft.azure/datastore"
+import { IFileSystem, MemoryFileSystem } from "@azure-tools/datastore"
 import * as assert from "assert";
 
 @suite class FileSystemTests {

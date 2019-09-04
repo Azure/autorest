@@ -2,9 +2,9 @@ import * as assert from 'assert';
 import { suite, test } from 'mocha-typescript';
 
 import { AutoRest } from '../lib/autorest-core';
-import { RealFileSystem } from '@microsoft.azure/datastore';
+import { RealFileSystem } from '@azure-tools/datastore';
 import { LoadLiterateOpenAPIs } from '../lib/pipeline/plugins/loaders';
-import { CreateFolderUri, ResolveUri } from '@microsoft.azure/uri';
+import { CreateFolderUri, ResolveUri } from '@azure-tools/uri';
 
 @suite class OpenAPI3Loading {
 

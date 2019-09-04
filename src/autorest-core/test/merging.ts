@@ -5,7 +5,7 @@
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-import { matches } from "@microsoft.azure/datastore";
+import { matches } from "@azure-tools/datastore";
 import { MergeOverwriteOrAppend } from "../lib/source-map/merging";
 
 @suite class Merging {

@@ -1,6 +1,6 @@
 
-import { RealFileSystem } from '@microsoft.azure/datastore';
-import { CreateFolderUri, ResolveUri } from '@microsoft.azure/uri';
+import { RealFileSystem } from '@azure-tools/datastore';
+import { CreateFolderUri, ResolveUri } from '@azure-tools/uri';
 import * as assert from 'assert';
 import { suite, test } from 'mocha-typescript';
 import { AutoRest } from '../lib/autorest-core';

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, DataSource, QuickDataSource } from '@microsoft.azure/datastore';
+import { DataHandle, DataSink, DataSource, QuickDataSource } from '@azure-tools/datastore';
 import { ConfigurationView } from '../configuration';
 
 export type PipelinePlugin = (config: ConfigurationView, input: DataSource, sink: DataSink) => Promise<DataSource>;

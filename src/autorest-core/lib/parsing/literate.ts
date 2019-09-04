@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, Mapping } from '@microsoft.azure/datastore';
+import { DataHandle, DataSink, Mapping } from '@azure-tools/datastore';
 import * as commonmark from 'commonmark';
 
 export async function parse(hConfigFile: DataHandle, sink: DataSink): Promise<Array<{ data: DataHandle, codeBlock: commonmark.Node }>> {

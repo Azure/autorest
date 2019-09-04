@@ -5,8 +5,8 @@ delete process.env['ELECTRON_NO_ATTACH_CONSOLE'];
 import { Artifact, AutoRest, Channel, DocumentType, IdentifyDocument, IFileSystem, IsConfigurationDocument, IsConfigurationExtension, IsOpenApiDocument, IsOpenApiExtension, LiterateToJson, Message } from '../exports';
 import { SourceMap } from './source-map';
 
-import { isDirectory, readdir, readFile } from '@microsoft.azure/async-io';
-import { FileUriToPath, GetExtension, IsUri, ParentFolderUri, ResolveUri } from '@microsoft.azure/uri';
+import { isDirectory, readdir, readFile } from '@azure-tools/async-io';
+import { FileUriToPath, GetExtension, IsUri, ParentFolderUri, ResolveUri } from '@azure-tools/uri';
 import { createHash } from 'crypto';
 import { From } from 'linq-es2015';
 import { safeDump } from 'yaml-ast-parser';

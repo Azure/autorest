@@ -1,13 +1,13 @@
 
 import { lookup } from "dns";
-import { Extension, ExtensionManager } from "@microsoft.azure/extension";
+import { Extension, ExtensionManager } from "@azure-tools/extension";
 import { homedir } from "os";
 import { dirname, join, resolve } from "path";
 
-import { Exception } from "@microsoft.azure/tasks";
+import { Exception } from "@azure-tools/tasks";
 
 import * as semver from "semver";
-import { isFile, mkdir, isDirectory } from "@microsoft.azure/async-io";
+import { isFile, mkdir, isDirectory } from "@azure-tools/async-io";
 import { mkdtempSync, rmdirSync } from "fs";
 import { tmpdir } from "os";
 
@@ -25,7 +25,9 @@ export const rootFolder = join(process.env["autorest.home"], ".autorest");
 const args = (<any>global).__args || {};
 
 export const extensionManager: Promise<ExtensionManager> = ExtensionManager.Create(rootFolder);
-export const corePackage = "@microsoft.azure/autorest-core"; // autorest-core"
+export const oldCorePackage = "@microsoft.azure/autorest-core";
+export const newCorePackage = "@autorest/core";
+
 const basePkgVersion = pkgVersion.indexOf("-") > -1 ? pkgVersion.substring(0, pkgVersion.indexOf("-")) : pkgVersion;
 const versionRange = `^${basePkgVersion}`; // the version range of the core package required.
 
@@ -38,7 +40,7 @@ export const networkEnabled: Promise<boolean> = new Promise<boolean>((r, j) => {
 export async function availableVersions() {
   if (await networkEnabled) {
     try {
-      const vers = (await (await extensionManager).getPackageVersions(corePackage)).sort((b, a) => semver.compare(a, b));
+      const vers = (await (await extensionManager).getPackageVersions(newCorePackage)).sort((b, a) => semver.compare(a, b));
       const result = new Array<string>();
       for (const ver of vers) {
         if (semver.satisfies(ver, versionRange)) {
@@ -47,7 +49,7 @@ export async function availableVersions() {
       }
       return result;
     } catch (e) {
-      console.info(`No available versions of package ${corePackage} found.`);
+      console.info(`No available versions of package ${newCorePackage} found.`);
     }
 
   } else {
@@ -59,15 +61,20 @@ export async function availableVersions() {
 
 export async function installedCores() {
   const extensions = await (await extensionManager).getInstalledExtensions();
-  const result = (extensions.length > 0) ? extensions.filter(ext => ext.name === corePackage && semver.satisfies(ext.version, versionRange)) : new Array<Extension>();
+  const result = (extensions.length > 0) ? extensions.filter(ext => (ext.name === newCorePackage || ext.name === oldCorePackage) && semver.satisfies(ext.version, versionRange)) : new Array<Extension>();
   return result.sort((a, b) => semver.compare(b.version, a.version));
 };
 
 export function resolvePathForLocalVersion(requestedVersion: string | null): string | null {
   try {
-    return requestedVersion ? resolve(requestedVersion) : dirname(require.resolve("@microsoft.azure/autorest-core/package.json"));
+    return requestedVersion ? resolve(requestedVersion) : dirname(require.resolve("@autorest/core/package.json"));
   } catch (e) {
-
+    // fallback to old-core name
+    try {
+      return dirname(require.resolve("@microsoft.azure/autorest-core/package.json"))
+    } catch {
+      // no dice
+    }
   }
   return null;
 }
@@ -90,7 +97,7 @@ export async function resolveEntrypoint(localPath: string | null, entrypoint: st
     if (await isDirectory(localPath)) {
       const pkg = require(`${localPath}/package.json`);
 
-      if (pkg.name === corePackage) {
+      if (pkg.name === oldCorePackage || pkg.name === newCorePackage) {
         switch (entrypoint) {
           case 'main':
           case 'main.js':
@@ -107,7 +114,7 @@ export async function resolveEntrypoint(localPath: string | null, entrypoint: st
           case 'autorest-core':
           case 'app.js':
           case 'app':
-            entrypoint = pkg.bin["autorest-core"];
+            entrypoint = pkg.bin["autorest-core"] || pkg.bin["core"];
             break;
 
           case 'module':
@@ -155,7 +162,7 @@ export async function selectVersion(requestedVersion: string, force: boolean, mi
     }
   } else {
     if (args.debug) {
-      console.log(`No ${corePackage} is installed.`);
+      console.log(`No ${newCorePackage} (or ${oldCorePackage}) is installed.`);
     }
   }
 
@@ -189,24 +196,29 @@ export async function selectVersion(requestedVersion: string, force: boolean, mi
     if (requestedVersion === 'latest') {
       requestedVersion = versionRange;
     }
+    let corePackageName = newCorePackage;
 
-    const pkg = await (await extensionManager).findPackage(corePackage, requestedVersion);
+    let pkg = await (await extensionManager).findPackage(newCorePackage, requestedVersion);
     if (pkg) {
       if (args.debug) {
         console.log(`Selected package: ${pkg.name}@${pkg.version} => ${pkg.resolvedInfo.rawSpec} `);
       }
     } else {
-      throw new Exception(`Unable to find a valid AutoRest core package for '${requestedVersion}'.`);
+      pkg = await (await extensionManager).findPackage(oldCorePackage, requestedVersion);
+      if (!pkg) {
+        throw new Exception(`Unable to find a valid AutoRest core package for '${requestedVersion}'.`);
+      }
+      corePackageName = oldCorePackage;
     }
 
     // pkg.version == the actual version 
     // check if it's installed already.
-    selectedVersion = await (await extensionManager).getInstalledExtension(corePackage, pkg.version);
+    selectedVersion = await (await extensionManager).getInstalledExtension(corePackageName, pkg.version);
 
     if (!selectedVersion || force) {
       // this will throw if there is an issue with installing the extension.
       if (args.debug) {
-        console.log(`**Installing package** ${corePackage}@${pkg.version}\n[This will take a few moments...]`);
+        console.log(`**Installing package** ${corePackageName}@${pkg.version}\n[This will take a few moments...]`);
       }
 
       selectedVersion = await (await extensionManager).installPackage(pkg, force, 5 * 60 * 1000, installer => installer.Message.Subscribe((s, m) => { if (args.debug) console.log(`Installer: ${m}`); }));

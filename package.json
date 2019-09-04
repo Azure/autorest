@@ -1,8 +1,8 @@
 {
-  "name": "@microsoft.azure/autorest-core",
+  "name": "autorest-system",
   "private": true,
   "version": "3.0.0",
-  "description": "AutoRest (core/bootstrap)",
+  "description": "AutoRest (core and bootstrapper) modules",
   "scripts": {
     "test": "rush test",
     "testci": "rush test & gulp testci",
@@ -30,13 +30,9 @@
     "autorest-language-service": "./src/autorest-core/entrypoints/language-service.js"
   },
   "homepage": "https://github.com/Azure/autorest/readme.md",
-  "devDependencies": {
+  "previouslydevDependencies": {
     "@microsoft/rush": "5.4.0",
     "typescript": "~3.5.2",
-    "tslint": "^5.11.0",
-    "tslint-language-service-ts3": "1.0.0",
-    "tslint-microsoft-contrib": "^5.2.1",
-    "tslint-sonarts": "^1.8.0",
     "pwsh": "0.2.0",
     "chalk": "^1.1.2",
     "coffee-script": "^1.11.1",
@@ -58,6 +54,5 @@
     "vinyl-fs": "^2.4.4",
     "yargs": "^6.6.0",
     "shx": "0.2.2"
-  },
-  "dependencies": {}
+  }
 }

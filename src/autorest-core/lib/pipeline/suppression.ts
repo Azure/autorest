@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { JsonPath, matches } from '@microsoft.azure/datastore';
+import { JsonPath, matches } from '@azure-tools/datastore';
 import { From } from 'linq-es2015';
 import { ConfigurationView } from '../autorest-core';
 import { ResolvedDirective } from '../configuration';

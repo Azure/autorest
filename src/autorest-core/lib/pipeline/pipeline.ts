@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSource, FastStringify, IFileSystem, JsonPath, QuickDataSource, safeEval, stringify, PipeState, mergePipeStates } from '@microsoft.azure/datastore';
+import { DataHandle, DataSource, FastStringify, IFileSystem, JsonPath, QuickDataSource, safeEval, stringify, PipeState, mergePipeStates } from '@azure-tools/datastore';
 import { ConfigurationView, getExtension } from '../configuration';
 import { Channel } from '../message';
 import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';

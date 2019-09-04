@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Clone, CreateAssignmentMapping, DataHandle, DataSink, JsonPath, JsonPathComponent, Mapping, QuickDataSource, ToAst, Transformer, AnyObject, Node } from '@microsoft.azure/datastore';
+import { Clone, CreateAssignmentMapping, DataHandle, DataSink, JsonPath, JsonPathComponent, Mapping, QuickDataSource, ToAst, Transformer, AnyObject, Node } from '@azure-tools/datastore';
 import { From } from 'linq-es2015';
 import { pushAll } from '../../array';
 import { ConfigurationView } from '../../autorest-core';

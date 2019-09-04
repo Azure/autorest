@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink } from '@microsoft.azure/datastore';
-import { Oai2ToOai3 } from '@microsoft.azure/oai2-to-oai3';
-import { clone } from '@microsoft.azure/linq';
+import { DataHandle, DataSink } from '@azure-tools/datastore';
+import { Oai2ToOai3 } from '@azure-tools/oai2-to-oai3';
+import { clone } from '@azure-tools/linq';
 
 export async function convertOAI2toOAI3(input: DataHandle, sink: DataSink): Promise<DataHandle> {
   const converter = new Oai2ToOai3(input.originalFullPath, await input.ReadObject());

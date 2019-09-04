@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as aio from '@microsoft.azure/async-io';
-import * as datastore from '@microsoft.azure/datastore';
+import * as aio from '@azure-tools/async-io';
+import * as datastore from '@azure-tools/datastore';
 
 import * as assert from 'assert';
 import { only, skip, slow, suite, test, timeout } from 'mocha-typescript';
 
 import { MultiAPIMerger } from '../lib/pipeline/plugins/merger';
-import { FastStringify } from '@microsoft.azure/datastore';
+import { FastStringify } from '@azure-tools/datastore';
 try {
   require('source-map-support').install();
 } catch {

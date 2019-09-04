@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { maximum, serialize } from '@microsoft.azure/codegen';
-import { AnyObject, DataHandle, DataSink, DataSource, Node, ProxyObject, QuickDataSource, Transformer, visit, ConvertJsonx2Yaml } from '@microsoft.azure/datastore';
-import { Dictionary, items, values } from '@microsoft.azure/linq';
-import * as oai from '@microsoft.azure/openapi';
+import { maximum, serialize } from '@azure-tools/codegen';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, ProxyObject, QuickDataSource, Transformer, visit, ConvertJsonx2Yaml } from '@azure-tools/datastore';
+import { Dictionary, items, values } from '@azure-tools/linq';
+import * as oai from '@azure-tools/openapi';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 

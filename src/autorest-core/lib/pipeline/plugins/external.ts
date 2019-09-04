@@ -1,4 +1,4 @@
-import { DataHandle, QuickDataSource, mergePipeStates } from '@microsoft.azure/datastore';
+import { DataHandle, QuickDataSource, mergePipeStates } from '@azure-tools/datastore';
 import { Channel, Message } from '../../message';
 import { PipelinePlugin } from '../common';
 import { AutoRestExtension } from '../plugin-endpoint';

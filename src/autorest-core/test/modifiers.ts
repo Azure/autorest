@@ -7,7 +7,7 @@ import * as assert from 'assert';
 
 import { PumpMessagesToConsole } from './test-utility';
 import { AutoRest } from "../exports";
-import { RealFileSystem } from "@microsoft.azure/datastore";
+import { RealFileSystem } from "@azure-tools/datastore";
 import { join } from "path";
 
 @suite class Modifiers {

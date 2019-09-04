@@ -6,7 +6,7 @@
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 import { CancellationToken } from "vscode-jsonrpc";
-import { DataStore } from "@microsoft.azure/datastore";
+import { DataStore } from "@azure-tools/datastore";
 import { Message, Channel } from "../lib/message";
 import { AutoRest } from "../lib/autorest-core";
 

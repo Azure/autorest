@@ -1,9 +1,9 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, visit, TransformerViaPointer, QuickDataSource } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, visit, TransformerViaPointer, QuickDataSource } from '@azure-tools/datastore';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
-import { Dictionary, items } from '@microsoft.azure/linq';
+import { Dictionary, items } from '@azure-tools/linq';
 import * as compareVersions from 'compare-versions';
-import { toSemver, maximum } from '@microsoft.azure/codegen';
+import { toSemver, maximum } from '@azure-tools/codegen';
 
 export class EnumDeduplicator extends TransformerViaPointer {
   protected refs = new Map<string, Array<{ target: AnyObject, pointer: string }>>();

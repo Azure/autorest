@@ -10,7 +10,7 @@ import { Channel, SourceLocation } from '../../message';
 import { commonmarkHeadingFollowingText, commonmarkSubHeadings, parseCommonmark } from '../../parsing/literate';
 import { parse as ParseLiterateYaml } from '../../parsing/literate-yaml';
 
-import { CloneAst, DataHandle, DataSink, DataSource, IndexToPosition, Lines, Mapping, QuickDataSource, StrictJsonSyntaxCheck, StringifyAst } from '@microsoft.azure/datastore';
+import { CloneAst, DataHandle, DataSink, DataSource, IndexToPosition, Lines, Mapping, QuickDataSource, StrictJsonSyntaxCheck, StringifyAst } from '@azure-tools/datastore';
 
 import { IdentitySourceMapping } from '../../source-map/merging';
 import { crawlReferences } from './ref-crawling';

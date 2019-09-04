@@ -1,4 +1,4 @@
-import { QuickDataSource, DataHandle, safeEval, AnyObject, nodes, selectNodes } from '@microsoft.azure/datastore';
+import { QuickDataSource, DataHandle, safeEval, AnyObject, nodes, selectNodes } from '@azure-tools/datastore';
 import * as jsonpath from 'jsonpath';
 import { createPerFilePlugin, PipelinePlugin } from '../common';
 import { Manipulator } from '../manipulation';

@@ -1,5 +1,5 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, ProxyNode, visit } from '@microsoft.azure/datastore';
-import { ResolveUri } from '@microsoft.azure/uri';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, ProxyNode, visit } from '@azure-tools/datastore';
+import { ResolveUri } from '@azure-tools/uri';
 import { ConfigurationView } from '../../configuration';
 import { Channel } from '../../message';
 

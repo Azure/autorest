@@ -5,7 +5,7 @@
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-import * as jp from "@microsoft.azure/datastore";
+import * as jp from "@azure-tools/datastore";
 
 @suite class JsonPath {
   @test async "IsPrefix"() {

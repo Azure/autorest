@@ -1,4 +1,4 @@
-import { DataHandle, QuickDataSource } from '@microsoft.azure/datastore';
+import { DataHandle, QuickDataSource } from '@azure-tools/datastore';
 import { PipelinePlugin } from '../common';
 import { processCodeModel } from '../commonmark-documentation';
 

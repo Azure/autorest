@@ -3,11 +3,9 @@
 * Licensed under the MIT License.See License.txt in the project root for license information.
 * --------------------------------------------------------------------------------------------*/
 
-import { values } from '@microsoft.azure/codegen';
-import { AnyObject, DataHandle, DataSink, DataSource, Node, ProxyObject, QuickDataSource, Transformer, visit } from '@microsoft.azure/datastore';
-import { Dictionary, items, keys } from '@microsoft.azure/linq';
-import * as oai from '@microsoft.azure/openapi';
-import { type } from 'os';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, ProxyObject, QuickDataSource, Transformer, visit } from '@azure-tools/datastore';
+import { Dictionary } from '@azure-tools/linq';
+import * as oai from '@azure-tools/openapi';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 

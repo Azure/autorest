@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, IndexToPosition, JsonPath, Mapping, ResolvePath, stringify, Stringify, YAMLNode, Descendants, Parse } from '@microsoft.azure/datastore';
+import { DataHandle, DataSink, IndexToPosition, JsonPath, Mapping, ResolvePath, stringify, Stringify, YAMLNode, Descendants, Parse } from '@azure-tools/datastore';
 import { pushAll } from '../array';
 import { ConfigurationView } from '../configuration';
 import { Channel } from '../message';

@@ -1,5 +1,5 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Processor, QuickDataSource } from '@microsoft.azure/datastore';
-import { items } from '@microsoft.azure/linq'
+import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Processor, QuickDataSource } from '@azure-tools/datastore';
+import { items } from '@azure-tools/linq'
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 import { format } from 'path';

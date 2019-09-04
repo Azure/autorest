@@ -6,7 +6,7 @@
 import { Configuration, ConfigurationView, MessageEmitter } from "./configuration";
 import { EventEmitter, IEvent } from "./events";
 import { Exception } from "./exception";
-import { IFileSystem, RealFileSystem } from "@microsoft.azure/datastore";
+import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import { runPipeline } from "./pipeline/pipeline";
 export { ConfigurationView } from './configuration';
 import { homedir } from "os"

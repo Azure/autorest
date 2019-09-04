@@ -1,8 +1,7 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Transformer, QuickDataSource, JsonPath, Source } from '@microsoft.azure/datastore';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Transformer, QuickDataSource, JsonPath, Source } from '@azure-tools/datastore';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
-import { clone } from '@microsoft.azure/linq';
-import { values } from '@microsoft.azure/codegen';
+import { values } from '@azure-tools/linq';
 
 const methods = new Set([
   'get',

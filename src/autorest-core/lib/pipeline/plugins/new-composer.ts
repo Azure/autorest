@@ -1,10 +1,9 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Transformer, Node, ProxyNode, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
-import { clone, Dictionary, keys } from '@microsoft.azure/linq';
-import { areSimilar } from "@microsoft.azure/object-comparison";
+import { AnyObject, DataHandle, DataSink, DataSource, Transformer, Node, ProxyNode, ProxyObject, QuickDataSource, visit } from '@azure-tools/datastore';
+import { values, clone, Dictionary, keys } from '@azure-tools/linq';
+import { areSimilar } from "@azure-tools/object-comparison";
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
-import { maximum, toSemver } from '@microsoft.azure/codegen';
-import { values } from '@microsoft.azure/codegen';
+import { maximum, toSemver } from '@azure-tools/codegen';
 import * as compareVersions from 'compare-versions';
 
 try {

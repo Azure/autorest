@@ -3,13 +3,13 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, nodes, safeEval } from '@microsoft.azure/datastore';
-import { YieldCPU } from '@microsoft.azure/tasks';
+import { DataHandle, DataSink, nodes, safeEval } from '@azure-tools/datastore';
+import { YieldCPU } from '@azure-tools/tasks';
 import { ConfigurationView } from '../autorest-core';
 import { ResolvedDirective } from '../configuration';
 import { Channel, Message, SourceLocation } from '../message';
 import { manipulateObject } from './object-manipulator';
-import { values } from '@microsoft.azure/codegen';
+import { values } from '@azure-tools/linq';
 
 export class Manipulator {
   private transformations: Array<ResolvedDirective>;

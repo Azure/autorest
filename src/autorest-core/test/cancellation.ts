@@ -4,7 +4,7 @@ import { Delay } from '../lib/sleep';
 
 import { AutoRest } from '../lib/autorest-core';
 import { Configuration } from '../lib/configuration';
-import { RealFileSystem } from '@microsoft.azure/datastore';
+import { RealFileSystem } from '@azure-tools/datastore';
 
 
 /*@suite */ class Cancellation {

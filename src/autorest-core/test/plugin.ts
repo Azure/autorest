@@ -6,9 +6,9 @@ import * as assert from 'assert';
 import { only, skip, slow, suite, test, timeout } from 'mocha-typescript';
 import { PumpMessagesToConsole } from './test-utility';
 
-import { DataHandle, DataStore, QuickDataSource, RealFileSystem } from '@microsoft.azure/datastore';
-import { Extension, ExtensionManager } from '@microsoft.azure/extension';
-import { CreateFolderUri, ResolveUri } from '@microsoft.azure/uri';
+import { DataHandle, DataStore, QuickDataSource, RealFileSystem } from '@azure-tools/datastore';
+import { Extension, ExtensionManager } from '@azure-tools/extension';
+import { CreateFolderUri, ResolveUri } from '@azure-tools/uri';
 import { homedir } from 'os';
 import { join } from 'path';
 import { CancellationToken } from 'vscode-jsonrpc';
@@ -19,7 +19,7 @@ import { LoadLiterateSwagger } from '../lib/pipeline/plugins/loaders';
 
 async function GetAutoRestDotNetPlugin(plugin: string): Promise<AutoRestExtension> {
   const extMgr = await ExtensionManager.Create(join(homedir(), '.autorest'));
-  const name = '@microsoft.azure/' + plugin;
+  const name = '@azure-tools/' + plugin;
   const source = '*';
   const pack = await extMgr.findPackage(name, source);
   const ext = await extMgr.installPackage(pack);

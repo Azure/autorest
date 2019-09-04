@@ -12,7 +12,7 @@ try {
 
 }
 
-export { IFileSystem } from '@microsoft.azure/datastore';
+export { IFileSystem } from '@azure-tools/datastore';
 export { Message, Channel } from './lib/message';
 export { Artifact } from './lib/artifact';
 export { AutoRest, ConfigurationView, IdentifyDocument, IsConfigurationExtension, IsConfigurationDocument, IsOpenApiExtension, LiterateToJson, IsOpenApiDocument } from './lib/autorest-core';

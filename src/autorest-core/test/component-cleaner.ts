@@ -1,7 +1,7 @@
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
-import * as datastore from '@microsoft.azure/datastore';
-import * as aio from "@microsoft.azure/async-io";
+import * as datastore from '@azure-tools/datastore';
+import * as aio from "@azure-tools/async-io";
 import { ComponentsCleaner } from "../lib/pipeline/plugins/components-cleaner";
 
 

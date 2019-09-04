@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, IndexToPosition, ParseNode, safeEval, StrictJsonSyntaxCheck } from '@microsoft.azure/datastore';
+import { DataHandle, DataSink, IndexToPosition, ParseNode, safeEval, StrictJsonSyntaxCheck } from '@azure-tools/datastore';
 import { ConfigurationView } from '../autorest-core';
 import { OperationAbortedException } from '../exception';
 import { Channel, SourceLocation } from '../message';

@@ -1,10 +1,10 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit } from '@microsoft.azure/datastore';
-import { clone, Dictionary } from '@microsoft.azure/linq';
-import { areSimilar } from '@microsoft.azure/object-comparison';
-import * as oai from '@microsoft.azure/openapi';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit } from '@azure-tools/datastore';
+import { clone, Dictionary } from '@azure-tools/linq';
+import { areSimilar } from '@azure-tools/object-comparison';
+import * as oai from '@azure-tools/openapi';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
-import { toSemver, maximum, gt, lt } from '@microsoft.azure/codegen';
+import { toSemver, maximum, gt, lt } from '@azure-tools/codegen';
 
 export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
 

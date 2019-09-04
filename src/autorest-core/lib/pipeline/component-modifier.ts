@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Clone } from '@microsoft.azure/datastore';
+import { Clone } from '@azure-tools/datastore';
 import { MergeOverwriteOrAppend } from '../source-map/merging';
 import { createPerFilePlugin, PipelinePlugin } from './common';
 

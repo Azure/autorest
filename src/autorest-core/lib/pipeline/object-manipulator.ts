@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Clone, CloneAst, DataHandle, DataSink, Descendants, IsPrefix, JsonPath, Mapping, nodes, ParseNode, paths, ReplaceNode, ResolveRelativeNode, SmartPosition, stringify, StringifyAst, ToAst, YAMLNode, ParseToAst } from '@microsoft.azure/datastore';
+import { Clone, CloneAst, DataHandle, DataSink, Descendants, IsPrefix, JsonPath, Mapping, nodes, ParseNode, paths, ReplaceNode, ResolveRelativeNode, SmartPosition, stringify, StringifyAst, ToAst, YAMLNode, ParseToAst } from '@azure-tools/datastore';
 import { From } from 'linq-es2015';
 import { IdentitySourceMapping } from '../source-map/merging';
 

@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { exists, filePath } from '@microsoft.azure/async-io';
-import { BlameTree, DataHandle, DataStore, IFileSystem, LazyPromise, ParseToAst, RealFileSystem, safeEval, Stringify, stringify, TryDecodeEnhancedPositionFromName } from '@microsoft.azure/datastore';
-import { Extension, ExtensionManager, LocalExtension } from '@microsoft.azure/extension';
-import { clone, keys, Dictionary } from '@microsoft.azure/linq';
-import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri, simplifyUri } from '@microsoft.azure/uri';
+import { exists, filePath } from '@azure-tools/async-io';
+import { BlameTree, DataHandle, DataStore, IFileSystem, LazyPromise, ParseToAst, RealFileSystem, safeEval, Stringify, stringify, TryDecodeEnhancedPositionFromName } from '@azure-tools/datastore';
+import { Extension, ExtensionManager, LocalExtension } from '@azure-tools/extension';
+import { clone, keys, Dictionary, values } from '@azure-tools/linq';
+import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri, simplifyUri } from '@azure-tools/uri';
 import { From } from 'linq-es2015';
 import { basename, dirname, join } from 'path';
 import { CancellationToken, CancellationTokenSource } from 'vscode-jsonrpc';
@@ -20,7 +20,7 @@ import { evaluateGuard, parseCodeBlocks } from './parsing/literate-yaml';
 import { AutoRestExtension } from './pipeline/plugin-endpoint';
 import { Suppressor } from './pipeline/suppression';
 import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
-import { values, Initializer } from '@microsoft.azure/codegen';
+import { Initializer } from '@azure-tools/codegen';
 
 const untildify: (path: string) => string = require('untildify');
 

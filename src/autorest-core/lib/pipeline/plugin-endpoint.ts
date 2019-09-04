@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, DataSource, LazyPromise, Mapping, SmartPosition } from '@microsoft.azure/datastore';
-import { EnsureIsFolderUri } from '@microsoft.azure/uri';
+import { DataHandle, DataSink, DataSource, LazyPromise, Mapping, SmartPosition } from '@azure-tools/datastore';
+import { EnsureIsFolderUri } from '@azure-tools/uri';
 import { ChildProcess, fork } from 'child_process';
 import { RawSourceMap } from 'source-map';
 import { Readable, Writable } from 'stream';

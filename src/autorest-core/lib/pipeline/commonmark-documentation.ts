@@ -12,7 +12,7 @@ import {
   SmartPosition,
   StringifyAst,
   YAMLMap, YAMLMapping, YAMLNodeWithPath
-} from '@microsoft.azure/datastore';
+} from '@azure-tools/datastore';
 import { Node, Parser } from 'commonmark';
 import { IdentitySourceMapping } from '../source-map/merging';
 

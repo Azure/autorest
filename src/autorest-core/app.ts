@@ -34,8 +34,8 @@ const color: (text: string) => string = (<any>global).color ? (<any>global).colo
 // start of autorest-ng
 // the console app starts for real here.
 
-import { CreateObject, DataStore, EnhancedFileSystem, nodes, Parse, RealFileSystem, Stringify } from '@microsoft.azure/datastore';
-import { ClearFolder, CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteBinary, WriteString } from '@microsoft.azure/uri';
+import { CreateObject, DataStore, EnhancedFileSystem, nodes, Parse, RealFileSystem, Stringify } from '@azure-tools/datastore';
+import { ClearFolder, CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteBinary, WriteString } from '@azure-tools/uri';
 import { ChildProcess } from 'child_process';
 import { join, resolve as currentDirectory } from 'path';
 import { Help } from './help';

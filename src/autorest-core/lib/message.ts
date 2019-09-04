@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Position, RawSourceMap } from "source-map";
-import { EnhancedPosition, Mapping } from "@microsoft.azure/datastore";
+import { EnhancedPosition, Mapping } from "@azure-tools/datastore";
 import { Artifact } from "./artifact";
 
 

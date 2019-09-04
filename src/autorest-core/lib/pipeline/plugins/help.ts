@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { QuickDataSource } from '@microsoft.azure/datastore';
+import { QuickDataSource } from '@azure-tools/datastore';
 import { Help } from '../../../help';
 import { PipelinePlugin } from '../common';
 

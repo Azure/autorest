@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, DataSource, QuickDataSource } from '@microsoft.azure/datastore';
-import { Deduplicator } from '@microsoft.azure/deduplication';
+import { DataHandle, DataSink, DataSource, QuickDataSource } from '@azure-tools/datastore';
+import { Deduplicator } from '@azure-tools/deduplication';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
-import { Dictionary, values, keys, items } from '@microsoft.azure/linq';
+import { Dictionary, values, keys, items } from '@azure-tools/linq';
 
 async function deduplicate(config: ConfigurationView, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));

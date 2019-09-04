@@ -16,6 +16,7 @@
   },
   "telemetryEnabled": false,
   "projects": [
+    /* perks libraries. 
     {
       "packageName": "@microsoft.azure/tasks",
       "projectFolder": "perks/libraries/tasks",
@@ -108,7 +109,7 @@
     },
     /* --- project packages --- */
     {
-      "packageName": "@microsoft.azure/autorest-core",
+      "packageName": "@autorest/core",
       "projectFolder": "src/autorest-core",
       "reviewCategory": "production",
       "shouldPublish": true

@@ -23,8 +23,8 @@ if (!String.prototype.padEnd) {
   };
 }
 
-import { isFile, readdir, rmdir, isDirectory } from '@microsoft.azure/async-io';
-import { Exception, LazyPromise } from '@microsoft.azure/tasks';
+import { isFile, readdir, rmdir, isDirectory } from '@azure-tools/async-io';
+import { Exception, LazyPromise } from '@azure-tools/tasks';
 import chalk from 'chalk';
 import { join } from 'path';
 import { gt } from 'semver';

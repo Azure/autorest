@@ -5,9 +5,9 @@
 import { CancellationToken } from "vscode-jsonrpc";
 import * as assert from "assert";
 import { only, skip, slow, suite, test, timeout } from "mocha-typescript";
-import { DataStore } from "@microsoft.azure/datastore";
+import { DataStore } from "@azure-tools/datastore";
 import { manipulateObject } from "../lib/pipeline/object-manipulator";
-import { safeEval } from "@microsoft.azure/datastore";
+import { safeEval } from "@azure-tools/datastore";
 try {
   require('source-map-support').install();
 } catch {

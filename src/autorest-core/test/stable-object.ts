@@ -5,7 +5,7 @@
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-import { NewEmptyObject } from "@microsoft.azure/datastore";
+import { NewEmptyObject } from "@azure-tools/datastore";
 
 @suite class StableObject {
   @test async "insert order preservation"() {

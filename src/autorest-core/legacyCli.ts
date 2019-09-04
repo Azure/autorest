@@ -4,8 +4,8 @@ import { isAbsolute } from 'path';
 *  Licensed under the MIT License. See License.txt in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import { ResolveUri, GetFilenameWithoutExtension } from "@microsoft.azure/uri";
-import { DataSource } from "@microsoft.azure/datastore";
+import { ResolveUri, GetFilenameWithoutExtension } from "@azure-tools/uri";
+import { DataSource } from "@azure-tools/datastore";
 import { AutoRestConfigurationImpl } from "./lib/configuration";
 
 const regexLegacyArg = /^-[^-]/;
@@ -28,7 +28,7 @@ async function ParseCompositeSwagger(inputScope: DataSource, uri: string, target
   let result: AutoRestConfigurationImpl = {
     "input-file": []
   };
-  
+
   const switches: { [key: string]: string | null } = {};
 
   // parse
@@ -47,7 +47,7 @@ async function ParseCompositeSwagger(inputScope: DataSource, uri: string, target
   if (inputFile === null) {
     throw new Error("No input specified.");
   }
-  
+
   result["input-file"] = inputFile;
   result["output-folder"] = switches["o"] || switches["output"] || switches["outputdirectory"] || "Generated";
   result["namespace"] = switches["n"] || switches["namespace"] || GetFilenameWithoutExtension(inputFile);
@@ -95,6 +95,6 @@ async function ParseCompositeSwagger(inputScope: DataSource, uri: string, target
     result["output-artifact"] = "swagger-document";
     delete (result as any)[usedCodeGenerator];
   }
-  
+
   return result;
 }

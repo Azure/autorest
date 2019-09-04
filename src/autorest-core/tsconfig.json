@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "dist",
+    "rootDir": ".",
     "alwaysStrict": true,
     "forceConsistentCasingInFileNames": false,
     "module": "commonjs",
@@ -22,16 +23,11 @@
     ],
     "experimentalDecorators": true,
     "newLine": "LF",
-    "plugins": [
-      {
-        "name": "tslint-language-service",
-        "configFile": "../../tslint.json"
-      }
-    ]
   },
   "exclude": [
     "node_modules",
     "static_modules",
-    "dist"
+    "dist",
+    "**/*.d.ts"
   ]
 }

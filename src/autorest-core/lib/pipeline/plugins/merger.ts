@@ -1,7 +1,7 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, ProxyObject, QuickDataSource, Transformer, visit } from '@microsoft.azure/datastore';
-import { clone, Dictionary, values } from '@microsoft.azure/linq';
+import { AnyObject, DataHandle, DataSink, DataSource, Node, ProxyObject, QuickDataSource, Transformer, visit } from '@azure-tools/datastore';
+import { clone, Dictionary, values } from '@azure-tools/linq';
 
-import * as oai from '@microsoft.azure/openapi';
+import * as oai from '@azure-tools/openapi';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 

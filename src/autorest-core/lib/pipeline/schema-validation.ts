@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { parseJsonPointer } from '@microsoft.azure/datastore';
+import { parseJsonPointer } from '@azure-tools/datastore';
 import * as SchemaValidator from 'z-schema';
 import { OperationAbortedException } from '../exception';
 import { Channel } from '../message';
