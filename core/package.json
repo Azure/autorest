@@ -35,7 +35,7 @@
     "eslint-fix": "eslint  . --fix --ext .ts",
     "eslint": "eslint  . --ext .ts",
     "prepare": "node ./.scripts/post-install --force --no-node-modules",
-    "prepack": "static-link && npm run build",
+    "prepack": "npm run static-link && npm run build",
     "run-pwsh": "pwsh -noprofile -command \"& {param($script) pwsh -noprofile -command ((convertfrom-json (get-content -raw ./package.json)).'pwsh-scripts'.$script) }\"",
     "clean": "pwsh -noprofile -command \"remove-item -recurse -ea 0 ./dist ; remove-item -ea 0 ./*.log\"",
     "before-build": "pwsh -noprofile -command \"new-item -itemType directory -ea 0 -path dist/lib/pipeline ; copy-item ../schema/*.json dist/lib/pipeline\""
