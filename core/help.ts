@@ -1,4 +1,3 @@
-
 export interface Help {
   categoryFriendlyName: string;  // e.g. "Output Verbosity", "C# generator"
   activationScope?: string;      // e.g. "csharp"

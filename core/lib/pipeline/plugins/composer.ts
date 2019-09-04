@@ -20,13 +20,14 @@ function distinct<T>(list: Array<T>): Array<T> {
   return sorted.filter((x, i) => i === 0 || x !== sorted[i - 1]);
 }
 
-interface ObjectWithPath<T> { obj: T; path: JsonPath; }
+function getProperty<T, U>(obj: ObjectWithPath<T>, key: string): ObjectWithPath<U> {
+  return { obj: (<any>obj.obj)[key], path: obj.path.concat([key]) };
+}
+
+interface ObjectWithPath<T> { obj: T; path: JsonPath }
 function getPropertyValues<T, U>(obj: ObjectWithPath<T>): Array<ObjectWithPath<U>> {
   const o: T = obj.obj || <T>{};
   return Object.getOwnPropertyNames(o).map(n => getProperty<T, U>(obj, n));
-}
-function getProperty<T, U>(obj: ObjectWithPath<T>, key: string): ObjectWithPath<U> {
-  return { obj: (<any>obj.obj)[key], path: obj.path.concat([key]) };
 }
 
 async function composeSwaggers(config: ConfigurationView, overrideInfoTitle: any, overrideInfoDescription: any, inputSwaggers: Array<DataHandle>, sink: DataSink): Promise<DataHandle> {
@@ -52,7 +53,7 @@ async function composeSwaggers(config: ConfigurationView, overrideInfoTitle: any
       : distinct(inputSwaggerObjects.map(s => s.info).filter(i => !!i).map(i => i.description).filter(i => !!i));
     const uniqueVersion: boolean = distinct(inputSwaggerObjects.map(s => s.info).filter(i => !!i).map(i => i.version)).length === 1;
 
-    if (candidateTitles.length === 0) { throw new Error(`No 'title' in provided OpenAPI definition(s).`); }
+    if (candidateTitles.length === 0) { throw new Error('No \'title\' in provided OpenAPI definition(s).'); }
     if (candidateTitles.length > 1) { throw new Error(`The 'title' across provided OpenAPI definitions has to match. Found: ${candidateTitles.map(x => `'${x}'`).join(', ')}. Please adjust or provide an override (--title=...).`); }
     if (candidateDescriptions.length !== 1) { candidateDescriptions.splice(0, candidateDescriptions.length); }
 
@@ -174,9 +175,6 @@ async function composeSwaggers(config: ConfigurationView, overrideInfoTitle: any
           }
         }
       }
-
-
-
 
 
       // inline produces/consumes

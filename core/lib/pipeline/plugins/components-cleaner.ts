@@ -140,9 +140,10 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
   public async process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
-        case 'components':
+        case 'components': {
           const components = <oai.Components>targetParent.components || this.newObject(targetParent, 'components', pointer);
           this.visitComponents(components, children);
+        }
           break;
 
         default:

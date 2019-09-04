@@ -1,9 +1,9 @@
 // load modules from static linker filesystem.
-if (process.argv.indexOf("--no-static-loader") === -1 && process.env["no-static-loader"] === undefined && require('fs').existsSync('./static-loader.js')) {
-  require('./static-loader.js').load(`${__dirname}/static_modules.fs`)
+if (process.argv.indexOf('--no-static-loader') === -1 && process.env['no-static-loader'] === undefined && require('fs').existsSync('./static-loader.js')) {
+  require('./static-loader.js').load(`${__dirname}/static_modules.fs`);
 }
 // everything else.
-import { tryRequire, resolveEntrypoint, ensureAutorestHome, selectVersion } from "./autorest-as-a-service"
+import { tryRequire, resolveEntrypoint, ensureAutorestHome, selectVersion } from './autorest-as-a-service';
 import { resolve } from 'path';
 
 import { LanguageClient } from 'vscode-languageclient';
@@ -17,53 +17,53 @@ export { Message, Artifact, GenerationResults, IFileSystem } from 'autorest-core
  */
 export enum Channel {
   /** Information is considered the mildest of responses; not necesarily actionable. */
-  Information = <any>"information",
+  Information = <any>'information',
 
   /** Warnings are considered important for best practices, but not catastrophic in nature. */
-  Warning = <any>"warning",
+  Warning = <any>'warning',
 
   /** Errors are considered blocking issues that block a successful operation.  */
-  Error = <any>"error",
+  Error = <any>'error',
 
   /** Debug messages are designed for the developer to communicate internal autorest implementation details. */
-  Debug = <any>"debug",
+  Debug = <any>'debug',
 
   /** Verbose messages give the user additional clarity on the process. */
-  Verbose = <any>"verbose",
+  Verbose = <any>'verbose',
 
   /** Catastrophic failure, likely abending the process.  */
-  Fatal = <any>"fatal",
+  Fatal = <any>'fatal',
 
   /** Hint messages offer guidance or support without forcing action. */
-  Hint = <any>"hint",
+  Hint = <any>'hint',
 
   /** File represents a file output from an extension. Details are a Artifact and are required.  */
-  File = <any>"file",
+  File = <any>'file',
 
   /** content represents an update/creation of a configuration file. The final uri will be in the same folder as the primary config file. */
-  Configuration = <any>"configuration",
+  Configuration = <any>'configuration',
 
   /** Protect is a path to not remove during a clear-output-folder.  */
-  Protect = <any>"protect",
+  Protect = <any>'protect',
 
 
 }
 
 export enum DocumentType {
-  OpenAPI2 = <any>"OpenAPI2",
-  OpenAPI3 = <any>"OpenAPI3",
-  LiterateConfiguration = <any>"LiterateConfiguration",
-  Unknown = <any>"Unknown"
+  OpenAPI2 = <any>'OpenAPI2',
+  OpenAPI3 = <any>'OpenAPI3',
+  LiterateConfiguration = <any>'LiterateConfiguration',
+  Unknown = <any>'Unknown'
 }
 
-let resolve_autorest: (value?: IAutoRest | PromiseLike<IAutoRest>) => void;
-let reject_autorest: (reason?: any) => void;
+let resolveAutoRest: (value?: IAutoRest | PromiseLike<IAutoRest>) => void;
+let rejectAutoRest: (reason?: any) => void;
 
 // export the selected implementation of the AutoRest interface.
 export declare type AutoRest = IAutoRest;
 export const AutoRest: Promise<IAutoRest> = new Promise((r, j) => {
-  resolve_autorest = r;
-  reject_autorest = j;
+  resolveAutoRest = r;
+  rejectAutoRest = j;
 });
 
 let coreModule: any = undefined;
@@ -81,12 +81,13 @@ let modulePath: string | undefined = undefined;
  *
  * @see { @link initialize }
  */
-export async function getLanguageServiceEntrypoint(requestedVersion: string = "latest-installed", minimumVersion?: string): Promise<string> {
+export async function getLanguageServiceEntrypoint(requestedVersion = 'latest-installed', minimumVersion?: string): Promise<string> {
   if (!modulePath && !busy) {
     // if we haven't already got autorest-core, let's do that now with the default settings.
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     await initialize(requestedVersion, minimumVersion);
   }
-  return resolveEntrypoint(modulePath, "language-service");
+  return resolveEntrypoint(modulePath, 'language-service');
 }
 
 /**
@@ -100,12 +101,13 @@ export async function getLanguageServiceEntrypoint(requestedVersion: string = "l
  *
  * @see {@link initialize}
  * */
-export async function getApplicationEntrypoint(requestedVersion: string = "latest-installed", minimumVersion?: string): Promise<string> {
+export async function getApplicationEntrypoint(requestedVersion = 'latest-installed', minimumVersion?: string): Promise<string> {
   if (!modulePath && !busy) {
     // if we haven't already got autorest-core, let's do that now with the default settings.
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     await initialize(requestedVersion, minimumVersion);
   }
-  return resolveEntrypoint(modulePath, "app");
+  return resolveEntrypoint(modulePath, 'app');
 }
 
 /**
@@ -123,12 +125,12 @@ export async function getApplicationEntrypoint(requestedVersion: string = "lates
  *
  * @param minimumVersion - a semver string representing the lowest autorest-core version that is considered acceptable.
  */
-export async function initialize(requestedVersion: string = "latest-installed", minimumVersion?: string) {
+export async function initialize(requestedVersion = 'latest-installed', minimumVersion?: string) {
   if (modulePath) {
     return;
   }
   if (busy) {
-    throw new Error("initialize is already in progress.")
+    throw new Error('initialize is already in progress.');
   }
 
   busy = true;
@@ -141,7 +143,7 @@ export async function initialize(requestedVersion: string = "latest-installed", 
       const localVersion = resolve(requestedVersion);
 
       // try to use a specified folder
-      modulePath = await resolveEntrypoint(localVersion, "module");
+      modulePath = await resolveEntrypoint(localVersion, 'module');
 
       if (modulePath) {
         return;
@@ -152,10 +154,10 @@ export async function initialize(requestedVersion: string = "latest-installed", 
 
     // logic to resolve and optionally install a autorest core package.
     // will throw if it's not doable.
-    let selectedVersion = await selectVersion(requestedVersion, false, minimumVersion);
-    modulePath = await resolveEntrypoint(await selectedVersion.modulePath, "module");
+    const selectedVersion = await selectVersion(requestedVersion, false, minimumVersion);
+    modulePath = await resolveEntrypoint(await selectedVersion.modulePath, 'module');
     if (!modulePath) {
-      reject_autorest(new Error(`Unable to start AutoRest Core from ${requestedVersion}/${await selectedVersion.modulePath}`));
+      rejectAutoRest(new Error(`Unable to start AutoRest Core from ${requestedVersion}/${await selectedVersion.modulePath}`));
       throw new Error(`Unable to start AutoRest Core from ${requestedVersion}/${await selectedVersion.modulePath}`);
     }
   } finally {
@@ -173,10 +175,10 @@ async function ensureCoreLoaded(): Promise<IAutoRest> {
 
   if (modulePath && !coreModule) {
     // get the library entrypoint
-    coreModule = await tryRequire(modulePath, "main");
+    coreModule = await tryRequire(modulePath, 'main');
 
     // assign the type to the Async Class Identity
-    resolve_autorest(coreModule.AutoRest)
+    resolveAutoRest(coreModule.AutoRest);
   }
 
   // wait for class definition
@@ -202,10 +204,10 @@ export async function create(fileSystem?: IFileSystem, configFileOrFolderUri?: s
 
   if (modulePath && !coreModule) {
     // get the library entrypoint
-    coreModule = await tryRequire(modulePath, "main");
+    coreModule = await tryRequire(modulePath, 'main');
 
     // assign the type to the Async Class Identity
-    resolve_autorest(coreModule.AutoRest)
+    resolveAutoRest(coreModule.AutoRest);
   }
 
   // wait for class definition
@@ -293,7 +295,7 @@ export class AutoRestLanguageService {
   public async generate(documentUri: string, language: string, configuration: any): Promise<GenerationResults> {
     // don't call before the client is ready.
     await this.languageClient.onReady();
-    return await this.languageClient.sendRequest<GenerationResults>("generate", { documentUri: documentUri, language: language, configuration: configuration });
+    return await this.languageClient.sendRequest<GenerationResults>('generate', { documentUri: documentUri, language: language, configuration: configuration });
   }
 
   /**
@@ -308,7 +310,7 @@ export class AutoRestLanguageService {
     // don't call before the client is ready.
     await this.languageClient.onReady();
 
-    return await this.languageClient.sendRequest<boolean>("isOpenApiDocument", { contentOrUri: contentOrUri });
+    return await this.languageClient.sendRequest<boolean>('isOpenApiDocument', { contentOrUri: contentOrUri });
   }
 
   /**
@@ -323,7 +325,7 @@ export class AutoRestLanguageService {
     // don't call before the client is ready.
     await this.languageClient.onReady();
 
-    return await this.languageClient.sendRequest<boolean>("isConfigurationDocument", { contentOrUri: contentOrUri });
+    return await this.languageClient.sendRequest<boolean>('isConfigurationDocument', { contentOrUri: contentOrUri });
   }
 
   /**
@@ -336,7 +338,7 @@ export class AutoRestLanguageService {
     // don't call before the client is ready.
     await this.languageClient.onReady();
 
-    return await this.languageClient.sendRequest<string>("toJSON", { contentOrUri: contentOrUri });
+    return await this.languageClient.sendRequest<string>('toJSON', { contentOrUri: contentOrUri });
   }
 
   /**
@@ -350,7 +352,7 @@ export class AutoRestLanguageService {
     // don't call before the client is ready.
     await this.languageClient.onReady();
 
-    return await this.languageClient.sendRequest<string>("detectConfigurationFile", { documentUri: documentUri });
+    return await this.languageClient.sendRequest<string>('detectConfigurationFile', { documentUri: documentUri });
   }
 
   /**
@@ -365,12 +367,12 @@ export class AutoRestLanguageService {
     // don't call before the client is ready.
     await this.languageClient.onReady();
 
-    return await this.languageClient.sendRequest<boolean>("isSupportedDocument", { languageId: languageId, contentOrUri: contentOrUri });
+    return await this.languageClient.sendRequest<boolean>('isSupportedDocument', { languageId: languageId, contentOrUri: contentOrUri });
   }
 
   public async identifyDocument(contentOrUri: string): Promise<DocumentType> {
     // don't call before the client is ready.
     await this.languageClient.onReady();
-    return await this.languageClient.sendRequest<DocumentType>("identifyDocument", { contentOrUri: contentOrUri });
+    return await this.languageClient.sendRequest<DocumentType>('identifyDocument', { contentOrUri: contentOrUri });
   }
 }

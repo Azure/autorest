@@ -54,10 +54,6 @@ class Result {
         case Channel.Verbose:
           service.verbose(message.Text);
           break;
-        case Channel.Information:
-          service.log(message.Text);
-          break;
-
         case Channel.Warning:
           service.pushDiagnostic(message, DiagnosticSeverity.Warning);
           break;
@@ -88,7 +84,7 @@ class Result {
     }));
   }
 
-  public clearDiagnostics(send: boolean = false) {
+  public clearDiagnostics(send = false) {
     const diagnostics = this.service.getDiagnosticCollection(this.configurationUrl);
     diagnostics.send();
     diagnostics.clear(send);
@@ -192,7 +188,7 @@ class Diagnostics {
   public constructor(private connection: IConnection, private fileUri: string) {
   }
 
-  public clear(send: boolean = false) {
+  public clear(send = false) {
     this.diagnostics.clear();
     if (send) {
       this.send();
@@ -203,7 +199,7 @@ class Diagnostics {
     this.connection.sendDiagnostics({ uri: this.fileUri, diagnostics: [...this.diagnostics.values()] });
   }
 
-  public push(diagnostic: Diagnostic, send: boolean = true) {
+  public push(diagnostic: Diagnostic, send = true) {
     const hash = md5(diagnostic) || '';
     if (!this.diagnostics.has(hash)) {
       this.diagnostics.set(hash, diagnostic);
@@ -346,20 +342,26 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
   public async isOpenApiDocument(contentOrUri: string): Promise<boolean> {
     try {
       return IsUri(contentOrUri) ? await IsOpenApiDocument(await this.ReadFile(contentOrUri)) : await IsOpenApiDocument(contentOrUri);
-    } catch { }
+    } catch {
+      // no worries
+    }
     return false;
   }
 
   public async identifyDocument(contentOrUri: string): Promise<DocumentType> {
     try {
       return IsUri(contentOrUri) ? await IdentifyDocument(await this.ReadFile(contentOrUri)) : await IdentifyDocument(contentOrUri);
-    } catch { }
+    } catch {
+      // no worries
+    }
     return DocumentType.Unknown;
   }
   public async isConfigurationDocument(contentOrUri: string): Promise<boolean> {
     try {
       return IsUri(contentOrUri) ? await IsConfigurationDocument(await this.ReadFile(contentOrUri)) : await IsConfigurationDocument(contentOrUri);
-    } catch { }
+    } catch {
+      // no worries
+    }
     return false;
   }
   public async isSupportedDocument(languageId: string, contentOrUri: string): Promise<boolean> {
@@ -371,14 +373,18 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
         const isConf = IsConfigurationDocument(content);
         return await isSwag || await isConf;
       }
-    } catch { }
+    } catch {
+      // no worries
+    }
     return false;
 
   }
   public async toJSON(contentOrUri: string): Promise<string> {
     try {
       return IsUri(contentOrUri) ? await LiterateToJson(await this.ReadFile(contentOrUri)) : await LiterateToJson(contentOrUri);
-    } catch { }
+    } catch {
+      // no worries
+    }
     return '';
   }
 
@@ -426,7 +432,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
   }
 
   private async onSaving() {
-
+    // not implemented?
   }
 
   private async getDocumentAnalysis(documentUri: string): Promise<DocumentAnalysis | null> {
@@ -594,6 +600,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
       const content = await readFile(decodeURIComponent(FileUriToPath(fileUri)));
       return content;
     } catch {
+      // no worries
     }
     throw new Error(`Unable to read ${fileUri}`);
   }

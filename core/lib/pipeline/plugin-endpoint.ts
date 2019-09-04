@@ -14,7 +14,7 @@ import { Artifact } from '../artifact';
 import { EventEmitter } from '../events';
 import { Exception } from '../exception';
 import { ArtifactMessage, Channel, Message } from '../message';
-import { IAutoRestPluginInitiator, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types } from './plugin-api';
+import { IAutoRestPluginInitiator, IAutoRestPluginInitiatorTypes, IAutoRestPluginTargetTypes } from './plugin-api';
 
 interface IAutoRestPluginTargetEndpoint {
   GetPluginNames(cancellationToken: CancellationToken): Promise<Array<string>>;
@@ -34,7 +34,7 @@ interface IAutoRestPluginInitiatorEndpoint {
 }
 
 export class AutoRestExtension extends EventEmitter {
-  private static lastSessionId: number = 0;
+  private static lastSessionId = 0;
   private static CreateSessionId(): string { return `session_${++AutoRestExtension.lastSessionId}`; }
   private static processes = new Array<ChildProcess>();
 
@@ -61,10 +61,10 @@ export class AutoRestExtension extends EventEmitter {
 
   public static async FromChildProcess(extensionName: string, childProc: ChildProcess): Promise<AutoRestExtension> {
     if (childProc.stdout === null) {
-      throw new Error("Child Process has no stdout pipe.")
+      throw new Error('Child Process has no stdout pipe.');
     }
     if (childProc.stdin === null) {
-      throw new Error("Child Process has no stdin pipe.")
+      throw new Error('Child Process has no stdin pipe.');
     }
     const plugin = new AutoRestExtension(extensionName, childProc.stdout, childProc.stdin, childProc);
     if (childProc.stderr !== null) {
@@ -87,11 +87,15 @@ export class AutoRestExtension extends EventEmitter {
 
     // hook in inspectors
     reader.on('data', chunk => {
-      try { this.__inspectTraffic.push([Date.now(), false, chunk.toString()]); } catch (e) { }
+      try { this.__inspectTraffic.push([Date.now(), false, chunk.toString()]); } catch  {
+        // no worries
+      }
     });
     const writerProxy = new Writable({
       write: (chunk: string | Buffer, encoding: string, callback: Function) => {
-        try { this.__inspectTraffic.push([Date.now(), true, chunk.toString()]); } catch (e) { }
+        try { this.__inspectTraffic.push([Date.now(), true, chunk.toString()]); } catch {
+          // no worries
+        }
         return writer.write(chunk, encoding, <any>callback);
       }
     });
@@ -105,7 +109,7 @@ export class AutoRestExtension extends EventEmitter {
       try {
         const endpoint = this.apiInitiatorEndpoints[sessionId];
         if (endpoint) {
-          return await (endpoint as any)[fnName](...rest);
+          return await (<any>endpoint)[fnName](...rest);
         }
       } catch (e) {
         if (e != 'Cancellation requested.') {
@@ -123,12 +127,12 @@ export class AutoRestExtension extends EventEmitter {
       WriteFile: dispatcher('WriteFile'),
       Message: dispatcher('Message'),
     };
-    channel.onRequest(IAutoRestPluginInitiator_Types.ReadFile, this.apiInitiator.ReadFile);
-    channel.onRequest(IAutoRestPluginInitiator_Types.GetValue, this.apiInitiator.GetValue);
-    channel.onRequest(IAutoRestPluginInitiator_Types.ListInputs, this.apiInitiator.ListInputs);
-    channel.onNotification(IAutoRestPluginInitiator_Types.ProtectFiles, this.apiInitiator.ProtectFiles);
-    channel.onNotification(IAutoRestPluginInitiator_Types.WriteFile, this.apiInitiator.WriteFile);
-    channel.onNotification(IAutoRestPluginInitiator_Types.Message, this.apiInitiator.Message);
+    channel.onRequest(IAutoRestPluginInitiatorTypes.ReadFile, this.apiInitiator.ReadFile);
+    channel.onRequest(IAutoRestPluginInitiatorTypes.GetValue, this.apiInitiator.GetValue);
+    channel.onRequest(IAutoRestPluginInitiatorTypes.ListInputs, this.apiInitiator.ListInputs);
+    channel.onNotification(IAutoRestPluginInitiatorTypes.ProtectFiles, this.apiInitiator.ProtectFiles);
+    channel.onNotification(IAutoRestPluginInitiatorTypes.WriteFile, this.apiInitiator.WriteFile);
+    channel.onNotification(IAutoRestPluginInitiatorTypes.Message, this.apiInitiator.Message);
 
     const errorPromise = new Promise<never>((_, rej) => channel.onError(e => { rej(new Exception(`AutoRest extension '${extensionName}' reported error: ` + e)); }));
     const terminationPromise = new Promise<never>((_, rej) => channel.onClose(() => { rej(new Exception(`AutoRest extension '${extensionName}' terminated.`)); }));
@@ -136,10 +140,10 @@ export class AutoRestExtension extends EventEmitter {
     // target
     this.apiTarget = {
       async GetPluginNames(cancellationToken: CancellationToken): Promise<Array<string>> {
-        return Promise.race([errorPromise, terminationPromise, channel.sendRequest(IAutoRestPluginTarget_Types.GetPluginNames, cancellationToken)]);
+        return Promise.race([errorPromise, terminationPromise, channel.sendRequest(IAutoRestPluginTargetTypes.GetPluginNames, cancellationToken)]);
       },
       async Process(pluginName: string, sessionId: string, cancellationToken: CancellationToken): Promise<boolean> {
-        return Promise.race([errorPromise, terminationPromise, channel.sendRequest(IAutoRestPluginTarget_Types.Process, pluginName, sessionId, cancellationToken)]);
+        return Promise.race([errorPromise, terminationPromise, channel.sendRequest(IAutoRestPluginTargetTypes.Process, pluginName, sessionId, cancellationToken)]);
       }
     };
   }
@@ -187,10 +191,10 @@ export class AutoRestExtension extends EventEmitter {
       }
       // TODO: transform mappings so friendly names are replaced by internals
       let handle: DataHandle;
-      if (typeof (sourceMap as any).mappings === 'string') {
-        onFile(handle = await sink.WriteDataWithSourceMap(filename, content, artifactType, ['fix-me-here'], () => sourceMap as any));
+      if (typeof (<any>sourceMap).mappings === 'string') {
+        onFile(handle = await sink.WriteDataWithSourceMap(filename, content, artifactType, ['fix-me-here'], () => <any>sourceMap));
       } else {
-        onFile(handle = await sink.WriteData(filename, content, ['fix-me-here2'], artifactType, sourceMap as Array<Mapping>, await inputFileHandles));
+        onFile(handle = await sink.WriteData(filename, content, ['fix-me-here2'], artifactType, <Array<Mapping>>sourceMap, await inputFileHandles));
       }
       return {
         uri: handle.key,
@@ -302,7 +306,7 @@ export class AutoRestExtension extends EventEmitter {
 
         if (message.Channel === Channel.File) {
           // wire through `sink` in order to retrieve default artifact type
-          const artifactMessage = message as ArtifactMessage;
+          const artifactMessage = <ArtifactMessage>message;
           const artifact = artifactMessage.Details;
 
           await writeFileToSinkAndNotify(artifact.uri, artifact.content, artifact.type, artifact.sourceMap);

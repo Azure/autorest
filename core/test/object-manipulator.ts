@@ -2,22 +2,22 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { CancellationToken } from "vscode-jsonrpc";
-import * as assert from "assert";
-import { only, skip, slow, suite, test, timeout } from "mocha-typescript";
-import { DataStore } from "@azure-tools/datastore";
-import { manipulateObject } from "../lib/pipeline/object-manipulator";
-import { safeEval } from "@azure-tools/datastore";
+import { CancellationToken } from 'vscode-jsonrpc';
+import * as assert from 'assert';
+import { only, skip, slow, suite, test, timeout } from 'mocha-typescript';
+import { DataStore } from '@azure-tools/datastore';
+import { manipulateObject } from '../lib/pipeline/object-manipulator';
+import { safeEval } from '@azure-tools/datastore';
 try {
   require('source-map-support').install();
 } catch {
-
+  // no worries
 }
 
 
 @suite class ObjectManipulator {
 
-  private exampleObject: string = `
+  private exampleObject = `
 host: localhost:27332
 paths:
   "/api/circular":
@@ -103,7 +103,7 @@ definitions:
     {
       // make all descriptions upper case
       const bestDescriptionEver = 'best description ever';
-      const result = await manipulateObject(input, dataStore.getDataSink(), '$..description', (_, x) => (x as string).toUpperCase());
+      const result = await manipulateObject(input, dataStore.getDataSink(), '$..description', (_, x) => (<string>x).toUpperCase());
       assert.strictEqual(result.anyHit, true);
       const resultObject = await result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, 'DESCRIPTION');

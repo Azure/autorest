@@ -3,17 +3,17 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Configuration, ConfigurationView, MessageEmitter } from "./configuration";
-import { EventEmitter, IEvent } from "./events";
-import { Exception } from "./exception";
-import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
-import { runPipeline } from "./pipeline/pipeline";
+import { Configuration, ConfigurationView, MessageEmitter } from './configuration';
+import { EventEmitter, IEvent } from './events';
+import { Exception } from './exception';
+import { IFileSystem, RealFileSystem } from '@azure-tools/datastore';
+import { runPipeline } from './pipeline/pipeline';
 export { ConfigurationView } from './configuration';
-import { homedir } from "os"
-import { Artifact } from "./artifact";
-import * as Constants from "./constants";
-import { DocumentType } from "./document-type";
-import { Channel, Message } from "./message";
+import { homedir } from 'os';
+import { Artifact } from './artifact';
+import * as Constants from './constants';
+import { DocumentType } from './document-type';
+import { Channel, Message } from './message';
 
 function IsIterable(target: any) {
   return !!target && typeof target !== 'string' && typeof (target[Symbol.iterator]) === 'function';
@@ -24,7 +24,7 @@ function Push<T>(destination: Array<T>, source: any) {
     if (IsIterable(source)) {
       destination.push(...source);
     } else {
-      destination.push(source)
+      destination.push(source);
     }
   }
 }
@@ -69,7 +69,7 @@ export class AutoRest extends EventEmitter {
     process.env['autorest.home'] = process.env['autorest.home'] || homedir();
   }
 
-  public async RegenerateView(includeDefault: boolean = false): Promise<ConfigurationView> {
+  public async RegenerateView(includeDefault = false): Promise<ConfigurationView> {
     this.Invalidate();
     const messageEmitter = new MessageEmitter();
 
@@ -102,11 +102,11 @@ export class AutoRest extends EventEmitter {
   /**
    * Called to start processing of the files.
    */
-  public Process(): { finish: Promise<boolean | Error>, cancel(): void } {
+  public Process(): { finish: Promise<boolean | Error>; cancel(): void } {
     let earlyCancel = false;
     let cancel: () => void = () => earlyCancel = true;
     const processInternal = async () => {
-      let view: ConfigurationView = null as any;
+      let view: ConfigurationView = <any>null;
       try {
         // grab the current configuration view.
         view = await this.view;
@@ -128,7 +128,7 @@ export class AutoRest extends EventEmitter {
           } else {
             // if this is using perform-load we don't need to require files.
             // if it's using batch, we might not have files in the main body
-            if ((view.Raw as any)['perform-load'] !== false) {
+            if ((<any>view.Raw)['perform-load'] !== false) {
               return new Exception('No input files provided.\n\nUse --help to get help information.');
             }
           }
@@ -153,6 +153,7 @@ export class AutoRest extends EventEmitter {
         if (e instanceof Exception) {
           // idea: don't throw exceptions, just visibly log them and return false
           message.Channel = Channel.Fatal;
+          // eslint-disable-next-line no-ex-assign
           e = false;
         }
         this.Message.Dispatch(message);
@@ -169,6 +170,42 @@ export class AutoRest extends EventEmitter {
       finish: processInternal()
     };
   }
+}
+
+/**
+ * Processes a document (yaml, markdown or JSON) and returns the document as a JSON-encoded document text
+ * @param content - the document content
+ *
+ * @returns the content as a JSON string (not a JSON DOM)
+ */
+export async function LiterateToJson(content: string): Promise<string> {
+  try {
+    const autorest = new AutoRest({
+      async EnumerateFileUris(folderUri: string): Promise<Array<string>> { return []; },
+      ReadFile: async (f: string): Promise<string> => f == 'none:///empty-file.md' ? content || '# empty file' : '# empty file'
+    });
+    let result = '';
+    autorest.AddConfiguration({ 'input-file': 'none:///empty-file.md', 'output-artifact': ['swagger-document'] });
+    autorest.GeneratedFile.Subscribe((source, artifact) => {
+      result = artifact.content;
+    });
+    // run autorest and wait.
+
+    await (await autorest.Process()).finish;
+    return result;
+  } catch (x) {
+    return '';
+  }
+}
+
+/**
+ * Checks to see if the document is a literate configuation document.
+ *
+ * @param content the document content to check
+ */
+export async function IsConfigurationDocument(content: string): Promise<boolean> {
+  // this checks to see if the document is an autorest markdown configuration document
+  return content.indexOf(Constants.MagicString) > -1;
 }
 
 /** Determines the document type based on the content of the document
@@ -212,41 +249,6 @@ export async function IdentifyDocument(content: string): Promise<DocumentType> {
   return DocumentType.Unknown;
 }
 
-/**
- * Processes a document (yaml, markdown or JSON) and returns the document as a JSON-encoded document text
- * @param content - the document content
- *
- * @returns the content as a JSON string (not a JSON DOM)
- */
-export async function LiterateToJson(content: string): Promise<string> {
-  try {
-    const autorest = new AutoRest({
-      async EnumerateFileUris(folderUri: string): Promise<Array<string>> { return []; },
-      ReadFile: async (f: string): Promise<string> => f == 'none:///empty-file.md' ? content || '# empty file' : '# empty file'
-    });
-    let result = '';
-    autorest.AddConfiguration({ 'input-file': 'none:///empty-file.md', 'output-artifact': ['swagger-document'] });
-    autorest.GeneratedFile.Subscribe((source, artifact) => {
-      result = artifact.content;
-    });
-    // run autorest and wait.
-
-    await (await autorest.Process()).finish;
-    return result;
-  } catch (x) {
-    return '';
-  }
-}
-
-/**
- * Checks to see if the document is a literate configuation document.
- *
- * @param content the document content to check
- */
-export async function IsConfigurationDocument(content: string): Promise<boolean> {
-  // this checks to see if the document is an autorest markdown configuration document
-  return content.indexOf(Constants.MagicString) > -1;
-}
 
 /**
   *  Given a document's content, does this represent a openapi document of some sort?

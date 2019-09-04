@@ -2,7 +2,7 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { parseJsonPointer } from '@azure-tools/datastore';
 import * as SchemaValidator from 'z-schema';
 import { OperationAbortedException } from '../exception';
@@ -17,7 +17,7 @@ export function createSwaggerSchemaValidatorPlugin(): PipelinePlugin {
   (<any>validator).setRemoteReference('https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json', require('./example-schema.json'));
   return createPerFilePlugin(async config => async (fileIn, sink) => {
     const obj = await fileIn.ReadObject<any>();
-    const errors = await new Promise<Array<{ code: string, params: Array<string>, message: string, path: string }> | null>(res => validator.validate(obj, extendedSwaggerSchema, (err, valid) => res(valid ? null : err)));
+    const errors = await new Promise<Array<{ code: string; params: Array<string>; message: string; path: string }> | null>(res => validator.validate(obj, extendedSwaggerSchema, (err, valid) => res(valid ? null : err)));
     if (errors !== null) {
       for (const error of errors) {
         config.Message({

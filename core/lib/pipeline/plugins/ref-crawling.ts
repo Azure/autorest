@@ -2,7 +2,7 @@ import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyOb
 import { ResolveUri } from '@azure-tools/uri';
 import { ConfigurationView } from '../../configuration';
 import { Channel } from '../../message';
-
+/* eslint-disable @typescript-eslint/no-use-before-define */
 export async function crawlReferences(config: ConfigurationView, inputScope: DataSource, filesToCrawl: Array<DataHandle>, sink: DataSink): Promise<Array<DataHandle>> {
   const result: Array<DataHandle> = [];
   let filesToExcludeInSearch: Array<string> = [];
@@ -16,7 +16,7 @@ export async function crawlReferences(config: ConfigurationView, inputScope: Dat
     result.push(await sink.WriteObject(currentSwagger.Description, await refProcessor.getOutput(), currentSwagger.identity, currentSwagger.artifactType, await refProcessor.getSourceMappings(), [currentSwagger]));
     filesToExcludeInSearch = [...new Set([...filesToExcludeInSearch, ...refProcessor.newFilesFound])];
     for (const fileUri of refProcessor.newFilesFound) {
-      config.Message({ Channel: Channel.Verbose, Text: `Reading $ref'd file ${fileUri}` })
+      config.Message({ Channel: Channel.Verbose, Text: `Reading $ref'd file ${fileUri}` });
       const originalSecondaryFile = await inputScope.ReadStrict(fileUri);
       const fileMarker = new SecondaryFileMarker(originalSecondaryFile);
       const fileMarkerOutput = await fileMarker.getOutput();

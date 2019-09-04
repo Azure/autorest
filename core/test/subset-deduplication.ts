@@ -1,4 +1,3 @@
-
 import * as aio from '@azure-tools/async-io';
 import * as datastore from '@azure-tools/datastore';
 import * as assert from 'assert';
@@ -72,7 +71,7 @@ const expandableFieldsList = ['properties', 'allOf'];
     const map = new Map<string, string>([[inputUri, input], [outputUri, output]]);
     const mfs = new datastore.MemoryFileSystem(map);
 
-    const cts: datastore.CancellationTokenSource = { cancel() { }, dispose() { }, token: { isCancellationRequested: false, onCancellationRequested: <any>null } };
+    const cts: datastore.CancellationTokenSource = { cancel() { /* unused */ }, dispose() { /* unused */ }, token: { isCancellationRequested: false, onCancellationRequested: <any>null } };
     const ds = new datastore.DataStore(cts.token);
     const scope = ds.GetReadThroughScope(mfs);
     const inputDataHandle = await scope.Read(inputUri);

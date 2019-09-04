@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSource, FastStringify, IFileSystem, JsonPath, QuickDataSource, safeEval, stringify, PipeState, mergePipeStates } from '@azure-tools/datastore';
+import { DataHandle, DataSource, IFileSystem, JsonPath, QuickDataSource, safeEval, stringify, PipeState, mergePipeStates } from '@azure-tools/datastore';
 import { ConfigurationView, getExtension } from '../configuration';
 import { Channel } from '../message';
 import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
@@ -14,7 +14,6 @@ import { AutoRestExtension } from './plugin-endpoint';
 import { createCommonmarkProcessorPlugin } from './plugins/commonmark';
 import { createComponentKeyRenamerPlugin } from './plugins/component-key-renamer';
 import { createComponentsCleanerPlugin } from './plugins/components-cleaner';
-import { createComposerPlugin } from './plugins/composer';
 import { createSwaggerToOpenApi3Plugin } from './plugins/conversion';
 import { createDeduplicatorPlugin } from './plugins/deduplicator';
 import { createArtifactEmitterPlugin } from './plugins/emitter';
@@ -48,7 +47,7 @@ interface PipelineNode {
   dependencies: Array<PipelineNode>;
 }
 
-function buildPipeline(config: ConfigurationView): { pipeline: { [name: string]: PipelineNode }, configs: { [jsonPath: string]: ConfigurationView } } {
+function buildPipeline(config: ConfigurationView): { pipeline: { [name: string]: PipelineNode }; configs: { [jsonPath: string]: ConfigurationView } } {
   const cfgPipeline = config.GetEntry(<any>'pipeline');
   const pipeline: { [name: string]: PipelineNode } = {};
   const configCache: { [jsonPath: string]: ConfigurationView } = {};
@@ -76,7 +75,7 @@ function buildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
   // One pipeline stage can generate multiple nodes in the pipeline graph
   // if the stage is associated with a configuration scope that has multiple entries.
   // Example: multiple generator calls
-  const createNodesAndSuffixes: (stageName: string) => { name: string, suffixes: Array<string> } = stageName => {
+  const createNodesAndSuffixes: (stageName: string) => { name: string; suffixes: Array<string> } = stageName => {
     const cfg = cfgPipeline[stageName];
     if (!cfg) {
       throw new Error(`Cannot find pipeline stage '${stageName}'.`);
@@ -101,7 +100,7 @@ function buildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
     // --> ("/1", ["a/1"], cfg of "a/1", [])
     //     --> adds node `${stageName}/1`
     // Note: inherits the config of the LAST input node (affects for example `.../generate`)
-    const addNodesAndSuffixes = (suffix: string, inputs: Array<string>, configScope: JsonPath, inputNodes: Array<{ name: string, suffixes: Array<string> }>) => {
+    const addNodesAndSuffixes = (suffix: string, inputs: Array<string>, configScope: JsonPath, inputNodes: Array<{ name: string; suffixes: Array<string> }>) => {
       if (inputNodes.length === 0) {
         const config = configCache[stringify(configScope)];
         const configs = scope ? [...config.GetNestedConfiguration(scope)] : [config];
@@ -164,6 +163,12 @@ function isDrainRequired(p: PipelineNode) {
 }
 
 export async function runPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
+
+  const fsInput = configView.DataStore.GetReadThroughScope(fileSystem);
+  const pipeline = buildPipeline(configView);
+  const times = !!configView['timestamp'];
+  const tasks: { [name: string]: Promise<DataSource> } = {};
+
   // built-in plugins
   const plugins: { [name: string]: PipelinePlugin } = {
     'help': createHelpPlugin(),
@@ -240,9 +245,6 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
 
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
 
-  const fsInput = configView.DataStore.GetReadThroughScope(fileSystem);
-  const pipeline = buildPipeline(configView);
-  const times = !!configView['timestamp'];
 
   const ScheduleNode: (nodeName: string) => Promise<DataSource> =
     async (nodeName) => {
@@ -253,6 +255,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
       }
 
       // get input
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       const inputScopes: Array<DataSource> = await Promise.all(node.inputs.map(getTask));
 
       let inputScope: DataSource;
@@ -263,7 +266,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
         case 1:
           inputScope = await inputScopes[0];
           break;
-        default:
+        default: {
           let pipeState: PipeState = {};
 
           const handles: Array<DataHandle> = [];
@@ -275,6 +278,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
             }
           }
           inputScope = new QuickDataSource(handles, pipeState);
+        }
           break;
 
       }
@@ -337,7 +341,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     };
 
   // schedule pipeline
-  const tasks: { [name: string]: Promise<DataSource> } = {};
+
   const getTask = (name: string) => name in tasks ?
     tasks[name] :
     tasks[name] = ScheduleNode(name);
@@ -388,7 +392,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
 
     const task = getTask(name);
 
-    const taskx: { _state: 'running' | 'failed' | 'complete'; _result(): Array<DataHandle>; _finishedAt: number } = task as any;
+    const taskx: { _state: 'running' | 'failed' | 'complete'; _result(): Array<DataHandle>; _finishedAt: number } = <any>task;
     taskx._state = 'running';
     task.then(async x => {
       const res = await Promise.all((await x.Enum()).map(key => x.ReadStrict(key)));

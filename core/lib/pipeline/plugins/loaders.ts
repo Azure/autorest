@@ -58,7 +58,7 @@ async function LoadLiterateSwaggerOverride(inputScope: DataSource, inputFileUri:
 
       // replace queries
       const candidProperties = ['name', 'operationId', '$ref'];
-      clue = clue.replace(/\.\#(.+?)\b/g, (_, match) => `..[?(${candidProperties.map(p => `(@[${JSON.stringify(p)}] && @[${JSON.stringify(p)}].indexOf(${JSON.stringify(match)}) !== -1)`).join(' || ')})]`);
+      clue = clue.replace(/\.#(.+?)\b/g, (_, match) => `..[?(${candidProperties.map(p => `(@[${JSON.stringify(p)}] && @[${JSON.stringify(p)}].indexOf(${JSON.stringify(match)}) !== -1)`).join(' || ')})]`);
 
       // target field
       const allowedTargetFields = ['description', 'summary'];
@@ -127,7 +127,7 @@ async function LoadLiterateOpenAPIOverride(inputScope: DataSource, inputFileUri:
 
       // replace queries
       const candidProperties = ['name', 'operationId', '$ref'];
-      clue = clue.replace(/\.\#(.+?)\b/g, (_, match) => `..[?(${candidProperties.map(p => `(@[${JSON.stringify(p)}] && @[${JSON.stringify(p)}].indexOf(${JSON.stringify(match)}) !== -1)`).join(' || ')})]`);
+      clue = clue.replace(/\.#(.+?)\b/g, (_, match) => `..[?(${candidProperties.map(p => `(@[${JSON.stringify(p)}] && @[${JSON.stringify(p)}].indexOf(${JSON.stringify(match)}) !== -1)`).join(' || ')})]`);
 
       // target field
       const allowedTargetFields = ['description', 'summary'];
@@ -153,6 +153,34 @@ async function LoadLiterateOpenAPIOverride(inputScope: DataSource, inputFileUri:
   return sink.WriteObject('override-directives', { directive: directives }, [inputFileUri], undefined, mappings, [commonmark]);
 }
 
+
+/**
+ * If a JSON file is provided, it checks that the syntax is correct.
+ * And if the syntax is incorrect, it puts an error message .
+ */
+async function checkSyntaxFromData(fileUri: string, handle: DataHandle, configView: ConfigurationView): Promise<void> {
+  if (fileUri.toLowerCase().endsWith('.json')) {
+    const error = StrictJsonSyntaxCheck(await handle.ReadData());
+    if (error) {
+      configView.Message({
+        Channel: Channel.Error,
+        Text: `Syntax Error Encountered:  ${error.message}`,
+        Source: [<SourceLocation>{ Position: IndexToPosition(handle, error.index), document: handle.key }],
+      });
+    }
+  }
+}
+
+/**
+ * Checks that the object has the property 'openapi' and that property has
+ * the string value matching something like "3.*.*".
+ */
+function isOpenAPI3Spec(specObject: OpenAPI3Spec): boolean {
+  const wasOpenApiVersionFound = /^3\.\d+\.\d+$/g.exec(<string>specObject.openapi);
+  return (wasOpenApiVersionFound) ? true : false;
+}
+
+
 export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle | null> {
   const handle = await inputScope.ReadStrict(inputFileUri);
   await checkSyntaxFromData(inputFileUri, handle, config);
@@ -162,7 +190,7 @@ export async function LoadLiterateSwagger(config: ConfigurationView, inputScope:
     return null;
     // TODO: Should we throw or send an error message?
   }
-  config.Message({ Channel: Channel.Verbose, Text: `Reading OpenAPI 2.0 file ${inputFileUri}` })
+  config.Message({ Channel: Channel.Verbose, Text: `Reading OpenAPI 2.0 file ${inputFileUri}` });
 
   const ast = CloneAst(await data.ReadYamlAst());
   const mapping = IdentitySourceMapping(data.key, ast);
@@ -178,7 +206,7 @@ export async function LoadLiterateOpenAPI(config: ConfigurationView, inputScope:
     return null;
     // TODO: Should we throw or send an error message?
   }
-  config.Message({ Channel: Channel.Verbose, Text: `Reading OpenAPI 3.0 file ${inputFileUri}` })
+  config.Message({ Channel: Channel.Verbose, Text: `Reading OpenAPI 3.0 file ${inputFileUri}` });
 
   const ast = CloneAst(await data.ReadYamlAst());
   const mapping = IdentitySourceMapping(data.key, ast);
@@ -229,32 +257,6 @@ export async function LoadLiterateOpenAPIOverrides(inputScope: DataSource, input
     rawOpenApis.push(pluginInput);
   }
   return rawOpenApis;
-}
-
-/**
- * If a JSON file is provided, it checks that the syntax is correct.
- * And if the syntax is incorrect, it puts an error message .
- */
-async function checkSyntaxFromData(fileUri: string, handle: DataHandle, configView: ConfigurationView): Promise<void> {
-  if (fileUri.toLowerCase().endsWith('.json')) {
-    const error = StrictJsonSyntaxCheck(await handle.ReadData());
-    if (error) {
-      configView.Message({
-        Channel: Channel.Error,
-        Text: `Syntax Error Encountered:  ${error.message}`,
-        Source: [<SourceLocation>{ Position: IndexToPosition(handle, error.index), document: handle.key }],
-      });
-    }
-  }
-}
-
-/**
- * Checks that the object has the property 'openapi' and that property has
- * the string value matching something like "3.*.*".
- */
-function isOpenAPI3Spec(specObject: OpenAPI3Spec): boolean {
-  const wasOpenApiVersionFound = /^3\.\d+\.\d+$/g.exec(<string>specObject.openapi);
-  return (wasOpenApiVersionFound) ? true : false;
 }
 
 interface OpenAPI3Spec {

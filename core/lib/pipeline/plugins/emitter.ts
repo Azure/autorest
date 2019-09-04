@@ -1,4 +1,3 @@
-
 import { DataHandle, DataSource, Lazy, Normalize, QuickDataSource, safeEval, Stringify, YAMLNode } from '@azure-tools/datastore';
 import { ResolveUri } from '@azure-tools/uri';
 import { Artifact } from '../../../exports';

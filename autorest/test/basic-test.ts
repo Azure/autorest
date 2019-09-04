@@ -1,5 +1,7 @@
-import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
+import { suite, test, slow, timeout, skip, only } from 'mocha-typescript';
 
 @suite class Hello {
-  @test "world"() { }
+  @test 'world'() {
+    // empty test
+  }
 }

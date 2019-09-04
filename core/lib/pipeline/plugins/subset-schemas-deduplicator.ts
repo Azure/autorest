@@ -6,15 +6,18 @@ import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 import { toSemver, maximum, gt, lt } from '@azure-tools/codegen';
 
+/* eslint-disable @typescript-eslint/no-use-before-define */
+
 export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
 
   public async process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {
     // initialize certain things ahead of time:
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
-        case 'components':
+        case 'components': {
           const components = <oai.Components>targetParent.components || this.newObject(targetParent, 'components', pointer);
           this.visitComponents(components, children);
+        }
           break;
 
         // copy these over without worrying about moving things down to components.

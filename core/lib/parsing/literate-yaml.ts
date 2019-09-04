@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -103,7 +104,7 @@ export function evaluateGuard(rawFenceGuard: string, contextObject: any): boolea
   }
 
   let guardResult = false;
-  let expressionFence: string = '';
+  let expressionFence = '';
   try {
     if (!fence.includes('$(')) {
       try {

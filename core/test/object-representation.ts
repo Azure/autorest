@@ -5,15 +5,15 @@
 
 import { ParseNode, ParseToAst, Stringify, StringifyAst, ToAst } from '@azure-tools/datastore';
 import { ConvertJsonx2Yaml, ConvertYaml2Jsonx } from '@azure-tools/datastore';
-import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
+import { suite, test, slow, timeout, skip, only } from 'mocha-typescript';
 import * as assert from 'assert';
 
 @suite class ObjectRepresentation {
 
-  @test async "round trip"() {
+  @test async 'round trip'() {
     const o: any = {};
     o.a = 3;
-    o.b = [1, "a"];
+    o.b = [1, 'a'];
     o.c = o;
     o.d = { x: [o] };
     o.e = o.d;

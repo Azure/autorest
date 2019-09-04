@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -22,6 +23,7 @@ import { Suppressor } from './pipeline/suppression';
 import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
 import { Initializer } from '@azure-tools/codegen';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const untildify: (path: string) => string = require('untildify');
 
 const RESOLVE_MACROS_AT_RUNTIME = true;
@@ -233,7 +235,7 @@ function ProxifyConfigurationView(cfgView: any) {
   });
 }
 
-const loadedExtensions: { [fullyQualified: string]: { extension: Extension, autorestExtension: LazyPromise<AutoRestExtension> } } = {};
+const loadedExtensions: { [fullyQualified: string]: { extension: Extension; autorestExtension: LazyPromise<AutoRestExtension> } } = {};
 /*@internal*/
 export async function getExtension(fullyQualified: string): Promise<AutoRestExtension> {
   return loadedExtensions[fullyQualified].autorestExtension;
@@ -245,7 +247,7 @@ export class ConfigurationView {
   private suppressor: Suppressor;
 
   /* @internal */ constructor(
-    /* @internal */public configurationFiles: { [key: string]: any; },
+    /* @internal */public configurationFiles: { [key: string]: any },
     /* @internal */public fileSystem: IFileSystem,
     /* @internal */public messageEmitter: MessageEmitter,
     /* @internal */public configFileFolderUri: string,
@@ -317,7 +319,7 @@ export class ConfigurationView {
     }
   }
 
-  public Dump(title: string = ''): void {
+  public Dump(title = ''): void {
     console.log(`\n${title}\n===================================`);
     for (const each of Object.getOwnPropertyNames(this.config)) {
       console.log(`${each} : ${(<any>this.config)[each]}`);
@@ -351,12 +353,12 @@ export class ConfigurationView {
   }
 
   private get BaseFolderUri(): string {
-    return EnsureIsFolderUri(ResolveUri(this.configFileFolderUri, this.config['base-folder'] as string));
+    return EnsureIsFolderUri(ResolveUri(this.configFileFolderUri, <string>this.config['base-folder']));
   }
 
   // public methods
 
-  public get UseExtensions(): Array<{ name: string, source: string, fullyQualified: string }> {
+  public get UseExtensions(): Array<{ name: string; source: string; fullyQualified: string }> {
     const useExtensions = this.Indexer['use-extension'] || {};
     return Object.keys(useExtensions).map(name => {
       const source = useExtensions[name];
@@ -434,12 +436,12 @@ export class ConfigurationView {
         return [dir]; // nothing to expand
       }
       // prepare directive
-      let parameters = (dir as any)[makro];
+      let parameters = (<any>dir)[makro];
       if (!Array.isArray(parameters)) {
         parameters = [parameters];
       }
       dir = { ...dir };
-      delete (dir as any)[makro];
+      delete (<any>dir)[makro];
       // call makro
       const makroResults: any = From(parameters).SelectMany(parameter => {
         const result = safeEval(declarations[makro], { $: parameter, $context: dir });
@@ -468,7 +470,7 @@ export class ConfigurationView {
   }
 
   public get OutputFolderUri(): string {
-    return this.ResolveAsFolder(this.config['output-folder'] as string);
+    return this.ResolveAsFolder(<string>this.config['output-folder']);
   }
 
   public IsOutputArtifactRequested(artifact: string): boolean {
@@ -482,7 +484,7 @@ export class ConfigurationView {
     if (key === 'resolved-directive') {
       return this.resolveDirectives();
     }
-    let result = this.config as any;
+    let result = <any>this.config;
     for (const keyPart of key.split('.')) {
       result = result[keyPart];
     }
@@ -518,7 +520,7 @@ export class ConfigurationView {
   }
 
   public * GetNestedConfiguration(pluginName: string): Iterable<ConfigurationView> {
-    for (const section of valuesOf<any>((this.config as any)[pluginName])) {
+    for (const section of valuesOf<any>((<any>this.config)[pluginName])) {
       if (section) {
         yield this.GetNestedConfigurationImmediate(section === true ? {} : section);
       }
@@ -561,7 +563,7 @@ export class ConfigurationView {
                 if (!shouldComplain) {
                   shouldComplain = true;
                 }
-                const path = s.Position.path as Array<string>;
+                const path = <Array<string>>s.Position.path;
                 if (path) {
                   if (path.length === 0) {
                     throw e;
@@ -603,8 +605,8 @@ export class ConfigurationView {
           if (source.Position) {
             try {
               source.document = this.DataStore.ReadStrictSync(source.document).Description;
-            } catch (e) {
-
+            } catch {
+              // no worries
             }
           }
         }
@@ -651,7 +653,7 @@ export class ConfigurationView {
           case 'yaml':
             mx.FormattedMessage = Stringify([mx.Details || mx]).replace(/^---/, '');
             break;
-          default:
+          default: {
             const t = mx.Channel === Channel.Debug || mx.Channel === Channel.Verbose ? ` [${Math.floor(process.uptime() * 100) / 100} s]` : '';
             let text = `${(mx.Channel || Channel.Information).toString().toUpperCase()}${mx.Key ? ` (${[...mx.Key].join('/')})` : ''}${t}: ${mx.Text}`;
             for (const source of mx.Source || []) {
@@ -674,6 +676,7 @@ export class ConfigurationView {
             }
             mx.FormattedMessage = text;
             break;
+          }
         }
         this.messageEmitter.Message.Dispatch(mx);
       }
@@ -733,7 +736,7 @@ export class Configuration {
     // this keeps --use parameters in the configuration so that we can check if someone tried pull it in (powershell needed this)
     configs['requesting-extensions'] = configs['requesting-extensions'] ? typeof configs['requesting-extensions'] === 'string' ? [configs['requesting-extensions']] : [...configs['requesting-extensions']] : [];
 
-    if (configs.hasOwnProperty('licence-header')) {
+    if (configs['licence-header']) {
       configs['license-header'] = configs['licence-header'];
       delete configs['licence-header'];
     }
@@ -788,7 +791,9 @@ export class Configuration {
           delete loadedExtensions[each];
         }
       }
-    } catch { }
+    } catch {
+      // no worries
+    }
   }
 
   public async CreateView(messageEmitter: MessageEmitter, includeDefault: boolean, ...configs: Array<any>): Promise<ConfigurationView> {
@@ -797,7 +802,7 @@ export class Configuration {
       : null;
     const configFileFolderUri = configFileUri ? ResolveUri(configFileUri, './') : (this.configFileOrFolderUri || 'file:///');
 
-    const configurationFiles: { [key: string]: any; } = {};
+    const configurationFiles: { [key: string]: any } = {};
     const configSegments: Array<any> = [];
     const secondPass: Array<any> = [];
 
@@ -913,7 +918,9 @@ export class Configuration {
               const fileProbe = '/package.json';
               localPath = require.resolve(additionalExtension.name + fileProbe); // have to resolve specific file - resolving a package by name will fail if no 'main' is present
               localPath = localPath.slice(0, localPath.length - fileProbe.length);
-            } catch (e) { }
+            } catch {
+              // no worries
+            }
 
 
             // trim off the '@org' and 'autorest.' from the name.
@@ -995,7 +1002,7 @@ export class Configuration {
             `extension-config-${additionalExtension.fullyQualified}`);
           // even though we load extensions after the default configuration, I want them to be able to 
           // trigger changes in the default configuration loading (ie, an extension can set a flag to use a different pipeline.)
-          viewsToHandle.push(createView(await addSegments(blocks.map(each => each['pipeline-model'] ? ({ ...each, "load-priority": 1000 }) : each))));
+          viewsToHandle.push(createView(await addSegments(blocks.map(each => each['pipeline-model'] ? ({ ...each, 'load-priority': 1000 }) : each))));
         } catch (e) {
           messageEmitter.Message.Dispatch({
             Channel: Channel.Fatal,
@@ -1029,14 +1036,14 @@ export class Configuration {
     }
     return createView().Indexer;
   }
-  public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders: boolean = false): Promise<string | null> {
+  public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders = false): Promise<string | null> {
     const files = await this.DetectConfigurationFiles(fileSystem, configFileOrFolderUri, messageEmitter, walkUpFolders);
 
     return From<string>(files).FirstOrDefault(each => each.toLowerCase().endsWith('/' + Constants.DefaultConfiguration)) ||
       From<string>(files).OrderBy(each => each.length).FirstOrDefault() || null;
   }
 
-  public static async DetectConfigurationFiles(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders: boolean = false): Promise<Array<string>> {
+  public static async DetectConfigurationFiles(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders = false): Promise<Array<string>> {
     const originalConfigFileOrFolderUri = configFileOrFolderUri;
 
     // null means null!

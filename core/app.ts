@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -24,10 +25,6 @@ if (!String.prototype.padEnd) {
 require('events').EventEmitter.defaultMaxListeners = 100;
 process.env['ELECTRON_RUN_AS_NODE'] = '1';
 delete process.env['ELECTRON_NO_ATTACH_CONSOLE'];
-
-process.on('exit', () => {
-  Shutdown();
-});
 
 const color: (text: string) => string = (<any>global).color ? (<any>global).color : p => p;
 
@@ -57,10 +54,6 @@ function awaitable(child: ChildProcess): Promise<number> {
   });
 }
 
-async function showHelp(): Promise<void> {
-  await currentMain(['--help']);
-}
-
 async function legacyMain(autorestArgs: Array<string>): Promise<number> {
   // generate virtual config file
   const currentDirUri = CreateFolderUri(currentDirectory());
@@ -84,8 +77,8 @@ async function legacyMain(autorestArgs: Array<string>): Promise<number> {
 
   // autorest init
   if (autorestArgs[0] === 'init') {
-    const clientNameGuess = (config['override-info'] || {}).title || Parse<any>(await ReadUri((config['input-file'] as any)[0])).info.title;
-    await autorestInit(clientNameGuess, Array.isArray(config['input-file']) ? config['input-file'] as any : []);
+    const clientNameGuess = (config['override-info'] || {}).title || Parse<any>(await ReadUri((<any>config['input-file'])[0])).info.title;
+    await autorestInit(clientNameGuess, Array.isArray(config['input-file']) ? <any>config['input-file'] : []);
     return 0;
   }
   // autorest init-min
@@ -123,7 +116,11 @@ ${Stringify(config).replace(/^---\n/, '')}
   const view = await api.view;
   let outstanding: Promise<void> = Promise.resolve();
   api.GeneratedFile.Subscribe((_: AutoRest, file: Artifact) => outstanding = outstanding.then(() => file.type === 'binary-file' ? WriteBinary(file.uri, file.content) : WriteString(file.uri, file.content)));
-  api.ClearFolder.Subscribe((_: AutoRest, folder: string) => outstanding = outstanding.then(async () => { try { await ClearFolder(folder); } catch (e) { } }));
+  api.ClearFolder.Subscribe((_: AutoRest, folder: string) => outstanding = outstanding.then(async () => {
+    try { await ClearFolder(folder); } catch  {
+      // no worries
+    }
+  }));
   subscribeMessages(api, () => { });
 
   // warn about `--` arguments
@@ -152,7 +149,7 @@ ${Stringify(config).replace(/^---\n/, '')}
  * Current AutoRest
  */
 
-interface CommandLineArgs { configFileOrFolder?: string; switches: Array<any>; rawSwitches: any; }
+interface CommandLineArgs { configFileOrFolder?: string; switches: Array<any>; rawSwitches: any }
 
 function parseArgs(autorestArgs: Array<string>): CommandLineArgs {
   const result: CommandLineArgs = {
@@ -226,12 +223,14 @@ function subscribeMessages(api: AutoRest, errorCounter: () => void) {
   });
 }
 
-async function autorestInit(title: string = 'API-NAME', inputs: Array<string> = ['LIST INPUT FILES HERE']) {
+async function autorestInit(title = 'API-NAME', inputs: Array<string> = ['LIST INPUT FILES HERE']) {
   const cwdUri = CreateFolderUri(currentDirectory());
   for (let i = 0; i < inputs.length; ++i) {
     try {
       inputs[i] = MakeRelativeUri(cwdUri, inputs[i]);
-    } catch (e) { }
+    } catch {
+      // no worries
+    }
   }
   console.log(`# ${title}
 > see https://aka.ms/autorest
@@ -282,10 +281,12 @@ let args: CommandLineArgs;
 let cleared = false;
 async function doClearFolders(protectFiles: Set<string>, clearFolders: Set<string>) {
   if (!cleared) {
-    timestampDebugLog("Clearing Folders.")
+    timestampDebugLog('Clearing Folders.');
     cleared = true;
     for (const folder of clearFolders) {
-      try { await ClearFolder(folder, [...protectFiles].map(each => ResolveUri(folder, each))) } catch { };
+      try { await ClearFolder(folder, [...protectFiles].map(each => ResolveUri(folder, each))); } catch {
+        // no worries
+      }
     }
   }
 }
@@ -320,11 +321,11 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
 
   if (args.rawSwitches['help']) {
     // if they are asking for help, feed a false file to config so we don't load a user's configuration 
-    args.configFileOrFolder = "invalid.filename.md";
+    args.configFileOrFolder = 'invalid.filename.md';
   }
 
   // get an instance of AutoRest and add the command line switches to the configuration.
-  const api = new AutoRest(new EnhancedFileSystem((MergeConfigurations(...args.switches) as any)['github-auth-token'] || process.env.GITHUB_AUTH_TOKEN), ResolveUri(currentDirUri, args.configFileOrFolder || '.'));
+  const api = new AutoRest(new EnhancedFileSystem((<any>MergeConfigurations(...args.switches))['github-auth-token'] || process.env.GITHUB_AUTH_TOKEN), ResolveUri(currentDirUri, args.configFileOrFolder || '.'));
   api.AddConfiguration(args.switches);
 
   // listen for output messages and file writes
@@ -333,7 +334,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   const clearFolders = new Set<string>();
   const protectFiles = new Set<string>();
   let fastMode = false;
-  let tasks = new Array<Promise<void>>();
+  const tasks = new Array<Promise<void>>();
 
   const config = (await api.view);
 
@@ -344,7 +345,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     }
 
     protectFiles.add(artifact.uri);
-    tasks.push((artifact.type === 'binary-file' ? WriteBinary(artifact.uri, artifact.content) : WriteString(artifact.uri, artifact.content)))
+    tasks.push((artifact.type === 'binary-file' ? WriteBinary(artifact.uri, artifact.content) : WriteString(artifact.uri, artifact.content)));
   });
   api.Message.Subscribe((_, message) => {
     if (message.Channel === Channel.Protect && message.Details) {
@@ -393,7 +394,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
       console.log('');
       for (const settingHelp of help.settings) {
         const keyPart = `--${settingHelp.key}`;
-        const typePart = settingHelp.type ? `=<${settingHelp.type}>` : ` `;// `[=<boolean>]`;
+        const typePart = settingHelp.type ? `=<${settingHelp.type}>` : ' ';// `[=<boolean>]`;
         const settingPart = `${keyPart}\`${typePart}\``;
         // if (!settingHelp.required) {
         //   settingPart = `[${settingPart}]`;
@@ -405,14 +406,14 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     // perform file system operations.
     await doClearFolders(protectFiles, clearFolders);
 
-    timestampDebugLog("Writing Outputs.")
+    timestampDebugLog('Writing Outputs.');
     await Promise.all(tasks);
 
     for (const artifact of artifacts) {
       await (artifact.type === 'binary-file' ? WriteBinary(artifact.uri, artifact.content) : WriteString(artifact.uri, artifact.content));
     }
   }
-  timestampLog("Generation Complete");
+  timestampLog('Generation Complete');
   // return the exit code to the caller.
   return exitcode;
 }
@@ -520,7 +521,7 @@ async function batch(api: AutoRest): Promise<void> {
   const config = await api.view;
   const batchTaskConfigReference: any = {};
   api.AddConfiguration(batchTaskConfigReference);
-  for (const batchTaskConfig of config.GetEntry('batch' as any)) {
+  for (const batchTaskConfig of config.GetEntry(<any>'batch')) {
     const isjson = (args.rawSwitches['message-format'] === 'json' || args.rawSwitches['message-format'] === 'yaml');
     if (!isjson) {
       outputMessage(api, {
@@ -549,7 +550,7 @@ async function batch(api: AutoRest): Promise<void> {
  */
 async function mainImpl(): Promise<number> {
   let autorestArgs: Array<string> = [];
-  const exitcode: number = 0;
+  const exitcode = 0;
 
   try {
     autorestArgs = process.argv.slice(2);
@@ -595,15 +596,25 @@ async function main() {
     exitcode = 102;
   } finally {
     try {
-      timestampDebugLog("Shutting Down.");
+      timestampDebugLog('Shutting Down.');
       await Shutdown();
     } catch  {
-      timestampDebugLog("Shutting Down: (trouble?)");
+      timestampDebugLog('Shutting Down: (trouble?)');
     } finally {
-      timestampDebugLog("Exiting.");
+      timestampDebugLog('Exiting.');
       process.exit(exitcode);
     }
   }
 }
 
 main();
+
+
+process.on('exit', () => {
+  Shutdown();
+});
+
+
+async function showHelp(): Promise<void> {
+  await currentMain(['--help']);
+}

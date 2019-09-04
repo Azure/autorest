@@ -2,6 +2,8 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable no-prototype-builtins */
 
 import { DataHandle, DataSink, IndexToPosition, JsonPath, Mapping, ResolvePath, stringify, Stringify, YAMLNode, Descendants, Parse } from '@azure-tools/datastore';
 import { pushAll } from '../array';
@@ -121,7 +123,7 @@ function toJsValue(value: any) {
 // but it works well enough for my needs right now
 // I will revisit it later.
 const macroRegEx = () => /\$\(([a-zA-Z0-9_-]*)\)/ig;
-export function resolveRValue(value: any, propertyName: string, higherPriority: any, lowerPriority: any, jsAware: number = 0): any {
+export function resolveRValue(value: any, propertyName: string, higherPriority: any, lowerPriority: any, jsAware = 0): any {
   if (value) {
     // resolves the actual macro value.
     const resolve = (macroExpression: string, macroKey: string) => {
@@ -194,13 +196,13 @@ export function MergeOverwriteOrAppend(higherPriority: any, lowerPriority: any, 
       return higherPriority;
     }
 
-    return [...new Set((higherPriority instanceof Array ? higherPriority : [higherPriority]).concat(lowerPriority))]
+    return [...new Set((higherPriority instanceof Array ? higherPriority : [higherPriority]).concat(lowerPriority))];
   }
 
   // object nodes - iterate all members
   const result: any = {};
 
-  let keys = [...new Set(Object.getOwnPropertyNames(higherPriority).concat(Object.getOwnPropertyNames(lowerPriority)))];
+  const keys = [...new Set(Object.getOwnPropertyNames(higherPriority).concat(Object.getOwnPropertyNames(lowerPriority)))];
   // keys = keys.filter((v, i) => { const idx = keys.indexOf(v); return idx === -1 || idx >= i; }); // distinct
 
   for (const key of keys) {
@@ -239,7 +241,7 @@ export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst:
   return result;
 }
 
-export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Array<DataHandle>, sink: DataSink, verifyOAI2: boolean = false): Promise<DataHandle> {
+export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Array<DataHandle>, sink: DataSink, verifyOAI2 = false): Promise<DataHandle> {
   let mergedGraph: any = {};
   const mappings = new Array<Mapping>();
   let cancel = false;
@@ -279,7 +281,7 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Ar
             config.Message({
               Channel: Channel.Error,
               Key: ['Fatal/DuplicateModelCollsion'],
-              Text: `Duplicated model name with non-identical definitions`,
+              Text: 'Duplicated model name with non-identical definitions',
               Source: [{ document: mergedHandle.key, Position: await ResolvePath(mergedHandle, ['definitions', model]) }]
 
             });
@@ -297,7 +299,7 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Ar
             config.Message({
               Channel: Channel.Error,
               Key: ['Fatal/DuplicateParameterCollision'],
-              Text: `Duplicated global non-identical parameter definitions`,
+              Text: 'Duplicated global non-identical parameter definitions',
               Source: [{ document: mergedHandle.key, Position: await ResolvePath(mergedHandle, ['parameters', parameter]) }]
             });
           }

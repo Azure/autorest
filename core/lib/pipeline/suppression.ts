@@ -39,7 +39,7 @@ export class Suppressor {
       // matches key
       if (From(m.Key || []).Any(k => From(sup.suppress).Any(s => k.toLowerCase() === s.toLowerCase()))) {
         // filter applicable sources
-        m.Source = m.Source.filter(s => !this.matchesSourceFilter(s.document, (s.Position as any).path, sup));
+        m.Source = m.Source.filter(s => !this.matchesSourceFilter(s.document, (<any>s.Position).path, sup));
       }
     }
 

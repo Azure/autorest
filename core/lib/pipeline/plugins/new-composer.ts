@@ -1,21 +1,17 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Transformer, Node, ProxyNode, ProxyObject, QuickDataSource, visit } from '@azure-tools/datastore';
-import { values, clone, Dictionary, keys } from '@azure-tools/linq';
-import { areSimilar } from "@azure-tools/object-comparison";
-import { ConfigurationView } from '../../configuration';
+import { AnyObject, DataSink, DataSource, Transformer, Node, ProxyObject, QuickDataSource, visit } from '@azure-tools/datastore';
+import { values, Dictionary } from '@azure-tools/linq';
+import { areSimilar } from '@azure-tools/object-comparison';
 import { PipelinePlugin } from '../common';
 import { maximum, toSemver } from '@azure-tools/codegen';
 import * as compareVersions from 'compare-versions';
+import { ConfigurationView } from '../../configuration';
 
 try {
   require('source-map-support').install();
 } catch {
-
+  // just for testing
 }
 
-function distinct<T>(list: Array<T>): Array<T> {
-  const sorted = list.slice().sort();
-  return sorted.filter((x, i) => i === 0 || x !== sorted[i - 1]);
-}
 
 /**
  * Prepares an OpenAPI document for the generation-2 code generators
@@ -141,7 +137,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
   }
 
   protected updateRefs(node: any) {
-    for (const { key, value } of visit(node)) {
+    for (const { value } of visit(node)) {
       if (value && typeof value === 'object') {
         const ref = value.$ref;
         if (ref) {
@@ -178,7 +174,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
   }
 
   protected visitPath(metadata: AnyObject, target: AnyObject, nodes: Iterable<Node>) {
-    for (const { key, value, pointer, children } of nodes) {
+    for (const { key, pointer, children } of nodes) {
       this.visitOperation(metadata, this.getOrCreateObject(target, key, pointer), children);
     }
   }
@@ -241,7 +237,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
 
   protected visitAndDerefObject(target: AnyObject, nodes: Iterable<Node>) {
     // for each parameter, we have to pull thru the $ref'd parameter
-    for (const { key, value, pointer, children } of nodes) {
+    for (const { key, value, pointer } of nodes) {
 
       if (value.$ref) {
         // look up the ref and clone it.
@@ -267,7 +263,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
   }
 
   protected visitResponses(responses: AnyObject, originalNodes: Iterable<Node>) {
-    for (const { key, value, pointer, children } of originalNodes) {
+    for (const { key, pointer, children } of originalNodes) {
       this.visitResponse(this.newObject(responses, key, pointer), children);
     }
   }
@@ -289,7 +285,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
   }
 
   protected inlineHeaders(target: AnyObject, originalNodes: Iterable<Node>) {
-    for (const { key, value, pointer, children } of originalNodes) {
+    for (const { key, value, pointer } of originalNodes) {
       // if the header is a $ref then we have to inline it.
       if (value.$ref) {
         const actualHeader = this.lookupRef(value.$ref);
@@ -310,7 +306,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
   }
 
   protected inlineHeaderCorrectly(target: AnyObject, originalNodes: Iterable<Node>) {
-    for (const { key, value, pointer, children } of originalNodes) {
+    for (const { key, value, pointer } of originalNodes) {
       if (value.$ref) {
         // it's specified as a reference
         this.clone(target, key, pointer, this.lookupRef(value.$ref));
@@ -333,7 +329,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
     }
   }
   protected inlineHeaderSchema(header: AnyObject, originalNodes: Iterable<Node>) {
-    for (const { key, value, pointer, children } of originalNodes) {
+    for (const { key, value, pointer } of originalNodes) {
       switch (key) {
         case 'schema':
           if (value.$ref) {
@@ -356,7 +352,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
     // the best behavior is to have the latest models.
     const sortedNodes = values(originalNodes)
       .linq.toArray()
-      .sort((a, b) => compareVersions(toSemver(maximum(b.value['x-ms-metadata'].apiVersions)), toSemver(maximum(a.value['x-ms-metadata'].apiVersions))))
+      .sort((a, b) => compareVersions(toSemver(maximum(b.value['x-ms-metadata'].apiVersions)), toSemver(maximum(a.value['x-ms-metadata'].apiVersions))));
     for (const { key, value, pointer } of sortedNodes) {
       // schemas have to keep their name
       const schemaName = (!value['type'] || value['type'] === 'object') ? value['x-ms-metadata'].name : key;
@@ -376,7 +372,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
   }
 
   protected visitParameter(parameter: ProxyObject<AnyObject>, originalNodes: Iterable<Node>) {
-    for (const { key, value, pointer, children } of originalNodes) {
+    for (const { key, value, pointer } of originalNodes) {
       switch (key) {
         case 'schema':
           if (value.$ref) {
@@ -459,7 +455,8 @@ async function compose(config: ConfigurationView, input: DataSource, sink: DataS
 
   // compose-a-vous!
   const composer = new NewComposer(inputs[0]);
-  return new QuickDataSource([await sink.WriteObject('composed oai3 doc...', await composer.getOutput(), [].concat.apply([], inputs.map(each => each.identity) as any), 'merged-oai3', await composer.getSourceMappings())], input.pipeState);
+  // eslint-disable-next-line prefer-spread
+  return new QuickDataSource([await sink.WriteObject('composed oai3 doc...', await composer.getOutput(), [].concat.apply([], <any>inputs.map(each => each.identity)), 'merged-oai3', await composer.getSourceMappings())], input.pipeState);
 }
 
 /* @internal */

@@ -12,9 +12,10 @@ export class ComponentKeyRenamer extends Transformer<any, oai.Model> {
     // initialize certain things ahead of time:
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
-        case 'components':
+        case 'components': {
           const components = <oai.Components>targetParent.components || this.newObject(targetParent, 'components', pointer);
           this.visitComponents(components, children);
+        }
           break;
 
         // copy these over without worrying about moving things down to components.

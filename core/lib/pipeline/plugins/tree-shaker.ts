@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Transformer, QuickDataSource, JsonPath, Source } from '@azure-tools/datastore';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
@@ -159,11 +160,11 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     // set the operationServers if they exist.
     servers.forEach(s => this.operationServers = s.value);
 
-    this.clone(targetParent, "servers", '/', this.servers);
+    this.clone(targetParent, 'servers', '/', this.servers);
 
     for (const { value, key, pointer, children } of theNodes) {
       switch (key) {
-        case 'parameters':
+        case 'parameters': {
           // parameters are a small special case, because they have to be tweaked when they are moved to the global parameter section.
           const newArray = this.newArray(targetParent, key, pointer);
           for (const child of children) {
@@ -173,16 +174,17 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
               p['x-ms-parameter-location'] = { value: 'method', pointer: '' };
             }
           }
+        }
           break;
 
         case 'requestbody':
-          this.dereference(`/components/requestBodies`, this.requestBodies, this.visitRequestBody, targetParent, key, pointer, value, children);
+          this.dereference('/components/requestBodies', this.requestBodies, this.visitRequestBody, targetParent, key, pointer, value, children);
           break;
         case 'responses':
-          this.dereferenceItems(`/components/responses`, this.responses, this.visitResponse, this.newObject(targetParent, key, pointer), children);
+          this.dereferenceItems('/components/responses', this.responses, this.visitResponse, this.newObject(targetParent, key, pointer), children);
           break;
         case 'callbacks':
-          this.dereferenceItems(`/components/callbacks`, this.callbacks, this.visitCallback, this.newObject(targetParent, key, pointer), children);
+          this.dereferenceItems('/components/callbacks', this.callbacks, this.visitCallback, this.newObject(targetParent, key, pointer), children);
           break;
         default:
           this.clone(targetParent, key, pointer, value);
@@ -206,7 +208,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
             this.clone(targetParent, key, pointer, value);
             break;
           }
-          this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
+          this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
           break;
         case 'content':
           this.visitContent(this.newObject(targetParent, key, pointer), children);
@@ -241,7 +243,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           // In AutoRest V2, AdditionalProperties are not dereferenced.
           if (!this.isSimpleTreeShake && typeof value === object) {
             // it should be a schema
-            this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
+            this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
           } else {
             // otherwise, just copy it across.
             this.clone(targetParent, key, pointer, value);
@@ -257,14 +259,14 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           } else {
             const polymorphicCollection = this.newArray(targetParent, key, pointer);
             for (const { value: itemVal, children: itemChildren, pointer: itemPointer, key: itemKey } of children) {
-              this.dereference(`/components/schemas`, this.schemas, this.visitSchema, polymorphicCollection, itemKey, itemPointer, itemVal, itemChildren);
+              this.dereference('/components/schemas', this.schemas, this.visitSchema, polymorphicCollection, itemKey, itemPointer, itemVal, itemChildren);
             }
           }
 
           break;
         case 'not':
         case 'items':
-          this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children, `${this.getNameHint(pointer)}Item`);
+          this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children, `${this.getNameHint(pointer)}Item`);
           break;
 
         // everything else, just copy recursively.
@@ -293,7 +295,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
         case 'schema':
-          this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
+          this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
           break;
 
         // everything else, just copy recursively.
@@ -309,7 +311,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
       this.clone(targetParent, key, pointer, value);
     } else {
       // object or string
-      this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children, nameHint);
+      this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children, nameHint);
     }
   }
 
@@ -352,7 +354,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
             this.clone(targetParent, key, pointer, value);
           } else {
             const nameHint = this.getNameHint(pointer);
-            this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children, nameHint);
+            this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children, nameHint);
           }
           break;
         case 'boolean':
@@ -368,12 +370,13 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           }
 
           break;
-        default:
+        default: {
           // inline objects had a name of '<Class><PropertyName>'
           // the dereference method will use the full path to build a name, and we should ask it to use the same thing that
           // we were using before..
           const nameHint = this.getNameHint(pointer);
-          this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children, nameHint);
+          this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children, nameHint);
+        }
           break;
       }
     }
@@ -476,7 +479,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
         case 'schema':
-          this.dereference(`/components/schemas`, this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
+          this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
           break;
         case 'content':
           this.visitContent(this.newObject(targetParent, key, pointer), children);

@@ -1,4 +1,3 @@
-
 import { RealFileSystem } from '@azure-tools/datastore';
 import { CreateFolderUri, ResolveUri } from '@azure-tools/uri';
 import * as assert from 'assert';
@@ -15,8 +14,8 @@ import { crawlReferences } from '../lib/pipeline/plugins/ref-crawling';
     const dataStore = config.DataStore;
     const sink = dataStore.getDataSink();
     const scope = dataStore.GetReadThroughScope(new RealFileSystem());
-    const file1DataHandle = await scope.ReadStrict(`https://raw.githubusercontent.com/Azure/autorest/b39cc11e2577662c97a47511a08665fa6e4d712d/src/autorest-core/test/resources/ref-crawling/original-files/input-file1.yaml`);
-    const file2DataHandle = await scope.ReadStrict(`https://raw.githubusercontent.com/Azure/autorest/b39cc11e2577662c97a47511a08665fa6e4d712d/src/autorest-core/test/resources/ref-crawling/original-files/input-file2.yaml`);
+    const file1DataHandle = await scope.ReadStrict('https://raw.githubusercontent.com/Azure/autorest/b39cc11e2577662c97a47511a08665fa6e4d712d/src/autorest-core/test/resources/ref-crawling/original-files/input-file1.yaml');
+    const file2DataHandle = await scope.ReadStrict('https://raw.githubusercontent.com/Azure/autorest/b39cc11e2577662c97a47511a08665fa6e4d712d/src/autorest-core/test/resources/ref-crawling/original-files/input-file2.yaml');
     const files = [file1DataHandle, file2DataHandle];
 
     const result = await crawlReferences(config, scope, files, sink);

@@ -99,7 +99,7 @@ export class DocumentAnalysis {
   /**
    * Retrieves all locations in the entire OpenAPI definition (and corresponding values) matching given JSON query.
    */
-  public * getDefinitionLocations(jsonQuery: string): Iterable<{ value: any, jsonPath: string }> {
+  public * getDefinitionLocations(jsonQuery: string): Iterable<{ value: any; jsonPath: string }> {
     for (const path of nodes(this.fullyResolvedAndMergedDefinition, jsonQuery)) {
       yield {
         value: path.value,

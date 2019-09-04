@@ -49,7 +49,7 @@ import { PipelinePlugin } from '../common';
  *
  */
 export class MultiAPIMerger extends Transformer<any, oai.Model> {
-  opCount: number = 0;
+  opCount = 0;
   cCount = new Dictionary<number>();
   refs = new Dictionary<string>();
 
@@ -87,9 +87,10 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
           }
           break;
 
-        case 'components':
+        case 'components': {
           const components = <oai.Components>target.components || this.newObject(target, 'components', pointer);
           this.visitComponents(components, children);
+        }
           break;
 
         case 'servers':
@@ -209,7 +210,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
       const titles = [...this.titles.values()];
 
       if (titles.length === 0) {
-        throw new Error(`No 'title' in provided OpenAPI definition(s).`);
+        throw new Error('No \'title\' in provided OpenAPI definition(s).');
       }
       if (titles.length > 1) {
         throw new Error(`The 'title' across provided OpenAPI definitions has to match. Found: ${titles.map(x => `'${x}'`).join(', ')}. Please adjust or provide an override (--title=...).`);
@@ -288,7 +289,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
           case 'options':
           case 'head':
           case 'patch':
-          case 'trace':
+          case 'trace': {
             const childOperation = this.newObject(paths, `${uid}.${child.key}`, pointer);
             childOperation['x-ms-metadata'] = clone(metadata);
             this.copy(childOperation, child.key, child.pointer, child.value);
@@ -308,8 +309,9 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
                 childOperation[child.key].parameters = clone(value.parameters);
               }
             }
+          }
             break;
-          case 'parameters':
+          // case 'parameters':
           // they are placed at the beginning of the array parameters per operation.
           default:
             // for now skipping until we support all OA3 features.
@@ -373,7 +375,8 @@ async function merge(config: ConfigurationView, input: DataSource, sink: DataSin
   const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry('description');
   const processor = new MultiAPIMerger(inputs, overrideTitle, overrideDescription);
 
-  return new QuickDataSource([await sink.WriteObject('merged oai3 doc...', await processor.getOutput(), [].concat.apply([], inputs.map(each => each.identity) as any), 'merged-oai3', await processor.getSourceMappings())], input.pipeState);
+  // eslint-disable-next-line prefer-spread
+  return new QuickDataSource([await sink.WriteObject('merged oai3 doc...', await processor.getOutput(), [].concat.apply([], <any>inputs.map(each => each.identity)), 'merged-oai3', await processor.getSourceMappings())], input.pipeState);
 }
 
 /* @internal */

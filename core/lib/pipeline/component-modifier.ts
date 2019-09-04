@@ -23,7 +23,7 @@ export function createComponentModifierPlugin(): PipelinePlugin {
   const noWireExtension = 'x-ms-no-wire';
 
   return createPerFilePlugin(async config => async (fileIn, sink) => {
-    const componentModifier = Clone((config.Raw as any).components);
+    const componentModifier = Clone((<any>config.Raw).components);
     if (componentModifier) {
       const o = await fileIn.ReadObject<any>();
 
@@ -65,7 +65,7 @@ export function createComponentModifierPlugin(): PipelinePlugin {
       const operationsSource = componentModifier.operations || [];
       const operationsTarget1 = o['paths'] = o['paths'] || {};
       const operationsTarget2 = o['x-ms-paths'] = o['x-ms-paths'] || {};
-      const getOperationWithId = (operationId: string): { get(): any, set(x: any): void } | null => {
+      const getOperationWithId = (operationId: string): { get(): any; set(x: any): void } | null => {
         for (const path of <any>[...Object.values(operationsTarget1), ...Object.values(operationsTarget2)]) {
           for (const method of Object.keys(path)) {
             if (path[method].operationId === operationId) {

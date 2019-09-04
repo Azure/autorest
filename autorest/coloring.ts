@@ -15,6 +15,7 @@ function compileStyledText(text: string): string {
 
   const commandRegex = /▌(.+?)▐/g;
   let i: RegExpExecArray;
+  // eslint-disable-next-line no-cond-assign
   while (i = commandRegex.exec(text)) {
     const startIndex = i.index;
     const length = i[0].length;

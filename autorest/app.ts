@@ -89,8 +89,8 @@ args['preview'] = args['preview'] || args['prerelease'];
 // Suppress the banner if the message-format is set to something other than regular.
 if ((!args['message-format']) || args['message-format'] === 'regular') {
   console.log(chalk.green.bold.underline(`AutoRest code generation utility [version: ${chalk.white.bold(pkgVersion)}; node: ${chalk.white.bold(process.version)}, max-memory: ${Math.round((require('v8').getHeapStatistics().heap_size_limit) / (1024 * 1024)) & 0xffffffff00} gb]`));
-  console.log(color(`(C) 2018 **Microsoft Corporation.**`));
-  console.log(chalk.blue.bold.underline(`https://aka.ms/autorest`));
+  console.log(color('(C) 2018 **Microsoft Corporation.**'));
+  console.log(chalk.blue.bold.underline('https://aka.ms/autorest'));
 }
 
 // argument tweakin'

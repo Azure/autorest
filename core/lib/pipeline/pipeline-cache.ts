@@ -1,8 +1,8 @@
-import { QuickDataSource, DataSource, DataHandle, DataSink } from "@azure-tools/datastore";
+import { QuickDataSource, DataSource, DataHandle, DataSink } from '@azure-tools/datastore';
 
 import { tmpdir } from 'os';
 import { join } from 'path';
-import { isDirectory, readdir, mkdir, writeFile, readFile } from "@azure-tools/async-io";
+import { isDirectory, readdir, mkdir, writeFile, readFile } from '@azure-tools/async-io';
 import { createHash } from 'crypto';
 
 const md5 = (content: any) => createHash('md5').update(JSON.stringify(content)).digest('hex');

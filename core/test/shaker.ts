@@ -15,7 +15,7 @@ import { FastStringify } from '@azure-tools/datastore';
 try {
   require('source-map-support').install();
 } catch {
-
+  /* unused */
 }
 
 const resources = `${__dirname}../../../test/resources/shaker`;
@@ -33,7 +33,7 @@ const resources = `${__dirname}../../../test/resources/shaker`;
     const map = new Map<string, string>([[inputUri, input], [outputUri, output]]);
     const mfs = new datastore.MemoryFileSystem(map);
 
-    const cts: datastore.CancellationTokenSource = { cancel() { }, dispose() { }, token: { isCancellationRequested: false, onCancellationRequested: <any>null } };
+    const cts: datastore.CancellationTokenSource = { cancel() {/* unused */ }, dispose() {/* unused */ }, token: { isCancellationRequested: false, onCancellationRequested: <any>null } };
     const ds = new datastore.DataStore(cts.token);
     const scope = ds.GetReadThroughScope(mfs);
     const inputDataHandle = await scope.Read(inputUri);

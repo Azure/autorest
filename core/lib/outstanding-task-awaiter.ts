@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { OutstandingTaskAlreadyCompletedException } from "./exception";
+import { OutstandingTaskAlreadyCompletedException } from './exception';
 
 
 export class OutstandingTaskAwaiter {
-  private locked: boolean = false;
-  private outstandingTasks: Promise<any>[] = [];
+  private locked = false;
+  private outstandingTasks: Array<Promise<any>> = [];
 
 
   public async Wait(): Promise<void> {

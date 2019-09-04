@@ -2,20 +2,20 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
-import * as assert from "assert";
+import { suite, test, slow, timeout, skip, only } from 'mocha-typescript';
+import * as assert from 'assert';
 
-import { NewEmptyObject } from "@azure-tools/datastore";
+import { NewEmptyObject } from '@azure-tools/datastore';
 
 @suite class StableObject {
-  @test async "insert order preservation"() {
+  @test async 'insert order preservation'() {
     const o = NewEmptyObject();
     o[3] = 0;
     o[1] = 1;
-    o["asd"] = 2;
+    o['asd'] = 2;
     o[2] = 3;
-    o["zyx"] = 4;
-    o["qwe"] = 5;
+    o['zyx'] = 4;
+    o['qwe'] = 5;
     o[-1] = 6;
     o[10] = 7;
     o[7] = 8;
@@ -26,24 +26,24 @@ import { NewEmptyObject } from "@azure-tools/datastore";
     }
   }
 
-  @test async "mutation order preservation"() {
+  @test async 'mutation order preservation'() {
     const o = NewEmptyObject();
-    o[8] = "a";
-    o[7] = "a";
-    o[6] = "a";
-    o[5] = "a";
-    o[4] = "a";
-    o[3] = "a";
-    o[2] = "a";
-    o[1] = "a";
-    o[0] = "a";
+    o[8] = 'a';
+    o[7] = 'a';
+    o[6] = 'a';
+    o[5] = 'a';
+    o[4] = 'a';
+    o[3] = 'a';
+    o[2] = 'a';
+    o[1] = 'a';
+    o[0] = 'a';
 
-    o[4] = "b";
-    o[3] = "b";
-    o[2] = "b";
-    o[6] = "b";
-    o[3] = "b";
-    o[8] = "b";
+    o[4] = 'b';
+    o[3] = 'b';
+    o[2] = 'b';
+    o[6] = 'b';
+    o[3] = 'b';
+    o[8] = 'b';
 
     const keys = Object.getOwnPropertyNames(o);
     assert.strictEqual(keys.length, 9);
@@ -52,24 +52,24 @@ import { NewEmptyObject } from "@azure-tools/datastore";
     }
   }
 
-  @test async "delete order preservation"() {
+  @test async 'delete order preservation'() {
     const o = NewEmptyObject();
     o[3] = 0;
     o[1] = 1;
-    o["asd"] = 2;
-    o["cowbell"] = "delete me";
+    o['asd'] = 2;
+    o['cowbell'] = 'delete me';
     o[2] = 3;
-    o["zyx"] = 4;
-    o["qwe"] = 5;
-    o[5] = "delete me";
+    o['zyx'] = 4;
+    o['qwe'] = 5;
+    o[5] = 'delete me';
     o[-1] = 6;
     o[10] = 7;
-    o["more"] = "delete me";
+    o['more'] = 'delete me';
     o[7] = 8;
 
     delete o[5];
-    delete o["more"];
-    delete o["cowbell"];
+    delete o['more'];
+    delete o['cowbell'];
 
     const keys = Object.getOwnPropertyNames(o);
     assert.strictEqual(keys.length, 9);

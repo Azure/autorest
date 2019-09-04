@@ -13,10 +13,10 @@ export async function manipulateObject(
   whereJsonQuery: string,
   transformer: (doc: any, obj: any, path: JsonPath) => any, // transforming to `undefined` results in removal
   mappingInfo?: {
-    transformerSourceHandle: DataHandle,
-    transformerSourcePosition: SmartPosition,
-    reason: string
-  }): Promise<{ anyHit: boolean, result: DataHandle }> {
+    transformerSourceHandle: DataHandle;
+    transformerSourcePosition: SmartPosition;
+    reason: string;
+  }): Promise<{ anyHit: boolean; result: DataHandle }> {
 
   if (whereJsonQuery === '$') {
     const data = await src.ReadData();
@@ -41,7 +41,7 @@ export async function manipulateObject(
   }
 
   // process
-  const mapping = IdentitySourceMapping(src.key, ast).filter(m => !hits.some(hit => IsPrefix(hit.path, (m.generated as any).path)));
+  const mapping = IdentitySourceMapping(src.key, ast).filter(m => !hits.some(hit => IsPrefix(hit.path, (<any>m.generated).path)));
   for (const hit of hits) {
     if (ast === undefined) {
       throw new Error('Cannot remove root node.');

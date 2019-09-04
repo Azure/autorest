@@ -1,38 +1,37 @@
+import { lookup } from 'dns';
+import { Extension, ExtensionManager } from '@azure-tools/extension';
+import { homedir } from 'os';
+import { dirname, join, resolve } from 'path';
 
-import { lookup } from "dns";
-import { Extension, ExtensionManager } from "@azure-tools/extension";
-import { homedir } from "os";
-import { dirname, join, resolve } from "path";
+import { Exception } from '@azure-tools/tasks';
 
-import { Exception } from "@azure-tools/tasks";
-
-import * as semver from "semver";
-import { isFile, mkdir, isDirectory } from "@azure-tools/async-io";
-import { mkdtempSync, rmdirSync } from "fs";
-import { tmpdir } from "os";
+import * as semver from 'semver';
+import { isFile, mkdir, isDirectory } from '@azure-tools/async-io';
+import { mkdtempSync, rmdirSync } from 'fs';
+import { tmpdir } from 'os';
 
 export const pkgVersion: string = require(`${__dirname}/../package.json`).version;
-process.env["autorest.home"] = process.env["autorest.home"] || homedir();
+process.env['autorest.home'] = process.env['autorest.home'] || homedir();
 
 try {
-  rmdirSync(mkdtempSync(join(process.env["autorest.home"], 'temp')));
+  rmdirSync(mkdtempSync(join(process.env['autorest.home'], 'temp')));
 } catch {
   // hmm. the home  directory isn't writable. let's fallback to $tmp
-  process.env["autorest.home"] = tmpdir();
+  process.env['autorest.home'] = tmpdir();
 }
 
-export const rootFolder = join(process.env["autorest.home"], ".autorest");
+export const rootFolder = join(process.env['autorest.home'], '.autorest');
 const args = (<any>global).__args || {};
 
 export const extensionManager: Promise<ExtensionManager> = ExtensionManager.Create(rootFolder);
-export const oldCorePackage = "@microsoft.azure/autorest-core";
-export const newCorePackage = "@autorest/core";
+export const oldCorePackage = '@microsoft.azure/autorest-core';
+export const newCorePackage = '@autorest/core';
 
-const basePkgVersion = pkgVersion.indexOf("-") > -1 ? pkgVersion.substring(0, pkgVersion.indexOf("-")) : pkgVersion;
+const basePkgVersion = pkgVersion.indexOf('-') > -1 ? pkgVersion.substring(0, pkgVersion.indexOf('-')) : pkgVersion;
 const versionRange = `^${basePkgVersion}`; // the version range of the core package required.
 
 export const networkEnabled: Promise<boolean> = new Promise<boolean>((r, j) => {
-  lookup("8.8.8.8", 4, (err, address, family) => {
+  lookup('8.8.8.8', 4, (err, address, family) => {
     r(err ? false : true);
   });
 });
@@ -53,17 +52,17 @@ export async function availableVersions() {
     }
 
   } else {
-    console.info(`Skipping getting available versions because network is not detected.`);
+    console.info('Skipping getting available versions because network is not detected.');
   }
   return [];
-};
+}
 
 
 export async function installedCores() {
   const extensions = await (await extensionManager).getInstalledExtensions();
   const result = (extensions.length > 0) ? extensions.filter(ext => (ext.name === newCorePackage || ext.name === oldCorePackage) && semver.satisfies(ext.version, versionRange)) : new Array<Extension>();
   return result.sort((a, b) => semver.compare(b.version, a.version));
-};
+}
 
 export function resolvePathForLocalVersion(requestedVersion: string | null): string | null {
   try {
@@ -71,11 +70,11 @@ export function resolvePathForLocalVersion(requestedVersion: string | null): str
     if (/^~[/|\\]/g.exec(requestedVersion)) {
       requestedVersion = join(homedir(), requestedVersion.substring(2));
     }
-    return requestedVersion ? resolve(requestedVersion) : dirname(require.resolve("@autorest/core/package.json"));
+    return requestedVersion ? resolve(requestedVersion) : dirname(require.resolve('@autorest/core/package.json'));
   } catch (e) {
     // fallback to old-core name
     try {
-      return dirname(require.resolve("@microsoft.azure/autorest-core/package.json"))
+      return dirname(require.resolve('@microsoft.azure/autorest-core/package.json'));
     } catch {
       // no dice
     }
@@ -83,22 +82,12 @@ export function resolvePathForLocalVersion(requestedVersion: string | null): str
   return null;
 }
 
-export async function tryRequire(localPath: string | null, entrypoint: string): Promise<any> {
-  try {
-    const ep = await resolveEntrypoint(localPath, entrypoint);
-    if (ep) {
-      return require(await resolveEntrypoint(localPath, entrypoint));
-    }
-  } catch (E) {
-    console.log(E);
-  }
-  return null;
-}
 
 export async function resolveEntrypoint(localPath: string | null, entrypoint: string): Promise<string | null> {
   try {
     // did they specify the package directory directly 
     if (await isDirectory(localPath)) {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       const pkg = require(`${localPath}/package.json`);
 
       if (args.debug) {
@@ -107,7 +96,7 @@ export async function resolveEntrypoint(localPath: string | null, entrypoint: st
 
       if (pkg.name === oldCorePackage || pkg.name === newCorePackage) {
         if (args.debug) {
-          console.log(`Looks like a core package.`);
+          console.log('Looks like a core package.');
         }
         switch (entrypoint) {
           case 'main':
@@ -118,14 +107,14 @@ export async function resolveEntrypoint(localPath: string | null, entrypoint: st
           case 'language-service':
           case 'language-service.js':
           case 'autorest-language-service':
-            entrypoint = pkg.bin["autorest-language-service"];
+            entrypoint = pkg.bin['autorest-language-service'];
             break;
 
           case 'autorest':
           case 'autorest-core':
           case 'app.js':
           case 'app':
-            entrypoint = pkg.bin["autorest-core"] || pkg.bin["core"];
+            entrypoint = pkg.bin['autorest-core'] || pkg.bin['core'];
             break;
 
           case 'module':
@@ -147,7 +136,21 @@ export async function resolveEntrypoint(localPath: string | null, entrypoint: st
         }
       }
     }
-  } catch (e) {
+  } catch {
+    // no worries
+  }
+  return null;
+}
+
+
+export async function tryRequire(localPath: string | null, entrypoint: string): Promise<any> {
+  try {
+    const ep = await resolveEntrypoint(localPath, entrypoint);
+    if (ep) {
+      return require(await resolveEntrypoint(localPath, entrypoint));
+    }
+  } catch (E) {
+    console.log(E);
   }
   return null;
 }
@@ -171,7 +174,7 @@ export async function selectVersion(requestedVersion: string, force: boolean, mi
       console.log(`The most recent installed version is ${currentVersion.version}`);
     }
 
-    if (requestedVersion === "latest-installed" || (requestedVersion === 'latest' && false == await networkEnabled)) {
+    if (requestedVersion === 'latest-installed' || (requestedVersion === 'latest' && false == await networkEnabled)) {
       if (args.debug) {
         console.log(`requesting current version '${currentVersion.version}'`);
       }

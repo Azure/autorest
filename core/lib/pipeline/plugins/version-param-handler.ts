@@ -24,14 +24,16 @@ export class ApiVersionParameterHandler extends Transformer<any, oai.Model> {
   public async process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
-        case 'components':
+        case 'components': {
           const components = <oai.Components>targetParent.components || this.newObject(targetParent, 'components', pointer);
           this.visitComponents(components, children);
+        }
           break;
 
-        case 'paths':
+        case 'paths': {
           const paths = <oai.PathItem>targetParent.paths || this.newObject(targetParent, 'paths', pointer);
           this.visitPaths(paths, children);
+        }
           break;
 
         default:
@@ -72,12 +74,14 @@ export class ApiVersionParameterHandler extends Transformer<any, oai.Model> {
           case 'options':
           case 'head':
           case 'patch':
-          case 'trace':
+          case 'trace': {
             const operation = this.newObject(path, key, pointer);
 
             for (const { value: v, key: k, pointer: p, children: c } of children) {
               switch (k) {
-                case 'parameters':
+                case 'parameters': {
+
+
                   const parameters: any = this.newArray(operation, k, p);
                   for (const { value: paramValue, pointer: paramPointer } of c) {
                     if (this.apiVersionReferences.has(paramValue.$ref) || paramValue.name === 'api-version') {
@@ -90,14 +94,16 @@ export class ApiVersionParameterHandler extends Transformer<any, oai.Model> {
                       });
                     }
                   }
+                }
                   break;
                 default:
                   this.copy(operation, k, p, v);
                   break;
               }
             }
+          }
             break;
-          case 'parameters':
+          case 'parameters': {
             const externalOperation: any = this.newArray(path, key, pointer);
             for (const { value: paramValue, pointer: paramPointer } of children) {
               if (this.apiVersionReferences.has(paramValue.$ref) || paramValue.name === 'api-version') {
@@ -110,6 +116,7 @@ export class ApiVersionParameterHandler extends Transformer<any, oai.Model> {
                 });
               }
             }
+          }
             break;
           case 'x-ms-metadata':
             // defer metadata processing until we know the final value of hasApiVersion.

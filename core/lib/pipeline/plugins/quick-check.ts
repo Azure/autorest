@@ -1,5 +1,5 @@
 import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Processor, QuickDataSource } from '@azure-tools/datastore';
-import { items } from '@azure-tools/linq'
+import { items } from '@azure-tools/linq';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 import { format } from 'path';
@@ -9,8 +9,8 @@ async function quickCheck(config: ConfigurationView, input: DataSource, sink: Da
   for (const each of inputs) {
     const oai = await each.ReadObject<AnyObject>();
 
-    const models = new Map<string, string[]>();
-    const enums = new Map<string, string[]>();
+    const models = new Map<string, Array<string>>();
+    const enums = new Map<string, Array<string>>();
     // check to see if there are models with the same name
     for (const { key, value } of items(oai.components.schemas)) {
       const schema = <AnyObject>value;
@@ -32,7 +32,7 @@ async function quickCheck(config: ConfigurationView, input: DataSource, sink: Da
         (models.get(name) || []).push(key);
       }
     }
-    let failed = false
+    let failed = false;
     for (const { key, value } of items(models)) {
       if (value.length > 1) {
         //failed = true;
@@ -47,10 +47,9 @@ async function quickCheck(config: ConfigurationView, input: DataSource, sink: Da
       }
     }
     if (failed) {
-      throw new Error("Detected Collisions.");
+      throw new Error('Detected Collisions.');
     }
   }
-
 
 
   const result: Array<DataHandle> = [];

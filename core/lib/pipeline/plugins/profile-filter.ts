@@ -2,6 +2,9 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable no-useless-escape */
+
 
 import { maximum, serialize } from '@azure-tools/codegen';
 import { AnyObject, DataHandle, DataSink, DataSource, Node, ProxyObject, QuickDataSource, Transformer, visit, ConvertJsonx2Yaml } from '@azure-tools/datastore';
@@ -67,7 +70,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   private components: any;
   private profilesApiVersions: Array<string> = [];
   private apiVersions: Array<string> = [];
-  private maxApiVersion: string = '';
+  private maxApiVersion = '';
   private profilesReferenced = new Set<string>();
 
   constructor(input: DataHandle, private profiles: any, private profilesToUse: Array<string>, apiVersions: Array<string>) {
@@ -117,7 +120,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
       for (const target of operationTargets) {
         const apiVersion = target.apiVersion;
         const profile = target.profile;
-        const pathRegex = new RegExp(`^${target.path.replace(/[\[\$\.\?\(\)]/g, '\\$&')}$`, `gi`);
+        const pathRegex = new RegExp(`^${target.path.replace(/[\[\$\.\?\(\)]/g, '\\$&')}$`, 'gi');
         this.filterTargets.push({ apiVersion, profile, pathRegex, weight: 0 });
       }
 
@@ -148,7 +151,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
               break;
             case 'not':
               if (fieldValue.$ref) {
-                const schemaUid = fieldValue.$ref.split('/')[fieldValue.$ref.split('/').length - 1]
+                const schemaUid = fieldValue.$ref.split('/')[fieldValue.$ref.split('/').length - 1];
                 if (this.polymorphicReferences[schemaUid] === undefined) {
                   this.polymorphicReferences[schemaUid] = new Set<string>();
                 }
@@ -210,12 +213,15 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   public async process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
-        case 'info':
+        case 'info': {
           const info = <oai.Info>targetParent.info || this.newObject(targetParent, 'info', pointer);
           this.visitInfo(info, children);
-        case 'components':
+          break;
+        }
+        case 'components': {
           const components = <oai.Components>targetParent.components || this.newObject(targetParent, 'components', pointer);
           this.visitComponents(components, children);
+        }
           break;
 
         case 'paths':
@@ -271,7 +277,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
     });
 
     // map of '${profileName}:${value[x-ms-metadata].path}' -> '${path:uid} (no method included, like path:0.get, path:0.put, etc)'
-    const uniquePathPerProfile = new Dictionary<String>();
+    const uniquePathPerProfile = new Dictionary<string>();
 
     // filter paths 
     for (const { value, key: pathKey, pointer, children } of nodes) {
@@ -291,7 +297,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
           }
 
           if (path.match(each.pathRegex) && originalApiVersions.includes(each.apiVersion) && uniquePathPerProfile[id] === keyWithNoMethod) {
-            uniquePathPerProfile
+            uniquePathPerProfile;
             match = true;
             this.profilesReferenced.add(each.profile);
             profiles[each.profile] = each.apiVersion;

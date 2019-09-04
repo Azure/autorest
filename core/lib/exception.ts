@@ -13,7 +13,7 @@ export class Exception extends Error {
 }
 
 export class OperationCanceledException extends Exception {
-  constructor(message: string = "Cancelation Requested", public exitCode: number = 1) {
+  constructor(message = 'Cancelation Requested', public exitCode: number = 1) {
     super(`[OperationCanceledException] ${message}`, exitCode);
     Object.setPrototypeOf(this, OperationCanceledException.prototype);
   }
@@ -21,14 +21,14 @@ export class OperationCanceledException extends Exception {
 
 export class OutstandingTaskAlreadyCompletedException extends Exception {
   constructor() {
-    super("[OutstandingTaskAlreadyCompletedException] The OutstandingTaskAwaiter is already completed, may not Enter() again.", 1);
+    super('[OutstandingTaskAlreadyCompletedException] The OutstandingTaskAwaiter is already completed, may not Enter() again.', 1);
     Object.setPrototypeOf(this, OutstandingTaskAlreadyCompletedException.prototype);
   }
 }
 
 export class OperationAbortedException extends Exception {
   constructor() {
-    super("[OperationAbortedException] Error occurred. Exiting.", 1);
+    super('[OperationAbortedException] Error occurred. Exiting.', 1);
     Object.setPrototypeOf(this, OperationAbortedException.prototype);
   }
 }

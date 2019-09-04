@@ -72,7 +72,7 @@ export function createGraphTransformerPlugin(): PipelinePlugin {
       }
     }
     return new QuickDataSource(result, input.pipeState);
-  }
+  };
 }
 
 /* @internal */
@@ -121,7 +121,7 @@ export function createTextTransformerPlugin(): PipelinePlugin {
                 $path: [],
                 $documentPath: inputHandle.key,
                 $lib
-              })
+              });
               if (output !== contents) {
                 modified = true;
                 contents = output;
@@ -131,16 +131,15 @@ export function createTextTransformerPlugin(): PipelinePlugin {
         }
 
         if (modified) {
-          result.push(await sink.WriteData(inputHandle.Description, contents || '', inputHandle.identity, inputHandle.artifactType))
+          result.push(await sink.WriteData(inputHandle.Description, contents || '', inputHandle.identity, inputHandle.artifactType));
         } else {
           result.push(await sink.Forward(inputHandle.Description, inputHandle));
         }
       }
     }
     return new QuickDataSource(result, input.pipeState);
-  }
-};
-
+  };
+}
 
 
 /* @internal */

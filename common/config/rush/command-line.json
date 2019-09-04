@@ -21,6 +21,18 @@
       "name": "reset-version",
       "summary": "reset the version in the package.json files to .0",
       "enableParallelism": true
+    },
+    {
+      "commandKind": "global",
+      "name": "fix",
+      "summary": "run all npm fix",
+      "shellCommand": "node common/scripts/fix.js"
+    },
+    {
+      "commandKind": "global",
+      "name": "lint",
+      "summary": "run all npm eslint",
+      "shellCommand": "node common/scripts/eslint.js"
     }
     // {
     //   /**

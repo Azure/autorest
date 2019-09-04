@@ -14,7 +14,7 @@ import { FastStringify } from '@azure-tools/datastore';
 try {
   require('source-map-support').install();
 } catch {
-
+  /* unused */
 }
 const resources = `${__dirname}../../../test/resources/merger`;
 
@@ -36,7 +36,7 @@ const resources = `${__dirname}../../../test/resources/merger`;
     const mfs = new datastore.MemoryFileSystem(map);
     const mfs2 = new datastore.MemoryFileSystem(map2);
 
-    const cts: datastore.CancellationTokenSource = { cancel() { }, dispose() { }, token: { isCancellationRequested: false, onCancellationRequested: <any>null } };
+    const cts: datastore.CancellationTokenSource = { cancel() {/* unused */ }, dispose() {/* unused */ }, token: { isCancellationRequested: false, onCancellationRequested: <any>null } };
     const ds = new datastore.DataStore(cts.token);
     const scope = ds.GetReadThroughScope(mfs);
     const scope2 = ds.GetReadThroughScope(mfs2);
@@ -59,13 +59,12 @@ const resources = `${__dirname}../../../test/resources/merger`;
       const data = await sink.WriteObject('merged oai3 doc...', await processor.getOutput(), inputDataHandle.identity, 'merged-oai3', await processor.getSourceMappings(), [inputDataHandle, inputDataHandle2]);
 
 
-
       // testing: dump out the converted file
       // console.log(FastStringify(processor.output));
       // console.log(JSON.stringify(data.ReadMetadata.sourceMap.Value));
 
-      await aio.writeFile("c:/tmp/input.yaml", input);
-      await aio.writeFile("c:/tmp/output.yaml", FastStringify(await processor.getOutput()));
+      await aio.writeFile('c:/tmp/input.yaml', input);
+      await aio.writeFile('c:/tmp/output.yaml', FastStringify(await processor.getOutput()));
       // await aio.writeFile("c:/tmp/output.yaml.map", JSON.stringify(await data.metadata.sourceMap));
 
 

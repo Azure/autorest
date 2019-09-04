@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -6,8 +7,8 @@
 import { DataHandle, DataSink, Mapping } from '@azure-tools/datastore';
 import * as commonmark from 'commonmark';
 
-export async function parse(hConfigFile: DataHandle, sink: DataSink): Promise<Array<{ data: DataHandle, codeBlock: commonmark.Node }>> {
-  const result: Array<{ data: DataHandle, codeBlock: commonmark.Node }> = [];
+export async function parse(hConfigFile: DataHandle, sink: DataSink): Promise<Array<{ data: DataHandle; codeBlock: commonmark.Node }>> {
+  const result: Array<{ data: DataHandle; codeBlock: commonmark.Node }> = [];
   const rawMarkdown = await hConfigFile.ReadData();
   for (const codeBlock of parseCodeblocks(rawMarkdown)) {
     const codeBlockKey = `codeBlock_${codeBlock.sourcepos[0][0]}`;

@@ -6,8 +6,8 @@ import * as compareVersions from 'compare-versions';
 import { toSemver, maximum } from '@azure-tools/codegen';
 
 export class EnumDeduplicator extends TransformerViaPointer {
-  protected refs = new Map<string, Array<{ target: AnyObject, pointer: string }>>();
-  protected enums = new Map<string, Array<{ target: AnyObject, value: AnyObject, key: string, pointer: string, originalNodes: Iterable<Node> }>>();
+  protected refs = new Map<string, Array<{ target: AnyObject; pointer: string }>>();
+  protected enums = new Map<string, Array<{ target: AnyObject; value: AnyObject; key: string; pointer: string; originalNodes: Iterable<Node> }>>();
   async visitLeaf(target: AnyObject, value: AnyObject, key: string, pointer: string, originalNodes: Iterable<Node>) {
     if (value) {
       if (pointer.startsWith('/components/schemas/') && value.enum) {
@@ -26,7 +26,7 @@ export class EnumDeduplicator extends TransformerViaPointer {
       if (key === '$ref') {
         const ref = value.toString();
         // let's hold onto the $ref object until we're done.
-        const r = this.refs.get(ref) || this.refs.set(ref, []).get(ref) || []
+        const r = this.refs.get(ref) || this.refs.set(ref, []).get(ref) || [];
         r.push({ target, pointer });
         return true;
       }

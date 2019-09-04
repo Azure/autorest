@@ -37,7 +37,7 @@ export class SourceMap {
    * @param line    Line in the source file having influenced the generated file.
    * @param column  Column in the source file having influenced the generated file.
    */
-  public LookupForward(file: string, line: number, column: number): Array<{ line: number, column: number, path: JsonPath | null }> {
+  public LookupForward(file: string, line: number, column: number): Array<{ line: number; column: number; path: JsonPath | null }> {
     const sameLineResults: Array<sourceMap.MappingItem> = [];
     this.consumer.eachMapping(mi => {
       if (((mi.source === file) || (decodeURIComponent(mi.source) === decodeURIComponent(file))) && mi.originalLine === line && mi.originalColumn <= column) {
@@ -55,7 +55,7 @@ export class SourceMap {
    * @param line    Line in the generated file having influenced the generated file.
    * @param column  Column in the generated file having influenced the generated file.
    */
-  public LookupBackwards(line: number, column: number): Array<{ file: string, line: number, column: number, path: JsonPath | null }> {
+  public LookupBackwards(line: number, column: number): Array<{ file: string; line: number; column: number; path: JsonPath | null }> {
     const sameLineResults: Array<sourceMap.MappingItem> = [];
     this.consumer.eachMapping(mi => {
       if (mi.generatedLine === line && mi.generatedColumn <= column) {

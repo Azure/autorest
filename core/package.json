@@ -32,6 +32,8 @@
     "reset-version": "node -e \"let pkg = require('./package.json'); const v = pkg.version.split('.'); v[v.length-1] = 0; const orig=JSON.stringify(pkg,null,2);  pkg.version = v.join('.'); const delta = JSON.stringify(pkg,null,2 ); if( orig !== delta) require('fs').writeFileSync('./package.json',delta)\"",
     "build": "npm run before-build && tsc -p .",
     "static-link": "static-link --no-node-modules",
+    "eslint-fix": "eslint  . --fix --ext .ts",
+    "eslint": "eslint  . --ext .ts",
     "prepare": "node ./.scripts/post-install --force --no-node-modules",
     "prepack": "static-link && npm run build",
     "run-pwsh": "pwsh -noprofile -command \"& {param($script) pwsh -noprofile -command ((convertfrom-json (get-content -raw ./package.json)).'pwsh-scripts'.$script) }\"",
