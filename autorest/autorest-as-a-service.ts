@@ -1,5 +1,5 @@
 import { lookup } from 'dns';
-import { Extension, ExtensionManager } from '@azure-tools/extension';
+import { Extension, ExtensionManager, Package } from '@azure-tools/extension';
 import { homedir } from 'os';
 import { dirname, join, resolve } from 'path';
 
@@ -218,17 +218,26 @@ export async function selectVersion(requestedVersion: string, force: boolean, mi
     }
     let corePackageName = newCorePackage;
 
-    let pkg = await (await extensionManager).findPackage(newCorePackage, requestedVersion);
+    let pkg: Package;
+    try {
+      // try the package 
+      pkg = await (await extensionManager).findPackage(newCorePackage, requestedVersion);
+    } catch {
+      // fallback to old package name
+      try {
+        pkg = await (await extensionManager).findPackage(oldCorePackage, requestedVersion);
+      } catch {
+        // no package found!
+      }
+      if (!pkg) {
+        throw new Exception(`Unable to find a valid AutoRest core package '${newCorePackage}' @ '${requestedVersion}'.`);
+      }
+      corePackageName = oldCorePackage;
+    }
     if (pkg) {
       if (args.debug) {
         console.log(`Selected package: ${pkg.name}@${pkg.version} => ${pkg.resolvedInfo.rawSpec} `);
       }
-    } else {
-      pkg = await (await extensionManager).findPackage(oldCorePackage, requestedVersion);
-      if (!pkg) {
-        throw new Exception(`Unable to find a valid AutoRest core package for '${requestedVersion}'.`);
-      }
-      corePackageName = oldCorePackage;
     }
 
     // pkg.version == the actual version 
