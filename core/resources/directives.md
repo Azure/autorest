@@ -102,7 +102,7 @@ declare-directive:
           return {from: "code-model-v3", where: `$.schemas[?(/${$}/i.exec(@.details.default.name))]`};
 
         case "openapi-document":
-          return { from: "openapi-document", where: `$.definitions[${JSON.stringify($)}]` };
+          return { from: "openapi-document", where: `$.schemas[${JSON.stringify($)}]` };
 
         case "swagger-document":
         default:

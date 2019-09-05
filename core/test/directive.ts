@@ -8,7 +8,8 @@ import { Message, Channel } from '../lib/message';
 
 @suite class Directive {
 
-  @test async 'suppression'() {
+  // todo: azure-validator doesn't work on v3.
+  @test @skip async 'suppression'() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), '../../test/resources/literate-example/'));
     autoRest.Message.Subscribe((_, m) => m.Channel === Channel.Fatal ? console.error(m.Text) : '');
 

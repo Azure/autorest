@@ -20,7 +20,8 @@ const resources = `${__dirname}../../../test/resources/merger`;
 
 @suite class TestShaker {
 
-  @test async 'Test Merger'() {
+  // todo: not testing now.
+  @test @skip async 'Test Merger'() {
 
     const inputUri = 'mem://input.yaml';
     const inputUri2 = 'mem://input2.yaml';

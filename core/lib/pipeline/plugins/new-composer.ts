@@ -96,9 +96,11 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
   public async process(target: ProxyObject<AnyObject>, nodes: Iterable<Node>) {
     const metadata = this.current.info ? this.current.info['x-ms-metadata'] : {};
     this.uniqueVersion = metadata.apiVersions.length > 1 ? false : true;
-    for (const { value, key } of visit(this.current.components.parameters)) {
-      if (value.name === 'api-version') {
-        this.apiVersionParamReferences.add(`#/components/parameters/${key}`);
+    if (this.current.components) {
+      for (const { value, key } of visit(this.current.components.parameters)) {
+        if (value.name === 'api-version') {
+          this.apiVersionParamReferences.add(`#/components/parameters/${key}`);
+        }
       }
     }
 
