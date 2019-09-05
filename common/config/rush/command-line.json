@@ -24,15 +24,39 @@
     },
     {
       "commandKind": "global",
+      "name": "sync-versions",
+      "summary": "sync versions of sibling projects",
+      "shellCommand": "node .scripts/sync-versions.js"
+    },
+    {
+      "commandKind": "global",
+      "name": "watch",
+      "summary": "run npm watch on all projects",
+      "shellCommand": "node .scripts/watch.js"
+    },
+    {
+      "commandKind": "global",
+      "name": "clean",
+      "summary": "run npm clean on all projects",
+      "shellCommand": "node .scripts/npm-run.js clean"
+    },
+    {
+      "commandKind": "global",
+      "name": "test",
+      "summary": "run all npm test",
+      "shellCommand": "node .scripts/npm-run.js test"
+    },
+    {
+      "commandKind": "global",
       "name": "fix",
       "summary": "run all npm fix",
-      "shellCommand": "node common/scripts/fix.js"
+      "shellCommand": "node .scripts/npm-run.js eslint-fix"
     },
     {
       "commandKind": "global",
       "name": "lint",
-      "summary": "run all npm eslint",
-      "shellCommand": "node common/scripts/eslint.js"
+      "summary": "run all npm lint",
+      "shellCommand": "node .scripts/npm-run.js eslint"
     }
     // {
     //   /**
@@ -82,31 +106,6 @@
     //    */
     //   "ignoreMissingScript": false
     // },
-    ,
-    {
-      "commandKind": "global",
-      "name": "sync-versions",
-      "summary": "sync versions of sibling projects",
-      "shellCommand": "node common/scripts/sync-versions.js"
-    },
-    {
-      "commandKind": "global",
-      "name": "watch",
-      "summary": "run npm watch on all projects",
-      "shellCommand": "node common/scripts/watch.js"
-    },
-    {
-      "commandKind": "global",
-      "name": "clean",
-      "summary": "run npm clean on all projects",
-      "shellCommand": "node common/scripts/clean.js"
-    },
-    {
-      "commandKind": "global",
-      "name": "test",
-      "summary": "run all npm test",
-      "shellCommand": "node common/scripts/test.js"
-    }
     //
     // {
     //   /**
@@ -124,7 +123,7 @@
     //    * that contains rush.json.  If custom parameters are associated with this command, their
     //    * values will be appended to the end of this string.
     //    */
-    //   "shellCommand": "node common/scripts/my-global-command.js"
+    //   "shellCommand": "node .scripts/my-global-command.js"
     // }
   ],
   /**

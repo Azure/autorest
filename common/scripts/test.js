@@ -1,1 +1,0 @@
-require('./for-each').npm('test');

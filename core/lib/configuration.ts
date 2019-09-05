@@ -733,9 +733,6 @@ export class Configuration {
     configs = { ...configs };
     configs['use-extension'] = { ...configs['use-extension'] };
 
-    // this keeps --use parameters in the configuration so that we can check if someone tried pull it in (powershell needed this)
-    configs['requesting-extensions'] = configs['requesting-extensions'] ? typeof configs['requesting-extensions'] === 'string' ? [configs['requesting-extensions']] : [...configs['requesting-extensions']] : [];
-
     if (configs['licence-header']) {
       configs['license-header'] = configs['licence-header'];
       delete configs['licence-header'];
@@ -747,7 +744,6 @@ export class Configuration {
       use = [use];
     }
     if (Array.isArray(use)) {
-      configs['requesting-extensions'].push(...use);
       const extMgr = await Configuration.extensionManager;
       for (const useEntry of use) {
         if (typeof useEntry === 'string') {
@@ -894,126 +890,136 @@ export class Configuration {
     // 5. resolve extensions
     const extMgr = await Configuration.extensionManager;
     const addedExtensions = new Set<string>();
-    const viewsToHandle: Array<ConfigurationView> = [createView()];
-    while (viewsToHandle.length > 0) {
-      const tmpView = <ConfigurationView>viewsToHandle.pop();
-      const additionalExtensions = tmpView.UseExtensions.filter(ext => !addedExtensions.has(ext.fullyQualified));
-      await addSegments([{ 'used-extension': tmpView.UseExtensions.map(x => x.fullyQualified) }]);
-      if (additionalExtensions.length === 0) {
-        continue;
-      }
-      // acquire additional extensions
-      for (const additionalExtension of additionalExtensions) {
-        try {
-          addedExtensions.add(additionalExtension.fullyQualified);
-
-          let ext = loadedExtensions[additionalExtension.fullyQualified];
-
-          // not yet loaded?
-          if (!ext) {
-            let localPath = untildify(additionalExtension.source);
-
-            // try resolving the package locally (useful for self-contained)
-            try {
-              const fileProbe = '/package.json';
-              localPath = require.resolve(additionalExtension.name + fileProbe); // have to resolve specific file - resolving a package by name will fail if no 'main' is present
-              localPath = localPath.slice(0, localPath.length - fileProbe.length);
-            } catch {
-              // no worries
-            }
 
 
-            // trim off the '@org' and 'autorest.' from the name.
-            const shortname = additionalExtension.name.split('/').last.replace(/^autorest\./ig, '');
-            const view = [...createView().GetNestedConfiguration(shortname)];
-            const enableDebugger = view.length > 0 ? <boolean>(view[0].GetEntry('debugger')) : false;
+    const resolveExtensions = async () => {
+      const viewsToHandle: Array<ConfigurationView> = [createView()];
+      while (viewsToHandle.length > 0) {
+        const tmpView = <ConfigurationView>viewsToHandle.pop();
+        const additionalExtensions = tmpView.UseExtensions.filter(ext => !addedExtensions.has(ext.fullyQualified));
+        await addSegments([{ 'used-extension': tmpView.UseExtensions.map(x => x.fullyQualified) }]);
+        if (additionalExtensions.length === 0) {
+          continue;
+        }
+        // acquire additional extensions
+        for (const additionalExtension of additionalExtensions) {
+          try {
+            addedExtensions.add(additionalExtension.fullyQualified);
 
-            if (await exists(localPath)) {
-              localPath = filePath(localPath);
-              if (messageFormat !== 'json' && messageFormat !== 'yaml') {
-                // local package
-                messageEmitter.Message.Dispatch({
-                  Channel: Channel.Information,
-                  Text: `> Loading local AutoRest extension '${additionalExtension.name}' (${localPath})`
-                });
+            let ext = loadedExtensions[additionalExtension.fullyQualified];
+
+            // not yet loaded?
+            if (!ext) {
+              let localPath = untildify(additionalExtension.source);
+
+              // try resolving the package locally (useful for self-contained)
+              try {
+                const fileProbe = '/package.json';
+                localPath = require.resolve(additionalExtension.name + fileProbe); // have to resolve specific file - resolving a package by name will fail if no 'main' is present
+                localPath = localPath.slice(0, localPath.length - fileProbe.length);
+              } catch {
+                // no worries
               }
 
-              const pack = await extMgr.findPackage(additionalExtension.name, localPath);
-              const extension = new LocalExtension(pack, localPath);
 
-              // start extension
-              ext = loadedExtensions[additionalExtension.fullyQualified] = {
-                extension,
-                autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await extension.start(enableDebugger)))
-              };
-            } else {
-              // remote package`
-              const installedExtension = await extMgr.getInstalledExtension(additionalExtension.name, additionalExtension.source);
-              if (installedExtension) {
+              // trim off the '@org' and 'autorest.' from the name.
+              const shortname = additionalExtension.name.split('/').last.replace(/^autorest\./ig, '');
+              const view = [...createView().GetNestedConfiguration(shortname)];
+              const enableDebugger = view.length > 0 ? <boolean>(view[0].GetEntry('debugger')) : false;
+
+              if (await exists(localPath)) {
+                localPath = filePath(localPath);
                 if (messageFormat !== 'json' && messageFormat !== 'yaml') {
+                  // local package
                   messageEmitter.Message.Dispatch({
                     Channel: Channel.Information,
-                    Text: `> Loading AutoRest extension '${additionalExtension.name}' (${additionalExtension.source}->${installedExtension.version})`
+                    Text: `> Loading local AutoRest extension '${additionalExtension.name}' (${localPath})`
                   });
                 }
 
-                // start extension
-                ext = loadedExtensions[additionalExtension.fullyQualified] = {
-                  extension: installedExtension,
-                  autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await installedExtension.start(enableDebugger)))
-                };
-              } else {
-                // acquire extension
-                const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);
-                messageEmitter.Message.Dispatch({
-                  Channel: Channel.Information,
-                  Text: `> Installing AutoRest extension '${additionalExtension.name}' (${additionalExtension.source})`
-                });
-                const cwd = process.cwd(); // TODO: fix extension?
-                const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, (progressInit: any) => progressInit.Message.Subscribe((s: any, m: any) => tmpView.Message({ Text: m, Channel: Channel.Verbose })));
-                messageEmitter.Message.Dispatch({
-                  Channel: Channel.Information,
-                  Text: `> Installed AutoRest extension '${additionalExtension.name}' (${additionalExtension.source}->${extension.version})`
-                });
-                process.chdir(cwd);
-                // start extension
+                const pack = await extMgr.findPackage(additionalExtension.name, localPath);
+                const extension = new LocalExtension(pack, localPath);
 
+                // start extension
                 ext = loadedExtensions[additionalExtension.fullyQualified] = {
                   extension,
                   autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await extension.start(enableDebugger)))
                 };
+              } else {
+                // remote package`
+                const installedExtension = await extMgr.getInstalledExtension(additionalExtension.name, additionalExtension.source);
+                if (installedExtension) {
+                  if (messageFormat !== 'json' && messageFormat !== 'yaml') {
+                    messageEmitter.Message.Dispatch({
+                      Channel: Channel.Information,
+                      Text: `> Loading AutoRest extension '${additionalExtension.name}' (${additionalExtension.source}->${installedExtension.version})`
+                    });
+                  }
+
+                  // start extension
+                  ext = loadedExtensions[additionalExtension.fullyQualified] = {
+                    extension: installedExtension,
+                    autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await installedExtension.start(enableDebugger)))
+                  };
+                } else {
+                  // acquire extension
+                  const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);
+                  messageEmitter.Message.Dispatch({
+                    Channel: Channel.Information,
+                    Text: `> Installing AutoRest extension '${additionalExtension.name}' (${additionalExtension.source})`
+                  });
+                  const cwd = process.cwd(); // TODO: fix extension?
+                  const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, (progressInit: any) => progressInit.Message.Subscribe((s: any, m: any) => tmpView.Message({ Text: m, Channel: Channel.Verbose })));
+                  messageEmitter.Message.Dispatch({
+                    Channel: Channel.Information,
+                    Text: `> Installed AutoRest extension '${additionalExtension.name}' (${additionalExtension.source}->${extension.version})`
+                  });
+                  process.chdir(cwd);
+                  // start extension
+
+                  ext = loadedExtensions[additionalExtension.fullyQualified] = {
+                    extension,
+                    autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await extension.start(enableDebugger)))
+                  };
+                }
               }
             }
+            await includeFn(fsLocal);
+
+            // merge config from extension
+            const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
+
+            const cp = simplifyUri(CreateFileUri(await ext.extension.configurationPath));
+            messageEmitter.Message.Dispatch({
+              Channel: Channel.Verbose,
+              Text: `> Including extension configuration file '${cp}'`
+            });
+
+            const blocks = await this.ParseCodeBlocks(
+              await inputView.ReadStrict(cp),
+              createView(),
+              `extension-config-${additionalExtension.fullyQualified}`);
+            // even though we load extensions after the default configuration, I want them to be able to 
+            // trigger changes in the default configuration loading (ie, an extension can set a flag to use a different pipeline.)
+            viewsToHandle.push(createView(await addSegments(blocks.map(each => each['pipeline-model'] ? ({ ...each, 'load-priority': 1000 }) : each))));
+          } catch (e) {
+            messageEmitter.Message.Dispatch({
+              Channel: Channel.Fatal,
+              Text: `Failed to install or start extension '${additionalExtension.name}' (${additionalExtension.source})`
+            });
+            throw e;
           }
-          await includeFn(fsLocal);
-
-          // merge config from extension
-          const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
-
-          const cp = simplifyUri(CreateFileUri(await ext.extension.configurationPath));
-          messageEmitter.Message.Dispatch({
-            Channel: Channel.Verbose,
-            Text: `> Including extension configuration file '${cp}'`
-          });
-
-          const blocks = await this.ParseCodeBlocks(
-            await inputView.ReadStrict(cp),
-            createView(),
-            `extension-config-${additionalExtension.fullyQualified}`);
-          // even though we load extensions after the default configuration, I want them to be able to 
-          // trigger changes in the default configuration loading (ie, an extension can set a flag to use a different pipeline.)
-          viewsToHandle.push(createView(await addSegments(blocks.map(each => each['pipeline-model'] ? ({ ...each, 'load-priority': 1000 }) : each))));
-        } catch (e) {
-          messageEmitter.Message.Dispatch({
-            Channel: Channel.Fatal,
-            Text: `Failed to install or start extension '${additionalExtension.name}' (${additionalExtension.source})`
-          });
-          throw e;
         }
+        await includeFn(fsLocal);
       }
+
+      // resolve any outstanding includes again
       await includeFn(fsLocal);
-    }
-    await includeFn(fsLocal);
+    };
+
+    // resolve the extensions
+    await resolveExtensions();
+
     // re-acquire CLI and configuration files at a lower priority
     // this enables the configuration of a plugin to specify stuff like `pipeline-model`
     // which would unlock a guarded section that has $(pipeline-model) == 'v3' in the yaml block.
@@ -1032,8 +1038,11 @@ export class Configuration {
         'config');
       await addSegments(blocks, false);
       await includeFn(this.fileSystem);
+      await resolveExtensions();
       return createView([...configs, ...blocks, ...secondPass]).Indexer;
     }
+    await resolveExtensions();
+    // return the final view 
     return createView().Indexer;
   }
   public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders = false): Promise<string | null> {

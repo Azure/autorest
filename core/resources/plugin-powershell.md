@@ -9,8 +9,8 @@ try-require: ./readme.powershell.md
 
 Note: if the --powershell is mentioned, but they are using autorest.powershell locally, don't try to load the autorest.powershell from npm.
 
-``` yaml $(powershell) && ( "$(requesting-extensions)".indexOf('autorest.powershell') === -1 )
+``` yaml $(powershell) && !isLoaded('@autorest/powershell')
 # load the extension 
 use-extension:
-  "@microsoft.azure/autorest.powershell": "beta"
+  "@autorest/powershell": "beta"
 ```

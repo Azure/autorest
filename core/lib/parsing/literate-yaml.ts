@@ -95,6 +95,14 @@ async function parseCodeBlocksInternal(config: ConfigurationView, hLiterate: Dat
 }
 
 export function evaluateGuard(rawFenceGuard: string, contextObject: any): boolean {
+
+  // extend the context object so that we can have some helper functions.
+  contextObject = {
+    ...contextObject,
+    /** finds out if there is an extension being loaded already by a given name */
+    isLoaded: (name: string) => contextObject['used-extension'] && !!(contextObject['used-extension'].find(each => each[0].startsWith(`"[\\"${name}\\"`)))
+  };
+
   // trim the language from the front first
   let match = /^\S*\s*(.*)/.exec(rawFenceGuard);
   const fence = match && match[1];
@@ -108,8 +116,9 @@ export function evaluateGuard(rawFenceGuard: string, contextObject: any): boolea
   try {
     if (!fence.includes('$(')) {
       try {
-        return safeEval<boolean>(fence);
+        return safeEval<boolean>(fence, contextObject);
       } catch (e) {
+        //console.log(`1 failed to eval ${fence}`);
         return false;
       }
     }
@@ -119,9 +128,10 @@ export function evaluateGuard(rawFenceGuard: string, contextObject: any): boolea
 
     // Let's run it only if there are no unresolved values for now.
     if (!expressionFence.includes('$(')) {
-      return safeEval<boolean>(expressionFence);
+      return safeEval<boolean>(expressionFence, contextObject);
     }
   } catch (E) {
+    // console.log(`2 failed to eval ${expressionFence}`);
     // not a legal expression?
   }
 
@@ -135,9 +145,15 @@ export function evaluateGuard(rawFenceGuard: string, contextObject: any): boolea
     // let's resolve them to undefined and see what happens.
 
     try {
-      return safeEval<boolean>(expressionFence.replace(/\$\(.*?\)/g, 'undefined'));
+      return safeEval<boolean>(expressionFence.replace(/\$\(.*?\)/g, 'undefined'), contextObject);
     } catch {
-      return safeEval<boolean>(fence.replace(/\$\(.*?\)/g, 'undefined'));
+      // console.log(`3 failed to eval ${expressionFence.replace(/\$\(.*?\)/g, 'undefined')}`);
+      try {
+        return safeEval<boolean>(fence.replace(/\$\(.*?\)/g, 'undefined'), contextObject);
+      } catch {
+        //console.log(`4 failed to eval ${fence.replace(/\$\(.*?\)/g, 'undefined')}`);
+        return false;
+      }
     }
   }
 
