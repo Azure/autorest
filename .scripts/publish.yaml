@@ -32,7 +32,7 @@ steps:
     npx @microsoft/rush rebuild 
 
     # build the packages
-    npx @microsoft/rush publish --publish --pack --include-all --tag preview
+    npx @microsoft/rush publish --publish --pack --include-all 
 
     # publish the packages (tag as preview by default)
     echo "//registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)" > ./.npmrc 

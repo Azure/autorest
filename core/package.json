@@ -20,7 +20,8 @@
   "bugs": {
     "url": "https://github.com/Azure/autorest/issues"
   },
-  "homepage": "https://github.com/Azure/autorest/readme.md",
+  "homepage": "https://github.com/Azure/autorest#readme",
+  "readme": "https://github.com/Azure/autorest/blob/master/readme.md",
   "main": "./dist/exports.js",
   "bin": {
     "autorest-core": "./entrypoints/app.js",
