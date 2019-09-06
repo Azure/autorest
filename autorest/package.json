@@ -1,5 +1,5 @@
 {
-  "name": "autorest",
+  "name": "@autorest/autorest",
   "version": "3.0.0",
   "patchOffset": 5000,
   "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is an OpenAPI spec that describes the REST API.",
@@ -24,7 +24,7 @@
   },
   "main": "./dist/exports.js",
   "bin": {
-    "autorest": "./entrypoints/app.js"
+    "autorest-v3": "./entrypoints/app.js"
   },
   "scripts": {
     "start": "node ./dist/app.js",

@@ -23,7 +23,7 @@
       "shouldPublish": true
     },
     {
-      "packageName": "autorest",
+      "packageName": "@autorest/autorest",
       "projectFolder": "autorest",
       "reviewCategory": "production",
       "shouldPublish": true
