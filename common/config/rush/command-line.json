@@ -11,16 +11,16 @@
    */
   "commands": [
     {
-      "commandKind": "bulk",
-      "name": "set-version",
-      "summary": "set the version in the package.json files",
-      "enableParallelism": true
+      "commandKind": "global",
+      "name": "set-versions",
+      "summary": "set the patch version in the package.json files",
+      "shellCommand": "node .scripts/set-versions.js"
     },
     {
-      "commandKind": "bulk",
-      "name": "reset-version",
-      "summary": "reset the version in the package.json files to .0",
-      "enableParallelism": true
+      "commandKind": "global",
+      "name": "reset-versions",
+      "summary": "reset the patch version in the package.json files to .0",
+      "shellCommand": "node .scripts/set-versions.js --reset"
     },
     {
       "commandKind": "global",

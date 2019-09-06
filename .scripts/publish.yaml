@@ -24,7 +24,7 @@ steps:
     npx @microsoft/rush update 
 
     # set the actual package versions and update again
-    npx @microsoft/rush set-version 
+    npx @microsoft/rush set-versions
     npx @microsoft/rush sync-versions
     npx @microsoft/rush update 
 

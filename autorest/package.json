@@ -1,6 +1,7 @@
 {
   "name": "autorest",
   "version": "3.0.0",
+  "patchOffset": 5000,
   "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is an OpenAPI spec that describes the REST API.",
   "engines": {
     "node": ">=10.13.0"
@@ -32,8 +33,6 @@
     "watch": "npm run before-build && tsc -p . --watch",
     "eslint-fix": "eslint  . --fix --ext .ts",
     "eslint": "eslint  . --ext .ts",
-    "set-version": "node -e \"let pkg = require('./package.json'); require('child_process').exec('git rev-list --parents HEAD --count --full-history .', (o,stdout) => { const v = pkg.version.split('.'); v[v.length-1] = (parseInt(stdout.trim()) + 5000); const orig=JSON.stringify(pkg,null,2);  pkg.version = v.join('.'); const delta = JSON.stringify(pkg,null,2 ); if( orig !== delta) require('fs').writeFileSync('./package.json',delta)})\"",
-    "reset-version": "node -e \"let pkg = require('./package.json'); const v = pkg.version.split('.'); v[v.length-1] = 0; const orig=JSON.stringify(pkg,null,2);  pkg.version = v.join('.'); const delta = JSON.stringify(pkg,null,2 ); if( orig !== delta) require('fs').writeFileSync('./package.json',delta)\"",
     "static-link": "static-link --force --no-node-modules",
     "preinstall": "node ./.scripts/preinstall-check",
     "prepack": "npm run static-link && npm run build",

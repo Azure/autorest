@@ -1,13 +1,30 @@
-var fs = require('fs');
+const { readFileSync, writeFileSync } = require('fs');
 
 function read(filename) {
-  const txt = fs.readFileSync(filename, 'utf8')
+  const txt = readFileSync(filename, 'utf8')
     .replace(/\r/gm, '')
     .replace(/\n/gm, '«')
     .replace(/\/\*.*?\*\//gm, '')
     .replace(/«/gm, '\n')
     .replace(/\s+\/\/.*/g, '');
   return JSON.parse(txt);
+}
+
+const packageList = {};
+const rush = read(`${__dirname}/../rush.json`);
+const pjs = {};
+
+function writeIfChanged(filename, content) {
+  const orig = JSON.parse(readFileSync(filename))
+  const origJson = JSON.stringify(orig, null, 2);
+  const json = JSON.stringify(content, null, 2);
+
+  if (origJson !== json) {
+    console.log(`Writing updated file '${filename}'`)
+    writeFileSync(filename, json)
+    return true;
+  }
+  return false;
 }
 
 function versionToInt(ver) {
@@ -22,16 +39,6 @@ function versionToInt(ver) {
   return n;
 }
 
-const rush = read(`${__dirname}/../rush.json`);
-const pjs = {};
-
-// load all the projects
-for (const each of rush.projects) {
-  const packageName = each.packageName;
-  const projectFolder = each.projectFolder;
-  pjs[packageName] = require(`${__dirname}/../${projectFolder}/package.json`);
-}
-
 function setPeerDependencies(dependencies) {
   for (const dep in dependencies) {
     const ref = pjs[dep];
@@ -40,20 +47,10 @@ function setPeerDependencies(dependencies) {
         console.log(`updating peer depedency ${dep} to ~${ref.version}`);
         dependencies[dep] = `~${ref.version}`;
       }
-
     }
   }
 }
 
-// verify that peer dependencies are the same version as they are building.
-for (const pj of Object.getOwnPropertyNames(pjs)) {
-  const each = pjs[pj];
-  setPeerDependencies(each.dependencies);
-  setPeerDependencies(each.devDependencies);
-  if (each['static-link']) {
-    setPeerDependencies(each['static-link'].devDependencies);
-  }
-}
 
 function recordDeps(dependencies) {
   for (const packageName in dependencies) {
@@ -63,10 +60,10 @@ function recordDeps(dependencies) {
       if (packageList[packageName] === packageVersion) {
         continue;
       }
+      console.log(`${packageName} has ['${packageList[packageName]}','${packageVersion}']`);
 
       // pick the higher one
       const v = versionToInt(packageVersion);
-
 
       if (v === 0) {
         console.error(`Unparsed version ${packageName}:${packageVersion}`);
@@ -74,6 +71,7 @@ function recordDeps(dependencies) {
       }
       const v2 = versionToInt(packageList[packageName]);
       if (v > v2) {
+
         packageList[packageName] = packageVersion;
       }
     } else {
@@ -89,12 +87,28 @@ function fixDeps(pj, dependencies) {
     }
   }
 }
-const packageList = {};
+
+// load all the projects
+for (const each of rush.projects) {
+  const packageName = each.packageName;
+  const projectFolder = each.projectFolder;
+  pjs[packageName] = JSON.parse(readFileSync(`${__dirname}/../${projectFolder}/package.json`));
+}
+
+// verify that peer dependencies are the same version as they are building.
+for (const pj of Object.getOwnPropertyNames(pjs)) {
+  const each = pjs[pj];
+  setPeerDependencies(each.dependencies);
+  setPeerDependencies(each.devDependencies);
+  if (each['static-link']) {
+    setPeerDependencies(each['static-link'].dependencies);
+  }
+}
+
 // now compare to see if someone has an exnternal package with different version
 // than everyone else.
 for (const pj of Object.getOwnPropertyNames(pjs)) {
   const each = pjs[pj];
-
   recordDeps(each.dependencies);
   recordDeps(each.devDependencies);
   if (each['static-link']) {
@@ -110,12 +124,19 @@ for (const pj of Object.getOwnPropertyNames(pjs)) {
     fixDeps(pj, each['static-link'].dependencies);
   }
 }
+var changed = 0;
 
 // write out the results.
 for (const each of rush.projects) {
   const packageName = each.packageName;
   const projectFolder = each.projectFolder;
-  fs.writeFileSync(`${__dirname}/../${projectFolder}/package.json`, JSON.stringify(pjs[packageName], null, 2));
+  if (writeIfChanged(`${__dirname}/../${projectFolder}/package.json`, pjs[packageName])) {
+    changed++;
+  }
 }
 
-console.log("project.json files updated");
+if (changed) {
+  console.log(`Updated ${changed} files.`);
+} else {
+  console.log('No changes made')
+}

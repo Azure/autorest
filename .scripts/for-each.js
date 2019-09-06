@@ -1,9 +1,9 @@
-var cp = require("child_process");
-var fs = require("fs");
-var path = require("path");
+const { spawn } = require('child_process');
+const { readFileSync } = require('fs');
+const { resolve } = require('path');
 
 function read(filename) {
-  const txt = fs.readFileSync(filename, "utf8")
+  const txt = readFileSync(filename, "utf8")
     .replace(/\r/gm, "")
     .replace(/\n/gm, "«")
     .replace(/\/\*.*?\*\//gm, "")
@@ -17,12 +17,14 @@ const repo = `${__dirname}/..`;
 const rush = read(`${repo}/rush.json`);
 const pjs = {};
 
+
+
 function forEachProject(onEach) {
   // load all the projects
   for (const each of rush.projects) {
     const packageName = each.packageName;
-    const projectFolder = path.resolve(`${repo}/${each.projectFolder}`);
-    const project = require(`${projectFolder}/package.json`);
+    const projectFolder = resolve(`${repo}/${each.projectFolder}`);
+    const project = JSON.parse(readFileSync(`${projectFolder}/package.json`));
     onEach(packageName, projectFolder, project);
   }
 }
@@ -37,7 +39,7 @@ function npmForEach(cmd) {
     // checks for the script first
     if (project.scripts[cmd]) {
       count++;
-      const proc = cp.spawn("npm", ["--silent", "run", cmd], { cwd: location, shell: true, stdio: "inherit" });
+      const proc = spawn("npm", ["--silent", "run", cmd], { cwd: location, shell: true, stdio: "inherit" });
       procs.push(proc);
       result[name] = {
         name, location, project, proc,
@@ -68,3 +70,4 @@ function npmForEach(cmd) {
 
 module.exports.forEachProject = forEachProject;
 module.exports.npm = npmForEach;
+module.exports.projectCount = rush.projects.length;
