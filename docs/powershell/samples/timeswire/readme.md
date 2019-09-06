@@ -131,7 +131,7 @@ This configuration block pulls in the powershell generator automatically.
 
 ``` yaml
 use:
-- "@autorest/powershell@beta"
+- "@autorest/powershell"
 
 ```
 

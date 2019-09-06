@@ -236,7 +236,7 @@ export async function selectVersion(requestedVersion: string, force: boolean, mi
     }
     if (pkg) {
       if (args.debug) {
-        console.log(`Selected package: ${pkg.name}@${pkg.version} => ${pkg.resolvedInfo.rawSpec} `);
+        console.log(`Selected package: ${pkg.resolvedInfo.rawSpec} => ${pkg.name}@${pkg.version}`);
       }
     }
 
