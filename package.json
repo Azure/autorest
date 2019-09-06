@@ -8,7 +8,8 @@
     "show-error": "echo ====== &echo ====== & echo ====== & echo REQUIRED: Install PowerShell-core 6.1 or greater (see readme.md) & echo ====== & echo ====== & echo ====== & exit 1",
     "test": "rush test",
     "testci": "rush test",
-    "build": "rush rebuild"
+    "build": "rush rebuild",
+    "pack": "rush publish --publish --pack --include-all --tag preview"
   },
   "repository": {
     "type": "git",

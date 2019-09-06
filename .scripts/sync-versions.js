@@ -22,24 +22,36 @@ function versionToInt(ver) {
   return n;
 }
 
-const rush = read(`${__dirname}/../../rush.json`);
+const rush = read(`${__dirname}/../rush.json`);
 const pjs = {};
 
 // load all the projects
 for (const each of rush.projects) {
   const packageName = each.packageName;
   const projectFolder = each.projectFolder;
-  pjs[packageName] = require(`${__dirname}/../../${projectFolder}/package.json`);
+  pjs[packageName] = require(`${__dirname}/../${projectFolder}/package.json`);
+}
+
+function setPeerDependencies(dependencies) {
+  for (const dep in dependencies) {
+    const ref = pjs[dep];
+    if (ref) {
+      if (dependencies[dep] !== `~${ref.version}`) {
+        console.log(`updating peer depedency ${dep} to ~${ref.version}`);
+        dependencies[dep] = `~${ref.version}`;
+      }
+
+    }
+  }
 }
 
 // verify that peer dependencies are the same version as they are building.
 for (const pj of Object.getOwnPropertyNames(pjs)) {
   const each = pjs[pj];
-  for (const dep in each.dependencies) {
-    const ref = pjs[dep];
-    if (ref) {
-      each.dependencies[dep] = `~${ref.version}`;
-    }
+  setPeerDependencies(each.dependencies);
+  setPeerDependencies(each.devDependencies);
+  if (each['static-link']) {
+    setPeerDependencies(each['static-link'].devDependencies);
   }
 }
 
@@ -82,21 +94,28 @@ const packageList = {};
 // than everyone else.
 for (const pj of Object.getOwnPropertyNames(pjs)) {
   const each = pjs[pj];
+
   recordDeps(each.dependencies);
   recordDeps(each.devDependencies);
+  if (each['static-link']) {
+    recordDeps(each['static-link'].dependencies);
+  }
 }
 
 for (const pj of Object.getOwnPropertyNames(pjs)) {
   const each = pjs[pj];
   fixDeps(pj, each.dependencies);
   fixDeps(pj, each.devDependencies);
+  if (each['static-link']) {
+    fixDeps(pj, each['static-link'].dependencies);
+  }
 }
 
 // write out the results.
 for (const each of rush.projects) {
   const packageName = each.packageName;
   const projectFolder = each.projectFolder;
-  fs.writeFileSync(`${__dirname}/../../${projectFolder}/package.json`, JSON.stringify(pjs[packageName], null, 2));
+  fs.writeFileSync(`${__dirname}/../${projectFolder}/package.json`, JSON.stringify(pjs[packageName], null, 2));
 }
 
 console.log("project.json files updated");
