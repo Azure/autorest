@@ -15,5 +15,5 @@ Note: if the --powershell is mentioned, but they are using autorest.powershell l
 ``` yaml $(powershell) && !isLoaded('@autorest/powershell')
 # load the extension 
 use-extension:
-  "@autorest/powershell": "beta"
+  "@autorest/powershell": "~2.0.295"
 ```
