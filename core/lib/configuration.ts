@@ -8,7 +8,7 @@ import { exists, filePath } from '@azure-tools/async-io';
 import { BlameTree, DataHandle, DataStore, IFileSystem, LazyPromise, ParseToAst, RealFileSystem, safeEval, Stringify, stringify, TryDecodeEnhancedPositionFromName } from '@azure-tools/datastore';
 import { Extension, ExtensionManager, LocalExtension } from '@azure-tools/extension';
 import { clone, keys, Dictionary, values } from '@azure-tools/linq';
-import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri, simplifyUri } from '@azure-tools/uri';
+import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri, simplifyUri, IsUri } from '@azure-tools/uri';
 import { From } from 'linq-es2015';
 import { basename, dirname, join } from 'path';
 import { CancellationToken, CancellationTokenSource } from 'vscode-jsonrpc';
@@ -747,16 +747,55 @@ export class Configuration {
       const extMgr = await Configuration.extensionManager;
       for (const useEntry of use) {
         if (typeof useEntry === 'string') {
+          // potential formats:
+          // <pkg>
+          // <pkg>@<version>
+          // @<org>/<pkg>
+          // @<org>/<pkg>@<version>
+          // <path>
+          // if the entry starts with an @ it's definitely a package reference
+
+          const [, identity, version] = <RegExpExecArray>/(^@.*?\/[^@]*|[^@]*)@?(.*)/.exec(useEntry);
+          if (identity) {
+            // parsed correctly
+            if (version) {
+              const pkg = await extMgr.findPackage(identity, version);
+              configs['use-extension'][pkg.name] = version;
+            } else {
+              // it's either a location or just the name
+              if (IsUri(identity) || await exists(identity)) {
+                // seems like it's a location to something. we don't know the actual name at this point.
+                const pkg = await extMgr.findPackage('plugin', identity);
+                configs['use-extension'][pkg.name] = identity;
+              } else {
+                // must be a package name without a version
+                // assume *?
+                const pkg = await extMgr.findPackage(identity, '*');
+                configs['use-extension'][pkg.name] = pkg.version;
+              }
+            }
+          }
+          /*
           // attempt <package>@<version> interpretation
           const separatorIndex = useEntry.lastIndexOf('@');
+          console.log(separatorIndex);
           const versionPart = useEntry.slice(separatorIndex + 1);
           if (separatorIndex > 0 && /^[^/\\]+$/.test(versionPart)) {
             const pkg = await extMgr.findPackage(useEntry.slice(0, separatorIndex), versionPart);
             configs['use-extension'][pkg.name] = versionPart;
           } else {
-            const pkg = await extMgr.findPackage('foo', useEntry);
-            configs['use-extension'][pkg.name] = useEntry;
+            console.log(separatorIndex);
+            if (separatorIndex === 0) {
+
+              const pkg = await extMgr.findPackage(useEntry, '*');
+              configs['use-extension'][pkg.name] = '*';
+            } else {
+              const pkg = await extMgr.findPackage(useEntry, useEntry);
+              configs['use-extension'][pkg.name] = useEntry;
+            }
+
           }
+          */
         }
       }
       delete configs.use;

@@ -1,9 +1,12 @@
 # Default Configuration - PowerShell
 
-The beta version of the PowerShell Generator.
+The AutoRest PowerShell generator is intended to be use from AutoRest. 
+
+> see https://aka.ms/autorest
+
 
 ``` yaml $(powershell)
-# probe from readme.powershell.md file 
+# probe for a local readme.powershell.md file 
 try-require: ./readme.powershell.md
 ```
 

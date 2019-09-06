@@ -100,7 +100,12 @@ export function evaluateGuard(rawFenceGuard: string, contextObject: any): boolea
   contextObject = {
     ...contextObject,
     /** finds out if there is an extension being loaded already by a given name */
-    isLoaded: (name: string) => contextObject['used-extension'] && !!(contextObject['used-extension'].find(each => each[0].startsWith(`"[\\"${name}\\"`)))
+    isLoaded: (name: string) => {
+      // console.log(name);
+      // console.log(JSON.stringify(contextObject['used-extension']));
+      // console.log(contextObject['used-extension'] && !!(contextObject['used-extension'].find(each => each.startsWith(`["${name}"`))));
+      return contextObject['used-extension'] && !!(contextObject['used-extension'].find(each => each.startsWith(`["${name}"`)));
+    }
   };
 
   // trim the language from the front first
