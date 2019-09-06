@@ -156,6 +156,7 @@ async function showInstalledExtensions(): Promise<number> {
   return 0;
 }
 
+/** clears out all autorest-temp folders from the temp folder*/
 async function clearTempData() {
   const all = [];
   const tmp = tmpdir();

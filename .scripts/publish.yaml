@@ -38,6 +38,6 @@ steps:
     echo "//registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)" > ./.npmrc 
     for file in common/temp/artifacts/packages/*.tgz 
     do
-     common/temp/pnpm-local/node_modules/.bin/pnpm publish $file --tag preview --access public || echo no-worries 
+     common/temp/pnpm-local/node_modules/.bin/pnpm publish $file --tag latest --access public || echo no-worries 
     done
 
