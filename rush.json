@@ -23,10 +23,18 @@
       "shouldPublish": true
     },
     {
-      "packageName": "@autorest/autorest",
+      "packageName": "autorest",
       "projectFolder": "autorest",
       "reviewCategory": "production",
       "shouldPublish": true
     }
+    /* #region ci-only
+    ,{
+      "packageName": "@autorest/autorest",
+      "projectFolder": "autorestautorest",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    }
+    /* #region end */
   ]
 }

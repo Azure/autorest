@@ -19,13 +19,17 @@ steps:
     # ensure latest npm is installed
     npm install -g npm 
 
-    # make sure the versions are all synchronized and pull in dependencies
-    npx @microsoft/rush sync-versions
-    npx @microsoft/rush update 
-
-    # set the actual package versions and update again
+    # make sure the versions are all synchronized 
     npx @microsoft/rush set-versions
-    npx @microsoft/rush sync-versions
+
+    # copy the autorest folder into autorestautorest
+    # and tweak the files so we can build @autorest/autorest too.
+    cp -r autorest autorestautorest
+    sed 's/\"name\": \"autorest\",/\"name\": \"@autorest\/autorest\",/g' -i autorestautorest/package.json
+    sed 's/\"autorest\":/\"autorest-beta\":/g' -i autorestautorest/package.json
+    sed 's/.*#region.*//g' -i rush.json
+
+    # pull in dependencies
     npx @microsoft/rush update 
 
     # compile the code
