@@ -12,7 +12,7 @@ import { Dictionary, values, keys, items } from '@azure-tools/linq';
 async function deduplicate(config: ConfigurationView, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
-  for (const each of values(inputs).linq.where(input => input.artifactType !== 'profile-filter-log')) {
+  for (const each of values(inputs).where(input => input.artifactType !== 'profile-filter-log')) {
     const deduplicator = new Deduplicator(await each.ReadObject());
 
     result.push(await sink.WriteObject('model-deduplicated-oai3-doc', await deduplicator.getOutput(), each.identity, 'deduplicated-oai3', [/* fix-me: Construct source map from the mappings returned by the deduplicator.s*/]));

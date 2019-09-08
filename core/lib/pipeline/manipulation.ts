@@ -21,7 +21,7 @@ export class Manipulator {
 
   private matchesSourceFilter(document: string, transform: ResolvedDirective, artifact: string | null): boolean {
     document = '/' + document;
-    return values(transform.from).linq.any(each => artifact === each || document.endsWith('/' + each));
+    return values(transform.from).any(each => artifact === each || document.endsWith('/' + each));
   }
 
   private async processInternal(data: DataHandle, sink: DataSink, documentId?: string): Promise<DataHandle> {

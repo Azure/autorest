@@ -426,12 +426,12 @@ export class ConfigurationView {
   public resolveDirectives(predicate?: (each: ResolvedDirective) => boolean) {
     // optionally filter by predicate.
     const plainDirectives = values(valuesOf<Directive>(this.config['directive']));
-    // predicate ? values(valuesOf<Directive>(this.config['directive'])).linq.where(predicate) : values(valuesOf<Directive>(this.config['directive']));
+    // predicate ? values(valuesOf<Directive>(this.config['directive'])).where(predicate) : values(valuesOf<Directive>(this.config['directive']));
 
     const declarations = this.config['declare-directive'] || {};
     const expandDirective = (dir: Directive): Iterable<Directive> => {
       const makro = Object.keys(dir).filter(m => declarations[m])[0];
-      // const makro = keys(dir).linq.first(m => !!declarations[m]);
+      // const makro = keys(dir).first(m => !!declarations[m]);
       if (!makro) {
         return [dir]; // nothing to expand
       }
@@ -451,9 +451,9 @@ export class ConfigurationView {
     };
     // makro expansion
     if (predicate) {
-      return plainDirectives.linq.selectMany(expandDirective).linq.select(each => new ResolvedDirective(each)).linq.where(predicate).linq.toArray();
+      return plainDirectives.selectMany(expandDirective).select(each => new ResolvedDirective(each)).where(predicate).toArray();
     }
-    return plainDirectives.linq.selectMany(expandDirective).linq.select(each => new ResolvedDirective(each)).linq.toArray();
+    return plainDirectives.selectMany(expandDirective).select(each => new ResolvedDirective(each)).toArray();
     // return From(plainDirectives).SelectMany(expandDirective).Select(each => new StaticDirectiveView(each)).ToArray();
   }
 

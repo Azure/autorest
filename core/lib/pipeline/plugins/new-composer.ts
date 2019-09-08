@@ -353,7 +353,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
     // since some models are going to be duplicated and this composer is used to mimic autorest v2
     // the best behavior is to have the latest models.
     const sortedNodes = values(originalNodes)
-      .linq.toArray()
+      .toArray()
       .sort((a, b) => compareVersions(toSemver(maximum(b.value['x-ms-metadata'].apiVersions)), toSemver(maximum(a.value['x-ms-metadata'].apiVersions))));
     for (const { key, value, pointer } of sortedNodes) {
       // schemas have to keep their name

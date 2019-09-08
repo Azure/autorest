@@ -77,7 +77,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
   async process(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     // split out servers first.
-    const [servers, theNodes] = values(originalNodes).linq.bifurcate(each => each.key === 'servers');
+    const [servers, theNodes] = values(originalNodes).bifurcate(each => each.key === 'servers');
 
     // set the doc servers
     servers.forEach(s => this.docServers = s.value);
@@ -122,7 +122,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
   visitPath(targetParent: AnyObject, nodes: Iterable<Node>) {
     // split out the servers first.
-    const [servers, theNodes] = values(nodes).linq.bifurcate(each => each.key === 'servers');
+    const [servers, theNodes] = values(nodes).bifurcate(each => each.key === 'servers');
 
     // set the operationServers if they exist.
     servers.forEach(s => this.pathServers = s.value);
@@ -155,7 +155,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   visitHttpOperation(targetParent: AnyObject, nodes: Iterable<Node>) {
 
     // split out the servers first.
-    const [servers, theNodes] = values(nodes).linq.bifurcate(each => each.key === 'servers');
+    const [servers, theNodes] = values(nodes).bifurcate(each => each.key === 'servers');
 
     // set the operationServers if they exist.
     servers.forEach(s => this.operationServers = s.value);
@@ -198,7 +198,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   }
 
   visitParameter(targetParent: AnyObject, nodes: Iterable<Node>) {
-    const [requiredNodes, theOtherNodes] = values(nodes).linq.bifurcate(each => each.key === 'required');
+    const [requiredNodes, theOtherNodes] = values(nodes).bifurcate(each => each.key === 'required');
     const isRequired = (requiredNodes.length > 0) ? !!requiredNodes[0].value : false;
     for (const { value, key, pointer, children } of theOtherNodes) {
       switch (key) {
@@ -227,7 +227,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
   visitSchema(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     const object = 'object';
-    const [requiredField, theNodes] = values(originalNodes).linq.bifurcate(each => each.key === 'required');
+    const [requiredField, theNodes] = values(originalNodes).bifurcate(each => each.key === 'required');
     const requiredProperties = new Array<string>();
     if (requiredField[0] !== undefined) {
       requiredProperties.push(...requiredField[0].value);
