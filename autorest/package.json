@@ -60,7 +60,8 @@
     "@azure-tools/tasks": "~3.0.0",
     "semver": "^5.5.1",
     "chalk": "2.3.0",
-    "pwsh": "0.2.0"
+    "pwsh": "0.2.0",
+    "source-map-support": "0.5.13"
   },
   "static-link": {
     "entrypoints": [],

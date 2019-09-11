@@ -2,7 +2,14 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-
+if (global && global.v8debug) {
+  try {
+    // try to let source maps resolve
+    require('source-map-support').install();
+  } catch {
+    // no worries
+  }
+}
 const cwd = process.cwd();
 
 // https://github.com/uxitten/polyfill/blob/master/string.polyfill.js

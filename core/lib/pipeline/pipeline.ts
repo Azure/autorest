@@ -3,6 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+/* eslint-disable @typescript-eslint/no-use-before-define */
+
+
 import { DataHandle, DataSource, IFileSystem, JsonPath, QuickDataSource, safeEval, stringify, PipeState, mergePipeStates } from '@azure-tools/datastore';
 import { ConfigurationView, getExtension } from '../configuration';
 import { Channel } from '../message';
@@ -164,11 +167,6 @@ function isDrainRequired(p: PipelineNode) {
 
 export async function runPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
 
-  const fsInput = configView.DataStore.GetReadThroughScope(fileSystem);
-  const pipeline = buildPipeline(configView);
-  const times = !!configView['timestamp'];
-  const tasks: { [name: string]: Promise<DataSource> } = {};
-
   // built-in plugins
   const plugins: { [name: string]: PipelinePlugin } = {
     'help': createHelpPlugin(),
@@ -244,6 +242,11 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
   });
 
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
+
+  const fsInput = configView.DataStore.GetReadThroughScope(fileSystem);
+  const pipeline = buildPipeline(configView);
+  const times = !!configView['timestamp'];
+  const tasks: { [name: string]: Promise<DataSource> } = {};
 
 
   const ScheduleNode: (nodeName: string) => Promise<DataSource> =
@@ -335,7 +338,9 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
 
         return scopeResult;
       } catch (e) {
-        console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);
+        if (configView.DebugMode) {
+          console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);
+        }
         throw e;
       }
     };

@@ -157,6 +157,7 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
     for (const { key: containerType, pointer: containerPointer, children: containerChildren, value: containerValue } of nodes) {
 
       switch (containerType) {
+        case 'responses':
         case 'schemas':
         case 'parameters':
           this.newObject(components, containerType, containerPointer);

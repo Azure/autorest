@@ -4,7 +4,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { exists, filePath } from '@azure-tools/async-io';
+import { exists, filePath, isDirectory } from '@azure-tools/async-io';
 import { BlameTree, DataHandle, DataStore, IFileSystem, LazyPromise, ParseToAst, RealFileSystem, safeEval, Stringify, stringify, TryDecodeEnhancedPositionFromName } from '@azure-tools/datastore';
 import { Extension, ExtensionManager, LocalExtension } from '@azure-tools/extension';
 import { clone, keys, Dictionary, values } from '@azure-tools/linq';
@@ -755,23 +755,28 @@ export class Configuration {
           // <path>
           // if the entry starts with an @ it's definitely a package reference
 
-          const [, identity, version] = <RegExpExecArray>/(^@.*?\/[^@]*|[^@]*)@?(.*)/.exec(useEntry);
-          if (identity) {
-            // parsed correctly
-            if (version) {
-              const pkg = await extMgr.findPackage(identity, version);
-              configs['use-extension'][pkg.name] = version;
-            } else {
-              // it's either a location or just the name
-              if (IsUri(identity) || await exists(identity)) {
-                // seems like it's a location to something. we don't know the actual name at this point.
-                const pkg = await extMgr.findPackage('plugin', identity);
-                configs['use-extension'][pkg.name] = identity;
+          if (await isDirectory(useEntry)) {
+            const pkg = await extMgr.findPackage('plugin', useEntry);
+            configs['use-extension'][pkg.name] = useEntry;
+          } else {
+            const [, identity, version] = <RegExpExecArray>/(^@.*?\/[^@]*|[^@]*)@?(.*)/.exec(useEntry);
+            if (identity) {
+              // parsed correctly
+              if (version) {
+                const pkg = await extMgr.findPackage(identity, version);
+                configs['use-extension'][pkg.name] = version;
               } else {
-                // must be a package name without a version
-                // assume *?
-                const pkg = await extMgr.findPackage(identity, '*');
-                configs['use-extension'][pkg.name] = pkg.version;
+                // it's either a location or just the name
+                if (IsUri(identity) || await exists(identity)) {
+                  // seems like it's a location to something. we don't know the actual name at this point.
+                  const pkg = await extMgr.findPackage('plugin', identity);
+                  configs['use-extension'][pkg.name] = identity;
+                } else {
+                  // must be a package name without a version
+                  // assume *?
+                  const pkg = await extMgr.findPackage(identity, '*');
+                  configs['use-extension'][pkg.name] = pkg.version;
+                }
               }
             }
           }
