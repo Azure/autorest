@@ -397,6 +397,33 @@ function Get-Foo {
 
 </details>
 
+#### Removing an unnecessary parameter
+
+If it's the case that a parameter in a generated variant should be removed (possibly to be given a constant value), the variant that uses this parameter should be hidden and a new variant should be created in its place that doesn't expose the parameter.
+
+For example, if a variant exposes a `-Scope` parameter for the user to set, but the value of this parameter can only ever be `/`, and providing any other value will result in an exception from the server, then we should remove this parameter and set the value for the user in a new custom variant:
+
+<details>
+<summary>Click to expand PowerShell example</summary>
+
+```powershell
+function Get-Foo_ListAll {
+    # Header attributes omitted
+    param(
+        # All parameters (except -Scope) from the hidden variant omitted
+
+        # Common parameters omitted
+    )
+
+    process {
+        $null = $PSBoundParameters.Add("Scope", "/")
+        MyModule.internal\Get-Foo @PSBoundParameters # Call the hidden (internal) module
+    }
+}
+```
+
+</details>
+
 #### Modifying model types
 
 If additional properties need to be added to a model type, specifically those returned from cmdlets, then a new file should be created in the `custom` folder that is called `{MODEL}.cs`, where `{MODEL}` is the name of the model object that properties are being added to. Inside of this file, a partial class should be created that has the same namespace of the model object you're adding the properties to.
