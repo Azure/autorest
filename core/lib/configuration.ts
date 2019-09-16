@@ -21,7 +21,7 @@ import { evaluateGuard, parseCodeBlocks } from './parsing/literate-yaml';
 import { AutoRestExtension } from './pipeline/plugin-endpoint';
 import { Suppressor } from './pipeline/suppression';
 import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
-import { Initializer } from '@azure-tools/codegen';
+import { Initializer, DeepPartial } from '@azure-tools/codegen';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const untildify: (path: string) => string = require('untildify');
