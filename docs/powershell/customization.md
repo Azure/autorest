@@ -49,7 +49,7 @@ if ($PSBoundParameters.ContainsKey("Foo"))
 }
 ```
 
-_Note_: for PowerShell, the removal operation is assigned to a `$null` variable to prevent the returned `bool` from being written out from the cmdlet; this should be done for the removal operation on a dictionary.
+_Note_: for PowerShell, the removal operation is assigned to a `$null` variable to prevent the returned `bool` from being written to the output stream from the cmdlet; this should be done for the removal operation on a dictionary, or any other command or call that returns a value.
 
 If a parameter should be added to the `PSBoundParameters` dictionary before being passed to the next cmdlet, then the following should be used:
 
@@ -58,6 +58,49 @@ If a parameter should be added to the `PSBoundParameters` dictionary before bein
 ```powershell
 $null = $PSBoundParameters.Add("Bar", $BarValue)
 ```
+
+### Handling cmdlets that support `ShouldProcess` or `-AsJob`
+
+When adding a variant or new cmdlet that requires supporting `ShouldProcess` or `-AsJob`, the contents of `PSBoundParameters` must be kept in mind if any additional cmdlet calls are made within the customization. These two scenarios could add `-Confirm`, `-WhatIf` and `-AsJob` to the `PSBoundParameters` dictionary, and attempting to send this set of parameters to a cmdlet that doesn't support `ShouldProcess` and/or `-AsJob` will result in an unusable scenario for the user. To avoid this case, the `PSBoundParameters` dictionary could be copied and stripped of these additional parameters in the case that the cmdlet they're being passed to don't support the scenarios.
+
+<detail>
+<summary>Click to expand PowerShell example</summary>
+
+```powershell
+function Update-Foo_SampleVariant {
+    [OutputType('...')]
+    [CmdletBinding(PositionalBinding=$false, SupportsShouldProcess)]
+    [PowerShell.Cmdlets.MyModule.Description('...')]
+    param(
+        [Parameter(Mandatory, HelpMessage='...')]
+        [System.String]
+        # ...
+        ${ParameterA},
+
+        [Parameter(HelpMessage='...')]
+        [System.Management.Automation.SwitchParameter]
+        # ...
+        ${AsJob},
+
+        # Common parameters omitted
+    )
+
+    process {
+        $GetPSBoundParameters = $PSBoundParameters
+        $null = $GetPSBoundParameters.Remove("Confirm")
+        $null = $GetPSBoundParameters.Remove("WhatIf")
+        $null = $GetPSBoundParameters.Remove("AsJob")
+        $Foo = MyModule\Get-Foo @GetPSBoundParameters
+
+        $Foo.ParameterA = $ParameterA
+        $null = $PSBoundParameters.Remove("ParameterA")
+        $null = $PSBoundParameters.Add("InputObject", $Foo)
+        MyModule\Set-Foo @PSBoundParameters
+    }
+}
+```
+
+</detail>
 
 ### Examples
 
