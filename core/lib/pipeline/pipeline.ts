@@ -23,7 +23,7 @@ import { createArtifactEmitterPlugin } from './plugins/emitter';
 import { createEnumDeduplicator } from './plugins/enum-deduplication';
 import { createExternalPlugin } from './plugins/external';
 import { createHelpPlugin } from './plugins/help';
-import { createIdentityPlugin } from './plugins/identity';
+import { createIdentityPlugin, createIdentityResetPlugin } from './plugins/identity';
 import { createMarkdownOverrideOpenApiLoaderPlugin, createMarkdownOverrideSwaggerLoaderPlugin, createOpenApiLoaderPlugin, createSwaggerLoaderPlugin } from './plugins/loaders';
 import { createMultiApiMergerPlugin } from './plugins/merger';
 import { createNewComposerPlugin } from './plugins/new-composer';
@@ -90,7 +90,10 @@ function buildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
     // derive information about given pipeline stage
     const plugin = cfg.plugin || stageName.split('/').reverse()[0];
     const outputArtifact = cfg['output-artifact'];
-    const scope = cfg.scope;
+    let scope = cfg.scope;
+    if (!cfg.scope) {
+      scope = `pipeline.${stageName}`
+    }
     const inputs: Array<string> = (!cfg.input ? [] : (Array.isArray(cfg.input) ? cfg.input : [cfg.input])).map((x: string) => resolvePipelineStageName(stageName, x));
 
     const suffixes: Array<string> = [];
@@ -171,6 +174,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
   const plugins: { [name: string]: PipelinePlugin } = {
     'help': createHelpPlugin(),
     'identity': createIdentityPlugin(),
+    'reset-identity': createIdentityResetPlugin(),
     'loader-swagger': createSwaggerLoaderPlugin(),
     'loader-openapi': createOpenApiLoaderPlugin(),
     'md-override-loader-swagger': createMarkdownOverrideSwaggerLoaderPlugin(),
