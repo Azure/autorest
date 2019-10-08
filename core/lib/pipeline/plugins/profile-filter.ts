@@ -425,7 +425,7 @@ async function filter(config: ConfigurationView, input: DataSource, sink: DataSi
         result.push(await sink.WriteData('profile-filter-log.yaml', serialize({ 'files-used': [...specsReferencedAfterFiltering], 'files-not-used': [...specsNotUsed] }), [], 'profile-filter-log'));
       }
 
-      result.push(await sink.WriteObject('profile-filtered-oai-doc...', output, each.identity, 'profile-filtered-oai3', await processor.getSourceMappings()));
+      result.push(await sink.WriteObject('oai3.profile-filtered.json', output, each.identity, 'openapi3-document-profile-filtered', await processor.getSourceMappings()));
     } else {
       result.push(each);
     }

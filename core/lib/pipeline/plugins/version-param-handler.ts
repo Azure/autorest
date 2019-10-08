@@ -153,7 +153,7 @@ async function handleApiVersionParameter(config: ConfigurationView, input: DataS
     for (const each of inputs) {
       const processor = new ApiVersionParameterHandler(each);
       const output = await processor.getOutput();
-      result.push(await sink.WriteObject('oai3 without api-version parameters...', output, each.identity, 'oi3-apiVersion-parameter-free', await processor.getSourceMappings()));
+      result.push(await sink.WriteObject('oai3.noapiversion.json', output, each.identity, 'openapi-document-noapiversion', await processor.getSourceMappings()));
     }
     return new QuickDataSource(result, input.pipeState);
   }

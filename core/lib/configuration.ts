@@ -520,6 +520,15 @@ export class ConfigurationView {
   }
 
   public * GetNestedConfiguration(pluginName: string): Iterable<ConfigurationView> {
+    let pp = pluginName.split('.');
+    if (pp.length > 1) {
+      const n = this.GetNestedConfiguration(pp[0]);
+      for (const s of n) {
+        yield* s.GetNestedConfiguration(pp.slice(1).join('.'));
+      }
+      return;
+    }
+
     for (const section of valuesOf<any>((<any>this.config)[pluginName])) {
       if (section) {
         yield this.GetNestedConfigurationImmediate(section === true ? {} : section);

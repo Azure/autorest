@@ -184,7 +184,7 @@ async function clean(config: ConfigurationView, input: DataSource, sink: DataSin
   for (const each of inputs) {
     const processor = new ComponentsCleaner(each);
     const output = await processor.getOutput();
-    result.push(await sink.WriteObject('cleaned-oai3-doc', output, each.identity, 'clean-spec-oai3', await processor.getSourceMappings()));
+    result.push(await sink.WriteObject('oai3.cleaned.json', output, each.identity, 'openapi-document-cleaned', await processor.getSourceMappings()));
   }
 
   return new QuickDataSource(result, input.pipeState);
