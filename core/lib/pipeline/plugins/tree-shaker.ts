@@ -532,6 +532,8 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
       if (targetCollection[nameHint]) {
         nameHint = undefined;
       }
+    } else {
+      nameHint = value.title || value['x-ms-client-name'] || nameHint;
     }
 
     const id = nameHint || `${parseJsonPointer(pointer).map(each => `${each}`.toLowerCase().replace(/-+/g, '_').replace(/\W+/g, '-').split('-').filter(each => each).join('-')).filter(each => each).join('·')}`.replace(/\·+/g, '·');
