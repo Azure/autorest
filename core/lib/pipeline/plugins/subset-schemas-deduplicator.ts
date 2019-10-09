@@ -76,7 +76,7 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
         const anotherSchemaName = anotherSchema.value[xMsMetadata].name;
         if (currentSchemaName === anotherSchemaName && currentSchema.uid !== anotherSchema.uid) {
           const skipList = ['description', 'enum', 'readOnly', 'required'];
-          const additiveFieldsList = ['properties', 'allOf'];
+          const additiveFieldsList = ['properties', 'allOf', 'required'];
 
           // filter out metadata
           const { 'x-ms-metadata': metadataAnotherSchema, ...filteredAnotherSchema } = anotherSchema.value;
@@ -251,7 +251,7 @@ export function getSupersetSchema(subset: any, superset: any, additiveFieldsList
             result[field][key] = superset[field][key];
           }
         } else {
-          if (!Object.keys(additiveFieldsMatches[field]).includes(key)) {
+          if (!(additiveFieldsMatches[field] && Object.keys(additiveFieldsMatches[field]).includes(key))) {
             if (result[field] === undefined) {
               result[field] = {};
             }
