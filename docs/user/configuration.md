@@ -48,7 +48,7 @@ Usage:
 
 Usage: 
 ``` powershell
-> autorest sample.yaml 
+> autorest sample.json 
 
 ```
 
