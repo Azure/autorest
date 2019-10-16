@@ -25,10 +25,10 @@ To use the PowerShell generator, you have to first install the AutoRest v3 beta:
 
 ``` powershell
 # Installing AutoRest (beta)
-> npm install -g autorest@beta
+> npm install -g "@autorest/autorest" 
 
 # if you have a previous version installed (or want it to pull the latest version), reset the autorest plugins
-> autorest --reset
+> autorest-beta --reset
 ```
 
 ## Returning to the release version of the generator
@@ -52,7 +52,7 @@ The output will be in the `./generated` folder by default
 
 ``` powershell
 # AutoRest command line
-> autorest --powershell --input-file:<path-to-swagger-file> [...options]
+> autorest-beta --powershell --input-file:<path-to-swagger-file> [...options]
 ```
 
 ## Common AutoRest parameters:
