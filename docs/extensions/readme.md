@@ -18,6 +18,7 @@ The following documents describes AutoRest specific vendor extensions for [OpenA
 * [x-ms-mutability](#x-ms-mutability) - provides insight to Autorest on how to generate code. It doesn't alter the modeling of what is actually sent on the wire.
 * [x-ms-examples](#x-ms-examples) - describes the format for specifying examples for request and response of an operation in an OpenAPI definition.
 * [x-ms-error-response](#x-ms-error-response) - indicates whether the response status code should be treated as an error response
+* [x-ms-headers](#x-ms-headers) - define shared response header types across multiple operations
 
 ### Microsoft Azure Extensions (available in most generators only when using `--azure-arm`)
 * [x-ms-odata](#x-ms-odata) - indicates the operation includes one or more [OData](http://www.odata.org/) query parameters.
@@ -751,6 +752,39 @@ Indicates whether the response status code should be treated as an error respons
     }
   }
 . . .
+```
+
+## x-ms-headers
+References a shared response header type to use for an operation, causing
+`headers` to be ignored.
+
+**Parent element**: [Response Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#response-object)
+
+**Schema**:
+[Reference Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#referenceObject)
+
+**Example**:
+```yaml
+# in some operation:
+"200":
+  x-ms-headers:
+    $ref: "#/definitions/MyHeaders"
+  headers:
+    Some-Header:
+      description: The foo of the bar.
+      type: string
+    Other-Header:
+      description: The foo of the bar.
+      type: string
+# in definitions:
+MyHeaders:
+  properties:
+    Some-Header:
+      description: The foo of the bar.
+      type: string
+    Other-Header:
+      description: The foo of the bar.
+      type: string
 ```
 
 ## x-ms-pageable
