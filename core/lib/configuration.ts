@@ -266,6 +266,7 @@ export class ConfigurationView {
       'require': [],
       'try-require': [],
       'use': [],
+      'pass-thru': [],
     };
 
     this.rawConfig = MergeConfigurations(this.rawConfig, ...configs);
@@ -520,7 +521,7 @@ export class ConfigurationView {
   }
 
   public * GetNestedConfiguration(pluginName: string): Iterable<ConfigurationView> {
-    let pp = pluginName.split('.');
+    const pp = pluginName.split('.');
     if (pp.length > 1) {
       const n = this.GetNestedConfiguration(pp[0]);
       for (const s of n) {

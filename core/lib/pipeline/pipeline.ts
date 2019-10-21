@@ -37,6 +37,7 @@ import { createJsonToYamlPlugin, createYamlToJsonPlugin } from './plugins/yaml-a
 import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from './schema-validation';
 import { createHash } from 'crypto';
 import { isCached, readCache, writeCache } from './pipeline-cache';
+import { values } from '@azure-tools/linq';
 
 const md5 = (content: any) => content ? createHash('md5').update(JSON.stringify(content)).digest('hex') : undefined;
 
@@ -92,7 +93,7 @@ function buildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
     const outputArtifact = cfg['output-artifact'];
     let scope = cfg.scope;
     if (!cfg.scope) {
-      scope = `pipeline.${stageName}`
+      scope = `pipeline.${stageName}`;
     }
     const inputs: Array<string> = (!cfg.input ? [] : (Array.isArray(cfg.input) ? cfg.input : [cfg.input])).map((x: string) => resolvePipelineStageName(stageName, x));
 
@@ -169,6 +170,7 @@ function isDrainRequired(p: PipelineNode) {
 }
 
 export async function runPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
+
 
   // built-in plugins
   const plugins: { [name: string]: PipelinePlugin } = {
@@ -292,7 +294,9 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
 
       const config = pipeline.configs[stringify(node.configScope)];
       const pluginName = node.pluginName;
-      const plugin = plugins[pluginName];
+
+      const passthru = values((<any>configView).GetEntry('pass-thru')).any(each => each === pluginName);
+      const plugin = passthru ? plugins.identity : plugins[pluginName];
 
       if (!plugin) {
         throw new Error(`Plugin '${pluginName}' not found.`);
