@@ -29,8 +29,7 @@
     "static-link": "static-link",
     "postinstall": "node ./post-install --force",
     "reinstall": "shx rm ./package-lock.json && shx rm -rf ./node_modules && npm install",
-    "prepack": "static-link && npm run build",
-    "something":""
+    "prepack": "static-link && npm run build"
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {
@@ -49,12 +48,12 @@
     "tslint-microsoft-contrib": "^5.0.3",
     "typescript": "^3.1.3",
     "mocha-typescript": "1.1.14",
-    "static-link": "^0.2.3",
+    "static-link": "^0.3.0",
     "@microsoft.azure/async-io": "^2.1.0",
     "@microsoft.azure/extension": "^2.2.0",
     "@microsoft.azure/oai2-to-oai3": "^3.0.0",
     "@microsoft.azure/tasks": "^2.1.0",
-    "vscode-jsonrpc": "^3.3.1"
+    "vscode-jsonrpc": "~3.3.1"
   },
   "static-link": {
     "entrypoints": [],
@@ -64,21 +63,21 @@
       "@microsoft.azure/oai2-to-oai3": "^3.0.0",
       "@microsoft.azure/tasks": "^2.1.0",
       "vscode-languageserver": "3.5.1",
-      "commonmark": "^0.27.0",
+      "commonmark": "0.27.0",
       "file-url": "^2.0.2",
       "get-uri": "^2.0.0",
       "js-yaml": "^3.11.0",
       "jsonpath": "1.0.0",
-      "linq-es2015": "^2.4.25",
+      "linq-es2015": "2.4.25",
       "safe-eval": "^0.3.0",
       "source-map": "0.5.6",
-      "strip-bom": "^3.0.0",
-      "untildify": "^3.0.2",
+      "strip-bom": "~3.0.0",
+      "untildify": "~3.0.2",
       "urijs": "^1.18.10",
-      "vscode-jsonrpc": "^3.3.1",
+      "vscode-jsonrpc": "~3.3.1",
       "yaml-ast-parser": "0.0.40",
-      "util": "0.12.0",
-      "z-schema": "3.19.0"
+      "util": "~0.12.0",
+      "z-schema": "~3.19.0"
     }
   },
   "dependencies": {}
