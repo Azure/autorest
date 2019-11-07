@@ -3,6 +3,7 @@ import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Tr
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 import { values } from '@azure-tools/linq';
+import { areSimilar } from '@azure-tools/object-comparison';
 
 const methods = new Set([
   'get',
@@ -177,7 +178,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
         }
           break;
 
-        case 'requestbody':
+        case 'requestBody':
           this.dereference('/components/requestBodies', this.requestBodies, this.visitRequestBody, targetParent, key, pointer, value, children);
           break;
         case 'responses':
@@ -292,6 +293,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   }
 
   visitMediaType(targetParent: AnyObject, originalNodes: Iterable<Node>) {
+
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
         case 'schema':
@@ -534,7 +536,12 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
       }
     } else {
       if (baseReferencePath === '/components/schemas') {
-        nameHint = value['x-ms-client-name'] || value.title || nameHint;
+        let nh = value['x-ms-client-name'] || value.title || nameHint;
+        let i = 0;
+        while (nh && <any>targetCollection[nh]) {
+          nh = `${value['x-ms-client-name'] || value.title || nameHint}${i++}`;
+        }
+        nameHint = nh;
       }
     }
 

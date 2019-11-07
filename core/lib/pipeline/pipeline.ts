@@ -15,6 +15,8 @@ import { createComponentModifierPlugin } from './component-modifier';
 import { createCSharpReflectApiVersionPlugin } from './metadata-generation';
 import { AutoRestExtension } from './plugin-endpoint';
 import { createCommonmarkProcessorPlugin } from './plugins/commonmark';
+import { createAllOfCleaner } from './plugins/allof-cleaner';
+
 import { createComponentKeyRenamerPlugin } from './plugins/component-key-renamer';
 import { createComponentsCleanerPlugin } from './plugins/components-cleaner';
 import { createSwaggerToOpenApi3Plugin } from './plugins/conversion';
@@ -209,7 +211,8 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     'components-cleaner': createComponentsCleanerPlugin(),
     'component-key-renamer': createComponentKeyRenamerPlugin(),
     'api-version-parameter-handler': createApiVersionParameterHandlerPlugin(),
-    'profile-filter': createProfileFilterPlugin()
+    'profile-filter': createProfileFilterPlugin(),
+    'allof-cleaner': createAllOfCleaner(),
   };
 
   // dynamically loaded, auto-discovered plugins
