@@ -226,11 +226,10 @@ function ProxifyConfigurationView(cfgView: any) {
   return new Proxy(cfgView, {
     get: (target, property) => {
       const value = (target)[property];
-
       if (value && value instanceof Array) {
         return value.map(each => resolveRValue(each, '', target, null));
       }
-      return resolveRValue(value, <string>property, null, cfgView);
+      return resolveRValue(value, <string>property, cfgView, null);
     }
   });
 }
