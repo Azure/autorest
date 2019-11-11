@@ -8,7 +8,7 @@ import { exists, filePath, isDirectory } from '@azure-tools/async-io';
 import { BlameTree, DataHandle, DataStore, IFileSystem, LazyPromise, ParseToAst, RealFileSystem, safeEval, Stringify, stringify, TryDecodeEnhancedPositionFromName } from '@azure-tools/datastore';
 import { Extension, ExtensionManager, LocalExtension } from '@azure-tools/extension';
 import { clone, keys, Dictionary, values } from '@azure-tools/linq';
-import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri, simplifyUri, IsUri } from '@azure-tools/uri';
+import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri, simplifyUri, IsUri, FileUriToPath } from '@azure-tools/uri';
 import { From } from 'linq-es2015';
 import { basename, dirname, join } from 'path';
 import { CancellationToken, CancellationTokenSource } from 'vscode-jsonrpc';
@@ -361,7 +361,7 @@ export class ConfigurationView {
   public get UseExtensions(): Array<{ name: string; source: string; fullyQualified: string }> {
     const useExtensions = this.Indexer['use-extension'] || {};
     return Object.keys(useExtensions).map(name => {
-      const source = useExtensions[name];
+      const source = useExtensions[name].startsWith('file://') ? FileUriToPath(useExtensions[name]) : useExtensions[name];
       return {
         name,
         source,
