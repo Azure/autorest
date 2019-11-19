@@ -16,10 +16,10 @@ directive:
       : $
   reason: polyfill
 - from: openapi-document
-  where: $.definitions.*.additionalProperties
+  where: $.components.*.additionalProperties
   transform: |
     return typeof $ === "boolean"
-      ? ($ ? { type: "object" } : undefined)
+      ? ($ ? { type: "object"} : undefined)
       : $
   reason: polyfill
 ```

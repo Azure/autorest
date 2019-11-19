@@ -3,7 +3,7 @@ import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Tr
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 import { values } from '@azure-tools/linq';
-import { areSimilar } from '@azure-tools/object-comparison';
+
 
 const methods = new Set([
   'get',
