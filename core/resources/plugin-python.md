@@ -12,6 +12,6 @@ try-require: ./readme.python.md
 
 ``` yaml $(python)
 use-extension:
-  "@microsoft.azure/autorest.python": "~2.1.26"
+  "@microsoft.azure/autorest.python": "~3.0.56"
 try-require: ./readme.python.md
 ```
