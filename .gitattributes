@@ -34,3 +34,7 @@
 *.xml text
 
 *.sln text eol=crlf merge=union
+
+shrinkwrap.yaml              merge=binary
+npm-shrinkwrap.json          merge=binary
+yarn.lock                    merge=binary

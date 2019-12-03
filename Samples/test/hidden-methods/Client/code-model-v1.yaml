@@ -40,7 +40,6 @@ modelTypes:
         defaultValue:
           $id: '10'
           fixed: false
-          raw: shiny
         documentation:
           $id: '11'
           fixed: false
@@ -66,43 +65,83 @@ modelTypes:
       $id: '15'
       fixed: false
       raw: Cowbell
+    extensions:
+      x-ms-metadata:
+        apiVersions:
+          - 1.0.0
+        filename:
+          - >-
+            mem:///129?file%3A%2F%2F%2FC%3A%2Fwork%2F2019%2Fautorest%2FSamples%2Ftest%2Fhidden-methods%2Fhidden-methods.yaml
+        name: Cowbell
+        originalLocations:
+          - >-
+            file:///C:/work/2019/autorest/Samples/test/hidden-methods/hidden-methods.yaml#/components/schemas/Cowbell
 name: CowbellFactory
 namespace: ''
 modelsName: Models
 apiVersion: 1.0.0
 baseUrl: 'https://localhost'
 documentation: This is a sample.
-operations:
+properties:
   - $id: '16'
+    isReadOnly: false
+    realPath:
+      - api-version
+    collectionFormat: none
+    defaultValue:
+      $id: '17'
+      fixed: false
+      raw: 1.0.0
+    documentation:
+      $id: '18'
+      fixed: false
+      raw: Client API version.
+    isRequired: true
+    isConstant: true
+    name:
+      $id: '19'
+      fixed: false
+      raw: api-version
+    serializedName: api-version
+    modelType:
+      $id: '20'
+      $type: PrimaryType
+      knownPrimaryType: string
+      name:
+        $id: '21'
+        fixed: false
+        raw: String
+operations:
+  - $id: '22'
     methods:
-      - $id: '17'
+      - $id: '23'
         parameters:
-          - $id: '18'
+          - $id: '24'
             location: body
             collectionFormat: none
             defaultValue:
-              $id: '19'
+              $id: '25'
               fixed: false
             documentation:
-              $id: '20'
+              $id: '26'
               fixed: false
             extensions:
               x-ms-requestBody-name: body
             isRequired: true
             isConstant: false
             name:
-              $id: '21'
+              $id: '27'
               fixed: false
               raw: body
             serializedName: body
             modelType:
               $ref: '2'
         name:
-          $id: '22'
+          $id: '28'
           fixed: false
           raw: Add
         group:
-          $id: '23'
+          $id: '29'
           fixed: false
           raw: Cowbell
         serializedName: Cowbell_Add
@@ -111,13 +150,25 @@ operations:
         httpMethod: post
         responses:
           OK:
-            $id: '24'
+            $id: '30'
+            extensions:
+              $id: '31'
+              x-ms-metadata:
+                apiVersions:
+                  - 1.0.0
+                filename:
+                  - >-
+                    mem:///129?file%3A%2F%2F%2FC%3A%2Fwork%2F2019%2Fautorest%2FSamples%2Ftest%2Fhidden-methods%2Fhidden-methods.yaml
+                name: paths·cowbell·post·responses·200
+                originalLocations:
+                  - >-
+                    file:///C:/work/2019/autorest/Samples/test/hidden-methods/hidden-methods.yaml#/components/responses/paths·cowbell·post·responses·200
             isNullable: true
         defaultResponse:
-          $id: '25'
+          $id: '32'
           isNullable: true
         returnType:
-          $id: '26'
+          $id: '33'
           isNullable: true
         description: A good description.
         requestContentType: application/json; charset=utf-8
@@ -127,10 +178,10 @@ operations:
           x-ms-requestBody-index: '0'
         hidden: false
     name:
-      $id: '27'
+      $id: '34'
       fixed: false
       raw: Cowbell
     typeName:
-      $id: '28'
+      $id: '35'
       fixed: false
     nameForProperty: Cowbell

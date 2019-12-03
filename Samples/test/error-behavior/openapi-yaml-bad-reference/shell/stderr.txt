@@ -1,3 +1,5 @@
-  Error: Could not resolve reference #/definitions/Cowball
-FATAL: Error: Could not resolve reference #/definitions/Cowball
-FATAL: openapi-document/openapi-document-converter - FAILED
+   at ...
+  Error: $ref to original location '/Samples/test/error-behavior/openapi-yaml-bad-reference/tiny.yaml#/components/schemas/Cowball' is not found in the new refs collection
+Error: $ref to original location '/Samples/test/error-behavior/openapi-yaml-bad-reference/tiny.yaml#/components/schemas/Cowball' is not found in the new refs collection
+FATAL: Error: $ref to original location '/Samples/test/error-behavior/openapi-yaml-bad-reference/tiny.yaml#/components/schemas/Cowball' is not found in the new refs collection
+FATAL: openapi-document/multi-api-merger - FAILED

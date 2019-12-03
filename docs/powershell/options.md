@@ -3,7 +3,7 @@ To change the way AutoRest generates, you can configure:
 - [Name Sanitation](#Name-Sanitization)
 - [Folder Layout](#Folder-Layout)
 - [Built-In Directives](directives.md)
-- [Custom Directives](../../src/autorest-core/resources/default-configuration.md#directives)
+- [Custom Directives](../../autorest-core/resources/default-configuration.md#directives)
 
 ## Name Sanitization
 Sometimes names from cmdlets or parameters contain redundant information. For example:

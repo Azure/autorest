@@ -1,0 +1,51 @@
+# Default Configuration
+
+This configuration applies to every run of AutoRest, but with less priority than any other specified configuration (i.e. it is overridable).
+
+## Basic Settings
+
+``` yaml
+azure-arm: false
+output-folder: generated
+openapi-type: arm
+
+# Load additional configurations.
+require:
+  
+  - $(this-folder)directives.md
+  - $(this-folder)pipeline.md
+  - $(this-folder)loader-openapi.md
+  - $(this-folder)markdown-documentation.md
+  - $(this-folder)miscellaneous.md
+  - $(this-folder)patches.md
+  - $(this-folder)plugin-powershell.md
+  - $(this-folder)plugin-azureresourceschema.md
+  - $(this-folder)plugin-csharp.md
+  - $(this-folder)plugin-go.md
+  - $(this-folder)plugin-java.md
+  - $(this-folder)plugin-nodejs.md
+  - $(this-folder)plugin-php.md
+  - $(this-folder)plugin-python.md
+  - $(this-folder)plugin-ruby.md
+  - $(this-folder)plugin-typescript.md
+  - $(this-folder)plugin-validators.md
+
+  - $(this-folder)graphs.md
+  - $(this-folder)help-configuration.md
+```
+
+##### Actually load files
+
+If we don't specify `--help`, we will trigger the setting to load files
+
+``` yaml !$(help)
+perform-load: true # kick off loading
+```
+
+
+``` yaml $(pipeline-model) == 'v3'
+# when an autorest-v3 generator is loading, we need to force the tag: all-api-versions so that it loads the whole api set.
+# but not TOO high, as then it'll be evaluated before $(pipeline-model)
+tag: all-api-versions
+load-priority: 500
+```

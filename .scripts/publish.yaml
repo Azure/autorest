@@ -1,0 +1,47 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master 
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    # ensure latest npm is installed
+    npm install -g npm 
+
+    # make sure the versions are all synchronized 
+    npx @microsoft/rush set-versions
+
+    # copy the autorest folder into autorestautorest
+    # and tweak the files so we can build @autorest/autorest too.
+    cp -r autorest autorestautorest
+    sed 's/\"name\": \"autorest\",/\"name\": \"@autorest\/autorest\",/g' -i autorestautorest/package.json
+    sed 's/\"autorest\":/\"autorest-beta\":/g' -i autorestautorest/package.json
+    sed 's/.*#region.*//g' -i rush.json
+
+    # pull in dependencies
+    npx @microsoft/rush update 
+
+    # compile the code
+    npx @microsoft/rush rebuild 
+
+    # build the packages
+    npx @microsoft/rush publish --publish --pack --include-all 
+
+    # publish the packages (tag as preview by default)
+    echo "//registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)" > ./.npmrc 
+    for file in common/temp/artifacts/packages/*.tgz 
+    do
+     common/temp/pnpm-local/node_modules/.bin/pnpm publish $file --tag latest --access public || echo no-worries 
+    done
+

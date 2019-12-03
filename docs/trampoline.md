@@ -2,8 +2,8 @@
 
 | Repository | Package | PRs | Issues |
 | ---------- | -:| -:| -:|
-| [AutoRest bootstrapper](https://github.com/Azure/autorest/tree/master/src/autorest) | [![version](https://img.shields.io/npm/v/autorest.svg?label=@latest)](https://www.npmjs.com/package/autorest                                                )<br> ![version](https://img.shields.io/npm/v/autorest/preview.svg?label=@preview)                           |
-| [AutoRest core](https://github.com/Azure/autorest/tree/master/src/autorest-core)    | [![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest-core.svg?label=@latest)](https://www.npmjs.com/package/@microsoft.azure/autorest-core)<br> ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest-core/preview.svg?label=@preview) | [![PRs](https://img.shields.io/github/issues-pr-raw/Azure/autorest.svg?label=%20%20)](https://github.com/Azure/autorest/pulls)  | [![issues](https://img.shields.io/github/issues-raw/Azure/autorest.svg?label=issues)](https://github.com/Azure/autorest/issues) |
+| [AutoRest bootstrapper](https://github.com/Azure/autorest/tree/master/autorest) | [![version](https://img.shields.io/npm/v/autorest.svg?label=@latest)](https://www.npmjs.com/package/autorest                                                )<br> ![version](https://img.shields.io/npm/v/autorest/preview.svg?label=@preview)                           |
+| [AutoRest core](https://github.com/Azure/autorest/tree/master/core)    | [![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest-core.svg?label=@latest)](https://www.npmjs.com/package/@microsoft.azure/autorest-core)<br> ![version](https://img.shields.io/npm/v/%40microsoft.azure%2Fautorest-core/preview.svg?label=@preview) | [![PRs](https://img.shields.io/github/issues-pr-raw/Azure/autorest.svg?label=%20%20)](https://github.com/Azure/autorest/pulls)  | [![issues](https://img.shields.io/github/issues-raw/Azure/autorest.svg?label=issues)](https://github.com/Azure/autorest/issues) |
 
 ## Code Generation
 

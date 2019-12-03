@@ -1,0 +1,3 @@
+# to test that a primary file does not get tagged as secondary or loaded twice
+root:
+  $ref: './input-file1.yaml'

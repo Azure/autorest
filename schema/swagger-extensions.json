@@ -82,6 +82,9 @@
     },
     "externalDocs": {
       "$ref": "#/definitions/externalDocs"
+    },
+    "x-ms-secondary-file": {
+      "type": "boolean"
     }
   },
   "definitions": {
