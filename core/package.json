@@ -54,7 +54,7 @@
     "@typescript-eslint/eslint-plugin": "~2.6.0",
     "@typescript-eslint/parser": "~2.6.0",
     "eslint": "~6.6.0",
-    "static-link": "^0.2.4",
+    "static-link": "^0.3.0",
     "vscode-languageserver": "3.5.1",
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/extension": "~3.0.0",
@@ -78,7 +78,8 @@
     "source-map-support": "0.5.13",
     "yaml-ast-parser": "0.0.40",
     "pwsh": "0.2.0",
-    "z-schema": "^3.19.0"
+    "z-schema": "^3.19.0",
+    "safe-buffer": "5.2.0"
   },
   "static-link": {
     "entrypoints": [],

@@ -53,7 +53,7 @@
     "@typescript-eslint/eslint-plugin": "~2.6.0",
     "@typescript-eslint/parser": "~2.6.0",
     "eslint": "~6.6.0",
-    "static-link": "^0.2.4",
+    "static-link": "^0.3.0",
     "@autorest/core": "~3.0.0",
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/extension": "~3.0.0",
@@ -61,7 +61,8 @@
     "semver": "^5.5.1",
     "chalk": "2.3.0",
     "pwsh": "0.2.0",
-    "source-map-support": "0.5.13"
+    "source-map-support": "0.5.13",
+    "safe-buffer": "5.2.0"
   },
   "static-link": {
     "entrypoints": [],
