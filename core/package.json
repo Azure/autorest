@@ -36,8 +36,8 @@
     "eslint": "eslint  . --ext .ts",
     "prepack": "npm run static-link && npm run build",
     "run-pwsh": "pwsh -noprofile -command \"& {param($script) pwsh -noprofile -command ((convertfrom-json (get-content -raw ./package.json)).'pwsh-scripts'.$script) }\"",
-    "clean": "pwsh -noprofile -command \"remove-item -recurse -ea 0 ./dist ; remove-item -ea 0 ./*.log\"",
-    "before-build": "pwsh -noprofile -command \"new-item -itemType directory -ea 0 -path dist/lib/pipeline ; copy-item ../schema/*.json dist/lib/pipeline\""
+    "clean": "rimraf ./dist && rimraf ./*.log",
+    "before-build": "mkdirp ./dist/lib/pipeline && cpy ../schema/*.json ./dist/lib/pipeline"
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {
@@ -69,15 +69,17 @@
     "@azure-tools/object-comparison": "~3.0.0",
     "compare-versions": "^3.4.0",
     "commonmark": "^0.27.0",
+    "cpy-cli": "~2.0.0",
     "jsonpath": "1.0.0",
     "linq-es2015": "^2.4.25",
+    "mkdirp": "~0.5.1",
+    "rimraf": "~3.0.0",
     "safe-eval": "^0.3.0",
     "source-map": "0.5.6",
     "untildify": "^3.0.2",
     "vscode-jsonrpc": "^3.5.0",
     "source-map-support": "0.5.13",
     "yaml-ast-parser": "0.0.40",
-    "pwsh": "0.2.0",
     "z-schema": "^3.19.0",
     "safe-buffer": "5.2.0"
   },
