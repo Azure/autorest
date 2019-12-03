@@ -9,6 +9,7 @@ import { clone } from '@azure-tools/linq';
 
 export async function convertOAI2toOAI3(input: DataHandle, sink: DataSink): Promise<DataHandle> {
   const converter = new Oai2ToOai3(input.originalFullPath, await input.ReadObject());
+  console.log(input.originalFullPath);
   converter.convert();
   const generated = clone(converter.generated);
   return sink.WriteObject('OpenAPI', generated, input.identity);

@@ -11,7 +11,7 @@ async function resetIdentity(config: ConfigurationView, input: DataSource, sink:
   const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
-    result.push(await sink.WriteObject(config.name, await each.ReadObject<any>(), each.identity, config.to));
+    result.push(await sink.WriteObject(config.name || each.Description, await each.ReadObject<any>(), each.identity, config.to));
   }
   return new QuickDataSource(result, input.pipeState);
 }

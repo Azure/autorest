@@ -23,6 +23,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
   private docServers?: Array<AnyObject>;
   private pathServers?: Array<AnyObject>;
+  private pathParameters?: Array<AnyObject>;
   private operationServers?: Array<AnyObject>;
 
   get servers() {
@@ -123,7 +124,11 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
   visitPath(targetParent: AnyObject, nodes: Iterable<Node>) {
     // split out the servers first.
-    const [servers, theNodes] = values(nodes).bifurcate(each => each.key === 'servers');
+    const [servers, someNodes] = values(nodes).bifurcate(each => each.key === 'servers');
+
+    const [parameters, theNodes] = values(someNodes).bifurcate(each => each.key === 'servers');
+
+    this.pathParameters = parameters;
 
     // set the operationServers if they exist.
     servers.forEach(s => this.pathServers = s.value);
@@ -151,6 +156,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
     // reset at end
     this.pathServers = undefined;
+    this.pathParameters = undefined;
   }
 
   visitHttpOperation(targetParent: AnyObject, nodes: Iterable<Node>) {
@@ -168,7 +174,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
         case 'parameters': {
           // parameters are a small special case, because they have to be tweaked when they are moved to the global parameter section.
           const newArray = this.newArray(targetParent, key, pointer);
-          for (const child of children) {
+          for (const child of [...this.pathParameters ?? [], ...children]) {
             const p = this.dereference('/components/parameters', this.parameters, this.visitParameter, newArray, child.key, child.pointer, child.value, child.children);
             // tag it as a method parameter. (default is 'client', so we have to tag it when we move it.)
             if (p['x-ms-parameter-location'] === undefined) {

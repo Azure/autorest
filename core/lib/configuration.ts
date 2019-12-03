@@ -22,6 +22,7 @@ import { AutoRestExtension } from './pipeline/plugin-endpoint';
 import { Suppressor } from './pipeline/suppression';
 import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
 import { Initializer, DeepPartial } from '@azure-tools/codegen';
+import { IdentifyDocument } from './autorest-core';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const untildify: (path: string) => string = require('untildify');
@@ -763,8 +764,7 @@ export class Configuration {
           // @<org>/<pkg>@<version>
           // <path>
           // if the entry starts with an @ it's definitely a package reference
-
-          if (await isDirectory(useEntry)) {
+          if (useEntry.endsWith('.tgz') || await isDirectory(useEntry)) {
             const pkg = await extMgr.findPackage('plugin', useEntry);
             configs['use-extension'][pkg.name] = useEntry;
           } else {
@@ -980,7 +980,7 @@ export class Configuration {
               const view = [...createView().GetNestedConfiguration(shortname)];
               const enableDebugger = view.length > 0 ? <boolean>(view[0].GetEntry('debugger')) : false;
 
-              if (await exists(localPath)) {
+              if (await exists(localPath) && !localPath.endsWith('.tgz')) {
                 localPath = filePath(localPath);
                 if (messageFormat !== 'json' && messageFormat !== 'yaml') {
                   // local package

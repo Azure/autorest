@@ -119,6 +119,5 @@ pipeline:
 
   openapi-document/tree-shaker:
     input: openapi-document/allof-cleaner
-    #input: openapi-document/transform
 
 ```
