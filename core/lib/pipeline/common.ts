@@ -19,11 +19,10 @@ export function createPerFilePlugin(processorBuilder: (config: ConfigurationView
       const fileIn = await input.ReadStrict(file);
 
       // only keep/process files that actually have content in them (ie, no empty objects, no {directive:[]} files ).
-      const pi = await fileIn.ReadObject<any>();
+      const pluginInput = await fileIn.ReadObject<any>();
 
-      if (!(length(pi) === 1 && pi.directive) || length(pi) === 0) {
-        const fileOut = await processor(fileIn, sink);
-        result.push(fileOut);
+      if (!(length(pluginInput) === 1 && pluginInput.directive) || length(pluginInput) === 0) {
+        result.push(await processor(fileIn, sink));
       }
     }
     return new QuickDataSource(result, input.pipeState);
