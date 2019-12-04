@@ -36,10 +36,8 @@
     "static-link": "static-link --force --no-node-modules",
     "preinstall": "node ./.scripts/preinstall-check",
     "prepack": "npm run static-link && npm run build",
-    "clean": "ver > nul 2>&1 nul && npm run --silent clean-cmd || npm run --silent clean-bash",
-    "clean-cmd": "if exist dist rmdir /s /q dist && exit 0 || exit 0 ",
-    "clean-bash": "rm nul && rm -rf dist && exit 0 || exit 0",
-    "before-build": "pwsh -noprofile -command \"new-item -type directory -ea 0 ./dist/interfaces; copy-item -ea 0 ./interfaces/*.d.ts dist/interfaces\""
+    "clean": "rimraf ./dist",
+    "before-build": "mkdirp ./dist/interfaces && cpy ./interfaces/*.d.ts ./dist/interfaces"
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {
@@ -60,7 +58,9 @@
     "@azure-tools/tasks": "~3.0.0",
     "semver": "^5.5.1",
     "chalk": "2.3.0",
-    "pwsh": "0.2.0",
+    "cpy-cli": "~2.0.0",
+    "mkdirp": "~0.5.1",
+    "rimraf": "~3.0.0",
     "source-map-support": "0.5.13",
     "safe-buffer": "5.2.0"
   },

@@ -4,8 +4,6 @@
   "version": "3.0.0",
   "description": "AutoRest (core and bootstrapper) modules",
   "scripts": {
-    "prepare": "(pwsh -v || npm --silent run show-error) && pwsh -noprofile ./.scripts/verify-install.ps1",
-    "show-error": "echo ====== &echo ====== & echo ====== & echo REQUIRED: Install PowerShell-core 6.1 or greater (see readme.md) & echo ====== & echo ====== & echo ====== & exit 1",
     "test": "rush test",
     "testci": "rush test",
     "build": "rush rebuild",
