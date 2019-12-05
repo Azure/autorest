@@ -27,7 +27,7 @@ steps:
     echo "//registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)" > ./.npmrc 
     for file in *.tgz 
     do
-      echo pnpm publish $file --tag latest --access public 
+      pnpm publish $file --tag latest --access public 
       rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi
     done
 
