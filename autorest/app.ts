@@ -210,7 +210,6 @@ async function main() {
           console.log(`Resetting autorest extension folder '${rootFolder}'`);
         }
 
-
         try {
           await (await extensionManager).reset();
           console.log(color('\n\n## Cleared the AutoRest extension folder.\nOn the next run, extensions will be reacquired from the repository.'));

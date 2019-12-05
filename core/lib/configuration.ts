@@ -142,7 +142,7 @@ function* valuesOf<T>(value: any): Iterable<T> {
     return value;
   }
   return [value];
-  // */
+  */
 }
 
 function arrayOf<T>(value: any): Array<T> {
