@@ -46,10 +46,10 @@ steps:
 
     # publish packages to a github release.
 
-    # publish autorest cli
+    # publish autorest cli and beta (@autorest/autorest)
     cd autorest 
     v=`node -e "console.log(require('./package.json').version)"`
-    publish-release --token $(Github-azuresdkci-personalaccesstoken) --repo autorest --owner azure --name autorest-$v --tag autorest-$v --notes='prerelease build' --prerelease --editRelease false --assets ../common/temp/artifacts/packages/autorest-$v.tgz --target_commitish $(Build.SourceBranchName)
+    publish-release --token $(Github-azuresdkci-personalaccesstoken) --repo autorest --owner azure --name autorest-$v --tag autorest-$v --notes='prerelease build' --prerelease --editRelease false --assets ../common/temp/artifacts/packages/autorest-$v.tgz --assets ../common/temp/artifacts/packages/autorest-autorest-$v.tgz --target_commitish $(Build.SourceBranchName)
     cd ..
 
     # publish autorest core

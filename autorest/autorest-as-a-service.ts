@@ -223,11 +223,16 @@ export async function selectVersion(requestedVersion: string, force: boolean, mi
       // try the package 
       pkg = await (await extensionManager).findPackage(newCorePackage, requestedVersion);
     } catch {
-      // fallback to old package name
+      // try a prerelease version from github.
       try {
-        pkg = await (await extensionManager).findPackage(oldCorePackage, requestedVersion);
+        pkg = await (await extensionManager).findPackage('core', `https://github.com/Azure/autorest/releases/download/autorest-core-${requestedVersion}/autorest-core-${requestedVersion}.tgz`);
       } catch {
-        // no package found!
+        // fallback to old package name
+        try {
+          pkg = await (await extensionManager).findPackage(oldCorePackage, requestedVersion);
+        } catch {
+          // no package found!
+        }
       }
       if (!pkg) {
         throw new Exception(`Unable to find a valid AutoRest core package '${newCorePackage}' @ '${requestedVersion}'.`);

@@ -763,6 +763,7 @@ export class Configuration {
           // @<org>/<pkg>
           // @<org>/<pkg>@<version>
           // <path>
+          // <path/uri to .tgz package file>
           // if the entry starts with an @ it's definitely a package reference
           if (useEntry.endsWith('.tgz') || await isDirectory(useEntry)) {
             const pkg = await extMgr.findPackage('plugin', useEntry);
@@ -789,27 +790,6 @@ export class Configuration {
               }
             }
           }
-          /*
-          // attempt <package>@<version> interpretation
-          const separatorIndex = useEntry.lastIndexOf('@');
-          console.log(separatorIndex);
-          const versionPart = useEntry.slice(separatorIndex + 1);
-          if (separatorIndex > 0 && /^[^/\\]+$/.test(versionPart)) {
-            const pkg = await extMgr.findPackage(useEntry.slice(0, separatorIndex), versionPart);
-            configs['use-extension'][pkg.name] = versionPart;
-          } else {
-            console.log(separatorIndex);
-            if (separatorIndex === 0) {
-
-              const pkg = await extMgr.findPackage(useEntry, '*');
-              configs['use-extension'][pkg.name] = '*';
-            } else {
-              const pkg = await extMgr.findPackage(useEntry, useEntry);
-              configs['use-extension'][pkg.name] = useEntry;
-            }
-
-          }
-          */
         }
       }
       delete configs.use;
