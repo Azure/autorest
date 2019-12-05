@@ -17,14 +17,13 @@ steps:
     npm install -g npm 
     npm install -g pnpm
 
+    echo "//registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)" > ./.npmrc 
+
     # grab the file specified
-    mkdir tmp
-    cd tmp
     wget $(pkg)
     rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
 
     # publish it to npm 
-    echo "//registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)" > ./.npmrc 
     for file in *.tgz 
     do
       pnpm publish $file --tag latest --access public 
