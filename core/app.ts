@@ -423,9 +423,6 @@ function shallowMerge(existing: any, more: any) {
     for (const key of Object.getOwnPropertyNames(more)) {
       const value = more[key];
       if (value !== undefined) {
-        /* if (existing[key]) {
-          Console.Log(color(`> Warning: ${key} is overwritten.`));
-        } */
         existing[key] = value;
       }
     }

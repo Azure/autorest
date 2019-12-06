@@ -3,6 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+// if this is being run directly, call the app entrypoint (we're probably running the local folder)
+if (require.main === module) {
+  require('../entrypoints/app');
+}
+
 // load modules from static linker filesystem.
 if (process.argv.indexOf('--no-static-loader') === -1 && process.env['no-static-loader'] === undefined && require('fs').existsSync('./static-loader.js')) {
   require('./static-loader.js').load(`${__dirname}/static_modules.fs`);
