@@ -2,7 +2,7 @@
 import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Transformer, QuickDataSource, JsonPath, Source } from '@azure-tools/datastore';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
-import { values } from '@azure-tools/linq';
+import { values, length } from '@azure-tools/linq';
 
 
 const methods = new Set([
@@ -126,9 +126,14 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     // split out the servers first.
     const [servers, someNodes] = values(nodes).bifurcate(each => each.key === 'servers');
 
-    const [parameters, theNodes] = values(someNodes).bifurcate(each => each.key === 'servers');
+    const [parameters, theNodes] = values(someNodes).bifurcate(each => each.key === 'parameters');
+    if (length(parameters) > 0) {
+      this.pathParameters = [];
+      for (const { value, key, pointer, children } of parameters) {
+        this.pathParameters.push(...children);
+      }
+    }
 
-    this.pathParameters = parameters;
 
     // set the operationServers if they exist.
     servers.forEach(s => this.pathServers = s.value);
@@ -174,13 +179,23 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
         case 'parameters': {
           // parameters are a small special case, because they have to be tweaked when they are moved to the global parameter section.
           const newArray = this.newArray(targetParent, key, pointer);
-          for (const child of [...this.pathParameters ?? [], ...children]) {
+          for (const child of this.pathParameters ?? []) {
+
             const p = this.dereference('/components/parameters', this.parameters, this.visitParameter, newArray, child.key, child.pointer, child.value, child.children);
             // tag it as a method parameter. (default is 'client', so we have to tag it when we move it.)
-            if (p['x-ms-parameter-location'] === undefined) {
+            if (!child.value.$ref && p['x-ms-parameter-location'] === undefined) {
               p['x-ms-parameter-location'] = { value: 'method', pointer: '' };
             }
           }
+
+          for (const child of children) {
+            const p = this.dereference('/components/parameters', this.parameters, this.visitParameter, newArray, length(this.pathParameters) + child.key, child.pointer, child.value, child.children);
+            // tag it as a method parameter. (default is 'client', so we have to tag it when we move it.)
+            if (!child.value.$ref && p['x-ms-parameter-location'] === undefined) {
+              p['x-ms-parameter-location'] = { value: 'method', pointer: '' };
+            }
+          }
+
         }
           break;
 
