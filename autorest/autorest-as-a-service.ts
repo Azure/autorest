@@ -124,15 +124,15 @@ export async function resolveEntrypoint(localPath: string | null, entrypoint: st
               if (args.debug) {
                 console.log(`special case: '${localPath}/${pkg.main}' .`);
               }
-              return localPath;
+              return localPath.replace(/\\/g, '/');
             }
         }
         const path = `${localPath}/${entrypoint}`;
         if (await isFile(path)) {
           if (args.debug) {
-            console.log(`Using Entrypoing: '${localPath}/${entrypoint}' .`);
+            console.log(`Using Entrypoint: '${localPath}/${entrypoint}' .`);
           }
-          return path;
+          return path.replace(/\\/g, '/');
         }
       }
     }
