@@ -328,7 +328,6 @@ export class ConfigurationView {
   }
 
   /* @internal */ public get Indexer(): ConfigurationView {
-
     return new Proxy<ConfigurationView>(this, {
       get: (target, property) => {
         return property in target.config ? (<any>target.config)[property] : this[<number | string>property];
@@ -472,6 +471,45 @@ export class ConfigurationView {
 
   public get OutputFolderUri(): string {
     return this.ResolveAsFolder(<string>this.config['output-folder']);
+  }
+
+  public get HeaderText(): string {
+    const h = this.rawConfig['header-definitions'];
+    const version = (<any>global).autorestVersion;
+
+    switch (this.rawConfig['license-header']?.toLowerCase()) {
+
+      case 'microsoft_mit':
+        return `${h.microsoft}\n${h.mit}\n${h.default.replace('{core}', version)}\n${h.warning}`;
+
+      case 'microsoft_apache':
+        return `${h.microsoft}\n${h.apache}\n${h.default.replace('{core}', version)}\n${h.warning}`;
+
+      case 'microsoft_mit_no_version':
+        return `${h.microsoft}\n${h.mit}\n${h['no-version']}\n${h.warning}`;
+
+      case 'microsoft_apache_no_version':
+        return `${h.microsoft}\n${h.apache}\n${h['no-version']}${h.warning}`;
+
+      case 'microsoft_apache_no_codegen':
+        return `${h.microsoft}\n${h.mit}\n${h['no-version']}`;
+
+      case 'none':
+        return '';
+
+      case 'microsoft_mit_small':
+        return `${h.microsoft}\n${h['mit-small']}\n${h.default.replace('{core}', version)}\n${h.warning}`;
+
+      case 'microsoft_mit_small_no_codegen':
+        return `${h.microsoft}\n${h['mit-small']}\n${h['no-version']}`;
+
+      case null:
+      case undefined:
+        return `${h.default.replace('{core}', version)}\n${h.warning}`;
+
+      default:
+        return `${this.rawConfig['license-header']}`;
+    }
   }
 
   public IsOutputArtifactRequested(artifact: string): boolean {

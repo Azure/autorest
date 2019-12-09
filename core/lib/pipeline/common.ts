@@ -17,11 +17,15 @@ export function createPerFilePlugin(processorBuilder: (config: ConfigurationView
     const result: Array<DataHandle> = [];
     for (const file of files) {
       const fileIn = await input.ReadStrict(file);
+      try {
+        // only keep/process files that actually have content in them (ie, no empty objects, no {directive:[]} files ).
+        const pluginInput = await fileIn.ReadObject<any>();
 
-      // only keep/process files that actually have content in them (ie, no empty objects, no {directive:[]} files ).
-      const pluginInput = await fileIn.ReadObject<any>();
-
-      if (!(length(pluginInput) === 1 && pluginInput.directive) || length(pluginInput) === 0) {
+        if (!(length(pluginInput) === 1 && pluginInput.directive) || length(pluginInput) === 0) {
+          result.push(await processor(fileIn, sink));
+        }
+      } catch {
+        // not an object anyway
         result.push(await processor(fileIn, sink));
       }
     }

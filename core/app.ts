@@ -25,6 +25,7 @@ if (!String.prototype.padEnd) {
 require('events').EventEmitter.defaultMaxListeners = 100;
 process.env['ELECTRON_RUN_AS_NODE'] = '1';
 delete process.env['ELECTRON_NO_ATTACH_CONSOLE'];
+(<any>global).autorestVersion = require('../package.json').version;
 
 const color: (text: string) => string = (<any>global).color ? (<any>global).color : p => p;
 
@@ -311,7 +312,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   args = parseArgs([...autorestArgs, ...more]);
 
   if ((!args.rawSwitches['message-format']) || args.rawSwitches['message-format'] === 'regular') {
-    console.log(color(`> Loading AutoRest core      '${__dirname}' (${require('../package.json').version})`));
+    console.log(color(`> Loading AutoRest core      '${__dirname}' (${(<any>global).autorestVersion})`));
   }
   verbose = verbose || args.rawSwitches['verbose'];
   debug = debug || args.rawSwitches['debug'];
