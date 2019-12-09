@@ -523,6 +523,9 @@ export class ConfigurationView {
     if (key === 'resolved-directive') {
       return this.resolveDirectives();
     }
+    if (<any>key === 'header-text') {
+      return this.HeaderText;
+    }
     let result = <any>this.config;
     for (const keyPart of key.split('.')) {
       result = result[keyPart];
