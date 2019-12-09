@@ -84,9 +84,6 @@ function parseArgs(autorestArgs: Array<string>): any {
         value = rawValue;
       }
       result[key] = value;
-    } else {
-      result._ = result._ || [];
-      result._.push(arg);
     }
   }
   return result;
