@@ -174,19 +174,22 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
     this.clone(targetParent, 'servers', '/', this.servers);
 
+    let newArray = length(this.pathParameters) > 0 ? this.newArray(targetParent, 'parameters', '') : undefined;
+    if (newArray) {
+      for (const child of this.pathParameters ?? []) {
+        const p = this.dereference('/components/parameters', this.parameters, this.visitParameter, newArray, child.key, child.pointer, child.value, child.children);
+        // tag it as a method parameter. (default is 'client', so we have to tag it when we move it.)
+        if (!child.value.$ref && p['x-ms-parameter-location'] === undefined) {
+          p['x-ms-parameter-location'] = { value: 'method', pointer: '' };
+        }
+      }
+    }
+
     for (const { value, key, pointer, children } of theNodes) {
       switch (key) {
         case 'parameters': {
           // parameters are a small special case, because they have to be tweaked when they are moved to the global parameter section.
-          const newArray = this.newArray(targetParent, key, pointer);
-          for (const child of this.pathParameters ?? []) {
-
-            const p = this.dereference('/components/parameters', this.parameters, this.visitParameter, newArray, child.key, child.pointer, child.value, child.children);
-            // tag it as a method parameter. (default is 'client', so we have to tag it when we move it.)
-            if (!child.value.$ref && p['x-ms-parameter-location'] === undefined) {
-              p['x-ms-parameter-location'] = { value: 'method', pointer: '' };
-            }
-          }
+          newArray = newArray || this.newArray(targetParent, key, pointer);
 
           for (const child of children) {
             const p = this.dereference('/components/parameters', this.parameters, this.visitParameter, newArray, length(this.pathParameters) + child.key, child.pointer, child.value, child.children);
@@ -195,7 +198,6 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
               p['x-ms-parameter-location'] = { value: 'method', pointer: '' };
             }
           }
-
         }
           break;
 
