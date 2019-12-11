@@ -89,6 +89,11 @@ export async function resolveEntrypoint(localPath: string | null, entrypoint: st
     if (await isDirectory(localPath)) {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const pkg = require(`${localPath}/package.json`);
+      if (pkg.name === 'autorest') {
+        // you've tried loading the bootstrapper not the core!
+        console.error(`The location you have specified is not autorest-core, it's autorest bootstrapper: ${pkg.name}`);
+        process.exit(1);
+      }
 
       if (args.debug) {
         console.log(`Examining AutoRest core package: ${pkg.name}`);

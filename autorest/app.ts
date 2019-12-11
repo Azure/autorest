@@ -283,7 +283,7 @@ async function main() {
 
     if (!args.version && localVersion) {
       // they never specified a version on the cmdline, but we might have one in configuration
-      const cfgVersion = (await configurationSpecifiedVersion(localVersion)).version;
+      const cfgVersion = (await configurationSpecifiedVersion(localVersion))?.version;
 
       // if we got one back, we're going to set the requestedVersion to whatever they asked for.
       if (cfgVersion) {
