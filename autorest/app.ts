@@ -12,23 +12,6 @@ if (global && global.v8debug) {
 }
 const cwd = process.cwd();
 
-// https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padEnd
-if (!String.prototype.padEnd) {
-  String.prototype.padEnd = function padEnd(targetLength, padString) {
-    targetLength = targetLength >> 0; // floor if number or convert non-number to 0;
-    padString = String(padString || ' ');
-    if (this.length > targetLength) {
-      return String(this);
-    } else {
-      targetLength = targetLength - this.length;
-      if (targetLength > padString.length) {
-        padString += padString.repeat(targetLength / padString.length); // append to original to ensure we are longer than needed
-      }
-      return String(this) + padString.slice(0, targetLength);
-    }
-  };
-}
 
 import { isFile, readdir, rmdir, isDirectory } from '@azure-tools/async-io';
 import { Exception, LazyPromise } from '@azure-tools/tasks';
@@ -283,7 +266,7 @@ async function main() {
 
     if (!args.version && localVersion) {
       // they never specified a version on the cmdline, but we might have one in configuration
-      const cfgVersion = (await configurationSpecifiedVersion(localVersion)).version;
+      const cfgVersion = (await configurationSpecifiedVersion(localVersion))?.version;
 
       // if we got one back, we're going to set the requestedVersion to whatever they asked for.
       if (cfgVersion) {

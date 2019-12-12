@@ -2,6 +2,7 @@ import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyOb
 import { ResolveUri } from '@azure-tools/uri';
 import { ConfigurationView } from '../../configuration';
 import { Channel } from '../../message';
+import { values, items, length } from '@azure-tools/linq';
 /* eslint-disable @typescript-eslint/no-use-before-define */
 export async function crawlReferences(config: ConfigurationView, inputScope: DataSource, filesToCrawl: Array<DataHandle>, sink: DataSink): Promise<Array<DataHandle>> {
   const result: Array<DataHandle> = [];
@@ -44,9 +45,35 @@ class RefProcessor extends Transformer<any, any> {
     this.filesToExclude = filesToExclude;
   }
 
+  async processXMSExamples(targetParent: AnyObject, examples: AnyObject) {
+    const xmsExamples = {};
+
+    for (const { key, value } of items(examples)) {
+
+      if (value.$ref) {
+        try {
+          const refPath = (value.$ref.indexOf('#') === -1) ? value.$ref : value.$ref.split('#')[0];
+          const refUri = ResolveUri(this.originalFileLocation, refPath);
+          const handle = await this.inputScope.ReadStrict(refUri);
+
+          xmsExamples[key] = await handle.ReadObject<AnyObject>();
+        } catch {
+          // skip examples that are not nice to us.
+        }
+      }
+    }
+
+    if (length(xmsExamples) > 0) {
+      targetParent['x-ms-examples'] = { value: xmsExamples, pointer: '' };
+    }
+  }
+
   async process(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
+
       if (key === 'x-ms-examples') {
+        // try to pull in the examples and insert them directly into this file.
+        await this.processXMSExamples(targetParent, value);
         continue;
       }
       if (key === '$ref') {
