@@ -18,8 +18,6 @@ The Azure and Model validators
 #### Validation
 
 ``` yaml
-version: 2.0.4407
-
 pipeline:
   swagger-document/model-validator:
     input: swagger-document/identity
@@ -30,8 +28,6 @@ pipeline:
 ```
 
 ``` yaml $(notnow)
-version: 2.0.4407
-
 pipeline:
   openapi-document/model-validator:
     input: openapi-document/identity
