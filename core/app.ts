@@ -561,11 +561,7 @@ async function mainImpl(): Promise<number> {
     // be very careful about the following check:
     // - doing the inversion (instanceof Error) doesn't reliably work since that seems to return false on Errors marshalled from safeEval
     if (e instanceof Exception) {
-      // if (autorestArgs.indexOf('--debug') !== -1) {
-      // console.log(`${__filename} - FAILURE ${JSON.stringify(e)}`);
-      // } else {
       console.log(e.message);
-      //}
       return e.exitCode;
     }
     if (e !== false) {
