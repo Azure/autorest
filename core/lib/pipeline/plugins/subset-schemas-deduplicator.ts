@@ -75,7 +75,7 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
         const currentSchemaName = currentSchema.value[xMsMetadata].name;
         const anotherSchemaName = anotherSchema.value[xMsMetadata].name;
         if (currentSchemaName === anotherSchemaName && currentSchema.uid !== anotherSchema.uid) {
-          const skipList = ['description', 'enum', 'readOnly', 'required'];
+          const skipList = ['description', 'enum', 'readOnly', 'required', 'x-ms-original', 'x-ms-examples'];
           const additiveFieldsList = ['properties', 'allOf', 'required'];
 
           // filter out metadata
