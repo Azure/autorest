@@ -142,7 +142,6 @@ use-extension:
 use-extension:
  "@autorest/az": "latest"
 try-require: ./readme.az.md   
-try-require: ./readme.cli.md   
 ```
 
 ### Graph
