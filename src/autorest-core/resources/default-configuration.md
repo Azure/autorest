@@ -138,6 +138,13 @@ use-extension:
  "oav": "~0.4.20"
 ```
 
+``` yaml $(az)
+use-extension:
+ "@autorest/az": "latest"
+try-require: ./readme.az.md   
+try-require: ./readme.cli.md   
+```
+
 ### Graph
 
 #### Reflection
