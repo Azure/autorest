@@ -332,7 +332,8 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   }
 
   visitArrayProperty(targetParent: AnyObject, key: string, pointer: string, value: AnyObject, children: Iterable<Node>, nameHint: string) {
-    if (value.items.type === 'boolean' || value.items.type === 'integer' || value.items.type === 'number') {
+    const t = value?.items?.type;
+    if (t === 'boolean' || t === 'integer' || t === 'number') {
       this.clone(targetParent, key, pointer, value);
     } else {
       // object or string
