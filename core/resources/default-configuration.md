@@ -29,6 +29,7 @@ require:
   - $(this-folder)plugin-ruby.md
   - $(this-folder)plugin-typescript.md
   - $(this-folder)plugin-validators.md
+  - $(this-folder)plugin-az.md
 
   - $(this-folder)graphs.md
   - $(this-folder)help-configuration.md
