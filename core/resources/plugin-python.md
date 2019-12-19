@@ -4,13 +4,13 @@ The V2 version of the Python Generator.
 
 
 
-``` yaml $(python) && $(preview)
+``` yaml $(v2-python) && $(preview) 
 use-extension:
   "@microsoft.azure/autorest.python": "preview"
 try-require: ./readme.python.md
 ```
 
-``` yaml $(python)
+``` yaml $(v2-python) 
 use-extension:
   "@microsoft.azure/autorest.python": "~3.0.56"
 try-require: ./readme.python.md
