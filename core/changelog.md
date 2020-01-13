@@ -1,5 +1,8 @@
 # AutoRest Core 
 
+## 1/13/2020
+- rebuild to pick up newer extension library that supports python interpreter detection
+
 ## 12/18/2019
 - force rebuild to pick up fix in oai2 converter
 
