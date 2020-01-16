@@ -87,6 +87,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     // initialize certain things ahead of time:
     for (const { value, key, pointer, children } of theNodes) {
       switch (key) {
+        case 'x-ms-paths':
         case 'paths':
           this.visitPaths(this.newObject(targetParent, key, pointer), children);
           break;
