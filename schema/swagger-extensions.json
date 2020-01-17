@@ -533,6 +533,9 @@
         "x-nullable": {
           "$ref": "#/definitions/xNullable"
         },
+        "x-ms-secret": {
+          "$ref": "#/definitions/xmsSecret"
+        },
         "x-ms-header-collection-prefix": {
           "type": "string",
           "description": "Provides the ability to specify a key value mapping, using given prefix as the prefix of all keys."
@@ -713,6 +716,9 @@
         "x-nullable": {
           "$ref": "#/definitions/xNullable"
         },
+        "x-ms-secret": {
+          "$ref": "#/definitions/xmsSecret"
+        },
         "x-ms-parameter-grouping": {
           "$ref": "#/definitions/xmsParameterGrouping"
         },
@@ -842,6 +848,9 @@
         "x-nullable": {
           "$ref": "#/definitions/xNullable"
         },
+        "x-ms-secret": {
+          "$ref": "#/definitions/xmsSecret"
+        },
         "x-ms-skip-url-encoding": {
           "$ref": "#/definitions/xmsSkipUrlEncoding"
         },
@@ -958,6 +967,9 @@
         "x-nullable": {
           "$ref": "#/definitions/xNullable"
         },
+        "x-ms-secret": {
+          "$ref": "#/definitions/xmsSecret"
+        },
         "multipleOf": {
           "$ref": "#/definitions/multipleOf"
         }
@@ -1069,6 +1081,9 @@
         },
         "x-nullable": {
           "$ref": "#/definitions/xNullable"
+        },
+        "x-ms-secret": {
+          "$ref": "#/definitions/xmsSecret"
         },
         "multipleOf": {
           "$ref": "#/definitions/multipleOf"
@@ -1192,6 +1207,9 @@
         },
         "x-nullable": {
           "$ref": "#/definitions/xNullable"
+        },
+        "x-ms-secret": {
+          "$ref": "#/definitions/xmsSecret"
         },
         "additionalProperties": {
           "anyOf": [
@@ -1383,6 +1401,9 @@
         "x-nullable": {
           "$ref": "#/definitions/xNullable"
         },
+        "x-ms-secret": {
+          "$ref": "#/definitions/xmsSecret"
+        },
         "multipleOf": {
           "$ref": "#/definitions/multipleOf"
         }
@@ -1573,6 +1594,10 @@
     },
     "xNullable": {
       "description": "Indicates whether the entity on which this extension is applied is nullable or not. `true` value indicates that it is nullable.",
+      "type": "boolean"
+    },
+    "xmsSecret": {
+      "description": "Indicates whether the entity on which this extension is applied is to be considered a secret (ie, password, certificate, etc) or not. `true` value indicates that it is a secret.",
       "type": "boolean"
     },
     "xmsEnum": {
