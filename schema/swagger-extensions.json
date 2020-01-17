@@ -334,6 +334,10 @@
         },
         "x-ms-examples": {
           "$ref": "#/definitions/xmsExamples"
+        },
+        "x-ms-client-name": {
+          "type": "string",
+          "description": "A code-generator-friendly name for the generated method name for this operation."
         }
       }
     },
