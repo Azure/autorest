@@ -8,7 +8,7 @@ use-extension:
 try-require: ./readme.csharp.md
 ```
 
-``` yaml $(csharp)
+``` yaml $(csharp) && $(pipeline-model) !== 'v3'
 use-extension:
   "@microsoft.azure/autorest.csharp": "~2.3.79"
 try-require: ./readme.csharp.md

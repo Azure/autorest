@@ -8,7 +8,7 @@ use-extension:
 try-require: ./readme.go.md
 ```
 
-``` yaml $(go)
+``` yaml $(go) && $(pipeline-model) !== 'v3'
 use-extension:
   "@microsoft.azure/autorest.go": "~2.1.47"
 try-require: ./readme.go.md
