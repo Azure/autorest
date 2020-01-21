@@ -2,13 +2,13 @@
 
 The V2 version of the Java Generator.
 
-``` yaml $(java) && $(preview)
+``` yaml $(java) && $(preview) 
 use-extension:
   "@microsoft.azure/autorest.java": "~2.1.88"
 try-require: ./readme.java.md
 ```
 
-``` yaml $(java)
+``` yaml $(java) && $(pipeline-model) !== 'v3'
 use-extension:
   "@microsoft.azure/autorest.java": "~2.1.88"
 try-require: ./readme.java.md

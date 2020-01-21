@@ -8,7 +8,7 @@ use-extension:
 try-require: ./readme.typescript.md
 ```
 
-``` yaml $(typescript)
+``` yaml $(typescript) && $(pipeline-model) !== 'v3'
 use-extension:
   "@microsoft.azure/autorest.typescript": "~4.2.0"
 try-require: ./readme.typescript.md

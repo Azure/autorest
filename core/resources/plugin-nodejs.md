@@ -9,7 +9,7 @@ use-extension:
 try-require: ./readme.nodejs.md
 ```
 
-``` yaml $(nodejs)
+``` yaml $(nodejs) && $(pipeline-model) !== 'v3'
 use-extension:
   "@microsoft.azure/autorest.nodejs": "~2.1.25"
 try-require: ./readme.nodejs.md
