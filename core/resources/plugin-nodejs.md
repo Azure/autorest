@@ -3,13 +3,13 @@
 The V2 version of the NodeJS Generator.
 
 
-``` yaml $(nodejs) && $(preview)
+``` yaml $(nodejs) && $(preview) && !isRequested('@autorest/nodejs')
 use-extension:
   "@microsoft.azure/autorest.nodejs": "preview"
 try-require: ./readme.nodejs.md
 ```
 
-``` yaml $(nodejs) && $(pipeline-model) !== 'v3'
+``` yaml $(nodejs) && !isRequested('@autorest/nodejs')
 use-extension:
   "@microsoft.azure/autorest.nodejs": "~2.1.25"
 try-require: ./readme.nodejs.md

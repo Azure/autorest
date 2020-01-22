@@ -10,6 +10,7 @@ import { OperationAbortedException } from '../exception';
 import { Channel, SourceLocation } from '../message';
 import { MergeYamls, resolveRValue } from '../source-map/merging';
 import { parse as ParseLiterate } from './literate';
+import { keys } from '@azure-tools/linq';
 
 export class CodeBlock {
   info!: string | null;
@@ -105,6 +106,17 @@ export function evaluateGuard(rawFenceGuard: string, contextObject: any): boolea
       // console.log(JSON.stringify(contextObject['used-extension']));
       // console.log(contextObject['used-extension'] && !!(contextObject['used-extension'].find(each => each.startsWith(`["${name}"`))));
       return contextObject['used-extension'] && !!(contextObject['used-extension'].find(each => each.startsWith(`["${name}"`)));
+    },
+
+    /** allows a check to see if a given extension is being requested already */
+    isRequested: (name: string) => {
+      return contextObject['use-extension'] && keys(contextObject['use-extension']).any(each => each === name);
+    },
+
+    /** prints a debug message from configuration. sssshhh. don't use this.  */
+    debugMessage: (text: string) => {
+      console.log(text);
+      return true;
     }
   };
 
