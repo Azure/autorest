@@ -44,9 +44,9 @@ If we don't specify `--help`, we will trigger the setting to load files
 perform-load: true # kick off loading
 ```
 
-
-``` yaml $(pipeline-model) == 'v3'
-# when an autorest-v3 generator is loading, we need to force the tag: all-api-versions so that it loads the whole api set.
+``` yaml enableAllVersionsMode()
+# when an autorest-v3 generator is loading, and a profile or api-verison is specified, 
+# we need to force the tag: all-api-versions so that it loads the whole api set.
 # but not TOO high, as then it'll be evaluated before $(pipeline-model)
 tag: all-api-versions
 load-priority: 500
