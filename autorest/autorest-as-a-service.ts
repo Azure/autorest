@@ -27,8 +27,8 @@ export const extensionManager: Promise<ExtensionManager> = ExtensionManager.Crea
 export const oldCorePackage = '@microsoft.azure/autorest-core';
 export const newCorePackage = '@autorest/core';
 
-const basePkgVersion = pkgVersion.indexOf('-') > -1 ? pkgVersion.substring(0, pkgVersion.indexOf('-')) : pkgVersion;
-const versionRange = `~${basePkgVersion}`; // the version range of the core package required.
+const basePkgVersion = semver.parse(pkgVersion.indexOf('-') > -1 ? pkgVersion.substring(0, pkgVersion.indexOf('-')) : pkgVersion);
+const versionRange = `~${basePkgVersion.major}.${basePkgVersion.minor}.0`; // the version range of the core package required.
 
 export const networkEnabled: Promise<boolean> = new Promise<boolean>((r, j) => {
   lookup('8.8.8.8', 4, (err, address, family) => {
