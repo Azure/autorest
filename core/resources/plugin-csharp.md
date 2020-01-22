@@ -3,18 +3,27 @@
 The V2 version of the C# Generator.
 
 ``` yaml $(csharp) && $(preview) && !isRequested('@autorest/csharp')
+# default the v2 generator to using the last stable @microsoft.azure/autorest-core 
+version: 2.0.4413
+
 use-extension:
   "@microsoft.azure/autorest.csharp": "preview"
 try-require: ./readme.csharp.md
 ```
 
 ``` yaml $(csharp) && !isRequested('@autorest/csharp')
+# default the v2 generator to using the last stable @microsoft.azure/autorest-core 
+version: 2.0.4413
+
 use-extension:
   "@microsoft.azure/autorest.csharp": "~2.3.79"
 try-require: ./readme.csharp.md
 ```
 
 ``` yaml $(jsonrpcclient) && !isRequested('@autorest/csharp')
+# default the v2 generator to using the last stable @microsoft.azure/autorest-core 
+version: 2.0.4413
+
 use-extension:
   "@microsoft.azure/autorest.csharp": "~2.3.79"
 ```

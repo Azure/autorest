@@ -4,14 +4,20 @@ The Azure and Model validators
 
 
 ``` yaml $(azure-validator)
-# use-extension:
-#  "@microsoft.azure/classic-openapi-validator": "~1.0.9"
-#  "@microsoft.azure/openapi-validator": "~1.0.2"
+# default the v2 generator to using the last stable @microsoft.azure/autorest-core 
+version: 2.0.4413
+
+use-extension:
+  "@microsoft.azure/classic-openapi-validator": "~1.0.9"
+  "@microsoft.azure/openapi-validator": "~1.0.2"
 ```
 
 ``` yaml $(model-validator)
-#use-extension:
- #"oav": "~0.4.20"
+# default the v2 generator to using the last stable @microsoft.azure/autorest-core 
+version: 2.0.4413
+
+use-extension:
+  "oav": "~0.4.20"
 ```
 
 
