@@ -10,7 +10,7 @@ use-extension:
 try-require: ./readme.python.md
 ```
 
-``` yaml $(v2-python)  && $(pipeline-model) !== 'v3'
+``` yaml $(v2-python) 
 use-extension:
   "@microsoft.azure/autorest.python": "~3.0.56"
 try-require: ./readme.python.md
