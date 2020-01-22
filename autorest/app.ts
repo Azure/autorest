@@ -210,6 +210,7 @@ async function configurationSpecifiedVersion(selectedVersion: any) {
     // if we got back a result, lets return that.
     if (configSpecifiedVersion) {
       selectedVersion = await selectVersion(configSpecifiedVersion, false);
+      console.log(chalk.yellow(`NOTE: AutoRest core version selected from configuration: ${chalk.yellow.bold(configSpecifiedVersion)}.`));
     }
     return selectedVersion;
   } catch {
