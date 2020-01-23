@@ -17,18 +17,24 @@ export function createSwaggerSchemaValidatorPlugin(): PipelinePlugin {
   (<any>validator).setRemoteReference('https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json', require('./example-schema.json'));
   return createPerFilePlugin(async config => async (fileIn, sink) => {
     const obj = await fileIn.ReadObject<any>();
+    const isSecondary = !!obj['x-ms-secondary-file'];
+
     const errors = await new Promise<Array<{ code: string; params: Array<string>; message: string; path: string }> | null>(res => validator.validate(obj, extendedSwaggerSchema, (err, valid) => res(valid ? null : err)));
     if (errors !== null) {
       for (const error of errors) {
         config.Message({
-          Channel: Channel.Error,
+          // secondary files have reduced schema compliancy, so we're gonna just warn them for now.
+          Channel: isSecondary ? Channel.Warning : Channel.Error,
           Details: error,
           Plugin: 'schema-validator-swagger',
           Source: [{ document: fileIn.key, Position: <any>{ path: parseJsonPointer(error.path) } }],
           Text: `Schema violation: ${error.message}`
         });
       }
-      throw new OperationAbortedException();
+      if (!isSecondary) {
+        throw new OperationAbortedException();
+      }
+
     }
     return sink.Forward(fileIn.Description, fileIn);
   });
