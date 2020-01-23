@@ -78,10 +78,14 @@ const args = parseArgs(process.argv);
 // aliases
 args['info'] = args['info'] || args['list-installed'];
 args['preview'] = args['preview'] || args['prerelease'];
+if (args['v3'] && !args['version']) {
+  // --v3 without --version infers --version:~3.0.6000 + 
+  args['version'] = '~3.0.6000';
+}
 
 // Suppress the banner if the message-format is set to something other than regular.
 if ((!args['message-format']) || args['message-format'] === 'regular') {
-  console.log(chalk.green.bold.underline(`AutoRest code generation utility [version: ${chalk.white.bold(pkgVersion)}; node: ${chalk.white.bold(process.version)}, max-memory: ${Math.round((require('v8').getHeapStatistics().heap_size_limit) / (1024 * 1024)) & 0xffffffff00} gb]`));
+  console.log(chalk.green.bold.underline(`AutoRest code generation utility [cli version: ${chalk.white.bold(pkgVersion)}; node: ${chalk.white.bold(process.version)}, max-memory: ${Math.round((require('v8').getHeapStatistics().heap_size_limit) / (1024 * 1024)) & 0xffffffff00} gb]`));
   console.log(color('(C) 2018 **Microsoft Corporation.**'));
   console.log(chalk.blue.bold.underline('https://aka.ms/autorest'));
 }

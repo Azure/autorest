@@ -11,15 +11,21 @@ Installing AutoRest on Windows, MacOS or Linux involves two steps:
   ``` powershell
   # Depending on your configuration you may need to be elevated or root to run this. (on OSX/Linux use 'sudo' )
   npm install -g autorest
+
+  # run using command 'autorest'
+  autorest-beta --help
   ```
-Or the beta version of AutoRest v3:
+Or the beta version of AutoRest v3, side-by-side:
 
   ``` powershell
   # Depending on your configuration you may need to be elevated or root to run this. (on OSX/Linux use 'sudo' )
-  npm install -g autorest@beta
+  npm install -g @autorest/autorest
+
+  # run using command 'autorest-beta'
+  autorest-beta --help
   ```
 
-### Updating Autorest
+### Updating Autorest core 
   To update AutoRest if you have previous versions installed, please run:
     
   ``` powershell
