@@ -1,5 +1,8 @@
 # AutoRest Core 
 
+## 1/27/2020
+- rebuild to pick up a perks change to support turning underscore in semver to dash on gh releases
+
 ## 1/23/2020
 - on secondary swagger files, schema schema validation is relaxed to be warnings.
 - drop unreferenced requestBodies during merge

@@ -1,5 +1,8 @@
 # AutoRest Core 
 
+## 1/27/2020
+- rebuild to pick up a perks change to support turning underscore in semver to dash on gh releases
+
 ## 1/13/2020
 - rebuild to pick up newer extension library that supports python interpreter detection
 
