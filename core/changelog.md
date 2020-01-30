@@ -1,5 +1,8 @@
 # AutoRest Core 
 
+## 1/30/2020
+- rebuild to pick up perks change to fix multibyte utf8 over byte boundary problem
+
 ## 1/27/2020
 - rebuild to pick up a perks change to support turning underscore in semver to dash on gh releases
 

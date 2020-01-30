@@ -42,11 +42,11 @@ If you want to force it to use the v3 (to get support for OpenAPI3 ) add `--v3` 
 | Generator | Command | Notes |
 |----|---|---|
 |PowerShell| `autorest --powershell ...` |Fully V3 Supported - use to generate powershell modules |   
-|CSharp|`autorest --csharp ...` |v2 generator, may use OpenAPI3 with `-v3` switch (may be some differences) - v3 generator in progress | 
-|Python|`autorest --python ...` |v2 generator, may use OpenAPI3 with `-v3` switch (may be some differences) - v3 generator in progress| 
-|Java|`autorest --java ...` |v2 generator, may use OpenAPI3 with `-v3` switch (may be some differences) - v3 generator in progress | 
-|TypeScript|`autorest --typescript ...` |v2 generator, may use OpenAPI3 with `-v3` switch (may be some differences) - v3 generator in progress | 
-|Go|`autorest --go ...` |v2 generator, may use OpenAPI3 with `-v3` switch (may be some differences) - v3 generator in progress | 
+|CSharp|`autorest --csharp ...` |v2 generator, may use OpenAPI3 with `--v3` switch (may be some differences) - v3 generator in progress | 
+|Python|`autorest --python ...` |v2 generator, may use OpenAPI3 with `--v3` switch (may be some differences) - v3 generator in progress| 
+|Java|`autorest --java ...` |v2 generator, may use OpenAPI3 with `--v3` switch (may be some differences) - v3 generator in progress | 
+|TypeScript|`autorest --typescript ...` |v2 generator, may use OpenAPI3 with `--v3` switch (may be some differences) - v3 generator in progress | 
+|Go|`autorest --go ...` |v2 generator, may use OpenAPI3 with `--v3` switch (may be some differences) - v3 generator in progress | 
 |Ruby|`autorest --ruby ...` |v2 generator - does not support v3 feature, no OpenAPI3 support | 
 
 #### New V3 Pipeline
