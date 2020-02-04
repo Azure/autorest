@@ -96,16 +96,13 @@ async function parseCodeBlocksInternal(config: ConfigurationView, hLiterate: Dat
   return hsConfigFileBlocks;
 }
 
-export function evaluateGuard(rawFenceGuard: string, contextObject: any, forceV3Mode = false): boolean {
+export function evaluateGuard(rawFenceGuard: string, contextObject: any, forceAllVersionsMode = false): boolean {
 
   // extend the context object so that we can have some helper functions.
   contextObject = {
     ...contextObject,
     /** finds out if there is an extension being loaded already by a given name */
     isLoaded: (name: string) => {
-      // console.log(name);
-      // console.log(JSON.stringify(contextObject['used-extension']));
-      // console.log(contextObject['used-extension'] && !!(contextObject['used-extension'].find(each => each.startsWith(`["${name}"`))));
       return contextObject['used-extension'] && !!(contextObject['used-extension'].find(each => each.startsWith(`["${name}"`)));
     },
 
@@ -116,7 +113,7 @@ export function evaluateGuard(rawFenceGuard: string, contextObject: any, forceV3
 
     /** if they are specifying one or more profiles or api-versions, then they are   */
     enableAllVersionsMode: () => {
-      return forceV3Mode;
+      return forceAllVersionsMode;
     },
 
     /** prints a debug message from configuration. sssshhh. don't use this.  */
