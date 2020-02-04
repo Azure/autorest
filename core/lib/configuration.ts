@@ -87,18 +87,18 @@ export interface AutoRestConfigurationImpl {
 export function MergeConfigurations(...configs: Array<AutoRestConfigurationImpl>): AutoRestConfigurationImpl {
   let result: AutoRestConfigurationImpl = {};
   configs = configs.map((each, i, a) => ({ ...each, 'load-priority': each['load-priority'] || -i })).sort((a, b) => (b['load-priority']) - (a['load-priority']));
-
+  const forceV3Mode = !!(configs.find(each => (each['api-version']?.length || each.profile?.length || 0 > 0)));
   for (const config of configs) {
-    result = MergeConfiguration(result, config);
+    result = MergeConfiguration(result, config, forceV3Mode);
   }
   result['load-priority'] = undefined;
   return result;
 }
 
 // TODO: operate on DataHandleRead and create source map!
-function MergeConfiguration(higherPriority: AutoRestConfigurationImpl, lowerPriority: AutoRestConfigurationImpl): AutoRestConfigurationImpl {
+function MergeConfiguration(higherPriority: AutoRestConfigurationImpl, lowerPriority: AutoRestConfigurationImpl, forceV3Mode = false): AutoRestConfigurationImpl {
   // check guard
-  if (lowerPriority.__info && !evaluateGuard(lowerPriority.__info, higherPriority)) {
+  if (lowerPriority.__info && !evaluateGuard(lowerPriority.__info, higherPriority, forceV3Mode)) {
     // guard false? => skip
     return higherPriority;
   }

@@ -96,7 +96,7 @@ async function parseCodeBlocksInternal(config: ConfigurationView, hLiterate: Dat
   return hsConfigFileBlocks;
 }
 
-export function evaluateGuard(rawFenceGuard: string, contextObject: any): boolean {
+export function evaluateGuard(rawFenceGuard: string, contextObject: any, forceV3Mode = false): boolean {
 
   // extend the context object so that we can have some helper functions.
   contextObject = {
@@ -116,7 +116,7 @@ export function evaluateGuard(rawFenceGuard: string, contextObject: any): boolea
 
     /** if they are specifying one or more profiles or api-versions, then they are   */
     enableAllVersionsMode: () => {
-      return length(contextObject['profile']) > 0 || length(contextObject['api-version']) > 0
+      return forceV3Mode;
     },
 
     /** prints a debug message from configuration. sssshhh. don't use this.  */
