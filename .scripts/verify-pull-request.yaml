@@ -66,7 +66,7 @@ steps:
                      --spec-path:validation.json \
                      --spec-path:xml-service.json \
                      --spec-path:xms-error-responses.json \
-                     --spec-root-path:./modelerfour/node_modules/@microsoft.azure/autorest.testserver/__files/ \
+                     --spec-root-path:./node_modules/@microsoft.azure/autorest.testserver/__files/ \
                      --output-path:./core/test/generated/typescript/ \
                      --compare-old --v3 --package-name:test-package --version:3.0.6200 --use:$AUTOREST_TYPESCRIPT \
                      --compare-new --v3 --package-name:test-package --version:./core --use:$AUTOREST_TYPESCRIPT
