@@ -1,0 +1,88 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install -g npm
+    npx @microsoft/rush update
+    npx @microsoft/rush rebuild
+    npx @microsoft/rush test
+
+  displayName: 'Rush install, build and test'
+
+- script : |
+    npm install @microsoft.azure/autorest.testserver --no-save
+    npm install -g @autorest/compare
+  displayName: Install autorest-compare
+
+- script : |
+    export AUTOREST_TYPESCRIPT=@autorest/typescript@0.1.0-dev.20200203.1
+    autorest-compare --typescript \
+                     --spec-path:azure-report.json \
+                     --spec-path:azure-resource-x.json \
+                     --spec-path:azure-resource.json \
+                     --spec-path:body-boolean.json \
+                     --spec-path:body-boolean.quirks.json \
+                     --spec-path:body-byte.json \
+                     --spec-path:body-complex.json \
+                     --spec-path:body-date.json \
+                     --spec-path:body-datetime-rfc1123.json \
+                     --spec-path:body-datetime.json \
+                     --spec-path:body-duration.json \
+                     --spec-path:body-file.json \
+                     --spec-path:body-integer.json \
+                     --spec-path:body-number.json \
+                     --spec-path:body-number.quirks.json \
+                     --spec-path:body-string.json \
+                     --spec-path:body-string.quirks.json \
+                     --spec-path:complex-model.json \
+                     --spec-path:custom-baseUrl-more-options.json \
+                     --spec-path:custom-baseUrl.json \
+                     --spec-path:extensible-enums-swagger.json \
+                     --spec-path:head-exceptions.json \
+                     --spec-path:head.json \
+                     --spec-path:httpInfrastructure.json \
+                     --spec-path:httpInfrastructure.quirks.json \
+                     --spec-path:parameter-flattening.json \
+                     --spec-path:report.json \
+                     --spec-path:storage.json \
+                     --spec-path:subscriptionId-apiVersion.json \
+                     --spec-path:url-multi-collectionFormat.json \
+                     --spec-path:url.json \
+                     --spec-path:validation.json \
+                     --spec-path:xml-service.json \
+                     --spec-path:xms-error-responses.json \
+                     --spec-root-path:./modelerfour/node_modules/@microsoft.azure/autorest.testserver/__files/ \
+                     --output-path:./core/test/generated/typescript/ \
+                     --compare-old --v3 --package-name:test-package --version:3.0.6200 --use:$AUTOREST_TYPESCRIPT \
+                     --compare-new --v3 --package-name:test-package --version:./core --use:$AUTOREST_TYPESCRIPT
+
+                     # Disabled due to errors in the TypeScript generator
+                     # --spec-path:additionalProperties.json \
+                     # --spec-path:azure-parameter-grouping.json \
+                     # --spec-path:azure-special-properties.json \
+                     # --spec-path:body-array.json \
+                     # --spec-path:body-dictionary.json \
+                     # --spec-path:body-formdata-urlencoded.json \
+                     # --spec-path:body-formdata.json \
+                     # --spec-path:custom-baseUrl-paging.json \
+                     # --spec-path:header.json \
+                     # --spec-path:lro.json \
+                     # --spec-path:model-flattening.json \
+                     # --spec-path:paging.json \
+                     # --spec-path:required-optional.json \
+  displayName: Regression Test - @autorest/typescript
+  continueOnError: true # Don't make this a hard fail just yet
