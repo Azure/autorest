@@ -3,7 +3,24 @@ import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Tr
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 import { values, length } from '@azure-tools/linq';
+import { createHash } from 'crypto';
 
+/** 
+ * parses a json pointer, and inserts a string into the returned array 
+ * the string is a hashed value of the pointer itself
+ * 
+ * this resolves potential collisions that occur when the code that creates identity of a shaken element  
+ * drops non-alphanumeric characters, and there are strings that are too similar
+ * 
+ * It's placed after the second element because the elements after that can be used 
+ * to synthesize a client name, and if it's placed earlier, it's too significant
+ * when trying to manually look thru a processes OAI file. 
+ */
+function hashedJsonPointer(p: string) {
+  const result = parseJsonPointer(p);
+  result.splice(1, 0, createHash('md5').update(p).digest().readUInt32BE(0).toString(36));
+  return result;
+}
 
 const methods = new Set([
   'get',
@@ -570,7 +587,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
       }
     }
 
-    const id = nameHint || `${parseJsonPointer(pointer).map(each => `${each}`.toLowerCase().replace(/-+/g, '_').replace(/\W+/g, '-').split('-').filter(each => each).join('-')).filter(each => each).join('·')}`.replace(/\·+/g, '·');
+    const id = nameHint || `${hashedJsonPointer(pointer).map(each => `${each}`.toLowerCase().replace(/-+/g, '_').replace(/\W+/g, '-').split('-').filter(each => each).join('-')).filter(each => each).join('·')}`.replace(/\·+/g, '·');
 
     // set the current location's object to be a $ref
     targetParent[key] = {
