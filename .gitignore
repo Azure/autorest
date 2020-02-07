@@ -293,3 +293,6 @@ temp
 common/temp/**
 package-deps.json
 common/config/rush/shrinkwrap.yaml
+
+# Code generation output for regression tests
+core/test/regression
