@@ -5,7 +5,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { exists, filePath, isDirectory } from '@azure-tools/async-io';
-import { BlameTree, DataHandle, DataStore, IFileSystem, LazyPromise, ParseToAst, RealFileSystem, safeEval, Stringify, stringify, TryDecodeEnhancedPositionFromName } from '@azure-tools/datastore';
+import { BlameTree, DataHandle, DataStore, IFileSystem, LazyPromise, ParseToAst, RealFileSystem, createSandbox, Stringify, stringify, TryDecodeEnhancedPositionFromName } from '@azure-tools/datastore';
 import { Extension, ExtensionManager, LocalExtension } from '@azure-tools/extension';
 import { clone, keys, Dictionary, values } from '@azure-tools/linq';
 import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri, simplifyUri, IsUri, FileUriToPath } from '@azure-tools/uri';
@@ -23,6 +23,8 @@ import { Suppressor } from './pipeline/suppression';
 import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
 import { Initializer, DeepPartial } from '@azure-tools/codegen';
 import { IdentifyDocument } from './autorest-core';
+
+const safeEval = createSandbox();
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const untildify: (path: string) => string = require('untildify');
