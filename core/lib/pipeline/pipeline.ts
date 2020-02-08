@@ -6,7 +6,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
 
-import { DataHandle, DataSource, IFileSystem, JsonPath, QuickDataSource, safeEval, stringify, PipeState, mergePipeStates } from '@azure-tools/datastore';
+import { DataHandle, DataSource, IFileSystem, JsonPath, QuickDataSource, createSandbox, stringify, PipeState, mergePipeStates } from '@azure-tools/datastore';
 import { ConfigurationView, getExtension } from '../configuration';
 import { Channel } from '../message';
 import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
@@ -41,6 +41,8 @@ import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin 
 import { createHash } from 'crypto';
 import { isCached, readCache, writeCache } from './pipeline-cache';
 import { values } from '@azure-tools/linq';
+
+const safeEval = createSandbox();
 
 const md5 = (content: any) => content ? createHash('md5').update(JSON.stringify(content)).digest('hex') : undefined;
 

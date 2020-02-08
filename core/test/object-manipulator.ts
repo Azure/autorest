@@ -7,7 +7,9 @@ import * as assert from 'assert';
 import { only, skip, slow, suite, test, timeout } from 'mocha-typescript';
 import { DataStore } from '@azure-tools/datastore';
 import { manipulateObject } from '../lib/pipeline/object-manipulator';
-import { safeEval } from '@azure-tools/datastore';
+import { createSandbox } from '@azure-tools/datastore';
+
+const safeEval = createSandbox();
 try {
   require('source-map-support').install();
 } catch {

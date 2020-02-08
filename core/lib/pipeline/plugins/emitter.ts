@@ -1,10 +1,12 @@
-import { DataHandle, DataSource, Lazy, Normalize, QuickDataSource, safeEval, Stringify, YAMLNode } from '@azure-tools/datastore';
+import { DataHandle, DataSource, Lazy, Normalize, QuickDataSource, createSandbox, Stringify, YAMLNode } from '@azure-tools/datastore';
 import { ResolveUri } from '@azure-tools/uri';
 import { Artifact } from '../../../exports';
 import { ConfigurationView } from '../../configuration';
 import { Channel } from '../../message';
 import { IdentitySourceMapping } from '../../source-map/merging';
 import { PipelinePlugin } from '../common';
+
+const safeEval = createSandbox();
 
 function isOutputArtifactOrMapRequested(config: ConfigurationView, artifactType: string) {
   return config.IsOutputArtifactRequested(artifactType) || config.IsOutputArtifactRequested(artifactType + '.map');

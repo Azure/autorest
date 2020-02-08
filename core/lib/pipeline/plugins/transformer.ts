@@ -1,8 +1,10 @@
-import { QuickDataSource, DataHandle, safeEval, AnyObject, nodes, selectNodes } from '@azure-tools/datastore';
+import { QuickDataSource, DataHandle, createSandbox, AnyObject, nodes, selectNodes } from '@azure-tools/datastore';
 import * as jsonpath from 'jsonpath';
 import { createPerFilePlugin, PipelinePlugin } from '../common';
 import { Manipulator } from '../manipulation';
 import { Channel } from '../../message';
+
+const safeEval = createSandbox();
 
 /* @internal */
 export function createGraphTransformerPlugin(): PipelinePlugin {
