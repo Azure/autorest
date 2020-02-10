@@ -54,3 +54,12 @@ output-artifact:
 use-extension:
   "@microsoft.azure/autorest-interactive": "latest"
 ```
+
+### remove additionalProperties:false for v2 generators
+``` yaml
+directive:
+- from: swagger-document
+  where: $..*[?(@.additionalProperties===false)]
+  transform: delete $.additionalProperties
+
+```

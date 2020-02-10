@@ -2,6 +2,7 @@
 
 ## 2/10/2020 
 - rebuild to fix NPM publishing problem.
+- remove additionalProperties: false so v2 generators don't choke.
 
 ## 1/30/2020
 - rebuild to pick up perks change to fix multibyte utf8 over byte boundary problem
