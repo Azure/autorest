@@ -1,4 +1,8 @@
-# AutoRest Core 
+# AutoRest CLI 
+
+## 2/10/2020 
+- detects when to fall back to autorest v2 core (no `--profile`, no `--api-version`)
+- made nodejs sandbox reusable. Much faster.
 
 ## 1/30/2020
 - rebuild to pick up perks change to fix multibyte utf8 over byte boundary problem

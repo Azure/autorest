@@ -20,6 +20,7 @@ Start by reading the documentation for using AutoRest:
 - [Generating a Client using AutoRest](./docs/examples/generating-a-client.md) - shows simple command line usage for generating a client library.
 - [Command Line Interface Documentation](./docs/user/command-line-interface.md) - explains common command line arguments.
 - [Examples](./Samples) - full, walkthrough-style scenarios for using AutoRest.
+- [Recent Updates](./changelog.md) - notes on recent updates .
 
 # New! AutoRest Version 3.0 
 AutoRest 3.0 introduces a large number of internal changes to support new scenarios. 

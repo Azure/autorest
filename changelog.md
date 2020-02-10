@@ -1,13 +1,23 @@
-## 2017.11.29 Version 2.0.4210
-* Use Ruby generator 3.x.x (instead of 2.x.x) by default, supports multi API version generation. Use `--use=@microsoft.azure/autorest.ruby@^2.0.0` to use the old generator.
-* Extensible enum support for C#
-* Generate API version metadata for C#
-* Reactivated oav model validator plugin
-* Integrated VSCode LSP
-* Improved command line help (showing automatically in some situations that imply that the user may need it; Python and C# generator specific help)
-* Feature coverage tracking for most generators (see [http://azure.github.io/autorest/dashboard.html](http://azure.github.io/autorest/dashboard.html))
-* Better output colorization
-* Various bugfixes (see #2727, #2694, #2689, #2688, #2685, #2674, #2671, #2655, #2434, #1734), most notably
-  * Nested schema definitions (outside of `definitions` section) completely ignored the `required` field
-  * Better support for huge OpenAPI files (caused stack overflow)
-  * Constant body parameters where not treated as constants
+# AutoRest 
+ 
+## 2/10/2020 
+- detects when to fall back to autorest v2 core (no `--profile`, no `--api-version`)
+- made nodejs sandbox reusable. Much faster.
+- when tree-shaking models, add a bit of disambiguation fluff to make sure they don't collide
+
+## 1/30/2020
+- rebuild to pick up perks change to fix multibyte utf8 over byte boundary problem
+
+## 1/27/2020
+- rebuild to pick up a perks change to support turning underscore in semver to dash on gh releases
+
+## 1/23/2020
+- on secondary swagger files, schema schema validation is relaxed to be warnings.
+- drop unreferenced requestBodies during merge
+- supports v2 generators (and will by default, fall back to a v2 core unless overriden with `--version:`
+- if a v3 generator is loaded via `--use:` , it should not attempt to load v2 generator  even if `--[generator]` is specified (ie, `--python` `--use:./python` ) should be perfectly fine 
+- the v3 generator name in `package.json` should be `@autorest/[name]` - ie `@autorest/csharp` 
+- it will only assume `--tag=all-api-versions`  if either `--profile:`... or `--api-version:`... is specified. 
+
+## 1/13/2020
+- rebuild to pick up newer extension library that supports python interpreter detection
