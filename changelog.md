@@ -1,5 +1,8 @@
 # AutoRest 
  
+## 2/11/2020
+- TransformerViaPointer was turning null into {} 
+
 ## 2/10/2020 
 - detects when to fall back to autorest v2 core (no `--profile`, no `--api-version`)
 - made nodejs sandbox reusable. Much faster.

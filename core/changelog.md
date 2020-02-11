@@ -1,5 +1,8 @@
 # AutoRest Core 
 
+## 2/11/2020
+- TransformerViaPointer was turning null into {} 
+
 ## 2/10/2020 
 - rebuild to fix NPM publishing problem.
 - remove additionalProperties: false so v2 generators don't choke.
