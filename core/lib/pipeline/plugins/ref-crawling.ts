@@ -4,62 +4,90 @@ import { ConfigurationView } from '../../configuration';
 import { Channel } from '../../message';
 import { values, items, length } from '@azure-tools/linq';
 /* eslint-disable @typescript-eslint/no-use-before-define */
-export async function crawlReferences(config: ConfigurationView, inputScope: DataSource, filesToCrawl: Array<DataHandle>, sink: DataSink): Promise<Array<DataHandle>> {
-  const result: Array<DataHandle> = [];
-  let filesToExcludeInSearch: Array<string> = [];
-  for (const file of filesToCrawl) {
-    const fileUri = ResolveUri(file.originalDirectory, file.identity[0]);
-    filesToExcludeInSearch.push(fileUri);
-  }
 
-  for (const currentSwagger of filesToCrawl) {
-    const refProcessor = new RefProcessor(currentSwagger, filesToExcludeInSearch, inputScope);
-    result.push(await sink.WriteObject(currentSwagger.Description, await refProcessor.getOutput(), currentSwagger.identity, currentSwagger.artifactType, await refProcessor.getSourceMappings(), [currentSwagger]));
-    filesToExcludeInSearch = [...new Set([...filesToExcludeInSearch, ...refProcessor.newFilesFound])];
-    for (const fileUri of refProcessor.newFilesFound) {
+export async function crawlReferences(config: ConfigurationView, inputScope: DataSource, filesToCrawl: Array<DataHandle>, sink: DataSink): Promise<Array<DataHandle>> {
+  // primary files should be in the order they were referenced; the order of the operations can affect the order 
+  // that API classes are generated in.
+  const primary: Array<DataHandle> = [];
+
+  // secondary files shouldn't matter (since we don't process their operations)
+  const secondary: Array<DataHandle> = [];
+
+  // files that have been queued up to resolve references 
+  const queued = new Set<string>();
+
+  /** crawls a file for $refs and then recurses to get the $ref'd files */
+  async function crawl(file: DataHandle) {
+    const refProcessor = new RefProcessor(file, inputScope);
+    const output = await refProcessor.getOutput();
+
+    for (const fileUri of values(refProcessor.filesReferenced).where(each => !queued.has(each))) {
+      queued.add(fileUri);
+
       config.Message({ Channel: Channel.Verbose, Text: `Reading $ref'd file ${fileUri}` });
-      const originalSecondaryFile = await inputScope.ReadStrict(fileUri);
-      const fileMarker = new SecondaryFileMarker(originalSecondaryFile);
-      const fileMarkerOutput = await fileMarker.getOutput();
+      const secondaryFile = await inputScope.ReadStrict(fileUri);
+
+      // mark secondary files with a tag so that we don't process operations for them.
+      const secondaryFileContent = await secondaryFile.ReadObject<any>();
+      secondaryFileContent['x-ms-secondary-file'] = true;
 
       // When a new file is read, by default it has artifactType as 'input-file'. Transforms target specific types of artifacts;
       // for this reason we need to identify the artifact type, so transforms are applied to all docs, including SECONDARY-FILES.
       // Primary files at this point already have a proper artifactType.
-      const artifactType = fileMarkerOutput.swagger ? 'swagger-document' : fileMarkerOutput.openapi ? 'openapi-document' : currentSwagger.artifactType;
-      filesToCrawl.push(await sink.WriteObject(originalSecondaryFile.Description, fileMarkerOutput, originalSecondaryFile.identity, artifactType, await fileMarker.getSourceMappings(), [originalSecondaryFile]));
+      const next = await sink.WriteObject(secondaryFile.Description, secondaryFileContent, secondaryFile.identity, secondaryFileContent.swagger ? 'swagger-document' : secondaryFileContent.openapi ? 'openapi-document' : file.artifactType, [], [secondaryFile]);
+
+      // crawl that and add it to the secondary set. 
+      secondary.push(await crawl(next));
     }
+
+    // wait for all the x-ms-examples to finish getting resolved
+    await Promise.all(refProcessor.examples);
+
+    // write the file to the data sink (this serializes the file, so it has to be done by this point.)
+    return sink.WriteObject(file.Description, output, file.identity, file.artifactType, [], [file]);
   }
 
-  return result;
+  // this seems a bit convoluted, but in order to not break the order that
+  // operations are generated in for existing generators
+  // the order of the files (at least the *primary* files) 
+  // has to be preserved.
+  await Promise.all(filesToCrawl.map(async (each, i) => {
+    queued.add(ResolveUri(each.originalDirectory, each.identity[0]));
+    primary[i] = await crawl(each);
+  }));
+
+  // return the finished files in the order they came (and then the secondary ones draggin' after.)
+  return [...primary, ...secondary];
 }
+
 
 class RefProcessor extends Transformer<any, any> {
 
-  public newFilesFound: Array<string> = new Array<string>();
+  public examples = new Array<Promise<void>>();
+  public filesReferenced = new Set<string>();
   private originalFileLocation: string;
-  private filesToExclude: Array<string>;
 
-  constructor(originalFile: DataHandle, filesToExclude: Array<string>, private inputScope: DataSource) {
+  constructor(originalFile: DataHandle, private inputScope: DataSource) {
     super(originalFile);
     this.originalFileLocation = ResolveUri(originalFile.originalDirectory, originalFile.identity[0]);
-    this.filesToExclude = filesToExclude;
   }
 
   async processXMSExamples(targetParent: AnyObject, examples: AnyObject) {
     const xmsExamples = {};
 
     for (const { key, value } of items(examples)) {
-
       if (value.$ref) {
         try {
           const refPath = (value.$ref.indexOf('#') === -1) ? value.$ref : value.$ref.split('#')[0];
           const refUri = ResolveUri(this.originalFileLocation, refPath);
           const handle = await this.inputScope.ReadStrict(refUri);
-
           xmsExamples[key] = await handle.ReadObject<AnyObject>();
         } catch {
           // skip examples that are not nice to us.
         }
+      } else {
+        // copy whatever was there I guess. 
+        xmsExamples[key] = value;
       }
     }
 
@@ -73,7 +101,7 @@ class RefProcessor extends Transformer<any, any> {
 
       if (key === 'x-ms-examples') {
         // try to pull in the examples and insert them directly into this file.
-        await this.processXMSExamples(targetParent, value);
+        this.examples.push(this.processXMSExamples(targetParent, value));
         continue;
       }
       if (key === '$ref') {
@@ -82,21 +110,13 @@ class RefProcessor extends Transformer<any, any> {
         const newRefFileName = ResolveUri(this.originalFileLocation, refFileName);
 
         if (!refPointer) {
-          // inline the whole file
-          const handle = await this.inputScope.ReadStrict(newRefFileName);
-          // todo: we should probably build a source map for the pulled in file, but
-          // I'm not going to do that today.
-          //targetParent[key] = { value: handle.ReadObject<AnyObject>(), pointer };
+          // points to a whole file? Huh?
           continue;
         }
 
         const newReference = (refPointer) ? `${newRefFileName}#${refPointer}` : newRefFileName;
+        this.filesReferenced.add(newRefFileName);
 
-        if (!this.filesToExclude.includes(newRefFileName)) {
-
-          this.newFilesFound.push(newRefFileName);
-          this.filesToExclude.push(newRefFileName);
-        }
         this.clone(targetParent, key, pointer, newReference);
       } else if (Array.isArray(value)) {
         await this.process(this.newArray(targetParent, key, pointer), children);
@@ -104,18 +124,6 @@ class RefProcessor extends Transformer<any, any> {
         await this.process(this.newObject(targetParent, key, pointer), children);
       } else {
         this.clone(targetParent, key, pointer, value);
-      }
-    }
-  }
-}
-
-class SecondaryFileMarker extends Transformer<any, any> {
-
-  async process(targetParent: AnyObject, originalNodes: Iterable<Node>) {
-    for (const { value, key, pointer } of originalNodes) {
-      this.clone(targetParent, key, pointer, value);
-      if (!targetParent['x-ms-secondary-file']) {
-        targetParent['x-ms-secondary-file'] = { value: true, pointer, filename: this.currentInputFilename };
       }
     }
   }
