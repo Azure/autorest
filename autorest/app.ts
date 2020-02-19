@@ -2,7 +2,9 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-if (global && global.v8debug) {
+const debuggerEnabled = global?.v8debug;
+
+if (debuggerEnabled) {
   try {
     // try to let source maps resolve
     require('source-map-support').install();
@@ -12,19 +14,20 @@ if (global && global.v8debug) {
 }
 const cwd = process.cwd();
 
-
 import { isFile, readdir, rmdir, isDirectory } from '@azure-tools/async-io';
 import { Exception, LazyPromise } from '@azure-tools/tasks';
 import { homedir } from 'os';
 import chalk from 'chalk';
 import { join, dirname } from 'path';
 import { gt } from 'semver';
-import { availableVersions, newCorePackage, oldCorePackage, ensureAutorestHome, extensionManager, installedCores, networkEnabled, pkgVersion, resolvePathForLocalVersion, rootFolder, selectVersion, tryRequire, resolveEntrypoint } from './autorest-as-a-service';
+import { availableVersions, newCorePackage, oldCorePackage, ensureAutorestHome, extensionManager, installedCores, networkEnabled, pkgVersion, resolvePathForLocalVersion, rootFolder, selectVersion, tryRequire, resolveEntrypoint, runCoreOutOfProc } from './autorest-as-a-service';
 import { color } from './coloring';
 import { tmpdir } from 'os';
 import * as vm from 'vm';
 
 import { ResolveUri, ReadUri, EnumerateFiles } from '@azure-tools/uri';
+
+const launchCore = debuggerEnabled ? tryRequire : runCoreOutOfProc;
 
 // aliases, round one.
 if (process.argv.indexOf('--no-upgrade-check') !== -1) {
@@ -285,7 +288,7 @@ async function main() {
     // if this is still valid, then we're not overriding it from configuration.
     if (localVersion) {
       process.chdir(cwd);
-      if (await tryRequire(localVersion, 'app.js')) {
+      if (await launchCore(localVersion, 'app.js')) {
         return;
       }
     }
@@ -335,19 +338,20 @@ async function main() {
       process.argv.push('--allow-no-input');
     }
 
-    if (args.debug) {
-      console.log(`Starting ${newCorePackage} from ${await selectedVersion.location}`);
-    }
 
     // if they never said the version on the command line, we should make a check for the config version.
     if (!args.version) {
       selectedVersion = await configurationSpecifiedVersion(selectedVersion) || selectedVersion;
     }
 
+    if (args.debug) {
+      console.log(`Starting ${newCorePackage} from ${await selectedVersion.location}`);
+    }
+
     // reset the working folder to the correct place.
     process.chdir(cwd);
 
-    const result = await tryRequire(await selectedVersion.modulePath, 'app.js');
+    const result = await launchCore(await selectedVersion.modulePath, 'app.js');
     if (!result) {
       throw new Error(`Unable to start AutoRest Core from ${await selectedVersion.modulePath}`);
     }

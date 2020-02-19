@@ -7,8 +7,10 @@ import { Exception } from '@azure-tools/tasks';
 
 import * as semver from 'semver';
 import { isFile, mkdir, isDirectory } from '@azure-tools/async-io';
+import { When } from '@azure-tools/tasks';
 import { mkdtempSync, rmdirSync } from 'fs';
 import { tmpdir } from 'os';
+import { spawn } from 'child_process';
 
 export const pkgVersion: string = require(`${__dirname}/../package.json`).version;
 process.env['autorest.home'] = process.env['autorest.home'] || homedir();
@@ -147,12 +149,41 @@ export async function resolveEntrypoint(localPath: string | null, entrypoint: st
   return null;
 }
 
+export async function runCoreOutOfProc(localPath: string | null, entrypoint: string): Promise<any> {
+  try {
+    const ep = await resolveEntrypoint(localPath, entrypoint);
+    if (ep) {
+      // Creates the nodejs command to load the target core 
+      // - copies the argv parameters
+      // - loads our static loader (so the newer loader is used, and we can get to 'chalk' in our static fs) 
+      // - loads the js file with coloring (core expects a global function called 'color' )
+      // - loads the actual entrypoint that we expect is there. 
+      const cmd = `
+        process.argv = ${ JSON.stringify(process.argv)};
+        if (require('fs').existsSync('${__dirname}/static-loader.js')) { require('${__dirname}/static-loader.js').load('${__dirname}/static_modules.fs'); }
+        const { color } = require('${__dirname}/coloring');
+        require('${ep}')
+      `.replace(/"/g, '\'').replace(/\\+/g, '/');
+
+      const p = spawn(process.execPath, ['-e', cmd], { stdio: ['inherit', 'inherit', 'inherit',] });
+      p.on('close', (code, signal) => {
+        process.exit(code);
+      });
+      // set up a promise to wait for the event to fire
+      await When(p, 'exit', 'close');
+      process.exit(0);
+    }
+  } catch (E) {
+    console.log(E);
+  }
+  return null;
+}
 
 export async function tryRequire(localPath: string | null, entrypoint: string): Promise<any> {
   try {
     const ep = await resolveEntrypoint(localPath, entrypoint);
     if (ep) {
-      return require(await resolveEntrypoint(localPath, entrypoint));
+      return require(ep);
     }
   } catch (E) {
     console.log(E);
