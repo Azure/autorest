@@ -310,6 +310,9 @@ async function deduplicateSubsetSchemas(config: ConfigurationView, input: DataSo
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
     const model = <any>await each.ReadObject();
+    /*
+    Disabling for now -- not sure if we need to skip this in the simple case anyway.
+
     if ([...values(model?.info?.['x-ms-metadata']?.apiVersions).distinct()].length < 2) {
       // if there is a single API version in the doc, let's not bother.
       config.Message({ Channel: Channel.Verbose, Text: `Skipping subset deduplication on single-api-version file ${each.identity}` });
@@ -317,6 +320,7 @@ async function deduplicateSubsetSchemas(config: ConfigurationView, input: DataSo
       continue;
     }
     config.Message({ Channel: Channel.Verbose, Text: `Processing subset deduplication on file ${each.identity}` });
+    */
     const processor = new SubsetSchemaDeduplicator(each);
     result.push(await sink.WriteObject('oai3.subset-schema-reduced.json', await processor.getOutput(), each.identity, 'openapi-document-schema-reduced', await processor.getSourceMappings()));
   }
