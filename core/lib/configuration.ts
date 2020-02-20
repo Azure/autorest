@@ -8,7 +8,7 @@ import { exists, filePath, isDirectory } from '@azure-tools/async-io';
 import { BlameTree, DataHandle, DataStore, IFileSystem, LazyPromise, ParseToAst, RealFileSystem, createSandbox, Stringify, stringify, TryDecodeEnhancedPositionFromName } from '@azure-tools/datastore';
 import { Extension, ExtensionManager, LocalExtension } from '@azure-tools/extension';
 import { clone, keys, Dictionary, values } from '@azure-tools/linq';
-import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri, simplifyUri, IsUri, FileUriToPath } from '@azure-tools/uri';
+import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri, simplifyUri, IsUri, FileUriToPath, CreateFileOrFolderUri } from '@azure-tools/uri';
 import { From } from 'linq-es2015';
 import { basename, dirname, join } from 'path';
 import { CancellationToken, CancellationTokenSource } from 'vscode-jsonrpc';
@@ -23,6 +23,7 @@ import { Suppressor } from './pipeline/suppression';
 import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
 import { Initializer, DeepPartial } from '@azure-tools/codegen';
 import { IdentifyDocument } from './autorest-core';
+import { cwd } from 'process';
 
 const safeEval = createSandbox();
 
@@ -353,7 +354,13 @@ export class ConfigurationView {
   private ResolveAsFolder(path: string): string {
     return EnsureIsFolderUri(ResolveUri(this.BaseFolderUri, path));
   }
-
+  private ResolveAsWriteableFolder(path: string): string {
+    // relative paths are relative to the local folder when the base-folder is remote.
+    if (!this.BaseFolderUri.startsWith('file:')) {
+      return EnsureIsFolderUri(ResolveUri(CreateFileOrFolderUri(cwd() + '/'), path));
+    }
+    return this.ResolveAsFolder(path);
+  }
   private ResolveAsPath(path: string): string {
     return ResolveUri(this.BaseFolderUri, path);
   }
@@ -476,7 +483,7 @@ export class ConfigurationView {
   }
 
   public get OutputFolderUri(): string {
-    return this.ResolveAsFolder(<string>this.config['output-folder']);
+    return this.ResolveAsWriteableFolder(<string>this.config['output-folder']);
   }
 
   public get HeaderText(): string {

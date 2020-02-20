@@ -2,16 +2,7 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-const debuggerEnabled = global?.v8debug;
-
-if (debuggerEnabled) {
-  try {
-    // try to let source maps resolve
-    require('source-map-support').install();
-  } catch {
-    // no worries
-  }
-}
+declare const isDebuggerEnabled;
 const cwd = process.cwd();
 
 import { isFile, readdir, rmdir, isDirectory } from '@azure-tools/async-io';
@@ -27,7 +18,7 @@ import * as vm from 'vm';
 
 import { ResolveUri, ReadUri, EnumerateFiles } from '@azure-tools/uri';
 
-const launchCore = debuggerEnabled ? tryRequire : runCoreOutOfProc;
+const launchCore = isDebuggerEnabled ? tryRequire : runCoreOutOfProc;
 
 // aliases, round one.
 if (process.argv.indexOf('--no-upgrade-check') !== -1) {
