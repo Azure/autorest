@@ -302,7 +302,10 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
       const config = pipeline.configs[stringify(node.configScope)];
       const pluginName = node.pluginName;
 
-      const passthru = values((<any>configView).GetEntry('pass-thru')).any(each => each === pluginName);
+      // you can have --pass-thru:FOO on the command line
+      // or add pass-thru: true in a pipline configuration step.
+      const passthru = (<any>config).GetEntry(node.configScope.last)['pass-thru'] === true || values((<any>configView).GetEntry('pass-thru')).any(each => each === pluginName);
+
       const plugin = passthru ? plugins.identity : plugins[pluginName];
 
       if (!plugin) {

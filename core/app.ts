@@ -44,6 +44,7 @@ import { AutoRestConfigurationImpl, MergeConfigurations } from './lib/configurat
 import { Exception, OperationCanceledException } from './lib/exception';
 import { Channel, Message } from './lib/message';
 import { ShallowCopy } from './lib/source-map/merging';
+import { homedir } from 'os';
 
 let verbose = false;
 let debug = false;
@@ -177,6 +178,11 @@ function parseArgs(autorestArgs: Array<string>): CommandLineArgs {
     if (rawValue.startsWith('.')) {
       // starts with a . or .. -> this is a relative path to current directory
       rawValue = join(process.cwd(), rawValue);
+    }
+
+    if (rawValue.startsWith('~/')) {
+      // starts with a ~/ this is a relative path to home directory
+      rawValue = join(homedir(), rawValue.substr(1));
     }
 
     // quote stuff beginning with '@', YAML doesn't think unquoted strings should start with that
