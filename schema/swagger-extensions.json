@@ -614,6 +614,9 @@
         "x-ms-parameter-location": {
           "$ref": "#/definitions/xmsParameterLocation"
         },
+        "x-ms-client-default": {
+          "$ref": "#/definitions/xmsClientDefault"
+        },
         "x-ms-header-collection-prefix": {
           "type": "string",
           "description": "Provides the ability to specify a key value mapping, using given prefix as the prefix of all keys."
@@ -732,6 +735,9 @@
         "x-ms-parameter-location": {
           "$ref": "#/definitions/xmsParameterLocation"
         },
+        "x-ms-client-default": {
+          "$ref": "#/definitions/xmsClientDefault"
+        },
         "x-ms-client-name": {
           "type": "string",
           "description": "A code-generator-friendly name for the parameter."
@@ -844,6 +850,9 @@
         },
         "x-ms-parameter-location": {
           "$ref": "#/definitions/xmsParameterLocation"
+        },
+        "x-ms-client-default": {
+          "$ref": "#/definitions/xmsClientDefault"
         },
         "x-ms-client-name": {
           "type": "string",
@@ -964,6 +973,9 @@
         "x-ms-parameter-location": {
           "$ref": "#/definitions/xmsParameterLocation"
         },
+        "x-ms-client-default": {
+          "$ref": "#/definitions/xmsClientDefault"
+        },
         "x-ms-client-name": {
           "type": "string",
           "description": "A code-generator-friendly name for the parameter."
@@ -1078,6 +1090,9 @@
         },
         "x-ms-parameter-location": {
           "$ref": "#/definitions/xmsParameterLocation"
+        },
+        "x-ms-client-default": {
+          "$ref": "#/definitions/xmsClientDefault"
         },
         "x-ms-client-name": {
           "type": "string",
@@ -1286,6 +1301,9 @@
         "example": {},
         "x-ms-client-flatten": {
           "$ref": "#/definitions/xmsClientFlatten"
+        },
+        "x-ms-client-default": {
+          "$ref": "#/definitions/xmsClientDefault"
         },
         "x-ms-client-name": {
           "type": "string"
@@ -1814,6 +1832,13 @@
       "enum": [
         "client",
         "method"
+      ]
+    },
+    "xmsClientDefault": {
+      "type": [
+        "string",
+        "boolean",
+        "number"
       ]
     },
     "xmsMutability": {
