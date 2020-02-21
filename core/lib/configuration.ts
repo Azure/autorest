@@ -529,7 +529,7 @@ export class ConfigurationView {
     return From(valuesOf<string>(this.config['output-artifact'])).Contains(artifact);
   }
 
-  public GetEntry(key: keyof AutoRestConfigurationImpl): any {
+  public GetEntry(key: string): any {
     if (!key) {
       return clone(this.config);
     }

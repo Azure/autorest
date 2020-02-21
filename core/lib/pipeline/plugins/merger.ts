@@ -1,5 +1,5 @@
 import { AnyObject, DataHandle, DataSink, DataSource, Node, ProxyObject, QuickDataSource, Transformer, visit } from '@azure-tools/datastore';
-import { clone, Dictionary, values } from '@azure-tools/linq';
+import { clone, Dictionary, values, visitor } from '@azure-tools/linq';
 
 import * as oai from '@azure-tools/openapi';
 import { ConfigurationView } from '../../configuration';
@@ -154,6 +154,11 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     // after each file, we have to go fix up local references to be absolute references
     // just in case it wasn't done before we got here.
     this.expandRefs(this.generated);
+
+    // mark this merged. 
+    if (!this.metadata.merged) {
+      this.metadata.merged = { value: true, pointer: '/', filename: this.currentInputFilename };
+    }
   }
 
   visitInfo(info: ProxyObject<Dictionary<oai.Info>>, nodes: Iterable<Node>) {
@@ -351,16 +356,17 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
       const name = (type === 'schemas' && value['x-ms-enum'] !== undefined && value['x-ms-enum'].name !== undefined) ? value['x-ms-enum'].name : key;
 
       const component: AnyObject = this.newObject(container, `${uid}`, pointer);
-      component['x-ms-metadata'] = {
-        value: {
-          apiVersions: [this.current.info && this.current.info.version ? this.current.info.version : ''], // track the API version this came from
-          filename: [this.currentInputFilename],                       // and the filename
-          name,
-          originalLocations: [originalLocation],
-          'x-ms-secondary-file': this.isSecondaryFile
-        }, pointer
-      };
-
+      if (!value['x-ms-metadata']) {
+        component['x-ms-metadata'] = {
+          value: {
+            apiVersions: [this.current.info && this.current.info.version ? this.current.info.version : ''], // track the API version this came from
+            filename: [this.currentInputFilename],                       // and the filename
+            name,
+            originalLocations: [originalLocation],
+            'x-ms-secondary-file': this.isSecondaryFile
+          }, pointer
+        };
+      }
       for (const child of children) {
         this.copy(component, child.key, child.pointer, child.value);
       }
@@ -368,8 +374,28 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
   }
 }
 
+function cleanRefs(instance: AnyObject): AnyObject {
+  for (const each of visitor(instance)) {
+    if (each.instance.$ref) {
+      each.instance.$ref = each.instance.$ref.substring(each.instance.$ref.indexOf('#'));
+    }
+  }
+  return instance;
+}
+
 async function merge(config: ConfigurationView, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
+  if (inputs.length === 1) {
+    const model = (await inputs[0].ReadObject<any>());
+    if (model.info?.['x-ms-metadata']?.merged) {
+      // this file is alone, and has been thru the merger before.
+      // (this can happen if we use an OAI3 file that was captured after going thru the pipeline)
+      // we're just going to clean the refs and give it back the way it came in.
+      cleanRefs(model);
+      return new QuickDataSource([await sink.WriteObject('merged oai3 doc...', model, inputs[0].identity, 'merged-oai3', undefined)], input.pipeState);
+    }
+  }
+
   const overrideInfo = config.GetEntry('override-info');
   const overrideTitle = (overrideInfo && overrideInfo.title) || config.GetEntry('title');
   const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry('description');

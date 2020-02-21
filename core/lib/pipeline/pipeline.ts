@@ -26,7 +26,7 @@ import { createArtifactEmitterPlugin } from './plugins/emitter';
 import { createEnumDeduplicator } from './plugins/enum-deduplication';
 import { createExternalPlugin } from './plugins/external';
 import { createHelpPlugin } from './plugins/help';
-import { createIdentityPlugin, createIdentityResetPlugin } from './plugins/identity';
+import { createIdentityPlugin, createIdentityResetPlugin, createNullPlugin } from './plugins/identity';
 import { createMarkdownOverrideOpenApiLoaderPlugin, createMarkdownOverrideSwaggerLoaderPlugin, createOpenApiLoaderPlugin, createSwaggerLoaderPlugin } from './plugins/loaders';
 import { createMultiApiMergerPlugin } from './plugins/merger';
 import { createNewComposerPlugin } from './plugins/new-composer';
@@ -181,6 +181,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
   const plugins: { [name: string]: PipelinePlugin } = {
     'help': createHelpPlugin(),
     'identity': createIdentityPlugin(),
+    'null': createNullPlugin(),
     'reset-identity': createIdentityResetPlugin(),
     'loader-swagger': createSwaggerLoaderPlugin(),
     'loader-openapi': createOpenApiLoaderPlugin(),
@@ -296,7 +297,6 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
           inputScope = new QuickDataSource(handles, pipeState);
         }
           break;
-
       }
 
       const config = pipeline.configs[stringify(node.configScope)];
@@ -304,9 +304,10 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
 
       // you can have --pass-thru:FOO on the command line
       // or add pass-thru: true in a pipline configuration step.
-      const passthru = (<any>config).GetEntry(node.configScope.last)['pass-thru'] === true || values((<any>configView).GetEntry('pass-thru')).any(each => each === pluginName);
+      const passthru = config.GetEntry(node.configScope.last.toString())['pass-thru'] === true || values(configView.GetEntry('pass-thru')).any(each => each === pluginName);
+      const usenull = config.GetEntry(node.configScope.last.toString())['null'] === true || values(configView.GetEntry('null')).any(each => each === pluginName);
 
-      const plugin = passthru ? plugins.identity : plugins[pluginName];
+      const plugin = usenull ? plugins.null : passthru ? plugins.identity : plugins[pluginName];
 
       if (!plugin) {
         throw new Error(`Plugin '${pluginName}' not found.`);
@@ -351,7 +352,11 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
         }
         // if this node wasn't able to load from the cache, then subsequent nodes shall not either
         if (!inputScope.cachable || config.CacheExclude.indexOf(nodeName) !== -1) {
-          scopeResult.cachable = false;
+          try {
+            scopeResult.cachable = false;
+          } catch  {
+            // not settable on fs inputs anyway.
+          }
         }
 
         return scopeResult;
