@@ -177,6 +177,13 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
 
   protected visitPath(metadata: AnyObject, target: AnyObject, nodes: Iterable<Node>) {
     for (const { key, pointer, children } of nodes) {
+      if (target[key] && !key.startsWith('x-ms')) {
+        // we're attempting to put another operation at the same path/method 
+        // where there is one already. 
+        // This is likely a case where a multi-api-version file is trying to 
+        // go thru the composer, and this is not allowed.
+        throw new Error(`There are multiple operations defined for \n  '${key}: ${metadata.path}'.\n\n  You are probably trying to use an input with multiple API versions with an autorest V2 generator, and that will not work. `);
+      }
       this.visitOperation(metadata, this.getOrCreateObject(target, key, pointer), children);
     }
   }
