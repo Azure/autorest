@@ -3,7 +3,7 @@ import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 import { Dictionary, items } from '@azure-tools/linq';
 import * as compareVersions from 'compare-versions';
-import { toSemver, maximum } from '@azure-tools/codegen';
+import { toSemver, maximum, camelCase, pascalCase } from '@azure-tools/codegen';
 
 export class EnumDeduplicator extends TransformerViaPointer {
   protected refs = new Map<string, Array<{ target: AnyObject; pointer: string }>>();
@@ -17,7 +17,8 @@ export class EnumDeduplicator extends TransformerViaPointer {
           return false;
         }
         // use the given name if specified, otherwise fallback to the metadata name
-        const name = value['x-ms-enum'] ? value['x-ms-enum'].name : value['x-ms-metadata'].name;
+        const name = pascalCase(value['x-ms-enum'] ? value['x-ms-enum'].name : value['x-ms-metadata'].name);
+
         const e = this.enums.get(name) || this.enums.set(name, []).get(name) || [];
         e.push({ target, value, key, pointer, originalNodes });
         return true;
@@ -36,11 +37,12 @@ export class EnumDeduplicator extends TransformerViaPointer {
 
   public async finish() {
     // time to consolodate the enums
-    for (const { key: name, value } of items(this.enums)) {
+    for (const { key: n, value } of items(this.enums)) {
       // first sort them according to api-version order
       const enumSet = value.sort((a, b) => compareVersions(toSemver(maximum(a.value['x-ms-metadata'].apiVersions)), toSemver(maximum(b.value['x-ms-metadata'].apiVersions))));
 
       const first = enumSet[0];
+      const name = first.value['x-ms-enum'] ? first.value['x-ms-enum'].name : first.value['x-ms-metadata'].name;
       if (enumSet.length === 1) {
 
         const originalRef = `#/components/schemas/${first.key}`;

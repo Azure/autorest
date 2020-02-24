@@ -3,6 +3,7 @@ import { items } from '@azure-tools/linq';
 import { ConfigurationView } from '../../configuration';
 import { PipelinePlugin } from '../common';
 import { format } from 'path';
+import { Channel } from '../../message';
 
 async function quickCheck(config: ConfigurationView, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
@@ -32,7 +33,7 @@ async function quickCheck(config: ConfigurationView, input: DataSource, sink: Da
         (models.get(name) || []).push(key);
       }
     }
-    let failed = false;
+    const failed = false;
     for (const { key, value } of items(models)) {
       if (value.length > 1) {
         //failed = true;
@@ -42,8 +43,8 @@ async function quickCheck(config: ConfigurationView, input: DataSource, sink: Da
     //    console.error('--------------------------------------------------------------------');
     for (const { key, value } of items(enums)) {
       if (value.length > 1) {
-        failed = true;
-        // console.error(`Enum ${key} has multiple implementations: ${value.join(',')}`);
+        //failed = true;
+        config.Message({ Text: `Enum ${key} has multiple unmerged implementations: ${value.join(',')}`, Channel: Channel.Error });
       }
     }
     if (failed) {
