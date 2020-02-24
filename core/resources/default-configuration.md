@@ -11,7 +11,7 @@ openapi-type: arm
 
 # Load additional configurations.
 require:
-  
+  - $(this-folder)inspect.md
   - $(this-folder)directives.md
   - $(this-folder)pipeline.md
   - $(this-folder)loader-openapi.md

@@ -29,6 +29,11 @@ async function deduplicate(config: ConfigurationView, input: DataSource, sink: D
     config.Message({ Channel: Channel.Verbose, Text: `Processing deduplication on file ${each.identity}` });
     */
 
+    // skip if it's already marked that it was done.
+    if (model.info?.['x-ms-metadata']?.deduplicated) {
+      result.push(await sink.WriteObject('oai3.model-deduplicated.json', model, each.identity, 'openapi-document-deduplicated', []));
+      continue;
+    }
     const deduplicator = new Deduplicator(model, idm);
     result.push(await sink.WriteObject('oai3.model-deduplicated.json', await deduplicator.getOutput(), each.identity, 'openapi-document-deduplicated', [/* fix-me: Construct source map from the mappings returned by the deduplicator.s*/]));
   }

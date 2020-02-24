@@ -27,6 +27,8 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
           break;
       }
     }
+    // mark this schemaReduced. 
+    this.generated.info['x-ms-metadata'].schemaReduced = true;
   }
 
   visitComponents(components: AnyObject, originalNodes: Iterable<Node>) {
@@ -321,6 +323,10 @@ async function deduplicateSubsetSchemas(config: ConfigurationView, input: DataSo
     }
     config.Message({ Channel: Channel.Verbose, Text: `Processing subset deduplication on file ${each.identity}` });
     */
+    if (model.info?.['x-ms-metadata']?.schemaReduced) {
+      result.push(await sink.WriteObject('oai3.subset-schema-reduced.json', model, each.identity, 'openapi-document-schema-reduced', []));
+      continue;
+    }
     const processor = new SubsetSchemaDeduplicator(each);
     result.push(await sink.WriteObject('oai3.subset-schema-reduced.json', await processor.getOutput(), each.identity, 'openapi-document-schema-reduced', await processor.getSourceMappings()));
   }
