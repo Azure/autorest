@@ -15,7 +15,6 @@ require:
   - $(this-folder)directives.md
   - $(this-folder)pipeline.md
   - $(this-folder)loader-openapi.md
-  - $(this-folder)markdown-documentation.md
   - $(this-folder)miscellaneous.md
   - $(this-folder)patches.md
   - $(this-folder)plugin-powershell.md

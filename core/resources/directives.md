@@ -120,11 +120,17 @@ Removes an operation by ID.
 ``` yaml
 declare-directive:
   remove-operation: >-
-    {
+    [{
       from: 'openapi-document',
       "where-operation": $,
       transform: '$ = undefined'
+    },
+    {
+      from: 'swagger-document',
+      "where-operation": $,
+      transform: '$ = undefined'
     }
+    ]
   rename-operation: >-
     [{
       from: 'swagger-document',

@@ -27,7 +27,7 @@ import { createEnumDeduplicator } from './plugins/enum-deduplication';
 import { createExternalPlugin } from './plugins/external';
 import { createHelpPlugin } from './plugins/help';
 import { createIdentityPlugin, createIdentityResetPlugin, createNullPlugin } from './plugins/identity';
-import { createMarkdownOverrideOpenApiLoaderPlugin, createMarkdownOverrideSwaggerLoaderPlugin, createOpenApiLoaderPlugin, createSwaggerLoaderPlugin } from './plugins/loaders';
+import { createOpenApiLoaderPlugin, createSwaggerLoaderPlugin } from './plugins/loaders';
 import { createMultiApiMergerPlugin } from './plugins/merger';
 import { createNewComposerPlugin } from './plugins/new-composer';
 import { createProfileFilterPlugin } from './plugins/profile-filter';
@@ -185,8 +185,6 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     'reset-identity': createIdentityResetPlugin(),
     'loader-swagger': createSwaggerLoaderPlugin(),
     'loader-openapi': createOpenApiLoaderPlugin(),
-    'md-override-loader-swagger': createMarkdownOverrideSwaggerLoaderPlugin(),
-    'md-override-loader-openapi': createMarkdownOverrideOpenApiLoaderPlugin(),
     'transform': createTransformerPlugin(),
     'text-transform': createTextTransformerPlugin(),
     'new-transform': createGraphTransformerPlugin(),

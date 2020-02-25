@@ -9,26 +9,20 @@ It requires no normalization, and will pass out the `openapi-document` artifacts
 pipeline:
 
   openapi-document/loader-openapi:
-    # output-artifact: openapi-document
     scope: perform-load
 
   openapi-document/individual/transform:
     input: loader-openapi
-    # output-artifact: openapi-document
 
   openapi-document/individual/schema-validator-openapi:
     input: individual/transform
-    #output-artifact: openapi-document
  
   openapi-document/individual/identity:
     input: individual/schema-validator-openapi
- #   output-artifact: openapi-document
 
   openapi-document/transform-immediate:
     input:
-    - openapi-document-override/md-override-loader-openapi
     - individual/identity
-  #  output-artifact: openapi-document
 ```
 
 
