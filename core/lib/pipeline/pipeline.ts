@@ -185,8 +185,6 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     'reset-identity': createIdentityResetPlugin(),
     'loader-swagger': createSwaggerLoaderPlugin(),
     'loader-openapi': createOpenApiLoaderPlugin(),
-    'md-override-loader-swagger': createMarkdownOverrideSwaggerLoaderPlugin(),
-    'md-override-loader-openapi': createMarkdownOverrideOpenApiLoaderPlugin(),
     'transform': createTransformerPlugin(),
     'text-transform': createTextTransformerPlugin(),
     'new-transform': createGraphTransformerPlugin(),
