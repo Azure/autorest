@@ -1,15 +1,13 @@
 {
-  "name": "autorest-build",
-  "version": "2.0.0",
-  "description": "Tools for AutoRest build processes",
+  "name": "@autorest/core",
+  "private": true,
+  "version": "3.0.0",
+  "description": "AutoRest (core and bootstrapper) modules",
   "scripts": {
-    "test": "gulp test",
-    "testci": "gulp testci",
-    "build": "gulp build --threshold=1",
-    "publish-preview": "gulp publish-preview",
-    "install": "gulp npm-install --verbose",
-    "reinstall": "shx rm -rf src/autorest/node_modules & shx rm -rf src/autorest-core/node_modules & shx rm src/autorest/package-lock.json & shx rm src/autorest-core/node_modules/package-lock.json & npm install",
-    "regenerate": "gulp regenerate"
+    "test": "rush test",
+    "testci": "rush test",
+    "build": "rush rebuild",
+    "pack": "rush publish --publish --pack --include-all --tag preview"
   },
   "repository": {
     "type": "git",
@@ -23,36 +21,10 @@
   "bugs": {
     "url": "https://github.com/Azure/autorest/issues"
   },
-  "homepage": "https://github.com/Azure/autorest/readme.md",
-  "main": "./src/AutoRest/AutoRest.js",
-  "engines": {
-    "node": ">=7.10.0"
+  "main": "./autorest/entrypoints/app.js",
+  "bin": {
+    "autorest-core": "./core/entrypoints/app.js",
+    "autorest-language-service": "./autorest-core/entrypoints/language-service.js"
   },
-  "devDependencies": {
-    "chalk": "^1.1.2",
-    "coffee-script": "^1.11.1",
-    "dts-generator": "^2.1.0",
-    "gulp": "^3.9.1",
-    "gulp-dependencies-changed": "^1.0.2",
-    "gulp-eol": "^0.1.2",
-    "gulp-filter": "^5.0.0",
-    "gulp-line-ending-corrector": "^1.0.1",
-    "gulp-rename": "^1.2.2",
-    "iced-coffee-script": "*",
-    "marked": "^0.3.6",
-    "marked-terminal": "^2.0.0",
-    "moment": "^2.17.1",
-    "run-sequence": "*",
-    "semver": "^5.3.0",
-    "shelljs": "^0.7.6",
-    "through2-parallel": "^0.1.3",
-    "typescript": "2.6.2",
-    "tslint": "^5.9.1",
-    "tslint-language-service": "^0.9.9",
-    "tslint-microsoft-contrib": "^5.0.3",
-    "vinyl-fs": "^2.4.4",
-    "yargs": "^6.6.0",
-    "shx": "0.2.2"
-  },
-  "dependencies": {}
+  "homepage": "https://github.com/Azure/autorest/readme.md"
 }

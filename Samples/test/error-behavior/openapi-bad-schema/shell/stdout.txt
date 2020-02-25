@@ -1,1 +1,4 @@
 https://aka.ms/autorest
+WARNING: Failed to blame {"path":[]} in '"mem (Error: Error retrieving '$.paths.cowbell.post' (Error: Trying to retrieve 'cowbell' from mapping that contains no such key))
+WARNING: Failed to blame {"path":[]} in '"mem (Error: Error retrieving '$.paths.cowbell.post' (Error: Trying to retrieve 'cowbell' from mapping that contains no such key))
+WARNING: Failed to blame {"path":[]} in '"mem (Error: Error retrieving '$.paths.cowbell.post' (Error: Trying to retrieve 'cowbell' from mapping that contains no such key))

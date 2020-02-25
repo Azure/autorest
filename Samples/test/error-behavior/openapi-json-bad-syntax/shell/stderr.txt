@@ -1,7 +1,17 @@
     - /Samples/test/error-behavior/openapi-json-bad-syntax/tiny.json:45:6
     - /Samples/test/error-behavior/openapi-json-bad-syntax/tiny.json:45:6
+    - /Samples/test/error-behavior/openapi-json-bad-syntax/tiny.json:45:6
+    - /Samples/test/error-behavior/openapi-json-bad-syntax/tiny.json:45:6
+   at ...
+   at ...
   Error: Syntax errors encountered.
-ERROR: Syntax Error Encountered: Unexpected token ] in JSON
+ERROR: Syntax Error Encountered:  Unexpected token ] in JSON
+ERROR: Syntax Error Encountered:  Unexpected token ] in JSON
 ERROR: Syntax error: missed comma between flow collection entries
+ERROR: Syntax error: missed comma between flow collection entries
+Error: Syntax errors encountered.
+Error: Syntax errors encountered.
 FATAL: Error: Syntax errors encountered.
-FATAL: swagger-document/loader - FAILED
+FATAL: Error: Syntax errors encountered.
+FATAL: openapi-document/loader-openapi - FAILED
+FATAL: swagger-document/loader-swagger - FAILED

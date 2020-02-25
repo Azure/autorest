@@ -1,0 +1,60 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master 
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    # ensure latest npm is installed
+    npm install -g npm 
+
+    npm install -g publish-release
+
+    # make sure the versions are all synchronized 
+    npx @microsoft/rush set-versions
+    rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
+
+    # copy the autorest folder into autorestautorest
+    # and tweak the files so we can build @autorest/autorest too.
+    cp -r autorest autorestautorest
+    sed 's/\"name\": \"autorest\",/\"name\": \"@autorest\/autorest\",/g' -i autorestautorest/package.json
+    sed 's/\"autorest\":/\"autorest-beta\":/g' -i autorestautorest/package.json
+    sed 's/.*#region.*//g' -i rush.json
+
+    # pull in dependencies
+    npx @microsoft/rush update 
+    rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
+
+    # compile the code
+    npx @microsoft/rush rebuild 
+    rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
+
+    # build the packages
+    npx @microsoft/rush publish --publish --pack --include-all 
+    rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
+
+    # publish packages to a github release.
+
+    # publish autorest cli and beta (@autorest/autorest)
+    cd autorest 
+    v=`node -e "console.log(require('./package.json').version)"`
+    publish-release --token $(Github-azuresdkci-personalaccesstoken) --repo autorest --owner azure --name autorest-$v --tag autorest-$v --notes='prerelease build' --prerelease --editRelease false --assets ../common/temp/artifacts/packages/autorest-$v.tgz --assets ../common/temp/artifacts/packages/autorest-autorest-$v.tgz --target_commitish $(Build.SourceBranchName)
+    cd ..
+
+    # publish autorest core
+    cd core 
+    v=`node -e "console.log(require('./package.json').version)"`
+    publish-release --token $(Github-azuresdkci-personalaccesstoken) --repo autorest --owner azure --name autorest-core-$v --tag autorest-core-$v --notes='prerelease build' --prerelease --editRelease false --assets ../common/temp/artifacts/packages/autorest-core-$v.tgz --target_commitish $(Build.SourceBranchName)
+    cd ..
+

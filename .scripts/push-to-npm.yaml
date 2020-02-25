@@ -1,0 +1,35 @@
+# publishes a package to NPM (passed in as $(pkg) variable)
+
+trigger:
+- master 
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    # ensure latest npm is installed
+    npm install -g npm 
+    npm install -g pnpm
+
+    echo "//registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)" > ./.npmrc 
+
+    # grab the file specified
+    wget $(pkg)
+    rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
+
+    # publish it to npm 
+    for file in *.tgz 
+    do
+      pnpm publish $file --tag latest --access public 
+      rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi
+    done
+
+
+    
+

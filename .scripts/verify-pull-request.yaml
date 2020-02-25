@@ -1,0 +1,33 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger: none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install -g npm
+    npx @microsoft/rush update
+    npx @microsoft/rush rebuild
+
+    # Tests are disabled for now, failures to be investigated (Azure/autorest#3400)
+    #npx @microsoft/rush test
+
+  displayName: 'Rush install, build and test'
+
+- script: |
+    npm install @microsoft.azure/autorest.testserver --no-save
+    npm install -g @autorest/compare@~0.2.0
+  displayName: Install autorest-compare
+
+- script: autorest-compare --compare:.scripts/regression-compare.yaml
+  displayName: Regression Test - @autorest/typescript

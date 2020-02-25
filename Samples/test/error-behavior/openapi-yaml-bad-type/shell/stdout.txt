@@ -1,2 +1,2 @@
 https://aka.ms/autorest
-Process() cancelled due to exception : Plugin imodeler1 reported failure.
+Process() cancelled due to exception : $ref to original location '/Samples/test/error-behavior/openapi-yaml-bad-type/tiny.yaml#Cowbell' is not found in the new refs collection

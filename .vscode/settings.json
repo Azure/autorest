@@ -1,21 +1,16 @@
 {
+  "typescript.tsdk": "./common/temp/node_modules/typescript/lib",
   "files.exclude": {
-    "node_modules/**": true,
-    "src/autorest-core/**/*.js": true,
-    "src/autorest-core/**/*.d.ts": true,
-    "src/autorest-core/**/*.js.map": true,
-    "src/autorest/**/*.js": true,
-    "src/autorest/**/*.js.map": true,
-    "src/autorest/*.d.ts": true,
-    "src/autorest/lib/*.d.ts": true,
-    "src/autorest/lib/**/*.d.ts": true,
-    "src/autorest/node_modules/**": true,
-    "src/autorest-core/node_modules/**": true,
-    "src/autorest/lib/vscode/*.d.ts": false,
+    "**/node_modules/**": true,
+    "**/dist/**": true,
     "**/.git": true,
     "**/.svn": true,
     "**/.hg": true,
-    "**/.DS_Store": true
+    "**/*.log": true,
+    "**/package-deps.json": true,
+    "**/.DS_Store": true,
+    "core/*.js": false,
+    "autorest/*.js": false,
   },
   "[typescript]": {
     "editor.formatOnSave": true,
@@ -30,9 +25,32 @@
     "editor.detectIndentation": false
   },
   "files.associations": {
-    "*.iced": "coffeescript"
+    "rush.json": "jsonc",
+    "command-line.json": "jsonc",
+    "common-versions.json": "jsonc"
   },
-  "tslint.alwaysShowRuleFailuresAsWarnings": true,
   "git.ignoreLimitWarning": true,
-  "typescript.tsdk": "node_modules\\typescript\\lib"
+  "files.eol": "\n",
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    "javascript",
+    {
+      "language": "typescript",
+      "autoFix": true
+    },
+    {
+      "language": "typescriptreact",
+      "autoFix": false
+    }
+  ],
+  "eslint.workingDirectories": [
+    {
+      "changeProcessCWD": true,
+      "directory": "./autorest",
+    },
+    {
+      "changeProcessCWD": true,
+      "directory": "./core",
+    }
+  ]
 }

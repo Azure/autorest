@@ -1,1 +1,2 @@
 https://aka.ms/autorest
+Process() cancelled due to exception : Could not read '/Samples/test/error-behavior/openapi-yaml-bad-file-reference/i-do-not-exist.json'.

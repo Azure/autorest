@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": ".",
+    "alwaysStrict": true,
+    "forceConsistentCasingInFileNames": false,
+    "module": "commonjs",
+    "noEmitOnError": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "sourceMap": true,
+    "strict": true,
+    "declaration": true,
+    "stripInternal": true,
+    "target": "es2018",
+    "types": [
+      "node",
+      "mocha"
+    ],
+    "lib": [
+      "es2018"
+    ],
+    "experimentalDecorators": true,
+    "newLine": "LF",
+  },
+  "exclude": [
+    "node_modules",
+    "static_modules",
+    "dist",
+    "**/*.d.ts"
+  ]
+}
