@@ -163,7 +163,7 @@ export async function runCoreOutOfProc(localPath: string | null, entrypoint: str
         if (require('fs').existsSync('${__dirname}/static-loader.js')) { require('${__dirname}/static-loader.js').load('${__dirname}/static_modules.fs'); }
         const { color } = require('${__dirname}/coloring');
         require('${ep}')
-      `.replace(/"/g, '\'').replace(/\\+/g, '/');
+      `.replace(/"/g, '\'').replace(/(\\(?![']))+/g, '/');
 
       const p = spawn(process.execPath, ['-e', cmd], { stdio: ['inherit', 'inherit', 'inherit',] });
       p.on('close', (code, signal) => {
