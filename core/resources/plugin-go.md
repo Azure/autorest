@@ -11,7 +11,7 @@ use-extension:
 try-require: ./readme.go.md
 ```
 
-``` yaml $(go) && && !isRequested('@autorest/go')
+``` yaml $(go) && !isRequested('@autorest/go')
 # default the v2 generator to using the last stable @microsoft.azure/autorest-core 
 version: 2.0.4413
 
