@@ -24,7 +24,8 @@ async function resetIdentity(config: ConfigurationView, input: DataSource, sink:
       p = p === -1 ? name.length : p;
       name = `${name.substring(0, p)}-${i++}${name.substring(p)}`;
     }
-    result.push(await sink.WriteObject(name, await each.ReadObject<any>(), each.identity, config.to));
+
+    result.push(await sink.WriteData(name, await each.ReadData(), each.identity, config.to));
   }
   return new QuickDataSource(result, input.pipeState);
 }
