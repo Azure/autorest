@@ -223,7 +223,8 @@ export async function selectVersion(requestedVersion: string, force: boolean, mi
   }
 
   let selectedVersion: any = null;
-  for (const each of installedVersions) {
+  // take the highest version that satisfies the version range.
+  for (const each of installedVersions.sort((a, b) => semver.compare(a?.version, b?.version))) {
     if (semver.satisfies(each.version, requestedVersion)) {
       selectedVersion = each;
     }
@@ -261,7 +262,8 @@ export async function selectVersion(requestedVersion: string, force: boolean, mi
     } catch {
       // try a prerelease version from github.
       try {
-        pkg = await (await extensionManager).findPackage('core', `https://github.com/Azure/autorest/releases/download/autorest-core-${requestedVersion}/autorest-core-${requestedVersion}.tgz`);
+        const rv = requestedVersion.replace(/^[~|^]/g, '');
+        pkg = await (await extensionManager).findPackage('core', `https://github.com/Azure/autorest/releases/download/autorest-core-${rv}/autorest-core-${rv}.tgz`);
       } catch {
         // fallback to old package name
         try {
