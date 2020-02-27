@@ -53,6 +53,19 @@ specs:
      - xml-service.json
      - xms-error-responses.json
 languages:
+  - language: python
+    excludeSpecs:
+      # The following specs aren't yet supported by @autorest/modelerfour
+      - body-formdata-urlencoded.json
+      - body-formdata.json
+    outputPath: ../core/test/regression/python
+    oldArgs:
+      - --v3
+      - --use:@autorest/python@5.0.0-dev.20200225.1
+    newArgs:
+      - --version:../core
+      - --v3
+      - --use:@autorest/python@5.0.0-dev.20200225.1
   - language: typescript
     excludeSpecs:
       # The following specs currently crash the v3 TypeScript generator
@@ -72,7 +85,6 @@ languages:
     outputPath: ../core/test/regression/typescript
     oldArgs:
       - --v3
-      - --version:3.0.6200
       - --package-name:test-package
       - --use:@autorest/typescript@0.1.0-dev.20200203.1
     newArgs:
