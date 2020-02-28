@@ -42,6 +42,9 @@ pipeline:
 
 
 ``` yaml $(pipeline-model) == 'v3'
+pass-thru: 
+  - api-version-parameter-handler
+
 pipeline:
 
   openapi-document/enum-deduplicator:
