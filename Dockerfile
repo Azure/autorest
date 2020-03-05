@@ -1,17 +1,17 @@
-FROM ubuntu:xenial 
+FROM ubuntu:bionic 
 
 LABEL maintainer="fearthecowboy" 
 
 # Required for install
-RUN apt-get update && apt-get install -y curl libunwind8 libicu55
+RUN apt-get update && apt-get install -y curl libunwind8 libicu60
 
 # NodeJS
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
 	apt-get update && apt-get install -y nodejs && \
 	npm install npm@latest -g
 
 # Autorest
-RUN npm install -g autorest@preview
+RUN npm install -g autorest@latest
 RUN autorest --reset --allow-no-input --csharp --ruby --python --java --go --nodejs --typescript --azure-validator --preview
 
 # Set the locale to UTF-8
