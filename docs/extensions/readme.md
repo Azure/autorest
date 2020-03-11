@@ -525,7 +525,7 @@ and
 ## x-ms-parameterized-host
 When used, replaces the standard OpenAPI "host" attribute with a host that contains variables to be replaced as part of method execution or client construction, very similar to how path parameters work.
 
-**Parent element**:  [Info Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#infoObject)
+**Parent element**:  [Swagger Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#swagger-object)
 
 **Schema**:
 
