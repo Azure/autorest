@@ -41,7 +41,7 @@ export async function crawlReferences(config: ConfigurationView, inputScope: Dat
     }
 
     // wait for all the x-ms-examples to finish getting resolved
-    await Promise.all(refProcessor.examples);
+    await Promise.all(refProcessor.promises);
 
     // write the file to the data sink (this serializes the file, so it has to be done by this point.)
     return sink.WriteObject(file.Description, output, file.identity, file.artifactType, [], [file]);
@@ -63,7 +63,7 @@ export async function crawlReferences(config: ConfigurationView, inputScope: Dat
 
 class RefProcessor extends Transformer<any, any> {
 
-  public examples = new Array<Promise<void>>();
+  public promises = new Array<Promise<void>>();
   public filesReferenced = new Set<string>();
   private originalFileLocation: string;
 
@@ -98,10 +98,9 @@ class RefProcessor extends Transformer<any, any> {
 
   async process(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
-
       if (key === 'x-ms-examples') {
         // try to pull in the examples and insert them directly into this file.
-        this.examples.push(this.processXMSExamples(targetParent, value));
+        this.promises.push(this.processXMSExamples(targetParent, value));
         continue;
       }
       if (key === '$ref') {
@@ -126,5 +125,23 @@ class RefProcessor extends Transformer<any, any> {
         this.clone(targetParent, key, pointer, value);
       }
     }
+  }
+
+  // we're overriding this because the part that processes x-ms-examples is designed
+  // to do so asynchronously, and we can't clone the ouptut model because it's 
+  // technically not finished yet. 
+  // (we await the promises above, so it's finished when we go to use it. )
+  protected async runProcess() {
+    if (!this.final) {
+      await this.init();
+      for (this.currentInput of values(this.inputs)) {
+        this.current = await this.currentInput.ReadObject<any>();
+        await this.process(this.generated, visit(this.current));
+      }
+      await this.finish();
+    }
+    // changed from parent: 
+    // don't use clone in this case, because it's still working. 
+    this.final = this.generated;
   }
 }
