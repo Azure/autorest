@@ -377,9 +377,9 @@ It can be used for query parameters and header parameters, as well as properties
 ```
 
 ## x-ms-external
-To allow generated clients to share models via shared libraries an `x-ms-external` extension was introduced. When a [Definition Objects](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#definitionsObject) contains this extensions it's definition will be excluded from generated library. Note that in strongly typed languages the code will not compile unless the assembly containing the type is referenced with the project/library.
+To allow generated clients to share models via shared libraries an `x-ms-external` extension was introduced. When a [Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schema-object) contains this extensions it's definition will be excluded from generated library. Note that in strongly typed languages the code will not compile unless the assembly containing the type is referenced with the project/library.
 
-**Parent element**: [Definition Objects](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#definitionsObject)
+**Parent element**: [Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schema-object)
 
 **Schema**:
 `true|false`
