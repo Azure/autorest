@@ -80,14 +80,29 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
 
       for (const { children: containerChildren, key: containerType } of visit(this.components)) {
         for (const { value: component, key: currentComponentUid, children: componentChildren } of containerChildren) {
-          for (const { value: componentField, key: componentFieldName } of componentChildren) {
-            switch (componentFieldName) {
-              case 'allOf':
-              case 'oneOf':
-              case 'anyOf':
-                for (const { value: obj } of visit(componentField)) {
-                  if (obj.$ref) {
-                    const refParts = obj.$ref.split('/');
+          // only apply polymorphic pull-thru on objects with a polymorphic discriminator
+          if (component?.['x-ms-discriminator-value']) {
+            for (const { value: componentField, key: componentFieldName } of componentChildren) {
+              switch (componentFieldName) {
+                case 'allOf':
+                case 'oneOf':
+                case 'anyOf':
+                  for (const { value: obj } of visit(componentField)) {
+                    if (obj.$ref) {
+                      const refParts = obj.$ref.split('/');
+                      const componentRefUid = refParts.pop();
+                      const refType = refParts.pop();
+                      if (this.componentsToKeep[refType].has(componentRefUid) && !this.componentsToKeep[containerType].has(currentComponentUid)) {
+                        this.componentsToKeep[containerType].add(currentComponentUid);
+                        this.crawlObject(component);
+                        entryAdded = true;
+                      }
+                    }
+                  }
+                  break;
+                case 'not':
+                  if (componentField.$ref) {
+                    const refParts = componentField.$ref.split('/');
                     const componentRefUid = refParts.pop();
                     const refType = refParts.pop();
                     if (this.componentsToKeep[refType].has(componentRefUid) && !this.componentsToKeep[containerType].has(currentComponentUid)) {
@@ -96,23 +111,11 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
                       entryAdded = true;
                     }
                   }
-                }
-                break;
-              case 'not':
-                if (componentField.$ref) {
-                  const refParts = componentField.$ref.split('/');
-                  const componentRefUid = refParts.pop();
-                  const refType = refParts.pop();
-                  if (this.componentsToKeep[refType].has(componentRefUid) && !this.componentsToKeep[containerType].has(currentComponentUid)) {
-                    this.componentsToKeep[containerType].add(currentComponentUid);
-                    this.crawlObject(component);
-                    entryAdded = true;
-                  }
-                }
-                break;
-              default:
-                break;
+                  break;
+                default:
+                  break;
 
+              }
             }
           }
         }
