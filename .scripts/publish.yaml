@@ -30,7 +30,7 @@ steps:
     rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
 
     # build packages 
-    npm publish-preview
+    gulp publish-preview
     
     # publish autorest core to a github release.
     v=`dir src/autorest-core/*.tgz  | sed 's/.*\(2\.0\..*\)\.tgz/\1/g'`
