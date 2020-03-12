@@ -1,0 +1,40 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- v2 
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    # ensure latest npm is installed
+    npm install -g npm 
+
+    npm install -g publish-release
+
+    # install gulp
+    npm install -g gulp
+    rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
+
+    # npm install 
+    npm install
+    rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
+
+    # build packages 
+    npm publish-preview
+    
+    # publish autorest core to a github release.
+    cd core 
+    v=`node -e "console.log(require('./src/autorest-core/package.json').version)"`
+    publish-release --token $(azuresdk-github-pat) --repo autorest --owner azure --name autorest-core-$v --tag autorest-core-$v --notes='v2 prerelease build' --prerelease --editRelease false --assets ./src/autorest-core/microsoft.azure-autorest-core-$v.tgz --target_commitish $(Build.SourceBranchName)
+    cd ..
+
