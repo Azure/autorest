@@ -33,8 +33,8 @@ steps:
     npm publish-preview
     
     # publish autorest core to a github release.
-    cd core 
-    v=`node -e "console.log(require('./src/autorest-core/package.json').version)"`
+    v=`dir src/autorest-core/*.tgz  | sed 's/.*\(2\.0\..*\)\.tgz/\1/g'`
     publish-release --token $(azuresdk-github-pat) --repo autorest --owner azure --name autorest-core-$v --tag autorest-core-$v --notes='v2 prerelease build' --prerelease --editRelease false --assets ./src/autorest-core/microsoft.azure-autorest-core-$v.tgz --target_commitish $(Build.SourceBranchName)
+    rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
     cd ..
 
