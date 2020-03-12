@@ -614,6 +614,9 @@
         "x-ms-parameter-location": {
           "$ref": "#/definitions/xmsParameterLocation"
         },
+        "x-ms-api-version": {
+          "$ref": "#/definitions/xmsApiVersion"
+        },
         "x-ms-client-default": {
           "$ref": "#/definitions/xmsClientDefault"
         },
@@ -735,6 +738,9 @@
         "x-ms-parameter-location": {
           "$ref": "#/definitions/xmsParameterLocation"
         },
+        "x-ms-api-version": {
+          "$ref": "#/definitions/xmsApiVersion"
+        },
         "x-ms-client-default": {
           "$ref": "#/definitions/xmsClientDefault"
         },
@@ -850,6 +856,9 @@
         },
         "x-ms-parameter-location": {
           "$ref": "#/definitions/xmsParameterLocation"
+        },
+        "x-ms-api-version": {
+          "$ref": "#/definitions/xmsApiVersion"
         },
         "x-ms-client-default": {
           "$ref": "#/definitions/xmsClientDefault"
@@ -973,6 +982,9 @@
         "x-ms-parameter-location": {
           "$ref": "#/definitions/xmsParameterLocation"
         },
+        "x-ms-api-version": {
+          "$ref": "#/definitions/xmsApiVersion"
+        },
         "x-ms-client-default": {
           "$ref": "#/definitions/xmsClientDefault"
         },
@@ -1090,6 +1102,9 @@
         },
         "x-ms-parameter-location": {
           "$ref": "#/definitions/xmsParameterLocation"
+        },
+        "x-ms-api-version": {
+          "$ref": "#/definitions/xmsApiVersion"
         },
         "x-ms-client-default": {
           "$ref": "#/definitions/xmsClientDefault"
@@ -1833,6 +1848,9 @@
         "client",
         "method"
       ]
+    },
+    "xmsApiVersion": {
+      "type": "boolean"
     },
     "xmsClientDefault": {
       "type": [

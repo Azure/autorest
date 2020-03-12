@@ -819,11 +819,11 @@ export class Configuration {
           // <path>
           // <path/uri to .tgz package file>
           // if the entry starts with an @ it's definitely a package reference
-          if (useEntry.endsWith('.tgz') || await isDirectory(useEntry)) {
+          if (useEntry.endsWith('.tgz') || await isDirectory(useEntry) || useEntry.startsWith('file:/')) {
             const pkg = await extMgr.findPackage('plugin', useEntry);
             configs['use-extension'][pkg.name] = useEntry;
           } else {
-            const [, identity, version] = <RegExpExecArray>/(^@.*?\/[^@]*|[^@]*)@?(.*)/.exec(useEntry);
+            const [, identity, version] = /^https?:\/\//g.exec(useEntry) ? [undefined, useEntry, undefined] : <RegExpExecArray>/(^@.*?\/[^@]*|[^@]*)@?(.*)/.exec(useEntry);
             if (identity) {
               // parsed correctly
               if (version) {
