@@ -1,5 +1,8 @@
 # AutoRest Core 
 
+## 3/13/2020
+- OAI2-to-OAI3 converter update in perks.
+
 ## 2/11/2020
 - TransformerViaPointer was turning null into {} 
 
