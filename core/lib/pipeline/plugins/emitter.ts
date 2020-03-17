@@ -47,23 +47,23 @@ async function emitArtifact(config: ConfigurationView, uri: string, handle: Data
 
   if (isObject) {
     const sink = config.DataStore.getDataSink();
-    const object = new Lazy<any>(() => handle.ReadObject<any>());
-    const ast = await handle.ReadYamlAst();
+
+    // const ast = await handle.ReadYamlAst();
 
     if (isOutputArtifactOrMapRequested(config, artifactType + '.yaml')) {
-      const h = await sink.WriteData(`${++emitCtr}.yaml`, Stringify(object.Value), ['fix-me'], artifactType, IdentitySourceMapping(handle.key, ast), [handle]);
+      const h = await sink.WriteData(`${++emitCtr}.yaml`, Stringify(await handle.ReadObject<any>()), ['fix-me'], artifactType, [] /*disabled source maps long ago */, [handle]);
       await emitArtifactInternal(config, artifactType + '.yaml', uri + '.yaml', h);
     }
     if (isOutputArtifactOrMapRequested(config, artifactType + '.norm.yaml')) {
-      const h = await sink.WriteData(`${++emitCtr}.norm.yaml`, Stringify(Normalize(object.Value)), ['fix-me'], artifactType, IdentitySourceMapping(handle.key, ast), [handle]);
+      const h = await sink.WriteData(`${++emitCtr}.norm.yaml`, Stringify(Normalize(await handle.ReadObject<any>())), ['fix-me'], artifactType, [] /*disabled source maps long ago */, [handle]);
       await emitArtifactInternal(config, artifactType + '.norm.yaml', uri + '.norm.yaml', h);
     }
     if (isOutputArtifactOrMapRequested(config, artifactType + '.json')) {
-      const h = await sink.WriteData(`${++emitCtr}.json`, JSON.stringify(object.Value, null, 2), ['fix-me'], artifactType, IdentitySourceMapping(handle.key, ast), [handle]);
+      const h = await sink.WriteData(`${++emitCtr}.json`, JSON.stringify(await handle.ReadObject<any>(), null, 2), ['fix-me'], artifactType, [] /*disabled source maps long ago */, [handle]);
       await emitArtifactInternal(config, artifactType + '.json', uri + '.json', h);
     }
     if (isOutputArtifactOrMapRequested(config, artifactType + '.norm.json')) {
-      const h = await sink.WriteData(`${++emitCtr}.norm.json`, JSON.stringify(Normalize(object.Value), null, 2), ['fix-me'], artifactType, IdentitySourceMapping(handle.key, ast), [handle]);
+      const h = await sink.WriteData(`${++emitCtr}.norm.json`, JSON.stringify(Normalize(await handle.ReadObject<any>()), null, 2), ['fix-me'], artifactType, [] /*disabled source maps long ago */, [handle]);
       await emitArtifactInternal(config, artifactType + '.norm.json', uri + '.norm.json', h);
     }
   }
