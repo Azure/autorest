@@ -48,8 +48,6 @@ async function emitArtifact(config: ConfigurationView, uri: string, handle: Data
   if (isObject) {
     const sink = config.DataStore.getDataSink();
 
-    // const ast = await handle.ReadYamlAst();
-
     if (isOutputArtifactOrMapRequested(config, artifactType + '.yaml')) {
       const h = await sink.WriteData(`${++emitCtr}.yaml`, Stringify(await handle.ReadObject<any>()), ['fix-me'], artifactType, [] /*disabled source maps long ago */, [handle]);
       await emitArtifactInternal(config, artifactType + '.yaml', uri + '.yaml', h);
