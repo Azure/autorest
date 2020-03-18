@@ -13,7 +13,7 @@ Installing AutoRest on Windows, MacOS or Linux involves two steps:
   npm install -g autorest
 
   # run using command 'autorest'
-  autorest-beta --help
+  autorest --help
   ```
 Or the beta version of AutoRest v3, side-by-side:
 
