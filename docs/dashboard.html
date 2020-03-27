@@ -72,8 +72,8 @@
         const coverageCategories = ["General", "Azure"];
 
         function semverCompare(v1, v2) {
-            const v1parts = v1.split('.').map(Number);
-            const v2parts = v2.split('.').map(Number);
+            const v1parts = v1.split(/[^\d]+/).map(Number);
+            const v2parts = v2.split(/[^\d]+/).map(Number);
 
             for (var i = 0; i < Math.min(v1parts.length, v2parts.length); ++i)
                 if (v1parts[i] != v2parts[i])
