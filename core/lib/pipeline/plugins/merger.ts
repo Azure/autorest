@@ -248,7 +248,13 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
           // see if this object has a $ref
           const newRef = this.refs[ref];
           if (newRef) {
-            value.$ref = newRef;
+            if (value.__rewrite__) {
+              // special case where the value was a proxy object 
+              value.__rewrite__('$ref', newRef);
+            } else {
+              // most of the time it's not.
+              value.$ref = newRef;
+            }
           } else {
             throw new Error(`$ref to original location '${ref}' is not found in the new refs collection`);
           }
