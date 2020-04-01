@@ -22,7 +22,7 @@ Using `npm` you can upgrade to the latest stable version of AutoRest:
 
 Installing AutoRest on Windows, MacOS or Linux involves two steps:
 
-1. __Install [Node.js](https://nodejs.org/en/)__ (10.16.x LTS HIGHLY RECOMENDED)
+1. __Install [Node.js](https://nodejs.org/en/)__ (node 10.16.x LTS is a bare minimum, node 12 and 13 have some great performance benfits.)
 > for more help, check out [Installing Node.JS on different platforms](./docs/developer/workstation.md#nodejs)
 
 2. __Install AutoRest__ using `npm`
@@ -58,16 +58,6 @@ Start by reading the documentation for using AutoRest:
 - [Generating a Client using AutoRest](./docs/examples/generating-a-client.md) - shows simple command line usage for generating a client library.
 - [Command Line Interface Documentation](./docs/user/command-line-interface.md) - explains common command line arguments
 - [Examples](./Samples) - full, walkthrough-style scenarios for using AutoRest
-
-# Developers ![image](./docs/images/glasses.png)
-
-Get yourself up and coding in AutoRest
-
-- [Developer Workstation Requirements](./.attic/developer/workstation.md) - what do you need to install to start working with the AutoRest code
-- [AutoRest Extensibility](./.attic/developer/architecture/AutoRest-extension.md) and [protocol](./.attic/developer/architecture/AutoRest-extension-protocol.md) documentation
-- [Working on AutoRest core](./.attic/developer/autorest-core.md) - compiling/testing AutoRest core using the build scripts
-- [Working on an AutoRest extension](./.attic/developer/autorest-extension.md) - creating and testing AutoRest extensions
-- [AutoRest repositories and packages](./docs/trampoline.md) - all maintained repositories and packages on one page
 
 Some related information:
 - [Validation Rules & Linting](https://github.com/Azure/azure-openapi-validator/blob/master/docs/readme.md) - about the validation rules in AutoRest

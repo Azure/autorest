@@ -1,5 +1,9 @@
 # AutoRest 
  
+## 4/1/2020
+- adding support so that input-files can be relative to the configuration file that is loading them (will still fall back to relative to baseDir if it doesn't find it)
+
+
 ## 2/11/2020
 - TransformerViaPointer was turning null into {} 
 
