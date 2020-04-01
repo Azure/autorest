@@ -22,7 +22,7 @@ Using `npm` you can upgrade to the latest stable version of AutoRest:
 
 Installing AutoRest on Windows, MacOS or Linux involves two steps:
 
-1. __Install [Node.js](https://nodejs.org/en/)__ (10.16.x LTS HIGHLY RECOMENDED)
+1. __Install [Node.js](https://nodejs.org/en/)__ (node 10.16.x LTS is a bare minimum, node 12 and 13 have some great performance benfits.)
 > for more help, check out [Installing Node.JS on different platforms](./docs/developer/workstation.md#nodejs)
 
 2. __Install AutoRest__ using `npm`
