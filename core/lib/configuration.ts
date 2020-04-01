@@ -8,7 +8,7 @@ import { exists, filePath, isDirectory } from '@azure-tools/async-io';
 import { BlameTree, DataHandle, DataStore, IFileSystem, LazyPromise, ParseToAst, RealFileSystem, createSandbox, Stringify, stringify, TryDecodeEnhancedPositionFromName } from '@azure-tools/datastore';
 import { Extension, ExtensionManager, LocalExtension } from '@azure-tools/extension';
 import { clone, keys, Dictionary, values } from '@azure-tools/linq';
-import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri, simplifyUri, IsUri, FileUriToPath, CreateFileOrFolderUri } from '@azure-tools/uri';
+import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri, simplifyUri, IsUri, FileUriToPath, CreateFileOrFolderUri, ParentFolderUri } from '@azure-tools/uri';
 import { From } from 'linq-es2015';
 import { basename, dirname, join } from 'path';
 import { CancellationToken, CancellationTokenSource } from 'vscode-jsonrpc';
@@ -34,6 +34,7 @@ const RESOLVE_MACROS_AT_RUNTIME = true;
 
 export interface AutoRestConfigurationImpl {
   __info?: string | null;
+  __parents?: any | undefined;
   'allow-no-input'?: boolean;
   'input-file'?: Array<string> | string;
   'exclude-file'?: Array<string> | string;
@@ -248,18 +249,52 @@ export async function getExtension(fullyQualified: string): Promise<AutoRestExte
   return loadedExtensions[fullyQualified].autorestExtension;
 }
 
+export class CachingFileSystem implements IFileSystem {
+  protected cache = new Map<string, string | Error>();
+
+  constructor(protected actualFileSystem: IFileSystem) {
+
+  }
+  EnumerateFileUris(folderUri: string): Promise<Array<string>> {
+    return this.actualFileSystem.EnumerateFileUris(folderUri);
+  }
+  async ReadFile(uri: string): Promise<string> {
+    const content = this.cache.get(uri);
+    if (content !== undefined) {
+      if (typeof content === 'string') {
+        return content;
+      }
+      throw content;
+    }
+    try {
+      const data = await this.actualFileSystem.ReadFile(uri);
+      this.cache.set(uri, data);
+      return data;
+    } catch (E) {
+      // not available, but remember that.
+      this.cache.set(uri, E);
+      throw E;
+    }
+  }
+}
+
 export class ConfigurationView {
   [name: string]: any;
+  /* @internal */  InputFileUris = new Array<string>();
 
   private suppressor: Suppressor;
+  /* @internal */public fileSystem: CachingFileSystem;
 
   /* @internal */ constructor(
     /* @internal */public configurationFiles: { [key: string]: any },
-    /* @internal */public fileSystem: IFileSystem,
+    fileSystem: IFileSystem,
     /* @internal */public messageEmitter: MessageEmitter,
     /* @internal */public configFileFolderUri: string,
     ...configs: Array<AutoRestConfigurationImpl> // decreasing priority
   ) {
+    // wrap the filesystem with the caching filesystem 
+    this.fileSystem = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
+
     // TODO: fix configuration loading, note that there was no point in passing that DataStore used
     // for loading in here as all connection to the sources is lost when passing `Array<AutoRestConfigurationImpl>` instead of `DataHandleRead`s...
     // theoretically the `ValuesOf` approach and such won't support blaming (who to blame if $.directives[3] sucks? which code block was it from)
@@ -305,6 +340,17 @@ export class ConfigurationView {
 
     // treat this as a configuration property too.
     (<any>(this.rawConfig)).configurationFiles = configurationFiles;
+  }
+
+  async init() {
+    // after the view is created, we want to be able to do any last-minute 
+    // initialization (like, make sure intput-file uris are actually resolved)
+    const inputFiles = await Promise.all(arrayOf<string>(this.config['input-file']).map(each => this.ResolveAsPath(each)));
+    const filesToExclude = await Promise.all(arrayOf<string>(this.config['exclude-file']).map(each => this.ResolveAsPath(each)));
+
+    this.InputFileUris = inputFiles.filter(x => !filesToExclude.includes(x));
+
+    return this;
   }
 
   public get Keys(): Array<string> {
@@ -361,9 +407,25 @@ export class ConfigurationView {
     }
     return this.ResolveAsFolder(path);
   }
-  private ResolveAsPath(path: string): string {
-    return ResolveUri(this.BaseFolderUri, path);
+
+  private ResolveAsPath(path: string): Promise<string> {
+    // is there even a potential for a parent folder from the input configuruation
+    const parentFolder = this.config?.__parents?.[path];
+    const fromBaseUri = ResolveUri(this.BaseFolderUri, path);
+
+    // if it's an absolute uri already, give it back that way.
+    if (IsUri(path) || !parentFolder) {
+      return Promise.resolve(fromBaseUri);
+    }
+
+    // let it try relative to the file that loaded it.
+    // if the relative-to-parent path isn't valid, we fall back to original behavior
+    // where the file path is relative to the base uri. 
+    // (and we don't even check to see if that's valid, try-require wouldn't need valid files)
+    const fromLoadedFile = ResolveUri(parentFolder, path);
+    return this.fileSystem.ReadFile(fromLoadedFile).then(() => fromLoadedFile, () => fromBaseUri);
   }
+
 
   private get BaseFolderUri(): string {
     return EnsureIsFolderUri(ResolveUri(this.configFileFolderUri, <string>this.config['base-folder']));
@@ -383,13 +445,13 @@ export class ConfigurationView {
     });
   }
 
-  public static async *getIncludedConfigurationFiles(configView: () => ConfigurationView, fileSystem: IFileSystem, ignoreFiles: Set<string>) {
+  public static async *getIncludedConfigurationFiles(configView: () => Promise<ConfigurationView>, fileSystem: IFileSystem, ignoreFiles: Set<string>) {
 
     let done = false;
 
     while (!done) {
       // get a fresh copy of the view every time we start the loop.
-      const view = configView();
+      const view = await configView();
 
       // if we make it thru the list, we're done.
       done = true;
@@ -401,7 +463,7 @@ export class ConfigurationView {
         // looks like we found one that we haven't handled yet.
         done = false;
         ignoreFiles.add(each);
-        yield view.ResolveAsPath(each);
+        yield await view.ResolveAsPath(each);
         break;
       }
     }
@@ -409,7 +471,7 @@ export class ConfigurationView {
     done = false;
     while (!done) {
       // get a fresh copy of the view every time we start the loop.
-      const view = configView();
+      const view = await configView();
 
       // if we make it thru the list, we're done.
       done = true;
@@ -421,7 +483,7 @@ export class ConfigurationView {
         // looks like we found one that we haven't handled yet.
         done = false;
         ignoreFiles.add(each);
-        const path = view.ResolveAsPath(each);
+        const path = await view.ResolveAsPath(each);
         try {
           if (await fileSystem.ReadFile(path)) {
             yield path;
@@ -468,18 +530,6 @@ export class ConfigurationView {
     }
     return plainDirectives.selectMany(expandDirective).select(each => new ResolvedDirective(each)).toArray();
     // return From(plainDirectives).SelectMany(expandDirective).Select(each => new StaticDirectiveView(each)).ToArray();
-  }
-
-  public get InputFileUris(): Array<string> {
-    const inputFiles = From<string>(valuesOf<string>(this.config['input-file']))
-      .Select(each => this.ResolveAsPath(each))
-      .ToArray();
-
-    const filesToExclude = From<string>(valuesOf<string>(this.config['exclude-file']))
-      .Select(each => this.ResolveAsPath(each))
-      .ToArray();
-
-    return inputFiles.filter(x => !filesToExclude.includes(x));
   }
 
   public get OutputFolderUri(): string {
@@ -592,7 +642,9 @@ export class ConfigurationView {
   }
 
   public GetNestedConfigurationImmediate(...scope: Array<any>): ConfigurationView {
-    return new ConfigurationView(this.configurationFiles, this.fileSystem, this.messageEmitter, this.configFileFolderUri, ...scope, this.config).Indexer;
+    const c = new ConfigurationView(this.configurationFiles, this.fileSystem, this.messageEmitter, this.configFileFolderUri, ...scope, this.config);
+    c.InputFileUris = this.InputFileUris;
+    return c.Indexer;
   }
 
   // message pipeline (source map resolution, filter, ...)
@@ -647,14 +699,14 @@ export class ConfigurationView {
           } catch (e) {
 
             /*
-              GS01: This should be restored when we go 'release'
+      GS01: This should be restored when we go 'release'
 
-            this.Message({
-              Channel: Channel.Warning,
-              Text: `Failed to blame ${JSON.stringify(s.Position)} in '${JSON.stringify(s.document)}' (${e})`,
-              Details: e
-            });
-            */
+    this.Message({
+      Channel: Channel.Warning,
+      Text: `Failed to blame ${JSON.stringify(s.Position)} in '${JSON.stringify(s.document)}' (${e})`,
+      Details: e
+    });
+    */
             return [s];
           }
 
@@ -751,12 +803,17 @@ export class ConfigurationView {
 }
 
 export class Configuration {
+  private fileSystem: CachingFileSystem;
   public constructor(
-    private fileSystem: IFileSystem = new RealFileSystem(),
+    fileSystem: IFileSystem = new RealFileSystem(),
     private configFileOrFolderUri?: string,
-  ) { }
+  ) {
+    this.fileSystem = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
+  }
 
   private async ParseCodeBlocks(configFile: DataHandle, contextConfig: ConfigurationView, scope: string): Promise<Array<AutoRestConfigurationImpl>> {
+    const parentFolder = ParentFolderUri(configFile.originalFullPath);
+
     // load config
     const hConfig = await parseCodeBlocks(
       contextConfig,
@@ -783,6 +840,24 @@ export class Configuration {
           throw new OperationAbortedException();
         }
         block.__info = each.info;
+
+        // for ['input-file','try-require', 'require'] paths, we're going to create a node that contains 
+        // a map of the path to the folder from which the configuration file 
+        // that loaded it was specified.
+
+        // this will enable us to try to load relative paths relative to the folder from which it was read
+        // rather than have to rely on the pseudo $(this-folder) macro (which requires updating the file)
+
+        block.__parents = {};
+        for (const kind of ['input-file', 'require', 'try-require', 'exclude-file']) {
+          if (block[kind]) {
+            for (const location of arrayOf<string>(block[kind])) {
+              if (!IsUri(location)) {
+                block.__parents[location] = parentFolder;
+              }
+            }
+          }
+        }
         return block;
       });
 
@@ -890,7 +965,7 @@ export class Configuration {
     const secondPass: Array<any> = [];
 
     const createView = (segments: Array<any> = configSegments) => {
-      return new ConfigurationView(configurationFiles, this.fileSystem, messageEmitter, configFileFolderUri, ...segments);
+      return new ConfigurationView(configurationFiles, this.fileSystem, messageEmitter, configFileFolderUri, ...segments).init();
     };
     const addSegments = async (configs: Array<any>, keepInSecondPass = true): Promise<Array<any>> => {
       const segs = await this.desugarRawConfigs(configs);
@@ -915,7 +990,7 @@ export class Configuration {
 
       const blocks = await this.ParseCodeBlocks(
         await fsInputView.ReadStrict(configFileUri),
-        createView(),
+        await createView(),
         'config');
       await addSegments(blocks, false);
     }
@@ -946,7 +1021,7 @@ export class Configuration {
           configurationFiles[additionalConfig] = await (await inputView.ReadStrict(additionalConfig)).ReadData();
           const blocks = await this.ParseCodeBlocks(
             await inputView.ReadStrict(additionalConfig),
-            createView(),
+            await createView(),
             `require-config-${additionalConfig}`);
           await addSegments(blocks);
         } catch (e) {
@@ -966,13 +1041,13 @@ export class Configuration {
       const inputView = messageEmitter.DataStore.GetReadThroughScope(fsLocal);
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(ResolveUri(CreateFolderUri(__dirname), '../../resources/default-configuration.md')),
-        createView(),
+        await createView(),
         'default-config');
       await addSegments(blocks);
     }
 
     await includeFn(fsLocal);
-    const messageFormat = createView().GetEntry('message-format');
+    const messageFormat = (await createView()).GetEntry('message-format');
 
     // 5. resolve extensions
     const extMgr = await Configuration.extensionManager;
@@ -980,7 +1055,7 @@ export class Configuration {
 
 
     const resolveExtensions = async () => {
-      const viewsToHandle: Array<ConfigurationView> = [createView()];
+      const viewsToHandle: Array<ConfigurationView> = [await createView()];
       while (viewsToHandle.length > 0) {
         const tmpView = <ConfigurationView>viewsToHandle.pop();
         const additionalExtensions = tmpView.UseExtensions.filter(ext => !addedExtensions.has(ext.fullyQualified));
@@ -1011,7 +1086,7 @@ export class Configuration {
 
               // trim off the '@org' and 'autorest.' from the name.
               const shortname = additionalExtension.name.split('/').last.replace(/^autorest\./ig, '');
-              const view = [...createView().GetNestedConfiguration(shortname)];
+              const view = [...(await createView()).GetNestedConfiguration(shortname)];
               const enableDebugger = view.length > 0 ? <boolean>(view[0].GetEntry('debugger')) : false;
 
               if (await exists(localPath) && !localPath.endsWith('.tgz')) {
@@ -1084,11 +1159,11 @@ export class Configuration {
 
             const blocks = await this.ParseCodeBlocks(
               await inputView.ReadStrict(cp),
-              createView(),
+              await createView(),
               `extension-config-${additionalExtension.fullyQualified}`);
             // even though we load extensions after the default configuration, I want them to be able to 
             // trigger changes in the default configuration loading (ie, an extension can set a flag to use a different pipeline.)
-            viewsToHandle.push(createView(await addSegments(blocks.map(each => each['pipeline-model'] ? ({ ...each, 'load-priority': 1000 }) : each))));
+            viewsToHandle.push(await createView(await addSegments(blocks.map(each => each['pipeline-model'] ? ({ ...each, 'load-priority': 1000 }) : each))));
           } catch (e) {
             messageEmitter.Message.Dispatch({
               Channel: Channel.Fatal,
@@ -1121,16 +1196,16 @@ export class Configuration {
     if (configFileUri !== null) {
       const blocks = await this.ParseCodeBlocks(
         await fsInputView.ReadStrict(configFileUri),
-        createView(),
+        await createView(),
         'config');
       await addSegments(blocks, false);
       await includeFn(this.fileSystem);
       await resolveExtensions();
-      return createView([...configs, ...blocks, ...secondPass]).Indexer;
+      return (await createView([...configs, ...blocks, ...secondPass])).Indexer;
     }
     await resolveExtensions();
     // return the final view 
-    return createView().Indexer;
+    return (await createView()).Indexer;
   }
   public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders = false): Promise<string | null> {
     const files = await this.DetectConfigurationFiles(fileSystem, configFileOrFolderUri, messageEmitter, walkUpFolders);
