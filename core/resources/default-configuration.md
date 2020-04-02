@@ -29,7 +29,7 @@ require:
   - $(this-folder)plugin-typescript.md
   - $(this-folder)plugin-validators.md
   - $(this-folder)plugin-az.md
-  - $(this-folder)plugin-terraform.md
+  - $(this-folder)plugin-trenton.md
 
   - $(this-folder)graphs.md
   - $(this-folder)help-configuration.md
