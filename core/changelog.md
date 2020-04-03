@@ -1,5 +1,8 @@
 # AutoRest Core 
 
+## 4/2/2020
+- rebuild to pick up latest data-store to fix the caching filename size
+
 ## 3/13/2020
 - OAI2-to-OAI3 converter update in perks.
 
