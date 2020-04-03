@@ -26,6 +26,7 @@ The following documents describes AutoRest specific vendor extensions for [OpenA
 * [x-ms-azure-resource](#x-ms-azure-resource) - indicates that the [Definition Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schemaObject) is a resource as defined by the [Resource Manager API](https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx)
 * [x-ms-request-id](#x-ms-request-id) - allows to overwrite the request id header name
 * [x-ms-client-request-id](#x-ms-client-request-id) - allows to overwrite the client request id header name
+* [x-nullable](#x-nullable) - when `true`, specifies that `null` is a valid value for the associated schema
 
 # Generic Extensions
 
@@ -1000,6 +1001,80 @@ When set, specifies the header parameter to be used instead of `x-ms-client-requ
         "required": false,
         "x-ms-client-request-id": true
       }]
+    }
+  }
+}
+```
+
+## x-nullable
+Set `"x-nullable": true` on a schema to indicate that a `null` is a legal value.  By default, a `null` value should be disallowed when forming a request and rejected during payload deserialization.
+
+When deserializing arrays, any `null` entries in the array should simply be discarded.
+
+**Example**:
+An operation that returns a scalar value or null.
+```json
+"responses": {
+  "200": {
+    "description": "The assigned integer, or null if unassigned.",
+    "schema": {
+      "type": "integer",
+      "x-nullable": true
+    }
+  }
+}
+```
+
+**Example**:
+An operation that returns an object or null.
+```json
+"responses": {
+  "200": {
+    "description": "The active Widget or null.",
+    "schema": {
+      "x-nullable": true,
+      "allOf": {
+        "$ref": "#/definitions/Widget"
+      }
+    }
+  }
+}
+```
+
+**Example**:
+A dictionary where a key's value can be null.
+```json
+{
+  "name": "arrayBody",
+  "in": "body",
+  "schema": {
+    "description": "Credential key/value pairs.  Set the credential key's value to null to remove the credential.",
+    "type": "object",
+    "additionalProperties": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "x-nullable": true
+      }
+    }
+  }
+}
+```
+
+**Example**:
+An object with an optional property.
+```json
+"Widget": {
+  "type": "object",
+  "properties": {
+    "size": {
+      "description": "widget size",
+      "type": "integer"
+    },
+    "shape": {
+      "description": "optional widget shape",
+      "type": "string",
+      "x-nullable": true
     }
   }
 }
