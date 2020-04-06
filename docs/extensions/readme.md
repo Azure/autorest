@@ -1009,7 +1009,7 @@ When set, specifies the header parameter to be used instead of `x-ms-client-requ
 ## x-nullable
 Set `"x-nullable": true` on a schema to indicate that a `null` is a legal value.  By default, a `null` value should be disallowed when forming a request and rejected during payload deserialization.
 
-When deserializing arrays, any `null` entries in the array should simply be discarded.
+For arrays, sending/receiving a `null` array entry is not supported and should result in an error.
 
 **Example**:
 An operation that returns a scalar value or null.
@@ -1050,7 +1050,7 @@ A dictionary where a key's value can be null.
   "schema": {
     "description": "Credential key/value pairs.  Set the credential key's value to null to remove the credential.",
     "type": "object",
-    "additionalProperties": {
+    "credentials": {
       "type": "object",
       "additionalProperties": {
         "type": "string",
