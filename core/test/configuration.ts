@@ -47,9 +47,6 @@ csharp:
     // output folder should be 'foo'
     assert.equal(cfg['output-folder'], 'foo');
 
-    // my-value should not get resolved here because the dependent variable is after
-    assert.equal(cfg['my-value'], '$(sample-value)');
-
     // sample-other should get resolved to the value of sample-value
     assert.equal(cfg['sample-other'], 'one');
 
