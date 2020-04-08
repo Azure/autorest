@@ -1,5 +1,8 @@
 # AutoRest 
  
+## 4/8/2020
+- Add support for preserving security info in OAI docs.
+
 ## 4/1/2020
 - adding support so that input-files can be relative to the configuration file that is loading them (will still fall back to relative to baseDir if it doesn't find it)
 
