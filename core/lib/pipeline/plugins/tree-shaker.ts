@@ -607,7 +607,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     // copy the parts of the parameter across
     visitor.bind(this)(tc, children);
     if (isAnonymous) {
-      tc['x-anonymous-schema'] = { value: { anonymous: true }, pointer: '' };
+      tc['x-autorest-anonymous-schema'] = { value: { anonymous: true }, pointer: '' };
     }
     return tc;
   }
