@@ -419,7 +419,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           // the dereference method will use the full path to build a name, and we should ask it to use the same thing that
           // we were using before..
           const nameHint = this.getNameHint(pointer);
-          this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children, nameHint);
+          this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children, nameHint, true);
         }
           break;
       }
@@ -554,7 +554,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     }
   }
 
-  dereference(baseReferencePath: string, targetCollection: AnyObject, visitor: (tp: any, on: Iterable<Node>) => void, targetParent: AnyObject, key: string, pointer: string, value: any, children: Iterable<Node>, nameHint?: string) {
+  dereference(baseReferencePath: string, targetCollection: AnyObject, visitor: (tp: any, on: Iterable<Node>) => void, targetParent: AnyObject, key: string, pointer: string, value: any, children: Iterable<Node>, nameHint?: string, isAnonymous = false) {
     if (value.$ref) {
       // it's a reference already.
       return this.clone(targetParent, key, pointer, value);
@@ -606,6 +606,9 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
     // copy the parts of the parameter across
     visitor.bind(this)(tc, children);
+    if (isAnonymous) {
+      tc['x-anonymous-schema'] = { value: { anonymous: true }, pointer: '' };
+    }
     return tc;
   }
 }
