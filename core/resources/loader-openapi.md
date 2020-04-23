@@ -20,9 +20,6 @@ pipeline:
   openapi-document/individual/identity:
     input: individual/schema-validator-openapi
 
-  openapi-document/transform-immediate:
-    input:
-    - individual/identity
 ```
 
 

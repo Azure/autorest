@@ -115,7 +115,7 @@ pipeline:
   openapi-document/transform:
     input:
       - openapi-document/openapi-document-converter	          # openapi-document/openapi-document-converter comes from the OAI2 loader
-      - openapi-document/transform-immediate                  # openapi-document/transform-immediate comes from the OAI3 loader
+      - openapi-document/individual/identity                  # openapi-document/individual/identity comes from the OAI3 loader
 
   openapi-document/allof-cleaner:
     input: openapi-document/transform
