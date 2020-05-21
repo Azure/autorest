@@ -757,6 +757,8 @@ Indicates whether the response status code should be treated as an error respons
 ## x-ms-pageable
 The REST API guidelines define a common pattern for paging through lists of data. The operation response is modeled in OpenAPI as a list of items (a "page") and a link to the next page, effectively resembling a singly linked list. Tag the operation as `x-ms-pageable` and the generated code will include methods for navigating between pages.
 
+**Note:** The request to get the nextPage will always be a `GET` request
+
 **Schema**:
 
 Field Name | Type | Description
