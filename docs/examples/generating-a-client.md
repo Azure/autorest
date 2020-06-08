@@ -4,8 +4,8 @@ First, download the petstore.yaml example file:
 
 | Platform | Command |
 |----|---|
-|PowerShell|`iwr https://raw.githubusercontent.com/Azure/autorest/master/Samples/1b-code-generation-multilang/petstore.yaml -o petstore.yaml`|
-|Linux/OS X|`curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/1b-code-generation-multilang/petstore.yaml`|
+|PowerShell|`iwr https://raw.githubusercontent.com/Azure/autorest/master/Samples/openapi-v2/1b-code-generation-multilang/petstore.yaml -o petstore.yaml`|
+|Linux/OS X|`curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/openapi-v2/1b-code-generation-multilang/petstore.yaml`|
 
 Next, generate the client:
  
