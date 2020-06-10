@@ -1,0 +1,20 @@
+# This file can be used to synchronize labels between AutoRest repositories:
+# npx github-label-sync --access-token <GitHub token with 'repo' scope> --labels ./labels.yml --allow-added-labels Azure/autorest
+- name: "P0 - Critical"
+  color: "d83c59"
+  description: "Critical Issue - blocking"
+  aliases:
+    - P0
+- name: "P1 - Required"
+  color: "e8db7d"
+  description: "Required functionality - not blocking"
+  aliases:
+    - P1
+- name: "P2 - Requested"
+  color: "5635a8"
+  description: "Feature Request"
+  aliases:
+    - P2
+- name: "fixed-please-confirm"
+  color: "58f913"
+  description: "Fix is released, waiting for confirmation"
