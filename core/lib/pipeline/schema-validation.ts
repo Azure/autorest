@@ -22,13 +22,14 @@ export function createSwaggerSchemaValidatorPlugin(): PipelinePlugin {
     const errors = await new Promise<Array<{ code: string; params: Array<string>; message: string; path: string }> | null>(res => validator.validate(obj, extendedSwaggerSchema, (err, valid) => res(valid ? null : err)));
     if (errors !== null) {
       for (const error of errors) {
+        const path = parseJsonPointer(error.path);
         config.Message({
           // secondary files have reduced schema compliancy, so we're gonna just warn them for now.
           Channel: isSecondary ? Channel.Warning : Channel.Error,
           Details: error,
           Plugin: 'schema-validator-swagger',
-          Source: [{ document: fileIn.key, Position: <any>{ path: parseJsonPointer(error.path) } }],
-          Text: `Schema violation: ${error.message}`
+          Source: [{ document: fileIn.key, Position: <any>{ path } }],
+          Text: `Schema violation: ${error.message} (${path.join(" > ")})`
         });
       }
       if (!isSecondary) {
@@ -50,12 +51,13 @@ export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
     const errors = await new Promise<Array<{ code: string; params: Array<string>; message: string; path: string }> | null>(res => validator.validate(obj, extendedOpenApiSchema, (err, valid) => res(valid ? null : err)));
     if (errors !== null) {
       for (const error of errors) {
+        const path = parseJsonPointer(error.path);
         config.Message({
           Channel: Channel.Warning,
           Details: error,
           Plugin: 'schema-validator-openapi',
           Source: [{ document: fileIn.key, Position: <any>{ path: parseJsonPointer(error.path) } }],
-          Text: `Schema violation: ${error.message}`
+          Text: `Schema violation: ${error.message} (${path.join(" > ")})`
         });
       }
       // throw new OperationAbortedException();
