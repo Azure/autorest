@@ -46,12 +46,21 @@ export async function manipulateObject(
     if (ast === undefined) {
       throw new Error('Cannot remove root node.');
     }
-    const newObject = transformer(doc, Clone(hit.value), hit.path);
-    const newAst = newObject === undefined
-      ? undefined
-      : ToAst(newObject); // <- can extend ToAst to also take an "ambient" object with AST, in order to create anchor refs for existing stuff!
-    const oldAst = ResolveRelativeNode(ast, ast, hit.path);
-    ast = ReplaceNode(ast, oldAst, newAst) || (() => { throw new Error('Cannot remove root node.'); })();
+
+    try {
+      const newObject = transformer(doc, Clone(hit.value), hit.path);
+      const newAst = newObject === undefined
+        ? undefined
+        : ToAst(newObject); // <- can extend ToAst to also take an "ambient" object with AST, in order to create anchor refs for existing stuff!
+      const oldAst = ResolveRelativeNode(ast, ast, hit.path);
+      ast = ReplaceNode(ast, oldAst, newAst) || (() => { throw new Error('Cannot remove root node.'); })();
+    } catch {
+      // Just suppress the error.
+      // Background: it can happen that one transformation fails but the others are still valid. One typical use case is
+      // the common parameters versus normal HTTP operations. They are on the same level in the path, so the commonly used
+      // '$.paths.*.*' "where selection" finds both, however, most probably the transformation should and can be executed
+      // either on the parameters or on the HTTP operations, i.e. one of the transformations will fail.
+    }
     /*
         // patch source map
         if (newAst !== undefined) {
