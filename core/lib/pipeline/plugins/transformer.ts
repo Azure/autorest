@@ -22,6 +22,7 @@ export function createGraphTransformerPlugin(): PipelinePlugin {
 
     const result: Array<DataHandle> = [];
     for (const file of await input.Enum()) {
+      console.error("### BEFORE TRANSFORM")
       const inputHandle = await input.Read(file);
       if (inputHandle) {
         const documentId = `/${inputHandle.Description || inputHandle.key}`;
@@ -32,13 +33,15 @@ export function createGraphTransformerPlugin(): PipelinePlugin {
           if (directive.from.find(
             each => each === inputHandle.artifactType ||  // artifact by type (ie, source-file-csharp)
               documentId.endsWith(`/${each}`) ||            // by name (ie, Get_AzAdSomething.cs)
-              documentId.match(new RegExp(`/.+/${each}$`)))) { // by regex (ie, Get-AzAd.*.cs) 
+              documentId.match(new RegExp(`/.+/${each}$`)))) { // by regex (ie, Get-AzAd.*.cs)
 
             for (const where of directive.where) {
               // if the file should be processed, run it thru
               for (const transform of directive.transform) {
-                // get the whole document 
+                // get the whole document
                 contents = contents === undefined ? await inputHandle.ReadObjectFast() : contents;
+
+                console.error("### ABOUT TO APPLY TRANSFORM")
 
                 // find the target nodes in the document
                 const targets = selectNodes(contents, where);
@@ -108,7 +111,7 @@ export function createTextTransformerPlugin(): PipelinePlugin {
           if (directive.from.length === 0 || directive.from.find(
             each => each === inputHandle.artifactType ||  // artifact by type (ie, source-file-csharp)
               documentId.endsWith(`/${each}`) ||            // by name (ie, Get_AzAdSomething.cs)
-              documentId.match(new RegExp(`/.+/${each}$`)))) { // by regex (ie, Get-AzAd.*.cs) 
+              documentId.match(new RegExp(`/.+/${each}$`)))) { // by regex (ie, Get-AzAd.*.cs)
 
             // if the file should be processed, run it thru
             for (const transform of directive.transform) {
