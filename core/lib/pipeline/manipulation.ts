@@ -38,7 +38,9 @@ export class Manipulator {
               const result = await manipulateObject(data, sink, w,
                 (doc, obj, path) => {
                   return safeEval<any>(`(() => { { ${t} }; return $; })()`, { $: obj, $doc: doc, $path: path, $documentPath: data.originalFullPath });
-                }
+                },
+                this.config,
+                t
 
               /*,
               {
