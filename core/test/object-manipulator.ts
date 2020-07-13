@@ -30,6 +30,9 @@ paths:
         '200':
           schema:
             "$ref": "#/definitions/NodeA"
+    post:
+      description: post fun time
+      operationId: Postcircular
 definitions:
   NodeA:
     description: Description
@@ -53,7 +56,8 @@ definitions:
       assert.strictEqual(result.anyHit, anyHit, jsonQuery);
     };
 
-    await expectHit('$..post', false);
+    await expectHit('$..put', false);
+    await expectHit('$..post', true);
     await expectHit('$..get', true);
     await expectHit('$.parameters', false);
     await expectHit('$.definitions', true);
@@ -119,6 +123,33 @@ definitions:
       const resultObject = await result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, 'DESCRIPTION');
       assert.strictEqual(resultObject.paths['/api/circular'].get.description, 'FUN TIME');
+    }
+  }
+
+  @test async 'skip'() {
+    // setup
+    const dataStore = new DataStore(CancellationToken.None);
+    const input = await dataStore.WriteData('mem://input.yaml', this.exampleObject, 'input-file', ['input.yaml']);
+
+    {
+      // the first override should fail but the second should be still executed
+      const bestDescriptionEver = 'best description ever';
+      let firstRun = true
+
+      const result = await manipulateObject(input, dataStore.getDataSink(), '$.paths.*.*', (_, x) => {
+        if (firstRun) {
+          firstRun = false;
+          throw Error("This error should have been suppressed in the manipulateObject(...).");
+        } else {
+          x.description = bestDescriptionEver;
+          return x;
+        }
+      });
+
+      assert.strictEqual(result.anyHit, true);
+      const resultObject = await result.result.ReadObject<any>();
+      assert.strictEqual(resultObject.paths['/api/circular'].get.description, "fun time");
+      assert.strictEqual(resultObject.paths['/api/circular'].post.description, bestDescriptionEver);
     }
   }
 }
