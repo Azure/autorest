@@ -1,5 +1,5 @@
 import { AnyObject, DataHandle, DataSink, DataSource, Node, ProxyObject, QuickDataSource, Transformer, visit } from '@azure-tools/datastore';
-import { clone, Dictionary, values, visitor, length } from '@azure-tools/linq';
+import { clone, Dictionary, values, visitor } from '@azure-tools/linq';
 
 import * as oai from '@azure-tools/openapi';
 import { ConfigurationView } from '../../configuration';
@@ -78,8 +78,6 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
 
   public async process(target: ProxyObject<oai.Model>, nodes: Iterable<Node>) {
 
-    console.error("### PROCESSING FILE:", (<DataHandle>this.currentInput).originalFullPath);
-
     for (const { key, value, pointer, children } of nodes) {
       switch (key) {
         case 'paths':
@@ -157,7 +155,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     // just in case it wasn't done before we got here.
     this.expandRefs(this.generated);
 
-    // mark this merged.
+    // mark this merged. 
     if (!this.metadata.merged) {
       this.metadata.merged = { value: true, pointer: '/', filename: this.currentInputFilename };
     }
@@ -200,11 +198,6 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
           if (this.refs[ref]) {
             this.refs[fullRef] = this.refs[ref];
           }
-        } else if (ref) {
-          if (ref === "https://github.com/Azure/azure-rest-api-specs/blob/master/specification/mixedreality/resource-manager/Microsoft.MixedReality/stable/2020-05-01/common.json#/components/parameters/accountKeyRegenerateParameter") {
-            console.error("### FOUND IT! Is it in refs?", this.refs[ref] !== undefined);
-          }
-          // console.error("### UNUSUAL REF:", ref, "<<", (<DataHandle>this.currentInput).originalFullPath);
         }
 
         // now, recurse into this object
@@ -256,7 +249,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
           const newRef = this.refs[ref];
           if (newRef) {
             if (value.__rewrite__) {
-              // special case where the value was a proxy object
+              // special case where the value was a proxy object 
               value.__rewrite__('$ref', newRef);
             } else {
               // most of the time it's not.
@@ -289,7 +282,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
         value: {
           apiVersions: [this.current.info && this.current.info.version ? this.current.info.version : ''], // track the API version this came from
           filename: [this.currentInputFilename],                       // and the filename
-          path: key,                                  // and here is the path from the operation.
+          path: key,	                                // and here is the path from the operation.
           originalLocations: [originalLocation]
         }, pointer
       };
@@ -353,8 +346,6 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     for (const { key, value, pointer, children } of nodes) {
 
       const uid = `${type}:${this.cCount[type]++}`;
-
-      console.error("### COMPONENT:", key, uid)
 
       // tag the current pointer with a the new location
       const originalLocation = `${(<DataHandle>this.currentInput).originalFullPath}#${pointer}`;
