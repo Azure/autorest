@@ -126,7 +126,7 @@ definitions:
     }
   }
 
-  @test async 'skip'() {
+  @test async 'skip-transform-failure'() {
     // setup
     const dataStore = new DataStore(CancellationToken.None);
     const input = await dataStore.WriteData('mem://input.yaml', this.exampleObject, 'input-file', ['input.yaml']);
