@@ -1480,10 +1480,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
