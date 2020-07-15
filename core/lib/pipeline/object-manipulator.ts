@@ -15,7 +15,7 @@ export async function manipulateObject(
   whereJsonQuery: string,
   transformer: (doc: any, obj: any, path: JsonPath) => any, // transforming to `undefined` results in removal
   config?: ConfigurationView,
-  extraTransforationContext?: string,
+  transformationString?: string,
   mappingInfo?: {
     transformerSourceHandle: DataHandle;
     transformerSourcePosition: SmartPosition;
