@@ -5,16 +5,16 @@ import { PipelinePlugin } from '../common';
 import { values, length } from '@azure-tools/linq';
 import { createHash } from 'crypto';
 
-/** 
- * parses a json pointer, and inserts a string into the returned array 
+/**
+ * parses a json pointer, and inserts a string into the returned array
  * the string is a hashed value of the pointer itself
- * 
- * this resolves potential collisions that occur when the code that creates identity of a shaken element  
+ *
+ * this resolves potential collisions that occur when the code that creates identity of a shaken element
  * drops non-alphanumeric characters, and there are strings that are too similar
- * 
- * It's placed after the second element because the elements after that can be used 
+ *
+ * It's placed after the second element because the elements after that can be used
  * to synthesize a client name, and if it's placed earlier, it's too significant
- * when trying to manually look thru a processes OAI file. 
+ * when trying to manually look thru a processes OAI file.
  */
 function hashedJsonPointer(p: string) {
   const result = parseJsonPointer(p);
@@ -285,6 +285,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           // In AutoRest V2, AdditionalProperties are not dereferenced.
           if (!this.isSimpleTreeShake && typeof value === object) {
             // it should be a schema
+            // console.error("### DEREFERENCING:", value, pointer)
             this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
           } else {
             // otherwise, just copy it across.
@@ -557,7 +558,9 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   dereference(baseReferencePath: string, targetCollection: AnyObject, visitor: (tp: any, on: Iterable<Node>) => void, targetParent: AnyObject, key: string, pointer: string, value: any, children: Iterable<Node>, nameHint?: string, isAnonymous = false) {
     if (value.$ref) {
       // it's a reference already.
-      return this.clone(targetParent, key, pointer, value);
+      const res = this.clone(targetParent, key, pointer, value);
+      // console.error("### CLONING REF:", pointer, value, res);
+      return res;
     }
 
     if (targetParent === targetCollection) {
