@@ -65,8 +65,8 @@ export async function manipulateObject(
       // either on the parameters or on the HTTP operations, i.e. one of the transformations will fail.
       if (config != null) {
         let errorText = `Directive with 'where' clause '${whereJsonQuery}' failed by path '${hit.path}`;
-        if (extraTransforationContext != null) {
-          errorText = `Directive with 'where' clause '${whereJsonQuery}' failed to execute transformation '${extraTransforationContext}' in path '${hit.path}`;
+        if (transformationString != null) {
+          errorText = `Directive with 'where' clause '${whereJsonQuery}' failed to execute transformation '${transformationString}' in path '${hit.path}`;
         }
 
         config.Message({
