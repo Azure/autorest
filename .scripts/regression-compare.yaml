@@ -22,8 +22,9 @@ specs:
      - body-duration.json
      - body-dictionary.json
      - body-file.json
-     - body-formdata-urlencoded.json
-     - body-formdata.json
+     # Not yet supported by AutoRest v3 and Modelerfour
+     # - body-formdata-urlencoded.json
+     # - body-formdata.json
      - body-integer.json
      - body-number.json
      - body-number.quirks.json
@@ -40,7 +41,12 @@ specs:
      - httpInfrastructure.json
      - httpInfrastructure.quirks.json
      - lro.json
+     - media_types.json
      - model-flattening.json
+     - multiapi-v1.json
+     - multiapi-v2.json
+     - multiapi-v3.json
+     - object-type.json
      - paging.json
      - parameter-flattening.json
      - report.json
@@ -54,41 +60,24 @@ specs:
      - xms-error-responses.json
 languages:
   - language: python
-    excludeSpecs:
-      # The following specs aren't yet supported by @autorest/modelerfour
-      - body-formdata-urlencoded.json
-      - body-formdata.json
     outputPath: ../core/test/regression/python
     oldArgs:
       - --v3
-      - --use:@autorest/python@5.0.0-dev.20200225.1
+      - --use:@autorest/python@5.1.0-preview.3
     newArgs:
       - --version:../core
       - --v3
-      - --use:@autorest/python@5.0.0-dev.20200225.1
+      - --use:@autorest/python@5.1.0-preview.3
   - language: typescript
-    excludeSpecs:
-      # The following specs currently crash the v3 TypeScript generator
-      - additionalProperties.json
-      - azure-parameter-grouping.json
-      - azure-special-properties.json
-      - body-array.json
-      - body-dictionary.json
-      - body-formdata-urlencoded.json
-      - body-formdata.json
-      - custom-baseUrl-paging.json
-      - header.json
-      - lro.json
-      - model-flattening.json
-      - paging.json
-      - required-optional.json
     outputPath: ../core/test/regression/typescript
     oldArgs:
       - --v3
       - --package-name:test-package
-      - --use:@autorest/typescript@0.1.0-dev.20200203.1
+      - --title:TestClient
+      - --use:@autorest/typescript@6.0.0-dev.20200715.2
     newArgs:
       - --v3
       - --version:../core
       - --package-name:test-package
-      - --use:@autorest/typescript@0.1.0-dev.20200203.1
+      - --title:TestClient
+      - --use:@autorest/typescript@6.0.0-dev.20200715.2
