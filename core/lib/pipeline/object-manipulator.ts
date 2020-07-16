@@ -5,6 +5,8 @@
 
 import { Clone, CloneAst, DataHandle, DataSink, Descendants, IsPrefix, JsonPath, Mapping, nodes, ParseNode, paths, ReplaceNode, ResolveRelativeNode, SmartPosition, stringify, StringifyAst, ToAst, YAMLNode, ParseToAst } from '@azure-tools/datastore';
 import { From } from 'linq-es2015';
+import { ConfigurationView } from '../autorest-core';
+import { Channel, Message, SourceLocation } from '../message';
 import { IdentitySourceMapping } from '../source-map/merging';
 
 export async function manipulateObject(
@@ -12,6 +14,8 @@ export async function manipulateObject(
   target: DataSink,
   whereJsonQuery: string,
   transformer: (doc: any, obj: any, path: JsonPath) => any, // transforming to `undefined` results in removal
+  config?: ConfigurationView,
+  transformationString?: string,
   mappingInfo?: {
     transformerSourceHandle: DataHandle;
     transformerSourcePosition: SmartPosition;
@@ -46,12 +50,32 @@ export async function manipulateObject(
     if (ast === undefined) {
       throw new Error('Cannot remove root node.');
     }
-    const newObject = transformer(doc, Clone(hit.value), hit.path);
-    const newAst = newObject === undefined
-      ? undefined
-      : ToAst(newObject); // <- can extend ToAst to also take an "ambient" object with AST, in order to create anchor refs for existing stuff!
-    const oldAst = ResolveRelativeNode(ast, ast, hit.path);
-    ast = ReplaceNode(ast, oldAst, newAst) || (() => { throw new Error('Cannot remove root node.'); })();
+
+    try {
+      const newObject = transformer(doc, Clone(hit.value), hit.path);
+      const newAst = newObject === undefined
+        ? undefined
+        : ToAst(newObject); // <- can extend ToAst to also take an "ambient" object with AST, in order to create anchor refs for existing stuff!
+      const oldAst = ResolveRelativeNode(ast, ast, hit.path);
+      ast = ReplaceNode(ast, oldAst, newAst) || (() => { throw new Error('Cannot remove root node.'); })();
+    } catch (err) {
+      // Background: it can happen that one transformation fails but the others are still valid. One typical use case is
+      // the common parameters versus normal HTTP operations. They are on the same level in the path, so the commonly used
+      // '$.paths.*.*' "where selection" finds both, however, most probably the transformation should and can be executed
+      // either on the parameters or on the HTTP operations, i.e. one of the transformations will fail.
+      if (config != null) {
+        let errorText = `Directive with 'where' clause '${whereJsonQuery}' failed by path '${hit.path}`;
+        if (transformationString != null) {
+          errorText = `Directive with 'where' clause '${whereJsonQuery}' failed to execute transformation '${transformationString}' in path '${hit.path}`;
+        }
+
+        config.Message({
+          Channel: Channel.Warning,
+          Details: err,
+          Text: `${errorText}: '${err.message}'`
+        });
+      }
+    }
     /*
         // patch source map
         if (newAst !== undefined) {
