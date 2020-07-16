@@ -9,15 +9,13 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x'
+    versionSpec: '12.x'
   displayName: 'Install Node.js'
 
 - script: |
     # ensure latest npm is installed
     npm install -g npm 
-    npm install -g pnpm
-
-    echo "//registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)" > ./.npmrc 
+    npm config set //registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)
 
     # grab the file specified
     wget $(pkg)
@@ -26,7 +24,7 @@ steps:
     # publish it to npm 
     for file in *.tgz 
     do
-      pnpm publish $file --tag latest --access public 
+      npm publish $file --tag latest --access public
       rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi
     done
 
