@@ -18,6 +18,7 @@ The following documents describes AutoRest specific vendor extensions for [OpenA
 * [x-ms-mutability](#x-ms-mutability) - provides insight to Autorest on how to generate code. It doesn't alter the modeling of what is actually sent on the wire.
 * [x-ms-examples](#x-ms-examples) - describes the format for specifying examples for request and response of an operation in an OpenAPI definition.
 * [x-ms-error-response](#x-ms-error-response) - indicates whether the response status code should be treated as an error response
+* [x-ms-text](#x-ms-text) - XML helper for scenario with attributes and text on the same XML node
 
 ### Microsoft Azure Extensions (available in most generators only when using `--azure-arm`)
 * [x-ms-odata](#x-ms-odata) - indicates the operation includes one or more [OData](http://www.odata.org/) query parameters.
@@ -751,6 +752,42 @@ Indicates whether the response status code should be treated as an error respons
       "description": "default stuff"
     }
   }
+. . .
+```
+
+## x-ms-text
+Swagger spec doesn't allow dev to model this XML structure: `<title language="text">the title</title>`
+This is well known issue: https://github.com/OAI/OpenAPI-Specification/issues/630
+
+This extension is defined to help for this scenario. 
+
+Note: The extension is not tight to this particular scenario (you could model any text node that way), but we recommend to follow as much as possible the Swagger specification, and to use it only in case of attributes/text.
+
+**Parent element**: [XML Object](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#xml-object)
+
+**Schema**:
+`true|false`
+
+**Example**:
+```json5
+. . .
+    "properties":{
+        "language": {
+          "xml": {
+            "attribute": true,
+            "name": "language"
+          },
+          "type": "string",
+          "description": "Returned value should be 'english'"
+        },
+        "content": {
+          "xml": {
+            "x-ms-text": true
+          },
+          "description": "Returned value should be 'I am text'",
+          "type": "string"
+        }
+      },
 . . .
 ```
 
