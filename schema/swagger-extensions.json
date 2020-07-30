@@ -935,7 +935,7 @@
           "type": "string"
         },
         "items": {
-          "$ref": "#/definitions/primitivesItems"
+          "$ref": "#/definitions/primitivesItemsWithFile"
         },
         "collectionFormat": {
           "$ref": "#/definitions/collectionFormatWithMulti"
@@ -1376,19 +1376,12 @@
       },
       "additionalProperties": false
     },
-    "primitivesItems": {
+    "primitivesItemsBase": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "type": {
-          "type": "string",
-          "enum": [
-            "string",
-            "number",
-            "integer",
-            "boolean",
-            "array"
-          ]
+          "type": "string"
         },
         "format": {
           "type": "string"
@@ -1454,6 +1447,45 @@
         },
         "^x-ms-sf-.*$": {
           "$ref": "#/definitions/vendorExtension"
+        }
+      }
+    },
+    "primitivesItems": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/primitivesItemsBase"
+        }
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "string",
+            "number",
+            "integer",
+            "boolean",
+            "array"
+          ]
+        }
+      }
+    },
+    "primitivesItemsWithFile": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/primitivesItemsBase"
+        }
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "string",
+            "number",
+            "integer",
+            "boolean",
+            "array",
+            "file"
+          ]
         }
       }
     },
