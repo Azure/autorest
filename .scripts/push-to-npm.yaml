@@ -1,4 +1,5 @@
 # publishes a package to NPM (passed in as $(pkg) variable)
+# you can also customize the tag used for NPM with the $(tag) variable (defaults to 'latest')
 
 trigger:
 - master 
@@ -19,12 +20,18 @@ steps:
 
     # grab the file specified
     wget $(pkg)
-    rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
+    rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi
+
+    # determine the tag
+    npmTag = "latest"
+    if [ -n "$(tag)" ]; then
+      npmTag = $(tag)
+    fi
 
     # publish it to npm 
     for file in *.tgz 
     do
-      npm publish $file --tag latest --access public
+      npm publish $file --tag $npmTag --access public
       rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi
     done
 
