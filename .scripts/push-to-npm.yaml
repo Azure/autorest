@@ -24,9 +24,9 @@ steps:
     rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi
 
     # determine the tag
-    npmTag = "latest"
+    npmTag="latest"
     if [ -n "$(tag)" ]; then
-      npmTag = $(tag)
+      npmTag=$(tag)
     fi
 
     # publish it to npm 
