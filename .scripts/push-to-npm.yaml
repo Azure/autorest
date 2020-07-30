@@ -1,5 +1,6 @@
 # publishes a package to NPM (passed in as $(pkg) variable)
 # you can also customize the tag used for NPM with the $(tag) variable (defaults to 'latest')
+# if you want to set a secondary tag on the package (like V2), set the $(altTag) variable
 
 trigger:
 - master 
@@ -33,8 +34,11 @@ steps:
     do
       npm publish $file --tag $npmTag --access public
       rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi
+
+      # set the alternate tag, if applicable
+      if [ -n "$(altTag)" ]; then
+        tar -zxvf $file
+        cd package/
+        npm dist-tag add $(npm show . name)@$(npm show . version) --tag $(altTag)
+      fi
     done
-
-
-    
-
