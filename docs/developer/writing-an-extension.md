@@ -59,11 +59,11 @@ Here's the general process of how AutoRest will communicate with your extension:
 1. AutoRest will run through the pipeline, and once it reaches the phase for your extension, it will run `npm run start` which invokes the command in your `package.json` as described above.
 2. AutoRest will attach to `stdio` and `stdout` of your process to establish the RPC channel
 3. AutoRest will send the `GetPluginNames` request which should be responded to with the plugin name(s) your extension provides (typically a name like `python` or whatever language you are providing a generator for)
-4. AutoRest will send a `Process` message to your extension for the plugin it wants to launch, providing a `sessionId` to be used for all future messages
-5. Your extension will send a `ListFiles` request to find the file it needs to process (typically asking for a `code-model-v4` artifact if you are a v3 code generator)
-6. Your extension will send a `ReadFile` request to read the specific file it wants to process (typically `code-model-v4.yaml`).
+4. AutoRest will send a `Process` message to your extension for the plugin it wants to launch, providing a `sessionId` to be used for all future messages.  **Do not** respond to this message yet!  AutoRest uses the response to determine when the extension has finished processing files.
+5. Your extension *may* send a `ListFiles` request to find the file(s) it needs to process (you can skip this step if you will just be asking for `@autorest/modelerfour`'s `code-model-v4.yaml`).
+6. Your extension will send a `ReadFile` request to read the specific file it wants to process (ask for `code-model-v4.yaml` if writing an AutoRest v3 language generator).
 7. Your extension will build its output files based on the code model and then send `WriteFile` notifications for each file that should be written to the output folder
-8. Once your extension is finished writing its output, it should terminate with an exit code of `0`
+8. Once your extension is finished writing its output, it should send a response to the `Process` request and then exit with a code of `0`.
 
 
 ### Extension Messages
@@ -127,7 +127,7 @@ inputs.
 
 ##### Response
 
-The extension should send a plain response to acknowledge that it started up successfully:
+The extension should send a plain response **only** when processing of files is complete to signal to AutoRest that the extension is finished:
 
 ```json
 {
