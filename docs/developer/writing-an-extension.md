@@ -62,8 +62,8 @@ Here's the general process of how AutoRest will communicate with your extension:
 4. AutoRest will send a `Process` message to your extension for the plugin it wants to launch, providing a `sessionId` to be used for all future messages.  **Do not** respond to this message yet!  AutoRest uses the response to determine when the extension has finished processing files.
 5. Your extension *may* send a `ListFiles` request to find the file(s) it needs to process (you can skip this step if you will just be asking for `@autorest/modelerfour`'s `code-model-v4.yaml`).
 6. Your extension will send a `ReadFile` request to read the specific file it wants to process (ask for `code-model-v4.yaml` if writing an AutoRest v3 language generator).
-7. Your extension will build its output files based on the code model and then send `WriteFile` notifications for each file that should be written to the output folder
-8. Once your extension is finished writing its output, it should send a response to the `Process` request and then exit with a code of `0`.
+7. Your extension will build its output files based on the code model and then send `WriteFile` notifications for each file that should be written to the output folder.  You can send as many `WriteFile` notifications you like at any time, no need to wait for a response.
+8. Once your extension is finished writing output files, it should send a response to the `Process` request and then exit with a code of `0`.
 
 
 ### Extension Messages
