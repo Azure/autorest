@@ -30,6 +30,7 @@ require:
   - $(this-folder)plugin-validators.md
   - $(this-folder)plugin-az.md
   - $(this-folder)plugin-trenton.md
+  - $(this-folder)plugin-azure-functions.md
 
   - $(this-folder)graphs.md
   - $(this-folder)help-configuration.md
