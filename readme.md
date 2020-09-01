@@ -78,7 +78,7 @@ See [dotnet/core/release-notes/2.0/2.0-supported-os.md](https://github.com/dotne
 
 ##### Server-side code generation for Azure Functions
 
-For generating Azure Functions apps from Open API specs, please use the following generators -
+You can now use the new Azure Functions generators to generate Function App skeleton projects from OpenAPI specs.  To try it out, use one of the following generators:
 
 | Generator | Command | Notes |
 |----|---|---|
