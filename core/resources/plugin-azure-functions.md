@@ -8,7 +8,7 @@ The Azure Functions Python Generator.
 
 ``` yaml $(azure-functions-python)
 use-extension:
-  "@autorest/azure-functions-python": "0.0.1-preview-dev.20200827.2"
+  "@autorest/azure-functions-python": "latest"
 ```
 
 ## Default Configuration - C\#
@@ -17,7 +17,7 @@ The Azure Functions C# Generator.
 
 ``` yaml $(azure-functions-csharp)
 use-extension:
-  "@autorest/azure-functions-csharp": "0.1.0-dev.187602791"
+  "@autorest/azure-functions-csharp": "latest"
 ```
 
 ## Default Configuration - Java
@@ -26,7 +26,7 @@ The Azure Functions Java Generator.
 
 ``` yaml $(azure-functions-java)
 use-extension:
-  "@autorest/azure-functions-java": "0.0.3-Preview"
+  "@autorest/azure-functions-java": "latest"
 ```
 
 ## Default Configuration - TypeScript
@@ -35,5 +35,5 @@ The Azure Functions TypeScript Generator.
 
 ``` yaml $(azure-functions-typescript)
 use-extension:
-  "@autorest/azure-functions-typescript": "0.0.2-preview-dev.20200730.1"
+  "@autorest/azure-functions-typescript": "latest"
 ```
