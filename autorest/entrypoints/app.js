@@ -12,7 +12,7 @@ if ((require('v8').getHeapStatistics()).heap_size_limit < 8000000000 && !(requir
     try {
       // try to let source maps resolve
       require('source-map-support').install();
-    } catch {
+    } catch (e) {
       // no worries
     }
   }
