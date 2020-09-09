@@ -19,12 +19,12 @@ if ((require('v8').getHeapStatistics()).heap_size_limit < 8000000000 && !(requir
   try {
     const v = process.versions.node.split('.');
     if (v[0] < 10 || v[0] === 10 && v[1] < 12) {
-      console.error('\nFATAL: Node v10 (v10.12.x minimum, v10.16.x LTS recommended) is required for AutoRest.\n');
+      console.error('\nFATAL: Node v10 or higher (v10.12.x minimum, v14.x LTS recommended) is required for AutoRest.\n');
       process.exit(1);
     }
 
-    if (v[0] > 13) {
-      console.error('\nWARNING: AutoRest has not been tested with Node versions greater than v13.\n');
+    if (v[0] > 14) {
+      console.error('\nWARNING: AutoRest has not been tested with Node versions greater than v14.\n');
     }
     if (process.argv.indexOf('--no-static-loader') === -1 && process.env['no-static-loader'] === undefined && require('fs').existsSync(`${__dirname}/../dist/static-loader.js`)) {
       require(`${__dirname}/../dist/static-loader.js`).load(`${__dirname}/../dist/static_modules.fs`);
