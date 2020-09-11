@@ -47,8 +47,8 @@ pipeline:
 
 ## Client Side Validation
 
-On by default for backwards compatibility, but see https://github.com/Azure/autorest/issues/2100
+On by default in AutoRest v2 for backwards compatibility, but see https://github.com/Azure/autorest/issues/2100.
 
-``` yaml
+``` yaml $(pipeline-model) == 'v2'
 client-side-validation: true
 ```
