@@ -23,7 +23,7 @@ into the main `Azure/autorest` repository:
 - `@autorest/codemodel` (in `Azure/perks`) - The code model definition used by `@autorest/modelerfour`
 - `@azure-tools/oai2-to-oai3` (in `Azure/perks`) - The Swagger to OpenAPI v3 converter
 
-There are other AutoRest packages from `Azure/perks that *could* be moved but
+There are other AutoRest packages from `Azure/perks` that *could* be moved but
 are less frequently updated and could be postponed until later:
 
 - `@azure-tools/autorest-extension-base` - Provides a starting point for TypeScript-based extensions and generators
@@ -82,6 +82,7 @@ Here is a list of areas where improved documentation is needed:
 
 - How the AutoRest v3 pipeline works
 - Transforms and directives: how they work and how to write them
+- Expand on AutoRest extension authoring documentation to cover more possibilities (TypeScript extension, config-only extension)
 - Reorganize existing documentation for effectiveness and fix broken links
 - Put together an initial FAQ that cross-references full documentation pages
 
