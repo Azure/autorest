@@ -36,6 +36,14 @@ require:
   - $(this-folder)help-configuration.md
 ```
 
+##### Extra configuration for `azure-arm: true`
+
+These extra settings are applied when `azure-arm: true`:
+
+``` yaml $(azure-arm)
+head-as-boolean: true
+```
+
 ##### Actually load files
 
 If we don't specify `--help`, we will trigger the setting to load files
