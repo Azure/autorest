@@ -63,11 +63,11 @@ languages:
     outputPath: ../core/test/regression/python
     oldArgs:
       - --v3
-      - --use:@autorest/python@5.1.0-preview.3
+      - --use:@autorest/python@5.4.0
     newArgs:
       - --version:../core
       - --v3
-      - --use:@autorest/python@5.1.0-preview.3
+      - --use:@autorest/python@5.4.0
   - language: typescript
     outputPath: ../core/test/regression/typescript
     oldArgs:
