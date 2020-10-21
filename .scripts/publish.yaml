@@ -12,7 +12,7 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '12.x'
+    versionSpec: '10.x'
   displayName: 'Install Node.js'
 
 - script: |
@@ -20,6 +20,9 @@ steps:
     npm install -g npm 
 
     npm install -g publish-release
+
+    # Remove any existing node_modules folder just in case
+    rm -rf node_modules
 
     # make sure the versions are all synchronized 
     npx @microsoft/rush set-versions
