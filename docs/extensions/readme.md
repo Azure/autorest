@@ -19,6 +19,7 @@ The following documents describes AutoRest specific vendor extensions for [OpenA
 * [x-ms-examples](#x-ms-examples) - describes the format for specifying examples for request and response of an operation in an OpenAPI definition.
 * [x-ms-error-response](#x-ms-error-response) - indicates whether the response status code should be treated as an error response
 * [x-ms-text](#x-ms-text) - XML helper for scenario with attributes and text on the same XML node
+* [x-ms-client-default](#x-ms-client-default) - Set default value for properties and parameters
 
 ### Microsoft Azure Extensions (available in most generators only when using `--azure-arm`)
 * [x-ms-odata](#x-ms-odata) - indicates the operation includes one or more [OData](http://www.odata.org/) query parameters.
@@ -759,7 +760,7 @@ Indicates whether the response status code should be treated as an error respons
 Swagger spec doesn't allow dev to model this XML structure: `<title language="text">the title</title>`
 This is well known issue: https://github.com/OAI/OpenAPI-Specification/issues/630
 
-This extension is defined to help for this scenario. 
+This extension is defined to help for this scenario.
 
 Note: The extension is not tight to this particular scenario (you could model any text node that way), but we recommend to follow as much as possible the Swagger specification, and to use it only in case of attributes/text.
 
@@ -788,6 +789,59 @@ Note: The extension is not tight to this particular scenario (you could model an
           "type": "string"
         }
       },
+. . .
+```
+
+## x-ms-client-default
+Set the default value for a property or a parameter.
+
+With this extension, you can set a default value for a property or parameter that is independent of how the property / parameter's schema is handling a default
+
+**Parent element**: [Parameter Objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#parameterObject) or [Property on the Schema Definition](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schemaObject).
+
+**Schema**:
+`string` - the default value for the property / parameter
+
+**Parameter Example**:
+```json5
+. . .
+    "parameters": [
+      {
+        "name": "parameterWithClientDefault",
+        "in": "query",
+        "type": "string",
+        "enum": [
+          "value1",
+          "value2"
+        ],
+        "x-ms-enum": {
+          "name": "ParameterWithClientDefaultEnum",
+          "modelAsString": false
+        },
+        "required": true,
+        "x-ms-client-default": "value1"
+      }
+    ],
+. . .
+```
+
+**Property Example**:
+```json5
+. . .
+    "properties": {
+      "propertyWithClientDefault": {
+          "type": "string",
+          "enum": [
+              "value1",
+              "value2"
+          ],
+          "x-ms-enum": {
+              "name": "PropertyWithClientDefaultEnum",
+              "modelAsString": true
+          },
+          "x-ms-client-default": "value1"
+      }
+    }
 . . .
 ```
 
