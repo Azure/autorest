@@ -54,10 +54,10 @@ See [dotnet/core/release-notes/2.0/2.0-supported-os.md](https://github.com/dotne
 # Getting Started using AutoRest ![image](./docs/images/normal.png)
 
 Start by reading the documentation for using AutoRest:
-- [Managing AutoRest](./docs/managing-autorest.md) - shows how to get new updates to AutoRest and choose which version to use for code generation
-- [Generating a Client using AutoRest](./docs/examples/generating-a-client.md) - shows simple command line usage for generating a client library.
-- [Command Line Interface Documentation](./docs/user/command-line-interface.md) - explains common command line arguments
-- [Examples](./Samples) - full, walkthrough-style scenarios for using AutoRest
+- [Managing AutoRest](https://github.com/Azure/autorest/blob/master/docs/managing-autorest.md) - shows how to get new updates to AutoRest and choose which version to use for code generation
+- [Generating a Client using AutoRest](https://github.com/Azure/autorest/blob/master/docs/examples/generating-a-client.md) - shows simple command line usage for generating a client library.
+- [Command Line Interface Documentation](https://github.com/Azure/autorest/blob/master/docs/user/command-line-interface.md) - explains common command line arguments
+- [Examples](https://github.com/Azure/autorest/tree/master/Samples) - full, walkthrough-style scenarios for using AutoRest
 
 Some related information:
 - [Validation Rules & Linting](https://github.com/Azure/azure-openapi-validator/blob/master/docs/readme.md) - about the validation rules in AutoRest
