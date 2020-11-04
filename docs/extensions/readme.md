@@ -796,7 +796,7 @@ Note: The extension is not tight to this particular scenario (you could model an
 Set the default value for a property or a parameter.
 
 With this extension, you can set a default value for a property or parameter that is independent of how the property / parameter's schema is handling a default. This is different than the `default` value
-you can speciy
+you can specify
 
 **Parent element**: [Parameter Objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#parameterObject) or [Property on the Schema Definition](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schemaObject).
 
@@ -858,6 +858,7 @@ Field Name | Type | Description
 itemName | `string` | Optional (default: `value`). Specifies the name of the property that provides the collection of pageable items.
 nextLinkName| `string` | Required. Specifies the name of the property that provides the next link (common: `nextLink`). If the model does not have a next link property then specify `null`. This is useful for services that return an object that has an array referenced by `itemName`. The object is then flattened in a way that the array is *directly* returned, no paging is used. This provides a better client side API to the end user.
 operationName | `string` | Optional (default: `<operationName>Next`). Specifies the name of the operation for retrieving the next page.
+tokenParamName | `string` | Optional (default: `nextLink`). If you are looking to pass the continuation token through an API parameter to subsequent calls, use this field to specify the name of the parameter that will take the continuation token
 
 **Parent element**:  [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
 
@@ -995,6 +996,45 @@ Full code:
 [example3.yaml](x-ms-pageable/example3.yaml),
 [example3.cs](x-ms-pageable/example3.cs)
 
+
+**Example 4: Passing the continuation token through an API parameter**
+
+```YAML
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+produces:
+  - application/json
+paths:
+  /getIntegers:
+    get:
+      operationId: list
+      description: "Gets those integers."
+      parameters:
+        - name: tokenHeader
+          in: header
+          type: string
+      x-ms-pageable:                            # EXTENSION
+        nextLinkName: continuationToken         # property name for the continuation token
+        tokenParamName: tokenHeader             # parameter name for taking the continuation token as input to next call
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/PagedIntegerCollection'
+definitions:
+  PagedIntegerCollection:
+    description: "Page of integers."
+    type: object
+    properties:
+      item:                                  # the current page (referred to by "value")
+        type: array
+        items:
+          type: integer
+      continuationToken:                     # token to pass to signify continued paging
+        type: string
+```
 
 ## x-ms-long-running-operation
 Some requests like creating/deleting a resource cannot be carried out immediately. In such a situation, the server sends a 201 (Created) or 202 (Accepted) and provides a link to monitor the status of the request. When such an operation is marked with extension `"x-ms-long-running-operation": true`, in OpenAPI, the generated code will know how to fetch the link to monitor the status. It will keep on polling at regular intervals till the request reaches one of the terminal states: Succeeded, Failed, or Canceled.
