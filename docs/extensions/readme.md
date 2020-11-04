@@ -856,9 +856,9 @@ The REST API guidelines define a common pattern for paging through lists of data
 Field Name | Type | Description
 ---|:---:|---
 itemName | `string` | Optional (default: `value`). Specifies the name of the property that provides the collection of pageable items.
-nextLinkName| `string` | Required. Specifies the name of the property that provides the next link (common: `nextLink`). If the model does not have a next link property then specify `null`. This is useful for services that return an object that has an array referenced by `itemName`. The object is then flattened in a way that the array is *directly* returned, no paging is used. This provides a better client side API to the end user.
+nextLinkName| `string` | Required. Specifies the name of the property that provides the next link or a continuation token (common: `nextLink` for the former, `token` for the latter). If the model does not have a next link property then specify `null`. This is useful for services that return an object that has an array referenced by `itemName`. The object is then flattened in a way that the array is *directly* returned, no paging is used. This provides a better client side API to the end user.
 operationName | `string` | Optional (default: `<operationName>Next`). Specifies the name of the operation for retrieving the next page.
-tokenParamName | `string` | Optional (default: `nextLink`). If you are looking to pass the continuation token through an API parameter to subsequent calls, use this field to specify the name of the parameter that will take the continuation token
+tokenParamName | `string` | Contains the name of the continuation token parameter for the case where `nextLinkName` contains a continuation token instead of a URL.
 
 **Parent element**:  [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
 
@@ -1016,7 +1016,7 @@ paths:
           in: header
           type: string
       x-ms-pageable:                            # EXTENSION
-        nextLinkName: continuationToken         # property name for the continuation token
+        nextLinkName: token                     # property name for the continuation token
         tokenParamName: tokenHeader             # parameter name for taking the continuation token as input to next call
       responses:
         200:
@@ -1032,7 +1032,7 @@ definitions:
         type: array
         items:
           type: integer
-      continuationToken:                     # token to pass to signify continued paging
+      token:                                 # token to pass to signify continued paging
         type: string
 ```
 
