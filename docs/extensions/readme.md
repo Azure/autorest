@@ -858,7 +858,7 @@ Field Name | Type | Description
 itemName | `string` | Optional (default: `value`). Specifies the name of the property that provides the collection of pageable items.
 nextLinkName| `string` | Required. Specifies the name of the property that provides the next link or a continuation token (common: `nextLink` for the former, `token` for the latter). If the model does not have a next link property then specify `null`. This is useful for services that return an object that has an array referenced by `itemName`. The object is then flattened in a way that the array is *directly* returned, no paging is used. This provides a better client side API to the end user.
 operationName | `string` | Optional (default: `<operationName>Next`). Specifies the name of the operation for retrieving the next page.
-tokenParamName | `string` | Contains the name of the continuation token parameter for the case where `nextLinkName` contains a continuation token instead of a URL.
+tokenParamName | `string` | Contains the name of the continuation token parameter for the case where `nextLinkName` contains a continuation token instead of a URL. The param needs to be present in the operation used for retrieving the next page, whether that operation has a separate swagger definition or not.
 
 **Parent element**:  [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
 
