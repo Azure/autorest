@@ -82,7 +82,7 @@ You can use `autorest --info` to examine installed cores and extensions:
 
 > `autorest --info`
 ``` text
-AutoRest code generation utility [version: 3.0.6161; node: v10.15.1, max-memory: 8192 gb]
+AutoRest code generation utility [version: 3.0.6161; node: v10.15.1, max-memory: 8192 MB]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 
