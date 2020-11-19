@@ -1,0 +1,57 @@
+{
+  "name": "@azure-tools/codemodel",
+  "version": "4.13.0",
+  "patchOffset": 100,
+  "description": "AutoRest code model library",
+  "directories": {
+    "doc": "docs"
+  },
+  "main": "dist/exports.js",
+  "typings": "dist/exports.d.ts",
+  "scripts": {
+    "build": "tsc -p .",
+    "watch": "tsc -p . --watch",
+    "eslint-fix": "eslint  . --fix --ext .ts",
+    "eslint": "eslint  . --ext .ts",
+    "prepare": "npm run build",
+    "test": "echo codemodel: No Tests.",
+    "clean": "ver > nul 2>&1 nul && npm run --silent clean-cmd || npm run --silent clean-bash",
+    "clean-cmd": "if exist dist rmdir /s /q dist && exit 0 || exit 0 ",
+    "clean-bash": "rm nul && rm -rf dist && exit 0 || exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/autorest.powershell.git"
+  },
+  "keywords": [
+    "AutoRest",
+    "codegen"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/autorest.powershell/issues"
+  },
+  "homepage": "https://github.com/Azure/perks/tree/master/codemodel#readme",
+  "readme": "https://github.com/Azure/perks/tree/master/codemodel/readme.md",
+  "devDependencies": {
+    "@types/js-yaml": "3.12.1",
+    "@types/mocha": "5.2.5",
+    "@types/node": "12.7.2",
+    "mocha": "5.2.0",
+    "mocha-typescript": "1.1.17",
+    "@typescript-eslint/eslint-plugin": "~2.6.0",
+    "@typescript-eslint/parser": "~2.6.0",
+    "eslint": "~6.6.0",
+    "typescript": "~3.7.2",
+    "glob": "~7.1.4",
+    "js-yaml": "3.13.1",
+    "typescript-json-schema": "~0.40.0",
+    "ts-morph": "~4.0.1"
+  },
+  "dependencies": {
+    "@azure-tools/autorest-extension-base": "~3.1.0",
+    "@azure-tools/codegen": "~2.5.0",
+    "@azure-tools/linq": "~3.1.0"
+  }
+}
