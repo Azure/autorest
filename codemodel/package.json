@@ -1,7 +1,6 @@
 {
-  "name": "@azure-tools/codemodel",
+  "name": "@autorest/codemodel",
   "version": "4.13.0",
-  "patchOffset": 100,
   "description": "AutoRest code model library",
   "directories": {
     "doc": "docs"
@@ -21,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Azure/autorest.powershell.git"
+    "url": "git+https://github.com/Azure/autorest.git"
   },
   "keywords": [
     "AutoRest",
@@ -30,10 +29,10 @@
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Azure/autorest.powershell/issues"
+    "url": "https://github.com/Azure/autorest/issues"
   },
-  "homepage": "https://github.com/Azure/perks/tree/master/codemodel#readme",
-  "readme": "https://github.com/Azure/perks/tree/master/codemodel/readme.md",
+  "homepage": "https://github.com/Azure/autorest/tree/master/codemodel#readme",
+  "readme": "https://github.com/Azure/autorest/tree/master/codemodel/readme.md",
   "devDependencies": {
     "@types/js-yaml": "3.12.1",
     "@types/mocha": "5.2.5",
