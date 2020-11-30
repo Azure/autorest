@@ -1,37 +1,24 @@
 # AutoRest Documentation
 
-1. Installing AutoRest. 
-    - You can [install AutoRest](./installing-autorest.md) on Windows, Mac, or Linux.
+1. Introduction
+    - Get an [introduction](./introduction.md) to the fundamental concepts of AutoRest
 
-1. [Defining Clients With OpenAPI](developer/guide/how-autorest-generates-code-from-swagger.md)
-    - AutoRest-specific [OpenAPI Extensions](extensions/readme.md)
+2. Installing AutoRest
+    - You can [install AutoRest](./install/readme.md) on Windows, Mac, or Linux.
 
-2. Generating Clients
-    - [Command Line Interface](user/command-line-interface.md) - using AutoRest from the command line.
-    - using AutoRest in Visual Studio.
+3. Defining Clients with OpenAPI
+    - Learn [how to define your REST API](./openapi/readme.md) with OpenAPI
 
-3. Using a Generated Client (C#) - overview of the generated code and extensibility points.
-    - [Project Setup](client/proj-setup.md)
-    - [Initialization](client/init.md)
-    - [Operations](client/ops.md)
-    - [Authentication](client/auth.md)
-    - [Error Handling](client/error.md)
-    - [Tracing](client/tracing.md)
-    - [Automatic Retries](client/retry.md)
+4. Generating Clients with AutoRest
+    - How do I generate code? See [here](./generate/readme.md)
 
-4. AutoRest Architecture
-    - Overview
-    - Code Generators
-    - Modelers
+5. Using Your Generated Client
+    - How do I [use my client](./client/readme.md) now that I've generated it?
 
-5. [Building AutoRest](developer/guide/building-code.md)
+6. Migrating from AutoRest 2.0 to 3.0
+    - I have old generated code using the previous version of AutoRest. How do I [upgrade](./migrate/readme.md) my generation and use my new code?
 
-6. [Writing Tests](developer/guide/writing-tests.md)
+7. Developing with AutoRest
+    - How do I generate or contribute to AutoRest in [dev mode](./developer/readme.md)?
 
-6. [Writing OpenAPI Validation Rules](https://github.com/Azure/azure-openapi-validator/blob/master/docs/developer/authoring-new-validation-rules.md)
-
-7. Contributing to the code
-
-8. OpenAPI (formerly 'Swagger') specifications:
--  [OpenAPI Spec 2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) (f.k.a. Swagger 2.0)
--  [OpenAPI Spec 3.0.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md) 
+8. [FAQ](./faq.md)
