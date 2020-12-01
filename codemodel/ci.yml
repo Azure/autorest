@@ -1,0 +1,37 @@
+trigger:
+  branches:
+    include:
+      - master
+      - consolidate-repos
+  paths:
+    include:
+      - codemodel/
+
+pr:
+  branches:
+    include:
+      - master
+      - consolidate-repos
+  paths:
+    include:
+      - codemodel/
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install -g npm
+    npm install -g @microsoft/rush
+    rush update
+  displayName: 'rush update'
+
+- script: |
+    rush rebuild -t @autorest/codemodel
+    # No tests for this project
+  displayName: 'Build'
