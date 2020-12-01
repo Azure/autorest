@@ -17,7 +17,7 @@ Installing AutoRest on Windows, MacOS or Linux involves two steps:
   ```
 
 3. To confirm you are using AutoRest V3, and not an older version, run `autorest --help`, and confirm your core version is 3.0 and higher.
-We strongly recommend version `3.06318` or higher due to bug fixes.
+We strongly recommend version `3.06318` or higher due to bug fixes. For more versioning information, see (./autorest-versioning.md)
 # <img align="center" src="images/autorestCoreVersion.png">
 
 4. Troubleshooting

@@ -35,6 +35,7 @@ For a full-set of flags, go to our [flag index](#index-of-flags)
 |`--clear-output-folder`|Clear all contents from our output folder before outputting your newly generated code into that folder|
 |`--namespace=NAMESPACE`|sets the namespace to use for the generated code|
 |`--add-credential`|If specified, the generated client will require a credential to make network calls. See [TODO] for information on how to authenticate to our generated clients|
+|`--tag=VALUE`|Preferred way to have conditional configurations. I.e., in my configuration file, I can set the `input-file` equal to different values depending on the `VALUE` passed through the `tag` flag. See our [Adding Tags When Generating](#adding-tags-when-generating) section for more information|
 
 ## Most Basic: Generating with a Single File on the Command Line
 
@@ -95,24 +96,220 @@ Lets start with our command line from the previous example, and work on moving t
 autorest --input-file=pets.json --python --output-folder=generated/ --namespace=pets
 ```
 
-First step is to create our configuration file. The preferred name for a configuration file is `README.md`, so you may hear these terms interchangeably.
+First step is to create our configuration file. The preferred name for a configuration file is `readme.md`, so you may hear these terms interchangeably.
 
 Once your configuration file is created, we can work on moving our flags into the config file. We tell AutoRest what flags we want using `yaml` code chunks in the
-README.
+readme.
 
-The preferred name for a configuration file is `README.md`, so these terms might be used interchangeably. With your configuration file,
-the command line is simplified to
-> `autorest [path to your config-file.md] [optional flags to override the configuration in your config file]`
+We start building up the skeleton of our configuration file by adding our `yaml` code block.
+````
+```yaml
+```
+````
 
-Bonus: if you aren't overriding your configuration, your config file name is `README.md`, and you are calling AutoRest in the same directory
-level as your config file resides, your AutoRest command boils down to...
-> `autorest`
+Now, we'll start moving the flags into the `yaml` code block. Adding the input file becomes
+````
+```yaml
+input-file: pets.json
+```
+````
+We also want our code to be generated in python, so let's add that to the config as well.
+
+````
+```yaml
+input-file: pets.json
+python: true
+```
+````
+Finally, let's add our remaining 2 flags.
+
+````
+```yaml
+input-file: pets.json
+python: true
+output-folder: generated/
+namespace: pets
+```
+````
+
+Now, all of our flags are transferred into our configuration file! We've also included this final config file in our [examples](examples/basic/readme.md)
+
+Having a configuration file doesn't mean you aren't allowed to specify flags on the command line, however, we recommend moving all flags into the config file, and only
+specifying flags on the command line if you're looking to override the values in the config file.
+
+Your command line is now just
+`autorest readme.md`
 
 And that's it!
 
 ## Adding Tags When Generating
 
+Say you only want certain configurations if a specific tag is included on the command line. The most common use case for this is having different versions of swagger files,
+and wanting to toggle between generating both versions.
+
+Let's start by examining what behavior we want to have when generating. The suggested way of toggling between versions on the command line is to specify a value in the `tag` flag.
+Let's say we want to generate our first [pets.json](./openapi/examples/pets.json) if you specify `--tag=v1`, and we want to generate our second [petsv2.json](./openapi/examples/petsv2.json)
+if `--tag=v2` is specified on the command line. Let's go about putting in the markdown code to make this possible.
+
+Starting with the flags we wantin both cases, we add in a `yaml` code block with no condition for entry.
+````
+### General settings
+```yaml
+python: true
+output-folder: generated/
+```
+````
+
+In the `yaml` code blocks we have in our markdown file, we can add conditional blocks, which we only enter if a specific value is passed for a specific flag. In this case, we want our `input-file`
+to be `pets.json`, if `--tag=v1` is specified on the command line, and if `--tag=v2` is specified, we want our `input-file` to be `petsv2.json`. Finally, we also want different namespaces for each
+of these versions so both can be allowed to persist at the same time.
+
+Our code block for `tag=v1` thus looks like t his
+````
+### Tag: v1
+
+These settings apply only when `--tag=v1` is specified on the command line.
+```yaml $(tag) == 'v1'
+input-file: pets.json
+namespace: pets.v1
+```
+````
+> Note: It is highly recommended to comment your conditional `yaml` blocks with the conditions required to enter. This is because the `yaml` conditionals don't show up in rendered
+markdown, so comments are needed for visibility.
+
+Similarly, our `tag=v2` code block will look like:
+````
+### Tag: v2
+
+These settings apply only when `--tag=v2` is specified on the command line.
+```yaml $(tag) == 'v2'
+input-file: petsv2.json
+namespace: pets.v2
+```
+````
+
+Finally, let us say we want `v2` to be generated by default, and `v1` only to be generating if `--tag=v1` is specified on the command line. We can add into our `General settings` `tag: v2`. This way,
+unless we override the value of `tag` by specifying `--tag=v1` on the command line, `tag` will be `v2`, and we will enter that conditional `yaml` code block by default. Updating our `General settings`, we get
+````
+### General settings
+```yaml
+python: true
+output-folder: generated/
+tag: v2
+```
+````
+
+Putting this all together, we get the [following config file](examples/tags/readme.md), and to generate v1, our command line is `autorest readme.md --tag=v1`, while generating v2, our command line
+is just `autorest readme.md` since `tag`'s default value is `v2`.
+
 ## Generating in Multiple Languages
+
+A common occurrence is wanting to generate your SDK in multiple languages. Since flags can vary across languages (i.e., certain flags are specific to certain languages), we commonly add conditional sections
+for each language. In this example, we will show how to generate in both Java and Python. In situations like this, it is preferred to have one main
+language agnostic configuration file titled `readme.md`, where you list the configuration you want regardless of language. Then, you create a configuration file for every language you want with the language name in the path. In this case, we would create a `readme.java.md`, and a `readme.python.md`. These configuration files will be linked to from the main `readme.md`.
+
+Let's start with the configurations we want in the main `readme.md`. Following from the [previous example](#adding-tags-when-generating), we want to generate [pets.json](../../openapi/examples/pets.json) if `--tag=v1` is specified on the command line, and [petsv2.json](../../openapi/examples/petsv2.json) if `--tag=v2` is specified, regardless of which language we're generating in. We also need to link to our `readme.python.md` and `readme.java.md` from this main readme.
+
+This gives us the following `readme.md`:
+
+````
+### General settings
+``` yaml
+tag: v2
+license-header: MICROSOFT_MIT_NO_VERSION
+```
+
+### Tag: v1
+
+These settings apply only when `--tag=v1` is specified on the command line.
+```yaml $(tag) == 'v1'
+input-file: pets.json
+```
+
+### Tag: v2
+
+These settings apply only when `--tag=v2` is specified on the command line.
+```yaml $(tag) == 'v2'
+input-file: petsv2.json
+```
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
+````
+
+Let's now discuss what's going to be different between the two languages.
+
+1. Location of the output: We want our Python sdk to go into `azure-sdk-for-python`, and we want our Java sdk to go into `azure-sdk-for-java`. With Python, we use the flag `--python-sdks-folder` to indicate the location of our local [`azure-sdk-for-python`](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk) clone, and for Java, we indicate the location of our local [`azure-sdk-for-java`](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk) clone with the flag `--azure-libraries-for-java-folder`. This will vary based off of whether we're generating `v1` or `v2`, so we need individual conditional yaml blocks.
+2. Namespace: We want our Python namespace to be `azure.pets`, while we want our Java namespace to be `com.microsoft.azure.pets`. We want different namespaces based off of whether we're generating `v1` or `v2` as well.
+3. For Python, we also want to specify the name of our Python package with flag `package-name`
+4. Finally, for Java, we would like our library to be `fluent`
+
+Let's put all of this information into our Python readme, `readme.python.md`:
+````
+# Python
+These settings apply only when `--python` is specified on the command line.
+
+``` yaml
+package-name: azure-pets
+```
+
+### Tag: v1
+
+These settings apply only when `--tag=v1` is specified on the command line.
+```yaml $(tag) == 'v1'
+namespace: azure.pets.v1
+output-folder: $(python-sdks-folder)/pets/azure-pets/azure/pets/v1
+```
+
+### Tag: v2
+
+These settings apply only when `--tag=v2` is specified on the command line.
+```yaml $(tag) == 'v2'
+namespace: azure.pets.v2
+output-folder: $(python-sdks-folder)/pets/azure-pets/azure/pets/v2
+```
+````
+
+Similarly, we have our Java readme, `readme.java.md`:
+````
+# Java
+These settings apply only when `--java` is specified on the command line.
+
+``` yaml
+fluent: true
+```
+
+### Tag: v1
+
+These settings apply only when `--tag=v1` is specified on the command line.
+```yaml $(tag) == 'v1'
+namespace: com.microsoft.azure.pets.v1
+output-folder: $(azure-libraries-for-java-folder)/pets/v1
+```
+
+### Tag: v2
+
+These settings apply only when `--tag=v2` is specified on the command line.
+```yaml $(tag) == 'v2'
+namespace: azure.pets.v2
+output-folder: $(azure-libraries-for-java-folder)/pets/v2
+```
+````
+
+Now, when generating `v2` code in Python, our command line looks like
+```
+autorest readme.md --python --python-sdks-folder=../azure-sdk-for-python/sdk
+```
+while our Java command looks like
+```
+autorest readme.md --java --azure-libraries-for-java-folder=../azure-sdk-for-java/sdk
+```
+If we want to generate `v1` code in either language, all that's needed is to tack `--tag=v1` on the command line.
 
 ## Generating Management Plane Code
 
@@ -125,6 +322,8 @@ And that's it!
 
 ## Generating MultiAPI Code
 
+Only Python supports generating
+
 ## Index of Flags
 
 | Flag | Description | Python | .NET | Java | TS | Go | Swift |
@@ -135,8 +334,10 @@ And that's it!
 |`--namespace=NAMESPACE`|sets the namespace to use for the generated code| x | x | x | x | x | x |
 |`--add-credential`|If specified, the generated client will require a credential to make network calls. See [TODO] for information on how to authenticate to our generated clients| x | x | x | x | x | x |
 |`--azure-arm`|Generate code tailor-made for management plane. See our [previous section](#generating-management-plane-code) for more info| x | x | x | x | x | x |
-|`--license-header`|Generate code tailor-made for management plane. See our [previous section](#generating-management-plane-code) for more info| x | x | x | x | x | x |
-| `--python-sdks-folder=DIRECTORY` | The path to the root directory of your [`azure-sdk-for-python`](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk) clone. | x | | | | | |
+|`--license-header=LICENSE_HEADER`|Specify the type of license header for your files. Common values include `MICROSOFT_MIT_NO_VERSION` and `MICROSOFT_MIT_NO_CODEGEN` TODO: list of all possible values and defaulot| x | x | x | x | x | x |
+|`--python-sdks-folder=DIRECTORY` | The path to the root directory of your [`azure-sdk-for-python`](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk) clone. Be sure to note that we include `sdk` in the folder path.| x | | | | | |
+|`--azure-libraries-for-java-folder=DIRECTORY` | The path to the root directory of your [`azure-sdk-for-java`](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk) clone. Be sure to note that we include `sdk` in the folder path.| | | x | | | |
+|`--fluent` |Enables Java's fluent generator, generating a set of fluent Java interfaces for a guided and convenient user experience for the client library. Currently used by Azure management libraries.| | | x | | | |
 
 ## I'm Curious: How does AutoRest Actually Generate Code From an OpenAPI Definition?
 

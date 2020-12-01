@@ -5,5 +5,6 @@
 ```yaml
 input-file: ../openapi/examples/pets.json
 python: true
-
+output-folder: generated/
+namespace: pets
 ```
