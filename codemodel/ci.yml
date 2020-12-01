@@ -33,5 +33,6 @@ steps:
 
 - script: |
     rush rebuild -t @autorest/codemodel
+    echo 'Did it work?'
     # No tests for this project
   displayName: 'Build'
