@@ -23,6 +23,12 @@
       "shouldPublish": true
     },
     {
+      "packageName": "@autorest/codemodel",
+      "projectFolder": "codemodel",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
       "packageName": "autorest",
       "projectFolder": "autorest",
       "reviewCategory": "production",
