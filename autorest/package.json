@@ -31,8 +31,8 @@
     "test": "./node_modules/.bin/mocha ./dist/test",
     "build": "npm run before-build && tsc -p .",
     "watch": "npm run before-build && tsc -p . --watch",
-    "eslint-fix": "eslint  . --fix --ext .ts",
-    "eslint": "eslint  . --ext .ts",
+    "fix": "eslint  . --fix --ext .ts",
+    "lint": "eslint  . --ext .ts --max-warnings=0",
     "static-link": "static-link --force --no-node-modules",
     "preinstall": "node ./.scripts/preinstall-check",
     "prepack": "npm run static-link && npm run build",
@@ -63,7 +63,9 @@
     "mkdirp": "~0.5.1",
     "rimraf": "~3.0.0",
     "source-map-support": "0.5.13",
-    "safe-buffer": "5.2.0"
+    "safe-buffer": "5.2.0",
+    "prettier": "~2.2.1",
+    "eslint-plugin-prettier": "~3.1.4"
   },
   "static-link": {
     "entrypoints": [],
