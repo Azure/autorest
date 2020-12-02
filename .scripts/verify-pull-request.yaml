@@ -17,11 +17,17 @@ steps:
   - script: |
       npm install -g npm
       npx @microsoft/rush update
-      npx @microsoft/rush rebuild
+    displayName: "Install dependencies"
 
-      # Tests are disabled for now, failures to be investigated (Azure/autorest#3400)
-      #npx @microsoft/rush test
-    displayName: "Rush install, build and test"
+  - script: |
+      npx @microsoft/rush rebuild
+    displayName: "Build"
+
+  # - script: npx @microsoft/rush test -v
+  #   displayName: Test
+  - script: npm test
+    workingDirectory: core
+    displayName: Test
 
   - script: npx @microsoft/rush lint -v
     displayName: Lint
