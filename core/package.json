@@ -32,8 +32,8 @@
     "watch": "tsc -p . --watch",
     "build": "npm run before-build && tsc -p .",
     "static-link": "static-link --no-node-modules --debug",
-    "eslint-fix": "eslint  . --fix --ext .ts",
-    "eslint": "eslint  . --ext .ts",
+    "fix": "eslint  . --fix --ext .ts",
+    "lint": "eslint  . --ext .ts --max-warnings=0",
     "prepack": "npm run static-link && npm run build",
     "run-pwsh": "pwsh -noprofile -command \"& {param($script) pwsh -noprofile -command ((convertfrom-json (get-content -raw ./package.json)).'pwsh-scripts'.$script) }\"",
     "clean": "rimraf ./dist && rimraf ./*.log",
@@ -80,7 +80,9 @@
     "source-map-support": "0.5.13",
     "yaml-ast-parser": "0.0.40",
     "z-schema": "^3.19.0",
-    "safe-buffer": "5.2.0"
+    "safe-buffer": "5.2.0",
+    "prettier": "~2.2.1",
+    "eslint-plugin-prettier": "~3.1.4"
   },
   "static-link": {
     "entrypoints": [],

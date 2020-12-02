@@ -3,7 +3,7 @@
 //  Licensed under the MIT License. See License.txt in the project root for license information.
 // ---------------------------------------------------------------------------------------------
 
-import { RawSourceMap, SourceMapConsumer } from 'source-map';
+import { RawSourceMap, SourceMapConsumer } from "source-map";
 
 /* @internal */
 export type JsonPath = Array<number | string>;
@@ -22,9 +22,13 @@ export class SourceMap {
    */
   public LookupPath(path: JsonPath): Array<sourceMap.MappingItem> {
     const result: Array<sourceMap.MappingItem> = [];
-    this.consumer.eachMapping(mi => {
+    this.consumer.eachMapping((mi) => {
       const itemPath = this.ExtractJsonPath(mi);
-      if (itemPath && itemPath.length === path.length && itemPath.every((part, index) => itemPath[index].toString() === path[index].toString())) {
+      if (
+        itemPath &&
+        itemPath.length === path.length &&
+        itemPath.every((part, index) => itemPath[index].toString() === path[index].toString())
+      ) {
         result.push(mi);
       }
     });
@@ -37,17 +41,25 @@ export class SourceMap {
    * @param line    Line in the source file having influenced the generated file.
    * @param column  Column in the source file having influenced the generated file.
    */
-  public LookupForward(file: string, line: number, column: number): Array<{ line: number; column: number; path: JsonPath | null }> {
+  public LookupForward(
+    file: string,
+    line: number,
+    column: number,
+  ): Array<{ line: number; column: number; path: JsonPath | null }> {
     const sameLineResults: Array<sourceMap.MappingItem> = [];
-    this.consumer.eachMapping(mi => {
-      if (((mi.source === file) || (decodeURIComponent(mi.source) === decodeURIComponent(file))) && mi.originalLine === line && mi.originalColumn <= column) {
+    this.consumer.eachMapping((mi) => {
+      if (
+        (mi.source === file || decodeURIComponent(mi.source) === decodeURIComponent(file)) &&
+        mi.originalLine === line &&
+        mi.originalColumn <= column
+      ) {
         sameLineResults.push(mi);
       }
     });
-    const maxColumn = sameLineResults.map(mi => mi.originalColumn).reduce((a, b) => Math.max(a, b), 0);
+    const maxColumn = sameLineResults.map((mi) => mi.originalColumn).reduce((a, b) => Math.max(a, b), 0);
     return sameLineResults
-      .filter(mi => mi.originalColumn === maxColumn)
-      .map(mi => ({ line: mi.generatedLine, column: mi.generatedColumn, path: this.ExtractJsonPath(mi) }));
+      .filter((mi) => mi.originalColumn === maxColumn)
+      .map((mi) => ({ line: mi.generatedLine, column: mi.generatedColumn, path: this.ExtractJsonPath(mi) }));
   }
 
   /**
@@ -55,17 +67,25 @@ export class SourceMap {
    * @param line    Line in the generated file having influenced the generated file.
    * @param column  Column in the generated file having influenced the generated file.
    */
-  public LookupBackwards(line: number, column: number): Array<{ file: string; line: number; column: number; path: JsonPath | null }> {
+  public LookupBackwards(
+    line: number,
+    column: number,
+  ): Array<{ file: string; line: number; column: number; path: JsonPath | null }> {
     const sameLineResults: Array<sourceMap.MappingItem> = [];
-    this.consumer.eachMapping(mi => {
+    this.consumer.eachMapping((mi) => {
       if (mi.generatedLine === line && mi.generatedColumn <= column) {
         sameLineResults.push(mi);
       }
     });
-    const maxColumn = sameLineResults.map(mi => mi.generatedColumn).reduce((a, b) => Math.max(a, b), 0);
+    const maxColumn = sameLineResults.map((mi) => mi.generatedColumn).reduce((a, b) => Math.max(a, b), 0);
     return sameLineResults
-      .filter(mi => mi.generatedColumn === maxColumn)
-      .map(mi => ({ file: mi.source, line: mi.originalLine, column: mi.originalColumn, path: this.ExtractJsonPath(mi) }));
+      .filter((mi) => mi.generatedColumn === maxColumn)
+      .map((mi) => ({
+        file: mi.source,
+        line: mi.originalLine,
+        column: mi.originalColumn,
+        path: this.ExtractJsonPath(mi),
+      }));
   }
 
   /**
@@ -75,10 +95,10 @@ export class SourceMap {
    */
   private ExtractJsonPath(mi: sourceMap.MappingItem): JsonPath | null {
     try {
-      const pathPart = mi.name.split('\n')[0];
+      const pathPart = mi.name.split("\n")[0];
       return JSON.parse(pathPart);
     } catch (e) {
-      console.warn('Failed obtaining object path from mapping item', e);
+      console.warn("Failed obtaining object path from mapping item", e);
       return null;
     }
   }

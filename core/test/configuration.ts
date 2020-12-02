@@ -1,15 +1,18 @@
-import { suite, test, slow, timeout, skip, only } from 'mocha-typescript';
-import * as assert from 'assert';
-import { IFileSystem, MemoryFileSystem } from '@azure-tools/datastore';
-import * as AutoRest from '../lib/autorest-core';
+import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
+import * as assert from "assert";
+import { IFileSystem, MemoryFileSystem } from "@azure-tools/datastore";
+import * as AutoRest from "../lib/autorest-core";
 
-@suite class TestConfiguration {
-
-  @test async 'Test config'() {
+@suite
+class TestConfiguration {
+  @test async "Test config"() {
     // test out subscribe
 
-    const f = new MemoryFileSystem(new Map<string, string>([
-      ['readme.md', `
+    const f = new MemoryFileSystem(
+      new Map<string, string>([
+        [
+          "readme.md",
+          `
 # this is a test
 > see https://aka.ms/autorest
 ~~~ yaml
@@ -33,55 +36,62 @@ csharp:
   output-folder: $(output-folder)/csharp
 
 ~~~
-`],
-      ['other.md', `
+`,
+        ],
+        [
+          "other.md",
+          `
 # My Doc.
 
 # some text
 
-`]]));
+`,
+        ],
+      ]),
+    );
 
-    const autorest = new AutoRest.AutoRest(f, MemoryFileSystem.DefaultVirtualRootUri + 'readme.md');
+    const autorest = new AutoRest.AutoRest(f, MemoryFileSystem.DefaultVirtualRootUri + "readme.md");
     let cfg = await autorest.view;
 
     // output folder should be 'foo'
-    assert.equal(cfg['output-folder'], 'foo');
+    assert.equal(cfg["output-folder"], "foo");
 
     // sample-other should get resolved to the value of sample-value
-    assert.equal(cfg['sample-other'], 'one');
+    assert.equal(cfg["sample-other"], "one");
 
     // verify that the items object that uses a macro works too
-    assert.equal(cfg['items'][3], 'one/two');
+    assert.equal(cfg["items"][3], "one/two");
 
-    for (const each of cfg.GetNestedConfiguration('csharp')) {
+    for (const each of cfg.GetNestedConfiguration("csharp")) {
       // verify the output folder is relative
-      assert.equal(each.GetEntry('output-folder'), 'foo/csharp');
+      assert.equal(each.GetEntry("output-folder"), "foo/csharp");
 
       // verify that the items object that uses a macro works too
       // assert.equal((<any>(each.Raw))['items'][3], "two/two");
 
       // now, this got resolved alot earlier.
       // dunno if we need it the other way or not.
-      assert.equal(each['items'][3], 'one/two');
+      assert.equal(each["items"][3], "one/two");
     }
 
     // override the output-folder from the cmdline
-    autorest.AddConfiguration({ 'output-folder': 'OUTPUT' });
+    autorest.AddConfiguration({ "output-folder": "OUTPUT" });
     cfg = await autorest.view;
-    assert.equal(cfg['output-folder'], 'OUTPUT');
+    assert.equal(cfg["output-folder"], "OUTPUT");
 
-    for (const each of cfg.GetNestedConfiguration('csharp')) {
-      assert.equal(each['output-folder'], 'OUTPUT/csharp');
+    for (const each of cfg.GetNestedConfiguration("csharp")) {
+      assert.equal(each["output-folder"], "OUTPUT/csharp");
     }
-
   }
 
-
-  @test async 'Test Guards'() {
+  @test async "Test Guards"() {
     // test out subscribe
 
-    const f = new MemoryFileSystem(new Map<string, string>([
-      ['readme.md', `
+    const f = new MemoryFileSystem(
+      new Map<string, string>([
+        [
+          "readme.md",
+          `
 # this is a test
 > see https://aka.ms/autorest
 
@@ -110,23 +120,29 @@ value:
  - not_bar
 ~~~
 
-`],
-      ['other.md', `
+`,
+        ],
+        [
+          "other.md",
+          `
 # My Doc.
 
 # some text
 
-`]]));
+`,
+        ],
+      ]),
+    );
 
-    const autorest = new AutoRest.AutoRest(f, MemoryFileSystem.DefaultVirtualRootUri + 'readme.md');
+    const autorest = new AutoRest.AutoRest(f, MemoryFileSystem.DefaultVirtualRootUri + "readme.md");
     autorest.AddConfiguration({ foo: true });
     let cfg = await autorest.view;
 
     // output folder should be 'foo'
-    assert.deepEqual(cfg['value'], ['foo', 'foo_and_not_bar', 'not_bar']);
+    assert.deepEqual(cfg["value"], ["foo", "foo_and_not_bar", "not_bar"]);
 
     autorest.AddConfiguration({ bar: true });
     cfg = await autorest.view;
-    assert.deepEqual(cfg['value'], ['foo', 'foo_and_bar', 'bar']);
+    assert.deepEqual(cfg["value"], ["foo", "foo_and_bar", "bar"]);
   }
 }

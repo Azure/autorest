@@ -3,28 +3,27 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as aio from '@azure-tools/async-io';
-import * as datastore from '@azure-tools/datastore';
+import * as aio from "@azure-tools/async-io";
+import * as datastore from "@azure-tools/datastore";
 
-import * as assert from 'assert';
-import { only, skip, slow, suite, test, timeout } from 'mocha-typescript';
+import * as assert from "assert";
+import { only, skip, slow, suite, test, timeout } from "mocha-typescript";
 
-import { MultiAPIMerger } from '../lib/pipeline/plugins/merger';
-import { FastStringify } from '@azure-tools/datastore';
+import { MultiAPIMerger } from "../lib/pipeline/plugins/merger";
+import { FastStringify } from "@azure-tools/datastore";
 try {
-  require('source-map-support').install();
+  require("source-map-support").install();
 } catch {
   /* unused */
 }
 const resources = `${__dirname}../../../test/resources/merger`;
 
-@suite class TestShaker {
-
+@suite
+class TestShaker {
   // todo: not testing now.
-  @test @skip async 'Test Merger'() {
-
-    const inputUri = 'mem://input.yaml';
-    const inputUri2 = 'mem://input2.yaml';
+  @test @skip async "Test Merger"() {
+    const inputUri = "mem://input.yaml";
+    const inputUri2 = "mem://input2.yaml";
     // const outputUri = 'mem://output.yaml';
 
     const input = await aio.readFile(`${resources}/input.yaml`);
@@ -37,7 +36,15 @@ const resources = `${__dirname}../../../test/resources/merger`;
     const mfs = new datastore.MemoryFileSystem(map);
     const mfs2 = new datastore.MemoryFileSystem(map2);
 
-    const cts: datastore.CancellationTokenSource = { cancel() {/* unused */ }, dispose() {/* unused */ }, token: { isCancellationRequested: false, onCancellationRequested: <any>null } };
+    const cts: datastore.CancellationTokenSource = {
+      cancel() {
+        /* unused */
+      },
+      dispose() {
+        /* unused */
+      },
+      token: { isCancellationRequested: false, onCancellationRequested: <any>null },
+    };
     const ds = new datastore.DataStore(cts.token);
     const scope = ds.GetReadThroughScope(mfs);
     const scope2 = ds.GetReadThroughScope(mfs2);
@@ -57,17 +64,22 @@ const resources = `${__dirname}../../../test/resources/merger`;
       const sink = ds.getDataSink();
       const output = await processor.getOutput();
 
-      const data = await sink.WriteObject('merged oai3 doc...', await processor.getOutput(), inputDataHandle.identity, 'merged-oai3', await processor.getSourceMappings(), [inputDataHandle, inputDataHandle2]);
-
+      const data = await sink.WriteObject(
+        "merged oai3 doc...",
+        await processor.getOutput(),
+        inputDataHandle.identity,
+        "merged-oai3",
+        await processor.getSourceMappings(),
+        [inputDataHandle, inputDataHandle2],
+      );
 
       // testing: dump out the converted file
       // console.log(FastStringify(processor.output));
       // console.log(JSON.stringify(data.ReadMetadata.sourceMap.Value));
 
-      await aio.writeFile('c:/tmp/input.yaml', input);
-      await aio.writeFile('c:/tmp/output.yaml', FastStringify(await processor.getOutput()));
+      await aio.writeFile("c:/tmp/input.yaml", input);
+      await aio.writeFile("c:/tmp/output.yaml", FastStringify(await processor.getOutput()));
       // await aio.writeFile("c:/tmp/output.yaml.map", JSON.stringify(await data.metadata.sourceMap));
-
 
       // assert.deepEqual(shaker.output, outputObject, 'Should be the same');
     }

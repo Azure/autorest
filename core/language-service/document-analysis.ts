@@ -3,10 +3,10 @@
 //  Licensed under the MIT License. See License.txt in the project root for license information.
 // ---------------------------------------------------------------------------------------------
 
-import { parseJsonPointer } from '@azure-tools/datastore';
-import { nodes, parse, paths, stringify, value, } from 'jsonpath';
-import { Location, Position } from 'vscode-languageserver';
-import { JsonPath, SourceMap } from './source-map';
+import { parseJsonPointer } from "@azure-tools/datastore";
+import { nodes, parse, paths, stringify, value } from "jsonpath";
+import { Location, Position } from "vscode-languageserver";
+import { JsonPath, SourceMap } from "./source-map";
 
 /**
  * @internal
@@ -23,7 +23,8 @@ export class DocumentAnalysis {
     private documentUri: string,
     private document: string,
     private fullyResolvedAndMergedDefinition: any,
-    private fullyResolvedAndMergedDefinitionMap: SourceMap) { }
+    private fullyResolvedAndMergedDefinitionMap: SourceMap,
+  ) {}
 
   /**
    * Determines the JSON query found at a given position.
@@ -32,7 +33,7 @@ export class DocumentAnalysis {
    * @param position The position to look at for a JSON query.
    */
   public getJsonQueryAt(position: Position): string | null {
-    const lines = this.document.split('\n');
+    const lines = this.document.split("\n");
     const potentialQuery: string = (lines[position.line].match(/\B\$[.[].+/g) || [])[0];
 
     try {
@@ -54,14 +55,13 @@ export class DocumentAnalysis {
     const fullyResolvedAndMergedDefinitionLocation = this.fullyResolvedAndMergedDefinitionMap.LookupForward(
       this.documentUri,
       position.line + 1, // VS Code deviates from the source map standard here... 0 vs. 1 based line numbers
-      position.character)[0];
+      position.character,
+    )[0];
     if (fullyResolvedAndMergedDefinitionLocation) {
-
       const path = fullyResolvedAndMergedDefinitionLocation.path;
       if (path) {
-
         // is $ref?
-        if (path.length > 0 && path[path.length - 1] === '$ref') {
+        if (path.length > 0 && path[path.length - 1] === "$ref") {
           // lookup object
           const refValueJsonPointer: string = value(this.fullyResolvedAndMergedDefinition, stringify(path));
           const refValueJsonPath: JsonPath = parseJsonPointer(refValueJsonPointer);
@@ -76,7 +76,7 @@ export class DocumentAnalysis {
   /**
    * Retrieves all document locations (VS Code understands) corresponding with given JSON query.
    */
-  public * getDocumentLocations(jsonQuery: string): Iterable<Location> {
+  public *getDocumentLocations(jsonQuery: string): Iterable<Location> {
     for (const path of paths(this.fullyResolvedAndMergedDefinition, jsonQuery)) {
       for (const mappingItem of this.fullyResolvedAndMergedDefinitionMap.LookupPath(path.slice(1))) {
         yield {
@@ -84,13 +84,13 @@ export class DocumentAnalysis {
           range: {
             start: {
               line: mappingItem.originalLine - 1, // VS Code deviates from the source map standard here... 0 vs. 1 based line numbers
-              character: mappingItem.originalColumn
+              character: mappingItem.originalColumn,
             },
             end: {
               line: mappingItem.originalLine - 1,
-              character: mappingItem.originalColumn // TODO: room for improvement. think there even is extended information in `name`!
-            }
-          }
+              character: mappingItem.originalColumn, // TODO: room for improvement. think there even is extended information in `name`!
+            },
+          },
         };
       }
     }
@@ -99,11 +99,11 @@ export class DocumentAnalysis {
   /**
    * Retrieves all locations in the entire OpenAPI definition (and corresponding values) matching given JSON query.
    */
-  public * getDefinitionLocations(jsonQuery: string): Iterable<{ value: any; jsonPath: string }> {
+  public *getDefinitionLocations(jsonQuery: string): Iterable<{ value: any; jsonPath: string }> {
     for (const path of nodes(this.fullyResolvedAndMergedDefinition, jsonQuery)) {
       yield {
         value: path.value,
-        jsonPath: stringify(path.path)
+        jsonPath: stringify(path.path),
       };
     }
   }
