@@ -79,6 +79,8 @@ help-content: # type: Help as defined in autorest-core/help.ts
       description: generate Java client code
     - key: python
       description: generate Python client code
+    - key: az
+      description: generate Azure CLI code
     - key: nodejs
       description: generate NodeJS client code
     - key: typescript
