@@ -23,7 +23,10 @@ steps:
       npx @microsoft/rush rebuild
     displayName: "Build"
 
-  - script: npx @microsoft/rush test -v
+  # - script: npx @microsoft/rush test -v
+  #   displayName: Test
+  - script: npm test
+    workingDirectory: core
     displayName: Test
 
   - script: npx @microsoft/rush lint -v
