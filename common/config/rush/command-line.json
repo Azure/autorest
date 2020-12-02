@@ -41,10 +41,10 @@
       "shellCommand": "node .scripts/npm-run.js clean"
     },
     {
-      "commandKind": "global",
+      "commandKind": "bulk",
       "name": "test",
-      "summary": "run all npm test",
-      "shellCommand": "node .scripts/npm-run.js test"
+      "summary": "Tests projects. Runs `npm test` on all projects.",
+      "enableParallelism": false
     },
     {
       "commandKind": "bulk",
