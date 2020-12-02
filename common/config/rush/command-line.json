@@ -44,7 +44,8 @@
       "commandKind": "bulk",
       "name": "test",
       "summary": "Tests projects. Runs `npm test` on all projects.",
-      "enableParallelism": false
+      "enableParallelism": false,
+      "allowWarningsInSuccessfulBuild": true
     },
     {
       "commandKind": "bulk",

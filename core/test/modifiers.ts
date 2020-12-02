@@ -44,7 +44,7 @@ class Modifiers {
     return result;
   }
 
-  @skip @test async Reference() {
+  @test async Reference() {
     const code = await this.generate({});
     assert.ok(code["CowbellOperationsExtensions.cs"].includes(" Get("));
     assert.ok(!code["CowbellOperationsExtensions.cs"].includes(" Retrieve("));
@@ -57,7 +57,7 @@ class Modifiers {
     assert.ok(!code["Models/SuperCowbell.cs"]);
   }
 
-  @skip @test async RemoveOperation() {
+  @test async RemoveOperation() {
     const code = await this.generate({
       directive: {
         "remove-operation": "Cowbell_Get",
@@ -67,7 +67,7 @@ class Modifiers {
     assert.ok(!code["CowbellOperationsExtensions.cs"].includes(" Retrieve("));
   }
 
-  @skip @test async RenameOperation() {
+  @test async RenameOperation() {
     const code = await this.generate({
       directive: {
         "rename-operation": {
@@ -80,7 +80,7 @@ class Modifiers {
     assert.ok(code["CowbellOperationsExtensions.cs"].includes(" Retrieve("));
   }
 
-  @skip @test async AddOperationForward() {
+  @test async AddOperationForward() {
     const code = await this.generate({
       components: {
         operations: [
@@ -96,7 +96,7 @@ class Modifiers {
     assert.ok(code["CowbellOperations.cs"].includes(".GetWith"));
   }
 
-  @skip @test async AddOperationImpl() {
+  @test async AddOperationImpl() {
     const implementation = "// implement me " + Math.random();
     const code = await this.generate({
       components: {
@@ -114,7 +114,7 @@ class Modifiers {
     assert.ok(code["CowbellOperations.cs"].includes(implementation));
   }
 
-  @skip @test async RemoveModel() {
+  @test async RemoveModel() {
     const code = await this.generate({
       directive: [
         { "remove-model": "Cowbell" },
@@ -126,7 +126,7 @@ class Modifiers {
     assert.ok(!code["Models/SuperCowbell.cs"]);
   }
 
-  @skip @test async RenameModel() {
+  @test async RenameModel() {
     const code = await this.generate({
       directive: {
         "rename-model": {
@@ -140,7 +140,7 @@ class Modifiers {
     assert.ok(code["Models/SuperCowbell.cs"].includes("string Name"));
   }
 
-  @skip @test async RemoveProperty() {
+  @test async RemoveProperty() {
     const code = await this.generate({
       directive: {
         "where-model": "Cowbell",
@@ -151,7 +151,7 @@ class Modifiers {
     assert.ok(!code["Models/Cowbell.cs"].includes("string Name"));
   }
 
-  @skip @test async RenameProperty() {
+  @test async RenameProperty() {
     const code = await this.generate({
       directive: {
         "where-model": "Cowbell",
