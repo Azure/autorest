@@ -11,6 +11,7 @@ import { RealFileSystem } from "@azure-tools/datastore";
 import { join } from "path";
 
 @suite
+@skip
 class Modifiers {
   private async generate(additionalConfig: any): Promise<{ [uri: string]: string }> {
     const autoRest = new AutoRest(new RealFileSystem());
