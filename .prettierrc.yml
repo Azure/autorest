@@ -1,5 +1,5 @@
-trailingComma: 'all'
+trailingComma: "all"
 printWidth: 120
-quoteProps: 'consistent'
-endOfLine: 'auto'
+quoteProps: "consistent"
+endOfLine: "auto"
 arrowParens: always

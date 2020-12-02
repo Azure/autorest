@@ -6,13 +6,13 @@
 trigger: none
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 steps:
   - task: NodeTool@0
     inputs:
-      versionSpec: '14.x'
-    displayName: 'Install Node.js'
+      versionSpec: "14.x"
+    displayName: "Install Node.js"
 
   - script: |
       npm install -g npm
@@ -21,14 +21,14 @@ steps:
 
       # Tests are disabled for now, failures to be investigated (Azure/autorest#3400)
       #npx @microsoft/rush test
-    displayName: 'Rush install, build and test'
+    displayName: "Rush install, build and test"
 
   - script: npx @microsoft/rush lint -v
     displayName: Lint
 
   - task: UsePythonVersion@0
     inputs:
-      versionSpec: '3.x'
+      versionSpec: "3.x"
     displayName: Install Python 3
 
   - script: |

@@ -1,171 +1,188 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>AutoRest dashboard</title>
     <style>
-        body, div {
-            /* padding: 30px; */
-            font-family: sans-serif;
-            text-align: center;
-        }
-        h1, h2 {
-            font-weight: normal;
-        }
-        h2 {
-            text-align: left;
-            min-width: 40%;
-        }
-        table {
-            display: inline-block;
-            border-collapse: collapse;
-        }
-        th {
-            color: #aaa;
-        }
-        th, td {
-            font-weight: normal;
-            /* font-style: italic; */
-            border: 1px solid #ddd;
-        }
-        td {
-            padding: 0px;
-        }
-        th, td > div {
-            padding: 3px;
-        }
-        a {
-            text-decoration: none;
-            color: blue;
-        }
+      body,
+      div {
+        /* padding: 30px; */
+        font-family: sans-serif;
+        text-align: center;
+      }
+      h1,
+      h2 {
+        font-weight: normal;
+      }
+      h2 {
+        text-align: left;
+        min-width: 40%;
+      }
+      table {
+        display: inline-block;
+        border-collapse: collapse;
+      }
+      th {
+        color: #aaa;
+      }
+      th,
+      td {
+        font-weight: normal;
+        /* font-style: italic; */
+        border: 1px solid #ddd;
+      }
+      td {
+        padding: 0px;
+      }
+      th,
+      td > div {
+        padding: 3px;
+      }
+      a {
+        text-decoration: none;
+        color: blue;
+      }
 
-        .loading {
-            display: inline-block;
-            height: 10px;
-            width: 10px;
-            background: gray;
-            animation: loading 1s infinite linear;
-        }
+      .loading {
+        display: inline-block;
+        height: 10px;
+        width: 10px;
+        background: gray;
+        animation: loading 1s infinite linear;
+      }
 
-        @keyframes loading {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(359.9deg);
-            }
+      @keyframes loading {
+        0% {
+          transform: rotate(0deg);
         }
+        100% {
+          transform: rotate(359.9deg);
+        }
+      }
 
-        details tr.optional {
-            display: none;
-        }
-        details[open] tr.optional {
-            display: table-row;
-        }
+      details tr.optional {
+        display: none;
+      }
+      details[open] tr.optional {
+        display: table-row;
+      }
     </style>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
-        const httpGet = (url, type) => new Promise((res, rej) => $.get(url, res, type).fail(rej));
-        const delay = ms => new Promise(res => setTimeout(res, ms));
+      const httpGet = (url, type) => new Promise((res, rej) => $.get(url, res, type).fail(rej));
+      const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-        const azureBlobContainer_coverage = "https://autorestci.blob.core.windows.net/autorest-ci-coverage-report";
-        const coverageCategories = ["General", "Azure"];
+      const azureBlobContainer_coverage = "https://autorestci.blob.core.windows.net/autorest-ci-coverage-report";
+      const coverageCategories = ["General", "Azure"];
 
-        function semverCompare(v1, v2) {
-            const v1parts = v1.split(/[^\d]+/).map(Number);
-            const v2parts = v2.split(/[^\d]+/).map(Number);
+      function semverCompare(v1, v2) {
+        const v1parts = v1.split(/[^\d]+/).map(Number);
+        const v2parts = v2.split(/[^\d]+/).map(Number);
 
-            for (var i = 0; i < Math.min(v1parts.length, v2parts.length); ++i)
-                if (v1parts[i] != v2parts[i])
-                    return v1parts[i] > v2parts[i] ? 1 : -1;
+        for (var i = 0; i < Math.min(v1parts.length, v2parts.length); ++i)
+          if (v1parts[i] != v2parts[i]) return v1parts[i] > v2parts[i] ? 1 : -1;
 
-            if (v1parts.length != v2parts.length)
-                return v1parts.length > v2parts.length ? 1 : -1;
-            return 0;
-        }
+        if (v1parts.length != v2parts.length) return v1parts.length > v2parts.length ? 1 : -1;
+        return 0;
+      }
 
-        async function deferredUI(targetUI, operation) {
-            targetUI.empty();
-            targetUI.append($("<span class='loading' />"));
-            // await delay(500);
-            const resultUI = await operation();
-            targetUI.empty();
-            targetUI.append(resultUI);
-        }
+      async function deferredUI(targetUI, operation) {
+        targetUI.empty();
+        targetUI.append($("<span class='loading' />"));
+        // await delay(500);
+        const resultUI = await operation();
+        targetUI.empty();
+        targetUI.append(resultUI);
+      }
 
-        async function refresh() {
-            const generatorFeatureCoverage = $("#generatorFeatureCoverage");
+      async function refresh() {
+        const generatorFeatureCoverage = $("#generatorFeatureCoverage");
 
-            deferredUI(generatorFeatureCoverage, async () => {
-                const reportsXml = await httpGet(`${azureBlobContainer_coverage}?restype=container&comp=list`, "xml");
-                const reports = [...$(reportsXml).find("Name").map((i, o) => $(o).text())];
-                const reportsByRepo/*: { [repo: string]: { version: string, uri: string }[]] }*/ = {};
-                for (const report of reports) {
-                    const [match, repo, version] = /^autorest\.(.+)_(.+)\.md$/.exec(report);
-                    if (!reportsByRepo[repo]) reportsByRepo[repo] = [];
-                    reportsByRepo[repo].push({ version: version, uri: `${azureBlobContainer_coverage}/${report}` });
-                }
+        deferredUI(generatorFeatureCoverage, async () => {
+          const reportsXml = await httpGet(`${azureBlobContainer_coverage}?restype=container&comp=list`, "xml");
+          const reports = [
+            ...$(reportsXml)
+              .find("Name")
+              .map((i, o) => $(o).text()),
+          ];
+          const reportsByRepo /*: { [repo: string]: { version: string, uri: string }[]] }*/ = {};
+          for (const report of reports) {
+            const [match, repo, version] = /^autorest\.(.+)_(.+)\.md$/.exec(report);
+            if (!reportsByRepo[repo]) reportsByRepo[repo] = [];
+            reportsByRepo[repo].push({ version: version, uri: `${azureBlobContainer_coverage}/${report}` });
+          }
 
-                const result = $("<div>")
-                for (const repo of Object.keys(reportsByRepo)) {
-                    let section = $("<details>").appendTo(result);
-                    section = $("<summary>").appendTo(section);
+          const result = $("<div>");
+          for (const repo of Object.keys(reportsByRepo)) {
+            let section = $("<details>").appendTo(result);
+            section = $("<summary>").appendTo(section);
 
-                    const table = $("<table>");
-                    section.append($("<h2>").text(repo).css("display", "inline-block"));
-                    section.append($("<br>"));
-                    section.append(table);
-                    section.append($("<br>"));
-                    section.append($("<br>"));
-                    table.append($("<tr>")
-                        .append($("<th>").text("Version"))
-                        .append($("<th>").text("Feature Set"))
-                        .append(coverageCategories.map(cat => $("<th>").text(cat))));
+            const table = $("<table>");
+            section.append($("<h2>").text(repo).css("display", "inline-block"));
+            section.append($("<br>"));
+            section.append(table);
+            section.append($("<br>"));
+            section.append($("<br>"));
+            table.append(
+              $("<tr>")
+                .append($("<th>").text("Version"))
+                .append($("<th>").text("Feature Set"))
+                .append(coverageCategories.map((cat) => $("<th>").text(cat))),
+            );
 
-                    const versions = reportsByRepo[repo].sort((a, b) => semverCompare(a.version, b.version)).reverse();
-                    let subsequent = false;
-                    for (const version of versions) {
-                        const request = httpGet(version.uri, "text");
-                        const featureSetVersion = $("<td>");
-                        deferredUI(featureSetVersion, async () => {
-                            const response = await request;
-                            const coverage = / (\d+\.\d+\.\d+)/.exec(response.split("\n").filter(l => l.includes("feature set version"))[0])[1];
-                            return coverage;
-                        });
-                        const coverages = coverageCategories.map(cat => {
-                            const cell = $("<td>");
-                            deferredUI(cell, async () => {
-                                const response = await request;
-                                const coverage = +/ (\d+)%/.exec(response.split("\n").filter(l => l.startsWith("##") && l.includes(cat))[0])[1];
-                                const color = `hsl(${coverage === 100 ? 120 : Math.pow(coverage / 100, 1.8) * 70 | 0},100%,60%)`;
-                                return $("<div>").text(coverage + "%").css("background", color).css("font-weight", "bold");
-                            });
-                            return cell;
-                        });
-                        table.append($("<tr>")
-                            .addClass(subsequent ? "optional" : "")
-                            .append($("<td>").append($("<a>").attr("href", version.uri).attr("target", "_blank").text(version.version)))
-                            .append(featureSetVersion)
-                            .append(coverages));
-                        subsequent = true;
-                    }
-                }
-                // alert(JSON.stringify(reportsByRepo));
+            const versions = reportsByRepo[repo].sort((a, b) => semverCompare(a.version, b.version)).reverse();
+            let subsequent = false;
+            for (const version of versions) {
+              const request = httpGet(version.uri, "text");
+              const featureSetVersion = $("<td>");
+              deferredUI(featureSetVersion, async () => {
+                const response = await request;
+                const coverage = / (\d+\.\d+\.\d+)/.exec(
+                  response.split("\n").filter((l) => l.includes("feature set version"))[0],
+                )[1];
+                return coverage;
+              });
+              const coverages = coverageCategories.map((cat) => {
+                const cell = $("<td>");
+                deferredUI(cell, async () => {
+                  const response = await request;
+                  const coverage = +/ (\d+)%/.exec(
+                    response.split("\n").filter((l) => l.startsWith("##") && l.includes(cat))[0],
+                  )[1];
+                  const color = `hsl(${coverage === 100 ? 120 : (Math.pow(coverage / 100, 1.8) * 70) | 0},100%,60%)`;
+                  return $("<div>")
+                    .text(coverage + "%")
+                    .css("background", color)
+                    .css("font-weight", "bold");
+                });
+                return cell;
+              });
+              table.append(
+                $("<tr>")
+                  .addClass(subsequent ? "optional" : "")
+                  .append(
+                    $("<td>").append($("<a>").attr("href", version.uri).attr("target", "_blank").text(version.version)),
+                  )
+                  .append(featureSetVersion)
+                  .append(coverages),
+              );
+              subsequent = true;
+            }
+          }
+          // alert(JSON.stringify(reportsByRepo));
 
-                // const x = await httpGet("http://registry.npmjs.org/@microsoft.azure%2Fautorest.java", "json");
-                // alert(JSON.stringify(x["dist-tags"]));
+          // const x = await httpGet("http://registry.npmjs.org/@microsoft.azure%2Fautorest.java", "json");
+          // alert(JSON.stringify(x["dist-tags"]));
 
-                return result;
-            });
-        }
+          return result;
+        });
+      }
 
-        $(() => refresh());
+      $(() => refresh());
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1>Generator Feature Coverage</h1>
     <div id="generatorFeatureCoverage"></div>
-</body>
-
+  </body>
 </html>

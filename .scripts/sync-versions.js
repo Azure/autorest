@@ -1,12 +1,12 @@
-const { readFileSync, writeFileSync } = require('fs');
+const { readFileSync, writeFileSync } = require("fs");
 
 function read(filename) {
-  const txt = readFileSync(filename, 'utf8')
-    .replace(/\r/gm, '')
-    .replace(/\n/gm, '«')
-    .replace(/\/\*.*?\*\//gm, '')
-    .replace(/«/gm, '\n')
-    .replace(/\s+\/\/.*/g, '');
+  const txt = readFileSync(filename, "utf8")
+    .replace(/\r/gm, "")
+    .replace(/\n/gm, "«")
+    .replace(/\/\*.*?\*\//gm, "")
+    .replace(/«/gm, "\n")
+    .replace(/\s+\/\/.*/g, "");
   return JSON.parse(txt);
 }
 
@@ -15,26 +15,29 @@ const rush = read(`${__dirname}/../rush.json`);
 const pjs = {};
 
 function writeIfChanged(filename, content) {
-  const orig = JSON.parse(readFileSync(filename))
+  const orig = JSON.parse(readFileSync(filename));
   const origJson = JSON.stringify(orig, null, 2);
   const json = JSON.stringify(content, null, 2);
 
   if (origJson !== json) {
-    console.log(`Writing updated file '${filename}'`)
-    writeFileSync(filename, json)
+    console.log(`Writing updated file '${filename}'`);
+    writeFileSync(filename, json);
     return true;
   }
   return false;
 }
 
 function versionToInt(ver) {
-  let v = ver.replace(/[^\d\.]/g, '').split('.').slice(0, 3);
+  let v = ver
+    .replace(/[^\d\.]/g, "")
+    .split(".")
+    .slice(0, 3);
   while (v.length < 3) {
     v.unshift(0);
   }
   let n = 0;
   for (let i = 0; i < v.length; i++) {
-    n = n + ((2 ** (i * 16)) * parseInt(v[v.length - 1 - i]))
+    n = n + 2 ** (i * 16) * parseInt(v[v.length - 1 - i]);
   }
   return n;
 }
@@ -50,7 +53,6 @@ function setPeerDependencies(dependencies) {
     }
   }
 }
-
 
 function recordDeps(dependencies) {
   for (const packageName in dependencies) {
@@ -71,7 +73,6 @@ function recordDeps(dependencies) {
       }
       const v2 = versionToInt(packageList[packageName]);
       if (v > v2) {
-
         packageList[packageName] = packageVersion;
       }
     } else {
@@ -82,7 +83,7 @@ function recordDeps(dependencies) {
 function fixDeps(pj, dependencies) {
   for (const packageName in dependencies) {
     if (dependencies[packageName] !== packageList[packageName]) {
-      console.log(`updating ${pj}:${packageName} from '${dependencies[packageName]}' to '${packageList[packageName]}'`)
+      console.log(`updating ${pj}:${packageName} from '${dependencies[packageName]}' to '${packageList[packageName]}'`);
       dependencies[packageName] = packageList[packageName];
     }
   }
@@ -100,8 +101,8 @@ for (const pj of Object.getOwnPropertyNames(pjs)) {
   const each = pjs[pj];
   setPeerDependencies(each.dependencies);
   setPeerDependencies(each.devDependencies);
-  if (each['static-link']) {
-    setPeerDependencies(each['static-link'].dependencies);
+  if (each["static-link"]) {
+    setPeerDependencies(each["static-link"].dependencies);
   }
 }
 
@@ -111,8 +112,8 @@ for (const pj of Object.getOwnPropertyNames(pjs)) {
   const each = pjs[pj];
   recordDeps(each.dependencies);
   recordDeps(each.devDependencies);
-  if (each['static-link']) {
-    recordDeps(each['static-link'].dependencies);
+  if (each["static-link"]) {
+    recordDeps(each["static-link"].dependencies);
   }
 }
 
@@ -120,8 +121,8 @@ for (const pj of Object.getOwnPropertyNames(pjs)) {
   const each = pjs[pj];
   fixDeps(pj, each.dependencies);
   fixDeps(pj, each.devDependencies);
-  if (each['static-link']) {
-    fixDeps(pj, each['static-link'].dependencies);
+  if (each["static-link"]) {
+    fixDeps(pj, each["static-link"].dependencies);
   }
 }
 var changed = 0;
@@ -138,5 +139,5 @@ for (const each of rush.projects) {
 if (changed) {
   console.log(`Updated ${changed} files.`);
 } else {
-  console.log('No changes made')
+  console.log("No changes made");
 }

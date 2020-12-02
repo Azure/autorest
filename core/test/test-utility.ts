@@ -2,11 +2,10 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { AutoRest } from '../lib/autorest-core';
-import { Message, Channel } from '../lib/message';
+import { AutoRest } from "../lib/autorest-core";
+import { Message, Channel } from "../lib/message";
 
 export function PumpMessagesToConsole(autoRest: AutoRest): void {
-
   autoRest.Message.Subscribe((_, m) => {
     switch (m.Channel) {
       case Channel.Information:
@@ -25,5 +24,4 @@ export function PumpMessagesToConsole(autoRest: AutoRest): void {
         break;
     }
   });
-
 }

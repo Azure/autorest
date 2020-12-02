@@ -9,7 +9,7 @@
 if (!String.prototype.padEnd) {
   String.prototype.padEnd = function padEnd(targetLength, padString) {
     targetLength = targetLength >> 0; // floor if number or convert non-number to 0;
-    padString = String(padString || ' ');
+    padString = String(padString || " ");
     if (this.length > targetLength) {
       return String(this);
     } else {
@@ -22,37 +22,53 @@ if (!String.prototype.padEnd) {
   };
 }
 
-require('events').EventEmitter.defaultMaxListeners = 100;
-process.env['ELECTRON_RUN_AS_NODE'] = '1';
-delete process.env['ELECTRON_NO_ATTACH_CONSOLE'];
-(<any>global).autorestVersion = require('../package.json').version;
+require("events").EventEmitter.defaultMaxListeners = 100;
+process.env["ELECTRON_RUN_AS_NODE"] = "1";
+delete process.env["ELECTRON_NO_ATTACH_CONSOLE"];
+(<any>global).autorestVersion = require("../package.json").version;
 
-const color: (text: string) => string = (<any>global).color ? (<any>global).color : p => p;
+const color: (text: string) => string = (<any>global).color ? (<any>global).color : (p) => p;
 
 // start of autorest-ng
 // the console app starts for real here.
 
-import { CreateObject, DataStore, EnhancedFileSystem, nodes, Parse, RealFileSystem, Stringify } from '@azure-tools/datastore';
-import { ClearFolder, CreateFolderUri, MakeRelativeUri, ReadUri, ResolveUri, WriteBinary, WriteString } from '@azure-tools/uri';
-import { ChildProcess } from 'child_process';
-import { join, resolve as currentDirectory } from 'path';
-import { Help } from './help';
-import { CreateConfiguration, isLegacy } from './legacyCli';
-import { Artifact } from './lib/artifact';
-import { AutoRest, ConfigurationView, IsOpenApiDocument, Shutdown } from './lib/autorest-core';
-import { AutoRestConfigurationImpl, MergeConfigurations } from './lib/configuration';
-import { Exception, OperationCanceledException } from './lib/exception';
-import { Channel, Message } from './lib/message';
-import { ShallowCopy } from './lib/source-map/merging';
-import { homedir } from 'os';
+import {
+  CreateObject,
+  DataStore,
+  EnhancedFileSystem,
+  nodes,
+  Parse,
+  RealFileSystem,
+  Stringify,
+} from "@azure-tools/datastore";
+import {
+  ClearFolder,
+  CreateFolderUri,
+  MakeRelativeUri,
+  ReadUri,
+  ResolveUri,
+  WriteBinary,
+  WriteString,
+} from "@azure-tools/uri";
+import { ChildProcess } from "child_process";
+import { join, resolve as currentDirectory } from "path";
+import { Help } from "./help";
+import { CreateConfiguration, isLegacy } from "./legacyCli";
+import { Artifact } from "./lib/artifact";
+import { AutoRest, ConfigurationView, IsOpenApiDocument, Shutdown } from "./lib/autorest-core";
+import { AutoRestConfigurationImpl, MergeConfigurations } from "./lib/configuration";
+import { Exception, OperationCanceledException } from "./lib/exception";
+import { Channel, Message } from "./lib/message";
+import { ShallowCopy } from "./lib/source-map/merging";
+import { homedir } from "os";
 
 let verbose = false;
 let debug = false;
 
 function awaitable(child: ChildProcess): Promise<number> {
   return new Promise<number>((resolve, reject) => {
-    child.addListener('error', reject);
-    child.addListener('exit', resolve);
+    child.addListener("error", reject);
+    child.addListener("exit", resolve);
   });
 }
 
@@ -62,78 +78,100 @@ async function legacyMain(autorestArgs: Array<string>): Promise<number> {
   const dataStore = new DataStore();
   let config: AutoRestConfigurationImpl = {};
   try {
-    config = await CreateConfiguration(currentDirUri, dataStore.GetReadThroughScope(new RealFileSystem()), autorestArgs);
+    config = await CreateConfiguration(
+      currentDirUri,
+      dataStore.GetReadThroughScope(new RealFileSystem()),
+      autorestArgs,
+    );
   } catch (e) {
-    console.error(color('!Error: You have provided legacy command line arguments (single-dash syntax) that seem broken.'));
-    console.error('');
-    console.error(color(
-      '> While AutoRest keeps on supporting the old CLI by converting it over to the new one internally, \n' +
-      '> it does not have crazy logic determining *what* is wrong with arguments, should conversion fail. \n' +
-      '> Please try fixing your arguments or consider moving to the new CLI. \n' +
-      '> isit https://github.com/Azure/autorest/blob/master/docs/user/cli.md for information about the new CLI.'));
-    console.error('');
-    console.error(color('!Internal error: ' + e));
+    console.error(
+      color("!Error: You have provided legacy command line arguments (single-dash syntax) that seem broken."),
+    );
+    console.error("");
+    console.error(
+      color(
+        "> While AutoRest keeps on supporting the old CLI by converting it over to the new one internally, \n" +
+          "> it does not have crazy logic determining *what* is wrong with arguments, should conversion fail. \n" +
+          "> Please try fixing your arguments or consider moving to the new CLI. \n" +
+          "> isit https://github.com/Azure/autorest/blob/master/docs/user/cli.md for information about the new CLI.",
+      ),
+    );
+    console.error("");
+    console.error(color("!Internal error: " + e));
     await showHelp();
     return 1;
   }
 
   // autorest init
-  if (autorestArgs[0] === 'init') {
-    const clientNameGuess = (config['override-info'] || {}).title || Parse<any>(await ReadUri((<any>config['input-file'])[0])).info.title;
-    await autorestInit(clientNameGuess, Array.isArray(config['input-file']) ? <any>config['input-file'] : []);
+  if (autorestArgs[0] === "init") {
+    const clientNameGuess =
+      (config["override-info"] || {}).title || Parse<any>(await ReadUri((<any>config["input-file"])[0])).info.title;
+    await autorestInit(clientNameGuess, Array.isArray(config["input-file"]) ? <any>config["input-file"] : []);
     return 0;
   }
   // autorest init-min
-  if (autorestArgs[0] === 'init-min') {
-    console.log(`# AutoRest Configuration (auto-generated, please adjust title)
+  if (autorestArgs[0] === "init-min") {
+    console.log(
+      `# AutoRest Configuration (auto-generated, please adjust title)
 
 > see https://aka.ms/autorest
 
 The following configuration was auto-generated and can be adjusted.
 
 ~~~ yaml
-${Stringify(config).replace(/^---\n/, '')}
+${Stringify(config).replace(/^---\n/, "")}
 ~~~
 
-`.replace(/~/g, '`'));
+`.replace(/~/g, "`"),
+    );
     return 0;
   }
   // autorest init-cli
-  if (autorestArgs[0] === 'init-cli') {
+  if (autorestArgs[0] === "init-cli") {
     const args: Array<string> = [];
-    for (const node of nodes(config, '$..*')) {
-      const path = node.path.join('.');
-      const values = node.value instanceof Array ? node.value : (typeof node.value === 'object' ? [] : [node.value]);
+    for (const node of nodes(config, "$..*")) {
+      const path = node.path.join(".");
+      const values = node.value instanceof Array ? node.value : typeof node.value === "object" ? [] : [node.value];
       for (const value of values) {
         args.push(`--${path}=${value}`);
       }
     }
-    console.log(args.join(' '));
+    console.log(args.join(" "));
     return 0;
   }
 
-  config['base-folder'] = currentDirUri;
+  config["base-folder"] = currentDirUri;
   const api = new AutoRest(new RealFileSystem());
   api.AddConfiguration(config);
   const view = await api.view;
   let outstanding: Promise<void> = Promise.resolve();
-  api.GeneratedFile.Subscribe((_: AutoRest, file: Artifact) => outstanding = outstanding.then(() => file.type === 'binary-file' ? WriteBinary(file.uri, file.content) : WriteString(file.uri, file.content)));
-  api.ClearFolder.Subscribe((_: AutoRest, folder: string) => outstanding = outstanding.then(async () => {
-    try { await ClearFolder(folder); } catch  {
-      // no worries
-    }
-  }));
-  subscribeMessages(api, () => { });
+  api.GeneratedFile.Subscribe(
+    (_: AutoRest, file: Artifact) =>
+      (outstanding = outstanding.then(() =>
+        file.type === "binary-file" ? WriteBinary(file.uri, file.content) : WriteString(file.uri, file.content),
+      )),
+  );
+  api.ClearFolder.Subscribe(
+    (_: AutoRest, folder: string) =>
+      (outstanding = outstanding.then(async () => {
+        try {
+          await ClearFolder(folder);
+        } catch {
+          // no worries
+        }
+      })),
+  );
+  subscribeMessages(api, () => {});
 
   // warn about `--` arguments
   for (const arg of autorestArgs) {
-    if (arg.startsWith('--')) {
+    if (arg.startsWith("--")) {
       view.Message({
         Channel: Channel.Warning,
         Text:
           `The parameter ${arg} looks like it was meant for the new CLI! ` +
-          'Note that you have invoked the legacy CLI (by using at least one single-dash argument). ' +
-          'Please visit https://github.com/Azure/autorest/blob/master/docs/user/cli.md for information about the new CLI.'
+          "Note that you have invoked the legacy CLI (by using at least one single-dash argument). " +
+          "Please visit https://github.com/Azure/autorest/blob/master/docs/user/cli.md for information about the new CLI.",
       });
     }
   }
@@ -151,12 +189,16 @@ ${Stringify(config).replace(/^---\n/, '')}
  * Current AutoRest
  */
 
-interface CommandLineArgs { configFileOrFolder?: string; switches: Array<any>; rawSwitches: any }
+interface CommandLineArgs {
+  configFileOrFolder?: string;
+  switches: Array<any>;
+  rawSwitches: any;
+}
 
 function parseArgs(autorestArgs: Array<string>): CommandLineArgs {
   const result: CommandLineArgs = {
     switches: [],
-    rawSwitches: {}
+    rawSwitches: {},
   };
 
   for (const arg of autorestArgs) {
@@ -173,26 +215,26 @@ function parseArgs(autorestArgs: Array<string>): CommandLineArgs {
 
     // switch
     const key = match[1];
-    let rawValue = match[3] || '{}';
+    let rawValue = match[3] || "{}";
 
-    if (rawValue.startsWith('.')) {
+    if (rawValue.startsWith(".")) {
       // starts with a . or .. -> this is a relative path to current directory
       rawValue = join(process.cwd(), rawValue);
     }
 
-    if (rawValue.startsWith('~/')) {
+    if (rawValue.startsWith("~/")) {
       // starts with a ~/ this is a relative path to home directory
       rawValue = join(homedir(), rawValue.substr(1));
     }
 
     // quote stuff beginning with '@', YAML doesn't think unquoted strings should start with that
-    rawValue = rawValue.startsWith('@') ? `'${rawValue}'` : rawValue;
+    rawValue = rawValue.startsWith("@") ? `'${rawValue}'` : rawValue;
     rawValue = rawValue.match(/20\d\d-\d+-\d+/) ? `'${rawValue}'` : rawValue;
     // quote numbers with decimal point, we don't have any use for non-integer numbers (while on the other hand version strings may look like decimal numbers)
-    rawValue = !isNaN(parseFloat(rawValue)) && rawValue.includes('.') ? `'${rawValue}'` : rawValue;
+    rawValue = !isNaN(parseFloat(rawValue)) && rawValue.includes(".") ? `'${rawValue}'` : rawValue;
     const value = Parse(rawValue);
     result.rawSwitches[key] = value;
-    result.switches.push(CreateObject(key.split('.'), value));
+    result.switches.push(CreateObject(key.split("."), value));
   }
 
   return result;
@@ -230,7 +272,7 @@ function subscribeMessages(api: AutoRest, errorCounter: () => void) {
   });
 }
 
-async function autorestInit(title = 'API-NAME', inputs: Array<string> = ['LIST INPUT FILES HERE']) {
+async function autorestInit(title = "API-NAME", inputs: Array<string> = ["LIST INPUT FILES HERE"]) {
   const cwdUri = CreateFolderUri(currentDirectory());
   for (let i = 0; i < inputs.length; ++i) {
     try {
@@ -239,7 +281,8 @@ async function autorestInit(title = 'API-NAME', inputs: Array<string> = ['LIST I
       // no worries
     }
   }
-  console.log(`# ${title}
+  console.log(
+    `# ${title}
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for the ${title}.
@@ -266,7 +309,7 @@ These are the global settings for the API.
 ~~~ yaml
 # list all the input OpenAPI files (may be YAML, JSON, or Literate- OpenAPI markdown)
 input-file:
-${inputs.map(x => '  - ' + x).join('\n')}
+${inputs.map((x) => "  - " + x).join("\n")}
 ~~~
 
 ---
@@ -279,7 +322,8 @@ csharp:
   # override the default output folder
   output-folder: generated/csharp
 ~~~
-`.replace(/~/g, '`'));
+`.replace(/~/g, "`"),
+  );
 }
 
 let exitcode = 0;
@@ -288,10 +332,15 @@ let args: CommandLineArgs;
 let cleared = false;
 async function doClearFolders(protectFiles: Set<string>, clearFolders: Set<string>) {
   if (!cleared) {
-    timestampDebugLog('Clearing Folders.');
+    timestampDebugLog("Clearing Folders.");
     cleared = true;
     for (const folder of clearFolders) {
-      try { await ClearFolder(folder, [...protectFiles].map(each => ResolveUri(folder, each))); } catch {
+      try {
+        await ClearFolder(
+          folder,
+          [...protectFiles].map((each) => ResolveUri(folder, each)),
+        );
+      } catch {
         // no worries
       }
     }
@@ -299,7 +348,7 @@ async function doClearFolders(protectFiles: Set<string>, clearFolders: Set<strin
 }
 
 async function currentMain(autorestArgs: Array<string>): Promise<number> {
-  if (autorestArgs[0] === 'init') {
+  if (autorestArgs[0] === "init") {
     await autorestInit();
     return 0;
   }
@@ -317,22 +366,27 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   // parse the args from the command line
   args = parseArgs([...autorestArgs, ...more]);
 
-  if ((!args.rawSwitches['message-format']) || args.rawSwitches['message-format'] === 'regular') {
+  if (!args.rawSwitches["message-format"] || args.rawSwitches["message-format"] === "regular") {
     console.log(color(`> Loading AutoRest core      '${__dirname}' (${(<any>global).autorestVersion})`));
   }
-  verbose = verbose || args.rawSwitches['verbose'];
-  debug = debug || args.rawSwitches['debug'];
+  verbose = verbose || args.rawSwitches["verbose"];
+  debug = debug || args.rawSwitches["debug"];
 
   // identify where we are starting from.
   const currentDirUri = CreateFolderUri(currentDirectory());
 
-  if (args.rawSwitches['help']) {
-    // if they are asking for help, feed a false file to config so we don't load a user's configuration 
-    args.configFileOrFolder = 'invalid.filename.md';
+  if (args.rawSwitches["help"]) {
+    // if they are asking for help, feed a false file to config so we don't load a user's configuration
+    args.configFileOrFolder = "invalid.filename.md";
   }
 
   // get an instance of AutoRest and add the command line switches to the configuration.
-  const api = new AutoRest(new EnhancedFileSystem((<any>MergeConfigurations(...args.switches))['github-auth-token'] || process.env.GITHUB_AUTH_TOKEN), ResolveUri(currentDirUri, args.configFileOrFolder || '.'));
+  const api = new AutoRest(
+    new EnhancedFileSystem(
+      (<any>MergeConfigurations(...args.switches))["github-auth-token"] || process.env.GITHUB_AUTH_TOKEN,
+    ),
+    ResolveUri(currentDirUri, args.configFileOrFolder || "."),
+  );
   api.AddConfiguration(args.switches);
 
   // listen for output messages and file writes
@@ -343,7 +397,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   let fastMode = false;
   const tasks = new Array<Promise<void>>();
 
-  const config = (await api.view);
+  const config = await api.view;
 
   api.GeneratedFile.Subscribe((_, artifact) => {
     if (config.HelpRequested) {
@@ -352,7 +406,11 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     }
 
     protectFiles.add(artifact.uri);
-    tasks.push((artifact.type === 'binary-file' ? WriteBinary(artifact.uri, artifact.content) : WriteString(artifact.uri, artifact.content)));
+    tasks.push(
+      artifact.type === "binary-file"
+        ? WriteBinary(artifact.uri, artifact.content)
+        : WriteString(artifact.uri, artifact.content),
+    );
   });
   api.Message.Subscribe((_, message) => {
     if (message.Channel === Channel.Protect && message.Details) {
@@ -362,12 +420,12 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   api.ClearFolder.Subscribe((_, folder) => clearFolders.add(folder));
 
   // maybe a resource schema batch process
-  if (config['resource-schema-batch']) {
+  if (config["resource-schema-batch"]) {
     return resourceSchemaBatch(api);
   }
-  fastMode = !!config['fast-mode'];
+  fastMode = !!config["fast-mode"];
 
-  if (config['batch']) {
+  if (config["batch"]) {
     await batch(api);
   } else {
     const result = await api.Process().finish;
@@ -379,29 +437,33 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   if (config.HelpRequested) {
     // no fs operations on --help! Instead, format and print artifacts to console.
     // - print boilerplate help
-    console.log('');
-    console.log('');
-    console.log(color('**Usage**: autorest `[configuration-file.md] [...options]`'));
-    console.log('');
-    console.log(color('  See: https://aka.ms/autorest/cli for additional documentation'));
+    console.log("");
+    console.log("");
+    console.log(color("**Usage**: autorest `[configuration-file.md] [...options]`"));
+    console.log("");
+    console.log(color("  See: https://aka.ms/autorest/cli for additional documentation"));
     // - sort artifacts by name (then content, just for stability)
-    const helpArtifacts = artifacts.sort((a, b) => a.uri === b.uri ? (a.content > b.content ? 1 : -1) : (a.uri > b.uri ? 1 : -1));
+    const helpArtifacts = artifacts.sort((a, b) =>
+      a.uri === b.uri ? (a.content > b.content ? 1 : -1) : a.uri > b.uri ? 1 : -1,
+    );
     // - format and print
     for (const helpArtifact of helpArtifacts) {
-      const help: Help = Parse(helpArtifact.content, (message, index) => console.error(color(`!Parsing error at **${helpArtifact.uri}**:__${index}: ${message}__`)));
+      const help: Help = Parse(helpArtifact.content, (message, index) =>
+        console.error(color(`!Parsing error at **${helpArtifact.uri}**:__${index}: ${message}__`)),
+      );
       if (!help) {
         continue;
       }
-      const activatedBySuffix = help.activationScope ? ` (activated by --${help.activationScope})` : '';
-      console.log('');
+      const activatedBySuffix = help.activationScope ? ` (activated by --${help.activationScope})` : "";
+      console.log("");
       console.log(color(`### ${help.categoryFriendlyName}${activatedBySuffix}`));
       if (help.description) {
         console.log(color(help.description));
       }
-      console.log('');
+      console.log("");
       for (const settingHelp of help.settings) {
         const keyPart = `--${settingHelp.key}`;
-        const typePart = settingHelp.type ? `=<${settingHelp.type}>` : ' ';// `[=<boolean>]`;
+        const typePart = settingHelp.type ? `=<${settingHelp.type}>` : " "; // `[=<boolean>]`;
         const settingPart = `${keyPart}\`${typePart}\``;
         // if (!settingHelp.required) {
         //   settingPart = `[${settingPart}]`;
@@ -413,14 +475,16 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     // perform file system operations.
     await doClearFolders(protectFiles, clearFolders);
 
-    timestampDebugLog('Writing Outputs.');
+    timestampDebugLog("Writing Outputs.");
     await Promise.all(tasks);
 
     for (const artifact of artifacts) {
-      await (artifact.type === 'binary-file' ? WriteBinary(artifact.uri, artifact.content) : WriteString(artifact.uri, artifact.content));
+      await (artifact.type === "binary-file"
+        ? WriteBinary(artifact.uri, artifact.content)
+        : WriteString(artifact.uri, artifact.content));
     }
   }
-  timestampLog('Generation Complete');
+  timestampLog("Generation Complete");
   // return the exit code to the caller.
   return exitcode;
 }
@@ -451,7 +515,9 @@ function getRds(schema: any, path: string): Array<string> {
   const result = new Array<any>();
   if (schema.resourceDefinitions) {
     for (const name of Object.getOwnPropertyNames(schema.resourceDefinitions)) {
-      result.push(`{ "$ref": "https://schema.management.azure.com/schemas/${apiversion}/${namespace}.json#/resourceDefinitions/${name}" }, `);
+      result.push(
+        `{ "$ref": "https://schema.management.azure.com/schemas/${apiversion}/${namespace}.json#/resourceDefinitions/${name}" }, `,
+      );
     }
   }
   return result;
@@ -466,11 +532,12 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
 
   // ask for the view without
   const config = await api.RegenerateView();
-  for (const batchConfig of config.GetNestedConfiguration('resource-schema-batch')) { // really, there should be only one
-    for (const eachFile of batchConfig['input-file']) {
+  for (const batchConfig of config.GetNestedConfiguration("resource-schema-batch")) {
+    // really, there should be only one
+    for (const eachFile of batchConfig["input-file"]) {
       const path = ResolveUri(config.configFileFolderUri, eachFile);
       const content = await ReadUri(path);
-      if (!await IsOpenApiDocument(content)) {
+      if (!(await IsOpenApiDocument(content))) {
         exitcode++;
         console.error(color(`!File ${path} is not a OpenAPI file.`));
         continue;
@@ -479,11 +546,13 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
       // Create the autorest instance for that item
       const instance = new AutoRest(new RealFileSystem(), config.configFileFolderUri);
       instance.GeneratedFile.Subscribe((_, file) => {
-        if (file.uri.endsWith('.json')) {
+        if (file.uri.endsWith(".json")) {
           const more = JSON.parse(file.content);
           if (!outputs.has(file.uri)) {
             outputs.set(file.uri, file.content);
-            outstanding = outstanding.then(() => file.type === 'binary-file' ? WriteBinary(file.uri, file.content) : WriteString(file.uri, file.content));
+            outstanding = outstanding.then(() =>
+              file.type === "binary-file" ? WriteBinary(file.uri, file.content) : WriteString(file.uri, file.content),
+            );
             schemas.push(...getRds(more, file.uri));
             return;
           } else {
@@ -494,15 +563,17 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
             existing.definitions = shallowMerge(existing.definitions, more.definitions);
             const content = JSON.stringify(existing, null, 2);
             outputs.set(file.uri, content);
-            outstanding = outstanding.then(() => file.type === 'binary-file' ? WriteBinary(file.uri, file.content) : WriteString(file.uri, content));
+            outstanding = outstanding.then(() =>
+              file.type === "binary-file" ? WriteBinary(file.uri, file.content) : WriteString(file.uri, content),
+            );
           }
         }
       });
       subscribeMessages(instance, () => exitcode++);
 
       // set configuration for that item
-      instance.AddConfiguration(ShallowCopy(batchConfig, 'input-file'));
-      instance.AddConfiguration({ 'input-file': eachFile });
+      instance.AddConfiguration(ShallowCopy(batchConfig, "input-file"));
+      instance.AddConfiguration({ "input-file": eachFile });
 
       console.log(`Running autorest for *${path}* `);
 
@@ -525,25 +596,35 @@ async function batch(api: AutoRest): Promise<void> {
   const config = await api.view;
   const batchTaskConfigReference: any = {};
   api.AddConfiguration(batchTaskConfigReference);
-  for (const batchTaskConfig of config.GetEntry(<any>'batch')) {
-    const isjson = (args.rawSwitches['message-format'] === 'json' || args.rawSwitches['message-format'] === 'yaml');
+  for (const batchTaskConfig of config.GetEntry(<any>"batch")) {
+    const isjson = args.rawSwitches["message-format"] === "json" || args.rawSwitches["message-format"] === "yaml";
     if (!isjson) {
-      outputMessage(api, {
-        Channel: Channel.Information,
-        Text: `Processing batch task - ${JSON.stringify(batchTaskConfig)} .`
-      }, () => { });
+      outputMessage(
+        api,
+        {
+          Channel: Channel.Information,
+          Text: `Processing batch task - ${JSON.stringify(batchTaskConfig)} .`,
+        },
+        () => {},
+      );
     }
     // update batch task config section
-    for (const key of Object.keys(batchTaskConfigReference)) { delete batchTaskConfigReference[key]; }
+    for (const key of Object.keys(batchTaskConfigReference)) {
+      delete batchTaskConfigReference[key];
+    }
     Object.assign(batchTaskConfigReference, batchTaskConfig);
     api.Invalidate();
 
     const result = await api.Process().finish;
     if (result !== true) {
-      outputMessage(api, {
-        Channel: Channel.Error,
-        Text: `Failure during batch task - ${JSON.stringify(batchTaskConfig)} -- ${result}.`
-      }, () => { });
+      outputMessage(
+        api,
+        {
+          Channel: Channel.Error,
+          Text: `Failure during batch task - ${JSON.stringify(batchTaskConfig)} -- ${result}.`,
+        },
+        () => {},
+      );
       throw result;
     }
   }
@@ -577,7 +658,6 @@ async function mainImpl(): Promise<number> {
   return 1;
 }
 
-
 function timestampLog(content: string) {
   console.log(color(`[${Math.floor(process.uptime() * 100) / 100} s] ${content}`));
 }
@@ -587,7 +667,6 @@ function timestampDebugLog(content: string) {
   }
 }
 
-
 async function main() {
   let exitcode = 0;
   try {
@@ -596,12 +675,12 @@ async function main() {
     exitcode = 102;
   } finally {
     try {
-      timestampDebugLog('Shutting Down.');
+      timestampDebugLog("Shutting Down.");
       await Shutdown();
-    } catch  {
-      timestampDebugLog('Shutting Down: (trouble?)');
+    } catch {
+      timestampDebugLog("Shutting Down: (trouble?)");
     } finally {
-      timestampDebugLog('Exiting.');
+      timestampDebugLog("Exiting.");
       process.exit(exitcode);
     }
   }
@@ -609,12 +688,10 @@ async function main() {
 
 main();
 
-
-process.on('exit', () => {
+process.on("exit", () => {
   Shutdown();
 });
 
-
 async function showHelp(): Promise<void> {
-  await currentMain(['--help']);
+  await currentMain(["--help"]);
 }

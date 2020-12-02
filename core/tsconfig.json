@@ -14,20 +14,10 @@
     "declaration": true,
     "stripInternal": true,
     "target": "es2018",
-    "types": [
-      "node",
-      "mocha"
-    ],
-    "lib": [
-      "es2018"
-    ],
+    "types": ["node", "mocha"],
+    "lib": ["es2018"],
     "experimentalDecorators": true,
-    "newLine": "LF",
+    "newLine": "LF"
   },
-  "exclude": [
-    "node_modules",
-    "static_modules",
-    "dist",
-    "**/*.d.ts"
-  ]
+  "exclude": ["node_modules", "static_modules", "dist", "**/*.d.ts"]
 }
