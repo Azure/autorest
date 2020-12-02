@@ -49,13 +49,13 @@
     {
       "commandKind": "bulk",
       "name": "lint:fix",
-      "summary": "Fix linting errors for projects",
+      "summary": "Fix linting errors for projects. Runs `npm run lint:fix` on all projects.",
       "enableParallelism": true
     },
     {
       "commandKind": "bulk",
       "name": "lint",
-      "summary": "Lint projects",
+      "summary": "Lint projects. Runs `npm run lint` on all projects.",
       "enableParallelism": true
     }
     // {
