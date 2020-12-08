@@ -483,12 +483,12 @@ async function compose(config: ConfigurationView, input: DataSource, sink: DataS
 
   // compose-a-vous!
   const composer = new NewComposer(inputs[0]);
-  // eslint-disable-next-line prefer-spread
   return new QuickDataSource(
     [
       await sink.WriteObject(
         "composed oai3 doc...",
         await composer.getOutput(),
+        // eslint-disable-next-line prefer-spread
         [].concat.apply([], <any>inputs.map((each) => each.identity)),
         "merged-oai3",
         await composer.getSourceMappings(),

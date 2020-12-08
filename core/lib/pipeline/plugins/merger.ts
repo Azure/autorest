@@ -439,12 +439,12 @@ async function merge(config: ConfigurationView, input: DataSource, sink: DataSin
   const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry("description");
   const processor = new MultiAPIMerger(inputs, overrideTitle, overrideDescription);
 
-  // eslint-disable-next-line prefer-spread
   return new QuickDataSource(
     [
       await sink.WriteObject(
         "merged oai3 doc...",
         await processor.getOutput(),
+        // eslint-disable-next-line prefer-spread
         [].concat.apply([], <any>inputs.map((each) => each.identity)),
         "merged-oai3",
         await processor.getSourceMappings(),
