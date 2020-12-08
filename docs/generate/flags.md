@@ -18,7 +18,7 @@
 |`--package-version=VERSION`|The semantic versioning of your generated SDK (i.e., `1.0.0`). Not to be confused with the version of the service you're creating an SDK for. If no version is specified, AutoRest will not create a new version file. Generally not necessary if you are going to wrap the generated code before exposing to users.| Needs to be specified if `--basic-setup-py` is specified. | Currently can't generate version for track 2|Default is `1.0.0-beta.1`. Only available in `fluent` mode.|Currently can't set version for track 2| Defaults to `1.0.0`|
 |`--python-sdks-folder=DIRECTORY`| The path to the root directory of your [`azure-sdk-for-python`](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk) clone. Be sure to note that we include `sdk` in the folder path.| x | | | |
 |`--basic-setup-py`|Whether to generate a build script for setuptools to package your SDK. See [here](https://packaging.python.org/tutorials/packaging-projects/#creating-setup-py) for more information about a `setup.py` file. Defaults to `false`, generally not suggested if you are going to wrap the generated code before exposing to users. Nees `--package-version` to be specified.| x | | | |
-|`--trace`|Whether to natively support tracing libraries, such OpenCensus or OpenTelemetry. See this [tracing quickstart](https://github.com/Azure/azure-sdk-for-python/blob/master/sdk/core/azure-core-tracing-opentelemetry/README.md) for an overview. Defaults to `false`.| x | | | |
+|`--trace`|Whether to natively support tracing libraries, such OpenCensus or OpenTelemetry. See this [tracing quickstart](https://github.com/Azure/azure-sdk-for-python/blob/master/sdk/core/azure-core-tracing-opentelemetry/README.md) for an overview. Defaults to `false`.| x | | | x|
 |`--multiapi`|Whether to generate a multiapi client. See [our previous section](#generating-multiapi-code) for more information. Defaults to `false`.| x | | | |
 |`--default-api=VALUE`|In the case of `--multiapi`, you can override the default service API version with this flag. If not specified, we use the latest GA service version as the default API.| x | | | |
 |`--keep-version-file`|Whether you want to override the current version file in your package or not. Defaults to `false`.| x | | | |
@@ -55,9 +55,7 @@
 |`--customization-class=NAME`|Use in conjunction with `--customization-jar-path`. That flag tells AutoRest where to look for your custom class, while `--customization-class` tells AutoRest the name of your custom class.| | | x | |
 |`--source-code-folder-path=DIRECTORY`|Where to output the generated code inside the `output-folder`. Use in the scenario when you are goign to write a convenience layer on top of the generated code. Defaults to `src`.| | || x|
 |`--generate-metadata`|Whether to generate extra metadata in your package. For instance, generates a README file, license file etc if set to `true`. Defaults to `false`.| | | | x|
-|`--tracing-info=TRACING_OBJECT`|Information needed to conduct tracing. If passed, it requires two properties: `namespace` and `packagePrefix`. Alternatively, you can specify the following two flags.| | | | x|
-|`--tracing-info.namespace=NAME`|The namespace for tracing.| | | | x|
-|`--tracing-info.packagePrefix=NAME`|The package prefix information needed to conduct tracing.| | | | x|
+|`--tracing-spanprefix=SPAN_PREFIX`|If you are tracing (passing in flag `--trace`), and you want to overwrite the span prefix AutoRest assigns, use this flag.| | | | x|
 |`--module=NAME`|The name of the module. This is the name your module will be published under.| | | | |x
 |`--file-prefix=PREFIX`|Optional prefix to file names. For example, if you set your file prefix to "zzz", all generated code files will begin with "zzz".| | | | |x
 |`--openapi-type=arm\|data-plane`|Specify if you want to generate `data-plane` code or `arm` code.| | | | |x
