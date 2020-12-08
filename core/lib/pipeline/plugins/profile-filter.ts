@@ -5,15 +5,34 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable no-useless-escape */
 
+import { maximum, serialize } from "@azure-tools/codegen";
+import {
+  AnyObject,
+  DataHandle,
+  DataSink,
+  DataSource,
+  Node,
+  ProxyObject,
+  QuickDataSource,
+  Transformer,
+  visit,
+  ConvertJsonx2Yaml,
+} from "@azure-tools/datastore";
+import { Dictionary, items, values } from "@azure-tools/linq";
+import * as oai from "@azure-tools/openapi";
+import { ConfigurationView } from "../../configuration";
+import { PipelinePlugin } from "../common";
 
-import { maximum, serialize } from '@azure-tools/codegen';
-import { AnyObject, DataHandle, DataSink, DataSource, Node, ProxyObject, QuickDataSource, Transformer, visit, ConvertJsonx2Yaml } from '@azure-tools/datastore';
-import { Dictionary, items, values } from '@azure-tools/linq';
-import * as oai from '@azure-tools/openapi';
-import { ConfigurationView } from '../../configuration';
-import { PipelinePlugin } from '../common';
-
-type componentType = 'schemas' | 'responses' | 'parameters' | 'examples' | 'requestBodies' | 'headers' | 'securitySchemes' | 'links' | 'callbacks';
+type componentType =
+  | "schemas"
+  | "responses"
+  | "parameters"
+  | "examples"
+  | "requestBodies"
+  | "headers"
+  | "securitySchemes"
+  | "links"
+  | "callbacks";
 
 interface PathMetadata {
   apiVersions: Array<string>;
@@ -49,7 +68,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
     headers: new Set<string>(),
     securitySchemes: new Set<string>(),
     links: new Set<string>(),
-    callbacks: new Set<string>()
+    callbacks: new Set<string>(),
   };
 
   private componentsToKeep = {
@@ -61,7 +80,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
     headers: new Set<string>(),
     securitySchemes: new Set<string>(),
     links: new Set<string>(),
-    callbacks: new Set<string>()
+    callbacks: new Set<string>(),
   };
 
   // This holds allOf, anyOf, oneOf, not references
@@ -70,23 +89,27 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   private components: any;
   private profilesApiVersions: Array<string> = [];
   private apiVersions: Array<string> = [];
-  private maxApiVersion = '';
+  private maxApiVersion = "";
   private profilesReferenced = new Set<string>();
 
-  constructor(input: DataHandle, private profiles: any, private profilesToUse: Array<string>, apiVersions: Array<string>) {
+  constructor(
+    input: DataHandle,
+    private profiles: any,
+    private profilesToUse: Array<string>,
+    apiVersions: Array<string>,
+  ) {
     super(input);
     this.apiVersions = apiVersions;
   }
 
   async init() {
     const currentDoc = await this.inputs[0].ReadObject<AnyObject>();
-    this.components = currentDoc['components'];
+    this.components = currentDoc["components"];
     if (this.profilesToUse.length > 0) {
       const resourcesTargets: Array<ResourceData> = [];
       const operationTargets: Array<OperationData> = [];
       for (const { key: profileName, value: profile } of visit(this.profiles)) {
         if (this.profilesToUse.includes(profileName)) {
-
           // get resources targets
           for (const { key: namespace, value: namespaceValue } of visit(profile.resources)) {
             for (const { key: version, value: resourceTypes } of visit(namespaceValue)) {
@@ -94,7 +117,11 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
                 resourcesTargets.push({ apiVersion: version, profile: profileName, matches: [namespace] });
               } else {
                 for (const resourceType of resourceTypes) {
-                  resourcesTargets.push({ apiVersion: version, profile: profileName, matches: [namespace, ...resourceType.split('/')] });
+                  resourcesTargets.push({
+                    apiVersion: version,
+                    profile: profileName,
+                    matches: [namespace, ...resourceType.split("/")],
+                  });
                 }
               }
             }
@@ -120,10 +147,9 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
       for (const target of operationTargets) {
         const apiVersion = target.apiVersion;
         const profile = target.profile;
-        const pathRegex = new RegExp(`^${target.path.replace(/[\[\$\.\?\(\)]/g, '\\$&')}$`, 'gi');
+        const pathRegex = new RegExp(`^${target.path.replace(/[\[\$\.\?\(\)]/g, "\\$&")}$`, "gi");
         this.filterTargets.push({ apiVersion, profile, pathRegex, weight: 0 });
       }
-
     } else if (this.apiVersions.length > 0) {
       this.maxApiVersion = maximum([this.maxApiVersion, maximum(this.apiVersions)]);
     }
@@ -135,12 +161,12 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
       for (const { value: schemaValue, key: schemaKey } of visit(this.components.schemas)) {
         for (const { value: fieldValue, key: fieldName } of visit(schemaValue)) {
           switch (fieldName) {
-            case 'anyOf':
-            case 'allOf':
-            case 'oneOf':
+            case "anyOf":
+            case "allOf":
+            case "oneOf":
               for (const { value } of visit(fieldValue)) {
                 if (value.$ref) {
-                  const schemaUid = value.$ref.split('/')[value.$ref.split('/').length - 1];
+                  const schemaUid = value.$ref.split("/")[value.$ref.split("/").length - 1];
                   if (this.polymorphicReferences[schemaUid] === undefined) {
                     this.polymorphicReferences[schemaUid] = new Set<string>();
                   }
@@ -149,9 +175,9 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
                 }
               }
               break;
-            case 'not':
+            case "not":
               if (fieldValue.$ref) {
-                const schemaUid = fieldValue.$ref.split('/')[fieldValue.$ref.split('/').length - 1];
+                const schemaUid = fieldValue.$ref.split("/")[fieldValue.$ref.split("/").length - 1];
                 if (this.polymorphicReferences[schemaUid] === undefined) {
                   this.polymorphicReferences[schemaUid] = new Set<string>();
                 }
@@ -168,8 +194,8 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
     }
 
     // crawl paths and keep everything referenced by them.
-    const paths = this.newObject(this.generated, 'paths', '/paths');
-    this.visitPaths(paths, visit(currentDoc['paths']));
+    const paths = this.newObject(this.generated, "paths", "/paths");
+    this.visitPaths(paths, visit(currentDoc["paths"]));
 
     // visit schemas that were marked to be kept
     if (this.components && this.components.schemas) {
@@ -193,13 +219,14 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
             this.componentsToKeep.schemas.add(polyRef);
             this.crawlObject(this.components.schemas[polyRef]);
             if (prevSchemasToKeep.size !== this.componentsToKeep.schemas.size) {
-              const difference = new Set(
-                [...this.componentsToKeep.schemas].filter(x => !prevSchemasToKeep.has(x))
-              );
+              const difference = new Set([...this.componentsToKeep.schemas].filter((x) => !prevSchemasToKeep.has(x)));
 
               for (const newSchemaUid of difference) {
                 prevSchemasToKeep.add(newSchemaUid);
-                if (this.polymorphicReferences[newSchemaUid] !== undefined /* && !polyReferencedSchemasChecked.has(referencedSchemaUid) */) {
+                if (
+                  this.polymorphicReferences[newSchemaUid] !==
+                  undefined /* && !polyReferencedSchemasChecked.has(referencedSchemaUid) */
+                ) {
                   polyReferencedSchemasToCheck.push(newSchemaUid);
                 }
               }
@@ -213,18 +240,20 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   public async process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
-        case 'info': {
-          const info = <oai.Info>targetParent.info || this.newObject(targetParent, 'info', pointer);
+        case "info": {
+          const info = <oai.Info>targetParent.info || this.newObject(targetParent, "info", pointer);
           this.visitInfo(info, children);
           break;
         }
-        case 'components': {
-          const components = <oai.Components>targetParent.components || this.newObject(targetParent, 'components', pointer);
-          this.visitComponents(components, children);
-        }
+        case "components":
+          {
+            const components =
+              <oai.Components>targetParent.components || this.newObject(targetParent, "components", pointer);
+            this.visitComponents(components, children);
+          }
           break;
 
-        case 'paths':
+        case "paths":
           // already handled at init()
           break;
 
@@ -236,17 +265,17 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   }
 
   public async finish() {
-    // Put in the metadata all the profiles that were actually used. 
+    // Put in the metadata all the profiles that were actually used.
     // This excludes paths that did not match any operation.
     if (this.profilesReferenced.size !== 0) {
-      this.generated.info['x-ms-metadata'].profiles = [...this.profilesReferenced];
+      this.generated.info["x-ms-metadata"].profiles = [...this.profilesReferenced];
     }
   }
 
   visitInfo(targetParent: AnyObject, nodes: Iterable<Node>) {
     for (const { value, key, pointer } of nodes) {
       switch (key) {
-        case 'version':
+        case "version":
           this.clone(targetParent, key, pointer, this.maxApiVersion);
           break;
         default:
@@ -259,31 +288,30 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   visitPath(targetParent: AnyObject, nodes: Iterable<Node>, pathMetadata: PathMetadata) {
     for (const { value, key, pointer } of nodes) {
       switch (key) {
-        case 'x-ms-metadata':
+        case "x-ms-metadata":
           this.clone(targetParent, key, pointer, pathMetadata);
           break;
         default:
           this.clone(targetParent, key, pointer, value);
           break;
       }
-
     }
   }
 
   visitPaths(targetParent: AnyObject, nodes: Iterable<Node>) {
     // sort targets by priority
     this.filterTargets.sort((a, b) => {
-      return (a.weight > b.weight) ? - 1 : (a.weight < b.weight) ? 1 : 0;
+      return a.weight > b.weight ? -1 : a.weight < b.weight ? 1 : 0;
     });
 
     // map of '${profileName}:${value[x-ms-metadata].path}' -> '${path:uid} (no method included, like path:0.get, path:0.put, etc)'
     const uniquePathPerProfile = new Dictionary<string>();
 
-    // filter paths 
+    // filter paths
     for (const { value, key: pathKey, pointer, children } of nodes) {
-      const path: string = value['x-ms-metadata'].path.replace(/\/*$/, '');
-      const keyWithNoMethod = pathKey.split('.')[0];
-      const originalApiVersions: Array<string> = value['x-ms-metadata'].apiVersions;
+      const path: string = value["x-ms-metadata"].path.replace(/\/*$/, "");
+      const keyWithNoMethod = pathKey.split(".")[0];
+      const originalApiVersions: Array<string> = value["x-ms-metadata"].apiVersions;
       const profiles = new Dictionary<string>();
       const apiVersions = new Set<string>();
 
@@ -292,11 +320,19 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
         // Profile Mode
         for (const each of values(this.filterTargets)) {
           const id = `${each.profile}:${path}`;
-          if (path.match(each.pathRegex) && originalApiVersions.includes(each.apiVersion) && uniquePathPerProfile[id] === undefined) {
+          if (
+            path.match(each.pathRegex) &&
+            originalApiVersions.includes(each.apiVersion) &&
+            uniquePathPerProfile[id] === undefined
+          ) {
             uniquePathPerProfile[id] = keyWithNoMethod;
           }
 
-          if (path.match(each.pathRegex) && originalApiVersions.includes(each.apiVersion) && uniquePathPerProfile[id] === keyWithNoMethod) {
+          if (
+            path.match(each.pathRegex) &&
+            originalApiVersions.includes(each.apiVersion) &&
+            uniquePathPerProfile[id] === keyWithNoMethod
+          ) {
             uniquePathPerProfile;
             match = true;
             this.profilesReferenced.add(each.profile);
@@ -319,8 +355,8 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
           apiVersions: [...apiVersions],
           profiles,
           path,
-          filename: value['x-ms-metadata'].filename,
-          originalLocations: value['x-ms-metadata'].originalLocations
+          filename: value["x-ms-metadata"].filename,
+          originalLocations: value["x-ms-metadata"].originalLocations,
         };
 
         this.visitPath(this.newObject(targetParent, pathKey, pointer), children, metadata);
@@ -329,15 +365,15 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
 
     // crawl the paths kept, and keep the schemas referenced by them
     for (const { value } of visit(targetParent)) {
-      const { 'x-ms-metadata': XMsMetadata, ...path } = value;
+      const { "x-ms-metadata": XMsMetadata, ...path } = value;
       this.crawlObject(path);
     }
   }
 
   private crawlObject(obj: any): void {
     for (const { key, value } of visit(obj)) {
-      if (key === '$ref') {
-        const refParts = value.split('/');
+      if (key === "$ref") {
+        const refParts = value.split("/");
         const componentUid = refParts.pop();
         const type: componentType = refParts.pop();
         if (!this.visitedComponents[type].has(componentUid)) {
@@ -345,7 +381,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
           this.componentsToKeep[type].add(componentUid);
           this.crawlObject(this.components[type][componentUid]);
         }
-      } else if (value && typeof (value) === 'object') {
+      } else if (value && typeof value === "object") {
         this.crawlObject(value);
       }
     }
@@ -354,13 +390,13 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   visitComponents(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
-        case 'schemas':
-        case 'responses':
-        case 'parameters':
-        case 'examples':
-        case 'requestBodies':
-        case 'headers':
-        case 'links':
+        case "schemas":
+        case "responses":
+        case "parameters":
+        case "examples":
+        case "requestBodies":
+        case "headers":
+        case "links":
           // everything else, just copy recursively.
           if (targetParent[key] === undefined) {
             this.newObject(targetParent, key, pointer);
@@ -368,7 +404,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
 
           this.visitComponent(key, targetParent[key], children);
           break;
-        case 'securitySchemes':
+        case "securitySchemes":
         default:
           this.clone(targetParent, key, pointer, value);
           break;
@@ -388,7 +424,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   // and the subsequent elements are resources_types.
   // Regex will match anything in the form (/...)/namespace(/...)/resourceType1(/...)/resourceType2(/...).../resourceTypeN(/...)
   getPathRegex(matches: Array<string>): RegExp {
-    const fragment = '(\\/([^\\/?#]+))*';
+    const fragment = "(\\/([^\\/?#]+))*";
     let regexString = `^${fragment}`;
 
     for (const word of matches) {
@@ -399,18 +435,24 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
       regexString = `${regexString}\\/${escapedWord}${fragment}`;
     }
 
-    return RegExp(`${regexString}$`, 'gi');
+    return RegExp(`${regexString}$`, "gi");
   }
 }
 
 async function filter(config: ConfigurationView, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
+  const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
-    const allProfileDefinitions = config.GetEntry('profiles');
-    const configApiVersion = config.GetEntry('api-version');
-    const apiVersions: Array<string> = configApiVersion ? (typeof (configApiVersion) === 'string') ? [configApiVersion] : configApiVersion : [];
-    const profilesRequested = !Array.isArray(config.GetEntry('profile')) ? [config.GetEntry('profile')] : config.GetEntry('profile');
+    const allProfileDefinitions = config.GetEntry("profiles");
+    const configApiVersion = config.GetEntry("api-version");
+    const apiVersions: Array<string> = configApiVersion
+      ? typeof configApiVersion === "string"
+        ? [configApiVersion]
+        : configApiVersion
+      : [];
+    const profilesRequested = !Array.isArray(config.GetEntry("profile"))
+      ? [config.GetEntry("profile")]
+      : config.GetEntry("profile");
     if (profilesRequested.length > 0 || apiVersions.length > 0) {
       if (profilesRequested.length > 0) {
         validateProfiles(allProfileDefinitions);
@@ -420,12 +462,31 @@ async function filter(config: ConfigurationView, input: DataSource, sink: DataSi
       const output = await processor.getOutput();
       const specsReferencedBeforeFiltering = getFilesUsed(visit(await each.ReadObject<AnyObject>()));
       const specsReferencedAfterFiltering = getFilesUsed(visit(output));
-      const specsNotUsed = [...specsReferencedBeforeFiltering].filter(x => !specsReferencedAfterFiltering.has(x));
-      if ((Array.isArray(config.GetEntry('output-artifact')) && config.GetEntry('output-artifact').includes('profile-filter-log')) || config.GetEntry('output-artifact') === 'profile-filter-log') {
-        result.push(await sink.WriteData('profile-filter-log.yaml', serialize({ 'files-used': [...specsReferencedAfterFiltering], 'files-not-used': [...specsNotUsed] }), [], 'profile-filter-log'));
+      const specsNotUsed = [...specsReferencedBeforeFiltering].filter((x) => !specsReferencedAfterFiltering.has(x));
+      if (
+        (Array.isArray(config.GetEntry("output-artifact")) &&
+          config.GetEntry("output-artifact").includes("profile-filter-log")) ||
+        config.GetEntry("output-artifact") === "profile-filter-log"
+      ) {
+        result.push(
+          await sink.WriteData(
+            "profile-filter-log.yaml",
+            serialize({ "files-used": [...specsReferencedAfterFiltering], "files-not-used": [...specsNotUsed] }),
+            [],
+            "profile-filter-log",
+          ),
+        );
       }
 
-      result.push(await sink.WriteObject('oai3.profile-filtered.json', output, each.identity, 'openapi3-document-profile-filtered', await processor.getSourceMappings()));
+      result.push(
+        await sink.WriteObject(
+          "oai3.profile-filtered.json",
+          output,
+          each.identity,
+          "openapi3-document-profile-filtered",
+          await processor.getSourceMappings(),
+        ),
+      );
     } else {
       result.push(each);
     }
@@ -438,26 +499,28 @@ function getFilesUsed(nodes: Iterable<Node>) {
   const filesUsed = new Set<string>();
   for (const field of nodes) {
     switch (field.key) {
-      case 'paths':
+      case "paths":
         for (const path of field.children) {
-          path.value['x-ms-metadata'].originalLocations.map(x => filesUsed.add(x.replace(/(.*)#\/paths.*/g, '$1')));
+          path.value["x-ms-metadata"].originalLocations.map((x) => filesUsed.add(x.replace(/(.*)#\/paths.*/g, "$1")));
         }
         break;
 
-      case 'components':
+      case "components":
         for (const collection of field.children) {
           switch (collection.key) {
-            case 'schemas':
-            case 'responses':
-            case 'parameters':
-            case 'examples':
-            case 'requestBodies':
-            case 'headers':
-            case 'links':
-            case 'callbacks':
-            case 'securitySchemes':
+            case "schemas":
+            case "responses":
+            case "parameters":
+            case "examples":
+            case "requestBodies":
+            case "headers":
+            case "links":
+            case "callbacks":
+            case "securitySchemes":
               for (const component of collection.children) {
-                component.value['x-ms-metadata'].originalLocations.map(x => filesUsed.add(x.replace(/(.*)#\/components.*/g, '$1')));
+                component.value["x-ms-metadata"].originalLocations.map((x) =>
+                  filesUsed.add(x.replace(/(.*)#\/components.*/g, "$1")),
+                );
               }
               break;
             default:
@@ -498,7 +561,8 @@ function validateProfiles(profiles: Dictionary<Profile>) {
   }
 
   if (Object.keys(duplicatedResources).length > 0) {
-    let errorMessage = 'The following resourceTypes are defined in multiple api-versions within the same providerNamespace in the same profile: ';
+    let errorMessage =
+      "The following resourceTypes are defined in multiple api-versions within the same providerNamespace in the same profile: ";
     for (const resourceType of items(duplicatedResources)) {
       errorMessage += `\n*${resourceType.key}:`;
       for (const duplicateEntry of resourceType.value) {

@@ -3,26 +3,26 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Clone } from '@azure-tools/datastore';
-import { MergeOverwriteOrAppend } from '../source-map/merging';
-import { createPerFilePlugin, PipelinePlugin } from './common';
+import { Clone } from "@azure-tools/datastore";
+import { MergeOverwriteOrAppend } from "../source-map/merging";
+import { createPerFilePlugin, PipelinePlugin } from "./common";
 
 function decorateSpecialProperties(o: any): void {
-  if (o['implementation']) {
-    o['x-ms-implementation'] = o['implementation'];
-    delete o['implementation'];
+  if (o["implementation"]) {
+    o["x-ms-implementation"] = o["implementation"];
+    delete o["implementation"];
   }
-  if (o['forward-to']) {
-    o['x-ms-forward-to'] = o['forward-to'];
-    delete o['forward-to'];
+  if (o["forward-to"]) {
+    o["x-ms-forward-to"] = o["forward-to"];
+    delete o["forward-to"];
   }
 }
 
 /* @internal */
 export function createComponentModifierPlugin(): PipelinePlugin {
-  const noWireExtension = 'x-ms-no-wire';
+  const noWireExtension = "x-ms-no-wire";
 
-  return createPerFilePlugin(async config => async (fileIn, sink) => {
+  return createPerFilePlugin(async (config) => async (fileIn, sink) => {
     const componentModifier = Clone((<any>config.Raw).components);
     if (componentModifier) {
       const o = await fileIn.ReadObject<any>();
@@ -32,7 +32,7 @@ export function createComponentModifierPlugin(): PipelinePlugin {
       // schemas:
       //  merge-override semantics, but decorate new properties so they're not serialized
       const schemasSource = componentModifier.schemas || {};
-      const schemasTarget = o.components.schemas = o.components.schemas || {};
+      const schemasTarget = (o.components.schemas = o.components.schemas || {});
       for (const schemaKey of Object.keys(schemasSource)) {
         const schemaSource = schemasSource[schemaKey];
         const schemaTarget = schemasTarget[schemaKey] || {};
@@ -53,7 +53,7 @@ export function createComponentModifierPlugin(): PipelinePlugin {
       // parameters:
       //  merge-override semantics
       const paramsSource = componentModifier.parameters || {};
-      const paramsTarget = o.components.parameters = o.components.parameters || {};
+      const paramsTarget = (o.components.parameters = o.components.parameters || {});
       for (const paramKey of Object.keys(paramsSource)) {
         const paramSource = paramsSource[paramKey];
         const paramTarget = paramsTarget[paramKey] || {};
@@ -63,13 +63,13 @@ export function createComponentModifierPlugin(): PipelinePlugin {
       // operations:
       //  merge-override semantics based on operationId, but decorate operations so they're not targetting the wire
       const operationsSource = componentModifier.operations || [];
-      const operationsTarget1 = o['paths'] = o['paths'] || {};
-      const operationsTarget2 = o['x-ms-paths'] = o['x-ms-paths'] || {};
+      const operationsTarget1 = (o["paths"] = o["paths"] || {});
+      const operationsTarget2 = (o["x-ms-paths"] = o["x-ms-paths"] || {});
       const getOperationWithId = (operationId: string): { get(): any; set(x: any): void } | null => {
         for (const path of <any>[...Object.values(operationsTarget1), ...Object.values(operationsTarget2)]) {
           for (const method of Object.keys(path)) {
             if (path[method].operationId === operationId) {
-              return { get: () => path[method], set: x => path[method] = x };
+              return { get: () => path[method], set: (x) => (path[method] = x) };
             }
           }
         }
@@ -78,7 +78,7 @@ export function createComponentModifierPlugin(): PipelinePlugin {
       const getDummyPath = (): string => {
         let path = `/dummy?${Object.keys(operationsTarget2).length}`;
         while (path in operationsTarget2) {
-          path += '0';
+          path += "0";
         }
         return path;
       };

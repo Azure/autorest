@@ -1,7 +1,7 @@
-import { DataHandle, QuickDataSource, mergePipeStates } from '@azure-tools/datastore';
-import { Channel, Message } from '../../message';
-import { PipelinePlugin } from '../common';
-import { AutoRestExtension } from '../plugin-endpoint';
+import { DataHandle, QuickDataSource, mergePipeStates } from "@azure-tools/datastore";
+import { Channel, Message } from "../../message";
+import { PipelinePlugin } from "../common";
+import { AutoRestExtension } from "../plugin-endpoint";
 
 /* @internal */
 export function createExternalPlugin(host: AutoRestExtension, pluginName: string): PipelinePlugin {
@@ -16,24 +16,23 @@ export function createExternalPlugin(host: AutoRestExtension, pluginName: string
     const results: Array<DataHandle> = [];
     const result = await extension.Process(
       pluginName,
-      key => config.GetEntry(<any>key),
+      (key) => config.GetEntry(<any>key),
       config,
       input,
       sink,
-      f => results.push(f),
+      (f) => results.push(f),
       (message: Message) => {
-
         if (message.Channel === Channel.Control) {
           if (message.Details && message.Details.skip !== undefined) {
             shouldSkip = message.Details.skip;
           }
-
         } else {
           config.Message.bind(config)(message);
         }
       },
 
-      config.CancellationToken);
+      config.CancellationToken,
+    );
     if (!result) {
       throw new Error(`Plugin ${pluginName} reported failure.`);
     }

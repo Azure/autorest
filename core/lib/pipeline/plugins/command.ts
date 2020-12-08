@@ -1,8 +1,8 @@
-import { PipelinePlugin } from '../common';
-import { ConfigurationView } from '../../configuration';
-import { DataSource, DataSink, DataHandle, QuickDataSource } from '@azure-tools/datastore';
-import { execute, cmdlineToArray } from '@azure-tools/codegen';
-import { FileUriToPath } from '@azure-tools/uri';
+import { PipelinePlugin } from "../common";
+import { ConfigurationView } from "../../configuration";
+import { DataSource, DataSink, DataHandle, QuickDataSource } from "@azure-tools/datastore";
+import { execute, cmdlineToArray } from "@azure-tools/codegen";
+import { FileUriToPath } from "@azure-tools/uri";
 
 async function command(config: ConfigurationView, input: DataSource, sink: DataSink) {
   const c = (<any>config.Raw).run;

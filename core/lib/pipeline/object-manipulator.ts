@@ -3,11 +3,31 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Clone, CloneAst, DataHandle, DataSink, Descendants, IsPrefix, JsonPath, Mapping, nodes, ParseNode, paths, ReplaceNode, ResolveRelativeNode, SmartPosition, stringify, StringifyAst, ToAst, YAMLNode, ParseToAst } from '@azure-tools/datastore';
-import { From } from 'linq-es2015';
-import { ConfigurationView } from '../autorest-core';
-import { Channel, Message, SourceLocation } from '../message';
-import { IdentitySourceMapping } from '../source-map/merging';
+import {
+  Clone,
+  CloneAst,
+  DataHandle,
+  DataSink,
+  Descendants,
+  IsPrefix,
+  JsonPath,
+  Mapping,
+  nodes,
+  ParseNode,
+  paths,
+  ReplaceNode,
+  ResolveRelativeNode,
+  SmartPosition,
+  stringify,
+  StringifyAst,
+  ToAst,
+  YAMLNode,
+  ParseToAst,
+} from "@azure-tools/datastore";
+import { From } from "linq-es2015";
+import { ConfigurationView } from "../autorest-core";
+import { Channel, Message, SourceLocation } from "../message";
+import { IdentitySourceMapping } from "../source-map/merging";
 
 export async function manipulateObject(
   src: DataHandle,
@@ -20,20 +40,26 @@ export async function manipulateObject(
     transformerSourceHandle: DataHandle;
     transformerSourcePosition: SmartPosition;
     reason: string;
-  }): Promise<{ anyHit: boolean; result: DataHandle }> {
-
-  if (whereJsonQuery === '$') {
+  },
+): Promise<{ anyHit: boolean; result: DataHandle }> {
+  if (whereJsonQuery === "$") {
     const data = await src.ReadData();
     const newObject = transformer(null, data, []);
     if (newObject !== data) {
-      const resultHandle = await target.WriteData(src.Description, newObject, src.identity, src.artifactType, undefined, mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src]);
+      const resultHandle = await target.WriteData(
+        src.Description,
+        newObject,
+        src.identity,
+        src.artifactType,
+        undefined,
+        mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src],
+      );
       return {
         anyHit: true,
-        result: resultHandle
+        result: resultHandle,
       };
     }
   }
-
 
   // find paths matched by `whereJsonQuery`
 
@@ -45,19 +71,23 @@ export async function manipulateObject(
   }
 
   // process
-  const mapping = IdentitySourceMapping(src.key, ast).filter(m => !hits.some(hit => IsPrefix(hit.path, (<any>m.generated).path)));
+  const mapping = IdentitySourceMapping(src.key, ast).filter(
+    (m) => !hits.some((hit) => IsPrefix(hit.path, (<any>m.generated).path)),
+  );
   for (const hit of hits) {
     if (ast === undefined) {
-      throw new Error('Cannot remove root node.');
+      throw new Error("Cannot remove root node.");
     }
 
     try {
       const newObject = transformer(doc, Clone(hit.value), hit.path);
-      const newAst = newObject === undefined
-        ? undefined
-        : ToAst(newObject); // <- can extend ToAst to also take an "ambient" object with AST, in order to create anchor refs for existing stuff!
+      const newAst = newObject === undefined ? undefined : ToAst(newObject); // <- can extend ToAst to also take an "ambient" object with AST, in order to create anchor refs for existing stuff!
       const oldAst = ResolveRelativeNode(ast, ast, hit.path);
-      ast = ReplaceNode(ast, oldAst, newAst) || (() => { throw new Error('Cannot remove root node.'); })();
+      ast =
+        ReplaceNode(ast, oldAst, newAst) ||
+        (() => {
+          throw new Error("Cannot remove root node.");
+        })();
     } catch (err) {
       // Background: it can happen that one transformation fails but the others are still valid. One typical use case is
       // the common parameters versus normal HTTP operations. They are on the same level in the path, so the commonly used
@@ -72,7 +102,7 @@ export async function manipulateObject(
         config.Message({
           Channel: Channel.Warning,
           Details: err,
-          Text: `${errorText}: '${err.message}'`
+          Text: `${errorText}: '${err.message}'`,
         });
       }
     }
@@ -109,9 +139,16 @@ export async function manipulateObject(
   }
 
   // write back
-  const resultHandle = await target.WriteData('manipulated', StringifyAst(ast), src.identity, undefined, mapping, mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src]);
+  const resultHandle = await target.WriteData(
+    "manipulated",
+    StringifyAst(ast),
+    src.identity,
+    undefined,
+    mapping,
+    mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src],
+  );
   return {
     anyHit: true,
-    result: resultHandle
+    result: resultHandle,
   };
 }

@@ -3,14 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, DataSource, QuickDataSource } from '@azure-tools/datastore';
-import { ConfigurationView } from '../configuration';
-import { length } from '@azure-tools/linq';
+import { DataHandle, DataSink, DataSource, QuickDataSource } from "@azure-tools/datastore";
+import { ConfigurationView } from "../configuration";
+import { length } from "@azure-tools/linq";
 
 export type PipelinePlugin = (config: ConfigurationView, input: DataSource, sink: DataSink) => Promise<DataSource>;
 
 /** @internal */
-export function createPerFilePlugin(processorBuilder: (config: ConfigurationView) => Promise<(input: DataHandle, sink: DataSink) => Promise<DataHandle>>): PipelinePlugin {
+export function createPerFilePlugin(
+  processorBuilder: (config: ConfigurationView) => Promise<(input: DataHandle, sink: DataSink) => Promise<DataHandle>>,
+): PipelinePlugin {
   return async (config, input, sink) => {
     const processor = await processorBuilder(config);
     const files = await input.Enum();

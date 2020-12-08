@@ -5,11 +5,23 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable no-prototype-builtins */
 
-import { DataHandle, DataSink, IndexToPosition, JsonPath, Mapping, ResolvePath, stringify, Stringify, YAMLNode, Descendants, Parse } from '@azure-tools/datastore';
-import { pushAll } from '../array';
-import { ConfigurationView } from '../configuration';
-import { Channel } from '../message';
-import { isArray } from 'util';
+import {
+  DataHandle,
+  DataSink,
+  IndexToPosition,
+  JsonPath,
+  Mapping,
+  ResolvePath,
+  stringify,
+  Stringify,
+  YAMLNode,
+  Descendants,
+  Parse,
+} from "@azure-tools/datastore";
+import { pushAll } from "../array";
+import { ConfigurationView } from "../configuration";
+import { Channel } from "../message";
+import { isArray } from "util";
 
 // // TODO: may want ASTy merge! (supporting circular structure and such?)
 function Merge(a: any, b: any, path: JsonPath = []): any {
@@ -23,7 +35,7 @@ function Merge(a: any, b: any, path: JsonPath = []): any {
   }
 
   // mapping nodes
-  if (typeof a === 'object' && typeof b === 'object') {
+  if (typeof a === "object" && typeof b === "object") {
     if (a instanceof Array && b instanceof Array) {
       if (a.length === 0) {
         return b;
@@ -46,7 +58,10 @@ function Merge(a: any, b: any, path: JsonPath = []): any {
       // object nodes - iterate all members
       const result: any = {};
       let keys = Object.getOwnPropertyNames(a).concat(Object.getOwnPropertyNames(b));
-      keys = keys.filter((v, i) => { const idx = keys.indexOf(v); return idx === -1 || idx >= i; }); // distinct
+      keys = keys.filter((v, i) => {
+        const idx = keys.indexOf(v);
+        return idx === -1 || idx >= i;
+      }); // distinct
 
       for (const key of keys) {
         const subpath = path.concat(key);
@@ -102,28 +117,34 @@ export function ShallowCopy(input: any, ...filter: Array<string>): any {
 }
 
 function toJsValue(value: any) {
-  switch (typeof (value)) {
-    case 'undefined':
-      return 'undefined';
-    case 'boolean':
-    case 'number':
+  switch (typeof value) {
+    case "undefined":
+      return "undefined";
+    case "boolean":
+    case "number":
       return value;
-    case 'object':
+    case "object":
       if (value === null) {
-        return 'null';
+        return "null";
       }
       if (isArray(value) && value.length === 0) {
-        return 'false';
+        return "false";
       }
-      return 'true';
+      return "true";
   }
   return `'${value}'`;
 }
 // Note: I am not convinced this works precisely as it should
 // but it works well enough for my needs right now
 // I will revisit it later.
-const macroRegEx = () => /\$\(([a-zA-Z0-9_-]*)\)/ig;
-export function resolveRValue(value: any, propertyName: string, higherPriority: any, lowerPriority: any, jsAware = 0): any {
+const macroRegEx = () => /\$\(([a-zA-Z0-9_-]*)\)/gi;
+export function resolveRValue(
+  value: any,
+  propertyName: string,
+  higherPriority: any,
+  lowerPriority: any,
+  jsAware = 0,
+): any {
   if (value) {
     // resolves the actual macro value.
     const resolve = (macroExpression: string, macroKey: string) => {
@@ -149,7 +170,7 @@ export function resolveRValue(value: any, propertyName: string, higherPriority: 
     };
 
     // resolve the macro value for strings
-    if (typeof value === 'string') {
+    if (typeof value === "string") {
       const match = macroRegEx().exec(value.trim());
       if (match) {
         if (match[0] === match.input) {
@@ -171,7 +192,7 @@ export function resolveRValue(value: any, propertyName: string, higherPriority: 
         // since we're not naming the parameter,
         // if there isn't a higher priority,
         // we can fall back to a wide-lookup in lowerPriority.
-        result.push(resolveRValue(each, '', higherPriority || lowerPriority, null));
+        result.push(resolveRValue(each, "", higherPriority || lowerPriority, null));
       }
       return result;
     }
@@ -184,14 +205,23 @@ export function resolveRValue(value: any, propertyName: string, higherPriority: 
   return value;
 }
 
-export function MergeOverwriteOrAppend(higherPriority: any, lowerPriority: any, concatListPathFilter: (path: JsonPath) => boolean = _ => false, path: JsonPath = []): any {
+export function MergeOverwriteOrAppend(
+  higherPriority: any,
+  lowerPriority: any,
+  concatListPathFilter: (path: JsonPath) => boolean = (_) => false,
+  path: JsonPath = [],
+): any {
   if (higherPriority === null || lowerPriority === null) {
     return null; // TODO: overthink, we could use this to force mute something even if it's "concat" mode...
   }
 
   // scalars/arrays involved
-  if (typeof higherPriority !== 'object' || higherPriority instanceof Array ||
-    typeof lowerPriority !== 'object' || lowerPriority instanceof Array) {
+  if (
+    typeof higherPriority !== "object" ||
+    higherPriority instanceof Array ||
+    typeof lowerPriority !== "object" ||
+    lowerPriority instanceof Array
+  ) {
     if (!(higherPriority instanceof Array) && !(lowerPriority instanceof Array) && !concatListPathFilter(path)) {
       return higherPriority;
     }
@@ -202,7 +232,9 @@ export function MergeOverwriteOrAppend(higherPriority: any, lowerPriority: any, 
   // object nodes - iterate all members
   const result: any = {};
 
-  const keys = [...new Set(Object.getOwnPropertyNames(higherPriority).concat(Object.getOwnPropertyNames(lowerPriority)))];
+  const keys = [
+    ...new Set(Object.getOwnPropertyNames(higherPriority).concat(Object.getOwnPropertyNames(lowerPriority))),
+  ];
   // keys = keys.filter((v, i) => { const idx = keys.indexOf(v); return idx === -1 || idx >= i; }); // distinct
 
   for (const key of keys) {
@@ -235,13 +267,18 @@ export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst:
       generated: { path: descendantPath },
       original: { path: descendantPath },
       name: JSON.stringify(descendantPath),
-      source: sourceYamlFileName
+      source: sourceYamlFileName,
     });
   }
   return result;
 }
 
-export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Array<DataHandle>, sink: DataSink, verifyOAI2 = false): Promise<DataHandle> {
+export async function MergeYamls(
+  config: ConfigurationView,
+  yamlInputHandles: Array<DataHandle>,
+  sink: DataSink,
+  verifyOAI2 = false,
+): Promise<DataHandle> {
   let mergedGraph: any = {};
   const mappings = new Array<Mapping>();
   let cancel = false;
@@ -254,16 +291,17 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Ar
 
   for (const yamlInputHandle of yamlInputHandles) {
     const rawYaml = await yamlInputHandle.ReadData();
-    const inputGraph: any = Parse(rawYaml, (message, index) => {
-      failed = true;
-      if (config) {
-        config.Message({
-          Channel: Channel.Error,
-          Text: message,
-          Source: [{ document: yamlInputHandle.key, Position: IndexToPosition(yamlInputHandle, index) }]
-        });
-      }
-    }) || {};
+    const inputGraph: any =
+      Parse(rawYaml, (message, index) => {
+        failed = true;
+        if (config) {
+          config.Message({
+            Channel: Channel.Error,
+            Text: message,
+            Source: [{ document: yamlInputHandle.key, Position: IndexToPosition(yamlInputHandle, index) }],
+          });
+        }
+      }) || {};
 
     mergedGraph = Merge(mergedGraph, inputGraph);
     pushAll(mappings, IdentitySourceMapping(yamlInputHandle.key, await yamlInputHandle.ReadYamlAst()));
@@ -277,13 +315,21 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Ar
           const individual = inputGraph.definitions[model];
           if (!deepCompare(individual, merged)) {
             cancel = true;
-            const mergedHandle = await sink.WriteObject('merged YAMLs', mergedGraph, newIdentity, undefined, mappings, yamlInputHandles);
+            const mergedHandle = await sink.WriteObject(
+              "merged YAMLs",
+              mergedGraph,
+              newIdentity,
+              undefined,
+              mappings,
+              yamlInputHandles,
+            );
             config.Message({
               Channel: Channel.Error,
-              Key: ['Fatal/DuplicateModelCollsion'],
-              Text: 'Duplicated model name with non-identical definitions',
-              Source: [{ document: mergedHandle.key, Position: await ResolvePath(mergedHandle, ['definitions', model]) }]
-
+              Key: ["Fatal/DuplicateModelCollsion"],
+              Text: "Duplicated model name with non-identical definitions",
+              Source: [
+                { document: mergedHandle.key, Position: await ResolvePath(mergedHandle, ["definitions", model]) },
+              ],
             });
           }
         }
@@ -295,12 +341,21 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Ar
           const individual = inputGraph.parameters[parameter];
           if (!deepCompare(individual, merged)) {
             cancel = true;
-            const mergedHandle = await sink.WriteObject('merged YAMLs', mergedGraph, newIdentity, undefined, mappings, yamlInputHandles);
+            const mergedHandle = await sink.WriteObject(
+              "merged YAMLs",
+              mergedGraph,
+              newIdentity,
+              undefined,
+              mappings,
+              yamlInputHandles,
+            );
             config.Message({
               Channel: Channel.Error,
-              Key: ['Fatal/DuplicateParameterCollision'],
-              Text: 'Duplicated global non-identical parameter definitions',
-              Source: [{ document: mergedHandle.key, Position: await ResolvePath(mergedHandle, ['parameters', parameter]) }]
+              Key: ["Fatal/DuplicateParameterCollision"],
+              Text: "Duplicated global non-identical parameter definitions",
+              Source: [
+                { document: mergedHandle.key, Position: await ResolvePath(mergedHandle, ["parameters", parameter]) },
+              ],
             });
           }
         }
@@ -309,15 +364,15 @@ export async function MergeYamls(config: ConfigurationView, yamlInputHandles: Ar
   }
 
   if (failed) {
-    throw new Error('Syntax errors encountered.');
+    throw new Error("Syntax errors encountered.");
   }
 
   if (cancel) {
     config.CancellationTokenSource.cancel();
-    throw new Error('Operation Cancelled');
+    throw new Error("Operation Cancelled");
   }
 
-  return sink.WriteObject('merged YAMLs', mergedGraph, newIdentity, undefined, mappings, yamlInputHandles);
+  return sink.WriteObject("merged YAMLs", mergedGraph, newIdentity, undefined, mappings, yamlInputHandles);
 }
 
 function deepCompare(x: any, y: any) {
@@ -348,7 +403,7 @@ function deepCompare(x: any, y: any) {
     }
 
     // Numbers, Strings, Functions, Booleans must be strictly equal
-    if (typeof (x[p]) !== 'object') {
+    if (typeof x[p] !== "object") {
       return false;
     }
 

@@ -11,38 +11,54 @@ import {
   Kind,
   SmartPosition,
   StringifyAst,
-  YAMLMap, YAMLMapping, YAMLNodeWithPath
-} from '@azure-tools/datastore';
-import { Node, Parser } from 'commonmark';
-import { IdentitySourceMapping } from '../source-map/merging';
+  YAMLMap,
+  YAMLMapping,
+  YAMLNodeWithPath,
+} from "@azure-tools/datastore";
+import { Node, Parser } from "commonmark";
+import { IdentitySourceMapping } from "../source-map/merging";
 
 function isDocumentationField(node: YAMLNodeWithPath) {
-  if (!node || !node.node.value || !node.node.value.value || typeof node.node.value.value !== 'string') {
+  if (!node || !node.node.value || !node.node.value.value || typeof node.node.value.value !== "string") {
     return false;
   }
   const path = node.path;
   if (path.length < 2) {
     return false;
   }
-  if (path[path.length - 2] === 'x-ms-examples') {
+  if (path[path.length - 2] === "x-ms-examples") {
     return false;
   }
   const last = path[path.length - 1];
-  return last === 'Description' || last === 'Summary';
+  return last === "Description" || last === "Summary";
 }
 
 export function plainTextVersion(commonmarkAst: Node): string {
-  let result = '';
+  let result = "";
   const walker = commonmarkAst.walker();
   let event;
   while ((event = walker.next())) {
     const node = event.node;
     switch (node.type) {
-      case 'text': result += node.literal; break;
-      case 'code': result += node.literal; break;
-      case 'softbreak': result += ' '; break;
-      case 'paragraph': if (!event.entering) { result += '\n'; } break;
-      case 'heading': if (!event.entering) { result += '\n'; } break;
+      case "text":
+        result += node.literal;
+        break;
+      case "code":
+        result += node.literal;
+        break;
+      case "softbreak":
+        result += " ";
+        break;
+      case "paragraph":
+        if (!event.entering) {
+          result += "\n";
+        }
+        break;
+      case "heading":
+        if (!event.entering) {
+          result += "\n";
+        }
+        break;
     }
   }
   return result.trim();
@@ -64,14 +80,14 @@ export async function processCodeModel(codeModel: DataHandle, sink: DataSink): P
       const parent = <YAMLMap>node.parent;
       const nodeOriginal = CloneAst(node);
       const key = nodeOriginal.key.value;
-      const origKey = key + '_Original';
+      const origKey = key + "_Original";
       nodeOriginal.key.value = origKey;
       parent.mappings.push(nodeOriginal);
       mapping.push({
-        name: 'original gfm',
-        generated: <SmartPosition>{ path: d.path.map((x, i) => i === d.path.length - 1 ? origKey : x) },
+        name: "original gfm",
+        generated: <SmartPosition>{ path: d.path.map((x, i) => (i === d.path.length - 1 ? origKey : x)) },
         original: <SmartPosition>{ path: d.path },
-        source: codeModel.key
+        source: codeModel.key,
       });
 
       // sanitize
@@ -81,5 +97,5 @@ export async function processCodeModel(codeModel: DataHandle, sink: DataSink): P
     }
   }
 
-  return sink.WriteData('codeModel.yaml', StringifyAst(ast), ['fix-me'], undefined, mapping, [codeModel]);
+  return sink.WriteData("codeModel.yaml", StringifyAst(ast), ["fix-me"], undefined, mapping, [codeModel]);
 }

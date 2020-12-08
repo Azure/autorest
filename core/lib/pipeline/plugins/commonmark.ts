@@ -1,6 +1,6 @@
-import { DataHandle, QuickDataSource } from '@azure-tools/datastore';
-import { PipelinePlugin } from '../common';
-import { processCodeModel } from '../commonmark-documentation';
+import { DataHandle, QuickDataSource } from "@azure-tools/datastore";
+import { PipelinePlugin } from "../common";
+import { processCodeModel } from "../commonmark-documentation";
 
 /* @internal */
 export function createCommonmarkProcessorPlugin(): PipelinePlugin {
@@ -10,8 +10,8 @@ export function createCommonmarkProcessorPlugin(): PipelinePlugin {
     for (let file of files) {
       const fileIn = await input.ReadStrict(file);
       const fileOut = await processCodeModel(fileIn, sink);
-      file = file.substr(file.indexOf('/output/') + '/output/'.length);
-      results.push(await sink.Forward('code-model-v1', fileOut));
+      file = file.substr(file.indexOf("/output/") + "/output/".length);
+      results.push(await sink.Forward("code-model-v1", fileOut));
     }
     return new QuickDataSource(results, input.pipeState);
   };

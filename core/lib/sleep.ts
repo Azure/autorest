@@ -4,5 +4,5 @@
  *--------------------------------------------------------------------------------------------*/
 
 export function Delay(delayMS: number): Promise<void> {
-  return new Promise<void>(res => setTimeout(res, delayMS));
+  return new Promise<void>((res) => setTimeout(res, delayMS));
 }

@@ -1,17 +1,25 @@
-import { AnyObject, DataSink, DataSource, Transformer, Node, ProxyObject, QuickDataSource, visit } from '@azure-tools/datastore';
-import { values, Dictionary } from '@azure-tools/linq';
-import { areSimilar } from '@azure-tools/object-comparison';
-import { PipelinePlugin } from '../common';
-import { maximum, toSemver } from '@azure-tools/codegen';
-import * as compareVersions from 'compare-versions';
-import { ConfigurationView } from '../../configuration';
+import {
+  AnyObject,
+  DataSink,
+  DataSource,
+  Transformer,
+  Node,
+  ProxyObject,
+  QuickDataSource,
+  visit,
+} from "@azure-tools/datastore";
+import { values, Dictionary } from "@azure-tools/linq";
+import { areSimilar } from "@azure-tools/object-comparison";
+import { PipelinePlugin } from "../common";
+import { maximum, toSemver } from "@azure-tools/codegen";
+import * as compareVersions from "compare-versions";
+import { ConfigurationView } from "../../configuration";
 
 try {
-  require('source-map-support').install();
+  require("source-map-support").install();
 } catch {
   // just for testing
 }
-
 
 /**
  * Prepares an OpenAPI document for the generation-2 code generators
@@ -43,9 +51,9 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
       return this.generated.components;
     }
     if (this.current.components) {
-      return this.newObject(this.generated, 'components', '/components');
+      return this.newObject(this.generated, "components", "/components");
     }
-    return this.newObject(this.generated, 'components', '/');
+    return this.newObject(this.generated, "components", "/");
   }
 
   get paths(): AnyObject {
@@ -53,71 +61,71 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
       return this.generated.paths;
     }
     if (this.current.paths) {
-      return this.newObject(this.generated, 'paths', '/paths');
+      return this.newObject(this.generated, "paths", "/paths");
     }
-    return this.newObject(this.generated, 'paths', '/');
+    return this.newObject(this.generated, "paths", "/");
   }
 
   private componentItem(key: string) {
-    return this.components[key] ? this.components[key] :
-      (this.current.components && this.current.components[key]) ?
-        this.newObject(this.components, key, `/components/${key}`) :
-        this.newObject(this.components, key, '/');
+    return this.components[key]
+      ? this.components[key]
+      : this.current.components && this.current.components[key]
+      ? this.newObject(this.components, key, `/components/${key}`)
+      : this.newObject(this.components, key, "/");
   }
 
   get schemas(): AnyObject {
-    return this.componentItem('schemas');
+    return this.componentItem("schemas");
   }
   get responses(): AnyObject {
-    return this.componentItem('responses');
+    return this.componentItem("responses");
   }
   get parameters(): AnyObject {
-    return this.componentItem('parameters');
+    return this.componentItem("parameters");
   }
   get examples(): AnyObject {
-    return this.componentItem('examples');
+    return this.componentItem("examples");
   }
   get requestBodies(): AnyObject {
-    return this.componentItem('requestBodies');
+    return this.componentItem("requestBodies");
   }
   get headers(): AnyObject {
-    return this.componentItem('headers');
+    return this.componentItem("headers");
   }
   get securitySchemes(): AnyObject {
-    return this.componentItem('securitySchemes');
+    return this.componentItem("securitySchemes");
   }
   get links(): AnyObject {
-    return this.componentItem('links');
+    return this.componentItem("links");
   }
   get callbacks(): AnyObject {
-    return this.componentItem('callbacks');
+    return this.componentItem("callbacks");
   }
 
   public async process(target: ProxyObject<AnyObject>, nodes: Iterable<Node>) {
-    const metadata = this.current.info ? this.current.info['x-ms-metadata'] : {};
+    const metadata = this.current.info ? this.current.info["x-ms-metadata"] : {};
     this.uniqueVersion = metadata.apiVersions.length > 1 ? false : true;
     if (this.current.components) {
       for (const { value, key } of visit(this.current.components.parameters)) {
-        if (value.name === 'api-version') {
+        if (value.name === "api-version") {
           this.apiVersionParamReferences.add(`#/components/parameters/${key}`);
         }
       }
     }
 
     for (const { key, value, pointer, children } of nodes) {
-
       switch (key) {
-        case 'paths':
+        case "paths":
           this.visitPaths(this.paths, children);
           break;
 
-        case 'components':
+        case "components":
           this.visitComponents(this.components, children);
           break;
 
-        case 'info':
-        case 'servers':
-        case 'openapi':
+        case "info":
+        case "servers":
+        case "openapi":
           this.clone(target, key, pointer, value);
           break;
 
@@ -129,7 +137,6 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
           }
 
           break;
-
       }
     }
   }
@@ -140,7 +147,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
 
   protected updateRefs(node: any) {
     for (const { value } of visit(node)) {
-      if (value && typeof value === 'object') {
+      if (value && typeof value === "object") {
         const ref = value.$ref;
         if (ref) {
           // see if this object has a $ref
@@ -158,16 +165,16 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
   }
   protected visitPaths(target: AnyObject, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
-      const actualPath = value['x-ms-metadata'] && value['x-ms-metadata'].path ? value['x-ms-metadata'].path : key;
+      const actualPath = value["x-ms-metadata"] && value["x-ms-metadata"].path ? value["x-ms-metadata"].path : key;
       if (target[actualPath] === undefined) {
         // new object
-        this.visitPath(value['x-ms-metadata'], this.newObject(target, actualPath, pointer), children);
+        this.visitPath(value["x-ms-metadata"], this.newObject(target, actualPath, pointer), children);
       } else {
         // we split up the operations when we merged in order to enable the deduplicator to work it's
         // magic on the operations
         // but the older modeler needs them mereged together again
         // luckily, it won't have any $refs to the paths, so I'm not worried about fixing those up.
-        this.visitPath(value['x-ms-metadata'], target[actualPath], children);
+        this.visitPath(value["x-ms-metadata"], target[actualPath], children);
         // if (!areSimilar(value, target[actualPath], 'x-ms-metadata', 'description', 'summary')) {
         //throw new Error(`Incompatible paths conflicting: ${pointer}: ${actualPath}`);
         //}
@@ -177,12 +184,14 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
 
   protected visitPath(metadata: AnyObject, target: AnyObject, nodes: Iterable<Node>) {
     for (const { key, pointer, children } of nodes) {
-      if (target[key] && !key.startsWith('x-ms')) {
-        // we're attempting to put another operation at the same path/method 
-        // where there is one already. 
-        // This is likely a case where a multi-api-version file is trying to 
+      if (target[key] && !key.startsWith("x-ms")) {
+        // we're attempting to put another operation at the same path/method
+        // where there is one already.
+        // This is likely a case where a multi-api-version file is trying to
         // go thru the composer, and this is not allowed.
-        throw new Error(`There are multiple operations defined for \n  '${key}: ${metadata.path}'.\n\n  You are probably trying to use an input with multiple API versions with an autorest V2 generator, and that will not work. `);
+        throw new Error(
+          `There are multiple operations defined for \n  '${key}: ${metadata.path}'.\n\n  You are probably trying to use an input with multiple API versions with an autorest V2 generator, and that will not work. `,
+        );
       }
       this.visitOperation(metadata, this.getOrCreateObject(target, key, pointer), children);
     }
@@ -190,14 +199,13 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
 
   protected visitOperation(metadata: AnyObject, target: AnyObject, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
-
       // we have to pull thru $refs on properties' *schema* and
       switch (key) {
-        case 'parameters':
+        case "parameters":
           this.visitAndDereferenceArray(metadata, target, key, pointer, children);
           break;
 
-        case 'responses':
+        case "responses":
           this.visitResponses(this.newObject(target, key, pointer), children);
           break;
 
@@ -216,38 +224,48 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
   protected lookupRef(reference: string): AnyObject {
     // since we know that the references are all in this file
     // we should be able to find the referenced item.
-    const [, path] = reference.split('#/');
-    const [components, component, location] = path.split('/');
+    const [, path] = reference.split("#/");
+    const [components, component, location] = path.split("/");
     return this.current[components][component][location];
   }
 
-  protected visitAndDereferenceArray(metadata: AnyObject, target: AnyObject, k: string, ptr: string, nodes: Iterable<Node>) {
+  protected visitAndDereferenceArray(
+    metadata: AnyObject,
+    target: AnyObject,
+    k: string,
+    ptr: string,
+    nodes: Iterable<Node>,
+  ) {
     const parametersArray = this.newArray(target, k, ptr);
     for (const { value, pointer } of nodes) {
       if (this.apiVersionParamReferences.has(value.$ref)) {
         const p = {
-          name: 'api-version',
-          in: 'query',
-          description: 'The API version to use for the request.',
+          name: "api-version",
+          in: "query",
+          description: "The API version to use for the request.",
           required: true,
           schema: {
-            type: 'string',
-            enum: [metadata['apiVersions'][0]]
-          }
+            type: "string",
+            enum: [metadata["apiVersions"][0]],
+          },
         };
 
         parametersArray.__push__({ value: p, pointer: ptr, recurse: true, filename: this.currentInputFilename });
         continue;
       }
 
-      parametersArray.__push__({ value: JSON.parse(JSON.stringify(value)), pointer, recurse: true, filename: this.currentInputFilename });
+      parametersArray.__push__({
+        value: JSON.parse(JSON.stringify(value)),
+        pointer,
+        recurse: true,
+        filename: this.currentInputFilename,
+      });
     }
   }
 
   protected visitAndDerefObject(target: AnyObject, nodes: Iterable<Node>) {
     // for each parameter, we have to pull thru the $ref'd parameter
     for (const { key, value, pointer } of nodes) {
-
       if (value.$ref) {
         // look up the ref and clone it.
         this.clone(target, key, pointer, this.lookupRef(value.$ref));
@@ -263,7 +281,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
         // the value isn't in the target. We can take it from the source
         this.clone(<AnyObject>target, key, pointer, value);
       } else {
-        if (!areSimilar(value, target[key], 'x-ms-metadata', 'description', 'summary')) {
+        if (!areSimilar(value, target[key], "x-ms-metadata", "description", "summary")) {
           throw new Error(`Incompatible models conflicting: ${pointer}`);
         }
       }
@@ -280,8 +298,8 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
   protected visitResponse(target: AnyObject, originalNodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of originalNodes) {
       switch (key) {
-        case 'headers':
-          // headers that are  $ref'd and we need to inline it 
+        case "headers":
+          // headers that are  $ref'd and we need to inline it
           // because the imodeler1 doesn't know how to deal with that.
           this.inlineHeaders(this.newObject(target, key, pointer), children);
           break;
@@ -303,8 +321,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
           // this has a schema that has to be derefed too.
           // this.clone(target, key, pointer, actualHeader);
           this.inlineHeaderCorrectly(this.newObject(target, key, pointer), visit(actualHeader));
-        }
-        else {
+        } else {
           // it's specified as a reference
           this.clone(target, key, pointer, actualHeader);
         }
@@ -322,7 +339,6 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
       } else {
         this.clone(target, key, pointer, value);
       }
-
     }
   }
 
@@ -334,13 +350,12 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
       } else {
         this.clone(target, key, pointer, value);
       }
-
     }
   }
   protected inlineHeaderSchema(header: AnyObject, originalNodes: Iterable<Node>) {
     for (const { key, value, pointer } of originalNodes) {
       switch (key) {
-        case 'schema':
+        case "schema":
           if (value.$ref) {
             // header schemas have to be inlined because the imodeler1 can't handle them
             this.clone(header, key, pointer, this.lookupRef(value.$ref));
@@ -361,16 +376,20 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
     // the best behavior is to have the latest models.
     const sortedNodes = values(originalNodes)
       .toArray()
-      .sort((a, b) => compareVersions(toSemver(maximum(b.value['x-ms-metadata'].apiVersions)), toSemver(maximum(a.value['x-ms-metadata'].apiVersions))));
+      .sort((a, b) =>
+        compareVersions(
+          toSemver(maximum(b.value["x-ms-metadata"].apiVersions)),
+          toSemver(maximum(a.value["x-ms-metadata"].apiVersions)),
+        ),
+      );
     for (const { key, value, pointer } of sortedNodes) {
       // schemas have to keep their name
-      const schemaName = (!value['type'] || value['type'] === 'object') ? value['x-ms-metadata'].name : key;
+      const schemaName = !value["type"] || value["type"] === "object" ? value["x-ms-metadata"].name : key;
 
       // this is pulling up the name of the schema back from the x-ms-metadata.
       // we do this because we don't want to alter the modeler
       // this is being added to the merger, since it looks like we want this behavior there too.
       if (target[schemaName] === undefined) {
-
         // the value isn't in the target. We can take it from the source'
         target[schemaName] = { value, pointer };
       }
@@ -383,7 +402,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
   protected visitParameter(parameter: ProxyObject<AnyObject>, originalNodes: Iterable<Node>) {
     for (const { key, value, pointer } of originalNodes) {
       switch (key) {
-        case 'schema':
+        case "schema":
           if (value.$ref) {
             // parameter schemas have to be inlined because the imodeler1 can't handle them
             this.clone(parameter, key, pointer, this.lookupRef(value.$ref));
@@ -401,7 +420,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
 
   protected visitParameters(target: ProxyObject<AnyObject>, originalNodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of originalNodes) {
-      if (!this.uniqueVersion && value.name === 'api-version') {
+      if (!this.uniqueVersion && value.name === "api-version") {
         // strip out the api version parameter when we inlined them.
         continue;
       }
@@ -414,39 +433,39 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
   visitComponents(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
-        case 'schemas':
+        case "schemas":
           this.visitSchemas(this.schemas, children);
           break;
 
-        case 'responses':
+        case "responses":
           this.visitResponses(this.responses, children);
           break;
 
-        case 'parameters':
+        case "parameters":
           this.visitParameters(this.parameters, children);
           break;
 
-        case 'examples':
+        case "examples":
           this.cloneInto(this.examples, children);
           break;
 
-        case 'requestBodies':
+        case "requestBodies":
           this.cloneInto(this.requestBodies, children);
           break;
 
-        case 'headers':
+        case "headers":
           this.cloneInto(this.headers, children);
           break;
 
-        case 'securitySchemes':
+        case "securitySchemes":
           this.cloneInto(this.securitySchemes, children);
           break;
 
-        case 'links':
+        case "links":
           this.cloneInto(this.links, children);
           break;
 
-        case 'callbacks':
+        case "callbacks":
           this.cloneInto(this.callbacks, children);
           break;
 
@@ -460,12 +479,23 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
 }
 
 async function compose(config: ConfigurationView, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
+  const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
 
   // compose-a-vous!
   const composer = new NewComposer(inputs[0]);
   // eslint-disable-next-line prefer-spread
-  return new QuickDataSource([await sink.WriteObject('composed oai3 doc...', await composer.getOutput(), [].concat.apply([], <any>inputs.map(each => each.identity)), 'merged-oai3', await composer.getSourceMappings())], input.pipeState);
+  return new QuickDataSource(
+    [
+      await sink.WriteObject(
+        "composed oai3 doc...",
+        await composer.getOutput(),
+        [].concat.apply([], <any>inputs.map((each) => each.identity)),
+        "merged-oai3",
+        await composer.getSourceMappings(),
+      ),
+    ],
+    input.pipeState,
+  );
 }
 
 /* @internal */

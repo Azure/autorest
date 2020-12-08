@@ -3,20 +3,20 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Configuration, ConfigurationView, MessageEmitter } from './configuration';
-import { EventEmitter, IEvent } from './events';
-import { Exception } from './exception';
-import { IFileSystem, RealFileSystem } from '@azure-tools/datastore';
-import { runPipeline } from './pipeline/pipeline';
-export { ConfigurationView } from './configuration';
-import { homedir } from 'os';
-import { Artifact } from './artifact';
-import * as Constants from './constants';
-import { DocumentType } from './document-type';
-import { Channel, Message } from './message';
+import { Configuration, ConfigurationView, MessageEmitter } from "./configuration";
+import { EventEmitter, IEvent } from "./events";
+import { Exception } from "./exception";
+import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
+import { runPipeline } from "./pipeline/pipeline";
+export { ConfigurationView } from "./configuration";
+import { homedir } from "os";
+import { Artifact } from "./artifact";
+import * as Constants from "./constants";
+import { DocumentType } from "./document-type";
+import { Channel, Message } from "./message";
 
 function IsIterable(target: any) {
-  return !!target && typeof target !== 'string' && typeof (target[Symbol.iterator]) === 'function';
+  return !!target && typeof target !== "string" && typeof target[Symbol.iterator] === "function";
 }
 
 function Push<T>(destination: Array<T>, source: any) {
@@ -66,7 +66,7 @@ export class AutoRest extends EventEmitter {
   public constructor(private fileSystem: IFileSystem = new RealFileSystem(), public configFileOrFolderUri?: string) {
     super();
     // ensure the environment variable for the home folder is set.
-    process.env['autorest.home'] = process.env['autorest.home'] || homedir();
+    process.env["autorest.home"] = process.env["autorest.home"] || homedir();
   }
 
   public async RegenerateView(includeDefault = false): Promise<ConfigurationView> {
@@ -78,7 +78,11 @@ export class AutoRest extends EventEmitter {
     messageEmitter.ClearFolder.Subscribe((cfg, folder) => this.ClearFolder.Dispatch(folder));
     messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
 
-    return this._view = await new Configuration(this.fileSystem, this.configFileOrFolderUri).CreateView(messageEmitter, includeDefault, ...this._configurations);
+    return (this._view = await new Configuration(this.fileSystem, this.configFileOrFolderUri).CreateView(
+      messageEmitter,
+      includeDefault,
+      ...this._configurations,
+    ));
   }
 
   public Invalidate() {
@@ -104,7 +108,7 @@ export class AutoRest extends EventEmitter {
    */
   public Process(): { finish: Promise<boolean | Error>; cancel(): void } {
     let earlyCancel = false;
-    let cancel: () => void = () => earlyCancel = true;
+    let cancel: () => void = () => (earlyCancel = true);
     const processInternal = async () => {
       let view: ConfigurationView = <any>null;
       try {
@@ -122,14 +126,14 @@ export class AutoRest extends EventEmitter {
           }
         };
         if (view.InputFileUris.length === 0) {
-          if (view.GetEntry('allow-no-input')) {
+          if (view.GetEntry("allow-no-input")) {
             this.Finished.Dispatch(true);
             return true;
           } else {
             // if this is using perform-load we don't need to require files.
             // if it's using batch, we might not have files in the main body
-            if ((<any>view.Raw)['perform-load'] !== false) {
-              return new Exception('No input files provided.\n\nUse --help to get help information.');
+            if ((<any>view.Raw)["perform-load"] !== false) {
+              return new Exception("No input files provided.\n\nUse --help to get help information.");
             }
           }
         }
@@ -141,7 +145,8 @@ export class AutoRest extends EventEmitter {
 
         await Promise.race([
           runPipeline(view, this.fileSystem),
-          new Promise((_, rej) => view.CancellationToken.onCancellationRequested(() => rej('Cancellation requested.')))]);
+          new Promise((_, rej) => view.CancellationToken.onCancellationRequested(() => rej("Cancellation requested."))),
+        ]);
 
         // finished -- return status (if cancelled, returns false.)
         this.Finished.Dispatch(!view.CancellationTokenSource.token.isCancellationRequested);
@@ -149,10 +154,15 @@ export class AutoRest extends EventEmitter {
         view.messageEmitter.removeAllListeners();
         return true;
       } catch (e) {
-
-        const message = view.DebugMode ? { Channel: Channel.Debug, Text: `Process() cancelled due to exception : ${e.message ? e.message : e} / ${e.stack ? e.stack : ''}` } : {
-          Channel: Channel.Debug, Text: 'Process() cancelled due to failure '
-        };
+        const message = view.DebugMode
+          ? {
+              Channel: Channel.Debug,
+              Text: `Process() cancelled due to exception : ${e.message ? e.message : e} / ${e.stack ? e.stack : ""}`,
+            }
+          : {
+              Channel: Channel.Debug,
+              Text: "Process() cancelled due to failure ",
+            };
         if (e instanceof Exception) {
           // idea: don't throw exceptions, just visibly log them and return false
           message.Channel = Channel.Fatal;
@@ -170,7 +180,7 @@ export class AutoRest extends EventEmitter {
     };
     return {
       cancel: cancel,
-      finish: processInternal()
+      finish: processInternal(),
     };
   }
 }
@@ -184,11 +194,14 @@ export class AutoRest extends EventEmitter {
 export async function LiterateToJson(content: string): Promise<string> {
   try {
     const autorest = new AutoRest({
-      async EnumerateFileUris(folderUri: string): Promise<Array<string>> { return []; },
-      ReadFile: async (f: string): Promise<string> => f == 'none:///empty-file.md' ? content || '# empty file' : '# empty file'
+      async EnumerateFileUris(folderUri: string): Promise<Array<string>> {
+        return [];
+      },
+      ReadFile: async (f: string): Promise<string> =>
+        f == "none:///empty-file.md" ? content || "# empty file" : "# empty file",
     });
-    let result = '';
-    autorest.AddConfiguration({ 'input-file': 'none:///empty-file.md', 'output-artifact': ['swagger-document'] });
+    let result = "";
+    autorest.AddConfiguration({ "input-file": "none:///empty-file.md", "output-artifact": ["swagger-document"] });
     autorest.GeneratedFile.Subscribe((source, artifact) => {
       result = artifact.content;
     });
@@ -197,7 +210,7 @@ export async function LiterateToJson(content: string): Promise<string> {
     await (await autorest.Process()).finish;
     return result;
   } catch (x) {
-    return '';
+    return "";
   }
 }
 
@@ -223,8 +236,7 @@ export async function IsConfigurationDocument(content: string): Promise<boolean>
  */
 export async function IdentifyDocument(content: string): Promise<DocumentType> {
   if (content) {
-
-    // check for configuration 
+    // check for configuration
     if (await IsConfigurationDocument(content)) {
       return DocumentType.LiterateConfiguration;
     }
@@ -238,26 +250,26 @@ export async function IdentifyDocument(content: string): Promise<DocumentType> {
       try {
         // maybe it's yaml or literate openapip
         doc = JSON.parse(await LiterateToJson(content));
-
       } catch (e) {
         // nope
       }
     }
     if (doc) {
-      return (doc.swagger && doc.swagger === '2.0') ? DocumentType.OpenAPI2 :
-        (doc.openapi && doc.openapi === '3.0.0') ? DocumentType.OpenAPI3 :
-          DocumentType.Unknown;
+      return doc.swagger && doc.swagger === "2.0"
+        ? DocumentType.OpenAPI2
+        : doc.openapi && doc.openapi === "3.0.0"
+        ? DocumentType.OpenAPI3
+        : DocumentType.Unknown;
     }
   }
   return DocumentType.Unknown;
 }
 
-
 /**
-  *  Given a document's content, does this represent a openapi document of some sort?
-  *
-  * @param content - the document content to evaluate
-  */
+ *  Given a document's content, does this represent a openapi document of some sort?
+ *
+ * @param content - the document content to evaluate
+ */
 export async function IsOpenApiDocument(content: string): Promise<boolean> {
   switch (await IdentifyDocument(content)) {
     case DocumentType.OpenAPI2:
@@ -280,8 +292,8 @@ export async function Shutdown() {
  */
 export async function IsConfigurationExtension(extension: string): Promise<boolean> {
   switch (extension) {
-    case 'markdown':
-    case 'md':
+    case "markdown":
+    case "md":
       return true;
     default:
       return false;
@@ -294,11 +306,11 @@ export async function IsConfigurationExtension(extension: string): Promise<boole
  */
 export async function IsOpenApiExtension(extension: string): Promise<boolean> {
   switch (extension) {
-    case 'yaml':
-    case 'yml':
-    case 'markdown':
-    case 'md':
-    case 'json':
+    case "yaml":
+    case "yml":
+    case "markdown":
+    case "md":
+    case "json":
       return true;
     default:
       return false;

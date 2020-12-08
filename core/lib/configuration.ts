@@ -4,107 +4,136 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { exists, filePath, isDirectory } from '@azure-tools/async-io';
-import { BlameTree, DataHandle, DataStore, IFileSystem, LazyPromise, ParseToAst, RealFileSystem, createSandbox, Stringify, stringify, TryDecodeEnhancedPositionFromName } from '@azure-tools/datastore';
-import { Extension, ExtensionManager, LocalExtension } from '@azure-tools/extension';
-import { clone, keys, Dictionary, values } from '@azure-tools/linq';
-import { CreateFileUri, CreateFolderUri, EnsureIsFolderUri, ExistsUri, ResolveUri, simplifyUri, IsUri, FileUriToPath, CreateFileOrFolderUri, ParentFolderUri } from '@azure-tools/uri';
-import { From } from 'linq-es2015';
-import { basename, dirname, join } from 'path';
-import { CancellationToken, CancellationTokenSource } from 'vscode-jsonrpc';
-import { Artifact } from './artifact';
-import * as Constants from './constants';
-import { EventEmitter, IEvent } from './events';
-import { OperationAbortedException } from './exception';
-import { Channel, Message, Range, SourceLocation } from './message';
-import { evaluateGuard, parseCodeBlocks } from './parsing/literate-yaml';
-import { AutoRestExtension } from './pipeline/plugin-endpoint';
-import { Suppressor } from './pipeline/suppression';
-import { MergeOverwriteOrAppend, resolveRValue } from './source-map/merging';
-import { Initializer, DeepPartial } from '@azure-tools/codegen';
-import { IdentifyDocument } from './autorest-core';
-import { cwd } from 'process';
+import { exists, filePath, isDirectory } from "@azure-tools/async-io";
+import {
+  BlameTree,
+  DataHandle,
+  DataStore,
+  IFileSystem,
+  LazyPromise,
+  ParseToAst,
+  RealFileSystem,
+  createSandbox,
+  Stringify,
+  stringify,
+  TryDecodeEnhancedPositionFromName,
+} from "@azure-tools/datastore";
+import { Extension, ExtensionManager, LocalExtension } from "@azure-tools/extension";
+import { clone, keys, Dictionary, values } from "@azure-tools/linq";
+import {
+  CreateFileUri,
+  CreateFolderUri,
+  EnsureIsFolderUri,
+  ExistsUri,
+  ResolveUri,
+  simplifyUri,
+  IsUri,
+  FileUriToPath,
+  CreateFileOrFolderUri,
+  ParentFolderUri,
+} from "@azure-tools/uri";
+import { From } from "linq-es2015";
+import { basename, dirname, join } from "path";
+import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
+import { Artifact } from "./artifact";
+import * as Constants from "./constants";
+import { EventEmitter, IEvent } from "./events";
+import { OperationAbortedException } from "./exception";
+import { Channel, Message, Range, SourceLocation } from "./message";
+import { evaluateGuard, parseCodeBlocks } from "./parsing/literate-yaml";
+import { AutoRestExtension } from "./pipeline/plugin-endpoint";
+import { Suppressor } from "./pipeline/suppression";
+import { MergeOverwriteOrAppend, resolveRValue } from "./source-map/merging";
+import { Initializer, DeepPartial } from "@azure-tools/codegen";
+import { IdentifyDocument } from "./autorest-core";
+import { cwd } from "process";
 
 const safeEval = createSandbox();
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const untildify: (path: string) => string = require('untildify');
+const untildify: (path: string) => string = require("untildify");
 
 const RESOLVE_MACROS_AT_RUNTIME = true;
 
 export interface AutoRestConfigurationImpl {
-  __info?: string | null;
-  __parents?: any | undefined;
-  'allow-no-input'?: boolean;
-  'input-file'?: Array<string> | string;
-  'exclude-file'?: Array<string> | string;
-  'base-folder'?: string;
-  'directive'?: Array<Directive> | Directive;
-  'declare-directive'?: { [name: string]: string };
-  'output-artifact'?: Array<string> | string;
-  'message-format'?: 'json' | 'yaml' | 'regular';
-  'use-extension'?: { [extensionName: string]: string };
-  'require'?: Array<string> | string;
-  'try-require'?: Array<string> | string;
-  'help'?: any;
-  'vscode'?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
+  "__info"?: string | null;
+  "__parents"?: any | undefined;
+  "allow-no-input"?: boolean;
+  "input-file"?: Array<string> | string;
+  "exclude-file"?: Array<string> | string;
+  "base-folder"?: string;
+  "directive"?: Array<Directive> | Directive;
+  "declare-directive"?: { [name: string]: string };
+  "output-artifact"?: Array<string> | string;
+  "message-format"?: "json" | "yaml" | "regular";
+  "use-extension"?: { [extensionName: string]: string };
+  "require"?: Array<string> | string;
+  "try-require"?: Array<string> | string;
+  "help"?: any;
+  "vscode"?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
 
-  'override-info'?: any; // make sure source maps are pulling it! (see "composite swagger" method)
-  'title'?: any;
-  'description'?: any;
+  "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)
+  "title"?: any;
+  "description"?: any;
 
-  'debug'?: boolean;
-  'verbose'?: boolean;
-  'time'?: boolean;
+  "debug"?: boolean;
+  "verbose"?: boolean;
+  "time"?: boolean;
 
   // plugin specific
-  'output-file'?: string;
-  'output-folder'?: string;
+  "output-file"?: string;
+  "output-folder"?: string;
 
   // from here on: CONVENTION, not cared about by the core
-  'client-side-validation'?: boolean; // C#
-  'fluent'?: boolean;
-  'azure-arm'?: boolean;
-  'namespace'?: string;
-  'license-header'?: string;
-  'add-credentials'?: boolean;
-  'package-name'?: string; // Ruby, Python, ...
-  'package-version'?: string;
-  'sync-methods'?: 'all' | 'essential' | 'none';
-  'payload-flattening-threshold'?: number;
-  'openapi-type'?: string; // the specification type (ARM/Data-Plane/Default)
-  'tag'?: string;
-  'simple-tree-shake'?: boolean;
+  "client-side-validation"?: boolean; // C#
+  "fluent"?: boolean;
+  "azure-arm"?: boolean;
+  "namespace"?: string;
+  "license-header"?: string;
+  "add-credentials"?: boolean;
+  "package-name"?: string; // Ruby, Python, ...
+  "package-version"?: string;
+  "sync-methods"?: "all" | "essential" | "none";
+  "payload-flattening-threshold"?: number;
+  "openapi-type"?: string; // the specification type (ARM/Data-Plane/Default)
+  "tag"?: string;
+  "simple-tree-shake"?: boolean;
 
   // multi-api specific
-  'profiles'?: any;
-  'profile'?: Array<string> | string;
-  'api-version'?: Array<string>;
+  "profiles"?: any;
+  "profile"?: Array<string> | string;
+  "api-version"?: Array<string>;
 
-  'pipeline-model'?: string;
-  'load-priority'?: number;
+  "pipeline-model"?: string;
+  "load-priority"?: number;
 
-  'resolved-directive'?: any;
-  'debugger'?: any;
+  "resolved-directive"?: any;
+  "debugger"?: any;
 }
 
 export function MergeConfigurations(...configs: Array<AutoRestConfigurationImpl>): AutoRestConfigurationImpl {
   let result: AutoRestConfigurationImpl = {};
-  configs = configs.map((each, i, a) => ({ ...each, 'load-priority': each['load-priority'] || -i })).sort((a, b) => (b['load-priority']) - (a['load-priority']));
+  configs = configs
+    .map((each, i, a) => ({ ...each, "load-priority": each["load-priority"] || -i }))
+    .sort((a, b) => b["load-priority"] - a["load-priority"]);
   // if they say --profile: or --api-version: (or in config) then we force it to set the tag=all-api-versions
-  // Some of the rest specs had a default tag set (really shouldn't have done that), which ... was problematic, 
+  // Some of the rest specs had a default tag set (really shouldn't have done that), which ... was problematic,
   // so this enables us to override that in the case they are asking for filtering to a profile or a api-verison
 
-  const forceAllVersionsMode = !!(configs.find(each => (each['api-version']?.length || each.profile?.length || 0 > 0)));
+  const forceAllVersionsMode = !!configs.find((each) => each["api-version"]?.length || each.profile?.length || 0 > 0);
   for (const config of configs) {
     result = MergeConfiguration(result, config, forceAllVersionsMode);
   }
-  result['load-priority'] = undefined;
+  result["load-priority"] = undefined;
   return result;
 }
 
 // TODO: operate on DataHandleRead and create source map!
-function MergeConfiguration(higherPriority: AutoRestConfigurationImpl, lowerPriority: AutoRestConfigurationImpl, forceAllVersionsMode = false): AutoRestConfigurationImpl {
+function MergeConfiguration(
+  higherPriority: AutoRestConfigurationImpl,
+  lowerPriority: AutoRestConfigurationImpl,
+  forceAllVersionsMode = false,
+): AutoRestConfigurationImpl {
   // check guard
   if (lowerPriority.__info && !evaluateGuard(lowerPriority.__info, higherPriority, forceAllVersionsMode)) {
     // guard false? => skip
@@ -116,17 +145,16 @@ function MergeConfiguration(higherPriority: AutoRestConfigurationImpl, lowerPrio
 }
 
 function isIterable(target: any): target is Iterable<any> {
-  return !!target && typeof (target[Symbol.iterator]) === 'function';
+  return !!target && typeof target[Symbol.iterator] === "function";
 }
 
 function* valuesOf<T>(value: any): Iterable<T> {
-
   switch (typeof value) {
-    case 'string':
-      yield <T><any>value;
+    case "string":
+      yield <T>(<any>value);
       break;
 
-    case 'object':
+    case "object":
       if (value) {
         if (isIterable(value)) {
           yield* value;
@@ -158,9 +186,9 @@ function arrayOf<T>(value: any): Array<T> {
     return [];
   }
   switch (typeof value) {
-    case 'string':
-      return [<T><any>value];
-    case 'object':
+    case "string":
+      return [<T>(<any>value)];
+    case "object":
       if (isIterable(value)) {
         return [...value];
       }
@@ -196,12 +224,12 @@ export class ResolvedDirective extends Initializer implements Dictionary<any> {
     this.apply(directive);
 
     // normalize typed content
-    this.from = arrayOf(directive['from']);
-    this.where = arrayOf(directive['where']);
+    this.from = arrayOf(directive["from"]);
+    this.where = arrayOf(directive["where"]);
     this.reason = directive.reason;
-    this.suppress = arrayOf(directive['suppress']);
-    this.transform = arrayOf(directive['transform'] || directive['text-transform']);
-    this.test = arrayOf(directive['test']);
+    this.suppress = arrayOf(directive["suppress"]);
+    this.transform = arrayOf(directive["transform"] || directive["text-transform"]);
+    this.test = arrayOf(directive["test"]);
   }
 }
 
@@ -225,25 +253,32 @@ export class MessageEmitter extends EventEmitter {
     this.DataStore = new DataStore(this.CancellationToken);
   }
   /* @internal */ public DataStore: DataStore;
-  /* @internal */ public get messageEmitter() { return this; }
-  /* @internal */ public get CancellationTokenSource(): CancellationTokenSource { return this.cancellationTokenSource; }
-  /* @internal */ public get CancellationToken(): CancellationToken { return this.cancellationTokenSource.token; }
+  /* @internal */ public get messageEmitter() {
+    return this;
+  }
+  /* @internal */ public get CancellationTokenSource(): CancellationTokenSource {
+    return this.cancellationTokenSource;
+  }
+  /* @internal */ public get CancellationToken(): CancellationToken {
+    return this.cancellationTokenSource.token;
+  }
 }
 
 function ProxifyConfigurationView(cfgView: any) {
-
   return new Proxy(cfgView, {
     get: (target, property) => {
-      const value = (target)[property];
+      const value = target[property];
       if (value && value instanceof Array) {
-        return value.map(each => resolveRValue(each, '', target, null));
+        return value.map((each) => resolveRValue(each, "", target, null));
       }
       return resolveRValue(value, <string>property, cfgView, null);
-    }
+    },
   });
 }
 
-const loadedExtensions: { [fullyQualified: string]: { extension: Extension; autorestExtension: LazyPromise<AutoRestExtension> } } = {};
+const loadedExtensions: {
+  [fullyQualified: string]: { extension: Extension; autorestExtension: LazyPromise<AutoRestExtension> };
+} = {};
 /*@internal*/
 export async function getExtension(fullyQualified: string): Promise<AutoRestExtension> {
   return loadedExtensions[fullyQualified].autorestExtension;
@@ -252,16 +287,14 @@ export async function getExtension(fullyQualified: string): Promise<AutoRestExte
 export class CachingFileSystem implements IFileSystem {
   protected cache = new Map<string, string | Error>();
 
-  constructor(protected actualFileSystem: IFileSystem) {
-
-  }
+  constructor(protected actualFileSystem: IFileSystem) {}
   EnumerateFileUris(folderUri: string): Promise<Array<string>> {
     return this.actualFileSystem.EnumerateFileUris(folderUri);
   }
   async ReadFile(uri: string): Promise<string> {
     const content = this.cache.get(uri);
     if (content !== undefined) {
-      if (typeof content === 'string') {
+      if (typeof content === "string") {
         return content;
       }
       throw content;
@@ -280,19 +313,19 @@ export class CachingFileSystem implements IFileSystem {
 
 export class ConfigurationView {
   [name: string]: any;
-  /* @internal */  InputFileUris = new Array<string>();
+  /* @internal */ InputFileUris = new Array<string>();
 
   private suppressor: Suppressor;
-  /* @internal */public fileSystem: CachingFileSystem;
+  /* @internal */ public fileSystem: CachingFileSystem;
 
   /* @internal */ constructor(
-    /* @internal */public configurationFiles: { [key: string]: any },
+    /* @internal */ public configurationFiles: { [key: string]: any },
     fileSystem: IFileSystem,
-    /* @internal */public messageEmitter: MessageEmitter,
-    /* @internal */public configFileFolderUri: string,
+    /* @internal */ public messageEmitter: MessageEmitter,
+    /* @internal */ public configFileFolderUri: string,
     ...configs: Array<AutoRestConfigurationImpl> // decreasing priority
   ) {
-    // wrap the filesystem with the caching filesystem 
+    // wrap the filesystem with the caching filesystem
     this.fileSystem = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
 
     // TODO: fix configuration loading, note that there was no point in passing that DataStore used
@@ -300,15 +333,15 @@ export class ConfigurationView {
     // theoretically the `ValuesOf` approach and such won't support blaming (who to blame if $.directives[3] sucks? which code block was it from)
     // long term, we simply gotta write a `Merge` method that adheres to the rules we need in here.
     this.rawConfig = <any>{
-      'directive': [],
-      'input-file': [],
-      'exclude-file': [],
-      'profile': [],
-      'output-artifact': [],
-      'require': [],
-      'try-require': [],
-      'use': [],
-      'pass-thru': [],
+      "directive": [],
+      "input-file": [],
+      "exclude-file": [],
+      "profile": [],
+      "output-artifact": [],
+      "require": [],
+      "try-require": [],
+      "use": [],
+      "pass-thru": [],
     };
 
     this.rawConfig = MergeConfigurations(this.rawConfig, ...configs);
@@ -316,11 +349,11 @@ export class ConfigurationView {
     // default values that are the least priority.
     // TODO: why is this here and not in default-configuration?
     this.rawConfig = MergeConfiguration(this.rawConfig, <any>{
-      'base-folder': '.',
-      'output-folder': 'generated',
-      'debug': false,
-      'verbose': false,
-      'disable-validation': false
+      "base-folder": ".",
+      "output-folder": "generated",
+      "debug": false,
+      "verbose": false,
+      "disable-validation": false,
     });
 
     if (RESOLVE_MACROS_AT_RUNTIME) {
@@ -339,16 +372,20 @@ export class ConfigurationView {
     this.suppressor = new Suppressor(this);
 
     // treat this as a configuration property too.
-    (<any>(this.rawConfig)).configurationFiles = configurationFiles;
+    (<any>this.rawConfig).configurationFiles = configurationFiles;
   }
 
   async init() {
-    // after the view is created, we want to be able to do any last-minute 
+    // after the view is created, we want to be able to do any last-minute
     // initialization (like, make sure intput-file uris are actually resolved)
-    const inputFiles = await Promise.all(arrayOf<string>(this.config['input-file']).map(each => this.ResolveAsPath(each)));
-    const filesToExclude = await Promise.all(arrayOf<string>(this.config['exclude-file']).map(each => this.ResolveAsPath(each)));
+    const inputFiles = await Promise.all(
+      arrayOf<string>(this.config["input-file"]).map((each) => this.ResolveAsPath(each)),
+    );
+    const filesToExclude = await Promise.all(
+      arrayOf<string>(this.config["exclude-file"]).map((each) => this.ResolveAsPath(each)),
+    );
 
-    this.InputFileUris = inputFiles.filter(x => !filesToExclude.includes(x));
+    this.InputFileUris = inputFiles.filter((x) => !filesToExclude.includes(x));
 
     return this;
   }
@@ -365,15 +402,15 @@ export class ConfigurationView {
 
     if (keys && keys.length > 0) {
       const path = dirname(keys[0]);
-      if (path.startsWith('file://')) {
+      if (path.startsWith("file://")) {
         // the configuration is a file path
         // we can save the configuration file to the target location
-        this.GeneratedFile.Dispatch({ content, type: 'configuration', uri: `${path}/${filename}` });
+        this.GeneratedFile.Dispatch({ content, type: "configuration", uri: `${path}/${filename}` });
       }
     }
   }
 
-  public Dump(title = ''): void {
+  public Dump(title = ""): void {
     console.log(`\n${title}\n===================================`);
     for (const each of Object.getOwnPropertyNames(this.config)) {
       console.log(`${each} : ${(<any>this.config)[each]}`);
@@ -384,15 +421,25 @@ export class ConfigurationView {
     return new Proxy<ConfigurationView>(this, {
       get: (target, property) => {
         return property in target.config ? (<any>target.config)[property] : this[<number | string>property];
-      }
+      },
     });
   }
 
-  /* @internal */ public get DataStore(): DataStore { return this.messageEmitter.DataStore; }
-  /* @internal */ public get CancellationToken(): CancellationToken { return this.messageEmitter.CancellationToken; }
-  /* @internal */ public get CancellationTokenSource(): CancellationTokenSource { return this.messageEmitter.CancellationTokenSource; }
-  /* @internal */ public get GeneratedFile(): IEvent<MessageEmitter, Artifact> { return this.messageEmitter.GeneratedFile; }
-  /* @internal */ public get ClearFolder(): IEvent<MessageEmitter, string> { return this.messageEmitter.ClearFolder; }
+  /* @internal */ public get DataStore(): DataStore {
+    return this.messageEmitter.DataStore;
+  }
+  /* @internal */ public get CancellationToken(): CancellationToken {
+    return this.messageEmitter.CancellationToken;
+  }
+  /* @internal */ public get CancellationTokenSource(): CancellationTokenSource {
+    return this.messageEmitter.CancellationTokenSource;
+  }
+  /* @internal */ public get GeneratedFile(): IEvent<MessageEmitter, Artifact> {
+    return this.messageEmitter.GeneratedFile;
+  }
+  /* @internal */ public get ClearFolder(): IEvent<MessageEmitter, string> {
+    return this.messageEmitter.ClearFolder;
+  }
 
   private config: AutoRestConfigurationImpl;
   private rawConfig: AutoRestConfigurationImpl;
@@ -402,8 +449,8 @@ export class ConfigurationView {
   }
   private ResolveAsWriteableFolder(path: string): string {
     // relative paths are relative to the local folder when the base-folder is remote.
-    if (!this.BaseFolderUri.startsWith('file:')) {
-      return EnsureIsFolderUri(ResolveUri(CreateFileOrFolderUri(cwd() + '/'), path));
+    if (!this.BaseFolderUri.startsWith("file:")) {
+      return EnsureIsFolderUri(ResolveUri(CreateFileOrFolderUri(cwd() + "/"), path));
     }
     return this.ResolveAsFolder(path);
   }
@@ -420,33 +467,40 @@ export class ConfigurationView {
 
     // let it try relative to the file that loaded it.
     // if the relative-to-parent path isn't valid, we fall back to original behavior
-    // where the file path is relative to the base uri. 
+    // where the file path is relative to the base uri.
     // (and we don't even check to see if that's valid, try-require wouldn't need valid files)
     const fromLoadedFile = ResolveUri(parentFolder, path);
-    return this.fileSystem.ReadFile(fromLoadedFile).then(() => fromLoadedFile, () => fromBaseUri);
+    return this.fileSystem.ReadFile(fromLoadedFile).then(
+      () => fromLoadedFile,
+      () => fromBaseUri,
+    );
   }
 
-
   private get BaseFolderUri(): string {
-    return EnsureIsFolderUri(ResolveUri(this.configFileFolderUri, <string>this.config['base-folder']));
+    return EnsureIsFolderUri(ResolveUri(this.configFileFolderUri, <string>this.config["base-folder"]));
   }
 
   // public methods
 
   public get UseExtensions(): Array<{ name: string; source: string; fullyQualified: string }> {
-    const useExtensions = this.Indexer['use-extension'] || {};
-    return Object.keys(useExtensions).map(name => {
-      const source = useExtensions[name].startsWith('file://') ? FileUriToPath(useExtensions[name]) : useExtensions[name];
+    const useExtensions = this.Indexer["use-extension"] || {};
+    return Object.keys(useExtensions).map((name) => {
+      const source = useExtensions[name].startsWith("file://")
+        ? FileUriToPath(useExtensions[name])
+        : useExtensions[name];
       return {
         name,
         source,
-        fullyQualified: JSON.stringify([name, source])
+        fullyQualified: JSON.stringify([name, source]),
       };
     });
   }
 
-  public static async *getIncludedConfigurationFiles(configView: () => Promise<ConfigurationView>, fileSystem: IFileSystem, ignoreFiles: Set<string>) {
-
+  public static async *getIncludedConfigurationFiles(
+    configView: () => Promise<ConfigurationView>,
+    fileSystem: IFileSystem,
+    ignoreFiles: Set<string>,
+  ) {
     let done = false;
 
     while (!done) {
@@ -455,7 +509,7 @@ export class ConfigurationView {
 
       // if we make it thru the list, we're done.
       done = true;
-      for (const each of valuesOf<string>(view.config['require'])) {
+      for (const each of valuesOf<string>(view.config["require"])) {
         if (ignoreFiles.has(each)) {
           continue;
         }
@@ -475,7 +529,7 @@ export class ConfigurationView {
 
       // if we make it thru the list, we're done.
       done = true;
-      for (const each of valuesOf<string>(view.config['try-require'])) {
+      for (const each of valuesOf<string>(view.config["try-require"])) {
         if (ignoreFiles.has(each)) {
           continue;
         }
@@ -494,18 +548,17 @@ export class ConfigurationView {
 
         break;
       }
-
     }
   }
 
   public resolveDirectives(predicate?: (each: ResolvedDirective) => boolean) {
     // optionally filter by predicate.
-    const plainDirectives = values(valuesOf<Directive>(this.config['directive']));
+    const plainDirectives = values(valuesOf<Directive>(this.config["directive"]));
     // predicate ? values(valuesOf<Directive>(this.config['directive'])).where(predicate) : values(valuesOf<Directive>(this.config['directive']));
 
-    const declarations = this.config['declare-directive'] || {};
+    const declarations = this.config["declare-directive"] || {};
     const expandDirective = (dir: Directive): Iterable<Directive> => {
-      const makro = Object.keys(dir).filter(m => declarations[m])[0];
+      const makro = Object.keys(dir).filter((m) => declarations[m])[0];
       // const makro = keys(dir).first(m => !!declarations[m]);
       if (!makro) {
         return [dir]; // nothing to expand
@@ -518,79 +571,87 @@ export class ConfigurationView {
       dir = { ...dir };
       delete (<any>dir)[makro];
       // call makro
-      const makroResults: any = From(parameters).SelectMany(parameter => {
-        const result = safeEval(declarations[makro], { $: parameter, $context: dir });
-        return Array.isArray(result) ? result : [result];
-      }).ToArray();
+      const makroResults: any = From(parameters)
+        .SelectMany((parameter) => {
+          const result = safeEval(declarations[makro], { $: parameter, $context: dir });
+          return Array.isArray(result) ? result : [result];
+        })
+        .ToArray();
       return From(makroResults).SelectMany((result: any) => expandDirective({ ...result, ...dir }));
     };
     // makro expansion
     if (predicate) {
-      return plainDirectives.selectMany(expandDirective).select(each => new ResolvedDirective(each)).where(predicate).toArray();
+      return plainDirectives
+        .selectMany(expandDirective)
+        .select((each) => new ResolvedDirective(each))
+        .where(predicate)
+        .toArray();
     }
-    return plainDirectives.selectMany(expandDirective).select(each => new ResolvedDirective(each)).toArray();
+    return plainDirectives
+      .selectMany(expandDirective)
+      .select((each) => new ResolvedDirective(each))
+      .toArray();
     // return From(plainDirectives).SelectMany(expandDirective).Select(each => new StaticDirectiveView(each)).ToArray();
   }
 
   public get OutputFolderUri(): string {
-    return this.ResolveAsWriteableFolder(<string>this.config['output-folder']);
+    return this.ResolveAsWriteableFolder(<string>this.config["output-folder"]);
   }
 
   public get HeaderText(): string {
-    const h = this.rawConfig['header-definitions'];
+    const h = this.rawConfig["header-definitions"];
     const version = (<any>global).autorestVersion;
 
-    switch (this.rawConfig['license-header']?.toLowerCase()) {
+    switch (this.rawConfig["license-header"]?.toLowerCase()) {
+      case "microsoft_mit":
+        return `${h.microsoft}\n${h.mit}\n${h.default.replace("{core}", version)}\n${h.warning}`;
 
-      case 'microsoft_mit':
-        return `${h.microsoft}\n${h.mit}\n${h.default.replace('{core}', version)}\n${h.warning}`;
+      case "microsoft_apache":
+        return `${h.microsoft}\n${h.apache}\n${h.default.replace("{core}", version)}\n${h.warning}`;
 
-      case 'microsoft_apache':
-        return `${h.microsoft}\n${h.apache}\n${h.default.replace('{core}', version)}\n${h.warning}`;
+      case "microsoft_mit_no_version":
+        return `${h.microsoft}\n${h.mit}\n${h["no-version"]}\n${h.warning}`;
 
-      case 'microsoft_mit_no_version':
-        return `${h.microsoft}\n${h.mit}\n${h['no-version']}\n${h.warning}`;
+      case "microsoft_apache_no_version":
+        return `${h.microsoft}\n${h.apache}\n${h["no-version"]}${h.warning}`;
 
-      case 'microsoft_apache_no_version':
-        return `${h.microsoft}\n${h.apache}\n${h['no-version']}${h.warning}`;
+      case "microsoft_apache_no_codegen":
+        return `${h.microsoft}\n${h.mit}\n${h["no-version"]}`;
 
-      case 'microsoft_apache_no_codegen':
-        return `${h.microsoft}\n${h.mit}\n${h['no-version']}`;
+      case "none":
+        return "";
 
-      case 'none':
-        return '';
+      case "microsoft_mit_small":
+        return `${h.microsoft}\n${h["mit-small"]}\n${h.default.replace("{core}", version)}\n${h.warning}`;
 
-      case 'microsoft_mit_small':
-        return `${h.microsoft}\n${h['mit-small']}\n${h.default.replace('{core}', version)}\n${h.warning}`;
-
-      case 'microsoft_mit_small_no_codegen':
-        return `${h.microsoft}\n${h['mit-small']}\n${h['no-version']}`;
+      case "microsoft_mit_small_no_codegen":
+        return `${h.microsoft}\n${h["mit-small"]}\n${h["no-version"]}`;
 
       case null:
       case undefined:
-        return `${h.default.replace('{core}', version)}\n${h.warning}`;
+        return `${h.default.replace("{core}", version)}\n${h.warning}`;
 
       default:
-        return `${this.rawConfig['license-header']}`;
+        return `${this.rawConfig["license-header"]}`;
     }
   }
 
   public IsOutputArtifactRequested(artifact: string): boolean {
-    return From(valuesOf<string>(this.config['output-artifact'])).Contains(artifact);
+    return From(valuesOf<string>(this.config["output-artifact"])).Contains(artifact);
   }
 
   public GetEntry(key: string): any {
     if (!key) {
       return clone(this.config);
     }
-    if (key === 'resolved-directive') {
+    if (key === "resolved-directive") {
       return this.resolveDirectives();
     }
-    if (<any>key === 'header-text') {
+    if (<any>key === "header-text") {
       return this.HeaderText;
     }
     let result = <any>this.config;
-    for (const keyPart of key.split('.')) {
+    for (const keyPart of key.split(".")) {
       result = result[keyPart];
     }
     return result;
@@ -601,15 +662,15 @@ export class ConfigurationView {
   }
 
   public get DebugMode(): boolean {
-    return !!this.config['debug'];
+    return !!this.config["debug"];
   }
 
   public get CacheMode(): boolean {
-    return !!this.config['cache'];
+    return !!this.config["cache"];
   }
 
   public get CacheExclude(): Array<string> {
-    const cache = this.config['cache'];
+    const cache = this.config["cache"];
     if (cache && cache.exclude) {
       return [...valuesOf<string>(cache.exclude)];
     }
@@ -617,19 +678,19 @@ export class ConfigurationView {
   }
 
   public get VerboseMode(): boolean {
-    return !!this.config['verbose'];
+    return !!this.config["verbose"];
   }
 
   public get HelpRequested(): boolean {
-    return !!this.config['help'];
+    return !!this.config["help"];
   }
 
-  public * GetNestedConfiguration(pluginName: string): Iterable<ConfigurationView> {
-    const pp = pluginName.split('.');
+  public *GetNestedConfiguration(pluginName: string): Iterable<ConfigurationView> {
+    const pp = pluginName.split(".");
     if (pp.length > 1) {
       const n = this.GetNestedConfiguration(pp[0]);
       for (const s of n) {
-        yield* s.GetNestedConfiguration(pp.slice(1).join('.'));
+        yield* s.GetNestedConfiguration(pp.slice(1).join("."));
       }
       return;
     }
@@ -642,7 +703,14 @@ export class ConfigurationView {
   }
 
   public GetNestedConfigurationImmediate(...scope: Array<any>): ConfigurationView {
-    const c = new ConfigurationView(this.configurationFiles, this.fileSystem, this.messageEmitter, this.configFileFolderUri, ...scope, this.config);
+    const c = new ConfigurationView(
+      this.configurationFiles,
+      this.fileSystem,
+      this.messageEmitter,
+      this.configFileFolderUri,
+      ...scope,
+      this.config,
+    );
     c.InputFileUris = this.InputFileUris;
     return c.Indexer;
   }
@@ -659,8 +727,8 @@ export class ConfigurationView {
 
     try {
       // update source locations to point to loaded Swagger
-      if (m.Source && typeof (m.Source.map) === 'function') {
-        const blameSources = m.Source.map(async s => {
+      if (m.Source && typeof m.Source.map === "function") {
+        const blameSources = m.Source.map(async (s) => {
           let blameTree: BlameTree | null = null;
 
           try {
@@ -672,7 +740,9 @@ export class ConfigurationView {
                 if (shouldComplain) {
                   this.Message({
                     Channel: Channel.Verbose,
-                    Text: `\nDEVELOPER-WARNING: Path '${originalPath}' was corrected to ${JSON.stringify(s.Position.path)} on MESSAGE '${JSON.stringify(m.Text)}'\n`
+                    Text: `\nDEVELOPER-WARNING: Path '${originalPath}' was corrected to ${JSON.stringify(
+                      s.Position.path,
+                    )} on MESSAGE '${JSON.stringify(m.Text)}'\n`,
                   });
                 }
               } catch (e) {
@@ -686,7 +756,7 @@ export class ConfigurationView {
                   }
                   // adjustment
                   // 1) skip leading `$`
-                  if (path[0] === '$') {
+                  if (path[0] === "$") {
                     path.shift();
                   } else {
                     path.pop();
@@ -697,7 +767,6 @@ export class ConfigurationView {
               }
             }
           } catch (e) {
-
             /*
       GS01: This should be restored when we go 'release'
 
@@ -710,10 +779,20 @@ export class ConfigurationView {
             return [s];
           }
 
-          return blameTree.BlameLeafs().map(r => <SourceLocation>{ document: r.source, Position: { ...TryDecodeEnhancedPositionFromName(r.name), line: r.line, column: r.column } });
+          return blameTree
+            .BlameLeafs()
+            .map(
+              (r) =>
+                <SourceLocation>{
+                  document: r.source,
+                  Position: { ...TryDecodeEnhancedPositionFromName(r.name), line: r.line, column: r.column },
+                },
+            );
         });
 
-        const src = From(await Promise.all(blameSources)).SelectMany(x => x).ToArray();
+        const src = From(await Promise.all(blameSources))
+          .SelectMany((x) => x)
+          .ToArray();
         m.Source = src;
         // m.Source = From(blameSources).SelectMany(x => x).ToArray();
         // get friendly names
@@ -729,15 +808,18 @@ export class ConfigurationView {
       }
 
       // set range (dummy)
-      if (m.Source && typeof (m.Source.map) === 'function') {
-        m.Range = m.Source.map(s => {
+      if (m.Source && typeof m.Source.map === "function") {
+        m.Range = m.Source.map((s) => {
           const positionStart = s.Position;
-          const positionEnd = <sourceMap.Position>{ line: s.Position.line, column: s.Position.column + (s.Position.length || 3) };
+          const positionEnd = <sourceMap.Position>{
+            line: s.Position.line,
+            column: s.Position.column + (s.Position.length || 3),
+          };
 
           return <Range>{
             document: s.document,
             start: positionStart,
-            end: positionEnd
+            end: positionEnd,
           };
         });
       }
@@ -748,30 +830,37 @@ export class ConfigurationView {
       // forward
       if (mx !== null) {
         // format message
-        switch (this.GetEntry('message-format')) {
-          case 'json':
+        switch (this.GetEntry("message-format")) {
+          case "json":
             // TODO: WHAT THE FUDGE, check with the consumers whether this has to be like that... otherwise, consider changing the format to something less generic
             if (mx.Details) {
-              mx.Details.sources = (mx.Source || []).filter(x => x.Position).map(source => {
-                let text = `${source.document}:${source.Position.line}:${source.Position.column}`;
-                if (source.Position.path) {
-                  text += ` (${stringify(source.Position.path)})`;
-                }
-                return text;
-              });
+              mx.Details.sources = (mx.Source || [])
+                .filter((x) => x.Position)
+                .map((source) => {
+                  let text = `${source.document}:${source.Position.line}:${source.Position.column}`;
+                  if (source.Position.path) {
+                    text += ` (${stringify(source.Position.path)})`;
+                  }
+                  return text;
+                });
               if (mx.Details.sources.length > 0) {
-                mx.Details['jsonref'] = mx.Details.sources[0];
-                mx.Details['json-path'] = mx.Details.sources[0];
+                mx.Details["jsonref"] = mx.Details.sources[0];
+                mx.Details["json-path"] = mx.Details.sources[0];
               }
             }
             mx.FormattedMessage = JSON.stringify(mx.Details || mx, null, 2);
             break;
-          case 'yaml':
-            mx.FormattedMessage = Stringify([mx.Details || mx]).replace(/^---/, '');
+          case "yaml":
+            mx.FormattedMessage = Stringify([mx.Details || mx]).replace(/^---/, "");
             break;
           default: {
-            const t = mx.Channel === Channel.Debug || mx.Channel === Channel.Verbose ? ` [${Math.floor(process.uptime() * 100) / 100} s]` : '';
-            let text = `${(mx.Channel || Channel.Information).toString().toUpperCase()}${mx.Key ? ` (${[...mx.Key].join('/')})` : ''}${t}: ${mx.Text}`;
+            const t =
+              mx.Channel === Channel.Debug || mx.Channel === Channel.Verbose
+                ? ` [${Math.floor(process.uptime() * 100) / 100} s]`
+                : "";
+            let text = `${(mx.Channel || Channel.Information).toString().toUpperCase()}${
+              mx.Key ? ` (${[...mx.Key].join("/")})` : ""
+            }${t}: ${mx.Text}`;
             for (const source of mx.Source || []) {
               if (source.Position) {
                 try {
@@ -804,88 +893,91 @@ export class ConfigurationView {
 
 export class Configuration {
   private fileSystem: CachingFileSystem;
-  public constructor(
-    fileSystem: IFileSystem = new RealFileSystem(),
-    private configFileOrFolderUri?: string,
-  ) {
+  public constructor(fileSystem: IFileSystem = new RealFileSystem(), private configFileOrFolderUri?: string) {
     this.fileSystem = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
   }
 
-  private async ParseCodeBlocks(configFile: DataHandle, contextConfig: ConfigurationView, scope: string): Promise<Array<AutoRestConfigurationImpl>> {
+  private async ParseCodeBlocks(
+    configFile: DataHandle,
+    contextConfig: ConfigurationView,
+    scope: string,
+  ): Promise<Array<AutoRestConfigurationImpl>> {
     const parentFolder = ParentFolderUri(configFile.originalFullPath);
 
     // load config
-    const hConfig = await parseCodeBlocks(
-      contextConfig,
-      configFile,
-      contextConfig.DataStore.getDataSink());
+    const hConfig = await parseCodeBlocks(contextConfig, configFile, contextConfig.DataStore.getDataSink());
 
-    if (hConfig.length === 1 && hConfig[0].info === null && configFile.Description.toLowerCase().endsWith('.md')) {
+    if (hConfig.length === 1 && hConfig[0].info === null && configFile.Description.toLowerCase().endsWith(".md")) {
       // this is a whole file, and it's a markdown file.
       return [];
     }
 
-    const blocks = await Promise.all(hConfig.filter(each => each).map(each => {
-      const pBlock = each.data.ReadObject<AutoRestConfigurationImpl>();
-      return pBlock.then(block => {
-        if (!block) {
-          block = {};
-        }
-        if (typeof block !== 'object') {
-          contextConfig.Message({
-            Channel: Channel.Error,
-            Text: 'Syntax error: Invalid YAML object.',
-            Source: [<SourceLocation>{ document: each.data.key, Position: { line: 1, column: 0 } }]
-          });
-          throw new OperationAbortedException();
-        }
-        block.__info = each.info;
+    const blocks = await Promise.all(
+      hConfig
+        .filter((each) => each)
+        .map((each) => {
+          const pBlock = each.data.ReadObject<AutoRestConfigurationImpl>();
+          return pBlock.then((block) => {
+            if (!block) {
+              block = {};
+            }
+            if (typeof block !== "object") {
+              contextConfig.Message({
+                Channel: Channel.Error,
+                Text: "Syntax error: Invalid YAML object.",
+                Source: [<SourceLocation>{ document: each.data.key, Position: { line: 1, column: 0 } }],
+              });
+              throw new OperationAbortedException();
+            }
+            block.__info = each.info;
 
-        // for ['input-file','try-require', 'require'] paths, we're going to create a node that contains 
-        // a map of the path to the folder from which the configuration file 
-        // that loaded it was specified.
+            // for ['input-file','try-require', 'require'] paths, we're going to create a node that contains
+            // a map of the path to the folder from which the configuration file
+            // that loaded it was specified.
 
-        // this will enable us to try to load relative paths relative to the folder from which it was read
-        // rather than have to rely on the pseudo $(this-folder) macro (which requires updating the file)
+            // this will enable us to try to load relative paths relative to the folder from which it was read
+            // rather than have to rely on the pseudo $(this-folder) macro (which requires updating the file)
 
-        block.__parents = {};
-        for (const kind of ['input-file', 'require', 'try-require', 'exclude-file']) {
-          if (block[kind]) {
-            for (const location of arrayOf<string>(block[kind])) {
-              if (!IsUri(location)) {
-                block.__parents[location] = parentFolder;
+            block.__parents = {};
+            for (const kind of ["input-file", "require", "try-require", "exclude-file"]) {
+              if (block[kind]) {
+                for (const location of arrayOf<string>(block[kind])) {
+                  if (!IsUri(location)) {
+                    block.__parents[location] = parentFolder;
+                  }
+                }
               }
             }
-          }
-        }
-        return block;
-      });
-
-    }));
+            return block;
+          });
+        }),
+    );
     return blocks;
   }
 
-  private static extensionManager: LazyPromise<ExtensionManager> = new LazyPromise<ExtensionManager>(() => ExtensionManager.Create(join(process.env['autorest.home'] || require('os').homedir(), '.autorest')));
+  private static extensionManager: LazyPromise<ExtensionManager> = new LazyPromise<ExtensionManager>(() =>
+    ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")),
+  );
 
   private async DesugarRawConfig(configs: any): Promise<any> {
     // shallow copy
     configs = { ...configs };
-    configs['use-extension'] = { ...configs['use-extension'] };
+    configs["use-extension"] = { ...configs["use-extension"] };
 
-    if (configs['licence-header']) {
-      configs['license-header'] = configs['licence-header'];
-      delete configs['licence-header'];
+    if (configs["licence-header"]) {
+      configs["license-header"] = configs["licence-header"];
+      delete configs["licence-header"];
     }
 
     // use => use-extension
     let use = configs.use;
-    if (typeof use === 'string') {
+    if (typeof use === "string") {
       use = [use];
     }
     if (Array.isArray(use)) {
       const extMgr = await Configuration.extensionManager;
       for (const useEntry of use) {
-        if (typeof useEntry === 'string') {
+        if (typeof useEntry === "string") {
           // potential formats:
           // <pkg>
           // <pkg>@<version>
@@ -894,27 +986,29 @@ export class Configuration {
           // <path>
           // <path/uri to .tgz package file>
           // if the entry starts with an @ it's definitely a package reference
-          if (useEntry.endsWith('.tgz') || await isDirectory(useEntry) || useEntry.startsWith('file:/')) {
-            const pkg = await extMgr.findPackage('plugin', useEntry);
-            configs['use-extension'][pkg.name] = useEntry;
+          if (useEntry.endsWith(".tgz") || (await isDirectory(useEntry)) || useEntry.startsWith("file:/")) {
+            const pkg = await extMgr.findPackage("plugin", useEntry);
+            configs["use-extension"][pkg.name] = useEntry;
           } else {
-            const [, identity, version] = /^https?:\/\//g.exec(useEntry) ? [undefined, useEntry, undefined] : <RegExpExecArray>/(^@.*?\/[^@]*|[^@]*)@?(.*)/.exec(useEntry);
+            const [, identity, version] = /^https?:\/\//g.exec(useEntry)
+              ? [undefined, useEntry, undefined]
+              : <RegExpExecArray>/(^@.*?\/[^@]*|[^@]*)@?(.*)/.exec(useEntry);
             if (identity) {
               // parsed correctly
               if (version) {
                 const pkg = await extMgr.findPackage(identity, version);
-                configs['use-extension'][pkg.name] = version;
+                configs["use-extension"][pkg.name] = version;
               } else {
                 // it's either a location or just the name
-                if (IsUri(identity) || await exists(identity)) {
+                if (IsUri(identity) || (await exists(identity))) {
                   // seems like it's a location to something. we don't know the actual name at this point.
-                  const pkg = await extMgr.findPackage('plugin', identity);
-                  configs['use-extension'][pkg.name] = identity;
+                  const pkg = await extMgr.findPackage("plugin", identity);
+                  configs["use-extension"][pkg.name] = identity;
                 } else {
                   // must be a package name without a version
                   // assume *?
-                  const pkg = await extMgr.findPackage(identity, '*');
-                  configs['use-extension'][pkg.name] = pkg.version;
+                  const pkg = await extMgr.findPackage(identity, "*");
+                  configs["use-extension"][pkg.name] = pkg.version;
                 }
               }
             }
@@ -927,7 +1021,7 @@ export class Configuration {
   }
 
   private async desugarRawConfigs(configs: Array<any>): Promise<Array<any>> {
-    return Promise.all(configs.map(c => this.DesugarRawConfig(c)));
+    return Promise.all(configs.map((c) => this.DesugarRawConfig(c)));
   }
 
   public static async shutdown() {
@@ -939,7 +1033,9 @@ export class Configuration {
       extMgr.dispose();
 
       // but if someone goes to use that, we're going to need a new instance (since the shared lock will be gone in the one we disposed.)
-      Configuration.extensionManager = new LazyPromise<ExtensionManager>(() => ExtensionManager.Create(join(process.env['autorest.home'] || require('os').homedir(), '.autorest')));
+      Configuration.extensionManager = new LazyPromise<ExtensionManager>(() =>
+        ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")),
+      );
 
       for (const each in loadedExtensions) {
         const ext = loadedExtensions[each];
@@ -954,18 +1050,31 @@ export class Configuration {
     }
   }
 
-  public async CreateView(messageEmitter: MessageEmitter, includeDefault: boolean, ...configs: Array<any>): Promise<ConfigurationView> {
-    const configFileUri = this.fileSystem && this.configFileOrFolderUri
-      ? await Configuration.DetectConfigurationFile(this.fileSystem, this.configFileOrFolderUri, messageEmitter)
-      : null;
-    const configFileFolderUri = configFileUri ? ResolveUri(configFileUri, './') : (this.configFileOrFolderUri || 'file:///');
+  public async CreateView(
+    messageEmitter: MessageEmitter,
+    includeDefault: boolean,
+    ...configs: Array<any>
+  ): Promise<ConfigurationView> {
+    const configFileUri =
+      this.fileSystem && this.configFileOrFolderUri
+        ? await Configuration.DetectConfigurationFile(this.fileSystem, this.configFileOrFolderUri, messageEmitter)
+        : null;
+    const configFileFolderUri = configFileUri
+      ? ResolveUri(configFileUri, "./")
+      : this.configFileOrFolderUri || "file:///";
 
     const configurationFiles: { [key: string]: any } = {};
     const configSegments: Array<any> = [];
     const secondPass: Array<any> = [];
 
     const createView = (segments: Array<any> = configSegments) => {
-      return new ConfigurationView(configurationFiles, this.fileSystem, messageEmitter, configFileFolderUri, ...segments).init();
+      return new ConfigurationView(
+        configurationFiles,
+        this.fileSystem,
+        messageEmitter,
+        configFileFolderUri,
+        ...segments,
+      ).init();
     };
     const addSegments = async (configs: Array<any>, keepInSecondPass = true): Promise<Array<any>> => {
       const segs = await this.desugarRawConfigs(configs);
@@ -984,22 +1093,26 @@ export class Configuration {
       // add loaded files to the input files.
       messageEmitter.Message.Dispatch({
         Channel: Channel.Verbose,
-        Text: `> Initial configuration file '${configFileUri}'`
+        Text: `> Initial configuration file '${configFileUri}'`,
       });
       configurationFiles[configFileUri] = await (await fsInputView.ReadStrict(configFileUri)).ReadData();
 
       const blocks = await this.ParseCodeBlocks(
         await fsInputView.ReadStrict(configFileUri),
         await createView(),
-        'config');
+        "config",
+      );
       await addSegments(blocks, false);
     }
 
     // 3. resolve 'require'd configuration
     const addedConfigs = new Set<string>();
     const includeFn = async (fsToUse: IFileSystem) => {
-
-      for await (let additionalConfig of ConfigurationView.getIncludedConfigurationFiles(createView, fsToUse, addedConfigs)) {
+      for await (let additionalConfig of ConfigurationView.getIncludedConfigurationFiles(
+        createView,
+        fsToUse,
+        addedConfigs,
+      )) {
         // acquire additional configs
         try {
           additionalConfig = simplifyUri(additionalConfig);
@@ -1011,7 +1124,7 @@ export class Configuration {
 
           messageEmitter.Message.Dispatch({
             Channel: Channel.Verbose,
-            Text: `> Including configuration file '${additionalConfig}'`
+            Text: `> Including configuration file '${additionalConfig}'`,
           });
           addedConfigs.add(additionalConfig);
           // merge config
@@ -1022,12 +1135,13 @@ export class Configuration {
           const blocks = await this.ParseCodeBlocks(
             await inputView.ReadStrict(additionalConfig),
             await createView(),
-            `require-config-${additionalConfig}`);
+            `require-config-${additionalConfig}`,
+          );
           await addSegments(blocks);
         } catch (e) {
           messageEmitter.Message.Dispatch({
             Channel: Channel.Fatal,
-            Text: `Failed to acquire 'require'd configuration '${additionalConfig}'`
+            Text: `Failed to acquire 'require'd configuration '${additionalConfig}'`,
           });
           throw e;
         }
@@ -1040,26 +1154,26 @@ export class Configuration {
     if (includeDefault) {
       const inputView = messageEmitter.DataStore.GetReadThroughScope(fsLocal);
       const blocks = await this.ParseCodeBlocks(
-        await inputView.ReadStrict(ResolveUri(CreateFolderUri(__dirname), '../../resources/default-configuration.md')),
+        await inputView.ReadStrict(ResolveUri(CreateFolderUri(__dirname), "../../resources/default-configuration.md")),
         await createView(),
-        'default-config');
+        "default-config",
+      );
       await addSegments(blocks);
     }
 
     await includeFn(fsLocal);
-    const messageFormat = (await createView()).GetEntry('message-format');
+    const messageFormat = (await createView()).GetEntry("message-format");
 
     // 5. resolve extensions
     const extMgr = await Configuration.extensionManager;
     const addedExtensions = new Set<string>();
 
-
     const resolveExtensions = async () => {
       const viewsToHandle: Array<ConfigurationView> = [await createView()];
       while (viewsToHandle.length > 0) {
         const tmpView = <ConfigurationView>viewsToHandle.pop();
-        const additionalExtensions = tmpView.UseExtensions.filter(ext => !addedExtensions.has(ext.fullyQualified));
-        await addSegments([{ 'used-extension': tmpView.UseExtensions.map(x => x.fullyQualified) }]);
+        const additionalExtensions = tmpView.UseExtensions.filter((ext) => !addedExtensions.has(ext.fullyQualified));
+        await addSegments([{ "used-extension": tmpView.UseExtensions.map((x) => x.fullyQualified) }]);
         if (additionalExtensions.length === 0) {
           continue;
         }
@@ -1076,26 +1190,25 @@ export class Configuration {
 
               // try resolving the package locally (useful for self-contained)
               try {
-                const fileProbe = '/package.json';
+                const fileProbe = "/package.json";
                 localPath = require.resolve(additionalExtension.name + fileProbe); // have to resolve specific file - resolving a package by name will fail if no 'main' is present
                 localPath = localPath.slice(0, localPath.length - fileProbe.length);
               } catch {
                 // no worries
               }
 
-
               // trim off the '@org' and 'autorest.' from the name.
-              const shortname = additionalExtension.name.split('/').last.replace(/^autorest\./ig, '');
+              const shortname = additionalExtension.name.split("/").last.replace(/^autorest\./gi, "");
               const view = [...(await createView()).GetNestedConfiguration(shortname)];
-              const enableDebugger = view.length > 0 ? <boolean>(view[0].GetEntry('debugger')) : false;
+              const enableDebugger = view.length > 0 ? <boolean>view[0].GetEntry("debugger") : false;
 
-              if (await exists(localPath) && !localPath.endsWith('.tgz')) {
+              if ((await exists(localPath)) && !localPath.endsWith(".tgz")) {
                 localPath = filePath(localPath);
-                if (messageFormat !== 'json' && messageFormat !== 'yaml') {
+                if (messageFormat !== "json" && messageFormat !== "yaml") {
                   // local package
                   messageEmitter.Message.Dispatch({
                     Channel: Channel.Information,
-                    Text: `> Loading local AutoRest extension '${additionalExtension.name}' (${localPath})`
+                    Text: `> Loading local AutoRest extension '${additionalExtension.name}' (${localPath})`,
                   });
                 }
 
@@ -1105,43 +1218,62 @@ export class Configuration {
                 // start extension
                 ext = loadedExtensions[additionalExtension.fullyQualified] = {
                   extension,
-                  autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await extension.start(enableDebugger)))
+                  autorestExtension: new LazyPromise(async () =>
+                    AutoRestExtension.FromChildProcess(additionalExtension.name, await extension.start(enableDebugger)),
+                  ),
                 };
               } else {
                 // remote package`
-                const installedExtension = await extMgr.getInstalledExtension(additionalExtension.name, additionalExtension.source);
+                const installedExtension = await extMgr.getInstalledExtension(
+                  additionalExtension.name,
+                  additionalExtension.source,
+                );
                 if (installedExtension) {
-                  if (messageFormat !== 'json' && messageFormat !== 'yaml') {
+                  if (messageFormat !== "json" && messageFormat !== "yaml") {
                     messageEmitter.Message.Dispatch({
                       Channel: Channel.Information,
-                      Text: `> Loading AutoRest extension '${additionalExtension.name}' (${additionalExtension.source}->${installedExtension.version})`
+                      Text: `> Loading AutoRest extension '${additionalExtension.name}' (${additionalExtension.source}->${installedExtension.version})`,
                     });
                   }
 
                   // start extension
                   ext = loadedExtensions[additionalExtension.fullyQualified] = {
                     extension: installedExtension,
-                    autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await installedExtension.start(enableDebugger)))
+                    autorestExtension: new LazyPromise(async () =>
+                      AutoRestExtension.FromChildProcess(
+                        additionalExtension.name,
+                        await installedExtension.start(enableDebugger),
+                      ),
+                    ),
                   };
                 } else {
                   // acquire extension
                   const pack = await extMgr.findPackage(additionalExtension.name, additionalExtension.source);
                   messageEmitter.Message.Dispatch({
                     Channel: Channel.Information,
-                    Text: `> Installing AutoRest extension '${additionalExtension.name}' (${additionalExtension.source})`
+                    Text: `> Installing AutoRest extension '${additionalExtension.name}' (${additionalExtension.source})`,
                   });
                   const cwd = process.cwd(); // TODO: fix extension?
-                  const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, (progressInit: any) => progressInit.Message.Subscribe((s: any, m: any) => tmpView.Message({ Text: m, Channel: Channel.Verbose })));
+                  const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, (progressInit: any) =>
+                    progressInit.Message.Subscribe((s: any, m: any) =>
+                      tmpView.Message({ Text: m, Channel: Channel.Verbose }),
+                    ),
+                  );
                   messageEmitter.Message.Dispatch({
                     Channel: Channel.Information,
-                    Text: `> Installed AutoRest extension '${additionalExtension.name}' (${additionalExtension.source}->${extension.version})`
+                    Text: `> Installed AutoRest extension '${additionalExtension.name}' (${additionalExtension.source}->${extension.version})`,
                   });
                   process.chdir(cwd);
                   // start extension
 
                   ext = loadedExtensions[additionalExtension.fullyQualified] = {
                     extension,
-                    autorestExtension: new LazyPromise(async () => AutoRestExtension.FromChildProcess(additionalExtension.name, await extension.start(enableDebugger)))
+                    autorestExtension: new LazyPromise(async () =>
+                      AutoRestExtension.FromChildProcess(
+                        additionalExtension.name,
+                        await extension.start(enableDebugger),
+                      ),
+                    ),
                   };
                 }
               }
@@ -1154,20 +1286,27 @@ export class Configuration {
             const cp = simplifyUri(CreateFileUri(await ext.extension.configurationPath));
             messageEmitter.Message.Dispatch({
               Channel: Channel.Verbose,
-              Text: `> Including extension configuration file '${cp}'`
+              Text: `> Including extension configuration file '${cp}'`,
             });
 
             const blocks = await this.ParseCodeBlocks(
               await inputView.ReadStrict(cp),
               await createView(),
-              `extension-config-${additionalExtension.fullyQualified}`);
-            // even though we load extensions after the default configuration, I want them to be able to 
+              `extension-config-${additionalExtension.fullyQualified}`,
+            );
+            // even though we load extensions after the default configuration, I want them to be able to
             // trigger changes in the default configuration loading (ie, an extension can set a flag to use a different pipeline.)
-            viewsToHandle.push(await createView(await addSegments(blocks.map(each => each['pipeline-model'] ? ({ ...each, 'load-priority': 1000 }) : each))));
+            viewsToHandle.push(
+              await createView(
+                await addSegments(
+                  blocks.map((each) => (each["pipeline-model"] ? { ...each, "load-priority": 1000 } : each)),
+                ),
+              ),
+            );
           } catch (e) {
             messageEmitter.Message.Dispatch({
               Channel: Channel.Fatal,
-              Text: `Failed to install or start extension '${additionalExtension.name}' (${additionalExtension.source})`
+              Text: `Failed to install or start extension '${additionalExtension.name}' (${additionalExtension.source})`,
             });
             throw e;
           }
@@ -1197,24 +1336,40 @@ export class Configuration {
       const blocks = await this.ParseCodeBlocks(
         await fsInputView.ReadStrict(configFileUri),
         await createView(),
-        'config');
+        "config",
+      );
       await addSegments(blocks, false);
       await includeFn(this.fileSystem);
       await resolveExtensions();
       return (await createView([...configs, ...blocks, ...secondPass])).Indexer;
     }
     await resolveExtensions();
-    // return the final view 
+    // return the final view
     return (await createView()).Indexer;
   }
-  public static async DetectConfigurationFile(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders = false): Promise<string | null> {
+  public static async DetectConfigurationFile(
+    fileSystem: IFileSystem,
+    configFileOrFolderUri: string | null,
+    messageEmitter?: MessageEmitter,
+    walkUpFolders = false,
+  ): Promise<string | null> {
     const files = await this.DetectConfigurationFiles(fileSystem, configFileOrFolderUri, messageEmitter, walkUpFolders);
 
-    return From<string>(files).FirstOrDefault(each => each.toLowerCase().endsWith('/' + Constants.DefaultConfiguration)) ||
-      From<string>(files).OrderBy(each => each.length).FirstOrDefault() || null;
+    return (
+      From<string>(files).FirstOrDefault((each) => each.toLowerCase().endsWith("/" + Constants.DefaultConfiguration)) ||
+      From<string>(files)
+        .OrderBy((each) => each.length)
+        .FirstOrDefault() ||
+      null
+    );
   }
 
-  public static async DetectConfigurationFiles(fileSystem: IFileSystem, configFileOrFolderUri: string | null, messageEmitter?: MessageEmitter, walkUpFolders = false): Promise<Array<string>> {
+  public static async DetectConfigurationFiles(
+    fileSystem: IFileSystem,
+    configFileOrFolderUri: string | null,
+    messageEmitter?: MessageEmitter,
+    walkUpFolders = false,
+  ): Promise<Array<string>> {
     const originalConfigFileOrFolderUri = configFileOrFolderUri;
 
     // null means null!
@@ -1244,13 +1399,15 @@ export class Configuration {
         // nope.
       }
       // this *was* an actual file passed in, not a folder. don't make this harder than it has to be.
-      throw new Error(`Specified file '${originalConfigFileOrFolderUri}' is not a valid configuration file (missing magic string, see https://github.com/Azure/autorest/blob/master/docs/user/literate-file-formats/configuration.md#the-file-format).`);
+      throw new Error(
+        `Specified file '${originalConfigFileOrFolderUri}' is not a valid configuration file (missing magic string, see https://github.com/Azure/autorest/blob/master/docs/user/literate-file-formats/configuration.md#the-file-format).`,
+      );
     }
 
     // scan the filesystem items for configurations.
     const results = new Array<string>();
     for (const name of await fileSystem.EnumerateFileUris(EnsureIsFolderUri(configFileOrFolderUri))) {
-      if (name.endsWith('.md')) {
+      if (name.endsWith(".md")) {
         const content = await fileSystem.ReadFile(name);
         if (content.indexOf(Constants.MagicString) > -1) {
           results.push(name);
@@ -1260,15 +1417,22 @@ export class Configuration {
 
     if (walkUpFolders) {
       // walk up
-      const newUriToConfigFileOrWorkingFolder = ResolveUri(configFileOrFolderUri, '..');
+      const newUriToConfigFileOrWorkingFolder = ResolveUri(configFileOrFolderUri, "..");
       if (newUriToConfigFileOrWorkingFolder !== configFileOrFolderUri) {
-        results.push(... await this.DetectConfigurationFiles(fileSystem, newUriToConfigFileOrWorkingFolder, messageEmitter, walkUpFolders));
+        results.push(
+          ...(await this.DetectConfigurationFiles(
+            fileSystem,
+            newUriToConfigFileOrWorkingFolder,
+            messageEmitter,
+            walkUpFolders,
+          )),
+        );
       }
     } else {
       if (messageEmitter && results.length === 0) {
         messageEmitter.Message.Dispatch({
           Channel: Channel.Verbose,
-          Text: `No configuration found at '${originalConfigFileOrFolderUri}'.`
+          Text: `No configuration found at '${originalConfigFileOrFolderUri}'.`,
         });
       }
     }
