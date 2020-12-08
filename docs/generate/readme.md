@@ -342,7 +342,7 @@ First, when generating managment
 
 ## Generating Multi API Code
 
-Only Python supports generating multiapi code, see [here](./multiapi) for how to generate.
+Only Python supports generating multiapi code, see [the Python docs](https://github.com/Azure/autorest.python/blob/autorestv3/docs/generate/readme.md) for how to generate.
 
 ## Index of Flags
 
