@@ -27,6 +27,7 @@ rules:
   "@typescript-eslint/no-unused-vars": "off"
   "@typescript-eslint/no-parameter-properties": "off"
   "@typescript-eslint/no-angle-bracket-type-assertion": "off"
+  "@typescript-eslint/no-use-before-define": "off"
   "require-atomic-updates": "off"
   "@typescript-eslint/consistent-type-assertions":
     - warn

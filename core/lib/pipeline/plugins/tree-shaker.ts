@@ -587,7 +587,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
       }
     }
 
-    const id = nameHint || `${hashedJsonPointer(pointer).map(each => `${each}`.toLowerCase().replace(/-+/g, '_').replace(/\W+/g, '-').split('-').filter(each => each).join('-')).filter(each => each).join('·')}`.replace(/\·+/g, '·');
+    const id = nameHint || generateSchemaIdFromJsonPath(pointer);
 
     // set the current location's object to be a $ref
     targetParent[key] = {
@@ -597,19 +597,24 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
         'x-ms-client-flatten': value['x-ms-client-flatten'], // we violate spec to allow flexibility in terms of flattening
         'x-ms-client-name': value['x-ms-client-name'], // we violate spec to allow flexibility in terms of naming too. *sigh*
         readOnly: value.readOnly
-      }, pointer
+      }, 
+      pointer,
     };
 
     // Q: I removed the 'targetCollection[key] ||' from this before. Why did I do that?
     // const tc = targetCollection[key] || this.newObject(targetCollection, id, pointer);
-    const tc = targetCollection[id] || this.newObject(targetCollection, id, pointer);
+    const newRef = targetCollection[id] ?? this.newObject(targetCollection, id, pointer);
 
     // copy the parts of the parameter across
-    visitor.bind(this)(tc, children);
+    visitor.bind(this)(newRef, children);
+
+    // x-ms-client-name correspond to the property, parameter, etc. name, not the model.
+    delete newRef["x-ms-client-name"];
+
     if (isAnonymous) {
-      tc['x-internal-autorest-anonymous-schema'] = { value: { anonymous: true }, pointer: '' };
+      newRef['x-internal-autorest-anonymous-schema'] = { value: { anonymous: true }, pointer: '' };
     }
-    return tc;
+    return newRef;
   }
 }
 
@@ -627,4 +632,18 @@ async function shakeTree(config: ConfigurationView, input: DataSource, sink: Dat
 /* @internal */
 export function createTreeShakerPlugin(): PipelinePlugin {
   return shakeTree;
+}
+
+
+export function generateSchemaIdFromJsonPath(pointer: string): string {
+  const value = hashedJsonPointer(pointer).map(x => `${x}`
+    .toLowerCase()
+    .replace(/-+/g, '_')
+    .replace(/\W+/g, '-')
+    .split('-')
+    .filter(each => each)
+    .join('-'))
+    .filter(each => each)
+    .join('·');
+  return `${value}`.replace(/\·+/g, '·');
 }
