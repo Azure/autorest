@@ -608,8 +608,10 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     // copy the parts of the parameter across
     visitor.bind(this)(newRef, children);
 
-    // x-ms-client-name correspond to the property, parameter, etc. name, not the model.
-    delete newRef["x-ms-client-name"];
+    if (baseReferencePath === '/components/schemas') {
+      // x-ms-client-name correspond to the property, parameter, etc. name, not the model.
+      delete newRef["x-ms-client-name"];
+    }
 
     if (isAnonymous) {
       newRef['x-internal-autorest-anonymous-schema'] = { value: { anonymous: true }, pointer: '' };
