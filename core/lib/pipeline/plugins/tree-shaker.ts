@@ -569,25 +569,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
     // not a reference, move the item
 
-    // generate a unique id for the shaken item.
-    if (nameHint) {
-      // fix namehint to not have unexpected characters.
-      nameHint = nameHint.replace(/[\/\\]+/g, '-');
-      if (targetCollection[nameHint]) {
-        nameHint = undefined;
-      }
-    } else {
-      if (baseReferencePath === '/components/schemas') {
-        let nh = value['x-ms-client-name'] || value.title || nameHint;
-        let i = 0;
-        while (nh && <any>targetCollection[nh]) {
-          nh = `${value['x-ms-client-name'] || value.title || nameHint}${i++}`;
-        }
-        nameHint = nh;
-      }
-    }
-
-    const id = nameHint || generateSchemaIdFromJsonPath(pointer);
+    const id = getNameHint(baseReferencePath, value, targetCollection, nameHint) ?? generateSchemaIdFromJsonPath(pointer);
 
     // set the current location's object to be a $ref
     targetParent[key] = {
@@ -637,7 +619,7 @@ export function createTreeShakerPlugin(): PipelinePlugin {
 }
 
 
-export function generateSchemaIdFromJsonPath(pointer: string): string {
+function generateSchemaIdFromJsonPath(pointer: string): string {
   const value = hashedJsonPointer(pointer).map(x => `${x}`
     .toLowerCase()
     .replace(/-+/g, '_')
@@ -648,4 +630,36 @@ export function generateSchemaIdFromJsonPath(pointer: string): string {
     .filter(each => each)
     .join('·');
   return `${value}`.replace(/\·+/g, '·');
+}
+
+function getNameHint(baseReferencePath: string, value: any, targetCollection: AnyObject, nameHint?: string): string | undefined {
+  if (nameHint) {
+    // fix namehint to not have unexpected characters.
+    const sanitizedName = nameHint.replace(/[\/\\]+/g, '-');
+    if (targetCollection[sanitizedName]) {
+      return undefined;
+    }
+    return sanitizedName;
+  } else {
+    if (baseReferencePath === '/components/schemas') {
+      const initialName = value['x-ms-client-name'] ?? value.title;
+      return findFirstAvailableKey(targetCollection, initialName);
+    }
+    return undefined;
+  }
+}
+
+/**
+ * Will return the first key that is not yet present in the `targetCollection` starting with the provided key.
+ * It will first check if the provided key is availalble otherwise it will try {key}1, {key}2, etc.
+ * @param targetCollection Object where the key will be inserted.
+ * @param initialKey Initial value to check.
+ */
+function findFirstAvailableKey(targetCollection: AnyObject, initialKey: string): string {
+  let current = initialKey;
+  let i = 0;
+  while (current && targetCollection[current]) {
+    current = `${initialKey}${i++}`;
+  }
+  return current;
 }
