@@ -569,25 +569,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
     // not a reference, move the item
 
-    // generate a unique id for the shaken item.
-    if (nameHint) {
-      // fix namehint to not have unexpected characters.
-      nameHint = nameHint.replace(/[\/\\]+/g, '-');
-      if (targetCollection[nameHint]) {
-        nameHint = undefined;
-      }
-    } else {
-      if (baseReferencePath === '/components/schemas') {
-        let nh = value['x-ms-client-name'] || value.title || nameHint;
-        let i = 0;
-        while (nh && <any>targetCollection[nh]) {
-          nh = `${value['x-ms-client-name'] || value.title || nameHint}${i++}`;
-        }
-        nameHint = nh;
-      }
-    }
-
-    const id = nameHint || `${hashedJsonPointer(pointer).map(each => `${each}`.toLowerCase().replace(/-+/g, '_').replace(/\W+/g, '-').split('-').filter(each => each).join('-')).filter(each => each).join('·')}`.replace(/\·+/g, '·');
+    const id = getNameHint(baseReferencePath, value, targetCollection, nameHint) ?? generateSchemaIdFromJsonPath(pointer);
 
     // set the current location's object to be a $ref
     targetParent[key] = {
@@ -597,19 +579,26 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
         'x-ms-client-flatten': value['x-ms-client-flatten'], // we violate spec to allow flexibility in terms of flattening
         'x-ms-client-name': value['x-ms-client-name'], // we violate spec to allow flexibility in terms of naming too. *sigh*
         readOnly: value.readOnly
-      }, pointer
+      }, 
+      pointer,
     };
 
     // Q: I removed the 'targetCollection[key] ||' from this before. Why did I do that?
     // const tc = targetCollection[key] || this.newObject(targetCollection, id, pointer);
-    const tc = targetCollection[id] || this.newObject(targetCollection, id, pointer);
+    const newRef = targetCollection[id] ?? this.newObject(targetCollection, id, pointer);
 
     // copy the parts of the parameter across
-    visitor.bind(this)(tc, children);
-    if (isAnonymous) {
-      tc['x-internal-autorest-anonymous-schema'] = { value: { anonymous: true }, pointer: '' };
+    visitor.bind(this)(newRef, children);
+
+    if (baseReferencePath === '/components/schemas') {
+      // x-ms-client-name correspond to the property, parameter, etc. name, not the model.
+      delete newRef["x-ms-client-name"];
     }
-    return tc;
+
+    if (isAnonymous) {
+      newRef['x-internal-autorest-anonymous-schema'] = { value: { anonymous: true }, pointer: '' };
+    }
+    return newRef;
   }
 }
 
@@ -627,4 +616,50 @@ async function shakeTree(config: ConfigurationView, input: DataSource, sink: Dat
 /* @internal */
 export function createTreeShakerPlugin(): PipelinePlugin {
   return shakeTree;
+}
+
+
+function generateSchemaIdFromJsonPath(pointer: string): string {
+  const value = hashedJsonPointer(pointer).map(x => `${x}`
+    .toLowerCase()
+    .replace(/-+/g, '_')
+    .replace(/\W+/g, '-')
+    .split('-')
+    .filter(each => each)
+    .join('-'))
+    .filter(each => each)
+    .join('·');
+  return `${value}`.replace(/\·+/g, '·');
+}
+
+function getNameHint(baseReferencePath: string, value: any, targetCollection: AnyObject, nameHint?: string): string | undefined {
+  if (nameHint) {
+    // fix namehint to not have unexpected characters.
+    const sanitizedName = nameHint.replace(/[\/\\]+/g, '-');
+    if (targetCollection[sanitizedName]) {
+      return undefined;
+    }
+    return sanitizedName;
+  } else {
+    if (baseReferencePath === '/components/schemas') {
+      const initialName = value['x-ms-client-name'] ?? value.title;
+      return findFirstAvailableKey(targetCollection, initialName);
+    }
+    return undefined;
+  }
+}
+
+/**
+ * Will return the first key that is not yet present in the `targetCollection` starting with the provided key.
+ * It will first check if the provided key is availalble otherwise it will try {key}1, {key}2, etc.
+ * @param targetCollection Object where the key will be inserted.
+ * @param initialKey Initial value to check.
+ */
+function findFirstAvailableKey(targetCollection: AnyObject, initialKey: string): string {
+  let current = initialKey;
+  let i = 0;
+  while (current && targetCollection[current]) {
+    current = `${initialKey}${i++}`;
+  }
+  return current;
 }
