@@ -380,11 +380,10 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     args.configFileOrFolder = "invalid.filename.md";
   }
 
+  const githubToken = MergeConfigurations(...args.switches)["github-auth-token"] ?? process.env.GITHUB_AUTH_TOKEN;
   // get an instance of AutoRest and add the command line switches to the configuration.
   const api = new AutoRest(
-    new EnhancedFileSystem(
-      (<any>MergeConfigurations(...args.switches))["github-auth-token"] || process.env.GITHUB_AUTH_TOKEN,
-    ),
+    new EnhancedFileSystem(githubToken),
     ResolveUri(currentDirUri, args.configFileOrFolder || "."),
   );
   api.AddConfiguration(args.switches);

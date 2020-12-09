@@ -109,6 +109,8 @@ export interface AutoRestConfigurationImpl {
 
   "resolved-directive"?: any;
   "debugger"?: any;
+
+  "github-auth-token"?: string;
 }
 
 export function MergeConfigurations(...configs: Array<AutoRestConfigurationImpl>): AutoRestConfigurationImpl {
