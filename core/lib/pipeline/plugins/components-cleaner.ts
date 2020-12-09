@@ -1,13 +1,23 @@
 /*--------------------------------------------------------------------------------------------
-* Copyright(c) Microsoft Corporation.All rights reserved.
-* Licensed under the MIT License.See License.txt in the project root for license information.
-* --------------------------------------------------------------------------------------------*/
+ * Copyright(c) Microsoft Corporation.All rights reserved.
+ * Licensed under the MIT License.See License.txt in the project root for license information.
+ * --------------------------------------------------------------------------------------------*/
 
-import { AnyObject, DataHandle, DataSink, DataSource, Node, ProxyObject, QuickDataSource, Transformer, visit } from '@azure-tools/datastore';
-import { Dictionary } from '@azure-tools/linq';
-import * as oai from '@azure-tools/openapi';
-import { ConfigurationView } from '../../configuration';
-import { PipelinePlugin } from '../common';
+import {
+  AnyObject,
+  DataHandle,
+  DataSink,
+  DataSource,
+  Node,
+  ProxyObject,
+  QuickDataSource,
+  Transformer,
+  visit,
+} from "@azure-tools/datastore";
+import { Dictionary } from "@azure-tools/linq";
+import * as oai from "@azure-tools/openapi";
+import { ConfigurationView } from "../../configuration";
+import { PipelinePlugin } from "../common";
 
 /**
  * components-to-keep are the ones that:
@@ -18,7 +28,16 @@ import { PipelinePlugin } from '../common';
  *
  */
 
-type componentType = 'schemas' | 'responses' | 'parameters' | 'examples' | 'requestBodies' | 'headers' | 'securitySchemes' | 'links' | 'callbacks';
+type componentType =
+  | "schemas"
+  | "responses"
+  | "parameters"
+  | "examples"
+  | "requestBodies"
+  | "headers"
+  | "securitySchemes"
+  | "links"
+  | "callbacks";
 
 export class ComponentsCleaner extends Transformer<any, oai.Model> {
   private visitedComponents = {
@@ -30,7 +49,7 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
     headers: new Set<string>(),
     securitySchemes: new Set<string>(),
     links: new Set<string>(),
-    callbacks: new Set<string>()
+    callbacks: new Set<string>(),
   };
 
   private componentsToKeep = {
@@ -42,7 +61,7 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
     headers: new Set<string>(),
     securitySchemes: new Set<string>(),
     links: new Set<string>(),
-    callbacks: new Set<string>()
+    callbacks: new Set<string>(),
   };
 
   private components: AnyObject = {};
@@ -64,7 +83,7 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
   findComponentsToKeepInComponents() {
     for (const { children, key: containerType } of visit(this.components)) {
       for (const { value, key: id } of children) {
-        if (!value['x-ms-metadata']['x-ms-secondary-file']) {
+        if (!value["x-ms-metadata"]["x-ms-secondary-file"]) {
           this.visitedComponents[containerType].add(id);
           this.componentsToKeep[containerType].add(id);
           this.crawlObject(value);
@@ -81,18 +100,21 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
       for (const { children: containerChildren, key: containerType } of visit(this.components)) {
         for (const { value: component, key: currentComponentUid, children: componentChildren } of containerChildren) {
           // only apply polymorphic pull-thru on objects with a polymorphic discriminator
-          if (component?.['x-ms-discriminator-value']) {
+          if (component?.["x-ms-discriminator-value"]) {
             for (const { value: componentField, key: componentFieldName } of componentChildren) {
               switch (componentFieldName) {
-                case 'allOf':
-                case 'oneOf':
-                case 'anyOf':
+                case "allOf":
+                case "oneOf":
+                case "anyOf":
                   for (const { value: obj } of visit(componentField)) {
                     if (obj.$ref) {
-                      const refParts = obj.$ref.split('/');
+                      const refParts = obj.$ref.split("/");
                       const componentRefUid = refParts.pop();
                       const refType = refParts.pop();
-                      if (this.componentsToKeep[refType].has(componentRefUid) && !this.componentsToKeep[containerType].has(currentComponentUid)) {
+                      if (
+                        this.componentsToKeep[refType].has(componentRefUid) &&
+                        !this.componentsToKeep[containerType].has(currentComponentUid)
+                      ) {
                         this.componentsToKeep[containerType].add(currentComponentUid);
                         this.crawlObject(component);
                         entryAdded = true;
@@ -100,12 +122,15 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
                     }
                   }
                   break;
-                case 'not':
+                case "not":
                   if (componentField.$ref) {
-                    const refParts = componentField.$ref.split('/');
+                    const refParts = componentField.$ref.split("/");
                     const componentRefUid = refParts.pop();
                     const refType = refParts.pop();
-                    if (this.componentsToKeep[refType].has(componentRefUid) && !this.componentsToKeep[containerType].has(currentComponentUid)) {
+                    if (
+                      this.componentsToKeep[refType].has(componentRefUid) &&
+                      !this.componentsToKeep[containerType].has(currentComponentUid)
+                    ) {
                       this.componentsToKeep[containerType].add(currentComponentUid);
                       this.crawlObject(component);
                       entryAdded = true;
@@ -114,7 +139,6 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
                   break;
                 default:
                   break;
-
               }
             }
           }
@@ -125,8 +149,8 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
 
   private crawlObject(obj: any): void {
     for (const { key, value } of visit(obj)) {
-      if (key === '$ref') {
-        const refParts = value.split('/');
+      if (key === "$ref") {
+        const refParts = value.split("/");
         const componentUid = refParts.pop();
         const t: componentType = refParts.pop();
         if (!this.visitedComponents[t].has(componentUid)) {
@@ -134,7 +158,7 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
           this.componentsToKeep[t].add(componentUid);
           this.crawlObject(this.components[t][componentUid]);
         }
-      } else if (value && typeof (value) === 'object') {
+      } else if (value && typeof value === "object") {
         this.crawlObject(value);
       }
     }
@@ -143,10 +167,12 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
   public async process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
-        case 'components': {
-          const components = <oai.Components>targetParent.components || this.newObject(targetParent, 'components', pointer);
-          this.visitComponents(components, children);
-        }
+        case "components":
+          {
+            const components =
+              <oai.Components>targetParent.components || this.newObject(targetParent, "components", pointer);
+            this.visitComponents(components, children);
+          }
           break;
 
         default:
@@ -157,13 +183,17 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
   }
 
   visitComponents(components: ProxyObject<Dictionary<oai.Components>>, nodes: Iterable<Node>) {
-    for (const { key: containerType, pointer: containerPointer, children: containerChildren, value: containerValue } of nodes) {
-
+    for (const {
+      key: containerType,
+      pointer: containerPointer,
+      children: containerChildren,
+      value: containerValue,
+    } of nodes) {
       switch (containerType) {
-        case 'responses':
-        case 'schemas':
-        case 'parameters':
-        case 'requestBodies':
+        case "responses":
+        case "schemas":
+        case "parameters":
+        case "requestBodies":
           this.newObject(components, containerType, containerPointer);
           for (const { key: componentId, pointer: componentPointer, value: componentValue } of containerChildren) {
             if (this.componentsToKeep[containerType].has(componentId)) {
@@ -183,12 +213,20 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
 }
 
 async function clean(config: ConfigurationView, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
+  const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
     const processor = new ComponentsCleaner(each);
     const output = await processor.getOutput();
-    result.push(await sink.WriteObject('oai3.cleaned.json', output, each.identity, 'openapi-document-cleaned', await processor.getSourceMappings()));
+    result.push(
+      await sink.WriteObject(
+        "oai3.cleaned.json",
+        output,
+        each.identity,
+        "openapi-document-cleaned",
+        await processor.getSourceMappings(),
+      ),
+    );
   }
 
   return new QuickDataSource(result, input.pipeState);

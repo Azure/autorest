@@ -3,27 +3,27 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { JsonPath, matches } from '@azure-tools/datastore';
-import { From } from 'linq-es2015';
-import { ConfigurationView } from '../autorest-core';
-import { ResolvedDirective } from '../configuration';
-import { Message } from '../message';
+import { JsonPath, matches } from "@azure-tools/datastore";
+import { From } from "linq-es2015";
+import { ConfigurationView } from "../autorest-core";
+import { ResolvedDirective } from "../configuration";
+import { Message } from "../message";
 
 export class Suppressor {
   private suppressions: Array<ResolvedDirective>;
 
   public constructor(private config: ConfigurationView) {
-    this.suppressions = config.resolveDirectives(x => x.suppress.length > 0);
+    this.suppressions = config.resolveDirectives((x) => x.suppress.length > 0);
   }
 
   private matchesSourceFilter(document: string, path: JsonPath | undefined, supression: ResolvedDirective): boolean {
     // from
     const from = From(supression.from);
-    const matchesFrom = !from.Any() || from.Any(d => document.toLowerCase().endsWith(d.toLowerCase()));
+    const matchesFrom = !from.Any() || from.Any((d) => document.toLowerCase().endsWith(d.toLowerCase()));
 
     // where
     const where = From(supression.where);
-    const matchesWhere = !where.Any() || (path && where.Any(w => matches(w, path))) || false;
+    const matchesWhere = !where.Any() || (path && where.Any((w) => matches(w, path))) || false;
 
     return matchesFrom && matchesWhere;
   }
@@ -37,9 +37,9 @@ export class Suppressor {
     // filter
     for (const sup of this.suppressions) {
       // matches key
-      if (From(m.Key || []).Any(k => From(sup.suppress).Any(s => k.toLowerCase() === s.toLowerCase()))) {
+      if (From(m.Key || []).Any((k) => From(sup.suppress).Any((s) => k.toLowerCase() === s.toLowerCase()))) {
         // filter applicable sources
-        m.Source = m.Source.filter(s => !this.matchesSourceFilter(s.document, (<any>s.Position).path, sup));
+        m.Source = m.Source.filter((s) => !this.matchesSourceFilter(s.document, (<any>s.Position).path, sup));
       }
     }
 

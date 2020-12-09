@@ -1,5 +1,5 @@
-import { convertOAI2toOAI3 } from '../../openapi/conversion';
-import { createPerFilePlugin, PipelinePlugin } from '../common';
+import { convertOAI2toOAI3 } from "../../openapi/conversion";
+import { createPerFilePlugin, PipelinePlugin } from "../common";
 
 /* @internal */
 export function createSwaggerToOpenApi3Plugin(): PipelinePlugin {

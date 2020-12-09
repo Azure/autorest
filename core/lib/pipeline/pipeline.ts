@@ -5,46 +5,60 @@
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
+import {
+  DataHandle,
+  DataSource,
+  IFileSystem,
+  JsonPath,
+  QuickDataSource,
+  createSandbox,
+  stringify,
+  PipeState,
+  mergePipeStates,
+} from "@azure-tools/datastore";
+import { ConfigurationView, getExtension } from "../configuration";
+import { Channel } from "../message";
+import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
+import { PipelinePlugin } from "./common";
+import { createComponentModifierPlugin } from "./component-modifier";
+import { createCSharpReflectApiVersionPlugin } from "./metadata-generation";
+import { AutoRestExtension } from "./plugin-endpoint";
+import { createCommonmarkProcessorPlugin } from "./plugins/commonmark";
+import { createAllOfCleaner } from "./plugins/allof-cleaner";
+import { createCommandPlugin } from "./plugins/command";
 
-import { DataHandle, DataSource, IFileSystem, JsonPath, QuickDataSource, createSandbox, stringify, PipeState, mergePipeStates } from '@azure-tools/datastore';
-import { ConfigurationView, getExtension } from '../configuration';
-import { Channel } from '../message';
-import { OutstandingTaskAwaiter } from '../outstanding-task-awaiter';
-import { PipelinePlugin } from './common';
-import { createComponentModifierPlugin } from './component-modifier';
-import { createCSharpReflectApiVersionPlugin } from './metadata-generation';
-import { AutoRestExtension } from './plugin-endpoint';
-import { createCommonmarkProcessorPlugin } from './plugins/commonmark';
-import { createAllOfCleaner } from './plugins/allof-cleaner';
-import { createCommandPlugin } from './plugins/command';
-
-import { createComponentKeyRenamerPlugin } from './plugins/component-key-renamer';
-import { createComponentsCleanerPlugin } from './plugins/components-cleaner';
-import { createSwaggerToOpenApi3Plugin } from './plugins/conversion';
-import { createDeduplicatorPlugin } from './plugins/deduplicator';
-import { createArtifactEmitterPlugin } from './plugins/emitter';
-import { createEnumDeduplicator } from './plugins/enum-deduplication';
-import { createExternalPlugin } from './plugins/external';
-import { createHelpPlugin } from './plugins/help';
-import { createIdentityPlugin, createIdentityResetPlugin, createNullPlugin } from './plugins/identity';
-import { createOpenApiLoaderPlugin, createSwaggerLoaderPlugin } from './plugins/loaders';
-import { createMultiApiMergerPlugin } from './plugins/merger';
-import { createNewComposerPlugin } from './plugins/new-composer';
-import { createProfileFilterPlugin } from './plugins/profile-filter';
-import { createQuickCheckPlugin } from './plugins/quick-check';
-import { subsetSchemaDeduplicatorPlugin } from './plugins/subset-schemas-deduplicator';
-import { createImmediateTransformerPlugin, createTextTransformerPlugin, createTransformerPlugin, createGraphTransformerPlugin } from './plugins/transformer';
-import { createTreeShakerPlugin } from './plugins/tree-shaker';
-import { createApiVersionParameterHandlerPlugin } from './plugins/version-param-handler';
-import { createJsonToYamlPlugin, createYamlToJsonPlugin } from './plugins/yaml-and-json';
-import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from './schema-validation';
-import { createHash } from 'crypto';
-import { isCached, readCache, writeCache } from './pipeline-cache';
-import { values } from '@azure-tools/linq';
+import { createComponentKeyRenamerPlugin } from "./plugins/component-key-renamer";
+import { createComponentsCleanerPlugin } from "./plugins/components-cleaner";
+import { createSwaggerToOpenApi3Plugin } from "./plugins/conversion";
+import { createDeduplicatorPlugin } from "./plugins/deduplicator";
+import { createArtifactEmitterPlugin } from "./plugins/emitter";
+import { createEnumDeduplicator } from "./plugins/enum-deduplication";
+import { createExternalPlugin } from "./plugins/external";
+import { createHelpPlugin } from "./plugins/help";
+import { createIdentityPlugin, createIdentityResetPlugin, createNullPlugin } from "./plugins/identity";
+import { createOpenApiLoaderPlugin, createSwaggerLoaderPlugin } from "./plugins/loaders";
+import { createMultiApiMergerPlugin } from "./plugins/merger";
+import { createNewComposerPlugin } from "./plugins/new-composer";
+import { createProfileFilterPlugin } from "./plugins/profile-filter";
+import { createQuickCheckPlugin } from "./plugins/quick-check";
+import { subsetSchemaDeduplicatorPlugin } from "./plugins/subset-schemas-deduplicator";
+import {
+  createImmediateTransformerPlugin,
+  createTextTransformerPlugin,
+  createTransformerPlugin,
+  createGraphTransformerPlugin,
+} from "./plugins/transformer";
+import { createTreeShakerPlugin } from "./plugins/tree-shaker";
+import { createApiVersionParameterHandlerPlugin } from "./plugins/version-param-handler";
+import { createJsonToYamlPlugin, createYamlToJsonPlugin } from "./plugins/yaml-and-json";
+import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from "./schema-validation";
+import { createHash } from "crypto";
+import { isCached, readCache, writeCache } from "./pipeline-cache";
+import { values } from "@azure-tools/linq";
 
 const safeEval = createSandbox();
 
-const md5 = (content: any) => content ? createHash('md5').update(JSON.stringify(content)).digest('hex') : undefined;
+const md5 = (content: any) => (content ? createHash("md5").update(JSON.stringify(content)).digest("hex") : undefined);
 
 interface PipelineNode {
   outputArtifact?: string;
@@ -56,8 +70,10 @@ interface PipelineNode {
   dependencies: Array<PipelineNode>;
 }
 
-function buildPipeline(config: ConfigurationView): { pipeline: { [name: string]: PipelineNode }; configs: { [jsonPath: string]: ConfigurationView } } {
-  const cfgPipeline = config.GetEntry(<any>'pipeline');
+function buildPipeline(
+  config: ConfigurationView,
+): { pipeline: { [name: string]: PipelineNode }; configs: { [jsonPath: string]: ConfigurationView } } {
+  const cfgPipeline = config.GetEntry(<any>"pipeline");
   const pipeline: { [name: string]: PipelineNode } = {};
   const configCache: { [jsonPath: string]: ConfigurationView } = {};
 
@@ -70,9 +86,9 @@ function buildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
   //    --> commonmarker                 if such a stage exists
   //    --> THROWS                       otherwise
   const resolvePipelineStageName = (currentStageName: string, relativeName: string) => {
-    while (currentStageName !== '') {
+    while (currentStageName !== "") {
       currentStageName = currentStageName.substring(0, currentStageName.length - 1);
-      currentStageName = currentStageName.substring(0, currentStageName.lastIndexOf('/') + 1);
+      currentStageName = currentStageName.substring(0, currentStageName.lastIndexOf("/") + 1);
 
       if (cfgPipeline[currentStageName + relativeName]) {
         return currentStageName + relativeName;
@@ -84,7 +100,7 @@ function buildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
   // One pipeline stage can generate multiple nodes in the pipeline graph
   // if the stage is associated with a configuration scope that has multiple entries.
   // Example: multiple generator calls
-  const createNodesAndSuffixes: (stageName: string) => { name: string; suffixes: Array<string> } = stageName => {
+  const createNodesAndSuffixes: (stageName: string) => { name: string; suffixes: Array<string> } = (stageName) => {
     const cfg = cfgPipeline[stageName];
     if (!cfg) {
       throw new Error(`Cannot find pipeline stage '${stageName}'.`);
@@ -94,13 +110,18 @@ function buildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
     }
 
     // derive information about given pipeline stage
-    const plugin = cfg.plugin || stageName.split('/').reverse()[0];
-    const outputArtifact = cfg['output-artifact'];
+    const plugin = cfg.plugin || stageName.split("/").reverse()[0];
+    const outputArtifact = cfg["output-artifact"];
     let scope = cfg.scope;
     if (!cfg.scope) {
       scope = `pipeline.${stageName}`;
     }
-    const inputs: Array<string> = (!cfg.input ? [] : (Array.isArray(cfg.input) ? cfg.input : [cfg.input])).map((x: string) => resolvePipelineStageName(stageName, x));
+    const inputs: Array<string> = (!cfg.input
+      ? []
+      : Array.isArray(cfg.input)
+      ? cfg.input
+      : [cfg.input]
+    ).map((x: string) => resolvePipelineStageName(stageName, x));
 
     const suffixes: Array<string> = [];
     // adds nodes using at least suffix `suffix`, the input nodes called `inputs` using the context `config`
@@ -112,16 +133,25 @@ function buildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
     // --> ("/1", ["a/1"], cfg of "a/1", [])
     //     --> adds node `${stageName}/1`
     // Note: inherits the config of the LAST input node (affects for example `.../generate`)
-    const addNodesAndSuffixes = (suffix: string, inputs: Array<string>, configScope: JsonPath, inputNodes: Array<{ name: string; suffixes: Array<string> }>) => {
+    const addNodesAndSuffixes = (
+      suffix: string,
+      inputs: Array<string>,
+      configScope: JsonPath,
+      inputNodes: Array<{ name: string; suffixes: Array<string> }>,
+    ) => {
       if (inputNodes.length === 0) {
         const config = configCache[stringify(configScope)];
         const configs = scope ? [...config.GetNestedConfiguration(scope)] : [config];
         for (let i = 0; i < configs.length; ++i) {
-          const newSuffix = configs.length === 1 ? '' : '/' + i;
+          const newSuffix = configs.length === 1 ? "" : "/" + i;
           suffixes.push(suffix + newSuffix);
           const path: JsonPath = configScope.slice();
-          if (scope) { path.push(scope); }
-          if (configs.length !== 1) { path.push(i); }
+          if (scope) {
+            path.push(scope);
+          }
+          if (configs.length !== 1) {
+            path.push(i);
+          }
           configCache[stringify(path)] = configs[i];
           pipeline[stageName + suffix + newSuffix] = {
             pluginName: plugin,
@@ -141,15 +171,16 @@ function buildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
             suffix + inputSuffix,
             inputs.concat([additionalInput]),
             pipeline[additionalInput].configScope,
-            inputSuffixesTail);
+            inputSuffixesTail,
+          );
         }
       }
     };
 
     configCache[stringify([])] = config;
-    addNodesAndSuffixes('', [], [], inputs.map(createNodesAndSuffixes));
+    addNodesAndSuffixes("", [], [], inputs.map(createNodesAndSuffixes));
 
-    return { name: stageName, suffixes: cfg.suffixes = suffixes };
+    return { name: stageName, suffixes: (cfg.suffixes = suffixes) };
   };
 
   for (const pipelineStepName of Object.keys(cfgPipeline)) {
@@ -158,7 +189,7 @@ function buildPipeline(config: ConfigurationView): { pipeline: { [name: string]:
 
   return {
     pipeline,
-    configs: configCache
+    configs: configCache,
   };
 }
 
@@ -175,52 +206,65 @@ function isDrainRequired(p: PipelineNode) {
 }
 
 export async function runPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
-
-
   // built-in plugins
   const plugins: { [name: string]: PipelinePlugin } = {
-    'help': createHelpPlugin(),
-    'identity': createIdentityPlugin(),
-    'null': createNullPlugin(),
-    'reset-identity': createIdentityResetPlugin(),
-    'loader-swagger': createSwaggerLoaderPlugin(),
-    'loader-openapi': createOpenApiLoaderPlugin(),
-    'transform': createTransformerPlugin(),
-    'text-transform': createTextTransformerPlugin(),
-    'new-transform': createGraphTransformerPlugin(),
-    'transform-immediate': createImmediateTransformerPlugin(),
-    'compose': createNewComposerPlugin(),
-    'schema-validator-openapi': createOpenApiSchemaValidatorPlugin(),
-    'schema-validator-swagger': createSwaggerSchemaValidatorPlugin(),
+    "help": createHelpPlugin(),
+    "identity": createIdentityPlugin(),
+    "null": createNullPlugin(),
+    "reset-identity": createIdentityResetPlugin(),
+    "loader-swagger": createSwaggerLoaderPlugin(),
+    "loader-openapi": createOpenApiLoaderPlugin(),
+    "transform": createTransformerPlugin(),
+    "text-transform": createTextTransformerPlugin(),
+    "new-transform": createGraphTransformerPlugin(),
+    "transform-immediate": createImmediateTransformerPlugin(),
+    "compose": createNewComposerPlugin(),
+    "schema-validator-openapi": createOpenApiSchemaValidatorPlugin(),
+    "schema-validator-swagger": createSwaggerSchemaValidatorPlugin(),
     // TODO: replace with OAV again
-    'semantic-validator': createIdentityPlugin(),
-    'openapi-document-converter': createSwaggerToOpenApi3Plugin(),
-    'component-modifiers': createComponentModifierPlugin(),
-    'yaml2jsonx': createYamlToJsonPlugin(),
-    'jsonx2yaml': createJsonToYamlPlugin(),
-    'reflect-api-versions-cs': createCSharpReflectApiVersionPlugin(),
-    'commonmarker': createCommonmarkProcessorPlugin(),
-    'profile-definition-emitter': createArtifactEmitterPlugin(),
-    'emitter': createArtifactEmitterPlugin(),
-    'pipeline-emitter': createArtifactEmitterPlugin(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('pipeline', pipeline.pipeline, ['fix-me-3'], 'pipeline')])),
-    'configuration-emitter': createArtifactEmitterPlugin(async () => new QuickDataSource([await configView.DataStore.getDataSink().WriteObject('configuration', configView.Raw, ['fix-me-4'], 'configuration')])),
-    'tree-shaker': createTreeShakerPlugin(),
-    'enum-deduplicator': createEnumDeduplicator(),
-    'quick-check': createQuickCheckPlugin(),
-    'model-deduplicator': createDeduplicatorPlugin(),
-    'subset-reducer': subsetSchemaDeduplicatorPlugin(),
-    'multi-api-merger': createMultiApiMergerPlugin(),
-    'components-cleaner': createComponentsCleanerPlugin(),
-    'component-key-renamer': createComponentKeyRenamerPlugin(),
-    'api-version-parameter-handler': createApiVersionParameterHandlerPlugin(),
-    'profile-filter': createProfileFilterPlugin(),
-    'allof-cleaner': createAllOfCleaner(),
-    'command': createCommandPlugin(),
+    "semantic-validator": createIdentityPlugin(),
+    "openapi-document-converter": createSwaggerToOpenApi3Plugin(),
+    "component-modifiers": createComponentModifierPlugin(),
+    "yaml2jsonx": createYamlToJsonPlugin(),
+    "jsonx2yaml": createJsonToYamlPlugin(),
+    "reflect-api-versions-cs": createCSharpReflectApiVersionPlugin(),
+    "commonmarker": createCommonmarkProcessorPlugin(),
+    "profile-definition-emitter": createArtifactEmitterPlugin(),
+    "emitter": createArtifactEmitterPlugin(),
+    "pipeline-emitter": createArtifactEmitterPlugin(
+      async () =>
+        new QuickDataSource([
+          await configView.DataStore.getDataSink().WriteObject("pipeline", pipeline.pipeline, ["fix-me-3"], "pipeline"),
+        ]),
+    ),
+    "configuration-emitter": createArtifactEmitterPlugin(
+      async () =>
+        new QuickDataSource([
+          await configView.DataStore.getDataSink().WriteObject(
+            "configuration",
+            configView.Raw,
+            ["fix-me-4"],
+            "configuration",
+          ),
+        ]),
+    ),
+    "tree-shaker": createTreeShakerPlugin(),
+    "enum-deduplicator": createEnumDeduplicator(),
+    "quick-check": createQuickCheckPlugin(),
+    "model-deduplicator": createDeduplicatorPlugin(),
+    "subset-reducer": subsetSchemaDeduplicatorPlugin(),
+    "multi-api-merger": createMultiApiMergerPlugin(),
+    "components-cleaner": createComponentsCleanerPlugin(),
+    "component-key-renamer": createComponentKeyRenamerPlugin(),
+    "api-version-parameter-handler": createApiVersionParameterHandlerPlugin(),
+    "profile-filter": createProfileFilterPlugin(),
+    "allof-cleaner": createAllOfCleaner(),
+    "command": createCommandPlugin(),
   };
 
   // dynamically loaded, auto-discovered plugins
   const __extensionExtension: { [pluginName: string]: AutoRestExtension } = {};
-  for (const useExtensionQualifiedName of configView.GetEntry(<any>'used-extension') || []) {
+  for (const useExtensionQualifiedName of configView.GetEntry(<any>"used-extension") || []) {
     const extension = await getExtension(useExtensionQualifiedName);
     for (const plugin of await extension.GetPluginNames(configView.CancellationToken)) {
       if (!plugins[plugin]) {
@@ -232,56 +276,63 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
 
   // __status scope
   const startTime = Date.now();
-  (<any>configView.Raw).__status = new Proxy<any>({}, {
-    get(_, key) {
-      if (key === '__info') { return false; }
-      const expr = Buffer.from(key.toString(), 'base64').toString('ascii');
-      try {
-        return JSON.stringify(safeEval(expr, {
-          pipeline: pipeline.pipeline,
-          external: __extensionExtension,
-          tasks,
-          startTime,
-          blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => {
-            return configView.DataStore.Blame(uri, position);
-          }
-
-        }), (k, v) => k === 'dependencies' ? undefined : v, 2);
-      } catch (e) {
-        return `${e}`;
-      }
-    }
-  });
+  (<any>configView.Raw).__status = new Proxy<any>(
+    {},
+    {
+      get(_, key) {
+        if (key === "__info") {
+          return false;
+        }
+        const expr = Buffer.from(key.toString(), "base64").toString("ascii");
+        try {
+          return JSON.stringify(
+            safeEval(expr, {
+              pipeline: pipeline.pipeline,
+              external: __extensionExtension,
+              tasks,
+              startTime,
+              blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => {
+                return configView.DataStore.Blame(uri, position);
+              },
+            }),
+            (k, v) => (k === "dependencies" ? undefined : v),
+            2,
+          );
+        } catch (e) {
+          return `${e}`;
+        }
+      },
+    },
+  );
 
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
 
   const fsInput = configView.DataStore.GetReadThroughScope(fileSystem);
   const pipeline = buildPipeline(configView);
-  const times = !!configView['timestamp'];
+  const times = !!configView["timestamp"];
   const tasks: { [name: string]: Promise<DataSource> } = {};
 
+  const ScheduleNode: (nodeName: string) => Promise<DataSource> = async (nodeName) => {
+    const node = pipeline.pipeline[nodeName];
 
-  const ScheduleNode: (nodeName: string) => Promise<DataSource> =
-    async (nodeName) => {
-      const node = pipeline.pipeline[nodeName];
+    if (!node) {
+      throw new Error(`Cannot find pipeline node ${nodeName}.`);
+    }
 
-      if (!node) {
-        throw new Error(`Cannot find pipeline node ${nodeName}.`);
-      }
+    // get input
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    const inputScopes: Array<DataSource> = await Promise.all(node.inputs.map(getTask));
 
-      // get input
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      const inputScopes: Array<DataSource> = await Promise.all(node.inputs.map(getTask));
-
-      let inputScope: DataSource;
-      switch (inputScopes.length) {
-        case 0:
-          inputScope = fsInput;
-          break;
-        case 1:
-          inputScope = await inputScopes[0];
-          break;
-        default: {
+    let inputScope: DataSource;
+    switch (inputScopes.length) {
+      case 0:
+        inputScope = fsInput;
+        break;
+      case 1:
+        inputScope = await inputScopes[0];
+        break;
+      default:
+        {
           let pipeState: PipeState = {};
 
           const handles: Array<DataHandle> = [];
@@ -294,83 +345,101 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
           }
           inputScope = new QuickDataSource(handles, pipeState);
         }
-          break;
+        break;
+    }
+
+    const config = pipeline.configs[stringify(node.configScope)];
+    const pluginName = node.pluginName;
+
+    // you can have --pass-thru:FOO on the command line
+    // or add pass-thru: true in a pipline configuration step.
+    const passthru =
+      config.GetEntry(node.configScope.last.toString())["pass-thru"] === true ||
+      values(configView.GetEntry("pass-thru")).any((each) => each === pluginName);
+    const usenull =
+      config.GetEntry(node.configScope.last.toString())["null"] === true ||
+      values(configView.GetEntry("null")).any((each) => each === pluginName);
+
+    const plugin = usenull ? plugins.null : passthru ? plugins.identity : plugins[pluginName];
+
+    if (!plugin) {
+      throw new Error(`Plugin '${pluginName}' not found.`);
+    }
+
+    if (inputScope.skip) {
+      config.Message({ Channel: Channel.Debug, Text: `${nodeName} - SKIPPING` });
+      return inputScope;
+    }
+    try {
+      let cacheKey: string | undefined;
+
+      if (config.CacheMode) {
+        // generate the key used to store/access cached content
+        const names = await inputScope.Enum();
+        const data = (
+          await Promise.all(names.map((name) => inputScope.ReadStrict(name).then((uri) => md5(uri.ReadData()))))
+        ).sort();
+
+        cacheKey = md5([config.configFileFolderUri, nodeName, ...data].join("«"));
       }
 
-      const config = pipeline.configs[stringify(node.configScope)];
-      const pluginName = node.pluginName;
+      // if caching is enabled, see if we can find a scopeResult in the cache first.
+      // key = inputScope names + md5(inputScope content)
+      if (
+        config.CacheMode &&
+        inputScope.cachable &&
+        config.CacheExclude.indexOf(nodeName) === -1 &&
+        (await isCached(cacheKey))
+      ) {
+        // shortcut -- get the outputs directly from the cache.
+        config.Message({
+          Channel: times ? Channel.Information : Channel.Debug,
+          Text: `${nodeName} - CACHED inputs = ${(await inputScope.Enum()).length} [0.0 s]`,
+        });
 
-      // you can have --pass-thru:FOO on the command line
-      // or add pass-thru: true in a pipline configuration step.
-      const passthru = config.GetEntry(node.configScope.last.toString())['pass-thru'] === true || values(configView.GetEntry('pass-thru')).any(each => each === pluginName);
-      const usenull = config.GetEntry(node.configScope.last.toString())['null'] === true || values(configView.GetEntry('null')).any(each => each === pluginName);
-
-      const plugin = usenull ? plugins.null : passthru ? plugins.identity : plugins[pluginName];
-
-      if (!plugin) {
-        throw new Error(`Plugin '${pluginName}' not found.`);
+        return await readCache(cacheKey, config.DataStore.getDataSink(node.outputArtifact));
       }
 
-      if (inputScope.skip) {
-        config.Message({ Channel: Channel.Debug, Text: `${nodeName} - SKIPPING` });
-        return inputScope;
+      const t1 = process.uptime() * 100;
+      config.Message({
+        Channel: times ? Channel.Information : Channel.Debug,
+        Text: `${nodeName} - START inputs = ${(await inputScope.Enum()).length}`,
+      });
+
+      // creates the actual plugin.
+      const scopeResult = await plugin(config, inputScope, config.DataStore.getDataSink(node.outputArtifact));
+      const t2 = process.uptime() * 100;
+
+      config.Message({
+        Channel: times ? Channel.Information : Channel.Debug,
+        Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]`,
+      });
+
+      // if caching is enabled, let's cache this scopeResult.
+      if (config.CacheMode && cacheKey) {
+        await writeCache(cacheKey, scopeResult);
       }
-      try {
-        let cacheKey: string | undefined;
-
-        if (config.CacheMode) {
-          // generate the key used to store/access cached content
-          const names = await inputScope.Enum();
-          const data = (await Promise.all(names.map(name => inputScope.ReadStrict(name).then(uri => md5(uri.ReadData()))))).sort();
-
-          cacheKey = md5(([config.configFileFolderUri, nodeName, ...data]).join('«'));
+      // if this node wasn't able to load from the cache, then subsequent nodes shall not either
+      if (!inputScope.cachable || config.CacheExclude.indexOf(nodeName) !== -1) {
+        try {
+          scopeResult.cachable = false;
+        } catch {
+          // not settable on fs inputs anyway.
         }
-
-        // if caching is enabled, see if we can find a scopeResult in the cache first.
-        // key = inputScope names + md5(inputScope content)
-        if (config.CacheMode && inputScope.cachable && config.CacheExclude.indexOf(nodeName) === -1 && await isCached(cacheKey)) {
-          // shortcut -- get the outputs directly from the cache.
-          config.Message({ Channel: times ? Channel.Information : Channel.Debug, Text: `${nodeName} - CACHED inputs = ${(await inputScope.Enum()).length} [0.0 s]` });
-
-          return await readCache(cacheKey, config.DataStore.getDataSink(node.outputArtifact));
-        }
-
-        const t1 = process.uptime() * 100;
-        config.Message({ Channel: times ? Channel.Information : Channel.Debug, Text: `${nodeName} - START inputs = ${(await inputScope.Enum()).length}` });
-
-        // creates the actual plugin.
-        const scopeResult = await plugin(config, inputScope, config.DataStore.getDataSink(node.outputArtifact));
-        const t2 = process.uptime() * 100;
-
-        config.Message({ Channel: times ? Channel.Information : Channel.Debug, Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]` });
-
-        // if caching is enabled, let's cache this scopeResult.
-        if (config.CacheMode && cacheKey) {
-          await writeCache(cacheKey, scopeResult);
-        }
-        // if this node wasn't able to load from the cache, then subsequent nodes shall not either
-        if (!inputScope.cachable || config.CacheExclude.indexOf(nodeName) !== -1) {
-          try {
-            scopeResult.cachable = false;
-          } catch  {
-            // not settable on fs inputs anyway.
-          }
-        }
-
-        return scopeResult;
-      } catch (e) {
-        if (configView.DebugMode) {
-          console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);
-        }
-        throw e;
       }
-    };
+
+      return scopeResult;
+    } catch (e) {
+      if (configView.DebugMode) {
+        console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);
+      }
+      throw e;
+    }
+  };
 
   // schedule pipeline
 
-  const getTask = (name: string) => name in tasks ?
-    tasks[name] :
-    tasks[name] = ScheduleNode(name);
+  const getTask = (name: string) => (name in tasks ? tasks[name] : (tasks[name] = ScheduleNode(name)));
 
   // execute pipeline
   const barrier = new OutstandingTaskAwaiter();
@@ -415,19 +484,22 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
   }
 */
   for (const name of Object.keys(pipeline.pipeline)) {
-
     const task = getTask(name);
 
-    const taskx: { _state: 'running' | 'failed' | 'complete'; _result(): Array<DataHandle>; _finishedAt: number } = <any>task;
-    taskx._state = 'running';
-    task.then(async x => {
-      const res = await Promise.all((await x.Enum()).map(key => x.ReadStrict(key)));
-      taskx._result = () => res;
-      taskx._state = 'complete';
-      taskx._finishedAt = Date.now();
-    }).catch(() => taskx._state = 'failed');
+    const taskx: { _state: "running" | "failed" | "complete"; _result(): Array<DataHandle>; _finishedAt: number } = <
+      any
+    >task;
+    taskx._state = "running";
+    task
+      .then(async (x) => {
+        const res = await Promise.all((await x.Enum()).map((key) => x.ReadStrict(key)));
+        taskx._result = () => res;
+        taskx._state = "complete";
+        taskx._finishedAt = Date.now();
+      })
+      .catch(() => (taskx._state = "failed"));
     barrier.Await(task);
-    barrierRobust.Await(task.catch(() => { }));
+    barrierRobust.Await(task.catch(() => {}));
   }
 
   try {

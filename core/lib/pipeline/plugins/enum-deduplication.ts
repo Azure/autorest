@@ -1,30 +1,42 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, visit, TransformerViaPointer, QuickDataSource } from '@azure-tools/datastore';
-import { ConfigurationView } from '../../configuration';
-import { PipelinePlugin } from '../common';
-import { Dictionary, items } from '@azure-tools/linq';
-import * as compareVersions from 'compare-versions';
-import { toSemver, maximum, camelCase, pascalCase } from '@azure-tools/codegen';
+import {
+  AnyObject,
+  DataHandle,
+  DataSink,
+  DataSource,
+  Node,
+  visit,
+  TransformerViaPointer,
+  QuickDataSource,
+} from "@azure-tools/datastore";
+import { ConfigurationView } from "../../configuration";
+import { PipelinePlugin } from "../common";
+import { Dictionary, items } from "@azure-tools/linq";
+import * as compareVersions from "compare-versions";
+import { toSemver, maximum, camelCase, pascalCase } from "@azure-tools/codegen";
 
 export class EnumDeduplicator extends TransformerViaPointer {
   protected refs = new Map<string, Array<{ target: AnyObject; pointer: string }>>();
-  protected enums = new Map<string, Array<{ target: AnyObject; value: AnyObject; key: string; pointer: string; originalNodes: Iterable<Node> }>>();
+  protected enums = new Map<
+    string,
+    Array<{ target: AnyObject; value: AnyObject; key: string; pointer: string; originalNodes: Iterable<Node> }>
+  >();
   async visitLeaf(target: AnyObject, value: AnyObject, key: string, pointer: string, originalNodes: Iterable<Node>) {
     if (value) {
-      if (pointer.startsWith('/components/schemas/') && value.enum) {
-        // it's an enum 
+      if (pointer.startsWith("/components/schemas/") && value.enum) {
+        // it's an enum
         // let's handle this ourselves.
-        if (!value['x-ms-metadata']) {
+        if (!value["x-ms-metadata"]) {
           return false;
         }
         // use the given name if specified, otherwise fallback to the metadata name
-        const name = pascalCase(value['x-ms-enum'] ? value['x-ms-enum'].name : value['x-ms-metadata'].name);
+        const name = pascalCase(value["x-ms-enum"] ? value["x-ms-enum"].name : value["x-ms-metadata"].name);
 
         const e = this.enums.get(name) || this.enums.set(name, []).get(name) || [];
         e.push({ target, value, key, pointer, originalNodes });
         return true;
       }
 
-      if (key === '$ref') {
+      if (key === "$ref") {
         const ref = value.toString();
         // let's hold onto the $ref object until we're done.
         const r = this.refs.get(ref) || this.refs.set(ref, []).get(ref) || [];
@@ -39,12 +51,16 @@ export class EnumDeduplicator extends TransformerViaPointer {
     // time to consolodate the enums
     for (const { key: n, value } of items(this.enums)) {
       // first sort them according to api-version order
-      const enumSet = value.sort((a, b) => compareVersions(toSemver(maximum(a.value['x-ms-metadata'].apiVersions)), toSemver(maximum(b.value['x-ms-metadata'].apiVersions))));
+      const enumSet = value.sort((a, b) =>
+        compareVersions(
+          toSemver(maximum(a.value["x-ms-metadata"].apiVersions)),
+          toSemver(maximum(b.value["x-ms-metadata"].apiVersions)),
+        ),
+      );
 
       const first = enumSet[0];
-      const name = first.value['x-ms-enum'] ? first.value['x-ms-enum'].name : first.value['x-ms-metadata'].name;
+      const name = first.value["x-ms-enum"] ? first.value["x-ms-enum"].name : first.value["x-ms-metadata"].name;
       if (enumSet.length === 1) {
-
         const originalRef = `#/components/schemas/${first.key}`;
         const newRef = `#/components/schemas/${name}`;
 
@@ -58,16 +74,16 @@ export class EnumDeduplicator extends TransformerViaPointer {
       // otherwise, we need to take the different versions of the enum,
       // combine all the values into a single enum
       const mergedEnum = this.newObject(first.target, name, first.pointer);
-      this.clone(mergedEnum, 'x-ms-metadata', first.pointer, first.value['x-ms-metadata']);
+      this.clone(mergedEnum, "x-ms-metadata", first.pointer, first.value["x-ms-metadata"]);
       if (first.value.description) {
-        this.clone(mergedEnum, 'description', first.pointer, first.value.description);
+        this.clone(mergedEnum, "description", first.pointer, first.value.description);
       }
-      if (first.value['x-ms-enum']) {
-        this.clone(mergedEnum, 'x-ms-enum', first.pointer, first.value['x-ms-enum']);
+      if (first.value["x-ms-enum"]) {
+        this.clone(mergedEnum, "x-ms-enum", first.pointer, first.value["x-ms-enum"]);
       }
-      this.clone(mergedEnum, 'type', first.pointer, 'string');
+      this.clone(mergedEnum, "type", first.pointer, "string");
       const newRef = `#/components/schemas/${name}`;
-      this.newArray(mergedEnum, 'enum', '');
+      this.newArray(mergedEnum, "enum", "");
 
       for (const each of enumSet) {
         for (const e of each.value.enum) {
@@ -83,7 +99,7 @@ export class EnumDeduplicator extends TransformerViaPointer {
     // write out the remaining unchanged $ref instances
     for (const { key: reference, value: refSet } of items(this.refs)) {
       for (const each of refSet) {
-        this.clone(each.target, '$ref', each.pointer, reference);
+        this.clone(each.target, "$ref", each.pointer, reference);
       }
     }
   }
@@ -100,11 +116,19 @@ export class EnumDeduplicator extends TransformerViaPointer {
 }
 
 async function deduplicateEnums(config: ConfigurationView, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
+  const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
     const ed = new EnumDeduplicator(each);
-    result.push(await sink.WriteObject('oai3.enum-deduplicated.json', await ed.getOutput(), each.identity, 'openapi-document-enum-deduplicated', await ed.getSourceMappings()));
+    result.push(
+      await sink.WriteObject(
+        "oai3.enum-deduplicated.json",
+        await ed.getOutput(),
+        each.identity,
+        "openapi-document-enum-deduplicated",
+        await ed.getSourceMappings(),
+      ),
+    );
   }
   return new QuickDataSource(result, input.pipeState);
 }
@@ -113,4 +137,3 @@ async function deduplicateEnums(config: ConfigurationView, input: DataSource, si
 export function createEnumDeduplicator(): PipelinePlugin {
   return deduplicateEnums;
 }
-

@@ -1,24 +1,35 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit } from '@azure-tools/datastore';
-import { clone, Dictionary, values } from '@azure-tools/linq';
-import { areSimilar } from '@azure-tools/object-comparison';
-import * as oai from '@azure-tools/openapi';
-import { ConfigurationView } from '../../configuration';
-import { PipelinePlugin } from '../common';
-import { toSemver, maximum, gt, lt } from '@azure-tools/codegen';
-import { Channel } from '../../message';
+import {
+  AnyObject,
+  DataHandle,
+  DataSink,
+  DataSource,
+  Node,
+  Transformer,
+  ProxyObject,
+  QuickDataSource,
+  visit,
+} from "@azure-tools/datastore";
+import { clone, Dictionary, values } from "@azure-tools/linq";
+import { areSimilar } from "@azure-tools/object-comparison";
+import * as oai from "@azure-tools/openapi";
+import { ConfigurationView } from "../../configuration";
+import { PipelinePlugin } from "../common";
+import { toSemver, maximum, gt, lt } from "@azure-tools/codegen";
+import { Channel } from "../../message";
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
 export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
-
   public async process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {
     // initialize certain things ahead of time:
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
-        case 'components': {
-          const components = <oai.Components>targetParent.components || this.newObject(targetParent, 'components', pointer);
-          this.visitComponents(components, children);
-        }
+        case "components":
+          {
+            const components =
+              <oai.Components>targetParent.components || this.newObject(targetParent, "components", pointer);
+            this.visitComponents(components, children);
+          }
           break;
 
         // copy these over without worrying about moving things down to components.
@@ -27,14 +38,14 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
           break;
       }
     }
-    // mark this schemaReduced. 
-    this.generated.info['x-ms-metadata'].schemaReduced = true;
+    // mark this schemaReduced.
+    this.generated.info["x-ms-metadata"].schemaReduced = true;
   }
 
   visitComponents(components: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, childIterator } of originalNodes) {
       switch (key) {
-        case 'schemas':
+        case "schemas":
           if (components[key] === undefined) {
             this.newObject(components, key, pointer);
           }
@@ -50,14 +61,14 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
   }
 
   visitSchemas<T>(container: ProxyObject<Dictionary<T>>, originalNodes: () => Iterable<Node>) {
-    const xMsMetadata = 'x-ms-metadata';
+    const xMsMetadata = "x-ms-metadata";
     const updatedSchemas = {};
 
     // get all the schemas and associate them with their uid
     // this will allow us to place the value in the right place at the end
     const schemas: Array<AnyObject> = [];
     for (const { key, value } of originalNodes()) {
-      if (value.type === 'object' || value.type === undefined) {
+      if (value.type === "object" || value.type === undefined) {
         // only do subset reduction on objects
         schemas.push({ value, uid: key });
       } else {
@@ -72,33 +83,44 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
       return gt(aMaxVersion, bMaxVersion) ? -1 : lt(aMaxVersion, bMaxVersion) ? 1 : 0;
     });
 
-    // deduplicate/reduce 
+    // deduplicate/reduce
     for (const { value: currentSchema } of visit(schemas)) {
       for (const { value: anotherSchema } of visit(schemas)) {
         const currentSchemaName = currentSchema.value[xMsMetadata].name;
         const anotherSchemaName = anotherSchema.value[xMsMetadata].name;
         if (currentSchemaName === anotherSchemaName && currentSchema.uid !== anotherSchema.uid) {
-          const skipList = ['description', 'enum', 'readOnly', 'required', 'x-ms-original', 'x-ms-examples'];
-          const additiveFieldsList = ['properties', 'allOf', 'required'];
+          const skipList = ["description", "enum", "readOnly", "required", "x-ms-original", "x-ms-examples"];
+          const additiveFieldsList = ["properties", "allOf", "required"];
 
           // filter out metadata
-          const { 'x-ms-metadata': metadataAnotherSchema, ...filteredAnotherSchema } = anotherSchema.value;
-          const { 'x-ms-metadata': metadataCurrentSchema, ...filteredCurrentSchema } = currentSchema.value;
+          const { "x-ms-metadata": metadataAnotherSchema, ...filteredAnotherSchema } = anotherSchema.value;
+          const { "x-ms-metadata": metadataCurrentSchema, ...filteredCurrentSchema } = currentSchema.value;
 
-          const subsetRelation = getSubsetRelation(filteredAnotherSchema, filteredCurrentSchema, additiveFieldsList, skipList);
+          const subsetRelation = getSubsetRelation(
+            filteredAnotherSchema,
+            filteredCurrentSchema,
+            additiveFieldsList,
+            skipList,
+          );
           if (subsetRelation.isSubset !== false) {
-            const supersetEquivSchema = getSupersetSchema(filteredAnotherSchema, filteredCurrentSchema, additiveFieldsList, subsetRelation, `#/components/schemas/${anotherSchema.uid}`);
+            const supersetEquivSchema = getSupersetSchema(
+              filteredAnotherSchema,
+              filteredCurrentSchema,
+              additiveFieldsList,
+              subsetRelation,
+              `#/components/schemas/${anotherSchema.uid}`,
+            );
             const subsetEquivSchema = getSubsetSchema(filteredAnotherSchema, subsetRelation);
 
             // gs: added -- ensure that properties left beg
             if (currentSchema.value.required && supersetEquivSchema.properties) {
               const sesNames = Object.getOwnPropertyNames(supersetEquivSchema.properties);
-              supersetEquivSchema.required = currentSchema.value.required.filter(each => sesNames.indexOf(each) > - 1);
+              supersetEquivSchema.required = currentSchema.value.required.filter((each) => sesNames.indexOf(each) > -1);
             }
 
             // replace with equivalent schema and put back metadata.
-            currentSchema.value = { 'x-ms-metadata': metadataCurrentSchema, ...supersetEquivSchema };
-            anotherSchema.value = { 'x-ms-metadata': metadataAnotherSchema, ...subsetEquivSchema };
+            currentSchema.value = { "x-ms-metadata": metadataCurrentSchema, ...supersetEquivSchema };
+            anotherSchema.value = { "x-ms-metadata": metadataAnotherSchema, ...subsetEquivSchema };
           }
         }
       }
@@ -117,7 +139,12 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
   }
 }
 
-export function getSubsetRelation(oldSchema: any, newSchema: any, additiveFieldsList: Array<string>, skipList: Array<string>): SubsetCheckResult {
+export function getSubsetRelation(
+  oldSchema: any,
+  newSchema: any,
+  additiveFieldsList: Array<string>,
+  skipList: Array<string>,
+): SubsetCheckResult {
   const result: SubsetCheckResult = { isSubset: true, nonAdditiveFieldsUpdates: {}, additiveFieldsMatches: {} };
   const failResult = { isSubset: false, nonAdditiveFieldsUpdates: {}, additiveFieldsMatches: {} };
   const skipSet = new Set(skipList);
@@ -143,7 +170,6 @@ export function getSubsetRelation(oldSchema: any, newSchema: any, additiveFields
         result.nonAdditiveFieldsUpdates[fieldName] = newSchema[fieldName];
       }
     } else if (additiveFieldsSet.has(fieldName)) {
-
       // array example use case of additive field: required and allOf fields
       if (Array.isArray(oldSchema[fieldName])) {
         if (!Array.isArray(newSchema[fieldName])) {
@@ -170,7 +196,6 @@ export function getSubsetRelation(oldSchema: any, newSchema: any, additiveFields
         if (!foundMatch) {
           return failResult;
         }
-
       } else {
         const oldFieldKeys = Object.keys(oldSchema[fieldName]);
 
@@ -200,17 +225,23 @@ export function getSubsetRelation(oldSchema: any, newSchema: any, additiveFields
   for (const fieldName of newSchemaFields) {
     // Add fields from the newSchema in the skipList that were not present in the old schema.
     // For example, a description that the latest model has but the newest does not have.
-    if (oldSchema[fieldName] === undefined &&
+    if (
+      oldSchema[fieldName] === undefined &&
       result.nonAdditiveFieldsUpdates[fieldName] === undefined &&
       result.additiveFieldsMatches[fieldName] === undefined &&
-      skipSet.has(fieldName)) {
+      skipSet.has(fieldName)
+    ) {
       result.nonAdditiveFieldsUpdates[fieldName] = newSchema[fieldName];
     }
 
     // for additive fields not in the oldmodel, we should treat them as empty objects/arrays.
     // Example: if the newer schema has an allOf and the old doesn't we should still treat as a match.
     // It's equivalent to saying that the old one has also an allOf, but it's an empty array.
-    if (oldSchema[fieldName] === undefined && result.additiveFieldsMatches[fieldName] === undefined && !skipSet.has(fieldName)) {
+    if (
+      oldSchema[fieldName] === undefined &&
+      result.additiveFieldsMatches[fieldName] === undefined &&
+      !skipSet.has(fieldName)
+    ) {
       result.additiveFieldsMatches[fieldName] = newSchema[fieldName];
     }
   }
@@ -218,7 +249,13 @@ export function getSubsetRelation(oldSchema: any, newSchema: any, additiveFields
   return result;
 }
 
-export function getSupersetSchema(subset: any, superset: any, additiveFieldsList: Array<string>, subsetCheckResult: SubsetCheckResult, supersetReference: string): AnyObject {
+export function getSupersetSchema(
+  subset: any,
+  superset: any,
+  additiveFieldsList: Array<string>,
+  subsetCheckResult: SubsetCheckResult,
+  supersetReference: string,
+): AnyObject {
   const result: any = {};
   const supersetKeys = new Set(Object.keys(superset));
   const subsetKeys = new Set(Object.keys(subset));
@@ -308,7 +345,7 @@ export interface SubsetCheckResult {
 }
 
 async function deduplicateSubsetSchemas(config: ConfigurationView, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
+  const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
     const model = <any>await each.ReadObject();
@@ -323,12 +360,28 @@ async function deduplicateSubsetSchemas(config: ConfigurationView, input: DataSo
     }
     config.Message({ Channel: Channel.Verbose, Text: `Processing subset deduplication on file ${each.identity}` });
     */
-    if (model.info?.['x-ms-metadata']?.schemaReduced) {
-      result.push(await sink.WriteObject('oai3.subset-schema-reduced.json', model, each.identity, 'openapi-document-schema-reduced', []));
+    if (model.info?.["x-ms-metadata"]?.schemaReduced) {
+      result.push(
+        await sink.WriteObject(
+          "oai3.subset-schema-reduced.json",
+          model,
+          each.identity,
+          "openapi-document-schema-reduced",
+          [],
+        ),
+      );
       continue;
     }
     const processor = new SubsetSchemaDeduplicator(each);
-    result.push(await sink.WriteObject('oai3.subset-schema-reduced.json', await processor.getOutput(), each.identity, 'openapi-document-schema-reduced', await processor.getSourceMappings()));
+    result.push(
+      await sink.WriteObject(
+        "oai3.subset-schema-reduced.json",
+        await processor.getOutput(),
+        each.identity,
+        "openapi-document-schema-reduced",
+        await processor.getSourceMappings(),
+      ),
+    );
   }
   return new QuickDataSource(result, input.pipeState);
 }

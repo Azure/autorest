@@ -1,8 +1,18 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, ProxyObject, QuickDataSource, visit } from '@azure-tools/datastore';
-import { clone, Dictionary } from '@azure-tools/linq';
-import * as oai from '@azure-tools/openapi';
-import { ConfigurationView } from '../../configuration';
-import { PipelinePlugin } from '../common';
+import {
+  AnyObject,
+  DataHandle,
+  DataSink,
+  DataSource,
+  Node,
+  Transformer,
+  ProxyObject,
+  QuickDataSource,
+  visit,
+} from "@azure-tools/datastore";
+import { clone, Dictionary } from "@azure-tools/linq";
+import * as oai from "@azure-tools/openapi";
+import { ConfigurationView } from "../../configuration";
+import { PipelinePlugin } from "../common";
 
 export class ComponentKeyRenamer extends Transformer<any, oai.Model> {
   // oldRefs -> newRefs;
@@ -12,10 +22,12 @@ export class ComponentKeyRenamer extends Transformer<any, oai.Model> {
     // initialize certain things ahead of time:
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
-        case 'components': {
-          const components = <oai.Components>targetParent.components || this.newObject(targetParent, 'components', pointer);
-          this.visitComponents(components, children);
-        }
+        case "components":
+          {
+            const components =
+              <oai.Components>targetParent.components || this.newObject(targetParent, "components", pointer);
+            this.visitComponents(components, children);
+          }
           break;
 
         // copy these over without worrying about moving things down to components.
@@ -29,15 +41,15 @@ export class ComponentKeyRenamer extends Transformer<any, oai.Model> {
   visitComponents(components: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
-        case 'schemas':
-        case 'responses':
-        case 'parameters':
-        case 'examples':
-        case 'requestBodies':
-        case 'headers':
-        case 'securitySchemes':
-        case 'links':
-        case 'callbacks':
+        case "schemas":
+        case "responses":
+        case "parameters":
+        case "examples":
+        case "requestBodies":
+        case "headers":
+        case "securitySchemes":
+        case "links":
+        case "callbacks":
           if (components[key] === undefined) {
             this.newObject(components, key, pointer);
           }
@@ -54,7 +66,7 @@ export class ComponentKeyRenamer extends Transformer<any, oai.Model> {
 
   visitComponent<T>(type: string, container: ProxyObject<Dictionary<T>>, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer } of originalNodes) {
-      const name = value['x-ms-metadata'].name;
+      const name = value["x-ms-metadata"].name;
       this.newRefs[`#/components/${type}/${key}`] = `#/components/${type}/${name}`;
       this.clone(container, name, pointer, value);
     }
@@ -67,7 +79,7 @@ export class ComponentKeyRenamer extends Transformer<any, oai.Model> {
 
   protected updateRefs(node: any) {
     for (const { key, value } of visit(node)) {
-      if (value && typeof value === 'object') {
+      if (value && typeof value === "object") {
         const ref = value.$ref;
         if (ref) {
           // see if this object has a $ref
@@ -84,11 +96,19 @@ export class ComponentKeyRenamer extends Transformer<any, oai.Model> {
 }
 
 async function renameComponentsKeys(config: ConfigurationView, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
+  const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
     const processor = new ComponentKeyRenamer(each);
-    result.push(await sink.WriteObject('oai3.component-renamed.json', await processor.getOutput(), each.identity, 'openapi-document-renamed', await processor.getSourceMappings()));
+    result.push(
+      await sink.WriteObject(
+        "oai3.component-renamed.json",
+        await processor.getOutput(),
+        each.identity,
+        "openapi-document-renamed",
+        await processor.getSourceMappings(),
+      ),
+    );
   }
   return new QuickDataSource(result, input.pipeState);
 }

@@ -3,13 +3,13 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, nodes, createSandbox } from '@azure-tools/datastore';
-import { YieldCPU } from '@azure-tools/tasks';
-import { ConfigurationView } from '../autorest-core';
-import { ResolvedDirective } from '../configuration';
-import { Channel, Message, SourceLocation } from '../message';
-import { manipulateObject } from './object-manipulator';
-import { values } from '@azure-tools/linq';
+import { DataHandle, DataSink, nodes, createSandbox } from "@azure-tools/datastore";
+import { YieldCPU } from "@azure-tools/tasks";
+import { ConfigurationView } from "../autorest-core";
+import { ResolvedDirective } from "../configuration";
+import { Channel, Message, SourceLocation } from "../message";
+import { manipulateObject } from "./object-manipulator";
+import { values } from "@azure-tools/linq";
 
 const safeEval = createSandbox();
 
@@ -18,12 +18,14 @@ export class Manipulator {
   private ctr = 0;
 
   public constructor(private config: ConfigurationView) {
-    this.transformations = config.resolveDirectives(directive => directive.from.length > 0 && directive.transform.length > 0 && directive.where.length > 0);
+    this.transformations = config.resolveDirectives(
+      (directive) => directive.from.length > 0 && directive.transform.length > 0 && directive.where.length > 0,
+    );
   }
 
   private matchesSourceFilter(document: string, transform: ResolvedDirective, artifact: string | null): boolean {
-    document = '/' + document;
-    return values(transform.from).any(each => artifact === each || document.endsWith('/' + each));
+    document = "/" + document;
+    return values(transform.from).any((each) => artifact === each || document.endsWith("/" + each));
   }
 
   private async processInternal(data: DataHandle, sink: DataSink, documentId?: string): Promise<DataHandle> {
@@ -35,18 +37,27 @@ export class Manipulator {
             // transform
             for (const t of directive.transform) {
               await YieldCPU();
-              const result = await manipulateObject(data, sink, w,
+              const result = await manipulateObject(
+                data,
+                sink,
+                w,
                 (doc, obj, path) => {
-                  return safeEval<any>(`(() => { { ${t} }; return $; })()`, { $: obj, $doc: doc, $path: path, $documentPath: data.originalFullPath });
+                  return safeEval<any>(`(() => { { ${t} }; return $; })()`, {
+                    $: obj,
+                    $doc: doc,
+                    $path: path,
+                    $documentPath: data.originalFullPath,
+                  });
                 },
                 this.config,
-                t
+                t,
 
-              /*,
+                /*,
               {
                 reason: trans.reason,
                 transformerSourceHandle: // TODO
-              }*/);
+              }*/
+              );
               if (!result.anyHit) {
                 // this.config.Message({
                 //   Channel: Channel.Warning,
@@ -62,10 +73,16 @@ export class Manipulator {
               const doc = await data.ReadObject<any>();
               const allHits = nodes(doc, w);
               for (const hit of allHits) {
-                const testResults = [...safeEval<any>(`(function* () { ${t.indexOf('yield') === -1 ? `yield (${t}\n)` : `${t}\n`} })()`, { $: hit.value, $doc: doc, $path: hit.path })];
+                const testResults = [
+                  ...safeEval<any>(`(function* () { ${t.indexOf("yield") === -1 ? `yield (${t}\n)` : `${t}\n`} })()`, {
+                    $: hit.value,
+                    $doc: doc,
+                    $path: hit.path,
+                  }),
+                ];
                 for (const testResult of testResults) {
-                  if (testResult === false || typeof testResult !== 'boolean') {
-                    const messageText = typeof testResult === 'string' ? testResult : 'Custom test failed';
+                  if (testResult === false || typeof testResult !== "boolean") {
+                    const messageText = typeof testResult === "string" ? testResult : "Custom test failed";
                     const message = (<Message>testResult).Text
                       ? <Message>testResult
                       : <Message>{ Text: messageText, Channel: Channel.Warning, Details: testResult };
@@ -97,8 +114,12 @@ export class Manipulator {
   }
 
   public async process(data: DataHandle, sink: DataSink, isObject: boolean, documentId?: string): Promise<DataHandle> {
-    const trans1 = !isObject ? await sink.WriteObject(`trans_input?${data.key}`, await data.ReadData(), data.identity, data.artifactType) : data;
+    const trans1 = !isObject
+      ? await sink.WriteObject(`trans_input?${data.key}`, await data.ReadData(), data.identity, data.artifactType)
+      : data;
     const result = await this.processInternal(trans1, sink, documentId);
-    return (!isObject) ? sink.WriteData(`trans_output?${data.key}`, await result.ReadObject<string>(), data.identity, data.artifactType) : result;
+    return !isObject
+      ? sink.WriteData(`trans_output?${data.key}`, await result.ReadObject<string>(), data.identity, data.artifactType)
+      : result;
   }
 }

@@ -3,19 +3,19 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { QuickDataSource } from '@azure-tools/datastore';
-import { Help } from '../../../help';
-import { PipelinePlugin } from '../common';
+import { QuickDataSource } from "@azure-tools/datastore";
+import { Help } from "../../../help";
+import { PipelinePlugin } from "../common";
 
 /* @internal */
 export function createHelpPlugin(): PipelinePlugin {
-  return async config => {
-    const help: { [helpKey: string]: Help } = config.GetEntry(<any>'help-content');
+  return async (config) => {
+    const help: { [helpKey: string]: Help } = config.GetEntry(<any>"help-content");
     for (const helpKey of Object.keys(help).sort()) {
       config.GeneratedFile.Dispatch({
-        type: 'help',
+        type: "help",
         uri: `${helpKey}.json`,
-        content: JSON.stringify(help[helpKey])
+        content: JSON.stringify(help[helpKey]),
       });
     }
     return new QuickDataSource([]);

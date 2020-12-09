@@ -1,39 +1,40 @@
 /* eslint-disable no-useless-escape */
-import { AnyObject, DataHandle, DataSink, DataSource, Node, parseJsonPointer, Transformer, QuickDataSource, JsonPath, Source } from '@azure-tools/datastore';
-import { ConfigurationView } from '../../configuration';
-import { PipelinePlugin } from '../common';
-import { values, length } from '@azure-tools/linq';
-import { createHash } from 'crypto';
+import {
+  AnyObject,
+  DataHandle,
+  DataSink,
+  DataSource,
+  Node,
+  parseJsonPointer,
+  Transformer,
+  QuickDataSource,
+  JsonPath,
+  Source,
+} from "@azure-tools/datastore";
+import { ConfigurationView } from "../../configuration";
+import { PipelinePlugin } from "../common";
+import { values, length } from "@azure-tools/linq";
+import { createHash } from "crypto";
 
-/** 
- * parses a json pointer, and inserts a string into the returned array 
+/**
+ * parses a json pointer, and inserts a string into the returned array
  * the string is a hashed value of the pointer itself
- * 
- * this resolves potential collisions that occur when the code that creates identity of a shaken element  
+ *
+ * this resolves potential collisions that occur when the code that creates identity of a shaken element
  * drops non-alphanumeric characters, and there are strings that are too similar
- * 
- * It's placed after the second element because the elements after that can be used 
+ *
+ * It's placed after the second element because the elements after that can be used
  * to synthesize a client name, and if it's placed earlier, it's too significant
- * when trying to manually look thru a processes OAI file. 
+ * when trying to manually look thru a processes OAI file.
  */
 function hashedJsonPointer(p: string) {
   const result = parseJsonPointer(p);
-  result.splice(1, 0, createHash('md5').update(p).digest().readUInt32BE(0).toString(36));
+  result.splice(1, 0, createHash("md5").update(p).digest().readUInt32BE(0).toString(36));
   return result;
 }
 
-const methods = new Set([
-  'get',
-  'put',
-  'post',
-  'delete',
-  'options',
-  'head',
-  'patch',
-  'trace'
-]);
+const methods = new Set(["get", "put", "post", "delete", "options", "head", "patch", "trace"]);
 export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
-
   constructor(originalFile: Source, private isSimpleTreeShake: boolean) {
     super([originalFile]);
   }
@@ -54,74 +55,75 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
       return this.generated.components;
     }
     if (this.current.components) {
-      return this.newObject(this.generated, 'components', '/components');
+      return this.newObject(this.generated, "components", "/components");
     }
-    return this.newObject(this.generated, 'components', '/');
+    return this.newObject(this.generated, "components", "/");
   }
 
   private componentItem(key: string) {
-    return this.components[key] ? this.components[key] :
-      (this.current.components && this.current.components[key]) ?
-        this.newObject(this.components, key, `/components/${key}`) :
-        this.newObject(this.components, key, '/');
+    return this.components[key]
+      ? this.components[key]
+      : this.current.components && this.current.components[key]
+      ? this.newObject(this.components, key, `/components/${key}`)
+      : this.newObject(this.components, key, "/");
   }
 
   get schemas(): AnyObject {
-    return this.componentItem('schemas');
+    return this.componentItem("schemas");
   }
   get responses(): AnyObject {
-    return this.componentItem('responses');
+    return this.componentItem("responses");
   }
   get parameters(): AnyObject {
-    return this.componentItem('parameters');
+    return this.componentItem("parameters");
   }
   get examples(): AnyObject {
-    return this.componentItem('examples');
+    return this.componentItem("examples");
   }
   get requestBodies(): AnyObject {
-    return this.componentItem('requestBodies');
+    return this.componentItem("requestBodies");
   }
   get headers(): AnyObject {
-    return this.componentItem('headers');
+    return this.componentItem("headers");
   }
   get securitySchemes(): AnyObject {
-    return this.componentItem('securitySchemes');
+    return this.componentItem("securitySchemes");
   }
   get links(): AnyObject {
-    return this.componentItem('links');
+    return this.componentItem("links");
   }
   get callbacks(): AnyObject {
-    return this.componentItem('callbacks');
+    return this.componentItem("callbacks");
   }
 
   async process(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     // split out servers first.
-    const [servers, theNodes] = values(originalNodes).bifurcate(each => each.key === 'servers');
+    const [servers, theNodes] = values(originalNodes).bifurcate((each) => each.key === "servers");
 
     // set the doc servers
-    servers.forEach(s => this.docServers = s.value);
+    servers.forEach((s) => (this.docServers = s.value));
 
     // initialize certain things ahead of time:
     for (const { value, key, pointer, children } of theNodes) {
       switch (key) {
-        case 'x-ms-paths':
-        case 'paths':
+        case "x-ms-paths":
+        case "paths":
           this.visitPaths(this.newObject(targetParent, key, pointer), children);
           break;
 
-        case 'components':
+        case "components":
           this.visitComponents(this.components, children);
           break;
 
-        case 'x-ms-metadata':
-        case 'x-ms-secondary-file':
-        case 'info':
+        case "x-ms-metadata":
+        case "x-ms-secondary-file":
+        case "info":
           this.clone(targetParent, key, pointer, value);
           break;
 
         // copy these over without worrying about moving things down to components.
         default:
-          if (!this.current['x-ms-secondary-file']) {
+          if (!this.current["x-ms-secondary-file"]) {
             this.clone(targetParent, key, pointer, value);
           }
           break;
@@ -129,7 +131,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     }
 
     if (this.docServers !== undefined) {
-      this.clone(targetParent, 'servers', '/servers', this.docServers);
+      this.clone(targetParent, "servers", "/servers", this.docServers);
     }
   }
 
@@ -142,9 +144,9 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
   visitPath(targetParent: AnyObject, nodes: Iterable<Node>) {
     // split out the servers first.
-    const [servers, someNodes] = values(nodes).bifurcate(each => each.key === 'servers');
+    const [servers, someNodes] = values(nodes).bifurcate((each) => each.key === "servers");
 
-    const [parameters, theNodes] = values(someNodes).bifurcate(each => each.key === 'parameters');
+    const [parameters, theNodes] = values(someNodes).bifurcate((each) => each.key === "parameters");
     if (length(parameters) > 0) {
       this.pathParameters = [];
       for (const { value, key, pointer, children } of parameters) {
@@ -152,22 +154,20 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
       }
     }
 
-
     // set the operationServers if they exist.
-    servers.forEach(s => this.pathServers = s.value);
+    servers.forEach((s) => (this.pathServers = s.value));
 
     // handle the rest.
     for (const { value, key, pointer, children } of theNodes) {
       switch (key) {
-
-        case 'get':
-        case 'put':
-        case 'post':
-        case 'delete':
-        case 'options':
-        case 'head':
-        case 'patch':
-        case 'trace':
+        case "get":
+        case "put":
+        case "post":
+        case "delete":
+        case "options":
+        case "head":
+        case "patch":
+        case "trace":
           this.visitHttpOperation(this.newObject(targetParent, key, pointer), children);
           break;
 
@@ -183,50 +183,89 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   }
 
   visitHttpOperation(targetParent: AnyObject, nodes: Iterable<Node>) {
-
     // split out the servers first.
-    const [servers, theNodes] = values(nodes).bifurcate(each => each.key === 'servers');
+    const [servers, theNodes] = values(nodes).bifurcate((each) => each.key === "servers");
 
     // set the operationServers if they exist.
-    servers.forEach(s => this.operationServers = s.value);
+    servers.forEach((s) => (this.operationServers = s.value));
 
-    this.clone(targetParent, 'servers', '/', this.servers);
+    this.clone(targetParent, "servers", "/", this.servers);
 
-    let newArray = length(this.pathParameters) > 0 ? this.newArray(targetParent, 'parameters', '') : undefined;
+    let newArray = length(this.pathParameters) > 0 ? this.newArray(targetParent, "parameters", "") : undefined;
     if (newArray) {
       for (const child of this.pathParameters ?? []) {
-        const p = this.dereference('/components/parameters', this.parameters, this.visitParameter, newArray, child.key, child.pointer, child.value, child.children);
+        const p = this.dereference(
+          "/components/parameters",
+          this.parameters,
+          this.visitParameter,
+          newArray,
+          child.key,
+          child.pointer,
+          child.value,
+          child.children,
+        );
         // tag it as a method parameter. (default is 'client', so we have to tag it when we move it.)
-        if (!child.value.$ref && p['x-ms-parameter-location'] === undefined) {
-          p['x-ms-parameter-location'] = { value: 'method', pointer: '' };
+        if (!child.value.$ref && p["x-ms-parameter-location"] === undefined) {
+          p["x-ms-parameter-location"] = { value: "method", pointer: "" };
         }
       }
     }
 
     for (const { value, key, pointer, children } of theNodes) {
       switch (key) {
-        case 'parameters': {
-          // parameters are a small special case, because they have to be tweaked when they are moved to the global parameter section.
-          newArray = newArray || this.newArray(targetParent, key, pointer);
+        case "parameters":
+          {
+            // parameters are a small special case, because they have to be tweaked when they are moved to the global parameter section.
+            newArray = newArray || this.newArray(targetParent, key, pointer);
 
-          for (const child of children) {
-            const p = this.dereference('/components/parameters', this.parameters, this.visitParameter, newArray, length(this.pathParameters) + child.key, child.pointer, child.value, child.children);
-            // tag it as a method parameter. (default is 'client', so we have to tag it when we move it.)
-            if (!child.value.$ref && p['x-ms-parameter-location'] === undefined) {
-              p['x-ms-parameter-location'] = { value: 'method', pointer: '' };
+            for (const child of children) {
+              const p = this.dereference(
+                "/components/parameters",
+                this.parameters,
+                this.visitParameter,
+                newArray,
+                length(this.pathParameters) + child.key,
+                child.pointer,
+                child.value,
+                child.children,
+              );
+              // tag it as a method parameter. (default is 'client', so we have to tag it when we move it.)
+              if (!child.value.$ref && p["x-ms-parameter-location"] === undefined) {
+                p["x-ms-parameter-location"] = { value: "method", pointer: "" };
+              }
             }
           }
-        }
           break;
 
-        case 'requestBody':
-          this.dereference('/components/requestBodies', this.requestBodies, this.visitRequestBody, targetParent, key, pointer, value, children);
+        case "requestBody":
+          this.dereference(
+            "/components/requestBodies",
+            this.requestBodies,
+            this.visitRequestBody,
+            targetParent,
+            key,
+            pointer,
+            value,
+            children,
+          );
           break;
-        case 'responses':
-          this.dereferenceItems('/components/responses', this.responses, this.visitResponse, this.newObject(targetParent, key, pointer), children);
+        case "responses":
+          this.dereferenceItems(
+            "/components/responses",
+            this.responses,
+            this.visitResponse,
+            this.newObject(targetParent, key, pointer),
+            children,
+          );
           break;
-        case 'callbacks':
-          this.dereferenceItems('/components/callbacks', this.callbacks, this.visitCallback, this.newObject(targetParent, key, pointer), children);
+        case "callbacks":
+          this.dereferenceItems(
+            "/components/callbacks",
+            this.callbacks,
+            this.visitCallback,
+            this.newObject(targetParent, key, pointer),
+            children,
+          );
           break;
         default:
           this.clone(targetParent, key, pointer, value);
@@ -236,23 +275,31 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
     // reset at end
     this.operationServers = undefined;
-
   }
 
   visitParameter(targetParent: AnyObject, nodes: Iterable<Node>) {
-    const [requiredNodes, theOtherNodes] = values(nodes).bifurcate(each => each.key === 'required');
-    const isRequired = (requiredNodes.length > 0) ? !!requiredNodes[0].value : false;
+    const [requiredNodes, theOtherNodes] = values(nodes).bifurcate((each) => each.key === "required");
+    const isRequired = requiredNodes.length > 0 ? !!requiredNodes[0].value : false;
     for (const { value, key, pointer, children } of theOtherNodes) {
       switch (key) {
-        case 'schema':
+        case "schema":
           if (isRequired && value.enum && value.enum.length === 1) {
             // if an enum has a single value and it is required, then it's just a constant. Thus, not necessary to shake it.
             this.clone(targetParent, key, pointer, value);
             break;
           }
-          this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
+          this.dereference(
+            "/components/schemas",
+            this.schemas,
+            this.visitSchema,
+            targetParent,
+            key,
+            pointer,
+            value,
+            children,
+          );
           break;
-        case 'content':
+        case "content":
           this.visitContent(this.newObject(targetParent, key, pointer), children);
           break;
         // everything else, just copy recursively.
@@ -268,8 +315,8 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   }
 
   visitSchema(targetParent: AnyObject, originalNodes: Iterable<Node>) {
-    const object = 'object';
-    const [requiredField, theNodes] = values(originalNodes).bifurcate(each => each.key === 'required');
+    const object = "object";
+    const [requiredField, theNodes] = values(originalNodes).bifurcate((each) => each.key === "required");
     const requiredProperties = new Array<string>();
     if (requiredField[0] !== undefined) {
       requiredProperties.push(...requiredField[0].value);
@@ -277,38 +324,66 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
     for (const { value, key, pointer, children } of theNodes) {
       switch (key) {
-        case 'properties':
+        case "properties":
           this.visitProperties(this.newObject(targetParent, key, pointer), children, requiredProperties);
           break;
 
-        case 'additionalProperties':
+        case "additionalProperties":
           // In AutoRest V2, AdditionalProperties are not dereferenced.
           if (!this.isSimpleTreeShake && typeof value === object) {
             // it should be a schema
-            this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
+            this.dereference(
+              "/components/schemas",
+              this.schemas,
+              this.visitSchema,
+              targetParent,
+              key,
+              pointer,
+              value,
+              children,
+            );
           } else {
             // otherwise, just copy it across.
             this.clone(targetParent, key, pointer, value);
           }
           break;
 
-        case 'allOf':
-        case 'anyOf':
-        case 'oneOf':
+        case "allOf":
+        case "anyOf":
+        case "oneOf":
           if (this.isSimpleTreeShake) {
             // this is the same behavior as AutoRest V2. Inlined allOf, anyOf, oneOf are not shaken
             this.clone(targetParent, key, pointer, value);
           } else {
             const polymorphicCollection = this.newArray(targetParent, key, pointer);
             for (const { value: itemVal, children: itemChildren, pointer: itemPointer, key: itemKey } of children) {
-              this.dereference('/components/schemas', this.schemas, this.visitSchema, polymorphicCollection, itemKey, itemPointer, itemVal, itemChildren);
+              this.dereference(
+                "/components/schemas",
+                this.schemas,
+                this.visitSchema,
+                polymorphicCollection,
+                itemKey,
+                itemPointer,
+                itemVal,
+                itemChildren,
+              );
             }
           }
 
           break;
-        case 'not':
-        case 'items':
-          this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children, `${this.getNameHint(pointer)}Item`);
+        case "not":
+        case "items":
+          this.dereference(
+            "/components/schemas",
+            this.schemas,
+            this.visitSchema,
+            targetParent,
+            key,
+            pointer,
+            value,
+            children,
+            `${this.getNameHint(pointer)}Item`,
+          );
           break;
 
         // everything else, just copy recursively.
@@ -334,11 +409,19 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   }
 
   visitMediaType(targetParent: AnyObject, originalNodes: Iterable<Node>) {
-
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
-        case 'schema':
-          this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
+        case "schema":
+          this.dereference(
+            "/components/schemas",
+            this.schemas,
+            this.visitSchema,
+            targetParent,
+            key,
+            pointer,
+            value,
+            children,
+          );
           break;
 
         // everything else, just copy recursively.
@@ -349,13 +432,30 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     }
   }
 
-  visitArrayProperty(targetParent: AnyObject, key: string, pointer: string, value: AnyObject, children: Iterable<Node>, nameHint: string) {
+  visitArrayProperty(
+    targetParent: AnyObject,
+    key: string,
+    pointer: string,
+    value: AnyObject,
+    children: Iterable<Node>,
+    nameHint: string,
+  ) {
     const t = value?.items?.type;
-    if (t === 'boolean' || t === 'integer' || t === 'number') {
+    if (t === "boolean" || t === "integer" || t === "number") {
       this.clone(targetParent, key, pointer, value);
     } else {
       // object or string
-      this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children, nameHint);
+      this.dereference(
+        "/components/schemas",
+        this.schemas,
+        this.visitSchema,
+        targetParent,
+        key,
+        pointer,
+        value,
+        children,
+        nameHint,
+      );
     }
   }
 
@@ -363,28 +463,30 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     const getArrayItemPropertyNameHint = (jp: JsonPath) => {
       // a unique id using the path, skipping 'properties'
       // and converting the 'items' to 'item'.
-      let nameHint = '';
+      let nameHint = "";
       for (let i = 2; i < jp.length; i += 1) {
-        if (jp[i] === 'properties') {
+        if (jp[i] === "properties") {
           continue;
         }
 
-        const part = (jp[i] === 'items') ? 'item' : jp[i];
-        nameHint += (i === 2) ? `${part}` : `-${part}`;
+        const part = jp[i] === "items" ? "item" : jp[i];
+        nameHint += i === 2 ? `${part}` : `-${part}`;
       }
       return nameHint;
     };
 
     const getPropertyNameHint = (jp: JsonPath) => {
-      let nameHint = '';
+      let nameHint = "";
       for (let i = 2; i < jp.length; i += 2) {
-        nameHint += (i === 2) ? `${jp[i]}` : `-${jp[i]}`;
+        nameHint += i === 2 ? `${jp[i]}` : `-${jp[i]}`;
       }
       return nameHint;
     };
 
     const jsonPath = parseJsonPointer(pointer);
-    return (jsonPath[jsonPath.length - 3] === 'items') ? getArrayItemPropertyNameHint(jsonPath) : getPropertyNameHint(jsonPath);
+    return jsonPath[jsonPath.length - 3] === "items"
+      ? getArrayItemPropertyNameHint(jsonPath)
+      : getPropertyNameHint(jsonPath);
   }
 
   visitProperties(targetParent: AnyObject, originalNodes: Iterable<Node>, requiredProperties: Array<string>) {
@@ -393,20 +495,30 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
       // we will leave strings inlined only if they ask for simple-tree-shake. Also, if it's a string + enum + required + single val enum
       // reason: old modeler does not handle non-inlined string properties.
       switch (value.type) {
-        case 'string':
+        case "string":
           if (this.isSimpleTreeShake) {
             this.clone(targetParent, key, pointer, value);
           } else {
             const nameHint = this.getNameHint(pointer);
-            this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children, nameHint);
+            this.dereference(
+              "/components/schemas",
+              this.schemas,
+              this.visitSchema,
+              targetParent,
+              key,
+              pointer,
+              value,
+              children,
+              nameHint,
+            );
           }
           break;
-        case 'boolean':
-        case 'integer':
-        case 'number':
+        case "boolean":
+        case "integer":
+        case "number":
           this.clone(targetParent, key, pointer, value);
           break;
-        case 'array':
+        case "array":
           if (this.isSimpleTreeShake) {
             this.clone(targetParent, key, pointer, value);
           } else {
@@ -414,13 +526,25 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           }
 
           break;
-        default: {
-          // inline objects had a name of '<Class><PropertyName>'
-          // the dereference method will use the full path to build a name, and we should ask it to use the same thing that
-          // we were using before..
-          const nameHint = this.getNameHint(pointer);
-          this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children, nameHint, true);
-        }
+        default:
+          {
+            // inline objects had a name of '<Class><PropertyName>'
+            // the dereference method will use the full path to build a name, and we should ask it to use the same thing that
+            // we were using before..
+            const nameHint = this.getNameHint(pointer);
+            this.dereference(
+              "/components/schemas",
+              this.schemas,
+              this.visitSchema,
+              targetParent,
+              key,
+              pointer,
+              value,
+              children,
+              nameHint,
+              true,
+            );
+          }
           break;
       }
     }
@@ -430,7 +554,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
         // everything else, just copy recursively.
-        case 'content':
+        case "content":
           this.visitContent(this.newObject(targetParent, key, pointer), children);
           break;
         default:
@@ -440,7 +564,13 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     }
   }
 
-  dereferenceItems(baseReferencePath: string, targetCollection: any, visitor: (tp: any, on: Iterable<Node>) => void, targetParent: AnyObject, originalNodes: Iterable<Node>) {
+  dereferenceItems(
+    baseReferencePath: string,
+    targetCollection: any,
+    visitor: (tp: any, on: Iterable<Node>) => void,
+    targetParent: AnyObject,
+    originalNodes: Iterable<Node>,
+  ) {
     for (const { value, key, pointer, children } of originalNodes) {
       this.dereference(baseReferencePath, targetCollection, visitor, targetParent, key, pointer, value, children);
     }
@@ -449,39 +579,51 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   visitComponents(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
-        case 'schemas':
+        case "schemas":
           this.dereferenceItems(`/components/${key}`, this.schemas, this.visitSchema, this.schemas, children);
           break;
 
-        case 'responses':
+        case "responses":
           this.dereferenceItems(`/components/${key}`, this.responses, this.visitResponse, this.responses, children);
           break;
 
-        case 'parameters':
+        case "parameters":
           this.dereferenceItems(`/components/${key}`, this.parameters, this.visitParameter, this.parameters, children);
           break;
 
-        case 'examples':
+        case "examples":
           this.dereferenceItems(`/components/${key}`, this.examples, this.visitExample, this.examples, children);
           break;
 
-        case 'requestBodies':
-          this.dereferenceItems(`/components/${key}`, this.requestBodies, this.visitRequestBody, this.requestBodies, children);
+        case "requestBodies":
+          this.dereferenceItems(
+            `/components/${key}`,
+            this.requestBodies,
+            this.visitRequestBody,
+            this.requestBodies,
+            children,
+          );
           break;
 
-        case 'headers':
+        case "headers":
           this.dereferenceItems(`/components/${key}`, this.headers, this.visitHeader, this.headers, children);
           break;
 
-        case 'securitySchemes':
-          this.dereferenceItems(`/components/${key}`, this.securitySchemes, this.visitSecurityScheme, this.securitySchemes, children);
+        case "securitySchemes":
+          this.dereferenceItems(
+            `/components/${key}`,
+            this.securitySchemes,
+            this.visitSecurityScheme,
+            this.securitySchemes,
+            children,
+          );
           break;
 
-        case 'links':
+        case "links":
           this.dereferenceItems(`/components/${key}`, this.links, this.visitLink, this.links, children);
           break;
 
-        case 'callbacks':
+        case "callbacks":
           this.dereferenceItems(`/components/${key}`, this.callbacks, this.visitCallback, this.callbacks, children);
           break;
 
@@ -496,14 +638,26 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   visitResponse(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
-        case 'content':
+        case "content":
           this.visitContent(this.newObject(targetParent, key, pointer), children);
           break;
-        case 'headers':
-          this.dereferenceItems(`/components/${key}`, this.headers, this.visitHeader, this.newObject(targetParent, key, pointer), children);
+        case "headers":
+          this.dereferenceItems(
+            `/components/${key}`,
+            this.headers,
+            this.visitHeader,
+            this.newObject(targetParent, key, pointer),
+            children,
+          );
           break;
-        case 'links':
-          this.dereferenceItems(`/components/${key}`, this.links, this.visitLink, this.newObject(targetParent, key, pointer), children);
+        case "links":
+          this.dereferenceItems(
+            `/components/${key}`,
+            this.links,
+            this.visitLink,
+            this.newObject(targetParent, key, pointer),
+            children,
+          );
           break;
         // everything else, just copy recursively.
         default:
@@ -522,10 +676,19 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   visitHeader(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
-        case 'schema':
-          this.dereference('/components/schemas', this.schemas, this.visitSchema, targetParent, key, pointer, value, children);
+        case "schema":
+          this.dereference(
+            "/components/schemas",
+            this.schemas,
+            this.visitSchema,
+            targetParent,
+            key,
+            pointer,
+            value,
+            children,
+          );
           break;
-        case 'content':
+        case "content":
           this.visitContent(this.newObject(targetParent, key, pointer), children);
           break;
         // everything else, just copy recursively.
@@ -554,7 +717,18 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     }
   }
 
-  dereference(baseReferencePath: string, targetCollection: AnyObject, visitor: (tp: any, on: Iterable<Node>) => void, targetParent: AnyObject, key: string, pointer: string, value: any, children: Iterable<Node>, nameHint?: string, isAnonymous = false) {
+  dereference(
+    baseReferencePath: string,
+    targetCollection: AnyObject,
+    visitor: (tp: any, on: Iterable<Node>) => void,
+    targetParent: AnyObject,
+    key: string,
+    pointer: string,
+    value: any,
+    children: Iterable<Node>,
+    nameHint?: string,
+    isAnonymous = false,
+  ) {
     if (value.$ref) {
       // it's a reference already.
       return this.clone(targetParent, key, pointer, value);
@@ -569,17 +743,18 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
     // not a reference, move the item
 
-    const id = getNameHint(baseReferencePath, value, targetCollection, nameHint) ?? generateSchemaIdFromJsonPath(pointer);
+    const id =
+      getNameHint(baseReferencePath, value, targetCollection, nameHint) ?? generateSchemaIdFromJsonPath(pointer);
 
     // set the current location's object to be a $ref
     targetParent[key] = {
       value: {
-        $ref: `#${baseReferencePath}/${id}`,
-        description: value.description,  // we violate spec to allow a unique description at the $ref spot, (ie: there are two fields that are of type 'color' -- one is 'borderColor' and one is 'fillColor' -- may be differen descriptions.)
-        'x-ms-client-flatten': value['x-ms-client-flatten'], // we violate spec to allow flexibility in terms of flattening
-        'x-ms-client-name': value['x-ms-client-name'], // we violate spec to allow flexibility in terms of naming too. *sigh*
-        readOnly: value.readOnly
-      }, 
+        "$ref": `#${baseReferencePath}/${id}`,
+        "description": value.description, // we violate spec to allow a unique description at the $ref spot, (ie: there are two fields that are of type 'color' -- one is 'borderColor' and one is 'fillColor' -- may be differen descriptions.)
+        "x-ms-client-flatten": value["x-ms-client-flatten"], // we violate spec to allow flexibility in terms of flattening
+        "x-ms-client-name": value["x-ms-client-name"], // we violate spec to allow flexibility in terms of naming too. *sigh*
+        "readOnly": value.readOnly,
+      },
       pointer,
     };
 
@@ -590,25 +765,33 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     // copy the parts of the parameter across
     visitor.bind(this)(newRef, children);
 
-    if (baseReferencePath === '/components/schemas') {
+    if (baseReferencePath === "/components/schemas") {
       // x-ms-client-name correspond to the property, parameter, etc. name, not the model.
       delete newRef["x-ms-client-name"];
     }
 
     if (isAnonymous) {
-      newRef['x-internal-autorest-anonymous-schema'] = { value: { anonymous: true }, pointer: '' };
+      newRef["x-internal-autorest-anonymous-schema"] = { value: { anonymous: true }, pointer: "" };
     }
     return newRef;
   }
 }
 
 async function shakeTree(config: ConfigurationView, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
+  const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
-  const isSimpleTreeShake = !!config.GetEntry('simple-tree-shake');
+  const isSimpleTreeShake = !!config.GetEntry("simple-tree-shake");
   for (const each of inputs) {
     const shaker = new OAI3Shaker(each, isSimpleTreeShake);
-    result.push(await sink.WriteObject('oai3.shaken.json', await shaker.getOutput(), each.identity, 'openapi-document-shaken', await shaker.getSourceMappings()));
+    result.push(
+      await sink.WriteObject(
+        "oai3.shaken.json",
+        await shaker.getOutput(),
+        each.identity,
+        "openapi-document-shaken",
+        await shaker.getSourceMappings(),
+      ),
+    );
   }
   return new QuickDataSource(result, input.pipeState);
 }
@@ -618,31 +801,38 @@ export function createTreeShakerPlugin(): PipelinePlugin {
   return shakeTree;
 }
 
-
 function generateSchemaIdFromJsonPath(pointer: string): string {
-  const value = hashedJsonPointer(pointer).map(x => `${x}`
-    .toLowerCase()
-    .replace(/-+/g, '_')
-    .replace(/\W+/g, '-')
-    .split('-')
-    .filter(each => each)
-    .join('-'))
-    .filter(each => each)
-    .join('·');
-  return `${value}`.replace(/\·+/g, '·');
+  const value = hashedJsonPointer(pointer)
+    .map((x) =>
+      `${x}`
+        .toLowerCase()
+        .replace(/-+/g, "_")
+        .replace(/\W+/g, "-")
+        .split("-")
+        .filter((each) => each)
+        .join("-"),
+    )
+    .filter((each) => each)
+    .join("·");
+  return `${value}`.replace(/\·+/g, "·");
 }
 
-function getNameHint(baseReferencePath: string, value: any, targetCollection: AnyObject, nameHint?: string): string | undefined {
+function getNameHint(
+  baseReferencePath: string,
+  value: any,
+  targetCollection: AnyObject,
+  nameHint?: string,
+): string | undefined {
   if (nameHint) {
     // fix namehint to not have unexpected characters.
-    const sanitizedName = nameHint.replace(/[\/\\]+/g, '-');
+    const sanitizedName = nameHint.replace(/[\/\\]+/g, "-");
     if (targetCollection[sanitizedName]) {
       return undefined;
     }
     return sanitizedName;
   } else {
-    if (baseReferencePath === '/components/schemas') {
-      const initialName = value['x-ms-client-name'] ?? value.title;
+    if (baseReferencePath === "/components/schemas") {
+      const initialName = value["x-ms-client-name"] ?? value.title;
       return findFirstAvailableKey(targetCollection, initialName);
     }
     return undefined;

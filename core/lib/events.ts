@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as events from 'events';
+import * as events from "events";
 
 export interface IEvent<TSender extends events.EventEmitter, TArgs> {
   Subscribe(fn: (sender: TSender, args: TArgs) => void): () => void;
@@ -22,7 +22,7 @@ export class EventDispatcher<TSender extends EventEmitter, TArgs> implements IEv
   }
 
   UnsubscribeAll() {
-    // call all the unsubscribes 
+    // call all the unsubscribes
     for (const each of this._subscriptions) {
       each();
     }
@@ -34,7 +34,9 @@ export class EventDispatcher<TSender extends EventEmitter, TArgs> implements IEv
     if (fn) {
       this._instance.addListener(this._name, fn);
     }
-    const unsub = () => { this.Unsubscribe(fn); };
+    const unsub = () => {
+      this.Unsubscribe(fn);
+    };
     this._subscriptions.push(unsub);
     return unsub;
   }
@@ -71,7 +73,7 @@ export class EventEmitter extends events.EventEmitter {
         enumerable: true,
         get: () => {
           return instance._subscriptions.get(propertyKey);
-        }
+        },
       };
       Object.defineProperty(instance, propertyKey, prop);
     };

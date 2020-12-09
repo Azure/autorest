@@ -4,22 +4,27 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, Mapping } from '@azure-tools/datastore';
-import * as commonmark from 'commonmark';
+import { DataHandle, DataSink, Mapping } from "@azure-tools/datastore";
+import * as commonmark from "commonmark";
 
-export async function parse(hConfigFile: DataHandle, sink: DataSink): Promise<Array<{ data: DataHandle; codeBlock: commonmark.Node }>> {
+export async function parse(
+  hConfigFile: DataHandle,
+  sink: DataSink,
+): Promise<Array<{ data: DataHandle; codeBlock: commonmark.Node }>> {
   const result: Array<{ data: DataHandle; codeBlock: commonmark.Node }> = [];
   const rawMarkdown = await hConfigFile.ReadData();
   for (const codeBlock of parseCodeblocks(rawMarkdown)) {
     const codeBlockKey = `codeBlock_${codeBlock.sourcepos[0][0]}`;
 
-    const data = codeBlock.literal || '';
+    const data = codeBlock.literal || "";
     const mappings = getSourceMapForCodeBlock(hConfigFile.key, codeBlock);
 
-    const hCodeBlock = await sink.WriteData(codeBlockKey, data, hConfigFile.identity, undefined, mappings, [hConfigFile]);
+    const hCodeBlock = await sink.WriteData(codeBlockKey, data, hConfigFile.identity, undefined, mappings, [
+      hConfigFile,
+    ]);
     result.push({
       data: hCodeBlock,
-      codeBlock
+      codeBlock,
     });
   }
   return result;
@@ -32,14 +37,14 @@ function getSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark.
     result.push({
       generated: {
         line: i + 1,
-        column: 0
+        column: 0,
       },
       original: {
         line: i + codeBlock.sourcepos[0][0] + (codeBlock.info === null ? 0 : 1),
-        column: codeBlock.sourcepos[0][1] - 1
+        column: codeBlock.sourcepos[0][1] - 1,
       },
       source: sourceFileName,
-      name: `Codeblock line '${i + 1}'`
+      name: `Codeblock line '${i + 1}'`,
     });
   }
   return result;
@@ -55,19 +60,17 @@ function* parseCodeblocks(markdown: string): Iterable<commonmark.Node> {
   let event;
   while ((event = walker.next())) {
     const node = event.node;
-    if (event.entering && node.type === 'code_block') {
+    if (event.entering && node.type === "code_block") {
       yield node;
     }
   }
 }
 
-const commonmarkHeadingNodeType = 'heading';
+const commonmarkHeadingNodeType = "heading";
 const commonmarkHeadingMaxLevel = 1000;
 
 function commonmarkParentHeading(startNode: commonmark.Node): commonmark.Node | null {
-  const currentLevel = startNode.type === commonmarkHeadingNodeType
-    ? startNode.level
-    : commonmarkHeadingMaxLevel;
+  const currentLevel = startNode.type === commonmarkHeadingNodeType ? startNode.level : commonmarkHeadingMaxLevel;
 
   let resultNode: commonmark.Node | null = startNode;
   while (resultNode != null && (resultNode.type !== commonmarkHeadingNodeType || resultNode.level >= currentLevel)) {
@@ -100,7 +103,7 @@ export function* commonmarkSubHeadings(startNode: commonmark.Node | null): Itera
 }
 
 export function commonmarkHeadingText(headingNode: commonmark.Node): string {
-  let text = '';
+  let text = "";
   let node = headingNode.firstChild;
   while (node) {
     text += node.literal;
@@ -111,11 +114,15 @@ export function commonmarkHeadingText(headingNode: commonmark.Node): string {
 
 export function commonmarkHeadingFollowingText(headingNode: commonmark.Node): [number, number] {
   let subNode = headingNode.next;
-  if (subNode === null) { throw new Error('No node found after heading node'); }
+  if (subNode === null) {
+    throw new Error("No node found after heading node");
+  }
   const startPos = subNode.sourcepos[0];
-  while (subNode.next
-    && subNode.next.type !== 'code_block'
-    && (subNode.next.type !== commonmarkHeadingNodeType /* || subNode.next.level > headingNode.level*/)) {
+  while (
+    subNode.next &&
+    subNode.next.type !== "code_block" &&
+    subNode.next.type !== commonmarkHeadingNodeType /* || subNode.next.level > headingNode.level*/
+  ) {
     subNode = subNode.next;
   }
   const endPos = subNode.sourcepos[1];

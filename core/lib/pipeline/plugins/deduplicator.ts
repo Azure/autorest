@@ -3,20 +3,20 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, DataSource, QuickDataSource } from '@azure-tools/datastore';
-import { Deduplicator } from '@azure-tools/deduplication';
-import { ConfigurationView } from '../../configuration';
-import { PipelinePlugin } from '../common';
-import { values } from '@azure-tools/linq';
-import { Channel } from '../../message';
+import { DataHandle, DataSink, DataSource, QuickDataSource } from "@azure-tools/datastore";
+import { Deduplicator } from "@azure-tools/deduplication";
+import { ConfigurationView } from "../../configuration";
+import { PipelinePlugin } from "../common";
+import { values } from "@azure-tools/linq";
+import { Channel } from "../../message";
 
 async function deduplicate(config: ConfigurationView, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map(async x => input.ReadStrict(x)));
+  const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
 
-  const idm = !!config['deduplicate-inline-models'];
+  const idm = !!config["deduplicate-inline-models"];
 
-  for (const each of values(inputs).where(input => input.artifactType !== 'profile-filter-log')) {
+  for (const each of values(inputs).where((input) => input.artifactType !== "profile-filter-log")) {
     const model = <any>await each.ReadObject();
 
     /* 
@@ -30,12 +30,30 @@ async function deduplicate(config: ConfigurationView, input: DataSource, sink: D
     */
 
     // skip if it's already marked that it was done.
-    if (model.info?.['x-ms-metadata']?.deduplicated) {
-      result.push(await sink.WriteObject('oai3.model-deduplicated.json', model, each.identity, 'openapi-document-deduplicated', []));
+    if (model.info?.["x-ms-metadata"]?.deduplicated) {
+      result.push(
+        await sink.WriteObject(
+          "oai3.model-deduplicated.json",
+          model,
+          each.identity,
+          "openapi-document-deduplicated",
+          [],
+        ),
+      );
       continue;
     }
     const deduplicator = new Deduplicator(model, idm);
-    result.push(await sink.WriteObject('oai3.model-deduplicated.json', await deduplicator.getOutput(), each.identity, 'openapi-document-deduplicated', [/* fix-me: Construct source map from the mappings returned by the deduplicator.s*/]));
+    result.push(
+      await sink.WriteObject(
+        "oai3.model-deduplicated.json",
+        await deduplicator.getOutput(),
+        each.identity,
+        "openapi-document-deduplicated",
+        [
+          /* fix-me: Construct source map from the mappings returned by the deduplicator.s*/
+        ],
+      ),
+    );
   }
 
   return new QuickDataSource(result, input.pipeState);

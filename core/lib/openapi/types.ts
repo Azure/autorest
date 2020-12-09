@@ -3,10 +3,6 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-interface OpenApi2Definition {
+interface OpenApi2Definition {}
 
-}
-
-interface OpenApi3Definition {
-
-}
+interface OpenApi3Definition {}

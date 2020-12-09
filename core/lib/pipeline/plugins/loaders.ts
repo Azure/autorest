@@ -3,24 +3,35 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { PipelinePlugin } from '../common';
+import { PipelinePlugin } from "../common";
 
-import { ConfigurationView } from '../../autorest-core';
-import { Channel, SourceLocation } from '../../message';
-import { commonmarkHeadingFollowingText, commonmarkSubHeadings, parseCommonmark } from '../../parsing/literate';
-import { parse as ParseLiterateYaml } from '../../parsing/literate-yaml';
+import { ConfigurationView } from "../../autorest-core";
+import { Channel, SourceLocation } from "../../message";
+import { commonmarkHeadingFollowingText, commonmarkSubHeadings, parseCommonmark } from "../../parsing/literate";
+import { parse as ParseLiterateYaml } from "../../parsing/literate-yaml";
 
-import { CloneAst, DataHandle, DataSink, DataSource, IndexToPosition, Lines, Mapping, QuickDataSource, StrictJsonSyntaxCheck, StringifyAst } from '@azure-tools/datastore';
+import {
+  CloneAst,
+  DataHandle,
+  DataSink,
+  DataSource,
+  IndexToPosition,
+  Lines,
+  Mapping,
+  QuickDataSource,
+  StrictJsonSyntaxCheck,
+  StringifyAst,
+} from "@azure-tools/datastore";
 
-import { IdentitySourceMapping } from '../../source-map/merging';
-import { crawlReferences } from './ref-crawling';
+import { IdentitySourceMapping } from "../../source-map/merging";
+import { crawlReferences } from "./ref-crawling";
 
 /**
  * If a JSON file is provided, it checks that the syntax is correct.
  * And if the syntax is incorrect, it puts an error message .
  */
 async function checkSyntaxFromData(fileUri: string, handle: DataHandle, configView: ConfigurationView): Promise<void> {
-  if (fileUri.toLowerCase().endsWith('.json')) {
+  if (fileUri.toLowerCase().endsWith(".json")) {
     const error = StrictJsonSyntaxCheck(await handle.ReadData());
     if (error) {
       configView.Message({
@@ -38,16 +49,20 @@ async function checkSyntaxFromData(fileUri: string, handle: DataHandle, configVi
  */
 function isOpenAPI3Spec(specObject: OpenAPI3Spec): boolean {
   const wasOpenApiVersionFound = /^3\.\d+\.\d+$/g.exec(<string>specObject.openapi);
-  return (wasOpenApiVersionFound) ? true : false;
+  return wasOpenApiVersionFound ? true : false;
 }
 
-
-export async function LoadLiterateSwagger(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle | null> {
+export async function LoadLiterateSwagger(
+  config: ConfigurationView,
+  inputScope: DataSource,
+  inputFileUri: string,
+  sink: DataSink,
+): Promise<DataHandle | null> {
   const handle = await inputScope.ReadStrict(inputFileUri);
   await checkSyntaxFromData(inputFileUri, handle, config);
   const data = await ParseLiterateYaml(config, handle, sink);
   // check OpenAPI version
-  if ((await data.ReadObject<any>()).swagger !== '2.0') {
+  if ((await data.ReadObject<any>()).swagger !== "2.0") {
     return null;
     // TODO: Should we throw or send an error message?
   }
@@ -56,10 +71,15 @@ export async function LoadLiterateSwagger(config: ConfigurationView, inputScope:
   const ast = CloneAst(await data.ReadYamlAst());
   const mapping = IdentitySourceMapping(data.key, ast);
 
-  return sink.WriteData(handle.Description, StringifyAst(ast), [inputFileUri], 'swagger-document', mapping, [data]);
+  return sink.WriteData(handle.Description, StringifyAst(ast), [inputFileUri], "swagger-document", mapping, [data]);
 }
 
-export async function LoadLiterateOpenAPI(config: ConfigurationView, inputScope: DataSource, inputFileUri: string, sink: DataSink): Promise<DataHandle | null> {
+export async function LoadLiterateOpenAPI(
+  config: ConfigurationView,
+  inputScope: DataSource,
+  inputFileUri: string,
+  sink: DataSink,
+): Promise<DataHandle | null> {
   const handle = await inputScope.ReadStrict(inputFileUri);
   await checkSyntaxFromData(inputFileUri, handle, config);
   const data = await ParseLiterateYaml(config, handle, sink);
@@ -72,10 +92,15 @@ export async function LoadLiterateOpenAPI(config: ConfigurationView, inputScope:
   const ast = CloneAst(await data.ReadYamlAst());
   const mapping = IdentitySourceMapping(data.key, ast);
 
-  return sink.WriteData(handle.Description, StringifyAst(ast), [inputFileUri], 'openapi-document', mapping, [data]);
+  return sink.WriteData(handle.Description, StringifyAst(ast), [inputFileUri], "openapi-document", mapping, [data]);
 }
 
-export async function LoadLiterateSwaggers(config: ConfigurationView, inputScope: DataSource, inputFileUris: Array<string>, sink: DataSink): Promise<Array<DataHandle>> {
+export async function LoadLiterateSwaggers(
+  config: ConfigurationView,
+  inputScope: DataSource,
+  inputFileUris: Array<string>,
+  sink: DataSink,
+): Promise<Array<DataHandle>> {
   const rawSwaggers: Array<DataHandle> = [];
   for (const inputFileUri of inputFileUris) {
     // read literate Swagger
@@ -88,7 +113,12 @@ export async function LoadLiterateSwaggers(config: ConfigurationView, inputScope
   return rawSwaggers;
 }
 
-export async function LoadLiterateOpenAPIs(config: ConfigurationView, inputScope: DataSource, inputFileUris: Array<string>, sink: DataSink): Promise<Array<DataHandle>> {
+export async function LoadLiterateOpenAPIs(
+  config: ConfigurationView,
+  inputScope: DataSource,
+  inputFileUris: Array<string>,
+  sink: DataSink,
+): Promise<Array<DataHandle>> {
   const rawOpenApis: Array<DataHandle> = [];
   for (const inputFileUri of inputFileUris) {
     // read literate Swagger
@@ -99,7 +129,6 @@ export async function LoadLiterateOpenAPIs(config: ConfigurationView, inputScope
   }
   return rawOpenApis;
 }
-
 
 interface OpenAPI3Spec {
   openapi?: string;
@@ -112,12 +141,7 @@ interface OpenAPI3Spec {
 export function createSwaggerLoaderPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
     const inputs = config.InputFileUris;
-    const swaggers = await LoadLiterateSwaggers(
-      config,
-      input,
-      inputs,
-      sink
-    );
+    const swaggers = await LoadLiterateSwaggers(config, input, inputs, sink);
 
     const foundAllFiles = swaggers.length !== inputs.length;
     let result: Array<DataHandle> = [];
@@ -133,12 +157,7 @@ export function createSwaggerLoaderPlugin(): PipelinePlugin {
 export function createOpenApiLoaderPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
     const inputs = config.InputFileUris;
-    const openapis = await LoadLiterateOpenAPIs(
-      config,
-      input,
-      inputs,
-      sink
-    );
+    const openapis = await LoadLiterateOpenAPIs(config, input, inputs, sink);
     let result: Array<DataHandle> = [];
     if (openapis.length === inputs.length) {
       result = await crawlReferences(config, input, openapis, sink);
@@ -146,4 +165,3 @@ export function createOpenApiLoaderPlugin(): PipelinePlugin {
     return new QuickDataSource(result, { skipping: openapis.length !== inputs.length });
   };
 }
-

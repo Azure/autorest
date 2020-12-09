@@ -1,9 +1,19 @@
-import { AnyObject, DataHandle, DataSink, DataSource, Node, ProxyObject, QuickDataSource, Transformer, visit } from '@azure-tools/datastore';
-import { clone, Dictionary, values, visitor } from '@azure-tools/linq';
+import {
+  AnyObject,
+  DataHandle,
+  DataSink,
+  DataSource,
+  Node,
+  ProxyObject,
+  QuickDataSource,
+  Transformer,
+  visit,
+} from "@azure-tools/datastore";
+import { clone, Dictionary, values, visitor } from "@azure-tools/linq";
 
-import * as oai from '@azure-tools/openapi';
-import { ConfigurationView } from '../../configuration';
-import { PipelinePlugin } from '../common';
+import * as oai from "@azure-tools/openapi";
+import { ConfigurationView } from "../../configuration";
+import { PipelinePlugin } from "../common";
 
 /**
  * Takes multiple input OAI3 files and creates one merged one.
@@ -57,7 +67,11 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
   apiVersions = new Set();
   titles = new Set();
 
-  constructor(input: Array<DataHandle>, protected overrideTitle: string | undefined, protected overrideDescription: string | undefined) {
+  constructor(
+    input: Array<DataHandle>,
+    protected overrideTitle: string | undefined,
+    protected overrideDescription: string | undefined,
+  ) {
     super(input);
   }
 
@@ -65,75 +79,77 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
    * returns true when the current source file is marked x-ms-secondary-file: true
    */
   protected get isSecondaryFile(): boolean {
-    return this.current['x-ms-secondary-file'] === true;
+    return this.current["x-ms-secondary-file"] === true;
   }
 
   protected get info() {
-    return this.getOrCreateObject(this.generated, 'info', '/info');
+    return this.getOrCreateObject(this.generated, "info", "/info");
   }
 
   protected get metadata() {
-    return this.getOrCreateObject(this.info, 'x-ms-metadata', '/');
+    return this.getOrCreateObject(this.info, "x-ms-metadata", "/");
   }
 
   public async process(target: ProxyObject<oai.Model>, nodes: Iterable<Node>) {
-
     for (const { key, value, pointer, children } of nodes) {
       switch (key) {
-        case 'paths':
+        case "paths":
           if (!this.isSecondaryFile) {
-            const paths = <oai.PathItem>target.paths || this.newObject(target, 'paths', pointer);
+            const paths = <oai.PathItem>target.paths || this.newObject(target, "paths", pointer);
             this.visitPaths(paths, children);
           }
           break;
 
-        case 'components': {
-          const components = <oai.Components>target.components || this.newObject(target, 'components', pointer);
-          this.visitComponents(components, children);
-        }
+        case "components":
+          {
+            const components = <oai.Components>target.components || this.newObject(target, "components", pointer);
+            this.visitComponents(components, children);
+          }
           break;
 
-        case 'servers':
-        case 'security':
-        case 'tags':
+        case "servers":
+        case "security":
+        case "tags":
           if (!this.isSecondaryFile) {
             const array = <any>target[key] || this.newArray(target, key, pointer);
             for (const item of children) {
               array.__push__({
                 value: item.value,
                 pointer: item.pointer,
-                recurse: true
+                recurse: true,
               });
             }
           }
           break;
 
-        case 'info':
+        case "info":
           if (!this.isSecondaryFile) {
-            const info = this.getOrCreateObject(target, 'info', pointer);
+            const info = this.getOrCreateObject(target, "info", pointer);
             this.visitInfo(info, children);
           }
 
           break;
 
-        case 'externalDocs':
+        case "externalDocs":
           if (!this.isSecondaryFile) {
             if (!target.externalDocs) {
-              const docs = this.newObject(target, 'externalDocs', pointer);
+              const docs = this.newObject(target, "externalDocs", pointer);
               for (const child of children) {
                 this.copy(docs, child.key, child.pointer, child.value, true);
               }
             }
-            const docsMetadata = (<oai.ExternalDocumentation>target.externalDocs)['x-ms-metadata'] || this.newArray(<oai.ExternalDocumentation>target.externalDocs, 'x-ms-metadata', pointer);
+            const docsMetadata =
+              (<oai.ExternalDocumentation>target.externalDocs)["x-ms-metadata"] ||
+              this.newArray(<oai.ExternalDocumentation>target.externalDocs, "x-ms-metadata", pointer);
             docsMetadata.__push__({
               value: clone(value),
               pointer,
-              recurse: true
+              recurse: true,
             });
           }
           break;
 
-        case 'openapi':
+        case "openapi":
           if (!this.isSecondaryFile) {
             if (!target.openapi) {
               this.copy(target, key, pointer, value);
@@ -155,25 +171,25 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     // just in case it wasn't done before we got here.
     this.expandRefs(this.generated);
 
-    // mark this merged. 
+    // mark this merged.
     if (!this.metadata.merged) {
-      this.metadata.merged = { value: true, pointer: '/', filename: this.currentInputFilename };
+      this.metadata.merged = { value: true, pointer: "/", filename: this.currentInputFilename };
     }
   }
 
   visitInfo(info: ProxyObject<Dictionary<oai.Info>>, nodes: Iterable<Node>) {
     for (const { key, value, pointer } of nodes) {
       switch (key) {
-        case 'title':
+        case "title":
           this.titles.add(value);
           break;
-        case 'description':
+        case "description":
           this.descriptions.add(value);
           break;
-        case 'version':
+        case "version":
           this.apiVersions.add(value);
           break;
-        case 'x-ms-metadata':
+        case "x-ms-metadata":
           // do nothing. This is handled at finish()
           break;
         default:
@@ -182,16 +198,15 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
           }
 
           break;
-
       }
     }
   }
 
   protected expandRefs(node: any) {
     for (const { value } of visit(node)) {
-      if (value && typeof value === 'object') {
+      if (value && typeof value === "object") {
         const ref = value.$ref;
-        if (ref && ref.startsWith('#')) {
+        if (ref && ref.startsWith("#")) {
           const fullRef = `${(<DataHandle>this.currentInput).originalFullPath}${ref}`;
           // change local refs to full ref
           value.$ref = fullRef;
@@ -210,31 +225,43 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     const info = <AnyObject>this.generated.info;
     // set the document's info that we haven't processed yet.
     if (this.overrideTitle) {
-      info.title = { value: this.overrideTitle, pointer: '/info/title', filename: this.currentInputFilename };
+      info.title = { value: this.overrideTitle, pointer: "/info/title", filename: this.currentInputFilename };
     } else {
       const titles = [...this.titles.values()];
 
       if (titles.length === 0) {
-        throw new Error('No \'title\' in provided OpenAPI definition(s).');
+        throw new Error("No 'title' in provided OpenAPI definition(s).");
       }
       if (titles.length > 1) {
-        throw new Error(`The 'title' across provided OpenAPI definitions has to match. Found: ${titles.map(x => `'${x}'`).join(', ')}. Please adjust or provide an override (--title=...).`);
+        throw new Error(
+          `The 'title' across provided OpenAPI definitions has to match. Found: ${titles
+            .map((x) => `'${x}'`)
+            .join(", ")}. Please adjust or provide an override (--title=...).`,
+        );
       }
-      info.title = { value: titles[0], pointer: '/info/title', filename: this.currentInputFilename };
+      info.title = { value: titles[0], pointer: "/info/title", filename: this.currentInputFilename };
     }
 
     if (this.overrideDescription) {
-      info.description = { value: this.overrideDescription, pointer: '/info/description', filename: this.currentInputFilename };
+      info.description = {
+        value: this.overrideDescription,
+        pointer: "/info/description",
+        filename: this.currentInputFilename,
+      };
     } else {
       const descriptions = [...this.descriptions.values()];
       if (descriptions[0]) {
-        info.description = { value: descriptions[0], pointer: '/info/description', filename: this.currentInputFilename };
+        info.description = {
+          value: descriptions[0],
+          pointer: "/info/description",
+          filename: this.currentInputFilename,
+        };
       }
     }
 
     const versions = [...this.apiVersions.values()];
-    this.metadata.apiVersions = { value: versions, pointer: '/' };
-    info.version = { value: versions[0], pointer: '/info/version' }; // todo: should this be the max version?
+    this.metadata.apiVersions = { value: versions, pointer: "/" };
+    info.version = { value: versions[0], pointer: "/info/version" }; // todo: should this be the max version?
 
     // walk thru the generated document, find all the $refs and update them to the new location
     this.updateRefs(this.generated);
@@ -242,15 +269,15 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
 
   protected updateRefs(node: any) {
     for (const { key, value } of visit(node)) {
-      if (value && typeof value === 'object') {
+      if (value && typeof value === "object") {
         const ref = value.$ref;
         if (ref) {
           // see if this object has a $ref
           const newRef = this.refs[ref];
           if (newRef) {
             if (value.__rewrite__) {
-              // special case where the value was a proxy object 
-              value.__rewrite__('$ref', newRef);
+              // special case where the value was a proxy object
+              value.__rewrite__("$ref", newRef);
             } else {
               // most of the time it's not.
               value.$ref = newRef;
@@ -280,47 +307,50 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
       const operation = this.newObject(paths, `${uid}`, pointer);
       const metadata = {
         value: {
-          apiVersions: [this.current.info && this.current.info.version ? this.current.info.version : ''], // track the API version this came from
-          filename: [this.currentInputFilename],                       // and the filename
-          path: key,	                                // and here is the path from the operation.
-          originalLocations: [originalLocation]
-        }, pointer
+          apiVersions: [this.current.info && this.current.info.version ? this.current.info.version : ""], // track the API version this came from
+          filename: [this.currentInputFilename], // and the filename
+          path: key, // and here is the path from the operation.
+          originalLocations: [originalLocation],
+        },
+        pointer,
       };
 
-      operation['x-ms-metadata'] = metadata;
+      operation["x-ms-metadata"] = metadata;
 
       // now, let's copy the rest of the operation into the operation object
       for (const child of children) {
         // check if operation if not is common and should be put in each one.
         switch (child.key) {
-          case 'get':
-          case 'put':
-          case 'post':
-          case 'delete':
-          case 'options':
-          case 'head':
-          case 'patch':
-          case 'trace': {
-            const childOperation = this.newObject(paths, `${uid}.${child.key}`, pointer);
-            childOperation['x-ms-metadata'] = clone(metadata);
-            this.copy(childOperation, child.key, child.pointer, child.value);
-            if (value.parameters) {
-              if (childOperation[child.key].parameters) {
-                childOperation[child.key].parameters.unshift(...clone(value.parameters).filter((x: { in: string; name: string }) => {
-                  for (const param of childOperation[child.key].parameters) {
-                    if (x.in === param.in && x.name === param.name) {
-                      return false;
-                    }
-                  }
+          case "get":
+          case "put":
+          case "post":
+          case "delete":
+          case "options":
+          case "head":
+          case "patch":
+          case "trace":
+            {
+              const childOperation = this.newObject(paths, `${uid}.${child.key}`, pointer);
+              childOperation["x-ms-metadata"] = clone(metadata);
+              this.copy(childOperation, child.key, child.pointer, child.value);
+              if (value.parameters) {
+                if (childOperation[child.key].parameters) {
+                  childOperation[child.key].parameters.unshift(
+                    ...clone(value.parameters).filter((x: { in: string; name: string }) => {
+                      for (const param of childOperation[child.key].parameters) {
+                        if (x.in === param.in && x.name === param.name) {
+                          return false;
+                        }
+                      }
 
-                  return true;
+                      return true;
+                    }),
+                  );
+                } else {
+                  childOperation[child.key].parameters = clone(value.parameters);
                 }
-                ));
-              } else {
-                childOperation[child.key].parameters = clone(value.parameters);
               }
             }
-          }
             break;
           // case 'parameters':
           // they are placed at the beginning of the array parameters per operation.
@@ -344,7 +374,6 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
 
   visitComponent<T>(type: string, container: ProxyObject<Dictionary<T>>, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
-
       const uid = `${type}:${this.cCount[type]++}`;
 
       // tag the current pointer with a the new location
@@ -355,18 +384,22 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
       this.refs[`#${pointer}`] = localRef;
 
       // for enums we need to use the name from the x-ms-enum. Otherwise, we can get collisions later on.
-      const name = (type === 'schemas' && value['x-ms-enum'] !== undefined && value['x-ms-enum'].name !== undefined) ? value['x-ms-enum'].name : key;
+      const name =
+        type === "schemas" && value["x-ms-enum"] !== undefined && value["x-ms-enum"].name !== undefined
+          ? value["x-ms-enum"].name
+          : key;
 
       const component: AnyObject = this.newObject(container, `${uid}`, pointer);
-      if (!value['x-ms-metadata']) {
-        component['x-ms-metadata'] = {
+      if (!value["x-ms-metadata"]) {
+        component["x-ms-metadata"] = {
           value: {
-            apiVersions: [this.current.info && this.current.info.version ? this.current.info.version : ''], // track the API version this came from
-            filename: [this.currentInputFilename],                       // and the filename
+            "apiVersions": [this.current.info && this.current.info.version ? this.current.info.version : ""], // track the API version this came from
+            "filename": [this.currentInputFilename], // and the filename
             name,
-            originalLocations: [originalLocation],
-            'x-ms-secondary-file': this.isSecondaryFile
-          }, pointer
+            "originalLocations": [originalLocation],
+            "x-ms-secondary-file": this.isSecondaryFile,
+          },
+          pointer,
         };
       }
       for (const child of children) {
@@ -379,32 +412,46 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
 function cleanRefs(instance: AnyObject): AnyObject {
   for (const each of visitor(instance)) {
     if (each.instance.$ref) {
-      each.instance.$ref = each.instance.$ref.substring(each.instance.$ref.indexOf('#'));
+      each.instance.$ref = each.instance.$ref.substring(each.instance.$ref.indexOf("#"));
     }
   }
   return instance;
 }
 
 async function merge(config: ConfigurationView, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map(x => input.ReadStrict(x)));
+  const inputs = await Promise.all((await input.Enum()).map((x) => input.ReadStrict(x)));
   if (inputs.length === 1) {
-    const model = (await inputs[0].ReadObject<any>());
-    if (model.info?.['x-ms-metadata']?.merged) {
+    const model = await inputs[0].ReadObject<any>();
+    if (model.info?.["x-ms-metadata"]?.merged) {
       // this file is alone, and has been thru the merger before.
       // (this can happen if we use an OAI3 file that was captured after going thru the pipeline)
       // we're just going to clean the refs and give it back the way it came in.
       cleanRefs(model);
-      return new QuickDataSource([await sink.WriteObject('merged oai3 doc...', model, inputs[0].identity, 'merged-oai3', undefined)], input.pipeState);
+      return new QuickDataSource(
+        [await sink.WriteObject("merged oai3 doc...", model, inputs[0].identity, "merged-oai3", undefined)],
+        input.pipeState,
+      );
     }
   }
 
-  const overrideInfo = config.GetEntry('override-info');
-  const overrideTitle = (overrideInfo && overrideInfo.title) || config.GetEntry('title');
-  const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry('description');
+  const overrideInfo = config.GetEntry("override-info");
+  const overrideTitle = (overrideInfo && overrideInfo.title) || config.GetEntry("title");
+  const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry("description");
   const processor = new MultiAPIMerger(inputs, overrideTitle, overrideDescription);
 
-  // eslint-disable-next-line prefer-spread
-  return new QuickDataSource([await sink.WriteObject('merged oai3 doc...', await processor.getOutput(), [].concat.apply([], <any>inputs.map(each => each.identity)), 'merged-oai3', await processor.getSourceMappings())], input.pipeState);
+  return new QuickDataSource(
+    [
+      await sink.WriteObject(
+        "merged oai3 doc...",
+        await processor.getOutput(),
+        // eslint-disable-next-line prefer-spread
+        [].concat.apply([], <any>inputs.map((each) => each.identity)),
+        "merged-oai3",
+        await processor.getSourceMappings(),
+      ),
+    ],
+    input.pipeState,
+  );
 }
 
 /* @internal */
