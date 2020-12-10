@@ -1,21 +1,22 @@
 # Default Configuration - Java
 
-The V2 version of the Java Generator.
+The V3 version of the Java Generator.
 
-``` yaml $(java) && $(preview) && !isRequested('@autorest/java')
-# default the v2 generator to using the last stable @microsoft.azure/autorest-core 
-version: ~2.0.4413
+``` yaml $(java) && !$(legacy) && !$(v2) && !isRequested('@microsoft.azure/autorest.java')
+version: ~3.0.6298
 
 use-extension:
-  "@microsoft.azure/autorest.java": "~2.1.88"
+  "@autorest/java": "4.0.4"
 try-require: ./readme.java.md
 ```
 
-``` yaml $(java) && !isRequested('@autorest/java')
+Enable use of the V2 Java generator (and V2 core) with the `--legacy` or `--v2` parameter:
+
+``` yaml $(java) && ($(legacy) || $(v2) || isRequested('@microsoft.azure/autorest.java'))
 # default the v2 generator to using the last stable @microsoft.azure/autorest-core 
 version: ~2.0.4413
 
 use-extension:
-  "@microsoft.azure/autorest.java": "~2.1.88"
+  "@microsoft.azure/autorest.java": "three"
 try-require: ./readme.java.md
 ```

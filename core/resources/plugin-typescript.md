@@ -1,22 +1,23 @@
-# Default Configuration - Typescript
+# Default Configuration - TypeScript
 
-The V2 version of the Typescript Generator.
+The V3 version of the Typescript Generator.
 
-``` yaml $(typescript) && $(preview) && !isRequested('@autorest/typescript')
-# default the v2 generator to using the last stable @microsoft.azure/autorest-core 
-version: ~2.0.4413
+``` yaml $(typescript) && !$(legacy) && !$(v2) && !isRequested('@microsoft.azure/autorest.typescript')
+version: ~3.0.6298
 
 use-extension:
-  "@microsoft.azure/autorest.typescript": "preview"
+  "@autorest/typescript": "6.0.0-dev.20201105.2"
 try-require: ./readme.typescript.md
 ```
 
-``` yaml $(typescript) && !isRequested('@autorest/typescript')
+Enable use of the V2 TypeScript generator (and V2 core) with the `--legacy` or `--v2` parameter:
+
+``` yaml $(typescript) && ($(legacy) || $(v2) || isRequested('@microsoft.azure/autorest.typescript'))
 # default the v2 generator to using the last stable @microsoft.azure/autorest-core 
 version: ~2.0.4413
 
 use-extension:
-  "@microsoft.azure/autorest.typescript": "~4.2.0"
+  "@microsoft.azure/autorest.typescript": "~4.4.4"
 try-require: ./readme.typescript.md
 ```
 

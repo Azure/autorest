@@ -1,8 +1,8 @@
 # Default Configuration - Python
 
-The V2 version of the Python Generator.
+The V3 version of the Python Generator.
 
-``` yaml $(python) && $(v3)
+``` yaml $(python) && !$(legacy) && !$(v2) && !isRequested('@microsoft.azure/autorest.python')
 version: ~3.0.6298
 
 use-extension:
@@ -10,20 +10,13 @@ use-extension:
 try-require: ./readme.python.md
 ```
 
-``` yaml $(python) && $(preview) && !isRequested('@autorest/python')
+Enable use of the V2 Python generator (and V2 core) with the `--legacy` or `--v2` parameter:
+
+``` yaml $(python) && ($(legacy) || $(v2) || isRequested('@microsoft.azure/autorest.python'))
 # default the v2 generator to using the last stable @microsoft.azure/autorest-core 
 version: ~2.0.4413
 
 use-extension:
-  "@microsoft.azure/autorest.python": "preview"
-try-require: ./readme.python.md
-```
-
-``` yaml $(python) && !isRequested('@autorest/python')
-# default the v2 generator to using the last stable @microsoft.azure/autorest-core 
-version: ~2.0.4413
-
-use-extension:
-  "@microsoft.azure/autorest.python": "~3.0.56"
+  "@microsoft.azure/autorest.python": "~4.0.73"
 try-require: ./readme.python.md
 ```

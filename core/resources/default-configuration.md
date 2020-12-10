@@ -44,6 +44,15 @@ These extra settings are applied when `azure-arm: true`:
 head-as-boolean: true
 ```
 
+##### Extra configuration for `legacy `
+
+If `--legacy` isn't provided, we set the `track2` option to `true` to indicate
+to V3 generators that the user wants to generate a Track 2 library.
+
+``` yaml !$(legacy)
+track2: true
+```
+
 ##### Actually load files
 
 If we don't specify `--help`, we will trigger the setting to load files
