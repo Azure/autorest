@@ -31,7 +31,6 @@ export function createPerFilePlugin(
         result.push(await processor(fileIn, sink));
       }
     }
-
     return new QuickDataSource(result, input.pipeState);
   };
 }
