@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { DataHandle, DataSink, IFileSystem } from "@azure-tools/datastore";
-import { Oai2ToOai3 } from "@azure-tools/oai2-to-oai3";
+import { Oai2ToOai3  } from "@azure-tools/oai2-to-oai3";
 import { clone } from "@azure-tools/linq";
 
 export async function convertOAI2toOAI3(

@@ -223,7 +223,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     "schema-validator-swagger": createSwaggerSchemaValidatorPlugin(),
     // TODO: replace with OAV again
     "semantic-validator": createIdentityPlugin(),
-    "openapi-document-converter": createSwaggerToOpenApi3Plugin(fileSystem),
+    "openapi-document-converter": createSwaggerToOpenApi3Plugin(),
     "component-modifiers": createComponentModifierPlugin(),
     "yaml2jsonx": createYamlToJsonPlugin(),
     "jsonx2yaml": createJsonToYamlPlugin(),
