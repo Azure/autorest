@@ -16,7 +16,7 @@ export function createSwaggerToOpenApi3Plugin(fileSystem?: IFileSystem): Pipelin
     for (const { result, name } of results) {
       const input = inputs.find((x) => x.originalFullPath === name);
       if(input === undefined) {
-        throw new Error(`Unexpected error while trying to map output of file ${name}. It cannot be find as an input.`);
+        throw new Error(`Unexpected error while trying to map output of file ${name}. It cannot be found as an input.`);
       }
       const out = await sink.WriteObject("OpenAPI", clone(result), input.identity);
       resultHandles.push(await sink.Forward(input.Description, out));
