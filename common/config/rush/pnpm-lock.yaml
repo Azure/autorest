@@ -5,7 +5,7 @@ dependencies:
   '@azure-tools/deduplication': 3.0.264
   '@azure-tools/extension': 3.0.263
   '@azure-tools/linq': 3.1.261
-  '@azure-tools/oai2-to-oai3': 4.0.269
+  '@azure-tools/oai2-to-oai3': 4.1.270
   '@azure-tools/object-comparison': 3.0.251
   '@azure-tools/openapi': 3.0.260
   '@azure-tools/tasks': 3.0.252
@@ -81,6 +81,21 @@ packages:
       node: '>=10.12.0'
     resolution:
       integrity: sha512-Zsf/IHsDd235JPz2mMQsmIKLSW4DVj9uowwT66zZdY6QEY6TNe5m8pF8cBTIm/kufZzF0rrGhLZHO1rBTrUN5g==
+  /@azure-tools/datastore/4.1.266:
+    dependencies:
+      '@azure-tools/codegen': 2.5.290
+      '@azure-tools/linq': 3.1.261
+      '@azure-tools/tasks': 3.0.252
+      '@azure-tools/uri': 3.0.254
+      js-yaml: 3.13.1
+      jsonpath: 1.0.0
+      source-map: 0.5.6
+      yaml-ast-parser: 0.0.40
+    dev: false
+    engines:
+      node: '>=10.12.0'
+    resolution:
+      integrity: sha512-Rcqu9cBv4Qnu2dAHoBKP9SQ/NuM7GVvz90u2QXi9ipNRmYS1ytlrOx5kQxqcql6E084FNQ8BoUQDVQ6djg+7lA==
   /@azure-tools/deduplication/3.0.264:
     dependencies:
       '@azure-tools/codegen': 2.5.290
@@ -124,16 +139,16 @@ packages:
       node: '>=10.12.0'
     resolution:
       integrity: sha512-SRYWE2SUYXBdqGoQYjBvvFtZKHLaYvL4HJwDKOp5PA0OCm5f3gLNVsXSwgzLzh4CiYjt0vsRiQy5AB4p7b8Ogg==
-  /@azure-tools/oai2-to-oai3/4.0.269:
+  /@azure-tools/oai2-to-oai3/4.1.270:
     dependencies:
-      '@azure-tools/datastore': 4.1.264
+      '@azure-tools/datastore': 4.1.266
       '@azure-tools/openapi': 3.0.260
       source-map: 0.5.6
     dev: false
     engines:
       node: '>=10.12.0'
     resolution:
-      integrity: sha512-YyVZQA0VIi/TXA9GNh+epc+0A2hC6tcHhvlrhDwbxSVeF0YQ5OCmx5Z9Zy0wEqX4DdgsVxVOZiompNB+rTAdXg==
+      integrity: sha512-zzVPbt5Wzj8jpHckhyKBa4bPbl+kehKU/ujiNtkCCtPWEPLW2KvZBNu/GMa2SL1LVq2sRPc/FewaUHfK3tYCXA==
   /@azure-tools/object-comparison/3.0.251:
     dev: false
     engines:
@@ -4328,11 +4343,11 @@ packages:
     dependencies:
       '@azure-tools/async-io': 3.0.252
       '@azure-tools/codegen': 2.5.290
-      '@azure-tools/datastore': 4.1.264
+      '@azure-tools/datastore': 4.1.266
       '@azure-tools/deduplication': 3.0.264
       '@azure-tools/extension': 3.0.263
       '@azure-tools/linq': 3.1.261
-      '@azure-tools/oai2-to-oai3': 4.0.269
+      '@azure-tools/oai2-to-oai3': 4.1.270
       '@azure-tools/object-comparison': 3.0.251
       '@azure-tools/openapi': 3.0.260
       '@azure-tools/tasks': 3.0.252
@@ -4372,7 +4387,7 @@ packages:
     dev: false
     name: '@rush-temp/core'
     resolution:
-      integrity: sha512-T6HX1MJGCCp1PujzrR9A4gZVy294j+h2UuuILTKpXWco/nLC8qyP+maV+3SPiGw2mMQ/+r7K36lIGAa0mwLgFg==
+      integrity: sha512-p+XxX5bXk1r67ynhVc782iu5e6UjkZjOMCId3hed4jJKdaZvW+Sm6fwpbpYMhf9QWhglTpM8l2crqv0ijeCKng==
       tarball: 'file:projects/core.tgz'
     version: 0.0.0
 registry: ''
@@ -4383,7 +4398,7 @@ specifiers:
   '@azure-tools/deduplication': ~3.0.0
   '@azure-tools/extension': ~3.0.0
   '@azure-tools/linq': ~3.1.0
-  '@azure-tools/oai2-to-oai3': ~4.0.0
+  '@azure-tools/oai2-to-oai3': ~4.1.0
   '@azure-tools/object-comparison': ~3.0.0
   '@azure-tools/openapi': ~3.0.0
   '@azure-tools/tasks': ~3.0.0
