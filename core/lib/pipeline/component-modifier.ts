@@ -95,7 +95,6 @@ export function createComponentModifierPlugin(): PipelinePlugin {
           operationsTarget2[getDummyPath()] = { get: newOperation };
         }
       }
-
       return sink.WriteObject(fileIn.Description, o, fileIn.identity);
     }
     return fileIn;

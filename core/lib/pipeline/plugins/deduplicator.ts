@@ -42,6 +42,7 @@ async function deduplicate(config: ConfigurationView, input: DataSource, sink: D
       );
       continue;
     }
+
     const deduplicator = new Deduplicator(model, idm);
     result.push(
       await sink.WriteObject(
