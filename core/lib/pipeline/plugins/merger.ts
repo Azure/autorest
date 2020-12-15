@@ -269,6 +269,10 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
 
   protected updateRefs(node: any) {
     for (const { key, value } of visit(node)) {
+      // We don't want to navigate the examples.
+      if (key === "x-ms-examples") {
+        continue;
+      }
       if (value && typeof value === "object") {
         const ref = value.$ref;
         if (ref) {
@@ -277,12 +281,13 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
           if (newRef) {
             if (value.__rewrite__) {
               // special case where the value was a proxy object
-              value.__rewrite__("$ref", newRef);
+              value.__rewrite__("$ref", key, newRef);
             } else {
               // most of the time it's not.
               value.$ref = newRef;
             }
           } else {
+            console.error("Node", value);
             throw new Error(`$ref to original location '${ref}' is not found in the new refs collection`);
           }
         }
