@@ -1,5 +1,4 @@
 import * as assert from "assert";
-import { only, skip, slow, suite, test, timeout } from "mocha-typescript";
 
 import { RealFileSystem } from "@azure-tools/datastore";
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";

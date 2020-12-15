@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 import { CancellationToken } from "vscode-jsonrpc";
 import * as assert from "assert";
-import { only, skip, slow, suite, test, timeout } from "mocha-typescript";
 import { DataStore } from "@azure-tools/datastore";
 import { manipulateObject } from "../lib/pipeline/object-manipulator";
 import { createSandbox } from "@azure-tools/datastore";

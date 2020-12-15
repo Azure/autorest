@@ -47,7 +47,7 @@
     "@types/mocha": "5.2.5",
     "mocha": "5.2.0",
     "mocha-typescript": "1.1.17",
-    "typescript": "~3.7.2",
+    "typescript": "~3.9.7",
     "@typescript-eslint/eslint-plugin": "~2.6.0",
     "@typescript-eslint/parser": "~2.6.0",
     "eslint": "~6.6.0",

@@ -1,6 +1,5 @@
 import * as cp from "child_process";
 import * as rpc from "vscode-jsonrpc";
-import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 
 async function connect() {
   const childProcess = cp.spawn("dotnet", [

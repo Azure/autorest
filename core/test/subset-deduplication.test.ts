@@ -1,7 +1,6 @@
 import * as aio from "@azure-tools/async-io";
 import * as datastore from "@azure-tools/datastore";
 import * as assert from "assert";
-import { suite, test, skip } from "mocha-typescript";
 import {
   getSubsetRelation,
   getSubsetSchema,

@@ -1,6 +1,5 @@
-import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
-import { IFileSystem, MemoryFileSystem } from "@azure-tools/datastore";
+import { MemoryFileSystem } from "@azure-tools/datastore";
 import * as AutoRest from "../lib/autorest-core";
 
 describe("Configuration", () => {

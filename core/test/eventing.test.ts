@@ -1,4 +1,3 @@
-import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 import { IEvent, EventEmitter } from "../lib/events";
 
