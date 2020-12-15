@@ -1150,21 +1150,18 @@ export class Configuration {
       }
     };
     await includeFn(this.fileSystem);
-    console.log("Here", __dirname, AppRoot);
-    console.log("Herer4", ResolveUri(CreateFolderUri(__dirname), "../../resources/default-configuration.md"));
 
     // 4. default configuration
     const fsLocal = new RealFileSystem();
     if (includeDefault) {
       const inputView = messageEmitter.DataStore.GetReadThroughScope(fsLocal);
       const blocks = await this.ParseCodeBlocks(
-        await inputView.ReadStrict(ResolveUri(CreateFolderUri(__dirname), "../../resources/default-configuration.md")),
+        await inputView.ReadStrict(ResolveUri(CreateFolderUri(AppRoot), "resources/default-configuration.md")),
         await createView(),
         "default-config",
       );
       await addSegments(blocks);
     }
-    console.log("Herer5");
 
     await includeFn(fsLocal);
     const messageFormat = (await createView()).GetEntry("message-format");

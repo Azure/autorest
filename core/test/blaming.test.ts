@@ -8,6 +8,7 @@ import * as assert from "assert";
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
 import { parse } from "@azure-tools/datastore";
 import { Configuration } from "../lib/configuration";
+import { AppRoot } from "../lib/constants";
 
 describe("Blaming", () => {
   afterAll(() => {
@@ -18,7 +19,7 @@ describe("Blaming", () => {
   xit("end to end blaming with literate swagger", async () => {
     const autoRest = new AutoRest(
       new RealFileSystem(),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/readme-composite.md"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/literate-example/readme-composite.md"),
     );
 
     // PumpMessagesToConsole(autoRest);
@@ -92,7 +93,7 @@ describe("Blaming", () => {
   xit("generate resolved swagger with source map", async () => {
     const autoRest = new AutoRest(
       new RealFileSystem(),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/small-input/"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/small-input/"),
     );
     autoRest.AddConfiguration({ "output-artifact": ["swagger-document", "swagger-document.map"] });
     const files: Array<Artifact> = [];
@@ -110,7 +111,7 @@ describe("Blaming", () => {
   it("large swagger performance", async () => {
     const autoRest = new AutoRest(
       new RealFileSystem(),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/large-input/"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/large-input/"),
     );
     autoRest.AddConfiguration({ "output-artifact": ["swagger-document", "swagger-document.map"] });
     const messages: Array<Message> = [];
