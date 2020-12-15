@@ -1,0 +1,98 @@
+{
+  "title": "A JSON Schema for x-ms-examples extension in Swagger 2.0 API.",
+  "id": "https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "required": [ "parameters", "responses" ],
+  "description": "Describes the format of an example defined using the x-ms-examples extension.",
+  "additionalProperties": false,
+  "properties": {
+    "operationId": {
+      "description": "The operationId in the swagger specification for which the example is being provided.",
+      "type": "string"
+    },
+    "title": {
+      "description": "The title in the swagger spec that uniquely identifies the swagger spec.",
+      "type": "string"
+    },
+    "description": {
+      "description": "A brief explanation about the current scenario.",
+      "type": "string"
+    },
+    "parameters": {
+      "$ref": "#/xmsParametersExample"
+    },
+    "responses": {
+      "type": "object",
+      "description": "A dictionary of {possible HTTP status codes (as the dictionary key)} that can be received from that operation and {examples (as the dictionary value)} of response {body} and {headers (for long running operations)}.",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^([0-9]{3})$|^(default)$": {
+          "$ref": "#/xmsResponseExample"
+        }
+      }
+    }
+  },
+  "xmsParametersExample": {
+    "type": "object",
+    "description": "A dictionary of parameter names and their sample values for a particular operation. Commonly used parameters in Azure, like 'api-version', 'subscriptionId' and 'resourceGroupName' have been defined as optional properties for ease of use. Please add other parameters as applicable in your example.",
+    "additionalProperties": true,
+    "properties": {
+      "api-version": {
+        "type": "string",
+        "description": "An example of the api-version used in the request.",
+        "minLength": 3
+      },
+      "subcriptionId": {
+        "type": "string",
+        "description": "An example of the subcriptionId used in the request.",
+        "minLength": 1
+      },
+      "resourceGroupName": {
+        "type": "string",
+        "description": "An example of the resourceGroupName used in the request.",
+        "pattern": "^[-\\w\\._\\(\\)]+$",
+        "minLength": 1,
+        "maxLength": 90
+      }
+    }
+  },
+  "xmsResponseHeaderExample": {
+    "type": "object",
+    "description": "Examples of response headers. Common response headers like 'location', 'azure-asyncoperation', 'retry-after', etc. are defined as optional properties for ease of use. Please feel free to add other response headers as applicable in the example.",
+    "properties": {
+      "location": {
+        "type": "string",
+        "description": "An example of the location header sent by the server, if applicable in the example.",
+        "minLength": 10,
+        "pattern": "^(http|https)://.*"
+      },
+      "azure-asyncoperation": {
+        "type": "string",
+        "description": "An example of the azure-asyncoperation header sent by the server, if applicable in the example.",
+        "minLength": 10,
+        "pattern": "^(http|https)://.*"
+      },
+      "retry-after": {
+        "type": "string",
+        "description": "An example value of the retry-after header sent by the server, if applicable in the example.",
+        "minLength": 1
+      }
+    },
+    "additionalProperties": true
+  },
+  "xmsResponseExample": {
+    "type": "object",
+    "description": "Describes headers and body of an example HTTP response, in the context of the x-ms-examples extension.",
+    "properties": {
+      "headers": {
+        "$ref": "#/xmsResponseHeaderExample"
+      },
+      "body": {
+        "type": [ "object", "number", "array", "integer", "string", "boolean", "null" ],
+        "description": "Example of the response body if applicable for the operation. Don't specify the body if the server is not sending a response body. The outcome from `JSON.parse()`, needs to be described over here."
+      }
+    }
+  }
+}

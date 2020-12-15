@@ -27,6 +27,12 @@
       "projectFolder": "autorest",
       "reviewCategory": "production",
       "shouldPublish": true
+    },
+    {
+      "packageName": "@autorest/schemas",
+      "projectFolder": "autorest-schemas",
+      "reviewCategory": "production",
+      "shouldPublish": false
     }
     /* #region ci-only
     ,{
