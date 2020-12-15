@@ -28,7 +28,7 @@
     "autorest-language-service": "./entrypoints/language-service.js"
   },
   "scripts": {
-    "test": "jest --coverage=false",
+    "test": "jest --coverage=false --forceExit --runInBand",
     "test:ci": "jest --ci",
     "watch": "tsc -p . --watch",
     "build": "npm run before-build && tsc -p .",
