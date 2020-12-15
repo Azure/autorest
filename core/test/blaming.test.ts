@@ -1,20 +1,21 @@
 import { EnhancedPosition } from "@azure-tools/datastore";
-import { PumpMessagesToConsole } from "./test-utility";
 import { Artifact } from "../lib/artifact";
 import { Channel, Message, SourceLocation } from "../lib/message";
 import { AutoRest } from "../lib/autorest-core";
 import { RealFileSystem } from "@azure-tools/datastore";
-import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
 import { parse } from "@azure-tools/datastore";
 import { Configuration } from "../lib/configuration";
 
-@suite
-class Blaming {
+describe("Blaming", () => {
+  afterAll(() => {
+    Configuration.shutdown();
+  });
+
   // gs01/nelson : to do -- we have to come back and make sure this works.
-  /* @test */ async "end to end blaming with literate swagger"() {
+  xit("end to end blaming with literate swagger", async () => {
     const autoRest = new AutoRest(
       new RealFileSystem(),
       ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/readme-composite.md"),
@@ -85,10 +86,10 @@ class Blaming {
       view.Message(msg);
       assert.equal((<Array<string>>msg.Source[0].Position.path).length, 2);
     }
-  }
+  });
 
   // gs01/nelson : to do -- we have to come back and make sure this works.
-  /* @test */ async "generate resolved swagger with source map"() {
+  xit("generate resolved swagger with source map", async () => {
     const autoRest = new AutoRest(
       new RealFileSystem(),
       ResolveUri(CreateFolderUri(__dirname), "../../test/resources/small-input/"),
@@ -104,9 +105,9 @@ class Blaming {
     const sourceMapObj = JSON.parse(sourceMap);
     assert.ok(sourceMap.length > 100000);
     assert.ok(sourceMapObj.mappings.split(";").length > 1000);
-  }
+  });
 
-  @test async "large swagger performance"() {
+  it("large swagger performance", async () => {
     const autoRest = new AutoRest(
       new RealFileSystem(),
       ResolveUri(CreateFolderUri(__dirname), "../../test/resources/large-input/"),
@@ -116,9 +117,5 @@ class Blaming {
     autoRest.Message.Subscribe((_, m) => messages.push(m));
     assert.equal(await autoRest.Process().finish, true);
     assert.notEqual(messages.length, 0);
-  }
-
-  static "after"() {
-    Configuration.shutdown();
-  }
-}
+  });
+});

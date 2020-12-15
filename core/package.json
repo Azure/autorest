@@ -28,7 +28,8 @@
     "autorest-language-service": "./entrypoints/language-service.js"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha ./dist/test --timeout 100000",
+    "test": "jest --coverage=false",
+    "test:ci": "jest --ci",
     "watch": "tsc -p . --watch",
     "build": "npm run before-build && tsc -p .",
     "static-link": "static-link --no-node-modules --debug",
@@ -49,8 +50,11 @@
     "mocha-typescript": "1.1.17",
     "deep-equal": "^1.0.1",
     "@types/node": "12.7.2",
+    "@types/jest": "26.0.16",
     "mocha": "5.2.0",
-    "typescript": "~3.7.2",
+    "jest": "~26.6.3",
+    "ts-jest": "~26.4.4",
+    "typescript": "~3.9.7",
     "@typescript-eslint/eslint-plugin": "~2.6.0",
     "@typescript-eslint/parser": "~2.6.0",
     "eslint": "~6.6.0",

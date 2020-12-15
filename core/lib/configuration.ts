@@ -45,8 +45,8 @@ import { AutoRestExtension } from "./pipeline/plugin-endpoint";
 import { Suppressor } from "./pipeline/suppression";
 import { MergeOverwriteOrAppend, resolveRValue } from "./source-map/merging";
 import { Initializer, DeepPartial } from "@azure-tools/codegen";
-import { IdentifyDocument } from "./autorest-core";
 import { cwd } from "process";
+import { AppRoot } from "./constants";
 
 const safeEval = createSandbox();
 
@@ -1150,6 +1150,8 @@ export class Configuration {
       }
     };
     await includeFn(this.fileSystem);
+    console.log("Here", __dirname, AppRoot);
+    console.log("Herer4", ResolveUri(CreateFolderUri(__dirname), "../../resources/default-configuration.md"));
 
     // 4. default configuration
     const fsLocal = new RealFileSystem();
@@ -1162,6 +1164,7 @@ export class Configuration {
       );
       await addSegments(blocks);
     }
+    console.log("Herer5");
 
     await includeFn(fsLocal);
     const messageFormat = (await createView()).GetEntry("message-format");
@@ -1343,9 +1346,12 @@ export class Configuration {
       await addSegments(blocks, false);
       await includeFn(this.fileSystem);
       await resolveExtensions();
+
       return (await createView([...configs, ...blocks, ...secondPass])).Indexer;
     }
+
     await resolveExtensions();
+
     // return the final view
     return (await createView()).Indexer;
   }
