@@ -11,7 +11,7 @@
     "declaration": true,
     "stripInternal": true,
     "target": "es2018",
-    "types": ["node", "mocha"],
+    "types": ["node", "jest"],
     "typeRoots": ["./node_modules/@types"],
     "lib": ["es2018"]
   },
