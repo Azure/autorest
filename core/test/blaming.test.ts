@@ -11,8 +11,8 @@ import { Configuration } from "../lib/configuration";
 import { AppRoot } from "../lib/constants";
 
 describe("Blaming", () => {
-  afterAll(() => {
-    Configuration.shutdown();
+  afterAll(async () => {
+    await Configuration.shutdown();
   });
 
   // gs01/nelson : to do -- we have to come back and make sure this works.

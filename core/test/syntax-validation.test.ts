@@ -36,8 +36,8 @@ const getLoaderErrors = async (swagger: string): Promise<Array<Message>> =>  {
   };
 
 describe("SyntaxValidation", () => {
-  afterAll(() => {
-    Configuration.shutdown();
+  afterAll(async () => {
+    await Configuration.shutdown();
   });
 
   xit("syntax errors", async () => {
