@@ -6,10 +6,9 @@ import { ComponentKeyRenamer } from "../lib/pipeline/plugins/component-key-renam
 
 const resources = `${__dirname}../../../test/resources/renamer`;
 
-@suite
-class ComponentRenaming {
+describe("ComponentRenaming", () => {
   // todo: fix test
-  @test @skip async "Replace component keys for actual names."() {
+  xit("Replace component keys for actual names.", async () => {
     const inputUri = "mem://input.json";
     const outputUri = "mem://output.json";
 
@@ -46,5 +45,5 @@ class ComponentRenaming {
 
       assert.deepEqual(await renamer.getOutput(), outputObject, "Should be the same");
     }
-  }
-}
+  });
+});

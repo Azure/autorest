@@ -5,6 +5,7 @@ import { RealFileSystem } from "@azure-tools/datastore";
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
 import { AutoRest } from "../lib/autorest-core";
 import { LoadLiterateSwaggers } from "../lib/pipeline/plugins/loaders";
+import { AppRoot } from "../lib/constants";
 
 describe("SwaggerLoading", () => {
   it("No input files provided", async () => {
@@ -30,9 +31,9 @@ describe("SwaggerLoading", () => {
     const dataStore = config.DataStore;
 
     const inputFilesUris = [
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/swagger-file1.json"),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/swagger-file2.json"),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/swagger-file3.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file1.json"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file2.json"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file3.yaml"),
     ];
 
     const swaggerFilesLoaded = await LoadLiterateSwaggers(
@@ -51,8 +52,8 @@ describe("SwaggerLoading", () => {
     const dataStore = config.DataStore;
 
     const inputFilesUris = [
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/non-swagger-file1.yaml"),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/non-swagger-file2.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/non-swagger-file1.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/non-swagger-file2.yaml"),
     ];
 
     const swaggerFilesLoaded = await LoadLiterateSwaggers(
@@ -71,14 +72,14 @@ describe("SwaggerLoading", () => {
     const dataStore = config.DataStore;
 
     const nonSwaggerFileUris = [
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/non-swagger-file1.yaml"),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/non-swagger-file2.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/non-swagger-file1.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/non-swagger-file2.yaml"),
     ];
 
     const swaggerFileUris = [
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/swagger-file1.json"),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/swagger-file2.json"),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/swagger-file3.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file1.json"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file2.json"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file3.yaml"),
     ];
 
     const inputFilesUris = [...swaggerFileUris, ...nonSwaggerFileUris];

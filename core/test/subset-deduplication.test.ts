@@ -15,11 +15,8 @@ const resources = `${__dirname}../../../test/resources/subset-deduplication`;
 const skipList = ["description", "enum", "readOnly", "required"];
 const expandableFieldsList = ["properties", "allOf"];
 
-@suite
-class SubsetDeduplication {
-  @skip /* todo: fix test  */
-  @test
-  async "subset check function"() {
+describe("SubsetDeduplication", () => {
+  xit("subset check function", async () => {
     const input = JSON.parse(await aio.readFile(`${resources}/schema1.json`));
     const input2 = JSON.parse(await aio.readFile(`${resources}/schema2.json`));
     const input3 = JSON.parse(await aio.readFile(`${resources}/schema3.json`));
@@ -31,11 +28,9 @@ class SubsetDeduplication {
 
     const result2 = getSubsetRelation(input2, input3, expandableFieldsList, skipList);
     assert.deepStrictEqual(result2, expected2);
-  }
+  });
 
-  @skip /* todo: fix test  */
-  @test
-  async "superset schema construction"() {
+  xit("superset schema construction", async () => {
     const input = JSON.parse(await aio.readFile(`${resources}/schema1.json`));
     const input2 = JSON.parse(await aio.readFile(`${resources}/schema2.json`));
     const checkResult1 = JSON.parse(await aio.readFile(`${resources}/expected-check-result1.json`));
@@ -43,11 +38,9 @@ class SubsetDeduplication {
 
     const result1 = getSupersetSchema(input, input2, expandableFieldsList, checkResult1, "#/definitions/subset");
     assert.deepStrictEqual(result1, updatedSchema2);
-  }
+  });
 
-  @skip /* todo: fix test  */
-  @test
-  async "subset schema construction"() {
+  xit("subset schema construction", async () => {
     const input = JSON.parse(await aio.readFile(`${resources}/schema1.json`));
     const input2 = JSON.parse(await aio.readFile(`${resources}/schema2.json`));
     const checkResult1 = JSON.parse(await aio.readFile(`${resources}/expected-check-result1.json`));
@@ -55,11 +48,9 @@ class SubsetDeduplication {
 
     const result1 = getSubsetSchema(input, checkResult1);
     assert.deepStrictEqual(result1, updatedSchema2);
-  }
+  });
 
-  @skip /* todo: fix test  */
-  @test
-  async "subset deduplication in spec"() {
+  xit("subset deduplication in spec", async () => {
     const inputUri = "mem://input1.json";
     const outputUri = "mem://output1.json";
 
@@ -95,5 +86,5 @@ class SubsetDeduplication {
       const processorOutput = await processor.getOutput();
       assert.deepEqual(processorOutput, outputObject, "Should be the same");
     }
-  }
-}
+  });
+});

@@ -1,14 +1,12 @@
 import * as assert from "assert";
-import { suite, test } from "mocha-typescript";
-
 import { AutoRest } from "../lib/autorest-core";
 import { RealFileSystem } from "@azure-tools/datastore";
 import { LoadLiterateOpenAPIs } from "../lib/pipeline/plugins/loaders";
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
+import { AppRoot } from "../lib/constants";
 
-@suite
-class OpenAPI3Loading {
-  @test async "No input files provided"() {
+describe("OpenAPI3Loading", () => {
+  it("No input files provided", async () => {
     const autoRest = new AutoRest();
     const config = await autoRest.view;
     const dataStore = config.DataStore;
@@ -23,16 +21,16 @@ class OpenAPI3Loading {
     );
 
     assert.strictEqual(OpenAPIFilesLoaded.length, 0);
-  }
+  });
 
-  @test async "All input files have a 3.*.* version."() {
+  it("All input files have a 3.*.* version.", async () => {
     const autoRest = new AutoRest();
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
     const inputFilesUris = [
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/openapi3-loading/oa3-file1.yaml"),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/openapi3-loading/oa3-file2.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/openapi3-loading/oa3-file1.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/openapi3-loading/oa3-file2.yaml"),
     ];
 
     const OpenAPIFilesLoaded = await LoadLiterateOpenAPIs(
@@ -43,16 +41,16 @@ class OpenAPI3Loading {
     );
 
     assert.strictEqual(OpenAPIFilesLoaded.length, inputFilesUris.length);
-  }
+  });
 
-  @test async "All input files do not have a 3.*.* version."() {
+  it("All input files do not have a 3.*.* version.", async () => {
     const autoRest = new AutoRest();
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
     const inputFilesUris = [
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/openapi3-loading/non-oa3-file1.yaml"),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/openapi3-loading/non-oa3-file2.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/openapi3-loading/non-oa3-file1.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/openapi3-loading/non-oa3-file2.yaml"),
     ];
 
     const OpenAPIFilesLoaded = await LoadLiterateOpenAPIs(
@@ -63,20 +61,20 @@ class OpenAPI3Loading {
     );
 
     assert.strictEqual(OpenAPIFilesLoaded.length, 0);
-  }
+  });
 
-  @test async "Some input files have a 3.*.* version and some input files do not have a 3.*.* version."() {
+  it("Some input files have a 3.*.* version and some input files do not have a 3.*.* version.", async () => {
     const autoRest = new AutoRest();
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
     const nonOpenAPIFileUris = [
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/openapi3-loading/non-oa3-file1.yaml"),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/openapi3-loading/non-oa3-file2.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/openapi3-loading/non-oa3-file1.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/openapi3-loading/non-oa3-file2.yaml"),
     ];
 
     const openAPIFileUris = [
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/openapi3-loading/oa3-file2.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/openapi3-loading/oa3-file2.yaml"),
     ];
 
     const inputFilesUris = [...openAPIFileUris, ...nonOpenAPIFileUris];
@@ -89,5 +87,5 @@ class OpenAPI3Loading {
     );
 
     assert.strictEqual(OpenAPIFilesLoaded.length, inputFilesUris.length - nonOpenAPIFileUris.length);
-  }
-}
+  });
+});
