@@ -103,8 +103,14 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     // set the doc servers
     servers.forEach((s) => (this.docServers = s.value));
 
+    // Order in which the openapi properties should be tree shaked.
+    // Components needs to go first so other tree shaked element don't interfer with actual models.
+    const elementOrder = ["components", "paths", "x-ms-paths"].reverse();
+    const sortedNodes = theNodes.sort((a, b) => {
+      return elementOrder.indexOf(b.key) - elementOrder.indexOf(a.key);
+    });
     // initialize certain things ahead of time:
-    for (const { value, key, pointer, children } of theNodes) {
+    for (const { value, key, pointer, children } of sortedNodes) {
       switch (key) {
         case "x-ms-paths":
         case "paths":
