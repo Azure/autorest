@@ -6,9 +6,8 @@ import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
 import { AutoRest } from "../lib/autorest-core";
 import { LoadLiterateSwaggers } from "../lib/pipeline/plugins/loaders";
 
-@suite
-class SwaggerLoading {
-  @test async "No input files provided"() {
+describe("SwaggerLoading", () => {
+  it("No input files provided", async () => {
     const autoRest = new AutoRest();
     const config = await autoRest.view;
     const dataStore = config.DataStore;
@@ -23,9 +22,9 @@ class SwaggerLoading {
     );
 
     assert.strictEqual(swaggerFilesLoaded.length, 0);
-  }
+  });
 
-  @test async "All input files have a 2.0 version."() {
+  it("All input files have a 2.0 version.", async () => {
     const autoRest = new AutoRest();
     const config = await autoRest.view;
     const dataStore = config.DataStore;
@@ -44,9 +43,9 @@ class SwaggerLoading {
     );
 
     assert.strictEqual(swaggerFilesLoaded.length, inputFilesUris.length);
-  }
+  });
 
-  @test async "All input files do not have a 2.0 version."() {
+  it("All input files do not have a 2.0 version.", async () => {
     const autoRest = new AutoRest();
     const config = await autoRest.view;
     const dataStore = config.DataStore;
@@ -64,9 +63,9 @@ class SwaggerLoading {
     );
 
     assert.strictEqual(swaggerFilesLoaded.length, 0);
-  }
+  });
 
-  @test async "Some input files have a 2.0 version and some input files do not have a 2.0 version."() {
+  it("Some input files have a 2.0 version and some input files do not have a 2.0 version.", async () => {
     const autoRest = new AutoRest();
     const config = await autoRest.view;
     const dataStore = config.DataStore;
@@ -92,10 +91,10 @@ class SwaggerLoading {
     );
 
     assert.strictEqual(swaggerFilesLoaded.length, inputFilesUris.length - nonSwaggerFileUris.length);
-  }
+  });
 
   // TODO: Uncomment when OpenAPI 3 support is ready.
-  // @test async "composite Swagger"() {
+  // it(""composite Swagger", async () => {
   //   const dataStore = new DataStore();
 
   //   const config = await CreateConfiguration("file:///", dataStore.GetReadThroughScope(new RealFileSystem()),
@@ -117,4 +116,4 @@ class SwaggerLoading {
   //   assert.equal(messages.filter(m => m.Channel === Channel.Fatal).length, 0);
   //   assert.notEqual(messages.length, 0);
   // }
-}
+});

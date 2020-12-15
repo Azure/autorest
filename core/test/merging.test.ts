@@ -8,9 +8,8 @@ import * as assert from "assert";
 import { matches } from "@azure-tools/datastore";
 import { MergeOverwriteOrAppend } from "../lib/source-map/merging";
 
-@suite
-class Merging {
-  @test async MergeOverwriteOrAppend() {
+describe("Merging", () => {
+  it("MergeOverwriteOrAppend", () => {
     // list overwriting and concatenation
     assert.deepStrictEqual(
       MergeOverwriteOrAppend(1, 2, (_) => false),
@@ -80,5 +79,5 @@ class Merging {
         ],
       },
     );
-  }
-}
+  });
+});

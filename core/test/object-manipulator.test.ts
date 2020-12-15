@@ -16,9 +16,7 @@ try {
   // no worries
 }
 
-@suite
-class ObjectManipulator {
-  private "exampleObject" = `
+const exampleObject = `
 host: localhost:27332
 paths:
   "/api/circular":
@@ -45,10 +43,11 @@ definitions:
       child:
         "$ref": "#/definitions/NodeB"`;
 
-  @test async "any hit"() {
+describe("ObjectManipulator", () => {
+  it("any hit", async () => {
     // setup
     const dataStore = new DataStore(CancellationToken.None);
-    const input = await dataStore.WriteData("mem://input.yaml", this.exampleObject, "input-file", ["input.yaml"]);
+    const input = await dataStore.WriteData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
 
     const expectHit = async (jsonQuery: string, anyHit: boolean) => {
       const result = await manipulateObject(input, dataStore.getDataSink(), jsonQuery, (_, x) => x);
@@ -68,12 +67,12 @@ definitions:
     await expectHit('$.definitions[?(@.description=="Description")]', true);
     await expectHit('$..[?(@.description=="Descriptio")]', false);
     await expectHit('$..[?(@.description=="Description")]', true);
-  }
+  });
 
-  @test async "removal"() {
+  it("removal", async () => {
     // setup
     const dataStore = new DataStore(CancellationToken.None);
-    const input = await dataStore.WriteData("mem://input.yaml", this.exampleObject, "input-file", ["input.yaml"]);
+    const input = await dataStore.WriteData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
 
     // remove all models that don't have a description
     const result = await manipulateObject(
@@ -86,12 +85,12 @@ definitions:
     const resultRaw = await result.result.ReadData();
     assert.ok(resultRaw.indexOf("NodeA") !== -1);
     assert.ok(resultRaw.indexOf("NodeB") === -1);
-  }
+  });
 
-  @test async "update"() {
+  it("update", async () => {
     // setup
     const dataStore = new DataStore(CancellationToken.None);
-    const input = await dataStore.WriteData("mem://input.yaml", this.exampleObject, "input-file", ["input.yaml"]);
+    const input = await dataStore.WriteData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
 
     {
       // override all existing model descriptions
@@ -140,12 +139,12 @@ definitions:
       assert.strictEqual(resultObject.definitions.NodeA.description, "DESCRIPTION");
       assert.strictEqual(resultObject.paths["/api/circular"].get.description, "FUN TIME");
     }
-  }
+  });
 
-  @test async "skip-transform-failure"() {
+  it("skip-transform-failure", async () => {
     // setup
     const dataStore = new DataStore(CancellationToken.None);
-    const input = await dataStore.WriteData("mem://input.yaml", this.exampleObject, "input-file", ["input.yaml"]);
+    const input = await dataStore.WriteData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
 
     {
       // the first override should fail but the second should be still executed
@@ -167,5 +166,5 @@ definitions:
       assert.strictEqual(resultObject.paths["/api/circular"].get.description, "fun time");
       assert.strictEqual(resultObject.paths["/api/circular"].post.description, bestDescriptionEver);
     }
-  }
-}
+  });
+});

@@ -74,16 +74,15 @@ async function connect() {
   Shutdown();
 
   // wait for shutdown!
-  await new Promise((resolve) => {
+  await new Promise<void>((resolve) => {
     setTimeout(() => {
       resolve();
     }, 200);
   });
 }
 
-@suite
-class TestConnectivity {
-  @test @skip async E2E() {
+describe("TestConnectivity", () => {
+  xit("E2E", async () => {
     await connect();
-  }
-}
+  });
+});

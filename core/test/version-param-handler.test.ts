@@ -6,11 +6,9 @@ import { ApiVersionParameterHandler } from "../lib/pipeline/plugins/version-para
 
 const resources = `${__dirname}../../../test/resources/version-param-handler`;
 
-@suite
-class ApiVersionParameterHandling {
-  @skip /* todo: fix test  */
-  @test
-  async "Remove api-version global parameter, remove references to said parameter and add metadata."() {
+describe("ApiVersionParameterHandling", () => {
+  /* todo: fix test  */
+  xit("Remove api-version global parameter, remove references to said parameter and add metadata.", async () => {
     const inputUri = "mem://input.json";
     const outputUri = "mem://output.json";
 
@@ -47,5 +45,5 @@ class ApiVersionParameterHandling {
 
       assert.deepEqual(await paramHandler.getOutput(), outputObject, "Should be the same");
     }
-  }
-}
+  });
+});

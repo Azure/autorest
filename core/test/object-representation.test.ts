@@ -5,12 +5,10 @@
 
 import { ParseNode, ParseToAst, Stringify, StringifyAst, ToAst } from "@azure-tools/datastore";
 import { ConvertJsonx2Yaml, ConvertYaml2Jsonx } from "@azure-tools/datastore";
-import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-@suite
-class ObjectRepresentation {
-  @test async "round trip"() {
+describe("ObjectRepresentation", () => {
+  it("round trip", () => {
     const o: any = {};
     o.a = 3;
     o.b = [1, "a"];
@@ -26,5 +24,5 @@ class ObjectRepresentation {
     const yaml2 = StringifyAst(yamlAst2);
 
     assert.equal(yaml2, yaml1);
-  }
-}
+  });
+});
