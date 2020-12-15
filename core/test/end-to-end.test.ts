@@ -6,10 +6,10 @@ import { RealFileSystem } from "@azure-tools/datastore";
 import { Channel, Message } from "../lib/message";
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
 import { PumpMessagesToConsole } from "./test-utility";
+import { AppRoot } from "../lib/constants";
 
-@suite
-class EndToEnd {
-  @test async "network full game"() {
+describe("EndToEnd", () => {
+  it("network full game", async () => {
     const autoRest = new AutoRest(new RealFileSystem());
     // PumpMessagesToConsole(autoRest);
     autoRest.AddConfiguration({
@@ -43,24 +43,24 @@ class EndToEnd {
 
     const success = await autoRest.Process().finish;
     assert.strictEqual(success, true);
-  }
+  });
 
-  @test async "other configuration scenario"() {
+  it("other configuration scenario", async () => {
     const autoRest = new AutoRest(
       new RealFileSystem(),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/readme-complicated.md"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/literate-example/readme-complicated.md"),
     );
     // PumpMessagesToConsole(autoRest);
 
     const config = await autoRest.view;
     assert.strictEqual(config["shouldwork"], true);
-  }
+  });
 
   // todo: skipping because testing is broken?
-  @test @skip async "complicated configuration scenario"() {
+  xit("complicated configuration scenario", async () => {
     const autoRest = new AutoRest(
       new RealFileSystem(),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/readme-complicated.md"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/literate-example/readme-complicated.md"),
     );
     // PumpMessagesToConsole(autoRest);
     autoRest.AddConfiguration({
@@ -84,14 +84,14 @@ class EndToEnd {
     });
     assert.equal(await autoRest.Process().finish, true);
     assert.notEqual(messages.length, 0);
-  }
+  });
   // testing end-to-end for non-arm type validation rules. Since all validation rules are currently defaulted to
   // ARM, non-ARM documents should show 0 validation messages
   // TODO: fix this test when validation rules are properly categorized
-  @test @skip async "non-arm type spec testing"() {
+  xit("non-arm type spec testing", async () => {
     const autoRest = new AutoRest(
       new RealFileSystem(),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/validation-options/readme.md"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/validation-options/readme.md"),
     );
     autoRest.AddConfiguration({
       "openapi-type": "default",
@@ -108,13 +108,13 @@ class EndToEnd {
     assert.notEqual(messages.length, 0);
     // flag any fatal errors
     assert.equal(messages.filter((m) => m.Channel === Channel.Fatal).length, 0);
-  }
+  });
 
   // todo: skipping because testing is broken?
-  @test @skip async "arm type spec testing"() {
+  xit("arm type spec testing", async () => {
     const autoRest = new AutoRest(
       new RealFileSystem(),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/validation-options/readme.md"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/validation-options/readme.md"),
     );
     autoRest.AddConfiguration({
       "openapi-type": "arm",
@@ -133,5 +133,5 @@ class EndToEnd {
     // flag any fatal errors
     assert.equal(messages.filter((m) => m.Channel === Channel.Fatal).length, 0);
     assert.notEqual(messages.length, 0);
-  }
-}
+  });
+});

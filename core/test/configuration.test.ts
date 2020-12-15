@@ -3,9 +3,8 @@ import * as assert from "assert";
 import { IFileSystem, MemoryFileSystem } from "@azure-tools/datastore";
 import * as AutoRest from "../lib/autorest-core";
 
-@suite
-class TestConfiguration {
-  @test async "Test config"() {
+describe("Configuration", () => {
+  it("Test config", async () => {
     // test out subscribe
 
     const f = new MemoryFileSystem(
@@ -82,9 +81,9 @@ csharp:
     for (const each of cfg.GetNestedConfiguration("csharp")) {
       assert.equal(each["output-folder"], "OUTPUT/csharp");
     }
-  }
+  });
 
-  @test async "Test Guards"() {
+  it("Test Guards", async () => {
     // test out subscribe
 
     const f = new MemoryFileSystem(
@@ -144,5 +143,5 @@ value:
     autorest.AddConfiguration({ bar: true });
     cfg = await autorest.view;
     assert.deepEqual(cfg["value"], ["foo", "foo_and_bar", "bar"]);
-  }
-}
+  });
+});
