@@ -8,8 +8,6 @@ import * as SchemaValidator from "z-schema";
 import { OperationAbortedException } from "../exception";
 import { Channel } from "../message";
 import { createPerFilePlugin, PipelinePlugin } from "./common";
-import * as path from "path";
-import { AppRoot } from "../constants";
 
 export function createSwaggerSchemaValidatorPlugin(): PipelinePlugin {
   const validator = new SchemaValidator({ breakOnFirstError: false });
