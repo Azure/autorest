@@ -4,7 +4,8 @@
   "description": "Internal package storing schemas",
   "scripts": {
     "test": "echo 'No Test'",
-    "build": "echo 'No Build'"
+    "build": "echo 'No Build'",
+    "lint": "echo 'No lint'"
   },
   "author": "",
   "license": "ISC"
