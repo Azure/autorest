@@ -6,7 +6,7 @@ The V3 version of the Java Generator.
 version: ~3.0.6298
 
 use-extension:
-  "@autorest/java": "4.0.4"
+  "@autorest/java": "^4.0.4"
 try-require: ./readme.java.md
 ```
 
