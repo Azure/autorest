@@ -24,7 +24,7 @@
     },
     {
       "packageName": "autorest",
-      "projectFolder": "autorest",
+      "projectFolder": "packages/apps/autorest",
       "reviewCategory": "production",
       "shouldPublish": true
     },
