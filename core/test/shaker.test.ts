@@ -5,12 +5,8 @@
 
 import * as aio from "@azure-tools/async-io";
 import * as datastore from "@azure-tools/datastore";
-
 import * as assert from "assert";
-import { only, skip, slow, suite, test, timeout } from "mocha-typescript";
-
 import { OAI3Shaker } from "../lib/pipeline/plugins/tree-shaker";
-import { FastStringify } from "@azure-tools/datastore";
 
 try {
   require("source-map-support").install();
@@ -20,10 +16,9 @@ try {
 
 const resources = `${__dirname}../../../test/resources/shaker`;
 
-@suite
-class TestShaker {
+describe("TestShaker", () => {
   // todo: fix test
-  @test @skip async "Test Shaker"() {
+  xit("Test Shaker", async () => {
     const inputUri = "mem://input.yaml";
     const outputUri = "mem://output.yaml";
 
@@ -63,5 +58,5 @@ class TestShaker {
 
       assert.deepEqual(await shaker.getOutput(), outputObject, "Should be the same");
     }
-  }
-}
+  });
+});

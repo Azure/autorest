@@ -1,14 +1,13 @@
 import * as assert from "assert";
-import { only, skip, slow, suite, test, timeout } from "mocha-typescript";
 
 import { RealFileSystem } from "@azure-tools/datastore";
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
 import { AutoRest } from "../lib/autorest-core";
 import { LoadLiterateSwaggers } from "../lib/pipeline/plugins/loaders";
+import { AppRoot } from "../lib/constants";
 
-@suite
-class SwaggerLoading {
-  @test async "No input files provided"() {
+describe("SwaggerLoading", () => {
+  it("No input files provided", async () => {
     const autoRest = new AutoRest();
     const config = await autoRest.view;
     const dataStore = config.DataStore;
@@ -23,17 +22,17 @@ class SwaggerLoading {
     );
 
     assert.strictEqual(swaggerFilesLoaded.length, 0);
-  }
+  });
 
-  @test async "All input files have a 2.0 version."() {
+  it("All input files have a 2.0 version.", async () => {
     const autoRest = new AutoRest();
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
     const inputFilesUris = [
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/swagger-file1.json"),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/swagger-file2.json"),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/swagger-file3.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file1.json"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file2.json"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file3.yaml"),
     ];
 
     const swaggerFilesLoaded = await LoadLiterateSwaggers(
@@ -44,16 +43,16 @@ class SwaggerLoading {
     );
 
     assert.strictEqual(swaggerFilesLoaded.length, inputFilesUris.length);
-  }
+  });
 
-  @test async "All input files do not have a 2.0 version."() {
+  it("All input files do not have a 2.0 version.", async () => {
     const autoRest = new AutoRest();
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
     const inputFilesUris = [
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/non-swagger-file1.yaml"),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/non-swagger-file2.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/non-swagger-file1.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/non-swagger-file2.yaml"),
     ];
 
     const swaggerFilesLoaded = await LoadLiterateSwaggers(
@@ -64,22 +63,22 @@ class SwaggerLoading {
     );
 
     assert.strictEqual(swaggerFilesLoaded.length, 0);
-  }
+  });
 
-  @test async "Some input files have a 2.0 version and some input files do not have a 2.0 version."() {
+  it("Some input files have a 2.0 version and some input files do not have a 2.0 version.", async () => {
     const autoRest = new AutoRest();
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
     const nonSwaggerFileUris = [
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/non-swagger-file1.yaml"),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/non-swagger-file2.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/non-swagger-file1.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/non-swagger-file2.yaml"),
     ];
 
     const swaggerFileUris = [
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/swagger-file1.json"),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/swagger-file2.json"),
-      ResolveUri(CreateFolderUri(__dirname), "../../test/resources/swagger-loading/swagger-file3.yaml"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file1.json"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file2.json"),
+      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file3.yaml"),
     ];
 
     const inputFilesUris = [...swaggerFileUris, ...nonSwaggerFileUris];
@@ -92,10 +91,10 @@ class SwaggerLoading {
     );
 
     assert.strictEqual(swaggerFilesLoaded.length, inputFilesUris.length - nonSwaggerFileUris.length);
-  }
+  });
 
   // TODO: Uncomment when OpenAPI 3 support is ready.
-  // @test async "composite Swagger"() {
+  // it(""composite Swagger", async () => {
   //   const dataStore = new DataStore();
 
   //   const config = await CreateConfiguration("file:///", dataStore.GetReadThroughScope(new RealFileSystem()),
@@ -117,4 +116,4 @@ class SwaggerLoading {
   //   assert.equal(messages.filter(m => m.Channel === Channel.Fatal).length, 0);
   //   assert.notEqual(messages.length, 0);
   // }
-}
+});

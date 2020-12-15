@@ -1,16 +1,13 @@
 import * as aio from "@azure-tools/async-io";
 import * as datastore from "@azure-tools/datastore";
 import * as assert from "assert";
-import { suite, test, skip } from "mocha-typescript";
-import { ApiVersionParameterHandler } from "../lib/pipeline/plugins/version-param-handler";
+import { ComponentKeyRenamer } from "../lib/pipeline/plugins/component-key-renamer";
 
-const resources = `${__dirname}../../../test/resources/version-param-handler`;
+const resources = `${__dirname}../../../test/resources/renamer`;
 
-@suite
-class ApiVersionParameterHandling {
-  @skip /* todo: fix test  */
-  @test
-  async "Remove api-version global parameter, remove references to said parameter and add metadata."() {
+describe("ComponentRenaming", () => {
+  // todo: fix test
+  xit("Replace component keys for actual names.", async () => {
     const inputUri = "mem://input.json";
     const outputUri = "mem://output.json";
 
@@ -43,9 +40,9 @@ class ApiVersionParameterHandling {
     if (inputDataHandle && outputDataHandle) {
       // if (inputDataHandle) {
       const outputObject = await outputDataHandle.ReadObject();
-      const paramHandler = new ApiVersionParameterHandler(inputDataHandle);
+      const renamer = new ComponentKeyRenamer(inputDataHandle);
 
-      assert.deepEqual(await paramHandler.getOutput(), outputObject, "Should be the same");
+      assert.deepEqual(await renamer.getOutput(), outputObject, "Should be the same");
     }
-  }
-}
+  });
+});

@@ -1,6 +1,5 @@
 import * as cp from "child_process";
 import * as rpc from "vscode-jsonrpc";
-import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 
 async function connect() {
   const childProcess = cp.spawn("dotnet", [
@@ -74,16 +73,15 @@ async function connect() {
   Shutdown();
 
   // wait for shutdown!
-  await new Promise((resolve) => {
+  await new Promise<void>((resolve) => {
     setTimeout(() => {
       resolve();
     }, 200);
   });
 }
 
-@suite
-class TestConnectivity {
-  @test @skip async E2E() {
+describe("TestConnectivity", () => {
+  xit("E2E", async () => {
     await connect();
-  }
-}
+  });
+});

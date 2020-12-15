@@ -2,15 +2,13 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
 import { matches } from "@azure-tools/datastore";
 import { MergeOverwriteOrAppend } from "../lib/source-map/merging";
 
-@suite
-class Merging {
-  @test async MergeOverwriteOrAppend() {
+describe("Merging", () => {
+  it("MergeOverwriteOrAppend", () => {
     // list overwriting and concatenation
     assert.deepStrictEqual(
       MergeOverwriteOrAppend(1, 2, (_) => false),
@@ -80,5 +78,5 @@ class Merging {
         ],
       },
     );
-  }
-}
+  });
+});

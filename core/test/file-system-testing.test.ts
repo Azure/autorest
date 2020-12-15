@@ -1,10 +1,8 @@
-import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
-import { IFileSystem, MemoryFileSystem } from "@azure-tools/datastore";
+import { MemoryFileSystem } from "@azure-tools/datastore";
 import * as assert from "assert";
 
-@suite
-class FileSystemTests {
-  @test async "does async iterable work"() {
+describe("FileSystemTests", () => {
+  it("does async iterable work", async () => {
     const f = new MemoryFileSystem(
       new Map<string, string>([
         ["readme.md", "# this is a test\n see https://aka.ms/autorest"],
@@ -17,5 +15,5 @@ class FileSystemTests {
     }
     assert.equal(n, 2);
     assert.equal(await f.ReadFile(MemoryFileSystem.DefaultVirtualRootUri + "other.md"), "#My Doc.");
-  }
-}
+  });
+});

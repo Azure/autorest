@@ -1,4 +1,3 @@
-import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 import { IEvent, EventEmitter } from "../lib/events";
 
@@ -10,9 +9,8 @@ export class MyClass extends EventEmitter {
   }
 }
 
-@suite
-class Eventing {
-  @test async "Do Events Work"() {
+describe("Eventing", () => {
+  it("Do Events Work", () => {
     const instance = new MyClass();
     let worksWithSubscribe = "no";
     let worksLikeNode = "no";
@@ -36,5 +34,5 @@ class Eventing {
     unsub();
 
     assert.equal(worksWithSubscribe, "no");
-  }
-}
+  });
+});

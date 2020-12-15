@@ -45,8 +45,8 @@ import { AutoRestExtension } from "./pipeline/plugin-endpoint";
 import { Suppressor } from "./pipeline/suppression";
 import { MergeOverwriteOrAppend, resolveRValue } from "./source-map/merging";
 import { Initializer, DeepPartial } from "@azure-tools/codegen";
-import { IdentifyDocument } from "./autorest-core";
 import { cwd } from "process";
+import { AppRoot } from "./constants";
 
 const safeEval = createSandbox();
 
@@ -1156,7 +1156,7 @@ export class Configuration {
     if (includeDefault) {
       const inputView = messageEmitter.DataStore.GetReadThroughScope(fsLocal);
       const blocks = await this.ParseCodeBlocks(
-        await inputView.ReadStrict(ResolveUri(CreateFolderUri(__dirname), "../../resources/default-configuration.md")),
+        await inputView.ReadStrict(ResolveUri(CreateFolderUri(AppRoot), "resources/default-configuration.md")),
         await createView(),
         "default-config",
       );
@@ -1343,9 +1343,12 @@ export class Configuration {
       await addSegments(blocks, false);
       await includeFn(this.fileSystem);
       await resolveExtensions();
+
       return (await createView([...configs, ...blocks, ...secondPass])).Indexer;
     }
+
     await resolveExtensions();
+
     // return the final view
     return (await createView()).Indexer;
   }

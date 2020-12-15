@@ -14,7 +14,7 @@
     "declaration": true,
     "stripInternal": true,
     "target": "es2018",
-    "types": ["node", "mocha"],
+    "types": ["node", "jest"],
     "lib": ["es2018"],
     "experimentalDecorators": true,
     "newLine": "LF"

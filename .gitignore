@@ -198,9 +198,6 @@ src/generator/AutoRest.Go.Tests/src/tests/generated/*
 src/generator/AutoRest.Go.Tests/src/tests/vendor/*
 src/generator/AutoRest.Go.Tests/src/tests/glide.lock
 
-autorest/**/*.js
-core/**/*.js
-
 *.js.map
 
 # backup files

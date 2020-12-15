@@ -7,7 +7,6 @@ import * as aio from "@azure-tools/async-io";
 import * as datastore from "@azure-tools/datastore";
 
 import * as assert from "assert";
-import { only, skip, slow, suite, test, timeout } from "mocha-typescript";
 
 import { MultiAPIMerger } from "../lib/pipeline/plugins/merger";
 import { FastStringify } from "@azure-tools/datastore";
@@ -18,10 +17,9 @@ try {
 }
 const resources = `${__dirname}../../../test/resources/merger`;
 
-@suite
-class TestShaker {
+describe("Merger", () => {
   // todo: not testing now.
-  @test @skip async "Test Merger"() {
+  xit("Test Merger", async () => {
     const inputUri = "mem://input.yaml";
     const inputUri2 = "mem://input2.yaml";
     // const outputUri = 'mem://output.yaml';
@@ -83,5 +81,5 @@ class TestShaker {
 
       // assert.deepEqual(shaker.output, outputObject, 'Should be the same');
     }
-  }
-}
+  });
+});

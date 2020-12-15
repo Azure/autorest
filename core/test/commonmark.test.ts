@@ -7,20 +7,18 @@ import { nodes } from "@azure-tools/datastore";
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
 import { RealFileSystem } from "@azure-tools/datastore";
 import { AutoRest } from "../lib/autorest-core";
-import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
 import { Node, Parser } from "commonmark";
 import { plainTextVersion } from "../lib/pipeline/commonmark-documentation";
 
-@suite
-class Commonmark {
-  private "Parse"(rawCommonmark: string): Node {
-    return new Parser().parse(rawCommonmark);
-  }
+const parse = (rawCommonmark: string): Node => {
+  return new Parser().parse(rawCommonmark);
+};
 
-  @test async "PlainTextVersion"() {
-    const compare = (raw: string, expected: string) => assert.strictEqual(plainTextVersion(this.Parse(raw)), expected);
+describe("CommonMark", () => {
+  it("parse PlainTextVersion", async () => {
+    const compare = (raw: string, expected: string) => assert.strictEqual(plainTextVersion(parse(raw)), expected);
 
     compare("Hello World", "Hello World");
     compare("this\ntest\ncould\nuse\nmore\ncowbell", "this test could use more cowbell");
@@ -30,10 +28,10 @@ class Commonmark {
     compare("# Heading \n Body", "Heading\nBody");
     compare("Fancy <b>html</b> features", "Fancy html features");
     compare("Even <code>fancier</code> <i>html</i> tags<br> and<hr> stuff", "Even fancier html tags and stuff");
-  }
+  });
 
   // gs01/nelson : to do -- we have to come back and make sure this works.
-  /* @test */ async "resolve markdown descriptions"() {
+  xit("resolve markdown descriptions", async () => {
     const autoRest = new AutoRest(
       new RealFileSystem(),
       ResolveUri(CreateFolderUri(__dirname), "../../test/resources/literate-example/"),
@@ -58,5 +56,5 @@ class Commonmark {
     // commented out since we don't include subheadings currently
     // // check that subheading was included
     // assert.ok(swaggerDocObj.definitions.ListQueryKeysResult.description.indexOf("content under a subheading") !== -1);
-  }
-}
+  });
+});

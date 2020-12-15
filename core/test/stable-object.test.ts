@@ -2,14 +2,11 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
-
 import { NewEmptyObject } from "@azure-tools/datastore";
 
-@suite
-class StableObject {
-  @test async "insert order preservation"() {
+describe("StableObject", () => {
+  it("insert order preservation", () => {
     const o = NewEmptyObject();
     o[3] = 0;
     o[1] = 1;
@@ -25,9 +22,9 @@ class StableObject {
     for (let i = 0; i < 9; ++i) {
       assert.strictEqual(o[keys[i]], i);
     }
-  }
+  });
 
-  @test async "mutation order preservation"() {
+  it("mutation order preservation", () => {
     const o = NewEmptyObject();
     o[8] = "a";
     o[7] = "a";
@@ -51,9 +48,9 @@ class StableObject {
     for (let i = 0; i < 9; ++i) {
       assert.strictEqual(keys[i], `${8 - i}`);
     }
-  }
+  });
 
-  @test async "delete order preservation"() {
+  it("delete order preservation", () => {
     const o = NewEmptyObject();
     o[3] = 0;
     o[1] = 1;
@@ -77,5 +74,5 @@ class StableObject {
     for (let i = 0; i < 9; ++i) {
       assert.strictEqual(o[keys[i]], i);
     }
-  }
-}
+  });
+});
