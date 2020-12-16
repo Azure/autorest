@@ -5,7 +5,7 @@
   "pnpmOptions": {},
   "nodeSupportedVersionRange": ">=8.9.4 <15.0.0",
   "ensureConsistentVersions": true,
-  "projectFolderMinDepth": 1,
+  "projectFolderMinDepth": 3,
   "projectFolderMaxDepth": 3,
   "repository": {},
   "eventHooks": {
