@@ -6,4 +6,4 @@ plugins:
 
 # then inherit the common settings
 extends:
-  - "../.default-eslintrc.yaml"
+  - "../../../.default-eslintrc.yaml"

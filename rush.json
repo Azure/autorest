@@ -5,7 +5,7 @@
   "pnpmOptions": {},
   "nodeSupportedVersionRange": ">=8.9.4 <15.0.0",
   "ensureConsistentVersions": true,
-  "projectFolderMinDepth": 1,
+  "projectFolderMinDepth": 3,
   "projectFolderMaxDepth": 3,
   "repository": {},
   "eventHooks": {
@@ -18,19 +18,19 @@
   "projects": [
     {
       "packageName": "@autorest/core",
-      "projectFolder": "core",
+      "projectFolder": "packages/extensions/core",
       "reviewCategory": "production",
       "shouldPublish": true
     },
     {
       "packageName": "autorest",
-      "projectFolder": "autorest",
+      "projectFolder": "packages/apps/autorest",
       "reviewCategory": "production",
       "shouldPublish": true
     },
     {
       "packageName": "@autorest/schemas",
-      "projectFolder": "autorest-schemas",
+      "projectFolder": "packages/libs/autorest-schemas",
       "reviewCategory": "production",
       "shouldPublish": false
     }

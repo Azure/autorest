@@ -60,14 +60,14 @@ specs:
       - xms-error-responses.json
 languages:
   - language: python
-    outputPath: ../core/test/regression/python
+    outputPath: ../packages/extensions/core/test/regression/python
     oldArgs:
       - --version:~3.0.6320
       - --use:@autorest/python
     newArgs:
-      - --version:../core
+      - --version:../packages/extensions/core
   - language: typescript
-    outputPath: ../core/test/regression/typescript
+    outputPath: ../packages/extensions/core/test/regression/typescript
     oldArgs:
       - --v3
       - --package-name:test-package
@@ -75,7 +75,7 @@ languages:
       - --use:@autorest/typescript@6.0.0-dev.20200715.2
     newArgs:
       - --v3
-      - --version:../core
+      - --version:../packages/extensions/core
       - --package-name:test-package
       - --title:TestClient
       - --use:@autorest/typescript@6.0.0-dev.20200715.2
