@@ -7,7 +7,7 @@ import { existsSync } from "fs";
 
 const resolveAppRoot = () => {
   let current = path.resolve(__dirname);
-  while (!existsSync(path.join(current, "node_modules"))) {
+  while (!existsSync(path.join(current, "package.json"))) {
     current = path.dirname(current);
   }
   return current;
