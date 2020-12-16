@@ -30,7 +30,7 @@
     },
     {
       "packageName": "@autorest/schemas",
-      "projectFolder": "autorest-schemas",
+      "projectFolder": "packages/libs/autorest-schemas",
       "reviewCategory": "production",
       "shouldPublish": false
     }
