@@ -1,7 +1,7 @@
 {
   "name": "@autorest/core",
   "version": "3.0.0",
-  "patchOffset": 5000,
+  "patchOffset": 5136,
   "description": "AutoRest core module",
   "engines": {
     "node": ">=10.13.0"
