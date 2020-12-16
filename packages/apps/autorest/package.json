@@ -1,7 +1,7 @@
 {
   "name": "autorest",
   "version": "3.0.0",
-  "patchOffset": 5000,
+  "patchOffset": 5110,
   "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is an OpenAPI spec that describes the REST API.",
   "engines": {
     "node": ">=10.13.0"
