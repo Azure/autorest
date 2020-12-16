@@ -78,7 +78,7 @@
     "untildify": "^3.0.2",
     "vscode-jsonrpc": "^3.5.0",
     "source-map-support": "0.5.13",
-    "yaml-ast-parser": "0.0.40",
+    "yaml-ast-parser": "0.0.43",
     "z-schema": "^3.19.0",
     "safe-buffer": "5.2.0",
     "prettier": "~2.2.1",
