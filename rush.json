@@ -18,7 +18,7 @@
   "projects": [
     {
       "packageName": "@autorest/core",
-      "projectFolder": "core",
+      "projectFolder": "packages/extensions/core",
       "reviewCategory": "production",
       "shouldPublish": true
     },
