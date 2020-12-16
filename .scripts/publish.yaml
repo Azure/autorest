@@ -53,11 +53,11 @@ steps:
       # publish autorest cli and beta (@autorest/autorest)
       cd packages/apps/autorest
       v=`node -e "console.log(require('./package.json').version)"`
-      publish-release --token $(azuresdk-github-pat) --repo autorest --owner azure --name autorest-$v --tag autorest-$v --notes='prerelease build' --prerelease --editRelease false --assets ../common/temp/artifacts/packages/autorest-$v.tgz --target_commitish $(Build.SourceBranchName)
+      publish-release --token $(azuresdk-github-pat) --repo autorest --owner azure --name autorest-$v --tag autorest-$v --notes='prerelease build' --prerelease --editRelease false --assets ../../../common/temp/artifacts/packages/autorest-$v.tgz --target_commitish $(Build.SourceBranchName)
       cd ../../..
 
       # publish autorest core
       cd packages/extensions/core
       v=`node -e "console.log(require('./package.json').version)"`
-      publish-release --token $(azuresdk-github-pat) --repo autorest --owner azure --name autorest-core-$v --tag autorest-core-$v --notes='prerelease build' --prerelease --editRelease false --assets ../common/temp/artifacts/packages/autorest-core-$v.tgz --target_commitish $(Build.SourceBranchName)
+      publish-release --token $(azuresdk-github-pat) --repo autorest --owner azure --name autorest-core-$v --tag autorest-core-$v --notes='prerelease build' --prerelease --editRelease false --assets ../../../common/temp/artifacts/packages/autorest-core-$v.tgz --target_commitish $(Build.SourceBranchName)
       cd ../../..
