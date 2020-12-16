@@ -28,12 +28,13 @@ steps:
       npx @microsoft/rush set-versions
       rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
 
+      # TODO: Remove this section as we deprecate @autorest/autorest
       # copy the autorest folder into autorestautorest
       # and tweak the files so we can build @autorest/autorest too.
-      cp -r autorest autorestautorest
-      sed 's/\"name\": \"autorest\",/\"name\": \"@autorest\/autorest\",/g' -i autorestautorest/package.json
-      sed 's/\"autorest\":/\"autorest-beta\":/g' -i autorestautorest/package.json
-      sed 's/.*#region.*//g' -i rush.json
+      # cp -r autorest autorestautorest
+      # sed 's/\"name\": \"autorest\",/\"name\": \"@autorest\/autorest\",/g' -i autorestautorest/package.json
+      # sed 's/\"autorest\":/\"autorest-beta\":/g' -i autorestautorest/package.json
+      # sed 's/.*#region.*//g' -i rush.json
 
       # pull in dependencies
       npx @microsoft/rush update 
@@ -50,13 +51,13 @@ steps:
       # publish packages to a github release.
 
       # publish autorest cli and beta (@autorest/autorest)
-      cd autorest 
+      cd packages/apps/autorest
       v=`node -e "console.log(require('./package.json').version)"`
-      publish-release --token $(azuresdk-github-pat) --repo autorest --owner azure --name autorest-$v --tag autorest-$v --notes='prerelease build' --prerelease --editRelease false --assets ../common/temp/artifacts/packages/autorest-$v.tgz --assets ../common/temp/artifacts/packages/autorest-autorest-$v.tgz --target_commitish $(Build.SourceBranchName)
-      cd ..
+      publish-release --token $(azuresdk-github-pat) --repo autorest --owner azure --name autorest-$v --tag autorest-$v --notes='prerelease build' --prerelease --editRelease false --assets ../common/temp/artifacts/packages/autorest-$v.tgz --target_commitish $(Build.SourceBranchName)
+      cd ../../..
 
       # publish autorest core
-      cd core 
+      cd packages/extensions/core
       v=`node -e "console.log(require('./package.json').version)"`
       publish-release --token $(azuresdk-github-pat) --repo autorest --owner azure --name autorest-core-$v --tag autorest-core-$v --notes='prerelease build' --prerelease --editRelease false --assets ../common/temp/artifacts/packages/autorest-core-$v.tgz --target_commitish $(Build.SourceBranchName)
-      cd ..
+      cd ../../..
