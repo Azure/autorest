@@ -83,8 +83,7 @@
     "z-schema": "^3.19.0",
     "safe-buffer": "5.2.0",
     "prettier": "~2.2.1",
-    "eslint-plugin-prettier": "~3.1.4",
-    "@autorest/schemas": "~1.0.0"
+    "eslint-plugin-prettier": "~3.1.4"
   },
   "static-link": {
     "entrypoints": [],
@@ -109,8 +108,7 @@
       "untildify": "^3.0.2",
       "vscode-jsonrpc": "^3.5.0",
       "yaml-ast-parser": "0.0.40",
-      "z-schema": "^3.19.0",
-      "@autorest/schemas": "~1.0.0"
+      "z-schema": "^3.19.0"
     }
   }
 }
