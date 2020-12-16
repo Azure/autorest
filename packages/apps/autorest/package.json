@@ -55,7 +55,7 @@
     "static-link": "^0.3.0",
     "@autorest/core": "~3.0.0",
     "@azure-tools/async-io": "~3.0.0",
-    "@azure-tools/extension": "~3.0.0",
+    "@azure-tools/extension": "~3.1.0",
     "@azure-tools/tasks": "~3.0.0",
     "@azure-tools/uri": "~3.0.0",
     "semver": "^5.5.1",
@@ -73,7 +73,7 @@
     "dependencies": {
       "@azure-tools/async-io": "~3.0.0",
       "@azure-tools/uri": "~3.0.0",
-      "@azure-tools/extension": "~3.0.0",
+      "@azure-tools/extension": "~3.1.0",
       "@azure-tools/tasks": "~3.0.0",
       "semver": "^5.5.1",
       "chalk": "2.3.0"

@@ -1,9 +1,9 @@
 dependencies:
   '@azure-tools/async-io': 3.0.252
   '@azure-tools/codegen': 2.5.290
-  '@azure-tools/datastore': 4.1.267
+  '@azure-tools/datastore': 4.1.268
   '@azure-tools/deduplication': 3.0.264
-  '@azure-tools/extension': 3.0.263
+  '@azure-tools/extension': 3.1.264
   '@azure-tools/linq': 3.1.261
   '@azure-tools/oai2-to-oai3': 4.1.272
   '@azure-tools/object-comparison': 3.0.251
@@ -67,7 +67,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-D9TuBY9YE+CE/EpbMaB3oVJq1xp7koIAQGlFrRNTLPgKNMelqkWK8HLnYSk810HL0rJFQjJE/BLx5lQsOjMYRQ==
-  /@azure-tools/datastore/4.1.267:
+  /@azure-tools/datastore/4.1.268:
     dependencies:
       '@azure-tools/codegen': 2.5.290
       '@azure-tools/linq': 3.1.261
@@ -76,16 +76,16 @@ packages:
       js-yaml: 3.13.1
       jsonpath: 1.0.0
       source-map: 0.5.6
-      yaml-ast-parser: 0.0.40
+      yaml-ast-parser: 0.0.43
     dev: false
     engines:
       node: '>=10.12.0'
     resolution:
-      integrity: sha512-79xJj2mlMY15Rr9v77AwRntmzxtrTz35tSwKCovMgxtwGY5fO0uumaFWCyJ+1xzx/tZs61p7yRFWW82FUOs1IA==
+      integrity: sha512-65kWMff99mjDg2YfzcV2H7dDtWT6sj5XAOqKsrGKegwvBvvVHiaFVGVYf1i0oPWq4uthlw3Ucl+G37n8SL6fbA==
   /@azure-tools/deduplication/3.0.264:
     dependencies:
       '@azure-tools/codegen': 2.5.290
-      '@azure-tools/datastore': 4.1.267
+      '@azure-tools/datastore': 4.1.268
       '@azure-tools/linq': 3.1.261
       '@azure-tools/object-comparison': 3.0.251
       '@azure-tools/openapi': 3.0.260
@@ -104,21 +104,23 @@ packages:
       node: '>=10.12.0'
     resolution:
       integrity: sha512-kUma7gjVToTpfKqCAMCVpmex4NBkcLBDO/LTx0ZUfa/bXExTZ+T/JOdgEC5GoF3aQPT0ajQKGiBaC4/a61johQ==
-  /@azure-tools/extension/3.0.263:
+  /@azure-tools/extension/3.1.264:
     dependencies:
       '@azure-tools/async-io': 3.0.252
       '@azure-tools/eventing': 3.0.251
       '@azure-tools/tasks': 3.0.252
+      npm: 6.14.9
       npm-normalize-package-bin: 1.0.1
       npm-package-arg: 6.1.0
       pacote: 9.2.3
       safe-buffer: 5.2.0
       semver: 5.7.1
+      yarn: 1.22.10
     dev: false
     engines:
       node: '>=10.12.0'
     resolution:
-      integrity: sha512-YO35of27vssxrohiunWeaQl3sF2P/luH/MboQt1B1p3G/hOB5le01ipea6+Y8bdfYQKvhIIUy2Mciwruo4l4eg==
+      integrity: sha512-AkcKUWH7inhJBYRb9KTU0HI761YN+I07Z+gcXMA9ieBI2glqlALlw046ttOld1UGHGCLHJ6Br3g1ghQYf8emeQ==
   /@azure-tools/linq/3.1.261:
     dev: false
     engines:
@@ -127,7 +129,7 @@ packages:
       integrity: sha512-SRYWE2SUYXBdqGoQYjBvvFtZKHLaYvL4HJwDKOp5PA0OCm5f3gLNVsXSwgzLzh4CiYjt0vsRiQy5AB4p7b8Ogg==
   /@azure-tools/oai2-to-oai3/4.1.272:
     dependencies:
-      '@azure-tools/datastore': 4.1.267
+      '@azure-tools/datastore': 4.1.268
       '@azure-tools/openapi': 3.0.260
       source-map: 0.5.6
     dev: false
@@ -166,22 +168,22 @@ packages:
       node: '>=10.12.0'
     resolution:
       integrity: sha512-Ux17AIJaqc3Z5XZWwl4I+5yXAaI7yiNnyHKck7BOrkUup7Yi4E5dT62JaNAuyPrCWs/dDZ8zcDAe9uaVkLMk9A==
-  /@babel/code-frame/7.10.4:
+  /@babel/code-frame/7.12.11:
     dependencies:
       '@babel/highlight': 7.10.4
     dev: false
     resolution:
-      integrity: sha512-vG6SvB6oYEhvgisZNFRmRCUkLz11c7rp+tbNTynGqc6mS1d5ATd/sGyV6W0KZZnXRKMTzZDRgQT3Ou9jhpAfUg==
+      integrity: sha512-Zt1yodBx1UcyiePMSkWnU4hPqhwq7hGi2nFL1LeA3EUl+q2LQx16MISgJ0+z7dnmgvP9QtIleuETGOiOH1RcIw==
   /@babel/core/7.12.10:
     dependencies:
-      '@babel/code-frame': 7.10.4
-      '@babel/generator': 7.12.10
+      '@babel/code-frame': 7.12.11
+      '@babel/generator': 7.12.11
       '@babel/helper-module-transforms': 7.12.1
       '@babel/helpers': 7.12.5
-      '@babel/parser': 7.12.10
+      '@babel/parser': 7.12.11
       '@babel/template': 7.12.7
       '@babel/traverse': 7.12.10
-      '@babel/types': 7.12.10
+      '@babel/types': 7.12.11
       convert-source-map: 1.7.0
       debug: 4.3.1
       gensync: 1.0.0-beta.2
@@ -194,57 +196,57 @@ packages:
       node: '>=6.9.0'
     resolution:
       integrity: sha512-eTAlQKq65zHfkHZV0sIVODCPGVgoo1HdBlbSLi9CqOzuZanMv2ihzY+4paiKr1mH+XmYESMAmJ/dpZ68eN6d8w==
-  /@babel/generator/7.12.10:
+  /@babel/generator/7.12.11:
     dependencies:
-      '@babel/types': 7.12.10
+      '@babel/types': 7.12.11
       jsesc: 2.5.2
       source-map: 0.5.6
     dev: false
     resolution:
-      integrity: sha512-6mCdfhWgmqLdtTkhXjnIz0LcdVCd26wS2JXRtj2XY0u5klDsXBREA/pG5NVOuVnF2LUrBGNFtQkIqqTbblg0ww==
-  /@babel/helper-function-name/7.10.4:
+      integrity: sha512-Ggg6WPOJtSi8yYQvLVjG8F/TlpWDlKx0OpS4Kt+xMQPs5OaGYWy+v1A+1TvxI6sAMGZpKWWoAQ1DaeQbImlItA==
+  /@babel/helper-function-name/7.12.11:
     dependencies:
       '@babel/helper-get-function-arity': 7.12.10
       '@babel/template': 7.12.7
-      '@babel/types': 7.12.10
+      '@babel/types': 7.12.11
     dev: false
     resolution:
-      integrity: sha512-YdaSyz1n8gY44EmN7x44zBn9zQ1Ry2Y+3GTA+3vH6Mizke1Vw0aWDM66FOYEPw8//qKkmqOckrGgTYa+6sceqQ==
+      integrity: sha512-AtQKjtYNolKNi6nNNVLQ27CP6D9oFR6bq/HPYSizlzbp7uC1M59XJe8L+0uXjbIaZaUJF99ruHqVGiKXU/7ybA==
   /@babel/helper-get-function-arity/7.12.10:
     dependencies:
-      '@babel/types': 7.12.10
+      '@babel/types': 7.12.11
     dev: false
     resolution:
       integrity: sha512-mm0n5BPjR06wh9mPQaDdXWDoll/j5UpCAPl1x8fS71GHm7HA6Ua2V4ylG1Ju8lvcTOietbPNNPaSilKj+pj+Ag==
   /@babel/helper-member-expression-to-functions/7.12.7:
     dependencies:
-      '@babel/types': 7.12.10
+      '@babel/types': 7.12.11
     dev: false
     resolution:
       integrity: sha512-DCsuPyeWxeHgh1Dus7APn7iza42i/qXqiFPWyBDdOFtvS581JQePsc1F/nD+fHrcswhLlRc2UpYS1NwERxZhHw==
   /@babel/helper-module-imports/7.12.5:
     dependencies:
-      '@babel/types': 7.12.10
+      '@babel/types': 7.12.11
     dev: false
     resolution:
       integrity: sha512-SR713Ogqg6++uexFRORf/+nPXMmWIn80TALu0uaFb+iQIUoR7bOC7zBWyzBs5b3tBBJXuyD0cRu1F15GyzjOWA==
   /@babel/helper-module-transforms/7.12.1:
     dependencies:
       '@babel/helper-module-imports': 7.12.5
-      '@babel/helper-replace-supers': 7.12.5
+      '@babel/helper-replace-supers': 7.12.11
       '@babel/helper-simple-access': 7.12.1
-      '@babel/helper-split-export-declaration': 7.11.0
-      '@babel/helper-validator-identifier': 7.10.4
+      '@babel/helper-split-export-declaration': 7.12.11
+      '@babel/helper-validator-identifier': 7.12.11
       '@babel/template': 7.12.7
       '@babel/traverse': 7.12.10
-      '@babel/types': 7.12.10
+      '@babel/types': 7.12.11
       lodash: 4.17.20
     dev: false
     resolution:
       integrity: sha512-QQzehgFAZ2bbISiCpmVGfiGux8YVFXQ0abBic2Envhej22DVXV9nCFaS5hIQbkyo1AdGb+gNME2TSh3hYJVV/w==
   /@babel/helper-optimise-call-expression/7.12.10:
     dependencies:
-      '@babel/types': 7.12.10
+      '@babel/types': 7.12.11
     dev: false
     resolution:
       integrity: sha512-4tpbU0SrSTjjt65UMWSrUOPZTsgvPgGG4S8QSTNHacKzpS51IVWGDj0yCwyeZND/i+LSN2g/O63jEXEWm49sYQ==
@@ -252,54 +254,54 @@ packages:
     dev: false
     resolution:
       integrity: sha512-O4KCvQA6lLiMU9l2eawBPMf1xPP8xPfB3iEQw150hOVTqj/rfXz0ThTb4HEzqQfs2Bmo5Ay8BzxfzVtBrr9dVg==
-  /@babel/helper-replace-supers/7.12.5:
+  /@babel/helper-replace-supers/7.12.11:
     dependencies:
       '@babel/helper-member-expression-to-functions': 7.12.7
       '@babel/helper-optimise-call-expression': 7.12.10
       '@babel/traverse': 7.12.10
-      '@babel/types': 7.12.10
+      '@babel/types': 7.12.11
     dev: false
     resolution:
-      integrity: sha512-5YILoed0ZyIpF4gKcpZitEnXEJ9UoDRki1Ey6xz46rxOzfNMAhVIJMoune1hmPVxh40LRv1+oafz7UsWX+vyWA==
+      integrity: sha512-q+w1cqmhL7R0FNzth/PLLp2N+scXEK/L2AHbXUyydxp828F4FEa5WcVoqui9vFRiHDQErj9Zof8azP32uGVTRA==
   /@babel/helper-simple-access/7.12.1:
     dependencies:
-      '@babel/types': 7.12.10
+      '@babel/types': 7.12.11
     dev: false
     resolution:
       integrity: sha512-OxBp7pMrjVewSSC8fXDFrHrBcJATOOFssZwv16F3/6Xtc138GHybBfPbm9kfiqQHKhYQrlamWILwlDCeyMFEaA==
-  /@babel/helper-split-export-declaration/7.11.0:
+  /@babel/helper-split-export-declaration/7.12.11:
     dependencies:
-      '@babel/types': 7.12.10
+      '@babel/types': 7.12.11
     dev: false
     resolution:
-      integrity: sha512-74Vejvp6mHkGE+m+k5vHY93FX2cAtrw1zXrZXRlG4l410Nm9PxfEiVTn1PjDPV5SnmieiueY4AFg2xqhNFuuZg==
-  /@babel/helper-validator-identifier/7.10.4:
+      integrity: sha512-LsIVN8j48gHgwzfocYUSkO/hjYAOJqlpJEc7tGXcIm4cubjVUf8LGW6eWRyxEu7gA25q02p0rQUWoCI33HNS5g==
+  /@babel/helper-validator-identifier/7.12.11:
     dev: false
     resolution:
-      integrity: sha512-3U9y+43hz7ZM+rzG24Qe2mufW5KhvFg/NhnNph+i9mgCtdTCtMJuI1TMkrIUiK7Ix4PYlRF9I5dhqaLYA/ADXw==
+      integrity: sha512-np/lG3uARFybkoHokJUmf1QfEvRVCPbmQeUQpKow5cQ3xWrV9i3rUHodKDJPQfTVX61qKi+UdYk8kik84n7XOw==
   /@babel/helpers/7.12.5:
     dependencies:
       '@babel/template': 7.12.7
       '@babel/traverse': 7.12.10
-      '@babel/types': 7.12.10
+      '@babel/types': 7.12.11
     dev: false
     resolution:
       integrity: sha512-lgKGMQlKqA8meJqKsW6rUnc4MdUk35Ln0ATDqdM1a/UpARODdI4j5Y5lVfUScnSNkJcdCRAaWkspykNoFg9sJA==
   /@babel/highlight/7.10.4:
     dependencies:
-      '@babel/helper-validator-identifier': 7.10.4
+      '@babel/helper-validator-identifier': 7.12.11
       chalk: 2.3.0
       js-tokens: 4.0.0
     dev: false
     resolution:
       integrity: sha512-i6rgnR/YgPEQzZZnbTHHuZdlE8qyoBNalD6F+q4vAFlcMEcqmkoG+mPqJYJCo63qPf74+Y1UZsl3l6f7/RIkmA==
-  /@babel/parser/7.12.10:
+  /@babel/parser/7.12.11:
     dev: false
     engines:
       node: '>=6.0.0'
     hasBin: true
     resolution:
-      integrity: sha512-PJdRPwyoOqFAWfLytxrWwGrAxghCgh/yTNCYciOz8QgjflA7aZhECPZAa2VUedKg2+QMWkI0L9lynh2SNmNEgA==
+      integrity: sha512-N3UxG+uuF4CMYoNj8AhnbAcJF0PiuJ9KHuy1lQmkYsxTer/MAH9UBNHsBoAX/4s6NvlDD047No8mYVGGzLL4hg==
   /@babel/plugin-syntax-async-generators/7.8.4_@babel+core@7.12.10:
     dependencies:
       '@babel/core': 7.12.10
@@ -410,34 +412,34 @@ packages:
       integrity: sha512-i7ooMZFS+a/Om0crxZodrTzNEPJHZrlMVGMTEpFAj6rYY/bKCddB0Dk/YxfPuYXOopuhKk/e1jV6h+WUU9XN3A==
   /@babel/template/7.12.7:
     dependencies:
-      '@babel/code-frame': 7.10.4
-      '@babel/parser': 7.12.10
-      '@babel/types': 7.12.10
+      '@babel/code-frame': 7.12.11
+      '@babel/parser': 7.12.11
+      '@babel/types': 7.12.11
     dev: false
     resolution:
       integrity: sha512-GkDzmHS6GV7ZeXfJZ0tLRBhZcMcY0/Lnb+eEbXDBfCAcZCjrZKe6p3J4we/D24O9Y8enxWAg1cWwof59yLh2ow==
   /@babel/traverse/7.12.10:
     dependencies:
-      '@babel/code-frame': 7.10.4
-      '@babel/generator': 7.12.10
-      '@babel/helper-function-name': 7.10.4
-      '@babel/helper-split-export-declaration': 7.11.0
-      '@babel/parser': 7.12.10
-      '@babel/types': 7.12.10
+      '@babel/code-frame': 7.12.11
+      '@babel/generator': 7.12.11
+      '@babel/helper-function-name': 7.12.11
+      '@babel/helper-split-export-declaration': 7.12.11
+      '@babel/parser': 7.12.11
+      '@babel/types': 7.12.11
       debug: 4.3.1
       globals: 11.12.0
       lodash: 4.17.20
     dev: false
     resolution:
       integrity: sha512-6aEtf0IeRgbYWzta29lePeYSk+YAFIC3kyqESeft8o5CkFlYIMX+EQDDWEiAQ9LHOA3d0oHdgrSsID/CKqXJlg==
-  /@babel/types/7.12.10:
+  /@babel/types/7.12.11:
     dependencies:
-      '@babel/helper-validator-identifier': 7.10.4
+      '@babel/helper-validator-identifier': 7.12.11
       lodash: 4.17.20
       to-fast-properties: 2.0.0
     dev: false
     resolution:
-      integrity: sha512-sf6wboJV5mGyip2hIpDSKsr80RszPinEFjsHTalMxZAZkoQ2/2yQzxlcFN52SJqsyPfLtPmenL4g2KB3KJXPDw==
+      integrity: sha512-ukA9SQtKThINm++CX1CwmliMrE54J6nIYB5XTwL5f/CLFW9owfls+YSU8tVW15RQ2w+a3fSbPjC6HdQNtWZkiA==
   /@bcoe/v8-coverage/0.2.3:
     dev: false
     resolution:
@@ -681,8 +683,8 @@ packages:
       integrity: sha512-MZPUxrmFubI36XS1DI3qmI0YdN1gks62JtFZvxR67ljjSNCeK6U08Zx4msEWOXuofgqUt6zPHSi1H9fbjR/NRA==
   /@types/babel__core/7.1.12:
     dependencies:
-      '@babel/parser': 7.12.10
-      '@babel/types': 7.12.10
+      '@babel/parser': 7.12.11
+      '@babel/types': 7.12.11
       '@types/babel__generator': 7.6.2
       '@types/babel__template': 7.4.0
       '@types/babel__traverse': 7.11.0
@@ -691,20 +693,20 @@ packages:
       integrity: sha512-wMTHiiTiBAAPebqaPiPDLFA4LYPKr6Ph0Xq/6rq1Ur3v66HXyG+clfR9CNETkD7MQS8ZHvpQOtA53DLws5WAEQ==
   /@types/babel__generator/7.6.2:
     dependencies:
-      '@babel/types': 7.12.10
+      '@babel/types': 7.12.11
     dev: false
     resolution:
       integrity: sha512-MdSJnBjl+bdwkLskZ3NGFp9YcXGx5ggLpQQPqtgakVhsWK0hTtNYhjpZLlWQTviGTvF8at+Bvli3jV7faPdgeQ==
   /@types/babel__template/7.4.0:
     dependencies:
-      '@babel/parser': 7.12.10
-      '@babel/types': 7.12.10
+      '@babel/parser': 7.12.11
+      '@babel/types': 7.12.11
     dev: false
     resolution:
       integrity: sha512-NTPErx4/FiPCGScH7foPyr+/1Dkzkni+rHiYHHoTjvwou7AQzJkNeD60A9CXRy+ZEN2B1bggmkTMCDb+Mv5k+A==
   /@types/babel__traverse/7.11.0:
     dependencies:
-      '@babel/types': 7.12.10
+      '@babel/types': 7.12.11
     dev: false
     resolution:
       integrity: sha512-kSjgDMZONiIfSH1Nxcr5JIRMwUetDki63FSQfpTCz8ogF3Ulqm8+mr5f78dUYs6vMiB6gBusQqfQmBvHZj/lwg==
@@ -1142,7 +1144,7 @@ packages:
   /babel-plugin-jest-hoist/26.6.2:
     dependencies:
       '@babel/template': 7.12.7
-      '@babel/types': 7.12.10
+      '@babel/types': 7.12.11
       '@types/babel__core': 7.1.12
       '@types/babel__traverse': 7.11.0
     dev: false
@@ -1998,7 +2000,7 @@ packages:
       integrity: sha512-6J72N8UNa462wa/KFODt/PJ3IU60SDpC3QXC1Hjc1BXXpfL2C9R5+AU7jhe0F6GREqVMh4Juu+NY7xn+6dipUQ==
   /eslint/6.6.0:
     dependencies:
-      '@babel/code-frame': 7.10.4
+      '@babel/code-frame': 7.12.11
       ajv: 6.12.6
       chalk: 2.3.0
       cross-spawn: 6.0.5
@@ -3308,7 +3310,7 @@ packages:
       integrity: sha512-llnc8vQgYcNqDrqRDXWwMr9i7rS5XFiCwvh6DTP7Jqa2mqpcCBBlpCbn+trkG0KNhPu/h8rzyBkriOtBstvWhw==
   /jest-message-util/26.6.2:
     dependencies:
-      '@babel/code-frame': 7.10.4
+      '@babel/code-frame': 7.12.11
       '@jest/types': 26.6.2
       '@types/stack-utils': 2.0.0
       chalk: 4.1.0
@@ -3448,7 +3450,7 @@ packages:
       integrity: sha512-S5wqyz0DXnNJPd/xfIzZ5Xnp1HrJWBczg8mMfMpN78OJ5eDxXyf+Ygld9wX1DnUWbIbhM1YDY95NjR4CBXkb2g==
   /jest-snapshot/26.6.2:
     dependencies:
-      '@babel/types': 7.12.10
+      '@babel/types': 7.12.11
       '@jest/types': 26.6.2
       '@types/babel__traverse': 7.11.0
       '@types/prettier': 2.1.5
@@ -4230,6 +4232,137 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==
+  /npm/6.14.9:
+    bundledDependencies:
+      - abbrev
+      - ansicolors
+      - ansistyles
+      - aproba
+      - archy
+      - bin-links
+      - bluebird
+      - byte-size
+      - cacache
+      - call-limit
+      - chownr
+      - ci-info
+      - cli-columns
+      - cli-table3
+      - cmd-shim
+      - columnify
+      - config-chain
+      - debuglog
+      - detect-indent
+      - detect-newline
+      - dezalgo
+      - editor
+      - figgy-pudding
+      - find-npm-prefix
+      - fs-vacuum
+      - fs-write-stream-atomic
+      - gentle-fs
+      - glob
+      - graceful-fs
+      - has-unicode
+      - hosted-git-info
+      - iferr
+      - imurmurhash
+      - infer-owner
+      - inflight
+      - inherits
+      - ini
+      - init-package-json
+      - is-cidr
+      - json-parse-better-errors
+      - JSONStream
+      - lazy-property
+      - libcipm
+      - libnpm
+      - libnpmaccess
+      - libnpmhook
+      - libnpmorg
+      - libnpmsearch
+      - libnpmteam
+      - libnpx
+      - lock-verify
+      - lockfile
+      - lodash._baseindexof
+      - lodash._baseuniq
+      - lodash._bindcallback
+      - lodash._cacheindexof
+      - lodash._createcache
+      - lodash._getnative
+      - lodash.clonedeep
+      - lodash.restparam
+      - lodash.union
+      - lodash.uniq
+      - lodash.without
+      - lru-cache
+      - meant
+      - mississippi
+      - mkdirp
+      - move-concurrently
+      - node-gyp
+      - nopt
+      - normalize-package-data
+      - npm-audit-report
+      - npm-cache-filename
+      - npm-install-checks
+      - npm-lifecycle
+      - npm-package-arg
+      - npm-packlist
+      - npm-pick-manifest
+      - npm-profile
+      - npm-registry-fetch
+      - npm-user-validate
+      - npmlog
+      - once
+      - opener
+      - osenv
+      - pacote
+      - path-is-inside
+      - promise-inflight
+      - qrcode-terminal
+      - query-string
+      - qw
+      - read-cmd-shim
+      - read-installed
+      - read-package-json
+      - read-package-tree
+      - read
+      - readable-stream
+      - readdir-scoped-modules
+      - request
+      - retry
+      - rimraf
+      - safe-buffer
+      - semver
+      - sha
+      - slide
+      - sorted-object
+      - sorted-union-stream
+      - ssri
+      - stringify-package
+      - tar
+      - text-table
+      - tiny-relative-date
+      - uid-number
+      - umask
+      - unique-filename
+      - unpipe
+      - update-notifier
+      - uuid
+      - validate-npm-package-license
+      - validate-npm-package-name
+      - which
+      - worker-farm
+      - write-file-atomic
+    dev: false
+    engines:
+      node: 6 >=6.2.0 || 8 || >=9.3.0
+    hasBin: true
+    resolution:
+      integrity: sha512-yHi1+i9LyAZF1gAmgyYtVk+HdABlLy94PMIDoK1TRKWvmFQAt5z3bodqVwKvzY0s6dLqQPVsRLiwhJfNtiHeCg==
   /nwsapi/2.2.0:
     dev: false
     resolution:
@@ -4455,7 +4588,7 @@ packages:
       integrity: sha1-vjX1Qlvh9/bHRxhPmKeIy5lHfuA=
   /parse-json/5.1.0:
     dependencies:
-      '@babel/code-frame': 7.10.4
+      '@babel/code-frame': 7.12.11
       error-ex: 1.3.2
       json-parse-even-better-errors: 2.3.1
       lines-and-columns: 1.1.6
@@ -6013,6 +6146,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-CFNtTnPTIrHJziB6uN1w4E0grm4=
+  /yaml-ast-parser/0.0.43:
+    dev: false
+    resolution:
+      integrity: sha512-2PTINUwsRqSd+s8XxKaJWQlUuEMHJQyEuh2edBbW8KNJz0SJPwUSD2zRWqezFEdN7IzAgeuYHFUCF7o8zRdZ0A==
   /yargs-parser/10.1.0:
     dependencies:
       camelcase: 4.1.0
@@ -6052,6 +6189,14 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-aePbxDmcYW++PaqBsJ+HYUFwCdv4LVvdnhBy78E57PIor8/OVvhMrADFFEDh8DHDFRv/O9i3lPhsENjO7QX0+A==
+  /yarn/1.22.10:
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    hasBin: true
+    requiresBuild: true
+    resolution:
+      integrity: sha512-IanQGI9RRPAN87VGTF7zs2uxkSyQSrSPsju0COgbsKQOOXr5LtcVPeyXWgwVa0ywG3d8dg6kSYKGBuYK021qeA==
   /z-schema/3.25.1:
     dependencies:
       core-js: 2.6.12
@@ -6067,7 +6212,7 @@ packages:
   'file:projects/autorest.tgz':
     dependencies:
       '@azure-tools/async-io': 3.0.252
-      '@azure-tools/extension': 3.0.263
+      '@azure-tools/extension': 3.1.264
       '@azure-tools/tasks': 3.0.252
       '@azure-tools/uri': 3.0.254
       '@types/commonmark': 0.27.4
@@ -6093,16 +6238,16 @@ packages:
     dev: false
     name: '@rush-temp/autorest'
     resolution:
-      integrity: sha512-V0nJV4o0nJNvouJJVPAojnNmf817aJz9VQ6oMJAzOqC/R4d9TrMU6ujAo1YKL1zrRVadPX16pS5UtYVjJN2qcg==
+      integrity: sha512-AAzvznOeIrYNsSSj1RTj+Th1zmf6V6tJgvSTNb/2k95PoBNA48MHAv7S9uSptT4seK9T6wiuAwwGBv61ccr/6g==
       tarball: 'file:projects/autorest.tgz'
     version: 0.0.0
   'file:projects/core.tgz':
     dependencies:
       '@azure-tools/async-io': 3.0.252
       '@azure-tools/codegen': 2.5.290
-      '@azure-tools/datastore': 4.1.267
+      '@azure-tools/datastore': 4.1.268
       '@azure-tools/deduplication': 3.0.264
-      '@azure-tools/extension': 3.0.263
+      '@azure-tools/extension': 3.1.264
       '@azure-tools/linq': 3.1.261
       '@azure-tools/oai2-to-oai3': 4.1.272
       '@azure-tools/object-comparison': 3.0.251
@@ -6143,7 +6288,7 @@ packages:
     dev: false
     name: '@rush-temp/core'
     resolution:
-      integrity: sha512-cv3KXgFYrUq9EJrVB2wo6136/mH3oGFNQ5PWgDEvj6OBuaq4I1XaU+xRhuCzoWwieq61i+AU2viY+LVE1FS9+w==
+      integrity: sha512-cMDJSDXU3q9FHy+jfEmUiWZcmQZUQF3fYKrwZq7DhpfhX3xIS3TMB8eEfkNty5IA1nHj3rnSdqLev/Fa7m2RJw==
       tarball: 'file:projects/core.tgz'
     version: 0.0.0
   'file:projects/schemas.tgz':
@@ -6158,7 +6303,7 @@ specifiers:
   '@azure-tools/codegen': ~2.5.0
   '@azure-tools/datastore': ~4.1.0
   '@azure-tools/deduplication': ~3.0.0
-  '@azure-tools/extension': ~3.0.0
+  '@azure-tools/extension': ~3.1.0
   '@azure-tools/linq': ~3.1.0
   '@azure-tools/oai2-to-oai3': ~4.1.0
   '@azure-tools/object-comparison': ~3.0.0
