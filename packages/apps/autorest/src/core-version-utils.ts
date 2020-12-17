@@ -4,6 +4,7 @@ import { dirname } from "path";
 import { AutorestArgs } from "./args";
 import { resolveEntrypoint, selectVersion } from "./autorest-as-a-service";
 import * as vm from "vm";
+import { config } from "process";
 
 /**
  * Return the version requested of the core extension.
@@ -15,6 +16,12 @@ export const getRequestedCoreVersion = (args: AutorestArgs): string => {
 };
 
 const cwd = process.cwd();
+
+/**
+ * Tries to load the version of autorest core from a config file.
+ * @param args CLI Version
+ * @param selectedVersion 
+ */
 export const configurationSpecifiedVersion = async (args: AutorestArgs, selectedVersion: any) => {
   try {
     // we can either have a selectedVerison object or a path. See if we can find the AutoRest API
@@ -57,8 +64,7 @@ export const configurationSpecifiedVersion = async (args: AutorestArgs, selected
           `,
       sandbox,
     );
-
-    console.error("Ues it wokr", configSpecifiedVersion);
+    
     // if we got back a result, lets return that.
     if (configSpecifiedVersion) {
       selectedVersion = await selectVersion(configSpecifiedVersion, false);
@@ -70,7 +76,6 @@ export const configurationSpecifiedVersion = async (args: AutorestArgs, selected
     }
     return selectedVersion;
   } catch (e) {
-    console.error("CRASH", e);
     return undefined;
   }
 };
