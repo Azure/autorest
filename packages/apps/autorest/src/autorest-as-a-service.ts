@@ -11,6 +11,7 @@ import { When } from "@azure-tools/tasks";
 import { mkdtempSync, rmdirSync } from "fs";
 import { tmpdir } from "os";
 import { spawn } from "child_process";
+import { AutorestArgs } from "./args";
 
 export const pkgVersion: string = require(`${__dirname}/../../package.json`).version;
 process.env["autorest.home"] = process.env["autorest.home"] || homedir();
@@ -23,7 +24,7 @@ try {
 }
 
 export const rootFolder = join(process.env["autorest.home"], ".autorest");
-const args = (<any>global).__args || {};
+const args: AutorestArgs = (<any>global).__args || {};
 
 export const extensionManager: Promise<ExtensionManager> = ExtensionManager.Create(rootFolder);
 export const oldCorePackage = "@microsoft.azure/autorest-core";
