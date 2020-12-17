@@ -5,11 +5,9 @@
 declare const isDebuggerEnabled: boolean;
 const cwd = process.cwd();
 
-import { isFile, readdir, rmdir, isDirectory } from "@azure-tools/async-io";
-import { LazyPromise } from "@azure-tools/tasks";
+import { isFile } from "@azure-tools/async-io";
 import chalk from "chalk";
-import { join, dirname } from "path";
-import { gt } from "semver";
+import { dirname } from "path";
 import {
   newCorePackage,
   ensureAutorestHome,
@@ -24,11 +22,11 @@ import {
   runCoreOutOfProc,
 } from "./autorest-as-a-service";
 import { color } from "./coloring";
-import { tmpdir } from "os";
 import * as vm from "vm";
 import { ResolveUri, ReadUri, EnumerateFiles } from "@azure-tools/uri";
 import { parseArgs } from "./args";
 import { showAvailableCoreVersions, showInstalledExtensions } from "./commands";
+import { checkForAutoRestUpdate, clearTempData } from "./actions";
 
 const launchCore = isDebuggerEnabled ? tryRequire : runCoreOutOfProc;
 
@@ -73,50 +71,9 @@ if (!args["message-format"] || args["message-format"] === "regular") {
 }
 
 // argument tweakin'
-const preview: boolean = args.preview;
 args.info = args.version === "" || args.info; // show --info if they use unparameterized --version.
 const listAvailable: boolean = args["list-available"] || false;
 const force = args.force || false;
-
-/** Check if there is an update for the bootstrapper available. */
-const checkBootstrapper = new LazyPromise(async () => {
-  if ((await networkEnabled) && !args["skip-upgrade-check"]) {
-    try {
-      const pkg = await (await extensionManager).findPackage("autorest", preview ? "preview" : "latest");
-      if (gt(pkg.version, pkgVersion)) {
-        console.log(
-          color(
-            `\n## There is a new version of AutoRest available (${
-              pkg.version
-            }).\n > You can install the newer version with with \`npm install -g autorest@${
-              preview ? "preview" : "latest"
-            }\`\n`,
-          ),
-        );
-      }
-    } catch (e) {
-      // no message then.
-    }
-  }
-});
-
-/** clears out all autorest-temp folders from the temp folder*/
-async function clearTempData() {
-  const all = [];
-  const tmp = tmpdir();
-  for (const each of await readdir(tmp)) {
-    if (each.startsWith("autorest")) {
-      const name = join(tmp, each);
-      if (await isDirectory(name)) {
-        all.push(rmdir(name));
-      }
-    }
-  }
-  if (all.length > 0) {
-    console.log(chalk.grey(`Clearing ${all.length} autorest temp data folders...`));
-  }
-  await Promise.all(all);
-}
 
 async function configurationSpecifiedVersion(selectedVersion: any) {
   try {
@@ -250,7 +207,7 @@ async function main() {
         localVersion = undefined;
       }
     }
-
+    
     // if this is still valid, then we're not overriding it from configuration.
     if (localVersion) {
       process.chdir(cwd);
@@ -275,7 +232,7 @@ async function main() {
     }
 
     // wait for the bootstrapper check to finish.
-    await checkBootstrapper;
+    await checkForAutoRestUpdate(args);
 
     // logic to resolve and optionally install a autorest core package.
     // will throw if it's not doable.
