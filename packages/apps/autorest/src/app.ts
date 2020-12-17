@@ -6,8 +6,7 @@ declare const isDebuggerEnabled;
 const cwd = process.cwd();
 
 import { isFile, readdir, rmdir, isDirectory } from "@azure-tools/async-io";
-import { Exception, LazyPromise } from "@azure-tools/tasks";
-import { homedir } from "os";
+import { LazyPromise } from "@azure-tools/tasks";
 import chalk from "chalk";
 import { join, dirname } from "path";
 import { gt } from "semver";
@@ -17,7 +16,6 @@ import {
   oldCorePackage,
   ensureAutorestHome,
   extensionManager,
-  installedCores,
   networkEnabled,
   pkgVersion,
   resolvePathForLocalVersion,
@@ -32,6 +30,7 @@ import { tmpdir } from "os";
 import * as vm from "vm";
 
 import { ResolveUri, ReadUri, EnumerateFiles } from "@azure-tools/uri";
+import { parseArgs } from "./args";
 
 const launchCore = isDebuggerEnabled ? tryRequire : runCoreOutOfProc;
 
@@ -46,39 +45,6 @@ if (process.argv.indexOf("--json") !== -1) {
 
 if (process.argv.indexOf("--yaml") !== -1) {
   process.argv.push("--message-format=yaml");
-}
-
-function parseArgs(autorestArgs: Array<string>): any {
-  const result: any = {};
-  for (const arg of autorestArgs) {
-    const match = /^--([^=:]+)([=:](.+))?$/g.exec(arg);
-    if (match) {
-      const key = match[1];
-      let rawValue = match[3] || "true";
-      if (rawValue.startsWith(".")) {
-        // starts with a . or .. -> this is a relative path to current directory
-        rawValue = join(cwd, rawValue);
-      }
-
-      // untildify!
-      if (/^~[/|\\]/g.exec(rawValue)) {
-        rawValue = join(homedir(), rawValue.substring(2));
-      }
-
-      let value;
-      try {
-        value = JSON.parse(rawValue);
-        // restrict allowed types (because with great type selection comes great responsibility)
-        if (typeof value !== "string" && typeof value !== "boolean") {
-          value = rawValue;
-        }
-      } catch (e) {
-        value = rawValue;
-      }
-      result[key] = value;
-    }
-  }
-  return result;
 }
 
 const args = parseArgs(process.argv);
@@ -110,7 +76,7 @@ if (!args["message-format"] || args["message-format"] === "regular") {
 
 // argument tweakin'
 const preview: boolean = args.preview;
-args.info = args.version === "" || args.version === true || args.info; // show --info if they use unparameterized --version.
+args.info = args.version === "" || args.info; // show --info if they use unparameterized --version.
 const listAvailable: boolean = args["list-available"] || false;
 const force = args.force || false;
 
