@@ -7,26 +7,21 @@ const cwd = process.cwd();
 
 import { isFile } from "@azure-tools/async-io";
 import chalk from "chalk";
-import { dirname } from "path";
 import {
   newCorePackage,
   ensureAutorestHome,
-  extensionManager,
   networkEnabled,
   pkgVersion,
   resolvePathForLocalVersion,
-  rootFolder,
   selectVersion,
   tryRequire,
-  resolveEntrypoint,
   runCoreOutOfProc,
 } from "./autorest-as-a-service";
 import { color } from "./coloring";
-import * as vm from "vm";
-import { ResolveUri, ReadUri, EnumerateFiles } from "@azure-tools/uri";
 import { parseArgs } from "./args";
 import { resetAutorest, showAvailableCoreVersions, showInstalledExtensions } from "./commands";
 import { checkForAutoRestUpdate, clearTempData } from "./actions";
+import { configurationSpecifiedVersion, getRequestedCoreVersion } from "./core-version-utils";
 
 const launchCore = isDebuggerEnabled ? tryRequire : runCoreOutOfProc;
 
@@ -52,7 +47,7 @@ args["info"] = args["info"] || args["list-installed"];
 args["preview"] = args["preview"] || args["prerelease"];
 if (args["v3"] && !args["version"]) {
   // --v3 without --version infers --version:~3.0.6212 +
-  // args["version"] = "~3.0.6212";
+  args["version"] = "~3.0.6212";
 }
 
 // Suppress the banner if the message-format is set to something other than regular.
@@ -74,69 +69,6 @@ if (!args["message-format"] || args["message-format"] === "regular") {
 args.info = args.version === "" || args.info; // show --info if they use unparameterized --version.
 const listAvailable: boolean = args["list-available"] || false;
 const force = args.force || false;
-
-async function configurationSpecifiedVersion(selectedVersion: any) {
-  try {
-    // we can either have a selectedVerison object or a path. See if we can find the AutoRest API
-    const autorestApi = await resolveEntrypoint(
-      typeof selectedVersion === "string" ? selectedVersion : await selectedVersion.modulePath,
-      "main",
-    );
-
-    // things we need in the sandbox.
-    const sandbox = {
-      require,
-      console,
-      rfs: {
-        EnumerateFileUris: async (folderUri: string): Promise<Array<string>> => {
-          return EnumerateFiles(folderUri, ["readme.md"]);
-        },
-        ReadFile: async (uri: string): Promise<string> => {
-          return ReadUri(uri);
-        },
-        WriteFile: async (uri: string, content: string): Promise<void> => {
-          //return WriteString(uri, content);
-        },
-      },
-      cfgfile: ResolveUri(cwd, args.configFileOrFolder || "."),
-      switches: args,
-    };
-
-    // *sigh* ... there's a bug in most versions of autorest-core that to use the API you have to
-    // have the current directory set to the package location. We'll fix this in the future versions.
-    process.chdir(dirname(autorestApi));
-    const configSpecifiedVersion = await vm.runInNewContext(
-      `
-          async function go() {
-            // load the autorest api library
-            const r = require('${autorestApi}');
-            const api = new r.AutoRest(rfs,cfgfile);
-            // don't let the version from the cmdline affect this!
-            delete switches.version;
-            api.AddConfiguration(switches);
-
-            // resolve the configuration and return the version if there is one.
-            return (await api.view).rawConfig.version;              
-          }
-          go();
-          `,
-      sandbox,
-    );
-
-    // if we got back a result, lets return that.
-    if (configSpecifiedVersion) {
-      selectedVersion = await selectVersion(configSpecifiedVersion, false);
-      console.log(
-        chalk.yellow(
-          `NOTE: AutoRest core version selected from configuration: ${chalk.yellow.bold(configSpecifiedVersion)}.`,
-        ),
-      );
-    }
-    return selectedVersion;
-  } catch {
-    return undefined;
-  }
-}
 
 /** Main Entrypoint for AutoRest Bootstrapper */
 async function main() {
@@ -169,16 +101,15 @@ async function main() {
       // We have a chance to fail again later if this proves problematic.
     }
 
-    let requestedVersion: string =
-      args.version || (args.latest && "latest") || (args.preview && "preview") || "latest-installed";
+    let requestedVersion: string = getRequestedCoreVersion(args);
     
     // check to see if local installed core is available.
     let localVersion = resolvePathForLocalVersion(args.version ? requestedVersion : null);
-
+    
     if (!args.version && localVersion) {
       
       // they never specified a version on the cmdline, but we might have one in configuration
-      const cfgVersion = (await configurationSpecifiedVersion(localVersion))?.version;
+      const cfgVersion = (await configurationSpecifiedVersion(args, localVersion))?.version;
 
       // if we got one back, we're going to set the requestedVersion to whatever they asked for.
       if (cfgVersion) {
@@ -253,7 +184,7 @@ async function main() {
 
     // if they never said the version on the command line, we should make a check for the config version.
     if (!args.version) {
-      selectedVersion = (await configurationSpecifiedVersion(selectedVersion)) || selectedVersion;
+      selectedVersion = (await configurationSpecifiedVersion(args, selectedVersion)) || selectedVersion;
     }
 
     if (args.debug) {
