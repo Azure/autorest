@@ -11,9 +11,7 @@ import chalk from "chalk";
 import { join, dirname } from "path";
 import { gt } from "semver";
 import {
-  availableVersions,
   newCorePackage,
-  oldCorePackage,
   ensureAutorestHome,
   extensionManager,
   networkEnabled,
@@ -28,10 +26,9 @@ import {
 import { color } from "./coloring";
 import { tmpdir } from "os";
 import * as vm from "vm";
-
 import { ResolveUri, ReadUri, EnumerateFiles } from "@azure-tools/uri";
 import { parseArgs } from "./args";
-import { showAvailableCoreVersions } from "./commands";
+import { showAvailableCoreVersions, showInstalledExtensions } from "./commands";
 
 const launchCore = isDebuggerEnabled ? tryRequire : runCoreOutOfProc;
 
@@ -102,37 +99,6 @@ const checkBootstrapper = new LazyPromise(async () => {
     }
   }
 });
-
-/** Shows all the autorest extensions that are installed. */
-async function showInstalledExtensions(): Promise<number> {
-  const extensions = await (await extensionManager).getInstalledExtensions();
-  let table = "";
-  if (extensions.length > 0) {
-    for (const extension of extensions) {
-      table += `\n ${chalk.cyan(
-        (extension.name === newCorePackage || extension.name === oldCorePackage ? "core" : "extension").padEnd(10),
-      )} ${chalk.cyan.bold(extension.name.padEnd(40))} ${chalk.cyan(extension.version.padEnd(12))} ${chalk.cyan(
-        extension.location,
-      )}`;
-    }
-  }
-  if (args.json) {
-    console.log(JSON.stringify(extensions, null, "  "));
-  } else {
-    if (table) {
-      console.log(
-        color(
-          `\n\n# Showing All Installed Extensions\n\n ${chalk.underline("Type".padEnd(10))} ${chalk.underline(
-            "Extension Name".padEnd(40),
-          )} ${chalk.underline("Version".padEnd(12))} ${chalk.underline("Location")} ${table}\n\n`,
-        ),
-      );
-    } else {
-      console.log(color("\n\n# Showing All Installed Extensions\n\n > No Extensions are currently installed.\n\n"));
-    }
-  }
-  return 0;
-}
 
 /** clears out all autorest-temp folders from the temp folder*/
 async function clearTempData() {
@@ -225,7 +191,7 @@ async function main() {
 
     // show what we have.
     if (args.info) {
-      process.exit(await showInstalledExtensions());
+      process.exit(await showInstalledExtensions(args));
     }
 
     try {
