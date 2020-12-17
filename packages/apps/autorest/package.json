@@ -27,7 +27,7 @@
     "autorest": "./entrypoints/app.js"
   },
   "scripts": {
-    "start": "node ./dist/app.js",
+    "start": "node ./dist/src/app.js",
     "test": "jest --coverage=false",
     "test:ci": "jest --ci",
     "build": "tsc -p .",

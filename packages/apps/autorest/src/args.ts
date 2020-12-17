@@ -3,17 +3,20 @@ import { join } from "path";
 
 export interface AutorestArgs {
   // Versioning
-  v3?: boolean;
-  preview?: boolean;
-  version?: string;
-  latest?: boolean;
+  "v3"?: boolean;
+  "preview"?: boolean;
+  "version"?: string;
+  "latest"?: boolean;
 
-  reset?: boolean;
-  debug?: boolean;
-  info?: boolean;
-  json?: boolean;
-  configFileOrFolder?: string;
-  force?: boolean;
+  "reset"?: boolean;
+  "debug"?: boolean;
+  "info"?: boolean;
+  "json"?: boolean;
+  "configFileOrFolder"?: string;
+  "force"?: boolean;
+
+  "message-format"?: "regular" | "json" | "yaml";
+  "list-available"?: boolean;
 }
 
 /**
