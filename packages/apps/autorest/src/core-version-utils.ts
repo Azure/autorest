@@ -31,14 +31,9 @@ export const configurationSpecifiedVersion = async (args: AutorestArgs, selected
         EnumerateFileUris: async (folderUri: string): Promise<Array<string>> => {
           return EnumerateFiles(folderUri, ["readme.md"]);
         },
-        ReadFile: async (uri: string): Promise<string> => {
-          return ReadUri(uri);
-        },
-        WriteFile: async (uri: string, content: string): Promise<void> => {
-          //return WriteString(uri, content);
-        },
+        ReadFile: (uri: string): Promise<string> => ReadUri(uri),
       },
-      cfgfile: ResolveUri(cwd, args.configFileOrFolder || "."),
+      cfgfile: ResolveUri(`file://${cwd}`, args.configFileOrFolder || ""),
       switches: args,
     };
 
@@ -62,7 +57,8 @@ export const configurationSpecifiedVersion = async (args: AutorestArgs, selected
           `,
       sandbox,
     );
-    
+
+    console.error("Ues it wokr", configSpecifiedVersion);
     // if we got back a result, lets return that.
     if (configSpecifiedVersion) {
       selectedVersion = await selectVersion(configSpecifiedVersion, false);
@@ -74,6 +70,7 @@ export const configurationSpecifiedVersion = async (args: AutorestArgs, selected
     }
     return selectedVersion;
   } catch (e) {
+    console.error("CRASH", e);
     return undefined;
   }
 };
