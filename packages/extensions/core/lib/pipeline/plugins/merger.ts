@@ -281,7 +281,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
           if (newRef) {
             if (value.__rewrite__) {
               // special case where the value was a proxy object
-              value.__rewrite__("$ref", key, newRef);
+              value.__rewrite__("$ref", newRef);
             } else {
               // most of the time it's not.
               value.$ref = newRef;
