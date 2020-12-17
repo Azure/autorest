@@ -160,7 +160,7 @@ Backup*/
 UpgradeLog*.XML
 
 # NuGet
-packages
+# packages
 
 # Mac OS #
 .DS_Store
@@ -293,3 +293,4 @@ common/config/rush/shrinkwrap.yaml
 
 # Code generation output for regression tests
 core/test/regression
+
