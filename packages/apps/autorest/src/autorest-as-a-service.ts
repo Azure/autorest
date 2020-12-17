@@ -205,7 +205,11 @@ export async function ensureAutorestHome() {
   await mkdir(rootFolder);
 }
 
-export async function selectVersion(requestedVersion: string, force: boolean, minimumVersion?: string) {
+export async function selectVersion(
+  requestedVersion: string,
+  force: boolean,
+  minimumVersion?: string,
+): Promise<Extension> {
   const installedVersions = await installedCores();
   let currentVersion = installedVersions[0] || null;
 
@@ -231,7 +235,7 @@ export async function selectVersion(requestedVersion: string, force: boolean, mi
     }
   }
 
-  let selectedVersion: any = null;
+  let selectedVersion: Extension = null;
   // take the highest version that satisfies the version range.
   for (const each of installedVersions.sort((a, b) => semver.compare(a?.version, b?.version))) {
     if (semver.satisfies(each.version, requestedVersion)) {

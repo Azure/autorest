@@ -4,7 +4,7 @@ import { dirname } from "path";
 import { AutorestArgs } from "./args";
 import { resolveEntrypoint, selectVersion } from "./autorest-as-a-service";
 import * as vm from "vm";
-import { config } from "process";
+import { Extension } from "@azure-tools/extension";
 
 /**
  * Return the version requested of the core extension.
@@ -19,10 +19,10 @@ const cwd = process.cwd();
 
 /**
  * Tries to load the version of autorest core from a config file.
- * @param args CLI Version
- * @param selectedVersion 
+ * @param args CLI Version.
+ * @param selectedVersion Path to or loaded version of @autorest/core.
  */
-export const configurationSpecifiedVersion = async (args: AutorestArgs, selectedVersion: any) => {
+export const configurationSpecifiedVersion = async (args: AutorestArgs, selectedVersion: string | Extension) => {
   try {
     // we can either have a selectedVerison object or a path. See if we can find the AutoRest API
     const autorestApi = await resolveEntrypoint(
@@ -64,17 +64,18 @@ export const configurationSpecifiedVersion = async (args: AutorestArgs, selected
           `,
       sandbox,
     );
-    
+
     // if we got back a result, lets return that.
     if (configSpecifiedVersion) {
-      selectedVersion = await selectVersion(configSpecifiedVersion, false);
+      const newVersion = await selectVersion(configSpecifiedVersion, false);
       console.log(
         chalk.yellow(
           `NOTE: AutoRest core version selected from configuration: ${chalk.yellow.bold(configSpecifiedVersion)}.`,
         ),
       );
+      return newVersion;
     }
-    return selectedVersion;
+    return undefined;
   } catch (e) {
     return undefined;
   }
