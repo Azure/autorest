@@ -39,7 +39,6 @@ if (process.argv.indexOf("--yaml") !== -1) {
 }
 
 const args = parseArgs(process.argv);
-console.error("Args", args);
 (<any>global).__args = args;
 
 // aliases
@@ -110,7 +109,7 @@ async function main() {
       
       // they never specified a version on the cmdline, but we might have one in configuration
       const cfgVersion = (await configurationSpecifiedVersion(args, localVersion))?.version;
-
+      
       // if we got one back, we're going to set the requestedVersion to whatever they asked for.
       if (cfgVersion) {
         args.version = requestedVersion = cfgVersion;

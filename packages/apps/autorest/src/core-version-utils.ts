@@ -62,7 +62,7 @@ export const configurationSpecifiedVersion = async (args: AutorestArgs, selected
           `,
       sandbox,
     );
-
+    
     // if we got back a result, lets return that.
     if (configSpecifiedVersion) {
       selectedVersion = await selectVersion(configSpecifiedVersion, false);
@@ -73,7 +73,7 @@ export const configurationSpecifiedVersion = async (args: AutorestArgs, selected
       );
     }
     return selectedVersion;
-  } catch {
+  } catch (e) {
     return undefined;
   }
 };
