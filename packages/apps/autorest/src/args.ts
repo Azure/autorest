@@ -5,6 +5,7 @@ export interface AutorestArgs {
   // Versioning
   "v3"?: boolean;
   "preview"?: boolean;
+  "prerelease"?: boolean;
   "version"?: string;
   "latest"?: boolean;
 
@@ -17,6 +18,9 @@ export interface AutorestArgs {
 
   "message-format"?: "regular" | "json" | "yaml";
   "list-available"?: boolean;
+  "clear-temp"?: boolean;
+  "list-installed"?: boolean;
+  "skip-upgrade-check"?: boolean;
 }
 
 /**

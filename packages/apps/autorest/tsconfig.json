@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "noErrorTruncation": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "module": "commonjs",
     "sourceMap": true,
     "newLine": "LF",
