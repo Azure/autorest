@@ -35,17 +35,7 @@ export const parseArgs = (argv: string[]): AutorestArgs => {
     if (match) {
       const key = match[1];
       const rawValue = resolvePathArg(match[3] || "true");
-      let value;
-      try {
-        value = JSON.parse(rawValue);
-        // restrict allowed types (because with great type selection comes great responsibility)
-        if (typeof value !== "string" && typeof value !== "boolean") {
-          value = rawValue;
-        }
-      } catch (e) {
-        value = rawValue;
-      }
-      result[key] = value;
+      result[key] = parseValue(rawValue);
     }
   }
   return result;
