@@ -1,4 +1,4 @@
-# <img align="center" src="./images/logo.png">  How AutoRest Generates Code From an OpenAPI Definition
+# <img align="center" src="../images/logo.png">  How AutoRest Generates Code From an OpenAPI Definition
 
 ## Contents
 - [Data Types](#data-types)

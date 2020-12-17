@@ -1,4 +1,4 @@
-# <img align="center" src="./images/logo.png">  Generating Clients with AutoRest
+# <img align="center" src="../images/logo.png">  Generating Clients with AutoRest
 
 This guide tells you how to generate code from your OpenAPI definition using AutoRest. We'll take this incrementally, working
 on first how to generate a single file, then how to generate with a configuration file, and keep taking it from there.
@@ -339,6 +339,8 @@ First, when generating managment
 --azure-arm
 
 ## Advanced: Generating with Directives
+
+Directives are used to change the code generated from your OpenAPI definition. For example, if you want to change the name of a parameter in an operation without changing the swagger. See [our directives section](./directives.md) if this is something you're interested in.
 
 ## Generating Multi API Code
 
