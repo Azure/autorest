@@ -157,7 +157,6 @@ declare module "autorest-core" {
      * Event: Signals when a message is generated
      */
     Message: IEvent<MessageEmitter, Message>;
-    constructor();
   }
 
   export interface Directive {

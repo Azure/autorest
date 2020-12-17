@@ -5,16 +5,16 @@
 
 // if this is being run directly, call the app entrypoint (we're probably running the local folder)
 if (require.main === module) {
-  require("../entrypoints/app");
+  require("../../entrypoints/app");
 }
 
 // load modules from static linker filesystem.
 if (
   process.argv.indexOf("--no-static-loader") === -1 &&
   process.env["no-static-loader"] === undefined &&
-  require("fs").existsSync("./static-loader.js")
+  require("fs").existsSync("../static-loader.js")
 ) {
-  require("./static-loader.js").load(`${__dirname}/static_modules.fs`);
+  require("../static-loader.js").load(`${__dirname}/../static_modules.fs`);
 }
 // everything else.
 import { tryRequire, resolveEntrypoint, ensureAutorestHome, selectVersion } from "./autorest-as-a-service";

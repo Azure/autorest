@@ -22,25 +22,24 @@
   "bugs": {
     "url": "https://github.com/Azure/autorest/issues"
   },
-  "main": "./dist/exports.js",
+  "main": "./dist/src/exports.js",
   "bin": {
     "autorest": "./entrypoints/app.js"
   },
   "scripts": {
-    "start": "node ./dist/app.js",
+    "start": "node ./dist/src/app.js",
     "test": "jest --coverage=false",
     "test:ci": "jest --ci",
-    "build": "npm run before-build && tsc -p .",
-    "watch": "npm run before-build && tsc -p . --watch",
+    "build": "tsc -p .",
+    "watch": "tsc -p . --watch",
     "fix": "eslint  . --fix --ext .ts",
     "lint": "eslint  . --ext .ts --max-warnings=0",
     "static-link": "static-link --force --no-node-modules",
     "preinstall": "node ./.scripts/preinstall-check",
     "prepack": "npm run static-link && npm run build",
-    "clean": "rimraf ./dist",
-    "before-build": "mkdirp ./dist/interfaces && cpy ./interfaces/*.d.ts ./dist/interfaces"
+    "clean": "rimraf ./dist"
   },
-  "typings": "./dist/main.d.ts",
+  "typings": "./dist/src/main.d.ts",
   "devDependencies": {
     "@types/commonmark": "^0.27.0",
     "@types/node": "12.7.2",

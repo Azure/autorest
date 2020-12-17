@@ -11,8 +11,9 @@ import { When } from "@azure-tools/tasks";
 import { mkdtempSync, rmdirSync } from "fs";
 import { tmpdir } from "os";
 import { spawn } from "child_process";
+import { AutorestArgs } from "./args";
 
-export const pkgVersion: string = require(`${__dirname}/../package.json`).version;
+export const pkgVersion: string = require(`${__dirname}/../../package.json`).version;
 process.env["autorest.home"] = process.env["autorest.home"] || homedir();
 
 try {
@@ -23,7 +24,7 @@ try {
 }
 
 export const rootFolder = join(process.env["autorest.home"], ".autorest");
-const args = (<any>global).__args || {};
+const args: AutorestArgs = (<any>global).__args || {};
 
 export const extensionManager: Promise<ExtensionManager> = ExtensionManager.Create(rootFolder);
 export const oldCorePackage = "@microsoft.azure/autorest-core";
@@ -167,7 +168,7 @@ export async function runCoreOutOfProc(localPath: string | null, entrypoint: str
       // - loads the actual entrypoint that we expect is there.
       const cmd = `
         process.argv = ${JSON.stringify(process.argv)};
-        if (require('fs').existsSync('${__dirname}/static-loader.js')) { require('${__dirname}/static-loader.js').load('${__dirname}/static_modules.fs'); }
+        if (require('fs').existsSync('${__dirname}/../static-loader.js')) { require('${__dirname}/../static-loader.js').load('${__dirname}/../static_modules.fs'); }
         const { color } = require('${__dirname}/coloring');
         require('${ep}')
       `
@@ -204,7 +205,11 @@ export async function ensureAutorestHome() {
   await mkdir(rootFolder);
 }
 
-export async function selectVersion(requestedVersion: string, force: boolean, minimumVersion?: string) {
+export async function selectVersion(
+  requestedVersion: string,
+  force: boolean,
+  minimumVersion?: string,
+): Promise<Extension> {
   const installedVersions = await installedCores();
   let currentVersion = installedVersions[0] || null;
 
@@ -230,7 +235,7 @@ export async function selectVersion(requestedVersion: string, force: boolean, mi
     }
   }
 
-  let selectedVersion: any = null;
+  let selectedVersion: Extension = null;
   // take the highest version that satisfies the version range.
   for (const each of installedVersions.sort((a, b) => semver.compare(a?.version, b?.version))) {
     if (semver.satisfies(each.version, requestedVersion)) {

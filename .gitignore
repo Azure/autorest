@@ -207,7 +207,6 @@ src/generator/AutoRest.Go.Tests/src/tests/glide.lock
 src/client/**/*
 
 src/extension/old/**/*
-*.d.ts
 
 src/bootstrapper
 src/extension/out
