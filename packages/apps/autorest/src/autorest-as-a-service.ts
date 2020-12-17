@@ -168,7 +168,7 @@ export async function runCoreOutOfProc(localPath: string | null, entrypoint: str
       // - loads the actual entrypoint that we expect is there.
       const cmd = `
         process.argv = ${JSON.stringify(process.argv)};
-        if (require('fs').existsSync('${__dirname}/static-loader.js')) { require('${__dirname}/static-loader.js').load('${__dirname}/static_modules.fs'); }
+        if (require('fs').existsSync('${__dirname}/../static-loader.js')) { require('${__dirname}/../static-loader.js').load('${__dirname}/../static_modules.fs'); }
         const { color } = require('${__dirname}/coloring');
         require('${ep}')
       `
