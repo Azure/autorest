@@ -160,7 +160,7 @@ Backup*/
 UpgradeLog*.XML
 
 # NuGet
-packages
+# packages
 
 # Mac OS #
 .DS_Store

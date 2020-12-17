@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/Azure/autorest/issues"
   },
-  "main": "./dist/exports.js",
+  "main": "./dist/src/exports.js",
   "bin": {
     "autorest": "./entrypoints/app.js"
   },
@@ -37,8 +37,7 @@
     "static-link": "static-link --force --no-node-modules",
     "preinstall": "node ./.scripts/preinstall-check",
     "prepack": "npm run static-link && npm run build",
-    "clean": "rimraf ./dist",
-    "before-build": "mkdirp ./dist/interfaces && cpy ./interfaces/*.d.ts ./dist/interfaces"
+    "clean": "rimraf ./dist"
   },
   "typings": "./dist/main.d.ts",
   "devDependencies": {

@@ -82,6 +82,7 @@ function parseArgs(autorestArgs: Array<string>): any {
 }
 
 const args = parseArgs(process.argv);
+console.error("Args", args);
 (<any>global).__args = args;
 
 // aliases
@@ -89,7 +90,7 @@ args["info"] = args["info"] || args["list-installed"];
 args["preview"] = args["preview"] || args["prerelease"];
 if (args["v3"] && !args["version"]) {
   // --v3 without --version infers --version:~3.0.6212 +
-  args["version"] = "~3.0.6212";
+  // args["version"] = "~3.0.6212";
 }
 
 // Suppress the banner if the message-format is set to something other than regular.
@@ -325,11 +326,12 @@ async function main() {
 
     let requestedVersion: string =
       args.version || (args.latest && "latest") || (args.preview && "preview") || "latest-installed";
-
+    
     // check to see if local installed core is available.
     let localVersion = resolvePathForLocalVersion(args.version ? requestedVersion : null);
 
     if (!args.version && localVersion) {
+      
       // they never specified a version on the cmdline, but we might have one in configuration
       const cfgVersion = (await configurationSpecifiedVersion(localVersion))?.version;
 
@@ -345,6 +347,7 @@ async function main() {
     // if this is still valid, then we're not overriding it from configuration.
     if (localVersion) {
       process.chdir(cwd);
+
       if (await launchCore(localVersion, "app.js")) {
         return;
       }

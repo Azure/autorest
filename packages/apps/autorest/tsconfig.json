@@ -15,5 +15,6 @@
     "typeRoots": ["./node_modules/@types"],
     "lib": ["es2018"]
   },
+  "include": ["src/**/*.ts", "definitions/**/*.d.ts", "test/**/*.ts"],
   "exclude": ["dist", "node_modules", "_lib", "lib/core/language-service"]
 }

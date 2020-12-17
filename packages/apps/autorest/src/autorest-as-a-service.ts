@@ -12,7 +12,7 @@ import { mkdtempSync, rmdirSync } from "fs";
 import { tmpdir } from "os";
 import { spawn } from "child_process";
 
-export const pkgVersion: string = require(`${__dirname}/../package.json`).version;
+export const pkgVersion: string = require(`${__dirname}/../../package.json`).version;
 process.env["autorest.home"] = process.env["autorest.home"] || homedir();
 
 try {

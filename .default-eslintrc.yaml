@@ -32,10 +32,6 @@ rules:
   "@typescript-eslint/consistent-type-assertions":
     - warn
     - assertionStyle: "angle-bracket"
-
-  "@typescript-eslint/array-type":
-    - warn
-    - default: generic
   no-undef: "off"
   no-unused-vars: "off"
   linebreak-style:
