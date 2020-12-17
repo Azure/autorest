@@ -25,7 +25,7 @@ import { color } from "./coloring";
 import * as vm from "vm";
 import { ResolveUri, ReadUri, EnumerateFiles } from "@azure-tools/uri";
 import { parseArgs } from "./args";
-import { showAvailableCoreVersions, showInstalledExtensions } from "./commands";
+import { resetAutorest, showAvailableCoreVersions, showInstalledExtensions } from "./commands";
 import { checkForAutoRestUpdate, clearTempData } from "./actions";
 
 const launchCore = isDebuggerEnabled ? tryRequire : runCoreOutOfProc;
@@ -163,26 +163,7 @@ async function main() {
       // if we have an autorest home folder, --reset may mean something.
       // if it's not there, --reset won't do anything.
       if (args.reset) {
-        if (args.debug) {
-          console.log(`Resetting autorest extension folder '${rootFolder}'`);
-        }
-
-        try {
-          await (await extensionManager).reset();
-          console.log(
-            color(
-              "\n\n## Cleared the AutoRest extension folder.\nOn the next run, extensions will be reacquired from the repository.",
-            ),
-          );
-          process.exit(0);
-        } catch (e) {
-          console.log(
-            color(
-              "\n\n## The AutoRest extension folder appears to be locked.\nDo you have a process that is currently using AutoRest (perhaps the vscode extension?).\n\nUnable to reset the extension folder, exiting.",
-            ),
-          );
-          process.exit(10);
-        }
+        process.exit(await resetAutorest(args));
       }
     } catch {
       // We have a chance to fail again later if this proves problematic.
