@@ -5,20 +5,17 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { exists, filePath, isDirectory } from "@azure-tools/async-io";
-import { DataHandle, IFileSystem, LazyPromise, ParseToAst, RealFileSystem } from "@azure-tools/datastore";
+import { DataHandle, IFileSystem, LazyPromise, RealFileSystem } from "@azure-tools/datastore";
 import { Extension, ExtensionManager, LocalExtension } from "@azure-tools/extension";
 import {
   CreateFileUri,
   CreateFolderUri,
-  EnsureIsFolderUri,
   ResolveUri,
   simplifyUri,
   IsUri,
   ParentFolderUri,
 } from "@azure-tools/uri";
-import { From } from "linq-es2015";
 import { join } from "path";
-import * as Constants from "../constants";
 import { OperationAbortedException } from "../exception";
 import { Channel, SourceLocation } from "../message";
 import { parseCodeBlocks } from "../parsing/literate-yaml";
@@ -29,6 +26,7 @@ import { arrayOf } from "./utils";
 import { ConfigurationView } from "./configuration-view";
 import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
+import { detectConfigurationFile } from "./configuration-file-resolver";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const untildify: (path: string) => string = require("untildify");
@@ -50,7 +48,6 @@ export class Configuration {
   private async ParseCodeBlocks(
     configFile: DataHandle,
     contextConfig: ConfigurationView,
-    scope: string,
   ): Promise<Array<AutoRestConfigurationImpl>> {
     const parentFolder = ParentFolderUri(configFile.originalFullPath);
 
@@ -207,7 +204,7 @@ export class Configuration {
   ): Promise<ConfigurationView> {
     const configFileUri =
       this.fileSystem && this.configFileOrFolderUri
-        ? await Configuration.DetectConfigurationFile(this.fileSystem, this.configFileOrFolderUri, messageEmitter)
+        ? await detectConfigurationFile(this.fileSystem, this.configFileOrFolderUri, messageEmitter)
         : null;
     const configFileFolderUri = configFileUri
       ? ResolveUri(configFileUri, "./")
@@ -250,7 +247,6 @@ export class Configuration {
       const blocks = await this.ParseCodeBlocks(
         await fsInputView.ReadStrict(configFileUri),
         await createView(),
-        "config",
       );
       await addSegments(blocks, false);
     }
@@ -285,7 +281,6 @@ export class Configuration {
           const blocks = await this.ParseCodeBlocks(
             await inputView.ReadStrict(additionalConfig),
             await createView(),
-            `require-config-${additionalConfig}`,
           );
           await addSegments(blocks);
         } catch (e) {
@@ -306,7 +301,6 @@ export class Configuration {
       const blocks = await this.ParseCodeBlocks(
         await inputView.ReadStrict(ResolveUri(CreateFolderUri(AppRoot), "resources/default-configuration.md")),
         await createView(),
-        "default-config",
       );
       await addSegments(blocks);
     }
@@ -442,7 +436,6 @@ export class Configuration {
             const blocks = await this.ParseCodeBlocks(
               await inputView.ReadStrict(cp),
               await createView(),
-              `extension-config-${additionalExtension.fullyQualified}`,
             );
             // even though we load extensions after the default configuration, I want them to be able to
             // trigger changes in the default configuration loading (ie, an extension can set a flag to use a different pipeline.)
@@ -486,7 +479,6 @@ export class Configuration {
       const blocks = await this.ParseCodeBlocks(
         await fsInputView.ReadStrict(configFileUri),
         await createView(),
-        "config",
       );
       await addSegments(blocks, false);
       await includeFn(this.fileSystem);
@@ -499,97 +491,5 @@ export class Configuration {
 
     // return the final view
     return (await createView()).Indexer;
-  }
-  public static async DetectConfigurationFile(
-    fileSystem: IFileSystem,
-    configFileOrFolderUri: string | null,
-    messageEmitter?: MessageEmitter,
-    walkUpFolders = false,
-  ): Promise<string | null> {
-    const files = await this.DetectConfigurationFiles(fileSystem, configFileOrFolderUri, messageEmitter, walkUpFolders);
-
-    return (
-      From<string>(files).FirstOrDefault((each) => each.toLowerCase().endsWith("/" + Constants.DefaultConfiguration)) ||
-      From<string>(files)
-        .OrderBy((each) => each.length)
-        .FirstOrDefault() ||
-      null
-    );
-  }
-
-  public static async DetectConfigurationFiles(
-    fileSystem: IFileSystem,
-    configFileOrFolderUri: string | null,
-    messageEmitter?: MessageEmitter,
-    walkUpFolders = false,
-  ): Promise<Array<string>> {
-    const originalConfigFileOrFolderUri = configFileOrFolderUri;
-
-    // null means null!
-    if (!configFileOrFolderUri) {
-      return [];
-    }
-
-    // try querying the Uri directly
-    let content: string | null;
-    try {
-      content = await fileSystem.ReadFile(configFileOrFolderUri);
-    } catch {
-      // didn't get the file successfully, move on.
-      content = null;
-    }
-    if (content !== null) {
-      if (content.indexOf(Constants.MagicString) > -1) {
-        // the file name was passed in!
-        return [configFileOrFolderUri];
-      }
-      try {
-        const ast = ParseToAst(content);
-        if (ast) {
-          return [configFileOrFolderUri];
-        }
-      } catch {
-        // nope.
-      }
-      // this *was* an actual file passed in, not a folder. don't make this harder than it has to be.
-      throw new Error(
-        `Specified file '${originalConfigFileOrFolderUri}' is not a valid configuration file (missing magic string, see https://github.com/Azure/autorest/blob/master/docs/user/literate-file-formats/configuration.md#the-file-format).`,
-      );
-    }
-
-    // scan the filesystem items for configurations.
-    const results = new Array<string>();
-    for (const name of await fileSystem.EnumerateFileUris(EnsureIsFolderUri(configFileOrFolderUri))) {
-      if (name.endsWith(".md")) {
-        const content = await fileSystem.ReadFile(name);
-        if (content.indexOf(Constants.MagicString) > -1) {
-          results.push(name);
-        }
-      }
-    }
-
-    if (walkUpFolders) {
-      // walk up
-      const newUriToConfigFileOrWorkingFolder = ResolveUri(configFileOrFolderUri, "..");
-      if (newUriToConfigFileOrWorkingFolder !== configFileOrFolderUri) {
-        results.push(
-          ...(await this.DetectConfigurationFiles(
-            fileSystem,
-            newUriToConfigFileOrWorkingFolder,
-            messageEmitter,
-            walkUpFolders,
-          )),
-        );
-      }
-    } else {
-      if (messageEmitter && results.length === 0) {
-        messageEmitter.Message.Dispatch({
-          Channel: Channel.Verbose,
-          Text: `No configuration found at '${originalConfigFileOrFolderUri}'.`,
-        });
-      }
-    }
-
-    return results;
   }
 }

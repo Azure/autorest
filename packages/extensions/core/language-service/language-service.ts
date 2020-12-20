@@ -23,7 +23,7 @@ import { FileUriToPath, GetExtension, IsUri, ParentFolderUri, ResolveUri } from 
 import { createHash } from "crypto";
 import { From } from "linq-es2015";
 import { safeDump } from "yaml-ast-parser";
-import { Configuration } from "../lib/configuration";
+import { Configuration, detectConfigurationFile, detectConfigurationFiles } from "../lib/configuration";
 import { DocumentAnalysis } from "./document-analysis";
 
 import {
@@ -680,7 +680,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
 
     try {
       // passing a file that isn't a config file will throw now.
-      configFiles = await Configuration.DetectConfigurationFiles(this, documentUri, undefined, true);
+      configFiles = await detectConfigurationFiles(this, documentUri, undefined, true);
 
       // is the document a config file?
       if (configFiles.length === 1 && configFiles[0] === documentUri) {
@@ -694,7 +694,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
       // this didn't find anything at all.
       // maybe try to ask for the parent folder's files
       try {
-        configFiles = await Configuration.DetectConfigurationFiles(this, ParentFolderUri(documentUri), undefined, true);
+        configFiles = await detectConfigurationFiles(this, ParentFolderUri(documentUri), undefined, true);
       } catch {
         // shhh. just let it go.
       }
@@ -760,7 +760,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     this.debug(`onRootUriChanged: ${rootUri}`);
     if (rootUri) {
       // check this folder for a configuration file
-      const configFile = await Configuration.DetectConfigurationFile(this, rootUri, undefined, false);
+      const configFile = await detectConfigurationFile(this, rootUri, undefined, false);
 
       if (configFile) {
         const content = await this.ReadFile(configFile);
