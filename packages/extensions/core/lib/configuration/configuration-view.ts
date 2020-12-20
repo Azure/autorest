@@ -23,13 +23,12 @@ import { Channel, Message, Range, SourceLocation } from "../message";
 import { Suppressor } from "../pipeline/suppression";
 import { resolveRValue } from "../source-map/merging";
 import { cwd } from "process";
-import { Directive } from "./directive";
+import { Directive, ResolvedDirective } from "./directive";
 import { AutoRestConfigurationImpl, mergeConfiguration, mergeConfigurations } from "./auto-rest-configuration-impl";
 import { arrayOf, valuesOf } from "./utils";
 import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
 import { IEvent } from "../events";
-import { ResolvedDirective } from "./configuration";
 
 const RESOLVE_MACROS_AT_RUNTIME = true;
 

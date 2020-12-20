@@ -5,9 +5,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { exists, filePath, isDirectory } from "@azure-tools/async-io";
-import { DataHandle, DataStore, IFileSystem, LazyPromise, ParseToAst, RealFileSystem } from "@azure-tools/datastore";
+import { DataHandle, IFileSystem, LazyPromise, ParseToAst, RealFileSystem } from "@azure-tools/datastore";
 import { Extension, ExtensionManager, LocalExtension } from "@azure-tools/extension";
-import { Dictionary } from "@azure-tools/linq";
 import {
   CreateFileUri,
   CreateFolderUri,
@@ -24,9 +23,7 @@ import { OperationAbortedException } from "../exception";
 import { Channel, SourceLocation } from "../message";
 import { parseCodeBlocks } from "../parsing/literate-yaml";
 import { AutoRestExtension } from "../pipeline/plugin-endpoint";
-import { Initializer } from "@azure-tools/codegen";
 import { AppRoot } from "../constants";
-import { Directive } from "./directive";
 import { AutoRestConfigurationImpl } from "./auto-rest-configuration-impl";
 import { arrayOf } from "./utils";
 import { ConfigurationView } from "./configuration-view";
@@ -35,30 +32,6 @@ import { MessageEmitter } from "./message-emitter";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const untildify: (path: string) => string = require("untildify");
-
-export class ResolvedDirective extends Initializer implements Dictionary<any> {
-  from: Array<string>;
-  where: Array<string>;
-  reason?: string;
-  suppress: Array<string>;
-  transform: Array<string>;
-  test: Array<string>;
-
-  constructor(directive: Directive) {
-    super();
-
-    // copy untyped content over
-    this.apply(directive);
-
-    // normalize typed content
-    this.from = arrayOf(directive["from"]);
-    this.where = arrayOf(directive["where"]);
-    this.reason = directive.reason;
-    this.suppress = arrayOf(directive["suppress"]);
-    this.transform = arrayOf(directive["transform"] || directive["text-transform"]);
-    this.test = arrayOf(directive["test"]);
-  }
-}
 
 const loadedExtensions: {
   [fullyQualified: string]: { extension: Extension; autorestExtension: LazyPromise<AutoRestExtension> };
