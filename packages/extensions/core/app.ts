@@ -56,7 +56,7 @@ import { Help } from "./help";
 import { CreateConfiguration, isLegacy } from "./legacyCli";
 import { Artifact } from "./lib/artifact";
 import { AutoRest, ConfigurationView, IsOpenApiDocument, Shutdown } from "./lib/autorest-core";
-import { AutoRestConfigurationImpl, MergeConfigurations } from "./lib/configuration";
+import { AutoRestConfigurationImpl, mergeConfigurations } from "./lib/configuration";
 import { Exception, OperationCanceledException } from "./lib/exception";
 import { Channel, Message } from "./lib/message";
 import { ShallowCopy } from "./lib/source-map/merging";
@@ -380,7 +380,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     args.configFileOrFolder = "invalid.filename.md";
   }
 
-  const githubToken = MergeConfigurations(...args.switches)["github-auth-token"] ?? process.env.GITHUB_AUTH_TOKEN;
+  const githubToken = mergeConfigurations(...args.switches)["github-auth-token"] ?? process.env.GITHUB_AUTH_TOKEN;
   // get an instance of AutoRest and add the command line switches to the configuration.
   const api = new AutoRest(
     new EnhancedFileSystem(githubToken),
