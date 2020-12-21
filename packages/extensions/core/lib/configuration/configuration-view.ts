@@ -49,16 +49,16 @@ function ProxifyConfigurationView(cfgView: any) {
 
 export class ConfigurationView {
   [name: string]: any;
-  /* @internal */ InputFileUris = new Array<string>();
+  public InputFileUris = new Array<string>();
+  public fileSystem: CachingFileSystem;
 
   private suppressor: Suppressor;
-  /* @internal */ public fileSystem: CachingFileSystem;
 
-  /* @internal */ constructor(
-    /* @internal */ public configurationFiles: { [key: string]: any },
+  public constructor(
+    public configurationFiles: { [key: string]: any },
     fileSystem: IFileSystem,
-    /* @internal */ public messageEmitter: MessageEmitter,
-    /* @internal */ public configFileFolderUri: string,
+     public messageEmitter: MessageEmitter,
+    public configFileFolderUri: string,
     ...configs: Array<AutoRestConfigurationImpl> // decreasing priority
   ) {
     // wrap the filesystem with the caching filesystem
