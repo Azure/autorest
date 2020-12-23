@@ -23,7 +23,7 @@ import { FileUriToPath, GetExtension, IsUri, ParentFolderUri, ResolveUri } from 
 import { createHash } from "crypto";
 import { From } from "linq-es2015";
 import { safeDump } from "yaml-ast-parser";
-import { Configuration, detectConfigurationFile, detectConfigurationFiles } from "../lib/configuration";
+import { ConfigurationLoader, detectConfigurationFile, detectConfigurationFiles } from "../lib/configuration";
 import { DocumentAnalysis } from "./document-analysis";
 
 import {

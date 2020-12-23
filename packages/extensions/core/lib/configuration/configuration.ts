@@ -7,14 +7,7 @@
 import { exists, filePath, isDirectory } from "@azure-tools/async-io";
 import { DataHandle, IFileSystem, LazyPromise, RealFileSystem } from "@azure-tools/datastore";
 import { Extension, ExtensionManager, LocalExtension } from "@azure-tools/extension";
-import {
-  CreateFileUri,
-  CreateFolderUri,
-  ResolveUri,
-  simplifyUri,
-  IsUri,
-  ParentFolderUri,
-} from "@azure-tools/uri";
+import { CreateFileUri, CreateFolderUri, ResolveUri, simplifyUri, IsUri, ParentFolderUri } from "@azure-tools/uri";
 import { join } from "path";
 import { OperationAbortedException } from "../exception";
 import { Channel, SourceLocation } from "../message";
@@ -39,13 +32,21 @@ export async function getExtension(fullyQualified: string): Promise<AutoRestExte
   return loadedExtensions[fullyQualified].autorestExtension;
 }
 
-export class Configuration {
+/**
+ * Class handling the loading of an autorest configuration.
+ */
+export class ConfigurationLoader {
   private fileSystem: CachingFileSystem;
+
+  /**
+   * @param fileSystem File system.
+   * @param configFileOrFolderUri Path to the config file or folder.
+   */
   public constructor(fileSystem: IFileSystem = new RealFileSystem(), private configFileOrFolderUri?: string) {
     this.fileSystem = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
   }
 
-  private async ParseCodeBlocks(
+  private async parseCodeBlocks(
     configFile: DataHandle,
     contextConfig: ConfigurationView,
   ): Promise<Array<AutoRestConfigurationImpl>> {
@@ -106,7 +107,7 @@ export class Configuration {
     ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")),
   );
 
-  private async DesugarRawConfig(configs: any): Promise<any> {
+  private async desugarRawConfig(configs: any): Promise<any> {
     // shallow copy
     configs = { ...configs };
     configs["use-extension"] = { ...configs["use-extension"] };
@@ -122,7 +123,7 @@ export class Configuration {
       use = [use];
     }
     if (Array.isArray(use)) {
-      const extMgr = await Configuration.extensionManager;
+      const extMgr = await ConfigurationLoader.extensionManager;
       for (const useEntry of use) {
         if (typeof useEntry === "string") {
           // potential formats:
@@ -168,7 +169,7 @@ export class Configuration {
   }
 
   private async desugarRawConfigs(configs: Array<any>): Promise<Array<any>> {
-    return Promise.all(configs.map((c) => this.DesugarRawConfig(c)));
+    return Promise.all(configs.map((c) => this.desugarRawConfig(c)));
   }
 
   public static async shutdown() {
@@ -176,11 +177,11 @@ export class Configuration {
       AutoRestExtension.killAll();
 
       // once we shutdown those extensions, we should shutdown the EM too.
-      const extMgr = await Configuration.extensionManager;
+      const extMgr = await ConfigurationLoader.extensionManager;
       extMgr.dispose();
 
       // but if someone goes to use that, we're going to need a new instance (since the shared lock will be gone in the one we disposed.)
-      Configuration.extensionManager = new LazyPromise<ExtensionManager>(() =>
+      ConfigurationLoader.extensionManager = new LazyPromise<ExtensionManager>(() =>
         ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")),
       );
 
@@ -244,10 +245,7 @@ export class Configuration {
       });
       configurationFiles[configFileUri] = await (await fsInputView.ReadStrict(configFileUri)).ReadData();
 
-      const blocks = await this.ParseCodeBlocks(
-        await fsInputView.ReadStrict(configFileUri),
-        await createView(),
-      );
+      const blocks = await this.parseCodeBlocks(await fsInputView.ReadStrict(configFileUri), await createView());
       await addSegments(blocks, false);
     }
 
@@ -278,10 +276,7 @@ export class Configuration {
           const inputView = messageEmitter.DataStore.GetReadThroughScope(fsToUse);
 
           configurationFiles[additionalConfig] = await (await inputView.ReadStrict(additionalConfig)).ReadData();
-          const blocks = await this.ParseCodeBlocks(
-            await inputView.ReadStrict(additionalConfig),
-            await createView(),
-          );
+          const blocks = await this.parseCodeBlocks(await inputView.ReadStrict(additionalConfig), await createView());
           await addSegments(blocks);
         } catch (e) {
           messageEmitter.Message.Dispatch({
@@ -298,7 +293,7 @@ export class Configuration {
     const fsLocal = new RealFileSystem();
     if (includeDefault) {
       const inputView = messageEmitter.DataStore.GetReadThroughScope(fsLocal);
-      const blocks = await this.ParseCodeBlocks(
+      const blocks = await this.parseCodeBlocks(
         await inputView.ReadStrict(ResolveUri(CreateFolderUri(AppRoot), "resources/default-configuration.md")),
         await createView(),
       );
@@ -309,7 +304,7 @@ export class Configuration {
     const messageFormat = (await createView()).GetEntry("message-format");
 
     // 5. resolve extensions
-    const extMgr = await Configuration.extensionManager;
+    const extMgr = await ConfigurationLoader.extensionManager;
     const addedExtensions = new Set<string>();
 
     const resolveExtensions = async () => {
@@ -433,10 +428,7 @@ export class Configuration {
               Text: `> Including extension configuration file '${cp}'`,
             });
 
-            const blocks = await this.ParseCodeBlocks(
-              await inputView.ReadStrict(cp),
-              await createView(),
-            );
+            const blocks = await this.parseCodeBlocks(await inputView.ReadStrict(cp), await createView());
             // even though we load extensions after the default configuration, I want them to be able to
             // trigger changes in the default configuration loading (ie, an extension can set a flag to use a different pipeline.)
             viewsToHandle.push(
@@ -476,10 +468,7 @@ export class Configuration {
 
     // reload files
     if (configFileUri !== null) {
-      const blocks = await this.ParseCodeBlocks(
-        await fsInputView.ReadStrict(configFileUri),
-        await createView(),
-      );
+      const blocks = await this.parseCodeBlocks(await fsInputView.ReadStrict(configFileUri), await createView());
       await addSegments(blocks, false);
       await includeFn(this.fileSystem);
       await resolveExtensions();
