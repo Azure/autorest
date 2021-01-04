@@ -2,7 +2,11 @@ import { evaluateGuard } from "../parsing/literate-yaml";
 import { MergeOverwriteOrAppend } from "../source-map/merging";
 import { Directive } from "./directive";
 
-export interface AutoRestConfigurationImpl {
+/**
+ * Represent a raw configuration provided by the user.
+ * i.e. The mapping of values passed via a config block, cli arguments, etc.
+ */
+export interface AutoRestRawConfiguration {
   "__info"?: string | null;
   "__parents"?: any | undefined;
   "allow-no-input"?: boolean;
@@ -60,8 +64,8 @@ export interface AutoRestConfigurationImpl {
   "github-auth-token"?: string;
 }
 
-export const mergeConfigurations = (...configs: Array<AutoRestConfigurationImpl>): AutoRestConfigurationImpl => {
-  let result: AutoRestConfigurationImpl = {};
+export const mergeConfigurations = (...configs: Array<AutoRestRawConfiguration>): AutoRestRawConfiguration => {
+  let result: AutoRestRawConfiguration = {};
   configs = configs
     .map((each, i, a) => ({ ...each, "load-priority": each["load-priority"] || -i }))
     .sort((a, b) => b["load-priority"] - a["load-priority"]);
@@ -79,10 +83,10 @@ export const mergeConfigurations = (...configs: Array<AutoRestConfigurationImpl>
 
 // TODO: operate on DataHandleRead and create source map!
 export const mergeConfiguration = (
-  higherPriority: AutoRestConfigurationImpl,
-  lowerPriority: AutoRestConfigurationImpl,
+  higherPriority: AutoRestRawConfiguration,
+  lowerPriority: AutoRestRawConfiguration,
   forceAllVersionsMode = false,
-): AutoRestConfigurationImpl => {
+): AutoRestRawConfiguration => {
   // check guard
   if (lowerPriority.__info && !evaluateGuard(lowerPriority.__info, higherPriority, forceAllVersionsMode)) {
     // guard false? => skip

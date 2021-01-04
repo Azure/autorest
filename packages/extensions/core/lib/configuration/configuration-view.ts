@@ -24,7 +24,7 @@ import { Suppressor } from "../pipeline/suppression";
 import { resolveRValue } from "../source-map/merging";
 import { cwd } from "process";
 import { Directive, ResolvedDirective } from "./directive";
-import { AutoRestConfigurationImpl, mergeConfiguration, mergeConfigurations } from "./auto-rest-configuration-impl";
+import { AutoRestRawConfiguration, mergeConfiguration, mergeConfigurations } from "./auto-rest-raw-configuration";
 import { arrayOf, valuesOf } from "./utils";
 import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
@@ -59,7 +59,7 @@ export class ConfigurationView {
     fileSystem: IFileSystem,
      public messageEmitter: MessageEmitter,
     public configFileFolderUri: string,
-    ...configs: Array<AutoRestConfigurationImpl> // decreasing priority
+    ...configs: Array<AutoRestRawConfiguration> // decreasing priority
   ) {
     // wrap the filesystem with the caching filesystem
     this.fileSystem = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
@@ -177,8 +177,8 @@ export class ConfigurationView {
     return this.messageEmitter.ClearFolder;
   }
 
-  private config: AutoRestConfigurationImpl;
-  private rawConfig: AutoRestConfigurationImpl;
+  private config: AutoRestRawConfiguration;
+  private rawConfig: AutoRestRawConfiguration;
 
   private ResolveAsFolder(path: string): string {
     return EnsureIsFolderUri(ResolveUri(this.BaseFolderUri, path));
@@ -393,7 +393,7 @@ export class ConfigurationView {
     return result;
   }
 
-  public get Raw(): AutoRestConfigurationImpl {
+  public get Raw(): AutoRestRawConfiguration {
     return this.config;
   }
 

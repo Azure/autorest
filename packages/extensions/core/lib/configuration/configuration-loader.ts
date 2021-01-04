@@ -14,7 +14,7 @@ import { Channel, SourceLocation } from "../message";
 import { parseCodeBlocks } from "../parsing/literate-yaml";
 import { AutoRestExtension } from "../pipeline/plugin-endpoint";
 import { AppRoot } from "../constants";
-import { AutoRestConfigurationImpl } from "./auto-rest-configuration-impl";
+import { AutoRestRawConfiguration } from "./auto-rest-raw-configuration";
 import { arrayOf } from "./utils";
 import { ConfigurationView } from "./configuration-view";
 import { CachingFileSystem } from "./caching-file-system";
@@ -49,7 +49,7 @@ export class ConfigurationLoader {
   private async parseCodeBlocks(
     configFile: DataHandle,
     contextConfig: ConfigurationView,
-  ): Promise<Array<AutoRestConfigurationImpl>> {
+  ): Promise<Array<AutoRestRawConfiguration>> {
     const parentFolder = ParentFolderUri(configFile.originalFullPath);
 
     // load config
@@ -64,7 +64,7 @@ export class ConfigurationLoader {
       hConfig
         .filter((each) => each)
         .map((each) => {
-          const pBlock = each.data.ReadObject<AutoRestConfigurationImpl>();
+          const pBlock = each.data.ReadObject<AutoRestRawConfiguration>();
           return pBlock.then((block) => {
             if (!block) {
               block = {};
