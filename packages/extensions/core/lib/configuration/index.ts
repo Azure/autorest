@@ -1,4 +1,4 @@
-export * from "./configuration";
+export * from "./configuration-loader";
 export * from "./auto-rest-configuration-impl";
 export * from "./configuration-view";
 export * from "./message-emitter";
