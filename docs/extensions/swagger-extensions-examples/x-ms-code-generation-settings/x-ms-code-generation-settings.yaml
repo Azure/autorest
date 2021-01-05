@@ -1,5 +1,5 @@
 ---
-swagger: '2.0'
+swagger: "2.0"
 info:
   title: PetStore Inc.
   description: Pets online.
@@ -10,25 +10,25 @@ info:
 x-ms-parameterized-host:
   hostTemplate: "{petBaseUrl}"
   parameters:
-  - name: petBaseUrl
-    required: true
-    type: string
-    in: path
-    x-ms-skip-url-encoding: true
+    - name: petBaseUrl
+      required: true
+      type: string
+      in: path
+      x-ms-skip-url-encoding: true
 paths:
   "/Pets/{petId}/GetPet":
     post:
       operationId: Pet_GetPetById
       description: Gets pets by id.
       parameters:
-      - name: petId
-        in: path
-        required: true
-        type: string
-        description: pet id
+        - name: petId
+          in: path
+          required: true
+          type: string
+          description: pet id
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
             "$ref": "#/definitions/Pet"
 definitions:

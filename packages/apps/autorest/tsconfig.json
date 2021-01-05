@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "noErrorTruncation": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "sourceMap": true,
+    "newLine": "LF",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "declaration": true,
+    "stripInternal": true,
+    "target": "es2018",
+    "types": ["node", "jest"],
+    "typeRoots": ["./node_modules/@types"],
+    "lib": ["es2018"]
+  },
+  "include": ["src/**/*.ts", "definitions/**/*.d.ts", "test/**/*.ts"],
+  "exclude": ["dist", "node_modules", "_lib", "lib/core/language-service"]
+}

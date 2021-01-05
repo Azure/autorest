@@ -3,42 +3,42 @@
 # if you want to set a secondary tag on the package (like V2), set the $(altTag) variable
 
 trigger:
-- master 
+  - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '12.x'
-  displayName: 'Install Node.js'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "12.x"
+    displayName: "Install Node.js"
 
-- script: |
-    # ensure latest npm is installed
-    npm install -g npm 
-    npm config set //registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)
+  - script: |
+      # ensure latest npm is installed
+      npm install -g npm 
+      npm config set //registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)
 
-    # grab the file specified
-    wget $(pkg)
-    rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi
-
-    # determine the tag
-    npmTag="latest"
-    if [ -n "$(tag)" ]; then
-      npmTag=$(tag)
-    fi
-
-    # publish it to npm 
-    for file in *.tgz 
-    do
-      npm publish $file --tag $npmTag --access public
+      # grab the file specified
+      wget $(pkg)
       rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi
 
-      # set the alternate tag, if applicable
-      if [ -n "$(altTag)" ]; then
-        tar -zxvf $file
-        cd package/
-        npm dist-tag add $(npm show . name)@$(npm show . version) --tag $(altTag)
+      # determine the tag
+      npmTag="latest"
+      if [ -n "$(tag)" ]; then
+        npmTag=$(tag)
       fi
-    done
+
+      # publish it to npm 
+      for file in *.tgz 
+      do
+        npm publish $file --tag $npmTag --access public
+        rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi
+
+        # set the alternate tag, if applicable
+        if [ -n "$(altTag)" ]; then
+          tar -zxvf $file
+          cd package/
+          npm dist-tag add $(npm show . name)@$(npm show . version) --tag $(altTag)
+        fi
+      done

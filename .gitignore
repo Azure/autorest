@@ -160,7 +160,7 @@ Backup*/
 UpgradeLog*.XML
 
 # NuGet
-packages
+# packages
 
 # Mac OS #
 .DS_Store
@@ -198,9 +198,6 @@ src/generator/AutoRest.Go.Tests/src/tests/generated/*
 src/generator/AutoRest.Go.Tests/src/tests/vendor/*
 src/generator/AutoRest.Go.Tests/src/tests/glide.lock
 
-autorest/**/*.js
-core/**/*.js
-
 *.js.map
 
 # backup files
@@ -210,7 +207,6 @@ core/**/*.js
 src/client/**/*
 
 src/extension/old/**/*
-*.d.ts
 
 src/bootstrapper
 src/extension/out
@@ -296,3 +292,4 @@ common/config/rush/shrinkwrap.yaml
 
 # Code generation output for regression tests
 core/test/regression
+

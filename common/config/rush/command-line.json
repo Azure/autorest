@@ -41,22 +41,23 @@
       "shellCommand": "node .scripts/npm-run.js clean"
     },
     {
-      "commandKind": "global",
+      "commandKind": "bulk",
       "name": "test",
-      "summary": "run all npm test",
-      "shellCommand": "node .scripts/npm-run.js test"
+      "summary": "Tests projects. Runs `npm test` on all projects.",
+      "enableParallelism": false,
+      "allowWarningsInSuccessfulBuild": true
     },
     {
-      "commandKind": "global",
-      "name": "fix",
-      "summary": "run all npm fix",
-      "shellCommand": "node .scripts/npm-run.js eslint-fix"
+      "commandKind": "bulk",
+      "name": "lint:fix",
+      "summary": "Fix linting errors for projects. Runs `npm run lint:fix` on all projects.",
+      "enableParallelism": true
     },
     {
-      "commandKind": "global",
+      "commandKind": "bulk",
       "name": "lint",
-      "summary": "run all npm lint",
-      "shellCommand": "node .scripts/npm-run.js eslint"
+      "summary": "Lint projects. Runs `npm run lint` on all projects.",
+      "enableParallelism": true
     }
     // {
     //   /**

@@ -81,6 +81,7 @@ Create one with `repo` scope.
 It can be passed to AutoRest using `--github-auth-token=<token>` or by setting the environment variable `GITHUB_AUTH_TOKEN`.
 This is the way to go for all scripts and automation.
 Needless to say, *do not put this token* into scripts directly, use Azure KeyVault or similar.
+**Note**: If the repository is in an organization it might require the Github Token to be given explicit permission to that organization.(Next to the token Enable SSO > Click Authorize for the relevant organization)
 
 #### Validation
 

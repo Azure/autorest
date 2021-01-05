@@ -17,8 +17,8 @@ The AutoRest CLI is updated like any Node package, via NPM:
 The AutoRest core module is the real processing hub for AutoRest.
 
 The CLI can load any version of the AutoRest Core module by using the command line `--version:[VERSION]`  where `[VERSION]` is one of:
- - a semver version range that matches a published nodejs package `@autorest/core` package.<br>AutoRest v3 defaults to `~3.0.6000` (ie, the latest published `3.0` package above build `6000` )  # TODO: should it default it 3.0.6318 for client side validation fix?
- - the specific version of the core module package, which can come from npm or a prerelase build in [github releases](https://github.com/azure/autorest/relases)<br>ie,  `--version:3.0.6189`
+ - a semver version range that matches a published nodejs package `@autorest/core` package.<br>AutoRest v3 defaults to `~3.0.6000` (ie, the latest published `3.0` package above build `6000` )
+ - the specific version of the core module package, which can come from npm or a prerelase build in [github releases](https://github.com/azure/autorest/releases)<br>ie,  `--version:3.0.6189`
  - a folder where the core package has been cloned and compiled. (ie, `c:\work\autorest` )
  - a URL to a nodejs autorest-core package
 

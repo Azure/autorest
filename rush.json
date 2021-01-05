@@ -1,11 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
-  "rushVersion": "5.12.0",
-  "pnpmVersion": "2.15.1",
+  "rushVersion": "5.35.2",
+  "pnpmVersion": "5.13.5",
   "pnpmOptions": {},
   "nodeSupportedVersionRange": ">=8.9.4 <15.0.0",
   "ensureConsistentVersions": true,
-  "projectFolderMinDepth": 1,
+  "projectFolderMinDepth": 3,
   "projectFolderMaxDepth": 3,
   "repository": {},
   "eventHooks": {
@@ -18,15 +18,21 @@
   "projects": [
     {
       "packageName": "@autorest/core",
-      "projectFolder": "core",
+      "projectFolder": "packages/extensions/core",
       "reviewCategory": "production",
       "shouldPublish": true
     },
     {
       "packageName": "autorest",
-      "projectFolder": "autorest",
+      "projectFolder": "packages/apps/autorest",
       "reviewCategory": "production",
       "shouldPublish": true
+    },
+    {
+      "packageName": "@autorest/schemas",
+      "projectFolder": "packages/libs/autorest-schemas",
+      "reviewCategory": "production",
+      "shouldPublish": false
     }
     /* #region ci-only
     ,{

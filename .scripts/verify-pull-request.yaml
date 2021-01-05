@@ -6,36 +6,41 @@
 trigger: none
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '13.x'
-  displayName: 'Install Node.js'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "14.x"
+    displayName: "Install Node.js"
 
-- script: |
-    npm install -g npm
-    npx @microsoft/rush update
-    npx @microsoft/rush rebuild
+  - script: |
+      npm install -g npm
+      npx @microsoft/rush update
+    displayName: "Install dependencies"
 
-    # Tests are disabled for now, failures to be investigated (Azure/autorest#3400)
-    #npx @microsoft/rush test
+  - script: |
+      npx @microsoft/rush rebuild
+    displayName: "Build"
 
-  displayName: 'Rush install, build and test'
+  - script: npx @microsoft/rush test -v
+    displayName: Test
 
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '3.x'
-  displayName: Install Python 3
+  - script: npx @microsoft/rush lint -v
+    displayName: Lint
 
-- script: |
-    npm install @microsoft.azure/autorest.testserver --no-save
-    npm install -g @autorest/compare@~0.3.0
-  displayName: Install autorest-compare
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: "3.x"
+    displayName: Install Python 3
 
-- script: autorest-compare --compare:.scripts/regression-compare.yaml --language:python
-  displayName: Regression Test - @autorest/python
+  - script: |
+      npm install @microsoft.azure/autorest.testserver --no-save
+      npm install -g @autorest/compare@~0.3.0
+    displayName: Install autorest-compare
 
-- script: autorest-compare --compare:.scripts/regression-compare.yaml --language:typescript
-  displayName: Regression Test - @autorest/typescript
+  - script: autorest-compare --compare:.scripts/regression-compare.yaml --language:python
+    displayName: Regression Test - @autorest/python
+
+  - script: autorest-compare --compare:.scripts/regression-compare.yaml --language:typescript
+    displayName: Regression Test - @autorest/typescript

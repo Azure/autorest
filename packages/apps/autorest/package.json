@@ -1,0 +1,81 @@
+{
+  "name": "autorest",
+  "version": "3.0.0",
+  "patchOffset": 5110,
+  "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is an OpenAPI spec that describes the REST API.",
+  "engines": {
+    "node": ">=10.13.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Azure/autorest"
+  },
+  "homepage": "https://github.com/Azure/autorest#readme",
+  "readme": "https://github.com/Azure/autorest/blob/master/readme.md",
+  "keywords": [
+    "autorest",
+    "rest",
+    "swagger"
+  ],
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/autorest/issues"
+  },
+  "main": "./dist/src/exports.js",
+  "bin": {
+    "autorest": "./entrypoints/app.js"
+  },
+  "scripts": {
+    "start": "node ./dist/src/app.js",
+    "test": "jest --coverage=false",
+    "test:ci": "jest --ci",
+    "build": "tsc -p .",
+    "watch": "tsc -p . --watch",
+    "fix": "eslint  . --fix --ext .ts",
+    "lint": "eslint  . --ext .ts --max-warnings=0",
+    "static-link": "static-link --force --no-node-modules",
+    "preinstall": "node ./.scripts/preinstall-check",
+    "prepack": "npm run static-link && npm run build",
+    "clean": "rimraf ./dist"
+  },
+  "typings": "./dist/src/main.d.ts",
+  "devDependencies": {
+    "@types/commonmark": "^0.27.0",
+    "@types/node": "12.7.2",
+    "@types/semver": "5.5.0",
+    "@types/jest": "26.0.16",
+    "jest": "~26.6.3",
+    "ts-jest": "~26.4.4",
+    "typescript": "~3.9.7",
+    "@typescript-eslint/eslint-plugin": "~2.6.0",
+    "@typescript-eslint/parser": "~2.6.0",
+    "eslint": "~6.6.0",
+    "static-link": "^0.3.0",
+    "@autorest/core": "~3.0.0",
+    "@azure-tools/async-io": "~3.0.0",
+    "@azure-tools/extension": "~3.0.0",
+    "@azure-tools/tasks": "~3.0.0",
+    "@azure-tools/uri": "~3.0.0",
+    "semver": "^5.5.1",
+    "chalk": "2.3.0",
+    "cpy-cli": "~2.0.0",
+    "mkdirp": "~0.5.1",
+    "rimraf": "~3.0.0",
+    "source-map-support": "0.5.13",
+    "safe-buffer": "5.2.0",
+    "prettier": "~2.2.1",
+    "eslint-plugin-prettier": "~3.1.4"
+  },
+  "static-link": {
+    "entrypoints": [],
+    "dependencies": {
+      "@azure-tools/async-io": "~3.0.0",
+      "@azure-tools/uri": "~3.0.0",
+      "@azure-tools/extension": "~3.0.0",
+      "@azure-tools/tasks": "~3.0.0",
+      "semver": "^5.5.1",
+      "chalk": "2.3.0"
+    }
+  }
+}
