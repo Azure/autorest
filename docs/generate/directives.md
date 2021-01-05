@@ -30,7 +30,7 @@ Directives consist of three parts:
     - its name in the [components or definitions][components] section OR
     - its location in its outer object, if defined within another object OR
     - its location in an operation, if defined within an operation
-  - As `property` can be filtered by:
+  - A `property` can be filtered by:
     - its location within its parent object
 
 - **Transform**: denoted by the field `transform`, the actions we would like to be applied on the specified objects.
@@ -110,7 +110,7 @@ directive:
     from: swagger-document
     where: '$.paths["/vm"].get.parameters[0]'
     transform: >
-        $["name"] = "id";
+        $["name"] = "identifier";
 ```
 
 #### Parameter defined in the "Parameters" section

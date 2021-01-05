@@ -331,12 +331,9 @@ If we want to generate `v1` code in either language, all that's needed is to tac
 
 There are a couple of steps that are more [management-plane](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane#control-plane) specific, which this section will go into.
 
-First, when generating managment
+The biggest thing to keep in mind when generating management plane code is using the flag `--azure-arm`. This tells the language generators you want management plane code. Since management plane code is more standardized, we are able to generate more specialized code. Setting this `azure-arm` flag also has implications for other flags (i.e., it forces `head-as-boolean` to be true). See our [flag index][flags] for more information.
 
-### azure-rest-api-specs
-
---track2
---azure-arm
+The OpenAPI definitions for management plane code also live in the `resource-manager` folder for services in the [azure-rest-api-specs][azure_rest_api_specs] repo (see here the location of [management storage][mgmt_storage]). You will need to also have your `readme.md` on this level (complete with language-specific readmes if necessary, see the [previous section](#generating-in-multiple-languages "Generating in Multiple Languages") for how to do this.)
 
 ## Generating with Directives
 
@@ -363,3 +360,5 @@ See [here](./how-autorest-generates-code-from-openapi.md)
 [basic_example]: ./examples/basic/readme.md
 [pets_v2_swagger]: ./openapi/examples/pets.json
 [tags_readme]: ./examples/tags/readme.md
+[azure_rest_api_specs]: https://github.com/Azure/azure-rest-api-specs
+[mgmt_storage]: https://github.com/Azure/azure-rest-api-specs/tree/master/specification/storage/resource-manager
