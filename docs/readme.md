@@ -21,6 +21,9 @@
 7. Developing with AutoRest
     - How do I generate or contribute to AutoRest in [dev mode][dev]?
 
+8. `Powershell` documentation
+    - [How][powershell] do I use AutoRest to build `Powershell` cmdlets?
+
 8. [FAQ][faq]
 
 <!-- LINKS -->
@@ -31,4 +34,5 @@
 [client]: ./client/readme.md
 [migrate]: ./migrate/readme.md
 [dev]: ./developer/readme.md
+[powershell]: ./powershell/readme.md
 [faq]: ./faq.md
