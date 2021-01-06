@@ -372,7 +372,6 @@ For language-specific information about generation, please refer to our language
 - [Python][python]
 - [Java][java]
 - [C#][csharp]
-- [Typescript][typescript]
 
 <!-- LINKS -->
 [flags]: ./flags.md
@@ -387,4 +386,3 @@ For language-specific information about generation, please refer to our language
 [python]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/generate
 [java]: https://github.com/Azure/autorest.java/tree/v4/docs/generate
 [csharp]: https://github.com/Azure/autorest.csharp/tree/v3/docs/generate
-[typescript]: https://github.com/Azure/autorest.typescript/tree/v6/docs/generate
