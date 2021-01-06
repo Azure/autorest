@@ -24,7 +24,9 @@
 8. `Powershell` documentation
     - [How][powershell] do I use AutoRest to build `Powershell` cmdlets?
 
-8. [FAQ][faq]
+9. [FAQ][faq]
+
+10. [Troubleshooting][troubleshooting]
 
 <!-- LINKS -->
 [introduction]: ./introduction.md
@@ -36,3 +38,4 @@
 [dev]: ./developer/readme.md
 [powershell]: ./powershell/readme.md
 [faq]: ./faq.md
+[troubleshooting]: ./troubleshooting.md
