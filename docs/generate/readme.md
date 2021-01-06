@@ -347,6 +347,21 @@ Only Python supports generating multiapi code, see [the Python docs](https://git
 
 See [here](.flags.md) for a complete index of flags.
 
+## Generate from Private GitHub Repos
+
+AutoRest supports generating from private GitHub repositories.
+There are multiple options:
+
+1) **Using the `token` query parameter**: Pass the `token` query parameter you get when clicking "Raw" on a file of a private repo, i.e. `https://github.com/<path-on-some-private-repo>/readme.md?token=<token>`.
+When such a URI is passed to AutoRest, it will automatically reuse that token for subsequent requests (e.g. querying referenced OpenAPI definitions).
+This is a quick and easy solution if you manually want to run AutoRest against private bits from time to time.
+2) **Using OAuth**: GitHub allows generating OAuth tokens under `Settings -> Personal access tokens`.
+Create one with `repo` scope.
+It can be passed to AutoRest using `--github-auth-token=<token>` or by setting the environment variable `GITHUB_AUTH_TOKEN`.
+This is the way to go for all scripts and automation.
+Needless to say, *do not put this token* into scripts directly, use Azure KeyVault or similar.
+**Note**: If the repository is in an organization it might require the Github Token to be given explicit permission to that organization.(Next to the token Enable SSO > Click Authorize for the relevant organization)
+
 ## I'm Curious: How does AutoRest Actually Generate Code From an OpenAPI Definition?
 
 See [here][how_autorest]
