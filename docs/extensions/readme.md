@@ -1191,11 +1191,11 @@ Additionally, applying this extension to a schema forces the schema to become a 
 ```json
 "parameters": [
   {
-    "x-ms-meta": {
-      "type": "string",
-      "x-ms-client-name": "Metadata",
-      "x-ms-header-collection-prefix": "x-ms-meta-"
-    }
+    "name": "x-ms-meta",
+    "in": "header",
+    "type": "string",
+    "x-ms-parameter-location": "method",
+    "x-ms-header-collection-prefix": "x-ms-meta-"
   }
 ]
 ```
