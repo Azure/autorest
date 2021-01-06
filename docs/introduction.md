@@ -19,8 +19,6 @@ At the core of AutoRest is a flexible pipeline where a series of pre-configured 
 
 # <img align="center" src="./images/autorest-pipeline.png">
 
-
-
 See our [landing page][landing_page] to get started with writing your OpenAPI definitions and generating with AutoRest!
 
 <!--LINKS-->

@@ -6,13 +6,6 @@ We usually recommend changing the swagger before going the directive route, but 
 
 >Stylistic note: we recommend annotating your directives in your config file with a header about what the directive is doing.
 
-For language-specific directives, see the ones for:
-- [.NET][net]
-- [Python][python]
-- [Java][java]
-- [Typesript][ts]
-- [Go][go]
-
 ## Structure and Terminology
 
 Directives consist of three parts:
@@ -276,12 +269,11 @@ directive:
         $["description"] = $["description].replace("'id'", "'identifier'");
 ```
 
+For language-specific directives, see the ones for:
+- [Python][python]
+
 <!-- LINKS -->
-[net]: https://github.com/Azure/autorest.csharp/blob/feature/v3/docs/generate/directives.md
 [python]: https://github.com/Azure/autorest.python/blob/autorestv3/docs/generate/directives.md
-[java]:  https://github.com/Azure/autorest.java/blob/v4/docs/generate/directives.md
-[ts]: https://github.com/Azure/autorest.typescript/blob/v6/docs/generate/directives.md
-[go]: https://github.com/Azure/autorest.go/blob/track2/docs/generate/directives.md
 [paths]: https://swagger.io/docs/specification/paths-and-operations/
 [parameters]: https://swagger.io/docs/specification/describing-parameters/
 [components]: https://swagger.io/docs/specification/components/

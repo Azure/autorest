@@ -86,6 +86,16 @@
 |`--openapi-type=arm\|data-plane`|Specify if you want to generate `data-plane` code or `arm` code.
 |`--armcore-connection`|If set to `true`, we output the code with the `Connection` type specified in [`armcore`][armcore_connection]. If not, we output a new `Connection` constructor with the generated code. Defaults to `false`.
 
+## Debugging flags
+
+| Flag | Description | Python | .NET | Java | TS | Go
+|------------------|-------------|-------------|-------------|-------------|-------------|-------------
+|`--verbose`| Log verbose-level information during generation time | x | x | x | x | x
+|`--debug`| Log debug-level information during generation time | x | x | x | x | x
+|`--{language-generator}-debugger`| Debug into a specific language's code. See our [debugging docs][debugging] to see if there are extra steps needed to for your language generator of choice | x | x | x | x | x
+|`--save-inputs`|Whether to save the configuration files (i.e. `Configuration.json` or `codeyaml.json`). Defaults to `false`.| | x| | | | |
+
+
 ## Deprecated / Not-Recommended Flags
 
 | Flag | Description | Python | .NET | Java | TS | Go
@@ -111,3 +121,4 @@
 [artifact_id]: https://maven.apache.org/guides/mini/guide-naming-conventions.html
 [fluent_docs]: https://github.com/Azure/autorest.java#additional-settings-for-fluent
 [armcore_connection]: https://github.com/Azure/azure-sdk-for-go/blob/master/sdk/armcore/connection.go
+[debugging]: ../troubleshooting.md#debugging

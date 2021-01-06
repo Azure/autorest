@@ -349,16 +349,27 @@ See [here](.flags.md) for a complete index of flags.
 
 ## I'm Curious: How does AutoRest Actually Generate Code From an OpenAPI Definition?
 
-See [here](./how-autorest-generates-code-from-openapi.md)
+See [here][how_autorest]
 
-## Troubleshooting
+
+For language-specific information about generation, please refer to our language-specific documentation:
+
+- [Python][python]
+- [Java][java]
+- [C#][csharp]
+- [Typescript][typescript]
 
 <!-- LINKS -->
 [flags]: ./flags.md
-[openapi_docs]: ../openapi/introduction.md
-[pets_swagger]: ../openapi/examples/pets.json)
+[openapi_docs]: ../openapi/readme.md
+[pets_swagger]: ../openapi/examples/pets.json
 [basic_example]: ./examples/basic/readme.md
 [pets_v2_swagger]: ./openapi/examples/pets.json
 [tags_readme]: ./examples/tags/readme.md
 [azure_rest_api_specs]: https://github.com/Azure/azure-rest-api-specs
 [mgmt_storage]: https://github.com/Azure/azure-rest-api-specs/tree/master/specification/storage/resource-manager
+[how_autorest]: ./how-autorest-generates-code-from-openapi.md
+[python]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/generate
+[java]: https://github.com/Azure/autorest.java/tree/v4/docs/generate
+[csharp]: https://github.com/Azure/autorest.csharp/tree/v3/docs/generate
+[typescript]: https://github.com/Azure/autorest.typescript/tree/v6/docs/generate
