@@ -1190,13 +1190,16 @@ Additionally, applying this extension to a schema forces the schema to become a 
 
 ```json
 "parameters": [
-  "x-ms-meta": {
-    "type": "string",
-    "x-ms-client-name": "Metadata",
-    "x-ms-header-collection-prefix": "x-ms-meta-"
+  {
+    "x-ms-meta": {
+      "type": "string",
+      "x-ms-client-name": "Metadata",
+      "x-ms-header-collection-prefix": "x-ms-meta-"
+    }
   }
 ]
 ```
+
 This request parameter will be forced to be a dictionary schema, and all keys in this dictionary will be prefixed with `x-ms-meta-`.
 So, if you input `{"key": "value"}` through this parameter, `{"x-ms-meta-key": "value"}` is what reaches the service.
 
