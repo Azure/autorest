@@ -23,7 +23,7 @@ The following documents describes AutoRest specific vendor extensions for [OpenA
 * [x-ms-pageable](#x-ms-pageable) - allows paging through lists of data.
 * [x-ms-long-running-operation](#x-ms-long-running-operation) - indicates that the operation implemented Long Running Operation pattern as defined by the [Resource Manager API](https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx).
 * [x-nullable](#x-nullable) - when `true`, specifies that `null` is a valid value for the associated schema
-* [x-ms-header-collection-prefix](#x-ms-header-collection-prefix) - Deal with prefixes for request and response headers.
+* [x-ms-header-collection-prefix](#x-ms-header-collection-prefix) - Handle collections of arbitrary headers by distinguishing them with a specified prefix.
 
 ### Microsoft Azure Extensions (available in most generators only when using `--azure-arm`)
 * [x-ms-odata](#x-ms-odata) - indicates the operation includes one or more [OData](http://www.odata.org/) query parameters.
@@ -1177,7 +1177,7 @@ An object with an optional property.
 ```
 
 ## x-ms-header-collection-prefix
-Use `x-ms-header-collection-prefix` to deal with prefixes for headers. Has different behavior if it refers to a request header or a response header:
+Handle collections of arbitrary headers by distinguishing them with a specified prefix. Has different behavior if it refers to a request header or a response header:
 
 - Request header: All keys in the request headers will be prefixed with the prefix value before being sent to the service.
 - Response header: Only response headers that start with the prefix specified here will be returned to users. Additionally, the prefix will be stripped from the response header key before being returned to users
@@ -1201,7 +1201,14 @@ Additionally, applying this extension to a schema forces the schema to become a 
 ```
 
 This request parameter will be forced to be a dictionary schema, and all keys in this dictionary will be prefixed with `x-ms-meta-`.
-So, if you input `{"key": "value"}` through this parameter, `{"x-ms-meta-key": "value"}` is what reaches the service.
+So, if you input a header with name `key` and value `value` through this parameter,
+
+```
+GET /path HTTP/1.1
+x-ms-meta-key: value
+```
+
+is what reaches the service.
 
 **Response Example**:
 
@@ -1223,11 +1230,10 @@ So, if you input `{"key": "value"}` through this parameter, `{"x-ms-meta-key": "
 This response header parameter will be forced to be a dictionary schema. Only entries with prefix `x-ms-meta-` will be returned to users,
 and this prefix will be stripped before be returned to users. So if the response from the service is
 
-```json
-{
-  "rejected-key": "value",
-  "x-ms-meta-key": "value",
-}
+```
+headers:
+  - rejected-key: value
+  - x-ms-meta-key: value
 ```
 
-What is returned to users is just `{"key": "value"}`.
+What is returned to users is just `key: value`.
