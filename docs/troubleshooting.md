@@ -1,5 +1,9 @@
 # <img align="center" src="./images/logo.png">  Troubleshooting
 
+## Module Errors
+
+When running into an AutoRest issues actually running the AutoRest program, your first instinct should always to be run `autorest --reset`. This clears you AutoRest temp folders and extensions, and reacquires them on your next call to AutoRest.
+
 ## Generation Errors
 
 There are two broad kinds of errors you can run into when generating: one kind is thrown earlier in the AutoRest pipeline and has to do with malformed swaggers (see [our main docs][main_docs] for more information). The other kind is thrown by the language generators.

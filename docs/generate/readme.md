@@ -30,7 +30,7 @@ For a full-set of flags, go to our [flag index][flags]
 | Option | Description |
 |------------------|-------------|
 |`--input-file=FILENAME`|Adds the given file to the list of input files for generation process|
-|`--output-folder=DIRECTORY`|The location for generated files. If not specified, uses `./Generated` as the default|
+|`--output-folder=DIRECTORY`|The location for generated files. If not specified, uses `./generated` as the default|
 |`--clear-output-folder`|Clear all contents from our output folder before outputting your newly generated code into that folder|
 |`--namespace=NAMESPACE`|sets the namespace to use for the generated code|
 |`--add-credential`|If specified, the generated client will require a credential to make network calls. See [TODO] for information on how to authenticate to our generated clients|
@@ -64,17 +64,18 @@ let's say we want to generate Python code. Adding this to our command line, we g
 autorest --input=file=pets.json --python
 ```
 
-In our final required step, we need to tell AutoRest where to output the generated SDK. We do this through the `--output-folder` flag (once again, see [common
+In our final step, we can tell AutoRest where to output the generated SDK. By default AutoRest generates files in output folder `./generated`. However, we can
+modify the output folder using flag `--output-folder` (once again, see [common
 flags](#common-flags "common flags") for more information). Putting this all together, we have:
 
 ```
-autorest --input-file=pets.json --python --output-folder=generated/
+autorest --input-file=pets.json --python --output-folder=myFolder/
 ```
 
 There are many other flags you can specify when generating. As an add-on, let's say we want to generate our code under the namespace `pets`. This gives us:
 
 ```
-autorest --input-file=pets.json --python --output-folder=generated/ --namespace=pets
+autorest --input-file=pets.json --python --output-folder=myFolder/ --namespace=pets
 ```
 And this concludes our basic example of generating with AutoRest. Continue reading to the next section to see our recommend way of generating AutoRest.
 
@@ -85,14 +86,14 @@ With a configuration file, we can move most of our flags from the command line i
 us the ability to override the configuration file settings from the command line. This both simplifies our command line for generation,
 and allows us to have a standardized set of flags to generate your OpenAPI documents with.
 
-As you can see in the above example, having to include these flags (i.e. `--input-file`, `--output-folder` etc) every time you generate can be annoying,
+As you can see in the above example, having to include these flags (i.e. `--input-file`, `--output-folder` etc) every time you generate can be cumbersome,
 and if you're trying to have every AutoRest generation standardized, a tiny typo can make a big difference. This is where a configuration file comes in.
 With a configuration file, we can add most, if not all of these flags into one file, where they can persist.
 
 Lets start with our command line from the previous example, and work on moving these flags into a config file.
 
 ```
-autorest --input-file=pets.json --python --output-folder=generated/ --namespace=pets
+autorest --input-file=pets.json --python --output-folder=myFolder/ --namespace=pets
 ```
 
 First step is to create our configuration file. The preferred name for a configuration file is `readme.md`, so you may hear these terms interchangeably.
@@ -126,7 +127,7 @@ Finally, let's add our remaining 2 flags.
 ```yaml
 input-file: pets.json
 python: true
-output-folder: generated/
+output-folder: myFolder/
 namespace: azure-pets
 ```
 ````
@@ -201,7 +202,7 @@ unless we override the value of `tag` by specifying `--tag=v1` on the command li
 
 ```yaml
 python: true
-output-folder: generated/
+output-folder: myFolder/
 tag: v2
 ```
 ````
@@ -254,7 +255,13 @@ See configuration in [readme.java.md](./readme.java.md)
 
 Let's now discuss what's going to be different between the two languages.
 
-1. Location of the output: We want our Python sdk to go into `azure-sdk-for-python`, and we want our Java sdk to go into `azure-sdk-for-java`. With Python, we use the flag `--python-sdks-folder` to indicate the location of our local [`azure-sdk-for-python`](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk) clone, and for Java, we indicate the location of our local [`azure-sdk-for-java`](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk) clone with the flag `--azure-libraries-for-java-folder`. This will vary based off of whether we're generating `v1` or `v2`, so we need individual conditional yaml blocks.
+1. Location of the output: We want our sdks to go into separate locations based on language. The location will also vary based off of whether we're generating `v1` or `v2` (since we want both versions to exist), so we need individual conditional yaml blocks.
+
+>Note: If you're developing with our Azure SDK repos, you can follow these steps:
+> - We would want our Python sdk to go into [`azure-sdk-for-python`][azure_sdk_for_python], and our Java sdk to go into [`azure-sdk-for-java`][azure_sdk_for_java].
+> - For Python, we use the flag `--python-sdks-folder` to indicate the location of our local [`azure-sdk-for-python`][azure_sdk_for_python] clone. Your output folder would be relative to `python-sdks-folder`, the location of which you would pass on the command line. I.e., your `output-folder` would look like `{python-sdks-folder}/pets/azure-pets`.
+> - For Java, we indicate the location of our local [`azure-sdk-for-java`][azure_sdk_for_java] clone with the flag `--azure-libraries-for-java-folder`. Your output folder would be relative to `azure-libraries-for-java-folder`, the location of which you would pass on the command line. I.e., your `output-folder` would look like `{azure-libraries-for-java-folder}/pets`.
+
 2. Namespace: We want our Python namespace to be `azure.pets`, while we want our Java namespace to be `com.microsoft.azure.pets`. We want different namespaces based off of whether we're generating `v1` or `v2` as well.
 3. For Python, we also want to specify the name of our Python package with flag `package-name`
 4. Finally, for Java, we would like our library to be `fluent`
@@ -275,7 +282,7 @@ These settings apply only when `--tag=v1` is specified on the command line.
 
 ```yaml $(tag) == 'v1'
 namespace: azure.pets.v1
-output-folder: $(python-sdks-folder)/pets/azure-pets/azure/pets/v1
+output-folder: python/pets/azure-pets/azure/pets/v1
 ```
 
 ## Tag: v2
@@ -284,7 +291,7 @@ These settings apply only when `--tag=v2` is specified on the command line.
 
 ```yaml $(tag) == 'v2'
 namespace: azure.pets.v2
-output-folder: $(python-sdks-folder)/pets/azure-pets/azure/pets/v2
+output-folder: python/pets/azure-pets/azure/pets/v2
 ```
 ````
 
@@ -304,7 +311,7 @@ These settings apply only when `--tag=v1` is specified on the command line.
 
 ```yaml $(tag) == 'v1'
 namespace: com.microsoft.azure.pets.v1
-output-folder: $(azure-libraries-for-java-folder)/pets/v1
+output-folder: java/pets/v1
 ```
 
 ## Tag: v2
@@ -313,17 +320,17 @@ These settings apply only when `--tag=v2` is specified on the command line.
 
 ```yaml $(tag) == 'v2'
 namespace: azure.pets.v2
-output-folder: $(azure-libraries-for-java-folder)/pets/v2
+output-folder: java/pets/v2
 ```
 ````
 
 Now, when generating `v2` code in Python, our command line looks like
 ```
-autorest readme.md --python --python-sdks-folder={path to local clone of azure-sdk-for-python/sdk}
+autorest readme.md --python
 ```
 while our Java command looks like
 ```
-autorest readme.md --java --azure-libraries-for-java-folder={path to local clone of azure-sdk-for-java/sdk}
+autorest readme.md --java
 ```
 If we want to generate `v1` code in either language, all that's needed is to tack `--tag=v1` on the command line.
 
@@ -386,3 +393,5 @@ For language-specific information about generation, please refer to our language
 [python]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/generate
 [java]: https://github.com/Azure/autorest.java/tree/v4/docs/generate
 [csharp]: https://github.com/Azure/autorest.csharp/tree/v3/docs/generate
+[azure_sdk_for_python]: https://github.com/Azure/azure-sdk-for-python/tree/master/sdk
+[azure_sdk_for_java]: https://github.com/Azure/azure-sdk-for-java/tree/master/sdk

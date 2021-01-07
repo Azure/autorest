@@ -12,9 +12,9 @@
 |`--namespace=NAMESPACE`|sets the namespace to use for the generated code| x | x | x | |
 |`--azure-arm`|generates control plane (Azure Resource Manager) code. Use this if you're generate SDKs for people to manage their Azure resources. See our [mgmt plane section][mgmt_plane_section] for more info. Defaults to `false`.| x | x | x | x | Uses flag `--openapi-type=arm` to specify
 |`--head-as-boolean`|With this flag, HEAD calls to non-existent resources (404) will not raise an error. Instead, if the resource exists, we return `true`, else `false`. Forced to be `true` if `--azure-arm` is set, otherwise defaults to `false`.| x | x ||| Go default is always `false`.
-|`--client-side-validation`|Whether you want the SDK to perform validation on inputs and outputs, based on swagger information. Recommended to be `false` for track 2 code, since we want the network to validate instead. Defaults to `false`.| x | x | calls it `--client-side-validations` | x | x
 |`--title=NAME`|Override the service client's name listed in the swagger under `title`.| x | x | x | x | x
 |`--description=DESCRIPTION`|Override the service client's description listed in the swagger under the top level `description`.| x | x | x | x | x
+|`--client-side-validation`|Whether you want the SDK to perform validation on inputs and outputs, based on swagger information. Recommended to be `false` for track 2 code, since we want the network to validate instead. Defaults to `false`.| x | x | calls it `--client-side-validations` | | x
 |`--package-name=NAME`|The name of your package. This is the name your package will be published under.| x | | |x |
 |`--package-version=VERSION`|The semantic versioning of your generated SDK (i.e., `1.0.0`). Not to be confused with the version of the service you're creating an SDK for. If no version is specified, AutoRest will not create a new version file. Generally not necessary if you are going to wrap the generated code before exposing to users.| Needs to be specified if `--basic-setup-py` is specified. | Currently can't generate version for track 2|Default is `1.0.0-beta.1`. Only available in `fluent` mode.|Currently can't set version for track 2| Defaults to `1.0.0`|
 |`--trace`|Whether to natively support tracing libraries, such OpenCensus or OpenTelemetry. See this [tracing quickstart][tracing_quickstart] for an overview. Defaults to `false`.| x | | | x|
@@ -23,7 +23,8 @@
 | Flag | Description
 |------------------|-------------
 |`--python-sdks-folder=DIRECTORY`| The path to the root directory of your [`azure-sdk-for-python`][azure_sdk_for_python] clone. Be sure to note that we include `sdk` in the folder path.
-|`--basic-setup-py`|Whether to generate a build script for setuptools to package your SDK. See [here][setup_py] for more information about a `setup.py` file. Defaults to `false`, generally not suggested if you are going to wrap the generated code before exposing to users. Needs `--package-version` to be specified.
+|`--black`| Runs [black][black] formatting on your generated files. Defaults to `false`.
+|`--basic-setup-py`|Whether to generate a build script for setuptools to package your SDK. See [here][setup_py] for more information about a `setup.py` file. Defaults to `false`, generally not suggested if you are going to wrap the generated code before exposing to users. Needs `--package-version` to be specified. Defaults to `false`.
 |`--multiapi`|Whether to generate a multiapi client. See [our multiapi section][multiapi_section] for more information. Defaults to `false`.
 |`--default-api=VALUE`|In the case of `--multiapi`, you can override the default service API version with this flag. If not specified, we use the latest GA service version as the default API.
 |`--keep-version-file`|Whether you want to override the current version file in your package or not. Defaults to `false`.
@@ -35,10 +36,10 @@
 
 | Flag | Description
 |------------------|-------------
-|`--library-name=NAME`|The name of your library. This is what will be displayed on NuGet.| | x| | |
-|`--shared-source-folders=VALUE(S)`|Pass shared folder paths through here. Common values point to the [shared generator assets][shared_generator_assets] and [shared azure core assets][shared_azure_core_assets] in [autorest.csharp][autorest_csharp| | x| | |
-|`--public-clients`|Whether to have your client public. Defaults to `false`.| | x| | |
-|`--model-namespace`|Whether to add a separate namespace of Models, more specifically adding `{value-from-namespace-flag}.Models`. Defaults to `true`.| | x| | |
+|`--library-name=NAME`|The name of your library. This is what will be displayed on NuGet.
+|`--shared-source-folders=VALUE(S)`|Pass shared folder paths through here. Common values point to the [shared generator assets][shared_generator_assets] and [shared azure core assets][shared_azure_core_assets] in [autorest.csharp][autorest_csharp
+|`--public-clients`|Whether to have your client public. Defaults to `false`.
+|`--model-namespace`|Whether to add a separate namespace of Models, more specifically adding `{value-from-namespace-flag}.Models`. Defaults to `true`.
 
 ## Java Flags
 
@@ -76,6 +77,7 @@
 |`--source-code-folder-path=DIRECTORY`|Where to output the generated code inside the `output-folder`. Use in the scenario when you are going to write a convenience layer on top of the generated code. Defaults to `src`.| | || x|
 |`--generate-metadata`|Whether to generate extra metadata in your package. For instance, generates a README file, license file etc if set to `true`. Defaults to `false`.
 |`--tracing-spanprefix=SPAN_PREFIX`|If you are tracing (passing in flag `--trace`), and you want to overwrite the span prefix AutoRest assigns, use this flag.
+|`--disable-async-iterators`|Whether to generate pageable methods as [AsyncIterators][ts_async_iterator]. Defaults to `true`.
 
 ## Go flags
 
@@ -122,3 +124,5 @@
 [fluent_docs]: https://github.com/Azure/autorest.java#additional-settings-for-fluent
 [armcore_connection]: https://github.com/Azure/azure-sdk-for-go/blob/master/sdk/armcore/connection.go
 [debugging]: ../troubleshooting.md#debugging
+[black]: https://pypi.org/project/black/
+[ts_async_iterator]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-3.html#async-iterators

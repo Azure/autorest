@@ -20,11 +20,7 @@ Installing AutoRest on Windows, MacOS or Linux involves two steps:
 We strongly recommend version `3.06318` or higher due to bug fixes. For more versioning information, see (./autorest-versioning.md)
 # <img align="center" src="images/autorestCoreVersion.png">
 
-4. Troubleshooting
-  When running into an autorest issue, your first instinct should always to be run `autorest --reset`. This clears you AutoRest temp folders and
-  extensions, and reacquires them on your next call to AutoRest.
-
-  TODO: What else should you do?
+4. If you're running into issues running AutoRest, check out our [troubleshooting][troubleshooting] docs
 
 
 ### Updating AutoRest
@@ -52,3 +48,6 @@ If you must fall back to AutoRest V2, run
   # run using command 'autorest' to check if installation worked
   autorest --help
   ```
+
+<!-- LINKS -->
+[troubleshooting]: ../troubleshooting.md#module-errors

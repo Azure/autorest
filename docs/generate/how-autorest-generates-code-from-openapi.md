@@ -65,7 +65,7 @@ public partial class Pet
 To represent `byte` arrays in the generated code, the property of the OpenAPI definition should have `string` as its type and `byte` as its format. This indicates binary data that will be represented as a base64-encoded string in requests and responses. The generated client will automatically do this encoding when processing requests and responses.
 
 - **`DateTime`**
-AutoRest generates `DateTime` typed properties in generated C# code for OpenAPI properties that have `string` as the type and `date-time` as the format. Note: it's possible to generate these properties as `DateTimeOffset` in C# when `-useDateTimeOffset` parameter is passed via command line.
+AutoRest generates `DateTime` typed properties in generated C# code for OpenAPI properties that have `string` as the type and `date-time` as the format.
 
 - **`int` / `long`**
 Both `int` and `long` properties in the generated code correspond to `integer` types in OpenAPI properties. If the format of the OpenAPI property is `int32`, `int` will be generated; if the format is `int64`, `long` will be generated. If the format field of the OpenAPI property is not set, AutoRest use  format `int32`.
