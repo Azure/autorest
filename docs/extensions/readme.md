@@ -20,15 +20,17 @@ The following documents describes AutoRest specific vendor extensions for [OpenA
 * [x-ms-error-response](#x-ms-error-response) - indicates whether the response status code should be treated as an error response
 * [x-ms-text](#x-ms-text) - XML helper for scenario with attributes and text on the same XML node
 * [x-ms-client-default](#x-ms-client-default) - Set default value for properties and parameters
+* [x-ms-pageable](#x-ms-pageable) - allows paging through lists of data.
+* [x-ms-long-running-operation](#x-ms-long-running-operation) - indicates that the operation implemented Long Running Operation pattern as defined by the [Resource Manager API](https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx).
+* [x-nullable](#x-nullable) - when `true`, specifies that `null` is a valid value for the associated schema
+* [x-ms-header-collection-prefix](#x-ms-header-collection-prefix) - Handle collections of arbitrary headers by distinguishing them with a specified prefix.
 
 ### Microsoft Azure Extensions (available in most generators only when using `--azure-arm`)
 * [x-ms-odata](#x-ms-odata) - indicates the operation includes one or more [OData](http://www.odata.org/) query parameters.
-* [x-ms-pageable](#x-ms-pageable) - allows paging through lists of data.
-* [x-ms-long-running-operation](#x-ms-long-running-operation) - indicates that the operation implemented Long Running Operation pattern as defined by the [Resource Manager API](https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx).
 * [x-ms-azure-resource](#x-ms-azure-resource) - indicates that the [Definition Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schemaObject) is a resource as defined by the [Resource Manager API](https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx)
 * [x-ms-request-id](#x-ms-request-id) - allows to overwrite the request id header name
 * [x-ms-client-request-id](#x-ms-client-request-id) - allows to overwrite the client request id header name
-* [x-nullable](#x-nullable) - when `true`, specifies that `null` is a valid value for the associated schema
+
 
 # Generic Extensions
 
@@ -1173,3 +1175,65 @@ An object with an optional property.
   }
 }
 ```
+
+## x-ms-header-collection-prefix
+Handle collections of arbitrary headers by distinguishing them with a specified prefix. Has different behavior if it refers to a request header or a response header:
+
+- Request header: All keys in the request headers will be prefixed with the prefix value before being sent to the service.
+- Response header: Only response headers that start with the prefix specified here will be returned to users. Additionally, the prefix will be stripped from the response header key before being returned to users
+
+Additionally, applying this extension to a schema forces the schema to become a dictionary.
+
+**Schema**: `string`. Name of the prefix you want to append / filter by. A common value for storage libraries is `x-ms-meta-`.
+
+**Request Example**:
+
+```json
+"parameters": [
+  {
+    "name": "x-ms-meta",
+    "in": "header",
+    "type": "string",
+    "x-ms-parameter-location": "method",
+    "x-ms-header-collection-prefix": "x-ms-meta-"
+  }
+]
+```
+
+This request parameter will be forced to be a dictionary schema, and all keys in this dictionary will be prefixed with `x-ms-meta-`.
+So, if you input a header with name `key` and value `value` through this parameter,
+
+```
+GET /path HTTP/1.1
+x-ms-meta-key: value
+```
+
+is what reaches the service.
+
+**Response Example**:
+
+```json
+"responses": {
+  "200": {
+    "description": "Success",
+    "headers": {
+      "x-ms-meta": {
+        "type": "string",
+        "x-ms-client-name": "Metadata",
+        "x-ms-header-collection-prefix": "x-ms-meta-"
+      }
+    }
+  }
+}
+```
+
+This response header parameter will be forced to be a dictionary schema. Only entries with prefix `x-ms-meta-` will be returned to users,
+and this prefix will be stripped before be returned to users. So if the response from the service is
+
+```
+headers:
+  - rejected-key: value
+  - x-ms-meta-key: value
+```
+
+What is returned to users is just `key: value`.
