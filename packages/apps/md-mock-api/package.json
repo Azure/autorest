@@ -1,11 +1,11 @@
 {
-  "name": "api-mock",
+  "name": "md-mock-api",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "typings": "./dist/index.d.ts",
   "bin": {
-    "api-mock": "./dist/cli/cli.js"
+    "md-mock-api": "./dist/cli/cli.js"
   },
   "scripts": {
     "fix": "eslint  . --fix --ext .ts",
