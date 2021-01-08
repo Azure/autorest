@@ -1,0 +1,136 @@
+{
+  "swagger": "3.0",
+  "info": {
+    "title": "Pet Client",
+    "description": "Example service client that also manages pets"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/pets": {
+      "get": {
+        "operationId": "getDog",
+        "description": "Get a dog",
+        "responses": {
+          "200": {
+            "description": "A 200 OK Dog",
+            "schema": {
+              "$ref": "#/definitions/Dog"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "putCat",
+        "description": "Put a cat onto our servers",
+        "parameters": [
+          {
+            "name": "cat",
+            "in": "body",
+            "description": "Cat",
+            "schema": {
+              "$ref": "#/definitions/Cat"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct cat",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "postKitten",
+        "description": "Post a kitten onto our servers",
+        "parameters": [
+          {
+            "name": "kitten",
+            "in": "body",
+            "description": "Kitten",
+            "schema": {
+              "$ref": "#/definitions/Kitten"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Received correct kitten",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "Dog": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The dog's name"
+        },
+        "wagsTailWhenHappy": {
+          "type": "boolean",
+          "description": "Whether the dog wags their tail when happy"
+        }
+      }
+    },
+    "Cat": {
+      "type": "object",
+      "properties": {
+        "likesMilk": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Kitten": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Cat"
+        }
+      ],
+      "type": "object",
+      "properties": {
+        "eatsMiceYet": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

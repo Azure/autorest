@@ -1,8 +1,13 @@
-# Client Apps
-- [Project Setup](proj-setup.md)
-- [Initialization](init.md)
-- [Authentication](auth.md)
-- [Client Operations](ops.md)
-- [Error Handling](error.md)
-- [Automatic Retries](retry.md)
-- [Tracing](tracing.md)
+# <img align="center" src="../images/logo.png">  Using the Generated Client
+
+This is highly-language specific, so please refer to the documentation we have for our individual language generators:
+- [Python][python]
+- [Java][java]
+- [C#][csharp]
+- [Typescript][typescript]
+
+<!--LINKS-->
+[python]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/client
+[java]: https://github.com/Azure/autorest.java/tree/v4/docs/client
+[csharp]: https://github.com/Azure/autorest.csharp/tree/v3/docs/client
+[typescript]: https://github.com/Azure/autorest.typescript/tree/v6/docs/client

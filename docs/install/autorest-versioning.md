@@ -14,13 +14,13 @@ The AutoRest CLI is updated like any Node package, via NPM:
 
 ## Core Module
 
-The AutoRest core module is the real processing hub for AutoRest. 
+The AutoRest core module is the real processing hub for AutoRest.
 
 The CLI can load any version of the AutoRest Core module by using the command line `--version:[VERSION]`  where `[VERSION]` is one of:
  - a semver version range that matches a published nodejs package `@autorest/core` package.<br>AutoRest v3 defaults to `~3.0.6000` (ie, the latest published `3.0` package above build `6000` )
  - the specific version of the core module package, which can come from npm or a prerelase build in [github releases](https://github.com/azure/autorest/releases)<br>ie,  `--version:3.0.6189`
  - a folder where the core package has been cloned and compiled. (ie, `c:\work\autorest` )
- - a URL to a nodejs autorest-core package 
+ - a URL to a nodejs autorest-core package
 
 An AutoRest configuration file can also specify a `version:` that requests a specific core module.<br>
 This can be overridden on the command line with `--version:`<br>
@@ -31,12 +31,12 @@ V2 generators will have their core module version defaulting to the latest v2 co
 > ---
 > AutoRest core modules are installed into the user's `$HOME/.autorest` folder.<br>
 > Multiple instances of the core module can be installed side-by-side<br>
-> 
+>
 > The core module runs in-process of the CLI (the module library is acquired and executed in the same process)
 >
 > AutoRest v2 core modules are called `@microsoft.azure/autorest-core` <br>
 > AutoRest v3 core modules are called `@autorest/core`<br>
-> 
+>
 >
 > See the [Managing Versions](#Managing-Versions) section below<br>
 > &nbsp;
@@ -60,15 +60,15 @@ If you want to pin to a specific version of an extension or to load one that is 
 > ---
 > AutoRest extension modules are installed into the user's `$HOME/.autorest` folder.<br>
 > Multiple instances of an extension module can be installed side-by-side<br>
-> 
+>
 > Extension modules are executed out-of-process (communicating via a JSON-RPC protocol over stdin/out). <br>
 > They can be written in any language (still must be packaged with npm!)<br>
 > We have plugins written in typescript, c#, python, java.
-> 
-> 
-> AutoRest v2 extension modules are generally called `@microsoft.azure/autorest.[LANGUAGE]` <br> 
+>
+>
+> AutoRest v2 extension modules are generally called `@microsoft.azure/autorest.[LANGUAGE]` <br>
 > AutoRest v3 extension modules are called `@autorest/[LANGUAGE]`<br>
-> 
+>
 >
 > See the [Managing Versions](#Managing-Versions) section below<br>
 > &nbsp;
@@ -97,7 +97,7 @@ Showing All Installed Extensions
 
 You can remove all the AutoRest core modules and extensions by using `--reset`:
 
-> `autorest --reset` 
+> `autorest --reset`
 ``` text
 AutoRest code generation utility [version: 3.0.6161; node: v10.15.1, max-memory: 8192 gb]
 (C) 2018 Microsoft Corporation.
