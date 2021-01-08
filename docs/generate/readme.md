@@ -5,6 +5,7 @@ on first how to generate a single file, then how to generate with a configuratio
 
 The command line usage of AutoRest boils down to the following:
 > `autorest [config-file.md | config-file.json | config-file.yaml] [additional options]`
+
 We'll be building upon this in our individual sections.
 
 ## Introduction: Flags
@@ -44,7 +45,7 @@ how to set options during generation by building up our command-line step-by-ste
 The first step here is to have your OpenAPI file definition of your client ([docs][openapi_introduction]) on how to do that).
 This example will use an example OpenAPI definition found [here][pets_swagger], so feel free to follow along with
 our sample code. To get things started, the command that starts AutoRest on the command line is `autorest`, so this is what our command line
-looks like to start with
+looks like to start with:
 
 ```
 autorest
