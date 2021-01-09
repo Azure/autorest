@@ -12,9 +12,9 @@ const getAppConfig = (cliConfig: CliConfig): ApiMockAppConfig => {
     include: cliConfig.include,
   };
 };
+
 const run = async () => {
   const cliConfig = parseArgs(hideBin(process.argv));
-  console.log(cliConfig);
   setLoggingLevelFromConfig(cliConfig);
   const app = new ApiMockApp(getAppConfig(cliConfig));
   await app.start();
