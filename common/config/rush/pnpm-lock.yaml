@@ -16,6 +16,7 @@ dependencies:
   '@rush-temp/schemas': 'file:projects/schemas.tgz'
   '@types/commonmark': 0.27.4
   '@types/express': 4.17.9
+  '@types/glob': 7.1.3
   '@types/jest': 26.0.16
   '@types/js-yaml': 4.0.0
   '@types/jsonpath': 0.2.0
@@ -804,7 +805,7 @@ packages:
   /@types/glob/7.1.3:
     dependencies:
       '@types/minimatch': 3.0.3
-      '@types/node': 12.7.2
+      '@types/node': 14.14.20
     dev: false
     resolution:
       integrity: sha512-SEYeGAIQIQX8NN6LDKprLjbrd5dARM5EXsd8GI/A5l0apYI1fGMWgPHSe4ZKL4eozlAyI+doUE9XbYS4xCkQ1w==
@@ -7128,6 +7129,7 @@ packages:
     dependencies:
       '@types/commonmark': 0.27.4
       '@types/express': 4.17.9
+      '@types/glob': 7.1.3
       '@types/js-yaml': 4.0.0
       '@types/node': 14.14.20
       '@types/yargs': 15.0.12
@@ -7147,7 +7149,7 @@ packages:
     dev: false
     name: '@rush-temp/md-mock-api'
     resolution:
-      integrity: sha512-WmqDz3Eh6ZqJGCCGd5kn4gWaH/CZN4+gh/6l5mht8kmR159kD1EO1imRifagc16xrPU2B2LPafXaucsUmFvhew==
+      integrity: sha512-hMlH0RArLayWWHAspDTHtQwfQUpnCw7LN0AmxgITVcRt0mYK5nwqXQo7ZnCnn7iVbqIyrvsxHd/QE44DHvmvFw==
       tarball: 'file:projects/md-mock-api.tgz'
     version: 0.0.0
   'file:projects/schemas.tgz':
@@ -7176,6 +7178,7 @@ specifiers:
   '@rush-temp/schemas': 'file:./projects/schemas.tgz'
   '@types/commonmark': ^0.27.0
   '@types/express': ~4.17.9
+  '@types/glob': ^7.1.3
   '@types/jest': 26.0.16
   '@types/js-yaml': ~4.0.0
   '@types/jsonpath': ^0.2.0

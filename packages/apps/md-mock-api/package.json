@@ -18,6 +18,7 @@
   "devDependencies": {
     "@types/commonmark": "^0.27.0",
     "@types/express": "~4.17.9",
+    "@types/glob": "^7.1.3",
     "@types/js-yaml": "~4.0.0",
     "@types/node": "~14.14.20",
     "@types/yargs": "~15.0.12",
