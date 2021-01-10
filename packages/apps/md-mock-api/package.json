@@ -9,7 +9,7 @@
   },
   "scripts": {
     "fix": "eslint  . --fix --ext .ts",
-    "lint": "eslint  . --ext .ts --max-warnings=0",
+    "lint": "eslint  ./src --ext .ts --max-warnings=0",
     "test": "echo 'No test'",
     "watch": "tsc -p . --watch",
     "build": "tsc -p ."

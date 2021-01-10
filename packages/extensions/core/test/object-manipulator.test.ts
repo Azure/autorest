@@ -10,7 +10,6 @@ import { createSandbox } from "@azure-tools/datastore";
 
 const safeEval = createSandbox();
 try {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   require("source-map-support").install();
 } catch {
   // no worries
