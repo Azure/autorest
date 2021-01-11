@@ -63,7 +63,7 @@ languages:
     outputPath: ../packages/extensions/core/test/regression/python
     oldArgs:
       - --version:~3.0.6320
-      - --use:autorest-python.5.5.0.tgz
+      - --use:autorest-python-5.5.0.tgz
     newArgs:
       - --version:../packages/extensions/core
   - language: typescript
