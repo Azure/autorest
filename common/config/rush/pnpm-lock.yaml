@@ -14,12 +14,14 @@ dependencies:
   '@rush-temp/core': 'file:projects/core.tgz'
   '@rush-temp/md-mock-api': 'file:projects/md-mock-api.tgz'
   '@rush-temp/schemas': 'file:projects/schemas.tgz'
+  '@types/body-parser': 1.19.0
   '@types/commonmark': 0.27.4
   '@types/express': 4.17.9
   '@types/glob': 7.1.3
   '@types/jest': 26.0.16
   '@types/js-yaml': 4.0.0
   '@types/jsonpath': 0.2.0
+  '@types/morgan': 1.9.2
   '@types/node': 14.14.20
   '@types/semver': 5.5.0
   '@types/source-map': 0.5.0
@@ -27,6 +29,7 @@ dependencies:
   '@types/z-schema': 3.24.0
   '@typescript-eslint/eslint-plugin': 4.12.0_f8181550f52dc153979b414865e5608c
   '@typescript-eslint/parser': 4.12.0_eslint@7.17.0+typescript@3.9.7
+  body-parser: 1.19.0
   chalk: 2.3.0
   commonmark: 0.27.0
   compare-versions: 3.6.0
@@ -42,12 +45,13 @@ dependencies:
   jsonpath: 1.0.0
   linq-es2015: 2.5.1
   mkdirp: 0.5.5
+  morgan: 1.10.0
   prettier: 2.2.1
   rimraf: 3.0.2
   safe-buffer: 5.2.0
   semver: 5.7.1
   source-map: 0.5.6
-  source-map-support: 0.5.13
+  source-map-support: 0.5.19
   static-link: 0.3.0
   ts-jest: 26.4.4_jest@26.6.3+typescript@3.9.7
   typescript: 3.9.7
@@ -862,6 +866,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
+  /@types/morgan/1.9.2:
+    dependencies:
+      '@types/node': 14.14.20
+    dev: false
+    resolution:
+      integrity: sha512-edtGMEdit146JwwIeyQeHHg9yID4WSolQPxpEorHmN3KuytuCHyn2ELNr5Uxy8SerniFbbkmgKMrGM933am5BQ==
   /@types/node/12.7.2:
     dev: false
     resolution:
@@ -1426,6 +1436,14 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-5T6P4xPgpp0YDFvSWwEZ4NoE3aM4QBQXDzmVbraCkFj8zHM+mba8SyqB5DbZWyR7mYHo6Y7BdQo3MoA4m0TeQg==
+  /basic-auth/2.0.1:
+    dependencies:
+      safe-buffer: 5.1.2
+    dev: false
+    engines:
+      node: '>= 0.8'
+    resolution:
+      integrity: sha512-NF+epuEdnUYVlGuhaxbbq+dvJttwLnGY+YixlXlME5KpQ5W3CnXA5cVTneY3SPbPDRkcjMbifrwmFYcClgOZeg==
   /bcrypt-pbkdf/1.0.2:
     dependencies:
       tweetnacl: 0.14.5
@@ -2098,6 +2116,12 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=
+  /depd/2.0.0:
+    dev: false
+    engines:
+      node: '>= 0.8'
+    resolution:
+      integrity: sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==
   /destroy/1.0.4:
     dev: false
     resolution:
@@ -4728,6 +4752,18 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
+  /morgan/1.10.0:
+    dependencies:
+      basic-auth: 2.0.1
+      debug: 2.6.9
+      depd: 2.0.0
+      on-finished: 2.3.0
+      on-headers: 1.0.2
+    dev: false
+    engines:
+      node: '>= 0.8.0'
+    resolution:
+      integrity: sha512-AbegBVI4sh6El+1gNwvD5YIck7nSA36weD7xvIxG4in80j/UoK8AEGaWnnz8v1GxonMCltmlNs5ZKbGvl9b1XQ==
   /move-concurrently/1.0.1:
     dependencies:
       aproba: 1.2.0
@@ -5003,6 +5039,12 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha1-IPEzZIGwg811M3mSoWlxqi2QaUc=
+  /on-headers/1.0.2:
+    dev: false
+    engines:
+      node: '>= 0.8'
+    resolution:
+      integrity: sha512-pZAE+FJLoyITytdqK0U5s+FIpjN0JP3OzFi/u8Rx+EV5/W+JTWGXG8xFzevE7AjBfDqHv/8vL8qQsIhHnqRkrA==
   /once/1.4.0:
     dependencies:
       wrappy: 1.0.2
@@ -6072,6 +6114,13 @@ packages:
     dev: false
     resolution:
       integrity: sha512-SHSKFHadjVA5oR4PPqhtAVdcBWwRYVd6g6cAXnIbRiIwc2EhPrTuKUBdSLvlEKyIP3GCf89fltvcZiP9MMFA1w==
+  /source-map-support/0.5.19:
+    dependencies:
+      buffer-from: 1.1.1
+      source-map: 0.6.1
+    dev: false
+    resolution:
+      integrity: sha512-Wonm7zOCIJzBGQdB+thsPar0kYuCIzYvxZwlBa87yi/Mdjv7Tip2cyVbLj5o0cFPN4EVkuTwb3GDDyUx2DGnGw==
   /source-map-url/0.4.0:
     dev: false
     resolution:
@@ -7065,14 +7114,14 @@ packages:
       rimraf: 3.0.2
       safe-buffer: 5.2.0
       semver: 5.7.1
-      source-map-support: 0.5.13
+      source-map-support: 0.5.19
       static-link: 0.3.0
       ts-jest: 26.4.4_jest@26.6.3+typescript@3.9.7
       typescript: 3.9.7
     dev: false
     name: '@rush-temp/autorest'
     resolution:
-      integrity: sha512-04/2YVrDiSDLhy9/+qrSr+F1r/jU+NgdIM8LW4lprWtcTTunGby6oGEp874NWBGDfqTDC/7wnoQ27eh19vJahQ==
+      integrity: sha512-m76kImpda5tQEJeiu4BLz4DZG0tzTfhYcJnDMhJD5t1DMc4K9+ZGcmvHE1XSgmoFzBzQkYh6q1HIRAat2uZbHw==
       tarball: 'file:projects/autorest.tgz'
     version: 0.0.0
   'file:projects/core.tgz':
@@ -7110,7 +7159,7 @@ packages:
       rimraf: 3.0.2
       safe-buffer: 5.2.0
       source-map: 0.5.6
-      source-map-support: 0.5.13
+      source-map-support: 0.5.19
       static-link: 0.3.0
       ts-jest: 26.4.4_jest@26.6.3+typescript@3.9.7
       typescript: 3.9.7
@@ -7122,19 +7171,22 @@ packages:
     dev: false
     name: '@rush-temp/core'
     resolution:
-      integrity: sha512-069iBIqN8IDUdXCfXy/PhFWAix/kUnO/BFCCNUbYmFzI/RFMb9xqp6wB6xlR3Xf1R7IYgXc+SidYcywQ7EPH9g==
+      integrity: sha512-zwOrw3yJwvDIXHlcw1qcNKyy7vkjjIf5ffP01JoYh46ggB31VvQRtrfkfzHX3B77Jt1NPnzN3vNPMucQr36JTw==
       tarball: 'file:projects/core.tgz'
     version: 0.0.0
   'file:projects/md-mock-api.tgz':
     dependencies:
+      '@types/body-parser': 1.19.0
       '@types/commonmark': 0.27.4
       '@types/express': 4.17.9
       '@types/glob': 7.1.3
       '@types/js-yaml': 4.0.0
+      '@types/morgan': 1.9.2
       '@types/node': 14.14.20
       '@types/yargs': 15.0.12
       '@typescript-eslint/eslint-plugin': 4.12.0_f8181550f52dc153979b414865e5608c
       '@typescript-eslint/parser': 4.12.0_eslint@7.17.0+typescript@3.9.7
+      body-parser: 1.19.0
       commonmark: 0.27.0
       eslint: 7.17.0
       eslint-plugin-import: 2.22.1_eslint@7.17.0
@@ -7142,14 +7194,16 @@ packages:
       eslint-plugin-unicorn: 25.0.1_eslint@7.17.0
       express: 4.17.1
       js-yaml: 4.0.0
+      morgan: 1.10.0
       prettier: 2.2.1
+      source-map-support: 0.5.19
       typescript: 3.9.7
       winston: 3.3.3
       yargs: 16.2.0
     dev: false
     name: '@rush-temp/md-mock-api'
     resolution:
-      integrity: sha512-hMlH0RArLayWWHAspDTHtQwfQUpnCw7LN0AmxgITVcRt0mYK5nwqXQo7ZnCnn7iVbqIyrvsxHd/QE44DHvmvFw==
+      integrity: sha512-TtG3KhVytDtk1xwqke9Ygl/v6EHwVJOGt4jaiYHbN2NFRhNCDis0gT53dLz841kppb03rUgfTH1kJMjNyhTDPQ==
       tarball: 'file:projects/md-mock-api.tgz'
     version: 0.0.0
   'file:projects/schemas.tgz':
@@ -7176,12 +7230,14 @@ specifiers:
   '@rush-temp/core': 'file:./projects/core.tgz'
   '@rush-temp/md-mock-api': 'file:./projects/md-mock-api.tgz'
   '@rush-temp/schemas': 'file:./projects/schemas.tgz'
+  '@types/body-parser': ^1.19.0
   '@types/commonmark': ^0.27.0
   '@types/express': ~4.17.9
   '@types/glob': ^7.1.3
   '@types/jest': 26.0.16
   '@types/js-yaml': ~4.0.0
   '@types/jsonpath': ^0.2.0
+  '@types/morgan': ^1.9.2
   '@types/node': ~14.14.20
   '@types/semver': 5.5.0
   '@types/source-map': 0.5.0
@@ -7189,6 +7245,7 @@ specifiers:
   '@types/z-schema': ^3.16.31
   '@typescript-eslint/eslint-plugin': ^4.12.0
   '@typescript-eslint/parser': ^4.12.0
+  body-parser: ^1.19.0
   chalk: 2.3.0
   commonmark: ^0.27.0
   compare-versions: ^3.4.0
@@ -7204,12 +7261,13 @@ specifiers:
   jsonpath: 1.0.0
   linq-es2015: ^2.4.25
   mkdirp: ~0.5.1
+  morgan: ^1.10.0
   prettier: ~2.2.1
   rimraf: ~3.0.0
   safe-buffer: 5.2.0
   semver: ^5.5.1
   source-map: 0.5.6
-  source-map-support: 0.5.13
+  source-map-support: ^0.5.19
   static-link: ^0.3.0
   ts-jest: ~26.4.4
   typescript: ~3.9.7
