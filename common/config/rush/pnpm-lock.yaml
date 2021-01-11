@@ -22,6 +22,7 @@ dependencies:
   '@types/js-yaml': 4.0.0
   '@types/jsonpath': 0.2.0
   '@types/morgan': 1.9.2
+  '@types/mustache': 4.1.0
   '@types/node': 14.14.20
   '@types/semver': 5.5.0
   '@types/source-map': 0.5.0
@@ -46,6 +47,7 @@ dependencies:
   linq-es2015: 2.5.1
   mkdirp: 0.5.5
   morgan: 1.10.0
+  mustache: 4.1.0
   prettier: 2.2.1
   rimraf: 3.0.2
   safe-buffer: 5.2.0
@@ -872,6 +874,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-edtGMEdit146JwwIeyQeHHg9yID4WSolQPxpEorHmN3KuytuCHyn2ELNr5Uxy8SerniFbbkmgKMrGM933am5BQ==
+  /@types/mustache/4.1.0:
+    dev: false
+    resolution:
+      integrity: sha512-dj4gq0BwsONZw/jqEf1qDBkAhAdBfIb7K+RDEQQvGfd6uTkfzKNxjz6NCeg50bveU0ydi8DruGp/9+FgIxli5w==
   /@types/node/12.7.2:
     dev: false
     resolution:
@@ -4795,6 +4801,11 @@ packages:
     dev: false
     resolution:
       integrity: sha512-0ZIR9PasPxGXmRsEF8jsDzndzHDj7tIav+JUmvIFB/WHswliFnquxECT/De7GR4yg99ky/NlRKJT82G1y271bw==
+  /mustache/4.1.0:
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-0FsgP/WVq4mKyjolIyX+Z9Bd+3WS8GOwoUTyKXT5cTYMGeauNTi2HPCwERqseC1IHAy0Z7MDZnJBfjabd4O8GQ==
   /nanomatch/1.2.13:
     dependencies:
       arr-diff: 4.0.0
@@ -7182,6 +7193,7 @@ packages:
       '@types/glob': 7.1.3
       '@types/js-yaml': 4.0.0
       '@types/morgan': 1.9.2
+      '@types/mustache': 4.1.0
       '@types/node': 14.14.20
       '@types/yargs': 15.0.12
       '@typescript-eslint/eslint-plugin': 4.12.0_f8181550f52dc153979b414865e5608c
@@ -7195,6 +7207,7 @@ packages:
       express: 4.17.1
       js-yaml: 4.0.0
       morgan: 1.10.0
+      mustache: 4.1.0
       prettier: 2.2.1
       source-map-support: 0.5.19
       typescript: 3.9.7
@@ -7203,7 +7216,7 @@ packages:
     dev: false
     name: '@rush-temp/md-mock-api'
     resolution:
-      integrity: sha512-TtG3KhVytDtk1xwqke9Ygl/v6EHwVJOGt4jaiYHbN2NFRhNCDis0gT53dLz841kppb03rUgfTH1kJMjNyhTDPQ==
+      integrity: sha512-9W0BT1Yim+x6Qs5NnJe1O35o9iUq91WmMCyH6YpkWPoOwlMvmybPbKgnpozB4cgejzBMFhE/K76LWqOu5JqS0w==
       tarball: 'file:projects/md-mock-api.tgz'
     version: 0.0.0
   'file:projects/schemas.tgz':
@@ -7238,6 +7251,7 @@ specifiers:
   '@types/js-yaml': ~4.0.0
   '@types/jsonpath': ^0.2.0
   '@types/morgan': ^1.9.2
+  '@types/mustache': ^4.1.0
   '@types/node': ~14.14.20
   '@types/semver': 5.5.0
   '@types/source-map': 0.5.0
@@ -7262,6 +7276,7 @@ specifiers:
   linq-es2015: ^2.4.25
   mkdirp: ~0.5.1
   morgan: ^1.10.0
+  mustache: ^4.1.0
   prettier: ~2.2.1
   rimraf: ~3.0.0
   safe-buffer: 5.2.0
