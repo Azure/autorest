@@ -52,6 +52,6 @@ jobs:
     displayName: Lint docs
     steps:
       - script: |
-          npm install -g markdown-link-check
+          sudo npm install -g markdown-link-check
           find docs -name "*.md" | xargs markdown-link-check
-        displayName: Lint markdown
+        displayName: Find 
