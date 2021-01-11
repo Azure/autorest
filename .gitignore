@@ -222,7 +222,6 @@ Samples/**/*.map
 **/dist/
 src/*/nm
 /nm/
-*.tgz
 
 
 # Logs
@@ -269,9 +268,6 @@ jspm_packages/
 
 # Optional REPL history
 .node_repl_history
-
-# Output of 'npm pack'
-*.tgz
 
 # Yarn Integrity file
 .yarn-integrity
