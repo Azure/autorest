@@ -53,5 +53,5 @@ jobs:
     steps:
       - script: |
           sudo npm install -g markdown-link-check
-          find docs -name "*.md" | xargs markdown-link-check
+          find docs -name "*.md" -exec markdown-link-check {} \;
         displayName: Find 
