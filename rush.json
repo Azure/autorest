@@ -30,7 +30,7 @@
     },
     {
       "packageName": "md-mock-api",
-      "projectFolder": "packages/apps/md-mock-api",
+      "projectFolder": "packages/tools/md-mock-api",
       "reviewCategory": "production",
       "shouldPublish": false
     },
