@@ -8,4 +8,5 @@ export interface TemplateContext {
 
 export interface RequestContext {
   baseUrl: string;
+  headers: { [key: string]: string | string[] | undefined };
 }

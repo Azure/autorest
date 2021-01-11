@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import mustache from "mustache";
 import { logger } from "../logger";
 import { MockRouteDefinition } from "../models";
 import { TemplateContext } from "../models/template-context";
 import { validateRequest } from "./request-validation";
+import { processResponseHeaders, render } from "./response-processor";
 
 export const processRequest = (route: MockRouteDefinition, request: Request, response: Response): void => {
   const requestDef = route.request;
@@ -41,19 +41,7 @@ const buildTemplateContext = (request: Request): TemplateContext => {
   return {
     request: {
       baseUrl: `${request.protocol}://${request.get("host")}`,
+      headers: request.headers,
     },
   };
 };
-
-const processResponseHeaders = (
-  headers: { [key: string]: string },
-  context: TemplateContext,
-): { [key: string]: string } => {
-  const result: { [key: string]: string } = {};
-  for (const [key, value] of Object.entries(headers)) {
-    result[key] = render(value, context);
-  }
-  return result;
-};
-
-const render = (template: string, context: TemplateContext) => mustache.render(template, context);
