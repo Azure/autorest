@@ -6,7 +6,7 @@ When running into an AutoRest issues actually running the AutoRest program, your
 
 ## Generation Errors
 
-There are two broad kinds of errors you can run into when generating: one kind is thrown earlier in the AutoRest pipeline and has to do with malformed swaggers (see [our main docs][main_docs] for more information). The other kind is thrown by the language generators.
+There are two broad kinds of errors you can run into when generating: one kind is thrown earlier in the AutoRest pipeline and has to do with malformed swaggers (see [our OpenAPI docs][main_docs] for more information). The other kind is thrown by the language generators.
 
 The general AutoRest errors are thrown like this, and are commonly due to swagger issues.
 
@@ -23,7 +23,7 @@ If you're error does not look like this, refer to the docs in our language gener
 - [Typescript][typescript_generation]
 
 
-Both of these issues should give you enough information to fix the error. If not, please let us know in either the [main repo][autorest_issues], or in the [Python repo][autorest_python_issues]. Also let us know if you believe
+These issues should give you enough information to fix the error. If not, please let us know in either the [main repo][autorest_issues], or in the language-specific repos. Also let us know if you believe
 there are erroneous errors being thrown.
 
 ## Debugging
@@ -38,12 +38,12 @@ If you would like to actually debug through a language generator's code, see our
 - [Typescript][typescript_debug]
 
 <!-- LINKS -->
-[main_docs]: https://github.com/Azure/autorest/tree/master/docs/generate/troubleshooting.md
+[main_docs]: https://github.com/Azure/autorest/blob/master/docs/openapi/readme.md
 [autorest_issues]: https://github.com/Azure/autorest/issues
 [autorest_python_issues]: https://github.com/Azure/autorest.python/issues
 [main_debugging]: https://github.com/Azure/autorest/tree/master/docs/generate/troubleshooting.md#debugging
 [autorest_python_repo]: https://github.com/Azure/autorest.python/tree/autorestv3
-[debugging_flags]: generate/flags.md#debugging-flags
+[debugging_flags]: https://github.com/Azure/autorest/blob/master/docs/generate/flags.md#debugging-flags
 [python_generation]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/troubleshooting.md#generation-errors
 [java_generation]: https://github.com/Azure/autorest.java/tree/v4/docs/troubleshooting.md#generation-errors
 [csharp_generation]: https://github.com/Azure/autorest.csharp/tree/v3/docs/troubleshooting.md#generation-errors

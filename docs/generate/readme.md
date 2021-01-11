@@ -34,7 +34,7 @@ For a full-set of flags, go to our [flag index][flags]
 |`--output-folder=DIRECTORY`|The location for generated files. If not specified, uses `./generated` as the default|
 |`--clear-output-folder`|Clear all contents from our output folder before outputting your newly generated code into that folder|
 |`--namespace=NAMESPACE`|sets the namespace to use for the generated code|
-|`--add-credential`|If specified, the generated client will require a credential to make network calls. See [TODO] for information on how to authenticate to our generated clients|
+|`--add-credential`|If specified, the generated client will require a credential to make network calls. See [our language docs][client] for information on how to authenticate to our generated clients.|
 |`--tag=VALUE`|Preferred way to have conditional configurations. I.e., in my configuration file, I can set the `input-file` equal to different values depending on the `VALUE` passed through the `tag` flag. See our [Adding Tags When Generating](#adding-tags-when-generating "Adding Tags When Generating") section for more information|
 
 ## Most Basic: Generating with a Single File on the Command Line
@@ -217,7 +217,7 @@ A common occurrence is wanting to generate your SDK in multiple languages. Since
 for each language. In this example, we will show how to generate in both Java and Python. In situations like this, it is preferred to have one main
 language agnostic configuration file titled `readme.md`, where you list the configuration you want regardless of language. Then, you create a configuration file for every language you want with the language name in the path. In this case, we would create a `readme.java.md`, and a `readme.python.md`. These configuration files will be linked to from the main `readme.md`.
 
-Let's start with the configurations we want in the main `readme.md`. Following from the [previous example](#adding-tags-when-generating), we want to generate [pets.json](../../openapi/examples/pets.json) if `--tag=v1` is specified on the command line, and [petsv2.json](../../openapi/examples/petsv2.json) if `--tag=v2` is specified, regardless of which language we're generating in. We also need to link to our `readme.python.md` and `readme.java.md` from this main readme.
+Let's start with the configurations we want in the main `readme.md`. Following from the [previous example](#adding-tags-when-generating), we want to generate [pets.json][pets_swagger] if `--tag=v1` is specified on the command line, and [petsv2.json][pets_v2_swagger] if `--tag=v2` is specified, regardless of which language we're generating in. We also need to link to our `readme.python.md` and `readme.java.md` from this main readme.
 
 This gives us the following `readme.md`:
 
@@ -337,7 +337,7 @@ If we want to generate `v1` code in either language, all that's needed is to tac
 
 ## Generating Management Plane Code
 
-There are a couple of steps that are more [management-plane](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane#control-plane) specific, which this section will go into.
+There are a couple of steps that are more [management-plane][mgmt_plane] specific, which this section will go into.
 
 The biggest thing to keep in mind when generating management plane code is using the flag `--azure-arm`. This tells the language generators you want management plane code. Since management plane code is more standardized, we are able to generate more specialized code. Setting this `azure-arm` flag also has implications for other flags (i.e., it forces `head-as-boolean` to be true). See our [flag index][flags] for more information.
 
@@ -345,15 +345,15 @@ The OpenAPI definitions for management plane code also live in the `resource-man
 
 ## Generating with Directives
 
-Directives are used to change the code generated from your OpenAPI definition. For example, if you want to change the name of a parameter in an operation without changing the swagger. See [our directives section](./directives.md) if this is something you're interested in.
+Directives are used to change the code generated from your OpenAPI definition. For example, if you want to change the name of a parameter in an operation without changing the swagger. See [our directives section][directives] if this is something you're interested in.
 
 ## Generating Multi API Code
 
-Only Python supports generating multiapi code, see [the Python docs](https://github.com/Azure/autorest.python/blob/autorestv3/docs/generate/readme.md) for how to generate.
+Only Python supports generating multiapi code, see [the Python docs][python_multiapi] for how to generate.
 
 ## Index of Flags
 
-See [here](.flags.md) for a complete index of flags.
+See [here][flags] for a complete index of flags.
 
 ## Generate from Private GitHub Repos
 
@@ -382,17 +382,22 @@ For language-specific information about generation, please refer to our language
 - [C#][csharp]
 
 <!-- LINKS -->
-[flags]: ./flags.md
-[openapi_docs]: ../openapi/readme.md
-[pets_swagger]: ../openapi/examples/pets.json
-[basic_example]: ./examples/basic/readme.md
-[pets_v2_swagger]: ./openapi/examples/pets.json
-[tags_readme]: ./examples/tags/readme.md
+[flags]: https://github.com/Azure/autorest/blob/master/docs/generate/flags.md
+[openapi_docs]: https://github.com/Azure/autorest/blob/master/docs/openapi/readme.md
+[pets_swagger]: https://github.com/Azure/autorest/blob/master/docs/openapi/examples/pets.json
+[basic_example]: https://github.com/Azure/autorest/blob/master/docs/generate/examples/basic/readme.md
+[pets_v2_swagger]: https://github.com/Azure/autorest/blob/master/docs/openapi/examples/petsv2.json
+[tags_readme]: https://github.com/Azure/autorest/blob/master/docs/generate/examples/tags/readme.md
 [azure_rest_api_specs]: https://github.com/Azure/azure-rest-api-specs
 [mgmt_storage]: https://github.com/Azure/azure-rest-api-specs/tree/master/specification/storage/resource-manager
 [how_autorest]: ./how-autorest-generates-code-from-openapi.md
-[python]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/generate
-[java]: https://github.com/Azure/autorest.java/tree/v4/docs/generate
-[csharp]: https://github.com/Azure/autorest.csharp/tree/v3/docs/generate
+[python]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/generate/readme.md
+[java]: https://github.com/Azure/autorest.java/tree/v4/docs/generate/readme.md
+[csharp]: https://github.com/Azure/autorest.csharp/tree/v3/docs/generate/readme.md
 [azure_sdk_for_python]: https://github.com/Azure/azure-sdk-for-python/tree/master/sdk
 [azure_sdk_for_java]: https://github.com/Azure/azure-sdk-for-java/tree/master/sdk
+[client]: https://github.com/Azure/autorest/blob/master/docs/client/readme.md
+[openapi_introduction]: https://github.com/Azure/autorest/blob/master/docs/openapi/readme.md
+[python_multiapi]: https://github.com/Azure/autorest.python/blob/autorestv3/docs/generate/multiapi.md
+[mgmt_plane]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane#control-plane
+[directives]: https://github.com/Azure/autorest/blob/master/docs/generate/directives.md

@@ -904,9 +904,6 @@ Task<IPage<int?>> ListAsync(ISimpleAPIClient operations, CancellationToken cance
 IPage<int?>       ListNext(ISimpleAPIClient operations, string nextPageLink);
 Task<IPage<int?>> ListNextAsync(ISimpleAPIClient operations, string nextPageLink, CancellationToken cancellationToken);
 ```
-Full code:
-[example1.yaml](x-ms-pageable/example1.yaml),
-[example1.cs](x-ms-pageable/example1.cs)
 
 **Example 2: Customized**
 
@@ -951,9 +948,6 @@ Task<IPage<int?>> ListAsync(ISimpleAPIClient operations, CancellationToken cance
 IPage<int?>       ListMore(ISimpleAPIClient operations, string nextPageLink);
 Task<IPage<int?>> ListMoreAsync(ISimpleAPIClient operations, string nextPageLink, CancellationToken cancellationToken);
 ```
-Full code:
-[example2.yaml](x-ms-pageable/example2.yaml),
-[example2.cs](x-ms-pageable/example2.cs)
 
 **Example 3: Single page result**
 
@@ -993,10 +987,6 @@ Generated signatures:
 IEnumerable<int?>       List(ISimpleAPIClient operations);
 Task<IEnumerable<int?>> ListAsync(ISimpleAPIClient operations, CancellationToken cancellationToken);
 ```
-Full code:
-[example3.yaml](x-ms-pageable/example3.yaml),
-[example3.cs](x-ms-pageable/example3.cs)
-
 
 ## x-ms-long-running-operation
 Some requests like creating/deleting a resource cannot be carried out immediately. In such a situation, the server sends a 201 (Created) or 202 (Accepted) and provides a link to monitor the status of the request. When such an operation is marked with extension `"x-ms-long-running-operation": true`, in OpenAPI, the generated code will know how to fetch the link to monitor the status. It will keep on polling at regular intervals till the request reaches one of the terminal states: Succeeded, Failed, or Canceled.
