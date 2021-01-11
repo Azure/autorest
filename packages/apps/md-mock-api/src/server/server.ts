@@ -3,7 +3,7 @@ import express from "express";
 import morgan from "morgan";
 import { logger } from "../logger";
 import { MockRouteDefinition } from "../models";
-import { processRequest, RequestExt } from "./request-processor";
+import { processRequest } from "./request-processor";
 export interface MockApiServerConfig {
   port: number;
 }
@@ -26,7 +26,7 @@ export class MockApiServer {
     const { request } = route;
     logger.info(`Registering route ${request.method} ${request.url}`);
     this.app.route(request.url)[request.method](bodyParser.raw({ type: "*/*" }), (req, res) => {
-      processRequest(route, req as RequestExt, res);
+      processRequest(route, req, res);
     });
   }
 
