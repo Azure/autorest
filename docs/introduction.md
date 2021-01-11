@@ -13,7 +13,7 @@ The main [swagger docs][swagger_basic_structure] have a good example for the bas
 
 ## What is AutoRest?
 
-AutoRest is a tool that provides a code generation framework for converting OpenAPI 2.0 and 3.0 specifications into client libraries for the services described by those specifications. It was developed by Microsoft around the time the OpenAPI Initiative was formed so that Azure service teams could start producing generated client libraries from new Swagger and OpenAPI 2.0 specifications. There are a few extensions that
+AutoRest is a tool that provides a code generation framework for converting OpenAPI 2.0 and 3.0 specifications into client libraries for the services described by those specifications. It was developed by Microsoft around the time the OpenAPI Initiative was formed so that Azure service teams could start producing generated client libraries from new Swagger and OpenAPI 2.0 specifications. AutoRest has created a [few extensions][extensions] to augment swagger functionality (a lot were created due to OpenAPI2 shortcomings).
 
 At the core of AutoRest is a flexible pipeline where a series of pre-configured phases transform and merge various OpenAPI input files to produce a “code model” that can be consumed by a language-specific code generator. These code generator extensions will interpret the code model and produce code that aligns with the design guidelines for each language. The generated code for a language will use the corresponding Azure Core implementation so that we can provide configurable behavior for how HTTP requests are made in the generated code.
 
@@ -27,3 +27,4 @@ See our [landing page][landing_page] to get started with writing your OpenAPI de
 [swagger_docs]: https://swagger.io/docs/
 [openapi_docs]: ./openapi/readme.md
 [landing_page]: readme.md
+[extensions]: extensions/readme.md

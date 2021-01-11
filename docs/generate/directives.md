@@ -95,7 +95,8 @@ We'll go over both in this example. In both cases, we'll be looking to rename pa
 ```
 
 Referring to the parameter's location in the operation, our filter would be `where: '$.paths["/vm"].get.parameters[0]'`. We're changing the name of the parameter,
-so our transform would apply to the `name` field (or the [`x-ms-client-name`] field if we've defined one for the parameter). This becomes
+so you could apply your transform to the `name` field. However, it's better to change the [`x-ms-client-name`][x_ms_client_name] field instead, since there could be
+this field defined for your parameter, and this field overrides the `name` field. This becomes
 
 ``` yaml
 ### Directive renaming "getVirtualMachine"'s parameter "id" to "identifier".
@@ -103,7 +104,7 @@ directive:
     from: swagger-document
     where: '$.paths["/vm"].get.parameters[0]'
     transform: >
-        $["name"] = "identifier";
+        $["x-ms-client-name"] = "identifier";
 ```
 
 #### Parameter defined in the "Parameters" section
@@ -128,7 +129,7 @@ directive:
     from: swagger-document
     where: '$.parameters["Id"]'
     transform: >
-        $["name"] = "identifier";
+        $["x-ms-client-name"] = "identifier";
 ```
 
 ### Model Rename
@@ -232,7 +233,7 @@ directive:
     from: swagger-document
     where: '$.definitions.VM.properties.virtualMachineType.x-ms-enum.values[0]'
     transform: >
-        $["name"] = "AzureVirtualMachine";
+        $["x-ms-client-name"] = "AzureVirtualMachine";
 ```
 
 Now, we would access the enum through `VirtualMachineTypes.AzureVirtualMachine` instead of `VirtualMachineTypes.AzureVM`.
@@ -241,7 +242,7 @@ Now, we would access the enum through `VirtualMachineTypes.AzureVirtualMachine` 
 
 Changing a description is very similar whether you're changing an operation's description or a model's description etc. The only thing that varies is how to refer to the object whose description your changing. Since this is covered in the previous examples, we won't do separate sections for this. Instead, we will show you how to change a property's description, which can be easily extended to another object, i.e. an operation.
 
-Let's say we [renamed the property](#property-rename "renamed the property") from `id` to `identifier`, and we want to change all references in the  description of `id` to `identifier`:
+Let's say we [renamed the property](#property-rename "Property Rename") from `id` to `identifier`, and we want to change all references in the  description of `id` to `identifier`:
 
 ```yaml
 ...
