@@ -1,8 +1,10 @@
-import { type } from "os";
 import { Request, Response } from "express";
+import yaml from "js-yaml";
 import { logger } from "../logger";
-import { MockRouteDefinition, MockRouteRequestDefinition } from "../models";
-
+import { MockRouteDefinition } from "../models";
+import { TemplateContext } from "../models/template-context";
+import { validateRequest } from "./request-validation";
+import { processResponseHeaders, render } from "./response-processor";
 export const processRequest = (route: MockRouteDefinition, request: Request, response: Response): void => {
   const requestDef = route.request;
   try {
@@ -19,55 +21,28 @@ export const processRequest = (route: MockRouteDefinition, request: Request, res
     return;
   }
 
+  const templateContext = buildTemplateContext(request);
+  logger.debug(`Template context:\n${yaml.dump(templateContext)}`);
   const responseDef = route.response;
-  response.status(responseDef.status).set(responseDef.headers);
+
+  response.status(responseDef.status);
+  if (responseDef.headers) {
+    response.set(processResponseHeaders(responseDef.headers, templateContext));
+  }
   if (responseDef.body) {
     if (responseDef.body.contentType) {
       response.contentType(responseDef.body.contentType);
     }
-    response.send(responseDef.body.content);
+    response.send(render(responseDef.body.content, templateContext));
   }
   response.end();
 };
 
-class ValidationError extends Error {
-  constructor(message: string, public expected: string, public actual: string) {
-    super(message);
-  }
-
-  public toJSON() {
-    return JSON.stringify({ message: this.message, expected: this.expected, actual: this.actual });
-  }
-}
-
-/**
- *
- * @param definition Definition.
- * @param request Express.js request.
- */
-const validateRequest = (definition: MockRouteRequestDefinition, request: Request) => {
-  if (definition.body) {
-    const actualBody = request.body.toString();
-    const expectedBody = definition.body.content;
-    if (expectedBody == null ? !isBodyNull(request.body) : actualBody !== definition.body.content) {
-      throw new ValidationError("Body provided doesn't match epxected body.", definition.body.content, actualBody);
-    }
-  }
-};
-
-const isBodyNull = (body: Buffer | unknown) => {
-  if (body == null) {
-    return true;
-  }
-
-  if (body instanceof Buffer) {
-    return body.toString() === "";
-  }
-
-  if (typeof body === "object") {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    return Object.keys(body as object).length === 0;
-  }
-
-  return false;
+const buildTemplateContext = (request: Request): TemplateContext => {
+  return {
+    request: {
+      baseUrl: `${request.protocol}://${request.get("host")}`,
+      headers: request.headers,
+    },
+  };
 };

@@ -29,6 +29,7 @@ export const parseArgs = (argv: string[]): CliConfig => {
       description: "Run with given logging level.",
     })
     .option("port", {
+      alias: "p",
       type: "number",
       description: "Port where to host the server",
       default: DEFAULT_PORT,
