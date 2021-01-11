@@ -7,7 +7,7 @@ This is highly-language specific, so please refer to the documentation we have f
 - [Typescript][typescript]
 
 <!--LINKS-->
-[python]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/client
-[java]: https://github.com/Azure/autorest.java/tree/v4/docs/client
-[csharp]: https://github.com/Azure/autorest.csharp/tree/v3/docs/client
-[typescript]: https://github.com/Azure/autorest.typescript/tree/v6/docs/client
+[python]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/client/readme.md
+[java]: https://github.com/Azure/autorest.java/tree/v4/docs/client/readme.md
+[csharp]: https://github.com/Azure/autorest.csharp/tree/v3/docs/client/readme.md
+[typescript]: https://github.com/Azure/autorest.typescript/tree/v6/docs/client/readme.md
