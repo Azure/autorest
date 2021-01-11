@@ -1,0 +1,30 @@
+root: true
+plugins:
+  - "@typescript-eslint"
+  - prettier
+  - import
+  - unicorn
+env:
+  browser: true
+  es6: true
+  node: true
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
+rules:
+  no-console: warn
+
+  "@typescript-eslint/no-empty-interface": off
+  "@typescript-eslint/no-unused-vars": off
+  import/no-default-export: warn
+  import/no-self-import: warn # This cause many circular dependency issues with index files.
+  import/no-internal-modules: off
+  import/order:
+    - warn
+    - groups: ["builtin", "external", "parent", "sibling", "index"]
+      alphabetize:
+        order: "asc"
+        caseInsensitive: true
+  unicorn/filename-case: warn
+  prettier/prettier: warn
+parser: "@typescript-eslint/parser"

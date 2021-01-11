@@ -29,6 +29,12 @@
       "shouldPublish": true
     },
     {
+      "packageName": "md-mock-api",
+      "projectFolder": "packages/tools/md-mock-api",
+      "reviewCategory": "production",
+      "shouldPublish": false
+    },
+    {
       "packageName": "@autorest/schemas",
       "projectFolder": "packages/libs/autorest-schemas",
       "reviewCategory": "production",
