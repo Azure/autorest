@@ -8,12 +8,16 @@ export interface MockApiServerConfig {
   port: number;
 }
 
+const loggerstream = {
+  write: (message: string) => logger.info(message),
+};
+
 export class MockApiServer {
   private app: express.Application;
 
   constructor(private config: MockApiServerConfig) {
     this.app = express();
-    this.app.use(morgan("dev"));
+    this.app.use(morgan("dev", { stream: loggerstream }));
   }
 
   public start(): void {
