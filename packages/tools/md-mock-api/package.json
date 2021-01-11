@@ -10,9 +10,9 @@
   "scripts": {
     "fix": "eslint  . --fix --ext .ts",
     "lint": "eslint  ./src --ext .ts --max-warnings=0",
-    "test": "echo 'No test'",
-    "watch": "tsc -p . --watch",
-    "build": "tsc -p ."
+    "test": "jest --watchAll",
+    "watch": "tsc -p ./tsconfig.build.json --watch",
+    "build": "tsc -p ./tsconfig.build.json"
   },
   "author": "",
   "license": "MIT",
@@ -21,10 +21,12 @@
     "@types/commonmark": "^0.27.0",
     "@types/express": "~4.17.9",
     "@types/glob": "^7.1.3",
+    "@types/jest": "^26.0.20",
     "@types/js-yaml": "~4.0.0",
     "@types/morgan": "^1.9.2",
     "@types/mustache": "^4.1.0",
     "@types/node": "~14.14.20",
+    "@types/supertest": "^2.0.10",
     "@types/yargs": "~15.0.12",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
@@ -33,16 +35,19 @@
     "eslint-plugin-prettier": "~3.1.4",
     "eslint-plugin-unicorn": "~25.0.1",
     "prettier": "~2.2.1",
+    "supertest": "^6.0.1",
     "typescript": "~3.9.7"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "commonmark": "^0.27.0",
     "express": "~4.17.1",
+    "jest": "^26.6.3",
     "js-yaml": "~4.0.0",
     "morgan": "^1.10.0",
     "mustache": "^4.1.0",
     "source-map-support": "^0.5.19",
+    "ts-jest": "^26.4.4",
     "winston": "~3.3.3",
     "yargs": "~16.2.0"
   }
