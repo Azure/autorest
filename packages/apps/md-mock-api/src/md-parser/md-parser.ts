@@ -270,7 +270,7 @@ const extractBodyDefinitionFromTreeNode = (node: MarkdownTreeNode, fromSection: 
   const sectionName = `${fromSection} > Body`;
   const code = extractCodeBlockFromTreeNode(node, sectionName);
   return {
-    content: code.content,
+    content: code.content.trim(),
     contentType: getContentTypeFromLanguage(code.language, sectionName),
   };
 };

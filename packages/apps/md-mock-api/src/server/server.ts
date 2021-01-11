@@ -1,7 +1,9 @@
+import bodyParser from "body-parser";
 import express from "express";
+import morgan from "morgan";
 import { logger } from "../logger";
 import { MockRouteDefinition } from "../models";
-
+import { processRequest, RequestExt } from "./request-processor";
 export interface MockApiServerConfig {
   port: number;
 }
@@ -11,6 +13,7 @@ export class MockApiServer {
 
   constructor(private config: MockApiServerConfig) {
     this.app = express();
+    this.app.use(morgan("dev"));
   }
 
   public start(): void {
@@ -20,23 +23,10 @@ export class MockApiServer {
   }
 
   public add(route: MockRouteDefinition): void {
-    const { request, response } = route;
+    const { request } = route;
     logger.info(`Registering route ${request.method} ${request.url}`);
-    this.app.route(request.url)[request.method]((_, res) => {
-      logger.debug(`Starting ${request.method.toUpperCase()} ${request.url}`)
-
-      res
-        .status(response.status)
-        .set(response.headers);
-        if(response.body) {
-
-          if(response.body.contentType) {
-            res.contentType(response.body.contentType);
-          }
-          res.send(response.body.content);
-        }
-        logger.info(`${request.method.toUpperCase()} ${request.url} ${response.status}`)
-
+    this.app.route(request.url)[request.method](bodyParser.raw({ type: "*/*" }), (req, res) => {
+      processRequest(route, req as RequestExt, res);
     });
   }
 
