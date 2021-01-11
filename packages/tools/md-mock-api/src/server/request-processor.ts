@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
+import yaml from "js-yaml";
 import { logger } from "../logger";
 import { MockRouteDefinition } from "../models";
 import { TemplateContext } from "../models/template-context";
 import { validateRequest } from "./request-validation";
 import { processResponseHeaders, render } from "./response-processor";
-
 export const processRequest = (route: MockRouteDefinition, request: Request, response: Response): void => {
   const requestDef = route.request;
   try {
@@ -22,6 +22,7 @@ export const processRequest = (route: MockRouteDefinition, request: Request, res
   }
 
   const templateContext = buildTemplateContext(request);
+  logger.debug(`Template context:\n${yaml.dump(templateContext)}`);
   const responseDef = route.response;
 
   response.status(responseDef.status);

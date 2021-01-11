@@ -14,7 +14,10 @@ Context available to use can be seen in [TemplateContext](../src/models/template
 ```yaml
 status: 202
 headers:
-  MyCustomHeader: "{{request.headers['MyCustomHeader']}}"
+  MyCustomHeader: "{{request.headers['mycustomheader']}}"
   Azure-AsyncOperation: "{{{request.baseUrl}}}/lro/LROPostDoubleHeadersFinalLocationGet/asyncOperationUrl"
   Location: "{{{request.baseUrl}}}/lro/LROPostDoubleHeadersFinalLocationGet/location"
 ```
+
+Note: 
+- Headers are all lowercase.
