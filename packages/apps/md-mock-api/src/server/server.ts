@@ -23,11 +23,20 @@ export class MockApiServer {
     const { request, response } = route;
     logger.info(`Registering route ${request.method} ${request.url}`);
     this.app.route(request.url)[request.method]((_, res) => {
+      logger.debug(`Starting ${request.method.toUpperCase()} ${request.url}`)
+
       res
         .status(response.status)
-        .set(response.headers)
-        .contentType(response.body.contentType)
-        .send(response.body.content);
+        .set(response.headers);
+        if(response.body) {
+
+          if(response.body.contentType) {
+            res.contentType(response.body.contentType);
+          }
+          res.send(response.body.content);
+        }
+        logger.info(`${request.method.toUpperCase()} ${request.url} ${response.status}`)
+
     });
   }
 

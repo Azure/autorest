@@ -15,10 +15,10 @@ export interface MockRouteRequestDefinition {
 export interface MockRouteResponseDefinition {
   status: number;
   headers?: { [key: string]: string };
-  body: MockBody;
+  body?: MockBody;
 }
 
 export interface MockBody {
-  contentType: string;
+  contentType?: string;
   content: string;
 }

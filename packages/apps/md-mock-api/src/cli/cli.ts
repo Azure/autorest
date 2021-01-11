@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('source-map-support').install();
+
 import { hideBin } from "yargs/helpers";
 import { ApiMockApp, ApiMockAppConfig } from "../app";
 import { logger, setLoggingLevelFromConfig } from "../logger";
