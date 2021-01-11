@@ -49,7 +49,6 @@ const validateRequest = (definition: MockRouteRequestDefinition, request: Reques
   if (definition.body) {
     const actualBody = request.body.toString();
     const expectedBody = definition.body.content;
-    console.log("Foo bar", actualBody, expectedBody === "");
     if (expectedBody == null ? !isBodyNull(request.body) : actualBody !== definition.body.content) {
       throw new ValidationError("Body provided doesn't match epxected body.", definition.body.content, actualBody);
     }
