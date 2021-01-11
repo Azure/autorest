@@ -11,6 +11,9 @@ export const convertToTree = (document: commonmark.Node): MarkdownTreeNode => {
   if (firstNode === null || firstNode.type !== "heading") {
     throw new Error("Document must start with a heading.");
   }
+  
+  // This lets have the title of the document not take a makrdown hading level(So the structure can start at heading 1: #)
+  firstNode.level = 0;
   const root: MarkdownTreeNode = {
     heading: firstNode,
     children: [],
