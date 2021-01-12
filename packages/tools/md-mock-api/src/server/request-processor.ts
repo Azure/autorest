@@ -3,9 +3,11 @@ import yaml from "js-yaml";
 import { logger } from "../logger";
 import { MockRouteDefinition } from "../models";
 import { TemplateContext } from "../models/template-context";
+import { RequestExt } from "./request-ext";
 import { validateRequest } from "./request-validation";
 import { processResponseHeaders, render } from "./response-processor";
-export const processRequest = (route: MockRouteDefinition, request: Request, response: Response): void => {
+
+export const processRequest = (route: MockRouteDefinition, request: RequestExt, response: Response): void => {
   const requestDef = route.request;
   try {
     validateRequest(requestDef, request);
@@ -33,7 +35,7 @@ export const processRequest = (route: MockRouteDefinition, request: Request, res
     if (responseDef.body.contentType) {
       response.contentType(responseDef.body.contentType);
     }
-    response.send(render(responseDef.body.content, templateContext));
+    response.send(responseDef.body.rawContent && render(responseDef.body.rawContent, templateContext));
   }
   response.end();
 };

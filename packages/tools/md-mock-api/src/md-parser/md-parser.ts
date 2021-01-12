@@ -6,12 +6,13 @@ import {
   CommonDefinition,
   CommonRequestDefinition,
   CommonResponseDefinition,
-  MockBody,
   MockRouteDefinition,
   MockRouteDefinitionGroup,
   MockRouteRequestDefinition,
   MockRouteResponseDefinition,
 } from "../models";
+import { extractBodyDefinitionFromTreeNode, extractBodyRequirementFromTreeNode } from "./md-body-parser";
+import { extractCodeBlockFromMarkdownNode, extractCodeBlockFromTreeNode, ExtractedCodeBlock } from "./md-code-block";
 import { mapMarkdownTree } from "./md-mapper";
 import { convertToTree, dumpMarkdownTree, MarkdownTreeNode } from "./md-tree";
 import { cleanRender } from "./md-utils";
@@ -90,37 +91,6 @@ const extractCommonFromTreeNode = (tree: MarkdownTreeNode): CommonDefinition => 
   return {
     request,
     response,
-  };
-};
-
-type Language = "json" | "yaml" | "xml";
-interface ExtractedCodeBlock {
-  language: Language;
-  content: string;
-}
-
-const extractCodeBlockFromTreeNode = (node: MarkdownTreeNode, sectionName: string): ExtractedCodeBlock => {
-  const child = node.children[0];
-  if (child === undefined) {
-    throw new Error(`${sectionName} section must have a code block content but found nothing`);
-  }
-  if ("heading" in child) {
-    throw new Error(`Unexpected heading '${cleanRender(child.heading)}' found in ${sectionName} section.`);
-  }
-  return extractCodeBlockFromMarkdownNode(child, sectionName);
-};
-
-const extractCodeBlockFromMarkdownNode = (node: commonmark.Node, sectionName: string): ExtractedCodeBlock => {
-  if (node.type !== "code_block") {
-    throw new Error(`Unexpected element under ${sectionName} section. Expected code block but got ${node.type}`);
-  }
-
-  if (node.literal === null) {
-    throw new Error("Code block has not content under ${sectionName} section.");
-  }
-  return {
-    language: (node.info ?? "") as ExtractedCodeBlock["language"],
-    content: node.literal,
   };
 };
 
@@ -215,7 +185,7 @@ const extractRequestDefinitionFromTreeNode = (
       const childTitle = cleanRender(child.heading);
       switch (childTitle) {
         case KnownHeading.body:
-          result = { ...result, body: extractBodyDefinitionFromTreeNode(child, sectionName) };
+          result = { ...result, body: extractBodyRequirementFromTreeNode(child, sectionName) };
           break;
         default:
           throw new Error(`Unexpected heading '${childTitle}' under section ${sectionName}`);
@@ -264,28 +234,4 @@ const assertProperty = <T, K extends keyof T>(
     throw new Error(`Section ${sectionName} is missing required property ${key}`);
   }
   return true;
-};
-
-const extractBodyDefinitionFromTreeNode = (node: MarkdownTreeNode, fromSection: string): MockBody => {
-  const sectionName = `${fromSection} > Body`;
-  const code = extractCodeBlockFromTreeNode(node, sectionName);
-  return {
-    content: code.content.trim(),
-    contentType: getContentTypeFromLanguage(code.language, sectionName),
-  };
-};
-
-const getContentTypeFromLanguage = (language: Language, sectionName: string) => {
-  const contentType = {
-    json: "application/json",
-    xml: "application/xml",
-    yaml: undefined,
-  }[language];
-
-  if (!contentType) {
-    throw new Error(
-      `Language ${language} used in section ${sectionName} is not known and can't be used for body content.`,
-    );
-  }
-  return contentType;
 };
