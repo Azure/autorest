@@ -3,9 +3,11 @@ import yaml from "js-yaml";
 import { logger } from "../logger";
 import { MockRouteDefinition } from "../models";
 import { TemplateContext } from "../models/template-context";
+import { RequestExt } from "./request-ext";
 import { validateRequest } from "./request-validation";
 import { processResponseHeaders, render } from "./response-processor";
-export const processRequest = (route: MockRouteDefinition, request: Request, response: Response): void => {
+
+export const processRequest = (route: MockRouteDefinition, request: RequestExt, response: Response): void => {
   const requestDef = route.request;
   try {
     validateRequest(requestDef, request);

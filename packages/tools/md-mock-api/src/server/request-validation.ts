@@ -1,8 +1,8 @@
-import { Request } from "express";
-import { MockRouteRequestDefinition } from "../models";
+import { MockRouteRequestDefinition, RequestBodyRequirement } from "../models";
+import { RequestExt } from "./request-ext";
 
 class ValidationError extends Error {
-  constructor(message: string, public expected: string, public actual: string) {
+  constructor(message: string, public expected: string | undefined, public actual: string | undefined) {
     super(message);
   }
 
@@ -17,29 +17,47 @@ class ValidationError extends Error {
  * @param request Express.js request.
  * @throws {ValidationError} when validation fails.
  */
-export const validateRequest = (definition: MockRouteRequestDefinition, request: Request): void => {
+export const validateRequest = (definition: MockRouteRequestDefinition, request: RequestExt): void => {
   if (definition.body) {
-    const actualBody = request.body.toString();
-    const expectedBody = definition.body.rawContent;
-    if (expectedBody == null ? !isBodyNull(request.body) : actualBody !== definition.body.rawContent) {
-      throw new ValidationError("Body provided doesn't match epxected body.", definition.body.rawContent, actualBody);
+    validateBodyContent(definition.body, request);
+  }
+};
+
+/**
+ *
+ * @param bodyRequirement Body requirement(s).
+ * @param request Express.js request.
+ * @throws {ValidationError} when validation fails.
+ */
+const validateBodyContent = (bodyRequirement: RequestBodyRequirement, request: RequestExt) => {
+  console.log("Validate", request.body, request.rawBody);
+  const expectedBody = bodyRequirement.rawContent;
+  const actualBody = request.rawBody;
+
+  if (expectedBody == null) {
+    if (!isBodyEmpty(actualBody)) {
+      throw new ValidationError("Body provided doesn't match expected body.", bodyRequirement.rawContent, actualBody);
+    }
+    return;
+  }
+
+  if (bodyRequirement.matchType === "exact") {
+    if (actualBody !== bodyRequirement.rawContent) {
+      throw new ValidationError("Body provided doesn't match expected body.", bodyRequirement.rawContent, actualBody);
+    }
+  }
+
+  if (bodyRequirement.matchType === "object") {
+    if (actualBody !== bodyRequirement.rawContent) {
+      throw new ValidationError("Body provided doesn't match expected body.", bodyRequirement.rawContent, actualBody);
     }
   }
 };
 
-const isBodyNull = (body: Buffer | unknown) => {
-  if (body == null) {
-    return true;
-  }
-
-  if (body instanceof Buffer) {
-    return body.toString() === "";
-  }
-
-  if (typeof body === "object") {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    return Object.keys(body as object).length === 0;
-  }
-
-  return false;
+/**
+ * Check if the provided body is empty.
+ * @param body express.js request body.
+ */
+const isBodyEmpty = (body: string | undefined | null) => {
+  return body == null || body === "";
 };
