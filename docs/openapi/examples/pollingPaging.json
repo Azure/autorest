@@ -16,7 +16,7 @@
       "application/json"
     ],
     "paths": {
-      "/directives/polling": {
+      "/basic/polling": {
         "put": {
             "x-ms-long-running-operation": true,
             "operationId": "basicPolling",
@@ -50,7 +50,7 @@
             }
           }
       },
-      "/directives/paging": {
+      "/basic/paging": {
         "get": {
             "x-ms-pageable": { "nextLinkName": "nextLink" },
             "operationId": "basicPaging",
