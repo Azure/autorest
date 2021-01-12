@@ -20,7 +20,7 @@
 
 ## Data Types
 ### Primitive Data Types
-The primitive types are based on [JSON-Schema Draft 4](JSON-primitive-types). More details in the OpenAPI Specification [here](OpenAPI-primitive-types).
+The primitive types are based on [JSON-Schema Draft 4][JSON-primitive-types]. More details in the OpenAPI Specification [here][OpenAPI-primitive-types].
 
 **Example:**
 ```json
@@ -708,7 +708,7 @@ if ((int)_statusCode != 200)
 }
 ```
 
-See [Error Handling](../../client/error.md) for details on how to catch and use the exceptions from generated clients.
+See [Error Handling](../client/readme.md) for details on how to catch and use the exceptions from generated clients.
 
 ### DEPRECATED - Composite Clients
 AutoRest supports a concept of a composite client where multiple OpenAPI documents are merged together to generate a single ServiceClient. To use this feature the OpenAPI documents need to conform to the following rules:
@@ -754,9 +754,9 @@ autorest.exe -modeler CompositeSwagger -input compositeDoc.json -output C:\Temp 
 
 
 ## Extensions
-AutoRest supports a number of extensions used to configure generated clients. Please refer to [Swagger Extensions](../../extensions/readme.md) document for details.
+AutoRest supports a number of extensions used to configure generated clients. Please refer to [Swagger Extensions](../extensions/readme.md) document for details.
 
-[OpenAPI-spec2.0]:https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md
-[JSON-primitive-types]:http://json-schema.org/latest/json-schema-core.html#anchor8
-[OpenAPI-primitive-types]:https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#datatypes]
-[JSON-schema-validation-properties]:http://json-schema.org/latest/json-schema-validation.html#anchor64
+[OpenAPI-spec2.0]: https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md
+[JSON-primitive-types]: http://json-schema.org/latest/json-schema-core.html#anchor8
+[OpenAPI-primitive-types]: https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#datatypes
+[JSON-schema-validation-properties]: http://json-schema.org/latest/json-schema-validation.html#anchor64

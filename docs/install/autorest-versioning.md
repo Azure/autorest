@@ -52,7 +52,7 @@ You can request a _well-known_ extension to be loaded by asking for it on the co
 
 If you want to pin to a specific version of an extension or to load one that is not _well-known_ specify `--use:[PKGREF]` on the command-line, where `[PKGREF]` is a NPM package reference like:
  - an npm package reference with a semver version range that matches a published nodejs package (ie, `--use:@autorest.powershell@~2.0.0` -- loads the powershell package that has a version greater than `2.0.0 `
- - an npm package reference with a semver version range that matches a published nodejs package, which can come from npm or a prerelase build in a [github repo](https://github.com/azure/autorest.modelerfour/relases)<br>ie,  `--use:@autorest/modelerfour@4.3.144`
+ - an npm package reference with a semver version range that matches a published nodejs package, which can come from npm or a prerelase build in a [github repo](https://github.com/Azure/autorest.modelerfour/releases)<br>ie,  `--use:@autorest/modelerfour@4.3.144`
  - a folder where the module package has been cloned and compiled. (ie, `c:\work\modelerfour` )
  - a URL to a nodejs module package file
 

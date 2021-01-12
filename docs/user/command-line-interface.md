@@ -95,7 +95,7 @@ Needless to say, *do not put this token* into scripts directly, use Azure KeyVau
 Example:
 Run `autorest --azure-validator --input-file=<path-to-spec> --message-format=json --openapi-type=arm` to get the validation messages considering ARM guidelines in JSON format.
 
-Also, see [Samples/2a-validation](../../Samples/2a-validation) for an example of validation using a configuration file.
+Also, see [Samples/2a-validation](../../Samples/openapi-v2/2a-validation) for an example of validation using a configuration file.
 
 #### Selecting the Language with which to generate code
 

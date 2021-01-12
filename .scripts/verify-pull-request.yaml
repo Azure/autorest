@@ -8,39 +8,50 @@ trigger: none
 pool:
   vmImage: "ubuntu-latest"
 
-steps:
-  - task: NodeTool@0
-    inputs:
-      versionSpec: "14.x"
-    displayName: "Install Node.js"
+jobs:
+  - job: main
+    displayName: "Build and test"
+    steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: "14.x"
+        displayName: "Install Node.js"
 
-  - script: |
-      npm install -g npm
-      npx @microsoft/rush update
-    displayName: "Install dependencies"
+      - script: |
+          npm install -g npm
+          npx @microsoft/rush update
+        displayName: "Install dependencies"
 
-  - script: |
-      npx @microsoft/rush rebuild
-    displayName: "Build"
+      - script: |
+          npx @microsoft/rush rebuild
+        displayName: "Build"
 
-  - script: npx @microsoft/rush test -v
-    displayName: Test
+      - script: npx @microsoft/rush test -v
+        displayName: Test
 
-  - script: npx @microsoft/rush lint -v
-    displayName: Lint
+      - script: npx @microsoft/rush lint -v
+        displayName: Lint
 
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: "3.x"
-    displayName: Install Python 3
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: "3.x"
+        displayName: Install Python 3
 
-  - script: |
-      npm install @microsoft.azure/autorest.testserver --no-save
-      npm install -g @autorest/compare@~0.3.0
-    displayName: Install autorest-compare
+      - script: |
+          npm install @microsoft.azure/autorest.testserver --no-save
+          npm install -g @autorest/compare@~0.3.0
+        displayName: Install autorest-compare
 
-  - script: autorest-compare --compare:.scripts/regression-compare.yaml --language:python
-    displayName: Regression Test - @autorest/python
+      - script: autorest-compare --compare:.scripts/regression-compare.yaml --language:python
+        displayName: Regression Test - @autorest/python
 
-  - script: autorest-compare --compare:.scripts/regression-compare.yaml --language:typescript
-    displayName: Regression Test - @autorest/typescript
+      - script: autorest-compare --compare:.scripts/regression-compare.yaml --language:typescript
+        displayName: Regression Test - @autorest/typescript
+
+  - job: lintdocs
+    displayName: Lint docs
+    steps:
+      - script: |
+          sudo npm install -g markdown-link-check
+          find docs -name "*.md" -print0 | xargs -0  -n1 markdown-link-check -c ./markdown-link-check-config.json
+        displayName: Find 
