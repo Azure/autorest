@@ -905,6 +905,8 @@ IPage<int?>       ListNext(ISimpleAPIClient operations, string nextPageLink);
 Task<IPage<int?>> ListNextAsync(ISimpleAPIClient operations, string nextPageLink, CancellationToken cancellationToken);
 ```
 
+- Swagger example: [pollingPaging.json](https://github.com/Azure/autorest/blob/master/docs/openapi/examples/pollingPaging.json#L53)
+
 **Example 2: Customized**
 
 Customizing code generation:
@@ -1023,6 +1025,8 @@ It will keep on polling at regular intervals till the request reaches one of the
   }
 }
 ```
+
+- Swagger example: [pollingPaging.json](https://github.com/Azure/autorest/blob/master/docs/openapi/examples/pollingPaging.json#L19)
 
 ## x-ms-azure-resource
 Resource types as defined by the [Resource Manager API](https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx) are tagged by using a `x-ms-azure-resource` extension.
