@@ -60,4 +60,4 @@ csproj: <name> # C# project file
 psd1: <name> # module manifest file
 psm1: <name> # script module file
 ```
-Note: By default these files will be named after the module-name. For example, the manifest file will be \<module-name>.psd1. You can see the full list of file names in the [defaults.md](https://github.com/Azure/autorest.powershell/blob/master/docs/options.md) for the PowerShell extension.
+Note: By default these files will be named after the module-name. For example, the manifest file will be \<module-name>.psd1.
