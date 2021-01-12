@@ -16,6 +16,7 @@ dependencies:
   '@rush-temp/schemas': 'file:projects/schemas.tgz'
   '@types/body-parser': 1.19.0
   '@types/commonmark': 0.27.4
+  '@types/deep-equal': 1.0.1
   '@types/express': 4.17.9
   '@types/glob': 7.1.3
   '@types/jest': 26.0.20
@@ -36,7 +37,7 @@ dependencies:
   commonmark: 0.27.0
   compare-versions: 3.6.0
   cpy-cli: 2.0.0
-  deep-equal: 1.1.1
+  deep-equal: 2.0.5
   eslint: 7.17.0
   eslint-plugin-import: 2.22.1_eslint@7.17.0
   eslint-plugin-prettier: 3.1.4_eslint@7.17.0+prettier@2.2.1
@@ -797,6 +798,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-t73xJJrvdTjXrn4jLS9VSGRbz0nUY3cl2DMGDU48lKl+HR9dbbjW2A9r3g40VA++mQpy6uuHg33gy7du2BKpog==
+  /@types/deep-equal/1.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-mMUu4nWHLBlHtxXY17Fg6+ucS/MnndyOWyOe7MmwkoMYxvfQU2ajtRaEvqSUv+aVkMqH/C0NCI8UoVfRNQ10yg==
   /@types/express-serve-static-core/4.17.17:
     dependencies:
       '@types/node': 14.14.20
@@ -1239,6 +1244,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-45sJrqne+Gao8gbiiK9jkZuuOcQ=
+  /array-filter/1.0.0:
+    dev: false
+    resolution:
+      integrity: sha1-uveeYubvTCpMC4MSMtr/7CUfnYM=
   /array-find-index/1.0.2:
     dev: false
     engines:
@@ -1342,6 +1351,14 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
+  /available-typed-arrays/1.0.2:
+    dependencies:
+      array-filter: 1.0.0
+    dev: false
+    engines:
+      node: '>= 0.4'
+    resolution:
+      integrity: sha512-XWX3OX8Onv97LMk/ftVyBibpGwY5a8SmuxZPzeOxqmuEqUCOM9ZE+uIaD1VNJ5QnvU2UQusvmKbuM1FR8QWGfQ==
   /aws-sign2/0.7.0:
     dev: false
     resolution:
@@ -2086,6 +2103,26 @@ packages:
     dev: false
     resolution:
       integrity: sha512-yd9c5AdiqVcR+JjcwUQb9DkhJc8ngNr0MahEBGvDiJw8puWab2yZlh+nkasOnZP+EGTAP6rRp2JzJhJZzvNF8g==
+  /deep-equal/2.0.5:
+    dependencies:
+      call-bind: 1.0.0
+      es-get-iterator: 1.1.1
+      get-intrinsic: 1.0.1
+      is-arguments: 1.1.0
+      is-date-object: 1.0.2
+      is-regex: 1.1.1
+      isarray: 2.0.5
+      object-is: 1.1.4
+      object-keys: 1.1.1
+      object.assign: 4.1.2
+      regexp.prototype.flags: 1.3.0
+      side-channel: 1.0.4
+      which-boxed-primitive: 1.0.2
+      which-collection: 1.0.1
+      which-typed-array: 1.1.4
+    dev: false
+    resolution:
+      integrity: sha512-nPiRgmbAtm1a3JsnLCf6/SLfXcjyN5v8L1TXzdCmHrXJ4hx+gW/w1YCcn7z8gJtSiDArZCgYtbao3QqLm/N1Sw==
   /deep-is/0.1.3:
     dev: false
     resolution:
@@ -2319,6 +2356,19 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-I4UGspA0wpZXWENrdA0uHbnhte683t3qT/1VFH9aX2dA5PPSf6QW5HHXf5HImaqPmjXaVeVk4RGWnaylmV7uAA==
+  /es-get-iterator/1.1.1:
+    dependencies:
+      call-bind: 1.0.0
+      get-intrinsic: 1.0.1
+      has-symbols: 1.0.1
+      is-arguments: 1.1.0
+      is-map: 2.0.2
+      is-set: 2.0.2
+      is-string: 1.0.5
+      isarray: 2.0.5
+    dev: false
+    resolution:
+      integrity: sha512-qorBw8Y7B15DVLaJWy6WdEV/ZkieBcu6QCq/xzWzGOKJqgG1j754vXRfZ3NY7HSShneqU43mPB4OkQBTkvHhFw==
   /es-to-primitive/1.2.1:
     dependencies:
       is-callable: 1.2.2
@@ -2944,6 +2994,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-gQaNKVqBQuwKxybG4iAMMPttXoA=
+  /foreach/2.0.5:
+    dev: false
+    resolution:
+      integrity: sha1-C+4AUBiusmDQo6865ljdATbsG5k=
   /forever-agent/0.6.1:
     dev: false
     resolution:
@@ -3068,6 +3122,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-ZnWP+AmS1VUaLgTRy47+zKtjTxz+0xMpx3I52i+aalBK1QP19ggLF3Db89KJX7kjfOfP2eoa01qc++GwPgufPg==
+  /get-intrinsic/1.0.2:
+    dependencies:
+      function-bind: 1.1.1
+      has: 1.0.3
+      has-symbols: 1.0.1
+    dev: false
+    resolution:
+      integrity: sha512-aeX0vrFm21ILl3+JpFFRNe9aUvp6VFZb2/CTbgLb8j75kOhvoNYjt9d8KA/tJG4gSo8nzEDedRl0h7vDmBYRVg==
   /get-package-type/0.1.0:
     dev: false
     engines:
@@ -3494,6 +3556,18 @@ packages:
     dev: false
     resolution:
       integrity: sha512-eVRqCvVlZbuw3GrM63ovNSNAeA1K16kaR/LRY/92w0zxQ5/1YzwblUX652i4Xs9RwAGjW9d9y6X88t8OaAJfWQ==
+  /is-bigint/1.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-J0ELF4yHFxHy0cmSxZuheDOz2luOdVvqjwmEcj8H/L1JHeuEDSDbeRP+Dk9kFVk5RTFzbucJ2Kb9F7ixY2QaCg==
+  /is-boolean-object/1.1.0:
+    dependencies:
+      call-bind: 1.0.0
+    dev: false
+    engines:
+      node: '>= 0.4'
+    resolution:
+      integrity: sha512-a7Uprx8UtD+HWdyYwnD1+ExtTgqQtD2k/1yJgtXP6wnMm8byhkoTZRl+95LLThpzNZJ5aEvi46cdH+ayMFRwmA==
   /is-buffer/1.1.6:
     dev: false
     resolution:
@@ -3615,12 +3689,22 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-5G0tKtBTFImOqDnLB2hG6Bp2qcKEFduo4tZu9MT/H6NQv/ghhy30o55ufafxJ/LdH79LLs2Kfrn85TLKyA7BUg==
+  /is-map/2.0.2:
+    dev: false
+    resolution:
+      integrity: sha512-cOZFQQozTha1f4MxLFzlgKYPTyj26picdZTx82hbc/Xf4K/tZOOXSCkMvU4pKioRXGDLJRn0GM7Upe7kR721yg==
   /is-negative-zero/2.0.1:
     dev: false
     engines:
       node: '>= 0.4'
     resolution:
       integrity: sha512-2z6JzQvZRa9A2Y7xC6dQQm4FSTSTNWjKIYYTt4246eMTJmIo0Q+ZyOsU66X8lxK1AbB92dFeglPLrhwpeRKO6w==
+  /is-number-object/1.0.4:
+    dev: false
+    engines:
+      node: '>= 0.4'
+    resolution:
+      integrity: sha512-zohwelOAur+5uXtk8O3GPQ1eAcu4ZX3UwxQhUlfFFMNpUd83gXgjbhJh6HmB6LUNV/ieOLQuDwJO3dWJosUeMw==
   /is-number/3.0.0:
     dependencies:
       kind-of: 3.2.2
@@ -3661,6 +3745,10 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-1+QkEcxiLlB7VEyFtyBg94e08OAsvq7FUBgApTq/w2ymCLyKJgDPsybBENVtA7XCQEgEXxKPonG+mvYRxh/LIg==
+  /is-set/2.0.2:
+    dev: false
+    resolution:
+      integrity: sha512-+2cnTEZeY5z/iXGbLhPrOAaK/Mau5k5eXq9j14CpRTftq0pAJu2MwVRSZhyZWBzx3o6X795Lz6Bpb6R0GKf37g==
   /is-stream/1.1.0:
     dev: false
     engines:
@@ -3687,10 +3775,30 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-OwijhaRSgqvhm/0ZdAcXNZt9lYdKFpcRDT5ULUuYXPoT794UNOdU+gpT6Rzo7b4V2HUl/op6GqY894AZwv9faQ==
+  /is-typed-array/1.1.4:
+    dependencies:
+      available-typed-arrays: 1.0.2
+      call-bind: 1.0.0
+      es-abstract: 1.18.0-next.1
+      foreach: 2.0.5
+      has-symbols: 1.0.1
+    dev: false
+    engines:
+      node: '>= 0.4'
+    resolution:
+      integrity: sha512-ILaRgn4zaSrVNXNGtON6iFNotXW3hAPF3+0fB1usg2jFlWqo5fEDdmJkz0zBfoi7Dgskr8Khi2xZ8cXqZEfXNA==
   /is-typedarray/1.0.0:
     dev: false
     resolution:
       integrity: sha1-5HnICFjfDBsR3dppQPlgEfzaSpo=
+  /is-weakmap/2.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-NSBR4kH5oVj1Uwvv970ruUkCV7O1mzgVFO4/rev2cLRda9Tm9HrL70ZPut4rOHgY0FNrUu9BCbXA2sdQ+x0chA==
+  /is-weakset/2.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-pi4vhbhVHGLxohUw7PhGsueT4vRGFoXhP7+RGN0jKIv9+8PWYCQTqtADngrxOm2g46hoH0+g8uZZBzMrvVGDmw==
   /is-windows/1.0.2:
     dev: false
     engines:
@@ -3714,6 +3822,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE=
+  /isarray/2.0.5:
+    dev: false
+    resolution:
+      integrity: sha512-xHjhDr3cNBK0BzdUJSPXZntQUx/mwMS5Rw4A7lPJ90XGAO6ISP/ePDNuo0vhqOZU+UD5JoodwCAAoZQd3FeAKw==
   /isexe/2.0.0:
     dev: false
     resolution:
@@ -6059,6 +6171,14 @@ packages:
     optional: true
     resolution:
       integrity: sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==
+  /side-channel/1.0.4:
+    dependencies:
+      call-bind: 1.0.0
+      get-intrinsic: 1.0.2
+      object-inspect: 1.9.0
+    dev: false
+    resolution:
+      integrity: sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw==
   /signal-exit/3.0.3:
     dev: false
     resolution:
@@ -6962,10 +7082,43 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-vwTUFf6V4zhcPkWp/4CQPr1TW9Ml6SF4lVyaIMBdJw5i6qUUJ1QWM4Z6YYVkfka0OUIzVo/0aNtGVGk256IKWw==
+  /which-boxed-primitive/1.0.2:
+    dependencies:
+      is-bigint: 1.0.1
+      is-boolean-object: 1.1.0
+      is-number-object: 1.0.4
+      is-string: 1.0.5
+      is-symbol: 1.0.3
+    dev: false
+    resolution:
+      integrity: sha512-bwZdv0AKLpplFY2KZRX6TvyuN7ojjr7lwkg6ml0roIy9YeuSr7JS372qlNW18UQYzgYK9ziGcerWqZOmEn9VNg==
+  /which-collection/1.0.1:
+    dependencies:
+      is-map: 2.0.2
+      is-set: 2.0.2
+      is-weakmap: 2.0.1
+      is-weakset: 2.0.1
+    dev: false
+    resolution:
+      integrity: sha512-W8xeTUwaln8i3K/cY1nGXzdnVZlidBcagyNFtBdD5kxnb4TvGKR7FfSIS3mYpwWS1QUCutfKz8IY8RjftB0+1A==
   /which-module/2.0.0:
     dev: false
     resolution:
       integrity: sha1-2e8H3Od7mQK4o6j6SzHD4/fm6Ho=
+  /which-typed-array/1.1.4:
+    dependencies:
+      available-typed-arrays: 1.0.2
+      call-bind: 1.0.0
+      es-abstract: 1.18.0-next.1
+      foreach: 2.0.5
+      function-bind: 1.1.1
+      has-symbols: 1.0.1
+      is-typed-array: 1.1.4
+    dev: false
+    engines:
+      node: '>= 0.4'
+    resolution:
+      integrity: sha512-49E0SpUe90cjpoc7BOJwyPHRqSAd12c10Qm2amdEZrJPCY2NDxaW01zHITrem+rnETY3dwrbH3UUrUwagfCYDA==
   /which/1.3.1:
     dependencies:
       isexe: 2.0.0
@@ -7248,13 +7401,14 @@ packages:
     dev: false
     name: '@rush-temp/core'
     resolution:
-      integrity: sha512-kdOPyqBM9L68k2aFs2G5FQq0qD33AoPFCff6wq+SPxRx1OJiR7Y5w/scPDHZahVzyiDplqxX31KS67Fv2mViBg==
+      integrity: sha512-hq7Nupl84pCUi45LnQPaqNFGSfof3GuNmHTJvBxOtklO75wyV1FB2kE0M1fg25fJLXIUttjUkJWTtDBsPxi7Aw==
       tarball: 'file:projects/core.tgz'
     version: 0.0.0
   'file:projects/md-mock-api.tgz':
     dependencies:
       '@types/body-parser': 1.19.0
       '@types/commonmark': 0.27.4
+      '@types/deep-equal': 1.0.1
       '@types/express': 4.17.9
       '@types/glob': 7.1.3
       '@types/jest': 26.0.20
@@ -7268,6 +7422,7 @@ packages:
       '@typescript-eslint/parser': 4.12.0_eslint@7.17.0+typescript@3.9.7
       body-parser: 1.19.0
       commonmark: 0.27.0
+      deep-equal: 2.0.5
       eslint: 7.17.0
       eslint-plugin-import: 2.22.1_eslint@7.17.0
       eslint-plugin-prettier: 3.1.4_eslint@7.17.0+prettier@2.2.1
@@ -7287,7 +7442,7 @@ packages:
     dev: false
     name: '@rush-temp/md-mock-api'
     resolution:
-      integrity: sha512-xhcWa2HJ4Ki7PK3gQeM2vvhSnmkb4dVJ/s8l4r6Lji0cVv9phIN5lR7Ex5I+aBtnOtVuKZzAvc8F4Wmt0f/xfg==
+      integrity: sha512-Qk7CDPzLygXvzYBTuAFsGlgrCtsVgYbSGqX+nKhlhZB7VrWo1D4MSx+/BBHBBc40/E1Zp2vjxmekNSBUtROoXg==
       tarball: 'file:projects/md-mock-api.tgz'
     version: 0.0.0
   'file:projects/schemas.tgz':
@@ -7316,6 +7471,7 @@ specifiers:
   '@rush-temp/schemas': 'file:./projects/schemas.tgz'
   '@types/body-parser': ^1.19.0
   '@types/commonmark': ^0.27.0
+  '@types/deep-equal': ^1.0.1
   '@types/express': ~4.17.9
   '@types/glob': ^7.1.3
   '@types/jest': ^26.0.20
@@ -7336,7 +7492,7 @@ specifiers:
   commonmark: ^0.27.0
   compare-versions: ^3.4.0
   cpy-cli: ~2.0.0
-  deep-equal: ^1.0.1
+  deep-equal: ^2.0.5
   eslint: ^7.17.0
   eslint-plugin-import: ~2.22.1
   eslint-plugin-prettier: ~3.1.4

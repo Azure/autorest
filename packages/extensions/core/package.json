@@ -46,7 +46,6 @@
     "@types/jsonpath": "^0.2.0",
     "@types/source-map": "0.5.0",
     "@types/z-schema": "^3.16.31",
-    "deep-equal": "^1.0.1",
     "@types/node": "~14.14.20",
     "@types/jest": "^26.0.20",
     "jest": "^26.6.3",
