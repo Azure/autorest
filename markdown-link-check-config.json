@@ -1,7 +1,7 @@
 {
   "ignorePatterns": [
     {
-      "pattern": "^http://github.com/Azure/autorest."
+      "pattern": "^https://github.com/Azure/autorest."
     }
   ]
 }
