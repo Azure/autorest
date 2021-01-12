@@ -7,10 +7,11 @@
 |`--output-folder=DIRECTORY`|The location for generated files. If not specified, uses `./generated` as the default| x | x | x | x | x
 |`--clear-output-folder`|Clear all contents from our output folder before outputting your newly generated code into that folder. Defaults to `false`.| x | x | x | x | x
 |`--project-folder=DIRECTORY`|Use this flag if you have a project folder that will contain both generated code and existing code you would like to persist. You can then define the output folder relative to this project folder, i.e. `output-folder: $(project-folder)/generated`.| x | x | x | x | x
-|`--add-credential`|If specified, the generated client will require a credential to make network calls. See [TODO] for information on how to authenticate to our generated clients. Forced to be `true` if `--azure-arm` is set, otherwise defaults to `false`.| x | No flag for `--add-credential`, will add credential param for a `TokenCredential` if `--azure-arm` is `true`. | No flag for `--add-credential`, gets whether to add credential from value of `--credential-types`. Defaults to false.| Is called `--add-credentials`. Defaults to false. | No flag, looks in `authenticationRequired` field in the swagger. Does not automatically set to true in azure-arm.
+|`--add-credential`|If specified, the generated client will require a credential to make network calls. See [our language docs][client] for information on how to authenticate to our generated clients. Forced to be `true` if `--azure-arm` is set, otherwise defaults to `false`.| x | No flag for `--add-credential`, will add credential param for a `TokenCredential` if `--azure-arm` is `true`. | No flag for `--add-credential`, gets whether to add credential from value of `--credential-types`. Defaults to false.| Is called `--add-credentials`. Defaults to false. | No flag, looks in `authenticationRequired` field in the swagger. Does not automatically set to true in azure-arm.
 |`--credential-scopes=VALUE(S)`|Specify the scopes over which the credential functions (see previous flag `--add-credential` for adding client credentials). This is tied with `BearerTokenCredentialPolicy`. If generating management plane code (see `--azure-arm` flag directly below), we default the scope to `'https://management.azure.com/.default'`. If not, we highly recommend you  use this flag if `--add-credential` is specified. If you don't generate with scopes in this case, it forces your SDK users to pass credential scopes themselves when calling your code. You can pass multiple values in using CSV format.| x | No flag for credential scopes. Currently only sets `TokenCredential` in mgmt mode. In mgmt mode's case, the credential scope is forced to `{endpoint}/.default`. In mgmt mode, this endpoint (which is gotten from the swagger), is `https://management.azure.com`| Currently doesn't default to ARM scope in mgmt mode | | `--credential-scope`
 |`--license-header=LICENSE_HEADER`|Specify the type of license header for your files. Common values include `MICROSOFT_MIT_NO_VERSION` and `MICROSOFT_MIT_NO_CODEGEN` TODO: list of all possible values and default| x | x | x | x | x
 |`--namespace=NAMESPACE`|Sets the namespace to use for the generated code| x | x | x | |
+|`--tag=VALUE`|Preferred way to have conditional configurations. I.e., in my configuration file, I can set the `input-file` equal to different values depending on the `VALUE` passed through the `tag` flag. See our [Adding Tags When Generating][adding_tags_when_generating] section for more information|
 |`--azure-arm`|generates control plane (Azure Resource Manager) code. Use this if you're generate SDKs for people to manage their Azure resources. See our [mgmt plane section][mgmt_plane_section] for more info. Defaults to `false`.| x | x | x | x | Uses flag `--openapi-type=arm` to specify
 |`--head-as-boolean`|With this flag, HEAD calls to non-existent resources (404) will not raise an error. Instead, if the resource exists, we return `true`, else `false`. Forced to be `true` if `--azure-arm` is set, otherwise defaults to `false`.| x | x ||| Go default is always `false`.
 |`--title=NAME`|Override the service client's name listed in the swagger under `title`.| x | x | x | x | x
@@ -38,7 +39,7 @@
 | Flag | Description
 |------------------|-------------
 |`--library-name=NAME`|The name of your library. This is what will be displayed on NuGet.
-|`--shared-source-folders=VALUE(S)`|Pass shared folder paths through here. Common values point to the [shared generator assets][shared_generator_assets] and [shared azure core assets][shared_azure_core_assets] in [autorest.csharp][autorest_csharp
+|`--shared-source-folders=VALUE(S)`|Pass shared folder paths through here. Common values point to the [shared generator assets][shared_generator_assets] and [shared azure core assets][shared_azure_core_assets] in [autorest.csharp][autorest_csharp]
 |`--public-clients`|Whether to have your client public. Defaults to `false`.
 |`--model-namespace`|Whether to add a separate namespace of Models, more specifically adding `{value-from-namespace-flag}.Models`. Defaults to `true`.
 
@@ -55,7 +56,7 @@
 |`--implementation-subpackage=NAME`|The sub-package that the Service client and Method Group client implementation classes will be put into. Defaults to `implementation`.
 |`--models-subpackage=NAME`|The sub-package that Enums, Exceptions, and Model types will be put into. Defaults to `models`.
 |`--add-context-parameter`|Indicates whether the [`com.azure.core.util.Context`][java_context] parameter should be included in generated proxy methods. Use if you want to pass arbitrary data (key-value pairs) to pipeline policies. Defaults to `false`.
-|`--context-client-method-parameter`|Indicates whether the `com.azure.core.util.Context` parameter should also be included in generated client methods. Forces `--add-context-parameter` to `true`. Defaults to `false`.
+|`--context-client-method-parameter`|Indicates whether the [`com.azure.core.util.Context`][java_context] parameter should also be included in generated client methods. Forces `--add-context-parameter` to `true`. Defaults to `false`.
 |`--sync-methods=all\|essential\|none`|Specifies mode for generating sync wrappers. Supported values are <br>&nbsp;&nbsp;`essential` - generates only one sync returning body or header (default) <br>&nbsp;&nbsp;`all` - generates one sync method for each async method<br>&nbsp;&nbsp;`none` - does not generate any sync methods
 |`--required-parameter-client-methods`|Indicates whether client method overloads with only required parameters should be generated. Defaults to `false`.
 |`--custom-types-subpackage=VALUE`|The sub-package that the custom types should be generated in. The types that custom types reference, or inherit from will also be automatically moved to this sub-package. **Recommended usage**: You can set this value to `models` and set `--models-subpackage=implementation.models`to generate models to `implementation.models` by default and pick specific models to be public through `--custom-types`.
@@ -109,12 +110,12 @@
 <!-- LINKS -->
 [tracing_quickstart]: https://github.com/Azure/azure-sdk-for-python/blob/master/sdk/core/azure-core-tracing-opentelemetry/README.md
 [azure_sdk_for_python]: https://github.com/Azure/azure-sdk-for-python/tree/master/sdk
-[mgmt_plane_section]: ./readme.md#generating-management-plane-code
+[mgmt_plane_section]: https://github.com/Azure/autorest/blob/master/docs/generate/readme.md#generating-management-plane-code
 [setup_py]: https://packaging.python.org/tutorials/packaging-projects/#creating-setup-py
-[multiapi_section]: ./readme.md#generating-multiapi-code
+[multiapi_section]: https://github.com/Azure/autorest/blob/master/docs/generate/readme.md#generating-multi-api-code
 [namespace_folders]: https://packaging.python.org/guides/packaging-namespace-packages/#pkgutil-style-namespace-packages
-[bearer_token_credential_policy]: https://azuresdkdocs.blob.core.windows.net/$web/python/azure-core/latest/azure.core.pipeline.policies.html#azure.core.pipeline.policies.BearerTokenCredentialPolicy
-[azure_key_credential_policy]: https://azuresdkdocs.blob.core.windows.net/$web/python/azure-core/latest/azure.core.pipeline.policies.html#azure.core.pipeline.policies.AzureKeyCredentialPolicy
+[bearer_token_credential_policy]: https://docs.microsoft.com/en-us/python/api/azure-core/azure.core.pipeline.policies.bearertokencredentialpolicy?view=azure-python
+[azure_key_credential_policy]: https://docs.microsoft.com/en-us/python/api/azure-core/azure.core.pipeline.policies.azurekeycredentialpolicy?view=azure-python
 [shared_generator_assets]: https://github.com/Azure/autorest.csharp/tree/feature/v3/src/assets/Generator.Shared
 [shared_azure_core_assets]: https://github.com/Azure/autorest.csharp/tree/feature/v3/src/assets/Azure.Core.Shared
 [autorest_csharp]: https://github.com/Azure/autorest.csharp
@@ -124,6 +125,8 @@
 [artifact_id]: https://maven.apache.org/guides/mini/guide-naming-conventions.html
 [fluent_docs]: https://github.com/Azure/autorest.java#additional-settings-for-fluent
 [armcore_connection]: https://github.com/Azure/azure-sdk-for-go/blob/master/sdk/armcore/connection.go
-[debugging]: ../troubleshooting.md#debugging
+[debugging]: https://github.com/Azure/autorest/blob/master/docs/troubleshooting.md#debugging
 [black]: https://pypi.org/project/black/
 [ts_async_iterator]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-3.html#async-iterators
+[client]: https://github.com/Azure/autorest/blob/master/docs/client/readme.md
+[adding_tags_when_generating]: https://github.com/Azure/autorest/blob/master/docs/generate/readme.md#adding-tags-when-generating

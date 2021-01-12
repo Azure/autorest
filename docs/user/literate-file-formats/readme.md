@@ -42,5 +42,3 @@ AutoRest can also be used to 'preprocess' a given file into a `JSON` or `YAML` f
 
 ## Specifications
   The specification for the [Literate Configuration](./configuration.md)
-
-  The specification for the [Literate Swagger](./literate-swagger.md)

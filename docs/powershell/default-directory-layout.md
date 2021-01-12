@@ -75,10 +75,10 @@ Defines the default display of objects in the PS console. Read more: https://doc
 C# project file.
 
 ### \<manifest-file\>.psd1
-Describes the content of a module and determines how a module is processed. Generally, inside this file the author description, files in the module, systems requirements, among other data is specified. Read more at: https://docs.microsoft.com/en-us/powershell/developer/module/how-to-write-a-powershell-module-manifest
+Describes the content of a module and determines how a module is processed. Generally, inside this file the author description, files in the module, systems requirements, among other data is specified. Read more at: https://docs.microsoft.com/en-us/powershell/scripting/developer/module/how-to-write-a-powershell-module-manifest
 
 ### \<module-file\>.psm1
-Defines a set of related script files, assemblies and related sources as a module. Read more at: https://docs.microsoft.com/en-us/powershell/developer/module/understanding-a-windows-powershell-module
+Defines a set of related script files, assemblies and related sources as a module. Read more at: https://docs.microsoft.com/en-us/powershell/scripting/developer/module/understanding-a-windows-powershell-module
 
 ### build-module.ps1
 Compiles the C# source files to binaries used by the script cmdlets.

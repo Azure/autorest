@@ -3,7 +3,7 @@ To change the way AutoRest generates, you can configure:
 - [Name Sanitation](#Name-Sanitization)
 - [Folder Layout](#Folder-Layout)
 - [Built-In Directives](directives.md)
-- [Custom Directives](../../autorest-core/resources/default-configuration.md#directives)
+- [Custom Directives](../../packages/extensions/core/resources/default-configuration.md#directives)
 
 ## Name Sanitization
 Sometimes names from cmdlets or parameters contain redundant information. For example:
@@ -60,4 +60,4 @@ csproj: <name> # C# project file
 psd1: <name> # module manifest file
 psm1: <name> # script module file
 ```
-Note: By default these files will be named after the module-name. For example, the manifest file will be \<module-name>.psd1. You can see the full list of file names in the [defaults.md](https://github.com/Azure/autorest.powershell/blob/master/extensions/powershell/defaults.md) for the PowerShell extension.
+Note: By default these files will be named after the module-name. For example, the manifest file will be \<module-name>.psd1.

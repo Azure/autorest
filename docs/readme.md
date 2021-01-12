@@ -24,18 +24,15 @@
 8. `Powershell` documentation
     - [How][powershell] do I use AutoRest to build `Powershell` cmdlets?
 
-9. [FAQ][faq]
-
-10. [Troubleshooting][troubleshooting]
+9. [Troubleshooting][troubleshooting]
 
 <!-- LINKS -->
-[introduction]: ./introduction.md
-[install]: ./install/readme.md
-[openapi]: ./openapi/readme.md
-[generate]: ./generate/readme.md
-[client]: ./client/readme.md
-[migrate]: ./migrate/readme.md
-[dev]: ./developer/readme.md
-[powershell]: ./powershell/readme.md
-[faq]: ./faq.md
-[troubleshooting]: ./troubleshooting.md
+[introduction]: https://github.com/Azure/autorest/blob/master/docs/introduction.md
+[install]: https://github.com/Azure/autorest/blob/master/docs/install/readme.md
+[openapi]: https://github.com/Azure/autorest/blob/master/docs/openapi/readme.md
+[generate]: https://github.com/Azure/autorest/blob/master/docs/generate/readme.md
+[client]: https://github.com/Azure/autorest/blob/master/docs/client/readme.md
+[migrate]: https://github.com/Azure/autorest/blob/master/docs/migrate/readme.md
+[dev]: https://github.com/Azure/autorest/blob/master/docs/developer/readme.md
+[powershell]: https://github.com/Azure/autorest/blob/master/docs/powershell/readme.md
+[troubleshooting]: https://github.com/Azure/autorest/blob/master/docs/troubleshooting.md

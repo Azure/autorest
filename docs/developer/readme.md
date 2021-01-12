@@ -3,4 +3,4 @@
 Current docs are [here][writing_an_extension], more incoming
 
 <!-- LINKS -->
-[writing_an_extension]: writing-an-extension.md
+[writing_an_extension]: https://github.com/Azure/autorest/blob/master/docs/developer/writing-an-extension.md
