@@ -41,7 +41,7 @@ const validateBodyContent = (bodyRequirement: RequestBodyRequirement, request: R
     return;
   }
 
-  if (bodyRequirement.matchType === "exact") {
+  if (bodyRequirement.matchType === undefined || bodyRequirement.matchType === "exact") {
     if (actualBody !== bodyRequirement.rawContent) {
       throw new ValidationError("Body provided doesn't match expected body.", bodyRequirement.rawContent, actualBody);
     }
