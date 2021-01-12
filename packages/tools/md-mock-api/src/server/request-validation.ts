@@ -31,7 +31,6 @@ export const validateRequest = (definition: MockRouteRequestDefinition, request:
  * @throws {ValidationError} when validation fails.
  */
 const validateBodyContent = (bodyRequirement: RequestBodyRequirement, request: RequestExt) => {
-  console.log("Validate", request.body, request.rawBody);
   const expectedRawBody = bodyRequirement.rawContent;
   const actualRawBody = request.rawBody;
 

@@ -23,7 +23,6 @@ const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
 const rawBodySaver = (req: RequestExt, res: ServerResponse, buf: Buffer, encoding: BufferEncoding) => {
   if (buf && buf.length) {
     req.rawBody = cleanupBody(buf.toString(encoding || "utf8"));
-    console.log("Save", req.rawBody);
   }
 };
 
