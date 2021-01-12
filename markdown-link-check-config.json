@@ -4,5 +4,11 @@
       "pattern": "^https://github\\.com/Azure/autorest\\."
     }
   ],
+  "replacementPatterns": [
+    {
+      "pattern": "https://github\\.com/Azure/autorest/(?:blob|tree)/master/",
+      "replacement": "{{BASEURL}}/"
+    }
+  ],
   "aliveStatusCodes": [200, 203]
 }
