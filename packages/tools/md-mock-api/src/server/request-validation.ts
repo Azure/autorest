@@ -1,8 +1,9 @@
+import deepEqual from "deep-equal";
 import { MockRouteRequestDefinition, RequestBodyRequirement } from "../models";
 import { RequestExt } from "./request-ext";
 
 class ValidationError extends Error {
-  constructor(message: string, public expected: string | undefined, public actual: string | undefined) {
+  constructor(message: string, public expected: unknown | undefined, public actual: unknown | undefined) {
     super(message);
   }
 
@@ -31,25 +32,33 @@ export const validateRequest = (definition: MockRouteRequestDefinition, request:
  */
 const validateBodyContent = (bodyRequirement: RequestBodyRequirement, request: RequestExt) => {
   console.log("Validate", request.body, request.rawBody);
-  const expectedBody = bodyRequirement.rawContent;
-  const actualBody = request.rawBody;
+  const expectedRawBody = bodyRequirement.rawContent;
+  const actualRawBody = request.rawBody;
 
-  if (expectedBody == null) {
-    if (!isBodyEmpty(actualBody)) {
-      throw new ValidationError("Body provided doesn't match expected body.", bodyRequirement.rawContent, actualBody);
+  if (expectedRawBody == null) {
+    if (!isBodyEmpty(actualRawBody)) {
+      throw new ValidationError(
+        "Body provided doesn't match expected body.",
+        bodyRequirement.rawContent,
+        actualRawBody,
+      );
     }
     return;
   }
 
   if (bodyRequirement.matchType === undefined || bodyRequirement.matchType === "exact") {
-    if (actualBody !== bodyRequirement.rawContent) {
-      throw new ValidationError("Body provided doesn't match expected body.", bodyRequirement.rawContent, actualBody);
+    if (actualRawBody !== bodyRequirement.rawContent) {
+      throw new ValidationError(
+        "Body provided doesn't match expected body.",
+        bodyRequirement.rawContent,
+        actualRawBody,
+      );
     }
   }
 
   if (bodyRequirement.matchType === "object") {
-    if (actualBody !== bodyRequirement.rawContent) {
-      throw new ValidationError("Body provided doesn't match expected body.", bodyRequirement.rawContent, actualBody);
+    if (!deepEqual(request.body, bodyRequirement.content, { strict: true })) {
+      throw new ValidationError("Body provided doesn't match expected body.", bodyRequirement.content, request.body);
     }
   }
 };

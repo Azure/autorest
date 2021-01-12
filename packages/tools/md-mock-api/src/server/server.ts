@@ -4,6 +4,7 @@ import express, { ErrorRequestHandler, Response } from "express";
 import morgan from "morgan";
 import { logger } from "../logger";
 import { MockRouteDefinition } from "../models";
+import { cleanupBody } from "../utils";
 import { RequestExt } from "./request-ext";
 import { processRequest } from "./request-processor";
 
@@ -21,7 +22,7 @@ const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
 
 const rawBodySaver = (req: RequestExt, res: ServerResponse, buf: Buffer, encoding: BufferEncoding) => {
   if (buf && buf.length) {
-    req.rawBody = buf.toString(encoding || "utf8");
+    req.rawBody = cleanupBody(buf.toString(encoding || "utf8"));
     console.log("Save", req.rawBody);
   }
 };

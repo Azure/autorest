@@ -1,4 +1,5 @@
 import { MockBody, RequestBodyRequirement } from "../models";
+import { cleanupBody } from "../utils";
 import { extractCodeBlockFromTreeNode, Language } from "./md-code-block";
 import { MarkdownTreeNode } from "./md-tree";
 
@@ -27,7 +28,7 @@ export const extractBodyDefinitionFromTreeNode = (node: MarkdownTreeNode, fromSe
   const language = validateSupportedLanguage(code.language, sectionName);
 
   return {
-    rawContent: code.content.trim(),
+    rawContent: cleanupBody(code.content),
     contentType: getContentTypeFromLanguage(language, sectionName),
   };
 };
