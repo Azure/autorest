@@ -20,7 +20,7 @@
 
 ## Data Types
 ### Primitive Data Types
-The primitive types are based on [JSON-Schema Draft 4](JSON-primitive-types). More details in the OpenAPI Specification [here](OpenAPI-primitive-types).
+The primitive types are based on [JSON-Schema Draft 4][JSON-primitive-types]. More details in the OpenAPI Specification [here][OpenAPI-primitive-types].
 
 **Example:**
 ```json
@@ -708,7 +708,7 @@ if ((int)_statusCode != 200)
 }
 ```
 
-See [Error Handling](../../client/error.md) for details on how to catch and use the exceptions from generated clients.
+See [Error Handling](../client/readme.md) for details on how to catch and use the exceptions from generated clients.
 
 ### DEPRECATED - Composite Clients
 AutoRest supports a concept of a composite client where multiple OpenAPI documents are merged together to generate a single ServiceClient. To use this feature the OpenAPI documents need to conform to the following rules:
