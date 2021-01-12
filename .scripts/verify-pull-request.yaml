@@ -26,7 +26,7 @@ jobs:
           npx @microsoft/rush rebuild
         displayName: "Build"
 
-      - script: npx @microsoft/rush test -v
+      - script: npx @microsoft/rush test:ci -v
         displayName: Test
 
       - script: npx @microsoft/rush lint -v

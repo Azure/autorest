@@ -26,12 +26,16 @@ const rawBodySaver = (req: RequestExt, res: ServerResponse, buf: Buffer, encodin
   }
 };
 
+const loggerstream = {
+  write: (message: string) => logger.info(message),
+};
+
 export class MockApiServer {
   private app: express.Application;
 
   constructor(private config: MockApiServerConfig) {
     this.app = express();
-    this.app.use(morgan("dev"));
+    this.app.use(morgan("dev", { stream: loggerstream }));
     this.app.use(bodyParser.json({ verify: rawBodySaver, strict: false }));
     this.app.use(bodyParser.urlencoded({ verify: rawBodySaver, extended: true }));
     this.app.use(bodyParser.raw({ verify: rawBodySaver, type: "*/*" }));

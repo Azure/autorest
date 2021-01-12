@@ -42,8 +42,8 @@
     },
     {
       "commandKind": "bulk",
-      "name": "test",
-      "summary": "Tests projects. Runs `npm test` on all projects.",
+      "name": "test:ci",
+      "summary": "Tests projects. Runs `npm test:ci` on all projects.",
       "enableParallelism": false,
       "allowWarningsInSuccessfulBuild": true
     },
