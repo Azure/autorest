@@ -7,7 +7,7 @@ import { cleanRender } from "./md-utils";
  */
 export type Language = "json" | "yaml" | "xml";
 
-interface ExtractedCodeBlock {
+export interface ExtractedCodeBlock {
   language: Language;
   content: string;
 }

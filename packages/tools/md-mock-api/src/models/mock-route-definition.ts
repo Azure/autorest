@@ -20,7 +20,7 @@ export interface MockRouteResponseDefinition {
 
 export interface MockBody {
   contentType?: string;
-  content: string;
+  rawContent?: string;
 }
 
 export interface RequestBodyRequirementBase {

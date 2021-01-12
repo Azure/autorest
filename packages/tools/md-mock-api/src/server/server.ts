@@ -1,5 +1,5 @@
 import bodyParser from "body-parser";
-import express from "express";
+import express, { ErrorRequestHandler } from "express";
 import morgan from "morgan";
 import { logger } from "../logger";
 import { MockRouteDefinition } from "../models";
@@ -7,6 +7,14 @@ import { processRequest } from "./request-processor";
 export interface MockApiServerConfig {
   port: number;
 }
+
+const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
+  console.log("err", JSON.stringify(err));
+  res.status(err.status || 500);
+  res
+    .send(err instanceof Error ? { name: err.name, message: err.message, stack: err.stack } : JSON.stringify(err))
+    .end();
+};
 
 export class MockApiServer {
   private app: express.Application;
@@ -17,6 +25,8 @@ export class MockApiServer {
   }
 
   public start(): void {
+    this.app.use(errorHandler);
+
     this.app.listen(this.config.port, () => {
       logger.info(`Started server on port ${this.config.port}`);
     });

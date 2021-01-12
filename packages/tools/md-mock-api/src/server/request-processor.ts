@@ -33,7 +33,7 @@ export const processRequest = (route: MockRouteDefinition, request: Request, res
     if (responseDef.body.contentType) {
       response.contentType(responseDef.body.contentType);
     }
-    response.send(render(responseDef.body.content, templateContext));
+    response.send(responseDef.body.rawContent && render(responseDef.body.rawContent, templateContext));
   }
   response.end();
 };

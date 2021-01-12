@@ -6,13 +6,13 @@ import {
   CommonDefinition,
   CommonRequestDefinition,
   CommonResponseDefinition,
-  MockBody,
   MockRouteDefinition,
   MockRouteDefinitionGroup,
   MockRouteRequestDefinition,
   MockRouteResponseDefinition,
 } from "../models";
-import { getContentTypeFromLanguage } from "./md-body-parser";
+import { extractBodyDefinitionFromTreeNode, extractBodyRequirementFromTreeNode } from "./md-body-parser";
+import { extractCodeBlockFromMarkdownNode, extractCodeBlockFromTreeNode, ExtractedCodeBlock } from "./md-code-block";
 import { mapMarkdownTree } from "./md-mapper";
 import { convertToTree, dumpMarkdownTree, MarkdownTreeNode } from "./md-tree";
 import { cleanRender } from "./md-utils";
@@ -234,13 +234,4 @@ const assertProperty = <T, K extends keyof T>(
     throw new Error(`Section ${sectionName} is missing required property ${key}`);
   }
   return true;
-};
-
-const extractBodyDefinitionFromTreeNode = (node: MarkdownTreeNode, fromSection: string): MockBody => {
-  const sectionName = `${fromSection} > Body`;
-  const code = extractCodeBlockFromTreeNode(node, sectionName);
-  return {
-    content: code.content.trim(),
-    contentType: getContentTypeFromLanguage(code.language, sectionName),
-  };
 };
