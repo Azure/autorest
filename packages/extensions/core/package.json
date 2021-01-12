@@ -29,7 +29,7 @@
   },
   "scripts": {
     "test": "jest --coverage=false --forceExit --runInBand",
-    "test:ci": "jest --ci",
+    "test:ci": "jest --ci --forceExit --runInBand",
     "watch": "tsc -p . --watch",
     "build": "npm run before-build && tsc -p .",
     "static-link": "static-link --no-node-modules --debug",
