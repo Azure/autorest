@@ -20,9 +20,9 @@ class ValidationError extends Error {
 export const validateRequest = (definition: MockRouteRequestDefinition, request: Request): void => {
   if (definition.body) {
     const actualBody = request.body.toString();
-    const expectedBody = definition.body.content;
-    if (expectedBody == null ? !isBodyNull(request.body) : actualBody !== definition.body.content) {
-      throw new ValidationError("Body provided doesn't match epxected body.", definition.body.content, actualBody);
+    const expectedBody = definition.body.rawContent;
+    if (expectedBody == null ? !isBodyNull(request.body) : actualBody !== definition.body.rawContent) {
+      throw new ValidationError("Body provided doesn't match epxected body.", definition.body.rawContent, actualBody);
     }
   }
 };
