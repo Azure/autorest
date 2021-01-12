@@ -26,6 +26,8 @@
 
 9. [Troubleshooting][troubleshooting]
 
+10. [FAQ][faq]
+
 <!-- LINKS -->
 [introduction]: https://github.com/Azure/autorest/blob/master/docs/introduction.md
 [install]: https://github.com/Azure/autorest/blob/master/docs/install/readme.md
@@ -36,3 +38,4 @@
 [dev]: https://github.com/Azure/autorest/blob/master/docs/developer/readme.md
 [powershell]: https://github.com/Azure/autorest/blob/master/docs/powershell/readme.md
 [troubleshooting]: https://github.com/Azure/autorest/blob/master/docs/troubleshooting.md
+[faq]: https://github.com/Azure/autorest/blob/master/docs/faq.md
