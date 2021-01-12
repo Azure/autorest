@@ -1,0 +1,116 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Polling Paging Example",
+      "description": "Show polling and paging generation",
+      "version": "1.0.0"
+    },
+    "host": "localhost:3000",
+    "schemes": [
+      "http"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "paths": {
+      "/directives/polling": {
+        "put": {
+            "x-ms-long-running-operation": true,
+            "operationId": "basicPolling",
+            "description": "A simple polling operation.",
+            "parameters": [
+              {
+                "name": "product",
+                "description": "Product to put",
+                "in": "body",
+                "schema": {
+                  "$ref": "#/definitions/Product"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Initial response",
+                "schema": {
+                  "$ref": "#/definitions/Product"
+                }
+              },
+              "204": {
+                "description": "Final response"
+              },
+              "default": {
+                "description": "Unexpected error",
+                "schema": {
+                  "$ref": "#/definitions/Error"
+                }
+              }
+            }
+          }
+      },
+      "/directives/paging": {
+        "get": {
+            "x-ms-pageable": { "nextLinkName": "nextLink" },
+            "operationId": "basicPaging",
+            "description": "A simple paging operation.",
+            "responses": {
+              "200": {
+                "description": "Your paged items.",
+                "schema": {
+                  "$ref": "#/definitions/ProductResult"
+                }
+              },
+              "default": {
+                "description": "Unexpected error"
+              }
+            }
+        }
+      }
+    },
+    "definitions": {
+        "Error": {
+            "type":  "object",
+            "properties": {
+                "status": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "ProductResult": {
+            "type":  "object",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Product"
+                    }
+                },
+                "nextLink": {
+                    "type": "string"
+                }
+            }
+        },
+        "Product": {
+            "type":  "object",
+            "properties": {
+                "properties": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "integer"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+  }
