@@ -1,4 +1,5 @@
 import { testClient } from "../../test/utils";
+import { BODY_NOT_EQUAL_ERROR_MESSAGE } from "./request-validation";
 import { MockApiServer } from "./server";
 
 describe("Server Validation", () => {
@@ -32,7 +33,8 @@ describe("Server Validation", () => {
           method: "post",
           url: "/body-match-validation",
           body: {
-            content: `foo`,
+            matchType: "exact",
+            rawContent: `foo`,
           },
         },
         response: {
@@ -45,9 +47,9 @@ describe("Server Validation", () => {
       const response = await testClient(server).post("/body-match-validation");
       expect(response.status).toEqual(400);
       expect(response.body).toEqual({
-        message: "Body provided doesn't match epxected body.",
+        message: BODY_NOT_EQUAL_ERROR_MESSAGE,
         expected: "foo",
-        actual: "{}",
+        actual: undefined,
       });
     });
 
@@ -56,7 +58,7 @@ describe("Server Validation", () => {
 
       expect(response.status).toEqual(400);
       expect(response.body).toEqual({
-        message: "Body provided doesn't match epxected body.",
+        message: BODY_NOT_EQUAL_ERROR_MESSAGE,
         expected: "foo",
         actual: "bar",
       });

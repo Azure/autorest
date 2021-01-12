@@ -34,7 +34,7 @@ describe("Server Templating", () => {
       response: {
         status: 200,
         body: {
-          content: `foo bar {{request.headers.myheader}}`,
+          rawContent: `foo bar {{request.headers.myheader}}`,
         },
       },
     });

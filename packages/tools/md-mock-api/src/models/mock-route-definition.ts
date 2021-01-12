@@ -35,10 +35,16 @@ export interface RequestBodyRequirementBase {
   rawContent: string;
 }
 
+/**
+ * Match the raw content exactly.(Default)
+ */
 type ExactMatch = {
-  matchType: "exact";
+  matchType?: "exact";
 };
 
+/**
+ * Does a deep equal with the body.
+ */
 type ObjectMatch = {
   matchType: "object";
   content: unknown;
