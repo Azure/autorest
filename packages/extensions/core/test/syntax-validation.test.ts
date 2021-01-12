@@ -11,7 +11,7 @@ import { Message, Channel } from "../lib/message";
 import { AutoRest } from "../lib/autorest-core";
 
 import { parse } from "../lib/parsing/literate-yaml";
-import { Configuration } from "../lib/configuration";
+import { ConfigurationLoader } from "../lib/configuration";
 
 const getLoaderErrors = async (swagger: string): Promise<Array<Message>> =>  {
     const dataStore = new DataStore(CancellationToken.None);
@@ -37,7 +37,7 @@ const getLoaderErrors = async (swagger: string): Promise<Array<Message>> =>  {
 
 describe("SyntaxValidation", () => {
   afterAll(async () => {
-    await Configuration.shutdown();
+    await ConfigurationLoader.shutdown();
   });
 
   xit("syntax errors", async () => {

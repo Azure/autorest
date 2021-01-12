@@ -6,7 +6,7 @@ import { isAbsolute } from "path";
 
 import { ResolveUri, GetFilenameWithoutExtension } from "@azure-tools/uri";
 import { DataSource } from "@azure-tools/datastore";
-import { AutoRestConfigurationImpl } from "./lib/configuration";
+import { AutoRestRawConfiguration } from "./lib/configuration";
 
 const regexLegacyArg = /^-[^-]/;
 
@@ -17,7 +17,7 @@ const regexLegacyArg = /^-[^-]/;
 async function ParseCompositeSwagger(
   inputScope: DataSource,
   uri: string,
-  targetConfig: AutoRestConfigurationImpl,
+  targetConfig: AutoRestRawConfiguration,
 ): Promise<void> {
   const compositeSwaggerFile = await inputScope.ReadStrict(uri);
   const data = await compositeSwaggerFile.ReadObject<{ info: any; documents: Array<string> }>();
@@ -32,8 +32,8 @@ async function ParseCompositeSwagger(
   baseFolderUri: string,
   inputScope: DataSource,
   args: Array<string>,
-): Promise<AutoRestConfigurationImpl> {
-  const result: AutoRestConfigurationImpl = {
+): Promise<AutoRestRawConfiguration> {
+  const result: AutoRestRawConfiguration = {
     "input-file": [],
   };
 
