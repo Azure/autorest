@@ -1,4 +1,4 @@
-# <img align="center" src="./images/logo.png">  Installing AutoRest
+# <img align="center" src="../images/logo.png">  Installing AutoRest
 
 Installing AutoRest on Windows, MacOS or Linux involves two steps:
 
@@ -17,7 +17,7 @@ Installing AutoRest on Windows, MacOS or Linux involves two steps:
   ```
 
 3. To confirm you are using AutoRest V3, and not an older version, run `autorest --help`, and confirm your core version is 3.0 and higher.
-We strongly recommend version `3.06318` or higher due to bug fixes. For more versioning information, see (./autorest-versioning.md)
+We strongly recommend version `3.06318` or higher due to bug fixes. For more versioning information, see [here][autorest_versioning].
 # <img align="center" src="images/autorestCoreVersion.png">
 
 4. If you're running into issues running AutoRest, check out our [troubleshooting][troubleshooting] docs
@@ -51,3 +51,4 @@ If you must fall back to AutoRest V2, run
 
 <!-- LINKS -->
 [troubleshooting]: ../troubleshooting.md#module-errors
+[autorest_versioning]: ./autorest-versioning.md
