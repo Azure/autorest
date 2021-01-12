@@ -3,5 +3,6 @@
     {
       "pattern": "^https://github.com/Azure/autorest."
     }
-  ]
+  ],
+  "aliveStatusCodes": [200, 203]
 }
