@@ -341,6 +341,14 @@ export class ConfigurationLoader {
               const view = [...(await createView()).GetNestedConfiguration(shortname)];
               const enableDebugger = view.length > 0 ? <boolean>view[0].GetEntry("debugger") : false;
 
+              // Add a hint here to make legacy users to be aware that the default version has been bumped to 3.0+.
+              if (shortname === "powershell") {
+                messageEmitter.Message.Dispatch({
+                  Channel: Channel.Information,
+                  Text: `\n## The default version of @autorest/powershell has been bummped from 2.1+ to 3.0+.\n > If you still want to use 2.1+ version, please specify it with --use:@autorest/powershell@2.1.{x}, e.g 2.1.401.\n`,
+                });
+              }
+
               if ((await exists(localPath)) && !localPath.endsWith(".tgz")) {
                 localPath = filePath(localPath);
                 if (messageFormat !== "json" && messageFormat !== "yaml") {
