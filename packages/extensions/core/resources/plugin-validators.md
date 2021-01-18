@@ -22,6 +22,7 @@ use-extension:
 ``` yaml $(model-validator)
 # default the v2 generator to using the last stable @microsoft.azure/autorest-core 
 version: ~2.0.4413
+
 use-extension:
   "oav": "~0.4.20"
 ```
