@@ -36,6 +36,7 @@ rules:
   "@typescript-eslint/consistent-type-assertions":
     - warn
     - assertionStyle: "angle-bracket"
+  "@typescript-eslint/triple-slash-reference": "off"
   no-undef: "off"
   no-unused-vars: "off"
   linebreak-style:
