@@ -3,13 +3,20 @@
 The Azure and Model validators
 
 
-``` yaml $(azure-validator)
-# default the v2 generator to using the last stable @microsoft.azure/autorest-core 
+``` yaml $(azure-validator) && !$(v3)
+# default the v2 validator to using the last stable @microsoft.azure/autorest-core 
 version: ~2.0.4413
 
 use-extension:
-  "@microsoft.azure/classic-openapi-validator": "~1.0.9"
-  "@microsoft.azure/openapi-validator": "~1.0.2"
+  "@microsoft.azure/classic-openapi-validator": "~1.1.5"
+  "@microsoft.azure/openapi-validator": "~1.7.0"
+```
+
+``` yaml $(azure-validator) && $(v3)
+# the v3 validator to using the last stable @microsoft.azure/autorest-core 
+version: ~3.0.5537
+use-extension:
+  "@microsoft.azure/openapi-validator": "^1.7.0"
 ```
 
 ``` yaml $(model-validator)
