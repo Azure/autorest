@@ -11,7 +11,9 @@ pool:
 
 steps:
   - template: ./build.yaml
-
+    parameters: 
+      setVersion: true
+      
   - script: npx @microsoft/rush publish --publish --pack --include-all 
     displayName: Pack packages
 
