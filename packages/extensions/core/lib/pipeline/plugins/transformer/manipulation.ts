@@ -10,6 +10,7 @@ import { ResolvedDirective } from "../../../configuration";
 import { Channel, Message, SourceLocation } from "../../../message";
 import { manipulateObject } from "../../object-manipulator";
 import { values } from "@azure-tools/linq";
+import { evalDirectiveTransform } from "./eval";
 
 const safeEval = createSandbox();
 
@@ -42,11 +43,12 @@ export class Manipulator {
                 sink,
                 w,
                 (doc, obj, path) => {
-                  return safeEval<any>(`(() => { { ${t} }; return $; })()`, {
-                    $: obj,
-                    $doc: doc,
-                    $path: path,
-                    $documentPath: data.originalFullPath,
+                  return evalDirectiveTransform(t, {
+                    config: this.config,
+                    value: obj,
+                    doc: doc,
+                    path: path,
+                    documentPath: data.originalFullPath,
                   });
                 },
                 this.config,
