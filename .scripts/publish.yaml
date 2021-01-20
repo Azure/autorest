@@ -16,11 +16,11 @@ steps:
     displayName: Pack packages
 
   - script: |
-    # publish the packages (tag as preview by default)
-    echo "//registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)" > ./.npmrc 
-    for file in common/temp/artifacts/packages/*.tgz 
-    do
-      echo "Trying to publish $file:"
-      # common/temp/pnpm-local/node_modules/.bin/pnpm publish $file --tag latest --access public --no-git-checks || echo no-worries 
-    done
-  displayName: Publish packages
+      # publish the packages (tag as preview by default)
+      echo "//registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)" > ./.npmrc 
+      for file in common/temp/artifacts/packages/*.tgz 
+      do
+        echo "Trying to publish $file:"
+        # common/temp/pnpm-local/node_modules/.bin/pnpm publish $file --tag latest --access public --no-git-checks || echo no-worries 
+      done
+    displayName: Publish packages
