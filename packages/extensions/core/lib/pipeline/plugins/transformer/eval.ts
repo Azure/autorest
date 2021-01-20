@@ -90,7 +90,7 @@ export const evalDirectiveTransform = (transformCode: string, context: Transform
       debug: (text: string) => config.Message({ Channel: Channel.Debug, Text: text }),
       verbose: (text: string) => config.Message({ Channel: Channel.Debug, Text: text }),
       log: (text: string) => console.error(text),
-      config: config,
+      config,
     },
   };
 

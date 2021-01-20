@@ -8,7 +8,7 @@ import { YieldCPU } from "@azure-tools/tasks";
 import { ConfigurationView } from "../../../autorest-core";
 import { ResolvedDirective } from "../../../configuration";
 import { Channel, Message, SourceLocation } from "../../../message";
-import { manipulateObject } from "../../object-manipulator";
+import { manipulateObject } from "./object-manipulator";
 import { values } from "@azure-tools/linq";
 import { evalDirectiveTransform } from "./eval";
 
@@ -36,20 +36,22 @@ export class Manipulator {
           for (const w of directive.where) {
             // transform
             for (const t of directive.transform) {
-              console.error("Safe evakl tghus", t);
               await YieldCPU();
               const result = await manipulateObject(
                 data,
                 sink,
                 w,
                 (doc, obj, path) => {
-                  return evalDirectiveTransform(t, {
+                  const r = evalDirectiveTransform(t, {
                     config: this.config,
                     value: obj,
                     doc: doc,
                     path: path,
                     documentPath: data.originalFullPath,
                   });
+                  console.error("Transform:\n:", t);
+                  console.error("R", r);
+                  return r;
                 },
                 this.config,
                 t,

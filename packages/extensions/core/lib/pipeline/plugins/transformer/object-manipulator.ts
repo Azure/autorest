@@ -8,26 +8,20 @@ import {
   CloneAst,
   DataHandle,
   DataSink,
-  Descendants,
   IsPrefix,
   JsonPath,
-  Mapping,
   nodes,
   ParseNode,
-  paths,
   ReplaceNode,
   ResolveRelativeNode,
   SmartPosition,
-  stringify,
   StringifyAst,
   ToAst,
   YAMLNode,
-  ParseToAst,
 } from "@azure-tools/datastore";
-import { From } from "linq-es2015";
-import { ConfigurationView } from "../autorest-core";
-import { Channel, Message, SourceLocation } from "../message";
-import { IdentitySourceMapping } from "../source-map/merging";
+import { ConfigurationView } from "../../../autorest-core";
+import { Channel } from "../../../message";
+import { IdentitySourceMapping } from "../../../source-map/merging";
 
 export async function manipulateObject(
   src: DataHandle,
