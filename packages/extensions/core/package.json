@@ -40,7 +40,7 @@
     "clean": "rimraf ./dist && rimraf ./*.log",
     "before-build": "mkdirp ./dist/lib/pipeline && cpy ../../libs/autorest-schemas/*.json ./dist/lib/pipeline"
   },
-  "typings": "./dist/main.d.ts",
+  "typings": "./dist/exports.d.ts",
   "devDependencies": {
     "@types/commonmark": "^0.27.0",
     "@types/jsonpath": "^0.2.0",

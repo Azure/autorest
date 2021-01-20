@@ -2,6 +2,9 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+/* eslint-disable @typescript-eslint/triple-slash-reference */
+/// <reference path="../definitions/core.d.ts" />
+/// <reference path="../definitions/vscode.d.ts" />
 
 // if this is being run directly, call the app entrypoint (we're probably running the local folder)
 if (require.main === module) {
@@ -12,7 +15,7 @@ if (require.main === module) {
 if (
   process.argv.indexOf("--no-static-loader") === -1 &&
   process.env["no-static-loader"] === undefined &&
-  require("fs").existsSync("../static-loader.js")
+  require("fs").existsSync(`${__dirname}/../static-loader.js`)
 ) {
   require("../static-loader.js").load(`${__dirname}/../static_modules.fs`);
 }
