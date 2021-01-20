@@ -1,8 +1,7 @@
-import { QuickDataSource, DataHandle, createSandbox, AnyObject, nodes, selectNodes } from "@azure-tools/datastore";
-import * as jsonpath from "jsonpath";
-import { createPerFilePlugin, PipelinePlugin } from "../common";
-import { Manipulator } from "../manipulation";
-import { Channel } from "../../message";
+import { QuickDataSource, DataHandle, createSandbox, AnyObject, selectNodes } from "@azure-tools/datastore";
+import { createPerFilePlugin, PipelinePlugin } from "../../common";
+import { Manipulator } from "./manipulation";
+import { Channel } from "../../../message";
 
 const safeEval = createSandbox();
 

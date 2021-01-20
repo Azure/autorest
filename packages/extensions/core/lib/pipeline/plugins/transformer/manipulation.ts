@@ -5,17 +5,16 @@
 
 import { DataHandle, DataSink, nodes, createSandbox } from "@azure-tools/datastore";
 import { YieldCPU } from "@azure-tools/tasks";
-import { ConfigurationView } from "../autorest-core";
-import { ResolvedDirective } from "../configuration";
-import { Channel, Message, SourceLocation } from "../message";
-import { manipulateObject } from "./object-manipulator";
+import { ConfigurationView } from "../../../autorest-core";
+import { ResolvedDirective } from "../../../configuration";
+import { Channel, Message, SourceLocation } from "../../../message";
+import { manipulateObject } from "../../object-manipulator";
 import { values } from "@azure-tools/linq";
 
 const safeEval = createSandbox();
 
 export class Manipulator {
   private transformations: Array<ResolvedDirective>;
-  private ctr = 0;
 
   public constructor(private config: ConfigurationView) {
     this.transformations = config.resolveDirectives(
@@ -36,6 +35,7 @@ export class Manipulator {
           for (const w of directive.where) {
             // transform
             for (const t of directive.transform) {
+              console.error("Safe evakl tghus", t);
               await YieldCPU();
               const result = await manipulateObject(
                 data,
