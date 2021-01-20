@@ -9,9 +9,9 @@ steps:
     inputs:
       versionSpec: "14.x"
     displayName: "Install Node.js"
-    
+
   - ${{ if eq(parameters.setVersion, true) }}:
-    - npx @microsoft/rush set-versions
+    - script: npx @microsoft/rush set-versions
       displayName: Set package versions
 
   - script: |
