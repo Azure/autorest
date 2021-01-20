@@ -23,6 +23,6 @@ steps:
       for file in common/temp/artifacts/packages/*.tgz 
       do
         echo "Trying to publish $file:"
-        # common/temp/pnpm-local/node_modules/.bin/pnpm publish $file --tag latest --access public --no-git-checks || echo no-worries 
+        common/temp/pnpm-local/node_modules/.bin/pnpm publish $file --tag latest --access public --no-git-checks || echo no-worries 
       done
     displayName: Publish packages
