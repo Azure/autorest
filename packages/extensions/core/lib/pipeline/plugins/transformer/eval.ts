@@ -33,6 +33,23 @@ export interface TransformOptions {
   documentPath: string;
 }
 
+export interface TestOptions {
+  /**
+   * Value to transform.
+   */
+  value: unknown;
+
+  /**
+   * Whole document.
+   */
+  doc: unknown;
+
+  /**
+   * Json path to the object.
+   */
+  path: JsonPath;
+}
+
 interface TransformEvalContext {
   /**
    * Value to transform.
@@ -95,4 +112,18 @@ export const evalDirectiveTransform = (transformCode: string, context: Transform
   };
 
   return safeEval<unknown>(`(() => { { ${transformCode} }; return $; })()`, evalContext);
+};
+
+export const evalDirectiveTest = (testCode: string, options: TestOptions): unknown[] => {
+  const context = {
+    $: options.value,
+    $doc: options.doc,
+    $path: options.path,
+  };
+  return [
+    ...safeEval<any>(
+      `(function* () { ${testCode.indexOf("yield") === -1 ? `yield (${testCode}\n)` : `${testCode}\n`} })()`,
+      context,
+    ),
+  ];
 };

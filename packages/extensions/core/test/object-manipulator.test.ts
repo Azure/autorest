@@ -7,6 +7,7 @@ import * as assert from "assert";
 import { DataStore } from "@azure-tools/datastore";
 import { manipulateObject } from "../lib/pipeline/plugins/transformer/object-manipulator";
 import { createSandbox } from "@azure-tools/datastore";
+import { createCommonmarkProcessorPlugin } from "../lib/pipeline/plugins/commonmark";
 
 const safeEval = createSandbox();
 try {
@@ -26,6 +27,19 @@ paths:
         '200':
           schema:
             "$ref": "#/definitions/NodeA"
+      parameters:
+        - name: Param1
+          in: query
+          schema:
+            type: string
+        - name: Param2
+          in: query
+          schema:
+            type: string
+        - name: Param3
+          in: query
+          schema:
+            type: string
     post:
       description: post fun time
       operationId: Postcircular
@@ -84,6 +98,26 @@ describe("ObjectManipulator", () => {
     const resultRaw = await result.result.ReadData();
     assert.ok(resultRaw.indexOf("NodeA") !== -1);
     assert.ok(resultRaw.indexOf("NodeB") === -1);
+  });
+
+
+  fit("remove from array", async () => {
+    // setup
+    const dataStore = new DataStore(CancellationToken.None);
+    const input = await dataStore.WriteData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
+
+    // remove all models that don't have a description
+    const result = await manipulateObject(
+      input,
+      dataStore.getDataSink(),
+      "$.paths..parameters[*]",
+      (_, x) => x.name == "Param1" ? undefined : x,
+    );
+    expect(result.anyHit).toBe(true);
+    const resultRaw = await result.result.ReadData();
+    expect(resultRaw).not.toContain("Param1");
+    expect(resultRaw).toContain("Param2");
+    expect(resultRaw).toContain("Param3");
   });
 
   it("update", async () => {

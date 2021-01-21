@@ -3,16 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, nodes, createSandbox } from "@azure-tools/datastore";
+import { DataHandle, DataSink, nodes } from "@azure-tools/datastore";
 import { YieldCPU } from "@azure-tools/tasks";
 import { ConfigurationView } from "../../../autorest-core";
 import { ResolvedDirective } from "../../../configuration";
 import { Channel, Message, SourceLocation } from "../../../message";
 import { manipulateObject } from "./object-manipulator";
 import { values } from "@azure-tools/linq";
-import { evalDirectiveTransform } from "./eval";
-
-const safeEval = createSandbox();
+import { evalDirectiveTest, evalDirectiveTransform } from "./eval";
 
 export class Manipulator {
   private transformations: Array<ResolvedDirective>;
@@ -33,57 +31,25 @@ export class Manipulator {
       // matches filter?
       if (this.matchesSourceFilter(documentId || data.key, directive, data.artifactType)) {
         try {
-          for (const w of directive.where) {
+          for (const where of directive.where) {
             // transform
-            for (const t of directive.transform) {
+            for (const transformCode of directive.transform) {
               await YieldCPU();
-              const result = await manipulateObject(
-                data,
-                sink,
-                w,
-                (doc, obj, path) => {
-                  const r = evalDirectiveTransform(t, {
-                    config: this.config,
-                    value: obj,
-                    doc: doc,
-                    path: path,
-                    documentPath: data.originalFullPath,
-                  });
-                  console.error("Transform:\n:", t);
-                  console.error("R", r);
-                  return r;
-                },
-                this.config,
-                t,
-
-                /*,
-              {
-                reason: trans.reason,
-                transformerSourceHandle: // TODO
-              }*/
-              );
-              if (!result.anyHit) {
-                // this.config.Message({
-                //   Channel: Channel.Warning,
-                //   Details: trans,
-                //   Text: `Transformation directive with 'where' clause '${w}' was not used.`
-                // });
-              }
+              const result = await this.processDirectiveTransform(data, sink, where, transformCode);
               data = result.result;
             }
 
             // test
-            for (const t of directive.test) {
+            for (const testCode of directive.test) {
               const doc = await data.ReadObject<any>();
-              const allHits = nodes(doc, w);
+              const allHits = nodes(doc, where);
               for (const hit of allHits) {
-                const testResults = [
-                  ...safeEval<any>(`(function* () { ${t.indexOf("yield") === -1 ? `yield (${t}\n)` : `${t}\n`} })()`, {
-                    $: hit.value,
-                    $doc: doc,
-                    $path: hit.path,
-                  }),
-                ];
+                const testResults = evalDirectiveTest(testCode, {
+                  value: hit.value,
+                  doc: doc,
+                  path: hit.path,
+                });
+
                 for (const testResult of testResults) {
                   if (testResult === false || typeof testResult !== "boolean") {
                     const messageText = typeof testResult === "string" ? testResult : "Custom test failed";
@@ -98,13 +64,6 @@ export class Manipulator {
                   }
                 }
               }
-              if (allHits.length === 0) {
-                // this.config.Message({
-                //   Channel: Channel.Warning,
-                //   Details: trans,
-                //   Text: `Test directive with 'where' clause '${w}' was not used.`
-                // });
-              }
             }
           }
         } catch {
@@ -115,6 +74,29 @@ export class Manipulator {
     }
 
     return data;
+  }
+
+  private processDirectiveTransform(
+    data: DataHandle,
+    sink: DataSink,
+    where: string,
+    transformCode: string,
+  ): Promise<{ anyHit: boolean; result: DataHandle }> {
+    return manipulateObject(
+      data,
+      sink,
+      where,
+      (doc, obj, path) =>
+        evalDirectiveTransform(transformCode, {
+          config: this.config,
+          value: obj,
+          doc: doc,
+          path: path,
+          documentPath: data.originalFullPath,
+        }),
+      this.config,
+      transformCode,
+    );
   }
 
   public async process(data: DataHandle, sink: DataSink, isObject: boolean, documentId?: string): Promise<DataHandle> {

@@ -76,7 +76,9 @@ export async function manipulateObject(
     try {
       const newObject = transformer(doc, Clone(hit.value), hit.path);
       const newAst = newObject === undefined ? undefined : ToAst(newObject); // <- can extend ToAst to also take an "ambient" object with AST, in order to create anchor refs for existing stuff!
+      console.error("{here3", hit.path, newObject);
       const oldAst = ResolveRelativeNode(ast, ast, hit.path);
+      console.error("old", oldAst);
       ast =
         ReplaceNode(ast, oldAst, newAst) ||
         (() => {
