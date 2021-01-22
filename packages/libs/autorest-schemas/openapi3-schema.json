@@ -6,6 +6,9 @@
     "paths"
   ],
   "properties": {
+    "$schema": {
+      "type": "string"
+    },
     "openapi": {
       "type": "string",
       "pattern": "^3\\.0\\.\\d(-.+)?$"

@@ -33,9 +33,7 @@ rules:
   "@typescript-eslint/explicit-module-boundary-types": "off"
   "@typescript-eslint/ban-types": "off"
   "require-atomic-updates": "off"
-  "@typescript-eslint/consistent-type-assertions":
-    - warn
-    - assertionStyle: "angle-bracket"
+  "@typescript-eslint/consistent-type-assertions": "off"
   no-undef: "off"
   no-unused-vars: "off"
   linebreak-style:
