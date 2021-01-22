@@ -31,6 +31,15 @@ export interface AutoRestRawConfiguration {
   "verbose"?: boolean;
   "time"?: boolean;
 
+  // --------------------------------------
+  // Temporary flags to deprecate features:
+
+  /**
+   * Mark OpenAPI3 validation(schema) error as warnings. (Will be removed and OpenAPI3 validation errors will always fail the pipeline)
+   */
+  "mark-oai3-errors-as-warnings"?: boolean;
+  // --------------------------------------
+
   // plugin specific
   "output-file"?: string;
   "output-folder"?: string;

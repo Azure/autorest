@@ -66,7 +66,7 @@ dependencies:
   winston: 3.3.3
   yaml-ast-parser: 0.0.43
   yargs: 16.2.0
-  z-schema: 3.25.1
+  z-schema: 5.0.0
 lockfileVersion: 5.2
 packages:
   /@azure-tools/async-io/3.0.252:
@@ -7049,6 +7049,12 @@ packages:
       node: '>= 0.10'
     resolution:
       integrity: sha512-X/p3UZerAIsbBfN/IwahhYaBbY68EN/UQBWHtsbXGT5bfrH/p4NQzUCG1kF/rtKaNpnJ7jAu6NGTdSNtyNIXMw==
+  /validator/12.2.0:
+    dev: false
+    engines:
+      node: '>= 0.10'
+    resolution:
+      integrity: sha512-jJfE/DW6tIK1Ek8nCfNFqt8Wb3nzMoAbocBF6/Icgg1ZFSBpObdnwVY2jQj6qUqzhx5jc71fpvBWyLGO7Xl+nQ==
   /vary/1.1.2:
     dev: false
     engines:
@@ -7392,6 +7398,19 @@ packages:
       commander: 2.20.3
     resolution:
       integrity: sha512-7tDlwhrBG+oYFdXNOjILSurpfQyuVgkRe3hB2q8TEssamDHB7BbLWYkYO98nTn0FibfdFroFKDjndbgufAgS/Q==
+  /z-schema/5.0.0:
+    dependencies:
+      lodash.get: 4.4.2
+      lodash.isequal: 4.5.0
+      validator: 12.2.0
+    dev: false
+    engines:
+      node: '>=8.0.0'
+    hasBin: true
+    optionalDependencies:
+      commander: 2.20.3
+    resolution:
+      integrity: sha512-58TxNEurHQEEgbrNbQnoUHXgh6tiplSvKb7D3o4K6KzICQk9vFyl8B0zycC/p3gW92qBZCmq5NJIhJODKrV7JQ==
   'file:projects/autorest.tgz':
     dependencies:
       '@azure-tools/async-io': 3.0.253
@@ -7433,7 +7452,7 @@ packages:
       '@azure-tools/extension': 3.0.263
       '@azure-tools/linq': 3.1.262
       '@azure-tools/oai2-to-oai3': 4.2.274
-      '@azure-tools/object-comparison': 3.0.251
+      '@azure-tools/object-comparison': 3.0.252
       '@azure-tools/openapi': 3.0.261
       '@azure-tools/tasks': 3.0.253
       '@azure-tools/uri': 3.0.255
@@ -7467,11 +7486,11 @@ packages:
       vscode-jsonrpc: 3.6.2
       vscode-languageserver: 3.5.1
       yaml-ast-parser: 0.0.43
-      z-schema: 3.25.1
+      z-schema: 5.0.0
     dev: false
     name: '@rush-temp/core'
     resolution:
-      integrity: sha512-Yi6FGwrv4vvNDPjOW3wDNVzq+jqX6jgogmae7TNOq1PRK5NJr3U/vgoGteaDYZ2xvWGQpWLZiZxnlkV2ovGBYg==
+      integrity: sha512-nFVvHHsZtARFi4jnyweKKEdHxCRQjMQDwS/GzPz/DuhyAFdNQCQaTdczbmmO8DeUSHF/Y68JdEq3UsHfd23MPA==
       tarball: 'file:projects/core.tgz'
     version: 0.0.0
   'file:projects/md-mock-api.tgz':
@@ -7591,4 +7610,4 @@ specifiers:
   winston: ~3.3.3
   yaml-ast-parser: 0.0.43
   yargs: ~16.2.0
-  z-schema: ^3.19.0
+  z-schema: ^5.0.0
