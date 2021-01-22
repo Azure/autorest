@@ -100,26 +100,6 @@ describe("ObjectManipulator", () => {
     assert.ok(resultRaw.indexOf("NodeB") === -1);
   });
 
-
-  fit("remove from array", async () => {
-    // setup
-    const dataStore = new DataStore(CancellationToken.None);
-    const input = await dataStore.WriteData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
-
-    // remove all models that don't have a description
-    const result = await manipulateObject(
-      input,
-      dataStore.getDataSink(),
-      "$.paths..parameters[*]",
-      (_, x) => x.name == "Param1" ? undefined : x,
-    );
-    expect(result.anyHit).toBe(true);
-    const resultRaw = await result.result.ReadData();
-    expect(resultRaw).not.toContain("Param1");
-    expect(resultRaw).toContain("Param2");
-    expect(resultRaw).toContain("Param3");
-  });
-
   it("update", async () => {
     // setup
     const dataStore = new DataStore(CancellationToken.None);
