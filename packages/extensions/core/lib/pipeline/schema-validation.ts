@@ -63,13 +63,13 @@ export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
       }
       if (!isSecondary) {
         config.Message({
-          Channel: Channel.Warning,
+          Channel: Channel.Error,
           Plugin: "schema-validator-openapi",
           Text: [
             `Errors in OpenAPI 3 file found. Errors are now failing the pipeline.`,
             `You can use --markOpenAPI3ErrorsAsWarning to keep mark as warning and let autorest keep going.`,
             `If you believe this the validation error is incorrect, please open an issue at https://github.com/Azure/autorest`,
-            `NOTE: in the future this flag will be removed and validation error will fail the pipeline. `,
+            `NOTE: in the future this flag will be removed and validation error will fail the pipeline.`,
           ].join("\n"),
         });
         throw new OperationAbortedException();
