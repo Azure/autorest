@@ -110,7 +110,6 @@ const logValidationError = (
   type: "error" | "warning",
 ) => {
   const path = parseJsonPointer(error.path);
-  console.error("error", error);
   config.Message({
     Channel: type == "warning" ? Channel.Warning : Channel.Error,
     Details: error,
