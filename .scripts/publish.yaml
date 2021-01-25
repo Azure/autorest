@@ -10,54 +10,19 @@ pool:
   vmImage: "ubuntu-latest"
 
 steps:
-  - task: NodeTool@0
-    inputs:
-      versionSpec: "10.x"
-    displayName: "Install Node.js"
+  - template: ./build.yaml
+    parameters:
+      setVersion: true
+
+  - script: npx @microsoft/rush publish --publish --pack --include-all
+    displayName: Pack packages
 
   - script: |
-      # ensure latest npm is installed
-      npm install -g npm 
-
-      npm install -g publish-release
-
-      # Remove any existing node_modules folder just in case
-      rm -rf node_modules
-
-      # make sure the versions are all synchronized 
-      npx @microsoft/rush set-versions
-      rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
-
-      # TODO: Remove this section as we deprecate @autorest/autorest
-      # copy the autorest folder into autorestautorest
-      # and tweak the files so we can build @autorest/autorest too.
-      # cp -r autorest autorestautorest
-      # sed 's/\"name\": \"autorest\",/\"name\": \"@autorest\/autorest\",/g' -i autorestautorest/package.json
-      # sed 's/\"autorest\":/\"autorest-beta\":/g' -i autorestautorest/package.json
-      # sed 's/.*#region.*//g' -i rush.json
-
-      # pull in dependencies
-      npx @microsoft/rush update 
-      rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
-
-      # compile the code
-      npx @microsoft/rush rebuild 
-      rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
-
-      # build the packages
-      npx @microsoft/rush publish --publish --pack --include-all 
-      rc=$?; if [ $rc -ne 0 ]; then exit $rc ; fi 
-
-      # publish packages to a github release.
-
-      # publish autorest cli and beta (@autorest/autorest)
-      cd packages/apps/autorest
-      v=`node -e "console.log(require('./package.json').version)"`
-      publish-release --token $(azuresdk-github-pat) --repo autorest --owner azure --name autorest-$v --tag autorest-$v --notes='prerelease build' --prerelease --editRelease false --assets ../../../common/temp/artifacts/packages/autorest-$v.tgz --target_commitish $(Build.SourceBranchName)
-      cd ../../..
-
-      # publish autorest core
-      cd packages/extensions/core
-      v=`node -e "console.log(require('./package.json').version)"`
-      publish-release --token $(azuresdk-github-pat) --repo autorest --owner azure --name autorest-core-$v --tag autorest-core-$v --notes='prerelease build' --prerelease --editRelease false --assets ../../../common/temp/artifacts/packages/autorest-core-$v.tgz --target_commitish $(Build.SourceBranchName)
-      cd ../../..
+      # publish the packages (tag as preview by default)
+      echo "//registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)" > ./.npmrc 
+      for file in common/temp/artifacts/packages/*.tgz 
+      do
+        echo "Trying to publish $file:"
+        common/temp/pnpm-local/node_modules/.bin/pnpm publish $file --tag latest --access public --no-git-checks || echo no-worries 
+      done
+    displayName: Publish packages

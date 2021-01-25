@@ -12,20 +12,8 @@ jobs:
   - job: main
     displayName: "Build and test"
     steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: "14.x"
-        displayName: "Install Node.js"
-
-      - script: |
-          npm install -g npm
-          npx @microsoft/rush install
-        displayName: "Install dependencies"
-
-      - script: |
-          npx @microsoft/rush rebuild
-        displayName: "Build"
-
+      - template: ./build.yaml
+      
       - script: npx @microsoft/rush test:ci -v
         displayName: Test
 

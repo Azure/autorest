@@ -1,0 +1,25 @@
+# Template for building projects
+parameters: 
+  - name: setVersion # Update version of packages.
+    type: boolean 
+    default: false
+  
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "14.x"
+    displayName: "Install Node.js"
+
+  - ${{ if eq(parameters.setVersion, true) }}:
+    - script: npx @microsoft/rush set-versions
+      displayName: Set package versions
+
+  - script: |
+      npm install -g npm
+      npx @microsoft/rush update
+    displayName: "Install dependencies"
+
+  - script: |
+      npx @microsoft/rush rebuild
+    displayName: "Build"
+
