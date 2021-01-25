@@ -87,7 +87,7 @@ export interface HttpMultipartRequest extends HttpWithBodyRequest {
 
 
 export class HttpMultipartRequest extends HttpWithBodyRequest implements HttpMultipartRequest {
-  multipart = <true>true;
+  multipart = <const>true;
 }
 
 export interface HttpHeader extends Extensions {

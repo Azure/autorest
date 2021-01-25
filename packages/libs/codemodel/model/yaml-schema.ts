@@ -1,4 +1,4 @@
-import { Schema, Type, DEFAULT_SAFE_SCHEMA } from 'js-yaml';
+import { Schema, Type, DEFAULT_SCHEMA } from 'js-yaml';
 
 import { CodeModel, Security } from './common/code-model';
 import { Metadata, CSharpLanguage, Language } from './common/metadata';
@@ -38,8 +38,7 @@ function TypeInfo<U extends new (...args: any) => any>(type: U) {
   return new Type(`!${type.name}`, { kind: 'mapping', instanceOf: type, construct: (i) => Object.setPrototypeOf(i, type.prototype) });
 }
 
-export const codeModelSchema = Schema.create(DEFAULT_SAFE_SCHEMA, [
-
+export const codeModelSchema = DEFAULT_SCHEMA.extend([
   TypeInfo(Security),
 
   TypeInfo(HttpModel),
@@ -55,7 +54,6 @@ export const codeModelSchema = Schema.create(DEFAULT_SAFE_SCHEMA, [
   TypeInfo(HttpResponse),
 
   TypeInfo(HttpHeader),
-
 
   TypeInfo(BinaryResponse),
   TypeInfo(Response),
@@ -77,10 +75,26 @@ export const codeModelSchema = Schema.create(DEFAULT_SAFE_SCHEMA, [
   TypeInfo(ConditionalValue),
   TypeInfo(ConstantValue),
 
-  new Type('!ChoiceSchema', { kind: 'mapping', instanceOf: ChoiceSchema, construct: (i) => Object.setPrototypeOf(i, ChoiceSchema.prototype) }),
-  new Type('!SealedChoiceSchema', { kind: 'mapping', instanceOf: SealedChoiceSchema, construct: (i) => Object.setPrototypeOf(i, SealedChoiceSchema.prototype) }),
-  new Type('!ConditionalSchema', { kind: 'mapping', instanceOf: ConditionalSchema, construct: (i) => Object.setPrototypeOf(i, ConditionalSchema.prototype) }),
-  new Type('!SealedConditionalSchema', { kind: 'mapping', instanceOf: SealedConditionalSchema, construct: (i) => Object.setPrototypeOf(i, SealedConditionalSchema.prototype) }),
+  new Type("!ChoiceSchema", {
+    kind: "mapping",
+    instanceOf: ChoiceSchema,
+    construct: (i) => Object.setPrototypeOf(i, ChoiceSchema.prototype),
+  }),
+  new Type("!SealedChoiceSchema", {
+    kind: "mapping",
+    instanceOf: SealedChoiceSchema,
+    construct: (i) => Object.setPrototypeOf(i, SealedChoiceSchema.prototype),
+  }),
+  new Type("!ConditionalSchema", {
+    kind: "mapping",
+    instanceOf: ConditionalSchema,
+    construct: (i) => Object.setPrototypeOf(i, ConditionalSchema.prototype),
+  }),
+  new Type("!SealedConditionalSchema", {
+    kind: "mapping",
+    instanceOf: SealedConditionalSchema,
+    construct: (i) => Object.setPrototypeOf(i, SealedConditionalSchema.prototype),
+  }),
   TypeInfo(ConstantSchema),
   TypeInfo(BooleanSchema),
   TypeInfo(ODataQuerySchema),
@@ -131,5 +145,4 @@ export const codeModelSchema = Schema.create(DEFAULT_SAFE_SCHEMA, [
   TypeInfo(Metadata),
 
   // new Type('!set', { kind: 'mapping', instanceOf: Set, represent: (o: any) => [...o], construct: (i) => new Set(i) }),
-
 ]);

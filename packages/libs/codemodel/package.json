@@ -1,7 +1,7 @@
 {
-  "name": "@azure-tools/codemodel",
-  "version": "4.13.0",
-  "patchOffset": 100,
+  "name": "@autorest/codemodel",
+  "version": "4.14.0",
+  "patchOffset": -1219,
   "description": "AutoRest code model library",
   "directories": {
     "doc": "docs"
@@ -11,10 +11,11 @@
   "scripts": {
     "build": "tsc -p .",
     "watch": "tsc -p . --watch",
-    "eslint-fix": "eslint  . --fix --ext .ts",
-    "eslint": "eslint  . --ext .ts",
+    "lint:fix": "eslint  . --fix --ext .ts",
+    "lint": "eslint  . --ext .ts",
     "prepare": "npm run build",
     "test": "echo codemodel: No Tests.",
+    "test:ci": "echo codemodel: No Tests.",
     "clean": "ver > nul 2>&1 nul && npm run --silent clean-cmd || npm run --silent clean-bash",
     "clean-cmd": "if exist dist rmdir /s /q dist && exit 0 || exit 0 ",
     "clean-bash": "rm nul && rm -rf dist && exit 0 || exit 0"
@@ -30,22 +31,23 @@
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Azure/autorest.powershell/issues"
+    "url": "https://github.com/Azure/autorest/issues"
   },
-  "homepage": "https://github.com/Azure/perks/tree/master/codemodel#readme",
-  "readme": "https://github.com/Azure/perks/tree/master/codemodel/readme.md",
+  "homepage": "https://github.com/Azure/autorest/tree/master/packages/libs/codemodel#readme",
+  "readme": "https://github.com/Azure/autorest/tree/master/packages/libs/codemodel/readme.md",
   "devDependencies": {
-    "@types/js-yaml": "3.12.1",
+    "@types/js-yaml": "~4.0.0",
     "@types/mocha": "5.2.5",
-    "@types/node": "12.7.2",
+    "@types/node": "~14.14.20",
     "mocha": "5.2.0",
     "mocha-typescript": "1.1.17",
-    "@typescript-eslint/eslint-plugin": "~2.6.0",
-    "@typescript-eslint/parser": "~2.6.0",
-    "eslint": "~6.6.0",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
+    "eslint-plugin-prettier": "~3.1.4",
+    "eslint": "^7.17.0",
     "typescript": "~3.9.7",
     "glob": "~7.1.4",
-    "js-yaml": "3.13.1",
+    "js-yaml": "~4.0.0",
     "typescript-json-schema": "~0.40.0",
     "ts-morph": "~4.0.1"
   },

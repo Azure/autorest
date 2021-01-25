@@ -1,4 +1,3 @@
-const { resolve } = require('path');
 const jsyaml = require('js-yaml');
 const fs = require('fs').promises;
 
@@ -76,16 +75,11 @@ function sortWithPriorty(a, b) {
   }
   return ib != -1 || a > b ? 1 : a < b ? -1 : 0;
 }
-function deserialize(text, filename) {
-  return js_yaml_1.safeLoad(text, {
-    filename,
-  });
-}
 
 function serialize(model) {
   return jsyaml.dump(model, {
     sortKeys: sortWithPriorty,
-    schema: jsyaml.DEFAULT_SAFE_SCHEMA,
+    schema: jsyaml.DEFAULT_SCHEMA,
     skipInvalid: true,
     lineWidth: 240
   }).
