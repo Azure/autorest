@@ -46,9 +46,7 @@ function ProxifyConfigurationView(cfgView: any) {
   });
 }
 
-
 export class ConfigurationView {
-  [name: string]: any;
   public InputFileUris = new Array<string>();
   public fileSystem: CachingFileSystem;
 
@@ -124,10 +122,6 @@ export class ConfigurationView {
     this.InputFileUris = inputFiles.filter((x) => !filesToExclude.includes(x));
 
     return this;
-  }
-
-  public get Keys(): Array<string> {
-    return Object.getOwnPropertyNames(this.config);
   }
 
   /* @internal */ public updateConfigurationFile(filename: string, content: string) {
