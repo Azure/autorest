@@ -1,0 +1,647 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "AuthorizationCodeOAuthFlow": {
+      "type": "object",
+      "properties": {
+        "authorizationUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "tokenUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "refreshUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "scopes": {
+          "$ref": "./master.json#/definitions/Dictionary<string>"
+        },
+        "extensions": {
+          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "authorizationUrl",
+        "scopes",
+        "tokenUrl"
+      ]
+    },
+    "BearerHTTPSecurityScheme": {
+      "type": "object",
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "enum": [
+            "bearer"
+          ]
+        },
+        "bearerFormat": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "http"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "extensions": {
+          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "scheme",
+        "type"
+      ]
+    },
+    "ClientCredentialsFlow": {
+      "type": "object",
+      "properties": {
+        "tokenUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "refreshUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "scopes": {
+          "$ref": "./master.json#/definitions/Dictionary<string>"
+        },
+        "extensions": {
+          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "scopes",
+        "tokenUrl"
+      ]
+    },
+    "ImplicitOAuthFlow": {
+      "type": "object",
+      "properties": {
+        "authorizationUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "refreshUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "scopes": {
+          "$ref": "./master.json#/definitions/Dictionary<string>"
+        },
+        "extensions": {
+          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "authorizationUrl",
+        "scopes"
+      ]
+    },
+    "NonBearerHTTPSecurityScheme": {
+      "type": "object",
+      "properties": {
+        "scheme": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "http"
+          ]
+        },
+        "extensions": {
+          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "scheme",
+        "type"
+      ]
+    },
+    "OAuth2SecurityScheme": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "oauth2"
+          ]
+        },
+        "flows": {
+          "$ref": "./http.json#/definitions/OAuthFlows"
+        },
+        "description": {
+          "type": "string"
+        },
+        "extensions": {
+          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "flows",
+        "type"
+      ]
+    },
+    "OAuthFlows": {
+      "type": "object",
+      "properties": {
+        "implicit": {
+          "$ref": "./http.json#/definitions/ImplicitOAuthFlow"
+        },
+        "password": {
+          "$ref": "./http.json#/definitions/PasswordOAuthFlow"
+        },
+        "clientCredentials": {
+          "$ref": "./http.json#/definitions/ClientCredentialsFlow"
+        },
+        "authorizationCode": {
+          "$ref": "./http.json#/definitions/AuthorizationCodeOAuthFlow"
+        },
+        "extensions": {
+          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false
+    },
+    "HTTPSecurityScheme": {
+      "anyOf": [
+        {
+          "$ref": "./http.json#/definitions/BearerHTTPSecurityScheme"
+        },
+        {
+          "$ref": "./http.json#/definitions/NonBearerHTTPSecurityScheme"
+        }
+      ]
+    },
+    "SecurityScheme": {
+      "anyOf": [
+        {
+          "$ref": "./http.json#/definitions/BearerHTTPSecurityScheme"
+        },
+        {
+          "$ref": "./http.json#/definitions/NonBearerHTTPSecurityScheme"
+        },
+        {
+          "$ref": "./http.json#/definitions/OAuth2SecurityScheme"
+        },
+        {
+          "$ref": "./http.json#/definitions/APIKeySecurityScheme"
+        },
+        {
+          "$ref": "./http.json#/definitions/OpenIdConnectSecurityScheme"
+        }
+      ]
+    },
+    "APIKeySecurityScheme": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "apiKey"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "in": {
+          "$ref": "./enums.json#/definitions/ParameterLocation"
+        },
+        "description": {
+          "type": "string"
+        },
+        "extensions": {
+          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "in",
+        "name",
+        "type"
+      ]
+    },
+    "OpenIdConnectSecurityScheme": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "openIdConnect"
+          ]
+        },
+        "openIdConnectUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "extensions": {
+          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "openIdConnectUrl",
+        "type"
+      ]
+    },
+    "PasswordOAuthFlow": {
+      "type": "object",
+      "properties": {
+        "tokenUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "refreshUrl": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "scopes": {
+          "$ref": "./master.json#/definitions/Dictionary<string>"
+        },
+        "extensions": {
+          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "scopes",
+        "tokenUrl"
+      ]
+    },
+    "SecurityRequirement": {
+      "description": "common ways of serializing simple parameters",
+      "type": "object",
+      "defaultProperties": [],
+      "additionalProperties": false
+    },
+    "HttpParameter": {
+      "description": "extended metadata for HTTP operation parameters",
+      "type": "object",
+      "properties": {
+        "in": {
+          "$ref": "./enums.json#/definitions/ParameterLocation",
+          "description": "the location that this parameter is placed in the http request"
+        },
+        "style": {
+          "$ref": "./enums.json#/definitions/SerializationStyle",
+          "description": "the Serialization Style used for the parameter."
+        },
+        "explode": {
+          "description": "when set, 'form' style parameters generate separate parameters for each value of an array.",
+          "type": "boolean"
+        },
+        "skipUriEncoding": {
+          "description": "when set, this indicates that the content of the parameter should not be subject to URI encoding rules.",
+          "type": "boolean"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "in"
+      ],
+      "allOf": [
+        {
+          "$ref": "./master.json#/definitions/Protocol"
+        }
+      ]
+    },
+    "HttpRequest": {
+      "description": "HTTP operation protocol data",
+      "type": "object",
+      "properties": {
+        "path": {
+          "description": "A relative path to an individual endpoint. \n\nThe field name MUST begin with a slash. \nThe path is appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order to construct the full URL. \nPath templating is allowed. \n\nWhen matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.",
+          "type": "string"
+        },
+        "uri": {
+          "description": "the base URI template for the operation. This will be a template that has Uri parameters to craft the base url to use.",
+          "type": "string"
+        },
+        "method": {
+          "$ref": "./enums.json#/definitions/HttpMethod",
+          "description": "the HTTP Method used to process this operation"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "path",
+        "uri"
+      ],
+      "allOf": [
+        {
+          "$ref": "./master.json#/definitions/Protocol"
+        }
+      ]
+    },
+    "HttpWithBodyRequest": {
+      "type": "object",
+      "properties": {
+        "knownMediaType": {
+          "$ref": "./enums.json#/definitions/KnownMediaType",
+          "description": "a normalized value for the media type (ie, distills down to a well-known moniker (ie, 'json'))"
+        },
+        "mediaTypes": {
+          "description": "must contain at least one media type to send for the body",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "knownMediaType",
+        "mediaTypes",
+        "method",
+        "path",
+        "uri"
+      ],
+      "allOf": [
+        {
+          "$ref": "./http.json#/definitions/HttpRequest"
+        }
+      ]
+    },
+    "HttpBinaryRequest": {
+      "type": "object",
+      "properties": {
+        "binary": {
+          "type": "boolean",
+          "enum": [
+            true
+          ]
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "binary",
+        "knownMediaType",
+        "mediaTypes",
+        "method",
+        "path",
+        "uri"
+      ],
+      "allOf": [
+        {
+          "$ref": "./http.json#/definitions/HttpWithBodyRequest"
+        }
+      ]
+    },
+    "HttpMultipartRequest": {
+      "type": "object",
+      "properties": {
+        "multipart": {
+          "description": "indicates that the HTTP Request should be a multipart request \n\nie, that it has multiple requests in a single request.",
+          "type": "boolean",
+          "enum": [
+            true
+          ]
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "knownMediaType",
+        "mediaTypes",
+        "method",
+        "multipart",
+        "path",
+        "uri"
+      ],
+      "allOf": [
+        {
+          "$ref": "./http.json#/definitions/HttpWithBodyRequest"
+        }
+      ]
+    },
+    "HttpHeader": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "string"
+        },
+        "schema": {
+          "$ref": "./schemas.json#/definitions/Schema"
+        },
+        "language": {
+          "$ref": "./master.json#/definitions/Languages"
+        },
+        "extensions": {
+          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "header",
+        "language",
+        "schema"
+      ]
+    },
+    "HttpResponse": {
+      "type": "object",
+      "properties": {
+        "statusCodes": {
+          "description": "the possible HTTP status codes that this response MUST match one of.",
+          "type": "array",
+          "items": {
+            "enum": [
+              100,
+              101,
+              102,
+              103,
+              200,
+              201,
+              202,
+              203,
+              204,
+              205,
+              206,
+              207,
+              208,
+              226,
+              300,
+              301,
+              302,
+              303,
+              304,
+              305,
+              306,
+              307,
+              308,
+              400,
+              401,
+              402,
+              403,
+              404,
+              405,
+              406,
+              407,
+              408,
+              409,
+              410,
+              411,
+              412,
+              413,
+              414,
+              415,
+              416,
+              417,
+              418,
+              421,
+              422,
+              423,
+              424,
+              425,
+              426,
+              428,
+              429,
+              431,
+              451,
+              500,
+              501,
+              502,
+              503,
+              504,
+              505,
+              506,
+              507,
+              508,
+              510,
+              511,
+              "default"
+            ]
+          }
+        },
+        "knownMediaType": {
+          "$ref": "./enums.json#/definitions/KnownMediaType",
+          "description": "canonical response type (ie, 'json')"
+        },
+        "mediaTypes": {
+          "description": "the possible media types that this response MUST match one of",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "headers": {
+          "description": "content returned by the service in the HTTP headers",
+          "type": "array",
+          "items": {
+            "$ref": "./http.json#/definitions/HttpHeader"
+          }
+        },
+        "headerGroups": {
+          "description": "sets of HTTP headers grouped together into a single schema",
+          "type": "array",
+          "items": {
+            "$ref": "./schemas.json#/definitions/GroupSchema"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "knownMediaType",
+        "mediaTypes",
+        "statusCodes"
+      ],
+      "allOf": [
+        {
+          "$ref": "./master.json#/definitions/Protocol"
+        }
+      ]
+    },
+    "HttpBinaryResponse": {
+      "type": "object",
+      "properties": {
+        "binary": {
+          "description": "binary responses",
+          "type": "boolean",
+          "enum": [
+            true
+          ]
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "binary",
+        "knownMediaType",
+        "mediaTypes",
+        "statusCodes"
+      ],
+      "allOf": [
+        {
+          "$ref": "./http.json#/definitions/HttpResponse"
+        }
+      ]
+    },
+    "HttpModel": {
+      "description": "code model metadata for HTTP protocol",
+      "type": "object",
+      "properties": {
+        "security": {
+          "description": "a collection of security requirements for the service",
+          "type": "array",
+          "items": {
+            "$ref": "./http.json#/definitions/SecurityRequirement"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$ref": "./master.json#/definitions/Protocol"
+        }
+      ]
+    }
+  }
+}
