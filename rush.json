@@ -39,14 +39,12 @@
       "projectFolder": "packages/libs/autorest-schemas",
       "reviewCategory": "production",
       "shouldPublish": false
-    }
-    /* #region ci-only
-    ,{
-      "packageName": "@autorest/autorest",
-      "projectFolder": "autorestautorest",
+    },
+    {
+      "packageName": "@autorest/codemodel",
+      "projectFolder": "packages/libs/codemodel",
       "reviewCategory": "production",
       "shouldPublish": true
     }
-    /* #region end */
   ]
 }

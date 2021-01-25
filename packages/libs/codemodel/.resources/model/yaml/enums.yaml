@@ -1,0 +1,196 @@
+$schema: 'http://json-schema.org/draft-07/schema#'
+definitions:
+  Default:
+    type: string
+    description: A catch-all for all un-handled response codes.
+    enum:
+      - default
+  HttpMethod:
+    type: string
+    description: standard HTTP protocol methods
+    enum:
+      - delete
+      - get
+      - head
+      - options
+      - patch
+      - post
+      - put
+      - trace
+  ImplementationLocation:
+    type: string
+    enum:
+      - Client
+      - Context
+      - Method
+  KnownMediaType:
+    type: string
+    enum:
+      - binary
+      - form
+      - json
+      - multipart
+      - text
+      - unknown
+      - xml
+  ParameterLocation:
+    type: string
+    description: the location that this parameter is placed in the http request
+    enum:
+      - body
+      - cookie
+      - header
+      - none
+      - path
+      - query
+      - uri
+      - virtual
+  PathEncodingStyle:
+    type: string
+    enum:
+      - label
+      - matrix
+      - simple
+  QueryEncodingStyle:
+    type: string
+    enum:
+      - deepObject
+      - form
+      - pipeDelimited
+      - spaceDelimited
+  SchemaContext:
+    type: string
+    enum:
+      - exception
+      - input
+      - output
+  SchemaType:
+    type: string
+    description: possible schema types that indicate the type of schema.
+    enum:
+      - any
+      - array
+      - binary
+      - boolean
+      - byte-array
+      - char
+      - choice
+      - conditional
+      - constant
+      - credential
+      - date
+      - date-time
+      - dictionary
+      - duration
+      - flag
+      - group
+      - integer
+      - not
+      - number
+      - object
+      - odata-query
+      - or
+      - sealed-choice
+      - sealed-conditional
+      - string
+      - time
+      - unixtime
+      - unknown
+      - uri
+      - uuid
+      - xor
+  Scheme:
+    type: string
+    enum:
+      - bearer
+  SecurityType:
+    type: string
+    enum:
+      - apiKey
+      - http
+      - oauth2
+      - openIdConnect
+  SerializationStyle:
+    type: string
+    description: |-
+      The Serialization Style used for the parameter.
+
+      Describes how the parameter value will be serialized depending on the type of the parameter value.
+    enum:
+      - binary
+      - deepObject
+      - form
+      - json
+      - label
+      - matrix
+      - pipeDelimited
+      - simple
+      - spaceDelimited
+      - tabDelimited
+      - xml
+  StatusCode:
+    enum:
+      - 100
+      - 101
+      - 102
+      - 103
+      - 200
+      - 201
+      - 202
+      - 203
+      - 204
+      - 205
+      - 206
+      - 207
+      - 208
+      - 226
+      - 300
+      - 301
+      - 302
+      - 303
+      - 304
+      - 305
+      - 306
+      - 307
+      - 308
+      - 400
+      - 401
+      - 402
+      - 403
+      - 404
+      - 405
+      - 406
+      - 407
+      - 408
+      - 409
+      - 410
+      - 411
+      - 412
+      - 413
+      - 414
+      - 415
+      - 416
+      - 417
+      - 418
+      - 421
+      - 422
+      - 423
+      - 424
+      - 425
+      - 426
+      - 428
+      - 429
+      - 431
+      - 451
+      - 500
+      - 501
+      - 502
+      - 503
+      - 504
+      - 505
+      - 506
+      - 507
+      - 508
+      - 510
+      - 511
+      - default
