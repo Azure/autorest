@@ -1,0 +1,36 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Binary with content-type: application/json",
+    "description": "Acceptance test for file with json content type.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/file": {
+      "x-ms-metadata": {
+        "apiVersions": ["1.0.0"]
+      },
+      "post": {
+        "description": "Uploading json file",
+        "operationId": "Upload_File",
+        "requestBody": {
+          "description": "Foo bar",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "format": "file"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Upload successful"
+          }
+        }
+      }
+    }
+  }
+}

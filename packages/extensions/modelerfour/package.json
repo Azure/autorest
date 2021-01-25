@@ -1,0 +1,89 @@
+{
+  "name": "@autorest/modelerfour",
+  "version": "4.15.0",
+  "patchOffset": -765,
+  "description": "AutoRest Modeler Version Four (component)",
+  "directories": {
+    "doc": "docs"
+  },
+  "engines": {
+    "node": ">=10.12.0"
+  },
+  "main": "dist/exports.js",
+  "typings": "dist/exports.d.ts",
+  "scripts": {
+    "start": "node --max_old_space_size=4096 ./entrypoints/main.js",
+    "debug": "node --max_old_space_size=4096 --inspect-brk=localhost:9229 ./entrypoints/main.js",
+    "fix": "eslint  ./src --fix --ext .ts",
+    "lint": "eslint  ./src --ext .ts --max-warnings=0",
+    "static-link": "static-link --no-node-modules --debug",
+    "watch": "tsc -p . --watch",
+    "build": "tsc -p .",
+    "prepack": "npm run static-link && npm run build",
+    "test": "jest --watch --coverage=false",
+    "test:ci": "jest --ci"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/autorest.modelerfour.git"
+  },
+  "keywords": [
+    "AutoRest",
+    "ModelerFour"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/autorest.modelerfour/issues"
+  },
+  "homepage": "https://github.com/Azure/autorest.modelerfour/tree/master/modelerfour#readme",
+  "readme": "https://github.com/Azure/autorest.modelerfour/tree/master/modelerfour/readme.md",
+  "devDependencies": {
+    "@types/js-yaml": "~4.0.0",
+    "@types/node": "~14.14.20",
+    "@types/jest": "^26.0.20",
+    "typescript": "~3.9.7",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
+    "eslint": "^7.17.0",
+    "@azure-tools/async-io": "~3.0.0",
+    "source-map-support": "^0.5.19",
+    "@microsoft.azure/autorest.testserver": "~2.10.46",
+    "@azure-tools/uri": "~3.0.0",
+    "js-yaml": "3.13.1",
+    "jest": "^26.6.3",
+    "jest-snapshot": "~26.6.2",
+    "expect": "~26.6.2",
+    "ts-jest": "^26.4.4",
+    "@azure-tools/codegen": "2.5.290",
+    "@azure-tools/codegen-csharp": "~3.0.0",
+    "@azure-tools/autorest-extension-base": "~3.1.0",
+    "@azure-tools/codemodel": "~4.13.0",
+    "@azure-tools/tasks": "~3.0.0",
+    "@azure-tools/openapi": "~3.0.0",
+    "@azure-tools/datastore": "~4.1.0",
+    "@azure-tools/linq": "~3.1.0",
+    "static-link": "^0.3.0",
+    "chalk": "2.3.0",
+    "recursive-diff": "~1.0.6",
+    "prettier": "~2.2.1",
+    "eslint-plugin-prettier": "~3.2.0"
+  },
+  "static-link": {
+    "entrypoints": [],
+    "dependencies": {
+      "js-yaml": "3.13.1",
+      "@azure-tools/codegen": "~2.4.0",
+      "@azure-tools/codegen-csharp": "~3.0.0",
+      "@azure-tools/autorest-extension-base": "~3.1.0",
+      "@azure-tools/codemodel": "~4.13.0",
+      "@azure-tools/tasks": "~3.0.0",
+      "@azure-tools/openapi": "~3.0.0",
+      "@azure-tools/datastore": "~4.1.0",
+      "@azure-tools/linq": "~3.1.0",
+      "source-map-support": "^0.5.19",
+      "recursive-diff": "~1.0.6"
+    }
+  },
+  "dependencies": {}
+}

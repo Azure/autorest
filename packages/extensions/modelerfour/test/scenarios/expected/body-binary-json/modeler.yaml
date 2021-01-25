@@ -1,0 +1,107 @@
+!<!CodeModel> 
+info: !<!Info> 
+  description: Acceptance test for file with json content type.
+  title: 'Binary with content-type: application/json'
+schemas: !<!Schemas> 
+  strings:
+    - !<!StringSchema> &ref_0
+      type: string
+      language: !<!Languages> 
+        default:
+          name: string
+          description: simple string
+      protocol: !<!Protocols> {}
+  binaries:
+    - !<!BinarySchema> &ref_1
+      type: binary
+      language: !<!Languages> 
+        default:
+          name: binary
+          description: ''
+      protocol: !<!Protocols> {}
+globalParameters:
+  - !<!Parameter> &ref_3
+    schema: *ref_0
+    clientDefaultValue: ''
+    implementation: Client
+    origin: 'modelerfour:synthesized/host'
+    required: true
+    extensions:
+      x-ms-skip-url-encoding: true
+    language: !<!Languages> 
+      default:
+        name: $host
+        description: server parameter
+        serializedName: $host
+    protocol: !<!Protocols> 
+      http: !<!HttpParameter> 
+        in: uri
+operationGroups:
+  - !<!OperationGroup> 
+    $key: Upload
+    operations:
+      - !<!Operation> 
+        apiVersions:
+          - !<!ApiVersion> 
+            version: 1.0.0
+        parameters:
+          - *ref_3
+        requests:
+          - !<!Request> 
+            parameters:
+              - !<!Parameter> &ref_2
+                schema: *ref_1
+                implementation: Method
+                required: true
+                language: !<!Languages> 
+                  default:
+                    name: data
+                    description: Foo bar
+                protocol: !<!Protocols> 
+                  http: !<!HttpParameter> 
+                    in: body
+                    style: binary
+            signatureParameters:
+              - *ref_2
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: ''
+            protocol: !<!Protocols> 
+              http: !<!HttpBinaryRequest> 
+                path: /file
+                method: post
+                binary: true
+                knownMediaType: binary
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !<!Response> 
+            language: !<!Languages> 
+              default:
+                name: ''
+                description: Upload successful
+            protocol: !<!Protocols> 
+              http: !<!HttpResponse> 
+                statusCodes:
+                  - '204'
+        language: !<!Languages> 
+          default:
+            name: File
+            description: Uploading json file
+        protocol: !<!Protocols> {}
+    language: !<!Languages> 
+      default:
+        name: Upload
+        description: ''
+    protocol: !<!Protocols> {}
+security: !<!Security> 
+  authenticationRequired: false
+language: !<!Languages> 
+  default:
+    name: ''
+    description: ''
+protocol: !<!Protocols> 
+  http: !<!HttpModel> {}
