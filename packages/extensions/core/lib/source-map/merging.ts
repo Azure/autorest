@@ -138,6 +138,15 @@ function toJsValue(value: any) {
 // but it works well enough for my needs right now
 // I will revisit it later.
 const macroRegEx = () => /\$\(([a-zA-Z0-9_-]*)\)/gi;
+
+/**
+ * Resolve macro values used(i.e. "$(myMacroValue)")
+ * @param value Value to resolve.
+ * @param propertyName Name of the property having that value.
+ * @param higherPriority Configuration with higher priority to extract value defined in the macro.
+ * @param lowerPriority Configuration with lower priority to extract value defined in the macro.
+ * @param jsAware 
+ */
 export function resolveRValue(
   value: any,
   propertyName: string,
