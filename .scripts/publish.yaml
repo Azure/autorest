@@ -18,8 +18,8 @@ steps:
     displayName: Pack packages
 
   - script: |
-      #  publish the packages (tag as preview by default)
-      NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" rush publish --apply --include-all --set-access-level public
+      NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" 
+      rush publish --apply --include-all --set-access-level public
     displayName: Publish packages
 
     #   # publish the packages (tag as preview by default)
