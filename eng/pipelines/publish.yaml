@@ -18,12 +18,3 @@ steps:
   - script: |
       NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" rush publish --apply --include-all --set-access-level public
     displayName: Publish packages
-
-    #   # publish the packages (tag as preview by default)
-    #   echo "//registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)" > ./.npmrc
-    #   for file in common/temp/artifacts/packages/*.tgz
-    #   do
-    #     echo "Trying to publish $file:"
-    #     npm publish $file --tag latest --access public --no-git-checks || echo no-worries
-    #   done
-    # displayName: Publish packages
