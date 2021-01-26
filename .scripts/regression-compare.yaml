@@ -58,24 +58,31 @@ specs:
       - validation.json
       - xml-service.json
       - xms-error-responses.json
+
 languages:
   - language: python
     outputPath: ../packages/extensions/core/test/regression/python
     oldArgs:
       - --version:~3.0.6320
-      - --use:@autorest/python
+      - --use:@autorest/modelerfour@4.15.451
+      - --use:@autorest/python@5.5.0
     newArgs:
       - --version:../packages/extensions/core
+      - --use:../packages/extensions/modelerfour
+      - --use:@autorest/python@5.5.0
+      
   - language: typescript
     outputPath: ../packages/extensions/core/test/regression/typescript
     oldArgs:
       - --v3
+      - --use:@autorest/modelerfour@4.15.451
       - --package-name:test-package
       - --title:TestClient
-      - --use:@autorest/typescript@6.0.0-dev.20200715.2
+      - --use:@autorest/typescript@6.0.0-dev.20201208.1
     newArgs:
       - --v3
       - --version:../packages/extensions/core
+      - --use:../packages/extensions/modelerfour
       - --package-name:test-package
       - --title:TestClient
-      - --use:@autorest/typescript@6.0.0-dev.20200715.2
+      - --use:@autorest/typescript@6.0.0-dev.20201208.1

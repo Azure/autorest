@@ -1,0 +1,16 @@
+# Steps to verify there is undocumented changes in the PR.
+
+steps:
+  - script: |
+      LABEL_NAME=Publish
+      LABEL_URL=https://api.github.com/repos/$BUILD_REPOSITORY_ID/issues/$SYSTEM_PULLREQUEST_PULLREQUESTNUMBER/labels
+
+      echo "Getting labels using $LABEL_URL"
+      if curl -s "$LABEL_URL" | grep "\"name\": \"$LABEL_NAME\""
+      then
+        echo "Publish label was included in the PR, won't be checking for changelog."
+      else 
+        npx @microsoft/rush change --verify || { echo '\nIf you run the rush publish command locally and meant to publish the changes, add the publish label to the pr.' ; exit 1; }
+      fi
+    displayName: Verify change logs
+    condition: eq(variables['Build.Reason'], 'PullRequest') # only run step if it is a PR

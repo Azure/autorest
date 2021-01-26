@@ -10,6 +10,12 @@ AutoRest is an open source tool -- if you need assistance, first check the docum
 
 View our [docs readme][docs_readme] as a starting point to find both general information and language-generator specific information
 
+## Contributing 
+
+### Contributing guide
+
+Check our [internal developer docs](./docs/internal/readme.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to Autorest.
+
 ### Code of Conduct
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.

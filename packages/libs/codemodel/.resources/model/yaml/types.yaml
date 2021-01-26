@@ -1,0 +1,86 @@
+$schema: 'http://json-schema.org/draft-07/schema#'
+definitions:
+  AllSchemaTypes:
+    type: string
+    description: all schema types
+    enum:
+      - any
+      - array
+      - binary
+      - boolean
+      - byte-array
+      - char
+      - choice
+      - conditional
+      - constant
+      - credential
+      - date
+      - date-time
+      - dictionary
+      - duration
+      - flag
+      - group
+      - integer
+      - not
+      - number
+      - object
+      - odata-query
+      - or
+      - sealed-choice
+      - sealed-conditional
+      - string
+      - time
+      - unixtime
+      - uri
+      - uuid
+      - xor
+  CompoundSchemaTypes:
+    type: string
+    enum:
+      - or
+      - xor
+  ObjectSchemaTypes:
+    type: string
+    enum:
+      - dictionary
+      - object
+      - or
+  PrimitiveSchemaTypes:
+    type: string
+    enum:
+      - boolean
+      - char
+      - credential
+      - date
+      - date-time
+      - duration
+      - integer
+      - number
+      - string
+      - time
+      - unixtime
+      - uri
+      - uuid
+  ValueSchemaTypes:
+    type: string
+    enum:
+      - array
+      - boolean
+      - byte-array
+      - char
+      - choice
+      - conditional
+      - credential
+      - date
+      - date-time
+      - duration
+      - flag
+      - integer
+      - number
+      - sealed-choice
+      - sealed-conditional
+      - string
+      - time
+      - unixtime
+      - uri
+      - uuid
