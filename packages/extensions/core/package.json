@@ -1,6 +1,6 @@
 {
   "name": "@autorest/core",
-  "version": "3.0.0",
+  "version": "3.0.6369",
   "patchOffset": 5136,
   "description": "AutoRest core module",
   "engines": {
