@@ -1,9 +1,4 @@
 # Template for building projects
-parameters: 
-  - name: setVersion # Update version of packages.
-    type: boolean 
-    default: false
-  
 steps:
   - task: NodeTool@0
     inputs:
