@@ -17,7 +17,7 @@ Optional recommendation:
 1. Install [rush.js](https://rushjs.io/pages/intro/get_started/) using
 
 ```bash
-npm install -g rush
+npm install -g @microsoft/rush
 ```
 
 2. Install dependencies
