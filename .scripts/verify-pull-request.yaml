@@ -12,6 +12,9 @@ jobs:
   - job: main
     displayName: "Build and test"
     steps:
+      - scripts:  npx @microsoft/rush change --verify
+        displayName: Verify change logs
+        
       - template: ./build.yaml
       
       - script: npx @microsoft/rush test:ci -v
