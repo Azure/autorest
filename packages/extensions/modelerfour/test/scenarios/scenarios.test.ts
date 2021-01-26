@@ -3,7 +3,7 @@ import { ModelerFour } from "../../src/modeler/modelerfour";
 import { readdirSync } from "fs";
 import { serialize } from "@azure-tools/codegen";
 import { Model } from "@azure-tools/openapi";
-import { codeModelSchema } from "@azure-tools/codemodel";
+import { codeModelSchema } from "@autorest/codemodel";
 
 const cfg = {
   "modelerfour": {

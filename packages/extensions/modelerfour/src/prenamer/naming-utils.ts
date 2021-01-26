@@ -1,4 +1,4 @@
-import { Languages } from "@azure-tools/codemodel";
+import { Languages } from "@autorest/codemodel";
 import { length, Dictionary } from "@azure-tools/linq";
 import { removeSequentialDuplicates, fixLeadingNumber, deconstruct, Style, Styler } from "@azure-tools/codegen";
 

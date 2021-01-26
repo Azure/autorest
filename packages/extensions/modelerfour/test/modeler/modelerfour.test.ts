@@ -9,7 +9,7 @@ import {
   SealedChoiceSchema,
   DictionarySchema,
   Operation,
-} from "@azure-tools/codemodel";
+} from "@autorest/codemodel";
 import { addOperation, addSchema, createTestSpec, InitialTestSpec, response, responses } from "../utils";
 import { runModeler } from "./modelerfour-utils";
 

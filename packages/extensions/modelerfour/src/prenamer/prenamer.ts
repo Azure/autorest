@@ -16,7 +16,7 @@ import {
   StringSchema,
   SealedChoiceSchema,
   PrimitiveSchema,
-} from "@azure-tools/codemodel";
+} from "@autorest/codemodel";
 import { Session } from "@azure-tools/autorest-extension-base";
 import { values, length, Dictionary, items } from "@azure-tools/linq";
 import { selectName, Style, Styler } from "@azure-tools/codegen";

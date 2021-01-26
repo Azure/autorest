@@ -1,0 +1,17 @@
+{
+  "name": "@autorest/codemodel",
+  "entries": [
+    {
+      "version": "4.14.3",
+      "tag": "@autorest/codemodel_v4.14.3",
+      "date": "Tue, 26 Jan 2021 21:36:02 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Revert js-yaml to 3.x"
+          }
+        ]
+      }
+    }
+  ]
+}

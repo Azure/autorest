@@ -1,4 +1,4 @@
-import { CodeModel } from "@azure-tools/codemodel";
+import { CodeModel } from "@autorest/codemodel";
 import { Session } from "@azure-tools/autorest-extension-base";
 
 export class Example {

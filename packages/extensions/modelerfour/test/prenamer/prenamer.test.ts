@@ -1,4 +1,4 @@
-import { CodeModel, ObjectSchema } from "@azure-tools/codemodel";
+import { CodeModel, ObjectSchema } from "@autorest/codemodel";
 import { ModelerFourOptions } from "modeler/modelerfour-options";
 import { PreNamer } from "../../src/prenamer/prenamer";
 import { createTestSessionFromModel } from "../utils";
