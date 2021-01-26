@@ -4,9 +4,7 @@
   "pnpmVersion": "5.13.5",
   "pnpmOptions": {},
   "nodeSupportedVersionRange": ">=8.9.4 <15.0.0",
-  // Disabling this during migration of other repos as it is causing issues.
-  // This needs to be enabled again. https://github.com/Azure/autorest/issues/3807
-  "ensureConsistentVersions": false,
+  "ensureConsistentVersions": true,
   "projectFolderMinDepth": 3,
   "projectFolderMaxDepth": 3,
   "repository": {},

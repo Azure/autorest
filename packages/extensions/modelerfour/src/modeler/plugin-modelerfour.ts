@@ -7,7 +7,7 @@ import { deserialize, serialize } from "@azure-tools/codegen";
 import { Host, startSession } from "@azure-tools/autorest-extension-base";
 import * as OpenAPI from "@azure-tools/openapi";
 import { ModelerFour } from "./modelerfour";
-import { codeModelSchema, CodeModel } from "@azure-tools/codemodel";
+import { codeModelSchema, CodeModel } from "@autorest/codemodel";
 
 export async function processRequest(host: Host) {
   const debug = (await host.GetValue("debug")) || false;

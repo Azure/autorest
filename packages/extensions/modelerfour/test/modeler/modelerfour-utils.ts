@@ -1,4 +1,4 @@
-import { CodeModel } from "@azure-tools/codemodel";
+import { CodeModel } from "@autorest/codemodel";
 import { Model } from "@azure-tools/openapi";
 import { ModelerFour } from "../../src/modeler/modelerfour";
 import { ModelerFourOptions } from "modeler/modelerfour-options";

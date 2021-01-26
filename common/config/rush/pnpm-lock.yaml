@@ -3,7 +3,6 @@ dependencies:
   '@azure-tools/autorest-extension-base': 3.1.267
   '@azure-tools/codegen': 2.5.290
   '@azure-tools/codegen-csharp': 3.0.263
-  '@azure-tools/codemodel': 4.13.349
   '@azure-tools/datastore': 4.1.270
   '@azure-tools/deduplication': 3.0.267
   '@azure-tools/extension': 3.0.263
@@ -54,6 +53,7 @@ dependencies:
   glob: 7.1.6
   jest: 26.6.3
   jest-snapshot: 26.6.2
+  js-yaml: 4.0.0
   jsonpath: 1.0.0
   linq-es2015: 2.5.1
   mkdirp: 0.5.5
@@ -8785,7 +8785,7 @@ packages:
       expect: 26.6.2
       jest: 26.6.3
       jest-snapshot: 26.6.2
-      js-yaml: 3.13.1
+      js-yaml: 4.0.0
       prettier: 2.2.1
       recursive-diff: 1.0.8
       source-map-support: 0.5.19
@@ -8795,7 +8795,7 @@ packages:
     dev: false
     name: '@rush-temp/modelerfour'
     resolution:
-      integrity: sha512-6TOtE71DdPqsJVnAIPm8ZfNmV2n5jJ7KSG/gcBoEP2bUqlvLH0qLcsJBkNglJ+HPS0z3MurJqepI0TiQZ2pU/A==
+      integrity: sha512-/Q/i4fuQvN99GmJ4ofz7c1r5o605wXt7crYKyFs3RcucaP0C7dBNNbS9mjJM6X16Fg5kp6UpvM88Q73u/Ka7Yw==
       tarball: 'file:projects/modelerfour.tgz'
     version: 0.0.0
   'file:projects/schemas.tgz':
@@ -8811,7 +8811,6 @@ specifiers:
   '@azure-tools/autorest-extension-base': ~3.1.0
   '@azure-tools/codegen': 2.5.290
   '@azure-tools/codegen-csharp': ~3.0.0
-  '@azure-tools/codemodel': ~4.13.0
   '@azure-tools/datastore': ~4.1.0
   '@azure-tools/deduplication': ~3.0.266
   '@azure-tools/extension': ~3.0.0
@@ -8862,6 +8861,7 @@ specifiers:
   glob: ~7.1.4
   jest: ^26.6.3
   jest-snapshot: ~26.6.2
+  js-yaml: ~4.0.0
   jsonpath: 1.0.0
   linq-es2015: ^2.4.25
   mkdirp: ~0.5.1

@@ -71,7 +71,7 @@ import {
   OperationGroup,
   TimeSchema,
   HttpMultipartRequest,
-} from "@azure-tools/codemodel";
+} from "@autorest/codemodel";
 import { Session, Channel } from "@azure-tools/autorest-extension-base";
 import { Interpretations, XMSEnum } from "./interpretations";
 import { fail, minimum, pascalCase, knownMediaType, KnownMediaType } from "@azure-tools/codegen";

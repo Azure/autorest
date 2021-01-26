@@ -14,7 +14,7 @@ import {
   OperationGroup,
   Request,
   SchemaContext,
-} from "@azure-tools/codemodel";
+} from "@autorest/codemodel";
 import { Session } from "@azure-tools/autorest-extension-base";
 import { values, items, length, Dictionary, refCount, clone } from "@azure-tools/linq";
 import { pascalCase, camelCase } from "@azure-tools/codegen";

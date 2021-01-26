@@ -9,7 +9,7 @@ import {
   Deprecation,
   ChoiceValue,
   SetType,
-} from "@azure-tools/codemodel";
+} from "@autorest/codemodel";
 import { StringFormat, JsonType, ParameterLocation } from "@azure-tools/openapi";
 import { getPascalIdentifier } from "@azure-tools/codegen";
 
