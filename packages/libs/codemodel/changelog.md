@@ -1,4 +1,11 @@
-# Change Log - @azure-tools/codemodel-v3
+# Change Log - @autorest/codemodel
 
-# 3/28/2019
-- republishing to force change in package dependency chain.
+This log was last generated on Tue, 26 Jan 2021 21:28:49 GMT and should not be manually modified.
+
+## 4.14.1
+Tue, 26 Jan 2021 21:28:49 GMT
+
+### Patches
+
+- Revert js-yaml to 3.x
+
