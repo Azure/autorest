@@ -6,7 +6,7 @@ steps:
       LABEL_URL=https://api.github.com/repos/$BUILD_REPOSITORY_ID/issues/$SYSTEM_PULLREQUEST_PULLREQUESTNUMBER/labels
 
       echo "Getting labels using $LABEL_URL"
-      if curl -s "$LABEL_URL" | grep '"name": "$LABEL_NAME"'
+      if curl -s "$LABEL_URL" | grep "\"name\": \"$LABEL_NAME\""
       then
         echo "Publish label was included in the PR, won't be checking for changelog."
       else 
