@@ -13,3 +13,4 @@ steps:
         npx @microsoft/rush change --verify || { echo '\nIf you run the rush publish command locally and meant to publish the changes, add the publish label to the pr.' ; exit 1; }
       fi
     displayName: Verify change logs
+    condition: eq(variables['Build.Reason'], 'PullRequest') # only run step if it is a PR
