@@ -1,7 +1,6 @@
 {
   "name": "@autorest/modelerfour",
-  "version": "4.15.1",
-  "patchOffset": -765,
+  "version": "4.15.454",
   "description": "AutoRest Modeler Version Four (component)",
   "directories": {
     "doc": "docs"

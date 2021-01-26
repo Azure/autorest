@@ -10,19 +10,11 @@ pool:
   vmImage: "ubuntu-latest"
 
 steps:
-  - template: ./build.yaml
-    parameters:
-      setVersion: true
+  - template: ./templates/build.yaml
 
   - script: npx @microsoft/rush publish --publish --pack --include-all
     displayName: Pack packages
 
   - script: |
-      # publish the packages (tag as preview by default)
-      echo "//registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)" > ./.npmrc 
-      for file in common/temp/artifacts/packages/*.tgz 
-      do
-        echo "Trying to publish $file:"
-        npm publish $file --tag latest --access public --no-git-checks || echo no-worries 
-      done
+      NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --apply --include-all --set-access-level public
     displayName: Publish packages

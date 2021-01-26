@@ -1,7 +1,6 @@
 {
   "name": "@autorest/codemodel",
-  "version": "4.14.1",
-  "patchOffset": -1219,
+  "version": "4.14.2",
   "description": "AutoRest code model library",
   "directories": {
     "doc": "docs"
