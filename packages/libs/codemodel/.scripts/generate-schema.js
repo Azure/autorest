@@ -79,7 +79,7 @@ function sortWithPriorty(a, b) {
 function serialize(model) {
   return jsyaml.dump(model, {
     sortKeys: sortWithPriorty,
-    schema: jsyaml.DEFAULT_SCHEMA,
+    schema: jsyaml.DEFAULT_SAFE_SCHEMA,
     skipInvalid: true,
     lineWidth: 240
   }).

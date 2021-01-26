@@ -39,7 +39,6 @@
   "homepage": "https://github.com/Azure/autorest.modelerfour/tree/master/modelerfour#readme",
   "readme": "https://github.com/Azure/autorest.modelerfour/tree/master/modelerfour/readme.md",
   "devDependencies": {
-    "@types/js-yaml": "~4.0.0",
     "@types/node": "~14.14.20",
     "@types/jest": "^26.0.20",
     "typescript": "~3.9.7",
@@ -50,7 +49,6 @@
     "source-map-support": "^0.5.19",
     "@microsoft.azure/autorest.testserver": "~2.10.46",
     "@azure-tools/uri": "~3.0.0",
-    "js-yaml": "~4.0.0",
     "jest": "^26.6.3",
     "jest-snapshot": "~26.6.2",
     "expect": "~26.6.2",

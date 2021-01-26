@@ -1,4 +1,4 @@
-import { Schema, Type, DEFAULT_SCHEMA } from 'js-yaml';
+import { Schema, Type, DEFAULT_SAFE_SCHEMA } from "js-yaml";
 
 import { CodeModel, Security } from './common/code-model';
 import { Metadata, CSharpLanguage, Language } from './common/metadata';
@@ -38,7 +38,7 @@ function TypeInfo<U extends new (...args: any) => any>(type: U) {
   return new Type(`!${type.name}`, { kind: 'mapping', instanceOf: type, construct: (i) => Object.setPrototypeOf(i, type.prototype) });
 }
 
-export const codeModelSchema = DEFAULT_SCHEMA.extend([
+export const codeModelSchema = Schema.create(DEFAULT_SAFE_SCHEMA, [
   TypeInfo(Security),
 
   TypeInfo(HttpModel),

@@ -25,7 +25,6 @@ dependencies:
   '@types/express': 4.17.11
   '@types/glob': 7.1.3
   '@types/jest': 26.0.20
-  '@types/js-yaml': 4.0.0
   '@types/jsonpath': 0.2.0
   '@types/mocha': 5.2.5
   '@types/morgan': 1.9.2
@@ -53,7 +52,6 @@ dependencies:
   glob: 7.1.6
   jest: 26.6.3
   jest-snapshot: 26.6.2
-  js-yaml: 4.0.0
   jsonpath: 1.0.0
   linq-es2015: 2.5.1
   mkdirp: 0.5.5
@@ -944,6 +942,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-9zi2Y+5USJRxd0FsahERhBwlcvFh6D2GLQnY2FH2BzK8J9s9omvNHIbvABwIluXa0fD8XVKMLTO0aOEuUfACAA==
+  /@types/js-yaml/3.12.1:
+    dev: false
+    resolution:
+      integrity: sha512-SGGAhXLHDx+PK4YLNcNGa6goPf9XRWQNAUUbffkwVGGXIxmDKWyGGL4inzq2sPmExu431Ekb9aEMn9BkPqEYFA==
   /@types/js-yaml/4.0.0:
     dev: false
     resolution:
@@ -8648,7 +8650,7 @@ packages:
       '@azure-tools/autorest-extension-base': 3.1.267
       '@azure-tools/codegen': 2.5.290
       '@azure-tools/linq': 3.1.262
-      '@types/js-yaml': 4.0.0
+      '@types/js-yaml': 3.12.1
       '@types/mocha': 5.2.5
       '@types/node': 14.14.22
       '@typescript-eslint/eslint-plugin': 4.14.1_b15473b68481c2b07ec15e4066acfd77
@@ -8656,7 +8658,7 @@ packages:
       eslint: 7.18.0
       eslint-plugin-prettier: 3.2.0_eslint@7.18.0+prettier@2.2.1
       glob: 7.1.6
-      js-yaml: 4.0.0
+      js-yaml: 3.13.1
       mocha: 5.2.0
       mocha-typescript: 1.1.17
       ts-morph: 4.0.1
@@ -8668,7 +8670,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-CZ5q/gmaUBsMTRCl0rN/9WBIHdIkjW6V1c2y951UsZBA/ykZaaxpyyagOpioxFH6lSXo24ghtzyiLNumOTXkqA==
+      integrity: sha512-Xzo1S6Y0ebLdiMdWwtUU6H9myuad5lEwHf9t4vjvyz5K8QnQz5h/TbU/ltpW6VCxyvTuugYjN+ot757tPG1KHA==
       tarball: 'file:projects/codemodel.tgz'
     version: 0.0.0
   'file:projects/core.tgz':
@@ -8775,7 +8777,7 @@ packages:
       '@azure-tools/uri': 3.0.255
       '@microsoft.azure/autorest.testserver': 2.10.68
       '@types/jest': 26.0.20
-      '@types/js-yaml': 4.0.0
+      '@types/js-yaml': 3.12.1
       '@types/node': 14.14.22
       '@typescript-eslint/eslint-plugin': 4.14.1_b15473b68481c2b07ec15e4066acfd77
       '@typescript-eslint/parser': 4.14.1_eslint@7.18.0+typescript@3.9.7
@@ -8785,7 +8787,7 @@ packages:
       expect: 26.6.2
       jest: 26.6.3
       jest-snapshot: 26.6.2
-      js-yaml: 4.0.0
+      js-yaml: 3.13.1
       prettier: 2.2.1
       recursive-diff: 1.0.8
       source-map-support: 0.5.19
@@ -8795,7 +8797,7 @@ packages:
     dev: false
     name: '@rush-temp/modelerfour'
     resolution:
-      integrity: sha512-/Q/i4fuQvN99GmJ4ofz7c1r5o605wXt7crYKyFs3RcucaP0C7dBNNbS9mjJM6X16Fg5kp6UpvM88Q73u/Ka7Yw==
+      integrity: sha512-/KQE1dUk+LWYiz0ttmdL+YaUzcjDR5zkoJ1toFMUfyfFlHNSF67RiT0GUh5yldr6RztwTT1UMyTYjVqlfqsYtg==
       tarball: 'file:projects/modelerfour.tgz'
     version: 0.0.0
   'file:projects/schemas.tgz':
@@ -8833,7 +8835,6 @@ specifiers:
   '@types/express': ~4.17.9
   '@types/glob': ^7.1.3
   '@types/jest': ^26.0.20
-  '@types/js-yaml': ~4.0.0
   '@types/jsonpath': ^0.2.0
   '@types/mocha': 5.2.5
   '@types/morgan': ^1.9.2
@@ -8861,7 +8862,6 @@ specifiers:
   glob: ~7.1.4
   jest: ^26.6.3
   jest-snapshot: ~26.6.2
-  js-yaml: ~4.0.0
   jsonpath: 1.0.0
   linq-es2015: ^2.4.25
   mkdirp: ~0.5.1
