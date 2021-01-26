@@ -9,6 +9,6 @@ This means that if the pull request include some changes to any packages you wil
 
 ## Release
 
-If you want to release an update you will then have to run `rush publish`. This will take all pending change files created with `rush change`, update the changelog and bump the package(s) version.
+If you want to release an update you will then have to run `rush publish -a`. This will take all pending change files created with `rush change`, update the changelog and bump the package(s) version.
 
 Then in the Pull Request make sure to add the `Publish` label to tell the validation that this is meant to publish and it will ignore the change check above.
