@@ -30,7 +30,10 @@ function Format-Comment([string] $coreDownloadUrl, [string] $modelerfourDownload
     $template = get-content -raw -encoding utf8 "$root/eng/pipelines/resources/tryit-comment-template.md";
     $AUTOREST_CORE_DOWNLOAD_URL = $coreDownloadUrl
     $AUTOREST_MODELERFOUR_DOWNLOAD_URL = $modelerfourDownloadUrl
-    return $ExecutionContext.InvokeCommand.ExpandString($template);
+
+    return $template 
+        -format "`$AUTOREST_CORE_DOWNLOAD_URL", $coreDownloadUrl `
+        -format "`$AUTOREST_MODELERFOUR_DOWNLOAD_URL", $modelerfourDownloadUrl `
 }
 
 function Run() {
@@ -50,7 +53,7 @@ function Run() {
     Write-Host $comment
     Write-Host "-----------------------"
 
-    $escapedComment = $comment -replace '`n', '%0D%0A'
+    $escapedComment = $comment -replace '`n', "%0D%0A"
     echo "##vso[task.setvariable variable=TRYIT_COMMENT]$escapedComment"
 }
 
