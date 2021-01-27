@@ -27,7 +27,7 @@ jobs:
       - script: ls $(Build.SourcesDirectory)/common/temp/artifacts/packages
 
       - publish: $(Build.SourcesDirectory)/common/temp/artifacts/packages
-        artifactName: packages
+        artifact: packages
 
       # - template: ./templates/create-tryit-comment.yaml
 
