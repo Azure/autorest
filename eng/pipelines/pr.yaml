@@ -29,11 +29,11 @@ jobs:
       - script: npx @microsoft/rush publish --publish --pack --include-all
         displayName: Pack packages
 
-      - script: ls /common/temp/artifacts/packages
-      
+      - script: ls $(Build.SourcesDirectory)/common/temp/artifacts/packages
+
       - task: PublishBuildArtifacts@1
         inputs:
-          pathToPublish: /common/temp/artifacts/packages
+          pathToPublish: $(Build.SourcesDirectory)/common/temp/artifacts/packages
           artifactName: packages
       
       # - script: |
