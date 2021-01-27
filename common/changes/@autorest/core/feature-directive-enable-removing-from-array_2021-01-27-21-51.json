@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "Refactoring: Cleanup of code running transform directives",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/core",
+  "email": "tiguerin@microsoft.com"
+}
