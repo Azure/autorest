@@ -31,9 +31,9 @@ function Format-Comment([string] $coreDownloadUrl, [string] $modelerfourDownload
     $AUTOREST_CORE_DOWNLOAD_URL = $coreDownloadUrl
     $AUTOREST_MODELERFOUR_DOWNLOAD_URL = $modelerfourDownloadUrl
 
-    return $template 
+    return $template `
         -replace "{{AUTOREST_CORE_DOWNLOAD_URL}}", $coreDownloadUrl `
-        -replace "{{AUTOREST_MODELERFOUR_DOWNLOAD_URL}}", $modelerfourDownloadUrl `
+        -replace "{{AUTOREST_MODELERFOUR_DOWNLOAD_URL}}", $modelerfourDownloadUrl
 }
 
 function Run() {
