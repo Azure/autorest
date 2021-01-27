@@ -14,40 +14,27 @@ jobs:
     steps:
       - template: ./templates/verify-changes.yaml
       - template: ./templates/build.yaml
-      
+
       # - script: npx @microsoft/rush test:ci -v
       #   displayName: Test
 
       # - script: npx @microsoft/rush lint -v
       #   displayName: Lint
-      
+
       - script: npx @microsoft/rush publish --publish --pack --include-all
         displayName: Pack packages
-      
-      - script: | 
-        git status
-        echo "----------------------------"
-        git diff
 
-      # - publish: $(Build.SourcesDirectory)/common/temp/artifacts/packages
-      #   artifact: packages
-      #   displayName: Publish packages(.tgz) as pipeline artifacts
-        
-      - task: UsePythonVersion@0
-        inputs:
-          versionSpec: "3.x"
-        displayName: Install Python 3
+      - publish: $(Build.SourcesDirectory)/common/temp/artifacts/packages
+        artifact: packages
+        displayName: Publish packages(.tgz) as pipeline artifacts
 
-      - script: |
-          npm install @microsoft.azure/autorest.testserver --no-save
-          npm install -g @autorest/compare@~0.3.0
-        displayName: Install autorest-compare
+      # - template: ./templates/create-tryit-comment.yaml
 
-      - script: autorest-compare --compare:.scripts/regression-compare.yaml --language:python
-        displayName: Regression Test - @autorest/python
-
-      - script: autorest-compare --compare:.scripts/regression-compare.yaml --language:typescript
-        displayName: Regression Test - @autorest/typescript
+  - job: regressiontests
+    displayName: Regression tests
+    dependsOn: main
+    steps:
+      - template: ./templates/regression-tests.yaml
 
   - job: lintdocs
     displayName: Lint docs
@@ -55,4 +42,4 @@ jobs:
       - script: |
           sudo npm install -g markdown-link-check
           find docs -name "*.md" -print0 | xargs -0  -n1 markdown-link-check -c ./markdown-link-check-config.json
-        displayName: Find 
+        displayName: Find

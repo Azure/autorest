@@ -64,11 +64,13 @@
     "chalk": "2.3.0",
     "recursive-diff": "~1.0.6",
     "prettier": "~2.2.1",
-    "eslint-plugin-prettier": "~3.2.0"
+    "eslint-plugin-prettier": "~3.2.0",
+    "js-yaml": "3.13.1"
   },
   "static-link": {
     "entrypoints": [],
     "dependencies": {
+      "js-yaml": "3.13.1",
       "@azure-tools/codegen": "~2.4.0",
       "@azure-tools/codegen-csharp": "~3.0.0",
       "@azure-tools/autorest-extension-base": "~3.1.0",
