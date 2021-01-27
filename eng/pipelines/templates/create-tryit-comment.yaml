@@ -1,5 +1,5 @@
 steps:
-  - pwsh: $(Build.SourcesDirectory)/eng/pipelines/scripts/get-github-comment.ps1
+  - pwsh: $(Build.SourcesDirectory)/eng/pipelines/scripts/get-tryit-github-comment.ps1
     displayName: "Build Github Comment"
 
   # - task: GitHubComment@0
