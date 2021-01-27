@@ -15,11 +15,11 @@ jobs:
       - template: ./templates/verify-changes.yaml
       - template: ./templates/build.yaml
 
-      # - script: npx @microsoft/rush test:ci -v
-      #   displayName: Test
+      - script: npx @microsoft/rush test:ci -v
+        displayName: Test
 
-      # - script: npx @microsoft/rush lint -v
-      #   displayName: Lint
+      - script: npx @microsoft/rush lint -v
+        displayName: Lint
 
       - script: npx @microsoft/rush publish --publish --pack --include-all
         displayName: Pack packages
