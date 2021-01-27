@@ -26,8 +26,10 @@ function Get-PackageVersion([string] $packageRoot) {
     return (Get-Content "$packageRoot/package.json") -join "`n" | ConvertFrom-Json | Select -ExpandProperty "version"
 }
 
-function Format-Comment($AUTOREST_CORE_DOWNLOAD_URL, $AUTOREST_MODLERFOUR_DOWNLOAD_URL) {
+function Format-Comment($coreDownloadUrl, $modelerfourDownloadUrl) {
     $template = get-content -raw -encoding utf8 "$root/eng/pipelines/resources/tryit-comment-template.md";
+    $AUTOREST_CORE_DOWNLOAD_URL = $coreDownloadUrl
+    $AUTOREST_MODLERFOUR_DOWNLOAD_URL = $modelerfourDownloadUrl
     return $ExecutionContext.InvokeCommand.ExpandString($template);
 }
 
@@ -41,7 +43,7 @@ function Run() {
     $coreDownloadUrl = Create-TinyUrlForArtifact -baseDownloadUrl $baseDownloadUrl -filename "autorest-core-$m4Version.tgz";
     $modelerfourDownloadUrl = Create-TinyUrlForArtifact -baseDownloadUrl $baseDownloadUrl -filename "autorest-modelerfour-$coreVersion.tgz";
 
-    $comment = Format-Comment -AUTOREST_CORE_DOWNLOAD_URL $coreDownloadUrl -AUTOREST_MODELERFOUR_DOWNLOAD_URL $modelerfourDownloadUrl
+    $comment = Format-Comment -coreDownloadUrl $coreDownloadUrl -modelerfourDownloadUrl $modelerfourDownloadUrl
 
     Write-Host "Github comment content:"
     Write-Host "-----------------------"
