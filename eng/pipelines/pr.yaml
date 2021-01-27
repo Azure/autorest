@@ -21,13 +21,13 @@ jobs:
       # - script: npx @microsoft/rush lint -v
       #   displayName: Lint
       
-      - script: npx @microsoft/rush publish --pack --include-all
+      - script: npx @microsoft/rush publish --publish --pack --include-all
         displayName: Pack packages
 
-      - publish: $(Build.SourcesDirectory)/common/temp/artifacts/packages
-        artifact: packages
-        displayName: Publish packages(.tgz) as pipeline artifacts
-
+      # - publish: $(Build.SourcesDirectory)/common/temp/artifacts/packages
+      #   artifact: packages
+      #   displayName: Publish packages(.tgz) as pipeline artifacts
+        
       - task: UsePythonVersion@0
         inputs:
           versionSpec: "3.x"
