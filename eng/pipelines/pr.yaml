@@ -15,11 +15,11 @@ jobs:
       - template: ./templates/verify-changes.yaml
       - template: ./templates/build.yaml
 
-      - script: npx @microsoft/rush test:ci -v
-        displayName: Test
+      # - script: npx @microsoft/rush test:ci -v
+      #   displayName: Test
 
-      - script: npx @microsoft/rush lint -v
-        displayName: Lint
+      # - script: npx @microsoft/rush lint -v
+      #   displayName: Lint
 
       - script: npx @microsoft/rush publish --publish --pack --include-all
         displayName: Pack packages
@@ -29,7 +29,33 @@ jobs:
       - publish: $(Build.SourcesDirectory)/common/temp/artifacts/packages
         artifact: packages
 
-      - template: ./templates/create-tryit-comment.yaml
+      # - template: ./templates/create-tryit-comment.yaml
+
+  - job: regressiontests
+    displayName: Regression tests
+    dependsOn: main
+    steps:
+      - download: current
+        artifact: packages
+
+      - script: ls ./packages
+      - script: |
+          corePkg="$(find ./packages -type f -iname "autorest-core-*.tgz" )"
+          modelerfourPkg="$(find ./packages -type f -iname "autorest-modelerfour-*.tgz" )"
+
+          echo "Found core package $corePkg"
+          echo "Found modelerfour package $modelerfourPkg"
+
+          sed -i "s,--version:../packages/extensions/core,$corePkg," ./.script/regression-compare.yaml
+          sed -i "s,--version:../packages/extensions/modelerfour,$modelerfourPkg," ./.script/regression-compare.yaml
+        displayName: Find packages path
+
+      - script: cat ./.script/regression-compare.yaml
+
+      - task: NodeTool@0
+        inputs:
+          versionSpec: "14.x"
+        displayName: "Install Node.js"
 
       - task: UsePythonVersion@0
         inputs:
