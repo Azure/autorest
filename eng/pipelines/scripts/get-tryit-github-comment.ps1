@@ -26,10 +26,10 @@ function Get-PackageVersion([string] $packageRoot) {
     return (Get-Content "$packageRoot/package.json") -join "`n" | ConvertFrom-Json | Select -ExpandProperty "version"
 }
 
-function Format-Comment($coreDownloadUrl, $modelerfourDownloadUrl) {
+function Format-Comment([string] $coreDownloadUrl, [string] $modelerfourDownloadUrl) {
     $template = get-content -raw -encoding utf8 "$root/eng/pipelines/resources/tryit-comment-template.md";
     $AUTOREST_CORE_DOWNLOAD_URL = $coreDownloadUrl
-    $AUTOREST_MODLERFOUR_DOWNLOAD_URL = $modelerfourDownloadUrl
+    $AUTOREST_MODELERFOUR_DOWNLOAD_URL = $modelerfourDownloadUrl
     return $ExecutionContext.InvokeCommand.ExpandString($template);
 }
 
