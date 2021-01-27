@@ -20,7 +20,7 @@ function Create-TinyUrlForArtifact([string] $baseDownloadUrl, [string] $filename
 }
 
 function Get-PackageVersion([string] $packageRoot) {
-    return (Get-Content $packageRoot/package.json) -join "`n" | ConvertFrom-Json | Select -ExpandProperty "version"
+    return (Get-Content "$packageRoot/package.json") -join "`n" | ConvertFrom-Json | Select -ExpandProperty "version"
 }
 
 function Run() {
