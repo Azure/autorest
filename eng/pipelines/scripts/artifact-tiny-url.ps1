@@ -24,7 +24,7 @@ function Get-PackageVersion([string] $packageRoot) {
 }
 
 function Run() {
-    $root = $env:Build_SourcesDirectory
+    $root = $env:BUILD_SOURCESDIRECTORY
     $baseDownloadUrl = Get-ArtifactBaseDownloadUrl
     Write-Host "Base download url is $baseDownloadUrl";
 
