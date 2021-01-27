@@ -38,14 +38,17 @@ jobs:
       - download: current
         artifact: packages
 
-      - script: ls ./packages
+      - script: |
+        ls $(Pipeline.Workspace)
+        ls $(Pipeline.Workspace)/packages
+        
       - script: |
           corePkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-core-*.tgz" )"
           modelerfourPkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-modelerfour-*.tgz" )"
 
           [ -z "$corePkg" ] && echo "Error: Couldn't find autorest core package" && exit 1
           [ -z "$modelerfourPkg" ] && echo "Error: Couldn't find autorest modelerfour package" && exit 1
-          
+
           echo "Found core package $corePkg"
           echo "Found modelerfour package $modelerfourPkg"
 
