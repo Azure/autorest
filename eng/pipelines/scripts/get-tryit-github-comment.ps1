@@ -49,6 +49,9 @@ function Run() {
     Write-Host "-----------------------"
     Write-Host $comment
     Write-Host "-----------------------"
+
+    $escapedComment = $comment -replace '`n', '%0D%0A'
+    echo "##vso[task.setvariable variable=TRYIT_COMMENT]$escapedComment"
 }
 
 Run
