@@ -39,9 +39,9 @@ jobs:
         artifact: packages
 
       - script: |
-        ls $(Pipeline.Workspace)
-        ls $(Pipeline.Workspace)/packages
-        
+          ls $(Pipeline.Workspace)
+          ls $(Pipeline.Workspace)/packages
+
       - script: |
           corePkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-core-*.tgz" )"
           modelerfourPkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-modelerfour-*.tgz" )"
