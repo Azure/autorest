@@ -46,11 +46,11 @@ jobs:
           echo "Found core package $corePkg"
           echo "Found modelerfour package $modelerfourPkg"
 
-          sed -i "s,--version:../packages/extensions/core,$corePkg," ./.script/regression-compare.yaml
-          sed -i "s,--version:../packages/extensions/modelerfour,$modelerfourPkg," ./.script/regression-compare.yaml
+          sed -i "s,--version:../packages/extensions/core,$corePkg," ./.scripts/regression-compare.yaml
+          sed -i "s,--version:../packages/extensions/modelerfour,$modelerfourPkg," ./.scripts/regression-compare.yaml
         displayName: Find packages path
 
-      - script: cat ./.script/regression-compare.yaml
+      - script: cat ./.scripts/regression-compare.yaml
 
       - task: NodeTool@0
         inputs:
