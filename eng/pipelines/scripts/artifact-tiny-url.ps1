@@ -1,5 +1,7 @@
 function Get-ArtifactBaseDownloadUrl() {
-    $url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_apis/build/builds/$env:Build_BuildId/artifacts?artifactName=packages&api-version=5.1"
+    $url = "$env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI$env:SYSTEM_TEAMPROJECTID/_apis/build/builds/$env:Build_BuildId/artifacts?artifactName=packages&api-version=5.1"
+    Write-Host "Getting artifact info at: '$url'"
+
     $buildPipeline= Invoke-RestMethod -Uri $url -Headers @{ Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN" } -Method Get
     $ArtifactDownloadURL= $buildPipeline.resource.downloadUrl
     return $ArtifactDownloadURL
