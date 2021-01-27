@@ -15,16 +15,11 @@ jobs:
       - template: ./templates/verify-changes.yaml
       - template: ./templates/build.yaml
       
-      - script: npx @microsoft/rush test:ci -v
-        displayName: Test
+      # - script: npx @microsoft/rush test:ci -v
+      #   displayName: Test
 
-      - script: npx @microsoft/rush lint -v
-        displayName: Lint
-
-      - task: UsePythonVersion@0
-        inputs:
-          versionSpec: "3.x"
-        displayName: Install Python 3
+      # - script: npx @microsoft/rush lint -v
+      #   displayName: Lint
 
       - script: npx @microsoft/rush publish --publish --pack --include-all
         displayName: Pack packages
@@ -35,7 +30,15 @@ jobs:
         inputs:
           pathToPublish: $(Build.SourcesDirectory)/common/temp/artifacts/packages
           artifactName: packages
-      
+
+      - pwsh: $(Build.SourcesDirectory)/eng/pipelines/scripts/artifact-tiny-url.ps1
+        displayName: "Create tiny urls for artifacts"
+        
+      # - task: UsePythonVersion@0
+      #   inputs:
+      #     versionSpec: "3.x"
+      #   displayName: Install Python 3
+
       # - script: |
       #     npm install @microsoft.azure/autorest.testserver --no-save
       #     npm install -g @autorest/compare@~0.3.0
