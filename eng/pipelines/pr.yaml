@@ -41,7 +41,7 @@ jobs:
           npm install -g @autorest/compare@~0.3.0
         displayName: Install autorest-compare
 
-      - script: autorest-compare --compare:.scripts/regression-compare.yaml --language:python --new-args "--version:./packages/autorest-core-4.15.455.tgz"
+      - script: autorest-compare --compare:.scripts/regression-compare.yaml --language:python
         displayName: Regression Test - @autorest/python
 
       - script: autorest-compare --compare:.scripts/regression-compare.yaml --language:typescript
