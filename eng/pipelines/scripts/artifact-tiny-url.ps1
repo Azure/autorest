@@ -8,7 +8,7 @@ function Get-ArtifactBaseDownloadUrl() {
 }
 
 function Get-DownloadUrl([string] $baseDownloadUrl, [string] $filename) {
-    return $ArtifactDownloadURL  -replace "format=zip","format=file&subPath=%2Fautorest-modelerfour-$(artver).tgz";
+    return $ArtifactDownloadURL  -replace "format=zip","format=file&subPath=%2F$filename";
 }
 
 function Create-TinyUrlForArtifact([string] $baseDownloadUrl, [string] $filename, [string]$outVarName) {
@@ -31,8 +31,8 @@ function Run() {
     $coreVersion = Get-PackageVersion -packageRoot $root/packages/extensions/core
     $m4Version = Get-PackageVersion -packageRoot $root/packages/extensions/modelerfour
 
-    Create-TinyUrlForArtifact -baseDownloadUrl $baseDownloadUrl -filename "%2Fautorest-modelerfour-$coreVersion.tgz" -outVarName "AUTOREST_MODELERFOUR_DOWNLOAD_URL";
-    Create-TinyUrlForArtifact -baseDownloadUrl $baseDownloadUrl -filename "%2Fautorest-core-$m4Version.tgz" -outVarName "AUTOREST_CORE_DOWNLOAD_URL";
+    Create-TinyUrlForArtifact -baseDownloadUrl $baseDownloadUrl -filename "autorest-modelerfour-$coreVersion.tgz" -outVarName "AUTOREST_MODELERFOUR_DOWNLOAD_URL";
+    Create-TinyUrlForArtifact -baseDownloadUrl $baseDownloadUrl -filename "autorest-core-$m4Version.tgz" -outVarName "AUTOREST_CORE_DOWNLOAD_URL";
 }
 
 Run
