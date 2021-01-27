@@ -31,8 +31,8 @@ jobs:
           pathToPublish: $(Build.SourcesDirectory)/common/temp/artifacts/packages
           artifactName: packages
           
-      - template: ./create-tryit-comment.yaml
-      
+      - template: ./templates/create-tryit-comment.yaml
+
       # - task: UsePythonVersion@0
       #   inputs:
       #     versionSpec: "3.x"
