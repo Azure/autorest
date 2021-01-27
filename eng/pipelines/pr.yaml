@@ -36,7 +36,7 @@ jobs:
     dependsOn: main
     steps:
       - download: current
-        artifact: WebApp
+        artifact: packages
 
       - script: ls
 
