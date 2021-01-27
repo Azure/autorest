@@ -1,0 +1,9 @@
+steps:
+  - pwsh: $(Build.SourcesDirectory)/eng/pipelines/scripts/get-github-comment.ps1
+    displayName: "Build Github Comment"
+
+  # - task: GitHubComment@0
+  #   inputs:
+  #     gitHubConnection: "Azure"
+  #     repositoryName: "$(Build.Repository.Name)"
+  #     comment: $(TRYIT_COMMENT)

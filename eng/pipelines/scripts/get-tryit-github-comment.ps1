@@ -1,3 +1,6 @@
+$root = $env:BUILD_SOURCESDIRECTORY
+
+
 function Get-ArtifactBaseDownloadUrl() {
     $url = "$env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI$env:SYSTEM_TEAMPROJECTID/_apis/build/builds/$env:BUILD_BUILDID/artifacts?artifactName=packages&api-version=5.1"
     Write-Host "Getting artifact info at: '$url'"
@@ -8,7 +11,7 @@ function Get-ArtifactBaseDownloadUrl() {
 }
 
 function Get-DownloadUrl([string] $baseDownloadUrl, [string] $filename) {
-    return $ArtifactDownloadURL  -replace "format=zip","format=file&subPath=%2F$filename";
+    return $baseDownloadUrl  -replace "format=zip","format=file&subPath=%2F$filename";
 }
 
 function Create-TinyUrlForArtifact([string] $baseDownloadUrl, [string] $filename, [string]$outVarName) {
@@ -16,23 +19,34 @@ function Create-TinyUrlForArtifact([string] $baseDownloadUrl, [string] $filename
     Write-Host "Raw Artifact Url: '$downloadUrl'"
     $downurl = (iwr "http://tinyurl.com/api-create.php?url=$( [System.Web.HttpUtility]::UrlEncode($downloadUrl))" ).Content
     Write-Host "Tiny Url: '$tinyUrl'"
-    Write-Host "##vso[task.setvariable variable=$outVarName]$downurl"
+    return $downurl;
 }
 
 function Get-PackageVersion([string] $packageRoot) {
     return (Get-Content "$packageRoot/package.json") -join "`n" | ConvertFrom-Json | Select -ExpandProperty "version"
 }
 
+function Format-Comment($AUTOREST_CORE_DOWNLOAD_URL, $AUTOREST_MODLERFOUR_DOWNLOAD_URL) {
+    $template = get-content -raw -encoding utf8 "$root/eng/pipelines/resources/tryit-comment-template.md";
+    return $ExecutionContext.InvokeCommand.ExpandString($template);
+}
+
 function Run() {
-    $root = $env:BUILD_SOURCESDIRECTORY
     $baseDownloadUrl = Get-ArtifactBaseDownloadUrl
     Write-Host "Base download url is $baseDownloadUrl";
 
     $coreVersion = Get-PackageVersion -packageRoot $root/packages/extensions/core
     $m4Version = Get-PackageVersion -packageRoot $root/packages/extensions/modelerfour
 
-    Create-TinyUrlForArtifact -baseDownloadUrl $baseDownloadUrl -filename "autorest-modelerfour-$coreVersion.tgz" -outVarName "AUTOREST_MODELERFOUR_DOWNLOAD_URL";
-    Create-TinyUrlForArtifact -baseDownloadUrl $baseDownloadUrl -filename "autorest-core-$m4Version.tgz" -outVarName "AUTOREST_CORE_DOWNLOAD_URL";
+    $coreDownloadUrl = Create-TinyUrlForArtifact -baseDownloadUrl $baseDownloadUrl -filename "autorest-core-$m4Version.tgz";
+    $modelerfourDownloadUrl = Create-TinyUrlForArtifact -baseDownloadUrl $baseDownloadUrl -filename "autorest-modelerfour-$coreVersion.tgz";
+
+    $comment = Format-Comment -AUTOREST_CORE_DOWNLOAD_URL $coreDownloadUrl -AUTOREST_MODELERFOUR_DOWNLOAD_URL $modelerfourDownloadUrl
+
+    Write-Host "Github comment content:"
+    Write-Host "-----------------------"
+    Write-Host $comment
+    Write-Host "-----------------------"
 }
 
 Run
