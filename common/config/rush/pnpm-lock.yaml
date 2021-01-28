@@ -1,7 +1,6 @@
 dependencies:
   '@azure-tools/async-io': 3.0.253
   '@azure-tools/autorest-extension-base': 3.1.267
-  '@azure-tools/codegen': 2.5.290
   '@azure-tools/codegen-csharp': 3.0.263
   '@azure-tools/datastore': 4.1.270
   '@azure-tools/deduplication': 3.0.267
@@ -122,7 +121,24 @@ packages:
       semver: 5.7.1
     dev: false
     resolution:
+      integrity: sha512-z0uY22Ko7FKqC9L1V/UCAyPKoqyaM8oawRmuVuhjtglds9eIxQ7b6K68a3WYw0NQU/YKhf8LBiTs1hG7nZM3aQ==
+  /@azure-tools/codegen/2.5.292:
+    dependencies:
+      '@azure-tools/async-io': 3.0.253
+      '@azure-tools/linq': 3.1.262
+      js-yaml: 3.13.1
+      semver: 5.7.1
+    dev: false
+    resolution:
       integrity: sha512-UU9/OgJfd+br9C/M9R8k2r+pyWtanRfl/u865BvkX3yBbMLbDsj12QP/AcY3MoC40rHpWYUJVTBDB84X3zIiIw==
+  /@azure-tools/codemodel/4.13.349:
+    dependencies:
+      '@azure-tools/autorest-extension-base': 3.1.267
+      '@azure-tools/codegen': 2.5.291
+      '@azure-tools/linq': 3.1.262
+    dev: false
+    resolution:
+      integrity: sha512-PhhQ/FXm2mGglLNvmzDc07YXtv8TSnRPoKZX/maKPH3oLJge2dJmrL8JmRPosaDmILh1Zyh/HKhs1Dl/yVKtQw==
   /@azure-tools/datastore/4.1.270:
     dependencies:
       '@azure-tools/codegen': 2.5.292
@@ -8767,7 +8783,7 @@ packages:
     dependencies:
       '@azure-tools/async-io': 3.0.253
       '@azure-tools/autorest-extension-base': 3.1.267
-      '@azure-tools/codegen': 2.5.290
+      '@azure-tools/codegen': 2.5.292
       '@azure-tools/codegen-csharp': 3.0.263
       '@azure-tools/datastore': 4.1.270
       '@azure-tools/linq': 3.1.262
@@ -8788,6 +8804,7 @@ packages:
       js-yaml: 3.13.1
       prettier: 2.2.1
       recursive-diff: 1.0.8
+      rimraf: 3.0.2
       source-map-support: 0.5.19
       static-link: 0.3.0
       ts-jest: 26.4.4_jest@26.6.3+typescript@3.9.7
@@ -8795,7 +8812,7 @@ packages:
     dev: false
     name: '@rush-temp/modelerfour'
     resolution:
-      integrity: sha512-i4RaTsykcz4n3bXGW8BKeKMQZ5OGE9M0LBwNIiR+p3Bj1qTofVpwso/xdMZGUTNoxjIo6FAb5K07OeVpU8fghQ==
+      integrity: sha512-Fpn+sfIwI8eDlFc998JwlGPnegZfgyqu3zhQZpEYk75GFQ8CbTDBm9pZhNfef7+XldedKgH+aNhYh2VZqJgw+w==
       tarball: 'file:projects/modelerfour.tgz'
     version: 0.0.0
   'file:projects/schemas.tgz':
@@ -8808,7 +8825,6 @@ packages:
 specifiers:
   '@azure-tools/async-io': ~3.0.0
   '@azure-tools/autorest-extension-base': ~3.1.0
-  '@azure-tools/codegen': 2.5.290
   '@azure-tools/codegen-csharp': ~3.0.0
   '@azure-tools/datastore': ~4.1.0
   '@azure-tools/deduplication': ~3.0.266

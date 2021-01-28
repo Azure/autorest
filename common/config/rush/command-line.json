@@ -29,16 +29,11 @@
       "shellCommand": "node .scripts/sync-versions.js"
     },
     {
-      "commandKind": "global",
-      "name": "watch",
-      "summary": "run npm watch on all projects",
-      "shellCommand": "node .scripts/watch.js"
-    },
-    {
-      "commandKind": "global",
+      "commandKind": "bulk",
       "name": "clean",
       "summary": "run npm clean on all projects",
-      "shellCommand": "node .scripts/npm-run.js clean"
+      "enableParallelism": false,
+      "ignoreMissingScript": true
     },
     {
       "commandKind": "bulk",

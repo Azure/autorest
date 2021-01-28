@@ -11,6 +11,7 @@
   "main": "dist/exports.js",
   "typings": "dist/exports.d.ts",
   "scripts": {
+    "clean": "rimraf ./dist",
     "start": "node --max_old_space_size=4096 ./entrypoints/main.js",
     "debug": "node --max_old_space_size=4096 --inspect-brk=localhost:9229 ./entrypoints/main.js",
     "fix": "eslint  ./src --fix --ext .ts",
@@ -52,7 +53,7 @@
     "jest-snapshot": "~26.6.2",
     "expect": "~26.6.2",
     "ts-jest": "^26.4.4",
-    "@azure-tools/codegen": "2.5.290",
+    "@azure-tools/codegen": "~2.5.292",
     "@azure-tools/codegen-csharp": "~3.0.0",
     "@azure-tools/autorest-extension-base": "~3.1.0",
     "@autorest/codemodel": "~4.14.3",
@@ -65,16 +66,15 @@
     "recursive-diff": "~1.0.6",
     "prettier": "~2.2.1",
     "eslint-plugin-prettier": "~3.2.0",
-    "js-yaml": "3.13.1"
+    "rimraf": "~3.0.0"
   },
   "static-link": {
     "entrypoints": [],
     "dependencies": {
-      "js-yaml": "3.13.1",
-      "@azure-tools/codegen": "~2.4.0",
+      "@azure-tools/codegen": "~2.5.292",
       "@azure-tools/codegen-csharp": "~3.0.0",
       "@azure-tools/autorest-extension-base": "~3.1.0",
-      "@autorest/codemodel": "~4.14.0",
+      "@autorest/codemodel": "~4.14.3",
       "@azure-tools/tasks": "~3.0.0",
       "@azure-tools/openapi": "~3.0.0",
       "@azure-tools/datastore": "~4.1.0",
