@@ -14,6 +14,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist", "src"),
     filename: "[name].js",
+    devtoolModuleFilenameTemplate: "../../[resource-path]",
   },
   resolve: {
     // Add ".ts" and ".tsx" as resolvable extensions.
