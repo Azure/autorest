@@ -91,7 +91,7 @@ packages:
       integrity: sha512-5Zo6Sr7ttnh6vaDhG1ESycJtOKzJCxo+bdJ68dmGgU/czm2HDptjKcVvenNuJNeWpvf0DmklXQDXZIkg11swzw==
   /@azure-tools/autorest-extension-base/3.1.267:
     dependencies:
-      '@azure-tools/codegen': 2.5.292
+      '@azure-tools/codegen': 2.5.291
       js-yaml: 3.13.1
       vscode-jsonrpc: 3.6.2
     dev: false
@@ -99,7 +99,7 @@ packages:
       integrity: sha512-hdDX0Ic3Xg4Jg80uAlnN6J5BN58Xo3Lrkt7uGBpy5Zj2q9cHrQ0y6lY+n3TtDO2ADpyjp8G84H+4lrjsGzn3MQ==
   /@azure-tools/codegen-csharp/3.0.263:
     dependencies:
-      '@azure-tools/codegen': 2.5.292
+      '@azure-tools/codegen': 2.5.291
       '@azure-tools/linq': 3.1.262
     dev: false
     resolution:
@@ -113,7 +113,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-D9TuBY9YE+CE/EpbMaB3oVJq1xp7koIAQGlFrRNTLPgKNMelqkWK8HLnYSk810HL0rJFQjJE/BLx5lQsOjMYRQ==
-  /@azure-tools/codegen/2.5.292:
+  /@azure-tools/codegen/2.5.291:
     dependencies:
       '@azure-tools/async-io': 3.0.253
       '@azure-tools/linq': 3.1.262
@@ -141,7 +141,7 @@ packages:
       integrity: sha512-PhhQ/FXm2mGglLNvmzDc07YXtv8TSnRPoKZX/maKPH3oLJge2dJmrL8JmRPosaDmILh1Zyh/HKhs1Dl/yVKtQw==
   /@azure-tools/datastore/4.1.270:
     dependencies:
-      '@azure-tools/codegen': 2.5.292
+      '@azure-tools/codegen': 2.5.291
       '@azure-tools/linq': 3.1.262
       '@azure-tools/tasks': 3.0.253
       '@azure-tools/uri': 3.0.255
@@ -156,7 +156,7 @@ packages:
       integrity: sha512-7Ofx2BR4wy8H2sgLJCSBoq8cFYKv6gU2ex1+mXgZXQY8WciHTujQkCFyqWVn7I6TEfQTQx88ngjED2pmpyBnfA==
   /@azure-tools/deduplication/3.0.267:
     dependencies:
-      '@azure-tools/codegen': 2.5.292
+      '@azure-tools/codegen': 2.5.291
       '@azure-tools/datastore': 4.1.270
       '@azure-tools/linq': 3.1.262
       '@azure-tools/object-comparison': 3.0.252
@@ -549,7 +549,7 @@ packages:
       globals: 12.4.0
       ignore: 4.0.6
       import-fresh: 3.3.0
-      js-yaml: 3.14.1
+      js-yaml: 3.13.1
       lodash: 4.17.20
       minimatch: 3.0.4
       strip-json-comments: 3.1.1
@@ -563,7 +563,7 @@ packages:
       camelcase: 5.3.1
       find-up: 4.1.0
       get-package-type: 0.1.0
-      js-yaml: 3.14.1
+      js-yaml: 3.13.1
       resolve-from: 5.0.0
     dev: false
     engines:
@@ -1425,7 +1425,7 @@ packages:
       call-bind: 1.0.2
       define-properties: 1.1.3
       es-abstract: 1.18.0-next.2
-      get-intrinsic: 1.1.0
+      get-intrinsic: 1.0.2
       is-string: 1.0.5
     dev: false
     engines:
@@ -1862,7 +1862,7 @@ packages:
   /call-bind/1.0.2:
     dependencies:
       function-bind: 1.1.1
-      get-intrinsic: 1.1.0
+      get-intrinsic: 1.0.2
     dev: false
     resolution:
       integrity: sha512-7O+FbCihrB5WGbFYesctwmTKae6rOiIzmz1icreWJ+0aA7LJfuqhEso2T9ncpcFtzMQtzXf2QGGueWJGTYsqrA==
@@ -2484,8 +2484,8 @@ packages:
   /deep-equal/2.0.5:
     dependencies:
       call-bind: 1.0.2
-      es-get-iterator: 1.1.2
-      get-intrinsic: 1.1.0
+      es-get-iterator: 1.1.1
+      get-intrinsic: 1.0.2
       is-arguments: 1.1.0
       is-date-object: 1.0.2
       is-regex: 1.1.1
@@ -2763,7 +2763,7 @@ packages:
       call-bind: 1.0.2
       es-to-primitive: 1.2.1
       function-bind: 1.1.1
-      get-intrinsic: 1.1.0
+      get-intrinsic: 1.0.2
       has: 1.0.3
       has-symbols: 1.0.1
       is-callable: 1.2.2
@@ -2779,10 +2779,10 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-Ih4ZMFHEtZupnUh6497zEL4y2+w8+1ljnCyaTa+adcoafI1GOvMwFlDjBLfWR7y9VLfrjRJe9ocuHY1PSR9jjw==
-  /es-get-iterator/1.1.2:
+  /es-get-iterator/1.1.1:
     dependencies:
       call-bind: 1.0.2
-      get-intrinsic: 1.1.0
+      get-intrinsic: 1.0.2
       has-symbols: 1.0.1
       is-arguments: 1.1.0
       is-map: 2.0.2
@@ -2791,7 +2791,7 @@ packages:
       isarray: 2.0.5
     dev: false
     resolution:
-      integrity: sha512-+DTO8GYwbMCwbywjimwZMHp8AuYXOS2JZFWoi2AlPOS3ebnII9w/NLpNZtA7A0YLaVDw+O7KFCeoIV7OPvM7hQ==
+      integrity: sha512-qorBw8Y7B15DVLaJWy6WdEV/ZkieBcu6QCq/xzWzGOKJqgG1j754vXRfZ3NY7HSShneqU43mPB4OkQBTkvHhFw==
   /es-to-primitive/1.2.1:
     dependencies:
       is-callable: 1.2.2
@@ -3009,7 +3009,7 @@ packages:
       import-fresh: 3.3.0
       imurmurhash: 0.1.4
       is-glob: 4.0.1
-      js-yaml: 3.14.1
+      js-yaml: 3.13.1
       json-stable-stringify-without-jsonify: 1.0.1
       levn: 0.4.1
       lodash: 4.17.20
@@ -3559,14 +3559,14 @@ packages:
       node: 6.* || 8.* || >= 10.*
     resolution:
       integrity: sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==
-  /get-intrinsic/1.1.0:
+  /get-intrinsic/1.0.2:
     dependencies:
       function-bind: 1.1.1
       has: 1.0.3
       has-symbols: 1.0.1
     dev: false
     resolution:
-      integrity: sha512-M11rgtQp5GZMZzDL7jLTNxbDfurpzuau5uqRWDPvlHjfvg3TdScAZo96GLvhMjImrmR8uAt0FS2RLoMrfWGKlg==
+      integrity: sha512-aeX0vrFm21ILl3+JpFFRNe9aUvp6VFZb2/CTbgLb8j75kOhvoNYjt9d8KA/tJG4gSo8nzEDedRl0h7vDmBYRVg==
   /get-package-type/0.1.0:
     dev: false
     engines:
@@ -4928,14 +4928,6 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
-  /js-yaml/3.14.1:
-    dependencies:
-      argparse: 1.0.10
-      esprima: 4.0.1
-    dev: false
-    hasBin: true
-    resolution:
-      integrity: sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==
   /js-yaml/4.0.0:
     dependencies:
       argparse: 2.0.1
@@ -7124,7 +7116,7 @@ packages:
   /side-channel/1.0.4:
     dependencies:
       call-bind: 1.0.2
-      get-intrinsic: 1.1.0
+      get-intrinsic: 1.0.2
       object-inspect: 1.9.0
     dev: false
     resolution:
@@ -8785,6 +8777,7 @@ packages:
       '@azure-tools/autorest-extension-base': 3.1.267
       '@azure-tools/codegen': 2.5.292
       '@azure-tools/codegen-csharp': 3.0.263
+      '@azure-tools/codemodel': 4.13.349
       '@azure-tools/datastore': 4.1.270
       '@azure-tools/linq': 3.1.262
       '@azure-tools/openapi': 3.0.261
@@ -8792,6 +8785,7 @@ packages:
       '@azure-tools/uri': 3.0.255
       '@microsoft.azure/autorest.testserver': 2.10.68
       '@types/jest': 26.0.20
+      '@types/js-yaml': 3.12.1
       '@types/node': 14.14.22
       '@typescript-eslint/eslint-plugin': 4.14.1_b15473b68481c2b07ec15e4066acfd77
       '@typescript-eslint/parser': 4.14.1_eslint@7.18.0+typescript@3.9.7
@@ -8822,6 +8816,7 @@ packages:
       integrity: sha512-R4SNYE56Q0TOMYcT8gSTZIInxE9vVJH1k54SR8Ksvg8HNkzG+Pko1NIxb8zpWFB74VEmx3TDaruHnodgJjUrvQ==
       tarball: 'file:projects/schemas.tgz'
     version: 0.0.0
+registry: ''
 specifiers:
   '@azure-tools/async-io': ~3.0.0
   '@azure-tools/autorest-extension-base': ~3.1.0
