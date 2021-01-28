@@ -1,5 +1,5 @@
 // @ts-check
-const path = require('path');
+const path = require("path");
 
 /**
  * @type {import("webpack").Configuration}
@@ -25,6 +25,8 @@ module.exports = {
       { test: /\.tsx?$/, loader: "ts-loader" },
     ],
   },
-  plugins: [
-  ],
+  plugins: [],
+  optimization: {
+    minimize: false,
+  },
 };
