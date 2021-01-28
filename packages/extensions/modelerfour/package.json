@@ -64,7 +64,9 @@
     "chalk": "2.3.0",
     "recursive-diff": "~1.0.6",
     "prettier": "~2.2.1",
-    "eslint-plugin-prettier": "~3.2.0"
+    "eslint-plugin-prettier": "~3.2.0",
+    "webpack": "~5.18.0",
+    "webpack-cli": "~4.4.0"
   },
   "static-link": {
     "entrypoints": [],
@@ -80,6 +82,5 @@
       "source-map-support": "^0.5.19",
       "recursive-diff": "~1.0.6"
     }
-  },
-  "dependencies": {}
+  }
 }
