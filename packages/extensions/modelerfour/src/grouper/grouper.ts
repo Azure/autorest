@@ -44,7 +44,6 @@ export class Grouper {
         for (const operation of group.operations) {
           for (const request of values(operation.requests)) {
             this.processParameterGroup(group, operation, request);
-            throw new Error("Foo");
             request.updateSignatureParameters();
           }
           operation.updateSignatureParameters();
