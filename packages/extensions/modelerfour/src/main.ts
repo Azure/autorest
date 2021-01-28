@@ -1,3 +1,5 @@
+require("source-map-support").install();
+
 import { AutoRestExtension } from "@azure-tools/autorest-extension-base";
 import { processRequest as modelerfour } from "./modeler/plugin-modelerfour";
 import { processRequest as preNamer } from "./prenamer/plugin-prenamer";
