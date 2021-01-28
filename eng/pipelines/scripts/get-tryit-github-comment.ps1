@@ -23,7 +23,9 @@ function Create-TinyUrlForArtifact([string] $baseDownloadUrl, [string] $filename
 }
 
 function Get-PackageVersion([string] $packageRoot) {
-    return (Get-Content "$packageRoot/package.json") -join "`n" | ConvertFrom-Json | Select -ExpandProperty "version"
+    $version =  (Get-Content "$packageRoot/package.json") -join "`n" | ConvertFrom-Json | Select -ExpandProperty "version";
+    Write-Host "Version for package at $packageRoot is $version"
+    return $version;
 }
 
 function Format-Comment([string] $coreDownloadUrl, [string] $modelerfourDownloadUrl) {
@@ -43,8 +45,8 @@ function Run() {
     $coreVersion = Get-PackageVersion -packageRoot $root/packages/extensions/core
     $m4Version = Get-PackageVersion -packageRoot $root/packages/extensions/modelerfour
 
-    $coreDownloadUrl = Create-TinyUrlForArtifact -baseDownloadUrl $baseDownloadUrl -filename "autorest-core-$m4Version.tgz";
-    $modelerfourDownloadUrl = Create-TinyUrlForArtifact -baseDownloadUrl $baseDownloadUrl -filename "autorest-modelerfour-$coreVersion.tgz";
+    $coreDownloadUrl = Create-TinyUrlForArtifact -baseDownloadUrl $baseDownloadUrl -filename "autorest-core-$coreVersion.tgz";
+    $modelerfourDownloadUrl = Create-TinyUrlForArtifact -baseDownloadUrl $baseDownloadUrl -filename "autorest-modelerfour-$m4Version.tgz";
 
     $comment = Format-Comment -coreDownloadUrl $coreDownloadUrl -modelerfourDownloadUrl $modelerfourDownloadUrl
 
