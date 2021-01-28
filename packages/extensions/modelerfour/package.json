@@ -11,13 +11,14 @@
   "main": "dist/exports.js",
   "typings": "dist/exports.d.ts",
   "scripts": {
-    "start": "node --max_old_space_size=4096 ./entrypoints/main.js",
-    "debug": "node --max_old_space_size=4096 --inspect-brk=localhost:9229 ./entrypoints/main.js",
+    "start": "node --max_old_space_size=4096 ./dist/src/main.js",
+    "debug": "node --max_old_space_size=4096 --inspect-brk=localhost:9229 ./dist/src/main.js",
     "fix": "eslint  ./src --fix --ext .ts",
     "lint": "eslint  ./src --ext .ts --max-warnings=0",
     "static-link": "static-link --no-node-modules --debug",
     "watch": "tsc -p . --watch",
     "build": "tsc -p .",
+    "build:prod": "webpack",
     "prepack": "npm run static-link && npm run build",
     "test": "jest --watch --coverage=false",
     "test:ci": "jest --ci"
@@ -66,7 +67,9 @@
     "prettier": "~2.2.1",
     "eslint-plugin-prettier": "~3.2.0",
     "webpack": "~5.18.0",
-    "webpack-cli": "~4.4.0"
+    "webpack-cli": "~4.4.0",
+    "ts-loader": "~8.0.14",
+    "@types/webpack": "~4.41.26"
   },
   "static-link": {
     "entrypoints": [],

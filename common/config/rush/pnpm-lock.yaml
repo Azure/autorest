@@ -33,6 +33,7 @@ dependencies:
   '@types/semver': 5.5.0
   '@types/source-map': 0.5.0
   '@types/supertest': 2.0.10
+  '@types/webpack': 4.41.26
   '@types/yargs': 15.0.12
   '@types/z-schema': 3.24.0
   '@typescript-eslint/eslint-plugin': 4.14.1_b15473b68481c2b07ec15e4066acfd77
@@ -69,6 +70,7 @@ dependencies:
   static-link: 0.3.0
   supertest: 6.1.3
   ts-jest: 26.4.4_jest@26.6.3+typescript@3.9.7
+  ts-loader: 8.0.14_typescript@3.9.7+webpack@5.18.0
   ts-morph: 4.0.1
   typescript: 3.9.7
   typescript-json-schema: 0.40.0
@@ -833,6 +835,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-MZPUxrmFubI36XS1DI3qmI0YdN1gks62JtFZvxR67ljjSNCeK6U08Zx4msEWOXuofgqUt6zPHSi1H9fbjR/NRA==
+  /@types/anymatch/1.3.1:
+    dev: false
+    resolution:
+      integrity: sha512-/+CRPXpBDpo2RK9C68N3b2cOvO0Cf5B9aPijHsoDQTHivnGSObdOF2BRQOYjojWTDy6nQvMjmqRXIxH55VjxxA==
   /@types/babel-types/7.0.9:
     dev: false
     resolution:
@@ -1041,6 +1047,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-ZFqF6qa48XsPdjXV5Gsz0Zqmux2PerNd3a/ktL45mHpa19cuMi/cL8tcxdAx497yRh+QtYPuofjT9oWw9P7nkA==
+  /@types/source-list-map/0.1.2:
+    dev: false
+    resolution:
+      integrity: sha512-K5K+yml8LTo9bWJI/rECfIPrGgxdpeNbj+d53lwN4QjW1MCwlkhUms+gtdzigTeUyBr09+u8BwOIY3MXvHdcsA==
   /@types/source-map/0.5.0:
     dev: false
     resolution:
@@ -1062,6 +1072,35 @@ packages:
     dev: false
     resolution:
       integrity: sha512-Xt8TbEyZTnD5Xulw95GLMOkmjGICrOQyJ2jqgkSjAUR3mm7pAIzSR0NFBaMcwlzVvlpCjNwbATcWWwjNiZiFrQ==
+  /@types/tapable/1.0.6:
+    dev: false
+    resolution:
+      integrity: sha512-W+bw9ds02rAQaMvaLYxAbJ6cvguW/iJXNT6lTssS1ps6QdrMKttqEAMEG/b5CR8TZl3/L7/lH0ZV5nNR1LXikA==
+  /@types/uglify-js/3.11.1:
+    dependencies:
+      source-map: 0.6.1
+    dev: false
+    resolution:
+      integrity: sha512-7npvPKV+jINLu1SpSYVWG8KvyJBhBa8tmzMMdDoVc2pWUYHN8KIXlPJhjJ4LT97c4dXJA2SHL/q6ADbDriZN+Q==
+  /@types/webpack-sources/2.1.0:
+    dependencies:
+      '@types/node': 14.14.22
+      '@types/source-list-map': 0.1.2
+      source-map: 0.7.3
+    dev: false
+    resolution:
+      integrity: sha512-LXn/oYIpBeucgP1EIJbKQ2/4ZmpvRl+dlrFdX7+94SKRUV3Evy3FsfMZY318vGhkWUS5MPhtOM3w1/hCOAOXcg==
+  /@types/webpack/4.41.26:
+    dependencies:
+      '@types/anymatch': 1.3.1
+      '@types/node': 14.14.22
+      '@types/tapable': 1.0.6
+      '@types/uglify-js': 3.11.1
+      '@types/webpack-sources': 2.1.0
+      source-map: 0.6.1
+    dev: false
+    resolution:
+      integrity: sha512-7ZyTfxjCRwexh+EJFwRUM+CDB2XvgHl4vfuqf1ZKrgGvcS5BrNvPQqJh3tsZ0P6h6Aa1qClVHaJZszLPzpqHeA==
   /@types/yargs-parser/20.2.0:
     dev: false
     resolution:
@@ -1897,6 +1936,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-pDAdOJtqQ/m2f/PKEaP2Y342Dp4=
+  /big.js/5.2.2:
+    dev: false
+    resolution:
+      integrity: sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==
   /blob/0.0.5:
     dev: false
     resolution:
@@ -2901,6 +2944,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==
+  /emojis-list/3.0.0:
+    dev: false
+    engines:
+      node: '>= 4'
+    resolution:
+      integrity: sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==
   /enabled/2.0.0:
     dev: false
     resolution:
@@ -2962,6 +3011,16 @@ packages:
       node: '>=8.0.0'
     resolution:
       integrity: sha512-21HlvPUKaitDGE4GXNtQ7PLP0Sz4aWLddMPw2VTyFz1FVZqu/kZsJUO8WNpKuE/OCL7nkfRaOui2ZCJloGznGA==
+  /enhanced-resolve/4.5.0:
+    dependencies:
+      graceful-fs: 4.2.4
+      memory-fs: 0.5.0
+      tapable: 1.1.3
+    dev: false
+    engines:
+      node: '>=6.9.0'
+    resolution:
+      integrity: sha512-Nv9m36S/vxpsI+Hc4/ZGRs0n9mXqSWGGq49zxb/cJfPAQMbUtttJAlNPS4AQzaBdw/pKskw5bMbekT/Y7W/Wlg==
   /enhanced-resolve/5.7.0:
     dependencies:
       graceful-fs: 4.2.4
@@ -2994,6 +3053,13 @@ packages:
     dev: false
     resolution:
       integrity: sha1-BuARbTAo9q70gGhJ6w6mp0iuaWA=
+  /errno/0.1.8:
+    dependencies:
+      prr: 1.0.1
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-dJ6oBr5SQ1VSd9qkk7ByRgb/1SH4JZjCHSW/mr63/QcXO9zLVxvJ6Oy13nio03rxpSnVDDjFor75SjVeZWPW/A==
   /error-ex/1.3.2:
     dependencies:
       is-arrayish: 0.2.1
@@ -5509,6 +5575,16 @@ packages:
       node: '>=6.11.5'
     resolution:
       integrity: sha512-92+huvxMvYlMzMt0iIOukcwYBFpkYJdpl2xsZ7LrlayO7E8SOv+JJUEK17B/dJIHAOLMfh2dZZ/Y18WgmGtYNw==
+  /loader-utils/2.0.0:
+    dependencies:
+      big.js: 5.2.2
+      emojis-list: 3.0.0
+      json5: 2.1.3
+    dev: false
+    engines:
+      node: '>=8.9.0'
+    resolution:
+      integrity: sha512-rP4F0h2RaWSvPEkD7BLDFQnvSf+nK+wr3ESUjNTyAGobqrijmW92zc+SO6d4p4B1wh7+B/Jg1mkQe5NYUEHtHQ==
   /locate-path/2.0.0:
     dependencies:
       p-locate: 2.0.0
@@ -5717,6 +5793,15 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-qX2bG48pTqYRVmDB37rn/6PT7LcR8T7oAX3bf99u1Tt1nzxYfxkgqDwUwolPlXweM0XzBOBFzSx4kfp7KP1s/w==
+  /memory-fs/0.5.0:
+    dependencies:
+      errno: 0.1.8
+      readable-stream: 2.3.7
+    dev: false
+    engines:
+      node: '>=4.3.0 <5.0.0 || >=5.10'
+    resolution:
+      integrity: sha512-jA0rdU5KoQMC0e6ppoNRtpp6vjFq6+NY7r8hywnC7V+1Xj/MtHwGIbB1QaK/dunyjWteJzmkpd7ooeWg10T7GA==
   /meow/5.0.0:
     dependencies:
       camelcase-keys: 4.2.0
@@ -6767,6 +6852,10 @@ packages:
       node: '>= 0.10'
     resolution:
       integrity: sha512-dh/frvCBVmSsDYzw6n926jv974gddhkFPfiN8hPOi30Wax25QZyZEGveluCgliBnqmuM+UJmBErbAUFIoDbjOw==
+  /prr/1.0.1:
+    dev: false
+    resolution:
+      integrity: sha1-0/wRS6BplaRexok/SEzrHXj19HY=
   /pseudomap/1.0.2:
     dev: false
     resolution:
@@ -8044,6 +8133,12 @@ packages:
       node: '>=10.0.0'
     resolution:
       integrity: sha512-rxZevLGTUzWna/qBLObOe16kB2RTnnbhciwgPbMMlazz1yZGVEgnZK762xyVdVznhqxrfCeBMmMkgOOaPwjH7g==
+  /tapable/1.1.3:
+    dev: false
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-4WK/bYZmj8xLr+HUCODHGF1ZFzsYffasLUgEiMBY4fgtltdO6B4WJtlSbPaDTLpYTcGVwM2qLnFTICEcNxs3kA==
   /tapable/2.2.0:
     dev: false
     engines:
@@ -8260,6 +8355,23 @@ packages:
       typescript: '>=3.8 <5.0'
     resolution:
       integrity: sha512-3lFWKbLxJm34QxyVNNCgXX1u4o/RV0myvA2y2Bxm46iGIjKlaY0own9gIckbjZJPn+WaJEnfPPJ20HHGpoq4yg==
+  /ts-loader/8.0.14_typescript@3.9.7+webpack@5.18.0:
+    dependencies:
+      chalk: 4.1.0
+      enhanced-resolve: 4.5.0
+      loader-utils: 2.0.0
+      micromatch: 4.0.2
+      semver: 7.3.4
+      typescript: 3.9.7
+      webpack: 5.18.0_webpack-cli@4.4.0
+    dev: false
+    engines:
+      node: '>=10.0.0'
+    peerDependencies:
+      typescript: '*'
+      webpack: '*'
+    resolution:
+      integrity: sha512-Jt/hHlUnApOZjnSjTmZ+AbD5BGlQFx3f1D0nYuNKwz0JJnuDGHJas6az+FlWKwwRTu+26GXpv249A8UAnYUpqA==
   /ts-morph/4.0.1:
     dependencies:
       '@dsherret/to-absolute-glob': 2.0.2
@@ -9327,6 +9439,7 @@ packages:
       '@types/jest': 26.0.20
       '@types/js-yaml': 3.12.1
       '@types/node': 14.14.22
+      '@types/webpack': 4.41.26
       '@typescript-eslint/eslint-plugin': 4.14.1_b15473b68481c2b07ec15e4066acfd77
       '@typescript-eslint/parser': 4.14.1_eslint@7.18.0+typescript@3.9.7
       chalk: 2.3.0
@@ -9341,13 +9454,14 @@ packages:
       source-map-support: 0.5.19
       static-link: 0.3.0
       ts-jest: 26.4.4_jest@26.6.3+typescript@3.9.7
+      ts-loader: 8.0.14_typescript@3.9.7+webpack@5.18.0
       typescript: 3.9.7
       webpack: 5.18.0_webpack-cli@4.4.0
       webpack-cli: 4.4.0_webpack@5.18.0
     dev: false
     name: '@rush-temp/modelerfour'
     resolution:
-      integrity: sha512-+uvKkFTzRdaYBABRPIvnUmzbbuMSVyGPqfnYrFDPCT3lK2AVplskY3Y3GF11U1Rhzovg4LnwrzCH2M+CMCYj4A==
+      integrity: sha512-99u35ofuhuaBc6w4ebOB8HppGq55QM+V4H6I7iHjKDcFjMqMBAIzoGUyPvrhtwgJyTEBEuDgyo8sUrmnf1ZTMw==
       tarball: 'file:projects/modelerfour.tgz'
     version: 0.0.0
   'file:projects/schemas.tgz':
@@ -9393,6 +9507,7 @@ specifiers:
   '@types/semver': 5.5.0
   '@types/source-map': 0.5.0
   '@types/supertest': ^2.0.10
+  '@types/webpack': ~4.41.26
   '@types/yargs': ~15.0.12
   '@types/z-schema': ^3.16.31
   '@typescript-eslint/eslint-plugin': ^4.12.0
@@ -9429,6 +9544,7 @@ specifiers:
   static-link: ^0.3.0
   supertest: ^6.0.1
   ts-jest: ^26.4.4
+  ts-loader: ~8.0.14
   ts-morph: ~4.0.1
   typescript: ~3.9.7
   typescript-json-schema: ~0.40.0
