@@ -15,11 +15,10 @@
     "debug": "node --max_old_space_size=4096 --inspect-brk=localhost:9229 ./dist/src/main.js",
     "fix": "eslint  ./src --fix --ext .ts",
     "lint": "eslint  ./src --ext .ts --max-warnings=0",
-    "static-link": "static-link --no-node-modules --debug",
     "watch": "tsc -p . --watch",
     "build": "tsc -p .",
     "build:prod": "webpack",
-    "prepack": "npm run static-link && npm run build",
+    "prepack": "npm run clean && npm run build:prod",
     "test": "jest --watch --coverage=false",
     "test:ci": "jest --ci"
   },
@@ -61,7 +60,6 @@
     "@azure-tools/openapi": "~3.0.0",
     "@azure-tools/datastore": "~4.1.0",
     "@azure-tools/linq": "~3.1.0",
-    "static-link": "^0.3.0",
     "chalk": "2.3.0",
     "recursive-diff": "~1.0.6",
     "prettier": "~2.2.1",
@@ -70,20 +68,5 @@
     "webpack-cli": "~4.4.0",
     "ts-loader": "~8.0.14",
     "@types/webpack": "~4.41.26"
-  },
-  "static-link": {
-    "entrypoints": [],
-    "dependencies": {
-      "@azure-tools/codegen": "~2.4.0",
-      "@azure-tools/codegen-csharp": "~3.0.0",
-      "@azure-tools/autorest-extension-base": "~3.1.0",
-      "@autorest/codemodel": "~4.14.0",
-      "@azure-tools/tasks": "~3.0.0",
-      "@azure-tools/openapi": "~3.0.0",
-      "@azure-tools/datastore": "~4.1.0",
-      "@azure-tools/linq": "~3.1.0",
-      "source-map-support": "^0.5.19",
-      "recursive-diff": "~1.0.6"
-    }
   }
 }
