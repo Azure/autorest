@@ -15,11 +15,11 @@ jobs:
       - template: ./templates/verify-changes.yaml
       - template: ./templates/build.yaml
 
-      # - script: npx @microsoft/rush test:ci -v
-      #   displayName: Test
+      - script: npx @microsoft/rush test:ci -v
+        displayName: Test
 
-      # - script: npx @microsoft/rush lint -v
-      #   displayName: Lint
+      - script: npx @microsoft/rush lint -v
+        displayName: Lint
 
       - script: npx @microsoft/rush publish --publish --pack --include-all
         displayName: Pack packages
@@ -28,7 +28,7 @@ jobs:
         artifact: packages
         displayName: Publish packages(.tgz) as pipeline artifacts
 
-      # - template: ./templates/create-tryit-comment.yaml
+      - template: ./templates/create-tryit-comment.yaml
 
   - job: regressiontests
     displayName: Regression tests
