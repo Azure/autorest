@@ -1403,7 +1403,7 @@ export class ModelerFour {
           }),
         },
         implementation: ImplementationLocation.Method,
-        required: body.instance?.required,
+        required: body.instance?.required ?? true,
         nullable: requestSchema?.instance?.nullable,
         clientDefaultValue: this.interpret.getClientDefault(body?.instance || {}, {}),
       }),

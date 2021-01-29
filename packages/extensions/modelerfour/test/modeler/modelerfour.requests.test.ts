@@ -43,9 +43,10 @@ describe("Modelerfour.Request", () => {
         expect(parameter?.required).toBe(true);
       });
 
-      it("mark body as not required by default", async () => {
+      // Note OpenAPI specs define the opposite(body is optional by default) but we are doing this for back compat right now.
+      it("mark body as required by default", async () => {
         const parameter = await runModelerWithBody(defaultBody);
-        expect(parameter?.required).toBe(undefined);
+        expect(parameter?.required).toBe(true);
       });
     });
   });
