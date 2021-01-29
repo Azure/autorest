@@ -1,6 +1,7 @@
 dependencies:
   '@azure-tools/async-io': 3.0.253
   '@azure-tools/autorest-extension-base': 3.1.267
+  '@azure-tools/codegen': 2.5.290
   '@azure-tools/codegen-csharp': 3.0.263
   '@azure-tools/datastore': 4.1.270
   '@azure-tools/deduplication': 3.0.267
@@ -12,6 +13,7 @@ dependencies:
   '@azure-tools/uri': 3.0.255
   '@microsoft.azure/autorest.testserver': 2.10.68
   '@rush-temp/autorest': 'file:projects/autorest.tgz'
+  '@rush-temp/codegen': 'file:projects/codegen.tgz'
   '@rush-temp/codemodel': 'file:projects/codemodel.tgz_prettier@2.2.1'
   '@rush-temp/core': 'file:projects/core.tgz'
   '@rush-temp/md-mock-api': 'file:projects/md-mock-api.tgz'
@@ -23,7 +25,6 @@ dependencies:
   '@types/deep-equal': 1.0.1
   '@types/express': 4.17.11
   '@types/glob': 7.1.3
-  '@types/jest': 26.0.20
   '@types/jsonpath': 0.2.0
   '@types/mocha': 5.2.5
   '@types/morgan': 1.9.2
@@ -9703,6 +9704,30 @@ packages:
       integrity: sha512-dPZD744MKrOU9KBHDlyvFKdgDSqGaUVHESzQrbd3EyeNLobYYVY1dmuWd2dR2gs8hPeKYRKqKIyZGiswjWhf5w==
       tarball: 'file:projects/autorest.tgz'
     version: 0.0.0
+  'file:projects/codegen.tgz':
+    dependencies:
+      '@azure-tools/async-io': 3.0.253
+      '@azure-tools/linq': 3.1.262
+      '@types/jest': 26.0.20
+      '@types/js-yaml': 3.12.1
+      '@types/mocha': 5.2.5
+      '@types/node': 12.7.2
+      '@types/semver': 5.5.0
+      '@typescript-eslint/eslint-plugin': 4.14.1_b15473b68481c2b07ec15e4066acfd77
+      '@typescript-eslint/parser': 4.14.1_eslint@7.18.0+typescript@3.9.7
+      eslint: 7.18.0
+      jest: 26.6.3
+      js-yaml: 3.13.1
+      semver: 5.7.1
+      source-map-support: 0.5.13
+      ts-jest: 26.4.4_jest@26.6.3+typescript@3.9.7
+      typescript: 3.9.7
+    dev: false
+    name: '@rush-temp/codegen'
+    resolution:
+      integrity: sha512-8Jg6IGD8KpVB8Q5Kev3eBZtUGrJrmiXdU0HOt8WTvcsDMooUkhmFX39j5uQapCmXcAeXeSZdpRx/x2Tv8TFusw==
+      tarball: 'file:projects/codegen.tgz'
+    version: 0.0.0
   'file:projects/codemodel.tgz_prettier@2.2.1':
     dependencies:
       '@azure-tools/autorest-extension-base': 3.1.267
@@ -9860,7 +9885,7 @@ packages:
     dev: false
     name: '@rush-temp/modelerfour'
     resolution:
-      integrity: sha512-ZKAhufTIlvZqTdPS+VJAvfJ7ObNiyGxrpO4DPyynySdhQBBXm4FhKFA6sdKZLQYdkCRt5SKC/ppzkvGgRX+9dQ==
+      integrity: sha512-NzcmHNsRXI9IZZxFljUsaOy9PeRj6H0j5yx/ZDzQ4zMKzGhiAlxnmheZkyDfTjfMyIZxPaaEcifI4+ja8rGbTg==
       tarball: 'file:projects/modelerfour.tgz'
     version: 0.0.0
   'file:projects/oai2-to-oai3.tgz':
@@ -9897,6 +9922,7 @@ registry: ''
 specifiers:
   '@azure-tools/async-io': ~3.0.0
   '@azure-tools/autorest-extension-base': ~3.1.0
+  '@azure-tools/codegen': 2.5.290
   '@azure-tools/codegen-csharp': ~3.0.0
   '@azure-tools/datastore': ~4.1.0
   '@azure-tools/deduplication': ~3.0.266
@@ -9908,6 +9934,7 @@ specifiers:
   '@azure-tools/uri': ~3.0.0
   '@microsoft.azure/autorest.testserver': ~2.10.46
   '@rush-temp/autorest': 'file:./projects/autorest.tgz'
+  '@rush-temp/codegen': 'file:./projects/codegen.tgz'
   '@rush-temp/codemodel': 'file:./projects/codemodel.tgz'
   '@rush-temp/core': 'file:./projects/core.tgz'
   '@rush-temp/md-mock-api': 'file:./projects/md-mock-api.tgz'
@@ -9919,7 +9946,6 @@ specifiers:
   '@types/deep-equal': ^1.0.1
   '@types/express': ~4.17.9
   '@types/glob': ^7.1.3
-  '@types/jest': ^26.0.20
   '@types/jsonpath': ^0.2.0
   '@types/mocha': 5.2.5
   '@types/morgan': ^1.9.2

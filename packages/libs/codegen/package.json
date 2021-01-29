@@ -1,0 +1,57 @@
+{
+  "name": "@azure-tools/codegen",
+  "version": "2.5.292",
+  "description": "Autorest Code generator common and base classes",
+  "directories": {
+    "doc": "docs"
+  },
+  "main": "dist/exports.js",
+  "typings": "dist/exports.d.ts",
+  "scripts": {
+    "build": "tsc -p .",
+    "watch": "tsc -p . --watch",
+    "lint:fix": "eslint . --fix --ext .ts",
+    "lint": "eslint . --ext .ts --max-warnings=0",
+    "prepare": "npm run build",
+    "test": "jest --watchAll --coverage=false",
+    "test:ci": "jest --ci",
+    "clean": "ver > nul 2>&1 nul && npm run --silent clean-cmd || npm run --silent clean-bash",
+    "clean-cmd": "if exist dist rmdir /s /q dist && exit 0 || exit 0 ",
+    "clean-bash": "rm nul && rm -rf dist && exit 0 || exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/perks.git"
+  },
+  "keywords": [
+    "AutoRest",
+    "codegen"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/perks/issues"
+  },
+  "homepage": "https://github.com/Azure/perks/tree/master/codegen#readme",
+  "readme": "https://github.com/Azure/perks/tree/master/codegen/readme.md",
+  "devDependencies": {
+    "@types/jest": "^26.0.19",
+    "@types/js-yaml": "3.12.1",
+    "@types/mocha": "5.2.5",
+    "@types/node": "12.7.2",
+    "@types/semver": "5.5.0",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
+    "eslint": "^7.17.0",
+    "jest": "^26.6.3",
+    "source-map-support": "0.5.13",
+    "ts-jest": "^26.4.4",
+    "typescript": "~3.9.7"
+  },
+  "dependencies": {
+    "@azure-tools/async-io": "~3.0.0",
+    "@azure-tools/linq": "~3.1.0",
+    "js-yaml": "3.13.1",
+    "semver": "^5.5.1"
+  }
+}

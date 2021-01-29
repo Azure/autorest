@@ -49,6 +49,12 @@
       "shouldPublish": true
     },
     {
+      "packageName": "@azure-tools/codegen",
+      "projectFolder": "packages/libs/codegen",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
       "packageName": "@azure-tools/oai2-to-oai3",
       "projectFolder": "packages/libs/oai2-to-oai3",
       "reviewCategory": "production",
