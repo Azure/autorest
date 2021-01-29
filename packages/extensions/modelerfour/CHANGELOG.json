@@ -2,6 +2,18 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.15.456",
+      "tag": "@autorest/modelerfour_v4.15.456",
+      "date": "Thu, 28 Jan 2021 00:22:27 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix static linking issue with modelerfour resulting in incompatible dependency."
+          }
+        ]
+      }
+    },
+    {
       "version": "4.15.455",
       "tag": "@autorest/modelerfour_v4.15.455",
       "date": "Tue, 26 Jan 2021 21:36:02 GMT",
@@ -22,22 +34,22 @@
       "version": "4.15.x",
       "comments": {
         "patch": [
-          { 
+          {
             "comment": "**Fix** Missing description in responses. ([PR 370](https://github.com/Azure/autorest.modelerfour/pull/370))"
           },
-          { 
+          {
             "comment": "**Feature** Added new flag `always-create-accept-parameter` to enable/disable accept param auto generation. ([PR 366](https://github.com/Azure/autorest.modelerfour/pull/366))"
           },
-          { 
+          {
             "comment": "**Fix** Allow request with body being a file and `application/json` content-type. ([PR 363](https://github.com/Azure/autorest.modelerfour/pull/363))"
           },
-          { 
+          {
             "comment": "**Fix** Dictionaries of dictionaries not being modeled as such(`dict[str, object]` instead of `dict[str, dict[str, str]]`). ([PR 372](https://github.com/Azure/autorest.modelerfour/pull/372))"
           },
-          { 
+          {
             "comment": "**Fix** Issue with sibling models(Model just being a ref of another) causing circular dependency exception. ([PR 375](https://github.com/Azure/autorest.modelerfour/pull/375))"
           },
-          { 
+          {
             "comment": "**Fix** Issue with duplicates schemas names due to consequtive name duplicate removal. ([PR 374](https://github.com/Azure/autorest.modelerfour/pull/374))"
           },
           {
@@ -219,7 +231,7 @@
       "version": "4.2.75",
       "comments": {
         "patch": [
-         {
+          {
             "comment": "add `style` to parameters to support collection format "
           },
           {
