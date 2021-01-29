@@ -1,0 +1,435 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "{Endpoint}/luis/v2.0",
+      "variables": {
+        "Endpoint": {
+          "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+          "x-ms-parameter-location": "client",
+          "x-ms-skip-url-encoding": true,
+          "x-ms-original": {
+            "$ref": "#/components/parameters/Endpoint"
+          },
+          "x-in": "path",
+          "x-name": "Endpoint",
+          "x-required": true,
+          "x-type": "string",
+          "default": ""
+        }
+      }
+    }
+  ],
+  "info": {
+    "version": "2.0",
+    "title": "LUIS Runtime Client"
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    }
+  ],
+  "paths": {
+    "/apps/{appId}": {
+      "post": {
+        "description": "Gets predictions for a given utterance, in the form of intents and entities. The current maximum query size is 500 characters.",
+        "operationId": "Prediction_Resolve",
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "description": "The LUIS application ID (Guid).",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "timezoneOffset",
+            "in": "query",
+            "description": "The timezone offset for the location of the request.",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "verbose",
+            "in": "query",
+            "description": "If true, return all intents instead of just the top scoring intent.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "staging",
+            "in": "query",
+            "description": "Use the staging endpoint slot.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "spellCheck",
+            "in": "query",
+            "description": "Enable spell checking.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "bing-spell-check-subscription-key",
+            "in": "query",
+            "description": "The subscription key to use when enabling Bing spell check",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "log",
+            "in": "query",
+            "description": "Log query (default is true)",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Prediction, based on the input query, containing intent(s) and entities.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LuisResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIError"
+                }
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Predictions From Endpoint Via Post request": {
+            "parameters": {
+              "Endpoint": "{Endpoint}",
+              "Ocp-Apim-Subscription-Key": "{Subscription Key}",
+              "appId": "{Application Id}",
+              "q": "forward to frank 30 dollars through HSBC"
+            },
+            "responses": {
+              "200": {
+                "headers": {},
+                "body": {
+                  "query": "forward to frank 30 dollars through HSBC",
+                  "topScoringIntent": {
+                    "intent": "give",
+                    "score": 0.3964121
+                  },
+                  "entities": [
+                    {
+                      "entity": "30",
+                      "type": "builtin.number",
+                      "startIndex": 17,
+                      "endIndex": 18,
+                      "resolution": {
+                        "value": "30"
+                      }
+                    },
+                    {
+                      "entity": "frank",
+                      "type": "frank",
+                      "startIndex": 11,
+                      "endIndex": 15,
+                      "score": 0.935219169
+                    },
+                    {
+                      "entity": "30 dollars",
+                      "type": "builtin.currency",
+                      "startIndex": 17,
+                      "endIndex": 26,
+                      "resolution": {
+                        "unit": "Dollar",
+                        "value": "30"
+                      }
+                    },
+                    {
+                      "entity": "hsbc",
+                      "type": "Bank",
+                      "startIndex": 36,
+                      "endIndex": 39,
+                      "resolution": {
+                        "values": [
+                          "BankeName"
+                        ]
+                      }
+                    }
+                  ],
+                  "sentimentAnalysis": {
+                    "label": "positive",
+                    "score": 0.9163064
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "x-ms-client-name": "query",
+          "x-ms-requestBody-name": "query",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Q"
+              }
+            }
+          },
+          "description": "The utterance to predict.",
+          "required": true
+        },
+        "x-ms-requestBody-index": 1
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Q": {
+        "type": "string",
+        "maxLength": 500,
+        "description": "The utterance to predict.",
+        "example": "\"forward to frank 30 dollars through HSBC\""
+      },
+      "LuisResult": {
+        "type": "object",
+        "description": "Prediction, based on the input query, containing intent(s) and entities.",
+        "properties": {
+          "query": {
+            "description": "The input utterance that was analyzed.",
+            "type": "string"
+          },
+          "alteredQuery": {
+            "type": "string",
+            "description": "The corrected utterance (when spell checking was enabled)."
+          },
+          "topScoringIntent": {
+            "$ref": "#/components/schemas/IntentModel"
+          },
+          "intents": {
+            "type": "array",
+            "description": "All the intents (and their score) that were detected from utterance.",
+            "items": {
+              "$ref": "#/components/schemas/IntentModel"
+            }
+          },
+          "entities": {
+            "type": "array",
+            "description": "The entities extracted from the utterance.",
+            "items": {
+              "$ref": "#/components/schemas/EntityModel"
+            }
+          },
+          "compositeEntities": {
+            "type": "array",
+            "description": "The composite entities extracted from the utterance.",
+            "items": {
+              "$ref": "#/components/schemas/CompositeEntityModel"
+            }
+          },
+          "sentimentAnalysis": {
+            "$ref": "#/components/schemas/Sentiment"
+          },
+          "connectedServiceResult": {
+            "$ref": "#/components/schemas/LuisResult"
+          }
+        }
+      },
+      "CompositeEntityModel": {
+        "description": "LUIS Composite Entity.",
+        "type": "object",
+        "properties": {
+          "parentType": {
+            "type": "string",
+            "description": "Type/name of parent entity."
+          },
+          "value": {
+            "type": "string",
+            "description": "Value for composite entity extracted by LUIS."
+          },
+          "children": {
+            "type": "array",
+            "description": "Child entities.",
+            "items": {
+              "$ref": "#/components/schemas/CompositeChildModel"
+            }
+          }
+        },
+        "required": [
+          "parentType",
+          "value",
+          "children"
+        ]
+      },
+      "CompositeChildModel": {
+        "description": "Child entity in a LUIS Composite Entity.",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of child entity."
+          },
+          "value": {
+            "type": "string",
+            "description": "Value extracted by LUIS."
+          }
+        },
+        "required": [
+          "type",
+          "value"
+        ]
+      },
+      "IntentModel": {
+        "description": "An intent detected from the utterance.",
+        "type": "object",
+        "properties": {
+          "intent": {
+            "type": "string",
+            "description": "Name of the intent, as defined in LUIS."
+          },
+          "score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Associated prediction score for the intent (float)."
+          }
+        }
+      },
+      "EntityModel": {
+        "description": "An entity extracted from the utterance.",
+        "type": "object",
+        "properties": {
+          "entity": {
+            "type": "string",
+            "description": "Name of the entity, as defined in LUIS."
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the entity, as defined in LUIS."
+          },
+          "startIndex": {
+            "type": "integer",
+            "description": "The position of the first character of the matched entity within the utterance."
+          },
+          "endIndex": {
+            "type": "integer",
+            "description": "The position of the last character of the matched entity within the utterance."
+          }
+        },
+        "additionalProperties": {
+          "type": "object",
+          "description": "List of additional properties. For example, score and resolution values for pre-built LUIS entities."
+        },
+        "required": [
+          "entity",
+          "type",
+          "startIndex",
+          "endIndex"
+        ]
+      },
+      "EntityWithScore": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "score": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "description": "Associated prediction score for the intent (float)."
+              }
+            },
+            "required": [
+              "score"
+            ]
+          }
+        ]
+      },
+      "EntityWithResolution": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EntityModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "resolution": {
+                "type": "object",
+                "description": "Resolution values for pre-built LUIS entities."
+              }
+            },
+            "required": [
+              "resolution"
+            ]
+          }
+        ]
+      },
+      "APIError": {
+        "type": "object",
+        "description": "Error information returned by the API",
+        "properties": {
+          "statusCode": {
+            "type": "string",
+            "description": "HTTP Status code"
+          },
+          "message": {
+            "type": "string",
+            "description": "Cause of the error."
+          }
+        }
+      },
+      "Sentiment": {
+        "description": "Sentiment of the input utterance.",
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "The polarity of the sentiment, can be positive, neutral or negative."
+          },
+          "score": {
+            "type": "number",
+            "description": "Score of the sentiment, ranges from 0 (most negative) to 1 (most positive)."
+          }
+        }
+      }
+    },
+    "parameters": {
+      "Endpoint": {
+        "name": "Endpoint",
+        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+        "x-ms-parameter-location": "client",
+        "required": true,
+        "in": "path",
+        "x-ms-skip-url-encoding": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "securitySchemes": {
+      "apiKeyHeader": {
+        "type": "apiKey",
+        "name": "Ocp-Apim-Subscription-Key",
+        "in": "header"
+      }
+    }
+  }
+}

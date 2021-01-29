@@ -1,0 +1,1037 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Swagger BAT Header Service",
+    "description": "Test Infrastructure for AutoRest",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/header/param/existingkey": {
+      "post": {
+        "operationId": "header_paramExistingKey",
+        "description": "Send a post request with header value \"User-Agent\": \"overwrite\"",
+        "tags": [
+          "Header Operations"
+        ],
+        "parameters": [
+          {
+            "description": "Send a post request with header value \"User-Agent\": \"overwrite\"",
+            "name": "User-Agent",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/response/existingkey": {
+      "post": {
+        "operationId": "header_responseExistingKey",
+        "description": "Get a response with header value \"User-Agent\": \"overwrite\"",
+        "tags": [
+          "Header Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response",
+            "headers": {
+              "User-Agent": {
+                "description": "response with header value \"User-Agent\": \"overwrite\"",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/param/protectedkey": {
+      "post": {
+        "operationId": "header_paramProtectedKey",
+        "description": "Send a post request with header value \"Content-Type\": \"text/html\"",
+        "tags": [
+          "Header Operations"
+        ],
+        "parameters": [
+          {
+            "description": "Send a post request with header value \"Content-Type\": \"text/html\"",
+            "name": "Content-Type",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/response/protectedkey": {
+      "post": {
+        "operationId": "header_responseProtectedKey",
+        "description": "Get a response with header value \"Content-Type\": \"text/html\"",
+        "tags": [
+          "Header Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response",
+            "headers": {
+              "Content-Type": {
+                "description": "response with header value \"Content-Type\": \"text/html\"",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/param/prim/integer": {
+      "post": {
+        "operationId": "header_paramInteger",
+        "description": "Send a post request with header values \"scenario\": \"positive\", \"value\": 1 or \"scenario\": \"negative\", \"value\": -2 ",
+        "tags": [
+          "Header Operations"
+        ],
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"positive\" or \"negative\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "description": "Send a post request with header values 1 or -2",
+            "name": "value",
+            "in": "header",
+            "type": "integer",
+            "format": "int32",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/response/prim/integer": {
+      "post": {
+        "operationId": "header_responseInteger",
+        "description": "Get a response with header value \"value\": 1 or -2",
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"positive\" or \"negative\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Header Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response",
+            "headers": {
+              "value": {
+                "description": "response with header value \"value\": 1 or -2",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/param/prim/long": {
+      "post": {
+        "operationId": "header_paramLong",
+        "description": "Send a post request with header values \"scenario\": \"positive\", \"value\": 105 or \"scenario\": \"negative\", \"value\": -2 ",
+        "tags": [
+          "Header Operations"
+        ],
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"positive\" or \"negative\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "description": "Send a post request with header values 105 or -2",
+            "name": "value",
+            "in": "header",
+            "type": "integer",
+            "format": "int64",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/response/prim/long": {
+      "post": {
+        "operationId": "header_responseLong",
+        "description": "Get a response with header value \"value\": 105 or -2",
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"positive\" or \"negative\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Header Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response",
+            "headers": {
+              "value": {
+                "description": "response with header value \"value\": 105 or -2",
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/param/prim/float": {
+      "post": {
+        "operationId": "header_paramFloat",
+        "description": "Send a post request with header values \"scenario\": \"positive\", \"value\": 0.07 or \"scenario\": \"negative\", \"value\": -3.0",
+        "tags": [
+          "Header Operations"
+        ],
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"positive\" or \"negative\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "description": "Send a post request with header values 0.07 or -3.0",
+            "name": "value",
+            "in": "header",
+            "type": "number",
+            "format": "float",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/response/prim/float": {
+      "post": {
+        "operationId": "header_responseFloat",
+        "description": "Get a response with header value \"value\": 0.07 or -3.0",
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"positive\" or \"negative\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Header Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response",
+            "headers": {
+              "value": {
+                "description": "response with header value \"value\": 0.07 or -3.0",
+                "type": "number",
+                "format": "float"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/param/prim/double": {
+      "post": {
+        "operationId": "header_paramDouble",
+        "description": "Send a post request with header values \"scenario\": \"positive\", \"value\": 7e120 or \"scenario\": \"negative\", \"value\": -3.0",
+        "tags": [
+          "Header Operations"
+        ],
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"positive\" or \"negative\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "description": "Send a post request with header values 7e120 or -3.0",
+            "name": "value",
+            "in": "header",
+            "type": "number",
+            "format": "double",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/response/prim/double": {
+      "post": {
+        "operationId": "header_responseDouble",
+        "description": "Get a response with header value \"value\": 7e120 or -3.0",
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"positive\" or \"negative\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Header Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response",
+            "headers": {
+              "value": {
+                "description": "response with header value \"value\": 7e120 or -3.0",
+                "type": "number",
+                "format": "double"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/param/prim/bool": {
+      "post": {
+        "operationId": "header_paramBool",
+        "description": "Send a post request with header values \"scenario\": \"true\", \"value\": true or \"scenario\": \"false\", \"value\": false",
+        "tags": [
+          "Header Operations"
+        ],
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"true\" or \"false\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "description": "Send a post request with header values true or false",
+            "name": "value",
+            "in": "header",
+            "type": "boolean",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/response/prim/bool": {
+      "post": {
+        "operationId": "header_responseBool",
+        "description": "Get a response with header value \"value\": true or false",
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"true\" or \"false\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Header Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response",
+            "headers": {
+              "value": {
+                "description": "response with header value \"value\": true or false",
+                "type": "boolean"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/param/prim/string": {
+      "post": {
+        "operationId": "header_paramString",
+        "description": "Send a post request with header values \"scenario\": \"valid\", \"value\": \"The quick brown fox jumps over the lazy dog\" or \"scenario\": \"null\", \"value\": null or \"scenario\": \"empty\", \"value\": \"\"",
+        "tags": [
+          "Header Operations"
+        ],
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"valid\" or \"null\" or \"empty\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "description": "Send a post request with header values \"The quick brown fox jumps over the lazy dog\" or null or \"\"",
+            "name": "value",
+            "in": "header",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/response/prim/string": {
+      "post": {
+        "operationId": "header_responseString",
+        "description": "Get a response with header values \"The quick brown fox jumps over the lazy dog\" or null or \"\"",
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"valid\" or \"null\" or \"empty\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Header Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response",
+            "headers": {
+              "value": {
+                "description": "response with header values \"The quick brown fox jumps over the lazy dog\" or null or \"\"",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/param/prim/date": {
+      "post": {
+        "operationId": "header_paramDate",
+        "description": "Send a post request with header values \"scenario\": \"valid\", \"value\": \"2010-01-01\" or \"scenario\": \"min\", \"value\": \"0001-01-01\"",
+        "tags": [
+          "Header Operations"
+        ],
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"valid\" or \"min\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "description": "Send a post request with header values \"2010-01-01\" or \"0001-01-01\"",
+            "name": "value",
+            "in": "header",
+            "type": "string",
+            "format": "date",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/response/prim/date": {
+      "post": {
+        "operationId": "header_responseDate",
+        "description": "Get a response with header values \"2010-01-01\" or \"0001-01-01\"",
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"valid\" or \"min\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Header Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response",
+            "headers": {
+              "value": {
+                "description": "response with header values \"2010-01-01\" or \"0001-01-01\"",
+                "type": "string",
+                "format": "date"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/param/prim/datetime": {
+      "post": {
+        "operationId": "header_paramDatetime",
+        "description": "Send a post request with header values \"scenario\": \"valid\", \"value\": \"2010-01-01T12:34:56Z\" or \"scenario\": \"min\", \"value\": \"0001-01-01T00:00:00Z\"",
+        "tags": [
+          "Header Operations"
+        ],
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"valid\" or \"min\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "description": "Send a post request with header values \"2010-01-01T12:34:56Z\" or \"0001-01-01T00:00:00Z\"",
+            "name": "value",
+            "in": "header",
+            "type": "string",
+            "format": "date-time",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/response/prim/datetime": {
+      "post": {
+        "operationId": "header_responseDatetime",
+        "description": "Get a response with header values \"2010-01-01T12:34:56Z\" or \"0001-01-01T00:00:00Z\"",
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"valid\" or \"min\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Header Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response",
+            "headers": {
+              "value": {
+                "description": "response with header values \"2010-01-01T12:34:56Z\" or \"0001-01-01T00:00:00Z\"",
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/param/prim/datetimerfc1123": {
+      "post": {
+        "operationId": "header_paramDatetimeRfc1123",
+        "description": "Send a post request with header values \"scenario\": \"valid\", \"value\": \"Wed, 01 Jan 2010 12:34:56 GMT\" or \"scenario\": \"min\", \"value\": \"Mon, 01 Jan 0001 00:00:00 GMT\"",
+        "tags": [
+          "Header Operations"
+        ],
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"valid\" or \"min\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "description": "Send a post request with header values \"Wed, 01 Jan 2010 12:34:56 GMT\" or \"Mon, 01 Jan 0001 00:00:00 GMT\"",
+            "name": "value",
+            "in": "header",
+            "type": "string",
+            "format": "date-time-rfc1123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/response/prim/datetimerfc1123": {
+      "post": {
+        "operationId": "header_responseDatetimeRfc1123",
+        "description": "Get a response with header values \"Wed, 01 Jan 2010 12:34:56 GMT\" or \"Mon, 01 Jan 0001 00:00:00 GMT\"",
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"valid\" or \"min\"",
+             "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Header Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response",
+            "headers": {
+              "value": {
+                "description": "response with header values \"Wed, 01 Jan 2010 12:34:56 GMT\" or \"Mon, 01 Jan 0001 00:00:00 GMT\"",
+                "type": "string",
+                "format": "date-time-rfc1123"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/param/prim/duration": {
+      "post": {
+        "operationId": "header_paramDuration",
+        "description": "Send a post request with header values \"scenario\": \"valid\", \"value\": \"P123DT22H14M12.011S\"",
+        "tags": [
+          "Header Operations"
+        ],
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"valid\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "description": "Send a post request with header values \"P123DT22H14M12.011S\"",
+            "name": "value",
+            "in": "header",
+            "type": "string",
+            "format": "duration",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/response/prim/duration": {
+      "post": {
+        "operationId": "header_responseDuration",
+        "description": "Get a response with header values \"P123DT22H14M12.011S\"",
+        "tags": [
+          "Header Operations"
+        ],
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"valid\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response",
+            "headers": {
+              "value": {
+                "description": "response with header values \"P123DT22H14M12.011S\"",
+                "type": "string",
+                "format": "duration"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/param/prim/byte": {
+      "post": {
+        "operationId": "header_paramByte",
+        "description": "Send a post request with header values \"scenario\": \"valid\", \"value\": \"啊齄丂狛狜隣郎隣兀﨩\"",
+        "tags": [
+          "Header Operations"
+        ],
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"valid\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "description": "Send a post request with header values \"啊齄丂狛狜隣郎隣兀﨩\"",
+            "name": "value",
+            "in": "header",
+            "type": "string",
+            "format": "byte",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/response/prim/byte": {
+      "post": {
+        "operationId": "header_responseByte",
+        "description": "Get a response with header values \"啊齄丂狛狜隣郎隣兀﨩\"",
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"valid\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Header Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response",
+            "headers": {
+              "value": {
+                "description": "response with header values \"啊齄丂狛狜隣郎隣兀﨩\"",
+                "type": "string",
+                "format": "byte"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/param/prim/enum": {
+      "post": {
+        "operationId": "header_paramEnum",
+        "description": "Send a post request with header values \"scenario\": \"valid\", \"value\": \"GREY\" or \"scenario\": \"null\", \"value\": null",
+        "tags": [
+          "Header Operations"
+        ],
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"valid\" or \"null\" or \"empty\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
+            "description": "Send a post request with header values 'GREY' ",
+            "name": "value",
+            "in": "header",
+            "type": "string",
+            "enum": [ "White", "black", "GREY" ],
+            "x-ms-enum": { "name": "GreyscaleColors", "modelAsString": false},
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/response/prim/enum": {
+      "post": {
+        "operationId": "header_responseEnum",
+        "description": "Get a response with header values \"GREY\" or null",
+        "parameters": [
+          {
+            "description": "Send a post request with header values \"scenario\": \"valid\" or \"null\" or \"empty\"",
+            "name": "scenario",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "tags": [
+          "Header Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response",
+            "headers": {
+              "value": {
+                "description": "response with header values \"GREY\" or null",
+                "type": "string",
+                "enum": [ "White", "black", "GREY" ],
+                "x-ms-enum": { "name": "GreyscaleColors", "modelAsString": false}
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0": {
+      "post": {
+        "operationId": "header_customRequestId",
+        "description": "Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request",
+        "tags": [
+          "Header Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response indicates that x-ms-client-request-id was successfuly received"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "type":  "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

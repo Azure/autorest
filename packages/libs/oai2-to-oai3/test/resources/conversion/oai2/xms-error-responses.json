@@ -1,0 +1,235 @@
+{
+ "swagger": "2.0",
+ "info": {
+  "version": "0.0.0",
+  "title": "XMS Error Response Extensions",
+  "description": "XMS Error Response Extensions"
+ },
+ "host": "localhost",
+ "schemes": [
+  "http"
+ ],
+ "paths": {
+  "/errorStatusCodes/Pets/{petId}/GetPet": {
+   "get": {
+    "operationId": "Pet_GetPetById",
+    "description": "Gets pets by id.",
+    "parameters": [
+     {
+      "name": "petId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "pet id"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "",
+      "schema": {
+       "$ref": "#/definitions/Pet"
+      }
+     },
+     "202": {
+      "description": "something something dark side"
+     },
+     "404": {
+      "description": "Not found",
+      "schema": {
+       "$ref": "#/definitions/NotFoundErrorBase"
+      },
+      "x-ms-error-response": true
+     },
+     "400": {
+      "description": "Bad request",
+      "schema": {
+       "type": "string"
+      },
+      "x-ms-error-response": true
+     },
+     "501": {
+      "description": "Some unexpected error",
+      "schema": {
+       "type": "integer"
+      },
+      "x-ms-error-response": true
+     },
+     "default": {
+      "description": "default stuff"
+     }
+    },
+    "produces": [
+     "application/json"
+    ],
+    "consumes": [
+     "application/json"
+    ]
+   }
+  },
+  "/errorStatusCodes/Pets/doSomething/{whatAction}": {
+   "post": {
+    "operationId": "Pet_DoSomething",
+    "description": "Asks pet to do something",
+    "parameters": [
+     {
+      "name": "whatAction",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "what action the pet should do"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "action performed",
+      "schema": {
+       "$ref": "#/definitions/PetAction"
+      }
+     },
+     "500": {
+      "description": "something bad happened",
+      "schema": {
+       "$ref": "#/definitions/PetActionError"
+      },
+      "x-ms-error-response": true
+     },
+     "default": {
+      "description": "default stuff",
+      "schema": {
+       "$ref": "#/definitions/PetActionError"
+      }
+     }
+    },
+    "produces": [
+     "application/json"
+    ],
+    "consumes": [
+     "application/json"
+    ]
+   }
+  }
+ },
+ "definitions": {
+  "Pet": {
+   "allOf": [
+    {
+     "$ref": "#/definitions/Animal"
+    }
+   ],
+   "properties": {
+    "name": {
+     "type": "string",
+     "readOnly": true,
+     "description": "Gets the Pet by id."
+    }
+   }
+  },
+  "NotFoundErrorBase": {
+   "properties": {
+    "reason": {
+     "type": "string"
+    },
+    "whatNotFound": {
+     "type": "string"
+    }
+   },
+   "allOf": [
+    {
+     "$ref": "#/definitions/BaseError"
+    }
+   ],
+   "required": [
+    "whatNotFound"
+   ],
+   "discriminator": "whatNotFound"
+  },
+  "BaseError": {
+   "properties": {
+    "someBaseProp": {
+     "type": "string"
+    }
+   }
+  },
+  "LinkNotFound": {
+   "properties": {
+    "whatSubAddress": {
+     "type": "string"
+    }
+   },
+   "allOf": [
+    {
+     "$ref": "#/definitions/NotFoundErrorBase"
+    }
+   ],
+   "x-ms-discriminator-value": "InvalidResourceLink"
+  },
+  "AnimalNotFound": {
+   "properties": {
+    "name": {
+     "type": "string"
+    }
+   },
+   "allOf": [
+    {
+     "$ref": "#/definitions/NotFoundErrorBase"
+    }
+   ]
+  },
+  "Animal": {
+   "properties": {
+    "aniType": {
+     "type": "string"
+    }
+   }
+  },
+  "PetAction": {
+   "properties": {
+    "actionResponse": {
+     "type": "string",
+     "description": "action feedback"
+    }
+   }
+  },
+  "PetActionError": {
+   "properties": {
+    "errorType": {
+     "type": "string"
+    },
+    "errorMessage": {
+     "type": "string",
+     "description": "the error message"
+    }
+   },
+   "required": [
+    "errorType"
+   ],
+   "discriminator": "errorType"
+  },
+  "PetSadError": {
+   "allOf": [
+    {
+     "$ref": "#/definitions/PetActionError"
+    }
+   ],
+   "properties": {
+    "reason": {
+     "type": "string",
+     "description": "why is the pet sad"
+    }
+   }
+  },
+  "PetHungryOrThirstyError": {
+   "allOf": [
+    {
+     "$ref": "#/definitions/PetSadError"
+    }
+   ],
+   "properties": {
+    "hungryOrThirsty": {
+     "type": "string",
+     "description": "is the pet hungry or thirsty or both"
+    }
+   }
+  }
+ }
+}

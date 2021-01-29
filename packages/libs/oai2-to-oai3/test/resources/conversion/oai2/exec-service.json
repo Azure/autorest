@@ -1,0 +1,716 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "3.2",
+    "title": "ExecService",
+    "description": "Azure Dev Spaces ExecService v3.2"
+  },
+  
+  "paths": {
+    "/api/v3.2/AzdsTraces": {
+      "post": {
+        "tags": [
+          "AzdsTraces"
+        ],
+        "operationId": "AzdsTraces_PostAzdsUserClusterLogsAsync",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "onbehalfof",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "UserClusterLog"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful"
+          },
+          "401": {
+            "description": "The caller failed authentication"
+          },
+          "403": {
+            "description": "The caller does not have proper access to this API"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. The request failed. Bad request.",
+            "schema": {
+              "$ref": "#/definitions/ExecServiceErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v3.2/Build/spaces/{spaceName}/services/{serviceName}/log": {
+      "post": {
+        "tags": [
+          "Build"
+        ],
+        "operationId": "Build_PostBuildLogs",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "spaceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "log",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "The caller failed authentication"
+          },
+          "403": {
+            "description": "The caller does not have proper access to this API"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. The request failed. Bad request.",
+            "schema": {
+              "$ref": "#/definitions/ExecServiceErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v3.2/Config/{path}": {
+      "get": {
+        "tags": [
+          "Config"
+        ],
+        "operationId": "Config_GetConfigDocument",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "401": {
+            "description": "The caller failed authentication"
+          },
+          "403": {
+            "description": "The caller does not have proper access to this API"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. The request failed. Bad request.",
+            "schema": {
+              "$ref": "#/definitions/ExecServiceErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v3.2/Liveness": {
+      "get": {
+        "tags": [
+          "Liveness"
+        ],
+        "operationId": "Liveness_LivenessCheck",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The liveness check was successful"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. The service has run out of storage space",
+            "schema": {
+              "$ref": "#/definitions/ExecServiceErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v3.2/Ping/auth": {
+      "get": {
+        "tags": [
+          "Ping"
+        ],
+        "operationId": "Ping_CheckUserAuth",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "The caller failed authentication"
+          },
+          "403": {
+            "description": "The caller does not have proper access to this API"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ExecServiceErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v3.2/Ping/auth/whitelist": {
+      "get": {
+        "tags": [
+          "Ping"
+        ],
+        "operationId": "Ping_CheckWhitelistAndUserAuth",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "The caller failed authentication"
+          },
+          "403": {
+            "description": "The caller does not have proper access to this API"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ExecServiceErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v3.2/Ping/auth/whitelistonly": {
+      "get": {
+        "tags": [
+          "Ping"
+        ],
+        "operationId": "Ping_CheckWhitelistOnlyAuth",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "The caller failed authentication"
+          },
+          "403": {
+            "description": "The caller does not have proper access to this API"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ExecServiceErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v3.2/Ping": {
+      "get": {
+        "tags": [
+          "Ping"
+        ],
+        "operationId": "Ping_PingCheck",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The ping was successful",
+            "schema": {
+              "$ref": "#/definitions/PingResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. The service cannot connect to one of its dependencies",
+            "schema": {
+              "$ref": "#/definitions/ExecServiceErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v3.2/Spaces/{spaceName}": {
+      "post": {
+        "tags": [
+          "Spaces"
+        ],
+        "operationId": "Spaces_CreateSpace",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "spaceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentSpaceName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The space was successfully created."
+          },
+          "401": {
+            "description": "The caller failed authentication"
+          },
+          "403": {
+            "description": "The caller does not have proper access to this API"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. The request failed. Space name is invalid.",
+            "schema": {
+              "$ref": "#/definitions/ExecServiceErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Spaces"
+        ],
+        "operationId": "Spaces_DeleteSpace",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "spaceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "noDelete",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "wait",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The space was successfully deleted."
+          },
+          "401": {
+            "description": "The caller failed authentication"
+          },
+          "403": {
+            "description": "The caller does not have proper access to this API"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. The request failed. Specified space cannot be deleted.",
+            "schema": {
+              "$ref": "#/definitions/ExecServiceErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v3.2/Spaces/{namespaceName}": {
+      "put": {
+        "tags": [
+          "Spaces"
+        ],
+        "operationId": "Spaces_CreateSpaceFromNamespace",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentSpaceName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The space was successfully created"
+          },
+          "401": {
+            "description": "The caller failed authentication"
+          },
+          "403": {
+            "description": "The caller does not have proper access to this API"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. The request failed. Bad request.",
+            "schema": {
+              "$ref": "#/definitions/ExecServiceErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v3.2/Spaces": {
+      "get": {
+        "tags": [
+          "Spaces"
+        ],
+        "operationId": "Spaces_ListSpaces",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request was successful; spaces are returned.",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Space"
+              }
+            }
+          },
+          "401": {
+            "description": "The caller failed authentication"
+          },
+          "403": {
+            "description": "The caller does not have proper access to this API"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ExecServiceErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v3.2/Traces/request": {
+      "post": {
+        "tags": [
+          "Traces"
+        ],
+        "operationId": "Traces_ReportRequestAsync",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request was successful"
+          },
+          "401": {
+            "description": "The caller failed authentication"
+          },
+          "403": {
+            "description": "The caller does not have proper access to this API"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ExecServiceErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v3.2/Traces/response": {
+      "post": {
+        "tags": [
+          "Traces"
+        ],
+        "operationId": "Traces_ReportResponseAsync",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request was successful"
+          },
+          "401": {
+            "description": "The caller failed authentication"
+          },
+          "403": {
+            "description": "The caller does not have proper access to this API"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ExecServiceErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v3.2/UserPod": {
+      "post": {
+        "tags": [
+          "UserPod"
+        ],
+        "operationId": "UserPod_CreatePodPatchOperation",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UserPodReviewRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; review response is returned.",
+            "schema": {
+              "$ref": "#/definitions/UserPodReviewResponse"
+            }
+          },
+          "401": {
+            "description": "The caller failed authentication"
+          },
+          "403": {
+            "description": "The caller does not have proper access to this API"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ExecServiceErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v3.2/Workspace/spaces/{spaceName}/services/{serviceName}/workspaces/{name}": {
+      "get": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspace_DownloadSource",
+        "consumes": [],
+        "produces": [
+          "application/gzip"
+        ],
+        "parameters": [
+          {
+            "name": "spaceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful. Code was downloaded.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "401": {
+            "description": "The caller failed authentication"
+          },
+          "403": {
+            "description": "The caller does not have proper access to this API"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. The request failed. Requested code was not found.",
+            "schema": {
+              "$ref": "#/definitions/ExecServiceErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PingResponse": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "connection": {
+          "type": "string"
+        },
+        "buildVersion": {
+          "type": "string"
+        }
+      }
+    },
+    "Space": {
+      "required": [
+        "name",
+        "parentSpaceName"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "parentSpaceName": {
+          "type": "string"
+        },
+        "isDevSpacesReady": {
+          "type": "boolean"
+        }
+      }
+    },
+    "UserPodReviewRequest": {
+      "type": "object",
+      "properties": {
+        "namespace": {
+          "type": "string"
+        },
+        "parentnamespace": {
+          "type": "string"
+        },
+        "grandparentnamespace": {
+          "type": "string"
+        },
+        "pod": {
+          "type": "object"
+        }
+      }
+    },
+    "UserPodReviewResponse": {
+      "type": "object",
+      "properties": {
+        "jsonpatches": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonPatchOperation"
+          }
+        }
+      }
+    },
+    "JsonPatchOperation": {
+      "type": "object",
+      "properties": {
+        "op": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "value": {
+          "type": "object"
+        }
+      }
+    },
+    "ExecServiceErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetails",
+          "description": "The details of the error."
+        }
+      }
+    },
+    "ErrorDetails": {
+      "properties": {
+        "code": {
+          "description": "Status code for the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message describing the error in detail.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "tags": []
+}

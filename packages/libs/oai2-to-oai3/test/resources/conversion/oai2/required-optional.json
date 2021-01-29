@@ -1,0 +1,872 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Required Optional Test Service",
+    "description": "Test Infrastructure for AutoRest",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "parameters": {
+    "required-global-path": {
+      "name": "required-global-path",
+      "in": "path",
+      "description": "number of items to skip",
+      "type": "string",
+      "required": true
+    },
+    "required-global-query": {
+      "name": "required-global-query",
+      "in": "query",
+      "description": "number of items to skip",
+      "required": true,
+      "type": "string"
+    },
+    "optional-global-query": {
+      "name": "optional-global-query",
+      "in": "query",
+      "description": "number of items to skip",
+      "required": false,
+      "type": "integer",
+      "format": "int32"
+    }
+  },
+  "paths": {
+    "/reqopt/implicit/required/path/{pathParameter}": {
+      "get": {
+        "operationId": "implicit_getRequiredPath",
+        "description": "Test implicitly required path parameter",
+        "parameters": [
+          {
+            "name": "pathParameter",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/implicit/optional/query": {
+      "put": {
+        "operationId": "implicit_putOptionalQuery",
+        "description": "Test implicitly optional query parameter",
+        "parameters": [
+          {
+            "name": "queryParameter",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/implicit/optional/header": {
+      "put": {
+        "operationId": "implicit_putOptionalHeader",
+        "description": "Test implicitly optional header parameter",
+        "parameters": [
+          {
+            "name": "queryParameter",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/implicit/optional/body": {
+      "put": {
+        "operationId": "implicit_putOptionalBody",
+        "description": "Test implicitly optional body parameter",
+        "parameters": [
+          {
+            "name": "bodyParameter",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/requied/integer/parameter": {
+      "post": {
+        "operationId": "explicit_postRequiredIntegerParameter",
+        "description": "Test explicitly required integer. Please put null and the client library should throw before the request is sent.",
+        "parameters": [
+          {
+            "name": "bodyParameter",
+            "in": "body",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/optional/integer/parameter": {
+      "post": {
+        "operationId": "explicit_postOptionalIntegerParameter",
+        "description": "Test explicitly optional integer. Please put null.",
+        "parameters": [
+          {
+            "name": "bodyParameter",
+            "in": "body",
+            "schema": {
+              "type": "integer"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/requied/integer/property": {
+      "post": {
+        "operationId": "explicit_postRequiredIntegerProperty",
+        "description": "Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.",
+        "parameters": [
+          {
+            "name": "bodyParameter",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/int-wrapper"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/optional/integer/property": {
+      "post": {
+        "operationId": "explicit_postOptionalIntegerProperty",
+        "description": "Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.",
+        "parameters": [
+          {
+            "name": "bodyParameter",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/int-optional-wrapper"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/requied/integer/header": {
+      "post": {
+        "operationId": "explicit_postRequiredIntegerHeader",
+        "description": "Test explicitly required integer. Please put a header 'headerParameter' => null and the client library should throw before the request is sent.",
+        "parameters": [
+          {
+            "name": "headerParameter",
+            "in": "header",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/optional/integer/header": {
+      "post": {
+        "operationId": "explicit_postOptionalIntegerHeader",
+        "description": "Test explicitly optional integer. Please put a header 'headerParameter' => null.",
+        "parameters": [
+          {
+            "name": "headerParameter",
+            "in": "header",
+            "type": "integer",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/requied/string/parameter": {
+      "post": {
+        "operationId": "explicit_postRequiredStringParameter",
+        "description": "Test explicitly required string. Please put null and the client library should throw before the request is sent.",
+        "parameters": [
+          {
+            "name": "bodyParameter",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/optional/string/parameter": {
+      "post": {
+        "operationId": "explicit_postOptionalStringParameter",
+        "description": "Test explicitly optional string. Please put null.",
+        "parameters": [
+          {
+            "name": "bodyParameter",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/requied/string/property": {
+      "post": {
+        "operationId": "explicit_postRequiredStringProperty",
+        "description": "Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.",
+        "parameters": [
+          {
+            "name": "bodyParameter",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/string-wrapper"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/optional/string/property": {
+      "post": {
+        "operationId": "explicit_postOptionalStringProperty",
+        "description": "Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.",
+        "parameters": [
+          {
+            "name": "bodyParameter",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/string-optional-wrapper"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/requied/string/header": {
+      "post": {
+        "operationId": "explicit_postRequiredStringHeader",
+        "description": "Test explicitly required string. Please put a header 'headerParameter' => null and the client library should throw before the request is sent.",
+        "parameters": [
+          {
+            "name": "headerParameter",
+            "in": "header",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/optional/string/header": {
+      "post": {
+        "operationId": "explicit_postOptionalStringHeader",
+        "description": "Test explicitly optional string. Please put a header 'headerParameter' => null.",
+        "parameters": [
+          {
+            "name": "bodyParameter",
+            "in": "header",
+            "type": "string",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/requied/class/parameter": {
+      "post": {
+        "operationId": "explicit_postRequiredClassParameter",
+        "description": "Test explicitly required complex object. Please put null and the client library should throw before the request is sent.",
+        "parameters": [
+          {
+            "name": "bodyParameter",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/product"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/optional/class/parameter": {
+      "post": {
+        "operationId": "explicit_postOptionalClassParameter",
+        "description": "Test explicitly optional complex object. Please put null.",
+        "parameters": [
+          {
+            "name": "bodyParameter",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/product"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/requied/class/property": {
+      "post": {
+        "operationId": "explicit_postRequiredClassProperty",
+        "description": "Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.",
+        "parameters": [
+          {
+            "name": "bodyParameter",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/class-wrapper"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/optional/class/property": {
+      "post": {
+        "operationId": "explicit_postOptionalClassProperty",
+        "description": "Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.",
+        "parameters": [
+          {
+            "name": "bodyParameter",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/class-optional-wrapper"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/requied/array/parameter": {
+      "post": {
+        "operationId": "explicit_postRequiredArrayParameter",
+        "description": "Test explicitly required array. Please put null and the client library should throw before the request is sent.",
+        "parameters": [
+          {
+            "name": "bodyParameter",
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/optional/array/parameter": {
+      "post": {
+        "operationId": "explicit_postOptionalArrayParameter",
+        "description": "Test explicitly optional array. Please put null.",
+        "parameters": [
+          {
+            "name": "bodyParameter",
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/requied/array/property": {
+      "post": {
+        "operationId": "explicit_postRequiredArrayProperty",
+        "description": "Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.",
+        "parameters": [
+          {
+            "name": "bodyParameter",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/array-wrapper"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/optional/array/property": {
+      "post": {
+        "operationId": "explicit_postOptionalArrayProperty",
+        "description": "Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.",
+        "parameters": [
+          {
+            "name": "bodyParameter",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/array-optional-wrapper"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/requied/array/header": {
+      "post": {
+        "operationId": "explicit_postRequiredArrayHeader",
+        "description": "Test explicitly required array. Please put a header 'headerParameter' => null and the client library should throw before the request is sent.",
+        "parameters": [
+          {
+            "name": "headerParameter",
+            "in": "header",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "required": true,
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/optional/array/header": {
+      "post": {
+        "operationId": "explicit_postOptionalArrayHeader",
+        "description": "Test explicitly optional integer. Please put a header 'headerParameter' => null.",
+        "parameters": [
+          {
+            "name": "headerParameter",
+            "in": "header",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "required": false,
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/global/required/path/{required-global-path}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/required-global-path"
+        }
+      ],
+      "get": {
+        "operationId": "implicit_getRequiredGlobalPath",
+        "description": "Test implicitly required path parameter",
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/global/required/query": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/required-global-query"
+        }
+      ],
+      "get": {
+        "operationId": "implicit_getRequiredGlobalQuery",
+        "description": "Test implicitly required query parameter",
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/reqopt/global/optional/query": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/optional-global-query"
+        }
+      ],
+      "get": {
+        "operationId": "implicit_getOptionalGlobalQuery",
+        "description": "Test implicitly optional query parameter",
+        "responses": {
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "type":  "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "int-wrapper": {
+      "type":  "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "int-optional-wrapper": {
+      "type":  "object",
+      "properties": {
+        "value": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "string-wrapper": {
+      "type":  "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "string-optional-wrapper": {
+      "type":  "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "array-wrapper": {
+      "type":  "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "array-optional-wrapper": {
+      "type":  "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "class-wrapper": {
+      "type":  "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/product"
+        }
+      }
+    },
+    "class-optional-wrapper": {
+      "type":  "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/product"
+        }
+      }
+    },
+    "product": {
+      "type":  "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
