@@ -274,6 +274,7 @@ export class EnglishPluralizationService {
   };
 
   constructor() {
+    // eslint-disable-next-line prefer-spread
     const flatten = <T>(l: Array<Array<T>>): Array<T> => (<Array<T>>[]).concat.apply(<Array<T>>[], l);
 
     this.userDictionary = new StringBidirectionalDictionary();

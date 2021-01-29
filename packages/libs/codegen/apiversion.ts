@@ -19,7 +19,7 @@ export function toSemver(apiversion: string) {
 
   // strip off leading "v" or "=" character
   apiversion = apiversion.replace(/^v|^=/gi, '');
-
+  // eslint-disable-next-line no-useless-escape
   const versionedDateRegex = new RegExp(/(^\d{4}\-\d{2}\-\d{2})(\.\d+\.\d+$)/gi);
   if (apiversion.match(versionedDateRegex)) {
     // convert yyyy-mm-dd.x1.x2      --->     (miliseconds since 1970-01-01).x1.x2

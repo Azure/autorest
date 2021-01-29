@@ -17,7 +17,7 @@ export const safeEval: <T>(code: string, context?: any) => T = createSandbox();
 export function createSandbox(): <T>(code: string, context?: any) => T {
   const sandbox = vm.createContext({});
   return (code: string, context?: any) => {
-    var response = 'SAFE_EVAL_' + Math.floor(Math.random() * 1000000);
+    const response = 'SAFE_EVAL_' + Math.floor(Math.random() * 1000000);
     sandbox[response] = {};
     if (context) {
       for (const key of Object.keys(context)) {
@@ -31,5 +31,5 @@ export function createSandbox(): <T>(code: string, context?: any) => T {
       vm.runInContext(`${response} = ${code}`, sandbox);
     }
     return sandbox[response];
-  }
+  };
 }
