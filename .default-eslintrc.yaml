@@ -36,9 +36,6 @@ rules:
   "@typescript-eslint/consistent-type-assertions": "off"
   no-undef: "off"
   no-unused-vars: "off"
-  linebreak-style:
-    - "warn"
-    - unix
   semi:
     - warn
     - always

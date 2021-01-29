@@ -1,7 +1,6 @@
 {
   "name": "@azure-tools/oai2-to-oai3",
-  "version": "4.2.0",
-  "patchOffset": 100,
+  "version": "4.2.275",
   "description": "OpenAPI2 to OpenAPI3 conversion library that maintains souremaps for use with AutoRest",
   "main": "./dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
@@ -15,11 +14,11 @@
   "scripts": {
     "build": "tsc -p .",
     "watch": "tsc -p . --watch",
-    "eslint-fix": "eslint  . --fix --ext .ts",
-    "eslint": "eslint  . --ext .ts",
+    "lint:fix": "eslint  . --fix --ext .ts",
+    "lint": "eslint  . --ext .ts",
     "prepare": "npm run build",
     "test": "npm run build && mocha dist/test --timeout=1000000",
-    "testci": "npm run build && mocha dist/test --timeout=1000000",
+    "test:ci": "npm run build && mocha dist/test --timeout=1000000",
     "clean": "ver > nul 2>&1 nul && npm run --silent clean-cmd || npm run --silent clean-bash",
     "clean-cmd": "if exist dist rmdir /s /q dist && exit 0 || exit 0 ",
     "clean-bash": "rm nul && rm -rf dist && exit 0 || exit 0"
