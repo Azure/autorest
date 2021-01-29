@@ -1,0 +1,59 @@
+{
+  "name": "@azure-tools/oai2-to-oai3",
+  "version": "4.2.275",
+  "description": "OpenAPI2 to OpenAPI3 conversion library that maintains souremaps for use with AutoRest",
+  "main": "./dist/src/index.js",
+  "typings": "./dist/src/index.d.ts",
+  "engines": {
+    "node": ">=10.12.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/perks.git"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "watch": "tsc -p . --watch",
+    "lint:fix": "eslint  . --fix --ext .ts",
+    "lint": "eslint  . --ext .ts",
+    "prepare": "npm run build",
+    "test": "npm run build && mocha dist/test --timeout=1000000",
+    "test:ci": "npm run build && mocha dist/test --timeout=1000000",
+    "clean": "ver > nul 2>&1 nul && npm run --silent clean-cmd || npm run --silent clean-bash",
+    "clean-cmd": "if exist dist rmdir /s /q dist && exit 0 || exit 0 ",
+    "clean-bash": "rm nul && rm -rf dist && exit 0 || exit 0"
+  },
+  "keywords": [
+    "perks",
+    "async",
+    "autorest",
+    "azure",
+    "typescript"
+  ],
+  "author": "Microsoft",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/perks/issues"
+  },
+  "homepage": "https://github.com/Azure/perks/tree/master/oai2-to-oai3#readme",
+  "readme": "https://github.com/Azure/perks/tree/master/oai2-to-oai3/readme.md",
+  "devDependencies": {
+    "mocha-typescript": "1.1.17",
+    "@types/mocha": "5.2.5",
+    "@types/node": "12.7.2",
+    "@types/js-yaml": "3.12.1",
+    "mocha": "5.2.0",
+    "typescript": "~3.9.7",
+    "@azure-tools/async-io": "~3.0.0",
+    "source-map-support": "0.5.13",
+    "@typescript-eslint/eslint-plugin": "~2.6.0",
+    "@typescript-eslint/parser": "~2.6.0",
+    "eslint": "~6.6.0",
+    "@types/source-map": "0.5.0"
+  },
+  "dependencies": {
+    "@azure-tools/datastore": "~4.1.0",
+    "@azure-tools/openapi": "~3.0.0",
+    "source-map": "0.5.6"
+  }
+}

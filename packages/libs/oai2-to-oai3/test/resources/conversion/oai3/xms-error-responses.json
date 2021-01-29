@@ -1,0 +1,262 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "http://localhost/"
+    }
+  ],
+  "info": {
+    "version": "0.0.0",
+    "title": "XMS Error Response Extensions",
+    "description": "XMS Error Response Extensions"
+  },
+  "paths": {
+    "/errorStatusCodes/Pets/{petId}/GetPet": {
+      "get": {
+        "operationId": "Pet_GetPetById",
+        "description": "Gets pets by id.",
+        "parameters": [
+          {
+            "name": "petId",
+            "in": "path",
+            "required": true,
+            "description": "pet id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "something something dark side"
+          },
+          "400": {
+            "description": "Bad request",
+            "x-ms-error-response": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "x-ms-error-response": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundErrorBase"
+                }
+              }
+            }
+          },
+          "501": {
+            "description": "Some unexpected error",
+            "x-ms-error-response": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "default stuff"
+          }
+        }
+      }
+    },
+    "/errorStatusCodes/Pets/doSomething/{whatAction}": {
+      "post": {
+        "operationId": "Pet_DoSomething",
+        "description": "Asks pet to do something",
+        "parameters": [
+          {
+            "name": "whatAction",
+            "in": "path",
+            "required": true,
+            "description": "what action the pet should do",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "action performed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetAction"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "something bad happened",
+            "x-ms-error-response": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetActionError"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "default stuff",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetActionError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Pet": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Animal"
+          }
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Gets the Pet by id."
+          }
+        }
+      },
+      "NotFoundErrorBase": {
+        "properties": {
+          "reason": {
+            "type": "string"
+          },
+          "whatNotFound": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseError"
+          }
+        ],
+        "required": [
+          "whatNotFound"
+        ],
+        "discriminator": {
+          "propertyName": "whatNotFound"
+        }
+      },
+      "BaseError": {
+        "properties": {
+          "someBaseProp": {
+            "type": "string"
+          }
+        }
+      },
+      "LinkNotFound": {
+        "properties": {
+          "whatSubAddress": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotFoundErrorBase"
+          }
+        ],
+        "x-ms-discriminator-value": "InvalidResourceLink"
+      },
+      "AnimalNotFound": {
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NotFoundErrorBase"
+          }
+        ]
+      },
+      "Animal": {
+        "properties": {
+          "aniType": {
+            "type": "string"
+          }
+        }
+      },
+      "PetAction": {
+        "properties": {
+          "actionResponse": {
+            "type": "string",
+            "description": "action feedback"
+          }
+        }
+      },
+      "PetActionError": {
+        "properties": {
+          "errorType": {
+            "type": "string"
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "the error message"
+          }
+        },
+        "required": [
+          "errorType"
+        ],
+        "discriminator": {
+          "propertyName": "errorType"
+        }
+      },
+      "PetSadError": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PetActionError"
+          }
+        ],
+        "properties": {
+          "reason": {
+            "type": "string",
+            "description": "why is the pet sad"
+          }
+        }
+      },
+      "PetHungryOrThirstyError": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PetSadError"
+          }
+        ],
+        "properties": {
+          "hungryOrThirsty": {
+            "type": "string",
+            "description": "is the pet hungry or thirsty or both"
+          }
+        }
+      }
+    }
+  }
+}

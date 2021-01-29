@@ -1,0 +1,126 @@
+swagger: '2.0'
+basePath: /rbtest/api
+info:
+  version: '1.0'
+  title: 'RequestBody Test v1'
+  description: 'This is a testcase re: body and form params.'
+paths:
+  /v1/bodytest1:
+    post:
+      operationId: bodyTest1
+      summary: 'Body parameter test 1'
+      description: 'Body param is a referenced parameter.'
+      consumes:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/BodyParam1'
+      responses:
+        '201':
+          description: 'Successful request.'
+        '400':
+          description: 'Invalid request.'
+  /v1/bodytest2:
+    post:
+      operationId: bodyTest2
+      summary: 'Body parameter test 2'
+      description: 'Body param is normal inline parameter.'
+      consumes:
+        - application/json
+      parameters:
+        - name: body_param
+          in: body
+          required: true
+          description: 'The content of the new counterexample.'
+          schema:
+            $ref: '#/definitions/Person'
+      responses:
+        '201':
+          description: 'Successful request.'
+        '400':
+          description: 'Invalid request.'
+  /v1/formtest1:
+    post:
+      operationId: formTest1
+      summary: 'Form parameter test 1'
+      description: 'Form params are referenced parameters.'
+      consumes:
+        - multipart/form-data
+      parameters:
+        - $ref: '#/parameters/FormParam1'
+        - $ref: '#/parameters/FormParam2'
+      responses:
+        '201':
+          description: 'Successful request.'
+        '400':
+          description: 'Invalid request.'
+  /v1/formtest2:
+    post:
+      operationId: formTest2
+      summary: 'Form parameter test 2'
+      description: 'Form params are defined inline.'
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: part_1
+          in: formData
+          description: 'A file transmitted via a mimepart within a multipart form.'
+          required: false
+          type: file
+          x-file-content-types:
+            - application/gzip
+            - application/jpg
+          x-include-filename: false
+          x-alternate-name: filePart
+        - name: part_2
+          in: formData
+          description: 'A string within a multipart form.'
+          required: false
+          type: string
+          x-alternate-name: stringPart
+      responses:
+        '201':
+          description: 'Successful request.'
+        '400':
+          description: 'Invalid request.'
+parameters:
+  BodyParam1:
+    name: body_param
+    in: body
+    required: true
+    description: 'A referenced body parameter.'
+    schema:
+      $ref: '#/definitions/Person'
+    x-alternate-name: person
+    x-test-property: true
+  FormParam1:
+    name: form_part_1
+    in: formData
+    description: 'A file transmitted via a mimepart within a multipart form.'
+    required: false
+    type: file
+    x-file-content-types:
+      - application/zip
+      - application/octet-stream
+    x-include-filename: true
+    x-alternate-name: filePart
+  FormParam2:
+    name: form_part_2
+    in: formData
+    description: 'A string transmitted via a mimepart within a multipart form.'
+    required: false
+    type: string
+    x-test-property: true
+    x-alternate-name: stringPart
+definitions:
+  Person:
+    properties:
+      name:
+        type: string
+        description: 'The person''s name.'
+      age:
+        type: integer
+        description: 'The person''s age.'
+    required:
+      - name
+      - age
+    x-test-property: 'a value'

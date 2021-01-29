@@ -1,0 +1,402 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "http://localhost:3000/"
+    }
+  ],
+  "info": {
+    "version": "1.0.0",
+    "title": "AdditionalPropertiesClient",
+    "description": "Test Infrastructure for AutoRest"
+  },
+  "paths": {
+    "/additionalProperties/true": {
+      "put": {
+        "operationId": "Pets_CreateAPTrue",
+        "description": "Create a Pet which contains more properties than what is defined.",
+        "responses": {
+          "200": {
+            "description": "A Pet which contains more properties than what is defined.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetAPTrue"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "x-ms-requestBody-name": "createParameters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PetAPTrue"
+              }
+            }
+          },
+          "required": true
+        },
+        "x-ms-requestBody-index": 0
+      }
+    },
+    "/additionalProperties/true-subclass": {
+      "put": {
+        "operationId": "Pets_CreateCatAPTrue",
+        "description": "Create a CatAPTrue which contains more properties than what is defined.",
+        "responses": {
+          "200": {
+            "description": "A CatAPTrue which contains more properties than what is defined.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatAPTrue"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "x-ms-requestBody-name": "createParameters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CatAPTrue"
+              }
+            }
+          },
+          "required": true
+        },
+        "x-ms-requestBody-index": 0
+      }
+    },
+    "/additionalProperties/type/object": {
+      "put": {
+        "operationId": "Pets_CreateAPObject",
+        "description": "Create a Pet which contains more properties than what is defined.",
+        "responses": {
+          "200": {
+            "description": "A Pet which contains more properties than what is defined.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetAPObject"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "x-ms-requestBody-name": "createParameters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PetAPObject"
+              }
+            }
+          },
+          "required": true
+        },
+        "x-ms-requestBody-index": 0
+      }
+    },
+    "/additionalProperties/type/string": {
+      "put": {
+        "operationId": "Pets_CreateAPString",
+        "description": "Create a Pet which contains more properties than what is defined.",
+        "responses": {
+          "200": {
+            "description": "A Pet which contains more properties than what is defined.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetAPString"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "x-ms-requestBody-name": "createParameters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PetAPString"
+              }
+            }
+          },
+          "required": true
+        },
+        "x-ms-requestBody-index": 0
+      }
+    },
+    "/additionalProperties/in/properties": {
+      "put": {
+        "operationId": "Pets_CreateAPInProperties",
+        "description": "Create a Pet which contains more properties than what is defined.",
+        "responses": {
+          "200": {
+            "description": "A Pet which contains more properties than what is defined.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetAPInProperties"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "x-ms-requestBody-name": "createParameters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PetAPInProperties"
+              }
+            }
+          },
+          "required": true
+        },
+        "x-ms-requestBody-index": 0
+      }
+    },
+    "/additionalProperties/in/properties/with/additionalProperties/string": {
+      "put": {
+        "operationId": "Pets_CreateAPInPropertiesWithAPString",
+        "description": "Create a Pet which contains more properties than what is defined.",
+        "responses": {
+          "200": {
+            "description": "A Pet which contains more properties than what is defined.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PetAPInPropertiesWithAPString"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "x-ms-requestBody-name": "createParameters",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PetAPInPropertiesWithAPString"
+              }
+            }
+          },
+          "required": true
+        },
+        "x-ms-requestBody-index": 0
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PetAPTrue": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "CatAPTrue": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PetAPTrue"
+          }
+        ],
+        "properties": {
+          "friendly": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PetAPObject": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
+      },
+      "PetAPString": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "PetAPInProperties": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "PetAPInPropertiesWithAPString": {
+        "type": "object",
+        "required": [
+          "id",
+          "@odata.location"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "@odata.location": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number"
+            }
+          }
+        },
+        "additionalProperties": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

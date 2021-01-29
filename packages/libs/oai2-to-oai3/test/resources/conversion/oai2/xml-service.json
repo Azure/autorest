@@ -1,0 +1,1496 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Swagger BAT XML Service",
+    "description": "Test Infrastructure for AutoRest Swagger BAT",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/xml"
+  ],
+  "consumes": [
+    "application/xml"
+  ],
+  "paths": {
+    "/xml/complex-type-ref-no-meta": {
+      "get": {
+        "operationId": "xml_getComplexTypeRefNoMeta",
+        "description": "Get a complex type that has a ref to a complex type with no XML node",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The empty list.",
+            "schema": {
+              "$ref": "#/definitions/RootWithRefAndNoMeta"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "xml_putComplexTypeRefNoMeta",
+        "description": "Puts a complex type that has a ref to a complex type with no XML node",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RootWithRefAndNoMeta"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success."
+          }
+        }
+      }
+    },
+    "/xml/complex-type-ref-with-meta": {
+      "get": {
+        "operationId": "xml_getComplexTypeRefWithMeta",
+        "description": "Get a complex type that has a ref to a complex type with XML node",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The empty list.",
+            "schema": {
+              "$ref": "#/definitions/RootWithRefAndMeta"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "xml_putComplexTypeRefWithMeta",
+        "description": "Puts a complex type that has a ref to a complex type with XML node",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RootWithRefAndMeta"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success."
+          }
+        }
+      }
+    },
+    "/xml/simple": {
+      "get": {
+        "operationId": "xml_getSimple",
+        "description": "Get a simple XML document",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The simple XML document",
+            "schema": {
+              "$ref": "#/definitions/Slideshow"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "xml_putSimple",
+        "description": "Put a simple XML document",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "slideshow",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Slideshow"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/xml/wrapped-lists": {
+      "get": {
+        "operationId": "xml_getWrappedLists",
+        "description": "Get an XML document with multiple wrapped lists",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The XML document with multiple wrapped lists",
+            "schema": {
+              "$ref": "#/definitions/AppleBarrel"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "xml_putWrappedLists",
+        "description": "Put an XML document with multiple wrapped lists",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "wrappedLists",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AppleBarrel"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/xml/headers": {
+      "get": {
+        "operationId": "xml_getHeaders",
+        "description": "Get strongly-typed response headers.",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The response header.",
+            "headers": {
+              "Custom-Header": {
+                "description": "A custom response header.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/xml/empty-list": {
+      "get": {
+        "operationId": "xml_getEmptyList",
+        "description": "Get an empty list.",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The empty list.",
+            "schema": {
+              "$ref": "#/definitions/Slideshow"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "xml_putEmptyList",
+        "description": "Puts an empty list.",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "slideshow",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Slideshow"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success."
+          }
+        }
+      }
+    },
+    "/xml/empty-wrapped-lists": {
+      "get": {
+        "operationId": "xml_getEmptyWrappedLists",
+        "description": "Gets some empty wrapped lists.",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The empty lists.",
+            "schema": {
+              "$ref": "#/definitions/AppleBarrel"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "xml_putEmptyWrappedLists",
+        "description": "Puts some empty wrapped lists.",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "appleBarrel",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AppleBarrel"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success."
+          }
+        }
+      }
+    },
+    "/xml/root-list": {
+      "get": {
+        "operationId": "xml_getRootList",
+        "description": "Gets a list as the root element.",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The root list.",
+            "schema": {
+              "type": "array",
+              "xml": {
+                "name": "bananas"
+              },
+              "items": {
+                "$ref": "#/definitions/Banana"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "xml_putRootList",
+        "description": "Puts a list as the root element.",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "bananas",
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "xml": {
+                "name": "bananas",
+                "wrapped": true
+              },
+              "items": {
+                "$ref": "#/definitions/Banana"
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success."
+          }
+        }
+      }
+    },
+    "/xml/root-list-single-item": {
+      "get": {
+        "operationId": "xml_getRootListSingleItem",
+        "description": "Gets a list with a single item.",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The root list.",
+            "schema": {
+              "type": "array",
+              "xml": {
+                "name": "bananas"
+              },
+              "items": {
+                "$ref": "#/definitions/Banana"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "xml_putRootListSingleItem",
+        "description": "Puts a list with a single item.",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "bananas",
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "xml": {
+                "name": "bananas",
+                "wrapped": true
+              },
+              "items": {
+                "$ref": "#/definitions/Banana"
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success."
+          }
+        }
+      }
+    },
+    "/xml/empty-root-list": {
+      "get": {
+        "operationId": "xml_getEmptyRootList",
+        "description": "Gets an empty list as the root element.",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The root list.",
+            "schema": {
+              "type": "array",
+              "xml": {
+                "name": "bananas"
+              },
+              "items": {
+                "$ref": "#/definitions/Banana"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "xml_putEmptyRootList",
+        "description": "Puts an empty list as the root element.",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "bananas",
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "xml": {
+                "name": "bananas",
+                "wrapped": true
+              },
+              "items": {
+                "$ref": "#/definitions/Banana"
+              }
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success."
+          }
+        }
+      }
+    },
+    "/xml/empty-child-element": {
+      "get": {
+        "operationId": "xml_getEmptyChildElement",
+        "description": "Gets an XML document with an empty child element.",
+        "tags": [
+          "XML Operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "The unknown banana.",
+            "schema": {
+              "$ref": "#/definitions/Banana"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "xml_putEmptyChildElement",
+        "description": "Puts a value with an empty child element.",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "banana",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Banana"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success."
+          }
+        }
+      }
+    },
+    "/xml/?comp=list": {
+      "get": {
+        "operationId": "xml_listContainers",
+        "description": "Lists containers in a storage account.",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "comp",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "list"
+            ],
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of containers.",
+            "schema": {
+              "$ref": "#/definitions/ListContainersResponse"
+            }
+          }
+        }
+      }
+    },
+    "/xml/?comp=properties&restype=service": {
+      "get": {
+        "operationId": "xml_getServiceProperties",
+        "description": "Gets storage service properties.",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "comp",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "properties"
+            ],
+            "required": true
+          },
+          {
+            "name": "restype",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "service"
+            ],
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The storage service properties.",
+            "schema": {
+              "$ref": "#/definitions/StorageServiceProperties"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "xml_putServiceProperties",
+        "description": "Puts storage service properties.",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "comp",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "properties"
+            ],
+            "required": true
+          },
+          {
+            "name": "restype",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "service"
+            ],
+            "required": true
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/StorageServiceProperties"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success."
+          }
+        }
+      }
+    },
+    "/xml/mycontainer?comp=acl&restype=container": {
+      "get": {
+        "operationId": "xml_getAcls",
+        "description": "Gets storage ACLs for a container.",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "comp",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "acl"
+            ],
+            "required": true
+          },
+          {
+            "name": "restype",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "container"
+            ],
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The storage ACLs.",
+            "schema": {
+              "$ref": "#/definitions/SignedIdentifiers"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "xml_putAcls",
+        "description": "Puts storage ACLs for a container.",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "comp",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "acl"
+            ],
+            "required": true
+          },
+          {
+            "name": "restype",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "container"
+            ],
+            "required": true
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SignedIdentifiers"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Indicates success."
+          }
+        }
+      }
+    },
+    "/xml/mycontainer?comp=list&restype=container": {
+      "get": {
+        "operationId": "xml_listBlobs",
+        "description": "Lists blobs in a storage container.",
+        "tags": [
+          "XML Operations"
+        ],
+        "parameters": [
+          {
+            "name": "comp",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "list"
+            ],
+            "required": true
+          },
+          {
+            "name": "restype",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "container"
+            ],
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of containers.",
+            "schema": {
+              "$ref": "#/definitions/ListBlobsResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "Slide": {
+      "type": "object",
+      "description": "A slide in a slideshow",
+      "properties": {
+        "type": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          }
+        },
+        "title": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "xml": {
+              "name": "item"
+            }
+          }
+        }
+      },
+      "xml": {
+        "name": "slide"
+      }
+    },
+    "Slideshow": {
+      "type": "object",
+      "description": "Data about a slideshow",
+      "xml": {
+        "name": "slideshow"
+      },
+      "properties": {
+        "title": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          }
+        },
+        "date": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          }
+        },
+        "author": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          }
+        },
+        "slides": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Slide"
+          }
+        }
+      }
+    },
+    "AppleBarrel": {
+      "type": "object",
+      "description": "A barrel of apples.",
+      "properties": {
+        "GoodApples": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "xml": {
+              "name": "Apple"
+            }
+          },
+          "xml": {
+            "wrapped": true
+          }
+        },
+        "BadApples": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "xml": {
+              "name": "Apple"
+            }
+          },
+          "xml": {
+            "wrapped": true
+          }
+        }
+      }
+    },
+    "Banana": {
+      "type": "object",
+      "description": "A banana.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "xml": {
+            "name": "name"
+          }
+        },
+        "flavor": {
+          "type": "string",
+          "xml": {
+            "name": "flavor"
+          }
+        },
+        "expiration": {
+          "description": "The time at which you should reconsider eating this banana",
+          "type": "string",
+          "format": "date-time",
+          "xml": {
+            "name": "expiration"
+          }
+        }
+      },
+      "xml": {
+        "name": "banana"
+      }
+    },
+    "Container": {
+      "type": "object",
+      "required": [
+        "Name",
+        "Properties"
+      ],
+      "description": "An Azure Storage container",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Properties": {
+          "$ref": "#/definitions/ContainerProperties"
+        },
+        "Metadata": {
+          "$ref": "#/definitions/Metadata"
+        }
+      }
+    },
+    "ContainerProperties": {
+      "type": "object",
+      "required": [
+        "Last-Modified",
+        "Etag"
+      ],
+      "description": "Properties of a container",
+      "properties": {
+        "Last-Modified": {
+          "type": "string",
+          "format": "date-time-rfc1123"
+        },
+        "Etag": {
+          "type": "string",
+          "format": "etag"
+        },
+        "LeaseStatus": {
+          "$ref": "#/definitions/LeaseStatus"
+        },
+        "LeaseState": {
+          "$ref": "#/definitions/LeaseState"
+        },
+        "LeaseDuration": {
+          "$ref": "#/definitions/LeaseDuration"
+        },
+        "PublicAccess": {
+          "$ref": "#/definitions/PublicAccessType"
+        }
+      }
+    },
+    "ListContainersResponse": {
+      "xml": {
+        "name": "EnumerationResults"
+      },
+      "description": "An enumeration of containers",
+      "type": "object",
+      "required": [
+        "ServiceEndpoint",
+        "Prefix",
+        "MaxResults",
+        "NextMarker"
+      ],
+      "properties": {
+        "ServiceEndpoint": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          }
+        },
+        "Prefix": {
+          "type": "string"
+        },
+        "Marker": {
+          "type": "string"
+        },
+        "MaxResults": {
+          "type": "integer"
+        },
+        "Containers": {
+          "xml": {
+            "wrapped": true
+          },
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Container"
+          }
+        },
+        "NextMarker": {
+          "type": "string"
+        }
+      }
+    },
+    "CorsRule": {
+      "description": "CORS is an HTTP feature that enables a web application running under one domain to access resources in another domain. Web browsers implement a security restriction known as same-origin policy that prevents a web page from calling APIs in a different domain; CORS provides a secure way to allow one domain (the origin domain) to call APIs in another domain",
+      "type": "object",
+      "required": [
+        "AllowedOrigins",
+        "AllowedMethods",
+        "AllowedHeaders",
+        "ExposedHeaders",
+        "MaxAgeInSeconds"
+      ],
+      "properties": {
+        "AllowedOrigins": {
+          "description": "The origin domains that are permitted to make a request against the storage service via CORS. The origin domain is the domain from which the request originates. Note that the origin must be an exact case-sensitive match with the origin that the user age sends to the service. You can also use the wildcard character '*' to allow all origin domains to make requests via CORS.",
+          "type": "string"
+        },
+        "AllowedMethods": {
+          "description": "The methods (HTTP request verbs) that the origin domain may use for a CORS request. (comma separated)",
+          "type": "string"
+        },
+        "AllowedHeaders": {
+          "description": "the request headers that the origin domain may specify on the CORS request.",
+          "type": "string"
+        },
+        "ExposedHeaders": {
+          "description": "The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer",
+          "type": "string"
+        },
+        "MaxAgeInSeconds": {
+          "description": "The maximum amount time that a browser should cache the preflight OPTIONS request.",
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "xml": {
+        "name": "CorsRule"
+      }
+    },
+    "Blob": {
+      "description": "An Azure Storage blob",
+      "type": "object",
+      "required": [
+        "Name",
+        "Deleted",
+        "Snapshot",
+        "Properties"
+      ],
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Deleted": {
+          "type": "boolean"
+        },
+        "Snapshot": {
+          "type": "string"
+        },
+        "Properties": {
+          "$ref": "#/definitions/BlobProperties"
+        },
+        "Metadata": {
+          "$ref": "#/definitions/Metadata"
+        }
+      },
+      "xml": {
+        "name": "Blob"
+      }
+    },
+    "BlobProperties": {
+      "description": "Properties of a blob",
+      "type": "object",
+      "required": [
+        "Etag",
+        "Last-Modified"
+      ],
+      "properties": {
+        "Last-Modified": {
+          "type": "string",
+          "format": "date-time-rfc1123"
+        },
+        "Etag": {
+          "type": "string",
+          "format": "etag"
+        },
+        "Content-Length": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Size in bytes"
+        },
+        "Content-Type": {
+          "type": "string"
+        },
+        "Content-Encoding": {
+          "type": "string"
+        },
+        "Content-Language": {
+          "type": "string"
+        },
+        "Content-MD5": {
+          "type": "string"
+        },
+        "Content-Disposition": {
+          "type": "string"
+        },
+        "Cache-Control": {
+          "type": "string"
+        },
+        "x-ms-blob-sequence-number": {
+          "x-ms-client-name": "blobSequenceNumber",
+          "type": "integer"
+        },
+        "BlobType": {
+          "type": "string",
+          "enum": [
+            "BlockBlob",
+            "PageBlob",
+            "AppendBlob"
+          ],
+          "x-ms-enum": {
+            "name": "BlobType",
+            "modelAsString": false
+          }
+        },
+        "LeaseStatus": {
+          "$ref": "#/definitions/LeaseStatus"
+        },
+        "LeaseState": {
+          "$ref": "#/definitions/LeaseState"
+        },
+        "LeaseDuration": {
+          "$ref": "#/definitions/LeaseDuration"
+        },
+        "CopyId": {
+          "type": "string"
+        },
+        "CopyStatus": {
+          "$ref": "#/definitions/CopyStatus"
+        },
+        "CopySource": {
+          "type": "string"
+        },
+        "CopyProgress": {
+          "type": "string"
+        },
+        "CopyCompletionTime": {
+          "type": "string",
+          "format": "date-time-rfc1123"
+        },
+        "CopyStatusDescription": {
+          "type": "string"
+        },
+        "ServerEncrypted": {
+          "type": "boolean"
+        },
+        "IncrementalCopy": {
+          "type": "boolean"
+        },
+        "DestinationSnapshot": {
+          "type": "string"
+        },
+        "DeletedTime": {
+          "type": "string",
+          "format": "date-time-rfc1123"
+        },
+        "RemainingRetentionDays": {
+          "type": "integer"
+        },
+        "AccessTier": {
+          "$ref": "#/definitions/AccessTier"
+        },
+        "AccessTierInferred": {
+          "type": "boolean"
+        },
+        "ArchiveStatus": {
+          "$ref": "#/definitions/ArchiveStatus"
+        }
+      }
+    },
+    "Logging": {
+      "description": "Azure Analytics Logging settings.",
+      "type": "object",
+      "required": [
+        "Version",
+        "Delete",
+        "Read",
+        "Write",
+        "RetentionPolicy"
+      ],
+      "properties": {
+        "Version": {
+          "description": "The version of Storage Analytics to configure.",
+          "type": "string"
+        },
+        "Delete": {
+          "description": "Indicates whether all delete requests should be logged.",
+          "type": "boolean"
+        },
+        "Read": {
+          "description": "Indicates whether all read requests should be logged.",
+          "type": "boolean"
+        },
+        "Write": {
+          "description": "Indicates whether all write requests should be logged.",
+          "type": "boolean"
+        },
+        "RetentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy"
+        }
+      }
+    },
+    "Metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "Metrics": {
+      "description": "",
+      "required": [
+        "Enabled"
+      ],
+      "properties": {
+        "Version": {
+          "description": "The version of Storage Analytics to configure.",
+          "type": "string"
+        },
+        "Enabled": {
+          "description": "Indicates whether metrics are enabled for the Blob service.",
+          "type": "boolean"
+        },
+        "IncludeAPIs": {
+          "description": "Indicates whether metrics should generate summary statistics for called API operations.",
+          "type": "boolean"
+        },
+        "RetentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy"
+        }
+      }
+    },
+    "ListBlobsResponse": {
+      "xml": {
+        "name": "EnumerationResults"
+      },
+      "description": "An enumeration of blobs",
+      "type": "object",
+      "required": [
+        "ServiceEndpoint",
+        "ContainerName",
+        "Prefix",
+        "Marker",
+        "MaxResults",
+        "Delimiter",
+        "Blobs",
+        "NextMarker"
+      ],
+      "properties": {
+        "ServiceEndpoint": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          }
+        },
+        "ContainerName": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          }
+        },
+        "Prefix": {
+          "type": "string"
+        },
+        "Marker": {
+          "type": "string"
+        },
+        "MaxResults": {
+          "type": "integer"
+        },
+        "Delimiter": {
+          "type": "string"
+        },
+        "Blobs": {
+          "$ref": "#/definitions/Blobs"
+        },
+        "NextMarker": {
+          "type": "string"
+        }
+      }
+    },
+    "Blobs": {
+      "type": "object",
+      "properties": {
+        "BlobPrefix": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlobPrefix"
+          }
+        },
+        "Blob": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Blob"
+          }
+        }
+      }
+    },
+    "BlobPrefix": {
+      "type": "object",
+      "required": [
+        "Name"
+      ],
+      "properties": {
+        "Name": {
+          "type": "string"
+        }
+      }
+    },
+    "PublicAccessType": {
+      "type": "string",
+      "enum": [
+        "container",
+        "blob"
+      ],
+      "x-ms-enum": {
+        "name": "PublicAccessType",
+        "modelAsString": true
+      }
+    },
+    "CopyStatus": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "success",
+        "aborted",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "CopyStatusType",
+        "modelAsString": false
+      }
+    },
+    "LeaseDuration": {
+      "type": "string",
+      "enum": [
+        "infinite",
+        "fixed"
+      ],
+      "x-ms-enum": {
+        "name": "LeaseDurationType",
+        "modelAsString": false
+      }
+    },
+    "LeaseState": {
+      "type": "string",
+      "enum": [
+        "available",
+        "leased",
+        "expired",
+        "breaking",
+        "broken"
+      ],
+      "x-ms-enum": {
+        "name": "LeaseStateType",
+        "modelAsString": false
+      }
+    },
+    "LeaseStatus": {
+      "type": "string",
+      "enum": [
+        "locked",
+        "unlocked"
+      ],
+      "x-ms-enum": {
+        "name": "LeaseStatusType",
+        "modelAsString": false
+      }
+    },
+    "AccessPolicy": {
+      "type": "object",
+      "required": [
+        "Start",
+        "Expiry",
+        "Permission"
+      ],
+      "description": "An Access policy",
+      "properties": {
+        "Start": {
+          "description": "the date-time the policy is active",
+          "type": "string",
+          "format": "date-time"
+        },
+        "Expiry": {
+          "description": "the date-time the policy expires",
+          "type": "string",
+          "format": "date-time"
+        },
+        "Permission": {
+          "description": "the permissions for the acl policy",
+          "type": "string"
+        }
+      }
+    },
+    "AccessTier": {
+      "type": "string",
+      "enum": [
+        "P4",
+        "P6",
+        "P10",
+        "P20",
+        "P30",
+        "P40",
+        "P50",
+        "Hot",
+        "Cool",
+        "Archive"
+      ],
+      "x-ms-enum": {
+        "name": "AccessTier",
+        "modelAsString": true
+      }
+    },
+    "ArchiveStatus": {
+      "type": "string",
+      "enum": [
+        "rehydrate-pending-to-hot",
+        "rehydrate-pending-to-cool"
+      ],
+      "x-ms-enum": {
+        "name": "ArchiveStatus",
+        "modelAsString": true
+      }
+    },
+    "RetentionPolicy": {
+      "description": "the retention policy",
+      "type": "object",
+      "required": [
+        "Enabled"
+      ],
+      "properties": {
+        "Enabled": {
+          "description": "Indicates whether a retention policy is enabled for the storage service",
+          "type": "boolean"
+        },
+        "Days": {
+          "description": "Indicates the number of days that metrics or logging or soft-deleted data should be retained. All data older than this value will be deleted",
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "SignedIdentifier": {
+      "description": "signed identifier",
+      "type": "object",
+      "required": [
+        "Id",
+        "AccessPolicy"
+      ],
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "a unique id"
+        },
+        "AccessPolicy": {
+          "description": "The access policy",
+          "$ref": "#/definitions/AccessPolicy"
+        }
+      },
+      "xml": {
+        "name": "SignedIdentifier"
+      }
+    },
+    "SignedIdentifiers": {
+      "description": "a collection of signed identifiers",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/SignedIdentifier"
+      },
+      "xml": {
+        "wrapped": true,
+        "name": "SignedIdentifiers"
+      }
+    },
+    "StorageServiceProperties": {
+      "description": "Storage Service Properties.",
+      "type": "object",
+      "properties": {
+        "Logging": {
+          "description": "Azure Analytics Logging settings",
+          "$ref": "#/definitions/Logging"
+        },
+        "HourMetrics": {
+          "description": "A summary of request statistics grouped by API in hourly aggregates for blobs",
+          "$ref": "#/definitions/Metrics"
+        },
+        "MinuteMetrics": {
+          "description": "a summary of request statistics grouped by API in minute aggregates for blobs",
+          "$ref": "#/definitions/Metrics"
+        },
+        "Cors": {
+          "description": "The set of CORS rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CorsRule"
+          },
+          "xml": {
+            "wrapped": true
+          }
+        },
+        "DefaultServiceVersion": {
+          "description": "The default version to use for requests to the Blob service if an incoming request's version is not specified. Possible values include version 2008-10-27 and all more recent versions",
+          "type": "string"
+        },
+        "DeleteRetentionPolicy": {
+          "description": "The Delete Retention Policy for the service",
+          "$ref": "#/definitions/RetentionPolicy"
+        }
+      }
+    },
+    "ComplexTypeNoMeta": {
+      "description": "I am a complex type with no XML node",
+      "type": "object",
+      "properties":{
+        "ID": {
+          "description": "The id of the res",
+          "type": "string"
+        }
+      }
+    },
+    "ComplexTypeWithMeta": {
+      "description": "I am a complex type with XML node",
+      "type": "object",
+      "properties":{
+        "ID": {
+          "description": "The id of the res",
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "XMLComplexTypeWithMeta"
+      }
+    },
+    "RootWithRefAndNoMeta": {
+      "description": "I am root, and I ref a model with no meta",
+      "type": "object",
+      "properties":{
+        "RefToModel": {
+          "description": "XML will use RefToModel",
+          "$ref": "#/definitions/ComplexTypeNoMeta"
+        },
+        "Something": {
+          "description": "Something else (just to avoid flattening)",
+          "type": "string"
+        }
+      }
+    },
+    "RootWithRefAndMeta": {
+      "description": "I am root, and I ref a model WITH meta",
+      "type": "object",
+      "properties":{
+        "RefToModel": {
+          "description": "XML will use XMLComplexTypeWithMeta",
+          "$ref": "#/definitions/ComplexTypeWithMeta"
+        },
+        "Something": {
+          "description": "Something else (just to avoid flattening)",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

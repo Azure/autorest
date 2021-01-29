@@ -1,0 +1,375 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "AdditionalPropertiesClient",
+    "description": "Test Infrastructure for AutoRest"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/additionalProperties/true": {
+      "put": {
+        "operationId": "Pets_CreateAPTrue",
+        "description": "Create a Pet which contains more properties than what is defined.",
+        "parameters": [
+          {
+            "name": "createParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PetAPTrue"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Pet which contains more properties than what is defined.",
+            "schema": {
+              "$ref": "#/definitions/PetAPTrue"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/additionalProperties/true-subclass": {
+      "put": {
+        "operationId": "Pets_CreateCatAPTrue",
+        "description": "Create a CatAPTrue which contains more properties than what is defined.",
+        "parameters": [
+          {
+            "name": "createParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatAPTrue"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A CatAPTrue which contains more properties than what is defined.",
+            "schema": {
+              "$ref": "#/definitions/CatAPTrue"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/additionalProperties/type/object": {
+      "put": {
+        "operationId": "Pets_CreateAPObject",
+        "description": "Create a Pet which contains more properties than what is defined.",
+        "parameters": [
+          {
+            "name": "createParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PetAPObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Pet which contains more properties than what is defined.",
+            "schema": {
+              "$ref": "#/definitions/PetAPObject"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/additionalProperties/type/string": {
+      "put": {
+        "operationId": "Pets_CreateAPString",
+        "description": "Create a Pet which contains more properties than what is defined.",
+        "parameters": [
+          {
+            "name": "createParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PetAPString"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Pet which contains more properties than what is defined.",
+            "schema": {
+              "$ref": "#/definitions/PetAPString"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/additionalProperties/in/properties": {
+      "put": {
+        "operationId": "Pets_CreateAPInProperties",
+        "description": "Create a Pet which contains more properties than what is defined.",
+        "parameters": [
+          {
+            "name": "createParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PetAPInProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Pet which contains more properties than what is defined.",
+            "schema": {
+              "$ref": "#/definitions/PetAPInProperties"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/additionalProperties/in/properties/with/additionalProperties/string": {
+      "put": {
+        "operationId": "Pets_CreateAPInPropertiesWithAPString",
+        "description": "Create a Pet which contains more properties than what is defined.",
+        "parameters": [
+          {
+            "name": "createParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PetAPInPropertiesWithAPString"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Pet which contains more properties than what is defined.",
+            "schema": {
+              "$ref": "#/definitions/PetAPInPropertiesWithAPString"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "PetAPTrue": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "CatAPTrue": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PetAPTrue"
+        }
+      ],
+      "properties": {
+        "friendly": {
+          "type": "boolean"
+        }
+      }
+    },
+    "PetAPObject": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "PetAPString": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "PetAPInProperties": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "additionalProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "PetAPInPropertiesWithAPString": {
+      "type": "object",
+      "required": [
+        "id",
+        "@odata.location"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "@odata.location": {
+          "type": "string"
+        },
+        "additionalProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  }
+}

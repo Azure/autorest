@@ -1,0 +1,63 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "AutoRest Swagger BAT Header Service",
+    "description": "Test Infrastructure for AutoRest"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http"
+  ],
+  "paths": {},
+  "responses": {
+    "200": {
+      "description": "The request was successful. Code was downloaded.",
+      "schema": {
+        "type": "file"
+      }
+    },
+    "401": {
+      "description": "The caller failed authentication"
+    },
+    "403": {
+      "description": "The caller does not have proper access to this API"
+    },
+    "default": {
+      "description": "Error response describing the reason for operation failure. The request failed.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    }
+  },
+  "definitions": {
+    "ErrorDetails": {
+      "properties": {
+        "code": {
+          "description": "Status code for the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message describing the error in detail.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetails",
+          "description": "The details of the error."
+        }
+      }
+    }
+  }
+}
