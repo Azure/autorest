@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@autorest/modelerfour",
-      "comment": "Fix haivng circular dependencies in additionalProperties [PR #3819](https://github.com/Azure/autorest/pull/3819)",
+      "comment": "Fix the use of  circular dependencies in additionalProperties [PR #3819](https://github.com/Azure/autorest/pull/3819)",
       "type": "patch"
     }
   ],
