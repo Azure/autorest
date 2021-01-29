@@ -1,7 +1,6 @@
 dependencies:
   '@azure-tools/async-io': 3.0.253
   '@azure-tools/autorest-extension-base': 3.1.267
-  '@azure-tools/codegen': 2.5.290
   '@azure-tools/codegen-csharp': 3.0.263
   '@azure-tools/datastore': 4.1.270
   '@azure-tools/deduplication': 3.0.267
@@ -16,6 +15,7 @@ dependencies:
   '@rush-temp/codegen': 'file:projects/codegen.tgz'
   '@rush-temp/codemodel': 'file:projects/codemodel.tgz_prettier@2.2.1'
   '@rush-temp/core': 'file:projects/core.tgz'
+  '@rush-temp/extension-base': 'file:projects/extension-base.tgz'
   '@rush-temp/md-mock-api': 'file:projects/md-mock-api.tgz'
   '@rush-temp/modelerfour': 'file:projects/modelerfour.tgz'
   '@rush-temp/oai2-to-oai3': 'file:projects/oai2-to-oai3.tgz'
@@ -9805,6 +9805,23 @@ packages:
       integrity: sha512-edYIWXJiXgQMpabycSQ+a+Ex3Q9jEvOSv0NsSZHCONHCFM9S2r5V+zTuSzO/GyelEloNM7HH87cA7EhpbUxdog==
       tarball: 'file:projects/core.tgz'
     version: 0.0.0
+  'file:projects/extension-base.tgz':
+    dependencies:
+      '@azure-tools/codegen': 2.5.292
+      '@types/js-yaml': 3.12.1
+      '@types/node': 12.7.2
+      '@typescript-eslint/eslint-plugin': 4.14.1_b15473b68481c2b07ec15e4066acfd77
+      '@typescript-eslint/parser': 4.14.1_eslint@7.18.0+typescript@3.9.7
+      eslint: 7.18.0
+      js-yaml: 3.13.1
+      typescript: 3.9.7
+      vscode-jsonrpc: 3.6.2
+    dev: false
+    name: '@rush-temp/extension-base'
+    resolution:
+      integrity: sha512-n9Y/ilnXCcHXDgnuTT0bPzLW8bo+N4CKtajf8BwdXKCSzFdRp6S+VJDJ21PL6xaF2JlacQ9OVIkCz44NoD2jkg==
+      tarball: 'file:projects/extension-base.tgz'
+    version: 0.0.0
   'file:projects/md-mock-api.tgz':
     dependencies:
       '@types/body-parser': 1.19.0
@@ -9885,7 +9902,7 @@ packages:
     dev: false
     name: '@rush-temp/modelerfour'
     resolution:
-      integrity: sha512-NzcmHNsRXI9IZZxFljUsaOy9PeRj6H0j5yx/ZDzQ4zMKzGhiAlxnmheZkyDfTjfMyIZxPaaEcifI4+ja8rGbTg==
+      integrity: sha512-ZKAhufTIlvZqTdPS+VJAvfJ7ObNiyGxrpO4DPyynySdhQBBXm4FhKFA6sdKZLQYdkCRt5SKC/ppzkvGgRX+9dQ==
       tarball: 'file:projects/modelerfour.tgz'
     version: 0.0.0
   'file:projects/oai2-to-oai3.tgz':
@@ -9922,7 +9939,6 @@ registry: ''
 specifiers:
   '@azure-tools/async-io': ~3.0.0
   '@azure-tools/autorest-extension-base': ~3.1.0
-  '@azure-tools/codegen': 2.5.290
   '@azure-tools/codegen-csharp': ~3.0.0
   '@azure-tools/datastore': ~4.1.0
   '@azure-tools/deduplication': ~3.0.266
@@ -9937,6 +9953,7 @@ specifiers:
   '@rush-temp/codegen': 'file:./projects/codegen.tgz'
   '@rush-temp/codemodel': 'file:./projects/codemodel.tgz'
   '@rush-temp/core': 'file:./projects/core.tgz'
+  '@rush-temp/extension-base': 'file:./projects/extension-base.tgz'
   '@rush-temp/md-mock-api': 'file:./projects/md-mock-api.tgz'
   '@rush-temp/modelerfour': 'file:./projects/modelerfour.tgz'
   '@rush-temp/oai2-to-oai3': 'file:./projects/oai2-to-oai3.tgz'
