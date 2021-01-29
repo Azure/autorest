@@ -1,6 +1,17 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Thu, 28 Jan 2021 00:22:27 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Jan 2021 23:48:49 GMT and should not be manually modified.
+
+## 4.16.0
+Fri, 29 Jan 2021 23:48:49 GMT
+
+### Minor changes
+
+- Migrate bundling system from static-link to webpack
+
+### Patches
+
+- Revert making the request body optional by default
 
 ## 4.15.456
 Thu, 28 Jan 2021 00:22:27 GMT
