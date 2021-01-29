@@ -8,18 +8,18 @@
   "engines": {
     "node": ">=10.12.0"
   },
-  "main": "dist/exports.js",
-  "typings": "dist/exports.d.ts",
+  "main": "dist/src/main.js",
+  "typings": "dist/src/main.d.ts",
   "scripts": {
     "clean": "rimraf ./dist",
-    "start": "node --max_old_space_size=4096 ./entrypoints/main.js",
-    "debug": "node --max_old_space_size=4096 --inspect-brk=localhost:9229 ./entrypoints/main.js",
+    "start": "node --max_old_space_size=4096 ./dist/src/main.js",
+    "debug": "node --max_old_space_size=4096 --inspect-brk=localhost:9229 ./dist/src/main.js",
     "fix": "eslint  ./src --fix --ext .ts",
     "lint": "eslint  ./src --ext .ts --max-warnings=0",
-    "static-link": "static-link --no-node-modules --debug",
     "watch": "tsc -p . --watch",
     "build": "tsc -p .",
-    "prepack": "npm run static-link && npm run build",
+    "build:prod": "webpack",
+    "prepack": "npm run clean && npm run build:prod",
     "test": "jest --watch --coverage=false",
     "test:ci": "jest --ci"
   },
@@ -41,6 +41,7 @@
   "devDependencies": {
     "@types/node": "~14.14.20",
     "@types/jest": "^26.0.20",
+    "@types/webpack": "~4.41.26",
     "typescript": "~3.9.7",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
@@ -61,27 +62,14 @@
     "@azure-tools/openapi": "~3.0.0",
     "@azure-tools/datastore": "~4.1.0",
     "@azure-tools/linq": "~3.1.0",
-    "static-link": "^0.3.0",
     "chalk": "2.3.0",
     "recursive-diff": "~1.0.6",
     "prettier": "~2.2.1",
     "eslint-plugin-prettier": "~3.2.0",
+    "ts-loader": "~8.0.14",
+    "webpack": "~5.18.0",
+    "webpack-cli": "~4.4.0",
     "rimraf": "~3.0.0"
-  },
-  "static-link": {
-    "entrypoints": [],
-    "dependencies": {
-      "@azure-tools/codegen": "~2.5.292",
-      "@azure-tools/codegen-csharp": "~3.0.0",
-      "@azure-tools/autorest-extension-base": "~3.1.0",
-      "@autorest/codemodel": "~4.14.3",
-      "@azure-tools/tasks": "~3.0.0",
-      "@azure-tools/openapi": "~3.0.0",
-      "@azure-tools/datastore": "~4.1.0",
-      "@azure-tools/linq": "~3.1.0",
-      "source-map-support": "^0.5.19",
-      "recursive-diff": "~1.0.6"
-    }
   },
   "dependencies": {}
 }
