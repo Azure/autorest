@@ -1,0 +1,40 @@
+{
+  "name": "@azure-tools/autorest-extension-base",
+  "version": "3.1.0",
+  "patchOffset": 100,
+  "description": "Library for creating AutoRest extensions",
+  "main": "dist/exports.js",
+  "scripts": {
+    "build": "tsc -p .",
+    "watch": "tsc -p . --watch",
+    "eslint-fix": "eslint  . --fix --ext .ts",
+    "eslint": "eslint  . --ext .ts",
+    "clean": "ver > nul 2>&1 nul && npm run --silent clean-cmd || npm run --silent clean-bash",
+    "clean-cmd": "if exist dist rmdir /s /q dist && exit 0 || exit 0 ",
+    "clean-bash": "rm nul && rm -rf dist && exit 0 || exit 0"
+  },
+  "typings": "./dist/exports.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/azure/perks.git"
+  },
+  "keywords": [
+    "autorest",
+    "extension"
+  ],
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/js-yaml": "3.12.1",
+    "@types/node": "12.7.2",
+    "typescript": "~3.9.7",
+    "@typescript-eslint/eslint-plugin": "~2.6.0",
+    "@typescript-eslint/parser": "~2.6.0",
+    "eslint": "~6.6.0"
+  },
+  "dependencies": {
+    "js-yaml": "3.13.1",
+    "vscode-jsonrpc": "^3.5.0",
+    "@azure-tools/codegen": "~2.5.0"
+  }
+}
