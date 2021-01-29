@@ -1,10 +1,8 @@
-import { QuickDataSource, DataHandle, createSandbox, AnyObject, nodes, selectNodes } from "@azure-tools/datastore";
-import * as jsonpath from "jsonpath";
-import { createPerFilePlugin, PipelinePlugin } from "../common";
-import { Manipulator } from "../manipulation";
-import { Channel } from "../../message";
-
-const safeEval = createSandbox();
+import { QuickDataSource, DataHandle, AnyObject, selectNodes } from "@azure-tools/datastore";
+import { createPerFilePlugin, PipelinePlugin } from "../../common";
+import { Manipulator } from "./manipulation";
+import { Channel } from "../../../message";
+import { evalDirectiveTransform } from "./eval";
 
 /* @internal */
 export function createGraphTransformerPlugin(): PipelinePlugin {
@@ -13,13 +11,6 @@ export function createGraphTransformerPlugin(): PipelinePlugin {
     const directives = config.resolveDirectives(
       (x) => x.from.length > 0 && x.transform.length > 0 && x.where.length > 0,
     ); // && (!!x.where && x.where.length > 0)
-
-    const $lib = {
-      debug: (text: string) => config.Message({ Channel: Channel.Debug, Text: text }),
-      verbose: (text: string) => config.Message({ Channel: Channel.Debug, Text: text }),
-      log: (text: string) => console.error(text),
-      config: config,
-    };
 
     const result: Array<DataHandle> = [];
     for (const file of await input.Enum()) {
@@ -55,13 +46,13 @@ export function createGraphTransformerPlugin(): PipelinePlugin {
                   });
 
                   for (const { path, value, parent } of targets) {
-                    const output = safeEval<AnyObject>(`(() => { { ${transform} }; return $; })()`, {
-                      $: value,
-                      $parent: parent,
-                      $doc: contents,
-                      $path: path,
-                      $documentPath: inputHandle.key,
-                      $lib,
+                    const output = evalDirectiveTransform(transform, {
+                      config: config,
+                      value,
+                      parent: parent,
+                      doc: contents,
+                      path: path,
+                      documentPath: inputHandle.key,
                     });
 
                     parent[path.last] = output;
@@ -102,12 +93,6 @@ export function createTextTransformerPlugin(): PipelinePlugin {
     if (directives.length === 0) {
       return input;
     }
-    const $lib = {
-      debug: (text: string) => config.Message({ Channel: Channel.Debug, Text: text }),
-      verbose: (text: string) => config.Message({ Channel: Channel.Debug, Text: text }),
-      log: (text: string) => console.error(text),
-      config: config,
-    };
 
     const result: Array<DataHandle> = [];
     for (const file of await input.Enum()) {
@@ -139,13 +124,24 @@ export function createTextTransformerPlugin(): PipelinePlugin {
                 Text: `Running text transform '${directive.from}/${directive.reason}' on ${inputHandle.key} `,
               });
 
-              const output = safeEval<string>(`(() => { { ${transform} }; return $; })()`, {
-                $: contents,
-                $doc: inputHandle,
-                $path: [],
-                $documentPath: inputHandle.key,
-                $lib,
+              const output = evalDirectiveTransform(transform, {
+                config,
+                value: contents,
+                doc: inputHandle,
+                path: [],
+                documentPath: inputHandle.key,
               });
+
+              if (typeof output !== "string") {
+                throw new Error(
+                  [
+                    `Unexpected result from directive, expected a string but got '${typeof output}'.`,
+                    "Transform code:\n",
+                    directive.transform,
+                  ].join("\n"),
+                );
+              }
+
               if (output !== contents) {
                 modified = true;
                 contents = output;

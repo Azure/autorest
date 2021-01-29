@@ -8,26 +8,20 @@ import {
   CloneAst,
   DataHandle,
   DataSink,
-  Descendants,
   IsPrefix,
   JsonPath,
-  Mapping,
   nodes,
   ParseNode,
-  paths,
   ReplaceNode,
   ResolveRelativeNode,
   SmartPosition,
-  stringify,
   StringifyAst,
   ToAst,
   YAMLNode,
-  ParseToAst,
 } from "@azure-tools/datastore";
-import { From } from "linq-es2015";
-import { ConfigurationView } from "../autorest-core";
-import { Channel, Message, SourceLocation } from "../message";
-import { IdentitySourceMapping } from "../source-map/merging";
+import { ConfigurationView } from "../../../autorest-core";
+import { Channel } from "../../../message";
+import { IdentitySourceMapping } from "../../../source-map/merging";
 
 export async function manipulateObject(
   src: DataHandle,
@@ -82,7 +76,9 @@ export async function manipulateObject(
     try {
       const newObject = transformer(doc, Clone(hit.value), hit.path);
       const newAst = newObject === undefined ? undefined : ToAst(newObject); // <- can extend ToAst to also take an "ambient" object with AST, in order to create anchor refs for existing stuff!
+      console.error("{here3", hit.path, newObject);
       const oldAst = ResolveRelativeNode(ast, ast, hit.path);
+      console.error("old", oldAst);
       ast =
         ReplaceNode(ast, oldAst, newAst) ||
         (() => {

@@ -5,8 +5,9 @@
 import { CancellationToken } from "vscode-jsonrpc";
 import * as assert from "assert";
 import { DataStore } from "@azure-tools/datastore";
-import { manipulateObject } from "../lib/pipeline/object-manipulator";
+import { manipulateObject } from "../lib/pipeline/plugins/transformer/object-manipulator";
 import { createSandbox } from "@azure-tools/datastore";
+import { createCommonmarkProcessorPlugin } from "../lib/pipeline/plugins/commonmark";
 
 const safeEval = createSandbox();
 try {
@@ -26,6 +27,19 @@ paths:
         '200':
           schema:
             "$ref": "#/definitions/NodeA"
+      parameters:
+        - name: Param1
+          in: query
+          schema:
+            type: string
+        - name: Param2
+          in: query
+          schema:
+            type: string
+        - name: Param3
+          in: query
+          schema:
+            type: string
     post:
       description: post fun time
       operationId: Postcircular

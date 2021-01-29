@@ -26,7 +26,7 @@ Directives consist of three parts:
   - A `property` can be filtered by:
     - its location within its parent object
 
-- **Transform**: denoted by the field `transform`, the actions we would like to be applied on the specified objects.
+- **Transform**: denoted by the field `transform`, the actions we would like to be applied on the specified objects. The list of available variables and functions can be found in [eval.ts](https://github.com/Azure/autorest/blob/master/packages/extensions/core/lib/pipeline/plugins/transformer/eval.ts)
 
 ## Directive Scenarios
 
