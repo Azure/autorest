@@ -712,6 +712,14 @@ export class ModelerFour {
     throw new Error("Method not implemented.");
   }
   processDictionarySchema(name: string, schema: OpenAPI.Schema): DictionarySchema {
+    const dictSchema = new DictionarySchema<any>(
+      this.interpret.getName(name, schema),
+      this.interpret.getDescription("", schema),
+      null,
+    );
+    // cache this now before we accidentally recurse on this type.
+    this.schemaCache.set(schema, dictSchema);
+
     let elementSchema: Schema;
     let elementNullable: boolean | undefined;
     if (schema.additionalProperties === true) {
@@ -727,16 +735,14 @@ export class ModelerFour {
       }
     }
 
-    return this.codeModel.schemas.add(
-      new DictionarySchema(
-        this.interpret.getName(name, schema),
-        this.interpret.getDescription(`Dictionary of <${elementSchema.language.default.name}>`, schema),
-        elementSchema,
-        {
-          nullableItems: elementNullable,
-        },
-      ),
+    dictSchema.language.default.description = this.interpret.getDescription(
+      `Dictionary of <${elementSchema.language.default.name}>`,
+      schema,
     );
+    dictSchema.elementType = elementSchema;
+    dictSchema.nullableItems = elementNullable;
+
+    return this.codeModel.schemas.add(dictSchema);
   }
 
   isSchemaPolymorphic(schema: OpenAPI.Schema | undefined): boolean {
@@ -779,6 +785,8 @@ export class ModelerFour {
     for (const { key: propertyName, value: propertyDeclaration } of items(schema.properties)) {
       const property = this.resolve(propertyDeclaration);
       this.use(<OpenAPI.Refable<OpenAPI.Schema>>propertyDeclaration, (pSchemaName, pSchema) => {
+        console.error("process chema", pSchema);
+
         const pType = this.processSchema(pSchemaName || `type·for·${propertyName}`, pSchema);
         const prop = objectSchema.addProperty(
           new Property(
@@ -967,6 +975,7 @@ export class ModelerFour {
 
   trap = new Set();
   processSchemaImpl(schema: OpenAPI.Schema, name: string): Schema {
+    console.error("Here", schema);
     if (this.trap.has(schema)) {
       throw new Error(
         `RECURSING!  Saw schema ${schema.title || schema["x-ms-metadata"]?.name || name} more than once.`,
