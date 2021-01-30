@@ -32,8 +32,15 @@ rules:
   "@typescript-eslint/no-empty-function": "off"
   "@typescript-eslint/explicit-module-boundary-types": "off"
   "@typescript-eslint/ban-types": "off"
-  "require-atomic-updates": "off"
   "@typescript-eslint/consistent-type-assertions": "off"
+
+  "require-atomic-updates": "off"
+  
+  # Prettier config https://github.com/prettier/eslint-plugin-prettier#recommended-configuration
+  prettier/prettier: "warn"
+  arrow-body-style: "off"
+  prefer-arrow-callback: "off"
+
   no-undef: "off"
   no-unused-vars: "off"
   semi:

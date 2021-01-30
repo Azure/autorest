@@ -14,7 +14,7 @@
     "clean": "rimraf ./dist",
     "start": "node --max_old_space_size=4096 ./dist/src/main.js",
     "debug": "node --max_old_space_size=4096 --inspect-brk=localhost:9229 ./dist/src/main.js",
-    "fix": "eslint  ./src --fix --ext .ts",
+    "lint:fix": "eslint  ./src --fix --ext .ts",
     "lint": "eslint  ./src --ext .ts --max-warnings=0",
     "watch": "tsc -p . --watch",
     "build": "tsc -p .",

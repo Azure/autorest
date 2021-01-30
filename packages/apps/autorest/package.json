@@ -31,7 +31,7 @@
     "test:ci": "jest --ci",
     "build": "tsc -p .",
     "watch": "tsc -p . --watch",
-    "fix": "eslint  . --fix --ext .ts",
+    "lint:fix": "eslint  . --fix --ext .ts",
     "lint": "eslint  . --ext .ts --max-warnings=0",
     "static-link": "static-link --force --no-node-modules",
     "preinstall": "node ./.scripts/preinstall-check",

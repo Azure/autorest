@@ -1,16 +1,11 @@
-root: true
+parser: "@typescript-eslint/parser"
+extends:
+  - "../../../.default-eslintrc.yaml"
+
 plugins:
-  - "@typescript-eslint"
-  - prettier
   - import
   - unicorn
-env:
-  browser: true
-  es6: true
-  node: true
-extends:
-  - eslint:recommended
-  - plugin:@typescript-eslint/recommended
+
 rules:
   no-console: warn
 
@@ -26,5 +21,3 @@ rules:
         order: "asc"
         caseInsensitive: true
   unicorn/filename-case: warn
-  prettier/prettier: warn
-parser: "@typescript-eslint/parser"

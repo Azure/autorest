@@ -8,7 +8,7 @@
     "md-mock-api": "./dist/cli/cli.js"
   },
   "scripts": {
-    "fix": "eslint  . --fix --ext .ts",
+    "lint:fix": "eslint  . --fix --ext .ts",
     "lint": "eslint  ./src --ext .ts --max-warnings=0",
     "test": "jest --watchAll --coverage=false",
     "test:ci": "jest --ci",

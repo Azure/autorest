@@ -6,7 +6,8 @@
     "test": "echo 'No Test'",
     "test:ci": "echo 'No test:ci'",
     "build": "echo 'No Build'",
-    "lint": "echo 'No lint'"
+    "lint": "echo 'No lint'",
+    "lint:fix": "echo 'No lint'"
   },
   "author": "",
   "license": "ISC"

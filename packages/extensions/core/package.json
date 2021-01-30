@@ -32,7 +32,7 @@
     "watch": "tsc -p . --watch",
     "build": "npm run before-build && tsc -p .",
     "static-link": "static-link --no-node-modules --debug",
-    "fix": "eslint  . --fix --ext .ts",
+    "lint:fix": "eslint  . --fix --ext .ts",
     "lint": "eslint  . --ext .ts --max-warnings=0",
     "prepack": "npm run static-link && npm run build",
     "run-pwsh": "pwsh -noprofile -command \"& {param($script) pwsh -noprofile -command ((convertfrom-json (get-content -raw ./package.json)).'pwsh-scripts'.$script) }\"",

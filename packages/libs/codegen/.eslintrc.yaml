@@ -1,9 +1,3 @@
----
-# configure plugins first
 parser: "@typescript-eslint/parser"
-plugins:
-- "@typescript-eslint"
-
-# then inherit the common settings
 extends:
-- "../../../.default-eslintrc.yaml"
+  - "../../../.default-eslintrc.yaml"
