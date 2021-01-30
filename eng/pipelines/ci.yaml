@@ -13,7 +13,7 @@ jobs:
   - job: main
     displayName: "Build and test"
     steps:
-      - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}
+      - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
         - template: ./templates/verify-changes.yaml
         
       - template: ./templates/build.yaml
@@ -31,7 +31,7 @@ jobs:
         artifact: packages
         displayName: Publish packages(.tgz) as pipeline artifacts
 
-      - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}
+      - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
         - template: ./templates/create-tryit-comment.yaml
 
   - job: regressiontests
