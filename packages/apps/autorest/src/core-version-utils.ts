@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { EnumerateFiles, ReadUri, ResolveUri } from "@azure-tools/uri";
 import chalk from "chalk";
 import { dirname } from "path";

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { lookup } from "dns";
 import { Extension, ExtensionManager, Package } from "@azure-tools/extension";
 import { homedir } from "os";

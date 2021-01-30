@@ -140,8 +140,10 @@ export class ConfigurationView {
   }
 
   public Dump(title = ""): void {
+    // eslint-disable-next-line no-console
     console.log(`\n${title}\n===================================`);
     for (const each of Object.getOwnPropertyNames(this.config)) {
+      // eslint-disable-next-line no-console
       console.log(`${each} : ${(<any>this.config)[each]}`);
     }
   }

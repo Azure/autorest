@@ -50,6 +50,7 @@ export async function processRequest(host: Host) {
     );
   } catch (E) {
     if (debug) {
+      // eslint-disable-next-line no-console
       console.error(`${__filename} - FAILURE  ${JSON.stringify(E)} ${E.stack}`);
     }
     throw E;

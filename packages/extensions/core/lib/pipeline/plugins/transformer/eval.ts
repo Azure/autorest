@@ -106,6 +106,7 @@ export const evalDirectiveTransform = (transformCode: string, context: Transform
     $lib: {
       debug: (text: string) => config.Message({ Channel: Channel.Debug, Text: text }),
       verbose: (text: string) => config.Message({ Channel: Channel.Debug, Text: text }),
+      // eslint-disable-next-line no-console
       log: (text: string) => console.error(text),
       config,
     },

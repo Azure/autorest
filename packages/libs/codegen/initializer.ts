@@ -68,6 +68,7 @@ function applyTo(source: any, target: any, exclusions: Set<string>, cache = new 
           try {
             applyTo(source[i], target[i], exclusions, cache);
           } catch (E) {
+            // eslint-disable-next-line no-console
             console.error(`  in property: ${i} `);
             throw E;
           }

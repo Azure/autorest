@@ -431,6 +431,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
       return scopeResult;
     } catch (e) {
       if (configView.DebugMode) {
+        // eslint-disable-next-line no-console
         console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);
       }
       throw e;
@@ -463,7 +464,6 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     // we'll mark it skip: true
     const node = pipeline.pipeline[name];
     if (isDrainRequired(node)) {
-      console.log(`Marking ${name} skippable`);
       node.skip = true;
     }
   }

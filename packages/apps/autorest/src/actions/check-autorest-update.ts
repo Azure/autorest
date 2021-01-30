@@ -14,6 +14,7 @@ export const checkForAutoRestUpdate = async (args: AutorestArgs) => {
       const npmTag = args.preview ? "preview" : "latest";
       const newVersion = await isAutorestUpdateAvailable(npmTag);
       if (newVersion) {
+        // eslint-disable-next-line no-console
         console.log(
           color(
             `\n## There is a new version of AutoRest available (${newVersion.version}).\n > You can install the newer version with with \`npm install -g autorest@${npmTag}\`\n`,

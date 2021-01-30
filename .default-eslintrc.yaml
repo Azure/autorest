@@ -41,6 +41,8 @@ rules:
   arrow-body-style: "off"
   prefer-arrow-callback: "off"
 
+  no-console: warn
+  
   no-undef: "off"
   no-unused-vars: "off"
   semi:

@@ -62,15 +62,19 @@ export class AutoRestExtension {
     // connection setup
     const channel = createMessageConnection(input, output, {
       error(message) {
+        // eslint-disable-next-line no-console
         console.error("error: ", message);
       },
       info(message) {
+        // eslint-disable-next-line no-console
         console.error("info: ", message);
       },
       log(message) {
+        // eslint-disable-next-line no-console
         console.error("log: ", message);
       },
       warn(message) {
+        // eslint-disable-next-line no-console
         console.error("warn: ", message);
       },
     });
@@ -156,6 +160,7 @@ export class AutoRestExtension {
         return true;
       } catch (e) {
         if (await channel.sendRequest(IAutoRestPluginInitiatorTypes.GetValue, sessionId, "debug")) {
+          // eslint-disable-next-line no-console
           console.error(`PLUGIN FAILURE: ${e.message}, ${e.stack}, ${JSON.stringify(e, null, 2)}`);
         }
 
