@@ -3,7 +3,8 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
-trigger: none
+trigger: 
+  - master
 
 pool:
   vmImage: "ubuntu-latest"
@@ -12,7 +13,9 @@ jobs:
   - job: main
     displayName: "Build and test"
     steps:
-      - template: ./templates/verify-changes.yaml
+      - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+        - template: ./templates/verify-changes.yaml
+        
       - template: ./templates/build.yaml
 
       - script: npx @microsoft/rush test:ci -v
@@ -28,7 +31,8 @@ jobs:
         artifact: packages
         displayName: Publish packages(.tgz) as pipeline artifacts
 
-      - template: ./templates/create-tryit-comment.yaml
+      - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+        - template: ./templates/create-tryit-comment.yaml
 
   - job: regressiontests
     displayName: Regression tests
