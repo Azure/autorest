@@ -3,20 +3,32 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { isDirectory, isFile, readdir } from '@azure-tools/async-io';
-import { spawn } from 'child_process';
-import * as path from 'path';
+import { isDirectory, isFile, readdir } from "@azure-tools/async-io";
+import { spawn } from "child_process";
+import * as path from "path";
 
-export function cmdlineToArray(text: string, result: Array<string> = [], matcher = /[^\s"]+|"([^"]*)"/gi, count = 0): Array<string> {
-  text = text.replace(/\\"/g, '\ufffe');
+export function cmdlineToArray(
+  text: string,
+  result: Array<string> = [],
+  matcher = /[^\s"]+|"([^"]*)"/gi,
+  count = 0,
+): Array<string> {
+  text = text.replace(/\\"/g, "\ufffe");
   const match = matcher.exec(text);
-  return match ? cmdlineToArray(text, result, matcher, result.push(match[1] ? match[1].replace(/\ufffe/g, '\\"') : match[0].replace(/\ufffe/g, '\\"'))) : result;
+  return match
+    ? cmdlineToArray(
+        text,
+        result,
+        matcher,
+        result.push(match[1] ? match[1].replace(/\ufffe/g, '\\"') : match[0].replace(/\ufffe/g, '\\"')),
+      )
+    : result;
 }
 
 function getPathVariableName() {
   // windows calls it's path 'Path' usually, but this is not guaranteed.
-  if (process.platform === 'win32') {
-    let PATH = 'Path';
+  if (process.platform === "win32") {
+    let PATH = "Path";
     Object.keys(process.env).forEach(function (e) {
       if (e.match(/^PATH$/i)) {
         PATH = e;
@@ -24,10 +36,10 @@ function getPathVariableName() {
     });
     return PATH;
   }
-  return 'PATH';
+  return "PATH";
 }
 async function realPathWithExtension(command: string): Promise<string | undefined> {
-  const pathExt = (process.env.pathext || '.EXE').split(';');
+  const pathExt = (process.env.pathext || ".EXE").split(";");
   for (const each of pathExt) {
     const filename = `${command}${each}`;
     if (await isFile(filename)) {
@@ -37,20 +49,24 @@ async function realPathWithExtension(command: string): Promise<string | undefine
   return undefined;
 }
 
-async function getFullPath(command: string, recursive = false, searchPath?: Array<string>): Promise<string | undefined> {
-  command = command.replace(/"/g, '');
+async function getFullPath(
+  command: string,
+  recursive = false,
+  searchPath?: Array<string>,
+): Promise<string | undefined> {
+  command = command.replace(/"/g, "");
   const ext = path.extname(command);
 
   if (path.isAbsolute(command)) {
     // if the file has an extension, or we're not on win32, and this is an actual file, use it.
-    if (ext || process.platform !== 'win32') {
+    if (ext || process.platform !== "win32") {
       if (await isFile(command)) {
         return command;
       }
     }
 
     // if we're on windows, look for a file with an acceptable extension.
-    if (process.platform === 'win32') {
+    if (process.platform === "win32") {
       // try all the PATHEXT extensions to see if it is a recognized program
       const cmd = await realPathWithExtension(command);
       if (cmd) {
@@ -72,7 +88,8 @@ async function getFullPath(command: string, recursive = false, searchPath?: Arra
             const folderPath = path.resolve(folder, entry);
 
             if (await isDirectory(folderPath)) {
-              fullPath = (await getFullPath(path.join(folderPath, command))) || (await getFullPath(command, true, [folderPath]));
+              fullPath =
+                (await getFullPath(path.join(folderPath, command))) || (await getFullPath(command, true, [folderPath]));
               if (fullPath) {
                 return fullPath;
               }
@@ -89,14 +106,14 @@ async function getFullPath(command: string, recursive = false, searchPath?: Arra
 }
 
 function quoteIfNecessary(text: string): string {
-  if (text && text.indexOf(' ') > -1 && text.charAt(0) !== '"') {
+  if (text && text.indexOf(" ") > -1 && text.charAt(0) !== '"') {
     return `"${text}"`;
   }
   return text;
 }
 
 function getSearchPath(): Array<string> {
-  return (process.env[getPathVariableName()] || '').split(path.delimiter);
+  return (process.env[getPathVariableName()] || "").split(path.delimiter);
 }
 
 export async function resolveFullPath(command: string, alternateRecursiveFolders?: Array<string>) {
@@ -123,7 +140,7 @@ export async function execute(cwd: string, command: string, ...parameters: Array
   }
 
   return new Promise((r, j) => {
-    if (process.platform === 'win32' && fullCommandPath.indexOf(' ') > -1 && !/.exe$/ig.exec(fullCommandPath)) {
+    if (process.platform === "win32" && fullCommandPath.indexOf(" ") > -1 && !/.exe$/gi.exec(fullCommandPath)) {
       const pathVar = getPathVariableName();
       // preserve the current path
       const originalPath = process.env[pathVar];
@@ -132,25 +149,27 @@ export async function execute(cwd: string, command: string, ...parameters: Array
         process.env[pathVar] = `${path.dirname(fullCommandPath)}${path.delimiter}${originalPath}`;
 
         // call spawn and return
-        spawn(path.basename(fullCommandPath), parameters, { env: process.env, cwd, stdio: 'inherit' }).on('close', (c, s) => {
-          if (c) {
-            j('Command Failed');
-          }
-          r();
-        });
+        spawn(path.basename(fullCommandPath), parameters, { env: process.env, cwd, stdio: "inherit" }).on(
+          "close",
+          (c, s) => {
+            if (c) {
+              j("Command Failed");
+            }
+            r();
+          },
+        );
         return;
       } finally {
         // regardless, restore the original path on the way out!
         process.env[pathVar] = originalPath;
       }
     }
-    spawn(fullCommandPath, parameters, { env: process.env, cwd, stdio: 'inherit' }).on('close', (c, s) => {
+    spawn(fullCommandPath, parameters, { env: process.env, cwd, stdio: "inherit" }).on("close", (c, s) => {
       if (c) {
-        j('Command Failed');
+        j("Command Failed");
       }
       r();
     });
     return;
   });
-
 }

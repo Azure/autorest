@@ -1,15 +1,14 @@
-import { Parameter, ImplementationLocation } from './parameter';
-import { Response } from './response';
-import { Metadata } from './metadata';
-import { Aspect } from './aspect';
-import { ApiVersion } from './api-version';
-import { Dictionary, values } from '@azure-tools/linq';
-import { DeepPartial } from '@azure-tools/codegen';
-import { SchemaType } from './schema-type';
+import { Parameter, ImplementationLocation } from "./parameter";
+import { Response } from "./response";
+import { Metadata } from "./metadata";
+import { Aspect } from "./aspect";
+import { ApiVersion } from "./api-version";
+import { Dictionary, values } from "@azure-tools/linq";
+import { DeepPartial } from "@azure-tools/codegen";
+import { SchemaType } from "./schema-type";
 
 /** represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)  */
 export interface Operation extends Aspect {
-
   /** common parameters when there are multiple requests */
   parameters?: Array<Parameter>;
 
@@ -27,7 +26,6 @@ export interface Operation extends Aspect {
 
   /** the apiVersion to use for a given profile name */
   profile?: Dictionary<ApiVersion>;
-
 }
 
 export interface Request extends Metadata {
@@ -37,7 +35,6 @@ export interface Request extends Metadata {
   /** a filtered list of parameters that is (assumably) the actual method signature parameters */
   signatureParameters?: Array<Parameter>;
 }
-
 
 export class Request extends Metadata implements Request {
   constructor(initializer?: DeepPartial<Request>) {
@@ -53,12 +50,15 @@ export class Request extends Metadata implements Request {
 
   updateSignatureParameters() {
     if (this.parameters) {
-      this.signatureParameters = values(this.parameters).where(each =>
-        each.schema.type !== SchemaType.Constant &&
-        each.implementation !== ImplementationLocation.Client &&
-        !each.groupedBy &&
-        !each.flattened
-      ).toArray();
+      this.signatureParameters = values(this.parameters)
+        .where(
+          (each) =>
+            each.schema.type !== SchemaType.Constant &&
+            each.implementation !== ImplementationLocation.Client &&
+            !each.groupedBy &&
+            !each.flattened,
+        )
+        .toArray();
     }
   }
 }
@@ -67,7 +67,6 @@ export class Operation extends Aspect implements Operation {
     super($key, description);
     this.apply(initializer);
   }
-
 
   /** add a request to the operation */
   addRequest(request: Request) {
@@ -83,12 +82,15 @@ export class Operation extends Aspect implements Operation {
 
   updateSignatureParameters() {
     if (this.parameters) {
-      this.signatureParameters = values(this.parameters).where(each =>
-        each.schema.type !== SchemaType.Constant &&
-        each.implementation !== ImplementationLocation.Client &&
-        !each.groupedBy &&
-        !each.flattened
-      ).toArray();
+      this.signatureParameters = values(this.parameters)
+        .where(
+          (each) =>
+            each.schema.type !== SchemaType.Constant &&
+            each.implementation !== ImplementationLocation.Client &&
+            !each.groupedBy &&
+            !each.flattened,
+        )
+        .toArray();
     }
   }
 

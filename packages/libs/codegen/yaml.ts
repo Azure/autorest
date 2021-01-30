@@ -3,47 +3,47 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DEFAULT_SAFE_SCHEMA, dump, safeLoad, Schema } from 'js-yaml';
+import { DEFAULT_SAFE_SCHEMA, dump, safeLoad, Schema } from "js-yaml";
 
 const propertyPriority = [
-  'info',
-  '$key',
-  'booleans',
-  'numbers',
-  'chars',
-  'strings',
-  'choices',
-  'sealedChoices',
-  'constants',
-  'dictionaries',
-  'compounds',
+  "info",
+  "$key",
+  "booleans",
+  "numbers",
+  "chars",
+  "strings",
+  "choices",
+  "sealedChoices",
+  "constants",
+  "dictionaries",
+  "compounds",
 
-  'name',
-  'schemas',
-  'type',
-  'format',
-  'schema',
-  'operationId',
-  'path',
-  'method',
-  'description',
-  'default',
+  "name",
+  "schemas",
+  "type",
+  "format",
+  "schema",
+  "operationId",
+  "path",
+  "method",
+  "description",
+  "default",
 ];
 
 const propertyNegativePriority = [
-  'objects',
-  'arrays',
-  'request',
-  'responses',
-  'exceptions',
-  'callbacks',
-  'http',
-  'commands',
-  'operations',
-  'extensions',
-  'details',
-  'language',
-  'protocol'
+  "objects",
+  "arrays",
+  "request",
+  "responses",
+  "exceptions",
+  "callbacks",
+  "http",
+  "commands",
+  "operations",
+  "extensions",
+  "details",
+  "language",
+  "protocol",
 ];
 
 function sortWithPriorty(a: any, b: any): number {
@@ -55,8 +55,8 @@ function sortWithPriorty(a: any, b: any): number {
   const na = propertyNegativePriority.indexOf(a);
   const nb = propertyNegativePriority.indexOf(b);
 
-  const dota = `${a}`.startsWith('.');
-  const dotb = `${b}`.startsWith('.');
+  const dota = `${a}`.startsWith(".");
+  const dotb = `${b}`.startsWith(".");
 
   if (dota) {
     if (!dotb) {
@@ -94,15 +94,15 @@ export function deserialize<T>(text: string, filename: string, schema: Schema = 
 }
 
 export interface SerializeOptions {
-  schema?: Schema,
-  sortKeys?: boolean
+  schema?: Schema;
+  sortKeys?: boolean;
 }
 
 export function serialize<T>(model: T, schemaOrOptions: Schema | SerializeOptions = DEFAULT_SAFE_SCHEMA): string {
   const options: SerializeOptions =
     schemaOrOptions instanceof Schema
       ? { schema: schemaOrOptions, sortKeys: true }
-      : { schema: DEFAULT_SAFE_SCHEMA, sortKeys: true, ... schemaOrOptions };
+      : { schema: DEFAULT_SAFE_SCHEMA, sortKeys: true, ...schemaOrOptions };
 
   return dump(model, {
     schema: options.schema,
@@ -119,4 +119,3 @@ export function serialize<T>(model: T, schemaOrOptions: Schema | SerializeOption
 
   //.replace(/(\s*language:)/g, '\n$1');
 }
-

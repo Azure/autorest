@@ -8,7 +8,7 @@ export enum SchemaContext {
   Output = "output",
 
   /** Schema is used as an exception from an operation. */
-  Exception = "exception"
+  Exception = "exception",
 }
 
 export interface SchemaUsage {

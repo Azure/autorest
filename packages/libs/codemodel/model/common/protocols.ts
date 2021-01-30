@@ -1,4 +1,4 @@
-import { Protocol } from './metadata';
+import { Protocol } from "./metadata";
 
 /** custom extensible metadata for individual protocols (ie, HTTP, etc) */
 export interface Protocols {
@@ -8,6 +8,4 @@ export interface Protocols {
   jsonrpc?: Protocol;
 }
 
-export class Protocols implements Protocols {
-
-}
+export class Protocols implements Protocols {}

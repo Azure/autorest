@@ -1,7 +1,6 @@
-import { Schema, ValueSchema } from '../schema';
-import { SchemaType } from '../schema-type';
-import { DeepPartial } from '@azure-tools/codegen';
-
+import { Schema, ValueSchema } from "../schema";
+import { SchemaType } from "../schema-type";
+import { DeepPartial } from "@azure-tools/codegen";
 
 /** a Schema that represents and array of values */
 export interface ArraySchema<ElementType extends Schema = Schema> extends ValueSchema {
@@ -23,8 +22,13 @@ export interface ArraySchema<ElementType extends Schema = Schema> extends ValueS
   /** if elements in the array should be nullable */
   nullableItems?: boolean;
 }
-export class ArraySchema<ElementType extends Schema = Schema> extends Schema implements ArraySchema<ElementType>{
-  constructor(name: string, description: string, elementType: ElementType, objectInitializer?: DeepPartial<ArraySchema<ElementType>>) {
+export class ArraySchema<ElementType extends Schema = Schema> extends Schema implements ArraySchema<ElementType> {
+  constructor(
+    name: string,
+    description: string,
+    elementType: ElementType,
+    objectInitializer?: DeepPartial<ArraySchema<ElementType>>,
+  ) {
     super(name, description, SchemaType.Array);
     this.elementType = elementType;
 
@@ -38,7 +42,7 @@ export interface ByteArraySchema extends ValueSchema {
   type: SchemaType.ByteArray;
 
   /** date-time format  */
-  format: 'base64url' | 'byte';
+  format: "base64url" | "byte";
 }
 
 export class ByteArraySchema extends Schema implements ByteArraySchema {

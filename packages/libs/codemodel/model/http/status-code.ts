@@ -1,12 +1,71 @@
 /** A catch-all for all un-handled response codes. */
-export type Default = 'default';
+export type Default = "default";
 export type StatusCode = Http1XX | Http2XX | Http3XX | Http4XX | Http5XX | Default;
 
 export type Http1XX = Continue | SwitchingProtocols | Processing | EarlyHints;
-export type Http2XX = OK | Created | Accepted | NonAuthoritativeInformation | NoContent | ResetContent | PartialContent | MultiStatus | AlreadyReported | IMUsed;
-export type Http3XX = MultipleChoices | MovedPermanently | Found | SeeOther | NotModified | UseProxy | SwitchProxy | TemporaryRedirect | PermanentRedirect;
-export type Http4XX = BadRequest | Unauthorized | PaymentRequired | Forbidden | NotFound | MethodNotAllowed | NotAcceptable | ProxyAuthenticationRequired | RequestTimeout | Conflict | Gone | LengthRequired | PreconditionFailed | PayloadTooLarge | URITooLong | UnsupportedMediaType | RangeNotSatisfiable | ExpectationFailed | ImaTeapot | MisdirectedRequest | UnprocessableEntity | Locked | FailedDependency | TooEarly | UpgradeRequired | PreconditionRequired | TooManyRequests | RequestHeaderFieldsTooLarge | UnavailableForLegalReasons;
-export type Http5XX = InternalServerError | NotImplemented | BadGateway | ServiceUnavailable | GatewayTimeout | HTTPVersionNotSupported | VariantAlsoNegotiates | InsufficientStorage | LoopDetected | NotExtended | NetworkAuthenticationRequired;
+export type Http2XX =
+  | OK
+  | Created
+  | Accepted
+  | NonAuthoritativeInformation
+  | NoContent
+  | ResetContent
+  | PartialContent
+  | MultiStatus
+  | AlreadyReported
+  | IMUsed;
+export type Http3XX =
+  | MultipleChoices
+  | MovedPermanently
+  | Found
+  | SeeOther
+  | NotModified
+  | UseProxy
+  | SwitchProxy
+  | TemporaryRedirect
+  | PermanentRedirect;
+export type Http4XX =
+  | BadRequest
+  | Unauthorized
+  | PaymentRequired
+  | Forbidden
+  | NotFound
+  | MethodNotAllowed
+  | NotAcceptable
+  | ProxyAuthenticationRequired
+  | RequestTimeout
+  | Conflict
+  | Gone
+  | LengthRequired
+  | PreconditionFailed
+  | PayloadTooLarge
+  | URITooLong
+  | UnsupportedMediaType
+  | RangeNotSatisfiable
+  | ExpectationFailed
+  | ImaTeapot
+  | MisdirectedRequest
+  | UnprocessableEntity
+  | Locked
+  | FailedDependency
+  | TooEarly
+  | UpgradeRequired
+  | PreconditionRequired
+  | TooManyRequests
+  | RequestHeaderFieldsTooLarge
+  | UnavailableForLegalReasons;
+export type Http5XX =
+  | InternalServerError
+  | NotImplemented
+  | BadGateway
+  | ServiceUnavailable
+  | GatewayTimeout
+  | HTTPVersionNotSupported
+  | VariantAlsoNegotiates
+  | InsufficientStorage
+  | LoopDetected
+  | NotExtended
+  | NetworkAuthenticationRequired;
 
 /* === 1xx Informational response === */
 
@@ -59,18 +118,17 @@ export type IMUsed = 226;
 /** Indicates multiple options for the resource from which the client may choose (via agent-driven content negotiation). For example, this code could be used to present multiple video format options, to list files with different filename extensions, or to suggest word-sense disambiguation. */
 export type MultipleChoices = 300;
 
-
 /** This and all future requests should be directed to the given URI. */
 export type MovedPermanently = 301;
 
 /** Tells the client to look at (browse to) another URL. 302 has been superseded by 303 and 307. This is an example of industry practice contradicting the standard. The HTTP/1.0 specification (RFC 1945) required the client to perform a temporary redirect (the original describing phrase was "Moved Temporarily"),[22] but popular browsers implemented 302 with the functionality of a 303 See Other. Therefore, HTTP/1.1 added status codes 303 and 307 to distinguish between the two behaviours.[23] However, some Web applications and frameworks use the 302 status code as if it were the 303. */
-export type Found = 302
+export type Found = 302;
 
 /** The response to the request can be found under another URI using the GET method. When received in response to a POST (or PUT/DELETE), the client should presume that the server has received the data and should issue a new GET request to the given URI.  */
 export type SeeOther = 303;
 
 /** Indicates that the resource has not been modified since the version specified by the request headers If-Modified-Since or If-None-Match. In such case, there is no need to retransmit the resource since the client still has a previously-downloaded copy. */
-export type NotModified = 304
+export type NotModified = 304;
 
 /** The requested resource is available only through a proxy, the address for which is provided in the response. For security reasons, many HTTP clients (such as Mozilla Firefox and Internet Explorer) do not obey this status code. */
 export type UseProxy = 305;
@@ -82,7 +140,7 @@ export type SwitchProxy = 306;
 export type TemporaryRedirect = 307;
 
 /** The request and all future requests should be repeated using another URI. 307 and 308 parallel the behaviors of 302 and 301, but do not allow the HTTP method to change. So, for example, submitting a form to a permanently redirected resource may continue smoothly. */
-export type PermanentRedirect = 308
+export type PermanentRedirect = 308;
 
 /* === 4xx Client errors === */
 
@@ -168,13 +226,11 @@ export type PreconditionRequired = 428;
 /** The user has sent too many requests in a given amount of time. Intended for use with rate-limiting schemes.  */
 export type TooManyRequests = 429;
 
-
 /** The server is unwilling to process the request because either an individual header field, or all the header fields collectively, are too large.  */
 export type RequestHeaderFieldsTooLarge = 431;
 
 /** A server operator has received a legal demand to deny access to a resource or to a set of resources that includes the requested resource.[60] The code 451 was chosen as a reference to the novel Fahrenheit 451 (see the Acknowledgements in the RFC).  */
 export type UnavailableForLegalReasons = 451;
-
 
 /* === 5XX Server Errors === */
 

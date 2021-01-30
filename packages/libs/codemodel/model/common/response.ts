@@ -1,11 +1,9 @@
-import { Metadata } from './metadata';
-import { Schema } from './schema';
-import { Initializer, DeepPartial } from '@azure-tools/codegen';
+import { Metadata } from "./metadata";
+import { Schema } from "./schema";
+import { Initializer, DeepPartial } from "@azure-tools/codegen";
 
 /** a response from a service.  */
-export interface Response extends Metadata {
-
-}
+export interface Response extends Metadata {}
 
 export class Response extends Metadata implements Response {
   constructor(objectInitializer?: DeepPartial<Response>) {

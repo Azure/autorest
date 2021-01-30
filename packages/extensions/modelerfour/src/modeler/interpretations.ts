@@ -306,10 +306,9 @@ export class Interpretations {
 
     // synthesize from tags.
     if (original.tags && length(original.tags) > 0) {
-      const newOperationId = length(original.tags) === 1 
-        ? `${original.tags[0]}`
-        : `${original.tags[0]}_${original.tags[1]}`;
-      
+      const newOperationId =
+        length(original.tags) === 1 ? `${original.tags[0]}` : `${original.tags[0]}_${original.tags[1]}`;
+
       this.session.warning(
         `Generating 'operationId' to '${newOperationId}' for '${httpMethod}' operation on path '${path}' `,
         ["Interpretations"],

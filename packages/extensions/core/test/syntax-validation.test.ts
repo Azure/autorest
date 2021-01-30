@@ -13,27 +13,27 @@ import { AutoRest } from "../lib/autorest-core";
 import { parse } from "../lib/parsing/literate-yaml";
 import { ConfigurationLoader } from "../lib/configuration";
 
-const getLoaderErrors = async (swagger: string): Promise<Array<Message>> =>  {
-    const dataStore = new DataStore(CancellationToken.None);
-    const uri = "mem:///swagger.json";
-    const h = await dataStore.WriteData(uri, swagger, "input-file", [uri]);
+const getLoaderErrors = async (swagger: string): Promise<Array<Message>> => {
+  const dataStore = new DataStore(CancellationToken.None);
+  const uri = "mem:///swagger.json";
+  const h = await dataStore.WriteData(uri, swagger, "input-file", [uri]);
 
-    const autoRest = new AutoRest();
-    const messages: Array<Message> = [];
+  const autoRest = new AutoRest();
+  const messages: Array<Message> = [];
 
-    autoRest.Message.Subscribe((_, m) => {
-      if (m.Channel == Channel.Error) {
-        messages.push(m);
-      }
-    });
-    try {
-      await parse(await autoRest.view, h, dataStore.getDataSink());
-    } catch (e) {
-      // it'll also throw, but detailed messages are emitted first
+  autoRest.Message.Subscribe((_, m) => {
+    if (m.Channel == Channel.Error) {
+      messages.push(m);
     }
+  });
+  try {
+    await parse(await autoRest.view, h, dataStore.getDataSink());
+  } catch (e) {
+    // it'll also throw, but detailed messages are emitted first
+  }
 
-    return messages;
-  };
+  return messages;
+};
 
 describe("SyntaxValidation", () => {
   afterAll(async () => {

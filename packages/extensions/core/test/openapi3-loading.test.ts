@@ -73,9 +73,7 @@ describe("OpenAPI3Loading", () => {
       ResolveUri(CreateFolderUri(AppRoot), "test/resources/openapi3-loading/non-oa3-file2.yaml"),
     ];
 
-    const openAPIFileUris = [
-      ResolveUri(CreateFolderUri(AppRoot), "test/resources/openapi3-loading/oa3-file2.yaml"),
-    ];
+    const openAPIFileUris = [ResolveUri(CreateFolderUri(AppRoot), "test/resources/openapi3-loading/oa3-file2.yaml")];
 
     const inputFilesUris = [...openAPIFileUris, ...nonOpenAPIFileUris];
 

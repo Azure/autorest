@@ -1,110 +1,91 @@
-declare type CollectionFormat =
-  'none' |
-  'csv' |
-  'ssv' |
-  'tsv' |
-  'pipes' |
-  'multi';
+declare type CollectionFormat = "none" | "csv" | "ssv" | "tsv" | "pipes" | "multi";
 
 declare type Constraint =
-  'None' |
-  'InclusiveMaximum' |
-  'ExclusiveMaximum' |
-  'InclusiveMinimum' |
-  'ExclusiveMinimum' |
-  'MaxLength' |
-  'MinLength' |
-  'Pattern' |
-  'MaxItems' |
-  'MinItems' |
-  'UniqueItems' |
-  'MultipleOf';
+  | "None"
+  | "InclusiveMaximum"
+  | "ExclusiveMaximum"
+  | "InclusiveMinimum"
+  | "ExclusiveMinimum"
+  | "MaxLength"
+  | "MinLength"
+  | "Pattern"
+  | "MaxItems"
+  | "MinItems"
+  | "UniqueItems"
+  | "MultipleOf";
 
-declare type HttpMethod =
-  'get' |
-  'post' |
-  'put' |
-  'patch' |
-  'delete' |
-  'head' |
-  'options';
+declare type HttpMethod = "get" | "post" | "put" | "patch" | "delete" | "head" | "options";
 
 declare type HttpStatusCode =
-  'Continue' |
-  'SwitchingProtocols' |
-  'OK' |
-  'Created' |
-  'Accepted' |
-  'NonAuthoritativeInformation' |
-  'NoContent' |
-  'ResetContent' |
-  'PartialContent' |
-  'Ambiguous' |
-  'MultipleChoices' |
-  'Moved' |
-  'MovedPermanently' |
-  'Found' |
-  'Redirect' |
-  'RedirectMethod' |
-  'SeeOther' |
-  'NotModified' |
-  'UseProxy' |
-  'Unused' |
-  'RedirectKeepVerb' |
-  'TemporaryRedirect' |
-  'BadRequest' |
-  'Unauthorized' |
-  'PaymentRequired' |
-  'Forbidden' |
-  'NotFound' |
-  'MethodNotAllowed' |
-  'NotAcceptable' |
-  'ProxyAuthenticationRequired' |
-  'RequestTimeout' |
-  'Conflict' |
-  'Gone' |
-  'LengthRequired' |
-  'PreconditionFailed' |
-  'RequestEntityTooLarge' |
-  'RequestUriTooLong' |
-  'UnsupportedMediaType' |
-  'RequestedRangeNotSatisfiable' |
-  'ExpectationFailed' |
-  'UpgradeRequired' |
-  'InternalServerError' |
-  'NotImplemented' |
-  'BadGateway' |
-  'ServiceUnavailable' |
-  'GatewayTimeout' |
-  'HttpVersionNotSupported';
+  | "Continue"
+  | "SwitchingProtocols"
+  | "OK"
+  | "Created"
+  | "Accepted"
+  | "NonAuthoritativeInformation"
+  | "NoContent"
+  | "ResetContent"
+  | "PartialContent"
+  | "Ambiguous"
+  | "MultipleChoices"
+  | "Moved"
+  | "MovedPermanently"
+  | "Found"
+  | "Redirect"
+  | "RedirectMethod"
+  | "SeeOther"
+  | "NotModified"
+  | "UseProxy"
+  | "Unused"
+  | "RedirectKeepVerb"
+  | "TemporaryRedirect"
+  | "BadRequest"
+  | "Unauthorized"
+  | "PaymentRequired"
+  | "Forbidden"
+  | "NotFound"
+  | "MethodNotAllowed"
+  | "NotAcceptable"
+  | "ProxyAuthenticationRequired"
+  | "RequestTimeout"
+  | "Conflict"
+  | "Gone"
+  | "LengthRequired"
+  | "PreconditionFailed"
+  | "RequestEntityTooLarge"
+  | "RequestUriTooLong"
+  | "UnsupportedMediaType"
+  | "RequestedRangeNotSatisfiable"
+  | "ExpectationFailed"
+  | "UpgradeRequired"
+  | "InternalServerError"
+  | "NotImplemented"
+  | "BadGateway"
+  | "ServiceUnavailable"
+  | "GatewayTimeout"
+  | "HttpVersionNotSupported";
 
 declare type KnownPrimaryType =
-  'none' |
-  'object' |
-  'int' |
-  'long' |
-  'double' |
-  'decimal' |
-  'string' |
-  'stream' |
-  'byteArray' |
-  'date' |
-  'dateTime' |
-  'dateTimeRfc1123' |
-  'timeSpan' |
-  'boolean' |
-  'credentials' |
-  'uuid' |
-  'base64Url' |
-  'unixTime';
+  | "none"
+  | "object"
+  | "int"
+  | "long"
+  | "double"
+  | "decimal"
+  | "string"
+  | "stream"
+  | "byteArray"
+  | "date"
+  | "dateTime"
+  | "dateTimeRfc1123"
+  | "timeSpan"
+  | "boolean"
+  | "credentials"
+  | "uuid"
+  | "base64Url"
+  | "unixTime";
 
-declare type ParameterLocation =
-  'none' |
-  'path' |
-  'query' |
-  'header' |
-  'body' |
-  'formData';
+declare type ParameterLocation = "none" | "path" | "query" | "header" | "body" | "formData";
 
 declare interface WithExtensions {
   extensions: { [key: string]: any };
@@ -157,7 +138,7 @@ declare interface Method extends WithExtensions {
   isAbsoluteUrl: boolean;
   httpMethod: HttpMethod;
   inputParameterTransformation?: Array<ParameterTransformation>;
-  responses: {[statusCode in HttpStatusCode]: Response };
+  responses: { [statusCode in HttpStatusCode]: Response };
   defaultResponse: Response;
   returnType: Response;
   description?: string;
@@ -184,7 +165,7 @@ declare interface ParameterMapping {
 
 declare interface IVariable extends WithExtensions {
   collectionFormat: CollectionFormat;
-  constraints?: {[constraint in Constraint]: string };
+  constraints?: { [constraint in Constraint]: string };
   defaultValue: FixableString;
   documentation?: string;
   isRequired: boolean;
@@ -216,7 +197,7 @@ declare interface IModelType {
 }
 
 declare interface EnumType extends IModelType {
-  $type: 'EnumType';
+  $type: "EnumType";
   values: EnumValue;
   modelAsExtensible: boolean;
   modelAsString: boolean;
@@ -230,13 +211,13 @@ declare interface EnumValue {
 }
 
 declare interface PrimaryType extends IModelType {
-  $type: 'PrimaryType';
+  $type: "PrimaryType";
   format?: string;
   knownPrimaryType: KnownPrimaryType;
 }
 
 declare interface CompositeType extends IModelType {
-  $type: 'CompositeType';
+  $type: "CompositeType";
   serializedName: string;
   baseModelType?: CompositeType;
   polymorphicDiscriminator?: string;
@@ -249,20 +230,15 @@ declare interface CompositeType extends IModelType {
 }
 
 declare interface DictionaryType extends IModelType {
-  $type: 'DictionaryType';
+  $type: "DictionaryType";
   valueType: ModelType;
   supportsAdditionalProperties: boolean;
 }
 
 declare interface SequenceType extends IModelType {
-  $type: 'SequenceType';
+  $type: "SequenceType";
   elementType: ModelType;
   elementXmlProperties?: XmlProperties;
 }
 
-type ModelType =
-  CompositeType |
-  DictionaryType |
-  EnumType |
-  PrimaryType |
-  SequenceType;
+type ModelType = CompositeType | DictionaryType | EnumType | PrimaryType | SequenceType;

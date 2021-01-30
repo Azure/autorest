@@ -1,4 +1,4 @@
-import { uri } from './uri';
+import { uri } from "./uri";
 
 /** example data [UNFINISHED] */
 export interface Example {

@@ -27,41 +27,43 @@
  * @param secondary secondary object - members from this will be used if primary does not have a member
  */
 export function intersect<T extends object, T2 extends object>(primary: T, secondary: T2): T & T2 {
-  return <T & T2><any>new Proxy({ primary, secondary }, {
-    // member get proxy handler
-    get(target, property, receiver) {
+  return <T & T2>(<any>new Proxy(
+    { primary, secondary },
+    {
+      // member get proxy handler
+      get(target, property, receiver) {
+        // check for properties on the objects first
+        const propertyName = property.toString();
+        if (Object.getOwnPropertyNames(target.primary).indexOf(propertyName) > -1) {
+          return (<any>target.primary)[property];
+        }
+        if (Object.getOwnPropertyNames(target.secondary).indexOf(propertyName) > -1) {
+          return (<any>target.secondary)[property];
+        }
 
-      // check for properties on the objects first
-      const propertyName = property.toString();
-      if (Object.getOwnPropertyNames(target.primary).indexOf(propertyName) > -1) {
-        return (<any>target.primary)[property];
-      }
-      if (Object.getOwnPropertyNames(target.secondary).indexOf(propertyName) > -1) {
-        return (<any>target.secondary)[property];
-      }
+        // try binding member function
+        if (typeof (<any>target.primary)[property] === "function") {
+          return (<any>target.primary)[property].bind(primary);
+        }
+        if (typeof (<any>target.secondary)[property] === "function") {
+          return (<any>target.secondary)[property].bind(secondary);
+        }
 
-      // try binding member function
-      if (typeof ((<any>target.primary)[property]) === 'function') {
-        return (<any>target.primary)[property].bind(primary);
-      }
-      if (typeof ((<any>target.secondary)[property]) === 'function') {
-        return (<any>target.secondary)[property].bind(secondary);
-      }
+        return (<any>target.primary)[property] || (<any>target.secondary)[property];
+      },
 
-      return (<any>target.primary)[property] || (<any>target.secondary)[property];
+      // member set proxy handler
+      set(target, property, value) {
+        const propertyName = property.toString();
+
+        if (Object.getOwnPropertyNames(target.primary).indexOf(propertyName) > -1) {
+          return ((<any>target.primary)[property] = value);
+        }
+        if (Object.getOwnPropertyNames(target.secondary).indexOf(propertyName) > -1) {
+          return ((<any>target.secondary)[property] = value);
+        }
+        return undefined;
+      },
     },
-
-    // member set proxy handler
-    set(target, property, value) {
-      const propertyName = property.toString();
-
-      if (Object.getOwnPropertyNames(target.primary).indexOf(propertyName) > -1) {
-        return (<any>target.primary)[property] = value;
-      }
-      if (Object.getOwnPropertyNames(target.secondary).indexOf(propertyName) > -1) {
-        return (<any>target.secondary)[property] = value;
-      }
-      return undefined;
-    }
-  });
+  ));
 }

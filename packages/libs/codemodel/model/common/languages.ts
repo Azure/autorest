@@ -1,4 +1,4 @@
-import { Language, CSharpLanguage } from './metadata';
+import { Language, CSharpLanguage } from "./metadata";
 
 /** custom extensible metadata for individual language generators */
 export interface Languages {
@@ -18,7 +18,4 @@ export interface Languages {
   sputnik?: Language;
 }
 
-
-export class Languages implements Languages {
-
-}
+export class Languages implements Languages {}

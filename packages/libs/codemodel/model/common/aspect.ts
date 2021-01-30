@@ -1,8 +1,8 @@
-import { ApiVersions } from './api-version';
-import { Deprecation } from './deprecation';
-import { ExternalDocumentation } from './external-documentation';
-import { Metadata } from './metadata';
-import { Initializer, DeepPartial } from '@azure-tools/codegen';
+import { ApiVersions } from "./api-version";
+import { Deprecation } from "./deprecation";
+import { ExternalDocumentation } from "./external-documentation";
+import { Metadata } from "./metadata";
+import { Initializer, DeepPartial } from "@azure-tools/codegen";
 
 const count = 0;
 
@@ -37,16 +37,18 @@ export class Aspect extends Metadata implements Aspect {
   constructor($key: string, description: string, initializer?: DeepPartial<Aspect>) {
     super();
 
-    this.apply({
-      language: {
-        default: {
-          name: $key,
-          description,
-          //          uid: count++
-        }
+    this.apply(
+      {
+        language: {
+          default: {
+            name: $key,
+            description,
+            //          uid: count++
+          },
+        },
+        protocol: {},
       },
-      protocol: {
-      }
-    }, initializer);
+      initializer,
+    );
   }
 }

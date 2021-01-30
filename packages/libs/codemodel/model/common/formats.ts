@@ -1,5 +1,5 @@
-import { XmlSerlializationFormat } from './formats/xml';
-import { SerializationFormat } from './schema';
+import { XmlSerlializationFormat } from "./formats/xml";
+import { SerializationFormat } from "./schema";
 
 /** custom extensible metadata for individual serialization formats */
 export interface SerializationFormats {

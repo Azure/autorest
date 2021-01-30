@@ -13,7 +13,6 @@ export interface Directive {
   test?: Array<string> | string;
 }
 
-
 export class ResolvedDirective extends Initializer {
   from: Array<string>;
   where: Array<string>;

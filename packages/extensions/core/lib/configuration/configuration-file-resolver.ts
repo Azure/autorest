@@ -1,8 +1,5 @@
 import { IFileSystem, ParseToAst } from "@azure-tools/datastore";
-import {
-  EnsureIsFolderUri,
-  ResolveUri,
-} from "@azure-tools/uri";
+import { EnsureIsFolderUri, ResolveUri } from "@azure-tools/uri";
 import { From } from "linq-es2015";
 import * as Constants from "../constants";
 import { Channel } from "../message";
@@ -12,7 +9,7 @@ import { MessageEmitter } from "./message-emitter";
  * Get the path to the configuration file.
  * @param fileSystem Filesystem.
  * @param configFileOrFolderUri Uri/folder to check
- * @param messageEmitter 
+ * @param messageEmitter
  * @param walkUpFolders If it should try to check parent folder recursively.
  */
 export const detectConfigurationFile = async (
@@ -36,7 +33,7 @@ export const detectConfigurationFile = async (
  * Get the paths to all the configuration files.
  * @param fileSystem Filesystem.
  * @param configFileOrFolderUri Uri/folder to check
- * @param messageEmitter 
+ * @param messageEmitter
  * @param walkUpFolders If it should try to check parent folder recursively.
  */
 export const detectConfigurationFiles = async (

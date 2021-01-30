@@ -101,15 +101,14 @@ async function main() {
     }
 
     let requestedVersion: string = getRequestedCoreVersion(args);
-    
+
     // check to see if local installed core is available.
     let localVersion = resolvePathForLocalVersion(args.version ? requestedVersion : null);
-    
+
     if (!args.version && localVersion) {
-      
       // they never specified a version on the cmdline, but we might have one in configuration
       const cfgVersion = (await configurationSpecifiedVersion(args, localVersion))?.version;
-      
+
       // if we got one back, we're going to set the requestedVersion to whatever they asked for.
       if (cfgVersion) {
         args.version = requestedVersion = cfgVersion;
@@ -118,7 +117,7 @@ async function main() {
         localVersion = undefined;
       }
     }
-    
+
     // if this is still valid, then we're not overriding it from configuration.
     if (localVersion) {
       process.chdir(cwd);

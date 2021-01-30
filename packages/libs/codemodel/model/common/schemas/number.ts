@@ -1,8 +1,8 @@
-import { SchemaType } from '../schema-type';
-import { Schema, ValueSchema, PrimitiveSchema } from '../schema';
-import { Languages } from '../languages';
-import { Extensions } from '../extensions';
-import { Initializer, DeepPartial } from '@azure-tools/codegen';
+import { SchemaType } from "../schema-type";
+import { Schema, ValueSchema, PrimitiveSchema } from "../schema";
+import { Languages } from "../languages";
+import { Extensions } from "../extensions";
+import { Initializer, DeepPartial } from "@azure-tools/codegen";
 
 /** returns true if the given schema is a NumberSchema */
 export function isNumberSchema(schema: Schema): schema is NumberSchema {
@@ -11,7 +11,6 @@ export function isNumberSchema(schema: Schema): schema is NumberSchema {
 
 /** a Schema that represents a Number value */
 export interface NumberSchema extends PrimitiveSchema {
-
   /** the schema type  */
   type: SchemaType.Number | SchemaType.Integer;
 
@@ -35,7 +34,13 @@ export interface NumberSchema extends PrimitiveSchema {
 }
 
 export class NumberSchema extends PrimitiveSchema implements NumberSchema {
-  constructor(name: string, description: string, type: SchemaType.Number | SchemaType.Integer, precision: number, objectInitializer?: DeepPartial<NumberSchema>) {
+  constructor(
+    name: string,
+    description: string,
+    type: SchemaType.Number | SchemaType.Integer,
+    precision: number,
+    objectInitializer?: DeepPartial<NumberSchema>,
+  ) {
     super(name, description, type);
     this.apply({ precision }, objectInitializer);
   }

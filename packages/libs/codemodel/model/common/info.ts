@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Extensions } from './extensions';
-import { uri } from './uri';
-import { ExternalDocumentation } from './external-documentation';
-import { Initializer, DeepPartial } from '@azure-tools/codegen';
+import { Extensions } from "./extensions";
+import { uri } from "./uri";
+import { ExternalDocumentation } from "./external-documentation";
+import { Initializer, DeepPartial } from "@azure-tools/codegen";
 
 export type email = string;
 
@@ -17,17 +17,14 @@ export interface Contact extends Extensions {
   email?: email; // email
 }
 
-
 /** license information  */
 export interface License extends Extensions {
-
   /** the nameof the license */
   name: string;
 
   /** an uri pointing to the full license text */
   url?: uri; // uriref
 }
-
 
 /** code model information */
 export interface Info extends Extensions {
@@ -49,7 +46,6 @@ export interface Info extends Extensions {
   /** External Documentation  */
   externalDocs?: ExternalDocumentation;
 }
-
 
 export class Contact extends Initializer implements Contact {
   constructor(initializer?: DeepPartial<Contact>) {

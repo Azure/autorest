@@ -1,15 +1,12 @@
-import { Aspect } from './aspect';
-import { SerializationFormats } from './formats';
-import { AllSchemaTypes, SchemaType } from './schema-type';
-import { DeepPartial, } from '@azure-tools/codegen';
-import { Dictionary } from '@azure-tools/linq';
-import { Extensions } from './extensions';
-import { Languages } from './languages';
+import { Aspect } from "./aspect";
+import { SerializationFormats } from "./formats";
+import { AllSchemaTypes, SchemaType } from "./schema-type";
+import { DeepPartial } from "@azure-tools/codegen";
+import { Dictionary } from "@azure-tools/linq";
+import { Extensions } from "./extensions";
+import { Languages } from "./languages";
 
-export interface SerializationFormat extends Extensions, Dictionary<any> {
-
-}
-
+export interface SerializationFormat extends Extensions, Dictionary<any> {}
 
 /** The Schema Object allows the definition of input and output data types. */
 export interface Schema extends Aspect {
@@ -37,7 +34,6 @@ export interface Schema extends Aspect {
   // writeOnly: boolean;
 }
 
-
 export class Schema extends Aspect implements Schema {
   type: AllSchemaTypes;
 
@@ -45,36 +41,36 @@ export class Schema extends Aspect implements Schema {
     super(schemaName, description);
     this.type = type;
 
-    this.apply({
-      language: {
-        default: {
-        }
+    this.apply(
+      {
+        language: {
+          default: {},
+        },
+        protocol: {},
       },
-      protocol: {
-      }
-    }, initializer);
+      initializer,
+    );
   }
 }
 
 /** schema types that are non-object or complex types */
-export interface ValueSchema extends Schema {
-
-}
+export interface ValueSchema extends Schema {}
 
 /** Schema types that are primitive language values */
-export interface PrimitiveSchema extends ValueSchema {
-
-}
+export interface PrimitiveSchema extends ValueSchema {}
 
 export class PrimitiveSchema extends Schema implements PrimitiveSchema {
-  constructor(name: string, description: string, schemaType: AllSchemaTypes, objectInitializer?: DeepPartial<PrimitiveSchema>) {
-    super(name.indexOf('·') > -1 ? schemaType : name, description, schemaType);
+  constructor(
+    name: string,
+    description: string,
+    schemaType: AllSchemaTypes,
+    objectInitializer?: DeepPartial<PrimitiveSchema>,
+  ) {
+    super(name.indexOf("·") > -1 ? schemaType : name, description, schemaType);
 
     this.apply(objectInitializer);
   }
 }
 
 /** schema types that can be objects */
-export interface ComplexSchema extends Schema {
-
-}
+export interface ComplexSchema extends Schema {}
