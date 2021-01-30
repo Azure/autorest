@@ -1,6 +1,6 @@
-import { SerializationStyle } from "./SerializationStyle";
-import { HttpMethod } from "./HttpMethod";
-import { ParameterLocation } from "./ParameterLocation";
+import { SerializationStyle } from "./serialization-style";
+import { HttpMethod } from "./http-method";
+import { ParameterLocation } from "./parameter-location";
 import { Protocol } from "../common/metadata";
 import { StatusCode } from "./status-code";
 import { SecurityRequirement } from "./security";

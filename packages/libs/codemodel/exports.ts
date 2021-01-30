@@ -22,10 +22,10 @@ export * from "./model/common/uri";
 export * from "./model/common/value";
 export * from "./model/common/formats/xml";
 export * from "./model/http/http";
-export * from "./model/http/HttpMethod";
-export * from "./model/http/ParameterLocation";
+export * from "./model/http/http-method";
+export * from "./model/http/parameter-location";
 export * from "./model/http/security";
-export * from "./model/http/SerializationStyle";
+export * from "./model/http/serialization-style";
 
 export * from "./model/http/status-code";
 export * from "./model/yaml-schema";

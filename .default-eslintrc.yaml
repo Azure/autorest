@@ -3,12 +3,16 @@ parser: "@typescript-eslint/parser"
 plugins:
   - "@typescript-eslint"
   - prettier
+  - unicorn
+
 env:
   es6: true
   node: true
+  
 extends:
   - eslint:recommended
   - plugin:@typescript-eslint/recommended
+
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
@@ -41,13 +45,13 @@ rules:
   arrow-body-style: "off"
   prefer-arrow-callback: "off"
 
+  # Unicorn plugin config 
+  unicorn/filename-case: warn
+
+  # Basic config
   no-console: warn
-  
   no-undef: "off"
   no-unused-vars: "off"
-  semi:
-    - warn
-    - always
   no-multiple-empty-lines:
     - warn
     - max: 2

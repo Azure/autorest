@@ -4,7 +4,6 @@ extends:
 
 plugins:
   - import
-  - unicorn
 
 rules:
   no-console: warn
@@ -20,4 +19,3 @@ rules:
       alphabetize:
         order: "asc"
         caseInsensitive: true
-  unicorn/filename-case: warn

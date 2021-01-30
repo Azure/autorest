@@ -7,7 +7,7 @@ import { Dictionary } from "@azure-tools/linq";
 import { Initializer, DeepPartial } from "@azure-tools/codegen";
 import { Extensions } from "../common/extensions";
 import { uri } from "../common/uri";
-import { ParameterLocation } from "./ParameterLocation";
+import { ParameterLocation } from "./parameter-location";
 
 export enum Scheme {
   Bearer = "bearer",
