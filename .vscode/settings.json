@@ -1,16 +1,16 @@
 {
   "typescript.tsdk": "./common/temp/node_modules/typescript/lib",
+  "search.exclude": {
+    "**/dist/**": true,
+  },
   "files.exclude": {
     "**/node_modules/**": true,
-    "**/dist/**": true,
     "**/.git": true,
     "**/.svn": true,
     "**/.hg": true,
     "**/*.log": true,
     "**/package-deps.json": true,
     "**/.DS_Store": true,
-    "core/*.js": false,
-    "autorest/*.js": false,
   },
   "editor.formatOnSave": true,
   "[javascript]": {
