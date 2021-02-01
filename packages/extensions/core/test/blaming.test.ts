@@ -1,14 +1,14 @@
 import { EnhancedPosition } from "@azure-tools/datastore";
-import { Artifact } from "../lib/artifact";
-import { Channel, Message, SourceLocation } from "../lib/message";
-import { AutoRest } from "../lib/autorest-core";
+import { Artifact } from "../src/lib/artifact";
+import { Channel, Message, SourceLocation } from "../src/lib/message";
+import { AutoRest } from "../src/lib/autorest-core";
 import { RealFileSystem } from "@azure-tools/datastore";
 import * as assert from "assert";
 
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
 import { parse } from "@azure-tools/datastore";
-import { ConfigurationLoader } from "../lib/configuration";
-import { AppRoot } from "../lib/constants";
+import { ConfigurationLoader } from "../src/lib/configuration";
+import { AppRoot } from "../src/lib/constants";
 
 describe("Blaming", () => {
   afterEach(async () => {

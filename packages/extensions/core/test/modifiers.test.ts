@@ -7,7 +7,7 @@ import * as assert from "assert";
 import { AutoRest } from "../src/exports";
 import { RealFileSystem } from "@azure-tools/datastore";
 import { join } from "path";
-import { AppRoot } from "../lib/constants";
+import { AppRoot } from "../src/lib/constants";
 
 const generate = async (additionalConfig: any): Promise<{ [uri: string]: string }> => {
   const autoRest = new AutoRest(new RealFileSystem());

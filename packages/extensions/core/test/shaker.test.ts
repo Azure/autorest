@@ -6,7 +6,7 @@
 import * as aio from "@azure-tools/async-io";
 import * as datastore from "@azure-tools/datastore";
 import * as assert from "assert";
-import { OAI3Shaker } from "../lib/pipeline/plugins/tree-shaker";
+import { OAI3Shaker } from "../src/lib/pipeline/plugins/tree-shaker";
 
 try {
   require("source-map-support").install();

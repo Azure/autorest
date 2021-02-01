@@ -7,11 +7,11 @@
 import * as assert from "assert";
 import { CancellationToken } from "vscode-jsonrpc";
 import { DataStore } from "@azure-tools/datastore";
-import { Message, Channel } from "../lib/message";
-import { AutoRest } from "../lib/autorest-core";
+import { Message, Channel } from "../src/lib/message";
+import { AutoRest } from "../src/lib/autorest-core";
 
-import { parse } from "../lib/parsing/literate-yaml";
-import { ConfigurationLoader } from "../lib/configuration";
+import { parse } from "../src/lib/parsing/literate-yaml";
+import { ConfigurationLoader } from "../src/lib/configuration";
 
 const getLoaderErrors = async (swagger: string): Promise<Array<Message>> => {
   const dataStore = new DataStore(CancellationToken.None);

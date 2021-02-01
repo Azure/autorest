@@ -5,7 +5,7 @@
 import * as assert from "assert";
 
 import { matches } from "@azure-tools/datastore";
-import { MergeOverwriteOrAppend } from "../lib/source-map/merging";
+import { MergeOverwriteOrAppend } from "../src/lib/source-map/merging";
 
 describe("Merging", () => {
   it("MergeOverwriteOrAppend", () => {

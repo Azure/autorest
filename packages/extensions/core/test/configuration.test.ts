@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import { MemoryFileSystem } from "@azure-tools/datastore";
-import * as AutoRest from "../lib/autorest-core";
+import * as AutoRest from "../src/lib/autorest-core";
 
 describe("Configuration", () => {
   it("Test config", async () => {
