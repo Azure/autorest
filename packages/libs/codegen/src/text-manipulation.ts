@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Text, TextPossibilities } from "./src/file-generator";
+import { Text, TextPossibilities } from "./file-generator";
 import { Dictionary, values } from "@azure-tools/linq";
 
 let indentation = "    ";
