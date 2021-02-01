@@ -17,7 +17,7 @@ import {
   SealedChoiceSchema,
   PrimitiveSchema,
 } from "@autorest/codemodel";
-import { Session } from "@azure-tools/autorest-extension-base";
+import { Session } from "@autorest/extension-base";
 import { values, length, Dictionary, items } from "@azure-tools/linq";
 import { selectName, Style, Styler } from "@azure-tools/codegen";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";

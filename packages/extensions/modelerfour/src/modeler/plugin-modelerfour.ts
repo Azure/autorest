@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { deserialize, serialize } from "@azure-tools/codegen";
-import { Host, startSession } from "@azure-tools/autorest-extension-base";
+import { Host, startSession } from "@autorest/extension-base";
 import * as OpenAPI from "@azure-tools/openapi";
 import { ModelerFour } from "./modelerfour";
 import { codeModelSchema, CodeModel } from "@autorest/codemodel";

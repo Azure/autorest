@@ -1,5 +1,5 @@
 import { CodeModel } from "@autorest/codemodel";
-import { Session } from "@azure-tools/autorest-extension-base";
+import { Session } from "@autorest/extension-base";
 
 export class Example {
   codeModel: CodeModel;

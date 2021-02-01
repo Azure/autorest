@@ -1,4 +1,4 @@
-import { Session } from "@azure-tools/autorest-extension-base";
+import { Session } from "@autorest/extension-base";
 import { values, items, length, Dictionary, refCount, clone, keys } from "@azure-tools/linq";
 import {
   Model as oai3,
@@ -12,7 +12,7 @@ import {
 } from "@azure-tools/openapi";
 
 import { serialize } from "@azure-tools/codegen";
-import { Host, startSession } from "@azure-tools/autorest-extension-base";
+import { Host, startSession } from "@autorest/extension-base";
 import { Interpretations } from "../modeler/interpretations";
 
 import { getDiff } from "recursive-diff";
