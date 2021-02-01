@@ -11,7 +11,7 @@ import {
 import { ConfigurationView } from "../../configuration";
 import { PipelinePlugin } from "../common";
 import { Dictionary, items } from "@azure-tools/linq";
-import * as compareVersions from "compare-versions";
+import compareVersions from "compare-versions";
 import { toSemver, maximum, camelCase, pascalCase } from "@azure-tools/codegen";
 
 export class EnumDeduplicator extends TransformerViaPointer {

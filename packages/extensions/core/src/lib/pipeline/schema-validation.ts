@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { DataHandle, parseJsonPointer } from "@azure-tools/datastore";
-import * as SchemaValidator from "z-schema";
+import SchemaValidator from "z-schema";
 import { OperationAbortedException } from "../exception";
 import { Channel } from "../message";
 import { createPerFilePlugin, PipelinePlugin } from "./common";

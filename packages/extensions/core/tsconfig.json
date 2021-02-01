@@ -1,22 +1,9 @@
 {
+  "extends": "../../../tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "alwaysStrict": true,
-    "forceConsistentCasingInFileNames": false,
-    "module": "commonjs",
-    "noEmitOnError": true,
     "noImplicitAny": false,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "sourceMap": true,
-    "strict": true,
-    "declaration": true,
-    "stripInternal": true,
-    "target": "es2018",
     "types": ["node", "jest"],
-    "lib": ["es2018"],
-    "experimentalDecorators": true,
-    "newLine": "LF"
   },
   "include": ["src/**/*.ts", "test/**/*.ts"],
 }
