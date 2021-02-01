@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": ".",
     "alwaysStrict": true,
     "forceConsistentCasingInFileNames": false,
     "module": "commonjs",
@@ -19,5 +18,5 @@
     "experimentalDecorators": true,
     "newLine": "LF"
   },
-  "exclude": ["node_modules", "static_modules", "dist", "**/*.d.ts"]
+  "include": ["src/**/*.ts", "test/**/*.ts"],
 }

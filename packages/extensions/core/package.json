@@ -29,8 +29,8 @@
   "scripts": {
     "test": "jest --coverage=false --forceExit --runInBand",
     "test:ci": "jest --ci --forceExit --runInBand",
-    "watch": "tsc -p . --watch",
-    "build": "npm run before-build && tsc -p .",
+    "watch": "tsc -p ./tsconfig.build.json --watch",
+    "build": "npm run before-build && tsc -p ./tsconfig.build.json",
     "static-link": "static-link --no-node-modules --debug",
     "lint:fix": "eslint  . --fix --ext .ts",
     "lint": "eslint  . --ext .ts --max-warnings=0",

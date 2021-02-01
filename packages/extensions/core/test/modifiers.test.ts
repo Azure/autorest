@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 import * as assert from "assert";
 
-import { AutoRest } from "../exports";
+import { AutoRest } from "../src/exports";
 import { RealFileSystem } from "@azure-tools/datastore";
 import { join } from "path";
 import { AppRoot } from "../lib/constants";
