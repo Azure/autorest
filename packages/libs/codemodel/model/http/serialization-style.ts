@@ -13,14 +13,14 @@ export enum SerializationStyle {
    * @type primitive, array, object
    * @in path
    */
-  Matrix = 'matrix',
+  Matrix = "matrix",
   /**
    * Label style parameters defined by RFC6570
    *
    * @type primitive, array, object
    * @in path
    */
-  Label = 'label',
+  Label = "label",
   /**
    * Simple style parameters defined by RFC6570. This option replaces collectionFormat with a csv value from OpenAPI 2.0.
    *
@@ -28,7 +28,7 @@ export enum SerializationStyle {
    * @type array
    * @in path, header
    */
-  Simple = 'simple',
+  Simple = "simple",
   /**
    * Form style parameters defined by RFC6570. This option replaces collectionFormat with a csv (when explode is false) or multi (when explode is true) value from OpenAPI 2.0.
    *
@@ -36,28 +36,28 @@ export enum SerializationStyle {
    * @type primitive, array, object
    * @in query, cookie, body
    */
-  Form = 'form',
+  Form = "form",
   /**
    * Space separated array values. This option replaces collectionFormat equal to ssv from OpenAPI 2.0.
    *
    * @type array
    * @in query
    */
-  SpaceDelimited = 'spaceDelimited',
+  SpaceDelimited = "spaceDelimited",
   /**
    * Pipe separated array values. This option replaces collectionFormat equal to pipes from OpenAPI 2.0.
    *
    * @type array
    * @in query
    */
-  PipeDelimited = 'pipeDelimited',
+  PipeDelimited = "pipeDelimited",
   /**
    * Provides a simple way of rendering nested objects using form parameters.
    *
    * @type object
    * @in query
    */
-  DeepObject = 'deepObject',
+  DeepObject = "deepObject",
   /**
    * Serialize to JSON text
    *
@@ -65,33 +65,32 @@ export enum SerializationStyle {
    * @type primitive, array, object
    * @in body
    */
-  Json = 'json',
+  Json = "json",
   /**
    * Serialize to XML text
    *
    * @type primitive, array, object
    * @in body
    */
-  Xml = 'xml',
+  Xml = "xml",
 
   /**
    * The content is a binary (stream)
    * @type binary
    * @in body
    */
-  Binary = 'binary',
+  Binary = "binary",
 
   /**
    * Tab delimited array
    */
-  TabDelimited = 'tabDelimited'
+  TabDelimited = "tabDelimited",
 }
 
 export type QueryEncodingStyle =
-  SerializationStyle.Form
+  | SerializationStyle.Form
   | SerializationStyle.SpaceDelimited
   | SerializationStyle.PipeDelimited
   | SerializationStyle.DeepObject;
 
 export type PathEncodingStyle = SerializationStyle.Matrix | SerializationStyle.Label | SerializationStyle.Simple;
-

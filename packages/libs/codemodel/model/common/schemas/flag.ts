@@ -1,9 +1,8 @@
-import { SchemaType } from '../schema-type';
-import { Schema, ValueSchema } from '../schema';
-import { Languages } from '../languages';
-import { Extensions } from '../extensions';
-import { Initializer, DeepPartial } from '@azure-tools/codegen';
-
+import { SchemaType } from "../schema-type";
+import { Schema, ValueSchema } from "../schema";
+import { Languages } from "../languages";
+import { Extensions } from "../extensions";
+import { Initializer, DeepPartial } from "@azure-tools/codegen";
 
 export interface FlagValue extends Extensions {
   /** per-language information for this value */
@@ -18,7 +17,7 @@ export class FlagValue extends Initializer implements FlagValue {
     this.value = value;
     this.language.default = {
       name,
-      description
+      description,
     };
     this.apply(objectInitializer);
   }
@@ -27,7 +26,6 @@ export class FlagValue extends Initializer implements FlagValue {
 export interface FlagSchema extends ValueSchema {
   /** the possible choices for in the set */
   choices: Array<FlagValue>;
-
 }
 
 export class FlagSchema extends Schema implements FlagSchema {

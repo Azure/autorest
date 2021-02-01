@@ -150,7 +150,7 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
   private crawlObject(obj: any): void {
     for (const { key, value } of visit(obj)) {
       // We don't want to navigate the examples.
-      if(key === "x-ms-examples") {
+      if (key === "x-ms-examples") {
         continue;
       }
       if (key === "$ref") {

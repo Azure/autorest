@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { createSandbox, deserialize } from '@azure-tools/codegen';
-import { Host } from './exports';
-import { Channel, Message, Mapping, RawSourceMap, JsonPath, Position } from './types';
-import { Schema, DEFAULT_SAFE_SCHEMA } from 'js-yaml';
+import { createSandbox, deserialize } from "@azure-tools/codegen";
+import { Host } from "./exports";
+import { Channel, Message, Mapping, RawSourceMap, JsonPath, Position } from "./types";
+import { Schema, DEFAULT_SAFE_SCHEMA } from "js-yaml";
 
 const safeEval = createSandbox();
 
@@ -14,13 +14,13 @@ async function getModel<T>(service: Host, yamlSchema: Schema = DEFAULT_SAFE_SCHE
   const files = await service.ListInputs(artifactType);
   const filename = files[0];
   if (files.length === 0) {
-    throw new Error('Inputs missing.');
+    throw new Error("Inputs missing.");
   }
   const content = await service.ReadFile(filename);
 
   return {
     filename,
-    model: deserialize<T>(content, filename, yamlSchema)
+    model: deserialize<T>(content, filename, yamlSchema),
   };
 }
 
@@ -31,27 +31,30 @@ export class Session<TInputModel> {
   model!: TInputModel;
   filename!: string;
 
-  /* @internal */ constructor(public readonly service: Host) {
-  }
+  /* @internal */ constructor(public readonly service: Host) {}
 
-  /* @internal */ async init<TProject>(project?: TProject, schema: Schema = DEFAULT_SAFE_SCHEMA, artifactType?: string) {
+  /* @internal */ async init<TProject>(
+    project?: TProject,
+    schema: Schema = DEFAULT_SAFE_SCHEMA,
+    artifactType?: string,
+  ) {
     const m = await getModel<TInputModel>(this.service, schema, artifactType);
     this.model = m.model;
     this.filename = m.filename;
 
     this.initContext(project);
-    this._debug = await this.getValue('debug', false);
-    this._verbose = await this.getValue('verbose', false);
+    this._debug = await this.getValue("debug", false);
+    this._verbose = await this.getValue("verbose", false);
     return this;
   }
 
-  /* @internal */  async initContext<TP>(project?: TP) {
+  /* @internal */ async initContext<TP>(project?: TP) {
     this.context = this.context || {
-      $config: await this.service.GetValue(''),
+      $config: await this.service.GetValue(""),
       $project: project,
       $lib: {
-        path: require('path')
-      }
+        path: require("path"),
+      },
     };
     return this;
   }
@@ -63,7 +66,7 @@ export class Session<TInputModel> {
   async getValue<V>(key: string, defaultValue?: V): Promise<V> {
     // check if it's in the model first
     const m = <any>this.model;
-    let value = m && m.language && m.language.default ? (m.language.default)[key] : undefined;
+    let value = m && m.language && m.language.default ? m.language.default[key] : undefined;
 
     // fall back to the configuration
     if (value == null || value === undefined) {
@@ -74,8 +77,7 @@ export class Session<TInputModel> {
     if (value === null || value === undefined) {
       try {
         value = safeEval(key, this.context);
-      }
-      catch {
+      } catch {
         value = null;
       }
     }
@@ -84,7 +86,7 @@ export class Session<TInputModel> {
       throw new Error(`No value for configuration key '${key}' was provided`);
     }
 
-    if (typeof value === 'string') {
+    if (typeof value === "string") {
       value = await this.resolveVariables(value);
     }
 
@@ -103,7 +105,12 @@ export class Session<TInputModel> {
   async protectFiles(path: string): Promise<void> {
     return this.service.ProtectFiles(path);
   }
-  writeFile(filename: string, content: string, sourceMap?: Array<Mapping> | RawSourceMap | undefined, artifactType?: string | undefined): void {
+  writeFile(
+    filename: string,
+    content: string,
+    sourceMap?: Array<Mapping> | RawSourceMap | undefined,
+    artifactType?: string | undefined,
+  ): void {
     return this.service.WriteFile(filename, content, sourceMap, artifactType);
   }
 
@@ -129,18 +136,17 @@ export class Session<TInputModel> {
     const files = await service.ListInputs();
     const filename = files[0];
     if (files.length === 0) {
-      throw new Error('Inputs missing.');
+      throw new Error("Inputs missing.");
     }
     return {
       filename,
-      model: deserialize<T>(await service.ReadFile(filename), filename)
+      model: deserialize<T>(await service.ReadFile(filename), filename),
     };
   }
 
-
   cache = new Array<any>();
   replacer(key: string, value: any) {
-    if (typeof value === 'object' && value !== null) {
+    if (typeof value === "object" && value !== null) {
       if (this.cache.indexOf(value) !== -1) {
         // Duplicate reference found
         try {

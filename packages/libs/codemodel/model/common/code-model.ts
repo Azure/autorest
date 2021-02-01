@@ -1,10 +1,10 @@
-import { Metadata } from './metadata';
-import { Schemas } from './schemas';
-import { Info } from './info';
-import { OperationGroup } from './operation';
-import { DeepPartial, enableSourceTracking, Initializer } from '@azure-tools/codegen';
-import { Parameter } from './parameter';
-import { ValueOrFactory, realize, sort } from '@azure-tools/linq';
+import { Metadata } from "./metadata";
+import { Schemas } from "./schemas";
+import { Info } from "./info";
+import { OperationGroup } from "./operation";
+import { DeepPartial, enableSourceTracking, Initializer } from "@azure-tools/codegen";
+import { Parameter } from "./parameter";
+import { ValueOrFactory, realize, sort } from "@azure-tools/linq";
 
 /** The security information for the API surface */
 export interface Security {
@@ -51,13 +51,12 @@ export class CodeModel extends Metadata implements CodeModel {
   }
 
   private get globals(): Array<Parameter> {
-    return (this.globalParameters || (this.globalParameters = []));
+    return this.globalParameters || (this.globalParameters = []);
   }
 
   getOperationGroup(group: string) {
-    let result = this.operationGroups.find(each => group.toLowerCase() === each.$key.toLowerCase());
+    let result = this.operationGroups.find((each) => group.toLowerCase() === each.$key.toLowerCase());
     if (!result) {
-
       result = new OperationGroup(group);
       this.operationGroups.push(result);
     }
@@ -68,11 +67,14 @@ export class CodeModel extends Metadata implements CodeModel {
     return this.globals.find(predicate);
   }
 
-  addGlobalParameter(parameter: Parameter): Parameter
-  addGlobalParameter(find: (value: Parameter) => boolean, create: () => Parameter): Parameter
-  addGlobalParameter(predicateOrParameter: Parameter | ((value: Parameter) => boolean), create: ValueOrFactory<Parameter> = <any>undefined): Parameter {
+  addGlobalParameter(parameter: Parameter): Parameter;
+  addGlobalParameter(find: (value: Parameter) => boolean, create: () => Parameter): Parameter;
+  addGlobalParameter(
+    predicateOrParameter: Parameter | ((value: Parameter) => boolean),
+    create: ValueOrFactory<Parameter> = <any>undefined,
+  ): Parameter {
     try {
-      if (typeof predicateOrParameter !== 'function') {
+      if (typeof predicateOrParameter !== "function") {
         // overload : parameter passed
         this.globals.push(predicateOrParameter);
 
@@ -82,11 +84,14 @@ export class CodeModel extends Metadata implements CodeModel {
       // overload : predicate, parameter passed
       let p = this.findGlobalParameter(predicateOrParameter);
       if (!p) {
-        this.globals.push(p = realize(create));
+        this.globals.push((p = realize(create)));
       }
       return p;
     } finally {
-      this.globalParameters = sort.numericly.ascendingInvalidLast(this.globals, each => each.extensions?.['x-ms-priority']);
+      this.globalParameters = sort.numericly.ascendingInvalidLast(
+        this.globals,
+        (each) => each.extensions?.["x-ms-priority"],
+      );
     }
   }
 }

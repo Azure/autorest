@@ -36,7 +36,7 @@ export interface ModelerFourOptions {
 
   /**
    * In the case where a type only definition is to inherit another type remove it.
-   * @example ChildSchema: {allOf: [ParentSchema]}. 
+   * @example ChildSchema: {allOf: [ParentSchema]}.
    * In this case ChildSchema will be removed and all reference to it will be updated to point to ParentSchema
    */
   "remove-empty-child-schemas"?: boolean;

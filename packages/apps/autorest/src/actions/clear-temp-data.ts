@@ -18,6 +18,7 @@ export const clearTempData = async () => {
     }
   }
   if (all.length > 0) {
+    // eslint-disable-next-line no-console
     console.log(chalk.grey(`Clearing ${all.length} autorest temp data folders...`));
   }
   await Promise.all(all);

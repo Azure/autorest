@@ -203,7 +203,10 @@ export class PreNamer {
 
     const objectSchemaNames = new Set<string>();
     for (const schema of values(this.codeModel.schemas.objects)) {
-      setName(schema, this.format.type, "", this.format.override, { existingNames, lenientModelDeduplication: this.options["lenient-model-deduplication"] });
+      setName(schema, this.format.type, "", this.format.override, {
+        existingNames,
+        lenientModelDeduplication: this.options["lenient-model-deduplication"],
+      });
 
       if (deduplicateSchemaNames) {
         deduplicateSchemaName(

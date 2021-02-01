@@ -1,6 +1,6 @@
-import { Extensions } from './extensions';
-import { uri } from './uri';
-import { Initializer, DeepPartial } from '@azure-tools/codegen';
+import { Extensions } from "./extensions";
+import { uri } from "./uri";
+import { Initializer, DeepPartial } from "@azure-tools/codegen";
 
 /** a reference to external documentation  */
 export interface ExternalDocumentation extends Extensions {

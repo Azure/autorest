@@ -1,21 +1,27 @@
-import { items, clone, values, keys, Dictionary } from '@azure-tools/linq';
-import { typeOf, isPrimitive } from './type';
+import { items, clone, values, keys, Dictionary } from "@azure-tools/linq";
+import { typeOf, isPrimitive } from "./type";
 
-const sourceMarker = '_#source#_';
-const mapMarker = '_#map#_';
-const getMap = '_#get-map#_';
-const getPosition = '_#get-position#_';
-const getActualValue = '_#get-value#_';
+const sourceMarker = "_#source#_";
+const mapMarker = "_#map#_";
+const getMap = "_#get-map#_";
+const getPosition = "_#get-position#_";
+const getActualValue = "_#get-value#_";
 const noSource = {
-  $f: 'none',
-  $p: 'none',
+  $f: "none",
+  $p: "none",
 };
 
 export function getMappings(instance: any) {
   return instance[getMap];
 }
 
-export function enableSourceTracking<T extends object>(instance: T, enforce = true, path = '$', map = new Dictionary<any>(), cache = new Map<string, any>()): T {
+export function enableSourceTracking<T extends object>(
+  instance: T,
+  enforce = true,
+  path = "$",
+  map = new Dictionary<any>(),
+  cache = new Map<string, any>(),
+): T {
   let proxy = cache.get(path);
   if (!proxy) {
     proxy = new Proxy<T>(instance, {
@@ -26,32 +32,31 @@ export function enableSourceTracking<T extends object>(instance: T, enforce = tr
 
         const value = target[p];
         switch (typeOf(value)) {
-          case 'undefined':
-          case 'null':
-          case 'function':
-          case 'string':
-          case 'boolean':
-          case 'number':
+          case "undefined":
+          case "null":
+          case "function":
+          case "string":
+          case "boolean":
+          case "number":
             return value;
 
-          case 'array':
+          case "array":
             return enableSourceTracking(value, enforce, `${path}[${String(p)}]`, map, cache);
 
-          case 'object':
+          case "object":
             return enableSourceTracking(value, enforce, `${path}.${String(p)}`, map, cache);
         }
 
         throw new Error(`Unhandled type withMap for '${typeOf(value)}'`);
       },
       set: (target: any, p: PropertyKey, value: any, receiver: any): boolean => {
-
-        let memberPath = '';
+        let memberPath = "";
         switch (typeOf(target)) {
-          case 'array':
+          case "array":
             memberPath = `${path}[${String(p)}]`;
             break;
 
-          case 'object':
+          case "object":
             memberPath = `${path}.${String(p)}`;
             break;
 
@@ -87,14 +92,14 @@ export function enableSourceTracking<T extends object>(instance: T, enforce = tr
 
         target[p] = value.valueOf();
         return true;
-      }
+      },
     });
     cache.set(path, proxy);
   }
   return proxy;
 }
 
-export function shadow<T extends object>(source: T, document: string, path = '$', cache = new Map<string, any>()): T {
+export function shadow<T extends object>(source: T, document: string, path = "$", cache = new Map<string, any>()): T {
   let proxy = cache.get(path);
 
   if (!proxy) {
@@ -104,7 +109,7 @@ export function shadow<T extends object>(source: T, document: string, path = '$'
           // they want the source location for this node.
           return {
             document,
-            Position: { path: [path] }
+            Position: { path: [path] },
           };
         }
         if (p === getActualValue) {
@@ -113,20 +118,20 @@ export function shadow<T extends object>(source: T, document: string, path = '$'
 
         const value = target[p];
         switch (typeOf(value)) {
-          case 'undefined':
-          case 'null':
-          case 'function':
+          case "undefined":
+          case "null":
+          case "function":
             return value;
 
-          case 'string':
-          case 'boolean':
-          case 'number':
+          case "string":
+          case "boolean":
+          case "number":
             return shadow(new Object(value), document, `${path}.${String(p)}`, cache);
 
-          case 'object':
+          case "object":
             return shadow(value, document, `${path}.${String(p)}`, cache);
 
-          case 'array':
+          case "array":
             return shadow(value, document, `${path}[${String(p)}]`, cache);
 
           default:

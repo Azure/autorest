@@ -7,14 +7,8 @@ import {
   stringify,
   TryDecodeEnhancedPositionFromName,
 } from "@azure-tools/datastore";
-import { clone,  values } from "@azure-tools/linq";
-import {
-  EnsureIsFolderUri,
-  ResolveUri,
-  IsUri,
-  FileUriToPath,
-  CreateFileOrFolderUri,
-} from "@azure-tools/uri";
+import { clone, values } from "@azure-tools/linq";
+import { EnsureIsFolderUri, ResolveUri, IsUri, FileUriToPath, CreateFileOrFolderUri } from "@azure-tools/uri";
 import { From } from "linq-es2015";
 import { basename, dirname } from "path";
 import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
@@ -46,7 +40,6 @@ function ProxifyConfigurationView(cfgView: any) {
   });
 }
 
-
 export class ConfigurationView {
   [name: string]: any;
   public InputFileUris = new Array<string>();
@@ -57,7 +50,7 @@ export class ConfigurationView {
   public constructor(
     public configurationFiles: { [key: string]: any },
     fileSystem: IFileSystem,
-     public messageEmitter: MessageEmitter,
+    public messageEmitter: MessageEmitter,
     public configFileFolderUri: string,
     ...configs: Array<AutoRestRawConfiguration> // decreasing priority
   ) {
@@ -147,8 +140,10 @@ export class ConfigurationView {
   }
 
   public Dump(title = ""): void {
+    // eslint-disable-next-line no-console
     console.log(`\n${title}\n===================================`);
     for (const each of Object.getOwnPropertyNames(this.config)) {
+      // eslint-disable-next-line no-console
       console.log(`${each} : ${(<any>this.config)[each]}`);
     }
   }

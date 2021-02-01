@@ -4,145 +4,150 @@
  *--------------------------------------------------------------------------------------------*/
 
 /** possible schema types that indicate the type of schema.
- * 
+ *
  * @note - this is essentially a discriminator for Schema
  */
 export enum SchemaType {
   /** a collection of items */
-  Array = 'array',
+  Array = "array",
 
   /** an associative array (ie, dictionary, hashtable, etc) */
-  Dictionary = 'dictionary',
+  Dictionary = "dictionary",
 
   /** a true or false value */
-  Boolean = 'boolean',
+  Boolean = "boolean",
 
   /** an integer value */
-  Integer = 'integer',
+  Integer = "integer",
 
   /** a number value */
-  Number = 'number',
+  Number = "number",
 
   /** an object of some type */
-  Object = 'object',
+  Object = "object",
 
   /** a string of characters  */
-  String = 'string',
+  String = "string",
 
   /** UnixTime */
-  UnixTime = 'unixtime',
+  UnixTime = "unixtime",
 
   /** ByteArray -- an array of bytes */
-  ByteArray = 'byte-array',
+  ByteArray = "byte-array",
 
   /* a binary stream */
-  Binary = 'binary',
+  Binary = "binary",
 
   /** a single character */
-  Char = 'char',
+  Char = "char",
 
   /** a Date */
-  Date = 'date',
+  Date = "date",
 
   /** a Date */
-  Time = 'time',
+  Time = "time",
 
   /** a DateTime */
-  DateTime = 'date-time',
+  DateTime = "date-time",
 
   /** a Duration */
-  Duration = 'duration',
+  Duration = "duration",
 
   /** a universally unique identifier  */
-  Uuid = 'uuid',
+  Uuid = "uuid",
 
   /** an URI of some kind */
-  Uri = 'uri',
+  Uri = "uri",
 
   /** a password or credential  */
-  Credential = 'credential',
+  Credential = "credential",
 
   /** OData Query */
-  ODataQuery = 'odata-query',
+  ODataQuery = "odata-query",
 
   /** a type that can be anything */
-  Any = 'any',
+  Any = "any",
 
   /** a choice between one of several  values (ie, 'enum')
-   * 
-   * @description - this is essentially can be thought of as an 'enum' 
+   *
+   * @description - this is essentially can be thought of as an 'enum'
    * that is a choice between one of several strings
    */
-  Choice = 'choice',
+  Choice = "choice",
 
-  SealedChoice = 'sealed-choice',
+  SealedChoice = "sealed-choice",
 
-  Conditional = 'conditional',
+  Conditional = "conditional",
 
-  SealedConditional = 'sealed-conditional',
+  SealedConditional = "sealed-conditional",
 
-  Flag = 'flag',
+  Flag = "flag",
 
   /** a constant value */
-  Constant = 'constant',
+  Constant = "constant",
 
-  Or = 'or',
+  Or = "or",
 
-  Xor = 'xor',
+  Xor = "xor",
 
-  Not = 'not',
+  Not = "not",
   /** the type is not known.
-   * 
-   * @description it's possible that we just may make this an error 
+   *
+   * @description it's possible that we just may make this an error
    * in representation.
    */
-  Unknown = 'unknown',
+  Unknown = "unknown",
 
-  Group = 'group',
-
-
+  Group = "group",
 }
 
 /** Compound schemas are used to construct complex objects or offer choices of a set of schemas.
- * 
+ *
  * (ie, allOf, anyOf, oneOf )
- * 
- * @note - historically 'allOf' was used to manage object hierarchy. 
- * 
-   */
-export type CompoundSchemaTypes =
-  SchemaType.Or |
-  SchemaType.Xor;
+ *
+ * @note - historically 'allOf' was used to manage object hierarchy.
+ *
+ */
+export type CompoundSchemaTypes = SchemaType.Or | SchemaType.Xor;
 
 /** Schema types that are primitive language values */
 export type PrimitiveSchemaTypes =
-  SchemaType.Char |
-  SchemaType.Date |
-  SchemaType.Time |
-  SchemaType.DateTime |
-  SchemaType.Duration |
-  SchemaType.Credential |
-  SchemaType.UnixTime |
-  SchemaType.Uri |
-  SchemaType.Uuid |
-  SchemaType.Boolean |
-  SchemaType.Integer |
-  SchemaType.Number |
-  SchemaType.String;
+  | SchemaType.Char
+  | SchemaType.Date
+  | SchemaType.Time
+  | SchemaType.DateTime
+  | SchemaType.Duration
+  | SchemaType.Credential
+  | SchemaType.UnixTime
+  | SchemaType.Uri
+  | SchemaType.Uuid
+  | SchemaType.Boolean
+  | SchemaType.Integer
+  | SchemaType.Number
+  | SchemaType.String;
 
 /** schema types that are non-object or complex types */
 export type ValueSchemaTypes =
-  SchemaType.ByteArray |
-  PrimitiveSchemaTypes |
-  SchemaType.Array |
-  SchemaType.Choice | SchemaType.SealedChoice | SchemaType.Flag | SchemaType.Conditional | SchemaType.SealedConditional;
+  | SchemaType.ByteArray
+  | PrimitiveSchemaTypes
+  | SchemaType.Array
+  | SchemaType.Choice
+  | SchemaType.SealedChoice
+  | SchemaType.Flag
+  | SchemaType.Conditional
+  | SchemaType.SealedConditional;
 
 /** schema types that can be objects */
-export type ObjectSchemaTypes =
-  SchemaType.Or |
-  SchemaType.Dictionary |
-  SchemaType.Object;
+export type ObjectSchemaTypes = SchemaType.Or | SchemaType.Dictionary | SchemaType.Object;
 
 /** all schema types */
 export type AllSchemaTypes =
-  SchemaType.Any | ValueSchemaTypes | ObjectSchemaTypes | SchemaType.Constant | SchemaType.ODataQuery | SchemaType.Xor | SchemaType.Group | SchemaType.Not | SchemaType.Binary; 
+  | SchemaType.Any
+  | ValueSchemaTypes
+  | ObjectSchemaTypes
+  | SchemaType.Constant
+  | SchemaType.ODataQuery
+  | SchemaType.Xor
+  | SchemaType.Group
+  | SchemaType.Not
+  | SchemaType.Binary;

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -136,6 +135,7 @@ export function evaluateGuard(rawFenceGuard: string, contextObject: any, forceAl
 
     /** prints a debug message from configuration. sssshhh. don't use this.  */
     debugMessage: (text: string) => {
+      // eslint-disable-next-line no-console
       console.log(text);
       return true;
     },

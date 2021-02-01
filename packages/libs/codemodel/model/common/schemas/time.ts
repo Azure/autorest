@@ -1,6 +1,6 @@
-import { PrimitiveSchema, Schema } from '../schema';
-import { SchemaType } from '../schema-type';
-import { DeepPartial } from '@azure-tools/codegen';
+import { PrimitiveSchema, Schema } from "../schema";
+import { SchemaType } from "../schema-type";
+import { DeepPartial } from "@azure-tools/codegen";
 
 /** a schema that represents a Duration value */
 export interface DurationSchema extends PrimitiveSchema {
@@ -21,7 +21,7 @@ export interface DateTimeSchema extends PrimitiveSchema {
   type: SchemaType.DateTime;
 
   /** date-time format  */
-  format: 'date-time-rfc1123' | 'date-time';
+  format: "date-time-rfc1123" | "date-time";
 }
 
 export class DateTimeSchema extends PrimitiveSchema implements DateTimeSchema {

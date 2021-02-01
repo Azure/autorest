@@ -1,3 +1,4 @@
+// eslint-disable-next-line unicorn/filename-case
 import { isAbsolute } from "path";
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.

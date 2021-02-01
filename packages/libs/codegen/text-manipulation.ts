@@ -3,18 +3,21 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Text, TextPossibilities } from './file-generator';
-import { Dictionary, values } from '@azure-tools/linq';
+import { Text, TextPossibilities } from "./file-generator";
+import { Dictionary, values } from "@azure-tools/linq";
 
-let indentation = '    ';
+let indentation = "    ";
 
-export const lineCommentPrefix = '//';
-export const docCommentPrefix = '///';
-export const EOL = '\n';
-export const CommaChar = ', ';
+export const lineCommentPrefix = "//";
+export const docCommentPrefix = "///";
+export const EOL = "\n";
+export const CommaChar = ", ";
 
 const acronyms = new Set([
-  'ip', 'os', 'ms', 'vm', //  'ssl', 'https', 'http', ''
+  "ip",
+  "os",
+  "ms",
+  "vm", //  'ssl', 'https', 'http', ''
 ]);
 
 declare global {
@@ -32,7 +35,10 @@ declare global {
 
 /** joins an array by passing thru a selector and uses the separator string (defaults to comma) */
 Array.prototype.joinWith = function <T>(selector: (t: T) => string, separator?: string): string {
-  return (<Array<T>>this).map(selector).filter(v => v ? true : false).join(separator || CommaChar);
+  return (<Array<T>>this)
+    .map(selector)
+    .filter((v) => (v ? true : false))
+    .join(separator || CommaChar);
 };
 
 /** todo: can we remove this? */

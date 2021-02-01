@@ -3,21 +3,21 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Dictionary } from '@azure-tools/linq';
-import { Initializer, DeepPartial } from '@azure-tools/codegen';
-import { Extensions } from '../common/extensions';
-import { uri } from '../common/uri';
-import { ParameterLocation } from './ParameterLocation';
+import { Dictionary } from "@azure-tools/linq";
+import { Initializer, DeepPartial } from "@azure-tools/codegen";
+import { Extensions } from "../common/extensions";
+import { uri } from "../common/uri";
+import { ParameterLocation } from "./parameter-location";
 
 export enum Scheme {
-  Bearer = 'bearer'
+  Bearer = "bearer",
 }
 
 export enum SecurityType {
-  ApiKey = 'apiKey',
-  Http = 'http',
-  OAuth2 = 'oauth2',
-  OpenIDConnect = 'openIdConnect'
+  ApiKey = "apiKey",
+  Http = "http",
+  OAuth2 = "oauth2",
+  OpenIDConnect = "openIdConnect",
 }
 
 export interface AuthorizationCodeOAuthFlow extends Extensions {
@@ -67,7 +67,7 @@ export interface OAuthFlows extends Extensions {
 
 export type HTTPSecurityScheme = NonBearerHTTPSecurityScheme | BearerHTTPSecurityScheme;
 export type SecurityScheme =
-  APIKeySecurityScheme
+  | APIKeySecurityScheme
   | HTTPSecurityScheme
   | OAuth2SecurityScheme
   | OpenIdConnectSecurityScheme;
@@ -161,7 +161,11 @@ export class PasswordOAuthFlow extends Initializer implements PasswordOAuthFlow 
 
 export class AuthorizationCodeOAuthFlow extends Initializer implements AuthorizationCodeOAuthFlow {
   scopes = new Dictionary<string>();
-  constructor(public authorizationUrl: string, tokenUrl: string, initializer?: DeepPartial<AuthorizationCodeOAuthFlow>) {
+  constructor(
+    public authorizationUrl: string,
+    tokenUrl: string,
+    initializer?: DeepPartial<AuthorizationCodeOAuthFlow>,
+  ) {
     super();
     this.apply(initializer);
   }
@@ -174,10 +178,8 @@ export class ClientCredentialsFlow extends Initializer implements ClientCredenti
   }
 }
 
-
 /**
  * @description common ways of serializing simple parameters
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#style-values
  */
-export interface SecurityRequirement extends Dictionary<string> {
-}
+export interface SecurityRequirement extends Dictionary<string> {}

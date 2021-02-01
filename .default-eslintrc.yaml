@@ -3,12 +3,16 @@ parser: "@typescript-eslint/parser"
 plugins:
   - "@typescript-eslint"
   - prettier
+  - unicorn
+
 env:
   es6: true
   node: true
+  
 extends:
   - eslint:recommended
   - plugin:@typescript-eslint/recommended
+
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
@@ -32,13 +36,22 @@ rules:
   "@typescript-eslint/no-empty-function": "off"
   "@typescript-eslint/explicit-module-boundary-types": "off"
   "@typescript-eslint/ban-types": "off"
-  "require-atomic-updates": "off"
   "@typescript-eslint/consistent-type-assertions": "off"
+
+  "require-atomic-updates": "off"
+  
+  # Prettier config https://github.com/prettier/eslint-plugin-prettier#recommended-configuration
+  prettier/prettier: "warn"
+  arrow-body-style: "off"
+  prefer-arrow-callback: "off"
+
+  # Unicorn plugin config 
+  unicorn/filename-case: warn
+
+  # Basic config
+  no-console: warn
   no-undef: "off"
   no-unused-vars: "off"
-  semi:
-    - warn
-    - always
   no-multiple-empty-lines:
     - warn
     - max: 2

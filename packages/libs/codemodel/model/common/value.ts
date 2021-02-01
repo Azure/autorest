@@ -1,10 +1,9 @@
-import { Aspect } from './aspect';
-import { Schema } from './schema';
-import { DeepPartial } from '@azure-tools/codegen';
+import { Aspect } from "./aspect";
+import { Schema } from "./schema";
+import { DeepPartial } from "@azure-tools/codegen";
 
 /** common base interface for properties, parameters and the like.  */
 export interface Value extends Aspect {
-
   /** the schema of this Value */
   schema: Schema;
 

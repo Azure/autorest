@@ -1,10 +1,10 @@
 export function isPrimitive(instance: any) {
   switch (typeof instance) {
-    case 'undefined':
-    case 'boolean':
-    case 'number':
-    case 'string':
-    case 'symbol':
+    case "undefined":
+    case "boolean":
+    case "number":
+    case "string":
+    case "symbol":
       return true;
     default:
       return false;
@@ -13,25 +13,25 @@ export function isPrimitive(instance: any) {
 
 export function typeOf(obj: any) {
   if (obj === null) {
-    return 'null';
+    return "null";
   }
 
-  const t = typeof (obj);
-  if (t === 'object') {
+  const t = typeof obj;
+  if (t === "object") {
     if (Array.isArray(obj)) {
-      return 'array';
+      return "array";
     }
     if (obj instanceof Set) {
-      return 'set';
+      return "set";
     }
     if (obj instanceof Map) {
-      return 'map';
+      return "map";
     }
     if (obj instanceof Date) {
-      return 'date';
+      return "date";
     }
     if (obj instanceof RegExp) {
-      return 'regexp';
+      return "regexp";
     }
   }
   return t;

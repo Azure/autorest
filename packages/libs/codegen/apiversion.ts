@@ -1,5 +1,4 @@
-import * as semver from 'semver';
-
+import * as semver from "semver";
 
 /*
  Handling:
@@ -18,18 +17,25 @@ export function toSemver(apiversion: string) {
   // let result = '';
 
   // strip off leading "v" or "=" character
-  apiversion = apiversion.replace(/^v|^=/gi, '');
+  apiversion = apiversion.replace(/^v|^=/gi, "");
   // eslint-disable-next-line no-useless-escape
   const versionedDateRegex = new RegExp(/(^\d{4}\-\d{2}\-\d{2})(\.\d+\.\d+$)/gi);
   if (apiversion.match(versionedDateRegex)) {
     // convert yyyy-mm-dd.x1.x2      --->     (miliseconds since 1970-01-01).x1.x2
-    const date = apiversion.replace(versionedDateRegex, '$1');
+    const date = apiversion.replace(versionedDateRegex, "$1");
     const miliseconds = new Date(date).getTime();
-    const lastNumbers = apiversion.replace(versionedDateRegex, '$2');
+    const lastNumbers = apiversion.replace(versionedDateRegex, "$2");
     return `${miliseconds}${lastNumbers}`;
   }
-  const [whole, major, minor, revision, tag] = /^(\d+)-(\d+)(?:-(\d+))?(.*)/.exec(apiversion) || /(\d*)\.(\d*)\.(\d*)(.*)/.exec(apiversion) || /(\d*)\.(\d*)()(.*)/.exec(apiversion) || /(\d*)()()(.*)/.exec(apiversion) || [];
-  return `${Number.parseInt(major || '0') || 0}.${Number.parseInt(minor || '0') || 0}.${Number.parseInt(revision || '0') || 0}${tag?.startsWith('-') ? tag : ''}`;
+  const [whole, major, minor, revision, tag] =
+    /^(\d+)-(\d+)(?:-(\d+))?(.*)/.exec(apiversion) ||
+    /(\d*)\.(\d*)\.(\d*)(.*)/.exec(apiversion) ||
+    /(\d*)\.(\d*)()(.*)/.exec(apiversion) ||
+    /(\d*)()()(.*)/.exec(apiversion) ||
+    [];
+  return `${Number.parseInt(major || "0") || 0}.${Number.parseInt(minor || "0") || 0}.${
+    Number.parseInt(revision || "0") || 0
+  }${tag?.startsWith("-") ? tag : ""}`;
 }
 
 export function lt(apiVersion1: string, apiVersion2: string) {
@@ -51,7 +57,7 @@ export function highest(apiVersion1: string, apiVersion2: string) {
 }
 export function minimum(apiversions: Array<string>) {
   if (apiversions.length === 0) {
-    return '';
+    return "";
   }
   let result = apiversions[0];
   for (const each of apiversions) {
@@ -61,7 +67,7 @@ export function minimum(apiversions: Array<string>) {
 }
 export function maximum(apiversions: Array<string>) {
   if (apiversions.length === 0) {
-    return '';
+    return "";
   }
   let result = apiversions[0];
   for (const each of apiversions) {

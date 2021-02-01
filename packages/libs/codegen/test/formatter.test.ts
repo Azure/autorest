@@ -1,9 +1,6 @@
 import { Style } from "../formatter";
 
-const testMapping = (
-  convert: (x: string) => string,
-  mapping: Array<[string, string]>
-) => {
+const testMapping = (convert: (x: string) => string, mapping: Array<[string, string]>) => {
   for (const [input, expected] of mapping) {
     it(`convert ${input} -> ${expected}`, () => {
       expect(convert(input)).toEqual(expected);

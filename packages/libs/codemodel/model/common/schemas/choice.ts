@@ -1,9 +1,9 @@
-import { SchemaType } from '../schema-type';
-import { PrimitiveSchema, ValueSchema, Schema } from '../schema';
-import { Languages } from '../languages';
-import { Extensions } from '../extensions';
-import { StringSchema } from './string';
-import { Initializer, DeepPartial } from '@azure-tools/codegen';
+import { SchemaType } from "../schema-type";
+import { PrimitiveSchema, ValueSchema, Schema } from "../schema";
+import { Languages } from "../languages";
+import { Extensions } from "../extensions";
+import { StringSchema } from "./string";
+import { Initializer, DeepPartial } from "@azure-tools/codegen";
 
 /** a schema that represents a choice of several values (ie, an 'enum') */
 export interface ChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema> extends ValueSchema {
@@ -25,26 +25,32 @@ export interface ChoiceValue extends Extensions {
 }
 
 export class ChoiceValue extends Initializer {
-  constructor(name: string, description: string, value: string | number | boolean, objectInitializer?: DeepPartial<ChoiceValue>) {
+  constructor(
+    name: string,
+    description: string,
+    value: string | number | boolean,
+    objectInitializer?: DeepPartial<ChoiceValue>,
+  ) {
     super();
     this.value = value;
     this.language = {
       default: {
         name,
-        description
-      }
+        description,
+      },
     };
     this.apply(objectInitializer);
   }
 }
 
-export class ChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema> extends Schema implements ChoiceSchema<ChoiceType>{
+export class ChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema>
+  extends Schema
+  implements ChoiceSchema<ChoiceType> {
   constructor(name: string, description: string, objectInitializer?: DeepPartial<ChoiceSchema<ChoiceType>>) {
     super(name, description, SchemaType.Choice);
     this.apply(objectInitializer);
   }
 }
-
 
 /** a schema that represents a choice of several values (ie, an 'enum') */
 export interface SealedChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema> extends ValueSchema {
@@ -58,10 +64,11 @@ export interface SealedChoiceSchema<ChoiceType extends PrimitiveSchema = StringS
   choices: Array<ChoiceValue>;
 }
 
-export class SealedChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema> extends Schema implements SealedChoiceSchema<ChoiceType>{
+export class SealedChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema>
+  extends Schema
+  implements SealedChoiceSchema<ChoiceType> {
   constructor(name: string, description: string, objectInitializer?: DeepPartial<ChoiceSchema<ChoiceType>>) {
     super(name, description, SchemaType.SealedChoice);
     this.apply(objectInitializer);
   }
 }
-

@@ -1,10 +1,10 @@
-import { SchemaType } from '../schema-type';
-import { Schema, ComplexSchema } from '../schema';
-import { DeepPartial } from '@azure-tools/codegen';
-import { Property } from '../property';
-import { Dictionary, values } from '@azure-tools/linq';
-import { Parameter } from '../parameter';
-import { SchemaUsage } from './usage';
+import { SchemaType } from "../schema-type";
+import { Schema, ComplexSchema } from "../schema";
+import { DeepPartial } from "@azure-tools/codegen";
+import { Property } from "../property";
+import { Dictionary, values } from "@azure-tools/linq";
+import { Parameter } from "../parameter";
+import { SchemaUsage } from "./usage";
 
 export interface Relations {
   immediate: Array<ComplexSchema>;
@@ -39,7 +39,7 @@ export class GroupProperty extends Property implements GroupProperty {
   constructor(name: string, description: string, schema: Schema, initializer?: DeepPartial<GroupProperty>) {
     super(name, description, schema);
 
-    this.applyWithExclusions(['schema'], initializer);
+    this.applyWithExclusions(["schema"], initializer);
   }
 }
 

@@ -25,6 +25,7 @@ export async function processRequest(host: Host) {
     host.WriteFile("code-model-v4-no-tags.yaml", serialize(result), undefined, "code-model-v4-no-tags");
   } catch (E) {
     if (debug) {
+      // eslint-disable-next-line no-console
       console.error(`${__filename} - FAILURE  ${JSON.stringify(E)} ${E.stack}`);
     }
     throw E;

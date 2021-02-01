@@ -1,9 +1,9 @@
-import { Dictionary } from '@azure-tools/linq';
-import { Extensions } from './extensions';
-import { Languages } from './languages';
-import { Protocols } from './protocols';
-import { Initializer, DeepPartial } from '@azure-tools/codegen';
-import { SetType } from '../../tag';
+import { Dictionary } from "@azure-tools/linq";
+import { Extensions } from "./extensions";
+import { Languages } from "./languages";
+import { Protocols } from "./protocols";
+import { Initializer, DeepPartial } from "@azure-tools/codegen";
+import { SetType } from "../../tag";
 
 /** common pattern for Metadata on aspects */
 export interface Metadata extends Extensions {
@@ -14,20 +14,17 @@ export interface Metadata extends Extensions {
   protocol: Protocols;
 }
 
-
 export class Metadata extends Initializer implements Metadata {
   constructor(objectInitializer?: DeepPartial<Metadata>) {
     super();
     this.language = SetType(Languages, {
       default: {
-        name: '',
-        description: ''
-      }
+        name: "",
+        description: "",
+      },
     });
 
-    this.protocol = SetType(Protocols, {
-
-    });
+    this.protocol = SetType(Protocols, {});
     this.apply(objectInitializer);
   }
 }
@@ -40,18 +37,14 @@ export interface Language extends Dictionary<any> {
   /** description text - describes this node. */
   description: string;
 }
-export class Language implements Language {
-}
+export class Language implements Language {}
 
-export interface CSharpLanguage {
-}
+export interface CSharpLanguage {}
 
-export class CSharpLanguage implements CSharpLanguage {
-}
+export class CSharpLanguage implements CSharpLanguage {}
 
 /** the bare-minimum fields for per-protocol metadata on a given aspect */
-export interface Protocol extends Dictionary<any> {
-}
+export interface Protocol extends Dictionary<any> {}
 
 export class Protocol extends Initializer implements Protocol {
   constructor(objectInitializer?: DeepPartial<Protocol>) {

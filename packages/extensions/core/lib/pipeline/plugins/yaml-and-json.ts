@@ -1,4 +1,4 @@
-import { ConvertJsonx2Yaml, ConvertYaml2Jsonx,  StringifyAst } from "@azure-tools/datastore";
+import { ConvertJsonx2Yaml, ConvertYaml2Jsonx, StringifyAst } from "@azure-tools/datastore";
 import { createPerFilePlugin, PipelinePlugin } from "../common";
 
 /* @internal */

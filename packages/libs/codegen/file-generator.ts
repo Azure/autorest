@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Initializer } from './initializer';
-import { EOL, setRegion, getRegions } from './text-manipulation';
+import { Initializer } from "./initializer";
+import { EOL, setRegion, getRegions } from "./text-manipulation";
 
 export type fIterable<T> = Iterable<T> | (() => Iterable<T>);
 
@@ -48,7 +48,7 @@ export class Text extends Initializer implements IText {
   }
 
   public add(text: TextPossibilities): IText {
-    if (typeof (text) === 'string') {
+    if (typeof text === "string") {
       this.content.push(text);
       return this;
     }
@@ -60,7 +60,7 @@ export class Text extends Initializer implements IText {
       this.content.push(text);
       return this;
     }
-    if (typeof (text) === 'function') {
+    if (typeof text === "function") {
       return this.add(text());
     }
     for (const each of text) {
@@ -70,9 +70,9 @@ export class Text extends Initializer implements IText {
   }
 
   get text(): string {
-    let output = '';
+    let output = "";
     for (const each of this.content) {
-      if (typeof (each) === 'string') {
+      if (typeof each === "string") {
         output = output + EOL + each;
         continue;
       }
@@ -87,7 +87,7 @@ export class Text extends Initializer implements IText {
 
   public toString = (): string => {
     return this.text;
-  }
+  };
 
   trim() {
     this.add({ edit: (s: string) => s.trim() });
@@ -98,7 +98,7 @@ export class TextWithRegions extends Text {
   private prefix: string;
   private postfix: string;
 
-  constructor(content?: TextPossibilities, objectIntializer?: Partial<TextWithRegions>, prefix = '#', postfix = '') {
+  constructor(content?: TextPossibilities, objectIntializer?: Partial<TextWithRegions>, prefix = "#", postfix = "") {
     super(content);
     this.apply(objectIntializer);
     this.prefix = prefix;
@@ -106,7 +106,7 @@ export class TextWithRegions extends Text {
   }
 
   removeRegion(region: string) {
-    this.add({ edit: (s: string) => setRegion(s, region, '', undefined, this.prefix, this.postfix) });
+    this.add({ edit: (s: string) => setRegion(s, region, "", undefined, this.prefix, this.postfix) });
   }
 
   setRegion(region: string, content: TextPossibilities, prepend = true) {

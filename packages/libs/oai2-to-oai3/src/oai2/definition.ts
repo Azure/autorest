@@ -1,5 +1,5 @@
 export interface OpenAPI2Definition {
-  [key: string]: unknown; 
+  [key: string]: unknown;
 
   additionalProperties?: OpenAPI2Definition | OpenAPI2Reference | boolean;
   allOf?: OpenAPI2Definition[];

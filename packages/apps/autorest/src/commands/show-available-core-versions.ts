@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import chalk from "chalk";
 import { AutorestArgs } from "../args";
 import { availableVersions, newCorePackage } from "../autorest-as-a-service";

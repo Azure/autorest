@@ -1,9 +1,8 @@
-import { SchemaType } from '../schema-type';
-import { Schema, ValueSchema } from '../schema';
-import { Languages } from '../languages';
-import { Extensions } from '../extensions';
-import { Initializer, DeepPartial } from '@azure-tools/codegen';
-
+import { SchemaType } from "../schema-type";
+import { Schema, ValueSchema } from "../schema";
+import { Languages } from "../languages";
+import { Extensions } from "../extensions";
+import { Initializer, DeepPartial } from "@azure-tools/codegen";
 
 /** a container for the actual constant value */
 export interface ConstantValue extends Extensions {
@@ -34,7 +33,9 @@ export interface ConstantSchema<ConstantType extends Schema = Schema> extends Sc
   value: ConstantValue;
 }
 
-export class ConstantSchema<ConstantType extends Schema = Schema> extends Schema implements ConstantSchema<ConstantType>{
+export class ConstantSchema<ConstantType extends Schema = Schema>
+  extends Schema
+  implements ConstantSchema<ConstantType> {
   constructor(name: string, description: string, objectInitializer?: DeepPartial<ConstantSchema<ConstantType>>) {
     super(name, description, SchemaType.Constant);
     this.apply(objectInitializer);

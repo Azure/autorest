@@ -3,20 +3,20 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Value } from './value';
-import { DeepPartial } from '@azure-tools/codegen';
-import { Schema } from './schema';
-import { Property } from './property';
+import { Value } from "./value";
+import { DeepPartial } from "@azure-tools/codegen";
+import { Schema } from "./schema";
+import { Property } from "./property";
 
 export enum ImplementationLocation {
   /** should be exposed as a method parameter in the operation */
-  Method = 'Method',
+  Method = "Method",
 
   /** should be exposed as a client parameter (not exposed in the operation directly) */
-  Client = 'Client',
+  Client = "Client",
 
   /** should be used as input to constructing the context of the client (ie, 'profile') */
-  Context = 'Context'
+  Context = "Context",
 }
 
 /** a definition of an discrete input for an operation */
@@ -54,10 +54,10 @@ export class VirtualParameter extends Parameter implements VirtualParameter {
   constructor(name: string, description: string, schema: Schema, initializer?: DeepPartial<VirtualParameter>) {
     super(name, description, schema);
 
-    this.applyWithExclusions(['schema'], initializer);
+    this.applyWithExclusions(["schema"], initializer);
   }
 }
 
 export function isVirtualParameter(parameter: Parameter): parameter is VirtualParameter {
-  return !!((<any>parameter).originalParameter);
+  return !!(<any>parameter).originalParameter;
 }

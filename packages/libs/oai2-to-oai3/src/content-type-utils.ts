@@ -6,10 +6,7 @@ import { OpenAPI2Operation } from "./oai2";
  * @param globalProduces: List of default content type produced by the API.
  * @returns list of produced content types. Array will have at least one entry.
  */
-export const resolveOperationProduces = (
-  operation: OpenAPI2Operation,
-  globalProduces: string[],
-): string[] => {
+export const resolveOperationProduces = (operation: OpenAPI2Operation, globalProduces: string[]): string[] => {
   const operationProduces = operation.produces;
   const produces = operationProduces
     ? operationProduces.indexOf("application/json") !== -1

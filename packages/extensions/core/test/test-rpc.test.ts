@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import * as cp from "child_process";
 import * as rpc from "vscode-jsonrpc";
 

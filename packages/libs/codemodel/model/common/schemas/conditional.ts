@@ -1,10 +1,10 @@
-import { SchemaType } from '../schema-type';
-import { PrimitiveSchema, ValueSchema, Schema } from '../schema';
-import { Languages } from '../languages';
-import { Extensions } from '../extensions';
-import { StringSchema } from './string';
-import { Initializer, DeepPartial } from '@azure-tools/codegen';
-import { Value } from '../value';
+import { SchemaType } from "../schema-type";
+import { PrimitiveSchema, ValueSchema, Schema } from "../schema";
+import { Languages } from "../languages";
+import { Extensions } from "../extensions";
+import { StringSchema } from "./string";
+import { Initializer, DeepPartial } from "@azure-tools/codegen";
+import { Value } from "../value";
 
 /** a schema that represents a value dependent on another */
 export interface ConditionalSchema<ConditionalType extends PrimitiveSchema = StringSchema> extends ValueSchema {
@@ -31,11 +31,16 @@ export interface ConditionalValue extends Extensions {
 
   /** the actual value  */
   source: string | number | boolean;
-
 }
 
 export class ConditionalValue extends Initializer {
-  constructor(name: string, description: string, source: string | number | boolean, target: string | number | boolean, objectInitializer?: DeepPartial<ConditionalValue>) {
+  constructor(
+    name: string,
+    description: string,
+    source: string | number | boolean,
+    target: string | number | boolean,
+    objectInitializer?: DeepPartial<ConditionalValue>,
+  ) {
     super();
 
     this.target = target;
@@ -44,21 +49,27 @@ export class ConditionalValue extends Initializer {
     this.language = {
       default: {
         name,
-        description
-      }
+        description,
+      },
     };
     this.apply(objectInitializer);
   }
 }
 
-export class ConditionalSchema<ConditionalType extends PrimitiveSchema = StringSchema> extends Schema implements ConditionalSchema<ConditionalType>{
-  constructor(name: string, description: string, sourceValue: Value, objectInitializer?: DeepPartial<ConditionalSchema<ConditionalType>>) {
+export class ConditionalSchema<ConditionalType extends PrimitiveSchema = StringSchema>
+  extends Schema
+  implements ConditionalSchema<ConditionalType> {
+  constructor(
+    name: string,
+    description: string,
+    sourceValue: Value,
+    objectInitializer?: DeepPartial<ConditionalSchema<ConditionalType>>,
+  ) {
     super(name, description, SchemaType.Conditional);
     this.sourceValue = sourceValue;
     this.apply(objectInitializer);
   }
 }
-
 
 /** a schema that represents a value dependent on another (not overridable) */
 export interface SealedConditionalSchema<ConditionalType extends PrimitiveSchema = StringSchema> extends ValueSchema {
@@ -75,11 +86,17 @@ export interface SealedConditionalSchema<ConditionalType extends PrimitiveSchema
   sourceValue: Value;
 }
 
-export class SealedConditionalSchema<ConditionalType extends PrimitiveSchema = StringSchema> extends Schema implements SealedConditionalSchema<ConditionalType>{
-  constructor(name: string, description: string, sourceValue: Value, objectInitializer?: DeepPartial<ConditionalSchema<ConditionalType>>) {
+export class SealedConditionalSchema<ConditionalType extends PrimitiveSchema = StringSchema>
+  extends Schema
+  implements SealedConditionalSchema<ConditionalType> {
+  constructor(
+    name: string,
+    description: string,
+    sourceValue: Value,
+    objectInitializer?: DeepPartial<ConditionalSchema<ConditionalType>>,
+  ) {
     super(name, description, SchemaType.SealedConditional);
     this.sourceValue = sourceValue;
     this.apply(objectInitializer);
   }
 }
-

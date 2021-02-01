@@ -1,8 +1,8 @@
-import { uid } from './uid';
+import { uid } from "./uid";
 
-import { Initializer, DeepPartial } from '@azure-tools/codegen';
-import { Value } from './value';
-import { Schema } from './schema';
+import { Initializer, DeepPartial } from "@azure-tools/codegen";
+import { Value } from "./value";
+import { Schema } from "./schema";
 
 /** a property is a child value in an object */
 export interface Property extends Value {
@@ -13,15 +13,15 @@ export interface Property extends Value {
   serializedName: string;
 
   /** when a property is flattened, the property will be the set of serialized names to get to that target property.
-   * 
+   *
    * If flattenedName is present, then this property is a flattened property.
-   * 
+   *
    * (ie, ['properties','name'] )
-   * 
+   *
    */
   flattenedNames?: Array<string>;
 
-  // add addtional x-ms-mutability-style-stuff 
+  // add addtional x-ms-mutability-style-stuff
   /** if this property is used as a discriminator for a polymorphic type */
   isDiscriminator?: boolean;
 }
@@ -31,6 +31,6 @@ export class Property extends Value implements Property {
     super(name, description, schema);
 
     this.serializedName = name;
-    this.applyWithExclusions(['schema'], initializer);
+    this.applyWithExclusions(["schema"], initializer);
   }
 }

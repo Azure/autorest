@@ -61,9 +61,8 @@ export interface OpenApi2PathParameter {
   description?: string;
   required?: boolean;
   format?: string;
-   enum?: string[];
+  enum?: string[];
 }
-
 
 export interface PrimitiveItems {
   type: "string" | "number" | "integer" | "boolean" | "array" | "file";

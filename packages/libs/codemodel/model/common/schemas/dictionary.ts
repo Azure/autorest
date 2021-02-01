@@ -1,6 +1,6 @@
-import { SchemaType } from '../schema-type';
-import { Schema, ComplexSchema } from '../schema';
-import { DeepPartial } from '@azure-tools/codegen';
+import { SchemaType } from "../schema-type";
+import { Schema, ComplexSchema } from "../schema";
+import { DeepPartial } from "@azure-tools/codegen";
 
 /** a schema that represents a key-value collection */
 export interface DictionarySchema<ElementType extends Schema = Schema> extends ComplexSchema {
@@ -14,8 +14,15 @@ export interface DictionarySchema<ElementType extends Schema = Schema> extends C
   nullableItems?: boolean;
 }
 
-export class DictionarySchema<ElementType extends Schema = Schema> extends Schema implements DictionarySchema<ElementType>{
-  constructor(name: string, description: string, elementType: ElementType, objectInitializer?: DeepPartial<DictionarySchema<ElementType>>) {
+export class DictionarySchema<ElementType extends Schema = Schema>
+  extends Schema
+  implements DictionarySchema<ElementType> {
+  constructor(
+    name: string,
+    description: string,
+    elementType: ElementType,
+    objectInitializer?: DeepPartial<DictionarySchema<ElementType>>,
+  ) {
     super(name, description, SchemaType.Dictionary);
     this.elementType = elementType;
 

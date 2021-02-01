@@ -98,6 +98,7 @@ export class SourceMap {
       const pathPart = mi.name.split("\n")[0];
       return JSON.parse(pathPart);
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.warn("Failed obtaining object path from mapping item", e);
       return null;
     }

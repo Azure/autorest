@@ -287,6 +287,7 @@ async function composeSwaggers(
     return hSwagger;
   } catch (E) {
     if (config.DebugMode) {
+      // eslint-disable-next-line no-console
       console.error(`${__filename} - FAILURE ${JSON.stringify(E)}`);
     }
     throw E;
