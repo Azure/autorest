@@ -7,7 +7,7 @@ import { nodes } from "@azure-tools/datastore";
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
 import { RealFileSystem } from "@azure-tools/datastore";
 import { AutoRest } from "../src/lib/autorest-core";
-import * as assert from "assert";
+import assert from "assert";
 
 import { Node, Parser } from "commonmark";
 import { plainTextVersion } from "../src/lib/pipeline/commonmark-documentation";

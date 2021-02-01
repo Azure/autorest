@@ -1,6 +1,6 @@
 import * as aio from "@azure-tools/async-io";
 import * as datastore from "@azure-tools/datastore";
-import * as assert from "assert";
+import assert from "assert";
 import { ComponentKeyRenamer } from "../src/lib/pipeline/plugins/component-key-renamer";
 
 const resources = `${__dirname}../../../test/resources/renamer`;

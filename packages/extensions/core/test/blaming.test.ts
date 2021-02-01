@@ -3,7 +3,7 @@ import { Artifact } from "../src/lib/artifact";
 import { Channel, Message, SourceLocation } from "../src/lib/message";
 import { AutoRest } from "../src/lib/autorest-core";
 import { RealFileSystem } from "@azure-tools/datastore";
-import * as assert from "assert";
+import assert from "assert";
 
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
 import { parse } from "@azure-tools/datastore";

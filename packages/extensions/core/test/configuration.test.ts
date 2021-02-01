@@ -1,4 +1,4 @@
-import * as assert from "assert";
+import assert from "assert";
 import { MemoryFileSystem } from "@azure-tools/datastore";
 import * as AutoRest from "../src/lib/autorest-core";
 

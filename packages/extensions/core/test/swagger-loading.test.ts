@@ -1,4 +1,4 @@
-import * as assert from "assert";
+import assert from "assert";
 
 import { RealFileSystem } from "@azure-tools/datastore";
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";

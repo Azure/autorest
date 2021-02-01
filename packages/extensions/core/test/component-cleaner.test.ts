@@ -1,4 +1,4 @@
-import * as assert from "assert";
+import assert from "assert";
 import * as datastore from "@azure-tools/datastore";
 import * as aio from "@azure-tools/async-io";
 import { ComponentsCleaner } from "../src/lib/pipeline/plugins/components-cleaner";

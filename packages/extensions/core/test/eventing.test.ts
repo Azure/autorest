@@ -1,4 +1,4 @@
-import * as assert from "assert";
+import assert from "assert";
 import { IEvent, EventEmitter } from "../src/lib/events";
 
 export class MyClass extends EventEmitter {

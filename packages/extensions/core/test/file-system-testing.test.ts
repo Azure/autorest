@@ -1,5 +1,5 @@
 import { MemoryFileSystem } from "@azure-tools/datastore";
-import * as assert from "assert";
+import assert from "assert";
 
 describe("FileSystemTests", () => {
   it("does async iterable work", async () => {

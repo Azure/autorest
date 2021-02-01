@@ -5,7 +5,7 @@
 
 import { ParseNode, ParseToAst, Stringify, StringifyAst, ToAst } from "@azure-tools/datastore";
 import { ConvertJsonx2Yaml, ConvertYaml2Jsonx } from "@azure-tools/datastore";
-import * as assert from "assert";
+import assert from "assert";
 
 describe("ObjectRepresentation", () => {
   it("round trip", () => {
