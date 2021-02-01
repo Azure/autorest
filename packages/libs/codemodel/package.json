@@ -10,8 +10,8 @@
   "scripts": {
     "build": "tsc -p .",
     "watch": "tsc -p . --watch",
-    "lint:fix": "eslint  . --fix --ext .ts",
-    "lint": "eslint  . --ext .ts",
+    "lint:fix": "eslint ./src --fix --ext .ts",
+    "lint": "eslint ./src --ext .ts",
     "prepare": "npm run build",
     "test": "echo codemodel: No Tests.",
     "test:ci": "echo codemodel: No Tests.",
