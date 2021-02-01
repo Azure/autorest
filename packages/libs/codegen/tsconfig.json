@@ -5,6 +5,5 @@
     "outDir": "dist",
     "types": ["jest"]
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["dist", "resources", "node_modules", "**/*.d.ts"]
+  "include": ["src/**/*.ts", "test/**/*.d.ts"]
 }

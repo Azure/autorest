@@ -1,4 +1,4 @@
-import { Style } from "../src/formatter";
+import { Style } from "./formatter";
 
 const testMapping = (convert: (x: string) => string, mapping: Array<[string, string]>) => {
   for (const [input, expected] of mapping) {

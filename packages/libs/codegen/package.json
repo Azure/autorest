@@ -8,8 +8,8 @@
   "main": "dist/exports.js",
   "typings": "dist/exports.d.ts",
   "scripts": {
-    "build": "tsc -p .",
-    "watch": "tsc -p . --watch",
+    "build": "tsc -p ./tsconfig.build.json",
+    "watch": "tsc -p ./tsconfig.build.json --watch",
     "lint:fix": "eslint . --fix --ext .ts",
     "lint": "eslint . --ext .ts --max-warnings=0",
     "prepare": "npm run build",
