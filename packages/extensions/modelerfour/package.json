@@ -55,7 +55,7 @@
     "jest-snapshot": "~26.6.2",
     "expect": "~26.6.2",
     "ts-jest": "^26.4.4",
-    "@azure-tools/codegen": "~2.5.292",
+    "@azure-tools/codegen": "~2.5.0",
     "@azure-tools/codegen-csharp": "~3.0.0",
     "@autorest/extension-base": "~3.1.0",
     "@autorest/codemodel": "~4.14.3",
