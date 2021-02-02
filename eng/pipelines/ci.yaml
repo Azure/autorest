@@ -20,10 +20,10 @@ jobs:
 
       - script: |
           ls ./packages/extensions/core/node_modules/@azure-tools/codegen/dist
-          cat ./packages/extensions/core/node_modules/@azure-tools/codegen/dist/exports.js
+          cat ./packages/extensions/core/node_modules/@azure-tools/codegen/dist/exports.d.ts
 
           ls ./packages/libs/codegen/dist
-          cat ./packages/libs/codegen/dist/exports.js
+          cat ./packages/libs/codegen/dist/exports.d.ts
 
       - script: npx @microsoft/rush test:ci -v
         displayName: Test
