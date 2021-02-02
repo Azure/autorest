@@ -515,7 +515,7 @@ packages:
       globals: 12.4.0
       ignore: 4.0.6
       import-fresh: 3.3.0
-      js-yaml: 3.14.1
+      js-yaml: 3.13.1
       lodash: 4.17.20
       minimatch: 3.0.4
       strip-json-comments: 3.1.1
@@ -529,7 +529,7 @@ packages:
       camelcase: 5.3.1
       find-up: 4.1.0
       get-package-type: 0.1.0
-      js-yaml: 3.14.1
+      js-yaml: 3.13.1
       resolve-from: 5.0.0
     dev: false
     engines:
@@ -3218,7 +3218,7 @@ packages:
       import-fresh: 3.3.0
       imurmurhash: 0.1.4
       is-glob: 4.0.1
-      js-yaml: 3.14.1
+      js-yaml: 3.13.1
       json-stable-stringify-without-jsonify: 1.0.1
       levn: 0.4.1
       lodash: 4.17.20
@@ -5149,14 +5149,6 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
-  /js-yaml/3.14.1:
-    dependencies:
-      argparse: 1.0.10
-      esprima: 4.0.1
-    dev: false
-    hasBin: true
-    resolution:
-      integrity: sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==
   /js-yaml/4.0.0:
     dependencies:
       argparse: 2.0.1
@@ -9028,7 +9020,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-6FcIt0Rmj0CNgygYHfufc3RmuzueICA0sLd2A+IOLKJsCfYAJDKg7VpeWdtm7xZnPnpBsRzYoiVnbQ4Bah7kiQ==
+      integrity: sha512-HOJC/hUUgnw/tj2En5YujqVXjbvUXF2Ju/v4V5YOTEXEI2hWJu1uIeebBGo1CEiJ6odDFLZdSejw/xXNeOwaxw==
       tarball: 'file:projects/codemodel.tgz'
     version: 0.0.0
   'file:projects/core.tgz':
@@ -9076,7 +9068,7 @@ packages:
     dev: false
     name: '@rush-temp/core'
     resolution:
-      integrity: sha512-HuWO/SLj1FtjAdRuPhqGkH83iwErtCn/0INqpXdt1vpIioEpZgBfkyAxVprDBTPDZN5EfCs0umJ7kzJlv824wQ==
+      integrity: sha512-JRNmes63axwsnHPtfer+u18w9yYIEr9rwWJ9+HEhw0O5VMw+Lo5/ELO6XeU3orMaK1kKRJDX+KZqSMAMCWnkdw==
       tarball: 'file:projects/core.tgz'
     version: 0.0.0
   'file:projects/extension-base.tgz_prettier@2.2.1':
@@ -9098,7 +9090,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-HgJO+IEfo+W9pCPebLGjCy1F2ktYSiIhkYZpmhRHbWW4ZfQlbOcxiFF60UGWE/U7iEt9qVjmGo2UdWZaJdiEpw==
+      integrity: sha512-xk9wAik1h9kh9fkcK01Ox7d1dXmr8uOFolbY+HveIqUqyEXAAEldY7rx8l42I6eJxmlteC3eZzBdijwOYGKCrw==
       tarball: 'file:projects/extension-base.tgz'
     version: 0.0.0
   'file:projects/md-mock-api.tgz':
@@ -9176,7 +9168,7 @@ packages:
     dev: false
     name: '@rush-temp/modelerfour'
     resolution:
-      integrity: sha512-iS4E76JifwxPUTub8uCD7mzNzGQAZwh6cWx1BBgmfpo3rDSrjBQRbNffMkxYsWyAfs2lF2C7staV85EeAPRbVg==
+      integrity: sha512-Hy4LXmay0tDwskVn8Hhgi+2i+JEMkoIQ6ubWGZgiauUarBKyuHacnqe5juLzzNrtA09O/G8cVpghgohgrIru3Q==
       tarball: 'file:projects/modelerfour.tgz'
     version: 0.0.0
   'file:projects/oai2-to-oai3.tgz_prettier@2.2.1':
