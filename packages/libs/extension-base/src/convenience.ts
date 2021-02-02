@@ -6,11 +6,11 @@
 import { createSandbox, deserialize } from "@azure-tools/codegen";
 import { Host } from "./exports";
 import { Channel, Message, Mapping, RawSourceMap, JsonPath, Position } from "./types";
-import { Schema, DEFAULT_SAFE_SCHEMA } from "js-yaml";
+import { Schema, DEFAULT_SCHEMA } from "js-yaml";
 
 const safeEval = createSandbox();
 
-async function getModel<T>(service: Host, yamlSchema: Schema = DEFAULT_SAFE_SCHEMA, artifactType?: string) {
+async function getModel<T>(service: Host, yamlSchema: Schema = DEFAULT_SCHEMA, artifactType?: string) {
   const files = await service.ListInputs(artifactType);
   const filename = files[0];
   if (files.length === 0) {
@@ -33,11 +33,7 @@ export class Session<TInputModel> {
 
   /* @internal */ constructor(public readonly service: Host) {}
 
-  /* @internal */ async init<TProject>(
-    project?: TProject,
-    schema: Schema = DEFAULT_SAFE_SCHEMA,
-    artifactType?: string,
-  ) {
+  /* @internal */ async init<TProject>(project?: TProject, schema: Schema = DEFAULT_SCHEMA, artifactType?: string) {
     const m = await getModel<TInputModel>(this.service, schema, artifactType);
     this.model = m.model;
     this.filename = m.filename;
@@ -167,17 +163,17 @@ export class Session<TInputModel> {
     let output = input;
     for (const rx of [/\$\((.*?)\)/g, /\$\{(.*?)\}/g]) {
       /* eslint-disable */
-      for (let match; match = rx.exec(input);) {
+      for (let match; (match = rx.exec(input)); ) {
         const text = match[0];
         const inner = match[1];
         let value = await this.getValue<any>(inner, null);
 
         if (value !== undefined && value !== null) {
-          if (typeof value === 'object') {
+          if (typeof value === "object") {
             value = JSON.stringify(value, this.replacer, 2);
           }
-          if (value === '{}') {
-            value = 'true';
+          if (value === "{}") {
+            value = "true";
           }
           output = output.replace(text, value);
         }
@@ -193,14 +189,14 @@ export class Session<TInputModel> {
   }
 
   protected msg(channel: Channel, message: string, key: Array<string>, objectOrPath?: string | Object, details?: any) {
-    const sourcePosition = objectOrPath ? (<any>objectOrPath)['_#get-position#_'] || String(objectOrPath) : undefined;
-    if (objectOrPath && (<any>objectOrPath)['_#get-position#_'])
+    const sourcePosition = objectOrPath ? (<any>objectOrPath)["_#get-position#_"] || String(objectOrPath) : undefined;
+    if (objectOrPath && (<any>objectOrPath)["_#get-position#_"])
       this.message({
         Channel: channel,
         Key: key,
         Source: [sourcePosition],
         Text: message,
-        Details: details
+        Details: details,
       });
     else {
       this.message({
@@ -208,7 +204,7 @@ export class Session<TInputModel> {
         Key: key,
         Source: [],
         Text: message,
-        Details: details
+        Details: details,
       });
     }
   }
@@ -248,6 +244,11 @@ export class Session<TInputModel> {
   }
 }
 
-export async function startSession<TInputModel>(service: Host, project?: any, schema: Schema = DEFAULT_SAFE_SCHEMA, artifactType?: string) {
+export async function startSession<TInputModel>(
+  service: Host,
+  project?: any,
+  schema: Schema = DEFAULT_SCHEMA,
+  artifactType?: string,
+) {
   return await new Session<TInputModel>(service).init(project, schema, artifactType);
 }

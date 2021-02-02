@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DEFAULT_SAFE_SCHEMA, dump, safeLoad, Schema } from "js-yaml";
+import { DEFAULT_SCHEMA, dump, load, Schema } from "js-yaml";
 
 const propertyPriority = [
   "info",
@@ -86,11 +86,11 @@ function sortWithPriorty(a: any, b: any): number {
   return ib != -1 || a > b ? 1 : a < b ? -1 : 0;
 }
 
-export function deserialize<T>(text: string, filename: string, schema: Schema = DEFAULT_SAFE_SCHEMA) {
-  return <T>safeLoad(text, {
+export function deserialize<T>(text: string, filename: string, schema: Schema = DEFAULT_SCHEMA): T {
+  return (load(text, {
     schema,
     filename,
-  });
+  }) as any) as T;
 }
 
 export interface SerializeOptions {
@@ -98,11 +98,11 @@ export interface SerializeOptions {
   sortKeys?: boolean;
 }
 
-export function serialize<T>(model: T, schemaOrOptions: Schema | SerializeOptions = DEFAULT_SAFE_SCHEMA): string {
+export function serialize<T>(model: T, schemaOrOptions: Schema | SerializeOptions = DEFAULT_SCHEMA): string {
   const options: SerializeOptions =
     schemaOrOptions instanceof Schema
       ? { schema: schemaOrOptions, sortKeys: true }
-      : { schema: DEFAULT_SAFE_SCHEMA, sortKeys: true, ...schemaOrOptions };
+      : { schema: DEFAULT_SCHEMA, sortKeys: true, ...schemaOrOptions };
 
   return dump(model, {
     schema: options.schema,

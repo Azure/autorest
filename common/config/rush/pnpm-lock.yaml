@@ -25,6 +25,7 @@ dependencies:
   '@types/express': 4.17.11
   '@types/glob': 7.1.3
   '@types/jest': 26.0.20
+  '@types/js-yaml': 4.0.0
   '@types/jsonpath': 0.2.0
   '@types/morgan': 1.9.2
   '@types/mustache': 4.1.1
@@ -52,6 +53,7 @@ dependencies:
   glob: 7.1.6
   jest: 26.6.3
   jest-snapshot: 26.6.2
+  js-yaml: 4.0.0
   jsonpath: 1.0.0
   linq-es2015: 2.5.1
   mkdirp: 0.5.5
@@ -945,10 +947,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-9zi2Y+5USJRxd0FsahERhBwlcvFh6D2GLQnY2FH2BzK8J9s9omvNHIbvABwIluXa0fD8XVKMLTO0aOEuUfACAA==
-  /@types/js-yaml/3.12.1:
-    dev: false
-    resolution:
-      integrity: sha512-SGGAhXLHDx+PK4YLNcNGa6goPf9XRWQNAUUbffkwVGGXIxmDKWyGGL4inzq2sPmExu431Ekb9aEMn9BkPqEYFA==
   /@types/js-yaml/4.0.0:
     dev: false
     resolution:
@@ -8987,7 +8985,7 @@ packages:
       '@azure-tools/async-io': 3.0.253
       '@azure-tools/linq': 3.1.262
       '@types/jest': 26.0.20
-      '@types/js-yaml': 3.12.1
+      '@types/js-yaml': 4.0.0
       '@types/node': 14.14.22
       '@types/semver': 5.5.0
       '@typescript-eslint/eslint-plugin': 4.14.2_8cdb9a11024373d23e22cd09874575e8
@@ -8996,7 +8994,7 @@ packages:
       eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
       eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
       jest: 26.6.3
-      js-yaml: 3.13.1
+      js-yaml: 4.0.0
       semver: 5.7.1
       source-map-support: 0.5.19
       ts-jest: 26.5.0_jest@26.6.3+typescript@3.9.7
@@ -9007,14 +9005,14 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-GdA3AY0XxALuUVbKekvHBAaWd+IY4GbigfmIL3cGCbOHug0y45UayDW+C+jIuZa8Er4Rc3afz8/GVC8S+CqnLw==
+      integrity: sha512-jpnFt8N5CVolxOhzEAuTgSkSq6CR3a9uvX1WeMJDDgVC2h+eRW80rhr2uqx6LyacyMBC/nfo5mfKCobgARJlUQ==
       tarball: 'file:projects/codegen.tgz'
     version: 0.0.0
   'file:projects/codemodel.tgz_prettier@2.2.1':
     dependencies:
       '@azure-tools/codegen': 2.5.290
       '@azure-tools/linq': 3.1.262
-      '@types/js-yaml': 3.12.1
+      '@types/js-yaml': 4.0.0
       '@types/node': 14.14.22
       '@typescript-eslint/eslint-plugin': 4.14.2_8cdb9a11024373d23e22cd09874575e8
       '@typescript-eslint/parser': 4.14.2_eslint@7.19.0+typescript@3.9.7
@@ -9022,7 +9020,7 @@ packages:
       eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
       eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
       glob: 7.1.6
-      js-yaml: 3.13.1
+      js-yaml: 4.0.0
       ts-morph: 4.0.1
       typescript: 3.9.7
       typescript-json-schema: 0.40.0
@@ -9032,7 +9030,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-deV7iclTLJ2j34G4I9AnV0eWdOgriY7XTgtyTlNAZxddO1lUltTcx+T8hVe/lPKV3XG9S3C0OaemKknNvxZxdQ==
+      integrity: sha512-so61NlNeyLX2dUXpr1GYwEXxdU71poS9WR9jv/f8gdqSaJvWOOklErm6DGEciraMU5g3svD/vxNak1inEtvgxA==
       tarball: 'file:projects/codemodel.tgz'
     version: 0.0.0
   'file:projects/core.tgz':
@@ -9086,14 +9084,14 @@ packages:
     version: 0.0.0
   'file:projects/extension-base.tgz_prettier@2.2.1':
     dependencies:
-      '@types/js-yaml': 3.12.1
+      '@types/js-yaml': 4.0.0
       '@types/node': 14.14.22
       '@typescript-eslint/eslint-plugin': 4.14.2_8cdb9a11024373d23e22cd09874575e8
       '@typescript-eslint/parser': 4.14.2_eslint@7.19.0+typescript@3.9.7
       eslint: 7.19.0
       eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
       eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
-      js-yaml: 3.13.1
+      js-yaml: 4.0.0
       typescript: 3.9.7
       vscode-jsonrpc: 3.6.2
     dev: false
@@ -9102,7 +9100,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-Ee1O6TjFx9yjKzsjJYBvbzzoYCNENIDWSCkeQnACjOThQMGy+5PXrCQGlSu5Na5V4zrT+wGYpqUt/DNeI5CswQ==
+      integrity: sha512-PqJY5LZNjcG2O5svdc8KPOeuPqOEVMMDsJFmVWCktJ1uwN0yMiFNz0JtUuPeT4y1St7l6uK0kPKKC0z117ot9g==
       tarball: 'file:projects/extension-base.tgz'
     version: 0.0.0
   'file:projects/md-mock-api.tgz':
@@ -9188,7 +9186,7 @@ packages:
       '@azure-tools/datastore': 4.1.270
       '@azure-tools/openapi': 3.0.261
       '@types/jest': 26.0.20
-      '@types/js-yaml': 3.12.1
+      '@types/js-yaml': 4.0.0
       '@types/node': 14.14.22
       '@types/source-map': 0.5.0
       '@typescript-eslint/eslint-plugin': 4.14.2_8cdb9a11024373d23e22cd09874575e8
@@ -9207,7 +9205,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-lBHioutZ7td8gqLpoyPYQloRj772NNZd5gOQOEFdI8Y1pnML4eKAub0PYhJhSu8y5EpC9RK0udTDAARwyj0lKA==
+      integrity: sha512-QVEGpLMNqAm7Nt552L9Ngpn1vuxPOsbMuI02DG5EABQiQwrKK1gxRH2BYccEPgKebqsVP1PD+TM20Z0dCBurJw==
       tarball: 'file:projects/oai2-to-oai3.tgz'
     version: 0.0.0
   'file:projects/schemas.tgz':
@@ -9245,6 +9243,7 @@ specifiers:
   '@types/express': ~4.17.9
   '@types/glob': ^7.1.3
   '@types/jest': ^26.0.20
+  '@types/js-yaml': ~4.0.0
   '@types/jsonpath': ^0.2.0
   '@types/morgan': ^1.9.2
   '@types/mustache': ^4.1.0
@@ -9272,6 +9271,7 @@ specifiers:
   glob: ~7.1.4
   jest: ^26.6.3
   jest-snapshot: ~26.6.2
+  js-yaml: ~4.0.0
   jsonpath: 1.0.0
   linq-es2015: ^2.4.25
   mkdirp: ~0.5.1
