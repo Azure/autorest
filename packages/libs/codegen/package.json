@@ -37,7 +37,6 @@
   "devDependencies": {
     "@types/jest": "^26.0.19",
     "@types/js-yaml": "3.12.1",
-    "@types/mocha": "5.2.5",
     "@types/node": "12.7.2",
     "@types/semver": "5.5.0",
     "@typescript-eslint/eslint-plugin": "^4.12.0",

@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/oai2-to-oai3",
+      "comment": "Internal: Migrate test framwork mocha -> jest",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@azure-tools/oai2-to-oai3",
+  "email": "tiguerin@microsoft.com"
+}
