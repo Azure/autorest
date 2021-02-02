@@ -48,7 +48,7 @@
     "ts-morph": "~4.0.1"
   },
   "dependencies": {
-    "@azure-tools/codegen": "2.5.290",
+    "@azure-tools/codegen": "~2.5.292",
     "@azure-tools/linq": "~3.1.0",
     "js-yaml": "3.13.1"
   },
