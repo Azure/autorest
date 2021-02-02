@@ -10,9 +10,7 @@
     "lint": "eslint ./src --ext .ts --max-warnings=0",
     "test": "echo 'No tests'",
     "test:ci": "echo 'No tests'",
-    "clean": "ver > nul 2>&1 nul && npm run --silent clean-cmd || npm run --silent clean-bash",
-    "clean-cmd": "if exist dist rmdir /s /q dist && exit 0 || exit 0 ",
-    "clean-bash": "rm nul && rm -rf dist && exit 0 || exit 0"
+    "clean": "rimraf ./dist"
   },
   "typings": "./dist/exports.d.ts",
   "repository": {
@@ -33,7 +31,8 @@
     "@typescript-eslint/parser": "^4.12.0",
     "eslint": "^7.17.0",
     "eslint-plugin-unicorn": "~27.0.0",
-    "eslint-plugin-prettier": "~3.2.0"
+    "eslint-plugin-prettier": "~3.2.0",
+    "rimraf": "^3.0.2"
   },
   "dependencies": {
     "js-yaml": "~4.0.0",

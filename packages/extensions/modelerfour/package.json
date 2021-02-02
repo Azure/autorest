@@ -70,7 +70,7 @@
     "ts-loader": "~8.0.14",
     "webpack": "~5.18.0",
     "webpack-cli": "~4.4.0",
-    "rimraf": "~3.0.0"
+    "rimraf": "^3.0.2"
   },
   "dependencies": {}
 }

@@ -73,7 +73,7 @@
     "jsonpath": "1.0.0",
     "linq-es2015": "^2.4.25",
     "mkdirp": "~0.5.1",
-    "rimraf": "~3.0.0",
+    "rimraf": "^3.0.2",
     "source-map": "0.5.6",
     "untildify": "^3.0.2",
     "vscode-jsonrpc": "^3.5.0",

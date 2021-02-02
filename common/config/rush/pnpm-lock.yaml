@@ -515,7 +515,7 @@ packages:
       globals: 12.4.0
       ignore: 4.0.6
       import-fresh: 3.3.0
-      js-yaml: 3.13.1
+      js-yaml: 3.14.1
       lodash: 4.17.20
       minimatch: 3.0.4
       strip-json-comments: 3.1.1
@@ -529,7 +529,7 @@ packages:
       camelcase: 5.3.1
       find-up: 4.1.0
       get-package-type: 0.1.0
-      js-yaml: 3.13.1
+      js-yaml: 3.14.1
       resolve-from: 5.0.0
     dev: false
     engines:
@@ -3218,7 +3218,7 @@ packages:
       import-fresh: 3.3.0
       imurmurhash: 0.1.4
       is-glob: 4.0.1
-      js-yaml: 3.13.1
+      js-yaml: 3.14.1
       json-stable-stringify-without-jsonify: 1.0.1
       levn: 0.4.1
       lodash: 4.17.20
@@ -5149,6 +5149,14 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
+  /js-yaml/3.14.1:
+    dependencies:
+      argparse: 1.0.10
+      esprima: 4.0.1
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==
   /js-yaml/4.0.0:
     dependencies:
       argparse: 2.0.1
@@ -8967,7 +8975,7 @@ packages:
     dev: false
     name: '@rush-temp/autorest'
     resolution:
-      integrity: sha512-XWh23LBIgHFgGhiV/K7zF5WHzYQGL7Czy93l8nY/lV8ZG1wQX034cpcpR0nAZEG/MleeUQzoAa0RXrsQOHe4wA==
+      integrity: sha512-g02ZVBKrDOUpZh00wQWxlbRe/LLxgjvaYM8R1v59lzGPqpFfZri5iTNUJvlrYOgpT8oQcvSffStp5Pt18UVQaA==
       tarball: 'file:projects/autorest.tgz'
     version: 0.0.0
   'file:projects/codegen.tgz_prettier@2.2.1':
@@ -8985,6 +8993,7 @@ packages:
       eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
       jest: 26.6.3
       js-yaml: 4.0.0
+      rimraf: 3.0.2
       semver: 5.7.1
       source-map-support: 0.5.19
       ts-jest: 26.5.0_jest@26.6.3+typescript@4.1.3
@@ -8995,7 +9004,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-bc3/1G35YzOmQuxJApzEiz4eoRJ8ds/lJYst3b0yDqPjvxhssRHHyZiGl0yPX6tH10nM2FGupTQQpdjcbV12+Q==
+      integrity: sha512-nGGKgwPTxtb5KuoDovVsY2c0+EkrUTEq+cwzgSAl0p5GLX90MmKnUqNphM1Vzh/4hahoeExI3Ime/IqqK8J+YA==
       tarball: 'file:projects/codegen.tgz'
     version: 0.0.0
   'file:projects/codemodel.tgz_prettier@2.2.1':
@@ -9067,7 +9076,7 @@ packages:
     dev: false
     name: '@rush-temp/core'
     resolution:
-      integrity: sha512-TCri+vgcs8gyG8DSVFS6IurXoMIMxcb6eOm7vYtLGj5H5FJUqibpsOvk5z2yHf1rS01Xe/PRfMYYJconuiJf+g==
+      integrity: sha512-HuWO/SLj1FtjAdRuPhqGkH83iwErtCn/0INqpXdt1vpIioEpZgBfkyAxVprDBTPDZN5EfCs0umJ7kzJlv824wQ==
       tarball: 'file:projects/core.tgz'
     version: 0.0.0
   'file:projects/extension-base.tgz_prettier@2.2.1':
@@ -9080,6 +9089,7 @@ packages:
       eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
       eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
       js-yaml: 4.0.0
+      rimraf: 3.0.2
       typescript: 4.1.3
       vscode-jsonrpc: 3.6.2
     dev: false
@@ -9088,7 +9098,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-RHMGApJMcvhi13lcv14fWhUM1Hm60bxq/6QAP4PIs5wsGmbjk2matRGPlIWIRSH0RazpzakyyQ5/f3OUK3rSMg==
+      integrity: sha512-HgJO+IEfo+W9pCPebLGjCy1F2ktYSiIhkYZpmhRHbWW4ZfQlbOcxiFF60UGWE/U7iEt9qVjmGo2UdWZaJdiEpw==
       tarball: 'file:projects/extension-base.tgz'
     version: 0.0.0
   'file:projects/md-mock-api.tgz':
@@ -9166,7 +9176,7 @@ packages:
     dev: false
     name: '@rush-temp/modelerfour'
     resolution:
-      integrity: sha512-ZHKoWEQWma3ysauixAs1zNxN7dqc1gvbx7AtioOwzRklBo2kR5N6MC9G2cToHJ24g/47mG4TFareO9kUjeCyhg==
+      integrity: sha512-iS4E76JifwxPUTub8uCD7mzNzGQAZwh6cWx1BBgmfpo3rDSrjBQRbNffMkxYsWyAfs2lF2C7staV85EeAPRbVg==
       tarball: 'file:projects/modelerfour.tgz'
     version: 0.0.0
   'file:projects/oai2-to-oai3.tgz_prettier@2.2.1':
@@ -9183,6 +9193,7 @@ packages:
       eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
       eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
       jest: 26.6.3
+      rimraf: 3.0.2
       source-map: 0.5.6
       source-map-support: 0.5.19
       ts-jest: 26.5.0_jest@26.6.3+typescript@4.1.3
@@ -9193,7 +9204,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-9tFiJlPm0DwYv/TNwy0yypamELGWEcaDlK/4Jn8g+ZPWftaFEG3XuOVGBHjaVLMl63vjat2kl47hltj0478lDg==
+      integrity: sha512-c3miz7la4bG0FxuVgMmZNrNdoyFkH218u1UyDt2xBrDpp/jbtm8y0YL/IMvGrFso1Yf2z7JGUhTjev4XSFo8Yg==
       tarball: 'file:projects/oai2-to-oai3.tgz'
     version: 0.0.0
   'file:projects/schemas.tgz':
@@ -9266,7 +9277,7 @@ specifiers:
   mustache: ^4.1.0
   prettier: ~2.2.1
   recursive-diff: ~1.0.6
-  rimraf: ~3.0.0
+  rimraf: ^3.0.2
   safe-buffer: 5.2.0
   semver: ^5.5.1
   source-map: 0.5.6
