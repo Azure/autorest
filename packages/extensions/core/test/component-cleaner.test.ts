@@ -1,8 +1,8 @@
-import * as assert from "assert";
+import assert from "assert";
 import * as datastore from "@azure-tools/datastore";
 import * as aio from "@azure-tools/async-io";
-import { ComponentsCleaner } from "../lib/pipeline/plugins/components-cleaner";
-import { AppRoot } from "../lib/constants";
+import { ComponentsCleaner } from "../src/lib/pipeline/plugins/components-cleaner";
+import { AppRoot } from "../src/lib/constants";
 
 require("source-map-support").install();
 

@@ -6,9 +6,9 @@
 import * as aio from "@azure-tools/async-io";
 import * as datastore from "@azure-tools/datastore";
 
-import * as assert from "assert";
+import assert from "assert";
 
-import { MultiAPIMerger } from "../lib/pipeline/plugins/merger";
+import { MultiAPIMerger } from "../src/lib/pipeline/plugins/merger";
 import { FastStringify } from "@azure-tools/datastore";
 try {
   require("source-map-support").install();

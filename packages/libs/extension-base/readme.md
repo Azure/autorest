@@ -21,7 +21,7 @@ See https://github.com/azure/autorest-extension-helloworld for an example of how
 ## Usage
 
 ``` JavaScript
-import { AutoRestExtension } from "autorest-extension-base";
+import { AutoRestExtension } from "@autorest/extension-base";
 
 const extension = new AutoRestExtension();
 

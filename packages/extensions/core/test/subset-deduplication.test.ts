@@ -1,12 +1,12 @@
 import * as aio from "@azure-tools/async-io";
 import * as datastore from "@azure-tools/datastore";
-import * as assert from "assert";
+import assert from "assert";
 import {
   getSubsetRelation,
   getSubsetSchema,
   getSupersetSchema,
   SubsetSchemaDeduplicator,
-} from "../lib/pipeline/plugins/subset-schemas-deduplicator";
+} from "../src/lib/pipeline/plugins/subset-schemas-deduplicator";
 
 const resources = `${__dirname}../../../test/resources/subset-deduplication`;
 

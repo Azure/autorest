@@ -18,7 +18,7 @@ const config = {
     },
   },
   setupFilesAfterEnv: [],
-  testMatch: ["<rootDir>/test/**/*.test.ts"],
+  testMatch: ["<rootDir>/src/**/*.test.ts"],
   verbose: true,
   testEnvironment: "node",
 };

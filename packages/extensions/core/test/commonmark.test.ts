@@ -6,11 +6,11 @@
 import { nodes } from "@azure-tools/datastore";
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
 import { RealFileSystem } from "@azure-tools/datastore";
-import { AutoRest } from "../lib/autorest-core";
-import * as assert from "assert";
+import { AutoRest } from "../src/lib/autorest-core";
+import assert from "assert";
 
 import { Node, Parser } from "commonmark";
-import { plainTextVersion } from "../lib/pipeline/commonmark-documentation";
+import { plainTextVersion } from "../src/lib/pipeline/commonmark-documentation";
 
 const parse = (rawCommonmark: string): Node => {
   return new Parser().parse(rawCommonmark);

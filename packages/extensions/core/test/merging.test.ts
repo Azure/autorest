@@ -2,10 +2,10 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import * as assert from "assert";
+import assert from "assert";
 
 import { matches } from "@azure-tools/datastore";
-import { MergeOverwriteOrAppend } from "../lib/source-map/merging";
+import { MergeOverwriteOrAppend } from "../src/lib/source-map/merging";
 
 describe("Merging", () => {
   it("MergeOverwriteOrAppend", () => {

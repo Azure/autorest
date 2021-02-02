@@ -1,7 +1,7 @@
 import * as aio from "@azure-tools/async-io";
 import * as datastore from "@azure-tools/datastore";
-import * as assert from "assert";
-import { ApiVersionParameterHandler } from "../lib/pipeline/plugins/version-param-handler";
+import assert from "assert";
+import { ApiVersionParameterHandler } from "../src/lib/pipeline/plugins/version-param-handler";
 
 const resources = `${__dirname}../../../test/resources/version-param-handler`;
 

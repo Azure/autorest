@@ -3,11 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import { CancellationToken } from "vscode-jsonrpc";
-import * as assert from "assert";
+import assert from "assert";
 import { DataStore } from "@azure-tools/datastore";
-import { manipulateObject } from "../lib/pipeline/plugins/transformer/object-manipulator";
+import { manipulateObject } from "../src/lib/pipeline/plugins/transformer/object-manipulator";
 import { createSandbox } from "@azure-tools/datastore";
-import { createCommonmarkProcessorPlugin } from "../lib/pipeline/plugins/commonmark";
 
 const safeEval = createSandbox();
 try {

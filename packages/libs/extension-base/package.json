@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc -p .",
     "watch": "tsc -p . --watch",
-    "lint:fix": "eslint . --fix --ext .ts",
-    "lint": "eslint . --ext .ts --max-warnings=0",
+    "lint:fix": "eslint ./src --fix --ext .ts",
+    "lint": "eslint ./src --ext .ts --max-warnings=0",
     "test": "echo 'No tests'",
     "test:ci": "echo 'No tests'",
     "clean": "ver > nul 2>&1 nul && npm run --silent clean-cmd || npm run --silent clean-bash",

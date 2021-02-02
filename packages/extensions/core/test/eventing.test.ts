@@ -1,5 +1,5 @@
-import * as assert from "assert";
-import { IEvent, EventEmitter } from "../lib/events";
+import assert from "assert";
+import { IEvent, EventEmitter } from "../src/lib/events";
 
 export class MyClass extends EventEmitter {
   @EventEmitter.Event public Debug!: IEvent<MyClass, string>;

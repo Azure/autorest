@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 /* eslint-disable no-console */
-import { AutoRest } from "../lib/autorest-core";
-import { Message, Channel } from "../lib/message";
+import { AutoRest } from "../src/lib/autorest-core";
+import { Message, Channel } from "../src/lib/message";
 
 export function PumpMessagesToConsole(autoRest: AutoRest): void {
   autoRest.Message.Subscribe((_, m) => {

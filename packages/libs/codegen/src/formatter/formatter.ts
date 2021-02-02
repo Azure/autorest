@@ -1,4 +1,4 @@
-import { fixLeadingNumber, removeSequentialDuplicates } from "./text-manipulation";
+import { fixLeadingNumber, removeSequentialDuplicates } from "../text-manipulation";
 import { Dictionary, values } from "@azure-tools/linq";
 
 export type Styler = (

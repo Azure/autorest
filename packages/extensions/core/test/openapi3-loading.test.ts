@@ -1,9 +1,9 @@
-import * as assert from "assert";
-import { AutoRest } from "../lib/autorest-core";
+import assert from "assert";
+import { AutoRest } from "../src/lib/autorest-core";
 import { RealFileSystem } from "@azure-tools/datastore";
-import { LoadLiterateOpenAPIs } from "../lib/pipeline/plugins/loaders";
+import { LoadLiterateOpenAPIs } from "../src/lib/pipeline/plugins/loaders";
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
-import { AppRoot } from "../lib/constants";
+import { AppRoot } from "../src/lib/constants";
 
 describe("OpenAPI3Loading", () => {
   it("No input files provided", async () => {

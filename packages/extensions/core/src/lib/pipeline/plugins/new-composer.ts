@@ -12,7 +12,7 @@ import { values, Dictionary } from "@azure-tools/linq";
 import { areSimilar } from "@azure-tools/object-comparison";
 import { PipelinePlugin } from "../common";
 import { maximum, toSemver } from "@azure-tools/codegen";
-import * as compareVersions from "compare-versions";
+import compareVersions from "compare-versions";
 import { ConfigurationView } from "../../configuration";
 
 try {

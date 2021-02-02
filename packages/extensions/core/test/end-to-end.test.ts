@@ -1,10 +1,10 @@
-import * as assert from "assert";
+import assert from "assert";
 
-import { AutoRest } from "../lib/autorest-core";
+import { AutoRest } from "../src/lib/autorest-core";
 import { RealFileSystem } from "@azure-tools/datastore";
-import { Channel, Message } from "../lib/message";
+import { Channel, Message } from "../src/lib/message";
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
-import { AppRoot } from "../lib/constants";
+import { AppRoot } from "../src/lib/constants";
 
 describe("EndToEnd", () => {
   it("network full game", async () => {

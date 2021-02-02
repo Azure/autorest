@@ -1,5 +1,5 @@
 import * as assert from "assert";
-import { toSemver } from "../apiversion";
+import { toSemver } from "./apiversion";
 
 describe("ApiVersion", () => {
   it("to semver conversion", () => {
