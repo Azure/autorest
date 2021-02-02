@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { serialize } from "@azure-tools/codegen";
-import { Host, startSession } from "@azure-tools/autorest-extension-base";
+import { Host, startSession } from "@autorest/extension-base";
 import { codeModelSchema, CodeModel } from "@autorest/codemodel";
 import { PreNamer } from "./prenamer";
 

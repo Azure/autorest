@@ -1,4 +1,4 @@
-import { Session } from "@azure-tools/autorest-extension-base";
+import { Session } from "@autorest/extension-base";
 import * as OpenAPI from "@azure-tools/openapi";
 import { values, length, items, ToDictionary, Dictionary } from "@azure-tools/linq";
 import {

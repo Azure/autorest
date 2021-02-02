@@ -72,7 +72,7 @@ import {
   TimeSchema,
   HttpMultipartRequest,
 } from "@autorest/codemodel";
-import { Session, Channel } from "@azure-tools/autorest-extension-base";
+import { Session, Channel } from "@autorest/extension-base";
 import { Interpretations, XMSEnum } from "./interpretations";
 import { fail, minimum, pascalCase, knownMediaType, KnownMediaType } from "@azure-tools/codegen";
 import { ModelerFourOptions } from "./modelerfour-options";
@@ -785,7 +785,6 @@ export class ModelerFour {
     for (const { key: propertyName, value: propertyDeclaration } of items(schema.properties)) {
       const property = this.resolve(propertyDeclaration);
       this.use(<OpenAPI.Refable<OpenAPI.Schema>>propertyDeclaration, (pSchemaName, pSchema) => {
-
         const pType = this.processSchema(pSchemaName || `type·for·${propertyName}`, pSchema);
         const prop = objectSchema.addProperty(
           new Property(

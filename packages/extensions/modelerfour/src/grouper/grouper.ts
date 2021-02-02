@@ -15,7 +15,7 @@ import {
   Request,
   SchemaContext,
 } from "@autorest/codemodel";
-import { Session } from "@azure-tools/autorest-extension-base";
+import { Session } from "@autorest/extension-base";
 import { values, items, length, Dictionary, refCount, clone } from "@azure-tools/linq";
 import { pascalCase, camelCase } from "@azure-tools/codegen";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
