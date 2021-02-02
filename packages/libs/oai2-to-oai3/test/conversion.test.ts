@@ -14,8 +14,8 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     const swaggerUri = "mem://swagger.yaml";
     const oai3Uri = "mem://oai3.yaml";
 
-    const swagger = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai2/swagger.yaml`);
-    const oai3 = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai3/openapi.yaml`);
+    const swagger = await aio.readFile(`${__dirname}/resources/conversion/oai2/swagger.yaml`);
+    const oai3 = await aio.readFile(`${__dirname}/resources/conversion/oai3/openapi.yaml`);
 
     const map = new Map<string, string>([
       [swaggerUri, swagger],
@@ -55,8 +55,8 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     const swaggerUri = "mem://tiny-swagger.yaml";
     const oai3Uri = "mem://tiny-oai3.yaml";
 
-    const swagger = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai2/tiny-swagger.yaml`);
-    const oai3 = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai3/tiny-openapi.yaml`);
+    const swagger = await aio.readFile(`${__dirname}/resources/conversion/oai2/tiny-swagger.yaml`);
+    const oai3 = await aio.readFile(`${__dirname}/resources/conversion/oai3/tiny-openapi.yaml`);
 
     const map = new Map<string, string>([
       [swaggerUri, swagger],
@@ -96,12 +96,8 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     const swaggerUri = "mem://ApiManagementClient-swagger.json";
     const oai3Uri = "mem://ApiManagementClient-oai3.json";
 
-    const swagger = await aio.readFile(
-      `${__dirname}/../../test/resources/conversion/oai2/ApiManagementClient-swagger.json`,
-    );
-    const oai3 = await aio.readFile(
-      `${__dirname}/../../test/resources/conversion/oai3/ApiManagementClient-openapi.json`,
-    );
+    const swagger = await aio.readFile(`${__dirname}/resources/conversion/oai2/ApiManagementClient-swagger.json`);
+    const oai3 = await aio.readFile(`${__dirname}/resources/conversion/oai3/ApiManagementClient-openapi.json`);
 
     const map = new Map<string, string>([
       [swaggerUri, swagger],
@@ -141,8 +137,8 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     const swaggerUri = "mem://request-body-swagger.yaml";
     const oai3Uri = "mem://request-body-openapi.yaml";
 
-    const swagger = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai2/request-body-swagger.yaml`);
-    const oai3 = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai3/request-body-openapi.yaml`);
+    const swagger = await aio.readFile(`${__dirname}/resources/conversion/oai2/request-body-swagger.yaml`);
+    const oai3 = await aio.readFile(`${__dirname}/resources/conversion/oai3/request-body-openapi.yaml`);
 
     const map = new Map<string, string>([
       [swaggerUri, swagger],
@@ -182,8 +178,8 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     const swaggerUri = "mem://header2.json";
     const oai3Uri = "mem://header3.json";
 
-    const swagger = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai2/header.json`);
-    const oai3 = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai3/header.json`);
+    const swagger = await aio.readFile(`${__dirname}/resources/conversion/oai2/header.json`);
+    const oai3 = await aio.readFile(`${__dirname}/resources/conversion/oai3/header.json`);
 
     const map = new Map<string, string>([
       [swaggerUri, swagger],
@@ -220,8 +216,8 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     const swaggerUri = "mem://additionalProperties2.json";
     const oai3Uri = "mem://additionalProperties3.json";
 
-    const swagger = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai2/additionalProperties.json`);
-    const oai3 = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai3/additionalProperties.json`);
+    const swagger = await aio.readFile(`${__dirname}/resources/conversion/oai2/additionalProperties.json`);
+    const oai3 = await aio.readFile(`${__dirname}/resources/conversion/oai3/additionalProperties.json`);
 
     const map = new Map<string, string>([
       [swaggerUri, swagger],
@@ -258,8 +254,8 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     const swaggerUri = "mem://xml-service2.json";
     const oai3Uri = "mem://xml-service3.json";
 
-    const swagger = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai2/xml-service.json`);
-    const oai3 = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai3/xml-service.json`);
+    const swagger = await aio.readFile(`${__dirname}/resources/conversion/oai2/xml-service.json`);
+    const oai3 = await aio.readFile(`${__dirname}/resources/conversion/oai3/xml-service.json`);
 
     const map = new Map<string, string>([
       [swaggerUri, swagger],
@@ -296,8 +292,8 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     const swaggerUri = "mem://xms-error-responses2.json";
     const oai3Uri = "mem://xms-error-responses3.json";
 
-    const swagger = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai2/xms-error-responses.json`);
-    const oai3 = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai3/xms-error-responses.json`);
+    const swagger = await aio.readFile(`${__dirname}/resources/conversion/oai2/xms-error-responses.json`);
+    const oai3 = await aio.readFile(`${__dirname}/resources/conversion/oai3/xms-error-responses.json`);
 
     const map = new Map<string, string>([
       [swaggerUri, swagger],
@@ -334,8 +330,8 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
-    const swagger = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai2/validation.json`);
-    const oai3 = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai3/validation.json`);
+    const swagger = await aio.readFile(`${__dirname}/resources/conversion/oai2/validation.json`);
+    const oai3 = await aio.readFile(`${__dirname}/resources/conversion/oai3/validation.json`);
 
     const map = new Map<string, string>([
       [swaggerUri, swagger],
@@ -372,8 +368,8 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
-    const swagger = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai2/storage.json`);
-    const oai3 = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai3/storage.json`);
+    const swagger = await aio.readFile(`${__dirname}/resources/conversion/oai2/storage.json`);
+    const oai3 = await aio.readFile(`${__dirname}/resources/conversion/oai3/storage.json`);
 
     const map = new Map<string, string>([
       [swaggerUri, swagger],
@@ -410,8 +406,8 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
-    const swagger = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai2/url.json`);
-    const oai3 = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai3/url.json`);
+    const swagger = await aio.readFile(`${__dirname}/resources/conversion/oai2/url.json`);
+    const oai3 = await aio.readFile(`${__dirname}/resources/conversion/oai3/url.json`);
 
     const map = new Map<string, string>([
       [swaggerUri, swagger],
@@ -448,12 +444,8 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
-    const swagger = await aio.readFile(
-      `${__dirname}/../../test/resources/conversion/oai2/url-multi-collectionFormat.json`,
-    );
-    const oai3 = await aio.readFile(
-      `${__dirname}/../../test/resources/conversion/oai3/url-multi-collectionFormat.json`,
-    );
+    const swagger = await aio.readFile(`${__dirname}/resources/conversion/oai2/url-multi-collectionFormat.json`);
+    const oai3 = await aio.readFile(`${__dirname}/resources/conversion/oai3/url-multi-collectionFormat.json`);
 
     const map = new Map<string, string>([
       [swaggerUri, swagger],
@@ -490,8 +482,8 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
-    const swagger = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai2/complex-model.json`);
-    const oai3 = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai3/complex-model.json`);
+    const swagger = await aio.readFile(`${__dirname}/resources/conversion/oai2/complex-model.json`);
+    const oai3 = await aio.readFile(`${__dirname}/resources/conversion/oai3/complex-model.json`);
 
     const map = new Map<string, string>([
       [swaggerUri, swagger],
@@ -528,10 +520,8 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
-    const swagger = await aio.readFile(
-      `${__dirname}/../../test/resources/conversion/oai2/extensible-enums-swagger.json`,
-    );
-    const oai3 = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai3/extensible-enums-swagger.json`);
+    const swagger = await aio.readFile(`${__dirname}/resources/conversion/oai2/extensible-enums-swagger.json`);
+    const oai3 = await aio.readFile(`${__dirname}/resources/conversion/oai3/extensible-enums-swagger.json`);
 
     const map = new Map<string, string>([
       [swaggerUri, swagger],
@@ -568,8 +558,8 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
-    const swagger = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai2/lro.json`);
-    const oai3 = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai3/lro.json`);
+    const swagger = await aio.readFile(`${__dirname}/resources/conversion/oai2/lro.json`);
+    const oai3 = await aio.readFile(`${__dirname}/resources/conversion/oai3/lro.json`);
 
     const map = new Map<string, string>([
       [swaggerUri, swagger],
@@ -606,8 +596,8 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
-    const swagger = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai2/exec-service.json`);
-    const oai3 = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai3/exec-service.json`);
+    const swagger = await aio.readFile(`${__dirname}/resources/conversion/oai2/exec-service.json`);
+    const oai3 = await aio.readFile(`${__dirname}/resources/conversion/oai3/exec-service.json`);
 
     const map = new Map<string, string>([
       [swaggerUri, swagger],
@@ -644,8 +634,8 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
-    const swagger = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai2/luis.json`);
-    const oai3 = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai3/luis.json`);
+    const swagger = await aio.readFile(`${__dirname}/resources/conversion/oai2/luis.json`);
+    const oai3 = await aio.readFile(`${__dirname}/resources/conversion/oai3/luis.json`);
 
     const map = new Map<string, string>([
       [swaggerUri, swagger],
