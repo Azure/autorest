@@ -35,7 +35,6 @@ dependencies:
   '@types/supertest': 2.0.10
   '@types/webpack': 4.41.26
   '@types/yargs': 15.0.13
-  '@types/z-schema': 3.24.0
   '@typescript-eslint/eslint-plugin': 4.14.2_e5f964fa93e839b7a7927397f6cb9cb1
   '@typescript-eslint/parser': 4.14.2_eslint@7.19.0+typescript@4.1.3
   body-parser: 1.19.0
@@ -1067,13 +1066,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-kQ5JNTrbDv3Rp5X2n/iUu37IJBDU2gsZ5R/g1/KHOOEc5IKfUFjXT6DENPGduh08I/pamwtEq4oul7gUqKTQDQ==
-  /@types/z-schema/3.24.0:
-    dependencies:
-      z-schema: 5.0.0
-    deprecated: 'This is a stub types definition. z-schema provides its own type definitions, so you do not need this installed.'
-    dev: false
-    resolution:
-      integrity: sha512-TbIRlPsf+ZbGGhY+7hnTUAIXgcyJDltyILJe3F0JaLpCMzkOHya7jdwZlAlIRrLj9YRUyo2GsweolMOkRqMkTg==
   /@typescript-eslint/eslint-plugin/4.14.2_e5f964fa93e839b7a7927397f6cb9cb1:
     dependencies:
       '@typescript-eslint/experimental-utils': 4.14.2_eslint@7.19.0+typescript@4.1.3
@@ -9039,7 +9031,6 @@ packages:
       '@types/jsonpath': 0.2.0
       '@types/node': 14.14.22
       '@types/source-map': 0.5.0
-      '@types/z-schema': 3.24.0
       '@typescript-eslint/eslint-plugin': 4.14.2_e5f964fa93e839b7a7927397f6cb9cb1
       '@typescript-eslint/parser': 4.14.2_eslint@7.19.0+typescript@4.1.3
       commonmark: 0.27.0
@@ -9068,7 +9059,7 @@ packages:
     dev: false
     name: '@rush-temp/core'
     resolution:
-      integrity: sha512-JRNmes63axwsnHPtfer+u18w9yYIEr9rwWJ9+HEhw0O5VMw+Lo5/ELO6XeU3orMaK1kKRJDX+KZqSMAMCWnkdw==
+      integrity: sha512-ioSdBFgarubTeMZjoUn62vUE+4/HQpMhjmInkREFNuYrJ8vO4m+kQuEcYNkBM54X7JFq7TUJelHtUzKAahO+YQ==
       tarball: 'file:projects/core.tgz'
     version: 0.0.0
   'file:projects/extension-base.tgz_prettier@2.2.1':
@@ -9243,7 +9234,6 @@ specifiers:
   '@types/supertest': ^2.0.10
   '@types/webpack': ~4.41.26
   '@types/yargs': ~15.0.12
-  '@types/z-schema': ^3.16.31
   '@typescript-eslint/eslint-plugin': ^4.12.0
   '@typescript-eslint/parser': ^4.12.0
   body-parser: ^1.19.0
