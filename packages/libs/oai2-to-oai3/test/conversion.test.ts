@@ -1,8 +1,6 @@
-import { suite, test } from "mocha-typescript";
 import assert from "assert";
 import * as aio from "@azure-tools/async-io";
 import * as datastore from "@azure-tools/datastore";
-import { FastStringify } from "@azure-tools/datastore";
 
 /* eslint-disable @typescript-eslint/no-empty-function */
 
@@ -11,9 +9,8 @@ require("source-map-support").install();
 import { Oai2ToOai3 } from "../src/converter";
 import { OpenAPI2Document } from "../src/oai2";
 
-@suite
-class MyTests {
-  @test async "test conversion - simple"() {
+describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
+  it("test conversion - simple", async () => {
     const swaggerUri = "mem://swagger.yaml";
     const oai3Uri = "mem://oai3.yaml";
 
@@ -52,9 +49,9 @@ class MyTests {
 
       assert.deepStrictEqual(convert.generated, original, "Should be the same");
     }
-  }
+  });
 
-  @test async "test conversion - tiny"() {
+  it("test conversion - tiny", async () => {
     const swaggerUri = "mem://tiny-swagger.yaml";
     const oai3Uri = "mem://tiny-oai3.yaml";
 
@@ -93,9 +90,9 @@ class MyTests {
 
       assert.deepStrictEqual(convert.generated, original, "Should be the same");
     }
-  }
+  });
 
-  @test async "test conversion - ApiManagementClient"() {
+  it("test conversion - ApiManagementClient", async () => {
     const swaggerUri = "mem://ApiManagementClient-swagger.json";
     const oai3Uri = "mem://ApiManagementClient-oai3.json";
 
@@ -138,9 +135,9 @@ class MyTests {
 
       assert.deepStrictEqual(convert.generated, original, "Should be the same");
     }
-  }
+  });
 
-  @test async "request body - copying extensions"() {
+  it("request body - copying extensions", async () => {
     const swaggerUri = "mem://request-body-swagger.yaml";
     const oai3Uri = "mem://request-body-openapi.yaml";
 
@@ -179,9 +176,9 @@ class MyTests {
 
       assert.deepStrictEqual(convert.generated, original, "Should be the same");
     }
-  }
+  });
 
-  @test async "headers"() {
+  it("headers", async () => {
     const swaggerUri = "mem://header2.json";
     const oai3Uri = "mem://header3.json";
 
@@ -217,9 +214,9 @@ class MyTests {
 
       assert.deepStrictEqual(convert.generated, original, "Should be the same");
     }
-  }
+  });
 
-  @test async "additionalProperties"() {
+  it("additionalProperties", async () => {
     const swaggerUri = "mem://additionalProperties2.json";
     const oai3Uri = "mem://additionalProperties3.json";
 
@@ -255,9 +252,9 @@ class MyTests {
 
       assert.deepStrictEqual(convert.generated, original, "Should be the same");
     }
-  }
+  });
 
-  @test async "xml-service"() {
+  it("xml-service", async () => {
     const swaggerUri = "mem://xml-service2.json";
     const oai3Uri = "mem://xml-service3.json";
 
@@ -293,9 +290,9 @@ class MyTests {
 
       assert.deepStrictEqual(convert.generated, original, "Should be the same");
     }
-  }
+  });
 
-  @test async "xms-error-responses"() {
+  it("xms-error-responses", async () => {
     const swaggerUri = "mem://xms-error-responses2.json";
     const oai3Uri = "mem://xms-error-responses3.json";
 
@@ -331,9 +328,9 @@ class MyTests {
 
       assert.deepStrictEqual(convert.generated, original, "Should be the same");
     }
-  }
+  });
 
-  @test async "validation"() {
+  it("validation", async () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
@@ -369,9 +366,9 @@ class MyTests {
 
       assert.deepStrictEqual(convert.generated, original, "Should be the same");
     }
-  }
+  });
 
-  @test async "storage"() {
+  it("storage", async () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
@@ -407,9 +404,9 @@ class MyTests {
 
       assert.deepStrictEqual(convert.generated, original, "Should be the same");
     }
-  }
+  });
 
-  @test async "url"() {
+  it("url", async () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
@@ -445,9 +442,9 @@ class MyTests {
 
       assert.deepStrictEqual(convert.generated, original, "Should be the same");
     }
-  }
+  });
 
-  @test async "url-multi-collectionFormat"() {
+  it("url-multi-collectionFormat", async () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
@@ -487,9 +484,9 @@ class MyTests {
 
       assert.deepStrictEqual(convert.generated, original, "Should be the same");
     }
-  }
+  });
 
-  @test async "complex-model"() {
+  it("complex-model", async () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
@@ -525,9 +522,9 @@ class MyTests {
 
       assert.deepStrictEqual(convert.generated, original, "Should be the same");
     }
-  }
+  });
 
-  @test async "extensible-enums-swagger"() {
+  it("extensible-enums-swagger", async () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
@@ -565,8 +562,9 @@ class MyTests {
 
       assert.deepStrictEqual(convert.generated, original, "Should be the same");
     }
-  }
-  @test async "lro"() {
+  });
+
+  it("lro", async () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
@@ -602,9 +600,9 @@ class MyTests {
 
       assert.deepStrictEqual(convert.generated, original, "Should be the same");
     }
-  }
+  });
 
-  @test async "exec-service"() {
+  it("exec-service", () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
@@ -640,9 +638,9 @@ class MyTests {
 
       assert.deepStrictEqual(convert.generated, original, "Should be the same");
     }
-  }
+  });
 
-  @test async "LUIS runtime"() {
+  it("LUIS runtime", () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
@@ -678,47 +676,5 @@ class MyTests {
 
       assert.deepStrictEqual(convert.generated, original, "Should be the same");
     }
-  }
-
-  /* @test */ async "test conversion with sourcemap"() {
-    const absoluteUri = "swagger.yaml";
-
-    const swagger = await aio.readFile(`${__dirname}/../../test/resources/conversion/oai2/swagger.yaml`);
-    const map = new Map<string, string>([[absoluteUri, swagger]]);
-    const mfs = new datastore.MemoryFileSystem(map);
-
-    const cts: datastore.CancellationTokenSource = {
-      cancel() {},
-      dispose() {},
-      token: {
-        isCancellationRequested: false,
-        onCancellationRequested: <any>null,
-      },
-    };
-    const ds = new datastore.DataStore(cts.token);
-    const scope = ds.GetReadThroughScope(mfs);
-    const files = await scope.Enum();
-    console.log(files);
-    const swaggerdata = await scope.Read(`file:///${absoluteUri}`);
-
-    assert(swaggerdata != null);
-    if (swaggerdata) {
-      const swag = await swaggerdata.ReadObject<OpenAPI2Document>();
-
-      const convert = new Oai2ToOai3(swaggerdata.key, swag);
-      const result = await convert.convert();
-
-      const sink = ds.getDataSink();
-      const text = FastStringify(convert.generated);
-      // console.log(text);
-      const data = await sink.WriteData("output-file", text, [absoluteUri], "yaml-file", convert.mappings, [
-        swaggerdata,
-      ]);
-
-      // console.log(JSON.stringify(await data.metadata.sourceMap));
-      await aio.writeFile("c:/tmp/swagger.yaml", swagger);
-      await aio.writeFile("c:/tmp/output.yaml", text);
-      // await aio.writeFile("c:/tmp/output.yaml.map", JSON.stringify(await data.metadata.sourceMap));
-    }
-  }
-}
+  });
+});
