@@ -602,7 +602,7 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     }
   });
 
-  it("exec-service", () => {
+  it("exec-service", async () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
@@ -640,7 +640,7 @@ describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
     }
   });
 
-  it("LUIS runtime", () => {
+  it("LUIS runtime", async () => {
     const swaggerUri = "mem://oai2.json";
     const oai3Uri = "mem://oai3.json";
 
