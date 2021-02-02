@@ -9284,7 +9284,6 @@ packages:
     version: 0.0.0
   'file:projects/oai2-to-oai3.tgz_prettier@2.2.1':
     dependencies:
-      '@azure-tools/async-io': 3.0.253
       '@azure-tools/datastore': 4.1.270
       '@azure-tools/openapi': 3.0.261
       '@types/jest': 26.0.20
@@ -9307,7 +9306,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-AwihAO/bAc2kVLgpPOXG8ItRzQQKp2BX7ZC3QDpxNVd2isP0u+D4f7S8x4sFXDbuX2B9g4amFHIDvWTniCDFxA==
+      integrity: sha512-5OmblxbW4eH2/2ukE05p0aekUxE7UaRhoDS99+K8a7o9N3HYDtMno8h4uvUnzObZEX5V9sxUK9/2/wsWTxoR7g==
       tarball: 'file:projects/oai2-to-oai3.tgz'
     version: 0.0.0
   'file:projects/schemas.tgz':

@@ -42,7 +42,6 @@
     "@types/node": "12.7.2",
     "@types/js-yaml": "3.12.1",
     "typescript": "~3.9.7",
-    "@azure-tools/async-io": "~3.0.0",
     "source-map-support": "0.5.13",
     "@typescript-eslint/eslint-plugin": "~2.6.0",
     "@typescript-eslint/parser": "~2.6.0",
