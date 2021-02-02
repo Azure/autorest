@@ -1,6 +1,6 @@
 import { readFile } from "@azure-tools/async-io";
 import { deserialize, fail } from "@azure-tools/codegen";
-import { Session, startSession } from "@azure-tools/autorest-extension-base";
+import { Session, startSession } from "@autorest/extension-base";
 import { Model } from "@azure-tools/openapi";
 
 export interface TestSessionInput {

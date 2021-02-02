@@ -72,7 +72,7 @@ import {
   TimeSchema,
   HttpMultipartRequest,
 } from "@autorest/codemodel";
-import { Session, Channel } from "@azure-tools/autorest-extension-base";
+import { Session, Channel } from "@autorest/extension-base";
 import { Interpretations, XMSEnum } from "./interpretations";
 import { fail, minimum, pascalCase, knownMediaType, KnownMediaType } from "@azure-tools/codegen";
 import { ModelerFourOptions } from "./modelerfour-options";
@@ -712,6 +712,14 @@ export class ModelerFour {
     throw new Error("Method not implemented.");
   }
   processDictionarySchema(name: string, schema: OpenAPI.Schema): DictionarySchema {
+    const dictSchema = new DictionarySchema<any>(
+      this.interpret.getName(name, schema),
+      this.interpret.getDescription("", schema),
+      null,
+    );
+    // cache this now before we accidentally recurse on this type.
+    this.schemaCache.set(schema, dictSchema);
+
     let elementSchema: Schema;
     let elementNullable: boolean | undefined;
     if (schema.additionalProperties === true) {
@@ -727,16 +735,14 @@ export class ModelerFour {
       }
     }
 
-    return this.codeModel.schemas.add(
-      new DictionarySchema(
-        this.interpret.getName(name, schema),
-        this.interpret.getDescription(`Dictionary of <${elementSchema.language.default.name}>`, schema),
-        elementSchema,
-        {
-          nullableItems: elementNullable,
-        },
-      ),
+    dictSchema.language.default.description = this.interpret.getDescription(
+      `Dictionary of <${elementSchema.language.default.name}>`,
+      schema,
     );
+    dictSchema.elementType = elementSchema;
+    dictSchema.nullableItems = elementNullable;
+
+    return this.codeModel.schemas.add(dictSchema);
   }
 
   isSchemaPolymorphic(schema: OpenAPI.Schema | undefined): boolean {
