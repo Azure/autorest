@@ -80,8 +80,8 @@ function toMatchRawFileSnapshot(
           pass: false,
           message: () =>
             `Received content ${errorColor("doesn't match")} the file ${coloredFilename}.\n\n${this.utils.diff(
-              content,
               output,
+              content,
             )}`,
         };
       }

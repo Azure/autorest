@@ -1,4 +1,4 @@
-import { Schema, Type, DEFAULT_SAFE_SCHEMA } from "js-yaml";
+import { Schema, Type, DEFAULT_SCHEMA } from "js-yaml";
 
 import { CodeModel, Security } from "./common/code-model";
 import { Metadata, CSharpLanguage, Language } from "./common/metadata";
@@ -62,7 +62,7 @@ function TypeInfo<U extends new (...args: any) => any>(type: U) {
   });
 }
 
-export const codeModelSchema = Schema.create(DEFAULT_SAFE_SCHEMA, [
+export const codeModelSchema = DEFAULT_SCHEMA.extend([
   TypeInfo(Security),
 
   TypeInfo(HttpModel),

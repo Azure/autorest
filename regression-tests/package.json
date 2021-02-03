@@ -1,0 +1,14 @@
+{
+  "name": "@autorest/regression-test",
+  "private": true,
+  "version": "3.0.0",
+  "description": "AutoRest Dependencies for regression testing",
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/autorest/issues"
+  },
+  "devDependencies": {
+    "@microsoft.azure/autorest.testserver": "^3.0.8"
+  }
+}
