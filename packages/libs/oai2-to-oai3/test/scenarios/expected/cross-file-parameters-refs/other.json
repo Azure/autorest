@@ -1,0 +1,35 @@
+{
+  "servers": [],
+  "components": {
+    "parameters": {
+      "QueryParm": {
+        "name": "MyQueryParam",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "items": {
+            "$ref": "#/components/schemas/MyQuerySchema"
+          }
+        }
+      },
+      "HeaderParam": {
+        "name": "MyHeaderParam",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "items": {
+            "$ref": "#/components/schemas/MyHeaderSchema"
+          }
+        }
+      }
+    },
+    "schemas": {
+      "MyQuerySchema": {
+        "type": "string"
+      },
+      "MyHeaderSchema": {
+        "type": "string"
+      }
+    }
+  }
+}

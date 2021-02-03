@@ -36,6 +36,7 @@
   "homepage": "https://github.com/Azure/perks/tree/master/oai2-to-oai3#readme",
   "readme": "https://github.com/Azure/perks/tree/master/oai2-to-oai3/readme.md",
   "devDependencies": {
+    "@autorest/test-utils": "~0.0.1",
     "@types/jest": "^26.0.20",
     "@types/js-yaml": "~4.0.0",
     "@types/node": "~14.14.20",

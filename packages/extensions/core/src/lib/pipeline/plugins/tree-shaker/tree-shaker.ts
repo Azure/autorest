@@ -11,8 +11,8 @@ import {
   JsonPath,
   Source,
 } from "@azure-tools/datastore";
-import { ConfigurationView } from "../../configuration";
-import { PipelinePlugin } from "../common";
+import { ConfigurationView } from "../../../configuration";
+import { PipelinePlugin } from "../../common";
 import { values, length } from "@azure-tools/linq";
 import { createHash } from "crypto";
 

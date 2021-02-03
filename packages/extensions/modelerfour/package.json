@@ -41,6 +41,7 @@
   "devDependencies": {
     "@autorest/codemodel": "~4.14.3",
     "@autorest/extension-base": "~3.1.0",
+    "@autorest/test-utils": "~0.0.1",
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/codegen": "~2.5.0",
     "@azure-tools/datastore": "~4.1.0",
@@ -58,8 +59,6 @@
     "eslint-plugin-prettier": "~3.2.0",
     "eslint-plugin-unicorn": "~27.0.0",
     "eslint": "^7.17.0",
-    "expect": "~26.6.2",
-    "jest-snapshot": "~26.6.2",
     "jest": "^26.6.3",
     "prettier": "~2.2.1",
     "recursive-diff": "~1.0.6",

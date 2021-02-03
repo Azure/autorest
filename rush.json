@@ -67,6 +67,12 @@
       "shouldPublish": true
     },
     {
+      "packageName": "@autorest/test-utils",
+      "projectFolder": "packages/testing/test-utils",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
       "packageName": "@autorest/extension-base",
       "projectFolder": "packages/libs/extension-base",
       "reviewCategory": "production",

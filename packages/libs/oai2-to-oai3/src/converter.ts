@@ -678,12 +678,6 @@ export class Oai2ToOai3 {
     return { value: createGraphProxy(this.originalFilename, pointer, this.mappings), pointer };
   }
 
-  visitUnspecified(nodes: Iterable<Node>) {
-    for (const { value, pointer } of nodes) {
-      console.error(`?? Unknown item: ${pointer} : ${value}`);
-    }
-  }
-
   async visitPaths(target: any, paths: Iterable<Node>, globalConsumes: Array<string>, globalProduces: Array<string>) {
     for (const { key: uri, pointer, children: pathItemMembers } of paths) {
       await this.visitPath(target, uri, pointer, pathItemMembers, globalConsumes, globalProduces);
@@ -817,38 +811,22 @@ export class Oai2ToOai3 {
         }
         const parameterName = parsedRef.componentName;
         if (parsedRef.basePath === "/parameters/") {
-          // TODO: I think we don't need this at all and can just call the else. TO check when adding the unit tests.
-          if (parsedRef.file == "" || parsedRef.file === this.originalFilename) {
-            const dereferencedParameter = get(this.original, parsedRef.path);
+          const dereferencedParameter = await this.resolveReference(parsedRef.file, parsedRef.path);
+          if (!dereferencedParameter) {
+            throw new Error(`Cannot find reference ${value.$ref}`);
+          }
 
-            if (
-              dereferencedParameter.in === "body" ||
-              dereferencedParameter.type === "file" ||
-              dereferencedParameter.in === "formData"
-            ) {
-              childIterator = () => visit(dereferencedParameter, [parameterName]);
-              value = dereferencedParameter;
-              pointer = parsedRef.path;
-            }
-          } else {
-            const dereferencedParameter = await this.resolveReference(parsedRef.file, parsedRef.path);
-            if (!dereferencedParameter) {
-              throw new Error(`Cannot find reference ${value.$ref}`);
-            }
-
-            if (
-              dereferencedParameter.in === "body" ||
-              dereferencedParameter.type === "file" ||
-              dereferencedParameter.in === "formData"
-            ) {
-              childIterator = () => visit(dereferencedParameter, [parameterName]);
-              value = dereferencedParameter;
-              pointer = parsedRef.path;
-            }
+          if (
+            dereferencedParameter.in === "body" ||
+            dereferencedParameter.type === "file" ||
+            dereferencedParameter.in === "formData"
+          ) {
+            childIterator = () => visit(dereferencedParameter, [parameterName]);
+            value = dereferencedParameter;
+            pointer = parsedRef.path;
           }
         } else {
-          // TODO: Throw exception
-          console.error("### CAN'T RESOLVE $ref", value.$ref);
+          throw new Error(`Reference ${value.$ref} is invalid. It should be referencing a parameter(#/parameters/xzy)`);
         }
       }
 
