@@ -7,10 +7,14 @@
   "scripts": {
     "build": "tsc -p .",
     "watch": "tsc -p . --watch",
+    "clean": "rimraf ./dist",
     "lint:fix": "eslint ./src --fix --ext .ts",
     "lint": "eslint ./src --ext .ts",
     "test:ci": "echo 'No tests'",
     "test": "echo 'No tests'"
+  },
+  "engines": {
+    "node": ">=10.13.0"
   },
   "repository": {
     "type": "git",
@@ -34,6 +38,7 @@
     "@types/jest": "~26.0.20",
     "eslint-plugin-prettier": "~3.2.0",
     "eslint-plugin-unicorn": "~27.0.0",
-    "eslint": "^7.17.0"
+    "eslint": "^7.17.0",
+    "rimraf": "~3.0.0"
   }
 }
