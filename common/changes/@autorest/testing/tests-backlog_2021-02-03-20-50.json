@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/testing",
+      "comment": "Initial content, include file snapshot matching",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/testing",
+  "email": "tiguerin@microsoft.com"
+}
