@@ -1,0 +1,63 @@
+{
+  "name": "@azure-tools/datastore",
+  "version": "4.1.0",
+  "patchOffset": 100,
+  "description": "Virtualized Filesystem with parsing and sourcemaps (AutoRest)",
+  "main": "./dist/main.js",
+  "typings": "./dist/main.d.ts",
+  "engines": {
+    "node": ">=10.12.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/perks.git"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "watch": "tsc -p . --watch",
+    "eslint-fix": "eslint  . --fix --ext .ts",
+    "eslint": "eslint  . --ext .ts",
+    "prepare": "npm run build",
+    "test": "npm run build && mocha dist/test --timeout 50000",
+    "testci": "npm run build && mocha dist/test --timeout 50000",
+    "clean": "ver > nul 2>&1 nul && npm run --silent clean-cmd || npm run --silent clean-bash",
+    "clean-cmd": "if exist dist rmdir /s /q dist && exit 0 || exit 0 ",
+    "clean-bash": "rm nul && rm -rf dist && exit 0 || exit 0"
+  },
+  "keywords": [
+    "perks",
+    "async",
+    "autorest",
+    "azure",
+    "typescript"
+  ],
+  "author": "Microsoft",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/perks/issues"
+  },
+  "homepage": "https://github.com/Azure/perks/tree/master/datastore#readme",
+  "readme": "https://github.com/Azure/perks/tree/master/datastore/readme.md",
+  "devDependencies": {
+    "mocha-typescript": "1.1.17",
+    "@types/mocha": "5.2.5",
+    "@types/node": "12.7.2",
+    "@types/jsonpath": "^0.2.0",
+    "@types/source-map": "0.5.0",
+    "mocha": "5.2.0",
+    "@typescript-eslint/eslint-plugin": "~2.6.0",
+    "@typescript-eslint/parser": "~2.6.0",
+    "eslint": "~6.6.0",
+    "typescript": "~3.9.7"
+  },
+  "dependencies": {
+    "@azure-tools/tasks": "~3.0.0",
+    "@azure-tools/uri": "~3.0.0",
+    "@azure-tools/linq": "~3.1.0",
+    "@azure-tools/codegen": "~2.5.0",
+    "jsonpath": "1.0.0",
+    "source-map": "0.5.6",
+    "yaml-ast-parser": "0.0.43",
+    "js-yaml": "3.13.1"
+  }
+}
