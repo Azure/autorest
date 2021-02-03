@@ -31,10 +31,17 @@ const expectInputsMatchSnapshots = async (testName: string, filenames: string[])
 
 describe("Scenario testings", () => {
   it("Convert cross file schema references", async () => {
+    // The expected result is for the body parameter to be copied over but not the schema.
     await expectInputsMatchSnapshots("cross-file-schema-refs", ["swagger.json", "other.json"]);
   });
 
+  it("Convert cross file regular parameters", async () => {
+    // The expected result is the ref just change from /parameters -> /components/parameters.
+    await expectInputsMatchSnapshots("cross-file-parameters-refs", ["swagger.json", "other.json"]);
+  });
+
   it("Convert cross file body parameter", async () => {
+    // The expected result is the ref just change from /defnitions -> /components/schemas.
     await expectInputsMatchSnapshots("cross-file-body-refs", ["swagger.json", "other.json"]);
   });
 });
