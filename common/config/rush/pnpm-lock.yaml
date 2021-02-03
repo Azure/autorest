@@ -18,6 +18,7 @@ dependencies:
   '@rush-temp/modelerfour': 'file:projects/modelerfour.tgz'
   '@rush-temp/oai2-to-oai3': 'file:projects/oai2-to-oai3.tgz_prettier@2.2.1'
   '@rush-temp/schemas': 'file:projects/schemas.tgz'
+  '@rush-temp/test-utils': 'file:projects/test-utils.tgz_prettier@2.2.1'
   '@types/body-parser': 1.19.0
   '@types/commonmark': 0.27.4
   '@types/deep-equal': 1.0.1
@@ -506,7 +507,7 @@ packages:
       globals: 12.4.0
       ignore: 4.0.6
       import-fresh: 3.3.0
-      js-yaml: 3.14.1
+      js-yaml: 3.13.1
       lodash: 4.17.20
       minimatch: 3.0.4
       strip-json-comments: 3.1.1
@@ -520,7 +521,7 @@ packages:
       camelcase: 5.3.1
       find-up: 4.1.0
       get-package-type: 0.1.0
-      js-yaml: 3.14.1
+      js-yaml: 3.13.1
       resolve-from: 5.0.0
     dev: false
     engines:
@@ -1938,7 +1939,7 @@ packages:
     dependencies:
       caniuse-lite: 1.0.30001183
       colorette: 1.2.1
-      electron-to-chromium: 1.3.652
+      electron-to-chromium: 1.3.653
       escalade: 3.1.1
       node-releases: 1.1.70
     dev: false
@@ -2817,10 +2818,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
-  /electron-to-chromium/1.3.652:
+  /electron-to-chromium/1.3.653:
     dev: false
     resolution:
-      integrity: sha512-85J5D0Ksxjq2MIHfgwOURRej72UMlexbaa7t+oKTJan3Pa/RBE8vJ4/JzwaQjLCElPvd0XeLWi7+xYTVrq96aA==
+      integrity: sha512-LehOhcl74u9fkV9Un6WahJ+Xh+0FZLCCDnKYis1Olx1DX2ugRww5PJicE65OG8yznMj8EOQZRcz6FSV1xKxqsA==
   /emittery/0.7.2:
     dev: false
     engines:
@@ -3202,7 +3203,7 @@ packages:
       import-fresh: 3.3.0
       imurmurhash: 0.1.4
       is-glob: 4.0.1
-      js-yaml: 3.14.1
+      js-yaml: 3.13.1
       json-stable-stringify-without-jsonify: 1.0.1
       levn: 0.4.1
       lodash: 4.17.20
@@ -5133,14 +5134,6 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
-  /js-yaml/3.14.1:
-    dependencies:
-      argparse: 1.0.10
-      esprima: 4.0.1
-    dev: false
-    hasBin: true
-    resolution:
-      integrity: sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==
   /js-yaml/4.0.0:
     dependencies:
       argparse: 2.0.1
@@ -9143,9 +9136,7 @@ packages:
       eslint: 7.19.0
       eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
       eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
-      expect: 26.6.2
       jest: 26.6.3
-      jest-snapshot: 26.6.2
       prettier: 2.2.1
       recursive-diff: 1.0.8
       rimraf: 3.0.2
@@ -9158,7 +9149,7 @@ packages:
     dev: false
     name: '@rush-temp/modelerfour'
     resolution:
-      integrity: sha512-FoIOdQ7TjmcaXomZinNzvF1jw1epQvnyoPAreXotN1qShiqgfQcs49N+7bBoe122fQf8cacWSqapHNhER4K1wg==
+      integrity: sha512-dDoKlI+WbFmKIg98l3+7kzsLZtSr/ufVsEnu0ow0+0S/AbUpT4NKpXI2KgAKW4TznZOl6ZJezJAKs0IxcYgVOQ==
       tarball: 'file:projects/modelerfour.tgz'
     version: 0.0.0
   'file:projects/oai2-to-oai3.tgz_prettier@2.2.1':
@@ -9186,7 +9177,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-c3miz7la4bG0FxuVgMmZNrNdoyFkH218u1UyDt2xBrDpp/jbtm8y0YL/IMvGrFso1Yf2z7JGUhTjev4XSFo8Yg==
+      integrity: sha512-y3ZMMf925okHkt10QtBjIQFNUz+G+UkihzURLLBdRrCehA/yKReMmpM5TKNPnrcg1rGFn2y/a/kAWmUZOQVTZw==
       tarball: 'file:projects/oai2-to-oai3.tgz'
     version: 0.0.0
   'file:projects/schemas.tgz':
@@ -9195,6 +9186,25 @@ packages:
     resolution:
       integrity: sha512-R4SNYE56Q0TOMYcT8gSTZIInxE9vVJH1k54SR8Ksvg8HNkzG+Pko1NIxb8zpWFB74VEmx3TDaruHnodgJjUrvQ==
       tarball: 'file:projects/schemas.tgz'
+    version: 0.0.0
+  'file:projects/test-utils.tgz_prettier@2.2.1':
+    dependencies:
+      '@types/jest': 26.0.20
+      eslint: 7.19.0
+      eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
+      eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
+      expect: 26.6.2
+      jest: 26.6.3
+      jest-snapshot: 26.6.2
+      rimraf: 3.0.2
+    dev: false
+    id: 'file:projects/test-utils.tgz'
+    name: '@rush-temp/test-utils'
+    peerDependencies:
+      prettier: '*'
+    resolution:
+      integrity: sha512-8nMXR/fQrY7cWzKlnWAWLNAPsCqTy218Yq76aUySEg/K65B+nGDBNIZewWlUh3Dy4q/xEwC+EN8tG9/SSwQ9EA==
+      tarball: 'file:projects/test-utils.tgz'
     version: 0.0.0
 specifiers:
   '@azure-tools/async-io': ~3.0.0
@@ -9216,6 +9226,7 @@ specifiers:
   '@rush-temp/modelerfour': 'file:./projects/modelerfour.tgz'
   '@rush-temp/oai2-to-oai3': 'file:./projects/oai2-to-oai3.tgz'
   '@rush-temp/schemas': 'file:./projects/schemas.tgz'
+  '@rush-temp/test-utils': 'file:./projects/test-utils.tgz'
   '@types/body-parser': ^1.19.0
   '@types/commonmark': ^0.27.0
   '@types/deep-equal': ^1.0.1
