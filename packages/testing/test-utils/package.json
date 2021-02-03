@@ -1,5 +1,5 @@
 {
-  "name": "@autorest/testing",
+  "name": "@autorest/test-utils",
   "version": "0.0.1",
   "description": "Set of testing utils that are used across packages",
   "main": "./dist/index.js",

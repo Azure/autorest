@@ -1,1 +1,1 @@
-import "@autorest/testing/dist/matchers";
+import "@autorest/test-utils/dist/matchers";

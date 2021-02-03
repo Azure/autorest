@@ -20,7 +20,7 @@ dependencies:
   '@rush-temp/modelerfour': 'file:projects/modelerfour.tgz'
   '@rush-temp/oai2-to-oai3': 'file:projects/oai2-to-oai3.tgz_prettier@2.2.1'
   '@rush-temp/schemas': 'file:projects/schemas.tgz'
-  '@rush-temp/testing': 'file:projects/testing.tgz'
+  '@rush-temp/test-utils': 'file:projects/test-utils.tgz_prettier@2.2.1'
   '@types/body-parser': 1.19.0
   '@types/commonmark': 0.27.4
   '@types/deep-equal': 1.0.1
@@ -48,7 +48,6 @@ dependencies:
   expect: 26.6.2
   express: 4.17.1
   glob: 7.1.6
-  jest: 26.6.3
   jest-snapshot: 26.6.2
   jsonpath: 1.0.0
   linq-es2015: 2.5.1
@@ -63,7 +62,7 @@ dependencies:
   source-map: 0.5.6
   static-link: 0.3.0
   supertest: 6.1.3
-  ts-jest: 26.5.0_jest@26.6.3+typescript@3.9.7
+  ts-jest: 26.5.0_typescript@3.9.7
   ts-loader: 8.0.14_typescript@3.9.7+webpack@5.18.0
   ts-morph: 4.0.1
   typescript: 3.9.7
@@ -8167,6 +8166,29 @@ packages:
       typescript: '>=3.8 <5.0'
     resolution:
       integrity: sha512-Ya4IQgvIFNa2Mgq52KaO8yBw2W8tWp61Ecl66VjF0f5JaV8u50nGoptHVILOPGoI7SDnShmEqnYQEmyHdQ+56g==
+  /ts-jest/26.5.0_typescript@3.9.7:
+    dependencies:
+      '@types/jest': 26.0.20
+      bs-logger: 0.2.6
+      buffer-from: 1.1.1
+      fast-json-stable-stringify: 2.1.0
+      jest-util: 26.6.2
+      json5: 2.2.0
+      lodash: 4.17.20
+      make-error: 1.3.6
+      mkdirp: 1.0.4
+      semver: 7.3.4
+      typescript: 3.9.7
+      yargs-parser: 20.2.4
+    dev: false
+    engines:
+      node: '>= 10'
+    hasBin: true
+    peerDependencies:
+      jest: '>=26 <27'
+      typescript: '>=3.8 <5.0'
+    resolution:
+      integrity: sha512-Ya4IQgvIFNa2Mgq52KaO8yBw2W8tWp61Ecl66VjF0f5JaV8u50nGoptHVILOPGoI7SDnShmEqnYQEmyHdQ+56g==
   /ts-loader/8.0.14_typescript@3.9.7+webpack@5.18.0:
     dependencies:
       chalk: 4.1.0
@@ -9280,7 +9302,7 @@ packages:
     dev: false
     name: '@rush-temp/modelerfour'
     resolution:
-      integrity: sha512-NzyBNOt7gTJNbMlmkgnzrV4HejGD0FyklQy16yFoRaapZTfD6Ow9YcEg2WvhFh0Ei/vG7lxFqZy1pTpHZYnMQw==
+      integrity: sha512-lw51cmCb6YNYYixCXX+hHYwSLBaRjtFTFWXBikwpj5LLqEbp6MJEsEs9baptRti3tG9sVB6YoHbmWyHdkrJQFQ==
       tarball: 'file:projects/modelerfour.tgz'
     version: 0.0.0
   'file:projects/oai2-to-oai3.tgz_prettier@2.2.1':
@@ -9307,7 +9329,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-5OmblxbW4eH2/2ukE05p0aekUxE7UaRhoDS99+K8a7o9N3HYDtMno8h4uvUnzObZEX5V9sxUK9/2/wsWTxoR7g==
+      integrity: sha512-L8idWKhkKeg6bjE8S/FbwbUuKcAAHe58PaXNxgSvsFMMnm19vTLRa4UbRDbePQfrTa7M1kp/M/+SWWvdte1s/g==
       tarball: 'file:projects/oai2-to-oai3.tgz'
     version: 0.0.0
   'file:projects/schemas.tgz':
@@ -9317,14 +9339,24 @@ packages:
       integrity: sha512-R4SNYE56Q0TOMYcT8gSTZIInxE9vVJH1k54SR8Ksvg8HNkzG+Pko1NIxb8zpWFB74VEmx3TDaruHnodgJjUrvQ==
       tarball: 'file:projects/schemas.tgz'
     version: 0.0.0
-  'file:projects/testing.tgz':
+  'file:projects/test-utils.tgz_prettier@2.2.1':
     dependencies:
+      '@types/jest': 26.0.20
+      eslint: 7.19.0
+      eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
+      eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
       expect: 26.6.2
+      jest: 26.6.3
+      jest-snapshot: 26.6.2
+      rimraf: 3.0.2
     dev: false
-    name: '@rush-temp/testing'
+    id: 'file:projects/test-utils.tgz'
+    name: '@rush-temp/test-utils'
+    peerDependencies:
+      prettier: '*'
     resolution:
-      integrity: sha512-1QUA76SkkfaDfra7EdQ5PzeRKsPf5WLw4bUzoe0Qj7AtgmBYfpirDZsSgMNVY5QXR3xcpYaFl9cH35rtdVzz6Q==
-      tarball: 'file:projects/testing.tgz'
+      integrity: sha512-nhwth141GJ3kFDfDLDG3UTGec7q7XA80dx0jbh2fUOOj6ok0twXKFEWPw11wOaFhPXAZvE2ophqxF8byG1PZwg==
+      tarball: 'file:projects/test-utils.tgz'
     version: 0.0.0
 registry: ''
 specifiers:
@@ -9349,7 +9381,7 @@ specifiers:
   '@rush-temp/modelerfour': 'file:./projects/modelerfour.tgz'
   '@rush-temp/oai2-to-oai3': 'file:./projects/oai2-to-oai3.tgz'
   '@rush-temp/schemas': 'file:./projects/schemas.tgz'
-  '@rush-temp/testing': 'file:./projects/testing.tgz'
+  '@rush-temp/test-utils': 'file:./projects/test-utils.tgz'
   '@types/body-parser': ^1.19.0
   '@types/commonmark': ^0.27.0
   '@types/deep-equal': ^1.0.1
@@ -9377,7 +9409,6 @@ specifiers:
   expect: ~26.6.2
   express: ~4.17.1
   glob: ~7.1.4
-  jest: ^26.6.3
   jest-snapshot: ~26.6.2
   jsonpath: 1.0.0
   linq-es2015: ^2.4.25

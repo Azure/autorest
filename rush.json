@@ -61,8 +61,8 @@
       "shouldPublish": true
     },
     {
-      "packageName": "@autorest/testing",
-      "projectFolder": "packages/libs/testing",
+      "packageName": "@autorest/test-utils",
+      "projectFolder": "packages/testing/test-utils",
       "reviewCategory": "production",
       "shouldPublish": true
     },

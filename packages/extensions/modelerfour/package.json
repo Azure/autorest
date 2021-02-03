@@ -69,6 +69,6 @@
     "webpack": "~5.18.0",
     "webpack-cli": "~4.4.0",
     "rimraf": "~3.0.0",
-    "@autorest/testing": "~0.0.1"
+    "@autorest/test-utils": "~0.0.1"
   }
 }
