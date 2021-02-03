@@ -6,7 +6,7 @@ import * as path from "path";
 declare global {
   namespace jest {
     interface Matchers<R> {
-      toMatchRawFileSnapshot(snapshotFile: string): CustomMatcherResult;
+      toMatchRawFileSnapshot(snapshotFile: string): jest.CustomMatcherResult;
     }
   }
 }
@@ -80,8 +80,8 @@ function toMatchRawFileSnapshot(
           pass: false,
           message: () =>
             `Received content ${errorColor("doesn't match")} the file ${coloredFilename}.\n\n${this.utils.diff(
-              content,
               output,
+              content,
             )}`,
         };
       }

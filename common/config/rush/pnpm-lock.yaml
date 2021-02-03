@@ -20,6 +20,7 @@ dependencies:
   '@rush-temp/modelerfour': 'file:projects/modelerfour.tgz'
   '@rush-temp/oai2-to-oai3': 'file:projects/oai2-to-oai3.tgz_prettier@2.2.1'
   '@rush-temp/schemas': 'file:projects/schemas.tgz'
+  '@rush-temp/testing': 'file:projects/testing.tgz'
   '@types/body-parser': 1.19.0
   '@types/commonmark': 0.27.4
   '@types/deep-equal': 1.0.1
@@ -9316,6 +9317,16 @@ packages:
       integrity: sha512-R4SNYE56Q0TOMYcT8gSTZIInxE9vVJH1k54SR8Ksvg8HNkzG+Pko1NIxb8zpWFB74VEmx3TDaruHnodgJjUrvQ==
       tarball: 'file:projects/schemas.tgz'
     version: 0.0.0
+  'file:projects/testing.tgz':
+    dependencies:
+      expect: 26.6.2
+    dev: false
+    name: '@rush-temp/testing'
+    resolution:
+      integrity: sha512-1QUA76SkkfaDfra7EdQ5PzeRKsPf5WLw4bUzoe0Qj7AtgmBYfpirDZsSgMNVY5QXR3xcpYaFl9cH35rtdVzz6Q==
+      tarball: 'file:projects/testing.tgz'
+    version: 0.0.0
+registry: ''
 specifiers:
   '@azure-tools/async-io': ~3.0.0
   '@azure-tools/codegen': 2.5.290
@@ -9338,6 +9349,7 @@ specifiers:
   '@rush-temp/modelerfour': 'file:./projects/modelerfour.tgz'
   '@rush-temp/oai2-to-oai3': 'file:./projects/oai2-to-oai3.tgz'
   '@rush-temp/schemas': 'file:./projects/schemas.tgz'
+  '@rush-temp/testing': 'file:./projects/testing.tgz'
   '@types/body-parser': ^1.19.0
   '@types/commonmark': ^0.27.0
   '@types/deep-equal': ^1.0.1

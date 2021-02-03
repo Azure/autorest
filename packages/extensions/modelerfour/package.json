@@ -52,8 +52,6 @@
     "@microsoft.azure/autorest.testserver": "~2.10.46",
     "@azure-tools/uri": "~3.0.0",
     "jest": "^26.6.3",
-    "jest-snapshot": "~26.6.2",
-    "expect": "~26.6.2",
     "ts-jest": "^26.4.4",
     "@azure-tools/codegen": "~2.5.292",
     "@azure-tools/codegen-csharp": "~3.0.0",
@@ -70,7 +68,7 @@
     "ts-loader": "~8.0.14",
     "webpack": "~5.18.0",
     "webpack-cli": "~4.4.0",
-    "rimraf": "~3.0.0"
-  },
-  "dependencies": {}
+    "rimraf": "~3.0.0",
+    "@autorest/testing": "~0.0.1"
+  }
 }
