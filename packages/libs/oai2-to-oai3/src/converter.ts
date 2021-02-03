@@ -817,37 +817,23 @@ export class Oai2ToOai3 {
         }
         const parameterName = parsedRef.componentName;
         if (parsedRef.basePath === "/parameters/") {
-          // TODO: I think we don't need this at all and can just call the else. TO check when adding the unit tests.
-          if (parsedRef.file == "" || parsedRef.file === this.originalFilename) {
-            const dereferencedParameter = get(this.original, parsedRef.path);
+          const dereferencedParameter = await this.resolveReference(parsedRef.file, parsedRef.path);
+          if (!dereferencedParameter) {
+            throw new Error(`Cannot find reference ${value.$ref}`);
+          }
 
-            if (
-              dereferencedParameter.in === "body" ||
-              dereferencedParameter.type === "file" ||
-              dereferencedParameter.in === "formData"
-            ) {
-              childIterator = () => visit(dereferencedParameter, [parameterName]);
-              value = dereferencedParameter;
-              pointer = parsedRef.path;
-            }
-          } else {
-            const dereferencedParameter = await this.resolveReference(parsedRef.file, parsedRef.path);
-            if (!dereferencedParameter) {
-              throw new Error(`Cannot find reference ${value.$ref}`);
-            }
-
-            if (
-              dereferencedParameter.in === "body" ||
-              dereferencedParameter.type === "file" ||
-              dereferencedParameter.in === "formData"
-            ) {
-              childIterator = () => visit(dereferencedParameter, [parameterName]);
-              value = dereferencedParameter;
-              pointer = parsedRef.path;
-            }
+          if (
+            dereferencedParameter.in === "body" ||
+            dereferencedParameter.type === "file" ||
+            dereferencedParameter.in === "formData"
+          ) {
+            childIterator = () => visit(dereferencedParameter, [parameterName]);
+            value = dereferencedParameter;
+            pointer = parsedRef.path;
           }
         } else {
           // TODO: Throw exception
+          // eslint-disable-next-line no-console
           console.error("### CAN'T RESOLVE $ref", value.$ref);
         }
       }
