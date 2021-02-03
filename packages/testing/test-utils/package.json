@@ -9,7 +9,7 @@
     "watch": "tsc -p . --watch",
     "clean": "rimraf ./dist",
     "lint:fix": "eslint ./src --fix --ext .ts",
-    "lint": "eslint ./src --ext .ts",
+    "lint": "eslint ./src --ext .ts --max-warnings=0",
     "test:ci": "echo 'No tests'",
     "test": "echo 'No tests'"
   },

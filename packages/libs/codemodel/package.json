@@ -11,7 +11,7 @@
     "build": "tsc -p .",
     "watch": "tsc -p . --watch",
     "lint:fix": "eslint ./src --fix --ext .ts",
-    "lint": "eslint ./src --ext .ts",
+    "lint": "eslint ./src --ext .ts --max-warnings=0",
     "prepare": "npm run build",
     "test": "echo codemodel: No Tests.",
     "test:ci": "echo codemodel: No Tests.",
