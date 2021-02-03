@@ -292,4 +292,5 @@ common/config/rush/shrinkwrap.yaml
 
 # Code generation output for regression tests
 core/test/regression
+regression-tests/output
 

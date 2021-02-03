@@ -3,7 +3,7 @@
 
 debug: false
 specs:
-  - specRootPath: ../node_modules/@microsoft.azure/autorest.testserver/swagger
+  - specRootPath: ./node_modules/@microsoft.azure/autorest.testserver/swagger
     specPaths:
       - additionalProperties.json
       - azure-parameter-grouping.json
@@ -61,7 +61,7 @@ specs:
 
 languages:
   - language: python
-    outputPath: ../packages/extensions/core/test/regression/python
+    outputPath: ./output/python
     oldArgs:
       - --version:~3.0.6320
       - --use:@autorest/modelerfour@4.15.451
@@ -70,9 +70,9 @@ languages:
       - --version:../packages/extensions/core
       - --use:../packages/extensions/modelerfour
       - --use:@autorest/python@5.5.0
-      
+
   - language: typescript
-    outputPath: ../packages/extensions/core/test/regression/typescript
+    outputPath: ./output/typescript
     oldArgs:
       - --v3
       - --use:@autorest/modelerfour@4.15.451
