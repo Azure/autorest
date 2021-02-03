@@ -56,7 +56,6 @@ describe("Tree shaker", () => {
         },
       });
 
-      console.log(result.components);
       const param = Object.values<any>(result.components.parameters)[0];
       expect(param["x-ms-client-name"]).toEqual("SomeParamClient");
     });

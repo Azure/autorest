@@ -678,12 +678,6 @@ export class Oai2ToOai3 {
     return { value: createGraphProxy(this.originalFilename, pointer, this.mappings), pointer };
   }
 
-  visitUnspecified(nodes: Iterable<Node>) {
-    for (const { value, pointer } of nodes) {
-      console.error(`?? Unknown item: ${pointer} : ${value}`);
-    }
-  }
-
   async visitPaths(target: any, paths: Iterable<Node>, globalConsumes: Array<string>, globalProduces: Array<string>) {
     for (const { key: uri, pointer, children: pathItemMembers } of paths) {
       await this.visitPath(target, uri, pointer, pathItemMembers, globalConsumes, globalProduces);
@@ -832,9 +826,7 @@ export class Oai2ToOai3 {
             pointer = parsedRef.path;
           }
         } else {
-          // TODO: Throw exception
-          // eslint-disable-next-line no-console
-          console.error("### CAN'T RESOLVE $ref", value.$ref);
+          throw new Error(`Reference ${value.$ref} is invalid. It should be referencing a parameter(#/parameters/xzy)`);
         }
       }
 
