@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/deduplication",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@azure-tools/deduplication",
+  "email": "tiguerin@microsoft.com"
+}
