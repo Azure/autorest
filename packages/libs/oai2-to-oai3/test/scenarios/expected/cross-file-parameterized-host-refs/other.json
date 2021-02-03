@@ -1,0 +1,19 @@
+{
+  "servers": [],
+  "components": {
+    "parameters": {
+      "GlobalEndpoint": {
+        "name": "Endpoint",
+        "in": "path",
+        "description": "Shared endpoint param.",
+        "required": true,
+        "x-ms-parameter-location": "client",
+        "x-ms-skip-url-encoding": true,
+        "schema": {
+          "default": "https://api.cognitive.microsoft.com",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

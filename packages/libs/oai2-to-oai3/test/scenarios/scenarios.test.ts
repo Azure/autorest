@@ -44,4 +44,9 @@ describe("Scenario testings", () => {
     // The expected result is the ref just change from /defnitions -> /components/schemas.
     await expectInputsMatchSnapshots("cross-file-body-refs", ["swagger.json", "other.json"]);
   });
+
+  it("Convert cross file parameterized host", async () => {
+    // The expected result is the parmaeter to be included/expanded in the OpenAPI3 server property.
+    await expectInputsMatchSnapshots("cross-file-parameterized-host-refs", ["swagger.json", "other.json"]);
+  });
 });
