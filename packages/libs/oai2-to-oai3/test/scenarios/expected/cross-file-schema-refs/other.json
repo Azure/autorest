@@ -2,10 +2,10 @@
   "servers": [],
   "components": {
     "schemas": {
-      "MyBodySchema": {
+      "MySharedSchema": {
         "type": "object",
         "properties": {
-          "url": {
+          "name": {
             "type": "string"
           }
         }

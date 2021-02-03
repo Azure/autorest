@@ -17,14 +17,6 @@
           "type": "string"
         }
       }
-    },
-    "OtherSchemaThatShouldStayHere": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        }
-      }
     }
   }
 }

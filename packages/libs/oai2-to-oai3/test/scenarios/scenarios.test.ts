@@ -30,6 +30,10 @@ const expectInputsMatchSnapshots = async (testName: string, filenames: string[])
 };
 
 describe("Scenario testings", () => {
+  it("Convert cross file schema references", async () => {
+    await expectInputsMatchSnapshots("cross-file-schema-refs", ["swagger.json", "other.json"]);
+  });
+
   it("Convert cross file body parameter", async () => {
     await expectInputsMatchSnapshots("cross-file-body-refs", ["swagger.json", "other.json"]);
   });
