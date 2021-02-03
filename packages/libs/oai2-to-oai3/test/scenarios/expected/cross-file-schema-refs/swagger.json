@@ -1,0 +1,28 @@
+{
+  "servers": [],
+  "$schema": "https://github.com/OAI/OpenAPI-Specification/blob/master/schemas/v2.0/schema.json",
+  "openapi": "3.0.0",
+  "info": {
+    "x-ms-metadata": {
+      "apiVersions": [
+        "test-0.1"
+      ]
+    },
+    "title": "Test",
+    "description": "test",
+    "version": "test-0.1"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "MySchema": {
+        "type": "object",
+        "properties": {
+          "myProp": {
+            "$ref": "other.json#/components/schemas/MySharedSchema"
+          }
+        }
+      }
+    }
+  }
+}

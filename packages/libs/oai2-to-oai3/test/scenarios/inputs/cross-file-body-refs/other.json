@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "BodyParam": {
+      "in": "body",
+      "name": "MyBodyParam",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/MyBodySchema"
+      }
+    }
+  },
+  "definitions": {
+    "MyBodySchema": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

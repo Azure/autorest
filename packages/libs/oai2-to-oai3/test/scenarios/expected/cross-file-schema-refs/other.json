@@ -1,0 +1,15 @@
+{
+  "servers": [],
+  "components": {
+    "schemas": {
+      "MySharedSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

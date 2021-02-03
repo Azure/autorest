@@ -6,7 +6,7 @@ import * as path from "path";
 declare global {
   namespace jest {
     interface Matchers<R> {
-      toMatchRawFileSnapshot(snapshotFile: string): CustomMatcherResult;
+      toMatchRawFileSnapshot(snapshotFile: string): jest.CustomMatcherResult;
     }
   }
 }
@@ -39,7 +39,10 @@ function toMatchRawFileSnapshot(
     };
   }
 
-  const filepath = getAbsolutePathToSnapshot(this.testPath!, filename);
+  if (!this.testPath) {
+    throw new Error("Unexpected matcher state, testPath is undefined");
+  }
+  const filepath = getAbsolutePathToSnapshot(this.testPath, filename);
   const content: string = received;
   const updateSnapshot: "none" | "all" | "new" = (this.snapshotState as any)._updateSnapshot;
 

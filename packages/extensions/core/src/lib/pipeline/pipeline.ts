@@ -48,7 +48,7 @@ import {
   createTransformerPlugin,
   createGraphTransformerPlugin,
 } from "./plugins/transformer";
-import { createTreeShakerPlugin } from "./plugins/tree-shaker";
+import { createTreeShakerPlugin } from "./plugins/tree-shaker/tree-shaker";
 import { createApiVersionParameterHandlerPlugin } from "./plugins/version-param-handler";
 import { createJsonToYamlPlugin, createYamlToJsonPlugin } from "./plugins/yaml-and-json";
 import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from "./schema-validation";

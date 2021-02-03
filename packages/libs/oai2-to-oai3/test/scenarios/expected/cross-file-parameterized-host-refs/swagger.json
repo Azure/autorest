@@ -1,0 +1,35 @@
+{
+  "servers": [
+    {
+      "url": "{Endpoint}",
+      "variables": {
+        "Endpoint": {
+          "x-name": "Endpoint",
+          "description": "Shared endpoint param.",
+          "x-ms-parameter-location": "client",
+          "x-required": true,
+          "x-type": "string",
+          "x-in": "path",
+          "x-ms-skip-url-encoding": true,
+          "default": "https://api.cognitive.microsoft.com",
+          "x-ms-original": {
+            "$ref": "other.json#/components/parameters/GlobalEndpoint"
+          }
+        }
+      }
+    }
+  ],
+  "$schema": "https://github.com/OAI/OpenAPI-Specification/blob/master/schemas/v2.0/schema.json",
+  "openapi": "3.0.0",
+  "info": {
+    "x-ms-metadata": {
+      "apiVersions": [
+        "test-0.1"
+      ]
+    },
+    "title": "Test",
+    "description": "test",
+    "version": "test-0.1"
+  },
+  "paths": {}
+}
