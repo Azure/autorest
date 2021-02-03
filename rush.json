@@ -61,6 +61,12 @@
       "shouldPublish": true
     },
     {
+      "packageName": "@azure-tools/deduplication",
+      "projectFolder": "packages/libs/deduplication",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
       "packageName": "@autorest/extension-base",
       "projectFolder": "packages/libs/extension-base",
       "reviewCategory": "production",

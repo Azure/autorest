@@ -3,17 +3,30 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { visit } from '@azure-tools/datastore';
-import { Dictionary, items, clone } from '@azure-tools/linq';
-import { areSimilar } from '@azure-tools/object-comparison';
-import * as compareVersions from 'compare-versions';
-import { toSemver, maximum } from '@azure-tools/codegen';
-import { YieldCPU } from '@azure-tools/tasks';
+import { visit } from "@azure-tools/datastore";
+import { Dictionary, items, clone } from "@azure-tools/linq";
+import { areSimilar } from "@azure-tools/object-comparison";
+import compareVersions from "compare-versions";
+import { toSemver, maximum } from "@azure-tools/codegen";
+import { YieldCPU } from "@azure-tools/tasks";
 
+type componentType =
+  | "schemas"
+  | "responses"
+  | "parameters"
+  | "examples"
+  | "requestBodies"
+  | "headers"
+  | "securitySchemes"
+  | "links"
+  | "callbacks";
 
-type componentType = 'schemas' | 'responses' | 'parameters' | 'examples' | 'requestBodies' | 'headers' | 'securitySchemes' | 'links' | 'callbacks';
-
-function getMergedProfilesMetadata(dict1: Dictionary<string>, dict2: Dictionary<string>, path: string, originalLocations: Array<string>): { [key: string]: string } {
+function getMergedProfilesMetadata(
+  dict1: Dictionary<string>,
+  dict2: Dictionary<string>,
+  path: string,
+  originalLocations: Array<string>,
+): { [key: string]: string } {
   const result: { [key: string]: string } = {};
   for (const { value, key } of items(dict1)) {
     result[key] = value;
@@ -21,7 +34,11 @@ function getMergedProfilesMetadata(dict1: Dictionary<string>, dict2: Dictionary<
 
   for (const item of items(dict2)) {
     if (result[item.key] !== undefined && result[item.key] !== item.value) {
-      throw Error(`Deduplicator: There's a conflict trying to deduplicate these two path objects with path ${path}, and with original locations ${originalLocations}. Both come from the same profile ${item.key}, but they have different api-versions: ${result[item.key]} and ${item.value}`);
+      throw Error(
+        `Deduplicator: There's a conflict trying to deduplicate these two path objects with path ${path}, and with original locations ${originalLocations}. Both come from the same profile ${
+          item.key
+        }, but they have different api-versions: ${result[item.key]} and ${item.value}`,
+      );
     }
 
     result[item.key] = item.value;
@@ -52,7 +69,7 @@ export class Deduplicator {
     headers: new Set<string>(),
     securitySchemes: new Set<string>(),
     links: new Set<string>(),
-    callbacks: new Set<string>()
+    callbacks: new Set<string>(),
   };
 
   // sets containing the UIDs of components already crawled
@@ -65,7 +82,7 @@ export class Deduplicator {
     headers: new Set<string>(),
     securitySchemes: new Set<string>(),
     links: new Set<string>(),
-    callbacks: new Set<string>()
+    callbacks: new Set<string>(),
   };
 
   // sets containing the UIDs of components already visited.
@@ -79,14 +96,14 @@ export class Deduplicator {
     headers: new Set<string>(),
     securitySchemes: new Set<string>(),
     links: new Set<string>(),
-    callbacks: new Set<string>()
+    callbacks: new Set<string>(),
   };
 
   // initially the target is the same as the original object
   private target: any;
   constructor(originalFile: any, protected deduplicateInlineModels = false) {
     this.target = clone(originalFile);
-    this.target.info['x-ms-metadata'].deduplicated = true;
+    this.target.info["x-ms-metadata"].deduplicated = true;
   }
 
   private async init() {
@@ -106,11 +123,11 @@ export class Deduplicator {
 
     // 2. deduplicate remaining fields
     for (const { key: fieldName } of visit(this.target)) {
-      if (fieldName === 'paths') {
+      if (fieldName === "paths") {
         if (this.target.paths) {
           this.deduplicatePaths();
         }
-      } else if (fieldName !== 'components' && fieldName !== 'openapi') {
+      } else if (fieldName !== "components" && fieldName !== "openapi") {
         if (this.target[fieldName]) {
           this.deduplicateAdditionalFieldMembers(fieldName);
         }
@@ -136,7 +153,6 @@ export class Deduplicator {
 
         // iterate over all the members
         for (const { key: anotherMemberUid, value: anotherMember } of visit(element)) {
-
           // ignore merge with itself
           if (memberUid !== anotherMemberUid && areSimilar(member, anotherMember)) {
             // finish up
@@ -167,7 +183,7 @@ export class Deduplicator {
     const deduplicatedPaths = new Set<string>();
     for (let { key: pathUid } of visit(this.target.paths)) {
       if (!deduplicatedPaths.has(pathUid)) {
-        const xMsMetadata = 'x-ms-metadata';
+        const xMsMetadata = "x-ms-metadata";
         const path = this.target.paths[pathUid];
 
         // extract metadata to be merged
@@ -178,35 +194,39 @@ export class Deduplicator {
         let profiles = path[xMsMetadata].profiles;
 
         // extract path properties excluding metadata
-        const { 'x-ms-metadata': metadataCurrent, ...filteredPath } = path;
+        const { "x-ms-metadata": metadataCurrent, ...filteredPath } = path;
 
         // iterate over all the paths
         for (const { key: anotherPathUid, value: anotherPath } of visit(this.target.paths)) {
-
           // ignore merge with itself && anotherPath already deleted (i.e. undefined)
           if (anotherPath !== undefined && pathUid !== anotherPathUid) {
-
             // extract the another path's properties excluding metadata
-            const { 'x-ms-metadata': metadataSchema, ...filteredAnotherPath } = anotherPath;
+            const { "x-ms-metadata": metadataSchema, ...filteredAnotherPath } = anotherPath;
 
             // TODO: Add more keys to ignore.
-            const keysToIgnore: Array<string> = ['description', 'tags', 'x-ms-original', 'x-ms-examples'];
+            const keysToIgnore: Array<string> = ["description", "tags", "x-ms-original", "x-ms-examples"];
 
             // they should have the same name to be merged and they should be similar
-            if (path[xMsMetadata].path === anotherPath[xMsMetadata].path && areSimilar(filteredPath, filteredAnotherPath, ...keysToIgnore)) {
-
+            if (
+              path[xMsMetadata].path === anotherPath[xMsMetadata].path &&
+              areSimilar(filteredPath, filteredAnotherPath, ...keysToIgnore)
+            ) {
               // merge metadata
               apiVersions = apiVersions.concat(anotherPath[xMsMetadata].apiVersions);
               filename = filename.concat(anotherPath[xMsMetadata].filename);
               originalLocations = originalLocations.concat(anotherPath[xMsMetadata].originalLocations);
-              profiles = getMergedProfilesMetadata(profiles, anotherPath[xMsMetadata].profiles, path[xMsMetadata].path, originalLocations);
+              profiles = getMergedProfilesMetadata(
+                profiles,
+                anotherPath[xMsMetadata].profiles,
+                path[xMsMetadata].path,
+                originalLocations,
+              );
 
               // the discriminator to take contents is the api version
               const maxApiVersionPath = maximum(path[xMsMetadata].apiVersions);
               const maxApiVersionAnotherPath = maximum(anotherPath[xMsMetadata].apiVersions);
               let uidPathToDelete = anotherPathUid;
               if (compareVersions(toSemver(maxApiVersionPath), toSemver(maxApiVersionAnotherPath)) === -1) {
-
                 // if the current path max api version is less than the another path, swap ids.
                 uidPathToDelete = pathUid;
                 pathUid = anotherPathUid;
@@ -225,7 +245,7 @@ export class Deduplicator {
           filename: [...new Set([...filename])],
           path: pathFromMetadata,
           profiles,
-          originalLocations: [...new Set([...originalLocations])]
+          originalLocations: [...new Set([...originalLocations])],
         };
         deduplicatedPaths.add(pathUid);
       }
@@ -242,17 +262,16 @@ export class Deduplicator {
   }
 
   private async deduplicateComponent(componentUid: string, type: string) {
-
     switch (type) {
-      case 'schemas':
-      case 'responses':
-      case 'parameters':
-      case 'examples':
-      case 'requestBodies':
-      case 'headers':
-      case 'links':
-      case 'callbacks':
-      case 'securitySchemes':
+      case "schemas":
+      case "responses":
+      case "parameters":
+      case "examples":
+      case "requestBodies":
+      case "headers":
+      case "links":
+      case "callbacks":
+      case "securitySchemes":
         if (!this.deduplicatedComponents[type].has(componentUid)) {
           if (!this.crawledComponents[type].has(componentUid)) {
             await YieldCPU();
@@ -262,7 +281,7 @@ export class Deduplicator {
           // Just try to deduplicate if it was not deduplicated while crawling another component.
           if (!this.deduplicatedComponents[type].has(componentUid)) {
             // deduplicate crawled component
-            const xMsMetadata = 'x-ms-metadata';
+            const xMsMetadata = "x-ms-metadata";
             const component = this.target.components[type][componentUid];
 
             // extract metadata to be merged
@@ -272,24 +291,25 @@ export class Deduplicator {
             let name = component[xMsMetadata].name;
 
             // extract component properties excluding metadata
-            const { 'x-ms-metadata': metadataCurrent, ...filteredComponent } = component;
+            const { "x-ms-metadata": metadataCurrent, ...filteredComponent } = component;
 
             // iterate over all the components of the same type of the component
             for (const { key: anotherComponentUid, value: anotherComponent } of visit(this.target.components[type])) {
               // ignore merge with itself && anotherComponent already deleted (i.e. undefined)
               if (anotherComponent !== undefined && componentUid !== anotherComponentUid) {
-
                 // extract the another component's properties excluding metadata
-                const { 'x-ms-metadata': metadataSchema, ...filteredAnotherComponent } = anotherComponent;
+                const { "x-ms-metadata": metadataSchema, ...filteredAnotherComponent } = anotherComponent;
 
                 // TODO: Add more keys to ignore.
-                const keysToIgnore: Array<string> = ['description', 'x-ms-original', 'x-ms-examples'];
+                const keysToIgnore: Array<string> = ["description", "x-ms-original", "x-ms-examples"];
 
-                const namesMatch = this.deduplicateInlineModels ?
-                  anotherComponent[xMsMetadata].name.replace(/\d*$/, '') === component[xMsMetadata].name.replace(/\d*$/, '') ||
-                  (anotherComponent[xMsMetadata].name.indexOf('·') > -1 && component[xMsMetadata].name.indexOf('·') > -1) :
-
-                  anotherComponent[xMsMetadata].name.replace(/\d*$/, '') === component[xMsMetadata].name.replace(/\d*$/, '');
+                const namesMatch = this.deduplicateInlineModels
+                  ? anotherComponent[xMsMetadata].name.replace(/\d*$/, "") ===
+                      component[xMsMetadata].name.replace(/\d*$/, "") ||
+                    (anotherComponent[xMsMetadata].name.indexOf("·") > -1 &&
+                      component[xMsMetadata].name.indexOf("·") > -1)
+                  : anotherComponent[xMsMetadata].name.replace(/\d*$/, "") ===
+                    component[xMsMetadata].name.replace(/\d*$/, "");
 
                 // const t1 = component['type'];
                 // const t2 = anotherComponent['type'];
@@ -299,13 +319,14 @@ export class Deduplicator {
 
                 // (type === 'schemas' && t1 === t2 && (t1 === 'object' || (t1 === 'string' && component['format']) || t1 === undefined))
                 // they should have the same name to be merged and they should be similar
-                if (namesMatch &&
+                if (
+                  namesMatch &&
                   // typesAreSame &&
                   // (isObjectSchema || isStringSchemaWithFormat) &&
-                  areSimilar(filteredAnotherComponent, filteredComponent, ...keysToIgnore)) {
-
+                  areSimilar(filteredAnotherComponent, filteredComponent, ...keysToIgnore)
+                ) {
                   // if the primary has a synthetic name, and the secondary doesn't use the secondary's name
-                  if (name.indexOf('·') > 0 && anotherComponent[xMsMetadata].name.indexOf('·') === -1) {
+                  if (name.indexOf("·") > 0 && anotherComponent[xMsMetadata].name.indexOf("·") === -1) {
                     name = anotherComponent[xMsMetadata].name;
                   }
 
@@ -318,8 +339,9 @@ export class Deduplicator {
                   const maxApiVersionComponent = maximum(component[xMsMetadata].apiVersions);
                   const maxApiVersionAnotherComponent = maximum(anotherComponent[xMsMetadata].apiVersions);
                   let uidComponentToDelete = anotherComponentUid;
-                  if (compareVersions(toSemver(maxApiVersionComponent), toSemver(maxApiVersionAnotherComponent)) === -1) {
-
+                  if (
+                    compareVersions(toSemver(maxApiVersionComponent), toSemver(maxApiVersionAnotherComponent)) === -1
+                  ) {
                     // if the current component max api version is less than the another component, swap ids.
                     uidComponentToDelete = componentUid;
                     componentUid = anotherComponentUid;
@@ -329,7 +351,10 @@ export class Deduplicator {
                   delete this.target.components[type][uidComponentToDelete];
                   this.refs[`#/components/${type}/${uidComponentToDelete}`] = `#/components/${type}/${componentUid}`;
                   this.updateRefs(this.target);
-                  this.updateMappings(`/components/${type}/${uidComponentToDelete}`, `/components/${type}/${componentUid}`);
+                  this.updateMappings(
+                    `/components/${type}/${uidComponentToDelete}`,
+                    `/components/${type}/${componentUid}`,
+                  );
                   this.deduplicatedComponents[type].add(uidComponentToDelete);
                 }
               }
@@ -339,7 +364,7 @@ export class Deduplicator {
               apiVersions: [...new Set([...apiVersions])],
               filename: [...new Set([...filename])],
               name,
-              originalLocations: [...new Set([...originalLocations])]
+              originalLocations: [...new Set([...originalLocations])],
             };
 
             this.deduplicatedComponents[type].add(componentUid);
