@@ -17,7 +17,7 @@ export interface Event<T> {
    * @param thisArgs The 'this' which will be used when calling the event listener.
    * @param disposables An array to which a {{IDisposable}} will be added. The
    * @return
-  */
+   */
   (listener: (e: T) => any, thisArgs?: any, disposables?: Array<Disposable>): Disposable;
 }
 export declare namespace Event {
@@ -71,4 +71,3 @@ export declare class CancellationTokenSource {
   cancel(): void;
   dispose(): void;
 }
-

@@ -1,5 +1,4 @@
-'use strict';
-import { Dictionary, items } from '@azure-tools/linq';
+import { Dictionary, items } from "@azure-tools/linq";
 
 export type JsonPointer = string;
 export type JsonPointerTokens = Array<string>;
@@ -19,7 +18,6 @@ export interface NodeT<T, K extends keyof T> {
   childIterator: () => Iterable<NodeT<T[K], keyof T[K]>>;
 }
 
-
 /**
  * Lookup a json pointer in an object
  *
@@ -32,8 +30,8 @@ export function get(obj: any, pointer: JsonPointer | JsonPointerTokens) {
 
   for (let i = 0; i < refTokens.length; ++i) {
     const tok = refTokens[i];
-    if (!(typeof obj === 'object' && tok in obj)) {
-      throw new Error('Invalid reference token: ' + tok);
+    if (!(typeof obj === "object" && tok in obj)) {
+      throw new Error("Invalid reference token: " + tok);
     }
     obj = obj[tok];
   }
@@ -52,12 +50,12 @@ export function set(obj: any, pointer: JsonPointer | JsonPointerTokens, value: a
   let nextTok: string | number = refTokens[0];
 
   if (refTokens.length === 0) {
-    throw Error('Can not set the root object');
+    throw Error("Can not set the root object");
   }
 
   for (let i = 0; i < refTokens.length - 1; ++i) {
     let tok: string | number = refTokens[i];
-    if (tok === '-' && Array.isArray(obj)) {
+    if (tok === "-" && Array.isArray(obj)) {
       tok = obj.length;
     }
     nextTok = refTokens[i + 1];
@@ -71,7 +69,7 @@ export function set(obj: any, pointer: JsonPointer | JsonPointerTokens, value: a
     }
     obj = obj[tok];
   }
-  if (nextTok === '-' && Array.isArray(obj)) {
+  if (nextTok === "-" && Array.isArray(obj)) {
     nextTok = obj.length;
   }
   obj[nextTok] = value;
@@ -93,7 +91,7 @@ export function remove(obj: any, pointer: JsonPointer | JsonPointerTokens) {
   const parent = get(obj, refTokens.slice(0, -1));
   if (Array.isArray(parent)) {
     const index = +finalToken;
-    if (finalToken === '' && isNaN(index)) {
+    if (finalToken === "" && isNaN(index)) {
       throw new Error(`Invalid array index: "${finalToken}"`);
     }
 
@@ -113,9 +111,13 @@ export function remove(obj: any, pointer: JsonPointer | JsonPointerTokens) {
 export function toDictionary(obj: any, descend?: (value: any) => boolean) {
   const results = new Dictionary<any>();
 
-  walk(obj, (value, pointer) => {
-    results[pointer] = value;
-  }, descend);
+  walk(
+    obj,
+    (value, pointer) => {
+      results[pointer] = value;
+    },
+    descend,
+  );
   return results;
 }
 
@@ -127,7 +129,11 @@ export function toDictionary(obj: any, descend?: (value: any) => boolean) {
  * @param {function} iterator
  * @param {function} descend
  */
-export function walk(obj: any, iterator: (value: any, pointer: string) => void, descend: (value: any) => boolean = isObjectOrArray) {
+export function walk(
+  obj: any,
+  iterator: (value: any, pointer: string) => void,
+  descend: (value: any) => boolean = isObjectOrArray,
+) {
   const refTokens = new Array<any>();
   /*
     const descendFn = descend || ((value: any) => {
@@ -150,7 +156,7 @@ export function walk(obj: any, iterator: (value: any, pointer: string) => void, 
 }
 
 function isObjectOrArray(value: any): boolean {
-  return typeof (value) === 'object';
+  return typeof value === "object";
 }
 
 /**
@@ -161,7 +167,11 @@ function isObjectOrArray(value: any): boolean {
  * @param {function} iterator
  * @param {function} descend
  */
-export function _visit(obj: any, iterator: (value: any, pointer: string) => boolean, descend: (value: any) => boolean = isObjectOrArray) {
+export function _visit(
+  obj: any,
+  iterator: (value: any, pointer: string) => boolean,
+  descend: (value: any) => boolean = isObjectOrArray,
+) {
   const refTokens = new Array<string>();
   const next = (cur: any) => {
     for (const { key, value } of items(cur)) {
@@ -188,8 +198,10 @@ export function* visit(obj: any, parentReference: JsonPointerTokens = new Array<
   }
 }
 
-
-export function* visitT<T, K extends keyof T>(obj: T, parentReference: JsonPointerTokens = new Array<string>()): Iterable<NodeT<T, K>> {
+export function* visitT<T, K extends keyof T>(
+  obj: T,
+  parentReference: JsonPointerTokens = new Array<string>(),
+): Iterable<NodeT<T, K>> {
   for (const { key, value } of items(<any>obj)) {
     const reference = [...parentReference, key];
     const v = <T[K]>value;
@@ -202,7 +214,6 @@ export function* visitT<T, K extends keyof T>(obj: T, parentReference: JsonPoint
     };
   }
 }
-
 
 /**
  * Tests if an object has a value for a json pointer
@@ -227,7 +238,7 @@ export function has(obj: any, pointer: JsonPointer | JsonPointerTokens) {
  * @returns {string}
  */
 function escape(str: string) {
-  return str.toString().replace(/~/g, '~0').replace(/\//g, '~1');
+  return str.toString().replace(/~/g, "~0").replace(/\//g, "~1");
 }
 
 /**
@@ -237,7 +248,7 @@ function escape(str: string) {
  * @returns {string}
  */
 function unescape(str: string) {
-  return str.replace(/~1/g, '/').replace(/~0/g, '~');
+  return str.replace(/~1/g, "/").replace(/~0/g, "~");
 }
 
 /**
@@ -247,8 +258,12 @@ function unescape(str: string) {
  * @returns {Array}
  */
 export function parsePointer(pointer: string): JsonPointerTokens {
-  if (pointer === '') { return new Array<string>(); }
-  if (pointer.charAt(0) !== '/') { throw new Error('Invalid JSON pointer: ' + pointer); }
+  if (pointer === "") {
+    return new Array<string>();
+  }
+  if (pointer.charAt(0) !== "/") {
+    throw new Error("Invalid JSON pointer: " + pointer);
+  }
   return pointer.substring(1).split(/\//).map(unescape);
 }
 
@@ -259,6 +274,8 @@ export function parsePointer(pointer: string): JsonPointerTokens {
  * @returns {string}
  */
 function compile(refTokens: JsonPointerTokens) {
-  if (refTokens.length === 0) { return ''; }
-  return `/${refTokens.map(escape).join('/')}`;
+  if (refTokens.length === 0) {
+    return "";
+  }
+  return `/${refTokens.map(escape).join("/")}`;
 }

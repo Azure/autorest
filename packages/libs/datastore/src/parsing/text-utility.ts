@@ -32,14 +32,8 @@ export function Lines(text: string): Array<string> {
  * @param text Source.
  * @param index Index.
  */
-export function IndexToPosition(
-  text: DataHandle | string,
-  index: number
-): sourceMapPosition {
-  const startIndices =
-    typeof text === "string"
-      ? LineIndices(text)
-      : text.metadata.lineIndices.Value;
+export function IndexToPosition(text: DataHandle | string, index: number): sourceMapPosition {
+  const startIndices = typeof text === "string" ? LineIndices(text) : text.metadata.lineIndices.Value;
 
   // bin. search for last `<item> <= index`
   let lineIndexMin = 0;

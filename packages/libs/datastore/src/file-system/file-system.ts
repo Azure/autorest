@@ -2,11 +2,11 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { EnumerateFiles, ResolveUri, ReadUri, WriteString } from '@azure-tools/uri';
+import { EnumerateFiles, ResolveUri, ReadUri, WriteString } from "@azure-tools/uri";
 // import { From } from "linq-es2015";
-import { items, keys } from '@azure-tools/linq';
+import { items, keys } from "@azure-tools/linq";
 
-import * as Constants from './constants';
+import * as Constants from "../constants";
 
 export interface IFileSystem {
   EnumerateFileUris(folderUri: string): Promise<Array<string>>;
@@ -14,16 +14,14 @@ export interface IFileSystem {
 }
 
 export class MemoryFileSystem implements IFileSystem {
-  public static readonly DefaultVirtualRootUri = 'file:///';
+  public static readonly DefaultVirtualRootUri = "file:///";
   private filesByUri: Map<string, string>;
 
   public constructor(files: Map<string, string>) {
     this.filesByUri = new Map<string, string>(
       items(files).select(
-        each => [
-          ResolveUri(MemoryFileSystem.DefaultVirtualRootUri, each.key),
-          each.value
-        ] as [string, string])
+        (each) => [ResolveUri(MemoryFileSystem.DefaultVirtualRootUri, each.key), each.value] as [string, string],
+      ),
     );
     /*
         this.filesByUri = new Map<string, string>(
@@ -44,16 +42,18 @@ export class MemoryFileSystem implements IFileSystem {
 
   async EnumerateFileUris(folderUri: string = MemoryFileSystem.DefaultVirtualRootUri): Promise<Array<string>> {
     // return await [...From(this.filesByUri.keys()).Where(uri => {
-    return keys(this.filesByUri).where(uri => {
-      // in folder?
-      if (!uri.startsWith(folderUri)) {
-        return false;
-      }
+    return keys(this.filesByUri)
+      .where((uri) => {
+        // in folder?
+        if (!uri.startsWith(folderUri)) {
+          return false;
+        }
 
-      // not in subfolder?
-      // return uri.substr(folderUri.length).indexOf("/") === -1;
-      return uri.substr(folderUri.length).indexOf('/') === -1;
-    }).toArray();
+        // not in subfolder?
+        // return uri.substr(folderUri.length).indexOf("/") === -1;
+        return uri.substr(folderUri.length).indexOf("/") === -1;
+      })
+      .toArray();
     //})];
   }
 
@@ -63,13 +63,10 @@ export class MemoryFileSystem implements IFileSystem {
 }
 
 export class RealFileSystem implements IFileSystem {
-  public constructor() {
-  }
+  public constructor() {}
 
   EnumerateFileUris(folderUri: string): Promise<Array<string>> {
-    return EnumerateFiles(folderUri, [
-      Constants.DefaultConfiguration
-    ]);
+    return EnumerateFiles(folderUri, [Constants.DefaultConfiguration]);
   }
   async ReadFile(uri: string): Promise<string> {
     return ReadUri(uri);
@@ -83,13 +80,10 @@ export class RealFileSystem implements IFileSystem {
 // - GitHub URI adjustment
 // - GitHub auth
 export class EnhancedFileSystem implements IFileSystem {
-  public constructor(private githubAuthToken?: string) {
-  }
+  public constructor(private githubAuthToken?: string) {}
 
   EnumerateFileUris(folderUri: string): Promise<Array<string>> {
-    return EnumerateFiles(folderUri, [
-      Constants.DefaultConfiguration
-    ]);
+    return EnumerateFiles(folderUri, [Constants.DefaultConfiguration]);
   }
   async ReadFile(uri: string): Promise<string> {
     const headers: { [key: string]: string } = {};
@@ -97,10 +91,10 @@ export class EnhancedFileSystem implements IFileSystem {
     // check for GitHub OAuth token
     if (
       this.githubAuthToken &&
-        (uri.startsWith('https://raw.githubusercontent.com') ||
-        uri.startsWith('https://github.com'))
+      (uri.startsWith("https://raw.githubusercontent.com") || uri.startsWith("https://github.com"))
     ) {
-      console.log(`Used GitHub authentication token to request '${uri}'.`);
+      // eslint-disable-next-line no-console
+      console.error(`Used GitHub authentication token to request '${uri}'.`);
       headers.authorization = `Bearer ${this.githubAuthToken}`;
     }
 

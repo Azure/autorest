@@ -3,11 +3,26 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle } from '../data-store/data-store';
-import { JsonPath, JsonPathComponent, stringify } from '../jsonpath';
-import { EnhancedPosition } from '../source-map/source-map';
-import { CloneAst, CreateYAMLAnchorRef, CreateYAMLMap, CreateYAMLMapping, CreateYAMLScalar, Descendants, Kind, ParseNode, ResolveAnchorRef, YAMLAnchorReference, YAMLMap, YAMLMapping, YAMLNode, YAMLSequence } from '../yaml';
-import { IndexToPosition } from './text-utility';
+import { DataHandle } from "../data-store/data-store";
+import { JsonPath, JsonPathComponent, stringify } from "../json-path/json-path";
+import { EnhancedPosition } from "../source-map/source-map";
+import {
+  CloneAst,
+  CreateYAMLAnchorRef,
+  CreateYAMLMap,
+  CreateYAMLMapping,
+  CreateYAMLScalar,
+  Descendants,
+  Kind,
+  ParseNode,
+  ResolveAnchorRef,
+  YAMLAnchorReference,
+  YAMLMap,
+  YAMLMapping,
+  YAMLNode,
+  YAMLSequence,
+} from "../yaml";
+import { IndexToPosition } from "./text-utility";
 
 function ResolveMapProperty(node: YAMLMap, property: string): YAMLMapping | null {
   for (const mapping of node.mappings) {
@@ -25,7 +40,12 @@ function ResolveMapProperty(node: YAMLMap, property: string): YAMLMapping | null
  * @param jsonPathPart           Path component to resolve
  * @param deferResolvingMappings If set to true, if resolving to a mapping, will return the entire mapping node instead of just the value (useful if desiring keys)
  */
-function ResolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPathPart: JsonPathComponent, deferResolvingMappings: boolean): YAMLNode {
+function ResolvePathPart(
+  yamlAstRoot: YAMLNode,
+  yamlAstCurrent: YAMLNode,
+  jsonPathPart: JsonPathComponent,
+  deferResolvingMappings: boolean,
+): YAMLNode {
   switch (yamlAstCurrent.kind) {
     case Kind.SCALAR:
       throw new Error(`Trying to retrieve '${jsonPathPart}' from scalar value`);
@@ -52,11 +72,13 @@ function ResolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPa
     case Kind.SEQ: {
       const astSub = yamlAstCurrent as YAMLSequence;
       const pathPartNumber = Number(jsonPathPart);
-      if (typeof jsonPathPart !== 'number' && isNaN(pathPartNumber)) {
+      if (typeof jsonPathPart !== "number" && isNaN(pathPartNumber)) {
         throw new Error(`Trying to retrieve non-string item '${jsonPathPart}' from sequence`);
       }
       if (0 > pathPartNumber || pathPartNumber >= astSub.items.length) {
-        throw new Error(`Trying to retrieve item '${jsonPathPart}' from sequence with '${astSub.items.length}' items (index out of bounds)`);
+        throw new Error(
+          `Trying to retrieve item '${jsonPathPart}' from sequence with '${astSub.items.length}' items (index out of bounds)`,
+        );
       }
       return astSub.items[pathPartNumber];
     }
@@ -66,7 +88,7 @@ function ResolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPa
       return ResolvePathPart(yamlAstRoot, newCurrent, jsonPathPart, deferResolvingMappings);
     }
     case Kind.INCLUDE_REF:
-      throw new Error('INCLUDE_REF not implemented');
+      throw new Error("INCLUDE_REF not implemented");
   }
   throw new Error(`unexpected YAML AST node kind '${yamlAstCurrent.kind}'`);
 }
@@ -82,7 +104,11 @@ export function ResolveRelativeNode(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLN
   }
 }
 
-export function ReplaceNode(yamlAstRoot: YAMLNode, target: YAMLNode, value: YAMLNode | undefined): YAMLNode | undefined {
+export function ReplaceNode(
+  yamlAstRoot: YAMLNode,
+  target: YAMLNode,
+  value: YAMLNode | undefined,
+): YAMLNode | undefined {
   // root replacement?
   if (target === yamlAstRoot) {
     return value;
@@ -172,14 +198,16 @@ export function ConvertYaml2Jsonx(ast: YAMLNode): YAMLNode {
     if (node.anchorId) {
       if (node.kind === Kind.MAP) {
         const yamlNodeMapping = node as YAMLMap;
-        yamlNodeMapping.mappings.push(CreateYAMLMapping(CreateYAMLScalar('$id'), CreateYAMLScalar(node.anchorId)));
+        yamlNodeMapping.mappings.push(CreateYAMLMapping(CreateYAMLScalar("$id"), CreateYAMLScalar(node.anchorId)));
       }
       node.anchorId = undefined;
     }
     if (node.kind === Kind.ANCHOR_REF) {
       const yamlNodeAnchor = node as YAMLAnchorReference;
       const map = CreateYAMLMap();
-      map.mappings.push(CreateYAMLMapping(CreateYAMLScalar('$$ref'), CreateYAMLScalar(yamlNodeAnchor.referencesAnchor)));
+      map.mappings.push(
+        CreateYAMLMapping(CreateYAMLScalar("$$ref"), CreateYAMLScalar(yamlNodeAnchor.referencesAnchor)),
+      );
       ReplaceNode(ast, yamlNodeAnchor, map);
     }
   }
@@ -195,19 +223,19 @@ export function ConvertJsonx2Yaml(ast: YAMLNode): YAMLNode {
     const node = nodeWithPath.node;
     if (node.kind === Kind.MAP) {
       const yamlNodeMapping = node as YAMLMap;
-      const propId = ResolveMapProperty(yamlNodeMapping, '$id');
-      let propRef = ResolveMapProperty(yamlNodeMapping, '$ref');
-      const propReff = ResolveMapProperty(yamlNodeMapping, '$$ref');
-      if (propRef && isNaN(parseInt(ParseNode<any>(propRef.value) + ''))) {
+      const propId = ResolveMapProperty(yamlNodeMapping, "$id");
+      let propRef = ResolveMapProperty(yamlNodeMapping, "$ref");
+      const propReff = ResolveMapProperty(yamlNodeMapping, "$$ref");
+      if (propRef && isNaN(parseInt(ParseNode<any>(propRef.value) + ""))) {
         propRef = null;
       }
       propRef = propRef || propReff;
 
       if (propId) {
-        yamlNodeMapping.anchorId = ParseNode<any>(propId.value) + '';
+        yamlNodeMapping.anchorId = ParseNode<any>(propId.value) + "";
         ReplaceNode(ast, propId, undefined);
       } else if (propRef) {
-        ReplaceNode(ast, yamlNodeMapping, CreateYAMLAnchorRef(ParseNode<any>(propRef.value) + ''));
+        ReplaceNode(ast, yamlNodeMapping, CreateYAMLAnchorRef(ParseNode<any>(propRef.value) + ""));
       }
     }
   }

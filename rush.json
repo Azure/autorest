@@ -67,6 +67,12 @@
       "shouldPublish": true
     },
     {
+      "packageName": "@azure-tools/datastore",
+      "projectFolder": "packages/libs/datastore",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
       "packageName": "@autorest/test-utils",
       "projectFolder": "packages/testing/test-utils",
       "reviewCategory": "production",

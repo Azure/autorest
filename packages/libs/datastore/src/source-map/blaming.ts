@@ -3,12 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { values } from '@azure-tools/linq';
-import { MappedPosition } from 'source-map';
-import { DataStore } from '../data-store/data-store';
-import { JsonPath } from '../jsonpath';
-import { EncodeEnhancedPositionInName, TryDecodeEnhancedPositionFromName } from './source-map';
-
+import { values } from "@azure-tools/linq";
+import { MappedPosition } from "source-map";
+import { DataStore } from "../data-store/data-store";
+import { JsonPath } from "../json-path/json-path";
+import { EncodeEnhancedPositionInName, TryDecodeEnhancedPositionFromName } from "./source-map";
 
 export class BlameTree {
   public static async Create(dataStore: DataStore, position: MappedPosition): Promise<BlameTree> {
@@ -19,7 +18,10 @@ export class BlameTree {
     const enhanced = TryDecodeEnhancedPositionFromName(position.name);
     if (enhanced !== undefined) {
       for (const blame of blames) {
-        blame.name = EncodeEnhancedPositionInName(blame.name, { ...enhanced, ...TryDecodeEnhancedPositionFromName(blame.name) });
+        blame.name = EncodeEnhancedPositionInName(blame.name, {
+          ...enhanced,
+          ...TryDecodeEnhancedPositionFromName(blame.name),
+        });
       }
     }
 
@@ -33,26 +35,29 @@ export class BlameTree {
 
   private constructor(
     public readonly node: MappedPosition & { path?: JsonPath },
-    public readonly blaming: Array<BlameTree>) { }
+    public readonly blaming: Array<BlameTree>,
+  ) {}
 
   public BlameLeafs(): Array<MappedPosition> {
     const result: Array<MappedPosition> = [];
 
     const todos: Array<BlameTree> = [this];
     let todo: BlameTree | undefined;
-    while (todo = todos.pop()) {
+    while ((todo = todos.pop())) {
       // report self
       if (todo.blaming.length === 0) {
         result.push({
           column: todo.node.column,
           line: todo.node.line,
           name: todo.node.name,
-          source: todo.node.source
+          source: todo.node.source,
         });
       }
       // recurse
       todos.push(...todo.blaming);
     }
-    return values(result).distinct(x => JSON.stringify(x)).toArray();
+    return values(result)
+      .distinct((x) => JSON.stringify(x))
+      .toArray();
   }
 }

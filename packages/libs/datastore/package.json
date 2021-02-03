@@ -1,7 +1,6 @@
 {
   "name": "@azure-tools/datastore",
-  "version": "4.1.0",
-  "patchOffset": 100,
+  "version": "4.1.270",
   "description": "Virtualized Filesystem with parsing and sourcemaps (AutoRest)",
   "main": "./dist/main.js",
   "typings": "./dist/main.d.ts",
@@ -13,16 +12,14 @@
     "url": "git+https://github.com/Azure/perks.git"
   },
   "scripts": {
-    "build": "tsc -p .",
-    "watch": "tsc -p . --watch",
-    "eslint-fix": "eslint  . --fix --ext .ts",
-    "eslint": "eslint  . --ext .ts",
+    "build": "tsc -p ./tsconfig.build.json",
+    "watch": "tsc -p ./tsconfig.build.json --watch",
+    "lint:fix": "eslint ./src --fix --ext .ts",
+    "lint": "eslint ./src --ext .ts --max-warnings=0",
     "prepare": "npm run build",
-    "test": "npm run build && mocha dist/test --timeout 50000",
-    "testci": "npm run build && mocha dist/test --timeout 50000",
-    "clean": "ver > nul 2>&1 nul && npm run --silent clean-cmd || npm run --silent clean-bash",
-    "clean-cmd": "if exist dist rmdir /s /q dist && exit 0 || exit 0 ",
-    "clean-bash": "rm nul && rm -rf dist && exit 0 || exit 0"
+    "test": "jest --watchAll --coverage=false",
+    "test:ci": "jest --ci",
+    "clean": "rimraf ./dist"
   },
   "keywords": [
     "perks",
@@ -39,25 +36,28 @@
   "homepage": "https://github.com/Azure/perks/tree/master/datastore#readme",
   "readme": "https://github.com/Azure/perks/tree/master/datastore/readme.md",
   "devDependencies": {
-    "mocha-typescript": "1.1.17",
-    "@types/mocha": "5.2.5",
-    "@types/node": "12.7.2",
+    "@types/jest": "^26.0.20",
     "@types/jsonpath": "^0.2.0",
+    "@types/node": "~14.14.20",
     "@types/source-map": "0.5.0",
-    "mocha": "5.2.0",
-    "@typescript-eslint/eslint-plugin": "~2.6.0",
-    "@typescript-eslint/parser": "~2.6.0",
-    "eslint": "~6.6.0",
-    "typescript": "~3.9.7"
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
+    "eslint-plugin-prettier": "~3.2.0",
+    "eslint-plugin-unicorn": "~27.0.0",
+    "eslint": "^7.17.0",
+    "jest": "^26.6.3",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.4.4",
+    "typescript": "~4.1.3"
   },
   "dependencies": {
+    "@azure-tools/codegen": "~2.5.0",
+    "@azure-tools/linq": "~3.1.0",
     "@azure-tools/tasks": "~3.0.0",
     "@azure-tools/uri": "~3.0.0",
-    "@azure-tools/linq": "~3.1.0",
-    "@azure-tools/codegen": "~2.5.0",
+    "js-yaml": "~4.0.0",
     "jsonpath": "1.0.0",
     "source-map": "0.5.6",
-    "yaml-ast-parser": "0.0.43",
-    "js-yaml": "3.13.1"
+    "yaml-ast-parser": "0.0.43"
   }
 }

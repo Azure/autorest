@@ -3,23 +3,23 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { OperationCanceledException, Delay, LazyPromise, Lazy } from '@azure-tools/tasks';
-import { ReadUri, ResolveUri, ParentFolderUri } from '@azure-tools/uri';
-import { MappedPosition, MappingItem, Position, RawSourceMap, SourceMapConsumer, SourceMapGenerator } from 'source-map';
-import { CancellationToken } from '../cancellation';
-import { IFileSystem } from '../file-system';
-import { FastStringify, ParseNode, ParseToAst as parseAst, YAMLNode, parseYaml } from '../yaml';
-import { BlameTree } from '../source-map/blaming';
-import { Compile, CompilePosition, Mapping, SmartPosition } from '../source-map/source-map';
-import { promises as fs } from 'fs';
-import { tmpdir } from 'os';
-import { join } from 'path';
+import { OperationCanceledException, Delay, LazyPromise, Lazy } from "@azure-tools/tasks";
+import { ReadUri, ResolveUri, ParentFolderUri } from "@azure-tools/uri";
+import { MappedPosition, MappingItem, Position, RawSourceMap, SourceMapConsumer, SourceMapGenerator } from "source-map";
+import { CancellationToken } from "../cancellation";
+import { IFileSystem } from "../file-system/file-system";
+import { FastStringify, ParseNode, ParseToAst as parseAst, YAMLNode, parseYaml } from "../yaml";
+import { BlameTree } from "../source-map/blaming";
+import { Compile, CompilePosition, Mapping, SmartPosition } from "../source-map/source-map";
+import { promises as fs } from "fs";
+import { tmpdir } from "os";
+import { join } from "path";
 
-import { createHash } from 'crypto';
-import { LineIndices } from '../main';
-const md5 = (content: any) => content ? createHash('md5').update(JSON.stringify(content)).digest('hex') : null;
+import { createHash } from "crypto";
+import { LineIndices } from "../main";
+const md5 = (content: any) => (content ? createHash("md5").update(JSON.stringify(content)).digest("hex") : null);
 
-const FALLBACK_DEFAULT_OUTPUT_ARTIFACT = '';
+const FALLBACK_DEFAULT_OUTPUT_ARTIFACT = "";
 
 /********************************************
  * Data model section (not exposed)
@@ -27,7 +27,7 @@ const FALLBACK_DEFAULT_OUTPUT_ARTIFACT = '';
 
 export interface Metadata {
   lineIndices: Lazy<Array<number>>;
-  
+
   // inputSourceMap: LazyPromise<RawSourceMap>;
   // sourceMap: LazyPromise<RawSourceMap>;
   // sourceMapEachMappingByLine: LazyPromise<Array<Array<MappingItem>>>;
@@ -46,7 +46,9 @@ export interface Data {
   accessed?: boolean;
 }
 
-interface Store { [uri: string]: Data }
+interface Store {
+  [uri: string]: Data;
+}
 
 /********************************************
  * Central data controller
@@ -102,14 +104,14 @@ export class QuickDataSource extends DataSource {
   }
 
   public async Enum(): Promise<Array<string>> {
-    return this.pipeState.skipping ? new Array<string>() : this.handles.map(x => x.key);
+    return this.pipeState.skipping ? new Array<string>() : this.handles.map((x) => x.key);
   }
 
   public async Read(key: string): Promise<DataHandle | null> {
     if (this.pipeState.skipping) {
       return null;
     }
-    const data = this.handles.filter(x => x.key === key)[0];
+    const data = this.handles.filter((x) => x.key === key)[0];
     return data || null;
   }
 }
@@ -121,7 +123,6 @@ class ReadThroughDataSource extends DataSource {
   constructor(private store: DataStore, private fs: IFileSystem) {
     super();
   }
-
 
   get cachable(): boolean {
     // filesystem based data source can't cache
@@ -138,23 +139,25 @@ class ReadThroughDataSource extends DataSource {
           this.uris.push(uri);
           return existingData;
         } catch (e) {
+          // ignore .
         }
 
         // populate cache
         let data: string | null = null;
         try {
-          data = await this.fs.ReadFile(uri) || await ReadUri(uri);
+          data = (await this.fs.ReadFile(uri)) || (await ReadUri(uri));
           if (data) {
-            const parent = ParentFolderUri(uri) || '';
+            const parent = ParentFolderUri(uri) || "";
             // hack to let $(this-folder) resolve to the location...
             data = data.replace(/\$\(this-folder\)\/*/g, parent);
           }
         } finally {
           if (!data) {
+            // eslint-disable-next-line no-unsafe-finally
             return null;
           }
         }
-        const readHandle = await this.store.WriteData(uri, data, 'input-file', [uri]);
+        const readHandle = await this.store.WriteData(uri, data, "input-file", [uri]);
 
         this.uris.push(uri);
         return readHandle;
@@ -170,17 +173,16 @@ class ReadThroughDataSource extends DataSource {
 }
 
 export class DataStore {
-  public static readonly BaseUri = 'mem://';
+  public static readonly BaseUri = "mem://";
   public readonly BaseUri = DataStore.BaseUri;
   private store: Store = {};
   private cacheFolder?: string;
 
-  public constructor(private cancellationToken: CancellationToken = CancellationToken.None) {
-  }
+  public constructor(private cancellationToken: CancellationToken = CancellationToken.None) {}
 
   private async getCacheFolder() {
     if (!this.cacheFolder) {
-      this.cacheFolder = await fs.mkdtemp(join(tmpdir(), 'autorest-'));
+      this.cacheFolder = await fs.mkdtemp(join(tmpdir(), "autorest-"));
     }
     return this.cacheFolder;
   }
@@ -201,14 +203,20 @@ export class DataStore {
 
   private uid = 0;
 
-  private async WriteDataInternal(uri: string, data: string, artifactType: string, identity: Array<string>, metadata: Metadata): Promise<DataHandle> {
+  private async WriteDataInternal(
+    uri: string,
+    data: string,
+    artifactType: string,
+    identity: Array<string>,
+    metadata: Metadata,
+  ): Promise<DataHandle> {
     this.ThrowIfCancelled();
     if (this.store[uri]) {
       throw new Error(`can only write '${uri}' once`);
     }
 
     // make a sanitized name
-    let filename = uri.replace(/[^\w.()]+/g, '-');
+    let filename = uri.replace(/[^\w.()]+/g, "-");
     if (filename.length > 64) {
       filename = `${md5(filename)}-${filename.substr(filename.length - 64)}`;
     }
@@ -225,7 +233,13 @@ export class DataStore {
     return this.Read(uri);
   }
 
-  public async WriteData(description: string, data: string, artifact: string, identity: Array<string>, sourceMapFactory?: (self: DataHandle) => Promise<RawSourceMap>): Promise<DataHandle> {
+  public async WriteData(
+    description: string,
+    data: string,
+    artifact: string,
+    identity: Array<string>,
+    sourceMapFactory?: (self: DataHandle) => Promise<RawSourceMap>,
+  ): Promise<DataHandle> {
     const uri = this.createUri(description);
 
     // metadata
@@ -251,7 +265,6 @@ export class DataStore {
 
     //   return sourceMap;
     // });
-
 
     // metadata.sourceMapEachMappingByLine = new LazyPromise<Array<Array<MappingItem>>>(async () => {
     //   const result: Array<Array<MappingItem>> = [];
@@ -284,12 +297,13 @@ export class DataStore {
 
   public getDataSink(defaultArtifact: string = FALLBACK_DEFAULT_OUTPUT_ARTIFACT): DataSink {
     return new DataSink(
-      (description, data, artifact, identity, sourceMapFactory) => this.WriteData(description, data, artifact || defaultArtifact, identity, sourceMapFactory),
+      (description, data, artifact, identity, sourceMapFactory) =>
+        this.WriteData(description, data, artifact || defaultArtifact, identity, sourceMapFactory),
       async (description, input) => {
         const uri = this.createUri(description);
         this.store[uri] = this.store[input.key];
         return this.Read(uri);
-      }
+      },
     );
   }
 
@@ -317,10 +331,10 @@ export class DataStore {
       source: absoluteUri,
       column: resolvedPosition.column,
       line: resolvedPosition.line,
-      name: `blameRoot (${JSON.stringify(position)})`
+      name: `blameRoot (${JSON.stringify(position)})`,
     });
   }
-  /* DISABLING SOURCE MAP SUPPORT 
+  /* DISABLING SOURCE MAP SUPPORT
   private async CreateInputSourceMapFor(absoluteUri: string): Promise<RawSourceMap> {
     const data = this.ReadStrictSync(absoluteUri);
 
@@ -359,23 +373,49 @@ export class DataStore {
 
 export class DataSink {
   constructor(
-    private write: (description: string, rawData: string, artifact: string | undefined, identity: Array<string>, metadataFactory: (readHandle: DataHandle) => Promise<RawSourceMap>) => Promise<DataHandle>,
-    private forward: (description: string, input: DataHandle) => Promise<DataHandle>) {
-  }
+    private write: (
+      description: string,
+      rawData: string,
+      artifact: string | undefined,
+      identity: Array<string>,
+      metadataFactory: (readHandle: DataHandle) => Promise<RawSourceMap>,
+    ) => Promise<DataHandle>,
+    private forward: (description: string, input: DataHandle) => Promise<DataHandle>,
+  ) {}
 
-  public async WriteDataWithSourceMap(description: string, data: string, artifact: string | undefined, identity: Array<string>, sourceMapFactory: (readHandle: DataHandle) => Promise<RawSourceMap>): Promise<DataHandle> {
+  public async WriteDataWithSourceMap(
+    description: string,
+    data: string,
+    artifact: string | undefined,
+    identity: Array<string>,
+    sourceMapFactory: (readHandle: DataHandle) => Promise<RawSourceMap>,
+  ): Promise<DataHandle> {
     return this.write(description, data, artifact, identity, sourceMapFactory);
   }
 
-  public async WriteData(description: string, data: string, identity: Array<string>, artifact?: string, mappings: Array<Mapping> = [], mappingSources: Array<DataHandle> = []): Promise<DataHandle> {
-    return this.WriteDataWithSourceMap(description, data, artifact, identity, async readHandle => {
+  public async WriteData(
+    description: string,
+    data: string,
+    identity: Array<string>,
+    artifact?: string,
+    mappings: Array<Mapping> = [],
+    mappingSources: Array<DataHandle> = [],
+  ): Promise<DataHandle> {
+    return this.WriteDataWithSourceMap(description, data, artifact, identity, async (readHandle) => {
       const sourceMapGenerator = new SourceMapGenerator({ file: readHandle.key });
       await Compile(mappings, sourceMapGenerator, mappingSources.concat(readHandle));
       return sourceMapGenerator.toJSON();
     });
   }
 
-  public WriteObject<T>(description: string, obj: T, identity: Array<string>, artifact?: string, mappings: Array<Mapping> = [], mappingSources: Array<DataHandle> = []): Promise<DataHandle> {
+  public WriteObject<T>(
+    description: string,
+    obj: T,
+    identity: Array<string>,
+    artifact?: string,
+    mappings: Array<Mapping> = [],
+    mappingSources: Array<DataHandle> = [],
+  ): Promise<DataHandle> {
     return this.WriteData(description, FastStringify(obj), identity, artifact, mappings, mappingSources);
   }
 
@@ -387,7 +427,7 @@ export class DataSink {
 export class DataHandle {
   constructor(public readonly key: string, private item: Data) {
     // start the clock once this has been created.
-    // this ensures that the data cache will be flushed if not 
+    // this ensures that the data cache will be flushed if not
     // used in a reasonable amount of time
     this.onTimer();
   }
@@ -399,7 +439,7 @@ export class DataHandle {
       artifactType: this.item.artifactType,
       identity: this.item.identity,
       name: this.item.name,
-      content: await this.ReadData(true)
+      content: await this.ReadData(true),
     });
   }
 
@@ -420,7 +460,8 @@ export class DataHandle {
     // wait to make sure it's finished writing to disk tho'
     // await this.item.writingToDisk;
     if (!this.item.writeToDisk) {
-      this.item.writeToDisk = fs.writeFile(this.item.name, this.item.cached);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      this.item.writeToDisk = fs.writeFile(this.item.name, this.item.cached!);
     }
 
     // clear the caches.
@@ -431,7 +472,7 @@ export class DataHandle {
 
   public get originalDirectory() {
     const id = this.identity[0];
-    return id.substring(0, id.lastIndexOf('/'));
+    return id.substring(0, id.lastIndexOf("/"));
   }
 
   public get originalFullPath() {
@@ -453,9 +494,9 @@ export class DataHandle {
       await this.item.writeToDisk;
 
       if (nocache) {
-        return await fs.readFile(this.item.name, 'utf8');
+        return await fs.readFile(this.item.name, "utf8");
       } else {
-        this.item.cached = await fs.readFile(this.item.name, 'utf8');
+        this.item.cached = await fs.readFile(this.item.name, "utf8");
 
         // start the timer again.
         this.onTimer();
@@ -496,7 +537,7 @@ export class DataHandle {
   }
 
   public get Description(): string {
-    return decodeURIComponent(this.key.split('?').reverse()[0]);
+    return decodeURIComponent(this.key.split("?").reverse()[0]);
   }
 
   public async IsObject(): Promise<boolean> {
@@ -510,7 +551,7 @@ export class DataHandle {
 
   public async Blame(position: Position): Promise<Array<MappedPosition>> {
     return [];
-    /* DISABLING SOURCE MAP SUPPORT 
+    /* DISABLING SOURCE MAP SUPPORT
     const metadata = this.metadata;
     const sameLineResults = ((await metadata.sourceMapEachMappingByLine)[position.line] || [])
       .filter(mapping => mapping.generatedColumn <= position.column);

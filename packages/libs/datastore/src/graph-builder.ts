@@ -1,26 +1,53 @@
-import { Mapping } from 'source-map';
-import { JsonPointer, Node, visit, parsePointer } from './json-pointer';
-import { CreateAssignmentMapping } from './source-map/source-map';
-import { Exception } from '@azure-tools/tasks';
+import { Mapping } from "source-map";
+import { JsonPointer, parsePointer } from "./json-pointer/json-pointer";
+import { CreateAssignmentMapping } from "./source-map/source-map";
+import { Exception } from "@azure-tools/tasks";
 
-export function createGraphProxy<T extends object>(originalFileName: string, targetPointer: JsonPointer = '', mappings = new Array<Mapping>(), instance = <any>{}): ProxyObject<T> {
-
-  const tag = (value: any, filename: string, pointer: string, key: string | number, subject: string | undefined, recurse: boolean) => {
-    CreateAssignmentMapping(value, filename, parsePointer(pointer), [...parsePointer(targetPointer), key].filter(each => each !== ''), subject || '', recurse, mappings);
+export function createGraphProxy<T extends object>(
+  originalFileName: string,
+  targetPointer: JsonPointer = "",
+  mappings = new Array<Mapping>(),
+  instance = <any>{},
+): ProxyObject<T> {
+  const tag = (
+    value: any,
+    filename: string,
+    pointer: string,
+    key: string | number,
+    subject: string | undefined,
+    recurse: boolean,
+  ) => {
+    CreateAssignmentMapping(
+      value,
+      filename,
+      parsePointer(pointer),
+      [...parsePointer(targetPointer), key].filter((each) => each !== ""),
+      subject || "",
+      recurse,
+      mappings,
+    );
   };
 
   const push = (value: any) => {
     instance.push(value.value);
     const filename = value.filename || originalFileName;
     if (!filename) {
-      throw new Error('Assignment: filename must be specified when there is no default.');
+      throw new Error("Assignment: filename must be specified when there is no default.");
     }
     const pp = parsePointer(value.pointer);
     const q = <any>parseInt(pp[pp.length - 1], 10);
     if (q >= 0) {
       pp[pp.length - 1] = q;
     }
-    CreateAssignmentMapping(value.value, filename, pp, [...parsePointer(targetPointer), instance.length - 1].filter(each => each !== ''), value.subject || '', value.recurse, mappings);
+    CreateAssignmentMapping(
+      value.value,
+      filename,
+      pp,
+      [...parsePointer(targetPointer), instance.length - 1].filter((each) => each !== ""),
+      value.subject || "",
+      value.recurse,
+      mappings,
+    );
   };
 
   const rewrite = (key: string, value: any) => {
@@ -30,13 +57,13 @@ export function createGraphProxy<T extends object>(originalFileName: string, tar
   return new Proxy<ProxyObject<T>>(instance, {
     get(target: ProxyObject<T>, key: string | number | symbol): any {
       switch (key) {
-        case '__push__':
+        case "__push__":
           return push;
-        case '__rewrite__':
+        case "__rewrite__":
           return rewrite;
       }
 
-      return (instance)[key];
+      return instance[key];
     },
 
     set(target: ProxyObject<T>, key: string | number, value: ProxyNode<any>): boolean {
@@ -52,7 +79,7 @@ export function createGraphProxy<T extends object>(originalFileName: string, tar
       }
       const filename = value.filename || originalFileName;
       if (!filename) {
-        throw new Error('Assignment: filename must be specified when there is no default.');
+        throw new Error("Assignment: filename must be specified when there is no default.");
       }
 
       instance[key] = value.value;

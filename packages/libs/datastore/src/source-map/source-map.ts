@@ -3,13 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Position, SourceMapGenerator } from 'source-map';
-import { DataHandle } from '../data-store/data-store';
-import { JsonPath, stringify } from '../jsonpath';
-import { IndexToPosition } from '../parsing/text-utility';
-import * as yaml from '../parsing/yaml';
-import { Descendants, ToAst } from '../yaml';
-import { values } from '@azure-tools/linq';
+import { Position, SourceMapGenerator } from "source-map";
+import { DataHandle } from "../data-store/data-store";
+import { JsonPath, stringify } from "../json-path/json-path";
+import { IndexToPosition } from "../parsing/text-utility";
+import * as yaml from "../parsing/yaml";
+import { Descendants, ToAst } from "../yaml";
 
 // information to attach to line/column based to get a richer experience
 export interface PositionEnhancements {
@@ -30,11 +29,10 @@ export interface Mapping {
   name?: string;
 }
 
-
 // for carrying over rich information into the realm of line/col based source maps
 // convention: <original name (contains no `nameWithPathSeparator`)>\n(<path>)
-const enhancedPositionSeparator = '\n\n(';
-const enhancedPositionEndMark = ')';
+const enhancedPositionSeparator = "\n\n(";
+const enhancedPositionEndMark = ")";
 export function TryDecodeEnhancedPositionFromName(name: string | undefined): EnhancedPosition | undefined {
   try {
     if (!name) {
@@ -55,7 +53,7 @@ export function EncodeEnhancedPositionInName(name: string | undefined, pos: Enha
   if (name && name.indexOf(enhancedPositionSeparator) !== -1) {
     name = name.split(enhancedPositionSeparator)[0];
   }
-  return (name || '') + enhancedPositionSeparator + JSON.stringify(pos, null, 2) + enhancedPositionEndMark;
+  return (name || "") + enhancedPositionSeparator + JSON.stringify(pos, null, 2) + enhancedPositionEndMark;
 }
 
 export async function CompilePosition(position: SmartPosition, yamlFile: DataHandle): Promise<EnhancedPosition> {
@@ -70,7 +68,11 @@ export async function CompilePosition(position: SmartPosition, yamlFile: DataHan
   return <EnhancedPosition>position;
 }
 
-export async function Compile(mappings: Array<Mapping>, target: SourceMapGenerator, yamlFiles: Array<DataHandle> = []): Promise<void> {
+export async function Compile(
+  mappings: Array<Mapping>,
+  target: SourceMapGenerator,
+  yamlFiles: Array<DataHandle> = [],
+): Promise<void> {
   // build lookup
   const yamlFileLookup: { [key: string]: DataHandle } = {};
   for (const yamlFile of yamlFiles) {
@@ -80,7 +82,9 @@ export async function Compile(mappings: Array<Mapping>, target: SourceMapGenerat
   const generatedFile = target.toJSON().file;
   const compilePos = (position: SmartPosition, key: string) => {
     if ((position as any).path && !yamlFileLookup[key]) {
-      throw new Error(`File '${key}' was not passed along with 'yamlFiles' (got '${JSON.stringify(yamlFiles.map(x => x.key))}')`);
+      throw new Error(
+        `File '${key}' was not passed along with 'yamlFiles' (got '${JSON.stringify(yamlFiles.map((x) => x.key))}')`,
+      );
     }
     return CompilePosition(position, yamlFileLookup[key]);
   };
@@ -92,7 +96,7 @@ export async function Compile(mappings: Array<Mapping>, target: SourceMapGenerat
       generated: compiledGenerated,
       original: compiledOriginal,
       name: EncodeEnhancedPositionInName(mapping.name, compiledOriginal),
-      source: mapping.source
+      source: mapping.source,
     });
   }
 }
@@ -102,14 +106,22 @@ export async function Compile(mappings: Array<Mapping>, target: SourceMapGenerat
  * @description This does make an implicit assumption that the decendents of the 'generated' node are 1:1 with the descendents in the 'source' node.
  * In the event that is not true, elements in the target's source map will not be pointing to the correct elements in the source node.
  */
-export function CreateAssignmentMapping(assignedObject: any, sourceKey: string, sourcePath: JsonPath, targetPath: JsonPath, subject: string, recurse = true, result = new Array<Mapping>()): Array<Mapping> {
+export function CreateAssignmentMapping(
+  assignedObject: any,
+  sourceKey: string,
+  sourcePath: JsonPath,
+  targetPath: JsonPath,
+  subject: string,
+  recurse = true,
+  result = new Array<Mapping>(),
+): Array<Mapping> {
   for (const descendant of Descendants(ToAst(assignedObject))) {
     const path = descendant.path;
     result.push({
       name: `${subject} (${stringify(path)})`,
       source: sourceKey,
       original: { path: sourcePath.concat(path) },
-      generated: { path: targetPath.concat(path) }
+      generated: { path: targetPath.concat(path) },
     });
 
     // if it's just the top node that is 1:1, break now.
@@ -119,4 +131,3 @@ export function CreateAssignmentMapping(assignedObject: any, sourceKey: string, 
   }
   return result;
 }
-

@@ -1,7 +1,7 @@
-import { clone, values } from '@azure-tools/linq';
-import { Mapping } from 'source-map';
-import { ProxyObject } from './graph-builder';
-import { createGraphProxy, Node, ProxyNode, visit } from './main';
+import { clone, values } from "@azure-tools/linq";
+import { Mapping } from "source-map";
+import { ProxyObject } from "./graph-builder";
+import { createGraphProxy, Node, ProxyNode, visit } from "./main";
 
 export interface AnyObject {
   [key: string]: any;
@@ -17,7 +17,7 @@ export interface Source {
   key: string;
 }
 
-export class Transformer<TInput extends object = AnyObject, TOutput extends object = AnyObject>  {
+export class Transformer<TInput extends object = AnyObject, TOutput extends object = AnyObject> {
   protected generated: TOutput;
   protected mappings = new Array<Mapping>();
   protected final?: TOutput;
@@ -46,54 +46,96 @@ export class Transformer<TInput extends object = AnyObject, TOutput extends obje
   public async finish() {
     /* override this method */
   }
-  public getOrCreateObject<TParent extends object, K extends keyof TParent>(target: ProxyObject<TParent>, member: K, pointer: string) {
+  public getOrCreateObject<TParent extends object, K extends keyof TParent>(
+    target: ProxyObject<TParent>,
+    member: K,
+    pointer: string,
+  ) {
     return target[member] === undefined ? this.newObject(target, member, pointer) : target[member];
   }
 
-  public getOrCreateArray<TParent extends object, K extends keyof TParent>(target: ProxyObject<TParent>, member: K, pointer: string) {
+  public getOrCreateArray<TParent extends object, K extends keyof TParent>(
+    target: ProxyObject<TParent>,
+    member: K,
+    pointer: string,
+  ) {
     return target[member] === undefined ? this.newArray(target, member, pointer) : target[member];
   }
 
-  public newObject<TParent extends object, K extends keyof TParent>(target: ProxyObject<TParent>, member: K, pointer: string): AnyObject {
-
-    const value = <ProxyObject<TParent[K]>><any>createGraphProxy(this.currentInputFilename, `${this.targetPointers.get(target)}/${member}`, this.mappings);
+  public newObject<TParent extends object, K extends keyof TParent>(
+    target: ProxyObject<TParent>,
+    member: K,
+    pointer: string,
+  ): AnyObject {
+    const value = <ProxyObject<TParent[K]>>(
+      (<any>createGraphProxy(this.currentInputFilename, `${this.targetPointers.get(target)}/${member}`, this.mappings))
+    );
     this.targetPointers.set(value, `${this.targetPointers.get(target)}/${member}`);
     target[member] = {
       value: <TParent[typeof member]>value,
       filename: this.currentInputFilename,
-      pointer
+      pointer,
     };
 
     return <Real<TParent[K]>>value;
   }
 
-  public newArray<TParent extends object, K extends keyof TParent>(target: ProxyObject<TParent>, member: K, pointer: string) {
-    const value = <ProxyObject<TParent[K]>><any>createGraphProxy(this.currentInputFilename, `${this.targetPointers.get(target)}/${member}`, this.mappings, new Array<any>());
+  public newArray<TParent extends object, K extends keyof TParent>(
+    target: ProxyObject<TParent>,
+    member: K,
+    pointer: string,
+  ) {
+    const value = <ProxyObject<TParent[K]>>(
+      (<any>(
+        createGraphProxy(
+          this.currentInputFilename,
+          `${this.targetPointers.get(target)}/${member}`,
+          this.mappings,
+          new Array<any>(),
+        )
+      ))
+    );
     this.targetPointers.set(value, `${this.targetPointers.get(target)}/${member}`);
     target[member] = {
       value: <TParent[typeof member]>value,
       filename: this.currentInputFilename,
-      pointer
+      pointer,
     };
 
     return <Real<TParent[K]>>value;
   }
 
-  protected copy<TParent extends object, K extends keyof TParent>(target: ProxyObject<TParent>, member: K, pointer: string, value: TParent[K], recurse = true) {
-    return target[member] = <ProxyNode<TParent[K]>>{ value, pointer, recurse, filename: this.currentInputFilename };
+  protected copy<TParent extends object, K extends keyof TParent>(
+    target: ProxyObject<TParent>,
+    member: K,
+    pointer: string,
+    value: TParent[K],
+    recurse = true,
+  ) {
+    return (target[member] = <ProxyNode<TParent[K]>>{ value, pointer, recurse, filename: this.currentInputFilename });
   }
-  protected clone<TParent extends object, K extends keyof TParent>(target: ProxyObject<TParent>, member: K, pointer: string, value: TParent[K], recurse = true) {
+  protected clone<TParent extends object, K extends keyof TParent>(
+    target: ProxyObject<TParent>,
+    member: K,
+    pointer: string,
+    value: TParent[K],
+    recurse = true,
+  ) {
     // return target[member] = <ProxyNode<TParent[K]>>{ value: JSON.parse(JSON.stringify(value)), pointer, recurse, filename: this.key };
-    return target[member] = <ProxyNode<TParent[K]>>{ value: clone(value), pointer, recurse, filename: this.currentInputFilename };
+    return (target[member] = <ProxyNode<TParent[K]>>{
+      value: clone(value),
+      pointer,
+      recurse,
+      filename: this.currentInputFilename,
+    });
   }
-
 
   protected inputs: Array<Source>;
   protected currentInput!: Source;
 
   constructor(inputs: Array<Source> | Source) {
-    this.generated = <TOutput>createGraphProxy('', '', this.mappings);
-    this.targetPointers.set(this.generated, '');
+    this.generated = <TOutput>createGraphProxy("", "", this.mappings);
+    this.targetPointers.set(this.generated, "");
     this.inputs = Array.isArray(inputs) ? inputs : [inputs];
   }
 
@@ -114,7 +156,7 @@ export class Transformer<TInput extends object = AnyObject, TOutput extends obje
       }
       await this.finish();
     }
-    this.final = clone(this.generated);  // should we be freezing this?
+    this.final = clone(this.generated); // should we be freezing this?
   }
 }
 
@@ -126,54 +168,60 @@ export class Processor<TInput extends object, TOutput extends object> extends Tr
 
 export function typeOf(obj: any) {
   if (obj === null) {
-    return 'null';
+    return "null";
   }
-  const t = typeof (obj);
+  const t = typeof obj;
 
-  return t === 'object' ?
-    Array.isArray(obj) ?
-      'array' :
-      'object' :
-    t;
+  return t === "object" ? (Array.isArray(obj) ? "array" : "object") : t;
 }
 
 export class TransformerViaPointer extends Transformer<AnyObject, AnyObject> {
   async process(target: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
-      if (!await this.visitLeaf(target, value, key, pointer, children)) {
+      if (!(await this.visitLeaf(target, value, key, pointer, children))) {
         await this.defaultCopy(target, value, key, pointer, children);
       }
     }
   }
 
-  async visitLeaf(target: AnyObject, value: AnyObject, key: string, pointer: string, originalNodes: Iterable<Node>): Promise<boolean> {
+  async visitLeaf(
+    target: AnyObject,
+    value: AnyObject,
+    key: string,
+    pointer: string,
+    originalNodes: Iterable<Node>,
+  ): Promise<boolean> {
     return false;
   }
 
-  async defaultCopy(target: AnyObject, ivalue: AnyObject, ikey: string, ipointer: string, originalNodes: Iterable<Node>) {
+  async defaultCopy(
+    target: AnyObject,
+    ivalue: AnyObject,
+    ikey: string,
+    ipointer: string,
+    originalNodes: Iterable<Node>,
+  ) {
     switch (typeOf(ivalue)) {
-      case "object": {
-        // objects recurse
-        const newTarget = this.newObject(target, ikey, ipointer);
-        for (const { value, key, pointer, children } of originalNodes) {
-          if (
-            !(await this.visitLeaf(newTarget, value, key, pointer, children))
-          ) {
-            await this.defaultCopy(newTarget, value, key, pointer, children);
+      case "object":
+        {
+          // objects recurse
+          const newTarget = this.newObject(target, ikey, ipointer);
+          for (const { value, key, pointer, children } of originalNodes) {
+            if (!(await this.visitLeaf(newTarget, value, key, pointer, children))) {
+              await this.defaultCopy(newTarget, value, key, pointer, children);
+            }
           }
         }
-      }
         break;
-      case "array": {
-        const newTarget = this.newArray(target, ikey, ipointer);
-        for (const { value, key, pointer, children } of originalNodes) {
-          if (
-            !(await this.visitLeaf(newTarget, value, key, pointer, children))
-          ) {
-            await this.defaultCopy(newTarget, value, key, pointer, children);
+      case "array":
+        {
+          const newTarget = this.newArray(target, ikey, ipointer);
+          for (const { value, key, pointer, children } of originalNodes) {
+            if (!(await this.visitLeaf(newTarget, value, key, pointer, children))) {
+              await this.defaultCopy(newTarget, value, key, pointer, children);
+            }
           }
         }
-      }
         break;
       default:
         // everything else, just clone.
