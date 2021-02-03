@@ -1,0 +1,23 @@
+{
+  "servers": [],
+  "components": {
+    "schemas": {
+      "MyBodySchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "OtherSchemaThatShouldStayHere": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
