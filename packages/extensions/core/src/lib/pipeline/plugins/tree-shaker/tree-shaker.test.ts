@@ -29,29 +29,60 @@ const shake = async (model: any) => {
 };
 
 describe("Tree shaker", () => {
-  it("when using x-ms-client-name on property with inline model definition it removes it from the shaked model", async () => {
-    const result = await shake({
-      components: {
-        schemas: {
-          Foo: {
-            type: JsonType.Object,
-            properties: {
-              bar: {
-                "x-ms-client-name": "barClient",
-                "type": JsonType.Object,
-                "properties": {
-                  name: { type: JsonType.String },
+  describe("when using x-ms-client-name", () => {
+    it("keeps x-ms-client-name when used on a schema", async () => {
+      const result = await shake({
+        components: {
+          schemas: {
+            Foo: {
+              "type": JsonType.Object,
+              "x-ms-client-name": "FooClient",
+            },
+          },
+        },
+      });
+
+      expect(result.components.schemas.Foo["x-ms-client-name"]).toEqual("FooClient");
+    });
+
+    it("keeps x-ms-client-name when used on a parameter", async () => {
+      const result = await shake({
+        paths: {
+          "/mypath": {
+            get: {
+              parameters: [{ "in": "query", "name": "some-param", "x-ms-client-name": "SomeParamClient" }],
+            },
+          },
+        },
+      });
+
+      console.log(result.components);
+      const param = Object.values<any>(result.components.parameters)[0];
+      expect(param["x-ms-client-name"]).toEqual("SomeParamClient");
+    });
+
+    it("it removes x-ms-client-name on shaked model when used on property with inline model definition", async () => {
+      const result = await shake({
+        components: {
+          schemas: {
+            Foo: {
+              type: JsonType.Object,
+              properties: {
+                bar: {
+                  "x-ms-client-name": "barClient",
+                  "type": JsonType.Object,
+                  "properties": {
+                    name: { type: JsonType.String },
+                  },
                 },
               },
             },
           },
         },
-      },
-    });
+      });
 
-    expect(Object.keys(result.components.schemas).length).toBe(3);
-    console.log("result.components.schemas", result.components.schemas);
-    expect(result.components.schemas.Foo.properties.bar["x-ms-client-name"]).toEqual("barClient");
-    expect(result.components.schemas["Foo-bar"]["x-ms-client-name"]).toBeUndefined();
+      expect(result.components.schemas.Foo.properties.bar["x-ms-client-name"]).toEqual("barClient");
+      expect(result.components.schemas["Foo-bar"]["x-ms-client-name"]).toBeUndefined();
+    });
   });
 });
