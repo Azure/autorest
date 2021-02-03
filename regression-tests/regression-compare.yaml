@@ -70,6 +70,7 @@ languages:
       - --version:../packages/extensions/core
       - --use:../packages/extensions/modelerfour
       - --use:@autorest/python@5.5.0
+      - --debug
 
   - language: typescript
     outputPath: ./output/typescript
