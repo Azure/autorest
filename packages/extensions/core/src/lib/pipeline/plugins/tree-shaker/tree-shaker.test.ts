@@ -3,7 +3,7 @@ import { JsonType, Model } from "@azure-tools/openapi";
 import { create } from "domain";
 import { OAI3Shaker } from "./tree-shaker";
 
-const createTestModel = (model: any): Model => {
+const createTestModel = (model: Partial<Model>): Model => {
   return {
     openApi: "3.0.0",
     paths: {},
@@ -11,10 +11,10 @@ const createTestModel = (model: any): Model => {
       title: "Test spec",
       version: "1.0.0",
     },
-    servers: {},
-    security: {},
+    servers: [],
+    security: [],
     components: {},
-    tags: {},
+    tags: [],
     ...model,
   };
 };
