@@ -18,3 +18,6 @@ steps:
   - script: |
       NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --include-all --set-access-level public
     displayName: Publish packages
+
+  - script: cat /home/vsts/.npm/_logs/*.log
+    condition: always()
