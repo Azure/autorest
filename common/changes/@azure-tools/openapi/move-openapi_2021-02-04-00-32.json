@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/openapi",
+      "comment": "Internal: Moved from Azure/perks and update formatting",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@azure-tools/openapi",
+  "email": "tiguerin@microsoft.com"
+}
