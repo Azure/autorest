@@ -1,10 +1,5 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-import assert from "assert";
-
-import * as jp from "@azure-tools/datastore";
+import * as assert from "assert";
+import * as jp from "./json-path";
 
 const roundTrip = (s: string): string => {
   return jp.stringify(jp.parse(s));
