@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Dictionary } from '@azure-tools/linq';
-import { Optional, Refable as Reference } from './common';
+import { Dictionary } from "@azure-tools/linq";
+import { Optional, Refable as Reference } from "./common";
 
 // OAI3 variants for the basic model definitions.
 
@@ -14,26 +14,20 @@ export interface Extensions {
 }
 
 /** Properties, Parameters, Operations and Schemas require additional support */
-export interface Implementation<T> {
-}
+export interface Implementation<T> {}
 
-export interface Details {
-}
+export interface Details {}
 
 /** Property References may have additional data that's not in the target reference */
 export interface PropertyDetails extends Details, Extensions {
   description?: string;
 }
 
-export interface ParameterDetails extends Details {
-}
+export interface ParameterDetails extends Details {}
 
-export interface SchemaDetails extends Details {
-}
+export interface SchemaDetails extends Details {}
 
-export interface HttpOperationDetails extends Details {
-}
-
+export interface HttpOperationDetails extends Details {}
 
 /**
  * @description The location of the parameter.
@@ -41,23 +35,23 @@ export interface HttpOperationDetails extends Details {
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#user-content-parameterIn
  */
 export enum ParameterLocation {
-  Query = 'query',
-  Header = 'header',
-  Cookie = 'cookie',
-  Path = 'path',
+  Query = "query",
+  Header = "header",
+  Cookie = "cookie",
+  Path = "path",
 }
 
 export function hasContent<T extends Partial<HasContent>>(parameter: T): parameter is HasContent & T {
-  return ((<HasContent>parameter).content) ? true : false;
+  return (<HasContent>parameter).content ? true : false;
 }
 export function hasSchema<T extends Partial<HasSchema>>(parameter: T): parameter is HasSchema & T {
-  return ((<HasSchema>parameter).schema) ? true : false;
+  return (<HasSchema>parameter).schema ? true : false;
 }
 export function hasExample<T extends HasExample>(parameter: T): parameter is HasExample & T {
-  return ((<HasExample>parameter).example) ? true : false;
+  return (<HasExample>parameter).example ? true : false;
 }
 export function hasExamples<T extends HasExamples>(parameter: T): parameter is HasExamples & T {
-  return ((<HasExamples>parameter).examples) ? true : false;
+  return (<HasExamples>parameter).examples ? true : false;
 }
 export function isCookieParameter(parameter: Parameter): parameter is InCookie & Parameter {
   return parameter.in === ParameterLocation.Cookie ? true : false;
@@ -73,49 +67,55 @@ export function isQueryParameter(parameter: Parameter): parameter is InQuery & P
 }
 
 /** Properties have additional data when referencing them */
-export type PropertyReference<T> = PropertyDetails & (Reference<T>);
+export type PropertyReference<T> = PropertyDetails & Reference<T>;
 
 /**
  * @description common ways of serializing simple parameters
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#style-values
  */
 export enum EncodingStyle {
-  Matrix = 'matrix',
-  Label = 'label',
-  Simple = 'simple',
-  Form = 'form',
-  SpaceDelimited = 'spaceDelimited',
-  PipeDelimited = 'pipeDelimited',
-  DeepObject = 'deepObject'
+  Matrix = "matrix",
+  Label = "label",
+  Simple = "simple",
+  Form = "form",
+  SpaceDelimited = "spaceDelimited",
+  PipeDelimited = "pipeDelimited",
+  DeepObject = "deepObject",
 }
 
 export enum JsonType {
-  Array = 'array',
-  Boolean = 'boolean',
-  Integer = 'integer',
-  Number = 'number',
-  Object = 'object',
-  String = 'string'
+  Array = "array",
+  Boolean = "boolean",
+  Integer = "integer",
+  Number = "number",
+  Object = "object",
+  String = "string",
 }
 export enum Scheme {
-  Bearer = 'bearer'
+  Bearer = "bearer",
 }
 export enum SecurityType {
-  ApiKey = 'apiKey',
-  Http = 'http',
-  OAuth2 = 'oauth2',
-  OpenIDConnect = 'openIdConnect'
+  ApiKey = "apiKey",
+  Http = "http",
+  OAuth2 = "oauth2",
+  OpenIDConnect = "openIdConnect",
 }
 
-export interface Callback extends Dictionary<PathItem> {
-}
-export interface SecurityRequirement extends Dictionary<string> {
-}
+export interface Callback extends Dictionary<PathItem> {}
+export interface SecurityRequirement extends Dictionary<string> {}
 export type HTTPSecurityScheme = NonBearerHTTPSecurityScheme | BearerHTTPSecurityScheme;
 
-export type SecurityScheme = APIKeySecurityScheme | HTTPSecurityScheme | OAuth2SecurityScheme | OpenIdConnectSecurityScheme;
+export type SecurityScheme =
+  | APIKeySecurityScheme
+  | HTTPSecurityScheme
+  | OAuth2SecurityScheme
+  | OpenIdConnectSecurityScheme;
 
-export type QueryEncodingStyle = EncodingStyle.Form | EncodingStyle.SpaceDelimited | EncodingStyle.PipeDelimited | EncodingStyle.DeepObject;
+export type QueryEncodingStyle =
+  | EncodingStyle.Form
+  | EncodingStyle.SpaceDelimited
+  | EncodingStyle.PipeDelimited
+  | EncodingStyle.DeepObject;
 export type PathEncodingStyle = EncodingStyle.Matrix | EncodingStyle.Label | EncodingStyle.Simple;
 
 export interface Model extends Extensions {
@@ -192,7 +192,12 @@ export interface ExternalDocumentation extends Extensions {
   url: string; // uriref
 }
 
-export interface Header extends Extensions, Partial<HasContent>, Partial<HasSchema>, Partial<HasExample>, Partial<HasExamples> {
+export interface Header
+  extends Extensions,
+    Partial<HasContent>,
+    Partial<HasSchema>,
+    Partial<HasExample>,
+    Partial<HasExamples> {
   description?: string;
   required: Optional<boolean>;
   deprecated: Optional<boolean>;
@@ -301,7 +306,12 @@ export interface InQuery extends HasSchema, Partial<HasExample>, Partial<HasExam
   style?: QueryEncodingStyle;
 }
 
-export interface Parameter extends Partial<HasSchema>, Partial<HasContent>, Partial<HasExample>, Partial<HasExamples>, Extensions {
+export interface Parameter
+  extends Partial<HasSchema>,
+    Partial<HasContent>,
+    Partial<HasExample>,
+    Partial<HasExamples>,
+    Extensions {
   name: string;
   in: ParameterLocation;
 

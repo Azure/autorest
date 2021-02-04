@@ -3,7 +3,6 @@ dependencies:
   '@azure-tools/extension': 3.0.263
   '@azure-tools/linq': 3.1.262
   '@azure-tools/object-comparison': 3.0.252
-  '@azure-tools/openapi': 3.0.261
   '@azure-tools/tasks': 3.0.253
   '@azure-tools/uri': 3.0.255
   '@microsoft.azure/autorest.testserver': 2.10.68
@@ -17,6 +16,7 @@ dependencies:
   '@rush-temp/md-mock-api': 'file:projects/md-mock-api.tgz'
   '@rush-temp/modelerfour': 'file:projects/modelerfour.tgz'
   '@rush-temp/oai2-to-oai3': 'file:projects/oai2-to-oai3.tgz_prettier@2.2.1'
+  '@rush-temp/openapi': 'file:projects/openapi.tgz_prettier@2.2.1'
   '@rush-temp/schemas': 'file:projects/schemas.tgz'
   '@rush-temp/test-utils': 'file:projects/test-utils.tgz_prettier@2.2.1'
   '@types/body-parser': 1.19.0
@@ -9045,7 +9045,7 @@ packages:
     dev: false
     name: '@rush-temp/core'
     resolution:
-      integrity: sha512-6c5tZhOEjRi4c9QfNlKJClqGGVJx8Iv18/KllJB51xapMAWDab7XR/n8/+NJ3WdajQ6S1eYjUyDHxoisdAmqJg==
+      integrity: sha512-p1hY6OQHdaZVnf4j8gL8Ntefi3H/GUWTsWix+WOk2q21VjTtmuOX+CUJq4rCgXm2k62+wwKXb6+qXlhFXQF2Nw==
       tarball: 'file:projects/core.tgz'
     version: 0.0.0
   'file:projects/datastore.tgz_prettier@2.2.1':
@@ -9199,7 +9199,7 @@ packages:
     dev: false
     name: '@rush-temp/modelerfour'
     resolution:
-      integrity: sha512-OpNhpPtFbxOduC3y+Kt5xL64vFPMHmIExKCcJQ65KhqQVfcdmqJb66R/curKFwZ0Qgd/lAiU1I60wtji4iVdjA==
+      integrity: sha512-bK877KnsEnp6PSxdT2/QpOVuiEasgUYc+r6UEIbCdI36qlnj7Pc08ZEl8jY1oDH9+KaoI/J2ZCXBM5KYAa/ReQ==
       tarball: 'file:projects/modelerfour.tgz'
     version: 0.0.0
   'file:projects/oai2-to-oai3.tgz_prettier@2.2.1':
@@ -9227,8 +9227,30 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-LEcwKu5OJ1e+0bY0BXSeHLJYoAg88/vnOb8vxKQVZk2pgDiybN+/N6G9mDm/LShiONfwmS1v1CBmt06mphcc2Q==
+      integrity: sha512-YiwseCoHejMpeYLgd89U4cxahvTICe2jqZOeZ9SVm9hSaDM9n7WfYEtAxQUIVHzPEJV2oYcC/47OZud2jQsj8A==
       tarball: 'file:projects/oai2-to-oai3.tgz'
+    version: 0.0.0
+  'file:projects/openapi.tgz_prettier@2.2.1':
+    dependencies:
+      '@azure-tools/linq': 3.1.262
+      '@types/jest': 26.0.20
+      '@types/node': 14.14.22
+      '@typescript-eslint/eslint-plugin': 4.14.2_e5f964fa93e839b7a7927397f6cb9cb1
+      '@typescript-eslint/parser': 4.14.2_eslint@7.19.0+typescript@4.1.3
+      eslint: 7.19.0
+      eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
+      eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
+      jest: 26.6.3
+      rimraf: 3.0.2
+      typescript: 4.1.3
+    dev: false
+    id: 'file:projects/openapi.tgz'
+    name: '@rush-temp/openapi'
+    peerDependencies:
+      prettier: '*'
+    resolution:
+      integrity: sha512-WFIfkVqdFWTopCGC7+cWhF+9Vvk0/7gwVeR1pPx/FVdyhIyEd/v6tyhB7jSBlfRR02vqn7fc01scrUa8tshljw==
+      tarball: 'file:projects/openapi.tgz'
     version: 0.0.0
   'file:projects/schemas.tgz':
     dev: false
@@ -9262,7 +9284,6 @@ specifiers:
   '@azure-tools/extension': ~3.0.0
   '@azure-tools/linq': ~3.1.0
   '@azure-tools/object-comparison': ~3.0.0
-  '@azure-tools/openapi': ~3.0.0
   '@azure-tools/tasks': ~3.0.0
   '@azure-tools/uri': ~3.0.0
   '@microsoft.azure/autorest.testserver': ~2.10.46
@@ -9276,6 +9297,7 @@ specifiers:
   '@rush-temp/md-mock-api': 'file:./projects/md-mock-api.tgz'
   '@rush-temp/modelerfour': 'file:./projects/modelerfour.tgz'
   '@rush-temp/oai2-to-oai3': 'file:./projects/oai2-to-oai3.tgz'
+  '@rush-temp/openapi': 'file:./projects/openapi.tgz'
   '@rush-temp/schemas': 'file:./projects/schemas.tgz'
   '@rush-temp/test-utils': 'file:./projects/test-utils.tgz'
   '@types/body-parser': ^1.19.0

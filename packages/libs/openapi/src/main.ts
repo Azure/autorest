@@ -3,6 +3,6 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-export * from './oai3';
-export * from './common';
-export * from './formats';
+export * from "./oai3";
+export * from "./common";
+export * from "./formats";

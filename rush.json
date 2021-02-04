@@ -73,6 +73,12 @@
       "shouldPublish": true
     },
     {
+      "packageName": "@azure-tools/openapi",
+      "projectFolder": "packages/libs/openapi",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
       "packageName": "@autorest/test-utils",
       "projectFolder": "packages/testing/test-utils",
       "reviewCategory": "production",
