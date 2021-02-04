@@ -1,0 +1,20 @@
+{
+  "name": "@azure-tools/codegen",
+  "entries": [
+    {
+      "version": "2.5.293",
+      "tag": "@azure-tools/codegen_v2.5.293",
+      "date": "Thu, 04 Feb 2021 19:05:18 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Internal: Moved source to src/ folder"
+          },
+          {
+            "comment": "Internal code linting fixes"
+          }
+        ]
+      }
+    }
+  ]
+}

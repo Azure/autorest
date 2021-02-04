@@ -1,0 +1,40 @@
+{
+  "name": "@autorest/core",
+  "entries": [
+    {
+      "version": "3.0.6370",
+      "tag": "@autorest/core_v3.0.6370",
+      "date": "Thu, 04 Feb 2021 19:05:18 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Internal: Moved source to src/ folder"
+          },
+          {
+            "comment": "Refactoring: Cleanup of code running transform directives"
+          },
+          {
+            "comment": "Internal code linting fixes"
+          },
+          {
+            "comment": "Internal: Add some tests to the tree shaker"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.5.0` to `~2.5.293`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.1.0` to `~4.1.271`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/oai2-to-oai3\" from `~4.2.0` to `~4.2.276`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.0.0` to `~3.1.0`"
+          }
+        ]
+      }
+    }
+  ]
+}
