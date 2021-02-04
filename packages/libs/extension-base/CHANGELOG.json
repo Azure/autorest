@@ -1,0 +1,30 @@
+{
+  "name": "@autorest/extension-base",
+  "entries": [
+    {
+      "version": "3.2.0",
+      "tag": "@autorest/extension-base_v3.2.0",
+      "date": "Thu, 04 Feb 2021 19:05:18 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Internal: Moved source to src/ folder"
+          },
+          {
+            "comment": "Internal code linting fixes"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Renamed package from @azure-tools/autorest-extension-base to @autorest/extension-base"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.5.0` to `~2.5.293`"
+          }
+        ]
+      }
+    }
+  ]
+}

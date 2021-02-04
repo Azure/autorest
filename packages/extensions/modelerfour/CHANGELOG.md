@@ -1,6 +1,20 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Thu, 28 Jan 2021 00:22:27 GMT and should not be manually modified.
+This log was last generated on Thu, 04 Feb 2021 19:16:37 GMT and should not be manually modified.
+
+## 4.16.0
+Thu, 04 Feb 2021 19:05:18 GMT
+
+### Minor changes
+
+- Migrate bundling system from static-link to webpack
+
+### Patches
+
+- Fix the use of  circular dependencies in additionalProperties [PR #3819](https://github.com/Azure/autorest/pull/3819)
+- Internal code linting fixes
+- Internal: Move out test custom matchers to seperate package
+- Rename @azure-tools/autorest-extension-base dependency to new @autorest/extension-base pkg
 
 ## 4.15.456
 Thu, 28 Jan 2021 00:22:27 GMT
