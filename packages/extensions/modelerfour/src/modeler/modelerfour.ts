@@ -160,7 +160,7 @@ export class ModelerFour {
         contact: i.contact,
         license: i.license,
         termsOfService: i.termsOfService,
-        externalDocs: filterOutXDash<ExternalDocumentation>(this.input.externalDocs),
+        externalDocs: filterOutXDash<ExternalDocumentation>(this.input.externalDocs as any),
         extensions: Interpretations.getExtensionProperties(i),
       },
       extensions: Interpretations.getExtensionProperties(this.input),

@@ -3,8 +3,8 @@
   "version": "3.0.0",
   "patchOffset": 100,
   "description": "OpenAPI common code for Azure Tools.",
-  "main": "./dist/main.js",
-  "typings": "./dist/main.d.ts",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "engines": {
     "node": ">=10.12.0"
   },
