@@ -22,4 +22,4 @@
 registry=https://registry.npmjs.org/
 always-auth=true
 loglevel=debug
-//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}
+# //registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}
