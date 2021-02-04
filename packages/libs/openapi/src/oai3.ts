@@ -3,8 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Dictionary } from "@azure-tools/linq";
-import { Optional, Refable as Reference } from "./common";
+import { Refable as Reference } from "./common";
+
+export type Dictionary<T> = { [key: string]: T };
 
 // OAI3 variants for the basic model definitions.
 
@@ -123,22 +124,22 @@ export interface Model extends Extensions {
   openApi: string;
   info: Info;
   externalDocs?: ExternalDocumentation;
-  servers: Optional<Array<Server>>;
-  security: Optional<Array<SecurityRequirement>>;
-  tags: Optional<Array<Tag>>;
-  components: Optional<Components>;
+  servers?: Array<Server>;
+  security?: Array<SecurityRequirement>;
+  tags?: Array<Tag>;
+  components?: Components;
 }
 
 export interface Components extends Extensions {
-  schemas: Optional<Dictionary<Reference<Schema>>>;
-  responses: Optional<Dictionary<Reference<Response>>>;
-  parameters: Optional<Dictionary<Reference<Parameter>>>;
-  examples: Optional<Dictionary<Reference<Example>>>;
-  requestBodies: Optional<Dictionary<Reference<RequestBody>>>;
-  headers: Optional<Dictionary<Reference<Header>>>;
-  securitySchemes: Optional<Dictionary<Reference<SecurityScheme>>>;
-  links: Optional<Dictionary<Reference<Link>>>;
-  callbacks: Optional<Dictionary<Reference<Callback>>>;
+  schemas?: Dictionary<Reference<Schema>>;
+  responses?: Dictionary<Reference<Response>>;
+  parameters?: Dictionary<Reference<Parameter>>;
+  examples?: Dictionary<Reference<Example>>;
+  requestBodies?: Dictionary<Reference<RequestBody>>;
+  headers?: Dictionary<Reference<Header>>;
+  securitySchemes?: Dictionary<Reference<SecurityScheme>>;
+  links?: Dictionary<Reference<Link>>;
+  callbacks?: Dictionary<Reference<Callback>>;
 }
 
 export interface APIKeySecurityScheme extends Extensions {
@@ -151,7 +152,7 @@ export interface AuthorizationCodeOAuthFlow extends Extensions {
   authorizationUrl: string; // uriref
   tokenUrl: string; // uriref
   refreshUrl?: string; // uriref
-  scopes: Optional<Dictionary<string>>;
+  scopes?: Dictionary<string>;
 }
 export interface BearerHTTPSecurityScheme extends Extensions {
   scheme: Scheme.Bearer;
@@ -162,7 +163,7 @@ export interface BearerHTTPSecurityScheme extends Extensions {
 export interface ClientCredentialsFlow extends Extensions {
   tokenUrl: string; // uriref
   refreshUrl?: string; // uriref
-  scopes: Optional<Dictionary<string>>;
+  scopes?: Dictionary<string>;
 }
 
 export interface Contact extends Extensions {
@@ -172,11 +173,11 @@ export interface Contact extends Extensions {
 }
 export interface Discriminator extends Extensions {
   propertyName: string;
-  mapping: Optional<Dictionary<string>>;
+  mapping?: Dictionary<string>;
 }
 export interface Encoding extends Extensions {
   contentType?: string;
-  headers: Optional<Dictionary<Reference<Header>>>;
+  headers?: Dictionary<Reference<Header>>;
   style?: QueryEncodingStyle;
   explode?: boolean;
   allowReserved?: boolean;
@@ -199,10 +200,10 @@ export interface Header
     Partial<HasExample>,
     Partial<HasExamples> {
   description?: string;
-  required: Optional<boolean>;
-  deprecated: Optional<boolean>;
-  allowEmptyValue: Optional<boolean>;
-  allowReserved: Optional<boolean>;
+  required?: boolean;
+  deprecated?: boolean;
+  allowEmptyValue?: boolean;
+  allowReserved?: boolean;
 }
 
 export interface ImplicitOAuthFlow extends Extensions {
@@ -226,7 +227,7 @@ export interface License extends Extensions {
 export interface Link extends Extensions {
   operationRef?: string; // uriref
   operationId?: string;
-  parameters: Optional<Dictionary<string>>;
+  parameters?: Dictionary<string>;
   requestBody?: any;
   description?: string;
   server?: Server;
@@ -234,7 +235,7 @@ export interface Link extends Extensions {
 
 export interface MediaType extends Extensions, Partial<HasExample>, Partial<HasExamples> {
   /** A map between a property name and its encoding information. The key, being the property name, MUST exist in the schema as a property. The encoding object SHALL only apply to requestBody objects when the media type is multipart or application/x-www-form-urlencoded. */
-  encoding: Optional<Dictionary<Encoding>>;
+  encoding?: Dictionary<Encoding>;
   /** The schema defining the type used for the request body. */
   schema?: Reference<Schema>;
 }
@@ -261,18 +262,18 @@ export interface OpenIdConnectSecurityScheme extends Extensions {
   description?: string;
 }
 export interface HttpOperation extends Extensions, Implementation<HttpOperationDetails> {
-  tags: Optional<Array<string>>;
+  tags?: Array<string>;
   summary?: string;
   description?: string;
   externalDocs?: ExternalDocumentation;
   operationId?: string;
-  parameters: Optional<Array<Reference<Parameter>>>;
+  parameters?: Array<Reference<Parameter>>;
   requestBody?: Reference<RequestBody>;
   responses: Dictionary<Reference<Response>>;
-  callbacks: Optional<Dictionary<Reference<Callback>>>;
+  callbacks?: Dictionary<Reference<Callback>>;
   deprecated?: boolean;
-  security: Optional<Array<SecurityRequirement>>;
-  servers: Optional<Array<Server>>;
+  security?: Array<SecurityRequirement>;
+  servers?: Array<Server>;
 }
 
 export interface HasSchema {
@@ -316,9 +317,9 @@ export interface Parameter
   in: ParameterLocation;
 
   description?: string;
-  allowEmptyValue: Optional<boolean>;
-  deprecated: Optional<boolean>;
-  required: Optional<boolean>;
+  allowEmptyValue?: boolean;
+  deprecated?: boolean;
+  required?: boolean;
   style?: EncodingStyle;
 
   allowReserved?: boolean;
@@ -327,7 +328,7 @@ export interface Parameter
 export interface PasswordOAuthFlow extends Extensions {
   tokenUrl: string; // uriref
   refreshUrl?: string; // uriref
-  scopes: Optional<Dictionary<string>>;
+  scopes?: Dictionary<string>;
 }
 export interface PathItem extends Extensions {
   $ref?: string | PathItem;
@@ -341,20 +342,20 @@ export interface PathItem extends Extensions {
   head?: HttpOperation;
   patch?: HttpOperation;
   trace?: HttpOperation;
-  servers: Optional<Array<Server>>;
-  parameters: Optional<Array<Reference<Parameter>>>;
+  servers?: Array<Server>;
+  parameters?: Array<Reference<Parameter>>;
 }
 
 export interface RequestBody extends Extensions {
   description?: string;
   content: Dictionary<MediaType>;
-  required: Optional<boolean>;
+  required?: boolean;
 }
 export interface Response extends Extensions {
   description: string;
-  headers: Optional<Dictionary<Reference<Header>>>;
-  content: Optional<Dictionary<MediaType>>;
-  links: Optional<Dictionary<Reference<Link>>>;
+  headers?: Dictionary<Reference<Header>>;
+  content?: Dictionary<MediaType>;
+  links?: Dictionary<Reference<Link>>;
 }
 
 export interface Schema extends Extensions, Implementation<SchemaDetails> {
@@ -363,11 +364,11 @@ export interface Schema extends Extensions, Implementation<SchemaDetails> {
   title?: string;
   description?: string;
   format?: string;
-  nullable: Optional<boolean>;
-  readOnly: Optional<boolean>;
-  writeOnly: Optional<boolean>;
-  deprecated: Optional<boolean>;
-  required: Optional<Array<string>>;
+  nullable?: boolean;
+  readOnly?: boolean;
+  writeOnly?: boolean;
+  deprecated?: boolean;
+  required?: Array<string>;
 
   /* number restrictions */
   multipleOf?: number;
@@ -400,25 +401,25 @@ export interface Schema extends Extensions, Implementation<SchemaDetails> {
   xml?: XML;
 
   /* Properties that are collections of things that are not references */
-  enum: Optional<Array<any>>;
+  enum?: Array<any>;
 
   /* properties with potential references */
   not?: Reference<Schema>;
-  allOf: Optional<Array<Reference<Schema>>>;
-  oneOf: Optional<Array<Reference<Schema>>>;
-  anyOf: Optional<Array<Reference<Schema>>>;
+  allOf?: Array<Reference<Schema>>;
+  oneOf?: Array<Reference<Schema>>;
+  anyOf?: Array<Reference<Schema>>;
   items?: Reference<Schema>;
-  properties: Optional<Dictionary<PropertyReference<Schema>>>;
+  properties?: Dictionary<PropertyReference<Schema>>;
   additionalProperties?: boolean | Reference<Schema>;
 }
 
 export interface Server extends Extensions {
   url: string;
   description?: string;
-  variables: Optional<Dictionary<ServerVariable>>;
+  variables?: Dictionary<ServerVariable>;
 }
 export interface ServerVariable extends Extensions {
-  enum: Optional<Array<string>>;
+  enum?: Array<string>;
   default: string;
   description?: string;
 }
