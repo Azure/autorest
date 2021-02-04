@@ -6,7 +6,7 @@ steps:
     displayName: "Install Node.js"
 
   - script: |
-      npm install -g npm@7.4
+      npm install -g npm@6 # Seems to be an with npm 7 and publishing https://github.com/npm/cli/issues/2624.
       npx @microsoft/rush install
     displayName: "Install dependencies"
 
