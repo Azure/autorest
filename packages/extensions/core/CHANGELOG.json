@@ -35,6 +35,44 @@
           }
         ]
       }
+    },
+    {
+      "version": "3.0.x",
+      "date": "Tue, 4 Feb 2020 00:00:00 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "rebuild to pick up latest data-store to fix the caching filename size"
+          },
+          {
+            "comment": "OAI2-to-OAI3 converter update in perks."
+          },
+          {
+            "comment": "TransformerViaPointer was turning null into {} "
+          },
+          {
+            "comment": "rebuild to fix NPM publishing problem."
+          },
+          {
+            "comment": "remove additionalProperties: false so v2 generators don't choke."
+          },
+          {
+            "comment": "rebuild to pick up perks change to fix multibyte utf8 over byte boundary problem"
+          },
+          {
+            "comment": "rebuild to pick up a perks change to support turning underscore in semver to dash on gh releases"
+          },
+          {
+            "comment": "rebuild to pick up newer extension library that supports python interpreter detection"
+          },
+          {
+            "comment": "force rebuild to pick up fix in oai2 converter"
+          },
+          {
+            "comment": "update the oai2-to-oai3 converter (parameterized host parameters should be client parameters if they are $ref'd)"
+          }
+        ]
+      }
     }
   ]
 }
