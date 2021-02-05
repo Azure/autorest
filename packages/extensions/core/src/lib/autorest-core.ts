@@ -154,7 +154,7 @@ export class AutoRest extends EventEmitter {
         view.messageEmitter.removeAllListeners();
         return true;
       } catch (e) {
-        const message = view.DebugMode
+        const message = view.config.debug
           ? {
               Channel: Channel.Debug,
               Text: `Process() cancelled due to exception : ${e.message ? e.message : e} / ${e.stack ? e.stack : ""}`,

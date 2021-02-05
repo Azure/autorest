@@ -47,7 +47,7 @@ function getPropertyValues<T, U>(obj: ObjectWithPath<T>): Array<ObjectWithPath<U
 }
 
 async function composeSwaggers(
-  config: AutorestContext,
+  context: AutorestContext,
   overrideInfoTitle: any,
   overrideInfoDescription: any,
   inputSwaggers: Array<DataHandle>,
@@ -273,7 +273,7 @@ async function composeSwaggers(
       inputSwaggers[i] = await sink.WriteObject("prepared", swagger, newIdentity, undefined, mapping, [inputSwagger]);
     }
 
-    let hSwagger = await MergeYamls(config, inputSwaggers, sink, true);
+    let hSwagger = await MergeYamls(context, inputSwaggers, sink, true);
 
     // override info section
     const info: any = { title: candidateTitles[0] };
@@ -282,11 +282,11 @@ async function composeSwaggers(
     }
     const hInfo = await sink.WriteObject("info.yaml", { info }, ["fix-me-4"]);
 
-    hSwagger = await MergeYamls(config, [hSwagger, hInfo], sink);
+    hSwagger = await MergeYamls(context, [hSwagger, hInfo], sink);
 
     return hSwagger;
   } catch (E) {
-    if (config.DebugMode) {
+    if (context.config.debug) {
       // eslint-disable-next-line no-console
       console.error(`${__filename} - FAILURE ${JSON.stringify(E)}`);
     }

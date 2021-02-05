@@ -2,7 +2,7 @@ import { IFileSystem } from "@azure-tools/datastore";
 import { CreateFileOrFolderUri, EnsureIsFolderUri, IsUri, ResolveUri } from "@azure-tools/uri";
 import { cwd } from "process";
 import { AutorestRawConfiguration, mergeConfigurations } from "./autorest-raw-configuration";
-import { arrayOf } from "./utils";
+import { arrayOf, valuesOf } from "./utils";
 
 // TODO-TIM don't extend
 export interface AutorestConfiguration extends AutorestRawConfiguration {
@@ -10,6 +10,8 @@ export interface AutorestConfiguration extends AutorestRawConfiguration {
    * Raw configuration that was used to build this config
    */
   raw: AutorestRawConfiguration;
+
+  configFileFolderUri: string;
 
   inputFileUris: string[];
 
@@ -20,6 +22,33 @@ export interface AutorestConfiguration extends AutorestRawConfiguration {
 
   // TODO-TIM check type?
   configurationFiles: { [key: string]: any };
+
+  /**
+   * If help was requested.
+   */
+  help: boolean;
+
+  /**
+   * If logging should be verbose.
+   */
+  verbose: boolean;
+
+  /**
+   * If running in debug mode.
+   */
+  debug: boolean;
+
+  /**
+   * If running in caching mode.
+   */
+  cachingEnabled: boolean;
+
+  /**
+   * list of files to exclude from caching.
+   */
+  cacheExclude: string[];
+
+  // TODO-TIM check those?
   name?: string;
   to?: string;
 }
@@ -50,15 +79,8 @@ export const createAutorestConfiguration = async (
     "disable-validation": false,
   };
   const rawConfig = mergeConfigurations(initialConfig, ...configs, defaultConfig);
-  const baseFolderUri = getBaseFolderUri(configFileFolderUri, rawConfig);
 
-  const config: AutorestConfiguration = {
-    ...rawConfig,
-    raw: rawConfig,
-    inputFileUris: [],
-    configurationFiles: configurationFiles,
-    outputFolderUri: resolveAsWriteableFolder(baseFolderUri, <string>rawConfig["output-folder"]),
-  };
+  const config: AutorestConfiguration = createConfigFromRawConfig(configFileFolderUri, rawConfig, configurationFiles);
 
   const inputFiles = await Promise.all(
     arrayOf<string>(rawConfig["input-file"]).map((each) =>
@@ -76,18 +98,39 @@ export const createAutorestConfiguration = async (
   return config;
 };
 
+const createConfigFromRawConfig = (
+  configFileFolderUri: string,
+  rawConfig: AutorestRawConfiguration,
+  configurationFiles: { [key: string]: string },
+): AutorestConfiguration => {
+  const baseFolderUri = getBaseFolderUri(configFileFolderUri, rawConfig);
+
+  return {
+    ...rawConfig,
+    raw: rawConfig,
+    configFileFolderUri: configFileFolderUri,
+    inputFileUris: [],
+    configurationFiles: configurationFiles,
+    outputFolderUri: resolveAsWriteableFolder(baseFolderUri, <string>rawConfig["output-folder"]),
+    help: Boolean(rawConfig.help),
+    verbose: Boolean(rawConfig.verbose),
+    cachingEnabled: Boolean(rawConfig.cache),
+    cacheExclude: getCacheExclude(rawConfig),
+    debug: Boolean(rawConfig.debug),
+  };
+};
+
+const getCacheExclude = (config: AutorestRawConfiguration) => {
+  const cache = config["cache"];
+  return cache && cache.exclude ? [...valuesOf<string>(cache.exclude)] : [];
+};
+
 export const getNestedAutorestConfiguration = (
   config: AutorestConfiguration,
   scopes: AutorestRawConfiguration[],
 ): AutorestConfiguration => {
   const rawConfig = mergeConfigurations(...scopes, config);
-  const newConfig: AutorestConfiguration = {
-    ...rawConfig,
-    raw: rawConfig,
-    outputFolderUri: config.outputFolderUri,
-    inputFileUris: config.inputFileUris,
-    configurationFiles: config.configurationFiles,
-  };
+  const newConfig = createConfigFromRawConfig(config.configFileFolderUri, rawConfig, config.configurationFiles);
   return newConfig;
 };
 

@@ -396,10 +396,10 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   let fastMode = false;
   const tasks = new Array<Promise<void>>();
 
-  const config = await api.view;
+  const context = await api.view;
 
   api.GeneratedFile.Subscribe((_, artifact) => {
-    if (config.HelpRequested) {
+    if (context.config.help) {
       artifacts.push(artifact);
       return;
     }
@@ -419,12 +419,12 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   api.ClearFolder.Subscribe((_, folder) => clearFolders.add(folder));
 
   // maybe a resource schema batch process
-  if (config["resource-schema-batch"]) {
+  if (context["resource-schema-batch"]) {
     return resourceSchemaBatch(api);
   }
-  fastMode = !!config["fast-mode"];
+  fastMode = !!context["fast-mode"];
 
-  if (config["batch"]) {
+  if (context["batch"]) {
     await batch(api);
   } else {
     const result = await api.Process().finish;
@@ -433,7 +433,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     }
   }
 
-  if (config.HelpRequested) {
+  if (context.config.help) {
     // no fs operations on --help! Instead, format and print artifacts to console.
     // - print boilerplate help
     console.log("");

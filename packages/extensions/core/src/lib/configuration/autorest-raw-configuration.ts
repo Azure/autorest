@@ -24,6 +24,7 @@ export interface AutorestRawConfiguration {
   "help"?: any;
   "pass-thru"?: any[];
   "disable-validation"?: boolean;
+  "cache"?: any;
   "vscode"?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
 
   "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)

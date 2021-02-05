@@ -138,7 +138,7 @@ export class AutorestContext {
     });
   }
 
-  public resolveDirectives(predicate?: (each: ResolvedDirective) => boolean) {
+  public resolveDirectives(predicate?: (each: ResolvedDirective) => boolean): ResolvedDirective[] {
     // optionally filter by predicate.
     const plainDirectives = values(valuesOf<Directive>(this.config["directive"]));
     // predicate ? values(valuesOf<Directive>(this.config['directive'])).where(predicate) : values(valuesOf<Directive>(this.config['directive']));
@@ -227,12 +227,11 @@ export class AutorestContext {
     if (!key) {
       return clone(this.config);
     }
+
     if (key === "resolved-directive") {
       return this.resolveDirectives();
     }
-    if (<any>key === "header-text") {
-      return this.HeaderText;
-    }
+
     let result = <any>this.config;
     for (const keyPart of key.split(".")) {
       result = result[keyPart];
@@ -242,30 +241,6 @@ export class AutorestContext {
 
   public get Raw(): AutorestRawConfiguration {
     return this.config;
-  }
-
-  public get DebugMode(): boolean {
-    return !!this.config["debug"];
-  }
-
-  public get CacheMode(): boolean {
-    return !!this.config["cache"];
-  }
-
-  public get CacheExclude(): Array<string> {
-    const cache = this.config["cache"];
-    if (cache && cache.exclude) {
-      return [...valuesOf<string>(cache.exclude)];
-    }
-    return [];
-  }
-
-  public get VerboseMode(): boolean {
-    return !!this.config["verbose"];
-  }
-
-  public get HelpRequested(): boolean {
-    return !!this.config["help"];
   }
 
   public *GetNestedConfiguration(pluginName: string): Iterable<AutorestContext> {
@@ -293,11 +268,11 @@ export class AutorestContext {
 
   // message pipeline (source map resolution, filter, ...)
   public async Message(m: Message): Promise<void> {
-    if (m.Channel === Channel.Debug && !this.DebugMode) {
+    if (m.Channel === Channel.Debug && !this.config.debug) {
       return;
     }
 
-    if (m.Channel === Channel.Verbose && !this.VerboseMode) {
+    if (m.Channel === Channel.Verbose && !this.config.verbose) {
       return;
     }
 

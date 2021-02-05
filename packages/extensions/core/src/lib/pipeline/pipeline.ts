@@ -348,16 +348,16 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
         break;
     }
 
-    const config = pipeline.configs[stringify(node.configScope)];
+    const context = pipeline.configs[stringify(node.configScope)];
     const pluginName = node.pluginName;
 
     // you can have --pass-thru:FOO on the command line
     // or add pass-thru: true in a pipline configuration step.
     const passthru =
-      config.GetEntry(node.configScope.last.toString())["pass-thru"] === true ||
+      context.GetEntry(node.configScope.last.toString())["pass-thru"] === true ||
       values(configView.GetEntry("pass-thru")).any((each) => each === pluginName);
     const usenull =
-      config.GetEntry(node.configScope.last.toString())["null"] === true ||
+      context.GetEntry(node.configScope.last.toString())["null"] === true ||
       values(configView.GetEntry("null")).any((each) => each === pluginName);
 
     const plugin = usenull ? plugins.null : passthru ? plugins.identity : plugins[pluginName];
@@ -367,60 +367,60 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     }
 
     if (inputScope.skip) {
-      config.Message({ Channel: Channel.Debug, Text: `${nodeName} - SKIPPING` });
+      context.Message({ Channel: Channel.Debug, Text: `${nodeName} - SKIPPING` });
       return inputScope;
     }
     try {
       let cacheKey: string | undefined;
 
-      if (config.CacheMode) {
+      if (context.config.cachingEnabled) {
         // generate the key used to store/access cached content
         const names = await inputScope.Enum();
         const data = (
           await Promise.all(names.map((name) => inputScope.ReadStrict(name).then((uri) => md5(uri.ReadData()))))
         ).sort();
 
-        cacheKey = md5([config.configFileFolderUri, nodeName, ...data].join("«"));
+        cacheKey = md5([context.configFileFolderUri, nodeName, ...data].join("«"));
       }
 
       // if caching is enabled, see if we can find a scopeResult in the cache first.
       // key = inputScope names + md5(inputScope content)
       if (
-        config.CacheMode &&
+        context.config.cachingEnabled &&
         inputScope.cachable &&
-        config.CacheExclude.indexOf(nodeName) === -1 &&
+        context.config.cacheExclude.indexOf(nodeName) === -1 &&
         (await isCached(cacheKey))
       ) {
         // shortcut -- get the outputs directly from the cache.
-        config.Message({
+        context.Message({
           Channel: times ? Channel.Information : Channel.Debug,
           Text: `${nodeName} - CACHED inputs = ${(await inputScope.Enum()).length} [0.0 s]`,
         });
 
-        return await readCache(cacheKey, config.DataStore.getDataSink(node.outputArtifact));
+        return await readCache(cacheKey, context.DataStore.getDataSink(node.outputArtifact));
       }
 
       const t1 = process.uptime() * 100;
-      config.Message({
+      context.Message({
         Channel: times ? Channel.Information : Channel.Debug,
         Text: `${nodeName} - START inputs = ${(await inputScope.Enum()).length}`,
       });
 
       // creates the actual plugin.
-      const scopeResult = await plugin(config, inputScope, config.DataStore.getDataSink(node.outputArtifact));
+      const scopeResult = await plugin(context, inputScope, context.DataStore.getDataSink(node.outputArtifact));
       const t2 = process.uptime() * 100;
 
-      config.Message({
+      context.Message({
         Channel: times ? Channel.Information : Channel.Debug,
         Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]`,
       });
 
       // if caching is enabled, let's cache this scopeResult.
-      if (config.CacheMode && cacheKey) {
+      if (context.config.cachingEnabled && cacheKey) {
         await writeCache(cacheKey, scopeResult);
       }
       // if this node wasn't able to load from the cache, then subsequent nodes shall not either
-      if (!inputScope.cachable || config.CacheExclude.indexOf(nodeName) !== -1) {
+      if (!inputScope.cachable || context.config.cacheExclude.indexOf(nodeName) !== -1) {
         try {
           scopeResult.cachable = false;
         } catch {
@@ -430,7 +430,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
       return scopeResult;
     } catch (e) {
-      if (configView.DebugMode) {
+      if (configView.config.debug) {
         // eslint-disable-next-line no-console
         console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);
       }
