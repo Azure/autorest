@@ -29,6 +29,11 @@ export interface Parameter extends Value {
 
   /** When a parameter is grouped into another, this will tell where the parameter got grouped into. */
   groupedBy?: Parameter;
+
+  /**
+   * If this parameter is to be included in a multipart request body.
+   */
+  isInMultipart?: boolean;
 }
 
 export class Parameter extends Value implements Parameter {

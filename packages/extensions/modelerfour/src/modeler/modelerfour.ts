@@ -1508,6 +1508,7 @@ export class ModelerFour {
                   },
                 },
                 clientDefaultValue: this.interpret.getClientDefault(propertyDeclaration, pSchema),
+                isInMultipart: true,
               },
             ),
           );
