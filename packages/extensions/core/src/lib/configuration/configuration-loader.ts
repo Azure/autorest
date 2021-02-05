@@ -213,8 +213,8 @@ export class ConfigurationLoader {
       : this.configFileOrFolderUri || "file:///";
 
     const configurationFiles: { [key: string]: any } = {};
-    const configSegments: Array<any> = [];
-    const secondPass: Array<any> = [];
+    const configSegments: AutorestRawConfiguration[] = [];
+    const secondPass: AutorestRawConfiguration[] = [];
 
     const createView = (segments: Array<any> = configSegments) => {
       return createAutorestContext(
@@ -225,6 +225,7 @@ export class ConfigurationLoader {
         ...segments,
       );
     };
+
     const addSegments = async (configs: Array<any>, keepInSecondPass = true): Promise<Array<any>> => {
       const segs = await this.desugarRawConfigs(configs);
       configSegments.push(...segs);
@@ -233,6 +234,7 @@ export class ConfigurationLoader {
       }
       return segs;
     };
+
     const fsInputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
 
     // 1. overrides (CLI, ...)
