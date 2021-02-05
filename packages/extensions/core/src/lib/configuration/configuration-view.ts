@@ -243,10 +243,6 @@ export class AutorestContext {
     return result;
   }
 
-  public get Raw(): AutorestRawConfiguration {
-    return this.config;
-  }
-
   public *GetNestedConfiguration(pluginName: string): Iterable<AutorestContext> {
     const pp = pluginName.split(".");
     if (pp.length > 1) {

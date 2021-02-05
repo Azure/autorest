@@ -1,18 +1,7 @@
-import {
-  DataHandle,
-  DataSource,
-  Lazy,
-  Normalize,
-  QuickDataSource,
-  createSandbox,
-  Stringify,
-  YAMLNode,
-} from "@azure-tools/datastore";
+import { DataHandle, DataSource, Normalize, QuickDataSource, createSandbox, Stringify } from "@azure-tools/datastore";
 import { ResolveUri } from "@azure-tools/uri";
-import { Artifact } from "../../../exports";
 import { AutorestContext } from "../../configuration";
 import { Channel } from "../../message";
-import { IdentitySourceMapping } from "../../source-map/merging";
 import { PipelinePlugin } from "../common";
 
 const safeEval = createSandbox();
@@ -149,20 +138,23 @@ export function createArtifactEmitterPlugin(inputOverride?: () => Promise<DataSo
     }
 
     // clear output-folder if requested
-    if (context.GetEntry(<any>"clear-output-folder")) {
+    if (context.GetEntry("clear-output-folder")) {
       context.ClearFolder.Dispatch(context.config.outputFolderUri);
     }
 
     await emitArtifacts(
       context,
-      context.GetEntry(<any>"input-artifact") || null,
+      context.GetEntry("input-artifact") || null,
       (key) =>
         ResolveUri(
           context.config.outputFolderUri,
-          safeEval<string>(context.GetEntry(<any>"output-uri-expr") || "$key", { $key: key, $config: context.Raw }),
+          safeEval<string>(context.GetEntry("output-uri-expr") || "$key", {
+            $key: key,
+            $config: context.config.raw,
+          }),
         ),
       input,
-      context.GetEntry(<any>"is-object"),
+      context.GetEntry("is-object"),
     );
     return new QuickDataSource([]);
   };

@@ -71,9 +71,9 @@ interface PipelineNode {
 }
 
 function buildPipeline(
-  config: AutorestContext,
+  context: AutorestContext,
 ): { pipeline: { [name: string]: PipelineNode }; configs: { [jsonPath: string]: AutorestContext } } {
-  const cfgPipeline = config.GetEntry(<any>"pipeline");
+  const cfgPipeline = context.GetEntry("pipeline");
   const pipeline: { [name: string]: PipelineNode } = {};
   const configCache: { [jsonPath: string]: AutorestContext } = {};
 
@@ -177,7 +177,7 @@ function buildPipeline(
       }
     };
 
-    configCache[stringify([])] = config;
+    configCache[stringify([])] = context;
     addNodesAndSuffixes("", [], [], inputs.map(createNodesAndSuffixes));
 
     return { name: stageName, suffixes: (cfg.suffixes = suffixes) };
@@ -242,7 +242,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
         new QuickDataSource([
           await configView.DataStore.getDataSink().WriteObject(
             "configuration",
-            configView.Raw,
+            configView.config.raw,
             ["fix-me-4"],
             "configuration",
           ),
@@ -264,7 +264,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
   // dynamically loaded, auto-discovered plugins
   const __extensionExtension: { [pluginName: string]: AutoRestExtension } = {};
-  for (const useExtensionQualifiedName of configView.GetEntry(<any>"used-extension") || []) {
+  for (const useExtensionQualifiedName of configView.GetEntry("used-extension") || []) {
     const extension = await getExtension(useExtensionQualifiedName);
     for (const plugin of await extension.GetPluginNames(configView.CancellationToken)) {
       if (!plugins[plugin]) {
@@ -276,7 +276,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
   // __status scope
   const startTime = Date.now();
-  (<any>configView.Raw).__status = new Proxy<any>(
+  configView.config.raw.__status = new Proxy<any>(
     {},
     {
       get(_, key) {
@@ -314,7 +314,6 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
   const ScheduleNode: (nodeName: string) => Promise<DataSource> = async (nodeName) => {
     const node = pipeline.pipeline[nodeName];
-
     if (!node) {
       throw new Error(`Cannot find pipeline node ${nodeName}.`);
     }
@@ -430,6 +429,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
       return scopeResult;
     } catch (e) {
+      console.error("Here", nodeName, e);
       if (configView.config.debug) {
         // eslint-disable-next-line no-console
         console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);

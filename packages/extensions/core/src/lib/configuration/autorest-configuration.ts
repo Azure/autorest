@@ -94,7 +94,6 @@ export const createAutorestConfiguration = async (
   );
 
   config.inputFileUris = inputFiles.filter((x) => !filesToExclude.includes(x));
-
   return config;
 };
 
@@ -131,6 +130,7 @@ export const getNestedAutorestConfiguration = (
 ): AutorestConfiguration => {
   const rawConfig = mergeConfigurations(...scopes, config);
   const newConfig = createConfigFromRawConfig(config.configFileFolderUri, rawConfig, config.configurationFiles);
+  newConfig.inputFileUris = config.inputFileUris;
   return newConfig;
 };
 
