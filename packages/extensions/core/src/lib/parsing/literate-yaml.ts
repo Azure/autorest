@@ -119,7 +119,7 @@ export function evaluateGuard(rawFenceGuard: string, contextObject: any, forceAl
     isLoaded: (name: string) => {
       return (
         contextObject["used-extension"] &&
-        !!contextObject["used-extension"].find((each) => each.startsWith(`["${name}"`))
+        !!contextObject["used-extension"].find((each: any) => each.startsWith(`["${name}"`))
       );
     },
 

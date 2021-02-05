@@ -309,7 +309,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
   const fsInput = configView.DataStore.GetReadThroughScope(fileSystem);
   const pipeline = buildPipeline(configView);
-  const times = !!configView["timestamp"];
+  const times = !!configView.config["timestamp"];
   const tasks: { [name: string]: Promise<DataSource> } = {};
 
   const ScheduleNode: (nodeName: string) => Promise<DataSource> = async (nodeName) => {

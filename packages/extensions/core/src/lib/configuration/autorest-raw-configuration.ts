@@ -79,6 +79,8 @@ export interface AutorestRawConfiguration {
   // TODO-TIM check what is this?
   "name"?: string;
   "to"?: string;
+
+  [key: string]: any;
 }
 
 export const mergeConfigurations = (...configs: Array<AutorestRawConfiguration>): AutorestRawConfiguration => {

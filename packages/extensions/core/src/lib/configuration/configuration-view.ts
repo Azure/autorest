@@ -223,6 +223,10 @@ export class AutorestContext {
     return From(valuesOf<string>(this.config["output-artifact"])).Contains(artifact);
   }
 
+  /**
+   * Returns the config value at the given path.
+   * @param key Path to the config;
+   */
   public GetEntry(key: string): any {
     if (!key) {
       return clone(this.config);
@@ -232,7 +236,7 @@ export class AutorestContext {
       return this.resolveDirectives();
     }
 
-    let result = <any>this.config;
+    let result = this.config;
     for (const keyPart of key.split(".")) {
       result = result[keyPart];
     }
@@ -253,17 +257,17 @@ export class AutorestContext {
       return;
     }
 
-    for (const section of valuesOf<any>((<any>this.config)[pluginName])) {
+    for (const section of valuesOf<any>(this.config.raw[pluginName])) {
       if (section) {
         yield this.GetNestedConfigurationImmediate(section === true ? {} : section);
       }
     }
   }
 
+  // TOOD-TIM: change type to any=>AutorestRawConfiguration
   public GetNestedConfigurationImmediate(...scopes: Array<any>): AutorestContext {
     const nestedConfig = getNestedAutorestConfiguration(this.config, scopes);
-    const c = new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter, this.configFileFolderUri);
-    return c;
+    return new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter, this.configFileFolderUri);
   }
 
   // message pipeline (source map resolution, filter, ...)
