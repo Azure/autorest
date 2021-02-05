@@ -51,18 +51,18 @@ export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
   const validator = new SchemaValidator({ breakOnFirstError: false });
 
   const extendedOpenApiSchema = require(`${schemaFolder}/openapi3-schema.json`);
-  return createPerFilePlugin(async (config) => async (fileIn, sink) => {
+  return createPerFilePlugin(async (context) => async (fileIn, sink) => {
     const obj = await fileIn.ReadObject<any>();
     const isSecondary = !!obj["x-ms-secondary-file"];
-    const markErrorAsWarnings = config["mark-oai3-errors-as-warnings"];
+    const markErrorAsWarnings = context.config["mark-oai3-errors-as-warnings"];
     const errors = await validateSchema(obj, extendedOpenApiSchema, validator);
     if (errors !== null) {
       for (const error of errors) {
         const level = markErrorAsWarnings || isSecondary ? "warning" : "error";
-        logValidationError(config, fileIn, error, "schema-validator-openapi", level);
+        logValidationError(context, fileIn, error, "schema-validator-openapi", level);
       }
       if (!isSecondary) {
-        config.Message({
+        context.Message({
           Channel: Channel.Error,
           Plugin: "schema-validator-openapi",
           Text: [

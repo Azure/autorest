@@ -50,6 +50,7 @@ interface ComponentTracker {
   links: Set<string>;
   callbacks: Set<string>;
 }
+
 export class ComponentsCleaner extends Transformer<any, oai.Model> {
   private visitedComponents: ComponentTracker = {
     schemas: new Set<string>(),

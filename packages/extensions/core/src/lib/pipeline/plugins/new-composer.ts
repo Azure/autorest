@@ -277,11 +277,11 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
 
   protected cloneInto<TParent extends object>(target: ProxyObject<TParent>, originalNodes: Iterable<Node>) {
     for (const { key, value, pointer } of originalNodes) {
-      if (target[key] === undefined) {
+      if (target[key as keyof TParent] === undefined) {
         // the value isn't in the target. We can take it from the source
         this.clone(<AnyObject>target, key, pointer, value);
       } else {
-        if (!areSimilar(value, target[key], "x-ms-metadata", "description", "summary")) {
+        if (!areSimilar(value, target[key as keyof TParent], "x-ms-metadata", "description", "summary")) {
           throw new Error(`Incompatible models conflicting: ${pointer}`);
         }
       }
