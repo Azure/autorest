@@ -62,7 +62,7 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
 
   visitSchemas<T>(container: ProxyObject<Dictionary<T>>, originalNodes: () => Iterable<Node>) {
     const xMsMetadata = "x-ms-metadata";
-    const updatedSchemas = {};
+    const updatedSchemas: any = {};
 
     // get all the schemas and associate them with their uid
     // this will allow us to place the value in the right place at the end
@@ -115,7 +115,9 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
             // gs: added -- ensure that properties left beg
             if (currentSchema.value.required && supersetEquivSchema.properties) {
               const sesNames = Object.getOwnPropertyNames(supersetEquivSchema.properties);
-              supersetEquivSchema.required = currentSchema.value.required.filter((each) => sesNames.indexOf(each) > -1);
+              supersetEquivSchema.required = currentSchema.value.required.filter(
+                (each: any) => sesNames.indexOf(each) > -1,
+              );
             }
 
             // replace with equivalent schema and put back metadata.

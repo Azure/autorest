@@ -518,7 +518,7 @@ function getFilesUsed(nodes: Iterable<Node>) {
             case "callbacks":
             case "securitySchemes":
               for (const component of collection.children) {
-                component.value["x-ms-metadata"].originalLocations.map((x) =>
+                component.value["x-ms-metadata"].originalLocations.map((x: any) =>
                   filesUsed.add(x.replace(/(.*)#\/components.*/g, "$1")),
                 );
               }

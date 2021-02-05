@@ -99,7 +99,7 @@ class RefProcessor extends Transformer<any, any> {
   }
 
   async processXMSExamples(targetParent: AnyObject, examples: AnyObject) {
-    const xmsExamples = {};
+    const xmsExamples: any = {};
 
     for (const { key, value } of items(examples)) {
       if (value.$ref) {

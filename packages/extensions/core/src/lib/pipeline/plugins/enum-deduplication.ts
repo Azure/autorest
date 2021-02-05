@@ -104,7 +104,7 @@ export class EnumDeduplicator extends TransformerViaPointer {
     }
   }
 
-  fixUp(originalRef: string, newRef: string, pointer) {
+  fixUp(originalRef: string, newRef: string, pointer: string) {
     const fixups = this.refs.get(originalRef);
     if (fixups) {
       for (const each of fixups) {
