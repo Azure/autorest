@@ -16,7 +16,7 @@ import {
 } from "@azure-tools/datastore";
 import { Dictionary } from "@azure-tools/linq";
 import * as oai from "@azure-tools/openapi";
-import { ConfigurationView } from "../../configuration";
+import { AutorestContext } from "../../configuration";
 import { PipelinePlugin } from "../common";
 
 /**
@@ -216,7 +216,7 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
   }
 }
 
-async function clean(config: ConfigurationView, input: DataSource, sink: DataSink) {
+async function clean(config: AutorestContext, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {

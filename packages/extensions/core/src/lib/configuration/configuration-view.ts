@@ -15,7 +15,6 @@ import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
 import { Artifact } from "../artifact";
 import { Channel, Message, Range, SourceLocation } from "../message";
 import { Suppressor } from "../pipeline/suppression";
-import { resolveRValue } from "../source-map/merging";
 import { cwd } from "process";
 import { Directive, ResolvedDirective } from "./directive";
 import { AutoRestRawConfiguration, mergeConfiguration, mergeConfigurations } from "./auto-rest-raw-configuration";
@@ -23,26 +22,15 @@ import { arrayOf, valuesOf } from "./utils";
 import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
 import { IEvent } from "../events";
-
-const RESOLVE_MACROS_AT_RUNTIME = true;
+import { AutorestConfiguration } from "./autorest-configuration";
 
 const safeEval = createSandbox();
 
-function ProxifyConfigurationView(cfgView: any) {
-  return new Proxy(cfgView, {
-    get: (target, property) => {
-      const value = target[property];
-      if (value && value instanceof Array) {
-        return value.map((each) => resolveRValue(each, "", target, null));
-      }
-      return resolveRValue(value, <string>property, cfgView, null);
-    },
-  });
-}
+export class AutorestContext {
+  // TODO-TIM: Remove !
+  public config!: AutorestConfiguration;
+  private rawConfig: AutoRestRawConfiguration;
 
-export class ConfigurationView {
-  [name: string]: any;
-  public InputFileUris = new Array<string>();
   public fileSystem: CachingFileSystem;
 
   private suppressor: Suppressor;
@@ -85,19 +73,6 @@ export class ConfigurationView {
       "disable-validation": false,
     });
 
-    if (RESOLVE_MACROS_AT_RUNTIME) {
-      // if RESOLVE_MACROS_AT_RUNTIME is set
-      // this will insert a Proxy object in most of the uses of
-      // the configuration, and will do a macro resolution when the
-      // value is retrieved.
-
-      // I have turned on this behavior by default. I'm not sure that
-      // I need it at this point, but I'm leaving this code here since
-      // It's possible that I do.
-      this.config = ProxifyConfigurationView(this.rawConfig);
-    } else {
-      this.config = this.rawConfig;
-    }
     this.suppressor = new Suppressor(this);
 
     // treat this as a configuration property too.
@@ -114,7 +89,8 @@ export class ConfigurationView {
       arrayOf<string>(this.config["exclude-file"]).map((each) => this.ResolveAsPath(each)),
     );
 
-    this.InputFileUris = inputFiles.filter((x) => !filesToExclude.includes(x));
+    const inputFileUris = inputFiles.filter((x) => !filesToExclude.includes(x));
+    this.config = { ...this.rawConfig, inputFileUris };
 
     return this;
   }
@@ -148,8 +124,8 @@ export class ConfigurationView {
     }
   }
 
-  /* @internal */ public get Indexer(): ConfigurationView {
-    return new Proxy<ConfigurationView>(this, {
+  /* @internal */ public get Indexer(): AutorestContext {
+    return new Proxy<AutorestContext>(this, {
       get: (target, property) => {
         return property in target.config ? (<any>target.config)[property] : this[<number | string>property];
       },
@@ -171,9 +147,6 @@ export class ConfigurationView {
   /* @internal */ public get ClearFolder(): IEvent<MessageEmitter, string> {
     return this.messageEmitter.ClearFolder;
   }
-
-  private config: AutoRestRawConfiguration;
-  private rawConfig: AutoRestRawConfiguration;
 
   private ResolveAsFolder(path: string): string {
     return EnsureIsFolderUri(ResolveUri(this.BaseFolderUri, path));
@@ -228,7 +201,7 @@ export class ConfigurationView {
   }
 
   public static async *getIncludedConfigurationFiles(
-    configView: () => Promise<ConfigurationView>,
+    configView: () => Promise<AutorestContext>,
     fileSystem: IFileSystem,
     ignoreFiles: Set<string>,
   ) {
@@ -416,7 +389,7 @@ export class ConfigurationView {
     return !!this.config["help"];
   }
 
-  public *GetNestedConfiguration(pluginName: string): Iterable<ConfigurationView> {
+  public *GetNestedConfiguration(pluginName: string): Iterable<AutorestContext> {
     const pp = pluginName.split(".");
     if (pp.length > 1) {
       const n = this.GetNestedConfiguration(pp[0]);
@@ -433,8 +406,8 @@ export class ConfigurationView {
     }
   }
 
-  public GetNestedConfigurationImmediate(...scope: Array<any>): ConfigurationView {
-    const c = new ConfigurationView(
+  public GetNestedConfigurationImmediate(...scope: Array<any>): AutorestContext {
+    const c = new AutorestContext(
       this.configurationFiles,
       this.fileSystem,
       this.messageEmitter,
@@ -442,7 +415,7 @@ export class ConfigurationView {
       ...scope,
       this.config,
     );
-    c.InputFileUris = this.InputFileUris;
+    c.config.inputFileUris = this.config.inputFileUris;
     return c.Indexer;
   }
 

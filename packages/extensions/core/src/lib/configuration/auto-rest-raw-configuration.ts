@@ -71,6 +71,10 @@ export interface AutoRestRawConfiguration {
   "debugger"?: any;
 
   "github-auth-token"?: string;
+
+  // TODO-TIM check what is this?
+  "name"?: string;
+  "to"?: string;
 }
 
 export const mergeConfigurations = (...configs: Array<AutoRestRawConfiguration>): AutoRestRawConfiguration => {

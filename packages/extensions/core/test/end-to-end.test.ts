@@ -71,7 +71,7 @@ describe("EndToEnd", () => {
     });
 
     const config = await autoRest.view;
-    assert.strictEqual(config.InputFileUris.length, 1);
+    assert.strictEqual(config.config.inputFileUris.length, 1);
 
     const messages: Array<Message> = [];
 

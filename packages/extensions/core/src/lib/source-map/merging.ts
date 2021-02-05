@@ -19,7 +19,7 @@ import {
   Parse,
 } from "@azure-tools/datastore";
 import { pushAll } from "../array";
-import { ConfigurationView } from "../configuration";
+import { AutorestContext } from "../configuration";
 import { Channel } from "../message";
 import { isArray } from "util";
 
@@ -274,7 +274,7 @@ export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst:
 }
 
 export async function MergeYamls(
-  config: ConfigurationView,
+  config: AutorestContext,
   yamlInputHandles: Array<DataHandle>,
   sink: DataSink,
   verifyOAI2 = false,

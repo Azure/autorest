@@ -16,7 +16,7 @@ import {
   PipeState,
   mergePipeStates,
 } from "@azure-tools/datastore";
-import { ConfigurationView, getExtension } from "../configuration";
+import { AutorestContext, getExtension } from "../configuration";
 import { Channel } from "../message";
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
 import { PipelinePlugin } from "./common";
@@ -71,11 +71,11 @@ interface PipelineNode {
 }
 
 function buildPipeline(
-  config: ConfigurationView,
-): { pipeline: { [name: string]: PipelineNode }; configs: { [jsonPath: string]: ConfigurationView } } {
+  config: AutorestContext,
+): { pipeline: { [name: string]: PipelineNode }; configs: { [jsonPath: string]: AutorestContext } } {
   const cfgPipeline = config.GetEntry(<any>"pipeline");
   const pipeline: { [name: string]: PipelineNode } = {};
-  const configCache: { [jsonPath: string]: ConfigurationView } = {};
+  const configCache: { [jsonPath: string]: AutorestContext } = {};
 
   // Resolves a pipeline stage name using the current stage's name and the relative name.
   // It considers the actually existing pipeline stages.
@@ -205,7 +205,7 @@ function isDrainRequired(p: PipelineNode) {
   return false;
 }
 
-export async function runPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
+export async function runPipeline(configView: AutorestContext, fileSystem: IFileSystem): Promise<void> {
   // built-in plugins
   const plugins: { [name: string]: PipelinePlugin } = {
     "help": createHelpPlugin(),

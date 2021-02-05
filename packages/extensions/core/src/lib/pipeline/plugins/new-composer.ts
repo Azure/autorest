@@ -13,7 +13,7 @@ import { areSimilar } from "@azure-tools/object-comparison";
 import { PipelinePlugin } from "../common";
 import { maximum, toSemver } from "@azure-tools/codegen";
 import compareVersions from "compare-versions";
-import { ConfigurationView } from "../../configuration";
+import { AutorestContext } from "../../configuration";
 
 try {
   require("source-map-support").install();
@@ -478,7 +478,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
   }
 }
 
-async function compose(config: ConfigurationView, input: DataSource, sink: DataSink) {
+async function compose(config: AutorestContext, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
 
   // compose-a-vous!

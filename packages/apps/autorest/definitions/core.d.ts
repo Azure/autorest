@@ -232,7 +232,7 @@ declare module "autorest-core" {
     }>;
     IncludedConfigurationFiles(fileSystem: IFileSystem, ignoreFiles: Set<string>): Promise<Array<string>>;
     readonly Directives: Array<DirectiveView>;
-    readonly InputFileUris: Array<string>;
+    readonly config.inputFileUris: Array<string>;
     readonly OutputFolderUri: string;
     IsOutputArtifactRequested(artifact: string): boolean;
     GetEntry(key: keyof AutoRestConfigurationImpl): any;

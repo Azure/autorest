@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ConfigurationLoader, ConfigurationView, MessageEmitter } from "./configuration";
+import { ConfigurationLoader, AutorestContext, MessageEmitter } from "./configuration";
 import { EventEmitter, IEvent } from "./events";
 import { Exception } from "./exception";
 import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import { runPipeline } from "./pipeline/pipeline";
-export { ConfigurationView } from "./configuration";
+export { AutorestContext as ConfigurationView } from "./configuration";
 import { homedir } from "os";
 import { Artifact } from "./artifact";
 import * as Constants from "./constants";
@@ -53,8 +53,8 @@ export class AutoRest extends EventEmitter {
   @EventEmitter.Event public Message!: IEvent<AutoRest, Message>;
 
   private _configurations = new Array<any>();
-  private _view: ConfigurationView | undefined;
-  public get view(): Promise<ConfigurationView> {
+  private _view: AutorestContext | undefined;
+  public get view(): Promise<AutorestContext> {
     return this._view ? Promise.resolve(this._view) : this.RegenerateView(true);
   }
 
@@ -69,7 +69,7 @@ export class AutoRest extends EventEmitter {
     process.env["autorest.home"] = process.env["autorest.home"] || homedir();
   }
 
-  public async RegenerateView(includeDefault = false): Promise<ConfigurationView> {
+  public async RegenerateView(includeDefault = false): Promise<AutorestContext> {
     this.Invalidate();
     const messageEmitter = new MessageEmitter();
 
@@ -110,7 +110,7 @@ export class AutoRest extends EventEmitter {
     let earlyCancel = false;
     let cancel: () => void = () => (earlyCancel = true);
     const processInternal = async () => {
-      let view: ConfigurationView = <any>null;
+      let view: AutorestContext = <any>null;
       try {
         // grab the current configuration view.
         view = await this.view;
@@ -125,7 +125,7 @@ export class AutoRest extends EventEmitter {
             view.messageEmitter.removeAllListeners();
           }
         };
-        if (view.InputFileUris.length === 0) {
+        if (view.config.inputFileUris.length === 0) {
           if (view.GetEntry("allow-no-input")) {
             this.Finished.Dispatch(true);
             return true;

@@ -16,7 +16,7 @@ import { AutoRestExtension } from "../pipeline/plugin-endpoint";
 import { AppRoot } from "../constants";
 import { AutoRestRawConfiguration } from "./auto-rest-raw-configuration";
 import { arrayOf } from "./utils";
-import { ConfigurationView } from "./configuration-view";
+import { AutorestContext } from "./configuration-view";
 import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
 import { detectConfigurationFile } from "./configuration-file-resolver";
@@ -48,7 +48,7 @@ export class ConfigurationLoader {
 
   private async parseCodeBlocks(
     configFile: DataHandle,
-    contextConfig: ConfigurationView,
+    contextConfig: AutorestContext,
   ): Promise<Array<AutoRestRawConfiguration>> {
     const parentFolder = ParentFolderUri(configFile.originalFullPath);
 
@@ -202,7 +202,7 @@ export class ConfigurationLoader {
     messageEmitter: MessageEmitter,
     includeDefault: boolean,
     ...configs: Array<any>
-  ): Promise<ConfigurationView> {
+  ): Promise<AutorestContext> {
     const configFileUri =
       this.fileSystem && this.configFileOrFolderUri
         ? await detectConfigurationFile(this.fileSystem, this.configFileOrFolderUri, messageEmitter)
@@ -216,7 +216,7 @@ export class ConfigurationLoader {
     const secondPass: Array<any> = [];
 
     const createView = (segments: Array<any> = configSegments) => {
-      return new ConfigurationView(
+      return new AutorestContext(
         configurationFiles,
         this.fileSystem,
         messageEmitter,
@@ -252,7 +252,7 @@ export class ConfigurationLoader {
     // 3. resolve 'require'd configuration
     const addedConfigs = new Set<string>();
     const includeFn = async (fsToUse: IFileSystem) => {
-      for await (let additionalConfig of ConfigurationView.getIncludedConfigurationFiles(
+      for await (let additionalConfig of AutorestContext.getIncludedConfigurationFiles(
         createView,
         fsToUse,
         addedConfigs,
@@ -308,9 +308,9 @@ export class ConfigurationLoader {
     const addedExtensions = new Set<string>();
 
     const resolveExtensions = async () => {
-      const viewsToHandle: Array<ConfigurationView> = [await createView()];
+      const viewsToHandle: Array<AutorestContext> = [await createView()];
       while (viewsToHandle.length > 0) {
-        const tmpView = <ConfigurationView>viewsToHandle.pop();
+        const tmpView = <AutorestContext>viewsToHandle.pop();
         const additionalExtensions = tmpView.UseExtensions.filter((ext) => !addedExtensions.has(ext.fullyQualified));
         await addSegments([{ "used-extension": tmpView.UseExtensions.map((x) => x.fullyQualified) }]);
         if (additionalExtensions.length === 0) {

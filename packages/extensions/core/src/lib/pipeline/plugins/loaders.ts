@@ -140,7 +140,7 @@ interface OpenAPI3Spec {
 /* @internal */
 export function createSwaggerLoaderPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
-    const inputs = config.InputFileUris;
+    const inputs = config.config.inputFileUris;
     const swaggers = await LoadLiterateSwaggers(config, input, inputs, sink);
 
     const foundAllFiles = swaggers.length !== inputs.length;
@@ -156,7 +156,7 @@ export function createSwaggerLoaderPlugin(): PipelinePlugin {
 /* @internal */
 export function createOpenApiLoaderPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
-    const inputs = config.InputFileUris;
+    const inputs = config.config.inputFileUris;
     const openapis = await LoadLiterateOpenAPIs(config, input, inputs, sink);
     let result: Array<DataHandle> = [];
     if (openapis.length === inputs.length) {

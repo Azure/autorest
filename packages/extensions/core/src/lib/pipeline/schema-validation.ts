@@ -10,7 +10,7 @@ import { Channel } from "../message";
 import { createPerFilePlugin, PipelinePlugin } from "./common";
 import * as path from "path";
 import { AppRoot } from "../constants";
-import { ConfigurationView } from "../configuration";
+import { AutorestContext } from "../configuration";
 
 // TODO-TIM: Find a better way? Move schema to a package?
 const schemaFolder =
@@ -103,7 +103,7 @@ const validateSchema = (
 };
 
 const logValidationError = (
-  config: ConfigurationView,
+  config: AutorestContext,
   fileIn: DataHandle,
   error: ValidationError,
   pluginName: string,

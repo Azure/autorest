@@ -5,12 +5,12 @@
 
 import { DataHandle, DataSink, DataSource, QuickDataSource } from "@azure-tools/datastore";
 import { Deduplicator } from "@azure-tools/deduplication";
-import { ConfigurationView } from "../../configuration";
+import { AutorestContext } from "../../configuration";
 import { PipelinePlugin } from "../common";
 import { values } from "@azure-tools/linq";
 import { Channel } from "../../message";
 
-async function deduplicate(config: ConfigurationView, input: DataSource, sink: DataSink) {
+async function deduplicate(config: AutorestContext, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
 
@@ -19,7 +19,7 @@ async function deduplicate(config: ConfigurationView, input: DataSource, sink: D
   for (const each of values(inputs).where((input) => input.artifactType !== "profile-filter-log")) {
     const model = <any>await each.ReadObject();
 
-    /* 
+    /*
     Disabling for now -- not sure if we need to skip this in the simple case anyway.
     if ([...values(model?.info?.['x-ms-metadata']?.apiVersions).distinct()].length < 2) {
       config.Message({ Channel: Channel.Verbose, Text: `Skipping Deduplication on single-api-version file ${each.identity}` });

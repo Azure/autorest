@@ -10,19 +10,19 @@ import {
 } from "@azure-tools/datastore";
 import { ResolveUri } from "@azure-tools/uri";
 import { Artifact } from "../../../exports";
-import { ConfigurationView } from "../../configuration";
+import { AutorestContext } from "../../configuration";
 import { Channel } from "../../message";
 import { IdentitySourceMapping } from "../../source-map/merging";
 import { PipelinePlugin } from "../common";
 
 const safeEval = createSandbox();
 
-function isOutputArtifactOrMapRequested(config: ConfigurationView, artifactType: string) {
+function isOutputArtifactOrMapRequested(config: AutorestContext, artifactType: string) {
   return config.IsOutputArtifactRequested(artifactType) || config.IsOutputArtifactRequested(artifactType + ".map");
 }
 
 async function emitArtifactInternal(
-  config: ConfigurationView,
+  config: AutorestContext,
   artifactType: string,
   uri: string,
   handle: DataHandle,
@@ -56,7 +56,7 @@ async function emitArtifactInternal(
 
 let emitCtr = 0;
 async function emitArtifact(
-  config: ConfigurationView,
+  config: AutorestContext,
   uri: string,
   handle: DataHandle,
   isObject: boolean,
@@ -116,7 +116,7 @@ async function emitArtifact(
 }
 
 export async function emitArtifacts(
-  config: ConfigurationView,
+  config: AutorestContext,
   artifactTypeFilter: string | Array<string> | null /* what's set on the emitter */,
   uriResolver: (key: string) => string,
   scope: DataSource,

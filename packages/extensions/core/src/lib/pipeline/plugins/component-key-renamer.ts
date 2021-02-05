@@ -11,7 +11,7 @@ import {
 } from "@azure-tools/datastore";
 import { clone, Dictionary } from "@azure-tools/linq";
 import * as oai from "@azure-tools/openapi";
-import { ConfigurationView } from "../../configuration";
+import { AutorestContext } from "../../configuration";
 import { PipelinePlugin } from "../common";
 
 export class ComponentKeyRenamer extends Transformer<any, oai.Model> {
@@ -95,7 +95,7 @@ export class ComponentKeyRenamer extends Transformer<any, oai.Model> {
   }
 }
 
-async function renameComponentsKeys(config: ConfigurationView, input: DataSource, sink: DataSink) {
+async function renameComponentsKeys(config: AutorestContext, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {

@@ -12,7 +12,7 @@ import {
 import { clone, Dictionary, values } from "@azure-tools/linq";
 import { areSimilar } from "@azure-tools/object-comparison";
 import * as oai from "@azure-tools/openapi";
-import { ConfigurationView } from "../../configuration";
+import { AutorestContext } from "../../configuration";
 import { PipelinePlugin } from "../common";
 import { toSemver, maximum, gt, lt } from "@azure-tools/codegen";
 import { Channel } from "../../message";
@@ -344,7 +344,7 @@ export interface SubsetCheckResult {
   };
 }
 
-async function deduplicateSubsetSchemas(config: ConfigurationView, input: DataSource, sink: DataSink) {
+async function deduplicateSubsetSchemas(config: AutorestContext, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
