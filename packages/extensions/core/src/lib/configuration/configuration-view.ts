@@ -8,17 +8,16 @@ import {
   TryDecodeEnhancedPositionFromName,
 } from "@azure-tools/datastore";
 import { clone, values } from "@azure-tools/linq";
-import { EnsureIsFolderUri, ResolveUri, IsUri, FileUriToPath, CreateFileOrFolderUri } from "@azure-tools/uri";
+import { EnsureIsFolderUri, ResolveUri, IsUri, FileUriToPath } from "@azure-tools/uri";
 import { From } from "linq-es2015";
 import { basename, dirname } from "path";
 import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
 import { Artifact } from "../artifact";
 import { Channel, Message, Range, SourceLocation } from "../message";
 import { Suppressor } from "../pipeline/suppression";
-import { cwd } from "process";
 import { Directive, ResolvedDirective } from "./directive";
-import { AutoRestRawConfiguration, mergeConfiguration, mergeConfigurations } from "./auto-rest-raw-configuration";
-import { arrayOf, valuesOf } from "./utils";
+import { AutorestRawConfiguration } from "./autorest-raw-configuration";
+import { valuesOf } from "./utils";
 import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
 import { IEvent } from "../events";
@@ -35,29 +34,25 @@ export const createAutorestContext = async (
   fileSystem: IFileSystem,
   messageEmitter: MessageEmitter,
   configFileFolderUri: string,
-  ...configs: AutoRestRawConfiguration[]
+  ...configs: AutorestRawConfiguration[]
 ): Promise<AutorestContext> => {
-  const config = await createAutorestConfiguration(configurationFiles, configs);
-  return new AutorestContext(config, fileSystem, messageEmitter, configFileFolderUri);
+  const cachingFs = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
+  const config = await createAutorestConfiguration(configFileFolderUri, configurationFiles, configs, cachingFs);
+  return new AutorestContext(config, cachingFs, messageEmitter, configFileFolderUri);
 };
 
 export class AutorestContext {
   public config: AutorestConfiguration;
 
-  public fileSystem: CachingFileSystem;
-
   private suppressor: Suppressor;
 
   public constructor(
     config: AutorestConfiguration,
-    fileSystem: IFileSystem,
+    public fileSystem: CachingFileSystem,
     public messageEmitter: MessageEmitter,
     public configFileFolderUri: string,
   ) {
     this.config = config;
-    // wrap the filesystem with the caching filesystem
-    this.fileSystem = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
-
     this.suppressor = new Suppressor(this);
   }
 
@@ -102,18 +97,7 @@ export class AutorestContext {
     return this.messageEmitter.ClearFolder;
   }
 
-  private ResolveAsFolder(path: string): string {
-    return EnsureIsFolderUri(ResolveUri(this.BaseFolderUri, path));
-  }
-  private ResolveAsWriteableFolder(path: string): string {
-    // relative paths are relative to the local folder when the base-folder is remote.
-    if (!this.BaseFolderUri.startsWith("file:")) {
-      return EnsureIsFolderUri(ResolveUri(CreateFileOrFolderUri(cwd() + "/"), path));
-    }
-    return this.ResolveAsFolder(path);
-  }
-
-  private ResolveAsPath(path: string): Promise<string> {
+  public ResolveAsPath(path: string): Promise<string> {
     // is there even a potential for a parent folder from the input configuruation
     const parentFolder = this.config?.__parents?.[path];
     const fromBaseUri = ResolveUri(this.BaseFolderUri, path);
@@ -152,61 +136,6 @@ export class AutorestContext {
         fullyQualified: JSON.stringify([name, source]),
       };
     });
-  }
-
-  public static async *getIncludedConfigurationFiles(
-    configView: () => Promise<AutorestContext>,
-    fileSystem: IFileSystem,
-    ignoreFiles: Set<string>,
-  ) {
-    let done = false;
-
-    while (!done) {
-      // get a fresh copy of the view every time we start the loop.
-      const view = await configView();
-
-      // if we make it thru the list, we're done.
-      done = true;
-      for (const each of valuesOf<string>(view.config["require"])) {
-        if (ignoreFiles.has(each)) {
-          continue;
-        }
-
-        // looks like we found one that we haven't handled yet.
-        done = false;
-        ignoreFiles.add(each);
-        yield await view.ResolveAsPath(each);
-        break;
-      }
-    }
-
-    done = false;
-    while (!done) {
-      // get a fresh copy of the view every time we start the loop.
-      const view = await configView();
-
-      // if we make it thru the list, we're done.
-      done = true;
-      for (const each of valuesOf<string>(view.config["try-require"])) {
-        if (ignoreFiles.has(each)) {
-          continue;
-        }
-
-        // looks like we found one that we haven't handled yet.
-        done = false;
-        ignoreFiles.add(each);
-        const path = await view.ResolveAsPath(each);
-        try {
-          if (await fileSystem.ReadFile(path)) {
-            yield path;
-          }
-        } catch {
-          // do nothing
-        }
-
-        break;
-      }
-    }
   }
 
   public resolveDirectives(predicate?: (each: ResolvedDirective) => boolean) {
@@ -250,10 +179,6 @@ export class AutorestContext {
       .select((each) => new ResolvedDirective(each))
       .toArray();
     // return From(plainDirectives).SelectMany(expandDirective).Select(each => new StaticDirectiveView(each)).ToArray();
-  }
-
-  public get OutputFolderUri(): string {
-    return this.ResolveAsWriteableFolder(<string>this.config["output-folder"]);
   }
 
   public get HeaderText(): string {
@@ -315,7 +240,7 @@ export class AutorestContext {
     return result;
   }
 
-  public get Raw(): AutoRestRawConfiguration {
+  public get Raw(): AutorestRawConfiguration {
     return this.config;
   }
 

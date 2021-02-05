@@ -303,7 +303,7 @@ export class AutoRestExtension extends EventEmitter {
         } catch (E) {
           // try getting the file from the output-folder
           try {
-            const result = await context.fileSystem.ReadFile(`${context.OutputFolderUri}${filename}`);
+            const result = await context.fileSystem.ReadFile(`${context.config.outputFolderUri}${filename}`);
             return result;
           } catch (E2) {
             // no file there!
@@ -353,10 +353,10 @@ export class AutoRestExtension extends EventEmitter {
         }
 
         // we'd like to be able to ask the host for a file directly (but only if it's supposed to be in the output-folder)
-        const t = context.OutputFolderUri.length;
+        const t = context.config.outputFolderUri.length;
         return (
           await context.fileSystem.EnumerateFileUris(
-            EnsureIsFolderUri(`${context.OutputFolderUri}${artifactType || ""}`),
+            EnsureIsFolderUri(`${context.config.outputFolderUri}${artifactType || ""}`),
           )
         ).map((each) => each.substr(t));
       },

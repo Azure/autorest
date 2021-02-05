@@ -6,7 +6,7 @@ import { Directive } from "./directive";
  * Represent a raw configuration provided by the user.
  * i.e. The mapping of values passed via a config block, cli arguments, etc.
  */
-export interface AutoRestRawConfiguration {
+export interface AutorestRawConfiguration {
   "__info"?: string | null;
   "__parents"?: any | undefined;
   "allow-no-input"?: boolean;
@@ -80,8 +80,8 @@ export interface AutoRestRawConfiguration {
   "to"?: string;
 }
 
-export const mergeConfigurations = (...configs: Array<AutoRestRawConfiguration>): AutoRestRawConfiguration => {
-  let result: AutoRestRawConfiguration = {};
+export const mergeConfigurations = (...configs: Array<AutorestRawConfiguration>): AutorestRawConfiguration => {
+  let result: AutorestRawConfiguration = {};
   configs = configs
     .map((each, i, a) => ({ ...each, "load-priority": each["load-priority"] || -i }))
     .sort((a, b) => b["load-priority"] - a["load-priority"]);
@@ -99,10 +99,10 @@ export const mergeConfigurations = (...configs: Array<AutoRestRawConfiguration>)
 
 // TODO: operate on DataHandleRead and create source map!
 export const mergeConfiguration = (
-  higherPriority: AutoRestRawConfiguration,
-  lowerPriority: AutoRestRawConfiguration,
+  higherPriority: AutorestRawConfiguration,
+  lowerPriority: AutorestRawConfiguration,
   forceAllVersionsMode = false,
-): AutoRestRawConfiguration => {
+): AutorestRawConfiguration => {
   // check guard
   if (lowerPriority.__info && !evaluateGuard(lowerPriority.__info, higherPriority, forceAllVersionsMode)) {
     // guard false? => skip

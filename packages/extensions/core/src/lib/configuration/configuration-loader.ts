@@ -14,12 +14,13 @@ import { Channel, SourceLocation } from "../message";
 import { parseCodeBlocks } from "../parsing/literate-yaml";
 import { AutoRestExtension } from "../pipeline/plugin-endpoint";
 import { AppRoot } from "../constants";
-import { AutoRestRawConfiguration } from "./auto-rest-raw-configuration";
+import { AutorestRawConfiguration } from "./autorest-raw-configuration";
 import { arrayOf } from "./utils";
 import { AutorestContext, createAutorestContext } from "./configuration-view";
 import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
 import { detectConfigurationFile } from "./configuration-file-resolver";
+import { getIncludedConfigurationFiles } from "./loading-utils";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const untildify: (path: string) => string = require("untildify");
@@ -49,7 +50,7 @@ export class ConfigurationLoader {
   private async parseCodeBlocks(
     configFile: DataHandle,
     contextConfig: AutorestContext,
-  ): Promise<Array<AutoRestRawConfiguration>> {
+  ): Promise<Array<AutorestRawConfiguration>> {
     const parentFolder = ParentFolderUri(configFile.originalFullPath);
 
     // load config
@@ -64,7 +65,7 @@ export class ConfigurationLoader {
       hConfig
         .filter((each) => each)
         .map((each) => {
-          const pBlock = each.data.ReadObject<AutoRestRawConfiguration>();
+          const pBlock = each.data.ReadObject<AutorestRawConfiguration>();
           return pBlock.then((block) => {
             if (!block) {
               block = {};
@@ -252,11 +253,7 @@ export class ConfigurationLoader {
     // 3. resolve 'require'd configuration
     const addedConfigs = new Set<string>();
     const includeFn = async (fsToUse: IFileSystem) => {
-      for await (let additionalConfig of AutorestContext.getIncludedConfigurationFiles(
-        createView,
-        fsToUse,
-        addedConfigs,
-      )) {
+      for await (let additionalConfig of getIncludedConfigurationFiles(createView, fsToUse, addedConfigs)) {
         // acquire additional configs
         try {
           additionalConfig = simplifyUri(additionalConfig);

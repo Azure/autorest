@@ -9,7 +9,7 @@ async function command(config: AutorestContext, input: DataSource, sink: DataSin
   const commands = Array.isArray(c) ? c : [c];
   for (const cmd of commands) {
     const commandline = cmdlineToArray(cmd);
-    await execute(FileUriToPath(config.OutputFolderUri), commandline[0], ...commandline.slice(1));
+    await execute(FileUriToPath(config.config.outputFolderUri), commandline[0], ...commandline.slice(1));
   }
   return new QuickDataSource([], input.pipeState);
 }

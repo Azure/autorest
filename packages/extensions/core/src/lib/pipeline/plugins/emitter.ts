@@ -143,26 +143,26 @@ export async function emitArtifacts(
 
 /* @internal */
 export function createArtifactEmitterPlugin(inputOverride?: () => Promise<DataSource>): PipelinePlugin {
-  return async (config, input) => {
+  return async (context, input) => {
     if (inputOverride) {
       input = await inputOverride();
     }
 
     // clear output-folder if requested
-    if (config.GetEntry(<any>"clear-output-folder")) {
-      config.ClearFolder.Dispatch(config.OutputFolderUri);
+    if (context.GetEntry(<any>"clear-output-folder")) {
+      context.ClearFolder.Dispatch(context.config.outputFolderUri);
     }
 
     await emitArtifacts(
-      config,
-      config.GetEntry(<any>"input-artifact") || null,
+      context,
+      context.GetEntry(<any>"input-artifact") || null,
       (key) =>
         ResolveUri(
-          config.OutputFolderUri,
-          safeEval<string>(config.GetEntry(<any>"output-uri-expr") || "$key", { $key: key, $config: config.Raw }),
+          context.config.outputFolderUri,
+          safeEval<string>(context.GetEntry(<any>"output-uri-expr") || "$key", { $key: key, $config: context.Raw }),
         ),
       input,
-      config.GetEntry(<any>"is-object"),
+      context.GetEntry(<any>"is-object"),
     );
     return new QuickDataSource([]);
   };
