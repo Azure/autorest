@@ -171,7 +171,7 @@ export function createTextTransformerPlugin(): PipelinePlugin {
 /* @internal */
 export function createTransformerPlugin(): PipelinePlugin {
   return createPerFilePlugin(async (config) => {
-    const isObject = config.GetEntry(<any>"is-object") === false ? false : true;
+    const isObject = config.GetEntry("is-object") === false ? false : true;
     const manipulator = new Manipulator(config);
     return async (fileIn, sink) => {
       const fileOut = await manipulator.process(fileIn, sink, isObject, fileIn.Description);
@@ -183,11 +183,11 @@ export function createTransformerPlugin(): PipelinePlugin {
 /* @internal */
 export function createImmediateTransformerPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
-    const isObject = config.GetEntry(<any>"is-object") === false ? false : true;
+    const isObject = config.GetEntry("is-object") === false ? false : true;
     const files = await input.Enum(); // first all the immediate-configs, then a single swagger-document
     const scopes = await Promise.all(files.slice(0, files.length - 1).map((f) => input.ReadStrict(f)));
     const manipulator = new Manipulator(
-      config.GetNestedConfigurationImmediate(...(await Promise.all(scopes.map((s) => s.ReadObject<any>())))),
+      config.extendWith(...(await Promise.all(scopes.map((s) => s.ReadObject<any>())))),
     );
     const file = files[files.length - 1];
     const fileIn = await input.ReadStrict(file);

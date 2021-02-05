@@ -60,7 +60,7 @@ csharp:
     // verify that the items object that uses a macro works too
     expect(cfg.raw["items"][3]).toEqual("one/two");
 
-    for (const each of context.GetNestedConfiguration("csharp")) {
+    for (const each of context.getNestedConfiguration("csharp")) {
       // verify the output folder is relative
       expect(each.GetEntry("output-folder")).toEqual("foo/csharp");
 
@@ -77,7 +77,7 @@ csharp:
     const updatedContext = await autorest.view;
     expect(updatedContext.config.raw["output-folder"]).toEqual("OUTPUT");
 
-    for (const each of updatedContext.GetNestedConfiguration("csharp")) {
+    for (const each of updatedContext.getNestedConfiguration("csharp")) {
       expect(each.config.raw["output-folder"]).toEqual("OUTPUT/csharp");
     }
   });

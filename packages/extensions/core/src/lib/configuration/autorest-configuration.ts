@@ -124,11 +124,11 @@ const getCacheExclude = (config: AutorestRawConfiguration) => {
   return cache && cache.exclude ? [...valuesOf<string>(cache.exclude)] : [];
 };
 
-export const getNestedAutorestConfiguration = (
+export const extendAutorestConfiguration = (
   config: AutorestConfiguration,
-  scopes: AutorestRawConfiguration[],
+  overrides: AutorestRawConfiguration[],
 ): AutorestConfiguration => {
-  const rawConfig = mergeConfigurations(...scopes, config);
+  const rawConfig = mergeConfigurations(...overrides, config);
   const newConfig = createConfigFromRawConfig(config.configFileFolderUri, rawConfig, config.configurationFiles);
   newConfig.inputFileUris = config.inputFileUris;
   return newConfig;

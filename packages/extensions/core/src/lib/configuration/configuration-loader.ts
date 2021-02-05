@@ -335,7 +335,7 @@ export class ConfigurationLoader {
 
               // trim off the '@org' and 'autorest.' from the name.
               const shortname = additionalExtension.name.split("/").last.replace(/^autorest\./gi, "");
-              const view = [...(await createView()).GetNestedConfiguration(shortname)];
+              const view = [...(await createView()).getNestedConfiguration(shortname)];
               const enableDebugger = view.length > 0 ? <boolean>view[0].GetEntry("debugger") : false;
 
               // Add a hint here to make legacy users to be aware that the default version has been bumped to 3.0+.

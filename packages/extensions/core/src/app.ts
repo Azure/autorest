@@ -531,7 +531,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
 
   // ask for the view without
   const config = await api.RegenerateView();
-  for (const batchContext of config.GetNestedConfiguration("resource-schema-batch")) {
+  for (const batchContext of config.getNestedConfiguration("resource-schema-batch")) {
     // really, there should be only one
     for (const eachFile of batchContext.config["input-file"] ?? []) {
       const path = ResolveUri(config.configFileFolderUri, eachFile);

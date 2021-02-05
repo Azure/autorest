@@ -24,7 +24,7 @@ import { IEvent } from "../events";
 import {
   AutorestConfiguration,
   createAutorestConfiguration,
-  getNestedAutorestConfiguration,
+  extendAutorestConfiguration,
 } from "./autorest-configuration";
 
 const safeEval = createSandbox();
@@ -243,26 +243,29 @@ export class AutorestContext {
     return result;
   }
 
-  public *GetNestedConfiguration(pluginName: string): Iterable<AutorestContext> {
+  public *getNestedConfiguration(pluginName: string): Iterable<AutorestContext> {
     const pp = pluginName.split(".");
     if (pp.length > 1) {
-      const n = this.GetNestedConfiguration(pp[0]);
+      const n = this.getNestedConfiguration(pp[0]);
       for (const s of n) {
-        yield* s.GetNestedConfiguration(pp.slice(1).join("."));
+        yield* s.getNestedConfiguration(pp.slice(1).join("."));
       }
       return;
     }
 
     for (const section of valuesOf<any>(this.config.raw[pluginName])) {
       if (section) {
-        yield this.GetNestedConfigurationImmediate(section === true ? {} : section);
+        yield this.extendWith(section === true ? {} : section);
       }
     }
   }
 
-  // TOOD-TIM: change type to any=>AutorestRawConfiguration
-  public GetNestedConfigurationImmediate(...scopes: Array<any>): AutorestContext {
-    const nestedConfig = getNestedAutorestConfiguration(this.config, scopes);
+  /**
+   * Returns a new Autorest context with the configuration extended with the provided configurations.
+   * @param overrides List of configs to override
+   */
+  public extendWith(...overrides: AutorestRawConfiguration[]): AutorestContext {
+    const nestedConfig = extendAutorestConfiguration(this.config, overrides);
     return new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter, this.configFileFolderUri);
   }
 
