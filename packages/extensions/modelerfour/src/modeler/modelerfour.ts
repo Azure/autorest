@@ -287,7 +287,7 @@ export class ModelerFour {
     if (i.instance) {
       return action(i.name, i.instance);
     }
-    throw "Unresolved item.";
+    throw new Error(`Unresolved item '${item}'`);
   }
 
   resolveArray<T>(source?: Array<Refable<T>>) {
