@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "autorest",
+      "comment": "REthing config",
+      "type": "patch"
+    }
+  ],
+  "packageName": "autorest",
+  "email": "tiguerin@microsoft.com"
+}

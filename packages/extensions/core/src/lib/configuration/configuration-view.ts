@@ -22,84 +22,50 @@ import { arrayOf, valuesOf } from "./utils";
 import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
 import { IEvent } from "../events";
-import { AutorestConfiguration } from "./autorest-configuration";
+import {
+  AutorestConfiguration,
+  createAutorestConfiguration,
+  getNestedAutorestConfiguration,
+} from "./autorest-configuration";
 
 const safeEval = createSandbox();
 
+export const createAutorestContext = async (
+  configurationFiles: { [key: string]: any },
+  fileSystem: IFileSystem,
+  messageEmitter: MessageEmitter,
+  configFileFolderUri: string,
+  ...configs: AutoRestRawConfiguration[]
+): Promise<AutorestContext> => {
+  const config = await createAutorestConfiguration(configurationFiles, configs);
+  return new AutorestContext(config, fileSystem, messageEmitter, configFileFolderUri);
+};
+
 export class AutorestContext {
-  // TODO-TIM: Remove !
-  public config!: AutorestConfiguration;
-  private rawConfig: AutoRestRawConfiguration;
+  public config: AutorestConfiguration;
 
   public fileSystem: CachingFileSystem;
 
   private suppressor: Suppressor;
 
   public constructor(
-    public configurationFiles: { [key: string]: any },
+    config: AutorestConfiguration,
     fileSystem: IFileSystem,
     public messageEmitter: MessageEmitter,
     public configFileFolderUri: string,
-    ...configs: Array<AutoRestRawConfiguration> // decreasing priority
   ) {
+    this.config = config;
     // wrap the filesystem with the caching filesystem
     this.fileSystem = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
 
-    // TODO: fix configuration loading, note that there was no point in passing that DataStore used
-    // for loading in here as all connection to the sources is lost when passing `Array<AutoRestConfigurationImpl>` instead of `DataHandleRead`s...
-    // theoretically the `ValuesOf` approach and such won't support blaming (who to blame if $.directives[3] sucks? which code block was it from)
-    // long term, we simply gotta write a `Merge` method that adheres to the rules we need in here.
-    this.rawConfig = <any>{
-      "directive": [],
-      "input-file": [],
-      "exclude-file": [],
-      "profile": [],
-      "output-artifact": [],
-      "require": [],
-      "try-require": [],
-      "use": [],
-      "pass-thru": [],
-    };
-
-    this.rawConfig = mergeConfigurations(this.rawConfig, ...configs);
-
-    // default values that are the least priority.
-    // TODO: why is this here and not in default-configuration?
-    this.rawConfig = mergeConfiguration(this.rawConfig, <any>{
-      "base-folder": ".",
-      "output-folder": "generated",
-      "debug": false,
-      "verbose": false,
-      "disable-validation": false,
-    });
-
     this.suppressor = new Suppressor(this);
-
-    // treat this as a configuration property too.
-    (<any>this.rawConfig).configurationFiles = configurationFiles;
-  }
-
-  async init() {
-    // after the view is created, we want to be able to do any last-minute
-    // initialization (like, make sure intput-file uris are actually resolved)
-    const inputFiles = await Promise.all(
-      arrayOf<string>(this.config["input-file"]).map((each) => this.ResolveAsPath(each)),
-    );
-    const filesToExclude = await Promise.all(
-      arrayOf<string>(this.config["exclude-file"]).map((each) => this.ResolveAsPath(each)),
-    );
-
-    const inputFileUris = inputFiles.filter((x) => !filesToExclude.includes(x));
-    this.config = { ...this.rawConfig, inputFileUris };
-
-    return this;
   }
 
   public updateConfigurationFile(filename: string, content: string) {
     // only name itself is allowed here, no path
     filename = basename(filename);
 
-    const keys = Object.getOwnPropertyNames(this.configurationFiles);
+    const keys = Object.getOwnPropertyNames(this.config.configurationFiles);
 
     if (keys && keys.length > 0) {
       const path = dirname(keys[0]);
@@ -118,14 +84,6 @@ export class AutorestContext {
       // eslint-disable-next-line no-console
       console.log(`${each} : ${(<any>this.config)[each]}`);
     }
-  }
-
-  /* @internal */ public get Indexer(): AutorestContext {
-    return new Proxy<AutorestContext>(this, {
-      get: (target, property) => {
-        return property in target.config ? (<any>target.config)[property] : this[<number | string>property];
-      },
-    });
   }
 
   /* @internal */ public get DataStore(): DataStore {
@@ -183,7 +141,7 @@ export class AutorestContext {
   // public methods
 
   public get UseExtensions(): Array<{ name: string; source: string; fullyQualified: string }> {
-    const useExtensions = this.Indexer["use-extension"] || {};
+    const useExtensions = this.config["use-extension"] || {};
     return Object.keys(useExtensions).map((name) => {
       const source = useExtensions[name].startsWith("file://")
         ? FileUriToPath(useExtensions[name])
@@ -299,10 +257,10 @@ export class AutorestContext {
   }
 
   public get HeaderText(): string {
-    const h = this.rawConfig["header-definitions"];
+    const h = this.config["header-definitions"];
     const version = (<any>global).autorestVersion;
 
-    switch (this.rawConfig["license-header"]?.toLowerCase()) {
+    switch (this.config["license-header"]?.toLowerCase()) {
       case "microsoft_mit":
         return `${h.microsoft}\n${h.mit}\n${h.default.replace("{core}", version)}\n${h.warning}`;
 
@@ -332,7 +290,7 @@ export class AutorestContext {
         return `${h.default.replace("{core}", version)}\n${h.warning}`;
 
       default:
-        return `${this.rawConfig["license-header"]}`;
+        return `${this.config["license-header"]}`;
     }
   }
 
@@ -402,17 +360,10 @@ export class AutorestContext {
     }
   }
 
-  public GetNestedConfigurationImmediate(...scope: Array<any>): AutorestContext {
-    const c = new AutorestContext(
-      this.configurationFiles,
-      this.fileSystem,
-      this.messageEmitter,
-      this.configFileFolderUri,
-      ...scope,
-      this.config,
-    );
-    c.config.inputFileUris = this.config.inputFileUris;
-    return c.Indexer;
+  public GetNestedConfigurationImmediate(...scopes: Array<any>): AutorestContext {
+    const nestedConfig = getNestedAutorestConfiguration(this.config, scopes);
+    const c = new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter, this.configFileFolderUri);
+    return c;
   }
 
   // message pipeline (source map resolution, filter, ...)

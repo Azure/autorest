@@ -16,7 +16,7 @@ import { AutoRestExtension } from "../pipeline/plugin-endpoint";
 import { AppRoot } from "../constants";
 import { AutoRestRawConfiguration } from "./auto-rest-raw-configuration";
 import { arrayOf } from "./utils";
-import { AutorestContext } from "./configuration-view";
+import { AutorestContext, createAutorestContext } from "./configuration-view";
 import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
 import { detectConfigurationFile } from "./configuration-file-resolver";
@@ -216,13 +216,13 @@ export class ConfigurationLoader {
     const secondPass: Array<any> = [];
 
     const createView = (segments: Array<any> = configSegments) => {
-      return new AutorestContext(
+      return createAutorestContext(
         configurationFiles,
         this.fileSystem,
         messageEmitter,
         configFileFolderUri,
         ...segments,
-      ).init();
+      );
     };
     const addSegments = async (configs: Array<any>, keepInSecondPass = true): Promise<Array<any>> => {
       const segs = await this.desugarRawConfigs(configs);
@@ -481,12 +481,12 @@ export class ConfigurationLoader {
       await includeFn(this.fileSystem);
       await resolveExtensions();
 
-      return (await createView([...configs, ...blocks, ...secondPass])).Indexer;
+      return await createView([...configs, ...blocks, ...secondPass]);
     }
 
     await resolveExtensions();
 
     // return the final view
-    return (await createView()).Indexer;
+    return await createView();
   }
 }
