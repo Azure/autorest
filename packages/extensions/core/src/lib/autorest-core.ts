@@ -8,7 +8,7 @@ import { EventEmitter, IEvent } from "./events";
 import { Exception } from "./exception";
 import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import { runPipeline } from "./pipeline/pipeline";
-export { AutorestContext as ConfigurationView } from "./configuration";
+export { AutorestContext } from "./configuration";
 import { homedir } from "os";
 import { Artifact } from "./artifact";
 import * as Constants from "./constants";

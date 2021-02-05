@@ -19,7 +19,7 @@ import {
 } from "@azure-tools/datastore";
 import { From } from "linq-es2015";
 import { pushAll } from "../../array";
-import { ConfigurationView } from "../../autorest-core";
+import { AutorestContext } from "../../autorest-core";
 import { IdentitySourceMapping, MergeYamls } from "../../source-map/merging";
 import { PipelinePlugin } from "../common";
 
@@ -47,7 +47,7 @@ function getPropertyValues<T, U>(obj: ObjectWithPath<T>): Array<ObjectWithPath<U
 }
 
 async function composeSwaggers(
-  config: ConfigurationView,
+  config: AutorestContext,
   overrideInfoTitle: any,
   overrideInfoDescription: any,
   inputSwaggers: Array<DataHandle>,

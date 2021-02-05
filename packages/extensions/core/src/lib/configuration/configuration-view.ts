@@ -95,11 +95,7 @@ export class AutorestContext {
     return this;
   }
 
-  public get Keys(): Array<string> {
-    return Object.getOwnPropertyNames(this.config);
-  }
-
-  /* @internal */ public updateConfigurationFile(filename: string, content: string) {
+  public updateConfigurationFile(filename: string, content: string) {
     // only name itself is allowed here, no path
     filename = basename(filename);
 

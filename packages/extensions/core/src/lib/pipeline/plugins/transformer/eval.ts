@@ -1,5 +1,5 @@
 import { createSandbox, JsonPath } from "@azure-tools/datastore";
-import { ConfigurationView } from "../../../autorest-core";
+import { AutorestContext } from "../../../autorest-core";
 import { Channel } from "../../../message";
 
 const safeEval = createSandbox();
@@ -8,7 +8,7 @@ export interface TransformOptions {
   /**
    * Current configuration.
    */
-  config: ConfigurationView;
+  config: AutorestContext;
 
   /**
    * Value to transform.
@@ -86,7 +86,7 @@ interface Lib {
   debug: (message: string) => void;
   verbose: (message: string) => void;
   log: (message: string) => void;
-  config: ConfigurationView;
+  config: AutorestContext;
 }
 
 /**

@@ -5,14 +5,14 @@
 
 import { JsonPath, matches } from "@azure-tools/datastore";
 import { From } from "linq-es2015";
-import { ConfigurationView } from "../autorest-core";
+import { AutorestContext } from "../autorest-core";
 import { ResolvedDirective } from "../configuration";
 import { Message } from "../message";
 
 export class Suppressor {
   private suppressions: Array<ResolvedDirective>;
 
-  public constructor(private config: ConfigurationView) {
+  public constructor(private config: AutorestContext) {
     this.suppressions = config.resolveDirectives((x) => x.suppress.length > 0);
   }
 
