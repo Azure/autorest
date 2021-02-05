@@ -16,7 +16,7 @@ import { AutoRestExtension } from "../pipeline/plugin-endpoint";
 import { AppRoot } from "../constants";
 import { AutorestRawConfiguration } from "./autorest-raw-configuration";
 import { arrayOf } from "./utils";
-import { AutorestContext, createAutorestContext } from "./configuration-view";
+import { AutorestContext, createAutorestContext } from "./autorest-context";
 import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
 import { detectConfigurationFile } from "./configuration-file-resolver";

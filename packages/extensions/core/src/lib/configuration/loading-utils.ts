@@ -1,5 +1,5 @@
 import { IFileSystem } from "@azure-tools/datastore";
-import { AutorestContext } from "./configuration-view";
+import { AutorestContext } from "./autorest-context";
 import { valuesOf } from "./utils";
 
 export async function* getIncludedConfigurationFiles(
