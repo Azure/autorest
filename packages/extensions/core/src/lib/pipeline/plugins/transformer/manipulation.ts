@@ -6,11 +6,11 @@
 import { DataHandle, DataSink, nodes } from "@azure-tools/datastore";
 import { YieldCPU } from "@azure-tools/tasks";
 import { AutorestContext } from "../../../autorest-core";
-import { ResolvedDirective } from "../../../configuration";
 import { Channel, Message, SourceLocation } from "../../../message";
 import { manipulateObject } from "./object-manipulator";
 import { values } from "@azure-tools/linq";
 import { evalDirectiveTest, evalDirectiveTransform } from "./eval";
+import { ResolvedDirective } from "@autorest/configuration";
 
 export class Manipulator {
   private transformations: Array<ResolvedDirective>;

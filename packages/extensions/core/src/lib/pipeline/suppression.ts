@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { ResolvedDirective } from "@autorest/configuration";
 import { JsonPath, matches } from "@azure-tools/datastore";
 import { From } from "linq-es2015";
 import { AutorestContext } from "../autorest-core";
-import { ResolvedDirective } from "../configuration";
 import { Message } from "../message";
 
 export class Suppressor {

@@ -7,7 +7,7 @@ import { isAbsolute } from "path";
 
 import { ResolveUri, GetFilenameWithoutExtension } from "@azure-tools/uri";
 import { DataSource } from "@azure-tools/datastore";
-import { AutorestRawConfiguration } from "./lib/configuration";
+import { AutorestRawConfiguration } from "@autorest/configuration";
 
 const regexLegacyArg = /^-[^-]/;
 

@@ -56,11 +56,12 @@ import { Help } from "./help";
 import { CreateConfiguration, isLegacy } from "./legacyCli";
 import { Artifact } from "./lib/artifact";
 import { AutoRest, IsOpenApiDocument, Shutdown } from "./lib/autorest-core";
-import { AutorestRawConfiguration, mergeConfigurations } from "./lib/configuration";
+import { mergeConfigurations } from "./lib/configuration";
 import { Exception } from "./lib/exception";
 import { Channel, Message } from "./lib/message";
 import { ShallowCopy } from "./lib/source-map/merging";
 import { homedir } from "os";
+import { AutorestRawConfiguration } from "@autorest/configuration";
 
 let verbose = false;
 let debug = false;
