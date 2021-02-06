@@ -1,5 +1,4 @@
-import { Initializer } from "@azure-tools/codegen";
-import { arrayOf } from "./utils";
+import { arrayOf } from "../../../extensions/core/src/lib/configuration/utils";
 
 export interface Directive {
   "from"?: Array<string> | string;
@@ -14,7 +13,7 @@ export interface Directive {
   "test"?: Array<string> | string;
 }
 
-export class ResolvedDirective extends Initializer {
+export class ResolvedDirective {
   from: Array<string>;
   where: Array<string>;
   reason?: string;
@@ -23,10 +22,8 @@ export class ResolvedDirective extends Initializer {
   test: Array<string>;
 
   constructor(directive: Directive) {
-    super();
-
     // copy untyped content over
-    this.apply(directive);
+    Object.assign(this, directive);
 
     // normalize typed content
     this.from = arrayOf(directive["from"]);

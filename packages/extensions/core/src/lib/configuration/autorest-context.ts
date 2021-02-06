@@ -15,17 +15,13 @@ import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
 import { Artifact } from "../artifact";
 import { Channel, Message, Range, SourceLocation } from "../message";
 import { Suppressor } from "../pipeline/suppression";
-import { Directive, ResolvedDirective } from "./directive";
-import { AutorestRawConfiguration } from "./autorest-raw-configuration";
+import { Directive, ResolvedDirective } from "../../../../../libs/configuration/src/directive";
 import { valuesOf } from "./utils";
 import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
 import { IEvent } from "../events";
-import {
-  AutorestConfiguration,
-  createAutorestConfiguration,
-  extendAutorestConfiguration,
-} from "./autorest-configuration";
+import { createAutorestConfiguration, extendAutorestConfiguration } from "./autorest-configuration";
+import { AutorestConfiguration, AutorestRawConfiguration } from "@autorest/configuration";
 
 const safeEval = createSandbox();
 

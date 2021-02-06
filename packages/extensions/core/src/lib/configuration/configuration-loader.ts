@@ -14,7 +14,7 @@ import { Channel, SourceLocation } from "../message";
 import { parseCodeBlocks } from "../parsing/literate-yaml";
 import { AutoRestExtension } from "../pipeline/plugin-endpoint";
 import { AppRoot } from "../constants";
-import { AutorestRawConfiguration } from "./autorest-raw-configuration";
+import { AutorestRawConfiguration } from "@autorest/configuration";
 import { arrayOf } from "./utils";
 import { AutorestContext, createAutorestContext } from "./autorest-context";
 import { CachingFileSystem } from "./caching-file-system";

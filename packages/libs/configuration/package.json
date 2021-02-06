@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Autorest configuration",
   "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -p ./tsconfig.build.json",
     "watch": "tsc -p ./tsconfig.build.json --watch",
