@@ -51,6 +51,13 @@ export class AutorestContext {
     this.suppressor = new Suppressor(this);
   }
 
+  /**
+   * @deprecated Use .config.raw instead. Keeping this for backward compatibility in the `autorest` module.
+   */
+  public get rawConfig() {
+    return this.config.raw;
+  }
+
   public updateConfigurationFile(filename: string, content: string) {
     // only name itself is allowed here, no path
     filename = basename(filename);

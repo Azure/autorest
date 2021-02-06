@@ -11,7 +11,7 @@ describe("OpenAPI3Loading", () => {
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
-    const inputFilesUris = [];
+    const inputFilesUris: string[] = [];
 
     const OpenAPIFilesLoaded = await LoadLiterateOpenAPIs(
       config,
