@@ -1,25 +1,25 @@
 import { arrayOf } from "./utils";
 
 export interface Directive {
-  "from"?: Array<string> | string;
-  "where"?: Array<string> | string;
+  "from"?: string[] | string;
+  "where"?: string[] | string;
   "reason"?: string;
 
   // one of:
-  "suppress"?: Array<string> | string;
-  "set"?: Array<string> | string;
-  "transform"?: Array<string> | string;
-  "text-transform"?: Array<string> | string;
-  "test"?: Array<string> | string;
+  "suppress"?: string[] | string;
+  "set"?: string[] | string;
+  "transform"?: string[] | string;
+  "text-transform"?: string[] | string;
+  "test"?: string[] | string;
 }
 
 export class ResolvedDirective {
-  from: Array<string>;
-  where: Array<string>;
+  from: string[];
+  where: string[];
   reason?: string;
-  suppress: Array<string>;
-  transform: Array<string>;
-  test: Array<string>;
+  suppress: string[];
+  transform: string[];
+  test: string[];
 
   constructor(directive: Directive) {
     // copy untyped content over
