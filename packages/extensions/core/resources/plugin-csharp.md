@@ -6,7 +6,7 @@ The V2 version of the C# Generator.
 version: ~3.0.6298
 
 use-extension:
-  "@autorest/csharp": "^3.0.0"
+  "@autorest/csharp": "latest"
 try-require: ./readme.csharp.md
 ```
 
