@@ -14,6 +14,7 @@ const generate = async (additionalConfig: any): Promise<{ [uri: string]: string 
   autoRest.AddConfiguration({
     "input-file": join(AppRoot, "test", "resources", "tiny.yaml"),
     "csharp": "true",
+    "v2": "true",
     "output-artifact": ["swagger-document.yaml", "openapi-document.yaml"],
   });
   // for testing local changes:
