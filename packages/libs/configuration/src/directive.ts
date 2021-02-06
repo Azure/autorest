@@ -1,4 +1,4 @@
-import { arrayOf } from "../../../extensions/core/src/lib/configuration/utils";
+import { arrayOf } from "./utils";
 
 export interface Directive {
   "from"?: Array<string> | string;

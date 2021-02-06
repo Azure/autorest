@@ -1,6 +1,6 @@
+import { valuesOf } from "@autorest/configuration";
 import { IFileSystem } from "@azure-tools/datastore";
 import { AutorestContext } from "./autorest-context";
-import { valuesOf } from "./utils";
 
 export async function* getIncludedConfigurationFiles(
   configView: () => Promise<AutorestContext>,

@@ -1,9 +1,8 @@
-import { AutorestConfiguration, AutorestRawConfiguration } from "@autorest/configuration";
+import { AutorestConfiguration, AutorestRawConfiguration, arrayOf, valuesOf } from "@autorest/configuration";
 import { IFileSystem } from "@azure-tools/datastore";
 import { CreateFileOrFolderUri, EnsureIsFolderUri, IsUri, ResolveUri } from "@azure-tools/uri";
 import { cwd } from "process";
 import { mergeConfigurations } from "./configuration-merging";
-import { arrayOf, valuesOf } from "./utils";
 
 export const createAutorestConfiguration = async (
   configFileFolderUri: string,
