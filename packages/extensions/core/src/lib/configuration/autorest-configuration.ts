@@ -1,4 +1,4 @@
-import { AutorestConfiguration, AutorestRawConfiguration, arrayOf, valuesOf } from "@autorest/configuration";
+import { AutorestConfiguration, AutorestRawConfiguration, arrayOf } from "@autorest/configuration";
 import { IFileSystem } from "@azure-tools/datastore";
 import { CreateFileOrFolderUri, EnsureIsFolderUri, IsUri, ResolveUri } from "@azure-tools/uri";
 import { cwd } from "process";
@@ -72,7 +72,7 @@ const createConfigFromRawConfig = (
 
 const getCacheExclude = (config: AutorestRawConfiguration) => {
   const cache = config["cache"];
-  return cache && cache.exclude ? [...valuesOf<string>(cache.exclude)] : [];
+  return cache && cache.exclude ? arrayOf<string>(cache.exclude) : [];
 };
 
 export const extendAutorestConfiguration = (

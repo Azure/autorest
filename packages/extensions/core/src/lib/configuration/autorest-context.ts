@@ -20,7 +20,7 @@ import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
 import { IEvent } from "../events";
 import { createAutorestConfiguration, extendAutorestConfiguration } from "./autorest-configuration";
-import { AutorestConfiguration, AutorestRawConfiguration, valuesOf } from "@autorest/configuration";
+import { AutorestConfiguration, AutorestRawConfiguration, arrayOf } from "@autorest/configuration";
 
 const safeEval = createSandbox();
 
@@ -135,8 +135,7 @@ export class AutorestContext {
 
   public resolveDirectives(predicate?: (each: ResolvedDirective) => boolean): ResolvedDirective[] {
     // optionally filter by predicate.
-    const plainDirectives = values(valuesOf<Directive>(this.config["directive"]));
-    // predicate ? values(valuesOf<Directive>(this.config['directive'])).where(predicate) : values(valuesOf<Directive>(this.config['directive']));
+    const plainDirectives = values(arrayOf<Directive>(this.config["directive"]));
 
     const declarations = this.config["declare-directive"] || {};
     const expandDirective = (dir: Directive): Iterable<Directive> => {
@@ -215,7 +214,7 @@ export class AutorestContext {
   }
 
   public IsOutputArtifactRequested(artifact: string): boolean {
-    return From(valuesOf<string>(this.config["output-artifact"])).Contains(artifact);
+    return From(arrayOf<string>(this.config["output-artifact"])).Contains(artifact);
   }
 
   /**
@@ -248,7 +247,7 @@ export class AutorestContext {
       return;
     }
 
-    for (const section of valuesOf<any>(this.config.raw[pluginName])) {
+    for (const section of arrayOf<any>(this.config.raw[pluginName])) {
       if (section) {
         yield this.extendWith(section === true ? {} : section);
       }

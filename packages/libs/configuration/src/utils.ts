@@ -2,51 +2,24 @@ export function isIterable(target: any): target is Iterable<any> {
   return !!target && typeof target[Symbol.iterator] === "function";
 }
 
-export function* valuesOf<T>(value: any): Iterable<T> {
-  switch (typeof value) {
-    case "string":
-      yield <T>(<any>value);
-      break;
-
-    case "object":
-      if (value) {
-        if (isIterable(value)) {
-          yield* value;
-        } else {
-          yield value;
-        }
-        return;
-      }
-      break;
-
-    default:
-      if (value) {
-        yield value;
-      }
-  }
-  /* rewrite
+/**
+ * Takes a configuration value that can be either an array, a single value or empty and returns an array with all values.
+ * @param value Value to wrap in an array.
+ * @returns Array of all the values.
+ */
+export function arrayOf<T>(value: T | T[] | undefined): T[] {
   if (value === undefined) {
     return [];
   }
-  if (value instanceof Array) {
-    return value;
-  }
-  return [value];
-  */
-}
 
-export function arrayOf<T>(value: any): Array<T> {
-  if (value === undefined) {
-    return [];
-  }
   switch (typeof value) {
-    case "string":
-      return [<T>(<any>value)];
+    case "string": // Need to do this case as String is iterable.
+      return [value];
     case "object":
       if (isIterable(value)) {
         return [...value];
       }
       break;
   }
-  return [<T>value];
+  return [value];
 }

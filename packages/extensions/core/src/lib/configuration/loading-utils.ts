@@ -1,4 +1,4 @@
-import { valuesOf } from "@autorest/configuration";
+import { arrayOf } from "@autorest/configuration";
 import { IFileSystem } from "@azure-tools/datastore";
 import { AutorestContext } from "./autorest-context";
 
@@ -15,7 +15,7 @@ export async function* getIncludedConfigurationFiles(
 
     // if we make it thru the list, we're done.
     done = true;
-    for (const each of valuesOf<string>(view.config["require"])) {
+    for (const each of arrayOf<string>(view.config["require"])) {
       if (ignoreFiles.has(each)) {
         continue;
       }
@@ -35,7 +35,7 @@ export async function* getIncludedConfigurationFiles(
 
     // if we make it thru the list, we're done.
     done = true;
-    for (const each of valuesOf<string>(view.config["try-require"])) {
+    for (const each of arrayOf<string>(view.config["try-require"])) {
       if (ignoreFiles.has(each)) {
         continue;
       }
