@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "Internal: Migrate bundling system to webpack",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/core",
+  "email": "tiguerin@microsoft.com"
+}

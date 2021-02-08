@@ -54,6 +54,20 @@
       ],
       "type": "string"
     },
+    "HttpMethod": {
+      "description": "standard HTTP protocol methods",
+      "enum": [
+        "delete",
+        "get",
+        "head",
+        "options",
+        "patch",
+        "post",
+        "put",
+        "trace"
+      ],
+      "type": "string"
+    },
     "SerializationStyle": {
       "description": "The Serialization Style used for the parameter.\n\nDescribes how the parameter value will be serialized depending on the type of the parameter value.",
       "enum": [
@@ -85,20 +99,6 @@
         "label",
         "matrix",
         "simple"
-      ],
-      "type": "string"
-    },
-    "HttpMethod": {
-      "description": "standard HTTP protocol methods",
-      "enum": [
-        "delete",
-        "get",
-        "head",
-        "options",
-        "patch",
-        "post",
-        "put",
-        "trace"
       ],
       "type": "string"
     },

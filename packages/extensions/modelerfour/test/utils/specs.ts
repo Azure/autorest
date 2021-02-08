@@ -1,4 +1,5 @@
 import { clone } from "@azure-tools/linq";
+import * as oai3 from "@azure-tools/openapi";
 
 export const InitialTestSpec = Object.freeze({
   info: {
@@ -30,7 +31,7 @@ export function createTestSpec(...customizers: Array<TestSpecCustomizer>): any {
 export function addOperation(
   spec: any,
   path: string,
-  operationDict: any,
+  operationDict: oai3.PathItem | any,
   metadata: any = { apiVersions: ["1.0.0"] },
 ): void {
   operationDict = { ...operationDict, ...{ "x-ms-metadata": metadata } };

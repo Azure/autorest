@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "autorest",
+      "comment": "Fix build not generating types",
+      "type": "patch"
+    }
+  ],
+  "packageName": "autorest",
+  "email": "tiguerin@microsoft.com"
+}
