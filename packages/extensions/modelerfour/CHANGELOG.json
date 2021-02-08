@@ -2,6 +2,28 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.16.1",
+      "tag": "@autorest/modelerfour_v4.16.1",
+      "date": "Mon, 08 Feb 2021 23:06:15 GMT",
+      "comments": {
+        "none": [
+          {
+            "comment": "Internal: Update tsconfig, files get generated directly under dist/ instead of dist/src/"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Set `isInMultipart: true` for multipart parameters"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/codemodel\" from `~4.14.4` to `~4.14.5`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.16.0",
       "tag": "@autorest/modelerfour_v4.16.0",
       "date": "Thu, 04 Feb 2021 19:05:18 GMT",
