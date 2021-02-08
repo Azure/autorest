@@ -24,4 +24,11 @@ module.exports = {
       allowlist: [/^(?:(?!jsonpath|@azure-tools\/extension).)*$/],
     }),
   ],
+  optimization: {
+    ...baseWebpackConfig.optimization,
+    // Makes sure the different endpoints don't duplicate share common code.
+    splitChunks: {
+      chunks: "all",
+    },
+  },
 };
