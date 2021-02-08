@@ -33,6 +33,7 @@ dependencies:
   '@types/node': 14.14.22
   '@types/semver': 5.5.0
   '@types/source-map': 0.5.0
+  '@types/source-map-support': 0.5.3
   '@types/supertest': 2.0.10
   '@types/webpack': 4.41.26
   '@types/yargs': 15.0.13
@@ -986,6 +987,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-K5K+yml8LTo9bWJI/rECfIPrGgxdpeNbj+d53lwN4QjW1MCwlkhUms+gtdzigTeUyBr09+u8BwOIY3MXvHdcsA==
+  /@types/source-map-support/0.5.3:
+    dependencies:
+      source-map: 0.6.1
+    dev: false
+    resolution:
+      integrity: sha512-fvjMjVH8Rmokw2dWh1dkj90iX5R8FPjeZzjNH+6eFXReh0QnHFf1YBl3B0CF0RohIAA3SDRJsGeeUWKl6d7HqA==
   /@types/source-map/0.5.0:
     dev: false
     resolution:
@@ -9267,6 +9274,7 @@ packages:
   file:projects/test-public-packages.tgz_prettier@2.2.1:
     dependencies:
       '@types/jest': 26.0.20
+      '@types/source-map-support': 0.5.3
       eslint: 7.19.0
       eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
       eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
@@ -9274,13 +9282,14 @@ packages:
       jest: 26.6.3
       jest-snapshot: 26.6.2
       rimraf: 3.0.2
+      source-map-support: 0.5.19
     dev: false
     id: file:projects/test-public-packages.tgz
     name: '@rush-temp/test-public-packages'
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-KZPyMBoEIqiaI+leooI2G3nTUqjUym9XA5kZ7BMdB5xj+YZR2sDRsTLw/uuzC73JXEP048ERZ2fb6K5W9M9yFw==
+      integrity: sha512-XYavD2knZJP9kfvPx5BT4LICne9EJQ1njLwuK6LZXt3JPkfnzsJDAvteRMe547KRXRR6gaHLoAWfyGXrmDKUTA==
       tarball: file:projects/test-public-packages.tgz
     version: 0.0.0
   file:projects/test-utils.tgz_prettier@2.2.1:
@@ -9338,6 +9347,7 @@ specifiers:
   '@types/node': ~14.14.20
   '@types/semver': 5.5.0
   '@types/source-map': 0.5.0
+  '@types/source-map-support': ^0.5.3
   '@types/supertest': ^2.0.10
   '@types/webpack': ~4.41.26
   '@types/yargs': ~15.0.12

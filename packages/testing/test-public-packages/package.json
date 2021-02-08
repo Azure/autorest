@@ -32,9 +32,10 @@
   "dependencies": {
     "@autorest/core": "~3.0.6370",
     "autorest": "~3.0.6336",
-    "expect": "~26.6.2"
+    "source-map-support": "^0.5.19"
   },
   "devDependencies": {
+    "@types/source-map-support": "^0.5.3",
     "eslint-plugin-prettier": "~3.2.0",
     "eslint-plugin-unicorn": "~27.0.0",
     "eslint": "^7.17.0",
