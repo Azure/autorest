@@ -9,7 +9,7 @@ module.exports = {
   target: "node",
   devtool: "source-map",
   output: {
-    path: path.resolve(__dirname, "dist", "src"),
+    path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
     devtoolModuleFilenameTemplate: "../../[resource-path]",
   },

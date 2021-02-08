@@ -8,12 +8,12 @@
   "engines": {
     "node": ">=10.12.0"
   },
-  "main": "dist/src/main.js",
-  "typings": "dist/src/main.d.ts",
+  "main": "dist/main.js",
+  "typings": "dist/main.d.ts",
   "scripts": {
     "clean": "rimraf ./dist",
-    "start": "node --max_old_space_size=4096 ./dist/src/main.js",
-    "debug": "node --max_old_space_size=4096 --inspect-brk=localhost:9229 ./dist/src/main.js",
+    "start": "node --max_old_space_size=4096 ./dist/main.js",
+    "debug": "node --max_old_space_size=4096 --inspect-brk=localhost:9229 ./dist/main.js",
     "lint:fix": "eslint  ./src --fix --ext .ts",
     "lint": "eslint  ./src --ext .ts --max-warnings=0",
     "watch": "tsc -p ./tsconfig.build.json --watch",
