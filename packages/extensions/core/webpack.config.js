@@ -12,6 +12,7 @@ module.exports = {
   entry: {
     "app": "./src/app.ts",
     "language-service": "./src/language-service/language-service.ts",
+    "exports": "./src/exports.ts",
   },
   output: {
     ...baseWebpackConfig.output,
