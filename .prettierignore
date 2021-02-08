@@ -293,7 +293,6 @@ temp
 # Rush files
 common/temp/**
 package-deps.json
-common/config/rush/shrinkwrap.yaml
 
 # Code generation output for regression tests
 core/test/regression
@@ -305,7 +304,6 @@ core/test/regression
 # Rush files
 common/changes/
 common/scripts/
-common/config/
 CHANGELOG.*
 
 # Package manager files
@@ -320,6 +318,6 @@ dist
 # Prettier reformats code blocks inside Markdown, which affects rendered output
 *.md
 
-schema/ 
+schema/
 Samples/
 core/test/resources/
