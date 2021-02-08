@@ -6,19 +6,20 @@ dependencies:
   '@azure-tools/tasks': 3.0.253
   '@azure-tools/uri': 3.0.255
   '@microsoft.azure/autorest.testserver': 2.10.68
-  '@rush-temp/autorest': 'file:projects/autorest.tgz'
-  '@rush-temp/codegen': 'file:projects/codegen.tgz_prettier@2.2.1'
-  '@rush-temp/codemodel': 'file:projects/codemodel.tgz_prettier@2.2.1'
-  '@rush-temp/core': 'file:projects/core.tgz'
-  '@rush-temp/datastore': 'file:projects/datastore.tgz_prettier@2.2.1'
-  '@rush-temp/deduplication': 'file:projects/deduplication.tgz_prettier@2.2.1'
-  '@rush-temp/extension-base': 'file:projects/extension-base.tgz_prettier@2.2.1'
-  '@rush-temp/md-mock-api': 'file:projects/md-mock-api.tgz'
-  '@rush-temp/modelerfour': 'file:projects/modelerfour.tgz'
-  '@rush-temp/oai2-to-oai3': 'file:projects/oai2-to-oai3.tgz_prettier@2.2.1'
-  '@rush-temp/openapi': 'file:projects/openapi.tgz_prettier@2.2.1'
-  '@rush-temp/schemas': 'file:projects/schemas.tgz'
-  '@rush-temp/test-utils': 'file:projects/test-utils.tgz_prettier@2.2.1'
+  '@rush-temp/autorest': file:projects/autorest.tgz
+  '@rush-temp/codegen': file:projects/codegen.tgz_prettier@2.2.1
+  '@rush-temp/codemodel': file:projects/codemodel.tgz_prettier@2.2.1
+  '@rush-temp/core': file:projects/core.tgz
+  '@rush-temp/datastore': file:projects/datastore.tgz_prettier@2.2.1
+  '@rush-temp/deduplication': file:projects/deduplication.tgz_prettier@2.2.1
+  '@rush-temp/extension-base': file:projects/extension-base.tgz_prettier@2.2.1
+  '@rush-temp/md-mock-api': file:projects/md-mock-api.tgz
+  '@rush-temp/modelerfour': file:projects/modelerfour.tgz
+  '@rush-temp/oai2-to-oai3': file:projects/oai2-to-oai3.tgz_prettier@2.2.1
+  '@rush-temp/openapi': file:projects/openapi.tgz_prettier@2.2.1
+  '@rush-temp/schemas': file:projects/schemas.tgz
+  '@rush-temp/test-public-packages': file:projects/test-public-packages.tgz_prettier@2.2.1
+  '@rush-temp/test-utils': file:projects/test-utils.tgz_prettier@2.2.1
   '@types/body-parser': 1.19.0
   '@types/commonmark': 0.27.4
   '@types/deep-equal': 1.0.1
@@ -32,6 +33,7 @@ dependencies:
   '@types/node': 14.14.22
   '@types/semver': 5.5.0
   '@types/source-map': 0.5.0
+  '@types/source-map-support': 0.5.3
   '@types/supertest': 2.0.10
   '@types/webpack': 4.41.26
   '@types/yargs': 15.0.13
@@ -77,6 +79,7 @@ dependencies:
   vscode-languageserver: 3.5.1
   webpack: 5.18.0_webpack-cli@4.4.0
   webpack-cli: 4.4.0_webpack@5.18.0
+  webpack-node-externals: 2.5.2
   winston: 3.3.3
   yaml-ast-parser: 0.0.43
   yargs: 16.2.0
@@ -985,6 +988,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-K5K+yml8LTo9bWJI/rECfIPrGgxdpeNbj+d53lwN4QjW1MCwlkhUms+gtdzigTeUyBr09+u8BwOIY3MXvHdcsA==
+  /@types/source-map-support/0.5.3:
+    dependencies:
+      source-map: 0.6.1
+    dev: false
+    resolution:
+      integrity: sha512-fvjMjVH8Rmokw2dWh1dkj90iX5R8FPjeZzjNH+6eFXReh0QnHFf1YBl3B0CF0RohIAA3SDRJsGeeUWKl6d7HqA==
   /@types/source-map/0.5.0:
     dev: false
     resolution:
@@ -2444,7 +2453,7 @@ packages:
     resolution:
       integrity: sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
   /core-js/2.6.12:
-    deprecated: 'core-js@<3 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.'
+    deprecated: core-js@<3 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.
     dev: false
     requiresBuild: true
     resolution:
@@ -2588,7 +2597,7 @@ packages:
   /debug/4.1.1:
     dependencies:
       ms: 2.1.3
-    deprecated: 'Debug versions >=3.2.0 <3.2.7 || >=4 <4.3.1 have a low-severity ReDos regression when used in a Node.js environment. It is recommended you upgrade to 3.2.7 or 4.3.1. (https://github.com/visionmedia/debug/issues/797)'
+    deprecated: Debug versions >=3.2.0 <3.2.7 || >=4 <4.3.1 have a low-severity ReDos regression when used in a Node.js environment. It is recommended you upgrade to 3.2.7 or 4.3.1. (https://github.com/visionmedia/debug/issues/797)
     dev: false
     resolution:
       integrity: sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
@@ -6959,7 +6968,7 @@ packages:
       request-promise-core: 1.1.4_request@2.88.2
       stealthy-require: 1.1.1
       tough-cookie: 2.5.0
-    deprecated: 'request-promise-native has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/3142'
+    deprecated: request-promise-native has been deprecated because it extends the now deprecated request package, see https://github.com/request/request/issues/3142
     dev: false
     engines:
       node: '>=0.12.0'
@@ -6989,7 +6998,7 @@ packages:
       tough-cookie: 2.5.0
       tunnel-agent: 0.6.0
       uuid: 3.4.0
-    deprecated: 'request has been deprecated, see https://github.com/request/request/issues/3142'
+    deprecated: request has been deprecated, see https://github.com/request/request/issues/3142
     dev: false
     engines:
       node: '>= 6'
@@ -7036,7 +7045,7 @@ packages:
     resolution:
       integrity: sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==
   /resolve-url/0.2.1:
-    deprecated: 'https://github.com/lydell/resolve-url#deprecated'
+    deprecated: https://github.com/lydell/resolve-url#deprecated
     dev: false
     resolution:
       integrity: sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
@@ -8275,7 +8284,7 @@ packages:
     resolution:
       integrity: sha512-48z9VGWwdCV5KfizHsE05DWS5fhK6gFlx5MjO7xu0Krc5FGPWzjlXEVV0nPMrdVuP7xmMHiPZ2HoYZwKOFTZOg==
   /urix/0.1.0:
-    deprecated: 'Please see https://github.com/lydell/urix#deprecated'
+    deprecated: Please see https://github.com/lydell/urix#deprecated
     dev: false
     resolution:
       integrity: sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
@@ -8493,6 +8502,10 @@ packages:
       node: '>=10.0.0'
     resolution:
       integrity: sha512-6/JUQv0ELQ1igjGDzHkXbVDRxkfA57Zw7PfiupdLFJYrgFqY5ZP8xxbpp2lU3EPwYx89ht5Z/aDkD40hFCm5AA==
+  /webpack-node-externals/2.5.2:
+    dev: false
+    resolution:
+      integrity: sha512-aHdl/y2N7PW2Sx7K+r3AxpJO+aDMcYzMQd60Qxefq3+EwhewSbTBqNumOsCE1JsCUNoyfGj5465N0sSf6hc/5w==
   /webpack-sources/2.2.0:
     dependencies:
       source-list-map: 2.0.1
@@ -8916,7 +8929,7 @@ packages:
       commander: 2.20.3
     resolution:
       integrity: sha512-58TxNEurHQEEgbrNbQnoUHXgh6tiplSvKb7D3o4K6KzICQk9vFyl8B0zycC/p3gW92qBZCmq5NJIhJODKrV7JQ==
-  'file:projects/autorest.tgz':
+  file:projects/autorest.tgz:
     dependencies:
       '@azure-tools/async-io': 3.0.253
       '@azure-tools/extension': 3.0.263
@@ -8946,10 +8959,10 @@ packages:
     dev: false
     name: '@rush-temp/autorest'
     resolution:
-      integrity: sha512-g02ZVBKrDOUpZh00wQWxlbRe/LLxgjvaYM8R1v59lzGPqpFfZri5iTNUJvlrYOgpT8oQcvSffStp5Pt18UVQaA==
-      tarball: 'file:projects/autorest.tgz'
+      integrity: sha512-lgPcCBuN0EtTshrGvi+QfDtOnIjjIKbjRmXMpa2i+o281i1/Pyp0I77A15Fl1fNqEr1sOj1c2X9Uj9bvy21fAg==
+      tarball: file:projects/autorest.tgz
     version: 0.0.0
-  'file:projects/codegen.tgz_prettier@2.2.1':
+  file:projects/codegen.tgz_prettier@2.2.1:
     dependencies:
       '@azure-tools/async-io': 3.0.253
       '@azure-tools/linq': 3.1.262
@@ -8970,15 +8983,15 @@ packages:
       ts-jest: 26.5.0_jest@26.6.3+typescript@4.1.3
       typescript: 4.1.3
     dev: false
-    id: 'file:projects/codegen.tgz'
+    id: file:projects/codegen.tgz
     name: '@rush-temp/codegen'
     peerDependencies:
       prettier: '*'
     resolution:
       integrity: sha512-nGGKgwPTxtb5KuoDovVsY2c0+EkrUTEq+cwzgSAl0p5GLX90MmKnUqNphM1Vzh/4hahoeExI3Ime/IqqK8J+YA==
-      tarball: 'file:projects/codegen.tgz'
+      tarball: file:projects/codegen.tgz
     version: 0.0.0
-  'file:projects/codemodel.tgz_prettier@2.2.1':
+  file:projects/codemodel.tgz_prettier@2.2.1:
     dependencies:
       '@azure-tools/linq': 3.1.262
       '@types/js-yaml': 4.0.0
@@ -8994,15 +9007,15 @@ packages:
       typescript: 4.1.3
       typescript-json-schema: 0.40.0
     dev: false
-    id: 'file:projects/codemodel.tgz'
+    id: file:projects/codemodel.tgz
     name: '@rush-temp/codemodel'
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-HOJC/hUUgnw/tj2En5YujqVXjbvUXF2Ju/v4V5YOTEXEI2hWJu1uIeebBGo1CEiJ6odDFLZdSejw/xXNeOwaxw==
-      tarball: 'file:projects/codemodel.tgz'
+      integrity: sha512-vhewttjjPT80EkaPZ1kN3kUvS/ncPbggJgmVgO03gN8lgkPxdtlDwNaXePeR48jecLekjZJlKivhAG+nUdDG7A==
+      tarball: file:projects/codemodel.tgz
     version: 0.0.0
-  'file:projects/core.tgz':
+  file:projects/core.tgz:
     dependencies:
       '@azure-tools/async-io': 3.0.253
       '@azure-tools/datastore': 4.1.270
@@ -9017,6 +9030,7 @@ packages:
       '@types/jsonpath': 0.2.0
       '@types/node': 14.14.22
       '@types/source-map': 0.5.0
+      '@types/webpack': 4.41.26
       '@typescript-eslint/eslint-plugin': 4.14.2_e5f964fa93e839b7a7927397f6cb9cb1
       '@typescript-eslint/parser': 4.14.2_eslint@7.19.0+typescript@4.1.3
       commonmark: 0.27.0
@@ -9036,19 +9050,23 @@ packages:
       source-map-support: 0.5.19
       static-link: 0.3.0
       ts-jest: 26.5.0_jest@26.6.3+typescript@4.1.3
+      ts-loader: 8.0.14_typescript@4.1.3+webpack@5.18.0
       typescript: 4.1.3
       untildify: 3.0.3
       vscode-jsonrpc: 3.6.2
       vscode-languageserver: 3.5.1
+      webpack: 5.18.0_webpack-cli@4.4.0
+      webpack-cli: 4.4.0_webpack@5.18.0
+      webpack-node-externals: 2.5.2
       yaml-ast-parser: 0.0.43
       z-schema: 5.0.0
     dev: false
     name: '@rush-temp/core'
     resolution:
-      integrity: sha512-p1hY6OQHdaZVnf4j8gL8Ntefi3H/GUWTsWix+WOk2q21VjTtmuOX+CUJq4rCgXm2k62+wwKXb6+qXlhFXQF2Nw==
-      tarball: 'file:projects/core.tgz'
+      integrity: sha512-T8SYDsPv5DEnDMPQ7ZIXC5qtjqFUyu52CCaI80IoQkAg8G8KgiT7ZV36ZSz9YN3NfMjeKZ97WF9EgD2kksH/1Q==
+      tarball: file:projects/core.tgz
     version: 0.0.0
-  'file:projects/datastore.tgz_prettier@2.2.1':
+  file:projects/datastore.tgz_prettier@2.2.1:
     dependencies:
       '@azure-tools/linq': 3.1.262
       '@azure-tools/tasks': 3.0.253
@@ -9071,15 +9089,15 @@ packages:
       typescript: 4.1.3
       yaml-ast-parser: 0.0.43
     dev: false
-    id: 'file:projects/datastore.tgz'
+    id: file:projects/datastore.tgz
     name: '@rush-temp/datastore'
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-jzA8ZsjK7hWuZhRrpg6RZIDQrHUG23g25QggsBZSu65e6F35kvvNdUiL4AILS/kARh7eRorkZd95qcHradNMtA==
-      tarball: 'file:projects/datastore.tgz'
+      integrity: sha512-8APPP4zsoAyOolDSeJ6htpG/tSM+4zAwP5HwIp+ci6OqgaJ6supTRlqcVRmoiRmJUI/0ABAgKKunngz8TqOH4g==
+      tarball: file:projects/datastore.tgz
     version: 0.0.0
-  'file:projects/deduplication.tgz_prettier@2.2.1':
+  file:projects/deduplication.tgz_prettier@2.2.1:
     dependencies:
       '@azure-tools/datastore': 4.1.270
       '@azure-tools/linq': 3.1.262
@@ -9097,15 +9115,15 @@ packages:
       rimraf: 3.0.2
       typescript: 4.1.3
     dev: false
-    id: 'file:projects/deduplication.tgz'
+    id: file:projects/deduplication.tgz
     name: '@rush-temp/deduplication'
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-gmyNM6kDVg0YsOVZOf9kzKII7DYLTZVGlvodaimmfTUIlroFoLL0PwW1FLBkhs4rzo1s6wA5kddKi2id2Mv9EA==
-      tarball: 'file:projects/deduplication.tgz'
+      integrity: sha512-DCfw+l261Nj4L9+1HEymQ8ELFqZxdq+13wJ0c0X+Nb/bw0dDLprNqPRBT8zYdXjHVA/l/rVGN5yMLZnljDGoJg==
+      tarball: file:projects/deduplication.tgz
     version: 0.0.0
-  'file:projects/extension-base.tgz_prettier@2.2.1':
+  file:projects/extension-base.tgz_prettier@2.2.1:
     dependencies:
       '@types/js-yaml': 4.0.0
       '@types/node': 14.14.22
@@ -9119,15 +9137,15 @@ packages:
       typescript: 4.1.3
       vscode-jsonrpc: 3.6.2
     dev: false
-    id: 'file:projects/extension-base.tgz'
+    id: file:projects/extension-base.tgz
     name: '@rush-temp/extension-base'
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-xk9wAik1h9kh9fkcK01Ox7d1dXmr8uOFolbY+HveIqUqyEXAAEldY7rx8l42I6eJxmlteC3eZzBdijwOYGKCrw==
-      tarball: 'file:projects/extension-base.tgz'
+      integrity: sha512-PU7TfPPCIsyTCUoPR3QSglvlcB1UwNA+kQtNeQu448EriRAd5UZ5pAh0xpaLnJUMFYoPONcr9Pivd+C08kWcUQ==
+      tarball: file:projects/extension-base.tgz
     version: 0.0.0
-  'file:projects/md-mock-api.tgz':
+  file:projects/md-mock-api.tgz:
     dependencies:
       '@types/body-parser': 1.19.0
       '@types/commonmark': 0.27.4
@@ -9166,9 +9184,9 @@ packages:
     name: '@rush-temp/md-mock-api'
     resolution:
       integrity: sha512-w/aVx2VUqxYyisvdFjas7ibFGiXSRLqvaVpSb+VA6nGG47g6ypPjGfZhBN0wIf7k5sIW5WZ5Y+tww0UIOK2CXg==
-      tarball: 'file:projects/md-mock-api.tgz'
+      tarball: file:projects/md-mock-api.tgz
     version: 0.0.0
-  'file:projects/modelerfour.tgz':
+  file:projects/modelerfour.tgz:
     dependencies:
       '@azure-tools/async-io': 3.0.253
       '@azure-tools/datastore': 4.1.270
@@ -9199,10 +9217,10 @@ packages:
     dev: false
     name: '@rush-temp/modelerfour'
     resolution:
-      integrity: sha512-bK877KnsEnp6PSxdT2/QpOVuiEasgUYc+r6UEIbCdI36qlnj7Pc08ZEl8jY1oDH9+KaoI/J2ZCXBM5KYAa/ReQ==
-      tarball: 'file:projects/modelerfour.tgz'
+      integrity: sha512-YN/COv3OXwOQX5gPvd4NbRiJxlkRJOCr+MYA1lAtA+W1e+0d8s5Dfp55wF5MFWr3qrduik051PTR6sOvFx2TYA==
+      tarball: file:projects/modelerfour.tgz
     version: 0.0.0
-  'file:projects/oai2-to-oai3.tgz_prettier@2.2.1':
+  file:projects/oai2-to-oai3.tgz_prettier@2.2.1:
     dependencies:
       '@azure-tools/datastore': 4.1.270
       '@azure-tools/openapi': 3.0.261
@@ -9222,15 +9240,15 @@ packages:
       ts-jest: 26.5.0_jest@26.6.3+typescript@4.1.3
       typescript: 4.1.3
     dev: false
-    id: 'file:projects/oai2-to-oai3.tgz'
+    id: file:projects/oai2-to-oai3.tgz
     name: '@rush-temp/oai2-to-oai3'
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-YiwseCoHejMpeYLgd89U4cxahvTICe2jqZOeZ9SVm9hSaDM9n7WfYEtAxQUIVHzPEJV2oYcC/47OZud2jQsj8A==
-      tarball: 'file:projects/oai2-to-oai3.tgz'
+      integrity: sha512-8PS8yJUgXph6ws5W8JoO3QIIXKa5r6H2M/RIJE7bekgWkqS5SKldrj8djKzNYg8ahhxj46RtI5BNYv+L7dsPUQ==
+      tarball: file:projects/oai2-to-oai3.tgz
     version: 0.0.0
-  'file:projects/openapi.tgz_prettier@2.2.1':
+  file:projects/openapi.tgz_prettier@2.2.1:
     dependencies:
       '@azure-tools/linq': 3.1.262
       '@types/jest': 26.0.20
@@ -9244,22 +9262,43 @@ packages:
       rimraf: 3.0.2
       typescript: 4.1.3
     dev: false
-    id: 'file:projects/openapi.tgz'
+    id: file:projects/openapi.tgz
     name: '@rush-temp/openapi'
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-WFIfkVqdFWTopCGC7+cWhF+9Vvk0/7gwVeR1pPx/FVdyhIyEd/v6tyhB7jSBlfRR02vqn7fc01scrUa8tshljw==
-      tarball: 'file:projects/openapi.tgz'
+      integrity: sha512-/Zav78QR2Z3r2FKzt1VQBdef703Hn+IPOg7C9JleeLEw/HCzZvs/bci7DaGxpjIQ8Wo3IJ3eufBQRrtswwOmdQ==
+      tarball: file:projects/openapi.tgz
     version: 0.0.0
-  'file:projects/schemas.tgz':
+  file:projects/schemas.tgz:
     dev: false
     name: '@rush-temp/schemas'
     resolution:
       integrity: sha512-R4SNYE56Q0TOMYcT8gSTZIInxE9vVJH1k54SR8Ksvg8HNkzG+Pko1NIxb8zpWFB74VEmx3TDaruHnodgJjUrvQ==
-      tarball: 'file:projects/schemas.tgz'
+      tarball: file:projects/schemas.tgz
     version: 0.0.0
-  'file:projects/test-utils.tgz_prettier@2.2.1':
+  file:projects/test-public-packages.tgz_prettier@2.2.1:
+    dependencies:
+      '@types/jest': 26.0.20
+      '@types/source-map-support': 0.5.3
+      eslint: 7.19.0
+      eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
+      eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
+      expect: 26.6.2
+      jest: 26.6.3
+      jest-snapshot: 26.6.2
+      rimraf: 3.0.2
+      source-map-support: 0.5.19
+    dev: false
+    id: file:projects/test-public-packages.tgz
+    name: '@rush-temp/test-public-packages'
+    peerDependencies:
+      prettier: '*'
+    resolution:
+      integrity: sha512-XYavD2knZJP9kfvPx5BT4LICne9EJQ1njLwuK6LZXt3JPkfnzsJDAvteRMe547KRXRR6gaHLoAWfyGXrmDKUTA==
+      tarball: file:projects/test-public-packages.tgz
+    version: 0.0.0
+  file:projects/test-utils.tgz_prettier@2.2.1:
     dependencies:
       '@types/jest': 26.0.20
       eslint: 7.19.0
@@ -9270,13 +9309,13 @@ packages:
       jest-snapshot: 26.6.2
       rimraf: 3.0.2
     dev: false
-    id: 'file:projects/test-utils.tgz'
+    id: file:projects/test-utils.tgz
     name: '@rush-temp/test-utils'
     peerDependencies:
       prettier: '*'
     resolution:
       integrity: sha512-8nMXR/fQrY7cWzKlnWAWLNAPsCqTy218Yq76aUySEg/K65B+nGDBNIZewWlUh3Dy4q/xEwC+EN8tG9/SSwQ9EA==
-      tarball: 'file:projects/test-utils.tgz'
+      tarball: file:projects/test-utils.tgz
     version: 0.0.0
 registry: ''
 specifiers:
@@ -9287,19 +9326,20 @@ specifiers:
   '@azure-tools/tasks': ~3.0.0
   '@azure-tools/uri': ~3.0.0
   '@microsoft.azure/autorest.testserver': ~2.10.46
-  '@rush-temp/autorest': 'file:./projects/autorest.tgz'
-  '@rush-temp/codegen': 'file:./projects/codegen.tgz'
-  '@rush-temp/codemodel': 'file:./projects/codemodel.tgz'
-  '@rush-temp/core': 'file:./projects/core.tgz'
-  '@rush-temp/datastore': 'file:./projects/datastore.tgz'
-  '@rush-temp/deduplication': 'file:./projects/deduplication.tgz'
-  '@rush-temp/extension-base': 'file:./projects/extension-base.tgz'
-  '@rush-temp/md-mock-api': 'file:./projects/md-mock-api.tgz'
-  '@rush-temp/modelerfour': 'file:./projects/modelerfour.tgz'
-  '@rush-temp/oai2-to-oai3': 'file:./projects/oai2-to-oai3.tgz'
-  '@rush-temp/openapi': 'file:./projects/openapi.tgz'
-  '@rush-temp/schemas': 'file:./projects/schemas.tgz'
-  '@rush-temp/test-utils': 'file:./projects/test-utils.tgz'
+  '@rush-temp/autorest': file:./projects/autorest.tgz
+  '@rush-temp/codegen': file:./projects/codegen.tgz
+  '@rush-temp/codemodel': file:./projects/codemodel.tgz
+  '@rush-temp/core': file:./projects/core.tgz
+  '@rush-temp/datastore': file:./projects/datastore.tgz
+  '@rush-temp/deduplication': file:./projects/deduplication.tgz
+  '@rush-temp/extension-base': file:./projects/extension-base.tgz
+  '@rush-temp/md-mock-api': file:./projects/md-mock-api.tgz
+  '@rush-temp/modelerfour': file:./projects/modelerfour.tgz
+  '@rush-temp/oai2-to-oai3': file:./projects/oai2-to-oai3.tgz
+  '@rush-temp/openapi': file:./projects/openapi.tgz
+  '@rush-temp/schemas': file:./projects/schemas.tgz
+  '@rush-temp/test-public-packages': file:./projects/test-public-packages.tgz
+  '@rush-temp/test-utils': file:./projects/test-utils.tgz
   '@types/body-parser': ^1.19.0
   '@types/commonmark': ^0.27.0
   '@types/deep-equal': ^1.0.1
@@ -9313,6 +9353,7 @@ specifiers:
   '@types/node': ~14.14.20
   '@types/semver': 5.5.0
   '@types/source-map': 0.5.0
+  '@types/source-map-support': ^0.5.3
   '@types/supertest': ^2.0.10
   '@types/webpack': ~4.41.26
   '@types/yargs': ~15.0.12
@@ -9358,6 +9399,7 @@ specifiers:
   vscode-languageserver: 3.5.1
   webpack: ~5.18.0
   webpack-cli: ~4.4.0
+  webpack-node-externals: ~2.5.2
   winston: ~3.3.3
   yaml-ast-parser: 0.0.43
   yargs: ~16.2.0

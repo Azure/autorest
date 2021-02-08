@@ -40,7 +40,7 @@
       "packageName": "@autorest/schemas",
       "projectFolder": "packages/libs/autorest-schemas",
       "reviewCategory": "production",
-      "shouldPublish": false
+      "shouldPublish": true
     },
     {
       "packageName": "@autorest/codemodel",
@@ -83,6 +83,12 @@
       "projectFolder": "packages/testing/test-utils",
       "reviewCategory": "production",
       "shouldPublish": true
+    },
+    {
+      "packageName": "@autorest/test-public-packages",
+      "projectFolder": "packages/testing/test-public-packages",
+      "reviewCategory": "production",
+      "shouldPublish": false
     },
     {
       "packageName": "@autorest/extension-base",
