@@ -3,7 +3,6 @@
 const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 const baseWebpackConfig = require("../../../common/config/webpack.base.config");
-const webpack = require("webpack");
 
 /**
  * @type {import("webpack").Configuration}
