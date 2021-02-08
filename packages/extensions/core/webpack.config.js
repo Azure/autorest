@@ -7,6 +7,6 @@ const baseWebpackConfig = require("../../../common/config/webpack.base.config");
 module.exports = {
   ...baseWebpackConfig,
   entry: {
-    main: "./src/main.ts",
+    app: "./src/app.ts",
   },
 };
