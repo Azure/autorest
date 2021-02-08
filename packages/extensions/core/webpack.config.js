@@ -36,7 +36,6 @@ module.exports = [
     output: {
       ...coreBaseConfig.output,
       path: path.resolve(__dirname, "dist"),
-      library: "AutoRestCore",
       libraryTarget: "commonjs2",
     },
   },

@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/Azure/autorest#readme",
   "readme": "https://github.com/Azure/autorest/blob/master/readme.md",
-  "main": "./entrypoints/exports.js",
+  "main": "./dist/exports.js",
   "bin": {
     "autorest-core": "./entrypoints/app.js",
     "autorest-language-service": "./entrypoints/language-service.js"
