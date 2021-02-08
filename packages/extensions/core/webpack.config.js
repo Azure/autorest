@@ -17,6 +17,8 @@ module.exports = {
   output: {
     ...baseWebpackConfig.output,
     path: path.resolve(__dirname, "dist"),
+    library: "AutoRestCore",
+    libraryTarget: "commonjs2",
   },
   externals: [
     nodeExternals({
