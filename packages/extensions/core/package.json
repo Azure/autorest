@@ -31,7 +31,7 @@
     "test:ci": "jest --ci --forceExit --runInBand",
     "watch": "tsc -p ./tsconfig.build.json --watch",
     "build": "npm run before-build && tsc -p ./tsconfig.build.json",
-    "build:prod": "webpack",
+    "build:prod": "npm run before-build && webpack",
     "lint:fix": "eslint ./src --fix --ext .ts",
     "lint": "eslint ./src --ext .ts --max-warnings=0",
     "prepack": "npm run clean && npm run build:prod",
