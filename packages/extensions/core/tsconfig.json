@@ -4,5 +4,5 @@
     "outDir": "dist",
     "types": ["node", "jest"]
   },
-  "include": ["src/**/*.ts", "test/**/*.ts", "../../libs/configuration/src/directive.ts"]
+  "include": ["src/**/*.ts", "test/**/*.ts"]
 }

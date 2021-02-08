@@ -15,7 +15,7 @@ import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
 import { Artifact } from "../artifact";
 import { Channel, Message, Range, SourceLocation } from "../message";
 import { Suppressor } from "../pipeline/suppression";
-import { Directive, ResolvedDirective } from "../../../../../libs/configuration/src/directive";
+import { Directive, ResolvedDirective } from "@autorest/configuration";
 import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
 import { IEvent } from "../events";
