@@ -1,6 +1,5 @@
-const path = require("path");
-
 // @ts-check
+const path = require("path");
 const baseWebpackConfig = require("../../../common/config/webpack.base.config");
 
 /**
@@ -13,6 +12,6 @@ module.exports = {
   },
   output: {
     ...baseWebpackConfig.output,
-    path: path.resolve(__dirname, "dist", "src"),
+    path: path.resolve(__dirname, "dist"),
   },
 };

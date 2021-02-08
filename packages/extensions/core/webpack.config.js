@@ -1,7 +1,9 @@
-const path = require("path");
-
 // @ts-check
+
+const path = require("path");
+const nodeExternals = require("webpack-node-externals");
 const baseWebpackConfig = require("../../../common/config/webpack.base.config");
+const webpack = require("webpack");
 
 /**
  * @type {import("webpack").Configuration}
@@ -17,4 +19,15 @@ module.exports = {
     ...baseWebpackConfig.output,
     path: path.resolve(__dirname, "dist"),
   },
+  externals: [
+    nodeExternals({
+      allowlist: [/^(?:(?!jsonpath).)*$/],
+    }),
+  ],
+  plugins: [
+    new webpack.IgnorePlugin({
+      resourceRegExp: /package\.json$/,
+      contextRegExp: /@azure-tools\/extension$/,
+    }),
+  ],
 };

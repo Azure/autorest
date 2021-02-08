@@ -34,5 +34,8 @@ module.exports = {
   plugins: [],
   optimization: {
     minimize: false,
+    moduleIds: "named",
+    chunkIds: "named",
+    mangleExports: false,
   },
 };

@@ -79,6 +79,7 @@ dependencies:
   vscode-languageserver: 3.5.1
   webpack: 5.18.0_webpack-cli@4.4.0
   webpack-cli: 4.4.0_webpack@5.18.0
+  webpack-node-externals: 2.5.2
   winston: 3.3.3
   yaml-ast-parser: 0.0.43
   yargs: 16.2.0
@@ -8501,6 +8502,10 @@ packages:
       node: '>=10.0.0'
     resolution:
       integrity: sha512-6/JUQv0ELQ1igjGDzHkXbVDRxkfA57Zw7PfiupdLFJYrgFqY5ZP8xxbpp2lU3EPwYx89ht5Z/aDkD40hFCm5AA==
+  /webpack-node-externals/2.5.2:
+    dev: false
+    resolution:
+      integrity: sha512-aHdl/y2N7PW2Sx7K+r3AxpJO+aDMcYzMQd60Qxefq3+EwhewSbTBqNumOsCE1JsCUNoyfGj5465N0sSf6hc/5w==
   /webpack-sources/2.2.0:
     dependencies:
       source-list-map: 2.0.1
@@ -9052,12 +9057,13 @@ packages:
       vscode-languageserver: 3.5.1
       webpack: 5.18.0_webpack-cli@4.4.0
       webpack-cli: 4.4.0_webpack@5.18.0
+      webpack-node-externals: 2.5.2
       yaml-ast-parser: 0.0.43
       z-schema: 5.0.0
     dev: false
     name: '@rush-temp/core'
     resolution:
-      integrity: sha512-VNy8HVAGDSqeu3nqnNJS9kSbXgtGOXJthFzQBsGL/zJYD8heoqZHQk0eGiQ8ZZNgtETDu5uHbbLq9tfOVtcyZg==
+      integrity: sha512-T8SYDsPv5DEnDMPQ7ZIXC5qtjqFUyu52CCaI80IoQkAg8G8KgiT7ZV36ZSz9YN3NfMjeKZ97WF9EgD2kksH/1Q==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.2.1:
@@ -9393,6 +9399,7 @@ specifiers:
   vscode-languageserver: 3.5.1
   webpack: ~5.18.0
   webpack-cli: ~4.4.0
+  webpack-node-externals: ~2.5.2
   winston: ~3.3.3
   yaml-ast-parser: 0.0.43
   yargs: ~16.2.0

@@ -40,7 +40,7 @@
       "packageName": "@autorest/schemas",
       "projectFolder": "packages/libs/autorest-schemas",
       "reviewCategory": "production",
-      "shouldPublish": false
+      "shouldPublish": true
     },
     {
       "packageName": "@autorest/codemodel",
