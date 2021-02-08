@@ -9,8 +9,9 @@ const baseWebpackConfig = require("../../../common/config/webpack.base.config");
 module.exports = {
   ...baseWebpackConfig,
   entry: {
-    app: "./src/app.ts",
-    exports: "./src/exports.ts",
+    "app": "./src/app.ts",
+    "exports": "./src/exports.ts",
+    "language-service": "./src/language-service/language-service.ts",
   },
   output: {
     ...baseWebpackConfig.output,

@@ -23,8 +23,8 @@
   "readme": "https://github.com/Azure/autorest/blob/master/readme.md",
   "main": "./dist/exports.js",
   "bin": {
-    "autorest-core": "./entrypoints/app.js",
-    "autorest-language-service": "./entrypoints/language-service.js"
+    "autorest-core": "./dist/app.js",
+    "autorest-language-service": "./dist/language-service.js"
   },
   "scripts": {
     "test": "jest --coverage=false --forceExit --runInBand",
