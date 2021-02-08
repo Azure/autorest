@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "ApiVersion": {
-      "description": "- since API version formats range from \nAzure ARM API date style (2018-01-01) to semver (1.2.3) \nand virtually any other text, this value tends to be an \nopaque string with the possibility of a modifier to indicate\nthat it is a range.\n\noptions: \n- prepend a dash or append a plus to indicate a range \n(ie, '2018-01-01+' or '-2019-01-01', or '1.0+' )\n\n- semver-range style (ie, '^1.0.0' or '~1.0.0' )",
+      "description": "- since API version formats range from\nAzure ARM API date style (2018-01-01) to semver (1.2.3)\nand virtually any other text, this value tends to be an\nopaque string with the possibility of a modifier to indicate\nthat it is a range.\n\noptions:\n- prepend a dash or append a plus to indicate a range\n(ie, '2018-01-01+' or '-2019-01-01', or '1.0+' )\n\n- semver-range style (ie, '^1.0.0' or '~1.0.0' )",
       "type": "object",
       "properties": {
         "version": {
@@ -406,6 +406,10 @@
         "groupedBy": {
           "$ref": "./master.json#/definitions/Parameter",
           "description": "When a parameter is grouped into another, this will tell where the parameter got grouped into."
+        },
+        "isInMultipart": {
+          "description": "If this parameter is to be included in a multipart request body.",
+          "type": "boolean"
         }
       },
       "defaultProperties": [],

@@ -1,6 +1,6 @@
 type: object
 description: the model that contains all the information required to generate a service api
-$schema: 'http://json-schema.org/draft-07/schema#'
+$schema: http://json-schema.org/draft-07/schema#
 additionalProperties: false
 definitions:
   APIKeySecurityScheme:
@@ -70,14 +70,14 @@ definitions:
   ApiVersion:
     type: object
     description: |-
-      - since API version formats range from 
-      Azure ARM API date style (2018-01-01) to semver (1.2.3) 
-      and virtually any other text, this value tends to be an 
+      - since API version formats range from
+      Azure ARM API date style (2018-01-01) to semver (1.2.3)
+      and virtually any other text, this value tends to be an
       opaque string with the possibility of a modifier to indicate
       that it is a range.
 
-      options: 
-      - prepend a dash or append a plus to indicate a range 
+      options:
+      - prepend a dash or append a plus to indicate a range
       (ie, '2018-01-01+' or '-2019-01-01', or '1.0+' )
 
       - semver-range style (ie, '^1.0.0' or '~1.0.0' )
@@ -237,7 +237,7 @@ definitions:
       - type
   ChoiceSchema:
     type: object
-    description: 'a schema that represents a choice of several values (ie, an ''enum'')'
+    description: a schema that represents a choice of several values (ie, an 'enum')
     additionalProperties: false
     allOf:
       - $ref: '#/definitions/ValueSchema'
@@ -372,7 +372,7 @@ definitions:
         description: the actual constant value
         $ref: '#/definitions/ConstantValue'
       valueType:
-        description: 'the schema type of the constant value (ie, StringSchema, NumberSchema, etc)'
+        description: the schema type of the constant value (ie, StringSchema, NumberSchema, etc)
         $ref: '#/definitions/Schema'
     required:
       - language
@@ -393,9 +393,9 @@ definitions:
         items:
           $ref: '#/definitions/ApiVersion'
       defaultValue:
-        description: 'If the value isn''t sent on the wire, the service will assume this'
+        description: If the value isn't sent on the wire, the service will assume this
       deprecated:
-        description: 'deprecation information -- ie, when this aspect doesn''t apply and why'
+        description: deprecation information -- ie, when this aspect doesn't apply and why
         $ref: '#/definitions/Deprecation'
       example:
         description: example information
@@ -404,7 +404,7 @@ definitions:
         $ref: '#/definitions/ExternalDocumentation'
       origin:
         type: string
-        description: 'where did this aspect come from (jsonpath or ''modelerfour:<soemthing>'')'
+        description: where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')
       serialization:
         description: per-serialization information for this Schema
         $ref: '#/definitions/SerializationFormats'
@@ -583,7 +583,7 @@ definitions:
       - type
   Example:
     type: object
-    description: 'example data [UNFINISHED]'
+    description: example data [UNFINISHED]
     additionalProperties: false
     properties:
       description:
@@ -765,7 +765,7 @@ definitions:
       multipart:
         type: boolean
         description: |-
-          indicates that the HTTP Request should be a multipart request 
+          indicates that the HTTP Request should be a multipart request
 
           ie, that it has multiple requests in a single request.
         enum:
@@ -786,13 +786,13 @@ definitions:
     properties:
       explode:
         type: boolean
-        description: 'when set, ''form'' style parameters generate separate parameters for each value of an array.'
+        description: when set, 'form' style parameters generate separate parameters for each value of an array.
       in:
         description: the location that this parameter is placed in the http request
         $ref: '#/definitions/ParameterLocation'
       skipUriEncoding:
         type: boolean
-        description: 'when set, this indicates that the content of the parameter should not be subject to URI encoding rules.'
+        description: when set, this indicates that the content of the parameter should not be subject to URI encoding rules.
       style:
         description: the Serialization Style used for the parameter.
         $ref: '#/definitions/SerializationStyle'
@@ -808,11 +808,11 @@ definitions:
       path:
         type: string
         description: |-
-          A relative path to an individual endpoint. 
+          A relative path to an individual endpoint.
 
-          The field name MUST begin with a slash. 
-          The path is appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order to construct the full URL. 
-          Path templating is allowed. 
+          The field name MUST begin with a slash.
+          The path is appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order to construct the full URL.
+          Path templating is allowed.
 
           When matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.
       method:
@@ -842,7 +842,7 @@ definitions:
         items:
           $ref: '#/definitions/HttpHeader'
       knownMediaType:
-        description: 'canonical response type (ie, ''json'')'
+        description: canonical response type (ie, 'json')
         $ref: '#/definitions/KnownMediaType'
       mediaTypes:
         type: array
@@ -929,7 +929,7 @@ definitions:
       - $ref: '#/definitions/HttpRequest'
     properties:
       knownMediaType:
-        description: 'a normalized value for the media type (ie, distills down to a well-known moniker (ie, ''json''))'
+        description: a normalized value for the media type (ie, distills down to a well-known moniker (ie, 'json'))
         $ref: '#/definitions/KnownMediaType'
       mediaTypes:
         type: array
@@ -1129,22 +1129,22 @@ definitions:
     properties:
       exclusiveMaximum:
         type: boolean
-        description: 'if present, the value must be lower than maximum'
+        description: if present, the value must be lower than maximum
       exclusiveMinimum:
         type: boolean
-        description: 'if present, the value must be higher than minimum'
+        description: if present, the value must be higher than minimum
       maximum:
         type: number
-        description: 'if present, the value must be lower than or equal to this (unless exclusiveMaximum is true)'
+        description: if present, the value must be lower than or equal to this (unless exclusiveMaximum is true)
       minimum:
         type: number
-        description: 'if present, the value must be highter than or equal to this (unless exclusiveMinimum is true)'
+        description: if present, the value must be highter than or equal to this (unless exclusiveMinimum is true)
       multipleOf:
         type: number
-        description: 'if present, the number must be an exact multiple of this value'
+        description: if present, the number must be an exact multiple of this value
       precision:
         type: number
-        description: 'precision (# of bits?) of the number'
+        description: precision (# of bits?) of the number
     required:
       - language
       - precision
@@ -1204,7 +1204,7 @@ definitions:
       children:
         $ref: '#/definitions/Relations'
       discriminator:
-        description: 'the property of the polymorphic descriminator for this type, if there is one'
+        description: the property of the polymorphic descriminator for this type, if there is one
         $ref: '#/definitions/Discriminator'
       discriminatorValue:
         type: string
@@ -1252,7 +1252,7 @@ definitions:
       - type
   Operation:
     type: object
-    description: 'represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)'
+    description: represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)
     additionalProperties: false
     properties:
       apiVersions:
@@ -1261,7 +1261,7 @@ definitions:
         items:
           $ref: '#/definitions/ApiVersion'
       deprecated:
-        description: 'deprecation information -- ie, when this aspect doesn''t apply and why'
+        description: deprecation information -- ie, when this aspect doesn't apply and why
         $ref: '#/definitions/Deprecation'
       exceptions:
         type: array
@@ -1273,7 +1273,7 @@ definitions:
         $ref: '#/definitions/ExternalDocumentation'
       origin:
         type: string
-        description: 'where did this aspect come from (jsonpath or ''modelerfour:<soemthing>'')'
+        description: where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')
       parameters:
         type: array
         description: common parameters when there are multiple requests
@@ -1356,13 +1356,16 @@ definitions:
     properties:
       flattened:
         type: boolean
-        description: 'When a parameter is flattened, it will be left in the list, but marked hidden (so, don''t generate those!)'
+        description: When a parameter is flattened, it will be left in the list, but marked hidden (so, don't generate those!)
       groupedBy:
-        description: 'When a parameter is grouped into another, this will tell where the parameter got grouped into.'
+        description: When a parameter is grouped into another, this will tell where the parameter got grouped into.
         $ref: '#/definitions/Parameter'
       implementation:
         description: suggested implementation location for this parameter
         $ref: '#/definitions/ImplementationLocation'
+      isInMultipart:
+        type: boolean
+        description: If this parameter is to be included in a multipart request body.
     required:
       - language
       - protocol
@@ -1451,7 +1454,7 @@ definitions:
         description: if this property is used as a discriminator for a polymorphic type
       readOnly:
         type: boolean
-        description: 'if the property is marked read-only (ie, not intended to be sent to the service)'
+        description: if the property is marked read-only (ie, not intended to be sent to the service)
       serializedName:
         type: string
         description: the wire name of this property
@@ -1466,7 +1469,7 @@ definitions:
     additionalProperties: false
   Protocols:
     type: object
-    description: 'custom extensible metadata for individual protocols (ie, HTTP, etc)'
+    description: custom extensible metadata for individual protocols (ie, HTTP, etc)
     additionalProperties: false
     properties:
       amqp:
@@ -1540,9 +1543,9 @@ definitions:
         items:
           $ref: '#/definitions/ApiVersion'
       defaultValue:
-        description: 'If the value isn''t sent on the wire, the service will assume this'
+        description: If the value isn't sent on the wire, the service will assume this
       deprecated:
-        description: 'deprecation information -- ie, when this aspect doesn''t apply and why'
+        description: deprecation information -- ie, when this aspect doesn't apply and why
         $ref: '#/definitions/Deprecation'
       example:
         description: example information
@@ -1551,7 +1554,7 @@ definitions:
         $ref: '#/definitions/ExternalDocumentation'
       origin:
         type: string
-        description: 'where did this aspect come from (jsonpath or ''modelerfour:<soemthing>'')'
+        description: where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')
       serialization:
         description: per-serialization information for this Schema
         $ref: '#/definitions/SerializationFormats'
@@ -1645,7 +1648,7 @@ definitions:
           $ref: '#/definitions/SchemaContext'
   Schemas:
     type: object
-    description: 'the full set of schemas for a given service, categorized into convenient collections'
+    description: the full set of schemas for a given service, categorized into convenient collections
     additionalProperties: false
     properties:
       any:
@@ -1679,13 +1682,13 @@ definitions:
       choices:
         type: array
         description: |-
-          - this is essentially can be thought of as an 'enum' 
+          - this is essentially can be thought of as an 'enum'
           that is a choice between one of several items, but an unspecified value is permitted.
         items:
           $ref: '#/definitions/ChoiceSchema'
       conditionals:
         type: array
-        description: 'ie, when ''profile'' is ''production'', use ''2018-01-01'' for apiversion'
+        description: ie, when 'profile' is 'production', use '2018-01-01' for apiversion
         items:
           $ref: '#/definitions/ConditionalSchema'
       constants:
@@ -1710,7 +1713,7 @@ definitions:
           $ref: '#/definitions/DateSchema'
       dictionaries:
         type: array
-        description: 'an associative array (ie, dictionary, hashtable, etc)'
+        description: an associative array (ie, dictionary, hashtable, etc)
         items:
           $ref: '#/definitions/DictionarySchema'
       durations:
@@ -1778,7 +1781,7 @@ definitions:
       unknowns:
         type: array
         description: |-
-          it's possible that we just may make this an error 
+          it's possible that we just may make this an error
           in representation.
         items:
           $ref: '#/definitions/Schema'
@@ -1802,7 +1805,7 @@ definitions:
       - bearer
   SealedChoiceSchema:
     type: object
-    description: 'a schema that represents a choice of several values (ie, an ''enum'')'
+    description: a schema that represents a choice of several values (ie, an 'enum')
     additionalProperties: false
     allOf:
       - $ref: '#/definitions/ValueSchema'
@@ -2050,7 +2053,7 @@ definitions:
       - type
   Value:
     type: object
-    description: 'common base interface for properties, parameters and the like.'
+    description: common base interface for properties, parameters and the like.
     additionalProperties: false
     properties:
       schema:
@@ -2066,7 +2069,7 @@ definitions:
       clientDefaultValue:
         description: the value that the client should provide if the consumer doesn't provide one
       deprecated:
-        description: 'deprecation information -- ie, when this aspect doesn''t apply and why'
+        description: deprecation information -- ie, when this aspect doesn't apply and why
         $ref: '#/definitions/Deprecation'
       externalDocs:
         description: External Documentation Links
@@ -2076,7 +2079,7 @@ definitions:
         description: can null be passed in instead
       origin:
         type: string
-        description: 'where did this aspect come from (jsonpath or ''modelerfour:<soemthing>'')'
+        description: where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')
       required:
         type: boolean
         description: if the value is marked 'required'.
@@ -2140,7 +2143,7 @@ definitions:
         $ref: '#/definitions/Parameter'
       pathToProperty:
         type: array
-        description: 'if this parameter is for a nested property, this is the path of properties it takes to get there'
+        description: if this parameter is for a nested property, this is the path of properties it takes to get there
         items:
           $ref: '#/definitions/Property'
       targetProperty:
@@ -2203,7 +2206,7 @@ properties:
     $ref: '#/definitions/Schemas'
   globalParameters:
     type: array
-    description: 'all global parameters (ie, ImplementationLocation = client )'
+    description: all global parameters (ie, ImplementationLocation = client )
     items:
       $ref: '#/definitions/Parameter'
   info:
