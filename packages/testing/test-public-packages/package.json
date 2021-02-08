@@ -1,0 +1,43 @@
+{
+  "name": "@autorest/test-public-packages",
+  "version": "0.1.0",
+  "description": "Packages designed to test importing other packages",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p .",
+    "watch": "tsc -p . --watch",
+    "clean": "rimraf ./dist",
+    "lint:fix": "eslint ./src --fix --ext .ts",
+    "lint": "eslint ./src --ext .ts --max-warnings=0",
+    "test:ci": "node ./dist/index.js",
+    "test": "node ./dist/index.js"
+  },
+  "engines": {
+    "node": ">=10.13.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/autorest.git"
+  },
+  "keywords": [
+    "autorest"
+  ],
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/autorest/issues"
+  },
+  "homepage": "https://github.com/Azure/autorest#readme",
+  "dependencies": {
+    "@autorest/core": "~3.0.6370",
+    "autorest": "~3.0.6336",
+    "expect": "~26.6.2"
+  },
+  "devDependencies": {
+    "eslint-plugin-prettier": "~3.2.0",
+    "eslint-plugin-unicorn": "~27.0.0",
+    "eslint": "^7.17.0",
+    "rimraf": "^3.0.2"
+  }
+}

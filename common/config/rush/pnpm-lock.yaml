@@ -18,6 +18,7 @@ dependencies:
   '@rush-temp/oai2-to-oai3': file:projects/oai2-to-oai3.tgz_prettier@2.2.1
   '@rush-temp/openapi': file:projects/openapi.tgz_prettier@2.2.1
   '@rush-temp/schemas': file:projects/schemas.tgz
+  '@rush-temp/test-public-packages': file:projects/test-public-packages.tgz_prettier@2.2.1
   '@rush-temp/test-utils': file:projects/test-utils.tgz_prettier@2.2.1
   '@types/body-parser': 1.19.0
   '@types/commonmark': 0.27.4
@@ -9263,6 +9264,25 @@ packages:
       integrity: sha512-R4SNYE56Q0TOMYcT8gSTZIInxE9vVJH1k54SR8Ksvg8HNkzG+Pko1NIxb8zpWFB74VEmx3TDaruHnodgJjUrvQ==
       tarball: file:projects/schemas.tgz
     version: 0.0.0
+  file:projects/test-public-packages.tgz_prettier@2.2.1:
+    dependencies:
+      '@types/jest': 26.0.20
+      eslint: 7.19.0
+      eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
+      eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
+      expect: 26.6.2
+      jest: 26.6.3
+      jest-snapshot: 26.6.2
+      rimraf: 3.0.2
+    dev: false
+    id: file:projects/test-public-packages.tgz
+    name: '@rush-temp/test-public-packages'
+    peerDependencies:
+      prettier: '*'
+    resolution:
+      integrity: sha512-KZPyMBoEIqiaI+leooI2G3nTUqjUym9XA5kZ7BMdB5xj+YZR2sDRsTLw/uuzC73JXEP048ERZ2fb6K5W9M9yFw==
+      tarball: file:projects/test-public-packages.tgz
+    version: 0.0.0
   file:projects/test-utils.tgz_prettier@2.2.1:
     dependencies:
       '@types/jest': 26.0.20
@@ -9303,6 +9323,7 @@ specifiers:
   '@rush-temp/oai2-to-oai3': file:./projects/oai2-to-oai3.tgz
   '@rush-temp/openapi': file:./projects/openapi.tgz
   '@rush-temp/schemas': file:./projects/schemas.tgz
+  '@rush-temp/test-public-packages': file:./projects/test-public-packages.tgz
   '@rush-temp/test-utils': file:./projects/test-utils.tgz
   '@types/body-parser': ^1.19.0
   '@types/commonmark': ^0.27.0
