@@ -21,13 +21,8 @@ module.exports = {
   },
   externals: [
     nodeExternals({
-      allowlist: [/^(?:(?!jsonpath).)*$/],
+      allowlist: [/^(?:(?!jsonpath|@azure-tools\/extension).)*$/],
     }),
   ],
-  plugins: [
-    new webpack.IgnorePlugin({
-      resourceRegExp: /package\.json$/,
-      contextRegExp: /@azure-tools\/extension$/,
-    }),
-  ],
+  plugins: [],
 };
