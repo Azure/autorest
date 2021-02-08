@@ -2,6 +2,21 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.0.6371",
+      "tag": "@autorest/core_v3.0.6371",
+      "date": "Mon, 08 Feb 2021 23:06:15 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Internal: Migrate bundling system to webpack"
+          },
+          {
+            "comment": "Update csharp generator to default to v3. Use `--v2` to revert to previous version"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.0.6370",
       "tag": "@autorest/core_v3.0.6370",
       "date": "Thu, 04 Feb 2021 19:05:18 GMT",

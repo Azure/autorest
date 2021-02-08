@@ -2,6 +2,18 @@
   "name": "@autorest/codemodel",
   "entries": [
     {
+      "version": "4.14.5",
+      "tag": "@autorest/codemodel_v4.14.5",
+      "date": "Mon, 08 Feb 2021 23:06:15 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add a new `isInMultipart` field on parameters"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.14.4",
       "tag": "@autorest/codemodel_v4.14.4",
       "date": "Thu, 04 Feb 2021 19:05:18 GMT",

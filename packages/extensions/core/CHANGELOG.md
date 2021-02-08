@@ -1,6 +1,14 @@
 # Change Log - @autorest/core
 
-This log was last generated on Thu, 04 Feb 2021 19:16:37 GMT and should not be manually modified.
+This log was last generated on Mon, 08 Feb 2021 23:06:15 GMT and should not be manually modified.
+
+## 3.0.6371
+Mon, 08 Feb 2021 23:06:15 GMT
+
+### Patches
+
+- Internal: Migrate bundling system to webpack
+- Update csharp generator to default to v3. Use `--v2` to revert to previous version
 
 ## 3.0.6370
 Thu, 04 Feb 2021 19:05:18 GMT
