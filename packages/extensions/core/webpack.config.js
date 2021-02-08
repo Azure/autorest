@@ -4,11 +4,19 @@ const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 const baseWebpackConfig = require("../../../common/config/webpack.base.config");
 
-const coreBaseConfig = {
+/**
+ * @type {import("webpack").Configuration}
+ */
+module.exports = {
   ...baseWebpackConfig,
+  entry: {
+    "app": "./src/app.ts",
+    "language-service": "./src/language-service/language-service.ts",
+  },
   output: {
     ...baseWebpackConfig.output,
     path: path.resolve(__dirname, "dist"),
+    libraryTarget: "commonjs2",
   },
   externals: [
     nodeExternals({
@@ -16,27 +24,3 @@ const coreBaseConfig = {
     }),
   ],
 };
-
-/**
- * @type {import("webpack").Configuration}
- */
-module.exports = [
-  {
-    ...coreBaseConfig,
-    entry: {
-      "app": "./src/app.ts",
-      "language-service": "./src/language-service/language-service.ts",
-    },
-  },
-  {
-    ...coreBaseConfig,
-    entry: {
-      exports: "./src/exports.ts",
-    },
-    output: {
-      ...coreBaseConfig.output,
-      path: path.resolve(__dirname, "dist"),
-      libraryTarget: "commonjs2",
-    },
-  },
-];
