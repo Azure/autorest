@@ -18,6 +18,8 @@ jobs:
 
       - template: ./templates/build.yaml
 
+      - script: npm install -g @autorest/core@3.0.6371
+
       - script: npx @microsoft/rush test:ci -v
         displayName: Test
 
