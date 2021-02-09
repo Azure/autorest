@@ -34,6 +34,7 @@ steps:
           --skipIfPublished \
           --editRelease false \
           --assets $pkgDir/filename.tgz \
+          --notes="$filename release"
           --target_commitish $(Build.SourceBranchName)
       done
     displayName: Publish packages to Github Releases
