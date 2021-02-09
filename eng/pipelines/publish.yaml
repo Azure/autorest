@@ -15,6 +15,23 @@ steps:
   - script: npx @microsoft/rush publish --publish --pack --include-all
     displayName: Pack packages
 
+  # - script: |
+  #     NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --include-all --set-access-level public
+  #   displayName: Publish packages to NPM
+
   - script: |
-      NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --include-all --set-access-level public
-    displayName: Publish packages
+      npm install -g publish-release
+      pkgDir=$(Build.SourcesDirectory)/common/temp/artifacts/packages
+      for filename in $pkgDir/*.tgz; do
+        echo "Trying to publish $filename.tgz to github release"
+        publish-release \
+          --token $(azuresdk-github-pat) \
+          --repo autorest  \
+          --owner azure \
+          --name $filename \
+          --tag $filename \
+          --editRelease false \
+          --assets $pkgDir/filename.tgz \
+          --target_commitish $(Build.SourceBranchName)
+      done
+    displayName: Publish packages to Github Releases
