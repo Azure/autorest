@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/Azure/autorest#readme",
   "dependencies": {
-    "@autorest/core": "~3.0.6372",
+    "@autorest/core": "~3.0.6371",
     "autorest": "~3.0.6337",
     "source-map-support": "^0.5.19"
   },
