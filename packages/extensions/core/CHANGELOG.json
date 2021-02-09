@@ -2,6 +2,23 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.0.6372",
+      "tag": "@autorest/core_v3.0.6372",
+      "date": "Tue, 09 Feb 2021 22:00:21 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Issue where it was not possible to override a config flag defined in the same markdown config. Markdown configuration loading now treats yaml code block in increasing priority order."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/schemas\" from `~1.0.0` to `~1.0.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.0.6371",
       "tag": "@autorest/core_v3.0.6371",
       "date": "Mon, 08 Feb 2021 23:06:15 GMT",

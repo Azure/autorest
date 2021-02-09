@@ -1,0 +1,17 @@
+{
+  "name": "@autorest/schemas",
+  "entries": [
+    {
+      "version": "1.0.1",
+      "tag": "@autorest/schemas_v1.0.1",
+      "date": "Tue, 09 Feb 2021 22:00:21 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Allow x-ms-client-default to be an array of primitive types"
+          }
+        ]
+      }
+    }
+  ]
+}
