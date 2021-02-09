@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/schemas",
+      "comment": "Allow x-ms-client-default to be an array of primitive types",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/schemas",
+  "email": "tiguerin@microsoft.com"
+}
