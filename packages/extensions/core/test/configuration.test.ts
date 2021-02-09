@@ -137,10 +137,10 @@ value:
     let cfg = await autorest.view;
 
     // output folder should be 'foo'
-    assert.deepEqual(cfg["value"], ["foo", "foo_and_not_bar", "not_bar"]);
+    assert.deepEqual(cfg["value"], ["not_bar", "foo_and_not_bar", "foo"]);
 
     autorest.AddConfiguration({ bar: true });
     cfg = await autorest.view;
-    assert.deepEqual(cfg["value"], ["foo", "foo_and_bar", "bar"]);
+    assert.deepEqual(cfg["value"], ["bar", "foo_and_bar", "foo"]);
   });
 });
