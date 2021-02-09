@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Mon, 08 Feb 2021 23:06:15 GMT and should not be manually modified.
+This log was last generated on Tue, 09 Feb 2021 00:12:31 GMT and should not be manually modified.
+
+## 3.0.6372
+Tue, 09 Feb 2021 00:12:31 GMT
+
+### Patches
+
+- Fix csharp generator configuration breaking default v2 settings
 
 ## 3.0.6371
 Mon, 08 Feb 2021 23:06:15 GMT

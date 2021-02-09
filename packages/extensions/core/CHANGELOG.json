@@ -2,6 +2,18 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.0.6372",
+      "tag": "@autorest/core_v3.0.6372",
+      "date": "Tue, 09 Feb 2021 00:12:31 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix csharp generator configuration breaking default v2 settings"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.0.6371",
       "tag": "@autorest/core_v3.0.6371",
       "date": "Mon, 08 Feb 2021 23:06:15 GMT",
