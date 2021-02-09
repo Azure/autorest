@@ -1,6 +1,6 @@
 # Default Configuration - CSharp
 
-The V2 version of the C# Generator.
+The V3 version of the C# Generator.
 
 ``` yaml $(csharp) && !$(legacy) && !$(v2) && !isRequested('@microsoft.azure/autorest.csharp')
 version: ~3.0.6298
@@ -10,7 +10,9 @@ use-extension:
 try-require: ./readme.csharp.md
 ```
 
-``` yaml $(csharp) && $(preview) && $(legacy) || $(v2) || isRequested('@microsoft.azure/autorest.csharp')
+The V2 version of the C# Generator.
+
+``` yaml $(csharp) && $(preview) && ($(legacy) || $(v2) || isRequested('@microsoft.azure/autorest.csharp'))
 # default the v2 generator to using the last stable @microsoft.azure/autorest-core
 version: ~2.0.4413
 
@@ -19,7 +21,7 @@ use-extension:
 try-require: ./readme.csharp.md
 ```
 
-``` yaml $(csharp) && !$(preview) && $(legacy) || $(v2) || isRequested('@microsoft.azure/autorest.csharp')
+``` yaml $(csharp) && !$(preview) && ($(legacy) || $(v2) || isRequested('@microsoft.azure/autorest.csharp'))
 # default the v2 generator to using the last stable @microsoft.azure/autorest-core
 version: ~2.0.4413
 
