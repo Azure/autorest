@@ -30,6 +30,7 @@ steps:
           --owner azure \
           --name $filename \
           --tag $filename \
+          --skipIfPublished \
           --editRelease false \
           --assets $pkgDir/filename.tgz \
           --target_commitish $(Build.SourceBranchName)
