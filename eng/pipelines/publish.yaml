@@ -22,7 +22,8 @@ steps:
   - script: |
       npm install -g publish-release
       pkgDir=$(Build.SourcesDirectory)/common/temp/artifacts/packages
-      for filename in $pkgDir/*.tgz; do
+      for fullFilename in $pkgDir/*.tgz; do
+        filename=${fullFilename%.*}
         echo "Trying to publish $filename.tgz to github release"
         publish-release \
           --token $(azuresdk-github-pat) \
