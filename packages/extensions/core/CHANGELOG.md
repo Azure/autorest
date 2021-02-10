@@ -1,6 +1,14 @@
 # Change Log - @autorest/core
 
-This log was last generated on Mon, 08 Feb 2021 23:06:15 GMT and should not be manually modified.
+This log was last generated on Wed, 10 Feb 2021 01:05:52 GMT and should not be manually modified.
+
+## 3.0.6372
+Tue, 09 Feb 2021 22:00:21 GMT
+
+### Patches
+
+- **Fix** Issue where it was not possible to override a config flag defined in the same markdown config. Markdown configuration loading now treats yaml code block in increasing priority order.
+- **Update** @azure-tools/extension to newer version that will log errors when installing packages.
 
 ## 3.0.6371
 Mon, 08 Feb 2021 23:06:15 GMT

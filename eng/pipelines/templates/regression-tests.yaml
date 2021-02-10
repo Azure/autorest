@@ -18,8 +18,6 @@ steps:
       sed -i "s,--use:../packages/extensions/modelerfour,--use:$modelerfourPkg," ./regression-tests/regression-compare.yaml
     displayName: Find packages path
 
-  - script: cat ./regression-tests/regression-compare.yaml
-
   - task: NodeTool@0
     inputs:
       versionSpec: "14.x"
@@ -32,7 +30,7 @@ steps:
 
   - script: |
       npm install
-      npm install -g @autorest/compare@~0.3.0
+      npm install -g @autorest/compare@~0.3.6
     displayName: Install autorest-compare
     workingDirectory: regression-tests
 
