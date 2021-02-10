@@ -36,11 +36,6 @@ steps:
 
   - script: autorest-compare --compare:./regression-tests/regression-compare.yaml --language:python
     displayName: Regression Test - @autorest/python
-  - script: |
-      ls ~/.autorest/
-      npm install -g https://github.com/Azure/autorest/releases/download/autorest-3.0.6209/autorest-autorest-3.0.6209.tgz
-      autorest-beta --input-file:https://github.com/Azure/autorest.testserver/blob/master/swagger/additionalProperties.json --version:3.0.6371 --python --verbose --debug
-    condition: always()
 
   - script: autorest-compare --compare:./regression-tests/regression-compare.yaml --language:typescript
     displayName: Regression Test - @autorest/typescript
