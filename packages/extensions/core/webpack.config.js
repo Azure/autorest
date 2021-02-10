@@ -21,7 +21,7 @@ module.exports = {
   },
   externals: [
     nodeExternals({
-      allowlist: [/^(?:(?!jsonpath|@azure-tools\/extension).)*$/],
+      allowlist: [/^(?:(?!jsonpath).)*$/],
     }),
   ],
   optimization: {
