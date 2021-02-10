@@ -66,6 +66,8 @@ languages:
       - --version:3.0.6370
       - --use:@autorest/modelerfour@4.15.451
       - --use:@autorest/python@5.5.0
+      - --debug
+      - --verbose
     newArgs:
       - --version:../packages/extensions/core
       - --use:../packages/extensions/modelerfour

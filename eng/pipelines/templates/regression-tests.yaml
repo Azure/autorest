@@ -30,7 +30,7 @@ steps:
 
   - script: |
       npm install
-      npm install -g @autorest/compare@~0.3.0
+      npm install -g @autorest/compare@~0.3.5
     displayName: Install autorest-compare
     workingDirectory: regression-tests
 
