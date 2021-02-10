@@ -9,7 +9,7 @@ interface MessageVisual {
 
 function getMessageVisual(messageType: MessageType): MessageVisual {
   let prefix = "•";
-  let color: chalk.ChalkFunction = msg => msg;
+  let color: chalk.ChalkFunction = chalk.default;
   let prefixColor: chalk.ChalkFunction | undefined;
 
   switch (messageType) {
@@ -41,32 +41,29 @@ function getMessageVisual(messageType: MessageType): MessageVisual {
   return {
     prefix,
     color,
-    prefixColor: prefixColor || color
+    prefixColor: prefixColor || color,
   };
 }
 
 /**
  * Prints a CompareMessage and its children in a human-readable way
  */
-export function printCompareMessage(
-  compareMessage: CompareMessage,
-  indentLevel: number = 0
-): void {
+export function printCompareMessage(compareMessage: CompareMessage, indentLevel = 0): void {
   const { message, type: messageType, children } = compareMessage;
   const messageVisual = getMessageVisual(messageType);
   const messageLines = message.trimRight().split("\n");
 
-  messageLines.forEach(line => {
+  messageLines.forEach((line) => {
     console.log(
       `${"".padEnd(indentLevel * 2)}`,
       messageVisual.prefixColor(messageVisual.prefix),
-      messageVisual.color(line)
+      messageVisual.color(line),
     );
   });
 
   if (children) {
     const childIndent = indentLevel + 1;
-    children.forEach(child => {
+    children.forEach((child) => {
       printCompareMessage(child, childIndent);
     });
   }

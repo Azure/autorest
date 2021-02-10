@@ -8,7 +8,7 @@ import * as path from "path";
  * Returns a flat list of file paths recursively under the specified folderPath.
  */
 export function getPathsRecursively(folderPath: string): string[] {
-  let filesInPath = [];
+  let filesInPath: string[] = [];
 
   if (!fs.existsSync(folderPath)) {
     return [];

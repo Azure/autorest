@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import * as fs from "fs";
 import * as path from "path";
-import * as Parser from "tree-sitter";
+import Parser from "tree-sitter";
 import * as TypeScript from "tree-sitter-typescript/typescript";
 import {
   CompareResult,
@@ -11,7 +12,7 @@ import {
   MessageType,
   OrderedItem,
   compareStrings,
-  compareText
+  compareText,
 } from "../comparers";
 
 const parser = new Parser();
@@ -94,43 +95,33 @@ export function parseFile(filePath: string): Parser.Tree {
 
 function extractField(fieldNode: Parser.SyntaxNode): FieldDetails {
   const { typeNode, valueNode } = fieldNode as any;
-  const accessibilityNode = fieldNode.namedChildren.find(
-    n => n.type === "accessibility_modifier"
-  );
-  const readOnlyNode = fieldNode.namedChildren.find(n => n.type === "readonly");
+  const accessibilityNode = fieldNode.namedChildren.find((n) => n.type === "accessibility_modifier");
+  const readOnlyNode = fieldNode.namedChildren.find((n) => n.type === "readonly");
 
   return {
     name: (fieldNode as any).nameNode.text,
     type: typeNode ? typeNode.children[1].text : "any",
     value: valueNode ? valueNode.text : undefined,
-    visibility: accessibilityNode
-      ? (accessibilityNode.text as Visibility)
-      : "private",
-    isReadOnly: readOnlyNode !== undefined
+    visibility: accessibilityNode ? (accessibilityNode.text as Visibility) : "private",
+    isReadOnly: readOnlyNode !== undefined,
   };
 }
 
-function extractParameter(
-  parameterNode: Parser.SyntaxNode,
-  ordinal: number
-): ParameterDetails {
+function extractParameter(parameterNode: Parser.SyntaxNode, ordinal: number): ParameterDetails {
   const [nameNode, typeNode] = parameterNode.namedChildren;
 
   return {
     name: nameNode.text,
     type: typeNode ? typeNode.children[1].text : "any",
     ordinal,
-    isOptional: parameterNode.type === "optional_parameter"
+    isOptional: parameterNode.type === "optional_parameter",
   };
 }
 
-function extractGenericParameter(
-  genericParamNode: Parser.SyntaxNode,
-  ordinal: number
-): GenericTypeParameterDetails {
+function extractGenericParameter(genericParamNode: Parser.SyntaxNode, ordinal: number): GenericTypeParameterDetails {
   return {
     name: genericParamNode.namedChildren[0].text,
-    ordinal
+    ordinal,
   };
 }
 
@@ -143,69 +134,55 @@ function extractFunction(functionNode: Parser.SyntaxNode): FunctionDetails {
     name: (functionNode as any).nameNode.text,
     body: (functionNode as any).bodyNode.text,
     genericTypes: genericNodes
-      ? genericNodes.namedChildren.map((p, i) => extractGenericParameter(p, i))
+      ? genericNodes.namedChildren.map((p: any, i: number) => extractGenericParameter(p, i))
       : [],
     returnType: returnTypeNode ? returnTypeNode.children[1].text : "any",
-    parameters: parameterNodes.map((p, i) => extractParameter(p, i))
+    parameters: parameterNodes.map((p: any, i: any) => extractParameter(p, i)),
   };
 }
 
 function extractMethod(methodNode: Parser.SyntaxNode): MethodDetails {
-  const accessibilityNode = methodNode.namedChildren.find(
-    n => n.type === "accessibility_modifier"
-  );
+  const accessibilityNode = methodNode.namedChildren.find((n) => n.type === "accessibility_modifier");
 
   return {
     ...extractFunction(methodNode),
-    visibility: accessibilityNode
-      ? (accessibilityNode.text as Visibility)
-      : "public"
+    visibility: accessibilityNode ? (accessibilityNode.text as Visibility) : "public",
   };
 }
 
 function isExported(node: Parser.SyntaxNode): boolean {
-  return node.parent.type === "export_statement";
+  return node.parent!.type === "export_statement";
 }
 
-function extractImplements(node: Parser.SyntaxNode): string[] {
+function extractImplements(node: Parser.SyntaxNode): string[] | undefined {
   const implementsNode: Parser.SyntaxNode = (node as any).namedChildren.find(
-    n => n.type === "implements_clause"
+    (n: any) => n.type === "implements_clause",
   );
 
-  return implementsNode
-    ? implementsNode.namedChildren.map(i => i.text)
-    : undefined;
+  return implementsNode ? implementsNode.namedChildren.map((i) => i.text) : undefined;
 }
 
-function extractExtends(node: Parser.SyntaxNode): string[] {
-  const extendsNode: Parser.SyntaxNode = (node as any).namedChildren.find(
-    n => n.type === "extends_clause"
-  );
+function extractExtends(node: Parser.SyntaxNode): string[] | undefined {
+  const extendsNode: Parser.SyntaxNode = (node as any).namedChildren.find((n: any) => n.type === "extends_clause");
 
-  return extendsNode ? extendsNode.namedChildren.map(i => i.text) : undefined;
+  return extendsNode ? extendsNode.namedChildren.map((i) => i.text) : undefined;
 }
 
 function extractClass(classNode: Parser.SyntaxNode): ClassDetails {
   const classBody: Parser.SyntaxNode = (classNode as any).bodyNode;
   const heritageNode: Parser.SyntaxNode = (classNode as any).namedChildren.find(
-    n => n.type === "class_heritage"
+    (n: any) => n.type === "class_heritage",
   );
-  const baseClass = heritageNode
-    ? (extractExtends(heritageNode) || [])[0]
-    : undefined;
+  const baseClass = heritageNode ? (extractExtends(heritageNode) || [])[0] : undefined;
   const interfaces = heritageNode ? extractImplements(heritageNode) : undefined;
 
   return {
     name: (classNode as any).nameNode.text,
-    methods: classBody.namedChildren
-      .filter(n => n.type === "method_definition")
-      .map(extractMethod),
-    fields: classBody.namedChildren
-      .filter(n => n.type === "public_field_definition")
-      .map(extractField),
+    methods: classBody.namedChildren.filter((n) => n.type === "method_definition").map(extractMethod),
+    fields: classBody.namedChildren.filter((n) => n.type === "public_field_definition").map(extractField),
     isExported: isExported(classNode),
     ...(baseClass ? { baseClass } : undefined),
-    ...(interfaces ? { interfaces } : undefined)
+    ...(interfaces ? { interfaces } : undefined),
   };
 }
 
@@ -215,14 +192,10 @@ function extractInterface(interfaceNode: Parser.SyntaxNode): InterfaceDetails {
 
   return {
     name: (interfaceNode as any).nameNode.text,
-    methods: interfaceBody.namedChildren
-      .filter(n => n.type === "method_definition")
-      .map(extractMethod),
-    fields: interfaceBody.namedChildren
-      .filter(n => n.type === "public_field_definition")
-      .map(extractField),
+    methods: interfaceBody.namedChildren.filter((n) => n.type === "method_definition").map(extractMethod),
+    fields: interfaceBody.namedChildren.filter((n) => n.type === "public_field_definition").map(extractField),
     isExported: isExported(interfaceNode),
-    ...(interfaces ? { interfaces } : undefined)
+    ...(interfaces ? { interfaces } : undefined),
   };
 }
 
@@ -232,13 +205,11 @@ function extractTypeAlias(typeAliasNode: Parser.SyntaxNode): TypeDetails {
   return {
     name: (typeAliasNode as any).nameNode.text,
     type: typeNode.text,
-    isExported: isExported(typeAliasNode)
+    isExported: isExported(typeAliasNode),
   };
 }
 
-function extractVariable(
-  variableNode: Parser.SyntaxNode
-): ModuleVariableDetails {
+function extractVariable(variableNode: Parser.SyntaxNode): ModuleVariableDetails {
   const typeNode = (variableNode as any).typeNode;
   const valueNode = (variableNode as any).valueNode;
 
@@ -247,57 +218,41 @@ function extractVariable(
     type: typeNode ? typeNode.children[1].text : "any",
     value: valueNode ? valueNode.text : undefined,
     // There isn't a named child for 'const' so look for its type
-    isConst: variableNode.parent.children[0].type === "const",
+    isConst: variableNode.parent!.children[0].type === "const",
     // variable_declarator is wrapped in a lexical_declaration
-    isExported: isExported(variableNode.parent)
+    isExported: isExported(variableNode.parent!),
   };
 }
 
-export function isModuleScopeVariable(
-  variableNode: Parser.SyntaxNode
-): boolean {
+export function isModuleScopeVariable(variableNode: Parser.SyntaxNode): boolean {
   const grandparent = variableNode.parent && variableNode.parent.parent;
-  return (
-    grandparent &&
-    (grandparent.type === "export_statement" || grandparent.type === "program")
-  );
+  return Boolean(grandparent && (grandparent.type === "export_statement" || grandparent.type === "program"));
 }
 
 export function extractSourceDetails(parseTree: Parser.Tree): SourceDetails {
   return {
-    classes: parseTree.rootNode
-      .descendantsOfType("class_declaration")
-      .map(extractClass),
-    interfaces: parseTree.rootNode
-      .descendantsOfType("interface_declaration")
-      .map(extractInterface),
-    types: parseTree.rootNode
-      .descendantsOfType("type_alias_declaration")
-      .map(extractTypeAlias),
+    classes: parseTree.rootNode.descendantsOfType("class_declaration").map(extractClass),
+    interfaces: parseTree.rootNode.descendantsOfType("interface_declaration").map(extractInterface),
+    types: parseTree.rootNode.descendantsOfType("type_alias_declaration").map(extractTypeAlias),
     variables: parseTree.rootNode
       .descendantsOfType("variable_declarator")
       .filter(isModuleScopeVariable)
       .map(extractVariable),
-    functions: parseTree.rootNode
-      .descendantsOfType("function_declaration")
-      .map(extractFunction)
+    functions: parseTree.rootNode.descendantsOfType("function_declaration").map(extractFunction),
   };
 }
 
-export function compareParameter(
-  oldParameter: ParameterDetails,
-  newParameter: ParameterDetails
-): CompareResult {
+export function compareParameter(oldParameter: ParameterDetails, newParameter: ParameterDetails): CompareResult {
   return prepareResult(oldParameter.name, MessageType.Changed, [
     compareValue("Type", oldParameter.type, newParameter.type),
-    compareValue("Optional", oldParameter.isOptional, newParameter.isOptional)
+    compareValue("Optional", oldParameter.isOptional, newParameter.isOptional),
   ]);
 }
 
 export function compareFunction(
   oldFunction: FunctionDetails,
   newFunction: FunctionDetails,
-  extraResults?: CompareResult[]
+  extraResults?: CompareResult[],
 ): CompareResult {
   return prepareResult(oldFunction.name, MessageType.Changed, [
     compareItems(
@@ -305,8 +260,8 @@ export function compareFunction(
       MessageType.Outline,
       oldFunction.genericTypes,
       newFunction.genericTypes,
-      t => undefined, // There's nothing to compare other than existence and order
-      true
+      (t) => undefined, // There's nothing to compare other than existence and order
+      true,
     ),
     compareItems(
       "Parameters",
@@ -314,139 +269,65 @@ export function compareFunction(
       oldFunction.parameters,
       newFunction.parameters,
       compareParameter,
-      true
+      true,
     ),
     compareValue("Return Type", oldFunction.returnType, newFunction.returnType),
     ...(extraResults || []),
-    compareText("Body", oldFunction.body, newFunction.body)
+    compareText("Body", oldFunction.body, newFunction.body),
   ]);
 }
 
-export function compareMethod(
-  oldMethod: MethodDetails,
-  newMethod: MethodDetails
-): CompareResult {
+export function compareMethod(oldMethod: MethodDetails, newMethod: MethodDetails): CompareResult {
   return compareFunction(oldMethod, newMethod, [
-    compareValue("Visibility", oldMethod.visibility, newMethod.visibility)
+    compareValue("Visibility", oldMethod.visibility, newMethod.visibility),
   ]);
 }
 
-export function compareField(
-  oldField: FieldDetails,
-  newField: FieldDetails
-): CompareResult {
+export function compareField(oldField: FieldDetails, newField: FieldDetails): CompareResult {
   return prepareResult(oldField.name, MessageType.Changed, [
     compareValue("Type", oldField.type, newField.type),
     compareText("Value", oldField.value, newField.value),
     compareValue("Visibility", oldField.visibility, newField.visibility),
-    compareValue("Read Only", oldField.isReadOnly, newField.isReadOnly)
+    compareValue("Read Only", oldField.isReadOnly, newField.isReadOnly),
   ]);
 }
 
-export function compareVariable(
-  oldVariable: ModuleVariableDetails,
-  newVariable: ModuleVariableDetails
-): CompareResult {
+export function compareVariable(oldVariable: ModuleVariableDetails, newVariable: ModuleVariableDetails): CompareResult {
   return prepareResult(oldVariable.name, MessageType.Changed, [
     compareValue("Type", oldVariable.type, newVariable.type),
     compareText("Value", oldVariable.value, newVariable.value),
     compareValue("Exported", oldVariable.isExported, newVariable.isExported),
-    compareValue("Constant", oldVariable.isConst, newVariable.isConst)
+    compareValue("Constant", oldVariable.isConst, newVariable.isConst),
   ]);
 }
 
-export function compareClass(
-  oldClass: ClassDetails,
-  newClass: ClassDetails
-): CompareResult {
+export function compareClass(oldClass: ClassDetails, newClass: ClassDetails): CompareResult {
   return prepareResult(oldClass.name, MessageType.Changed, [
     compareValue("Exported", oldClass.isExported, newClass.isExported),
     compareValue("Base Class", oldClass.baseClass, newClass.baseClass),
     compareStrings("Interfaces", oldClass.interfaces, newClass.interfaces),
-    compareItems(
-      "Methods",
-      MessageType.Outline,
-      oldClass.methods,
-      newClass.methods,
-      compareMethod
-    ),
-    compareItems(
-      "Fields",
-      MessageType.Outline,
-      oldClass.fields,
-      newClass.fields,
-      compareField
-    )
+    compareItems("Methods", MessageType.Outline, oldClass.methods, newClass.methods, compareMethod),
+    compareItems("Fields", MessageType.Outline, oldClass.fields, newClass.fields, compareField),
   ]);
 }
 
-export function compareInterface(
-  oldInterface: InterfaceDetails,
-  newInterface: InterfaceDetails
-): CompareResult {
+export function compareInterface(oldInterface: InterfaceDetails, newInterface: InterfaceDetails): CompareResult {
   return prepareResult(oldInterface.name, MessageType.Changed, [
     compareValue("Exported", oldInterface.isExported, newInterface.isExported),
-    compareStrings(
-      "Base Interfaces",
-      oldInterface.interfaces,
-      newInterface.interfaces
-    ),
-    compareItems(
-      "Methods",
-      MessageType.Outline,
-      oldInterface.methods,
-      newInterface.methods,
-      compareMethod
-    ),
-    compareItems(
-      "Fields",
-      MessageType.Outline,
-      oldInterface.fields,
-      newInterface.fields,
-      compareField
-    )
+    compareStrings("Base Interfaces", oldInterface.interfaces, newInterface.interfaces),
+    compareItems("Methods", MessageType.Outline, oldInterface.methods, newInterface.methods, compareMethod),
+    compareItems("Fields", MessageType.Outline, oldInterface.fields, newInterface.fields, compareField),
   ]);
 }
 
-export function compareFile(
-  oldFile: FileDetails,
-  newFile: FileDetails
-): CompareResult {
-  const oldSource = extractSourceDetails(
-    parseFile(path.resolve(oldFile.basePath, oldFile.name))
-  );
-  const newSource = extractSourceDetails(
-    parseFile(path.resolve(newFile.basePath, newFile.name))
-  );
+export function compareFile(oldFile: FileDetails, newFile: FileDetails): CompareResult {
+  const oldSource = extractSourceDetails(parseFile(path.resolve(oldFile.basePath, oldFile.name)));
+  const newSource = extractSourceDetails(parseFile(path.resolve(newFile.basePath, newFile.name)));
 
   return prepareResult(oldFile.name, MessageType.Changed, [
-    compareItems(
-      "Classes",
-      MessageType.Outline,
-      oldSource.classes,
-      newSource.classes,
-      compareClass
-    ),
-    compareItems(
-      "Interfaces",
-      MessageType.Outline,
-      oldSource.interfaces,
-      newSource.interfaces,
-      compareInterface
-    ),
-    compareItems(
-      "Functions",
-      MessageType.Outline,
-      oldSource.functions,
-      newSource.functions,
-      compareFunction
-    ),
-    compareItems(
-      "Variables",
-      MessageType.Outline,
-      oldSource.variables,
-      newSource.variables,
-      compareVariable
-    )
+    compareItems("Classes", MessageType.Outline, oldSource.classes, newSource.classes, compareClass),
+    compareItems("Interfaces", MessageType.Outline, oldSource.interfaces, newSource.interfaces, compareInterface),
+    compareItems("Functions", MessageType.Outline, oldSource.functions, newSource.functions, compareFunction),
+    compareItems("Variables", MessageType.Outline, oldSource.variables, newSource.variables, compareVariable),
   ]);
 }

@@ -8,7 +8,7 @@ import { AutoRestLanguages } from "./runner";
 import { getOperationFromArgs } from "./cli";
 
 async function main(): Promise<void> {
-  let args = process.argv.slice(2);
+  const args = process.argv.slice(2);
   const languageArgsString = ["", ...AutoRestLanguages].join("\n                                               - ");
 
   // First, check for the --help parameter, or no parameters at all
@@ -69,7 +69,7 @@ Comparison Arguments
   --new-args <AutoRest arguments>              Indicates that what follows are arguments to AutoRest to generate the "new"
                                                output for comparison.
 
-`.trimLeft()
+`.trimLeft(),
     );
   } else {
     const [operation, runConfig] = getOperationFromArgs(args);
@@ -79,7 +79,7 @@ Comparison Arguments
   }
 }
 
-main().catch(err => {
+main().catch((err) => {
   console.error("\nAn error occurred during execution:\n\n", err);
   process.exit(1);
 });

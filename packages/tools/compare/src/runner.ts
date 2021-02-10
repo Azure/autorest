@@ -45,13 +45,7 @@ export interface AutoRestResult {
 /**
  * The names of all supported AutoRest language generators.
  */
-export type AutoRestLanguage =
-  | "typescript"
-  | "python"
-  | "java"
-  | "csharp"
-  | "powershell"
-  | "go";
+export type AutoRestLanguage = "typescript" | "python" | "java" | "csharp" | "powershell" | "go";
 
 /**
  * A list of the names of all supported AutoRest language generators.
@@ -72,9 +66,7 @@ export const AutoRestLanguages: AutoRestLanguage[] = [
 export function getBaseResult(outputPath: string): AutoRestGenerateResult {
   return {
     outputPath,
-    outputFiles: getPathsRecursively(outputPath).map((p) =>
-      path.relative(outputPath, p)
-    ),
+    outputFiles: getPathsRecursively(outputPath).map((p) => path.relative(outputPath, p)),
   };
 }
 
@@ -87,7 +79,7 @@ export const generateWithAutoRest = async (
   language: AutoRestLanguage,
   specPath: string,
   outputPath: string,
-  autoRestArgs: string[]
+  autoRestArgs: string[],
 ): Promise<AutoRestGenerateResult> => {
   const args = [
     // The language generator to use
@@ -136,17 +128,15 @@ export const runAutoRest = (args: string[]): Promise<AutoRestResult> => {
       errorOutput += data.toString();
     });
 
-    let versionArg = args.find((arg) => arg.startsWith("--version"));
-    let [_, version] = versionArg
-      ? parseArgument(versionArg)
-      : [null, "unspecified"];
+    const versionArg = args.find((arg) => arg.startsWith("--version"));
+    const [_, version] = versionArg ? parseArgument(versionArg) : [null, "unspecified"];
 
     autoRestProcess.on("exit", (exitCode) => {
-      if (exitCode > 0) {
+      if (exitCode === null || exitCode > 0) {
         reject(
           new Error(
-            `AutoRest (${version}) exited with non-zero code:\n\n${errorOutput}\n\nCommand Output:\n\n${normalOutput}`
-          )
+            `AutoRest (${version}) exited with non-zero code:\n\n${errorOutput}\n\nCommand Output:\n\n${normalOutput}`,
+          ),
         );
       } else {
         const timeElapsed = Date.now() - startTime;

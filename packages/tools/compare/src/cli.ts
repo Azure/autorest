@@ -3,14 +3,14 @@
 
 import * as fs from "fs";
 import * as path from "path";
-import * as chalk from "chalk";
+import chalk from "chalk";
 import { AutoRestLanguages, AutoRestLanguage } from "./runner";
 import {
   RunConfiguration,
   loadConfiguration,
   SpecConfiguration,
   LanguageConfiguration,
-  UseExistingOutput
+  UseExistingOutput,
 } from "./config";
 import { CompareOperation, BaselineOperation, Operation } from "./operations";
 
@@ -39,7 +39,8 @@ export function getAutoRestArgs(args: string[]): [string[], string[]] {
   const autoRestArgs = [];
 
   while (args.length > 0) {
-    const arg = args.shift();
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const arg = args.shift()!;
     const [argName, _] = parseArgument(arg);
 
     if (argName === "old-args" || argName === "new-args") {
@@ -54,17 +55,13 @@ export function getAutoRestArgs(args: string[]): [string[], string[]] {
 }
 
 function getCompareConfiguration(args: string[]): RunConfiguration {
-  let configPath: string;
-  let languageToRun: AutoRestLanguage;
+  let configPath: string | undefined = undefined;
+  let languageToRun: AutoRestLanguage | undefined = undefined;
   let useExistingOutput: UseExistingOutput | undefined;
 
   function warnIfConfigFileUsed(argName: string): boolean {
     if (configPath !== undefined) {
-      console.log(
-        chalk.gray(
-          `Skipping argument '${argName}' and using value from ${configPath}`
-        )
-      );
+      console.log(chalk.gray(`Skipping argument '${argName}' and using value from ${configPath}`));
 
       return true;
     }
@@ -72,26 +69,27 @@ function getCompareConfiguration(args: string[]): RunConfiguration {
     return false;
   }
 
-  let languageConfig: LanguageConfiguration = {
-    language: undefined,
-    outputPath: undefined,
+  const languageConfig: LanguageConfiguration = {
+    language: undefined as any,
+    outputPath: undefined as any,
     oldArgs: [],
-    newArgs: []
+    newArgs: [],
   };
 
-  let specConfig: SpecConfiguration = {
-    specRootPath: undefined,
-    specPaths: []
+  const specConfig: SpecConfiguration = {
+    specRootPath: undefined as any,
+    specPaths: [],
   };
 
   let runConfig: RunConfiguration = {
     debug: false,
     specs: [specConfig],
-    languages: [languageConfig]
+    languages: [languageConfig],
   };
 
   while (args.length > 0) {
-    const [argName, argValue] = parseArgument(args.shift());
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const [argName, argValue] = parseArgument(args.shift()!);
 
     switch (argName) {
       case "compare":
@@ -101,7 +99,8 @@ function getCompareConfiguration(args: string[]): RunConfiguration {
           }
 
           configPath = argValue;
-          runConfig = loadConfiguration(configPath);
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          runConfig = loadConfiguration(configPath)!;
         }
         break;
 
@@ -139,9 +138,7 @@ function getCompareConfiguration(args: string[]): RunConfiguration {
         if (argValue === "old" || argValue === "all" || argValue === "none") {
           useExistingOutput = argValue;
         } else {
-          throw new Error(
-            `Unexpected value for --use-existing-output: ${argValue}`
-          );
+          throw new Error(`Unexpected value for --use-existing-output: ${argValue}`);
         }
         break;
 
@@ -153,9 +150,7 @@ function getCompareConfiguration(args: string[]): RunConfiguration {
           }
         } else {
           throw new Error(
-            `Unexpected value for --language: ${argValue}.  Supported languages are: ${AutoRestLanguages.join(
-              ", "
-            )}.`
+            `Unexpected value for --language: ${argValue}.  Supported languages are: ${AutoRestLanguages.join(", ")}.`,
           );
         }
         break;
@@ -168,7 +163,7 @@ function getCompareConfiguration(args: string[]): RunConfiguration {
 
   // Add debug flags if --debug was set globally
   if (runConfig.debug) {
-    for (let language of runConfig.languages) {
+    for (const language of runConfig.languages) {
       language.oldArgs.push("--debug");
       language.newArgs.push("--debug");
     }
@@ -176,69 +171,55 @@ function getCompareConfiguration(args: string[]): RunConfiguration {
 
   if (configPath === undefined && languageConfig.language === undefined) {
     throw new Error(
-      `Missing language parameter.  Please use one of the following:\n${[
-        "",
-        ...AutoRestLanguages
-      ].join("\n    --language:")}\n`
+      `Missing language parameter.  Please use one of the following:\n${["", ...AutoRestLanguages].join(
+        "\n    --language:",
+      )}\n`,
     );
   }
 
   if (configPath === undefined && languageConfig.outputPath === undefined) {
-    throw new Error(
-      "An output path must be provided with the --output-path parameter."
-    );
+    throw new Error("An output path must be provided with the --output-path parameter.");
   }
 
   if (configPath === undefined && specConfig.specPaths.length === 0) {
-    throw new Error(
-      "A spec path must be provided with the --spec-path parameter."
-    );
+    throw new Error("A spec path must be provided with the --spec-path parameter.");
   }
 
   // Resolve paths relative to configuration file or the current directory
-  const fullConfigPath = configPath
-    ? path.dirname(path.resolve(configPath))
-    : process.cwd();
+  const fullConfigPath = configPath ? path.dirname(path.resolve(configPath)) : process.cwd();
 
   runConfig = {
     ...runConfig,
     specs: runConfig.specs.map(resolveSpecRootPath(fullConfigPath)),
-    languages: runConfig.languages.map(
-      prepareLanguageConfiguration(fullConfigPath, useExistingOutput)
-    )
+    languages: runConfig.languages.map(prepareLanguageConfiguration(fullConfigPath, useExistingOutput)),
   };
 
   // Filter language configurations to desired language
   if (languageToRun) {
-    runConfig.languages = [
-      runConfig.languages.find(l => l.language === languageToRun)
-    ];
-
-    if (runConfig.languages.length === 0) {
-      throw new Error(
-        `No language configurations are available after --language:${languageToRun} filter.`
-      );
+    const language = runConfig.languages.find((l) => l.language === languageToRun);
+    if (language === undefined) {
+      throw new Error(`No language configurations are available after --language:${languageToRun} filter.`);
     }
+    runConfig.languages = [language];
   }
 
   return runConfig;
 }
 
 function getBaselineConfiguration(args: string[]): RunConfiguration {
-  let configPath: string;
-  let runConfig: RunConfiguration;
-  let languageToRun: string;
+  let configPath: string | undefined = undefined;
+  let runConfig: RunConfiguration | undefined = undefined;
+  let languageToRun: string | undefined = undefined;
 
   while (args.length > 0) {
-    const arg = args.shift();
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const arg = args.shift()!;
     const [argName, argValue] = parseArgument(arg);
 
     switch (argName) {
       case "generate-baseline":
         if (argValue === "true") {
-          throw new Error(
-            "A configuration file must be specified: --generate-baseline:path-to-config.yaml"
-          );
+          throw new Error("A configuration file must be specified: --generate-baseline:path-to-config.yaml");
         }
 
         if (!fs.existsSync(argValue)) {
@@ -254,9 +235,7 @@ function getBaselineConfiguration(args: string[]): RunConfiguration {
           languageToRun = argValue as AutoRestLanguage;
         } else {
           throw new Error(
-            `Unexpected value for --language: ${argValue}.  Supported languages are: ${AutoRestLanguages.join(
-              ", "
-            )}.`
+            `Unexpected value for --language: ${argValue}.  Supported languages are: ${AutoRestLanguages.join(", ")}.`,
           );
         }
         break;
@@ -266,78 +245,71 @@ function getBaselineConfiguration(args: string[]): RunConfiguration {
     }
   }
 
+  if (!configPath) {
+    throw new Error("Couldn't resolve config path.");
+  }
+  if (!runConfig) {
+    throw new Error("Configuration couldn't be loaded");
+  }
+
   // Resolve paths relative to configuration file
   const fullConfigPath = path.dirname(path.resolve(configPath));
   runConfig = {
     ...runConfig,
     specs: runConfig.specs.map(resolveSpecRootPath(fullConfigPath)),
-    languages: runConfig.languages.map(
-      prepareLanguageConfiguration(fullConfigPath)
-    )
+    languages: runConfig.languages.map(prepareLanguageConfiguration(fullConfigPath)),
   };
 
   // Filter language configurations to desired language
   if (languageToRun) {
-    runConfig.languages = [
-      runConfig.languages.find(l => l.language === languageToRun)
-    ];
-
-    if (runConfig.languages.length === 0) {
-      throw new Error(
-        `No language configurations are available after --language:${languageToRun} filter.`
-      );
+    const language = runConfig.languages.find((l) => l.language === languageToRun);
+    if (language === undefined) {
+      throw new Error(`No language configurations are available after --language:${languageToRun} filter.`);
     }
+    runConfig.languages = [language];
   }
 
   return runConfig;
 }
 
 function resolveSpecRootPath(configPath: string) {
-  return function(specConfig: SpecConfiguration): SpecConfiguration {
+  return function (specConfig: SpecConfiguration): SpecConfiguration {
     return {
       ...specConfig,
-      specRootPath: path.resolve(configPath, specConfig.specRootPath)
+      specRootPath: path.resolve(configPath, specConfig.specRootPath),
     };
   };
 }
 
-function prepareLanguageConfiguration(
-  configPath: string,
-  useExistingOutput?: UseExistingOutput
-) {
-  return function(
-    languageConfig: LanguageConfiguration
-  ): LanguageConfiguration {
+function prepareLanguageConfiguration(configPath: string, useExistingOutput?: UseExistingOutput) {
+  return function (languageConfig: LanguageConfiguration): LanguageConfiguration {
     return {
       ...languageConfig,
-      useExistingOutput: useExistingOutput
-        ? useExistingOutput
-        : languageConfig.useExistingOutput,
+      useExistingOutput: useExistingOutput ? useExistingOutput : languageConfig.useExistingOutput,
       outputPath: path.resolve(configPath, languageConfig.outputPath),
       oldArgs: languageConfig.oldArgs.map(resolveUseArgumentPaths(configPath)),
-      newArgs: languageConfig.newArgs.map(resolveUseArgumentPaths(configPath))
+      newArgs: languageConfig.newArgs.map(resolveUseArgumentPaths(configPath)),
     };
   };
 }
 
 function resolveUseArgumentPaths(configPath: string) {
-  return function(autoRestArg: string): string {
+  return function (autoRestArg: string): string {
     const [argName, argValue] = parseArgument(autoRestArg);
     // This assumes that any relative path will start with '.' since
     // we cannot reliably detect a path otherwise
-    return (argName === "use" || argName === "version") &&
-      argValue.startsWith(".")
+    return (argName === "use" || argName === "version") && argValue.startsWith(".")
       ? `--${argName}:${path.resolve(configPath, argValue)}`
       : autoRestArg;
   };
 }
 
-export function getOperationFromArgs(
-  args: string[]
-): [Operation, RunConfiguration] {
+export function getOperationFromArgs(args: string[]): [Operation, RunConfiguration] {
   if (args[0].startsWith("--compare")) {
     return [new CompareOperation(), getCompareConfiguration(args)];
   } else if (args[0].startsWith("--generate-baseline")) {
     return [new BaselineOperation(), getBaselineConfiguration(args)];
+  } else {
+    throw new Error("Unkown operation. Please provide --comopare or --generate-baseline");
   }
 }

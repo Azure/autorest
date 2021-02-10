@@ -80,9 +80,9 @@ export interface RunConfiguration {
 /**
  * Loads a RunConfiguration object from the YAML file at configPath.
  */
-export function loadConfiguration(configPath: string): RunConfiguration {
+export function loadConfiguration(configPath: string): RunConfiguration | undefined {
   try {
-    return yaml.safeLoad(fs.readFileSync(configPath, "utf8")) as RunConfiguration;
+    return yaml.load(fs.readFileSync(configPath, "utf8")) as RunConfiguration;
   } catch (e) {
     console.error(e);
   }

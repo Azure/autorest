@@ -8,10 +8,7 @@ import * as Diff from "diff";
 /**
  * A function which compares two items and returns a CompareResult.
  */
-export type Comparer<TItem extends NamedItem> = (
-  oldItem: TItem,
-  newItem: TItem
-) => CompareResult;
+export type Comparer<TItem extends NamedItem> = (oldItem: TItem, newItem: TItem) => CompareResult;
 
 /**
  * An item with a name.  The name is typically used to compare lists
@@ -65,7 +62,7 @@ export enum MessageType {
   /**
    * A message that indicates an item has changed.
    */
-  Changed
+  Changed,
 }
 
 /**
@@ -97,17 +94,13 @@ export type CompareResult = CompareMessage | undefined;
  * Simplifies the creation of a `CompareResult` which only needs to be returned
  * when there are child messages for a comparison output.
  */
-export function prepareResult(
-  message: string,
-  messageType: MessageType,
-  results: CompareResult[]
-): CompareResult {
-  const children = results.filter(r => r !== undefined);
+export function prepareResult(message: string, messageType: MessageType, results: CompareResult[]): CompareResult {
+  const children = results.filter((r) => r !== undefined);
   return children.length > 0
     ? {
         message,
         type: messageType,
-        children
+        children: children as CompareMessage[],
       }
     : undefined;
 }
@@ -134,13 +127,13 @@ export function compareItems<TItem extends NamedItem>(
   oldItems: TItem[],
   newItems: TItem[],
   compareFunc: Comparer<TItem>,
-  isOrderSignificant?: boolean
+  isOrderSignificant?: boolean,
 ): CompareResult {
   const messages: CompareMessage[] = [];
   let orderChanged = false;
 
   // Build an index of the new items
-  const oldItemIndex: object = {};
+  const oldItemIndex: any = {};
   for (const oldItem of oldItems) {
     oldItemIndex[oldItem.name] = oldItem;
   }
@@ -156,10 +149,7 @@ export function compareItems<TItem extends NamedItem>(
         const oldOrder: number | undefined = (oldItem as any).ordinal;
         const newOrder: number | undefined = (newItem as any).ordinal;
 
-        orderChanged =
-          oldOrder !== undefined &&
-          newOrder !== undefined &&
-          oldOrder !== newOrder;
+        orderChanged = oldOrder !== undefined && newOrder !== undefined && oldOrder !== newOrder;
 
         if (orderChanged) {
           messages.push({
@@ -167,14 +157,14 @@ export function compareItems<TItem extends NamedItem>(
             type: MessageType.Outline,
             children: [
               {
-                message: oldItems.map(i => i.name).join(", "),
-                type: MessageType.Removed
+                message: oldItems.map((i) => i.name).join(", "),
+                type: MessageType.Removed,
               },
               {
-                message: newItems.map(i => i.name).join(", "),
-                type: MessageType.Added
-              }
-            ]
+                message: newItems.map((i) => i.name).join(", "),
+                type: MessageType.Added,
+              },
+            ],
           });
         }
       }
@@ -188,7 +178,7 @@ export function compareItems<TItem extends NamedItem>(
     } else {
       messages.push({
         message: newItem.name,
-        type: MessageType.Added
+        type: MessageType.Added,
       });
     }
   }
@@ -199,7 +189,7 @@ export function compareItems<TItem extends NamedItem>(
     // Insert removed items at the front of the list
     messages.unshift({
       message: oldItemName,
-      type: MessageType.Removed
+      type: MessageType.Removed,
     });
   }
 
@@ -213,14 +203,14 @@ export function compareItems<TItem extends NamedItem>(
 export function compareStrings(
   resultMessage: string,
   oldItems: string[] | undefined,
-  newItems: string[] | undefined
+  newItems: string[] | undefined,
 ): CompareResult {
   return compareItems(
     resultMessage,
     MessageType.Outline,
-    (oldItems || []).map(name => ({ name })),
-    (newItems || []).map(name => ({ name })),
-    (o, n) => undefined
+    (oldItems || []).map((name) => ({ name })),
+    (newItems || []).map((name) => ({ name })),
+    (o, n) => undefined,
   );
 }
 
@@ -228,19 +218,15 @@ export function compareStrings(
  * Performs a strict comparison of two values and returns a message
  * reporting the difference, if any.
  */
-export function compareValue(
-  message: string,
-  oldValue: any,
-  newValue: any
-): CompareResult {
+export function compareValue(message: string, oldValue: any, newValue: any): CompareResult {
   return oldValue !== newValue
     ? {
         message,
         type: MessageType.Outline,
         children: [
           { message: `${oldValue}`, type: MessageType.Removed },
-          { message: `${newValue}`, type: MessageType.Added }
-        ]
+          { message: `${newValue}`, type: MessageType.Added },
+        ],
       }
     : undefined;
 }
@@ -256,17 +242,15 @@ function getDiffMessage(diffChange: Diff.Change): CompareMessage {
     messageType = MessageType.Removed;
   } else {
     // Trim plain messages so that they don't take up too much space
-    let messageLines = message.split("\n");
+    const messageLines = message.split("\n");
     if (messageLines.length > maxPlainDiffLines) {
-      message = `${messageLines
-        .slice(0, maxPlainDiffLines)
-        .join("\n")}\n... [trimmed for brevity] ...`;
+      message = `${messageLines.slice(0, maxPlainDiffLines).join("\n")}\n... [trimmed for brevity] ...`;
     }
   }
 
   return {
     message,
-    type: messageType
+    type: messageType,
   };
 }
 
@@ -277,11 +261,11 @@ function getDiffMessage(diffChange: Diff.Change): CompareMessage {
 export function compareText(
   message: string,
   oldString: string | undefined,
-  newString: string | undefined
+  newString: string | undefined,
 ): CompareResult {
   const wrapperMessage = {
     message,
-    type: MessageType.Outline
+    type: MessageType.Outline,
   };
 
   if (oldString === undefined && newString === undefined) {
@@ -291,19 +275,17 @@ export function compareText(
       ...wrapperMessage,
       children: [
         {
-          message: oldString || newString,
-          type:
-            oldString === undefined ? MessageType.Added : MessageType.Removed
-        }
-      ]
+          message: oldString ?? newString ?? "",
+          type: oldString === undefined ? MessageType.Added : MessageType.Removed,
+        },
+      ],
     };
   } else {
     const diff = Diff.diffLines(oldString, newString);
-    return diff.length > 0 &&
-      !(diff.length === 1 && diff[0].value.length === newString.length)
+    return diff.length > 0 && !(diff.length === 1 && diff[0].value.length === newString.length)
       ? {
           ...wrapperMessage,
-          children: diff.map(getDiffMessage)
+          children: diff.map(getDiffMessage),
         }
       : undefined;
   }
@@ -328,11 +310,7 @@ export interface CompareSourceOptions {
  * Compares two files which are considered to be the same (having the same file
  * path) using a comparer that is selected based on the file's extension.
  */
-export function compareFile(
-  oldFile: FileDetails,
-  newFile: FileDetails,
-  options: CompareSourceOptions
-): CompareResult {
+export function compareFile(oldFile: FileDetails, newFile: FileDetails, options: CompareSourceOptions): CompareResult {
   const extension = path.extname(oldFile.name).substr(1);
   const comparer = options.comparersByType[extension];
   return comparer ? comparer(oldFile, newFile) : undefined;
@@ -344,20 +322,20 @@ export function compareFile(
 export function compareOutputFiles(
   baseResult: AutoRestGenerateResult,
   nextResult: AutoRestGenerateResult,
-  options: CompareSourceOptions
+  options: CompareSourceOptions,
 ): CompareResult {
   return compareItems(
     "Generated Output Files",
     MessageType.Outline,
-    baseResult.outputFiles.map(file => ({
+    baseResult.outputFiles.map((file) => ({
       name: file,
-      basePath: baseResult.outputPath
+      basePath: baseResult.outputPath,
     })),
-    nextResult.outputFiles.map(file => ({
+    nextResult.outputFiles.map((file) => ({
       name: file,
-      basePath: nextResult.outputPath
+      basePath: nextResult.outputPath,
     })),
-    (oldFile, newFile) => compareFile(oldFile, newFile, options)
+    (oldFile, newFile) => compareFile(oldFile, newFile, options),
   );
 }
 
@@ -367,7 +345,7 @@ export function compareOutputFiles(
  */
 export async function compareDuration(
   baseResult: AutoRestGenerateResult,
-  nextResult: AutoRestGenerateResult
+  nextResult: AutoRestGenerateResult,
 ): Promise<void> {
   // TODO: Write some logic for this
 }

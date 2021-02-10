@@ -1,27 +1,7 @@
 {
+  "extends": "../../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "noErrorTruncation": true,
-    "noImplicitAny": false,
-    "module": "commonjs",
-    "sourceMap": true,
-    "newLine": "LF",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "downlevelIteration": true,
-    "declaration": true,
-    "stripInternal": true,
-    "target": "es6",
-    "lib": [
-      "es5",
-      "es2015.collection",
-      "es2015.iterable"
-    ]
+    "outDir": "dist"
   },
-  "exclude": [
-    "dist",
-    "node_modules",
-    "generated/**",
-    "test/**"
-  ]
+  "include": ["src/**/*.ts", "definitions/**/*.d.ts", "test/**/*.ts"]
 }
