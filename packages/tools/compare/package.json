@@ -1,0 +1,49 @@
+{
+  "name": "@autorest/compare",
+  "version": "0.3.6",
+  "description": "Compares the output between two AutoRest runs to check for material differences.",
+  "main": "dist/index.js",
+  "bin": {
+    "autorest-compare": "dist/index.js"
+  },
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "test:unit": "ts-mocha -p tsconfig.json test/**/*.spec.ts",
+    "test-run": "ts-node src/index.ts --typescript --spec-path:redis/resource-manager --spec-root-path:../azure-rest-api-specs/specification --output-path:generated/ --compare-base --version:^2.0.0 --compare-next --version:3.0.6170",
+    "test-generate": "ts-node src/index.ts --generate-baseline --typescript --spec-path:redis/resource-manager --spec-root-path:../azure-rest-api-specs/specification --output-path:generated/ --compare-base --version:^2.0.0 --compare-next --version:3.0.6170",
+    "test-python": "ts-node src/index.ts --python --output-path:generated/python/ --spec-path:body-string.json --spec-root-path:/home/daviwil/Projects/Code/autorest.modelerfour/modelerfour/node_modules/@microsoft.azure/autorest.testserver/__files/ --compare-old --v3 --version=3.0.6199 --use=@autorest/python@5.0.0_20200124 --use:@autorest/modelerfour@4.3.142 --debug --compare-new --v3 --version=3.0.6199 --use=@autorest/python@5.0.0_20200124  --use:/home/daviwil/Projects/Code/autorest.modelerfour/modelerfour --debug --verbose",
+    "build": "tsc -p .",
+    "watch": "tsc -p . --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/autorest.compare.git"
+  },
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/autorest.compare/issues"
+  },
+  "homepage": "https://github.com/Azure/autorest.compare#readme",
+  "dependencies": {
+    "autorest": "3.0.6337",
+    "@types/diff": "^4.0.2",
+    "@types/js-yaml": "^3.12.2",
+    "chalk": "^3.0.0",
+    "diff": "^4.0.1",
+    "js-yaml": "^3.13.1",
+    "source-map-support": "^0.5.19",
+    "tree-sitter": "^0.17.0",
+    "tree-sitter-python": "^0.16.0",
+    "tree-sitter-typescript": "0.16.1"
+  },
+  "devDependencies": {
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.12.14",
+    "@types/source-map-support": "^0.5.3",
+    "mocha": "^6.2.2",
+    "ts-mocha": "^6.0.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^3.7.3"
+  }
+}
