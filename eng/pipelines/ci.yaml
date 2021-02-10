@@ -18,11 +18,11 @@ jobs:
 
       - template: ./templates/build.yaml
 
-      # - script: npx @microsoft/rush test:ci -v
-      #   displayName: Test
+      - script: npx @microsoft/rush test:ci -v
+        displayName: Test
 
-      # - script: npx @microsoft/rush lint -v
-      #   displayName: Lint
+      - script: npx @microsoft/rush lint -v
+        displayName: Lint
 
       - script: npx @microsoft/rush publish --publish --pack --include-all
         displayName: Pack packages
@@ -31,8 +31,8 @@ jobs:
         artifact: packages
         displayName: Publish packages(.tgz) as pipeline artifacts
 
-      # - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-      #     - template: ./templates/create-tryit-comment.yaml
+      - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+          - template: ./templates/create-tryit-comment.yaml
 
   - job: regressiontests
     displayName: Regression tests
