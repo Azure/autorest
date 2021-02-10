@@ -1,6 +1,6 @@
 dependencies:
   '@azure-tools/async-io': 3.0.253
-  '@azure-tools/extension': 3.0.263
+  '@azure-tools/extension': 3.1.270
   '@azure-tools/linq': 3.1.262
   '@azure-tools/object-comparison': 3.0.252
   '@azure-tools/tasks': 3.0.253
@@ -127,11 +127,12 @@ packages:
       node: '>=10.12.0'
     resolution:
       integrity: sha512-mgWKlHQeqn2i46xtoo+cfW+147lW8RCTwdIDl9XmyeZqsVx8FxBssTdEbKUCvYqFtS+7b6QZXnrYGZuXHD9Ayg==
-  /@azure-tools/extension/3.0.263:
+  /@azure-tools/extension/3.1.270:
     dependencies:
       '@azure-tools/async-io': 3.0.253
       '@azure-tools/eventing': 3.0.252
       '@azure-tools/tasks': 3.0.253
+      npm: 6.14.9
       npm-normalize-package-bin: 1.0.1
       npm-package-arg: 6.1.0
       pacote: 9.2.3
@@ -141,7 +142,7 @@ packages:
     engines:
       node: '>=10.12.0'
     resolution:
-      integrity: sha512-YO35of27vssxrohiunWeaQl3sF2P/luH/MboQt1B1p3G/hOB5le01ipea6+Y8bdfYQKvhIIUy2Mciwruo4l4eg==
+      integrity: sha512-ZNWhoGUFh2QBdLWe69Gb03TMbV2hmBAe2Cg5ZkNpnXWvPvDEKY9f5gcsH46WgoD4SJKZrwfV8gF1wR0GJ6wjIQ==
   /@azure-tools/linq/3.1.262:
     dev: false
     engines:
@@ -6008,6 +6009,137 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==
+  /npm/6.14.9:
+    bundledDependencies:
+      - abbrev
+      - ansicolors
+      - ansistyles
+      - aproba
+      - archy
+      - bin-links
+      - bluebird
+      - byte-size
+      - cacache
+      - call-limit
+      - chownr
+      - ci-info
+      - cli-columns
+      - cli-table3
+      - cmd-shim
+      - columnify
+      - config-chain
+      - debuglog
+      - detect-indent
+      - detect-newline
+      - dezalgo
+      - editor
+      - figgy-pudding
+      - find-npm-prefix
+      - fs-vacuum
+      - fs-write-stream-atomic
+      - gentle-fs
+      - glob
+      - graceful-fs
+      - has-unicode
+      - hosted-git-info
+      - iferr
+      - imurmurhash
+      - infer-owner
+      - inflight
+      - inherits
+      - ini
+      - init-package-json
+      - is-cidr
+      - json-parse-better-errors
+      - JSONStream
+      - lazy-property
+      - libcipm
+      - libnpm
+      - libnpmaccess
+      - libnpmhook
+      - libnpmorg
+      - libnpmsearch
+      - libnpmteam
+      - libnpx
+      - lock-verify
+      - lockfile
+      - lodash._baseindexof
+      - lodash._baseuniq
+      - lodash._bindcallback
+      - lodash._cacheindexof
+      - lodash._createcache
+      - lodash._getnative
+      - lodash.clonedeep
+      - lodash.restparam
+      - lodash.union
+      - lodash.uniq
+      - lodash.without
+      - lru-cache
+      - meant
+      - mississippi
+      - mkdirp
+      - move-concurrently
+      - node-gyp
+      - nopt
+      - normalize-package-data
+      - npm-audit-report
+      - npm-cache-filename
+      - npm-install-checks
+      - npm-lifecycle
+      - npm-package-arg
+      - npm-packlist
+      - npm-pick-manifest
+      - npm-profile
+      - npm-registry-fetch
+      - npm-user-validate
+      - npmlog
+      - once
+      - opener
+      - osenv
+      - pacote
+      - path-is-inside
+      - promise-inflight
+      - qrcode-terminal
+      - query-string
+      - qw
+      - read-cmd-shim
+      - read-installed
+      - read-package-json
+      - read-package-tree
+      - read
+      - readable-stream
+      - readdir-scoped-modules
+      - request
+      - retry
+      - rimraf
+      - safe-buffer
+      - semver
+      - sha
+      - slide
+      - sorted-object
+      - sorted-union-stream
+      - ssri
+      - stringify-package
+      - tar
+      - text-table
+      - tiny-relative-date
+      - uid-number
+      - umask
+      - unique-filename
+      - unpipe
+      - update-notifier
+      - uuid
+      - validate-npm-package-license
+      - validate-npm-package-name
+      - which
+      - worker-farm
+      - write-file-atomic
+    dev: false
+    engines:
+      node: 6 >=6.2.0 || 8 || >=9.3.0
+    hasBin: true
+    resolution:
+      integrity: sha512-yHi1+i9LyAZF1gAmgyYtVk+HdABlLy94PMIDoK1TRKWvmFQAt5z3bodqVwKvzY0s6dLqQPVsRLiwhJfNtiHeCg==
   /nwsapi/2.2.0:
     dev: false
     resolution:
@@ -8932,7 +9064,7 @@ packages:
   file:projects/autorest.tgz:
     dependencies:
       '@azure-tools/async-io': 3.0.253
-      '@azure-tools/extension': 3.0.263
+      '@azure-tools/extension': 3.1.270
       '@azure-tools/tasks': 3.0.253
       '@azure-tools/uri': 3.0.255
       '@types/commonmark': 0.27.4
@@ -8959,7 +9091,7 @@ packages:
     dev: false
     name: '@rush-temp/autorest'
     resolution:
-      integrity: sha512-lgPcCBuN0EtTshrGvi+QfDtOnIjjIKbjRmXMpa2i+o281i1/Pyp0I77A15Fl1fNqEr1sOj1c2X9Uj9bvy21fAg==
+      integrity: sha512-KHBctuIrg4zY4hPXW9qjfGmL72dTNkznkTwdlpG4taw5rUU3JdDKs9a5+Ym83G1VslIqd73u4J9+iiHoa/2PwQ==
       tarball: file:projects/autorest.tgz
     version: 0.0.0
   file:projects/codegen.tgz_prettier@2.2.1:
@@ -9019,7 +9151,7 @@ packages:
     dependencies:
       '@azure-tools/async-io': 3.0.253
       '@azure-tools/datastore': 4.1.270
-      '@azure-tools/extension': 3.0.263
+      '@azure-tools/extension': 3.1.270
       '@azure-tools/linq': 3.1.262
       '@azure-tools/object-comparison': 3.0.252
       '@azure-tools/openapi': 3.0.261
@@ -9063,7 +9195,7 @@ packages:
     dev: false
     name: '@rush-temp/core'
     resolution:
-      integrity: sha512-T8SYDsPv5DEnDMPQ7ZIXC5qtjqFUyu52CCaI80IoQkAg8G8KgiT7ZV36ZSz9YN3NfMjeKZ97WF9EgD2kksH/1Q==
+      integrity: sha512-Bikx7IUlaTyNJI743z3RvlGWKjY+ZAcRiBRjqKRWu5PJWWD4Ov/3L2eyxzUvQAu3tHDd3gksgAznFgSYRiPWsQ==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.2.1:
@@ -9217,7 +9349,7 @@ packages:
     dev: false
     name: '@rush-temp/modelerfour'
     resolution:
-      integrity: sha512-YN/COv3OXwOQX5gPvd4NbRiJxlkRJOCr+MYA1lAtA+W1e+0d8s5Dfp55wF5MFWr3qrduik051PTR6sOvFx2TYA==
+      integrity: sha512-hmE1KrczGg36CUcBCf1ovA/mJF4agQPaz2vEYuNj+0Q1g5jYKyyLX6Z4oV3ekAhv15pe/U0W47AItDFaGhPb5A==
       tarball: file:projects/modelerfour.tgz
     version: 0.0.0
   file:projects/oai2-to-oai3.tgz_prettier@2.2.1:
@@ -9295,7 +9427,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-XYavD2knZJP9kfvPx5BT4LICne9EJQ1njLwuK6LZXt3JPkfnzsJDAvteRMe547KRXRR6gaHLoAWfyGXrmDKUTA==
+      integrity: sha512-xiMbx3UQsXMjtC8xLYqtOumuG6MxMvoPeOftg1st6kZDkCdCdF95qY5frArgj4E1I4C9V2Mz4dPkU3wqSAvsGA==
       tarball: file:projects/test-public-packages.tgz
     version: 0.0.0
   file:projects/test-utils.tgz_prettier@2.2.1:
@@ -9320,7 +9452,7 @@ packages:
 registry: ''
 specifiers:
   '@azure-tools/async-io': ~3.0.0
-  '@azure-tools/extension': ~3.0.0
+  '@azure-tools/extension': ~3.1.270
   '@azure-tools/linq': ~3.1.0
   '@azure-tools/object-comparison': ~3.0.0
   '@azure-tools/tasks': ~3.0.0

@@ -87,6 +87,6 @@
   },
   "dependencies": {
     "jsonpath": "1.0.0",
-    "@azure-tools/extension": "~3.0.0"
+    "@azure-tools/extension": "~3.1.270"
   }
 }
