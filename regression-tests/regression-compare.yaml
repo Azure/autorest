@@ -63,7 +63,7 @@ languages:
   - language: python
     outputPath: ./output/python
     oldArgs:
-      - --version:~3.0.6320
+      - --version:3.0.6370
       - --use:@autorest/modelerfour@4.15.451
       - --use:@autorest/python@5.5.0
     newArgs:
