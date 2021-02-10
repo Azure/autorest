@@ -1,6 +1,6 @@
 dependencies:
   '@azure-tools/async-io': 3.0.253
-  '@azure-tools/extension': 3.1.270
+  '@azure-tools/extension': 3.1.271
   '@azure-tools/linq': 3.1.262
   '@azure-tools/object-comparison': 3.0.252
   '@azure-tools/tasks': 3.0.253
@@ -127,7 +127,7 @@ packages:
       node: '>=10.12.0'
     resolution:
       integrity: sha512-mgWKlHQeqn2i46xtoo+cfW+147lW8RCTwdIDl9XmyeZqsVx8FxBssTdEbKUCvYqFtS+7b6QZXnrYGZuXHD9Ayg==
-  /@azure-tools/extension/3.1.270:
+  /@azure-tools/extension/3.1.271:
     dependencies:
       '@azure-tools/async-io': 3.0.253
       '@azure-tools/eventing': 3.0.252
@@ -142,7 +142,7 @@ packages:
     engines:
       node: '>=10.12.0'
     resolution:
-      integrity: sha512-ZNWhoGUFh2QBdLWe69Gb03TMbV2hmBAe2Cg5ZkNpnXWvPvDEKY9f5gcsH46WgoD4SJKZrwfV8gF1wR0GJ6wjIQ==
+      integrity: sha512-oMntEJukwqd1C2VgbJ6sOKNMUQivat4Jr8/2ByRZCOYXdnzHwKwuYIFr9NlDmH21ZkeMqS54PQibo4HROtTyeg==
   /@azure-tools/linq/3.1.262:
     dev: false
     engines:
@@ -9064,7 +9064,7 @@ packages:
   file:projects/autorest.tgz:
     dependencies:
       '@azure-tools/async-io': 3.0.253
-      '@azure-tools/extension': 3.1.270
+      '@azure-tools/extension': 3.1.271
       '@azure-tools/tasks': 3.0.253
       '@azure-tools/uri': 3.0.255
       '@types/commonmark': 0.27.4
@@ -9091,7 +9091,7 @@ packages:
     dev: false
     name: '@rush-temp/autorest'
     resolution:
-      integrity: sha512-KHBctuIrg4zY4hPXW9qjfGmL72dTNkznkTwdlpG4taw5rUU3JdDKs9a5+Ym83G1VslIqd73u4J9+iiHoa/2PwQ==
+      integrity: sha512-VbUtsFl7j4/Q5bGUhTUEeCqG9rJ832rTVl1vdDD/HpvVkqtdmsziU2XhaTnngmqi3jc4ZKST3idH8QV0EUrBAQ==
       tarball: file:projects/autorest.tgz
     version: 0.0.0
   file:projects/codegen.tgz_prettier@2.2.1:
@@ -9151,7 +9151,7 @@ packages:
     dependencies:
       '@azure-tools/async-io': 3.0.253
       '@azure-tools/datastore': 4.1.270
-      '@azure-tools/extension': 3.1.270
+      '@azure-tools/extension': 3.1.271
       '@azure-tools/linq': 3.1.262
       '@azure-tools/object-comparison': 3.0.252
       '@azure-tools/openapi': 3.0.261
@@ -9195,7 +9195,7 @@ packages:
     dev: false
     name: '@rush-temp/core'
     resolution:
-      integrity: sha512-Bikx7IUlaTyNJI743z3RvlGWKjY+ZAcRiBRjqKRWu5PJWWD4Ov/3L2eyxzUvQAu3tHDd3gksgAznFgSYRiPWsQ==
+      integrity: sha512-cLN7ZritReZLr1Q6MCDqUCv8kfpm12gnjvRZ5824WN2X3j8YE8lE4O84XL6s4+6k25PQCQKZIwGK2t7ThBk6ng==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.2.1:
@@ -9452,7 +9452,7 @@ packages:
 registry: ''
 specifiers:
   '@azure-tools/async-io': ~3.0.0
-  '@azure-tools/extension': ~3.1.270
+  '@azure-tools/extension': ~3.1.271
   '@azure-tools/linq': ~3.1.0
   '@azure-tools/object-comparison': ~3.0.0
   '@azure-tools/tasks': ~3.0.0
