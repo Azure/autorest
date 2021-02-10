@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import * as fs from "fs";
-import * as path from "path";
+import fs from "fs";
+import path from "path";
 import Parser from "tree-sitter";
-import * as Python from "tree-sitter-python";
+import Python from "tree-sitter-python";
 import {
   CompareResult,
   FileDetails,
