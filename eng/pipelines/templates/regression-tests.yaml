@@ -16,12 +16,7 @@ steps:
 
       sed -i "s,--version:../packages/extensions/core,--version:$corePkg," ./regression-tests/regression-compare.yaml
       sed -i "s,--use:../packages/extensions/modelerfour,--use:$modelerfourPkg," ./regression-tests/regression-compare.yaml
-
-
-      autorest --input-file:https://github.com/Azure/autorest.testserver/blob/master/swagger/additionalProperties.json --version:$corePkg --python --verbose --debug
     displayName: Find packages path
-
-  - script: cat ./regression-tests/regression-compare.yaml
 
   - task: NodeTool@0
     inputs:
@@ -41,6 +36,11 @@ steps:
 
   - script: autorest-compare --compare:./regression-tests/regression-compare.yaml --language:python
     displayName: Regression Test - @autorest/python
+  - script: |
+      corePkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-core-*.tgz" )"
+      npm install -g autorest
+      autorest --input-file:https://github.com/Azure/autorest.testserver/blob/master/swagger/additionalProperties.json --version:$corePkg --python --verbose --debug
+    condition: always()
 
   - script: autorest-compare --compare:./regression-tests/regression-compare.yaml --language:typescript
     displayName: Regression Test - @autorest/typescript
