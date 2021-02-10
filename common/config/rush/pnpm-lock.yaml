@@ -1,6 +1,6 @@
 dependencies:
   '@azure-tools/async-io': 3.0.253
-  '@azure-tools/extension': 3.1.271
+  '@azure-tools/extension': 3.1.272
   '@azure-tools/linq': 3.1.262
   '@azure-tools/object-comparison': 3.0.252
   '@azure-tools/tasks': 3.0.253
@@ -9,7 +9,7 @@ dependencies:
   '@rush-temp/autorest': file:projects/autorest.tgz_ts-node@9.1.1
   '@rush-temp/codegen': file:projects/codegen.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/codemodel': file:projects/codemodel.tgz_prettier@2.2.1
-  '@rush-temp/compare': file:projects/compare.tgz
+  '@rush-temp/compare': file:projects/compare.tgz_prettier@2.2.1
   '@rush-temp/core': file:projects/core.tgz_ts-node@9.1.1
   '@rush-temp/datastore': file:projects/datastore.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/deduplication': file:projects/deduplication.tgz_prettier@2.2.1+ts-node@9.1.1
@@ -113,7 +113,7 @@ packages:
       node: '>=10.12.0'
     resolution:
       integrity: sha512-mgWKlHQeqn2i46xtoo+cfW+147lW8RCTwdIDl9XmyeZqsVx8FxBssTdEbKUCvYqFtS+7b6QZXnrYGZuXHD9Ayg==
-  /@azure-tools/extension/3.1.271:
+  /@azure-tools/extension/3.1.272:
     dependencies:
       '@azure-tools/async-io': 3.0.253
       '@azure-tools/eventing': 3.0.252
@@ -128,7 +128,7 @@ packages:
     engines:
       node: '>=10.12.0'
     resolution:
-      integrity: sha512-oMntEJukwqd1C2VgbJ6sOKNMUQivat4Jr8/2ByRZCOYXdnzHwKwuYIFr9NlDmH21ZkeMqS54PQibo4HROtTyeg==
+      integrity: sha512-jLcUCdpUhMgmYqrGzaa9CJQWMA6ZParNMsvHSxIGizIYuf34rtlPA1Fq2R18oeRI8SMKLMKKi+XlGaOrAej4Bg==
   /@azure-tools/linq/3.1.262:
     dev: false
     engines:
@@ -9815,7 +9815,7 @@ packages:
   file:projects/autorest.tgz_ts-node@9.1.1:
     dependencies:
       '@azure-tools/async-io': 3.0.253
-      '@azure-tools/extension': 3.1.271
+      '@azure-tools/extension': 3.1.272
       '@azure-tools/tasks': 3.0.253
       '@azure-tools/uri': 3.0.255
       '@types/commonmark': 0.27.4
@@ -9845,7 +9845,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-JDSI5D2t3oBVSu3RpcbdQBgrRwgelW8FJjWXJvjji96CazsYDUKocjKeDAucNGy9EquETUTkFJCzDF6tLxbARA==
+      integrity: sha512-l+lTDXi+0+f85cEcAMRtkRC0//vXffGDZRJNcQECdLcEVqhUn6t9vWs5lJfSwQVZtJ4hxmnneB/Tyl2D8wiVAw==
       tarball: file:projects/autorest.tgz
     version: 0.0.0
   file:projects/codegen.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9902,15 +9902,20 @@ packages:
       integrity: sha512-vhewttjjPT80EkaPZ1kN3kUvS/ncPbggJgmVgO03gN8lgkPxdtlDwNaXePeR48jecLekjZJlKivhAG+nUdDG7A==
       tarball: file:projects/codemodel.tgz
     version: 0.0.0
-  file:projects/compare.tgz:
+  file:projects/compare.tgz_prettier@2.2.1:
     dependencies:
       '@types/diff': 4.0.2
       '@types/js-yaml': 4.0.0
       '@types/mocha': 5.2.7
       '@types/node': 14.14.22
       '@types/source-map-support': 0.5.3
+      '@typescript-eslint/eslint-plugin': 4.14.2_e5f964fa93e839b7a7927397f6cb9cb1
+      '@typescript-eslint/parser': 4.14.2_eslint@7.19.0+typescript@4.1.3
       chalk: 4.1.0
       diff: 4.0.2
+      eslint: 7.19.0
+      eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
+      eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
       js-yaml: 4.0.0
       mocha: 6.2.3
       source-map-support: 0.5.19
@@ -9921,15 +9926,18 @@ packages:
       ts-node: 9.1.1_typescript@4.1.3
       typescript: 4.1.3
     dev: false
+    id: file:projects/compare.tgz
     name: '@rush-temp/compare'
+    peerDependencies:
+      prettier: '*'
     resolution:
-      integrity: sha512-n6c/gJk7FCAvpGjjV5ckJtBiuALxT57Ncm54ypp8j/+nW8PvVr2BsRv6QZIySNbIeMNU2gUJwCv7OW+7Myhmjg==
+      integrity: sha512-Twa6pn0zBRB7MWM+rMR71EEQMYc7tM1iVAfStb1i04lQaN1DZZ/Eh4mb1jdPJE+/kR24PoKLxvMLjKm3rnvOXA==
       tarball: file:projects/compare.tgz
     version: 0.0.0
   file:projects/core.tgz_ts-node@9.1.1:
     dependencies:
       '@azure-tools/async-io': 3.0.253
-      '@azure-tools/extension': 3.1.271
+      '@azure-tools/extension': 3.1.272
       '@azure-tools/linq': 3.1.262
       '@azure-tools/object-comparison': 3.0.252
       '@azure-tools/tasks': 3.0.253
@@ -9975,7 +9983,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-cLN7ZritReZLr1Q6MCDqUCv8kfpm12gnjvRZ5824WN2X3j8YE8lE4O84XL6s4+6k25PQCQKZIwGK2t7ThBk6ng==
+      integrity: sha512-rClVUIcTSsreGuuNM2/Pzh9IIyvgfu9ODcO33u6vAnWTMxMSXfmDi3CVU+42AB6gfjIeWx6ufp/7VbfZ4UadRA==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -10237,7 +10245,7 @@ packages:
 registry: ''
 specifiers:
   '@azure-tools/async-io': ~3.0.0
-  '@azure-tools/extension': ~3.1.271
+  '@azure-tools/extension': ~3.1.272
   '@azure-tools/linq': ~3.1.0
   '@azure-tools/object-comparison': ~3.0.0
   '@azure-tools/tasks': ~3.0.0

@@ -42,7 +42,7 @@
   "devDependencies": {
     "@autorest/core": "~3.0.6372",
     "@azure-tools/async-io": "~3.0.0",
-    "@azure-tools/extension": "~3.1.271",
+    "@azure-tools/extension": "~3.1.272",
     "@azure-tools/tasks": "~3.0.0",
     "@azure-tools/uri": "~3.0.0",
     "@types/commonmark": "^0.27.0",
@@ -72,7 +72,7 @@
     "dependencies": {
       "@azure-tools/async-io": "~3.0.0",
       "@azure-tools/uri": "~3.0.0",
-      "@azure-tools/extension": "~3.1.271",
+      "@azure-tools/extension": "~3.1.272",
       "@azure-tools/tasks": "~3.0.0",
       "semver": "^5.5.1",
       "chalk": "2.3.0"
