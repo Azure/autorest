@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import * as path from "path";
+import path from "path";
 import { AutoRestGenerateResult } from "./runner";
 import * as Diff from "diff";
 

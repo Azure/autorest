@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import * as fs from "fs";
-import * as path from "path";
-import * as chalk from "chalk";
+import fs from "fs";
+import path from "path";
+import chalk from "chalk";
 import { RunConfiguration, LanguageConfiguration } from "./config";
 import { generateWithAutoRest, AutoRestGenerateResult, getBaseResult, runAutoRest } from "./runner";
 import { compareOutputFiles, CompareResult } from "./comparers";

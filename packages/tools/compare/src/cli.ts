@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import * as fs from "fs";
-import * as path from "path";
+import fs from "fs";
+import path from "path";
 import chalk from "chalk";
 import { AutoRestLanguages, AutoRestLanguage } from "./runner";
 import {

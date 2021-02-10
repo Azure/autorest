@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import * as fs from "fs";
+import fs from "fs";
 import * as yaml from "js-yaml";
 import { AutoRestLanguage } from "./runner";
 
