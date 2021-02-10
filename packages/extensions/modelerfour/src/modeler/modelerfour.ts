@@ -653,8 +653,13 @@ export class ModelerFour {
     const alwaysSeal = this.options[`always-seal-x-ms-enums`] === true;
     const sealed = xmse && (alwaysSeal || !xmse.modelAsString);
 
-    // model as string forces it to be a choice/enum.
-    if (!alwaysSeal && xmse?.modelAsString !== true && (length(schema.enum) === 1 || length(xmse?.values) === 1)) {
+    // Convert an enum to a constant if it only has a single value, is required and modelAsString is not set to true
+    if (
+      !alwaysSeal &&
+      xmse?.modelAsString !== true &&
+      schema.required &&
+      (length(schema.enum) === 1 || length(xmse?.values) === 1)
+    ) {
       const constVal = length(xmse?.values) === 1 ? xmse?.values?.[0]?.value : schema?.enum?.[0];
 
       return this.codeModel.schemas.add(
