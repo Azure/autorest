@@ -18,6 +18,12 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     libraryTarget: "commonjs2",
   },
+  resolve: {
+    ...baseWebpackConfig.resolve,
+    alias: {
+      jsonpath: path.resolve(__dirname, "node_modules", "jsonpath", "jsonpath.min.js"),
+    },
+  },
   optimization: {
     ...baseWebpackConfig.optimization,
     // Makes sure the different endpoints don't duplicate share common code.
