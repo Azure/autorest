@@ -9,6 +9,9 @@
         "patch": [
           {
             "comment": "**Fix** Issue where it was not possible to override a config flag defined in the same markdown config. Markdown configuration loading now treats yaml code block in increasing priority order."
+          },
+          {
+            "comment": "**Update** @azure-tools/extension to newer version that will log errors when installing packages."
           }
         ],
         "dependency": [
