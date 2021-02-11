@@ -200,7 +200,6 @@ describe("Modeler", () => {
     addSchema(spec, "ShouldBeConstant", {
       type: "string",
       enum: ["html_strip"],
-      required: true,
     });
 
     addSchema(spec, "ShouldBeChoice", {
@@ -719,7 +718,6 @@ describe("Modeler", () => {
       "x-ms-enum": {
         modelAsString: false,
       },
-      "required": true,
     });
 
     const codeModelWithoutSetting = await runModeler(spec, {
