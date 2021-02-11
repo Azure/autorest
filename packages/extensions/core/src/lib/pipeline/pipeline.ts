@@ -86,15 +86,22 @@ function buildPipeline(
   //    --> commonmarker                 if such a stage exists
   //    --> THROWS                       otherwise
   const resolvePipelineStageName = (currentStageName: string, relativeName: string) => {
-    while (currentStageName !== "") {
-      currentStageName = currentStageName.substring(0, currentStageName.length - 1);
-      currentStageName = currentStageName.substring(0, currentStageName.lastIndexOf("/") + 1);
+    let stageName = currentStageName;
+    const stageTried: string[] = [];
+    while (stageName !== "") {
+      stageName = stageName.substring(0, stageName.length - 1);
+      stageName = stageName.substring(0, stageName.lastIndexOf("/") + 1);
 
-      if (cfgPipeline[currentStageName + relativeName]) {
-        return currentStageName + relativeName;
+      const resolvedStageName = stageName + relativeName;
+      stageTried.push(resolvedStageName);
+      if (cfgPipeline[resolvedStageName]) {
+        return resolvedStageName;
       }
     }
-    throw new Error(`Cannot resolve pipeline stage '${relativeName}'.`);
+    const search = stageTried.map((x) => ` - ${x}`).join("\n");
+    throw new Error(
+      `Cannot resolve pipeline stage '${relativeName}' for stage '${currentStageName}'. Looked for pipeline stages:\n${search}\n`,
+    );
   };
 
   // One pipeline stage can generate multiple nodes in the pipeline graph
