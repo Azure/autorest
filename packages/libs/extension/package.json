@@ -1,0 +1,67 @@
+{
+  "name": "@azure-tools/extension",
+  "version": "3.1.0",
+  "patchOffset": 100,
+  "description": "Yarn-Based extension aquisition (for Azure Open Source Projects)",
+  "engines": {
+    "node": ">=10.12.0"
+  },
+  "main": "./dist/src/main.js",
+  "typings": "./dist/src/main.d.ts",
+  "scripts": {
+    "build": "tsc -p .",
+    "watch": "tsc -p . --watch",
+    "eslint-fix": "eslint  . --fix --ext .ts",
+    "eslint": "eslint  . --ext .ts",
+    "prepare": "npm run build",
+    "test": "npm run build && _mocha dist/test --timeout 50000",
+    "testci": "npm run build && mocha dist/test --timeout 50000",
+    "clean": "ver > nul 2>&1 nul && npm run --silent clean-cmd || npm run --silent clean-bash",
+    "clean-cmd": "if exist dist rmdir /s /q dist && exit 0 || exit 0 ",
+    "clean-bash": "rm nul && rm -rf dist && exit 0 || exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/perks.git"
+  },
+  "keywords": [
+    "perks",
+    "autorest",
+    "azure",
+    "typescript"
+  ],
+  "author": "Microsoft",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/perks/issues"
+  },
+  "homepage": "https://github.com/Azure/perks/tree/master/extension#readme",
+  "readme": "https://github.com/Azure/perks/tree/master/extension/readme.md",
+  "old": {
+    "@types/npm": "^2.0.28",
+    "npm": "5.6.0"
+  },
+  "dependencies": {
+    "@azure-tools/async-io": "~3.0.0",
+    "@azure-tools/eventing": "~3.0.0",
+    "@azure-tools/tasks": "~3.0.0",
+    "npm-normalize-package-bin": "1.0.1",
+    "npm-package-arg": "6.1.0",
+    "pacote": "9.2.3",
+    "safe-buffer": "5.2.0",
+    "semver": "^5.5.1",
+    "npm": "6.14.9"
+  },
+  "devDependencies": {
+    "@types/mocha": "5.2.5",
+    "@types/node": "12.7.2",
+    "@types/semver": "5.5.0",
+    "@typescript-eslint/eslint-plugin": "~2.6.0",
+    "@typescript-eslint/parser": "~2.6.0",
+    "eslint": "~6.6.0",
+    "mocha": "5.2.0",
+    "mocha-typescript": "1.1.17",
+    "source-map-support": "0.5.13",
+    "typescript": "~3.9.7"
+  }
+}
