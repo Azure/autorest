@@ -1,7 +1,6 @@
 {
   "name": "@azure-tools/extension",
-  "version": "3.1.0",
-  "patchOffset": 100,
+  "version": "3.1.272",
   "description": "Yarn-Based extension aquisition (for Azure Open Source Projects)",
   "engines": {
     "node": ">=10.12.0"
@@ -9,16 +8,14 @@
   "main": "./dist/src/main.js",
   "typings": "./dist/src/main.d.ts",
   "scripts": {
-    "build": "tsc -p .",
-    "watch": "tsc -p . --watch",
-    "eslint-fix": "eslint  . --fix --ext .ts",
-    "eslint": "eslint  . --ext .ts",
+    "build": "tsc -p ./tsconfig.build.json",
+    "watch": "tsc -p ./tsconfig.build.json --watch",
+    "lint:fix": "eslint ./src --fix --ext .ts",
+    "lint": "eslint ./src --ext .ts --max-warnings=0",
     "prepare": "npm run build",
     "test": "npm run build && _mocha dist/test --timeout 50000",
-    "testci": "npm run build && mocha dist/test --timeout 50000",
-    "clean": "ver > nul 2>&1 nul && npm run --silent clean-cmd || npm run --silent clean-bash",
-    "clean-cmd": "if exist dist rmdir /s /q dist && exit 0 || exit 0 ",
-    "clean-bash": "rm nul && rm -rf dist && exit 0 || exit 0"
+    "test:ci": "npm run build && mocha dist/test --timeout 50000",
+    "clean": "rimraf ./dist"
   },
   "repository": {
     "type": "git",
@@ -46,22 +43,25 @@
     "@azure-tools/eventing": "~3.0.0",
     "@azure-tools/tasks": "~3.0.0",
     "npm-normalize-package-bin": "1.0.1",
-    "npm-package-arg": "6.1.0",
+    "npm-package-arg": "^8.1.0",
+    "npm": "6.14.9",
     "pacote": "9.2.3",
+    "rimraf": "^3.0.2",
     "safe-buffer": "5.2.0",
-    "semver": "^5.5.1",
-    "npm": "6.14.9"
+    "semver": "^5.5.1"
   },
   "devDependencies": {
-    "@types/mocha": "5.2.5",
-    "@types/node": "12.7.2",
+    "@types/npm-package-arg": "^6.1.0",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "~14.14.20",
     "@types/semver": "5.5.0",
-    "@typescript-eslint/eslint-plugin": "~2.6.0",
-    "@typescript-eslint/parser": "~2.6.0",
-    "eslint": "~6.6.0",
-    "mocha": "5.2.0",
-    "mocha-typescript": "1.1.17",
-    "source-map-support": "0.5.13",
-    "typescript": "~3.9.7"
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
+    "eslint-plugin-prettier": "~3.2.0",
+    "eslint-plugin-unicorn": "~27.0.0",
+    "eslint": "^7.17.0",
+    "mocha": "^6.2.2",
+    "source-map-support": "^0.5.19",
+    "typescript": "~4.1.3"
   }
 }

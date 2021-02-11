@@ -21,11 +21,7 @@ export const execNpm = async (cwd: string, ...args: string[]) => {
 };
 
 export class Npm implements PackageManager {
-  public async install(
-    directory: string,
-    packages: string[],
-    options?: InstallOptions
-  ) {
+  public async install(directory: string, packages: string[], options?: InstallOptions) {
     const output = await execNpm(
       directory,
       "install",
@@ -33,13 +29,15 @@ export class Npm implements PackageManager {
       "--prefix",
       directory.replace(/\\/g, "/"),
       ...(options?.force ? ["--force"] : []),
-      ...packages
+      ...packages,
     );
     if (output.error) {
+      /* eslint-disable no-console */
       console.error("NPM log:");
       console.log("-".repeat(50));
       console.error(output.log);
       console.log("-".repeat(50));
+      /* eslint-enable no-console */
       throw Error(`Failed to install package '${packages}' -- ${output.error}`);
     }
   }
@@ -48,18 +46,9 @@ export class Npm implements PackageManager {
     await execNpm(directory, "cache", "clean", "--force");
   }
 
-  public async getPackageVersions(
-    directory: string,
-    packageName: string
-  ): Promise<string[]> {
-    const result = await execNpm(
-      directory,
-      "view",
-      packageName,
-      "versions",
-      "--json"
-    );
-    
+  public async getPackageVersions(directory: string, packageName: string): Promise<string[]> {
+    const result = await execNpm(directory, "view", packageName, "versions", "--json");
+
     return JSON.parse(result.stdout).data;
   }
 }

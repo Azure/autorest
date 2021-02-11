@@ -9,20 +9,16 @@ interface MoreOptions extends SpawnOptions {
 export interface ExecResult {
   stdout: string;
   stderr: string;
-  
+
   /**
    * Union of stdout and stderr.
    */
   log: string;
   error: Error | null;
-  code: number;
+  code: number | null;
 }
 
-export const execute = (
-  command: string,
-  cmdlineargs: Array<string>,
-  options: MoreOptions
-): Promise<ExecResult> => {
+export const execute = (command: string, cmdlineargs: Array<string>, options: MoreOptions): Promise<ExecResult> => {
   return new Promise((r, j) => {
     const cp = spawn(command, cmdlineargs, { ...options, stdio: "pipe" });
     if (options.onCreate) {

@@ -103,6 +103,12 @@
       "shouldPublish": false
     },
     {
+      "packageName": "@azure-tools/extension",
+      "projectFolder": "packages/libs/extension",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
       "packageName": "@autorest/extension-base",
       "projectFolder": "packages/libs/extension-base",
       "reviewCategory": "production",

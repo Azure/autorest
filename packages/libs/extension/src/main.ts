@@ -3,97 +3,102 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { exists, isDirectory, isFile, mkdir, readdir, readFile, rmdir } from '@azure-tools/async-io';
-import { Progress, Subscribe } from '@azure-tools/eventing';
-import { CriticalSection, Delay, Exception, Mutex, shallowCopy, SharedLock } from '@azure-tools/tasks';
-import { ChildProcess, spawn, spawnSync } from 'child_process';
-import { resolve as npmResolvePackage } from 'npm-package-arg';
-import { homedir, tmpdir } from 'os';
-import * as pacote from 'pacote';
-import { basename, delimiter, dirname, extname, isAbsolute, join, normalize, resolve } from 'path';
-import * as semver from 'semver';
-import { Npm } from './npm';
-import { PackageManager, PackageManagerType } from './package-manager';
-import { Yarn } from './yarn';
+import { exists, isDirectory, isFile, mkdir, readdir, readFile, rmdir } from "@azure-tools/async-io";
+import { Progress, Subscribe } from "@azure-tools/eventing";
+import { CriticalSection, Delay, Exception, Mutex, shallowCopy, SharedLock } from "@azure-tools/tasks";
+import { ChildProcess, spawn, spawnSync } from "child_process";
+import { resolve as npmResolvePackage } from "npm-package-arg";
+import { homedir, tmpdir } from "os";
+import * as pacote from "pacote";
+import { basename, delimiter, dirname, extname, isAbsolute, join, normalize, resolve } from "path";
+import * as semver from "semver";
+import { Npm } from "./npm";
+import { PackageManager, PackageManagerType } from "./package-manager";
+import { Yarn } from "./yarn";
 import * as fs from "fs";
 
 export async function updatePythonPath(command: Array<string>) {
-  const detect = quoteIfNecessary('import sys; print(sys.hexversion >= 0x03060000)');
+  const detect = quoteIfNecessary("import sys; print(sys.hexversion >= 0x03060000)");
   const path = process.env[getPathVariableName()];
 
-  const pyexe = process.env['AUTOREST_PYTHON_EXE'];
+  const pyexe = process.env["AUTOREST_PYTHON_EXE"];
   if (pyexe) {
     command[0] = pyexe;
     return;
   }
 
   // detect the python interpreter.
-  const py = await getFullPath('py', path);
+  const py = await getFullPath("py", path);
   try {
-    if (py && process.platform === 'win32') {
+    if (py && process.platform === "win32") {
       // check if 'py -3' works
-      if (spawnSync(py, ['-3', '-c', detect], { encoding: 'utf8', shell: true }).stdout.toLowerCase().trim() === 'true') {
+      if (
+        spawnSync(py, ["-3", "-c", detect], { encoding: "utf8", shell: true }).stdout.toLowerCase().trim() === "true"
+      ) {
         command[0] = py;
-        command.splice(1, 0, '-3');
+        command.splice(1, 0, "-3");
         return;
       }
     }
-  }
-  catch {
+  } catch {
     // no worries
   }
 
-  const python3 = await getFullPath('python3', path);
+  const python3 = await getFullPath("python3", path);
   try {
     if (python3) {
       // check if 'python3' works
-      if (spawnSync(python3, ['-c', detect], { encoding: 'utf8', shell: true }).stdout.toLowerCase().trim() === 'true') {
+      if (
+        spawnSync(python3, ["-c", detect], { encoding: "utf8", shell: true }).stdout.toLowerCase().trim() === "true"
+      ) {
         command[0] = python3;
         return;
       }
     }
-  }
-  catch {
+  } catch {
     // no worries
   }
 
-  const python = await getFullPath('python', path);
+  const python = await getFullPath("python", path);
   try {
     if (python) {
       // check if 'python' works (ie, is a v3)
 
-      if (spawnSync(python, ['-c', detect], { encoding: 'utf8', shell: true }).stdout.toLowerCase().trim() === 'true') {
+      if (spawnSync(python, ["-c", detect], { encoding: "utf8", shell: true }).stdout.toLowerCase().trim() === "true") {
         command[0] = python;
         return;
       }
     }
-  }
-  catch {
+  } catch {
     // no worries
   }
 
   switch (process.platform) {
-    case 'win32':
-      console.error('Python interpreter not found -- please install from Microsoft Store or from python.org (at least 3.6)');
+    case "win32":
+      // eslint-disable-next-line no-console
+      console.error(
+        "Python interpreter not found -- please install from Microsoft Store or from python.org (at least 3.6)",
+      );
       break;
-    case 'darwin':
-      console.error('Python interpreter not found -- please install from homebrew (at least 3.6)');
+    case "darwin":
+      // eslint-disable-next-line no-console
+      console.error("Python interpreter not found -- please install from homebrew (at least 3.6)");
       break;
     default:
-      console.error('Python interpreter not found -- please install python >= 3.6');
+      // eslint-disable-next-line no-console
+      console.error("Python interpreter not found -- please install python >= 3.6");
       break;
   }
-  throw new Error('Python interpreter not available.');
+  throw new Error("Python interpreter not available.");
 }
 
 function quoteIfNecessary(text: string): string {
-  if (text && text.indexOf(' ') > -1 && text.charAt(0) != '"') {
+  if (text && text.indexOf(" ") > -1 && text.charAt(0) != '"') {
     return `"${text}"`;
   }
   return text;
 }
 const nodePath = quoteIfNecessary(process.execPath);
-
 
 export class UnresolvedPackageException extends Exception {
   constructor(packageId: string) {
@@ -116,7 +121,7 @@ export class PackageInstallationException extends Exception {
   }
 }
 export class UnsatisfiedEngineException extends Exception {
-  constructor(name: string, version: string, message = '') {
+  constructor(name: string, version: string, message = "") {
     super(`Unable to find matching engine '${name}' - '${version} ${message}'`, 1);
     Object.setPrototypeOf(this, UnsatisfiedEngineException.prototype);
   }
@@ -136,16 +141,28 @@ export class ExtensionFolderLocked extends Exception {
   }
 }
 
-function cmdlineToArray(text: string, result: Array<string> = [], matcher = /[^\s"]+|"([^"]*)"/gi, count = 0): Array<string> {
-  text = text.replace(/\\"/g, '\ufffe');
+function cmdlineToArray(
+  text: string,
+  result: Array<string> = [],
+  matcher = /[^\s"]+|"([^"]*)"/gi,
+  count = 0,
+): Array<string> {
+  text = text.replace(/\\"/g, "\ufffe");
   const match = matcher.exec(text);
-  return match ? cmdlineToArray(text, result, matcher, result.push(match[1] ? match[1].replace(/\ufffe/g, '\\"') : match[0].replace(/\ufffe/g, '\\"'))) : result;
+  return match
+    ? cmdlineToArray(
+        text,
+        result,
+        matcher,
+        result.push(match[1] ? match[1].replace(/\ufffe/g, '\\"') : match[0].replace(/\ufffe/g, '\\"')),
+      )
+    : result;
 }
 
 function getPathVariableName() {
   // windows calls it's path 'Path' usually, but this is not guaranteed.
-  if (process.platform === 'win32') {
-    let PATH = 'Path';
+  if (process.platform === "win32") {
+    let PATH = "Path";
     Object.keys(process.env).forEach(function (e) {
       if (e.match(/^PATH$/i)) {
         PATH = e;
@@ -153,10 +170,10 @@ function getPathVariableName() {
     });
     return PATH;
   }
-  return 'PATH';
+  return "PATH";
 }
 async function realPathWithExtension(command: string): Promise<string | undefined> {
-  const pathExt = (process.env.pathext || '.EXE').split(';');
+  const pathExt = (process.env.pathext || ".EXE").split(";");
   for (const each of pathExt) {
     const filename = `${command}${each}`;
     if (await isFile(filename)) {
@@ -167,19 +184,19 @@ async function realPathWithExtension(command: string): Promise<string | undefine
 }
 
 async function getFullPath(command: string, searchPath?: string): Promise<string | undefined> {
-  command = command.replace(/"/g, '');
+  command = command.replace(/"/g, "");
   const ext = extname(command);
 
   if (isAbsolute(command)) {
     // if the file has an extension, or we're not on win32, and this is an actual file, use it.
-    if (ext || process.platform !== 'win32') {
+    if (ext || process.platform !== "win32") {
       if (await isFile(command)) {
         return command;
       }
     }
 
     // if we're on windows, look for a file with an acceptable extension.
-    if (process.platform === 'win32') {
+    if (process.platform === "win32") {
       // try all the PATHEXT extensions to see if it is a recognized program
       const cmd = await realPathWithExtension(command);
       if (cmd) {
@@ -208,9 +225,11 @@ async function getFullPath(command: string, searchPath?: string): Promise<string
  * Once installed, a Package is an Extension
  */
 export class Package {
-  /* @internal */ public constructor(public resolvedInfo: any, /* @internal */ public packageMetadata: any,/* @internal */ public extensionManager: ExtensionManager) {
-
-  }
+  /* @internal */ public constructor(
+    public resolvedInfo: any,
+    /* @internal */ public packageMetadata: any,
+    /* @internal */ public extensionManager: ExtensionManager,
+  ) {}
 
   get id(): string {
     return this.packageMetadata._id;
@@ -226,8 +245,8 @@ export class Package {
 
   get source(): string {
     // work around bug that npm doesn't programatically handle exact versions.
-    if (this.resolvedInfo.type === 'version' && this.resolvedInfo.registry === true) {
-      return this.packageMetadata._spec + '*';
+    if (this.resolvedInfo.type === "version" && this.resolvedInfo.registry === true) {
+      return this.packageMetadata._spec + "*";
     }
     return this.packageMetadata._spec;
   }
@@ -253,7 +272,7 @@ export class Extension extends Package {
    * The installed location of the package.
    */
   public get location(): string {
-    return normalize(`${this.installationPath}/${this.id.replace('/', '_')}`);
+    return normalize(`${this.installationPath}/${this.id.replace("/", "_")}`);
   }
   /**
    * The path to the installed npm package (internal to 'location')
@@ -270,8 +289,8 @@ export class Extension extends Package {
   }
 
   /**
- * the path to the readme.md configuration file for the extension.
- */
+   * the path to the readme.md configuration file for the extension.
+   */
   public get configurationPath(): Promise<string> {
     return (async () => {
       const items = await readdir(this.modulePath);
@@ -283,7 +302,7 @@ export class Extension extends Package {
           }
         }
       }
-      return '';
+      return "";
     })();
   }
 
@@ -292,7 +311,7 @@ export class Extension extends Package {
     const content = fs.readFileSync(this.packageJsonPath).toString();
     try {
       return JSON.parse(content);
-    } catch(e) {
+    } catch (e) {
       throw new Error(`Failed to parse package definition at '${this.packageJsonPath}'. ${e}`);
     }
   }
@@ -303,7 +322,7 @@ export class Extension extends Package {
       if (cfgPath) {
         return readFile(cfgPath);
       }
-      return '';
+      return "";
     })();
   }
 
@@ -322,7 +341,7 @@ export class Extension extends Package {
  * */
 export class LocalExtension extends Extension {
   public constructor(pkg: Package, private extensionPath: string) {
-    super(pkg, '');
+    super(pkg, "");
   }
   public get location(): string {
     return this.extensionPath;
@@ -332,16 +351,16 @@ export class LocalExtension extends Extension {
   }
 
   async remove(): Promise<void> {
-    throw new Error('Cannot remove local extension. Lifetime not our responsibility.');
+    throw new Error("Cannot remove local extension. Lifetime not our responsibility.");
   }
 }
 
 async function fetchPackageMetadata(spec: string): Promise<any> {
   try {
     return await pacote.manifest(spec, {
-      cache: `${tmpdir()}/cache`,
-      registry: process.env.autorest_registry || 'https://registry.npmjs.org',
-      'full-metadata': true
+      "cache": `${tmpdir()}/cache`,
+      "registry": process.env.autorest_registry || "https://registry.npmjs.org",
+      "full-metadata": true,
     });
   } catch (er) {
     throw new UnresolvedPackageException(spec);
@@ -354,6 +373,8 @@ function resolveName(name: string, version: string) {
   } catch (e) {
     if (e instanceof Error) {
       throw new InvalidPackageIdentityException(name, version, e.message);
+    } else {
+      throw e;
     }
   }
 }
@@ -363,24 +384,17 @@ export class ExtensionManager {
 
   public static async Create(
     installationPath: string,
-    packageManagerType: PackageManagerType = "yarn"
+    packageManagerType: PackageManagerType = "yarn",
   ): Promise<ExtensionManager> {
     if (!(await exists(installationPath))) {
       await mkdir(installationPath);
     }
     if (!(await isDirectory(installationPath))) {
-      throw new Exception(
-        `Extension folder '${installationPath}' is not a valid directory`
-      );
+      throw new Exception(`Extension folder '${installationPath}' is not a valid directory`);
     }
     const lock = new SharedLock(installationPath);
     const packageManager = packageManagerType === "yarn" ? new Yarn() : new Npm();
-    return new ExtensionManager(
-      installationPath,
-      lock,
-      await lock.acquire(),
-      packageManager,
-    );
+    return new ExtensionManager(installationPath, lock, await lock.acquire(), packageManager);
   }
 
   public async dispose() {
@@ -418,8 +432,7 @@ export class ExtensionManager {
     private sharedLock: SharedLock | null,
     private disposeLock: () => Promise<void>,
     private packageManager: PackageManager,
-  ) {
-  }
+  ) {}
 
   public async getPackageVersions(name: string): Promise<Array<string>> {
     const versions = await this.packageManager.getPackageVersions(process.cwd(), name);
@@ -440,9 +453,7 @@ export class ExtensionManager {
 
       // get all matching package versions for that
       if (version.startsWith("~") || version.startsWith("^")) {
-        const vers = (
-          await this.getPackageVersions(resolved.raw)
-        ).filter((each) => semver.satisfies(each, version));
+        const vers = (await this.getPackageVersions(resolved.raw)).filter((each) => semver.satisfies(each, version));
         if (vers.length > 0) {
           resolvedName = `${resolved.name}@${vers[0]}`;
         }
@@ -458,12 +469,10 @@ export class ExtensionManager {
       if (name.startsWith("@autorest/")) {
         const ghurl = `https://github.com/Azure/${name.replace(
           "@autorest/",
-          "autorest."
-        )}/releases/download/v${version}/${name
-          .replace("@", "")
-          .replace("autorest/", "autorest-")}-${version.replace(
+          "autorest.",
+        )}/releases/download/v${version}/${name.replace("@", "").replace("autorest/", "autorest-")}-${version.replace(
           /_/g,
-          "-"
+          "-",
         )}.tgz`;
         try {
           const pm = await fetchPackageMetadata(ghurl);
@@ -479,10 +488,7 @@ export class ExtensionManager {
     }
   }
 
-  public async getInstalledExtension(
-    name: string,
-    version: string
-  ): Promise<Extension | null> {
+  public async getInstalledExtension(name: string, version: string): Promise<Extension | null> {
     if (!semver.validRange(version)) {
       // if they asked for something that isn't a valid range, we have to find out what version
       // the target package actually is.
@@ -518,13 +524,11 @@ export class ExtensionManager {
               ? normalize(`${fullpath}/node_modules/${org}/${name}`)
               : normalize(`${fullpath}/node_modules/${name}`);
             const pm = await fetchPackageMetadata(actualPath);
-            const ext = new Extension(
-              new Package(null, pm, this),
-              this.installationPath
-            );
+            const ext = new Extension(new Package(null, pm, this), this.installationPath);
             if (fullpath !== ext.location) {
+              // eslint-disable-next-line no-console
               console.trace(
-                `WARNING: Not reporting '${fullpath}' since its package.json claims it should be at '${ext.location}' (probably symlinked once and modified later)`
+                `WARNING: Not reporting '${fullpath}' since its package.json claims it should be at '${ext.location}' (probably symlinked once and modified later)`,
               );
               continue;
             }
@@ -547,7 +551,7 @@ export class ExtensionManager {
     pkg: Package,
     force?: boolean,
     maxWait: number = 5 * 60 * 1000,
-    progressInit: Subscribe = () => {}
+    progressInit: Subscribe = () => {},
   ): Promise<Extension> {
     if (!this.sharedLock) {
       throw new Exception("Extension manager has been disposed.");
@@ -561,9 +565,7 @@ export class ExtensionManager {
     // we need this so that only one extension at a time can start installing
     // in this process (since to use NPM right, we have to do a change dir before runinng it)
     // if we ran NPM out-of-proc, this probably wouldn't be necessary.
-    const extensionRelease = await ExtensionManager.criticalSection.acquire(
-      maxWait
-    );
+    const extensionRelease = await ExtensionManager.criticalSection.acquire(maxWait);
 
     if (!(await exists(this.installationPath))) {
       await mkdir(this.installationPath);
@@ -587,9 +589,7 @@ export class ExtensionManager {
 
         // force removal first
         try {
-          progress.NotifyMessage(
-            `Removing existing extension ${extension.location}`
-          );
+          progress.NotifyMessage(`Removing existing extension ${extension.location}`);
           await Delay(100);
           await rmdir(extension.location);
         } catch (e) {
@@ -606,9 +606,7 @@ export class ExtensionManager {
       await extensionRelease();
 
       await results;
-      progress.NotifyMessage(
-        `Package Install completed ${pkg.name}, ${pkg.version}`
-      );
+      progress.NotifyMessage(`Package Install completed ${pkg.name}, ${pkg.version}`);
 
       return extension;
     } catch (e) {
@@ -618,9 +616,7 @@ export class ExtensionManager {
       }
       // clean up the attempted install directory
       if (await isDirectory(extension.location)) {
-        progress.NotifyMessage(
-          `Cleaning up failed installation: ${extension.location}`
-        );
+        progress.NotifyMessage(`Cleaning up failed installation: ${extension.location}`);
         await Delay(100);
         await rmdir(extension.location);
       }
@@ -629,11 +625,7 @@ export class ExtensionManager {
         throw e;
       }
       if (e instanceof Error) {
-        throw new PackageInstallationException(
-          pkg.name,
-          pkg.version,
-          e.message + e.stack
-        );
+        throw new PackageInstallationException(pkg.name, pkg.version, e.message + e.stack);
       }
       throw new PackageInstallationException(pkg.name, pkg.version, `${e}`);
     } finally {
@@ -651,10 +643,7 @@ export class ExtensionManager {
     }
   }
 
-  public async start(
-    extension: Extension,
-    enableDebugger = false
-  ): Promise<ChildProcess> {
+  public async start(extension: Extension, enableDebugger = false): Promise<ChildProcess> {
     const PathVar = getPathVariableName();
     if (!extension.definition.scripts) {
       throw new MissingStartCommandException(extension);
@@ -678,16 +667,8 @@ export class ExtensionManager {
     const env = shallowCopy(process.env);
 
     // add potential .bin folders (depends on platform and npm version)
-    env[PathVar] = `${join(
-      extension.modulePath,
-      "node_modules",
-      ".bin"
-    )}${delimiter}${env[PathVar]}`;
-    env[PathVar] = `${join(
-      extension.location,
-      "node_modules",
-      ".bin"
-    )}${delimiter}${env[PathVar]}`;
+    env[PathVar] = `${join(extension.modulePath, "node_modules", ".bin")}${delimiter}${env[PathVar]}`;
+    env[PathVar] = `${join(extension.location, "node_modules", ".bin")}${delimiter}${env[PathVar]}`;
 
     // find appropriate path for interpreter
     switch (command[0].toLowerCase()) {
@@ -709,15 +690,10 @@ export class ExtensionManager {
       command[i] = quoteIfNecessary(command[i]);
     }
     // spawn the command via the shell (since that how npm would have done it anyway.)
-    const fullCommandPath = await getFullPath(
-      command[0],
-      env[getPathVariableName()]
-    );
+    const fullCommandPath = await getFullPath(command[0], env[getPathVariableName()]);
     if (!fullCommandPath) {
       throw new Exception(
-        `Unable to resolve full path for executable '${
-          command[0]
-        }' -- (cmdline '${command.join(" ")}')`
+        `Unable to resolve full path for executable '${command[0]}' -- (cmdline '${command.join(" ")}')`,
       );
     }
 
@@ -726,18 +702,12 @@ export class ExtensionManager {
     // then we're going to have to add the folder to the PATH
     // and execute it by just the filename
     // and set the path back when we're done.
-    if (
-      process.platform === "win32" &&
-      fullCommandPath.indexOf(" ") > -1 &&
-      !/.exe$/gi.exec(fullCommandPath)
-    ) {
+    if (process.platform === "win32" && fullCommandPath.indexOf(" ") > -1 && !/.exe$/gi.exec(fullCommandPath)) {
       // preserve the current path
       const originalPath = process.env[PathVar];
       try {
         // insert the dir into the path
-        process.env[PathVar] = `${dirname(fullCommandPath)}${delimiter}${
-          env[PathVar]
-        }`;
+        process.env[PathVar] = `${dirname(fullCommandPath)}${delimiter}${env[PathVar]}`;
 
         // call spawn and return
         return spawn(basename(fullCommandPath), command.slice(1), {

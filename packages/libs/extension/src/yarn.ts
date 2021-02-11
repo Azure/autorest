@@ -41,24 +41,22 @@ export const execYarn = async (cwd: string, ...args: string[]) => {
 };
 
 export class Yarn implements PackageManager {
-  public async install(
-    directory: string,
-    packages: string[],
-    options?: InstallOptions
-  ) {
+  public async install(directory: string, packages: string[], options?: InstallOptions) {
     const output = await execYarn(
       directory,
       "add",
       "--global-folder",
       directory.replace(/\\/g, "/"),
       ...(options?.force ? ["--force"] : []),
-      ...packages
+      ...packages,
     );
     if (output.error) {
+      /* eslint-disable no-console */
       console.error("Yarn log:");
       console.log("-".repeat(50));
       console.error(output.log);
       console.log("-".repeat(50));
+      /* eslint-enable no-console */
       throw Error(`Failed to install package '${packages}' -- ${output.error}`);
     }
   }
@@ -67,17 +65,8 @@ export class Yarn implements PackageManager {
     await execYarn(directory, "cache", "clean", "--force");
   }
 
-  public async getPackageVersions(
-    directory: string,
-    packageName: string
-  ): Promise<string[]> {
-    const result = await execYarn(
-      directory,
-      "info",
-      packageName,
-      "versions",
-      "--json"
-    );
+  public async getPackageVersions(directory: string, packageName: string): Promise<string[]> {
+    const result = await execYarn(directory, "info", packageName, "versions", "--json");
     return JSON.parse(result.stdout).data;
   }
 }
