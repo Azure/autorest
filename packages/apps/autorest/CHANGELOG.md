@@ -1,6 +1,14 @@
 # Change Log - autorest
 
-This log was last generated on Wed, 10 Feb 2021 01:05:53 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Feb 2021 18:03:07 GMT and should not be manually modified.
+
+## 3.0.6339
+Thu, 11 Feb 2021 18:03:07 GMT
+
+### Patches
+
+- **Update** @azure-tools/extension to ~3.1.272 
+- **Internals** Update chalk dependency to ^4.1.0
 
 ## 3.0.6338
 Tue, 09 Feb 2021 00:00:00 GMT
