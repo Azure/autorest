@@ -2,6 +2,40 @@
   "name": "autorest",
   "entries": [
     {
+      "version": "3.0.6338",
+      "tag": "autorest_v3.0.6338",
+      "date": "Tue, 09 Feb 2021 00:00:00 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Update** @azure-tools/extension to newer version that will log errors when installing packages."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/core\" from `~3.0.6371` to `~3.0.6372`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.0.6337",
+      "tag": "autorest_v3.0.6337",
+      "date": "Mon, 08 Feb 2021 23:06:15 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix build not generating types"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/core\" from `~3.0.6370` to `~3.0.6371`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.0.6336",
       "tag": "autorest_v3.0.6336",
       "date": "Thu, 04 Feb 2021 19:05:18 GMT",

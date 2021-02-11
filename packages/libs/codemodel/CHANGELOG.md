@@ -1,6 +1,13 @@
 # Change Log - @autorest/codemodel
 
-This log was last generated on Thu, 04 Feb 2021 19:16:37 GMT and should not be manually modified.
+This log was last generated on Mon, 08 Feb 2021 23:06:15 GMT and should not be manually modified.
+
+## 4.14.5
+Mon, 08 Feb 2021 23:06:15 GMT
+
+### Patches
+
+- Add a new `isInMultipart` field on parameters
 
 ## 4.14.4
 Thu, 04 Feb 2021 19:05:18 GMT

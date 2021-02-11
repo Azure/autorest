@@ -54,7 +54,6 @@ export class ConfigurationLoader {
 
     // load config
     const hConfig = await parseCodeBlocks(contextConfig, configFile, contextConfig.DataStore.getDataSink());
-
     if (hConfig.length === 1 && hConfig[0].info === null && configFile.Description.toLowerCase().endsWith(".md")) {
       // this is a whole file, and it's a markdown file.
       return [];
@@ -248,7 +247,7 @@ export class ConfigurationLoader {
       configurationFiles[configFileUri] = await (await fsInputView.ReadStrict(configFileUri)).ReadData();
 
       const blocks = await this.parseCodeBlocks(await fsInputView.ReadStrict(configFileUri), await createView());
-      await addSegments(blocks, false);
+      await addSegments(blocks.reverse(), false);
     }
 
     // 3. resolve 'require'd configuration
@@ -275,7 +274,7 @@ export class ConfigurationLoader {
 
           configurationFiles[additionalConfig] = await (await inputView.ReadStrict(additionalConfig)).ReadData();
           const blocks = await this.parseCodeBlocks(await inputView.ReadStrict(additionalConfig), await createView());
-          await addSegments(blocks);
+          await addSegments(blocks.reverse());
         } catch (e) {
           messageEmitter.Message.Dispatch({
             Channel: Channel.Fatal,
@@ -295,7 +294,7 @@ export class ConfigurationLoader {
         await inputView.ReadStrict(ResolveUri(CreateFolderUri(AppRoot), "resources/default-configuration.md")),
         await createView(),
       );
-      await addSegments(blocks);
+      await addSegments(blocks.reverse());
     }
 
     await includeFn(fsLocal);
@@ -440,7 +439,7 @@ export class ConfigurationLoader {
             viewsToHandle.push(
               await createView(
                 await addSegments(
-                  blocks.map((each) => (each["pipeline-model"] ? { ...each, "load-priority": 1000 } : each)),
+                  blocks.reverse().map((each) => (each["pipeline-model"] ? { ...each, "load-priority": 1000 } : each)),
                 ),
               ),
             );
@@ -475,7 +474,7 @@ export class ConfigurationLoader {
     // reload files
     if (configFileUri !== null) {
       const blocks = await this.parseCodeBlocks(await fsInputView.ReadStrict(configFileUri), await createView());
-      await addSegments(blocks, false);
+      await addSegments(blocks.reverse(), false);
       await includeFn(this.fileSystem);
       await resolveExtensions();
 

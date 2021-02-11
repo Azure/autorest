@@ -37,6 +37,12 @@
       "shouldPublish": false
     },
     {
+      "packageName": "@autorest/compare",
+      "projectFolder": "packages/tools/compare",
+      "reviewCategory": "production",
+      "shouldPublish": false
+    },
+    {
       "packageName": "@autorest/schemas",
       "projectFolder": "packages/libs/autorest-schemas",
       "reviewCategory": "production",

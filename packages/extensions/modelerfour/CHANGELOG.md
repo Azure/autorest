@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Thu, 04 Feb 2021 19:16:37 GMT and should not be manually modified.
+This log was last generated on Mon, 08 Feb 2021 23:06:15 GMT and should not be manually modified.
+
+## 4.16.1
+Mon, 08 Feb 2021 23:06:15 GMT
+
+### Patches
+
+- Set `isInMultipart: true` for multipart parameters
 
 ## 4.16.0
 Thu, 04 Feb 2021 19:05:18 GMT

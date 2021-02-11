@@ -1,6 +1,6 @@
 {
   "name": "autorest",
-  "version": "3.0.6336",
+  "version": "3.0.6338",
   "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is an OpenAPI spec that describes the REST API.",
   "engines": {
     "node": ">=10.13.0"
@@ -40,9 +40,9 @@
   },
   "typings": "./dist/src/exports.d.ts",
   "devDependencies": {
-    "@autorest/core": "~3.0.6370",
+    "@autorest/core": "~3.0.6372",
     "@azure-tools/async-io": "~3.0.0",
-    "@azure-tools/extension": "~3.0.0",
+    "@azure-tools/extension": "~3.1.272",
     "@azure-tools/tasks": "~3.0.0",
     "@azure-tools/uri": "~3.0.0",
     "@types/commonmark": "^0.27.0",
@@ -51,7 +51,7 @@
     "@types/semver": "5.5.0",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
-    "chalk": "2.3.0",
+    "chalk": "^4.1.0",
     "cpy-cli": "~2.0.0",
     "eslint-plugin-prettier": "~3.2.0",
     "eslint-plugin-unicorn": "~27.0.0",
@@ -72,7 +72,7 @@
     "dependencies": {
       "@azure-tools/async-io": "~3.0.0",
       "@azure-tools/uri": "~3.0.0",
-      "@azure-tools/extension": "~3.0.0",
+      "@azure-tools/extension": "~3.1.272",
       "@azure-tools/tasks": "~3.0.0",
       "semver": "^5.5.1",
       "chalk": "2.3.0"

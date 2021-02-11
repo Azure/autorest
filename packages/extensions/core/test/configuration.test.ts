@@ -136,10 +136,10 @@ value:
     let context = await autorest.view;
 
     // output folder should be 'foo'
-    expect(context.config.raw["value"]).toEqual(["foo", "foo_and_not_bar", "not_bar"]);
+    expect(context.config.raw["value"]).toEqual(["not_bar", "foo_and_not_bar", "foo"]);
 
     autorest.AddConfiguration({ bar: true });
     context = await autorest.view;
-    expect(context.config.raw["value"]).toEqual(["foo", "foo_and_bar", "bar"]);
+    expect(context.config.raw["value"]).toEqual(["bar", "foo_and_bar", "foo"]);
   });
 });

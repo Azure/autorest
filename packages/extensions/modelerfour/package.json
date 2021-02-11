@@ -1,6 +1,6 @@
 {
   "name": "@autorest/modelerfour",
-  "version": "4.16.0",
+  "version": "4.16.1",
   "description": "AutoRest Modeler Version Four (component)",
   "directories": {
     "doc": "docs"
@@ -39,7 +39,7 @@
   "homepage": "https://github.com/Azure/autorest.modelerfour/tree/master/modelerfour#readme",
   "readme": "https://github.com/Azure/autorest.modelerfour/tree/master/modelerfour/readme.md",
   "devDependencies": {
-    "@autorest/codemodel": "~4.14.4",
+    "@autorest/codemodel": "~4.14.5",
     "@autorest/extension-base": "~3.2.0",
     "@autorest/test-utils": "~0.1.0",
     "@azure-tools/async-io": "~3.0.0",
@@ -55,7 +55,7 @@
     "@types/webpack": "~4.41.26",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
-    "chalk": "2.3.0",
+    "chalk": "^4.1.0",
     "eslint-plugin-prettier": "~3.2.0",
     "eslint-plugin-unicorn": "~27.0.0",
     "eslint": "^7.17.0",

@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "autorest",
+      "comment": "**Internals** Update chalk dependency to ^4.1.0",
+      "type": "patch"
+    }
+  ],
+  "packageName": "autorest",
+  "email": "tiguerin@microsoft.com"
+}

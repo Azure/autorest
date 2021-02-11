@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "autorest",
-      "comment": "Fix build not generating types",
+      "comment": "**Update** @azure-tools/extension to ~3.1.272 ",
       "type": "patch"
     }
   ],
