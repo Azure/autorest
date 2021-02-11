@@ -1,6 +1,15 @@
 # Change Log - @autorest/core
 
-This log was last generated on Wed, 10 Feb 2021 01:05:52 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Feb 2021 18:03:07 GMT and should not be manually modified.
+
+## 3.0.6373
+Thu, 11 Feb 2021 18:03:07 GMT
+
+### Patches
+
+- **Fix** Configuration for csharp causing pipeline stage not found error
+- **Improvement** Provide a more detail error message when pipeline can't find a stage.
+- **Update** @azure-tools/extension to ~3.1.272 and bundle it in the webpack file
 
 ## 3.0.6372
 Tue, 09 Feb 2021 22:00:21 GMT

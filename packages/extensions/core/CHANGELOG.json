@@ -2,6 +2,24 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.0.6373",
+      "tag": "@autorest/core_v3.0.6373",
+      "date": "Thu, 11 Feb 2021 18:03:07 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Configuration for csharp causing pipeline stage not found error"
+          },
+          {
+            "comment": "**Improvement** Provide a more detail error message when pipeline can't find a stage."
+          },
+          {
+            "comment": "**Update** @azure-tools/extension to ~3.1.272 and bundle it in the webpack file"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.0.6372",
       "tag": "@autorest/core_v3.0.6372",
       "date": "Tue, 09 Feb 2021 22:00:21 GMT",

@@ -2,6 +2,18 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.16.2",
+      "tag": "@autorest/modelerfour_v4.16.2",
+      "date": "Thu, 11 Feb 2021 18:03:07 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Internals** Update chalk dependency to ^4.1.0"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.16.1",
       "tag": "@autorest/modelerfour_v4.16.1",
       "date": "Mon, 08 Feb 2021 23:06:15 GMT",
