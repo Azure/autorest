@@ -8,7 +8,7 @@ export { Message, Channel } from "./lib/message";
 export { Artifact } from "./lib/artifact";
 export {
   AutoRest,
-  ConfigurationView,
+  AutorestContext,
   IdentifyDocument,
   IsConfigurationExtension,
   IsConfigurationDocument,

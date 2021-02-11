@@ -10,6 +10,7 @@ dependencies:
   '@rush-temp/codegen': file:projects/codegen.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/codemodel': file:projects/codemodel.tgz_prettier@2.2.1
   '@rush-temp/compare': file:projects/compare.tgz_prettier@2.2.1
+  '@rush-temp/configuration': file:projects/configuration.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/core': file:projects/core.tgz_ts-node@9.1.1
   '@rush-temp/datastore': file:projects/datastore.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/deduplication': file:projects/deduplication.tgz_prettier@2.2.1+ts-node@9.1.1
@@ -9934,6 +9935,28 @@ packages:
       integrity: sha512-Twa6pn0zBRB7MWM+rMR71EEQMYc7tM1iVAfStb1i04lQaN1DZZ/Eh4mb1jdPJE+/kR24PoKLxvMLjKm3rnvOXA==
       tarball: file:projects/compare.tgz
     version: 0.0.0
+  file:projects/configuration.tgz_prettier@2.2.1+ts-node@9.1.1:
+    dependencies:
+      '@types/jest': 26.0.20
+      '@types/node': 14.14.22
+      '@typescript-eslint/eslint-plugin': 4.14.2_e5f964fa93e839b7a7927397f6cb9cb1
+      '@typescript-eslint/parser': 4.14.2_eslint@7.19.0+typescript@4.1.3
+      eslint: 7.19.0
+      eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
+      eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
+      jest: 26.6.3_ts-node@9.1.1
+      rimraf: 3.0.2
+      typescript: 4.1.3
+    dev: false
+    id: file:projects/configuration.tgz
+    name: '@rush-temp/configuration'
+    peerDependencies:
+      prettier: '*'
+      ts-node: '*'
+    resolution:
+      integrity: sha512-EVrxkL1FDh6fBjFjOyXeDB5zySa2JZVha4LWxkSDNs7OsT/0+8FgbxyN1JRQ0y/jTf2Im0iX0lp//ZCDYXM6DA==
+      tarball: file:projects/configuration.tgz
+    version: 0.0.0
   file:projects/core.tgz_ts-node@9.1.1:
     dependencies:
       '@azure-tools/async-io': 3.0.253
@@ -9983,7 +10006,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-rClVUIcTSsreGuuNM2/Pzh9IIyvgfu9ODcO33u6vAnWTMxMSXfmDi3CVU+42AB6gfjIeWx6ufp/7VbfZ4UadRA==
+      integrity: sha512-0p/B+FO7SiasvCnxLnWO1/PcCTNdl0R+Rtj7qoIPOqqJlGXvCE35gmKDaPTAO7IX4IGoIt4RlcAy+eXzZ+RvVw==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -10204,6 +10227,7 @@ packages:
   file:projects/test-public-packages.tgz_prettier@2.2.1:
     dependencies:
       '@types/jest': 26.0.20
+      '@types/node': 14.14.22
       '@types/source-map-support': 0.5.3
       eslint: 7.19.0
       eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
@@ -10219,7 +10243,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-jRwFyXU3CUmLSzRcEawNKokHJVQQiEk8FDC1iheNNd4MDG3KQZdt6RQ00w9w6PWOahHXnNsXcUjI58pkmCRMLQ==
+      integrity: sha512-eYuOor8YA3sjAjGczARPVi+LUHqgCKxNRvxPaaEsuOUasEYQ8hn71h3JOYZQHpj0XHwAdFgfr9+zfyV/e/4Yrg==
       tarball: file:projects/test-public-packages.tgz
     version: 0.0.0
   file:projects/test-utils.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -10255,6 +10279,7 @@ specifiers:
   '@rush-temp/codegen': file:./projects/codegen.tgz
   '@rush-temp/codemodel': file:./projects/codemodel.tgz
   '@rush-temp/compare': file:./projects/compare.tgz
+  '@rush-temp/configuration': file:./projects/configuration.tgz
   '@rush-temp/core': file:./projects/core.tgz
   '@rush-temp/datastore': file:./projects/datastore.tgz
   '@rush-temp/deduplication': file:./projects/deduplication.tgz

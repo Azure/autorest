@@ -22,8 +22,8 @@ function decorateSpecialProperties(o: any): void {
 export function createComponentModifierPlugin(): PipelinePlugin {
   const noWireExtension = "x-ms-no-wire";
 
-  return createPerFilePlugin(async (config) => async (fileIn, sink) => {
-    const componentModifier = Clone((<any>config.Raw).components);
+  return createPerFilePlugin(async (context) => async (fileIn, sink) => {
+    const componentModifier = Clone(context.config.raw.components);
     if (componentModifier) {
       const o = await fileIn.ReadObject<any>();
 

@@ -55,12 +55,13 @@ import { join, resolve as currentDirectory } from "path";
 import { Help } from "./help";
 import { CreateConfiguration, isLegacy } from "./legacyCli";
 import { Artifact } from "./lib/artifact";
-import { AutoRest, ConfigurationView, IsOpenApiDocument, Shutdown } from "./lib/autorest-core";
-import { AutoRestRawConfiguration, mergeConfigurations } from "./lib/configuration";
-import { Exception, OperationCanceledException } from "./lib/exception";
+import { AutoRest, IsOpenApiDocument, Shutdown } from "./lib/autorest-core";
+import { mergeConfigurations } from "./lib/configuration";
+import { Exception } from "./lib/exception";
 import { Channel, Message } from "./lib/message";
 import { ShallowCopy } from "./lib/source-map/merging";
 import { homedir } from "os";
+import { AutorestRawConfiguration } from "@autorest/configuration";
 
 let verbose = false;
 let debug = false;
@@ -76,7 +77,7 @@ async function legacyMain(autorestArgs: Array<string>): Promise<number> {
   // generate virtual config file
   const currentDirUri = CreateFolderUri(currentDirectory());
   const dataStore = new DataStore();
-  let config: AutoRestRawConfiguration = {};
+  let config: AutorestRawConfiguration = {};
   try {
     config = await CreateConfiguration(
       currentDirUri,
@@ -396,10 +397,10 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   let fastMode = false;
   const tasks = new Array<Promise<void>>();
 
-  const config = await api.view;
+  const context = await api.view;
 
   api.GeneratedFile.Subscribe((_, artifact) => {
-    if (config.HelpRequested) {
+    if (context.config.help) {
       artifacts.push(artifact);
       return;
     }
@@ -419,12 +420,12 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   api.ClearFolder.Subscribe((_, folder) => clearFolders.add(folder));
 
   // maybe a resource schema batch process
-  if (config["resource-schema-batch"]) {
+  if (context.config["resource-schema-batch"]) {
     return resourceSchemaBatch(api);
   }
-  fastMode = !!config["fast-mode"];
+  fastMode = !!context.config["fast-mode"];
 
-  if (config["batch"]) {
+  if (context.config["batch"]) {
     await batch(api);
   } else {
     const result = await api.Process().finish;
@@ -433,7 +434,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     }
   }
 
-  if (config.HelpRequested) {
+  if (context.config.help) {
     // no fs operations on --help! Instead, format and print artifacts to console.
     // - print boilerplate help
     console.log("");
@@ -531,9 +532,9 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
 
   // ask for the view without
   const config = await api.RegenerateView();
-  for (const batchConfig of config.GetNestedConfiguration("resource-schema-batch")) {
+  for (const batchContext of config.getNestedConfiguration("resource-schema-batch")) {
     // really, there should be only one
-    for (const eachFile of batchConfig["input-file"]) {
+    for (const eachFile of batchContext.config["input-file"] ?? []) {
       const path = ResolveUri(config.configFileFolderUri, eachFile);
       const content = await ReadUri(path);
       if (!(await IsOpenApiDocument(content))) {
@@ -571,7 +572,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
       subscribeMessages(instance, () => exitcode++);
 
       // set configuration for that item
-      instance.AddConfiguration(ShallowCopy(batchConfig, "input-file"));
+      instance.AddConfiguration(ShallowCopy(batchContext, "input-file"));
       instance.AddConfiguration({ "input-file": eachFile });
 
       console.log(`Running autorest for *${path}* `);

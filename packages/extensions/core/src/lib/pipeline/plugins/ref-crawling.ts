@@ -10,13 +10,13 @@ import {
   visit,
 } from "@azure-tools/datastore";
 import { ResolveUri } from "@azure-tools/uri";
-import { ConfigurationView } from "../../configuration";
+import { AutorestContext } from "../../configuration";
 import { Channel } from "../../message";
 import { values, items, length } from "@azure-tools/linq";
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
 export async function crawlReferences(
-  config: ConfigurationView,
+  config: AutorestContext,
   inputScope: DataSource,
   filesToCrawl: Array<DataHandle>,
   sink: DataSink,
@@ -99,7 +99,7 @@ class RefProcessor extends Transformer<any, any> {
   }
 
   async processXMSExamples(targetParent: AnyObject, examples: AnyObject) {
-    const xmsExamples = {};
+    const xmsExamples: any = {};
 
     for (const { key, value } of items(examples)) {
       if (value.$ref) {

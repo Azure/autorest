@@ -11,7 +11,7 @@ import {
   createSandbox,
   StrictJsonSyntaxCheck,
 } from "@azure-tools/datastore";
-import { ConfigurationView } from "../autorest-core";
+import { AutorestContext } from "../autorest-core";
 import { OperationAbortedException } from "../exception";
 import { Channel, SourceLocation } from "../message";
 import { MergeYamls, resolveRValue } from "../source-map/merging";
@@ -29,26 +29,26 @@ function tryMarkdown(rawMarkdownOrYaml: string): boolean {
   return /^#/gm.test(rawMarkdownOrYaml);
 }
 
-export async function parse(config: ConfigurationView, literate: DataHandle, sink: DataSink): Promise<DataHandle> {
+export async function parse(config: AutorestContext, literate: DataHandle, sink: DataSink): Promise<DataHandle> {
   return parseInternal(config, literate, sink);
 }
 
 export async function parseCodeBlocks(
-  config: ConfigurationView,
+  config: AutorestContext,
   literate: DataHandle,
   sink: DataSink,
 ): Promise<Array<CodeBlock>> {
   return parseCodeBlocksInternal(config, literate, sink);
 }
 
-async function parseInternal(config: ConfigurationView, hLiterate: DataHandle, sink: DataSink): Promise<DataHandle> {
+async function parseInternal(config: AutorestContext, hLiterate: DataHandle, sink: DataSink): Promise<DataHandle> {
   // merge the parsed codeblocks
   const blocks = (await parseCodeBlocksInternal(config, hLiterate, sink)).map((each) => each.data);
   return MergeYamls(config, blocks, sink);
 }
 
 async function parseCodeBlocksInternal(
-  config: ConfigurationView,
+  config: AutorestContext,
   hLiterate: DataHandle,
   sink: DataSink,
 ): Promise<Array<CodeBlock>> {
@@ -119,7 +119,7 @@ export function evaluateGuard(rawFenceGuard: string, contextObject: any, forceAl
     isLoaded: (name: string) => {
       return (
         contextObject["used-extension"] &&
-        !!contextObject["used-extension"].find((each) => each.startsWith(`["${name}"`))
+        !!contextObject["used-extension"].find((each: any) => each.startsWith(`["${name}"`))
       );
     },
 

@@ -1,12 +1,10 @@
-import { evaluateGuard } from "../parsing/literate-yaml";
-import { MergeOverwriteOrAppend } from "../source-map/merging";
 import { Directive } from "./directive";
 
 /**
  * Represent a raw configuration provided by the user.
  * i.e. The mapping of values passed via a config block, cli arguments, etc.
  */
-export interface AutoRestRawConfiguration {
+export interface AutorestRawConfiguration {
   "__info"?: string | null;
   "__parents"?: any | undefined;
   "allow-no-input"?: boolean;
@@ -17,10 +15,14 @@ export interface AutoRestRawConfiguration {
   "declare-directive"?: { [name: string]: string };
   "output-artifact"?: Array<string> | string;
   "message-format"?: "json" | "yaml" | "regular";
+  "use"?: any[];
   "use-extension"?: { [extensionName: string]: string };
   "require"?: Array<string> | string;
   "try-require"?: Array<string> | string;
   "help"?: any;
+  "pass-thru"?: any[];
+  "disable-validation"?: boolean;
+  "cache"?: any;
   "vscode"?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
 
   "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)
@@ -71,37 +73,10 @@ export interface AutoRestRawConfiguration {
   "debugger"?: any;
 
   "github-auth-token"?: string;
+
+  // TODO-TIM check what is this?
+  "name"?: string;
+  "to"?: string;
+
+  [key: string]: any;
 }
-
-export const mergeConfigurations = (...configs: Array<AutoRestRawConfiguration>): AutoRestRawConfiguration => {
-  let result: AutoRestRawConfiguration = {};
-  configs = configs
-    .map((each, i, a) => ({ ...each, "load-priority": each["load-priority"] || -i }))
-    .sort((a, b) => b["load-priority"] - a["load-priority"]);
-  // if they say --profile: or --api-version: (or in config) then we force it to set the tag=all-api-versions
-  // Some of the rest specs had a default tag set (really shouldn't have done that), which ... was problematic,
-  // so this enables us to override that in the case they are asking for filtering to a profile or a api-verison
-
-  const forceAllVersionsMode = !!configs.find((each) => each["api-version"]?.length || each.profile?.length || 0 > 0);
-  for (const config of configs) {
-    result = mergeConfiguration(result, config, forceAllVersionsMode);
-  }
-  result["load-priority"] = undefined;
-  return result;
-};
-
-// TODO: operate on DataHandleRead and create source map!
-export const mergeConfiguration = (
-  higherPriority: AutoRestRawConfiguration,
-  lowerPriority: AutoRestRawConfiguration,
-  forceAllVersionsMode = false,
-): AutoRestRawConfiguration => {
-  // check guard
-  if (lowerPriority.__info && !evaluateGuard(lowerPriority.__info, higherPriority, forceAllVersionsMode)) {
-    // guard false? => skip
-    return higherPriority;
-  }
-
-  // merge
-  return MergeOverwriteOrAppend(higherPriority, lowerPriority);
-};

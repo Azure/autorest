@@ -16,7 +16,7 @@ import {
   PipeState,
   mergePipeStates,
 } from "@azure-tools/datastore";
-import { ConfigurationView, getExtension } from "../configuration";
+import { AutorestContext, getExtension } from "../configuration";
 import { Channel } from "../message";
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
 import { PipelinePlugin } from "./common";
@@ -71,11 +71,11 @@ interface PipelineNode {
 }
 
 function buildPipeline(
-  config: ConfigurationView,
-): { pipeline: { [name: string]: PipelineNode }; configs: { [jsonPath: string]: ConfigurationView } } {
-  const cfgPipeline = config.GetEntry(<any>"pipeline");
+  context: AutorestContext,
+): { pipeline: { [name: string]: PipelineNode }; configs: { [jsonPath: string]: AutorestContext } } {
+  const cfgPipeline = context.GetEntry("pipeline");
   const pipeline: { [name: string]: PipelineNode } = {};
-  const configCache: { [jsonPath: string]: ConfigurationView } = {};
+  const configCache: { [jsonPath: string]: AutorestContext } = {};
 
   // Resolves a pipeline stage name using the current stage's name and the relative name.
   // It considers the actually existing pipeline stages.
@@ -148,7 +148,7 @@ function buildPipeline(
     ) => {
       if (inputNodes.length === 0) {
         const config = configCache[stringify(configScope)];
-        const configs = scope ? [...config.GetNestedConfiguration(scope)] : [config];
+        const configs = scope ? [...config.getNestedConfiguration(scope)] : [config];
         for (let i = 0; i < configs.length; ++i) {
           const newSuffix = configs.length === 1 ? "" : "/" + i;
           suffixes.push(suffix + newSuffix);
@@ -184,7 +184,7 @@ function buildPipeline(
       }
     };
 
-    configCache[stringify([])] = config;
+    configCache[stringify([])] = context;
     addNodesAndSuffixes("", [], [], inputs.map(createNodesAndSuffixes));
 
     return { name: stageName, suffixes: (cfg.suffixes = suffixes) };
@@ -212,7 +212,7 @@ function isDrainRequired(p: PipelineNode) {
   return false;
 }
 
-export async function runPipeline(configView: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
+export async function runPipeline(configView: AutorestContext, fileSystem: IFileSystem): Promise<void> {
   // built-in plugins
   const plugins: { [name: string]: PipelinePlugin } = {
     "help": createHelpPlugin(),
@@ -249,7 +249,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
         new QuickDataSource([
           await configView.DataStore.getDataSink().WriteObject(
             "configuration",
-            configView.Raw,
+            configView.config.raw,
             ["fix-me-4"],
             "configuration",
           ),
@@ -271,7 +271,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
 
   // dynamically loaded, auto-discovered plugins
   const __extensionExtension: { [pluginName: string]: AutoRestExtension } = {};
-  for (const useExtensionQualifiedName of configView.GetEntry(<any>"used-extension") || []) {
+  for (const useExtensionQualifiedName of configView.GetEntry("used-extension") || []) {
     const extension = await getExtension(useExtensionQualifiedName);
     for (const plugin of await extension.GetPluginNames(configView.CancellationToken)) {
       if (!plugins[plugin]) {
@@ -283,7 +283,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
 
   // __status scope
   const startTime = Date.now();
-  (<any>configView.Raw).__status = new Proxy<any>(
+  configView.config.raw.__status = new Proxy<any>(
     {},
     {
       get(_, key) {
@@ -316,12 +316,11 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
 
   const fsInput = configView.DataStore.GetReadThroughScope(fileSystem);
   const pipeline = buildPipeline(configView);
-  const times = !!configView["timestamp"];
+  const times = !!configView.config["timestamp"];
   const tasks: { [name: string]: Promise<DataSource> } = {};
 
   const ScheduleNode: (nodeName: string) => Promise<DataSource> = async (nodeName) => {
     const node = pipeline.pipeline[nodeName];
-
     if (!node) {
       throw new Error(`Cannot find pipeline node ${nodeName}.`);
     }
@@ -355,16 +354,16 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
         break;
     }
 
-    const config = pipeline.configs[stringify(node.configScope)];
+    const context = pipeline.configs[stringify(node.configScope)];
     const pluginName = node.pluginName;
 
     // you can have --pass-thru:FOO on the command line
     // or add pass-thru: true in a pipline configuration step.
     const passthru =
-      config.GetEntry(node.configScope.last.toString())["pass-thru"] === true ||
+      context.GetEntry(node.configScope.last.toString())["pass-thru"] === true ||
       values(configView.GetEntry("pass-thru")).any((each) => each === pluginName);
     const usenull =
-      config.GetEntry(node.configScope.last.toString())["null"] === true ||
+      context.GetEntry(node.configScope.last.toString())["null"] === true ||
       values(configView.GetEntry("null")).any((each) => each === pluginName);
 
     const plugin = usenull ? plugins.null : passthru ? plugins.identity : plugins[pluginName];
@@ -374,60 +373,60 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
     }
 
     if (inputScope.skip) {
-      config.Message({ Channel: Channel.Debug, Text: `${nodeName} - SKIPPING` });
+      context.Message({ Channel: Channel.Debug, Text: `${nodeName} - SKIPPING` });
       return inputScope;
     }
     try {
       let cacheKey: string | undefined;
 
-      if (config.CacheMode) {
+      if (context.config.cachingEnabled) {
         // generate the key used to store/access cached content
         const names = await inputScope.Enum();
         const data = (
           await Promise.all(names.map((name) => inputScope.ReadStrict(name).then((uri) => md5(uri.ReadData()))))
         ).sort();
 
-        cacheKey = md5([config.configFileFolderUri, nodeName, ...data].join("«"));
+        cacheKey = md5([context.configFileFolderUri, nodeName, ...data].join("«"));
       }
 
       // if caching is enabled, see if we can find a scopeResult in the cache first.
       // key = inputScope names + md5(inputScope content)
       if (
-        config.CacheMode &&
+        context.config.cachingEnabled &&
         inputScope.cachable &&
-        config.CacheExclude.indexOf(nodeName) === -1 &&
+        context.config.cacheExclude.indexOf(nodeName) === -1 &&
         (await isCached(cacheKey))
       ) {
         // shortcut -- get the outputs directly from the cache.
-        config.Message({
+        context.Message({
           Channel: times ? Channel.Information : Channel.Debug,
           Text: `${nodeName} - CACHED inputs = ${(await inputScope.Enum()).length} [0.0 s]`,
         });
 
-        return await readCache(cacheKey, config.DataStore.getDataSink(node.outputArtifact));
+        return await readCache(cacheKey, context.DataStore.getDataSink(node.outputArtifact));
       }
 
       const t1 = process.uptime() * 100;
-      config.Message({
+      context.Message({
         Channel: times ? Channel.Information : Channel.Debug,
         Text: `${nodeName} - START inputs = ${(await inputScope.Enum()).length}`,
       });
 
       // creates the actual plugin.
-      const scopeResult = await plugin(config, inputScope, config.DataStore.getDataSink(node.outputArtifact));
+      const scopeResult = await plugin(context, inputScope, context.DataStore.getDataSink(node.outputArtifact));
       const t2 = process.uptime() * 100;
 
-      config.Message({
+      context.Message({
         Channel: times ? Channel.Information : Channel.Debug,
         Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]`,
       });
 
       // if caching is enabled, let's cache this scopeResult.
-      if (config.CacheMode && cacheKey) {
+      if (context.config.cachingEnabled && cacheKey) {
         await writeCache(cacheKey, scopeResult);
       }
       // if this node wasn't able to load from the cache, then subsequent nodes shall not either
-      if (!inputScope.cachable || config.CacheExclude.indexOf(nodeName) !== -1) {
+      if (!inputScope.cachable || context.config.cacheExclude.indexOf(nodeName) !== -1) {
         try {
           scopeResult.cachable = false;
         } catch {
@@ -437,7 +436,7 @@ export async function runPipeline(configView: ConfigurationView, fileSystem: IFi
 
       return scopeResult;
     } catch (e) {
-      if (configView.DebugMode) {
+      if (configView.config.debug) {
         // eslint-disable-next-line no-console
         console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);
       }

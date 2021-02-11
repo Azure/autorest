@@ -11,7 +11,7 @@ import {
   JsonPath,
   Source,
 } from "@azure-tools/datastore";
-import { ConfigurationView } from "../../../configuration";
+import { AutorestContext } from "../../../configuration";
 import { PipelinePlugin } from "../../common";
 import { values, length } from "@azure-tools/linq";
 import { createHash } from "crypto";
@@ -783,7 +783,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   }
 }
 
-async function shakeTree(config: ConfigurationView, input: DataSource, sink: DataSink) {
+async function shakeTree(config: AutorestContext, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   const isSimpleTreeShake = !!config.GetEntry("simple-tree-shake");

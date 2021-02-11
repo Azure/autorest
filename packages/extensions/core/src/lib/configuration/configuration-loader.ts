@@ -14,12 +14,12 @@ import { Channel, SourceLocation } from "../message";
 import { parseCodeBlocks } from "../parsing/literate-yaml";
 import { AutoRestExtension } from "../pipeline/plugin-endpoint";
 import { AppRoot } from "../constants";
-import { AutoRestRawConfiguration } from "./auto-rest-raw-configuration";
-import { arrayOf } from "./utils";
-import { ConfigurationView } from "./configuration-view";
+import { AutorestRawConfiguration, arrayOf } from "@autorest/configuration";
+import { AutorestContext, createAutorestContext } from "./autorest-context";
 import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
 import { detectConfigurationFile } from "./configuration-file-resolver";
+import { getIncludedConfigurationFiles } from "./loading-utils";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const untildify: (path: string) => string = require("untildify");
@@ -48,8 +48,8 @@ export class ConfigurationLoader {
 
   private async parseCodeBlocks(
     configFile: DataHandle,
-    contextConfig: ConfigurationView,
-  ): Promise<Array<AutoRestRawConfiguration>> {
+    contextConfig: AutorestContext,
+  ): Promise<Array<AutorestRawConfiguration>> {
     const parentFolder = ParentFolderUri(configFile.originalFullPath);
 
     // load config
@@ -63,7 +63,7 @@ export class ConfigurationLoader {
       hConfig
         .filter((each) => each)
         .map((each) => {
-          const pBlock = each.data.ReadObject<AutoRestRawConfiguration>();
+          const pBlock = each.data.ReadObject<AutorestRawConfiguration>();
           return pBlock.then((block) => {
             if (!block) {
               block = {};
@@ -201,7 +201,7 @@ export class ConfigurationLoader {
     messageEmitter: MessageEmitter,
     includeDefault: boolean,
     ...configs: Array<any>
-  ): Promise<ConfigurationView> {
+  ): Promise<AutorestContext> {
     const configFileUri =
       this.fileSystem && this.configFileOrFolderUri
         ? await detectConfigurationFile(this.fileSystem, this.configFileOrFolderUri, messageEmitter)
@@ -211,18 +211,19 @@ export class ConfigurationLoader {
       : this.configFileOrFolderUri || "file:///";
 
     const configurationFiles: { [key: string]: any } = {};
-    const configSegments: Array<any> = [];
-    const secondPass: Array<any> = [];
+    const configSegments: AutorestRawConfiguration[] = [];
+    const secondPass: AutorestRawConfiguration[] = [];
 
     const createView = (segments: Array<any> = configSegments) => {
-      return new ConfigurationView(
+      return createAutorestContext(
         configurationFiles,
         this.fileSystem,
         messageEmitter,
         configFileFolderUri,
         ...segments,
-      ).init();
+      );
     };
+
     const addSegments = async (configs: Array<any>, keepInSecondPass = true): Promise<Array<any>> => {
       const segs = await this.desugarRawConfigs(configs);
       configSegments.push(...segs);
@@ -231,6 +232,7 @@ export class ConfigurationLoader {
       }
       return segs;
     };
+
     const fsInputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
 
     // 1. overrides (CLI, ...)
@@ -251,11 +253,7 @@ export class ConfigurationLoader {
     // 3. resolve 'require'd configuration
     const addedConfigs = new Set<string>();
     const includeFn = async (fsToUse: IFileSystem) => {
-      for await (let additionalConfig of ConfigurationView.getIncludedConfigurationFiles(
-        createView,
-        fsToUse,
-        addedConfigs,
-      )) {
+      for await (let additionalConfig of getIncludedConfigurationFiles(createView, fsToUse, addedConfigs)) {
         // acquire additional configs
         try {
           additionalConfig = simplifyUri(additionalConfig);
@@ -307,9 +305,9 @@ export class ConfigurationLoader {
     const addedExtensions = new Set<string>();
 
     const resolveExtensions = async () => {
-      const viewsToHandle: Array<ConfigurationView> = [await createView()];
+      const viewsToHandle: Array<AutorestContext> = [await createView()];
       while (viewsToHandle.length > 0) {
-        const tmpView = <ConfigurationView>viewsToHandle.pop();
+        const tmpView = <AutorestContext>viewsToHandle.pop();
         const additionalExtensions = tmpView.UseExtensions.filter((ext) => !addedExtensions.has(ext.fullyQualified));
         await addSegments([{ "used-extension": tmpView.UseExtensions.map((x) => x.fullyQualified) }]);
         if (additionalExtensions.length === 0) {
@@ -337,7 +335,7 @@ export class ConfigurationLoader {
 
               // trim off the '@org' and 'autorest.' from the name.
               const shortname = additionalExtension.name.split("/").last.replace(/^autorest\./gi, "");
-              const view = [...(await createView()).GetNestedConfiguration(shortname)];
+              const view = [...(await createView()).getNestedConfiguration(shortname)];
               const enableDebugger = view.length > 0 ? <boolean>view[0].GetEntry("debugger") : false;
 
               // Add a hint here to make legacy users to be aware that the default version has been bumped to 3.0+.
@@ -480,12 +478,12 @@ export class ConfigurationLoader {
       await includeFn(this.fileSystem);
       await resolveExtensions();
 
-      return (await createView([...configs, ...blocks, ...secondPass])).Indexer;
+      return await createView([...configs, ...blocks, ...secondPass]);
     }
 
     await resolveExtensions();
 
     // return the final view
-    return (await createView()).Indexer;
+    return await createView();
   }
 }

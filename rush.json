@@ -85,6 +85,12 @@
       "shouldPublish": true
     },
     {
+      "packageName": "@autorest/configuration",
+      "projectFolder": "packages/libs/configuration",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
       "packageName": "@autorest/test-utils",
       "projectFolder": "packages/testing/test-utils",
       "reviewCategory": "production",

@@ -165,7 +165,7 @@ class Result {
       await this.resetConfiguration(this.service.settings.configuration);
 
       // get the list of files this is running on
-      this.files = (await this.AutoRest.view).InputFileUris;
+      this.files = (await this.AutoRest.view).config.inputFileUris;
 
       // start it up!
       const processResult = this.AutoRest.Process();
@@ -703,7 +703,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     // is there a config file that contains the document as an input?
     for (const configFile of configFiles) {
       const a = new AutoRest(this, configFile);
-      const inputs = (await a.view).InputFileUris;
+      const inputs = (await a.view).config.inputFileUris;
       for (const input of inputs) {
         if (input === documentUri || decodeURIComponent(input) == decodeURIComponent(documentUri)) {
           return configFile;

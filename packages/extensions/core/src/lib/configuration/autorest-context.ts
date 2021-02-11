@@ -8,126 +8,61 @@ import {
   TryDecodeEnhancedPositionFromName,
 } from "@azure-tools/datastore";
 import { clone, values } from "@azure-tools/linq";
-import { EnsureIsFolderUri, ResolveUri, IsUri, FileUriToPath, CreateFileOrFolderUri } from "@azure-tools/uri";
+import { EnsureIsFolderUri, ResolveUri, IsUri, FileUriToPath } from "@azure-tools/uri";
 import { From } from "linq-es2015";
 import { basename, dirname } from "path";
 import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
 import { Artifact } from "../artifact";
 import { Channel, Message, Range, SourceLocation } from "../message";
 import { Suppressor } from "../pipeline/suppression";
-import { resolveRValue } from "../source-map/merging";
-import { cwd } from "process";
-import { Directive, ResolvedDirective } from "./directive";
-import { AutoRestRawConfiguration, mergeConfiguration, mergeConfigurations } from "./auto-rest-raw-configuration";
-import { arrayOf, valuesOf } from "./utils";
+import { Directive, ResolvedDirective } from "@autorest/configuration";
 import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
 import { IEvent } from "../events";
-
-const RESOLVE_MACROS_AT_RUNTIME = true;
+import { createAutorestConfiguration, extendAutorestConfiguration } from "./autorest-configuration";
+import { AutorestConfiguration, AutorestRawConfiguration, arrayOf } from "@autorest/configuration";
 
 const safeEval = createSandbox();
 
-function ProxifyConfigurationView(cfgView: any) {
-  return new Proxy(cfgView, {
-    get: (target, property) => {
-      const value = target[property];
-      if (value && value instanceof Array) {
-        return value.map((each) => resolveRValue(each, "", target, null));
-      }
-      return resolveRValue(value, <string>property, cfgView, null);
-    },
-  });
-}
+export const createAutorestContext = async (
+  configurationFiles: { [key: string]: any },
+  fileSystem: IFileSystem,
+  messageEmitter: MessageEmitter,
+  configFileFolderUri: string,
+  ...configs: AutorestRawConfiguration[]
+): Promise<AutorestContext> => {
+  const cachingFs = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
+  const config = await createAutorestConfiguration(configFileFolderUri, configurationFiles, configs, cachingFs);
+  return new AutorestContext(config, cachingFs, messageEmitter, configFileFolderUri);
+};
 
-export class ConfigurationView {
-  [name: string]: any;
-  public InputFileUris = new Array<string>();
-  public fileSystem: CachingFileSystem;
+export class AutorestContext {
+  public config: AutorestConfiguration;
 
   private suppressor: Suppressor;
 
   public constructor(
-    public configurationFiles: { [key: string]: any },
-    fileSystem: IFileSystem,
+    config: AutorestConfiguration,
+    public fileSystem: CachingFileSystem,
     public messageEmitter: MessageEmitter,
     public configFileFolderUri: string,
-    ...configs: Array<AutoRestRawConfiguration> // decreasing priority
   ) {
-    // wrap the filesystem with the caching filesystem
-    this.fileSystem = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
-
-    // TODO: fix configuration loading, note that there was no point in passing that DataStore used
-    // for loading in here as all connection to the sources is lost when passing `Array<AutoRestConfigurationImpl>` instead of `DataHandleRead`s...
-    // theoretically the `ValuesOf` approach and such won't support blaming (who to blame if $.directives[3] sucks? which code block was it from)
-    // long term, we simply gotta write a `Merge` method that adheres to the rules we need in here.
-    this.rawConfig = <any>{
-      "directive": [],
-      "input-file": [],
-      "exclude-file": [],
-      "profile": [],
-      "output-artifact": [],
-      "require": [],
-      "try-require": [],
-      "use": [],
-      "pass-thru": [],
-    };
-
-    this.rawConfig = mergeConfigurations(this.rawConfig, ...configs);
-
-    // default values that are the least priority.
-    // TODO: why is this here and not in default-configuration?
-    this.rawConfig = mergeConfiguration(this.rawConfig, <any>{
-      "base-folder": ".",
-      "output-folder": "generated",
-      "debug": false,
-      "verbose": false,
-      "disable-validation": false,
-    });
-
-    if (RESOLVE_MACROS_AT_RUNTIME) {
-      // if RESOLVE_MACROS_AT_RUNTIME is set
-      // this will insert a Proxy object in most of the uses of
-      // the configuration, and will do a macro resolution when the
-      // value is retrieved.
-
-      // I have turned on this behavior by default. I'm not sure that
-      // I need it at this point, but I'm leaving this code here since
-      // It's possible that I do.
-      this.config = ProxifyConfigurationView(this.rawConfig);
-    } else {
-      this.config = this.rawConfig;
-    }
+    this.config = config;
     this.suppressor = new Suppressor(this);
-
-    // treat this as a configuration property too.
-    (<any>this.rawConfig).configurationFiles = configurationFiles;
   }
 
-  async init() {
-    // after the view is created, we want to be able to do any last-minute
-    // initialization (like, make sure intput-file uris are actually resolved)
-    const inputFiles = await Promise.all(
-      arrayOf<string>(this.config["input-file"]).map((each) => this.ResolveAsPath(each)),
-    );
-    const filesToExclude = await Promise.all(
-      arrayOf<string>(this.config["exclude-file"]).map((each) => this.ResolveAsPath(each)),
-    );
-
-    this.InputFileUris = inputFiles.filter((x) => !filesToExclude.includes(x));
-
-    return this;
+  /**
+   * @deprecated Use .config.raw instead. Keeping this for backward compatibility in the `autorest` module.
+   */
+  public get rawConfig() {
+    return this.config.raw;
   }
 
-  public get Keys(): Array<string> {
-    return Object.getOwnPropertyNames(this.config);
-  }
-
-  /* @internal */ public updateConfigurationFile(filename: string, content: string) {
+  public updateConfigurationFile(filename: string, content: string) {
     // only name itself is allowed here, no path
     filename = basename(filename);
 
-    const keys = Object.getOwnPropertyNames(this.configurationFiles);
+    const keys = Object.getOwnPropertyNames(this.config.configurationFiles);
 
     if (keys && keys.length > 0) {
       const path = dirname(keys[0]);
@@ -148,14 +83,6 @@ export class ConfigurationView {
     }
   }
 
-  /* @internal */ public get Indexer(): ConfigurationView {
-    return new Proxy<ConfigurationView>(this, {
-      get: (target, property) => {
-        return property in target.config ? (<any>target.config)[property] : this[<number | string>property];
-      },
-    });
-  }
-
   /* @internal */ public get DataStore(): DataStore {
     return this.messageEmitter.DataStore;
   }
@@ -172,21 +99,7 @@ export class ConfigurationView {
     return this.messageEmitter.ClearFolder;
   }
 
-  private config: AutoRestRawConfiguration;
-  private rawConfig: AutoRestRawConfiguration;
-
-  private ResolveAsFolder(path: string): string {
-    return EnsureIsFolderUri(ResolveUri(this.BaseFolderUri, path));
-  }
-  private ResolveAsWriteableFolder(path: string): string {
-    // relative paths are relative to the local folder when the base-folder is remote.
-    if (!this.BaseFolderUri.startsWith("file:")) {
-      return EnsureIsFolderUri(ResolveUri(CreateFileOrFolderUri(cwd() + "/"), path));
-    }
-    return this.ResolveAsFolder(path);
-  }
-
-  private ResolveAsPath(path: string): Promise<string> {
+  public ResolveAsPath(path: string): Promise<string> {
     // is there even a potential for a parent folder from the input configuruation
     const parentFolder = this.config?.__parents?.[path];
     const fromBaseUri = ResolveUri(this.BaseFolderUri, path);
@@ -214,7 +127,7 @@ export class ConfigurationView {
   // public methods
 
   public get UseExtensions(): Array<{ name: string; source: string; fullyQualified: string }> {
-    const useExtensions = this.Indexer["use-extension"] || {};
+    const useExtensions = this.config["use-extension"] || {};
     return Object.keys(useExtensions).map((name) => {
       const source = useExtensions[name].startsWith("file://")
         ? FileUriToPath(useExtensions[name])
@@ -227,65 +140,9 @@ export class ConfigurationView {
     });
   }
 
-  public static async *getIncludedConfigurationFiles(
-    configView: () => Promise<ConfigurationView>,
-    fileSystem: IFileSystem,
-    ignoreFiles: Set<string>,
-  ) {
-    let done = false;
-
-    while (!done) {
-      // get a fresh copy of the view every time we start the loop.
-      const view = await configView();
-
-      // if we make it thru the list, we're done.
-      done = true;
-      for (const each of valuesOf<string>(view.config["require"])) {
-        if (ignoreFiles.has(each)) {
-          continue;
-        }
-
-        // looks like we found one that we haven't handled yet.
-        done = false;
-        ignoreFiles.add(each);
-        yield await view.ResolveAsPath(each);
-        break;
-      }
-    }
-
-    done = false;
-    while (!done) {
-      // get a fresh copy of the view every time we start the loop.
-      const view = await configView();
-
-      // if we make it thru the list, we're done.
-      done = true;
-      for (const each of valuesOf<string>(view.config["try-require"])) {
-        if (ignoreFiles.has(each)) {
-          continue;
-        }
-
-        // looks like we found one that we haven't handled yet.
-        done = false;
-        ignoreFiles.add(each);
-        const path = await view.ResolveAsPath(each);
-        try {
-          if (await fileSystem.ReadFile(path)) {
-            yield path;
-          }
-        } catch {
-          // do nothing
-        }
-
-        break;
-      }
-    }
-  }
-
-  public resolveDirectives(predicate?: (each: ResolvedDirective) => boolean) {
+  public resolveDirectives(predicate?: (each: ResolvedDirective) => boolean): ResolvedDirective[] {
     // optionally filter by predicate.
-    const plainDirectives = values(valuesOf<Directive>(this.config["directive"]));
-    // predicate ? values(valuesOf<Directive>(this.config['directive'])).where(predicate) : values(valuesOf<Directive>(this.config['directive']));
+    const plainDirectives = values(arrayOf<Directive>(this.config["directive"]));
 
     const declarations = this.config["declare-directive"] || {};
     const expandDirective = (dir: Directive): Iterable<Directive> => {
@@ -325,15 +182,11 @@ export class ConfigurationView {
     // return From(plainDirectives).SelectMany(expandDirective).Select(each => new StaticDirectiveView(each)).ToArray();
   }
 
-  public get OutputFolderUri(): string {
-    return this.ResolveAsWriteableFolder(<string>this.config["output-folder"]);
-  }
-
   public get HeaderText(): string {
-    const h = this.rawConfig["header-definitions"];
+    const h = this.config["header-definitions"];
     const version = (<any>global).autorestVersion;
 
-    switch (this.rawConfig["license-header"]?.toLowerCase()) {
+    switch (this.config["license-header"]?.toLowerCase()) {
       case "microsoft_mit":
         return `${h.microsoft}\n${h.mit}\n${h.default.replace("{core}", version)}\n${h.warning}`;
 
@@ -363,96 +216,67 @@ export class ConfigurationView {
         return `${h.default.replace("{core}", version)}\n${h.warning}`;
 
       default:
-        return `${this.rawConfig["license-header"]}`;
+        return `${this.config["license-header"]}`;
     }
   }
 
   public IsOutputArtifactRequested(artifact: string): boolean {
-    return From(valuesOf<string>(this.config["output-artifact"])).Contains(artifact);
+    return From(arrayOf<string>(this.config["output-artifact"])).Contains(artifact);
   }
 
+  /**
+   * Returns the config value at the given path.
+   * @param key Path to the config;
+   */
   public GetEntry(key: string): any {
     if (!key) {
       return clone(this.config);
     }
+
     if (key === "resolved-directive") {
       return this.resolveDirectives();
     }
-    if (<any>key === "header-text") {
-      return this.HeaderText;
-    }
-    let result = <any>this.config;
+
+    let result = this.config;
     for (const keyPart of key.split(".")) {
       result = result[keyPart];
     }
     return result;
   }
 
-  public get Raw(): AutoRestRawConfiguration {
-    return this.config;
-  }
-
-  public get DebugMode(): boolean {
-    return !!this.config["debug"];
-  }
-
-  public get CacheMode(): boolean {
-    return !!this.config["cache"];
-  }
-
-  public get CacheExclude(): Array<string> {
-    const cache = this.config["cache"];
-    if (cache && cache.exclude) {
-      return [...valuesOf<string>(cache.exclude)];
-    }
-    return [];
-  }
-
-  public get VerboseMode(): boolean {
-    return !!this.config["verbose"];
-  }
-
-  public get HelpRequested(): boolean {
-    return !!this.config["help"];
-  }
-
-  public *GetNestedConfiguration(pluginName: string): Iterable<ConfigurationView> {
+  public *getNestedConfiguration(pluginName: string): Iterable<AutorestContext> {
     const pp = pluginName.split(".");
     if (pp.length > 1) {
-      const n = this.GetNestedConfiguration(pp[0]);
+      const n = this.getNestedConfiguration(pp[0]);
       for (const s of n) {
-        yield* s.GetNestedConfiguration(pp.slice(1).join("."));
+        yield* s.getNestedConfiguration(pp.slice(1).join("."));
       }
       return;
     }
 
-    for (const section of valuesOf<any>((<any>this.config)[pluginName])) {
+    for (const section of arrayOf<any>(this.config.raw[pluginName])) {
       if (section) {
-        yield this.GetNestedConfigurationImmediate(section === true ? {} : section);
+        yield this.extendWith(section === true ? {} : section);
       }
     }
   }
 
-  public GetNestedConfigurationImmediate(...scope: Array<any>): ConfigurationView {
-    const c = new ConfigurationView(
-      this.configurationFiles,
-      this.fileSystem,
-      this.messageEmitter,
-      this.configFileFolderUri,
-      ...scope,
-      this.config,
-    );
-    c.InputFileUris = this.InputFileUris;
-    return c.Indexer;
+  /**
+   * Returns a new Autorest context with the configuration extended with the provided configurations.
+   * @param overrides List of configs to override
+   */
+  public extendWith(...overrides: AutorestRawConfiguration[]): AutorestContext {
+    const nestedConfig = extendAutorestConfiguration(this.config, overrides);
+    return new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter, this.configFileFolderUri);
   }
 
   // message pipeline (source map resolution, filter, ...)
   public async Message(m: Message): Promise<void> {
-    if (m.Channel === Channel.Debug && !this.DebugMode) {
+    if (m.Channel === Channel.Debug && !this.config.debug) {
       return;
     }
 
-    if (m.Channel === Channel.Verbose && !this.VerboseMode) {
+    if (m.Channel === Channel.Verbose && !this.config.verbose) {
       return;
     }
 
