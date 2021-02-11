@@ -1,7 +1,6 @@
 // @ts-check
 
 const path = require("path");
-const nodeExternals = require("webpack-node-externals");
 const baseWebpackConfig = require("../../../common/config/webpack.base.config");
 
 /**
@@ -19,11 +18,12 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     libraryTarget: "commonjs2",
   },
-  externals: [
-    nodeExternals({
-      allowlist: [/^(?:(?!jsonpath).)*$/],
-    }),
-  ],
+  resolve: {
+    ...baseWebpackConfig.resolve,
+    alias: {
+      jsonpath: path.resolve(__dirname, "node_modules", "jsonpath", "jsonpath.min.js"),
+    },
+  },
   optimization: {
     ...baseWebpackConfig.optimization,
     // Makes sure the different endpoints don't duplicate share common code.
