@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Mon, 08 Feb 2021 23:06:15 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Feb 2021 18:03:07 GMT and should not be manually modified.
+
+## 4.16.2
+Thu, 11 Feb 2021 18:03:07 GMT
+
+### Patches
+
+- **Internals** Update chalk dependency to ^4.1.0
 
 ## 4.16.1
 Mon, 08 Feb 2021 23:06:15 GMT
