@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@autorest/modelerfour",
-      "comment": "**Change** enum with a single value that are optional are now modeled as enum instead of constant",
+      "comment": "**Change** let single value enum parameters be able to be grouped.",
       "type": "patch"
     }
   ],
