@@ -98,6 +98,13 @@ function is(value: any): asserts value is object | string | number | boolean {
   }
 }
 
+interface ProcessSchemaOptions {
+  /**
+   * If the schema is optional.
+   */
+  isOptional?: boolean;
+}
+
 /** Acts as a cache for processing inputs.
  *
  * If the input is undefined, the ouptut is always undefined.
@@ -143,8 +150,8 @@ export class ModelerFour {
   private useModelNamespace!: boolean | undefined;
   private profileFilter!: Array<string>;
   private apiVersionFilter!: Array<string>;
-  private schemaCache = new ProcessingCache((schema: OpenAPI.Schema, name: string) =>
-    this.processSchemaImpl(schema, name),
+  private schemaCache = new ProcessingCache((schema: OpenAPI.Schema, name: string, options: ProcessSchemaOptions) =>
+    this.processSchemaImpl(schema, name, options),
   );
   private options: ModelerFourOptions = {};
   private uniqueNames: Dictionary<any> = {};
@@ -646,7 +653,11 @@ export class ModelerFour {
     );
   }
 
-  processChoiceSchema(name: string, schema: OpenAPI.Schema): ChoiceSchema | SealedChoiceSchema | ConstantSchema {
+  processChoiceSchema(
+    name: string,
+    schema: OpenAPI.Schema,
+    options: ProcessSchemaOptions = {},
+  ): ChoiceSchema | SealedChoiceSchema | ConstantSchema {
     const xmse = <XMSEnum>schema["x-ms-enum"];
     name = (xmse && xmse.name) || this.interpret.getName(name, schema);
 
@@ -657,7 +668,7 @@ export class ModelerFour {
     if (
       !alwaysSeal &&
       xmse?.modelAsString !== true &&
-      schema.required &&
+      !options.isOptional &&
       (length(schema.enum) === 1 || length(xmse?.values) === 1)
     ) {
       const constVal = length(xmse?.values) === 1 ? xmse?.values?.[0]?.value : schema?.enum?.[0];
@@ -972,12 +983,12 @@ export class ModelerFour {
     );
   }
 
-  processSchema(name: string, schema: OpenAPI.Schema): Schema {
-    return this.schemaCache.process(schema, name) || fail("Unable to process schema.");
+  processSchema(name: string, schema: OpenAPI.Schema, options: ProcessSchemaOptions = {}): Schema {
+    return this.schemaCache.process(schema, name, options) || fail("Unable to process schema.");
   }
 
   trap = new Set();
-  processSchemaImpl(schema: OpenAPI.Schema, name: string): Schema {
+  processSchemaImpl(schema: OpenAPI.Schema, name: string, options: ProcessSchemaOptions): Schema {
     if (this.trap.has(schema)) {
       throw new Error(
         `RECURSING!  Saw schema ${schema.title || schema["x-ms-metadata"]?.name || name} more than once.`,
@@ -987,7 +998,7 @@ export class ModelerFour {
 
     // handle enums differently early
     if (schema.enum || schema["x-ms-enum"]) {
-      return this.processChoiceSchema(name, schema);
+      return this.processChoiceSchema(name, schema, options);
     }
 
     if (this.isSchemaBinary(schema)) {
@@ -1902,7 +1913,8 @@ export class ModelerFour {
               return operation.addParameter(p);
             }
           }
-          let parameterSchema = this.processSchema(name || "", schema);
+
+          let parameterSchema = this.processSchema(name || "", schema, { isOptional: !parameter.required });
 
           // Track the usage of this schema as an input with media type
           this.trackSchemaUsage(parameterSchema, { usage: [SchemaContext.Input] });
