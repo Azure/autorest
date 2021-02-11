@@ -8,7 +8,7 @@ import { InstallOptions, PackageManager } from "./package-manager";
 
 let _cli: string | undefined;
 const getPathToYarnCli = async () => {
-  const fname = resolve(`${__dirname}/../../yarn/cli.js`);
+  const fname = resolve(`${__dirname}/../yarn/cli.js`);
   if (await isFile(fname)) {
     _cli = fname;
   } else {

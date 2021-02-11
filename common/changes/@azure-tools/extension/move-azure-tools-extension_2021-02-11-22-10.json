@@ -4,6 +4,11 @@
       "packageName": "@azure-tools/extension",
       "comment": "**Update** various dependencies and moved package source from Azure/perks -> Azure/autorest",
       "type": "patch"
+    },
+    {
+      "packageName": "@azure-tools/extension",
+      "comment": "**Update** copy yarn file on build from node dependency.",
+      "type": "patch"
     }
   ],
   "packageName": "@azure-tools/extension",
