@@ -1,0 +1,16 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "**Fix** Configuration for csharp causing pipeline stage not found error",
+      "type": "patch"
+    },
+    {
+      "packageName": "@autorest/core",
+      "comment": "**Improvement** Provide a more detail error message when pipeline can't find a stage.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/core",
+  "email": "tiguerin@microsoft.com"
+}
