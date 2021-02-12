@@ -9,11 +9,6 @@ import { manipulateObject } from "../src/lib/pipeline/plugins/transformer/object
 import { createSandbox } from "@azure-tools/datastore";
 
 const safeEval = createSandbox();
-try {
-  require("source-map-support").install();
-} catch {
-  // no worries
-}
 
 const exampleObject = `
 host: localhost:27332

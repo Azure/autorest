@@ -5,7 +5,7 @@
 
 import { ConfigurationLoader, AutorestContext, MessageEmitter } from "./configuration";
 import { EventEmitter, IEvent } from "./events";
-import { Exception } from "./exception";
+import { Exception } from "@autorest/common";
 import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import { runPipeline } from "./pipeline/pipeline";
 export { AutorestContext } from "./configuration";
@@ -154,7 +154,7 @@ export class AutoRest extends EventEmitter {
         view.messageEmitter.removeAllListeners();
         return true;
       } catch (e) {
-        const message = view.config.debug
+        const message = view?.config.debug
           ? {
               Channel: Channel.Debug,
               Text: `Process() cancelled due to exception : ${e.message ? e.message : e} / ${e.stack ? e.stack : ""}`,

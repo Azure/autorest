@@ -7,8 +7,7 @@ import { PipelinePlugin } from "../common";
 
 import { AutorestContext } from "../../autorest-core";
 import { Channel, SourceLocation } from "../../message";
-import { commonmarkHeadingFollowingText, commonmarkSubHeadings, parseCommonmark } from "../../parsing/literate";
-import { parse as ParseLiterateYaml } from "../../parsing/literate-yaml";
+import { parse as ParseLiterateYaml } from "@autorest/common";
 
 import {
   CloneAst,
@@ -16,14 +15,12 @@ import {
   DataSink,
   DataSource,
   IndexToPosition,
-  Lines,
-  Mapping,
   QuickDataSource,
   StrictJsonSyntaxCheck,
   StringifyAst,
 } from "@azure-tools/datastore";
 
-import { IdentitySourceMapping } from "../../source-map/merging";
+import { identitySourceMapping } from "@autorest/common";
 import { crawlReferences } from "./ref-crawling";
 
 /**
@@ -69,7 +66,7 @@ export async function LoadLiterateSwagger(
   config.Message({ Channel: Channel.Verbose, Text: `Reading OpenAPI 2.0 file ${inputFileUri}` });
 
   const ast = CloneAst(await data.ReadYamlAst());
-  const mapping = IdentitySourceMapping(data.key, ast);
+  const mapping = identitySourceMapping(data.key, ast);
 
   return sink.WriteData(handle.Description, StringifyAst(ast), [inputFileUri], "swagger-document", mapping, [data]);
 }
@@ -90,7 +87,7 @@ export async function LoadLiterateOpenAPI(
   config.Message({ Channel: Channel.Verbose, Text: `Reading OpenAPI 3.0 file ${inputFileUri}` });
 
   const ast = CloneAst(await data.ReadYamlAst());
-  const mapping = IdentitySourceMapping(data.key, ast);
+  const mapping = identitySourceMapping(data.key, ast);
 
   return sink.WriteData(handle.Description, StringifyAst(ast), [inputFileUri], "openapi-document", mapping, [data]);
 }

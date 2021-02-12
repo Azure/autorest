@@ -21,7 +21,7 @@ import {
 } from "@azure-tools/datastore";
 import { AutorestContext } from "../../../autorest-core";
 import { Channel } from "../../../message";
-import { IdentitySourceMapping } from "../../../source-map/merging";
+import { identitySourceMapping } from "@autorest/common";
 
 export async function manipulateObject(
   src: DataHandle,
@@ -65,7 +65,7 @@ export async function manipulateObject(
   }
 
   // process
-  const mapping = IdentitySourceMapping(src.key, ast).filter(
+  const mapping = identitySourceMapping(src.key, ast).filter(
     (m) => !hits.some((hit) => IsPrefix(hit.path, (<any>m.generated).path)),
   );
   for (const hit of hits) {

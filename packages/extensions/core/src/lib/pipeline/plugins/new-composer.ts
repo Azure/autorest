@@ -15,12 +15,6 @@ import { maximum, toSemver } from "@azure-tools/codegen";
 import compareVersions from "compare-versions";
 import { AutorestContext } from "../../configuration";
 
-try {
-  require("source-map-support").install();
-} catch {
-  // just for testing
-}
-
 /**
  * Prepares an OpenAPI document for the generation-2 code generators
  * (ie, anything before MultiAPI was introduced)

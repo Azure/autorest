@@ -16,7 +16,7 @@ import {
   YAMLNodeWithPath,
 } from "@azure-tools/datastore";
 import { Node, Parser } from "commonmark";
-import { IdentitySourceMapping } from "../source-map/merging";
+import { identitySourceMapping } from "@autorest/common";
 
 function isDocumentationField(node: YAMLNodeWithPath) {
   if (!node || !node.node.value || !node.node.value.value || typeof node.node.value.value !== "string") {
@@ -66,7 +66,7 @@ export function plainTextVersion(commonmarkAst: Node): string {
 
 export async function processCodeModel(codeModel: DataHandle, sink: DataSink): Promise<DataHandle> {
   const ast = CloneAst(await codeModel.ReadYamlAst());
-  const mapping = IdentitySourceMapping(codeModel.key, ast);
+  const mapping = identitySourceMapping(codeModel.key, ast);
 
   const cmParser = new Parser();
 

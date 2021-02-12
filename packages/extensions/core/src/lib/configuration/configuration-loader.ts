@@ -9,9 +9,8 @@ import { DataHandle, IFileSystem, LazyPromise, RealFileSystem } from "@azure-too
 import { Extension, ExtensionManager, LocalExtension } from "@azure-tools/extension";
 import { CreateFileUri, CreateFolderUri, ResolveUri, simplifyUri, IsUri, ParentFolderUri } from "@azure-tools/uri";
 import { join } from "path";
-import { OperationAbortedException } from "../exception";
+import { OperationAbortedException, parseCodeBlocks } from "@autorest/common";
 import { Channel, SourceLocation } from "../message";
-import { parseCodeBlocks } from "../parsing/literate-yaml";
 import { AutoRestExtension } from "../pipeline/plugin-endpoint";
 import { AppRoot } from "../constants";
 import { AutorestRawConfiguration, arrayOf } from "@autorest/configuration";
