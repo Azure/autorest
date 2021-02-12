@@ -154,6 +154,7 @@ export class AutoRest extends EventEmitter {
         view.messageEmitter.removeAllListeners();
         return true;
       } catch (e) {
+        console.log("e", e);
         const message = view.config.debug
           ? {
               Channel: Channel.Debug,
