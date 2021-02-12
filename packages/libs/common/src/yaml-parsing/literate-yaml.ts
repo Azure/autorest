@@ -13,7 +13,7 @@ import {
 } from "@azure-tools/datastore";
 import { OperationAbortedException } from "../exceptions";
 import { AutorestLogger } from "../logging";
-import { MergeYamls, resolveRValue } from "../merging";
+import { mergeYamls, resolveRValue } from "../merging";
 import { parseCodeBlocksFromMarkdown } from "./markdown-parser";
 
 const safeEval = createSandbox();
@@ -42,7 +42,7 @@ export async function parseCodeBlocks(
 async function parseInternal(logger: AutorestLogger, hLiterate: DataHandle, sink: DataSink): Promise<DataHandle> {
   // merge the parsed codeblocks
   const blocks = (await parseCodeBlocksInternal(logger, hLiterate, sink)).map((each) => each.data);
-  return MergeYamls(logger, blocks, sink);
+  return mergeYamls(logger, blocks, sink);
 }
 
 async function parseCodeBlocksInternal(
