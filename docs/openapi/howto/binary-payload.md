@@ -14,7 +14,7 @@ There is 2 part to describe a binary/file payload:
 
 - Describe the schema of the payload. This is the important part to mark the payload as a binary/file. It is a different process for Swagger 2 and OpenAPI 3
   - OpenAPI3: Use schema `{"type": "string", "format": "binary"}`
-  - Swagger: This one is a little more complex, for responses: `{"type": "file"}` and for requests `{"type": "string", "format": "binary"}` (This is a autorest specific feature. Read below for more details.)
+  - Swagger: This one is a little more complex, for responses: `{"type": "file"}` and for requests `{"type": "string", "format": "binary"}` (This is a autorest specific feature. Read [below](#swagger-2-1) for more details.)
 
 [See more information on Swagger docs](https://swagger.io/docs/specification/describing-responses/#response-that-returns-a-file)
 
