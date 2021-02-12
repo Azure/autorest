@@ -5,7 +5,7 @@
 
 import { ConfigurationLoader, AutorestContext, MessageEmitter } from "./configuration";
 import { EventEmitter, IEvent } from "./events";
-import { Exception } from "./exception";
+import { Exception } from "@autorest/common";
 import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import { runPipeline } from "./pipeline/pipeline";
 export { AutorestContext } from "./configuration";

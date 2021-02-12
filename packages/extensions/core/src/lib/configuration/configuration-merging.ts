@@ -1,5 +1,4 @@
-import { evaluateGuard } from "../parsing/literate-yaml";
-import { MergeOverwriteOrAppend } from "../source-map/merging";
+import { evaluateGuard, mergeOverwriteOrAppend } from "@autorest/common";
 import { AutorestRawConfiguration } from "@autorest/configuration";
 
 export const mergeConfigurations = (...configs: Array<AutorestRawConfiguration>): AutorestRawConfiguration => {
@@ -32,5 +31,5 @@ export const mergeConfiguration = (
   }
 
   // merge
-  return MergeOverwriteOrAppend(higherPriority, lowerPriority);
+  return mergeOverwriteOrAppend(higherPriority, lowerPriority);
 };

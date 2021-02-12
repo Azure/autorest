@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { DataHandle, parseJsonPointer } from "@azure-tools/datastore";
 import SchemaValidator from "z-schema";
-import { OperationAbortedException } from "../exception";
+import { OperationAbortedException } from "@autorest/common";
 import { Channel } from "../message";
 import { createPerFilePlugin, PipelinePlugin } from "./common";
 import { AutorestContext } from "../configuration";

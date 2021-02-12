@@ -20,7 +20,7 @@ import {
 import { From } from "linq-es2015";
 import { pushAll } from "../../array";
 import { AutorestContext } from "../../autorest-core";
-import { IdentitySourceMapping, MergeYamls } from "../../source-map/merging";
+import { identitySourceMapping, mergeYamls } from "@autorest/common";
 import { PipelinePlugin } from "../common";
 
 function getArrayValues<T>(obj: ObjectWithPath<Array<T>>): Array<ObjectWithPath<T>> {
@@ -259,7 +259,7 @@ async function composeSwaggers(
       }
 
       // finish source map
-      pushAll(mapping, IdentitySourceMapping(inputSwagger.key, ToAst(swagger)));
+      pushAll(mapping, identitySourceMapping(inputSwagger.key, ToAst(swagger)));
 
       // populate object
       populate.forEach((f) => f());
@@ -273,7 +273,7 @@ async function composeSwaggers(
       inputSwaggers[i] = await sink.WriteObject("prepared", swagger, newIdentity, undefined, mapping, [inputSwagger]);
     }
 
-    let hSwagger = await MergeYamls(context, inputSwaggers, sink, true);
+    let hSwagger = await mergeYamls(context, inputSwaggers, sink, true);
 
     // override info section
     const info: any = { title: candidateTitles[0] };
@@ -282,7 +282,7 @@ async function composeSwaggers(
     }
     const hInfo = await sink.WriteObject("info.yaml", { info }, ["fix-me-4"]);
 
-    hSwagger = await MergeYamls(context, [hSwagger, hInfo], sink);
+    hSwagger = await mergeYamls(context, [hSwagger, hInfo], sink);
 
     return hSwagger;
   } catch (E) {

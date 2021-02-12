@@ -18,13 +18,10 @@ import {
   Descendants,
   Parse,
 } from "@azure-tools/datastore";
-import { pushAll } from "../array";
-import { AutorestContext } from "../configuration";
-import { Channel } from "../message";
-import { isArray } from "util";
+import { AutorestLogger } from "../logging";
 
 // // TODO: may want ASTy merge! (supporting circular structure and such?)
-function Merge(a: any, b: any, path: JsonPath = []): any {
+function merge(a: any, b: any, path: JsonPath = []): any {
   if (a === null || b === null) {
     throw new Error(`Argument cannot be null ('${stringify(path)}')`);
   }
@@ -79,7 +76,7 @@ function Merge(a: any, b: any, path: JsonPath = []): any {
         // try merge objects otherwise
         const aMember = a[key];
         const bMember = b[key];
-        result[key] = Merge(aMember, bMember, subpath);
+        result[key] = merge(aMember, bMember, subpath);
       }
       return result;
     }
@@ -88,7 +85,7 @@ function Merge(a: any, b: any, path: JsonPath = []): any {
   throw new Error(`'${stringify(path)}' has incompatible values (${Stringify(a)}, ${Stringify(b)}).`);
 }
 
-export function ShallowCopy(input: any, ...filter: Array<string>): any {
+export function shallowCopy(input: any, ...filter: Array<string>): any {
   /* TODO; replace and test with this:
   const copy = { ...input };
   for (const each of filter) {
@@ -127,7 +124,7 @@ function toJsValue(value: any) {
       if (value === null) {
         return "null";
       }
-      if (isArray(value) && value.length === 0) {
+      if (Array.isArray(value) && value.length === 0) {
         return "false";
       }
       return "true";
@@ -205,7 +202,7 @@ export function resolveRValue(
   return value;
 }
 
-export function MergeOverwriteOrAppend(
+export function mergeOverwriteOrAppend(
   higherPriority: any,
   lowerPriority: any,
   concatListPathFilter: (path: JsonPath) => boolean = (_) => false,
@@ -253,12 +250,12 @@ export function MergeOverwriteOrAppend(
     // try merge objects otherwise
     const aMember = resolveRValue(higherPriority[key], key, lowerPriority, higherPriority);
     const bMember = resolveRValue(lowerPriority[key], key, higherPriority, lowerPriority);
-    result[key] = MergeOverwriteOrAppend(aMember, bMember, concatListPathFilter, subpath);
+    result[key] = mergeOverwriteOrAppend(aMember, bMember, concatListPathFilter, subpath);
   }
   return result;
 }
 
-export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst: YAMLNode): Array<Mapping> {
+export function identitySourceMapping(sourceYamlFileName: string, sourceYamlAst: YAMLNode): Array<Mapping> {
   const result = new Array<Mapping>();
   const descendantsWithPath = Descendants(sourceYamlAst);
   for (const descendantWithPath of descendantsWithPath) {
@@ -273,8 +270,8 @@ export function IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst:
   return result;
 }
 
-export async function MergeYamls(
-  config: AutorestContext,
+export async function mergeYamls(
+  logger: AutorestLogger,
   yamlInputHandles: Array<DataHandle>,
   sink: DataSink,
   verifyOAI2 = false,
@@ -294,17 +291,17 @@ export async function MergeYamls(
     const inputGraph: any =
       Parse(rawYaml, (message, index) => {
         failed = true;
-        if (config) {
-          config.Message({
-            Channel: Channel.Error,
-            Text: message,
-            Source: [{ document: yamlInputHandle.key, Position: IndexToPosition(yamlInputHandle, index) }],
+        if (logger) {
+          logger.trackError({
+            code: "yaml_parsing",
+            message: message,
+            source: [{ document: yamlInputHandle.key, position: IndexToPosition(yamlInputHandle, index) }],
           });
         }
       }) || {};
 
-    mergedGraph = Merge(mergedGraph, inputGraph);
-    pushAll(mappings, IdentitySourceMapping(yamlInputHandle.key, await yamlInputHandle.ReadYamlAst()));
+    mergedGraph = merge(mergedGraph, inputGraph);
+    mappings.push(...identitySourceMapping(yamlInputHandle.key, await yamlInputHandle.ReadYamlAst()));
 
     if (verifyOAI2) {
       // check for non-identical duplicate models and parameters
@@ -323,12 +320,11 @@ export async function MergeYamls(
               mappings,
               yamlInputHandles,
             );
-            config.Message({
-              Channel: Channel.Error,
-              Key: ["Fatal/DuplicateModelCollsion"],
-              Text: "Duplicated model name with non-identical definitions",
-              Source: [
-                { document: mergedHandle.key, Position: await ResolvePath(mergedHandle, ["definitions", model]) },
+            logger.trackError({
+              code: "Fatal/DuplicateModelCollsion",
+              message: "Duplicated model name with non-identical definitions",
+              source: [
+                { document: mergedHandle.key, position: await ResolvePath(mergedHandle, ["definitions", model]) },
               ],
             });
           }
@@ -349,12 +345,11 @@ export async function MergeYamls(
               mappings,
               yamlInputHandles,
             );
-            config.Message({
-              Channel: Channel.Error,
-              Key: ["Fatal/DuplicateParameterCollision"],
-              Text: "Duplicated global non-identical parameter definitions",
-              Source: [
-                { document: mergedHandle.key, Position: await ResolvePath(mergedHandle, ["parameters", parameter]) },
+            logger.trackError({
+              code: "Fatal/DuplicateParameterCollision",
+              message: "Duplicated global non-identical parameter definitions",
+              source: [
+                { document: mergedHandle.key, position: await ResolvePath(mergedHandle, ["parameters", parameter]) },
               ],
             });
           }
@@ -368,7 +363,6 @@ export async function MergeYamls(
   }
 
   if (cancel) {
-    config.CancellationTokenSource.cancel();
     throw new Error("Operation Cancelled");
   }
 

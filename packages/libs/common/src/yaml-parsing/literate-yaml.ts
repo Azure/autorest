@@ -11,12 +11,10 @@ import {
   createSandbox,
   StrictJsonSyntaxCheck,
 } from "@azure-tools/datastore";
-import { AutorestContext } from "../autorest-core";
-import { OperationAbortedException } from "../exception";
-import { Channel, SourceLocation } from "../message";
-import { MergeYamls, resolveRValue } from "../source-map/merging";
-import { parse as ParseLiterate } from "./literate";
-import { keys, length } from "@azure-tools/linq";
+import { OperationAbortedException } from "../exceptions";
+import { AutorestLogger } from "../logging";
+import { MergeYamls, resolveRValue } from "../merging";
+import { parseCodeBlocksFromMarkdown } from "./markdown-parser";
 
 const safeEval = createSandbox();
 
@@ -29,26 +27,26 @@ function tryMarkdown(rawMarkdownOrYaml: string): boolean {
   return /^#/gm.test(rawMarkdownOrYaml);
 }
 
-export async function parse(config: AutorestContext, literate: DataHandle, sink: DataSink): Promise<DataHandle> {
-  return parseInternal(config, literate, sink);
+export async function parse(logger: AutorestLogger, literate: DataHandle, sink: DataSink): Promise<DataHandle> {
+  return parseInternal(logger, literate, sink);
 }
 
 export async function parseCodeBlocks(
-  config: AutorestContext,
+  logger: AutorestLogger,
   literate: DataHandle,
   sink: DataSink,
 ): Promise<Array<CodeBlock>> {
-  return parseCodeBlocksInternal(config, literate, sink);
+  return parseCodeBlocksInternal(logger, literate, sink);
 }
 
-async function parseInternal(config: AutorestContext, hLiterate: DataHandle, sink: DataSink): Promise<DataHandle> {
+async function parseInternal(logger: AutorestLogger, hLiterate: DataHandle, sink: DataSink): Promise<DataHandle> {
   // merge the parsed codeblocks
-  const blocks = (await parseCodeBlocksInternal(config, hLiterate, sink)).map((each) => each.data);
-  return MergeYamls(config, blocks, sink);
+  const blocks = (await parseCodeBlocksInternal(logger, hLiterate, sink)).map((each) => each.data);
+  return MergeYamls(logger, blocks, sink);
 }
 
 async function parseCodeBlocksInternal(
-  config: AutorestContext,
+  logger: AutorestLogger,
   hLiterate: DataHandle,
   sink: DataSink,
 ): Promise<Array<CodeBlock>> {
@@ -58,7 +56,7 @@ async function parseCodeBlocksInternal(
 
   // try parsing as literate YAML
   if (tryMarkdown(rawMarkdown)) {
-    const hsConfigFileBlocksWithContext = await ParseLiterate(hLiterate, sink);
+    const hsConfigFileBlocksWithContext = await parseCodeBlocksFromMarkdown(hLiterate, sink);
 
     for (const { data, codeBlock } of hsConfigFileBlocksWithContext) {
       // only consider YAML/JSON blocks
@@ -71,10 +69,10 @@ async function parseCodeBlocksInternal(
         // check syntax on JSON blocks with simple check first
         const error = StrictJsonSyntaxCheck(await data.ReadData());
         if (error) {
-          config.Message({
-            Channel: Channel.Error,
-            Text: `Syntax Error Encountered:  ${error.message}`,
-            Source: [<SourceLocation>{ Position: IndexToPosition(data, error.index), document: data.key }],
+          logger.trackError({
+            code: "syntax_error", // TODO-TIM check this code.
+            message: `Syntax Error Encountered:  ${error.message}`,
+            source: [{ position: IndexToPosition(data, error.index), document: data.key }],
           });
           throw new OperationAbortedException();
         }
@@ -86,10 +84,10 @@ async function parseCodeBlocksInternal(
       // quick syntax check.
       ParseNode(ast, async (message, index) => {
         failing = true;
-        config.Message({
-          Channel: Channel.Error,
-          Text: `Syntax Error Encountered:  ${message}`,
-          Source: [<SourceLocation>{ Position: IndexToPosition(data, index), document: data.key }],
+        logger.trackError({
+          code: "syntax_error",
+          message: `Syntax Error Encountered:  ${message}`,
+          source: [{ position: IndexToPosition(data, index), document: data.key }],
         });
       });
 
@@ -124,8 +122,8 @@ export function evaluateGuard(rawFenceGuard: string, contextObject: any, forceAl
     },
 
     /** allows a check to see if a given extension is being requested already */
-    isRequested: (name: string) => {
-      return contextObject["use-extension"] && keys(contextObject["use-extension"]).any((each) => each === name);
+    isRequested: (name: string): boolean => {
+      return contextObject["use-extension"]?.[name];
     },
 
     /** if they are specifying one or more profiles or api-versions, then they are   */

@@ -57,9 +57,8 @@ import { CreateConfiguration, isLegacy } from "./legacyCli";
 import { Artifact } from "./lib/artifact";
 import { AutoRest, IsOpenApiDocument, Shutdown } from "./lib/autorest-core";
 import { mergeConfigurations } from "./lib/configuration";
-import { Exception } from "./lib/exception";
+import { Exception, shallowCopy } from "@autorest/common";
 import { Channel, Message } from "./lib/message";
-import { ShallowCopy } from "./lib/source-map/merging";
 import { homedir } from "os";
 import { AutorestRawConfiguration } from "@autorest/configuration";
 
@@ -572,7 +571,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
       subscribeMessages(instance, () => exitcode++);
 
       // set configuration for that item
-      instance.AddConfiguration(ShallowCopy(batchContext, "input-file"));
+      instance.AddConfiguration(shallowCopy(batchContext, "input-file"));
       instance.AddConfiguration({ "input-file": eachFile });
 
       console.log(`Running autorest for *${path}* `);
