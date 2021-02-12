@@ -1,13 +1,11 @@
-import assert from "assert";
 import { validateSystemRequirements } from "./system-requirements";
 
-describe.only("System requirements", () => {
-  it("works", async () => {
-    const response = await validateSystemRequirements({
-      dotnet: { message: "Dotnet required", version: ">4" },
+describe("System requirements", () => {
+  it("returns no error when requirements are matched", async () => {
+    const errors = await validateSystemRequirements({
+      node: { version: ">10" },
     });
-
-    console.log("Response", response);
+    expect(errors).toEqual([]);
   });
 
   it("returns error when requesting an executable that is not present", async () => {
@@ -15,7 +13,7 @@ describe.only("System requirements", () => {
       unkownCommandThatShouldNotExists: { message: "That command is misssing" },
     });
 
-    assert.deepStrictEqual(errors, [
+    expect(errors).toEqual([
       {
         name: "unkownCommandThatShouldNotExists",
         message: "That command is misssing",

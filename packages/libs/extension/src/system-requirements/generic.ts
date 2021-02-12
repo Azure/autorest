@@ -7,10 +7,12 @@ export const validateGenericSystemRequirement = async (
 ): Promise<SystemRequirementError | undefined> => {
   const isAvailable = await checkIfExcutableAvailable(name);
 
-  return {
-    name,
-    message: requirement.message ?? `Couldn't find executable ${name}`,
-  };
+  return isAvailable
+    ? undefined
+    : {
+        name,
+        message: requirement.message ?? `Couldn't find executable '${name}' in path. Make sure it is installed.`,
+      };
 };
 
 const checkIfExcutableAvailable = async (name: string): Promise<boolean> => {

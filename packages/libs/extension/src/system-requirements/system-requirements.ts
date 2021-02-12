@@ -1,5 +1,5 @@
 import { execute } from "../exec-cmd";
-import { validateDotnetRequirement } from "./dotnet";
+import { DotnetExeName, validateDotnetRequirement } from "./dotnet";
 import { validateGenericSystemRequirement } from "./generic";
 
 /**
@@ -27,7 +27,6 @@ export const validateSystemRequirements = async (
   const errors: SystemRequirementError[] = [];
 
   for (const [name, requirement] of Object.entries(requirements)) {
-    console.log(`Validating requirement: ${name}`);
     const error = await validateSystemRequirement(name, requirement);
     if (error) {
       errors.push(error);
@@ -41,7 +40,7 @@ export const validateSystemRequirement = async (
   requirement: SystemRequirement,
 ): Promise<SystemRequirementError | undefined> => {
   switch (name) {
-    case "dotnet":
+    case DotnetExeName:
       return validateDotnetRequirement(requirement);
     default:
       return validateGenericSystemRequirement(name, requirement);
