@@ -12,7 +12,6 @@ import {
   JsonPath,
   Mapping,
   ResolvePath,
-  stringify,
   Stringify,
   YAMLNode,
   Descendants,
@@ -20,10 +19,15 @@ import {
 } from "@azure-tools/datastore";
 import { AutorestLogger } from "../logging";
 
-// // TODO: may want ASTy merge! (supporting circular structure and such?)
-function merge(a: any, b: any, path: JsonPath = []): any {
+/**
+ * Merge a and b by adding new properties of b into a. It will fail if a and b have the same property and the value is different.
+ * @param a Object 1 to merge
+ * @param b Object 2 to merge
+ * @param path current path of the merge.
+ */
+function strictMerge(a: any, b: any, path: JsonPath = []): any {
   if (a === null || b === null) {
-    throw new Error(`Argument cannot be null ('${stringify(path)}')`);
+    throw new Error(`Argument cannot be null ('${Stringify(path)}')`);
   }
 
   // trivial case
@@ -42,24 +46,11 @@ function merge(a: any, b: any, path: JsonPath = []): any {
       }
       // both sides gave a sequence, and they are not identical.
       // this is currently not a good thing.
-      throw new Error(`'${stringify(path)}' has two arrays that are incompatible (${Stringify(a)}, ${Stringify(b)}).`);
-      // // sequence nodes
-      // const result = a.slice();
-      // for (const belem of b) {
-      //     if (a.indexOf(belem) === -1) {
-      //         result.push(belem);
-      //     }
-      // }
-      // return result;
+      throw new Error(`'${Stringify(path)}' has two arrays that are incompatible (${Stringify(a)}, ${Stringify(b)}).`);
     } else {
       // object nodes - iterate all members
       const result: any = {};
-      let keys = Object.getOwnPropertyNames(a).concat(Object.getOwnPropertyNames(b));
-      keys = keys.filter((v, i) => {
-        const idx = keys.indexOf(v);
-        return idx === -1 || idx >= i;
-      }); // distinct
-
+      const keys = new Set([...Object.keys(a), ...Object.keys(b)]);
       for (const key of keys) {
         const subpath = path.concat(key);
 
@@ -76,7 +67,7 @@ function merge(a: any, b: any, path: JsonPath = []): any {
         // try merge objects otherwise
         const aMember = a[key];
         const bMember = b[key];
-        result[key] = merge(aMember, bMember, subpath);
+        result[key] = strictMerge(aMember, bMember, subpath);
       }
       return result;
     }
@@ -255,19 +246,15 @@ export function mergeOverwriteOrAppend(
   return result;
 }
 
-export function identitySourceMapping(sourceYamlFileName: string, sourceYamlAst: YAMLNode): Array<Mapping> {
-  const result = new Array<Mapping>();
-  const descendantsWithPath = Descendants(sourceYamlAst);
-  for (const descendantWithPath of descendantsWithPath) {
-    const descendantPath = descendantWithPath.path;
-    result.push({
-      generated: { path: descendantPath },
-      original: { path: descendantPath },
-      name: JSON.stringify(descendantPath),
+export function identitySourceMapping(sourceYamlFileName: string, sourceYamlAst: YAMLNode): Mapping[] {
+  return [...Descendants(sourceYamlAst)].map((x) => {
+    return {
+      generated: { path: x.path },
+      original: { path: x.path },
+      name: JSON.stringify(x.path),
       source: sourceYamlFileName,
-    });
-  }
-  return result;
+    };
+  });
 }
 
 export async function mergeYamls(
@@ -277,7 +264,7 @@ export async function mergeYamls(
   verifyOAI2 = false,
 ): Promise<DataHandle> {
   let mergedGraph: any = {};
-  const mappings = new Array<Mapping>();
+  const mappings = [];
   let cancel = false;
   let failed = false;
 
@@ -300,7 +287,7 @@ export async function mergeYamls(
         }
       }) || {};
 
-    mergedGraph = merge(mergedGraph, inputGraph);
+    mergedGraph = strictMerge(mergedGraph, inputGraph);
     mappings.push(...identitySourceMapping(yamlInputHandle.key, await yamlInputHandle.ReadYamlAst()));
 
     if (verifyOAI2) {
