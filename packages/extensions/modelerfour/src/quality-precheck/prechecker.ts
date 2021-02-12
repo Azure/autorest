@@ -162,16 +162,16 @@ export class QualityPreChecker {
               }
             }
 
-            // if (diff.length > 0) {
-            //   const details = diff
-            //     .map((each) => `${each.path.join(".")} => '${each.op === "delete" ? "<removed>" : each.val}'`)
-            //     .join(",");
-            //   this.session.error(
-            //     `Schema '${schemaName}' has a property '${propName}' that is conflicting with a property in the parent schema '${parentName}' differs more than just description : [${details}]`,
-            //     ["PreCheck", "PropertyRedeclaration"],
-            //   );
-            //   continue;
-            // }
+            if (diff.length > 0) {
+              const details = diff
+                .map((each) => `${each.path.join(".")} => '${each.op === "delete" ? "<removed>" : each.val}'`)
+                .join(",");
+              this.session.warning(
+                `Schema '${schemaName}' has a property '${propName}' that is conflicting with a property in the parent schema '${parentName}' differs more than just description : [${details}]`,
+                ["PreCheck", "PropertyRedeclaration"],
+              );
+              continue;
+            }
           }
         }
       }

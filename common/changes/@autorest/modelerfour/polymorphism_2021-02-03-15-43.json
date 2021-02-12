@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@autorest/modelerfour",
-      "comment": "commented out model deduplication code",
+      "comment": "Change property redefinition error when changing type into a warning to allow polymorphism",
       "type": "patch"
     }
   ],
