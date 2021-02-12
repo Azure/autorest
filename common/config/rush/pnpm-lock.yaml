@@ -9,6 +9,7 @@ dependencies:
   '@rush-temp/autorest': file:projects/autorest.tgz_ts-node@9.1.1
   '@rush-temp/codegen': file:projects/codegen.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/codemodel': file:projects/codemodel.tgz_prettier@2.2.1
+  '@rush-temp/common': file:projects/common.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/compare': file:projects/compare.tgz_prettier@2.2.1
   '@rush-temp/configuration': file:projects/configuration.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/core': file:projects/core.tgz_ts-node@9.1.1
@@ -10075,6 +10076,28 @@ packages:
       integrity: sha512-vhewttjjPT80EkaPZ1kN3kUvS/ncPbggJgmVgO03gN8lgkPxdtlDwNaXePeR48jecLekjZJlKivhAG+nUdDG7A==
       tarball: file:projects/codemodel.tgz
     version: 0.0.0
+  file:projects/common.tgz_prettier@2.2.1+ts-node@9.1.1:
+    dependencies:
+      '@types/jest': 26.0.20
+      '@types/node': 14.14.22
+      '@typescript-eslint/eslint-plugin': 4.14.2_e5f964fa93e839b7a7927397f6cb9cb1
+      '@typescript-eslint/parser': 4.14.2_eslint@7.19.0+typescript@4.1.3
+      eslint: 7.19.0
+      eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
+      eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
+      jest: 26.6.3_ts-node@9.1.1
+      rimraf: 3.0.2
+      typescript: 4.1.3
+    dev: false
+    id: file:projects/common.tgz
+    name: '@rush-temp/common'
+    peerDependencies:
+      prettier: '*'
+      ts-node: '*'
+    resolution:
+      integrity: sha512-zwxIalME8BSkqYwSkzKnlLXc7Gov2PjkC9ynvqVR1pfSCzMP7A6bW5gXatwyOMXFFaeQx/daBoxYv3yXwzIlaA==
+      tarball: file:projects/common.tgz
+    version: 0.0.0
   file:projects/compare.tgz_prettier@2.2.1:
     dependencies:
       '@types/diff': 4.0.2
@@ -10272,9 +10295,11 @@ packages:
       '@types/semver': 5.5.0
       '@typescript-eslint/eslint-plugin': 4.14.2_e5f964fa93e839b7a7927397f6cb9cb1
       '@typescript-eslint/parser': 4.14.2_eslint@7.19.0+typescript@4.1.3
+      cpy-cli: 2.0.0
       eslint: 7.19.0
       eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
       eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
+      mkdirp: 0.5.5
       mocha: 6.2.3
       mocha-typescript: 1.1.17
       npm: 6.14.9
@@ -10293,7 +10318,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-RRQFvWwHMZrC7lP6TSu105G5a/iqzi5C1zSrAo311Pd4UQCX0a2U8Mkn/Ta1r5SO9CcM+VVkEtDRBRGSH21IKA==
+      integrity: sha512-+e3yuwf8fUk4HLljzMBu+Sr1QN07KHHIg02MVdCJxkNd9JYtRMLY5MLlBRppwFLJ4Yttf+He/pC0PHWVstTFjQ==
       tarball: file:projects/extension.tgz
     version: 0.0.0
   file:projects/md-mock-api.tgz_ts-node@9.1.1:
@@ -10485,6 +10510,7 @@ specifiers:
   '@rush-temp/autorest': file:./projects/autorest.tgz
   '@rush-temp/codegen': file:./projects/codegen.tgz
   '@rush-temp/codemodel': file:./projects/codemodel.tgz
+  '@rush-temp/common': file:./projects/common.tgz
   '@rush-temp/compare': file:./projects/compare.tgz
   '@rush-temp/configuration': file:./projects/configuration.tgz
   '@rush-temp/core': file:./projects/core.tgz

@@ -85,6 +85,12 @@
       "shouldPublish": true
     },
     {
+      "packageName": "@autorest/common",
+      "projectFolder": "packages/libs/common",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
       "packageName": "@autorest/configuration",
       "projectFolder": "packages/libs/configuration",
       "reviewCategory": "production",
