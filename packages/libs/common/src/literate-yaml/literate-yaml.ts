@@ -6,12 +6,13 @@
 import { DataHandle, DataSink, IndexToPosition, ParseNode, StrictJsonSyntaxCheck, Parse } from "@azure-tools/datastore";
 import { OperationAbortedException } from "../exceptions";
 import { AutorestLogger } from "../logging";
-import { identitySourceMapping, resolveRValue, strictMerge } from "../merging";
+import { identitySourceMapping, strictMerge } from "../merging";
+import { LiterateYamlErrorCodes } from "./error-codes";
 import { parseCodeBlocksFromMarkdown } from "./markdown-parser";
 
-export class CodeBlock {
-  info!: string | null;
-  data!: DataHandle;
+export interface CodeBlock {
+  info: string | null;
+  data: DataHandle;
 }
 
 function tryMarkdown(rawMarkdownOrYaml: string): boolean {
@@ -32,8 +33,8 @@ export async function parseCodeBlocks(
   logger: AutorestLogger,
   hLiterate: DataHandle,
   sink: DataSink,
-): Promise<Array<CodeBlock>> {
-  let hsConfigFileBlocks: Array<CodeBlock> = [];
+): Promise<CodeBlock[]> {
+  let hsConfigFileBlocks: CodeBlock[] = [];
 
   const rawMarkdown = await hLiterate.ReadData();
 
@@ -53,7 +54,7 @@ export async function parseCodeBlocks(
         const error = StrictJsonSyntaxCheck(await data.ReadData());
         if (error) {
           logger.trackError({
-            code: "syntax_error", // TODO-TIM check this code.
+            code: LiterateYamlErrorCodes.jsonParsingError, // TODO-TIM check this code.
             message: `Syntax Error Encountered:  ${error.message}`,
             source: [{ position: IndexToPosition(data, error.index), document: data.key }],
           });
@@ -68,7 +69,7 @@ export async function parseCodeBlocks(
       ParseNode(ast, async (message, index) => {
         failing = true;
         logger.trackError({
-          code: "syntax_error",
+          code: LiterateYamlErrorCodes.yamlParsingError,
           message: `Syntax Error Encountered:  ${message}`,
           source: [{ position: IndexToPosition(data, index), document: data.key }],
         });
@@ -77,8 +78,6 @@ export async function parseCodeBlocks(
       if (failing) {
         throw new OperationAbortedException();
       }
-
-      // fairly confident of no immediate syntax errors.
 
       hsConfigFileBlocks.push({ info: codeBlock.info, data });
     }
