@@ -12,7 +12,7 @@ import {
 import { clone, Dictionary, values, visitor } from "@azure-tools/linq";
 
 import * as oai from "@azure-tools/openapi";
-import { ConfigurationView } from "../../configuration";
+import { AutorestContext } from "../../configuration";
 import { PipelinePlugin } from "../common";
 
 /**
@@ -422,7 +422,7 @@ function cleanRefs(instance: AnyObject): AnyObject {
   return instance;
 }
 
-async function merge(config: ConfigurationView, input: DataSource, sink: DataSink) {
+async function merge(config: AutorestContext, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map((x) => input.ReadStrict(x)));
   if (inputs.length === 1) {
     const model = await inputs[0].ReadObject<any>();

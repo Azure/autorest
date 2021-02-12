@@ -160,7 +160,7 @@ export class ModelerFour {
         contact: i.contact,
         license: i.license,
         termsOfService: i.termsOfService,
-        externalDocs: filterOutXDash<ExternalDocumentation>(this.input.externalDocs),
+        externalDocs: filterOutXDash<ExternalDocumentation>(this.input.externalDocs as any),
         extensions: Interpretations.getExtensionProperties(i),
       },
       extensions: Interpretations.getExtensionProperties(this.input),
@@ -287,7 +287,7 @@ export class ModelerFour {
     if (i.instance) {
       return action(i.name, i.instance);
     }
-    throw "Unresolved item.";
+    throw new Error(`Unresolved item '${item}'`);
   }
 
   resolveArray<T>(source?: Array<Refable<T>>) {
@@ -1508,6 +1508,7 @@ export class ModelerFour {
                   },
                 },
                 clientDefaultValue: this.interpret.getClientDefault(propertyDeclaration, pSchema),
+                isInMultipart: true,
               },
             ),
           );

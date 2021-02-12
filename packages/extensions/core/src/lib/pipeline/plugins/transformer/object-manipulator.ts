@@ -19,7 +19,7 @@ import {
   ToAst,
   YAMLNode,
 } from "@azure-tools/datastore";
-import { ConfigurationView } from "../../../autorest-core";
+import { AutorestContext } from "../../../autorest-core";
 import { Channel } from "../../../message";
 import { IdentitySourceMapping } from "../../../source-map/merging";
 
@@ -28,7 +28,7 @@ export async function manipulateObject(
   target: DataSink,
   whereJsonQuery: string,
   transformer: (doc: any, obj: any, path: JsonPath) => any, // transforming to `undefined` results in removal
-  config?: ConfigurationView,
+  config?: AutorestContext,
   transformationString?: string,
   mappingInfo?: {
     transformerSourceHandle: DataHandle;
@@ -115,7 +115,7 @@ export async function manipulateObject(
                 };
               }));
           }
-    
+
           // try to be smart and assume that nodes existing in both old and new AST have a relationship
           mapping.push(
             ...From(Descendants(newAst))

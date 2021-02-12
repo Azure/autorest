@@ -14,11 +14,9 @@ steps:
       echo "Found core package $corePkg"
       echo "Found modelerfour package $modelerfourPkg"
 
-      sed -i "s,--version:../packages/extensions/core,--version:$corePkg," ./.scripts/regression-compare.yaml
-      sed -i "s,--use:../packages/extensions/modelerfour,--use:$modelerfourPkg," ./.scripts/regression-compare.yaml
+      sed -i "s,--version:../packages/extensions/core,--version:$corePkg," ./regression-tests/regression-compare.yaml
+      sed -i "s,--use:../packages/extensions/modelerfour,--use:$modelerfourPkg," ./regression-tests/regression-compare.yaml
     displayName: Find packages path
-
-  - script: cat ./.scripts/regression-compare.yaml
 
   - task: NodeTool@0
     inputs:
@@ -31,12 +29,13 @@ steps:
     displayName: Install Python 3
 
   - script: |
-      npm install @microsoft.azure/autorest.testserver --no-save
-      npm install -g @autorest/compare@~0.3.0
+      npm install
+      npm install -g @autorest/compare@~0.3.6
     displayName: Install autorest-compare
+    workingDirectory: regression-tests
 
-  - script: autorest-compare --compare:.scripts/regression-compare.yaml --language:python
+  - script: autorest-compare --compare:./regression-tests/regression-compare.yaml --language:python
     displayName: Regression Test - @autorest/python
 
-  - script: autorest-compare --compare:.scripts/regression-compare.yaml --language:typescript
+  - script: autorest-compare --compare:./regression-tests/regression-compare.yaml --language:typescript
     displayName: Regression Test - @autorest/typescript

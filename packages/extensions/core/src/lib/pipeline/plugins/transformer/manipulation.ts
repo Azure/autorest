@@ -5,17 +5,17 @@
 
 import { DataHandle, DataSink, nodes } from "@azure-tools/datastore";
 import { YieldCPU } from "@azure-tools/tasks";
-import { ConfigurationView } from "../../../autorest-core";
-import { ResolvedDirective } from "../../../configuration";
+import { AutorestContext } from "../../../autorest-core";
 import { Channel, Message, SourceLocation } from "../../../message";
 import { manipulateObject } from "./object-manipulator";
 import { values } from "@azure-tools/linq";
 import { evalDirectiveTest, evalDirectiveTransform } from "./eval";
+import { ResolvedDirective } from "@autorest/configuration";
 
 export class Manipulator {
   private transformations: Array<ResolvedDirective>;
 
-  public constructor(private config: ConfigurationView) {
+  public constructor(private config: AutorestContext) {
     this.transformations = config.resolveDirectives(
       (directive) => directive.from.length > 0 && directive.transform.length > 0 && directive.where.length > 0,
     );

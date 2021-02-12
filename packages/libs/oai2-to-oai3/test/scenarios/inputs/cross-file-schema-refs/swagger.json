@@ -1,0 +1,21 @@
+{
+  "$schema": "https://github.com/OAI/OpenAPI-Specification/blob/master/schemas/v2.0/schema.json",
+  "swagger": "2.0",
+  "info": {
+    "x-ms-metadata": {
+      "apiVersions": ["test-0.1"]
+    },
+    "title": "Test",
+    "description": "test",
+    "version": "test-0.1"
+  },
+  "paths": {},
+  "definitions": {
+    "MySchema": {
+      "type": "object",
+      "properties": {
+        "myProp": { "$ref": "other.json#/definitions/MySharedSchema" }
+      }
+    }
+  }
+}

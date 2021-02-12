@@ -12,7 +12,7 @@ import {
 import { clone, Dictionary, values } from "@azure-tools/linq";
 import { areSimilar } from "@azure-tools/object-comparison";
 import * as oai from "@azure-tools/openapi";
-import { ConfigurationView } from "../../configuration";
+import { AutorestContext } from "../../configuration";
 import { PipelinePlugin } from "../common";
 import { toSemver, maximum, gt, lt } from "@azure-tools/codegen";
 import { Channel } from "../../message";
@@ -62,7 +62,7 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
 
   visitSchemas<T>(container: ProxyObject<Dictionary<T>>, originalNodes: () => Iterable<Node>) {
     const xMsMetadata = "x-ms-metadata";
-    const updatedSchemas = {};
+    const updatedSchemas: any = {};
 
     // get all the schemas and associate them with their uid
     // this will allow us to place the value in the right place at the end
@@ -115,7 +115,9 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
             // gs: added -- ensure that properties left beg
             if (currentSchema.value.required && supersetEquivSchema.properties) {
               const sesNames = Object.getOwnPropertyNames(supersetEquivSchema.properties);
-              supersetEquivSchema.required = currentSchema.value.required.filter((each) => sesNames.indexOf(each) > -1);
+              supersetEquivSchema.required = currentSchema.value.required.filter(
+                (each: any) => sesNames.indexOf(each) > -1,
+              );
             }
 
             // replace with equivalent schema and put back metadata.
@@ -344,7 +346,7 @@ export interface SubsetCheckResult {
   };
 }
 
-async function deduplicateSubsetSchemas(config: ConfigurationView, input: DataSource, sink: DataSink) {
+async function deduplicateSubsetSchemas(config: AutorestContext, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {

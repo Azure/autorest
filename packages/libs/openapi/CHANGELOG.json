@@ -1,0 +1,22 @@
+{
+  "name": "@azure-tools/openapi",
+  "entries": [
+    {
+      "version": "3.1.0",
+      "tag": "@azure-tools/openapi_v3.1.0",
+      "date": "Thu, 04 Feb 2021 19:05:18 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Change types from using `: Optional<T>` to `?: T`"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Internal: Moved from Azure/perks and update formatting"
+          }
+        ]
+      }
+    }
+  ]
+}

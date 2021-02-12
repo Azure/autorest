@@ -1,0 +1,22 @@
+{
+  "name": "@azure-tools/datastore",
+  "entries": [
+    {
+      "version": "4.1.271",
+      "tag": "@azure-tools/datastore_v4.1.271",
+      "date": "Thu, 04 Feb 2021 19:05:18 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Internal: Moved from Azure/perks, formatting changes"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.5.0` to `~2.5.293`"
+          }
+        ]
+      }
+    }
+  ]
+}

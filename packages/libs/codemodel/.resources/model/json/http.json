@@ -351,7 +351,7 @@
       "type": "object",
       "properties": {
         "path": {
-          "description": "A relative path to an individual endpoint. \n\nThe field name MUST begin with a slash. \nThe path is appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order to construct the full URL. \nPath templating is allowed. \n\nWhen matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.",
+          "description": "A relative path to an individual endpoint.\n\nThe field name MUST begin with a slash.\nThe path is appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order to construct the full URL.\nPath templating is allowed.\n\nWhen matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.",
           "type": "string"
         },
         "uri": {
@@ -436,7 +436,7 @@
       "type": "object",
       "properties": {
         "multipart": {
-          "description": "indicates that the HTTP Request should be a multipart request \n\nie, that it has multiple requests in a single request.",
+          "description": "indicates that the HTTP Request should be a multipart request\n\nie, that it has multiple requests in a single request.",
           "type": "boolean",
           "enum": [
             true

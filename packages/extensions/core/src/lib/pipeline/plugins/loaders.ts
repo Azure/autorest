@@ -5,7 +5,7 @@
 
 import { PipelinePlugin } from "../common";
 
-import { ConfigurationView } from "../../autorest-core";
+import { AutorestContext } from "../../autorest-core";
 import { Channel, SourceLocation } from "../../message";
 import { commonmarkHeadingFollowingText, commonmarkSubHeadings, parseCommonmark } from "../../parsing/literate";
 import { parse as ParseLiterateYaml } from "../../parsing/literate-yaml";
@@ -30,7 +30,7 @@ import { crawlReferences } from "./ref-crawling";
  * If a JSON file is provided, it checks that the syntax is correct.
  * And if the syntax is incorrect, it puts an error message .
  */
-async function checkSyntaxFromData(fileUri: string, handle: DataHandle, configView: ConfigurationView): Promise<void> {
+async function checkSyntaxFromData(fileUri: string, handle: DataHandle, configView: AutorestContext): Promise<void> {
   if (fileUri.toLowerCase().endsWith(".json")) {
     const error = StrictJsonSyntaxCheck(await handle.ReadData());
     if (error) {
@@ -53,7 +53,7 @@ function isOpenAPI3Spec(specObject: OpenAPI3Spec): boolean {
 }
 
 export async function LoadLiterateSwagger(
-  config: ConfigurationView,
+  config: AutorestContext,
   inputScope: DataSource,
   inputFileUri: string,
   sink: DataSink,
@@ -75,7 +75,7 @@ export async function LoadLiterateSwagger(
 }
 
 export async function LoadLiterateOpenAPI(
-  config: ConfigurationView,
+  config: AutorestContext,
   inputScope: DataSource,
   inputFileUri: string,
   sink: DataSink,
@@ -96,7 +96,7 @@ export async function LoadLiterateOpenAPI(
 }
 
 export async function LoadLiterateSwaggers(
-  config: ConfigurationView,
+  config: AutorestContext,
   inputScope: DataSource,
   inputFileUris: Array<string>,
   sink: DataSink,
@@ -114,7 +114,7 @@ export async function LoadLiterateSwaggers(
 }
 
 export async function LoadLiterateOpenAPIs(
-  config: ConfigurationView,
+  config: AutorestContext,
   inputScope: DataSource,
   inputFileUris: Array<string>,
   sink: DataSink,
@@ -140,7 +140,7 @@ interface OpenAPI3Spec {
 /* @internal */
 export function createSwaggerLoaderPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
-    const inputs = config.InputFileUris;
+    const inputs = config.config.inputFileUris;
     const swaggers = await LoadLiterateSwaggers(config, input, inputs, sink);
 
     const foundAllFiles = swaggers.length !== inputs.length;
@@ -156,7 +156,7 @@ export function createSwaggerLoaderPlugin(): PipelinePlugin {
 /* @internal */
 export function createOpenApiLoaderPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
-    const inputs = config.InputFileUris;
+    const inputs = config.config.inputFileUris;
     const openapis = await LoadLiterateOpenAPIs(config, input, inputs, sink);
     let result: Array<DataHandle> = [];
     if (openapis.length === inputs.length) {

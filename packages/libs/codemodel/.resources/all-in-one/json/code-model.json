@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "ApiVersion": {
-      "description": "- since API version formats range from \nAzure ARM API date style (2018-01-01) to semver (1.2.3) \nand virtually any other text, this value tends to be an \nopaque string with the possibility of a modifier to indicate\nthat it is a range.\n\noptions: \n- prepend a dash or append a plus to indicate a range \n(ie, '2018-01-01+' or '-2019-01-01', or '1.0+' )\n\n- semver-range style (ie, '^1.0.0' or '~1.0.0' )",
+      "description": "- since API version formats range from\nAzure ARM API date style (2018-01-01) to semver (1.2.3)\nand virtually any other text, this value tends to be an\nopaque string with the possibility of a modifier to indicate\nthat it is a range.\n\noptions:\n- prepend a dash or append a plus to indicate a range\n(ie, '2018-01-01+' or '-2019-01-01', or '1.0+' )\n\n- semver-range style (ie, '^1.0.0' or '~1.0.0' )",
       "type": "object",
       "properties": {
         "version": {
@@ -1041,6 +1041,10 @@
         "groupedBy": {
           "$ref": "#/definitions/Parameter",
           "description": "When a parameter is grouped into another, this will tell where the parameter got grouped into."
+        },
+        "isInMultipart": {
+          "description": "If this parameter is to be included in a multipart request body.",
+          "type": "boolean"
         }
       },
       "defaultProperties": [],
@@ -1802,7 +1806,7 @@
           }
         },
         "choices": {
-          "description": "- this is essentially can be thought of as an 'enum' \nthat is a choice between one of several items, but an unspecified value is permitted.",
+          "description": "- this is essentially can be thought of as an 'enum'\nthat is a choice between one of several items, but an unspecified value is permitted.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ChoiceSchema"
@@ -1860,7 +1864,7 @@
           }
         },
         "unknowns": {
-          "description": "it's possible that we just may make this an error \nin representation.",
+          "description": "it's possible that we just may make this an error\nin representation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Schema"
@@ -2214,6 +2218,20 @@
       "defaultProperties": [],
       "additionalProperties": false
     },
+    "HttpMethod": {
+      "description": "standard HTTP protocol methods",
+      "enum": [
+        "delete",
+        "get",
+        "head",
+        "options",
+        "patch",
+        "post",
+        "put",
+        "trace"
+      ],
+      "type": "string"
+    },
     "SerializationStyle": {
       "description": "The Serialization Style used for the parameter.\n\nDescribes how the parameter value will be serialized depending on the type of the parameter value.",
       "enum": [
@@ -2245,20 +2263,6 @@
         "label",
         "matrix",
         "simple"
-      ],
-      "type": "string"
-    },
-    "HttpMethod": {
-      "description": "standard HTTP protocol methods",
-      "enum": [
-        "delete",
-        "get",
-        "head",
-        "options",
-        "patch",
-        "post",
-        "put",
-        "trace"
       ],
       "type": "string"
     },
@@ -2716,7 +2720,7 @@
       "type": "object",
       "properties": {
         "path": {
-          "description": "A relative path to an individual endpoint. \n\nThe field name MUST begin with a slash. \nThe path is appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order to construct the full URL. \nPath templating is allowed. \n\nWhen matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.",
+          "description": "A relative path to an individual endpoint.\n\nThe field name MUST begin with a slash.\nThe path is appended (no relative URL resolution) to the expanded URL from the Server Object's url field in order to construct the full URL.\nPath templating is allowed.\n\nWhen matching URLs, concrete (non-templated) paths would be matched before their templated counterparts.",
           "type": "string"
         },
         "uri": {
@@ -2801,7 +2805,7 @@
       "type": "object",
       "properties": {
         "multipart": {
-          "description": "indicates that the HTTP Request should be a multipart request \n\nie, that it has multiple requests in a single request.",
+          "description": "indicates that the HTTP Request should be a multipart request\n\nie, that it has multiple requests in a single request.",
           "type": "boolean",
           "enum": [
             true

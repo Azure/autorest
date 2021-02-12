@@ -1,0 +1,120 @@
+{
+  "name": "autorest",
+  "entries": [
+    {
+      "version": "3.0.6339",
+      "tag": "autorest_v3.0.6339",
+      "date": "Thu, 11 Feb 2021 18:03:07 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Update** @azure-tools/extension to ~3.1.272 "
+          },
+          {
+            "comment": "**Internals** Update chalk dependency to ^4.1.0"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/core\" from `~3.0.6372` to `~3.0.6373`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.0.6338",
+      "tag": "autorest_v3.0.6338",
+      "date": "Tue, 09 Feb 2021 00:00:00 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Update** @azure-tools/extension to newer version that will log errors when installing packages."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/core\" from `~3.0.6371` to `~3.0.6372`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.0.6337",
+      "tag": "autorest_v3.0.6337",
+      "date": "Mon, 08 Feb 2021 23:06:15 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix build not generating types"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/core\" from `~3.0.6370` to `~3.0.6371`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.0.6336",
+      "tag": "autorest_v3.0.6336",
+      "date": "Thu, 04 Feb 2021 19:05:18 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Consolidate tsconfig settings with other projects"
+          },
+          {
+            "comment": "Internal code linting fixes"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/core\" from `~3.0.0` to `~3.0.6370`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.0.x",
+      "date": "Mon, 10 Feb 2020 00:00:00 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "detects when to fall back to autorest v2 core (no `--profile`, no `--api-version`)"
+          },
+          {
+            "comment": "made nodejs sandbox reusable. Much faster."
+          },
+          {
+            "comment": "rebuild to pick up perks change to fix multibyte utf8 over byte boundary problem"
+          },
+          {
+            "comment": "rebuild to pick up a perks change to support turning underscore in semver to dash on gh releases"
+          },
+          {
+            "comment": "on secondary swagger files, schema schema validation is relaxed to be warnings."
+          },
+          {
+            "comment": "drop unreferenced requestBodies during merge"
+          },
+          {
+            "comment": "supports v2 generators (and will by default, fall back to a v2 core unless overriden with `--version:`"
+          },
+          {
+            "comment": "if a v3 generator is loaded via `--use:` , it should not attempt to load v2 generator  even if `--[generator]` is specified (ie, `--python` `--use:./python` ) should be perfectly fine"
+          },
+          {
+            "comment": "the v3 generator name in `package.json` should be `@autorest/[name]` - ie `@autorest/csharp` "
+          },
+          {
+            "comment": "it will only assume `--tag=all-api-versions`  if either `--profile:`... or `--api-version:`... is specified. "
+          },
+          {
+            "comment": "rebuild to pick up newer extension library that supports python interpreter detection"
+          }
+        ]
+      }
+    }
+  ]
+}

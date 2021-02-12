@@ -2,6 +2,86 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.16.2",
+      "tag": "@autorest/modelerfour_v4.16.2",
+      "date": "Thu, 11 Feb 2021 18:03:07 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Internals** Update chalk dependency to ^4.1.0"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.16.1",
+      "tag": "@autorest/modelerfour_v4.16.1",
+      "date": "Mon, 08 Feb 2021 23:06:15 GMT",
+      "comments": {
+        "none": [
+          {
+            "comment": "Internal: Update tsconfig, files get generated directly under dist/ instead of dist/src/"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Set `isInMultipart: true` for multipart parameters"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/codemodel\" from `~4.14.4` to `~4.14.5`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.16.0",
+      "tag": "@autorest/modelerfour_v4.16.0",
+      "date": "Thu, 04 Feb 2021 19:05:18 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Migrate bundling system from static-link to webpack"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Fix the use of  circular dependencies in additionalProperties [PR #3819](https://github.com/Azure/autorest/pull/3819)"
+          },
+          {
+            "comment": "Internal code linting fixes"
+          },
+          {
+            "comment": "Internal: Move out test custom matchers to seperate package"
+          },
+          {
+            "comment": "Rename @azure-tools/autorest-extension-base dependency to new @autorest/extension-base pkg"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/codemodel\" from `~4.14.3` to `~4.14.4`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/extension-base\" from `~3.1.0` to `~3.2.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.0.1` to `~0.1.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.5.0` to `~2.5.293`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.1.0` to `~4.1.271`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.0.0` to `~3.1.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.15.456",
       "tag": "@autorest/modelerfour_v4.15.456",
       "date": "Thu, 28 Jan 2021 00:22:27 GMT",

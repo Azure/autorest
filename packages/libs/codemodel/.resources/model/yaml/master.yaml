@@ -1,19 +1,19 @@
 type: object
 description: the model that contains all the information required to generate a service api
-$schema: 'http://json-schema.org/draft-07/schema#'
+$schema: http://json-schema.org/draft-07/schema#
 additionalProperties: false
 definitions:
   ApiVersion:
     type: object
     description: |-
-      - since API version formats range from 
-      Azure ARM API date style (2018-01-01) to semver (1.2.3) 
-      and virtually any other text, this value tends to be an 
+      - since API version formats range from
+      Azure ARM API date style (2018-01-01) to semver (1.2.3)
+      and virtually any other text, this value tends to be an
       opaque string with the possibility of a modifier to indicate
       that it is a range.
 
-      options: 
-      - prepend a dash or append a plus to indicate a range 
+      options:
+      - prepend a dash or append a plus to indicate a range
       (ie, '2018-01-01+' or '-2019-01-01', or '1.0+' )
 
       - semver-range style (ie, '^1.0.0' or '~1.0.0' )
@@ -33,13 +33,13 @@ definitions:
     type: array
     description: a collection of api versions
     items:
-      $ref: './master.yaml#/definitions/ApiVersion'
+      $ref: ./master.yaml#/definitions/ApiVersion
   BinaryResponse:
     type: object
     description: a response where the content should be treated as a binary instead of a value or object
     additionalProperties: false
     allOf:
-      - $ref: './master.yaml#/definitions/Response'
+      - $ref: ./master.yaml#/definitions/Response
     properties:
       binary:
         type: boolean
@@ -72,10 +72,10 @@ definitions:
         description: the actual value
       extensions:
         description: additional metadata extensions dictionary
-        $ref: './master.yaml#/definitions/Dictionary<any>'
+        $ref: ./master.yaml#/definitions/Dictionary<any>
       language:
         description: per-language information for this value
-        $ref: './master.yaml#/definitions/Languages'
+        $ref: ./master.yaml#/definitions/Languages
     required:
       - language
       - source
@@ -94,7 +94,7 @@ definitions:
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: './master.yaml#/definitions/Dictionary<any>'
+        $ref: ./master.yaml#/definitions/Dictionary<any>
   Deprecation:
     type: object
     description: represents  deprecation information for a given aspect
@@ -104,7 +104,7 @@ definitions:
         type: array
         description: the api versions that this deprecation is applicable to.
         items:
-          $ref: './master.yaml#/definitions/ApiVersion'
+          $ref: ./master.yaml#/definitions/ApiVersion
       message:
         type: string
         description: the reason why this aspect
@@ -114,11 +114,11 @@ definitions:
   Dictionary<ApiVersion>:
     type: object
     additionalProperties:
-      $ref: './master.yaml#/definitions/ApiVersion'
+      $ref: ./master.yaml#/definitions/ApiVersion
   Dictionary<ComplexSchema>:
     type: object
     additionalProperties:
-      $ref: './schemas.yaml#/definitions/ComplexSchema'
+      $ref: ./schemas.yaml#/definitions/ComplexSchema
   Dictionary<any>:
     type: object
     additionalProperties:
@@ -132,18 +132,18 @@ definitions:
     additionalProperties: false
     properties:
       all:
-        $ref: './master.yaml#/definitions/Dictionary<ComplexSchema>'
+        $ref: ./master.yaml#/definitions/Dictionary<ComplexSchema>
       immediate:
-        $ref: './master.yaml#/definitions/Dictionary<ComplexSchema>'
+        $ref: ./master.yaml#/definitions/Dictionary<ComplexSchema>
       property:
-        $ref: './master.yaml#/definitions/Property'
+        $ref: ./master.yaml#/definitions/Property
     required:
       - all
       - immediate
       - property
   Example:
     type: object
-    description: 'example data [UNFINISHED]'
+    description: example data [UNFINISHED]
     additionalProperties: false
     properties:
       description:
@@ -160,7 +160,7 @@ definitions:
     properties:
       extensions:
         description: additional metadata extensions dictionary
-        $ref: './master.yaml#/definitions/Dictionary<any>'
+        $ref: ./master.yaml#/definitions/Dictionary<any>
   ExternalDocumentation:
     type: object
     description: a reference to external documentation
@@ -173,7 +173,7 @@ definitions:
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: './master.yaml#/definitions/Dictionary<any>'
+        $ref: ./master.yaml#/definitions/Dictionary<any>
     required:
       - url
   FlagValue:
@@ -184,10 +184,10 @@ definitions:
         type: number
       extensions:
         description: additional metadata extensions dictionary
-        $ref: './master.yaml#/definitions/Dictionary<any>'
+        $ref: ./master.yaml#/definitions/Dictionary<any>
       language:
         description: per-language information for this value
-        $ref: './master.yaml#/definitions/Languages'
+        $ref: ./master.yaml#/definitions/Languages
     required:
       - language
       - value
@@ -195,12 +195,12 @@ definitions:
     type: object
     additionalProperties: false
     allOf:
-      - $ref: './master.yaml#/definitions/Property'
+      - $ref: ./master.yaml#/definitions/Property
     properties:
       originalParameter:
         type: array
         items:
-          $ref: './master.yaml#/definitions/Parameter'
+          $ref: ./master.yaml#/definitions/Parameter
     required:
       - language
       - originalParameter
@@ -217,13 +217,13 @@ definitions:
         description: a text description of the service
       contact:
         description: contact information for the service
-        $ref: './master.yaml#/definitions/Contact'
+        $ref: ./master.yaml#/definitions/Contact
       externalDocs:
         description: External Documentation
-        $ref: './master.yaml#/definitions/ExternalDocumentation'
+        $ref: ./master.yaml#/definitions/ExternalDocumentation
       license:
         description: license information for th service
-        $ref: './master.yaml#/definitions/License'
+        $ref: ./master.yaml#/definitions/License
       termsOfService:
         type: string
         description: an uri to the terms of service specified to access the service
@@ -232,7 +232,7 @@ definitions:
         description: the title of this service.
       extensions:
         description: additional metadata extensions dictionary
-        $ref: './master.yaml#/definitions/Dictionary<any>'
+        $ref: ./master.yaml#/definitions/Dictionary<any>
     required:
       - title
   Language:
@@ -256,33 +256,33 @@ definitions:
     additionalProperties: false
     properties:
       default:
-        $ref: './master.yaml#/definitions/Language'
+        $ref: ./master.yaml#/definitions/Language
       c:
-        $ref: './master.yaml#/definitions/Language'
+        $ref: ./master.yaml#/definitions/Language
       cpp:
-        $ref: './master.yaml#/definitions/Language'
+        $ref: ./master.yaml#/definitions/Language
       csharp:
-        $ref: './master.yaml#/definitions/Language'
+        $ref: ./master.yaml#/definitions/Language
       go:
-        $ref: './master.yaml#/definitions/Language'
+        $ref: ./master.yaml#/definitions/Language
       java:
-        $ref: './master.yaml#/definitions/Language'
+        $ref: ./master.yaml#/definitions/Language
       javascript:
-        $ref: './master.yaml#/definitions/Language'
+        $ref: ./master.yaml#/definitions/Language
       objectivec:
-        $ref: './master.yaml#/definitions/Language'
+        $ref: ./master.yaml#/definitions/Language
       powershell:
-        $ref: './master.yaml#/definitions/Language'
+        $ref: ./master.yaml#/definitions/Language
       python:
-        $ref: './master.yaml#/definitions/Language'
+        $ref: ./master.yaml#/definitions/Language
       ruby:
-        $ref: './master.yaml#/definitions/Language'
+        $ref: ./master.yaml#/definitions/Language
       sputnik:
-        $ref: './master.yaml#/definitions/Language'
+        $ref: ./master.yaml#/definitions/Language
       swift:
-        $ref: './master.yaml#/definitions/Language'
+        $ref: ./master.yaml#/definitions/Language
       typescript:
-        $ref: './master.yaml#/definitions/Language'
+        $ref: ./master.yaml#/definitions/Language
     required:
       - default
   License:
@@ -298,7 +298,7 @@ definitions:
         description: an uri pointing to the full license text
       extensions:
         description: additional metadata extensions dictionary
-        $ref: './master.yaml#/definitions/Dictionary<any>'
+        $ref: ./master.yaml#/definitions/Dictionary<any>
     required:
       - name
   Metadata:
@@ -308,75 +308,75 @@ definitions:
     properties:
       extensions:
         description: additional metadata extensions dictionary
-        $ref: './master.yaml#/definitions/Dictionary<any>'
+        $ref: ./master.yaml#/definitions/Dictionary<any>
       language:
         description: per-language information for this aspect
-        $ref: './master.yaml#/definitions/Languages'
+        $ref: ./master.yaml#/definitions/Languages
       protocol:
         description: per-protocol information for this aspect
-        $ref: './master.yaml#/definitions/Protocols'
+        $ref: ./master.yaml#/definitions/Protocols
     required:
       - language
       - protocol
   Operation:
     type: object
-    description: 'represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)'
+    description: represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)
     additionalProperties: false
     properties:
       apiVersions:
         type: array
         description: API versions that this applies to. Undefined means all versions
         items:
-          $ref: './master.yaml#/definitions/ApiVersion'
+          $ref: ./master.yaml#/definitions/ApiVersion
       deprecated:
-        description: 'deprecation information -- ie, when this aspect doesn''t apply and why'
-        $ref: './master.yaml#/definitions/Deprecation'
+        description: deprecation information -- ie, when this aspect doesn't apply and why
+        $ref: ./master.yaml#/definitions/Deprecation
       exceptions:
         type: array
         description: responses that indicate a failed call
         items:
-          $ref: './master.yaml#/definitions/Response'
+          $ref: ./master.yaml#/definitions/Response
       externalDocs:
         description: External Documentation Links
-        $ref: './master.yaml#/definitions/ExternalDocumentation'
+        $ref: ./master.yaml#/definitions/ExternalDocumentation
       origin:
         type: string
-        description: 'where did this aspect come from (jsonpath or ''modelerfour:<soemthing>'')'
+        description: where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')
       parameters:
         type: array
         description: common parameters when there are multiple requests
         items:
-          $ref: './master.yaml#/definitions/Parameter'
+          $ref: ./master.yaml#/definitions/Parameter
       profile:
         description: the apiVersion to use for a given profile name
-        $ref: './master.yaml#/definitions/Dictionary<ApiVersion>'
+        $ref: ./master.yaml#/definitions/Dictionary<ApiVersion>
       requests:
         type: array
         description: the different possibilities to build the request.
         items:
-          $ref: './master.yaml#/definitions/Request'
+          $ref: ./master.yaml#/definitions/Request
       responses:
         type: array
         description: responses that indicate a successful call
         items:
-          $ref: './master.yaml#/definitions/Response'
+          $ref: ./master.yaml#/definitions/Response
       signatureParameters:
         type: array
         description: a common filtered list of parameters that is (assumably) the actual method signature parameters
         items:
-          $ref: './master.yaml#/definitions/Parameter'
+          $ref: ./master.yaml#/definitions/Parameter
       summary:
         type: string
         description: a short description
       extensions:
         description: additional metadata extensions dictionary
-        $ref: './master.yaml#/definitions/Dictionary<any>'
+        $ref: ./master.yaml#/definitions/Dictionary<any>
       language:
         description: per-language information for this aspect
-        $ref: './master.yaml#/definitions/Languages'
+        $ref: ./master.yaml#/definitions/Languages
       protocol:
         description: per-protocol information for this aspect
-        $ref: './master.yaml#/definitions/Protocols'
+        $ref: ./master.yaml#/definitions/Protocols
     required:
       - language
       - protocol
@@ -385,14 +385,14 @@ definitions:
     description: an operation group represents a container around set of operations
     additionalProperties: false
     allOf:
-      - $ref: './master.yaml#/definitions/Metadata'
+      - $ref: ./master.yaml#/definitions/Metadata
     properties:
       $key:
         type: string
       operations:
         type: array
         items:
-          $ref: './master.yaml#/definitions/Operation'
+          $ref: ./master.yaml#/definitions/Operation
     required:
       - $key
       - language
@@ -403,17 +403,20 @@ definitions:
     description: a definition of an discrete input for an operation
     additionalProperties: false
     allOf:
-      - $ref: './master.yaml#/definitions/Value'
+      - $ref: ./master.yaml#/definitions/Value
     properties:
       flattened:
         type: boolean
-        description: 'When a parameter is flattened, it will be left in the list, but marked hidden (so, don''t generate those!)'
+        description: When a parameter is flattened, it will be left in the list, but marked hidden (so, don't generate those!)
       groupedBy:
-        description: 'When a parameter is grouped into another, this will tell where the parameter got grouped into.'
-        $ref: './master.yaml#/definitions/Parameter'
+        description: When a parameter is grouped into another, this will tell where the parameter got grouped into.
+        $ref: ./master.yaml#/definitions/Parameter
       implementation:
         description: suggested implementation location for this parameter
-        $ref: './enums.yaml#/definitions/ImplementationLocation'
+        $ref: ./enums.yaml#/definitions/ImplementationLocation
+      isInMultipart:
+        type: boolean
+        description: If this parameter is to be included in a multipart request body.
     required:
       - language
       - protocol
@@ -423,7 +426,7 @@ definitions:
     description: a property is a child value in an object
     additionalProperties: false
     allOf:
-      - $ref: './master.yaml#/definitions/Value'
+      - $ref: ./master.yaml#/definitions/Value
     properties:
       flattenedNames:
         type: array
@@ -440,7 +443,7 @@ definitions:
         description: if this property is used as a discriminator for a polymorphic type
       readOnly:
         type: boolean
-        description: 'if the property is marked read-only (ie, not intended to be sent to the service)'
+        description: if the property is marked read-only (ie, not intended to be sent to the service)
       serializedName:
         type: string
         description: the wire name of this property
@@ -455,17 +458,17 @@ definitions:
     additionalProperties: false
   Protocols:
     type: object
-    description: 'custom extensible metadata for individual protocols (ie, HTTP, etc)'
+    description: custom extensible metadata for individual protocols (ie, HTTP, etc)
     additionalProperties: false
     properties:
       amqp:
-        $ref: './master.yaml#/definitions/Protocol'
+        $ref: ./master.yaml#/definitions/Protocol
       jsonrpc:
-        $ref: './master.yaml#/definitions/Protocol'
+        $ref: ./master.yaml#/definitions/Protocol
       mqtt:
-        $ref: './master.yaml#/definitions/Protocol'
+        $ref: ./master.yaml#/definitions/Protocol
       http:
-        $ref: './master.yaml#/definitions/Protocol'
+        $ref: ./master.yaml#/definitions/Protocol
   Relations:
     type: object
     additionalProperties: false
@@ -473,11 +476,11 @@ definitions:
       all:
         type: array
         items:
-          $ref: './schemas.yaml#/definitions/ComplexSchema'
+          $ref: ./schemas.yaml#/definitions/ComplexSchema
       immediate:
         type: array
         items:
-          $ref: './schemas.yaml#/definitions/ComplexSchema'
+          $ref: ./schemas.yaml#/definitions/ComplexSchema
     required:
       - all
       - immediate
@@ -485,18 +488,18 @@ definitions:
     type: object
     additionalProperties: false
     allOf:
-      - $ref: './master.yaml#/definitions/Metadata'
+      - $ref: ./master.yaml#/definitions/Metadata
     properties:
       parameters:
         type: array
         description: the parameter inputs to the operation
         items:
-          $ref: './master.yaml#/definitions/Parameter'
+          $ref: ./master.yaml#/definitions/Parameter
       signatureParameters:
         type: array
         description: a filtered list of parameters that is (assumably) the actual method signature parameters
         items:
-          $ref: './master.yaml#/definitions/Parameter'
+          $ref: ./master.yaml#/definitions/Parameter
     required:
       - language
       - protocol
@@ -505,7 +508,7 @@ definitions:
     description: a response from a service.
     additionalProperties: false
     allOf:
-      - $ref: './master.yaml#/definitions/Metadata'
+      - $ref: ./master.yaml#/definitions/Metadata
     required:
       - language
       - protocol
@@ -514,11 +517,11 @@ definitions:
     description: a response that should be deserialized into a result of type(schema)
     additionalProperties: false
     allOf:
-      - $ref: './master.yaml#/definitions/Response'
+      - $ref: ./master.yaml#/definitions/Response
     properties:
       schema:
         description: the content returned by the service for a given operaiton
-        $ref: './schemas.yaml#/definitions/Schema'
+        $ref: ./schemas.yaml#/definitions/Schema
       nullable:
         type: boolean
         description: indicates whether the response can be 'null'
@@ -534,12 +537,12 @@ definitions:
         type: array
         description: Known media types in which this schema can be serialized
         items:
-          $ref: './enums.yaml#/definitions/KnownMediaType'
+          $ref: ./enums.yaml#/definitions/KnownMediaType
       usage:
         type: array
         description: contexts in which the schema is used
         items:
-          $ref: './schemas.yaml#/definitions/SchemaContext'
+          $ref: ./schemas.yaml#/definitions/SchemaContext
   Security:
     type: object
     description: The security information for the API surface
@@ -556,49 +559,49 @@ definitions:
     properties:
       extensions:
         description: additional metadata extensions dictionary
-        $ref: './master.yaml#/definitions/Dictionary<any>'
+        $ref: ./master.yaml#/definitions/Dictionary<any>
   SerializationFormats:
     type: object
     description: custom extensible metadata for individual serialization formats
     additionalProperties: false
     properties:
       binary:
-        $ref: './master.yaml#/definitions/SerializationFormat'
+        $ref: ./master.yaml#/definitions/SerializationFormat
       json:
-        $ref: './master.yaml#/definitions/SerializationFormat'
+        $ref: ./master.yaml#/definitions/SerializationFormat
       protobuf:
-        $ref: './master.yaml#/definitions/SerializationFormat'
+        $ref: ./master.yaml#/definitions/SerializationFormat
       xml:
-        $ref: './master.yaml#/definitions/XmlSerlializationFormat'
+        $ref: ./master.yaml#/definitions/XmlSerlializationFormat
   Value:
     type: object
-    description: 'common base interface for properties, parameters and the like.'
+    description: common base interface for properties, parameters and the like.
     additionalProperties: false
     properties:
       schema:
         description: the schema of this Value
-        $ref: './schemas.yaml#/definitions/Schema'
+        $ref: ./schemas.yaml#/definitions/Schema
       apiVersions:
         type: array
         description: API versions that this applies to. Undefined means all versions
         items:
-          $ref: './master.yaml#/definitions/ApiVersion'
+          $ref: ./master.yaml#/definitions/ApiVersion
       assumedValue:
         description: the value that the remote will assume if this value is not present
       clientDefaultValue:
         description: the value that the client should provide if the consumer doesn't provide one
       deprecated:
-        description: 'deprecation information -- ie, when this aspect doesn''t apply and why'
-        $ref: './master.yaml#/definitions/Deprecation'
+        description: deprecation information -- ie, when this aspect doesn't apply and why
+        $ref: ./master.yaml#/definitions/Deprecation
       externalDocs:
         description: External Documentation Links
-        $ref: './master.yaml#/definitions/ExternalDocumentation'
+        $ref: ./master.yaml#/definitions/ExternalDocumentation
       nullable:
         type: boolean
         description: can null be passed in instead
       origin:
         type: string
-        description: 'where did this aspect come from (jsonpath or ''modelerfour:<soemthing>'')'
+        description: where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')
       required:
         type: boolean
         description: if the value is marked 'required'.
@@ -607,13 +610,13 @@ definitions:
         description: a short description
       extensions:
         description: additional metadata extensions dictionary
-        $ref: './master.yaml#/definitions/Dictionary<any>'
+        $ref: ./master.yaml#/definitions/Dictionary<any>
       language:
         description: per-language information for this aspect
-        $ref: './master.yaml#/definitions/Languages'
+        $ref: ./master.yaml#/definitions/Languages
       protocol:
         description: per-protocol information for this aspect
-        $ref: './master.yaml#/definitions/Protocols'
+        $ref: ./master.yaml#/definitions/Protocols
     required:
       - language
       - protocol
@@ -622,19 +625,19 @@ definitions:
     type: object
     additionalProperties: false
     allOf:
-      - $ref: './master.yaml#/definitions/Parameter'
+      - $ref: ./master.yaml#/definitions/Parameter
     properties:
       originalParameter:
         description: the original body parameter that this parameter is in effect replacing
-        $ref: './master.yaml#/definitions/Parameter'
+        $ref: ./master.yaml#/definitions/Parameter
       pathToProperty:
         type: array
-        description: 'if this parameter is for a nested property, this is the path of properties it takes to get there'
+        description: if this parameter is for a nested property, this is the path of properties it takes to get there
         items:
-          $ref: './master.yaml#/definitions/Property'
+          $ref: ./master.yaml#/definitions/Property
       targetProperty:
         description: the target property this virtual parameter represents
-        $ref: './master.yaml#/definitions/Property'
+        $ref: ./master.yaml#/definitions/Property
     required:
       - language
       - originalParameter
@@ -646,7 +649,7 @@ definitions:
     type: object
     additionalProperties: false
     allOf:
-      - $ref: './master.yaml#/definitions/SerializationFormat'
+      - $ref: ./master.yaml#/definitions/SerializationFormat
     properties:
       name:
         type: string
@@ -672,31 +675,31 @@ definitions:
 properties:
   schemas:
     description: All schemas for the model
-    $ref: './schemas.yaml#/definitions/Schemas'
+    $ref: ./schemas.yaml#/definitions/Schemas
   globalParameters:
     type: array
-    description: 'all global parameters (ie, ImplementationLocation = client )'
+    description: all global parameters (ie, ImplementationLocation = client )
     items:
-      $ref: './master.yaml#/definitions/Parameter'
+      $ref: ./master.yaml#/definitions/Parameter
   info:
     description: Code model information
-    $ref: './master.yaml#/definitions/Info'
+    $ref: ./master.yaml#/definitions/Info
   operationGroups:
     type: array
     description: All operations
     items:
-      $ref: './master.yaml#/definitions/OperationGroup'
+      $ref: ./master.yaml#/definitions/OperationGroup
   security:
-    $ref: './master.yaml#/definitions/Security'
+    $ref: ./master.yaml#/definitions/Security
   extensions:
     description: additional metadata extensions dictionary
-    $ref: './master.yaml#/definitions/Dictionary<any>'
+    $ref: ./master.yaml#/definitions/Dictionary<any>
   language:
     description: per-language information for this aspect
-    $ref: './master.yaml#/definitions/Languages'
+    $ref: ./master.yaml#/definitions/Languages
   protocol:
     description: per-protocol information for this aspect
-    $ref: './master.yaml#/definitions/Protocols'
+    $ref: ./master.yaml#/definitions/Protocols
 required:
   - info
   - language

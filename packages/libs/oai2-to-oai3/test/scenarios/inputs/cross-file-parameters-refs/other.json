@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "QueryParm": {
+      "in": "query",
+      "name": "MyQueryParam",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/MyQuerySchema"
+      }
+    },
+    "HeaderParam": {
+      "in": "query",
+      "name": "MyHeaderParam",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/MyHeaderSchema"
+      }
+    }
+  },
+  "definitions": {
+    "MyQuerySchema": {
+      "type": "string"
+    },
+    "MyHeaderSchema": {
+      "type": "string"
+    }
+  }
+}

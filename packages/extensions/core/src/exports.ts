@@ -3,25 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-// load modules from static linker filesystem.
-try {
-  if (
-    process.argv.indexOf("--no-static-loader") === -1 &&
-    process.env["no-static-loader"] === undefined &&
-    require("fs").existsSync(`${__dirname}/static-loader.js`)
-  ) {
-    require("./static-loader.js").load(`${__dirname}/static_modules.fs`);
-  }
-} catch {
-  // no worries.
-}
-
 export { IFileSystem } from "@azure-tools/datastore";
 export { Message, Channel } from "./lib/message";
 export { Artifact } from "./lib/artifact";
 export {
   AutoRest,
-  ConfigurationView,
+  AutorestContext,
   IdentifyDocument,
   IsConfigurationExtension,
   IsConfigurationDocument,

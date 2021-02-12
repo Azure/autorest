@@ -12,7 +12,7 @@ describe("SwaggerLoading", () => {
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
-    const inputFilesUris = [];
+    const inputFilesUris: string[] = [];
 
     const swaggerFilesLoaded = await LoadLiterateSwaggers(
       config,

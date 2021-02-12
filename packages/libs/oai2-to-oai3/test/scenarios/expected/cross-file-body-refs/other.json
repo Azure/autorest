@@ -1,0 +1,15 @@
+{
+  "servers": [],
+  "components": {
+    "schemas": {
+      "MyBodySchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

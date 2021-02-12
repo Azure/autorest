@@ -2,6 +2,41 @@
   "name": "@autorest/codemodel",
   "entries": [
     {
+      "version": "4.14.5",
+      "tag": "@autorest/codemodel_v4.14.5",
+      "date": "Mon, 08 Feb 2021 23:06:15 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add a new `isInMultipart` field on parameters"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.14.4",
+      "tag": "@autorest/codemodel_v4.14.4",
+      "date": "Thu, 04 Feb 2021 19:05:18 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Internal: Moved source to src/ folder"
+          },
+          {
+            "comment": "Internal code linting fixes"
+          },
+          {
+            "comment": "Removed unused deprecated dependency @azure-tools/autorest-extension-base"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.5.0` to `~2.5.293`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.14.3",
       "tag": "@autorest/codemodel_v4.14.3",
       "date": "Tue, 26 Jan 2021 21:36:02 GMT",

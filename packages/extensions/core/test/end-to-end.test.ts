@@ -50,8 +50,8 @@ describe("EndToEnd", () => {
     );
     // PumpMessagesToConsole(autoRest);
 
-    const config = await autoRest.view;
-    assert.strictEqual(config["shouldwork"], true);
+    const context = await autoRest.view;
+    assert.strictEqual(context.config["shouldwork"], true);
   });
 
   // todo: skipping because testing is broken?
@@ -71,7 +71,7 @@ describe("EndToEnd", () => {
     });
 
     const config = await autoRest.view;
-    assert.strictEqual(config.InputFileUris.length, 1);
+    assert.strictEqual(config.config.inputFileUris.length, 1);
 
     const messages: Array<Message> = [];
 

@@ -1,0 +1,131 @@
+{
+  "name": "@autorest/core",
+  "entries": [
+    {
+      "version": "3.0.6373",
+      "tag": "@autorest/core_v3.0.6373",
+      "date": "Thu, 11 Feb 2021 18:03:07 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Configuration for csharp causing pipeline stage not found error"
+          },
+          {
+            "comment": "**Improvement** Provide a more detail error message when pipeline can't find a stage."
+          },
+          {
+            "comment": "**Update** @azure-tools/extension to ~3.1.272 and bundle it in the webpack file"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.0.6372",
+      "tag": "@autorest/core_v3.0.6372",
+      "date": "Tue, 09 Feb 2021 22:00:21 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Issue where it was not possible to override a config flag defined in the same markdown config. Markdown configuration loading now treats yaml code block in increasing priority order."
+          },
+          {
+            "comment": "**Update** @azure-tools/extension to newer version that will log errors when installing packages."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/schemas\" from `~1.0.0` to `~1.0.1`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.0.6371",
+      "tag": "@autorest/core_v3.0.6371",
+      "date": "Mon, 08 Feb 2021 23:06:15 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Internal: Migrate bundling system to webpack"
+          },
+          {
+            "comment": "Update csharp generator to default to v3. Use `--v2` to revert to previous version"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.0.6370",
+      "tag": "@autorest/core_v3.0.6370",
+      "date": "Thu, 04 Feb 2021 19:05:18 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Internal: Moved source to src/ folder"
+          },
+          {
+            "comment": "Refactoring: Cleanup of code running transform directives"
+          },
+          {
+            "comment": "Internal code linting fixes"
+          },
+          {
+            "comment": "Internal: Add some tests to the tree shaker"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.5.0` to `~2.5.293`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.1.0` to `~4.1.271`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/oai2-to-oai3\" from `~4.2.0` to `~4.2.276`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.0.0` to `~3.1.0`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.0.x",
+      "date": "Tue, 4 Feb 2020 00:00:00 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "rebuild to pick up latest data-store to fix the caching filename size"
+          },
+          {
+            "comment": "OAI2-to-OAI3 converter update in perks."
+          },
+          {
+            "comment": "TransformerViaPointer was turning null into {} "
+          },
+          {
+            "comment": "rebuild to fix NPM publishing problem."
+          },
+          {
+            "comment": "remove additionalProperties: false so v2 generators don't choke."
+          },
+          {
+            "comment": "rebuild to pick up perks change to fix multibyte utf8 over byte boundary problem"
+          },
+          {
+            "comment": "rebuild to pick up a perks change to support turning underscore in semver to dash on gh releases"
+          },
+          {
+            "comment": "rebuild to pick up newer extension library that supports python interpreter detection"
+          },
+          {
+            "comment": "force rebuild to pick up fix in oai2 converter"
+          },
+          {
+            "comment": "update the oai2-to-oai3 converter (parameterized host parameters should be client parameters if they are $ref'd)"
+          }
+        ]
+      }
+    }
+  ]
+}

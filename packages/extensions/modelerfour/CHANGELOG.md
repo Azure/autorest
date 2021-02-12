@@ -1,6 +1,34 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Thu, 28 Jan 2021 00:22:27 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Feb 2021 18:03:07 GMT and should not be manually modified.
+
+## 4.16.2
+Thu, 11 Feb 2021 18:03:07 GMT
+
+### Patches
+
+- **Internals** Update chalk dependency to ^4.1.0
+
+## 4.16.1
+Mon, 08 Feb 2021 23:06:15 GMT
+
+### Patches
+
+- Set `isInMultipart: true` for multipart parameters
+
+## 4.16.0
+Thu, 04 Feb 2021 19:05:18 GMT
+
+### Minor changes
+
+- Migrate bundling system from static-link to webpack
+
+### Patches
+
+- Fix the use of  circular dependencies in additionalProperties [PR #3819](https://github.com/Azure/autorest/pull/3819)
+- Internal code linting fixes
+- Internal: Move out test custom matchers to seperate package
+- Rename @azure-tools/autorest-extension-base dependency to new @autorest/extension-base pkg
 
 ## 4.15.456
 Thu, 28 Jan 2021 00:22:27 GMT

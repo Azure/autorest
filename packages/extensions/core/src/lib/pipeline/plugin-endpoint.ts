@@ -9,8 +9,8 @@ import { ChildProcess, fork } from "child_process";
 import { RawSourceMap } from "source-map";
 import { Readable, Writable } from "stream";
 import { CancellationToken, createMessageConnection } from "vscode-jsonrpc";
-import { ConfigurationView } from "../../exports";
 import { Artifact } from "../artifact";
+import { AutorestContext } from "../configuration";
 import { EventEmitter } from "../events";
 import { Exception } from "../exception";
 import { ArtifactMessage, Channel, Message } from "../message";
@@ -192,7 +192,7 @@ export class AutoRestExtension extends EventEmitter {
   public async Process(
     pluginName: string,
     configuration: (key: string) => any,
-    configurationView: ConfigurationView,
+    context: AutorestContext,
     inputScope: DataSource,
     sink: DataSink,
     onFile: (data: DataHandle) => void,
@@ -205,7 +205,7 @@ export class AutoRestExtension extends EventEmitter {
     this.apiInitiatorEndpoints[sid] = AutoRestExtension.CreateEndpointFor(
       pluginName,
       configuration,
-      configurationView,
+      context,
       inputScope,
       sink,
       onFile,
@@ -228,7 +228,7 @@ export class AutoRestExtension extends EventEmitter {
   private static CreateEndpointFor(
     pluginName: string,
     configuration: (key: string) => any,
-    configurationView: ConfigurationView,
+    context: AutorestContext,
     inputScope: DataSource,
     sink: DataSink,
     onFile: (data: DataHandle) => void,
@@ -303,9 +303,7 @@ export class AutoRestExtension extends EventEmitter {
         } catch (E) {
           // try getting the file from the output-folder
           try {
-            const result = await configurationView.fileSystem.ReadFile(
-              `${configurationView.OutputFolderUri}${filename}`,
-            );
+            const result = await context.fileSystem.ReadFile(`${context.config.outputFolderUri}${filename}`);
             return result;
           } catch (E2) {
             // no file there!
@@ -355,10 +353,10 @@ export class AutoRestExtension extends EventEmitter {
         }
 
         // we'd like to be able to ask the host for a file directly (but only if it's supposed to be in the output-folder)
-        const t = configurationView.OutputFolderUri.length;
+        const t = context.config.outputFolderUri.length;
         return (
-          await configurationView.fileSystem.EnumerateFileUris(
-            EnsureIsFolderUri(`${configurationView.OutputFolderUri}${artifactType || ""}`),
+          await context.fileSystem.EnumerateFileUris(
+            EnsureIsFolderUri(`${context.config.outputFolderUri}${artifactType || ""}`),
           )
         ).map((each) => each.substr(t));
       },
@@ -403,7 +401,7 @@ export class AutoRestExtension extends EventEmitter {
           if (message.Key && message.Text) {
             const key = [...message.Key];
             if (key.length > 0) {
-              configurationView.updateConfigurationFile(key[0], message.Text);
+              context.updateConfigurationFile(key[0], message.Text);
             }
           }
 

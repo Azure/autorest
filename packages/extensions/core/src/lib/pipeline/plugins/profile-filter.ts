@@ -20,7 +20,7 @@ import {
 } from "@azure-tools/datastore";
 import { Dictionary, items, values } from "@azure-tools/linq";
 import * as oai from "@azure-tools/openapi";
-import { ConfigurationView } from "../../configuration";
+import { AutorestContext } from "../../configuration";
 import { PipelinePlugin } from "../common";
 
 type componentType =
@@ -54,12 +54,24 @@ interface OperationData {
   path: string;
 }
 
+interface ComponentTracker {
+  schemas: Set<string>;
+  responses: Set<string>;
+  parameters: Set<string>;
+  examples: Set<string>;
+  requestBodies: Set<string>;
+  headers: Set<string>;
+  securitySchemes: Set<string>;
+  links: Set<string>;
+  callbacks: Set<string>;
+}
+
 export class ProfileFilter extends Transformer<any, oai.Model> {
   filterTargets: Array<{ apiVersion: string; profile: string; pathRegex: RegExp; weight: number }> = [];
 
   // sets containing the UIDs of components already visited.
   // This is used to prevent circular references.
-  private visitedComponents = {
+  private visitedComponents: ComponentTracker = {
     schemas: new Set<string>(),
     responses: new Set<string>(),
     parameters: new Set<string>(),
@@ -71,7 +83,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
     callbacks: new Set<string>(),
   };
 
-  private componentsToKeep = {
+  private componentsToKeep: ComponentTracker = {
     schemas: new Set<string>(),
     responses: new Set<string>(),
     parameters: new Set<string>(),
@@ -414,7 +426,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
 
   visitComponent<T>(type: string, container: ProxyObject<Dictionary<T>>, nodes: Iterable<Node>) {
     for (const { key, value, pointer } of nodes) {
-      if (this.componentsToKeep[type].has(key)) {
+      if (this.componentsToKeep[type as keyof ComponentTracker].has(key)) {
         this.clone(container, key, pointer, value);
       }
     }
@@ -439,7 +451,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   }
 }
 
-async function filter(config: ConfigurationView, input: DataSource, sink: DataSink) {
+async function filter(config: AutorestContext, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
@@ -501,7 +513,9 @@ function getFilesUsed(nodes: Iterable<Node>) {
     switch (field.key) {
       case "paths":
         for (const path of field.children) {
-          path.value["x-ms-metadata"].originalLocations.map((x) => filesUsed.add(x.replace(/(.*)#\/paths.*/g, "$1")));
+          path.value["x-ms-metadata"].originalLocations.map((x: string) =>
+            filesUsed.add(x.replace(/(.*)#\/paths.*/g, "$1")),
+          );
         }
         break;
 
@@ -518,7 +532,7 @@ function getFilesUsed(nodes: Iterable<Node>) {
             case "callbacks":
             case "securitySchemes":
               for (const component of collection.children) {
-                component.value["x-ms-metadata"].originalLocations.map((x) =>
+                component.value["x-ms-metadata"].originalLocations.map((x: any) =>
                   filesUsed.add(x.replace(/(.*)#\/components.*/g, "$1")),
                 );
               }

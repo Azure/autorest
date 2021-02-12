@@ -59,7 +59,7 @@ export const configurationSpecifiedVersion = async (args: AutorestArgs, selected
             api.AddConfiguration(switches);
 
             // resolve the configuration and return the version if there is one.
-            return (await api.view).rawConfig.version;              
+            return (await api.view).rawConfig.version;
           }
           go();
           `,

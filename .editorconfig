@@ -1,0 +1,20 @@
+# top-most EditorConfig file
+root = true
+
+[*]
+# (Please don't specify an indent_size here; that has too many unintended consequences.)
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# JS/TS files
+[*.{js,jsx,ts,tsx}]
+indent_size = 2
+
+# Json files
+[*.{json}]
+indent_size = 2
+
+# Yaml files
+[*.{yaml}]
+indent_size = 2
