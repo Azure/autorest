@@ -54,7 +54,7 @@ export async function parseCodeBlocks(
         const error = StrictJsonSyntaxCheck(await data.ReadData());
         if (error) {
           logger.trackError({
-            code: LiterateYamlErrorCodes.jsonParsingError, // TODO-TIM check this code.
+            code: LiterateYamlErrorCodes.jsonParsingError,
             message: `Syntax Error Encountered:  ${error.message}`,
             source: [{ position: IndexToPosition(data, error.index), document: data.key }],
           });
