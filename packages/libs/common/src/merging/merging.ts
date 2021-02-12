@@ -73,7 +73,7 @@ function strictMerge(a: any, b: any, path: JsonPath = []): any {
     }
   }
 
-  throw new Error(`'${stringify(path)}' has incompatible values (${Stringify(a)}, ${Stringify(b)}).`);
+  throw new Error(`'${Stringify(path)}' has incompatible values (${Stringify(a)}, ${Stringify(b)}).`);
 }
 
 export function shallowCopy(input: any, ...filter: Array<string>): any {
