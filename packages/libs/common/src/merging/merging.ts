@@ -209,7 +209,7 @@ export function mergeOverwriteOrAppend(
   path: JsonPath = [],
 ): any {
   if (higherPriority === null || lowerPriority === null) {
-    return null; // TODO: overthink, we could use this to force mute something even if it's "concat" mode...
+    return null;
   }
 
   // scalars/arrays involved
