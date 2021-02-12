@@ -2,7 +2,7 @@
 
 This document will explain how you can represent various binary payload in swagger/openapi.
 
-## Generic case
+## Basics
 
 There is 2 part to describe a binary/file payload:
 
@@ -22,7 +22,7 @@ There is 2 part to describe a binary/file payload:
 
 The overall response should look like this(Replace `{{INSERT_CONTENT_TYPE}}` with desired content type):
 
-**OpenAPI 3**
+#### OpenAPI 3
 
 ```json
 {
@@ -48,7 +48,7 @@ The overall response should look like this(Replace `{{INSERT_CONTENT_TYPE}}` wit
 }
 ```
 
-**Swagger 2**
+#### Swagger 2
 
 ```json
 {
@@ -74,7 +74,7 @@ The overall response should look like this(Replace `{{INSERT_CONTENT_TYPE}}` wit
 
 The overall request should look like this(Replace `{{INSERT_CONTENT_TYPE}}` with desired content type):
 
-**OpenAPI 3**
+#### OpenAPI 3
 
 ```json
 {
@@ -97,9 +97,9 @@ The overall request should look like this(Replace `{{INSERT_CONTENT_TYPE}}` with
 }
 ```
 
-**Swagger 2**
+#### Swagger 2
 
-Swagger 2 doesn't actually generic file content as described in their docs [File upload](https://swagger.io/docs/specification/2-0/file-upload/).
+**Important:** Swagger 2 doesn't actually generic file content as described in their docs [File upload](https://swagger.io/docs/specification/2-0/file-upload/).
 However autorest does provide an extension and lets user follow the same pattern as OpenAPI3 using the schema using `{"type": "file"}`.
 
 ```json

@@ -316,7 +316,7 @@ shrinkwrap.json
 dist
 
 # Prettier reformats code blocks inside Markdown, which affects rendered output
-# *.md
+*.md
 
 schema/
 Samples/
