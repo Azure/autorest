@@ -64,28 +64,19 @@ export function strictMerge(a: any, b: any, path: JsonPath = []): any {
   throw new Error(`'${Stringify(path)}' has incompatible values (${Stringify(a)}, ${Stringify(b)}).`);
 }
 
-function toJsValue(value: any) {
-  switch (typeof value) {
-    case "undefined":
-      return "undefined";
-    case "boolean":
-    case "number":
-      return value;
-    case "object":
-      if (value === null) {
-        return "null";
-      }
-      if (Array.isArray(value) && value.length === 0) {
-        return "false";
-      }
-      return "true";
-  }
-  return `'${value}'`;
-}
 // Note: I am not convinced this works precisely as it should
 // but it works well enough for my needs right now
 // I will revisit it later.
 const macroRegEx = () => /\$\(([a-zA-Z0-9_-]*)\)/gi;
+
+/**
+ * Resolve the expanded value by interpolating any
+ * @param value Value to interpolate.
+ * @param propertyName Name of the property.
+ * @param higherPriority Higher priority context to resolve the interpolation values.
+ * @param lowerPriority Lower priority context to resolve the interpolation values.
+ * @param jsAware
+ */
 export function resolveRValue(
   value: any,
   propertyName: string,
@@ -124,7 +115,7 @@ export function resolveRValue(
         if (match[0] === match.input) {
           // the target value should be the result without string twiddling
           if (jsAware > 0) {
-            return toJsValue(resolve(match[0], match[1]));
+            return JSON.stringify(resolve(match[0], match[1]));
           }
           return resolve(match[0], match[1]);
         }
@@ -147,7 +138,7 @@ export function resolveRValue(
   }
 
   if (jsAware > 0) {
-    return toJsValue(value);
+    return JSON.stringify(value);
   }
 
   return value;
