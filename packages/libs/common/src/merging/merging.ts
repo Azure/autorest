@@ -5,19 +5,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable no-prototype-builtins */
 
-import {
-  DataHandle,
-  DataSink,
-  IndexToPosition,
-  JsonPath,
-  Mapping,
-  ResolvePath,
-  Stringify,
-  YAMLNode,
-  Descendants,
-  Parse,
-} from "@azure-tools/datastore";
-import { AutorestLogger } from "../logging";
+import { JsonPath, Mapping, Stringify, YAMLNode, Descendants } from "@azure-tools/datastore";
 
 /**
  * Merge a and b by adding new properties of b into a. It will fail if a and b have the same property and the value is different.
@@ -25,7 +13,7 @@ import { AutorestLogger } from "../logging";
  * @param b Object 2 to merge
  * @param path current path of the merge.
  */
-function strictMerge(a: any, b: any, path: JsonPath = []): any {
+export function strictMerge(a: any, b: any, path: JsonPath = []): any {
   if (a === null || b === null) {
     throw new Error(`Argument cannot be null ('${Stringify(path)}')`);
   }
@@ -255,150 +243,4 @@ export function identitySourceMapping(sourceYamlFileName: string, sourceYamlAst:
       source: sourceYamlFileName,
     };
   });
-}
-
-export async function mergeYamls(
-  logger: AutorestLogger,
-  yamlInputHandles: Array<DataHandle>,
-  sink: DataSink,
-  verifyOAI2 = false,
-): Promise<DataHandle> {
-  let mergedGraph: any = {};
-  const mappings = [];
-  let cancel = false;
-  let failed = false;
-
-  const newIdentity = new Array<string>();
-  for (const each of yamlInputHandles) {
-    newIdentity.push(...each.identity);
-  }
-
-  for (const yamlInputHandle of yamlInputHandles) {
-    const rawYaml = await yamlInputHandle.ReadData();
-    const inputGraph: any =
-      Parse(rawYaml, (message, index) => {
-        failed = true;
-        if (logger) {
-          logger.trackError({
-            code: "yaml_parsing",
-            message: message,
-            source: [{ document: yamlInputHandle.key, position: IndexToPosition(yamlInputHandle, index) }],
-          });
-        }
-      }) || {};
-
-    mergedGraph = strictMerge(mergedGraph, inputGraph);
-    mappings.push(...identitySourceMapping(yamlInputHandle.key, await yamlInputHandle.ReadYamlAst()));
-
-    if (verifyOAI2) {
-      // check for non-identical duplicate models and parameters
-
-      if (inputGraph.definitions) {
-        for (const model in inputGraph.definitions) {
-          const merged = mergedGraph.definitions[model];
-          const individual = inputGraph.definitions[model];
-          if (!deepCompare(individual, merged)) {
-            cancel = true;
-            const mergedHandle = await sink.WriteObject(
-              "merged YAMLs",
-              mergedGraph,
-              newIdentity,
-              undefined,
-              mappings,
-              yamlInputHandles,
-            );
-            logger.trackError({
-              code: "Fatal/DuplicateModelCollsion",
-              message: "Duplicated model name with non-identical definitions",
-              source: [
-                { document: mergedHandle.key, position: await ResolvePath(mergedHandle, ["definitions", model]) },
-              ],
-            });
-          }
-        }
-      }
-
-      if (inputGraph.parameters) {
-        for (const parameter in inputGraph.parameters) {
-          const merged = mergedGraph.parameters[parameter];
-          const individual = inputGraph.parameters[parameter];
-          if (!deepCompare(individual, merged)) {
-            cancel = true;
-            const mergedHandle = await sink.WriteObject(
-              "merged YAMLs",
-              mergedGraph,
-              newIdentity,
-              undefined,
-              mappings,
-              yamlInputHandles,
-            );
-            logger.trackError({
-              code: "Fatal/DuplicateParameterCollision",
-              message: "Duplicated global non-identical parameter definitions",
-              source: [
-                { document: mergedHandle.key, position: await ResolvePath(mergedHandle, ["parameters", parameter]) },
-              ],
-            });
-          }
-        }
-      }
-    }
-  }
-
-  if (failed) {
-    throw new Error("Syntax errors encountered.");
-  }
-
-  if (cancel) {
-    throw new Error("Operation Cancelled");
-  }
-
-  return sink.WriteObject("merged YAMLs", mergedGraph, newIdentity, undefined, mappings, yamlInputHandles);
-}
-
-function deepCompare(x: any, y: any) {
-  // if both x and y are null or undefined and exactly the same
-  if (x === y) {
-    return true;
-  }
-
-  // if they are not strictly equal, they both need to be Objects
-  if (!(x instanceof Object) || !(y instanceof Object)) {
-    return false;
-  }
-
-  for (const p in x) {
-    // other properties were tested using x.constructor === y.constructor
-    if (!x.hasOwnProperty(p)) {
-      continue;
-    }
-
-    // allows to compare x[ p ] and y[ p ] when set to undefined
-    if (!y.hasOwnProperty(p)) {
-      return false;
-    }
-
-    // if they have the same strict value or identity then they are equal
-    if (x[p] === y[p]) {
-      continue;
-    }
-
-    // Numbers, Strings, Functions, Booleans must be strictly equal
-    if (typeof x[p] !== "object") {
-      return false;
-    }
-
-    // Objects and Arrays must be tested recursively
-    if (!deepCompare(x[p], y[p])) {
-      return false;
-    }
-  }
-
-  for (const p in y) {
-    // allows x[ p ] to be set to undefined
-    if (y.hasOwnProperty(p) && !x.hasOwnProperty(p)) {
-      return false;
-    }
-  }
-  return true;
 }
