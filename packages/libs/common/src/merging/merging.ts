@@ -64,34 +64,6 @@ export function strictMerge(a: any, b: any, path: JsonPath = []): any {
   throw new Error(`'${Stringify(path)}' has incompatible values (${Stringify(a)}, ${Stringify(b)}).`);
 }
 
-export function shallowCopy(input: any, ...filter: Array<string>): any {
-  /* TODO; replace and test with this:
-  const copy = { ...input };
-  for (const each of filter) {
-    if (copy[each]) {
-      delete copy[each];
-    }
-  }
-  return copy;
-  */
-
-  if (!input) {
-    return input;
-  }
-  const keys = input.Keys ? input.Keys : Object.getOwnPropertyNames(input);
-
-  const result: any = {};
-  for (const key of keys) {
-    if (filter.indexOf(key) == -1) {
-      const value = input[key];
-      if (value !== undefined) {
-        result[key] = value;
-      }
-    }
-  }
-  return result;
-}
-
 function toJsValue(value: any) {
   switch (typeof value) {
     case "undefined":
