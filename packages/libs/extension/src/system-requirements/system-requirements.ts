@@ -1,6 +1,7 @@
 import { execute } from "../exec-cmd";
 import { DotnetExeName, validateDotnetRequirement } from "./dotnet";
 import { validateGenericSystemRequirement } from "./generic";
+import { JavaExeName, validateJavaRequirement } from "./java";
 
 /**
  * Represent set of system requirements.
@@ -42,6 +43,8 @@ export const validateSystemRequirement = async (
   switch (name) {
     case DotnetExeName:
       return validateDotnetRequirement(requirement);
+    case JavaExeName:
+      return validateJavaRequirement(requirement);
     default:
       return validateGenericSystemRequirement(name, requirement);
   }
