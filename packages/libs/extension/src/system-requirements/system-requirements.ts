@@ -13,6 +13,11 @@ export interface SystemRequirements {
 export interface SystemRequirement {
   version?: string;
   message?: string;
+  /**
+   * Name of an environment variable where the user could provide the path to the exe.
+   * @example "AUTOREST_PYTHON_PATH"
+   */
+  environmentVariable?: string;
 }
 
 export interface SystemRequirementError {

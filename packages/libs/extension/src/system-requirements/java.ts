@@ -1,33 +1,16 @@
 import { execute } from "../exec-cmd";
-import { validateVersionRequirement } from "./common";
-import { SystemRequirement, SystemRequirementError } from "./system-requirements";
+import { defineKnownRequirement } from "./common";
 
 export const JavaExeName = "java";
 
-const ExeNotFoundMessage = `${JavaExeName} command line is not found in the path. Make sure to have ${JavaExeName} installed.`;
-
-export const validateJavaRequirement = async (
-  requirement: SystemRequirement,
-): Promise<SystemRequirementError | undefined> => {
-  const actualVersion = await getJavaVersion();
-  if (actualVersion === undefined) {
-    return {
-      name: JavaExeName,
-      message: requirement.message ?? ExeNotFoundMessage,
-    };
-  }
-
-  return validateVersionRequirement(JavaExeName, actualVersion, requirement);
-};
-
-const getJavaVersion = async (): Promise<string | undefined> => {
+export const validateJavaRequirement = defineKnownRequirement(JavaExeName, async () => {
   try {
     const result = await execute(JavaExeName, ["-version"]);
     return parseJavaVersionFromStdout(result.stdout);
   } catch (e) {
     return undefined;
   }
-};
+});
 
 const JAVA_VERSION_REGEX = /java version "(.*)"/;
 

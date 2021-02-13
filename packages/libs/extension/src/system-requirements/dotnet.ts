@@ -1,30 +1,13 @@
 import { execute } from "../exec-cmd";
-import { validateVersionRequirement } from "./common";
-import { SystemRequirement, SystemRequirementError } from "./system-requirements";
+import { defineKnownRequirement } from "./common";
 
 export const DotnetExeName = "dotnet";
 
-const ExeNotFoundMessage = `${DotnetExeName} command line is not found in the path. Make sure to have ${DotnetExeName} installed.`;
-
-export const validateDotnetRequirement = async (
-  requirement: SystemRequirement,
-): Promise<SystemRequirementError | undefined> => {
-  const actualVersion = await getDotnetVersion();
-  if (actualVersion === undefined) {
-    return {
-      name: DotnetExeName,
-      message: requirement.message ?? ExeNotFoundMessage,
-    };
-  }
-
-  return validateVersionRequirement(DotnetExeName, actualVersion, requirement);
-};
-
-const getDotnetVersion = async (): Promise<string | undefined> => {
+export const validateDotnetRequirement = defineKnownRequirement(DotnetExeName, async (cmd) => {
   try {
-    const result = await execute(DotnetExeName, ["--version"]);
+    const result = await execute(cmd, ["--version"]);
     return result.stdout;
   } catch (e) {
     return undefined;
   }
-};
+});
