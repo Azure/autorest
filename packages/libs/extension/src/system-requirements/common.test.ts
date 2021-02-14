@@ -33,8 +33,9 @@ describe("System requirements common", () => {
 
   describe("validateVersionRequirement", () => {
     it("is valid when version has beta flags", () => {
-      expect(validateVersionRequirement("", "3.1.0-rc.2", { version: ">=3.1.0" })).toBeUndefined();
-      expect(validateVersionRequirement("", "3.1.0-beta.19", { version: ">=3.1.0" })).toBeUndefined();
+      const resolution = { name: "test", command: "test" };
+      expect(validateVersionRequirement(resolution, "3.1.0-rc.2", { version: ">=3.1.0" })).toBeUndefined();
+      expect(validateVersionRequirement(resolution, "3.1.0-beta.19", { version: ">=3.1.0" })).toBeUndefined();
     });
   });
 });

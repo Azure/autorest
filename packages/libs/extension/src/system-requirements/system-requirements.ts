@@ -1,31 +1,8 @@
-import { execute } from "../exec-cmd";
+import { SystemRequirements, SystemRequirementError, SystemRequirement, SystemRequirementResolution } from "./models";
 import { DotnetExeName, validateDotnetRequirement } from "./dotnet";
 import { validateGenericSystemRequirement } from "./generic";
 import { JavaExeName, validateJavaRequirement } from "./java";
-
-/**
- * Represent set of system requirements.
- */
-export interface SystemRequirements {
-  [name: string]: SystemRequirement;
-}
-
-export interface SystemRequirement {
-  version?: string;
-  message?: string;
-  /**
-   * Name of an environment variable where the user could provide the path to the exe.
-   * @example "AUTOREST_PYTHON_PATH"
-   */
-  environmentVariable?: string;
-}
-
-export interface SystemRequirementError {
-  name: string;
-  message: string;
-  neededVersion?: string;
-  actualVersion?: string;
-}
+import { PythonRequirement, validatePythonRequirement } from "./python";
 
 export const validateSystemRequirements = async (
   requirements: SystemRequirements,
@@ -33,9 +10,9 @@ export const validateSystemRequirements = async (
   const errors: SystemRequirementError[] = [];
 
   for (const [name, requirement] of Object.entries(requirements)) {
-    const error = await validateSystemRequirement(name, requirement);
-    if (error) {
-      errors.push(error);
+    const result = await validateSystemRequirement(name, requirement);
+    if ("error" in result) {
+      errors.push(result);
     }
   }
   return errors;
@@ -44,12 +21,14 @@ export const validateSystemRequirements = async (
 export const validateSystemRequirement = async (
   name: string,
   requirement: SystemRequirement,
-): Promise<SystemRequirementError | undefined> => {
+): Promise<SystemRequirementResolution | SystemRequirementError> => {
   switch (name) {
     case DotnetExeName:
       return validateDotnetRequirement(requirement);
     case JavaExeName:
       return validateJavaRequirement(requirement);
+    case PythonRequirement:
+      return validatePythonRequirement(requirement);
     default:
       return validateGenericSystemRequirement(name, requirement);
   }

@@ -1,31 +1,40 @@
-import { SystemRequirement, SystemRequirementError } from "./system-requirements";
+import { SystemRequirement, SystemRequirementError, SystemRequirementResolution } from "./models";
 
 import semver from "semver";
 
+/**
+ * Validate the provided system requirement resolution is satisfying the version requirement if applicable.
+ * @param resolution Command resolution.
+ * @param actualVersion Version for that resolution.
+ * @param requirement Requirement.
+ * @returns the resolution if it is valid or an @see SystemRequirementError if not.
+ */
 export const validateVersionRequirement = (
-  name: string,
+  resolution: SystemRequirementResolution,
   actualVersion: string,
   requirement: SystemRequirement,
-): SystemRequirementError | undefined => {
+): SystemRequirementResolution | SystemRequirementError => {
   if (!requirement.version) {
-    return undefined; // No version requirement.
+    return resolution; // No version requirement.
   }
 
   try {
     if (versionIsSatisfied(actualVersion, requirement.version)) {
-      return undefined;
+      return resolution;
     }
     return {
-      name,
+      ...resolution,
+      error: true,
       message:
         requirement.message ??
-        `System ${name} version is '${actualVersion}' but doesn't satisfy requirement '${requirement.version}'. Please update.`,
+        `${resolution.command} version is '${actualVersion}' but doesn't satisfy requirement '${requirement.version}'. Please update.`,
       actualVersion: actualVersion,
       neededVersion: requirement.version,
     };
   } catch {
     return {
-      name,
+      ...resolution,
+      error: true,
       message: `Couldn't parse the version ${actualVersion}. This is not a valid semver version.`,
       actualVersion: actualVersion,
       neededVersion: requirement.version,
@@ -49,24 +58,34 @@ export const versionIsSatisfied = (version: string, requirement: string): boolea
 export const getExecutablePath = (requirement: SystemRequirement): string | undefined =>
   requirement.environmentVariable && process.env[requirement.environmentVariable];
 
-export type KnownRequirementHandler = (requirement: SystemRequirement) => Promise<SystemRequirementError | undefined>;
+export type KnownRequirementHandler = (
+  requirement: SystemRequirement,
+) => Promise<SystemRequirementResolution | SystemRequirementResolution>;
 
+/**
+ *
+ * @param name Name of the command.
+ * @param getVersion Function used to get the version. Callbacks takes the resolved command from the requirement environmentVariable is provided or default the the value of @name
+ */
 export const defineKnownRequirement = (
   name: string,
   getVersion: (cmd: string) => Promise<string | undefined>,
 ): KnownRequirementHandler => {
   return async (requirement: SystemRequirement) => {
     const executablePath = getExecutablePath(requirement);
-    const actualVersion = await getVersion(executablePath ?? name);
+    const command = executablePath ?? name;
+    const actualVersion = await getVersion(command);
     const ExeNotFoundMessage = `${name} command line is not found in the path. Make sure to have ${name} installed.`;
 
     if (actualVersion === undefined) {
       return {
+        error: true,
         name,
+        command,
         message: requirement.message ?? ExeNotFoundMessage,
       };
     }
 
-    return validateVersionRequirement(name, actualVersion, requirement);
+    return validateVersionRequirement({ name, command }, actualVersion, requirement);
   };
 };
