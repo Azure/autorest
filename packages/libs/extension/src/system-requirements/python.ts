@@ -52,14 +52,19 @@ const tryPython = async (
   command: string,
   additionalArgs: string[] = [],
 ): Promise<SystemRequirementResolution | SystemRequirementError> => {
+  const resolution: SystemRequirementResolution = {
+    name: PythonRequirement,
+    command,
+    additionalArgs: additionalArgs.length > 0 ? additionalArgs : undefined,
+  };
+
   try {
     const result = await execute(command, [...additionalArgs, "-c", PRINT_PYTHON_VERSION_SCRIPT]);
-    return validateVersionRequirement({ name: PythonRequirement, command }, result.stdout, requirement);
+    return validateVersionRequirement(resolution, result.stdout, requirement);
   } catch (e) {
     return {
       error: true,
-      name: PythonRequirement,
-      command,
+      ...resolution,
       message: `'${command}' command line is not found in the path. Make sure to have it installed.`,
     };
   }

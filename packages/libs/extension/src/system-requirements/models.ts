@@ -27,6 +27,12 @@ export interface SystemRequirementResolution {
    * @example python3, /home/myuser/python39/python, java, etc.
    */
   command: string;
+
+  /**
+   * List of additional arguments to pass to this command.
+   * @example '-3' for 'py' to specify to use python 3
+   */
+  additionalArgs?: string[];
 }
 
 export interface SystemRequirementError extends SystemRequirementResolution {
