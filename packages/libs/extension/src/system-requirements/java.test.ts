@@ -31,7 +31,7 @@ describe("java System Requirements", () => {
         error: true,
         name: "java",
         command: "java",
-        message: "java command line is not found in the path. Make sure to have java installed.",
+        message: "'java' command line is not found in the path. Make sure to have java installed.",
       });
     });
   });
@@ -43,7 +43,7 @@ describe("java System Requirements", () => {
         error: true,
         name: "java",
         command: "java",
-        message: "java command line is not found in the path. Make sure to have java installed.",
+        message: "'java' command line is not found in the path. Make sure to have java installed.",
       });
     });
 
@@ -57,7 +57,7 @@ describe("java System Requirements", () => {
       expect(await resolveJavaRequirement({ version: ">=1.8" })).toEqual({
         error: true,
         actualVersion: "1.7.0_123",
-        message: "java version is '1.7.0_123' but doesn't satisfy requirement '>=1.8'. Please update.",
+        message: "'java' version is '1.7.0_123' but doesn't satisfy requirement '>=1.8'. Please update.",
         name: "java",
         command: "java",
         neededVersion: ">=1.8",

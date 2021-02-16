@@ -1,6 +1,7 @@
 import { execute } from "../exec-cmd";
-import { getExecutablePath, validateVersionRequirement } from "./common";
+import { getExecutablePath } from "./common";
 import { SystemRequirement, SystemRequirementError, SystemRequirementResolution, SystemRequirements } from "./models";
+import { validateVersionRequirement } from "./version";
 
 export const PythonRequirement = "python";
 

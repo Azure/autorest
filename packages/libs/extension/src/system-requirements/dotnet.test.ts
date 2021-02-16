@@ -24,7 +24,7 @@ describe("Dotnet System Requirements", () => {
         error: true,
         name: "dotnet",
         command: "dotnet",
-        message: "dotnet command line is not found in the path. Make sure to have dotnet installed.",
+        message: "'dotnet' command line is not found in the path. Make sure to have dotnet installed.",
       });
     });
   });
@@ -36,7 +36,7 @@ describe("Dotnet System Requirements", () => {
         error: true,
         name: "dotnet",
         command: "dotnet",
-        message: "dotnet command line is not found in the path. Make sure to have dotnet installed.",
+        message: "'dotnet' command line is not found in the path. Make sure to have dotnet installed.",
       });
     });
 
@@ -55,7 +55,7 @@ describe("Dotnet System Requirements", () => {
       expect(await resolveDotnetRequirement({ version: ">=3.1" })).toEqual({
         error: true,
         actualVersion: "3.0.8",
-        message: "dotnet version is '3.0.8' but doesn't satisfy requirement '>=3.1'. Please update.",
+        message: "'dotnet' version is '3.0.8' but doesn't satisfy requirement '>=3.1'. Please update.",
         name: "dotnet",
         command: "dotnet",
         neededVersion: ">=3.1",
