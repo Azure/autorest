@@ -70,7 +70,7 @@ export const patchPythonPath = async (
   command: PythonCommandLine,
   requirement: SystemRequirement,
 ): Promise<string[]> => {
-  const [existingCommand, args] = command;
+  const [_, args] = command;
   const resolution = await resolvePythonRequirement(requirement);
 
   return [resolution.command, ...(resolution.additionalArgs ?? [], args)];
@@ -89,7 +89,7 @@ const tryPython = async (
 
   try {
     const result = await execute(command, [...additionalArgs, "-c", PRINT_PYTHON_VERSION_SCRIPT]);
-    return validateVersionRequirement(resolution, result.stdout, requirement);
+    return validateVersionRequirement(resolution, result.stdout.trim(), requirement);
   } catch (e) {
     return {
       error: true,

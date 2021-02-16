@@ -64,7 +64,7 @@ export class UnsatisfiedSystemRequirementException extends Exception {
   constructor(extension: Extension, errors: SystemRequirementError[]) {
     const message = [
       `System is missing dependencies required by extension '${extension.name}':`,
-      ...errors.map((x) => ` - ${x.name}: ${x.message}`),
+      ...errors.map((x) => ` - ${x.name}: ${x.message.replace(/\n/g, "\n ")}`),
     ].join("\n");
     super(message, 1);
     Object.setPrototypeOf(this, UnsatisfiedSystemRequirementException.prototype);
@@ -590,7 +590,7 @@ export class ExtensionManager {
   public async start(extension: Extension, enableDebugger = false): Promise<ChildProcess> {
     const PathVar = getPathVariableName();
 
-    this.validateExtensionSystemRequirements(extension);
+    await this.validateExtensionSystemRequirements(extension);
     if (!extension.definition.scripts) {
       throw new MissingStartCommandException(extension);
     }
