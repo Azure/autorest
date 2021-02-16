@@ -72,7 +72,9 @@ export const patchPythonPath = async (
 ): Promise<string[]> => {
   const [_, args] = command;
   const resolution = await resolvePythonRequirement(requirement);
-
+  if ("error" in resolution) {
+    throw new Error(`Failed to find compatible python version. ${resolution.message}`);
+  }
   return [resolution.command, ...(resolution.additionalArgs ?? [], args)];
 };
 
