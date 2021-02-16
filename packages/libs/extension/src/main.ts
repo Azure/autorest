@@ -16,7 +16,13 @@ import { Npm } from "./npm";
 import { PackageManager, PackageManagerType } from "./package-manager";
 import { Yarn } from "./yarn";
 import * as fs from "fs";
-import { patchPythonPath, PythonCommandLine } from "./system-requirements";
+import {
+  patchPythonPath,
+  PythonCommandLine,
+  SystemRequirementError,
+  SystemRequirements,
+  validateSystemRequirements,
+} from "./system-requirements";
 
 function quoteIfNecessary(text: string): string {
   if (text && text.indexOf(" ") > -1 && text.charAt(0) != '"') {
@@ -46,10 +52,22 @@ export class PackageInstallationException extends Exception {
     Object.setPrototypeOf(this, PackageInstallationException.prototype);
   }
 }
+
 export class UnsatisfiedEngineException extends Exception {
   constructor(name: string, version: string, message = "") {
     super(`Unable to find matching engine '${name}' - '${version} ${message}'`, 1);
     Object.setPrototypeOf(this, UnsatisfiedEngineException.prototype);
+  }
+}
+
+export class UnsatisfiedSystemRequirementException extends Exception {
+  constructor(extension: Extension, errors: SystemRequirementError[]) {
+    const message = [
+      `System is missing dependencies required by extension '${extension.name}':`,
+      ...errors.map((x) => ` - ${x.name}: ${x.message}`),
+    ].join("\n");
+    super(message, 1);
+    Object.setPrototypeOf(this, UnsatisfiedSystemRequirementException.prototype);
   }
 }
 
@@ -571,6 +589,8 @@ export class ExtensionManager {
 
   public async start(extension: Extension, enableDebugger = false): Promise<ChildProcess> {
     const PathVar = getPathVariableName();
+
+    this.validateExtensionSystemRequirements(extension);
     if (!extension.definition.scripts) {
       throw new MissingStartCommandException(extension);
     }
@@ -652,5 +672,21 @@ export class ExtensionManager {
       cwd: extension.modulePath,
       stdio: ["pipe", "pipe", "pipe"],
     });
+  }
+
+  /**
+   * Validate if present the extension system requirements.
+   * @param extension Extension to validate.
+   */
+  private async validateExtensionSystemRequirements(extension: Extension) {
+    const systemRequirements: SystemRequirements | undefined = extension.definition.systemRequirements;
+    if (!systemRequirements) {
+      return;
+    }
+
+    const errors = await validateSystemRequirements(systemRequirements);
+    if (errors.length > 0) {
+      throw new UnsatisfiedSystemRequirementException(extension, errors);
+    }
   }
 }
