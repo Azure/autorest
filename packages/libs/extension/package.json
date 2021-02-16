@@ -5,8 +5,8 @@
   "engines": {
     "node": ">=10.12.0"
   },
-  "main": "./dist/src/main.js",
-  "typings": "./dist/src/main.d.ts",
+  "main": "./dist/src/index.js",
+  "typings": "./dist/src/index.d.ts",
   "scripts": {
     "before-build": "mkdirp ./dist/yarn && cpy ./node_modules/yarn/lib/cli.js ./dist/yarn",
     "build": "npm run -s before-build && tsc -p ./tsconfig.build.json",

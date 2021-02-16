@@ -47,6 +47,35 @@ export const resolvePythonRequirement = async (
   return createPythonErrorMessage(requirement, errors);
 };
 
+export type KnownPythonExe = "python.exe" | "python3.exe" | "python" | "python3";
+
+/**
+ * List representing a python command line.
+ */
+export type PythonCommandLine = [KnownPythonExe, ...string[]];
+
+/**
+ * This method is kept for backward compatibility and will be removed in a future release.
+ * @deprecated Please use patchPythonPath(command, requirement) instead.
+ */
+export const updatePythonPath = async (command: PythonCommandLine): Promise<string[]> => {
+  return patchPythonPath(command, { version: ">=3.6", environmentVariable: "AUTOREST_PYTHON_EXE" });
+};
+
+/**
+ * @param command list of the command and arguments. First item in array must be a python exe @see KnownPythonExe. (e.g. ["python", "mypythonfile.py"]
+ * @param requirement
+ */
+export const patchPythonPath = async (
+  command: PythonCommandLine,
+  requirement: SystemRequirement,
+): Promise<string[]> => {
+  const [existingCommand, args] = command;
+  const resolution = await resolvePythonRequirement(requirement);
+
+  return [resolution.command, ...(resolution.additionalArgs ?? [], args)];
+};
+
 const tryPython = async (
   requirement: SystemRequirement,
   command: string,
