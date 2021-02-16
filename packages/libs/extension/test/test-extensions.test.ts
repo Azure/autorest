@@ -4,9 +4,7 @@ import * as tasks from "@azure-tools/tasks";
 import assert from "assert";
 import * as fs from "fs";
 import * as os from "os";
-import { ExtensionManager, InvalidPackageIdentityException, UnresolvedPackageException } from "../src/main";
-
-require("source-map-support").install();
+import { ExtensionManager, InvalidPackageIdentityException, UnresolvedPackageException } from "../src";
 
 const tmpFolder = fs.mkdtempSync(`${fs.mkdtempSync(`${os.tmpdir()}/test`)}/install-pkg`);
 
@@ -33,7 +31,6 @@ describe("TestExtensions", () => {
   });
 
   it("reset", async () => {
-    console.log("Resetting");
     await extensionManager.reset();
     {
       console.log("Installing Once");
