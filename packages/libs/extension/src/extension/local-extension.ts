@@ -13,6 +13,7 @@ export class LocalExtension extends Extension {
   public get location(): string {
     return this.extensionPath;
   }
+
   public get modulePath(): string {
     return this.extensionPath;
   }
