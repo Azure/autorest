@@ -3,7 +3,7 @@ import { defineKnownRequirement } from "./common";
 
 export const JavaExeName = "java";
 
-export const validateJavaRequirement = defineKnownRequirement(JavaExeName, async () => {
+export const resolveJavaRequirement = defineKnownRequirement(JavaExeName, async () => {
   try {
     const result = await execute(JavaExeName, ["-version"]);
     return parseJavaVersionFromStdout(result.stdout);

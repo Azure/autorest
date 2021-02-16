@@ -1,4 +1,4 @@
-import { validateJavaRequirement } from "./java";
+import { resolveJavaRequirement } from "./java";
 import { execute } from "../exec-cmd";
 
 jest.mock("../exec-cmd");
@@ -22,13 +22,15 @@ describe("java System Requirements", () => {
   describe("when not requesting any specific version", () => {
     it("succeed if java is installed", async () => {
       mockJavaVersionResult("1.8.0_281");
-      expect(await validateJavaRequirement({})).toBeUndefined();
+      expect(await resolveJavaRequirement({})).toEqual({ command: "java", name: "java" });
     });
 
     it("return error if java is not found", async () => {
       mockExecute.mockRejectedValue(new Error("ENOENT"));
-      expect(await validateJavaRequirement({})).toEqual({
+      expect(await resolveJavaRequirement({})).toEqual({
+        error: true,
         name: "java",
+        command: "java",
         message: "java command line is not found in the path. Make sure to have java installed.",
       });
     });
@@ -37,23 +39,27 @@ describe("java System Requirements", () => {
   describe("when not requesting a specific version", () => {
     it("return error if java is not found", async () => {
       mockExecute.mockRejectedValue(new Error("ENOENT"));
-      expect(await validateJavaRequirement({ version: ">3.1" })).toEqual({
+      expect(await resolveJavaRequirement({ version: ">3.1" })).toEqual({
+        error: true,
         name: "java",
+        command: "java",
         message: "java command line is not found in the path. Make sure to have java installed.",
       });
     });
 
     it("succeed if java is installed with the same version", async () => {
       mockJavaVersionResult("1.8.0_281");
-      expect(await validateJavaRequirement({ version: ">=1.8" })).toBeUndefined();
+      expect(await resolveJavaRequirement({ version: ">=1.8" })).toEqual({ command: "java", name: "java" });
     });
 
     it("error if java is installed with an older version than requested", async () => {
       mockJavaVersionResult("1.7.0_123");
-      expect(await validateJavaRequirement({ version: ">=1.8" })).toEqual({
+      expect(await resolveJavaRequirement({ version: ">=1.8" })).toEqual({
+        error: true,
         actualVersion: "1.7.0_123",
-        message: "System java version is '1.7.0_123' but doesn't satisfy requirement '>=1.8'. Please update.",
+        message: "java version is '1.7.0_123' but doesn't satisfy requirement '>=1.8'. Please update.",
         name: "java",
+        command: "java",
         neededVersion: ">=1.8",
       });
     });

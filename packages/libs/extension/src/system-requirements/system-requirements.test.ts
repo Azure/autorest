@@ -15,7 +15,9 @@ describe("System requirements", () => {
 
     expect(errors).toEqual([
       {
+        error: true,
         name: "unkownCommandThatShouldNotExists",
+        command: "unkownCommandThatShouldNotExists",
         message: "That command is misssing",
       },
     ]);

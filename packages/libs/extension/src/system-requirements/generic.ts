@@ -1,7 +1,7 @@
 import commandExists from "command-exists";
 import { SystemRequirement, SystemRequirementError, SystemRequirementResolution } from "./models";
 
-export const validateGenericSystemRequirement = async (
+export const resolveGenericSystemRequirement = async (
   name: string,
   requirement: SystemRequirement,
 ): Promise<SystemRequirementResolution | SystemRequirementError> => {

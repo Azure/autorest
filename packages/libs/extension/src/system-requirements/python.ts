@@ -9,7 +9,7 @@ export const PythonRequirement = "python";
  */
 const PRINT_PYTHON_VERSION_SCRIPT = "import sys; print('.'.join(map(str, sys.version_info[:3])))";
 
-export const validatePythonRequirement = async (
+export const resolvePythonRequirement = async (
   requirement: SystemRequirement,
 ): Promise<SystemRequirementResolution | SystemRequirementError> => {
   // Hardcoding AUTOREST_PYTHON_EXE is for backward compatibility
@@ -51,8 +51,17 @@ const tryPython = async (
   command: string,
   additionalArgs: string[] = [],
 ): Promise<SystemRequirementResolution | SystemRequirementError> => {
-  const result = await execute(command, [...additionalArgs, "-c", PRINT_PYTHON_VERSION_SCRIPT]);
-  return validateVersionRequirement({ name: PythonRequirement, command }, result.stdout, requirement);
+  try {
+    const result = await execute(command, [...additionalArgs, "-c", PRINT_PYTHON_VERSION_SCRIPT]);
+    return validateVersionRequirement({ name: PythonRequirement, command }, result.stdout, requirement);
+  } catch (e) {
+    return {
+      error: true,
+      name: PythonRequirement,
+      command,
+      message: `'${command}' command line is not found in the path. Make sure to have it installed.`,
+    };
+  }
 };
 
 const createPythonErrorMessage = (
@@ -61,8 +70,8 @@ const createPythonErrorMessage = (
 ): SystemRequirementError => {
   const versionReq = requirement.version ?? "*";
   const lines = [
-    `Couldn't find a valid python interpreter satisfying the requirement (version: ${versionReq}). Tried: `,
-    errors.map((x) => ` - ${x.command}`),
+    `Couldn't find a valid python interpreter satisfying the requirement (version: ${versionReq}). Tried:`,
+    ...errors.map((x) => ` - ${x.command} (${x.message})`),
   ];
 
   return {

@@ -3,7 +3,7 @@ import { defineKnownRequirement } from "./common";
 
 export const DotnetExeName = "dotnet";
 
-export const validateDotnetRequirement = defineKnownRequirement(DotnetExeName, async (cmd) => {
+export const resolveDotnetRequirement = defineKnownRequirement(DotnetExeName, async (cmd) => {
   try {
     const result = await execute(cmd, ["--version"]);
     return result.stdout;

@@ -1,8 +1,8 @@
 import { SystemRequirements, SystemRequirementError, SystemRequirement, SystemRequirementResolution } from "./models";
-import { DotnetExeName, validateDotnetRequirement } from "./dotnet";
-import { validateGenericSystemRequirement } from "./generic";
-import { JavaExeName, validateJavaRequirement } from "./java";
-import { PythonRequirement, validatePythonRequirement } from "./python";
+import { DotnetExeName, resolveDotnetRequirement } from "./dotnet";
+import { resolveGenericSystemRequirement } from "./generic";
+import { JavaExeName, resolveJavaRequirement } from "./java";
+import { PythonRequirement, resolvePythonRequirement } from "./python";
 
 export const validateSystemRequirements = async (
   requirements: SystemRequirements,
@@ -10,7 +10,7 @@ export const validateSystemRequirements = async (
   const errors: SystemRequirementError[] = [];
 
   for (const [name, requirement] of Object.entries(requirements)) {
-    const result = await validateSystemRequirement(name, requirement);
+    const result = await resolveSystemRequirement(name, requirement);
     if ("error" in result) {
       errors.push(result);
     }
@@ -18,18 +18,18 @@ export const validateSystemRequirements = async (
   return errors;
 };
 
-export const validateSystemRequirement = async (
+export const resolveSystemRequirement = async (
   name: string,
   requirement: SystemRequirement,
 ): Promise<SystemRequirementResolution | SystemRequirementError> => {
   switch (name) {
     case DotnetExeName:
-      return validateDotnetRequirement(requirement);
+      return resolveDotnetRequirement(requirement);
     case JavaExeName:
-      return validateJavaRequirement(requirement);
+      return resolveJavaRequirement(requirement);
     case PythonRequirement:
-      return validatePythonRequirement(requirement);
+      return resolvePythonRequirement(requirement);
     default:
-      return validateGenericSystemRequirement(name, requirement);
+      return resolveGenericSystemRequirement(name, requirement);
   }
 };
