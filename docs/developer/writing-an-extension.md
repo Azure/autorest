@@ -17,7 +17,7 @@ because the `install` and `start` commands will be used by AutoRest to set up
 and run your extension.  Here's a boilerplate `package.json` example that you
 can use as a starting point:
 
-##### Example `package.json`
+#### Example `package.json`
 
 ```json
 {
@@ -27,6 +27,12 @@ can use as a starting point:
   "scripts": {
     "start": "<command to run your generator>",
     "install": "<command to build your generator>"
+  },
+  "systemRequirements": {
+    "myCompiler": {
+      "version": ">=3.2.1",
+      "environmentVariable": "AUTOREST_MY_COMPILER_PATH"
+    }
   }
 }
 ```
@@ -36,6 +42,51 @@ NOTE: the package name _does not_ need to contain `@autorest`.
 Consult the [`package.json`
 documentation](https://docs.npmjs.com/files/package.json) for information on
 more fields that you use to can supply additional information.
+
+#### Extension system requirements
+
+Autorest can automatically check for command line executable to be availaible in the path to ensure the start command succeed.
+
+Schema:
+```json
+{
+  "systemRequirements": {
+    "<exe-name>": {
+      "version": "<version-requirement [optional]>",
+      "environmentVariable": "<environment variable name [optional]>",
+    }
+  }
+}
+```
+
+| Field                 | Optional? | Description                                                                                                                                    | Example                    |
+| --------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| `exe-name`            | Required  | This is the name of the executable that should be available in the path.                                                                       | `python`                   |
+| `version`             | Optional  | This is the version requirement for the executable. It is only supported for [known commands](#known-commands)                                 | `>=3.6`                    |
+| `environmentVariable` | Optional  | This is a name of an environment variable where the extension could expect the user to configure the path to the exe to use for this extension | `AUTOREST_PYTHON_EXE_PATH` |
+
+
+##### Known commands
+
+This is a list of known commands that will be able to retrieve the version of.
+- `dotnet`
+- `java`
+- `python`: Python(only python 3+) will automatically look for `py`, `python3` and `python` for a compatible version.
+
+##### Programtic usage.
+
+You can consume the `@azure-tools/extension` package to use any of the `resolveXYZRequirement` to get the same results and/or get the path to the command.
+
+```ts
+import {resolvePythonRequirement} from "@azure-tools/extensions"
+
+const resolution = await resolvePythonRequirement({version: ">=3.6"});
+if(resolution.error) {
+  console.error("Error", resolution)
+} else {
+  console.log("Command for python 3.6 is:", resolution.command)
+}
+```
 
 ### RPC Channel
 
