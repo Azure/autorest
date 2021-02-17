@@ -14,7 +14,8 @@ import { tmpdir } from "os";
 import { spawn } from "child_process";
 import { AutorestArgs } from "./args";
 
-const nodeRequire = typeof __webpack_require__ === "function" ? __non_webpack_require__ : require;
+const inWebpack = typeof __webpack_require__ === "function";
+const nodeRequire = inWebpack ? __non_webpack_require__ : require;
 
 export const pkgVersion: string = require(`../package.json`).version;
 process.env["autorest.home"] = process.env["autorest.home"] || homedir();
@@ -29,7 +30,9 @@ try {
 export const rootFolder = join(process.env["autorest.home"], ".autorest");
 const args: AutorestArgs = (<any>global).__args || {};
 
-export const extensionManager: Promise<ExtensionManager> = ExtensionManager.Create(rootFolder);
+const pathToYarnCli = inWebpack ? `${__dirname}/yarn/cli.js` : undefined;
+
+export const extensionManager: Promise<ExtensionManager> = ExtensionManager.Create(rootFolder, "yarn", pathToYarnCli);
 export const oldCorePackage = "@microsoft.azure/autorest-core";
 export const newCorePackage = "@autorest/core";
 
