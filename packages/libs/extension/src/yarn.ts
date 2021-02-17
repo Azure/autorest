@@ -32,23 +32,11 @@ const getPathToYarnCli = async () => {
   return _cli;
 };
 
-export const execYarn = async (cwd: string, ...args: string[]) => {
-  const procArgs = [
-    await getPathToYarnCli(),
-    "--no-node-version-check",
-    "--no-lockfile",
-    "--json",
-    "--registry",
-    process.env.autorest_registry || DEFAULT_NPM_REGISTRY,
-    ...args,
-  ];
-
-  return await execute(process.execPath, procArgs, { cwd });
-};
-
 export class Yarn implements PackageManager {
+  public constructor(private pathToYarnCli: string | undefined = undefined) {}
+
   public async install(directory: string, packages: string[], options?: InstallOptions) {
-    const output = await execYarn(
+    const output = await this.execYarn(
       directory,
       "add",
       "--global-folder",
@@ -68,11 +56,25 @@ export class Yarn implements PackageManager {
   }
 
   public async clean(directory: string): Promise<void> {
-    await execYarn(directory, "cache", "clean", "--force");
+    await this.execYarn(directory, "cache", "clean", "--force");
   }
 
   public async getPackageVersions(directory: string, packageName: string): Promise<string[]> {
-    const result = await execYarn(directory, "info", packageName, "versions", "--json");
+    const result = await this.execYarn(directory, "info", packageName, "versions", "--json");
     return JSON.parse(result.stdout).data;
+  }
+
+  public async execYarn(cwd: string, ...args: string[]) {
+    const procArgs = [
+      this.pathToYarnCli ?? (await getPathToYarnCli()),
+      "--no-node-version-check",
+      "--no-lockfile",
+      "--json",
+      "--registry",
+      process.env.autorest_registry || DEFAULT_NPM_REGISTRY,
+      ...args,
+    ];
+
+    return await execute(process.execPath, procArgs, { cwd });
   }
 }

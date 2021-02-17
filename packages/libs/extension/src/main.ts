@@ -147,6 +147,7 @@ export class ExtensionManager {
   public static async Create(
     installationPath: string,
     packageManagerType: PackageManagerType = "yarn",
+    packageManagerPath: string | undefined = undefined,
   ): Promise<ExtensionManager> {
     if (!(await exists(installationPath))) {
       await mkdir(installationPath);
@@ -155,7 +156,7 @@ export class ExtensionManager {
       throw new Exception(`Extension folder '${installationPath}' is not a valid directory`);
     }
     const lock = new SharedLock(installationPath);
-    const packageManager = packageManagerType === "yarn" ? new Yarn() : new Npm();
+    const packageManager = packageManagerType === "yarn" ? new Yarn(packageManagerPath) : new Npm();
     return new ExtensionManager(installationPath, lock, await lock.acquire(), packageManager);
   }
 
