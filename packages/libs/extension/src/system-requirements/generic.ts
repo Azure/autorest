@@ -1,9 +1,8 @@
 import commandExists from "command-exists";
-import { SystemRequirement, SystemRequirementError, SystemRequirementResolution } from "./models";
+import { SystemRequirementError, SystemRequirementResolution } from "./models";
 
 export const resolveGenericSystemRequirement = async (
   name: string,
-  requirement: SystemRequirement,
 ): Promise<SystemRequirementResolution | SystemRequirementError> => {
   const isAvailable = await checkIfExcutableAvailable(name);
   const resolution = { name, command: name };
@@ -12,7 +11,7 @@ export const resolveGenericSystemRequirement = async (
     : {
         error: true,
         ...resolution,
-        message: requirement.message ?? `Couldn't find executable '${name}' in path. Make sure it is installed.`,
+        message: `Couldn't find executable '${name}' in path. Make sure it is installed.`,
       };
 };
 

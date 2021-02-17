@@ -26,14 +26,13 @@ export const defineKnownRequirement = (
     const executablePath = getExecutablePath(requirement);
     const command = executablePath ?? name;
     const actualVersion = await getVersion(command);
-    const ExeNotFoundMessage = `'${name}' command line is not found in the path. Make sure to have ${name} installed.`;
 
     if (actualVersion === undefined) {
       return {
         error: true,
         name,
         command,
-        message: requirement.message ?? ExeNotFoundMessage,
+        message: `'${name}' command line is not found in the path. Make sure to have ${name} installed.`,
       };
     }
 

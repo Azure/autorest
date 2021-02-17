@@ -25,9 +25,7 @@ export const validateVersionRequirement = (
     return {
       ...resolution,
       error: true,
-      message:
-        requirement.message ??
-        `'${resolution.command}' version is '${actualVersion}' but doesn't satisfy requirement '${requirement.version}'. Please update.`,
+      message: `'${resolution.command}' version is '${actualVersion}' but doesn't satisfy requirement '${requirement.version}'. Please update.`,
       actualVersion: actualVersion,
       neededVersion: requirement.version,
     };

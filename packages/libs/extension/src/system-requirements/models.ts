@@ -1,18 +1,21 @@
 /**
  * Represent set of system requirements.
  */
-export interface SystemRequirements {
-  [name: string]: SystemRequirement;
+export interface ExtensionSystemRequirements {
+  [name: string]: ExtensionSystemRequirement;
 }
 
 export interface SystemRequirement {
   version?: string;
-  message?: string;
   /**
    * Name of an environment variable where the user could provide the path to the exe.
    * @example "AUTOREST_PYTHON_PATH"
    */
   environmentVariable?: string;
+}
+
+export interface ExtensionSystemRequirement extends SystemRequirement {
+  message?: string;
 }
 
 export interface SystemRequirementResolution {

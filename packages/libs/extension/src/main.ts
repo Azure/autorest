@@ -18,8 +18,8 @@ import { Yarn } from "./yarn";
 import {
   patchPythonPath,
   PythonCommandLine,
-  SystemRequirements,
-  validateSystemRequirements,
+  ExtensionSystemRequirements,
+  validateExtensionSystemRequirements,
 } from "./system-requirements";
 import { Extension, Package } from "./extension";
 import {
@@ -497,12 +497,12 @@ export class ExtensionManager {
    * @param extension Extension to validate.
    */
   private async validateExtensionSystemRequirements(extension: Extension) {
-    const systemRequirements: SystemRequirements | undefined = extension.definition.systemRequirements;
+    const systemRequirements: ExtensionSystemRequirements | undefined = extension.definition.systemRequirements;
     if (!systemRequirements) {
       return;
     }
 
-    const errors = await validateSystemRequirements(systemRequirements);
+    const errors = await validateExtensionSystemRequirements(systemRequirements);
     if (errors.length > 0) {
       throw new UnsatisfiedSystemRequirementException(extension, errors);
     }
