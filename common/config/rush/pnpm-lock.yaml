@@ -6,7 +6,7 @@ dependencies:
   '@azure-tools/tasks': 3.0.253
   '@azure-tools/uri': 3.0.255
   '@microsoft.azure/autorest.testserver': 2.10.68
-  '@rush-temp/autorest': file:projects/autorest.tgz_ts-node@9.1.1
+  '@rush-temp/autorest': file:projects/autorest.tgz_ts-node@9.1.1+webpack-cli@4.4.0
   '@rush-temp/codegen': file:projects/codegen.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/codemodel': file:projects/codemodel.tgz_prettier@2.2.1
   '@rush-temp/common': file:projects/common.tgz_prettier@2.2.1+ts-node@9.1.1
@@ -15,7 +15,7 @@ dependencies:
   '@rush-temp/core': file:projects/core.tgz_ts-node@9.1.1
   '@rush-temp/datastore': file:projects/datastore.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/deduplication': file:projects/deduplication.tgz_prettier@2.2.1+ts-node@9.1.1
-  '@rush-temp/extension': file:projects/extension.tgz_prettier@2.2.1
+  '@rush-temp/extension': file:projects/extension.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/extension-base': file:projects/extension-base.tgz_prettier@2.2.1
   '@rush-temp/md-mock-api': file:projects/md-mock-api.tgz_ts-node@9.1.1
   '@rush-temp/modelerfour': file:projects/modelerfour.tgz_ts-node@9.1.1
@@ -25,6 +25,7 @@ dependencies:
   '@rush-temp/test-public-packages': file:projects/test-public-packages.tgz_prettier@2.2.1
   '@rush-temp/test-utils': file:projects/test-utils.tgz_prettier@2.2.1+ts-node@9.1.1
   '@types/body-parser': 1.19.0
+  '@types/command-exists': 1.2.0
   '@types/commonmark': 0.27.4
   '@types/deep-equal': 1.0.1
   '@types/diff': 4.0.2
@@ -49,8 +50,10 @@ dependencies:
   '@typescript-eslint/parser': 4.14.2_eslint@7.19.0+typescript@4.1.3
   body-parser: 1.19.0
   chalk: 4.1.0
+  command-exists: 1.2.9
   commonmark: 0.27.0
   compare-versions: 3.6.0
+  copy-webpack-plugin: 7.0.0_webpack@5.18.0
   cpy-cli: 2.0.0
   deep-equal: 2.0.5
   diff: 4.0.2
@@ -871,6 +874,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-W98JrE0j2K78swW4ukqMleo8R7h/pFETjM2DQ90MF6XK2i4LO4W3gQ71Lt4w3bfm2EvVSyWHplECvB5sK22yFQ==
+  /@types/command-exists/1.2.0:
+    dev: false
+    resolution:
+      integrity: sha512-ugsxEJfsCuqMLSuCD4PIJkp5Uk2z6TCMRCgYVuhRo5cYQY3+1xXTQkSlPtkpGHuvWMjS2KTeVQXxkXRACMbM6A==
   /@types/commonmark/0.27.4:
     dev: false
     resolution:
@@ -2209,16 +2216,6 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-Az5zJR2CBujap2rqXGaJKaPHyJ0IrUimvYNX+ncCy8PJP4ltOGTrHUIo097ZaL2zMeKYpiCdqDvS6zdrTFok3Q==
-  /chalk/2.4.2:
-    dependencies:
-      ansi-styles: 3.2.1
-      escape-string-regexp: 1.0.5
-      supports-color: 5.5.0
-    dev: false
-    engines:
-      node: '>=4'
-    resolution:
-      integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==
   /chalk/3.0.0:
     dependencies:
       ansi-styles: 4.3.0
@@ -2310,14 +2307,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-S0dXYP+AJkx2LDoXGQMukcf+oNE=
-  /cliui/4.1.0:
-    dependencies:
-      string-width: 2.1.1
-      strip-ansi: 4.0.0
-      wrap-ansi: 2.1.0
-    dev: false
-    resolution:
-      integrity: sha512-4FG+RSG9DL7uEwRUZXZn3SS34DiDPfzP0VOiEwtUWlE+AR2EIg+hSyvrIgUUfhdgR/UkAeW2QHgeP+hWrXs7jQ==
   /cliui/5.0.0:
     dependencies:
       string-width: 3.1.0
@@ -2449,6 +2438,10 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==
+  /command-exists/1.2.9:
+    dev: false
+    resolution:
+      integrity: sha512-LTQ/SGc+s0Xc0Fu5WaKnR0YiygZkm9eKFvyS+fRsU7/ZWFF8ykFM6Pc9aCVf1+xasOOZpO3BAVgVrKvsqKHV7w==
   /commander/2.20.3:
     dev: false
     resolution:
@@ -2589,6 +2582,24 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
+  /copy-webpack-plugin/7.0.0_webpack@5.18.0:
+    dependencies:
+      fast-glob: 3.2.5
+      glob-parent: 5.1.1
+      globby: 11.0.2
+      loader-utils: 2.0.0
+      normalize-path: 3.0.0
+      p-limit: 3.1.0
+      schema-utils: 3.0.0
+      serialize-javascript: 5.0.1
+      webpack: 5.18.0_webpack-cli@4.4.0
+    dev: false
+    engines:
+      node: '>= 10.13.0'
+    peerDependencies:
+      webpack: ^5.1.0
+    resolution:
+      integrity: sha512-SLjQNa5iE3BoCP76ESU9qYo9ZkEWtXoZxDurHoqPchAFRblJ9g96xTeC560UXBMre1Nx6ixIIUfiY3VcjpJw3g==
   /core-js/2.6.12:
     deprecated: core-js@<3 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.
     dev: false
@@ -3988,10 +3999,6 @@ packages:
       node: '>=6.9.0'
     resolution:
       integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==
-  /get-caller-file/1.0.3:
-    dev: false
-    resolution:
-      integrity: sha512-3t6rVToeoZfYSGd8YoLFR2DJkiQrIiUrGcjvFX2mDw3bn6k2OtwHN0TNCLbBO+w8qTvimhDkv+LSscbJY1vE6w==
   /get-caller-file/2.0.5:
     dev: false
     engines:
@@ -4503,12 +4510,6 @@ packages:
       node: '>= 0.10'
     resolution:
       integrity: sha512-Ju0Bz/cEia55xDwUWEa8+olFpCiQoypjnQySseKtmjNrnps3P+xfpUmGr90T7yjlVJmOtybRvPXhKMbHr+fWnw==
-  /invert-kv/2.0.0:
-    dev: false
-    engines:
-      node: '>=4'
-    resolution:
-      integrity: sha512-wPVv/y/QQ/Uiirj/vh3oP+1Ww+AWehmi1g5fFWGPF6IpCBCDVrhgHRMvrLfdYcwDh3QJbGXDW4JAuzxElLSqKA==
   /ip-regex/2.1.0:
     dev: false
     engines:
@@ -5794,14 +5795,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-odePw6UEdMuAhF07O24dpJpEbo4=
-  /lcid/2.0.0:
-    dependencies:
-      invert-kv: 2.0.0
-    dev: false
-    engines:
-      node: '>=6'
-    resolution:
-      integrity: sha512-avPEb8P8EGnwXKClwsNUgryVjllcRqtMYa49NTsbQagYuT1DcXnl1915oxWjoyGrXR6zH/Y0Zc96xWsPcoDKeA==
   /leven/3.1.0:
     dev: false
     engines:
@@ -6023,14 +6016,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-4BpckQnyr3lmDk6LlYd5AYT1qWw=
-  /map-age-cleaner/0.1.3:
-    dependencies:
-      p-defer: 1.0.0
-    dev: false
-    engines:
-      node: '>=6'
-    resolution:
-      integrity: sha512-bJzx6nMoP6PDLPBFmg7+xRKeFZvFboMrGlxmNj9ClvX53KrmvM5bXFXEWjbz4cz1AFn+jWJ9z/DJSz7hrs0w3w==
   /map-cache/0.2.2:
     dev: false
     engines:
@@ -6074,16 +6059,6 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
-  /mem/4.3.0:
-    dependencies:
-      map-age-cleaner: 0.1.3
-      mimic-fn: 2.1.0
-      p-is-promise: 2.1.0
-    dev: false
-    engines:
-      node: '>=6'
-    resolution:
-      integrity: sha512-qX2bG48pTqYRVmDB37rn/6PT7LcR8T7oAX3bf99u1Tt1nzxYfxkgqDwUwolPlXweM0XzBOBFzSx4kfp7KP1s/w==
   /memory-fs/0.5.0:
     dependencies:
       errno: 0.1.8
@@ -6282,17 +6257,6 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
-  /mocha-typescript/1.1.17:
-    dependencies:
-      '@types/mocha': 5.2.7
-      chalk: 2.4.2
-      cross-spawn: 6.0.5
-      yargs: 11.1.1
-    deprecated: mocha-typescript has been deprecated, use @testdeck/mocha instead
-    dev: false
-    hasBin: true
-    resolution:
-      integrity: sha512-Ge6pCQkZumkkhxVNdAf3JxunskShgaynCb30HYD7TT1Yhog/7NW2+6w5RcRHI+nuQrCMTX6z1+qf2pD8qwCoQA==
   /mocha/6.2.3:
     dependencies:
       ansi-colors: 3.2.3
@@ -6902,16 +6866,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-/7xJiDNuDoM94MFox+8VISGqf7M=
-  /os-locale/3.1.0:
-    dependencies:
-      execa: 1.0.0
-      lcid: 2.0.0
-      mem: 4.3.0
-    dev: false
-    engines:
-      node: '>=6'
-    resolution:
-      integrity: sha512-Z8l3R4wYWM40/52Z+S265okfFj8Kt2cC2MKY+xNi3kFs+XGI7WXu/I309QQQYbRW4ijiZ+yxs9pqEhJh0DqW3Q==
   /os-tmpdir/1.0.2:
     dev: false
     engines:
@@ -6925,12 +6879,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-0CWcCECdMVc2Rw3U5w9ZjqX6ga6ubk1xDVKxtBQPK7wis/0F2r9T6k4ydGYhecl7YUBxBVxhL5oisPsNxAPe2g==
-  /p-defer/1.0.0:
-    dev: false
-    engines:
-      node: '>=4'
-    resolution:
-      integrity: sha1-n26xgvbJqozXQwBKfU+WsZaw+ww=
   /p-each-series/2.2.0:
     dev: false
     engines:
@@ -6943,12 +6891,6 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-P7z7FbiZpEEjs0ttzBi3JDNqLK4=
-  /p-is-promise/2.1.0:
-    dev: false
-    engines:
-      node: '>=6'
-    resolution:
-      integrity: sha512-Y3W0wlRPK8ZMRbNq97l4M5otioeA5lm1z7bkNkxCka8HSPjR0xRWmpCmc9utiaLP9Jb1eD8BgeIxTW4AIF45Pg==
   /p-limit/1.3.0:
     dependencies:
       p-try: 1.0.0
@@ -7818,10 +7760,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==
-  /require-main-filename/1.0.1:
-    dev: false
-    resolution:
-      integrity: sha1-l/cXtp1IeE9fUmpsWqj/3aBVpNE=
   /require-main-filename/2.0.0:
     dev: false
     resolution:
@@ -8641,14 +8579,6 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-vnoN5ITexcXN34s9WRJQRJEvY1s=
-  /supports-color/5.5.0:
-    dependencies:
-      has-flag: 3.0.0
-    dev: false
-    engines:
-      node: '>=4'
-    resolution:
-      integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==
   /supports-color/6.0.0:
     dependencies:
       has-flag: 3.0.0
@@ -9662,15 +9592,6 @@ packages:
       node: '>=0.4.0'
     resolution:
       integrity: sha1-t5Zpu0LstAn4PVg8rVLKF+qhZD8=
-  /wrap-ansi/2.1.0:
-    dependencies:
-      string-width: 1.0.2
-      strip-ansi: 3.0.1
-    dev: false
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha1-2Pw9KE3QV5T+hJc8rs3Rz4JP3YU=
   /wrap-ansi/5.1.0:
     dependencies:
       ansi-styles: 3.2.1
@@ -9779,10 +9700,6 @@ packages:
       node: '>=0.4'
     resolution:
       integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==
-  /y18n/3.2.2:
-    dev: false
-    resolution:
-      integrity: sha512-uGZHXkHnhF0XeeAPgnKfPv1bgKAYyVvmNL1xlKsPYZPaIHxGti2hHqvOCQv71XMsLxu1QjergkqogUnms5D3YQ==
   /y18n/4.0.1:
     dev: false
     resolution:
@@ -9844,12 +9761,6 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-WOkpgNhPTlE73h4VFAFsOnomJVaovO8VqLDzy5saChRBFQFBoMYirowyW+Q9HB4HFF4Z7VZTiG3iSzJJA29yRA==
-  /yargs-parser/9.0.2:
-    dependencies:
-      camelcase: 4.1.0
-    dev: false
-    resolution:
-      integrity: sha1-nM9qQ0YP5O1Aqbto9I1DuKaMwHc=
   /yargs-unparser/1.6.0:
     dependencies:
       flat: 4.1.1
@@ -9860,23 +9771,6 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-W9tKgmSn0DpSatfri0nx52Joq5hVXgeLiqR/5G0sZNDoLZFOr/xjBUDcShCOGNsBnEMNo1KAMBkTej1Hm62HTw==
-  /yargs/11.1.1:
-    dependencies:
-      cliui: 4.1.0
-      decamelize: 1.2.0
-      find-up: 2.1.0
-      get-caller-file: 1.0.3
-      os-locale: 3.1.0
-      require-directory: 2.1.1
-      require-main-filename: 1.0.1
-      set-blocking: 2.0.0
-      string-width: 2.1.1
-      which-module: 2.0.0
-      y18n: 3.2.2
-      yargs-parser: 9.0.2
-    dev: false
-    resolution:
-      integrity: sha512-PRU7gJrJaXv3q3yQZ/+/X6KBswZiaQ+zOmdprZcouPYtQgvNU35i+68M4b1ZHLZtYFT5QObFLV+ZkmJYcwKdiw==
   /yargs/13.3.2:
     dependencies:
       cliui: 5.0.0
@@ -9992,19 +9886,20 @@ packages:
       commander: 2.20.3
     resolution:
       integrity: sha512-58TxNEurHQEEgbrNbQnoUHXgh6tiplSvKb7D3o4K6KzICQk9vFyl8B0zycC/p3gW92qBZCmq5NJIhJODKrV7JQ==
-  file:projects/autorest.tgz_ts-node@9.1.1:
+  file:projects/autorest.tgz_ts-node@9.1.1+webpack-cli@4.4.0:
     dependencies:
       '@azure-tools/async-io': 3.0.253
-      '@azure-tools/extension': 3.1.272
       '@azure-tools/tasks': 3.0.253
       '@azure-tools/uri': 3.0.255
       '@types/commonmark': 0.27.4
       '@types/jest': 26.0.20
       '@types/node': 14.14.22
       '@types/semver': 5.5.0
+      '@types/webpack': 4.41.26
       '@typescript-eslint/eslint-plugin': 4.14.2_e5f964fa93e839b7a7927397f6cb9cb1
       '@typescript-eslint/parser': 4.14.2_eslint@7.19.0+typescript@4.1.3
       chalk: 4.1.0
+      copy-webpack-plugin: 7.0.0_webpack@5.18.0
       cpy-cli: 2.0.0
       eslint: 7.19.0
       eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
@@ -10018,14 +9913,17 @@ packages:
       source-map-support: 0.5.19
       static-link: 0.3.0
       ts-jest: 26.5.0_jest@26.6.3+typescript@4.1.3
+      ts-loader: 8.0.14_typescript@4.1.3+webpack@5.18.0
       typescript: 4.1.3
+      webpack: 5.18.0_webpack-cli@4.4.0
     dev: false
     id: file:projects/autorest.tgz
     name: '@rush-temp/autorest'
     peerDependencies:
       ts-node: '*'
+      webpack-cli: '*'
     resolution:
-      integrity: sha512-jpTf1H5/3b+sWAOxRlKYLXX8OIBMIcXHEXMYLFJexQQ2htN8PfAaKFufcAz3bUM2SsbyOiyPo6+p42eG9c2SQw==
+      integrity: sha512-ACuGPhIdPEll6vkp5TFiNNIImxsrxGjIaZ8eEZ55p3tCLRT2iqvlP/vWNdkOZ4AeprsOl4zmN6ggbZaaCamXbA==
       tarball: file:projects/autorest.tgz
     version: 0.0.0
   file:projects/codegen.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -10294,24 +10192,25 @@ packages:
       integrity: sha512-PU7TfPPCIsyTCUoPR3QSglvlcB1UwNA+kQtNeQu448EriRAd5UZ5pAh0xpaLnJUMFYoPONcr9Pivd+C08kWcUQ==
       tarball: file:projects/extension-base.tgz
     version: 0.0.0
-  file:projects/extension.tgz_prettier@2.2.1:
+  file:projects/extension.tgz_prettier@2.2.1+ts-node@9.1.1:
     dependencies:
       '@azure-tools/async-io': 3.0.253
       '@azure-tools/eventing': 3.0.252
       '@azure-tools/tasks': 3.0.253
-      '@types/mocha': 5.2.7
+      '@types/command-exists': 1.2.0
+      '@types/jest': 26.0.20
       '@types/node': 14.14.22
       '@types/npm-package-arg': 6.1.0
       '@types/semver': 5.5.0
       '@typescript-eslint/eslint-plugin': 4.14.2_e5f964fa93e839b7a7927397f6cb9cb1
       '@typescript-eslint/parser': 4.14.2_eslint@7.19.0+typescript@4.1.3
+      command-exists: 1.2.9
       cpy-cli: 2.0.0
       eslint: 7.19.0
       eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
       eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
+      jest: 26.6.3_ts-node@9.1.1
       mkdirp: 0.5.5
-      mocha: 6.2.3
-      mocha-typescript: 1.1.17
       npm: 6.14.9
       npm-normalize-package-bin: 1.0.1
       npm-package-arg: 8.1.0
@@ -10327,8 +10226,9 @@ packages:
     name: '@rush-temp/extension'
     peerDependencies:
       prettier: '*'
+      ts-node: '*'
     resolution:
-      integrity: sha512-+e3yuwf8fUk4HLljzMBu+Sr1QN07KHHIg02MVdCJxkNd9JYtRMLY5MLlBRppwFLJ4Yttf+He/pC0PHWVstTFjQ==
+      integrity: sha512-tGI3jbSCj8rA5LoxISx0ayBm8cnONm0J56aHhdiPdV5uOQNeHYoGR7JxZ3fl3eV6pwZZSdO56OfykMqdtkixQA==
       tarball: file:projects/extension.tgz
     version: 0.0.0
   file:projects/md-mock-api.tgz_ts-node@9.1.1:
@@ -10536,6 +10436,7 @@ specifiers:
   '@rush-temp/test-public-packages': file:./projects/test-public-packages.tgz
   '@rush-temp/test-utils': file:./projects/test-utils.tgz
   '@types/body-parser': ^1.19.0
+  '@types/command-exists': ~1.2.0
   '@types/commonmark': ^0.27.0
   '@types/deep-equal': ^1.0.1
   '@types/diff': ^4.0.2
@@ -10560,8 +10461,10 @@ specifiers:
   '@typescript-eslint/parser': ^4.12.0
   body-parser: ^1.19.0
   chalk: ^4.1.0
+  command-exists: ~1.2.9
   commonmark: ^0.27.0
   compare-versions: ^3.4.0
+  copy-webpack-plugin: ^7.0.0
   cpy-cli: ~2.0.0
   deep-equal: ^2.0.5
   diff: ^4.0.1

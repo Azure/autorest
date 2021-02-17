@@ -20,6 +20,9 @@ import { MessageEmitter } from "./message-emitter";
 import { detectConfigurationFile } from "./configuration-file-resolver";
 import { getIncludedConfigurationFiles } from "./loading-utils";
 
+const inWebpack = typeof __webpack_require__ === "function";
+const pathToYarnCli = inWebpack ? `${__dirname}/yarn/cli.js` : undefined;
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const untildify: (path: string) => string = require("untildify");
 
@@ -102,7 +105,11 @@ export class ConfigurationLoader {
   }
 
   private static extensionManager: LazyPromise<ExtensionManager> = new LazyPromise<ExtensionManager>(() =>
-    ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")),
+    ExtensionManager.Create(
+      join(process.env["autorest.home"] || require("os").homedir(), ".autorest"),
+      "yarn",
+      pathToYarnCli,
+    ),
   );
 
   private async desugarRawConfig(configs: any): Promise<any> {
