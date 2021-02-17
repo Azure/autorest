@@ -22,7 +22,7 @@ jobs:
         displayName: Publish packages
 
   - job: prerelease
-    displayName: Prerelease
+    displayName: Publish prerelease
     steps:
       - template: ./templates/build.yaml
 
