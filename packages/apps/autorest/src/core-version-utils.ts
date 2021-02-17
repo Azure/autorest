@@ -7,6 +7,9 @@ import { resolveEntrypoint, selectVersion } from "./autorest-as-a-service";
 import * as vm from "vm";
 import { Extension } from "@azure-tools/extension";
 
+const inWebpack = typeof __webpack_require__ === "function";
+const nodeRequire = inWebpack ? __non_webpack_require__ : require;
+
 /**
  * Return the version requested of the core extension.
  * @param args ClI args.
@@ -33,7 +36,7 @@ export const configurationSpecifiedVersion = async (args: AutorestArgs, selected
 
     // things we need in the sandbox.
     const sandbox = {
-      require,
+      require: nodeRequire,
       console,
       rfs: {
         EnumerateFileUris: async (folderUri: string): Promise<Array<string>> => {
@@ -59,7 +62,7 @@ export const configurationSpecifiedVersion = async (args: AutorestArgs, selected
             api.AddConfiguration(switches);
 
             // resolve the configuration and return the version if there is one.
-            return (await api.view).rawConfig.version;              
+            return (await api.view).rawConfig.version;
           }
           go();
           `,

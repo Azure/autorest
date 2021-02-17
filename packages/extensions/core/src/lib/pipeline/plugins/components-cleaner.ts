@@ -16,7 +16,7 @@ import {
 } from "@azure-tools/datastore";
 import { Dictionary } from "@azure-tools/linq";
 import * as oai from "@azure-tools/openapi";
-import { ConfigurationView } from "../../configuration";
+import { AutorestContext } from "../../configuration";
 import { PipelinePlugin } from "../common";
 
 /**
@@ -39,8 +39,20 @@ type componentType =
   | "links"
   | "callbacks";
 
+interface ComponentTracker {
+  schemas: Set<string>;
+  responses: Set<string>;
+  parameters: Set<string>;
+  examples: Set<string>;
+  requestBodies: Set<string>;
+  headers: Set<string>;
+  securitySchemes: Set<string>;
+  links: Set<string>;
+  callbacks: Set<string>;
+}
+
 export class ComponentsCleaner extends Transformer<any, oai.Model> {
-  private visitedComponents = {
+  private visitedComponents: ComponentTracker = {
     schemas: new Set<string>(),
     responses: new Set<string>(),
     parameters: new Set<string>(),
@@ -52,7 +64,7 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
     callbacks: new Set<string>(),
   };
 
-  private componentsToKeep = {
+  private componentsToKeep: ComponentTracker = {
     schemas: new Set<string>(),
     responses: new Set<string>(),
     parameters: new Set<string>(),
@@ -84,8 +96,8 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
     for (const { children, key: containerType } of visit(this.components)) {
       for (const { value, key: id } of children) {
         if (!value["x-ms-metadata"]["x-ms-secondary-file"]) {
-          this.visitedComponents[containerType].add(id);
-          this.componentsToKeep[containerType].add(id);
+          this.visitedComponents[containerType as keyof ComponentTracker].add(id);
+          this.componentsToKeep[containerType as keyof ComponentTracker].add(id);
           this.crawlObject(value);
         }
       }
@@ -112,10 +124,10 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
                       const componentRefUid = refParts.pop();
                       const refType = refParts.pop();
                       if (
-                        this.componentsToKeep[refType].has(componentRefUid) &&
-                        !this.componentsToKeep[containerType].has(currentComponentUid)
+                        this.componentsToKeep[refType as keyof ComponentTracker].has(componentRefUid) &&
+                        !this.componentsToKeep[containerType as keyof ComponentTracker].has(currentComponentUid)
                       ) {
-                        this.componentsToKeep[containerType].add(currentComponentUid);
+                        this.componentsToKeep[containerType as keyof ComponentTracker].add(currentComponentUid);
                         this.crawlObject(component);
                         entryAdded = true;
                       }
@@ -128,10 +140,10 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
                     const componentRefUid = refParts.pop();
                     const refType = refParts.pop();
                     if (
-                      this.componentsToKeep[refType].has(componentRefUid) &&
-                      !this.componentsToKeep[containerType].has(currentComponentUid)
+                      this.componentsToKeep[refType as keyof ComponentTracker].has(componentRefUid) &&
+                      !this.componentsToKeep[containerType as keyof ComponentTracker].has(currentComponentUid)
                     ) {
-                      this.componentsToKeep[containerType].add(currentComponentUid);
+                      this.componentsToKeep[containerType as keyof ComponentTracker].add(currentComponentUid);
                       this.crawlObject(component);
                       entryAdded = true;
                     }
@@ -216,7 +228,7 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
   }
 }
 
-async function clean(config: ConfigurationView, input: DataSource, sink: DataSink) {
+async function clean(config: AutorestContext, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {

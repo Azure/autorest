@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Clone } from "@azure-tools/datastore";
-import { MergeOverwriteOrAppend } from "../source-map/merging";
+import { mergeOverwriteOrAppend } from "@autorest/common";
 import { createPerFilePlugin, PipelinePlugin } from "./common";
 
 function decorateSpecialProperties(o: any): void {
@@ -22,8 +22,8 @@ function decorateSpecialProperties(o: any): void {
 export function createComponentModifierPlugin(): PipelinePlugin {
   const noWireExtension = "x-ms-no-wire";
 
-  return createPerFilePlugin(async (config) => async (fileIn, sink) => {
-    const componentModifier = Clone((<any>config.Raw).components);
+  return createPerFilePlugin(async (context) => async (fileIn, sink) => {
+    const componentModifier = Clone(context.config.raw.components);
     if (componentModifier) {
       const o = await fileIn.ReadObject<any>();
 
@@ -47,7 +47,7 @@ export function createComponentModifierPlugin(): PipelinePlugin {
           }
         }
 
-        schemasTarget[schemaKey] = MergeOverwriteOrAppend(schemaSource, schemaTarget);
+        schemasTarget[schemaKey] = mergeOverwriteOrAppend(schemaSource, schemaTarget);
       }
 
       // parameters:
@@ -57,7 +57,7 @@ export function createComponentModifierPlugin(): PipelinePlugin {
       for (const paramKey of Object.keys(paramsSource)) {
         const paramSource = paramsSource[paramKey];
         const paramTarget = paramsTarget[paramKey] || {};
-        paramsTarget[paramKey] = MergeOverwriteOrAppend(paramSource, paramTarget);
+        paramsTarget[paramKey] = mergeOverwriteOrAppend(paramSource, paramTarget);
       }
 
       // operations:
@@ -89,7 +89,7 @@ export function createComponentModifierPlugin(): PipelinePlugin {
         decorateSpecialProperties(newOperation);
 
         if (existingOperation) {
-          existingOperation.set(MergeOverwriteOrAppend(newOperation, existingOperation.get()));
+          existingOperation.set(mergeOverwriteOrAppend(newOperation, existingOperation.get()));
         } else {
           newOperation[noWireExtension] = true;
           operationsTarget2[getDummyPath()] = { get: newOperation };

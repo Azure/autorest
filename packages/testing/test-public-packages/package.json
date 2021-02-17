@@ -30,11 +30,12 @@
   },
   "homepage": "https://github.com/Azure/autorest#readme",
   "dependencies": {
-    "@autorest/core": "~3.0.6372",
-    "autorest": "~3.0.6337",
+    "@autorest/core": "~3.0.6373",
+    "autorest": "~3.0.6339",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {
+    "@types/node": "~14.14.20",
     "@types/source-map-support": "^0.5.3",
     "eslint-plugin-prettier": "~3.2.0",
     "eslint-plugin-unicorn": "~27.0.0",
