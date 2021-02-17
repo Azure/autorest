@@ -9,6 +9,9 @@ const fs = require("fs");
 const stripJsonComments = require("./strip-json-comments");
 const { execSync } = require("child_process");
 
+// Constants
+const PRERELEASE_TYPE = "dev";
+
 const root = resolve(join(__dirname), "..");
 const changeDir = join(root, "common", "changes");
 
@@ -96,7 +99,7 @@ const run = async () => {
   console.log("Package paths", packagePaths);
 
   console.log("Bumping versions");
-  execSync(`npx @microsoft/rush publish --apply --prerelease-name="dev" --partial-prerelease`);
+  execSync(`npx @microsoft/rush publish --apply --prerelease-name="${PRERELEASE_TYPE}" --partial-prerelease`);
   console.log("Adding prerelease number");
   await addPrereleaseNumber(changeCounts, packagePaths);
 };
