@@ -64,6 +64,7 @@
     "@typescript-eslint/parser": "^4.12.0",
     "commonmark": "^0.27.0",
     "compare-versions": "^3.4.0",
+    "copy-webpack-plugin": "^7.0.0",
     "cpy-cli": "~2.0.0",
     "eslint-plugin-prettier": "~3.2.0",
     "eslint-plugin-unicorn": "~27.0.0",
