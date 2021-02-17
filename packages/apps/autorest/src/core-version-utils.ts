@@ -33,7 +33,7 @@ export const configurationSpecifiedVersion = async (args: AutorestArgs, selected
 
     // things we need in the sandbox.
     const sandbox = {
-      require,
+      require: __non_webpack_require__,
       console,
       rfs: {
         EnumerateFileUris: async (folderUri: string): Promise<Array<string>> => {
