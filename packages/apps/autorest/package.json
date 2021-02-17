@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/Azure/autorest/issues"
   },
-  "main": "./dist/src/exports.js",
+  "main": "./dist/exports.js",
   "bin": {
     "autorest": "./entrypoints/app.js"
   },
@@ -29,16 +29,16 @@
     "start": "node ./dist/src/app.js",
     "test": "jest --coverage=false",
     "test:ci": "jest --ci",
-    "build": "tsc -p .",
+    "build": "tsc -p tsconfig.build.json",
     "build:prod": "webpack",
-    "watch": "tsc -p . --watch",
+    "watch": "tsc -p tsconfig.build.json --watch",
     "lint:fix": "eslint ./src --fix --ext .ts",
     "lint": "eslint ./src --ext .ts --max-warnings=0",
     "preinstall": "node ./.scripts/preinstall-check",
     "prepack": "npm run clean && npm run build:prod",
     "clean": "rimraf ./dist"
   },
-  "typings": "./dist/src/exports.d.ts",
+  "typings": "./dist/exports.d.ts",
   "devDependencies": {
     "@autorest/core": "~3.0.6373",
     "@azure-tools/async-io": "~3.0.0",
