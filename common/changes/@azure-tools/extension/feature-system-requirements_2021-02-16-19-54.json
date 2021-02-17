@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/extension",
+      "comment": "**Feature** Added new \"systemRequirements\" validation for extensions. Extension are able to provide a list of system requirements which autorest will validate before starting.",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@azure-tools/extension",
+  "email": "tiguerin@microsoft.com"
+}

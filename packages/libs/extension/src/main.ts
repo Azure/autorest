@@ -6,7 +6,7 @@
 import { exists, isDirectory, isFile, mkdir, readdir, readFile, rmdir } from "@azure-tools/async-io";
 import { Progress, Subscribe } from "@azure-tools/eventing";
 import { CriticalSection, Delay, Exception, Mutex, shallowCopy, SharedLock } from "@azure-tools/tasks";
-import { ChildProcess, spawn, spawnSync } from "child_process";
+import { ChildProcess, spawn } from "child_process";
 import { resolve as npmResolvePackage } from "npm-package-arg";
 import { homedir, tmpdir } from "os";
 import * as pacote from "pacote";
@@ -15,82 +15,21 @@ import * as semver from "semver";
 import { Npm } from "./npm";
 import { PackageManager, PackageManagerType } from "./package-manager";
 import { Yarn } from "./yarn";
-import * as fs from "fs";
-
-export async function updatePythonPath(command: Array<string>) {
-  const detect = quoteIfNecessary("import sys; print(sys.hexversion >= 0x03060000)");
-  const path = process.env[getPathVariableName()];
-
-  const pyexe = process.env["AUTOREST_PYTHON_EXE"];
-  if (pyexe) {
-    command[0] = pyexe;
-    return;
-  }
-
-  // detect the python interpreter.
-  const py = await getFullPath("py", path);
-  try {
-    if (py && process.platform === "win32") {
-      // check if 'py -3' works
-      if (
-        spawnSync(py, ["-3", "-c", detect], { encoding: "utf8", shell: true }).stdout.toLowerCase().trim() === "true"
-      ) {
-        command[0] = py;
-        command.splice(1, 0, "-3");
-        return;
-      }
-    }
-  } catch {
-    // no worries
-  }
-
-  const python3 = await getFullPath("python3", path);
-  try {
-    if (python3) {
-      // check if 'python3' works
-      if (
-        spawnSync(python3, ["-c", detect], { encoding: "utf8", shell: true }).stdout.toLowerCase().trim() === "true"
-      ) {
-        command[0] = python3;
-        return;
-      }
-    }
-  } catch {
-    // no worries
-  }
-
-  const python = await getFullPath("python", path);
-  try {
-    if (python) {
-      // check if 'python' works (ie, is a v3)
-
-      if (spawnSync(python, ["-c", detect], { encoding: "utf8", shell: true }).stdout.toLowerCase().trim() === "true") {
-        command[0] = python;
-        return;
-      }
-    }
-  } catch {
-    // no worries
-  }
-
-  switch (process.platform) {
-    case "win32":
-      // eslint-disable-next-line no-console
-      console.error(
-        "Python interpreter not found -- please install from Microsoft Store or from python.org (at least 3.6)",
-      );
-      break;
-    case "darwin":
-      // eslint-disable-next-line no-console
-      console.error("Python interpreter not found -- please install from homebrew (at least 3.6)");
-      break;
-    default:
-      // eslint-disable-next-line no-console
-      console.error("Python interpreter not found -- please install python >= 3.6");
-      break;
-  }
-  throw new Error("Python interpreter not available.");
-}
+import {
+  patchPythonPath,
+  PythonCommandLine,
+  ExtensionSystemRequirements,
+  validateExtensionSystemRequirements,
+} from "./system-requirements";
+import { Extension, Package } from "./extension";
+import {
+  UnresolvedPackageException,
+  InvalidPackageIdentityException,
+  ExtensionFolderLocked,
+  PackageInstallationException,
+  MissingStartCommandException,
+  UnsatisfiedSystemRequirementException,
+} from "./exceptions";
 
 function quoteIfNecessary(text: string): string {
   if (text && text.indexOf(" ") > -1 && text.charAt(0) != '"') {
@@ -99,47 +38,6 @@ function quoteIfNecessary(text: string): string {
   return text;
 }
 const nodePath = quoteIfNecessary(process.execPath);
-
-export class UnresolvedPackageException extends Exception {
-  constructor(packageId: string) {
-    super(`Unable to resolve package '${packageId}'.`, 1);
-    Object.setPrototypeOf(this, UnresolvedPackageException.prototype);
-  }
-}
-
-export class InvalidPackageIdentityException extends Exception {
-  constructor(name: string, version: string, message: string) {
-    super(`Package '${name}' - '${version}' is not a valid package reference:\n  ${message}`, 1);
-    Object.setPrototypeOf(this, InvalidPackageIdentityException.prototype);
-  }
-}
-
-export class PackageInstallationException extends Exception {
-  constructor(name: string, version: string, message: string) {
-    super(`Package '${name}' - '${version}' failed to install:\n  ${message}`, 1);
-    Object.setPrototypeOf(this, PackageInstallationException.prototype);
-  }
-}
-export class UnsatisfiedEngineException extends Exception {
-  constructor(name: string, version: string, message = "") {
-    super(`Unable to find matching engine '${name}' - '${version} ${message}'`, 1);
-    Object.setPrototypeOf(this, UnsatisfiedEngineException.prototype);
-  }
-}
-
-export class MissingStartCommandException extends Exception {
-  constructor(extension: Extension) {
-    super(`Extension '${extension.id}' is missing the script 'start' in the package.json file`, 1);
-    Object.setPrototypeOf(this, MissingStartCommandException.prototype);
-  }
-}
-
-export class ExtensionFolderLocked extends Exception {
-  constructor(path: string) {
-    super(`Extension Folder '${path}' is locked by another process.`, 1);
-    Object.setPrototypeOf(this, ExtensionFolderLocked.prototype);
-  }
-}
 
 function cmdlineToArray(
   text: string,
@@ -217,142 +115,6 @@ async function getFullPath(command: string, searchPath?: string): Promise<string
   }
 
   return undefined;
-}
-
-/**
- * A Package is a representation of a npm package.
- *
- * Once installed, a Package is an Extension
- */
-export class Package {
-  /* @internal */ public constructor(
-    public resolvedInfo: any,
-    /* @internal */ public packageMetadata: any,
-    /* @internal */ public extensionManager: ExtensionManager,
-  ) {}
-
-  get id(): string {
-    return this.packageMetadata._id;
-  }
-
-  get name(): string {
-    return this.packageMetadata.name;
-  }
-
-  get version(): string {
-    return this.packageMetadata.version;
-  }
-
-  get source(): string {
-    // work around bug that npm doesn't programatically handle exact versions.
-    if (this.resolvedInfo.type === "version" && this.resolvedInfo.registry === true) {
-      return this.packageMetadata._spec + "*";
-    }
-    return this.packageMetadata._spec;
-  }
-
-  async install(force = false): Promise<Extension> {
-    return this.extensionManager.installPackage(this, force);
-  }
-
-  get allVersions(): Promise<Array<string>> {
-    return this.extensionManager.getPackageVersions(this.name);
-  }
-}
-
-/**
- * Extension is an installed Package
- * @extends Package
- * */
-export class Extension extends Package {
-  /* @internal */ public constructor(pkg: Package, private installationPath: string) {
-    super(pkg.resolvedInfo, pkg.packageMetadata, pkg.extensionManager);
-  }
-  /**
-   * The installed location of the package.
-   */
-  public get location(): string {
-    return normalize(`${this.installationPath}/${this.id.replace("/", "_")}`);
-  }
-  /**
-   * The path to the installed npm package (internal to 'location')
-   */
-  public get modulePath(): string {
-    return normalize(`${this.location}/node_modules/${this.name}`);
-  }
-
-  /**
-   * the path to the package.json file for the npm packge.
-   */
-  public get packageJsonPath(): string {
-    return normalize(`${this.modulePath}/package.json`);
-  }
-
-  /**
-   * the path to the readme.md configuration file for the extension.
-   */
-  public get configurationPath(): Promise<string> {
-    return (async () => {
-      const items = await readdir(this.modulePath);
-      for (const each of items) {
-        if (/^readme.md$/i.exec(each)) {
-          const fullPath = normalize(`${this.modulePath}/${each}`);
-          if (await isFile(fullPath)) {
-            return fullPath;
-          }
-        }
-      }
-      return "";
-    })();
-  }
-
-  /** the loaded package.json information */
-  public get definition(): any {
-    const content = fs.readFileSync(this.packageJsonPath).toString();
-    try {
-      return JSON.parse(content);
-    } catch (e) {
-      throw new Error(`Failed to parse package definition at '${this.packageJsonPath}'. ${e}`);
-    }
-  }
-
-  public get configuration(): Promise<string> {
-    return (async () => {
-      const cfgPath = await this.configurationPath;
-      if (cfgPath) {
-        return readFile(cfgPath);
-      }
-      return "";
-    })();
-  }
-
-  async remove(): Promise<void> {
-    return this.extensionManager.removeExtension(this);
-  }
-
-  async start(enableDebugger = false): Promise<ChildProcess> {
-    return this.extensionManager.start(this, enableDebugger);
-  }
-}
-
-/**
- * LocalExtension is a local extension that must not be installed.
- * @extends Extension
- * */
-export class LocalExtension extends Extension {
-  public constructor(pkg: Package, private extensionPath: string) {
-    super(pkg, "");
-  }
-  public get location(): string {
-    return this.extensionPath;
-  }
-  public get modulePath(): string {
-    return this.extensionPath;
-  }
-
-  async remove(): Promise<void> {
-    throw new Error("Cannot remove local extension. Lifetime not our responsibility.");
-  }
 }
 
 async function fetchPackageMetadata(spec: string): Promise<any> {
@@ -646,6 +408,8 @@ export class ExtensionManager {
 
   public async start(extension: Extension, enableDebugger = false): Promise<ChildProcess> {
     const PathVar = getPathVariableName();
+
+    await this.validateExtensionSystemRequirements(extension);
     if (!extension.definition.scripts) {
       throw new MissingStartCommandException(extension);
     }
@@ -682,7 +446,7 @@ export class ExtensionManager {
       case "python.exe":
       case "python3":
       case "python3.exe":
-        await updatePythonPath(command);
+        await patchPythonPath(command as PythonCommandLine, { version: ">=3.6" });
         break;
     }
 
@@ -727,5 +491,21 @@ export class ExtensionManager {
       cwd: extension.modulePath,
       stdio: ["pipe", "pipe", "pipe"],
     });
+  }
+
+  /**
+   * Validate if present the extension system requirements.
+   * @param extension Extension to validate.
+   */
+  private async validateExtensionSystemRequirements(extension: Extension) {
+    const systemRequirements: ExtensionSystemRequirements | undefined = extension.definition.systemRequirements;
+    if (!systemRequirements) {
+      return;
+    }
+
+    const errors = await validateExtensionSystemRequirements(systemRequirements);
+    if (errors.length > 0) {
+      throw new UnsatisfiedSystemRequirementException(extension, errors);
+    }
   }
 }

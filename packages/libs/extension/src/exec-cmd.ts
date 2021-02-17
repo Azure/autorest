@@ -18,8 +18,12 @@ export interface ExecResult {
   code: number | null;
 }
 
-export const execute = (command: string, cmdlineargs: Array<string>, options: MoreOptions): Promise<ExecResult> => {
-  return new Promise((r, j) => {
+export const execute = (
+  command: string,
+  cmdlineargs: Array<string>,
+  options: MoreOptions = {},
+): Promise<ExecResult> => {
+  return new Promise((resolve, reject) => {
     const cp = spawn(command, cmdlineargs, { ...options, stdio: "pipe" });
     if (options.onCreate) {
       options.onCreate(cp);
@@ -39,8 +43,12 @@ export const execute = (command: string, cmdlineargs: Array<string>, options: Mo
       out += chunk;
       all += chunk;
     });
+
+    cp.on("error", (err) => {
+      reject(err);
+    });
     cp.on("close", (code, signal) =>
-      r({
+      resolve({
         stdout: out,
         stderr: err,
         log: all,
