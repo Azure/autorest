@@ -23,6 +23,7 @@ jobs:
 
   - job: prerelease
     displayName: Publish prerelease
+    dependsOn: stable # Publish prerelease after to prevent race condition.
     steps:
       - template: ./templates/build.yaml
 
