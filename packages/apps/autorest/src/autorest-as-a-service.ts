@@ -169,12 +169,10 @@ export async function runCoreOutOfProc(localPath: string | null, entrypoint: str
     if (ep) {
       // Creates the nodejs command to load the target core
       // - copies the argv parameters
-      // - loads our static loader (so the newer loader is used, and we can get to 'chalk' in our static fs) - For backward compatibility.
       // - loads the js file with coloring (core expects a global function called 'color' )
       // - loads the actual entrypoint that we expect is there.
       const cmd = `
         process.argv = ${JSON.stringify(process.argv)};
-        if (require('fs').existsSync('${__dirname}/../static-loader.js')) { require('${__dirname}/../static-loader.js').load('${__dirname}/../static_modules.fs'); }
         const { color } = require('${__dirname}/exports');
         global.color = color;
         require('${ep}')

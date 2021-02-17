@@ -65,21 +65,9 @@
     "safe-buffer": "5.2.0",
     "semver": "^5.5.1",
     "source-map-support": "^0.5.19",
-    "static-link": "^0.3.0",
     "ts-jest": "^26.4.4",
     "ts-loader": "~8.0.14",
     "typescript": "~4.1.3",
     "webpack": "~5.18.0"
-  },
-  "static-link": {
-    "entrypoints": [],
-    "dependencies": {
-      "@azure-tools/async-io": "~3.0.0",
-      "@azure-tools/uri": "~3.0.0",
-      "@azure-tools/extension": "~3.1.272",
-      "@azure-tools/tasks": "~3.0.0",
-      "semver": "^5.5.1",
-      "chalk": "2.3.0"
-    }
   }
 }
