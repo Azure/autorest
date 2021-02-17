@@ -22,7 +22,6 @@ specs:
       - body-duration.json
       - body-dictionary.json
       - body-file.json
-      # Not yet supported by AutoRest v3 and Modelerfour
       - body-formdata-urlencoded.json
       - body-formdata.json
       - body-integer.json
