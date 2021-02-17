@@ -8,13 +8,27 @@ trigger:
 
 pool:
   vmImage: "ubuntu-latest"
+jobs:
+  - job: stable
+    displayName: Publish stable
+    steps:
+      - template: ./templates/build.yaml
 
-steps:
-  - template: ./templates/build.yaml
+      - script: npx @microsoft/rush publish --publish --pack --include-all
+        displayName: Pack packages
 
-  - script: npx @microsoft/rush publish --publish --pack --include-all
-    displayName: Pack packages
+      - script: |
+          NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --include-all --set-access-level public
+        displayName: Publish packages
 
-  - script: |
-      NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --include-all --set-access-level public
-    displayName: Publish packages
+  - job: prerelease
+    displayName: Prerelease
+    steps:
+      - template: ./templates/build.yaml
+
+      - script: node ./eng/bump-for-prerelease.js
+        displayName: Bump version to prerelease targets
+
+      - script: |
+          NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --set-access-level public --tag next
+        displayName: Publish packages
