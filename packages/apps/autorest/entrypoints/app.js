@@ -47,6 +47,10 @@ if (
       process.exit(1);
     }
 
+    if (v[0] > 14) {
+      console.error("\nWARNING: AutoRest has not been tested with Node versions greater than v14.\n");
+    }
+
     require(`${__dirname}/../dist/app.js`);
   } catch (e) {
     console.error(e);
