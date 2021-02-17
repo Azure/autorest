@@ -31,5 +31,5 @@ jobs:
         displayName: Bump version to prerelease targets
 
       - script: |
-          NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --set-access-level public --tag next
+          NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --include-all --set-access-level public --tag next
         displayName: Publish packages
