@@ -4,9 +4,6 @@ import { CreateFileOrFolderUri, EnsureIsFolderUri, IsUri, ResolveUri } from "@az
 import { cwd } from "process";
 import { mergeConfigurations } from "./configuration-merging";
 import { arrayOf } from "./utils";
-import { omit } from "lodash";
-import { ExtensionManager } from "@azure-tools/extension";
-import fs from "fs";
 
 // TODO-TIM don't extend
 export interface AutorestConfiguration extends AutorestRawConfiguration {
@@ -88,17 +85,8 @@ export const createConfigFromRawConfig = (
 ): AutorestConfiguration => {
   const baseFolderUri = getBaseFolderUri(configFileFolderUri, rawConfig);
 
-  const cleanedConfig = {
-    ...omit(rawConfig, "licence-header", "use"),
-    "license-header": rawConfig["license-header"] ?? rawConfig["licence-header"],
-    "use-extensions": {
-      ...rawConfig["use-extension"],
-      ...(rawConfig.use && desugarUseField(rawConfig.use)),
-    },
-  };
-
   return {
-    ...cleanedConfig,
+    ...rawConfig,
     raw: rawConfig,
     configFileFolderUri: configFileFolderUri,
     inputFileUris: [],
@@ -110,58 +98,6 @@ export const createConfigFromRawConfig = (
     cacheExclude: getCacheExclude(rawConfig),
     debug: Boolean(rawConfig.debug),
   };
-};
-
-const desugarUseField = async (use: string[] | string) => {
-  // Create an empty extension manager to be able to call findPackages.
-  const extMgr = await ExtensionManager.Create("");
-  const useArray = typeof use === "string" ? [use] : use;
-  const extensions: Record<string, string> = {};
-  for (const useEntry of useArray) {
-    if (typeof useEntry === "string") {
-      // potential formats:
-      // <pkg>
-      // <pkg>@<version>
-      // @<org>/<pkg>
-      // @<org>/<pkg>@<version>
-      // <path>
-      // <path/uri to .tgz package file>
-      // if the entry starts with an @ it's definitely a package reference
-      if (
-        useEntry.endsWith(".tgz") ||
-        (await fs.promises.lstat(useEntry)).isDirectory() ||
-        useEntry.startsWith("file:/")
-      ) {
-        const pkg = await extMgr.findPackage("plugin", useEntry);
-        extensions[pkg.name] = useEntry;
-      } else {
-        const [, identity, version] = /^https?:\/\//g.exec(useEntry)
-          ? [undefined, useEntry, undefined]
-          : <RegExpExecArray>/(^@.*?\/[^@]*|[^@]*)@?(.*)/.exec(useEntry);
-
-        if (identity) {
-          // parsed correctly
-          if (version) {
-            const pkg = await extMgr.findPackage(identity, version);
-            extensions[pkg.name] = version;
-          } else {
-            // it's either a location or just the name
-            if (IsUri(identity) || (await fs.promises.access(identity))) {
-              // seems like it's a location to something. we don't know the actual name at this point.
-              const pkg = await extMgr.findPackage("plugin", identity);
-              extensions[pkg.name] = identity;
-            } else {
-              // must be a package name without a version
-              // assume *?
-              const pkg = await extMgr.findPackage(identity, "*");
-              extensions[pkg.name] = pkg.version;
-            }
-          }
-        }
-      }
-    }
-  }
-  return extensions;
 };
 
 const getCacheExclude = (config: AutorestRawConfiguration) => {

@@ -2,6 +2,7 @@ import { AutorestLogger, CodeBlock, OperationAbortedException, parseCodeBlocks }
 import { DataHandle, DataSink } from "@azure-tools/datastore";
 import { ParentFolderUri, IsUri } from "@azure-tools/uri";
 import { AutorestRawConfiguration } from "../autorest-raw-configuration";
+import { desugarRawConfig } from "../desugar";
 import { arrayOf } from "../utils";
 
 export interface ConfigurationFile {
@@ -87,6 +88,6 @@ const codeBlockToRawConfig = async (
   }
   return {
     condition: codeBlock.info ?? undefined,
-    config,
+    config: await desugarRawConfig(config),
   };
 };

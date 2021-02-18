@@ -5,7 +5,6 @@ import { Directive } from "./directive";
  * i.e. The mapping of values passed via a config block, cli arguments, etc.
  */
 export interface AutorestRawConfiguration {
-  "__info"?: string | null;
   "__parents"?: any | undefined;
   "allow-no-input"?: boolean;
   "input-file"?: Array<string> | string;
@@ -15,7 +14,7 @@ export interface AutorestRawConfiguration {
   "declare-directive"?: { [name: string]: string };
   "output-artifact"?: Array<string> | string;
   "message-format"?: "json" | "yaml" | "regular";
-  "use"?: any[];
+  "use"?: string[] | string;
   "use-extension"?: { [extensionName: string]: string };
   "require"?: Array<string> | string;
   "try-require"?: Array<string> | string;

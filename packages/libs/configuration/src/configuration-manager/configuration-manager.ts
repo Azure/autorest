@@ -2,6 +2,7 @@ import { evaluateGuard, mergeOverwriteOrAppend } from "@autorest/common";
 import { IFileSystem } from "@azure-tools/datastore";
 import { AutorestConfiguration, createAutorestConfiguration } from "../autorest-configuration";
 import { AutorestRawConfiguration } from "../autorest-raw-configuration";
+import { desugarRawConfig } from "../desugar";
 import { ConditionalConfiguration, ConfigurationFile } from "./configuration-file";
 
 const initialConfig: AutorestRawConfiguration = Object.freeze({
@@ -39,11 +40,11 @@ export class ConfigurationManager {
 
   public constructor(private configFileOrFolderUri: string, private fileSystem: IFileSystem) {}
 
-  public addConfig(config: AutorestRawConfiguration) {
-    this.configItems.push({ type: "simple", config });
+  public async addConfig(config: AutorestRawConfiguration) {
+    this.configItems.push({ type: "simple", config: await desugarRawConfig(config) });
   }
 
-  public addConfigFile(file: ConfigurationFile) {
+  public async addConfigFile(file: ConfigurationFile) {
     this.configItems.push(file);
   }
 

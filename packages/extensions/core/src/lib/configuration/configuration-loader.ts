@@ -110,7 +110,7 @@ export class ConfigurationLoader {
     // 1. overrides (CLI, ...)
     // await addSegments(configs, false);
     for (const config of configs) {
-      manager.addConfig(config);
+      await manager.addConfig(config);
     }
 
     // 2. file
@@ -182,7 +182,7 @@ export class ConfigurationLoader {
         const extensions = resolveExtensions(tmpView);
         const additionalExtensions = extensions.filter((ext) => !addedExtensions.has(ext.fullyQualified));
         // TODO-TIM can use additionalExtensions instead of extensions
-        manager.addConfig({ "used-extension": extensions.map((x) => x.fullyQualified) });
+        await manager.addConfig({ "used-extension": extensions.map((x) => x.fullyQualified) });
         if (additionalExtensions.length === 0) {
           continue;
         }
