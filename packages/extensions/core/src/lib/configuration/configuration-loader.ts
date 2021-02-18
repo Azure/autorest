@@ -18,11 +18,11 @@ import {
   ConfigurationManager,
   readConfigurationFile,
   CachingFileSystem,
+  getIncludedConfigurationFiles,
 } from "@autorest/configuration";
 import { AutorestContext } from "./autorest-context";
 import { MessageEmitter } from "./message-emitter";
 import { detectConfigurationFile } from "./configuration-file-resolver";
-import { getIncludedConfigurationFiles } from "./loading-utils";
 
 const inWebpack = typeof __webpack_require__ === "function";
 const pathToYarnCli = inWebpack ? `${__dirname}/yarn/cli.js` : undefined;

@@ -1,6 +1,7 @@
-import { arrayOf, AutorestConfiguration } from "@autorest/configuration";
 import { IFileSystem } from "@azure-tools/datastore";
 import { ResolveUri, IsUri, EnsureIsFolderUri } from "@azure-tools/uri";
+import { AutorestConfiguration } from "./autorest-configuration";
+import { arrayOf } from "./utils";
 
 export async function* getIncludedConfigurationFiles(
   configView: () => Promise<AutorestConfiguration>,
