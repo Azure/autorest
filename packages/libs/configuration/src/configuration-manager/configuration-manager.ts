@@ -1,4 +1,4 @@
-import { AutorestLogger, evaluateGuard, mergeOverwriteOrAppend } from "@autorest/common";
+import { evaluateGuard, mergeOverwriteOrAppend } from "@autorest/common";
 import { IFileSystem } from "@azure-tools/datastore";
 import { AutorestConfiguration, createAutorestConfiguration } from "../autorest-configuration";
 import { AutorestRawConfiguration } from "../autorest-raw-configuration";

@@ -26,6 +26,7 @@
   "homepage": "https://github.com/Azure/autorest#readme",
   "devDependencies": {
     "@types/jest": "^26.0.20",
+    "@types/lodash": "~4.14.168",
     "@types/node": "~14.14.20",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
@@ -39,6 +40,8 @@
   "dependencies": {
     "@autorest/common": "~1.0.0",
     "@azure-tools/datastore": "~4.1.271",
-    "@azure-tools/uri": "~3.0.0"
+    "@azure-tools/extension": "~3.1.272",
+    "@azure-tools/uri": "~3.0.0",
+    "lodash": "~4.17.20"
   }
 }
