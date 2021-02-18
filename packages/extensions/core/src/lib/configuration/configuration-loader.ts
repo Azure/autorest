@@ -7,7 +7,7 @@
 import { exists, filePath } from "@azure-tools/async-io";
 import { IFileSystem, LazyPromise, RealFileSystem } from "@azure-tools/datastore";
 import { Extension, ExtensionManager, LocalExtension } from "@azure-tools/extension";
-import { CreateFileUri, CreateFolderUri, ResolveUri, simplifyUri, IsUri, FileUriToPath } from "@azure-tools/uri";
+import { CreateFileUri, CreateFolderUri, ResolveUri, simplifyUri, FileUriToPath } from "@azure-tools/uri";
 import { join } from "path";
 import { AutorestLogger } from "@autorest/common";
 import { Channel } from "../message";
@@ -19,10 +19,10 @@ import {
   readConfigurationFile,
   CachingFileSystem,
   getIncludedConfigurationFiles,
+  detectConfigurationFile,
 } from "@autorest/configuration";
 import { AutorestContext } from "./autorest-context";
 import { MessageEmitter } from "./message-emitter";
-import { detectConfigurationFile } from "./configuration-file-resolver";
 
 const inWebpack = typeof __webpack_require__ === "function";
 const pathToYarnCli = inWebpack ? `${__dirname}/yarn/cli.js` : undefined;
@@ -91,20 +91,21 @@ export class ConfigurationLoader {
     includeDefault: boolean,
     ...configs: Array<any>
   ): Promise<AutorestContext> {
+    const logger: AutorestLogger = {
+      // TODO-TIM define correctly.
+      verbose: () => null,
+      trackError: () => null,
+    };
+
     const configFileUri =
       this.fileSystem && this.configFileOrFolderUri
-        ? await detectConfigurationFile(this.fileSystem, this.configFileOrFolderUri, messageEmitter)
+        ? await detectConfigurationFile(this.fileSystem, this.configFileOrFolderUri, logger)
         : null;
     const configFileFolderUri = configFileUri
       ? ResolveUri(configFileUri, "./")
       : this.configFileOrFolderUri || "file:///";
 
     const configurationFiles: { [key: string]: any } = {};
-
-    const logger: AutorestLogger = {
-      // TODO-TIM define correctly.
-      trackError: () => null,
-    };
 
     const manager = new ConfigurationManager(configFileFolderUri, this.fileSystem);
 

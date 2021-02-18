@@ -62,6 +62,13 @@ export class AutorestContext implements AutorestLogger {
     return this.config.raw;
   }
 
+  public verbose(message: string) {
+    this.Message({
+      Channel: Channel.Verbose,
+      Text: message,
+    });
+  }
+
   public trackError(error: AutorestError) {
     this.Message({
       Channel: Channel.Error,

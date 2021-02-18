@@ -237,16 +237,6 @@ export async function isOpenApiDocument(content: string): Promise<boolean> {
   return coreModule.IsOpenApiDocument(content);
 }
 
-/**
- * Checks to see if the document is a literate configuation document.
- *
- * @param content the document content to check
- */
-export async function isConfigurationDocument(content: string): Promise<boolean> {
-  await ensureCoreLoaded();
-  return coreModule.IsConfigurationDocument(content);
-}
-
 /** Determines the document type based on the content of the document
  *
  * @returns Promise<DocumentType> one of:

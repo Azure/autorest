@@ -9,7 +9,6 @@ import {
   DocumentType,
   IdentifyDocument,
   IFileSystem,
-  IsConfigurationDocument,
   IsConfigurationExtension,
   IsOpenApiDocument,
   IsOpenApiExtension,
@@ -23,7 +22,7 @@ import { FileUriToPath, GetExtension, IsUri, ParentFolderUri, ResolveUri } from 
 import { createHash } from "crypto";
 import { From } from "linq-es2015";
 import { safeDump } from "yaml-ast-parser";
-import { ConfigurationLoader, detectConfigurationFile, detectConfigurationFiles } from "../lib/configuration";
+import { detectConfigurationFile, detectConfigurationFiles, isConfigurationDocument } from "@autorest/configuration";
 import { DocumentAnalysis } from "./document-analysis";
 
 import {
@@ -397,8 +396,8 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
   public async isConfigurationDocument(contentOrUri: string): Promise<boolean> {
     try {
       return IsUri(contentOrUri)
-        ? await IsConfigurationDocument(await this.ReadFile(contentOrUri))
-        : await IsConfigurationDocument(contentOrUri);
+        ? await isConfigurationDocument(await this.ReadFile(contentOrUri))
+        : await isConfigurationDocument(contentOrUri);
     } catch {
       // no worries
     }
@@ -410,7 +409,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
         // so far, so good.
         const content = IsUri(contentOrUri) ? await this.ReadFile(contentOrUri) : contentOrUri;
         const isSwag = IsOpenApiDocument(content);
-        const isConf = IsConfigurationDocument(content);
+        const isConf = isConfigurationDocument(content);
         return (await isSwag) || (await isConf);
       }
     } catch {
@@ -738,7 +737,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     }
 
     // is this a config file?
-    if ((await IsConfigurationExtension(document.languageId)) && (await IsConfigurationDocument(document.getText()))) {
+    if ((await IsConfigurationExtension(document.languageId)) && (await isConfigurationDocument(document.getText()))) {
       this.process(document.uri);
       return;
     }

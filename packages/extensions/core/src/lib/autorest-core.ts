@@ -9,9 +9,9 @@ import { Exception } from "@autorest/common";
 import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import { runPipeline } from "./pipeline/pipeline";
 export { AutorestContext } from "./configuration";
+import { isConfigurationDocument } from "@autorest/configuration";
 import { homedir } from "os";
 import { Artifact } from "./artifact";
-import * as Constants from "./constants";
 import { DocumentType } from "./document-type";
 import { Channel, Message } from "./message";
 
@@ -214,16 +214,6 @@ export async function LiterateToJson(content: string): Promise<string> {
   }
 }
 
-/**
- * Checks to see if the document is a literate configuation document.
- *
- * @param content the document content to check
- */
-export async function IsConfigurationDocument(content: string): Promise<boolean> {
-  // this checks to see if the document is an autorest markdown configuration document
-  return content.indexOf(Constants.MagicString) > -1;
-}
-
 /** Determines the document type based on the content of the document
  *
  * @returns Promise<DocumentType> one of:
@@ -237,7 +227,7 @@ export async function IsConfigurationDocument(content: string): Promise<boolean>
 export async function IdentifyDocument(content: string): Promise<DocumentType> {
   if (content) {
     // check for configuration
-    if (await IsConfigurationDocument(content)) {
+    if (await isConfigurationDocument(content)) {
       return DocumentType.LiterateConfiguration;
     }
 

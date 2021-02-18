@@ -13,9 +13,6 @@ const resolveAppRoot = () => {
   return current;
 };
 
-export const MagicString = "\n> see https://aka.ms/autorest";
-export const DefaultConfiguration = "readme.md";
-
 /**
  * Root of autorest core(i.e core folder)
  */
