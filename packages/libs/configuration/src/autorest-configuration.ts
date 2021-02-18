@@ -98,7 +98,7 @@ export const createAutorestConfiguration = async (
   return config;
 };
 
-const createConfigFromRawConfig = (
+export const createConfigFromRawConfig = (
   configFileFolderUri: string,
   rawConfig: AutorestRawConfiguration,
   configurationFiles: { [key: string]: string },
