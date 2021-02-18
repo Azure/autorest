@@ -5,24 +5,16 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { exists, filePath, isDirectory } from "@azure-tools/async-io";
-import { DataHandle, IFileSystem, LazyPromise, RealFileSystem } from "@azure-tools/datastore";
+import { IFileSystem, LazyPromise, RealFileSystem } from "@azure-tools/datastore";
 import { Extension, ExtensionManager, LocalExtension } from "@azure-tools/extension";
-import {
-  CreateFileUri,
-  CreateFolderUri,
-  ResolveUri,
-  simplifyUri,
-  IsUri,
-  ParentFolderUri,
-  FileUriToPath,
-} from "@azure-tools/uri";
+import { CreateFileUri, CreateFolderUri, ResolveUri, simplifyUri, IsUri, FileUriToPath } from "@azure-tools/uri";
 import { join } from "path";
-import { AutorestLogger, OperationAbortedException, parseCodeBlocks } from "@autorest/common";
-import { Channel, SourceLocation } from "../message";
+import { AutorestLogger } from "@autorest/common";
+import { Channel } from "../message";
 import { AutoRestExtension } from "../pipeline/plugin-endpoint";
 import { AppRoot } from "../constants";
-import { AutorestRawConfiguration, arrayOf, ConfigurationManager } from "@autorest/configuration";
-import { AutorestContext, createAutorestContext } from "./autorest-context";
+import { AutorestRawConfiguration, ConfigurationManager } from "@autorest/configuration";
+import { AutorestContext } from "./autorest-context";
 import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
 import { detectConfigurationFile } from "./configuration-file-resolver";
@@ -55,62 +47,6 @@ export class ConfigurationLoader {
    */
   public constructor(fileSystem: IFileSystem = new RealFileSystem(), private configFileOrFolderUri?: string) {
     this.fileSystem = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
-  }
-
-  private async parseCodeBlocks(
-    configFile: DataHandle,
-    contextConfig: AutorestContext,
-  ): Promise<Array<AutorestRawConfiguration>> {
-    const parentFolder = ParentFolderUri(configFile.originalFullPath);
-
-    // load config
-    const hConfig = await parseCodeBlocks(contextConfig, configFile, contextConfig.DataStore.getDataSink());
-    if (hConfig.length === 1 && hConfig[0].info === null && configFile.Description.toLowerCase().endsWith(".md")) {
-      // this is a whole file, and it's a markdown file.
-      return [];
-    }
-
-    const blocks = await Promise.all(
-      hConfig
-        .filter((each) => each)
-        .map((each) => {
-          const pBlock = each.data.ReadObject<AutorestRawConfiguration>();
-          return pBlock.then((block) => {
-            if (!block) {
-              block = {};
-            }
-            if (typeof block !== "object") {
-              contextConfig.Message({
-                Channel: Channel.Error,
-                Text: "Syntax error: Invalid YAML object.",
-                Source: [<SourceLocation>{ document: each.data.key, Position: { line: 1, column: 0 } }],
-              });
-              throw new OperationAbortedException();
-            }
-            block.__info = each.info;
-
-            // for ['input-file','try-require', 'require'] paths, we're going to create a node that contains
-            // a map of the path to the folder from which the configuration file
-            // that loaded it was specified.
-
-            // this will enable us to try to load relative paths relative to the folder from which it was read
-            // rather than have to rely on the pseudo $(this-folder) macro (which requires updating the file)
-
-            block.__parents = {};
-            for (const kind of ["input-file", "require", "try-require", "exclude-file"]) {
-              if (block[kind]) {
-                for (const location of arrayOf<string>(block[kind])) {
-                  if (!IsUri(location)) {
-                    block.__parents[location] = parentFolder;
-                  }
-                }
-              }
-            }
-            return block;
-          });
-        }),
-    );
-    return blocks;
   }
 
   private static extensionManager: LazyPromise<ExtensionManager> = new LazyPromise<ExtensionManager>(() =>
@@ -229,7 +165,7 @@ export class ConfigurationLoader {
       trackError: () => null,
     };
 
-    const manager = new ConfigurationManager(this.fileSystem, messageEmitter.DataStore, logger);
+    const manager = new ConfigurationManager(configFileFolderUri, this.fileSystem);
 
     const resolveConfig = () => manager.resolveConfig();
 
@@ -246,7 +182,9 @@ export class ConfigurationLoader {
         Channel: Channel.Verbose,
         Text: `> Initial configuration file '${configFileUri}'`,
       });
-      manager.addRawConfigFile(configFileUri);
+      const data = await messageEmitter.DataStore.GetReadThroughScope(this.fileSystem).ReadStrict(configFileUri);
+      const file = await readConfigurationFile(data, logger, messageEmitter.DataStore.getDataSink());
+      manager.addConfigFile(file);
     }
 
     // 3. resolve 'require'd configuration
@@ -293,7 +231,7 @@ export class ConfigurationLoader {
     }
 
     await resolveRequiredConfigs(fsLocal);
-    const messageFormat = resolveConfig()["message-format"];
+    const messageFormat = (await resolveConfig())["message-format"];
 
     // 5. resolve extensions
     const extMgr = await ConfigurationLoader.extensionManager;
@@ -489,7 +427,7 @@ export class ConfigurationLoader {
     // await resolveExtensions();
 
     // return the final view
-    return new AutorestContext(manager.resolveConfig(), this.fileSystem, messageEmitter, configFileFolderUri);
+    return new AutorestContext(await manager.resolveConfig(), this.fileSystem, messageEmitter, configFileFolderUri);
   }
 }
 

@@ -1,8 +1,8 @@
 import { AutorestLogger, evaluateGuard, mergeOverwriteOrAppend } from "@autorest/common";
-import { DataSink, DataSource, DataStore, IFileSystem } from "@azure-tools/datastore";
-import { AutorestConfiguration, createConfigFromRawConfig } from "../autorest-configuration";
+import { IFileSystem } from "@azure-tools/datastore";
+import { AutorestConfiguration, createAutorestConfiguration } from "../autorest-configuration";
 import { AutorestRawConfiguration } from "../autorest-raw-configuration";
-import { ConditionalConfiguration, ConfigurationFile, readConfigurationFile } from "./configuration-file";
+import { ConditionalConfiguration, ConfigurationFile } from "./configuration-file";
 
 const initialConfig: AutorestRawConfiguration = Object.freeze({
   "directive": [],
@@ -36,11 +36,8 @@ type ConfigurationItem = ConfigurationFile | SimpleConfiguration;
  */
 export class ConfigurationManager {
   private configItems: ConfigurationItem[] = [];
-  private fsView: DataSource;
 
-  public constructor(private fileSystem: IFileSystem, private dataStore: DataStore, private logger: AutorestLogger) {
-    this.fsView = dataStore.GetReadThroughScope(this.fileSystem);
-  }
+  public constructor(private configFileOrFolderUri: string, private fileSystem: IFileSystem) {}
 
   public addConfig(config: AutorestRawConfiguration) {
     this.configItems.push({ type: "simple", config });
@@ -50,13 +47,7 @@ export class ConfigurationManager {
     this.configItems.push(file);
   }
 
-  public async addRawConfigFile(fileUri: string) {
-    const data = await this.fsView.ReadStrict(fileUri);
-    const file = await readConfigurationFile(data, this.logger, this.dataStore.getDataSink());
-    this.configItems.push(file);
-  }
-
-  public resolveConfig(): AutorestConfiguration {
+  public async resolveConfig(): Promise<AutorestConfiguration> {
     let current = initialConfig;
 
     // TODO-TIM take into account load-priority
@@ -72,7 +63,7 @@ export class ConfigurationManager {
     current = mergeOverwriteOrAppend(current, defaultConfig);
 
     // TODO-TIM check those params
-    return createConfigFromRawConfig("", current, {});
+    return createAutorestConfiguration(this.configFileOrFolderUri, current, {}, this.fileSystem);
   }
 
   /**
@@ -81,23 +72,23 @@ export class ConfigurationManager {
    * @param configFile Config file.
    */
   private mergeConfigFile(config: AutorestRawConfiguration, configFile: ConfigurationFile): AutorestRawConfiguration {
-    let resolvedConfig = config;
-    let current = {};
+    let currentFileResolution = {};
+    const resolveConfig = () => mergeOverwriteOrAppend(config, currentFileResolution);
 
-    for (const config of configFile.configs) {
+    for (const configBlock of configFile.configs) {
+      const resolvedConfig = resolveConfig();
       // if they say --profile: or --api-version: (or in config) then we force it to set the tag=all-api-versions
       // Some of the rest specs had a default tag set (really shouldn't have done that), which ... was problematic,
       // so this enables us to override that in the case they are asking for filtering to a profile or a api-verison
       const forceAllVersionsMode = Boolean(resolvedConfig["api-version"]?.length || resolvedConfig.profile?.length);
 
-      const shouldInclude = shouldIncludeConditionalConfig(resolvedConfig, config, forceAllVersionsMode);
+      const shouldInclude = shouldIncludeConditionalConfig(resolvedConfig, configBlock, forceAllVersionsMode);
       if (shouldInclude) {
-        current = mergeOverwriteOrAppend(config, current);
-        resolvedConfig = mergeOverwriteOrAppend(config, current);
+        currentFileResolution = mergeOverwriteOrAppend(configBlock.config, currentFileResolution);
       }
     }
 
-    return resolvedConfig;
+    return resolveConfig();
   }
 }
 

@@ -113,31 +113,6 @@ export class AutorestContext implements AutorestLogger {
     return this.messageEmitter.ClearFolder;
   }
 
-  public ResolveAsPath(path: string): Promise<string> {
-    // is there even a potential for a parent folder from the input configuruation
-    const parentFolder = this.config?.__parents?.[path];
-    const fromBaseUri = ResolveUri(this.BaseFolderUri, path);
-
-    // if it's an absolute uri already, give it back that way.
-    if (IsUri(path) || !parentFolder) {
-      return Promise.resolve(fromBaseUri);
-    }
-
-    // let it try relative to the file that loaded it.
-    // if the relative-to-parent path isn't valid, we fall back to original behavior
-    // where the file path is relative to the base uri.
-    // (and we don't even check to see if that's valid, try-require wouldn't need valid files)
-    const fromLoadedFile = ResolveUri(parentFolder, path);
-    return this.fileSystem.ReadFile(fromLoadedFile).then(
-      () => fromLoadedFile,
-      () => fromBaseUri,
-    );
-  }
-
-  private get BaseFolderUri(): string {
-    return EnsureIsFolderUri(ResolveUri(this.configFileFolderUri, <string>this.config["base-folder"]));
-  }
-
   public resolveDirectives(predicate?: (each: ResolvedDirective) => boolean): ResolvedDirective[] {
     // optionally filter by predicate.
     const plainDirectives = values(arrayOf<Directive>(this.config["directive"]));

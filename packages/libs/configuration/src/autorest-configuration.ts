@@ -56,31 +56,10 @@ export interface AutorestConfiguration extends AutorestRawConfiguration {
 
 export const createAutorestConfiguration = async (
   configFileFolderUri: string,
+  rawConfig: AutorestRawConfiguration,
   configurationFiles: { [key: string]: any },
-  configs: AutorestRawConfiguration[],
   fileSystem: IFileSystem,
 ): Promise<AutorestConfiguration> => {
-  const initialConfig: AutorestRawConfiguration = {
-    "directive": [],
-    "input-file": [],
-    "exclude-file": [],
-    "profile": [],
-    "output-artifact": [],
-    "require": [],
-    "try-require": [],
-    "use": [],
-    "pass-thru": [],
-  };
-
-  const defaultConfig: AutorestRawConfiguration = {
-    "base-folder": ".",
-    "output-folder": "generated",
-    "debug": false,
-    "verbose": false,
-    "disable-validation": false,
-  };
-  const rawConfig = mergeConfigurations(initialConfig, ...configs, defaultConfig);
-
   const config: AutorestConfiguration = createConfigFromRawConfig(configFileFolderUri, rawConfig, configurationFiles);
 
   const inputFiles = await Promise.all(
@@ -88,6 +67,7 @@ export const createAutorestConfiguration = async (
       resolveAsPath(configFileFolderUri, config, each, fileSystem),
     ),
   );
+
   const filesToExclude = await Promise.all(
     arrayOf<string>(rawConfig["exclude-file"]).map((each) =>
       resolveAsPath(configFileFolderUri, config, each, fileSystem),
