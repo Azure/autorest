@@ -13,6 +13,7 @@ import {
   AutorestRawConfiguration,
   CachingFileSystem,
   ConfigurationLoader,
+  getNestedConfiguration,
   ResolvedExtension,
 } from "@autorest/configuration";
 import { AutorestContext } from "./autorest-context";
@@ -102,10 +103,6 @@ export class AutorestContextLoader {
       this.configFileOrFolderUri,
     );
 
-    // TODO-TIM: handle this scenario:
-    // const view = [...(await createView()).getNestedConfiguration(shortname)];
-    // const enableDebugger = tmpView["debugger"];
-
     const { config, extensions } = await loader.load(configs, includeDefault);
     this.setupExtensions(config, extensions);
 
@@ -114,9 +111,12 @@ export class AutorestContextLoader {
   }
 
   private setupExtensions(config: AutorestConfiguration, extensions: ResolvedExtension[]) {
-    const enableDebugger = config["debugger"];
     for (const { extension, definition } of extensions) {
       if (!loadedExtensions[definition.fullyQualified]) {
+        const shortname = definition.name.split("/").last.replace(/^autorest\./gi, "");
+        const nestedConfig = [...getNestedConfiguration(config, shortname)][0];
+        const enableDebugger = nestedConfig["debugger"];
+
         loadedExtensions[definition.fullyQualified] = {
           extension,
           autorestExtension: new LazyPromise(async () =>

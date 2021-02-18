@@ -14,31 +14,18 @@ import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
 import { Artifact } from "../artifact";
 import { Channel, Message, Range, SourceLocation } from "../message";
 import { Suppressor } from "../pipeline/suppression";
-import { Directive, ResolvedDirective, CachingFileSystem } from "@autorest/configuration";
+import { Directive, ResolvedDirective, CachingFileSystem, getNestedConfiguration } from "@autorest/configuration";
 import { MessageEmitter } from "./message-emitter";
 import { IEvent } from "../events";
 import {
   AutorestConfiguration,
   AutorestRawConfiguration,
   arrayOf,
-  createAutorestConfiguration,
   extendAutorestConfiguration,
 } from "@autorest/configuration";
 import { AutorestError, AutorestLogger } from "@autorest/common";
 
 const safeEval = createSandbox();
-
-export const createAutorestContext = async (
-  configurationFiles: { [key: string]: any },
-  fileSystem: IFileSystem,
-  messageEmitter: MessageEmitter,
-  configFileFolderUri: string,
-  ...configs: AutorestRawConfiguration[]
-): Promise<AutorestContext> => {
-  const cachingFs = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
-  const config = await createAutorestConfiguration(configFileFolderUri, configurationFiles, configs, cachingFs);
-  return new AutorestContext(config, cachingFs, messageEmitter, configFileFolderUri);
-};
 
 export class AutorestContext implements AutorestLogger {
   public config: AutorestConfiguration;
@@ -238,19 +225,8 @@ export class AutorestContext implements AutorestLogger {
   }
 
   public *getNestedConfiguration(pluginName: string): Iterable<AutorestContext> {
-    const pp = pluginName.split(".");
-    if (pp.length > 1) {
-      const n = this.getNestedConfiguration(pp[0]);
-      for (const s of n) {
-        yield* s.getNestedConfiguration(pp.slice(1).join("."));
-      }
-      return;
-    }
-
-    for (const section of arrayOf<any>(this.config.raw[pluginName])) {
-      if (section) {
-        yield this.extendWith(section === true ? {} : section);
-      }
+    for (const nestedConfig of getNestedConfiguration(this.config, pluginName)) {
+      yield new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter);
     }
   }
 
@@ -260,7 +236,7 @@ export class AutorestContext implements AutorestLogger {
    */
   public extendWith(...overrides: AutorestRawConfiguration[]): AutorestContext {
     const nestedConfig = extendAutorestConfiguration(this.config, overrides);
-    return new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter, this.configFileFolderUri);
+    return new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter);
   }
 
   // message pipeline (source map resolution, filter, ...)

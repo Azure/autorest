@@ -9,11 +9,22 @@ import { detectConfigurationFile } from "../configuration-file-resolver";
 import { ConfigurationManager, readConfigurationFile } from "../configuration-manager";
 import { getIncludedConfigurationFiles } from "../configuration-require-resolver";
 import { AutorestRawConfiguration } from "../autorest-raw-configuration";
-import { exists, filePath } from "../utils";
+import { arrayOf, exists, filePath } from "../utils";
 
 export interface AutorestConfigurationResult {
   config: AutorestConfiguration;
   extensions: ResolvedExtension[];
+}
+
+export interface ExtensionDefinition {
+  name: string;
+  source: string;
+  fullyQualified: string;
+}
+
+export interface ResolvedExtension {
+  definition: ExtensionDefinition;
+  extension: Extension;
 }
 
 /**
@@ -258,17 +269,6 @@ export class ConfigurationLoader {
       }
     }
   }
-}
-
-export interface ExtensionDefinition {
-  name: string;
-  source: string;
-  fullyQualified: string;
-}
-
-export interface ResolvedExtension {
-  definition: ExtensionDefinition;
-  extension: Extension;
 }
 
 const resolveExtensions = (config: AutorestRawConfiguration): ExtensionDefinition[] => {

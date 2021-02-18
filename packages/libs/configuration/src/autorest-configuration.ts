@@ -115,6 +115,26 @@ export const extendAutorestConfiguration = (
   return newConfig;
 };
 
+export function* getNestedConfiguration(
+  config: AutorestConfiguration,
+  pluginName: string,
+): Iterable<AutorestConfiguration> {
+  const pp = pluginName.split(".");
+  if (pp.length > 1) {
+    const n = getNestedConfiguration(config, pp[0]);
+    for (const s of n) {
+      yield* s.getNestedConfiguration(pp.slice(1).join("."));
+    }
+    return;
+  }
+
+  for (const section of arrayOf<any>(config.raw[pluginName])) {
+    if (section) {
+      yield extendAutorestConfiguration(config, section === true ? {} : section);
+    }
+  }
+}
+
 export const resolveAsPath = (
   configFileFolderUri: string,
   config: AutorestConfiguration,
