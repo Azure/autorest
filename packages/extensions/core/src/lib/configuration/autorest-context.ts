@@ -138,22 +138,6 @@ export class AutorestContext implements AutorestLogger {
     return EnsureIsFolderUri(ResolveUri(this.configFileFolderUri, <string>this.config["base-folder"]));
   }
 
-  // public methods
-
-  public get UseExtensions(): Array<{ name: string; source: string; fullyQualified: string }> {
-    const useExtensions = this.config["use-extension"] || {};
-    return Object.keys(useExtensions).map((name) => {
-      const source = useExtensions[name].startsWith("file://")
-        ? FileUriToPath(useExtensions[name])
-        : useExtensions[name];
-      return {
-        name,
-        source,
-        fullyQualified: JSON.stringify([name, source]),
-      };
-    });
-  }
-
   public resolveDirectives(predicate?: (each: ResolvedDirective) => boolean): ResolvedDirective[] {
     // optionally filter by predicate.
     const plainDirectives = values(arrayOf<Directive>(this.config["directive"]));

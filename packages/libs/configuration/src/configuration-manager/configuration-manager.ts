@@ -1,8 +1,8 @@
-import { evaluateGuard, mergeOverwriteOrAppend } from "@autorest/common";
-import { IFileSystem } from "@azure-tools/datastore";
+import { AutorestLogger, evaluateGuard, mergeOverwriteOrAppend } from "@autorest/common";
+import { DataSink, DataSource, DataStore, IFileSystem } from "@azure-tools/datastore";
 import { AutorestConfiguration, createConfigFromRawConfig } from "../autorest-configuration";
 import { AutorestRawConfiguration } from "../autorest-raw-configuration";
-import { ConditionalConfiguration, ConfigurationFile } from "./configuration-file";
+import { ConditionalConfiguration, ConfigurationFile, readConfigurationFile } from "./configuration-file";
 
 const initialConfig: AutorestRawConfiguration = Object.freeze({
   "directive": [],
@@ -24,24 +24,48 @@ const defaultConfig: AutorestRawConfiguration = Object.freeze({
   "disable-validation": false,
 });
 
+interface SimpleConfiguration {
+  type: "simple";
+  config: AutorestRawConfiguration;
+}
+
+type ConfigurationItem = ConfigurationFile | SimpleConfiguration;
+
 /**
  * Class organizing configurations and merging them together.
  */
 export class ConfigurationManager {
-  private configFiles: ConfigurationFile[] = [];
+  private configItems: ConfigurationItem[] = [];
+  private fsView: DataSource;
 
-  public constructor(private fileSystem: IFileSystem) {}
+  public constructor(private fileSystem: IFileSystem, private dataStore: DataStore, private logger: AutorestLogger) {
+    this.fsView = dataStore.GetReadThroughScope(this.fileSystem);
+  }
+
+  public addConfig(config: AutorestRawConfiguration) {
+    this.configItems.push({ type: "simple", config });
+  }
 
   public addConfigFile(file: ConfigurationFile) {
-    this.configFiles.push(file);
+    this.configItems.push(file);
+  }
+
+  public async addRawConfigFile(fileUri: string) {
+    const data = await this.fsView.ReadStrict(fileUri);
+    const file = await readConfigurationFile(data, this.logger, this.dataStore.getDataSink());
+    this.configItems.push(file);
   }
 
   public resolveConfig(): AutorestConfiguration {
     let current = initialConfig;
 
     // TODO-TIM take into account load-priority
-    for (const configFile of this.configFiles) {
-      current = this.mergeConfigFile(current, configFile);
+    for (const configItem of this.configItems) {
+      if (configItem.type === "file") {
+        current = this.mergeConfigFile(current, configItem);
+      } else if (configItem.type === "simple") {
+        current = mergeOverwriteOrAppend(current, configItem.config);
+      }
     }
 
     // Finally apply default config.

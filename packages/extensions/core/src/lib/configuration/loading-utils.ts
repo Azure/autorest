@@ -1,9 +1,8 @@
-import { arrayOf } from "@autorest/configuration";
+import { arrayOf, AutorestConfiguration } from "@autorest/configuration";
 import { IFileSystem } from "@azure-tools/datastore";
-import { AutorestContext } from "./autorest-context";
 
 export async function* getIncludedConfigurationFiles(
-  configView: () => Promise<AutorestContext>,
+  configView: () => AutorestConfiguration,
   fileSystem: IFileSystem,
   ignoreFiles: Set<string>,
 ) {
@@ -11,7 +10,7 @@ export async function* getIncludedConfigurationFiles(
 
   while (!done) {
     // get a fresh copy of the view every time we start the loop.
-    const view = await configView();
+    const view = configView();
 
     // if we make it thru the list, we're done.
     done = true;

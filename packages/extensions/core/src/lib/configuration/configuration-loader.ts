@@ -7,18 +7,27 @@
 import { exists, filePath, isDirectory } from "@azure-tools/async-io";
 import { DataHandle, IFileSystem, LazyPromise, RealFileSystem } from "@azure-tools/datastore";
 import { Extension, ExtensionManager, LocalExtension } from "@azure-tools/extension";
-import { CreateFileUri, CreateFolderUri, ResolveUri, simplifyUri, IsUri, ParentFolderUri } from "@azure-tools/uri";
+import {
+  CreateFileUri,
+  CreateFolderUri,
+  ResolveUri,
+  simplifyUri,
+  IsUri,
+  ParentFolderUri,
+  FileUriToPath,
+} from "@azure-tools/uri";
 import { join } from "path";
-import { OperationAbortedException, parseCodeBlocks } from "@autorest/common";
+import { AutorestLogger, OperationAbortedException, parseCodeBlocks } from "@autorest/common";
 import { Channel, SourceLocation } from "../message";
 import { AutoRestExtension } from "../pipeline/plugin-endpoint";
 import { AppRoot } from "../constants";
-import { AutorestRawConfiguration, arrayOf } from "@autorest/configuration";
+import { AutorestRawConfiguration, arrayOf, ConfigurationManager } from "@autorest/configuration";
 import { AutorestContext, createAutorestContext } from "./autorest-context";
 import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
 import { detectConfigurationFile } from "./configuration-file-resolver";
 import { getIncludedConfigurationFiles } from "./loading-utils";
+import { readConfigurationFile } from "@autorest/configuration/dist/configuration-manager/configuration-file";
 
 const inWebpack = typeof __webpack_require__ === "function";
 const pathToYarnCli = inWebpack ? `${__dirname}/yarn/cli.js` : undefined;
@@ -112,6 +121,7 @@ export class ConfigurationLoader {
     ),
   );
 
+  // TODO-TIM consume this in configuration manager
   private async desugarRawConfig(configs: any): Promise<any> {
     // shallow copy
     configs = { ...configs };
@@ -173,10 +183,6 @@ export class ConfigurationLoader {
     return configs;
   }
 
-  private async desugarRawConfigs(configs: Array<any>): Promise<Array<any>> {
-    return Promise.all(configs.map((c) => this.desugarRawConfig(c)));
-  }
-
   public static async shutdown() {
     try {
       AutoRestExtension.killAll();
@@ -217,32 +223,22 @@ export class ConfigurationLoader {
       : this.configFileOrFolderUri || "file:///";
 
     const configurationFiles: { [key: string]: any } = {};
-    const configSegments: AutorestRawConfiguration[] = [];
-    const secondPass: AutorestRawConfiguration[] = [];
 
-    const createView = (segments: Array<any> = configSegments) => {
-      return createAutorestContext(
-        configurationFiles,
-        this.fileSystem,
-        messageEmitter,
-        configFileFolderUri,
-        ...segments,
-      );
+    const logger: AutorestLogger = {
+      // TODO-TIM define correctly.
+      trackError: () => null,
     };
 
-    const addSegments = async (configs: Array<any>, keepInSecondPass = true): Promise<Array<any>> => {
-      const segs = await this.desugarRawConfigs(configs);
-      configSegments.push(...segs);
-      if (keepInSecondPass) {
-        secondPass.push(...segs);
-      }
-      return segs;
-    };
+    const manager = new ConfigurationManager(this.fileSystem, messageEmitter.DataStore, logger);
 
-    const fsInputView = messageEmitter.DataStore.GetReadThroughScope(this.fileSystem);
+    const resolveConfig = () => manager.resolveConfig();
 
     // 1. overrides (CLI, ...)
-    await addSegments(configs, false);
+    // await addSegments(configs, false);
+    for (const config of configs) {
+      manager.addConfig(config);
+    }
+
     // 2. file
     if (configFileUri !== null) {
       // add loaded files to the input files.
@@ -250,16 +246,13 @@ export class ConfigurationLoader {
         Channel: Channel.Verbose,
         Text: `> Initial configuration file '${configFileUri}'`,
       });
-      configurationFiles[configFileUri] = await (await fsInputView.ReadStrict(configFileUri)).ReadData();
-
-      const blocks = await this.parseCodeBlocks(await fsInputView.ReadStrict(configFileUri), await createView());
-      await addSegments(blocks.reverse(), false);
+      manager.addRawConfigFile(configFileUri);
     }
 
     // 3. resolve 'require'd configuration
     const addedConfigs = new Set<string>();
-    const includeFn = async (fsToUse: IFileSystem) => {
-      for await (let additionalConfig of getIncludedConfigurationFiles(createView, fsToUse, addedConfigs)) {
+    const resolveRequiredConfigs = async (fsToUse: IFileSystem) => {
+      for await (let additionalConfig of getIncludedConfigurationFiles(resolveConfig, fsToUse, addedConfigs)) {
         // acquire additional configs
         try {
           additionalConfig = simplifyUri(additionalConfig);
@@ -277,10 +270,8 @@ export class ConfigurationLoader {
           // merge config
 
           const inputView = messageEmitter.DataStore.GetReadThroughScope(fsToUse);
-
-          configurationFiles[additionalConfig] = await (await inputView.ReadStrict(additionalConfig)).ReadData();
-          const blocks = await this.parseCodeBlocks(await inputView.ReadStrict(additionalConfig), await createView());
-          await addSegments(blocks.reverse());
+          const data = await inputView.ReadStrict(additionalConfig);
+          manager.addConfigFile(await readConfigurationFile(data, logger, messageEmitter.DataStore.getDataSink()));
         } catch (e) {
           messageEmitter.Message.Dispatch({
             Channel: Channel.Fatal,
@@ -290,35 +281,36 @@ export class ConfigurationLoader {
         }
       }
     };
-    await includeFn(this.fileSystem);
+    await resolveRequiredConfigs(this.fileSystem);
 
     // 4. default configuration
     const fsLocal = new RealFileSystem();
     if (includeDefault) {
       const inputView = messageEmitter.DataStore.GetReadThroughScope(fsLocal);
-      const blocks = await this.parseCodeBlocks(
-        await inputView.ReadStrict(ResolveUri(CreateFolderUri(AppRoot), "resources/default-configuration.md")),
-        await createView(),
-      );
-      await addSegments(blocks.reverse());
+      const defaultConfigUri = ResolveUri(CreateFolderUri(AppRoot), "resources/default-configuration.md");
+      const data = await inputView.ReadStrict(defaultConfigUri);
+      manager.addConfigFile(await readConfigurationFile(data, logger, messageEmitter.DataStore.getDataSink()));
     }
 
-    await includeFn(fsLocal);
-    const messageFormat = (await createView()).GetEntry("message-format");
+    await resolveRequiredConfigs(fsLocal);
+    const messageFormat = resolveConfig()["message-format"];
 
     // 5. resolve extensions
     const extMgr = await ConfigurationLoader.extensionManager;
     const addedExtensions = new Set<string>();
 
-    const resolveExtensions = async () => {
-      const viewsToHandle: Array<AutorestContext> = [await createView()];
+    const resolveExtensionConfigs = async () => {
+      const viewsToHandle: Array<AutorestRawConfiguration> = [resolveConfig()];
       while (viewsToHandle.length > 0) {
-        const tmpView = <AutorestContext>viewsToHandle.pop();
-        const additionalExtensions = tmpView.UseExtensions.filter((ext) => !addedExtensions.has(ext.fullyQualified));
-        await addSegments([{ "used-extension": tmpView.UseExtensions.map((x) => x.fullyQualified) }]);
+        const tmpView = viewsToHandle.pop() as AutorestRawConfiguration;
+        const extensions = resolveExtensions(tmpView);
+        const additionalExtensions = extensions.filter((ext) => !addedExtensions.has(ext.fullyQualified));
+        // TODO-TIM can use additionalExtensions instead of extensions
+        manager.addConfig({ "used-extension": extensions.map((x) => x.fullyQualified) });
         if (additionalExtensions.length === 0) {
           continue;
         }
+
         // acquire additional extensions
         for (const additionalExtension of additionalExtensions) {
           try {
@@ -341,8 +333,10 @@ export class ConfigurationLoader {
 
               // trim off the '@org' and 'autorest.' from the name.
               const shortname = additionalExtension.name.split("/").last.replace(/^autorest\./gi, "");
-              const view = [...(await createView()).getNestedConfiguration(shortname)];
-              const enableDebugger = view.length > 0 ? <boolean>view[0].GetEntry("debugger") : false;
+
+              // TODO-TIM: handle this scenario:
+              // const view = [...(await createView()).getNestedConfiguration(shortname)];
+              const enableDebugger = tmpView["debugger"];
 
               // Add a hint here to make legacy users to be aware that the default version has been bumped to 3.0+.
               if (shortname === "powershell") {
@@ -428,27 +422,31 @@ export class ConfigurationLoader {
                 }
               }
             }
-            await includeFn(fsLocal);
+            await resolveRequiredConfigs(fsLocal);
 
             // merge config from extension
             const inputView = messageEmitter.DataStore.GetReadThroughScope(new RealFileSystem());
 
-            const cp = simplifyUri(CreateFileUri(await ext.extension.configurationPath));
+            const extensionConfigurationUri = simplifyUri(CreateFileUri(await ext.extension.configurationPath));
             messageEmitter.Message.Dispatch({
               Channel: Channel.Verbose,
-              Text: `> Including extension configuration file '${cp}'`,
+              Text: `> Including extension configuration file '${extensionConfigurationUri}'`,
             });
 
-            const blocks = await this.parseCodeBlocks(await inputView.ReadStrict(cp), await createView());
+            // const data = await inputView.ReadStrict(extensionConfigurationUri);
+            // manager.addConfigFile(await readConfigurationFile(data, logger, messageEmitter.DataStore.getDataSink()));
+
             // even though we load extensions after the default configuration, I want them to be able to
             // trigger changes in the default configuration loading (ie, an extension can set a flag to use a different pipeline.)
-            viewsToHandle.push(
-              await createView(
-                await addSegments(
-                  blocks.reverse().map((each) => (each["pipeline-model"] ? { ...each, "load-priority": 1000 } : each)),
-                ),
-              ),
-            );
+
+            // TODO-TIM check this. Maybe just combine the file.
+            // await createView(
+            //   await addSegments(
+            //     blocks.reverse().map((each) => (each["pipeline-model"] ? { ...each, "load-priority": 1000 } : each)),
+            //   ),
+            // ),
+
+            viewsToHandle.push(resolveConfig());
           } catch (e) {
             messageEmitter.Message.Dispatch({
               Channel: Channel.Fatal,
@@ -457,15 +455,15 @@ export class ConfigurationLoader {
             throw e;
           }
         }
-        await includeFn(fsLocal);
+        await resolveRequiredConfigs(fsLocal);
       }
 
       // resolve any outstanding includes again
-      await includeFn(fsLocal);
+      await resolveRequiredConfigs(fsLocal);
     };
 
     // resolve the extensions
-    await resolveExtensions();
+    await resolveExtensionConfigs();
 
     // re-acquire CLI and configuration files at a lower priority
     // this enables the configuration of a plugin to specify stuff like `pipeline-model`
@@ -477,19 +475,34 @@ export class ConfigurationLoader {
 
     // it's only marginally hackey...
 
+    // TODO-TIM reload this.
     // reload files
-    if (configFileUri !== null) {
-      const blocks = await this.parseCodeBlocks(await fsInputView.ReadStrict(configFileUri), await createView());
-      await addSegments(blocks.reverse(), false);
-      await includeFn(this.fileSystem);
-      await resolveExtensions();
+    // if (configFileUri !== null) {
+    //   const blocks = await this.parseCodeBlocks(await fsInputView.ReadStrict(configFileUri), await createView());
+    //   await addSegments(blocks.reverse(), false);
+    //   await resolveRequiredConfigs(this.fileSystem);
+    //   await resolveExtensions();
 
-      return await createView([...configs, ...blocks, ...secondPass]);
-    }
+    //   return await createView([...configs, ...blocks, ...secondPass]);
+    // }
 
-    await resolveExtensions();
+    // await resolveExtensions();
 
     // return the final view
-    return await createView();
+    return new AutorestContext(manager.resolveConfig(), this.fileSystem, messageEmitter, configFileFolderUri);
   }
 }
+
+const resolveExtensions = (
+  config: AutorestRawConfiguration,
+): Array<{ name: string; source: string; fullyQualified: string }> => {
+  const useExtensions = config["use-extension"] || {};
+  return Object.keys(useExtensions).map((name) => {
+    const source = useExtensions[name].startsWith("file://") ? FileUriToPath(useExtensions[name]) : useExtensions[name];
+    return {
+      name,
+      source,
+      fullyQualified: JSON.stringify([name, source]),
+    };
+  });
+};
