@@ -42,6 +42,7 @@ export const createAutorestContext = async (
 
 export class AutorestContext implements AutorestLogger {
   public config: AutorestConfiguration;
+  public configFileFolderUri: string;
 
   private suppressor: Suppressor;
 
@@ -49,9 +50,9 @@ export class AutorestContext implements AutorestLogger {
     config: AutorestConfiguration,
     public fileSystem: CachingFileSystem,
     public messageEmitter: MessageEmitter,
-    public configFileFolderUri: string,
   ) {
     this.config = config;
+    this.configFileFolderUri = config.configFileFolderUri;
     this.suppressor = new Suppressor(this);
   }
 
@@ -65,6 +66,20 @@ export class AutorestContext implements AutorestLogger {
   public verbose(message: string) {
     this.Message({
       Channel: Channel.Verbose,
+      Text: message,
+    });
+  }
+
+  public info(message: string) {
+    this.Message({
+      Channel: Channel.Information,
+      Text: message,
+    });
+  }
+
+  public fatal(message: string) {
+    this.Message({
+      Channel: Channel.Fatal,
       Text: message,
     });
   }

@@ -3,6 +3,7 @@ import { omit } from "lodash";
 import { AutorestRawConfiguration } from "./autorest-raw-configuration";
 import fs from "fs";
 import { IsUri } from "@azure-tools/uri";
+import { exists } from "./utils";
 
 const desugarUseField = async (use: string[] | string) => {
   // Create an empty extension manager to be able to call findPackages.
@@ -38,7 +39,7 @@ const desugarUseField = async (use: string[] | string) => {
             extensions[pkg.name] = version;
           } else {
             // it's either a location or just the name
-            if (IsUri(identity) || (await fs.promises.access(identity))) {
+            if (IsUri(identity) || (await exists(identity))) {
               // seems like it's a location to something. we don't know the actual name at this point.
               const pkg = await extMgr.findPackage("plugin", identity);
               extensions[pkg.name] = identity;

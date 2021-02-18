@@ -42,6 +42,8 @@ export interface AutorestLogger {
    * Provide a way for the user to supress some warnings.
    */
   verbose(message: string): void;
+  info(message: string): void;
+  fatal(message: string): void;
 
   /**
    * Track an error that occurred.

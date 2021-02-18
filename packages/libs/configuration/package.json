@@ -42,6 +42,7 @@
     "@azure-tools/datastore": "~4.1.271",
     "@azure-tools/extension": "~3.1.272",
     "@azure-tools/uri": "~3.0.0",
-    "lodash": "~4.17.20"
+    "lodash": "~4.17.20",
+    "untildify": "^4.0.0"
   }
 }

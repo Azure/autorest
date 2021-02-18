@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ConfigurationLoader, AutorestContext, MessageEmitter } from "./configuration";
+import { AutorestContextLoader, AutorestContext, MessageEmitter } from "./configuration";
 import { EventEmitter, IEvent } from "./events";
 import { Exception } from "@autorest/common";
 import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
@@ -78,7 +78,7 @@ export class AutoRest extends EventEmitter {
     messageEmitter.ClearFolder.Subscribe((cfg, folder) => this.ClearFolder.Dispatch(folder));
     messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
 
-    return (this._view = await new ConfigurationLoader(this.fileSystem, this.configFileOrFolderUri).CreateView(
+    return (this._view = await new AutorestContextLoader(this.fileSystem, this.configFileOrFolderUri).CreateView(
       messageEmitter,
       includeDefault,
       ...this._configurations,
@@ -273,7 +273,7 @@ export async function IsOpenApiDocument(content: string): Promise<boolean> {
  * Shuts down any active autorest extension processes.
  */
 export async function Shutdown() {
-  await ConfigurationLoader.shutdown();
+  await AutorestContextLoader.shutdown();
 }
 
 /**

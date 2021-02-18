@@ -85,7 +85,6 @@ dependencies:
   semver: 5.7.1
   source-map: 0.5.6
   source-map-support: 0.5.19
-  static-link: 0.3.0
   supertest: 6.1.3
   tree-sitter: 0.17.1
   tree-sitter-python: 0.16.1
@@ -97,7 +96,7 @@ dependencies:
   ts-node: 9.1.1_typescript@4.1.3
   typescript: 4.1.3
   typescript-json-schema: 0.40.0
-  untildify: 3.0.3
+  untildify: 4.0.0
   vscode-jsonrpc: 3.6.2
   vscode-languageserver: 3.5.1
   webpack: 5.18.0_webpack-cli@4.4.0
@@ -9168,6 +9167,12 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-iSk/J8efr8uPT/Z4eSUywnqyrQU7DSdMfdqK4iWEaUVVmcP5JcnpRqmVMwcwcnmI1ATFNgC5V90u09tBynNFKA==
+  /untildify/4.0.0:
+    dev: false
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-KK8xQ1mkzZeg9inewmFVDNkg3l5LUhoq9kN6iWYB/CC9YMG8HA+c1Q8HwDe6dEX7kErrEVNVBO3fWsVq5iDgtw==
   /uri-js/4.4.1:
     dependencies:
       punycode: 2.1.1
@@ -9923,7 +9928,7 @@ packages:
       ts-node: '*'
       webpack-cli: '*'
     resolution:
-      integrity: sha512-ACuGPhIdPEll6vkp5TFiNNIImxsrxGjIaZ8eEZ55p3tCLRT2iqvlP/vWNdkOZ4AeprsOl4zmN6ggbZaaCamXbA==
+      integrity: sha512-CHVmhRf95lCqV0zGRbFG3doyCD+HFIlw35Y3AO7Ext9oQ5u+a5OraPQRXn7hy6HPku1nlnr3HQrkprg9fhWy3w==
       tarball: file:projects/autorest.tgz
     version: 0.0.0
   file:projects/codegen.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -10038,7 +10043,9 @@ packages:
     version: 0.0.0
   file:projects/configuration.tgz_prettier@2.2.1+ts-node@9.1.1:
     dependencies:
+      '@azure-tools/uri': 3.0.255
       '@types/jest': 26.0.20
+      '@types/lodash': 4.14.168
       '@types/node': 14.14.22
       '@typescript-eslint/eslint-plugin': 4.14.2_e5f964fa93e839b7a7927397f6cb9cb1
       '@typescript-eslint/parser': 4.14.2_eslint@7.19.0+typescript@4.1.3
@@ -10046,8 +10053,10 @@ packages:
       eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
       eslint-plugin-unicorn: 27.0.0_eslint@7.19.0
       jest: 26.6.3_ts-node@9.1.1
+      lodash: 4.17.20
       rimraf: 3.0.2
       typescript: 4.1.3
+      untildify: 4.0.0
     dev: false
     id: file:projects/configuration.tgz
     name: '@rush-temp/configuration'
@@ -10055,7 +10064,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-EVrxkL1FDh6fBjFjOyXeDB5zySa2JZVha4LWxkSDNs7OsT/0+8FgbxyN1JRQ0y/jTf2Im0iX0lp//ZCDYXM6DA==
+      integrity: sha512-3fnowIdP9OZD7Nd03NWu2emW5vy7e4zcu3ci1fdutTrzt3V6JXizvu4IEObOhtGG3YCsyp5Ez2jb9kMiJCF75w==
       tarball: file:projects/configuration.tgz
     version: 0.0.0
   file:projects/core.tgz_ts-node@9.1.1:
@@ -10077,6 +10086,7 @@ packages:
       '@typescript-eslint/parser': 4.14.2_eslint@7.19.0+typescript@4.1.3
       commonmark: 0.27.0
       compare-versions: 3.6.0
+      copy-webpack-plugin: 7.0.0_webpack@5.18.0
       cpy-cli: 2.0.0
       eslint: 7.19.0
       eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
@@ -10109,7 +10119,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-+4rTtSdQpQCAaIAlnbYo6aex4H0LIgLjnKkxJH/o4gXz7jlEwq+gt+gk+sVR1n+0cpBbO4vvu+W9ylFzYO3MfA==
+      integrity: sha512-mQxkS7D5QcAZISlw8X308WEoGza55+CXLdpuZTIMF1CQwOosPkATnSYOV0dk/yKg0Q6qaSUcJS1uRVZegLv+Aw==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -10496,7 +10506,6 @@ specifiers:
   semver: ^5.5.1
   source-map: 0.5.6
   source-map-support: ^0.5.19
-  static-link: ^0.3.0
   supertest: ^6.0.1
   tree-sitter: ^0.17.0
   tree-sitter-python: ^0.16.0
@@ -10508,7 +10517,7 @@ specifiers:
   ts-node: ^9.1.1
   typescript: ~4.1.3
   typescript-json-schema: ~0.40.0
-  untildify: ^3.0.2
+  untildify: ^4.0.0
   vscode-jsonrpc: ^3.5.0
   vscode-languageserver: 3.5.1
   webpack: ~5.18.0
