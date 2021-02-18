@@ -1,5 +1,5 @@
 import { evaluateGuard, mergeOverwriteOrAppend } from "@autorest/common";
-import { AutorestRawConfiguration } from "@autorest/configuration";
+import { AutorestRawConfiguration } from "./autorest-raw-configuration";
 
 export const mergeConfigurations = (...configs: Array<AutorestRawConfiguration>): AutorestRawConfiguration => {
   let result: AutorestRawConfiguration = {};

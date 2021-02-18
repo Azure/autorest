@@ -19,8 +19,13 @@ import { Directive, ResolvedDirective } from "@autorest/configuration";
 import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
 import { IEvent } from "../events";
-import { createAutorestConfiguration, extendAutorestConfiguration } from "./autorest-configuration";
-import { AutorestConfiguration, AutorestRawConfiguration, arrayOf } from "@autorest/configuration";
+import {
+  AutorestConfiguration,
+  AutorestRawConfiguration,
+  arrayOf,
+  createAutorestConfiguration,
+  extendAutorestConfiguration,
+} from "@autorest/configuration";
 import { AutorestError, AutorestLogger } from "@autorest/common";
 
 const safeEval = createSandbox();
