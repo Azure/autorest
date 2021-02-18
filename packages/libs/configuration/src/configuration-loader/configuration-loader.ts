@@ -124,63 +124,59 @@ export class ConfigurationLoader {
     const addedExtensions = new Set<string>();
     const extensions: ResolvedExtension[] = [];
 
-    const resolveExtensionConfigs = async () => {
-      const viewsToHandle: Array<AutorestRawConfiguration> = [resolveConfig()];
-      while (viewsToHandle.length > 0) {
-        const config = viewsToHandle.pop() as AutorestRawConfiguration;
-        const extensionDefs = resolveExtensions(config);
-        const additionalExtensions = extensionDefs.filter((ext) => !addedExtensions.has(ext.fullyQualified));
-        // TODO-TIM can use additionalExtensions instead of extensions
-        await manager.addConfig({ "used-extension": extensionDefs.map((x) => x.fullyQualified) });
-        if (additionalExtensions.length === 0) {
-          continue;
-        }
+    const viewsToHandle: AutorestRawConfiguration[] = [await resolveConfig()];
+    while (viewsToHandle.length > 0) {
+      const config = viewsToHandle.pop() as AutorestRawConfiguration;
+      const extensionDefs = resolveExtensions(config);
 
-        // acquire additional extensions
-        for (const additionalExtension of additionalExtensions) {
-          try {
-            addedExtensions.add(additionalExtension.fullyQualified);
-
-            const extension = await this.resolveExtension(additionalExtension);
-            extensions.push({ extension, definition: additionalExtension });
-            await resolveRequiredConfigs(fsLocal);
-
-            // merge config from extension
-            const inputView = this.dataStore.GetReadThroughScope(new RealFileSystem());
-
-            const extensionConfigurationUri = simplifyUri(CreateFileUri(await extension.configurationPath));
-            this.logger.verbose(`> Including extension configuration file '${extensionConfigurationUri}'`);
-
-            const data = await inputView.ReadStrict(extensionConfigurationUri);
-            manager.addConfigFile(await readConfigurationFile(data, this.logger, this.dataStore.getDataSink()));
-
-            // even though we load extensions after the default configuration, I want them to be able to
-            // trigger changes in the default configuration loading (ie, an extension can set a flag to use a different pipeline.)
-
-            // TODO-TIM check this. Maybe just combine the file.
-            // await createView(
-            //   await addSegments(
-            //     blocks.reverse().map((each) => (each["pipeline-model"] ? { ...each, "load-priority": 1000 } : each)),
-            //   ),
-            // ),
-
-            viewsToHandle.push(resolveConfig());
-          } catch (e) {
-            this.logger.fatal(
-              `Failed to install extension '${additionalExtension.name}' (${additionalExtension.source})`,
-            );
-            throw e;
-          }
-        }
-        await resolveRequiredConfigs(fsLocal);
+      const additionalExtensions = extensionDefs.filter((ext) => !addedExtensions.has(ext.fullyQualified));
+      // TODO-TIM can use additionalExtensions instead of extensions
+      await manager.addConfig({ "used-extension": extensionDefs.map((x) => x.fullyQualified) });
+      if (additionalExtensions.length === 0) {
+        continue;
       }
 
-      // resolve any outstanding includes again
-      await resolveRequiredConfigs(fsLocal);
-    };
+      // acquire additional extensions
+      for (const additionalExtension of additionalExtensions) {
+        try {
+          addedExtensions.add(additionalExtension.fullyQualified);
 
-    // resolve the extensions
-    await resolveExtensionConfigs();
+          const extension = await this.resolveExtension(additionalExtension);
+          extensions.push({ extension, definition: additionalExtension });
+          await resolveRequiredConfigs(fsLocal);
+
+          // merge config from extension
+          const inputView = this.dataStore.GetReadThroughScope(new RealFileSystem());
+
+          const extensionConfigurationUri = simplifyUri(CreateFileUri(await extension.configurationPath));
+          this.logger.verbose(`> Including extension configuration file '${extensionConfigurationUri}'`);
+
+          const data = await inputView.ReadStrict(extensionConfigurationUri);
+          manager.addConfigFile(await readConfigurationFile(data, this.logger, this.dataStore.getDataSink()));
+
+          // even though we load extensions after the default configuration, I want them to be able to
+          // trigger changes in the default configuration loading (ie, an extension can set a flag to use a different pipeline.)
+
+          // TODO-TIM check this. Maybe just combine the file.
+          // await createView(
+          //   await addSegments(
+          //     blocks.reverse().map((each) => (each["pipeline-model"] ? { ...each, "load-priority": 1000 } : each)),
+          //   ),
+          // ),
+
+          viewsToHandle.push(await resolveConfig());
+        } catch (e) {
+          this.logger.fatal(
+            `Failed to install extension '${additionalExtension.name}' (${additionalExtension.source})`,
+          );
+          throw e;
+        }
+      }
+      await resolveRequiredConfigs(fsLocal);
+    }
+
+    // resolve any outstanding includes again
+    await resolveRequiredConfigs(fsLocal);
 
     // re-acquire CLI and configuration files at a lower priority
     // this enables the configuration of a plugin to specify stuff like `pipeline-model`
@@ -212,23 +208,23 @@ export class ConfigurationLoader {
 
   /**
    * Returns the @see Extension object for the requested extension.
-   * @param resolvedExtension extension definition.
+   * @param extensionDef extension definition.
    * @param messageFormat message format.
    */
-  private async resolveExtension(resolvedExtension: ExtensionDefinition): Promise<Extension> {
-    let localPath = untildify(resolvedExtension.source);
+  private async resolveExtension(extensionDef: ExtensionDefinition): Promise<Extension> {
+    let localPath = untildify(extensionDef.source);
 
     // try resolving the package locally (useful for self-contained)
     try {
       const fileProbe = "/package.json";
-      localPath = require.resolve(resolvedExtension.name + fileProbe); // have to resolve specific file - resolving a package by name will fail if no 'main' is present
+      localPath = require.resolve(extensionDef.name + fileProbe); // have to resolve specific file - resolving a package by name will fail if no 'main' is present
       localPath = localPath.slice(0, localPath.length - fileProbe.length);
     } catch {
       // no worries
     }
 
     // trim off the '@org' and 'autorest.' from the name.
-    const shortname = resolvedExtension.name.split("/").last.replace(/^autorest\./gi, "");
+    const shortname = extensionDef.name.split("/").last.replace(/^autorest\./gi, "");
 
     // Add a hint here to make legacy users to be aware that the default version has been bumped to 3.0+.
     if (shortname === "powershell") {
@@ -240,30 +236,27 @@ export class ConfigurationLoader {
     if ((await exists(localPath)) && !localPath.endsWith(".tgz")) {
       localPath = filePath(localPath);
       // local package
-      this.logger.info(`> Loading local AutoRest extension '${resolvedExtension.name}' (${localPath})`);
+      this.logger.info(`> Loading local AutoRest extension '${extensionDef.name}' (${localPath})`);
 
-      const pack = await this.extMgr.findPackage(resolvedExtension.name, localPath);
+      const pack = await this.extMgr.findPackage(extensionDef.name, localPath);
       return new LocalExtension(pack, localPath);
     } else {
       // remote package`
-      const installedExtension = await this.extMgr.getInstalledExtension(
-        resolvedExtension.name,
-        resolvedExtension.source,
-      );
+      const installedExtension = await this.extMgr.getInstalledExtension(extensionDef.name, extensionDef.source);
       if (installedExtension) {
         this.logger.info(
-          `> Loading AutoRest extension '${resolvedExtension.name}' (${resolvedExtension.source}->${installedExtension.version})`,
+          `> Loading AutoRest extension '${extensionDef.name}' (${extensionDef.source}->${installedExtension.version})`,
         );
         return installedExtension;
       } else {
         // acquire extension
-        const pack = await this.extMgr.findPackage(resolvedExtension.name, resolvedExtension.source);
-        this.logger.info(`> Installing AutoRest extension '${resolvedExtension.name}' (${resolvedExtension.source})`);
+        const pack = await this.extMgr.findPackage(extensionDef.name, extensionDef.source);
+        this.logger.info(`> Installing AutoRest extension '${extensionDef.name}' (${extensionDef.source})`);
         const extension = await this.extMgr.installPackage(pack, false, 5 * 60 * 1000, (progressInit: any) =>
           progressInit.Message.Subscribe((s: any, m: any) => this.logger.verbose(m)),
         );
         this.logger.info(
-          `> Installed AutoRest extension '${resolvedExtension.name}' (${resolvedExtension.source}->${extension.version})`,
+          `> Installed AutoRest extension '${extensionDef.name}' (${extensionDef.source}->${extension.version})`,
         );
         return extension;
       }

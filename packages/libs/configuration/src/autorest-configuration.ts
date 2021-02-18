@@ -123,7 +123,7 @@ export function* getNestedConfiguration(
   if (pp.length > 1) {
     const n = getNestedConfiguration(config, pp[0]);
     for (const s of n) {
-      yield* s.getNestedConfiguration(pp.slice(1).join("."));
+      yield* getNestedConfiguration(s, pp.slice(1).join("."));
     }
     return;
   }

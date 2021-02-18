@@ -4,10 +4,11 @@ import { AutorestRawConfiguration } from "./autorest-raw-configuration";
 import fs from "fs";
 import { IsUri } from "@azure-tools/uri";
 import { exists } from "./utils";
+import os from "os";
 
 const desugarUseField = async (use: string[] | string) => {
   // Create an empty extension manager to be able to call findPackages.
-  const extMgr = await ExtensionManager.Create("");
+  const extMgr = await ExtensionManager.Create(os.tmpdir());
   const useArray = typeof use === "string" ? [use] : use;
   const extensions: Record<string, string> = {};
   for (const useEntry of useArray) {

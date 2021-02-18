@@ -105,8 +105,6 @@ export class AutorestContextLoader {
 
     const { config, extensions } = await loader.load(configs, includeDefault);
     this.setupExtensions(config, extensions);
-
-    // TODO-TIM handle starting extensions
     return new AutorestContext(config, this.fileSystem, messageEmitter);
   }
 
@@ -115,7 +113,7 @@ export class AutorestContextLoader {
       if (!loadedExtensions[definition.fullyQualified]) {
         const shortname = definition.name.split("/").last.replace(/^autorest\./gi, "");
         const nestedConfig = [...getNestedConfiguration(config, shortname)][0];
-        const enableDebugger = nestedConfig["debugger"];
+        const enableDebugger = nestedConfig?.["debugger"];
 
         loadedExtensions[definition.fullyQualified] = {
           extension,

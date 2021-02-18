@@ -44,7 +44,7 @@ export class ConfigurationManager {
     this.configItems.push({ type: "simple", config: await desugarRawConfig(config) });
   }
 
-  public async addConfigFile(file: ConfigurationFile) {
+  public addConfigFile(file: ConfigurationFile) {
     this.configItems.push(file);
   }
 
