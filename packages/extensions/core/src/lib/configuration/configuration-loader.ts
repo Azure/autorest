@@ -4,7 +4,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { exists, filePath, isDirectory } from "@azure-tools/async-io";
+import { exists, filePath } from "@azure-tools/async-io";
 import { IFileSystem, LazyPromise, RealFileSystem } from "@azure-tools/datastore";
 import { Extension, ExtensionManager, LocalExtension } from "@azure-tools/extension";
 import { CreateFileUri, CreateFolderUri, ResolveUri, simplifyUri, IsUri, FileUriToPath } from "@azure-tools/uri";
@@ -13,13 +13,16 @@ import { AutorestLogger } from "@autorest/common";
 import { Channel } from "../message";
 import { AutoRestExtension } from "../pipeline/plugin-endpoint";
 import { AppRoot } from "../constants";
-import { AutorestRawConfiguration, ConfigurationManager } from "@autorest/configuration";
+import {
+  AutorestRawConfiguration,
+  ConfigurationManager,
+  readConfigurationFile,
+  CachingFileSystem,
+} from "@autorest/configuration";
 import { AutorestContext } from "./autorest-context";
-import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
 import { detectConfigurationFile } from "./configuration-file-resolver";
 import { getIncludedConfigurationFiles } from "./loading-utils";
-import { readConfigurationFile } from "@autorest/configuration/dist/configuration-manager/configuration-file";
 
 const inWebpack = typeof __webpack_require__ === "function";
 const pathToYarnCli = inWebpack ? `${__dirname}/yarn/cli.js` : undefined;

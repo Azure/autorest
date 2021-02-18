@@ -8,15 +8,13 @@ import {
   TryDecodeEnhancedPositionFromName,
 } from "@azure-tools/datastore";
 import { clone, values } from "@azure-tools/linq";
-import { EnsureIsFolderUri, ResolveUri, IsUri, FileUriToPath } from "@azure-tools/uri";
 import { From } from "linq-es2015";
 import { basename, dirname } from "path";
 import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
 import { Artifact } from "../artifact";
 import { Channel, Message, Range, SourceLocation } from "../message";
 import { Suppressor } from "../pipeline/suppression";
-import { Directive, ResolvedDirective } from "@autorest/configuration";
-import { CachingFileSystem } from "./caching-file-system";
+import { Directive, ResolvedDirective, CachingFileSystem } from "@autorest/configuration";
 import { MessageEmitter } from "./message-emitter";
 import { IEvent } from "../events";
 import {

@@ -2,11 +2,12 @@ import { IFileSystem } from "@azure-tools/datastore";
 
 export class CachingFileSystem implements IFileSystem {
   protected cache = new Map<string, string | Error>();
-
   constructor(protected actualFileSystem: IFileSystem) {}
+
   EnumerateFileUris(folderUri: string): Promise<Array<string>> {
     return this.actualFileSystem.EnumerateFileUris(folderUri);
   }
+
   async ReadFile(uri: string): Promise<string> {
     const content = this.cache.get(uri);
     if (content !== undefined) {
