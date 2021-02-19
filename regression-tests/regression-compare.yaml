@@ -63,7 +63,7 @@ languages:
     outputPath: ./output/python
     oldArgs:
       - --version:3.0.6371
-      - --use:@autorest/modelerfour@4.15.451
+      - --use:@autorest/modelerfour@4.16.3-dev.1
       - --use:@autorest/python@5.5.0
     newArgs:
       - --version:3.0.6371
@@ -75,7 +75,7 @@ languages:
     oldArgs:
       - --v3
       - --version:3.0.6371
-      - --use:@autorest/modelerfour@4.15.451
+      - --use:@autorest/modelerfour@4.16.3-dev.1
       - --package-name:test-package
       - --title:TestClient
       - --use:@autorest/typescript@6.0.0-dev.20201208.1
