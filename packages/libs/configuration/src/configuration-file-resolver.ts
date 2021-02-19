@@ -15,7 +15,7 @@ export const detectConfigurationFile = async (
   configFileOrFolderUri: string | null,
   logger?: AutorestLogger,
   walkUpFolders = false,
-): Promise<string | null> => {
+): Promise<string | undefined> => {
   const files = await detectConfigurationFiles(fileSystem, configFileOrFolderUri, logger, walkUpFolders);
 
   return (

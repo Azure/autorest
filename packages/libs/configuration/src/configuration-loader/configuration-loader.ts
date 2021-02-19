@@ -52,10 +52,10 @@ export class ConfigurationLoader {
     configs: AutorestRawConfiguration[],
     includeDefault: boolean,
   ): Promise<AutorestConfigurationResult> {
-    const configFileUri =
-      this.fileSystem && this.configFileOrFolderUri
-        ? await detectConfigurationFile(this.fileSystem, this.configFileOrFolderUri, this.logger)
-        : null;
+    const configFileUri = this.configFileOrFolderUri
+      ? await detectConfigurationFile(this.fileSystem, this.configFileOrFolderUri, this.logger)
+      : undefined;
+
     const configFileFolderUri = configFileUri
       ? ResolveUri(configFileUri, "./")
       : this.configFileOrFolderUri || "file:///";
@@ -73,7 +73,7 @@ export class ConfigurationLoader {
     }
 
     // 2. file
-    if (configFileUri !== null) {
+    if (configFileUri != null && configFileUri !== undefined) {
       // add loaded files to the input files.
       this.logger.verbose(`> Initial configuration file '${configFileUri}'`);
       const data = await this.dataStore.GetReadThroughScope(this.fileSystem).ReadStrict(configFileUri);
