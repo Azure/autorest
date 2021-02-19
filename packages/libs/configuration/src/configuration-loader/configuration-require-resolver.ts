@@ -1,10 +1,16 @@
 import { IFileSystem } from "@azure-tools/datastore";
 import { ResolveUri, IsUri, EnsureIsFolderUri } from "@azure-tools/uri";
-import { AutorestConfiguration } from "./autorest-configuration";
-import { arrayOf } from "./utils";
+import { AutorestConfiguration } from "../autorest-configuration";
+import { arrayOf } from "../utils";
 
+/**
+ * Resolve required configuration from the provided config.
+ * @param resolveConfig Callback to resolve current config.
+ * @param fileSystem Filesystem.
+ * @param ignoreFiles Current state of files already resolved.
+ */
 export async function* getIncludedConfigurationFiles(
-  configView: () => Promise<AutorestConfiguration>,
+  resolveConfig: () => Promise<AutorestConfiguration>,
   fileSystem: IFileSystem,
   ignoreFiles: Set<string>,
 ) {
@@ -12,7 +18,7 @@ export async function* getIncludedConfigurationFiles(
 
   while (!done) {
     // get a fresh copy of the view every time we start the loop.
-    const config = await configView();
+    const config = await resolveConfig();
 
     // if we make it thru the list, we're done.
     done = true;
@@ -32,7 +38,7 @@ export async function* getIncludedConfigurationFiles(
   done = false;
   while (!done) {
     // get a fresh copy of the view every time we start the loop.
-    const config = await configView();
+    const config = await resolveConfig();
 
     // if we make it thru the list, we're done.
     done = true;

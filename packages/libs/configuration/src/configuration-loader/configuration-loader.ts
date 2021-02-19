@@ -1,13 +1,13 @@
-import { DataStore, IFileSystem, LazyPromise, RealFileSystem } from "@azure-tools/datastore";
+import { DataStore, IFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import { Extension, ExtensionManager, LocalExtension } from "@azure-tools/extension";
-import { CreateFileUri, CreateFolderUri, ResolveUri, simplifyUri, FileUriToPath } from "@azure-tools/uri";
+import { CreateFileUri, ResolveUri, simplifyUri, FileUriToPath } from "@azure-tools/uri";
 import { AutorestLogger } from "@autorest/common";
 import untildify from "untildify";
 import { CachingFileSystem } from "../caching-file-system";
 import { AutorestConfiguration } from "../autorest-configuration";
 import { detectConfigurationFile } from "../configuration-file-resolver";
 import { ConfigurationManager, readConfigurationFile } from "../configuration-manager";
-import { getIncludedConfigurationFiles } from "../configuration-require-resolver";
+import { getIncludedConfigurationFiles } from "./configuration-require-resolver";
 import { AutorestRawConfiguration } from "../autorest-raw-configuration";
 import { exists, filePath } from "@azure-tools/async-io";
 
