@@ -14,6 +14,7 @@ import {
   CachingFileSystem,
   ConfigurationLoader,
   getNestedConfiguration,
+  mergeConfigurations,
   ResolvedExtension,
 } from "@autorest/configuration";
 import { AutorestContext } from "./autorest-context";
@@ -86,7 +87,7 @@ export class AutorestContextLoader {
     includeDefault: boolean,
     ...configs: AutorestRawConfiguration[]
   ): Promise<AutorestContext> {
-    const logger: AutorestLogger = new AutorestCoreLogger({} as any, messageEmitter);
+    const logger: AutorestLogger = new AutorestCoreLogger(mergeConfigurations(configs) as any, messageEmitter);
 
     const defaultConfigUri = ResolveUri(CreateFolderUri(AppRoot), "resources/default-configuration.md");
     const loader = new ConfigurationLoader(

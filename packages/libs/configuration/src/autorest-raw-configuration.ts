@@ -66,7 +66,6 @@ export interface AutorestRawConfiguration {
   "api-version"?: Array<string>;
 
   "pipeline-model"?: string;
-  "load-priority"?: number;
 
   "resolved-directive"?: any;
   "debugger"?: any;

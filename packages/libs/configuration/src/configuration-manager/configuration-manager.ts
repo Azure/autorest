@@ -52,7 +52,6 @@ export class ConfigurationManager {
     let current = initialConfig;
 
     const configFileNames = [];
-    // TODO-TIM take into account load-priority
     for (const configItem of this.configItems) {
       if (configItem.type === "file") {
         current = this.mergeConfigFile(current, configItem);

@@ -153,16 +153,6 @@ export class ConfigurationLoader {
           const data = await inputView.ReadStrict(extensionConfigurationUri);
           manager.addConfigFile(await readConfigurationFile(data, this.logger, this.dataStore.getDataSink()));
 
-          // even though we load extensions after the default configuration, I want them to be able to
-          // trigger changes in the default configuration loading (ie, an extension can set a flag to use a different pipeline.)
-
-          // TODO-TIM check this. Maybe just combine the file.
-          // await createView(
-          //   await addSegments(
-          //     blocks.reverse().map((each) => (each["pipeline-model"] ? { ...each, "load-priority": 1000 } : each)),
-          //   ),
-          // ),
-
           viewsToHandle.push(await resolveConfig());
         } catch (e) {
           this.logger.fatal(
@@ -176,31 +166,6 @@ export class ConfigurationLoader {
 
     // resolve any outstanding includes again
     await resolveRequiredConfigs(fsLocal);
-
-    // re-acquire CLI and configuration files at a lower priority
-    // this enables the configuration of a plugin to specify stuff like `pipeline-model`
-    // which would unlock a guarded section that has $(pipeline-model) == 'v3' in the yaml block.
-    // doing so would allow the configuration to load input-files that have that guard on
-
-    // and because this comes in at a lower-priority, it won't overwrite values that have been already
-    // set in a meaningful way.
-
-    // it's only marginally hackey...
-
-    // TODO-TIM reload this.
-    // reload files
-    // if (configFileUri !== null) {
-    //   const blocks = await this.parseCodeBlocks(await fsInputView.ReadStrict(configFileUri), await createView());
-    //   await addSegments(blocks.reverse(), false);
-    //   await resolveRequiredConfigs(this.fileSystem);
-    //   await resolveExtensions();
-
-    //   return await createView([...configs, ...blocks, ...secondPass]);
-    // }
-
-    // await resolveExtensions();
-
-    // return the final view
 
     return { config: await manager.resolveConfig(), extensions };
   }
