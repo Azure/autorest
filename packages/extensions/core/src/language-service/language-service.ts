@@ -452,7 +452,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
       // if the configuration change involved a change in the autorest configuration
       // we should activate all the open documents again.
       for (const document of this.all()) {
-        this.onDocumentChanged(document);
+        void this.onDocumentChanged(document);
       }
     }
   }
@@ -609,7 +609,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     for (const each of changes) {
       const doc = this.get(each.uri);
       if (doc) {
-        this.onDocumentChanged(doc);
+        void this.onDocumentChanged(doc);
         return;
       }
 
@@ -617,7 +617,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
       const txt = await this.ReadFile(each.uri);
       if (documentUri.startsWith("file://")) {
         // fake out a document for us to play with
-        this.onDocumentChanged({
+        void this.onDocumentChanged({
           uri: each.uri,
           languageId: "",
           version: 1,
@@ -732,13 +732,13 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
 
     if ((await IsOpenApiExtension(document.languageId)) && (await IsOpenApiDocument(document.getText()))) {
       // find the configuration file and activate that.
-      this.process(await this.getConfiguration(document.uri));
+      void this.process(await this.getConfiguration(document.uri));
       return;
     }
 
     // is this a config file?
     if ((await IsConfigurationExtension(document.languageId)) && (await isConfigurationDocument(document.getText()))) {
-      this.process(document.uri);
+      void this.process(document.uri);
       return;
     }
 
@@ -747,7 +747,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     const result = this.results.get(document.uri);
     if (result) {
       // this used to be a config file
-      result.cancel();
+      void result.cancel();
       result.clear();
     }
 
@@ -773,7 +773,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
           lineCount: 1,
         };
         this.virtualFile.set(configFile, document);
-        this.onDocumentChanged(document);
+        void this.onDocumentChanged(document);
       }
     }
   }

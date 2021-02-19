@@ -60,8 +60,8 @@ export class AutorestContext implements AutorestLogger {
     this.logger.trackError(error);
   }
 
-  public async Message(m: Message) {
-    await this.logger.message(m);
+  public Message(m: Message) {
+    void this.logger.message(m);
   }
 
   public resolveDirectives(predicate?: (each: ResolvedDirective) => boolean) {
@@ -166,7 +166,7 @@ export class AutorestContext implements AutorestLogger {
 
     let result = this.config;
     for (const keyPart of key.split(".")) {
-      result = result[keyPart];
+      result = result[keyPart as keyof AutorestRawConfiguration];
     }
     return result;
   }

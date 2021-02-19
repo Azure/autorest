@@ -62,7 +62,7 @@ export class AutorestContextLoader {
 
       // once we shutdown those extensions, we should shutdown the EM too.
       const extMgr = await AutorestContextLoader.extensionManager;
-      extMgr.dispose();
+      void extMgr.dispose();
 
       // but if someone goes to use that, we're going to need a new instance (since the shared lock will be gone in the one we disposed.)
       AutorestContextLoader.extensionManager = new LazyPromise<ExtensionManager>(() =>
@@ -87,7 +87,7 @@ export class AutorestContextLoader {
     includeDefault: boolean,
     ...configs: AutorestRawConfiguration[]
   ): Promise<AutorestContext> {
-    const logger: AutorestLogger = new AutorestCoreLogger((mergeConfigurations(configs) as any) as any, messageEmitter);
+    const logger: AutorestLogger = new AutorestCoreLogger(mergeConfigurations(...configs) as any, messageEmitter);
 
     const defaultConfigUri = ResolveUri(CreateFolderUri(AppRoot), "resources/default-configuration.md");
     const loader = new ConfigurationLoader(

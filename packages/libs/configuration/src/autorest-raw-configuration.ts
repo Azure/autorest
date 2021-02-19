@@ -6,6 +6,7 @@ import { Directive } from "./directive";
  * i.e. The mapping of values passed via a config block, cli arguments, etc.
  */
 export interface AutorestRawConfiguration extends AutorestRawConfigurationAlias {
+  "__status"?: any;
   "__parents"?: any | undefined;
   "allow-no-input"?: boolean;
   "input-file"?: Array<string> | string;
@@ -28,10 +29,23 @@ export interface AutorestRawConfiguration extends AutorestRawConfigurationAlias 
   "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)
   "title"?: any;
   "description"?: any;
+  "run"?: any;
 
   "debug"?: boolean;
   "verbose"?: boolean;
   "time"?: boolean;
+  "timestamp"?: boolean;
+  "fast-mode"?: boolean;
+  "header-definitions"?: any;
+  "components"?: any;
+  "batch"?: boolean;
+  "resource-schema-batch"?: any;
+  "perform-load"?: any;
+
+  /**
+   * Feature flags. Those flags enable/disable certain features
+   */
+  "deduplicate-inline-models"?: boolean;
 
   // --------------------------------------
   // Temporary flags to deprecate features:

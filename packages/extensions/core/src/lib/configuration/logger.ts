@@ -14,28 +14,28 @@ export class AutorestCoreLogger {
   }
 
   public verbose(message: string) {
-    this.message({
+    void this.message({
       Channel: Channel.Verbose,
       Text: message,
     });
   }
 
   public info(message: string) {
-    this.message({
+    void this.message({
       Channel: Channel.Information,
       Text: message,
     });
   }
 
   public fatal(message: string) {
-    this.message({
+    void this.message({
       Channel: Channel.Fatal,
       Text: message,
     });
   }
 
   public trackError(error: AutorestError) {
-    this.message({
+    void this.message({
       Channel: Channel.Error,
       Text: error.message,
       Source: error.source?.map((x) => ({ document: x.document, Position: x.position })),
@@ -50,8 +50,6 @@ export class AutorestCoreLogger {
     if (m.Channel === Channel.Verbose && !this.config.verbose) {
       return;
     }
-
-    console.error("This.config", this.config["message-format"]);
 
     try {
       // update source locations to point to loaded Swagger
@@ -164,7 +162,7 @@ export class AutorestCoreLogger {
           try {
             blameTree = await this.messageEmitter.DataStore.Blame(s.document, s.Position);
             if (shouldComplain) {
-              this.message({
+              await this.message({
                 Channel: Channel.Verbose,
                 Text: `\nDEVELOPER-WARNING: Path '${originalPath}' was corrected to ${JSON.stringify(
                   s.Position.path,

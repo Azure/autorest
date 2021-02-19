@@ -687,10 +687,10 @@ async function main() {
   }
 }
 
-main();
+void main();
 
 process.on("exit", () => {
-  Shutdown();
+  void Shutdown();
 });
 
 async function showHelp(): Promise<void> {
