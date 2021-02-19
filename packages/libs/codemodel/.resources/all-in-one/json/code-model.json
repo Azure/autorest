@@ -1042,8 +1042,8 @@
           "$ref": "#/definitions/Parameter",
           "description": "When a parameter is grouped into another, this will tell where the parameter got grouped into."
         },
-        "isInMultipart": {
-          "description": "If this parameter is to be included in a multipart request body.",
+        "isPartialBody": {
+          "description": "If this parameter is only part of the body request(for multipart and form bodies.)",
           "type": "boolean"
         }
       },
