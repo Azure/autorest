@@ -1,10 +1,11 @@
+import { ExtensionDefinition } from "./configuration-loader";
 import { Directive } from "./directive";
 
 /**
  * Represent a raw configuration provided by the user.
  * i.e. The mapping of values passed via a config block, cli arguments, etc.
  */
-export interface AutorestRawConfiguration {
+export interface AutorestRawConfiguration extends AutorestRawConfigurationAlias {
   "__parents"?: any | undefined;
   "allow-no-input"?: boolean;
   "input-file"?: Array<string> | string;
@@ -76,5 +77,18 @@ export interface AutorestRawConfiguration {
   "name"?: string;
   "to"?: string;
 
-  [key: string]: any;
+  /**
+   * This is property compiled.
+   */
+  "used-extension"?: string[];
+}
+
+/**
+ * Contains a set of alias that can be set and will be converted.
+ */
+export interface AutorestRawConfigurationAlias {
+  /**
+   * Alias for @see AutorestRawConfiguration["license-header"]
+   */
+  "licence-header"?: string;
 }

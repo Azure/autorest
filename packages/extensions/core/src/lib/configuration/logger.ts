@@ -51,6 +51,8 @@ export class AutorestCoreLogger {
       return;
     }
 
+    console.error("This.config", this.config["message-format"]);
+
     try {
       // update source locations to point to loaded Swagger
       if (m.Source && typeof m.Source.map === "function") {

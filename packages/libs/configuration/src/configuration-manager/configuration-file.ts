@@ -77,7 +77,8 @@ const codeBlockToRawConfig = async (
   // this will enable us to try to load relative paths relative to the folder from which it was read
   // rather than have to rely on the pseudo $(this-folder) macro (which requires updating the file)
   config.__parents = {};
-  for (const kind of ["input-file", "require", "try-require", "exclude-file"]) {
+  const kinds: Array<keyof AutorestRawConfiguration> = ["input-file", "require", "try-require", "exclude-file"];
+  for (const kind of kinds) {
     if (config[kind]) {
       for (const location of arrayOf<string>(config[kind])) {
         if (!IsUri(location)) {

@@ -61,7 +61,7 @@ export const desugarRawConfig = async (rawConfig: AutorestRawConfiguration): Pro
   return {
     ...omit(rawConfig, "licence-header"),
     "license-header": rawConfig["license-header"] ?? rawConfig["licence-header"],
-    "use-extensions": {
+    "use-extension": {
       ...rawConfig["use-extension"],
       ...(rawConfig.use && (await desugarUseField(rawConfig.use))),
     },

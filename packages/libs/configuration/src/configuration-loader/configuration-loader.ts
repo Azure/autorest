@@ -117,8 +117,10 @@ export class ConfigurationLoader {
       const data = await inputView.ReadStrict(this.defaultConfigUri);
       manager.addConfigFile(await readConfigurationFile(data, this.logger, this.dataStore.getDataSink()));
     }
+    console.log("Included default", await manager.resolveConfig());
 
     await resolveRequiredConfigs(fsLocal);
+    console.log("Resolved require", await manager.resolveConfig());
 
     // 5. resolve extensions
     const addedExtensions = new Set<string>();
