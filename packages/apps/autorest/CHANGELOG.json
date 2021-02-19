@@ -2,6 +2,26 @@
   "name": "autorest",
   "entries": [
     {
+      "version": "3.1.0",
+      "tag": "autorest_v3.1.0",
+      "date": "Fri, 19 Feb 2021 21:42:09 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Migrate** to using webpack for bundling."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/core\" from `~3.0.6373` to `~3.0.6374`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/extension\" from `~3.1.272` to `~3.2.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.0.6339",
       "tag": "autorest_v3.0.6339",
       "date": "Thu, 11 Feb 2021 18:03:07 GMT",

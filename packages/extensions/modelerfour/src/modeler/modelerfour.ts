@@ -1469,7 +1469,7 @@ export class ModelerFour {
 
     const requestSchema = values(kmtObject).first((each) => !!each.schema.instance)?.schema;
 
-    if (kmt === KnownMediaType.Multipart) {
+    if (kmt === KnownMediaType.Multipart || kmt === KnownMediaType.Form) {
       if (!requestSchema || !requestSchema.instance) {
         throw new Error("Cannot process a multipart/form-data body without a schema.");
       }
@@ -1508,7 +1508,7 @@ export class ModelerFour {
                   },
                 },
                 clientDefaultValue: this.interpret.getClientDefault(propertyDeclaration, pSchema),
-                isInMultipart: true,
+                isPartialBody: true,
               },
             ),
           );

@@ -92,16 +92,16 @@ describe("Modelerfour.Request", () => {
       const idParameter = parameters?.[0];
       const addressParameter = parameters?.[1];
       expect(idParameter?.language.default.name).toEqual("id");
-      expect(idParameter?.isInMultipart).toBe(true);
+      expect(idParameter?.isPartialBody).toBe(true);
       expect(addressParameter?.language.default.name).toEqual("address");
-      expect(idParameter?.isInMultipart).toBe(true);
+      expect(idParameter?.isPartialBody).toBe(true);
     });
 
     it("doesn't mark other parameter as isInMultipart", async () => {
       const queryParam = parameters?.[2];
 
       expect(queryParam?.language.default.name).toEqual(queryParam);
-      expect(queryParam?.isInMultipart).toBeFalsy();
+      expect(queryParam?.isPartialBody).toBeFalsy();
     });
   });
 });

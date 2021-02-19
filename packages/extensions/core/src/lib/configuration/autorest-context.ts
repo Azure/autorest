@@ -164,6 +164,11 @@ export class AutorestContext implements AutorestLogger {
       return resolveDirectives(this.config);
     }
 
+    // This key is used in pipelines plugins to retrieve the headertext.
+    if (key === "header-text") {
+      return this.HeaderText;
+    }
+
     let result = this.config;
     for (const keyPart of key.split(".")) {
       result = result[keyPart as keyof AutorestRawConfiguration];

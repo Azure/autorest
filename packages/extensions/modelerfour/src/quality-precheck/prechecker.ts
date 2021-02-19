@@ -166,7 +166,7 @@ export class QualityPreChecker {
               const details = diff
                 .map((each) => `${each.path.join(".")} => '${each.op === "delete" ? "<removed>" : each.val}'`)
                 .join(",");
-              this.session.error(
+              this.session.warning(
                 `Schema '${schemaName}' has a property '${propName}' that is conflicting with a property in the parent schema '${parentName}' differs more than just description : [${details}]`,
                 ["PreCheck", "PropertyRedeclaration"],
               );

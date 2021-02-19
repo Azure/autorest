@@ -1,0 +1,17 @@
+{
+  "name": "@autorest/common",
+  "entries": [
+    {
+      "version": "1.0.1",
+      "tag": "@autorest/common_v1.0.1",
+      "date": "Fri, 19 Feb 2021 21:42:09 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Initial release, include code extract from @autorest/core around merging object and reading yaml/config"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/extension",
-  "version": "3.1.272",
+  "version": "3.2.0",
   "description": "Yarn-Based extension aquisition (for Azure Open Source Projects)",
   "engines": {
     "node": ">=10.12.0"
