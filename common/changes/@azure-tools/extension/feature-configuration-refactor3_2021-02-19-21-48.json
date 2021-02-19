@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/extension",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@azure-tools/extension",
+  "email": "tiguerin@microsoft.com"
+}
