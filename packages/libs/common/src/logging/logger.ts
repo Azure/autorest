@@ -41,8 +41,11 @@ export interface AutorestLogger {
    * The pipeline runner would then be able to fail if any error or warnings were reported either at the end of the stage or at the very end of the run.
    * Provide a way for the user to supress some warnings.
    */
+
   verbose(message: string): void;
+
   info(message: string): void;
+
   fatal(message: string): void;
 
   /**

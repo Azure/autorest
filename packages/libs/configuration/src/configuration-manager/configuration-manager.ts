@@ -51,20 +51,21 @@ export class ConfigurationManager {
   public async resolveConfig(): Promise<AutorestConfiguration> {
     let current = initialConfig;
 
+    const configFileNames = [];
     // TODO-TIM take into account load-priority
     for (const configItem of this.configItems) {
       if (configItem.type === "file") {
         current = this.mergeConfigFile(current, configItem);
+        configFileNames.push(configItem.fullPath);
       } else if (configItem.type === "simple") {
         current = mergeOverwriteOrAppend(current, configItem.config);
       }
     }
 
     // Finally apply default config.
-    current = mergeOverwriteOrAppend(current, defaultConfig);
+    const finalConfig = mergeOverwriteOrAppend(current, defaultConfig);
 
-    // TODO-TIM check those params
-    return createAutorestConfiguration(this.configFileOrFolderUri, current, {}, this.fileSystem);
+    return createAutorestConfiguration(this.configFileOrFolderUri, finalConfig, configFileNames, this.fileSystem);
   }
 
   /**

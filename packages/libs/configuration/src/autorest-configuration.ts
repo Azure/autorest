@@ -21,8 +21,10 @@ export interface AutorestConfiguration extends AutorestRawConfiguration {
    */
   outputFolderUri: string;
 
-  // TODO-TIM check type?
-  configurationFiles: { [key: string]: any };
+  /**
+   * List of configuration files used to create this config.
+   */
+  configurationFiles: string[];
 
   /**
    * If help was requested.
@@ -57,7 +59,7 @@ export interface AutorestConfiguration extends AutorestRawConfiguration {
 export const createAutorestConfiguration = async (
   configFileFolderUri: string,
   rawConfig: AutorestRawConfiguration,
-  configurationFiles: { [key: string]: any },
+  configurationFiles: string[],
   fileSystem: IFileSystem,
 ): Promise<AutorestConfiguration> => {
   const config: AutorestConfiguration = createConfigFromRawConfig(configFileFolderUri, rawConfig, configurationFiles);
@@ -81,7 +83,7 @@ export const createAutorestConfiguration = async (
 export const createConfigFromRawConfig = (
   configFileFolderUri: string,
   rawConfig: AutorestRawConfiguration,
-  configurationFiles: { [key: string]: string },
+  configurationFiles: string[],
 ): AutorestConfiguration => {
   const baseFolderUri = getBaseFolderUri(configFileFolderUri, rawConfig);
 

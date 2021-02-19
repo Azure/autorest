@@ -130,8 +130,7 @@ export class ConfigurationLoader {
       const extensionDefs = resolveExtensions(config);
 
       const additionalExtensions = extensionDefs.filter((ext) => !addedExtensions.has(ext.fullyQualified));
-      // TODO-TIM can use additionalExtensions instead of extensions
-      await manager.addConfig({ "used-extension": extensionDefs.map((x) => x.fullyQualified) });
+      await manager.addConfig({ "used-extension": additionalExtensions.map((x) => x.fullyQualified) });
       if (additionalExtensions.length === 0) {
         continue;
       }
