@@ -210,6 +210,7 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
         case "schemas":
         case "parameters":
         case "requestBodies":
+        case "headers":
           this.newObject(components, containerType, containerPointer);
           for (const { key: componentId, pointer: componentPointer, value: componentValue } of containerChildren) {
             if (this.componentsToKeep[containerType].has(componentId)) {
