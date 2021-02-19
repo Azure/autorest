@@ -1,0 +1,28 @@
+{
+  "name": "@azure-tools/extension",
+  "entries": [
+    {
+      "version": "3.2.0",
+      "tag": "@azure-tools/extension_v3.2.0",
+      "date": "Fri, 19 Feb 2021 21:42:09 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Feature**: Add option to set the path to the yarn cli in the ExtensionManager. This enable webpack compatibility."
+          },
+          {
+            "comment": "**Feature** Added new \"systemRequirements\" validation for extensions. Extension are able to provide a list of system requirements which autorest will validate before starting."
+          }
+        ],
+        "patch": [
+          {
+            "comment": "**Update** various dependencies and moved package source from Azure/perks -> Azure/autorest"
+          },
+          {
+            "comment": "**Update** copy yarn file on build from node dependency."
+          }
+        ]
+      }
+    }
+  ]
+}

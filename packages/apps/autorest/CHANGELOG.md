@@ -1,6 +1,13 @@
 # Change Log - autorest
 
-This log was last generated on Thu, 11 Feb 2021 18:03:07 GMT and should not be manually modified.
+This log was last generated on Fri, 19 Feb 2021 21:42:09 GMT and should not be manually modified.
+
+## 3.1.0
+Fri, 19 Feb 2021 21:42:09 GMT
+
+### Minor changes
+
+- **Migrate** to using webpack for bundling.
 
 ## 3.0.6339
 Thu, 11 Feb 2021 18:03:07 GMT

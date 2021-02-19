@@ -1,6 +1,18 @@
 # Change Log - @autorest/core
 
-This log was last generated on Thu, 11 Feb 2021 18:03:07 GMT and should not be manually modified.
+This log was last generated on Fri, 19 Feb 2021 21:42:09 GMT and should not be manually modified.
+
+## 3.0.6374
+Fri, 19 Feb 2021 21:42:09 GMT
+
+### Patches
+
+- Bundle jsonpath in webpack
+- Extract some section into @autorest/core
+- Rethink config
+- **Fix** problem not resolving the yarn/cli.js file
+- **Fix** Components cleaner not removing external non used headers but remove their schemas
+- **Revert** removal of header-text config getter
 
 ## 3.0.6373
 Thu, 11 Feb 2021 18:03:07 GMT
