@@ -12,7 +12,7 @@ import { CancellationToken, createMessageConnection } from "vscode-jsonrpc";
 import { Artifact } from "../artifact";
 import { AutorestContext } from "../configuration";
 import { EventEmitter } from "../events";
-import { Exception } from "../exception";
+import { Exception } from "@autorest/common";
 import { ArtifactMessage, Channel, Message } from "../message";
 import { IAutoRestPluginInitiator, IAutoRestPluginInitiatorTypes, IAutoRestPluginTargetTypes } from "./plugin-api";
 

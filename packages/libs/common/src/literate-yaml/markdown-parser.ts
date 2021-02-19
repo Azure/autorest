@@ -7,7 +7,12 @@
 import { DataHandle, DataSink, Mapping } from "@azure-tools/datastore";
 import * as commonmark from "commonmark";
 
-export async function parse(
+/**
+ * Retrieve all code blocks in the markdown file
+ * @param hConfigFile DataHandle for the markdown config file.
+ * @param sink Data sink.
+ */
+export async function parseCodeBlocksFromMarkdown(
   hConfigFile: DataHandle,
   sink: DataSink,
 ): Promise<Array<{ data: DataHandle; codeBlock: commonmark.Node }>> {
@@ -68,17 +73,6 @@ function* parseCodeblocks(markdown: string): Iterable<commonmark.Node> {
 
 const commonmarkHeadingNodeType = "heading";
 const commonmarkHeadingMaxLevel = 1000;
-
-function commonmarkParentHeading(startNode: commonmark.Node): commonmark.Node | null {
-  const currentLevel = startNode.type === commonmarkHeadingNodeType ? startNode.level : commonmarkHeadingMaxLevel;
-
-  let resultNode: commonmark.Node | null = startNode;
-  while (resultNode != null && (resultNode.type !== commonmarkHeadingNodeType || resultNode.level >= currentLevel)) {
-    resultNode = resultNode.prev || resultNode.parent;
-  }
-
-  return resultNode;
-}
 
 export function* commonmarkSubHeadings(startNode: commonmark.Node | null): Iterable<commonmark.Node> {
   if (startNode && (startNode.type === commonmarkHeadingNodeType || !startNode.prev)) {

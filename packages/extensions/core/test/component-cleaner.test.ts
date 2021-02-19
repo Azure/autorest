@@ -4,8 +4,6 @@ import * as aio from "@azure-tools/async-io";
 import { ComponentsCleaner } from "../src/lib/pipeline/plugins/components-cleaner";
 import { AppRoot } from "../src/lib/constants";
 
-require("source-map-support").install();
-
 const resources = `${AppRoot}/test/resources/component-cleaner`;
 
 const readData = async (...files: Array<string>) => {

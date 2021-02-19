@@ -21,6 +21,7 @@ import { MessageEmitter } from "./message-emitter";
 import { IEvent } from "../events";
 import { createAutorestConfiguration, extendAutorestConfiguration } from "./autorest-configuration";
 import { AutorestConfiguration, AutorestRawConfiguration, arrayOf } from "@autorest/configuration";
+import { AutorestError, AutorestLogger } from "@autorest/common";
 
 const safeEval = createSandbox();
 
@@ -36,7 +37,7 @@ export const createAutorestContext = async (
   return new AutorestContext(config, cachingFs, messageEmitter, configFileFolderUri);
 };
 
-export class AutorestContext {
+export class AutorestContext implements AutorestLogger {
   public config: AutorestConfiguration;
 
   private suppressor: Suppressor;
@@ -56,6 +57,14 @@ export class AutorestContext {
    */
   public get rawConfig() {
     return this.config.raw;
+  }
+
+  public trackError(error: AutorestError) {
+    this.Message({
+      Channel: Channel.Error,
+      Text: error.message,
+      Source: error.source?.map((x) => ({ document: x.document, Position: x.position })),
+    });
   }
 
   public updateConfigurationFile(filename: string, content: string) {
@@ -235,6 +244,11 @@ export class AutorestContext {
 
     if (key === "resolved-directive") {
       return this.resolveDirectives();
+    }
+
+    // This key is used in pipelines plugins to retrieve the headertext.
+    if (key === "header-text") {
+      return this.HeaderText;
     }
 
     let result = this.config;

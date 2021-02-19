@@ -62,4 +62,3 @@ export function color(text: string): string {
       .replace(/'(.*?)'/gm, addStyle("gray", "'$1'")),
   );
 }
-(<any>global).color = color;

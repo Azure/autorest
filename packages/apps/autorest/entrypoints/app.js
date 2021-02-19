@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 
 global.isDebuggerEnabled =
   !!require("inspector").url() || global.v8debug || /--debug|--inspect/.test(process.execArgv.join(" "));
@@ -49,14 +50,8 @@ if (
     if (v[0] > 14) {
       console.error("\nWARNING: AutoRest has not been tested with Node versions greater than v14.\n");
     }
-    if (
-      process.argv.indexOf("--no-static-loader") === -1 &&
-      process.env["no-static-loader"] === undefined &&
-      require("fs").existsSync(`${__dirname}/../dist/static-loader.js`)
-    ) {
-      require(`${__dirname}/../dist/static-loader.js`).load(`${__dirname}/../dist/static_modules.fs`);
-    }
-    require(`${__dirname}/../dist/src/app.js`);
+
+    require(`${__dirname}/../dist/app.js`);
   } catch (e) {
     console.error(e);
   }

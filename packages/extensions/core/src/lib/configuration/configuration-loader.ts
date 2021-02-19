@@ -9,9 +9,8 @@ import { DataHandle, IFileSystem, LazyPromise, RealFileSystem } from "@azure-too
 import { Extension, ExtensionManager, LocalExtension } from "@azure-tools/extension";
 import { CreateFileUri, CreateFolderUri, ResolveUri, simplifyUri, IsUri, ParentFolderUri } from "@azure-tools/uri";
 import { join } from "path";
-import { OperationAbortedException } from "../exception";
+import { OperationAbortedException, parseCodeBlocks } from "@autorest/common";
 import { Channel, SourceLocation } from "../message";
-import { parseCodeBlocks } from "../parsing/literate-yaml";
 import { AutoRestExtension } from "../pipeline/plugin-endpoint";
 import { AppRoot } from "../constants";
 import { AutorestRawConfiguration, arrayOf } from "@autorest/configuration";
@@ -20,6 +19,9 @@ import { CachingFileSystem } from "./caching-file-system";
 import { MessageEmitter } from "./message-emitter";
 import { detectConfigurationFile } from "./configuration-file-resolver";
 import { getIncludedConfigurationFiles } from "./loading-utils";
+
+const inWebpack = typeof __webpack_require__ === "function";
+const pathToYarnCli = inWebpack ? `${__dirname}/yarn/cli.js` : undefined;
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const untildify: (path: string) => string = require("untildify");
@@ -103,7 +105,11 @@ export class ConfigurationLoader {
   }
 
   private static extensionManager: LazyPromise<ExtensionManager> = new LazyPromise<ExtensionManager>(() =>
-    ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")),
+    ExtensionManager.Create(
+      join(process.env["autorest.home"] || require("os").homedir(), ".autorest"),
+      "yarn",
+      pathToYarnCli,
+    ),
   );
 
   private async desugarRawConfig(configs: any): Promise<any> {
