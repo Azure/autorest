@@ -8,6 +8,9 @@ describe("SyntaxValidation", () => {
   let errors: AutorestError[];
 
   const logger = {
+    verbose: jest.fn((x) => errors.push(x)),
+    info: jest.fn((x) => errors.push(x)),
+    fatal: jest.fn((x) => errors.push(x)),
     trackError: jest.fn((x) => errors.push(x)),
   };
 
