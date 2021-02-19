@@ -20,6 +20,7 @@ import { AutorestContext } from "./autorest-context";
 import { MessageEmitter } from "./message-emitter";
 import { AutorestLogger } from "@autorest/common";
 import { AppRoot } from "../constants";
+import { AutorestCoreLogger } from "./logger";
 
 const inWebpack = typeof __webpack_require__ === "function";
 const pathToYarnCli = inWebpack ? `${__dirname}/yarn/cli.js` : undefined;
@@ -85,13 +86,7 @@ export class AutorestContextLoader {
     includeDefault: boolean,
     ...configs: AutorestRawConfiguration[]
   ): Promise<AutorestContext> {
-    const logger: AutorestLogger = {
-      // TODO-TIM define correctly.
-      verbose: () => null,
-      info: () => null,
-      fatal: () => null,
-      trackError: () => null,
-    };
+    const logger: AutorestLogger = new AutorestCoreLogger({} as any, messageEmitter);
 
     const defaultConfigUri = ResolveUri(CreateFolderUri(AppRoot), "resources/default-configuration.md");
     const loader = new ConfigurationLoader(

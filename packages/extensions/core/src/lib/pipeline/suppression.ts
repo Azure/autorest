@@ -3,17 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ResolvedDirective } from "@autorest/configuration";
+import { AutorestConfiguration, ResolvedDirective, resolveDirectives } from "@autorest/configuration";
 import { JsonPath, matches } from "@azure-tools/datastore";
 import { From } from "linq-es2015";
-import { AutorestContext } from "../autorest-core";
 import { Message } from "../message";
 
 export class Suppressor {
   private suppressions: Array<ResolvedDirective>;
 
-  public constructor(private config: AutorestContext) {
-    this.suppressions = config.resolveDirectives((x) => x.suppress.length > 0);
+  public constructor(config: AutorestConfiguration) {
+    this.suppressions = resolveDirectives(config, (x) => x.suppress.length > 0);
   }
 
   private matchesSourceFilter(document: string, path: JsonPath | undefined, supression: ResolvedDirective): boolean {
