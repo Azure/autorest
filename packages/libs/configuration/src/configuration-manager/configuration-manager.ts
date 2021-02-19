@@ -34,6 +34,9 @@ type ConfigurationItem = ConfigurationFile | SimpleConfiguration;
 
 /**
  * Class organizing configurations and merging them together.
+ * Configuration should be added in order of higher priority to lower priority.
+ * This means the first configs values will be able to be used in following configs.
+ * This also means that if a property is defined in 2 config the first one will be the one kept.
  */
 export class ConfigurationManager {
   private configItems: ConfigurationItem[] = [];
