@@ -9,7 +9,7 @@ import { detectConfigurationFile } from "../configuration-file-resolver";
 import { ConfigurationManager, readConfigurationFile } from "../configuration-manager";
 import { getIncludedConfigurationFiles } from "../configuration-require-resolver";
 import { AutorestRawConfiguration } from "../autorest-raw-configuration";
-import { arrayOf, exists, filePath } from "../utils";
+import { exists, filePath } from "@azure-tools/async-io";
 
 export interface AutorestConfigurationResult {
   config: AutorestConfiguration;

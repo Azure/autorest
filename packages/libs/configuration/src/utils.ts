@@ -26,17 +26,3 @@ export function arrayOf<T>(value: T | T[] | undefined): T[] {
   }
   return [value];
 }
-
-export const filePath = (path: string | Buffer | Url | URL): string => {
-  const pathStr = path.toString();
-  return pathStr.startsWith("file:///") ? fileURLToPath(pathStr) : pathStr;
-};
-
-export const exists = async (path: string): Promise<boolean> => {
-  try {
-    await fs.promises.access(path);
-    return true;
-  } catch {
-    return false;
-  }
-};

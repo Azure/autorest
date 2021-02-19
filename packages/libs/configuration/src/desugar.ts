@@ -1,9 +1,8 @@
 import { ExtensionManager } from "@azure-tools/extension";
 import { omit } from "lodash";
 import { AutorestRawConfiguration } from "./autorest-raw-configuration";
-import fs from "fs";
 import { IsUri } from "@azure-tools/uri";
-import { exists } from "./utils";
+import { isDirectory, exists } from "@azure-tools/async-io";
 import os from "os";
 
 const desugarUseField = async (use: string[] | string) => {
@@ -21,11 +20,7 @@ const desugarUseField = async (use: string[] | string) => {
       // <path>
       // <path/uri to .tgz package file>
       // if the entry starts with an @ it's definitely a package reference
-      if (
-        useEntry.endsWith(".tgz") ||
-        (await fs.promises.lstat(useEntry)).isDirectory() ||
-        useEntry.startsWith("file:/")
-      ) {
+      if (useEntry.endsWith(".tgz") || (await isDirectory(useEntry)) || useEntry.startsWith("file:/")) {
         const pkg = await extMgr.findPackage("plugin", useEntry);
         extensions[pkg.name] = useEntry;
       } else {
