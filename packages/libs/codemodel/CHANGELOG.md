@@ -1,6 +1,13 @@
 # Change Log - @autorest/codemodel
 
-This log was last generated on Mon, 08 Feb 2021 23:06:15 GMT and should not be manually modified.
+This log was last generated on Fri, 19 Feb 2021 21:42:09 GMT and should not be manually modified.
+
+## 4.14.6
+Fri, 19 Feb 2021 21:42:09 GMT
+
+### Patches
+
+- Change name of isInMultipart to isPartialBody
 
 ## 4.14.5
 Mon, 08 Feb 2021 23:06:15 GMT

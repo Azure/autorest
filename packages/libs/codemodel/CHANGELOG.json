@@ -2,6 +2,18 @@
   "name": "@autorest/codemodel",
   "entries": [
     {
+      "version": "4.14.6",
+      "tag": "@autorest/codemodel_v4.14.6",
+      "date": "Fri, 19 Feb 2021 21:42:09 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Change name of isInMultipart to isPartialBody"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.14.5",
       "tag": "@autorest/codemodel_v4.14.5",
       "date": "Mon, 08 Feb 2021 23:06:15 GMT",

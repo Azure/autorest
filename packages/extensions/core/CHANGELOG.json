@@ -2,6 +2,44 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.0.6374",
+      "tag": "@autorest/core_v3.0.6374",
+      "date": "Fri, 19 Feb 2021 21:42:09 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bundle jsonpath in webpack"
+          },
+          {
+            "comment": "Extract some section into @autorest/core"
+          },
+          {
+            "comment": "Rethink config"
+          },
+          {
+            "comment": "**Fix** problem not resolving the yarn/cli.js file"
+          },
+          {
+            "comment": "**Fix** Components cleaner not removing external non used headers but remove their schemas"
+          },
+          {
+            "comment": "**Revert** removal of header-text config getter"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.0.0` to `~1.0.1`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/configuration\" from `~1.0.0` to `~1.0.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/extension\" from `~3.1.272` to `~3.2.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.0.6373",
       "tag": "@autorest/core_v3.0.6373",
       "date": "Thu, 11 Feb 2021 18:03:07 GMT",
