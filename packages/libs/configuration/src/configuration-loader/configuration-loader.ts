@@ -117,10 +117,8 @@ export class ConfigurationLoader {
       const data = await inputView.ReadStrict(this.defaultConfigUri);
       manager.addConfigFile(await readConfigurationFile(data, this.logger, this.dataStore.getDataSink()));
     }
-    console.log("Included default", await manager.resolveConfig());
 
     await resolveRequiredConfigs(fsLocal);
-    console.log("Resolved require", await manager.resolveConfig());
 
     // 5. resolve extensions
     const addedExtensions = new Set<string>();
@@ -168,8 +166,16 @@ export class ConfigurationLoader {
 
     // resolve any outstanding includes again
     await resolveRequiredConfigs(fsLocal);
+    const config = await manager.resolveConfig();
+    // If the pipeline-model was set we set it at the beginning and reload the config.
+    // There is some configuration in `default-configuration.md` that depends on pipeline-model but some plugins are setting up pipeline-model.
 
-    return { config: await manager.resolveConfig(), extensions };
+    if (config["pipeline-model"]) {
+      await manager.addHighPriorityConfig({ "pipeline-model": config["pipeline-model"] });
+      return { config: await manager.resolveConfig(), extensions };
+    } else {
+      return { config, extensions };
+    }
   }
 
   /**

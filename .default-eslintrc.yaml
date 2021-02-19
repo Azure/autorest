@@ -8,7 +8,7 @@ plugins:
 env:
   es6: true
   node: true
-  
+
 extends:
   - eslint:recommended
   - plugin:@typescript-eslint/recommended
@@ -20,6 +20,8 @@ parserOptions:
   ecmaVersion: 2018
   sourceType: module
   warnOnUnsupportedTypeScriptVersion: false
+  project: ./tsconfig.json
+
 rules:
   "@typescript-eslint/no-this-alias": "off"
   "@typescript-eslint/interface-name-prefix": "off"
@@ -37,15 +39,16 @@ rules:
   "@typescript-eslint/explicit-module-boundary-types": "off"
   "@typescript-eslint/ban-types": "off"
   "@typescript-eslint/consistent-type-assertions": "off"
+  "@typescript-eslint/no-floating-promises": "warn"
 
   "require-atomic-updates": "off"
-  
+
   # Prettier config https://github.com/prettier/eslint-plugin-prettier#recommended-configuration
   prettier/prettier: "warn"
   arrow-body-style: "off"
   prefer-arrow-callback: "off"
 
-  # Unicorn plugin config 
+  # Unicorn plugin config
   unicorn/filename-case: warn
 
   # Basic config

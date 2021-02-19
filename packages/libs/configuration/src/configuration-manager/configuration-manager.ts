@@ -47,10 +47,27 @@ export class ConfigurationManager {
     this.configItems.push({ type: "simple", config: await desugarRawConfig(config) });
   }
 
+  /**
+   * Adds a configuration with high priority.
+   * This means this configuration will be loaded first, its value will be able to be used in later configurations.
+   * @param config Configuration.
+   */
+  public async addHighPriorityConfig(config: AutorestRawConfiguration) {
+    this.configItems.unshift({ type: "simple", config: await desugarRawConfig(config) });
+  }
+
+  /**
+   * Adds a configuration.
+   * @param config Configuration.
+   */
   public addConfigFile(file: ConfigurationFile) {
     this.configItems.push(file);
   }
 
+  /**
+   * Resolve the @see AutorestConfiguration from all the configurations.
+   * It will resolve potential condition for configuration file blocks to be included.
+   */
   public async resolveConfig(): Promise<AutorestConfiguration> {
     let current = initialConfig;
 
