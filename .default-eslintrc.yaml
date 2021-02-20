@@ -4,11 +4,12 @@ plugins:
   - "@typescript-eslint"
   - prettier
   - unicorn
+  - node
 
 env:
   es6: true
   node: true
-  
+
 extends:
   - eslint:recommended
   - plugin:@typescript-eslint/recommended
@@ -39,14 +40,21 @@ rules:
   "@typescript-eslint/consistent-type-assertions": "off"
 
   "require-atomic-updates": "off"
-  
+
   # Prettier config https://github.com/prettier/eslint-plugin-prettier#recommended-configuration
   prettier/prettier: "warn"
   arrow-body-style: "off"
   prefer-arrow-callback: "off"
 
-  # Unicorn plugin config 
+  # Unicorn plugin config
   unicorn/filename-case: warn
+
+  # =================================================
+  # Node plugin
+  # =================================================
+  # Prevent from using method that are not yet availalbe in the supported version of node.(see engines field of package.json)
+  node/no-unsupported-features/node-builtins: [error, { "ignores": ["fs.promises"] }]
+  node/no-unsupported-features/es-builtins: error
 
   # Basic config
   no-console: warn
