@@ -1,6 +1,13 @@
 # Change Log - @autorest/common
 
-This log was last generated on Fri, 19 Feb 2021 21:42:09 GMT and should not be manually modified.
+This log was last generated on Sat, 20 Feb 2021 17:49:35 GMT and should not be manually modified.
+
+## 1.0.2
+Sat, 20 Feb 2021 17:49:35 GMT
+
+### Patches
+
+- **Fix** Revert use of flatMap which is not available on node 10
 
 ## 1.0.1
 Fri, 19 Feb 2021 21:42:09 GMT

@@ -1,6 +1,6 @@
 {
   "name": "@autorest/core",
-  "version": "3.0.6374",
+  "version": "3.0.6375",
   "description": "AutoRest core module",
   "engines": {
     "node": ">=10.13.0"
@@ -39,7 +39,7 @@
   },
   "typings": "./dist/exports.d.ts",
   "devDependencies": {
-    "@autorest/common": "~1.0.1",
+    "@autorest/common": "~1.0.2",
     "@autorest/configuration": "~1.0.1",
     "@autorest/schemas": "~1.0.1",
     "@autorest/test-utils": "~0.1.0",
