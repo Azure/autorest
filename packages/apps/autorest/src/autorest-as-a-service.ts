@@ -1,3 +1,4 @@
+/* eslint-disable no-process-exit */
 /* eslint-disable no-console */
 import { lookup } from "dns";
 import { Extension, ExtensionManager, Package } from "@azure-tools/extension";
@@ -91,6 +92,7 @@ export function resolvePathForLocalVersion(requestedVersion: string | null): str
   } catch (e) {
     // fallback to old-core name
     try {
+      // eslint-disable-next-line node/no-missing-require
       return dirname(nodeRequire.resolve("@microsoft.azure/autorest-core/package.json"));
     } catch {
       // no dice

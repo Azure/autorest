@@ -25,5 +25,6 @@ const run = async () => {
 
 run().catch((e) => {
   logger.error("Error", e);
+  // eslint-disable-next-line no-process-exit
   process.exit(1);
 });

@@ -682,6 +682,7 @@ async function main() {
       timestampDebugLog("Shutting Down: (trouble?)");
     } finally {
       timestampDebugLog("Exiting.");
+      // eslint-disable-next-line no-process-exit
       process.exit(exitcode);
     }
   }

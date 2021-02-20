@@ -75,11 +75,13 @@ Comparison Arguments
     const [operation, runConfig] = getOperationFromArgs(args);
     await runOperation(operation, runConfig);
 
+    // eslint-disable-next-line no-process-exit
     process.exit(operation.getExitCode());
   }
 }
 
 main().catch((err) => {
   console.error("\nAn error occurred during execution:\n\n", err);
+  // eslint-disable-next-line no-process-exit
   process.exit(1);
 });
