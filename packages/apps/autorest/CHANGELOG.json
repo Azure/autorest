@@ -2,6 +2,18 @@
   "name": "autorest",
   "entries": [
     {
+      "version": "3.1.1",
+      "tag": "autorest_v3.1.1",
+      "date": "Sun, 21 Feb 2021 05:37:47 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix**: Loosen default version requirement for @autorest/core to only be the same major version as the cli."
+          }
+        ]
+      }
+    },
+    {
       "version": "3.1.0",
       "tag": "autorest_v3.1.0",
       "date": "Fri, 19 Feb 2021 21:42:09 GMT",
