@@ -2,6 +2,23 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.0.6375",
+      "tag": "@autorest/core_v3.0.6375",
+      "date": "Sat, 20 Feb 2021 17:49:35 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Revert use of flatMap which is not available on node 10"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.0.1` to `~1.0.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.0.6374",
       "tag": "@autorest/core_v3.0.6374",
       "date": "Fri, 19 Feb 2021 21:42:09 GMT",

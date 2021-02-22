@@ -1,6 +1,6 @@
 {
   "name": "@autorest/core",
-  "version": "3.0.6374",
+  "version": "3.0.6375",
   "description": "AutoRest core module",
   "engines": {
     "node": ">=10.13.0"
@@ -39,7 +39,7 @@
   },
   "typings": "./dist/exports.d.ts",
   "devDependencies": {
-    "@autorest/common": "~1.0.1",
+    "@autorest/common": "~1.0.2",
     "@autorest/configuration": "~1.0.1",
     "@autorest/schemas": "~1.0.1",
     "@autorest/test-utils": "~0.1.0",
@@ -67,6 +67,7 @@
     "compare-versions": "^3.4.0",
     "copy-webpack-plugin": "^7.0.0",
     "cpy-cli": "~2.0.0",
+    "eslint-plugin-node": "~11.1.0",
     "eslint-plugin-prettier": "~3.2.0",
     "eslint-plugin-unicorn": "~27.0.0",
     "eslint": "^7.17.0",
