@@ -1,3 +1,4 @@
+/* eslint-disable no-process-exit */
 /* eslint-disable no-console */
 import { lookup } from "dns";
 import { Extension, ExtensionManager, Package } from "@azure-tools/extension";
@@ -39,7 +40,12 @@ export const newCorePackage = "@autorest/core";
 const basePkgVersion = semver.parse(
   pkgVersion.indexOf("-") > -1 ? pkgVersion.substring(0, pkgVersion.indexOf("-")) : pkgVersion,
 );
-const versionRange = `~${basePkgVersion.major}.${basePkgVersion.minor}.0`; // the version range of the core package required.
+
+/**
+ * The version range of the core package required.
+ * Require @autorest/core to have the same major version as autorest.
+ */
+const versionRange = `^${basePkgVersion.major}.0.0`;
 
 export const networkEnabled: Promise<boolean> = new Promise<boolean>((r, j) => {
   lookup("8.8.8.8", 4, (err, address, family) => {
@@ -91,6 +97,7 @@ export function resolvePathForLocalVersion(requestedVersion: string | null): str
   } catch (e) {
     // fallback to old-core name
     try {
+      // eslint-disable-next-line node/no-missing-require
       return dirname(nodeRequire.resolve("@microsoft.azure/autorest-core/package.json"));
     } catch {
       // no dice

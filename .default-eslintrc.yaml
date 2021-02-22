@@ -4,6 +4,7 @@ plugins:
   - "@typescript-eslint"
   - prettier
   - unicorn
+  - node
 
 env:
   es6: true
@@ -12,6 +13,7 @@ env:
 extends:
   - eslint:recommended
   - plugin:@typescript-eslint/recommended
+  - plugin:node/recommended
 
 globals:
   Atomics: readonly
@@ -50,6 +52,16 @@ rules:
 
   # Unicorn plugin config
   unicorn/filename-case: warn
+
+  # =================================================
+  # Node plugin
+  # =================================================
+  # Prevent from using method that are not yet availalbe in the supported version of node.(see engines field of package.json)
+  node/no-unsupported-features/node-builtins: [error, { "ignores": ["fs.promises"] }]
+  node/no-unsupported-features/es-builtins: error
+  node/no-unsupported-features/es-syntax: off # Disabling this one otherwise it will complain about typescript imports which get transpiled.
+  node/no-missing-import: off
+  node/shebang: off
 
   # Basic config
   no-console: warn

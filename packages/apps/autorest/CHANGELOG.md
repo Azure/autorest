@@ -1,6 +1,13 @@
 # Change Log - autorest
 
-This log was last generated on Fri, 19 Feb 2021 21:42:09 GMT and should not be manually modified.
+This log was last generated on Sun, 21 Feb 2021 05:37:47 GMT and should not be manually modified.
+
+## 3.1.1
+Sun, 21 Feb 2021 05:37:47 GMT
+
+### Patches
+
+- **Fix**: Loosen default version requirement for @autorest/core to only be the same major version as the cli.
 
 ## 3.1.0
 Fri, 19 Feb 2021 21:42:09 GMT

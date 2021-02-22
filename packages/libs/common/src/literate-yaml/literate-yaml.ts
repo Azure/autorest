@@ -107,7 +107,8 @@ export async function mergeYamls(
   const cancel = false;
   let failed = false;
 
-  const newIdentity = yamlInputHandles.flatMap((x) => x.identity);
+  //  ([] as string[]).concat(...x.map()) as an alternative for flatMap which is not availalbe on node 10.
+  const newIdentity = ([] as string[]).concat(...yamlInputHandles.map((x) => x.identity));
 
   for (const yamlInputHandle of yamlInputHandles) {
     const rawYaml = await yamlInputHandle.ReadData();

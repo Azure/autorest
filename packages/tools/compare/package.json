@@ -6,6 +6,9 @@
   "bin": {
     "autorest-compare": "dist/index.js"
   },
+  "engines": {
+    "node": ">=10.13.0"
+  },
   "scripts": {
     "start": "ts-node src/index.ts",
     "test": "ts-mocha -p tsconfig.json test/**/*.spec.ts",
@@ -29,7 +32,7 @@
   },
   "homepage": "https://github.com/Azure/autorest.compare#readme",
   "dependencies": {
-    "autorest": "~3.1.0",
+    "autorest": "~3.1.1",
     "chalk": "^4.1.0",
     "diff": "^4.0.1",
     "js-yaml": "~4.0.0",
@@ -46,6 +49,7 @@
     "@types/source-map-support": "^0.5.3",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
+    "eslint-plugin-node": "~11.1.0",
     "eslint-plugin-prettier": "~3.2.0",
     "eslint-plugin-unicorn": "~27.0.0",
     "eslint": "^7.17.0",

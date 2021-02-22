@@ -1,4 +1,3 @@
-import { Schema } from "inspector";
 import { OpenAPI2Definition } from "./definition";
 import { OpenAPI2HeaderDefinition } from "./header";
 
