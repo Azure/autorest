@@ -38,7 +38,7 @@ export class Session<TInputModel> {
     this.model = m.model;
     this.filename = m.filename;
 
-    this.initContext(project);
+    void this.initContext(project);
     this._debug = await this.getValue("debug", false);
     this._verbose = await this.getValue("verbose", false);
     return this;

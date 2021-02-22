@@ -1,11 +1,12 @@
+import { ExtensionDefinition } from "./configuration-loader";
 import { Directive } from "./directive";
 
 /**
  * Represent a raw configuration provided by the user.
  * i.e. The mapping of values passed via a config block, cli arguments, etc.
  */
-export interface AutorestRawConfiguration {
-  "__info"?: string | null;
+export interface AutorestRawConfiguration extends AutorestRawConfigurationAlias {
+  "__status"?: any;
   "__parents"?: any | undefined;
   "allow-no-input"?: boolean;
   "input-file"?: Array<string> | string;
@@ -15,7 +16,7 @@ export interface AutorestRawConfiguration {
   "declare-directive"?: { [name: string]: string };
   "output-artifact"?: Array<string> | string;
   "message-format"?: "json" | "yaml" | "regular";
-  "use"?: any[];
+  "use"?: string[] | string;
   "use-extension"?: { [extensionName: string]: string };
   "require"?: Array<string> | string;
   "try-require"?: Array<string> | string;
@@ -28,10 +29,23 @@ export interface AutorestRawConfiguration {
   "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)
   "title"?: any;
   "description"?: any;
+  "run"?: any;
 
   "debug"?: boolean;
   "verbose"?: boolean;
   "time"?: boolean;
+  "timestamp"?: boolean;
+  "fast-mode"?: boolean;
+  "header-definitions"?: any;
+  "components"?: any;
+  "batch"?: boolean;
+  "resource-schema-batch"?: any;
+  "perform-load"?: any;
+
+  /**
+   * Feature flags. Those flags enable/disable certain features
+   */
+  "deduplicate-inline-models"?: boolean;
 
   // --------------------------------------
   // Temporary flags to deprecate features:
@@ -67,7 +81,6 @@ export interface AutorestRawConfiguration {
   "api-version"?: Array<string>;
 
   "pipeline-model"?: string;
-  "load-priority"?: number;
 
   "resolved-directive"?: any;
   "debugger"?: any;
@@ -78,5 +91,18 @@ export interface AutorestRawConfiguration {
   "name"?: string;
   "to"?: string;
 
-  [key: string]: any;
+  /**
+   * This is property compiled.
+   */
+  "used-extension"?: string[];
+}
+
+/**
+ * Contains a set of alias that can be set and will be converted.
+ */
+export interface AutorestRawConfigurationAlias {
+  /**
+   * Alias for @see AutorestRawConfiguration["license-header"]
+   */
+  "licence-header"?: string;
 }

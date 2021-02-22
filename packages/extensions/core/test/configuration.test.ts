@@ -1,3 +1,4 @@
+import { AutorestRawConfiguration } from "@autorest/configuration";
 import { MemoryFileSystem } from "@azure-tools/datastore";
 import * as AutoRest from "../src/lib/autorest-core";
 
@@ -55,10 +56,10 @@ csharp:
     expect(cfg.raw["output-folder"]).toEqual("foo");
 
     // sample-other should get resolved to the value of sample-value
-    expect(cfg.raw["sample-other"]).toEqual("one");
+    expect(cfg.raw["sample-other" as keyof AutorestRawConfiguration]).toEqual("one");
 
     // verify that the items object that uses a macro works too
-    expect(cfg.raw["items"][3]).toEqual("one/two");
+    expect(cfg.raw["items" as keyof AutorestRawConfiguration][3]).toEqual("one/two");
 
     for (const each of context.getNestedConfiguration("csharp")) {
       // verify the output folder is relative
@@ -69,7 +70,7 @@ csharp:
 
       // now, this got resolved alot earlier.
       // dunno if we need it the other way or not.
-      expect(each.config["items"][3]).toEqual("one/two");
+      expect(each.config["items" as keyof AutorestRawConfiguration][3]).toEqual("one/two");
     }
 
     // override the output-folder from the cmdline
@@ -136,10 +137,14 @@ value:
     let context = await autorest.view;
 
     // output folder should be 'foo'
-    expect(context.config.raw["value"]).toEqual(["not_bar", "foo_and_not_bar", "foo"]);
+    expect(context.config.raw["value" as keyof AutorestRawConfiguration]).toEqual([
+      "not_bar",
+      "foo_and_not_bar",
+      "foo",
+    ]);
 
     autorest.AddConfiguration({ bar: true });
     context = await autorest.view;
-    expect(context.config.raw["value"]).toEqual(["bar", "foo_and_bar", "foo"]);
+    expect(context.config.raw["value" as keyof AutorestRawConfiguration]).toEqual(["bar", "foo_and_bar", "foo"]);
   });
 });

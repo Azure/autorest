@@ -1,55 +1,40 @@
-import {
-  BlameTree,
-  DataStore,
-  IFileSystem,
-  createSandbox,
-  Stringify,
-  stringify,
-  TryDecodeEnhancedPositionFromName,
-} from "@azure-tools/datastore";
-import { clone, values } from "@azure-tools/linq";
-import { EnsureIsFolderUri, ResolveUri, IsUri, FileUriToPath } from "@azure-tools/uri";
+import { DataStore } from "@azure-tools/datastore";
+import { clone } from "@azure-tools/linq";
 import { From } from "linq-es2015";
 import { basename, dirname } from "path";
 import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
 import { Artifact } from "../artifact";
-import { Channel, Message, Range, SourceLocation } from "../message";
-import { Suppressor } from "../pipeline/suppression";
-import { Directive, ResolvedDirective } from "@autorest/configuration";
-import { CachingFileSystem } from "./caching-file-system";
+import {
+  CachingFileSystem,
+  getNestedConfiguration,
+  ResolvedDirective,
+  resolveDirectives,
+} from "@autorest/configuration";
 import { MessageEmitter } from "./message-emitter";
 import { IEvent } from "../events";
-import { createAutorestConfiguration, extendAutorestConfiguration } from "./autorest-configuration";
-import { AutorestConfiguration, AutorestRawConfiguration, arrayOf } from "@autorest/configuration";
+import {
+  AutorestConfiguration,
+  AutorestRawConfiguration,
+  arrayOf,
+  extendAutorestConfiguration,
+} from "@autorest/configuration";
 import { AutorestError, AutorestLogger } from "@autorest/common";
-
-const safeEval = createSandbox();
-
-export const createAutorestContext = async (
-  configurationFiles: { [key: string]: any },
-  fileSystem: IFileSystem,
-  messageEmitter: MessageEmitter,
-  configFileFolderUri: string,
-  ...configs: AutorestRawConfiguration[]
-): Promise<AutorestContext> => {
-  const cachingFs = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
-  const config = await createAutorestConfiguration(configFileFolderUri, configurationFiles, configs, cachingFs);
-  return new AutorestContext(config, cachingFs, messageEmitter, configFileFolderUri);
-};
+import { Message } from "../message";
+import { AutorestCoreLogger } from "./logger";
 
 export class AutorestContext implements AutorestLogger {
   public config: AutorestConfiguration;
-
-  private suppressor: Suppressor;
+  public configFileFolderUri: string;
+  private logger: AutorestCoreLogger;
 
   public constructor(
     config: AutorestConfiguration,
     public fileSystem: CachingFileSystem,
     public messageEmitter: MessageEmitter,
-    public configFileFolderUri: string,
   ) {
     this.config = config;
-    this.suppressor = new Suppressor(this);
+    this.logger = new AutorestCoreLogger(config, messageEmitter);
+    this.configFileFolderUri = config.configFileFolderUri;
   }
 
   /**
@@ -59,12 +44,28 @@ export class AutorestContext implements AutorestLogger {
     return this.config.raw;
   }
 
+  public verbose(message: string) {
+    this.logger.verbose(message);
+  }
+
+  public info(message: string) {
+    this.logger.info(message);
+  }
+
+  public fatal(message: string) {
+    this.logger.fatal(message);
+  }
+
   public trackError(error: AutorestError) {
-    this.Message({
-      Channel: Channel.Error,
-      Text: error.message,
-      Source: error.source?.map((x) => ({ document: x.document, Position: x.position })),
-    });
+    this.logger.trackError(error);
+  }
+
+  public Message(m: Message) {
+    void this.logger.message(m);
+  }
+
+  public resolveDirectives(predicate?: (each: ResolvedDirective) => boolean) {
+    return resolveDirectives(this.config, predicate);
   }
 
   public updateConfigurationFile(filename: string, content: string) {
@@ -106,89 +107,6 @@ export class AutorestContext implements AutorestLogger {
   }
   /* @internal */ public get ClearFolder(): IEvent<MessageEmitter, string> {
     return this.messageEmitter.ClearFolder;
-  }
-
-  public ResolveAsPath(path: string): Promise<string> {
-    // is there even a potential for a parent folder from the input configuruation
-    const parentFolder = this.config?.__parents?.[path];
-    const fromBaseUri = ResolveUri(this.BaseFolderUri, path);
-
-    // if it's an absolute uri already, give it back that way.
-    if (IsUri(path) || !parentFolder) {
-      return Promise.resolve(fromBaseUri);
-    }
-
-    // let it try relative to the file that loaded it.
-    // if the relative-to-parent path isn't valid, we fall back to original behavior
-    // where the file path is relative to the base uri.
-    // (and we don't even check to see if that's valid, try-require wouldn't need valid files)
-    const fromLoadedFile = ResolveUri(parentFolder, path);
-    return this.fileSystem.ReadFile(fromLoadedFile).then(
-      () => fromLoadedFile,
-      () => fromBaseUri,
-    );
-  }
-
-  private get BaseFolderUri(): string {
-    return EnsureIsFolderUri(ResolveUri(this.configFileFolderUri, <string>this.config["base-folder"]));
-  }
-
-  // public methods
-
-  public get UseExtensions(): Array<{ name: string; source: string; fullyQualified: string }> {
-    const useExtensions = this.config["use-extension"] || {};
-    return Object.keys(useExtensions).map((name) => {
-      const source = useExtensions[name].startsWith("file://")
-        ? FileUriToPath(useExtensions[name])
-        : useExtensions[name];
-      return {
-        name,
-        source,
-        fullyQualified: JSON.stringify([name, source]),
-      };
-    });
-  }
-
-  public resolveDirectives(predicate?: (each: ResolvedDirective) => boolean): ResolvedDirective[] {
-    // optionally filter by predicate.
-    const plainDirectives = values(arrayOf<Directive>(this.config["directive"]));
-
-    const declarations = this.config["declare-directive"] || {};
-    const expandDirective = (dir: Directive): Iterable<Directive> => {
-      const makro = Object.keys(dir).filter((m) => declarations[m])[0];
-      // const makro = keys(dir).first(m => !!declarations[m]);
-      if (!makro) {
-        return [dir]; // nothing to expand
-      }
-      // prepare directive
-      let parameters = (<any>dir)[makro];
-      if (!Array.isArray(parameters)) {
-        parameters = [parameters];
-      }
-      dir = { ...dir };
-      delete (<any>dir)[makro];
-      // call makro
-      const makroResults: any = From(parameters)
-        .SelectMany((parameter) => {
-          const result = safeEval(declarations[makro], { $: parameter, $context: dir });
-          return Array.isArray(result) ? result : [result];
-        })
-        .ToArray();
-      return From(makroResults).SelectMany((result: any) => expandDirective({ ...result, ...dir }));
-    };
-    // makro expansion
-    if (predicate) {
-      return plainDirectives
-        .selectMany(expandDirective)
-        .select((each) => new ResolvedDirective(each))
-        .where(predicate)
-        .toArray();
-    }
-    return plainDirectives
-      .selectMany(expandDirective)
-      .select((each) => new ResolvedDirective(each))
-      .toArray();
-    // return From(plainDirectives).SelectMany(expandDirective).Select(each => new StaticDirectiveView(each)).ToArray();
   }
 
   public get HeaderText(): string {
@@ -243,7 +161,7 @@ export class AutorestContext implements AutorestLogger {
     }
 
     if (key === "resolved-directive") {
-      return this.resolveDirectives();
+      return resolveDirectives(this.config);
     }
 
     // This key is used in pipelines plugins to retrieve the headertext.
@@ -253,25 +171,14 @@ export class AutorestContext implements AutorestLogger {
 
     let result = this.config;
     for (const keyPart of key.split(".")) {
-      result = result[keyPart];
+      result = result[keyPart as keyof AutorestRawConfiguration];
     }
     return result;
   }
 
   public *getNestedConfiguration(pluginName: string): Iterable<AutorestContext> {
-    const pp = pluginName.split(".");
-    if (pp.length > 1) {
-      const n = this.getNestedConfiguration(pp[0]);
-      for (const s of n) {
-        yield* s.getNestedConfiguration(pp.slice(1).join("."));
-      }
-      return;
-    }
-
-    for (const section of arrayOf<any>(this.config.raw[pluginName])) {
-      if (section) {
-        yield this.extendWith(section === true ? {} : section);
-      }
+    for (const nestedConfig of getNestedConfiguration(this.config, pluginName)) {
+      yield new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter);
     }
   }
 
@@ -281,179 +188,6 @@ export class AutorestContext implements AutorestLogger {
    */
   public extendWith(...overrides: AutorestRawConfiguration[]): AutorestContext {
     const nestedConfig = extendAutorestConfiguration(this.config, overrides);
-    return new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter, this.configFileFolderUri);
-  }
-
-  // message pipeline (source map resolution, filter, ...)
-  public async Message(m: Message): Promise<void> {
-    if (m.Channel === Channel.Debug && !this.config.debug) {
-      return;
-    }
-
-    if (m.Channel === Channel.Verbose && !this.config.verbose) {
-      return;
-    }
-
-    try {
-      // update source locations to point to loaded Swagger
-      if (m.Source && typeof m.Source.map === "function") {
-        const blameSources = m.Source.map(async (s) => {
-          let blameTree: BlameTree | null = null;
-
-          try {
-            const originalPath = JSON.stringify(s.Position.path);
-            let shouldComplain = false;
-            while (blameTree === null) {
-              try {
-                blameTree = await this.DataStore.Blame(s.document, s.Position);
-                if (shouldComplain) {
-                  this.Message({
-                    Channel: Channel.Verbose,
-                    Text: `\nDEVELOPER-WARNING: Path '${originalPath}' was corrected to ${JSON.stringify(
-                      s.Position.path,
-                    )} on MESSAGE '${JSON.stringify(m.Text)}'\n`,
-                  });
-                }
-              } catch (e) {
-                if (!shouldComplain) {
-                  shouldComplain = true;
-                }
-                const path = <Array<string>>s.Position.path;
-                if (path) {
-                  if (path.length === 0) {
-                    throw e;
-                  }
-                  // adjustment
-                  // 1) skip leading `$`
-                  if (path[0] === "$") {
-                    path.shift();
-                  } else {
-                    path.pop();
-                  }
-                } else {
-                  throw e;
-                }
-              }
-            }
-          } catch (e) {
-            /*
-      GS01: This should be restored when we go 'release'
-
-    this.Message({
-      Channel: Channel.Warning,
-      Text: `Failed to blame ${JSON.stringify(s.Position)} in '${JSON.stringify(s.document)}' (${e})`,
-      Details: e
-    });
-    */
-            return [s];
-          }
-
-          return blameTree.BlameLeafs().map(
-            (r) =>
-              <SourceLocation>{
-                document: r.source,
-                Position: { ...TryDecodeEnhancedPositionFromName(r.name), line: r.line, column: r.column },
-              },
-          );
-        });
-
-        const src = From(await Promise.all(blameSources))
-          .SelectMany((x) => x)
-          .ToArray();
-        m.Source = src;
-        // m.Source = From(blameSources).SelectMany(x => x).ToArray();
-        // get friendly names
-        for (const source of src) {
-          if (source.Position) {
-            try {
-              source.document = this.DataStore.ReadStrictSync(source.document).Description;
-            } catch {
-              // no worries
-            }
-          }
-        }
-      }
-
-      // set range (dummy)
-      if (m.Source && typeof m.Source.map === "function") {
-        m.Range = m.Source.map((s) => {
-          const positionStart = s.Position;
-          const positionEnd = <sourceMap.Position>{
-            line: s.Position.line,
-            column: s.Position.column + (s.Position.length || 3),
-          };
-
-          return <Range>{
-            document: s.document,
-            start: positionStart,
-            end: positionEnd,
-          };
-        });
-      }
-
-      // filter
-      const mx = this.suppressor.filter(m);
-
-      // forward
-      if (mx !== null) {
-        // format message
-        switch (this.GetEntry("message-format")) {
-          case "json":
-            // TODO: WHAT THE FUDGE, check with the consumers whether this has to be like that... otherwise, consider changing the format to something less generic
-            if (mx.Details) {
-              mx.Details.sources = (mx.Source || [])
-                .filter((x) => x.Position)
-                .map((source) => {
-                  let text = `${source.document}:${source.Position.line}:${source.Position.column}`;
-                  if (source.Position.path) {
-                    text += ` (${stringify(source.Position.path)})`;
-                  }
-                  return text;
-                });
-              if (mx.Details.sources.length > 0) {
-                mx.Details["jsonref"] = mx.Details.sources[0];
-                mx.Details["json-path"] = mx.Details.sources[0];
-              }
-            }
-            mx.FormattedMessage = JSON.stringify(mx.Details || mx, null, 2);
-            break;
-          case "yaml":
-            mx.FormattedMessage = Stringify([mx.Details || mx]).replace(/^---/, "");
-            break;
-          default: {
-            const t =
-              mx.Channel === Channel.Debug || mx.Channel === Channel.Verbose
-                ? ` [${Math.floor(process.uptime() * 100) / 100} s]`
-                : "";
-            let text = `${(mx.Channel || Channel.Information).toString().toUpperCase()}${
-              mx.Key ? ` (${[...mx.Key].join("/")})` : ""
-            }${t}: ${mx.Text}`;
-            for (const source of mx.Source || []) {
-              if (source.Position) {
-                try {
-                  text += `\n    - ${source.document}`;
-                  if (source.Position.line !== undefined) {
-                    text += `:${source.Position.line}`;
-                    if (source.Position.column !== undefined) {
-                      text += `:${source.Position.column}`;
-                    }
-                  }
-                  if (source.Position.path) {
-                    text += ` (${stringify(source.Position.path)})`;
-                  }
-                } catch (e) {
-                  // no friendly name, so nothing more specific to show
-                }
-              }
-            }
-            mx.FormattedMessage = text;
-            break;
-          }
-        }
-        this.messageEmitter.Message.Dispatch(mx);
-      }
-    } catch (e) {
-      this.messageEmitter.Message.Dispatch({ Channel: Channel.Error, Text: `${e}` });
-    }
+    return new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter);
   }
 }

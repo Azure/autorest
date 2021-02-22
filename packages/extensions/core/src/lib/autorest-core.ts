@@ -3,15 +3,15 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ConfigurationLoader, AutorestContext, MessageEmitter } from "./configuration";
+import { AutorestContextLoader, AutorestContext, MessageEmitter } from "./configuration";
 import { EventEmitter, IEvent } from "./events";
 import { Exception } from "@autorest/common";
 import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import { runPipeline } from "./pipeline/pipeline";
 export { AutorestContext } from "./configuration";
+import { isConfigurationDocument } from "@autorest/configuration";
 import { homedir } from "os";
 import { Artifact } from "./artifact";
-import * as Constants from "./constants";
 import { DocumentType } from "./document-type";
 import { Channel, Message } from "./message";
 
@@ -78,7 +78,7 @@ export class AutoRest extends EventEmitter {
     messageEmitter.ClearFolder.Subscribe((cfg, folder) => this.ClearFolder.Dispatch(folder));
     messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
 
-    return (this._view = await new ConfigurationLoader(this.fileSystem, this.configFileOrFolderUri).CreateView(
+    return (this._view = await new AutorestContextLoader(this.fileSystem, this.configFileOrFolderUri).CreateView(
       messageEmitter,
       includeDefault,
       ...this._configurations,
@@ -214,16 +214,6 @@ export async function LiterateToJson(content: string): Promise<string> {
   }
 }
 
-/**
- * Checks to see if the document is a literate configuation document.
- *
- * @param content the document content to check
- */
-export async function IsConfigurationDocument(content: string): Promise<boolean> {
-  // this checks to see if the document is an autorest markdown configuration document
-  return content.indexOf(Constants.MagicString) > -1;
-}
-
 /** Determines the document type based on the content of the document
  *
  * @returns Promise<DocumentType> one of:
@@ -237,7 +227,7 @@ export async function IsConfigurationDocument(content: string): Promise<boolean>
 export async function IdentifyDocument(content: string): Promise<DocumentType> {
   if (content) {
     // check for configuration
-    if (await IsConfigurationDocument(content)) {
+    if (await isConfigurationDocument(content)) {
       return DocumentType.LiterateConfiguration;
     }
 
@@ -283,7 +273,7 @@ export async function IsOpenApiDocument(content: string): Promise<boolean> {
  * Shuts down any active autorest extension processes.
  */
 export async function Shutdown() {
-  await ConfigurationLoader.shutdown();
+  await AutorestContextLoader.shutdown();
 }
 
 /**

@@ -429,7 +429,7 @@ export class DataHandle {
     // start the clock once this has been created.
     // this ensures that the data cache will be flushed if not
     // used in a reasonable amount of time
-    this.onTimer();
+    void this.onTimer();
   }
 
   public async serialize() {
@@ -448,7 +448,7 @@ export class DataHandle {
 
     if (this.item.accessed) {
       // it's been cached. start the timer!
-      this.onTimer();
+      void this.onTimer();
 
       // clear the accessed flag before we go.
       this.item.accessed = false;
@@ -499,7 +499,7 @@ export class DataHandle {
         this.item.cached = await fs.readFile(this.item.name, "utf8");
 
         // start the timer again.
-        this.onTimer();
+        void this.onTimer();
       }
     }
 

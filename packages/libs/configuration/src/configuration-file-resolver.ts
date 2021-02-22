@@ -1,31 +1,26 @@
+import { AutorestLogger } from "@autorest/common";
 import { IFileSystem, ParseToAst } from "@azure-tools/datastore";
 import { EnsureIsFolderUri, ResolveUri } from "@azure-tools/uri";
-import { From } from "linq-es2015";
-import * as Constants from "../constants";
-import { Channel } from "../message";
-import { MessageEmitter } from "./message-emitter";
+import { DefaultConfiguration, MagicString } from "./contants";
 
 /**
  * Get the path to the configuration file.
  * @param fileSystem Filesystem.
  * @param configFileOrFolderUri Uri/folder to check
- * @param messageEmitter
+ * @param logger
  * @param walkUpFolders If it should try to check parent folder recursively.
  */
 export const detectConfigurationFile = async (
   fileSystem: IFileSystem,
   configFileOrFolderUri: string | null,
-  messageEmitter?: MessageEmitter,
+  logger?: AutorestLogger,
   walkUpFolders = false,
-): Promise<string | null> => {
-  const files = await detectConfigurationFiles(fileSystem, configFileOrFolderUri, messageEmitter, walkUpFolders);
+): Promise<string | undefined> => {
+  const files = await detectConfigurationFiles(fileSystem, configFileOrFolderUri, logger, walkUpFolders);
 
   return (
-    From<string>(files).FirstOrDefault((each) => each.toLowerCase().endsWith("/" + Constants.DefaultConfiguration)) ||
-    From<string>(files)
-      .OrderBy((each) => each.length)
-      .FirstOrDefault() ||
-    null
+    files.filter((x) => x.toLowerCase().endsWith("/" + DefaultConfiguration))[0] ||
+    files.sort((a, b) => a.length - b.length)[0]
   );
 };
 
@@ -33,13 +28,13 @@ export const detectConfigurationFile = async (
  * Get the paths to all the configuration files.
  * @param fileSystem Filesystem.
  * @param configFileOrFolderUri Uri/folder to check
- * @param messageEmitter
+ * @param logger
  * @param walkUpFolders If it should try to check parent folder recursively.
  */
 export const detectConfigurationFiles = async (
   fileSystem: IFileSystem,
   configFileOrFolderUri: string | null,
-  messageEmitter?: MessageEmitter,
+  logger?: AutorestLogger,
   walkUpFolders = false,
 ): Promise<Array<string>> => {
   const originalConfigFileOrFolderUri = configFileOrFolderUri;
@@ -58,7 +53,7 @@ export const detectConfigurationFiles = async (
     content = null;
   }
   if (content !== null) {
-    if (content.indexOf(Constants.MagicString) > -1) {
+    if (content.indexOf(MagicString) > -1) {
       // the file name was passed in!
       return [configFileOrFolderUri];
     }
@@ -81,7 +76,7 @@ export const detectConfigurationFiles = async (
   for (const name of await fileSystem.EnumerateFileUris(EnsureIsFolderUri(configFileOrFolderUri))) {
     if (name.endsWith(".md")) {
       const content = await fileSystem.ReadFile(name);
-      if (content.indexOf(Constants.MagicString) > -1) {
+      if (content.indexOf(MagicString) > -1) {
         results.push(name);
       }
     }
@@ -92,22 +87,24 @@ export const detectConfigurationFiles = async (
     const newUriToConfigFileOrWorkingFolder = ResolveUri(configFileOrFolderUri, "..");
     if (newUriToConfigFileOrWorkingFolder !== configFileOrFolderUri) {
       results.push(
-        ...(await detectConfigurationFiles(
-          fileSystem,
-          newUriToConfigFileOrWorkingFolder,
-          messageEmitter,
-          walkUpFolders,
-        )),
+        ...(await detectConfigurationFiles(fileSystem, newUriToConfigFileOrWorkingFolder, logger, walkUpFolders)),
       );
     }
   } else {
-    if (messageEmitter && results.length === 0) {
-      messageEmitter.Message.Dispatch({
-        Channel: Channel.Verbose,
-        Text: `No configuration found at '${originalConfigFileOrFolderUri}'.`,
-      });
+    if (logger && results.length === 0) {
+      logger.verbose(`No configuration found at '${originalConfigFileOrFolderUri}'.`);
     }
   }
 
   return results;
 };
+
+/**
+ * Checks to see if the document is a literate configuation document.
+ *
+ * @param content the document content to check
+ */
+export async function isConfigurationDocument(content: string): Promise<boolean> {
+  // this checks to see if the document is an autorest markdown configuration document
+  return content.indexOf(MagicString) > -1;
+}

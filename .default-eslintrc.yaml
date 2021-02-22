@@ -22,6 +22,8 @@ parserOptions:
   ecmaVersion: 2018
   sourceType: module
   warnOnUnsupportedTypeScriptVersion: false
+  project: ./tsconfig.json
+
 rules:
   "@typescript-eslint/no-this-alias": "off"
   "@typescript-eslint/interface-name-prefix": "off"
@@ -39,6 +41,7 @@ rules:
   "@typescript-eslint/explicit-module-boundary-types": "off"
   "@typescript-eslint/ban-types": "off"
   "@typescript-eslint/consistent-type-assertions": "off"
+  "@typescript-eslint/no-floating-promises": "warn"
 
   "require-atomic-updates": "off"
 

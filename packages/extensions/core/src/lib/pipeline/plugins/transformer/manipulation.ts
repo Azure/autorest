@@ -10,13 +10,14 @@ import { Channel, Message, SourceLocation } from "../../../message";
 import { manipulateObject } from "./object-manipulator";
 import { values } from "@azure-tools/linq";
 import { evalDirectiveTest, evalDirectiveTransform } from "./eval";
-import { ResolvedDirective } from "@autorest/configuration";
+import { ResolvedDirective, resolveDirectives } from "@autorest/configuration";
 
 export class Manipulator {
   private transformations: Array<ResolvedDirective>;
 
-  public constructor(private config: AutorestContext) {
-    this.transformations = config.resolveDirectives(
+  public constructor(private context: AutorestContext) {
+    this.transformations = resolveDirectives(
+      context.config,
       (directive) => directive.from.length > 0 && directive.transform.length > 0 && directive.where.length > 0,
     );
   }
@@ -60,7 +61,7 @@ export class Manipulator {
                     for (const src of message.Source) {
                       src.document = src.document || data.key;
                     }
-                    this.config.Message(message);
+                    this.context.Message(message);
                   }
                 }
               }
@@ -88,13 +89,13 @@ export class Manipulator {
       where,
       (doc, obj, path) =>
         evalDirectiveTransform(transformCode, {
-          config: this.config,
+          config: this.context,
           value: obj,
           doc: doc,
           path: path,
           documentPath: data.originalFullPath,
         }),
-      this.config,
+      this.context,
       transformCode,
     );
   }

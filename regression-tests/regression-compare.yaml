@@ -81,6 +81,7 @@ languages:
       - --use:@autorest/typescript@6.0.0-dev.20201208.1
     newArgs:
       - --v3
+      - --debug
       - --version:../packages/extensions/core
       - --use:../packages/extensions/modelerfour
       - --package-name:test-package

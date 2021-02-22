@@ -504,8 +504,8 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
         taskx._finishedAt = Date.now();
       })
       .catch(() => (taskx._state = "failed"));
-    barrier.Await(task);
-    barrierRobust.Await(task.catch(() => {}));
+    void barrier.Await(task);
+    void barrierRobust.Await(task.catch(() => {}));
   }
 
   try {

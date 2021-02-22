@@ -11,7 +11,6 @@ export {
   AutorestContext,
   IdentifyDocument,
   IsConfigurationExtension,
-  IsConfigurationDocument,
   IsOpenApiExtension,
   LiterateToJson,
   IsOpenApiDocument,
