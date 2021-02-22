@@ -34,15 +34,7 @@ const color: (text: string) => string = (<any>global).color ? (<any>global).colo
 // start of autorest-ng
 // the console app starts for real here.
 
-import {
-  CreateObject,
-  DataStore,
-  EnhancedFileSystem,
-  nodes,
-  Parse,
-  RealFileSystem,
-  Stringify,
-} from "@azure-tools/datastore";
+import { CreateObject, EnhancedFileSystem, Parse, RealFileSystem } from "@azure-tools/datastore";
 import {
   ClearFolder,
   CreateFolderUri,
@@ -52,140 +44,17 @@ import {
   WriteBinary,
   WriteString,
 } from "@azure-tools/uri";
-import { ChildProcess } from "child_process";
 import { join, resolve as currentDirectory } from "path";
 import { Help } from "./help";
-import { CreateConfiguration, isLegacy } from "./legacyCli";
 import { Artifact } from "./lib/artifact";
 import { AutoRest, IsOpenApiDocument, Shutdown } from "./lib/autorest-core";
 import { mergeConfigurations } from "./lib/configuration";
 import { Exception } from "@autorest/common";
 import { Channel, Message } from "./lib/message";
 import { homedir } from "os";
-import { AutorestRawConfiguration } from "@autorest/configuration";
 
 let verbose = false;
 let debug = false;
-
-function awaitable(child: ChildProcess): Promise<number> {
-  return new Promise<number>((resolve, reject) => {
-    child.addListener("error", reject);
-    child.addListener("exit", resolve);
-  });
-}
-
-async function legacyMain(autorestArgs: Array<string>): Promise<number> {
-  // generate virtual config file
-  const currentDirUri = CreateFolderUri(currentDirectory());
-  const dataStore = new DataStore();
-  let config: AutorestRawConfiguration = {};
-  try {
-    config = await CreateConfiguration(
-      currentDirUri,
-      dataStore.GetReadThroughScope(new RealFileSystem()),
-      autorestArgs,
-    );
-  } catch (e) {
-    console.error(
-      color("!Error: You have provided legacy command line arguments (single-dash syntax) that seem broken."),
-    );
-    console.error("");
-    console.error(
-      color(
-        "> While AutoRest keeps on supporting the old CLI by converting it over to the new one internally, \n" +
-          "> it does not have crazy logic determining *what* is wrong with arguments, should conversion fail. \n" +
-          "> Please try fixing your arguments or consider moving to the new CLI. \n" +
-          "> isit https://github.com/Azure/autorest/blob/master/docs/user/cli.md for information about the new CLI.",
-      ),
-    );
-    console.error("");
-    console.error(color("!Internal error: " + e));
-    await showHelp();
-    return 1;
-  }
-
-  // autorest init
-  if (autorestArgs[0] === "init") {
-    const clientNameGuess =
-      (config["override-info"] || {}).title || Parse<any>(await ReadUri((<any>config["input-file"])[0])).info.title;
-    await autorestInit(clientNameGuess, Array.isArray(config["input-file"]) ? <any>config["input-file"] : []);
-    return 0;
-  }
-  // autorest init-min
-  if (autorestArgs[0] === "init-min") {
-    console.log(
-      `# AutoRest Configuration (auto-generated, please adjust title)
-
-> see https://aka.ms/autorest
-
-The following configuration was auto-generated and can be adjusted.
-
-~~~ yaml
-${Stringify(config).replace(/^---\n/, "")}
-~~~
-
-`.replace(/~/g, "`"),
-    );
-    return 0;
-  }
-  // autorest init-cli
-  if (autorestArgs[0] === "init-cli") {
-    const args: Array<string> = [];
-    for (const node of nodes(config, "$..*")) {
-      const path = node.path.join(".");
-      const values = node.value instanceof Array ? node.value : typeof node.value === "object" ? [] : [node.value];
-      for (const value of values) {
-        args.push(`--${path}=${value}`);
-      }
-    }
-    console.log(args.join(" "));
-    return 0;
-  }
-
-  config["base-folder"] = currentDirUri;
-  const api = new AutoRest(new RealFileSystem());
-  api.AddConfiguration(config);
-  const view = await api.view;
-  let outstanding: Promise<void> = Promise.resolve();
-  api.GeneratedFile.Subscribe(
-    (_: AutoRest, file: Artifact) =>
-      (outstanding = outstanding.then(() =>
-        file.type === "binary-file" ? WriteBinary(file.uri, file.content) : WriteString(file.uri, file.content),
-      )),
-  );
-  api.ClearFolder.Subscribe(
-    (_: AutoRest, folder: string) =>
-      (outstanding = outstanding.then(async () => {
-        try {
-          await ClearFolder(folder);
-        } catch {
-          // no worries
-        }
-      })),
-  );
-  subscribeMessages(api, () => {});
-
-  // warn about `--` arguments
-  for (const arg of autorestArgs) {
-    if (arg.startsWith("--")) {
-      view.Message({
-        Channel: Channel.Warning,
-        Text:
-          `The parameter ${arg} looks like it was meant for the new CLI! ` +
-          "Note that you have invoked the legacy CLI (by using at least one single-dash argument). " +
-          "Please visit https://github.com/Azure/autorest/blob/master/docs/user/cli.md for information about the new CLI.",
-      });
-    }
-  }
-
-  const result = await api.Process().finish;
-  if (result != true) {
-    throw result;
-  }
-  await outstanding;
-
-  return 0;
-}
 
 /**
  * Current AutoRest
@@ -640,11 +509,8 @@ async function mainImpl(): Promise<number> {
 
   try {
     autorestArgs = process.argv.slice(2);
-    if (isLegacy(autorestArgs)) {
-      return await legacyMain(autorestArgs);
-    } else {
-      return await currentMain(autorestArgs);
-    }
+
+    return await currentMain(autorestArgs);
   } catch (e) {
     // be very careful about the following check:
     // - doing the inversion (instanceof Error) doesn't reliably work since that seems to return false on Errors marshalled from safeEval
