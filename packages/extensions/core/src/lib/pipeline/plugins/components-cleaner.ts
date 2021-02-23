@@ -167,7 +167,7 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
       }
       if (key === "$ref" && typeof value === "string") {
         const refParts = value.split("/");
-        const componentUid = refParts.pop();
+        const componentUid = refParts.pop() as string;
         const t: ComponentType = refParts.pop() as ComponentType;
         if (!this.visitedComponents[t].has(componentUid)) {
           this.visitedComponents[t].add(componentUid);
