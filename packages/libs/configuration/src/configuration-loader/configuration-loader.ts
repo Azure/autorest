@@ -153,6 +153,8 @@ export class ConfigurationLoader {
           const data = await inputView.ReadStrict(extensionConfigurationUri);
           manager.addConfigFile(await readConfigurationFile(data, this.logger, this.dataStore.getDataSink()));
 
+          await resolveRequiredConfigs(fsLocal);
+
           viewsToHandle.push(await resolveConfig());
         } catch (e) {
           this.logger.fatal(
