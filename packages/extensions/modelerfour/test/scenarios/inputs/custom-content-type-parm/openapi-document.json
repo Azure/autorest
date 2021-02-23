@@ -15,7 +15,7 @@
         "operationId": "postWithCustomContentType",
         "requestBody": {
           "content": {
-            "multipart/mixed": {
+            "application/json": {
               "schema": {
                 "type": "object",
                 "format": "file"

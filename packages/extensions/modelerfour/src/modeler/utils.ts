@@ -9,13 +9,12 @@ export function isContentTypeParameterDefined(operation: Operation): boolean {
 }
 
 function isParameterContentTypeHeader(parameter: Parameter): boolean {
-  return false;
-  // const serializedName = parameter.language.default.serializedName;
-  // if (!serializedName || typeof serializedName !== "string") {
-  //   return false;
-  // }
-  // if (parameter.protocol.http?.in !== "header") {
-  //   return false;
-  // }
-  // return serializedName?.toLowerCase() === "content-type";
+  const serializedName = parameter.language.default.serializedName;
+  if (!serializedName || typeof serializedName !== "string") {
+    return false;
+  }
+  if (parameter.protocol.http?.in !== "header") {
+    return false;
+  }
+  return serializedName?.toLowerCase() === "content-type";
 }

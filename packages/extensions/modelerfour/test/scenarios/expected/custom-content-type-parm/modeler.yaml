@@ -4,7 +4,7 @@ info: !Info
   title: Operation where there is a custom Content-Type parameter.
 schemas: !Schemas 
   booleans:
-    - !BooleanSchema &ref_3
+    - !BooleanSchema &ref_5
       type: boolean
       language: !Languages 
         default:
@@ -26,8 +26,16 @@ schemas: !Schemas
           name: ''
           description: ''
       protocol: !Protocols {}
+  binaries:
+    - !BinarySchema &ref_3
+      type: binary
+      language: !Languages 
+        default:
+          name: binary
+          description: ''
+      protocol: !Protocols {}
 globalParameters:
-  - !Parameter &ref_4
+  - !Parameter &ref_6
     schema: *ref_0
     clientDefaultValue: ''
     implementation: Client
@@ -52,7 +60,7 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_4
+          - *ref_6
           - !Parameter &ref_2
             schema: *ref_1
             implementation: Method
@@ -65,11 +73,40 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter &ref_4
+                schema: *ref_3
+                implementation: Method
+                language: !Languages 
+                  default:
+                    name: data
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: binary
+            signatureParameters:
+              - *ref_4
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpBinaryRequest 
+                path: /api/User/HasUser
+                method: post
+                binary: true
+                knownMediaType: binary
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
         signatureParameters:
           - *ref_2
         responses:
           - !SchemaResponse 
-            schema: *ref_3
+            schema: *ref_5
             language: !Languages 
               default:
                 name: ''
