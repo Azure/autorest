@@ -16,6 +16,7 @@ export interface AutorestArgs {
   "configFileOrFolder"?: string;
   "force"?: boolean;
 
+  "verbose"?: boolean;
   "message-format"?: "regular" | "json" | "yaml";
   "list-available"?: boolean;
   "clear-temp"?: boolean;

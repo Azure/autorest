@@ -11,8 +11,6 @@ export const getRequestedCoreVersion = (args: AutorestArgs): string => {
   return args.version || (args.latest && "latest") || (args.preview && "preview") || "latest-installed";
 };
 
-const cwd = process.cwd();
-
 /**
  * Tries to load the version of autorest core from a config file.
  * @param args CLI Version.
@@ -21,12 +19,14 @@ const cwd = process.cwd();
 export const findCoreVersionUsingConfiguration = async (args: AutorestArgs): Promise<string | undefined> => {
   const configFileOrFolder = args.configFileOrFolder;
 
+  /* eslint-disable no-console */
   const logger: AutorestLogger = {
-    fatal: () => null,
-    info: () => null,
-    verbose: () => null,
-    trackError: () => null,
+    fatal: (x) => console.error(x),
+    info: (x) => console.log(x),
+    verbose: (x) => args.verbose && console.log(x),
+    trackError: (x) => console.error(x),
   };
+  /* eslint-enable no-console */
 
   const loader = new ConfigurationLoader(logger, configFileOrFolder);
   const { config } = await loader.load([args], false);

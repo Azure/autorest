@@ -83,7 +83,7 @@ export async function installedCores() {
           (ext) =>
             (ext.name === newCorePackage || ext.name === oldCorePackage) && semver.satisfies(ext.version, versionRange),
         )
-      : new Array<Extension>();
+      : [];
   return result.sort((a, b) => semver.compare(b.version, a.version));
 }
 

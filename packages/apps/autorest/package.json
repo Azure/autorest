@@ -40,12 +40,11 @@
   },
   "typings": "./dist/exports.d.ts",
   "devDependencies": {
-    "@autorest/core": "~3.0.6375",
     "@autorest/configuration": "~1.0.1",
+    "@autorest/core": "~3.0.6375",
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/extension": "~3.2.0",
     "@azure-tools/tasks": "~3.0.0",
-    "@azure-tools/uri": "~3.0.0",
     "@types/commonmark": "^0.27.0",
     "@types/jest": "^26.0.20",
     "@types/node": "~14.14.20",
