@@ -76,7 +76,7 @@ import { Session, Channel } from "@autorest/extension-base";
 import { Interpretations, XMSEnum } from "./interpretations";
 import { fail, minimum, pascalCase, knownMediaType, KnownMediaType } from "@azure-tools/codegen";
 import { ModelerFourOptions } from "./modelerfour-options";
-import { operationDefineContentTypeParameter } from "./utils";
+import { isContentTypeParameterDefined } from "./utils";
 
 /** adds only if the item is not in the collection already
  *
@@ -1374,7 +1374,7 @@ export class ModelerFour {
     const shouldIncludeContentType =
       this.options[`always-create-content-type-parameter`] === true || http.mediaTypes.length > 1;
 
-    if (!operationDefineContentTypeParameter(operation) && shouldIncludeContentType) {
+    if (!isContentTypeParameterDefined(operation) && shouldIncludeContentType) {
       const scs = this.getContentTypeParameterSchema(http);
 
       // add the parameter for the binary upload.
@@ -1451,10 +1451,7 @@ export class ModelerFour {
       },
     });
 
-    if (
-      !operationDefineContentTypeParameter(operation) &&
-      this.options[`always-create-content-type-parameter`] === true
-    ) {
+    if (!isContentTypeParameterDefined(operation) && this.options[`always-create-content-type-parameter`] === true) {
       const scs = this.getContentTypeParameterSchema(http, true);
 
       // add the parameter for the binary upload.
