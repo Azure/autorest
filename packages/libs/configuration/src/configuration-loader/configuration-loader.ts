@@ -60,8 +60,6 @@ export class ConfigurationLoader {
       ? ResolveUri(configFileUri, "./")
       : this.configFileOrFolderUri || "file:///";
 
-    const configurationFiles: { [key: string]: any } = {};
-
     const manager = new ConfigurationManager(configFileFolderUri, this.fileSystem);
 
     const resolveConfig = () => manager.resolveConfig();
@@ -83,31 +81,11 @@ export class ConfigurationLoader {
 
     // 3. resolve 'require'd configuration
     const addedConfigs = new Set<string>();
+
     const resolveRequiredConfigs = async (fsToUse: IFileSystem) => {
-      for await (let additionalConfig of getIncludedConfigurationFiles(resolveConfig, fsToUse, addedConfigs)) {
-        // acquire additional configs
-        try {
-          additionalConfig = simplifyUri(additionalConfig);
-
-          // skip ones we've aleady loaded faster.
-          if (configurationFiles[additionalConfig]) {
-            continue;
-          }
-
-          this.logger.verbose(`> Including configuration file '${additionalConfig}'`);
-          addedConfigs.add(additionalConfig);
-          // merge config
-
-          const inputView = this.dataStore.GetReadThroughScope(fsToUse);
-          const data = await inputView.ReadStrict(additionalConfig);
-          manager.addConfigFile(await readConfigurationFile(data, this.logger, this.dataStore.getDataSink()));
-        } catch (e) {
-          this.logger.fatal(`Failed to acquire 'require'd configuration '${additionalConfig}'`);
-
-          throw e;
-        }
-      }
+      return this.resolveRequiredConfigs(manager, fsToUse, addedConfigs);
     };
+
     await resolveRequiredConfigs(this.fileSystem);
 
     // 4. default configuration
@@ -180,6 +158,40 @@ export class ConfigurationLoader {
     }
   }
 
+  /**
+   * Resolve the required configurations that haven't been loaded yet.
+   * @param manager Configuration manager.
+   * @param fsToUse Filesystem to use to load unloaded configs.
+   * @param alreadyAddedConfigs List of configuration already loaded.
+   */
+  private async resolveRequiredConfigs(
+    manager: ConfigurationManager,
+    fsToUse: IFileSystem,
+    alreadyAddedConfigs: Set<string>,
+  ) {
+    for await (let additionalConfig of getIncludedConfigurationFiles(
+      () => manager.resolveConfig(),
+      fsToUse,
+      alreadyAddedConfigs,
+    )) {
+      // acquire additional configs
+      try {
+        additionalConfig = simplifyUri(additionalConfig);
+
+        this.logger.verbose(`> Including configuration file '${additionalConfig}'`);
+        alreadyAddedConfigs.add(additionalConfig);
+        // merge config
+
+        const inputView = this.dataStore.GetReadThroughScope(fsToUse);
+        const data = await inputView.ReadStrict(additionalConfig);
+        manager.addConfigFile(await readConfigurationFile(data, this.logger, this.dataStore.getDataSink()));
+      } catch (e) {
+        this.logger.fatal(`Failed to acquire 'require'd configuration '${additionalConfig}'`);
+
+        throw e;
+      }
+    }
+  }
   /**
    * Returns the @see Extension object for the requested extension.
    * @param extensionDef extension definition.
