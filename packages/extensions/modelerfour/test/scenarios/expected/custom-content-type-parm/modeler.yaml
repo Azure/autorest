@@ -1,0 +1,101 @@
+!CodeModel 
+info: !Info 
+  description: Acceptance test for file with custom content type.
+  title: Operation where there is a custom Content-Type parameter.
+schemas: !Schemas 
+  booleans:
+    - !BooleanSchema &ref_3
+      type: boolean
+      language: !Languages 
+        default:
+          name: response
+          description: ''
+      protocol: !Protocols {}
+  strings:
+    - !StringSchema &ref_0
+      type: string
+      language: !Languages 
+        default:
+          name: string
+          description: simple string
+      protocol: !Protocols {}
+    - !StringSchema &ref_1
+      type: string
+      language: !Languages 
+        default:
+          name: ''
+          description: ''
+      protocol: !Protocols {}
+globalParameters:
+  - !Parameter &ref_4
+    schema: *ref_0
+    clientDefaultValue: ''
+    implementation: Client
+    origin: modelerfour:synthesized/host
+    required: true
+    extensions:
+      x-ms-skip-url-encoding: true
+    language: !Languages 
+      default:
+        name: $host
+        description: server parameter
+        serializedName: $host
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: uri
+operationGroups:
+  - !OperationGroup 
+    $key: ''
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_4
+          - !Parameter &ref_2
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: multipartContentType
+                description: 'Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID>'
+                serializedName: Content-Type
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: header
+        signatureParameters:
+          - *ref_2
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: postWithCustomContentType
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: ''
+        description: ''
+    protocol: !Protocols {}
+security: !Security 
+  authenticationRequired: false
+language: !Languages 
+  default:
+    name: ''
+    description: ''
+protocol: !Protocols 
+  http: !HttpModel {}
