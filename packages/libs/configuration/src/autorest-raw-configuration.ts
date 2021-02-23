@@ -1,4 +1,3 @@
-import { ExtensionDefinition } from "./configuration-loader";
 import { Directive } from "./directive";
 
 /**
