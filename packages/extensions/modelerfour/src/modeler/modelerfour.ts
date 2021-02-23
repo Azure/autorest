@@ -1368,8 +1368,6 @@ export class ModelerFour {
         http,
       },
     });
-    this.session.log(`Options ${JSON.stringify(this.options)}`, {});
-    this.session.log(`Accept-param ${this.options["always-create-accept-parameter"]}`, {});
 
     const shouldIncludeContentType =
       this.options[`always-create-content-type-parameter`] === true || http.mediaTypes.length > 1;
