@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { OperationCanceledException, Delay, LazyPromise, Lazy } from "@azure-tools/tasks";
+import { OperationCanceledException, Delay, Lazy } from "@azure-tools/tasks";
 import { ReadUri, ResolveUri, ParentFolderUri } from "@azure-tools/uri";
-import { MappedPosition, MappingItem, Position, RawSourceMap, SourceMapConsumer, SourceMapGenerator } from "source-map";
+import { MappedPosition, Position, RawSourceMap, SourceMapGenerator } from "source-map";
 import { CancellationToken } from "../cancellation";
 import { IFileSystem } from "../file-system/file-system";
 import { FastStringify, ParseNode, ParseToAst as parseAst, YAMLNode, parseYaml } from "../yaml";

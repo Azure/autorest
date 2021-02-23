@@ -23,7 +23,7 @@ import { color } from "./coloring";
 import { parseArgs } from "./args";
 import { resetAutorest, showAvailableCoreVersions, showInstalledExtensions } from "./commands";
 import { checkForAutoRestUpdate, clearTempData } from "./actions";
-import { configurationSpecifiedVersion, getRequestedCoreVersion } from "./core-version-utils";
+import { findCoreVersionUsingConfiguration, getRequestedCoreVersion } from "./core-version-utils";
 
 const launchCore = isDebuggerEnabled ? tryRequire : runCoreOutOfProc;
 
@@ -104,28 +104,26 @@ async function main() {
 
     let requestedVersion: string = getRequestedCoreVersion(args);
 
-    // check to see if local installed core is available.
-    let localVersion = resolvePathForLocalVersion(args.version ? requestedVersion : null);
-
-    if (!args.version && localVersion) {
+    if (!args.version) {
       // they never specified a version on the cmdline, but we might have one in configuration
-      const cfgVersion = (await configurationSpecifiedVersion(args, localVersion))?.version;
+      const cfgVersion = await findCoreVersionUsingConfiguration(args);
 
       // if we got one back, we're going to set the requestedVersion to whatever they asked for.
       if (cfgVersion) {
         args.version = requestedVersion = cfgVersion;
-
-        // and not use the local version
-        localVersion = undefined;
       }
     }
 
-    // if this is still valid, then we're not overriding it from configuration.
-    if (localVersion) {
-      process.chdir(cwd);
+    const localVersion = resolvePathForLocalVersion(args.version ? requestedVersion : null);
 
-      if (await launchCore(localVersion, "app.js")) {
-        return;
+    // If we still don't have a requested version, check to see if local installed core is available.
+    if (!args.version) {
+      if (localVersion) {
+        process.chdir(cwd);
+
+        if (await launchCore(localVersion, "app.js")) {
+          return;
+        }
       }
     }
 
@@ -148,10 +146,9 @@ async function main() {
 
     // logic to resolve and optionally install a autorest core package.
     // will throw if it's not doable.
-    let selectedVersion = await selectVersion(requestedVersion, force);
+    const selectedVersion = await selectVersion(requestedVersion, force);
 
     // let's strip the extra stuff from the command line before we require the core module.
-    const oldArgs = process.argv;
     const newArgs = new Array<string>();
 
     for (const each of process.argv) {
@@ -180,11 +177,6 @@ async function main() {
     if (args.reset || args.latest || args.version == "latest") {
       // if there is *any* other argument left, that's an indicator that the core is supposed to do something
       process.argv.push("--allow-no-input");
-    }
-
-    // if they never said the version on the command line, we should make a check for the config version.
-    if (!args.version) {
-      selectedVersion = (await configurationSpecifiedVersion(args, selectedVersion)) || selectedVersion;
     }
 
     if (args.debug) {

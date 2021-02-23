@@ -90,14 +90,12 @@ export class AutorestContextLoader {
     const logger: AutorestLogger = new AutorestCoreLogger(mergeConfigurations(...configs) as any, messageEmitter);
 
     const defaultConfigUri = ResolveUri(CreateFolderUri(AppRoot), "resources/default-configuration.md");
-    const loader = new ConfigurationLoader(
-      this.fileSystem,
-      messageEmitter.DataStore,
-      logger,
-      await AutorestContextLoader.extensionManager,
+    const loader = new ConfigurationLoader(logger, this.configFileOrFolderUri, {
+      extensionManager: await AutorestContextLoader.extensionManager,
+      fileSystem: this.fileSystem,
+      dataStore: messageEmitter.DataStore,
       defaultConfigUri,
-      this.configFileOrFolderUri,
-    );
+    });
 
     const { config, extensions } = await loader.load(configs, includeDefault);
     this.setupExtensions(config, extensions);

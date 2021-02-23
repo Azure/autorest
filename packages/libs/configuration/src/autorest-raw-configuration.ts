@@ -8,6 +8,12 @@ import { Directive } from "./directive";
 export interface AutorestRawConfiguration extends AutorestRawConfigurationAlias {
   "__status"?: any;
   "__parents"?: any | undefined;
+
+  /**
+   * Version of @autorest/core.
+   */
+  "version"?: string;
+
   "allow-no-input"?: boolean;
   "input-file"?: Array<string> | string;
   "exclude-file"?: Array<string> | string;
