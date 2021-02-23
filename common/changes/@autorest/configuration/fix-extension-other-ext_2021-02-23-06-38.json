@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/configuration",
+      "comment": "**Fix** Plugins with nested configuration file requiring other plugins wasn't loading those plugins",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/configuration",
+  "email": "tiguerin@microsoft.com"
+}
