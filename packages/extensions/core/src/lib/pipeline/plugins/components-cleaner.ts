@@ -28,7 +28,7 @@ import { PipelinePlugin } from "../common";
  *
  */
 
-type componentType =
+type ComponentType =
   | "schemas"
   | "responses"
   | "parameters"
@@ -165,10 +165,10 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
       if (key === "x-ms-examples") {
         continue;
       }
-      if (key === "$ref") {
+      if (key === "$ref" && typeof value === "string") {
         const refParts = value.split("/");
         const componentUid = refParts.pop();
-        const t: componentType = refParts.pop();
+        const t: ComponentType = refParts.pop() as ComponentType;
         if (!this.visitedComponents[t].has(componentUid)) {
           this.visitedComponents[t].add(componentUid);
           this.componentsToKeep[t].add(componentUid);

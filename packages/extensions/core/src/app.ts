@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 /* eslint-disable no-console */
-
+import "source-map-support/register";
 import { omit } from "lodash";
 
 // https://github.com/uxitten/polyfill/blob/master/string.polyfill.js

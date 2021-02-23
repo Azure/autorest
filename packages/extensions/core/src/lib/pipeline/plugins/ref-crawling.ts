@@ -95,6 +95,7 @@ class RefProcessor extends Transformer<any, any> {
 
   constructor(originalFile: DataHandle, private inputScope: DataSource) {
     super(originalFile);
+
     this.originalFileLocation = ResolveUri(originalFile.originalDirectory, originalFile.identity[0]);
   }
 
@@ -129,7 +130,8 @@ class RefProcessor extends Transformer<any, any> {
         this.promises.push(this.processXMSExamples(targetParent, value));
         continue;
       }
-      if (key === "$ref") {
+      // If the key is $ref and the value is a string then it should be a json reference. Otherwise it might be a property called $ref if it is another type.
+      if (key === "$ref" && typeof value === "string") {
         const refFileName = value.indexOf("#") === -1 ? value : value.split("#")[0];
         const refPointer = value.indexOf("#") === -1 ? undefined : value.split("#")[1];
         const newRefFileName = ResolveUri(this.originalFileLocation, refFileName);
