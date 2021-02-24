@@ -1906,11 +1906,14 @@ export class ModelerFour {
           this.trackSchemaUsage(parameterSchema, { usage: [SchemaContext.Input] });
 
           if (parameter.in === ParameterLocation.Header && "x-ms-header-collection-prefix" in parameter) {
-            parameterSchema = new DictionarySchema(
+            const dictionarySchema = new DictionarySchema(
               parameterSchema.language.default.name,
               parameterSchema.language.default.description,
               parameterSchema,
             );
+            this.trackSchemaUsage(dictionarySchema, { usage: [SchemaContext.Input] });
+            this.codeModel.schemas.add(dictionarySchema);
+            parameterSchema = dictionarySchema;
           }
 
           /* regular, everyday parameter */
@@ -2106,7 +2109,14 @@ export class ModelerFour {
       this.use(header.schema, (_name, sch) => {
         let hsch = this.processSchema(this.interpret.getName(headerName, sch), sch);
         if ("x-ms-header-collection-prefix" in header) {
-          hsch = new DictionarySchema(hsch.language.default.name, hsch.language.default.description, hsch);
+          const dictionarySchema = new DictionarySchema(
+            hsch.language.default.name,
+            hsch.language.default.description,
+            hsch,
+          );
+          this.trackSchemaUsage(dictionarySchema, { usage: [SchemaContext.Input] });
+          this.codeModel.schemas.add(dictionarySchema);
+          hsch = dictionarySchema;
         }
 
         hsch.language.default.header = headerName;
