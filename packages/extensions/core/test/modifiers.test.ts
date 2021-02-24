@@ -15,6 +15,8 @@ const generate = async (additionalConfig: any): Promise<{ [uri: string]: string 
     "input-file": join(AppRoot, "test", "resources", "tiny.yaml"),
     "csharp": "true",
     "v2": "true",
+    "verbose": true,
+    "debug": true,
     "output-artifact": ["swagger-document.yaml", "openapi-document.yaml"],
   });
   // for testing local changes:
@@ -38,12 +40,21 @@ const generate = async (additionalConfig: any): Promise<{ [uri: string]: string 
   });
 
   const messages: any[] = [];
-  const channels = new Set([Channel.Information, Channel.Warning, Channel.Error, Channel.Fatal]);
+  const channels = new Set([
+    Channel.Information,
+    Channel.Warning,
+    Channel.Error,
+    Channel.Fatal,
+    Channel.Debug,
+    Channel.Verbose,
+  ]);
+
   autoRest.Message.Subscribe((_, message) => {
     if (channels.has(message.Channel)) {
       messages.push(message);
     }
   });
+
   const success = await autoRest.Process().finish;
 
   if (!success) {
