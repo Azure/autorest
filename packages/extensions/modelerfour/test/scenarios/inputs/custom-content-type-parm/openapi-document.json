@@ -1,0 +1,54 @@
+{
+  "openapi": "3.0.0",
+  "$schema": "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/schemas/v3.0/schema.json",
+  "info": {
+    "title": "Operation where there is a custom Content-Type parameter.",
+    "description": "Acceptance test for file with custom content type.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/User/HasUser": {
+      "x-ms-metadata": {
+        "apiVersions": ["1.0.0"]
+      },
+      "post": {
+        "operationId": "postWithCustomContentType",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "format": "file"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "x-ms-client-name": "multipartContentType",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-ms-parameter-location": "method",
+            "description": "Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID>"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

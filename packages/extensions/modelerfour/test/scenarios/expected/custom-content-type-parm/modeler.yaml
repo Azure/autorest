@@ -1,8 +1,16 @@
 !CodeModel 
 info: !Info 
-  description: Acceptance test for file with json content type.
-  title: 'Binary with content-type: application/json'
+  description: Acceptance test for file with custom content type.
+  title: Operation where there is a custom Content-Type parameter.
 schemas: !Schemas 
+  booleans:
+    - !BooleanSchema &ref_5
+      type: boolean
+      language: !Languages 
+        default:
+          name: response
+          description: ''
+      protocol: !Protocols {}
   strings:
     - !StringSchema &ref_0
       type: string
@@ -11,19 +19,15 @@ schemas: !Schemas
           name: string
           description: simple string
       protocol: !Protocols {}
-  constants:
-    - !ConstantSchema &ref_1
-      type: constant
-      value: !ConstantValue 
-        value: application/json
-      valueType: *ref_0
+    - !StringSchema &ref_1
+      type: string
       language: !Languages 
         default:
-          name: application/json
-          description: Content Type 'application/json'
+          name: ''
+          description: ''
       protocol: !Protocols {}
   binaries:
-    - !BinarySchema &ref_2
+    - !BinarySchema &ref_3
       type: binary
       language: !Languages 
         default:
@@ -31,7 +35,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
 globalParameters:
-  - !Parameter &ref_4
+  - !Parameter &ref_6
     schema: *ref_0
     clientDefaultValue: ''
     implementation: Client
@@ -49,76 +53,79 @@ globalParameters:
         in: uri
 operationGroups:
   - !OperationGroup 
-    $key: Upload
+    $key: ''
     operations:
       - !Operation 
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_4
+          - *ref_6
+          - !Parameter &ref_2
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: multipartContentType
+                description: 'Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID>'
+                serializedName: Content-Type
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: header
         requests:
           - !Request 
             parameters:
-              - !Parameter 
-                schema: *ref_1
+              - !Parameter &ref_4
+                schema: *ref_3
                 implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: content-type
-                    description: Upload file type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_3
-                schema: *ref_2
-                implementation: Method
-                required: true
                 language: !Languages 
                   default:
                     name: data
-                    description: Foo bar
+                    description: ''
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
                     style: binary
             signatureParameters:
-              - *ref_3
+              - *ref_4
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
               http: !HttpBinaryRequest 
-                path: /file
+                path: /api/User/HasUser
                 method: post
                 binary: true
                 knownMediaType: binary
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
-        signatureParameters: []
+        signatureParameters:
+          - *ref_2
         responses:
-          - !Response 
+          - !SchemaResponse 
+            schema: *ref_5
             language: !Languages 
               default:
                 name: ''
-                description: Upload successful
+                description: OK
             protocol: !Protocols 
               http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
                 statusCodes:
-                  - '204'
+                  - '200'
         language: !Languages 
           default:
-            name: File
-            description: Uploading json file
+            name: postWithCustomContentType
+            description: ''
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: Upload
+        name: ''
         description: ''
     protocol: !Protocols {}
 security: !Security 
