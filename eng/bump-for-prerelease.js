@@ -49,7 +49,8 @@ const getChangeCountPerPackage = async () => {
 
   for (const change of changes) {
     if (!(change.packageName in changeCounts)) {
-      changeCounts[change.packageName] = 0;
+      // Count all changes that are not "none"
+      changeCounts[change.packageName] = change.changes.filter((x) => x.type !== "none");
     }
     changeCounts[change.packageName]++;
   }
@@ -75,6 +76,14 @@ const addPrereleaseNumber = async (changeCounts, packagePaths) => {
     }
     const packageJsonPath = join(projectPath, "package.json");
     const packageJsonContent = await readJsonFile(packageJsonPath);
+    if (!packageJsonContent.version.endsWith(`-${PRERELEASE_TYPE}`)) {
+      throw new Error(
+        [
+          `Couldn't add change count to package '${packageName}'. Version ${packageJsonContent.version} should be ending with '-${PRERELEASE_TYPE}'`,
+          `This means that the rush publish --apply --publish didn't bump this package version but this script found 1 change. Appending the change count would result in an invalid version.`,
+        ].join("\n"),
+      );
+    }
     const newVersion = `${packageJsonContent.version}.${changeCount}`;
     console.log(`Setting version for ${packageName} to '${newVersion}'`);
     await fs.promises.writeFile(
