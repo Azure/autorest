@@ -3,7 +3,7 @@ import { isContentTypeParameterDefined } from "./utils";
 
 const stringSchema = new Schema("string", "A String", SchemaType.Any);
 
-describe("Modlerfour utils", () => {
+describe("Modelerfour utils", () => {
   describe("isContentTypeParameterDefined()", () => {
     it("returns false if there is a no parameter in the operation", () => {
       const operation = new Operation("op-1", "Test operation 1", {});
