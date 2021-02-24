@@ -83,7 +83,7 @@ describe("Python system requirement", () => {
     });
   });
 
-  describe("updatePythonPath", () => {
+  describe("patchPythonPath", () => {
     it("stub with the only compatible python version", async () => {
       mockInstalledPython({
         python3: "3.7.0",
