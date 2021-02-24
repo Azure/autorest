@@ -59,7 +59,9 @@ export type PythonCommandLine = [KnownPythonExe, ...string[]];
  * @deprecated Please use patchPythonPath(command, requirement) instead.
  */
 export const updatePythonPath = async (command: PythonCommandLine): Promise<string[]> => {
-  return patchPythonPath(command, { version: ">=3.6", environmentVariable: "AUTOREST_PYTHON_EXE" });
+  const newCommand = await patchPythonPath(command, { version: ">=3.6", environmentVariable: "AUTOREST_PYTHON_EXE" });
+  (command as string[])[0] = newCommand[0];
+  return newCommand;
 };
 
 /**
@@ -70,12 +72,12 @@ export const patchPythonPath = async (
   command: PythonCommandLine,
   requirement: SystemRequirement,
 ): Promise<string[]> => {
-  const [_, args] = command;
+  const [_, ...args] = command;
   const resolution = await resolvePythonRequirement(requirement);
   if ("error" in resolution) {
     throw new Error(`Failed to find compatible python version. ${resolution.message}`);
   }
-  return [resolution.command, ...(resolution.additionalArgs ?? [], args)];
+  return [resolution.command, ...(resolution.additionalArgs ?? []), ...args];
 };
 
 const tryPython = async (

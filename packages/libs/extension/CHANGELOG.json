@@ -2,6 +2,18 @@
   "name": "@azure-tools/extension",
   "entries": [
     {
+      "version": "3.2.1",
+      "tag": "@azure-tools/extension_v3.2.1",
+      "date": "Wed, 24 Feb 2021 00:33:50 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** updatePythonPath wasn't patching array inplace."
+          }
+        ]
+      }
+    },
+    {
       "version": "3.2.0",
       "tag": "@azure-tools/extension_v3.2.0",
       "date": "Fri, 19 Feb 2021 21:42:09 GMT",
