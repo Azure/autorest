@@ -67,6 +67,7 @@ export class Yarn implements PackageManager {
   public async execYarn(cwd: string, ...args: string[]) {
     const procArgs = [
       this.pathToYarnCli ?? (await getPathToYarnCli()),
+      "--no-default-rc", // Prevent yarn from loading ~/.yarnrc.yml
       "--no-node-version-check",
       "--no-lockfile",
       "--json",

@@ -4,6 +4,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 /* eslint-disable no-console */
+import "source-map-support/register";
+
 declare const isDebuggerEnabled: boolean;
 const cwd = process.cwd();
 
