@@ -50,9 +50,9 @@ const getChangeCountPerPackage = async () => {
   for (const change of changes) {
     if (!(change.packageName in changeCounts)) {
       // Count all changes that are not "none"
-      changeCounts[change.packageName] = change.changes.filter((x) => x.type !== "none");
+      changeCounts[change.packageName] = 0;
     }
-    changeCounts[change.packageName]++;
+    changeCounts[change.packageName] += change.changes.filter((x) => x.type !== "none").length;
   }
 
   return changeCounts;
@@ -68,35 +68,57 @@ const getPackagesPaths = async () => {
   return paths;
 };
 
+/**
+ * Update the package dependencies to match the newly updated version.
+ * @param {*} packageManifest
+ * @param {*} updatedPackages
+ */
+const updateDependencyVersions = (packageManifest, updatedPackages) => {
+  const dependencies = {};
+  if (packageManifest.dependencies) {
+    for (const [name, currentVersion] of Object.entries(packageManifest.dependencies)) {
+      const updatedPackage = updatedPackages[name];
+      if (updatedPackage) {
+        dependencies[name] = `~${updatedPackage.newVersion}`;
+      } else {
+        dependencies[name] = currentVersion;
+        currentVersion;
+      }
+    }
+  }
+
+  return {
+    ...packageManifest,
+    dependencies,
+  };
+};
+
 const addPrereleaseNumber = async (changeCounts, packagePaths) => {
-  for (const [packageName, changeCount] of Object.entries(changeCounts)) {
+  const updatedManifests = {};
+  const packagesWithChanges = Object.entries(changeCounts).filter(([_, changeCount]) => changeCount > 0);
+  for (const [packageName, changeCount] of packagesWithChanges) {
     const projectPath = packagePaths[packageName];
     if (!projectPath) {
       throw new Error(`Cannot find package path for '${packageName}'`);
     }
     const packageJsonPath = join(projectPath, "package.json");
     const packageJsonContent = await readJsonFile(packageJsonPath);
-    if (!packageJsonContent.version.endsWith(`-${PRERELEASE_TYPE}`)) {
-      throw new Error(
-        [
-          `Couldn't add change count to package '${packageName}'. Version ${packageJsonContent.version} should be ending with '-${PRERELEASE_TYPE}'`,
-          `This means that the rush publish --apply --publish didn't bump this package version but this script found 1 change. Appending the change count would result in an invalid version.`,
-        ].join("\n"),
-      );
-    }
-    const newVersion = `${packageJsonContent.version}.${changeCount}`;
+    const newVersion = `${packageJsonContent.version}-${PRERELEASE_TYPE}.${changeCount}`;
     console.log(`Setting version for ${packageName} to '${newVersion}'`);
-    await fs.promises.writeFile(
+    updatedManifests[packageName] = {
       packageJsonPath,
-      JSON.stringify(
-        {
-          ...packageJsonContent,
-          version: newVersion,
-        },
-        null,
-        2,
-      ),
-    );
+      oldVersion: packageJsonContent.version,
+      newVersion: newVersion,
+      manifest: {
+        ...packageJsonContent,
+        version: newVersion,
+      },
+    };
+  }
+
+  for (const { packageJsonPath, manifest } of Object.values(updatedManifests)) {
+    const newManifest = updateDependencyVersions(manifest, updatedManifests);
+    await fs.promises.writeFile(packageJsonPath, JSON.stringify(newManifest, null, 2));
   }
 };
 
@@ -107,8 +129,6 @@ const run = async () => {
   const packagePaths = await getPackagesPaths();
   console.log("Package paths", packagePaths);
 
-  console.log("Bumping versions");
-  execSync(`npx @microsoft/rush publish --apply --prerelease-name="${PRERELEASE_TYPE}" --partial-prerelease`);
   console.log("Adding prerelease number");
   await addPrereleaseNumber(changeCounts, packagePaths);
 };
