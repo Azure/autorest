@@ -36,8 +36,18 @@ const generate = async (additionalConfig: any): Promise<{ [uri: string]: string 
       // console.warn(args.content);
     }
   });
+
+  const messages: any[] = [];
+  autoRest.Message.Subscribe((_, message) => {
+    messages.push(message);
+  });
   const success = await autoRest.Process().finish;
-  assert.strictEqual(success, true);
+
+  if (!success) {
+    // eslint-disable-next-line no-console
+    console.log("Messages", messages);
+    fail("Autorest didn't complete with success.");
+  }
 
   return result;
 };
