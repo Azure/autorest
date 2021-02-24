@@ -103,7 +103,17 @@ const addPrereleaseNumber = async (changeCounts, packagePaths) => {
     }
     const packageJsonPath = join(projectPath, "package.json");
     const packageJsonContent = await readJsonFile(packageJsonPath);
-    const newVersion = `${packageJsonContent.version}-${PRERELEASE_TYPE}.${changeCount}`;
+    const newVersion = `${packageJsonContent.version}.${changeCount}`;
+
+    if (!packageJsonContent.version.endsWith(`-${PRERELEASE_TYPE}`)) {
+      throw new Error(
+        [
+          `Couldn't add change count to package '${packageName}'. Version ${packageJsonContent.version} should be ending with '-${PRERELEASE_TYPE}'`,
+          `This means that the rush publish --apply --publish didn't bump this package version but this script found 1 change. Appending the change count would result in an invalid version.`,
+        ].join("\n"),
+      );
+    }
+
     console.log(`Setting version for ${packageName} to '${newVersion}'`);
     updatedManifests[packageName] = {
       packageJsonPath,
@@ -128,6 +138,10 @@ const run = async () => {
 
   const packagePaths = await getPackagesPaths();
   console.log("Package paths", packagePaths);
+
+  // Bumping with rush publish so rush computes from the changes what will be the next non prerelease version.
+  console.log("Bumping versions with rush publish");
+  execSync(`npx @microsoft/rush publish --apply --prerelease-name="${PRERELEASE_TYPE}" --partial-prerelease`);
 
   console.log("Adding prerelease number");
   await addPrereleaseNumber(changeCounts, packagePaths);
