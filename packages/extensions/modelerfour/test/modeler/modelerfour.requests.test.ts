@@ -112,52 +112,57 @@ describe("Modelerfour.Request", () => {
     let spec: oai3.Model;
 
     let operation: Operation;
+    let operation2: Operation;
     let codeModel: CodeModel;
 
     beforeEach(async () => {
       spec = createTestSpec();
 
-      addOperation(spec, "/headerWithExtension", <oai3.PathItem>{
-        post: {
-          operationId: "hasHeaderWithExtension",
-          description: "Has x-ms-header-collection-prefix on header",
-          parameters: [
-            {
-              "name": "x-ms-req-meta",
-              "x-ms-client-name": "RequestHeaderWithExtension",
-              "in": "header",
-              "schema": {
-                type: "string",
-              },
-              "x-ms-parameter-location": "method",
-              "x-ms-header-collection-prefix": "x-ms-req-meta",
+      const operationDef = {
+        operationId: "hasHeaderWithExtension",
+        description: "Has x-ms-header-collection-prefix on header",
+        parameters: [
+          {
+            "name": "x-ms-req-meta",
+            "x-ms-client-name": "RequestHeaderWithExtension",
+            "in": "header",
+            "schema": {
+              type: "string",
             },
-          ],
-          responses: {
-            200: {
-              description: "Response with a header extension.",
-              content: {
-                "application/json": {
-                  schema: {
-                    type: "string",
-                  },
+            "x-ms-parameter-location": "method",
+            "x-ms-header-collection-prefix": "x-ms-req-meta",
+          },
+        ],
+        responses: {
+          200: {
+            description: "Response with a header extension.",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "string",
                 },
               },
-              headers: {
-                "x-named-header": {
-                  "x-ms-client-name": "HeaderWithExtension",
-                  "x-ms-header-collection-prefix": "x-ms-res-meta",
-                  "schema": {
-                    type: "string",
-                  },
+            },
+            headers: {
+              "x-named-header": {
+                "x-ms-client-name": "HeaderWithExtension",
+                "x-ms-header-collection-prefix": "x-ms-res-meta",
+                "schema": {
+                  type: "string",
                 },
               },
             },
           },
         },
+      };
+      addOperation(spec, "/headerWithExtension", {
+        post: operationDef,
+        put: { ...operationDef, operationId: "hasHeaderWithExtension2" },
       });
+
       codeModel = await runModeler(spec);
       operation = findByName("hasHeaderWithExtension", codeModel.operationGroups[0].operations)!;
+      operation2 = findByName("hasHeaderWithExtension2", codeModel.operationGroups[0].operations)!;
       expect(operation).not.toBeNull();
     });
 
@@ -178,8 +183,21 @@ describe("Modelerfour.Request", () => {
         expect((header.schema as any).elementType.type).toEqual("string");
       });
 
-      it("added the ressponse header schemas to the shared list of schemas", async () => {
+      it("added the response header schemas to the shared list of schemas", async () => {
         expect(codeModel.schemas.dictionaries).toContain(header.schema);
+      });
+
+      it("share the same header if it is the exact same across operations", async () => {
+        const header2 = findByName<HttpHeader>(
+          "HeaderWithExtension",
+          operation2.responses?.[0].protocol.http!.headers,
+        )!;
+        expect(header2).toBeDefined();
+
+        expect(codeModel.schemas.dictionaries).toContain(header2.schema);
+
+        // It should be the exact same object
+        expect(header.schema).toBe(header2.schema);
       });
     });
 
@@ -203,6 +221,17 @@ describe("Modelerfour.Request", () => {
       it("added the ressponse header schemas to the shared list of schemas", async () => {
         const headerWithExtension = operation.parameters?.[1];
         expect(codeModel.schemas.dictionaries).toContain(headerWithExtension!.schema);
+      });
+
+      it("share the same header if it is the exact same across operations", async () => {
+        const parameter2 = findByName("RequestHeaderWithExtension", operation.parameters)!;
+
+        expect(parameter2).toBeDefined();
+
+        expect(codeModel.schemas.dictionaries).toContain(parameter2.schema);
+
+        // It should be the exact same object
+        expect(parameter.schema).toBe(parameter2.schema);
       });
     });
   });

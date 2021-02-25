@@ -2110,11 +2110,10 @@ export class ModelerFour {
       this.use(header.schema, (_name, sch) => {
         let hsch = this.processSchema(this.interpret.getName(headerName, sch), sch);
         if ("x-ms-header-collection-prefix" in header) {
-          const dictionarySchema = this.codeModel.schemas.add(
-            new DictionarySchema(hsch.language.default.name, hsch.language.default.description, hsch),
-          );
+          const newSchema = new DictionarySchema(hsch.language.default.name, hsch.language.default.description, hsch);
+          newSchema.language.default.header = headerName;
+          const dictionarySchema = this.codeModel.schemas.add(newSchema);
           this.trackSchemaUsage(dictionarySchema, { usage: [SchemaContext.Input] });
-          this.codeModel.schemas.add(dictionarySchema);
           hsch = dictionarySchema;
         }
 
