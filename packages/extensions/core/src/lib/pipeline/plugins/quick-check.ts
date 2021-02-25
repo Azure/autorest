@@ -22,7 +22,7 @@ async function quickCheck(config: AutorestContext, input: DataSource, sink: Data
     const models = new Map<string, Array<string>>();
     const enums = new Map<string, Array<string>>();
     // check to see if there are models with the same name
-    for (const { key, value } of items(oai.components.schemas)) {
+    for (const { key, value } of items(oai.components?.schemas)) {
       const schema = <AnyObject>value;
       const name = (<AnyObject>value)["x-ms-metadata"].name.toLowerCase();
 
