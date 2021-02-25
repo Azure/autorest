@@ -389,7 +389,7 @@ describe("Modeler", () => {
     assertSchema("HasClientDefault", codeModel.schemas.objects, (s) => s.properties[0].clientDefaultValue, true);
 
     const postIt = findByName("postIt", codeModel.operationGroups[0].operations);
-    const bodyParam = findByName<Parameter | undefined>(
+    const bodyParam = findByName<Parameter>(
       "defaultedBodyParam",
       <Array<Parameter> | undefined>postIt!.requests?.[0].parameters,
     );
@@ -399,7 +399,7 @@ describe("Modeler", () => {
     expect(queryParam!.clientDefaultValue).toEqual(42);
 
     const postMeme = findByName("postMeme", codeModel.operationGroups[0].operations);
-    const memeBodyParam = findByName<Parameter | undefined>(
+    const memeBodyParam = findByName<Parameter>(
       "defaultedBodyMeme",
       <Array<Parameter> | undefined>postMeme!.requests?.[0].parameters,
     );

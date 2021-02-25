@@ -1,3 +1,11 @@
-export function findByName<T>(name: string, items: Array<T> | undefined): T | undefined {
-  return (items && items.find((i) => (<any>i).language.default.name === name)) || undefined;
+export interface NamedItem {
+  language: {
+    default: {
+      name: string;
+    };
+  };
+}
+
+export function findByName<T extends NamedItem>(name: string, items: T[] | undefined): T | undefined {
+  return items && items.find((x) => x.language.default.name === name);
 }
