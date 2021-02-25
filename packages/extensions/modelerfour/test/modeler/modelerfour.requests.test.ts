@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
-import { CodeModel, DictionarySchema, Operation, Parameter } from "@autorest/codemodel";
+import { CodeModel, DictionarySchema, HttpHeader, Operation, Parameter } from "@autorest/codemodel";
 import { HttpOperation, JsonType, ParameterLocation, RequestBody } from "@azure-tools/openapi";
 import { addOperation, createTestSpec, findByName } from "../utils";
 import { runModeler } from "./modelerfour-utils";
@@ -162,35 +162,42 @@ describe("Modelerfour.Request", () => {
     });
 
     describe("response header", () => {
+      let header: HttpHeader;
+      beforeEach(() => {
+        header = findByName<HttpHeader>("HeaderWithExtension", operation.responses?.[0].protocol.http!.headers)!;
+        expect(header).toBeDefined();
+      });
+
       it("propagates extensions to response header definitions", async () => {
-        const headerWithExtension = operation.responses?.[0].protocol.http!.headers[0];
-        expect(headerWithExtension.language.default.name).toEqual("HeaderWithExtension");
-        expect(headerWithExtension.extensions["x-ms-header-collection-prefix"]).toEqual("x-ms-res-meta");
+        expect(header.language.default.name).toEqual("HeaderWithExtension");
+        expect(header.extensions?.["x-ms-header-collection-prefix"]).toEqual("x-ms-res-meta");
       });
 
       it("changes the type of the response header to be Dictionary<originalType>", async () => {
-        const headerWithExtension = operation.responses?.[0].protocol.http!.headers[0];
-        expect(headerWithExtension.schema.type).toEqual("dictionary");
-        expect(headerWithExtension.schema.elementType.type).toEqual("string");
+        expect(header.schema.type).toEqual("dictionary");
+        expect((header.schema as any).elementType.type).toEqual("string");
       });
 
       it("added the ressponse header schemas to the shared list of schemas", async () => {
-        const headerWithExtension = operation.responses?.[0].protocol.http!.headers[0];
-        expect(codeModel.schemas.dictionaries).toContain(headerWithExtension.schema);
+        expect(codeModel.schemas.dictionaries).toContain(header.schema);
       });
     });
 
     describe("request header", () => {
+      let parameter: Parameter;
+      beforeEach(() => {
+        parameter = findByName("RequestHeaderWithExtension", operation.parameters)!;
+        expect(parameter).toBeDefined();
+      });
+
       it("propagates extensions to request header definitions", async () => {
-        const headerWithExtension = operation.parameters?.[1];
-        expect(headerWithExtension?.language.default.name).toEqual("RequestHeaderWithExtension");
-        expect(headerWithExtension?.extensions?.["x-ms-header-collection-prefix"]).toEqual("x-ms-req-meta");
+        expect(parameter.language.default.name).toEqual("RequestHeaderWithExtension");
+        expect(parameter.extensions?.["x-ms-header-collection-prefix"]).toEqual("x-ms-req-meta");
       });
 
       it("changes the type of the request header to be Dictionary<originalType>", async () => {
-        const headerWithExtension = operation.parameters?.[1];
-        expect(headerWithExtension?.schema.type).toEqual("dictionary");
-        expect((headerWithExtension?.schema as DictionarySchema).elementType.type).toEqual("string");
+        expect(parameter.schema.type).toEqual("dictionary");
+        expect((parameter.schema as DictionarySchema).elementType.type).toEqual("string");
       });
 
       it("added the ressponse header schemas to the shared list of schemas", async () => {
