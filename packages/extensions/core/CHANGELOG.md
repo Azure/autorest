@@ -1,6 +1,18 @@
 # Change Log - @autorest/core
 
-This log was last generated on Sat, 20 Feb 2021 17:49:35 GMT and should not be manually modified.
+This log was last generated on Fri, 26 Feb 2021 21:50:13 GMT and should not be manually modified.
+
+## 3.1.0
+Fri, 26 Feb 2021 21:50:13 GMT
+
+### Minor changes
+
+- **Remove** legacy CLI functionality(Using arguments with single dash).
+
+### Patches
+
+- **Update** Moved configuration loading from @autorest/core and redesign
+- **Fix** issue when using properties with `$ref` as name where it would try to resolve a reference.
 
 ## 3.0.6375
 Sat, 20 Feb 2021 17:49:35 GMT

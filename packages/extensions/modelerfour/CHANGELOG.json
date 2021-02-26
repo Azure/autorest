@@ -2,6 +2,21 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.17.1",
+      "tag": "@autorest/modelerfour_v4.17.1",
+      "date": "Fri, 26 Feb 2021 21:50:13 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Don't add a duplicate Content-Type parameter if it is already provided in the spec"
+          },
+          {
+            "comment": "Fix x-ms-header-collection-prefix injected dictionary not defined in the list of schemas"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.17.0",
       "tag": "@autorest/modelerfour_v4.17.0",
       "date": "Fri, 19 Feb 2021 21:42:09 GMT",
