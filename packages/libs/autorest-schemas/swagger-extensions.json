@@ -1084,12 +1084,82 @@
       ]
     },
     "parameter": {
-      "oneOf": [
+      "allOf": [
         {
-          "$ref": "#/definitions/bodyParameter"
+          "if": {
+            "required": ["in"],
+            "properties": {
+              "in": {
+                "enum": ["body"]
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/definitions/bodyParameter"
+          }
         },
         {
-          "$ref": "#/definitions/nonBodyParameter"
+          "if": {
+            "required": ["in"],
+            "properties": {
+              "in": {
+                "enum": ["header"]
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/definitions/headerParameterSubSchema"
+          }
+        },
+        {
+          "if": {
+            "required": ["in"],
+            "properties": {
+              "in": {
+                "enum": ["formData"]
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/definitions/formDataParameterSubSchema"
+          }
+        },
+        {
+          "if": {
+            "required": ["in"],
+            "properties": {
+              "in": {
+                "enum": ["query"]
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/definitions/queryParameterSubSchema"
+          }
+        },
+        {
+          "if": {
+            "required": ["in"],
+            "properties": {
+              "in": {
+                "enum": ["path"]
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/definitions/pathParameterSubSchema"
+          }
+        },
+        {
+          "then": {
+            "type": "object",
+            "required": ["in"],
+            "properties": {
+              "in": {
+                "enum": ["body", "header", "formData", "query", "path"]
+              }
+            }
+          }
         }
       ],
       "properties": {
@@ -1467,14 +1537,15 @@
       "description": "The parameters needed to send a valid API call.",
       "additionalItems": false,
       "items": {
-        "oneOf": [
-          {
-            "$ref": "#/definitions/parameter"
-          },
-          {
-            "$ref": "#/definitions/jsonReference"
-          }
-        ]
+        "if": {
+          "required": ["$ref"]
+        },
+        "then": {
+          "$ref": "#/definitions/jsonReference"
+        },
+        "else": {
+          "$ref": "#/definitions/parameter"
+        }
       },
       "uniqueItems": true
     },

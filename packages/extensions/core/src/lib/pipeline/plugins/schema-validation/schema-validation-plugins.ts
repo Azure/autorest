@@ -65,15 +65,23 @@ export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
   });
 }
 
+const IGNORED_AJV_PARAMS = new Set(["type", "errors"]);
+
 const logValidationError = (
   config: AutorestContext,
   fileIn: DataHandle,
   error: PositionedValidationError,
   type: "error" | "warning",
 ) => {
+  const messageLines = [`Schema violation: ${error.message} (${error.path.join(" > ")})`];
+  for (const [name, value] of Object.entries(error.params).filter(([name]) => !IGNORED_AJV_PARAMS.has(name))) {
+    const formattedValue = Array.isArray(value) ? [...new Set(value)].join(", ") : value;
+    messageLines.push(`  ${name}: ${formattedValue}`);
+  }
+
   const msg = {
     code: SCHEMA_VIOLATION_ERROR_CODE,
-    message: `Schema violation: ${error.message} (${error.path.join(" > ")})`,
+    message: messageLines.join("\n"),
     source: [{ document: fileIn.key, position: error.position }],
     details: error,
   };
