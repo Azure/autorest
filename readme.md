@@ -2,6 +2,37 @@
 
 The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) format.
 
+## Packages
+| Name                                            | Latest                                                       | Next                                                              |
+| ----------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------- |
+| [autorest][autorest_src]                        | ![](https://img.shields.io/npm/v/autorest)                   | ![](https://img.shields.io/npm/v/autorest/next)                   |
+| [@autorest/core][core_src]                      | ![](https://img.shields.io/npm/v/@autorest/core)             | ![](https://img.shields.io/npm/v/@autorest/core/next)             |
+| [@autorest/modelerfour][modelerfour_src]        | ![](https://img.shields.io/npm/v/@autorest/modelerfour)      | ![](https://img.shields.io/npm/v/@autorest/modelerfour/next)      |
+| [@autorest/codemodel][codemodel_src]            | ![](https://img.shields.io/npm/v/@autorest/codemodel)        | ![](https://img.shields.io/npm/v/@autorest/codemodel/next)        |
+| [@autorest/common][common_src]                  | ![](https://img.shields.io/npm/v/@autorest/common)           | ![](https://img.shields.io/npm/v/@autorest/common/next)           |
+| [@autorest/configuration][configuration_src]    | ![](https://img.shields.io/npm/v/@autorest/configuration)    | ![](https://img.shields.io/npm/v/@autorest/configuration/next)    |
+| [@autorest/extension-base][extension_base_src]  | ![](https://img.shields.io/npm/v/@autorest/extension-base)   | ![](https://img.shields.io/npm/v/@autorest/extension-base/next)   |
+| [@azure-tools/extension][extension_src]         | ![](https://img.shields.io/npm/v/@azure-tools/extension)     | ![](https://img.shields.io/npm/v/@azure-tools/extension/next)     |
+| [@azure-tools/codegen][codegen_src]             | ![](https://img.shields.io/npm/v/@azure-tools/codegen)       | ![](https://img.shields.io/npm/v/@azure-tools/codegen/next)       |
+| [@azure-tools/openapi][openapi_src]             | ![](https://img.shields.io/npm/v/@azure-tools/openapi)       | ![](https://img.shields.io/npm/v/@azure-tools/openapi/next)       |
+| [@azure-tools/deduplication][deduplication_src] | ![](https://img.shields.io/npm/v/@azure-tools/deduplication) | ![](https://img.shields.io/npm/v/@azure-tools/deduplication/next) |
+| [@azure-tools/datastore][datastore_src]         | ![](https://img.shields.io/npm/v/@azure-tools/datastore)     | ![](https://img.shields.io/npm/v/@azure-tools/datastore/next)     |
+| [@azure-tools/oai2-to-oai3][oai2-to-oai3_src]   | ![](https://img.shields.io/npm/v/@azure-tools/oai2-to-oai3)  | ![](https://img.shields.io/npm/v/@azure-tools/oai2-to-oai3/next)  |
+
+[autorest_src]: ./packages/apps/autorest
+[core_src]: ./packages/extensions/core
+[modelerfour_src]: ./packages/extensions/modelerfour
+[codemodel_src]: ./packages/libs/codemodel
+[common_src]: ./packages/libs/common
+[configuration_src]: ./packages/libs/configuration
+[extension_base_src]: ./packages/libs/extension-base
+[extension_src]: ./packages/libs/extension
+[codegen_src]: ./packages/libs/codegen
+[openapi_src]: ./packages/libs/openapi
+[deduplication_src]: ./packages/libs/deduplication
+[datastore_src]: ./packages/libs/datastore
+[oai2-to-oai3_src]: ./packages/libs/oai2-to-oai3
+
 ## Support Policy
 
 AutoRest is an open source tool -- if you need assistance, first check the documentation. If you find a bug or need some help, feel free to submit an [issue](https://github.com/Azure/autorest/issues)
@@ -10,7 +41,7 @@ AutoRest is an open source tool -- if you need assistance, first check the docum
 
 View our [docs readme][docs_readme] as a starting point to find both general information and language-generator specific information
 
-## Contributing 
+## Contributing
 
 ### Contributing guide
 
@@ -22,3 +53,4 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 
 <!--LINKS-->
 [docs_readme]: docs/readme.md
+
