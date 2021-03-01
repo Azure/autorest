@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@autorest/schemas",
-      "comment": "Update schema to jsonschema draft-06",
+      "comment": "Update schema to jsonschema draft-07",
       "type": "patch"
     }
   ],
