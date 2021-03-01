@@ -76,6 +76,7 @@ import { Session, Channel } from "@autorest/extension-base";
 import { Interpretations, XMSEnum } from "./interpretations";
 import { fail, minimum, pascalCase, knownMediaType, KnownMediaType } from "@azure-tools/codegen";
 import { ModelerFourOptions } from "./modelerfour-options";
+import { isContentTypeParameterDefined } from "./utils";
 
 /** adds only if the item is not in the collection already
  *
@@ -1367,9 +1368,11 @@ export class ModelerFour {
         http,
       },
     });
-    this.session.log(`Options ${JSON.stringify(this.options)}`, {});
-    this.session.log(`Accept-param ${this.options["always-create-accept-parameter"]}`, {});
-    if (this.options[`always-create-content-type-parameter`] === true || http.mediaTypes.length > 1) {
+
+    const shouldIncludeContentType =
+      this.options[`always-create-content-type-parameter`] === true || http.mediaTypes.length > 1;
+
+    if (!isContentTypeParameterDefined(operation) && shouldIncludeContentType) {
       const scs = this.getContentTypeParameterSchema(http);
 
       // add the parameter for the binary upload.
@@ -1446,7 +1449,7 @@ export class ModelerFour {
       },
     });
 
-    if (this.options[`always-create-content-type-parameter`] === true) {
+    if (!isContentTypeParameterDefined(operation) && this.options[`always-create-content-type-parameter`] === true) {
       const scs = this.getContentTypeParameterSchema(http, true);
 
       // add the parameter for the binary upload.
@@ -1469,7 +1472,7 @@ export class ModelerFour {
 
     const requestSchema = values(kmtObject).first((each) => !!each.schema.instance)?.schema;
 
-    if (kmt === KnownMediaType.Multipart) {
+    if (kmt === KnownMediaType.Multipart || kmt === KnownMediaType.Form) {
       if (!requestSchema || !requestSchema.instance) {
         throw new Error("Cannot process a multipart/form-data body without a schema.");
       }
@@ -1508,7 +1511,7 @@ export class ModelerFour {
                   },
                 },
                 clientDefaultValue: this.interpret.getClientDefault(propertyDeclaration, pSchema),
-                isInMultipart: true,
+                isPartialBody: true,
               },
             ),
           );
@@ -1903,11 +1906,15 @@ export class ModelerFour {
           this.trackSchemaUsage(parameterSchema, { usage: [SchemaContext.Input] });
 
           if (parameter.in === ParameterLocation.Header && "x-ms-header-collection-prefix" in parameter) {
-            parameterSchema = new DictionarySchema(
-              parameterSchema.language.default.name,
-              parameterSchema.language.default.description,
-              parameterSchema,
+            const dictionarySchema = this.codeModel.schemas.add(
+              new DictionarySchema(
+                parameterSchema.language.default.name,
+                parameterSchema.language.default.description,
+                parameterSchema,
+              ),
             );
+            this.trackSchemaUsage(dictionarySchema, { usage: [SchemaContext.Input] });
+            parameterSchema = dictionarySchema;
           }
 
           /* regular, everyday parameter */
@@ -2103,7 +2110,11 @@ export class ModelerFour {
       this.use(header.schema, (_name, sch) => {
         let hsch = this.processSchema(this.interpret.getName(headerName, sch), sch);
         if ("x-ms-header-collection-prefix" in header) {
-          hsch = new DictionarySchema(hsch.language.default.name, hsch.language.default.description, hsch);
+          const newSchema = new DictionarySchema(hsch.language.default.name, hsch.language.default.description, hsch);
+          newSchema.language.default.header = headerName;
+          const dictionarySchema = this.codeModel.schemas.add(newSchema);
+          this.trackSchemaUsage(dictionarySchema, { usage: [SchemaContext.Input] });
+          hsch = dictionarySchema;
         }
 
         hsch.language.default.header = headerName;

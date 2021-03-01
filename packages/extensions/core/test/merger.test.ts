@@ -10,11 +10,7 @@ import assert from "assert";
 
 import { MultiAPIMerger } from "../src/lib/pipeline/plugins/merger";
 import { FastStringify } from "@azure-tools/datastore";
-try {
-  require("source-map-support").install();
-} catch {
-  /* unused */
-}
+
 const resources = `${__dirname}../../../test/resources/merger`;
 
 describe("Merger", () => {

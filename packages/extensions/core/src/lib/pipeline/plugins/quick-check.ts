@@ -9,12 +9,12 @@ import {
   QuickDataSource,
 } from "@azure-tools/datastore";
 import { items } from "@azure-tools/linq";
-import { ConfigurationView } from "../../configuration";
+import { AutorestContext } from "../../configuration";
 import { PipelinePlugin } from "../common";
 import { format } from "path";
 import { Channel } from "../../message";
 
-async function quickCheck(config: ConfigurationView, input: DataSource, sink: DataSink) {
+async function quickCheck(config: AutorestContext, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   for (const each of inputs) {
     const oai = await each.ReadObject<AnyObject>();
@@ -22,7 +22,7 @@ async function quickCheck(config: ConfigurationView, input: DataSource, sink: Da
     const models = new Map<string, Array<string>>();
     const enums = new Map<string, Array<string>>();
     // check to see if there are models with the same name
-    for (const { key, value } of items(oai.components.schemas)) {
+    for (const { key, value } of items(oai.components?.schemas)) {
       const schema = <AnyObject>value;
       const name = (<AnyObject>value)["x-ms-metadata"].name.toLowerCase();
 

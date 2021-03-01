@@ -8,7 +8,7 @@ import {
   TransformerViaPointer,
   QuickDataSource,
 } from "@azure-tools/datastore";
-import { ConfigurationView } from "../../configuration";
+import { AutorestContext } from "../../configuration";
 import { PipelinePlugin } from "../common";
 import { Dictionary, items } from "@azure-tools/linq";
 import compareVersions from "compare-versions";
@@ -104,7 +104,7 @@ export class EnumDeduplicator extends TransformerViaPointer {
     }
   }
 
-  fixUp(originalRef: string, newRef: string, pointer) {
+  fixUp(originalRef: string, newRef: string, pointer: string) {
     const fixups = this.refs.get(originalRef);
     if (fixups) {
       for (const each of fixups) {
@@ -115,7 +115,7 @@ export class EnumDeduplicator extends TransformerViaPointer {
   }
 }
 
-async function deduplicateEnums(config: ConfigurationView, input: DataSource, sink: DataSink) {
+async function deduplicateEnums(config: AutorestContext, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {

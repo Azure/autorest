@@ -1,0 +1,74 @@
+{
+  "name": "@azure-tools/extension",
+  "version": "3.2.1",
+  "description": "Yarn-Based extension aquisition (for Azure Open Source Projects)",
+  "engines": {
+    "node": ">=10.13.0"
+  },
+  "main": "./dist/src/index.js",
+  "typings": "./dist/src/index.d.ts",
+  "scripts": {
+    "before-build": "mkdirp ./dist/yarn && cpy ./node_modules/yarn/lib/cli.js ./dist/yarn",
+    "build": "npm run -s before-build && tsc -p ./tsconfig.build.json",
+    "watch": "tsc -p ./tsconfig.build.json --watch",
+    "lint:fix": "eslint ./src --fix --ext .ts",
+    "lint": "eslint ./src --ext .ts --max-warnings=0",
+    "prepare": "npm run build",
+    "test": "jest --watchAll --coverage=false",
+    "test:ci": "jest --ci",
+    "clean": "rimraf ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/perks.git"
+  },
+  "keywords": [
+    "perks",
+    "autorest",
+    "azure",
+    "typescript"
+  ],
+  "author": "Microsoft",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/perks/issues"
+  },
+  "homepage": "https://github.com/Azure/perks/tree/master/extension#readme",
+  "readme": "https://github.com/Azure/perks/tree/master/extension/readme.md",
+  "old": {
+    "@types/npm": "^2.0.28",
+    "npm": "5.6.0"
+  },
+  "dependencies": {
+    "@azure-tools/async-io": "~3.0.0",
+    "@azure-tools/eventing": "~3.0.0",
+    "@azure-tools/tasks": "~3.0.0",
+    "command-exists": "~1.2.9",
+    "npm-normalize-package-bin": "1.0.1",
+    "npm-package-arg": "^8.1.0",
+    "npm": "6.14.9",
+    "pacote": "9.2.3",
+    "rimraf": "^3.0.2",
+    "safe-buffer": "5.2.0",
+    "semver": "^5.5.1",
+    "yarn": "1.22.10"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "@types/command-exists": "~1.2.0",
+    "@types/node": "~14.14.20",
+    "@types/npm-package-arg": "^6.1.0",
+    "@types/semver": "5.5.0",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
+    "cpy-cli": "~2.0.0",
+    "eslint-plugin-node": "~11.1.0",
+    "eslint-plugin-prettier": "~3.2.0",
+    "eslint-plugin-unicorn": "~27.0.0",
+    "eslint": "^7.17.0",
+    "jest": "^26.6.3",
+    "mkdirp": "~0.5.1",
+    "source-map-support": "^0.5.19",
+    "typescript": "~4.1.3"
+  }
+}

@@ -3,12 +3,14 @@ import { createPerFilePlugin, PipelinePlugin } from "../../common";
 import { Manipulator } from "./manipulation";
 import { Channel } from "../../../message";
 import { evalDirectiveTransform } from "./eval";
+import { resolveDirectives } from "@autorest/configuration";
 
 /* @internal */
 export function createGraphTransformerPlugin(): PipelinePlugin {
-  return async (config, input, sink) => {
+  return async (context, input, sink) => {
     // object transforms must have a where clause and a transform
-    const directives = config.resolveDirectives(
+    const directives = resolveDirectives(
+      context.config,
       (x) => x.from.length > 0 && x.transform.length > 0 && x.where.length > 0,
     ); // && (!!x.where && x.where.length > 0)
 
@@ -40,14 +42,14 @@ export function createGraphTransformerPlugin(): PipelinePlugin {
                 // find the target nodes in the document
                 const targets = selectNodes(contents, where);
                 if (targets.length > 0) {
-                  config.Message({
+                  context.Message({
                     Channel: Channel.Debug,
                     Text: `Running object transform '${directive.from}/${directive.reason}' on ${inputHandle.key} `,
                   });
 
                   for (const { path, value, parent } of targets) {
                     const output = evalDirectiveTransform(transform, {
-                      config: config,
+                      config: context,
                       value,
                       parent: parent,
                       doc: contents,
@@ -171,7 +173,7 @@ export function createTextTransformerPlugin(): PipelinePlugin {
 /* @internal */
 export function createTransformerPlugin(): PipelinePlugin {
   return createPerFilePlugin(async (config) => {
-    const isObject = config.GetEntry(<any>"is-object") === false ? false : true;
+    const isObject = config.GetEntry("is-object") === false ? false : true;
     const manipulator = new Manipulator(config);
     return async (fileIn, sink) => {
       const fileOut = await manipulator.process(fileIn, sink, isObject, fileIn.Description);
@@ -183,11 +185,11 @@ export function createTransformerPlugin(): PipelinePlugin {
 /* @internal */
 export function createImmediateTransformerPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
-    const isObject = config.GetEntry(<any>"is-object") === false ? false : true;
+    const isObject = config.GetEntry("is-object") === false ? false : true;
     const files = await input.Enum(); // first all the immediate-configs, then a single swagger-document
     const scopes = await Promise.all(files.slice(0, files.length - 1).map((f) => input.ReadStrict(f)));
     const manipulator = new Manipulator(
-      config.GetNestedConfigurationImmediate(...(await Promise.all(scopes.map((s) => s.ReadObject<any>())))),
+      config.extendWith(...(await Promise.all(scopes.map((s) => s.ReadObject<any>())))),
     );
     const file = files[files.length - 1];
     const fileIn = await input.ReadStrict(file);

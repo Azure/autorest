@@ -5,6 +5,7 @@ import { RealFileSystem } from "@azure-tools/datastore";
 import { Channel, Message } from "../src/lib/message";
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
 import { AppRoot } from "../src/lib/constants";
+import { AutorestRawConfiguration } from "@autorest/configuration";
 
 describe("EndToEnd", () => {
   it("network full game", async () => {
@@ -50,8 +51,8 @@ describe("EndToEnd", () => {
     );
     // PumpMessagesToConsole(autoRest);
 
-    const config = await autoRest.view;
-    assert.strictEqual(config["shouldwork"], true);
+    const context = await autoRest.view;
+    assert.strictEqual(context.config["shouldwork" as keyof AutorestRawConfiguration], true);
   });
 
   // todo: skipping because testing is broken?
@@ -71,7 +72,7 @@ describe("EndToEnd", () => {
     });
 
     const config = await autoRest.view;
-    assert.strictEqual(config.InputFileUris.length, 1);
+    assert.strictEqual(config.config.inputFileUris.length, 1);
 
     const messages: Array<Message> = [];
 

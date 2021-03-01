@@ -1,6 +1,5 @@
 import { Source } from "@azure-tools/datastore";
 import { JsonType, Model } from "@azure-tools/openapi";
-import { create } from "domain";
 import { OAI3Shaker } from "./tree-shaker";
 
 const createTestModel = (model: Partial<Model>): Model => {

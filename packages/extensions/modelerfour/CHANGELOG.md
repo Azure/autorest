@@ -1,6 +1,24 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Mon, 08 Feb 2021 23:06:15 GMT and should not be manually modified.
+This log was last generated on Fri, 19 Feb 2021 21:42:09 GMT and should not be manually modified.
+
+## 4.17.0
+Fri, 19 Feb 2021 21:42:09 GMT
+
+### Minor changes
+
+- **Change** Body parmaeters for a `formData` body will be seperate parameters in the generated model instead of being grouped in a body object.
+
+### Patches
+
+- Change property redefinition error when changing type into a warning to allow polymorphism
+
+## 4.16.2
+Thu, 11 Feb 2021 18:03:07 GMT
+
+### Patches
+
+- **Internals** Update chalk dependency to ^4.1.0
 
 ## 4.16.1
 Mon, 08 Feb 2021 23:06:15 GMT

@@ -10,13 +10,13 @@ import {
   visit,
 } from "@azure-tools/datastore";
 import { ResolveUri } from "@azure-tools/uri";
-import { ConfigurationView } from "../../configuration";
+import { AutorestContext } from "../../configuration";
 import { Channel } from "../../message";
 import { values, items, length } from "@azure-tools/linq";
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
 export async function crawlReferences(
-  config: ConfigurationView,
+  config: AutorestContext,
   inputScope: DataSource,
   filesToCrawl: Array<DataHandle>,
   sink: DataSink,
@@ -95,11 +95,12 @@ class RefProcessor extends Transformer<any, any> {
 
   constructor(originalFile: DataHandle, private inputScope: DataSource) {
     super(originalFile);
+
     this.originalFileLocation = ResolveUri(originalFile.originalDirectory, originalFile.identity[0]);
   }
 
   async processXMSExamples(targetParent: AnyObject, examples: AnyObject) {
-    const xmsExamples = {};
+    const xmsExamples: any = {};
 
     for (const { key, value } of items(examples)) {
       if (value.$ref) {
@@ -129,7 +130,8 @@ class RefProcessor extends Transformer<any, any> {
         this.promises.push(this.processXMSExamples(targetParent, value));
         continue;
       }
-      if (key === "$ref") {
+      // If the key is $ref and the value is a string then it should be a json reference. Otherwise it might be a property called $ref if it is another type.
+      if (key === "$ref" && typeof value === "string") {
         const refFileName = value.indexOf("#") === -1 ? value : value.split("#")[0];
         const refPointer = value.indexOf("#") === -1 ? undefined : value.split("#")[1];
         const newRefFileName = ResolveUri(this.originalFileLocation, refFileName);

@@ -1,3 +1,4 @@
+/* eslint-disable no-process-exit */
 /* eslint-disable no-console */
 import { lookup } from "dns";
 import { Extension, ExtensionManager, Package } from "@azure-tools/extension";
@@ -14,7 +15,10 @@ import { tmpdir } from "os";
 import { spawn } from "child_process";
 import { AutorestArgs } from "./args";
 
-export const pkgVersion: string = require(`${__dirname}/../../package.json`).version;
+const inWebpack = typeof __webpack_require__ === "function";
+const nodeRequire = inWebpack ? __non_webpack_require__ : require;
+
+export const pkgVersion: string = require(`../package.json`).version;
 process.env["autorest.home"] = process.env["autorest.home"] || homedir();
 
 try {
@@ -27,14 +31,21 @@ try {
 export const rootFolder = join(process.env["autorest.home"], ".autorest");
 const args: AutorestArgs = (<any>global).__args || {};
 
-export const extensionManager: Promise<ExtensionManager> = ExtensionManager.Create(rootFolder);
+const pathToYarnCli = inWebpack ? `${__dirname}/yarn/cli.js` : undefined;
+
+export const extensionManager: Promise<ExtensionManager> = ExtensionManager.Create(rootFolder, "yarn", pathToYarnCli);
 export const oldCorePackage = "@microsoft.azure/autorest-core";
 export const newCorePackage = "@autorest/core";
 
 const basePkgVersion = semver.parse(
   pkgVersion.indexOf("-") > -1 ? pkgVersion.substring(0, pkgVersion.indexOf("-")) : pkgVersion,
 );
-const versionRange = `~${basePkgVersion.major}.${basePkgVersion.minor}.0`; // the version range of the core package required.
+
+/**
+ * The version range of the core package required.
+ * Require @autorest/core to have the same major version as autorest.
+ */
+const versionRange = `^${basePkgVersion.major}.0.0`;
 
 export const networkEnabled: Promise<boolean> = new Promise<boolean>((r, j) => {
   lookup("8.8.8.8", 4, (err, address, family) => {
@@ -82,11 +93,12 @@ export function resolvePathForLocalVersion(requestedVersion: string | null): str
     if (/^~[/|\\]/g.exec(requestedVersion)) {
       requestedVersion = join(homedir(), requestedVersion.substring(2));
     }
-    return requestedVersion ? resolve(requestedVersion) : dirname(require.resolve("@autorest/core/package.json"));
+    return requestedVersion ? resolve(requestedVersion) : dirname(nodeRequire.resolve("@autorest/core/package.json"));
   } catch (e) {
     // fallback to old-core name
     try {
-      return dirname(require.resolve("@microsoft.azure/autorest-core/package.json"));
+      // eslint-disable-next-line node/no-missing-require
+      return dirname(nodeRequire.resolve("@microsoft.azure/autorest-core/package.json"));
     } catch {
       // no dice
     }
@@ -99,7 +111,7 @@ export async function resolveEntrypoint(localPath: string | null, entrypoint: st
     // did they specify the package directory directly
     if (await isDirectory(localPath)) {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const pkg = require(`${localPath}/package.json`);
+      const pkg = nodeRequire(`${localPath}/package.json`);
       if (pkg.name === "autorest") {
         // you've tried loading the bootstrapper not the core!
         console.error(`The location you have specified is not autorest-core, it's autorest bootstrapper: ${pkg.name}`);
@@ -164,13 +176,12 @@ export async function runCoreOutOfProc(localPath: string | null, entrypoint: str
     if (ep) {
       // Creates the nodejs command to load the target core
       // - copies the argv parameters
-      // - loads our static loader (so the newer loader is used, and we can get to 'chalk' in our static fs)
       // - loads the js file with coloring (core expects a global function called 'color' )
       // - loads the actual entrypoint that we expect is there.
       const cmd = `
         process.argv = ${JSON.stringify(process.argv)};
-        if (require('fs').existsSync('${__dirname}/../static-loader.js')) { require('${__dirname}/../static-loader.js').load('${__dirname}/../static_modules.fs'); }
-        const { color } = require('${__dirname}/coloring');
+        const { color } = require('${__dirname}/exports');
+        global.color = color;
         require('${ep}')
       `
         .replace(/"/g, "'")
@@ -194,7 +205,7 @@ export async function tryRequire(localPath: string | null, entrypoint: string): 
   try {
     const ep = await resolveEntrypoint(localPath, entrypoint);
     if (ep) {
-      return require(ep);
+      return nodeRequire(ep);
     }
   } catch (E) {
     console.log(E);

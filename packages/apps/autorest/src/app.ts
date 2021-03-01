@@ -1,8 +1,11 @@
+/* eslint-disable no-process-exit */
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 /* eslint-disable no-console */
+import "source-map-support/register";
+
 declare const isDebuggerEnabled: boolean;
 const cwd = process.cwd();
 
@@ -205,4 +208,4 @@ async function main() {
   }
 }
 
-main();
+void main();

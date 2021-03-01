@@ -414,9 +414,9 @@ definitions:
       implementation:
         description: suggested implementation location for this parameter
         $ref: ./enums.yaml#/definitions/ImplementationLocation
-      isInMultipart:
+      isPartialBody:
         type: boolean
-        description: If this parameter is to be included in a multipart request body.
+        description: If this parameter is only part of the body request(for multipart and form bodies.)
     required:
       - language
       - protocol

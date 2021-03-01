@@ -1,8 +1,8 @@
 // @ts-check
 
 const path = require("path");
-const nodeExternals = require("webpack-node-externals");
 const baseWebpackConfig = require("../../../common/config/webpack.base.config");
+const CopyPlugin = require("copy-webpack-plugin");
 
 /**
  * @type {import("webpack").Configuration}
@@ -19,9 +19,16 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     libraryTarget: "commonjs2",
   },
-  externals: [
-    nodeExternals({
-      allowlist: [/^(?:(?!jsonpath).)*$/],
+  resolve: {
+    ...baseWebpackConfig.resolve,
+    alias: {
+      jsonpath: path.resolve(__dirname, "node_modules", "jsonpath", "jsonpath.min.js"),
+    },
+  },
+  plugins: [
+    // We need to copy the yarn cli.js so @azure-tools/extensions can call the file as it is.(Not bundled in the webpack bundle.)
+    new CopyPlugin({
+      patterns: [{ from: "node_modules/@azure-tools/extension/dist/yarn/cli.js", to: "yarn/cli.js" }],
     }),
   ],
   optimization: {

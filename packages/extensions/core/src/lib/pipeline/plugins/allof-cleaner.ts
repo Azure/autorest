@@ -13,7 +13,7 @@ import {
 } from "@azure-tools/datastore";
 import { Model, isReference, Refable, Schema } from "@azure-tools/openapi";
 
-import { ConfigurationView } from "../../configuration";
+import { AutorestContext } from "../../configuration";
 import { PipelinePlugin } from "../common";
 import { values, length, items } from "@azure-tools/linq";
 
@@ -44,7 +44,7 @@ export class AllOfCleaner {
   }
 }
 
-async function allofCleaner(config: ConfigurationView, input: DataSource, sink: DataSink) {
+async function allofCleaner(config: AutorestContext, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
 

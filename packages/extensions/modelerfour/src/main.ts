@@ -23,4 +23,4 @@ async function main() {
   await pluginHost.Run();
 }
 
-main();
+void main();

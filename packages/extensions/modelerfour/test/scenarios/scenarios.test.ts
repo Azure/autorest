@@ -12,7 +12,7 @@ const cfg = {
     "group-parameters": true,
     "resolve-schema-name-collisons": true,
     "additional-checks": true,
-    //'always-create-content-type-parameter': true,
+    "always-create-content-type-parameter": true,
     "naming": {
       override: {
         $host: "$host",
@@ -22,7 +22,7 @@ const cfg = {
       constantParameter: "pascal",
       /*
         for when playing with python style settings :
-        
+
         parameter: 'snakecase',
         property: 'snakecase',
         operation: 'snakecase',

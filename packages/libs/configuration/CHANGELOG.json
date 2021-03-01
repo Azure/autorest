@@ -1,0 +1,17 @@
+{
+  "name": "@autorest/configuration",
+  "entries": [
+    {
+      "version": "1.0.1",
+      "tag": "@autorest/configuration_v1.0.1",
+      "date": "Fri, 19 Feb 2021 21:42:09 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Initial release, include models only"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -6,19 +6,6 @@
 /// <reference path="../definitions/core.d.ts" />
 /// <reference path="../definitions/vscode.d.ts" />
 
-// if this is being run directly, call the app entrypoint (we're probably running the local folder)
-if (require.main === module) {
-  require("../../entrypoints/app");
-}
-
-// load modules from static linker filesystem.
-if (
-  process.argv.indexOf("--no-static-loader") === -1 &&
-  process.env["no-static-loader"] === undefined &&
-  require("fs").existsSync(`${__dirname}/../static-loader.js`)
-) {
-  require("../static-loader.js").load(`${__dirname}/../static_modules.fs`);
-}
 // everything else.
 import { tryRequire, resolveEntrypoint, ensureAutorestHome, selectVersion } from "./autorest-as-a-service";
 import { resolve } from "path";
@@ -28,6 +15,7 @@ import { LanguageClient } from "vscode-languageclient";
 // exports the public AutoRest definitions
 import { GenerationResults, IFileSystem, AutoRest as IAutoRest } from "autorest-core";
 export { Message, Artifact, GenerationResults, IFileSystem } from "autorest-core";
+export { color } from "./coloring";
 
 /**
  * The Channel that a message is registered with.
@@ -247,16 +235,6 @@ export async function create(fileSystem?: IFileSystem, configFileOrFolderUri?: s
 export async function isOpenApiDocument(content: string): Promise<boolean> {
   await ensureCoreLoaded();
   return coreModule.IsOpenApiDocument(content);
-}
-
-/**
- * Checks to see if the document is a literate configuation document.
- *
- * @param content the document content to check
- */
-export async function isConfigurationDocument(content: string): Promise<boolean> {
-  await ensureCoreLoaded();
-  return coreModule.IsConfigurationDocument(content);
 }
 
 /** Determines the document type based on the content of the document

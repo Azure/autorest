@@ -31,9 +31,9 @@ export interface Parameter extends Value {
   groupedBy?: Parameter;
 
   /**
-   * If this parameter is to be included in a multipart request body.
+   * If this parameter is only part of the body request(for multipart and form bodies.)
    */
-  isInMultipart?: boolean;
+  isPartialBody?: boolean;
 }
 
 export class Parameter extends Value implements Parameter {

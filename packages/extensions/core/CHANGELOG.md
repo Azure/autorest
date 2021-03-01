@@ -1,6 +1,34 @@
 # Change Log - @autorest/core
 
-This log was last generated on Wed, 10 Feb 2021 01:05:52 GMT and should not be manually modified.
+This log was last generated on Sat, 20 Feb 2021 17:49:35 GMT and should not be manually modified.
+
+## 3.0.6375
+Sat, 20 Feb 2021 17:49:35 GMT
+
+### Patches
+
+- **Fix** Revert use of flatMap which is not available on node 10
+
+## 3.0.6374
+Fri, 19 Feb 2021 21:42:09 GMT
+
+### Patches
+
+- Bundle jsonpath in webpack
+- Extract some section into @autorest/core
+- Rethink config
+- **Fix** problem not resolving the yarn/cli.js file
+- **Fix** Components cleaner not removing external non used headers but remove their schemas
+- **Revert** removal of header-text config getter
+
+## 3.0.6373
+Thu, 11 Feb 2021 18:03:07 GMT
+
+### Patches
+
+- **Fix** Configuration for csharp causing pipeline stage not found error
+- **Improvement** Provide a more detail error message when pipeline can't find a stage.
+- **Update** @azure-tools/extension to ~3.1.272 and bundle it in the webpack file
 
 ## 3.0.6372
 Tue, 09 Feb 2021 22:00:21 GMT

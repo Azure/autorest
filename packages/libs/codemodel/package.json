@@ -1,12 +1,15 @@
 {
   "name": "@autorest/codemodel",
-  "version": "4.14.5",
+  "version": "4.14.6",
   "description": "AutoRest code model library",
   "directories": {
     "doc": "docs"
   },
   "main": "dist/exports.js",
   "typings": "dist/exports.d.ts",
+  "engines": {
+    "node": ">=10.13.0"
+  },
   "scripts": {
     "build": "tsc -p .",
     "watch": "tsc -p . --watch",
@@ -39,6 +42,7 @@
     "@types/node": "~14.14.20",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
+    "eslint-plugin-node": "~11.1.0",
     "eslint-plugin-prettier": "~3.2.0",
     "eslint-plugin-unicorn": "~27.0.0",
     "eslint": "^7.17.0",

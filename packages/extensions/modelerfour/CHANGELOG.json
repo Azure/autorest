@@ -2,6 +2,40 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.17.0",
+      "tag": "@autorest/modelerfour_v4.17.0",
+      "date": "Fri, 19 Feb 2021 21:42:09 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Change** Body parmaeters for a `formData` body will be seperate parameters in the generated model instead of being grouped in a body object."
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Change property redefinition error when changing type into a warning to allow polymorphism"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/codemodel\" from `~4.14.5` to `~4.14.6`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.16.2",
+      "tag": "@autorest/modelerfour_v4.16.2",
+      "date": "Thu, 11 Feb 2021 18:03:07 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Internals** Update chalk dependency to ^4.1.0"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.16.1",
       "tag": "@autorest/modelerfour_v4.16.1",
       "date": "Mon, 08 Feb 2021 23:06:15 GMT",

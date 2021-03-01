@@ -7,12 +7,12 @@ import assert from "assert";
 
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
 import { parse } from "@azure-tools/datastore";
-import { ConfigurationLoader } from "../src/lib/configuration";
+import { AutorestContextLoader } from "../src/lib/configuration";
 import { AppRoot } from "../src/lib/constants";
 
 describe("Blaming", () => {
   afterEach(async () => {
-    await ConfigurationLoader.shutdown();
+    await AutorestContextLoader.shutdown();
   });
 
   // gs01/nelson : to do -- we have to come back and make sure this works.

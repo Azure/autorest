@@ -1,28 +1,17 @@
-import {
-  DataHandle,
-  DataSource,
-  Lazy,
-  Normalize,
-  QuickDataSource,
-  createSandbox,
-  Stringify,
-  YAMLNode,
-} from "@azure-tools/datastore";
+import { DataHandle, DataSource, Normalize, QuickDataSource, createSandbox, Stringify } from "@azure-tools/datastore";
 import { ResolveUri } from "@azure-tools/uri";
-import { Artifact } from "../../../exports";
-import { ConfigurationView } from "../../configuration";
+import { AutorestContext } from "../../configuration";
 import { Channel } from "../../message";
-import { IdentitySourceMapping } from "../../source-map/merging";
 import { PipelinePlugin } from "../common";
 
 const safeEval = createSandbox();
 
-function isOutputArtifactOrMapRequested(config: ConfigurationView, artifactType: string) {
+function isOutputArtifactOrMapRequested(config: AutorestContext, artifactType: string) {
   return config.IsOutputArtifactRequested(artifactType) || config.IsOutputArtifactRequested(artifactType + ".map");
 }
 
 async function emitArtifactInternal(
-  config: ConfigurationView,
+  config: AutorestContext,
   artifactType: string,
   uri: string,
   handle: DataHandle,
@@ -56,7 +45,7 @@ async function emitArtifactInternal(
 
 let emitCtr = 0;
 async function emitArtifact(
-  config: ConfigurationView,
+  config: AutorestContext,
   uri: string,
   handle: DataHandle,
   isObject: boolean,
@@ -116,7 +105,7 @@ async function emitArtifact(
 }
 
 export async function emitArtifacts(
-  config: ConfigurationView,
+  config: AutorestContext,
   artifactTypeFilter: string | Array<string> | null /* what's set on the emitter */,
   uriResolver: (key: string) => string,
   scope: DataSource,
@@ -143,26 +132,29 @@ export async function emitArtifacts(
 
 /* @internal */
 export function createArtifactEmitterPlugin(inputOverride?: () => Promise<DataSource>): PipelinePlugin {
-  return async (config, input) => {
+  return async (context, input) => {
     if (inputOverride) {
       input = await inputOverride();
     }
 
     // clear output-folder if requested
-    if (config.GetEntry(<any>"clear-output-folder")) {
-      config.ClearFolder.Dispatch(config.OutputFolderUri);
+    if (context.GetEntry("clear-output-folder")) {
+      context.ClearFolder.Dispatch(context.config.outputFolderUri);
     }
 
     await emitArtifacts(
-      config,
-      config.GetEntry(<any>"input-artifact") || null,
+      context,
+      context.GetEntry("input-artifact") || null,
       (key) =>
         ResolveUri(
-          config.OutputFolderUri,
-          safeEval<string>(config.GetEntry(<any>"output-uri-expr") || "$key", { $key: key, $config: config.Raw }),
+          context.config.outputFolderUri,
+          safeEval<string>(context.GetEntry("output-uri-expr") || "$key", {
+            $key: key,
+            $config: context.config.raw,
+          }),
         ),
       input,
-      config.GetEntry(<any>"is-object"),
+      context.GetEntry("is-object"),
     );
     return new QuickDataSource([]);
   };

@@ -38,7 +38,7 @@ use-extension:
 
 ##### Input API versions (azure-rest-api-specs + C# specific)
 
-``` yaml $(csharp) && !isRequested('@autorest/csharp')
+``` yaml $(csharp) && !isRequested('@autorest/csharp') && ($(legacy) || $(v2))
 pipeline:
   swagger-document/reflect-api-versions-cs: # emits a *.cs file containing information about the API versions involved in this call
     input:
@@ -51,7 +51,7 @@ pipeline:
     scope: scope-reflect-api-versions-cs-emitter
 ```
 
-``` yaml $(csharp) && !isRequested('@autorest/csharp')
+``` yaml $(csharp) && !isRequested('@autorest/csharp') && ($(legacy) || $(v2))
 pipeline:
   openapi-document/reflect-api-versions-cs: # emits a *.cs file containing information about the API versions involved in this call
     input:

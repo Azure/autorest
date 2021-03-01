@@ -62,7 +62,7 @@ perform-load: true # kick off loading
 ```
 
 ``` yaml enableAllVersionsMode()
-# when an autorest-v3 generator is loading, and a profile or api-verison is specified, 
+# when an autorest-v3 generator is loading, and a profile or api-verison is specified,
 # we need to force the tag: all-api-versions so that it loads the whole api set.
 # but not TOO high, as then it'll be evaluated before $(pipeline-model)
 tag: all-api-versions
@@ -87,11 +87,11 @@ header-definitions:
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
- 
+
   mit: Licensed under the MIT License. See License.txt in the project root for license information.
 
   mit-small: Licensed under the MIT License.
 
   microsoft: Copyright (c) Microsoft Corporation. All rights reserved.
-  
-  
+
+

@@ -12,7 +12,7 @@ import {
 import { clone, Dictionary, values, visitor } from "@azure-tools/linq";
 
 import * as oai from "@azure-tools/openapi";
-import { ConfigurationView } from "../../configuration";
+import { AutorestContext } from "../../configuration";
 import { PipelinePlugin } from "../common";
 
 /**
@@ -206,7 +206,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     for (const { value } of visit(node)) {
       if (value && typeof value === "object") {
         const ref = value.$ref;
-        if (ref && ref.startsWith("#")) {
+        if (ref && typeof ref === "string" && ref.startsWith("#")) {
           const fullRef = `${(<DataHandle>this.currentInput).originalFullPath}${ref}`;
           // change local refs to full ref
           value.$ref = fullRef;
@@ -275,7 +275,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
       }
       if (value && typeof value === "object") {
         const ref = value.$ref;
-        if (ref) {
+        if (ref && typeof ref === "string") {
           // see if this object has a $ref
           const newRef = this.refs[ref];
           if (newRef) {
@@ -422,7 +422,7 @@ function cleanRefs(instance: AnyObject): AnyObject {
   return instance;
 }
 
-async function merge(config: ConfigurationView, input: DataSource, sink: DataSink) {
+async function merge(config: AutorestContext, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map((x) => input.ReadStrict(x)));
   if (inputs.length === 1) {
     const model = await inputs[0].ReadObject<any>();
