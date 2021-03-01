@@ -1,7 +1,7 @@
 {
   "title": "A JSON Schema for Composite Swagger in Swagger 2.0 API.",
-  "id": "https://raw.githubusercontent.com/Azure/autorest/master/schema/composite-swagger.json#",
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "https://raw.githubusercontent.com/Azure/autorest/master/schema/composite-swagger.json#",
+  "$schema": "http://json-schema.org/draft-06/schema#",
   "type": "object",
   "required": [
     "info",

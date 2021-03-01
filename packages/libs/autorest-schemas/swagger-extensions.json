@@ -1,7 +1,7 @@
 {
   "title": "A JSON Schema for Swagger 2.0 API.",
-  "id": "https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json#",
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json#",
+  "$schema": "http://json-schema.org/draft-06/schema#",
   "type": "object",
   "required": ["swagger", "info", "paths"],
   "additionalProperties": false,
@@ -1114,58 +1114,58 @@
           "type": "string"
         },
         "title": {
-          "$ref": "http://json-schema.org/draft-04/schema#/properties/title"
+          "$ref": "http://json-schema.org/draft-06/schema#/properties/title"
         },
         "description": {
-          "$ref": "http://json-schema.org/draft-04/schema#/properties/description"
+          "$ref": "http://json-schema.org/draft-06/schema#/properties/description"
         },
         "default": {
-          "$ref": "http://json-schema.org/draft-04/schema#/properties/default"
+          "$ref": "http://json-schema.org/draft-06/schema#/properties/default"
         },
         "multipleOf": {
-          "$ref": "http://json-schema.org/draft-04/schema#/properties/multipleOf"
+          "$ref": "http://json-schema.org/draft-06/schema#/properties/multipleOf"
         },
         "maximum": {
-          "$ref": "http://json-schema.org/draft-04/schema#/properties/maximum"
+          "$ref": "http://json-schema.org/draft-06/schema#/properties/maximum"
         },
         "exclusiveMaximum": {
-          "$ref": "http://json-schema.org/draft-04/schema#/properties/exclusiveMaximum"
+          "$ref": "http://json-schema.org/draft-06/schema#/properties/exclusiveMaximum"
         },
         "minimum": {
-          "$ref": "http://json-schema.org/draft-04/schema#/properties/minimum"
+          "$ref": "http://json-schema.org/draft-06/schema#/properties/minimum"
         },
         "exclusiveMinimum": {
-          "$ref": "http://json-schema.org/draft-04/schema#/properties/exclusiveMinimum"
+          "$ref": "http://json-schema.org/draft-06/schema#/properties/exclusiveMinimum"
         },
         "maxLength": {
-          "$ref": "http://json-schema.org/draft-04/schema#/definitions/positiveInteger"
+          "$ref": "http://json-schema.org/draft-06/schema#/definitions/nonNegativeInteger"
         },
         "minLength": {
-          "$ref": "http://json-schema.org/draft-04/schema#/definitions/positiveIntegerDefault0"
+          "$ref": "http://json-schema.org/draft-06/schema#/definitions/nonNegativeIntegerDefault0"
         },
         "pattern": {
-          "$ref": "http://json-schema.org/draft-04/schema#/properties/pattern"
+          "$ref": "http://json-schema.org/draft-06/schema#/properties/pattern"
         },
         "maxItems": {
-          "$ref": "http://json-schema.org/draft-04/schema#/definitions/positiveInteger"
+          "$ref": "http://json-schema.org/draft-06/schema#/definitions/nonNegativeInteger"
         },
         "minItems": {
-          "$ref": "http://json-schema.org/draft-04/schema#/definitions/positiveIntegerDefault0"
+          "$ref": "http://json-schema.org/draft-06/schema#/definitions/nonNegativeIntegerDefault0"
         },
         "uniqueItems": {
-          "$ref": "http://json-schema.org/draft-04/schema#/properties/uniqueItems"
+          "$ref": "http://json-schema.org/draft-06/schema#/properties/uniqueItems"
         },
         "maxProperties": {
-          "$ref": "http://json-schema.org/draft-04/schema#/definitions/positiveInteger"
+          "$ref": "http://json-schema.org/draft-06/schema#/definitions/nonNegativeInteger"
         },
         "minProperties": {
-          "$ref": "http://json-schema.org/draft-04/schema#/definitions/positiveIntegerDefault0"
+          "$ref": "http://json-schema.org/draft-06/schema#/definitions/nonNegativeIntegerDefault0"
         },
         "required": {
-          "$ref": "http://json-schema.org/draft-04/schema#/definitions/stringArray"
+          "$ref": "http://json-schema.org/draft-06/schema#/definitions/stringArray"
         },
         "enum": {
-          "$ref": "http://json-schema.org/draft-04/schema#/properties/enum"
+          "$ref": "http://json-schema.org/draft-06/schema#/properties/enum"
         },
         "x-ms-enum": {
           "$ref": "#/definitions/xmsEnum"
@@ -1188,7 +1188,7 @@
           "default": {}
         },
         "type": {
-          "$ref": "http://json-schema.org/draft-04/schema#/properties/type"
+          "$ref": "http://json-schema.org/draft-06/schema#/properties/type"
         },
         "items": {
           "anyOf": [
@@ -1274,16 +1274,16 @@
           "type": "string"
         },
         "title": {
-          "$ref": "http://json-schema.org/draft-04/schema#/properties/title"
+          "$ref": "http://json-schema.org/draft-06/schema#/properties/title"
         },
         "description": {
-          "$ref": "http://json-schema.org/draft-04/schema#/properties/description"
+          "$ref": "http://json-schema.org/draft-06/schema#/properties/description"
         },
         "default": {
-          "$ref": "http://json-schema.org/draft-04/schema#/properties/default"
+          "$ref": "http://json-schema.org/draft-06/schema#/properties/default"
         },
         "required": {
-          "$ref": "http://json-schema.org/draft-04/schema#/definitions/stringArray"
+          "$ref": "http://json-schema.org/draft-06/schema#/definitions/stringArray"
         },
         "type": {
           "type": "string",
@@ -1495,49 +1495,49 @@
       "default": "csv"
     },
     "title": {
-      "$ref": "http://json-schema.org/draft-04/schema#/properties/title"
+      "$ref": "http://json-schema.org/draft-06/schema#/properties/title"
     },
     "description": {
-      "$ref": "http://json-schema.org/draft-04/schema#/properties/description"
+      "$ref": "http://json-schema.org/draft-06/schema#/properties/description"
     },
     "default": {
-      "$ref": "http://json-schema.org/draft-04/schema#/properties/default"
+      "$ref": "http://json-schema.org/draft-06/schema#/properties/default"
     },
     "multipleOf": {
-      "$ref": "http://json-schema.org/draft-04/schema#/properties/multipleOf"
+      "$ref": "http://json-schema.org/draft-06/schema#/properties/multipleOf"
     },
     "maximum": {
-      "$ref": "http://json-schema.org/draft-04/schema#/properties/maximum"
+      "$ref": "http://json-schema.org/draft-06/schema#/properties/maximum"
     },
     "exclusiveMaximum": {
-      "$ref": "http://json-schema.org/draft-04/schema#/properties/exclusiveMaximum"
+      "$ref": "http://json-schema.org/draft-06/schema#/properties/exclusiveMaximum"
     },
     "minimum": {
-      "$ref": "http://json-schema.org/draft-04/schema#/properties/minimum"
+      "$ref": "http://json-schema.org/draft-06/schema#/properties/minimum"
     },
     "exclusiveMinimum": {
-      "$ref": "http://json-schema.org/draft-04/schema#/properties/exclusiveMinimum"
+      "$ref": "http://json-schema.org/draft-06/schema#/properties/exclusiveMinimum"
     },
     "maxLength": {
-      "$ref": "http://json-schema.org/draft-04/schema#/definitions/positiveInteger"
+      "$ref": "http://json-schema.org/draft-06/schema#/definitions/nonNegativeInteger"
     },
     "minLength": {
-      "$ref": "http://json-schema.org/draft-04/schema#/definitions/positiveIntegerDefault0"
+      "$ref": "http://json-schema.org/draft-06/schema#/definitions/nonNegativeIntegerDefault0"
     },
     "pattern": {
-      "$ref": "http://json-schema.org/draft-04/schema#/properties/pattern"
+      "$ref": "http://json-schema.org/draft-06/schema#/properties/pattern"
     },
     "maxItems": {
-      "$ref": "http://json-schema.org/draft-04/schema#/definitions/positiveInteger"
+      "$ref": "http://json-schema.org/draft-06/schema#/definitions/nonNegativeInteger"
     },
     "minItems": {
-      "$ref": "http://json-schema.org/draft-04/schema#/definitions/positiveIntegerDefault0"
+      "$ref": "http://json-schema.org/draft-06/schema#/definitions/nonNegativeIntegerDefault0"
     },
     "uniqueItems": {
-      "$ref": "http://json-schema.org/draft-04/schema#/properties/uniqueItems"
+      "$ref": "http://json-schema.org/draft-06/schema#/properties/uniqueItems"
     },
     "enum": {
-      "$ref": "http://json-schema.org/draft-04/schema#/properties/enum"
+      "$ref": "http://json-schema.org/draft-06/schema#/properties/enum"
     },
     "jsonReference": {
       "type": "object",

@@ -6,28 +6,20 @@
 import { DataHandle, parseJsonPointer } from "@azure-tools/datastore";
 import SchemaValidator from "z-schema";
 import { OperationAbortedException } from "@autorest/common";
-import { Channel } from "../message";
-import { createPerFilePlugin, PipelinePlugin } from "./common";
-import { AutorestContext } from "../configuration";
+import { Channel } from "../../message";
+import { createPerFilePlugin, PipelinePlugin } from "../common";
+import { AutorestContext } from "../../configuration";
+import { SwaggerSchemaValidator } from "./schema-validation";
+import { ErrorObject } from "ajv";
 
 export function createSwaggerSchemaValidatorPlugin(): PipelinePlugin {
-  const validator = new SchemaValidator({ breakOnFirstError: false });
-
-  const extendedSwaggerSchema = require(`@autorest/schemas/swagger-extensions.json`);
-  (<any>validator).setRemoteReference(
-    "http://json.schemastore.org/swagger-2.0",
-    require(`@autorest/schemas/swagger.json`),
-  );
-  (<any>validator).setRemoteReference(
-    "https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json",
-    require(`@autorest/schemas/example-schema.json`),
-  );
+  const swaggerValidator = new SwaggerSchemaValidator();
   return createPerFilePlugin(async (config) => async (fileIn, sink) => {
     const obj = await fileIn.ReadObject<any>();
     const isSecondary = !!obj["x-ms-secondary-file"];
 
-    const errors = await validateSchema(obj, extendedSwaggerSchema, validator);
-    if (errors !== null) {
+    const errors = swaggerValidator.validate(obj);
+    if (errors) {
       for (const error of errors) {
         // secondary files have reduced schema compliancy, so we're gonna just warn them for now.
         logValidationError(config, fileIn, error, "schema-validator-swagger", isSecondary ? "warning" : "error");
@@ -53,7 +45,7 @@ export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
     if (errors !== null) {
       for (const error of errors) {
         const level = markErrorAsWarnings || isSecondary ? "warning" : "error";
-        logValidationError(context, fileIn, error, "schema-validator-openapi", level);
+        logValidationError(context, fileIn, error as any, "schema-validator-openapi", level);
       }
       if (!isSecondary) {
         context.Message({
@@ -99,11 +91,12 @@ const validateSchema = (
 const logValidationError = (
   config: AutorestContext,
   fileIn: DataHandle,
-  error: ValidationError,
+  error: ErrorObject,
   pluginName: string,
   type: "error" | "warning",
 ) => {
-  const path = parseJsonPointer(error.path);
+  console.error("LOG error", error);
+  const path = parseJsonPointer(error.dataPath);
   config.Message({
     Channel: type == "warning" ? Channel.Warning : Channel.Error,
     Details: error,
