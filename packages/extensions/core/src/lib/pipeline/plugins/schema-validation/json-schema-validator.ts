@@ -120,29 +120,24 @@ function mergeParams(objA: any = {}, objB: any = {}) {
 
   const res: any = {};
 
-  for (const k in objA) {
-    if (Object.prototype.hasOwnProperty.call(objA, k)) {
-      res[k] = arrayify(objA[k]);
-    }
+  for (const k in Object.keys(objA)) {
+    res[k] = arrayify(objA[k]);
   }
 
-  for (const k in objB) {
-    if (Object.prototype.hasOwnProperty.call(objB, k)) {
-      if (res[k]) {
-        const curr = res[k];
-        res[k] = curr.concat(arrayify(objB[k]));
-      } else {
-        res[k] = arrayify(objB[k]);
-      }
+  for (const k in Object.keys(objB)) {
+    if (res[k]) {
+      res[k] = res[k].concat(arrayify(objB[k]));
+    } else {
+      res[k] = arrayify(objB[k]);
     }
   }
 
   return res;
 }
 
-function arrayify(thing: any) {
+function arrayify<T>(thing: T | T[] | undefined): T[] | undefined {
   if (thing === undefined || thing === null) {
-    return thing;
+    return undefined;
   }
   if (Array.isArray(thing)) {
     return thing;
