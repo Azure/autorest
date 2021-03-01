@@ -110,7 +110,6 @@ dependencies:
   yaml-ast-parser: 0.0.43
   yargs: 16.2.0
   yarn: 1.22.10
-  z-schema: 5.0.0
 lockfileVersion: 5.2
 packages:
   /@azure-tools/async-io/3.0.253:
@@ -9984,7 +9983,7 @@ packages:
       ts-node: '*'
       webpack-cli: '*'
     resolution:
-      integrity: sha512-zn1e426O60et7E7+UyeBq6Rey9550paWPTGAUk+pTr+YpjckVIoKRoSqSIfoFhwf9Y5PblAe9bKTj4d8SEDuEA==
+      integrity: sha512-QfELcsPUqDpOSGfMho2oSGzcGCt89Da8V5LpSXRqN2y8UZRg6Z4bjoT3DXPUAvbGDqppR6ydCJlrLW4WIWKtMg==
       tarball: file:projects/autorest.tgz
     version: 0.0.0
   file:projects/codegen.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -10098,7 +10097,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-ICQYsvvinkuAM42zp7jOoB+n+w3xqxTYbonvjNu3PoBGJuVTPNbAZ5I5kx65XvtVg3N4POEhAsS0iEuwabmV8w==
+      integrity: sha512-Jo2B0ovccrO54g8I6Slhpz/incztxEnm/r52st+81Fd8/C+02q5sDEUMO84uM9RHNDH79vq+BYZn1PsXz5k45Q==
       tarball: file:projects/compare.tgz
     version: 0.0.0
   file:projects/configuration.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -10126,7 +10125,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-/618yDQpSPf7x6bJkMyiKhltfS8j/YBjBxXydeDAnwYF1nN7I1kKLTJteCBRrZKiK5tLJFDuWm16x9PB85r+oA==
+      integrity: sha512-LKUi6Mrflh5w0+U/PWjn1jtU7bE2jLqvND53aQf/hWMJmVmBcDFqXNS1vL2GUXNXjg/nWHsVG+Acu9agQwrPJg==
       tarball: file:projects/configuration.tgz
     version: 0.0.0
   file:projects/core.tgz_ts-node@9.1.1:
@@ -10185,7 +10184,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-782NYNml1Z2gUhfaiCatbVYXkhRNm71+W+pDkxKnfITJ5/grMrb8QH5OdYcxsBDjuhaUVtVME4oqAKmHk3Iw4A==
+      integrity: sha512-UKacK+vMh/BPaGatzLaMSPbd0qt4LCnnoEScLtb7jpHBvnVRZMVhH4bj6pjsUOUcIx4Kuxsh0fmjJkw4Nmmbsg==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -10469,11 +10468,12 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-Nr/rOhVjZc0golARSPIQKP6Po09CdqVmXJF9NEfypoN2dthsy31ki4ls1D1YB0aHFwonpZLLTnDuFhUQ5GBiVA==
+      integrity: sha512-dsmOlrJ7onRNMwAoVVwpacSEJbkLWYEEogGtNVi5aHh6VkhAFpyZKzJlrpOZ4UWasiCCFHr3w2tBzqVAMnox2A==
       tarball: file:projects/test-public-packages.tgz
     version: 0.0.0
   file:projects/test-utils.tgz_prettier@2.2.1+ts-node@9.1.1:
     dependencies:
+      '@azure-tools/tasks': 3.0.253
       '@types/jest': 26.0.20
       eslint: 7.19.0
       eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
@@ -10489,7 +10489,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-8nMXR/fQrY7cWzKlnWAWLNAPsCqTy218Yq76aUySEg/K65B+nGDBNIZewWlUh3Dy4q/xEwC+EN8tG9/SSwQ9EA==
+      integrity: sha512-avGo/LW8WilQ37XPpPHqyRVtrS6FS4Oxm2NnkvMKV6v3UA8sQMMLH4QglVnyVpZDP8ULsCZwWrc7kVe+iYlZKA==
       tarball: file:projects/test-utils.tgz
     version: 0.0.0
 registry: ''
@@ -10605,4 +10605,3 @@ specifiers:
   yaml-ast-parser: 0.0.43
   yargs: ~16.2.0
   yarn: 1.22.10
-  z-schema: ^5.0.0

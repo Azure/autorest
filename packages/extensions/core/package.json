@@ -92,7 +92,6 @@
     "webpack-cli": "~4.4.0",
     "webpack-node-externals": "~2.5.2",
     "webpack": "~5.18.0",
-    "yaml-ast-parser": "0.0.43",
-    "z-schema": "^5.0.0"
+    "yaml-ast-parser": "0.0.43"
   }
 }
