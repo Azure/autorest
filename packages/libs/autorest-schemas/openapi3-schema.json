@@ -896,7 +896,10 @@
         "^path:": {},
         "^x-": {}
       },
-      "additionalProperties": false
+      "additionalProperties": {
+        "not": true,
+        "errorMessage": "should only have path names that start with `/` but found ${0#}"
+      }
     },
     "PathItem": {
       "type": "object",

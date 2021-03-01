@@ -13,9 +13,8 @@ export abstract class JsonSchemaValidator {
   protected ajv: Ajv;
 
   public constructor() {
-    this.ajv = ajvErrors(
-      new Ajv({ allErrors: true, strict: false, meta: require("ajv/lib/refs/json-schema-draft-06.json") }),
-    );
+    this.ajv = new Ajv({ allErrors: true, strict: false, meta: require("ajv/lib/refs/json-schema-draft-06.json") });
+    ajvErrors(this.ajv, {});
   }
 
   public abstract get schema(): AnySchemaObject;
