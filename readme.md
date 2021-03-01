@@ -10,12 +10,12 @@ The **AutoRest** tool generates client libraries for accessing RESTful web servi
 | [@autorest/core][core_src]                      | ![](https://img.shields.io/npm/v/@autorest/core)             | ![](https://img.shields.io/npm/v/@autorest/core/next)             |
 | [@autorest/modelerfour][modelerfour_src]        | ![](https://img.shields.io/npm/v/@autorest/modelerfour)      | ![](https://img.shields.io/npm/v/@autorest/modelerfour/next)      |
 | Language generators                             |
-| [@autorest/csharp][csharp_src]                  | ![](https://img.shields.io/npm/v/@autorest/csharp)           | ![](https://img.shields.io/npm/v/@autorest/csharp/next)           |
-| [@autorest/go][go_src]                          | ![](https://img.shields.io/npm/v/@autorest/go)               | ![](https://img.shields.io/npm/v/@autorest/go/next)               |
-| [@autorest/java][java_src]                      | ![](https://img.shields.io/npm/v/@autorest/java)             | ![](https://img.shields.io/npm/v/@autorest/java/next)             |
-| [@autorest/python][python_src]                  | ![](https://img.shields.io/npm/v/@autorest/python)           | ![](https://img.shields.io/npm/v/@autorest/python/next)           |
-| [@autorest/swift][swift_src]                    | ![](https://img.shields.io/npm/v/@autorest/swift)            | ![](https://img.shields.io/npm/v/@autorest/swift/next)            |
-| [@autorest/typescript][typescript_src]          | ![](https://img.shields.io/npm/v/@autorest/typescript)       | ![](https://img.shields.io/npm/v/@autorest/typescript/next)       |
+| [@autorest/csharp][csharp_src]                  | ![](https://img.shields.io/npm/v/@autorest/csharp)           |                                                                   |
+| [@autorest/go][go_src]                          | ![](https://img.shields.io/npm/v/@autorest/go)               |                                                                   |
+| [@autorest/java][java_src]                      | ![](https://img.shields.io/npm/v/@autorest/java)             |                                                                   |
+| [@autorest/python][python_src]                  | ![](https://img.shields.io/npm/v/@autorest/python)           |                                                                   |
+| [@autorest/swift][swift_src]                    | ![](https://img.shields.io/npm/v/@autorest/swift)            |                                                                   |
+| [@autorest/typescript][typescript_src]          | ![](https://img.shields.io/npm/v/@autorest/typescript)       |                                                                   |
 | Internal packages                               |
 | [@autorest/codemodel][codemodel_src]            | ![](https://img.shields.io/npm/v/@autorest/codemodel)        | ![](https://img.shields.io/npm/v/@autorest/codemodel/next)        |
 | [@autorest/common][common_src]                  | ![](https://img.shields.io/npm/v/@autorest/common)           | ![](https://img.shields.io/npm/v/@autorest/common/next)           |
