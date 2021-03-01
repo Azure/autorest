@@ -1,6 +1,6 @@
 import { Channel, Message, Range, SourceLocation } from "../message";
 import { BlameTree, stringify, Stringify, TryDecodeEnhancedPositionFromName } from "@azure-tools/datastore";
-import { AutorestError } from "@autorest/common";
+import { AutorestError, AutorestWarning } from "@autorest/common";
 import { AutorestConfiguration } from "@autorest/configuration";
 import { From } from "linq-es2015";
 import { Suppressor } from "../pipeline/suppression";
@@ -34,11 +34,21 @@ export class AutorestCoreLogger {
     });
   }
 
+  public trackWarning(error: AutorestWarning) {
+    void this.message({
+      Channel: Channel.Warning,
+      Text: error.message,
+      Source: error.source?.map((x) => ({ document: x.document, Position: x.position })),
+      Details: error.details,
+    });
+  }
+
   public trackError(error: AutorestError) {
     void this.message({
       Channel: Channel.Error,
       Text: error.message,
       Source: error.source?.map((x) => ({ document: x.document, Position: x.position })),
+      Details: error.details,
     });
   }
 

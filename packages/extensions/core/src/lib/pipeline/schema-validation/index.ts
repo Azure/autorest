@@ -1,2 +1,1 @@
-export * from "./schema-validation";
-export * from "./schema-validation-plugin";
+export * from "./schema-validation-plugins";

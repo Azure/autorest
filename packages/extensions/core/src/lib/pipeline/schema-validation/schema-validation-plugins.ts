@@ -2,27 +2,29 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-/* eslint-disable @typescript-eslint/no-var-requires */
-import { DataHandle, parseJsonPointer } from "@azure-tools/datastore";
-import SchemaValidator from "z-schema";
+import { DataHandle } from "@azure-tools/datastore";
 import { OperationAbortedException } from "@autorest/common";
 import { Channel } from "../../message";
 import { createPerFilePlugin, PipelinePlugin } from "../common";
 import { AutorestContext } from "../../configuration";
-import { SwaggerSchemaValidator } from "./schema-validation";
-import { ErrorObject } from "ajv";
+import { SwaggerSchemaValidator } from "./swagger-schema-validator";
+import { PositionedValidationError } from "./json-schema-validator";
+import { OpenApi3SchemaValidator } from "./openapi3-schema-validator";
+
+export const SCHEMA_VIOLATION_ERROR_CODE = "schema_violation";
 
 export function createSwaggerSchemaValidatorPlugin(): PipelinePlugin {
   const swaggerValidator = new SwaggerSchemaValidator();
+
   return createPerFilePlugin(async (config) => async (fileIn, sink) => {
     const obj = await fileIn.ReadObject<any>();
     const isSecondary = !!obj["x-ms-secondary-file"];
 
-    const errors = swaggerValidator.validate(obj);
+    const errors = await swaggerValidator.validateFile(fileIn);
     if (errors) {
       for (const error of errors) {
         // secondary files have reduced schema compliancy, so we're gonna just warn them for now.
-        logValidationError(config, fileIn, error, "schema-validator-swagger", isSecondary ? "warning" : "error");
+        logValidationError(config, fileIn, error, isSecondary ? "warning" : "error");
       }
       if (!isSecondary) {
         throw new OperationAbortedException();
@@ -32,20 +34,18 @@ export function createSwaggerSchemaValidatorPlugin(): PipelinePlugin {
   });
 }
 
-/* @internal */
 export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
-  const validator = new SchemaValidator({ breakOnFirstError: false });
+  const validator = new OpenApi3SchemaValidator();
 
-  const extendedOpenApiSchema = require(`@autorest/schemas/openapi3-schema.json`);
   return createPerFilePlugin(async (context) => async (fileIn, sink) => {
     const obj = await fileIn.ReadObject<any>();
     const isSecondary = !!obj["x-ms-secondary-file"];
     const markErrorAsWarnings = context.config["mark-oai3-errors-as-warnings"];
-    const errors = await validateSchema(obj, extendedOpenApiSchema, validator);
+    const errors = await validator.validateFile(fileIn);
     if (errors !== null) {
       for (const error of errors) {
         const level = markErrorAsWarnings || isSecondary ? "warning" : "error";
-        logValidationError(context, fileIn, error as any, "schema-validator-openapi", level);
+        logValidationError(context, fileIn, error as any, level);
       }
       if (!isSecondary) {
         context.Message({
@@ -65,43 +65,22 @@ export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
   });
 }
 
-interface ValidationError {
-  code: "OBJECT_ADDITIONAL_PROPERTIES" | "ONE_OF_MISSING" | string;
-  params: string[];
-  message: string;
-  path: string;
-  inner?: ValidationError[];
-}
-
-/**
- * @param value Value to validate.
- * @param schema Schema as a javascript object.
- * @param validator Schema validator.
- */
-const validateSchema = (
-  value: unknown,
-  schema: unknown,
-  validator: SchemaValidator,
-): Promise<ValidationError[] | null> => {
-  return new Promise<ValidationError[] | null>((res) =>
-    validator.validate(value, schema, (err, valid) => res(valid ? null : err)),
-  );
-};
-
 const logValidationError = (
   config: AutorestContext,
   fileIn: DataHandle,
-  error: ErrorObject,
-  pluginName: string,
+  error: PositionedValidationError,
   type: "error" | "warning",
 ) => {
   console.error("LOG error", error);
-  const path = parseJsonPointer(error.dataPath);
-  config.Message({
-    Channel: type == "warning" ? Channel.Warning : Channel.Error,
-    Details: error,
-    Plugin: pluginName,
-    Source: [{ document: fileIn.key, Position: <any>{ path } }],
-    Text: `Schema violation: ${error.message} (${path.join(" > ")})`,
-  });
+  const msg = {
+    code: SCHEMA_VIOLATION_ERROR_CODE,
+    message: `Schema violation: ${error.message} ${JSON.stringify(error.params)} (${error.dataPath})`,
+    source: [{ document: fileIn.key, position: error.position }],
+  };
+
+  if (type == "warning") {
+    config.trackWarning(msg);
+  } else {
+    config.trackError(msg);
+  }
 };
