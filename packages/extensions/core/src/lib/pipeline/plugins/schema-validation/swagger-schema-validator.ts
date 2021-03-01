@@ -6,12 +6,9 @@ export class SwaggerSchemaValidator extends JsonSchemaValidator {
     super();
     addFormats(this.ajv);
 
+    this.ajv.addSchema(require("@autorest/schemas/swagger.json"), "http://json.schemastore.org/swagger-2.0");
     this.ajv.addSchema(
-      require("C:/dev/azsdk/autorest/packages/libs/autorest-schemas/swagger.json"),
-      "http://json.schemastore.org/swagger-2.0",
-    );
-    this.ajv.addSchema(
-      require("C:/dev/azsdk/autorest/packages/libs/autorest-schemas/example-schema.json"),
+      require("@autorest/schemas/example-schema.json"),
       "https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json",
     );
   }
