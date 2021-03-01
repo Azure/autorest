@@ -36,6 +36,8 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.20",
+    "@azure-tools/datastore": "~4.1.271",
+    "@azure-tools/tasks": "~3.0.0",
     "eslint-plugin-prettier": "~3.2.0",
     "eslint-plugin-unicorn": "~27.0.0",
     "eslint": "^7.17.0",
