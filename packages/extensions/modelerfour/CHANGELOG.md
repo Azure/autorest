@@ -1,6 +1,14 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Fri, 19 Feb 2021 21:42:09 GMT and should not be manually modified.
+This log was last generated on Fri, 26 Feb 2021 21:50:13 GMT and should not be manually modified.
+
+## 4.17.1
+Fri, 26 Feb 2021 21:50:13 GMT
+
+### Patches
+
+- **Fix** Don't add a duplicate Content-Type parameter if it is already provided in the spec
+- Fix x-ms-header-collection-prefix injected dictionary not defined in the list of schemas
 
 ## 4.17.0
 Fri, 19 Feb 2021 21:42:09 GMT

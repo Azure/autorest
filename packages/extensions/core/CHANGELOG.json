@@ -2,6 +2,37 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.1.0",
+      "tag": "@autorest/core_v3.1.0",
+      "date": "Fri, 26 Feb 2021 21:50:13 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Remove** legacy CLI functionality(Using arguments with single dash)."
+          }
+        ],
+        "patch": [
+          {
+            "comment": "**Update** Moved configuration loading from @autorest/core and redesign"
+          },
+          {
+            "comment": "**Fix** issue when using properties with `$ref` as name where it would try to resolve a reference."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.0.2` to `~1.0.3`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/configuration\" from `~1.0.1` to `~1.1.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/extension\" from `~3.2.0` to `~3.2.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.0.6375",
       "tag": "@autorest/core_v3.0.6375",
       "date": "Sat, 20 Feb 2021 17:49:35 GMT",
