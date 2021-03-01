@@ -21,7 +21,7 @@ export function createSwaggerSchemaValidatorPlugin(): PipelinePlugin {
     const isSecondary = !!obj["x-ms-secondary-file"];
 
     const errors = await swaggerValidator.validateFile(fileIn);
-    if (errors) {
+    if (errors.length > 0) {
       for (const error of errors) {
         // secondary files have reduced schema compliancy, so we're gonna just warn them for now.
         logValidationError(config, fileIn, error, isSecondary ? "warning" : "error");
@@ -42,7 +42,7 @@ export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
     const isSecondary = !!obj["x-ms-secondary-file"];
     const markErrorAsWarnings = context.config["mark-oai3-errors-as-warnings"];
     const errors = await validator.validateFile(fileIn);
-    if (errors !== null) {
+    if (errors.length > 0) {
       for (const error of errors) {
         const level = markErrorAsWarnings || isSecondary ? "warning" : "error";
         logValidationError(context, fileIn, error as any, level);
