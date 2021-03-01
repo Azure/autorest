@@ -2,6 +2,18 @@
   "name": "@azure-tools/extension",
   "entries": [
     {
+      "version": "3.2.2",
+      "tag": "@azure-tools/extension_v3.2.2",
+      "date": "Fri, 26 Feb 2021 21:50:13 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Prevent single-file yarn from loading user config and changing version"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.2.1",
       "tag": "@azure-tools/extension_v3.2.1",
       "date": "Wed, 24 Feb 2021 00:33:50 GMT",

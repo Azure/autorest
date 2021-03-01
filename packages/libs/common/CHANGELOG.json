@@ -2,6 +2,18 @@
   "name": "@autorest/common",
   "entries": [
     {
+      "version": "1.0.3",
+      "tag": "@autorest/common_v1.0.3",
+      "date": "Fri, 26 Feb 2021 21:50:13 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Update** Autorest logger definition"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.2",
       "tag": "@autorest/common_v1.0.2",
       "date": "Sat, 20 Feb 2021 17:49:35 GMT",

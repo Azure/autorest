@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/extension
 
-This log was last generated on Wed, 24 Feb 2021 00:33:50 GMT and should not be manually modified.
+This log was last generated on Fri, 26 Feb 2021 21:50:13 GMT and should not be manually modified.
+
+## 3.2.2
+Fri, 26 Feb 2021 21:50:13 GMT
+
+### Patches
+
+- Prevent single-file yarn from loading user config and changing version
 
 ## 3.2.1
 Wed, 24 Feb 2021 00:33:50 GMT
