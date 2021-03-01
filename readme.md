@@ -5,9 +5,18 @@ The **AutoRest** tool generates client libraries for accessing RESTful web servi
 ## Packages
 | Name                                            | Latest                                                       | Next                                                              |
 | ----------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------- |
+| Core functionality                              |
 | [autorest][autorest_src]                        | ![](https://img.shields.io/npm/v/autorest)                   | ![](https://img.shields.io/npm/v/autorest/next)                   |
 | [@autorest/core][core_src]                      | ![](https://img.shields.io/npm/v/@autorest/core)             | ![](https://img.shields.io/npm/v/@autorest/core/next)             |
 | [@autorest/modelerfour][modelerfour_src]        | ![](https://img.shields.io/npm/v/@autorest/modelerfour)      | ![](https://img.shields.io/npm/v/@autorest/modelerfour/next)      |
+| Language generators                             |
+| [@autorest/csharp][csharp_src]                  | ![](https://img.shields.io/npm/v/@autorest/csharp)           | ![](https://img.shields.io/npm/v/@autorest/csharp/next)           |
+| [@autorest/go][go_src]                          | ![](https://img.shields.io/npm/v/@autorest/go)               | ![](https://img.shields.io/npm/v/@autorest/go/next)               |
+| [@autorest/java][java_src]                      | ![](https://img.shields.io/npm/v/@autorest/java)             | ![](https://img.shields.io/npm/v/@autorest/java/next)             |
+| [@autorest/python][python_src]                  | ![](https://img.shields.io/npm/v/@autorest/python)           | ![](https://img.shields.io/npm/v/@autorest/python/next)           |
+| [@autorest/swift][swift_src]                    | ![](https://img.shields.io/npm/v/@autorest/swift)            | ![](https://img.shields.io/npm/v/@autorest/swift/next)            |
+| [@autorest/typescript][typescript_src]          | ![](https://img.shields.io/npm/v/@autorest/typescript)       | ![](https://img.shields.io/npm/v/@autorest/typescript/next)       |
+| Internal packages                               |
 | [@autorest/codemodel][codemodel_src]            | ![](https://img.shields.io/npm/v/@autorest/codemodel)        | ![](https://img.shields.io/npm/v/@autorest/codemodel/next)        |
 | [@autorest/common][common_src]                  | ![](https://img.shields.io/npm/v/@autorest/common)           | ![](https://img.shields.io/npm/v/@autorest/common/next)           |
 | [@autorest/configuration][configuration_src]    | ![](https://img.shields.io/npm/v/@autorest/configuration)    | ![](https://img.shields.io/npm/v/@autorest/configuration/next)    |
@@ -19,19 +28,26 @@ The **AutoRest** tool generates client libraries for accessing RESTful web servi
 | [@azure-tools/datastore][datastore_src]         | ![](https://img.shields.io/npm/v/@azure-tools/datastore)     | ![](https://img.shields.io/npm/v/@azure-tools/datastore/next)     |
 | [@azure-tools/oai2-to-oai3][oai2-to-oai3_src]   | ![](https://img.shields.io/npm/v/@azure-tools/oai2-to-oai3)  | ![](https://img.shields.io/npm/v/@azure-tools/oai2-to-oai3/next)  |
 
-[autorest_src]: ./packages/apps/autorest
-[core_src]: ./packages/extensions/core
-[modelerfour_src]: ./packages/extensions/modelerfour
-[codemodel_src]: ./packages/libs/codemodel
-[common_src]: ./packages/libs/common
-[configuration_src]: ./packages/libs/configuration
-[extension_base_src]: ./packages/libs/extension-base
-[extension_src]: ./packages/libs/extension
-[codegen_src]: ./packages/libs/codegen
-[openapi_src]: ./packages/libs/openapi
-[deduplication_src]: ./packages/libs/deduplication
-[datastore_src]: ./packages/libs/datastore
-[oai2-to-oai3_src]: ./packages/libs/oai2-to-oai3
+[autorest_src]: packages/apps/autorest
+[core_src]: packages/extensions/core
+[modelerfour_src]: packages/extensions/modelerfour
+[csharp_src]: https://github.com/Azure/autorest.csharp
+[python_src]: https://github.com/Azure/autorest.python
+[go_src]: https://github.com/Azure/autorest.go
+[java_src]: https://github.com/Azure/autorest.java
+[swift_src]: https://github.com/Azure/autorest.swift
+[typescript_src]: https://github.com/Azure/autorest.typescript
+[codemodel_src]: packages/libs/codemodel
+[common_src]: packages/libs/common
+[configuration_src]: packages/libs/configuration
+[extension_base_src]: packages/libs/extension-base
+[extension_src]: packages/libs/extension
+[codegen_src]: packages/libs/codegen
+[openapi_src]: packages/libs/openapi
+[deduplication_src]: packages/libs/deduplication
+[datastore_src]: packages/libs/datastore
+[oai2-to-oai3_src]: packages/libs/oai2-to-oai3
+
 
 ## Support Policy
 
