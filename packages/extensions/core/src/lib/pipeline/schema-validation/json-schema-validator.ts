@@ -1,9 +1,11 @@
-import { CompilePosition, DataHandle, parseJsonPointer } from "@azure-tools/datastore";
+import { CompilePosition, DataHandle, JsonPath, parseJsonPointer } from "@azure-tools/datastore";
 import Ajv, { AnySchemaObject, ErrorObject } from "ajv";
 import ajvErrors from "ajv-errors";
 import { Position } from "source-map";
 
-export type ValidationError = ErrorObject;
+export interface ValidationError extends ErrorObject {
+  path: JsonPath;
+}
 
 export interface PositionedValidationError extends ValidationError {
   position: Position;
@@ -19,13 +21,13 @@ export abstract class JsonSchemaValidator {
 
   public abstract get schema(): AnySchemaObject;
 
-  public validate(spec: unknown): ErrorObject[] {
+  public validate(spec: unknown): ValidationError[] {
     const validate = this.ajv.compile(this.schema);
     const valid = validate(spec);
     if (valid || !validate.errors) {
       return [];
     } else {
-      return validate.errors;
+      return validate.errors.map((x) => ({ ...x, path: parseJsonPointer(x.dataPath) }));
     }
   }
 
@@ -38,9 +40,8 @@ export abstract class JsonSchemaValidator {
 }
 
 async function extendWithPosition(error: ValidationError, file: DataHandle): Promise<PositionedValidationError> {
-  const path = parseJsonPointer(error.dataPath);
   return {
     ...error,
-    position: await CompilePosition({ path }, file),
+    position: await CompilePosition({ path: error.path }, file),
   };
 }

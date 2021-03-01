@@ -71,11 +71,11 @@ const logValidationError = (
   error: PositionedValidationError,
   type: "error" | "warning",
 ) => {
-  console.error("LOG error", error);
   const msg = {
     code: SCHEMA_VIOLATION_ERROR_CODE,
-    message: `Schema violation: ${error.message} ${JSON.stringify(error.params)} (${error.dataPath})`,
+    message: `Schema violation: ${error.message} (${error.path.join(" > ")})`,
     source: [{ document: fileIn.key, position: error.position }],
+    details: error,
   };
 
   if (type == "warning") {
