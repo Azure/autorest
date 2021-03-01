@@ -403,14 +403,15 @@
       }
     },
     "responseValue": {
-      "oneOf": [
-        {
-          "$ref": "#/definitions/response"
-        },
-        {
-          "$ref": "#/definitions/jsonReference"
-        }
-      ]
+      "if": {
+        "required": ["$ref"]
+      },
+      "then": {
+        "$ref": "#/definitions/jsonReference"
+      },
+      "else": {
+        "$ref": "#/definitions/response"
+      }
     },
     "response": {
       "type": "object",
@@ -1066,20 +1067,58 @@
       }
     },
     "nonBodyParameter": {
-      "type": "object",
-      "required": ["name", "in", "type"],
-      "oneOf": [
+      "allOf": [
         {
-          "$ref": "#/definitions/headerParameterSubSchema"
+          "if": {
+            "required": ["in"],
+            "properties": {
+              "in": {
+                "enum": ["header"]
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/definitions/headerParameterSubSchema"
+          }
         },
         {
-          "$ref": "#/definitions/formDataParameterSubSchema"
+          "if": {
+            "required": ["in"],
+            "properties": {
+              "in": {
+                "enum": ["formData"]
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/definitions/formDataParameterSubSchema"
+          }
         },
         {
-          "$ref": "#/definitions/queryParameterSubSchema"
+          "if": {
+            "required": ["in"],
+            "properties": {
+              "in": {
+                "enum": ["query"]
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/definitions/queryParameterSubSchema"
+          }
         },
         {
-          "$ref": "#/definitions/pathParameterSubSchema"
+          "if": {
+            "required": ["in"],
+            "properties": {
+              "in": {
+                "enum": ["path"]
+              }
+            }
+          },
+          "then": {
+            "$ref": "#/definitions/pathParameterSubSchema"
+          }
         }
       ]
     },
@@ -1768,14 +1807,15 @@
       "description": "The parameters used in conjunction with x-ms-parameterized-host.",
       "additionalItems": false,
       "items": {
-        "oneOf": [
-          {
-            "$ref": "#/definitions/nonBodyParameter"
-          },
-          {
-            "$ref": "#/definitions/jsonReference"
-          }
-        ]
+        "if": {
+          "required": ["$ref"]
+        },
+        "then": {
+          "$ref": "#/definitions/nonBodyParameter"
+        },
+        "else": {
+          "$ref": "#/definitions/response"
+        }
       },
       "uniqueItems": true
     },
@@ -1842,14 +1882,15 @@
       "type": "object",
       "description": "Describes the 'x-ms-examples' extension.",
       "additionalProperties": {
-        "oneOf": [
-          {
-            "$ref": "https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json#"
-          },
-          {
-            "$ref": "#/definitions/jsonReference"
-          }
-        ]
+        "if": {
+          "required": ["$ref"]
+        },
+        "then": {
+          "$ref": "#/definitions/jsonReference"
+        },
+        "else": {
+          "$ref": "https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json#"
+        }
       }
     }
   }
