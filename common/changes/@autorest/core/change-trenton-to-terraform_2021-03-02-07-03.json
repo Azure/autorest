@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "change trenton to terraform",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/core",
+  "email": ""
+}
