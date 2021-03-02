@@ -2,6 +2,23 @@
   "name": "@autorest/configuration",
   "entries": [
     {
+      "version": "1.1.1",
+      "tag": "@autorest/configuration_v1.1.1",
+      "date": "Tue, 02 Mar 2021 17:24:23 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Load arrays in the order they are defined within the same file(Resolve issue with directive loaded in inverted order)"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.0.3` to `~1.1.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.0",
       "tag": "@autorest/configuration_v1.1.0",
       "date": "Fri, 26 Feb 2021 21:50:13 GMT",
