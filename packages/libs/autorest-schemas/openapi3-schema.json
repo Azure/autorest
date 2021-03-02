@@ -230,7 +230,7 @@
             "^[a-zA-Z0-9\\.\\-_]+$": {
               "if": { "required": ["$ref"] },
               "then": { "$ref": "#/definitions/Reference" },
-              "else": { "$ref": "#/definitions/SecuritySchema" }
+              "else": { "$ref": "#/definitions/SecurityScheme" }
             }
           }
         },
