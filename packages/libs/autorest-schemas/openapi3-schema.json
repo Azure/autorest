@@ -168,14 +168,9 @@
           "type": "object",
           "patternProperties": {
             "^[a-zA-Z0-9\\.\\-_]+$": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Reference"
-                },
-                {
-                  "$ref": "#/definitions/Schema"
-                }
-              ]
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" },
+              "else": { "$ref": "#/definitions/Schema" }
             }
           }
         },
@@ -183,14 +178,9 @@
           "type": "object",
           "patternProperties": {
             "^[a-zA-Z0-9\\.\\-_]+$": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Reference"
-                },
-                {
-                  "$ref": "#/definitions/Response"
-                }
-              ]
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" },
+              "else": { "$ref": "#/definitions/Response" }
             }
           }
         },
@@ -198,14 +188,9 @@
           "type": "object",
           "patternProperties": {
             "^[a-zA-Z0-9\\.\\-_]+$": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Reference"
-                },
-                {
-                  "$ref": "#/definitions/Parameter"
-                }
-              ]
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" },
+              "else": { "$ref": "#/definitions/Parameter" }
             }
           }
         },
@@ -213,14 +198,9 @@
           "type": "object",
           "patternProperties": {
             "^[a-zA-Z0-9\\.\\-_]+$": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Reference"
-                },
-                {
-                  "$ref": "#/definitions/Example"
-                }
-              ]
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" },
+              "else": { "$ref": "#/definitions/Example" }
             }
           }
         },
@@ -228,14 +208,9 @@
           "type": "object",
           "patternProperties": {
             "^[a-zA-Z0-9\\.\\-_]+$": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Reference"
-                },
-                {
-                  "$ref": "#/definitions/RequestBody"
-                }
-              ]
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" },
+              "else": { "$ref": "#/definitions/RequestBody" }
             }
           }
         },
@@ -243,14 +218,9 @@
           "type": "object",
           "patternProperties": {
             "^[a-zA-Z0-9\\.\\-_]+$": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Reference"
-                },
-                {
-                  "$ref": "#/definitions/Header"
-                }
-              ]
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" },
+              "else": { "$ref": "#/definitions/Header" }
             }
           }
         },
@@ -258,14 +228,9 @@
           "type": "object",
           "patternProperties": {
             "^[a-zA-Z0-9\\.\\-_]+$": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Reference"
-                },
-                {
-                  "$ref": "#/definitions/SecurityScheme"
-                }
-              ]
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" },
+              "else": { "$ref": "#/definitions/SecuritySchema" }
             }
           }
         },
@@ -273,14 +238,9 @@
           "type": "object",
           "patternProperties": {
             "^[a-zA-Z0-9\\.\\-_]+$": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Reference"
-                },
-                {
-                  "$ref": "#/definitions/Link"
-                }
-              ]
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" },
+              "else": { "$ref": "#/definitions/Link" }
             }
           }
         },
@@ -288,14 +248,9 @@
           "type": "object",
           "patternProperties": {
             "^[a-zA-Z0-9\\.\\-_]+$": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Reference"
-                },
-                {
-                  "$ref": "#/definitions/Callback"
-                }
-              ]
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" },
+              "else": { "$ref": "#/definitions/Callback" }
             }
           }
         }
@@ -384,87 +339,60 @@
           "enum": ["array", "boolean", "integer", "number", "object", "string"]
         },
         "not": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "allOf": {
           "type": "array",
           "items": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Schema"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Schema" }
           }
         },
         "oneOf": {
           "type": "array",
           "items": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Schema"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Schema" }
           }
         },
         "anyOf": {
           "type": "array",
           "items": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Schema"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Schema" }
           }
         },
         "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "properties": {
           "type": "object",
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Schema"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Schema" }
           }
         },
         "additionalProperties": {
-          "oneOf": [
+          "allOf": [
             {
-              "$ref": "#/definitions/Schema"
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" }
             },
             {
-              "$ref": "#/definitions/Reference"
+              "if": { "type": "object" },
+              "then": { "$ref": "#/definitions/Schema" }
             },
             {
-              "type": "boolean"
+              "if": { "type": "boolean" },
+              "then": { "type": "boolean" }
             }
           ],
           "default": true
@@ -558,14 +486,9 @@
         },
         "headers": {
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Header" }
           }
         },
         "content": {
@@ -577,14 +500,9 @@
         "links": {
           "type": "object",
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Link"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Link" }
           }
         }
       },
@@ -607,14 +525,9 @@
       "type": "object",
       "properties": {
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "example": {},
         "encoding": {
@@ -634,26 +547,16 @@
       "required": ["examples"],
       "properties": {
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "examples": {
           "type": "object",
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Example"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Example" }
           }
         },
         "encoding": {
@@ -739,14 +642,9 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "example": {}
       },
@@ -787,26 +685,16 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "examples": {
           "type": "object",
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Example"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Example" },
+            "else": { "$ref": "#/definitions/Schema" }
           }
         }
       },
@@ -907,14 +795,9 @@
         "parameters": {
           "type": "array",
           "items": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Parameter"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Parameter" }
           }
         }
       },
@@ -948,25 +831,15 @@
         "parameters": {
           "type": "array",
           "items": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Parameter"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Parameter" }
           }
         },
         "requestBody": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/RequestBody"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/RequestBody" }
         },
         "responses": {
           "$ref": "#/definitions/Responses"
@@ -974,14 +847,9 @@
         "callbacks": {
           "type": "object",
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Callback"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Callback" }
           }
         },
         "deprecated": {
@@ -1010,26 +878,16 @@
       "type": "object",
       "properties": {
         "default": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Response"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Response" }
         }
       },
       "patternProperties": {
         "[1-5](?:\\d{2}|XX)": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Response"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Response" }
         },
         "^x-": {}
       },
@@ -1162,14 +1020,9 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "example": {}
       },
@@ -1217,14 +1070,9 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "example": {}
       },
@@ -1272,14 +1120,9 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "example": {}
       },
@@ -1327,14 +1170,9 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "example": {}
       },
@@ -1398,26 +1236,16 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "examples": {
           "type": "object",
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Example"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Example" }
           }
         }
       },
@@ -1465,26 +1293,16 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "examples": {
           "type": "object",
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Example"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Example" }
           }
         }
       },
@@ -1532,26 +1350,16 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "examples": {
           "type": "object",
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Example"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Example" }
           }
         }
       },
@@ -1599,26 +1407,16 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "examples": {
           "type": "object",
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Example"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Example" }
           }
         }
       },

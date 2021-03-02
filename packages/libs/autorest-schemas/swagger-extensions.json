@@ -1811,7 +1811,7 @@
           "required": ["$ref"]
         },
         "then": {
-          "$ref": "#/definitions/nonBodyParameter"
+          "$ref": "#/definitions/jsonReference"
         },
         "else": {
           "$ref": "#/definitions/response"
