@@ -1,7 +1,7 @@
-# Default Configuration - trenton
+# Default Configuration - terraform
 
-``` yaml $(trenton)
+``` yaml $(terraform)
 use-extension:
-  "@autorest/trenton": "latest"
-try-require: ./readme.trenton.md
+  "@autorest/terraform": "latest"
+try-require: ./readme.terraform.md
 ```
