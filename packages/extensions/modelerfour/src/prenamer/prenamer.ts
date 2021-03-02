@@ -16,6 +16,7 @@ import {
   StringSchema,
   SealedChoiceSchema,
   PrimitiveSchema,
+  Metadata,
 } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
 import { values, length, Dictionary, items } from "@azure-tools/linq";
@@ -117,7 +118,7 @@ export class PreNamer {
     const deduplicateSchemaNames =
       !!this.options["lenient-model-deduplication"] || !!this.options["resolve-schema-name-collisons"];
 
-    const existingNames = new Set<string>();
+    const existingNames = this.getGlobalScopeNames();
 
     // choice
     this.processChoiceNames(this.codeModel.schemas.choices, existingNames, deduplicateSchemaNames);
@@ -411,4 +412,35 @@ export class PreNamer {
       this.fixCollisions(schema);
     }
   }
+
+  /**
+   * Returns a new set containing all the names in the global scopes for the given CodeModel.
+   * This correspond to the names of
+   * - Enums/Choices
+   * - Objects/Models
+   * - Groups
+   * - SealedChoices
+   */
+  private getGlobalScopeNames(): Set<string> {
+    const { override } = this.format;
+    return new Set(
+      [
+        ...getInitialStyledNames(this.codeModel.schemas.choices, this.format.choice, override),
+        ...getInitialStyledNames(this.codeModel.schemas.sealedChoices, this.format.choice, override),
+        ...getInitialStyledNames(this.codeModel.schemas.objects, this.format.type, override),
+        ...getInitialStyledNames(this.codeModel.schemas.groups, this.format.type, override),
+      ].filter((x) => !isUnassigned(x)),
+    );
+  }
+}
+
+function getInitialStyledNames(
+  components: Metadata[] | undefined,
+  styler: Styler,
+  overrides: Dictionary<string>,
+): string[] {
+  if (!components) {
+    return [];
+  }
+  return components.map((x) => styler(x.language.default.name, false, overrides));
 }
