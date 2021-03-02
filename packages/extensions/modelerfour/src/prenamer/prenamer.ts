@@ -13,9 +13,7 @@ import {
   Request,
   Response,
   ChoiceSchema,
-  StringSchema,
   SealedChoiceSchema,
-  PrimitiveSchema,
   Metadata,
 } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
@@ -82,6 +80,7 @@ export class PreNamer {
 
   enum = 0;
   constant = 0;
+
   constructor(protected session: Session<CodeModel>) {
     this.codeModel = session.model; // shadow(session.model, filename);
   }
@@ -118,13 +117,11 @@ export class PreNamer {
     const deduplicateSchemaNames =
       !!this.options["lenient-model-deduplication"] || !!this.options["resolve-schema-name-collisons"];
 
-    const existingNames = this.getGlobalScopeNames();
-
     // choice
-    this.processChoiceNames(this.codeModel.schemas.choices, existingNames, deduplicateSchemaNames);
+    this.processChoiceNames(this.codeModel.schemas.choices, deduplicateSchemaNames);
 
     // sealed choice
-    this.processChoiceNames(this.codeModel.schemas.sealedChoices, existingNames, deduplicateSchemaNames);
+    this.processChoiceNames(this.codeModel.schemas.sealedChoices, deduplicateSchemaNames);
 
     // constant
     for (const schema of values(this.codeModel.schemas.constants)) {
@@ -205,7 +202,7 @@ export class PreNamer {
     const objectSchemaNames = new Set<string>();
     for (const schema of values(this.codeModel.schemas.objects)) {
       setName(schema, this.format.type, "", this.format.override, {
-        existingNames,
+        removeDuplicates: false,
         lenientModelDeduplication: this.options["lenient-model-deduplication"],
       });
 
@@ -226,7 +223,7 @@ export class PreNamer {
     const groupSchemaNames = new Set<string>();
     for (const schema of values(this.codeModel.schemas.groups)) {
       setName(schema, this.format.type, "", this.format.override, {
-        existingNames,
+        removeDuplicates: false,
         lenientModelDeduplication: this.options["lenient-model-deduplication"],
       });
 
@@ -282,6 +279,9 @@ export class PreNamer {
     // set a styled client name
     setName(this.codeModel, this.format.client, this.codeModel.info.title, this.format.override);
 
+    // Cleanup global names by removing duplicates consecutive words in the name if possible.
+    this.cleanupGlobalScopeNames();
+
     // fix collisions from flattening on ObjectSchemas
     this.fixPropertyCollisions();
 
@@ -293,13 +293,12 @@ export class PreNamer {
 
   private processChoiceNames(
     choices: Array<ChoiceSchema | SealedChoiceSchema> | undefined,
-    existingNames: Set<string>,
     deduplicateSchemaNames: boolean,
   ) {
     const choiceSchemaNames = new Set<string>();
     for (const schema of values(choices)) {
       setName(schema, this.format.choice, `Enum${this.enum++}`, this.format.override, {
-        existingNames,
+        removeDuplicates: false,
         lenientModelDeduplication: this.options["lenient-model-deduplication"],
       });
 
@@ -413,6 +412,17 @@ export class PreNamer {
     }
   }
 
+  private cleanupGlobalScopeNames() {
+    const items = this.getGlobalScopeNamesAndStyler();
+    const existingNames = new Set(items.map((x) => x.component.language.default.name));
+    for (const item of items) {
+      setName(item.component, item.styler, "", this.format.override, {
+        removeDuplicates: true,
+        existingNames: existingNames,
+      });
+    }
+  }
+
   /**
    * Returns a new set containing all the names in the global scopes for the given CodeModel.
    * This correspond to the names of
@@ -421,26 +431,22 @@ export class PreNamer {
    * - Groups
    * - SealedChoices
    */
-  private getGlobalScopeNames(): Set<string> {
-    const { override } = this.format;
-    return new Set(
-      [
-        ...getInitialStyledNames(this.codeModel.schemas.choices, this.format.choice, override),
-        ...getInitialStyledNames(this.codeModel.schemas.sealedChoices, this.format.choice, override),
-        ...getInitialStyledNames(this.codeModel.schemas.objects, this.format.type, override),
-        ...getInitialStyledNames(this.codeModel.schemas.groups, this.format.type, override),
-      ].filter((x) => !isUnassigned(x)),
-    );
+  private getGlobalScopeNamesAndStyler(): { component: Metadata; styler: Styler }[] {
+    return [
+      ...getComponentsWithStyler(this.codeModel.schemas.choices, this.format.choice),
+      ...getComponentsWithStyler(this.codeModel.schemas.sealedChoices, this.format.choice),
+      ...getComponentsWithStyler(this.codeModel.schemas.objects, this.format.type),
+      ...getComponentsWithStyler(this.codeModel.schemas.groups, this.format.type),
+    ];
   }
 }
 
-function getInitialStyledNames(
+function getComponentsWithStyler(
   components: Metadata[] | undefined,
   styler: Styler,
-  overrides: Dictionary<string>,
-): string[] {
+): { component: Metadata; styler: Styler }[] {
   if (!components) {
     return [];
   }
-  return components.map((x) => styler(x.language.default.name, false, overrides));
+  return components.map((x) => ({ component: x, styler }));
 }
