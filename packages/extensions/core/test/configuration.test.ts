@@ -138,13 +138,13 @@ value:
 
     // output folder should be 'foo'
     expect(context.config.raw["value" as keyof AutorestRawConfiguration]).toEqual([
-      "not_bar",
-      "foo_and_not_bar",
       "foo",
+      "foo_and_not_bar",
+      "not_bar",
     ]);
 
     autorest.AddConfiguration({ bar: true });
     context = await autorest.view;
-    expect(context.config.raw["value" as keyof AutorestRawConfiguration]).toEqual(["bar", "foo_and_bar", "foo"]);
+    expect(context.config.raw["value" as keyof AutorestRawConfiguration]).toEqual(["foo", "foo_and_bar", "bar"]);
   });
 });
