@@ -2,8 +2,13 @@
   "changes": [
     {
       "packageName": "@autorest/schemas",
-      "comment": "Update schema to jsonschema draft-07",
-      "type": "patch"
+      "comment": "Update schemas to jsonschema draft-07.",
+      "type": "minor"
+    },
+    {
+      "packageName": "@autorest/schemas",
+      "comment": "Update schemas to use if else instead of oneof to provide more helpful validation.",
+      "type": "minor"
     }
   ],
   "packageName": "@autorest/schemas",
