@@ -24,11 +24,6 @@ stages:
           - script: npx @microsoft/rush test:ci -v
             displayName: Test
 
-          - script: |
-              npm install -g istanbul
-              istanbul report --include ./packages/**/coverage/coverage-final.json
-            displayName: Merge code coverages
-
           - task: PublishCodeCoverageResults@1
             inputs:
               codeCoverageTool: Cobertura
@@ -59,19 +54,19 @@ stages:
               sudo npm install -g markdown-link-check
               find docs -name "*.md" -print0 | xargs -0  -n1 markdown-link-check -c ./markdown-link-check-config.json
             displayName: Find
-  # - stage: regressiontests
-  #   displayName: Regression Tests
-  #   dependsOn: main
-  #   jobs:
-  #     - template: ./templates/regression-tests.yaml
-  #       parameters:
-  #         name: node10
-  #         nodeVersion: 10.x
-  #     - template: ./templates/regression-tests.yaml
-  #       parameters:
-  #         name: node12
-  #         nodeVersion: 12.x
-  #     - template: ./templates/regression-tests.yaml
-  #       parameters:
-  #         name: node14
-  #         nodeVersion: 14.x
+  - stage: regressiontests
+    displayName: Regression Tests
+    dependsOn: main
+    jobs:
+      - template: ./templates/regression-tests.yaml
+        parameters:
+          name: node10
+          nodeVersion: 10.x
+      - template: ./templates/regression-tests.yaml
+        parameters:
+          name: node12
+          nodeVersion: 12.x
+      - template: ./templates/regression-tests.yaml
+        parameters:
+          name: node14
+          nodeVersion: 14.x
