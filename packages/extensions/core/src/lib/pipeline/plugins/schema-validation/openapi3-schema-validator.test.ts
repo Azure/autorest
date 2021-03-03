@@ -32,6 +32,23 @@ describe("OpenAPI3 schema validator", () => {
     ]);
   });
 
+  it("combines erros", () => {
+    const errors = validator.validate({
+      ...baseSwaggerSpec,
+      info: { ...baseSwaggerSpec.info, invalidProp: "foo", otherProp: "bar" },
+    });
+    expect(errors).toEqual([
+      {
+        dataPath: "/info",
+        keyword: "additionalProperties",
+        message: "should NOT have additional properties",
+        params: { additionalProperty: ["invalidProp", "otherProp"] },
+        path: ["info"],
+        schemaPath: "#/additionalProperties",
+      },
+    ]);
+  });
+
   it("returns custom error if path is not starting with /", () => {
     const errors = validator.validate({ ...baseSwaggerSpec, paths: { "foo/bar": {} } });
     expect(errors).toEqual([

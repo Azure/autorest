@@ -120,18 +120,17 @@ function mergeParams(objA: any = {}, objB: any = {}) {
 
   const res: any = {};
 
-  for (const k in Object.keys(objA)) {
+  for (const k of Object.keys(objA)) {
     res[k] = arrayify(objA[k]);
   }
 
-  for (const k in Object.keys(objB)) {
+  for (const k of Object.keys(objB)) {
     if (res[k]) {
       res[k] = res[k].concat(arrayify(objB[k]));
     } else {
       res[k] = arrayify(objB[k]);
     }
   }
-
   return res;
 }
 

@@ -1814,7 +1814,7 @@
           "$ref": "#/definitions/jsonReference"
         },
         "else": {
-          "$ref": "#/definitions/response"
+          "$ref": "#/definitions/nonBodyParameter"
         }
       },
       "uniqueItems": true
