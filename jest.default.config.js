@@ -8,7 +8,7 @@ const config = {
   moduleNameMapper: {},
   collectCoverage: true,
   collectCoverageFrom: ["src/**/*.ts", "!**/node_modules/**"],
-  coverageReporters: ["json", "html"],
+  coverageReporters: ["json", "html", "cobertura"],
   coveragePathIgnorePatterns: ["/node_modules/", ".*/test/.*"],
   modulePathIgnorePatterns: ["<rootDir>/sdk"],
   globals: {

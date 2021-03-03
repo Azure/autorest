@@ -32,8 +32,8 @@ stages:
           - task: PublishCodeCoverageResults@1
             inputs:
               codeCoverageTool: Cobertura
-              summaryFileLocation: $(Build.SourcesDirectory)/coverage/cobertura-coverage.xml
-              reportDirectory: $(Build.SourcesDirectory)/coverage
+              summaryFileLocation: $(Build.SourcesDirectory)/packages/**/coverage/cobertura-coverage.xml
+              reportDirectory: $(Build.SourcesDirectory)/packages/**/coverage
 
           - script: npx @microsoft/rush lint -v
             displayName: Lint
@@ -59,19 +59,19 @@ stages:
               sudo npm install -g markdown-link-check
               find docs -name "*.md" -print0 | xargs -0  -n1 markdown-link-check -c ./markdown-link-check-config.json
             displayName: Find
-  - stage: regressiontests
-    displayName: Regression Tests
-    dependsOn: main
-    jobs:
-      - template: ./templates/regression-tests.yaml
-        parameters:
-          name: node10
-          nodeVersion: 10.x
-      - template: ./templates/regression-tests.yaml
-        parameters:
-          name: node12
-          nodeVersion: 12.x
-      - template: ./templates/regression-tests.yaml
-        parameters:
-          name: node14
-          nodeVersion: 14.x
+  # - stage: regressiontests
+  #   displayName: Regression Tests
+  #   dependsOn: main
+  #   jobs:
+  #     - template: ./templates/regression-tests.yaml
+  #       parameters:
+  #         name: node10
+  #         nodeVersion: 10.x
+  #     - template: ./templates/regression-tests.yaml
+  #       parameters:
+  #         name: node12
+  #         nodeVersion: 12.x
+  #     - template: ./templates/regression-tests.yaml
+  #       parameters:
+  #         name: node14
+  #         nodeVersion: 14.x
