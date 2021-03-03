@@ -7,6 +7,9 @@
 - Generally swaggers are kept in [this][azure_rest_api_specs] repo
 - Additional OpenAPI validation done by [Prechecker][prechecker]
 
+How to guides:
+- [Define binary/file requests](./howto/binary-payload.md)
+
 <!-- LINKS -->
 [swagger]: https://swagger.io/docs/
 [extensions]: ../extensions/readme.md
