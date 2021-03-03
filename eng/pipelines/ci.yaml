@@ -33,6 +33,10 @@ stages:
             inputs:
               codeCoverageTool: cobertura
               summaryFileLocation: $(Build.SourcesDirectory)/coverage/cobertura-coverage.xml
+              pathToSources: $(Build.SourcesDirectory)
+              reportDirectory: $(Build.SourcesDirectory)/coverage
+              #additionalCodeCoverageFiles: # Optional
+              #failIfCoverageEmpty: false # Optional
 
           - script: npx @microsoft/rush lint -v
             displayName: Lint
