@@ -8,6 +8,8 @@ parameters:
 jobs:
   - job: ${{ parameters.name }}
     displayName: Node ${{ parameters.nodeVersion }}
+    variables:
+      autorest.home: $(Agent.SourcesDirectory) # Setting autorest.home to local path to prevent conflict with other parralel jobs in the same machine.
     steps:
       - download: current
         artifact: packages
@@ -40,6 +42,7 @@ jobs:
       - script: |
           npm install
           npm install -g @autorest/compare@~0.3.6
+          node -e "console.log('process env', process.env)"
         displayName: Install autorest-compare
         workingDirectory: regression-tests
 
