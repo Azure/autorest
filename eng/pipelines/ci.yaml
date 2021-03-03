@@ -24,6 +24,19 @@ stages:
           - script: npx @microsoft/rush test:ci -v
             displayName: Test
 
+          - script: |
+              npm install -g istanbul
+              istanbul report --include ./packages/**/coverage/coverage-final.json
+            displayName:
+          - task: PublishCodeCoverageResults@1
+            inputs:
+              codeCoverageTool: cobertura
+              summaryFileLocation: $(Build.SourcesDirectory)/coverage/cobertura-coverage.xml
+              #pathToSources: # Optional
+              reportDirectory: $(Build.SourcesDirectory)/coverage
+              #additionalCodeCoverageFiles: # Optional
+              #failIfCoverageEmpty: false # Optional
+
           - script: npx @microsoft/rush lint -v
             displayName: Lint
 
