@@ -3,7 +3,7 @@
     {
       "packageName": "@autorest/core",
       "comment": "change trenton to terraform",
-      "type": "minor"
+      "type": "patch"
     }
   ],
   "packageName": "@autorest/core",
