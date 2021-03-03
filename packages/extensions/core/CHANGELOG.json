@@ -2,21 +2,6 @@
   "name": "@autorest/core",
   "entries": [
     {
-      "version": "3.1.1",
-      "tag": "@autorest/core_v3.1.1",
-      "date": "Tue, 02 Mar 2021 17:24:23 GMT",
-      "comments": {
-        "dependency": [
-          {
-            "comment": "Updating dependency \"@autorest/common\" from `~1.0.3` to `~1.1.0`"
-          },
-          {
-            "comment": "Updating dependency \"@autorest/configuration\" from `~1.1.0` to `~1.1.1`"
-          }
-        ]
-      }
-    },
-    {
       "version": "3.1.0",
       "tag": "@autorest/core_v3.1.0",
       "date": "Fri, 26 Feb 2021 21:50:13 GMT",

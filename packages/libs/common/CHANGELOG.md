@@ -1,13 +1,6 @@
 # Change Log - @autorest/common
 
-This log was last generated on Tue, 02 Mar 2021 17:24:23 GMT and should not be manually modified.
-
-## 1.1.0
-Tue, 02 Mar 2021 17:24:23 GMT
-
-### Minor changes
-
-- **Update** Merging functionality to accept an array merging strategy to decide order of merging
+This log was last generated on Fri, 26 Feb 2021 21:50:13 GMT and should not be manually modified.
 
 ## 1.0.3
 Fri, 26 Feb 2021 21:50:13 GMT
