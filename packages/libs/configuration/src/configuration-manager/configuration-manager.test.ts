@@ -50,6 +50,25 @@ describe("ConfigurationManager", () => {
     it("adds value from 2nd config if not present in 1st", async () => {
       expect(output["base-folder"]).toEqual("base-folder-2");
     });
+
+    it("combine nested objects", async () => {
+      await manager.addConfig({
+        "use-extension": {
+          "@autorest/csharp": "latest",
+        },
+      });
+      await manager.addConfig({
+        "use-extension": {
+          "@autorest/modelerfour": "latest",
+        },
+      });
+
+      const output = await manager.resolveConfig();
+      expect(output["use-extension"]).toEqual({
+        "@autorest/csharp": "latest",
+        "@autorest/modelerfour": "latest",
+      });
+    });
   });
 
   describe("adding a single file with multiple blocks", () => {

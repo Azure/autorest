@@ -196,14 +196,19 @@ export function mergeOverwriteOrAppend(
       continue;
     }
     if (lowerPriority[key] === undefined) {
-      result[key] = resolveRValue(computedOptions.interpolationContext[key], key, null, higherPriority);
+      result[key] = resolveRValue(higherPriority[key], key, null, computedOptions.interpolationContext);
       continue;
     }
 
     // try merge objects otherwise
     const aMember = resolveRValue(higherPriority[key], key, lowerPriority, computedOptions.interpolationContext);
     const bMember = resolveRValue(lowerPriority[key], key, computedOptions.interpolationContext, lowerPriority);
-    result[key] = mergeOverwriteOrAppend(aMember, bMember, computedOptions, subpath);
+    result[key] = mergeOverwriteOrAppend(
+      aMember,
+      bMember,
+      { ...computedOptions, interpolationContext: computedOptions.interpolationContext[key] },
+      subpath,
+    );
   }
   return result;
 }
