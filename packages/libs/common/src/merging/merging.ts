@@ -126,14 +126,10 @@ export function resolveRValue(
 
     // resolve macro values for array values
     if (value instanceof Array) {
-      const result = new Array<any>();
-      for (const each of value) {
-        // since we're not naming the parameter,
-        // if there isn't a higher priority,
-        // we can fall back to a wide-lookup in lowerPriority.
-        result.push(resolveRValue(each, "", higherPriority || lowerPriority, null));
-      }
-      return result;
+      // since we're not naming the parameter,
+      // if there isn't a higher priority,
+      // we can fall back to a wide-lookup in lowerPriority.
+      return value.map((x) => resolveRValue(x, "", higherPriority || lowerPriority, null));
     }
   }
 
