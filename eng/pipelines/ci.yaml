@@ -24,6 +24,12 @@ stages:
           - script: npx @microsoft/rush test:ci -v
             displayName: Test
 
+          - task: PublishCodeCoverageResults@1
+            inputs:
+              codeCoverageTool: Cobertura
+              summaryFileLocation: $(Build.SourcesDirectory)/packages/**/coverage/cobertura-coverage.xml
+              reportDirectory: $(Build.SourcesDirectory)/packages/**/coverage
+
           - script: npx @microsoft/rush lint -v
             displayName: Lint
 
