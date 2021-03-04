@@ -1771,10 +1771,10 @@ export class ModelerFour {
       });
     }
 
-    if (variable.format) {
+    if (variable["x-format"]) {
       return this.processSchema(`${variableName}`, {
         type: JsonType.String,
-        format: variable.format,
+        format: variable["x-format"],
       });
     }
     return this.stringSchema;
