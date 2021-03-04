@@ -43,7 +43,7 @@ describe("ConfigurationManager", () => {
       expect(output["output-folder"]).toEqual("generated-1");
     });
 
-    it("combines array values", async () => {
+    it("combines array values in order of higher priority", async () => {
       expect(output["api-version"]).toEqual(["version-1", "version-2"]);
     });
 
@@ -54,7 +54,7 @@ describe("ConfigurationManager", () => {
 
   describe("adding a single file with multiple blocks", () => {
     it("override values with blocks defined later", async () => {
-      await manager.addConfigFile({
+      manager.addConfigFile({
         type: "file",
         fullPath: "/dev/path/readme.md",
         configs: [
@@ -77,11 +77,38 @@ describe("ConfigurationManager", () => {
       const output = await manager.resolveConfig();
       expect(output["output-folder"]).toEqual("generated-2");
       expect(output["base-folder"]).toEqual("base-folder-1");
-      expect(output["api-version"]).toEqual(["version-2", "version-1"]);
+      expect(output["api-version"]).toEqual(["version-1", "version-2"]);
+    });
+
+    it("merges array in the order they are defined", async () => {
+      manager.addConfigFile({
+        type: "file",
+        fullPath: "/dev/path/readme.md",
+        configs: [
+          {
+            config: {
+              "api-version": ["version-1"],
+            },
+          },
+          {
+            config: {
+              "api-version": ["version-2"],
+            },
+          },
+          {
+            config: {
+              "api-version": ["version-3"],
+            },
+          },
+        ],
+      });
+
+      const output = await manager.resolveConfig();
+      expect(output["api-version"]).toEqual(["version-1", "version-2", "version-3"]);
     });
 
     it("use condition from previous blocks", async () => {
-      await manager.addConfigFile({
+      manager.addConfigFile({
         type: "file",
         fullPath: "/dev/path/readme.md",
         configs: [
@@ -111,7 +138,7 @@ describe("ConfigurationManager", () => {
       const output = await manager.resolveConfig();
       expect(output["output-folder"]).toEqual("generated-1");
       expect(output["base-folder"]).toEqual("base-folder-1");
-      expect(output["api-version"]).toEqual(["version-3", "version-1"]);
+      expect(output["api-version"]).toEqual(["version-1", "version-3"]);
     });
   });
 });

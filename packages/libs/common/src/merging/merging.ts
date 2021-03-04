@@ -144,16 +144,29 @@ export function resolveRValue(
   return value;
 }
 
+export type ArrayMergingStrategy = "high-pri-first" | "low-pri-first";
+
+export interface MergeOptions {
+  arrayMergeStrategy?: ArrayMergingStrategy;
+  concatListPathFilter?: (path: JsonPath) => boolean;
+}
+
+const defaultOptions: Required<MergeOptions> = {
+  arrayMergeStrategy: "high-pri-first",
+  concatListPathFilter: () => false,
+};
+
 export function mergeOverwriteOrAppend(
   higherPriority: any,
   lowerPriority: any,
-  concatListPathFilter: (path: JsonPath) => boolean = (_) => false,
+  options: MergeOptions = {},
   path: JsonPath = [],
 ): any {
   if (higherPriority === null || lowerPriority === null) {
     return null;
   }
 
+  const computedOptions = { ...defaultOptions, ...options };
   // scalars/arrays involved
   if (
     typeof higherPriority !== "object" ||
@@ -161,11 +174,7 @@ export function mergeOverwriteOrAppend(
     typeof lowerPriority !== "object" ||
     lowerPriority instanceof Array
   ) {
-    if (!(higherPriority instanceof Array) && !(lowerPriority instanceof Array) && !concatListPathFilter(path)) {
-      return higherPriority;
-    }
-
-    return [...new Set((higherPriority instanceof Array ? higherPriority : [higherPriority]).concat(lowerPriority))];
+    return mergeArray(higherPriority, lowerPriority, path, computedOptions);
   }
 
   // object nodes - iterate all members
@@ -192,9 +201,29 @@ export function mergeOverwriteOrAppend(
     // try merge objects otherwise
     const aMember = resolveRValue(higherPriority[key], key, lowerPriority, higherPriority);
     const bMember = resolveRValue(lowerPriority[key], key, higherPriority, lowerPriority);
-    result[key] = mergeOverwriteOrAppend(aMember, bMember, concatListPathFilter, subpath);
+    result[key] = mergeOverwriteOrAppend(aMember, bMember, computedOptions, subpath);
   }
   return result;
+}
+
+function mergeArray(
+  higherPriority: unknown,
+  lowerPriority: unknown,
+  path: JsonPath,
+  { concatListPathFilter, arrayMergeStrategy }: Required<MergeOptions>,
+) {
+  if (!(higherPriority instanceof Array) && !(lowerPriority instanceof Array) && !concatListPathFilter(path)) {
+    return higherPriority;
+  }
+
+  const higherPriorityArray = higherPriority instanceof Array ? higherPriority : [higherPriority];
+  const lowerPriorityArray = lowerPriority instanceof Array ? lowerPriority : [lowerPriority];
+
+  if (arrayMergeStrategy === "high-pri-first") {
+    return [...new Set(higherPriorityArray.concat(lowerPriority))];
+  } else {
+    return [...new Set(lowerPriorityArray.concat(higherPriority))];
+  }
 }
 
 export function identitySourceMapping(sourceYamlFileName: string, sourceYamlAst: YAMLNode): Mapping[] {

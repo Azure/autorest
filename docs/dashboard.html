@@ -160,7 +160,13 @@
                 $("<tr>")
                   .addClass(subsequent ? "optional" : "")
                   .append(
-                    $("<td>").append($("<a>").attr("href", version.uri).attr("target", "_blank").text(version.version)),
+                    $("<td>").append(
+                      $("<a>")
+                        .attr("href", version.uri)
+                        .attr("target", "_blank")
+                        .attr("rel", "noopener noreferrer")
+                        .text(version.version),
+                    ),
                   )
                   .append(featureSetVersion)
                   .append(coverages),

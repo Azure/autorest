@@ -9,46 +9,64 @@ trigger:
 pool:
   vmImage: "ubuntu-latest"
 
-jobs:
-  - job: main
-    displayName: "Build and test"
-    steps:
-      - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-          - template: ./templates/verify-changes.yaml
+stages:
+  - stage: main
+    displayName: Main
+    jobs:
+      - job: main
+        displayName: "Build and Unit test"
+        steps:
+          - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+              - template: ./templates/verify-changes.yaml
 
-      - template: ./templates/build.yaml
+          - template: ./templates/build.yaml
 
-      - script: npx @microsoft/rush test:ci -v
-        displayName: Test
+          - script: npx @microsoft/rush test:ci -v
+            displayName: Test
 
-      - script: npx @microsoft/rush lint -v
-        displayName: Lint
+          - task: PublishCodeCoverageResults@1
+            inputs:
+              codeCoverageTool: Cobertura
+              summaryFileLocation: $(Build.SourcesDirectory)/packages/**/coverage/cobertura-coverage.xml
+              reportDirectory: $(Build.SourcesDirectory)/packages/**/coverage
 
-      - script: |
-          commitId=$(git rev-parse --short HEAD)
-          npx @microsoft/rush publish --apply --prerelease-name="ci.$commitId"
-        displayName: Bump versions
+          - script: npx @microsoft/rush lint -v
+            displayName: Lint
 
-      - script: npx @microsoft/rush publish --publish --pack --include-all
-        displayName: Pack packages
+          - script: |
+              commitId=$(git rev-parse --short HEAD)
+              npx @microsoft/rush publish --apply --prerelease-name="ci.$commitId"
+            displayName: Bump versions
 
-      - publish: $(Build.SourcesDirectory)/common/temp/artifacts/packages
-        artifact: packages
-        displayName: Publish packages(.tgz) as pipeline artifacts
+          - script: npx @microsoft/rush publish --publish --pack --include-all
+            displayName: Pack packages
 
-      - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-          - template: ./templates/create-tryit-comment.yaml
+          - publish: $(Build.SourcesDirectory)/common/temp/artifacts/packages
+            artifact: packages
+            displayName: Publish packages(.tgz) as pipeline artifacts
 
-  - job: regressiontests
-    displayName: Regression tests
+          - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+              - template: ./templates/create-tryit-comment.yaml
+      - job: lintdocs
+        displayName: Lint docs
+        steps:
+          - script: |
+              sudo npm install -g markdown-link-check
+              find docs -name "*.md" -print0 | xargs -0  -n1 markdown-link-check -c ./markdown-link-check-config.json
+            displayName: Find
+  - stage: regressiontests
+    displayName: Regression Tests
     dependsOn: main
-    steps:
+    jobs:
       - template: ./templates/regression-tests.yaml
-
-  - job: lintdocs
-    displayName: Lint docs
-    steps:
-      - script: |
-          sudo npm install -g markdown-link-check
-          find docs -name "*.md" -print0 | xargs -0  -n1 markdown-link-check -c ./markdown-link-check-config.json
-        displayName: Find
+        parameters:
+          name: node10
+          nodeVersion: 10.x
+      - template: ./templates/regression-tests.yaml
+        parameters:
+          name: node12
+          nodeVersion: 12.x
+      - template: ./templates/regression-tests.yaml
+        parameters:
+          name: node14
+          nodeVersion: 14.x
