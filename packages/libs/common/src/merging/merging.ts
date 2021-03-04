@@ -147,11 +147,12 @@ export function resolveRValue(
 export type ArrayMergingStrategy = "high-pri-first" | "low-pri-first";
 
 export interface MergeOptions {
+  interpolationContext?: any;
   arrayMergeStrategy?: ArrayMergingStrategy;
   concatListPathFilter?: (path: JsonPath) => boolean;
 }
 
-const defaultOptions: Required<MergeOptions> = {
+const defaultOptions: Omit<Required<MergeOptions>, "interpolationContext"> = {
   arrayMergeStrategy: "high-pri-first",
   concatListPathFilter: () => false,
 };
@@ -166,7 +167,12 @@ export function mergeOverwriteOrAppend(
     return null;
   }
 
-  const computedOptions = { ...defaultOptions, ...options };
+  const computedOptions = {
+    ...defaultOptions,
+    ...options,
+    interpolationContext: options.interpolationContext ?? higherPriority,
+  };
+
   // scalars/arrays involved
   if (
     typeof higherPriority !== "object" ||
@@ -190,17 +196,17 @@ export function mergeOverwriteOrAppend(
 
     // forward if only present in one of the nodes
     if (higherPriority[key] === undefined) {
-      result[key] = resolveRValue(lowerPriority[key], key, higherPriority, lowerPriority);
+      result[key] = resolveRValue(lowerPriority[key], key, computedOptions.interpolationContext, lowerPriority);
       continue;
     }
     if (lowerPriority[key] === undefined) {
-      result[key] = resolveRValue(higherPriority[key], key, null, higherPriority);
+      result[key] = resolveRValue(computedOptions.interpolationContext[key], key, null, higherPriority);
       continue;
     }
 
     // try merge objects otherwise
-    const aMember = resolveRValue(higherPriority[key], key, lowerPriority, higherPriority);
-    const bMember = resolveRValue(lowerPriority[key], key, higherPriority, lowerPriority);
+    const aMember = resolveRValue(higherPriority[key], key, lowerPriority, computedOptions.interpolationContext);
+    const bMember = resolveRValue(lowerPriority[key], key, computedOptions.interpolationContext, lowerPriority);
     result[key] = mergeOverwriteOrAppend(aMember, bMember, computedOptions, subpath);
   }
   return result;
