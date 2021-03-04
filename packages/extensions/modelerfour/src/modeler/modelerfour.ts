@@ -1657,13 +1657,7 @@ export class ModelerFour {
             // scenario 3 : single parameterized value
 
             for (const { key: variableName, value: variable } of items(server.variables).where((each) => !!each.key)) {
-              const sch = variable.enum
-                ? this.processChoiceSchema(variableName, <OpenAPI.Schema>{
-                    type: "string",
-                    enum: variable.enum,
-                    description: variable.description || `${variableName} - server parameter`,
-                  })
-                : this.stringSchema;
+              const sch = this.getServerVariableSchema(variableName, variable);
 
               const clientdefault = variable.default ? variable.default : undefined;
 
@@ -1768,6 +1762,23 @@ export class ModelerFour {
     return baseUri;
   }
 
+  private getServerVariableSchema(variableName: string, variable: OpenAPI.ServerVariable) {
+    if (variable.enum) {
+      return this.processChoiceSchema(variableName, <OpenAPI.Schema>{
+        type: "string",
+        enum: variable.enum,
+        description: variable.description || `${variableName} - server parameter`,
+      });
+    }
+
+    if (variable.format) {
+      return this.processSchema(`${variableName}`, {
+        type: JsonType.String,
+        format: variable.format,
+      });
+    }
+    return this.stringSchema;
+  }
   processApiVersionParameterForProfile() {
     throw new Error("Profile Support for API Verison Parameters not implemented.");
   }
