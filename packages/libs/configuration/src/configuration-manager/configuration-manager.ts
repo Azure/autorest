@@ -107,6 +107,7 @@ export class ConfigurationManager {
       if (shouldInclude) {
         currentFileResolution = mergeOverwriteOrAppend(configBlock.config, currentFileResolution, {
           arrayMergeStrategy: "low-pri-first", // We want arrays to be merged in the order of definition within the same file(First defined first in the array)
+          interpolationContext: mergeOverwriteOrAppend(config, configBlock.config),
         });
       }
     }

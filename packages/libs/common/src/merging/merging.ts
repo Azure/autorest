@@ -126,14 +126,10 @@ export function resolveRValue(
 
     // resolve macro values for array values
     if (value instanceof Array) {
-      const result = new Array<any>();
-      for (const each of value) {
-        // since we're not naming the parameter,
-        // if there isn't a higher priority,
-        // we can fall back to a wide-lookup in lowerPriority.
-        result.push(resolveRValue(each, "", higherPriority || lowerPriority, null));
-      }
-      return result;
+      // since we're not naming the parameter,
+      // if there isn't a higher priority,
+      // we can fall back to a wide-lookup in lowerPriority.
+      return value.map((x) => resolveRValue(x, "", higherPriority || lowerPriority, null));
     }
   }
 
@@ -147,11 +143,12 @@ export function resolveRValue(
 export type ArrayMergingStrategy = "high-pri-first" | "low-pri-first";
 
 export interface MergeOptions {
+  interpolationContext?: any;
   arrayMergeStrategy?: ArrayMergingStrategy;
   concatListPathFilter?: (path: JsonPath) => boolean;
 }
 
-const defaultOptions: Required<MergeOptions> = {
+const defaultOptions: Omit<Required<MergeOptions>, "interpolationContext"> = {
   arrayMergeStrategy: "high-pri-first",
   concatListPathFilter: () => false,
 };
@@ -166,7 +163,12 @@ export function mergeOverwriteOrAppend(
     return null;
   }
 
-  const computedOptions = { ...defaultOptions, ...options };
+  const computedOptions = {
+    ...defaultOptions,
+    ...options,
+    interpolationContext: options.interpolationContext ?? higherPriority,
+  };
+
   // scalars/arrays involved
   if (
     typeof higherPriority !== "object" ||
@@ -190,18 +192,23 @@ export function mergeOverwriteOrAppend(
 
     // forward if only present in one of the nodes
     if (higherPriority[key] === undefined) {
-      result[key] = resolveRValue(lowerPriority[key], key, higherPriority, lowerPriority);
+      result[key] = resolveRValue(lowerPriority[key], key, computedOptions.interpolationContext, lowerPriority);
       continue;
     }
     if (lowerPriority[key] === undefined) {
-      result[key] = resolveRValue(higherPriority[key], key, null, higherPriority);
+      result[key] = resolveRValue(higherPriority[key], key, null, computedOptions.interpolationContext);
       continue;
     }
 
     // try merge objects otherwise
-    const aMember = resolveRValue(higherPriority[key], key, lowerPriority, higherPriority);
-    const bMember = resolveRValue(lowerPriority[key], key, higherPriority, lowerPriority);
-    result[key] = mergeOverwriteOrAppend(aMember, bMember, computedOptions, subpath);
+    const aMember = resolveRValue(higherPriority[key], key, lowerPriority, computedOptions.interpolationContext);
+    const bMember = resolveRValue(lowerPriority[key], key, computedOptions.interpolationContext, lowerPriority);
+    result[key] = mergeOverwriteOrAppend(
+      aMember,
+      bMember,
+      { ...computedOptions, interpolationContext: computedOptions.interpolationContext[key] },
+      subpath,
+    );
   }
   return result;
 }
