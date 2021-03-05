@@ -50,6 +50,25 @@ describe("ConfigurationManager", () => {
     it("adds value from 2nd config if not present in 1st", async () => {
       expect(output["base-folder"]).toEqual("base-folder-2");
     });
+
+    it("combine nested objects", async () => {
+      await manager.addConfig({
+        "use-extension": {
+          "@autorest/csharp": "latest",
+        },
+      });
+      await manager.addConfig({
+        "use-extension": {
+          "@autorest/modelerfour": "latest",
+        },
+      });
+
+      const output = await manager.resolveConfig();
+      expect(output["use-extension"]).toEqual({
+        "@autorest/csharp": "latest",
+        "@autorest/modelerfour": "latest",
+      });
+    });
   });
 
   describe("adding a single file with multiple blocks", () => {
@@ -139,6 +158,111 @@ describe("ConfigurationManager", () => {
       expect(output["output-folder"]).toEqual("generated-1");
       expect(output["base-folder"]).toEqual("base-folder-1");
       expect(output["api-version"]).toEqual(["version-1", "version-3"]);
+    });
+  });
+
+  describe("interpolate previous values", () => {
+    it("interpolate from previous config", async () => {
+      await manager.addConfig({
+        name: "FooBar",
+      });
+      await manager.addConfig({
+        namespace: "$(name).Client",
+      });
+
+      const output = await manager.resolveConfig();
+      expect(output["namespace"]).toEqual("FooBar.Client");
+    });
+
+    it("interpolate from same config but defined before", async () => {
+      await manager.addConfig({
+        name: "FooBar",
+        namespace: "$(name).Client",
+      });
+
+      const output = await manager.resolveConfig();
+      expect(output["namespace"]).toEqual("FooBar.Client");
+    });
+
+    it("interpolate with higher priority value(defined before) instead of the one in the same block", async () => {
+      await manager.addConfig({
+        name: "FooBarOverride",
+      });
+      await manager.addConfig({
+        name: "FooBar",
+        namespace: "$(name).Client",
+      });
+
+      const output = await manager.resolveConfig();
+      expect(output["namespace"]).toEqual("FooBarOverride.Client");
+    });
+
+    it("interpolate with higher priority value(defined before) instead of the one in the same block", async () => {
+      await manager.addConfig({
+        name: "FooBarOverride",
+      });
+
+      manager.addConfigFile({
+        type: "file",
+        fullPath: "/dev/path/readme.md",
+        configs: [
+          {
+            config: {
+              name: "FooBar",
+              namespace: "$(name).Client",
+            },
+          },
+        ],
+      });
+      const output = await manager.resolveConfig();
+      expect(output["namespace"]).toEqual("FooBarOverride.Client");
+    });
+
+    it("interpolate from the last block", async () => {
+      manager.addConfigFile({
+        type: "file",
+        fullPath: "/dev/path/readme.md",
+        configs: [
+          {
+            config: {
+              name: "FooBar",
+            },
+          },
+          {
+            config: {
+              name: "FooBarOverride",
+              namespace: "$(name).Client",
+            },
+          },
+        ],
+      });
+      const output = await manager.resolveConfig();
+      expect(output["namespace"]).toEqual("FooBarOverride.Client");
+    });
+
+    it("interpolate from the last block", async () => {
+      await manager.addConfig({
+        name: "FooBarCLIOverride",
+      });
+      manager.addConfigFile({
+        type: "file",
+        fullPath: "/dev/path/readme.md",
+        configs: [
+          {
+            config: {
+              name: "FooBar",
+            },
+          },
+          {
+            config: {
+              name: "FooNextBlockOverride",
+              namespace: "$(name).Client",
+            },
+          },
+        ],
+      });
+      const output = await manager.resolveConfig();
+      expect(output["namespace"]).toEqual("FooBarCLIOverride.Client");
     });
   });
 });
