@@ -8,10 +8,13 @@
       "comments": {
         "patch": [
           {
-            "comment": "change trenton to terraform"
+            "comment": "**Rename** trenton plugin to terraform"
           },
           {
             "comment": "**Fix** Handle using extension properties(x-) under components in OpenAPI3"
+          },
+          {
+            "comment": "**Update** @autorest/configuration dependency to uptake various configuration loading fixes"
           }
         ],
         "dependency": [
