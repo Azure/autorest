@@ -50,7 +50,7 @@ describe("Scenario testings", () => {
     await expectInputsMatchSnapshots("cross-file-parameterized-host-refs", ["swagger.json", "other.json"]);
   });
 
-  fit("Convert parameterized host parameters to server variables", async () => {
+  it("Convert parameterized host parameters to server variables", async () => {
     // The expected result is the parmaeter to be included/expanded in the OpenAPI3 server property.
     await expectInputsMatchSnapshots("parameterized-host-parameters", ["swagger.json"]);
   });
