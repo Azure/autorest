@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Fri, 26 Feb 2021 21:50:13 GMT and should not be manually modified.
+This log was last generated on Fri, 05 Mar 2021 16:31:29 GMT and should not be manually modified.
+
+## 4.17.2
+Fri, 05 Mar 2021 16:31:29 GMT
+
+### Patches
+
+- Allow server variables to provide a string format(url, uri, etc.)
 
 ## 4.17.1
 Fri, 26 Feb 2021 21:50:13 GMT

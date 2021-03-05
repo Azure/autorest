@@ -1,6 +1,14 @@
 # Change Log - @autorest/core
 
-This log was last generated on Fri, 26 Feb 2021 21:50:13 GMT and should not be manually modified.
+This log was last generated on Fri, 05 Mar 2021 16:31:29 GMT and should not be manually modified.
+
+## 3.1.1
+Fri, 05 Mar 2021 16:31:29 GMT
+
+### Patches
+
+- change trenton to terraform
+- **Fix** Handle using extension properties(x-) under components in OpenAPI3
 
 ## 3.1.0
 Fri, 26 Feb 2021 21:50:13 GMT
