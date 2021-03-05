@@ -2,6 +2,18 @@
   "name": "@azure-tools/oai2-to-oai3",
   "entries": [
     {
+      "version": "4.2.277",
+      "tag": "@azure-tools/oai2-to-oai3_v4.2.277",
+      "date": "Fri, 05 Mar 2021 16:31:29 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "When converting x-ms-parameterized-host parameters to server variables keep format as x-format"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.2.276",
       "tag": "@azure-tools/oai2-to-oai3_v4.2.276",
       "date": "Thu, 04 Feb 2021 19:05:18 GMT",

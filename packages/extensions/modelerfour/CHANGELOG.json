@@ -2,6 +2,18 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.17.2",
+      "tag": "@autorest/modelerfour_v4.17.2",
+      "date": "Fri, 05 Mar 2021 16:31:29 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Allow server variables to provide a string format(url, uri, etc.)"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.17.1",
       "tag": "@autorest/modelerfour_v4.17.1",
       "date": "Fri, 26 Feb 2021 21:50:13 GMT",

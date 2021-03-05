@@ -2,6 +2,38 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.1.1",
+      "tag": "@autorest/core_v3.1.1",
+      "date": "Fri, 05 Mar 2021 16:31:29 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Rename** trenton plugin to terraform"
+          },
+          {
+            "comment": "**Fix** Handle using extension properties(x-) under components in OpenAPI3"
+          },
+          {
+            "comment": "**Update** @autorest/configuration dependency to uptake various configuration loading fixes"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.0.3` to `~1.1.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/configuration\" from `~1.1.0` to `~1.1.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/extension\" from `~3.2.2` to `~3.2.3`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/oai2-to-oai3\" from `~4.2.276` to `~4.2.277`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.1.0",
       "tag": "@autorest/core_v3.1.0",
       "date": "Fri, 26 Feb 2021 21:50:13 GMT",

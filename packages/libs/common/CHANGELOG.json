@@ -2,6 +2,21 @@
   "name": "@autorest/common",
   "entries": [
     {
+      "version": "1.1.0",
+      "tag": "@autorest/common_v1.1.0",
+      "date": "Fri, 05 Mar 2021 16:31:29 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Update** merge functionality to be able to take interpolation context. Default to the higher priority element otherwise"
+          },
+          {
+            "comment": "**Update** Merging functionality to accept an array merging strategy to decide order of merging"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.3",
       "tag": "@autorest/common_v1.0.3",
       "date": "Fri, 26 Feb 2021 21:50:13 GMT",
