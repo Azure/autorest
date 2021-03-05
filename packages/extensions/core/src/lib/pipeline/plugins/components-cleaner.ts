@@ -100,7 +100,6 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
       }
       for (const { value, key: id } of children) {
         if (!value["x-ms-metadata"]["x-ms-secondary-file"]) {
-          console.error("Components type", containerType);
           this.visitedComponents[containerType as keyof ComponentTracker].add(id);
           this.componentsToKeep[containerType as keyof ComponentTracker].add(id);
           this.crawlObject(value);
