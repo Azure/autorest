@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "Set @autorest/typescript default version to 'latest'",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/core",
+  "email": "joheredi@microsoft.com"
+}
