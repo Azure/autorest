@@ -59,4 +59,9 @@ describe("ComponentCleaner", () => {
     const { input, output } = await runComponentCleaner("schema-with-$ref-property");
     expect(output).toEqual(input);
   });
+
+  it("ignores x- properties under components", async () => {
+    const { input, output } = await runComponentCleaner("components-extensions");
+    expect(output).toEqual(input);
+  });
 });

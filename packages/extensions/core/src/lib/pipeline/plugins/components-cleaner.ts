@@ -94,6 +94,10 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
 
   findComponentsToKeepInComponents() {
     for (const { children, key: containerType } of visit(this.components)) {
+      // Ignore extension properties(x-)
+      if (!(containerType in this.visitedComponents)) {
+        continue;
+      }
       for (const { value, key: id } of children) {
         if (!value["x-ms-metadata"]["x-ms-secondary-file"]) {
           this.visitedComponents[containerType as keyof ComponentTracker].add(id);
