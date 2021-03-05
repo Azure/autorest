@@ -95,7 +95,7 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
   findComponentsToKeepInComponents() {
     for (const { children, key: containerType } of visit(this.components)) {
       // Ignore extension properties(x-)
-      if (!(containerType in Object.keys(this.visitedComponents))) {
+      if (!(containerType in this.visitedComponents)) {
         continue;
       }
       for (const { value, key: id } of children) {
