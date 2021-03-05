@@ -75,6 +75,7 @@ export class Oai2ToOai3 {
               case "in":
               case "required":
               case "type":
+              case "format":
               case "name":
                 // turn these into x-* properties
                 param[`x-${key}`] = originalParameter[key];
