@@ -6,7 +6,7 @@ The V3 version of the Typescript Generator.
 version: ~3.1.0
 
 use-extension:
-  "@autorest/typescript": "6.0.0-dev.20201105.2"
+  "@autorest/typescript": "latest"
 try-require: ./readme.typescript.md
 ```
 
