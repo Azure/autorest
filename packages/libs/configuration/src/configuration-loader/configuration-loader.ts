@@ -42,11 +42,6 @@ export interface ConfigurationLoaderOptions {
    * Extension manager to resolve extension configuration. If not provided the extension configuration won't be resolved.
    */
   extensionManager?: ExtensionManager;
-
-  /**
-   * Default configuration Uri. This is the path to the default configuration file.
-   */
-  defaultConfigUri?: string;
 }
 
 /**
@@ -56,14 +51,15 @@ export class ConfigurationLoader {
   private fileSystem: CachingFileSystem;
   private dataStore: DataStore;
   private extensionManager: ExtensionManager | undefined;
-  private defaultConfigUri: string | undefined;
 
   /**
    * @param fileSystem File system.
+   * @param defaultConfigUri Default configuration Uri. This is the path to the default configuration file.
    * @param configFileOrFolderUri Path to the config file or folder.
    */
   public constructor(
     private logger: AutorestLogger,
+    private defaultConfigUri: string,
     private configFileOrFolderUri: string | undefined,
     options: ConfigurationLoaderOptions = {},
   ) {
@@ -71,7 +67,6 @@ export class ConfigurationLoader {
     this.fileSystem = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
     this.dataStore = options.dataStore ?? new DataStore({ isCancellationRequested: false } as any);
     this.extensionManager = options.extensionManager;
-    this.defaultConfigUri = options.defaultConfigUri;
   }
 
   public async load(
@@ -120,7 +115,6 @@ export class ConfigurationLoader {
     }
 
     // 4. resolve extensions
-    const addedExtensions = new Set<string>();
     const extensions: ResolvedExtension[] = [];
     if (this.extensionManager) {
       const addedExtensions = new Set<string>();
@@ -144,15 +138,10 @@ export class ConfigurationLoader {
             extensions.push({ extension, definition: additionalExtension });
             await resolveRequiredConfigs(fsLocal);
 
-<<<<<<< HEAD
             // merge config from extension
-            const inputView = this.dataStore.GetReadThroughScope(new RealFileSystem());
-
             const extensionConfigurationUri = simplifyUri(CreateFileUri(await extension.configurationPath));
             this.logger.verbose(`> Including extension configuration file '${extensionConfigurationUri}'`);
-
-            const data = await inputView.ReadStrict(extensionConfigurationUri);
-            manager.addConfigFile(await readConfigurationFile(data, this.logger, this.dataStore.getDataSink()));
+            await loadConfigFile(extensionConfigurationUri, fsLocal);
 
             viewsToHandle.push(await resolveConfig());
           } catch (e) {
@@ -161,22 +150,6 @@ export class ConfigurationLoader {
             );
             throw e;
           }
-=======
-          const extension = await this.resolveExtension(additionalExtension);
-          extensions.push({ extension, definition: additionalExtension });
-
-          // merge config from extension
-          const extensionConfigurationUri = simplifyUri(CreateFileUri(await extension.configurationPath));
-          this.logger.verbose(`> Including extension configuration file '${extensionConfigurationUri}'`);
-          await loadConfigFile(extensionConfigurationUri, fsLocal);
-
-          viewsToHandle.push(await resolveConfig());
-        } catch (e) {
-          this.logger.fatal(
-            `Failed to install extension '${additionalExtension.name}' (${additionalExtension.source})`,
-          );
-          throw e;
->>>>>>> dcb1684cb2b528150605a3aa9a443e0d18f286d1
         }
         await resolveRequiredConfigs(fsLocal);
       }
