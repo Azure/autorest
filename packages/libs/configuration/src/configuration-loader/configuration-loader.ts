@@ -78,6 +78,7 @@ export class ConfigurationLoader {
     for (const config of configs) {
       await manager.addConfig(config);
     }
+    await resolveRequiredConfigs(this.fileSystem);
 
     // 2. file
     if (configFileUri != null && configFileUri !== undefined) {
@@ -158,6 +159,7 @@ export class ConfigurationLoader {
     manager: ConfigurationManager,
     alreadyAddedConfigs: Set<string>,
   ) {
+    this.logger.verbose(`> Including configuration file '${fileUri}'`);
     const data = await this.dataStore.GetReadThroughScope(fsToUse).ReadStrict(fileUri);
     const file = await readConfigurationFile(data, this.logger, this.dataStore.getDataSink());
     manager.addConfigFile(file);
