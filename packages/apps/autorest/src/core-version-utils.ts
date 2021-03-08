@@ -33,6 +33,7 @@ export const findCoreVersionUsingConfiguration = async (args: AutorestArgs): Pro
     info: (x) => console.log(x),
     verbose: (x) => args.verbose && console.log(x),
     trackError: (x) => console.error(x),
+    trackWarning: (x) => console.error(x),
   };
   /* eslint-enable no-console */
 
