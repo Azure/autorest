@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/oai2-to-oai3
 
-This log was last generated on Thu, 04 Feb 2021 19:16:37 GMT and should not be manually modified.
+This log was last generated on Fri, 05 Mar 2021 16:31:29 GMT and should not be manually modified.
+
+## 4.2.277
+Fri, 05 Mar 2021 16:31:29 GMT
+
+### Patches
+
+- When converting x-ms-parameterized-host parameters to server variables keep format as x-format
 
 ## 4.2.276
 Thu, 04 Feb 2021 19:05:18 GMT

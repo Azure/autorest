@@ -19,7 +19,7 @@ const inWebpack = typeof __webpack_require__ === "function";
 const nodeRequire = inWebpack ? __non_webpack_require__ : require;
 
 export const pkgVersion: string = require(`../package.json`).version;
-process.env["autorest.home"] = process.env["autorest.home"] || homedir();
+process.env["autorest.home"] = process.env["AUTOREST_HOME"] || process.env["autorest.home"] || homedir();
 
 try {
   rmdirSync(mkdtempSync(join(process.env["autorest.home"], "temp")));

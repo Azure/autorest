@@ -1,4 +1,5 @@
 import { createSandbox } from "@azure-tools/datastore";
+import { flatMap } from "lodash";
 import { AutorestConfiguration } from "./autorest-configuration";
 import { arrayOf } from "./utils";
 
@@ -67,20 +68,19 @@ export const resolveDirectives = (
     dir = { ...dir };
     delete (<any>dir)[makro];
     // call makro
-    const makroResults: any = parameters.flatMap((parameter) => {
+    const makroResults: any = flatMap(parameters, (parameter) => {
       const result = safeEval(declarations[makro], { $: parameter, $context: dir });
       return Array.isArray(result) ? result : [result];
     });
-    return makroResults.flatMap((result: any) => expandDirective({ ...result, ...dir }));
+    return flatMap(makroResults, (result: any) => expandDirective({ ...result, ...dir }));
   };
 
   // makro expansion
   if (predicate) {
-    return plainDirectives
-      .flatMap(expandDirective)
+    return flatMap(plainDirectives, expandDirective)
       .map((each) => new ResolvedDirective(each))
       .filter(predicate);
   }
-  return plainDirectives.flatMap(expandDirective).map((each) => new ResolvedDirective(each));
+  return flatMap(plainDirectives, expandDirective).map((each) => new ResolvedDirective(each));
   // return From(plainDirectives).SelectMany(expandDirective).Select(each => new StaticDirectiveView(each)).ToArray();
 };

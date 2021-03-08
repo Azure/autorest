@@ -8,39 +8,61 @@ import { mergeOverwriteOrAppend } from "./merging";
 describe("Merging", () => {
   describe("mergeOverwriteOrAppend", () => {
     it("keeps the higher priority value if it is a primitive", () => {
-      expect(mergeOverwriteOrAppend(1, 2, (_) => false)).toEqual(1);
+      expect(mergeOverwriteOrAppend(1, 2, { concatListPathFilter: (_) => false })).toEqual(1);
     });
 
     it("creates an array with both value if concat filter is true for the given path", () => {
-      expect(mergeOverwriteOrAppend(1, 2, (_) => true)).toEqual([1, 2]);
+      expect(mergeOverwriteOrAppend(1, 2, { concatListPathFilter: (_) => true })).toEqual([1, 2]);
     });
 
     it("creates an array with both values if any value is already an array", () => {
-      expect(mergeOverwriteOrAppend(1, [2], (_) => false)).toEqual([1, 2]);
-      expect(mergeOverwriteOrAppend(1, [2], (_) => true)).toEqual([1, 2]);
-      expect(mergeOverwriteOrAppend([1], 2, (_) => false)).toEqual([1, 2]);
-      expect(mergeOverwriteOrAppend([1], 2, (_) => true)).toEqual([1, 2]);
+      expect(mergeOverwriteOrAppend(1, [2], { concatListPathFilter: (_) => false })).toEqual([1, 2]);
+      expect(mergeOverwriteOrAppend(1, [2], { concatListPathFilter: (_) => true })).toEqual([1, 2]);
+      expect(mergeOverwriteOrAppend([1], 2, { concatListPathFilter: (_) => false })).toEqual([1, 2]);
+      expect(mergeOverwriteOrAppend([1], 2, { concatListPathFilter: (_) => true })).toEqual([1, 2]);
     });
 
     it("creates an array with both values if they are already arrays", () => {
-      expect(mergeOverwriteOrAppend([1], [2], (_) => false)).toEqual([1, 2]);
-      expect(mergeOverwriteOrAppend([1], [2], (_) => true)).toEqual([1, 2]);
+      expect(mergeOverwriteOrAppend([1], [2], { concatListPathFilter: (_) => false })).toEqual([1, 2]);
+      expect(mergeOverwriteOrAppend([1], [2], { concatListPathFilter: (_) => true })).toEqual([1, 2]);
     });
 
     it("keeps the higher priority properties first for an object", () => {
-      expect(mergeOverwriteOrAppend({ a: 1, b: 1 }, { a: 2, b: 2 }, (_) => false)).toEqual({ a: 1, b: 1 });
+      expect(mergeOverwriteOrAppend({ a: 1, b: 1 }, { a: 2, b: 2 }, { concatListPathFilter: (_) => false })).toEqual({
+        a: 1,
+        b: 1,
+      });
     });
 
     it("combines values into arrays if requested", () => {
-      expect(mergeOverwriteOrAppend({ a: 1, b: 1 }, { a: 2, b: 2 }, (_) => true)).toEqual({ a: [1, 2], b: [1, 2] });
+      expect(mergeOverwriteOrAppend({ a: 1, b: 1 }, { a: 2, b: 2 }, { concatListPathFilter: (_) => true })).toEqual({
+        a: [1, 2],
+        b: [1, 2],
+      });
+    });
+
+    it("combines arrays higher priority values first by default", () => {
+      expect(mergeOverwriteOrAppend({ a: [1, 2] }, { a: [3, 4] })).toEqual({
+        a: [1, 2, 3, 4],
+      });
+    });
+
+    it("combines arrays lower priority values first if requested", () => {
+      expect(mergeOverwriteOrAppend({ a: [1, 2] }, { a: [3, 4] }, { arrayMergeStrategy: "low-pri-first" })).toEqual({
+        a: [3, 4, 1, 2],
+      });
     });
 
     it("combines values into arrays only for the requested path", () => {
-      expect(mergeOverwriteOrAppend({ a: 1, b: 1 }, { a: 2, b: 2 }, (p) => matches("$.a", p))).toEqual({
+      expect(
+        mergeOverwriteOrAppend({ a: 1, b: 1 }, { a: 2, b: 2 }, { concatListPathFilter: (p) => matches("$.a", p) }),
+      ).toEqual({
         a: [1, 2],
         b: 1,
       });
-      expect(mergeOverwriteOrAppend({ a: 1, b: 1 }, { a: 2, b: 2 }, (p) => matches("$.b", p))).toEqual({
+      expect(
+        mergeOverwriteOrAppend({ a: 1, b: 1 }, { a: 2, b: 2 }, { concatListPathFilter: (p) => matches("$.b", p) }),
+      ).toEqual({
         a: 1,
         b: [1, 2],
       });

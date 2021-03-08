@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@autorest/common",
-      "comment": "**Update** Autorest logger definition",
+      "comment": "Add `trackWarning` functionality to logger",
       "type": "patch"
     }
   ],

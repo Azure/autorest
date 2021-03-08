@@ -54,4 +54,14 @@ describe("ComponentCleaner", () => {
   it("secondary-file components not referenced by something in a primary-file.", async () => {
     await expectScenarioToMatchSnapshot("some-unused-secondary-components");
   });
+
+  it("ignores schema properties called $ref", async () => {
+    const { input, output } = await runComponentCleaner("schema-with-$ref-property");
+    expect(output).toEqual(input);
+  });
+
+  it("ignores x- properties under components", async () => {
+    const { input, output } = await runComponentCleaner("components-extensions");
+    expect(output).toEqual(input);
+  });
 });

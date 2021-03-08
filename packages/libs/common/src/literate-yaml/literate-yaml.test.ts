@@ -2,16 +2,16 @@ import { CancellationToken, DataStore } from "@azure-tools/datastore";
 
 import { parse } from "./literate-yaml";
 import { AutorestError } from "../logging";
-import { OperationAbortedException } from "../exceptions";
 
 describe("SyntaxValidation", () => {
   let errors: AutorestError[];
 
   const logger = {
-    verbose: jest.fn((x) => errors.push(x)),
-    info: jest.fn((x) => errors.push(x)),
+    verbose: jest.fn(),
+    info: jest.fn(),
     fatal: jest.fn((x) => errors.push(x)),
     trackError: jest.fn((x) => errors.push(x)),
+    trackWarning: jest.fn((x) => errors.push(x)),
   };
 
   beforeEach(() => {

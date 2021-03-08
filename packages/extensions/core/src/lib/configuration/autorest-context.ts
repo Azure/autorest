@@ -18,7 +18,7 @@ import {
   arrayOf,
   extendAutorestConfiguration,
 } from "@autorest/configuration";
-import { AutorestError, AutorestLogger } from "@autorest/common";
+import { AutorestError, AutorestLogger, AutorestWarning } from "@autorest/common";
 import { Message } from "../message";
 import { AutorestCoreLogger } from "./logger";
 
@@ -58,6 +58,10 @@ export class AutorestContext implements AutorestLogger {
 
   public trackError(error: AutorestError) {
     this.logger.trackError(error);
+  }
+
+  public trackWarning(error: AutorestWarning) {
+    this.logger.trackWarning(error);
   }
 
   public Message(m: Message) {

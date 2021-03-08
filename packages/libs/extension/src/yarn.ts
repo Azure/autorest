@@ -75,6 +75,11 @@ export class Yarn implements PackageManager {
       ...args,
     ];
 
-    return await execute(process.execPath, procArgs, { cwd });
+    const newEnv = {
+      ...process.env,
+      YARN_IGNORE_PATH: "1", // Prevent yarn from using a different version if configured in ~/.yarnrc
+    };
+
+    return await execute(process.execPath, procArgs, { cwd, env: newEnv });
   }
 }

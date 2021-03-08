@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@autorest/core",
-      "comment": "**Update** Moved configuration loading from @autorest/core and redesign",
+      "comment": "Update swagger schema validator to use new system(`ajv` & `ajv-errors`) providing more relevant information",
       "type": "patch"
     }
   ],

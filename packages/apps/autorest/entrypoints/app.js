@@ -29,15 +29,6 @@ if (
       process.exit(code);
     });
 } else {
-  // load modules from static linker filesystem.
-  if (isDebuggerEnabled) {
-    try {
-      // try to let source maps resolve
-      require("source-map-support").install();
-    } catch (e) {
-      // no worries
-    }
-  }
   try {
     const v = process.versions.node.split(".");
     if (v[0] < 10 || (v[0] === 10 && v[1] < 12)) {

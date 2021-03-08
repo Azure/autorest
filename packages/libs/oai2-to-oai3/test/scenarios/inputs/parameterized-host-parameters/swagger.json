@@ -1,0 +1,56 @@
+{
+  "$schema": "https://github.com/OAI/OpenAPI-Specification/blob/master/schemas/v2.0/schema.json",
+  "swagger": "2.0",
+  "info": {
+    "x-ms-metadata": {
+      "apiVersions": ["test-0.1"]
+    },
+    "title": "Test",
+    "description": "test",
+    "version": "test-0.1"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{UriParam}{EnumParam}{StringParam}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/StringParam"
+      },
+      {
+        "$ref": "#/parameters/UrlParam"
+      },
+      {
+        "$ref": "#/parameters/EnumParam"
+      }
+    ]
+  },
+  "paths": {},
+  "definitions": {},
+  "parameters": {
+    "StringParam": {
+      "name": "StringParam",
+      "in": "path",
+      "description": "Parameter that is a generic  string",
+      "required": true,
+      "type": "string",
+      "default": "https://api.cognitive.microsoft.com"
+    },
+    "UrlParam": {
+      "name": "UrlParam",
+      "in": "path",
+      "description": "Parameter that is formatted as url",
+      "required": true,
+      "type": "string",
+      "default": "https://api.cognitive.microsoft.com"
+    },
+    "EnumParam": {
+      "name": "EnumParam",
+      "in": "path",
+      "description": "Shared endpoint param.",
+      "required": true,
+      "type": "string",
+      "enum": ["v1", "v2"],
+      "default": "v1"
+    }
+  }
+}

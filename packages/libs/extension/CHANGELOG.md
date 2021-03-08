@@ -1,6 +1,27 @@
 # Change Log - @azure-tools/extension
 
-This log was last generated on Fri, 19 Feb 2021 21:42:09 GMT and should not be manually modified.
+This log was last generated on Fri, 05 Mar 2021 16:31:29 GMT and should not be manually modified.
+
+## 3.2.3
+Fri, 05 Mar 2021 16:31:29 GMT
+
+### Patches
+
+- **Revert** not using global yarnrc and change to prevent yarn from loading alternate version
+
+## 3.2.2
+Fri, 26 Feb 2021 21:50:13 GMT
+
+### Patches
+
+- Prevent single-file yarn from loading user config and changing version
+
+## 3.2.1
+Wed, 24 Feb 2021 00:33:50 GMT
+
+### Patches
+
+- **Fix** updatePythonPath wasn't patching array inplace.
 
 ## 3.2.0
 Fri, 19 Feb 2021 21:42:09 GMT

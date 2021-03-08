@@ -28,7 +28,7 @@ import { PipelinePlugin } from "../common";
  *
  */
 
-type componentType =
+type ComponentType =
   | "schemas"
   | "responses"
   | "parameters"
@@ -94,6 +94,10 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
 
   findComponentsToKeepInComponents() {
     for (const { children, key: containerType } of visit(this.components)) {
+      // Ignore extension properties(x-)
+      if (!(containerType in this.visitedComponents)) {
+        continue;
+      }
       for (const { value, key: id } of children) {
         if (!value["x-ms-metadata"]["x-ms-secondary-file"]) {
           this.visitedComponents[containerType as keyof ComponentTracker].add(id);
@@ -165,10 +169,10 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
       if (key === "x-ms-examples") {
         continue;
       }
-      if (key === "$ref") {
+      if (key === "$ref" && typeof value === "string") {
         const refParts = value.split("/");
-        const componentUid = refParts.pop();
-        const t: componentType = refParts.pop();
+        const componentUid = refParts.pop() as string;
+        const t: ComponentType = refParts.pop() as ComponentType;
         if (!this.visitedComponents[t].has(componentUid)) {
           this.visitedComponents[t].add(componentUid);
           this.componentsToKeep[t].add(componentUid);

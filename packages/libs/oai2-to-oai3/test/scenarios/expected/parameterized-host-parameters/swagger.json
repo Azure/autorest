@@ -1,0 +1,103 @@
+{
+  "servers": [
+    {
+      "url": "{UriParam}{EnumParam}{StringParam}",
+      "variables": {
+        "StringParam": {
+          "x-name": "StringParam",
+          "x-in": "path",
+          "description": "Parameter that is a generic  string",
+          "x-required": true,
+          "x-type": "string",
+          "default": "https://api.cognitive.microsoft.com",
+          "x-ms-parameter-location": "client",
+          "x-ms-original": {
+            "$ref": "#/components/parameters/StringParam"
+          }
+        },
+        "UrlParam": {
+          "x-name": "UrlParam",
+          "x-in": "path",
+          "description": "Parameter that is formatted as url",
+          "x-required": true,
+          "x-type": "string",
+          "default": "https://api.cognitive.microsoft.com",
+          "x-ms-parameter-location": "client",
+          "x-ms-original": {
+            "$ref": "#/components/parameters/UrlParam"
+          }
+        },
+        "EnumParam": {
+          "x-name": "EnumParam",
+          "x-in": "path",
+          "description": "Shared endpoint param.",
+          "x-required": true,
+          "x-type": "string",
+          "enum": [
+            "v1",
+            "v2"
+          ],
+          "default": "v1",
+          "x-ms-parameter-location": "client",
+          "x-ms-original": {
+            "$ref": "#/components/parameters/EnumParam"
+          }
+        }
+      }
+    }
+  ],
+  "$schema": "https://github.com/OAI/OpenAPI-Specification/blob/master/schemas/v2.0/schema.json",
+  "openapi": "3.0.0",
+  "info": {
+    "x-ms-metadata": {
+      "apiVersions": [
+        "test-0.1"
+      ]
+    },
+    "title": "Test",
+    "description": "test",
+    "version": "test-0.1"
+  },
+  "paths": {},
+  "components": {
+    "parameters": {
+      "StringParam": {
+        "name": "StringParam",
+        "in": "path",
+        "description": "Parameter that is a generic  string",
+        "required": true,
+        "x-ms-parameter-location": "client",
+        "schema": {
+          "default": "https://api.cognitive.microsoft.com",
+          "type": "string"
+        }
+      },
+      "UrlParam": {
+        "name": "UrlParam",
+        "in": "path",
+        "description": "Parameter that is formatted as url",
+        "required": true,
+        "x-ms-parameter-location": "client",
+        "schema": {
+          "default": "https://api.cognitive.microsoft.com",
+          "type": "string"
+        }
+      },
+      "EnumParam": {
+        "name": "EnumParam",
+        "in": "path",
+        "description": "Shared endpoint param.",
+        "required": true,
+        "x-ms-parameter-location": "client",
+        "schema": {
+          "enum": [
+            "v1",
+            "v2"
+          ],
+          "default": "v1",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

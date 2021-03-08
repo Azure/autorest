@@ -3,7 +3,7 @@
 The V2 version of the C# Generator.
 
 ``` yaml $(csharp) && !$(legacy) && !$(v2) && !isRequested('@microsoft.azure/autorest.csharp')
-version: ~3.0.6298
+version: ~3.1.0
 
 use-extension:
   "@autorest/csharp": "latest"

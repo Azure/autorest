@@ -24,6 +24,11 @@ export interface AutorestDiagnostic {
    * location where the problem was found.
    */
   readonly source?: SourceLocation[];
+
+  /**
+   * Additional details.
+   */
+  readonly details?: Error | unknown;
 }
 
 export interface AutorestError extends AutorestDiagnostic {}
@@ -52,4 +57,9 @@ export interface AutorestLogger {
    * Track an error that occurred.
    */
   trackError(error: AutorestError): void;
+
+  /**
+   * Track an warning that occurred.
+   */
+  trackWarning(error: AutorestWarning): void;
 }

@@ -50,7 +50,7 @@ export class AutorestContextLoader {
 
   private static extensionManager: LazyPromise<ExtensionManager> = new LazyPromise<ExtensionManager>(() =>
     ExtensionManager.Create(
-      join(process.env["autorest.home"] || require("os").homedir(), ".autorest"),
+      join(process.env["AUTOREST_HOME"] || process.env["autorest.home"] || require("os").homedir(), ".autorest"),
       "yarn",
       pathToYarnCli,
     ),
@@ -66,7 +66,9 @@ export class AutorestContextLoader {
 
       // but if someone goes to use that, we're going to need a new instance (since the shared lock will be gone in the one we disposed.)
       AutorestContextLoader.extensionManager = new LazyPromise<ExtensionManager>(() =>
-        ExtensionManager.Create(join(process.env["autorest.home"] || require("os").homedir(), ".autorest")),
+        ExtensionManager.Create(
+          join(process.env["AUTOREST_HOME"] || process.env["autorest.home"] || require("os").homedir(), ".autorest"),
+        ),
       );
 
       for (const each in loadedExtensions) {

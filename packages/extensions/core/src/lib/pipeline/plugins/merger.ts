@@ -206,7 +206,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     for (const { value } of visit(node)) {
       if (value && typeof value === "object") {
         const ref = value.$ref;
-        if (ref && ref.startsWith("#")) {
+        if (ref && typeof ref === "string" && ref.startsWith("#")) {
           const fullRef = `${(<DataHandle>this.currentInput).originalFullPath}${ref}`;
           // change local refs to full ref
           value.$ref = fullRef;
@@ -275,7 +275,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
       }
       if (value && typeof value === "object") {
         const ref = value.$ref;
-        if (ref) {
+        if (ref && typeof ref === "string") {
           // see if this object has a $ref
           const newRef = this.refs[ref];
           if (newRef) {

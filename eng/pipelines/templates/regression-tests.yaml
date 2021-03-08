@@ -1,41 +1,53 @@
+parameters:
+  - name: name
+    type: string
+  - name: nodeVersion
+    type: string
+
 # Steps the for regresion test using autorest-compare.
-steps:
-  - download: current
-    artifact: packages
-    displayName: Download packages(.tgz)
+jobs:
+  - job: ${{ parameters.name }}
+    displayName: Node ${{ parameters.nodeVersion }}
+    variables:
+      AUTOREST_HOME: $(Build.SourcesDirectory) # Setting autorest.home to local path to prevent conflict with other parralel jobs in the same machine.
+    steps:
+      - download: current
+        artifact: packages
+        displayName: Download packages(.tgz)
 
-  - script: |
-      corePkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-core-*.tgz" )"
-      modelerfourPkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-modelerfour-*.tgz" )"
+      - script: |
+          corePkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-core-*.tgz" )"
+          modelerfourPkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-modelerfour-*.tgz" )"
 
-      [ -z "$corePkg" ] && echo "Error: Couldn't find autorest core package" && exit 1
-      [ -z "$modelerfourPkg" ] && echo "Error: Couldn't find autorest modelerfour package" && exit 1
+          [ -z "$corePkg" ] && echo "Error: Couldn't find autorest core package" && exit 1
+          [ -z "$modelerfourPkg" ] && echo "Error: Couldn't find autorest modelerfour package" && exit 1
 
-      echo "Found core package $corePkg"
-      echo "Found modelerfour package $modelerfourPkg"
+          echo "Found core package $corePkg"
+          echo "Found modelerfour package $modelerfourPkg"
 
-      sed -i "s,--version:../packages/extensions/core,--version:$corePkg," ./regression-tests/regression-compare.yaml
-      sed -i "s,--use:../packages/extensions/modelerfour,--use:$modelerfourPkg," ./regression-tests/regression-compare.yaml
-    displayName: Find packages path
+          sed -i "s,--version:../packages/extensions/core,--version:$corePkg," ./regression-tests/regression-compare.yaml
+          sed -i "s,--use:../packages/extensions/modelerfour,--use:$modelerfourPkg," ./regression-tests/regression-compare.yaml
+        displayName: Find packages path
 
-  - task: NodeTool@0
-    inputs:
-      versionSpec: "14.x"
-    displayName: "Install Node.js"
+      - task: NodeTool@0
+        inputs:
+          versionSpec: ${{ parameters.nodeVersion }}
+        displayName: "Install Node.js"
 
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: "3.x"
-    displayName: Install Python 3
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: "3.x"
+        displayName: Install Python 3
 
-  - script: |
-      npm install
-      npm install -g @autorest/compare@~0.3.6
-    displayName: Install autorest-compare
-    workingDirectory: regression-tests
+      - script: |
+          npm install
+          npm install -g @autorest/compare@~0.3.6
+          node -e "console.log('process env', process.env)"
+        displayName: Install autorest-compare
+        workingDirectory: regression-tests
 
-  - script: autorest-compare --compare:./regression-tests/regression-compare.yaml --language:python
-    displayName: Regression Test - @autorest/python
+      - script: autorest-compare --compare:./regression-tests/regression-compare.yaml --language:python
+        displayName: Regression Test - @autorest/python
 
-  - script: autorest-compare --compare:./regression-tests/regression-compare.yaml --language:typescript
-    displayName: Regression Test - @autorest/typescript
+      - script: autorest-compare --compare:./regression-tests/regression-compare.yaml --language:typescript
+        displayName: Regression Test - @autorest/typescript

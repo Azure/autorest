@@ -1,6 +1,14 @@
 # Change Log - autorest
 
-This log was last generated on Sun, 21 Feb 2021 05:37:47 GMT and should not be manually modified.
+This log was last generated on Fri, 26 Feb 2021 21:50:13 GMT and should not be manually modified.
+
+## 3.1.2
+Fri, 26 Feb 2021 21:50:13 GMT
+
+### Patches
+
+- **Removed** isConfigurationDocument, use @autorest/configuration package to get this function
+- Always load sourcemaps
 
 ## 3.1.1
 Sun, 21 Feb 2021 05:37:47 GMT
