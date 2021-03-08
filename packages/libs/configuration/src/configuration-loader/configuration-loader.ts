@@ -1,4 +1,4 @@
-import { CancellationToken, DataStore, IFileSystem, RealFileSystem } from "@azure-tools/datastore";
+import { DataStore, IFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import { Extension, ExtensionManager, LocalExtension } from "@azure-tools/extension";
 import { CreateFileUri, ResolveUri, simplifyUri, FileUriToPath } from "@azure-tools/uri";
 import { AutorestLogger } from "@autorest/common";

@@ -22,6 +22,11 @@ module.exports = {
     new CopyPlugin({
       patterns: [{ from: "node_modules/@azure-tools/extension/dist/yarn/cli.js", to: "yarn/cli.js" }],
     }),
+
+    // We need to copy the default configuration resources files.
+    new CopyPlugin({
+      patterns: [{ from: "node_modules/@autorest/configuration/resources", to: "resources" }],
+    }),
   ],
   optimization: {
     ...baseWebpackConfig.optimization,

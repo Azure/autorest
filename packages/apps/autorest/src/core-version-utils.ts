@@ -1,6 +1,14 @@
 import { AutorestArgs } from "./args";
 import { ConfigurationLoader } from "@autorest/configuration";
 import { AutorestLogger } from "../../../libs/configuration/node_modules/@autorest/common/dist";
+import { CreateFileOrFolderUri, CreateFolderUri, ResolveUri } from "@azure-tools/uri";
+import { AppRoot } from "./constants";
+
+const inWebpack = typeof __webpack_require__ === "function";
+const nodeRequire = inWebpack ? __non_webpack_require__ : require;
+const defaultConfigUri = inWebpack
+  ? ResolveUri(CreateFolderUri(AppRoot), `dist/resources/default-configuration.md`)
+  : CreateFileOrFolderUri(nodeRequire.resolve("@autorest/configuration/resources/default-configuration.md"));
 
 /**
  * Return the version requested of the core extension.
@@ -28,7 +36,7 @@ export const findCoreVersionUsingConfiguration = async (args: AutorestArgs): Pro
   };
   /* eslint-enable no-console */
 
-  const loader = new ConfigurationLoader(logger, configFileOrFolder);
+  const loader = new ConfigurationLoader(logger, defaultConfigUri, configFileOrFolder);
   const { config } = await loader.load([args], false);
   return config.version;
 };
