@@ -2,6 +2,18 @@
   "name": "@autorest/configuration",
   "entries": [
     {
+      "version": "1.1.2",
+      "tag": "@autorest/configuration_v1.1.2",
+      "date": "Mon, 08 Mar 2021 18:07:37 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Loading --require configuration added from the CLI before default configuration"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.1",
       "tag": "@autorest/configuration_v1.1.1",
       "date": "Fri, 05 Mar 2021 16:31:29 GMT",
