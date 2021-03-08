@@ -61,8 +61,7 @@
   "components": {
     "schemas": {
       "PetType": {
-        "type": "string",
-        "enum": ["type_dog", "type_cat"]
+        "type": "string"
       },
       "Pet": {
         "type": "object",
@@ -78,8 +77,8 @@
         "discriminator": {
           "propertyName": "pet_type",
           "mapping": {
-            "fiat": "#/components/schemas/Cat",
-            "crypto": "#/components/schemas/Dog"
+            "type_cat": "#/components/schemas/Cat",
+            "type_dog": "#/components/schemas/Dog"
           }
         }
       },
