@@ -15,107 +15,7 @@
       "url": "http://localhost"
     }
   ],
-  "paths": {
-    "path:0": {
-      "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://discriminator-mapping/discriminator-mapping.json"
-        ],
-        "path": "/dog/",
-        "originalLocations": [
-          "discriminator-mapping/discriminator-mapping.json#/paths/~1dog~1"
-        ]
-      }
-    },
-    "path:0.put": {
-      "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://discriminator-mapping/discriminator-mapping.json"
-        ],
-        "path": "/dog/",
-        "originalLocations": [
-          "discriminator-mapping/discriminator-mapping.json#/paths/~1dog~1"
-        ]
-      },
-      "put": {
-        "operationId": "put_dog",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/schemas:3"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "ok"
-          },
-          "default": {
-            "description": "error"
-          }
-        }
-      }
-    },
-    "path:1": {
-      "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://discriminator-mapping/discriminator-mapping.json"
-        ],
-        "path": "/pet/",
-        "originalLocations": [
-          "discriminator-mapping/discriminator-mapping.json#/paths/~1pet~1"
-        ]
-      }
-    },
-    "path:1.get": {
-      "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://discriminator-mapping/discriminator-mapping.json"
-        ],
-        "path": "/pet/",
-        "originalLocations": [
-          "discriminator-mapping/discriminator-mapping.json#/paths/~1pet~1"
-        ]
-      },
-      "get": {
-        "operationId": "get_pet",
-        "responses": {
-          "200": {
-            "description": "ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/schemas:1",
-                  "example": {
-                    "name": "Nora",
-                    "bark": false,
-                    "pet_type": "type_dog"
-                  }
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "error"
-          }
-        }
-      }
-    }
-  },
+  "paths": {},
   "components": {
     "schemas": {
       "schemas:0": {
@@ -132,11 +32,7 @@
           ],
           "x-ms-secondary-file": false
         },
-        "type": "string",
-        "enum": [
-          "type_dog",
-          "type_cat"
-        ]
+        "type": "string"
       },
       "schemas:1": {
         "x-ms-metadata": {
@@ -168,8 +64,8 @@
         "discriminator": {
           "propertyName": "pet_type",
           "mapping": {
-            "fiat": "#/components/schemas/schemas:2",
-            "crypto": "#/components/schemas/schemas:3"
+            "type_cat": "#/components/schemas/schemas:2",
+            "type_dog": "#/components/schemas/schemas:3"
           }
         }
       },
