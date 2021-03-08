@@ -66,7 +66,7 @@ export class AutoRest extends EventEmitter {
   public constructor(private fileSystem: IFileSystem = new RealFileSystem(), public configFileOrFolderUri?: string) {
     super();
     // ensure the environment variable for the home folder is set.
-    process.env["autorest.home"] = process.env["autorest.home"] || homedir();
+    process.env["autorest.home"] = process.env["AUTOREST_HOME"] || process.env["autorest.home"] || homedir();
   }
 
   public async RegenerateView(includeDefault = false): Promise<AutorestContext> {

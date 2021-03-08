@@ -9,7 +9,7 @@ jobs:
   - job: ${{ parameters.name }}
     displayName: Node ${{ parameters.nodeVersion }}
     variables:
-      autorest.home: $(Agent.SourcesDirectory) # Setting autorest.home to local path to prevent conflict with other parralel jobs in the same machine.
+      autorest_home: $(Agent.SourcesDirectory) # Setting autorest.home to local path to prevent conflict with other parralel jobs in the same machine.
     steps:
       - download: current
         artifact: packages
