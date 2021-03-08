@@ -1,0 +1,260 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "x-ms-metadata": {
+      "merged": true,
+      "apiVersions": [
+        "1.0.0"
+      ]
+    },
+    "title": "Pet Store",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost"
+    }
+  ],
+  "paths": {
+    "path:0": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem://discriminator-mapping/discriminator-mapping.json"
+        ],
+        "path": "/dog/",
+        "originalLocations": [
+          "discriminator-mapping/discriminator-mapping.json#/paths/~1dog~1"
+        ]
+      }
+    },
+    "path:0.put": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem://discriminator-mapping/discriminator-mapping.json"
+        ],
+        "path": "/dog/",
+        "originalLocations": [
+          "discriminator-mapping/discriminator-mapping.json#/paths/~1dog~1"
+        ]
+      },
+      "put": {
+        "operationId": "put_dog",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/schemas:3"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ok"
+          },
+          "default": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "path:1": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem://discriminator-mapping/discriminator-mapping.json"
+        ],
+        "path": "/pet/",
+        "originalLocations": [
+          "discriminator-mapping/discriminator-mapping.json#/paths/~1pet~1"
+        ]
+      }
+    },
+    "path:1.get": {
+      "x-ms-metadata": {
+        "apiVersions": [
+          "1.0.0"
+        ],
+        "filename": [
+          "mem://discriminator-mapping/discriminator-mapping.json"
+        ],
+        "path": "/pet/",
+        "originalLocations": [
+          "discriminator-mapping/discriminator-mapping.json#/paths/~1pet~1"
+        ]
+      },
+      "get": {
+        "operationId": "get_pet",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/schemas:1",
+                  "example": {
+                    "name": "Nora",
+                    "bark": false,
+                    "pet_type": "type_dog"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "schemas:0": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem://discriminator-mapping/discriminator-mapping.json"
+          ],
+          "name": "PetType",
+          "originalLocations": [
+            "discriminator-mapping/discriminator-mapping.json#/components/schemas/PetType"
+          ],
+          "x-ms-secondary-file": false
+        },
+        "type": "string",
+        "enum": [
+          "type_dog",
+          "type_cat"
+        ]
+      },
+      "schemas:1": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem://discriminator-mapping/discriminator-mapping.json"
+          ],
+          "name": "Pet",
+          "originalLocations": [
+            "discriminator-mapping/discriminator-mapping.json#/components/schemas/Pet"
+          ],
+          "x-ms-secondary-file": false
+        },
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "pet_type": {
+            "$ref": "#/components/schemas/schemas:0"
+          }
+        },
+        "required": [
+          "name",
+          "pet_type"
+        ],
+        "discriminator": {
+          "propertyName": "pet_type",
+          "mapping": {
+            "fiat": "#/components/schemas/schemas:2",
+            "crypto": "#/components/schemas/schemas:3"
+          }
+        }
+      },
+      "schemas:2": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem://discriminator-mapping/discriminator-mapping.json"
+          ],
+          "name": "Cat",
+          "originalLocations": [
+            "discriminator-mapping/discriminator-mapping.json#/components/schemas/Cat"
+          ],
+          "x-ms-secondary-file": false
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/schemas:1"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "hunting": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "schemas:3": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem://discriminator-mapping/discriminator-mapping.json"
+          ],
+          "name": "Dog",
+          "originalLocations": [
+            "discriminator-mapping/discriminator-mapping.json#/components/schemas/Dog"
+          ],
+          "x-ms-secondary-file": false
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/schemas:1"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "bark": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "schemas:4": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem://discriminator-mapping/discriminator-mapping.json"
+          ],
+          "name": "ModelWithMappingProp",
+          "originalLocations": [
+            "discriminator-mapping/discriminator-mapping.json#/components/schemas/ModelWithMappingProp"
+          ],
+          "x-ms-secondary-file": false
+        },
+        "type": "object",
+        "properties": {
+          "mapping": {
+            "type": "object",
+            "properties": {
+              "enabled": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

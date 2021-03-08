@@ -1,0 +1,131 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Pet Store",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost"
+    }
+  ],
+  "paths": {
+    "/dog/": {
+      "put": {
+        "operationId": "put_dog",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Dog"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ok"
+          },
+          "default": {
+            "description": "error"
+          }
+        }
+      }
+    },
+    "/pet/": {
+      "get": {
+        "operationId": "get_pet",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet",
+                  "example": {
+                    "name": "Nora",
+                    "bark": false,
+                    "pet_type": "type_dog"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PetType": {
+        "type": "string",
+        "enum": ["type_dog", "type_cat"]
+      },
+      "Pet": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "pet_type": {
+            "$ref": "#/components/schemas/PetType"
+          }
+        },
+        "required": ["name", "pet_type"],
+        "discriminator": {
+          "propertyName": "pet_type",
+          "mapping": {
+            "fiat": "#/components/schemas/Cat",
+            "crypto": "#/components/schemas/Dog"
+          }
+        }
+      },
+      "Cat": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Pet"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "hunting": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "Dog": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Pet"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "bark": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "ModelWithMappingProp": {
+        "type": "object",
+        "properties": {
+          "mapping": {
+            "type": "object",
+            "properties": {
+              "enabled": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

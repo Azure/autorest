@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
-    "version": "1.0.0",
+    "description": "v1.0.2 -This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
+    "version": "1.0.2",
     "title": "Swagger Petstore",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
@@ -16,21 +16,21 @@
   "tags": [
     {
       "name": "pet",
-      "description": "Everything about your Pets",
+      "description": "v1.0.2 -Everything about your Pets",
       "externalDocs": {
-        "description": "Find out more",
+        "description": "v1.0.2 -Find out more",
         "url": "http://swagger.io"
       }
     },
     {
       "name": "store",
-      "description": "Access to Petstore orders"
+      "description": "v1.0.2 -Access to Petstore orders"
     },
     {
       "name": "user",
-      "description": "Operations about user",
+      "description": "v1.0.2 -Operations about user",
       "externalDocs": {
-        "description": "Find out more about our store",
+        "description": "v1.0.2 -Find out more about our store",
         "url": "http://swagger.io"
       }
     }
@@ -38,23 +38,18 @@
   "paths": {
     "/pet": {
       "post": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Add a new pet to the store",
-        "description": "",
+        "description": "v1.0.2 -",
         "operationId": "addPet",
         "responses": {
           "405": {
-            "description": "Invalid input"
+            "description": "v1.0.2 -Invalid input"
           }
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ],
         "requestBody": {
@@ -71,35 +66,30 @@
               }
             }
           },
-          "description": "Pet object that needs to be added to the store",
+          "description": "v1.0.2 -Pet object that needs to be added to the store",
           "required": true
         },
         "x-ms-requestBody-index": 0
       },
       "put": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Update an existing pet",
-        "description": "",
+        "description": "v1.0.2 -",
         "operationId": "updatePet",
         "responses": {
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "v1.0.2 -Invalid ID supplied"
           },
           "404": {
-            "description": "Pet not found"
+            "description": "v1.0.2 -Pet not found"
           },
           "405": {
-            "description": "Validation exception"
+            "description": "v1.0.2 -Validation exception"
           }
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ],
         "requestBody": {
@@ -116,7 +106,7 @@
               }
             }
           },
-          "description": "Pet object that needs to be added to the store",
+          "description": "v1.0.2 -Pet object that needs to be added to the store",
           "required": true
         },
         "x-ms-requestBody-index": 0
@@ -124,28 +114,22 @@
     },
     "/pet/findByStatus": {
       "get": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Finds Pets by status",
-        "description": "Multiple status values can be provided with comma separated strings",
+        "description": "v1.0.2 -Multiple status values can be provided with comma separated strings",
         "operationId": "findPetsByStatus",
         "parameters": [
           {
             "name": "status",
             "in": "query",
-            "description": "Status values that need to be considered for filter",
+            "description": "v1.0.2 -Status values that need to be considered for filter",
             "required": true,
             "explode": true,
             "schema": {
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": [
-                  "available",
-                  "pending",
-                  "sold"
-                ],
+                "enum": ["available", "pending", "sold"],
                 "default": "available"
               }
             }
@@ -153,7 +137,7 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "v1.0.2 -successful operation",
             "content": {
               "application/xml": {
                 "schema": {
@@ -174,32 +158,27 @@
             }
           },
           "400": {
-            "description": "Invalid status value"
+            "description": "v1.0.2 -Invalid status value"
           }
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ]
       }
     },
     "/pet/findByTags": {
       "get": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Finds Pets by tags",
-        "description": "Muliple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
+        "description": "v1.0.2 -Muliple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
         "operationId": "findPetsByTags",
         "parameters": [
           {
             "name": "tags",
             "in": "query",
-            "description": "Tags to filter by",
+            "description": "v1.0.2 -Tags to filter by",
             "required": true,
             "explode": true,
             "schema": {
@@ -212,7 +191,7 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "v1.0.2 -successful operation",
             "content": {
               "application/xml": {
                 "schema": {
@@ -233,15 +212,12 @@
             }
           },
           "400": {
-            "description": "Invalid tag value"
+            "description": "v1.0.2 -Invalid tag value"
           }
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ],
         "deprecated": true
@@ -249,17 +225,15 @@
     },
     "/pet/{petId}": {
       "get": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Find pet by ID",
-        "description": "Returns a single pet",
+        "description": "v1.0.2 -Returns a single pet",
         "operationId": "getPetById",
         "parameters": [
           {
             "name": "petId",
             "in": "path",
-            "description": "ID of pet to return",
+            "description": "v1.0.2 -ID of pet to return",
             "required": true,
             "schema": {
               "type": "integer",
@@ -269,7 +243,7 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "v1.0.2 -successful operation",
             "content": {
               "application/xml": {
                 "schema": {
@@ -284,10 +258,10 @@
             }
           },
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "v1.0.2 -Invalid ID supplied"
           },
           "404": {
-            "description": "Pet not found"
+            "description": "v1.0.2 -Pet not found"
           }
         },
         "security": [
@@ -297,17 +271,15 @@
         ]
       },
       "post": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Updates a pet in the store with form data",
-        "description": "",
+        "description": "v1.0.2 -",
         "operationId": "updatePetWithForm",
         "parameters": [
           {
             "name": "petId",
             "in": "path",
-            "description": "ID of pet that needs to be updated",
+            "description": "v1.0.2 -ID of pet that needs to be updated",
             "required": true,
             "schema": {
               "type": "integer",
@@ -317,15 +289,12 @@
         ],
         "responses": {
           "405": {
-            "description": "Invalid input"
+            "description": "v1.0.2 -Invalid input"
           }
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ],
         "requestBody": {
@@ -336,11 +305,11 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "description": "Updated name of the pet",
+                    "description": "v1.0.2 -Updated name of the pet",
                     "type": "string"
                   },
                   "status": {
-                    "description": "Updated status of the pet",
+                    "description": "v1.0.2 -Updated status of the pet",
                     "type": "string"
                   }
                 },
@@ -352,11 +321,9 @@
         "x-ms-requestBody-index": 2
       },
       "delete": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Deletes a pet",
-        "description": "",
+        "description": "v1.0.2 -",
         "operationId": "deletePet",
         "parameters": [
           {
@@ -370,7 +337,7 @@
           {
             "name": "petId",
             "in": "path",
-            "description": "Pet id to delete",
+            "description": "v1.0.2 -Pet id to delete",
             "required": true,
             "schema": {
               "type": "integer",
@@ -380,35 +347,30 @@
         ],
         "responses": {
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "v1.0.2 -Invalid ID supplied"
           },
           "404": {
-            "description": "Pet not found"
+            "description": "v1.0.2 -Pet not found"
           }
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ]
       }
     },
     "/pet/{petId}/uploadImage": {
       "post": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "uploads an image",
-        "description": "",
+        "description": "v1.0.2 -",
         "operationId": "uploadFile",
         "parameters": [
           {
             "name": "petId",
             "in": "path",
-            "description": "ID of pet to update",
+            "description": "v1.0.2 -ID of pet to update",
             "required": true,
             "schema": {
               "type": "integer",
@@ -418,7 +380,7 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "v1.0.2 -successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -430,10 +392,7 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ],
         "requestBody": {
@@ -444,11 +403,11 @@
                 "type": "object",
                 "properties": {
                   "additionalMetadata": {
-                    "description": "Additional data to pass to server",
+                    "description": "v1.0.2 -Additional data to pass to server",
                     "type": "string"
                   },
                   "file": {
-                    "description": "file to upload",
+                    "description": "v1.0.2 -file to upload",
                     "type": "file"
                   }
                 },
@@ -462,15 +421,13 @@
     },
     "/store/inventory": {
       "get": {
-        "tags": [
-          "store"
-        ],
+        "tags": ["store"],
         "summary": "Returns pet inventories by status",
-        "description": "Returns a map of status codes to quantities",
+        "description": "v1.0.2 -Returns a map of status codes to quantities",
         "operationId": "getInventory",
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "v1.0.2 -successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -493,15 +450,13 @@
     },
     "/store/order": {
       "post": {
-        "tags": [
-          "store"
-        ],
+        "tags": ["store"],
         "summary": "Place an order for a pet",
-        "description": "",
+        "description": "v1.0.2 -",
         "operationId": "placeOrder",
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "v1.0.2 -successful operation",
             "content": {
               "application/xml": {
                 "schema": {
@@ -516,7 +471,7 @@
             }
           },
           "400": {
-            "description": "Invalid Order"
+            "description": "v1.0.2 -Invalid Order"
           }
         },
         "requestBody": {
@@ -528,7 +483,7 @@
               }
             }
           },
-          "description": "order placed for purchasing the pet",
+          "description": "v1.0.2 -order placed for purchasing the pet",
           "required": true
         },
         "x-ms-requestBody-index": 0
@@ -536,17 +491,15 @@
     },
     "/store/order/{orderId}": {
       "get": {
-        "tags": [
-          "store"
-        ],
+        "tags": ["store"],
         "summary": "Find purchase order by ID",
-        "description": "For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions",
+        "description": "v1.0.2 -For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions",
         "operationId": "getOrderById",
         "parameters": [
           {
             "name": "orderId",
             "in": "path",
-            "description": "ID of pet that needs to be fetched",
+            "description": "v1.0.2 -ID of pet that needs to be fetched",
             "required": true,
             "schema": {
               "type": "integer",
@@ -558,7 +511,7 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "v1.0.2 -successful operation",
             "content": {
               "application/xml": {
                 "schema": {
@@ -573,25 +526,23 @@
             }
           },
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "v1.0.2 -Invalid ID supplied"
           },
           "404": {
-            "description": "Order not found"
+            "description": "v1.0.2 -Order not found"
           }
         }
       },
       "delete": {
-        "tags": [
-          "store"
-        ],
+        "tags": ["store"],
         "summary": "Delete purchase order by ID",
-        "description": "For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors",
+        "description": "v1.0.2 -For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors",
         "operationId": "deleteOrder",
         "parameters": [
           {
             "name": "orderId",
             "in": "path",
-            "description": "ID of the order that needs to be deleted",
+            "description": "v1.0.2 -ID of the order that needs to be deleted",
             "required": true,
             "schema": {
               "type": "integer",
@@ -602,25 +553,23 @@
         ],
         "responses": {
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "v1.0.2 -Invalid ID supplied"
           },
           "404": {
-            "description": "Order not found"
+            "description": "v1.0.2 -Order not found"
           }
         }
       }
     },
     "/user": {
       "post": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Create user",
-        "description": "This can only be done by the logged in user.",
+        "description": "v1.0.2 -This can only be done by the logged in user.",
         "operationId": "createUser",
         "responses": {
           "default": {
-            "description": "successful operation"
+            "description": "v1.0.2 -successful operation"
           }
         },
         "requestBody": {
@@ -632,7 +581,7 @@
               }
             }
           },
-          "description": "Created user object",
+          "description": "v1.0.2 -Created user object",
           "required": true
         },
         "x-ms-requestBody-index": 0
@@ -640,15 +589,13 @@
     },
     "/user/createWithArray": {
       "post": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Creates list of users with given input array",
-        "description": "",
+        "description": "v1.0.2 -",
         "operationId": "createUsersWithArrayInput",
         "responses": {
           "default": {
-            "description": "successful operation"
+            "description": "v1.0.2 -successful operation"
           }
         },
         "requestBody": {
@@ -663,7 +610,7 @@
               }
             }
           },
-          "description": "List of user object",
+          "description": "v1.0.2 -List of user object",
           "required": true
         },
         "x-ms-requestBody-index": 0
@@ -671,15 +618,13 @@
     },
     "/user/createWithList": {
       "post": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Creates list of users with given input array",
-        "description": "",
+        "description": "v1.0.2 -",
         "operationId": "createUsersWithListInput",
         "responses": {
           "default": {
-            "description": "successful operation"
+            "description": "v1.0.2 -successful operation"
           }
         },
         "requestBody": {
@@ -694,7 +639,7 @@
               }
             }
           },
-          "description": "List of user object",
+          "description": "v1.0.2 -List of user object",
           "required": true
         },
         "x-ms-requestBody-index": 0
@@ -702,17 +647,15 @@
     },
     "/user/login": {
       "get": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Logs user into the system",
-        "description": "",
+        "description": "v1.0.2 -",
         "operationId": "loginUser",
         "parameters": [
           {
             "name": "username",
             "in": "query",
-            "description": "The user name for login",
+            "description": "v1.0.2 -The user name for login",
             "required": true,
             "schema": {
               "type": "string"
@@ -721,7 +664,7 @@
           {
             "name": "password",
             "in": "query",
-            "description": "The password for login in clear text",
+            "description": "v1.0.2 -The password for login in clear text",
             "required": true,
             "schema": {
               "type": "string",
@@ -731,17 +674,17 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "v1.0.2 -successful operation",
             "headers": {
               "X-Rate-Limit": {
-                "description": "calls per hour allowed by the user",
+                "description": "v1.0.2 -calls per hour allowed by the user",
                 "schema": {
                   "type": "integer",
                   "format": "int32"
                 }
               },
               "X-Expires-After": {
-                "description": "date in UTC when token expires",
+                "description": "v1.0.2 -date in UTC when token expires",
                 "schema": {
                   "type": "string",
                   "format": "date-time"
@@ -762,39 +705,35 @@
             }
           },
           "400": {
-            "description": "Invalid username/password supplied"
+            "description": "v1.0.2 -Invalid username/password supplied"
           }
         }
       }
     },
     "/user/logout": {
       "get": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Logs out current logged in user session",
-        "description": "",
+        "description": "v1.0.2 -",
         "operationId": "logoutUser",
         "responses": {
           "default": {
-            "description": "successful operation"
+            "description": "v1.0.2 -successful operation"
           }
         }
       }
     },
     "/user/{username}": {
       "get": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Get user by user name",
-        "description": "",
+        "description": "v1.0.2 -",
         "operationId": "getUserByName",
         "parameters": [
           {
             "name": "username",
             "in": "path",
-            "description": "The name that needs to be fetched. Use user1 for testing. ",
+            "description": "v1.0.2 -The name that needs to be fetched. Use user1 for testing. ",
             "required": true,
             "schema": {
               "type": "string"
@@ -803,7 +742,7 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "v1.0.2 -successful operation",
             "content": {
               "application/xml": {
                 "schema": {
@@ -818,25 +757,23 @@
             }
           },
           "400": {
-            "description": "Invalid username supplied"
+            "description": "v1.0.2 -Invalid username supplied"
           },
           "404": {
-            "description": "User not found"
+            "description": "v1.0.2 -User not found"
           }
         }
       },
       "put": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Updated user",
-        "description": "This can only be done by the logged in user.",
+        "description": "v1.0.2 -This can only be done by the logged in user.",
         "operationId": "updateUser",
         "parameters": [
           {
             "name": "username",
             "in": "path",
-            "description": "name that need to be updated",
+            "description": "v1.0.2 -name that need to be updated",
             "required": true,
             "schema": {
               "type": "string"
@@ -845,10 +782,10 @@
         ],
         "responses": {
           "400": {
-            "description": "Invalid user supplied"
+            "description": "v1.0.2 -Invalid user supplied"
           },
           "404": {
-            "description": "User not found"
+            "description": "v1.0.2 -User not found"
           }
         },
         "requestBody": {
@@ -860,23 +797,21 @@
               }
             }
           },
-          "description": "Updated user object",
+          "description": "v1.0.2 -Updated user object",
           "required": true
         },
         "x-ms-requestBody-index": 1
       },
       "delete": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Delete user",
-        "description": "This can only be done by the logged in user.",
+        "description": "v1.0.2 -This can only be done by the logged in user.",
         "operationId": "deleteUser",
         "parameters": [
           {
             "name": "username",
             "in": "path",
-            "description": "The name that needs to be deleted",
+            "description": "v1.0.2 -The name that needs to be deleted",
             "required": true,
             "schema": {
               "type": "string"
@@ -885,17 +820,17 @@
         ],
         "responses": {
           "400": {
-            "description": "Invalid username supplied"
+            "description": "v1.0.2 -Invalid username supplied"
           },
           "404": {
-            "description": "User not found"
+            "description": "v1.0.2 -User not found"
           }
         }
       }
     }
   },
   "externalDocs": {
-    "description": "Find out more about Swagger",
+    "description": "v1.0.2 -Find out more about Swagger",
     "url": "http://swagger.io"
   },
   "servers": [
@@ -945,12 +880,8 @@
           },
           "status": {
             "type": "string",
-            "description": "Order Status",
-            "enum": [
-              "placed",
-              "approved",
-              "delivered"
-            ]
+            "description": "v1.0.2 -This is the Order Status description for api 1.0.2",
+            "enum": ["placed", "approved", "delivered"]
           },
           "complete": {
             "type": "boolean",
@@ -1004,7 +935,7 @@
           "userStatus": {
             "type": "integer",
             "format": "int32",
-            "description": "User Status"
+            "description": "v1.0.2 -This is the User Status for version 1.0.2"
           }
         },
         "xml": {
@@ -1028,10 +959,7 @@
       },
       "Pet": {
         "type": "object",
-        "required": [
-          "name",
-          "photoUrls"
-        ],
+        "required": ["name", "photoUrls"],
         "properties": {
           "id": {
             "type": "integer",
@@ -1066,12 +994,8 @@
           },
           "status": {
             "type": "string",
-            "description": "pet status in the store",
-            "enum": [
-              "available",
-              "pending",
-              "sold"
-            ]
+            "description": "v1.0.2 -this is the pet status in the store for version 1.0.2",
+            "enum": ["available", "pending", "sold"]
           }
         },
         "xml": {
