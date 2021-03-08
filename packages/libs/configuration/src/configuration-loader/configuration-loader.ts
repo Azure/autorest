@@ -110,7 +110,7 @@ export class ConfigurationLoader {
 
     // 3. default configuration
     const fsLocal = new RealFileSystem();
-    if (this.defaultConfigUri && includeDefault) {
+    if (includeDefault) {
       await loadConfigFile(this.defaultConfigUri, fsLocal);
     }
 
