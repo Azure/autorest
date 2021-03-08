@@ -23,4 +23,9 @@ async function main() {
   await pluginHost.Run();
 }
 
-void main();
+main().catch((error) => {
+  // eslint-disable-next-line no-console
+  console.error("Modelerfour exited with uncaught error", error);
+  // eslint-disable-next-line no-process-exit
+  process.exit(1);
+});
