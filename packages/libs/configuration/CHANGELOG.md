@@ -1,6 +1,13 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Fri, 05 Mar 2021 16:31:29 GMT and should not be manually modified.
+This log was last generated on Mon, 08 Mar 2021 18:07:37 GMT and should not be manually modified.
+
+## 1.1.2
+Mon, 08 Mar 2021 18:07:37 GMT
+
+### Patches
+
+- **Fix** Loading --require configuration added from the CLI before default configuration
 
 ## 1.1.1
 Fri, 05 Mar 2021 16:31:29 GMT

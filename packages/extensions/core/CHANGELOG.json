@@ -2,6 +2,26 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.1.2",
+      "tag": "@autorest/core_v3.1.2",
+      "date": "Mon, 08 Mar 2021 18:07:37 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Set @autorest/typescript default version to 'latest'"
+          },
+          {
+            "comment": "**Update** @autorest/configuration dependency to update `--require` cli load order fix"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/configuration\" from `~1.1.1` to `~1.1.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.1.1",
       "tag": "@autorest/core_v3.1.1",
       "date": "Fri, 05 Mar 2021 16:31:29 GMT",
