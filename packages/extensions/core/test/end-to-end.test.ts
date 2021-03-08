@@ -38,10 +38,33 @@ describe("EndToEnd", () => {
       },
     });
 
+    const messages: Message[] = [];
+    const channels = new Set([
+      Channel.Information,
+      Channel.Warning,
+      Channel.Error,
+      Channel.Fatal,
+      Channel.Debug,
+      Channel.Verbose,
+    ]);
+
+    autoRest.Message.Subscribe((_, message) => {
+      if (channels.has(message.Channel)) {
+        messages.push(message);
+      }
+    });
+
     // TODO: generate for all, probe results
 
     const success = await autoRest.Process().finish;
-    assert.strictEqual(success, true);
+
+    if (!success) {
+      // eslint-disable-next-line no-console
+      console.log("Messages", messages);
+      fail("Autorest didn't complete with success.");
+    }
+
+    expect(success).toBe(true);
   });
 
   it("other configuration scenario", async () => {

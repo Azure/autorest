@@ -1,0 +1,9 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Base spec",
+    "version": "1.0",
+    "unexpectedProperty": "value"
+  },
+  "paths": {}
+}
