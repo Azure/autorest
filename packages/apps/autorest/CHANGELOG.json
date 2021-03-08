@@ -2,6 +2,29 @@
   "name": "autorest",
   "entries": [
     {
+      "version": "3.1.2",
+      "tag": "autorest_v3.1.2",
+      "date": "Fri, 26 Feb 2021 21:50:13 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Removed** isConfigurationDocument, use @autorest/configuration package to get this function"
+          },
+          {
+            "comment": "Always load sourcemaps"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/core\" from `~3.0.6375` to `~3.1.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/extension\" from `~3.2.0` to `~3.2.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.1.1",
       "tag": "autorest_v3.1.1",
       "date": "Sun, 21 Feb 2021 05:37:47 GMT",

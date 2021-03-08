@@ -2,6 +2,30 @@
   "name": "@azure-tools/extension",
   "entries": [
     {
+      "version": "3.2.3",
+      "tag": "@azure-tools/extension_v3.2.3",
+      "date": "Fri, 05 Mar 2021 16:31:29 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Revert** not using global yarnrc and change to prevent yarn from loading alternate version"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.2.2",
+      "tag": "@azure-tools/extension_v3.2.2",
+      "date": "Fri, 26 Feb 2021 21:50:13 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Prevent single-file yarn from loading user config and changing version"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.2.1",
       "tag": "@azure-tools/extension_v3.2.1",
       "date": "Wed, 24 Feb 2021 00:33:50 GMT",

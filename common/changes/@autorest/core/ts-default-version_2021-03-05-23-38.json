@@ -2,10 +2,10 @@
   "changes": [
     {
       "packageName": "@autorest/core",
-      "comment": "**Update** Moved configuration loading from @autorest/core and redesign",
+      "comment": "Set @autorest/typescript default version to 'latest'",
       "type": "patch"
     }
   ],
   "packageName": "@autorest/core",
-  "email": "tiguerin@microsoft.com"
+  "email": "joheredi@microsoft.com"
 }

@@ -2,6 +2,57 @@
   "name": "@autorest/configuration",
   "entries": [
     {
+      "version": "1.1.1",
+      "tag": "@autorest/configuration_v1.1.1",
+      "date": "Fri, 05 Mar 2021 16:31:29 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** issue where interpolating a value defined in the same block wouldn't be able to be overwritten by previous configs"
+          },
+          {
+            "comment": "**Fix** Load arrays in the order they are defined within the same file(Resolve issue with directive loaded in inverted order)"
+          },
+          {
+            "comment": "Revert use of flatmap"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.0.3` to `~1.1.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/extension\" from `~3.2.2` to `~3.2.3`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.1.0",
+      "tag": "@autorest/configuration_v1.1.0",
+      "date": "Fri, 26 Feb 2021 21:50:13 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Update** Moved configuration loading from @autorest/core and redesign"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "**Fix** Plugins with nested configuration file requiring other plugins wasn't loading those plugins"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.0.2` to `~1.0.3`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/extension\" from `~3.2.0` to `~3.2.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.1",
       "tag": "@autorest/configuration_v1.0.1",
       "date": "Fri, 19 Feb 2021 21:42:09 GMT",

@@ -1,6 +1,26 @@
 # Change Log - @autorest/core
 
-This log was last generated on Sat, 20 Feb 2021 17:49:35 GMT and should not be manually modified.
+This log was last generated on Fri, 05 Mar 2021 16:31:29 GMT and should not be manually modified.
+
+## 3.1.1
+Fri, 05 Mar 2021 16:31:29 GMT
+
+### Patches
+
+- **Rename** trenton plugin to terraform
+- **Fix** Handle using extension properties(x-) under components in OpenAPI3
+
+## 3.1.0
+Fri, 26 Feb 2021 21:50:13 GMT
+
+### Minor changes
+
+- **Remove** legacy CLI functionality(Using arguments with single dash).
+
+### Patches
+
+- **Update** Moved configuration loading from @autorest/core and redesign
+- **Fix** issue when using properties with `$ref` as name where it would try to resolve a reference.
 
 ## 3.0.6375
 Sat, 20 Feb 2021 17:49:35 GMT
@@ -63,7 +83,7 @@ Tue, 4 Feb 2020 00:00:00 GMT
 
 - rebuild to pick up latest data-store to fix the caching filename size
 - OAI2-to-OAI3 converter update in perks.
-- TransformerViaPointer was turning null into {} 
+- TransformerViaPointer was turning null into {}
 - rebuild to fix NPM publishing problem.
 - remove additionalProperties: false so v2 generators don't choke.
 - rebuild to pick up perks change to fix multibyte utf8 over byte boundary problem

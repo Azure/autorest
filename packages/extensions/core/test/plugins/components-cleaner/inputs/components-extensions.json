@@ -1,0 +1,25 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "This is a simple openapi spec where a component has a property called $ref. This should be handled gracefully.",
+    "version": "1.0.0",
+    "title": "Swagger Petstore"
+  },
+  "paths": {},
+  "components": {
+    "x-custom-property": {
+      "description": "This extension property shouldn't crash"
+    },
+    "schemas": {
+      "MyComponent": {
+        "x-ms-metadata": {
+          "apiVersions": ["1.0.0"],
+          "x-ms-secondary-file": false
+        },
+        "properties": {
+          "foo": { "type": "string" }
+        }
+      }
+    }
+  }
+}

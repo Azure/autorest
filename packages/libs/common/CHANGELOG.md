@@ -1,6 +1,21 @@
 # Change Log - @autorest/common
 
-This log was last generated on Sat, 20 Feb 2021 17:49:35 GMT and should not be manually modified.
+This log was last generated on Fri, 05 Mar 2021 16:31:29 GMT and should not be manually modified.
+
+## 1.1.0
+Fri, 05 Mar 2021 16:31:29 GMT
+
+### Minor changes
+
+- **Update** merge functionality to be able to take interpolation context. Default to the higher priority element otherwise
+- **Update** Merging functionality to accept an array merging strategy to decide order of merging
+
+## 1.0.3
+Fri, 26 Feb 2021 21:50:13 GMT
+
+### Patches
+
+- **Update** Autorest logger definition
 
 ## 1.0.2
 Sat, 20 Feb 2021 17:49:35 GMT
