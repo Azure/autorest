@@ -48,6 +48,9 @@ dependencies:
   '@types/yargs': 15.0.13
   '@typescript-eslint/eslint-plugin': 4.14.2_e5f964fa93e839b7a7927397f6cb9cb1
   '@typescript-eslint/parser': 4.14.2_eslint@7.19.0+typescript@4.1.3
+  ajv: 7.1.1
+  ajv-errors: 2.0.0_ajv@7.1.1
+  ajv-formats: 1.5.1
   body-parser: 1.19.0
   chalk: 4.1.0
   command-exists: 1.2.9
@@ -107,7 +110,6 @@ dependencies:
   yaml-ast-parser: 0.0.43
   yargs: 16.2.0
   yarn: 1.22.10
-  z-schema: 5.0.0
 lockfileVersion: 5.2
 packages:
   /@azure-tools/async-io/3.0.253:
@@ -1479,6 +1481,20 @@ packages:
       node: '>= 4.0.0'
     resolution:
       integrity: sha512-e0L/HNe6qkQ7H19kTlRRqUibEAwDK5AFk6y3PtMsuut2VAH6+Q4xZml1tNDJD7kSAyqmbG/K08K5WEJYtUrSlQ==
+  /ajv-errors/2.0.0_ajv@7.1.1:
+    dependencies:
+      ajv: 7.1.1
+    dev: false
+    peerDependencies:
+      ajv: ^7.0.0
+    resolution:
+      integrity: sha512-Qi+I07e2Kc7Tgza7cZMvROyWuWmandN0BLbAiQUGLAMN/IfwIyg5kjg1qz/+q7p+uJ/x3THplnuGmihg/+WnXg==
+  /ajv-formats/1.5.1:
+    dependencies:
+      ajv: 7.1.1
+    dev: false
+    resolution:
+      integrity: sha512-s1RBVF4HZd2UjGkb6t6uWoXjf6o7j7dXPQIL7vprcIT/67bTD6+5ocsU0UKShS2qWxueGDWuGfKHfOxHWrlTQg==
   /ajv-keywords/3.5.2_ajv@6.12.6:
     dependencies:
       ajv: 6.12.6
@@ -1505,6 +1521,15 @@ packages:
     dev: false
     resolution:
       integrity: sha512-xzzzaqgEQfmuhbhAoqjJ8T/1okb6gAzXn/eQRNpAN1AEUoHJTNF9xCDRTtf/s3SKldtZfa+RJeTs+BQq+eZ/sw==
+  /ajv/7.1.1:
+    dependencies:
+      fast-deep-equal: 3.1.3
+      json-schema-traverse: 1.0.0
+      require-from-string: 2.0.2
+      uri-js: 4.4.1
+    dev: false
+    resolution:
+      integrity: sha512-ga/aqDYnUy/o7vbsRTFhhTsNeXiYb5JWDIcRIeZfwRNCefwjNTVYCGdGSUrEmiu3yDK3vFvNbgJxvrQW4JXrYQ==
   /align-text/0.1.4:
     dependencies:
       kind-of: 3.2.2
@@ -9958,7 +9983,7 @@ packages:
       ts-node: '*'
       webpack-cli: '*'
     resolution:
-      integrity: sha512-zn1e426O60et7E7+UyeBq6Rey9550paWPTGAUk+pTr+YpjckVIoKRoSqSIfoFhwf9Y5PblAe9bKTj4d8SEDuEA==
+      integrity: sha512-QfELcsPUqDpOSGfMho2oSGzcGCt89Da8V5LpSXRqN2y8UZRg6Z4bjoT3DXPUAvbGDqppR6ydCJlrLW4WIWKtMg==
       tarball: file:projects/autorest.tgz
     version: 0.0.0
   file:projects/codegen.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -10072,7 +10097,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-ICQYsvvinkuAM42zp7jOoB+n+w3xqxTYbonvjNu3PoBGJuVTPNbAZ5I5kx65XvtVg3N4POEhAsS0iEuwabmV8w==
+      integrity: sha512-Jo2B0ovccrO54g8I6Slhpz/incztxEnm/r52st+81Fd8/C+02q5sDEUMO84uM9RHNDH79vq+BYZn1PsXz5k45Q==
       tarball: file:projects/compare.tgz
     version: 0.0.0
   file:projects/configuration.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -10100,7 +10125,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-/618yDQpSPf7x6bJkMyiKhltfS8j/YBjBxXydeDAnwYF1nN7I1kKLTJteCBRrZKiK5tLJFDuWm16x9PB85r+oA==
+      integrity: sha512-LKUi6Mrflh5w0+U/PWjn1jtU7bE2jLqvND53aQf/hWMJmVmBcDFqXNS1vL2GUXNXjg/nWHsVG+Acu9agQwrPJg==
       tarball: file:projects/configuration.tgz
     version: 0.0.0
   file:projects/core.tgz_ts-node@9.1.1:
@@ -10120,6 +10145,9 @@ packages:
       '@types/webpack': 4.41.26
       '@typescript-eslint/eslint-plugin': 4.14.2_e5f964fa93e839b7a7927397f6cb9cb1
       '@typescript-eslint/parser': 4.14.2_eslint@7.19.0+typescript@4.1.3
+      ajv: 7.1.1
+      ajv-errors: 2.0.0_ajv@7.1.1
+      ajv-formats: 1.5.1
       commonmark: 0.27.0
       compare-versions: 3.6.0
       copy-webpack-plugin: 7.0.0_webpack@5.18.0
@@ -10156,7 +10184,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-QR7EBmyjKQCJfEkVZ/SgNyOPjgrtWDRW8nkJTexjXt6u++T17G2JSJ7l0v9+LDypazQ6Cebpq3lmQVUHcqrBMw==
+      integrity: sha512-UKacK+vMh/BPaGatzLaMSPbd0qt4LCnnoEScLtb7jpHBvnVRZMVhH4bj6pjsUOUcIx4Kuxsh0fmjJkw4Nmmbsg==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -10440,11 +10468,12 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-Nr/rOhVjZc0golARSPIQKP6Po09CdqVmXJF9NEfypoN2dthsy31ki4ls1D1YB0aHFwonpZLLTnDuFhUQ5GBiVA==
+      integrity: sha512-dsmOlrJ7onRNMwAoVVwpacSEJbkLWYEEogGtNVi5aHh6VkhAFpyZKzJlrpOZ4UWasiCCFHr3w2tBzqVAMnox2A==
       tarball: file:projects/test-public-packages.tgz
     version: 0.0.0
   file:projects/test-utils.tgz_prettier@2.2.1+ts-node@9.1.1:
     dependencies:
+      '@azure-tools/tasks': 3.0.253
       '@types/jest': 26.0.20
       eslint: 7.19.0
       eslint-plugin-prettier: 3.2.0_eslint@7.19.0+prettier@2.2.1
@@ -10460,7 +10489,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-8nMXR/fQrY7cWzKlnWAWLNAPsCqTy218Yq76aUySEg/K65B+nGDBNIZewWlUh3Dy4q/xEwC+EN8tG9/SSwQ9EA==
+      integrity: sha512-avGo/LW8WilQ37XPpPHqyRVtrS6FS4Oxm2NnkvMKV6v3UA8sQMMLH4QglVnyVpZDP8ULsCZwWrc7kVe+iYlZKA==
       tarball: file:projects/test-utils.tgz
     version: 0.0.0
 registry: ''
@@ -10514,6 +10543,9 @@ specifiers:
   '@types/yargs': ~15.0.12
   '@typescript-eslint/eslint-plugin': ^4.12.0
   '@typescript-eslint/parser': ^4.12.0
+  ajv: ^7.1.1
+  ajv-errors: ^2.0.0
+  ajv-formats: ^1.5.1
   body-parser: ^1.19.0
   chalk: ^4.1.0
   command-exists: ~1.2.9
@@ -10573,4 +10605,3 @@ specifiers:
   yaml-ast-parser: 0.0.43
   yargs: ~16.2.0
   yarn: 1.22.10
-  z-schema: ^5.0.0

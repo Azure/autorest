@@ -2,8 +2,8 @@
   "changes": [
     {
       "packageName": "@autorest/common",
-      "comment": "**Update** Merging functionality to accept an array merging strategy to decide order of merging",
-      "type": "minor"
+      "comment": "Add `trackWarning` functionality to logger",
+      "type": "patch"
     }
   ],
   "packageName": "@autorest/common",

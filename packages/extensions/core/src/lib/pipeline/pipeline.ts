@@ -51,7 +51,7 @@ import {
 import { createTreeShakerPlugin } from "./plugins/tree-shaker/tree-shaker";
 import { createApiVersionParameterHandlerPlugin } from "./plugins/version-param-handler";
 import { createJsonToYamlPlugin, createYamlToJsonPlugin } from "./plugins/yaml-and-json";
-import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from "./schema-validation";
+import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from "./plugins/schema-validation";
 import { createHash } from "crypto";
 import { isCached, readCache, writeCache } from "./pipeline-cache";
 import { values } from "@azure-tools/linq";

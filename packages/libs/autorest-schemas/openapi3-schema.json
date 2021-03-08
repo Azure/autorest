@@ -1,10 +1,6 @@
 {
   "type": "object",
-  "required": [
-    "openapi",
-    "info",
-    "paths"
-  ],
+  "required": ["openapi", "info", "paths"],
   "properties": {
     "$schema": {
       "type": "string"
@@ -51,9 +47,7 @@
   "definitions": {
     "Reference": {
       "type": "object",
-      "required": [
-        "$ref"
-      ],
+      "required": ["$ref"],
       "properties": {
         "$ref": {
           "type": "string"
@@ -62,10 +56,7 @@
     },
     "Info": {
       "type": "object",
-      "required": [
-        "title",
-        "version"
-      ],
+      "required": ["title", "version"],
       "properties": {
         "title": {
           "type": "string"
@@ -112,9 +103,7 @@
     },
     "License": {
       "type": "object",
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "properties": {
         "name": {
           "type": "string"
@@ -130,9 +119,7 @@
     },
     "Server": {
       "type": "object",
-      "required": [
-        "url"
-      ],
+      "required": ["url"],
       "properties": {
         "url": {
           "type": "string"
@@ -154,9 +141,7 @@
     },
     "ServerVariable": {
       "type": "object",
-      "required": [
-        "default"
-      ],
+      "required": ["default"],
       "properties": {
         "enum": {
           "type": "array",
@@ -183,14 +168,9 @@
           "type": "object",
           "patternProperties": {
             "^[a-zA-Z0-9\\.\\-_]+$": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Reference"
-                },
-                {
-                  "$ref": "#/definitions/Schema"
-                }
-              ]
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" },
+              "else": { "$ref": "#/definitions/Schema" }
             }
           }
         },
@@ -198,14 +178,9 @@
           "type": "object",
           "patternProperties": {
             "^[a-zA-Z0-9\\.\\-_]+$": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Reference"
-                },
-                {
-                  "$ref": "#/definitions/Response"
-                }
-              ]
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" },
+              "else": { "$ref": "#/definitions/Response" }
             }
           }
         },
@@ -213,14 +188,9 @@
           "type": "object",
           "patternProperties": {
             "^[a-zA-Z0-9\\.\\-_]+$": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Reference"
-                },
-                {
-                  "$ref": "#/definitions/Parameter"
-                }
-              ]
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" },
+              "else": { "$ref": "#/definitions/Parameter" }
             }
           }
         },
@@ -228,14 +198,9 @@
           "type": "object",
           "patternProperties": {
             "^[a-zA-Z0-9\\.\\-_]+$": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Reference"
-                },
-                {
-                  "$ref": "#/definitions/Example"
-                }
-              ]
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" },
+              "else": { "$ref": "#/definitions/Example" }
             }
           }
         },
@@ -243,14 +208,9 @@
           "type": "object",
           "patternProperties": {
             "^[a-zA-Z0-9\\.\\-_]+$": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Reference"
-                },
-                {
-                  "$ref": "#/definitions/RequestBody"
-                }
-              ]
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" },
+              "else": { "$ref": "#/definitions/RequestBody" }
             }
           }
         },
@@ -258,14 +218,9 @@
           "type": "object",
           "patternProperties": {
             "^[a-zA-Z0-9\\.\\-_]+$": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Reference"
-                },
-                {
-                  "$ref": "#/definitions/Header"
-                }
-              ]
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" },
+              "else": { "$ref": "#/definitions/Header" }
             }
           }
         },
@@ -273,14 +228,9 @@
           "type": "object",
           "patternProperties": {
             "^[a-zA-Z0-9\\.\\-_]+$": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Reference"
-                },
-                {
-                  "$ref": "#/definitions/SecurityScheme"
-                }
-              ]
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" },
+              "else": { "$ref": "#/definitions/SecurityScheme" }
             }
           }
         },
@@ -288,14 +238,9 @@
           "type": "object",
           "patternProperties": {
             "^[a-zA-Z0-9\\.\\-_]+$": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Reference"
-                },
-                {
-                  "$ref": "#/definitions/Link"
-                }
-              ]
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" },
+              "else": { "$ref": "#/definitions/Link" }
             }
           }
         },
@@ -303,14 +248,9 @@
           "type": "object",
           "patternProperties": {
             "^[a-zA-Z0-9\\.\\-_]+$": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/Reference"
-                },
-                {
-                  "$ref": "#/definitions/Callback"
-                }
-              ]
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" },
+              "else": { "$ref": "#/definitions/Callback" }
             }
           }
         }
@@ -329,7 +269,7 @@
         "multipleOf": {
           "type": "number",
           "minimum": 0,
-          "exclusiveMinimum": true
+          "exclusiveMinimum": 0
         },
         "maximum": {
           "type": "number"
@@ -396,97 +336,63 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "array",
-            "boolean",
-            "integer",
-            "number",
-            "object",
-            "string"
-          ]
+          "enum": ["array", "boolean", "integer", "number", "object", "string"]
         },
         "not": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "allOf": {
           "type": "array",
           "items": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Schema"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Schema" }
           }
         },
         "oneOf": {
           "type": "array",
           "items": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Schema"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Schema" }
           }
         },
         "anyOf": {
           "type": "array",
           "items": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Schema"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Schema" }
           }
         },
         "items": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "properties": {
           "type": "object",
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Schema"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Schema" }
           }
         },
         "additionalProperties": {
-          "oneOf": [
+          "allOf": [
             {
-              "$ref": "#/definitions/Schema"
+              "if": { "required": ["$ref"] },
+              "then": { "$ref": "#/definitions/Reference" }
             },
             {
-              "$ref": "#/definitions/Reference"
+              "if": { "type": "object" },
+              "then": { "$ref": "#/definitions/Schema" }
             },
             {
-              "type": "boolean"
+              "if": { "type": "boolean" },
+              "then": { "type": "boolean" }
             }
           ],
           "default": true
@@ -532,9 +438,7 @@
     },
     "Discriminator": {
       "type": "object",
-      "required": [
-        "propertyName"
-      ],
+      "required": ["propertyName"],
       "properties": {
         "propertyName": {
           "type": "string"
@@ -575,23 +479,16 @@
     },
     "Response": {
       "type": "object",
-      "required": [
-        "description"
-      ],
+      "required": ["description"],
       "properties": {
         "description": {
           "type": "string"
         },
         "headers": {
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Header" }
           }
         },
         "content": {
@@ -603,14 +500,9 @@
         "links": {
           "type": "object",
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Link"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Link" }
           }
         }
       },
@@ -633,14 +525,9 @@
       "type": "object",
       "properties": {
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "example": {},
         "encoding": {
@@ -657,31 +544,19 @@
     },
     "MediaTypeWithExamples": {
       "type": "object",
-      "required": [
-        "examples"
-      ],
+      "required": ["examples"],
       "properties": {
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "examples": {
           "type": "object",
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Example"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Example" }
           }
         },
         "encoding": {
@@ -737,9 +612,7 @@
     },
     "HeaderWithSchemaWithExample": {
       "type": "object",
-      "required": [
-        "schema"
-      ],
+      "required": ["schema"],
       "properties": {
         "description": {
           "type": "string"
@@ -758,9 +631,7 @@
         },
         "style": {
           "type": "string",
-          "enum": [
-            "simple"
-          ],
+          "enum": ["simple"],
           "default": "simple"
         },
         "explode": {
@@ -771,14 +642,9 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "example": {}
       },
@@ -789,10 +655,7 @@
     },
     "HeaderWithSchemaWithExamples": {
       "type": "object",
-      "required": [
-        "schema",
-        "examples"
-      ],
+      "required": ["schema", "examples"],
       "properties": {
         "description": {
           "type": "string"
@@ -811,9 +674,7 @@
         },
         "style": {
           "type": "string",
-          "enum": [
-            "simple"
-          ],
+          "enum": ["simple"],
           "default": "simple"
         },
         "explode": {
@@ -824,26 +685,16 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "examples": {
           "type": "object",
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Example"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Example" },
+            "else": { "$ref": "#/definitions/Schema" }
           }
         }
       },
@@ -854,9 +705,7 @@
     },
     "HeaderWithContent": {
       "type": "object",
-      "required": [
-        "content"
-      ],
+      "required": ["content"],
       "properties": {
         "description": {
           "type": "string"
@@ -896,7 +745,10 @@
         "^path:": {},
         "^x-": {}
       },
-      "additionalProperties": false
+      "additionalProperties": {
+        "not": true,
+        "errorMessage": "should only have path names that start with `/` but found ${0#}"
+      }
     },
     "PathItem": {
       "type": "object",
@@ -943,14 +795,9 @@
         "parameters": {
           "type": "array",
           "items": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Parameter"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Parameter" }
           }
         }
       },
@@ -961,9 +808,7 @@
     },
     "Operation": {
       "type": "object",
-      "required": [
-        "responses"
-      ],
+      "required": ["responses"],
       "properties": {
         "tags": {
           "type": "array",
@@ -986,25 +831,15 @@
         "parameters": {
           "type": "array",
           "items": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Parameter"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Parameter" }
           }
         },
         "requestBody": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/RequestBody"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/RequestBody" }
         },
         "responses": {
           "$ref": "#/definitions/Responses"
@@ -1012,14 +847,9 @@
         "callbacks": {
           "type": "object",
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Callback"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Callback" }
           }
         },
         "deprecated": {
@@ -1048,26 +878,16 @@
       "type": "object",
       "properties": {
         "default": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Response"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Response" }
         }
       },
       "patternProperties": {
         "[1-5](?:\\d{2}|XX)": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Response"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Response" }
         },
         "^x-": {}
       },
@@ -1092,9 +912,7 @@
     },
     "Tag": {
       "type": "object",
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "properties": {
         "name": {
           "type": "string"
@@ -1113,9 +931,7 @@
     },
     "ExternalDocumentation": {
       "type": "object",
-      "required": [
-        "url"
-      ],
+      "required": ["url"],
       "properties": {
         "description": {
           "type": "string"
@@ -1167,30 +983,21 @@
     },
     "ParameterWithSchemaWithExampleInPath": {
       "type": "object",
-      "required": [
-        "name",
-        "in",
-        "schema",
-        "required"
-      ],
+      "required": ["name", "in", "schema", "required"],
       "properties": {
         "name": {
           "type": "string"
         },
         "in": {
           "type": "string",
-          "enum": [
-            "path"
-          ]
+          "enum": ["path"]
         },
         "description": {
           "type": "string"
         },
         "required": {
           "type": "boolean",
-          "enum": [
-            true
-          ]
+          "enum": [true]
         },
         "deprecated": {
           "type": "boolean",
@@ -1202,11 +1009,7 @@
         },
         "style": {
           "type": "string",
-          "enum": [
-            "matrix",
-            "label",
-            "simple"
-          ],
+          "enum": ["matrix", "label", "simple"],
           "default": "simple"
         },
         "explode": {
@@ -1217,14 +1020,9 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "example": {}
       },
@@ -1235,20 +1033,14 @@
     },
     "ParameterWithSchemaWithExampleInQuery": {
       "type": "object",
-      "required": [
-        "name",
-        "in",
-        "schema"
-      ],
+      "required": ["name", "in", "schema"],
       "properties": {
         "name": {
           "type": "string"
         },
         "in": {
           "type": "string",
-          "enum": [
-            "query"
-          ]
+          "enum": ["query"]
         },
         "description": {
           "type": "string"
@@ -1267,12 +1059,7 @@
         },
         "style": {
           "type": "string",
-          "enum": [
-            "form",
-            "spaceDelimited",
-            "pipeDelimited",
-            "deepObject"
-          ],
+          "enum": ["form", "spaceDelimited", "pipeDelimited", "deepObject"],
           "default": "form"
         },
         "explode": {
@@ -1283,14 +1070,9 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "example": {}
       },
@@ -1301,20 +1083,14 @@
     },
     "ParameterWithSchemaWithExampleInHeader": {
       "type": "object",
-      "required": [
-        "name",
-        "in",
-        "schema"
-      ],
+      "required": ["name", "in", "schema"],
       "properties": {
         "name": {
           "type": "string"
         },
         "in": {
           "type": "string",
-          "enum": [
-            "header"
-          ]
+          "enum": ["header"]
         },
         "description": {
           "type": "string"
@@ -1333,9 +1109,7 @@
         },
         "style": {
           "type": "string",
-          "enum": [
-            "simple"
-          ],
+          "enum": ["simple"],
           "default": "simple"
         },
         "explode": {
@@ -1346,14 +1120,9 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "example": {}
       },
@@ -1364,20 +1133,14 @@
     },
     "ParameterWithSchemaWithExampleInCookie": {
       "type": "object",
-      "required": [
-        "name",
-        "in",
-        "schema"
-      ],
+      "required": ["name", "in", "schema"],
       "properties": {
         "name": {
           "type": "string"
         },
         "in": {
           "type": "string",
-          "enum": [
-            "cookie"
-          ]
+          "enum": ["cookie"]
         },
         "description": {
           "type": "string"
@@ -1396,9 +1159,7 @@
         },
         "style": {
           "type": "string",
-          "enum": [
-            "form"
-          ],
+          "enum": ["form"],
           "default": "form"
         },
         "explode": {
@@ -1409,14 +1170,9 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "example": {}
       },
@@ -1443,31 +1199,21 @@
     },
     "ParameterWithSchemaWithExamplesInPath": {
       "type": "object",
-      "required": [
-        "name",
-        "in",
-        "schema",
-        "required",
-        "examples"
-      ],
+      "required": ["name", "in", "schema", "required", "examples"],
       "properties": {
         "name": {
           "type": "string"
         },
         "in": {
           "type": "string",
-          "enum": [
-            "path"
-          ]
+          "enum": ["path"]
         },
         "description": {
           "type": "string"
         },
         "required": {
           "type": "boolean",
-          "enum": [
-            true
-          ]
+          "enum": [true]
         },
         "deprecated": {
           "type": "boolean",
@@ -1479,11 +1225,7 @@
         },
         "style": {
           "type": "string",
-          "enum": [
-            "matrix",
-            "label",
-            "simple"
-          ],
+          "enum": ["matrix", "label", "simple"],
           "default": "simple"
         },
         "explode": {
@@ -1494,26 +1236,16 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "examples": {
           "type": "object",
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Example"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Example" }
           }
         }
       },
@@ -1524,21 +1256,14 @@
     },
     "ParameterWithSchemaWithExamplesInQuery": {
       "type": "object",
-      "required": [
-        "name",
-        "in",
-        "schema",
-        "examples"
-      ],
+      "required": ["name", "in", "schema", "examples"],
       "properties": {
         "name": {
           "type": "string"
         },
         "in": {
           "type": "string",
-          "enum": [
-            "query"
-          ]
+          "enum": ["query"]
         },
         "description": {
           "type": "string"
@@ -1557,12 +1282,7 @@
         },
         "style": {
           "type": "string",
-          "enum": [
-            "form",
-            "spaceDelimited",
-            "pipeDelimited",
-            "deepObject"
-          ],
+          "enum": ["form", "spaceDelimited", "pipeDelimited", "deepObject"],
           "default": "form"
         },
         "explode": {
@@ -1573,26 +1293,16 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "examples": {
           "type": "object",
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Example"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Example" }
           }
         }
       },
@@ -1603,21 +1313,14 @@
     },
     "ParameterWithSchemaWithExamplesInHeader": {
       "type": "object",
-      "required": [
-        "name",
-        "in",
-        "schema",
-        "examples"
-      ],
+      "required": ["name", "in", "schema", "examples"],
       "properties": {
         "name": {
           "type": "string"
         },
         "in": {
           "type": "string",
-          "enum": [
-            "header"
-          ]
+          "enum": ["header"]
         },
         "description": {
           "type": "string"
@@ -1636,9 +1339,7 @@
         },
         "style": {
           "type": "string",
-          "enum": [
-            "simple"
-          ],
+          "enum": ["simple"],
           "default": "simple"
         },
         "explode": {
@@ -1649,26 +1350,16 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "examples": {
           "type": "object",
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Example"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Example" }
           }
         }
       },
@@ -1679,21 +1370,14 @@
     },
     "ParameterWithSchemaWithExamplesInCookie": {
       "type": "object",
-      "required": [
-        "name",
-        "in",
-        "schema",
-        "examples"
-      ],
+      "required": ["name", "in", "schema", "examples"],
       "properties": {
         "name": {
           "type": "string"
         },
         "in": {
           "type": "string",
-          "enum": [
-            "cookie"
-          ]
+          "enum": ["cookie"]
         },
         "description": {
           "type": "string"
@@ -1712,9 +1396,7 @@
         },
         "style": {
           "type": "string",
-          "enum": [
-            "form"
-          ],
+          "enum": ["form"],
           "default": "form"
         },
         "explode": {
@@ -1725,26 +1407,16 @@
           "default": false
         },
         "schema": {
-          "oneOf": [
-            {
-              "$ref": "#/definitions/Schema"
-            },
-            {
-              "$ref": "#/definitions/Reference"
-            }
-          ]
+          "if": { "required": ["$ref"] },
+          "then": { "$ref": "#/definitions/Reference" },
+          "else": { "$ref": "#/definitions/Schema" }
         },
         "examples": {
           "type": "object",
           "additionalProperties": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/Example"
-              },
-              {
-                "$ref": "#/definitions/Reference"
-              }
-            ]
+            "if": { "required": ["$ref"] },
+            "then": { "$ref": "#/definitions/Reference" },
+            "else": { "$ref": "#/definitions/Example" }
           }
         }
       },
@@ -1765,29 +1437,21 @@
     },
     "ParameterWithContentInPath": {
       "type": "object",
-      "required": [
-        "name",
-        "in",
-        "content"
-      ],
+      "required": ["name", "in", "content"],
       "properties": {
         "name": {
           "type": "string"
         },
         "in": {
           "type": "string",
-          "enum": [
-            "path"
-          ]
+          "enum": ["path"]
         },
         "description": {
           "type": "string"
         },
         "required": {
           "type": "boolean",
-          "enum": [
-            true
-          ]
+          "enum": [true]
         },
         "deprecated": {
           "type": "boolean",
@@ -1813,22 +1477,14 @@
     },
     "ParameterWithContentNotInPath": {
       "type": "object",
-      "required": [
-        "name",
-        "in",
-        "content"
-      ],
+      "required": ["name", "in", "content"],
       "properties": {
         "name": {
           "type": "string"
         },
         "in": {
           "type": "string",
-          "enum": [
-            "query",
-            "header",
-            "cookie"
-          ]
+          "enum": ["query", "header", "cookie"]
         },
         "description": {
           "type": "string"
@@ -1861,9 +1517,7 @@
     },
     "RequestBody": {
       "type": "object",
-      "required": [
-        "content"
-      ],
+      "required": ["content"],
       "properties": {
         "description": {
           "type": "string"
@@ -1902,28 +1556,18 @@
     },
     "APIKeySecurityScheme": {
       "type": "object",
-      "required": [
-        "type",
-        "name",
-        "in"
-      ],
+      "required": ["type", "name", "in"],
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "apiKey"
-          ]
+          "enum": ["apiKey"]
         },
         "name": {
           "type": "string"
         },
         "in": {
           "type": "string",
-          "enum": [
-            "header",
-            "query",
-            "cookie"
-          ]
+          "enum": ["header", "query", "cookie"]
         },
         "description": {
           "type": "string"
@@ -1950,17 +1594,12 @@
         "properties": {
           "scheme": {
             "type": "string",
-            "enum": [
-              "bearer"
-            ]
+            "enum": ["bearer"]
           }
         }
       },
       "type": "object",
-      "required": [
-        "scheme",
-        "type"
-      ],
+      "required": ["scheme", "type"],
       "properties": {
         "scheme": {
           "type": "string"
@@ -1970,9 +1609,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "http"
-          ]
+          "enum": ["http"]
         }
       },
       "patternProperties": {
@@ -1982,25 +1619,18 @@
     },
     "BearerHTTPSecurityScheme": {
       "type": "object",
-      "required": [
-        "type",
-        "scheme"
-      ],
+      "required": ["type", "scheme"],
       "properties": {
         "scheme": {
           "type": "string",
-          "enum": [
-            "bearer"
-          ]
+          "enum": ["bearer"]
         },
         "bearerFormat": {
           "type": "string"
         },
         "type": {
           "type": "string",
-          "enum": [
-            "http"
-          ]
+          "enum": ["http"]
         },
         "description": {
           "type": "string"
@@ -2013,16 +1643,11 @@
     },
     "OAuth2SecurityScheme": {
       "type": "object",
-      "required": [
-        "type",
-        "flows"
-      ],
+      "required": ["type", "flows"],
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "oauth2"
-          ]
+          "enum": ["oauth2"]
         },
         "flows": {
           "$ref": "#/definitions/OAuthFlows"
@@ -2038,16 +1663,11 @@
     },
     "OpenIdConnectSecurityScheme": {
       "type": "object",
-      "required": [
-        "type",
-        "openIdConnectUrl"
-      ],
+      "required": ["type", "openIdConnectUrl"],
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "openIdConnect"
-          ]
+          "enum": ["openIdConnect"]
         },
         "openIdConnectUrl": {
           "type": "string"
@@ -2084,10 +1704,7 @@
     },
     "ImplicitOAuthFlow": {
       "type": "object",
-      "required": [
-        "authorizationUrl",
-        "scopes"
-      ],
+      "required": ["authorizationUrl", "scopes"],
       "properties": {
         "authorizationUrl": {
           "type": "string"
@@ -2109,9 +1726,7 @@
     },
     "PasswordOAuthFlow": {
       "type": "object",
-      "required": [
-        "tokenUrl"
-      ],
+      "required": ["tokenUrl"],
       "properties": {
         "tokenUrl": {
           "type": "string"
@@ -2133,9 +1748,7 @@
     },
     "ClientCredentialsFlow": {
       "type": "object",
-      "required": [
-        "tokenUrl"
-      ],
+      "required": ["tokenUrl"],
       "properties": {
         "tokenUrl": {
           "type": "string"
@@ -2157,10 +1770,7 @@
     },
     "AuthorizationCodeOAuthFlow": {
       "type": "object",
-      "required": [
-        "authorizationUrl",
-        "tokenUrl"
-      ],
+      "required": ["authorizationUrl", "tokenUrl"],
       "properties": {
         "authorizationUrl": {
           "type": "string"
@@ -2262,12 +1872,7 @@
         },
         "style": {
           "type": "string",
-          "enum": [
-            "form",
-            "spaceDelimited",
-            "pipeDelimited",
-            "deepObject"
-          ]
+          "enum": ["form", "spaceDelimited", "pipeDelimited", "deepObject"]
         },
         "explode": {
           "type": "boolean"

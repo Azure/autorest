@@ -1,12 +1,9 @@
 {
   "title": "A JSON Schema for Composite Swagger in Swagger 2.0 API.",
-  "id": "https://raw.githubusercontent.com/Azure/autorest/master/schema/composite-swagger.json#",
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "https://raw.githubusercontent.com/Azure/autorest/master/schema/composite-swagger.json#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "required": [
-    "info",
-    "documents"
-  ],
+  "required": ["info", "documents"],
   "description": "Describes the title, description of the Composite Swagger. It provides a mechanism to bind/package clients generated from multiple swaggers together into one composite client.",
   "additionalProperties": false,
   "properties": {
@@ -17,7 +14,7 @@
       "type": "array",
       "minItems": 1,
       "description": "Describes the list of relative or absolute swagger document urls or file paths.",
-     "items": {
+      "items": {
         "type": "string",
         "description": "A relative or absolute url or file path to a swagger document to be included in the list."
       }
@@ -26,10 +23,7 @@
   "info": {
     "type": "object",
     "description": "General information about the API.",
-    "required": [
-      "title",
-      "description"
-    ],
+    "required": ["title", "description"],
     "additionalProperties": false,
     "patternProperties": {
       "^x-(?!ms-).*$": {
@@ -91,9 +85,7 @@
   },
   "license": {
     "type": "object",
-    "required": [
-      "name"
-    ],
+    "required": ["name"],
     "additionalProperties": false,
     "properties": {
       "name": {

@@ -1,9 +1,9 @@
 {
   "title": "A JSON Schema for x-ms-examples extension in Swagger 2.0 API.",
-  "id": "https://raw.githubusercontent.com/Azure/autorest/master/packages/libs/autorest-schemas/example-schema.json#",
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "https://raw.githubusercontent.com/Azure/autorest/master/packages/libs/autorest-schemas/example-schema.json#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "required": [ "parameters", "responses" ],
+  "required": ["parameters", "responses"],
   "description": "Describes the format of an example defined using the x-ms-examples extension.",
   "additionalProperties": false,
   "properties": {
@@ -90,7 +90,7 @@
         "$ref": "#/xmsResponseHeaderExample"
       },
       "body": {
-        "type": [ "object", "number", "array", "integer", "string", "boolean", "null" ],
+        "type": ["object", "number", "array", "integer", "string", "boolean", "null"],
         "description": "Example of the response body if applicable for the operation. Don't specify the body if the server is not sending a response body. The outcome from `JSON.parse()`, needs to be described over here."
       }
     }
