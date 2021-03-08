@@ -3,6 +3,7 @@ import { ConfigurationLoader } from "@autorest/configuration";
 import { AutorestLogger } from "../../../libs/configuration/node_modules/@autorest/common/dist";
 import { CreateFileOrFolderUri, CreateFolderUri, ResolveUri } from "@azure-tools/uri";
 import { AppRoot } from "./constants";
+import { extensionManager } from "./autorest-as-a-service";
 
 const inWebpack = typeof __webpack_require__ === "function";
 const nodeRequire = inWebpack ? __non_webpack_require__ : require;
@@ -37,7 +38,9 @@ export const findCoreVersionUsingConfiguration = async (args: AutorestArgs): Pro
   };
   /* eslint-enable no-console */
 
-  const loader = new ConfigurationLoader(logger, defaultConfigUri, configFileOrFolder);
+  const loader = new ConfigurationLoader(logger, defaultConfigUri, configFileOrFolder, {
+    extensionManager: await extensionManager,
+  });
   const { config } = await loader.load([args], false);
   return config.version;
 };
