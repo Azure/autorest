@@ -3,7 +3,7 @@
     {
       "packageName": "@autorest/modelerfour",
       "comment": "**Change** let single value enum parameters be able to be grouped.",
-      "type": "patch"
+      "type": "minor"
     }
   ],
   "packageName": "@autorest/modelerfour",
