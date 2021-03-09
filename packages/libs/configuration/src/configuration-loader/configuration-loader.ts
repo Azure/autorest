@@ -136,7 +136,6 @@ export class ConfigurationLoader {
 
             const extension = await this.resolveExtension(this.extensionManager, additionalExtension);
             extensions.push({ extension, definition: additionalExtension });
-            await resolveRequiredConfigs(fsLocal);
 
             // merge config from extension
             const extensionConfigurationUri = simplifyUri(CreateFileUri(await extension.configurationPath));
