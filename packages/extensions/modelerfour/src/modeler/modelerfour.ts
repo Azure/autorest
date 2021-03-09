@@ -291,8 +291,8 @@ export class ModelerFour {
     throw new Error(`Unresolved item '${item}'`);
   }
 
-  resolveArray<T>(source?: Array<Refable<T>>) {
-    return values(source).select((each) => dereference(this.input, each).instance);
+  resolveArray<T>(source: Array<Refable<T>> | undefined) {
+    return (source ?? []).map((each) => dereference(this.input, each).instance);
   }
 
   resolveDictionary<T>(source?: Dictionary<Refable<T>>) {
@@ -746,16 +746,18 @@ export class ModelerFour {
     return this.codeModel.schemas.add(dictSchema);
   }
 
-  isSchemaPolymorphic(schema: OpenAPI.Schema | undefined): boolean {
+  findPolymorphicDiscriminator(schema: OpenAPI.Schema | undefined): OpenAPI.Discriminator | undefined {
     if (schema) {
       if (schema.type === JsonType.Object) {
         if (schema.discriminator) {
-          return true;
+          return schema.discriminator;
         }
-        return this.resolveArray(schema.allOf).any((each) => this.isSchemaPolymorphic(each));
+        return this.resolveArray(schema.allOf)
+          .map((each) => this.findPolymorphicDiscriminator(each))
+          .filter((x) => !!x)[0];
       }
     }
-    return false;
+    return undefined;
   }
 
   createObjectSchema(name: string, schema: OpenAPI.Schema) {
@@ -886,10 +888,10 @@ export class ModelerFour {
 
     if (parents.length > 0 && xorTypes.length === 0 && orTypes.length === 0) {
       // craft the and type for the model.
-      const n = this.interpret.getName(name, schema);
-      const isPolymorphic = this.isSchemaPolymorphic(schema);
-      objectSchema.discriminatorValue = isPolymorphic ? schema["x-ms-discriminator-value"] || n : undefined;
-
+      const discriminator = this.findPolymorphicDiscriminator(schema);
+      objectSchema.discriminatorValue = discriminator
+        ? this.findDiscriminatorValue(discriminator, name, schema)
+        : undefined;
       objectSchema.parents = new Relations();
       objectSchema.parents.immediate = parents;
 
@@ -936,6 +938,24 @@ export class ModelerFour {
     }
     return objectSchema;
   }
+
+  private findDiscriminatorValue(discriminator: OpenAPI.Discriminator, name: string, schema: OpenAPI.Schema): string {
+    if (schema["x-ms-discriminator-value"]) {
+      return schema["x-ms-discriminator-value"];
+    }
+
+    const mappedValue = discriminator.mapping
+      ? this.findDiscriminatorValueFromMapping(name, discriminator.mapping)
+      : undefined;
+
+    return mappedValue ?? this.interpret.getName(name, schema);
+  }
+
+  private findDiscriminatorValueFromMapping(name: string, mapping: { [key: string]: string }): string | undefined {
+    const entry = Object.entries(mapping).find(([_, ref]) => ref === `#/components/schemas/${name}`);
+    return entry?.[0];
+  }
+
   processOdataSchema(name: string, schema: OpenAPI.Schema): ODataQuerySchema {
     throw new Error("Method not implemented.");
   }
