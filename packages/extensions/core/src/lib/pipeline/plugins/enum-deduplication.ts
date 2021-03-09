@@ -57,7 +57,6 @@ export class EnumDeduplicator extends TransformerViaPointer {
           toSemver(maximum(b.value["x-ms-metadata"].apiVersions)),
         ),
       );
-      console.error("Processing", value);
 
       const first = enumSet[0];
       const name = first.value["x-ms-enum"] ? first.value["x-ms-enum"].name : first.value["x-ms-metadata"].name;
