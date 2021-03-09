@@ -4,13 +4,12 @@ import {
   DataSink,
   DataSource,
   Node,
-  visit,
   TransformerViaPointer,
   QuickDataSource,
 } from "@azure-tools/datastore";
 import { AutorestContext } from "../../configuration";
 import { PipelinePlugin } from "../common";
-import { Dictionary, items } from "@azure-tools/linq";
+import { items } from "@azure-tools/linq";
 import compareVersions from "compare-versions";
 import { toSemver, maximum, camelCase, pascalCase } from "@azure-tools/codegen";
 
@@ -20,6 +19,7 @@ export class EnumDeduplicator extends TransformerViaPointer {
     string,
     Array<{ target: AnyObject; value: AnyObject; key: string; pointer: string; originalNodes: Iterable<Node> }>
   >();
+
   async visitLeaf(target: AnyObject, value: AnyObject, key: string, pointer: string, originalNodes: Iterable<Node>) {
     if (value) {
       if (pointer.startsWith("/components/schemas/") && value.enum) {
@@ -33,7 +33,7 @@ export class EnumDeduplicator extends TransformerViaPointer {
 
         const e = this.enums.get(name) || this.enums.set(name, []).get(name) || [];
         e.push({ target, value, key, pointer, originalNodes });
-        return true;
+        return false;
       }
 
       if (key === "$ref") {
@@ -49,7 +49,7 @@ export class EnumDeduplicator extends TransformerViaPointer {
 
   public async finish() {
     // time to consolodate the enums
-    for (const { key: n, value } of items(this.enums)) {
+    for (const value of this.enums.values()) {
       // first sort them according to api-version order
       const enumSet = value.sort((a, b) =>
         compareVersions(
@@ -57,6 +57,7 @@ export class EnumDeduplicator extends TransformerViaPointer {
           toSemver(maximum(b.value["x-ms-metadata"].apiVersions)),
         ),
       );
+      console.error("Processing", value);
 
       const first = enumSet[0];
       const name = first.value["x-ms-enum"] ? first.value["x-ms-enum"].name : first.value["x-ms-metadata"].name;
@@ -67,7 +68,7 @@ export class EnumDeduplicator extends TransformerViaPointer {
         // only one of this enum, we can just put it in without any processing
         // (switching the generic name out for the name of the enum.)
         this.clone(first.target, name, first.pointer, first.value);
-        this.fixUp(originalRef, newRef, first.pointer);
+        this.updateRefs(originalRef, newRef, first.pointer);
         continue;
       }
 
@@ -92,7 +93,7 @@ export class EnumDeduplicator extends TransformerViaPointer {
           }
         }
         const originalRef = `#/components/schemas/${each.key}`;
-        this.fixUp(originalRef, newRef, each.pointer);
+        this.updateRefs(originalRef, newRef, each.pointer);
       }
     }
 
@@ -104,7 +105,7 @@ export class EnumDeduplicator extends TransformerViaPointer {
     }
   }
 
-  fixUp(originalRef: string, newRef: string, pointer: string) {
+  private updateRefs(originalRef: string, newRef: string, pointer: string) {
     const fixups = this.refs.get(originalRef);
     if (fixups) {
       for (const each of fixups) {
