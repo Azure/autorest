@@ -681,8 +681,6 @@ export class ModelerFour {
     const sealed = xmse && (alwaysSeal || !xmse.modelAsString);
 
     const parentChoices = this.getChoiceSchemaParentValues(name, schema);
-    console.error("paretns", parentChoices);
-
     const choices = [...parentChoices, ...this.interpret.getEnumChoices(schema)];
 
     // model as string forces it to be a choice/enum.
