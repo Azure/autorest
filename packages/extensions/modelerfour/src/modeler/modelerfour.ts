@@ -709,9 +709,40 @@ export class ModelerFour {
   processOrSchema(name: string, schema: OpenAPI.Schema): OrSchema {
     throw new Error("Method not implemented.");
   }
+
+  /**
+   * Create a XorSchema from an openapi3 schema.
+   * @param name Name of the schema
+   * @param schema OpenAPI3 Schema
+   * @returns M4 XorSchema.
+   */
   processXorSchema(name: string, schema: OpenAPI.Schema): XorSchema {
-    throw new Error("Method not implemented.");
+    if (!schema.oneOf) {
+      throw new Error(`Unexpected schema ${name} can't be processed as a XOR type as it has no oneOf property.`);
+    }
+    if (schema.oneOf.length === 0) {
+      throw new Error(`Schema ${name} can't be processed as a XOR type as the oneOf array is empty.`);
+    }
+
+    if (schema.properties) {
+      throw new Error(
+        `Schema ${name} has oneOf defined but is defining properties. This is not supported at this time.`,
+      );
+    }
+
+    if (schema.allOf) {
+      throw new Error(`Schema ${name} has oneOf defined but is defining allOf. This is not supported at this time.`);
+    }
+
+    const types = schema.oneOf.map((x) => this.use(x, (n, i) => this.processSchema(n, i)));
+
+    return this.codeModel.schemas.add(
+      new XorSchema(name, this.interpret.getDescription("", schema), {
+        oneOf: types,
+      }),
+    );
   }
+
   processDictionarySchema(name: string, schema: OpenAPI.Schema): DictionarySchema {
     const dictSchema = new DictionarySchema<any>(
       this.interpret.getName(name, schema),
@@ -823,10 +854,15 @@ export class ModelerFour {
 
     // is this more than a straightforward object?
     const parentCount = length(schema.allOf);
-    const isMoreThanObject = parentCount + length(schema.anyOf) + length(schema.oneOf) > 0 || !!dictionaryDef;
+    const isMoreThanObject = parentCount + length(schema.anyOf) || !!dictionaryDef;
 
     // do we have properties at all?
     const hasProperties = length(schema.properties) > 0;
+
+    // If the schema has a oneOf defined.
+    if (schema.oneOf && schema.oneOf.length > 0) {
+      return this.processXorSchema(name, schema);
+    }
 
     if (!isMoreThanObject && !hasProperties) {
       // it's an empty object?
