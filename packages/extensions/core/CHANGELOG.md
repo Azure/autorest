@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Mon, 08 Mar 2021 18:07:37 GMT and should not be manually modified.
+This log was last generated on Wed, 10 Mar 2021 02:02:59 GMT and should not be manually modified.
+
+## 3.1.3
+Wed, 10 Mar 2021 02:02:59 GMT
+
+### Patches
+
+- **Update** @autorest/configuration to uptake directives array fix
 
 ## 3.1.2
 Mon, 08 Mar 2021 18:07:37 GMT
@@ -92,7 +99,7 @@ Tue, 4 Feb 2020 00:00:00 GMT
 
 - rebuild to pick up latest data-store to fix the caching filename size
 - OAI2-to-OAI3 converter update in perks.
-- TransformerViaPointer was turning null into {}
+- TransformerViaPointer was turning null into {} 
 - rebuild to fix NPM publishing problem.
 - remove additionalProperties: false so v2 generators don't choke.
 - rebuild to pick up perks change to fix multibyte utf8 over byte boundary problem
