@@ -1,6 +1,13 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Mon, 08 Mar 2021 18:07:37 GMT and should not be manually modified.
+This log was last generated on Wed, 10 Mar 2021 01:07:02 GMT and should not be manually modified.
+
+## 1.1.3
+Wed, 10 Mar 2021 01:07:02 GMT
+
+### Patches
+
+- **Fix** Defining multiple directive in configuration file as an object could override each other
 
 ## 1.1.2
 Mon, 08 Mar 2021 18:07:37 GMT

@@ -93,7 +93,7 @@ export class ConfigurationManager {
    * @param configFile Config file.
    */
   private mergeConfigFile(config: AutorestRawConfiguration, configFile: ConfigurationFile): AutorestRawConfiguration {
-    let currentFileResolution = {};
+    let currentFileResolution = { ...initialConfig };
     const resolveConfig = () => mergeOverwriteOrAppend(config, currentFileResolution);
 
     for (const configBlock of configFile.configs) {
