@@ -16,7 +16,7 @@ pipeline:
 
   openapi-document/individual/schema-validator-openapi:
     input: individual/transform
- 
+
   openapi-document/individual/identity:
     input: individual/schema-validator-openapi
 
@@ -67,5 +67,15 @@ pipeline:
   # OpenAPI
   openapi-document/openapi-document-converter:
     input: swagger-document/identity
-    # output-artifact: openapi-document
+    output-artifact: openapi-from-swagger-document
+
+  openapi-document/openapi-document-converter/emitter:
+    input: openapi-document/openapi-document-converter
+    scope: scope-openapi-document-converter/emitter
+
+scope-openapi-document-converter/emitter:
+  input-artifact: openapi-from-swagger-document
+  is-object: true
+  output-uri-expr: |
+    $key.replace(/\.json$/, "").replace(/[/:]/g, "-")
 ```
