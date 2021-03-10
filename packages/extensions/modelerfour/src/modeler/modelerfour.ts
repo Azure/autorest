@@ -737,7 +737,7 @@ export class ModelerFour {
     const types = schema.oneOf.map((x) => this.use(x, (n, i) => this.processSchema(n, i)));
 
     return this.codeModel.schemas.add(
-      new XorSchema(name, this.interpret.getDescription("", schema), {
+      new XorSchema(this.interpret.getName(name, schema), this.interpret.getDescription("", schema), {
         oneOf: types,
       }),
     );
