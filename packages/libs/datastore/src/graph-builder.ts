@@ -68,6 +68,7 @@ export function createGraphProxy<T extends object>(
 
     set(target: ProxyObject<T>, key: string | number, value: ProxyNode<any>): boolean {
       // check if this is a correct assignment.
+      console.error("Value", value)
       if (value.value === undefined) {
         throw new Error(`Assignment: Value '${key}' may not be undefined.`);
       }

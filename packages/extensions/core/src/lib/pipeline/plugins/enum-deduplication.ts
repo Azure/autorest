@@ -4,45 +4,37 @@ import {
   DataSink,
   DataSource,
   Node,
-  TransformerViaPointer,
   QuickDataSource,
+  TransformerViaPointer,
+  visit,
 } from "@azure-tools/datastore";
 import { AutorestContext } from "../../configuration";
 import { PipelinePlugin } from "../common";
-import { items } from "@azure-tools/linq";
 import compareVersions from "compare-versions";
-import { toSemver, maximum, camelCase, pascalCase } from "@azure-tools/codegen";
+import { toSemver, maximum, pascalCase } from "@azure-tools/codegen";
+import * as oai3 from "@azure-tools/openapi";
+import { cloneDeep } from "lodash";
 
-export class EnumDeduplicator extends TransformerViaPointer {
-  protected refs = new Map<string, Array<{ target: AnyObject; pointer: string }>>();
+export class EnumDeduplicator extends TransformerViaPointer<oai3.Model, oai3.Model> {
+  private newRefs: Record<string, string> = {};
   protected enums = new Map<
     string,
     Array<{ target: AnyObject; value: AnyObject; key: string; pointer: string; originalNodes: Iterable<Node> }>
   >();
 
   async visitLeaf(target: AnyObject, value: AnyObject, key: string, pointer: string, originalNodes: Iterable<Node>) {
-    if (value) {
-      if (pointer.startsWith("/components/schemas/") && value.enum) {
-        // it's an enum
-        // let's handle this ourselves.
-        if (!value["x-ms-metadata"]) {
-          return false;
-        }
-        // use the given name if specified, otherwise fallback to the metadata name
-        const name = pascalCase(value["x-ms-enum"] ? value["x-ms-enum"].name : value["x-ms-metadata"].name);
-
-        const e = this.enums.get(name) || this.enums.set(name, []).get(name) || [];
-        e.push({ target, value, key, pointer, originalNodes });
+    if (value && pointer.startsWith("/components/schemas/") && value.enum) {
+      // it's an enum
+      // let's handle this ourselves.
+      if (!value["x-ms-metadata"]) {
         return false;
       }
+      // use the given name if specified, otherwise fallback to the metadata name
+      const name = pascalCase(value["x-ms-enum"] ? value["x-ms-enum"].name : value["x-ms-metadata"].name);
 
-      if (key === "$ref") {
-        const ref = value.toString();
-        // let's hold onto the $ref object until we're done.
-        const r = this.refs.get(ref) || this.refs.set(ref, []).get(ref) || [];
-        r.push({ target, pointer });
-        return true;
-      }
+      const e = this.enums.get(name) || this.enums.set(name, []).get(name) || [];
+      e.push({ target, value, key, pointer, originalNodes });
+      return true;
     }
     return false;
   }
@@ -67,7 +59,7 @@ export class EnumDeduplicator extends TransformerViaPointer {
         // only one of this enum, we can just put it in without any processing
         // (switching the generic name out for the name of the enum.)
         this.clone(first.target, name, first.pointer, first.value);
-        this.updateRefs(originalRef, newRef, first.pointer);
+        this.newRefs[originalRef] = newRef;
         continue;
       }
 
@@ -92,26 +84,31 @@ export class EnumDeduplicator extends TransformerViaPointer {
           }
         }
         const originalRef = `#/components/schemas/${each.key}`;
-        this.updateRefs(originalRef, newRef, each.pointer);
+        this.newRefs[originalRef] = newRef;
       }
     }
 
-    // write out the remaining unchanged $ref instances
-    for (const { key: reference, value: refSet } of items(this.refs)) {
-      for (const each of refSet) {
-        this.clone(each.target, "$ref", each.pointer, reference);
-      }
-    }
+    // Remove all the proxy objects.
+    this.generated = cloneDeep(this.generated);
+    // Update renamed schema references
+    this.updateRefs(this.generated);
   }
 
-  private updateRefs(originalRef: string, newRef: string, pointer: string) {
-    const fixups = this.refs.get(originalRef);
-    if (fixups) {
-      for (const each of fixups) {
-        each.target.$ref = { value: newRef, pointer };
+  protected updateRefs(node: any) {
+    for (const { value } of visit(node)) {
+      if (value && typeof value === "object") {
+        const ref = value.$ref;
+        if (ref) {
+          // see if this object has a $ref
+          const newRef = this.newRefs[ref];
+          if (newRef) {
+            value.$ref = newRef;
+          }
+        }
+        // now, recurse into this object
+        this.updateRefs(value);
       }
     }
-    this.refs.delete(originalRef);
   }
 }
 
