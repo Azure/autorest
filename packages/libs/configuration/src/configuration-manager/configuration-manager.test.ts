@@ -159,6 +159,31 @@ describe("ConfigurationManager", () => {
       expect(output["base-folder"]).toEqual("base-folder-1");
       expect(output["api-version"]).toEqual(["version-1", "version-3"]);
     });
+
+    it("merge directives defined as object", async () => {
+      manager.addConfigFile({
+        type: "file",
+        fullPath: "/dev/path/readme.md",
+        configs: [
+          {
+            config: {
+              directive: { from: "swagger-document", transform: "$.swagger=true" },
+            },
+          },
+          {
+            config: {
+              directive: { from: "openapi-document", transform: "$.openapi3=true" },
+            },
+          },
+        ],
+      });
+
+      const output = await manager.resolveConfig();
+      expect(output.directive).toEqual([
+        { from: "swagger-document", transform: "$.swagger=true" },
+        { from: "openapi-document", transform: "$.openapi3=true" },
+      ]);
+    });
   });
 
   describe("interpolate previous values", () => {
