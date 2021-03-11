@@ -34,7 +34,7 @@ export async function readUriWithRetries(uri: string, headers: { [name: string]:
       tryed++;
       if (isRetryableStatusCode(e.statusCode) && tryed <= MAX_RETRY_COUNT) {
         // eslint-disable-next-line no-console
-        console.error(`Failed to load uri ${uri}, ${e}, trying again (${tryed}/${MAX_RETRY_COUNT})`);
+        console.error(`Failed to load uri ${uri}, trying again (${tryed}/${MAX_RETRY_COUNT})`, e);
       } else {
         throw e;
       }
