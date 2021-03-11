@@ -119,5 +119,41 @@ describe("Modelerfour.Schemas", () => {
         expect(dog?.discriminatorValue).toEqual("dogType");
       });
     });
+
+    describe("enums", () => {
+      it("enums referencing other any with allOf include all their properties", async () => {
+        const spec = createTestSpec();
+
+        addSchema(spec, "Foo", {
+          type: "string",
+          enum: ["one", "two"],
+        });
+        addSchema(spec, "Bar", {
+          type: "string",
+          enum: ["three", "four", "five"],
+          allOf: [{ $ref: "#/components/schemas/Foo" }],
+        });
+
+        const codeModel = await runModeler(spec);
+
+        const bar = findByName("Bar", codeModel.schemas.choices);
+        expect(bar).toBeDefined();
+        expect(bar?.choices).toEqual([
+          { language: { default: { description: "", name: "one" } }, value: "one" },
+          { language: { default: { description: "", name: "two" } }, value: "two" },
+          { language: { default: { description: "", name: "three" } }, value: "three" },
+          { language: { default: { description: "", name: "four" } }, value: "four" },
+          { language: { default: { description: "", name: "five" } }, value: "five" },
+        ]);
+
+        // Parent should not have changed
+        const foo = findByName("Foo", codeModel.schemas.choices);
+        expect(foo).toBeDefined();
+        expect(foo?.choices).toEqual([
+          { language: { default: { description: "", name: "one" } }, value: "one" },
+          { language: { default: { description: "", name: "two" } }, value: "two" },
+        ]);
+      });
+    });
   });
 });
