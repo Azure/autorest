@@ -1,15 +1,4 @@
-import {
-  AnyObject,
-  DataHandle,
-  DataSink,
-  DataSource,
-  Node,
-  QuickDataSource,
-  TransformerViaPointer,
-  visit,
-} from "@azure-tools/datastore";
-import { AutorestContext } from "../../configuration";
-import { PipelinePlugin } from "../common";
+import { AnyObject, Node, TransformerViaPointer, visit } from "@azure-tools/datastore";
 import compareVersions from "compare-versions";
 import { toSemver, maximum, pascalCase } from "@azure-tools/codegen";
 import * as oai3 from "@azure-tools/openapi";
@@ -110,27 +99,4 @@ export class EnumDeduplicator extends TransformerViaPointer<oai3.Model, oai3.Mod
       }
     }
   }
-}
-
-async function deduplicateEnums(config: AutorestContext, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
-  const result: Array<DataHandle> = [];
-  for (const each of inputs) {
-    const ed = new EnumDeduplicator(each);
-    result.push(
-      await sink.WriteObject(
-        "oai3.enum-deduplicated.json",
-        await ed.getOutput(),
-        each.identity,
-        "openapi-document-enum-deduplicated",
-        await ed.getSourceMappings(),
-      ),
-    );
-  }
-  return new QuickDataSource(result, input.pipeState);
-}
-
-/* @internal */
-export function createEnumDeduplicator(): PipelinePlugin {
-  return deduplicateEnums;
 }
