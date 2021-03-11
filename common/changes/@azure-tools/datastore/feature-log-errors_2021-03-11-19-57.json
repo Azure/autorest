@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@azure-tools/datastore",
-      "comment": "Log error when failed to load datastore uri",
+      "comment": "Added retry logic for loading uris.",
       "type": "patch"
     }
   ],
