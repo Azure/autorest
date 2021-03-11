@@ -151,6 +151,9 @@ class ReadThroughDataSource extends DataSource {
             // hack to let $(this-folder) resolve to the location...
             data = data.replace(/\$\(this-folder\)\/*/g, parent);
           }
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.error("Unexpected error trying to read file", e);
         } finally {
           if (!data) {
             // eslint-disable-next-line no-unsafe-finally
