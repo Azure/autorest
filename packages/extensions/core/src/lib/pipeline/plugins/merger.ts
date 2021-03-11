@@ -290,6 +290,14 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
             throw new Error(`$ref to original location '${ref}' is not found in the new refs collection`);
           }
         }
+
+        // Update OpenAPI3 discriminator mapping
+        if (key === "discriminator" && value.mapping) {
+          for (const [key, ref] of Object.entries<string>(value.mapping)) {
+            const newRef = this.refs[ref];
+            value.mapping[key] = newRef;
+          }
+        }
         // now, recurse into this object
         this.updateRefs(value);
       }

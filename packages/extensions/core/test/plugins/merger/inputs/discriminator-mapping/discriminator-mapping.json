@@ -1,0 +1,78 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Pet Store",
+    "version": "1.0.0"
+  },
+  "servers": [{ "url": "http://localhost" }],
+  "paths": {},
+  "components": {
+    "schemas": {
+      "PetType": {
+        "type": "string"
+      },
+      "Pet": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "pet_type": {
+            "$ref": "#/components/schemas/PetType"
+          }
+        },
+        "required": ["name", "pet_type"],
+        "discriminator": {
+          "propertyName": "pet_type",
+          "mapping": {
+            "type_cat": "#/components/schemas/Cat",
+            "type_dog": "#/components/schemas/Dog"
+          }
+        }
+      },
+      "Cat": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Pet"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "hunting": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "Dog": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Pet"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "bark": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "ModelWithMappingProp": {
+        "type": "object",
+        "properties": {
+          "mapping": {
+            "type": "object",
+            "properties": {
+              "enabled": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
