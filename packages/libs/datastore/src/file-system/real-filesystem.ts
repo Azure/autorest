@@ -1,5 +1,5 @@
-import { EnumerateFiles, ReadUri, WriteString } from "@azure-tools/uri";
-import { IFileSystem } from "./file-system";
+import { EnumerateFiles, WriteString } from "@azure-tools/uri";
+import { IFileSystem, readUriWithRetries } from "./file-system";
 import * as Constants from "../constants";
 
 export class RealFileSystem implements IFileSystem {
@@ -10,7 +10,7 @@ export class RealFileSystem implements IFileSystem {
   }
 
   public async read(uri: string): Promise<string> {
-    return ReadUri(uri);
+    return await readUriWithRetries(uri);
   }
 
   public async write(uri: string, content: string): Promise<void> {

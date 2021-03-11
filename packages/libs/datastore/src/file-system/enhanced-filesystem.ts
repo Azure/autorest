@@ -1,5 +1,5 @@
 import { EnumerateFiles, ReadUri, WriteString } from "@azure-tools/uri";
-import { IFileSystem } from "./file-system";
+import { IFileSystem, readUriWithRetries } from "./file-system";
 import * as Constants from "../constants";
 
 // handles:
@@ -25,7 +25,7 @@ export class EnhancedFileSystem implements IFileSystem {
       headers.authorization = `Bearer ${this.githubAuthToken}`;
     }
 
-    return ReadUri(uri, headers);
+    return readUriWithRetries(uri, headers);
   }
 
   public async write(uri: string, content: string): Promise<void> {

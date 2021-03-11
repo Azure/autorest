@@ -145,7 +145,7 @@ class ReadThroughDataSource extends DataSource {
         // populate cache
         let data: string | null = null;
         try {
-          data = (await this.fs.ReadFile(uri)) || (await ReadUri(uri));
+          data = (await this.fs.read(uri)) || (await ReadUri(uri));
           if (data) {
             const parent = ParentFolderUri(uri) || "";
             // hack to let $(this-folder) resolve to the location...
