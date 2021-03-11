@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/common",
+      "comment": "**Fix** Max call stack issue with loading very large swagger",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/common",
+  "email": "tiguerin@microsoft.com"
+}
