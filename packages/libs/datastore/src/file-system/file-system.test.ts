@@ -1,4 +1,4 @@
-import { MemoryFileSystem } from "./file-system";
+import { MemoryFileSystem } from "./memory-file-system";
 
 describe("Filesystem", () => {
   it("Simple memory filesystem test", async () => {
@@ -9,10 +9,10 @@ describe("Filesystem", () => {
       ]),
     );
     let n = 0;
-    for (const name of await f.EnumerateFileUris()) {
+    for (const name of await f.list()) {
       n++;
     }
     expect(n).toEqual(2);
-    expect(await f.ReadFile(MemoryFileSystem.DefaultVirtualRootUri + "other.md")).toEqual("#My Doc.");
+    expect(await f.read(MemoryFileSystem.DefaultVirtualRootUri + "other.md")).toEqual("#My Doc.");
   });
 });

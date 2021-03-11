@@ -194,11 +194,11 @@ export class AutoRest extends EventEmitter {
 export async function LiterateToJson(content: string): Promise<string> {
   try {
     const autorest = new AutoRest({
-      async EnumerateFileUris(folderUri: string): Promise<Array<string>> {
-        return [];
-      },
-      ReadFile: async (f: string): Promise<string> =>
-        f == "none:///empty-file.md" ? content || "# empty file" : "# empty file",
+      list: () => Promise.resolve([]),
+      read: (f: string) => Promise.resolve(f == "none:///empty-file.md" ? content || "# empty file" : "# empty file"),
+      EnumerateFileUris: () => Promise.resolve([]),
+      ReadFile: (f: string) =>
+        Promise.resolve(f == "none:///empty-file.md" ? content || "# empty file" : "# empty file"),
     });
     let result = "";
     autorest.AddConfiguration({ "input-file": "none:///empty-file.md", "output-artifact": ["swagger-document"] });

@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 // export * from "./proxy"
-export * from "./file-system/file-system";
+export * from "./file-system";
 export * from "./json-path/json-path";
 export * from "./json-pointer/json-pointer";
 export * from "./graph-builder";
