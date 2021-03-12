@@ -15,6 +15,7 @@ export class RealFileSystem implements IFileSystem {
     } catch (e) {
       console.error("E", Object.getOwnPropertyNames(e));
       console.error(e.code);
+      console.error(e.constructor.name);
       throw e;
     }
   }
