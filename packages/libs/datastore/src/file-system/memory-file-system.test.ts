@@ -1,3 +1,4 @@
+import { UriNotFoundError } from "./errors";
 import { MemoryFileSystem } from "./memory-file-system";
 
 describe("MemoryFileSystem", () => {
@@ -19,6 +20,6 @@ describe("MemoryFileSystem", () => {
 
   it("should throw error if the file doesn't exists", async () => {
     const uri = MemoryFileSystem.DefaultVirtualRootUri + "unkown-file.md";
-    await expect(() => fs.read(uri)).rejects.toThrowError(`File ${uri} is not in the MemoryFileSystem`);
+    await expect(() => fs.read(uri)).rejects.toThrowError(UriNotFoundError);
   });
 });
