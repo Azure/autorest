@@ -3,7 +3,12 @@
     {
       "packageName": "@azure-tools/datastore",
       "comment": "Added retry logic for loading uris.",
-      "type": "patch"
+      "type": "minor"
+    },
+    {
+      "packageName": "@azure-tools/datastore",
+      "comment": "**Refactor** abstract file system. Moved CachingFileSystem from @autorest/configuration.",
+      "type": "minor"
     }
   ],
   "packageName": "@azure-tools/datastore",
