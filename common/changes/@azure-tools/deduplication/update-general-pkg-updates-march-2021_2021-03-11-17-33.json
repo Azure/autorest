@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/deduplication",
+      "comment": "Bump dependencies versions",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@azure-tools/deduplication",
+  "email": ""
+}

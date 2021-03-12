@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "Bump dependencies versions",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/core",
+  "email": ""
+}
