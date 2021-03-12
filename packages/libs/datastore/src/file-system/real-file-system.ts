@@ -10,7 +10,13 @@ export class RealFileSystem implements IFileSystem {
   }
 
   public async read(uri: string): Promise<string> {
-    return await readUriWithRetries(uri);
+    try {
+      return await readUriWithRetries(uri);
+    } catch (e) {
+      console.error("E", Object.getOwnPropertyNames(e));
+      console.error(e.code);
+      throw e;
+    }
   }
 
   public async write(uri: string, content: string): Promise<void> {
