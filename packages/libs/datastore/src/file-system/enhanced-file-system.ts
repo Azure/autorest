@@ -1,18 +1,23 @@
-import { EnumerateFiles, ReadUri, WriteString } from "@azure-tools/uri";
-import { IFileSystem, readUriWithRetries } from "./file-system";
-import * as Constants from "../constants";
+import { WriteString } from "@azure-tools/uri";
+import { RealFileSystem } from "./real-file-system";
 
 // handles:
 // - GitHub URI adjustment
 // - GitHub auth
-export class EnhancedFileSystem implements IFileSystem {
-  public constructor(private githubAuthToken?: string) {}
-
-  public list(folderUri: string): Promise<Array<string>> {
-    return EnumerateFiles(folderUri, [Constants.DefaultConfiguration]);
+export class EnhancedFileSystem extends RealFileSystem {
+  public constructor(private githubAuthToken?: string) {
+    super();
   }
 
   public async read(uri: string): Promise<string> {
+    return super.read(uri, this.getHeaders(uri));
+  }
+
+  public async write(uri: string, content: string): Promise<void> {
+    return WriteString(uri, content);
+  }
+
+  private getHeaders(uri: string) {
     const headers: { [key: string]: string } = {};
 
     // check for GitHub OAuth token
@@ -25,24 +30,6 @@ export class EnhancedFileSystem implements IFileSystem {
       headers.authorization = `Bearer ${this.githubAuthToken}`;
     }
 
-    return readUriWithRetries(uri, headers);
-  }
-
-  public async write(uri: string, content: string): Promise<void> {
-    return WriteString(uri, content);
-  }
-
-  /**
-   * @deprecated
-   */
-  public async ReadFile(uri: string): Promise<string> {
-    return this.read(uri);
-  }
-
-  /**
-   * @deprecated
-   */
-  public async EnumerateFileUris(folderUri: string): Promise<Array<string>> {
-    return this.list(folderUri);
+    return headers;
   }
 }
