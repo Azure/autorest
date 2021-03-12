@@ -30,7 +30,7 @@ export function NewEmptyObject(): any {
         return true;
       },
       ownKeys(target) {
-        return keys;
+        return keys as any;
       },
     },
   );
