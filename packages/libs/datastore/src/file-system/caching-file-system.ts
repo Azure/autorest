@@ -1,4 +1,4 @@
-import { IFileSystem } from "@azure-tools/datastore";
+import { IFileSystem } from "./file-system";
 
 export class CachingFileSystem implements IFileSystem {
   protected cache = new Map<string, string | Error>();
