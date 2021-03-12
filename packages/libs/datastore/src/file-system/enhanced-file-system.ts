@@ -4,6 +4,9 @@ import { RealFileSystem } from "./real-file-system";
 // handles:
 // - GitHub URI adjustment
 // - GitHub auth
+/**
+ *
+ */
 export class EnhancedFileSystem extends RealFileSystem {
   public constructor(private githubAuthToken?: string) {
     super();
