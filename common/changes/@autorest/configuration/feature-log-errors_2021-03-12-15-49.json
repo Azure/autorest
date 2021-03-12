@@ -2,8 +2,8 @@
   "changes": [
     {
       "packageName": "@autorest/configuration",
-      "comment": "",
-      "type": "none"
+      "comment": "Extract CachingFileSystem out into @azure-tools/datastore",
+      "type": "minor"
     }
   ],
   "packageName": "@autorest/configuration",
