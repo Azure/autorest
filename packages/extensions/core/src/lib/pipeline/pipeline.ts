@@ -359,7 +359,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
     // you can have --pass-thru:FOO on the command line
     // or add pass-thru: true in a pipline configuration step.
-    const configEntry = config.GetEntry(node.configScope.last.toString());
+    const configEntry = context.GetEntry(node.configScope.last.toString());
     const passthru =
       (configEntry && configEntry["pass-thru"] === true) ||
       values(configView.GetEntry("pass-thru")).any((each) => each === pluginName);
