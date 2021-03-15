@@ -5,15 +5,15 @@
 import { JSONPath } from "jsonpath-plus";
 import { createSandbox } from "@azure-tools/codegen";
 
+export type JsonPath = JsonPathComponent[];
 export type JsonPathComponent = string | number;
 
-const safeEval = createSandbox();
 interface JSONPathExt {
   toPathArray: (path: string) => string[];
   toPathString: (path: JsonPathComponent[]) => string;
 }
 
-export interface JsonPathResult {
+interface JsonPathResult {
   path: string;
   value: any;
   parent: any;
@@ -22,6 +22,8 @@ export interface JsonPathResult {
   pointer: string;
 }
 
+// Override the vm used in jsonpath to use our safeEval and ignore errors.
+const safeEval = createSandbox();
 JSONPath.prototype.vm = {
   runInNewContext: (code: string, context: Record<string, any>) => {
     try {
@@ -32,38 +34,6 @@ JSONPath.prototype.vm = {
     }
   },
 };
-
-// patch in smart filter expressions
-// const handlers = (<any>jsonpath).handlers;
-// handlers.register("subscript-descendant-filter_expression", function (component: any, partial: any, count: any) {
-//   const src = component.expression.value.slice(1);
-
-//   const passable = function (key: any, value: any) {
-//     try {
-//       return safeEval(src.replace(/@/g, "$$$$"), { $$: value });
-//     } catch (e) {
-//       return false;
-//     }
-//   };
-
-//   return eval("this").traverse(partial, null, passable, count);
-// });
-// handlers.register("subscript-child-filter_expression", function (component: any, partial: any, count: any) {
-//   const src = component.expression.value.slice(1);
-
-//   const passable = function (key: any, value: any) {
-//     try {
-//       return safeEval(src.replace(/@/g, "$$$$"), { $$: value });
-//     } catch (e) {
-//       return false;
-//     }
-//   };
-
-//   return eval("this").descend(partial, null, passable, count);
-// });
-// patch end
-
-export type JsonPath = (string | number)[];
 
 export function parse(jsonPath: string): JsonPath {
   return ((JSONPath as any) as JSONPathExt).toPathArray(jsonPath).slice(1);
