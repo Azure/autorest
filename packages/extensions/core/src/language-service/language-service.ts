@@ -630,7 +630,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     }
   }
   // IFileSystem Implementation
-  public async EnumerateFileUris(folderUri: string): Promise<Array<string>> {
+  public async list(folderUri: string): Promise<Array<string>> {
     if (folderUri && folderUri.startsWith("file:")) {
       const folderPath = FileUriToPath(folderUri);
       if (await isDirectory(folderPath)) {
@@ -648,7 +648,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     return [];
   }
 
-  public async ReadFile(fileUri: string): Promise<string> {
+  public async read(fileUri: string): Promise<string> {
     const doc = this.get(fileUri) || this.virtualFile.get(fileUri);
     try {
       if (doc) {
@@ -660,6 +660,14 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
       // no worries
     }
     throw new Error(`Unable to read ${fileUri}`);
+  }
+
+  public async EnumerateFileUris(folderUri: string): Promise<Array<string>> {
+    return this.list(folderUri);
+  }
+
+  public async ReadFile(fileUri: string): Promise<string> {
+    return this.read(fileUri);
   }
 
   private async process(configurationUrl: string) {

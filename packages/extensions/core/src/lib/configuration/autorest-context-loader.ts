@@ -3,7 +3,7 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { IFileSystem, LazyPromise, RealFileSystem } from "@azure-tools/datastore";
+import { CachingFileSystem, IFileSystem, LazyPromise, RealFileSystem } from "@azure-tools/datastore";
 import { Extension, ExtensionManager } from "@azure-tools/extension";
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
 import { join } from "path";
@@ -11,7 +11,6 @@ import { AutoRestExtension } from "../pipeline/plugin-endpoint";
 import {
   AutorestConfiguration,
   AutorestRawConfiguration,
-  CachingFileSystem,
   ConfigurationLoader,
   getNestedConfiguration,
   mergeConfigurations,
