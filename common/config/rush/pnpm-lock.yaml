@@ -71,6 +71,7 @@ dependencies:
   jest-snapshot: 26.6.2
   js-yaml: 4.0.0
   jsonpath: 1.0.0
+  jsonpath-plus: 5.0.4
   linq-es2015: 2.5.1
   lodash: 4.17.21
   mkdirp: 0.5.5
@@ -928,6 +929,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
+  /@types/jsonpath-plus/5.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-kdhqBgp6Wm5bDAvEg1iX/QQGwt7pfFp7XnGDi/ETuw1BMM6a1n/FwanCemzVocedXvTXJuOX0bPmu/WpMejHTA==
   /@types/jsonpath/0.2.0:
     dev: false
     resolution:
@@ -5232,6 +5237,12 @@ packages:
       '0': node >= 0.2.0
     resolution:
       integrity: sha1-P02uSpH6wxX3EGL4UhzCOfE2YoA=
+  /jsonpath-plus/5.0.4:
+    dev: false
+    engines:
+      node: '>=10.0.0'
+    resolution:
+      integrity: sha512-w3pI3PewtwIrrGRCFvTkCkKu8IrOwjsqoYRxvxuXQjPB0udEtAuBY0B6/SEztsxMmuIHVHGFQ0knVnTCPW9qYw==
   /jsonpath/1.0.0:
     dependencies:
       esprima: 1.2.2
@@ -9242,6 +9253,7 @@ packages:
       '@azure-tools/uri': 3.0.256
       '@types/jest': 26.0.20
       '@types/jsonpath': 0.2.0
+      '@types/jsonpath-plus': 5.0.1
       '@types/node': 14.14.34
       '@types/source-map': 0.5.0
       '@typescript-eslint/eslint-plugin': 4.17.0_3641211d697b4d4d12940eb9cf33dc28
@@ -9253,6 +9265,7 @@ packages:
       jest: 26.6.3_ts-node@9.1.1
       js-yaml: 4.0.0
       jsonpath: 1.0.0
+      jsonpath-plus: 5.0.4
       rimraf: 3.0.2
       source-map: 0.5.6
       ts-jest: 26.5.3_jest@26.6.3+typescript@4.2.3
@@ -9265,7 +9278,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-9XGDUEEt44VkCbJxFPjzskKfeqMLYcVn6zDGBYmBVz5ho+et0+iLR5oD3sMfJybn3dlQz0sGTmF7/XO0FZ4zqQ==
+      integrity: sha512-V3MwekQOa7HHZxr2pu9ubSasr9E9VS+V2fwhaQr72OZy6JaBjVJe6tO+n0CLGMIrrRZMjTLo358I+d5OjyVitg==
       tarball: file:projects/datastore.tgz
     version: 0.0.0
   file:projects/deduplication.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9535,6 +9548,7 @@ packages:
       integrity: sha512-avGo/LW8WilQ37XPpPHqyRVtrS6FS4Oxm2NnkvMKV6v3UA8sQMMLH4QglVnyVpZDP8ULsCZwWrc7kVe+iYlZKA==
       tarball: file:projects/test-utils.tgz
     version: 0.0.0
+registry: ''
 specifiers:
   '@azure-tools/async-io': ~3.0.0
   '@azure-tools/eventing': ~3.0.0
@@ -9608,6 +9622,7 @@ specifiers:
   jest-snapshot: ~26.6.2
   js-yaml: ~4.0.0
   jsonpath: 1.0.0
+  jsonpath-plus: 5.0.4
   linq-es2015: ^2.4.25
   lodash: ~4.17.20
   mkdirp: ~0.5.1
