@@ -119,5 +119,32 @@ describe("Modelerfour.Schemas", () => {
         expect(dog?.discriminatorValue).toEqual("dogType");
       });
     });
+
+    describe("enums", () => {
+      it("enums referencing other any with allOf include all their properties", async () => {
+        const spec = createTestSpec();
+
+        addSchema(spec, "Foo", {
+          type: "string",
+          enum: ["one", "two"],
+        });
+        addSchema(spec, "Bar", {
+          type: "string",
+          enum: ["three", "four", "five"],
+          allOf: [{ $ref: "#/components/schemas/Foo" }],
+        });
+
+        const codeModel = await runModeler(spec);
+
+        const bar = findByName("Bar", codeModel.schemas.choices);
+        expect(bar).toBeDefined();
+        expect(bar?.choices.map((x) => x.value)).toEqual(["one", "two", "three", "four", "five"]);
+
+        // Parent should not have changed
+        const foo = findByName("Foo", codeModel.schemas.choices);
+        expect(foo).toBeDefined();
+        expect(foo?.choices.map((x) => x.value)).toEqual(["one", "two"]);
+      });
+    });
   });
 });
