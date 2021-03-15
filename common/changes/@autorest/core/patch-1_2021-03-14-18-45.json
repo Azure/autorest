@@ -2,8 +2,8 @@
   "changes": [
     {
       "packageName": "@autorest/core",
-      "comment": "",
-      "type": "none"
+      "comment": "**Fix** Cannot read property 'pass-thru' of undefined crash",
+      "type": "patch"
     }
   ],
   "packageName": "@autorest/core",

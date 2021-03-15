@@ -361,10 +361,10 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     // or add pass-thru: true in a pipline configuration step.
     const configEntry = context.GetEntry(node.configScope.last.toString());
     const passthru =
-      (configEntry && configEntry["pass-thru"] === true) ||
+      configEntry?.["pass-thru"] === true ||
       values(configView.GetEntry("pass-thru")).any((each) => each === pluginName);
     const usenull =
-      (configEntry && configEntry["null"] === true) ||
+      configEntry?.["null"] === true ||
       values(configView.GetEntry("null")).any((each) => each === pluginName);
 
     const plugin = usenull ? plugins.null : passthru ? plugins.identity : plugins[pluginName];
