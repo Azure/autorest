@@ -1,6 +1,6 @@
 {
   "name": "@autorest/modelerfour",
-  "version": "4.17.2",
+  "version": "4.18.0",
   "description": "AutoRest Modeler Version Four (component)",
   "directories": {
     "doc": "docs"
@@ -39,14 +39,14 @@
   "homepage": "https://github.com/Azure/autorest.modelerfour/tree/master/modelerfour#readme",
   "readme": "https://github.com/Azure/autorest.modelerfour/tree/master/modelerfour/readme.md",
   "devDependencies": {
-    "@autorest/codemodel": "~4.14.6",
-    "@autorest/extension-base": "~3.2.0",
-    "@autorest/test-utils": "~0.1.0",
+    "@autorest/codemodel": "~4.14.7",
+    "@autorest/extension-base": "~3.2.1",
+    "@autorest/test-utils": "~0.2.0",
     "@azure-tools/async-io": "~3.0.0",
-    "@azure-tools/codegen": "~2.5.293",
-    "@azure-tools/datastore": "~4.1.271",
+    "@azure-tools/codegen": "~2.5.294",
+    "@azure-tools/datastore": "~4.2.0",
     "@azure-tools/linq": "~3.1.0",
-    "@azure-tools/openapi": "~3.1.0",
+    "@azure-tools/openapi": "~3.1.1",
     "@azure-tools/tasks": "~3.0.0",
     "@azure-tools/uri": "~3.0.0",
     "@types/jest": "^26.0.20",

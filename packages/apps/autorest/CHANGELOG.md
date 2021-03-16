@@ -1,6 +1,13 @@
 # Change Log - autorest
 
-This log was last generated on Fri, 26 Feb 2021 21:50:13 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Mar 2021 15:52:56 GMT and should not be manually modified.
+
+## 3.1.3
+Tue, 16 Mar 2021 15:52:56 GMT
+
+### Patches
+
+- Bump dependencies versions
 
 ## 3.1.2
 Fri, 26 Feb 2021 21:50:13 GMT

@@ -2,6 +2,18 @@
   "name": "@azure-tools/extension",
   "entries": [
     {
+      "version": "3.2.4",
+      "tag": "@azure-tools/extension_v3.2.4",
+      "date": "Tue, 16 Mar 2021 15:52:56 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump dependencies versions"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.2.3",
       "tag": "@azure-tools/extension_v3.2.3",
       "date": "Fri, 05 Mar 2021 16:31:29 GMT",

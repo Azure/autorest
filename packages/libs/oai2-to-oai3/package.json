@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/oai2-to-oai3",
-  "version": "4.2.277",
+  "version": "4.2.278",
   "description": "OpenAPI2 to OpenAPI3 conversion library that maintains souremaps for use with AutoRest",
   "main": "./dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
@@ -36,7 +36,7 @@
   "homepage": "https://github.com/Azure/perks/tree/master/oai2-to-oai3#readme",
   "readme": "https://github.com/Azure/perks/tree/master/oai2-to-oai3/readme.md",
   "devDependencies": {
-    "@autorest/test-utils": "~0.1.0",
+    "@autorest/test-utils": "~0.2.0",
     "@types/jest": "^26.0.20",
     "@types/js-yaml": "~4.0.0",
     "@types/node": "~14.14.20",
@@ -54,8 +54,8 @@
     "typescript": "~4.2.3"
   },
   "dependencies": {
-    "@azure-tools/datastore": "~4.1.271",
-    "@azure-tools/openapi": "~3.1.0",
+    "@azure-tools/datastore": "~4.2.0",
+    "@azure-tools/openapi": "~3.1.1",
     "source-map": "0.5.6"
   }
 }

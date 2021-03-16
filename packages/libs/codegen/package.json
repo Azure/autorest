@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/codegen",
-  "version": "2.5.293",
+  "version": "2.5.294",
   "description": "Autorest Code generator common and base classes",
   "directories": {
     "doc": "docs"

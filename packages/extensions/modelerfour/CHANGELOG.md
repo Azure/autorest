@@ -1,6 +1,19 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Fri, 05 Mar 2021 16:31:29 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Mar 2021 15:52:56 GMT and should not be manually modified.
+
+## 4.18.0
+Tue, 16 Mar 2021 15:52:56 GMT
+
+### Minor changes
+
+- **Change** let single value enum parameters be able to be grouped.
+- **Feature** Support using `allOf` in enum to reference a parent enum. All the parent choices will be flattened in the child enum
+
+### Patches
+
+- **Respect** OpenAPI3 discriminator mapping
+- Bump dependencies versions
 
 ## 4.17.2
 Fri, 05 Mar 2021 16:31:29 GMT
