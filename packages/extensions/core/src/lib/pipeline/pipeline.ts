@@ -35,7 +35,12 @@ import { createArtifactEmitterPlugin } from "./plugins/emitter";
 import { createEnumDeduplicator } from "./plugins/enum-deduplication";
 import { createExternalPlugin } from "./plugins/external";
 import { createHelpPlugin } from "./plugins/help";
-import { createIdentityPlugin, createIdentityResetPlugin, createNullPlugin } from "./plugins/identity";
+import {
+  createIdentityPlugin,
+  createIdentityResetPlugin,
+  createNormalizeIdentityPlugin,
+  createNullPlugin,
+} from "./plugins/identity";
 import { createOpenApiLoaderPlugin, createSwaggerLoaderPlugin } from "./plugins/loaders";
 import { createMultiApiMergerPlugin } from "./plugins/merger";
 import { createNewComposerPlugin } from "./plugins/new-composer";
@@ -219,6 +224,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     "identity": createIdentityPlugin(),
     "null": createNullPlugin(),
     "reset-identity": createIdentityResetPlugin(),
+    "normalize-identity": createNormalizeIdentityPlugin(),
     "loader-swagger": createSwaggerLoaderPlugin(),
     "loader-openapi": createOpenApiLoaderPlugin(),
     "transform": createTransformerPlugin(),
