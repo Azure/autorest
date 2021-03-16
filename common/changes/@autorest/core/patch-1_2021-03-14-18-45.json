@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "**Fix** Cannot read property 'pass-thru' of undefined crash",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/core",
+  "email": "kant2002@gmail.com"
+}
