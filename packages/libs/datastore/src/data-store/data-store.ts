@@ -153,6 +153,7 @@ class ReadThroughDataSource extends DataSource {
           }
         } catch (e) {
           // TODO-TIM: Reeenable this log with new logging system https://github.com/Azure/autorest/issues/3988
+          // Disabled this as it creates too much noise for some expected failure(Cannot find samples)
           // eslint-disable-next-line no-console
           // console.error("Unexpected error trying to read file", e);
         } finally {
