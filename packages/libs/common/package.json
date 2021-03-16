@@ -42,7 +42,7 @@
     "@types/commonmark": "^0.27.0"
   },
   "dependencies": {
-    "@azure-tools/datastore": "~4.2.0",
+    "@azure-tools/datastore": "~4.2.1",
     "commonmark": "^0.27.0"
   }
 }

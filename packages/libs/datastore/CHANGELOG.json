@@ -2,6 +2,18 @@
   "name": "@azure-tools/datastore",
   "entries": [
     {
+      "version": "4.2.1",
+      "tag": "@azure-tools/datastore_v4.2.1",
+      "date": "Tue, 16 Mar 2021 19:28:18 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Revert** logging when failed to load file as it creates too much noise"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.2.0",
       "tag": "@azure-tools/datastore_v4.2.0",
       "date": "Tue, 16 Mar 2021 15:52:56 GMT",
