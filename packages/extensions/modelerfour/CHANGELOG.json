@@ -2,6 +2,49 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.18.0",
+      "tag": "@autorest/modelerfour_v4.18.0",
+      "date": "Tue, 16 Mar 2021 15:52:56 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Change** let single value enum parameters be able to be grouped."
+          },
+          {
+            "comment": "**Feature** Support using `allOf` in enum to reference a parent enum. All the parent choices will be flattened in the child enum"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "**Respect** OpenAPI3 discriminator mapping"
+          },
+          {
+            "comment": "Bump dependencies versions"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/codemodel\" from `~4.14.6` to `~4.14.7`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/extension-base\" from `~3.2.0` to `~3.2.1`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.1.0` to `~0.2.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.5.293` to `~2.5.294`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.1.271` to `~4.2.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.1.0` to `~3.1.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.17.2",
       "tag": "@autorest/modelerfour_v4.17.2",
       "date": "Fri, 05 Mar 2021 16:31:29 GMT",

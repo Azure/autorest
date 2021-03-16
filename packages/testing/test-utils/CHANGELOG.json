@@ -2,6 +2,28 @@
   "name": "@autorest/test-utils",
   "entries": [
     {
+      "version": "0.2.0",
+      "tag": "@autorest/test-utils_v0.2.0",
+      "date": "Tue, 16 Mar 2021 15:52:56 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add new util to create DataHandle"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Update createDataHandle to take filename optionally"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.1.271` to `~4.2.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.0",
       "tag": "@autorest/test-utils_v0.1.0",
       "date": "Thu, 04 Feb 2021 19:05:18 GMT",

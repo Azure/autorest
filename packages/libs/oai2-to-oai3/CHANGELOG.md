@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/oai2-to-oai3
 
-This log was last generated on Fri, 05 Mar 2021 16:31:29 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Mar 2021 15:52:56 GMT and should not be manually modified.
+
+## 4.2.278
+Tue, 16 Mar 2021 15:52:56 GMT
+
+### Patches
+
+- Bump dependencies versions
 
 ## 4.2.277
 Fri, 05 Mar 2021 16:31:29 GMT

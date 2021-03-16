@@ -1,6 +1,17 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Wed, 10 Mar 2021 01:07:02 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Mar 2021 15:52:56 GMT and should not be manually modified.
+
+## 1.2.0
+Tue, 16 Mar 2021 15:52:56 GMT
+
+### Minor changes
+
+- Extract CachingFileSystem out into @azure-tools/datastore
+
+### Patches
+
+- Bump dependencies versions
 
 ## 1.1.3
 Wed, 10 Mar 2021 01:07:02 GMT

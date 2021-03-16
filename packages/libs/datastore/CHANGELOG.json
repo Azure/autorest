@@ -2,6 +2,34 @@
   "name": "@azure-tools/datastore",
   "entries": [
     {
+      "version": "4.2.0",
+      "tag": "@azure-tools/datastore_v4.2.0",
+      "date": "Tue, 16 Mar 2021 15:52:56 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Update** TransformerViaPointer to take Generic Input/Output types"
+          },
+          {
+            "comment": "Bump dependencies versions"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Added retry logic for loading uris."
+          },
+          {
+            "comment": "**Refactor** abstract file system. Moved CachingFileSystem from @autorest/configuration."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.5.293` to `~2.5.294`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.1.271",
       "tag": "@azure-tools/datastore_v4.1.271",
       "date": "Thu, 04 Feb 2021 19:05:18 GMT",
