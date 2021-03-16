@@ -2,8 +2,8 @@
   "name": "@autorest/core",
   "entries": [
     {
-      "version": "3.2.2",
-      "tag": "@autorest/core_v3.2.2",
+      "version": "3.2.1",
+      "tag": "@autorest/core_v3.2.1",
       "date": "Tue, 16 Mar 2021 19:28:18 GMT",
       "comments": {
         "patch": [

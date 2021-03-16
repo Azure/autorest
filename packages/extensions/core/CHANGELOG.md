@@ -2,7 +2,7 @@
 
 This log was last generated on Tue, 16 Mar 2021 19:28:18 GMT and should not be manually modified.
 
-## 3.2.2
+## 3.2.1
 Tue, 16 Mar 2021 19:28:18 GMT
 
 ### Patches
@@ -120,7 +120,7 @@ Tue, 4 Feb 2020 00:00:00 GMT
 
 - rebuild to pick up latest data-store to fix the caching filename size
 - OAI2-to-OAI3 converter update in perks.
-- TransformerViaPointer was turning null into {} 
+- TransformerViaPointer was turning null into {}
 - rebuild to fix NPM publishing problem.
 - remove additionalProperties: false so v2 generators don't choke.
 - rebuild to pick up perks change to fix multibyte utf8 over byte boundary problem
