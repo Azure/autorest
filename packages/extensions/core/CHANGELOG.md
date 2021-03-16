@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Tue, 16 Mar 2021 15:52:56 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Mar 2021 19:28:18 GMT and should not be manually modified.
+
+## 3.2.2
+Tue, 16 Mar 2021 19:28:18 GMT
+
+### Patches
+
+- **Update** @azure-tools/data-store
 
 ## 3.2.0
 Tue, 16 Mar 2021 15:52:56 GMT

@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@autorest/common": "~1.1.1",
-    "@azure-tools/datastore": "~4.2.0",
+    "@azure-tools/datastore": "~4.2.1",
     "@azure-tools/extension": "~3.2.4",
     "@azure-tools/uri": "~3.0.0",
     "@azure-tools/async-io": "~3.0.0",

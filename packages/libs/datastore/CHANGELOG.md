@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/datastore
 
-This log was last generated on Tue, 16 Mar 2021 15:52:56 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Mar 2021 19:28:18 GMT and should not be manually modified.
+
+## 4.2.1
+Tue, 16 Mar 2021 19:28:18 GMT
+
+### Patches
+
+- **Revert** logging when failed to load file as it creates too much noise
 
 ## 4.2.0
 Tue, 16 Mar 2021 15:52:56 GMT
