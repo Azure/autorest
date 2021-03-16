@@ -152,8 +152,9 @@ class ReadThroughDataSource extends DataSource {
             data = data.replace(/\$\(this-folder\)\/*/g, parent);
           }
         } catch (e) {
+          // TODO-TIM: Reeenable this log with new logging system https://github.com/Azure/autorest/issues/3988
           // eslint-disable-next-line no-console
-          console.error("Unexpected error trying to read file", e);
+          // console.error("Unexpected error trying to read file", e);
         } finally {
           if (!data) {
             // eslint-disable-next-line no-unsafe-finally
