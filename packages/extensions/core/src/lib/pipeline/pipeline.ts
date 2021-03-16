@@ -364,8 +364,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
       configEntry?.["pass-thru"] === true ||
       values(configView.GetEntry("pass-thru")).any((each) => each === pluginName);
     const usenull =
-      configEntry?.["null"] === true ||
-      values(configView.GetEntry("null")).any((each) => each === pluginName);
+      configEntry?.["null"] === true || values(configView.GetEntry("null")).any((each) => each === pluginName);
 
     const plugin = usenull ? plugins.null : passthru ? plugins.identity : plugins[pluginName];
 
