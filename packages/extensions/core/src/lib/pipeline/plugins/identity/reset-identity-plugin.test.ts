@@ -16,12 +16,8 @@ describe("ResetIdentityPlugin", () => {
       config: {},
     } as any;
     const cts: CancellationTokenSource = {
-      cancel() {
-        /* unused */
-      },
-      dispose() {
-        /* unused */
-      },
+      cancel() {},
+      dispose() {},
       token: { isCancellationRequested: false, onCancellationRequested: <any>null },
     };
     const ds = new DataStore(cts.token);
