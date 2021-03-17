@@ -8,8 +8,7 @@ describe("NormalizeIdentityPlugin", () => {
   let context: AutorestContext;
   let sink: DataSink;
 
-  const file1 = createDataHandle("{}", { name: "foo.json" });
-  const file2 = createDataHandle("{}", { name: "bar.json" });
+  const file1 = createDataHandle("{}", { name: "single/file/foo.json" });
 
   beforeEach(() => {
     context = {
@@ -62,7 +61,7 @@ describe("NormalizeIdentityPlugin", () => {
     expect(result[2].Description).toEqual("shared/common.json");
   });
 
-  fit("update refs accordingly", async () => {
+  it("update refs accordingly", async () => {
     const mainContent = {
       definitions: {
         $ref: "https://github.com/myorg/myproject/project2/data.json#/foo",
