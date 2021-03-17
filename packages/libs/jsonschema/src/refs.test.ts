@@ -1,4 +1,4 @@
-import { parseJsonRef, stringifyJsonRef } from "./refs";
+import { parseJsonRef, stringifyJsonRef, updateJsonRefs } from "./refs";
 
 describe("JsonSchema Refs", () => {
   describe("parseJsonRef", () => {
@@ -26,6 +26,26 @@ describe("JsonSchema Refs", () => {
 
     it("parse file only", () => {
       expect(stringifyJsonRef({ file: "bar.json" })).toEqual("bar.json");
+    });
+  });
+
+  describe("updateJsonRefs", () => {
+    const testUpdateRef = (document: any) => {
+      return updateJsonRefs(document, (x) => (x += "Bar"));
+    };
+
+    it("update string refs nested in objects", () => {
+      expect(testUpdateRef({ foo: { bar: { $ref: "#/definitions/Foo" } } })).toEqual({
+        foo: { bar: { $ref: "#/definitions/FooBar" } },
+      });
+    });
+
+    it("update string refs nested in array", () => {
+      expect(testUpdateRef([{ $ref: "#/definitions/Foo" }])).toEqual([
+        {
+          $ref: "#/definitions/FooBar",
+        },
+      ]);
     });
   });
 });

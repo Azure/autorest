@@ -25,3 +25,21 @@ export function stringifyJsonRef(ref: JsonRef) {
   const path = ref.path === undefined ? "" : `#${ref.path}`;
   return `${ref.file ?? ""}${path}`;
 }
+
+/**
+ * Update the given document $ref in place using the modifier. Calls the modifier for each instance of a $ref.
+ * @param document Document with $ref to update.
+ * @param modifier Modifier
+ */
+export function updateJsonRefs<T extends {} | ArrayLike<{}>>(document: T, modifier: (ref: string) => string): T {
+  for (const value of Object.values(document)) {
+    if (value && typeof value === "object") {
+      const ref = (value as any).$ref;
+      if (ref && typeof ref === "string") {
+        (value as any).$ref = modifier(ref);
+      }
+      updateJsonRefs(value as any, modifier);
+    }
+  }
+  return document;
+}

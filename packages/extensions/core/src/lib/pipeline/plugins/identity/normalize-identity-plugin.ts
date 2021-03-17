@@ -1,10 +1,10 @@
 import { DataHandle, DataSink, DataSource, QuickDataSource, visit } from "@azure-tools/datastore";
-import { parseJsonRef, stringifyJsonRef } from "@azure-tools/jsonschema";
+import { parseJsonRef, stringifyJsonRef, updateJsonRefs } from "@azure-tools/jsonschema";
 import { cloneDeep } from "lodash";
 import { AutorestContext } from "../../../configuration";
 import { PipelinePlugin } from "../../common";
 import { URL } from "url";
-import { relative, dirname } from "path";
+import { relative, dirname, basename } from "path";
 
 function resolveRelativeRef(currentFile: string, newRef: string) {
   return relative(dirname(currentFile), newRef).replace(/\\/g, "/");
@@ -56,12 +56,16 @@ function resolveCommonRoot(uris: string[]) {
 function resolveNewIdentity(dataHandles: DataHandle[]): Map<string, string> {
   const map = new Map<string, string>();
 
+  if (dataHandles.length === 1) {
+    const name = dataHandles[0].Description;
+    return new Map([[name, basename(name)]]);
+  }
+
   const root = resolveCommonRoot(dataHandles.map((x) => x.Description));
   for (const data of dataHandles) {
     if (!data.Description.startsWith(root)) {
       throw new Error(`Unexpected error: '${data.Description}' does not start with '${root}'`);
     }
-    console.log("Here", data.Description.substring(root.length));
     map.set(data.Description, data.Description.substring(root.length));
   }
 
@@ -79,7 +83,7 @@ async function normalizeIdentity(context: AutorestContext, input: DataSource, si
       if (!newName) {
         throw new Error(`Unexpected error. Couldn't find mapping for data handle ${input.Description}`);
       }
-      updateRefs(data, newName, identityMap);
+      updateFileRefs(data, newName, identityMap);
 
       return await sink.WriteData(newName, JSON.stringify(data, null, 2), input.identity, context.config.to);
     }),
@@ -94,22 +98,15 @@ async function normalizeIdentity(context: AutorestContext, input: DataSource, si
  * @param currentFile Current file path to resolve relative urls.
  * @param fileMap Mapping of the file old name => new name.
  */
-function updateRefs(node: any, currentFile: string, fileMap: Map<string, string>) {
-  for (const { value } of visit(node)) {
-    if (value && typeof value === "object") {
-      const ref = value.$ref;
-      if (ref) {
-        // see if this object has a $ref
-        const { file, path } = parseJsonRef(ref);
-        const newFile = file && fileMap.get(file);
-        if (newFile) {
-          value.$ref = stringifyJsonRef({ file: resolveRelativeRef(currentFile, newFile), path });
-        }
-      }
-      // now, recurse into this object
-      updateRefs(value, currentFile, fileMap);
+function updateFileRefs(node: any, currentFile: string, fileMap: Map<string, string>) {
+  updateJsonRefs(node, (ref) => {
+    const { file, path } = parseJsonRef(ref);
+    const newFile = file && fileMap.get(file);
+    if (newFile) {
+      return stringifyJsonRef({ file: resolveRelativeRef(currentFile, newFile), path });
     }
-  }
+    return ref;
+  });
 }
 
 export function createNormalizeIdentityPlugin(): PipelinePlugin {
