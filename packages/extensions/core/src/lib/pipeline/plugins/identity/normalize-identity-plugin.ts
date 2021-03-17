@@ -4,7 +4,11 @@ import { cloneDeep } from "lodash";
 import { AutorestContext } from "../../../configuration";
 import { PipelinePlugin } from "../../common";
 import { URL } from "url";
-import { resolve } from "node:url";
+import { relative, dirname } from "path";
+
+function resolveRelativeRef(currentFile: string, newRef: string) {
+  return relative(dirname(currentFile), newRef).replace(/\\/g, "/");
+}
 
 /**
  * Find the common path from all the provided paths.
@@ -57,6 +61,7 @@ function resolveNewIdentity(dataHandles: DataHandle[]): Map<string, string> {
     if (!data.Description.startsWith(root)) {
       throw new Error(`Unexpected error: '${data.Description}' does not start with '${root}'`);
     }
+    console.log("Here", data.Description.substring(root.length));
     map.set(data.Description, data.Description.substring(root.length));
   }
 
@@ -74,7 +79,7 @@ async function normalizeIdentity(context: AutorestContext, input: DataSource, si
       if (!newName) {
         throw new Error(`Unexpected error. Couldn't find mapping for data handle ${input.Description}`);
       }
-      updateRefs(data, identityMap);
+      updateRefs(data, newName, identityMap);
 
       return await sink.WriteData(newName, JSON.stringify(data, null, 2), input.identity, context.config.to);
     }),
@@ -86,9 +91,10 @@ async function normalizeIdentity(context: AutorestContext, input: DataSource, si
 /**
  * Update references in content using the given fileMap.
  * @param node Node to recursively check
+ * @param currentFile Current file path to resolve relative urls.
  * @param fileMap Mapping of the file old name => new name.
  */
-function updateRefs(node: any, fileMap: Map<string, string>) {
+function updateRefs(node: any, currentFile: string, fileMap: Map<string, string>) {
   for (const { value } of visit(node)) {
     if (value && typeof value === "object") {
       const ref = value.$ref;
@@ -97,11 +103,11 @@ function updateRefs(node: any, fileMap: Map<string, string>) {
         const { file, path } = parseJsonRef(ref);
         const newFile = file && fileMap.get(file);
         if (newFile) {
-          value.$ref = stringifyJsonRef({ file: newFile, path });
+          value.$ref = stringifyJsonRef({ file: resolveRelativeRef(currentFile, newFile), path });
         }
       }
       // now, recurse into this object
-      updateRefs(value, fileMap);
+      updateRefs(value, currentFile, fileMap);
     }
   }
 }
