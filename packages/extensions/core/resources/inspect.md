@@ -83,20 +83,3 @@ pipeline:
 output-artifact: oai3-document
 
 ```
-
-
-``` yaml $(output-oai3-v2)
-pipeline-model: v3
-
-pipeline:
-  oai3/normalize-identity:
-    input: openapi-document/transform
-    to: oai3-document
-
-  oai3/emitter:
-    input: oai3/normalize-identity
-    is-object: true
-
-output-artifact: oai3-document
-
-```
