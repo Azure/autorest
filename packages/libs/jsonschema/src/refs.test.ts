@@ -47,5 +47,8 @@ describe("JsonSchema Refs", () => {
         },
       ]);
     });
+    it("doesn't change $ref used as a property", () => {
+      expect(testUpdateRef([{ $ref: { name: "refProperty" } }])).toEqual([{ $ref: { name: "refProperty" } }]);
+    });
   });
 });
