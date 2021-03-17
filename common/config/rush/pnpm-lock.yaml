@@ -16,6 +16,7 @@ dependencies:
   '@rush-temp/deduplication': file:projects/deduplication.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/extension': file:projects/extension.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/extension-base': file:projects/extension-base.tgz_prettier@2.2.1
+  '@rush-temp/jsonschema': file:projects/jsonschema.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/md-mock-api': file:projects/md-mock-api.tgz_ts-node@9.1.1
   '@rush-temp/modelerfour': file:projects/modelerfour.tgz_ts-node@9.1.1
   '@rush-temp/oai2-to-oai3': file:projects/oai2-to-oai3.tgz_prettier@2.2.1+ts-node@9.1.1
@@ -9035,7 +9036,7 @@ packages:
       ts-node: '*'
       webpack-cli: '*'
     resolution:
-      integrity: sha512-TBir/R5LP+EVIpp3sl00XK6Tanl2EiiMy/BLoVyy7p+THa4dxt1gT+gxUyvGNHzpWTUb5/Z1+nqXHi1tlDUT2g==
+      integrity: sha512-MYaI8F0tF3ZyTJr0bLSC7V3RsVmfzbDHo1FxPmPL9Y2cEs7xR7jV+2NgtofjoC8nFcecR0DsSfbX9WkASKoFHg==
       tarball: file:projects/autorest.tgz
     version: 0.0.0
   file:projects/codegen.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9091,7 +9092,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-TVydgrqBL1/3Au12c5aq/0tiqgdysVN9rs3NTc1YqtiiawEk3SE8wdN6rJ4V2DVe6oIATIZESiSaKdXGB3CNvQ==
+      integrity: sha512-9fAUXVYsHiYi8CGMX+MagSRN+kdVfQ/RgRMOac1+IyHbyjPiHzdNeLQiCikdolhIfVutRvBBL9stWHj6ZXXqCg==
       tarball: file:projects/codemodel.tgz
     version: 0.0.0
   file:projects/common.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9116,7 +9117,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-nUgPPsKp0h1bKcrjUj58WuEmjV5XJayd8TaE9FwZm+wcEcSTbdomD3L3OrRj7USGuW0d57jihYTKr1QE+MSmyw==
+      integrity: sha512-ogaL/BtpeDw/vNeMWqIiuxwOh+1pasOF+jGqM9GVH7Nc+OmNGJ9Eo/rO/Xmp9IKZtjU7nx9O9Zy9MBPzM+Tc3A==
       tarball: file:projects/common.tgz
     version: 0.0.0
   file:projects/compare.tgz_prettier@2.2.1:
@@ -9149,7 +9150,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-FnuDiviwjBBAI60lgifZq4WBLomJOy4Z+nGK/E1mQMmPTn1lXVs0F75LQrPEEGoY8//+g43U+5DQBdP6GXlbpA==
+      integrity: sha512-MN/5BOPdjF3WRLdpWKfuSWORddarBDR0MEwozLpmNHyzyWUFXEDWe6jFIBhtvFwAsKExTzThDj/7RKmZxePafQ==
       tarball: file:projects/compare.tgz
     version: 0.0.0
   file:projects/configuration.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9177,7 +9178,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-ztkakhKfK8Y/FixtdTO28taQWtFo5wFu6oXo2hsshFFHMUOEZ4BEomDBaAUzWUH956vw7RcbvzXkTno8aZoRrg==
+      integrity: sha512-KJ7/DjTf5PsSbFqZkdjzcYa3QF0TECE7P1H3p6RFJI2dlyG4/ARdvYDpkceCbeBV/veTm8Sa5SiqTL5dxz1/ZQ==
       tarball: file:projects/configuration.tgz
     version: 0.0.0
   file:projects/core.tgz_ts-node@9.1.1:
@@ -9232,7 +9233,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-SGSO550wNvYfoEJ9ztYJMwLE9kEwskKJw1sec03+8VNtGtPCfF3XMwpcMsgYMDVWZd2yAdR4l9upHpE6w3p8Lw==
+      integrity: sha512-2qPz1ItnvSVlzHPFBI3VdvJMWT8kHoO2F5WZQILigYE1FkzpLuFKmwgiSuBkSaJH+ww+qeXhZThe+6APRdry9g==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9265,7 +9266,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-9XGDUEEt44VkCbJxFPjzskKfeqMLYcVn6zDGBYmBVz5ho+et0+iLR5oD3sMfJybn3dlQz0sGTmF7/XO0FZ4zqQ==
+      integrity: sha512-sNk9sCNXH/XdbyPfnC5qPx/qi+4gL4xyZAmWFI5qTG32cLeyI17tToGPXuT0nC6m/AkXLjQhdCUQwZeEpCKt7g==
       tarball: file:projects/datastore.tgz
     version: 0.0.0
   file:projects/deduplication.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9292,7 +9293,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-m67lcWGcI7be0nETxDVYhyudvBTQ4KCbiNcOGgSeKk/eVdL0bbDfZa0jNRxhf9l0A+FLk/F3iUfZAtAVHDa/gw==
+      integrity: sha512-+tExIQDYBZy1cZM9UQ1hVmMIjxh55dlXbsvhLhKk27i09pbEcoPXKPGB5EEPKnvvgJS1uXGrR9BAD5mKE4CX8Q==
       tarball: file:projects/deduplication.tgz
     version: 0.0.0
   file:projects/extension-base.tgz_prettier@2.2.1:
@@ -9315,7 +9316,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-Sq/pjne5Vs47e0F07MW+WZfJlry3MqxbHPSKV3hawrqSbeXQITOSnpjtwgy2wsGII8ojr9w1lvkEUqgqX/x3ug==
+      integrity: sha512-1vj2h0KUiNi0YGtfqyIWH/AasDFIThlzxeN0uhLCtGeld4wDs6fAP7vY9fyurVVNn+VGvqTjH0r5nnD3ZRPomg==
       tarball: file:projects/extension-base.tgz
     version: 0.0.0
   file:projects/extension.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9357,6 +9358,29 @@ packages:
     resolution:
       integrity: sha512-he5P0rfZ8IwYSBCZwqfXDAjdB9xCeqK4LXhmIhNOphJshMkGtEILKrTAj0VD9KM1f85qAOq5ViHqVHfiuGFctw==
       tarball: file:projects/extension.tgz
+    version: 0.0.0
+  file:projects/jsonschema.tgz_prettier@2.2.1+ts-node@9.1.1:
+    dependencies:
+      '@types/jest': 26.0.20
+      '@types/node': 14.14.34
+      '@typescript-eslint/eslint-plugin': 4.17.0_3641211d697b4d4d12940eb9cf33dc28
+      '@typescript-eslint/parser': 4.17.0_eslint@7.21.0+typescript@4.2.3
+      eslint: 7.21.0
+      eslint-plugin-node: 11.1.0_eslint@7.21.0
+      eslint-plugin-prettier: 3.2.0_eslint@7.21.0+prettier@2.2.1
+      eslint-plugin-unicorn: 27.0.0_eslint@7.21.0
+      jest: 26.6.3_ts-node@9.1.1
+      rimraf: 3.0.2
+      typescript: 4.2.3
+    dev: false
+    id: file:projects/jsonschema.tgz
+    name: '@rush-temp/jsonschema'
+    peerDependencies:
+      prettier: '*'
+      ts-node: '*'
+    resolution:
+      integrity: sha512-5XpiqTOFShmnk47wRywTCH8st0HpKkXv1liw1jZLM+4ofb13HzAoWnxnAUvAW9mppk346Y6pXCnnVIaDuL6HZQ==
+      tarball: file:projects/jsonschema.tgz
     version: 0.0.0
   file:projects/md-mock-api.tgz_ts-node@9.1.1:
     dependencies:
@@ -9435,7 +9459,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-dyodjljZwDI82Z0WvdyWtMp//WL4+3ONLOY9K9pWznoxP2jnq4n6ywVC6tWOIB6SPZVvNiKXS6gWHwf5o9afvw==
+      integrity: sha512-it5TO6k4oAIA8qJ/8tE+2qb4EQN/icDcDI1Odoq9rfLEX7IGt3tcmcPhziH/v4LVPOWaSLnp7Auy/InsKLNhLg==
       tarball: file:projects/modelerfour.tgz
     version: 0.0.0
   file:projects/oai2-to-oai3.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9463,7 +9487,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-hibjbhIAfthfms8GlsJI4fZz93A73JiO2wDGsOP9D/YMj9Ef9GXoe4oLQfkbYfKcwj885mawJV/TqirDsJoHRw==
+      integrity: sha512-ZDOC+4FN9X8JUwPJADzORKc5VY5OgpoQSt45HFdW2lEJnUhKEu25q94yaYk91/SnohJ4y9AaIW+rUCksRCUcPg==
       tarball: file:projects/oai2-to-oai3.tgz
     version: 0.0.0
   file:projects/openapi.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9511,7 +9535,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-SAUvCraUOB2VCu0NBoDhJoFG80qSN5xVY2BTjCCOLz3DkFBIhHlEVLH9I+VOvBK44P1pilOwQJG1WknNPw9SdQ==
+      integrity: sha512-V4Z4Z2TNrXNy8FMLGuk9uJh/V7d3UyMB7mAfoMhySkyHvB6WsrirDJCi596Hmk4V2xrC6fzUQONnodb+0rQWgg==
       tarball: file:projects/test-public-packages.tgz
     version: 0.0.0
   file:projects/test-utils.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9532,9 +9556,10 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-avGo/LW8WilQ37XPpPHqyRVtrS6FS4Oxm2NnkvMKV6v3UA8sQMMLH4QglVnyVpZDP8ULsCZwWrc7kVe+iYlZKA==
+      integrity: sha512-nuFWmDF0AyvYS6KLkzHGpEHP+Qko3rnM7JJ2VGnikgg4anJnInHR0yhIZBh7JKh3E9UExU+FZrgFXg2dnCleIw==
       tarball: file:projects/test-utils.tgz
     version: 0.0.0
+registry: ''
 specifiers:
   '@azure-tools/async-io': ~3.0.0
   '@azure-tools/eventing': ~3.0.0
@@ -9553,6 +9578,7 @@ specifiers:
   '@rush-temp/deduplication': file:./projects/deduplication.tgz
   '@rush-temp/extension': file:./projects/extension.tgz
   '@rush-temp/extension-base': file:./projects/extension-base.tgz
+  '@rush-temp/jsonschema': file:./projects/jsonschema.tgz
   '@rush-temp/md-mock-api': file:./projects/md-mock-api.tgz
   '@rush-temp/modelerfour': file:./projects/modelerfour.tgz
   '@rush-temp/oai2-to-oai3': file:./projects/oai2-to-oai3.tgz
