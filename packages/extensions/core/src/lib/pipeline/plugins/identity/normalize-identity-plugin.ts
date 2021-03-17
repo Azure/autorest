@@ -1,7 +1,48 @@
 import { DataHandle, DataSink, DataSource, QuickDataSource, visit } from "@azure-tools/datastore";
+import { parseJsonRef, stringifyJsonRef } from "@azure-tools/jsonschema";
 import { cloneDeep } from "lodash";
 import { AutorestContext } from "../../../configuration";
 import { PipelinePlugin } from "../../common";
+import { URL } from "url";
+import { resolve } from "node:url";
+
+/**
+ * Find the common path from all the provided paths.
+ * @param paths List of paths to resolve the common parent.
+ * @returns common parent path.
+ */
+function resolveCommonPath(paths: string[]): string {
+  const [first, ...parsedPaths] = paths.map((x) => x.split("/"));
+  const commonPath: string[] = [];
+  for (let i = 0; i < first.length; i++) {
+    for (const path of parsedPaths) {
+      if (path[i] !== first[i]) {
+        return commonPath.join("/");
+      }
+    }
+    commonPath.push(first[i]);
+  }
+  return commonPath.join("/");
+}
+
+function resolveCommonRoot(uris: string[]) {
+  let root = "";
+  const [first, ...parsedUris] = uris.map((x) => new URL(x));
+  for (const uri of parsedUris) {
+    if (uri.protocol !== first.protocol) {
+      return root;
+    }
+  }
+  root += `${first.protocol}//`;
+  for (const uri of parsedUris) {
+    if (uri.host !== first.host) {
+      return root;
+    }
+  }
+  root += first.host;
+
+  return `${root}${resolveCommonPath([first, ...parsedUris].map((x) => x.pathname))}/`;
+}
 
 /**
  * Compute the new filemap names.
@@ -11,9 +52,12 @@ import { PipelinePlugin } from "../../common";
 function resolveNewIdentity(dataHandles: DataHandle[]): Map<string, string> {
   const map = new Map<string, string>();
 
+  const root = resolveCommonRoot(dataHandles.map((x) => x.Description));
   for (const data of dataHandles) {
-    const filename = data.Description;
-    map.set(data.Description, filename.replace(/[:/]/g, "-"));
+    if (!data.Description.startsWith(root)) {
+      throw new Error(`Unexpected error: '${data.Description}' does not start with '${root}'`);
+    }
+    map.set(data.Description, data.Description.substring(root.length));
   }
 
   return map;
@@ -50,10 +94,10 @@ function updateRefs(node: any, fileMap: Map<string, string>) {
       const ref = value.$ref;
       if (ref) {
         // see if this object has a $ref
-        const [file, path] = ref.split("#");
-        const newFile = fileMap.get(file);
+        const { file, path } = parseJsonRef(ref);
+        const newFile = file && fileMap.get(file);
         if (newFile) {
-          value.$ref = `${newFile}#${path}`;
+          value.$ref = stringifyJsonRef({ file: newFile, path });
         }
       }
       // now, recurse into this object
