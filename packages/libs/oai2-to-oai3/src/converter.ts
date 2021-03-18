@@ -1,4 +1,4 @@
-import { createGraphProxy, JsonPointer, Node, visit, get } from "@azure-tools/datastore";
+import { createGraphProxy, JsonPointer, Node, visit, get, typeOf } from "@azure-tools/datastore";
 import { Mapping } from "source-map";
 import { resolveOperationConsumes, resolveOperationProduces } from "./content-type-utils";
 import {
@@ -537,9 +537,12 @@ export class Oai2ToOai3 {
         case "uniqueItems":
         case "maxProperties":
         case "minProperties":
-        case "enum":
         case "readOnly":
           target[key] = { value, pointer, recurse: true };
+          break;
+        case "enum":
+          target.enum = this.newArray(pointer);
+          await this.visitEnum(target.enum, childIterator);
           break;
         case "allOf":
           target.allOf = this.newArray(pointer);
@@ -585,6 +588,17 @@ export class Oai2ToOai3 {
         default:
           await this.visitExtensions(target, key, value, pointer);
           break;
+      }
+    }
+  }
+
+  private async visitEnum(target: any, members: () => Iterable<Node>) {
+    for (const { key: index, value, pointer, childIterator } of members()) {
+      if (typeof value === "object") {
+        target.__push__(this.newObject(pointer));
+        await this.visitSchema(target[index], value, childIterator);
+      } else {
+        target.__push__({ value, pointer, recurse: true });
       }
     }
   }

@@ -1,0 +1,45 @@
+{
+  "servers": [],
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0",
+    "title": "test",
+    "description": "Test"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "MyStringEnum": {
+        "type": "object",
+        "enum": [
+          "foo",
+          "bar"
+        ]
+      },
+      "MyNumberEnum": {
+        "type": "object",
+        "enum": [
+          7,
+          998,
+          12310
+        ]
+      },
+      "MyObjectEnum": {
+        "type": "object",
+        "enum": [
+          {
+            "$ref": "#/components/schemas/FrequencySingle"
+          }
+        ]
+      },
+      "MyEnumValue": {
+        "type": "object",
+        "properties": {
+          "age": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}
