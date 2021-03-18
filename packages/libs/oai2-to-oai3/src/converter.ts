@@ -508,7 +508,6 @@ export class Oai2ToOai3 {
     for (const { key, value, pointer, childIterator } of schemaItemMemebers()) {
       switch (key) {
         case "$ref":
-          console.error("$ref", value);
           target.$ref = { value: await this.convertReferenceToOai3(value), pointer };
           break;
         case "additionalProperties":
@@ -595,7 +594,6 @@ export class Oai2ToOai3 {
 
   private async visitEnum(target: any, members: () => Iterable<Node>) {
     for (const { key: index, value, pointer, childIterator } of members()) {
-      console.error("ENUM BA", index, value);
       if (typeof value === "object") {
         const obj = this.newObject(pointer);
         await this.visitSchema(obj, value, childIterator);
