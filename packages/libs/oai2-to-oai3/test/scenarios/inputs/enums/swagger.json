@@ -1,0 +1,38 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "test",
+    "description": "Test"
+  },
+  "produces": ["application/json"],
+  "consumes": ["application/json"],
+  "paths": {},
+  "definitions": {
+    "MyStringEnum": {
+      "type": "object",
+      "enum": ["foo", "bar"]
+    },
+    "MyNumberEnum": {
+      "type": "object",
+      "enum": [7, 998, 12310]
+    },
+    "MyObjectEnum": {
+      "type": "object",
+      "enum": [
+        {
+          "$ref": "#/definitions/FrequencySingle"
+        }
+      ]
+    },
+    "MyEnumValue": {
+      "type": "object",
+      "properties": {
+        "age": {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -595,11 +595,10 @@ export class Oai2ToOai3 {
   private async visitEnum(target: any, members: () => Iterable<Node>) {
     for (const { key: index, value, pointer, childIterator } of members()) {
       if (typeof value === "object") {
-        const obj = this.newObject(pointer);
-        await this.visitSchema(obj, value, childIterator);
-        target.__push__(obj);
+        target.__push__(this.newObject(pointer));
+        await this.visitSchema(target[index], value, childIterator);
       } else {
-        target.__push__(value);
+        target.__push__({ value, pointer, recurse: true });
       }
     }
   }
