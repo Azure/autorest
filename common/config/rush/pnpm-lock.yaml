@@ -4,7 +4,7 @@ dependencies:
   '@azure-tools/linq': 3.1.262
   '@azure-tools/object-comparison': 3.0.252
   '@azure-tools/tasks': 3.0.253
-  '@azure-tools/uri': 3.1.1-dev.2
+  '@azure-tools/uri': 3.1.1
   '@rush-temp/autorest': file:projects/autorest.tgz_ts-node@9.1.1+webpack-cli@4.4.0
   '@rush-temp/codegen': file:projects/codegen.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/codemodel': file:projects/codemodel.tgz_prettier@2.2.1
@@ -146,7 +146,7 @@ packages:
       node: '>=10.12.0'
     resolution:
       integrity: sha512-ViYOxgal9iukwbebZUpj5hEnT6OjSLDFItqPXYfMkntm7BCM1OQbBVo49KMBqOyCu6o+M5EVC7KF8SldL3oGtg==
-  /@azure-tools/uri/3.1.1-dev.2:
+  /@azure-tools/uri/3.1.1:
     dependencies:
       '@azure-tools/async-io': 3.0.253
       file-url: 3.0.0
@@ -156,7 +156,7 @@ packages:
     engines:
       node: '>=10.12.0'
     resolution:
-      integrity: sha512-hGtSLrMt+w66+jIq1cYt5p+8sY9HMW4OZfCQAtIwRlgoke6TOEVBeQ+zYHKnxyJy90DzYacufWrd6DbjtN09Wg==
+      integrity: sha512-UgPgD+qVtm4ASYqoTDazjowimrmMGGEQqPnNk9K/8CZdi2oSLtGqX9S1++2+NDaHlq74VyxbcNMKoxgO+2CCUQ==
   /@babel/code-frame/7.12.11:
     dependencies:
       '@babel/highlight': 7.13.10
@@ -9014,7 +9014,7 @@ packages:
     dependencies:
       '@azure-tools/async-io': 3.0.253
       '@azure-tools/tasks': 3.0.253
-      '@azure-tools/uri': 3.1.1-dev.2
+      '@azure-tools/uri': 3.1.1
       '@types/commonmark': 0.27.4
       '@types/jest': 26.0.20
       '@types/node': 14.14.34
@@ -9047,7 +9047,7 @@ packages:
       ts-node: '*'
       webpack-cli: '*'
     resolution:
-      integrity: sha512-4ImUrdp6BUHe5/KZsGAlomSmOMeGUkKBF2RGWJVormcrE7L44q+uzcaf3rsQFBVo4q1j/AgtzWJYJoVLFTvHCw==
+      integrity: sha512-QuC8csMGwk7MiCLuCbkfQI4cKxqo3jsjEs+lb9dQS1bGiTjvimv32o4SvJFxBr2GFuMAlEG7i8VP/B64PKky7g==
       tarball: file:projects/autorest.tgz
     version: 0.0.0
   file:projects/codegen.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9167,7 +9167,7 @@ packages:
   file:projects/configuration.tgz_prettier@2.2.1+ts-node@9.1.1:
     dependencies:
       '@azure-tools/async-io': 3.0.253
-      '@azure-tools/uri': 3.1.1-dev.2
+      '@azure-tools/uri': 3.1.1
       '@types/jest': 26.0.20
       '@types/lodash': 4.14.168
       '@types/node': 14.14.34
@@ -9189,7 +9189,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-YuDxJ6aK4vLEyOAMBEDgmn20plL/YxeZMNQrI3r/UK1OKfxQAMjek9vylIWV8k+yAkx5/sxRSmMUia8oyCg+7Q==
+      integrity: sha512-s3kL3EbNMTlANrV2eaS4QE2bzF4aOnzYZTK74w2MpQ2Gk2pN7ZS5MIh4yfTB9O4+ZMgT63c/75Mff8Y1kFPHHA==
       tarball: file:projects/configuration.tgz
     version: 0.0.0
   file:projects/core.tgz_ts-node@9.1.1:
@@ -9198,7 +9198,7 @@ packages:
       '@azure-tools/linq': 3.1.262
       '@azure-tools/object-comparison': 3.0.252
       '@azure-tools/tasks': 3.0.253
-      '@azure-tools/uri': 3.1.1-dev.2
+      '@azure-tools/uri': 3.1.1
       '@types/commonmark': 0.27.4
       '@types/jest': 26.0.20
       '@types/jsonpath': 0.2.0
@@ -9244,14 +9244,14 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-874s1PokBEivVJT3PvcZsaBVzCMgykzAn9S4GXTnEaSwZSV762w2+5IqT11fma3ZRLLC1tI8l7n8fQF919CZiA==
+      integrity: sha512-M7zC32jqRwuryr1VgH8HYS0Ss+Q+OM4zKLbTNuI/brIKEXux0aVPbN2nWr8bFz69ctzNjBiBdjlN+LT+t/LmQg==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.2.1+ts-node@9.1.1:
     dependencies:
       '@azure-tools/linq': 3.1.262
       '@azure-tools/tasks': 3.0.253
-      '@azure-tools/uri': 3.1.1-dev.2
+      '@azure-tools/uri': 3.1.1
       '@types/jest': 26.0.20
       '@types/jsonpath': 0.2.0
       '@types/node': 14.14.34
@@ -9277,7 +9277,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-OMPk/Tw9ZKflJNPqcq23WNbOJSBWNAIp0PAAkOC2Ol/ZkjmYvsO93IWjMVqMXA5rFoJ3PyEYsuKs2XxRce4KEQ==
+      integrity: sha512-859pEc+p/6R9manmRzKkoj2igppVAgitUOSCVjjF1DfaFl5xcnjJWUV1PHsW6Ve9jazhI+sovI60hqZLVg0a6g==
       tarball: file:projects/datastore.tgz
     version: 0.0.0
   file:projects/deduplication.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9420,7 +9420,7 @@ packages:
       '@azure-tools/async-io': 3.0.253
       '@azure-tools/linq': 3.1.262
       '@azure-tools/tasks': 3.0.253
-      '@azure-tools/uri': 3.1.1-dev.2
+      '@azure-tools/uri': 3.1.1
       '@types/jest': 26.0.20
       '@types/node': 14.14.34
       '@types/webpack': 4.41.26
@@ -9447,7 +9447,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-PybWMaOlA7czeQ9Mtalp4c/uaTgtGynemi2W9MPW/sjm7tAvJp0D4tdlupcImYOZYqtD+7WsTmXffhEJ11cjbA==
+      integrity: sha512-jx10+RX3uXUDtHXVXGVfFhHwQdeoenNm7CqKsS05+6fwU+oscHx8PS+8Z+cEpp5Vp4UKtoGuV0Yd5Wld+rinRA==
       tarball: file:projects/modelerfour.tgz
     version: 0.0.0
   file:projects/oai2-to-oai3.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9554,7 +9554,7 @@ specifiers:
   '@azure-tools/linq': ~3.1.0
   '@azure-tools/object-comparison': ~3.0.0
   '@azure-tools/tasks': ~3.0.0
-  '@azure-tools/uri': 3.1.1-dev.2
+  '@azure-tools/uri': ~3.1.1
   '@rush-temp/autorest': file:./projects/autorest.tgz
   '@rush-temp/codegen': file:./projects/codegen.tgz
   '@rush-temp/codemodel': file:./projects/codemodel.tgz
