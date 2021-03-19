@@ -44,7 +44,7 @@
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/extension": "~3.2.4",
     "@azure-tools/tasks": "~3.0.0",
-    "@azure-tools/uri": "~3.0.0",
+    "@azure-tools/uri": "3.1.1-dev.2",
     "@types/commonmark": "^0.27.0",
     "@types/jest": "^26.0.20",
     "@types/node": "~14.14.20",
