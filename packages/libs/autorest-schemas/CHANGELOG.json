@@ -2,6 +2,21 @@
   "name": "@autorest/schemas",
   "entries": [
     {
+      "version": "1.1.0",
+      "tag": "@autorest/schemas_v1.1.0",
+      "date": "Tue, 16 Mar 2021 15:52:56 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update schemas to jsonschema draft-07."
+          },
+          {
+            "comment": "Update schemas to use if else instead of oneof to provide more helpful validation."
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.1",
       "tag": "@autorest/schemas_v1.0.1",
       "date": "Tue, 09 Feb 2021 22:00:21 GMT",

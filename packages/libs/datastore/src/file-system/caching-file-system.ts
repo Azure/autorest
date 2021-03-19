@@ -1,14 +1,14 @@
-import { IFileSystem } from "@azure-tools/datastore";
+import { IFileSystem } from "./file-system";
 
 export class CachingFileSystem implements IFileSystem {
   protected cache = new Map<string, string | Error>();
   constructor(protected actualFileSystem: IFileSystem) {}
 
-  EnumerateFileUris(folderUri: string): Promise<Array<string>> {
-    return this.actualFileSystem.EnumerateFileUris(folderUri);
+  public list(folderUri: string): Promise<Array<string>> {
+    return this.actualFileSystem.list(folderUri);
   }
 
-  async ReadFile(uri: string): Promise<string> {
+  public async read(uri: string): Promise<string> {
     const content = this.cache.get(uri);
     if (content !== undefined) {
       if (typeof content === "string") {
@@ -17,7 +17,7 @@ export class CachingFileSystem implements IFileSystem {
       throw content;
     }
     try {
-      const data = await this.actualFileSystem.ReadFile(uri);
+      const data = await this.actualFileSystem.read(uri);
       this.cache.set(uri, data);
       return data;
     } catch (E) {
@@ -25,5 +25,19 @@ export class CachingFileSystem implements IFileSystem {
       this.cache.set(uri, E);
       throw E;
     }
+  }
+
+  /**
+   * @deprecated
+   */
+  public EnumerateFileUris(folderUri: string): Promise<Array<string>> {
+    return this.list(folderUri);
+  }
+
+  /**
+   * @deprecated
+   */
+  public async ReadFile(uri: string): Promise<string> {
+    return this.read(uri);
   }
 }

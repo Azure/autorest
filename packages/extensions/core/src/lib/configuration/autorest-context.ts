@@ -1,15 +1,10 @@
-import { DataStore } from "@azure-tools/datastore";
+import { DataStore, CachingFileSystem } from "@azure-tools/datastore";
 import { clone } from "@azure-tools/linq";
 import { From } from "linq-es2015";
 import { basename, dirname } from "path";
 import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
 import { Artifact } from "../artifact";
-import {
-  CachingFileSystem,
-  getNestedConfiguration,
-  ResolvedDirective,
-  resolveDirectives,
-} from "@autorest/configuration";
+import { getNestedConfiguration, ResolvedDirective, resolveDirectives } from "@autorest/configuration";
 import { MessageEmitter } from "./message-emitter";
 import { IEvent } from "../events";
 import {

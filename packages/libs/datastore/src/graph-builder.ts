@@ -66,16 +66,16 @@ export function createGraphProxy<T extends object>(
       return instance[key];
     },
 
-    set(target: ProxyObject<T>, key: string | number, value: ProxyNode<any>): boolean {
+    set(target: ProxyObject<T>, key, value: ProxyNode<any>): boolean {
       // check if this is a correct assignment.
       if (value.value === undefined) {
-        throw new Error(`Assignment: Value '${key}' may not be undefined.`);
+        throw new Error(`Assignment: Value '${String(key)}' may not be undefined.`);
       }
       if (value.pointer === undefined) {
-        throw new Error(`Assignment: for '${key}', a json pointer property is required.`);
+        throw new Error(`Assignment: for '${String(key)}', a json pointer property is required.`);
       }
       if (instance[key]) {
-        throw new Exception(`Collision detected inserting into object: ${key}`); //-- ${JSON.stringify(instance, null, 2)}
+        throw new Exception(`Collision detected inserting into object: ${String(key)}`); //-- ${JSON.stringify(instance, null, 2)}
       }
       const filename = value.filename || originalFileName;
       if (!filename) {
@@ -83,7 +83,14 @@ export function createGraphProxy<T extends object>(
       }
 
       instance[key] = value.value;
-      tag(value.value, filename, value.pointer, key, value.subject, value.recurse ? true : false);
+      tag(
+        value.value,
+        filename,
+        value.pointer,
+        typeof key === "symbol" ? String(key) : key,
+        value.subject,
+        value.recurse ? true : false,
+      );
 
       return true;
     },

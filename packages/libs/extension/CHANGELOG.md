@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/extension
 
-This log was last generated on Fri, 05 Mar 2021 16:31:29 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Mar 2021 15:52:56 GMT and should not be manually modified.
+
+## 3.2.4
+Tue, 16 Mar 2021 15:52:56 GMT
+
+### Patches
+
+- Bump dependencies versions
 
 ## 3.2.3
 Fri, 05 Mar 2021 16:31:29 GMT

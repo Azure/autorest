@@ -1,6 +1,6 @@
 {
   "name": "@autorest/extension-base",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Library for creating AutoRest extensions",
   "main": "dist/exports.js",
   "typings": "./dist/exports.d.ts",
@@ -36,11 +36,11 @@
     "eslint-plugin-unicorn": "~27.0.0",
     "eslint": "^7.17.0",
     "rimraf": "^3.0.2",
-    "typescript": "~4.1.3"
+    "typescript": "~4.2.3"
   },
   "dependencies": {
     "js-yaml": "~4.0.0",
     "vscode-jsonrpc": "^3.5.0",
-    "@azure-tools/codegen": "~2.5.293"
+    "@azure-tools/codegen": "~2.5.294"
   }
 }

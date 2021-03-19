@@ -291,8 +291,8 @@ export class ModelerFour {
     throw new Error(`Unresolved item '${item}'`);
   }
 
-  resolveArray<T>(source?: Array<Refable<T>>) {
-    return values(source).select((each) => dereference(this.input, each).instance);
+  resolveArray<T>(source: Array<Refable<T>> | undefined) {
+    return (source ?? []).map((each) => dereference(this.input, each).instance);
   }
 
   resolveDictionary<T>(source?: Dictionary<Refable<T>>) {
@@ -647,6 +647,32 @@ export class ModelerFour {
     );
   }
 
+  /**
+   *
+   * @param name Name of the schema
+   * @param schema OpenApi3 schema.
+   * @returns List of choicevalue from parents enum(refed using allOf) if any.
+   */
+  private getChoiceSchemaParentValues(name: string, schema: OpenAPI.Schema): ChoiceValue[] {
+    if (!schema.allOf) {
+      return [];
+    }
+
+    const parentChoices: ChoiceValue[] = [];
+    const parents = schema.allOf?.map((x) => this.use(x, (n, i) => this.processSchema(n, i)));
+    for (const parent of parents) {
+      if (parent.type === SchemaType.Choice || parent.type === SchemaType.SealedChoice) {
+        const parentChoice = parent as ChoiceSchema;
+        parentChoices.push(...parentChoice.choices);
+      } else {
+        throw new Error(
+          `Unexpected parent type for enum ${name}. ${parent.language.default.name} should be an enum of the same type but is a ${parent.type}`,
+        );
+      }
+    }
+    return parentChoices.map((x) => new ChoiceValue("", "", "", x));
+  }
+
   processChoiceSchema(name: string, schema: OpenAPI.Schema): ChoiceSchema | SealedChoiceSchema | ConstantSchema {
     const xmse = <XMSEnum>schema["x-ms-enum"];
     name = (xmse && xmse.name) || this.interpret.getName(name, schema);
@@ -654,9 +680,12 @@ export class ModelerFour {
     const alwaysSeal = this.options[`always-seal-x-ms-enums`] === true;
     const sealed = xmse && (alwaysSeal || !xmse.modelAsString);
 
+    const parentChoices = this.getChoiceSchemaParentValues(name, schema);
+    const choices = [...parentChoices, ...this.interpret.getEnumChoices(schema)];
+
     // model as string forces it to be a choice/enum.
-    if (!alwaysSeal && xmse?.modelAsString !== true && (length(schema.enum) === 1 || length(xmse?.values) === 1)) {
-      const constVal = length(xmse?.values) === 1 ? xmse?.values?.[0]?.value : schema?.enum?.[0];
+    if (!alwaysSeal && xmse?.modelAsString !== true && choices.length === 1) {
+      const constVal = choices[0].value;
 
       return this.codeModel.schemas.add(
         new ConstantSchema(name, this.interpret.getDescription(``, schema), {
@@ -686,7 +715,7 @@ export class ModelerFour {
           externalDocs: this.interpret.getExternalDocs(schema),
           serialization: this.interpret.getSerialization(schema),
           choiceType: <any>this.getPrimitiveSchemaForEnum(schema),
-          choices: this.interpret.getEnumChoices(schema),
+          choices,
         }),
       );
     }
@@ -702,7 +731,7 @@ export class ModelerFour {
         externalDocs: this.interpret.getExternalDocs(schema),
         serialization: this.interpret.getSerialization(schema),
         choiceType: <any>this.getPrimitiveSchemaForEnum(schema),
-        choices: this.interpret.getEnumChoices(schema),
+        choices,
       }),
     );
   }
@@ -746,16 +775,18 @@ export class ModelerFour {
     return this.codeModel.schemas.add(dictSchema);
   }
 
-  isSchemaPolymorphic(schema: OpenAPI.Schema | undefined): boolean {
+  findPolymorphicDiscriminator(schema: OpenAPI.Schema | undefined): OpenAPI.Discriminator | undefined {
     if (schema) {
       if (schema.type === JsonType.Object) {
         if (schema.discriminator) {
-          return true;
+          return schema.discriminator;
         }
-        return this.resolveArray(schema.allOf).any((each) => this.isSchemaPolymorphic(each));
+        return this.resolveArray(schema.allOf)
+          .map((each) => this.findPolymorphicDiscriminator(each))
+          .filter((x) => !!x)[0];
       }
     }
-    return false;
+    return undefined;
   }
 
   createObjectSchema(name: string, schema: OpenAPI.Schema) {
@@ -886,10 +917,10 @@ export class ModelerFour {
 
     if (parents.length > 0 && xorTypes.length === 0 && orTypes.length === 0) {
       // craft the and type for the model.
-      const n = this.interpret.getName(name, schema);
-      const isPolymorphic = this.isSchemaPolymorphic(schema);
-      objectSchema.discriminatorValue = isPolymorphic ? schema["x-ms-discriminator-value"] || n : undefined;
-
+      const discriminator = this.findPolymorphicDiscriminator(schema);
+      objectSchema.discriminatorValue = discriminator
+        ? this.findDiscriminatorValue(discriminator, name, schema)
+        : undefined;
       objectSchema.parents = new Relations();
       objectSchema.parents.immediate = parents;
 
@@ -936,6 +967,24 @@ export class ModelerFour {
     }
     return objectSchema;
   }
+
+  private findDiscriminatorValue(discriminator: OpenAPI.Discriminator, name: string, schema: OpenAPI.Schema): string {
+    if (schema["x-ms-discriminator-value"]) {
+      return schema["x-ms-discriminator-value"];
+    }
+
+    const mappedValue = discriminator.mapping
+      ? this.findDiscriminatorValueFromMapping(name, discriminator.mapping)
+      : undefined;
+
+    return mappedValue ?? this.interpret.getName(name, schema);
+  }
+
+  private findDiscriminatorValueFromMapping(name: string, mapping: { [key: string]: string }): string | undefined {
+    const entry = Object.entries(mapping).find(([_, ref]) => ref === `#/components/schemas/${name}`);
+    return entry?.[0];
+  }
+
   processOdataSchema(name: string, schema: OpenAPI.Schema): ODataQuerySchema {
     throw new Error("Method not implemented.");
   }

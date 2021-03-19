@@ -1,6 +1,15 @@
 # Change Log - @autorest/common
 
-This log was last generated on Fri, 05 Mar 2021 16:31:29 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Mar 2021 15:52:56 GMT and should not be manually modified.
+
+## 1.1.1
+Tue, 16 Mar 2021 15:52:56 GMT
+
+### Patches
+
+- Add `trackWarning` functionality to logger
+- **Fix** Max call stack issue with loading very large swagger
+- Bump dependencies versions
 
 ## 1.1.0
 Fri, 05 Mar 2021 16:31:29 GMT

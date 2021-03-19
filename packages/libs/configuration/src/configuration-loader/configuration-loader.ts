@@ -1,9 +1,8 @@
-import { DataStore, IFileSystem, RealFileSystem } from "@azure-tools/datastore";
+import { DataStore, IFileSystem, RealFileSystem, CachingFileSystem } from "@azure-tools/datastore";
 import { Extension, ExtensionManager, LocalExtension } from "@azure-tools/extension";
 import { CreateFileUri, ResolveUri, simplifyUri, FileUriToPath } from "@azure-tools/uri";
 import { AutorestLogger } from "@autorest/common";
 import untildify from "untildify";
-import { CachingFileSystem } from "../caching-file-system";
 import { AutorestConfiguration } from "../autorest-configuration";
 import { detectConfigurationFile } from "../configuration-file-resolver";
 import { ConfigurationManager, readConfigurationFile } from "../configuration-manager";

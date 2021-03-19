@@ -2,6 +2,29 @@
   "name": "@azure-tools/oai2-to-oai3",
   "entries": [
     {
+      "version": "4.2.278",
+      "tag": "@azure-tools/oai2-to-oai3_v4.2.278",
+      "date": "Tue, 16 Mar 2021 15:52:56 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump dependencies versions"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.1.271` to `~4.2.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.1.0` to `~3.1.1`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.1.0` to `~0.2.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.2.277",
       "tag": "@azure-tools/oai2-to-oai3_v4.2.277",
       "date": "Fri, 05 Mar 2021 16:31:29 GMT",

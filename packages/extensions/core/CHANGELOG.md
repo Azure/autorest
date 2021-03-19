@@ -1,6 +1,34 @@
 # Change Log - @autorest/core
 
-This log was last generated on Mon, 08 Mar 2021 18:07:37 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Mar 2021 19:28:18 GMT and should not be manually modified.
+
+## 3.2.1
+Tue, 16 Mar 2021 19:28:18 GMT
+
+### Patches
+
+- **Update** @azure-tools/data-store
+
+## 3.2.0
+Tue, 16 Mar 2021 15:52:56 GMT
+
+### Minor changes
+
+- Update swagger schema validator to use new system(`ajv` & `ajv-errors`) providing more relevant information
+
+### Patches
+
+- **Fix** enum deduplicator to prevent crash when using allOf in enums
+- **Handle** Discrimnator mapping. Make sure the refs are updated
+- **Fix** Cannot read property 'pass-thru' of undefined crash
+- Bump dependencies versions
+
+## 3.1.3
+Wed, 10 Mar 2021 02:02:59 GMT
+
+### Patches
+
+- **Update** @autorest/configuration to uptake directives array fix
 
 ## 3.1.2
 Mon, 08 Mar 2021 18:07:37 GMT
