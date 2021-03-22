@@ -9,6 +9,10 @@ export interface KnownMediaTypeGroupItem {
   mediaType: string;
   schema: Dereferenced<OpenAPI.Schema | undefined>;
 }
+
+/**
+ * Body processing functions
+ */
 export class BodyProcessor {
   public constructor(private session: Session<OpenAPI.Model>) {}
 
