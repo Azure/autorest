@@ -17,3 +17,8 @@ const resolveAppRoot = () => {
  * Root of autorest core(i.e core folder)
  */
 export const AppRoot = resolveAppRoot();
+
+/**
+ * Version of this package.
+ */
+export const VERSION = require("../../package.json").version;

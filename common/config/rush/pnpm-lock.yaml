@@ -5,6 +5,7 @@ dependencies:
   '@azure-tools/object-comparison': 3.0.252
   '@azure-tools/tasks': 3.0.253
   '@azure-tools/uri': 3.1.1
+  '@azure/logger': 1.0.2
   '@rush-temp/autorest': file:projects/autorest.tgz_ts-node@9.1.1+webpack-cli@4.4.0
   '@rush-temp/codegen': file:projects/codegen.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/codemodel': file:projects/codemodel.tgz_prettier@2.2.1
@@ -157,6 +158,14 @@ packages:
       node: '>=10.12.0'
     resolution:
       integrity: sha512-UgPgD+qVtm4ASYqoTDazjowimrmMGGEQqPnNk9K/8CZdi2oSLtGqX9S1++2+NDaHlq74VyxbcNMKoxgO+2CCUQ==
+  /@azure/logger/1.0.2:
+    dependencies:
+      tslib: 2.1.0
+    dev: false
+    engines:
+      node: '>=8.0.0'
+    resolution:
+      integrity: sha512-YZNjNV0vL3nN2nedmcjQBcpCTo3oqceXmgiQtEm6fLpucjRZyQKAQruhCmCpRlB1iykqKJJ/Y8CDmT5rIE6IJw==
   /@babel/code-frame/7.12.11:
     dependencies:
       '@babel/highlight': 7.13.10
@@ -8217,6 +8226,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
+  /tslib/2.1.0:
+    dev: false
+    resolution:
+      integrity: sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A==
   /tsutils/3.21.0_typescript@4.2.3:
     dependencies:
       tslib: 1.14.1
@@ -9252,6 +9265,7 @@ packages:
       '@azure-tools/linq': 3.1.262
       '@azure-tools/tasks': 3.0.253
       '@azure-tools/uri': 3.1.1
+      '@azure/logger': 1.0.2
       '@types/jest': 26.0.20
       '@types/jsonpath': 0.2.0
       '@types/node': 14.14.34
@@ -9277,7 +9291,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-859pEc+p/6R9manmRzKkoj2igppVAgitUOSCVjjF1DfaFl5xcnjJWUV1PHsW6Ve9jazhI+sovI60hqZLVg0a6g==
+      integrity: sha512-uRL9MrUii4CK881JG7n2azamTk9z+zlQprbdEaU21zL04oXvSSyI3FHyOR+qGO+W4iYmphOlHVoRusRiiOCCUg==
       tarball: file:projects/datastore.tgz
     version: 0.0.0
   file:projects/deduplication.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9555,6 +9569,7 @@ specifiers:
   '@azure-tools/object-comparison': ~3.0.0
   '@azure-tools/tasks': ~3.0.0
   '@azure-tools/uri': ~3.1.1
+  '@azure/logger': ^1.0.2
   '@rush-temp/autorest': file:./projects/autorest.tgz
   '@rush-temp/codegen': file:./projects/codegen.tgz
   '@rush-temp/codemodel': file:./projects/codemodel.tgz
