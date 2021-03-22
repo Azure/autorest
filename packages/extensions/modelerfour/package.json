@@ -48,7 +48,7 @@
     "@azure-tools/linq": "~3.1.0",
     "@azure-tools/openapi": "~3.1.1",
     "@azure-tools/tasks": "~3.0.0",
-    "@azure-tools/uri": "~3.0.0",
+    "@azure-tools/uri": "~3.1.1",
     "@types/jest": "^26.0.20",
     "@types/node": "~14.14.20",
     "@types/webpack": "~4.41.26",
