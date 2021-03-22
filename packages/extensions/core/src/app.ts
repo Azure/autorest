@@ -5,6 +5,7 @@
 /* eslint-disable no-console */
 import "source-map-support/register";
 import { omit } from "lodash";
+import { configureLibrariesLogger } from "@autorest/common";
 
 // https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padEnd
@@ -242,6 +243,11 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   }
   verbose = verbose || args.rawSwitches["verbose"];
   debug = debug || args.rawSwitches["debug"];
+
+  // Only show library logs if in verbose or debug mode.
+  if (verbose || debug) {
+    configureLibrariesLogger("verbose", console.log);
+  }
 
   // identify where we are starting from.
   const currentDirUri = CreateFolderUri(currentDirectory());
