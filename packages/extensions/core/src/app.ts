@@ -18,13 +18,13 @@ const color: (text: string) => string = (<any>global).color ? (<any>global).colo
 
 import { CreateObject, EnhancedFileSystem, Parse, RealFileSystem } from "@azure-tools/datastore";
 import {
-  ClearFolder,
-  CreateFolderUri,
-  MakeRelativeUri,
-  ReadUri,
-  ResolveUri,
-  WriteBinary,
-  WriteString,
+  clearFolder,
+  createFolderUri,
+  makeRelativeUri,
+  readUri,
+  resolveUri,
+  writeBinary,
+  writeString,
 } from "@azure-tools/uri";
 import { join, resolve as currentDirectory } from "path";
 import { Help } from "./help";
@@ -127,10 +127,10 @@ function subscribeMessages(api: AutoRest, errorCounter: () => void) {
 }
 
 async function autorestInit(title = "API-NAME", inputs: Array<string> = ["LIST INPUT FILES HERE"]) {
-  const cwdUri = CreateFolderUri(currentDirectory());
+  const cwdUri = createFolderUri(currentDirectory());
   for (let i = 0; i < inputs.length; ++i) {
     try {
-      inputs[i] = MakeRelativeUri(cwdUri, inputs[i]);
+      inputs[i] = makeRelativeUri(cwdUri, inputs[i]);
     } catch {
       // no worries
     }
@@ -190,9 +190,9 @@ async function doClearFolders(protectFiles: Set<string>, clearFolders: Set<strin
     cleared = true;
     for (const folder of clearFolders) {
       try {
-        await ClearFolder(
+        await clearFolder(
           folder,
-          [...protectFiles].map((each) => ResolveUri(folder, each)),
+          [...protectFiles].map((each) => resolveUri(folder, each)),
         );
       } catch {
         // no worries
@@ -232,7 +232,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   }
 
   // identify where we are starting from.
-  const currentDirUri = CreateFolderUri(currentDirectory());
+  const currentDirUri = createFolderUri(currentDirectory());
 
   if (args.rawSwitches["help"]) {
     // if they are asking for help, feed a false file to config so we don't load a user's configuration
@@ -243,7 +243,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   // get an instance of AutoRest and add the command line switches to the configuration.
   const api = new AutoRest(
     new EnhancedFileSystem(githubToken),
-    ResolveUri(currentDirUri, args.configFileOrFolder || "."),
+    resolveUri(currentDirUri, args.configFileOrFolder || "."),
   );
   api.AddConfiguration(args.switches);
 
@@ -266,8 +266,8 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     protectFiles.add(artifact.uri);
     tasks.push(
       artifact.type === "binary-file"
-        ? WriteBinary(artifact.uri, artifact.content)
-        : WriteString(artifact.uri, artifact.content),
+        ? writeBinary(artifact.uri, artifact.content)
+        : writeString(artifact.uri, artifact.content),
     );
   });
   api.Message.Subscribe((_, message) => {
@@ -338,8 +338,8 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
 
     for (const artifact of artifacts) {
       await (artifact.type === "binary-file"
-        ? WriteBinary(artifact.uri, artifact.content)
-        : WriteString(artifact.uri, artifact.content));
+        ? writeBinary(artifact.uri, artifact.content)
+        : writeString(artifact.uri, artifact.content));
     }
   }
   timestampLog("Generation Complete");
@@ -393,8 +393,8 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
   for (const batchContext of config.getNestedConfiguration("resource-schema-batch")) {
     // really, there should be only one
     for (const eachFile of batchContext.config["input-file"] ?? []) {
-      const path = ResolveUri(config.configFileFolderUri, eachFile);
-      const content = await ReadUri(path);
+      const path = resolveUri(config.configFileFolderUri, eachFile);
+      const content = await readUri(path);
       if (!(await IsOpenApiDocument(content))) {
         exitcode++;
         console.error(color(`!File ${path} is not a OpenAPI file.`));
@@ -409,7 +409,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
           if (!outputs.has(file.uri)) {
             outputs.set(file.uri, file.content);
             outstanding = outstanding.then(() =>
-              file.type === "binary-file" ? WriteBinary(file.uri, file.content) : WriteString(file.uri, file.content),
+              file.type === "binary-file" ? writeBinary(file.uri, file.content) : writeString(file.uri, file.content),
             );
             schemas.push(...getRds(more, file.uri));
             return;
@@ -422,7 +422,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
             const content = JSON.stringify(existing, null, 2);
             outputs.set(file.uri, content);
             outstanding = outstanding.then(() =>
-              file.type === "binary-file" ? WriteBinary(file.uri, file.content) : WriteString(file.uri, content),
+              file.type === "binary-file" ? writeBinary(file.uri, file.content) : writeString(file.uri, content),
             );
           }
         }
