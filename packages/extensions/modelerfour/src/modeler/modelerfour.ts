@@ -74,9 +74,11 @@ import {
 } from "@autorest/codemodel";
 import { Session, Channel } from "@autorest/extension-base";
 import { Interpretations, XMSEnum } from "./interpretations";
-import { fail, minimum, pascalCase, knownMediaType, KnownMediaType } from "@azure-tools/codegen";
+import { fail, minimum, pascalCase, KnownMediaType } from "@azure-tools/codegen";
 import { ModelerFourOptions } from "./modelerfour-options";
 import { isContentTypeParameterDefined } from "./utils";
+import { BodyProcessor } from "./body-processor";
+import { isSchemaBinary } from "./schema-utils";
 
 /** adds only if the item is not in the collection already
  *
@@ -149,6 +151,7 @@ export class ModelerFour {
   );
   private options: ModelerFourOptions = {};
   private uniqueNames: Dictionary<any> = {};
+  private bodyProcessor: BodyProcessor;
 
   constructor(protected session: Session<oai3>) {
     this.input = session.model; // shadow(session.model, filename);
@@ -170,6 +173,7 @@ export class ModelerFour {
       },
     });
     this.interpret = new Interpretations(session);
+    this.bodyProcessor = new BodyProcessor(session);
 
     this.preprocessOperations();
   }
@@ -1035,7 +1039,7 @@ export class ModelerFour {
       return this.processChoiceSchema(name, schema);
     }
 
-    if (this.isSchemaBinary(schema)) {
+    if (isSchemaBinary(schema)) {
       // handle inconsistency in file format handling.
       this.session.hint(
         `'The schema ${schema?.["x-ms-metadata"]?.name || name} with 'type: ${schema.type}', format: ${
@@ -1258,18 +1262,8 @@ export class ModelerFour {
     throw new Error(`Unrecognized schema type:'${schema.type}' / format: ${schema.format} ${JSON.stringify(schema)} `);
   }
 
-  groupMediaTypes(oai3Content: Dictionary<MediaType> | undefined) {
-    return items(oai3Content).groupBy(
-      (each) => knownMediaType(each.key),
-      (each) => ({
-        mediaType: each.key,
-        schema: this.resolve(each.value.schema),
-      }),
-    );
-  }
-
   filterMediaTypes(oai3Content: Dictionary<MediaType> | undefined) {
-    const mediaTypeGroups = this.groupMediaTypes(oai3Content);
+    const mediaTypeGroups = this.bodyProcessor.groupMediaTypes(oai3Content);
 
     // filter out invalid combinations
     //if (length(mediaTypeGroups.keys()) > 0) {
@@ -2204,7 +2198,7 @@ export class ModelerFour {
   ) {
     const requestBody = this.resolve(httpOperation.requestBody);
     if (requestBody.instance) {
-      const groupedMediaTypes = this.groupMediaTypes(requestBody.instance.content);
+      const groupedMediaTypes = this.bodyProcessor.groupMediaTypes(requestBody.instance.content);
       const kmtCount = groupedMediaTypes.size;
       switch (httpMethod.toLowerCase()) {
         case "get":
@@ -2231,7 +2225,7 @@ export class ModelerFour {
       }
 
       const kmtBinary = groupedMediaTypes.get(KnownMediaType.Binary);
-
+      const kmtJSON = groupedMediaTypes.get(KnownMediaType.Json);
       if (kmtBinary) {
         // handle binary
         this.processBinary(KnownMediaType.Binary, kmtBinary, operation, requestBody);
@@ -2240,13 +2234,8 @@ export class ModelerFour {
       if (kmtText) {
         this.processBinary(KnownMediaType.Text, kmtText, operation, requestBody);
       }
-      const kmtJSON = groupedMediaTypes.get(KnownMediaType.Json);
       if (kmtJSON) {
-        if ([...kmtJSON.values()].find((x) => x.schema.instance && this.isSchemaBinary(x.schema.instance))) {
-          this.processBinary(KnownMediaType.Binary, kmtJSON, operation, requestBody);
-        } else {
-          this.processSerializedObject(KnownMediaType.Json, kmtJSON, operation, requestBody);
-        }
+        this.processSerializedObject(KnownMediaType.Json, kmtJSON, operation, requestBody);
       }
       const kmtXML = groupedMediaTypes.get(KnownMediaType.Xml);
       if (kmtXML && !kmtJSON) {
@@ -2352,10 +2341,6 @@ export class ModelerFour {
     this.codeModel.schemas.objects?.forEach((o) => this.propagateSchemaUsage(o));
 
     return this.codeModel;
-  }
-
-  private isSchemaBinary(schema: OpenAPI.Schema) {
-    return <any>schema.type === "file" || <any>schema.format === "file" || <any>schema.format === "binary";
   }
 
   private propagateSchemaUsage(schema: Schema): void {
