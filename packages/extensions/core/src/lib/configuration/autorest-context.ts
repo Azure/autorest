@@ -16,6 +16,7 @@ import {
 import { AutorestError, AutorestLogger, AutorestWarning } from "@autorest/common";
 import { Message } from "../message";
 import { AutorestCoreLogger } from "./logger";
+import { VERSION } from "../constants";
 
 export class AutorestContext implements AutorestLogger {
   public config: AutorestConfiguration;
@@ -110,14 +111,12 @@ export class AutorestContext implements AutorestLogger {
 
   public get HeaderText(): string {
     const h = this.config["header-definitions"];
-    const version = (<any>global).autorestVersion;
-
     switch (this.config["license-header"]?.toLowerCase()) {
       case "microsoft_mit":
-        return `${h.microsoft}\n${h.mit}\n${h.default.replace("{core}", version)}\n${h.warning}`;
+        return `${h.microsoft}\n${h.mit}\n${h.default.replace("{core}", VERSION)}\n${h.warning}`;
 
       case "microsoft_apache":
-        return `${h.microsoft}\n${h.apache}\n${h.default.replace("{core}", version)}\n${h.warning}`;
+        return `${h.microsoft}\n${h.apache}\n${h.default.replace("{core}", VERSION)}\n${h.warning}`;
 
       case "microsoft_mit_no_version":
         return `${h.microsoft}\n${h.mit}\n${h["no-version"]}\n${h.warning}`;
@@ -132,14 +131,14 @@ export class AutorestContext implements AutorestLogger {
         return "";
 
       case "microsoft_mit_small":
-        return `${h.microsoft}\n${h["mit-small"]}\n${h.default.replace("{core}", version)}\n${h.warning}`;
+        return `${h.microsoft}\n${h["mit-small"]}\n${h.default.replace("{core}", VERSION)}\n${h.warning}`;
 
       case "microsoft_mit_small_no_codegen":
         return `${h.microsoft}\n${h["mit-small"]}\n${h["no-version"]}`;
 
       case null:
       case undefined:
-        return `${h.default.replace("{core}", version)}\n${h.warning}`;
+        return `${h.default.replace("{core}", VERSION)}\n${h.warning}`;
 
       default:
         return `${this.config["license-header"]}`;

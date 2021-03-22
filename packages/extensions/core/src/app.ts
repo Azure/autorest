@@ -7,28 +7,9 @@ import "source-map-support/register";
 import { omit } from "lodash";
 import { configureLibrariesLogger } from "@autorest/common";
 
-// https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padEnd
-if (!String.prototype.padEnd) {
-  String.prototype.padEnd = function padEnd(targetLength, padString) {
-    targetLength = targetLength >> 0; // floor if number or convert non-number to 0;
-    padString = String(padString || " ");
-    if (this.length > targetLength) {
-      return String(this);
-    } else {
-      targetLength = targetLength - this.length;
-      if (targetLength > padString.length) {
-        padString += padString.repeat(targetLength / padString.length); // append to original to ensure we are longer than needed
-      }
-      return String(this) + padString.slice(0, targetLength);
-    }
-  };
-}
-
 require("events").EventEmitter.defaultMaxListeners = 100;
 process.env["ELECTRON_RUN_AS_NODE"] = "1";
 delete process.env["ELECTRON_NO_ATTACH_CONSOLE"];
-(<any>global).autorestVersion = require("../package.json").version;
 
 const color: (text: string) => string = (<any>global).color ? (<any>global).color : (p) => p;
 
@@ -53,6 +34,7 @@ import { mergeConfigurations } from "@autorest/configuration";
 import { Exception } from "@autorest/common";
 import { Channel, Message } from "./lib/message";
 import { homedir } from "os";
+import { VERSION } from "./lib/constants";
 
 let verbose = false;
 let debug = false;
@@ -239,7 +221,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   args = parseArgs([...autorestArgs, ...more]);
 
   if (!args.rawSwitches["message-format"] || args.rawSwitches["message-format"] === "regular") {
-    console.log(color(`> Loading AutoRest core      '${__dirname}' (${(<any>global).autorestVersion})`));
+    console.log(color(`> Loading AutoRest core      '${__dirname}' (${VERSION})`));
   }
   verbose = verbose || args.rawSwitches["verbose"];
   debug = debug || args.rawSwitches["debug"];
@@ -565,7 +547,3 @@ void main();
 process.on("exit", () => {
   void Shutdown();
 });
-
-async function showHelp(): Promise<void> {
-  await currentMain(["--help"]);
-}
