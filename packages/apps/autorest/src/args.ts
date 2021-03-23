@@ -1,5 +1,6 @@
 import { homedir } from "os";
 import { join } from "path";
+import untildify from "untildify";
 
 export interface AutorestArgs {
   // Versioning
@@ -63,11 +64,7 @@ const resolvePathArg = (rawValue: string): string => {
     rawValue = join(cwd, rawValue);
   }
 
-  // untildify!
-  if (/^~[/|\\]/g.exec(rawValue)) {
-    rawValue = join(homedir(), rawValue.substring(2));
-  }
-  return rawValue;
+  return untildify(rawValue);
 };
 
 const parseValue = (rawValue: string) => {

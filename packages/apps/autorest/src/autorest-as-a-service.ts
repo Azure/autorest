@@ -3,7 +3,7 @@
 import { lookup } from "dns";
 import { Extension, ExtensionManager, Package } from "@azure-tools/extension";
 import { homedir } from "os";
-import { dirname, join, resolve } from "path";
+import { join } from "path";
 
 import { Exception } from "@azure-tools/tasks";
 
@@ -85,25 +85,6 @@ export async function installedCores() {
         )
       : [];
   return result.sort((a, b) => semver.compare(b.version, a.version));
-}
-
-export function resolvePathForLocalVersion(requestedVersion: string | null): string | null {
-  try {
-    // untildify!
-    if (/^~[/|\\]/g.exec(requestedVersion)) {
-      requestedVersion = join(homedir(), requestedVersion.substring(2));
-    }
-    return requestedVersion ? resolve(requestedVersion) : dirname(nodeRequire.resolve("@autorest/core/package.json"));
-  } catch (e) {
-    // fallback to old-core name
-    try {
-      // eslint-disable-next-line node/no-missing-require
-      return dirname(nodeRequire.resolve("@microsoft.azure/autorest-core/package.json"));
-    } catch {
-      // no dice
-    }
-  }
-  return null;
 }
 
 export async function resolveEntrypoint(localPath: string | null, entrypoint: string): Promise<string | null> {

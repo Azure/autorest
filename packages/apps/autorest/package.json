@@ -64,6 +64,7 @@
     "jsonpath": "1.0.0",
     "mkdirp": "~0.5.1",
     "prettier": "~2.2.1",
+    "untildify": "^4.0.0",
     "rimraf": "^3.0.2",
     "safe-buffer": "5.2.0",
     "semver": "^5.5.1",

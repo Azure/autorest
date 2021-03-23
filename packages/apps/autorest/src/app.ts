@@ -9,23 +9,13 @@ import "source-map-support/register";
 declare const isDebuggerEnabled: boolean;
 const cwd = process.cwd();
 
-import { isFile } from "@azure-tools/async-io";
 import chalk from "chalk";
-import {
-  newCorePackage,
-  ensureAutorestHome,
-  networkEnabled,
-  pkgVersion,
-  resolvePathForLocalVersion,
-  selectVersion,
-  tryRequire,
-  runCoreOutOfProc,
-} from "./autorest-as-a-service";
+import { newCorePackage, ensureAutorestHome, pkgVersion, tryRequire, runCoreOutOfProc } from "./autorest-as-a-service";
 import { color } from "./coloring";
 import { parseArgs } from "./args";
 import { resetAutorest, showAvailableCoreVersions, showInstalledExtensions } from "./commands";
-import { checkForAutoRestUpdate, clearTempData } from "./actions";
-import { findCoreVersionUsingConfiguration, getRequestedCoreVersion } from "./core-version-utils";
+import { clearTempData } from "./actions";
+import { resolveCoreVersion } from "./core-version-utils";
 
 const launchCore = isDebuggerEnabled ? tryRequire : runCoreOutOfProc;
 
@@ -69,9 +59,8 @@ if (!args["message-format"] || args["message-format"] === "regular") {
 }
 
 // argument tweakin'
-args.info = args.version === "" || args.info; // show --info if they use unparameterized --version.
+args.info = args.version === "" || (args.version as any) === true || args.info; // show --info if they use unparameterized --version.
 const listAvailable: boolean = args["list-available"] || false;
-const force = args.force || false;
 
 /** Main Entrypoint for AutoRest Bootstrapper */
 async function main() {
@@ -104,51 +93,10 @@ async function main() {
       // We have a chance to fail again later if this proves problematic.
     }
 
-    let requestedVersion: string = getRequestedCoreVersion(args);
-    const localVersion = resolvePathForLocalVersion(args.version ? requestedVersion : null);
-
-    if (!args.version) {
-      // they never specified a version on the cmdline, but we might have one in configuration
-      const cfgVersion = await findCoreVersionUsingConfiguration(args);
-
-      // if we got one back, we're going to set the requestedVersion to whatever they asked for.
-      if (cfgVersion) {
-        args.version = requestedVersion = cfgVersion;
-      }
-    }
-
-    // If we still don't have a requested version, check to see if local installed core is available.
-    if (localVersion) {
-      process.chdir(cwd);
-
-      if (await launchCore(localVersion, "app.js")) {
-        return;
-      }
-    }
-
-    // if the resolved local version is actually a file, we'll try that as a package when we get there.
-    if (await isFile(localVersion)) {
-      // this should try to install the file.
-      if (args.debug) {
-        console.log(`Found local core package file: '${localVersion}'`);
-      }
-      requestedVersion = localVersion;
-    }
-
-    // failing that, we'll continue on and see if NPM can do something with the version.
-    if (args.debug) {
-      console.log(`Network Enabled: ${await networkEnabled}`);
-    }
-
-    // wait for the bootstrapper check to finish.
-    await checkForAutoRestUpdate(args);
-
-    // logic to resolve and optionally install a autorest core package.
-    // will throw if it's not doable.
-    const selectedVersion = await selectVersion(requestedVersion, force);
+    const coreVersionPath = await resolveCoreVersion(args);
 
     // let's strip the extra stuff from the command line before we require the core module.
-    const newArgs = new Array<string>();
+    const newArgs: string[] = [];
 
     for (const each of process.argv) {
       let keep = true;
@@ -169,25 +117,26 @@ async function main() {
         newArgs.push(each);
       }
     }
-    process.argv = newArgs;
 
     // use this to make the core aware that this run may be legal even without any inputs
     // this is a valid scenario for "preparation calls" to autorest like `autorest --reset` or `autorest --latest`
     if (args.reset || args.latest || args.version == "latest") {
       // if there is *any* other argument left, that's an indicator that the core is supposed to do something
-      process.argv.push("--allow-no-input");
+      newArgs.push("--allow-no-input");
     }
 
+    process.argv = newArgs;
+
     if (args.debug) {
-      console.log(`Starting ${newCorePackage} from ${await selectedVersion.location}`);
+      console.log(`Starting ${newCorePackage} from ${coreVersionPath}`);
     }
 
     // reset the working folder to the correct place.
     process.chdir(cwd);
 
-    const result = await launchCore(await selectedVersion.modulePath, "app.js");
+    const result = await launchCore(coreVersionPath, "app.js");
     if (!result) {
-      throw new Error(`Unable to start AutoRest Core from ${await selectedVersion.modulePath}`);
+      throw new Error(`Unable to start AutoRest Core from ${coreVersionPath}`);
     }
   } catch (exception) {
     console.log(chalk.redBright("Failure:"));
