@@ -464,7 +464,7 @@ export class DataHandle {
     await Delay(3000);
     if (this.item.accessed) {
       // it's been cached. start the timer!
-      void this.onTimer();
+      this.onTimer();
       // clear the accessed flag before we go.
       this.item.accessed = false;
       return;
