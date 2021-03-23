@@ -1,4 +1,5 @@
-import { WriteString } from "@azure-tools/uri";
+import { writeString } from "@azure-tools/uri";
+import { logger } from "../logger";
 import { RealFileSystem } from "./real-file-system";
 
 // handles:
@@ -17,7 +18,7 @@ export class EnhancedFileSystem extends RealFileSystem {
   }
 
   public async write(uri: string, content: string): Promise<void> {
-    return WriteString(uri, content);
+    return writeString(uri, content);
   }
 
   private getHeaders(uri: string) {
@@ -28,8 +29,7 @@ export class EnhancedFileSystem extends RealFileSystem {
       this.githubAuthToken &&
       (uri.startsWith("https://raw.githubusercontent.com") || uri.startsWith("https://github.com"))
     ) {
-      // eslint-disable-next-line no-console
-      console.error(`Used GitHub authentication token to request '${uri}'.`);
+      logger.info(`Used GitHub authentication token to request '${uri}'.`);
       headers.authorization = `Bearer ${this.githubAuthToken}`;
     }
 

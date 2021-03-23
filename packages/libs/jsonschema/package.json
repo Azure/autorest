@@ -1,7 +1,7 @@
 {
-  "name": "@autorest/configuration",
-  "version": "1.2.0",
-  "description": "Autorest configuration",
+  "name": "@azure-tools/jsonschema",
+  "version": "1.0.0",
+  "description": "Json schema utilities",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "engines": {
@@ -26,10 +26,9 @@
   "bugs": {
     "url": "https://github.com/Azure/autorest/issues"
   },
-  "homepage": "https://github.com/Azure/autorest#readme",
+  "homepage": "https://github.com/Azure/autorest/tree/master/packages/libs/jsonschema",
   "devDependencies": {
     "@types/jest": "^26.0.20",
-    "@types/lodash": "~4.14.168",
     "@types/node": "~14.14.20",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
@@ -41,13 +40,5 @@
     "rimraf": "^3.0.2",
     "typescript": "~4.2.3"
   },
-  "dependencies": {
-    "@autorest/common": "~1.1.1",
-    "@azure-tools/datastore": "~4.2.1",
-    "@azure-tools/extension": "~3.2.4",
-    "@azure-tools/uri": "~3.1.1",
-    "@azure-tools/async-io": "~3.0.0",
-    "lodash": "~4.17.20",
-    "untildify": "^4.0.0"
-  }
+  "dependencies": {}
 }

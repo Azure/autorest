@@ -67,6 +67,10 @@ help-content: # type: Help as defined in autorest-core/help.ts
     - key: max-memory-size
       type: string
       description: Increases the maximum memory size in MB used by Node.js when running AutoRest (translates to the Node.js parameter --max-old-space-size)
+    - key: output-converted-oai3
+      type: string
+      description: If enabled and the input-files are `swager 2.0` this will output the resulting OpenAPI3.0 converted files to the `output-folder`
+
   _autorest-core-1:
     categoryFriendlyName: Core Functionality
     description: "> While AutoRest can be extended arbitrarily by 3rd parties (say, with a custom generator),\n> we officially support and maintain the following functionality.\n> More specific help is shown when combining the following switches with `--help` ."

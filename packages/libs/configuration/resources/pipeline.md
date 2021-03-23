@@ -14,7 +14,7 @@ pipeline:
   openapi-document/multi-api-merger:
     input: tree-shaker
     # output-artifact: openapi-document
-    
+
   openapi-document/components-cleaner:
     input: multi-api-merger
     # output-artifact: openapi-document
@@ -33,16 +33,16 @@ pipeline:
 
   openapi-document/model-deduplicator:
     input: profile-filter
-    # output-artifact: openapi-document   
+    # output-artifact: openapi-document
 
   openapi-document/emitter:
     input: profile-filter
-    input-artifact: profile-filter-log 
+    input-artifact: profile-filter-log
 ```
 
 
 ``` yaml $(pipeline-model) == 'v3'
-pass-thru: 
+pass-thru:
   - api-version-parameter-handler
 
 pipeline:
@@ -63,7 +63,7 @@ pipeline:
 
   openapi-document/multi-api/identity:
     input: reset-identity
-    
+
   openapi-document/multi-api/emitter:
     input: openapi-document/multi-api/identity
     input-artifact: openapi-document
@@ -78,7 +78,7 @@ and joins the collections back into a single pipeline (it splits at load time.)
 
 The final step is the `openapi-document/identity`, which is the pipeline input
 for Single-API version generators (ie, based using `imodeler1` ).
- 
+
 
 ``` yaml !$(pipeline-model) || $(pipeline-model) == 'v2'
 pipeline:
@@ -123,4 +123,19 @@ pipeline:
   openapi-document/tree-shaker:
     input: openapi-document/allof-cleaner
 
+```
+
+### Default configuration: Output Converted Openapi
+
+``` yaml $(output-converted-oai3)
+pipeline:
+  converted-oai3/normalize-identity:
+    input: openapi-document/transform
+    to: converted-oai3-document
+
+  converted-oai3/emitter:
+    input: converted-oai3/normalize-identity
+    is-object: true
+
+output-artifact: converted-oai3-document
 ```

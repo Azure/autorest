@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/jsonschema",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@azure-tools/jsonschema",
+  "email": "tiguerin@microsoft.com"
+}
