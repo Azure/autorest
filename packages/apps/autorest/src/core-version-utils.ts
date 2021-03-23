@@ -1,7 +1,7 @@
 import { AutorestArgs } from "./args";
 import { ConfigurationLoader } from "@autorest/configuration";
 import { AutorestLogger } from "../../../libs/configuration/node_modules/@autorest/common/dist";
-import { CreateFileOrFolderUri, CreateFolderUri, ResolveUri } from "@azure-tools/uri";
+import { createFileOrFolderUri, createFolderUri, resolveUri } from "@azure-tools/uri";
 import { AppRoot } from "./constants";
 import { extensionManager } from "./autorest-as-a-service";
 import chalk from "chalk";
@@ -9,8 +9,8 @@ import chalk from "chalk";
 const inWebpack = typeof __webpack_require__ === "function";
 const nodeRequire = inWebpack ? __non_webpack_require__ : require;
 const defaultConfigUri = inWebpack
-  ? ResolveUri(CreateFolderUri(AppRoot), `dist/resources/default-configuration.md`)
-  : CreateFileOrFolderUri(nodeRequire.resolve("@autorest/configuration/resources/default-configuration.md"));
+  ? resolveUri(createFolderUri(AppRoot), `dist/resources/default-configuration.md`)
+  : createFileOrFolderUri(nodeRequire.resolve("@autorest/configuration/resources/default-configuration.md"));
 
 /**
  * Return the version requested of the core extension.
@@ -29,7 +29,7 @@ const cwd = process.cwd();
  * @param selectedVersion Path to or loaded version of @autorest/core.
  */
 export const findCoreVersionUsingConfiguration = async (args: AutorestArgs): Promise<string | undefined> => {
-  const configFileOrFolder = ResolveUri(CreateFolderUri(cwd), args.configFileOrFolder || ".");
+  const configFileOrFolder = resolveUri(createFolderUri(cwd), args.configFileOrFolder || ".");
   /* eslint-disable no-console */
   const logger: AutorestLogger = {
     fatal: (x) => console.error(x),

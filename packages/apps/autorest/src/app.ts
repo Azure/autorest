@@ -105,6 +105,7 @@ async function main() {
     }
 
     let requestedVersion: string = getRequestedCoreVersion(args);
+    const localVersion = resolvePathForLocalVersion(args.version ? requestedVersion : null);
 
     if (!args.version) {
       // they never specified a version on the cmdline, but we might have one in configuration
@@ -116,16 +117,12 @@ async function main() {
       }
     }
 
-    const localVersion = resolvePathForLocalVersion(args.version ? requestedVersion : null);
-
     // If we still don't have a requested version, check to see if local installed core is available.
-    if (!args.version) {
-      if (localVersion) {
-        process.chdir(cwd);
+    if (localVersion) {
+      process.chdir(cwd);
 
-        if (await launchCore(localVersion, "app.js")) {
-          return;
-        }
+      if (await launchCore(localVersion, "app.js")) {
+        return;
       }
     }
 
