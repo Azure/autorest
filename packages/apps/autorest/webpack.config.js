@@ -17,10 +17,21 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     libraryTarget: "commonjs2",
   },
+  resolve: {
+    ...baseWebpackConfig.resolve,
+    alias: {
+      jsonpath: path.resolve(__dirname, "node_modules", "jsonpath", "jsonpath.min.js"),
+    },
+  },
   plugins: [
     // We need to copy the yarn cli.js so @azure-tools/extensions can call the file as it is.(Not bundled in the webpack bundle.)
     new CopyPlugin({
       patterns: [{ from: "node_modules/@azure-tools/extension/dist/yarn/cli.js", to: "yarn/cli.js" }],
+    }),
+
+    // We need to copy the default configuration resources files.
+    new CopyPlugin({
+      patterns: [{ from: "node_modules/@autorest/configuration/resources", to: "resources" }],
     }),
   ],
   optimization: {

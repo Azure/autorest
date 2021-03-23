@@ -40,6 +40,7 @@
   },
   "typings": "./dist/exports.d.ts",
   "devDependencies": {
+    "@autorest/configuration": "~1.2.0",
     "@autorest/core": "~3.2.1",
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/extension": "~3.2.4",
@@ -60,8 +61,10 @@
     "eslint-plugin-unicorn": "~27.0.0",
     "eslint": "^7.17.0",
     "jest": "^26.6.3",
+    "jsonpath": "1.0.0",
     "mkdirp": "~0.5.1",
     "prettier": "~2.2.1",
+    "untildify": "^4.0.0",
     "rimraf": "^3.0.2",
     "safe-buffer": "5.2.0",
     "semver": "^5.5.1",

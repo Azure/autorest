@@ -26,25 +26,46 @@ export interface ResolvedExtension {
   extension: Extension;
 }
 
+export interface ConfigurationLoaderOptions {
+  /**
+   * Override the file system to use.
+   */
+  fileSystem?: IFileSystem;
+
+  /**
+   * Pass a custom datastore.
+   */
+  dataStore?: DataStore;
+
+  /**
+   * Extension manager to resolve extension configuration. If not provided the extension configuration won't be resolved.
+   */
+  extensionManager?: ExtensionManager;
+}
+
 /**
  * Class handling the loading of an autorest configuration.
  */
 export class ConfigurationLoader {
   private fileSystem: CachingFileSystem;
+  private dataStore: DataStore;
+  private extensionManager: ExtensionManager | undefined;
 
   /**
    * @param fileSystem File system.
+   * @param defaultConfigUri Default configuration Uri. This is the path to the default configuration file.
    * @param configFileOrFolderUri Path to the config file or folder.
    */
   public constructor(
-    fileSystem: IFileSystem = new RealFileSystem(),
-    private dataStore: DataStore,
     private logger: AutorestLogger,
-    private extMgr: ExtensionManager,
     private defaultConfigUri: string,
-    private configFileOrFolderUri?: string,
+    private configFileOrFolderUri: string | undefined,
+    options: ConfigurationLoaderOptions = {},
   ) {
+    const fileSystem = options.fileSystem ?? new RealFileSystem();
     this.fileSystem = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
+    this.dataStore = options.dataStore ?? new DataStore({ isCancellationRequested: false } as any);
+    this.extensionManager = options.extensionManager;
   }
 
   public async load(
@@ -93,42 +114,43 @@ export class ConfigurationLoader {
     }
 
     // 4. resolve extensions
-    const addedExtensions = new Set<string>();
     const extensions: ResolvedExtension[] = [];
+    if (this.extensionManager) {
+      const addedExtensions = new Set<string>();
+      const viewsToHandle: AutorestRawConfiguration[] = [await resolveConfig()];
+      while (viewsToHandle.length > 0) {
+        const config = viewsToHandle.pop() as AutorestRawConfiguration;
+        const extensionDefs = resolveExtensions(config);
 
-    const viewsToHandle: AutorestRawConfiguration[] = [await resolveConfig()];
-    while (viewsToHandle.length > 0) {
-      const config = viewsToHandle.pop() as AutorestRawConfiguration;
-      const extensionDefs = resolveExtensions(config);
-
-      const additionalExtensions = extensionDefs.filter((ext) => !addedExtensions.has(ext.fullyQualified));
-      await manager.addConfig({ "used-extension": additionalExtensions.map((x) => x.fullyQualified) });
-      if (additionalExtensions.length === 0) {
-        continue;
-      }
-
-      // acquire additional extensions
-      for (const additionalExtension of additionalExtensions) {
-        try {
-          addedExtensions.add(additionalExtension.fullyQualified);
-
-          const extension = await this.resolveExtension(additionalExtension);
-          extensions.push({ extension, definition: additionalExtension });
-
-          // merge config from extension
-          const extensionConfigurationUri = simplifyUri(CreateFileUri(await extension.configurationPath));
-          this.logger.verbose(`> Including extension configuration file '${extensionConfigurationUri}'`);
-          await loadConfigFile(extensionConfigurationUri, fsLocal);
-
-          viewsToHandle.push(await resolveConfig());
-        } catch (e) {
-          this.logger.fatal(
-            `Failed to install extension '${additionalExtension.name}' (${additionalExtension.source})`,
-          );
-          throw e;
+        const additionalExtensions = extensionDefs.filter((ext) => !addedExtensions.has(ext.fullyQualified));
+        await manager.addConfig({ "used-extension": additionalExtensions.map((x) => x.fullyQualified) });
+        if (additionalExtensions.length === 0) {
+          continue;
         }
+
+        // acquire additional extensions
+        for (const additionalExtension of additionalExtensions) {
+          try {
+            addedExtensions.add(additionalExtension.fullyQualified);
+
+            const extension = await this.resolveExtension(this.extensionManager, additionalExtension);
+            extensions.push({ extension, definition: additionalExtension });
+
+            // merge config from extension
+            const extensionConfigurationUri = simplifyUri(CreateFileUri(await extension.configurationPath));
+            this.logger.verbose(`> Including extension configuration file '${extensionConfigurationUri}'`);
+            await loadConfigFile(extensionConfigurationUri, fsLocal);
+
+            viewsToHandle.push(await resolveConfig());
+          } catch (e) {
+            this.logger.fatal(
+              `Failed to install extension '${additionalExtension.name}' (${additionalExtension.source})`,
+            );
+            throw e;
+          }
+        }
+        await resolveRequiredConfigs(fsLocal);
       }
-      await resolveRequiredConfigs(fsLocal);
     }
 
     // resolve any outstanding includes again
@@ -205,7 +227,7 @@ export class ConfigurationLoader {
    * @param extensionDef extension definition.
    * @param messageFormat message format.
    */
-  private async resolveExtension(extensionDef: ExtensionDefinition): Promise<Extension> {
+  private async resolveExtension(extMgr: ExtensionManager, extensionDef: ExtensionDefinition): Promise<Extension> {
     let localPath = untildify(extensionDef.source);
 
     // try resolving the package locally (useful for self-contained)
@@ -232,11 +254,11 @@ export class ConfigurationLoader {
       // local package
       this.logger.info(`> Loading local AutoRest extension '${extensionDef.name}' (${localPath})`);
 
-      const pack = await this.extMgr.findPackage(extensionDef.name, localPath);
+      const pack = await extMgr.findPackage(extensionDef.name, localPath);
       return new LocalExtension(pack, localPath);
     } else {
       // remote package`
-      const installedExtension = await this.extMgr.getInstalledExtension(extensionDef.name, extensionDef.source);
+      const installedExtension = await extMgr.getInstalledExtension(extensionDef.name, extensionDef.source);
       if (installedExtension) {
         this.logger.info(
           `> Loading AutoRest extension '${extensionDef.name}' (${extensionDef.source}->${installedExtension.version})`,
@@ -244,9 +266,9 @@ export class ConfigurationLoader {
         return installedExtension;
       } else {
         // acquire extension
-        const pack = await this.extMgr.findPackage(extensionDef.name, extensionDef.source);
+        const pack = await extMgr.findPackage(extensionDef.name, extensionDef.source);
         this.logger.info(`> Installing AutoRest extension '${extensionDef.name}' (${extensionDef.source})`);
-        const extension = await this.extMgr.installPackage(pack, false, 5 * 60 * 1000, (progressInit: any) =>
+        const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, (progressInit: any) =>
           progressInit.Message.Subscribe((s: any, m: any) => this.logger.verbose(m)),
         );
         this.logger.info(

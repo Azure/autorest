@@ -5,7 +5,6 @@
  *--------------------------------------------------------------------------------------------*/
 import { CachingFileSystem, IFileSystem, LazyPromise, RealFileSystem } from "@azure-tools/datastore";
 import { Extension, ExtensionManager } from "@azure-tools/extension";
-import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
 import { join } from "path";
 import { AutoRestExtension } from "../pipeline/plugin-endpoint";
 import {
@@ -19,11 +18,17 @@ import {
 import { AutorestContext } from "./autorest-context";
 import { MessageEmitter } from "./message-emitter";
 import { AutorestLogger } from "@autorest/common";
-import { AppRoot } from "../constants";
 import { AutorestCoreLogger } from "./logger";
+import { CreateFileOrFolderUri, CreateFolderUri, ResolveUri } from "@azure-tools/uri";
+import { AppRoot } from "../constants";
 
 const inWebpack = typeof __webpack_require__ === "function";
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const nodeRequire = inWebpack ? __non_webpack_require__! : require;
 const pathToYarnCli = inWebpack ? `${__dirname}/yarn/cli.js` : undefined;
+const defaultConfigUri = inWebpack
+  ? ResolveUri(CreateFolderUri(AppRoot), `dist/resources/default-configuration.md`)
+  : CreateFileOrFolderUri(nodeRequire.resolve("@autorest/configuration/resources/default-configuration.md"));
 
 const loadedExtensions: {
   [fullyQualified: string]: { extension: Extension; autorestExtension: LazyPromise<AutoRestExtension> };
@@ -90,15 +95,11 @@ export class AutorestContextLoader {
   ): Promise<AutorestContext> {
     const logger: AutorestLogger = new AutorestCoreLogger(mergeConfigurations(...configs) as any, messageEmitter);
 
-    const defaultConfigUri = ResolveUri(CreateFolderUri(AppRoot), "resources/default-configuration.md");
-    const loader = new ConfigurationLoader(
-      this.fileSystem,
-      messageEmitter.DataStore,
-      logger,
-      await AutorestContextLoader.extensionManager,
-      defaultConfigUri,
-      this.configFileOrFolderUri,
-    );
+    const loader = new ConfigurationLoader(logger, defaultConfigUri, this.configFileOrFolderUri, {
+      extensionManager: await AutorestContextLoader.extensionManager,
+      fileSystem: this.fileSystem,
+      dataStore: messageEmitter.DataStore,
+    });
 
     const { config, extensions } = await loader.load(configs, includeDefault);
     this.setupExtensions(config, extensions);
