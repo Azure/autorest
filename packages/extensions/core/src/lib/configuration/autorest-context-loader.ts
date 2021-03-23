@@ -19,16 +19,17 @@ import { AutorestContext } from "./autorest-context";
 import { MessageEmitter } from "./message-emitter";
 import { AutorestLogger } from "@autorest/common";
 import { AutorestCoreLogger } from "./logger";
-import { CreateFileOrFolderUri, CreateFolderUri, ResolveUri } from "@azure-tools/uri";
+import { createFileOrFolderUri, createFolderUri, resolveUri } from "@azure-tools/uri";
 import { AppRoot } from "../constants";
+import { homedir } from "os";
 
 const inWebpack = typeof __webpack_require__ === "function";
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const nodeRequire = inWebpack ? __non_webpack_require__! : require;
 const pathToYarnCli = inWebpack ? `${__dirname}/yarn/cli.js` : undefined;
 const defaultConfigUri = inWebpack
-  ? ResolveUri(CreateFolderUri(AppRoot), `dist/resources/default-configuration.md`)
-  : CreateFileOrFolderUri(nodeRequire.resolve("@autorest/configuration/resources/default-configuration.md"));
+  ? resolveUri(createFolderUri(AppRoot), `dist/resources/default-configuration.md`)
+  : createFileOrFolderUri(nodeRequire.resolve("@autorest/configuration/resources/default-configuration.md"));
 
 const loadedExtensions: {
   [fullyQualified: string]: { extension: Extension; autorestExtension: LazyPromise<AutoRestExtension> };
@@ -54,7 +55,7 @@ export class AutorestContextLoader {
 
   private static extensionManager: LazyPromise<ExtensionManager> = new LazyPromise<ExtensionManager>(() =>
     ExtensionManager.Create(
-      join(process.env["AUTOREST_HOME"] || process.env["autorest.home"] || require("os").homedir(), ".autorest"),
+      join(process.env["AUTOREST_HOME"] || process.env["autorest.home"] || homedir(), ".autorest"),
       "yarn",
       pathToYarnCli,
     ),
@@ -71,7 +72,7 @@ export class AutorestContextLoader {
       // but if someone goes to use that, we're going to need a new instance (since the shared lock will be gone in the one we disposed.)
       AutorestContextLoader.extensionManager = new LazyPromise<ExtensionManager>(() =>
         ExtensionManager.Create(
-          join(process.env["AUTOREST_HOME"] || process.env["autorest.home"] || require("os").homedir(), ".autorest"),
+          join(process.env["AUTOREST_HOME"] || process.env["autorest.home"] || homedir(), ".autorest"),
         ),
       );
 

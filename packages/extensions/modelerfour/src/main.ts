@@ -1,5 +1,4 @@
-require("source-map-support").install();
-
+import "source-map-support/register";
 import { AutoRestExtension } from "@autorest/extension-base";
 import { processRequest as modelerfour } from "./modeler/plugin-modelerfour";
 import { processRequest as preNamer } from "./prenamer/plugin-prenamer";

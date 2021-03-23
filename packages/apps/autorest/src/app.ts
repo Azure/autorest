@@ -10,12 +10,13 @@ declare const isDebuggerEnabled: boolean;
 const cwd = process.cwd();
 
 import chalk from "chalk";
-import { newCorePackage, ensureAutorestHome, pkgVersion, tryRequire, runCoreOutOfProc } from "./autorest-as-a-service";
+import { newCorePackage, ensureAutorestHome, tryRequire, runCoreOutOfProc } from "./autorest-as-a-service";
 import { color } from "./coloring";
 import { parseArgs } from "./args";
 import { resetAutorest, showAvailableCoreVersions, showInstalledExtensions } from "./commands";
 import { clearTempData } from "./actions";
 import { resolveCoreVersion } from "./core-version-utils";
+import { VERSION } from "./constants";
 
 const launchCore = isDebuggerEnabled ? tryRequire : runCoreOutOfProc;
 
@@ -47,7 +48,7 @@ if (args["v3"] && !args["version"]) {
 if (!args["message-format"] || args["message-format"] === "regular") {
   console.log(
     chalk.green.bold.underline(
-      `AutoRest code generation utility [cli version: ${chalk.white.bold(pkgVersion)}; node: ${chalk.white.bold(
+      `AutoRest code generation utility [cli version: ${chalk.white.bold(VERSION)}; node: ${chalk.white.bold(
         process.version,
       )}, max-memory: ${
         Math.round(require("v8").getHeapStatistics().heap_size_limit / (1024 * 1024)) & 0xffffffff00
