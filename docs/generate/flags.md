@@ -21,6 +21,12 @@
 |`--package-version=VERSION`|The semantic versioning of your generated SDK (i.e., `1.0.0`). Not to be confused with the version of the service you're creating an SDK for. If no version is specified, AutoRest will not create a new version file. Generally not necessary if you are going to wrap the generated code before exposing to users.| Needs to be specified if `--basic-setup-py` is specified. | Currently can't generate version for track 2|Default is `1.0.0-beta.1`. Only available in `fluent` mode.|Currently can't set version for track 2| Defaults to `1.0.0`|
 |`--trace`|Whether to natively support tracing libraries, such OpenCensus or OpenTelemetry. See this [tracing quickstart][tracing_quickstart] for an overview. Defaults to `false`.| x | | | x|
 
+## Autorest flags
+Those are flags that affect autorest only
+
+| Flag | Description
+|------------------|-------------
+| `--output-converted-oai3` | If enabled and the input-files are `swager 2.0` this will output the resulting OpenAPI3.0 converted files to the `output-folder`
 
 ## Temporary flags
 Those flags are temporary and will be removed in the future. Those flags are here to have a smoother rollout of certain feature.

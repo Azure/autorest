@@ -121,6 +121,12 @@
       "shouldPublish": true
     },
     {
+      "packageName": "@azure-tools/jsonschema",
+      "projectFolder": "packages/libs/jsonschema",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
       "packageName": "@autorest/modelerfour",
       "projectFolder": "packages/extensions/modelerfour",
       "reviewCategory": "production",

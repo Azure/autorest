@@ -8,13 +8,18 @@ import { Lazy } from "@azure-tools/tasks";
  */
 export function createDataHandle(content: string, props: { name?: string } = {}): DataHandle {
   const name = props.name ?? "test-generated";
-  return new DataHandle(`mem://${name}`, {
-    name,
-    identity: [name],
-    artifactType: "",
-    cached: content,
-    metadata: {
-      lineIndices: new Lazy<number[]>(() => LineIndices(content)),
+  const key = name.includes("://") ? name : `mem://${name}`;
+  return new DataHandle(
+    key,
+    {
+      name,
+      identity: [name],
+      artifactType: "",
+      cached: content,
+      metadata: {
+        lineIndices: new Lazy<number[]>(() => LineIndices(content)),
+      },
     },
-  });
+    false,
+  );
 }

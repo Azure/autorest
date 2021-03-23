@@ -1,0 +1,16 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "**Added** New normalize-identity plugin to support multi openapi3 files output",
+      "type": "patch"
+    },
+    {
+      "packageName": "@autorest/core",
+      "comment": "**Added** New config/flag `--output-converted-oai3` to output openapi3 files right after conversion from Swager 2.0",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/core",
+  "email": "tiguerin@microsoft.com"
+}

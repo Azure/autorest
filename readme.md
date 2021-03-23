@@ -3,30 +3,32 @@
 The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) format.
 
 ## Packages
-| Name                                            | Changelog                 | Latest                                                       | Next                                                              |
-| ----------------------------------------------- | ------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------- |
+
+| Name                                            | Changelog                       | Latest                                                       | Next                                                              |
+| ----------------------------------------------- | ------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------- |
 | Core functionality                              |
-| [autorest][autorest_src]                        | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/autorest)                   | ![](https://img.shields.io/npm/v/autorest/next)                   |
-| [@autorest/core][core_src]                      | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/@autorest/core)             | ![](https://img.shields.io/npm/v/@autorest/core/next)             |
-| [@autorest/modelerfour][modelerfour_src]        | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/@autorest/modelerfour)      | ![](https://img.shields.io/npm/v/@autorest/modelerfour/next)      |
+| [autorest][autorest_src]                        | [Changelog][autorest_chg]       | ![](https://img.shields.io/npm/v/autorest)                   | ![](https://img.shields.io/npm/v/autorest/next)                   |
+| [@autorest/core][core_src]                      | [Changelog][core_chg]           | ![](https://img.shields.io/npm/v/@autorest/core)             | ![](https://img.shields.io/npm/v/@autorest/core/next)             |
+| [@autorest/modelerfour][modelerfour_src]        | [Changelog][modelerfour_chg]    | ![](https://img.shields.io/npm/v/@autorest/modelerfour)      | ![](https://img.shields.io/npm/v/@autorest/modelerfour/next)      |
 | Language generators                             |
-| [@autorest/csharp][csharp_src]                  | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/@autorest/csharp)           |                                                                   |
-| [@autorest/go][go_src]                          | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/@autorest/go)               |                                                                   |
-| [@autorest/java][java_src]                      | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/@autorest/java)             |                                                                   |
-| [@autorest/python][python_src]                  | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/@autorest/python)           |                                                                   |
-| [@autorest/swift][swift_src]                    | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/@autorest/swift)            |                                                                   |
-| [@autorest/typescript][typescript_src]          | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/@autorest/typescript)       |                                                                   |
+| [@autorest/csharp][csharp_src]                  | [Changelog][csharp_chg]         | ![](https://img.shields.io/npm/v/@autorest/csharp)           |                                                                   |
+| [@autorest/go][go_src]                          | [Changelog][go_chg]             | ![](https://img.shields.io/npm/v/@autorest/go)               |                                                                   |
+| [@autorest/java][java_src]                      | [Changelog][java_chg]           | ![](https://img.shields.io/npm/v/@autorest/java)             |                                                                   |
+| [@autorest/python][python_src]                  | [Changelog][python_chg]         | ![](https://img.shields.io/npm/v/@autorest/python)           |                                                                   |
+| [@autorest/swift][swift_src]                    | [Changelog][swift_chg]          | ![](https://img.shields.io/npm/v/@autorest/swift)            |                                                                   |
+| [@autorest/typescript][typescript_src]          | [Changelog][typescript_chg]     | ![](https://img.shields.io/npm/v/@autorest/typescript)       |                                                                   |
 | Internal packages                               |
-| [@autorest/codemodel][codemodel_src]            | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/@autorest/codemodel)        | ![](https://img.shields.io/npm/v/@autorest/codemodel/next)        |
-| [@autorest/common][common_src]                  | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/@autorest/common)           | ![](https://img.shields.io/npm/v/@autorest/common/next)           |
-| [@autorest/configuration][configuration_src]    | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/@autorest/configuration)    | ![](https://img.shields.io/npm/v/@autorest/configuration/next)    |
-| [@autorest/extension-base][extension_base_src]  | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/@autorest/extension-base)   | ![](https://img.shields.io/npm/v/@autorest/extension-base/next)   |
-| [@azure-tools/extension][extension_src]         | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/@azure-tools/extension)     | ![](https://img.shields.io/npm/v/@azure-tools/extension/next)     |
-| [@azure-tools/codegen][codegen_src]             | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/@azure-tools/codegen)       | ![](https://img.shields.io/npm/v/@azure-tools/codegen/next)       |
-| [@azure-tools/openapi][openapi_src]             | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/@azure-tools/openapi)       | ![](https://img.shields.io/npm/v/@azure-tools/openapi/next)       |
-| [@azure-tools/deduplication][deduplication_src] | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/@azure-tools/deduplication) | ![](https://img.shields.io/npm/v/@azure-tools/deduplication/next) |
-| [@azure-tools/datastore][datastore_src]         | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/@azure-tools/datastore)     | ![](https://img.shields.io/npm/v/@azure-tools/datastore/next)     |
-| [@azure-tools/oai2-to-oai3][oai2-to-oai3_src]   | [Changelog][autorest_chg] | ![](https://img.shields.io/npm/v/@azure-tools/oai2-to-oai3)  | ![](https://img.shields.io/npm/v/@azure-tools/oai2-to-oai3/next)  |
+| [@autorest/codemodel][codemodel_src]            | [Changelog][codemodel_chg]      | ![](https://img.shields.io/npm/v/@autorest/codemodel)        | ![](https://img.shields.io/npm/v/@autorest/codemodel/next)        |
+| [@autorest/common][common_src]                  | [Changelog][common_chg]         | ![](https://img.shields.io/npm/v/@autorest/common)           | ![](https://img.shields.io/npm/v/@autorest/common/next)           |
+| [@autorest/configuration][configuration_src]    | [Changelog][configuration_chg]  | ![](https://img.shields.io/npm/v/@autorest/configuration)    | ![](https://img.shields.io/npm/v/@autorest/configuration/next)    |
+| [@autorest/extension-base][extension_base_src]  | [Changelog][extension_base_chg] | ![](https://img.shields.io/npm/v/@autorest/extension-base)   | ![](https://img.shields.io/npm/v/@autorest/extension-base/next)   |
+| [@azure-tools/extension][extension_src]         | [Changelog][extension_chg]      | ![](https://img.shields.io/npm/v/@azure-tools/extension)     | ![](https://img.shields.io/npm/v/@azure-tools/extension/next)     |
+| [@azure-tools/codegen][codegen_src]             | [Changelog][codemodel_chg]      | ![](https://img.shields.io/npm/v/@azure-tools/codegen)       | ![](https://img.shields.io/npm/v/@azure-tools/codegen/next)       |
+| [@azure-tools/openapi][openapi_src]             | [Changelog][openapi_chg]        | ![](https://img.shields.io/npm/v/@azure-tools/openapi)       | ![](https://img.shields.io/npm/v/@azure-tools/openapi/next)       |
+| [@azure-tools/deduplication][deduplication_src] | [Changelog][deduplication_chg]  | ![](https://img.shields.io/npm/v/@azure-tools/deduplication) | ![](https://img.shields.io/npm/v/@azure-tools/deduplication/next) |
+| [@azure-tools/datastore][datastore_src]         | [Changelog][datastore_chg]      | ![](https://img.shields.io/npm/v/@azure-tools/datastore)     | ![](https://img.shields.io/npm/v/@azure-tools/datastore/next)     |
+| [@azure-tools/oai2-to-oai3][oai2-to-oai3_src]   | [Changelog][oai2-to-oai3_chg]   | ![](https://img.shields.io/npm/v/@azure-tools/oai2-to-oai3)  | ![](https://img.shields.io/npm/v/@azure-tools/oai2-to-oai3/next)  |
+| [@azure-tools/jsonschema][jsonschema_src]       | [Changelog][jsonschema_chg]     | ![](https://img.shields.io/npm/v/@azure-tools/jsonschema)    | ![](https://img.shields.io/npm/v/@azure-tools/jsonschema/next)    |
 
 [autorest_src]: packages/apps/autorest
 [core_src]: packages/extensions/core
@@ -46,9 +48,7 @@ The **AutoRest** tool generates client libraries for accessing RESTful web servi
 [openapi_src]: packages/libs/openapi
 [deduplication_src]: packages/libs/deduplication
 [datastore_src]: packages/libs/datastore
-[oai2-to-oai3_src]: packages/libs/oai2-to-oai3
-
-
+[jsonschema_src]: packages/libs/oai2-to-oai3
 [autorest_chg]: packages/apps/autorest/CHANGELOG.md
 [core_chg]: packages/extensions/core/CHANGELOG.md
 [modelerfour_chg]: packages/extensions/modelerfour/CHANGELOG.md
@@ -68,7 +68,7 @@ The **AutoRest** tool generates client libraries for accessing RESTful web servi
 [deduplication_chg]: packages/libs/deduplication/CHANGELOG.md
 [datastore_chg]: packages/libs/datastore/CHANGELOG.md
 [oai2-to-oai3_chg]: packages/libs/oai2-to-oai3/CHANGELOG.md
-
+[jsonschema_chg]: packages/libs/jsonschema/CHANGELOG.md
 
 ## Support Policy
 

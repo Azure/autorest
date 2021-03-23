@@ -428,11 +428,14 @@ export class DataSink {
 }
 
 export class DataHandle {
-  constructor(public readonly key: string, private item: Data) {
+  /**
+   * @param autoUnload If the data unhandle should automatically unload files after they are not used for a while.
+   */
+  constructor(public readonly key: string, private item: Data, private autoUnload = true) {
     // start the clock once this has been created.
     // this ensures that the data cache will be flushed if not
     // used in a reasonable amount of time
-    void this.onTimer();
+    this.onTimer();
   }
 
   public async serialize() {
@@ -446,27 +449,34 @@ export class DataHandle {
     });
   }
 
-  private async onTimer() {
-    await Delay(3000);
+  private onTimer() {
+    this.checkIfNeedToUnload().catch((e) => {
+      // eslint-disable-next-line no-console
+      console.error("Error while verifing DataHandle cache status", e);
+    });
+  }
 
+  private async checkIfNeedToUnload() {
+    if (!this.autoUnload) {
+      return;
+    }
+
+    await Delay(3000);
     if (this.item.accessed) {
       // it's been cached. start the timer!
       void this.onTimer();
-
       // clear the accessed flag before we go.
       this.item.accessed = false;
       return;
     }
     // wasn't actually used since the delay. let's dump it.
     // console.log(`flushing ${this.item.name}`);
-
     // wait to make sure it's finished writing to disk tho'
     // await this.item.writingToDisk;
     if (!this.item.writeToDisk) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       this.item.writeToDisk = fs.writeFile(this.item.name, this.item.cached!);
     }
-
     // clear the caches.
     this.item.cached = undefined;
     this.item.cachedObject = undefined;
@@ -502,7 +512,7 @@ export class DataHandle {
         this.item.cached = await fs.readFile(this.item.name, "utf8");
 
         // start the timer again.
-        void this.onTimer();
+        this.onTimer();
       }
     }
 
