@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/common",
+      "comment": "**Added** configuration for usage of @azure/logger in libraries",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/common",
+  "email": "tiguerin@microsoft.com"
+}

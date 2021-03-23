@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/modelerfour",
+      "comment": "Bump @azure-tools/uri version to ~3.1.1",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/modelerfour",
+  "email": "tiguerin@microsoft.com"
+}

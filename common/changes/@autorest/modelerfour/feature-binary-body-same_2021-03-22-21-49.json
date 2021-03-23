@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/modelerfour",
+      "comment": "**Update** how binary request body are treated if the content-type is not binary: Group all binary body together to prevent multiple method overload with same parameter",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/modelerfour",
+  "email": "tiguerin@microsoft.com"
+}

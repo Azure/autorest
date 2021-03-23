@@ -1,27 +1,35 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
-import { CodeModel, DictionarySchema, HttpHeader, Operation, Parameter } from "@autorest/codemodel";
+import { CodeModel, DictionarySchema, HttpHeader, Operation, Parameter, SealedChoiceSchema } from "@autorest/codemodel";
 import { HttpOperation, JsonType, ParameterLocation, RequestBody } from "@azure-tools/openapi";
 import { addOperation, createTestSpec, findByName } from "../utils";
 import { runModeler } from "./modelerfour-utils";
 import * as oai3 from "@azure-tools/openapi";
+import assert from "assert";
 
 describe("Modelerfour.Request", () => {
   describe("Body", () => {
-    describe("Required attribute", () => {
-      const runModelerWithBody = async (body: RequestBody) => {
-        const spec = createTestSpec();
+    const runModelerWithBody = async (body: RequestBody): Promise<Operation> => {
+      const spec = createTestSpec();
 
-        addOperation(spec, "/test", {
-          post: {
-            requestBody: {
-              ...body,
-            },
+      addOperation(spec, "/test", {
+        post: {
+          requestBody: {
+            ...body,
           },
-        });
+        },
+      });
 
-        const codeModel = await runModeler(spec);
-        const parameter = codeModel.operationGroups[0]?.operations[0]?.requests?.[0]?.parameters?.[0];
+      const codeModel = await runModeler(spec);
+      const operation = codeModel.operationGroups[0]?.operations[0];
+      assert(operation);
+      return operation;
+    };
+
+    describe("Required attribute", () => {
+      const runModelerWithBodyAndGetParam = async (body: RequestBody) => {
+        const operation = await runModelerWithBody(body);
+        const parameter = operation.requests?.[0]?.parameters?.[0];
 
         expect(parameter).not.toBeNull();
         return parameter;
@@ -39,18 +47,76 @@ describe("Modelerfour.Request", () => {
       };
 
       it("mark body as required if required: true", async () => {
-        const parameter = await runModelerWithBody({ ...defaultBody, required: true });
+        const parameter = await runModelerWithBodyAndGetParam({ ...defaultBody, required: true });
         expect(parameter?.required).toBe(true);
       });
 
       it("mark body as not required if required: false", async () => {
-        const parameter = await runModelerWithBody({ ...defaultBody, required: true });
+        const parameter = await runModelerWithBodyAndGetParam({ ...defaultBody, required: true });
         expect(parameter?.required).toBe(true);
       });
 
       it("mark body as not required by default", async () => {
-        const parameter = await runModelerWithBody(defaultBody);
+        const parameter = await runModelerWithBodyAndGetParam(defaultBody);
         expect(parameter?.required).toBe(undefined);
+      });
+    });
+
+    fdescribe("multiple binary content-types", () => {
+      let operation: Operation;
+
+      beforeEach(async () => {
+        operation = await runModelerWithBody({
+          content: {
+            "application/octet-stream": {
+              schema: { type: JsonType.String, format: "binary" },
+            },
+            "image/png": {
+              schema: { type: JsonType.String, format: "binary" },
+            },
+          },
+        });
+      });
+
+      it("only create one request", async () => {
+        expect(operation.requests?.length).toEqual(1);
+      });
+
+      it("operation has a content-type parameter", async () => {
+        const param = findByName("content-type", operation.requests?.[0].parameters);
+        assert(param);
+        expect(param?.schema.type).toEqual("sealed-choice");
+        const schema = param?.schema as SealedChoiceSchema;
+        expect(schema.choices.map((x) => x.value)).toEqual(["application/octet-stream", "image/png"]);
+      });
+    });
+
+    describe("has binary content type and application/json with binary schema", () => {
+      let operation: Operation;
+
+      beforeEach(async () => {
+        operation = await runModelerWithBody({
+          content: {
+            "application/octet-stream": {
+              schema: { type: JsonType.String, format: "binary" },
+            },
+            "application/json": {
+              schema: { type: JsonType.String, format: "binary" },
+            },
+          },
+        });
+      });
+
+      it("only create one request", async () => {
+        expect(operation.requests?.length).toEqual(1);
+      });
+
+      it("operation has a content-type parameter", async () => {
+        const param = findByName("content-type", operation.requests?.[0].parameters);
+        assert(param);
+        expect(param?.schema.type).toEqual("sealed-choice");
+        const schema = param?.schema as SealedChoiceSchema;
+        expect(schema.choices.map((x) => x.value)).toEqual(["application/json", "application/octet-stream"]);
       });
     });
   });

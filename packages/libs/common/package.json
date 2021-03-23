@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "@azure-tools/datastore": "~4.2.1",
+    "@azure/logger": "^1.0.2",
     "commonmark": "^0.27.0"
   }
 }

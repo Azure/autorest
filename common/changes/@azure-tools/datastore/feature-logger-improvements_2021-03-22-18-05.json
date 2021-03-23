@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/datastore",
+      "comment": "**Update** Logging to use `@azure/logger` instead of `console`",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@azure-tools/datastore",
+  "email": "tiguerin@microsoft.com"
+}
