@@ -59,7 +59,7 @@ describe("Tree shaker", () => {
       expect(param["x-ms-client-name"]).toEqual("SomeParamClient");
     });
 
-    it("it removes x-ms-client-name on shaked model when used on property with inline model definition", async () => {
+    it("removes x-ms-client-name on shaked model when used on property with inline model definition", async () => {
       const result = await shake({
         components: {
           schemas: {

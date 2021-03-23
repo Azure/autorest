@@ -55,7 +55,7 @@ describe("Scenario testings", () => {
     await expectInputsMatchSnapshots("parameterized-host-parameters", ["swagger.json"]);
   });
 
-  fit("Convert enums using $ref object as values", async () => {
+  it("Convert enums using $ref object as values", async () => {
     // The expected result is the $ref in `enum` has been updated to the openapi 3 format.
     await expectInputsMatchSnapshots("enums", ["swagger.json"]);
   });

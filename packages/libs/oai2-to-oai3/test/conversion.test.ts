@@ -4,7 +4,7 @@ import { OpenAPI2Document } from "../src/oai2";
 import { join } from "path";
 import fs from "fs";
 
-const testConvertingOpenAPI2 = async (openAPI2Name: string, openAPI3Name: string) => {
+const expectConvertingOpenAPI2 = async (openAPI2Name: string, openAPI3Name: string) => {
   const swaggerUri = "mem://swagger.yaml";
   const oai3Uri = "mem://oai3.yaml";
 
@@ -43,70 +43,70 @@ const testConvertingOpenAPI2 = async (openAPI2Name: string, openAPI3Name: string
 
 describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
   it("test conversion - simple", async () => {
-    await testConvertingOpenAPI2("swagger.yaml", "openapi.yaml");
+    await expectConvertingOpenAPI2("swagger.yaml", "openapi.yaml");
   });
 
   it("test conversion - tiny", async () => {
-    await testConvertingOpenAPI2("tiny-swagger.yaml", "tiny-openapi.yaml");
+    await expectConvertingOpenAPI2("tiny-swagger.yaml", "tiny-openapi.yaml");
   });
 
   it("test conversion - ApiManagementClient", async () => {
-    await testConvertingOpenAPI2("ApiManagementClient-swagger.json", "ApiManagementClient-openapi.json");
+    await expectConvertingOpenAPI2("ApiManagementClient-swagger.json", "ApiManagementClient-openapi.json");
   });
 
   it("request body - copying extensions", async () => {
-    await testConvertingOpenAPI2("request-body-swagger.yaml", "request-body-openapi.yaml");
+    await expectConvertingOpenAPI2("request-body-swagger.yaml", "request-body-openapi.yaml");
   });
 
   it("headers", async () => {
-    await testConvertingOpenAPI2("header.json", "header.json");
+    await expectConvertingOpenAPI2("header.json", "header.json");
   });
 
   it("additionalProperties", async () => {
-    await testConvertingOpenAPI2("additionalProperties.json", "additionalProperties.json");
+    await expectConvertingOpenAPI2("additionalProperties.json", "additionalProperties.json");
   });
 
   it("xml-service", async () => {
-    await testConvertingOpenAPI2("xml-service.json", "xml-service.json");
+    await expectConvertingOpenAPI2("xml-service.json", "xml-service.json");
   });
 
   it("xms-error-responses", async () => {
-    await testConvertingOpenAPI2("xms-error-responses.json", "xms-error-responses.json");
+    await expectConvertingOpenAPI2("xms-error-responses.json", "xms-error-responses.json");
   });
 
   it("validation", async () => {
-    await testConvertingOpenAPI2("validation.json", "validation.json");
+    await expectConvertingOpenAPI2("validation.json", "validation.json");
   });
 
   it("storage", async () => {
-    await testConvertingOpenAPI2("storage.json", "storage.json");
+    await expectConvertingOpenAPI2("storage.json", "storage.json");
   });
 
   it("url", async () => {
-    await testConvertingOpenAPI2("url.json", "url.json");
+    await expectConvertingOpenAPI2("url.json", "url.json");
   });
 
   it("url-multi-collectionFormat", async () => {
-    await testConvertingOpenAPI2("url-multi-collectionFormat.json", "url-multi-collectionFormat.json");
+    await expectConvertingOpenAPI2("url-multi-collectionFormat.json", "url-multi-collectionFormat.json");
   });
 
   it("complex-model", async () => {
-    await testConvertingOpenAPI2("complex-model.json", "complex-model.json");
+    await expectConvertingOpenAPI2("complex-model.json", "complex-model.json");
   });
 
   it("extensible-enums-swagger", async () => {
-    await testConvertingOpenAPI2("extensible-enums-swagger.json", "extensible-enums-swagger.json");
+    await expectConvertingOpenAPI2("extensible-enums-swagger.json", "extensible-enums-swagger.json");
   });
 
   it("lro", async () => {
-    await testConvertingOpenAPI2("lro.json", "lro.json");
+    await expectConvertingOpenAPI2("lro.json", "lro.json");
   });
 
   it("exec-service", async () => {
-    await testConvertingOpenAPI2("exec-service.json", "exec-service.json");
+    await expectConvertingOpenAPI2("exec-service.json", "exec-service.json");
   });
 
   it("LUIS runtime", async () => {
-    await testConvertingOpenAPI2("luis.json", "luis.json");
+    await expectConvertingOpenAPI2("luis.json", "luis.json");
   });
 });

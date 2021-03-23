@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-conditional-expect */
 import { keys } from "@azure-tools/linq";
 import * as pointer from "./json-pointer";
 
@@ -189,7 +190,6 @@ describe("JsonPointer", () => {
         },
       },
     };
-
     for (const each of pointer.visit(obj)) {
       switch (each.key) {
         case "foo":
