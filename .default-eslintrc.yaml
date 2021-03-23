@@ -5,6 +5,7 @@ plugins:
   - prettier
   - unicorn
   - node
+  - jest
 
 env:
   es6: true
@@ -62,6 +63,12 @@ rules:
   node/no-unsupported-features/es-syntax: off # Disabling this one otherwise it will complain about typescript imports which get transpiled.
   node/no-missing-import: off
   node/shebang: off
+
+  # =================================================
+  # Jest plugin
+  # =================================================
+  jest/no-focused-tests: warn
+  jest/no-identical-title: warn
 
   # Basic config
   no-console: warn

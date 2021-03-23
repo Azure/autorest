@@ -94,7 +94,7 @@ describe("Python system requirement", () => {
       expect(result).toEqual(["python3", "-c", "print();"]);
     });
 
-    it("stub with the first compatible python version", async () => {
+    it("stub with the first compatible python version(python3 is 3.7)", async () => {
       mockInstalledPython({
         python3: "3.7.0",
         python: "3.9.0",
@@ -104,7 +104,7 @@ describe("Python system requirement", () => {
       expect(result).toEqual(["python3", "-c", "print();"]);
     });
 
-    it("stub with the first compatible python version", async () => {
+    it("stub with the first compatible python version(python3 is 2.0)", async () => {
       mockInstalledPython({
         python3: "2.0.0",
         python: "3.9.0",
@@ -116,7 +116,7 @@ describe("Python system requirement", () => {
   });
 
   describe("updatePythonPath (Deprecated)", () => {
-    it("stub with the only compatible python version", async () => {
+    it("stub with the only compatible python version(python3 is 3.7)", async () => {
       mockInstalledPython({
         python3: "3.7.0",
         python: "2.7.0",
@@ -127,7 +127,7 @@ describe("Python system requirement", () => {
       expect(result).toEqual(["python3", "-c", "print();"]);
     });
 
-    it("stub with the first compatible python version", async () => {
+    it("stub with the first compatible python version(python3 is 3.7, python is 3.9)", async () => {
       mockInstalledPython({
         python3: "3.7.0",
         python: "3.9.0",
@@ -138,7 +138,7 @@ describe("Python system requirement", () => {
       expect(result).toEqual(["python3", "-c", "print();"]);
     });
 
-    it("stub with the first compatible python version", async () => {
+    it("stub with the first compatible python version(python3 is 2.0)", async () => {
       mockInstalledPython({
         python3: "2.0.0",
         python: "3.9.0",
