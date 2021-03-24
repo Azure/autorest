@@ -14,11 +14,11 @@ import { mkdtempSync, rmdirSync } from "fs";
 import { tmpdir } from "os";
 import { spawn } from "child_process";
 import { AutorestArgs } from "./args";
+import { VERSION } from "./constants";
 
 const inWebpack = typeof __webpack_require__ === "function";
 const nodeRequire = inWebpack ? __non_webpack_require__ : require;
 
-export const pkgVersion: string = require(`../package.json`).version;
 process.env["autorest.home"] = process.env["AUTOREST_HOME"] || process.env["autorest.home"] || homedir();
 
 try {
@@ -37,9 +37,7 @@ export const extensionManager: Promise<ExtensionManager> = ExtensionManager.Crea
 export const oldCorePackage = "@microsoft.azure/autorest-core";
 export const newCorePackage = "@autorest/core";
 
-const basePkgVersion = semver.parse(
-  pkgVersion.indexOf("-") > -1 ? pkgVersion.substring(0, pkgVersion.indexOf("-")) : pkgVersion,
-);
+const basePkgVersion = semver.parse(VERSION.indexOf("-") > -1 ? VERSION.substring(0, VERSION.indexOf("-")) : VERSION);
 
 /**
  * The version range of the core package required.

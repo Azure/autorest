@@ -6,8 +6,9 @@
 import "source-map-support/register";
 import { omit } from "lodash";
 import { configureLibrariesLogger } from "@autorest/common";
+import { EventEmitter } from "events";
 
-require("events").EventEmitter.defaultMaxListeners = 100;
+EventEmitter.defaultMaxListeners = 100;
 process.env["ELECTRON_RUN_AS_NODE"] = "1";
 delete process.env["ELECTRON_NO_ATTACH_CONSOLE"];
 
