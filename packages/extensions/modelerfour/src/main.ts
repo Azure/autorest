@@ -23,4 +23,9 @@ async function main() {
   await pluginHost.Run();
 }
 
-void main();
+main().catch((e) => {
+  // eslint-disable-next-line no-console
+  console.error("Unexpected Error while running modelerfour extension", e);
+  // eslint-disable-next-line no-process-exit
+  process.exit(1);
+});
