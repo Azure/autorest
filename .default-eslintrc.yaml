@@ -5,6 +5,7 @@ plugins:
   - prettier
   - unicorn
   - node
+  - jest
 
 env:
   es6: true
@@ -14,6 +15,7 @@ extends:
   - eslint:recommended
   - plugin:@typescript-eslint/recommended
   - plugin:node/recommended
+  - plugin:jest/recommended
 
 globals:
   Atomics: readonly
@@ -62,6 +64,14 @@ rules:
   node/no-unsupported-features/es-syntax: off # Disabling this one otherwise it will complain about typescript imports which get transpiled.
   node/no-missing-import: off
   node/shebang: off
+
+  # =================================================
+  # Jest plugin
+  # =================================================
+  jest/no-deprecated-functions: off
+  jest/expect-expect: off
+  jest/no-focused-tests: warn
+  jest/no-identical-title: warn
 
   # Basic config
   no-console: warn

@@ -222,7 +222,7 @@ describe("ConfigurationManager", () => {
       expect(output["namespace"]).toEqual("FooBarOverride.Client");
     });
 
-    it("interpolate with higher priority value(defined before) instead of the one in the same block", async () => {
+    it("interpolate with higher priority value(defined in previous config) instead of the one in the same block", async () => {
       await manager.addConfig({
         name: "FooBarOverride",
       });
@@ -265,7 +265,7 @@ describe("ConfigurationManager", () => {
       expect(output["namespace"]).toEqual("FooBarOverride.Client");
     });
 
-    it("interpolate from the last block", async () => {
+    it("interpolate from the previous config", async () => {
       await manager.addConfig({
         name: "FooBarCLIOverride",
       });

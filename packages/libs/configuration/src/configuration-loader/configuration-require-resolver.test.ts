@@ -33,12 +33,12 @@ describe("getIncludedConfigurationFiles", () => {
       expect(result).toEqual(["file://./foo.md", "file://./bar.md"]);
     });
 
-    it("it still resolve file path if they don't exists", async () => {
+    it("still resolve file path if they don't exists", async () => {
       const result = await getRequiredFiles({ require: ["doesnot-exists.md"] });
       expect(result).toEqual(["file://./doesnot-exists.md"]);
     });
 
-    it("it resolve duplicate require only once", async () => {
+    it("resolve duplicate require only once", async () => {
       const result = await getRequiredFiles({ require: ["foo.md", "bar.md", "foo.md", "bar.md"] });
       expect(result).toEqual(["file://./foo.md", "file://./bar.md"]);
     });
