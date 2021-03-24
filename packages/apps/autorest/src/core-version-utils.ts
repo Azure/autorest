@@ -47,7 +47,7 @@ export const findCoreVersionUsingConfiguration = async (args: AutorestArgs): Pro
   const loader = new ConfigurationLoader(logger, defaultConfigUri, configFileOrFolder, {
     extensionManager: await extensionManager,
   });
-  const { config } = await loader.load([args], false);
+  const { config } = await loader.load([args], true);
   if (config.version) {
     // eslint-disable-next-line no-console
     console.log(
