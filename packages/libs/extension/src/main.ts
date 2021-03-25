@@ -30,6 +30,7 @@ import {
   MissingStartCommandException,
   UnsatisfiedSystemRequirementException,
 } from "./exceptions";
+import { logger } from "./logger";
 
 function quoteIfNecessary(text: string): string {
   if (text && text.indexOf(" ") > -1 && text.charAt(0) != '"') {
@@ -124,7 +125,8 @@ async function fetchPackageMetadata(spec: string): Promise<any> {
       "registry": process.env.autorest_registry || "https://registry.npmjs.org",
       "full-metadata": true,
     });
-  } catch (er) {
+  } catch (error) {
+    logger.error(`Error resolving package ${spec}`, error);
     throw new UnresolvedPackageException(spec);
   }
 }
