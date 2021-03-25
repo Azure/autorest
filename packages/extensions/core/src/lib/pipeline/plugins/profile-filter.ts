@@ -5,6 +5,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable no-useless-escape */
 
+import { arrayOf } from "@autorest/configuration";
 import { maximum, serialize } from "@azure-tools/codegen";
 import {
   AnyObject,
@@ -451,20 +452,19 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   }
 }
 
-async function filter(config: AutorestContext, input: DataSource, sink: DataSink) {
+async function filter(context: AutorestContext, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
-    const allProfileDefinitions = config.GetEntry("profiles");
-    const configApiVersion = config.GetEntry("api-version");
+    const allProfileDefinitions = context.GetEntry("profiles");
+    const configApiVersion = context.GetEntry("api-version");
     const apiVersions: Array<string> = configApiVersion
       ? typeof configApiVersion === "string"
         ? [configApiVersion]
         : configApiVersion
       : [];
-    const profilesRequested = !Array.isArray(config.GetEntry("profile"))
-      ? [config.GetEntry("profile")]
-      : config.GetEntry("profile");
+
+    const profilesRequested = arrayOf(context.config.profile);
     if (profilesRequested.length > 0 || apiVersions.length > 0) {
       if (profilesRequested.length > 0) {
         validateProfiles(allProfileDefinitions);
@@ -476,9 +476,9 @@ async function filter(config: AutorestContext, input: DataSource, sink: DataSink
       const specsReferencedAfterFiltering = getFilesUsed(visit(output));
       const specsNotUsed = [...specsReferencedBeforeFiltering].filter((x) => !specsReferencedAfterFiltering.has(x));
       if (
-        (Array.isArray(config.GetEntry("output-artifact")) &&
-          config.GetEntry("output-artifact").includes("profile-filter-log")) ||
-        config.GetEntry("output-artifact") === "profile-filter-log"
+        (Array.isArray(context.GetEntry("output-artifact")) &&
+          context.GetEntry("output-artifact").includes("profile-filter-log")) ||
+        context.GetEntry("output-artifact") === "profile-filter-log"
       ) {
         result.push(
           await sink.WriteData(
