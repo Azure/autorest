@@ -1,6 +1,16 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
+    "SecurityScheme": {
+      "anyOf": [
+        {
+          "$ref": "./master.json#/definitions/AADTokenSecurityScheme"
+        },
+        {
+          "$ref": "./master.json#/definitions/AzureKeyScheme"
+        }
+      ]
+    },
     "AuthorizationCodeOAuthFlow": {
       "type": "object",
       "properties": {
@@ -201,25 +211,6 @@
         },
         {
           "$ref": "./http.json#/definitions/NonBearerHTTPSecurityScheme"
-        }
-      ]
-    },
-    "SecurityScheme": {
-      "anyOf": [
-        {
-          "$ref": "./http.json#/definitions/BearerHTTPSecurityScheme"
-        },
-        {
-          "$ref": "./http.json#/definitions/NonBearerHTTPSecurityScheme"
-        },
-        {
-          "$ref": "./http.json#/definitions/OAuth2SecurityScheme"
-        },
-        {
-          "$ref": "./http.json#/definitions/APIKeySecurityScheme"
-        },
-        {
-          "$ref": "./http.json#/definitions/OpenIdConnectSecurityScheme"
         }
       ]
     },

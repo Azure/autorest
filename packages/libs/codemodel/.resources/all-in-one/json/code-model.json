@@ -2191,12 +2191,79 @@
         "authenticationRequired": {
           "description": "indicates that the API surface requires authentication",
           "type": "boolean"
+        },
+        "schemes": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/AADTokenSecurityScheme"
+              },
+              {
+                "$ref": "#/definitions/AzureKeyScheme"
+              }
+            ]
+          }
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "authenticationRequired"
+        "authenticationRequired",
+        "schemes"
+      ]
+    },
+    "SecurityScheme": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/AADTokenSecurityScheme"
+        },
+        {
+          "$ref": "#/definitions/AzureKeyScheme"
+        }
+      ]
+    },
+    "AADTokenSecurityScheme": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "AADToken"
+          ]
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "scopes"
+      ]
+    },
+    "AzureKeyScheme": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "AzureKey"
+          ]
+        },
+        "headerName": {
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "headerName",
+        "name"
       ]
     },
     "Example": {
@@ -2570,25 +2637,6 @@
         },
         {
           "$ref": "#/definitions/NonBearerHTTPSecurityScheme"
-        }
-      ]
-    },
-    "SecurityScheme": {
-      "anyOf": [
-        {
-          "$ref": "#/definitions/BearerHTTPSecurityScheme"
-        },
-        {
-          "$ref": "#/definitions/NonBearerHTTPSecurityScheme"
-        },
-        {
-          "$ref": "#/definitions/OAuth2SecurityScheme"
-        },
-        {
-          "$ref": "#/definitions/APIKeySecurityScheme"
-        },
-        {
-          "$ref": "#/definitions/OpenIdConnectSecurityScheme"
         }
       ]
     },

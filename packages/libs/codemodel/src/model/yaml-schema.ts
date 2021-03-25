@@ -1,6 +1,6 @@
 import { Schema, Type, DEFAULT_SCHEMA } from "js-yaml";
 
-import { CodeModel, Security } from "./common/code-model";
+import { CodeModel } from "./common/code-model";
 import { Metadata, CSharpLanguage, Language } from "./common/metadata";
 import { Parameter, VirtualParameter } from "./common/parameter";
 import { Property } from "./common/property";
@@ -53,6 +53,7 @@ import { DictionarySchema } from "./common/schemas/dictionary";
 import { OrSchema, XorSchema } from "./common/schemas/relationship";
 import { BinarySchema } from "./common/schemas/binary";
 import { ConditionalValue, ConditionalSchema, SealedConditionalSchema } from "./common/schemas/conditional";
+import { Security } from "./common/security";
 
 function TypeInfo<U extends new (...args: any) => any>(type: U) {
   return new Type(`!${type.name}`, {

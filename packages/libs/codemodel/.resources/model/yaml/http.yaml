@@ -447,8 +447,5 @@ definitions:
     additionalProperties: false
   SecurityScheme:
     anyOf:
-      - $ref: ./http.yaml#/definitions/BearerHTTPSecurityScheme
-      - $ref: ./http.yaml#/definitions/NonBearerHTTPSecurityScheme
-      - $ref: ./http.yaml#/definitions/OAuth2SecurityScheme
-      - $ref: ./http.yaml#/definitions/APIKeySecurityScheme
-      - $ref: ./http.yaml#/definitions/OpenIdConnectSecurityScheme
+      - $ref: ./master.yaml#/definitions/AADTokenSecurityScheme
+      - $ref: ./master.yaml#/definitions/AzureKeyScheme
