@@ -9,7 +9,6 @@ const initialConfig: AutorestRawConfiguration = Object.freeze({
   "directive": [],
   "input-file": [],
   "exclude-file": [],
-  "profile": [],
   "output-artifact": [],
   "require": [],
   "try-require": [],
