@@ -22,6 +22,7 @@
 
 *.json text eol=lf
 *.ts text eol=lf
+*.txt text eol=lf
 
 *.msbuild text
 *.nuspec text
