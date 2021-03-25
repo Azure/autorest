@@ -22,6 +22,7 @@ export abstract class JsonSchemaValidator {
   public abstract get schema(): AnySchemaObject;
 
   public validate(spec: unknown): ValidationError[] {
+    console.error("Validat", (spec as any).components.securitySchemes);
     const validate = this.ajv.compile(this.schema);
     const valid = validate(spec);
     if (valid || !validate.errors) {

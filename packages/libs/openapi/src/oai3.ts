@@ -103,7 +103,7 @@ export enum SecurityType {
 }
 
 export interface Callback extends Dictionary<PathItem> {}
-export interface SecurityRequirement extends Dictionary<string> {}
+export interface SecurityRequirement extends Dictionary<string[]> {}
 export type HTTPSecurityScheme = NonBearerHTTPSecurityScheme | BearerHTTPSecurityScheme;
 
 export type SecurityScheme =
