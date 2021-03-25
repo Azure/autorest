@@ -2278,13 +2278,7 @@ export class ModelerFour {
   }
 
   process() {
-    if (keys(this.input.components?.securitySchemes).any()) {
-      // we don't currently handle security information directly, but we can
-      // tell if there is something in there.
-      // if there is any security information, mark it auth-required true.
-      this.codeModel.security.authenticationRequired = true;
-    }
-
+    this.processSecurity();
     let priority = 0;
     for (const { key: name, value: parameter } of this.resolveDictionary(this.input.components?.parameters)) {
       if (parameter["x-ms-parameter-location"] !== "method") {
@@ -2341,6 +2335,16 @@ export class ModelerFour {
     this.codeModel.schemas.objects?.forEach((o) => this.propagateSchemaUsage(o));
 
     return this.codeModel;
+  }
+
+  private processSecurity() {
+    const schemes = this.input.components?.securitySchemes;
+    if (!schemes || Object.keys(schemes).length === 0) {
+      return;
+    }
+
+    this.codeModel.security.authenticationRequired = true;
+    console.error("Schemes", schemes);
   }
 
   private propagateSchemaUsage(schema: Schema): void {

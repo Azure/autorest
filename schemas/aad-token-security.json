@@ -1,0 +1,8 @@
+{
+  "flows": {
+    "authorizationCode": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/authorize",
+      "tokenUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/token"
+    }
+  }
+}
