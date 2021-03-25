@@ -146,6 +146,7 @@ export class ModelerFour {
   private apiVersionParameter!: "choice" | "constant" | undefined;
   private useModelNamespace!: boolean | undefined;
   private profileFilter!: Array<string>;
+  private apiVersionFilter!: Array<string>;
   private schemaCache = new ProcessingCache((schema: OpenAPI.Schema, name: string) =>
     this.processSchemaImpl(schema, name),
   );
