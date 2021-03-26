@@ -49,6 +49,8 @@ This uses [OpenAPI security model](https://swagger.io/docs/specification/authent
 }
 ```
 
+Alternatively instead of
+
 ### Key authentication
 
 - OpenAPI 3
@@ -88,5 +90,76 @@ This uses [OpenAPI security model](https://swagger.io/docs/specification/authent
       "AzureKey": []
     }
   ]
+}
+```
+
+## Configure using flags/config
+
+There is a few config options that will result in the same generation:
+
+### `--security`
+
+This is a list of the supported security schemes(`AADToken` | `AzureKey`).
+
+Example
+
+```yaml
+# For AAD Token  only
+security: AADToken
+# For Azure key  only
+security: AzureKey
+
+# For both
+security: [AADToken, AzureKey]
+```
+
+By default:
+
+- `AADToken` scope is `https://management.azure.com/.default`
+- `AzureKey` header name is `Authorization`
+
+### `--security-scopes`
+
+To be used with `security: AADToken` will override the list of scopes.
+
+Example:
+
+```yaml
+security: AADToken
+security-scopes:
+  - "https://fakeendpoint.azure.com/.default"
+  - "https://dummyendpoint.azure.com/.default"
+```
+
+### `--security-header-name`
+
+To be used with `security: AzureKey` will override the header name.
+
+Example:
+
+```yaml
+security: AzureKey
+security-header-name: CustomAuth
+```
+
+### `--azure-arm`
+
+This will automatically configure `AADToken` credentials with `https://management.azure.com/.default` scope.
+
+Equivalent to passing
+
+```yaml
+{
+  "components":
+    {
+      "securitySchemes":
+        {
+          "AADToken":
+            {
+              "$ref": "https://raw.githubusercontent.com/Azure/autorest/master/schemas/aad-token-security.json#/components/securitySchemes/AADToken",
+            },
+        },
+    },
+  "security": [{ "AADToken": ["https://management.azure.com/.default"] }],
 }
 ```
