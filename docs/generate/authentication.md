@@ -2,7 +2,7 @@
 
 Autorest only supports 2 types of authentication, any other will need to be handled manually:
 
-- `AADToken`: Represent an AzureAD oauth2 authentication
+- `AADToken`: Represent an AzureAD OAuth2 authentication
 - `AzureKey`: Represent an api key authentication
 
 This can be either configured in OpenAPI spec or using flags/config
@@ -20,7 +20,13 @@ This uses [OpenAPI security model](https://swagger.io/docs/specification/authent
   "components": {
     "securitySchemes": {
       "AADToken": {
-        "$ref": "https://raw.githubusercontent.com/Azure/autorest/master/schemas/aad-token-security.json#/components/securitySchemes/AADToken"
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/authorize",
+            "tokenUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/token"
+          }
+        }
       }
     }
   },
@@ -38,7 +44,13 @@ This uses [OpenAPI security model](https://swagger.io/docs/specification/authent
 {
   "securityDefinitions": {
     "AADToken": {
-      "$ref": "https://raw.githubusercontent.com/Azure/autorest/master/schemas/aad-token-security.json#/components/securitySchemes/AADToken"
+      "type": "oauth2",
+      "flows": {
+        "authorizationCode": {
+          "authorizationUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/authorize",
+          "tokenUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/token"
+        }
+      }
     }
   },
   "security": [
@@ -49,7 +61,7 @@ This uses [OpenAPI security model](https://swagger.io/docs/specification/authent
 }
 ```
 
-Alternatively instead of
+Alternatively instead of using a `$ref` you can
 
 ### Key authentication
 
@@ -148,18 +160,22 @@ This will automatically configure `AADToken` credentials with `https://managemen
 
 Equivalent to passing
 
-```yaml
+```json
 {
   "components":
     {
       "securitySchemes":
         {
           "AADToken":
-            {
-              "$ref": "https://raw.githubusercontent.com/Azure/autorest/master/schemas/aad-token-security.json#/components/securitySchemes/AADToken",
-            },
-        },
-    },
+             "type": "oauth2",
+            "flows": {
+                "authorizationCode": {
+                "authorizationUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/authorize",
+                "tokenUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/token"
+                }
+            }
+        }
+    }
   "security": [{ "AADToken": ["https://management.azure.com/.default"] }],
 }
 ```
