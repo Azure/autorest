@@ -163,20 +163,19 @@ Equivalent to passing
 
 ```json
 {
-  "components":
-    {
-      "securitySchemes":
-        {
-          "AADToken":
-             "type": "oauth2",
-            "flows": {
-                "authorizationCode": {
-                "authorizationUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/authorize",
-                "tokenUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/token"
-                }
-            }
+  "components": {
+    "securitySchemes": {
+      "AADToken": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/authorize",
+            "tokenUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/token"
+          }
         }
+      }
     }
-  "security": [{ "AADToken": ["https://management.azure.com/.default"] }],
+  },
+  "security": [{ "AADToken": ["https://management.azure.com/.default"] }]
 }
 ```
