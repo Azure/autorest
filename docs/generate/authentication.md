@@ -45,12 +45,9 @@ This uses [OpenAPI security model](https://swagger.io/docs/specification/authent
   "securityDefinitions": {
     "AADToken": {
       "type": "oauth2",
-      "flows": {
-        "authorizationCode": {
-          "authorizationUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/authorize",
-          "tokenUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/token"
-        }
-      }
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/authorize",
+      "tokenUrl": "https://login.microsoftonline.com/common/v2.0/oauth2/token"
     }
   },
   "security": [
