@@ -10,6 +10,7 @@ export enum KnownSecurityScheme {
 }
 
 const KnownSecuritySchemeList = Object.values(KnownSecurityScheme);
+
 /**
  * Body processing functions
  */
@@ -32,7 +33,15 @@ export class SecurityProcessor {
       const names = Object.keys(oai3SecurityRequirement);
       if (names.length > 1) {
         throw new Error(
-          `Security defines multiple requirements at the same time which is not supported. ${oai3SecurityRequirement}`,
+          [
+            `Security defines multiple requirements at the same time which is not supported(${names.join(",")}).`,
+            `Did you meant to have multiple authentication options instead? Define each option seperately in your spec:`,
+            JSON.stringify(
+              names.map((x) => ({ [x]: oai3SecurityRequirement[x] })),
+              null,
+              2,
+            ),
+          ].join("\n"),
         );
       }
       if (names.length === 0) {
