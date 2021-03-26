@@ -118,6 +118,7 @@ Example
 ```yaml
 # For AAD Token  only
 security: AADToken
+
 # For Azure key  only
 security: AzureKey
 
