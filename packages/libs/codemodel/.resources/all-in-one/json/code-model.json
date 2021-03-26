@@ -2195,14 +2195,7 @@
         "schemes": {
           "type": "array",
           "items": {
-            "anyOf": [
-              {
-                "$ref": "#/definitions/AADTokenSecurityScheme"
-              },
-              {
-                "$ref": "#/definitions/AzureKeyScheme"
-              }
-            ]
+            "$ref": "#/definitions/SecurityScheme"
           }
         }
       },
@@ -2214,46 +2207,16 @@
       ]
     },
     "SecurityScheme": {
-      "anyOf": [
-        {
-          "$ref": "#/definitions/AADTokenSecurityScheme"
-        },
-        {
-          "$ref": "#/definitions/AzureKeyScheme"
-        }
-      ]
-    },
-    "AADTokenSecurityScheme": {
       "type": "object",
       "properties": {
         "name": {
-          "type": "string",
-          "enum": [
-            "AADToken"
-          ]
+          "type": "string"
         },
         "scopes": {
           "type": "array",
           "items": {
             "type": "string"
           }
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "name",
-        "scopes"
-      ]
-    },
-    "AzureKeyScheme": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "enum": [
-            "AzureKey"
-          ]
         },
         "headerName": {
           "type": "string"
@@ -2262,8 +2225,37 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
+        "name"
+      ]
+    },
+    "AADTokenSecurityScheme": {
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "scopes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecurityScheme"
+        }
+      ]
+    },
+    "AzureKeyScheme": {
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
         "headerName",
         "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecurityScheme"
+        }
       ]
     },
     "Example": {

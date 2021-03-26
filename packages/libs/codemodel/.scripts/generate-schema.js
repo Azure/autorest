@@ -104,7 +104,7 @@ function fix(txt) {
 }
 
 function fixmodel(schema) {
-  txt = JSON.stringify(schema);
+  let txt = JSON.stringify(schema);
   txt = txt
     .replace(/<Schema<AllSchemaTypes>>/g, "")
     .replace(/Schema<AllSchemaTypes>/g, "Schema")
@@ -126,7 +126,7 @@ function fixmodel(schema) {
     .replace(/ElementType/g, "Schema")
     .replace(/SerializationFormats<SerializationFormat>/g, "SerializationFormats");
 
-  model = JSON.parse(txt, undefined, 2);
+  const model = JSON.parse(txt);
   return model;
 }
 

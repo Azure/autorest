@@ -2,13 +2,25 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "SecurityScheme": {
-      "anyOf": [
-        {
-          "$ref": "./master.json#/definitions/AADTokenSecurityScheme"
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
         },
-        {
-          "$ref": "./master.json#/definitions/AzureKeyScheme"
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "headerName": {
+          "type": "string"
         }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "name"
       ]
     },
     "AuthorizationCodeOAuthFlow": {

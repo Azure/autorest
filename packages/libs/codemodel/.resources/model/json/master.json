@@ -918,14 +918,7 @@
         "schemes": {
           "type": "array",
           "items": {
-            "anyOf": [
-              {
-                "$ref": "./master.json#/definitions/AADTokenSecurityScheme"
-              },
-              {
-                "$ref": "./master.json#/definitions/AzureKeyScheme"
-              }
-            ]
+            "$ref": "./http.json#/definitions/SecurityScheme"
           }
         }
       },
@@ -938,45 +931,32 @@
     },
     "AADTokenSecurityScheme": {
       "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "enum": [
-            "AADToken"
-          ]
-        },
-        "scopes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
+      "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
         "name",
         "scopes"
+      ],
+      "allOf": [
+        {
+          "$ref": "./http.json#/definitions/SecurityScheme"
+        }
       ]
     },
     "AzureKeyScheme": {
       "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "enum": [
-            "AzureKey"
-          ]
-        },
-        "headerName": {
-          "type": "string"
-        }
-      },
+      "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
         "headerName",
         "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "./http.json#/definitions/SecurityScheme"
+        }
       ]
     },
     "Example": {

@@ -9,6 +9,9 @@ export interface Security {
    */
   authenticationRequired: boolean;
 
+  /**
+   * @items {"type": "SecuritySchemeFull"}
+   */
   schemes: SecurityScheme[];
 }
 
@@ -20,14 +23,18 @@ export class Security extends Initializer implements Security {
   }
 }
 
-export type SecurityScheme = AADTokenSecurityScheme | AzureKeyScheme;
+export interface SecurityScheme {
+  name: string;
+  scopes?: string[];
+  headerName?: string;
+}
 
-export interface AADTokenSecurityScheme {
+export interface AADTokenSecurityScheme extends SecurityScheme {
   name: "AADToken";
   scopes: string[];
 }
 
-export interface AzureKeyScheme {
+export interface AzureKeyScheme extends SecurityScheme {
   name: "AzureKey";
   headerName: string;
 }

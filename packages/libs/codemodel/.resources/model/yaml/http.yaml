@@ -446,6 +446,16 @@ definitions:
     description: common ways of serializing simple parameters
     additionalProperties: false
   SecurityScheme:
-    anyOf:
-      - $ref: ./master.yaml#/definitions/AADTokenSecurityScheme
-      - $ref: ./master.yaml#/definitions/AzureKeyScheme
+    type: object
+    additionalProperties: false
+    properties:
+      name:
+        type: string
+      headerName:
+        type: string
+      scopes:
+        type: array
+        items:
+          type: string
+    required:
+      - name

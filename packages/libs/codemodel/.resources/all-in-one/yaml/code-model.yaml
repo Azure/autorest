@@ -6,15 +6,8 @@ definitions:
   AADTokenSecurityScheme:
     type: object
     additionalProperties: false
-    properties:
-      name:
-        type: string
-        enum:
-          - AADToken
-      scopes:
-        type: array
-        items:
-          type: string
+    allOf:
+      - $ref: '#/definitions/SecurityScheme'
     required:
       - name
       - scopes
@@ -165,13 +158,8 @@ definitions:
   AzureKeyScheme:
     type: object
     additionalProperties: false
-    properties:
-      name:
-        type: string
-        enum:
-          - AzureKey
-      headerName:
-        type: string
+    allOf:
+      - $ref: '#/definitions/SecurityScheme'
     required:
       - headerName
       - name
@@ -1888,9 +1876,7 @@ definitions:
       schemes:
         type: array
         items:
-          anyOf:
-            - $ref: '#/definitions/AADTokenSecurityScheme'
-            - $ref: '#/definitions/AzureKeyScheme'
+          $ref: '#/definitions/SecurityScheme'
     required:
       - authenticationRequired
       - schemes
@@ -1899,9 +1885,19 @@ definitions:
     description: common ways of serializing simple parameters
     additionalProperties: false
   SecurityScheme:
-    anyOf:
-      - $ref: '#/definitions/AADTokenSecurityScheme'
-      - $ref: '#/definitions/AzureKeyScheme'
+    type: object
+    additionalProperties: false
+    properties:
+      name:
+        type: string
+      headerName:
+        type: string
+      scopes:
+        type: array
+        items:
+          type: string
+    required:
+      - name
   SecurityType:
     type: string
     enum:

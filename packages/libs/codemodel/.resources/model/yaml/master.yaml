@@ -6,15 +6,8 @@ definitions:
   AADTokenSecurityScheme:
     type: object
     additionalProperties: false
-    properties:
-      name:
-        type: string
-        enum:
-          - AADToken
-      scopes:
-        type: array
-        items:
-          type: string
+    allOf:
+      - $ref: ./http.yaml#/definitions/SecurityScheme
     required:
       - name
       - scopes
@@ -52,13 +45,8 @@ definitions:
   AzureKeyScheme:
     type: object
     additionalProperties: false
-    properties:
-      name:
-        type: string
-        enum:
-          - AzureKey
-      headerName:
-        type: string
+    allOf:
+      - $ref: ./http.yaml#/definitions/SecurityScheme
     required:
       - headerName
       - name
@@ -582,9 +570,7 @@ definitions:
       schemes:
         type: array
         items:
-          anyOf:
-            - $ref: ./master.yaml#/definitions/AADTokenSecurityScheme
-            - $ref: ./master.yaml#/definitions/AzureKeyScheme
+          $ref: ./http.yaml#/definitions/SecurityScheme
     required:
       - authenticationRequired
       - schemes
