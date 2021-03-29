@@ -180,7 +180,6 @@ export class AutorestCoreLogger {
               });
             }
           } catch (e) {
-            console.error("E", e);
             if (!shouldComplain) {
               shouldComplain = true;
             }

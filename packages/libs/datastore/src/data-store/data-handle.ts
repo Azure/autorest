@@ -6,9 +6,9 @@ import { ParseToAst as parseAst, YAMLNode, parseYaml, ParseNode } from "../yaml"
 export interface Metadata {
   lineIndices: Lazy<Array<number>>;
 
-  inputSourceMap: LazyPromise<RawSourceMap>;
-  sourceMap: LazyPromise<RawSourceMap>;
-  sourceMapEachMappingByLine: LazyPromise<Array<Array<MappingItem>>>;
+  // inputSourceMap: LazyPromise<RawSourceMap>;
+  // sourceMap: LazyPromise<RawSourceMap>;
+  // sourceMapEachMappingByLine: LazyPromise<Array<Array<MappingItem>>>;
 }
 
 export interface Data {
@@ -160,6 +160,8 @@ export class DataHandle {
   }
 
   public async blame(position: Position): Promise<Array<MappedPosition>> {
+    return [];
+    /* DISABLING SOURCE MAP SUPPORT
     const metadata = this.metadata;
     const sameLineResults = ((await metadata.sourceMapEachMappingByLine)[position.line] || []).filter(
       (mapping) => mapping.generatedColumn <= position.column,
@@ -176,6 +178,7 @@ export class DataHandle {
           source: m.source,
         };
       });
+      */
   }
 
   /**
