@@ -48,13 +48,13 @@ export class DataStore {
     return this.cacheFolder;
   }
 
-  private ThrowIfCancelled(): void {
+  private throwIfCancelled(): void {
     if (this.cancellationToken.isCancellationRequested) {
       throw new OperationCanceledException();
     }
   }
 
-  public GetReadThroughScope(fs: IFileSystem): DataSource {
+  public getReadThroughScope(fs: IFileSystem): DataSource {
     return new ReadThroughDataSource(this, fs);
   }
 
@@ -71,7 +71,7 @@ export class DataStore {
     identity: Array<string>,
     metadata: Metadata,
   ): Promise<DataHandle> {
-    this.ThrowIfCancelled();
+    this.throwIfCancelled();
     if (this.store[uri]) {
       throw new Error(`can only write '${uri}' once`);
     }
@@ -91,10 +91,10 @@ export class DataStore {
       metadata,
     };
 
-    return this.Read(uri);
+    return this.read(uri);
   }
 
-  public async WriteData(
+  public async writeData(
     description: string,
     data: string,
     artifact: string,
@@ -146,7 +146,7 @@ export class DataStore {
       return result;
     });
 
-    metadata.inputSourceMap = new LazyPromise(() => this.CreateInputSourceMapFor(uri));
+    metadata.inputSourceMap = new LazyPromise(() => this.createInputSourceMapFor(uri));
     metadata.lineIndices = new Lazy<Array<number>>(() => LineIndices(data));
 
     return result;
@@ -159,7 +159,7 @@ export class DataStore {
   public getDataSink(defaultArtifact: string = FALLBACK_DEFAULT_OUTPUT_ARTIFACT): DataSink {
     return new DataSink(
       (description, data, artifact, identity, sourceMapFactory) =>
-        this.WriteData(description, data, artifact || defaultArtifact, identity, sourceMapFactory),
+        this.writeData(description, data, artifact || defaultArtifact, identity, sourceMapFactory),
       async (description, input) => {
         const uri = this.createUri(description);
         this.store[uri] = this.store[input.key];
@@ -168,7 +168,7 @@ export class DataStore {
     );
   }
 
-  public ReadStrictSync(absoluteUri: string): DataHandle {
+  public readStrictSync(absoluteUri: string): DataHandle {
     const entry = this.store[absoluteUri];
     if (entry === undefined) {
       throw new Error(`Object '${absoluteUri}' does not exist.`);
@@ -176,7 +176,7 @@ export class DataStore {
     return new DataHandle(absoluteUri, entry);
   }
 
-  public async Read(uri: string): Promise<DataHandle> {
+  public async read(uri: string): Promise<DataHandle> {
     uri = resolveUri(this.BaseUri, uri);
     const data = this.store[uri];
     if (!data) {
@@ -185,8 +185,8 @@ export class DataStore {
     return new DataHandle(uri, data);
   }
 
-  public async Blame(absoluteUri: string, position: SmartPosition): Promise<BlameTree> {
-    const data = this.ReadStrictSync(absoluteUri);
+  public async blame(absoluteUri: string, position: SmartPosition): Promise<BlameTree> {
+    const data = this.readStrictSync(absoluteUri);
     const resolvedPosition = await CompilePosition(position, data);
     return await BlameTree.Create(this, {
       source: absoluteUri,
@@ -196,8 +196,8 @@ export class DataStore {
     });
   }
 
-  private async CreateInputSourceMapFor(absoluteUri: string): Promise<RawSourceMap> {
-    const data = this.ReadStrictSync(absoluteUri);
+  private async createInputSourceMapFor(absoluteUri: string): Promise<RawSourceMap> {
+    const data = this.readStrictSync(absoluteUri);
 
     // retrieve all target positions
     const targetPositions: Array<SmartPosition> = [];
@@ -215,7 +215,7 @@ export class DataStore {
       for (const inputPosition of inputPositions) {
         mappings.push({
           name: inputPosition.name,
-          source: this.ReadStrictSync(inputPosition.source).Description, // friendly name
+          source: this.readStrictSync(inputPosition.source).description, // friendly name
           generated: blameTree.node,
           original: inputPosition,
         });
@@ -224,5 +224,46 @@ export class DataStore {
     const sourceMapGenerator = new SourceMapGenerator({ file: absoluteUri });
     await Compile(mappings, sourceMapGenerator);
     return sourceMapGenerator.toJSON();
+  }
+
+  /**
+   * @deprecated use @see getReadThroughScope
+   */
+  public GetReadThroughScope(fs: IFileSystem): DataSource {
+    return this.getReadThroughScope(fs);
+  }
+
+  /**
+   * @deprecated use @see writeData
+   */
+  public async WriteData(
+    description: string,
+    data: string,
+    artifact: string,
+    identity: Array<string>,
+    sourceMapFactory?: (self: DataHandle) => Promise<RawSourceMap>,
+  ): Promise<DataHandle> {
+    return this.writeData(description, data, artifact, identity, sourceMapFactory);
+  }
+
+  /**
+   * @deprecated use @see readStrictSync
+   */
+  public ReadStrictSync(absoluteUri: string): DataHandle {
+    return this.readStrictSync(absoluteUri);
+  }
+
+  /**
+   * @deprecated use @see read
+   */
+  public async Read(uri: string): Promise<DataHandle> {
+    return this.read(uri);
+  }
+
+  /**
+   * @deprecated use @see blame
+   */
+  public async Blame(absoluteUri: string, position: SmartPosition): Promise<BlameTree> {
+    return this.blame(absoluteUri, position);
   }
 }
