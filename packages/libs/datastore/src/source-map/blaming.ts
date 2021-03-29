@@ -5,7 +5,7 @@
 
 import { values } from "@azure-tools/linq";
 import { MappedPosition } from "source-map";
-import { DataStore } from "../data-store/data-store";
+import { DataStore } from "../data-store";
 import { JsonPath } from "../json-path/json-path";
 import { EncodeEnhancedPositionInName, TryDecodeEnhancedPositionFromName } from "./source-map";
 
