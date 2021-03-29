@@ -38,7 +38,7 @@ export class DataHandle {
   public async serialize() {
     this.item.name;
     return JSON.stringify({
-      key: this.Description,
+      key: this.description,
       artifactType: this.item.artifactType,
       identity: this.item.identity,
       name: this.item.name,
@@ -93,7 +93,7 @@ export class DataHandle {
     return this.item.identity;
   }
 
-  public async ReadData(nocache = false): Promise<string> {
+  public async readData(nocache = false): Promise<string> {
     if (!nocache) {
       // we're going to use the data, so let's not let it expire.
       this.item.accessed = true;
@@ -116,26 +116,26 @@ export class DataHandle {
     return this.item.cached;
   }
 
-  public async ReadObjectFast<T>(): Promise<T> {
+  public async readObjectFast<T>(): Promise<T> {
     // we're going to use the data, so let's not let it expire.
     this.item.accessed = true;
 
-    return this.item.cachedObject || (this.item.cachedObject = parseYaml(await this.ReadData()));
+    return this.item.cachedObject || (this.item.cachedObject = parseYaml(await this.readData()));
   }
 
-  public async ReadObject<T>(): Promise<T> {
+  public async readObject<T>(): Promise<T> {
     // we're going to use the data, so let's not let it expire.
     this.item.accessed = true;
 
     // return the cached object, or get it, then return it.
-    return this.item.cachedObject || (this.item.cachedObject = ParseNode<T>(await this.ReadYamlAst()));
+    return this.item.cachedObject || (this.item.cachedObject = ParseNode<T>(await this.readYamlAst()));
   }
 
-  public async ReadYamlAst(): Promise<YAMLNode> {
+  public async readYamlAst(): Promise<YAMLNode> {
     // we're going to use the data, so let's not let it expire.
     this.item.accessed = true;
     // return the cachedAst or get it, then return it.
-    return this.item.cachedAst || (this.item.cachedAst = parseAst(await this.ReadData()));
+    return this.item.cachedAst || (this.item.cachedAst = parseAst(await this.readData()));
   }
 
   public get metadata(): Metadata {
@@ -146,20 +146,20 @@ export class DataHandle {
     return this.item.artifactType;
   }
 
-  public get Description(): string {
+  public get description(): string {
     return decodeURIComponent(this.key.split("?").reverse()[0]);
   }
 
-  public async IsObject(): Promise<boolean> {
+  public async isObject(): Promise<boolean> {
     try {
-      await this.ReadObject();
+      await this.readObject();
       return true;
     } catch (e) {
       return false;
     }
   }
 
-  public async Blame(position: Position): Promise<Array<MappedPosition>> {
+  public async blame(position: Position): Promise<Array<MappedPosition>> {
     const metadata = this.metadata;
     const sameLineResults = ((await metadata.sourceMapEachMappingByLine)[position.line] || []).filter(
       (mapping) => mapping.generatedColumn <= position.column,
@@ -176,5 +176,54 @@ export class DataHandle {
           source: m.source,
         };
       });
+  }
+
+  /**
+   * @deprecated use @see isObject
+   */
+  public async IsObject(): Promise<boolean> {
+    return this.isObject();
+  }
+
+  /**
+   * @deprecated use @see blame
+   */
+  public async Blame(position: Position): Promise<Array<MappedPosition>> {
+    return this.blame(position);
+  }
+
+  /**
+   * @deprecated use @see description
+   */
+  public get Description(): string {
+    return this.description;
+  }
+
+  /**
+   * @deprecated use @see readData
+   */
+  public async ReadData(nocache = false): Promise<string> {
+    return this.readData(nocache);
+  }
+
+  /**
+   * @deprecated use @see readObjectFast
+   */
+  public async ReadObjectFast<T>(): Promise<T> {
+    return this.readObjectFast();
+  }
+
+  /**
+   * @deprecated use @see readObject
+   */
+  public async ReadObject<T>(): Promise<T> {
+    return this.readObject();
+  }
+
+  /**
+   * @deprecated use @see readYamlAst
+   */
+  public async ReadYamlAst(): Promise<YAMLNode> {
+    return this.readYamlAst();
   }
 }

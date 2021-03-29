@@ -3,8 +3,8 @@ import { PipeState } from "./misc";
 
 export abstract class DataSource {
   public pipeState: PipeState;
-  public abstract Enum(): Promise<Array<string>>;
-  public abstract Read(uri: string): Promise<DataHandle | null>;
+  public abstract enum(): Promise<Array<string>>;
+  public abstract read(uri: string): Promise<DataHandle | null>;
 
   constructor() {
     this.pipeState = {};
@@ -33,5 +33,21 @@ export abstract class DataSource {
    */
   public async ReadStrict(uri: string): Promise<DataHandle> {
     return this.readStrict(uri);
+  }
+
+  /**
+   *
+   * @deprecated use @see enum() instead
+   */
+  public async Enum(): Promise<Array<string>> {
+    return this.enum();
+  }
+
+  /**
+   *
+   * @deprecated use @see read() instead
+   */
+  public async Read(key: string): Promise<DataHandle | null> {
+    return this.read(key);
   }
 }

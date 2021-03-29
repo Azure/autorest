@@ -18,7 +18,7 @@ export class ReadThroughDataSource extends DataSource {
     return false;
   }
 
-  public async Read(uri: string): Promise<DataHandle | null> {
+  public async read(uri: string): Promise<DataHandle | null> {
     // sync cache (inner stuff is racey!)
     if (!this.cache[uri]) {
       this.cache[uri] = (async () => {
@@ -58,7 +58,7 @@ export class ReadThroughDataSource extends DataSource {
     return this.cache[uri];
   }
 
-  public async Enum(): Promise<Array<string>> {
+  public async enum(): Promise<Array<string>> {
     return this.uris;
   }
 }
