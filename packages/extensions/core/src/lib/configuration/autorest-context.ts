@@ -17,6 +17,7 @@ import { AutorestError, AutorestLogger, AutorestWarning } from "@autorest/common
 import { Message } from "../message";
 import { AutorestCoreLogger } from "./logger";
 import { VERSION } from "../constants";
+import { StatsCollector } from "../stats";
 
 export class AutorestContext implements AutorestLogger {
   public config: AutorestConfiguration;
@@ -27,6 +28,7 @@ export class AutorestContext implements AutorestLogger {
     config: AutorestConfiguration,
     public fileSystem: CachingFileSystem,
     public messageEmitter: MessageEmitter,
+    public stats: StatsCollector,
   ) {
     this.config = config;
     this.logger = new AutorestCoreLogger(config, messageEmitter);
@@ -176,7 +178,7 @@ export class AutorestContext implements AutorestLogger {
 
   public *getNestedConfiguration(pluginName: string): Iterable<AutorestContext> {
     for (const nestedConfig of getNestedConfiguration(this.config, pluginName)) {
-      yield new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter);
+      yield new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter, this.stats);
     }
   }
 
@@ -186,6 +188,6 @@ export class AutorestContext implements AutorestLogger {
    */
   public extendWith(...overrides: AutorestRawConfiguration[]): AutorestContext {
     const nestedConfig = extendAutorestConfiguration(this.config, overrides);
-    return new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter);
+    return new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter, this.stats);
   }
 }

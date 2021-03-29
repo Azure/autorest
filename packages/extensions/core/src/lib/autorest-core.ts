@@ -14,6 +14,7 @@ import { homedir } from "os";
 import { Artifact } from "./artifact";
 import { DocumentType } from "./document-type";
 import { Channel, Message } from "./message";
+import { StatsCollector } from "./stats";
 
 function IsIterable(target: any) {
   return !!target && typeof target !== "string" && typeof target[Symbol.iterator] === "function";
@@ -78,7 +79,8 @@ export class AutoRest extends EventEmitter {
     messageEmitter.ClearFolder.Subscribe((cfg, folder) => this.ClearFolder.Dispatch(folder));
     messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
 
-    return (this._view = await new AutorestContextLoader(this.fileSystem, this.configFileOrFolderUri).CreateView(
+    const stats = new StatsCollector();
+    return (this._view = await new AutorestContextLoader(this.fileSystem, stats, this.configFileOrFolderUri).CreateView(
       messageEmitter,
       includeDefault,
       ...this._configurations,

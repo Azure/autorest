@@ -22,6 +22,7 @@ import { AutorestCoreLogger } from "./logger";
 import { createFileOrFolderUri, createFolderUri, resolveUri } from "@azure-tools/uri";
 import { AppRoot } from "../constants";
 import { homedir } from "os";
+import { StatsCollector } from "../stats";
 
 const inWebpack = typeof __webpack_require__ === "function";
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -49,7 +50,11 @@ export class AutorestContextLoader {
    * @param fileSystem File system.
    * @param configFileOrFolderUri Path to the config file or folder.
    */
-  public constructor(fileSystem: IFileSystem = new RealFileSystem(), private configFileOrFolderUri?: string) {
+  public constructor(
+    fileSystem: IFileSystem = new RealFileSystem(),
+    private stats: StatsCollector,
+    private configFileOrFolderUri?: string,
+  ) {
     this.fileSystem = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
   }
 
@@ -104,7 +109,7 @@ export class AutorestContextLoader {
 
     const { config, extensions } = await loader.load(configs, includeDefault);
     this.setupExtensions(config, extensions);
-    return new AutorestContext(config, this.fileSystem, messageEmitter);
+    return new AutorestContext(config, this.fileSystem, messageEmitter, this.stats);
   }
 
   private setupExtensions(config: AutorestConfiguration, extensions: ResolvedExtension[]) {
