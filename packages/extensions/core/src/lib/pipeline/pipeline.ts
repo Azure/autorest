@@ -60,6 +60,7 @@ import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin 
 import { createHash } from "crypto";
 import { isCached, readCache, writeCache } from "./pipeline-cache";
 import { values } from "@azure-tools/linq";
+import { createOpenAPIStatsCollectorPlugin } from "./plugins/openapi-stats-collector";
 
 const safeEval = createSandbox();
 
@@ -227,6 +228,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     "normalize-identity": createNormalizeIdentityPlugin(),
     "loader-swagger": createSwaggerLoaderPlugin(),
     "loader-openapi": createOpenApiLoaderPlugin(),
+    "openapi-stats-collector": createOpenAPIStatsCollectorPlugin(),
     "transform": createTransformerPlugin(),
     "text-transform": createTextTransformerPlugin(),
     "new-transform": createGraphTransformerPlugin(),

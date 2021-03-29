@@ -1,8 +1,13 @@
-export class StatsCollector {
-  private stats: { [key: string]: number } = {};
+import { merge } from "lodash";
 
-  public track(name: string, value: number) {
-    this.stats[name] = value;
+export type StatGroup = { [key: string]: Stat };
+export type Stat = number | StatGroup;
+
+export class StatsCollector {
+  private stats: { [key: string]: Stat } = {};
+
+  public track(value: Stat) {
+    merge(this.stats, value);
   }
 
   public getAll() {
