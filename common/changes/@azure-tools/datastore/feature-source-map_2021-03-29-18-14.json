@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/datastore",
+      "comment": "**Refactor** datastore and deprecated PascalCase methods",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@azure-tools/datastore",
+  "email": "tiguerin@microsoft.com"
+}
