@@ -36,7 +36,7 @@ export async function LoadLiterateSwagger(
   await checkSyntaxFromData(inputFileUri, handle, config);
   const data = await ParseLiterateYaml(config, handle, sink);
   // check OpenAPI version
-  if ((await data.ReadObject<any>()).swagger !== "2.0") {
+  if ((await data.readObject<any>()).swagger !== "2.0") {
     return null;
     // TODO: Should we throw or send an error message?
   }
@@ -45,7 +45,7 @@ export async function LoadLiterateSwagger(
   const ast = CloneAst(await data.ReadYamlAst());
   const mapping = identitySourceMapping(data.key, ast);
 
-  return sink.WriteData(handle.Description, StringifyAst(ast), [inputFileUri], "swagger-document", mapping, [data]);
+  return sink.writeData(handle.description, StringifyAst(ast), [inputFileUri], "swagger-document", mapping, [data]);
 }
 
 export function createSwaggerLoaderPlugin(): PipelinePlugin {

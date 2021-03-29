@@ -142,3 +142,10 @@ pipeline:
 
 output-artifact: converted-oai3-document
 ```
+
+
+### Output stats
+```yaml
+output-artifact:
+  - stats.json
+```

@@ -249,13 +249,13 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     "pipeline-emitter": createArtifactEmitterPlugin(
       async () =>
         new QuickDataSource([
-          await configView.DataStore.getDataSink().WriteObject("pipeline", pipeline.pipeline, ["fix-me-3"], "pipeline"),
+          await configView.DataStore.getDataSink().writeObject("pipeline", pipeline.pipeline, ["fix-me-3"], "pipeline"),
         ]),
     ),
     "configuration-emitter": createArtifactEmitterPlugin(
       async () =>
         new QuickDataSource([
-          await configView.DataStore.getDataSink().WriteObject(
+          await configView.DataStore.getDataSink().writeObject(
             "configuration",
             configView.config.raw,
             ["fix-me-4"],
@@ -307,7 +307,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
               tasks,
               startTime,
               blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => {
-                return configView.DataStore.Blame(uri, position);
+                return configView.DataStore.blame(uri, position);
               },
             }),
             (k, v) => (k === "dependencies" ? undefined : v),
@@ -518,6 +518,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
   try {
     await barrier.Wait();
+    await emitStats(configView);
   } catch (e) {
     // wait for outstanding nodes
     try {
@@ -527,4 +528,20 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     }
     throw e;
   }
+}
+
+async function emitStats(context: AutorestContext) {
+  const plugin = createArtifactEmitterPlugin(
+    async () =>
+      new QuickDataSource([
+        await context.DataStore.getDataSink().writeObject(
+          "stats.json",
+          context.stats.getAll(),
+          ["stats"],
+          "stats.json",
+        ),
+      ]),
+  );
+  console.error("Emitting stats");
+  await plugin(context, new QuickDataSource([]), context.DataStore.getDataSink());
 }

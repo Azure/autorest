@@ -45,13 +45,21 @@ export async function collectOpenAPIStats(context: AutorestContext, dataSource: 
   console.log("Stats", inspect(context.stats.getAll(), { depth: null, colors: true }));
 }
 
-function countOperations(spec: oai3.Model) {
+/**
+ * @param spec OpenAPI spec
+ * @returns number of operations(path + methods) defined in the spec.
+ */
+function countOperations(spec: oai3.Model): number {
   return Object.values(spec.paths).reduce((count, operation) => {
     return Object.keys(operation).length + count;
   }, 0);
 }
 
-function countLongRunningOperations(spec: oai3.Model) {
+/**
+ * @param spec OpenAPI spec
+ * @returns number of long runnning operations(defined with x-ms-long-running-operation: true) defined in the spec.
+ */
+function countLongRunningOperations(spec: oai3.Model): number {
   return Object.values(spec.paths).reduce((count, operation) => {
     return Object.values(operation).filter(isLongRunningOperation).length + count;
   }, 0);
