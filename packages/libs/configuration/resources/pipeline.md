@@ -117,9 +117,6 @@ pipeline:
       - openapi-document/openapi-document-converter	          # openapi-document/openapi-document-converter comes from the OAI2 loader
       - openapi-document/individual/identity                  # openapi-document/individual/identity comes from the OAI3 loader
 
-  openapi-document/openapi-stats-collector:
-    input: openapi-document/transform
-
   openapi-document/allof-cleaner:
     input: openapi-document/transform
 
@@ -145,7 +142,15 @@ output-artifact: converted-oai3-document
 
 
 ### Output stats
-```yaml
+
+```yaml $(stats)
+
+# Collect stats steps
+pipeline:
+  #  Collect from individual openapi document.
+  openapi-document/openapi-stats-collector:
+    input: openapi-document/transform
+
 output-artifact:
   - stats.json
 ```
