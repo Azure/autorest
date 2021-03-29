@@ -42,7 +42,6 @@ export async function collectOpenAPIStats(context: AutorestContext, dataSource: 
       });
     }
   }
-  console.log("Stats", inspect(context.stats.getAll(), { depth: null, colors: true }));
 }
 
 /**

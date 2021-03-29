@@ -35,6 +35,8 @@ function hashedJsonPointer(p: string) {
 
 const methods = new Set(["get", "put", "post", "delete", "options", "head", "patch", "trace"]);
 export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
+  public anonymousSchemaCount = 0;
+
   constructor(originalFile: Source, private isSimpleTreeShake: boolean) {
     super([originalFile]);
   }
@@ -777,22 +779,35 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     }
 
     if (isAnonymous) {
+      this.anonymousSchemaCount++;
       newRef["x-internal-autorest-anonymous-schema"] = { value: { anonymous: true }, pointer: "" };
     }
     return newRef;
   }
 }
 
-async function shakeTree(config: AutorestContext, input: DataSource, sink: DataSink) {
+async function shakeTree(context: AutorestContext, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
-  const isSimpleTreeShake = !!config.GetEntry("simple-tree-shake");
+  const isSimpleTreeShake = !!context.GetEntry("simple-tree-shake");
   for (const each of inputs) {
     const shaker = new OAI3Shaker(each, isSimpleTreeShake);
+    const output = await shaker.getOutput();
+
+    context.stats.track({
+      openapi: {
+        specs: {
+          [each.identity[0]]: {
+            anonynousSchemaCount: shaker.anonymousSchemaCount,
+          },
+        },
+      },
+    });
+
     result.push(
-      await sink.WriteObject(
+      await sink.writeObject(
         "oai3.shaken.json",
-        await shaker.getOutput(),
+        output,
         each.identity,
         "openapi-document-shaken",
         await shaker.getSourceMappings(),

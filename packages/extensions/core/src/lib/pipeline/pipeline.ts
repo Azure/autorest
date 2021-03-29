@@ -542,6 +542,5 @@ async function emitStats(context: AutorestContext) {
         ),
       ]),
   );
-  console.error("Emitting stats");
   await plugin(context, new QuickDataSource([]), context.DataStore.getDataSink());
 }
