@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle } from "../data-store/data-store";
+import { DataHandle } from "../data-store";
 import { Position as sourceMapPosition } from "source-map";
 
 const regexNewLine = /\r?\n/g;
