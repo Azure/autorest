@@ -1,4 +1,5 @@
 import { writeString } from "@azure-tools/uri";
+import { URL } from "node:url";
 import { logger } from "../logger";
 import { RealFileSystem } from "./real-file-system";
 
@@ -25,14 +26,20 @@ export class EnhancedFileSystem extends RealFileSystem {
     const headers: { [key: string]: string } = {};
 
     // check for GitHub OAuth token
-    if (
-      this.githubAuthToken &&
-      (uri.startsWith("https://raw.githubusercontent.com") || uri.startsWith("https://github.com"))
-    ) {
+    if (this.githubAuthToken && this.isGithubUrl(uri)) {
       logger.info(`Used GitHub authentication token to request '${uri}'.`);
       headers.authorization = `Bearer ${this.githubAuthToken}`;
     }
 
     return headers;
+  }
+
+  private isGithubUrl(uri: string) {
+    try {
+      const url = new URL(uri);
+      return url.host === "raw.githubusercontent.com" || url.host === "github.com";
+    } catch {
+      return false;
+    }
   }
 }
