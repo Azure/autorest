@@ -34,8 +34,17 @@ function hashedJsonPointer(p: string) {
 }
 
 const methods = new Set(["get", "put", "post", "delete", "options", "head", "patch", "trace"]);
+
 export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
-  public anonymousSchemaCount = 0;
+  public stats: SchemaStats = {
+    anonymous: 0,
+    namedSchema: 0,
+    namedSchemaInline: 0,
+
+    get total() {
+      return this.anonymous + this.namedSchema + this.namedSchemaInline;
+    },
+  };
 
   constructor(originalFile: Source, private isSimpleTreeShake: boolean) {
     super([originalFile]);
@@ -580,6 +589,9 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     originalNodes: Iterable<Node>,
   ) {
     for (const { value, key, pointer, children } of originalNodes) {
+      if (baseReferencePath === "/components/schemas") {
+        this.stats.namedSchema++;
+      }
       this.dereference(baseReferencePath, targetCollection, visitor, targetParent, key, pointer, value, children);
     }
   }
@@ -754,6 +766,10 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     const id =
       getNameHint(baseReferencePath, value, targetCollection, nameHint) ?? generateSchemaIdFromJsonPath(pointer);
 
+    if (value["x-ms-client-name"] && baseReferencePath === "/components/schemas") {
+      this.stats.namedSchemaInline++;
+    }
+
     // set the current location's object to be a $ref
     targetParent[key] = {
       value: {
@@ -779,11 +795,21 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     }
 
     if (isAnonymous) {
-      this.anonymousSchemaCount++;
+      this.stats.anonymous++;
       newRef["x-internal-autorest-anonymous-schema"] = { value: { anonymous: true }, pointer: "" };
     }
     return newRef;
   }
+}
+
+/**
+ * Statistics around schemas in files.
+ */
+interface SchemaStats {
+  namedSchema: number;
+  namedSchemaInline: number;
+  anonymous: number;
+  total: number;
 }
 
 async function shakeTree(context: AutorestContext, input: DataSource, sink: DataSink) {
@@ -798,7 +824,7 @@ async function shakeTree(context: AutorestContext, input: DataSource, sink: Data
       openapi: {
         specs: {
           [each.identity[0]]: {
-            anonynousSchemaCount: shaker.anonymousSchemaCount,
+            schemas: { ...shaker.stats },
           },
         },
       },

@@ -2,15 +2,6 @@ import { DataSource } from "@azure-tools/datastore";
 import { AutorestContext } from "../../../configuration";
 import { PipelinePlugin } from "../../common";
 import * as oai3 from "@azure-tools/openapi";
-import { StatGroup } from "../../../stats";
-import { inspect } from "util";
-
-interface OpenAPISpecCount extends StatGroup {
-  lineCount: number;
-  schemaCount: number;
-  operationCount: number;
-  longRunningOperationCount: number;
-}
 
 export async function collectOpenAPIStats(context: AutorestContext, dataSource: DataSource) {
   const inputs = await dataSource.enum();
@@ -26,9 +17,8 @@ export async function collectOpenAPIStats(context: AutorestContext, dataSource: 
       const rawContent = await data.readData();
       const spec = await data.readObject<oai3.Model>();
 
-      const specStat: OpenAPISpecCount = {
+      const specStat = {
         lineCount: rawContent.split("\n").length,
-        schemaCount: Object.keys(spec?.components?.schemas ?? {}).length,
         operationCount: countOperations(spec),
         longRunningOperationCount: countLongRunningOperations(spec),
       };
