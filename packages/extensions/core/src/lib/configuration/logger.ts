@@ -5,37 +5,42 @@ import { AutorestConfiguration } from "@autorest/configuration";
 import { From } from "linq-es2015";
 import { Suppressor } from "../pipeline/suppression";
 import { MessageEmitter } from "./message-emitter";
+import { AsyncLogManager } from "./logger-processor";
 
 export class AutorestCoreLogger {
   private suppressor: Suppressor;
 
-  public constructor(private config: AutorestConfiguration, private messageEmitter: MessageEmitter) {
+  public constructor(
+    private config: AutorestConfiguration,
+    private messageEmitter: MessageEmitter,
+    private asyncLogManager: AsyncLogManager,
+  ) {
     this.suppressor = new Suppressor(config);
   }
 
   public verbose(message: string) {
-    void this.message({
+    this.log({
       Channel: Channel.Verbose,
       Text: message,
     });
   }
 
   public info(message: string) {
-    void this.message({
+    this.log({
       Channel: Channel.Information,
       Text: message,
     });
   }
 
   public fatal(message: string) {
-    void this.message({
+    this.log({
       Channel: Channel.Fatal,
       Text: message,
     });
   }
 
   public trackWarning(error: AutorestWarning) {
-    void this.message({
+    this.log({
       Channel: Channel.Warning,
       Text: error.message,
       Source: error.source?.map((x) => ({ document: x.document, Position: x.position })),
@@ -44,7 +49,7 @@ export class AutorestCoreLogger {
   }
 
   public trackError(error: AutorestError) {
-    void this.message({
+    this.log({
       Channel: Channel.Error,
       Text: error.message,
       Source: error.source?.map((x) => ({ document: x.document, Position: x.position })),
@@ -52,7 +57,11 @@ export class AutorestCoreLogger {
     });
   }
 
-  public async message(m: Message) {
+  public log(message: Message) {
+    this.asyncLogManager.registerLog(this.sendMessageAsync(message));
+  }
+
+  private async sendMessageAsync(m: Message) {
     if (m.Channel === Channel.Debug && !this.config.debug) {
       return;
     }
@@ -172,7 +181,7 @@ export class AutorestCoreLogger {
           try {
             blameTree = await this.messageEmitter.DataStore.Blame(s.document, s.Position);
             if (shouldComplain) {
-              await this.message({
+              await this.log({
                 Channel: Channel.Verbose,
                 Text: `\nDEVELOPER-WARNING: Path '${originalPath}' was corrected to ${JSON.stringify(
                   s.Position.path,

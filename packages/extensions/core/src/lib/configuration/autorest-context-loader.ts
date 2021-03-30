@@ -22,6 +22,7 @@ import { AutorestCoreLogger } from "./logger";
 import { createFileOrFolderUri, createFolderUri, resolveUri } from "@azure-tools/uri";
 import { AppRoot } from "../constants";
 import { homedir } from "os";
+import { AsyncLogManager } from "./logger-processor";
 
 const inWebpack = typeof __webpack_require__ === "function";
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -43,6 +44,8 @@ export async function getExtension(fullyQualified: string): Promise<AutoRestExte
  * Class handling the loading of an autorest configuration.
  */
 export class AutorestContextLoader {
+  private static asyncLogManager = new AsyncLogManager();
+
   private fileSystem: CachingFileSystem;
 
   /**
@@ -84,6 +87,9 @@ export class AutorestContextLoader {
           delete loadedExtensions[each];
         }
       }
+
+      // Wait for all logs to have been sent before shutting down.
+      await AutorestContextLoader.asyncLogManager.waitForMessages();
     } catch {
       // no worries
     }
@@ -94,7 +100,11 @@ export class AutorestContextLoader {
     includeDefault: boolean,
     ...configs: AutorestRawConfiguration[]
   ): Promise<AutorestContext> {
-    const logger: AutorestLogger = new AutorestCoreLogger(mergeConfigurations(...configs) as any, messageEmitter);
+    const logger: AutorestLogger = new AutorestCoreLogger(
+      mergeConfigurations(...configs) as any,
+      messageEmitter,
+      AutorestContextLoader.asyncLogManager,
+    );
 
     const loader = new ConfigurationLoader(logger, defaultConfigUri, this.configFileOrFolderUri, {
       extensionManager: await AutorestContextLoader.extensionManager,
@@ -104,7 +114,7 @@ export class AutorestContextLoader {
 
     const { config, extensions } = await loader.load(configs, includeDefault);
     this.setupExtensions(config, extensions);
-    return new AutorestContext(config, this.fileSystem, messageEmitter);
+    return new AutorestContext(config, this.fileSystem, messageEmitter, AutorestContextLoader.asyncLogManager);
   }
 
   private setupExtensions(config: AutorestConfiguration, extensions: ResolvedExtension[]) {
