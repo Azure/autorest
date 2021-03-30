@@ -19,8 +19,11 @@ export async function collectOpenAPIStats(context: AutorestContext, dataSource: 
 
       const specStat = {
         lineCount: rawContent.split("\n").length,
-        operationCount: countOperations(spec),
-        longRunningOperationCount: countLongRunningOperations(spec),
+        operations: {
+          total: countOperations(spec),
+          longRunning: countLongRunningOperations(spec),
+          pageable: countPageableOperations(spec),
+        },
       };
 
       context.stats.track({
@@ -56,6 +59,20 @@ function countLongRunningOperations(spec: oai3.Model): number {
 
 function isLongRunningOperation(operation: oai3.HttpOperation): boolean {
   return operation["x-ms-long-running-operation"];
+}
+
+/**
+ * @param spec OpenAPI spec
+ * @returns number of long runnning operations(defined with x-ms-long-running-operation: true) defined in the spec.
+ */
+function countPageableOperations(spec: oai3.Model): number {
+  return Object.values(spec.paths).reduce((count, operation) => {
+    return Object.values(operation).filter(isPageableOperation).length + count;
+  }, 0);
+}
+
+function isPageableOperation(operation: oai3.HttpOperation): boolean {
+  return operation["x-ms-pageable"];
 }
 
 export function createOpenAPIStatsCollectorPlugin(): PipelinePlugin {
