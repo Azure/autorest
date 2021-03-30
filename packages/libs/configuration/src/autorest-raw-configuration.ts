@@ -32,7 +32,7 @@ export interface AutorestRawConfiguration extends AutorestRawConfigurationAlias 
   "vscode"?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
 
   /**
-   * Toggle outputing statistics for current specs.
+   * Toggle outputting statistics for current specs.
    */
   "stats"?: boolean;
 
