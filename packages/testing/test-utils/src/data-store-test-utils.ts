@@ -18,7 +18,7 @@ export function createDataHandle(content: string, props: { name?: string } = {})
       cached: content,
       metadata: {
         lineIndices: new Lazy<number[]>(() => LineIndices(content)),
-      },
+      } as any,
     },
     false,
   );

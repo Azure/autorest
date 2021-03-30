@@ -1,5 +1,5 @@
 import { Channel, Message, Range, SourceLocation } from "../message";
-import { BlameTree, stringify, Stringify, TryDecodeEnhancedPositionFromName } from "@azure-tools/datastore";
+import { BlameTree, stringify, Stringify, tryDecodeEnhancedPositionFromName } from "@azure-tools/datastore";
 import { AutorestError, AutorestWarning } from "@autorest/common";
 import { AutorestConfiguration } from "@autorest/configuration";
 import { From } from "linq-es2015";
@@ -79,7 +79,7 @@ export class AutorestCoreLogger {
         for (const source of src) {
           if (source.Position) {
             try {
-              source.document = this.messageEmitter.DataStore.ReadStrictSync(source.document).Description;
+              source.document = this.messageEmitter.DataStore.readStrictSync(source.document).description;
             } catch {
               // no worries
             }
@@ -179,7 +179,7 @@ export class AutorestCoreLogger {
         let shouldComplain = false;
         while (blameTree === null) {
           try {
-            blameTree = await this.messageEmitter.DataStore.Blame(s.document, s.Position);
+            blameTree = await this.messageEmitter.DataStore.blame(s.document, s.Position);
             if (shouldComplain) {
               await this.log({
                 Channel: Channel.Verbose,
@@ -222,13 +222,10 @@ this.Message({
         return [s];
       }
 
-      return blameTree.BlameLeafs().map(
-        (r) =>
-          <SourceLocation>{
-            document: r.source,
-            Position: { ...TryDecodeEnhancedPositionFromName(r.name), line: r.line, column: r.column },
-          },
-      );
+      return blameTree.getMappingLeafs().map((r) => ({
+        document: r.source,
+        Position: { ...tryDecodeEnhancedPositionFromName(r.name), line: r.line, column: r.column },
+      }));
     });
 
     return From(await Promise.all(blameSources))
