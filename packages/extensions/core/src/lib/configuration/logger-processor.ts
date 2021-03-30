@@ -3,15 +3,15 @@
  */
 export class AsyncLogManager {
   private pendingMessage: Promise<unknown> | undefined;
-
-  public registerLog(messagePromise: Promise<unknown>): void {
-    this.pendingMessage = Promise.resolve()
-      .then(() => this.pendingMessage)
-      .then(() => messagePromise)
-      .catch((error) => {
+  public registerLog(sendMessage: () => Promise<unknown>): void {
+    this.pendingMessage = (this.pendingMessage ?? Promise.resolve()).then(async () => {
+      try {
+        await sendMessage();
+      } catch (error) {
         // eslint-disable-next-line no-console
         console.error("Unexpected error while logging", error);
-      });
+      }
+    });
   }
 
   /**

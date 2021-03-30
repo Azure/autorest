@@ -58,7 +58,7 @@ export class AutorestCoreLogger {
   }
 
   public log(message: Message) {
-    this.asyncLogManager.registerLog(this.sendMessageAsync(message));
+    this.asyncLogManager.registerLog(() => this.sendMessageAsync(message));
   }
 
   private async sendMessageAsync(m: Message) {
