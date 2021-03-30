@@ -5,11 +5,11 @@
 
 import { OperationCanceledException, Lazy, LazyPromise } from "@azure-tools/tasks";
 import { resolveUri } from "@azure-tools/uri";
-import { MappingItem, Position, RawSourceMap, SourceMapConsumer, SourceMapGenerator } from "source-map";
+import { RawSourceMap, SourceMapGenerator } from "source-map";
 import { CancellationToken } from "../cancellation";
 import { IFileSystem } from "../file-system/file-system";
 import { BlameTree } from "../source-map/blaming";
-import { Compile, CompilePosition, Mapping, SmartPosition } from "../source-map/source-map";
+import { CompilePosition, SmartPosition } from "../source-map/source-map";
 import { promises as fs } from "fs";
 import { tmpdir } from "os";
 import { join } from "path";
@@ -64,7 +64,7 @@ export class DataStore {
 
   private uid = 0;
 
-  private async WriteDataInternal(
+  private async writeDataInternal(
     uri: string,
     data: string,
     artifactType: string,
@@ -106,7 +106,7 @@ export class DataStore {
     // metadata
     const metadata: Metadata = {} as any;
 
-    const result = await this.WriteDataInternal(uri, data, artifact, identity, metadata);
+    const result = await this.writeDataInternal(uri, data, artifact, identity, metadata);
 
     // metadata.artifactType = artifact;
 
@@ -115,7 +115,7 @@ export class DataStore {
         return new SourceMapGenerator().toJSON();
       }
       const sourceMap = await sourceMapFactory(result);
-
+      console.error("Raw", sourceMap);
       // validate
       const inputFiles = sourceMap.sources.concat(sourceMap.file);
       for (const inputFile of inputFiles) {
@@ -127,26 +127,7 @@ export class DataStore {
       return sourceMap;
     });
 
-    metadata.sourceMapEachMappingByLine = new LazyPromise<Array<Array<MappingItem>>>(async () => {
-      const result: Array<Array<MappingItem>> = [];
-
-      const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
-
-      // does NOT support multiple sources :(
-      // `singleResult` has null-properties if there is no original
-
-      // get coinciding sources
-      sourceMapConsumer.eachMapping((mapping) => {
-        while (result.length <= mapping.generatedLine) {
-          result.push([]);
-        }
-        result[mapping.generatedLine].push(mapping);
-      });
-
-      return result;
-    });
-
-    metadata.inputSourceMap = new LazyPromise(() => this.createInputSourceMapFor(uri));
+    // metadata.inputSourceMap = new LazyPromise(() => this.createInputSourceMapFor(uri));
     metadata.lineIndices = new Lazy<Array<number>>(() => LineIndices(data));
 
     return result;
@@ -196,21 +177,20 @@ export class DataStore {
     });
   }
 
+  /*  input source map not enable at this time.
   private async createInputSourceMapFor(absoluteUri: string): Promise<RawSourceMap> {
     const data = this.readStrictSync(absoluteUri);
 
     // retrieve all target positions
-    const targetPositions: Array<SmartPosition> = [];
+    const targetPositions: SmartPosition[] = [];
     const metadata = data.metadata;
     const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
-    sourceMapConsumer.eachMapping((m) =>
-      targetPositions.push(<Position>{ column: m.generatedColumn, line: m.generatedLine }),
-    );
+    sourceMapConsumer.eachMapping((m) => targetPositions.push({ column: m.generatedColumn, line: m.generatedLine }));
 
     // collect blame
     const mappings: Array<Mapping> = [];
     for (const targetPosition of targetPositions) {
-      const blameTree = await this.Blame(absoluteUri, targetPosition);
+      const blameTree = await this.blame(absoluteUri, targetPosition);
       const inputPositions = blameTree.BlameLeafs();
       for (const inputPosition of inputPositions) {
         mappings.push({
@@ -225,6 +205,7 @@ export class DataStore {
     await Compile(mappings, sourceMapGenerator);
     return sourceMapGenerator.toJSON();
   }
+  */
 
   /**
    * @deprecated use @see getReadThroughScope
