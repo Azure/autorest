@@ -15,6 +15,7 @@ import { AutorestContext } from "../../../configuration";
 import { PipelinePlugin } from "../../common";
 import { values, length } from "@azure-tools/linq";
 import { createHash } from "crypto";
+import { SchemaStats } from "../../../stats";
 
 /**
  * parses a json pointer, and inserts a string into the returned array
@@ -800,16 +801,6 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     }
     return newRef;
   }
-}
-
-/**
- * Statistics around schemas in files.
- */
-interface SchemaStats {
-  namedSchema: number;
-  namedSchemaInline: number;
-  anonymous: number;
-  total: number;
 }
 
 async function shakeTree(context: AutorestContext, input: DataSource, sink: DataSink) {
