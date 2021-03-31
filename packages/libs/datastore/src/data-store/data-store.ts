@@ -115,7 +115,7 @@ export class DataStore {
         return new SourceMapGenerator().toJSON();
       }
       const sourceMap = await sourceMapFactory(result);
-      console.error("Raw", sourceMap);
+
       // validate
       const inputFiles = sourceMap.sources.concat(sourceMap.file);
       for (const inputFile of inputFiles) {
@@ -191,7 +191,7 @@ export class DataStore {
     const mappings: Array<Mapping> = [];
     for (const targetPosition of targetPositions) {
       const blameTree = await this.blame(absoluteUri, targetPosition);
-      const inputPositions = blameTree.BlameLeafs();
+      const inputPositions = blameTree.getMappingLeafs();
       for (const inputPosition of inputPositions) {
         mappings.push({
           name: inputPosition.name,

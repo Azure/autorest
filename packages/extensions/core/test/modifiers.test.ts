@@ -49,7 +49,7 @@ const generate = async (additionalConfig: any): Promise<oai3.Model> => {
   if (!success) {
     // eslint-disable-next-line no-console
     console.log("Messages", messages);
-    fail("Autorest didn't complete with success.");
+    throw new Error("Autorest didn't complete with success.");
   }
 
   assert(resolvedDocument);
