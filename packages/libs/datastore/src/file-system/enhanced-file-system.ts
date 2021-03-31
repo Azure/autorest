@@ -1,5 +1,5 @@
 import { writeString } from "@azure-tools/uri";
-import { URL } from "node:url";
+import { URL } from "url";
 import { logger } from "../logger";
 import { RealFileSystem } from "./real-file-system";
 
