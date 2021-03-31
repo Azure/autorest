@@ -79,19 +79,7 @@ export class AutorestCoreLogger {
 
       // set range (dummy)
       if (m.Source && typeof m.Source.map === "function") {
-        m.Range = m.Source.map((s) => {
-          const positionStart = s.Position;
-          const positionEnd = <sourceMap.Position>{
-            line: s.Position.line,
-            column: s.Position.column + (s.Position.length || 3),
-          };
-
-          return <Range>{
-            document: s.document,
-            start: positionStart,
-            end: positionEnd,
-          };
-        });
+        m.Range = resolveRanges(m.Source);
       }
 
       // filter
@@ -230,4 +218,20 @@ export class AutorestCoreLogger {
       return source;
     });
   }
+}
+
+function resolveRanges(sources: SourceLocation[]): Range[] {
+  return sources.map((source) => {
+    const positionStart = source.Position;
+    const positionEnd = <sourceMap.Position>{
+      line: source.Position.line,
+      column: source.Position.column + (source.Position.length || 3),
+    };
+
+    return {
+      document: source.document,
+      start: positionStart,
+      end: positionEnd,
+    };
+  });
 }
