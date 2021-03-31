@@ -69,8 +69,8 @@ export async function CompilePosition(position: SmartPosition, yamlFile: DataHan
   return <EnhancedPosition>position;
 }
 
-export async function Compile(
-  mappings: Array<Mapping>,
+export async function compileMapping(
+  mappings: Mapping[],
   target: SourceMapGenerator,
   yamlFiles: Array<DataHandle> = [],
 ): Promise<void> {

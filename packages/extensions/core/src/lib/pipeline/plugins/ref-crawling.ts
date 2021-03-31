@@ -1,19 +1,8 @@
-import {
-  AnyObject,
-  DataHandle,
-  DataSink,
-  DataSource,
-  Node,
-  Transformer,
-  ProxyObject,
-  ProxyNode,
-  visit,
-} from "@azure-tools/datastore";
-import { ResolveUri } from "@azure-tools/uri";
+import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, visit } from "@azure-tools/datastore";
+import { resolveUri } from "@azure-tools/uri";
 import { AutorestContext } from "../../configuration";
 import { Channel } from "../../message";
 import { values, items, length } from "@azure-tools/linq";
-/* eslint-disable @typescript-eslint/no-use-before-define */
 
 export async function crawlReferences(
   config: AutorestContext,
@@ -40,17 +29,17 @@ export async function crawlReferences(
       queued.add(fileUri);
 
       config.Message({ Channel: Channel.Verbose, Text: `Reading $ref'd file ${fileUri}` });
-      const secondaryFile = await inputScope.ReadStrict(fileUri);
+      const secondaryFile = await inputScope.readStrict(fileUri);
 
       // mark secondary files with a tag so that we don't process operations for them.
-      const secondaryFileContent = await secondaryFile.ReadObject<any>();
+      const secondaryFileContent = await secondaryFile.readObject<any>();
       secondaryFileContent["x-ms-secondary-file"] = true;
 
       // When a new file is read, by default it has artifactType as 'input-file'. Transforms target specific types of artifacts;
       // for this reason we need to identify the artifact type, so transforms are applied to all docs, including SECONDARY-FILES.
       // Primary files at this point already have a proper artifactType.
-      const next = await sink.WriteObject(
-        secondaryFile.Description,
+      const next = await sink.writeObject(
+        secondaryFile.description,
         secondaryFileContent,
         secondaryFile.identity,
         secondaryFileContent.swagger
@@ -68,9 +57,9 @@ export async function crawlReferences(
 
     // wait for all the x-ms-examples to finish getting resolved
     await Promise.all(refProcessor.promises);
-
+    const mapping = await refProcessor.getSourceMappings();
     // write the file to the data sink (this serializes the file, so it has to be done by this point.)
-    return sink.WriteObject(file.Description, output, file.identity, file.artifactType, [], [file]);
+    return sink.writeObject(file.description, output, file.identity, file.artifactType, mapping, [file]);
   }
 
   // this seems a bit convoluted, but in order to not break the order that
@@ -79,7 +68,7 @@ export async function crawlReferences(
   // has to be preserved.
   await Promise.all(
     filesToCrawl.map(async (each, i) => {
-      queued.add(ResolveUri(each.originalDirectory, each.identity[0]));
+      queued.add(resolveUri(each.originalDirectory, each.identity[0]));
       primary[i] = await crawl(each);
     }),
   );
@@ -96,7 +85,7 @@ class RefProcessor extends Transformer<any, any> {
   constructor(originalFile: DataHandle, private inputScope: DataSource) {
     super(originalFile);
 
-    this.originalFileLocation = ResolveUri(originalFile.originalDirectory, originalFile.identity[0]);
+    this.originalFileLocation = resolveUri(originalFile.originalDirectory, originalFile.identity[0]);
   }
 
   async processXMSExamples(targetParent: AnyObject, examples: AnyObject) {
@@ -106,9 +95,9 @@ class RefProcessor extends Transformer<any, any> {
       if (value.$ref) {
         try {
           const refPath = value.$ref.indexOf("#") === -1 ? value.$ref : value.$ref.split("#")[0];
-          const refUri = ResolveUri(this.originalFileLocation, refPath);
-          const handle = await this.inputScope.ReadStrict(refUri);
-          xmsExamples[key] = await handle.ReadObject<AnyObject>();
+          const refUri = resolveUri(this.originalFileLocation, refPath);
+          const handle = await this.inputScope.readStrict(refUri);
+          xmsExamples[key] = await handle.readObject<AnyObject>();
         } catch {
           // skip examples that are not nice to us.
         }
@@ -134,7 +123,7 @@ class RefProcessor extends Transformer<any, any> {
       if (key === "$ref" && typeof value === "string") {
         const refFileName = value.indexOf("#") === -1 ? value : value.split("#")[0];
         const refPointer = value.indexOf("#") === -1 ? undefined : value.split("#")[1];
-        const newRefFileName = ResolveUri(this.originalFileLocation, refFileName);
+        const newRefFileName = resolveUri(this.originalFileLocation, refFileName);
 
         if (!refPointer) {
           // points to a whole file? Huh?
