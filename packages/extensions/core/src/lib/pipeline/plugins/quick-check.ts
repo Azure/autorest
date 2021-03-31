@@ -9,7 +9,7 @@ import {
   QuickDataSource,
 } from "@azure-tools/datastore";
 import { items } from "@azure-tools/linq";
-import { AutorestContext } from "../../configuration";
+import { AutorestContext } from "../../context";
 import { PipelinePlugin } from "../common";
 import { format } from "path";
 import { Channel } from "../../message";

@@ -2,10 +2,10 @@ import { Channel, Message, Range, SourceLocation } from "../message";
 import { BlameTree, stringify, Stringify, tryDecodeEnhancedPositionFromName } from "@azure-tools/datastore";
 import { AutorestError, AutorestWarning } from "@autorest/common";
 import { AutorestConfiguration } from "@autorest/configuration";
-import { From } from "linq-es2015";
 import { Suppressor } from "../pipeline/suppression";
 import { MessageEmitter } from "./message-emitter";
-import { AsyncLogManager } from "./logger-processor";
+import { LoggingSession } from "./logging-session";
+import { flatMap } from "lodash";
 
 export class AutorestCoreLogger {
   private suppressor: Suppressor;
@@ -13,7 +13,7 @@ export class AutorestCoreLogger {
   public constructor(
     private config: AutorestConfiguration,
     private messageEmitter: MessageEmitter,
-    private asyncLogManager: AsyncLogManager,
+    private asyncLogManager: LoggingSession,
   ) {
     this.suppressor = new Suppressor(config);
   }
@@ -73,18 +73,8 @@ export class AutorestCoreLogger {
     try {
       // update source locations to point to loaded Swagger
       if (m.Source && typeof m.Source.map === "function") {
-        const src = await this.handleMessageSource(m, m.Source);
-        m.Source = src;
-        // get friendly names
-        for (const source of src) {
-          if (source.Position) {
-            try {
-              source.document = this.messageEmitter.DataStore.readStrictSync(source.document).description;
-            } catch {
-              // no worries
-            }
-          }
-        }
+        const sources = await this.resolveOriginalSources(m, m.Source);
+        m.Source = this.resolveOriginalDocumentNames(sources);
       }
 
       // set range (dummy)
@@ -170,7 +160,7 @@ export class AutorestCoreLogger {
     }
   }
 
-  private async handleMessageSource(message: Message, source: SourceLocation[]) {
+  private async resolveOriginalSources(message: Message, source: SourceLocation[]) {
     const blameSources = source.map(async (s) => {
       let blameTree: BlameTree | null = null;
 
@@ -210,15 +200,11 @@ export class AutorestCoreLogger {
           }
         }
       } catch (e) {
-        /*
-  GS01: This should be restored when we go 'release'
-
-this.Message({
-  Channel: Channel.Warning,
-  Text: `Failed to blame ${JSON.stringify(s.Position)} in '${JSON.stringify(s.document)}' (${e})`,
-  Details: e
-});
-*/
+        this.log({
+          Channel: Channel.Debug,
+          Text: `Failed to blame ${JSON.stringify(s.Position)} in '${JSON.stringify(s.document)}' (${e})`,
+          Details: e,
+        });
         return [s];
       }
 
@@ -228,8 +214,20 @@ this.Message({
       }));
     });
 
-    return From(await Promise.all(blameSources))
-      .SelectMany((x) => x)
-      .ToArray();
+    return flatMap(await Promise.all(blameSources));
+  }
+
+  private resolveOriginalDocumentNames(sources: SourceLocation[]) {
+    return sources.map((source) => {
+      if (source.Position) {
+        try {
+          const document = this.messageEmitter.DataStore.readStrictSync(source.document).description;
+          return { ...source, document };
+        } catch {
+          // no worries
+        }
+      }
+      return source;
+    });
   }
 }

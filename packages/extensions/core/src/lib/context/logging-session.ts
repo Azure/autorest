@@ -1,7 +1,7 @@
 /**
  * Class processing the logger and disatching async.
  */
-export class AsyncLogManager {
+export class LoggingSession {
   private pendingMessage: Promise<unknown> | undefined;
   public registerLog(sendMessage: () => Promise<unknown>): void {
     this.pendingMessage = (this.pendingMessage ?? Promise.resolve()).then(async () => {
@@ -19,7 +19,9 @@ export class AsyncLogManager {
    */
   public async waitForMessages(): Promise<void> {
     if (this.pendingMessage) {
-      await this.pendingMessage;
+      await this.pendingMessage.catch((x) => console.error("CATCH errror", x));
     }
   }
 }
+
+export const AutorestLoggingSession = new LoggingSession();

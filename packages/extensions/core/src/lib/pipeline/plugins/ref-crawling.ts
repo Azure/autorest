@@ -1,6 +1,6 @@
 import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, visit } from "@azure-tools/datastore";
 import { resolveUri } from "@azure-tools/uri";
-import { AutorestContext } from "../../configuration";
+import { AutorestContext } from "../../context";
 import { Channel } from "../../message";
 import { values, items, length } from "@azure-tools/linq";
 

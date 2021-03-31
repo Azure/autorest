@@ -16,7 +16,7 @@ import {
 } from "@azure-tools/datastore";
 import { Dictionary } from "@azure-tools/linq";
 import * as oai from "@azure-tools/openapi";
-import { AutorestContext } from "../../configuration";
+import { AutorestContext } from "../../context";
 import { PipelinePlugin } from "../common";
 
 /**

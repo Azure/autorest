@@ -17,7 +17,7 @@ import { AutorestError, AutorestLogger, AutorestWarning } from "@autorest/common
 import { Message } from "../message";
 import { AutorestCoreLogger } from "./logger";
 import { VERSION } from "../constants";
-import { AsyncLogManager } from "./logger-processor";
+import { LoggingSession } from "./logging-session";
 
 export class AutorestContext implements AutorestLogger {
   public config: AutorestConfiguration;
@@ -28,7 +28,7 @@ export class AutorestContext implements AutorestLogger {
     config: AutorestConfiguration,
     public fileSystem: CachingFileSystem,
     public messageEmitter: MessageEmitter,
-    public asyncLogManager: AsyncLogManager,
+    public asyncLogManager: LoggingSession,
   ) {
     this.config = config;
     this.logger = new AutorestCoreLogger(config, messageEmitter, asyncLogManager);

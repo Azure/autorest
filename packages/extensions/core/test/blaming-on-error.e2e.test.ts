@@ -6,7 +6,7 @@ import { AutoRest, Channel, Message } from "../src/exports";
 import { RealFileSystem } from "@azure-tools/datastore";
 import { join } from "path";
 import { AppRoot } from "../src/lib/constants";
-import { AutorestContextLoader } from "../src/lib/configuration";
+import { AutorestContextLoader } from "../src/lib/context";
 import { createFileUri } from "@azure-tools/uri";
 
 const generate = async (file: string): Promise<{ errors: Message[] }> => {

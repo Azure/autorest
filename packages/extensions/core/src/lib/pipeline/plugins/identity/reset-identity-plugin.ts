@@ -1,5 +1,5 @@
 import { PipelinePlugin } from "../../common";
-import { AutorestContext } from "../../../configuration";
+import { AutorestContext } from "../../../context";
 import { DataSource, DataSink, DataHandle, QuickDataSource } from "@azure-tools/datastore";
 import { uniqBy } from "lodash";
 

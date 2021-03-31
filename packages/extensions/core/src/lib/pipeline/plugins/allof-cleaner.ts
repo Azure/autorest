@@ -13,7 +13,7 @@ import {
 } from "@azure-tools/datastore";
 import { Model, isReference, Refable, Schema } from "@azure-tools/openapi";
 
-import { AutorestContext } from "../../configuration";
+import { AutorestContext } from "../../context";
 import { PipelinePlugin } from "../common";
 import { values, length, items } from "@azure-tools/linq";
 

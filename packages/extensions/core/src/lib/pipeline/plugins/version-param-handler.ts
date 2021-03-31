@@ -11,7 +11,7 @@ import {
 } from "@azure-tools/datastore";
 import { clone, Dictionary } from "@azure-tools/linq";
 import * as oai from "@azure-tools/openapi";
-import { AutorestContext } from "../../configuration";
+import { AutorestContext } from "../../context";
 import { PipelinePlugin } from "../common";
 
 export class ApiVersionParameterHandler extends Transformer<any, oai.Model> {
