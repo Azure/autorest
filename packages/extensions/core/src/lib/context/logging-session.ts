@@ -19,7 +19,7 @@ export class LoggingSession {
    */
   public async waitForMessages(): Promise<void> {
     if (this.pendingMessage) {
-      await this.pendingMessage.catch((x) => console.error("CATCH errror", x));
+      await this.pendingMessage;
     }
   }
 }
