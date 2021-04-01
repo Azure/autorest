@@ -2,6 +2,18 @@
   "name": "@azure-tools/extension",
   "entries": [
     {
+      "version": "3.2.5",
+      "tag": "@azure-tools/extension_v3.2.5",
+      "date": "Thu, 01 Apr 2021 15:46:41 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Add** Logging when fail to fetch pacakge metadata"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.2.4",
       "tag": "@azure-tools/extension_v3.2.4",
       "date": "Tue, 16 Mar 2021 15:52:56 GMT",

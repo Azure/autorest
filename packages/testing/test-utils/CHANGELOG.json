@@ -2,6 +2,23 @@
   "name": "@autorest/test-utils",
   "entries": [
     {
+      "version": "0.2.1",
+      "tag": "@autorest/test-utils_v0.2.1",
+      "date": "Thu, 01 Apr 2021 15:46:41 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Updated** createDataHandle to respect protocol"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.2.1` to `~4.2.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.2.0",
       "tag": "@autorest/test-utils_v0.2.0",
       "date": "Tue, 16 Mar 2021 15:52:56 GMT",

@@ -2,6 +2,35 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.18.1",
+      "tag": "@autorest/modelerfour_v4.18.1",
+      "date": "Thu, 01 Apr 2021 15:46:41 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @azure-tools/uri version to ~3.1.1"
+          },
+          {
+            "comment": "**Cleanup** Migrated use of require -> es6 imports"
+          },
+          {
+            "comment": "**Update** how binary request body are treated if the content-type is not binary: Group all binary body together to prevent multiple method overload with same parameter"
+          },
+          {
+            "comment": "**Fix** Some unhandled promises"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.2.0` to `~0.2.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.2.1` to `~4.2.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.18.0",
       "tag": "@autorest/modelerfour_v4.18.0",
       "date": "Tue, 16 Mar 2021 15:52:56 GMT",

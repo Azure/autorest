@@ -40,8 +40,8 @@ const args = parseArgs(process.argv);
 args["info"] = args["info"] || args["list-installed"];
 args["preview"] = args["preview"] || args["prerelease"];
 if (args["v3"] && !args["version"]) {
-  // --v3 without --version infers --version:~3.0.6212 +
-  args["version"] = "~3.0.6212";
+  // --v3 without --version infers --version:^3.2.0 +
+  args["version"] = "^3.2.0";
 }
 
 // Suppress the banner if the message-format is set to something other than regular.

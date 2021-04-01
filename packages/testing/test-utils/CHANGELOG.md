@@ -1,6 +1,13 @@
 # Change Log - @autorest/test-utils
 
-This log was last generated on Tue, 16 Mar 2021 15:52:56 GMT and should not be manually modified.
+This log was last generated on Thu, 01 Apr 2021 15:46:41 GMT and should not be manually modified.
+
+## 0.2.1
+Thu, 01 Apr 2021 15:46:41 GMT
+
+### Patches
+
+- **Updated** createDataHandle to respect protocol
 
 ## 0.2.0
 Tue, 16 Mar 2021 15:52:56 GMT

@@ -2,6 +2,27 @@
   "name": "@azure-tools/datastore",
   "entries": [
     {
+      "version": "4.2.2",
+      "tag": "@azure-tools/datastore_v4.2.2",
+      "date": "Thu, 01 Apr 2021 15:46:41 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @azure-tools/uri version to ~3.1.1"
+          },
+          {
+            "comment": "**Update** Logging to use `@azure/logger` instead of `console`"
+          },
+          {
+            "comment": "**Refactor** datastore and deprecated PascalCase methods"
+          },
+          {
+            "comment": "**Fix vulnerability** incomplete url sanitization when adding github auth token"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.2.1",
       "tag": "@azure-tools/datastore_v4.2.1",
       "date": "Tue, 16 Mar 2021 19:28:18 GMT",

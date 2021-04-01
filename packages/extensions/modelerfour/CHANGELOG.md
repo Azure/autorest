@@ -1,6 +1,16 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Tue, 16 Mar 2021 15:52:56 GMT and should not be manually modified.
+This log was last generated on Thu, 01 Apr 2021 15:46:41 GMT and should not be manually modified.
+
+## 4.18.1
+Thu, 01 Apr 2021 15:46:41 GMT
+
+### Patches
+
+- Bump @azure-tools/uri version to ~3.1.1
+- **Cleanup** Migrated use of require -> es6 imports
+- **Update** how binary request body are treated if the content-type is not binary: Group all binary body together to prevent multiple method overload with same parameter
+- **Fix** Some unhandled promises
 
 ## 4.18.0
 Tue, 16 Mar 2021 15:52:56 GMT
