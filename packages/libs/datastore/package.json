@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/datastore",
-  "version": "4.2.1",
+  "version": "4.2.2",
   "description": "Virtualized Filesystem with parsing and sourcemaps (AutoRest)",
   "main": "./dist/main.js",
   "typings": "./dist/main.d.ts",

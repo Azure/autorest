@@ -1,6 +1,14 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Tue, 16 Mar 2021 15:52:56 GMT and should not be manually modified.
+This log was last generated on Thu, 01 Apr 2021 15:46:41 GMT and should not be manually modified.
+
+## 1.2.1
+Thu, 01 Apr 2021 15:46:41 GMT
+
+### Patches
+
+- Bump @azure-tools/uri version to ~3.1.1
+- Simplify configuration loading interface
 
 ## 1.2.0
 Tue, 16 Mar 2021 15:52:56 GMT
