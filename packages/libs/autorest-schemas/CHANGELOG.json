@@ -2,6 +2,18 @@
   "name": "@autorest/schemas",
   "entries": [
     {
+      "version": "1.1.1",
+      "tag": "@autorest/schemas_v1.1.1",
+      "date": "Thu, 01 Apr 2021 15:46:41 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix**: OpenAPI3 Validation of additional properties support boolean"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.0",
       "tag": "@autorest/schemas_v1.1.0",
       "date": "Tue, 16 Mar 2021 15:52:56 GMT",

@@ -1,6 +1,13 @@
 # Change Log - @autorest/common
 
-This log was last generated on Tue, 16 Mar 2021 15:52:56 GMT and should not be manually modified.
+This log was last generated on Thu, 01 Apr 2021 15:46:41 GMT and should not be manually modified.
+
+## 1.1.2
+Thu, 01 Apr 2021 15:46:41 GMT
+
+### Patches
+
+- **Added** configuration for usage of @azure/logger in libraries
 
 ## 1.1.1
 Tue, 16 Mar 2021 15:52:56 GMT

@@ -1,6 +1,16 @@
 # Change Log - autorest
 
-This log was last generated on Tue, 16 Mar 2021 15:52:56 GMT and should not be manually modified.
+This log was last generated on Thu, 01 Apr 2021 15:46:42 GMT and should not be manually modified.
+
+## 3.1.4
+Thu, 01 Apr 2021 15:46:42 GMT
+
+### Patches
+
+- Bump @azure-tools/uri version to ~3.1.1
+- **Cleanup** Migrated use of require -> es6 imports
+- **Fix** Load default configuration when resolving core version
+- **Update** @autorest/core version resolving in configuration file doesn't shell out to @autorest/core anymore
 
 ## 3.1.3
 Tue, 16 Mar 2021 15:52:56 GMT

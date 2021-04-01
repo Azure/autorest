@@ -2,6 +2,26 @@
   "name": "@azure-tools/oai2-to-oai3",
   "entries": [
     {
+      "version": "4.2.279",
+      "tag": "@azure-tools/oai2-to-oai3_v4.2.279",
+      "date": "Thu, 01 Apr 2021 15:46:42 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** enum with $ref inside not being processed"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.2.1` to `~4.2.2`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.2.0` to `~0.2.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.2.278",
       "tag": "@azure-tools/oai2-to-oai3_v4.2.278",
       "date": "Tue, 16 Mar 2021 15:52:56 GMT",
