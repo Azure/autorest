@@ -16,10 +16,10 @@ const ArmDefaultScope = "https://management.azure.com/.default";
 const DefaultHeaderName = "Authorization";
 
 export interface SecurityConfiguration {
-  azureArm?: boolean;
-  security?: KnownSecurityScheme[];
-  scopes?: string[];
-  headerName?: string;
+  azureArm: boolean;
+  security: KnownSecurityScheme[];
+  scopes: string[];
+  headerName: string;
 }
 
 /**
@@ -69,11 +69,10 @@ export class SecurityProcessor {
    * Build the security object from the autorest configuration
    */
   private getSecurityFromConfig(): Security | undefined {
-    if (!this.securityConfig.security) {
+    const schemes: SecurityScheme[] = this.securityConfig.security.map((x) => this.getSecuritySchemeFromConfig(x));
+    if (schemes.length === 0) {
       return undefined;
     }
-
-    const schemes: SecurityScheme[] = this.securityConfig.security.map((x) => this.getSecuritySchemeFromConfig(x));
     return new Security(true, { schemes });
   }
 
@@ -82,12 +81,12 @@ export class SecurityProcessor {
       case KnownSecurityScheme.AADToken:
         return {
           name: KnownSecurityScheme.AADToken,
-          scopes: this.securityConfig.scopes ?? [ArmDefaultScope],
+          scopes: this.securityConfig.scopes,
         };
       case KnownSecurityScheme.AzureKey:
         return {
           name: KnownSecurityScheme.AADToken,
-          headerName: this.securityConfig.headerName ?? DefaultHeaderName,
+          headerName: this.securityConfig.headerName,
         };
       default:
         throw new Error(`Unexpected security scheme '${name}'. Only known schemes are ${KnownSecuritySchemeList}`);
@@ -190,10 +189,10 @@ export class SecurityProcessor {
 
   private async getSecurityConfig(): Promise<SecurityConfiguration> {
     return {
-      azureArm: await this.session.getValue("azure-arm"),
-      security: arrayify(await this.session.getValue("security")),
-      scopes: arrayify(await this.session.getValue("security-scopes")),
-      headerName: await this.session.getValue("security-header-name"),
+      azureArm: await this.session.getValue("azure-arm", false),
+      security: arrayify(await this.session.getValue("security", [])),
+      scopes: arrayify(await this.session.getValue("security-scopes", [ArmDefaultScope])),
+      headerName: await this.session.getValue("security-header-name", DefaultHeaderName),
     };
   }
 }

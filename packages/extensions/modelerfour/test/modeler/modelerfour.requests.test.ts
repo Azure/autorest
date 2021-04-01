@@ -62,7 +62,7 @@ describe("Modelerfour.Request", () => {
       });
     });
 
-    fdescribe("multiple binary content-types", () => {
+    describe("multiple binary content-types", () => {
       let operation: Operation;
 
       beforeEach(async () => {
@@ -154,7 +154,7 @@ describe("Modelerfour.Request", () => {
 
       const codeModel = await runModeler(spec);
       parameters = codeModel.operationGroups[0]?.operations[0]?.requests?.[0]?.parameters;
-      expect(parameters).not.toBeNull();
+      assert(parameters);
     });
 
     it("mark body parameter as isInMultipart", async () => {
@@ -229,14 +229,14 @@ describe("Modelerfour.Request", () => {
       codeModel = await runModeler(spec);
       operation = findByName("hasHeaderWithExtension", codeModel.operationGroups[0].operations)!;
       operation2 = findByName("hasHeaderWithExtension2", codeModel.operationGroups[0].operations)!;
-      expect(operation).not.toBeNull();
+      assert(operation);
     });
 
     describe("response header", () => {
       let header: HttpHeader;
       beforeEach(() => {
         header = findByName<HttpHeader>("HeaderWithExtension", operation.responses?.[0].protocol.http!.headers)!;
-        expect(header).toBeDefined();
+        assert(header);
       });
 
       it("propagates extensions to response header definitions", async () => {
@@ -271,7 +271,7 @@ describe("Modelerfour.Request", () => {
       let parameter: Parameter;
       beforeEach(() => {
         parameter = findByName("RequestHeaderWithExtension", operation.parameters)!;
-        expect(parameter).toBeDefined();
+        assert(parameter);
       });
 
       it("propagates extensions to request header definitions", async () => {
