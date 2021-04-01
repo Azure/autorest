@@ -249,6 +249,8 @@ export class ModelerFour {
   }
 
   async init() {
+    await this.securityProcessor.init();
+
     this.options = await this.session.getValue("modelerfour", {});
     // grab override-client-name
     const newTitle = await this.session.getValue("override-client-name", "");

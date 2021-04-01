@@ -3,6 +3,7 @@ import { Session } from "@autorest/extension-base";
 import * as oai3 from "@azure-tools/openapi";
 import { dereference, ParameterLocation, Refable } from "@azure-tools/openapi";
 import { Interpretations } from "./interpretations";
+import { arrayify } from "./utils";
 
 export enum KnownSecurityScheme {
   AADToken = "AADToken",
@@ -11,20 +12,96 @@ export enum KnownSecurityScheme {
 
 const KnownSecuritySchemeList = Object.values(KnownSecurityScheme);
 
+const ArmDefaultScope = "https://management.azure.com/.default";
+const DefaultHeaderName = "Authorization";
+
+export interface SecurityConfiguration {
+  azureArm?: boolean;
+  security?: KnownSecurityScheme[];
+  scopes?: string[];
+  headerName?: string;
+}
+
 /**
  * Body processing functions
  */
 export class SecurityProcessor {
+  private securityConfig!: SecurityConfiguration;
   public constructor(private session: Session<oai3.Model>, private interpret: Interpretations) {}
+
+  public async init() {
+    this.securityConfig = await this.getSecurityConfig();
+  }
 
   /**
    * Process the security definition defined in OpenAPI
    */
   public process(openApiModel: oai3.Model): Security {
+    const securityFromSpec = this.getSecurityFromOpenAPISpec(openApiModel);
+    const securityFromConfig = this.getSecurityFromConfig();
+    const securityFromArm = this.getSecurityForAzureArm();
+
+    if (securityFromSpec && (securityFromConfig || securityFromArm)) {
+      this.session.warning(
+        "OpenAPI spec has a security definition but autorest security config is defined. Security config from autorest will be used.",
+        ["SecurityDefinedSpecAndConfig"],
+      );
+    }
+    if (securityFromArm && securityFromConfig) {
+      this.session.warning("OpenAPI spec has both 'security' and 'azure-arm' defined. Ignoring 'security'.", [
+        "SecurityAndAzureArmDefined",
+      ]);
+    }
+
+    return securityFromArm ?? securityFromConfig ?? securityFromSpec ?? new Security(false);
+  }
+
+  private getSecurityForAzureArm(): Security | undefined {
+    if (!this.securityConfig.azureArm) {
+      return undefined;
+    }
+
+    return new Security(true, {
+      schemes: [{ name: KnownSecurityScheme.AADToken, scopes: this.securityConfig.scopes ?? [ArmDefaultScope] }],
+    });
+  }
+  /**
+   * Build the security object from the autorest configuration
+   */
+  private getSecurityFromConfig(): Security | undefined {
+    if (!this.securityConfig.security) {
+      return undefined;
+    }
+
+    const schemes: SecurityScheme[] = this.securityConfig.security.map((x) => this.getSecuritySchemeFromConfig(x));
+    return new Security(true, { schemes });
+  }
+
+  private getSecuritySchemeFromConfig(name: string): SecurityScheme {
+    switch (name) {
+      case KnownSecurityScheme.AADToken:
+        return {
+          name: KnownSecurityScheme.AADToken,
+          scopes: this.securityConfig.scopes ?? [ArmDefaultScope],
+        };
+      case KnownSecurityScheme.AzureKey:
+        return {
+          name: KnownSecurityScheme.AADToken,
+          headerName: this.securityConfig.headerName ?? DefaultHeaderName,
+        };
+      default:
+        throw new Error(`Unexpected security scheme '${name}'. Only known schemes are ${KnownSecuritySchemeList}`);
+    }
+  }
+
+  /**
+   * Build the security object from the OpenAPI spec.
+   */
+  private getSecurityFromOpenAPISpec(openApiModel: oai3.Model): Security | undefined {
     const oai3Schemes = Object.values(openApiModel.components?.securitySchemes ?? {});
     const security = openApiModel.security;
     if (!security || oai3Schemes.length === 0) {
-      return new Security(false);
+      return undefined;
     }
 
     const schemeMap = this.resolveOpenAPI3SecuritySchemes(oai3Schemes);
@@ -109,5 +186,14 @@ export class SecurityProcessor {
     } else {
       return undefined;
     }
+  }
+
+  private async getSecurityConfig(): Promise<SecurityConfiguration> {
+    return {
+      azureArm: await this.session.getValue("azure-arm"),
+      security: arrayify(await this.session.getValue("security")),
+      scopes: arrayify(await this.session.getValue("security-scopes")),
+      headerName: await this.session.getValue("security-header-name"),
+    };
   }
 }
