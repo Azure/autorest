@@ -85,7 +85,7 @@ export class SecurityProcessor {
         };
       case KnownSecurityScheme.AzureKey:
         return {
-          name: KnownSecurityScheme.AADToken,
+          name: KnownSecurityScheme.AzureKey,
           headerName: this.securityConfig.headerName,
         };
       default:
