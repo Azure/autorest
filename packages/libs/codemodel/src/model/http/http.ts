@@ -9,6 +9,7 @@ import { DeepPartial, KnownMediaType, Initializer } from "@azure-tools/codegen";
 import { Extensions } from "../common/extensions";
 import { GroupSchema } from "../common/schemas/object";
 import { Languages } from "../common/languages";
+import { Deprecation } from "../common/deprecation";
 
 /** extended metadata for HTTP operation parameters  */
 export interface HttpParameter extends Protocol {
@@ -67,6 +68,7 @@ export class HttpWithBodyRequest extends HttpRequest implements HttpWithBodyRequ
     this.apply(objectInitializer);
   }
 }
+
 export interface HttpBinaryRequest extends HttpWithBodyRequest {
   /* indicates that the HTTP request should be a binary, not a serialized object */
   binary: true;
@@ -90,13 +92,21 @@ export interface HttpHeader extends Extensions {
   header: string;
   schema: Schema;
   language: Languages;
+
+  /**
+   * Represent the deprecation information if api is deprecated.
+   * @default undefined
+   */
+  deprecated?: Deprecation;
 }
+
 export class HttpHeader extends Initializer implements HttpHeader {
   constructor(public header: string, public schema: Schema, objectInitializer?: DeepPartial<HttpHeader>) {
     super();
     this.apply(objectInitializer);
   }
 }
+
 export interface HttpResponse extends Protocol {
   /** the possible HTTP status codes that this response MUST match one of. */
   statusCodes: Array<StatusCode>; // oai3 supported options.

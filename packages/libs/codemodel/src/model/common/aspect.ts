@@ -2,9 +2,7 @@ import { ApiVersions } from "./api-version";
 import { Deprecation } from "./deprecation";
 import { ExternalDocumentation } from "./external-documentation";
 import { Metadata } from "./metadata";
-import { Initializer, DeepPartial } from "@azure-tools/codegen";
-
-const count = 0;
+import { DeepPartial } from "@azure-tools/codegen";
 
 /** the base interface that represents an aspect of the model. */
 export interface Aspect extends Metadata {
@@ -23,7 +21,10 @@ export interface Aspect extends Metadata {
   /** API versions that this applies to. Undefined means all versions */
   apiVersions?: ApiVersions;
 
-  /** deprecation information -- ie, when this aspect doesn't apply and why */
+  /**
+   * Represent the deprecation information if api is deprecated.
+   * @default undefined
+   */
   deprecated?: Deprecation;
 
   /** where did this aspect come from (jsonpath or 'modelerfour:<soemthing>') */
