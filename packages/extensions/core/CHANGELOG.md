@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Thu, 01 Apr 2021 15:46:41 GMT and should not be manually modified.
+This log was last generated on Fri, 02 Apr 2021 15:18:00 GMT and should not be manually modified.
+
+## 3.2.4
+Fri, 02 Apr 2021 15:18:00 GMT
+
+### Patches
+
+- **Update** @autorest/configuration to take fix for broken interactive plugin
 
 ## 3.2.2
 Thu, 01 Apr 2021 15:46:41 GMT
