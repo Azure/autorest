@@ -111,7 +111,6 @@ export const evalDirectiveTransform = (transformCode: string, context: Transform
       config,
     },
   };
-
   return safeEval<unknown>(`(() => { { ${transformCode} }; return $; })()`, evalContext);
 };
 

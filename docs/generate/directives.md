@@ -28,6 +28,10 @@ Directives consist of three parts:
 
 - **Transform**: denoted by the field `transform`, the actions we would like to be applied on the specified objects. The list of available variables and functions can be found in [eval.ts](https://github.com/Azure/autorest/blob/master/packages/extensions/core/src/lib/pipeline/plugins/transformer/eval.ts)
 
+## Built-in Directives
+
+[See built in directives here](./build-in-directives.md)
+
 ## Directive Scenarios
 
 The following directives cover the most common tweaking scenarios for generation.
