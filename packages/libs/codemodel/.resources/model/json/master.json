@@ -31,27 +31,16 @@
       }
     },
     "Deprecation": {
-      "description": "represents  deprecation information for a given aspect",
+      "description": "Represent information about a deprecation",
       "type": "object",
       "properties": {
-        "message": {
-          "description": "the reason why this aspect",
+        "reason": {
+          "description": "Reason why this was deprecated.",
           "type": "string"
-        },
-        "apiVersions": {
-          "description": "the api versions that this deprecation is applicable to.",
-          "type": "array",
-          "items": {
-            "$ref": "./master.json#/definitions/ApiVersion"
-          }
         }
       },
       "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "apiVersions",
-        "message"
-      ]
+      "additionalProperties": false
     },
     "Extensions": {
       "description": "A dictionary of open-ended 'x-*' extensions propogated from the original source document.",
@@ -322,7 +311,8 @@
         },
         "deprecated": {
           "$ref": "./master.json#/definitions/Deprecation",
-          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+          "description": "Represent the deprecation information if api is deprecated.",
+          "default": "undefined"
         },
         "origin": {
           "description": "where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')",
@@ -819,7 +809,8 @@
         },
         "deprecated": {
           "$ref": "./master.json#/definitions/Deprecation",
-          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+          "description": "Represent the deprecation information if api is deprecated.",
+          "default": "undefined"
         },
         "origin": {
           "description": "where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')",

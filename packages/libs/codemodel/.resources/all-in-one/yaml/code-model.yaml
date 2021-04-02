@@ -395,7 +395,8 @@ definitions:
       defaultValue:
         description: If the value isn't sent on the wire, the service will assume this
       deprecated:
-        description: deprecation information -- ie, when this aspect doesn't apply and why
+        description: Represent the deprecation information if api is deprecated.
+        default: undefined
         $ref: '#/definitions/Deprecation'
       example:
         description: example information
@@ -509,20 +510,12 @@ definitions:
       - default
   Deprecation:
     type: object
-    description: represents  deprecation information for a given aspect
+    description: Represent information about a deprecation
     additionalProperties: false
     properties:
-      apiVersions:
-        type: array
-        description: the api versions that this deprecation is applicable to.
-        items:
-          $ref: '#/definitions/ApiVersion'
-      message:
+      reason:
         type: string
-        description: the reason why this aspect
-    required:
-      - apiVersions
-      - message
+        description: Reason why this was deprecated.
   Dictionary<ApiVersion>:
     type: object
     additionalProperties:
@@ -1261,7 +1254,8 @@ definitions:
         items:
           $ref: '#/definitions/ApiVersion'
       deprecated:
-        description: deprecation information -- ie, when this aspect doesn't apply and why
+        description: Represent the deprecation information if api is deprecated.
+        default: undefined
         $ref: '#/definitions/Deprecation'
       exceptions:
         type: array
@@ -1545,7 +1539,8 @@ definitions:
       defaultValue:
         description: If the value isn't sent on the wire, the service will assume this
       deprecated:
-        description: deprecation information -- ie, when this aspect doesn't apply and why
+        description: Represent the deprecation information if api is deprecated.
+        default: undefined
         $ref: '#/definitions/Deprecation'
       example:
         description: example information
@@ -2069,7 +2064,8 @@ definitions:
       clientDefaultValue:
         description: the value that the client should provide if the consumer doesn't provide one
       deprecated:
-        description: deprecation information -- ie, when this aspect doesn't apply and why
+        description: Represent the deprecation information if api is deprecated.
+        default: undefined
         $ref: '#/definitions/Deprecation'
       externalDocs:
         description: External Documentation Links
