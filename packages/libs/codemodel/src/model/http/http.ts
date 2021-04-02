@@ -92,12 +92,6 @@ export interface HttpHeader extends Extensions {
   header: string;
   schema: Schema;
   language: Languages;
-
-  /**
-   * Represent the deprecation information if api is deprecated.
-   * @default undefined
-   */
-  deprecated?: Deprecation;
 }
 
 export class HttpHeader extends Initializer implements HttpHeader {

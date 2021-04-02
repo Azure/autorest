@@ -2177,7 +2177,6 @@ export class ModelerFour {
         headers.push(
           new HttpHeader(headerName, hsch, {
             extensions: this.interpret.getExtensionProperties(header),
-            deprecated: this.interpret.getDeprecation(header),
             language: {
               default: {
                 name: header["x-ms-client-name"] || headerName,
