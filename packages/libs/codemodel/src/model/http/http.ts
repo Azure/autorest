@@ -97,15 +97,20 @@ export class HttpHeader extends Initializer implements HttpHeader {
     this.apply(objectInitializer);
   }
 }
+
 export interface HttpResponse extends Protocol {
   /** the possible HTTP status codes that this response MUST match one of. */
   statusCodes: Array<StatusCode>; // oai3 supported options.
 
-  /** canonical response type (ie, 'json') */
-  knownMediaType: KnownMediaType;
+  /**
+   * canonical response type (ie, 'json').
+   */
+  knownMediaType?: KnownMediaType;
 
-  /** the possible media types that this response MUST match one of */
-  mediaTypes: Array<string>; // the response mediaTypes that this should apply to (ie, 'application/json')
+  /**
+   * The possible media types that this response MUST match one of.
+   */
+  mediaTypes?: Array<string>; // the response mediaTypes that this should apply to (ie, 'application/json')
 
   /** content returned by the service in the HTTP headers */
   headers?: Array<HttpHeader>;

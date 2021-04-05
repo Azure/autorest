@@ -712,8 +712,6 @@ definitions:
           - true
     required:
       - binary
-      - knownMediaType
-      - mediaTypes
       - statusCodes
   HttpHeader:
     type: object
@@ -842,11 +840,11 @@ definitions:
         items:
           $ref: '#/definitions/HttpHeader'
       knownMediaType:
-        description: canonical response type (ie, 'json')
+        description: canonical response type (ie, 'json').
         $ref: '#/definitions/KnownMediaType'
       mediaTypes:
         type: array
-        description: the possible media types that this response MUST match one of
+        description: The possible media types that this response MUST match one of.
         items:
           type: string
       statusCodes:
@@ -919,8 +917,6 @@ definitions:
             - 511
             - default
     required:
-      - knownMediaType
-      - mediaTypes
       - statusCodes
   HttpWithBodyRequest:
     type: object
