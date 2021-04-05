@@ -6,7 +6,7 @@ import { DataHandle } from "@azure-tools/datastore";
 import { OperationAbortedException } from "@autorest/common";
 import { Channel } from "../../../message";
 import { createPerFilePlugin, PipelinePlugin } from "../../common";
-import { AutorestContext } from "../../../configuration";
+import { AutorestContext } from "../../../context";
 import { SwaggerSchemaValidator } from "./swagger-schema-validator";
 import { PositionedValidationError } from "./json-schema-validator";
 import { OpenApi3SchemaValidator } from "./openapi3-schema-validator";

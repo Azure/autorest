@@ -1,14 +1,13 @@
 import { Delay, Lazy, LazyPromise } from "@azure-tools/tasks";
-import { MappedPosition, MappingItem, Position, RawSourceMap } from "source-map";
+import { MappedPosition, Position, RawSourceMap, SourceMapConsumer } from "source-map";
 import { promises as fs } from "fs";
 import { ParseToAst as parseAst, YAMLNode, parseYaml, ParseNode } from "../yaml";
 
 export interface Metadata {
   lineIndices: Lazy<Array<number>>;
+  sourceMap: LazyPromise<RawSourceMap>;
 
   // inputSourceMap: LazyPromise<RawSourceMap>;
-  // sourceMap: LazyPromise<RawSourceMap>;
-  // sourceMapEachMappingByLine: LazyPromise<Array<Array<MappingItem>>>;
 }
 
 export interface Data {
@@ -42,7 +41,7 @@ export class DataHandle {
       artifactType: this.item.artifactType,
       identity: this.item.identity,
       name: this.item.name,
-      content: await this.ReadData(true),
+      content: await this.readData(true),
     });
   }
 
@@ -160,25 +159,13 @@ export class DataHandle {
   }
 
   public async blame(position: Position): Promise<Array<MappedPosition>> {
-    return [];
-    /* DISABLING SOURCE MAP SUPPORT
     const metadata = this.metadata;
-    const sameLineResults = ((await metadata.sourceMapEachMappingByLine)[position.line] || []).filter(
-      (mapping) => mapping.generatedColumn <= position.column,
-    );
-    const maxColumn = sameLineResults.reduce((c, m) => Math.max(c, m.generatedColumn), 0);
-    const columnDelta = position.column - maxColumn;
-    return sameLineResults
-      .filter((m) => m.generatedColumn === maxColumn)
-      .map((m) => {
-        return {
-          column: m.originalColumn + columnDelta,
-          line: m.originalLine,
-          name: m.name,
-          source: m.source,
-        };
-      });
-      */
+    const consumer = new SourceMapConsumer(await metadata.sourceMap);
+    const mappedPosition = consumer.originalPositionFor(position);
+    if (mappedPosition.line === null) {
+      return [];
+    }
+    return [mappedPosition];
   }
 
   /**

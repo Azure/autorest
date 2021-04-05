@@ -1,5 +1,5 @@
 import { DataHandle, DataSink, DataSource, QuickDataSource } from "@azure-tools/datastore";
-import { AutorestContext } from "../../../configuration";
+import { AutorestContext } from "../../../context";
 import { PipelinePlugin } from "../../common";
 import { EnumDeduplicator } from "./enum-deduplicator";
 

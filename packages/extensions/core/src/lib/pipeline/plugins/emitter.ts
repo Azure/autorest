@@ -1,6 +1,6 @@
 import { DataHandle, DataSource, Normalize, QuickDataSource, createSandbox, Stringify } from "@azure-tools/datastore";
 import { ResolveUri } from "@azure-tools/uri";
-import { AutorestContext } from "../../configuration";
+import { AutorestContext } from "../../context";
 import { Channel } from "../../message";
 import { PipelinePlugin } from "../common";
 

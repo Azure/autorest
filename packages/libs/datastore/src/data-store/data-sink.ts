@@ -1,6 +1,6 @@
 import { RawSourceMap, SourceMapGenerator } from "source-map";
 import { FastStringify } from "../yaml";
-import { Compile, Mapping } from "../source-map/source-map";
+import { compileMapping, Mapping } from "../source-map/source-map";
 
 import { DataHandle } from "./data-handle";
 
@@ -20,7 +20,7 @@ export class DataSink {
     description: string,
     data: string,
     artifact: string | undefined,
-    identity: Array<string>,
+    identity: string[],
     sourceMapFactory: (readHandle: DataHandle) => Promise<RawSourceMap>,
   ): Promise<DataHandle> {
     return this.write(description, data, artifact, identity, sourceMapFactory);
@@ -29,14 +29,14 @@ export class DataSink {
   public async writeData(
     description: string,
     data: string,
-    identity: Array<string>,
+    identity: string[],
     artifact?: string,
-    mappings: Array<Mapping> = [],
-    mappingSources: Array<DataHandle> = [],
+    mappings: Mapping[] = [],
+    mappingSources: DataHandle[] = [],
   ): Promise<DataHandle> {
     return this.writeDataWithSourceMap(description, data, artifact, identity, async (readHandle) => {
       const sourceMapGenerator = new SourceMapGenerator({ file: readHandle.key });
-      await Compile(mappings, sourceMapGenerator, mappingSources.concat(readHandle));
+      await compileMapping(mappings, sourceMapGenerator, mappingSources.concat(readHandle));
       return sourceMapGenerator.toJSON();
     });
   }

@@ -21,8 +21,8 @@ const readData = async (file: string) => {
     token: { isCancellationRequested: false, onCancellationRequested: <any>null },
   };
   const ds = new DataStore(cts.token);
-  const scope = ds.GetReadThroughScope(mfs);
-  return await scope.Read(inputUri);
+  const scope = ds.getReadThroughScope(mfs);
+  return await scope.read(inputUri);
 };
 
 const runComponentCleaner = async (scenarioName: string) => {
@@ -30,7 +30,7 @@ const runComponentCleaner = async (scenarioName: string) => {
   assert(input);
   const cleaner = new ComponentsCleaner(input);
   return {
-    input: await input?.ReadObject(),
+    input: await input?.readObject(),
     output: await cleaner.getOutput(),
   };
 };
