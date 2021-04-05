@@ -4,7 +4,7 @@
     "SecurityScheme": {
       "type": "object",
       "properties": {
-        "name": {
+        "type": {
           "type": "string"
         },
         "scopes": {
@@ -20,7 +20,7 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "name"
+        "type"
       ]
     },
     "AuthorizationCodeOAuthFlow": {

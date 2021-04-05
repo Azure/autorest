@@ -9,8 +9,8 @@ definitions:
     allOf:
       - $ref: '#/definitions/SecurityScheme'
     required:
-      - name
       - scopes
+      - type
   APIKeySecurityScheme:
     type: object
     additionalProperties: false
@@ -155,14 +155,14 @@ definitions:
       - authorizationUrl
       - scopes
       - tokenUrl
-  AzureKeyScheme:
+  AzureKeySecurityScheme:
     type: object
     additionalProperties: false
     allOf:
       - $ref: '#/definitions/SecurityScheme'
     required:
       - headerName
-      - name
+      - type
   BearerHTTPSecurityScheme:
     type: object
     additionalProperties: false
@@ -1888,7 +1888,7 @@ definitions:
     type: object
     additionalProperties: false
     properties:
-      name:
+      type:
         type: string
       headerName:
         type: string
@@ -1897,7 +1897,7 @@ definitions:
         items:
           type: string
     required:
-      - name
+      - type
   SecurityType:
     type: string
     enum:

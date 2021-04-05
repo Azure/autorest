@@ -24,17 +24,31 @@ export class Security extends Initializer implements Security {
 }
 
 export interface SecurityScheme {
-  name: string;
+  type: string;
   scopes?: string[];
   headerName?: string;
 }
 
 export interface AADTokenSecurityScheme extends SecurityScheme {
-  name: "AADToken";
+  type: "AADToken";
   scopes: string[];
 }
 
-export interface AzureKeyScheme extends SecurityScheme {
-  name: "AzureKey";
+export class AADTokenSecurityScheme implements AADTokenSecurityScheme {
+  public constructor(objectInitializer?: DeepPartial<AADTokenSecurityScheme>) {
+    this.type = "AADToken";
+    Object.assign(this, objectInitializer);
+  }
+}
+
+export interface AzureKeySecurityScheme extends SecurityScheme {
+  type: "AzureKey";
   headerName: string;
+}
+
+export class AzureKeySecurityScheme implements AzureKeySecurityScheme {
+  public constructor(objectInitializer?: DeepPartial<AzureKeySecurityScheme>) {
+    this.type = "AzureKey";
+    Object.assign(this, objectInitializer);
+  }
 }

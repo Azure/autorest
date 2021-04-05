@@ -9,8 +9,8 @@ definitions:
     allOf:
       - $ref: ./http.yaml#/definitions/SecurityScheme
     required:
-      - name
       - scopes
+      - type
   ApiVersion:
     type: object
     description: |-
@@ -42,14 +42,14 @@ definitions:
     description: a collection of api versions
     items:
       $ref: ./master.yaml#/definitions/ApiVersion
-  AzureKeyScheme:
+  AzureKeySecurityScheme:
     type: object
     additionalProperties: false
     allOf:
       - $ref: ./http.yaml#/definitions/SecurityScheme
     required:
       - headerName
-      - name
+      - type
   BinaryResponse:
     type: object
     description: a response where the content should be treated as a binary instead of a value or object

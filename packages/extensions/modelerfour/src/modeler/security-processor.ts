@@ -1,4 +1,4 @@
-import { Security, SecurityScheme } from "@autorest/codemodel";
+import { AADTokenSecurityScheme, AzureKeySecurityScheme, Security, SecurityScheme } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
 import * as oai3 from "@azure-tools/openapi";
 import { dereference, ParameterLocation, Refable } from "@azure-tools/openapi";
@@ -62,7 +62,11 @@ export class SecurityProcessor {
     }
 
     return new Security(true, {
-      schemes: [{ name: KnownSecurityScheme.AADToken, scopes: this.securityConfig.scopes ?? [ArmDefaultScope] }],
+      schemes: [
+        new AADTokenSecurityScheme({
+          scopes: this.securityConfig.scopes ?? [ArmDefaultScope],
+        }),
+      ],
     });
   }
   /**
@@ -79,15 +83,13 @@ export class SecurityProcessor {
   private getSecuritySchemeFromConfig(name: string): SecurityScheme {
     switch (name) {
       case KnownSecurityScheme.AADToken:
-        return {
-          name: KnownSecurityScheme.AADToken,
+        return new AADTokenSecurityScheme({
           scopes: this.securityConfig.scopes,
-        };
+        });
       case KnownSecurityScheme.AzureKey:
-        return {
-          name: KnownSecurityScheme.AzureKey,
+        return new AzureKeySecurityScheme({
           headerName: this.securityConfig.headerName,
-        };
+        });
       default:
         throw new Error(`Unexpected security scheme '${name}'. Only known schemes are ${KnownSecuritySchemeList}`);
     }
@@ -165,10 +167,9 @@ export class SecurityProcessor {
     scheme: oai3.SecurityScheme,
   ): SecurityScheme | undefined {
     if (name === KnownSecurityScheme.AADToken) {
-      return {
-        name: "AADToken",
+      return new AADTokenSecurityScheme({
         scopes: scopes,
-      };
+      });
     } else if (name === KnownSecurityScheme.AzureKey) {
       if (scheme.type !== oai3.SecurityType.ApiKey) {
         throw new Error(`AzureKey security scheme should be of type 'apiKey' but was '${scheme.type}'`);
@@ -178,10 +179,9 @@ export class SecurityProcessor {
         throw new Error(`AzureKey security scheme should be of in 'header' but was '${scheme.in}'`);
       }
 
-      return {
-        name: "AzureKey",
+      return new AzureKeySecurityScheme({
         headerName: scheme.name,
-      };
+      });
     } else {
       return undefined;
     }

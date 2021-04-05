@@ -449,7 +449,7 @@ definitions:
     type: object
     additionalProperties: false
     properties:
-      name:
+      type:
         type: string
       headerName:
         type: string
@@ -458,4 +458,4 @@ definitions:
         items:
           type: string
     required:
-      - name
+      - type
