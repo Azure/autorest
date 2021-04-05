@@ -1,4 +1,3 @@
-
 # Default Configuration - Directives
 
 The built-in `transform` directive with its filters `from` and `where` are very powerful, but can become verbose and thus hard to reuse for common patterns (e.g. rename an operation).
@@ -10,7 +9,7 @@ Configuration files using these macros instead of "low-level" directives are rob
 
 A declaration such as
 
-``` yaml false
+```yaml false
 declare-directive:
   my-directive: >-
     [
@@ -26,7 +25,7 @@ declare-directive:
 
 can be used by naming it in a `directive` section:
 
-``` yaml false
+```yaml false
 directive:
   - my-directive: # as a standalone, with an object as parameter
       foo: bar
@@ -40,7 +39,7 @@ Each `directive` entry that names `my-directive` will be expanded with the whate
 If the declaration evaluates to an array, the directives are duplicated accordingly (this enables directive declarations that transform data on multiple stages).
 In the above example, `directive` gets expanded to:
 
-``` yaml false
+```yaml false
 directive:
   - transform: >-
       some transformer, parameterized with '{ "foo": \"bar\", "baz": 42 }'
@@ -59,12 +58,11 @@ directive:
 
 As can be seen in the last `directive`, `from` as specified originally was not overridden by `code-model-v1`, i.e. what was specified by the user is given higher priority.
 
-
 ## `set`
 
 Formerly implemented in the AutoRest core itself, `set` is now just syntactic sugar for `transform`.
 
-``` yaml
+```yaml
 declare-directive:
   set: >-
     { transform: `return ${JSON.stringify($)}` }
@@ -76,17 +74,17 @@ declare-directive:
 
 Select operations by ID at different stages of the pipeline.
 
-``` yaml
+```yaml
 declare-directive:
   where-operation: >-
     (() => {
       switch ($context.from) {
         case "code-model-v1":
           return { from: "code-model-v1", where: `$.operations[*].methods[?(@.serializedName == ${JSON.stringify($)})]` };
-        
+
         case "openapi-document":
           return { from: "openapi-document", where: `$..paths.*[?(@.operationId == ${JSON.stringify($)})]` };
-          
+
         case "swagger-document":
         default:
           return { from: "swagger-document", where: `$.paths.*[?(@.operationId == ${JSON.stringify($)})]` };
@@ -109,15 +107,13 @@ declare-directive:
           return { from: "swagger-document", where: `$.definitions[${JSON.stringify($)}]` };
       }
     })()
-
-
 ```
 
 ## Removal
 
 Removes an operation by ID.
 
-``` yaml
+```yaml
 declare-directive:
   remove-operation: >-
     [{
@@ -161,7 +157,7 @@ declare-directive:
       from: 'swagger-document',
       where: `$..['$ref']`,
       transform: `$ = $ === "#/definitions/${$.from}" ? "#/definitions/${$.to}" : $`
-    }, 
+    },
     {
       from: 'swagger-document',
       where: `$..['$ref']`,
@@ -184,5 +180,15 @@ declare-directive:
     {
       from: 'openapi-document',
       transform: `if ($.properties[${JSON.stringify($.from)}]) { $.properties[${JSON.stringify($.to)}] = $.properties[${JSON.stringify($.from)}]; delete $.properties[${JSON.stringify($.from)}]; }`
+    }]
+
+  remove-parameter: >-
+    [{
+      from: 'swagger-document',
+      transform: `$.parameters = $.parameters.filter(x=> !(x.in === ${JSON.stringify($.in)} && x.name === ${JSON.stringify($.name)}))`
+    },
+    {
+      from: 'openapi-document',
+      transform: `$.parameters = $.parameters.filter(x=> !(x.in === ${JSON.stringify($.in)} && x.name === ${JSON.stringify($.name)}))`
     }]
 ```
