@@ -60,6 +60,7 @@ import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin 
 import { createHash } from "crypto";
 import { isCached, readCache, writeCache } from "./pipeline-cache";
 import { values } from "@azure-tools/linq";
+import { createAdlCompilerPlugin } from "./plugins/adl/adl-plugin";
 
 const safeEval = createSandbox();
 
@@ -227,6 +228,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     "normalize-identity": createNormalizeIdentityPlugin(),
     "loader-swagger": createSwaggerLoaderPlugin(),
     "loader-openapi": createOpenApiLoaderPlugin(),
+    "adl-compiler": createAdlCompilerPlugin(),
     "transform": createTransformerPlugin(),
     "text-transform": createTextTransformerPlugin(),
     "new-transform": createGraphTransformerPlugin(),
