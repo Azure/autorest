@@ -8,6 +8,11 @@ definitions:
     additionalProperties: false
     allOf:
       - $ref: '#/definitions/SecurityScheme'
+    properties:
+      scopes:
+        type: array
+        items:
+          type: string
     required:
       - scopes
       - type
@@ -160,6 +165,9 @@ definitions:
     additionalProperties: false
     allOf:
       - $ref: '#/definitions/SecurityScheme'
+    properties:
+      headerName:
+        type: string
     required:
       - headerName
       - type
@@ -1886,12 +1894,6 @@ definitions:
     properties:
       type:
         type: string
-      headerName:
-        type: string
-      scopes:
-        type: array
-        items:
-          type: string
     required:
       - type
   SecurityType:

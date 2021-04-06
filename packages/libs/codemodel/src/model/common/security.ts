@@ -25,8 +25,6 @@ export class Security extends Initializer implements Security {
 
 export interface SecurityScheme {
   type: string;
-  scopes?: string[];
-  headerName?: string;
 }
 
 export interface AADTokenSecurityScheme extends SecurityScheme {

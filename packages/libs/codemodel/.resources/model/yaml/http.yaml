@@ -447,11 +447,5 @@ definitions:
     properties:
       type:
         type: string
-      headerName:
-        type: string
-      scopes:
-        type: array
-        items:
-          type: string
     required:
       - type

@@ -2211,15 +2211,6 @@
       "properties": {
         "type": {
           "type": "string"
-        },
-        "scopes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "headerName": {
-          "type": "string"
         }
       },
       "defaultProperties": [],
@@ -2230,7 +2221,14 @@
     },
     "AADTokenSecurityScheme": {
       "type": "object",
-      "properties": {},
+      "properties": {
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
@@ -2245,7 +2243,11 @@
     },
     "AzureKeySecurityScheme": {
       "type": "object",
-      "properties": {},
+      "properties": {
+        "headerName": {
+          "type": "string"
+        }
+      },
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [

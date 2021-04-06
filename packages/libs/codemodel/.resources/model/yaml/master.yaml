@@ -8,6 +8,11 @@ definitions:
     additionalProperties: false
     allOf:
       - $ref: ./http.yaml#/definitions/SecurityScheme
+    properties:
+      scopes:
+        type: array
+        items:
+          type: string
     required:
       - scopes
       - type
@@ -47,6 +52,9 @@ definitions:
     additionalProperties: false
     allOf:
       - $ref: ./http.yaml#/definitions/SecurityScheme
+    properties:
+      headerName:
+        type: string
     required:
       - headerName
       - type

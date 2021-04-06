@@ -6,15 +6,6 @@
       "properties": {
         "type": {
           "type": "string"
-        },
-        "scopes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "headerName": {
-          "type": "string"
         }
       },
       "defaultProperties": [],
