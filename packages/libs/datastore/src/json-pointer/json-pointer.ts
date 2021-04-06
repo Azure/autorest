@@ -26,7 +26,7 @@ export interface NodeT<T, K extends keyof T> {
  * @returns {*} - value at location, or will throw if location is not present.
  */
 export function get(obj: any, pointer: JsonPointer | JsonPointerTokens) {
-  const refTokens = Array.isArray(pointer) ? pointer : parsePointer(pointer);
+  const refTokens = Array.isArray(pointer) ? pointer : parseJsonPointer(pointer);
 
   for (let i = 0; i < refTokens.length; ++i) {
     const tok = refTokens[i];
@@ -46,7 +46,7 @@ export function get(obj: any, pointer: JsonPointer | JsonPointerTokens) {
  * @param value
  */
 export function set(obj: any, pointer: JsonPointer | JsonPointerTokens, value: any) {
-  const refTokens = Array.isArray(pointer) ? pointer : parsePointer(pointer);
+  const refTokens = Array.isArray(pointer) ? pointer : parseJsonPointer(pointer);
   let nextTok: string | number = refTokens[0];
 
   if (refTokens.length === 0) {
@@ -82,7 +82,7 @@ export function set(obj: any, pointer: JsonPointer | JsonPointerTokens, value: a
  * @param {JsonPointer|JsonPointerTokens} pointer - pointer or tokens to a location
  */
 export function remove(obj: any, pointer: JsonPointer | JsonPointerTokens) {
-  const refTokens = Array.isArray(pointer) ? pointer : parsePointer(pointer);
+  const refTokens = Array.isArray(pointer) ? pointer : parseJsonPointer(pointer);
   const finalToken = refTokens[refTokens.length - 1];
   if (finalToken === undefined) {
     throw new Error(`Invalid JSON pointer for remove: "${pointer}"`);
@@ -147,7 +147,7 @@ export function walk(
       if (descend(value)) {
         next(value);
       } else {
-        iterator(value, compile(refTokens));
+        iterator(value, serializeJsonPointer(refTokens));
       }
       refTokens.pop();
     }
@@ -176,7 +176,7 @@ export function _visit(
   const next = (cur: any) => {
     for (const { key, value } of items(cur)) {
       refTokens.push(String(key));
-      if (iterator(value, compile(refTokens)) && descend(value)) {
+      if (iterator(value, serializeJsonPointer(refTokens)) && descend(value)) {
         next(value);
       }
       refTokens.pop();
@@ -191,7 +191,7 @@ export function* visit(obj: any, parentReference: JsonPointerTokens = new Array<
     yield {
       value,
       key,
-      pointer: compile(reference),
+      pointer: serializeJsonPointer(reference),
       children: visit(value, reference),
       childIterator: () => visit(value, reference),
     };
@@ -208,7 +208,7 @@ export function* visitT<T, K extends keyof T>(
     yield {
       value: v,
       key,
-      pointer: compile(reference),
+      pointer: serializeJsonPointer(reference),
       children: visitT(<T[K]>value, reference),
       childIterator: () => visitT(<T[K]>value, reference),
     };
@@ -257,7 +257,7 @@ function unescape(str: string) {
  * @param pointer
  * @returns {Array}
  */
-export function parsePointer(pointer: string): JsonPointerTokens {
+export function parseJsonPointer(pointer: string): JsonPointerTokens {
   if (pointer === "") {
     return new Array<string>();
   }
@@ -270,10 +270,10 @@ export function parsePointer(pointer: string): JsonPointerTokens {
 /**
  * Builds a json pointer from a array of reference tokens
  *
- * @param refTokens
- * @returns {string}
+ * @param refTokens segment of paths.
+ * @returns JsonPointer string.
  */
-function compile(refTokens: JsonPointerTokens) {
+export function serializeJsonPointer(refTokens: JsonPointerTokens): string {
   if (refTokens.length === 0) {
     return "";
   }

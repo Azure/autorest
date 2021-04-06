@@ -111,7 +111,7 @@ export const extendAutorestConfiguration = (
   config: AutorestConfiguration,
   overrides: AutorestRawConfiguration[],
 ): AutorestConfiguration => {
-  const rawConfig = mergeConfigurations(...overrides, config);
+  const rawConfig = mergeConfigurations(...overrides, config.raw);
   const newConfig = createConfigFromRawConfig(config.configFileFolderUri, rawConfig, config.configurationFiles);
   newConfig.inputFileUris = config.inputFileUris;
   return newConfig;

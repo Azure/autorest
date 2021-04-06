@@ -1,41 +1,46 @@
 import { Channel, Message, Range, SourceLocation } from "../message";
-import { BlameTree, stringify, Stringify, TryDecodeEnhancedPositionFromName } from "@azure-tools/datastore";
+import { BlameTree, stringify, Stringify, tryDecodeEnhancedPositionFromName } from "@azure-tools/datastore";
 import { AutorestError, AutorestWarning } from "@autorest/common";
 import { AutorestConfiguration } from "@autorest/configuration";
-import { From } from "linq-es2015";
 import { Suppressor } from "../pipeline/suppression";
 import { MessageEmitter } from "./message-emitter";
+import { LoggingSession } from "./logging-session";
+import { flatMap } from "lodash";
 
 export class AutorestCoreLogger {
   private suppressor: Suppressor;
 
-  public constructor(private config: AutorestConfiguration, private messageEmitter: MessageEmitter) {
+  public constructor(
+    private config: AutorestConfiguration,
+    private messageEmitter: MessageEmitter,
+    private asyncLogManager: LoggingSession,
+  ) {
     this.suppressor = new Suppressor(config);
   }
 
   public verbose(message: string) {
-    void this.message({
+    this.log({
       Channel: Channel.Verbose,
       Text: message,
     });
   }
 
   public info(message: string) {
-    void this.message({
+    this.log({
       Channel: Channel.Information,
       Text: message,
     });
   }
 
   public fatal(message: string) {
-    void this.message({
+    this.log({
       Channel: Channel.Fatal,
       Text: message,
     });
   }
 
   public trackWarning(error: AutorestWarning) {
-    void this.message({
+    this.log({
       Channel: Channel.Warning,
       Text: error.message,
       Source: error.source?.map((x) => ({ document: x.document, Position: x.position })),
@@ -44,7 +49,7 @@ export class AutorestCoreLogger {
   }
 
   public trackError(error: AutorestError) {
-    void this.message({
+    this.log({
       Channel: Channel.Error,
       Text: error.message,
       Source: error.source?.map((x) => ({ document: x.document, Position: x.position })),
@@ -52,7 +57,11 @@ export class AutorestCoreLogger {
     });
   }
 
-  public async message(m: Message) {
+  public log(message: Message) {
+    this.asyncLogManager.registerLog(() => this.sendMessageAsync(message));
+  }
+
+  private async sendMessageAsync(m: Message) {
     if (m.Channel === Channel.Debug && !this.config.debug) {
       return;
     }
@@ -64,35 +73,13 @@ export class AutorestCoreLogger {
     try {
       // update source locations to point to loaded Swagger
       if (m.Source && typeof m.Source.map === "function") {
-        const src = await this.handleMessageSource(m, m.Source);
-        m.Source = src;
-        // get friendly names
-        for (const source of src) {
-          if (source.Position) {
-            try {
-              source.document = this.messageEmitter.DataStore.ReadStrictSync(source.document).Description;
-            } catch {
-              // no worries
-            }
-          }
-        }
+        const sources = await this.resolveOriginalSources(m, m.Source);
+        m.Source = this.resolveOriginalDocumentNames(sources);
       }
 
       // set range (dummy)
       if (m.Source && typeof m.Source.map === "function") {
-        m.Range = m.Source.map((s) => {
-          const positionStart = s.Position;
-          const positionEnd = <sourceMap.Position>{
-            line: s.Position.line,
-            column: s.Position.column + (s.Position.length || 3),
-          };
-
-          return <Range>{
-            document: s.document,
-            start: positionStart,
-            end: positionEnd,
-          };
-        });
+        m.Range = resolveRanges(m.Source);
       }
 
       // filter
@@ -161,7 +148,7 @@ export class AutorestCoreLogger {
     }
   }
 
-  private async handleMessageSource(message: Message, source: SourceLocation[]) {
+  private async resolveOriginalSources(message: Message, source: SourceLocation[]) {
     const blameSources = source.map(async (s) => {
       let blameTree: BlameTree | null = null;
 
@@ -170,9 +157,9 @@ export class AutorestCoreLogger {
         let shouldComplain = false;
         while (blameTree === null) {
           try {
-            blameTree = await this.messageEmitter.DataStore.Blame(s.document, s.Position);
+            blameTree = await this.messageEmitter.DataStore.blame(s.document, s.Position);
             if (shouldComplain) {
-              await this.message({
+              await this.log({
                 Channel: Channel.Verbose,
                 Text: `\nDEVELOPER-WARNING: Path '${originalPath}' was corrected to ${JSON.stringify(
                   s.Position.path,
@@ -201,29 +188,50 @@ export class AutorestCoreLogger {
           }
         }
       } catch (e) {
-        /*
-  GS01: This should be restored when we go 'release'
-
-this.Message({
-  Channel: Channel.Warning,
-  Text: `Failed to blame ${JSON.stringify(s.Position)} in '${JSON.stringify(s.document)}' (${e})`,
-  Details: e
-});
-*/
+        this.log({
+          Channel: Channel.Debug,
+          Text: `Failed to blame ${JSON.stringify(s.Position)} in '${JSON.stringify(s.document)}' (${e})`,
+          Details: e,
+        });
         return [s];
       }
 
-      return blameTree.BlameLeafs().map(
-        (r) =>
-          <SourceLocation>{
-            document: r.source,
-            Position: { ...TryDecodeEnhancedPositionFromName(r.name), line: r.line, column: r.column },
-          },
-      );
+      return blameTree.getMappingLeafs().map((r) => ({
+        document: r.source,
+        Position: { ...tryDecodeEnhancedPositionFromName(r.name), line: r.line, column: r.column },
+      }));
     });
 
-    return From(await Promise.all(blameSources))
-      .SelectMany((x) => x)
-      .ToArray();
+    return flatMap(await Promise.all(blameSources));
   }
+
+  private resolveOriginalDocumentNames(sources: SourceLocation[]) {
+    return sources.map((source) => {
+      if (source.Position) {
+        try {
+          const document = this.messageEmitter.DataStore.readStrictSync(source.document).description;
+          return { ...source, document };
+        } catch {
+          // no worries
+        }
+      }
+      return source;
+    });
+  }
+}
+
+function resolveRanges(sources: SourceLocation[]): Range[] {
+  return sources.map((source) => {
+    const positionStart = source.Position;
+    const positionEnd = <sourceMap.Position>{
+      line: source.Position.line,
+      column: source.Position.column + (source.Position.length || 3),
+    };
+
+    return {
+      document: source.document,
+      start: positionStart,
+      end: positionEnd,
+    };
+  });
 }

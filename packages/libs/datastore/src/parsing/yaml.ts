@@ -155,7 +155,7 @@ export function ReplaceNode(
 
 export async function ResolvePath(yamlFile: DataHandle, jsonPath: JsonPath): Promise<EnhancedPosition> {
   // let node = (await (await yamlFile.ReadMetadata).resolvePathCache)[stringify(jsonPath)];
-  const yamlAst = await yamlFile.ReadYamlAst();
+  const yamlAst = await yamlFile.readYamlAst();
   const node = ResolveRelativeNode(yamlAst, yamlAst, jsonPath);
   return CreateEnhancedPosition(yamlFile, jsonPath, node);
 }

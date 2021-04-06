@@ -13,7 +13,7 @@ import { areSimilar } from "@azure-tools/object-comparison";
 import { PipelinePlugin } from "../common";
 import { maximum, toSemver } from "@azure-tools/codegen";
 import compareVersions from "compare-versions";
-import { AutorestContext } from "../../configuration";
+import { AutorestContext } from "../../context";
 
 /**
  * Prepares an OpenAPI document for the generation-2 code generators

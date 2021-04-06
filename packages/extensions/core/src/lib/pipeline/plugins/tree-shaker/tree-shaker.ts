@@ -11,7 +11,7 @@ import {
   JsonPath,
   Source,
 } from "@azure-tools/datastore";
-import { AutorestContext } from "../../../configuration";
+import { AutorestContext } from "../../../context";
 import { PipelinePlugin } from "../../common";
 import { values, length } from "@azure-tools/linq";
 import { createHash } from "crypto";
