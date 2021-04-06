@@ -1,9 +1,7 @@
-import type { CompilerHost } from "@azure-tools/adl";
-import { QuickDataSource } from "@azure-tools/datastore";
+import { CompilerHost, createProgram } from "@azure-tools/adl";
 import { readdir, readFile, realpath, stat } from "fs/promises";
 import { join, resolve } from "path";
 import { pathToFileURL } from "url";
-import { PipelinePlugin } from "../../common";
 
 export function createAdlHost(): CompilerHost {
   return {
@@ -26,22 +24,10 @@ export function createAdlHost(): CompilerHost {
 }
 
 export async function compileAdl(entrypoint: string) {
-  const { createProgram } = await import("@azure-tools/adl");
-
   const program = await createProgram(createAdlHost(), {
     mainFile: entrypoint,
     noEmit: true,
   });
   console.error("Pr", program);
   return [];
-}
-
-export function createAdlCompilerPlugin(): PipelinePlugin {
-  return async (context, input, sink) => {
-    // Todo-Tim fail if multiple.
-    const entrypoint = context.config.inputFileUris[0];
-    const result = await compileAdl(entrypoint);
-    console.error("Result", result);
-    return new QuickDataSource([]);
-  };
 }

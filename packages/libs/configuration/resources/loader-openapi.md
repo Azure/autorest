@@ -63,23 +63,6 @@ pipeline:
 ```
 
 ```yaml $(adl)
-pipeline:
-  adl/adl-compiler:
-    output-artifact: swagger-document
-    scope: perform-load
-
-  openapi-document/openapi-document-converter:
-    input: adl/adl-compiler
-
-  swagger-document/loader-swagger:
-    null: true
-
-  openapi-document/loader-openapi:
-    null: true
-
-  openapi-document/individual/identity:
-    null: true
-
-  swagger-document/identity:
-    null: true
+use-extension:
+  "@autorest/adl": C:/dev/azsdk/autorest/packages/extensions/adl
 ```
