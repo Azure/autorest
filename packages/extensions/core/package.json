@@ -95,5 +95,8 @@
     "webpack-node-externals": "~2.5.2",
     "webpack": "~5.18.0",
     "yaml-ast-parser": "0.0.43"
+  },
+  "dependencies": {
+    "@azure-tools/adl": "~0.8.0"
   }
 }
