@@ -1,4 +1,4 @@
-import { CompilerHost, createProgram } from "@azure-tools/adl";
+import type { CompilerHost } from "@azure-tools/adl";
 import { QuickDataSource } from "@azure-tools/datastore";
 import { readdir, readFile, realpath, stat } from "fs/promises";
 import { join, resolve } from "path";
@@ -26,6 +26,8 @@ export function createAdlHost(): CompilerHost {
 }
 
 export async function compileAdl(entrypoint: string) {
+  const { createProgram } = await import("@azure-tools/adl");
+
   const program = await createProgram(createAdlHost(), {
     mainFile: entrypoint,
     noEmit: true,
