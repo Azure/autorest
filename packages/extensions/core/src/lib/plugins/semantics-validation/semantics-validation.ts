@@ -29,7 +29,7 @@ export function validateDiscriminator(spec: oai3.Model): SemanticError[] {
           errors.push({
             code: SemanticErrorCodes.DiscriminatorNotRequired,
             params: { discriminator },
-            message: "discriminator must be a required property.",
+            message: "Discriminator must be a required property.",
             path: ["components", "schemas", name],
           });
         }
