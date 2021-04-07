@@ -2,6 +2,73 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.2.4",
+      "tag": "@autorest/core_v3.2.4",
+      "date": "Fri, 02 Apr 2021 15:18:00 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Update** @autorest/configuration to take fix for broken interactive plugin"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/configuration\" from `~1.2.1` to `~1.2.2`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.2.2",
+      "tag": "@autorest/core_v3.2.2",
+      "date": "Thu, 01 Apr 2021 15:46:41 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @azure-tools/uri version to ~3.1.1"
+          },
+          {
+            "comment": "**Cleanup** Migrated use of require -> es6 imports"
+          },
+          {
+            "comment": "**Added** configure @azure/logger according to debug/verbose flags"
+          },
+          {
+            "comment": "**Added** New normalize-identity plugin to support multi openapi3 files output"
+          },
+          {
+            "comment": "**Added** New config/flag `--output-converted-oai3` to output openapi3 files right after conversion from Swager 2.0"
+          },
+          {
+            "comment": "Update to simplified configuration loader interface"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.1.1` to `~1.1.2`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/configuration\" from `~1.2.0` to `~1.2.1`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/schemas\" from `~1.1.0` to `~1.1.1`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.2.0` to `~0.2.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.2.1` to `~4.2.2`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/extension\" from `~3.2.4` to `~3.2.5`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/oai2-to-oai3\" from `~4.2.278` to `~4.2.279`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.2.1",
       "tag": "@autorest/core_v3.2.1",
       "date": "Tue, 16 Mar 2021 19:28:18 GMT",

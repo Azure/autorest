@@ -12,7 +12,7 @@ import {
 import { clone, Dictionary, values } from "@azure-tools/linq";
 import { areSimilar } from "@azure-tools/object-comparison";
 import * as oai from "@azure-tools/openapi";
-import { AutorestContext } from "../../configuration";
+import { AutorestContext } from "../../context";
 import { PipelinePlugin } from "../common";
 import { toSemver, maximum, gt, lt } from "@azure-tools/codegen";
 import { Channel } from "../../message";

@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/oai2-to-oai3
 
-This log was last generated on Tue, 16 Mar 2021 15:52:56 GMT and should not be manually modified.
+This log was last generated on Thu, 01 Apr 2021 15:46:42 GMT and should not be manually modified.
+
+## 4.2.279
+Thu, 01 Apr 2021 15:46:42 GMT
+
+### Patches
+
+- **Fix** enum with $ref inside not being processed
 
 ## 4.2.278
 Tue, 16 Mar 2021 15:52:56 GMT

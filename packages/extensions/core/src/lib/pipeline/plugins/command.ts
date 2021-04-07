@@ -1,5 +1,5 @@
 import { PipelinePlugin } from "../common";
-import { AutorestContext } from "../../configuration";
+import { AutorestContext } from "../../context";
 import { DataSource, DataSink, DataHandle, QuickDataSource } from "@azure-tools/datastore";
 import { execute, cmdlineToArray } from "@azure-tools/codegen";
 import { FileUriToPath } from "@azure-tools/uri";

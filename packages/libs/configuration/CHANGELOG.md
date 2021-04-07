@@ -1,6 +1,21 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Tue, 16 Mar 2021 15:52:56 GMT and should not be manually modified.
+This log was last generated on Fri, 02 Apr 2021 15:18:00 GMT and should not be manually modified.
+
+## 1.2.2
+Fri, 02 Apr 2021 15:18:00 GMT
+
+### Patches
+
+- **Fix** issue where getting nested config wouldn't copy the raw config and cause issue
+
+## 1.2.1
+Thu, 01 Apr 2021 15:46:41 GMT
+
+### Patches
+
+- Bump @azure-tools/uri version to ~3.1.1
+- Simplify configuration loading interface
 
 ## 1.2.0
 Tue, 16 Mar 2021 15:52:56 GMT

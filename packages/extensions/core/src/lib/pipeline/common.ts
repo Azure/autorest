@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { DataHandle, DataSink, DataSource, QuickDataSource } from "@azure-tools/datastore";
-import { AutorestContext } from "../configuration";
+import { AutorestContext } from "../context";
 import { length } from "@azure-tools/linq";
 
 export type PipelinePlugin = (config: AutorestContext, input: DataSource, sink: DataSink) => Promise<DataSource>;

@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/extension
 
-This log was last generated on Tue, 16 Mar 2021 15:52:56 GMT and should not be manually modified.
+This log was last generated on Thu, 01 Apr 2021 15:46:41 GMT and should not be manually modified.
+
+## 3.2.5
+Thu, 01 Apr 2021 15:46:41 GMT
+
+### Patches
+
+- **Add** Logging when fail to fetch pacakge metadata
 
 ## 3.2.4
 Tue, 16 Mar 2021 15:52:56 GMT

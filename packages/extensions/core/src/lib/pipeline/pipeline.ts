@@ -16,7 +16,7 @@ import {
   PipeState,
   mergePipeStates,
 } from "@azure-tools/datastore";
-import { AutorestContext, getExtension } from "../configuration";
+import { AutorestContext, getExtension } from "../context";
 import { Channel } from "../message";
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
 import { PipelinePlugin } from "./common";

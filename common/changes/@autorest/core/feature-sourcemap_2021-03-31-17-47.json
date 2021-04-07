@@ -2,8 +2,8 @@
   "changes": [
     {
       "packageName": "@autorest/core",
-      "comment": "Bump @azure-tools/uri version to ~3.1.1",
-      "type": "patch"
+      "comment": "**Feature** Add sourcemap support for errors providing original location of problem",
+      "type": "minor"
     }
   ],
   "packageName": "@autorest/core",

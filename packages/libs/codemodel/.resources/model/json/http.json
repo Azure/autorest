@@ -561,10 +561,10 @@
         },
         "knownMediaType": {
           "$ref": "./enums.json#/definitions/KnownMediaType",
-          "description": "canonical response type (ie, 'json')"
+          "description": "canonical response type (ie, 'json')."
         },
         "mediaTypes": {
-          "description": "the possible media types that this response MUST match one of",
+          "description": "The possible media types that this response MUST match one of.",
           "type": "array",
           "items": {
             "type": "string"
@@ -588,8 +588,6 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "knownMediaType",
-        "mediaTypes",
         "statusCodes"
       ],
       "allOf": [
@@ -613,8 +611,6 @@
       "additionalProperties": false,
       "required": [
         "binary",
-        "knownMediaType",
-        "mediaTypes",
         "statusCodes"
       ],
       "allOf": [

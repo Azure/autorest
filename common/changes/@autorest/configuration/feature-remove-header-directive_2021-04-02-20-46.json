@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@autorest/configuration",
-      "comment": "Simplify configuration loading interface",
+      "comment": "**Added** remove-parameter built-in directive",
       "type": "patch"
     }
   ],

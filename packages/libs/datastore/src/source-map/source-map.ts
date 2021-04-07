@@ -33,7 +33,8 @@ export interface Mapping {
 // convention: <original name (contains no `nameWithPathSeparator`)>\n(<path>)
 const enhancedPositionSeparator = "\n\n(";
 const enhancedPositionEndMark = ")";
-export function TryDecodeEnhancedPositionFromName(name: string | undefined): EnhancedPosition | undefined {
+
+export function tryDecodeEnhancedPositionFromName(name: string | undefined): EnhancedPosition | undefined {
   try {
     if (!name) {
       return undefined;
@@ -49,7 +50,7 @@ export function TryDecodeEnhancedPositionFromName(name: string | undefined): Enh
   }
 }
 
-export function EncodeEnhancedPositionInName(name: string | undefined, pos: EnhancedPosition): string {
+export function encodeEnhancedPositionInName(name: string | undefined, pos: EnhancedPosition): string {
   if (name && name.indexOf(enhancedPositionSeparator) !== -1) {
     name = name.split(enhancedPositionSeparator)[0];
   }
@@ -68,8 +69,8 @@ export async function CompilePosition(position: SmartPosition, yamlFile: DataHan
   return <EnhancedPosition>position;
 }
 
-export async function Compile(
-  mappings: Array<Mapping>,
+export async function compileMapping(
+  mappings: Mapping[],
   target: SourceMapGenerator,
   yamlFiles: Array<DataHandle> = [],
 ): Promise<void> {
@@ -95,7 +96,7 @@ export async function Compile(
     target.addMapping({
       generated: compiledGenerated,
       original: compiledOriginal,
-      name: EncodeEnhancedPositionInName(mapping.name, compiledOriginal),
+      name: encodeEnhancedPositionInName(mapping.name, compiledOriginal),
       source: mapping.source,
     });
   }

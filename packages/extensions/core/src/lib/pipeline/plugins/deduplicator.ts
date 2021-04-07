@@ -5,7 +5,7 @@
 
 import { DataHandle, DataSink, DataSource, QuickDataSource } from "@azure-tools/datastore";
 import { Deduplicator } from "@azure-tools/deduplication";
-import { AutorestContext } from "../../configuration";
+import { AutorestContext } from "../../context";
 import { PipelinePlugin } from "../common";
 import { values } from "@azure-tools/linq";
 

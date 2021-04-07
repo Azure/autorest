@@ -49,7 +49,7 @@ const generate = async (additionalConfig: any): Promise<oai3.Model> => {
   if (!success) {
     // eslint-disable-next-line no-console
     console.log("Messages", messages);
-    fail("Autorest didn't complete with success.");
+    throw new Error("Autorest didn't complete with success.");
   }
 
   assert(resolvedDocument);
@@ -79,6 +79,12 @@ const findOperation = (spec: oai3.Model, name: string): oai3.HttpOperation | und
     }
   }
   return undefined;
+};
+
+const findParameter = (spec: oai3.Model, name: string): oai3.Parameter | undefined => {
+  return Object.values((spec.components?.parameters as Record<string, oai3.Parameter>) ?? [])
+    .filter((x) => !("$ref" in x))
+    .find((parameter: oai3.Parameter) => parameter.name === name);
 };
 
 describe("Modifiers", () => {
@@ -187,5 +193,33 @@ describe("Modifiers", () => {
     const model = findModel(code, "Cowbell");
     expect(model?.properties?.name).toBe(undefined);
     expect(model?.properties?.firstName).toBeDefined();
+  });
+
+  it("remove a header parameter", async () => {
+    const code = await generate({
+      directive: {
+        "where-operation": "Cowbell_Get",
+        "remove-parameter": {
+          in: "header",
+          name: "myHeader",
+        },
+      },
+    });
+    expect(findParameter(code, "myHeader")).toEqual(undefined);
+    expect(findParameter(code, "id")).toBeDefined();
+  });
+
+  it("remove a query parameter", async () => {
+    const code = await generate({
+      directive: {
+        "where": "$.paths..*",
+        "remove-parameter": {
+          in: "query",
+          name: "id",
+        },
+      },
+    });
+    expect(findParameter(code, "id")).toEqual(undefined);
+    expect(findParameter(code, "myHeader")).toBeDefined();
   });
 });

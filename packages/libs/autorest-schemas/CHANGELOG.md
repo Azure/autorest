@@ -1,6 +1,13 @@
 # Change Log - @autorest/schemas
 
-This log was last generated on Tue, 16 Mar 2021 15:52:56 GMT and should not be manually modified.
+This log was last generated on Thu, 01 Apr 2021 15:46:41 GMT and should not be manually modified.
+
+## 1.1.1
+Thu, 01 Apr 2021 15:46:41 GMT
+
+### Patches
+
+- **Fix**: OpenAPI3 Validation of additional properties support boolean
 
 ## 1.1.0
 Tue, 16 Mar 2021 15:52:56 GMT

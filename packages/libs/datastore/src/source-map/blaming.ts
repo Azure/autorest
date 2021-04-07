@@ -5,40 +5,42 @@
 
 import { values } from "@azure-tools/linq";
 import { MappedPosition } from "source-map";
-import { DataStore } from "../data-store";
-import { JsonPath } from "../json-path/json-path";
-import { EncodeEnhancedPositionInName, TryDecodeEnhancedPositionFromName } from "./source-map";
+import { DataStore } from "../data-store/data-store";
+import { encodeEnhancedPositionInName, tryDecodeEnhancedPositionFromName } from "./source-map";
 
+/**
+ * Represent a source mapping tree.
+ */
 export class BlameTree {
-  public static async Create(dataStore: DataStore, position: MappedPosition): Promise<BlameTree> {
-    const data = dataStore.ReadStrictSync(position.source);
-    const blames = await data.Blame(position);
+  public static async create(dataStore: DataStore, position: MappedPosition): Promise<BlameTree> {
+    const data = dataStore.readStrictSync(position.source);
+    const blames = await data.blame(position);
 
     // propagate smart position
-    const enhanced = TryDecodeEnhancedPositionFromName(position.name);
+    const enhanced = tryDecodeEnhancedPositionFromName(position.name);
     if (enhanced !== undefined) {
       for (const blame of blames) {
-        blame.name = EncodeEnhancedPositionInName(blame.name, {
+        blame.name = encodeEnhancedPositionInName(blame.name, {
           ...enhanced,
-          ...TryDecodeEnhancedPositionFromName(blame.name),
+          ...tryDecodeEnhancedPositionFromName(blame.name),
         });
       }
     }
 
-    const s = new Array<BlameTree>();
+    const children = [];
     for (const pos of blames) {
-      s.push(await BlameTree.Create(dataStore, pos));
+      children.push(await BlameTree.create(dataStore, pos));
     }
 
-    return new BlameTree(position, s);
+    return new BlameTree(position, children);
   }
 
-  private constructor(
-    public readonly node: MappedPosition & { path?: JsonPath },
-    public readonly blaming: Array<BlameTree>,
-  ) {}
+  private constructor(public readonly node: MappedPosition, public readonly blaming: BlameTree[]) {}
 
-  public BlameLeafs(): Array<MappedPosition> {
+  /**
+   * @returns List of mapped positions at the leaf of the tree.(i.e. the original file(s) posistions)
+   */
+  public getMappingLeafs(): Array<MappedPosition> {
     const result: Array<MappedPosition> = [];
 
     const todos: Array<BlameTree> = [this];

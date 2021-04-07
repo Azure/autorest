@@ -1,11 +1,11 @@
 {
   "changes": [
     {
-      "packageName": "@azure-tools/datastore",
+      "packageName": "@autorest/test-utils",
       "comment": "",
       "type": "none"
     }
   ],
-  "packageName": "@azure-tools/datastore",
+  "packageName": "@autorest/test-utils",
   "email": "tiguerin@microsoft.com"
 }

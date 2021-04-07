@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AutorestContextLoader, AutorestContext, MessageEmitter } from "./configuration";
+import { AutorestContextLoader, AutorestContext, MessageEmitter, AutorestLoggingSession } from "./context";
 import { EventEmitter, IEvent } from "./events";
 import { Exception } from "@autorest/common";
 import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import { runPipeline } from "./pipeline/pipeline";
-export { AutorestContext } from "./configuration";
+export { AutorestContext } from "./context";
 import { isConfigurationDocument } from "@autorest/configuration";
 import { homedir } from "os";
 import { Artifact } from "./artifact";
@@ -150,6 +150,9 @@ export class AutoRest extends EventEmitter {
           new Promise((_, rej) => view.CancellationToken.onCancellationRequested(() => rej("Cancellation requested."))),
         ]);
 
+        // Wait for all logs to have been sent before shutting down.
+        await AutorestLoggingSession.waitForMessages();
+
         // finished -- return status (if cancelled, returns false.)
         this.Finished.Dispatch(!view.CancellationTokenSource.token.isCancellationRequested);
 
@@ -172,7 +175,8 @@ export class AutoRest extends EventEmitter {
           e = false;
         }
         this.Message.Dispatch(message);
-
+        // Wait for all logs to have been sent before shutting down.
+        await AutorestLoggingSession.waitForMessages();
         this.Finished.Dispatch(e);
         if (view) {
           view.messageEmitter.removeAllListeners();

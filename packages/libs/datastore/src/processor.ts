@@ -2,6 +2,7 @@ import { clone, values } from "@azure-tools/linq";
 import { Mapping } from "source-map";
 import { ProxyObject } from "./graph-builder";
 import { createGraphProxy, Node, ProxyNode, visit } from "./main";
+import { parseJsonPointer, serializeJsonPointer } from "./json-pointer";
 
 export interface AnyObject {
   [key: string]: any;
@@ -67,10 +68,10 @@ export class Transformer<TInput extends object = AnyObject, TOutput extends obje
     member: K,
     pointer: string,
   ): AnyObject {
-    const value = <ProxyObject<TParent[K]>>(
-      (<any>createGraphProxy(this.currentInputFilename, `${this.targetPointers.get(target)}/${member}`, this.mappings))
-    );
-    this.targetPointers.set(value, `${this.targetPointers.get(target)}/${member}`);
+    const parentTargetPointer = parseJsonPointer(this.targetPointers.get(target) ?? "");
+    const targetPointer = serializeJsonPointer([...parentTargetPointer, member as string]);
+    const value = <ProxyObject<TParent[K]>>createGraphProxy(this.currentInputFilename, targetPointer, this.mappings);
+    this.targetPointers.set(value, targetPointer);
     target[member] = {
       value: <TParent[typeof member]>value,
       filename: this.currentInputFilename,
@@ -85,17 +86,13 @@ export class Transformer<TInput extends object = AnyObject, TOutput extends obje
     member: K,
     pointer: string,
   ) {
+    const parentTargetPointer = parseJsonPointer(this.targetPointers.get(target) ?? "");
+    const targetPointer = serializeJsonPointer([...parentTargetPointer, member as string]);
+
     const value = <ProxyObject<TParent[K]>>(
-      (<any>(
-        createGraphProxy(
-          this.currentInputFilename,
-          `${this.targetPointers.get(target)}/${member}`,
-          this.mappings,
-          new Array<any>(),
-        )
-      ))
+      createGraphProxy(this.currentInputFilename, targetPointer, this.mappings, new Array<any>())
     );
-    this.targetPointers.set(value, `${this.targetPointers.get(target)}/${member}`);
+    this.targetPointers.set(value, targetPointer);
     target[member] = {
       value: <TParent[typeof member]>value,
       filename: this.currentInputFilename,

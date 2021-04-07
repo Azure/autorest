@@ -2,8 +2,8 @@
   "changes": [
     {
       "packageName": "@azure-tools/datastore",
-      "comment": "",
-      "type": "none"
+      "comment": "**Added** sourcemap support",
+      "type": "minor"
     }
   ],
   "packageName": "@azure-tools/datastore",

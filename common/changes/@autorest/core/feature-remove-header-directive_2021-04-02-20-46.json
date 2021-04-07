@@ -2,8 +2,8 @@
   "changes": [
     {
       "packageName": "@autorest/core",
-      "comment": "Update to simplified configuration loader interface",
-      "type": "patch"
+      "comment": "",
+      "type": "none"
     }
   ],
   "packageName": "@autorest/core",

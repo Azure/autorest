@@ -1,6 +1,6 @@
 import { createDataHandle } from "@autorest/test-utils";
 import { CancellationTokenSource, DataHandle, DataSink, DataStore, QuickDataSource } from "@azure-tools/datastore";
-import { AutorestContext } from "../../../configuration";
+import { AutorestContext } from "../../../context";
 import { createIdentityResetPlugin } from "./reset-identity-plugin";
 
 describe("ResetIdentityPlugin", () => {

@@ -2,6 +2,44 @@
   "name": "@autorest/configuration",
   "entries": [
     {
+      "version": "1.2.2",
+      "tag": "@autorest/configuration_v1.2.2",
+      "date": "Fri, 02 Apr 2021 15:18:00 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** issue where getting nested config wouldn't copy the raw config and cause issue"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.2.1",
+      "tag": "@autorest/configuration_v1.2.1",
+      "date": "Thu, 01 Apr 2021 15:46:41 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @azure-tools/uri version to ~3.1.1"
+          },
+          {
+            "comment": "Simplify configuration loading interface"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.1.1` to `~1.1.2`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.2.1` to `~4.2.2`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/extension\" from `~3.2.4` to `~3.2.5`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.2.0",
       "tag": "@autorest/configuration_v1.2.0",
       "date": "Tue, 16 Mar 2021 15:52:56 GMT",

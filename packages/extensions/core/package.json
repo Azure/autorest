@@ -1,6 +1,6 @@
 {
   "name": "@autorest/core",
-  "version": "3.2.1",
+  "version": "3.2.4",
   "description": "AutoRest core module",
   "engines": {
     "node": ">=10.13.0"
@@ -39,18 +39,18 @@
   },
   "typings": "./dist/exports.d.ts",
   "devDependencies": {
-    "@autorest/common": "~1.1.1",
-    "@autorest/configuration": "~1.2.0",
-    "@autorest/schemas": "~1.1.0",
-    "@autorest/test-utils": "~0.2.0",
+    "@autorest/common": "~1.1.2",
+    "@autorest/configuration": "~1.2.2",
+    "@autorest/schemas": "~1.1.1",
+    "@autorest/test-utils": "~0.2.1",
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/codegen": "~2.5.294",
-    "@azure-tools/datastore": "~4.2.1",
+    "@azure-tools/datastore": "~4.2.2",
     "@azure-tools/deduplication": "~3.0.268",
-    "@azure-tools/extension": "~3.2.4",
+    "@azure-tools/extension": "~3.2.5",
     "@azure-tools/jsonschema": "~1.0.0",
     "@azure-tools/linq": "~3.1.0",
-    "@azure-tools/oai2-to-oai3": "~4.2.278",
+    "@azure-tools/oai2-to-oai3": "~4.2.279",
     "@azure-tools/object-comparison": "~3.0.0",
     "@azure-tools/openapi": "~3.1.1",
     "@azure-tools/tasks": "~3.0.0",
