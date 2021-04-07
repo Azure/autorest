@@ -6,7 +6,7 @@ import {
   getSubsetSchema,
   getSupersetSchema,
   SubsetSchemaDeduplicator,
-} from "../src/lib/pipeline/plugins/subset-schemas-deduplicator";
+} from "../src/lib/plugins/subset-schemas-deduplicator";
 
 const resources = `${__dirname}../../../test/resources/subset-deduplication`;
 
@@ -15,7 +15,7 @@ const skipList = ["description", "enum", "readOnly", "required"];
 const expandableFieldsList = ["properties", "allOf"];
 
 describe("SubsetDeduplication", () => {
-  xit("subset check function", async () => {
+  it.skip("subset check function", async () => {
     const input = JSON.parse(await aio.readFile(`${resources}/schema1.json`));
     const input2 = JSON.parse(await aio.readFile(`${resources}/schema2.json`));
     const input3 = JSON.parse(await aio.readFile(`${resources}/schema3.json`));
@@ -29,7 +29,7 @@ describe("SubsetDeduplication", () => {
     assert.deepStrictEqual(result2, expected2);
   });
 
-  xit("superset schema construction", async () => {
+  it.skip("superset schema construction", async () => {
     const input = JSON.parse(await aio.readFile(`${resources}/schema1.json`));
     const input2 = JSON.parse(await aio.readFile(`${resources}/schema2.json`));
     const checkResult1 = JSON.parse(await aio.readFile(`${resources}/expected-check-result1.json`));
@@ -39,7 +39,7 @@ describe("SubsetDeduplication", () => {
     assert.deepStrictEqual(result1, updatedSchema2);
   });
 
-  xit("subset schema construction", async () => {
+  it.skip("subset schema construction", async () => {
     const input = JSON.parse(await aio.readFile(`${resources}/schema1.json`));
     const input2 = JSON.parse(await aio.readFile(`${resources}/schema2.json`));
     const checkResult1 = JSON.parse(await aio.readFile(`${resources}/expected-check-result1.json`));
@@ -49,7 +49,7 @@ describe("SubsetDeduplication", () => {
     assert.deepStrictEqual(result1, updatedSchema2);
   });
 
-  xit("subset deduplication in spec", async () => {
+  it.skip("subset deduplication in spec", async () => {
     const inputUri = "mem://input1.json";
     const outputUri = "mem://output1.json";
 

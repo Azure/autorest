@@ -1,4 +1,4 @@
-import { ComponentsCleaner } from "../../../src/lib/pipeline/plugins/components-cleaner";
+import { ComponentsCleaner } from "../../../src/lib/plugins/components-cleaner";
 import fs from "fs";
 import { CancellationTokenSource, DataStore, MemoryFileSystem } from "@azure-tools/datastore";
 import assert from "assert";

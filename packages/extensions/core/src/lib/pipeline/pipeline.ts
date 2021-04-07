@@ -19,48 +19,14 @@ import {
 import { AutorestContext, getExtension } from "../context";
 import { Channel } from "../message";
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
-import { PipelinePlugin } from "./common";
-import { createComponentModifierPlugin } from "./component-modifier";
-import { createCSharpReflectApiVersionPlugin } from "./metadata-generation";
 import { AutoRestExtension } from "./plugin-endpoint";
-import { createCommonmarkProcessorPlugin } from "./plugins/commonmark";
-import { createAllOfCleaner } from "./plugins/allof-cleaner";
-import { createCommandPlugin } from "./plugins/command";
 
-import { createComponentKeyRenamerPlugin } from "./plugins/component-key-renamer";
-import { createComponentsCleanerPlugin } from "./plugins/components-cleaner";
-import { createSwaggerToOpenApi3Plugin } from "./plugins/conversion";
-import { createDeduplicatorPlugin } from "./plugins/deduplicator";
-import { createArtifactEmitterPlugin } from "./plugins/emitter";
-import { createEnumDeduplicator } from "./plugins/enum-deduplication";
-import { createExternalPlugin } from "./plugins/external";
-import { createHelpPlugin } from "./plugins/help";
-import {
-  createIdentityPlugin,
-  createIdentityResetPlugin,
-  createNormalizeIdentityPlugin,
-  createNullPlugin,
-} from "./plugins/identity";
-import { createOpenApiLoaderPlugin, createSwaggerLoaderPlugin } from "./plugins/loaders";
-import { createMultiApiMergerPlugin } from "./plugins/merger";
-import { createNewComposerPlugin } from "./plugins/new-composer";
-import { createProfileFilterPlugin } from "./plugins/profile-filter";
-import { createQuickCheckPlugin } from "./plugins/quick-check";
-import { subsetSchemaDeduplicatorPlugin } from "./plugins/subset-schemas-deduplicator";
-import {
-  createImmediateTransformerPlugin,
-  createTextTransformerPlugin,
-  createTransformerPlugin,
-  createGraphTransformerPlugin,
-} from "./plugins/transformer";
-import { createTreeShakerPlugin } from "./plugins/tree-shaker/tree-shaker";
-import { createApiVersionParameterHandlerPlugin } from "./plugins/version-param-handler";
-import { createJsonToYamlPlugin, createYamlToJsonPlugin } from "./plugins/yaml-and-json";
-import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from "./plugins/schema-validation";
+import { createArtifactEmitterPlugin } from "../plugins/emitter";
+import { createExternalPlugin } from "../plugins/external";
 import { createHash } from "crypto";
 import { isCached, readCache, writeCache } from "./pipeline-cache";
 import { values } from "@azure-tools/linq";
-import { createOpenAPIStatsCollectorPlugin } from "./plugins/openapi-stats-collector";
+import { PLUGIN_MAP } from "../plugins";
 
 const safeEval = createSandbox();
 
@@ -220,70 +186,14 @@ function isDrainRequired(p: PipelineNode) {
 
 export async function runPipeline(configView: AutorestContext, fileSystem: IFileSystem): Promise<void> {
   // built-in plugins
-  const plugins: { [name: string]: PipelinePlugin } = {
-    "help": createHelpPlugin(),
-    "identity": createIdentityPlugin(),
-    "null": createNullPlugin(),
-    "reset-identity": createIdentityResetPlugin(),
-    "normalize-identity": createNormalizeIdentityPlugin(),
-    "loader-swagger": createSwaggerLoaderPlugin(),
-    "loader-openapi": createOpenApiLoaderPlugin(),
-    "openapi-stats-collector": createOpenAPIStatsCollectorPlugin(),
-    "transform": createTransformerPlugin(),
-    "text-transform": createTextTransformerPlugin(),
-    "new-transform": createGraphTransformerPlugin(),
-    "transform-immediate": createImmediateTransformerPlugin(),
-    "compose": createNewComposerPlugin(),
-    "schema-validator-openapi": createOpenApiSchemaValidatorPlugin(),
-    "schema-validator-swagger": createSwaggerSchemaValidatorPlugin(),
-    // TODO: replace with OAV again
-    "semantic-validator": createIdentityPlugin(),
-    "openapi-document-converter": createSwaggerToOpenApi3Plugin(),
-    "component-modifiers": createComponentModifierPlugin(),
-    "yaml2jsonx": createYamlToJsonPlugin(),
-    "jsonx2yaml": createJsonToYamlPlugin(),
-    "reflect-api-versions-cs": createCSharpReflectApiVersionPlugin(),
-    "commonmarker": createCommonmarkProcessorPlugin(),
-    "profile-definition-emitter": createArtifactEmitterPlugin(),
-    "emitter": createArtifactEmitterPlugin(),
-    "pipeline-emitter": createArtifactEmitterPlugin(
-      async () =>
-        new QuickDataSource([
-          await configView.DataStore.getDataSink().writeObject("pipeline", pipeline.pipeline, ["fix-me-3"], "pipeline"),
-        ]),
-    ),
-    "configuration-emitter": createArtifactEmitterPlugin(
-      async () =>
-        new QuickDataSource([
-          await configView.DataStore.getDataSink().writeObject(
-            "configuration",
-            configView.config.raw,
-            ["fix-me-4"],
-            "configuration",
-          ),
-        ]),
-    ),
-    "tree-shaker": createTreeShakerPlugin(),
-    "enum-deduplicator": createEnumDeduplicator(),
-    "quick-check": createQuickCheckPlugin(),
-    "model-deduplicator": createDeduplicatorPlugin(),
-    "subset-reducer": subsetSchemaDeduplicatorPlugin(),
-    "multi-api-merger": createMultiApiMergerPlugin(),
-    "components-cleaner": createComponentsCleanerPlugin(),
-    "component-key-renamer": createComponentKeyRenamerPlugin(),
-    "api-version-parameter-handler": createApiVersionParameterHandlerPlugin(),
-    "profile-filter": createProfileFilterPlugin(),
-    "allof-cleaner": createAllOfCleaner(),
-    "command": createCommandPlugin(),
-  };
 
   // dynamically loaded, auto-discovered plugins
   const __extensionExtension: { [pluginName: string]: AutoRestExtension } = {};
   for (const useExtensionQualifiedName of configView.GetEntry("used-extension") || []) {
     const extension = await getExtension(useExtensionQualifiedName);
     for (const plugin of await extension.GetPluginNames(configView.CancellationToken)) {
-      if (!plugins[plugin]) {
-        plugins[plugin] = createExternalPlugin(extension, plugin);
+      if (!PLUGIN_MAP[plugin]) {
+        PLUGIN_MAP[plugin] = createExternalPlugin(extension, plugin);
         __extensionExtension[plugin] = extension;
       }
     }
@@ -326,6 +236,13 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
   const pipeline = buildPipeline(configView);
   const times = !!configView.config["timestamp"];
   const tasks: { [name: string]: Promise<DataSource> } = {};
+
+  const pipelineEmitterPlugin = createArtifactEmitterPlugin(
+    async (context) =>
+      new QuickDataSource([
+        await context.DataStore.getDataSink().writeObject("pipeline", pipeline.pipeline, ["fix-me-3"], "pipeline"),
+      ]),
+  );
 
   const ScheduleNode: (nodeName: string) => Promise<DataSource> = async (nodeName) => {
     const node = pipeline.pipeline[nodeName];
@@ -374,7 +291,13 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     const usenull =
       configEntry?.["null"] === true || values(configView.GetEntry("null")).any((each) => each === pluginName);
 
-    const plugin = usenull ? plugins.null : passthru ? plugins.identity : plugins[pluginName];
+    const plugin = usenull
+      ? PLUGIN_MAP.null
+      : passthru
+      ? PLUGIN_MAP.identity
+      : pluginName === "pipeline-emitter"
+      ? pipelineEmitterPlugin
+      : PLUGIN_MAP[pluginName];
 
     if (!plugin) {
       throw new Error(`Plugin '${pluginName}' not found.`);

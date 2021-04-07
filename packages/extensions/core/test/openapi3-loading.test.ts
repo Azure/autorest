@@ -1,7 +1,7 @@
 import assert from "assert";
 import { AutoRest } from "../src/lib/autorest-core";
 import { RealFileSystem } from "@azure-tools/datastore";
-import { LoadLiterateOpenAPIs } from "../src/lib/pipeline/plugins/loaders";
+import { LoadLiterateOpenAPIs } from "../src/lib/plugins/loaders";
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
 import { AppRoot } from "../src/lib/constants";
 

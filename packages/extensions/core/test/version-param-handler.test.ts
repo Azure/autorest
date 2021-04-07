@@ -1,13 +1,13 @@
 import * as aio from "@azure-tools/async-io";
 import * as datastore from "@azure-tools/datastore";
 import assert from "assert";
-import { ApiVersionParameterHandler } from "../src/lib/pipeline/plugins/version-param-handler";
+import { ApiVersionParameterHandler } from "../src/lib/plugins/version-param-handler";
 
 const resources = `${__dirname}../../../test/resources/version-param-handler`;
 
 describe("ApiVersionParameterHandling", () => {
   /* todo: fix test  */
-  xit("Remove api-version global parameter, remove references to said parameter and add metadata.", async () => {
+  it.skip("Remove api-version global parameter, remove references to said parameter and add metadata.", async () => {
     const inputUri = "mem://input.json";
     const outputUri = "mem://output.json";
 
