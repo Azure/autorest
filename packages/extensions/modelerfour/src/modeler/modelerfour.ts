@@ -266,6 +266,7 @@ export class ModelerFour {
       // detect the apiversion mode
       this.apiVersionMode = this.initApiVersionMode(apiVersionParameter, useModelNamespace);
     } else {
+      this.apiVersionMode = apiVersionMode as any;
       // just set the other parameters
       this.initApiVersionMode(apiVersionParameter, useModelNamespace);
     }
