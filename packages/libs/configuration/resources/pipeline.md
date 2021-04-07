@@ -139,3 +139,18 @@ pipeline:
 
 output-artifact: converted-oai3-document
 ```
+
+
+### Output stats
+
+```yaml $(stats)
+
+# Collect stats steps
+pipeline:
+  #  Collect from individual openapi document.
+  openapi-document/openapi-stats-collector:
+    input: openapi-document/transform
+
+output-artifact:
+  - stats.json
+```
