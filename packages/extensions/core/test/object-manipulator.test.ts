@@ -5,7 +5,7 @@
 import { CancellationToken } from "vscode-jsonrpc";
 import assert from "assert";
 import { DataStore } from "@azure-tools/datastore";
-import { manipulateObject } from "../src/lib/pipeline/plugins/transformer/object-manipulator";
+import { manipulateObject } from "../src/lib/plugins/transformer/object-manipulator";
 import { createSandbox } from "@azure-tools/datastore";
 
 const safeEval = createSandbox();

@@ -1,4 +1,4 @@
-import { MultiAPIMerger } from "../../../src/lib/pipeline/plugins/merger";
+import { MultiAPIMerger } from "../../../src/lib/plugins/merger";
 import fs from "fs";
 import { createDataHandle } from "@autorest/test-utils";
 
