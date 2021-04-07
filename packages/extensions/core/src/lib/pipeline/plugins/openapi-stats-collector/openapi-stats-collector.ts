@@ -1,5 +1,5 @@
 import { DataSource } from "@azure-tools/datastore";
-import { AutorestContext } from "../../../configuration";
+import { AutorestContext } from "../../../context";
 import { PipelinePlugin } from "../../common";
 import * as oai3 from "@azure-tools/openapi";
 

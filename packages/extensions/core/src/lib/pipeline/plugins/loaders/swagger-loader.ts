@@ -5,7 +5,7 @@ import { parse as ParseLiterateYaml } from "@autorest/common";
 import { CloneAst, DataHandle, DataSink, DataSource, QuickDataSource, StringifyAst } from "@azure-tools/datastore";
 import { identitySourceMapping } from "@autorest/common";
 import { crawlReferences } from "../ref-crawling";
-import { AutorestContext } from "../../../configuration";
+import { AutorestContext } from "../../../context";
 import { checkSyntaxFromData } from "./common";
 
 export async function LoadLiterateSwaggers(

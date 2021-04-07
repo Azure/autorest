@@ -1,6 +1,6 @@
 import { Channel, SourceLocation } from "../../../message";
 import { DataHandle, IndexToPosition, StrictJsonSyntaxCheck } from "@azure-tools/datastore";
-import { AutorestContext } from "../../../configuration";
+import { AutorestContext } from "../../../context";
 
 /**
  * If a JSON file is provided, it checks that the syntax is correct.
