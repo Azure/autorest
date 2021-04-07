@@ -34,7 +34,7 @@ export function logValidationError(context: AutorestContext, fileIn: DataHandle,
   context.trackError({
     code: error.code,
     message: messageLines.join("\n"),
-    source: [{ document: fileIn.key, position: { path: error.path } as any }],
+    source: [{ document: fileIn.key, position: { path: error.path } }],
     details: error,
   });
 }
