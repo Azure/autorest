@@ -2,7 +2,7 @@ export type ConfigurationSchema = {
   [key: string]: ConfigurationSchema | ConfigurationProperty;
 };
 
-export type ConfigurationPropertyType = "string" | "number" | "boolean";
+export type ConfigurationPropertyType = "string" | "number" | "boolean" | ConfigurationSchema;
 
 export type ConfigurationProperty = {
   type: ConfigurationPropertyType;
@@ -10,32 +10,40 @@ export type ConfigurationProperty = {
   description?: string;
 };
 
-export type InferredProcessedType<T> = T extends { type: "string"; array: true }
-  ? string[]
+// prettier-ignore
+export type InferredProcessedType<T> =
+  T extends { type: "string"; array: true }
+    ? string[]
   : T extends { type: "number"; array: true }
-  ? number[]
+    ? number[]
   : T extends { type: "boolean"; array: true }
-  ? boolean[]
+    ? boolean[]
+  : T extends { type: ConfigurationSchema; array: true }
+    ? ProcessedConfiguration<T["type"]>[]
   : T extends { type: "string" }
-  ? string
+    ? string
   : T extends { type: "number" }
-  ? number
+    ? number
   : T extends { type: "boolean" }
-  ? boolean
+    ? boolean
   : never;
 
-export type InferredRawType<T> = T extends { type: "string"; array: true }
-  ? string[] | string | undefined
+// prettier-ignore
+export type InferredRawType<T> =
+  T extends { type: "string"; array: true }
+    ? string[] | string | undefined
   : T extends { type: "number"; array: true }
-  ? number[] | number | undefined
+    ? number[] | number | undefined
   : T extends { type: "boolean"; array: true }
-  ? boolean[] | boolean | undefined
+    ? boolean[] | boolean | undefined
+  : T extends { type: ConfigurationSchema; array: true }
+    ? RawConfiguration<T["type"]>[] | RawConfiguration<T["type"]> | undefined
   : T extends { type: "string" }
-  ? string | undefined
+    ? string | undefined
   : T extends { type: "number" }
-  ? number | undefined
+    ? number | undefined
   : T extends { type: "boolean" }
-  ? boolean | undefined
+    ? boolean | undefined
   : never;
 
 export type ProcessedConfiguration<S extends ConfigurationSchema> = {
