@@ -1,7 +1,6 @@
 import { PipelinePlugin } from "../../pipeline/common";
 import oai3 from "@azure-tools/openapi";
 import { SemanticError, validateOpenAPISemantics } from "./semantics-validation";
-import { OperationAbortedException } from "@autorest/common";
 import { DataHandle } from "@azure-tools/datastore";
 import { AutorestContext } from "../../context";
 import util from "util";
