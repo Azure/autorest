@@ -1,11 +1,11 @@
-import { EnhancedPosition } from "@azure-tools/datastore";
+import { SmartPosition } from "@azure-tools/datastore";
 
 /**
  * Represent a location in a document.
  */
 export interface SourceLocation {
   readonly document: string;
-  readonly position: EnhancedPosition;
+  readonly position: SmartPosition;
 }
 
 export interface AutorestDiagnostic {
