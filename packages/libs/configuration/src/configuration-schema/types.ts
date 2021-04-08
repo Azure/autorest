@@ -16,45 +16,32 @@ export type EnumType<T extends ReadonlyArray<string>> = T[number];
 
 // prettier-ignore
 export type InferredProcessedType<T> =
-  T extends { array: true }
-    ? InferredPrimitiveType<T>[]
-: T extends { dictionary: true }
-    ? Record<string, InferredPrimitiveType<T>>
+  T extends { array: true }      ? InferredPrimitiveType<T>[]
+: T extends { dictionary: true } ? Record<string, InferredPrimitiveType<T>>
   : InferredPrimitiveType<T>;
 
-let a: InferredProcessedType<{ type: "string"; array: true }>;
 // prettier-ignore
 export type InferredPrimitiveType<T> =
-  T extends { type: "string", enum: ReadonlyArray<string> }
-    ? EnumType<T["enum"]>
-  : T extends { type: ConfigurationSchema }
-    ? RawConfiguration<T["type"]>
-  : T extends { type: "string" }
-    ? string
-  : T extends { type: "number" }
-    ? number
-  : T extends { type: "boolean" }
-    ? boolean
+  T extends { type: "string", enum: ReadonlyArray<string> }  ? EnumType<T["enum"]>
+  : T extends { type: ConfigurationSchema }                  ? RawConfiguration<T["type"]>
+  : T extends { type: "string" }                             ? string
+  : T extends { type: "number" }                             ? number
+  : T extends { type: "boolean" }                            ? boolean
   : never;
 
 // prettier-ignore
 export type InferredRawType<T> =
-  T extends { type: "string"; array: true }
-    ? string[] | string | undefined
-  : T extends { type: "number"; array: true }
-    ? number[] | number | undefined
-  : T extends { type: "boolean"; array: true }
-    ? boolean[] | boolean | undefined
-  : T extends { type: ConfigurationSchema; array: true }
-    ? RawConfiguration<T["type"]>[] | RawConfiguration<T["type"]> | undefined
-  : T extends { type: "string", enum: ReadonlyArray<string> }
-    ? EnumType<T["enum"]>
-  : T extends { type: "string" }
-    ? string | undefined
-  : T extends { type: "number" }
-    ? number | undefined
-  : T extends { type: "boolean" }
-    ? boolean | undefined
+  T extends {  array: true }       ? NonNullable<InferredRawPrimitiveType<T>>[] | InferredRawPrimitiveType<T>
+  : T extends { dictionary: true } ? Record<string, InferredRawPrimitiveType<T>>
+  : InferredRawPrimitiveType<T>;
+
+// prettier-ignore
+export type InferredRawPrimitiveType<T> =
+  T extends { type: ConfigurationSchema }                     ? RawConfiguration<T["type"]> | undefined
+  : T extends { type: "string", enum: ReadonlyArray<string> } ? EnumType<T["enum"]>
+  : T extends { type: "string" }                              ? string | undefined
+  : T extends { type: "number" }                              ? number | undefined
+  : T extends { type: "boolean" }                             ? boolean | undefined
   : never;
 
 export type ProcessedConfiguration<S extends ConfigurationSchema> = {
