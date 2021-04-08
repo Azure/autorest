@@ -1,14 +1,17 @@
 export type ConfigurationSchema = {
-  [key: string]: ConfigurationSchema | ConfigurationProperty;
+  readonly [key: string]: ConfigurationSchema | ConfigurationProperty;
 };
 
 export type ConfigurationPropertyType = "string" | "number" | "boolean" | ConfigurationSchema;
 
 export type ConfigurationProperty = {
-  type: ConfigurationPropertyType;
-  array?: boolean;
-  description?: string;
+  readonly type: ConfigurationPropertyType;
+  readonly array?: boolean;
+  readonly enum?: readonly string[];
+  readonly description?: string;
 };
+
+export type EnumType<T extends ReadonlyArray<string>> = T[number];
 
 // prettier-ignore
 export type InferredProcessedType<T> =
@@ -20,6 +23,8 @@ export type InferredProcessedType<T> =
     ? boolean[]
   : T extends { type: ConfigurationSchema; array: true }
     ? ProcessedConfiguration<T["type"]>[]
+  : T extends { type: "string", enum: ReadonlyArray<string> }
+    ? EnumType<T["enum"]>
   : T extends { type: "string" }
     ? string
   : T extends { type: "number" }
@@ -38,6 +43,8 @@ export type InferredRawType<T> =
     ? boolean[] | boolean | undefined
   : T extends { type: ConfigurationSchema; array: true }
     ? RawConfiguration<T["type"]>[] | RawConfiguration<T["type"]> | undefined
+  : T extends { type: "string", enum: ReadonlyArray<string> }
+    ? EnumType<T["enum"]>
   : T extends { type: "string" }
     ? string | undefined
   : T extends { type: "number" }

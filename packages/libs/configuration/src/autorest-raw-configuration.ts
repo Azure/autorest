@@ -37,7 +37,7 @@ export interface AutorestRawConfiguration extends AutorestRawConfigurationAlias 
   "stats"?: boolean;
 
   "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)
-  "title"?: any;
+  "title"?: string;
   "description"?: any;
   "run"?: any;
 
