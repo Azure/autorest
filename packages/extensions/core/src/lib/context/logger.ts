@@ -43,7 +43,7 @@ export class AutorestCoreLogger {
     this.log({
       Channel: Channel.Warning,
       Text: error.message,
-      Source: error.source?.map((x) => ({ document: x.document, Position: x.position })),
+      Source: error.source?.map((x) => ({ document: x.document, Position: x.position as any })),
       Details: error.details,
     });
   }
@@ -52,7 +52,7 @@ export class AutorestCoreLogger {
     this.log({
       Channel: Channel.Error,
       Text: error.message,
-      Source: error.source?.map((x) => ({ document: x.document, Position: x.position })),
+      Source: error.source?.map((x) => ({ document: x.document, Position: x.position as any })),
       Details: error.details,
     });
   }

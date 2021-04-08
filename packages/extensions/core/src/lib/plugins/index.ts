@@ -36,6 +36,7 @@ import { PipelinePlugin } from "../pipeline/common";
 import { QuickDataSource } from "@azure-tools/datastore";
 import { createCSharpReflectApiVersionPlugin } from "./metadata-generation";
 import { createComponentModifierPlugin } from "./component-modifier";
+import { createSemanticValidationPlugin } from "./semantics-validation";
 
 export const PLUGIN_MAP: { [name: string]: PipelinePlugin } = {
   "help": createHelpPlugin(),
@@ -53,8 +54,7 @@ export const PLUGIN_MAP: { [name: string]: PipelinePlugin } = {
   "compose": createNewComposerPlugin(),
   "schema-validator-openapi": createOpenApiSchemaValidatorPlugin(),
   "schema-validator-swagger": createSwaggerSchemaValidatorPlugin(),
-  // TODO: replace with OAV again
-  "semantic-validator": createIdentityPlugin(),
+  "semantic-validator": createSemanticValidationPlugin(),
   "openapi-document-converter": createSwaggerToOpenApi3Plugin(),
   "component-modifiers": createComponentModifierPlugin(),
   "yaml2jsonx": createYamlToJsonPlugin(),
