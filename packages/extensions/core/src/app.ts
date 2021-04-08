@@ -451,22 +451,25 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
   return exitcode;
 }
 
+/**
+ * Runs a batch of autorest jobs. Using each of the configuration in the batch configuration run a job with those additional settings.
+ * @param api Autorest Program.
+ */
 async function batch(api: AutoRest): Promise<void> {
-  const config = await api.view;
+  const context = await api.view;
+  const batch = context.config["batch"];
+  console.log("----------------------- baticgh");
+  if (!batch) {
+    throw new Error("Unexpected batch cannot be undefined");
+  }
+
   const batchTaskConfigReference: any = {};
   api.AddConfiguration(batchTaskConfigReference);
-  for (const batchTaskConfig of config.GetEntry(<any>"batch")) {
-    const isjson = args.rawSwitches["message-format"] === "json" || args.rawSwitches["message-format"] === "yaml";
-    if (!isjson) {
-      outputMessage(
-        api,
-        {
-          Channel: Channel.Information,
-          Text: `Processing batch task - ${JSON.stringify(batchTaskConfig)} .`,
-        },
-        () => {},
-      );
-    }
+
+  context.info(`Starting batch processing with ${batch.length} batch configurations`);
+  return;
+  for (const [index, batchTaskConfig] of batch.entries()) {
+    context.info(`Processing batch task - ${JSON.stringify(batchTaskConfig)} (${index + 1}/${batch.length}).`);
     // update batch task config section
     for (const key of Object.keys(batchTaskConfigReference)) {
       delete batchTaskConfigReference[key];
@@ -476,14 +479,7 @@ async function batch(api: AutoRest): Promise<void> {
 
     const result = await api.Process().finish;
     if (result !== true) {
-      outputMessage(
-        api,
-        {
-          Channel: Channel.Error,
-          Text: `Failure during batch task - ${JSON.stringify(batchTaskConfig)} -- ${result}.`,
-        },
-        () => {},
-      );
+      context.info(`Failure during batch task - ${JSON.stringify(batchTaskConfig)} -- ${result}.`);
       throw result;
     }
   }

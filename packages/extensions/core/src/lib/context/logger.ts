@@ -141,6 +141,7 @@ export class AutorestCoreLogger {
             break;
           }
         }
+
         this.messageEmitter.Message.Dispatch(mx);
       }
     } catch (e) {

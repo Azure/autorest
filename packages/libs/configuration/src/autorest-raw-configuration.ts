@@ -48,7 +48,7 @@ export interface AutorestRawConfiguration extends AutorestRawConfigurationAlias 
   "fast-mode"?: boolean;
   "header-definitions"?: any;
   "components"?: any;
-  "batch"?: boolean;
+  "batch"?: AutorestRawConfiguration[];
   "resource-schema-batch"?: any;
   "perform-load"?: any;
 
