@@ -7,6 +7,7 @@ export type ConfigurationPropertyType = "string" | "number" | "boolean" | Config
 export type ConfigurationProperty = {
   readonly type: ConfigurationPropertyType;
   readonly array?: boolean;
+  readonly dictionary?: boolean;
   readonly enum?: readonly string[];
   readonly description?: string;
 };
@@ -15,16 +16,19 @@ export type EnumType<T extends ReadonlyArray<string>> = T[number];
 
 // prettier-ignore
 export type InferredProcessedType<T> =
-  T extends { type: "string"; array: true }
-    ? string[]
-  : T extends { type: "number"; array: true }
-    ? number[]
-  : T extends { type: "boolean"; array: true }
-    ? boolean[]
-  : T extends { type: ConfigurationSchema; array: true }
-    ? ProcessedConfiguration<T["type"]>[]
-  : T extends { type: "string", enum: ReadonlyArray<string> }
+  T extends { array: true }
+    ? InferredPrimitiveType<T>[]
+: T extends { dictionary: true }
+    ? Record<string, InferredPrimitiveType<T>>
+  : InferredPrimitiveType<T>;
+
+let a: InferredProcessedType<{ type: "string"; array: true }>;
+// prettier-ignore
+export type InferredPrimitiveType<T> =
+  T extends { type: "string", enum: ReadonlyArray<string> }
     ? EnumType<T["enum"]>
+  : T extends { type: ConfigurationSchema }
+    ? RawConfiguration<T["type"]>
   : T extends { type: "string" }
     ? string
   : T extends { type: "number" }

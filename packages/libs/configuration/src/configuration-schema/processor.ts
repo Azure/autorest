@@ -9,14 +9,12 @@ export class ConfigurationSchemaProcessor<S extends ConfigurationSchema> {
   }
 }
 
-export type Foo<S extends ConfigurationSchema> = S;
-
 const schema = {
   "allow-no-input": { type: "boolean" },
   "input-file": { type: "string", array: true },
   "exclude-file": { type: "string", array: true },
   "base-folder": { type: "string" },
-  "directives": {
+  "directive": {
     array: true,
     type: {
       "from": { type: "string", array: true },
@@ -28,6 +26,10 @@ const schema = {
       "text-transform": { type: "string", array: true },
       "test": { type: "string", array: true },
     },
+  },
+  "declare-directive": {
+    dictionary: true,
+    type: "string",
   },
   "output-artifact": { type: "string", array: true },
   "require": { type: "string", array: true, description: "Additional configuration files to include." },
