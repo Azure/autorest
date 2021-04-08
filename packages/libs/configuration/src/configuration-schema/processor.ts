@@ -1,7 +1,15 @@
-import { ConfigurationSchema, ProcessedConfiguration, RawConfiguration } from "./types";
+import {
+  ConfigurationProperty,
+  ConfigurationSchema,
+  InferredProcessedType,
+  InferredRawType,
+  ProcessedConfiguration,
+  RawConfiguration,
+} from "./types";
 
 export enum ProcessingErrorCode {
   UnknownProperty = "unknownProperty",
+  InvalidType = "invalidType",
 }
 
 export interface ProcessingError {
@@ -28,5 +36,76 @@ export class ConfigurationSchemaProcessor<S extends ConfigurationSchema> {
     }
 
     return {} as any;
+  }
+}
+
+type Result<T> =
+  | {
+      errors: ProcessingError[];
+    }
+  | {
+      value: T;
+    };
+
+function processProperty<T extends ConfigurationProperty>(
+  schema: T,
+  path: string[],
+  value: InferredRawType<T>,
+): Result<InferredProcessedType<T>> {
+  if (schema.array) {
+    return null!;
+  }
+
+  if (schema.type === "number") {
+    if (typeof value !== "number") {
+      return {
+        errors: [{ code: ProcessingErrorCode.InvalidType, message: `Expected a number but got ${typeof value}`, path }],
+      };
+    }
+    return { value } as any;
+  }
+
+  if (schema.type === "boolean") {
+    if (typeof value !== "boolean") {
+      return {
+        errors: [
+          {
+            code: ProcessingErrorCode.InvalidType,
+            message: `Expected a boolean but got ${typeof value}`,
+            path,
+          },
+        ],
+      };
+    }
+    return { value } as any;
+  }
+
+  if (schema.type === "string") {
+    if (typeof value !== "string") {
+      return {
+        errors: [
+          {
+            code: ProcessingErrorCode.InvalidType,
+            message: `Expected a string but got ${typeof value}`,
+            path,
+          },
+        ],
+      };
+    }
+
+    if (schema.enum) {
+      if (!schema.enum.includes(value)) {
+        return {
+          errors: [
+            {
+              code: ProcessingErrorCode.InvalidType,
+              message: `Expected a value to be in [${schema.enum.join(",")}] but got ${typeof value}`,
+              path,
+            },
+          ],
+        };
+      }
+    }
+    return { value } as any;
   }
 }
