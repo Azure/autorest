@@ -89,24 +89,7 @@ export class AutorestCoreLogger {
         // format message
         switch (this.config["message-format"]) {
           case "json":
-            // TODO: WHAT THE FUDGE, check with the consumers whether this has to be like that... otherwise, consider changing the format to something less generic
-            if (mx.details) {
-              mx.details.sources = (mx.source || [])
-                .filter((x) => x.Position)
-                .map((source) => {
-                  let text = `${source.document}:${source.Position.line}:${source.Position.column}`;
-                  if (source.Position.path) {
-                    text += ` (${stringify(source.Position.path)})`;
-                  }
-                  return text;
-                });
-              if (mx.details.sources.length > 0) {
-                mx.details["jsonref"] = mx.details.sources[0];
-                mx.details["json-path"] = mx.details.sources[0];
-              }
-            }
-            mx.formattedMessage = JSON.stringify(mx.details || mx, null, 2);
-            break;
+            mx.formattedMessage = getJsonFormatterMessage(mx);
           case "yaml":
             mx.formattedMessage = Stringify([mx.details || mx]).replace(/^---/, "");
             break;
@@ -256,4 +239,36 @@ function getUptimePrefix() {
  */
 function getMessageKey(message: Message) {
   return message.key ? ` (${[...message.key].join("/")})` : "";
+}
+
+function getJsonFormatterMessage(message: Message) {
+  return JSON.stringify(message, null, 2);
+}
+
+function getLegacyJsonFormatterMessage(message: Message) {
+  if (message.details) {
+    message.details.sources = (message.source || [])
+      .filter((x) => x.Position)
+      .map((source) => {
+        let text = `${source.document}:${source.Position.line}:${source.Position.column}`;
+        if (source.Position.path) {
+          text += ` (${stringify(source.Position.path)})`;
+        }
+        return text;
+      });
+    if (message.details.sources.length > 0) {
+      message.details["jsonref"] = message.details.sources[0];
+      message.details["json-path"] = message.details.sources[0];
+    }
+  }
+  const legacyMessage = {
+    Channel: message.channel,
+    Details: message.details,
+    Text: message.message,
+    Key: message.key,
+    Source: message.source,
+    Plugin: message.plugin,
+  };
+
+  return JSON.stringify(message.details || legacyMessage, null, 2);
 }

@@ -20,7 +20,7 @@ export interface AutorestRawConfiguration extends AutorestRawConfigurationAlias 
   "directive"?: Array<Directive> | Directive;
   "declare-directive"?: { [name: string]: string };
   "output-artifact"?: Array<string> | string;
-  "message-format"?: "json" | "yaml" | "regular";
+  "message-format"?: "json" | "jsonLegacy" | "yaml" | "regular";
   "use"?: string[] | string;
   "use-extension"?: { [extensionName: string]: string };
   "require"?: Array<string> | string;
