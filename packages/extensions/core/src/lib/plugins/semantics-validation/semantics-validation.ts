@@ -1,7 +1,10 @@
 import oai3 from "@azure-tools/openapi";
-import { SemanticError } from "./types";
+import { ResolveReferenceFn, SemanticError } from "./types";
+import { createReferenceResolver } from "./utils";
 import { validateDiscriminator, validatePaths } from "./validators";
 
-export function validateOpenAPISemantics(spec: oai3.Model): SemanticError[] {
-  return [...validateDiscriminator(spec), ...validatePaths(spec)];
+export function validateOpenAPISemantics(spec: oai3.Model, resolve: ResolveReferenceFn | undefined): SemanticError[] {
+  const resolveReference = createReferenceResolver(spec, resolve);
+
+  return [...validateDiscriminator(spec), ...validatePaths(spec, resolveReference)];
 }

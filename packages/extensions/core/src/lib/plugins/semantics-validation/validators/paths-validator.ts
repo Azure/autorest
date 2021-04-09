@@ -1,9 +1,18 @@
-import { SemanticError, SemanticErrorCodes } from "../types";
-import oai3, { dereference, ParameterLocation, Refable } from "@azure-tools/openapi";
+import { ResolveReferenceFn, SemanticError, SemanticErrorCodes } from "../types";
+import oai3, { ParameterLocation, Refable } from "@azure-tools/openapi";
+import { createReferenceResolver } from "../utils";
 
 export const PATH_TEMPLATES_REGEX = /\{(.*?)\}/g;
 
-export function validatePaths(spec: oai3.Model): SemanticError[] {
+/**
+ * Semantic validation for paths.
+ * @param spec OpenAPI Spec to validate.
+ * @param resolveReference
+ * @returns
+ */
+export function validatePaths(spec: oai3.Model, resolve?: ResolveReferenceFn): SemanticError[] {
+  const resolveReference = createReferenceResolver(spec, resolve);
+
   const paths = spec.paths;
   const errors: SemanticError[] = [];
   for (const [uri, pathItem] of Object.entries(paths)) {
@@ -14,7 +23,7 @@ export function validatePaths(spec: oai3.Model): SemanticError[] {
         continue;
       }
 
-      errors.push(...validatePathParameterExists(uri, paramName, pathItem, spec));
+      errors.push(...validatePathParameterExists(uri, paramName, pathItem, resolveReference));
     }
   }
   return errors;
@@ -24,17 +33,17 @@ function validatePathParameterExists(
   uri: string,
   paramName: string,
   pathItem: oai3.PathItem,
-  spec: oai3.Model,
+  resolveReference: ResolveReferenceFn,
 ): SemanticError[] {
   if (pathItem.parameters) {
-    if (findPathParameter(paramName, pathItem.parameters, spec)) {
+    if (findPathParameter(paramName, pathItem.parameters, resolveReference)) {
       return [];
     }
   }
 
   const misssingFromMethods = [];
   for (const [method, operation] of Object.entries(pathItem)) {
-    if (!findPathParameter(paramName, operation.parameters ?? [], spec)) {
+    if (!findPathParameter(paramName, operation.parameters ?? [], resolveReference)) {
       misssingFromMethods.push(method);
     }
   }
@@ -46,10 +55,10 @@ function validatePathParameterExists(
 function findPathParameter(
   paramName: string,
   parameters: Refable<oai3.Parameter>[],
-  spec: oai3.Model,
+  resolveReference: ResolveReferenceFn,
 ): oai3.Parameter | undefined {
   return parameters
-    .map((x) => dereference(spec, x).instance)
+    .map((x) => resolveReference(x))
     .find((x) => x.in === ParameterLocation.Path && x.name === paramName);
 }
 

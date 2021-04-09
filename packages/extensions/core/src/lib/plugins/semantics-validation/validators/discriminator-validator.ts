@@ -6,11 +6,13 @@ export function validateDiscriminator(spec: oai3.Model): SemanticError[] {
   if (!schemas) {
     return [];
   }
+
   const errors: SemanticError[] = [];
   for (const [name, model] of Object.entries(schemas)) {
     if ("$ref" in model) {
       continue;
     }
+
     const discriminator = model.discriminator;
     if (discriminator) {
       if (model.oneOf || model.anyOf) {

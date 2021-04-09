@@ -1,3 +1,5 @@
+import { Refable } from "@azure-tools/openapi";
+
 export enum SemanticErrorCodes {
   DiscriminatorNotRequired = "DiscriminatorNotRequired",
   PathParameterEmtpy = "PathParameterEmtpy",
@@ -10,3 +12,5 @@ export interface SemanticError {
   params: Record<string, unknown>;
   path: string[];
 }
+
+export type ResolveReferenceFn<T = any> = (r: Refable<T>) => T;
