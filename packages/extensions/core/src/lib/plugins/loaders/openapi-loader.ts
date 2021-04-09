@@ -45,7 +45,7 @@ export async function LoadLiterateOpenAPI(
     return null;
     // TODO: Should we throw or send an error message?
   }
-  config.Message({ Channel: Channel.Verbose, Text: `Reading OpenAPI 3.0 file ${inputFileUri}` });
+  config.Message({ channel: Channel.Verbose, message: `Reading OpenAPI 3.0 file ${inputFileUri}` });
 
   const ast = CloneAst(await data.ReadYamlAst());
   const mapping = identitySourceMapping(data.key, ast);

@@ -96,27 +96,27 @@ function parseArgs(autorestArgs: Array<string>): CommandLineArgs {
 }
 
 function outputMessage(instance: AutoRest, m: Message, errorCounter: () => void) {
-  switch (m.Channel) {
+  switch (m.channel) {
     case Channel.Debug:
       if (debug) {
-        console.log(color(m.FormattedMessage || m.Text));
+        console.log(color(m.formattedMessage || m.message));
       }
       break;
     case Channel.Verbose:
       if (verbose) {
-        console.log(color(m.FormattedMessage || m.Text));
+        console.log(color(m.formattedMessage || m.message));
       }
       break;
     case Channel.Information:
-      console.log(color(m.FormattedMessage || m.Text));
+      console.log(color(m.formattedMessage || m.message));
       break;
     case Channel.Warning:
-      console.log(color(m.FormattedMessage || m.Text));
+      console.log(color(m.formattedMessage || m.message));
       break;
     case Channel.Error:
     case Channel.Fatal:
       errorCounter();
-      console.error(color(m.FormattedMessage || m.Text));
+      console.error(color(m.formattedMessage || m.message));
       break;
   }
 }
@@ -272,8 +272,8 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     );
   });
   api.Message.Subscribe((_, message) => {
-    if (message.Channel === Channel.Protect && message.Details) {
-      protectFiles.add(message.Details);
+    if (message.channel === Channel.Protect && message.details) {
+      protectFiles.add(message.details);
     }
   });
   api.ClearFolder.Subscribe((_, folder) => clearFolders.add(folder));

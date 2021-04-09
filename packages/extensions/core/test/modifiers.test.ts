@@ -39,7 +39,7 @@ const generate = async (additionalConfig: any): Promise<oai3.Model> => {
   ]);
 
   autoRest.Message.Subscribe((_, message) => {
-    if (channels.has(message.Channel)) {
+    if (channels.has(message.channel)) {
       messages.push(message);
     }
   });

@@ -43,8 +43,8 @@ export function createGraphTransformerPlugin(): PipelinePlugin {
                 const targets = selectNodes(contents, where);
                 if (targets.length > 0) {
                   context.Message({
-                    Channel: Channel.Debug,
-                    Text: `Running object transform '${directive.from}/${directive.reason}' on ${inputHandle.key} `,
+                    channel: Channel.Debug,
+                    message: `Running object transform '${directive.from}/${directive.reason}' on ${inputHandle.key} `,
                   });
 
                   for (const { path, value, parent } of targets) {
@@ -122,8 +122,8 @@ export function createTextTransformerPlugin(): PipelinePlugin {
               contents = contents === undefined ? await inputHandle.ReadData(true) : contents;
 
               config.Message({
-                Channel: Channel.Debug,
-                Text: `Running text transform '${directive.from}/${directive.reason}' on ${inputHandle.key} `,
+                channel: Channel.Debug,
+                message: `Running text transform '${directive.from}/${directive.reason}' on ${inputHandle.key} `,
               });
 
               const output = evalDirectiveTransform(transform, {

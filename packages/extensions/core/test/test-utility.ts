@@ -8,20 +8,20 @@ import { Message, Channel } from "../src/lib/message";
 
 export function PumpMessagesToConsole(autoRest: AutoRest): void {
   autoRest.Message.Subscribe((_, m) => {
-    switch (m.Channel) {
+    switch (m.channel) {
       case Channel.Information:
       case Channel.Debug:
       case Channel.Verbose:
-        console.log(m.Text);
+        console.log(m.message);
         break;
       case Channel.Warning:
-        console.warn(m.Text);
+        console.warn(m.message);
         break;
       case Channel.Error:
-        console.error(m.Text);
+        console.error(m.message);
         break;
       case Channel.Fatal:
-        console.error(m.Text);
+        console.error(m.message);
         break;
     }
   });

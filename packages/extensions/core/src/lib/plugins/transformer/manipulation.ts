@@ -54,11 +54,11 @@ export class Manipulator {
                 for (const testResult of testResults) {
                   if (testResult === false || typeof testResult !== "boolean") {
                     const messageText = typeof testResult === "string" ? testResult : "Custom test failed";
-                    const message = (<Message>testResult).Text
+                    const message = (<Message>testResult).message
                       ? <Message>testResult
-                      : <Message>{ Text: messageText, Channel: Channel.Warning, Details: testResult };
-                    message.Source = message.Source || [<SourceLocation>{ Position: { path: hit.path } }];
-                    for (const src of message.Source) {
+                      : <Message>{ message: messageText, channel: Channel.Warning, details: testResult };
+                    message.source = message.source || [<SourceLocation>{ Position: { path: hit.path } }];
+                    for (const src of message.source) {
                       src.document = src.document || data.key;
                     }
                     this.context.Message(message);

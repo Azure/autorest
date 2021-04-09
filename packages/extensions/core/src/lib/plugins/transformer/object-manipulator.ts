@@ -94,9 +94,9 @@ export async function manipulateObject(
         }
 
         config.Message({
-          Channel: Channel.Warning,
-          Details: err,
-          Text: `${errorText}: '${err.message}'`,
+          channel: Channel.Warning,
+          details: err,
+          message: `${errorText}: '${err.message}'`,
         });
       }
     }

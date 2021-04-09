@@ -22,9 +22,9 @@ export function createExternalPlugin(host: AutoRestExtension, pluginName: string
       sink,
       (f) => results.push(f),
       (message: Message) => {
-        if (message.Channel === Channel.Control) {
-          if (message.Details && message.Details.skip !== undefined) {
-            shouldSkip = message.Details.skip;
+        if (message.channel === Channel.Control) {
+          if (message.details && message.details.skip !== undefined) {
+            shouldSkip = message.details.skip;
           }
         } else {
           config.Message.bind(config)(message);

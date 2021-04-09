@@ -40,7 +40,7 @@ export async function LoadLiterateSwagger(
     return null;
     // TODO: Should we throw or send an error message?
   }
-  config.Message({ Channel: Channel.Verbose, Text: `Reading OpenAPI 2.0 file ${inputFileUri}` });
+  config.Message({ channel: Channel.Verbose, message: `Reading OpenAPI 2.0 file ${inputFileUri}` });
 
   const ast = CloneAst(await data.ReadYamlAst());
   const mapping = identitySourceMapping(data.key, ast);

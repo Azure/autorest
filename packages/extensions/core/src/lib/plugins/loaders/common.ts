@@ -15,9 +15,9 @@ export async function checkSyntaxFromData(
     const error = StrictJsonSyntaxCheck(await handle.ReadData());
     if (error) {
       configView.Message({
-        Channel: Channel.Error,
-        Text: `Syntax Error Encountered:  ${error.message}`,
-        Source: [<SourceLocation>{ Position: IndexToPosition(handle, error.index), document: handle.key }],
+        channel: Channel.Error,
+        message: `Syntax Error Encountered:  ${error.message}`,
+        source: [<SourceLocation>{ Position: IndexToPosition(handle, error.index), document: handle.key }],
       });
     }
   }

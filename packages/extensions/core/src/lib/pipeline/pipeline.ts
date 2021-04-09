@@ -304,7 +304,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     }
 
     if (inputScope.skip) {
-      context.Message({ Channel: Channel.Debug, Text: `${nodeName} - SKIPPING` });
+      context.Message({ channel: Channel.Debug, message: `${nodeName} - SKIPPING` });
       return inputScope;
     }
     try {
@@ -330,8 +330,8 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
       ) {
         // shortcut -- get the outputs directly from the cache.
         context.Message({
-          Channel: times ? Channel.Information : Channel.Debug,
-          Text: `${nodeName} - CACHED inputs = ${(await inputScope.Enum()).length} [0.0 s]`,
+          channel: times ? Channel.Information : Channel.Debug,
+          message: `${nodeName} - CACHED inputs = ${(await inputScope.Enum()).length} [0.0 s]`,
         });
 
         return await readCache(cacheKey, context.DataStore.getDataSink(node.outputArtifact));
@@ -339,8 +339,8 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
       const t1 = process.uptime() * 100;
       context.Message({
-        Channel: times ? Channel.Information : Channel.Debug,
-        Text: `${nodeName} - START inputs = ${(await inputScope.Enum()).length}`,
+        channel: times ? Channel.Information : Channel.Debug,
+        message: `${nodeName} - START inputs = ${(await inputScope.Enum()).length}`,
       });
 
       // creates the actual plugin.
@@ -348,8 +348,8 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
       const t2 = process.uptime() * 100;
 
       context.Message({
-        Channel: times ? Channel.Information : Channel.Debug,
-        Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]`,
+        channel: times ? Channel.Information : Channel.Debug,
+        message: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]`,
       });
 
       // if caching is enabled, let's cache this scopeResult.

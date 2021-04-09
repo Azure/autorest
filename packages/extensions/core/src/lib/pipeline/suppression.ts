@@ -29,21 +29,21 @@ export class Suppressor {
 
   public filter(m: Message): Message | null {
     // the message does not have a source attached to it - assume it may pass
-    if (!m.Source || m.Source.length === 0) {
+    if (!m.source || m.source.length === 0) {
       return m;
     }
 
     // filter
     for (const sup of this.suppressions) {
       // matches key
-      if (From(m.Key || []).Any((k) => From(sup.suppress).Any((s) => k.toLowerCase() === s.toLowerCase()))) {
+      if (From(m.key || []).Any((k) => From(sup.suppress).Any((s) => k.toLowerCase() === s.toLowerCase()))) {
         // filter applicable sources
-        m.Source = m.Source.filter((s) => !this.matchesSourceFilter(s.document, (<any>s.Position).path, sup));
+        m.source = m.source.filter((s) => !this.matchesSourceFilter(s.document, (<any>s.Position).path, sup));
       }
     }
 
     // drop message if all source locations have been stripped
-    if (m.Source.length === 0) {
+    if (m.source.length === 0) {
       return null;
     }
 

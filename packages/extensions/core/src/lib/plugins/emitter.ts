@@ -19,13 +19,13 @@ async function emitArtifactInternal(
   if (config.IsOutputArtifactRequested(artifactType)) {
     const content = await handle.ReadData(true);
     if (content !== "") {
-      config.Message({ Channel: Channel.Debug, Text: `Emitting '${artifactType}' at ${uri}` });
+      config.Message({ channel: Channel.Debug, message: `Emitting '${artifactType}' at ${uri}` });
       if (uri.startsWith("stdout://")) {
         config.Message({
-          Channel: Channel.Information,
-          Details: { type: artifactType, uri, content },
-          Text: `Artifact '${uri.slice("stdout://".length)}' of type '${artifactType}' has been emitted.`,
-          Plugin: "emitter",
+          channel: Channel.Information,
+          details: { type: artifactType, uri, content },
+          message: `Artifact '${uri.slice("stdout://".length)}' of type '${artifactType}' has been emitted.`,
+          plugin: "emitter",
         });
       } else {
         config.GeneratedFile.Dispatch({ type: artifactType, uri, content });

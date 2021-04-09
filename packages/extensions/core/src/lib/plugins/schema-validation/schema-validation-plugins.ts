@@ -49,9 +49,9 @@ export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
       }
       if (!isSecondary) {
         context.Message({
-          Channel: Channel.Error,
-          Plugin: "schema-validator-openapi",
-          Text: [
+          channel: Channel.Error,
+          plugin: "schema-validator-openapi",
+          message: [
             `Unrecoverable schema validation errors were encountered in OpenAPI 3 input files.`,
             `You can use --markOpenAPI3ErrorsAsWarning to keep mark as warning and let autorest keep going.`,
             `If you believe this the validation error is incorrect, please open an issue at https://github.com/Azure/autorest`,

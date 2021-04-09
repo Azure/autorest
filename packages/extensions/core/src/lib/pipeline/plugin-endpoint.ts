@@ -326,11 +326,11 @@ export class AutoRestExtension extends EventEmitter {
         finishNotifications = new Promise<void>((res) => (notify = res));
 
         onMessage(<Message>{
-          Channel: Channel.Protect,
-          Details: fileOrFolder,
-          Text: fileOrFolder,
-          Plugin: pluginName,
-          Key: [],
+          channel: Channel.Protect,
+          details: fileOrFolder,
+          message: fileOrFolder,
+          plugin: pluginName,
+          key: [],
         });
 
         await finishPrev;
@@ -371,11 +371,11 @@ export class AutoRestExtension extends EventEmitter {
 
         const artifact = await writeFileToSinkAndNotify(filename, content, undefined, sourceMap);
         onMessage(<ArtifactMessage>{
-          Channel: Channel.File,
-          Details: artifact,
-          Text: artifact.content,
-          Plugin: pluginName,
-          Key: [artifact.type, artifact.uri],
+          channel: Channel.File,
+          details: artifact,
+          message: artifact.content,
+          plugin: pluginName,
+          key: [artifact.type, artifact.uri],
         });
 
         await finishPrev;
@@ -386,22 +386,22 @@ export class AutoRestExtension extends EventEmitter {
         let notify: () => void = () => {};
         finishNotifications = new Promise<void>((res) => (notify = res));
 
-        message.Plugin = message.Plugin || pluginName;
+        message.plugin = message.plugin || pluginName;
         // transform friendly with internals
-        if (Array.isArray(message.Source)) {
-          for (const source of message.Source) {
+        if (Array.isArray(message.source)) {
+          for (const source of message.source) {
             if (source.document) {
               source.document = (await friendly2internal(source.document)) || source.document;
             }
           }
         }
 
-        if (message.Channel === Channel.Configuration) {
+        if (message.channel === Channel.Configuration) {
           // special case. route the output to the config
-          if (message.Key && message.Text) {
-            const key = [...message.Key];
+          if (message.key && message.message) {
+            const key = [...message.key];
             if (key.length > 0) {
-              context.updateConfigurationFile(key[0], message.Text);
+              context.updateConfigurationFile(key[0], message.message);
             }
           }
 
@@ -409,10 +409,10 @@ export class AutoRestExtension extends EventEmitter {
           notify();
         }
 
-        if (message.Channel === Channel.File) {
+        if (message.channel === Channel.File) {
           // wire through `sink` in order to retrieve default artifact type
           const artifactMessage = <ArtifactMessage>message;
-          const artifact = artifactMessage.Details;
+          const artifact = artifactMessage.details;
 
           await writeFileToSinkAndNotify(artifact.uri, artifact.content, artifact.type, artifact.sourceMap);
         }

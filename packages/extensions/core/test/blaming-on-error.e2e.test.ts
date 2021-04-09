@@ -29,7 +29,7 @@ const generate = async (file: string): Promise<{ errors: Message[] }> => {
   ]);
 
   autoRest.Message.Subscribe((_, message) => {
-    if (channels.has(message.Channel)) {
+    if (channels.has(message.channel)) {
       messages.push(message);
     }
   });
@@ -43,7 +43,7 @@ const generate = async (file: string): Promise<{ errors: Message[] }> => {
     throw new Error("Autorest complete with success but should have failed.");
   }
 
-  const errors = messages.filter((x) => x.Channel === Channel.Error);
+  const errors = messages.filter((x) => x.channel === Channel.Error);
 
   if (errors.length === 0) {
     // eslint-disable-next-line no-console
@@ -59,8 +59,8 @@ describe("Blaming (e2e)", () => {
     const { errors } = await generate(file);
     expect(errors.length).toEqual(2);
 
-    expect(errors[0].Text).toEqual("Syntax Error Encountered:  Syntax error: duplicate key");
-    expect(errors[0].Source).toEqual([
+    expect(errors[0].message).toEqual("Syntax Error Encountered:  Syntax error: duplicate key");
+    expect(errors[0].source).toEqual([
       {
         Position: { column: 0, line: 10 },
         document: createFileUri(file),
@@ -72,8 +72,8 @@ describe("Blaming (e2e)", () => {
     const file = join(AppRoot, "test", "resources", "error-in-config/invalid-indent-yaml.md");
     const { errors } = await generate(file);
     expect(errors.length).toEqual(3);
-    expect(errors[0].Text).toEqual("Syntax Error Encountered:  Syntax error: bad indentation of a mapping entry");
-    expect(errors[0].Source).toEqual([
+    expect(errors[0].message).toEqual("Syntax Error Encountered:  Syntax error: bad indentation of a mapping entry");
+    expect(errors[0].source).toEqual([
       {
         Position: { column: 0, line: 11 },
         document: createFileUri(file),

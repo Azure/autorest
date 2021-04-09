@@ -71,15 +71,15 @@ class Result {
     this.onDispose.push(this.AutoRest.GeneratedFile.Subscribe((a, artifact) => this.artifacts.push(artifact)));
     this.onDispose.push(
       this.AutoRest.Message.Subscribe((au, message) => {
-        switch (message.Channel) {
+        switch (message.channel) {
           case Channel.Debug:
-            service.debug(message.Text);
+            service.debug(message.message);
             break;
           case Channel.Fatal:
-            service.error(message.Text);
+            service.error(message.message);
             break;
           case Channel.Verbose:
-            service.verbose(message.Text);
+            service.verbose(message.message);
             break;
           case Channel.Warning:
             service.pushDiagnostic(message, DiagnosticSeverity.Warning);
@@ -510,20 +510,20 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
 
   public pushDiagnostic(message: Message, severity: DiagnosticSeverity) {
     let moreInfo = "";
-    if (message.Plugin === "azure-validator") {
-      if (message.Key) {
+    if (message.plugin === "azure-validator") {
+      if (message.key) {
         moreInfo =
           "\n More info: " +
           azureValidatorRulesDocUrl +
           "#" +
-          [...message.Key][1].toLowerCase() +
+          [...message.key][1].toLowerCase() +
           "-" +
-          [...message.Key][0].toLowerCase() +
+          [...message.key][0].toLowerCase() +
           "\n";
       }
     }
-    if (message.Range) {
-      for (const each of message.Range) {
+    if (message.range) {
+      for (const each of message.range) {
         // get the file reference first
 
         const file = this.getDiagnosticCollection(each.document);
@@ -535,8 +535,8 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
               Position.create(each.start.line - 1, each.start.column),
               Position.create(each.end.line - 1, each.end.column),
             ),
-            message: message.Text + moreInfo,
-            source: message.Key ? [...message.Key].join("/") : "",
+            message: message.message + moreInfo,
+            source: message.key ? [...message.key].join("/") : "",
           });
         }
       }

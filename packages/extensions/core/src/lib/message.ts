@@ -12,36 +12,36 @@ import { Artifact } from "./artifact";
  */
 export enum Channel {
   /** Information is considered the mildest of responses; not necesarily actionable. */
-  Information = <any>"information",
+  Information = "information",
 
   /** Warnings are considered important for best practices, but not catastrophic in nature. */
-  Warning = <any>"warning",
+  Warning = "warning",
 
   /** Errors are considered blocking issues that block a successful operation.  */
-  Error = <any>"error",
+  Error = "error",
 
   /** Debug messages are designed for the developer to communicate internal autorest implementation details. */
-  Debug = <any>"debug",
+  Debug = "debug",
 
   /** Verbose messages give the user additional clarity on the process. */
-  Verbose = <any>"verbose",
+  Verbose = "verbose",
 
   /** Catastrophic failure, likely abending the process.  */
-  Fatal = <any>"fatal",
+  Fatal = "fatal",
 
   /** Hint messages offer guidance or support without forcing action. */
-  Hint = <any>"hint",
+  Hint = "hint",
 
   /** File represents a file output from an extension. Details are a Artifact and are required.  */
-  File = <any>"file",
+  File = "file",
 
   /** content represents an update/creation of a configuration file. The final uri will be in the same folder as the primary config file. */
-  Configuration = <any>"configuration",
+  Configuration = "configuration",
 
   /** Protect is a path to not remove during a clear-output-folder.  */
-  Protect = <any>"protect",
+  Protect = "protect",
 
-  Control = <any>"Control",
+  Control = "Control",
 }
 
 export interface SourceLocation {
@@ -56,18 +56,18 @@ export interface Range {
 }
 
 export interface Message {
-  Channel: Channel;
-  Key?: Iterable<string>;
-  Details?: any;
-  Text: string;
+  channel: Channel;
+  key?: Iterable<string>;
+  details?: any;
+  message: string;
 
   // injected or modified by core
-  Source?: Array<SourceLocation>;
-  Range?: Iterable<Range>;
-  Plugin?: string;
-  FormattedMessage?: string;
+  source?: SourceLocation[];
+  range?: Iterable<Range>;
+  plugin?: string;
+  formattedMessage?: string;
 }
 
 export interface ArtifactMessage extends Message {
-  Details: Artifact & { sourceMap?: Array<Mapping> | RawSourceMap };
+  details: Artifact & { sourceMap?: Array<Mapping> | RawSourceMap };
 }

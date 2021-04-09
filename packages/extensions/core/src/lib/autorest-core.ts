@@ -157,18 +157,20 @@ export class AutoRest extends EventEmitter {
         view.messageEmitter.removeAllListeners();
         return true;
       } catch (e) {
-        const message = view?.config.debug
+        const message: Message = view?.config.debug
           ? {
-              Channel: Channel.Debug,
-              Text: `Process() cancelled due to exception : ${e.message ? e.message : e} / ${e.stack ? e.stack : ""}`,
+              channel: Channel.Debug,
+              message: `Process() cancelled due to exception : ${e.message ? e.message : e} / ${
+                e.stack ? e.stack : ""
+              }`,
             }
           : {
-              Channel: Channel.Debug,
-              Text: "Process() cancelled due to failure ",
+              channel: Channel.Debug,
+              message: "Process() cancelled due to failure ",
             };
         if (e instanceof Exception) {
           // idea: don't throw exceptions, just visibly log them and return false
-          message.Channel = Channel.Fatal;
+          message.channel = Channel.Fatal;
           // eslint-disable-next-line no-ex-assign
           e = false;
         }

@@ -49,7 +49,7 @@ describe("EndToEnd", () => {
     ]);
 
     autoRest.Message.Subscribe((_, message) => {
-      if (channels.has(message.Channel)) {
+      if (channels.has(message.channel)) {
         messages.push(message);
       }
     });
@@ -79,7 +79,7 @@ describe("EndToEnd", () => {
   });
 
   // todo: skipping because testing is broken?
-  xit("complicated configuration scenario", async () => {
+  it.skip("complicated configuration scenario", async () => {
     const autoRest = new AutoRest(
       new RealFileSystem(),
       ResolveUri(CreateFolderUri(AppRoot), "test/resources/literate-example/readme-complicated.md"),
@@ -100,7 +100,7 @@ describe("EndToEnd", () => {
     const messages: Array<Message> = [];
 
     autoRest.Message.Subscribe((_, m) => {
-      if (m.Channel === Channel.Warning) {
+      if (m.channel === Channel.Warning) {
         messages.push(m);
       }
     });
@@ -110,7 +110,7 @@ describe("EndToEnd", () => {
   // testing end-to-end for non-arm type validation rules. Since all validation rules are currently defaulted to
   // ARM, non-ARM documents should show 0 validation messages
   // TODO: fix this test when validation rules are properly categorized
-  xit("non-arm type spec testing", async () => {
+  it.skip("non-arm type spec testing", async () => {
     const autoRest = new AutoRest(
       new RealFileSystem(),
       ResolveUri(CreateFolderUri(AppRoot), "test/resources/validation-options/readme.md"),
@@ -129,11 +129,11 @@ describe("EndToEnd", () => {
     assert.equal(await autoRest.Process().finish, true);
     assert.notEqual(messages.length, 0);
     // flag any fatal errors
-    assert.equal(messages.filter((m) => m.Channel === Channel.Fatal).length, 0);
+    assert.equal(messages.filter((m) => m.channel === Channel.Fatal).length, 0);
   });
 
   // todo: skipping because testing is broken?
-  xit("arm type spec testing", async () => {
+  it.skip("arm type spec testing", async () => {
     const autoRest = new AutoRest(
       new RealFileSystem(),
       ResolveUri(CreateFolderUri(AppRoot), "test/resources/validation-options/readme.md"),
@@ -153,7 +153,7 @@ describe("EndToEnd", () => {
     // PumpMessagesToConsole(autoRest);
     assert.equal(await autoRest.Process().finish, true);
     // flag any fatal errors
-    assert.equal(messages.filter((m) => m.Channel === Channel.Fatal).length, 0);
+    assert.equal(messages.filter((m) => m.channel === Channel.Fatal).length, 0);
     assert.notEqual(messages.length, 0);
   });
 });

@@ -19,49 +19,49 @@ export class AutorestCoreLogger {
 
   public verbose(message: string) {
     this.log({
-      Channel: Channel.Verbose,
-      Text: message,
+      channel: Channel.Verbose,
+      message: message,
     });
   }
 
   public info(message: string) {
     this.log({
-      Channel: Channel.Information,
-      Text: message,
+      channel: Channel.Information,
+      message: message,
     });
   }
 
   public fatal(message: string) {
     this.log({
-      Channel: Channel.Fatal,
-      Text: message,
+      channel: Channel.Fatal,
+      message: message,
     });
   }
 
   public trackWarning(error: AutorestWarning) {
     this.log({
-      Channel: Channel.Warning,
-      Text: error.message,
-      Source: error.source?.map((x) => ({ document: x.document, Position: x.position as any })),
-      Details: error.details,
+      channel: Channel.Warning,
+      message: error.message,
+      source: error.source?.map((x) => ({ document: x.document, Position: x.position as any })),
+      details: error.details,
     });
   }
 
   public trackError(error: AutorestError) {
     this.log({
-      Channel: Channel.Error,
-      Text: error.message,
-      Source: error.source?.map((x) => ({ document: x.document, Position: x.position as any })),
-      Details: error.details,
+      channel: Channel.Error,
+      message: error.message,
+      source: error.source?.map((x) => ({ document: x.document, Position: x.position as any })),
+      details: error.details,
     });
   }
 
   public log(message: Message) {
-    if (message.Channel === Channel.Debug && !this.config.debug) {
+    if (message.channel === Channel.Debug && !this.config.debug) {
       return;
     }
 
-    if (message.Channel === Channel.Verbose && !this.config.verbose) {
+    if (message.channel === Channel.Verbose && !this.config.verbose) {
       return;
     }
 
@@ -71,14 +71,14 @@ export class AutorestCoreLogger {
   private async sendMessageAsync(m: Message): Promise<Message | undefined> {
     try {
       // update source locations to point to loaded Swagger
-      if (m.Source && typeof m.Source.map === "function") {
-        const sources = await this.resolveOriginalSources(m, m.Source);
-        m.Source = this.resolveOriginalDocumentNames(sources);
+      if (m.source && typeof m.source.map === "function") {
+        const sources = await this.resolveOriginalSources(m, m.source);
+        m.source = this.resolveOriginalDocumentNames(sources);
       }
 
       // set range (dummy)
-      if (m.Source && typeof m.Source.map === "function") {
-        m.Range = resolveRanges(m.Source);
+      if (m.source && typeof m.source.map === "function") {
+        m.range = resolveRanges(m.source);
       }
 
       // filter
@@ -90,8 +90,8 @@ export class AutorestCoreLogger {
         switch (this.config["message-format"]) {
           case "json":
             // TODO: WHAT THE FUDGE, check with the consumers whether this has to be like that... otherwise, consider changing the format to something less generic
-            if (mx.Details) {
-              mx.Details.sources = (mx.Source || [])
+            if (mx.details) {
+              mx.details.sources = (mx.source || [])
                 .filter((x) => x.Position)
                 .map((source) => {
                   let text = `${source.document}:${source.Position.line}:${source.Position.column}`;
@@ -100,25 +100,25 @@ export class AutorestCoreLogger {
                   }
                   return text;
                 });
-              if (mx.Details.sources.length > 0) {
-                mx.Details["jsonref"] = mx.Details.sources[0];
-                mx.Details["json-path"] = mx.Details.sources[0];
+              if (mx.details.sources.length > 0) {
+                mx.details["jsonref"] = mx.details.sources[0];
+                mx.details["json-path"] = mx.details.sources[0];
               }
             }
-            mx.FormattedMessage = JSON.stringify(mx.Details || mx, null, 2);
+            mx.formattedMessage = JSON.stringify(mx.details || mx, null, 2);
             break;
           case "yaml":
-            mx.FormattedMessage = Stringify([mx.Details || mx]).replace(/^---/, "");
+            mx.formattedMessage = Stringify([mx.details || mx]).replace(/^---/, "");
             break;
           default: {
             const t =
-              mx.Channel === Channel.Debug || mx.Channel === Channel.Verbose
+              mx.channel === Channel.Debug || mx.channel === Channel.Verbose
                 ? ` [${Math.floor(process.uptime() * 100) / 100} s]`
                 : "";
-            let text = `${(mx.Channel || Channel.Information).toString().toUpperCase()}${
-              mx.Key ? ` (${[...mx.Key].join("/")})` : ""
-            }${t}: ${mx.Text}`;
-            for (const source of mx.Source || []) {
+            let text = `${(mx.channel || Channel.Information).toString().toUpperCase()}${
+              mx.key ? ` (${[...mx.key].join("/")})` : ""
+            }${t}: ${mx.message}`;
+            for (const source of mx.source || []) {
               if (source.Position) {
                 try {
                   text += `\n    - ${source.document}`;
@@ -136,7 +136,7 @@ export class AutorestCoreLogger {
                 }
               }
             }
-            mx.FormattedMessage = text;
+            mx.formattedMessage = text;
             break;
           }
         }
@@ -144,7 +144,7 @@ export class AutorestCoreLogger {
         return mx;
       }
     } catch (e) {
-      return { Channel: Channel.Error, Text: `${e}` };
+      return { channel: Channel.Error, message: `${e}` };
     }
   }
 
@@ -160,10 +160,10 @@ export class AutorestCoreLogger {
             blameTree = await this.dataStore.blame(s.document, s.Position);
             if (shouldComplain) {
               await this.log({
-                Channel: Channel.Verbose,
-                Text: `\nDEVELOPER-WARNING: Path '${originalPath}' was corrected to ${JSON.stringify(
+                channel: Channel.Verbose,
+                message: `\nDEVELOPER-WARNING: Path '${originalPath}' was corrected to ${JSON.stringify(
                   s.Position.path,
-                )} on MESSAGE '${JSON.stringify(message.Text)}'\n`,
+                )} on MESSAGE '${JSON.stringify(message.message)}'\n`,
               });
             }
           } catch (e) {
@@ -189,9 +189,9 @@ export class AutorestCoreLogger {
         }
       } catch (e) {
         this.log({
-          Channel: Channel.Debug,
-          Text: `Failed to blame ${JSON.stringify(s.Position)} in '${JSON.stringify(s.document)}' (${e})`,
-          Details: e,
+          channel: Channel.Debug,
+          message: `Failed to blame ${JSON.stringify(s.Position)} in '${JSON.stringify(s.document)}' (${e})`,
+          details: e,
         });
         return [s];
       }

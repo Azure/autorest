@@ -54,8 +54,8 @@ async function quickCheck(config: AutorestContext, input: DataSource, sink: Data
       if (value.length > 1) {
         //failed = true;
         config.Message({
-          Text: `Enum ${key} has multiple unmerged implementations: ${value.join(",")}`,
-          Channel: Channel.Error,
+          message: `Enum ${key} has multiple unmerged implementations: ${value.join(",")}`,
+          channel: Channel.Error,
         });
       }
     }
