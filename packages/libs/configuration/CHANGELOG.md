@@ -1,6 +1,17 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Fri, 02 Apr 2021 15:18:00 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Apr 2021 19:53:22 GMT and should not be manually modified.
+
+## 1.2.3
+Fri, 09 Apr 2021 19:53:22 GMT
+
+### Patches
+
+- Added skip-semantics-validation config flag
+- **Added** remove-parameter built-in directive
+- **Update** Configuration to use new semantic validator
+- **Addd** `stats` flag to configuration
+- **Fix** Loading same configuration twice
 
 ## 1.2.2
 Fri, 02 Apr 2021 15:18:00 GMT

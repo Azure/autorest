@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Thu, 01 Apr 2021 15:46:41 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Apr 2021 19:53:22 GMT and should not be manually modified.
+
+## 4.18.2
+Fri, 09 Apr 2021 19:53:22 GMT
+
+### Patches
+
+- **Fix** api-version-mode configuration not working if not auto
 
 ## 4.18.1
 Thu, 01 Apr 2021 15:46:41 GMT

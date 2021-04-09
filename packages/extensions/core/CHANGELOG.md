@@ -1,6 +1,20 @@
 # Change Log - @autorest/core
 
-This log was last generated on Fri, 02 Apr 2021 15:18:00 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Apr 2021 19:53:22 GMT and should not be manually modified.
+
+## 3.3.0
+Fri, 09 Apr 2021 19:53:22 GMT
+
+### Minor changes
+
+- **Added** Semantic validator plugin 
+- **Feature** Add sourcemap support for errors providing original location of problem
+- **Added** support for emitting statistics of the specs and resuting model
+
+### Patches
+
+- **Added** [SemanticValidator] Path parameters validation to the semantic validator
+- **Internal** Refactor plugins
 
 ## 3.2.4
 Fri, 02 Apr 2021 15:18:00 GMT

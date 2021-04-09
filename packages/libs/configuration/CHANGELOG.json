@@ -2,6 +2,38 @@
   "name": "@autorest/configuration",
   "entries": [
     {
+      "version": "1.2.3",
+      "tag": "@autorest/configuration_v1.2.3",
+      "date": "Fri, 09 Apr 2021 19:53:22 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added skip-semantics-validation config flag"
+          },
+          {
+            "comment": "**Added** remove-parameter built-in directive"
+          },
+          {
+            "comment": "**Update** Configuration to use new semantic validator"
+          },
+          {
+            "comment": "**Addd** `stats` flag to configuration"
+          },
+          {
+            "comment": "**Fix** Loading same configuration twice"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.1.2` to `~1.1.3`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.2.2` to `~4.3.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.2.2",
       "tag": "@autorest/configuration_v1.2.2",
       "date": "Fri, 02 Apr 2021 15:18:00 GMT",
