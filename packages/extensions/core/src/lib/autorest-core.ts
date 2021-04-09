@@ -48,9 +48,7 @@ export class AutoRest extends EventEmitter {
    * Event: Signals when a Folder is supposed to be cleared
    */
   @EventEmitter.Event public ClearFolder!: IEvent<AutoRest, string>;
-  /**
-   * Event: Signals when a message is generated
-   */
+
   @EventEmitter.Event public Message!: IEvent<AutoRest, Message>;
 
   private _configurations = new Array<any>();
@@ -68,6 +66,7 @@ export class AutoRest extends EventEmitter {
     super();
     // ensure the environment variable for the home folder is set.
     process.env["autorest.home"] = process.env["AUTOREST_HOME"] || process.env["autorest.home"] || homedir();
+    AutorestLoggingSession.on("message", (message) => this.Message.Dispatch(message));
   }
 
   public async RegenerateView(includeDefault = false): Promise<AutorestContext> {
@@ -77,7 +76,6 @@ export class AutoRest extends EventEmitter {
     // subscribe to the events for the current configuration view
     messageEmitter.GeneratedFile.Subscribe((cfg, file) => this.GeneratedFile.Dispatch(file));
     messageEmitter.ClearFolder.Subscribe((cfg, folder) => this.ClearFolder.Dispatch(folder));
-    messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
 
     const stats = new StatsCollector();
     return (this._view = await new AutorestContextLoader(this.fileSystem, stats, this.configFileOrFolderUri).CreateView(
@@ -174,7 +172,8 @@ export class AutoRest extends EventEmitter {
           // eslint-disable-next-line no-ex-assign
           e = false;
         }
-        this.Message.Dispatch(message);
+        view.Message(message);
+
         // Wait for all logs to have been sent before shutting down.
         await AutorestLoggingSession.waitForMessages();
         this.Finished.Dispatch(e);

@@ -458,7 +458,6 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
 async function batch(api: AutoRest): Promise<void> {
   const context = await api.view;
   const batch = context.config["batch"];
-  console.log("----------------------- baticgh");
   if (!batch) {
     throw new Error("Unexpected batch cannot be undefined");
   }
@@ -467,7 +466,6 @@ async function batch(api: AutoRest): Promise<void> {
   api.AddConfiguration(batchTaskConfigReference);
 
   context.info(`Starting batch processing with ${batch.length} batch configurations`);
-  return;
   for (const [index, batchTaskConfig] of batch.entries()) {
     context.info(`Processing batch task - ${JSON.stringify(batchTaskConfig)} (${index + 1}/${batch.length}).`);
     // update batch task config section

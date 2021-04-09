@@ -58,18 +58,18 @@ export class AutorestCoreLogger {
   }
 
   public log(message: Message) {
+    if (message.Channel === Channel.Debug && !this.config.debug) {
+      return;
+    }
+
+    if (message.Channel === Channel.Verbose && !this.config.verbose) {
+      return;
+    }
+
     this.asyncLogManager.registerLog(() => this.sendMessageAsync(message));
   }
 
-  private async sendMessageAsync(m: Message) {
-    if (m.Channel === Channel.Debug && !this.config.debug) {
-      return;
-    }
-
-    if (m.Channel === Channel.Verbose && !this.config.verbose) {
-      return;
-    }
-
+  private async sendMessageAsync(m: Message): Promise<Message | undefined> {
     try {
       // update source locations to point to loaded Swagger
       if (m.Source && typeof m.Source.map === "function") {
@@ -142,10 +142,10 @@ export class AutorestCoreLogger {
           }
         }
 
-        this.messageEmitter.Message.Dispatch(mx);
+        return mx;
       }
     } catch (e) {
-      this.messageEmitter.Message.Dispatch({ Channel: Channel.Error, Text: `${e}` });
+      return { Channel: Channel.Error, Text: `${e}` };
     }
   }
 

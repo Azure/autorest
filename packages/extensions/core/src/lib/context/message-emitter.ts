@@ -13,10 +13,7 @@ export class MessageEmitter extends EventEmitter {
    * Event: Signals when a Folder is supposed to be cleared
    */
   @EventEmitter.Event public ClearFolder!: IEvent<MessageEmitter, string>;
-  /**
-   * Event: Signals when a message is generated
-   */
-  @EventEmitter.Event public Message!: IEvent<MessageEmitter, Message>;
+
   private cancellationTokenSource = new CancellationTokenSource();
 
   constructor() {
