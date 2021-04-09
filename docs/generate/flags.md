@@ -24,9 +24,11 @@
 ## Autorest flags
 Those are flags that affect autorest only
 
-| Flag | Description
-|------------------|-------------
-| `--output-converted-oai3` | If enabled and the input-files are `swager 2.0` this will output the resulting OpenAPI3.0 converted files to the `output-folder`
+| Flag                          | Description                                                                                                                      |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `--output-converted-oai3`     | If enabled and the input-files are `swager 2.0` this will output the resulting OpenAPI3.0 converted files to the `output-folder` |
+| `--skip-semantics-validation` | Disable the semantic validator plugin.                                                                                           |
+
 
 ## Temporary flags
 Those flags are temporary and will be removed in the future. Those flags are here to have a smoother rollout of certain feature.
