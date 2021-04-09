@@ -36,6 +36,11 @@ export interface AutorestRawConfiguration extends AutorestRawConfigurationAlias 
    */
   "stats"?: boolean;
 
+  /**
+   * Skip the semantic validation plugin.
+   */
+  "skip-semantics-validation"?: boolean;
+
   "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)
   "title"?: any;
   "description"?: any;
