@@ -15,11 +15,11 @@ export function createSemanticValidationPlugin(): PipelinePlugin {
     }
     const inputs = await Promise.all((await input.enum()).map(async (x) => input.readStrict(x)));
 
-    const specMap = new Map();
+    const specMap = new Map<string, { spec: oai3.Model; file: DataHandle }>();
 
     for (const file of inputs) {
-      const model = await file.readObject<oai3.Model>();
-      specMap.set(file.identity[0], model);
+      const spec = await file.readObject<oai3.Model>();
+      specMap.set(file.identity[0], { spec, file });
     }
 
     const resolveReference = <T>(item: Refable<T>, from: string): T => {
@@ -28,20 +28,20 @@ export function createSemanticValidationPlugin(): PipelinePlugin {
       }
       const ref = parseJsonRef(item.$ref);
       const file = ref.file ?? from;
-      const spec = specMap.get(file);
-      if (!spec) {
+      const entry = specMap.get(file);
+      if (!entry) {
         throw new Error(`Cannot find spec '${file}' referenced in ${stringifyJsonRef({ file, path: ref.path })}`);
       }
-      return dereference<T>(spec, {
+      return dereference<T>(entry.spec, {
         $ref: stringifyJsonRef({ path: ref.path }),
       }).instance;
     };
 
-    for (const [name, spec] of specMap.entries()) {
+    for (const [name, { spec, file }] of specMap.entries()) {
       const errors = validateOpenAPISemantics(spec, (item) => resolveReference(item, name));
       if (errors.length > 0) {
         for (const error of errors) {
-          logValidationError(context, spec, error);
+          logValidationError(context, file, error);
         }
         throw new Error("Semantic validation failed. There was some errors");
       }

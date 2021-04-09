@@ -128,4 +128,25 @@ describe("Semantic Validation > Paths", () => {
 
     expect(errors).toHaveLength(0);
   });
+
+  it("succeeed if path parameter when using mixed global and per method paarams", () => {
+    const errors = validatePaths({
+      ...baseModel,
+      paths: {
+        "/my/{myMissingParam}/foo/{otherMissingParam}": {
+          parameters: [{ in: ParameterLocation.Path, name: "myMissingParam" }],
+          get: {
+            responses: OkResponse,
+            parameters: [{ in: ParameterLocation.Path, name: "otherMissingParam" }],
+          },
+          post: {
+            responses: OkResponse,
+            parameters: [{ in: ParameterLocation.Path, name: "otherMissingParam" }],
+          },
+        },
+      },
+    });
+
+    expect(errors).toHaveLength(0);
+  });
 });

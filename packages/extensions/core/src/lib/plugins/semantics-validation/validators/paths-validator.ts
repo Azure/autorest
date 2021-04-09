@@ -4,6 +4,8 @@ import { createReferenceResolver } from "../utils";
 
 export const PATH_TEMPLATES_REGEX = /\{(.*?)\}/g;
 
+const operationKeys = new Set(["get", "post", "put", "delete", "options", "head", "patch", "trace"]);
+
 /**
  * Semantic validation for paths.
  * @param spec OpenAPI Spec to validate.
@@ -42,7 +44,7 @@ function validatePathParameterExists(
   }
 
   const misssingFromMethods = [];
-  for (const [method, operation] of Object.entries(pathItem)) {
+  for (const [method, operation] of Object.entries(pathItem).filter(([method]) => operationKeys.has(method))) {
     if (!findPathParameter(paramName, operation.parameters ?? [], resolveReference)) {
       misssingFromMethods.push(method);
     }
