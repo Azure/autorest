@@ -1,5 +1,5 @@
 import { SemanticError, SemanticErrorCodes } from "../types";
-import oai3, { dereference, Refable } from "@azure-tools/openapi";
+import oai3, { dereference, ParameterLocation, Refable } from "@azure-tools/openapi";
 
 export const PATH_TEMPLATES_REGEX = /\{(.*?)\}/g;
 
@@ -38,12 +38,19 @@ function validatePathParameterExists(
       misssingFromMethods.push(method);
     }
   }
-
-  return [createPathParameterMissingDefinitionError(uri, paramName, misssingFromMethods)];
+  return misssingFromMethods.length > 0
+    ? [createPathParameterMissingDefinitionError(uri, paramName, misssingFromMethods)]
+    : [];
 }
 
-function findPathParameter(paramName: string, parameters: Refable<oai3.Parameter>[], spec: oai3.Model) {
-  return parameters.map((x) => dereference(spec, x).instance).find((x) => x.in === "path" && x.name === "paramName");
+function findPathParameter(
+  paramName: string,
+  parameters: Refable<oai3.Parameter>[],
+  spec: oai3.Model,
+): oai3.Parameter | undefined {
+  return parameters
+    .map((x) => dereference(spec, x).instance)
+    .find((x) => x.in === ParameterLocation.Path && x.name === paramName);
 }
 
 function createPathParameterEmptyError(uri: string): SemanticError {
@@ -56,7 +63,7 @@ function createPathParameterEmptyError(uri: string): SemanticError {
 }
 
 function createPathParameterMissingDefinitionError(uri: string, paramName: string, methods: string[]): SemanticError {
-  const missingStr = methods.map((str) => `"${str}"`).join(", ");
+  const missingStr = methods.map((str) => `'${str}'`).join(", ");
   return {
     code: SemanticErrorCodes.PathParameterMissingDefinition,
     message: `Path parameter '${paramName}' referenced in path '${uri}' needs to be defined in every operation at either the path or operation level. (Missing in ${missingStr})`,
