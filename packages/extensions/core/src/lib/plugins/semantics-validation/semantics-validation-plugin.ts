@@ -1,12 +1,17 @@
 import { PipelinePlugin } from "../../pipeline/common";
 import oai3 from "@azure-tools/openapi";
-import { SemanticError, validateOpenAPISemantics } from "./semantics-validation";
+import { validateOpenAPISemantics } from "./semantics-validation";
 import { DataHandle } from "@azure-tools/datastore";
 import { AutorestContext } from "../../context";
 import util from "util";
+import { SemanticError } from "./types";
 
 export function createSemanticValidationPlugin(): PipelinePlugin {
   return async (context, input, sink) => {
+    if (context.config["skip-semantics-validation"]) {
+      context.trackWarning({ code: "SkippedSemanticValidation", message: "Semantic validation was skipped." });
+      return input;
+    }
     const inputs = await Promise.all((await input.enum()).map(async (x) => input.readStrict(x)));
 
     for (const file of inputs) {
