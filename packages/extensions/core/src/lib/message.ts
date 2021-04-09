@@ -57,6 +57,14 @@ export interface Range {
 
 export interface Message {
   channel: Channel;
+  /**
+   * Plugin that emitted this message if applicable.
+   */
+  plugin?: string;
+
+  /**
+   * Code for this error.
+   */
   key?: Iterable<string>;
   details?: any;
   message: string;
@@ -64,7 +72,6 @@ export interface Message {
   // injected or modified by core
   source?: SourceLocation[];
   range?: Iterable<Range>;
-  plugin?: string;
   formattedMessage?: string;
 }
 

@@ -111,32 +111,7 @@ export class AutorestCoreLogger {
             mx.formattedMessage = Stringify([mx.details || mx]).replace(/^---/, "");
             break;
           default: {
-            const t =
-              mx.channel === Channel.Debug || mx.channel === Channel.Verbose
-                ? ` [${Math.floor(process.uptime() * 100) / 100} s]`
-                : "";
-            let text = `${(mx.channel || Channel.Information).toString().toUpperCase()}${
-              mx.key ? ` (${[...mx.key].join("/")})` : ""
-            }${t}: ${mx.message}`;
-            for (const source of mx.source || []) {
-              if (source.Position) {
-                try {
-                  text += `\n    - ${source.document}`;
-                  if (source.Position.line !== undefined) {
-                    text += `:${source.Position.line}`;
-                    if (source.Position.column !== undefined) {
-                      text += `:${source.Position.column}`;
-                    }
-                  }
-                  if (source.Position.path) {
-                    text += ` (${stringify(source.Position.path)})`;
-                  }
-                } catch (e) {
-                  // no friendly name, so nothing more specific to show
-                }
-              }
-            }
-            mx.formattedMessage = text;
+            mx.formattedMessage = getTextFormattedMessage(mx);
             break;
           }
         }
@@ -234,4 +209,51 @@ function resolveRanges(sources: SourceLocation[]): Range[] {
       end: positionEnd,
     };
   });
+}
+
+/**
+ * Gets the formattedMessage for text output.
+ */
+function getTextFormattedMessage(message: Message): string {
+  const timestamp =
+    message.channel === Channel.Debug || message.channel === Channel.Verbose ? ` ${getUptimePrefix()}` : "";
+  const channel = (message.channel || Channel.Information).toString().toUpperCase();
+  let text = `${channel}${getMessageKey(message)}${timestamp}: ${message.message}`;
+
+  for (const source of message.source || []) {
+    if (source.Position) {
+      try {
+        text += `\n    - ${source.document}`;
+        if (source.Position.line !== undefined) {
+          text += `:${source.Position.line}`;
+          if (source.Position.column !== undefined) {
+            text += `:${source.Position.column}`;
+          }
+        }
+        if (source.Position.path) {
+          text += ` (${stringify(source.Position.path)})`;
+        }
+      } catch (e) {
+        // no friendly name, so nothing more specific to show
+      }
+    }
+  }
+  return text;
+}
+
+/**
+ * Returns uptime prefix.
+ * @returns
+ */
+function getUptimePrefix() {
+  return `[${Math.floor(process.uptime() * 100) / 100} s]`;
+}
+
+/**
+ * Returns the formatted message key if present.
+ * @param message Message
+ * @returns formatted message key.
+ */
+function getMessageKey(message: Message) {
+  return message.key ? ` (${[...message.key].join("/")})` : "";
 }
