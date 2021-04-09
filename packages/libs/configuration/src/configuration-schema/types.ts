@@ -23,25 +23,25 @@ export type InferredProcessedType<T> =
 // prettier-ignore
 export type InferredPrimitiveType<T> =
   T extends { type: "string", enum: ReadonlyArray<string> }  ? EnumType<T["enum"]>
-  : T extends { type: ConfigurationSchema }                  ? RawConfiguration<T["type"]>
   : T extends { type: "string" }                             ? string
   : T extends { type: "number" }                             ? number
   : T extends { type: "boolean" }                            ? boolean
+  : T extends { type: ConfigurationSchema }                  ? ProcessedConfiguration<T["type"]>
   : never;
 
 // prettier-ignore
 export type InferredRawType<T> =
-  T extends {  array: true }       ? NonNullable<InferredRawPrimitiveType<T>>[] | InferredRawPrimitiveType<T>
+  T extends { array: true }       ? NonNullable<InferredRawPrimitiveType<T>>[] | InferredRawPrimitiveType<T>
   : T extends { dictionary: true } ? Record<string, InferredRawPrimitiveType<T>>
   : InferredRawPrimitiveType<T>;
 
 // prettier-ignore
 export type InferredRawPrimitiveType<T> =
-  T extends { type: ConfigurationSchema }                     ? RawConfiguration<T["type"]> | undefined
-  : T extends { type: "string", enum: ReadonlyArray<string> } ? EnumType<T["enum"]>
+  T extends { type: "string", enum: ReadonlyArray<string> } ? EnumType<T["enum"]>
   : T extends { type: "string" }                              ? string | undefined
   : T extends { type: "number" }                              ? number | undefined
   : T extends { type: "boolean" }                             ? boolean | undefined
+  : T extends { type: ConfigurationSchema }                     ? RawConfiguration<T["type"]> | undefined
   : never;
 
 export type ProcessedConfiguration<S extends ConfigurationSchema> = {

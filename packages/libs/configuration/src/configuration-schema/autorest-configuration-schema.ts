@@ -34,4 +34,8 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
 
 export const autorestConfigurationProcessor = new ConfigurationSchemaProcessor(AUTOREST_CONFIGURATION_SCHEMA);
 const result = autorestConfigurationProcessor.processConfiguration({});
-const config: AutorestRawConfiguration = result;
+if ("errors" in result) {
+  console.error("Errors", result.errors);
+} else {
+  const config: AutorestRawConfiguration = result.value;
+}
