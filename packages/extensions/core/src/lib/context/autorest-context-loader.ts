@@ -102,7 +102,7 @@ export class AutorestContextLoader {
   ): Promise<AutorestContext> {
     const logger: AutorestLogger = new AutorestCoreLogger(
       mergeConfigurations(...configs) as any,
-      messageEmitter,
+      messageEmitter.DataStore,
       AutorestLoggingSession,
     );
 

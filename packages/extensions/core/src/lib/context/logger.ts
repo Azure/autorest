@@ -1,9 +1,8 @@
 import { Channel, Message, Range, SourceLocation } from "../message";
-import { BlameTree, stringify, Stringify, tryDecodeEnhancedPositionFromName } from "@azure-tools/datastore";
+import { BlameTree, DataStore, stringify, Stringify, tryDecodeEnhancedPositionFromName } from "@azure-tools/datastore";
 import { AutorestError, AutorestWarning } from "@autorest/common";
 import { AutorestConfiguration } from "@autorest/configuration";
 import { Suppressor } from "../pipeline/suppression";
-import { MessageEmitter } from "./message-emitter";
 import { LoggingSession } from "./logging-session";
 import { flatMap } from "lodash";
 
@@ -12,7 +11,7 @@ export class AutorestCoreLogger {
 
   public constructor(
     private config: AutorestConfiguration,
-    private messageEmitter: MessageEmitter,
+    private dataStore: DataStore,
     private asyncLogManager: LoggingSession,
   ) {
     this.suppressor = new Suppressor(config);

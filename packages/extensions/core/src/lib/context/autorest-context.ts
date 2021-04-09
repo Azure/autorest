@@ -33,7 +33,7 @@ export class AutorestContext implements AutorestLogger {
     public asyncLogManager: LoggingSession,
   ) {
     this.config = config;
-    this.logger = new AutorestCoreLogger(config, messageEmitter, asyncLogManager);
+    this.logger = new AutorestCoreLogger(config, messageEmitter.DataStore, asyncLogManager);
     this.configFileFolderUri = config.configFileFolderUri;
   }
 
