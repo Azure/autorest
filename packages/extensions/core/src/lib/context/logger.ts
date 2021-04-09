@@ -157,7 +157,7 @@ export class AutorestCoreLogger {
         let shouldComplain = false;
         while (blameTree === null) {
           try {
-            blameTree = await this.messageEmitter.DataStore.blame(s.document, s.Position);
+            blameTree = await this.dataStore.blame(s.document, s.Position);
             if (shouldComplain) {
               await this.log({
                 Channel: Channel.Verbose,
@@ -209,7 +209,7 @@ export class AutorestCoreLogger {
     return sources.map((source) => {
       if (source.Position) {
         try {
-          const document = this.messageEmitter.DataStore.readStrictSync(source.document).description;
+          const document = this.dataStore.readStrictSync(source.document).description;
           return { ...source, document };
         } catch {
           // no worries
