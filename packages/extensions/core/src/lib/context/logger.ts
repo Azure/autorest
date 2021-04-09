@@ -90,6 +90,10 @@ export class AutorestCoreLogger {
         switch (this.config["message-format"]) {
           case "json":
             mx.formattedMessage = getJsonFormatterMessage(mx);
+            break;
+          case "jsonLegacy":
+            mx.formattedMessage = getLegacyJsonFormatterMessage(mx);
+            break;
           case "yaml":
             mx.formattedMessage = Stringify([mx.details || mx]).replace(/^---/, "");
             break;
