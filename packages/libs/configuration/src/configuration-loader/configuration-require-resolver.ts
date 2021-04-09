@@ -1,5 +1,5 @@
 import { IFileSystem } from "@azure-tools/datastore";
-import { ResolveUri, IsUri, EnsureIsFolderUri } from "@azure-tools/uri";
+import { resolveUri, isUri, ensureIsFolderUri } from "@azure-tools/uri";
 import { AutorestConfiguration } from "../autorest-configuration";
 import { arrayOf } from "../utils";
 
@@ -23,13 +23,14 @@ export async function* getIncludedConfigurationFiles(
     // if we make it thru the list, we're done.
     done = true;
     for (const each of arrayOf<string>(config["require"])) {
-      if (ignoreFiles.has(each)) {
+      const path = await resolveRequireAsPath(each, config, fileSystem);
+      if (ignoreFiles.has(path)) {
         continue;
       }
 
       // looks like we found one that we haven't handled yet.
       done = false;
-      ignoreFiles.add(each);
+      ignoreFiles.add(path);
       yield await resolveRequireAsPath(each, config, fileSystem);
       break;
     }
@@ -43,16 +44,16 @@ export async function* getIncludedConfigurationFiles(
     // if we make it thru the list, we're done.
     done = true;
     for (const each of arrayOf<string>(config["try-require"])) {
-      if (ignoreFiles.has(each)) {
+      const path = await resolveRequireAsPath(each, config, fileSystem);
+      if (ignoreFiles.has(path)) {
         continue;
       }
 
       // looks like we found one that we haven't handled yet.
       done = false;
-      ignoreFiles.add(each);
-      const path = await resolveRequireAsPath(each, config, fileSystem);
+      ignoreFiles.add(path);
       try {
-        if (await fileSystem.ReadFile(path)) {
+        if (await fileSystem.read(path)) {
           yield path;
         }
       } catch {
@@ -71,10 +72,10 @@ const resolveRequireAsPath = (
 ): Promise<string> => {
   // is there even a potential for a parent folder from the input configuruation
   const parentFolder = config.__parents?.[path];
-  const fromBaseUri = ResolveUri(getBaseFolderUri(config), path);
+  const fromBaseUri = resolveUri(getBaseFolderUri(config), path);
 
   // if it's an absolute uri already, give it back that way.
-  if (IsUri(path) || !parentFolder) {
+  if (isUri(path) || !parentFolder) {
     return Promise.resolve(fromBaseUri);
   }
 
@@ -82,13 +83,13 @@ const resolveRequireAsPath = (
   // if the relative-to-parent path isn't valid, we fall back to original behavior
   // where the file path is relative to the base uri.
   // (and we don't even check to see if that's valid, try-require wouldn't need valid files)
-  const fromLoadedFile = ResolveUri(parentFolder, path);
-  return fileSystem.ReadFile(fromLoadedFile).then(
+  const fromLoadedFile = resolveUri(parentFolder, path);
+  return fileSystem.read(fromLoadedFile).then(
     () => fromLoadedFile,
     () => fromBaseUri,
   );
 };
 
 const getBaseFolderUri = (config: AutorestConfiguration): string => {
-  return EnsureIsFolderUri(ResolveUri(config.configFileFolderUri, <string>config["base-folder"]));
+  return ensureIsFolderUri(resolveUri(config.configFileFolderUri, <string>config["base-folder"]));
 };
