@@ -57,6 +57,7 @@ function processConfiguration<S extends ConfigurationSchema>(
       //   message: `Property ${key} is not defined in the schema.`,
       //   path: propertyPath,
       // });
+      result[key] = value;
       continue;
     }
 
