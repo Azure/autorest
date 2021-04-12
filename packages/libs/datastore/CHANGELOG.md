@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/datastore
 
-This log was last generated on Thu, 01 Apr 2021 15:46:41 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Apr 2021 19:53:22 GMT and should not be manually modified.
+
+## 4.3.0
+Fri, 09 Apr 2021 19:53:22 GMT
+
+### Minor changes
+
+- **Added** sourcemap support
 
 ## 4.2.2
 Thu, 01 Apr 2021 15:46:41 GMT

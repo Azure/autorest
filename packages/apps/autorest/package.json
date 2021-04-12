@@ -1,6 +1,6 @@
 {
   "name": "autorest",
-  "version": "3.1.4",
+  "version": "3.1.5",
   "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is an OpenAPI spec that describes the REST API.",
   "engines": {
     "node": ">=10.13.0"
@@ -40,8 +40,8 @@
   },
   "typings": "./dist/exports.d.ts",
   "devDependencies": {
-    "@autorest/configuration": "~1.2.2",
-    "@autorest/core": "~3.2.4",
+    "@autorest/configuration": "~1.2.3",
+    "@autorest/core": "~3.3.0",
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/extension": "~3.2.5",
     "@azure-tools/tasks": "~3.0.0",
