@@ -167,12 +167,12 @@ describe("ConfigurationManager", () => {
         configs: [
           {
             config: {
-              directive: { from: "swagger-document", transform: "$.swagger=true" },
+              directive: [{ from: "swagger-document", transform: "$.swagger=true" }],
             },
           },
           {
             config: {
-              directive: { from: "openapi-document", transform: "$.openapi3=true" },
+              directive: [{ from: "openapi-document", transform: "$.openapi3=true" }],
             },
           },
         ],
