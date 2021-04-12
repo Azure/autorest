@@ -18,6 +18,10 @@ const TestSchema = {
     type: "number",
     array: true,
   },
+  numberDict: {
+    type: "number",
+    dictionary: true,
+  },
   nested: {
     nestedNumber: { type: "number" },
   },
@@ -87,7 +91,7 @@ describe("ConfigurationProcessor", () => {
       errors: [
         {
           code: ProcessingErrorCode.InvalidType,
-          message: "Expected a string but got number: '123'",
+          message: "Expected a string but got number: 123",
           path: ["simpleString"],
         },
       ],
@@ -113,7 +117,7 @@ describe("ConfigurationProcessor", () => {
       errors: [
         {
           code: ProcessingErrorCode.InvalidType,
-          message: "Expected a string but got number: '123'",
+          message: "Expected a string but got number: 123",
           path: ["simpleEnum"],
         },
       ],
@@ -196,6 +200,44 @@ describe("ConfigurationProcessor", () => {
 
       expect(result).toEqual({
         value: { numberArray: [123] },
+      });
+    });
+  });
+
+  describe("Dictionary validation", () => {
+    it("validate dictionary of number", () => {
+      const result = processor.processConfiguration({
+        numberDict: {
+          foo: "notANumber" as any,
+        },
+      });
+
+      expect(result).toEqual({
+        errors: [
+          {
+            code: ProcessingErrorCode.InvalidType,
+            message: "Expected a number but got string: 'notANumber'",
+            path: ["numberDict", "foo"],
+          },
+        ],
+      });
+    });
+
+    it("process dictionary of number", () => {
+      const result = processor.processConfiguration({
+        numberDict: {
+          foo: 123,
+          bar: 456,
+        },
+      });
+
+      expect(result).toEqual({
+        value: {
+          numberDict: {
+            foo: 123,
+            bar: 456,
+          },
+        },
       });
     });
   });

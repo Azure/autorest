@@ -1,4 +1,5 @@
 import { flatMap } from "lodash";
+import { inspect } from "util";
 import {
   ConfigurationProperty,
   ConfigurationSchema,
@@ -50,11 +51,12 @@ function processConfiguration<S extends ConfigurationSchema>(
     const propertySchema = schema[key];
     const propertyPath = [...path, key];
     if (!propertySchema) {
-      errors.push({
-        code: ProcessingErrorCode.UnknownProperty,
-        message: `Property ${key} is not defined in the schema.`,
-        path: propertyPath,
-      });
+      // Don't fail for now as any property could be used. See if we can make use of this latter(Maybe using a flag)
+      // errors.push({
+      //   code: ProcessingErrorCode.UnknownProperty,
+      //   message: `Property ${key} is not defined in the schema.`,
+      //   path: propertyPath,
+      // });
       continue;
     }
 
@@ -95,6 +97,25 @@ function processProperty<T extends ConfigurationProperty>(
         return { value: [result.value] as any };
       }
     }
+  } else if (schema.dictionary) {
+    if (value === undefined) {
+      return { value: {} as any };
+    }
+
+    if (typeof value !== "object") {
+      return { errors: [createInvalidTypeError(value, "object", path)] };
+    }
+    const result: any = {};
+
+    for (const [key, dictValue] of Object.entries(value ?? {})) {
+      const prop = processPrimitiveProperty(schema, [...path, key], dictValue);
+      if ("errors" in prop) {
+        return { errors: prop.errors };
+      }
+      result[key] = prop.value;
+    }
+
+    return { value: result };
   } else {
     return processPrimitiveProperty(schema, path, value as InferredRawPrimitiveType<T>) as any;
   }
@@ -132,11 +153,14 @@ function processPrimitiveProperty<T extends ConfigurationProperty>(
 
     if (schema.enum) {
       if (!schema.enum.includes(value)) {
+        const serializedValue = inspect(value);
         return {
           errors: [
             {
               code: ProcessingErrorCode.InvalidType,
-              message: `Expected a value to be in [${schema.enum.map((x) => `'${x}'`).join(",")}] but got '${value}'`,
+              message: `Expected a value to be in [${schema.enum
+                .map((x) => `'${x}'`)
+                .join(",")}] but got ${serializedValue}`,
               path,
             },
           ],
@@ -151,9 +175,11 @@ function processPrimitiveProperty<T extends ConfigurationProperty>(
 }
 
 function createInvalidTypeError(value: unknown, expectedType: string, path: string[]) {
+  const serializedValue = inspect(value);
+
   return {
     code: ProcessingErrorCode.InvalidType,
-    message: `Expected a ${expectedType} but got ${typeof value}: '${value}'`,
+    message: `Expected a ${expectedType} but got ${typeof value}: ${serializedValue}`,
     path,
   };
 }
