@@ -2,6 +2,18 @@
   "name": "@autorest/codemodel",
   "entries": [
     {
+      "version": "4.14.8",
+      "tag": "@autorest/codemodel_v4.14.8",
+      "date": "Fri, 09 Apr 2021 19:53:22 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Update** knownmediatype and mediaTypes to be optional in HttpOperation"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.14.7",
       "tag": "@autorest/codemodel_v4.14.7",
       "date": "Tue, 16 Mar 2021 15:52:56 GMT",
