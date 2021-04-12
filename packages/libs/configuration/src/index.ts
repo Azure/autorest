@@ -1,5 +1,6 @@
 export * from "./autorest-configuration";
-export * from "./autorest-raw-configuration";
+export * from "./autorest-normalized-configuration";
+export * from "./configuration-schema";
 export * from "./configuration-manager";
 export * from "./configuration-file-resolver";
 export * from "./configuration-loader";

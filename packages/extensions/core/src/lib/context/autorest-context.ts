@@ -4,15 +4,15 @@ import { From } from "linq-es2015";
 import { basename, dirname } from "path";
 import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
 import { Artifact } from "../artifact";
-import { getNestedConfiguration, ResolvedDirective, resolveDirectives } from "@autorest/configuration";
+import {
+  AutorestNormalizedConfiguration,
+  getNestedConfiguration,
+  ResolvedDirective,
+  resolveDirectives,
+} from "@autorest/configuration";
 import { MessageEmitter } from "./message-emitter";
 import { IEvent } from "../events";
-import {
-  AutorestConfiguration,
-  AutorestRawConfiguration,
-  arrayOf,
-  extendAutorestConfiguration,
-} from "@autorest/configuration";
+import { AutorestConfiguration, arrayOf, extendAutorestConfiguration } from "@autorest/configuration";
 import { AutorestError, AutorestLogger, AutorestWarning } from "@autorest/common";
 import { Message } from "../message";
 import { AutorestCoreLogger } from "./logger";
@@ -173,7 +173,7 @@ export class AutorestContext implements AutorestLogger {
 
     let result = this.config;
     for (const keyPart of key.split(".")) {
-      result = result[keyPart as keyof AutorestRawConfiguration];
+      result = result[keyPart as keyof AutorestConfiguration];
     }
     return result;
   }
@@ -188,7 +188,7 @@ export class AutorestContext implements AutorestLogger {
    * Returns a new Autorest context with the configuration extended with the provided configurations.
    * @param overrides List of configs to override
    */
-  public extendWith(...overrides: AutorestRawConfiguration[]): AutorestContext {
+  public extendWith(...overrides: AutorestNormalizedConfiguration[]): AutorestContext {
     const nestedConfig = extendAutorestConfiguration(this.config, overrides);
     return new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter, this.stats, this.asyncLogManager);
   }

@@ -50,7 +50,7 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
 } as const;
 
 export type AutorestRawConfiguration = RawConfiguration<typeof AUTOREST_CONFIGURATION_SCHEMA> & {
-  [key: string]: string;
+  [key: string]: any;
 };
 
 export const autorestConfigurationProcessor = new ConfigurationSchemaProcessor(AUTOREST_CONFIGURATION_SCHEMA);

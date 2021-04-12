@@ -1,7 +1,7 @@
 import { AutorestLogger, CodeBlock, OperationAbortedException, parseCodeBlocks } from "@autorest/common";
 import { DataHandle, DataSink } from "@azure-tools/datastore";
 import { parentFolderUri, isUri } from "@azure-tools/uri";
-import { AutorestNormalizedConfiguration } from "../autorest-raw-configuration";
+import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
 import {
   autorestConfigurationProcessor,
   AUTOREST_CONFIGURATION_SCHEMA,

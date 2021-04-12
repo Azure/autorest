@@ -1,6 +1,6 @@
 import { IFileSystem, MemoryFileSystem } from "@azure-tools/datastore";
 import { createConfigFromRawConfig } from "../autorest-configuration";
-import { AutorestNormalizedConfiguration } from "../autorest-raw-configuration";
+import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
 import { getIncludedConfigurationFiles } from "./configuration-require-resolver";
 
 const configFile1 = "foo.md";

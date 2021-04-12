@@ -7,7 +7,7 @@ import { AutorestConfiguration } from "../autorest-configuration";
 import { detectConfigurationFile } from "../configuration-file-resolver";
 import { ConfigurationManager, readConfigurationFile } from "../configuration-manager";
 import { getIncludedConfigurationFiles } from "./configuration-require-resolver";
-import { AutorestNormalizedConfiguration } from "../autorest-raw-configuration";
+import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
 import { exists, filePath } from "@azure-tools/async-io";
 import { autorestConfigurationProcessor, AutorestRawConfiguration } from "../configuration-schema";
 

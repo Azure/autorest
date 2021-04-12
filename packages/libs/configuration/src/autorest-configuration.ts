@@ -1,4 +1,4 @@
-import { AutorestNormalizedConfiguration } from "./autorest-raw-configuration";
+import { AutorestNormalizedConfiguration } from "./autorest-normalized-configuration";
 import { IFileSystem } from "@azure-tools/datastore";
 import { CreateFileOrFolderUri, EnsureIsFolderUri, IsUri, ResolveUri } from "@azure-tools/uri";
 import { cwd } from "process";

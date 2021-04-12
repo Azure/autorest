@@ -1,6 +1,6 @@
 import { ExtensionManager } from "@azure-tools/extension";
 import { omit } from "lodash";
-import { AutorestNormalizedConfiguration } from "./autorest-raw-configuration";
+import { AutorestNormalizedConfiguration } from "./autorest-normalized-configuration";
 import { IsUri } from "@azure-tools/uri";
 import { isDirectory, exists } from "@azure-tools/async-io";
 import os from "os";

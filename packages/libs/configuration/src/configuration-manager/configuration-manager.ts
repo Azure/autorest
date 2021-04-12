@@ -1,7 +1,7 @@
 import { evaluateGuard, mergeOverwriteOrAppend } from "@autorest/common";
 import { IFileSystem } from "@azure-tools/datastore";
 import { AutorestConfiguration, createAutorestConfiguration } from "../autorest-configuration";
-import { AutorestNormalizedConfiguration } from "../autorest-raw-configuration";
+import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
 import { desugarRawConfig } from "../desugar";
 import { ConditionalConfiguration, ConfigurationFile } from "./configuration-file";
 
