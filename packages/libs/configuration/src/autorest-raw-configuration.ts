@@ -4,7 +4,7 @@ import { Directive } from "./directive";
  * Represent a raw configuration provided by the user.
  * i.e. The mapping of values passed via a config block, cli arguments, etc.
  */
-export interface AutorestRawConfiguration extends AutorestRawConfigurationAlias {
+export interface AutorestNormalizedConfiguration extends AutorestRawConfigurationAlias {
   "__status"?: any;
   "__parents"?: any | undefined;
 
@@ -14,17 +14,17 @@ export interface AutorestRawConfiguration extends AutorestRawConfigurationAlias 
   "version"?: string;
 
   "allow-no-input"?: boolean;
-  "input-file"?: Array<string> | string;
-  "exclude-file"?: Array<string> | string;
+  "input-file"?: Array<string>;
+  "exclude-file"?: Array<string>;
   "base-folder"?: string;
-  "directive"?: Array<Directive> | Directive;
+  "directive"?: Array<Directive>;
   "declare-directive"?: { [name: string]: string };
-  "output-artifact"?: Array<string> | string;
+  "output-artifact"?: Array<string>;
   "message-format"?: "json" | "yaml" | "regular";
   "use"?: string[] | string;
   "use-extension"?: { [extensionName: string]: string };
-  "require"?: Array<string> | string;
-  "try-require"?: Array<string> | string;
+  "require"?: Array<string>;
+  "try-require"?: Array<string>;
   "help"?: any;
   "pass-thru"?: any[];
   "disable-validation"?: boolean;
@@ -92,7 +92,7 @@ export interface AutorestRawConfiguration extends AutorestRawConfigurationAlias 
 
   // multi-api specific
   "profiles"?: any;
-  "profile"?: Array<string> | string;
+  "profile"?: Array<string>;
   "api-version"?: Array<string>;
 
   "pipeline-model"?: string;

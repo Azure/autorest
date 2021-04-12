@@ -1,16 +1,15 @@
-import { AutorestRawConfiguration } from "./autorest-raw-configuration";
+import { AutorestNormalizedConfiguration } from "./autorest-raw-configuration";
 import { IFileSystem } from "@azure-tools/datastore";
 import { CreateFileOrFolderUri, EnsureIsFolderUri, IsUri, ResolveUri } from "@azure-tools/uri";
 import { cwd } from "process";
 import { mergeConfigurations } from "./configuration-merging";
 import { arrayOf } from "./utils";
 
-// TODO-TIM don't extend
-export interface AutorestConfiguration extends AutorestRawConfiguration {
+export interface AutorestConfiguration extends AutorestNormalizedConfiguration {
   /**
    * Raw configuration that was used to build this config
    */
-  raw: AutorestRawConfiguration;
+  raw: AutorestNormalizedConfiguration;
 
   configFileFolderUri: string;
 
@@ -58,7 +57,7 @@ export interface AutorestConfiguration extends AutorestRawConfiguration {
 
 export const createAutorestConfiguration = async (
   configFileFolderUri: string,
-  rawConfig: AutorestRawConfiguration,
+  rawConfig: AutorestNormalizedConfiguration,
   configurationFiles: string[],
   fileSystem: IFileSystem,
 ): Promise<AutorestConfiguration> => {
@@ -82,7 +81,7 @@ export const createAutorestConfiguration = async (
 
 export const createConfigFromRawConfig = (
   configFileFolderUri: string,
-  rawConfig: AutorestRawConfiguration,
+  rawConfig: AutorestNormalizedConfiguration,
   configurationFiles: string[],
 ): AutorestConfiguration => {
   const baseFolderUri = getBaseFolderUri(configFileFolderUri, rawConfig);
@@ -102,14 +101,14 @@ export const createConfigFromRawConfig = (
   };
 };
 
-const getCacheExclude = (config: AutorestRawConfiguration) => {
+const getCacheExclude = (config: AutorestNormalizedConfiguration) => {
   const cache = config["cache"];
   return cache && cache.exclude ? arrayOf<string>(cache.exclude) : [];
 };
 
 export const extendAutorestConfiguration = (
   config: AutorestConfiguration,
-  overrides: AutorestRawConfiguration[],
+  overrides: AutorestNormalizedConfiguration[],
 ): AutorestConfiguration => {
   const rawConfig = mergeConfigurations(...overrides, config.raw);
   const newConfig = createConfigFromRawConfig(config.configFileFolderUri, rawConfig, config.configurationFiles);
@@ -130,7 +129,7 @@ export function* getNestedConfiguration(
     return;
   }
 
-  for (const section of arrayOf<any>(config.raw[pluginName as keyof AutorestRawConfiguration])) {
+  for (const section of arrayOf<any>(config.raw[pluginName as keyof AutorestNormalizedConfiguration])) {
     if (section) {
       yield extendAutorestConfiguration(config, section === true ? [] : [section]);
     }
@@ -163,7 +162,7 @@ export const resolveAsPath = (
   );
 };
 
-export const getBaseFolderUri = (configFileFolderUri: string, config: AutorestRawConfiguration) =>
+export const getBaseFolderUri = (configFileFolderUri: string, config: AutorestNormalizedConfiguration) =>
   EnsureIsFolderUri(ResolveUri(configFileFolderUri, <string>config["base-folder"]));
 
 const resolveAsFolder = (baseFolderUri: string, path: string): string => {

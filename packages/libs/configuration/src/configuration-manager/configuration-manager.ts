@@ -1,11 +1,11 @@
 import { evaluateGuard, mergeOverwriteOrAppend } from "@autorest/common";
 import { IFileSystem } from "@azure-tools/datastore";
 import { AutorestConfiguration, createAutorestConfiguration } from "../autorest-configuration";
-import { AutorestRawConfiguration } from "../autorest-raw-configuration";
+import { AutorestNormalizedConfiguration } from "../autorest-raw-configuration";
 import { desugarRawConfig } from "../desugar";
 import { ConditionalConfiguration, ConfigurationFile } from "./configuration-file";
 
-const initialConfig: AutorestRawConfiguration = Object.freeze({
+const initialConfig: AutorestNormalizedConfiguration = Object.freeze({
   "directive": [],
   "input-file": [],
   "exclude-file": [],
@@ -17,7 +17,7 @@ const initialConfig: AutorestRawConfiguration = Object.freeze({
   "pass-thru": [],
 });
 
-const defaultConfig: AutorestRawConfiguration = Object.freeze({
+const defaultConfig: AutorestNormalizedConfiguration = Object.freeze({
   "base-folder": ".",
   "output-folder": "generated",
   "debug": false,
@@ -27,7 +27,7 @@ const defaultConfig: AutorestRawConfiguration = Object.freeze({
 
 interface SimpleConfiguration {
   type: "simple";
-  config: AutorestRawConfiguration;
+  config: AutorestNormalizedConfiguration;
 }
 
 type ConfigurationItem = ConfigurationFile | SimpleConfiguration;
@@ -43,7 +43,7 @@ export class ConfigurationManager {
 
   public constructor(private configFileOrFolderUri: string, private fileSystem: IFileSystem) {}
 
-  public async addConfig(config: AutorestRawConfiguration) {
+  public async addConfig(config: AutorestNormalizedConfiguration) {
     this.configItems.push({ type: "simple", config: await desugarRawConfig(config) });
   }
 
@@ -52,7 +52,7 @@ export class ConfigurationManager {
    * This means this configuration will be loaded first, its value will be able to be used in later configurations.
    * @param config Configuration.
    */
-  public async addHighPriorityConfig(config: AutorestRawConfiguration) {
+  public async addHighPriorityConfig(config: AutorestNormalizedConfiguration) {
     this.configItems.unshift({ type: "simple", config: await desugarRawConfig(config) });
   }
 
@@ -92,7 +92,10 @@ export class ConfigurationManager {
    * @param config Current config. Will be used to resolve values in the config file.(Such as condition or interpolate values).
    * @param configFile Config file.
    */
-  private mergeConfigFile(config: AutorestRawConfiguration, configFile: ConfigurationFile): AutorestRawConfiguration {
+  private mergeConfigFile(
+    config: AutorestNormalizedConfiguration,
+    configFile: ConfigurationFile,
+  ): AutorestNormalizedConfiguration {
     let currentFileResolution = { ...initialConfig };
     const resolveConfig = () => mergeOverwriteOrAppend(config, currentFileResolution);
 
@@ -117,7 +120,7 @@ export class ConfigurationManager {
 }
 
 const shouldIncludeConditionalConfig = (
-  context: AutorestRawConfiguration,
+  context: AutorestNormalizedConfiguration,
   config: ConditionalConfiguration,
   forceAllVersionsMode: boolean,
 ) => (config.condition ? evaluateGuard(config.condition, context, forceAllVersionsMode) : true);

@@ -1,6 +1,6 @@
 import { ExtensionManager } from "@azure-tools/extension";
 import { omit } from "lodash";
-import { AutorestRawConfiguration } from "./autorest-raw-configuration";
+import { AutorestNormalizedConfiguration } from "./autorest-raw-configuration";
 import { IsUri } from "@azure-tools/uri";
 import { isDirectory, exists } from "@azure-tools/async-io";
 import os from "os";
@@ -57,7 +57,9 @@ const desugarUseField = async (use: string[] | string) => {
  * Resolve some sugar properties.
  * @param rawConfig Config to clean.
  */
-export const desugarRawConfig = async (rawConfig: AutorestRawConfiguration): Promise<AutorestRawConfiguration> => {
+export const desugarRawConfig = async (
+  rawConfig: AutorestNormalizedConfiguration,
+): Promise<AutorestNormalizedConfiguration> => {
   return {
     ...omit(rawConfig, "licence-header"),
     "license-header": rawConfig["license-header"] ?? rawConfig["licence-header"],

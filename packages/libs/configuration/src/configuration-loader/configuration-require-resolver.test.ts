@@ -1,6 +1,6 @@
 import { IFileSystem, MemoryFileSystem } from "@azure-tools/datastore";
 import { createConfigFromRawConfig } from "../autorest-configuration";
-import { AutorestRawConfiguration } from "../autorest-raw-configuration";
+import { AutorestNormalizedConfiguration } from "../autorest-raw-configuration";
 import { getIncludedConfigurationFiles } from "./configuration-require-resolver";
 
 const configFile1 = "foo.md";
@@ -10,7 +10,7 @@ const defaultConfig = { "base-folder": "file://.", "output-folder": "./generated
 describe("getIncludedConfigurationFiles", () => {
   let fs: IFileSystem;
 
-  const getRequiredFiles = async (raw: AutorestRawConfiguration) => {
+  const getRequiredFiles = async (raw: AutorestNormalizedConfiguration) => {
     const result: string[] = [];
 
     const config = createConfigFromRawConfig(".", { ...defaultConfig, ...raw }, []);
