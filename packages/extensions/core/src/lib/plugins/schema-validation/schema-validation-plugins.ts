@@ -17,7 +17,7 @@ export function createSwaggerSchemaValidatorPlugin(): PipelinePlugin {
   const swaggerValidator = new SwaggerSchemaValidator();
 
   return createPerFilePlugin(async (config) => async (fileIn, sink) => {
-    const obj = await fileIn.ReadObject<any>();
+    const obj = await fileIn.readObject<any>();
     const isSecondary = !!obj["x-ms-secondary-file"];
 
     const errors = await swaggerValidator.validateFile(fileIn);
@@ -30,7 +30,7 @@ export function createSwaggerSchemaValidatorPlugin(): PipelinePlugin {
         throw new OperationAbortedException();
       }
     }
-    return sink.Forward(fileIn.Description, fileIn);
+    return sink.forward(fileIn.description, fileIn);
   });
 }
 
@@ -38,7 +38,7 @@ export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
   const validator = new OpenApi3SchemaValidator();
 
   return createPerFilePlugin(async (context) => async (fileIn, sink) => {
-    const obj = await fileIn.ReadObject<any>();
+    const obj = await fileIn.readObject<any>();
     const isSecondary = !!obj["x-ms-secondary-file"];
     const markErrorAsWarnings = context.config["mark-oai3-errors-as-warnings"];
     const errors = await validator.validateFile(fileIn);
@@ -47,13 +47,14 @@ export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
         const level = markErrorAsWarnings || isSecondary ? "warning" : "error";
         logValidationError(context, fileIn, error as any, level);
       }
-      if (!isSecondary) {
+
+      if (!isSecondary && !markErrorAsWarnings) {
         context.Message({
           Channel: Channel.Error,
           Plugin: "schema-validator-openapi",
           Text: [
             `Unrecoverable schema validation errors were encountered in OpenAPI 3 input files.`,
-            `You can use --markOpenAPI3ErrorsAsWarning to keep mark as warning and let autorest keep going.`,
+            `You can use --mark-oai3-errors-as-warnings to keep mark as warning and let autorest keep going.`,
             `If you believe this the validation error is incorrect, please open an issue at https://github.com/Azure/autorest`,
             `NOTE: in the future this flag will be removed and validation error will fail the pipeline.`,
           ].join("\n"),
@@ -61,7 +62,7 @@ export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
         throw new OperationAbortedException();
       }
     }
-    return sink.Forward(fileIn.Description, fileIn);
+    return sink.forward(fileIn.description, fileIn);
   });
 }
 

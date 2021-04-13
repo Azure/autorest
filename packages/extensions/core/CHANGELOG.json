@@ -2,6 +2,23 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.3.1",
+      "tag": "@autorest/core_v3.3.1",
+      "date": "Tue, 13 Apr 2021 15:34:55 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Package update** update schema package for fix with $ref"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/schemas\" from `~1.1.1` to `~1.1.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.3.0",
       "tag": "@autorest/core_v3.3.0",
       "date": "Fri, 09 Apr 2021 19:53:22 GMT",

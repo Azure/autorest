@@ -387,9 +387,12 @@
               "then": { "$ref": "#/definitions/Reference" }
             },
             {
-              "if": { "type": "object" },
-              "then": { "$ref": "#/definitions/Schema" },
-              "else": {
+              "if": { "type": "object", "not": { "required": ["$ref"] } },
+              "then": { "$ref": "#/definitions/Schema" }
+            },
+            {
+              "if": { "type": "boolean" },
+              "then": {
                 "type": "boolean",
                 "errorMessage": "should be a Reference Object, Schema Object, or boolean value"
               }
