@@ -286,6 +286,7 @@
       "description": "possible schema types that indicate the type of schema.",
       "enum": [
         "any",
+        "any-object",
         "array",
         "binary",
         "boolean",
@@ -381,6 +382,7 @@
       "description": "all schema types",
       "enum": [
         "any",
+        "any-object",
         "array",
         "binary",
         "boolean",
@@ -1673,6 +1675,22 @@
       "allOf": [
         {
           "$ref": "#/definitions/Schema"
+        }
+      ]
+    },
+    "AnyObjectSchema": {
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnySchema"
         }
       ]
     },

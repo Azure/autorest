@@ -1,5 +1,14 @@
 $schema: http://json-schema.org/draft-07/schema#
 definitions:
+  AnyObjectSchema:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: ./schemas.yaml#/definitions/AnySchema
+    required:
+      - language
+      - protocol
+      - type
   AnySchema:
     type: object
     additionalProperties: false
