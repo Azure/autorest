@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Fri, 09 Apr 2021 19:53:22 GMT and should not be manually modified.
+This log was last generated on Tue, 13 Apr 2021 15:34:55 GMT and should not be manually modified.
+
+## 3.3.1
+Tue, 13 Apr 2021 15:34:55 GMT
+
+### Patches
+
+- **Package update** update schema package for fix with $ref
 
 ## 3.3.0
 Fri, 09 Apr 2021 19:53:22 GMT
