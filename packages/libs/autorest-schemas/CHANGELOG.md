@@ -1,6 +1,13 @@
 # Change Log - @autorest/schemas
 
-This log was last generated on Thu, 01 Apr 2021 15:46:41 GMT and should not be manually modified.
+This log was last generated on Tue, 13 Apr 2021 15:34:55 GMT and should not be manually modified.
+
+## 1.1.2
+Tue, 13 Apr 2021 15:34:55 GMT
+
+### Patches
+
+- **Fix** Schema.addtionalProperties not allowing $Ref
 
 ## 1.1.1
 Thu, 01 Apr 2021 15:46:41 GMT
