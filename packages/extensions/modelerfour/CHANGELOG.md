@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Fri, 09 Apr 2021 19:53:22 GMT and should not be manually modified.
+This log was last generated on Tue, 13 Apr 2021 21:32:54 GMT and should not be manually modified.
+
+## 4.18.3
+Tue, 13 Apr 2021 21:32:54 GMT
+
+### Patches
+
+- **Fix** Enum without type resulting in null values
 
 ## 4.18.2
 Fri, 09 Apr 2021 19:53:22 GMT
