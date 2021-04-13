@@ -686,6 +686,7 @@ export class ModelerFour {
     const sealed = xmse && (alwaysSeal || !xmse.modelAsString);
 
     const parentChoices = this.getChoiceSchemaParentValues(name, schema);
+    const type = this.getPrimitiveSchemaForEnum(schema);
     const choices = [...parentChoices, ...this.interpret.getEnumChoices(schema)];
 
     // model as string forces it to be a choice/enum.
@@ -702,7 +703,7 @@ export class ModelerFour {
           example: this.interpret.getExample(schema),
           externalDocs: this.interpret.getExternalDocs(schema),
           serialization: this.interpret.getSerialization(schema),
-          valueType: this.getPrimitiveSchemaForEnum(schema),
+          valueType: type,
           value: new ConstantValue(this.interpret.getConstantValue(schema, constVal)),
         }),
       );
@@ -719,7 +720,7 @@ export class ModelerFour {
           example: this.interpret.getExample(schema),
           externalDocs: this.interpret.getExternalDocs(schema),
           serialization: this.interpret.getSerialization(schema),
-          choiceType: <any>this.getPrimitiveSchemaForEnum(schema),
+          choiceType: type as any,
           choices,
         }),
       );
@@ -735,7 +736,7 @@ export class ModelerFour {
         example: this.interpret.getExample(schema),
         externalDocs: this.interpret.getExternalDocs(schema),
         serialization: this.interpret.getSerialization(schema),
-        choiceType: <any>this.getPrimitiveSchemaForEnum(schema),
+        choiceType: type as any,
         choices,
       }),
     );
