@@ -145,6 +145,20 @@ describe("Modelerfour.Schemas", () => {
         expect(foo).toBeDefined();
         expect(foo?.choices.map((x) => x.value)).toEqual(["one", "two"]);
       });
+
+      it("default to type:string if all values are string", async () => {
+        const spec = createTestSpec();
+
+        addSchema(spec, "Foo", {
+          enum: ["one", "two"],
+        });
+
+        const codeModel = await runModeler(spec);
+        const foo = findByName("Foo", codeModel.schemas.choices);
+        expect(foo).toBeDefined();
+        expect(foo?.choiceType.type).toEqual("string");
+        expect(foo?.choices.map((x) => x.value)).toEqual(["one", "two"]);
+      });
     });
   });
 });

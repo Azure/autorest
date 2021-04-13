@@ -2,6 +2,18 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.18.3",
+      "tag": "@autorest/modelerfour_v4.18.3",
+      "date": "Tue, 13 Apr 2021 21:32:54 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Enum without type resulting in null values"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.18.2",
       "tag": "@autorest/modelerfour_v4.18.2",
       "date": "Fri, 09 Apr 2021 19:53:22 GMT",
