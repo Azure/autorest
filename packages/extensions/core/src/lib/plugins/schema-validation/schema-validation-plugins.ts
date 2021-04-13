@@ -30,7 +30,7 @@ export function createSwaggerSchemaValidatorPlugin(): PipelinePlugin {
         throw new OperationAbortedException();
       }
     }
-    return sink.Forward(fileIn.description, fileIn);
+    return sink.forward(fileIn.description, fileIn);
   });
 }
 
@@ -62,7 +62,7 @@ export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
         throw new OperationAbortedException();
       }
     }
-    return sink.Forward(fileIn.description, fileIn);
+    return sink.forward(fileIn.description, fileIn);
   });
 }
 
