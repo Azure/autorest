@@ -1,9 +1,10 @@
-# <img align="center" src="../images/logo.png">  Generating Clients with AutoRest
+# <img align="center" src="../images/logo.png"> Generating Clients with AutoRest
 
 This guide tells you how to generate code from your OpenAPI definition using AutoRest. We'll take this incrementally, working
 on first how to generate a single file, then how to generate with a configuration file, and keep taking it from there.
 
 The command line usage of AutoRest boils down to the following:
+
 > `autorest [config-file.md | config-file.json | config-file.yaml] [additional options]`
 
 We'll be building upon this in our individual sections.
@@ -15,27 +16,27 @@ We'll be building upon this in our individual sections.
 AutoRest has varying levels of support for the following languages. When generating code, we always want to specify what language we
 want our generated code to have, and we specify our language through a command line flag
 
-| Language | Description |
-|------------------|-------------|
-|`--python`|Python|
-|`--csharp`|C# / .NET code|
-|`--java`|Java|
-|`--typescript`|Typescript|
-|`--go`|Golang|
-|No flag yet|Swift|
+| Language       | Description    |
+| -------------- | -------------- |
+| `--python`     | Python         |
+| `--csharp`     | C# / .NET code |
+| `--java`       | Java           |
+| `--typescript` | Typescript     |
+| `--go`         | Golang         |
+| No flag yet    | Swift          |
 
 ### Common flags
 
 For a full-set of flags, go to our [flag index][flags]
 
-| Option | Description |
-|------------------|-------------|
-|`--input-file=FILENAME`|Adds the given file to the list of input files for generation process|
-|`--output-folder=DIRECTORY`|The location for generated files. If not specified, uses `./generated` as the default|
-|`--clear-output-folder`|Clear all contents from our output folder before outputting your newly generated code into that folder|
-|`--namespace=NAMESPACE`|sets the namespace to use for the generated code|
-|`--add-credential`|If specified, the generated client will require a credential to make network calls. See [our language docs][client] for information on how to authenticate to our generated clients.|
-|`--tag=VALUE`|Preferred way to have conditional configurations. I.e., in my configuration file, I can set the `input-file` equal to different values depending on the `VALUE` passed through the `tag` flag. See our [Adding Tags When Generating](#adding-tags-when-generating "Adding Tags When Generating") section for more information|
+| Option                      | Description                                                                                                                                                                                                                                                                                                                   |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--input-file=FILENAME`     | Adds the given file to the list of input files for generation process                                                                                                                                                                                                                                                         |
+| `--output-folder=DIRECTORY` | The location for generated files. If not specified, uses `./generated` as the default                                                                                                                                                                                                                                         |
+| `--clear-output-folder`     | Clear all contents from our output folder before outputting your newly generated code into that folder                                                                                                                                                                                                                        |
+| `--namespace=NAMESPACE`     | sets the namespace to use for the generated code                                                                                                                                                                                                                                                                              |
+| `--add-credential`          | If specified, the generated client will require a credential to make network calls. See [our language docs][client] for information on how to authenticate to our generated clients.                                                                                                                                          |
+| `--tag=VALUE`               | Preferred way to have conditional configurations. I.e., in my configuration file, I can set the `input-file` equal to different values depending on the `VALUE` passed through the `tag` flag. See our [Adding Tags When Generating](#adding-tags-when-generating "Adding Tags When Generating") section for more information |
 
 ## Most Basic: Generating with a Single File on the Command Line
 
@@ -78,6 +79,7 @@ There are many other flags you can specify when generating. As an add-on, let's 
 ```
 autorest --input-file=pets.json --python --output-folder=myFolder/ --namespace=pets
 ```
+
 And this concludes our basic example of generating with AutoRest. Continue reading to the next section to see our recommend way of generating AutoRest.
 
 ## Keeping your options in one place: the preferred option
@@ -103,17 +105,20 @@ Once your configuration file is created, we can work on moving our flags into th
 readme.
 
 We start building up the skeleton of our configuration file by adding our `yaml` code block.
+
 ````
 ```yaml
 ```
 ````
 
 Now, we'll start moving the flags into the `yaml` code block. Adding the input file becomes
+
 ````
 ```yaml
 input-file: pets.json
 ```
 ````
+
 We also want our code to be generated in python, so let's add that to the config as well.
 
 ````
@@ -122,6 +127,7 @@ input-file: pets.json
 python: true
 ```
 ````
+
 Finally, let's add our remaining 2 flags.
 
 ````
@@ -153,6 +159,7 @@ Let's say we want to generate our first [pets.json][pets_swagger] if you specify
 if `--tag=v2` is specified on the command line. Let's go about putting in the markdown code to make this possible.
 
 Starting with the flags we wantin both cases, we add in a `yaml` code block with no condition for entry.
+
 ````
 ### General settings
 
@@ -167,6 +174,7 @@ to be `pets.json`, if `--tag=v1` is specified on the command line, and if `--tag
 of these versions, and different output folders, so both can be allowed to persist at the same time.
 
 Our code block for `tag=v1` thus looks like this
+
 ````
 ### Tag: v1
 
@@ -179,10 +187,12 @@ namespace: azure.pets.v1
 output-folder: $(python-sdks-folder)/pets/azure-pets/azure/pets/v1
 ```
 ````
+
 > Note: It is highly recommended to comment your conditional `yaml` blocks with the conditions required to enter. This is because the `yaml` conditionals don't show up in rendered
-markdown, so comments are needed for visibility.
+> markdown, so comments are needed for visibility.
 
 Similarly, our `tag=v2` code block will look like:
+
 ````
 ### Tag: v2
 
@@ -198,6 +208,7 @@ output-folder: $(python-sdks-folder)/pets/azure-pets/azure/pets/v2
 
 Finally, let us say we want `v2` to be generated by default, and `v1` only to be generating if `--tag=v1` is specified on the command line. We can add into our `General settings` `tag: v2`. This way,
 unless we override the value of `tag` by specifying `--tag=v1` on the command line, `tag` will be `v2`, and we will enter that conditional `yaml` code block by default. Updating our `General settings`, we get
+
 ````
 ### General settings
 
@@ -258,7 +269,8 @@ Let's now discuss what's going to be different between the two languages.
 
 1. Location of the output: We want our sdks to go into separate locations based on language. The location will also vary based off of whether we're generating `v1` or `v2` (since we want both versions to exist), so we need individual conditional yaml blocks.
 
->Note: If you're developing with our Azure SDK repos, you can follow these steps:
+> Note: If you're developing with our Azure SDK repos, you can follow these steps:
+>
 > - We would want our Python sdk to go into [`azure-sdk-for-python`][azure_sdk_for_python], and our Java sdk to go into [`azure-sdk-for-java`][azure_sdk_for_java].
 > - For Python, we use the flag `--python-sdks-folder` to indicate the location of our local [`azure-sdk-for-python`][azure_sdk_for_python] clone. Your output folder would be relative to `python-sdks-folder`, the location of which you would pass on the command line. I.e., your `output-folder` would look like `{python-sdks-folder}/pets/azure-pets`.
 > - For Java, we indicate the location of our local [`azure-sdk-for-java`][azure_sdk_for_java] clone with the flag `--azure-libraries-for-java-folder`. Your output folder would be relative to `azure-libraries-for-java-folder`, the location of which you would pass on the command line. I.e., your `output-folder` would look like `{azure-libraries-for-java-folder}/pets`.
@@ -268,6 +280,7 @@ Let's now discuss what's going to be different between the two languages.
 4. Finally, for Java, we would like our library to be `fluent`
 
 Let's put all of this information into our Python readme, `readme.python.md`:
+
 ````
 # Python
 
@@ -297,6 +310,7 @@ output-folder: python/pets/azure-pets/azure/pets/v2
 ````
 
 Similarly, we have our Java readme, `readme.java.md`:
+
 ````
 # Java
 
@@ -326,13 +340,17 @@ output-folder: java/pets/v2
 ````
 
 Now, when generating `v2` code in Python, our command line looks like
+
 ```
 autorest readme.md --python
 ```
+
 while our Java command looks like
+
 ```
 autorest readme.md --java
 ```
+
 If we want to generate `v1` code in either language, all that's needed is to tack `--tag=v1` on the command line.
 
 ## Generating Management Plane Code
@@ -360,20 +378,19 @@ See [here][flags] for a complete index of flags.
 AutoRest supports generating from private GitHub repositories.
 There are multiple options:
 
-1) **Using the `token` query parameter**: Pass the `token` query parameter you get when clicking "Raw" on a file of a private repo, i.e. `https://github.com/<path-on-some-private-repo>/readme.md?token=<token>`.
-When such a URI is passed to AutoRest, it will automatically reuse that token for subsequent requests (e.g. querying referenced OpenAPI definitions).
-This is a quick and easy solution if you manually want to run AutoRest against private bits from time to time.
-2) **Using OAuth**: GitHub allows generating OAuth tokens under `Settings -> Personal access tokens`.
-Create one with `repo` scope.
-It can be passed to AutoRest using `--github-auth-token=<token>` or by setting the environment variable `GITHUB_AUTH_TOKEN`.
-This is the way to go for all scripts and automation.
-Needless to say, *do not put this token* into scripts directly, use Azure KeyVault or similar.
-**Note**: If the repository is in an organization it might require the Github Token to be given explicit permission to that organization.(Next to the token Enable SSO > Click Authorize for the relevant organization)
+1. **Using the `token` query parameter**: Pass the `token` query parameter you get when clicking "Raw" on a file of a private repo, i.e. `https://github.com/<path-on-some-private-repo>/readme.md?token=<token>`.
+   When such a URI is passed to AutoRest, it will automatically reuse that token for subsequent requests (e.g. querying referenced OpenAPI definitions).
+   This is a quick and easy solution if you manually want to run AutoRest against private bits from time to time.
+2. **Using OAuth**: GitHub allows generating OAuth tokens under `Settings -> Personal access tokens`.
+   Create one with `repo` scope.
+   It can be passed to AutoRest using `--github-auth-token=<token>` or by setting the environment variable `GITHUB_AUTH_TOKEN`.
+   This is the way to go for all scripts and automation.
+   Needless to say, _do not put this token_ into scripts directly, use Azure KeyVault or similar.
+   **Note**: If the repository is in an organization it might require the Github Token to be given explicit permission to that organization.(Next to the token Enable SSO > Click Authorize for the relevant organization)
 
 ## I'm Curious: How does AutoRest Actually Generate Code From an OpenAPI Definition?
 
 See [here][how_autorest]
-
 
 For language-specific information about generation, please refer to our language-specific documentation:
 
@@ -382,6 +399,7 @@ For language-specific information about generation, please refer to our language
 - [C#][csharp]
 
 <!-- LINKS -->
+
 [flags]: https://github.com/Azure/autorest/blob/master/docs/generate/flags.md
 [openapi_docs]: https://github.com/Azure/autorest/blob/master/docs/openapi/readme.md
 [pets_swagger]: https://github.com/Azure/autorest/blob/master/docs/openapi/examples/pets.json
@@ -393,7 +411,7 @@ For language-specific information about generation, please refer to our language
 [how_autorest]: ./how-autorest-generates-code-from-openapi.md
 [python]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/generate/readme.md
 [java]: https://github.com/Azure/autorest.java/tree/v4/docs/generate/readme.md
-[csharp]: https://github.com/Azure/autorest.csharp/tree/v3/readme.md
+[csharp]: https://github.com/Azure/autorest.csharp/tree/feature/v3/readme.md
 [azure_sdk_for_python]: https://github.com/Azure/azure-sdk-for-python/tree/master/sdk
 [azure_sdk_for_java]: https://github.com/Azure/azure-sdk-for-java/tree/master/sdk
 [client]: https://github.com/Azure/autorest/blob/master/docs/client/readme.md
