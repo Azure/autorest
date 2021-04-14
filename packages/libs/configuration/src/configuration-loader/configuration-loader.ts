@@ -97,7 +97,7 @@ export class ConfigurationLoader {
     // 1. overrides (CLI, ...)
     // await addSegments(configs, false);
     for (const rawConfig of configs) {
-      const result = autorestConfigurationProcessor.processConfiguration(rawConfig);
+      const result = autorestConfigurationProcessor.processConfiguration(rawConfig, { logger: this.logger });
       if ("errors" in result) {
         for (const error of result.errors) {
           this.logger.trackError({

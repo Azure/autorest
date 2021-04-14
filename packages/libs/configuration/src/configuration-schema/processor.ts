@@ -1,3 +1,4 @@
+import { AutorestLogger } from "@autorest/common";
 import { flatMap } from "lodash";
 import { inspect } from "util";
 import {
@@ -22,28 +23,35 @@ export interface ProcessingError {
   path: string[];
 }
 
+export interface ErrorResult {
+  errors: ProcessingError[];
+}
+
+export interface ValueResult<T> {
+  value: T;
+}
+
+export type Result<T> = ErrorResult | ValueResult<T>;
+
+export interface ProcessConfigurationOptions {
+  logger: AutorestLogger;
+}
 export class ConfigurationSchemaProcessor<S extends ConfigurationSchema> {
   public constructor(private schema: S) {}
 
-  public processConfiguration(configuration: RawConfiguration<S>): Result<ProcessedConfiguration<S>> {
-    return processConfiguration(this.schema, [], configuration);
+  public processConfiguration(
+    configuration: RawConfiguration<S>,
+    options: ProcessConfigurationOptions,
+  ): Result<ProcessedConfiguration<S>> {
+    return processConfiguration(this.schema, [], configuration, options);
   }
 }
-
-type ErrorResult = {
-  errors: ProcessingError[];
-};
-
-type ValueResult<T> = {
-  value: T;
-};
-
-type Result<T> = ErrorResult | ValueResult<T>;
 
 function processConfiguration<S extends ConfigurationSchema>(
   schema: S,
   path: string[],
   configuration: RawConfiguration<S>,
+  options: ProcessConfigurationOptions,
 ): Result<ProcessedConfiguration<S>> {
   const errors = [];
   const result: any = {};
@@ -61,11 +69,17 @@ function processConfiguration<S extends ConfigurationSchema>(
       continue;
     }
 
-    const propertyResult = processProperty(propertySchema as any, propertyPath, value);
+    const propertyResult = processProperty(propertySchema as any, propertyPath, value, options);
     if (isErrorResult(propertyResult)) {
       errors.push(...propertyResult.errors);
     } else {
       result[key] = propertyResult.value;
+      if (propertySchema.deprecated) {
+        options.logger.trackWarning({
+          code: "DeprecatedConfig",
+          message: `Using ${propertyPath.join(".")} which is deprecated and will be removed in the future.`,
+        });
+      }
     }
   }
 
@@ -76,6 +90,7 @@ function processProperty<T extends ConfigurationProperty>(
   schema: T,
   path: string[],
   value: InferredRawType<T>,
+  options: ProcessConfigurationOptions,
 ): Result<InferredProcessedType<T>> {
   if (schema.array) {
     if (value === undefined) {
@@ -83,7 +98,7 @@ function processProperty<T extends ConfigurationProperty>(
     }
 
     if (Array.isArray(value)) {
-      const result = value.map((x, i) => processPrimitiveProperty(schema, [...path, i.toString()], x));
+      const result = value.map((x, i) => processPrimitiveProperty(schema, [...path, i.toString()], x, options));
       const values = result.filter(isNotErrorResult).map((x) => x.value);
       const errors = flatMap(result.filter(isErrorResult).map((x) => x.errors));
       if (errors.length > 0) {
@@ -91,7 +106,7 @@ function processProperty<T extends ConfigurationProperty>(
       }
       return { value: values as any };
     } else {
-      const result = processPrimitiveProperty(schema, path, value as InferredRawPrimitiveType<T>);
+      const result = processPrimitiveProperty(schema, path, value as InferredRawPrimitiveType<T>, options);
       if (isErrorResult(result)) {
         return result;
       } else {
@@ -109,7 +124,7 @@ function processProperty<T extends ConfigurationProperty>(
     const result: any = {};
 
     for (const [key, dictValue] of Object.entries(value ?? {})) {
-      const prop = processPrimitiveProperty(schema, [...path, key], dictValue);
+      const prop = processPrimitiveProperty(schema, [...path, key], dictValue, options);
       if ("errors" in prop) {
         return { errors: prop.errors };
       }
@@ -118,7 +133,7 @@ function processProperty<T extends ConfigurationProperty>(
 
     return { value: result };
   } else {
-    return processPrimitiveProperty(schema, path, value as InferredRawPrimitiveType<T>) as any;
+    return processPrimitiveProperty(schema, path, value as InferredRawPrimitiveType<T>, options) as any;
   }
 }
 
@@ -126,6 +141,7 @@ function processPrimitiveProperty<T extends ConfigurationProperty>(
   schema: T,
   path: string[],
   value: InferredRawPrimitiveType<T>,
+  options: ProcessConfigurationOptions,
 ): Result<InferredPrimitiveType<T>> {
   if (schema.type === "number") {
     if (typeof value !== "number") {
@@ -172,7 +188,7 @@ function processPrimitiveProperty<T extends ConfigurationProperty>(
   }
 
   // Means this is a nested configuration schema
-  return processConfiguration<any>(schema, path, value as any) as any;
+  return processConfiguration<any>(schema, path, value as any, options) as any;
 }
 
 function createInvalidTypeError(value: unknown, expectedType: string, path: string[]) {

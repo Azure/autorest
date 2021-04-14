@@ -44,6 +44,7 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
   // Temporary flag to disable later.
   "mark-oai3-errors-as-warnings": {
     type: "boolean",
+    deprecated: true,
     description:
       "Mark OpenAPI3 validation(schema) error as warnings. (Will be removed and OpenAPI3 validation errors will always fail the pipeline)",
   },

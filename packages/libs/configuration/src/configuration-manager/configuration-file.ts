@@ -75,7 +75,7 @@ const codeBlockToRawConfig = async (
     throw new OperationAbortedException();
   }
 
-  const result = autorestConfigurationProcessor.processConfiguration(rawConfig);
+  const result = autorestConfigurationProcessor.processConfiguration(rawConfig, { logger });
   if ("errors" in result) {
     for (const error of result.errors) {
       logger.trackError({

@@ -5,11 +5,35 @@ export type ConfigurationSchema = {
 export type ConfigurationPropertyType = "string" | "number" | "boolean" | ConfigurationSchema;
 
 export type ConfigurationProperty = {
+  /**
+   * Type.
+   */
   readonly type: ConfigurationPropertyType;
+
+  /**
+   * If this is an array of the type.
+   */
   readonly array?: boolean;
+
+  /**
+   * If this is a map/dictionary of the type.
+   */
   readonly dictionary?: boolean;
+
+  /**
+   * List of supported values. Only supported for type: string.
+   */
   readonly enum?: readonly string[];
+
+  /**
+   * Description for the flag.
+   */
   readonly description?: string;
+
+  /**
+   * Mark this config flag as deprecated.It will log a warning when used.
+   */
+  readonly deprecated?: boolean;
 };
 
 export type EnumType<T extends ReadonlyArray<string>> = T[number];
