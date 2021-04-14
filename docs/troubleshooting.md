@@ -41,14 +41,13 @@ If you would like to actually debug through a language generator's code, see our
 [main_docs]: https://github.com/Azure/autorest/blob/master/docs/openapi/readme.md
 [autorest_issues]: https://github.com/Azure/autorest/issues
 [autorest_python_issues]: https://github.com/Azure/autorest.python/issues
-[main_debugging]: https://github.com/Azure/autorest/tree/master/docs/generate/troubleshooting.md#debugging
 [autorest_python_repo]: https://github.com/Azure/autorest.python/tree/autorestv3
 [debugging_flags]: https://github.com/Azure/autorest/blob/master/docs/generate/flags.md#debugging-flags
 [python_generation]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/troubleshooting.md#generation-errors
 [java_generation]: https://github.com/Azure/autorest.java/tree/v4/docs/troubleshooting.md#generation-errors
-[csharp_generation]: https://github.com/Azure/autorest.csharp/tree/v3/docs/troubleshooting.md#generation-errors
+[csharp_generation]: https://github.com/Azure/autorest.csharp/tree/feature/v3/docs/troubleshooting.md#generation-errors
 [typescript_generation]: https://github.com/Azure/autorest.typescript/tree/v6/docs/troubleshooting.md#generation-errors
 [python_debug]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/troubleshooting.md#debugging
 [java_debug]: https://github.com/Azure/autorest.java/tree/v4/docs/troubleshooting.md#debugging
-[csharp_debug]: https://github.com/Azure/autorest.csharp/tree/v3/docs/troubleshooting.md#debugging
+[csharp_debug]: https://github.com/Azure/autorest.csharp/tree/feature/v3/docs/troubleshooting.md#debugging
 [typescript_debug]: https://github.com/Azure/autorest.typescript/tree/v6/docs/troubleshooting.md#debugging
