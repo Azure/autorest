@@ -1,6 +1,7 @@
-# <img align="center" src="../images/logo.png">  Migrating from AutoRest V2 to V3
+# <img align="center" src="../images/logo.png"> Migrating from AutoRest V2 to V3
 
 ## General Guidance
+
 First, make sure when generating you are using AutoRest V3. Follow the steps in [our installation section][install] for information on upgrading
 and confirming your new AutoRest version.
 
@@ -24,7 +25,6 @@ See the language generator flags [here][language_flags]
 
 Support for track 2 SDKs that follow the guidelines listed [here][guidelines]
 
-
 For language-specific information about migration and changes, please refer to our language-specific documentation:
 
 - [Python][python]
@@ -32,12 +32,12 @@ For language-specific information about migration and changes, please refer to o
 - [C#][csharp]
 - [Typescript][typescript]
 
-
 <!-- LINKS -->
+
 [install]: https://github.com/Azure/autorest/blob/master/docs/install/readme.md
 [language_flags]: https://github.com/Azure/autorest/blob/master/docs/generate/readme.md#language-flags
 [guidelines]: https://azure.github.io/azure-sdk/general_introduction.html
 [python]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/migrate/readme.md
 [java]: https://github.com/Azure/autorest.java/tree/v4/docs/migrate/readme.md
-[csharp]: https://github.com/Azure/autorest.csharp/tree/v3/docs/migrate/readme.md
+[csharp]: https://github.com/Azure/autorest.csharp/tree/feature/v3/docs/migrate/readme.md
 [typescript]: https://github.com/Azure/autorest.typescript/tree/v6/docs/migrate/readme.md
