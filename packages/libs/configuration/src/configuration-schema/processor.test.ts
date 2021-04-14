@@ -1,4 +1,6 @@
+import { AutorestLogger } from "@autorest/common";
 import { ConfigurationSchemaProcessor, ProcessingErrorCode } from "./processor";
+import { RawConfiguration } from "./types";
 
 const TestSchema = {
   simpleNumber: {
@@ -29,9 +31,21 @@ const TestSchema = {
 
 const processor = new ConfigurationSchemaProcessor(TestSchema);
 
+const logger: AutorestLogger = {
+  info: jest.fn(),
+  verbose: jest.fn(),
+  fatal: jest.fn(),
+  trackWarning: jest.fn(),
+  trackError: jest.fn(),
+};
+
+function processConfig(config: RawConfiguration<typeof TestSchema>) {
+  return processor.processConfiguration(config, { logger });
+}
+
 describe("ConfigurationProcessor", () => {
   it("validate simple number", () => {
-    const result = processor.processConfiguration({
+    const result = processConfig({
       simpleNumber: "fooNotANumber" as any,
     });
 
@@ -47,7 +61,7 @@ describe("ConfigurationProcessor", () => {
   });
 
   it("process simple number", () => {
-    const result = processor.processConfiguration({
+    const result = processConfig({
       simpleNumber: 123,
     });
 
@@ -57,7 +71,7 @@ describe("ConfigurationProcessor", () => {
   });
 
   it("validate simple boolean", () => {
-    const result = processor.processConfiguration({
+    const result = processConfig({
       simpleBoolean: "fooNotABoolean" as any,
     });
 
@@ -73,7 +87,7 @@ describe("ConfigurationProcessor", () => {
   });
 
   it("process simple boolean", () => {
-    const result = processor.processConfiguration({
+    const result = processConfig({
       simpleBoolean: true,
     });
 
@@ -83,7 +97,7 @@ describe("ConfigurationProcessor", () => {
   });
 
   it("validate simple string", () => {
-    const result = processor.processConfiguration({
+    const result = processConfig({
       simpleString: 123 as any,
     });
 
@@ -99,7 +113,7 @@ describe("ConfigurationProcessor", () => {
   });
 
   it("process simple string", () => {
-    const result = processor.processConfiguration({
+    const result = processConfig({
       simpleString: "foo",
     });
 
@@ -109,7 +123,7 @@ describe("ConfigurationProcessor", () => {
   });
 
   it("validate simple enum not correct type", () => {
-    const result = processor.processConfiguration({
+    const result = processConfig({
       simpleEnum: 123 as any,
     });
 
@@ -125,7 +139,7 @@ describe("ConfigurationProcessor", () => {
   });
 
   it("validate simple enum match one of allowed values", () => {
-    const result = processor.processConfiguration({
+    const result = processConfig({
       simpleEnum: "four" as any,
     });
 
@@ -141,7 +155,7 @@ describe("ConfigurationProcessor", () => {
   });
 
   it("process simple enum", () => {
-    const result = processor.processConfiguration({
+    const result = processConfig({
       simpleEnum: "two",
     });
 
@@ -152,7 +166,7 @@ describe("ConfigurationProcessor", () => {
 
   describe("Array validation", () => {
     it("validate array of number", () => {
-      const result = processor.processConfiguration({
+      const result = processConfig({
         numberArray: ["notANumber" as any, 456],
       });
 
@@ -168,7 +182,7 @@ describe("ConfigurationProcessor", () => {
     });
 
     it("validate array of number passed as single value", () => {
-      const result = processor.processConfiguration({
+      const result = processConfig({
         numberArray: "notANumber" as any,
       });
 
@@ -184,7 +198,7 @@ describe("ConfigurationProcessor", () => {
     });
 
     it("process array of number", () => {
-      const result = processor.processConfiguration({
+      const result = processConfig({
         numberArray: [123, 456],
       });
 
@@ -194,7 +208,7 @@ describe("ConfigurationProcessor", () => {
     });
 
     it("process array of number (passing single value)", () => {
-      const result = processor.processConfiguration({
+      const result = processConfig({
         numberArray: 123,
       });
 
@@ -206,7 +220,7 @@ describe("ConfigurationProcessor", () => {
 
   describe("Dictionary validation", () => {
     it("validate dictionary of number", () => {
-      const result = processor.processConfiguration({
+      const result = processConfig({
         numberDict: {
           foo: "notANumber" as any,
         },
@@ -224,7 +238,7 @@ describe("ConfigurationProcessor", () => {
     });
 
     it("process dictionary of number", () => {
-      const result = processor.processConfiguration({
+      const result = processConfig({
         numberDict: {
           foo: 123,
           bar: 456,
@@ -244,7 +258,7 @@ describe("ConfigurationProcessor", () => {
 
   describe("Nestsed config validation", () => {
     it("validate nested entry", () => {
-      const result = processor.processConfiguration({
+      const result = processConfig({
         nested: { nestedNumber: "notANumber" as any },
       });
 
@@ -260,7 +274,7 @@ describe("ConfigurationProcessor", () => {
     });
 
     it("process a nested entry", () => {
-      const result = processor.processConfiguration({
+      const result = processConfig({
         nested: { nestedNumber: 123 },
       });
 
