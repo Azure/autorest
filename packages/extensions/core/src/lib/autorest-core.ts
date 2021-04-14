@@ -80,9 +80,10 @@ export class AutoRest extends EventEmitter {
     messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
 
     const stats = new StatsCollector();
-    return (this._view = await new AutorestContextLoader(this.fileSystem, stats, this.configFileOrFolderUri).CreateView(
+    return (this._view = await new AutorestContextLoader(this.fileSystem, stats, this.configFileOrFolderUri).createView(
       messageEmitter,
       includeDefault,
+      "core",
       ...this._configurations,
     ));
   }

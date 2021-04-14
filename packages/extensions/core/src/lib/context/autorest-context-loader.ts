@@ -95,9 +95,10 @@ export class AutorestContextLoader {
     }
   }
 
-  public async CreateView(
+  public async createView(
     messageEmitter: MessageEmitter,
     includeDefault: boolean,
+    pluginName: string,
     ...configs: AutorestRawConfiguration[]
   ): Promise<AutorestContext> {
     const logger: AutorestLogger = new AutorestCoreLogger(
@@ -114,7 +115,7 @@ export class AutorestContextLoader {
 
     const { config, extensions } = await loader.load(configs, includeDefault);
     this.setupExtensions(config, extensions);
-    return new AutorestContext(config, this.fileSystem, messageEmitter, this.stats, AutorestLoggingSession);
+    return new AutorestContext(config, this.fileSystem, messageEmitter, this.stats, AutorestLoggingSession, pluginName);
   }
 
   private setupExtensions(config: AutorestConfiguration, extensions: ResolvedExtension[]) {
