@@ -4,7 +4,7 @@ definitions:
     type: object
     additionalProperties: false
     allOf:
-      - $ref: ./schemas.yaml#/definitions/AnySchema
+      - $ref: ./schemas.yaml#/definitions/Schema
     required:
       - language
       - protocol
@@ -499,6 +499,10 @@ definitions:
         type: array
         items:
           $ref: ./schemas.yaml#/definitions/AnySchema
+      anyObjects:
+        type: array
+        items:
+          $ref: ./schemas.yaml#/definitions/AnyObjectSchema
       arrays:
         type: array
         description: a collection of items

@@ -1690,7 +1690,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AnySchema"
+          "$ref": "#/definitions/Schema"
         }
       ]
     },
@@ -1898,6 +1898,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AnySchema"
+          }
+        },
+        "anyObjects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnyObjectSchema"
           }
         }
       },

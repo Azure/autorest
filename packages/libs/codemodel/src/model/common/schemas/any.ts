@@ -11,7 +11,7 @@ export class AnySchema extends Schema implements AnySchema {
   }
 }
 
-export interface AnyObjectSchema extends AnySchema {
+export interface AnyObjectSchema extends Schema {
   type: SchemaType.AnyObject;
 }
 

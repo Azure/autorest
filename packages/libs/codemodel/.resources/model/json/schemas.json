@@ -821,7 +821,7 @@
       ],
       "allOf": [
         {
-          "$ref": "./schemas.json#/definitions/AnySchema"
+          "$ref": "./schemas.json#/definitions/Schema"
         }
       ]
     },
@@ -1029,6 +1029,12 @@
           "type": "array",
           "items": {
             "$ref": "./schemas.json#/definitions/AnySchema"
+          }
+        },
+        "anyObjects": {
+          "type": "array",
+          "items": {
+            "$ref": "./schemas.json#/definitions/AnyObjectSchema"
           }
         }
       },
