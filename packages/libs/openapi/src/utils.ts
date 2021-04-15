@@ -16,16 +16,34 @@ export const excludeXDash = <T extends Record<string, unknown>>(dictionary: T): 
   return Object.keys(dictionary).filter((v, i, a) => !v.startsWith("x-"));
 };
 
-export const filterOutXDash = <T>(obj: T | undefined): T | undefined => {
-  if (obj) {
-    const result = <any>{};
-    for (const [key, value] of Object.entries(obj).filter(([key, value]) => !key.startsWith("x-"))) {
-      result[key] = <any>value;
-    }
-    return result;
+export function includeXDashProperties<T extends Record<string, unknown>>(obj: T | undefined): T | undefined {
+  if (!obj) {
+    return undefined;
   }
-  return undefined;
-};
+
+  const result: any = {};
+  for (const key of includeXDash(obj)) {
+    result[key] = obj[key];
+  }
+  return result;
+}
+
+export function omitXDashProperties<T extends Record<string, unknown>>(obj: T | undefined): T | undefined {
+  if (!obj) {
+    return undefined;
+  }
+
+  const result: any = {};
+  for (const key of excludeXDash(obj)) {
+    result[key] = obj[key];
+  }
+  return result;
+}
+
+/**
+ * @deprecated use omitXDashProperties
+ */
+export const filterOutXDash = omitXDashProperties;
 
 /**
  * Identifies if a given refable is a reference or an instance
