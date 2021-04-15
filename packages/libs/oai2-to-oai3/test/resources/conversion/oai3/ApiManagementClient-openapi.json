@@ -5808,7 +5808,9 @@
         },
         "x-ms-requestBody-index": 4
       }
-    },
+    }
+  },
+  "x-ms-paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}?export=true": {
       "get": {
         "tags": [
