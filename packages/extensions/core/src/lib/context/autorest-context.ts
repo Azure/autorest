@@ -19,6 +19,7 @@ import { AutorestCoreLogger } from "./logger";
 import { VERSION } from "../constants";
 import { StatsCollector } from "../stats";
 import { LoggingSession } from "./logging-session";
+import { PipelinePluginDefinition } from "../pipeline/plugin-loader";
 
 export class AutorestContext implements AutorestLogger {
   public config: AutorestConfiguration;
@@ -31,7 +32,7 @@ export class AutorestContext implements AutorestLogger {
     public messageEmitter: MessageEmitter,
     public stats: StatsCollector,
     public asyncLogManager: LoggingSession,
-    private pluginName: string,
+    private plugin?: PipelinePluginDefinition,
   ) {
     this.config = config;
     this.logger = new AutorestCoreLogger(config, messageEmitter, asyncLogManager);
@@ -153,7 +154,9 @@ export class AutorestContext implements AutorestLogger {
   }
 
   private getDefaultHeaderText() {
-    return this.config["header-definitions"].default.replace("{core}", VERSION).replace("{generator}", this.pluginName);
+    const extension = this.plugin?.extension;
+    const generator = extension ? `${extension?.extensionName}@${extension?.extensionVersion}` : "";
+    return this.config["header-definitions"].default.replace("{core}", VERSION).replace("{generator}", generator);
   }
 
   public IsOutputArtifactRequested(artifact: string): boolean {
@@ -185,15 +188,20 @@ export class AutorestContext implements AutorestLogger {
     return result;
   }
 
-  public *getNestedConfiguration(pluginName: string): Iterable<AutorestContext> {
-    for (const nestedConfig of getNestedConfiguration(this.config, pluginName)) {
+  /**
+   * Get a new configuration that is extended with the properties under the given scope.
+   * @param scope Name of the nested property to flatten.
+   * @param plugin Optional plugin requesting this configuration.
+   */
+  public *getNestedConfiguration(scope: string, plugin?: PipelinePluginDefinition): Iterable<AutorestContext> {
+    for (const nestedConfig of getNestedConfiguration(this.config, scope)) {
       yield new AutorestContext(
         nestedConfig,
         this.fileSystem,
         this.messageEmitter,
         this.stats,
         this.asyncLogManager,
-        pluginName,
+        plugin,
       );
     }
   }
@@ -210,7 +218,7 @@ export class AutorestContext implements AutorestLogger {
       this.messageEmitter,
       this.stats,
       this.asyncLogManager,
-      this.pluginName,
+      this.plugin,
     );
   }
 }

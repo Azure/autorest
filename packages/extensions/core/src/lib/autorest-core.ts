@@ -83,7 +83,6 @@ export class AutoRest extends EventEmitter {
     return (this._view = await new AutorestContextLoader(this.fileSystem, stats, this.configFileOrFolderUri).createView(
       messageEmitter,
       includeDefault,
-      "core",
       ...this._configurations,
     ));
   }

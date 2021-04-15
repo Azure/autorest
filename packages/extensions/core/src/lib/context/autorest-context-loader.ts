@@ -98,7 +98,6 @@ export class AutorestContextLoader {
   public async createView(
     messageEmitter: MessageEmitter,
     includeDefault: boolean,
-    pluginName: string,
     ...configs: AutorestRawConfiguration[]
   ): Promise<AutorestContext> {
     const logger: AutorestLogger = new AutorestCoreLogger(
@@ -115,7 +114,7 @@ export class AutorestContextLoader {
 
     const { config, extensions } = await loader.load(configs, includeDefault);
     this.setupExtensions(config, extensions);
-    return new AutorestContext(config, this.fileSystem, messageEmitter, this.stats, AutorestLoggingSession, pluginName);
+    return new AutorestContext(config, this.fileSystem, messageEmitter, this.stats, AutorestLoggingSession);
   }
 
   private setupExtensions(config: AutorestConfiguration, extensions: ResolvedExtension[]) {
@@ -128,7 +127,11 @@ export class AutorestContextLoader {
         loadedExtensions[definition.fullyQualified] = {
           extension,
           autorestExtension: new LazyPromise(async () =>
-            AutoRestExtension.FromChildProcess(definition.name, await extension.start(enableDebugger)),
+            AutoRestExtension.fromChildProcess(
+              definition.name,
+              extension.version,
+              await extension.start(enableDebugger),
+            ),
           ),
         };
       }
