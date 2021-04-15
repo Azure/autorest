@@ -228,7 +228,6 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
   const fsInput = configView.DataStore.getReadThroughScope(fileSystem);
   const pipeline = buildPipeline(configView, plugins);
-  console.log("Built pipeline", pipeline);
   const times = !!configView.config["timestamp"];
   const tasks: { [name: string]: Promise<DataSource> } = {};
 
@@ -240,7 +239,6 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
   );
 
   const ScheduleNode: (nodeName: string) => Promise<DataSource> = async (nodeName) => {
-    console.error("SChedleaw", nodeName);
     const node = pipeline.pipeline[nodeName];
     if (!node) {
       throw new Error(`Cannot find pipeline node ${nodeName}.`);
