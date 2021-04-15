@@ -14,7 +14,6 @@ const operationKeys = new Set(["get", "post", "put", "delete", "options", "head"
  */
 export function validatePaths(spec: oai3.Model, resolve?: ResolveReferenceFn): SemanticError[] {
   const resolveReference = createReferenceResolver(spec, resolve);
-  console.log("Fo", Object.keys(spec.paths));
   const paths = spec.paths;
   const errors: SemanticError[] = [];
   for (const [uri, pathItem] of Object.entries(paths)) {
