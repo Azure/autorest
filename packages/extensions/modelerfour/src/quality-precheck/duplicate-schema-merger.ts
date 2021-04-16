@@ -13,6 +13,9 @@ export class DuplicateSchemaMerger {
       return spec;
     }
     let count = 0;
+
+    // Need to iterate until we find no duplicate.
+    // This ensure that if 2 schema have properties referencing to schemas that get merged those schemas can also be merged.
     for (;;) {
       const result = this.findAndRemoveDuplicateSchemas(spec);
       spec = result.spec;
