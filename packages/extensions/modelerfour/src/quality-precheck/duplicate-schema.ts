@@ -2,7 +2,7 @@ import { Session } from "@autorest/extension-base";
 import { items, length, values } from "@azure-tools/linq";
 import oai3, { dereference, Dereferenced, JsonType, Schema } from "@azure-tools/openapi";
 import { ModelerFourOptions } from "modeler/modelerfour-options";
-import { getDiff } from "recursive-diff";
+import { getDiff, rdiffResult } from "recursive-diff";
 
 export class DuplicateSchemaChecker {
   public constructor(private session: Session<oai3.Model>, private options: ModelerFourOptions) {}
@@ -20,26 +20,70 @@ export class DuplicateSchemaChecker {
         break;
       }
     }
-
     this.session.verbose(`Found and removed ${count} duplicate schema`, {});
+    this.findDifferentSchemasWithSameName(spec);
 
     return spec;
   }
 
-  private findAndRemoveDuplicateSchemas(spec: oai3.Model): { spec: oai3.Model; removedCount: number } {
-    let errors = new Set<string>();
+  /**
+   * Find all the schemas and group by name.
+   * @param spec OpenAPI Spec.
+   * @returns Map of schema name to schema using this name.
+   */
+  private groupSchemasByName(spec: oai3.Model) {
+    return items(spec.components?.schemas)
+      .select((s) => ({ key: s.key, value: dereference(spec, s.value) }))
+      .groupBy(
+        // Make sure to check x-ms-client-name first to see if the schema is already being renamed
+        (each) => each.value.instance["x-ms-client-name"] || each.value.instance["x-ms-metadata"]?.name,
+        (each) => each,
+      );
+  }
 
+  private findAndRemoveDuplicateSchemas(spec: oai3.Model): { spec: oai3.Model; removedCount: number } {
     const dupedNames = this.groupSchemasByName(spec);
 
     let count = 0;
     for (const [name, schemas] of dupedNames.entries()) {
       if (name && schemas.length > 1) {
         const result = this.resolveDuplicateSchemas(spec, name, schemas);
-        if (result.errors.size > 0) {
-          errors = new Set([...errors, ...result.errors]);
-        }
+
         count += result.removedCount;
         spec = result.spec;
+      }
+    }
+
+    return { spec, removedCount: count };
+  }
+
+  /**
+   * Find the differences between schemas with the same name and convert those to errors.
+   * @param spec Spec
+   */
+  private findDifferentSchemasWithSameName(spec: oai3.Model) {
+    const dupedNames = this.groupSchemasByName(spec);
+    const errors = new Set<string>();
+    for (const [name, schemas] of dupedNames.entries()) {
+      if (name && schemas.length > 1) {
+        const [baseSchema, ...otherSchemas] = schemas;
+
+        for (const otherSchema of otherSchemas) {
+          if (values(schemas).any((each) => this.isObjectOrEnum(each.value.instance))) {
+            const diff = diffSchemas(baseSchema.value.instance, otherSchema.value.instance);
+            if (diff.length > 0) {
+              const details = diff
+                .map((each) => {
+                  const path = each.path.join(".");
+                  const oldValue = each.op === "add" ? "<none>" : JSON.stringify(each.oldVal);
+                  const newValue = each.op === "delete" ? "<none>" : JSON.stringify(each.val);
+                  return `  - ${path}: ${oldValue} => ${newValue}`;
+                })
+                .join("\n");
+              errors.add(`Duplicate Schema named '${name}' (${diff.length} differences):\n${details}`);
+            }
+          }
+        }
       }
     }
 
@@ -54,70 +98,23 @@ export class DuplicateSchemaChecker {
         );
       }
     }
-
-    return { spec, removedCount: count };
-  }
-  private groupSchemasByName(spec: oai3.Model) {
-    return items(spec.components?.schemas)
-      .select((s) => ({ key: s.key, value: dereference(spec, s.value) }))
-      .groupBy(
-        // Make sure to check x-ms-client-name first to see if the schema is already being renamed
-        (each) => each.value.instance["x-ms-client-name"] || each.value.instance["x-ms-metadata"]?.name,
-        (each) => each,
-      );
   }
 
   private resolveDuplicateSchemas(
     spec: oai3.Model,
     name: string,
     schemas: DereferencedSchema[],
-  ): { spec: oai3.Model; errors: Set<string>; removedCount: number } {
+  ): { spec: oai3.Model; removedCount: number } {
     const [baseSchema, ...otherSchemas] = schemas;
-    const errors = new Set<string>();
-    const sameSchemas = [];
-    for (const otherSchema of otherSchemas) {
-      const diff = getDiff(baseSchema.value.instance, otherSchema.value.instance).filter(
-        (each) => each.path[0] !== "description" && each.path[0] !== "x-ms-metadata",
-      );
+    const sameSchemas = otherSchemas.filter((otherSchema) => {
+      const diff = diffSchemas(baseSchema.value.instance, otherSchema.value.instance);
+      return diff.length === 0;
+    });
 
-      if (diff.length === 0) {
-        sameSchemas.push(otherSchema);
-      } else {
-        if (values(schemas).any((each) => this.isObjectOrEnum(each.value.instance))) {
-          const rdiff = getDiff(otherSchema.value.instance, baseSchema.value.instance).filter(
-            (each) => each.path[0] !== "description" && each.path[0] !== "x-ms-metadata",
-          );
-          if (diff.length > 0) {
-            const details = diff
-              .map((each) => {
-                const path = each.path.join(".");
-                let iValue = each.op === "add" ? "<none>" : JSON.stringify(each.oldVal);
-                if (each.op !== "update") {
-                  const v = rdiff.find((each) => each.path.join(".") === path);
-                  iValue = JSON.stringify(v?.val);
-                }
-                const nValue = each.op === "delete" ? "<none>" : JSON.stringify(each.val);
-                return `${path}: ${iValue} => ${nValue}`;
-              })
-              .join(",");
-            errors.add(`Duplicate Schema named ${name} -- ${details} `);
-          }
-        }
-      }
-    }
+    const newSpec = this.removeDuplicateSchemas(spec, name, [baseSchema, ...sameSchemas]);
 
-    // found two schemas that are indeed the same.
-    // stop, find all the $refs to the second one, and rewrite them to go to the first one.
-    // then go back and start again.
-    // Restart the scan now that the duplicate has been removed
-
-    // it may not be identical, but if it's not an object, I'm not sure we care too much.
-    if (errors.size === 0) {
-      spec = this.removeDuplicateSchemas(spec, name, [baseSchema, ...sameSchemas]);
-    }
     return {
-      spec: spec,
-      errors,
+      spec: newSpec,
       removedCount: sameSchemas.length,
     };
   }
@@ -176,22 +173,6 @@ export class DuplicateSchemaChecker {
       return false;
     });
     return spec;
-  }
-
-  private replaceRefs2(spec: oai3.Model, schemaToKeep: DereferencedSchema, schemasToRemove: DereferencedSchema[]) {
-    let text = JSON.stringify(spec);
-    text = this.replaceRefsInRawSpec(text, schemaToKeep, schemasToRemove);
-    return JSON.parse(text);
-  }
-
-  private replaceRefsInRawSpec(text: string, schemaToKeep: DereferencedSchema, schemasToRemove: DereferencedSchema[]) {
-    for (const schemaToRemove of schemasToRemove) {
-      text = text.replace(
-        new RegExp(`"\\#\\/components\\/schemas\\/${schemaToRemove.key}"`, "g"),
-        `"#/components/schemas/${schemaToKeep.key}"`,
-      );
-    }
-    return text;
   }
 
   /**
@@ -263,4 +244,16 @@ function visit(obj: any, visitor: (obj: any) => boolean) {
     }
   }
   return false;
+}
+
+/**
+ * Get the list of difference between 2 schemas ignoring description and metadata.
+ * @param baseSchema Baseline schema
+ * @param otherSchema Schema to compare
+ * @returns List of differences.
+ */
+function diffSchemas(baseSchema: oai3.Schema, otherSchema: oai3.Schema): rdiffResult[] {
+  return getDiff(baseSchema, otherSchema, true).filter(
+    (x) => x.path[0] !== "description" && x.path[0] !== "x-ms-metadata",
+  );
 }
