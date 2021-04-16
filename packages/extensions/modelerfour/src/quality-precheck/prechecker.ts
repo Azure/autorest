@@ -1,12 +1,11 @@
 import { Session } from "@autorest/extension-base";
-import { values, items, length, Dictionary, refCount, clone, keys } from "@azure-tools/linq";
+import { values, items, length } from "@azure-tools/linq";
 import {
   Model as oai3,
   Refable,
   Dereferenced,
   dereference,
   Schema,
-  PropertyDetails,
   JsonType,
   StringFormat,
 } from "@azure-tools/openapi";
@@ -17,7 +16,7 @@ import { Interpretations } from "../modeler/interpretations";
 
 import { getDiff } from "recursive-diff";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
-import { DuplicateSchemaChecker } from "./duplicate-schema";
+import { DuplicateSchemaMerger } from "./duplicate-schema-merger";
 
 export async function processRequest(host: Host) {
   const debug = (await host.GetValue("debug")) || false;
@@ -201,7 +200,7 @@ export class QualityPreChecker {
       ["PreCheck", "CheckDuplicateSchemas"],
     );
 
-    const duplicateSchemaChecker = new DuplicateSchemaChecker(this.session, this.options);
+    const duplicateSchemaChecker = new DuplicateSchemaMerger(this.session, this.options);
     this.input = duplicateSchemaChecker.findDuplicateSchemas(this.input);
   }
 
