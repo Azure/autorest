@@ -202,7 +202,7 @@ export class QualityPreChecker {
     );
 
     const duplicateSchemaChecker = new DuplicateSchemaChecker(this.session, this.options);
-    this.input = duplicateSchemaChecker.findDuplicateSchemas();
+    this.input = duplicateSchemaChecker.findDuplicateSchemas(this.input);
   }
 
   fixUpSchemasThatUseAllOfInsteadOfJustRef() {

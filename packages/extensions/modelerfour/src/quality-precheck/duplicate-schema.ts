@@ -7,8 +7,7 @@ import { getDiff } from "recursive-diff";
 export class DuplicateSchemaChecker {
   public constructor(private session: Session<oai3.Model>, private options: ModelerFourOptions) {}
 
-  public findDuplicateSchemas(): oai3.Model {
-    let spec = this.session.model;
+  public findDuplicateSchemas(spec: oai3.Model): oai3.Model {
     if (!spec.components?.schemas) {
       return spec;
     }
