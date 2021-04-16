@@ -1,7 +1,6 @@
 import { Session } from "@autorest/extension-base";
 import { items, length, values } from "@azure-tools/linq";
 import oai3, { dereference, Dereferenced, JsonType, Schema } from "@azure-tools/openapi";
-import { mapValues } from "lodash";
 import { ModelerFourOptions } from "modeler/modelerfour-options";
 import { getDiff } from "recursive-diff";
 
@@ -14,10 +13,8 @@ export class DuplicateSchemaChecker {
       return spec;
     }
     let count = 0;
-    let i = 0;
     for (;;) {
-      i++;
-      const result = this.foo(spec);
+      const result = this.findAndRemoveDuplicateSchemas(spec);
       spec = result.spec;
       count += result.removedCount;
       if (result.removedCount === 0) {
@@ -30,7 +27,7 @@ export class DuplicateSchemaChecker {
     return spec;
   }
 
-  private foo(spec: oai3.Model): { spec: oai3.Model; removedCount: number } {
+  private findAndRemoveDuplicateSchemas(spec: oai3.Model): { spec: oai3.Model; removedCount: number } {
     let errors = new Set<string>();
 
     const dupedNames = this.groupSchemasByName(spec);
@@ -128,16 +125,7 @@ export class DuplicateSchemaChecker {
 
   private removeDuplicateSchemas(spec: oai3.Model, name: string, schemas: DereferencedSchema[]): oai3.Model {
     const { keep: schemaToKeep, remove: schemasToRemove } = this.findSchemaToRemove(spec, schemas);
-    let newSpec = spec;
-    let text = JSON.stringify(newSpec);
-    for (const schemaToRemove of schemasToRemove) {
-      text = text.replace(
-        new RegExp(`"\\#\\/components\\/schemas\\/${schemaToRemove.key}"`, "g"),
-        `"#/components/schemas/${schemaToKeep.key}"`,
-      );
-    }
-
-    newSpec = JSON.parse(text);
+    const newSpec = this.replaceRefs(spec, schemaToKeep, schemasToRemove);
 
     for (const schemaToRemove of schemasToRemove) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -176,6 +164,35 @@ export class DuplicateSchemaChecker {
     );
 
     return newSpec;
+  }
+
+  private replaceRefs(spec: oai3.Model, schemaToKeep: DereferencedSchema, schemasToRemove: DereferencedSchema[]) {
+    const newRef = `#/components/schemas/${schemaToKeep.key}`;
+    const refsToReplace = new Set(schemasToRemove.map((x) => `#/components/schemas/${x.key}`));
+    visit(spec, (node) => {
+      if (typeof node === "object" && node.$ref && refsToReplace.has(node.$ref)) {
+        node.$ref = newRef;
+        return true;
+      }
+      return false;
+    });
+    return spec;
+  }
+
+  private replaceRefs2(spec: oai3.Model, schemaToKeep: DereferencedSchema, schemasToRemove: DereferencedSchema[]) {
+    let text = JSON.stringify(spec);
+    text = this.replaceRefsInRawSpec(text, schemaToKeep, schemasToRemove);
+    return JSON.parse(text);
+  }
+
+  private replaceRefsInRawSpec(text: string, schemaToKeep: DereferencedSchema, schemasToRemove: DereferencedSchema[]) {
+    for (const schemaToRemove of schemasToRemove) {
+      text = text.replace(
+        new RegExp(`"\\#\\/components\\/schemas\\/${schemaToRemove.key}"`, "g"),
+        `"#/components/schemas/${schemaToKeep.key}"`,
+      );
+    }
+    return text;
   }
 
   /**
@@ -222,4 +239,29 @@ export class DuplicateSchemaChecker {
 interface DereferencedSchema {
   key: string;
   value: Dereferenced<Schema>;
+}
+
+function visit(obj: any, visitor: (obj: any) => boolean) {
+  if (!obj) {
+    return undefined;
+  }
+
+  if (visitor(obj)) {
+    return;
+  }
+
+  if (Array.isArray(obj)) {
+    for (const item of obj) {
+      visit(item, visitor);
+    }
+  } else if (typeof obj === "object") {
+    for (const [key, item] of Object.entries(obj)) {
+      if (key === "x-ms-examples") {
+        continue;
+      }
+
+      visit(item, visitor);
+    }
+  }
+  return false;
 }
