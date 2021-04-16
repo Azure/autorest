@@ -94,6 +94,8 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     for (const { key, value, pointer, children } of nodes) {
       switch (key) {
         case "paths":
+        case "x-ms-paths":
+          // Merge paths and x-ms-paths together under paths.
           if (!this.isSecondaryFile) {
             const paths = <oai.PathItem>target.paths || this.newObject(target, "paths", pointer);
             this.visitPaths(paths, children);
