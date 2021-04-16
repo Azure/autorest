@@ -160,12 +160,10 @@ export class Oai2ToOai3 {
         case "x-ms-paths":
         case "paths":
           {
-            // convert x-ms-paths to paths by just passing paths as the key.
-            const newKey = "paths";
-            if (!this.generated[newKey]) {
-              this.generated[newKey] = this.newObject(pointer);
+            if (!this.generated[key]) {
+              this.generated[key] = this.newObject(pointer);
             }
-            await this.visitPaths(this.generated[newKey], children, globalConsumes, globalProduces);
+            await this.visitPaths(this.generated[key], children, globalConsumes, globalProduces);
           }
           break;
         case "host":
