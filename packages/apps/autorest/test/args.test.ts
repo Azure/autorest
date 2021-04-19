@@ -44,7 +44,7 @@ describe("Args", () => {
   });
 
   it("parse args with ~ path", () => {
-    expect(parseArgs(["--configFileOrFolder:~/path/to/folder"]).configFileOrFolder).toEqual(
+    expect(join(parseArgs(["--configFileOrFolder:~/path/to/folder"]).configFileOrFolder)).toEqual(
       join(homedir(), "path/to/folder"),
     );
   });
