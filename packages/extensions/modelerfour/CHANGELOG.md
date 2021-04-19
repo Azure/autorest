@@ -1,6 +1,14 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Tue, 13 Apr 2021 21:32:54 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Apr 2021 21:06:54 GMT and should not be manually modified.
+
+## 4.18.4
+Mon, 19 Apr 2021 21:06:54 GMT
+
+### Patches
+
+- **Fix** Enum defined just with allOf of other enum
+- **Typo** Ambigious -> Ambiguous 
 
 ## 4.18.3
 Tue, 13 Apr 2021 21:32:54 GMT
