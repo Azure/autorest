@@ -854,6 +854,7 @@ export class ModelerFour {
     name: string,
     schema: OpenAPI.Schema,
   ): ObjectSchema | DictionarySchema | OrSchema | XorSchema | AnySchema {
+    console.error("Name", name, schema);
     const dictionaryDef = schema.additionalProperties;
 
     // is this more than a straightforward object?
@@ -1028,6 +1029,7 @@ export class ModelerFour {
   }
 
   trap = new Set();
+
   processSchemaImpl(schema: OpenAPI.Schema, name: string): Schema {
     if (this.trap.has(schema)) {
       throw new Error(
@@ -1036,8 +1038,14 @@ export class ModelerFour {
     }
     this.trap.add(schema);
 
+    const parents = schema.allOf?.map((x) => this.use(x, (n, i) => this.processSchema(n, i)));
+
     // handle enums differently early
-    if (schema.enum || schema["x-ms-enum"]) {
+    if (
+      schema.enum ||
+      schema["x-ms-enum"] ||
+      parents?.find((x) => x.type === SchemaType.SealedChoice || x.type === SchemaType.Choice)
+    ) {
       return this.processChoiceSchema(name, schema);
     }
 
