@@ -9,7 +9,8 @@ import {
   Transformer,
   visit,
 } from "@azure-tools/datastore";
-import { clone, Dictionary, values, visitor } from "@azure-tools/linq";
+import { walk } from "@azure-tools/json";
+import { clone, Dictionary, visitor } from "@azure-tools/linq";
 
 import * as oai from "@azure-tools/openapi";
 import { AutorestContext } from "../context";
@@ -205,7 +206,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
   }
 
   protected expandRefs(node: any) {
-    for (const { value } of visit(node)) {
+    walk(node, (value: any) => {
       if (value && typeof value === "object") {
         const ref = value.$ref;
         if (ref && typeof ref === "string" && ref.startsWith("#")) {
@@ -217,10 +218,10 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
           }
         }
 
-        // now, recurse into this object
-        this.expandRefs(value);
+        return "visit-children";
       }
-    }
+      return "stop";
+    });
   }
 
   public async finish() {

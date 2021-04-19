@@ -1,5 +1,5 @@
 import { Dictionary, items } from "@azure-tools/linq";
-import jp from "@azure-tools/json";
+import * as jp from "@azure-tools/json";
 
 export type JsonPointer = string;
 export type JsonPointerTokens = Array<string>;
