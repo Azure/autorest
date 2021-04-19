@@ -140,6 +140,9 @@ export function walk(
     });
   */
   const next = (cur: any) => {
+    if (cur == null) {
+      return;
+    }
     for (const [key, value] of Object.entries(cur)) {
       refTokens.push(String(key));
       if (descend(value)) {
@@ -158,6 +161,9 @@ function isObjectOrArray(value: any): boolean {
 }
 
 export function* visit(obj: any, parentReference: JsonPointerTokens = new Array<string>()): Iterable<Node> {
+  if (obj == null) {
+    return;
+  }
   for (const [key, value] of Object.entries(obj)) {
     const reference = [...parentReference, key];
     yield {
@@ -174,6 +180,9 @@ export function* visitT<T, K extends keyof T>(
   obj: T,
   parentReference: JsonPointerTokens = new Array<string>(),
 ): Iterable<NodeT<T, K>> {
+  if (obj == null) {
+    return;
+  }
   for (const [key, value] of Object.entries(obj)) {
     const reference = [...parentReference, key];
     const v = <T[K]>value;
