@@ -1,5 +1,4 @@
 /* eslint-disable jest/no-conditional-expect */
-import { keys } from "@azure-tools/linq";
 import * as pointer from "./json-pointer";
 
 describe("JsonPointer", () => {
@@ -63,7 +62,7 @@ describe("JsonPointer", () => {
   });
 
   it("should do examples", () => {
-    for (const p of keys(rfcValues)) {
+    for (const p of Object.keys(rfcValues)) {
       const expectedValue = rfcValues[p];
       expect(pointer.get(rfcExample, p)).toEqual(expectedValue);
     }
