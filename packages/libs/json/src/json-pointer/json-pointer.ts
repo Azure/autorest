@@ -1,5 +1,5 @@
 export type JsonPointer = string;
-export type JsonPointerTokens = Array<string>;
+export type JsonPointerTokens = string[];
 
 /**
  * Escapes a reference token
@@ -48,4 +48,24 @@ export function serializeJsonPointer(refTokens: JsonPointerTokens): string {
     return "";
   }
   return `/${refTokens.map(escape).join("/")}`;
+}
+
+/**
+ * Lookup a json pointer in an object
+ *
+ * @param {Object} obj - object to work on
+ * @param {JsonPointer|JsonPointerTokens} pointer - pointer or tokens to a location
+ * @returns {*} - value at location, or will throw if location is not present.
+ */
+export function getFromJsonPointer<T>(obj: any, pointer: JsonPointer | JsonPointerTokens): T {
+  const refTokens = Array.isArray(pointer) ? pointer : parseJsonPointer(pointer);
+
+  for (let i = 0; i < refTokens.length; ++i) {
+    const tok = refTokens[i];
+    if (!(typeof obj === "object" && tok in obj)) {
+      throw new Error("Invalid reference token: " + tok);
+    }
+    obj = obj[tok];
+  }
+  return obj;
 }

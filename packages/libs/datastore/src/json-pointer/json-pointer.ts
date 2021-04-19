@@ -25,18 +25,10 @@ export interface NodeT<T, K extends keyof T> {
  * @param {Object} obj - object to work on
  * @param {JsonPointer|JsonPointerTokens} pointer - pointer or tokens to a location
  * @returns {*} - value at location, or will throw if location is not present.
+ * @deprecated use @azure-tools/json#getJsonPointer
  */
-export function get(obj: any, pointer: JsonPointer | JsonPointerTokens) {
-  const refTokens = Array.isArray(pointer) ? pointer : parseJsonPointer(pointer);
-
-  for (let i = 0; i < refTokens.length; ++i) {
-    const tok = refTokens[i];
-    if (!(typeof obj === "object" && tok in obj)) {
-      throw new Error("Invalid reference token: " + tok);
-    }
-    obj = obj[tok];
-  }
-  return obj;
+export function get(obj: any, pointer: JsonPointer | JsonPointerTokens): any {
+  return jp.getFromJsonPointer(obj, pointer);
 }
 
 /**
@@ -129,6 +121,7 @@ export function toDictionary(obj: any, descend?: (value: any) => boolean) {
  * @param obj
  * @param {function} iterator
  * @param {function} descend
+ * @deprecated use @azure-tools/json#walk
  */
 export function walk(
   obj: any,
