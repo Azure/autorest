@@ -1,5 +1,3 @@
-import { Dictionary, items } from "@azure-tools/linq";
-
 export type JsonPointer = string;
 export type JsonPointerTokens = Array<string>;
 export interface Node {
@@ -108,8 +106,8 @@ export function remove(obj: any, pointer: JsonPointer | JsonPointerTokens) {
  * @param {function} descend
  * @returns {}
  */
-export function toDictionary(obj: any, descend?: (value: any) => boolean) {
-  const results = new Dictionary<any>();
+export function toDictionary(obj: any, descend?: (value: any) => boolean): Record<string, any> {
+  const results: Record<string, any> = {};
 
   walk(
     obj,
@@ -142,7 +140,7 @@ export function walk(
     });
   */
   const next = (cur: any) => {
-    for (const { key, value } of items(cur)) {
+    for (const [key, value] of Object.entries(cur)) {
       refTokens.push(String(key));
       if (descend(value)) {
         next(value);
@@ -159,34 +157,8 @@ function isObjectOrArray(value: any): boolean {
   return typeof value === "object";
 }
 
-/**
- * Iterates over an object -- the visitor can return false to skip
- * Iterator: function (value, pointer) {}
- *
- * @param obj
- * @param {function} iterator
- * @param {function} descend
- */
-export function _visit(
-  obj: any,
-  iterator: (value: any, pointer: string) => boolean,
-  descend: (value: any) => boolean = isObjectOrArray,
-) {
-  const refTokens = new Array<string>();
-  const next = (cur: any) => {
-    for (const { key, value } of items(cur)) {
-      refTokens.push(String(key));
-      if (iterator(value, serializeJsonPointer(refTokens)) && descend(value)) {
-        next(value);
-      }
-      refTokens.pop();
-    }
-  };
-  next(obj);
-}
-
 export function* visit(obj: any, parentReference: JsonPointerTokens = new Array<string>()): Iterable<Node> {
-  for (const { key, value } of items(obj)) {
+  for (const [key, value] of Object.entries(obj)) {
     const reference = [...parentReference, key];
     yield {
       value,
@@ -202,12 +174,12 @@ export function* visitT<T, K extends keyof T>(
   obj: T,
   parentReference: JsonPointerTokens = new Array<string>(),
 ): Iterable<NodeT<T, K>> {
-  for (const { key, value } of items(<any>obj)) {
+  for (const [key, value] of Object.entries(obj)) {
     const reference = [...parentReference, key];
     const v = <T[K]>value;
     yield {
       value: v,
-      key,
+      key: key as K,
       pointer: serializeJsonPointer(reference),
       children: visitT(<T[K]>value, reference),
       childIterator: () => visitT(<T[K]>value, reference),
