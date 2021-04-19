@@ -146,6 +146,30 @@ describe("Modelerfour.Schemas", () => {
         expect(foo?.choices.map((x) => x.value)).toEqual(["one", "two"]);
       });
 
+      it("enums just using other enum in allOf makes a copy", async () => {
+        const spec = createTestSpec();
+
+        addSchema(spec, "Foo", {
+          type: "string",
+          enum: ["one", "two"],
+        });
+        addSchema(spec, "Bar", {
+          type: "string",
+          allOf: [{ $ref: "#/components/schemas/Foo" }],
+        });
+
+        const codeModel = await runModeler(spec);
+
+        const bar = findByName("Bar", codeModel.schemas.choices);
+        expect(bar).toBeDefined();
+        expect(bar?.choices.map((x) => x.value)).toEqual(["one", "two"]);
+
+        // Parent should not have changed
+        const foo = findByName("Foo", codeModel.schemas.choices);
+        expect(foo).toBeDefined();
+        expect(foo?.choices.map((x) => x.value)).toEqual(["one", "two"]);
+      });
+
       it("default to type:string if all values are string", async () => {
         const spec = createTestSpec();
 
