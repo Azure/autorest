@@ -639,7 +639,7 @@ export class ModelerFour {
       case undefined:
         if (length(schema.enum) > 0 && values(schema.enum).all((each) => typeof each === "string")) {
           this.session.warning(
-            `The enum schema '${schema?.["x-ms-metadata"]?.name}' with an undefined type and enum values is ambigious. This has been auto-corrected to 'type:string'`,
+            `The enum schema '${schema?.["x-ms-metadata"]?.name}' with an undefined type and enum values is ambiguous. This has been auto-corrected to 'type:string'`,
             ["Modeler", "MissingType"],
             schema,
           );
@@ -1066,7 +1066,7 @@ export class ModelerFour {
           this.session.warning(
             `The schema '${
               schema?.["x-ms-metadata"]?.name || name
-            }' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'`,
+            }' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'`,
             ["Modeler", "MissingType"],
             schema,
           );
@@ -1080,7 +1080,7 @@ export class ModelerFour {
           this.session.warning(
             `The schema '${
               schema?.["x-ms-metadata"]?.name || name
-            }' with an undefined type and additionalProperties is a bit ambigious. This has been auto-corrected to 'type:object'`,
+            }' with an undefined type and additionalProperties is a bit ambiguous. This has been auto-corrected to 'type:object'`,
             ["Modeler"],
             schema,
           );
@@ -1094,7 +1094,7 @@ export class ModelerFour {
           this.session.warning(
             `The schema '${
               schema?.["x-ms-metadata"]?.name || name
-            }' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'`,
+            }' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'`,
             ["Modeler", "MissingType"],
             schema,
           );
