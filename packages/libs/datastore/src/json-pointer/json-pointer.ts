@@ -1,4 +1,5 @@
 import { Dictionary, items } from "@azure-tools/linq";
+import jp from "@azure-tools/json";
 
 export type JsonPointer = string;
 export type JsonPointerTokens = Array<string>;
@@ -232,39 +233,14 @@ export function has(obj: any, pointer: JsonPointer | JsonPointerTokens) {
 }
 
 /**
- * Escapes a reference token
- *
- * @param str
- * @returns {string}
- */
-function escape(str: string) {
-  return str.toString().replace(/~/g, "~0").replace(/\//g, "~1");
-}
-
-/**
- * Unescapes a reference token
- *
- * @param str
- * @returns {string}
- */
-function unescape(str: string) {
-  return str.replace(/~1/g, "/").replace(/~0/g, "~");
-}
-
-/**
  * Converts a json pointer into a array of reference tokens
  *
  * @param pointer
  * @returns {Array}
+ * @deprecated use from @azure-tools/json
  */
 export function parseJsonPointer(pointer: string): JsonPointerTokens {
-  if (pointer === "") {
-    return new Array<string>();
-  }
-  if (pointer.charAt(0) !== "/") {
-    throw new Error("Invalid JSON pointer: " + pointer);
-  }
-  return pointer.substring(1).split(/\//).map(unescape);
+  return jp.parseJsonPointer(pointer);
 }
 
 /**
@@ -272,10 +248,8 @@ export function parseJsonPointer(pointer: string): JsonPointerTokens {
  *
  * @param refTokens segment of paths.
  * @returns JsonPointer string.
+ * @deprecated use from @azure-tools/json
  */
 export function serializeJsonPointer(refTokens: JsonPointerTokens): string {
-  if (refTokens.length === 0) {
-    return "";
-  }
-  return `/${refTokens.map(escape).join("/")}`;
+  return jp.serializeJsonPointer(refTokens);
 }
