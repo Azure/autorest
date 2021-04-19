@@ -1,4 +1,4 @@
-import { parseJsonPointer, serializeJsonPointer } from "./json-pointer";
+import { getFromJsonPointer, parseJsonPointer, serializeJsonPointer } from "./json-pointer";
 
 describe("Json Pointer", () => {
   it("serialize simple json path", () => {
@@ -23,5 +23,49 @@ describe("Json Pointer", () => {
 
   it("parse json path with ~ characters", () => {
     expect(parseJsonPointer("/path/this~0is~0here/prop")).toEqual(["path", "this~is~here", "prop"]);
+  });
+
+  describe("getFromJsonPointer()", () => {
+    const examples = {
+      "foo": ["bar", "baz"],
+      "bar": { baz: 10 },
+      "": 0,
+      "a/b": 1,
+      "c%d": 2,
+      "e^f": 3,
+      "g|h": 4,
+      "i\\j": 5,
+      'k"l': 6,
+      " ": 7,
+      "m~n": 8,
+    };
+
+    const expectedValues = {
+      "": examples,
+      "/foo": examples.foo,
+      "/foo/0": "bar",
+      "/bar": examples.bar,
+      "/bar/baz": 10,
+      "/": 0,
+      "/a~1b": 1,
+      "/c%d": 2,
+      "/e^f": 3,
+      "/g|h": 4,
+      "/i\\j": 5,
+      '/k"l': 6,
+      "/ ": 7,
+      "/m~0n": 8,
+    };
+
+    it("should work for root element", () => {
+      const obj = {};
+      expect(getFromJsonPointer(obj, "")).toEqual(obj);
+    });
+
+    it("should do examples", () => {
+      for (const [key, expectedValue] of Object.entries(expectedValues)) {
+        expect(getFromJsonPointer(examples, key)).toEqual(expectedValue);
+      }
+    });
   });
 });
