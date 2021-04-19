@@ -854,7 +854,6 @@ export class ModelerFour {
     name: string,
     schema: OpenAPI.Schema,
   ): ObjectSchema | DictionarySchema | OrSchema | XorSchema | AnySchema {
-    console.error("Name", name, schema);
     const dictionaryDef = schema.additionalProperties;
 
     // is this more than a straightforward object?
