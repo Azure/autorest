@@ -1,12 +1,11 @@
 import { Session } from "@autorest/extension-base";
-import { values, items, length, Dictionary, refCount, clone, keys } from "@azure-tools/linq";
+import { values, items, length } from "@azure-tools/linq";
 import {
   Model as oai3,
   Refable,
   Dereferenced,
   dereference,
   Schema,
-  PropertyDetails,
   JsonType,
   StringFormat,
 } from "@azure-tools/openapi";
@@ -17,6 +16,7 @@ import { Interpretations } from "../modeler/interpretations";
 
 import { getDiff } from "recursive-diff";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
+import { DuplicateSchemaMerger } from "./duplicate-schema-merger";
 
 export async function processRequest(host: Host) {
   const debug = (await host.GetValue("debug")) || false;
@@ -55,11 +55,6 @@ export async function processRequest(host: Host) {
     }
     throw E;
   }
-}
-
-interface DereferencedSchema {
-  key: string;
-  value: Dereferenced<Schema>;
 }
 
 export class QualityPreChecker {
@@ -199,160 +194,14 @@ export class QualityPreChecker {
     }
   }
 
-  isObjectOrEnum(schema: Schema) {
-    switch (schema.type) {
-      case JsonType.Array:
-      case JsonType.Boolean:
-      case JsonType.Number:
-        return false;
-
-      case JsonType.String:
-        return schema.enum || schema["x-ms-enum"];
-
-      case JsonType.Object:
-        // empty objects don't worry.
-        if (length(schema.properties) === 0 && length(schema.allOf) === 0) {
-          return false;
-        }
-        return true;
-
-      default:
-        return length(schema.properties) > 0 || length(schema.allOf) > 0 ? true : false;
-    }
-  }
-
-  checkForDuplicateSchemas(): undefined {
+  checkForDuplicateSchemas() {
     this.session.warning(
       "Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.",
       ["PreCheck", "CheckDuplicateSchemas"],
     );
 
-    // Returns true if scanning should be restarted
-    const innerCheckForDuplicateSchemas = (): any => {
-      const errors = new Set<string>();
-      if (this.input.components && this.input.components.schemas) {
-        const dupedNames = items(this.input.components?.schemas)
-          .select((s) => ({ key: s.key, value: this.resolve(s.value) }))
-          .groupBy(
-            // Make sure to check x-ms-client-name first to see if the schema is already being renamed
-            (each) => each.value.instance["x-ms-client-name"] || each.value.instance["x-ms-metadata"]?.name,
-            (each) => each,
-          );
-
-        for (const [name, schemas] of dupedNames.entries()) {
-          if (name && schemas.length > 1) {
-            const diff = getDiff(schemas[0].value.instance, schemas[1].value.instance).filter(
-              (each) => each.path[0] !== "description" && each.path[0] !== "x-ms-metadata",
-            );
-
-            if (diff.length === 0) {
-              // found two schemas that are indeed the same.
-              // stop, find all the $refs to the second one, and rewrite them to go to the first one.
-              // then go back and start again.
-              this.removeDuplicateSchemas(name, schemas[0], schemas[1]);
-              // Restart the scan now that the duplicate has been removed
-              return true;
-            }
-
-            // it may not be identical, but if it's not an object, I'm not sure we care too much.
-            if (values(schemas).any((each) => this.isObjectOrEnum(each.value.instance))) {
-              const rdiff = getDiff(schemas[1].value.instance, schemas[0].value.instance).filter(
-                (each) => each.path[0] !== "description" && each.path[0] !== "x-ms-metadata",
-              );
-              if (diff.length > 0) {
-                const details = diff
-                  .map((each) => {
-                    const path = each.path.join(".");
-                    let iValue = each.op === "add" ? "<none>" : JSON.stringify(each.oldVal);
-                    if (each.op !== "update") {
-                      const v = rdiff.find((each) => each.path.join(".") === path);
-                      iValue = JSON.stringify(v?.val);
-                    }
-                    const nValue = each.op === "delete" ? "<none>" : JSON.stringify(each.val);
-                    return `${path}: ${iValue} => ${nValue}`;
-                  })
-                  .join(",");
-                errors.add(`Duplicate Schema named ${name} -- ${details} `);
-                continue;
-              }
-            }
-          }
-        }
-      }
-
-      for (const each of errors) {
-        // Allow duplicate schemas if requested
-        if (this.options["lenient-model-deduplication"]) {
-          this.session.warning(each, ["PreCheck", "DuplicateSchema"]);
-        } else {
-          this.session.error(
-            `${each}; This error can be *temporarily* avoided by using the 'modelerfour.lenient-model-deduplication' setting.  NOTE: This setting will be removed in a future version of @autorest/modelerfour; schemas should be updated to fix this issue sooner than that.`,
-            ["PreCheck", "DuplicateSchema"],
-          );
-        }
-      }
-    };
-
-    while (innerCheckForDuplicateSchemas()) {
-      // Loop until the scan is complete
-    }
-
-    return undefined;
-  }
-
-  private findSchemaToRemove(
-    schema1: DereferencedSchema,
-    schema2: DereferencedSchema,
-  ): { keep: DereferencedSchema; remove: DereferencedSchema } {
-    const schema1Ref = this.input.components?.schemas?.[schema1.key].$ref;
-    // If schema1 is pointing to schema2 then we should delete schema1
-    if (schema1Ref && schema1Ref === `#/components/schemas/${schema2.key}`) {
-      return { remove: schema1, keep: schema2 };
-    }
-    return { remove: schema2, keep: schema1 };
-  }
-
-  private removeDuplicateSchemas(name: string, schema1: DereferencedSchema, schema2: DereferencedSchema) {
-    const { keep: schemaToKeep, remove: schemaToRemove } = this.findSchemaToRemove(schema1, schema2);
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    delete this.input.components!.schemas![schemaToRemove.key];
-    const text = JSON.stringify(this.input);
-    this.input = JSON.parse(
-      text.replace(
-        new RegExp(`"\\#\\/components\\/schemas\\/${schemaToRemove.key}"`, "g"),
-        `"#/components/schemas/${schemaToKeep.key}"`,
-      ),
-    );
-
-    // update metadata to match
-    if (this.input?.components?.schemas?.[schemaToKeep.key]) {
-      const primarySchema = this.resolve(this.input.components.schemas[schemaToKeep.key]);
-      const primaryMetadata = primarySchema.instance["x-ms-metadata"];
-      const secondaryMetadata = schemaToRemove.value.instance["x-ms-metadata"];
-
-      if (primaryMetadata && secondaryMetadata) {
-        primaryMetadata.apiVersions = [
-          ...new Set<string>([...(primaryMetadata.apiVersions || []), ...(secondaryMetadata.apiVersions || [])]),
-        ];
-        primaryMetadata.filename = [
-          ...new Set<string>([...(primaryMetadata.filename || []), ...(secondaryMetadata.filename || [])]),
-        ];
-        primaryMetadata.originalLocations = [
-          ...new Set<string>([
-            ...(primaryMetadata.originalLocations || []),
-            ...(secondaryMetadata.originalLocations || []),
-          ]),
-        ];
-        primaryMetadata["x-ms-secondary-file"] = !(
-          !primaryMetadata["x-ms-secondary-file"] || !secondaryMetadata["x-ms-secondary-file"]
-        );
-      }
-    }
-
-    this.session.verbose(
-      `Schema ${name} has multiple identical declarations, reducing to just one - removing: ${schemaToRemove.key}, keeping: ${schemaToKeep.key}`,
-      ["PreCheck", "ReducingSchema"],
-    );
+    const duplicateSchemaChecker = new DuplicateSchemaMerger(this.session, this.options);
+    this.input = duplicateSchemaChecker.findDuplicateSchemas(this.input);
   }
 
   fixUpSchemasThatUseAllOfInsteadOfJustRef() {
