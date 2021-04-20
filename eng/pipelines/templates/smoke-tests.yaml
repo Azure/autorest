@@ -38,5 +38,5 @@ jobs:
           versionSpec: ${{ parameters.nodeVersion }}
         displayName: "Install Node.js"
 
-      - script: ./scripts/smoke-test.ps1 -coreVersion:$CORE_PKG -m4Version:$M4_PKG
+      - script: ./regression-tests/smoke-test.ps1 -coreVersion:$CORE_PKG -m4Version:$M4_PKG
         displayName: Run smoke tests
