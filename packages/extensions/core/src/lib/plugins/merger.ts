@@ -9,7 +9,8 @@ import {
   Transformer,
   visit,
 } from "@azure-tools/datastore";
-import { clone, Dictionary, values, visitor } from "@azure-tools/linq";
+import { walk } from "@azure-tools/json";
+import { clone, Dictionary, visitor } from "@azure-tools/linq";
 
 import * as oai from "@azure-tools/openapi";
 import { AutorestContext } from "../context";
@@ -59,14 +60,14 @@ import { PipelinePlugin } from "../pipeline/common";
  *
  */
 export class MultiAPIMerger extends Transformer<any, oai.Model> {
-  opCount = 0;
-  cCount = new Dictionary<number>();
-  refs = new Dictionary<string>();
+  private opCount = 0;
+  private cCount: Record<string, number> = {};
+  private refs: Record<string, string> = {};
 
   descriptions = new Set();
   apiVersions = new Set();
   titles = new Set();
-
+  private time = 0;
   constructor(
     input: Array<DataHandle>,
     protected overrideTitle: string | undefined,
@@ -205,8 +206,9 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
   }
 
   protected expandRefs(node: any) {
-    for (const { value } of visit(node)) {
+    walk(node, (value: any) => {
       if (value && typeof value === "object") {
+        const start = new Date().getTime();
         const ref = value.$ref;
         if (ref && typeof ref === "string" && ref.startsWith("#")) {
           const fullRef = `${(<DataHandle>this.currentInput).originalFullPath}${ref}`;
@@ -216,11 +218,11 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
             this.refs[fullRef] = this.refs[ref];
           }
         }
-
-        // now, recurse into this object
-        this.expandRefs(value);
+        this.time += new Date().getTime() - start;
+        return "visit-children";
       }
-    }
+      return "stop";
+    });
   }
 
   public async finish() {

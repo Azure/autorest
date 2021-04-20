@@ -1,74 +1,7 @@
 /* eslint-disable jest/no-conditional-expect */
-import { keys } from "@azure-tools/linq";
 import * as pointer from "./json-pointer";
 
 describe("JsonPointer", () => {
-  let rfcExample: any;
-  let rfcValues: any;
-  let rfcParsed: any;
-
-  beforeEach(() => {
-    rfcExample = {
-      "foo": ["bar", "baz"],
-      "bar": { baz: 10 },
-      "": 0,
-      "a/b": 1,
-      "c%d": 2,
-      "e^f": 3,
-      "g|h": 4,
-      "i\\j": 5,
-      'k"l': 6,
-      " ": 7,
-      "m~n": 8,
-    };
-
-    rfcValues = {
-      "": rfcExample,
-      "/foo": rfcExample.foo,
-      "/foo/0": "bar",
-      "/bar": rfcExample.bar,
-      "/bar/baz": 10,
-      "/": 0,
-      "/a~1b": 1,
-      "/c%d": 2,
-      "/e^f": 3,
-      "/g|h": 4,
-      "/i\\j": 5,
-      '/k"l': 6,
-      "/ ": 7,
-      "/m~0n": 8,
-    };
-
-    rfcParsed = {
-      "": { tokens: [], value: rfcExample },
-      "/foo": { tokens: ["foo"], value: rfcExample.foo },
-      "/foo/0": { tokens: ["foo", "0"], value: "bar" },
-      "/bar": { tokens: ["bar"], value: rfcExample.bar },
-      "/bar/baz": { tokens: ["bar", "baz"], value: 10 },
-      "/": { tokens: [""], value: 0 },
-      "/a~1b": { tokens: ["a/b"], value: 1 },
-      "/c%d": { tokens: ["c%d"], value: 2 },
-      "/e^f": { tokens: ["e^f"], value: 3 },
-      "/g|h": { tokens: ["g|h"], value: 4 },
-      "/i\\j": { tokens: ["i\\j"], value: 5 },
-      '/k"l': { tokens: ['k"l'], value: 6 },
-      "/ ": { tokens: [" "], value: 7 },
-      "/m~0n": { tokens: ["m~n"], value: 8 },
-    };
-  });
-
-  it("should work for root element", () => {
-    const obj = {};
-    expect(pointer.get(obj, "")).toEqual(obj);
-  });
-
-  it("should do examples", () => {
-    for (const p of keys(rfcValues)) {
-      const expectedValue = rfcValues[p];
-      expect(pointer.get(rfcExample, p)).toEqual(expectedValue);
-    }
-  });
-
   it("should create arrays for - and reference the (nonexistent) member after the last array element.", () => {
     const obj = <any>["foo"];
     pointer.set(obj, "/-/test/-", "expected");

@@ -1,0 +1,45 @@
+{
+  "name": "@azure-tools/json",
+  "version": "1.0.0",
+  "description": "Json objects utilities",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "engines": {
+    "node": ">=10.13.0"
+  },
+  "scripts": {
+    "build": "tsc -p ./tsconfig.build.json",
+    "watch": "tsc -p ./tsconfig.build.json --watch",
+    "lint:fix": "eslint ./src --fix --ext .ts",
+    "lint": "eslint ./src --ext .ts --max-warnings=0",
+    "prepare": "npm run build",
+    "test": "jest --watchAll --coverage=false",
+    "test:ci": "jest --ci",
+    "clean": "rimraf ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/autorest.git"
+  },
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/autorest/issues"
+  },
+  "homepage": "https://github.com/Azure/autorest/tree/master/packages/libs/json",
+  "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "@types/node": "~14.14.20",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
+    "eslint-plugin-jest": "~24.3.2",
+    "eslint-plugin-node": "~11.1.0",
+    "eslint-plugin-prettier": "~3.2.0",
+    "eslint-plugin-unicorn": "~27.0.0",
+    "eslint": "^7.17.0",
+    "jest": "^26.6.3",
+    "rimraf": "^3.0.2",
+    "typescript": "~4.2.3"
+  },
+  "dependencies": {}
+}

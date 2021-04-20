@@ -121,6 +121,12 @@
       "shouldPublish": true
     },
     {
+      "packageName": "@azure-tools/json",
+      "projectFolder": "packages/libs/json",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
       "packageName": "@azure-tools/jsonschema",
       "projectFolder": "packages/libs/jsonschema",
       "reviewCategory": "production",
