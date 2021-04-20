@@ -70,6 +70,10 @@ stages:
         parameters:
           name: node14
           nodeVersion: 14.x
+      - template: ./templates/regression-tests.yaml
+        parameters:
+          name: node16
+          nodeVersion: 16.x
 
   - stage: smoketests
     displayName: Smoke Tests
