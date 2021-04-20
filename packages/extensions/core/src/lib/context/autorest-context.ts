@@ -19,6 +19,7 @@ import { AutorestCoreLogger } from "./logger";
 import { VERSION } from "../constants";
 import { StatsCollector } from "../stats";
 import { LoggingSession } from "./logging-session";
+import { PipelinePluginDefinition } from "../pipeline/plugin-loader";
 
 export class AutorestContext implements AutorestLogger {
   public config: AutorestConfiguration;
@@ -31,6 +32,7 @@ export class AutorestContext implements AutorestLogger {
     public messageEmitter: MessageEmitter,
     public stats: StatsCollector,
     public asyncLogManager: LoggingSession,
+    private plugin?: PipelinePluginDefinition,
   ) {
     this.config = config;
     this.logger = new AutorestCoreLogger(config, messageEmitter, asyncLogManager);
@@ -115,12 +117,14 @@ export class AutorestContext implements AutorestLogger {
 
   public get HeaderText(): string {
     const h = this.config["header-definitions"];
+
+    const defaultText = this.getDefaultHeaderText();
     switch (this.config["license-header"]?.toLowerCase()) {
       case "microsoft_mit":
-        return `${h.microsoft}\n${h.mit}\n${h.default.replace("{core}", VERSION)}\n${h.warning}`;
+        return `${h.microsoft}\n${h.mit}\n${defaultText}\n${h.warning}`;
 
       case "microsoft_apache":
-        return `${h.microsoft}\n${h.apache}\n${h.default.replace("{core}", VERSION)}\n${h.warning}`;
+        return `${h.microsoft}\n${h.apache}\n${defaultText}\n${h.warning}`;
 
       case "microsoft_mit_no_version":
         return `${h.microsoft}\n${h.mit}\n${h["no-version"]}\n${h.warning}`;
@@ -135,18 +139,24 @@ export class AutorestContext implements AutorestLogger {
         return "";
 
       case "microsoft_mit_small":
-        return `${h.microsoft}\n${h["mit-small"]}\n${h.default.replace("{core}", VERSION)}\n${h.warning}`;
+        return `${h.microsoft}\n${h["mit-small"]}\n${defaultText}\n${h.warning}`;
 
       case "microsoft_mit_small_no_codegen":
         return `${h.microsoft}\n${h["mit-small"]}\n${h["no-version"]}`;
 
       case null:
       case undefined:
-        return `${h.default.replace("{core}", VERSION)}\n${h.warning}`;
+        return `${defaultText}\n${h.warning}`;
 
       default:
         return `${this.config["license-header"]}`;
     }
+  }
+
+  private getDefaultHeaderText() {
+    const extension = this.plugin?.extension;
+    const generator = extension ? `${extension?.extensionName}@${extension?.extensionVersion}` : "";
+    return this.config["header-definitions"].default.replace("{core}", VERSION).replace("{generator}", generator);
   }
 
   public IsOutputArtifactRequested(artifact: string): boolean {
@@ -178,9 +188,21 @@ export class AutorestContext implements AutorestLogger {
     return result;
   }
 
-  public *getNestedConfiguration(pluginName: string): Iterable<AutorestContext> {
-    for (const nestedConfig of getNestedConfiguration(this.config, pluginName)) {
-      yield new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter, this.stats, this.asyncLogManager);
+  /**
+   * Get a new configuration that is extended with the properties under the given scope.
+   * @param scope Name of the nested property to flatten.
+   * @param plugin Optional plugin requesting this configuration.
+   */
+  public *getNestedConfiguration(scope: string, plugin?: PipelinePluginDefinition): Iterable<AutorestContext> {
+    for (const nestedConfig of getNestedConfiguration(this.config, scope)) {
+      yield new AutorestContext(
+        nestedConfig,
+        this.fileSystem,
+        this.messageEmitter,
+        this.stats,
+        this.asyncLogManager,
+        plugin,
+      );
     }
   }
 
@@ -190,6 +212,13 @@ export class AutorestContext implements AutorestLogger {
    */
   public extendWith(...overrides: AutorestNormalizedConfiguration[]): AutorestContext {
     const nestedConfig = extendAutorestConfiguration(this.config, overrides);
-    return new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter, this.stats, this.asyncLogManager);
+    return new AutorestContext(
+      nestedConfig,
+      this.fileSystem,
+      this.messageEmitter,
+      this.stats,
+      this.asyncLogManager,
+      this.plugin,
+    );
   }
 }
