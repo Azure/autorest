@@ -1,3 +1,4 @@
+import { JsonType } from "@azure-tools/openapi";
 import { addSchema, createTestSpec, findByName } from "../utils";
 import { runModeler } from "./modelerfour-utils";
 
@@ -182,6 +183,35 @@ describe("Modelerfour.Schemas", () => {
         expect(foo).toBeDefined();
         expect(foo?.choiceType.type).toEqual("string");
         expect(foo?.choices.map((x) => x.value)).toEqual(["one", "two"]);
+      });
+    });
+
+    describe("Deprecation", () => {
+      it("doesn't set deprecated info by default", async () => {
+        const spec = createTestSpec();
+
+        addSchema(spec, "RegularModel", {
+          type: "object",
+          properties: { name: { type: JsonType.String } },
+        });
+
+        const codeModel = await runModeler(spec);
+        const model = findByName("RegularModel", codeModel.schemas.objects);
+        expect(model?.deprecated).toEqual(undefined);
+      });
+
+      it("mark model as deprecated if deprecated:true", async () => {
+        const spec = createTestSpec();
+
+        addSchema(spec, "DeprecatedModel", {
+          type: "object",
+          deprecated: true,
+          properties: { name: { type: JsonType.String } },
+        });
+
+        const codeModel = await runModeler(spec);
+        const model = findByName("DeprecatedModel", codeModel.schemas.objects);
+        expect(model?.deprecated).toEqual({});
       });
     });
   });

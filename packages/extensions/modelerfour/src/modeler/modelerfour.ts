@@ -1617,6 +1617,7 @@ export class ModelerFour {
       new Operation(memberName, this.interpret.getDescription("", httpOperation), {
         extensions: this.interpret.getExtensionProperties(httpOperation),
         apiVersions: this.interpret.getApiVersions(pathItem),
+        deprecated: this.interpret.getDeprecation(httpOperation),
         language: {
           default: {
             summary: httpOperation.summary,
@@ -1986,6 +1987,7 @@ export class ModelerFour {
               required: parameter.required ? true : undefined,
               implementation,
               extensions: this.interpret.getExtensionProperties(parameter),
+              deprecated: this.interpret.getDeprecation(parameter),
               nullable: parameter.nullable || schema.nullable,
               protocol: {
                 http: new HttpParameter(

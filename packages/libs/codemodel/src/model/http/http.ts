@@ -9,6 +9,7 @@ import { DeepPartial, KnownMediaType, Initializer } from "@azure-tools/codegen";
 import { Extensions } from "../common/extensions";
 import { GroupSchema } from "../common/schemas/object";
 import { Languages } from "../common/languages";
+import { Deprecation } from "../common/deprecation";
 
 /** extended metadata for HTTP operation parameters  */
 export interface HttpParameter extends Protocol {
@@ -67,6 +68,7 @@ export class HttpWithBodyRequest extends HttpRequest implements HttpWithBodyRequ
     this.apply(objectInitializer);
   }
 }
+
 export interface HttpBinaryRequest extends HttpWithBodyRequest {
   /* indicates that the HTTP request should be a binary, not a serialized object */
   binary: true;
@@ -91,6 +93,7 @@ export interface HttpHeader extends Extensions {
   schema: Schema;
   language: Languages;
 }
+
 export class HttpHeader extends Initializer implements HttpHeader {
   constructor(public header: string, public schema: Schema, objectInitializer?: DeepPartial<HttpHeader>) {
     super();
