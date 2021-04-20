@@ -1,6 +1,11 @@
 # Change Log - autorest
 
-This log was last generated on Thu, 01 Apr 2021 15:46:42 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Apr 2021 19:53:22 GMT and should not be manually modified.
+
+## 3.1.5
+Fri, 09 Apr 2021 19:53:22 GMT
+
+_Version update only_
 
 ## 3.1.4
 Thu, 01 Apr 2021 15:46:42 GMT

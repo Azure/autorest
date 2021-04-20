@@ -271,6 +271,7 @@ export class ModelerFour {
       // detect the apiversion mode
       this.apiVersionMode = this.initApiVersionMode(apiVersionParameter, useModelNamespace);
     } else {
+      this.apiVersionMode = apiVersionMode as any;
       // just set the other parameters
       this.initApiVersionMode(apiVersionParameter, useModelNamespace);
     }
@@ -643,7 +644,7 @@ export class ModelerFour {
       case undefined:
         if (length(schema.enum) > 0 && values(schema.enum).all((each) => typeof each === "string")) {
           this.session.warning(
-            `The enum schema '${schema?.["x-ms-metadata"]?.name}' with an undefined type and enum values is ambigious. This has been auto-corrected to 'type:string'`,
+            `The enum schema '${schema?.["x-ms-metadata"]?.name}' with an undefined type and enum values is ambiguous. This has been auto-corrected to 'type:string'`,
             ["Modeler", "MissingType"],
             schema,
           );
@@ -690,6 +691,7 @@ export class ModelerFour {
     const sealed = xmse && (alwaysSeal || !xmse.modelAsString);
 
     const parentChoices = this.getChoiceSchemaParentValues(name, schema);
+    const type = this.getPrimitiveSchemaForEnum(schema);
     const choices = [...parentChoices, ...this.interpret.getEnumChoices(schema)];
 
     // model as string forces it to be a choice/enum.
@@ -706,7 +708,7 @@ export class ModelerFour {
           example: this.interpret.getExample(schema),
           externalDocs: this.interpret.getExternalDocs(schema),
           serialization: this.interpret.getSerialization(schema),
-          valueType: this.getPrimitiveSchemaForEnum(schema),
+          valueType: type,
           value: new ConstantValue(this.interpret.getConstantValue(schema, constVal)),
         }),
       );
@@ -723,7 +725,7 @@ export class ModelerFour {
           example: this.interpret.getExample(schema),
           externalDocs: this.interpret.getExternalDocs(schema),
           serialization: this.interpret.getSerialization(schema),
-          choiceType: <any>this.getPrimitiveSchemaForEnum(schema),
+          choiceType: type as any,
           choices,
         }),
       );
@@ -739,7 +741,7 @@ export class ModelerFour {
         example: this.interpret.getExample(schema),
         externalDocs: this.interpret.getExternalDocs(schema),
         serialization: this.interpret.getSerialization(schema),
-        choiceType: <any>this.getPrimitiveSchemaForEnum(schema),
+        choiceType: type as any,
         choices,
       }),
     );
@@ -1031,6 +1033,7 @@ export class ModelerFour {
   }
 
   trap = new Set();
+
   processSchemaImpl(schema: OpenAPI.Schema, name: string): Schema {
     if (this.trap.has(schema)) {
       throw new Error(
@@ -1039,8 +1042,14 @@ export class ModelerFour {
     }
     this.trap.add(schema);
 
+    const parents = schema.allOf?.map((x) => this.use(x, (n, i) => this.processSchema(n, i)));
+
     // handle enums differently early
-    if (schema.enum || schema["x-ms-enum"]) {
+    if (
+      schema.enum ||
+      schema["x-ms-enum"] ||
+      parents?.find((x) => x.type === SchemaType.SealedChoice || x.type === SchemaType.Choice)
+    ) {
       return this.processChoiceSchema(name, schema);
     }
 
@@ -1069,7 +1078,7 @@ export class ModelerFour {
           this.session.warning(
             `The schema '${
               schema?.["x-ms-metadata"]?.name || name
-            }' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'`,
+            }' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'`,
             ["Modeler", "MissingType"],
             schema,
           );
@@ -1083,7 +1092,7 @@ export class ModelerFour {
           this.session.warning(
             `The schema '${
               schema?.["x-ms-metadata"]?.name || name
-            }' with an undefined type and additionalProperties is a bit ambigious. This has been auto-corrected to 'type:object'`,
+            }' with an undefined type and additionalProperties is a bit ambiguous. This has been auto-corrected to 'type:object'`,
             ["Modeler"],
             schema,
           );
@@ -1097,7 +1106,7 @@ export class ModelerFour {
           this.session.warning(
             `The schema '${
               schema?.["x-ms-metadata"]?.name || name
-            }' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'`,
+            }' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'`,
             ["Modeler", "MissingType"],
             schema,
           );
@@ -1613,6 +1622,7 @@ export class ModelerFour {
       new Operation(memberName, this.interpret.getDescription("", httpOperation), {
         extensions: this.interpret.getExtensionProperties(httpOperation),
         apiVersions: this.interpret.getApiVersions(pathItem),
+        deprecated: this.interpret.getDeprecation(httpOperation),
         language: {
           default: {
             summary: httpOperation.summary,
@@ -1982,6 +1992,7 @@ export class ModelerFour {
               required: parameter.required ? true : undefined,
               implementation,
               extensions: this.interpret.getExtensionProperties(parameter),
+              deprecated: this.interpret.getDeprecation(parameter),
               nullable: parameter.nullable || schema.nullable,
               protocol: {
                 http: new HttpParameter(

@@ -1,9 +1,5 @@
 {
-  "ignorePatterns": [
-    {
-      "pattern": "^https://github\\.com/Azure/autorest\\."
-    }
-  ],
+  "ignorePatterns": [],
   "replacementPatterns": [
     {
       "pattern": "https://github\\.com/Azure/autorest/(?:blob|tree)/master/",

@@ -1,4 +1,4 @@
-# <img align="center" src="./images/logo.png">  Troubleshooting
+# <img align="center" src="./images/logo.png"> Troubleshooting
 
 ## Module Errors
 
@@ -18,10 +18,8 @@ FATAL: Error: Enum types of 'object' and format 'undefined' are not supported. C
 If you're error does not look like this, refer to the docs in our language generators:
 
 - [Python][python_generation]
-- [Java][java_generation]
 - [C#][csharp_generation]
 - [Typescript][typescript_generation]
-
 
 These issues should give you enough information to fix the error. If not, please let us know in either the [main repo][autorest_issues], or in the language-specific repos. Also let us know if you believe
 there are erroneous errors being thrown.
@@ -38,17 +36,16 @@ If you would like to actually debug through a language generator's code, see our
 - [Typescript][typescript_debug]
 
 <!-- LINKS -->
+
 [main_docs]: https://github.com/Azure/autorest/blob/master/docs/openapi/readme.md
 [autorest_issues]: https://github.com/Azure/autorest/issues
 [autorest_python_issues]: https://github.com/Azure/autorest.python/issues
-[main_debugging]: https://github.com/Azure/autorest/tree/master/docs/generate/troubleshooting.md#debugging
 [autorest_python_repo]: https://github.com/Azure/autorest.python/tree/autorestv3
 [debugging_flags]: https://github.com/Azure/autorest/blob/master/docs/generate/flags.md#debugging-flags
 [python_generation]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/troubleshooting.md#generation-errors
-[java_generation]: https://github.com/Azure/autorest.java/tree/v4/docs/troubleshooting.md#generation-errors
-[csharp_generation]: https://github.com/Azure/autorest.csharp/tree/v3/docs/troubleshooting.md#generation-errors
+[csharp_generation]: https://github.com/Azure/autorest.csharp/tree/feature/v3/docs/troubleshooting.md#generation-errors
 [typescript_generation]: https://github.com/Azure/autorest.typescript/tree/v6/docs/troubleshooting.md#generation-errors
 [python_debug]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/troubleshooting.md#debugging
-[java_debug]: https://github.com/Azure/autorest.java/tree/v4/docs/troubleshooting.md#debugging
-[csharp_debug]: https://github.com/Azure/autorest.csharp/tree/v3/docs/troubleshooting.md#debugging
+[java_debug]: https://github.com/Azure/autorest.java/blob/v4/docs/client/troubleshooting.md#debugging
+[csharp_debug]: https://github.com/Azure/autorest.csharp/tree/feature/v3/docs/troubleshooting.md#debugging
 [typescript_debug]: https://github.com/Azure/autorest.typescript/tree/v6/docs/troubleshooting.md#debugging

@@ -2,6 +2,18 @@
   "name": "@azure-tools/datastore",
   "entries": [
     {
+      "version": "4.3.0",
+      "tag": "@azure-tools/datastore_v4.3.0",
+      "date": "Fri, 09 Apr 2021 19:53:22 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Added** sourcemap support"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.2.2",
       "tag": "@azure-tools/datastore_v4.2.2",
       "date": "Thu, 01 Apr 2021 15:46:41 GMT",

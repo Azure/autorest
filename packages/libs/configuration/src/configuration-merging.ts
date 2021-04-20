@@ -1,6 +1,5 @@
 import { mergeOverwriteOrAppend } from "@autorest/common";
-import { AutorestRawConfiguration } from "./autorest-raw-configuration";
 
-export const mergeConfigurations = (...configs: Array<AutorestRawConfiguration>): AutorestRawConfiguration => {
-  return configs.reduce((result, config) => mergeOverwriteOrAppend(result, config), {});
-};
+export function mergeConfigurations<T>(...configs: Array<T>): T {
+  return configs.reduce((result, config) => mergeOverwriteOrAppend(result, config), {}) as T;
+}

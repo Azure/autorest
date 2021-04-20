@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.3.7
+ - **Update** update dependencies.
+
 ### 0.3.6
  - **Fix** race condition issue with downloading extensions
 

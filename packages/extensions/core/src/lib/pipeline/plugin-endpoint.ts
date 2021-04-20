@@ -62,17 +62,21 @@ export class AutoRestExtension extends EventEmitter {
 
   public static async FromModule(modulePath: string): Promise<AutoRestExtension> {
     const childProc = fork(modulePath, [], <any>{ silent: true });
-    return AutoRestExtension.FromChildProcess(modulePath, childProc);
+    return AutoRestExtension.fromChildProcess(modulePath, "", childProc);
   }
 
-  public static async FromChildProcess(extensionName: string, childProc: ChildProcess): Promise<AutoRestExtension> {
+  public static async fromChildProcess(
+    extensionName: string,
+    version: string,
+    childProc: ChildProcess,
+  ): Promise<AutoRestExtension> {
     if (childProc.stdout === null) {
       throw new Error("Child Process has no stdout pipe.");
     }
     if (childProc.stdin === null) {
       throw new Error("Child Process has no stdin pipe.");
     }
-    const plugin = new AutoRestExtension(extensionName, childProc.stdout, childProc.stdin, childProc);
+    const plugin = new AutoRestExtension(extensionName, version, childProc.stdout, childProc.stdin, childProc);
     if (childProc.stderr !== null) {
       childProc.stderr.pipe(process.stderr);
     }
@@ -91,7 +95,8 @@ export class AutoRestExtension extends EventEmitter {
   private __inspectTraffic: Array<[number, boolean /*outgoing (core => ext)*/, string]> = [];
 
   public constructor(
-    private extensionName: string,
+    public extensionName: string,
+    public extensionVersion: string,
     reader: Readable,
     writer: Writable,
     private childProcess: ChildProcess,

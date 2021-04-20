@@ -2,6 +2,33 @@
   "name": "@azure-tools/oai2-to-oai3",
   "entries": [
     {
+      "version": "4.2.281",
+      "tag": "@azure-tools/oai2-to-oai3_v4.2.281",
+      "date": "Fri, 16 Apr 2021 15:18:54 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Stop merging x-ms-paths into paths"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.2.280",
+      "tag": "@azure-tools/oai2-to-oai3_v4.2.280",
+      "date": "Fri, 09 Apr 2021 19:53:22 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.2.2` to `~4.3.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.2.1` to `~0.2.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.2.279",
       "tag": "@azure-tools/oai2-to-oai3_v4.2.279",
       "date": "Thu, 01 Apr 2021 15:46:42 GMT",

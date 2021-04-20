@@ -172,7 +172,8 @@ definitions:
       defaultValue:
         description: If the value isn't sent on the wire, the service will assume this
       deprecated:
-        description: deprecation information -- ie, when this aspect doesn't apply and why
+        description: Represent the deprecation information if api is deprecated.
+        default: undefined
         $ref: ./master.yaml#/definitions/Deprecation
       example:
         description: example information
@@ -452,7 +453,8 @@ definitions:
       defaultValue:
         description: If the value isn't sent on the wire, the service will assume this
       deprecated:
-        description: deprecation information -- ie, when this aspect doesn't apply and why
+        description: Represent the deprecation information if api is deprecated.
+        default: undefined
         $ref: ./master.yaml#/definitions/Deprecation
       example:
         description: example information
