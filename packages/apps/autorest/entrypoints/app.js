@@ -31,9 +31,9 @@ if (
 } else {
   try {
     const v = process.versions.node.split(".");
-    if (v[0] < 10 || (v[0] === 10 && v[1] < 12)) {
+    if (v[0] < 10 || (v[0] === 10 && v[1] < 16)) {
       console.error(
-        "\nFATAL: Node v10 or higher (v10.12.x minimum, v14.x LTS recommended) is required for AutoRest.\n",
+        "\nFATAL: Node v10 or higher (v10.16.x minimum, v14.x LTS recommended) is required for AutoRest.\n",
       );
       process.exit(1);
     }
