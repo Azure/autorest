@@ -70,3 +70,12 @@ stages:
         parameters:
           name: node14
           nodeVersion: 14.x
+
+  - stage: smoketests
+    displayName: Smoke Tests
+    dependsOn: main
+    jobs:
+      - template: ./templates/smoke-tests.yaml
+        parameters:
+          name: node14
+          nodeVersion: 14.x
