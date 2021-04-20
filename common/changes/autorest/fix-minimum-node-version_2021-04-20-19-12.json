@@ -3,7 +3,7 @@
     {
       "packageName": "autorest",
       "comment": "**Update** minimum node version from `10.12` to `10.16`",
-      "type": "patch"
+      "type": "minor"
     }
   ],
   "packageName": "autorest",
