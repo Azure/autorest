@@ -1,20 +1,9 @@
 param (
-   [string] $coreVersion,
-   [string] $m4Version,
+   [string] $coreVersion = "../packages/extension/core",
+   [string] $m4Version = "../packages/extension/modelerfour"
 )
 
 $ErrorActionPreference = "Stop"
-
-foreach ($input in Get-Content (Join-Path $PSScriptRoot "smoke-tests.yaml"))
-{
-    if ($input -match "^(?<readme>[^#].*?specification/(?<name>[\w-]+(/[\w-]+)+)/readme.md)(:(?<args>.*))?")
-    {
-        $readme = $Matches["readme"]
-
-        Write-Host "Testing spec: $readme"
-        Exec { autorest --version=$coreVersion --use:$m4Version }
-    }
-}
 
 
 function Exec
@@ -27,5 +16,17 @@ function Exec
     & $cmd
     if ($lastexitcode -ne 0) {
         throw ("Exec: " + $errorMessage)
+    }
+}
+
+
+foreach ($input in Get-Content (Join-Path $PSScriptRoot "smoke-tests.yaml"))
+{
+    if ($input -match "^(?<readme>[^#].*?specification/(?<name>[\w-]+(/[\w-]+)+)/readme.md)(:(?<args>.*))?")
+    {
+        $readme = $Matches["readme"]
+
+        Write-Host "Testing spec: $readme"
+        Exec { autorest --version=$coreVersion --use:$m4Version }
     }
 }
