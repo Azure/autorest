@@ -66,7 +66,6 @@ import {
   ConstantValue,
   HttpHeader,
   ChoiceValue,
-  Language,
   Request,
   OperationGroup,
   TimeSchema,
@@ -248,6 +247,13 @@ export class ModelerFour {
 
   async init() {
     this.options = await this.session.getValue("modelerfour", {});
+
+    if (this.options["treat-type-object-as-anything"]) {
+      this.session.warning(
+        "modelerfour.treat-type-object-as-anything options is a temporary flag. It WILL be removed in the future.",
+        ["UsingTemporaryFlag"],
+      );
+    }
     // grab override-client-name
     const newTitle = await this.session.getValue("override-client-name", "");
     if (newTitle) {
@@ -588,6 +594,9 @@ export class ModelerFour {
 
   private _anyObjectSchema?: AnyObjectSchema;
   public get anyObjectSchema(): AnySchema {
+    if (this.options["treat-type-object-as-anything"]) {
+      return this.anySchema;
+    }
     return (
       this._anyObjectSchema ?? (this._anyObjectSchema = this.codeModel.schemas.add(new AnyObjectSchema("Any object")))
     );
