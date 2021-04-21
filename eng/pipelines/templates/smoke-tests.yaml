@@ -39,10 +39,10 @@ jobs:
         displayName: "Install Node.js"
 
       - script: |
-          npm install -g autorest
-          # echo "Installing autorest from $AUTOREST_CLI_PKG"
-          # npm install -g $AUTOREST_CLI_PKG
+          # npm install -g autorest
+          echo "Installing autorest from $AUTOREST_CLI_PKG"
+          npm install -g $AUTOREST_CLI_PKG
         displayName: "Install autorest cli"
 
-      - pwsh: ./regression-tests/smoke-test.ps1 -coreVersion $env:CORE_PKG -m4Version $env:M4_PKG
+      - pwsh: ./regression-tests/smoke-tests.ps1 -coreVersion $env:CORE_PKG -m4Version $env:M4_PKG
         displayName: Run smoke tests
