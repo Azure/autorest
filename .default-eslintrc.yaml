@@ -70,6 +70,7 @@ rules:
   # =================================================
   jest/no-deprecated-functions: off
   jest/expect-expect: off
+  jest/no-standalone-expect: off
   jest/no-focused-tests: warn
   jest/no-identical-title: warn
 

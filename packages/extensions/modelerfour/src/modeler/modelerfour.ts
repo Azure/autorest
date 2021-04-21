@@ -79,6 +79,7 @@ import { ModelerFourOptions } from "./modelerfour-options";
 import { isContentTypeParameterDefined } from "./utils";
 import { BodyProcessor } from "./body-processor";
 import { isSchemaBinary } from "./schema-utils";
+import { SecurityProcessor } from "./security-processor";
 
 /** adds only if the item is not in the collection already
  *
@@ -152,6 +153,7 @@ export class ModelerFour {
   private options: ModelerFourOptions = {};
   private uniqueNames: Dictionary<any> = {};
   private bodyProcessor: BodyProcessor;
+  private securityProcessor: SecurityProcessor;
 
   constructor(protected session: Session<oai3>) {
     this.input = session.model; // shadow(session.model, filename);
@@ -174,6 +176,7 @@ export class ModelerFour {
     });
     this.interpret = new Interpretations(session);
     this.bodyProcessor = new BodyProcessor(session);
+    this.securityProcessor = new SecurityProcessor(session, this.interpret);
 
     this.preprocessOperations();
   }
@@ -246,6 +249,8 @@ export class ModelerFour {
   }
 
   async init() {
+    await this.securityProcessor.init();
+
     this.options = await this.session.getValue("modelerfour", {});
 
     if (this.options["treat-type-object-as-anything"]) {
@@ -2307,13 +2312,7 @@ export class ModelerFour {
   }
 
   process() {
-    if (keys(this.input.components?.securitySchemes).any()) {
-      // we don't currently handle security information directly, but we can
-      // tell if there is something in there.
-      // if there is any security information, mark it auth-required true.
-      this.codeModel.security.authenticationRequired = true;
-    }
-
+    this.codeModel.security = this.securityProcessor.process(this.input);
     let priority = 0;
     for (const { key: name, value: parameter } of this.resolveDictionary(this.input.components?.parameters)) {
       if (parameter["x-ms-parameter-location"] !== "method") {

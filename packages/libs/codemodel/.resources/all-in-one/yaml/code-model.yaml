@@ -3,6 +3,19 @@ description: the model that contains all the information required to generate a 
 $schema: http://json-schema.org/draft-07/schema#
 additionalProperties: false
 definitions:
+  AADTokenSecurityScheme:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/SecurityScheme'
+    properties:
+      scopes:
+        type: array
+        items:
+          type: string
+    required:
+      - scopes
+      - type
   APIKeySecurityScheme:
     type: object
     additionalProperties: false
@@ -157,6 +170,17 @@ definitions:
       - authorizationUrl
       - scopes
       - tokenUrl
+  AzureKeySecurityScheme:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/SecurityScheme'
+    properties:
+      headerName:
+        type: string
+    required:
+      - headerName
+      - type
   BearerHTTPSecurityScheme:
     type: object
     additionalProperties: false
@@ -1863,19 +1887,25 @@ definitions:
       authenticationRequired:
         type: boolean
         description: indicates that the API surface requires authentication
+      schemes:
+        type: array
+        items:
+          $ref: '#/definitions/SecurityScheme'
     required:
       - authenticationRequired
+      - schemes
   SecurityRequirement:
     type: object
     description: common ways of serializing simple parameters
     additionalProperties: false
   SecurityScheme:
-    anyOf:
-      - $ref: '#/definitions/BearerHTTPSecurityScheme'
-      - $ref: '#/definitions/NonBearerHTTPSecurityScheme'
-      - $ref: '#/definitions/OAuth2SecurityScheme'
-      - $ref: '#/definitions/APIKeySecurityScheme'
-      - $ref: '#/definitions/OpenIdConnectSecurityScheme'
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+    required:
+      - type
   SecurityType:
     type: string
     enum:

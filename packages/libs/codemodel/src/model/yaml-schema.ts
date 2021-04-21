@@ -1,6 +1,6 @@
 import { Schema, Type, DEFAULT_SCHEMA } from "js-yaml";
 
-import { CodeModel, Security } from "./common/code-model";
+import { CodeModel } from "./common/code-model";
 import { Metadata, CSharpLanguage, Language } from "./common/metadata";
 import { Parameter, VirtualParameter } from "./common/parameter";
 import { Property } from "./common/property";
@@ -12,18 +12,6 @@ import { Aspect } from "./common/aspect";
 import { Schemas } from "./common/schemas";
 import { ExternalDocumentation } from "./common/external-documentation";
 import { Contact, Info, License } from "./common/info";
-import {
-  APIKeySecurityScheme,
-  BearerHTTPSecurityScheme,
-  ImplicitOAuthFlow,
-  NonBearerHTTPSecurityScheme,
-  OAuth2SecurityScheme,
-  OAuthFlows,
-  OpenIdConnectSecurityScheme,
-  PasswordOAuthFlow,
-  AuthorizationCodeOAuthFlow,
-  ClientCredentialsFlow,
-} from "./http/security";
 import { Languages } from "./common/languages";
 
 import { Protocols } from "./common/protocols";
@@ -53,6 +41,7 @@ import { DictionarySchema } from "./common/schemas/dictionary";
 import { OrSchema, XorSchema } from "./common/schemas/relationship";
 import { BinarySchema } from "./common/schemas/binary";
 import { ConditionalValue, ConditionalSchema, SealedConditionalSchema } from "./common/schemas/conditional";
+import { AADTokenSecurityScheme, AzureKeySecurityScheme, Security } from "./common/security";
 
 function TypeInfo<U extends new (...args: any) => any>(type: U) {
   return new Type(`!${type.name}`, {
@@ -152,16 +141,8 @@ export const codeModelSchema = DEFAULT_SCHEMA.extend([
   TypeInfo(License),
   TypeInfo(OperationGroup),
 
-  TypeInfo(APIKeySecurityScheme),
-  TypeInfo(BearerHTTPSecurityScheme),
-  TypeInfo(ImplicitOAuthFlow),
-  TypeInfo(NonBearerHTTPSecurityScheme),
-  TypeInfo(OAuth2SecurityScheme),
-  TypeInfo(OAuthFlows),
-  TypeInfo(OpenIdConnectSecurityScheme),
-  TypeInfo(PasswordOAuthFlow),
-  TypeInfo(AuthorizationCodeOAuthFlow),
-  TypeInfo(ClientCredentialsFlow),
+  TypeInfo(AADTokenSecurityScheme),
+  TypeInfo(AzureKeySecurityScheme),
   TypeInfo(Languages),
   TypeInfo(Language),
   TypeInfo(CSharpLanguage),

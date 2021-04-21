@@ -442,9 +442,10 @@ definitions:
     description: common ways of serializing simple parameters
     additionalProperties: false
   SecurityScheme:
-    anyOf:
-      - $ref: ./http.yaml#/definitions/BearerHTTPSecurityScheme
-      - $ref: ./http.yaml#/definitions/NonBearerHTTPSecurityScheme
-      - $ref: ./http.yaml#/definitions/OAuth2SecurityScheme
-      - $ref: ./http.yaml#/definitions/APIKeySecurityScheme
-      - $ref: ./http.yaml#/definitions/OpenIdConnectSecurityScheme
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+    required:
+      - type
