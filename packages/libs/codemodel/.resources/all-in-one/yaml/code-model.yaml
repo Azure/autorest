@@ -29,6 +29,7 @@ definitions:
     description: all schema types
     enum:
       - any
+      - any-object
       - array
       - binary
       - boolean
@@ -58,6 +59,15 @@ definitions:
       - uri
       - uuid
       - xor
+  AnyObjectSchema:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/Schema'
+    required:
+      - language
+      - protocol
+      - type
   AnySchema:
     type: object
     additionalProperties: false
@@ -1593,6 +1603,7 @@ definitions:
     description: possible schema types that indicate the type of schema.
     enum:
       - any
+      - any-object
       - array
       - binary
       - boolean
@@ -1646,6 +1657,10 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/AnySchema'
+      anyObjects:
+        type: array
+        items:
+          $ref: '#/definitions/AnyObjectSchema'
       arrays:
         type: array
         description: a collection of items

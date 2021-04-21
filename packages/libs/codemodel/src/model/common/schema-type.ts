@@ -68,6 +68,11 @@ export enum SchemaType {
   /** a type that can be anything */
   Any = "any",
 
+  /**
+   * A type that can be any object. Like Any but cannot be a primitive type or array
+   */
+  AnyObject = "any-object",
+
   /** a choice between one of several  values (ie, 'enum')
    *
    * @description - this is essentially can be thought of as an 'enum'
@@ -143,6 +148,7 @@ export type ObjectSchemaTypes = SchemaType.Or | SchemaType.Dictionary | SchemaTy
 /** all schema types */
 export type AllSchemaTypes =
   | SchemaType.Any
+  | SchemaType.AnyObject
   | ValueSchemaTypes
   | ObjectSchemaTypes
   | SchemaType.Constant

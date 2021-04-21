@@ -5,6 +5,7 @@
       "description": "possible schema types that indicate the type of schema.",
       "enum": [
         "any",
+        "any-object",
         "array",
         "binary",
         "boolean",

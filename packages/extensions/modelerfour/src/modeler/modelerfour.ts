@@ -66,11 +66,11 @@ import {
   ConstantValue,
   HttpHeader,
   ChoiceValue,
-  Language,
   Request,
   OperationGroup,
   TimeSchema,
   HttpMultipartRequest,
+  AnyObjectSchema,
 } from "@autorest/codemodel";
 import { Session, Channel } from "@autorest/extension-base";
 import { Interpretations, XMSEnum } from "./interpretations";
@@ -247,6 +247,13 @@ export class ModelerFour {
 
   async init() {
     this.options = await this.session.getValue("modelerfour", {});
+
+    if (this.options["treat-type-object-as-anything"]) {
+      this.session.warning(
+        "modelerfour.treat-type-object-as-anything options is a temporary flag. It WILL be removed in the future.",
+        ["UsingTemporaryFlag"],
+      );
+    }
     // grab override-client-name
     const newTitle = await this.session.getValue("override-client-name", "");
     if (newTitle) {
@@ -579,9 +586,20 @@ export class ModelerFour {
       (this._booleanSchema = this.codeModel.schemas.add(new BooleanSchema("bool", "simple boolean")))
     );
   }
-  _anySchema?: AnySchema;
-  get anySchema(): AnySchema {
-    return this._anySchema || (this._anySchema = this.codeModel.schemas.add(new AnySchema("Any object")));
+
+  private _anySchema?: AnySchema;
+  public get anySchema(): AnySchema {
+    return this._anySchema ?? (this._anySchema = this.codeModel.schemas.add(new AnySchema("Anything")));
+  }
+
+  private _anyObjectSchema?: AnyObjectSchema;
+  public get anyObjectSchema(): AnySchema {
+    if (this.options["treat-type-object-as-anything"]) {
+      return this.anySchema;
+    }
+    return (
+      this._anyObjectSchema ?? (this._anyObjectSchema = this.codeModel.schemas.add(new AnyObjectSchema("Any object")))
+    );
   }
 
   getSchemaForString(schema: OpenAPI.Schema): Schema {
@@ -764,7 +782,7 @@ export class ModelerFour {
       const eschema = this.resolve(schema.additionalProperties);
       const ei = eschema.instance;
       if (ei && this.interpret.isEmptyObject(ei)) {
-        elementSchema = this.anySchema;
+        elementSchema = this.anyObjectSchema;
       } else {
         elementNullable = (<any>schema.additionalProperties)["nullable"] || (ei && ei.nullable) || undefined;
         elementSchema = this.processSchema(eschema.name || "", <OpenAPI.Schema>eschema.instance);
@@ -866,7 +884,7 @@ export class ModelerFour {
     if (!isMoreThanObject && !hasProperties) {
       // it's an empty object?
       // this.session.warning(`Schema '${name}' is an empty object without properties or modifiers.`, ['Modeler', 'EmptyObject'], aSchema);
-      return this.anySchema;
+      return this.anyObjectSchema;
     }
 
     const dictionarySchema = dictionaryDef ? this.processDictionarySchema(name, schema) : undefined;

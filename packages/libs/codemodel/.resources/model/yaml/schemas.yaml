@@ -1,5 +1,14 @@
 $schema: http://json-schema.org/draft-07/schema#
 definitions:
+  AnyObjectSchema:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: ./schemas.yaml#/definitions/Schema
+    required:
+      - language
+      - protocol
+      - type
   AnySchema:
     type: object
     additionalProperties: false
@@ -492,6 +501,10 @@ definitions:
         type: array
         items:
           $ref: ./schemas.yaml#/definitions/AnySchema
+      anyObjects:
+        type: array
+        items:
+          $ref: ./schemas.yaml#/definitions/AnyObjectSchema
       arrays:
         type: array
         description: a collection of items
