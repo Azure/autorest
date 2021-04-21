@@ -38,7 +38,7 @@ jobs:
           versionSpec: ${{ parameters.nodeVersion }}
         displayName: "Install Node.js"
 
-      - script: npm install -g $AUTOREST_CLI_PKG
+      - script: npm install -g $(AUTOREST_CLI_PKG)
         displayName: "Install autorest cli"
 
       - script: pwsh ./regression-tests/smoke-test.ps1 -coreVersion=$CORE_PKG -m4Version=$M4_PKG
