@@ -44,5 +44,5 @@ jobs:
           # npm install -g $AUTOREST_CLI_PKG
         displayName: "Install autorest cli"
 
-      - script: pwsh ./regression-tests/smoke-test.ps1 -coreVersion $CORE_PKG -m4Version $M4_PKG
+      - pwsh: ./regression-tests/smoke-test.ps1 -coreVersion $env:CORE_PKG -m4Version $env:M4_PKG
         displayName: Run smoke tests
