@@ -6,18 +6,26 @@ param (
 $ErrorActionPreference = "Stop"
 
 
-function Exec
+function Invoke($command)
 {
-    [CmdletBinding()]
-    param(
-        [Parameter(Position=0,Mandatory=1)][scriptblock]$cmd,
-        [Parameter(Position=1,Mandatory=0)][string]$errorMessage = ("Error executing command {0}" -f $cmd)
-    )
-    & $cmd
-    if ($lastexitcode -ne 0) {
-        throw ("Exec: " + $errorMessage)
+    Write-Host "> $command"
+    pushd $repoRoot
+    if ($IsLinux)
+    {
+        sh -c "$command 2>&1"
+    }
+    else
+    {
+        cmd /c "$command 2>&1"
+    }
+    popd
+
+    if($LastExitCode -ne 0)
+    {
+        throw "Command failed to execute: $command"
     }
 }
+
 
 if($coreVersion -eq "") {
     $coreVersion = Resolve-Path "$PSScriptRoot/../packages/extensions/core"
@@ -36,6 +44,6 @@ foreach ($input in Get-Content (Join-Path $PSScriptRoot "smoke-tests.yaml"))
         $readme = $Matches["readme"]
 
         Write-Host "Testing spec: $readme"
-        Exec { autorest --version=$coreVersion --use:$m4Version }
+        Invoke "autorest --version=$coreVersion --use:$m4Version"
     }
 }
