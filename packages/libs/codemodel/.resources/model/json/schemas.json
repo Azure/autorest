@@ -35,7 +35,8 @@
         },
         "deprecated": {
           "$ref": "./master.json#/definitions/Deprecation",
-          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+          "description": "Represent the deprecation information if api is deprecated.",
+          "default": "undefined"
         },
         "origin": {
           "description": "where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')",
@@ -1103,7 +1104,8 @@
         },
         "deprecated": {
           "$ref": "./master.json#/definitions/Deprecation",
-          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+          "description": "Represent the deprecation information if api is deprecated.",
+          "default": "undefined"
         },
         "origin": {
           "description": "where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')",

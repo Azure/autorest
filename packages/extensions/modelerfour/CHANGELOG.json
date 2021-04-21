@@ -2,6 +2,21 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.18.4",
+      "tag": "@autorest/modelerfour_v4.18.4",
+      "date": "Mon, 19 Apr 2021 21:06:54 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Enum defined just with allOf of other enum"
+          },
+          {
+            "comment": "**Typo** Ambigious -> Ambiguous "
+          }
+        ]
+      }
+    },
+    {
       "version": "4.18.3",
       "tag": "@autorest/modelerfour_v4.18.3",
       "date": "Tue, 13 Apr 2021 21:32:54 GMT",

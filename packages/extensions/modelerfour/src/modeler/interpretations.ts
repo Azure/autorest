@@ -260,11 +260,14 @@ export class Interpretations {
     }
     return [];
   }
-  getDeprecation(schema: OpenAPI.Schema): Deprecation | undefined {
-    if (schema.deprecated) {
-      // todo
+
+  public getDeprecation(schema: OpenAPI.Deprecatable): Deprecation | undefined {
+    if (!schema.deprecated) {
+      return undefined;
     }
-    return undefined;
+
+    // We don't have any additional information at this time. Just returning an empty object saying this is deprecated.
+    return {};
   }
 
   constructor(private session: Session<OpenAPI.Model>) {}

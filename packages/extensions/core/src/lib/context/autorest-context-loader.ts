@@ -95,7 +95,7 @@ export class AutorestContextLoader {
     }
   }
 
-  public async CreateView(
+  public async createView(
     messageEmitter: MessageEmitter,
     includeDefault: boolean,
     ...configs: AutorestRawConfiguration[]
@@ -127,7 +127,11 @@ export class AutorestContextLoader {
         loadedExtensions[definition.fullyQualified] = {
           extension,
           autorestExtension: new LazyPromise(async () =>
-            AutoRestExtension.FromChildProcess(definition.name, await extension.start(enableDebugger)),
+            AutoRestExtension.fromChildProcess(
+              definition.name,
+              extension.version,
+              await extension.start(enableDebugger),
+            ),
           ),
         };
       }

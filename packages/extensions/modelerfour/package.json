@@ -1,6 +1,6 @@
 {
   "name": "@autorest/modelerfour",
-  "version": "4.18.3",
+  "version": "4.18.4",
   "description": "AutoRest Modeler Version Four (component)",
   "directories": {
     "doc": "docs"

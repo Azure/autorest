@@ -1,4 +1,5 @@
 import { Dictionary, items } from "@azure-tools/linq";
+import * as jp from "@azure-tools/json";
 
 export type JsonPointer = string;
 export type JsonPointerTokens = Array<string>;
@@ -24,18 +25,10 @@ export interface NodeT<T, K extends keyof T> {
  * @param {Object} obj - object to work on
  * @param {JsonPointer|JsonPointerTokens} pointer - pointer or tokens to a location
  * @returns {*} - value at location, or will throw if location is not present.
+ * @deprecated use @azure-tools/json#getJsonPointer
  */
-export function get(obj: any, pointer: JsonPointer | JsonPointerTokens) {
-  const refTokens = Array.isArray(pointer) ? pointer : parseJsonPointer(pointer);
-
-  for (let i = 0; i < refTokens.length; ++i) {
-    const tok = refTokens[i];
-    if (!(typeof obj === "object" && tok in obj)) {
-      throw new Error("Invalid reference token: " + tok);
-    }
-    obj = obj[tok];
-  }
-  return obj;
+export function get(obj: any, pointer: JsonPointer | JsonPointerTokens): any {
+  return jp.getFromJsonPointer(obj, pointer);
 }
 
 /**
@@ -128,6 +121,7 @@ export function toDictionary(obj: any, descend?: (value: any) => boolean) {
  * @param obj
  * @param {function} iterator
  * @param {function} descend
+ * @deprecated use @azure-tools/json#walk
  */
 export function walk(
   obj: any,
@@ -232,39 +226,14 @@ export function has(obj: any, pointer: JsonPointer | JsonPointerTokens) {
 }
 
 /**
- * Escapes a reference token
- *
- * @param str
- * @returns {string}
- */
-function escape(str: string) {
-  return str.toString().replace(/~/g, "~0").replace(/\//g, "~1");
-}
-
-/**
- * Unescapes a reference token
- *
- * @param str
- * @returns {string}
- */
-function unescape(str: string) {
-  return str.replace(/~1/g, "/").replace(/~0/g, "~");
-}
-
-/**
  * Converts a json pointer into a array of reference tokens
  *
  * @param pointer
  * @returns {Array}
+ * @deprecated use from @azure-tools/json
  */
 export function parseJsonPointer(pointer: string): JsonPointerTokens {
-  if (pointer === "") {
-    return new Array<string>();
-  }
-  if (pointer.charAt(0) !== "/") {
-    throw new Error("Invalid JSON pointer: " + pointer);
-  }
-  return pointer.substring(1).split(/\//).map(unescape);
+  return jp.parseJsonPointer(pointer);
 }
 
 /**
@@ -272,10 +241,8 @@ export function parseJsonPointer(pointer: string): JsonPointerTokens {
  *
  * @param refTokens segment of paths.
  * @returns JsonPointer string.
+ * @deprecated use from @azure-tools/json
  */
 export function serializeJsonPointer(refTokens: JsonPointerTokens): string {
-  if (refTokens.length === 0) {
-    return "";
-  }
-  return `/${refTokens.map(escape).join("/")}`;
+  return jp.serializeJsonPointer(refTokens);
 }
