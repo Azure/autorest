@@ -28,9 +28,9 @@ jobs:
           echo "Found core package $corePkg"
           echo "Found modelerfour package $modelerfourPkg"
 
-          echo '##vso[task.setvariable variable=AUTOREST_CLI_PKG]$autorestPkg'
-          echo '##vso[task.setvariable variable=CORE_PKG]$corePkg'
-          echo '##vso[task.setvariable variable=M4_PKG]$modelerfourPkg'
+          echo "##vso[task.setvariable variable=AUTOREST_CLI_PKG]$autorestPkg"
+          echo "##vso[task.setvariable variable=CORE_PKG]$corePkg"
+          echo "##vso[task.setvariable variable=M4_PKG]$modelerfourPkg"
         displayName: Find packages path
 
       - task: NodeTool@0
