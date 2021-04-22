@@ -50,7 +50,7 @@ npm run watch
 
 Test framework we used is [jest](https://jestjs.io/)
 
-To run the test you have 2 options:
+To run the test on the built product you have 2 options:
 
 1. Run all the tests using
 

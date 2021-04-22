@@ -1,14 +1,15 @@
 import { DataStore, IFileSystem, RealFileSystem, CachingFileSystem } from "@azure-tools/datastore";
 import { Extension, ExtensionManager, LocalExtension } from "@azure-tools/extension";
-import { CreateFileUri, ResolveUri, simplifyUri, FileUriToPath } from "@azure-tools/uri";
-import { AutorestLogger } from "@autorest/common";
+import { createFileUri, resolveUri, simplifyUri, fileUriToPath } from "@azure-tools/uri";
+import { AutorestLogger, OperationAbortedException } from "@autorest/common";
 import untildify from "untildify";
 import { AutorestConfiguration } from "../autorest-configuration";
 import { detectConfigurationFile } from "../configuration-file-resolver";
 import { ConfigurationManager, readConfigurationFile } from "../configuration-manager";
 import { getIncludedConfigurationFiles } from "./configuration-require-resolver";
-import { AutorestRawConfiguration } from "../autorest-raw-configuration";
+import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
 import { exists, filePath } from "@azure-tools/async-io";
+import { autorestConfigurationProcessor, AutorestRawConfiguration } from "../configuration-schema";
 
 export interface AutorestConfigurationResult {
   config: AutorestConfiguration;
@@ -77,7 +78,7 @@ export class ConfigurationLoader {
       : undefined;
 
     const configFileFolderUri = configFileUri
-      ? ResolveUri(configFileUri, "./")
+      ? resolveUri(configFileUri, "./")
       : this.configFileOrFolderUri || "file:///";
 
     const manager = new ConfigurationManager(configFileFolderUri, this.fileSystem);
@@ -95,8 +96,18 @@ export class ConfigurationLoader {
 
     // 1. overrides (CLI, ...)
     // await addSegments(configs, false);
-    for (const config of configs) {
-      await manager.addConfig(config);
+    for (const rawConfig of configs) {
+      const result = autorestConfigurationProcessor.processConfiguration(rawConfig, { logger: this.logger });
+      if ("errors" in result) {
+        for (const error of result.errors) {
+          this.logger.trackError({
+            code: error.code,
+            message: error.message,
+          });
+        }
+        throw new OperationAbortedException();
+      }
+      await manager.addConfig(result.value);
     }
     await resolveRequiredConfigs(this.fileSystem);
 
@@ -117,9 +128,9 @@ export class ConfigurationLoader {
     const extensions: ResolvedExtension[] = [];
     if (this.extensionManager) {
       const addedExtensions = new Set<string>();
-      const viewsToHandle: AutorestRawConfiguration[] = [await resolveConfig()];
+      const viewsToHandle: AutorestNormalizedConfiguration[] = [await resolveConfig()];
       while (viewsToHandle.length > 0) {
-        const config = viewsToHandle.pop() as AutorestRawConfiguration;
+        const config = viewsToHandle.pop() as AutorestNormalizedConfiguration;
         const extensionDefs = resolveExtensions(config);
 
         const additionalExtensions = extensionDefs.filter((ext) => !addedExtensions.has(ext.fullyQualified));
@@ -137,7 +148,7 @@ export class ConfigurationLoader {
             extensions.push({ extension, definition: additionalExtension });
 
             // merge config from extension
-            const extensionConfigurationUri = simplifyUri(CreateFileUri(await extension.configurationPath));
+            const extensionConfigurationUri = simplifyUri(createFileUri(await extension.configurationPath));
             this.logger.verbose(`> Including extension configuration file '${extensionConfigurationUri}'`);
             await loadConfigFile(extensionConfigurationUri, fsLocal);
 
@@ -181,7 +192,7 @@ export class ConfigurationLoader {
     alreadyAddedConfigs: Set<string>,
   ) {
     this.logger.verbose(`> Including configuration file '${fileUri}'`);
-    const data = await this.dataStore.GetReadThroughScope(fsToUse).ReadStrict(fileUri);
+    const data = await this.dataStore.getReadThroughScope(fsToUse).readStrict(fileUri);
     const file = await readConfigurationFile(data, this.logger, this.dataStore.getDataSink());
     manager.addConfigFile(file);
 
@@ -212,8 +223,8 @@ export class ConfigurationLoader {
         alreadyAddedConfigs.add(additionalConfig);
         // merge config
 
-        const inputView = this.dataStore.GetReadThroughScope(fsToUse);
-        const data = await inputView.ReadStrict(additionalConfig);
+        const inputView = this.dataStore.getReadThroughScope(fsToUse);
+        const data = await inputView.readStrict(additionalConfig);
         manager.addConfigFile(await readConfigurationFile(data, this.logger, this.dataStore.getDataSink()));
       } catch (e) {
         this.logger.fatal(`Failed to acquire 'require'd configuration '${additionalConfig}'`);
@@ -280,10 +291,10 @@ export class ConfigurationLoader {
   }
 }
 
-const resolveExtensions = (config: AutorestRawConfiguration): ExtensionDefinition[] => {
+const resolveExtensions = (config: AutorestNormalizedConfiguration): ExtensionDefinition[] => {
   const useExtensions = config["use-extension"] || {};
   return Object.keys(useExtensions).map((name) => {
-    const source = useExtensions[name].startsWith("file://") ? FileUriToPath(useExtensions[name]) : useExtensions[name];
+    const source = useExtensions[name].startsWith("file://") ? fileUriToPath(useExtensions[name]) : useExtensions[name];
     return {
       name,
       source,

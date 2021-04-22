@@ -3,6 +3,19 @@ description: the model that contains all the information required to generate a 
 $schema: http://json-schema.org/draft-07/schema#
 additionalProperties: false
 definitions:
+  AADTokenSecurityScheme:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: ./http.yaml#/definitions/SecurityScheme
+    properties:
+      scopes:
+        type: array
+        items:
+          type: string
+    required:
+      - scopes
+      - type
   ApiVersion:
     type: object
     description: |-
@@ -34,6 +47,17 @@ definitions:
     description: a collection of api versions
     items:
       $ref: ./master.yaml#/definitions/ApiVersion
+  AzureKeySecurityScheme:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: ./http.yaml#/definitions/SecurityScheme
+    properties:
+      headerName:
+        type: string
+    required:
+      - headerName
+      - type
   BinaryResponse:
     type: object
     description: a response where the content should be treated as a binary instead of a value or object
@@ -97,20 +121,12 @@ definitions:
         $ref: ./master.yaml#/definitions/Dictionary<any>
   Deprecation:
     type: object
-    description: represents  deprecation information for a given aspect
+    description: Represent information about a deprecation
     additionalProperties: false
     properties:
-      apiVersions:
-        type: array
-        description: the api versions that this deprecation is applicable to.
-        items:
-          $ref: ./master.yaml#/definitions/ApiVersion
-      message:
+      reason:
         type: string
-        description: the reason why this aspect
-    required:
-      - apiVersions
-      - message
+        description: Reason why this was deprecated.
   Dictionary<ApiVersion>:
     type: object
     additionalProperties:
@@ -329,7 +345,8 @@ definitions:
         items:
           $ref: ./master.yaml#/definitions/ApiVersion
       deprecated:
-        description: deprecation information -- ie, when this aspect doesn't apply and why
+        description: Represent the deprecation information if api is deprecated.
+        default: undefined
         $ref: ./master.yaml#/definitions/Deprecation
       exceptions:
         type: array
@@ -551,8 +568,13 @@ definitions:
       authenticationRequired:
         type: boolean
         description: indicates that the API surface requires authentication
+      schemes:
+        type: array
+        items:
+          $ref: ./http.yaml#/definitions/SecurityScheme
     required:
       - authenticationRequired
+      - schemes
   SerializationFormat:
     type: object
     additionalProperties: false
@@ -591,7 +613,8 @@ definitions:
       clientDefaultValue:
         description: the value that the client should provide if the consumer doesn't provide one
       deprecated:
-        description: deprecation information -- ie, when this aspect doesn't apply and why
+        description: Represent the deprecation information if api is deprecated.
+        default: undefined
         $ref: ./master.yaml#/definitions/Deprecation
       externalDocs:
         description: External Documentation Links

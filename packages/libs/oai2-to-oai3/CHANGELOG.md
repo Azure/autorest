@@ -1,6 +1,18 @@
 # Change Log - @azure-tools/oai2-to-oai3
 
-This log was last generated on Thu, 01 Apr 2021 15:46:42 GMT and should not be manually modified.
+This log was last generated on Fri, 16 Apr 2021 15:18:54 GMT and should not be manually modified.
+
+## 4.2.281
+Fri, 16 Apr 2021 15:18:54 GMT
+
+### Patches
+
+- Stop merging x-ms-paths into paths
+
+## 4.2.280
+Fri, 09 Apr 2021 19:53:22 GMT
+
+_Version update only_
 
 ## 4.2.279
 Thu, 01 Apr 2021 15:46:42 GMT

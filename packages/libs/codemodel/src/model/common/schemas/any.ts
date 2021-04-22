@@ -10,3 +10,14 @@ export class AnySchema extends Schema implements AnySchema {
     this.apply(objectInitializer);
   }
 }
+
+export interface AnyObjectSchema extends Schema {
+  type: SchemaType.AnyObject;
+}
+
+export class AnyObjectSchema extends Schema implements AnyObjectSchema {
+  constructor(description: string, objectInitializer?: DeepPartial<AnyObjectSchema>) {
+    super("AnyObject", description, SchemaType.AnyObject);
+    this.apply(objectInitializer);
+  }
+}

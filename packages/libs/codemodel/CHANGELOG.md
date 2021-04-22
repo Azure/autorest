@@ -1,6 +1,13 @@
 # Change Log - @autorest/codemodel
 
-This log was last generated on Tue, 16 Mar 2021 15:52:56 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Apr 2021 19:53:22 GMT and should not be manually modified.
+
+## 4.14.8
+Fri, 09 Apr 2021 19:53:22 GMT
+
+### Patches
+
+- **Update** knownmediatype and mediaTypes to be optional in HttpOperation
 
 ## 4.14.7
 Tue, 16 Mar 2021 15:52:56 GMT

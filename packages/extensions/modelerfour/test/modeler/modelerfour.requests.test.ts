@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-standalone-expect */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
 import { CodeModel, DictionarySchema, HttpHeader, Operation, Parameter, SealedChoiceSchema } from "@autorest/codemodel";
@@ -7,23 +8,32 @@ import { runModeler } from "./modelerfour-utils";
 import * as oai3 from "@azure-tools/openapi";
 import assert from "assert";
 
+async function runModelerWithOperation(
+  method: string,
+  path: string,
+  operation: oai3.HttpOperation,
+): Promise<Operation> {
+  const spec = createTestSpec();
+
+  addOperation(spec, path, {
+    [method]: operation,
+  });
+
+  const codeModel = await runModeler(spec);
+  const m4Operation = codeModel.operationGroups[0]?.operations[0];
+  assert(m4Operation);
+  return m4Operation;
+}
+
 describe("Modelerfour.Request", () => {
   describe("Body", () => {
     const runModelerWithBody = async (body: RequestBody): Promise<Operation> => {
-      const spec = createTestSpec();
-
-      addOperation(spec, "/test", {
-        post: {
-          requestBody: {
-            ...body,
-          },
+      return runModelerWithOperation("post", "/test", {
+        requestBody: {
+          ...body,
         },
+        responses: {},
       });
-
-      const codeModel = await runModeler(spec);
-      const operation = codeModel.operationGroups[0]?.operations[0];
-      assert(operation);
-      return operation;
     };
 
     describe("Required attribute", () => {
@@ -62,7 +72,7 @@ describe("Modelerfour.Request", () => {
       });
     });
 
-    fdescribe("multiple binary content-types", () => {
+    describe("multiple binary content-types", () => {
       let operation: Operation;
 
       beforeEach(async () => {
@@ -154,7 +164,7 @@ describe("Modelerfour.Request", () => {
 
       const codeModel = await runModeler(spec);
       parameters = codeModel.operationGroups[0]?.operations[0]?.requests?.[0]?.parameters;
-      expect(parameters).not.toBeNull();
+      assert(parameters);
     });
 
     it("mark body parameter as isInMultipart", async () => {
@@ -229,14 +239,14 @@ describe("Modelerfour.Request", () => {
       codeModel = await runModeler(spec);
       operation = findByName("hasHeaderWithExtension", codeModel.operationGroups[0].operations)!;
       operation2 = findByName("hasHeaderWithExtension2", codeModel.operationGroups[0].operations)!;
-      expect(operation).not.toBeNull();
+      assert(operation);
     });
 
     describe("response header", () => {
       let header: HttpHeader;
       beforeEach(() => {
         header = findByName<HttpHeader>("HeaderWithExtension", operation.responses?.[0].protocol.http!.headers)!;
-        expect(header).toBeDefined();
+        assert(header);
       });
 
       it("propagates extensions to response header definitions", async () => {
@@ -271,7 +281,7 @@ describe("Modelerfour.Request", () => {
       let parameter: Parameter;
       beforeEach(() => {
         parameter = findByName("RequestHeaderWithExtension", operation.parameters)!;
-        expect(parameter).toBeDefined();
+        assert(parameter);
       });
 
       it("propagates extensions to request header definitions", async () => {
@@ -299,6 +309,59 @@ describe("Modelerfour.Request", () => {
         // It should be the exact same object
         expect(parameter.schema).toBe(parameter2.schema);
       });
+    });
+  });
+
+  describe("deprecation", () => {
+    it("doesn't set deprecated property by default", async () => {
+      const operation = await runModelerWithOperation("get", "/depreacted", {
+        responses: {},
+      });
+
+      expect(operation.deprecated).toEqual(undefined);
+    });
+
+    it("mark request as deprecated if deprecated: true", async () => {
+      const operation = await runModelerWithOperation("get", "/depreacted", {
+        deprecated: true,
+        responses: {},
+      });
+
+      expect(operation.deprecated).toEqual({});
+    });
+
+    it("mark query parameter as deprecated", async () => {
+      const operation = await runModelerWithOperation("get", "/depreacted", {
+        responses: {},
+        parameters: [
+          {
+            name: "deprecatedQueryParam",
+            in: ParameterLocation.Query,
+            schema: { type: JsonType.String },
+            deprecated: true,
+          },
+        ],
+      });
+
+      const parameter = findByName("deprecatedQueryParam", operation.parameters);
+      expect(parameter?.deprecated).toEqual({});
+    });
+
+    it("mark header parameter as deprecated", async () => {
+      const operation = await runModelerWithOperation("get", "/depreacted", {
+        responses: {},
+        parameters: [
+          {
+            name: "deprecatedHeaderParam",
+            in: ParameterLocation.Header,
+            schema: { type: JsonType.String },
+            deprecated: true,
+          },
+        ],
+      });
+
+      const parameter = findByName("deprecatedHeaderParam", operation.parameters);
+      expect(parameter?.deprecated).toEqual({});
     });
   });
 });

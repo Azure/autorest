@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { addSchema, createTestSessionFromModel, createTestSpec } from "../utils";
 import { QualityPreChecker } from "../../src/quality-precheck/prechecker";
 import { Model, Refable, Dereferenced, dereference, Schema } from "@azure-tools/openapi";
 import { ModelerFourOptions } from "modeler/modelerfour-options";
+import assert from "assert";
 
 class PreCheckerClient {
   private constructor(private input: Model, public result: Model) {}
@@ -47,14 +49,11 @@ describe("Prechecker", () => {
     const model = client.result;
 
     const childSchemaRef = model.components?.schemas && model.components?.schemas["ChildSchema"];
-    if (childSchemaRef) {
-      const childSchema = client.resolve<Schema>(childSchemaRef);
-      expect(childSchema.instance.allOf?.length).toEqual(1);
-      const parent = client.resolve(childSchema.instance.allOf && childSchema.instance.allOf[0]);
-      expect(parent.name).toEqual("ParentSchema");
-    } else {
-      fail("No 'ChildSchema' found!");
-    }
+    assert(childSchemaRef);
+    const childSchema = client.resolve<Schema>(childSchemaRef);
+    expect(childSchema.instance.allOf?.length).toEqual(1);
+    const parent = client.resolve(childSchema.instance.allOf && childSchema.instance.allOf[0]);
+    expect(parent.name).toEqual("ParentSchema");
   });
 
   it("remove the sibling schema with the $ref", async () => {

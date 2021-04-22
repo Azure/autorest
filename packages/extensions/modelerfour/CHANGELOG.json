@@ -2,6 +2,56 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.18.4",
+      "tag": "@autorest/modelerfour_v4.18.4",
+      "date": "Mon, 19 Apr 2021 21:06:54 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Enum defined just with allOf of other enum"
+          },
+          {
+            "comment": "**Typo** Ambigious -> Ambiguous "
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.18.3",
+      "tag": "@autorest/modelerfour_v4.18.3",
+      "date": "Tue, 13 Apr 2021 21:32:54 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Enum without type resulting in null values"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.18.2",
+      "tag": "@autorest/modelerfour_v4.18.2",
+      "date": "Fri, 09 Apr 2021 19:53:22 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** api-version-mode configuration not working if not auto"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/codemodel\" from `~4.14.7` to `~4.14.8`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.2.1` to `~0.2.2`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.2.2` to `~4.3.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.18.1",
       "tag": "@autorest/modelerfour_v4.18.1",
       "date": "Thu, 01 Apr 2021 15:46:41 GMT",

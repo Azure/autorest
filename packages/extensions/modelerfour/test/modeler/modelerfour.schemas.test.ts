@@ -1,3 +1,4 @@
+import { JsonType } from "@azure-tools/openapi";
 import { addSchema, createTestSpec, findByName } from "../utils";
 import { runModeler } from "./modelerfour-utils";
 
@@ -144,6 +145,73 @@ describe("Modelerfour.Schemas", () => {
         const foo = findByName("Foo", codeModel.schemas.choices);
         expect(foo).toBeDefined();
         expect(foo?.choices.map((x) => x.value)).toEqual(["one", "two"]);
+      });
+
+      it("enums just using other enum in allOf makes a copy", async () => {
+        const spec = createTestSpec();
+
+        addSchema(spec, "Foo", {
+          type: "string",
+          enum: ["one", "two"],
+        });
+        addSchema(spec, "Bar", {
+          type: "string",
+          allOf: [{ $ref: "#/components/schemas/Foo" }],
+        });
+
+        const codeModel = await runModeler(spec);
+
+        const bar = findByName("Bar", codeModel.schemas.choices);
+        expect(bar).toBeDefined();
+        expect(bar?.choices.map((x) => x.value)).toEqual(["one", "two"]);
+
+        // Parent should not have changed
+        const foo = findByName("Foo", codeModel.schemas.choices);
+        expect(foo).toBeDefined();
+        expect(foo?.choices.map((x) => x.value)).toEqual(["one", "two"]);
+      });
+
+      it("default to type:string if all values are string", async () => {
+        const spec = createTestSpec();
+
+        addSchema(spec, "Foo", {
+          enum: ["one", "two"],
+        });
+
+        const codeModel = await runModeler(spec);
+        const foo = findByName("Foo", codeModel.schemas.choices);
+        expect(foo).toBeDefined();
+        expect(foo?.choiceType.type).toEqual("string");
+        expect(foo?.choices.map((x) => x.value)).toEqual(["one", "two"]);
+      });
+    });
+
+    describe("Deprecation", () => {
+      it("doesn't set deprecated info by default", async () => {
+        const spec = createTestSpec();
+
+        addSchema(spec, "RegularModel", {
+          type: "object",
+          properties: { name: { type: JsonType.String } },
+        });
+
+        const codeModel = await runModeler(spec);
+        const model = findByName("RegularModel", codeModel.schemas.objects);
+        expect(model?.deprecated).toEqual(undefined);
+      });
+
+      it("mark model as deprecated if deprecated:true", async () => {
+        const spec = createTestSpec();
+
+        addSchema(spec, "DeprecatedModel", {
+          type: "object",
+          deprecated: true,
+          properties: { name: { type: JsonType.String } },
+        });
+
+        const codeModel = await runModeler(spec);
+        const model = findByName("DeprecatedModel", codeModel.schemas.objects);
+        expect(model?.deprecated).toEqual({});
       });
     });
   });

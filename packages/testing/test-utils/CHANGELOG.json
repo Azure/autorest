@@ -2,6 +2,18 @@
   "name": "@autorest/test-utils",
   "entries": [
     {
+      "version": "0.2.2",
+      "tag": "@autorest/test-utils_v0.2.2",
+      "date": "Fri, 09 Apr 2021 19:53:22 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.2.2` to `~4.3.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.2.1",
       "tag": "@autorest/test-utils_v0.2.1",
       "date": "Thu, 01 Apr 2021 15:46:41 GMT",

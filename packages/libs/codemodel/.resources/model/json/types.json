@@ -63,6 +63,7 @@
       "description": "all schema types",
       "enum": [
         "any",
+        "any-object",
         "array",
         "binary",
         "boolean",

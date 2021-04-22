@@ -1,6 +1,34 @@
 # Change Log - @autorest/core
 
-This log was last generated on Fri, 02 Apr 2021 15:18:00 GMT and should not be manually modified.
+This log was last generated on Fri, 16 Apr 2021 15:18:54 GMT and should not be manually modified.
+
+## 3.3.2
+Fri, 16 Apr 2021 15:18:54 GMT
+
+### Patches
+
+- **Merge x-ms-paths into paths during multi-api-merger step"
+
+## 3.3.1
+Tue, 13 Apr 2021 15:34:55 GMT
+
+### Patches
+
+- **Package update** update schema package for fix with $ref
+
+## 3.3.0
+Fri, 09 Apr 2021 19:53:22 GMT
+
+### Minor changes
+
+- **Added** Semantic validator plugin 
+- **Feature** Add sourcemap support for errors providing original location of problem
+- **Added** support for emitting statistics of the specs and resuting model
+
+### Patches
+
+- **Added** [SemanticValidator] Path parameters validation to the semantic validator
+- **Internal** Refactor plugins
 
 ## 3.2.4
 Fri, 02 Apr 2021 15:18:00 GMT

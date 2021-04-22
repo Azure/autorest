@@ -16,50 +16,17 @@ import {
   PipeState,
   mergePipeStates,
 } from "@azure-tools/datastore";
-import { AutorestContext, getExtension } from "../context";
+import { AutorestContext } from "../context";
 import { Channel } from "../message";
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
-import { PipelinePlugin } from "./common";
-import { createComponentModifierPlugin } from "./component-modifier";
-import { createCSharpReflectApiVersionPlugin } from "./metadata-generation";
-import { AutoRestExtension } from "./plugin-endpoint";
-import { createCommonmarkProcessorPlugin } from "./plugins/commonmark";
-import { createAllOfCleaner } from "./plugins/allof-cleaner";
-import { createCommandPlugin } from "./plugins/command";
 
-import { createComponentKeyRenamerPlugin } from "./plugins/component-key-renamer";
-import { createComponentsCleanerPlugin } from "./plugins/components-cleaner";
-import { createSwaggerToOpenApi3Plugin } from "./plugins/conversion";
-import { createDeduplicatorPlugin } from "./plugins/deduplicator";
-import { createArtifactEmitterPlugin } from "./plugins/emitter";
-import { createEnumDeduplicator } from "./plugins/enum-deduplication";
-import { createExternalPlugin } from "./plugins/external";
-import { createHelpPlugin } from "./plugins/help";
-import {
-  createIdentityPlugin,
-  createIdentityResetPlugin,
-  createNormalizeIdentityPlugin,
-  createNullPlugin,
-} from "./plugins/identity";
-import { createOpenApiLoaderPlugin, createSwaggerLoaderPlugin } from "./plugins/loaders";
-import { createMultiApiMergerPlugin } from "./plugins/merger";
-import { createNewComposerPlugin } from "./plugins/new-composer";
-import { createProfileFilterPlugin } from "./plugins/profile-filter";
-import { createQuickCheckPlugin } from "./plugins/quick-check";
-import { subsetSchemaDeduplicatorPlugin } from "./plugins/subset-schemas-deduplicator";
-import {
-  createImmediateTransformerPlugin,
-  createTextTransformerPlugin,
-  createTransformerPlugin,
-  createGraphTransformerPlugin,
-} from "./plugins/transformer";
-import { createTreeShakerPlugin } from "./plugins/tree-shaker/tree-shaker";
-import { createApiVersionParameterHandlerPlugin } from "./plugins/version-param-handler";
-import { createJsonToYamlPlugin, createYamlToJsonPlugin } from "./plugins/yaml-and-json";
-import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from "./plugins/schema-validation";
+import { createArtifactEmitterPlugin } from "../plugins/emitter";
 import { createHash } from "crypto";
 import { isCached, readCache, writeCache } from "./pipeline-cache";
 import { values } from "@azure-tools/linq";
+import { CORE_PLUGIN_MAP } from "../plugins";
+import { loadPlugins, PipelinePluginDefinition } from "./plugin-loader";
+import { mapValues, omitBy } from "lodash";
 
 const safeEval = createSandbox();
 
@@ -77,6 +44,7 @@ interface PipelineNode {
 
 function buildPipeline(
   context: AutorestContext,
+  plugins: { [key: string]: PipelinePluginDefinition },
 ): { pipeline: { [name: string]: PipelineNode }; configs: { [jsonPath: string]: AutorestContext } } {
   const cfgPipeline = context.GetEntry("pipeline");
   const pipeline: { [name: string]: PipelineNode } = {};
@@ -122,7 +90,8 @@ function buildPipeline(
     }
 
     // derive information about given pipeline stage
-    const plugin = cfg.plugin || stageName.split("/").reverse()[0];
+    const pluginName = cfg.plugin || stageName.split("/").reverse()[0];
+    const plugin = plugins[pluginName];
     const outputArtifact = cfg["output-artifact"];
     let scope = cfg.scope;
     if (!cfg.scope) {
@@ -153,7 +122,7 @@ function buildPipeline(
     ) => {
       if (inputNodes.length === 0) {
         const config = configCache[stringify(configScope)];
-        const configs = scope ? [...config.getNestedConfiguration(scope)] : [config];
+        const configs = scope ? [...config.getNestedConfiguration(scope, plugin)] : [config];
         for (let i = 0; i < configs.length; ++i) {
           const newSuffix = configs.length === 1 ? "" : "/" + i;
           suffixes.push(suffix + newSuffix);
@@ -166,7 +135,7 @@ function buildPipeline(
           }
           configCache[stringify(path)] = configs[i];
           pipeline[stageName + suffix + newSuffix] = {
-            pluginName: plugin,
+            pluginName: pluginName,
             outputArtifact,
             configScope: path,
             inputs,
@@ -218,74 +187,11 @@ function isDrainRequired(p: PipelineNode) {
 }
 
 export async function runPipeline(configView: AutorestContext, fileSystem: IFileSystem): Promise<void> {
-  // built-in plugins
-  const plugins: { [name: string]: PipelinePlugin } = {
-    "help": createHelpPlugin(),
-    "identity": createIdentityPlugin(),
-    "null": createNullPlugin(),
-    "reset-identity": createIdentityResetPlugin(),
-    "normalize-identity": createNormalizeIdentityPlugin(),
-    "loader-swagger": createSwaggerLoaderPlugin(),
-    "loader-openapi": createOpenApiLoaderPlugin(),
-    "transform": createTransformerPlugin(),
-    "text-transform": createTextTransformerPlugin(),
-    "new-transform": createGraphTransformerPlugin(),
-    "transform-immediate": createImmediateTransformerPlugin(),
-    "compose": createNewComposerPlugin(),
-    "schema-validator-openapi": createOpenApiSchemaValidatorPlugin(),
-    "schema-validator-swagger": createSwaggerSchemaValidatorPlugin(),
-    // TODO: replace with OAV again
-    "semantic-validator": createIdentityPlugin(),
-    "openapi-document-converter": createSwaggerToOpenApi3Plugin(),
-    "component-modifiers": createComponentModifierPlugin(),
-    "yaml2jsonx": createYamlToJsonPlugin(),
-    "jsonx2yaml": createJsonToYamlPlugin(),
-    "reflect-api-versions-cs": createCSharpReflectApiVersionPlugin(),
-    "commonmarker": createCommonmarkProcessorPlugin(),
-    "profile-definition-emitter": createArtifactEmitterPlugin(),
-    "emitter": createArtifactEmitterPlugin(),
-    "pipeline-emitter": createArtifactEmitterPlugin(
-      async () =>
-        new QuickDataSource([
-          await configView.DataStore.getDataSink().WriteObject("pipeline", pipeline.pipeline, ["fix-me-3"], "pipeline"),
-        ]),
-    ),
-    "configuration-emitter": createArtifactEmitterPlugin(
-      async () =>
-        new QuickDataSource([
-          await configView.DataStore.getDataSink().WriteObject(
-            "configuration",
-            configView.config.raw,
-            ["fix-me-4"],
-            "configuration",
-          ),
-        ]),
-    ),
-    "tree-shaker": createTreeShakerPlugin(),
-    "enum-deduplicator": createEnumDeduplicator(),
-    "quick-check": createQuickCheckPlugin(),
-    "model-deduplicator": createDeduplicatorPlugin(),
-    "subset-reducer": subsetSchemaDeduplicatorPlugin(),
-    "multi-api-merger": createMultiApiMergerPlugin(),
-    "components-cleaner": createComponentsCleanerPlugin(),
-    "component-key-renamer": createComponentKeyRenamerPlugin(),
-    "api-version-parameter-handler": createApiVersionParameterHandlerPlugin(),
-    "profile-filter": createProfileFilterPlugin(),
-    "allof-cleaner": createAllOfCleaner(),
-    "command": createCommandPlugin(),
-  };
-
-  // dynamically loaded, auto-discovered plugins
-  const __extensionExtension: { [pluginName: string]: AutoRestExtension } = {};
-  for (const useExtensionQualifiedName of configView.GetEntry("used-extension") || []) {
-    const extension = await getExtension(useExtensionQualifiedName);
-    for (const plugin of await extension.GetPluginNames(configView.CancellationToken)) {
-      if (!plugins[plugin]) {
-        plugins[plugin] = createExternalPlugin(extension, plugin);
-        __extensionExtension[plugin] = extension;
-      }
-    }
-  }
+  const plugins = await loadPlugins(configView);
+  const __extensionExtension = mapValues(
+    omitBy(plugins, (x) => x.builtIn),
+    (x) => x.extension,
+  );
 
   // __status scope
   const startTime = Date.now();
@@ -305,7 +211,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
               tasks,
               startTime,
               blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => {
-                return configView.DataStore.Blame(uri, position);
+                return configView.DataStore.blame(uri, position);
               },
             }),
             (k, v) => (k === "dependencies" ? undefined : v),
@@ -320,10 +226,17 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
 
-  const fsInput = configView.DataStore.GetReadThroughScope(fileSystem);
-  const pipeline = buildPipeline(configView);
+  const fsInput = configView.DataStore.getReadThroughScope(fileSystem);
+  const pipeline = buildPipeline(configView, plugins);
   const times = !!configView.config["timestamp"];
   const tasks: { [name: string]: Promise<DataSource> } = {};
+
+  const pipelineEmitterPlugin = createArtifactEmitterPlugin(
+    async (context) =>
+      new QuickDataSource([
+        await context.DataStore.getDataSink().writeObject("pipeline", pipeline.pipeline, ["fix-me-3"], "pipeline"),
+      ]),
+  );
 
   const ScheduleNode: (nodeName: string) => Promise<DataSource> = async (nodeName) => {
     const node = pipeline.pipeline[nodeName];
@@ -372,7 +285,13 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     const usenull =
       configEntry?.["null"] === true || values(configView.GetEntry("null")).any((each) => each === pluginName);
 
-    const plugin = usenull ? plugins.null : passthru ? plugins.identity : plugins[pluginName];
+    const plugin = usenull
+      ? CORE_PLUGIN_MAP.null
+      : passthru
+      ? CORE_PLUGIN_MAP.identity
+      : pluginName === "pipeline-emitter"
+      ? pipelineEmitterPlugin
+      : plugins[pluginName]?.plugin;
 
     if (!plugin) {
       throw new Error(`Plugin '${pluginName}' not found.`);
@@ -516,6 +435,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
   try {
     await barrier.Wait();
+    await emitStats(configView);
   } catch (e) {
     // wait for outstanding nodes
     try {
@@ -525,4 +445,19 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     }
     throw e;
   }
+}
+
+async function emitStats(context: AutorestContext) {
+  const plugin = createArtifactEmitterPlugin(
+    async () =>
+      new QuickDataSource([
+        await context.DataStore.getDataSink().writeObject(
+          "stats.json",
+          context.stats.getAll(),
+          ["stats"],
+          "stats.json",
+        ),
+      ]),
+  );
+  await plugin(context, new QuickDataSource([]), context.DataStore.getDataSink());
 }

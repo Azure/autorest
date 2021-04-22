@@ -9,7 +9,7 @@ for Multi-API version generators (ie, based using `imodeler2` ).
 Avoiding conflicts is done thru additional metadata specified in the
 `x-ms-metadata` extension node.
 
-``` yaml
+```yaml
 pipeline:
   openapi-document/multi-api-merger:
     input: tree-shaker
@@ -40,13 +40,11 @@ pipeline:
     input-artifact: profile-filter-log
 ```
 
-
-``` yaml $(pipeline-model) == 'v3'
+```yaml $(pipeline-model) == 'v3'
 pass-thru:
   - api-version-parameter-handler
 
 pipeline:
-
   openapi-document/enum-deduplicator:
     input: model-deduplicator
 
@@ -68,7 +66,6 @@ pipeline:
     input: openapi-document/multi-api/identity
     input-artifact: openapi-document
     is-object: true
-
 ```
 
 # Default Configuration - Single API Version Pipeline
@@ -79,8 +76,7 @@ and joins the collections back into a single pipeline (it splits at load time.)
 The final step is the `openapi-document/identity`, which is the pipeline input
 for Single-API version generators (ie, based using `imodeler1` ).
 
-
-``` yaml !$(pipeline-model) || $(pipeline-model) == 'v2'
+```yaml !$(pipeline-model) || $(pipeline-model) == 'v2'
 pipeline:
   openapi-document/compose:
     input: openapi-document/model-deduplicator # just before deduplication.
@@ -110,24 +106,26 @@ scope-openapi-document/emitter:
 This takes the output of the openapi2/openapi3 loaded documents,
 and joins the collections back into a single pipeline (it splits at load time.)
 
-``` yaml
+```yaml
 pipeline:
   openapi-document/transform:
     input:
-      - openapi-document/openapi-document-converter	          # openapi-document/openapi-document-converter comes from the OAI2 loader
-      - openapi-document/individual/identity                  # openapi-document/individual/identity comes from the OAI3 loader
+      - openapi-document/openapi-document-converter # openapi-document/openapi-document-converter comes from the OAI2 loader
+      - openapi-document/individual/identity # openapi-document/individual/identity comes from the OAI3 loader
+
+  openapi-document/semantic-validator:
+    input: openapi-document/transform
 
   openapi-document/allof-cleaner:
-    input: openapi-document/transform
+    input: openapi-document/semantic-validator
 
   openapi-document/tree-shaker:
     input: openapi-document/allof-cleaner
-
 ```
 
 ### Default configuration: Output Converted Openapi
 
-``` yaml $(output-converted-oai3)
+```yaml $(output-converted-oai3)
 pipeline:
   converted-oai3/normalize-identity:
     input: openapi-document/transform
@@ -138,4 +136,17 @@ pipeline:
     is-object: true
 
 output-artifact: converted-oai3-document
+```
+
+### Output stats
+
+```yaml $(stats)
+# Collect stats steps
+pipeline:
+  #  Collect from individual openapi document.
+  openapi-document/openapi-stats-collector:
+    input: openapi-document/transform
+
+output-artifact:
+  - stats.json
 ```

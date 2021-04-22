@@ -103,7 +103,7 @@ export enum SecurityType {
 }
 
 export interface Callback extends Dictionary<PathItem> {}
-export interface SecurityRequirement extends Dictionary<string> {}
+export interface SecurityRequirement extends Dictionary<string[]> {}
 export type HTTPSecurityScheme = NonBearerHTTPSecurityScheme | BearerHTTPSecurityScheme;
 
 export type SecurityScheme =
@@ -194,14 +194,14 @@ export interface ExternalDocumentation extends Extensions {
 }
 
 export interface Header
-  extends Extensions,
+  extends Deprecatable,
+    Extensions,
     Partial<HasContent>,
     Partial<HasSchema>,
     Partial<HasExample>,
     Partial<HasExamples> {
   description?: string;
   required?: boolean;
-  deprecated?: boolean;
   allowEmptyValue?: boolean;
   allowReserved?: boolean;
 }
@@ -261,7 +261,8 @@ export interface OpenIdConnectSecurityScheme extends Extensions {
   openIdConnectUrl: string; // url
   description?: string;
 }
-export interface HttpOperation extends Extensions, Implementation<HttpOperationDetails> {
+
+export interface HttpOperation extends Deprecatable, Extensions, Implementation<HttpOperationDetails> {
   tags?: Array<string>;
   summary?: string;
   description?: string;
@@ -271,9 +272,13 @@ export interface HttpOperation extends Extensions, Implementation<HttpOperationD
   requestBody?: Reference<RequestBody>;
   responses: Dictionary<Reference<Response>>;
   callbacks?: Dictionary<Reference<Callback>>;
-  deprecated?: boolean;
+
   security?: Array<SecurityRequirement>;
   servers?: Array<Server>;
+}
+
+export interface Deprecatable {
+  deprecated?: boolean;
 }
 
 export interface HasSchema {
@@ -308,7 +313,8 @@ export interface InQuery extends HasSchema, Partial<HasExample>, Partial<HasExam
 }
 
 export interface Parameter
-  extends Partial<HasSchema>,
+  extends Deprecatable,
+    Partial<HasSchema>,
     Partial<HasContent>,
     Partial<HasExample>,
     Partial<HasExamples>,
@@ -318,7 +324,6 @@ export interface Parameter
 
   description?: string;
   allowEmptyValue?: boolean;
-  deprecated?: boolean;
   required?: boolean;
   style?: EncodingStyle;
 
@@ -358,7 +363,7 @@ export interface Response extends Extensions {
   links?: Dictionary<Reference<Link>>;
 }
 
-export interface Schema extends Extensions, Implementation<SchemaDetails> {
+export interface Schema extends Deprecatable, Extensions, Implementation<SchemaDetails> {
   /* common properties */
   type?: JsonType;
   title?: string;
@@ -367,7 +372,6 @@ export interface Schema extends Extensions, Implementation<SchemaDetails> {
   nullable?: boolean;
   readOnly?: boolean;
   writeOnly?: boolean;
-  deprecated?: boolean;
   required?: Array<string>;
 
   /* number restrictions */

@@ -2,6 +2,21 @@
   "name": "autorest",
   "entries": [
     {
+      "version": "3.1.5",
+      "tag": "autorest_v3.1.5",
+      "date": "Fri, 09 Apr 2021 19:53:22 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/configuration\" from `~1.2.2` to `~1.2.3`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/core\" from `~3.2.4` to `~3.3.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.1.4",
       "tag": "autorest_v3.1.4",
       "date": "Thu, 01 Apr 2021 15:46:42 GMT",
