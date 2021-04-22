@@ -9,5 +9,8 @@ export async function setupAdlCompilerPlugin(host: Host) {
   const entrypoint = inputFiles[0];
   const result = await compileAdl(fileURLToPath(entrypoint));
   console.error("Result", result);
-  host.WriteFile("swagger-document.json", "{}", undefined, "swagger-document");
+
+  for (const [name, content] of Object.entries(result)) {
+    host.WriteFile(name, content, undefined, "swagger-document");
+  }
 }
