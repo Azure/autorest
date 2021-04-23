@@ -8,20 +8,13 @@ interface CliArgs {
    * Options with the name as they are passed.
    * @example --foo.bar=true  -> {"foo.bar": true}
    */
-  rawOptions: Record<string, any>;
-
-  /**
-   * Options where the name was expanded
-   * @example --foo.bar=true  -> {"foo": {"bar": true}}
-   */
-  options: any[];
+  options: Record<string, any>;
 }
 
 export function parseArgs(cliArgs: string[]): CliArgs {
   const result: CliArgs = {
     positional: [],
-    options: [],
-    rawOptions: {},
+    options: {},
   };
 
   for (const arg of cliArgs) {
@@ -37,8 +30,7 @@ export function parseArgs(cliArgs: string[]): CliArgs {
     const key = match[1];
     const rawValue = resolvePathArg(match[3] || "true");
     const value = parseValue(rawValue);
-    result.rawOptions[key] = value;
-    result.options.push(CreateObject(key.split("."), value));
+    result.options[key] = value;
   }
 
   return result;
