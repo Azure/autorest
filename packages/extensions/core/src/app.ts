@@ -5,9 +5,9 @@
 /* eslint-disable no-console */
 import "source-map-support/register";
 import { omit } from "lodash";
-import { configureLibrariesLogger } from "@autorest/common";
+import { AutorestLogger, configureLibrariesLogger } from "@autorest/common";
 import { EventEmitter } from "events";
-
+import { parseAutorestCliArgs } from "@autorest/configuration";
 EventEmitter.defaultMaxListeners = 100;
 process.env["ELECTRON_RUN_AS_NODE"] = "1";
 delete process.env["ELECTRON_NO_ATTACH_CONSOLE"];
@@ -17,7 +17,7 @@ const color: (text: string) => string = (<any>global).color ? (<any>global).colo
 // start of autorest-ng
 // the console app starts for real here.
 
-import { CreateObject, EnhancedFileSystem, Parse, RealFileSystem } from "@azure-tools/datastore";
+import { EnhancedFileSystem, Parse, RealFileSystem } from "@azure-tools/datastore";
 import {
   clearFolder,
   createFolderUri,
@@ -27,73 +27,16 @@ import {
   writeBinary,
   writeString,
 } from "@azure-tools/uri";
-import { join, resolve as currentDirectory } from "path";
+import { resolve as currentDirectory } from "path";
 import { Help } from "./help";
 import { Artifact } from "./lib/artifact";
 import { AutoRest, IsOpenApiDocument, Shutdown } from "./lib/autorest-core";
-import { mergeConfigurations } from "@autorest/configuration";
 import { Exception } from "@autorest/common";
 import { Channel, Message } from "./lib/message";
-import { homedir } from "os";
 import { VERSION } from "./lib/constants";
 
 let verbose = false;
 let debug = false;
-
-/**
- * Current AutoRest
- */
-
-interface CommandLineArgs {
-  configFileOrFolder?: string;
-  switches: Array<any>;
-  rawSwitches: any;
-}
-
-function parseArgs(autorestArgs: Array<string>): CommandLineArgs {
-  const result: CommandLineArgs = {
-    switches: [],
-    rawSwitches: {},
-  };
-
-  for (const arg of autorestArgs) {
-    const match = /^--([^=:]+)([=:](.+))?$/g.exec(arg);
-
-    // configuration file?
-    if (match === null) {
-      if (result.configFileOrFolder) {
-        throw new Error(`Found multiple configuration file arguments: '${result.configFileOrFolder}', '${arg}'`);
-      }
-      result.configFileOrFolder = arg;
-      continue;
-    }
-
-    // switch
-    const key = match[1];
-    let rawValue = match[3] || "{}";
-
-    if (rawValue.startsWith(".")) {
-      // starts with a . or .. -> this is a relative path to current directory
-      rawValue = join(process.cwd(), rawValue);
-    }
-
-    if (rawValue.startsWith("~/")) {
-      // starts with a ~/ this is a relative path to home directory
-      rawValue = join(homedir(), rawValue.substr(1));
-    }
-
-    // quote stuff beginning with '@', YAML doesn't think unquoted strings should start with that
-    rawValue = rawValue.startsWith("@") ? `'${rawValue}'` : rawValue;
-    rawValue = rawValue.match(/20\d\d-\d+-\d+/) ? `'${rawValue}'` : rawValue;
-    // quote numbers with decimal point, we don't have any use for non-integer numbers (while on the other hand version strings may look like decimal numbers)
-    rawValue = !isNaN(parseFloat(rawValue)) && rawValue.includes(".") ? `'${rawValue}'` : rawValue;
-    const value = Parse(rawValue);
-    result.rawSwitches[key] = value;
-    result.switches.push(CreateObject(key.split("."), value));
-  }
-
-  return result;
-}
 
 function outputMessage(instance: AutoRest, m: Message, errorCounter: () => void) {
   switch (m.Channel) {
@@ -182,7 +125,6 @@ csharp:
 }
 
 let exitcode = 0;
-let args: CommandLineArgs;
 
 let cleared = false;
 async function doClearFolders(protectFiles: Set<string>, clearFolders: Set<string>) {
@@ -218,14 +160,22 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     }
   }
 
-  // parse the args from the command line
-  args = parseArgs([...autorestArgs, ...more]);
+  // TODO-TIM better logger integration?
+  const logger: AutorestLogger = {
+    info: (...args) => console.log(...args),
+    verbose: (...args) => console.log(...args),
+    fatal: (...args) => console.error(...args),
+    trackError: (...args) => console.error(...args),
+    trackWarning: (...args) => console.warn(...args),
+  };
 
-  if (!args.rawSwitches["message-format"] || args.rawSwitches["message-format"] === "regular") {
+  const args = parseAutorestCliArgs([...autorestArgs, ...more], { logger });
+
+  if (!args.options["message-format"] || args.options["message-format"] === "regular") {
     console.log(color(`> Loading AutoRest core      '${__dirname}' (${VERSION})`));
   }
-  verbose = verbose || args.rawSwitches["verbose"];
-  debug = debug || args.rawSwitches["debug"];
+  verbose = verbose || (args.options["verbose"] ?? false);
+  debug = debug || (args.options["debug"] ?? false);
 
   // Only show library logs if in verbose or debug mode.
   if (verbose || debug) {
@@ -235,18 +185,18 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   // identify where we are starting from.
   const currentDirUri = createFolderUri(currentDirectory());
 
-  if (args.rawSwitches["help"]) {
+  if (args.options["help"]) {
     // if they are asking for help, feed a false file to config so we don't load a user's configuration
     args.configFileOrFolder = "invalid.filename.md";
   }
 
-  const githubToken = mergeConfigurations(...args.switches)["github-auth-token"] ?? process.env.GITHUB_AUTH_TOKEN;
+  const githubToken = args.options["github-auth-token"] ?? process.env.GITHUB_AUTH_TOKEN;
   // get an instance of AutoRest and add the command line switches to the configuration.
   const api = new AutoRest(
     new EnhancedFileSystem(githubToken),
-    resolveUri(currentDirUri, args.configFileOrFolder || "."),
+    resolveUri(currentDirUri, args.configFileOrFolder ?? "."),
   );
-  api.AddConfiguration(args.switches);
+  api.AddConfiguration(args.options);
 
   // listen for output messages and file writes
   subscribeMessages(api, () => exitcode++);
