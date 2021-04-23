@@ -8,11 +8,12 @@ export interface ParseAutorestCliArgsOptions {
   logger: AutorestLogger;
 }
 
-export interface AutorestCLIArgs {
+export interface AutorestCliArgs {
   options: AutorestNormalizedConfiguration;
   configFileOrFolder: string | undefined;
 }
-export function parseAutorestCliArgs(cliArgs: string[], options: ParseAutorestCliArgsOptions): AutorestCLIArgs {
+
+export function parseAutorestCliArgs(cliArgs: string[], options: ParseAutorestCliArgsOptions): AutorestCliArgs {
   const parsedArgs = parseArgs(cliArgs);
   if (parsedArgs.positional.length > 1) {
     throw new Error(`Found multiple configuration file arguments: '${parsedArgs.positional.join(",")}'`);

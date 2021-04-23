@@ -5,9 +5,9 @@
 /* eslint-disable no-console */
 import "source-map-support/register";
 import { omit } from "lodash";
-import { AutorestLogger, configureLibrariesLogger } from "@autorest/common";
+import { configureLibrariesLogger } from "@autorest/common";
 import { EventEmitter } from "events";
-import { parseAutorestCliArgs } from "@autorest/configuration";
+import { AutorestCliArgs, parseAutorestCliArgs } from "@autorest/configuration";
 EventEmitter.defaultMaxListeners = 100;
 process.env["ELECTRON_RUN_AS_NODE"] = "1";
 delete process.env["ELECTRON_NO_ATTACH_CONSOLE"];
@@ -34,11 +34,25 @@ import { AutoRest, IsOpenApiDocument, Shutdown } from "./lib/autorest-core";
 import { Exception } from "@autorest/common";
 import { Channel, Message } from "./lib/message";
 import { VERSION } from "./lib/constants";
+import { AutorestCoreLogger } from "./lib/context/logger";
 
 let verbose = false;
 let debug = false;
 
-function outputMessage(instance: AutoRest, m: Message, errorCounter: () => void) {
+// TODO remove this when redesigning the logger integration. This is a hack to reuse the logic of the AutorestCoreLogger
+// https://github.com/Azure/autorest/issues/4024
+class RootLogger extends AutorestCoreLogger {
+  public constructor() {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    super({} as any, null!, null!);
+  }
+
+  public log(message: Message) {
+    outputMessage(message, () => {});
+  }
+}
+
+function outputMessage(m: Message, errorCounter: () => void) {
   switch (m.Channel) {
     case Channel.Debug:
       if (debug) {
@@ -66,7 +80,7 @@ function outputMessage(instance: AutoRest, m: Message, errorCounter: () => void)
 
 function subscribeMessages(api: AutoRest, errorCounter: () => void) {
   api.Message.Subscribe((_, m) => {
-    return outputMessage(_, m, errorCounter);
+    return outputMessage(m, errorCounter);
   });
 }
 
@@ -151,7 +165,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   }
 
   // add probes for readme.*.md files when a standalone arg is given.
-  const more = new Array<string>();
+  const more = [];
   for (const each of autorestArgs) {
     const match = /^--([^=:]+)([=:](.+))?$/g.exec(each);
     if (match && !match[3]) {
@@ -160,15 +174,10 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     }
   }
 
-  // TODO-TIM better logger integration?
-  const logger: AutorestLogger = {
-    info: (...args) => console.log(...args),
-    verbose: (...args) => console.log(...args),
-    fatal: (...args) => console.error(...args),
-    trackError: (...args) => console.error(...args),
-    trackWarning: (...args) => console.warn(...args),
-  };
+  // We need to check if verbose logging should be enabled before parsing the args.
+  verbose = verbose || autorestArgs.indexOf("--verbose") !== -1;
 
+  const logger = new RootLogger();
   const args = parseAutorestCliArgs([...autorestArgs, ...more], { logger });
 
   if (!args.options["message-format"] || args.options["message-format"] === "regular") {
@@ -235,7 +244,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   fastMode = !!context.config["fast-mode"];
 
   if (context.config["batch"]) {
-    await batch(api);
+    await batch(api, args);
   } else {
     const result = await api.Process().finish;
     if (result !== true) {
@@ -401,15 +410,14 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
   return exitcode;
 }
 
-async function batch(api: AutoRest): Promise<void> {
+async function batch(api: AutoRest, args: AutorestCliArgs): Promise<void> {
   const config = await api.view;
   const batchTaskConfigReference: any = {};
   api.AddConfiguration(batchTaskConfigReference);
   for (const batchTaskConfig of config.GetEntry(<any>"batch")) {
-    const isjson = args.rawSwitches["message-format"] === "json" || args.rawSwitches["message-format"] === "yaml";
+    const isjson = args.options["message-format"] === "json" || args.options["message-format"] === "yaml";
     if (!isjson) {
       outputMessage(
-        api,
         {
           Channel: Channel.Information,
           Text: `Processing batch task - ${JSON.stringify(batchTaskConfig)} .`,
@@ -427,7 +435,6 @@ async function batch(api: AutoRest): Promise<void> {
     const result = await api.Process().finish;
     if (result !== true) {
       outputMessage(
-        api,
         {
           Channel: Channel.Error,
           Text: `Failure during batch task - ${JSON.stringify(batchTaskConfig)} -- ${result}.`,
