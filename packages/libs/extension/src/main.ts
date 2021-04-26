@@ -232,15 +232,13 @@ export class ExtensionManager {
       // (if it is an autorest.<whatever> project)
       // https://github.com/Azure/${PROJECT}/releases/download/v${VERSION}/autorest/${PROJECT}-${VERSION}.tgz
       if (name.startsWith("@autorest/")) {
-        const githubRepo = name.replace("@", "").replace("autorest/", "autorest-");
+        const githubRepo = name.replace("@autorest/", "autorest.");
+        const githubPkgName = name.replace("@", "").replace("autorest/", "autorest-");
         const githubVersion = version
           .replace(/^[~|^]/g, "") // Use the exact version instead of range
           .replace(/_/g, "-"); // Replace _ with - ;
 
-        const ghurl = `https://github.com/Azure/${name.replace(
-          "@autorest/",
-          "autorest.",
-        )}/releases/download/v${version}/${githubRepo}-${githubVersion}.tgz`;
+        const ghurl = `https://github.com/Azure/${githubRepo}/releases/download/v${githubVersion}/${githubPkgName}-${githubVersion}.tgz`;
         try {
           const pm = await fetchPackageMetadata(ghurl);
           if (pm) {
