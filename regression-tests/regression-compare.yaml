@@ -81,13 +81,12 @@ languages:
       - --modelerfour.treat-type-object-as-anything
       - --package-name:test-package
       - --title:TestClient
-      - --use:@autorest/typescript@6.0.0-alpha.20210309.1
+      - --use:@autorest/typescript@6.0.0-alpha.20210415.6
     newArgs:
       - --v3
-      - --debug
       - --version:../packages/extensions/core
       - --use:../packages/extensions/modelerfour
       - --modelerfour.treat-type-object-as-anything
       - --package-name:test-package
       - --title:TestClient
-      - --use:@autorest/typescript@6.0.0-alpha.20210309.1
+      - --use:@autorest/typescript@6.0.0-alpha.20210415.6
