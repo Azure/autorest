@@ -179,7 +179,6 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
 
   const logger = new RootLogger();
   const args = parseAutorestCliArgs([...autorestArgs, ...more], { logger });
-  console.error("Try require", more, args);
 
   if (!args.options["message-format"] || args.options["message-format"] === "regular") {
     console.log(color(`> Loading AutoRest core      '${__dirname}' (${VERSION})`));
