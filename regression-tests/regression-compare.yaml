@@ -64,13 +64,13 @@ languages:
     oldArgs:
       - --version:3.0.6371
       - --use:@autorest/modelerfour@4.18.0-dev.1
-      - --use:@autorest/python@5.5.0
+      - --use:@autorest/python@5.7.0
       - --modelerfour.treat-type-object-as-anything
     newArgs:
       - --debug
       - --version:../packages/extensions/core
       - --use:../packages/extensions/modelerfour
-      - --use:@autorest/python@5.5.0
+      - --use:@autorest/python@5.7.0
       - --modelerfour.treat-type-object-as-anything
 
   - language: typescript
