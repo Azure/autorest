@@ -1,3 +1,4 @@
+export * from "./args";
 export * from "./autorest-configuration";
 export * from "./autorest-normalized-configuration";
 export * from "./configuration-schema";

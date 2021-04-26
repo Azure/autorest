@@ -1,3 +1,4 @@
+import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
 import { ConfigurationSchemaProcessor } from "./processor";
 import { RawConfiguration } from "./types";
 
@@ -55,3 +56,5 @@ export type AutorestRawConfiguration = RawConfiguration<typeof AUTOREST_CONFIGUR
 };
 
 export const autorestConfigurationProcessor = new ConfigurationSchemaProcessor(AUTOREST_CONFIGURATION_SCHEMA);
+
+export const AUTOREST_INITIAL_CONFIG: AutorestNormalizedConfiguration = autorestConfigurationProcessor.getInitialConfig();

@@ -2,20 +2,9 @@ import { evaluateGuard, mergeOverwriteOrAppend } from "@autorest/common";
 import { IFileSystem } from "@azure-tools/datastore";
 import { AutorestConfiguration, createAutorestConfiguration } from "../autorest-configuration";
 import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
+import { AUTOREST_INITIAL_CONFIG } from "../configuration-schema";
 import { desugarRawConfig } from "../desugar";
 import { ConditionalConfiguration, ConfigurationFile } from "./configuration-file";
-
-const initialConfig: AutorestNormalizedConfiguration = Object.freeze({
-  "directive": [],
-  "input-file": [],
-  "exclude-file": [],
-  "profile": [],
-  "output-artifact": [],
-  "require": [],
-  "try-require": [],
-  "use": [],
-  "pass-thru": [],
-});
 
 const defaultConfig: AutorestNormalizedConfiguration = Object.freeze({
   "base-folder": ".",
@@ -69,7 +58,7 @@ export class ConfigurationManager {
    * It will resolve potential condition for configuration file blocks to be included.
    */
   public async resolveConfig(): Promise<AutorestConfiguration> {
-    let current = initialConfig;
+    let current = AUTOREST_INITIAL_CONFIG;
 
     const configFileNames = [];
     for (const configItem of this.configItems) {
@@ -96,7 +85,7 @@ export class ConfigurationManager {
     config: AutorestNormalizedConfiguration,
     configFile: ConfigurationFile,
   ): AutorestNormalizedConfiguration {
-    let currentFileResolution = { ...initialConfig };
+    let currentFileResolution = { ...AUTOREST_INITIAL_CONFIG };
     const resolveConfig = () => mergeOverwriteOrAppend(config, currentFileResolution);
 
     for (const configBlock of configFile.configs) {
