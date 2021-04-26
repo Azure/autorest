@@ -7,7 +7,6 @@ interface MessageVisual {
   prefixColor: chalk.ChalkFunction;
 }
 
-console.error("Chalk", chalk);
 function getMessageVisual(messageType: MessageType): MessageVisual {
   let prefix = "•";
   let color: chalk.ChalkFunction = chalk;
