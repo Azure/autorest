@@ -67,7 +67,6 @@ languages:
       - --use:@autorest/python@5.7.0
       - --modelerfour.treat-type-object-as-anything
     newArgs:
-      - --debug
       - --version:../packages/extensions/core
       - --use:../packages/extensions/modelerfour
       - --use:@autorest/python@5.7.0
