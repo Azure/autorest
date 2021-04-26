@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/extension",
+      "comment": "**Fix** Fallback to github release when version doesn't exists broken if using version range",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@azure-tools/extension",
+  "email": "tiguerin@microsoft.com"
+}
