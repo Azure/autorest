@@ -6,15 +6,24 @@ interface CliArgs {
   positional: string[];
   /**
    * Options with the name as they are passed.
+   * If the same flag is passed multiple times the latest overrides the values.
    * @example --foo.bar=true  -> {"foo.bar": true}
    */
   options: Record<string, any>;
+
+  /**
+   * Options list with the name as they are passed.
+   * if the same flag is passed multiple times all the values are included in this list.
+   * @example --foo.bar=true  -> [{key: "foo.bar", value: true}]
+   */
+  optionList: Array<{ key: string; value: "string" }>;
 }
 
 export function parseArgs(cliArgs: string[]): CliArgs {
   const result: CliArgs = {
     positional: [],
     options: {},
+    optionList: [],
   };
 
   for (const arg of cliArgs) {
@@ -31,6 +40,7 @@ export function parseArgs(cliArgs: string[]): CliArgs {
     const rawValue = resolvePathArg(match[3] || "true");
     const value = parseValue(rawValue);
     result.options[key] = value;
+    result.optionList.push({ key, value });
   }
 
   return result;

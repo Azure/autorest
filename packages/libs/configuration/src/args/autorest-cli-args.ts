@@ -2,7 +2,7 @@ import { AutorestLogger, OperationAbortedException } from "@autorest/common";
 import { CreateObject } from "@azure-tools/datastore";
 import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
 import { mergeConfigurations } from "../configuration-merging";
-import { autorestConfigurationProcessor } from "../configuration-schema";
+import { autorestConfigurationProcessor, AUTOREST_INITIAL_CONFIG } from "../configuration-schema";
 import { parseArgs } from "./parse-args";
 
 export interface ParseAutorestCliArgsOptions {
@@ -21,10 +21,8 @@ export function parseAutorestCliArgs(cliArgs: string[], options: ParseAutorestCl
   }
   const configFileOrFolder = parsedArgs.positional[0];
 
-  const optionsAsObjects = Object.entries(parsedArgs.options).map(([key, value]) =>
-    CreateObject(key.split("."), value),
-  );
-  const config = mergeConfigurations(...optionsAsObjects);
+  const optionsAsObjects = parsedArgs.optionList.map(({ key, value }) => CreateObject(key.split("."), value));
+  const config = mergeConfigurations(AUTOREST_INITIAL_CONFIG, ...optionsAsObjects);
   const result = autorestConfigurationProcessor.processConfiguration(config, {
     logger: options.logger,
   });

@@ -62,8 +62,8 @@ languages:
   - language: python
     outputPath: ./output/python
     oldArgs:
-      - --version:3.0.6371
-      - --use:@autorest/modelerfour@4.18.0-dev.1
+      - --version:3.3.2
+      - --use:@autorest/modelerfour@4.18.4
       - --use:@autorest/python@5.7.0
       - --modelerfour.treat-type-object-as-anything
     newArgs:
@@ -76,8 +76,8 @@ languages:
     outputPath: ./output/typescript
     oldArgs:
       - --v3
-      - --version:3.0.6371
-      - --use:@autorest/modelerfour@4.18.0-dev.1
+      - --version:3.3.2
+      - --use:@autorest/modelerfour@4.18.4
       - --modelerfour.treat-type-object-as-anything
       - --package-name:test-package
       - --title:TestClient
