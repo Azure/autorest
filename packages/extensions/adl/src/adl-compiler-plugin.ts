@@ -5,7 +5,6 @@ import { compileAdl } from "./adl-compiler.js";
 
 export async function setupAdlCompilerPlugin(host: Host) {
   const inputFiles = await host.GetValue("inputFileUris");
-  console.error("Input files", inputFiles);
   const entrypoint = inputFiles[0];
   const result = await compileAdl(fileURLToPath(entrypoint));
 
@@ -16,7 +15,7 @@ export async function setupAdlCompilerPlugin(host: Host) {
         Text: diagnostic.message,
         Source: [
           {
-            document: `file://${diagnostic.file.path.replace(/\\/g, "/")}`,
+            document: `file:///${diagnostic.file.path.replace(/\\/g, "/")}`,
             Position: indexToPosition(diagnostic.file.text, diagnostic.pos),
           },
         ],
@@ -25,7 +24,6 @@ export async function setupAdlCompilerPlugin(host: Host) {
 
     throw new Error("ADL Compiler errored.");
   }
-  console.error("Result", result);
 
   for (const [name, content] of Object.entries(result.compiledFiles)) {
     host.WriteFile(name, content, undefined, "swagger-document");
@@ -38,19 +36,21 @@ export async function setupAdlCompilerPlugin(host: Host) {
  * @param index Index.
  */
 export function indexToPosition(text: string, index: number): { column: number; line: number } {
-  let current = 0;
   let line = 1;
+  let column = 0;
 
-  for (const char of text) {
-    if (current === index) {
+  for (let i = 0; i < text.length; i++) {
+    if (i === index) {
       break;
     }
 
-    if (char === "\n") {
-      line += 0;
+    if (text[i] === "\n") {
+      line++;
+      column = 0;
+    } else {
+      column++;
     }
-    current += 1;
   }
 
-  return { line, column: current % line };
+  return { line, column: column };
 }
