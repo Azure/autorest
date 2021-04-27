@@ -13,7 +13,7 @@ export class AutorestFixer {
     for (const path of files) {
       const file = await loadSpec(path);
       if (file.type === "swagger") {
-        const result = await fixSwagger(file.spec);
+        const result = fixSwagger(file.spec);
         for (const fix of result.fixes) {
           logger.info(`${fix.code}: ${fix.message} in ${path}#/${fix.path.join("/")}`);
         }
