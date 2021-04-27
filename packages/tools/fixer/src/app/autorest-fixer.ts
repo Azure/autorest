@@ -15,7 +15,7 @@ export class AutorestFixer {
       if (file.type === "swagger") {
         const result = fixSwagger(file.spec);
         for (const fix of result.fixes) {
-          logger.info(`${fix.code}: ${fix.message} in ${path}#/${fix.path.join("/")}`);
+          logger.info(`${fix.code}: ${fix.message} in ${path} at #/${fix.path.join("/")}`);
         }
         await saveSpec(path, result.spec);
       } else if (file.type === "openapi") {
