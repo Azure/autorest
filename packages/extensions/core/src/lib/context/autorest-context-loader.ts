@@ -101,7 +101,7 @@ export class AutorestContextLoader {
     ...configs: AutorestRawConfiguration[]
   ): Promise<AutorestContext> {
     const logger: AutorestLogger = new AutorestCoreLogger(
-      mergeConfigurations(...configs) as any,
+      mergeConfigurations(configs) as any,
       messageEmitter,
       AutorestLoggingSession,
     );

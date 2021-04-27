@@ -22,7 +22,9 @@ export function parseAutorestCliArgs(cliArgs: string[], options: ParseAutorestCl
   const configFileOrFolder = parsedArgs.positional[0];
 
   const optionsAsObjects = parsedArgs.optionList.map(({ key, value }) => CreateObject(key.split("."), value));
-  const config = mergeConfigurations(AUTOREST_INITIAL_CONFIG, ...optionsAsObjects);
+  const config = mergeConfigurations([AUTOREST_INITIAL_CONFIG, ...optionsAsObjects.reverse()], {
+    arrayMergeStrategy: "low-pri-first",
+  });
   const result = autorestConfigurationProcessor.processConfiguration(config, {
     logger: options.logger,
   });
