@@ -36,6 +36,7 @@ export type Result<T> = ErrorResult | ValueResult<T>;
 export interface ProcessConfigurationOptions {
   logger: AutorestLogger;
 }
+
 export class ConfigurationSchemaProcessor<S extends ConfigurationSchema> {
   public constructor(private schema: S) {}
 
@@ -45,6 +46,29 @@ export class ConfigurationSchemaProcessor<S extends ConfigurationSchema> {
   ): Result<ProcessedConfiguration<S>> {
     return processConfiguration(this.schema, [], configuration, options);
   }
+
+  /**
+   * Returns an empty config with all array property to be able to work with @see mergeConfigurations.
+   */
+  public getInitialConfig(): Readonly<ProcessedConfiguration<S>> {
+    return getInitialConfig(this.schema);
+  }
+}
+
+function getInitialConfig<S extends ConfigurationSchema>(schema: S): Readonly<ProcessedConfiguration<S>> {
+  const config: any = {};
+
+  for (const [key, value] of Object.entries(schema)) {
+    if (value.array) {
+      config[key] = [];
+    } else if (!("type" in value)) {
+      const nested = getInitialConfig(value);
+      if (Object.keys(nested).length > 0) {
+        config[key] = nested;
+      }
+    }
+  }
+  return Object.freeze(config);
 }
 
 function processConfiguration<S extends ConfigurationSchema>(

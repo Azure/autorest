@@ -1,4 +1,4 @@
-import * as chalk from "chalk";
+import chalk from "chalk";
 import { CompareMessage, MessageType } from "./comparers";
 
 interface MessageVisual {
@@ -9,7 +9,7 @@ interface MessageVisual {
 
 function getMessageVisual(messageType: MessageType): MessageVisual {
   let prefix = "•";
-  let color: chalk.ChalkFunction = chalk.default;
+  let color: chalk.ChalkFunction = chalk;
   let prefixColor: chalk.ChalkFunction | undefined;
 
   switch (messageType) {

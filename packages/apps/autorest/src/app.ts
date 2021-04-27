@@ -12,7 +12,7 @@ const cwd = process.cwd();
 import chalk from "chalk";
 import { newCorePackage, ensureAutorestHome, tryRequire, runCoreOutOfProc } from "./autorest-as-a-service";
 import { color } from "./coloring";
-import { parseArgs } from "./args";
+import { parseAutorestArgs } from "./args";
 import { resetAutorest, showAvailableCoreVersions, showInstalledExtensions } from "./commands";
 import { clearTempData } from "./actions";
 import { resolveCoreVersion } from "./core-version-utils";
@@ -33,7 +33,7 @@ if (process.argv.indexOf("--yaml") !== -1) {
   process.argv.push("--message-format=yaml");
 }
 
-const args = parseArgs(process.argv);
+const args = parseAutorestArgs(process.argv);
 (<any>global).__args = args;
 
 // aliases
