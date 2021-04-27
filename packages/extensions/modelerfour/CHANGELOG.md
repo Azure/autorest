@@ -1,6 +1,19 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Mon, 19 Apr 2021 21:06:54 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Apr 2021 17:48:43 GMT and should not be manually modified.
+
+## 4.19.0
+Tue, 27 Apr 2021 17:48:43 GMT
+
+### Minor changes
+
+- **Added** Distinction between anything and anyobject
+- **Added** Support for openapi deprecation
+- **Added** Support known set of security scheme
+
+### Patches
+
+- **Perf** Major performance improvment to duplicate schema finder
 
 ## 4.18.4
 Mon, 19 Apr 2021 21:06:54 GMT

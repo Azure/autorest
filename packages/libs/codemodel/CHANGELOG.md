@@ -1,6 +1,18 @@
 # Change Log - @autorest/codemodel
 
-This log was last generated on Fri, 09 Apr 2021 19:53:22 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Apr 2021 17:48:43 GMT and should not be manually modified.
+
+## 4.15.0
+Tue, 27 Apr 2021 17:48:43 GMT
+
+### Minor changes
+
+- **Added** AnyObject schema type
+- **Update** Codemodel to take new security model
+
+### Patches
+
+- **Updated** deprecation model
 
 ## 4.14.8
 Fri, 09 Apr 2021 19:53:22 GMT

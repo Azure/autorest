@@ -1,6 +1,19 @@
 # Change Log - @autorest/core
 
-This log was last generated on Fri, 16 Apr 2021 15:18:54 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Apr 2021 17:48:43 GMT and should not be manually modified.
+
+## 3.4.0
+Tue, 27 Apr 2021 17:48:43 GMT
+
+### Minor changes
+
+- **Updated** CLI Parsing to uptake logic moved to @autorest/configuration and use config validation
+
+### Patches
+
+- **Fix** Default license header containing uninterpolated {generator}
+- **Fix** Tree Shaking number enums same as string enum. This allows those enum to get a better auto generated name if no name is provided
+- **Perf** improvement to multi api merger
 
 ## 3.3.2
 Fri, 16 Apr 2021 15:18:54 GMT

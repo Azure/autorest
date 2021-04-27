@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/extension
 
-This log was last generated on Thu, 01 Apr 2021 15:46:41 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Apr 2021 17:48:43 GMT and should not be manually modified.
+
+## 3.2.6
+Tue, 27 Apr 2021 17:48:43 GMT
+
+### Patches
+
+- **Fix** Fallback to github release when version doesn't exists broken if using version range
 
 ## 3.2.5
 Thu, 01 Apr 2021 15:46:41 GMT
