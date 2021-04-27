@@ -25,6 +25,10 @@ export const parseArgs = (argv: string[]): CliConfig => {
     .option("level", {
       type: "string",
       description: "Run with given logging level.",
+    })
+    .option("dry-run", {
+      type: "boolean",
+      description: "Perform a dry run.",
     });
 
   const options = cli.argv;
