@@ -43,6 +43,12 @@
       "shouldPublish": false
     },
     {
+      "packageName": "@autorest/fixer",
+      "projectFolder": "packages/tools/fixer",
+      "reviewCategory": "production",
+      "shouldPublish": false
+    },
+    {
       "packageName": "@autorest/schemas",
       "projectFolder": "packages/libs/autorest-schemas",
       "reviewCategory": "production",

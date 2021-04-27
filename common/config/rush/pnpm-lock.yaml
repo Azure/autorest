@@ -17,6 +17,7 @@ dependencies:
   '@rush-temp/deduplication': file:projects/deduplication.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/extension': file:projects/extension.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/extension-base': file:projects/extension-base.tgz_prettier@2.2.1
+  '@rush-temp/fixer': file:projects/fixer.tgz_ts-node@9.1.1
   '@rush-temp/json': file:projects/json.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/jsonschema': file:projects/jsonschema.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/md-mock-api': file:projects/md-mock-api.tgz_ts-node@9.1.1
@@ -9131,6 +9132,7 @@ packages:
       eslint-plugin-unicorn: 27.0.0_eslint@7.21.0
       glob: 7.1.6
       js-yaml: 4.0.0
+      rimraf: 3.0.2
       ts-morph: 4.0.1
       typescript: 4.2.3
       typescript-json-schema: 0.40.0
@@ -9140,7 +9142,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-t7yV4UXZ9LY0uBWM4tSY3CzjFXX/KZMh8BHBxavVW05S2Abcvdqg4fp9dg1ptv7zjhJe6b2hd8q7/qvV2TVD3g==
+      integrity: sha512-7inc2VqhBiJk4K+yoq3VVBLlQT3JNRwDBNHdNRPvbrYqahugfZPauNQ6lPe9vxi9LsMOttpWFjR9+ErcIZ0Ozw==
       tarball: file:projects/codemodel.tgz
     version: 0.0.0
   file:projects/common.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9286,7 +9288,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-teEvn07T6xWRuhn4w2IkjuMpVeD3BKTJz52iAvlPBmOS/zjcQkvLjjTgFHZ2zPoryNX5MrIQ3oU4cpVzLtEQDQ==
+      integrity: sha512-d3CR9xMEKnV7PpOuXrbjXVTfoEERyekuwlLE5OYKBHmdUiodFP4ZDkl6akXSiSaCUaJWzgH8S7GMxOHjoJ3vKw==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9321,7 +9323,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-JqP39zpy1qfqpya+rJm6rFiYhTGCb0ZNUQWBBS2nqpcDRAZcaXoempdObfO8sfZyuMkKzoGkkHQKNn3BuMofCw==
+      integrity: sha512-zYF6jNGOcGX3Zz1HXSwpkzl8d/YshQXAZMjfSSgFE7/+CWq7nKkcfjKiKdKhAtvhLe+XIplcUYhdi2CHt0xZGQ==
       tarball: file:projects/datastore.tgz
     version: 0.0.0
   file:projects/deduplication.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9417,6 +9419,39 @@ packages:
     resolution:
       integrity: sha512-WR1oVuYC6i/S5T3rDF89yMm6sOSGArXegynpRt7U9U/jPvxrmNyEVeGjiRJUYmarQnuGx+5aqNBEmoB158bIJQ==
       tarball: file:projects/extension.tgz
+    version: 0.0.0
+  file:projects/fixer.tgz_ts-node@9.1.1:
+    dependencies:
+      '@types/glob': 7.1.3
+      '@types/jest': 26.0.20
+      '@types/js-yaml': 4.0.0
+      '@types/node': 14.14.34
+      '@types/yargs': 15.0.13
+      '@typescript-eslint/eslint-plugin': 4.17.0_3641211d697b4d4d12940eb9cf33dc28
+      '@typescript-eslint/parser': 4.17.0_eslint@7.21.0+typescript@4.2.3
+      eslint: 7.21.0
+      eslint-plugin-import: 2.22.1_eslint@7.21.0
+      eslint-plugin-jest: 24.3.2_f7a788bcd4fefc8ee2fd4a52e26bb045
+      eslint-plugin-node: 11.1.0_eslint@7.21.0
+      eslint-plugin-prettier: 3.2.0_eslint@7.21.0+prettier@2.2.1
+      eslint-plugin-unicorn: 27.0.0_eslint@7.21.0
+      glob: 7.1.6
+      jest: 26.6.3_ts-node@9.1.1
+      prettier: 2.2.1
+      rimraf: 3.0.2
+      source-map-support: 0.5.19
+      ts-jest: 26.5.3_jest@26.6.3+typescript@4.2.3
+      typescript: 4.2.3
+      winston: 3.3.3
+      yargs: 16.2.0
+    dev: false
+    id: file:projects/fixer.tgz
+    name: '@rush-temp/fixer'
+    peerDependencies:
+      ts-node: '*'
+    resolution:
+      integrity: sha512-c07uWrN5Ly7q6YxM2BWXSwQBWsctzFTlaoUetm5dTnte2Wkv7lXxB6IpO0IFM+fZd7a0yTIQQ//dfDRhu6k+5Q==
+      tarball: file:projects/fixer.tgz
     version: 0.0.0
   file:projects/json.tgz_prettier@2.2.1+ts-node@9.1.1:
     dependencies:
@@ -9669,6 +9704,7 @@ specifiers:
   '@rush-temp/deduplication': file:./projects/deduplication.tgz
   '@rush-temp/extension': file:./projects/extension.tgz
   '@rush-temp/extension-base': file:./projects/extension-base.tgz
+  '@rush-temp/fixer': file:./projects/fixer.tgz
   '@rush-temp/json': file:./projects/json.tgz
   '@rush-temp/jsonschema': file:./projects/jsonschema.tgz
   '@rush-temp/md-mock-api': file:./projects/md-mock-api.tgz
