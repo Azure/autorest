@@ -1,4 +1,4 @@
-import { CompilerHost, createProgram } from "@azure-tools/adl";
+import { CompilerHost, createProgram, DiagnosticError } from "@azure-tools/adl";
 import { readdir, readFile, realpath, stat } from "fs/promises";
 import { join, resolve } from "path";
 import { fileURLToPath, pathToFileURL } from "url";
@@ -24,14 +24,23 @@ export function createAdlHost(writeFile: (path: string, content: string) => Prom
   };
 }
 
-export async function compileAdl(entrypoint: string) {
+export async function compileAdl(
+  entrypoint: string,
+): Promise<{ compiledFiles: Record<string, string> } | { error: DiagnosticError }> {
   const output: Record<string, string> = {};
   const writeFile = async (path: string, content: string) => {
     output[path] = content;
   };
 
-  const program = await createProgram(createAdlHost(writeFile), {
-    mainFile: entrypoint,
-  });
-  return output;
+  try {
+    const program = await createProgram(createAdlHost(writeFile), {
+      mainFile: entrypoint,
+    });
+    return { compiledFiles: output };
+  } catch (e) {
+    if ("diagnostics" in e) {
+      return { error: e };
+    }
+    throw e;
+  }
 }
