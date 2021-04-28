@@ -1,18 +1,25 @@
 import { cloneDeep } from "lodash";
 import { Fix, FixCode, FixResult } from "../types";
 
-export function fixSwagger(spec: any): FixResult {
-  return fixSwaggerMissingType(spec);
+export function fixSwagger(filename: string, spec: any): FixResult {
+  return fixSwaggerMissingType(filename, spec);
 }
 
-export function fixSwaggerMissingType(spec: any): FixResult {
+/**
+ * Find definitions with missing type: object that should be object according to autorest historic behavior.
+ * @param filename Filename
+ * @param spec Spec.
+ * @returns FixResult
+ */
+export function fixSwaggerMissingType(filename: string, spec: any): FixResult {
   const newSpec = cloneDeep(spec);
   const fixes: Fix[] = [];
 
   forEachDefinitions(newSpec, (definition, path) => {
-    if (definition.properties && !("type" in definition)) {
+    if (!("type" in definition) && autorestAssumeSchemaIsObject(definition)) {
       definition.type = "object";
       fixes.push({
+        filename,
         code: FixCode.MissingTypeObject,
         message: `Schema is defining properties but is missing type: object.`,
         path,
@@ -23,13 +30,25 @@ export function fixSwaggerMissingType(spec: any): FixResult {
   return { spec: newSpec, fixes };
 }
 
+function autorestAssumeSchemaIsObject(definition: any) {
+  return definition.properties || definition.additionalProperties || definition.allOf;
+}
+
 function forEachDefinitions(spec: any, handler: (definition: any, path: string[]) => void) {
+  if (!spec.definitions) {
+    return;
+  }
+
   for (const [name, definition] of Object.entries<any>(spec.definitions)) {
     forEachNestedDefinitions(definition, ["definitions", name], handler);
   }
 }
 
 function forEachNestedDefinitions(definition: any, path: string[], handler: (definition: any, path: string[]) => void) {
+  if (typeof definition !== "object") {
+    return;
+  }
+
   handler(definition, path);
 
   if (definition.properties) {

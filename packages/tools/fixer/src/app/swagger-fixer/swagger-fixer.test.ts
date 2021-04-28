@@ -10,7 +10,7 @@ const ObjectMissingType = Object.freeze({
 describe("Swagger fixer", () => {
   describe("Fix misisng type:object", () => {
     it("fix on a named definitions", () => {
-      const result = fixSwaggerMissingType({
+      const result = fixSwaggerMissingType("test.json", {
         definitions: {
           Foo: ObjectMissingType,
         },
@@ -26,12 +26,35 @@ describe("Swagger fixer", () => {
       expect(result.fixes[0]).toEqual({
         code: FixCode.MissingTypeObject,
         message: "Schema is defining properties but is missing type: object.",
+        filename: "test.json",
+        path: ["definitions", "Foo"],
+      });
+    });
+
+    it("fix on a named definitions with additional properties", () => {
+      const result = fixSwaggerMissingType("test.json", {
+        definitions: {
+          Foo: { additionalProperties: true },
+        },
+      });
+
+      expect(result.spec).toEqual({
+        definitions: {
+          Foo: { additionalProperties: true, type: "object" },
+        },
+      });
+
+      expect(result.fixes).toHaveLength(1);
+      expect(result.fixes[0]).toEqual({
+        code: FixCode.MissingTypeObject,
+        message: "Schema is defining properties but is missing type: object.",
+        filename: "test.json",
         path: ["definitions", "Foo"],
       });
     });
 
     it("fix on a nested definitions in properties", () => {
-      const result = fixSwaggerMissingType({
+      const result = fixSwaggerMissingType("test.json", {
         definitions: {
           Foo: {
             type: "object",
@@ -57,11 +80,12 @@ describe("Swagger fixer", () => {
       expect(result.fixes[0]).toEqual({
         code: FixCode.MissingTypeObject,
         message: "Schema is defining properties but is missing type: object.",
+        filename: "test.json",
         path: ["definitions", "Foo", "properties", "Bar"],
       });
     });
     it("fix on a nested definitions in allOf", () => {
-      const result = fixSwaggerMissingType({
+      const result = fixSwaggerMissingType("test.json", {
         definitions: {
           Foo: {
             type: "object",
@@ -83,6 +107,7 @@ describe("Swagger fixer", () => {
       expect(result.fixes[0]).toEqual({
         code: FixCode.MissingTypeObject,
         message: "Schema is defining properties but is missing type: object.",
+        filename: "test.json",
         path: ["definitions", "Foo", "allOf", "0"],
       });
     });

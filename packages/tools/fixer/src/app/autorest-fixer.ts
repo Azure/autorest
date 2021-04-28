@@ -10,12 +10,15 @@ export class AutorestFixer {
   public async fix() {
     const files = await findFiles(this.config.include);
     logger.info(`${this.config.dryRun && "[DRY RUN] "}Running fixer on ${files.length} files`);
+
+    const fixes = [];
     for (const path of files) {
       const file = await loadSpec(path);
       if (file.type === "swagger") {
-        const result = fixSwagger(file.spec);
+        const result = fixSwagger(path, file.spec);
         for (const fix of result.fixes) {
           logger.info(`${fix.code}: ${fix.message} in ${path} at #/${fix.path.join("/")}`);
+          fixes.push(fix);
         }
         if (!this.config.dryRun) {
           await saveSpec(path, result.spec);
@@ -26,6 +29,7 @@ export class AutorestFixer {
         // Nothing.
       }
     }
+    logger.info(`Found ${fixes.length} fixes.`);
   }
 }
 

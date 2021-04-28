@@ -6,6 +6,7 @@ export interface FixResult {
 export interface Fix {
   code: FixCode;
   message: string;
+  filename: string;
   path: string[];
 }
 
