@@ -9,7 +9,7 @@ export class AutorestFixer {
 
   public async fix() {
     const files = await findFiles(this.config.include);
-    logger.info(`${this.config.dryRun && "[DRY RUN] "}Running fixer on ${files.length} files`);
+    logger.info(`${this.config.dryRun ? "[DRY RUN] " : ""}Running fixer on ${files.length} files`);
 
     const fixes = [];
     for (const path of files) {
@@ -20,7 +20,7 @@ export class AutorestFixer {
           logger.info(`${fix.code}: ${fix.message} in ${path} at #/${fix.path.join("/")}`);
           fixes.push(fix);
         }
-        if (!this.config.dryRun) {
+        if (!this.config.dryRun && result.fixes.length > 0) {
           await saveSpec(path, result.spec);
         }
       } else if (file.type === "openapi") {
@@ -52,5 +52,5 @@ async function loadSpec(path: string): Promise<SwaggerSpec | OpenAPISpec | Unkow
 }
 
 async function saveSpec(path: string, spec: any) {
-  return writeFile(path, JSON.stringify(spec, null, 2));
+  return writeFile(path, JSON.stringify(spec, null, 2) + "\n");
 }

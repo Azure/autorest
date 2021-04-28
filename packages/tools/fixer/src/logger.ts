@@ -7,7 +7,8 @@ export const logger = winston.createLogger({
     winston.format.splat(),
     winston.format.errors({ stack: true }),
     winston.format.colorize(),
-    winston.format.printf(({ level, message, stack }) => {
+    winston.format.printf(({ level, message, stack, padding }) => {
+      padding = (padding && padding[level]) || "";
       if (stack) {
         // print log trace
         return `${level}: ${message} - ${stack}`;
