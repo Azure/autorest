@@ -3,6 +3,7 @@ import { logger } from "../logger";
 import { findFiles } from "../utils";
 import { AutorestFixerConfig } from "./autorest-fixer-config";
 import { fixSwagger } from "./swagger-fixer";
+import chalk from "chalk";
 
 export class AutorestFixer {
   public constructor(private config: AutorestFixerConfig) {}
@@ -17,7 +18,7 @@ export class AutorestFixer {
       if (file.type === "swagger") {
         const result = fixSwagger(path, file.spec);
         for (const fix of result.fixes) {
-          logger.info(`${fix.code}: ${fix.message} in ${path} at #/${fix.path.join("/")}`);
+          logger.info(`${chalk.blue(fix.code)}: ${fix.message} in ${path} at #/${fix.path.join("/")}`);
           fixes.push(fix);
         }
         if (!this.config.dryRun && result.fixes.length > 0) {

@@ -55,6 +55,7 @@
     "source-map-support": "^0.5.19",
     "ts-jest": "^26.4.4",
     "winston": "~3.3.3",
-    "yargs": "~16.2.0"
+    "yargs": "~16.2.0",
+    "chalk": "^4.1.0"
   }
 }
