@@ -12,6 +12,7 @@ import { CliConfig } from "./cli-config";
 const getAppConfig = (cliConfig: CliConfig): AutorestFixerConfig => {
   return {
     include: cliConfig.include,
+    dryRun: cliConfig["dry-run"],
   };
 };
 
