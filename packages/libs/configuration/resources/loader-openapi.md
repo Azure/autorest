@@ -64,5 +64,5 @@ pipeline:
 
 ```yaml $(adl)
 use-extension:
-  "@autorest/adl": C:/dev/azsdk/autorest/packages/extensions/adl
+  "@autorest/adl": latest
 ```
