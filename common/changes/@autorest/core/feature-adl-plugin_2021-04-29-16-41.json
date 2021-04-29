@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "Blaming files not loaded by autorest",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/core",
+  "email": "tiguerin@microsoft.com"
+}
