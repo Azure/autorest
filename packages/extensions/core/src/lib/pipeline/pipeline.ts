@@ -429,17 +429,17 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
         taskx._finishedAt = Date.now();
       })
       .catch(() => (taskx._state = "failed"));
-    void barrier.Await(task);
-    void barrierRobust.Await(task.catch(() => {}));
+    barrier.await(task);
+    barrierRobust.await(task.catch(() => {}));
   }
 
   try {
-    await barrier.Wait();
+    await barrier.wait();
     await emitStats(configView);
   } catch (e) {
     // wait for outstanding nodes
     try {
-      await barrierRobust.Wait();
+      await barrierRobust.wait();
     } catch {
       // wait for others to fail or whatever...
     }
