@@ -110,7 +110,7 @@ export class SecurityProcessor {
     for (const oai3SecurityRequirement of security) {
       const names = Object.keys(oai3SecurityRequirement);
       if (names.length > 1) {
-        throw new Error(
+        this.session.warning(
           [
             `Security defines multiple requirements at the same time which is not supported(${names.join(",")}).`,
             `Did you meant to have multiple authentication options instead? Define each option seperately in your spec:`,
@@ -120,8 +120,11 @@ export class SecurityProcessor {
               2,
             ),
           ].join("\n"),
+          ["MultipleSecurityLayerUnsupported"],
         );
+        continue;
       }
+
       if (names.length === 0) {
         throw new Error(`Invalid empty security requirement`);
       }

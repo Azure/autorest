@@ -2,6 +2,18 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.4.1",
+      "tag": "@autorest/core_v3.4.1",
+      "date": "Tue, 04 May 2021 18:18:45 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Uncaught promise exception"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.4.0",
       "tag": "@autorest/core_v3.4.0",
       "date": "Tue, 27 Apr 2021 17:48:43 GMT",
