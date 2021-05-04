@@ -2,6 +2,18 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.19.1",
+      "tag": "@autorest/modelerfour_v4.19.1",
+      "date": "Tue, 04 May 2021 18:18:45 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Using multiple security layers(`AND`) now produce warning instead of error."
+          }
+        ]
+      }
+    },
+    {
       "version": "4.19.0",
       "tag": "@autorest/modelerfour_v4.19.0",
       "date": "Tue, 27 Apr 2021 17:48:43 GMT",

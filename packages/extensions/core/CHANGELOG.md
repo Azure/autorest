@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Tue, 27 Apr 2021 17:48:43 GMT and should not be manually modified.
+This log was last generated on Tue, 04 May 2021 18:18:45 GMT and should not be manually modified.
+
+## 3.4.1
+Tue, 04 May 2021 18:18:45 GMT
+
+### Patches
+
+- **Fix** Uncaught promise exception
 
 ## 3.4.0
 Tue, 27 Apr 2021 17:48:43 GMT
