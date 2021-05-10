@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Tue, 04 May 2021 18:18:45 GMT and should not be manually modified.
+This log was last generated on Mon, 10 May 2021 18:01:37 GMT and should not be manually modified.
+
+## 3.4.2
+Mon, 10 May 2021 18:01:37 GMT
+
+### Patches
+
+- Update dependencies to include fix for interpolating config value from previous value in same file
 
 ## 3.4.1
 Tue, 04 May 2021 18:18:45 GMT

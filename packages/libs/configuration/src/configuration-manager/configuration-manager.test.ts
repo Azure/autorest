@@ -243,7 +243,28 @@ describe("ConfigurationManager", () => {
       expect(output["namespace"]).toEqual("FooBarOverride.Client");
     });
 
-    it("interpolate from the last block", async () => {
+    it("interpolate from previous block", async () => {
+      manager.addConfigFile({
+        type: "file",
+        fullPath: "/dev/path/readme.md",
+        configs: [
+          {
+            config: {
+              name: "FooBar",
+            },
+          },
+          {
+            config: {
+              namespace: "$(name).Client",
+            },
+          },
+        ],
+      });
+      const output = await manager.resolveConfig();
+      expect(output["namespace"]).toEqual("FooBar.Client");
+    });
+
+    it("interpolate with value from same block overriding the last block value", async () => {
       manager.addConfigFile({
         type: "file",
         fullPath: "/dev/path/readme.md",
