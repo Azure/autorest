@@ -97,7 +97,7 @@ export function resolveRValue(
         const keys = Object.getOwnPropertyNames(lowerPriority);
         const macroKeyLocation = keys.indexOf(macroKey);
         if (macroKeyLocation > -1) {
-          if (macroKeyLocation < keys.indexOf(propertyName) + 1000) {
+          if (macroKeyLocation < keys.indexOf(propertyName)) {
             // the macroKey is in the overrides, and it precedes the propertyName itself
             return resolveRValue(lowerPriority[macroKey], macroKey, higherPriority, lowerPriority, jsAware - 1);
           }
