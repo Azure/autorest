@@ -1,6 +1,6 @@
 {
   "name": "@autorest/core",
-  "version": "3.4.1",
+  "version": "3.4.2",
   "description": "AutoRest core module2",
   "engines": {
     "node": ">=10.13.0"
@@ -39,8 +39,8 @@
   },
   "typings": "./dist/exports.d.ts",
   "devDependencies": {
-    "@autorest/common": "~1.1.3",
-    "@autorest/configuration": "~1.3.0",
+    "@autorest/common": "~1.1.4",
+    "@autorest/configuration": "~1.3.1",
     "@autorest/schemas": "~1.1.2",
     "@autorest/test-utils": "~0.2.2",
     "@azure-tools/async-io": "~3.0.0",
