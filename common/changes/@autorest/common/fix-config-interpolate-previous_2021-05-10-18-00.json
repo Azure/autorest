@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/common",
+      "comment": "**Fix** Keep order of property when merging to allow interpolation from same file",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/common",
+  "email": "tiguerin@microsoft.com"
+}
