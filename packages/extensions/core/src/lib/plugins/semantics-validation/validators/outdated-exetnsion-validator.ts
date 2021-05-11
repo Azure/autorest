@@ -12,7 +12,7 @@ export function validateOutdatedExtensions(spec: oai3.Model): SemanticError[] {
     errors.push({
       level: "warn",
       code: SemanticErrorCodes.OutdatedExtension,
-      message: `x-ms-code-generation-settings; is not supported in Autorest V3. It will just be ignored.`,
+      message: `Extension 'x-ms-code-generation-settings' is not supported in Autorest V3. It will just be ignored.`,
       path: ["info", "x-ms-code-generation-settings"],
       params: {},
     });
