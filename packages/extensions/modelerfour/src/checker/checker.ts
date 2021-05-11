@@ -1,20 +1,7 @@
-import {
-  CodeModel,
-  Schema,
-  ObjectSchema,
-  isObjectSchema,
-  SchemaType,
-  Property,
-  ParameterLocation,
-  Operation,
-  Parameter,
-  VirtualParameter,
-  getAllProperties,
-  ImplementationLocation,
-  DictionarySchema,
-} from "@autorest/codemodel";
+import { CodeModel, Schema } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
-import { values, items, length, Dictionary, refCount, clone } from "@azure-tools/linq";
+import { values, Dictionary } from "@azure-tools/linq";
+import { filter, groupBy, pickBy } from "lodash";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
 
 export class Checker {
@@ -32,19 +19,24 @@ export class Checker {
   }
 
   checkOperationGroups() {
-    for (const dupe of values(this.codeModel.operationGroups)
-      .select((each) => each.language.default.name)
-      .duplicates()) {
-      this.session.error(`Duplicate Operation group '${dupe}' detected .`, []);
+    const duplicates = findDuplicates(this.codeModel.operationGroups, (x) => x.language.default.name);
+    for (const [dupe] of Object.entries(duplicates)) {
+      this.session.error(`Duplicate Operation group '${dupe}' detected .`, ["DuplicateOperationGroup"]);
     }
   }
 
   checkOperations() {
     for (const group of this.codeModel.operationGroups) {
-      for (const dupe of values(group.operations)
-        .select((each) => each.language.default.name)
-        .duplicates()) {
-        this.session.error(`Duplicate Operation '${dupe}' detected.`, []);
+      const duplicates = findDuplicates(group.operations, (x) => x.language.default.name);
+      for (const [dupe, operations] of Object.entries(duplicates)) {
+        const paths = operations
+          .map((x) => x.requests?.[0].protocol.http?.path)
+          .map((x) => `  - ${x}`)
+          .join("\n");
+        this.session.error(
+          `Duplicate Operation '${group.language.default.name}' > '${dupe}' detected. Using the following paths:\n${paths}`,
+          ["DuplicateOperation"],
+        );
       }
     }
   }
@@ -82,4 +74,9 @@ export class Checker {
     }
     return this.codeModel;
   }
+}
+
+function findDuplicates<T>(items: T[], groupByFn: (item: T) => string): Record<string, T[]> {
+  const grouped = groupBy(items, groupByFn);
+  return pickBy(grouped, (x) => x.length > 1);
 }
