@@ -66,11 +66,13 @@ languages:
       - --use:@autorest/modelerfour@4.18.4
       - --use:@autorest/python@5.7.0
       - --modelerfour.treat-type-object-as-anything
+      - --modelerfour.allow-operations-with-no-success
     newArgs:
       - --version:../packages/extensions/core
       - --use:../packages/extensions/modelerfour
       - --use:@autorest/python@5.7.0
       - --modelerfour.treat-type-object-as-anything
+      - --modelerfour.allow-operations-with-no-success
 
   - language: typescript
     outputPath: ./output/typescript
@@ -79,6 +81,7 @@ languages:
       - --version:3.3.2
       - --use:@autorest/modelerfour@4.18.4
       - --modelerfour.treat-type-object-as-anything
+        - --modelerfour.allow-operations-with-no-success
       - --package-name:test-package
       - --title:TestClient
       - --use:@autorest/typescript@6.0.0-alpha.20210415.6
@@ -87,6 +90,7 @@ languages:
       - --version:../packages/extensions/core
       - --use:../packages/extensions/modelerfour
       - --modelerfour.treat-type-object-as-anything
+      - --modelerfour.allow-operations-with-no-success
       - --package-name:test-package
       - --title:TestClient
       - --use:@autorest/typescript@6.0.0-alpha.20210415.6

@@ -94,7 +94,10 @@ export class Checker {
       this.checkDuplicateOperationGroups();
 
       this.checkDuplicateOperations();
-      this.checkNoSucessOperations();
+
+      if (!this.options["allow-operations-with-no-success"]) {
+        this.checkNoSucessOperations();
+      }
 
       this.checkSchemas();
     }
