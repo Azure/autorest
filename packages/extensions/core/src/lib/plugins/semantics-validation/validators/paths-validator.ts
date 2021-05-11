@@ -65,6 +65,7 @@ function findPathParameter(
 
 function createPathParameterEmptyError(uri: string): SemanticError {
   return {
+    level: "error",
     code: SemanticErrorCodes.PathParameterEmtpy,
     message: `A path parameter in uri ${uri} is empty.`,
     params: { uri },
@@ -75,6 +76,7 @@ function createPathParameterEmptyError(uri: string): SemanticError {
 function createPathParameterMissingDefinitionError(uri: string, paramName: string, methods: string[]): SemanticError {
   const missingStr = methods.map((str) => `'${str}'`).join(", ");
   return {
+    level: "error",
     code: SemanticErrorCodes.PathParameterMissingDefinition,
     message: `Path parameter '${paramName}' referenced in path '${uri}' needs to be defined in every operation at either the path or operation level. (Missing in ${missingStr})`,
     params: { paramName, uri, methods },
