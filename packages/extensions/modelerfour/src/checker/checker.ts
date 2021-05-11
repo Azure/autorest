@@ -1,7 +1,7 @@
 import { CodeModel, Schema } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
 import { values, Dictionary } from "@azure-tools/linq";
-import { filter, groupBy, pickBy } from "lodash";
+import { groupBy, pickBy } from "lodash";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
 
 export class Checker {
