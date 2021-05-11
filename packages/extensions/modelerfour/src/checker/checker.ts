@@ -1,7 +1,6 @@
-import { CodeModel, Schema } from "@autorest/codemodel";
+import { CodeModel } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
-import { values, Dictionary } from "@azure-tools/linq";
-import { groupBy, pickBy } from "lodash";
+import { flatMap, groupBy, pickBy } from "lodash";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
 
 export class Checker {
@@ -34,7 +33,7 @@ export class Checker {
           .map((x) => `  - ${x}`)
           .join("\n");
         this.session.error(
-          `Duplicate Operation '${group.language.default.name}' > '${dupe}' detected. Using the following paths:\n${paths}`,
+          `Duplicate Operation '${group.language.default.name}' > '${dupe}' detected(This is most likely due to 2 operation using the same 'operationId' or 'tags'). Duplicates have those paths:\n${paths}`,
           ["DuplicateOperation"],
         );
       }
@@ -42,21 +41,24 @@ export class Checker {
   }
 
   checkSchemas() {
-    const allSchemas = values(<Dictionary<Array<Schema>>>(<any>this.codeModel.schemas))
-      .selectMany((schemas) => (Array.isArray(schemas) ? values(schemas) : []))
-      .toArray();
+    const allSchemas = flatMap(Object.values(this.codeModel.schemas), (schemas) =>
+      Array.isArray(schemas) ? schemas : [],
+    );
 
-    for (const each of values(allSchemas).where((each) => !each.language.default.name)) {
-      this.session.warning(`Schema Missing Name '${JSON.stringify(each)}'.`, []);
+    for (const name of allSchemas.filter((x) => !x.language.default.name)) {
+      this.session.warning(`Schema Missing Name '${JSON.stringify(name)}'.`, []);
     }
 
-    const types = values(<Array<Schema>>this.codeModel.schemas.objects)
-      .concat(values(this.codeModel.schemas.groups))
-      .concat(values(this.codeModel.schemas.choices))
-      .concat(values(this.codeModel.schemas.sealedChoices))
-      .toArray();
-    for (const dupe of values(types).duplicates((each) => each.language.default.name)) {
-      this.session.error(`Duplicate object schemas with '${dupe.language.default.name}' name  detected.`, []);
+    const types = [
+      ...(this.codeModel.schemas.objects ?? []),
+      ...(this.codeModel.schemas.groups ?? []),
+      ...(this.codeModel.schemas.choices ?? []),
+      ...(this.codeModel.schemas.sealedChoices ?? []),
+    ];
+
+    const duplicates = findDuplicates(types, (each) => each.language.default.name);
+    for (const name of Object.keys(duplicates)) {
+      this.session.error(`Duplicate object schemas with '${name}' name  detected.`, []);
     }
 
     /* for (const dupe of values(this.codeModel.schemas.numbers).select(each => each.type).duplicates()) {
