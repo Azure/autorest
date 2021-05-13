@@ -182,11 +182,7 @@ export function mergeOverwriteOrAppend(
   // object nodes - iterate all members
   const result: any = {};
 
-  const keys = [
-    ...new Set(Object.getOwnPropertyNames(higherPriority).concat(Object.getOwnPropertyNames(lowerPriority))),
-  ];
-  // keys = keys.filter((v, i) => { const idx = keys.indexOf(v); return idx === -1 || idx >= i; }); // distinct
-
+  const keys = getKeysInOrder(higherPriority, lowerPriority, computedOptions);
   for (const key of keys) {
     const subpath = path.concat(key);
 
@@ -211,6 +207,23 @@ export function mergeOverwriteOrAppend(
     );
   }
   return result;
+}
+
+/**
+ *
+ * @param higherPriority Higher priority object
+ * @param lowerPriority Lower priority object
+ * @param options Merge options.
+ * @returns List of unique keys used in both object in the order defined in the options.
+ */
+function getKeysInOrder(higherPriority: any, lowerPriority: any, options: MergeOptions): string[] {
+  const lowPriKeys = Object.getOwnPropertyNames(lowerPriority);
+  const highPriKeys = Object.getOwnPropertyNames(higherPriority);
+  return [
+    ...new Set(
+      options.arrayMergeStrategy === "low-pri-first" ? lowPriKeys.concat(highPriKeys) : highPriKeys.concat(lowPriKeys),
+    ),
+  ];
 }
 
 function mergeArray(

@@ -32,13 +32,12 @@ import { createApiVersionParameterHandlerPlugin } from "./version-param-handler"
 import { createJsonToYamlPlugin, createYamlToJsonPlugin } from "./yaml-and-json";
 import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from "./schema-validation";
 import { createOpenAPIStatsCollectorPlugin } from "./openapi-stats-collector";
-import { PipelinePlugin } from "../pipeline/common";
 import { QuickDataSource } from "@azure-tools/datastore";
 import { createCSharpReflectApiVersionPlugin } from "./metadata-generation";
 import { createComponentModifierPlugin } from "./component-modifier";
 import { createSemanticValidationPlugin } from "./semantics-validation";
 
-export const PLUGIN_MAP: { [name: string]: PipelinePlugin } = {
+export const CORE_PLUGIN_MAP = {
   "help": createHelpPlugin(),
   "identity": createIdentityPlugin(),
   "null": createNullPlugin(),

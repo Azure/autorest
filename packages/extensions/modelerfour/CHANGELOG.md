@@ -1,6 +1,34 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Tue, 13 Apr 2021 21:32:54 GMT and should not be manually modified.
+This log was last generated on Tue, 04 May 2021 18:18:45 GMT and should not be manually modified.
+
+## 4.19.1
+Tue, 04 May 2021 18:18:45 GMT
+
+### Patches
+
+- **Fix** Using multiple security layers(`AND`) now produce warning instead of error.
+
+## 4.19.0
+Tue, 27 Apr 2021 17:48:43 GMT
+
+### Minor changes
+
+- **Added** Distinction between anything and anyobject
+- **Added** Support for openapi deprecation
+- **Added** Support known set of security scheme
+
+### Patches
+
+- **Perf** Major performance improvment to duplicate schema finder
+
+## 4.18.4
+Mon, 19 Apr 2021 21:06:54 GMT
+
+### Patches
+
+- **Fix** Enum defined just with allOf of other enum
+- **Typo** Ambigious -> Ambiguous 
 
 ## 4.18.3
 Tue, 13 Apr 2021 21:32:54 GMT

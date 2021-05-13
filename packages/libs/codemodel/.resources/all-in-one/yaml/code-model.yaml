@@ -3,6 +3,19 @@ description: the model that contains all the information required to generate a 
 $schema: http://json-schema.org/draft-07/schema#
 additionalProperties: false
 definitions:
+  AADTokenSecurityScheme:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/SecurityScheme'
+    properties:
+      scopes:
+        type: array
+        items:
+          type: string
+    required:
+      - scopes
+      - type
   APIKeySecurityScheme:
     type: object
     additionalProperties: false
@@ -29,6 +42,7 @@ definitions:
     description: all schema types
     enum:
       - any
+      - any-object
       - array
       - binary
       - boolean
@@ -58,6 +72,15 @@ definitions:
       - uri
       - uuid
       - xor
+  AnyObjectSchema:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/Schema'
+    required:
+      - language
+      - protocol
+      - type
   AnySchema:
     type: object
     additionalProperties: false
@@ -147,6 +170,17 @@ definitions:
       - authorizationUrl
       - scopes
       - tokenUrl
+  AzureKeySecurityScheme:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/SecurityScheme'
+    properties:
+      headerName:
+        type: string
+    required:
+      - headerName
+      - type
   BearerHTTPSecurityScheme:
     type: object
     additionalProperties: false
@@ -395,7 +429,8 @@ definitions:
       defaultValue:
         description: If the value isn't sent on the wire, the service will assume this
       deprecated:
-        description: deprecation information -- ie, when this aspect doesn't apply and why
+        description: Represent the deprecation information if api is deprecated.
+        default: undefined
         $ref: '#/definitions/Deprecation'
       example:
         description: example information
@@ -509,20 +544,12 @@ definitions:
       - default
   Deprecation:
     type: object
-    description: represents  deprecation information for a given aspect
+    description: Represent information about a deprecation
     additionalProperties: false
     properties:
-      apiVersions:
-        type: array
-        description: the api versions that this deprecation is applicable to.
-        items:
-          $ref: '#/definitions/ApiVersion'
-      message:
+      reason:
         type: string
-        description: the reason why this aspect
-    required:
-      - apiVersions
-      - message
+        description: Reason why this was deprecated.
   Dictionary<ApiVersion>:
     type: object
     additionalProperties:
@@ -1257,7 +1284,8 @@ definitions:
         items:
           $ref: '#/definitions/ApiVersion'
       deprecated:
-        description: deprecation information -- ie, when this aspect doesn't apply and why
+        description: Represent the deprecation information if api is deprecated.
+        default: undefined
         $ref: '#/definitions/Deprecation'
       exceptions:
         type: array
@@ -1541,7 +1569,8 @@ definitions:
       defaultValue:
         description: If the value isn't sent on the wire, the service will assume this
       deprecated:
-        description: deprecation information -- ie, when this aspect doesn't apply and why
+        description: Represent the deprecation information if api is deprecated.
+        default: undefined
         $ref: '#/definitions/Deprecation'
       example:
         description: example information
@@ -1598,6 +1627,7 @@ definitions:
     description: possible schema types that indicate the type of schema.
     enum:
       - any
+      - any-object
       - array
       - binary
       - boolean
@@ -1651,6 +1681,10 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/AnySchema'
+      anyObjects:
+        type: array
+        items:
+          $ref: '#/definitions/AnyObjectSchema'
       arrays:
         type: array
         description: a collection of items
@@ -1853,19 +1887,25 @@ definitions:
       authenticationRequired:
         type: boolean
         description: indicates that the API surface requires authentication
+      schemes:
+        type: array
+        items:
+          $ref: '#/definitions/SecurityScheme'
     required:
       - authenticationRequired
+      - schemes
   SecurityRequirement:
     type: object
     description: common ways of serializing simple parameters
     additionalProperties: false
   SecurityScheme:
-    anyOf:
-      - $ref: '#/definitions/BearerHTTPSecurityScheme'
-      - $ref: '#/definitions/NonBearerHTTPSecurityScheme'
-      - $ref: '#/definitions/OAuth2SecurityScheme'
-      - $ref: '#/definitions/APIKeySecurityScheme'
-      - $ref: '#/definitions/OpenIdConnectSecurityScheme'
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+    required:
+      - type
   SecurityType:
     type: string
     enum:
@@ -2065,7 +2105,8 @@ definitions:
       clientDefaultValue:
         description: the value that the client should provide if the consumer doesn't provide one
       deprecated:
-        description: deprecation information -- ie, when this aspect doesn't apply and why
+        description: Represent the deprecation information if api is deprecated.
+        default: undefined
         $ref: '#/definitions/Deprecation'
       externalDocs:
         description: External Documentation Links

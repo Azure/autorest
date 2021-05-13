@@ -43,7 +43,10 @@ export function createSemanticValidationPlugin(): PipelinePlugin {
         for (const error of errors) {
           logValidationError(context, file, error);
         }
-        throw new Error("Semantic validation failed. There was some errors");
+        // IF there was at least one error throw.
+        if (errors.find((x) => x.level === "error")) {
+          throw new Error("Semantic validation failed. There was some errors");
+        }
       }
     }
 
@@ -57,11 +60,16 @@ export function logValidationError(context: AutorestContext, fileIn: DataHandle,
     const formattedValue = util.inspect(value, { colors: true });
     messageLines.push(`  **${name}**: ${formattedValue}`);
   }
-
-  context.trackError({
+  const log = {
     code: error.code,
     message: messageLines.join("\n"),
     source: [{ document: fileIn.key, position: { path: error.path } }],
     details: error,
-  });
+  };
+
+  if (error.level === "error") {
+    context.trackError(log);
+  } else {
+    context.trackWarning(log);
+  }
 }

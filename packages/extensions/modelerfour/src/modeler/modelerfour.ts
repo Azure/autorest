@@ -66,11 +66,11 @@ import {
   ConstantValue,
   HttpHeader,
   ChoiceValue,
-  Language,
   Request,
   OperationGroup,
   TimeSchema,
   HttpMultipartRequest,
+  AnyObjectSchema,
 } from "@autorest/codemodel";
 import { Session, Channel } from "@autorest/extension-base";
 import { Interpretations, XMSEnum } from "./interpretations";
@@ -79,6 +79,7 @@ import { ModelerFourOptions } from "./modelerfour-options";
 import { isContentTypeParameterDefined } from "./utils";
 import { BodyProcessor } from "./body-processor";
 import { isSchemaBinary } from "./schema-utils";
+import { SecurityProcessor } from "./security-processor";
 
 /** adds only if the item is not in the collection already
  *
@@ -152,6 +153,7 @@ export class ModelerFour {
   private options: ModelerFourOptions = {};
   private uniqueNames: Dictionary<any> = {};
   private bodyProcessor: BodyProcessor;
+  private securityProcessor: SecurityProcessor;
 
   constructor(protected session: Session<oai3>) {
     this.input = session.model; // shadow(session.model, filename);
@@ -174,6 +176,7 @@ export class ModelerFour {
     });
     this.interpret = new Interpretations(session);
     this.bodyProcessor = new BodyProcessor(session);
+    this.securityProcessor = new SecurityProcessor(session, this.interpret);
 
     this.preprocessOperations();
   }
@@ -246,7 +249,16 @@ export class ModelerFour {
   }
 
   async init() {
+    await this.securityProcessor.init();
+
     this.options = await this.session.getValue("modelerfour", {});
+
+    if (this.options["treat-type-object-as-anything"]) {
+      this.session.warning(
+        "modelerfour.treat-type-object-as-anything options is a temporary flag. It WILL be removed in the future.",
+        ["UsingTemporaryFlag"],
+      );
+    }
     // grab override-client-name
     const newTitle = await this.session.getValue("override-client-name", "");
     if (newTitle) {
@@ -579,9 +591,20 @@ export class ModelerFour {
       (this._booleanSchema = this.codeModel.schemas.add(new BooleanSchema("bool", "simple boolean")))
     );
   }
-  _anySchema?: AnySchema;
-  get anySchema(): AnySchema {
-    return this._anySchema || (this._anySchema = this.codeModel.schemas.add(new AnySchema("Any object")));
+
+  private _anySchema?: AnySchema;
+  public get anySchema(): AnySchema {
+    return this._anySchema ?? (this._anySchema = this.codeModel.schemas.add(new AnySchema("Anything")));
+  }
+
+  private _anyObjectSchema?: AnyObjectSchema;
+  public get anyObjectSchema(): AnySchema {
+    if (this.options["treat-type-object-as-anything"]) {
+      return this.anySchema;
+    }
+    return (
+      this._anyObjectSchema ?? (this._anyObjectSchema = this.codeModel.schemas.add(new AnyObjectSchema("Any object")))
+    );
   }
 
   getSchemaForString(schema: OpenAPI.Schema): Schema {
@@ -639,7 +662,7 @@ export class ModelerFour {
       case undefined:
         if (length(schema.enum) > 0 && values(schema.enum).all((each) => typeof each === "string")) {
           this.session.warning(
-            `The enum schema '${schema?.["x-ms-metadata"]?.name}' with an undefined type and enum values is ambigious. This has been auto-corrected to 'type:string'`,
+            `The enum schema '${schema?.["x-ms-metadata"]?.name}' with an undefined type and enum values is ambiguous. This has been auto-corrected to 'type:string'`,
             ["Modeler", "MissingType"],
             schema,
           );
@@ -764,7 +787,7 @@ export class ModelerFour {
       const eschema = this.resolve(schema.additionalProperties);
       const ei = eschema.instance;
       if (ei && this.interpret.isEmptyObject(ei)) {
-        elementSchema = this.anySchema;
+        elementSchema = this.anyObjectSchema;
       } else {
         elementNullable = (<any>schema.additionalProperties)["nullable"] || (ei && ei.nullable) || undefined;
         elementSchema = this.processSchema(eschema.name || "", <OpenAPI.Schema>eschema.instance);
@@ -866,7 +889,7 @@ export class ModelerFour {
     if (!isMoreThanObject && !hasProperties) {
       // it's an empty object?
       // this.session.warning(`Schema '${name}' is an empty object without properties or modifiers.`, ['Modeler', 'EmptyObject'], aSchema);
-      return this.anySchema;
+      return this.anyObjectSchema;
     }
 
     const dictionarySchema = dictionaryDef ? this.processDictionarySchema(name, schema) : undefined;
@@ -1028,6 +1051,7 @@ export class ModelerFour {
   }
 
   trap = new Set();
+
   processSchemaImpl(schema: OpenAPI.Schema, name: string): Schema {
     if (this.trap.has(schema)) {
       throw new Error(
@@ -1036,8 +1060,14 @@ export class ModelerFour {
     }
     this.trap.add(schema);
 
+    const parents = schema.allOf?.map((x) => this.use(x, (n, i) => this.processSchema(n, i)));
+
     // handle enums differently early
-    if (schema.enum || schema["x-ms-enum"]) {
+    if (
+      schema.enum ||
+      schema["x-ms-enum"] ||
+      parents?.find((x) => x.type === SchemaType.SealedChoice || x.type === SchemaType.Choice)
+    ) {
       return this.processChoiceSchema(name, schema);
     }
 
@@ -1066,7 +1096,7 @@ export class ModelerFour {
           this.session.warning(
             `The schema '${
               schema?.["x-ms-metadata"]?.name || name
-            }' with an undefined type and declared properties is a bit ambigious. This has been auto-corrected to 'type:object'`,
+            }' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'`,
             ["Modeler", "MissingType"],
             schema,
           );
@@ -1080,7 +1110,7 @@ export class ModelerFour {
           this.session.warning(
             `The schema '${
               schema?.["x-ms-metadata"]?.name || name
-            }' with an undefined type and additionalProperties is a bit ambigious. This has been auto-corrected to 'type:object'`,
+            }' with an undefined type and additionalProperties is a bit ambiguous. This has been auto-corrected to 'type:object'`,
             ["Modeler"],
             schema,
           );
@@ -1094,7 +1124,7 @@ export class ModelerFour {
           this.session.warning(
             `The schema '${
               schema?.["x-ms-metadata"]?.name || name
-            }' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'`,
+            }' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'`,
             ["Modeler", "MissingType"],
             schema,
           );
@@ -1610,6 +1640,7 @@ export class ModelerFour {
       new Operation(memberName, this.interpret.getDescription("", httpOperation), {
         extensions: this.interpret.getExtensionProperties(httpOperation),
         apiVersions: this.interpret.getApiVersions(pathItem),
+        deprecated: this.interpret.getDeprecation(httpOperation),
         language: {
           default: {
             summary: httpOperation.summary,
@@ -1979,6 +2010,7 @@ export class ModelerFour {
               required: parameter.required ? true : undefined,
               implementation,
               extensions: this.interpret.getExtensionProperties(parameter),
+              deprecated: this.interpret.getDeprecation(parameter),
               nullable: parameter.nullable || schema.nullable,
               protocol: {
                 http: new HttpParameter(
@@ -2280,13 +2312,7 @@ export class ModelerFour {
   }
 
   process() {
-    if (keys(this.input.components?.securitySchemes).any()) {
-      // we don't currently handle security information directly, but we can
-      // tell if there is something in there.
-      // if there is any security information, mark it auth-required true.
-      this.codeModel.security.authenticationRequired = true;
-    }
-
+    this.codeModel.security = this.securityProcessor.process(this.input);
     let priority = 0;
     for (const { key: name, value: parameter } of this.resolveDictionary(this.input.components?.parameters)) {
       if (parameter["x-ms-parameter-location"] !== "method") {

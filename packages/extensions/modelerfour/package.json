@@ -1,6 +1,6 @@
 {
   "name": "@autorest/modelerfour",
-  "version": "4.18.3",
+  "version": "4.19.1",
   "description": "AutoRest Modeler Version Four (component)",
   "directories": {
     "doc": "docs"
@@ -14,8 +14,8 @@
     "clean": "rimraf ./dist",
     "start": "node --max_old_space_size=4096 ./dist/main.js",
     "debug": "node --max_old_space_size=4096 --inspect-brk=localhost:9229 ./dist/main.js",
-    "lint:fix": "eslint  ./src --fix --ext .ts",
-    "lint": "eslint  ./src --ext .ts --max-warnings=0",
+    "lint:fix": "eslint  ./src ./test --fix --ext .ts",
+    "lint": "eslint  ./src ./test --ext .ts --max-warnings=0",
     "watch": "tsc -p ./tsconfig.build.json --watch",
     "build": "tsc -p ./tsconfig.build.json",
     "build:prod": "webpack",
@@ -39,14 +39,14 @@
   "homepage": "https://github.com/Azure/autorest.modelerfour/tree/master/modelerfour#readme",
   "readme": "https://github.com/Azure/autorest.modelerfour/tree/master/modelerfour/readme.md",
   "devDependencies": {
-    "@autorest/codemodel": "~4.14.8",
+    "@autorest/codemodel": "~4.15.0",
     "@autorest/extension-base": "~3.2.1",
     "@autorest/test-utils": "~0.2.2",
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/codegen": "~2.5.294",
-    "@azure-tools/datastore": "~4.3.0",
+    "@azure-tools/datastore": "~4.3.1",
     "@azure-tools/linq": "~3.1.0",
-    "@azure-tools/openapi": "~3.1.1",
+    "@azure-tools/openapi": "~3.1.2",
     "@azure-tools/tasks": "~3.0.0",
     "@azure-tools/uri": "~3.1.1",
     "@types/jest": "^26.0.20",

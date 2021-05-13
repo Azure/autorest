@@ -2,6 +2,18 @@
   "name": "@azure-tools/datastore",
   "entries": [
     {
+      "version": "4.3.1",
+      "tag": "@azure-tools/datastore_v4.3.1",
+      "date": "Tue, 27 Apr 2021 17:48:43 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Deprecate** json-pointer functionality as it is moved to seperate package"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.3.0",
       "tag": "@azure-tools/datastore_v4.3.0",
       "date": "Fri, 09 Apr 2021 19:53:22 GMT",

@@ -2,6 +2,26 @@
   "name": "@autorest/codemodel",
   "entries": [
     {
+      "version": "4.15.0",
+      "tag": "@autorest/codemodel_v4.15.0",
+      "date": "Tue, 27 Apr 2021 17:48:43 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Added** AnyObject schema type"
+          },
+          {
+            "comment": "**Update** Codemodel to take new security model"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "**Updated** deprecation model"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.14.8",
       "tag": "@autorest/codemodel_v4.14.8",
       "date": "Fri, 09 Apr 2021 19:53:22 GMT",

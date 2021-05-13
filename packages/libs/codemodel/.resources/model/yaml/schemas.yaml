@@ -1,5 +1,14 @@
 $schema: http://json-schema.org/draft-07/schema#
 definitions:
+  AnyObjectSchema:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: ./schemas.yaml#/definitions/Schema
+    required:
+      - language
+      - protocol
+      - type
   AnySchema:
     type: object
     additionalProperties: false
@@ -172,7 +181,8 @@ definitions:
       defaultValue:
         description: If the value isn't sent on the wire, the service will assume this
       deprecated:
-        description: deprecation information -- ie, when this aspect doesn't apply and why
+        description: Represent the deprecation information if api is deprecated.
+        default: undefined
         $ref: ./master.yaml#/definitions/Deprecation
       example:
         description: example information
@@ -452,7 +462,8 @@ definitions:
       defaultValue:
         description: If the value isn't sent on the wire, the service will assume this
       deprecated:
-        description: deprecation information -- ie, when this aspect doesn't apply and why
+        description: Represent the deprecation information if api is deprecated.
+        default: undefined
         $ref: ./master.yaml#/definitions/Deprecation
       example:
         description: example information
@@ -490,6 +501,10 @@ definitions:
         type: array
         items:
           $ref: ./schemas.yaml#/definitions/AnySchema
+      anyObjects:
+        type: array
+        items:
+          $ref: ./schemas.yaml#/definitions/AnyObjectSchema
       arrays:
         type: array
         description: a collection of items

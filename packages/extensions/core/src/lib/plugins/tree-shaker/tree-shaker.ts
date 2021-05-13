@@ -5,7 +5,6 @@ import {
   DataSink,
   DataSource,
   Node,
-  parseJsonPointer,
   Transformer,
   QuickDataSource,
   JsonPath,
@@ -17,6 +16,7 @@ import { values, length } from "@azure-tools/linq";
 import { createHash } from "crypto";
 import { SchemaStats } from "../../stats";
 import { includeXDashProperties } from "@azure-tools/openapi";
+import { parseJsonPointer } from "@azure-tools/json";
 
 /**
  * parses a json pointer, and inserts a string into the returned array
@@ -510,11 +510,13 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
   visitProperties(targetParent: AnyObject, originalNodes: Iterable<Node>, requiredProperties: Array<string>) {
     for (const { value, key, pointer, children } of originalNodes) {
-      // if the property has a schema that type 'boolean', 'integer', 'number' then we'll just leave it inline
-      // we will leave strings inlined only if they ask for simple-tree-shake. Also, if it's a string + enum + required + single val enum
+      // if the property has a schema that type 'boolean' then we'll just leave it inline
+      // we will leave strings, number and integer inlined only if they ask for simple-tree-shake. Also, if it's a string + enum + required + single val enum
       // reason: old modeler does not handle non-inlined string properties.
       switch (value.type) {
         case "string":
+        case "integer":
+        case "number":
           if (this.isSimpleTreeShake) {
             this.clone(targetParent, key, pointer, value);
           } else {
@@ -533,8 +535,6 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           }
           break;
         case "boolean":
-        case "integer":
-        case "number":
           this.clone(targetParent, key, pointer, value);
           break;
         case "array":

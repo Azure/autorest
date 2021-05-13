@@ -15,7 +15,7 @@ import { ConstantSchema } from "./schemas/constant";
 import { OrSchema, XorSchema } from "./schemas/relationship";
 import { BinarySchema } from "./schemas/binary";
 import { finished } from "stream";
-import { AnySchema } from "./schemas/any";
+import { AnyObjectSchema, AnySchema } from "./schemas/any";
 
 export { SchemaUsage, SchemaContext } from "./schemas/usage";
 
@@ -119,15 +119,24 @@ export interface Schemas {
   groups?: Array<GroupSchema>;
 
   any?: Array<AnySchema>;
+
+  anyObjects?: AnyObjectSchema[];
 }
 
 export class Schemas {
   add<T extends Schema>(schema: T): T {
     if (schema instanceof AnySchema) {
-      if (!(this.any && this.any[0])) {
+      if (!this.any?.[0]) {
         this.any = [schema];
       }
-      return <T>this.any[0];
+      return this.any[0] as T;
+    }
+
+    if (schema instanceof AnyObjectSchema) {
+      if (!this.anyObjects?.[0]) {
+        this.anyObjects = [schema];
+      }
+      return this.anyObjects[0] as T;
     }
 
     let group = `${camelCase(schema.type)}s`.replace(/rys$/g, "ries");

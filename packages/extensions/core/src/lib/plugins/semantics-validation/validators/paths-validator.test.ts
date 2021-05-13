@@ -28,6 +28,7 @@ describe("Semantic Validation > Paths", () => {
 
     expect(errors).toEqual([
       {
+        level: "error",
         code: SemanticErrorCodes.PathParameterEmtpy,
         message: "A path parameter in uri /my/{}/empty/param is empty.",
         params: { uri: "/my/{}/empty/param" },
@@ -50,6 +51,7 @@ describe("Semantic Validation > Paths", () => {
 
     expect(errors).toEqual([
       {
+        level: "error",
         code: SemanticErrorCodes.PathParameterMissingDefinition,
         message:
           "Path parameter 'myMissingParam' referenced in path '/my/{myMissingParam}/foo' needs to be defined in every operation at either the path or operation level. (Missing in 'get')",
@@ -81,6 +83,7 @@ describe("Semantic Validation > Paths", () => {
 
     expect(errors).toEqual([
       {
+        level: "error",
         code: SemanticErrorCodes.PathParameterMissingDefinition,
         message:
           "Path parameter 'myMissingParam' referenced in path '/my/{myMissingParam}/foo' needs to be defined in every operation at either the path or operation level. (Missing in 'post', 'put')",

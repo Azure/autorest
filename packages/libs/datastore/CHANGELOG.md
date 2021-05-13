@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/datastore
 
-This log was last generated on Fri, 09 Apr 2021 19:53:22 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Apr 2021 17:48:43 GMT and should not be manually modified.
+
+## 4.3.1
+Tue, 27 Apr 2021 17:48:43 GMT
+
+### Patches
+
+- **Deprecate** json-pointer functionality as it is moved to seperate package
 
 ## 4.3.0
 Fri, 09 Apr 2021 19:53:22 GMT

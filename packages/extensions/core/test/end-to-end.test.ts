@@ -5,7 +5,7 @@ import { RealFileSystem } from "@azure-tools/datastore";
 import { Channel, Message } from "../src/lib/message";
 import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
 import { AppRoot } from "../src/lib/constants";
-import { AutorestRawConfiguration } from "@autorest/configuration";
+import { AutorestConfiguration } from "@autorest/configuration";
 
 describe("EndToEnd", () => {
   it("network full game", async () => {
@@ -61,7 +61,7 @@ describe("EndToEnd", () => {
     if (!success) {
       // eslint-disable-next-line no-console
       console.log("Messages", messages);
-      fail("Autorest didn't complete with success.");
+      throw new Error("Autorest didn't complete with success.");
     }
 
     expect(success).toBe(true);
@@ -75,11 +75,11 @@ describe("EndToEnd", () => {
     // PumpMessagesToConsole(autoRest);
 
     const context = await autoRest.view;
-    assert.strictEqual(context.config["shouldwork" as keyof AutorestRawConfiguration], true);
+    assert.strictEqual(context.config["shouldwork" as keyof AutorestConfiguration], true);
   });
 
   // todo: skipping because testing is broken?
-  xit("complicated configuration scenario", async () => {
+  it.skip("complicated configuration scenario", async () => {
     const autoRest = new AutoRest(
       new RealFileSystem(),
       ResolveUri(CreateFolderUri(AppRoot), "test/resources/literate-example/readme-complicated.md"),
@@ -110,7 +110,7 @@ describe("EndToEnd", () => {
   // testing end-to-end for non-arm type validation rules. Since all validation rules are currently defaulted to
   // ARM, non-ARM documents should show 0 validation messages
   // TODO: fix this test when validation rules are properly categorized
-  xit("non-arm type spec testing", async () => {
+  it.skip("non-arm type spec testing", async () => {
     const autoRest = new AutoRest(
       new RealFileSystem(),
       ResolveUri(CreateFolderUri(AppRoot), "test/resources/validation-options/readme.md"),
@@ -133,7 +133,7 @@ describe("EndToEnd", () => {
   });
 
   // todo: skipping because testing is broken?
-  xit("arm type spec testing", async () => {
+  it.skip("arm type spec testing", async () => {
     const autoRest = new AutoRest(
       new RealFileSystem(),
       ResolveUri(CreateFolderUri(AppRoot), "test/resources/validation-options/readme.md"),

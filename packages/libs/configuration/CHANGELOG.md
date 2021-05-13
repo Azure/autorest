@@ -1,6 +1,25 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Fri, 09 Apr 2021 19:53:22 GMT and should not be manually modified.
+This log was last generated on Mon, 10 May 2021 18:01:37 GMT and should not be manually modified.
+
+## 1.3.1
+Mon, 10 May 2021 18:01:37 GMT
+
+### Patches
+
+- **Fix** Keep order of property when merging to allow interpolation from same file
+
+## 1.3.0
+Tue, 27 Apr 2021 17:48:43 GMT
+
+### Minor changes
+
+- **Added** CLI argument parsing functionality(Moved from core and autorest)
+- **Addded** configuration validator for known config properties
+
+### Patches
+
+- **Bump** @autorest/java default version to 4.0.24
 
 ## 1.2.3
 Fri, 09 Apr 2021 19:53:22 GMT

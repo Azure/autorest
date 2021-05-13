@@ -1,6 +1,6 @@
 {
   "name": "@autorest/codemodel",
-  "version": "4.14.8",
+  "version": "4.15.0",
   "description": "AutoRest code model library",
   "directories": {
     "doc": "docs"
@@ -18,9 +18,7 @@
     "prepare": "npm run build",
     "test": "echo codemodel: No Tests.",
     "test:ci": "echo codemodel: No Tests.",
-    "clean": "ver > nul 2>&1 nul && npm run --silent clean-cmd || npm run --silent clean-bash",
-    "clean-cmd": "if exist dist rmdir /s /q dist && exit 0 || exit 0 ",
-    "clean-bash": "rm nul && rm -rf dist && exit 0 || exit 0"
+    "clean": "rimraf ./dist"
   },
   "repository": {
     "type": "git",
@@ -48,6 +46,7 @@
     "eslint-plugin-unicorn": "~27.0.0",
     "eslint": "^7.17.0",
     "glob": "~7.1.4",
+    "rimraf": "^3.0.2",
     "ts-morph": "~4.0.1",
     "typescript-json-schema": "~0.40.0",
     "typescript": "~4.2.3"

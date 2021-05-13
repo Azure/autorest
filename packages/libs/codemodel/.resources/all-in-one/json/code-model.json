@@ -31,27 +31,16 @@
       }
     },
     "Deprecation": {
-      "description": "represents  deprecation information for a given aspect",
+      "description": "Represent information about a deprecation",
       "type": "object",
       "properties": {
-        "message": {
-          "description": "the reason why this aspect",
+        "reason": {
+          "description": "Reason why this was deprecated.",
           "type": "string"
-        },
-        "apiVersions": {
-          "description": "the api versions that this deprecation is applicable to.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiVersion"
-          }
         }
       },
       "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "apiVersions",
-        "message"
-      ]
+      "additionalProperties": false
     },
     "Extensions": {
       "description": "A dictionary of open-ended 'x-*' extensions propogated from the original source document.",
@@ -103,7 +92,8 @@
         },
         "deprecated": {
           "$ref": "#/definitions/Deprecation",
-          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+          "description": "Represent the deprecation information if api is deprecated.",
+          "default": "undefined"
         },
         "origin": {
           "description": "where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')",
@@ -286,6 +276,7 @@
       "description": "possible schema types that indicate the type of schema.",
       "enum": [
         "any",
+        "any-object",
         "array",
         "binary",
         "boolean",
@@ -381,6 +372,7 @@
       "description": "all schema types",
       "enum": [
         "any",
+        "any-object",
         "array",
         "binary",
         "boolean",
@@ -949,7 +941,8 @@
         },
         "deprecated": {
           "$ref": "#/definitions/Deprecation",
-          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+          "description": "Represent the deprecation information if api is deprecated.",
+          "default": "undefined"
         },
         "origin": {
           "description": "where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')",
@@ -1676,6 +1669,22 @@
         }
       ]
     },
+    "AnyObjectSchema": {
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Schema"
+        }
+      ]
+    },
     "Schemas": {
       "description": "the full set of schemas for a given service, categorized into convenient collections",
       "type": "object",
@@ -1880,6 +1889,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AnySchema"
+          }
+        },
+        "anyObjects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnyObjectSchema"
           }
         }
       },
@@ -2096,7 +2111,8 @@
         },
         "deprecated": {
           "$ref": "#/definitions/Deprecation",
-          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+          "description": "Represent the deprecation information if api is deprecated.",
+          "default": "undefined"
         },
         "origin": {
           "description": "where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')",
@@ -2191,12 +2207,73 @@
         "authenticationRequired": {
           "description": "indicates that the API surface requires authentication",
           "type": "boolean"
+        },
+        "schemes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityScheme"
+          }
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "authenticationRequired"
+        "authenticationRequired",
+        "schemes"
+      ]
+    },
+    "SecurityScheme": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ]
+    },
+    "AADTokenSecurityScheme": {
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "scopes",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecurityScheme"
+        }
+      ]
+    },
+    "AzureKeySecurityScheme": {
+      "type": "object",
+      "properties": {
+        "headerName": {
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "headerName",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecurityScheme"
+        }
       ]
     },
     "Example": {
@@ -2570,25 +2647,6 @@
         },
         {
           "$ref": "#/definitions/NonBearerHTTPSecurityScheme"
-        }
-      ]
-    },
-    "SecurityScheme": {
-      "anyOf": [
-        {
-          "$ref": "#/definitions/BearerHTTPSecurityScheme"
-        },
-        {
-          "$ref": "#/definitions/NonBearerHTTPSecurityScheme"
-        },
-        {
-          "$ref": "#/definitions/OAuth2SecurityScheme"
-        },
-        {
-          "$ref": "#/definitions/APIKeySecurityScheme"
-        },
-        {
-          "$ref": "#/definitions/OpenIdConnectSecurityScheme"
         }
       ]
     },
@@ -3056,7 +3114,8 @@
         },
         "deprecated": {
           "$ref": "#/definitions/Deprecation",
-          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+          "description": "Represent the deprecation information if api is deprecated.",
+          "default": "undefined"
         },
         "origin": {
           "description": "where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')",

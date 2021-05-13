@@ -2,6 +2,18 @@
   "name": "@azure-tools/oai2-to-oai3",
   "entries": [
     {
+      "version": "4.2.281",
+      "tag": "@azure-tools/oai2-to-oai3_v4.2.281",
+      "date": "Fri, 16 Apr 2021 15:18:54 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Stop merging x-ms-paths into paths"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.2.280",
       "tag": "@azure-tools/oai2-to-oai3_v4.2.280",
       "date": "Fri, 09 Apr 2021 19:53:22 GMT",

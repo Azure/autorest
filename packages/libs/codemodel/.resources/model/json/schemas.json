@@ -35,7 +35,8 @@
         },
         "deprecated": {
           "$ref": "./master.json#/definitions/Deprecation",
-          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+          "description": "Represent the deprecation information if api is deprecated.",
+          "default": "undefined"
         },
         "origin": {
           "description": "where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')",
@@ -809,6 +810,22 @@
         }
       ]
     },
+    "AnyObjectSchema": {
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "./schemas.json#/definitions/Schema"
+        }
+      ]
+    },
     "Schemas": {
       "description": "the full set of schemas for a given service, categorized into convenient collections",
       "type": "object",
@@ -1014,6 +1031,12 @@
           "items": {
             "$ref": "./schemas.json#/definitions/AnySchema"
           }
+        },
+        "anyObjects": {
+          "type": "array",
+          "items": {
+            "$ref": "./schemas.json#/definitions/AnyObjectSchema"
+          }
         }
       },
       "defaultProperties": [],
@@ -1081,7 +1104,8 @@
         },
         "deprecated": {
           "$ref": "./master.json#/definitions/Deprecation",
-          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+          "description": "Represent the deprecation information if api is deprecated.",
+          "default": "undefined"
         },
         "origin": {
           "description": "where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')",

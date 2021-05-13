@@ -113,7 +113,7 @@ directive:
 
 ### Rename property
 
-Rename the property on a model, to be used with `where-model`
+Rename the property on a model(Rename the actual property name and doesn't change `x-ms-client-name`.), to be used with `where-model`
 
 ```yaml
 directive:

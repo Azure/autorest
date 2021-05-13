@@ -88,10 +88,7 @@
       "required": ["version", "title"],
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -146,10 +143,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -170,10 +164,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -182,10 +173,7 @@
       "type": "object",
       "description": "Relative paths to the individual endpoints. They must be relative to the 'basePath'.",
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         },
         "^/": {
@@ -233,10 +221,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -254,10 +239,7 @@
       "required": ["responses"],
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -336,10 +318,7 @@
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -382,10 +361,7 @@
         "^([0-9]{3})$|^(default)$": {
           "$ref": "#/definitions/responseValue"
         },
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -445,10 +421,7 @@
       },
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -538,10 +511,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -555,10 +525,7 @@
       "type": "object",
       "required": ["name", "in", "schema"],
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -613,10 +580,7 @@
     "headerParameterSubSchema": {
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -728,10 +692,7 @@
     "queryParameterSubSchema": {
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -844,10 +805,7 @@
     "formDataParameterSubSchema": {
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -957,10 +915,7 @@
     "pathParameterSubSchema": {
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -1211,10 +1166,7 @@
       "type": "object",
       "description": "A deterministic version of a JSON Schema object.",
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -1373,10 +1325,7 @@
       "type": "object",
       "description": "A deterministic version of a JSON Schema object.",
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -1478,10 +1427,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -1556,10 +1502,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -1823,10 +1766,7 @@
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },

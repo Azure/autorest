@@ -16,17 +16,17 @@ import {
   PipeState,
   mergePipeStates,
 } from "@azure-tools/datastore";
-import { AutorestContext, getExtension } from "../context";
+import { AutorestContext } from "../context";
 import { Channel } from "../message";
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
-import { AutoRestExtension } from "./plugin-endpoint";
 
 import { createArtifactEmitterPlugin } from "../plugins/emitter";
-import { createExternalPlugin } from "../plugins/external";
 import { createHash } from "crypto";
 import { isCached, readCache, writeCache } from "./pipeline-cache";
 import { values } from "@azure-tools/linq";
-import { PLUGIN_MAP } from "../plugins";
+import { CORE_PLUGIN_MAP } from "../plugins";
+import { loadPlugins, PipelinePluginDefinition } from "./plugin-loader";
+import { mapValues, omitBy } from "lodash";
 
 const safeEval = createSandbox();
 
@@ -44,6 +44,7 @@ interface PipelineNode {
 
 function buildPipeline(
   context: AutorestContext,
+  plugins: { [key: string]: PipelinePluginDefinition },
 ): { pipeline: { [name: string]: PipelineNode }; configs: { [jsonPath: string]: AutorestContext } } {
   const cfgPipeline = context.GetEntry("pipeline");
   const pipeline: { [name: string]: PipelineNode } = {};
@@ -89,7 +90,8 @@ function buildPipeline(
     }
 
     // derive information about given pipeline stage
-    const plugin = cfg.plugin || stageName.split("/").reverse()[0];
+    const pluginName = cfg.plugin || stageName.split("/").reverse()[0];
+    const plugin = plugins[pluginName];
     const outputArtifact = cfg["output-artifact"];
     let scope = cfg.scope;
     if (!cfg.scope) {
@@ -120,7 +122,7 @@ function buildPipeline(
     ) => {
       if (inputNodes.length === 0) {
         const config = configCache[stringify(configScope)];
-        const configs = scope ? [...config.getNestedConfiguration(scope)] : [config];
+        const configs = scope ? [...config.getNestedConfiguration(scope, plugin)] : [config];
         for (let i = 0; i < configs.length; ++i) {
           const newSuffix = configs.length === 1 ? "" : "/" + i;
           suffixes.push(suffix + newSuffix);
@@ -133,7 +135,7 @@ function buildPipeline(
           }
           configCache[stringify(path)] = configs[i];
           pipeline[stageName + suffix + newSuffix] = {
-            pluginName: plugin,
+            pluginName: pluginName,
             outputArtifact,
             configScope: path,
             inputs,
@@ -185,19 +187,11 @@ function isDrainRequired(p: PipelineNode) {
 }
 
 export async function runPipeline(configView: AutorestContext, fileSystem: IFileSystem): Promise<void> {
-  // built-in plugins
-
-  // dynamically loaded, auto-discovered plugins
-  const __extensionExtension: { [pluginName: string]: AutoRestExtension } = {};
-  for (const useExtensionQualifiedName of configView.GetEntry("used-extension") || []) {
-    const extension = await getExtension(useExtensionQualifiedName);
-    for (const plugin of await extension.GetPluginNames(configView.CancellationToken)) {
-      if (!PLUGIN_MAP[plugin]) {
-        PLUGIN_MAP[plugin] = createExternalPlugin(extension, plugin);
-        __extensionExtension[plugin] = extension;
-      }
-    }
-  }
+  const plugins = await loadPlugins(configView);
+  const __extensionExtension = mapValues(
+    omitBy(plugins, (x) => x.builtIn),
+    (x) => x.extension,
+  );
 
   // __status scope
   const startTime = Date.now();
@@ -232,8 +226,8 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
 
-  const fsInput = configView.DataStore.GetReadThroughScope(fileSystem);
-  const pipeline = buildPipeline(configView);
+  const fsInput = configView.DataStore.getReadThroughScope(fileSystem);
+  const pipeline = buildPipeline(configView, plugins);
   const times = !!configView.config["timestamp"];
   const tasks: { [name: string]: Promise<DataSource> } = {};
 
@@ -292,12 +286,12 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
       configEntry?.["null"] === true || values(configView.GetEntry("null")).any((each) => each === pluginName);
 
     const plugin = usenull
-      ? PLUGIN_MAP.null
+      ? CORE_PLUGIN_MAP.null
       : passthru
-      ? PLUGIN_MAP.identity
+      ? CORE_PLUGIN_MAP.identity
       : pluginName === "pipeline-emitter"
       ? pipelineEmitterPlugin
-      : PLUGIN_MAP[pluginName];
+      : plugins[pluginName]?.plugin;
 
     if (!plugin) {
       throw new Error(`Plugin '${pluginName}' not found.`);
@@ -435,17 +429,17 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
         taskx._finishedAt = Date.now();
       })
       .catch(() => (taskx._state = "failed"));
-    void barrier.Await(task);
-    void barrierRobust.Await(task.catch(() => {}));
+    barrier.await(task);
+    barrierRobust.await(task.catch(() => {}));
   }
 
   try {
-    await barrier.Wait();
+    await barrier.wait();
     await emitStats(configView);
   } catch (e) {
     // wait for outstanding nodes
     try {
-      await barrierRobust.Wait();
+      await barrierRobust.wait();
     } catch {
       // wait for others to fail or whatever...
     }

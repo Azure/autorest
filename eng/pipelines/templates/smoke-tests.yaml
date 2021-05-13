@@ -1,0 +1,48 @@
+parameters:
+  - name: name
+    type: string
+  - name: nodeVersion
+    type: string
+
+# Steps the for regresion test using autorest-compare.
+jobs:
+  - job: ${{ parameters.name }}
+    displayName: Node ${{ parameters.nodeVersion }}
+    variables:
+      AUTOREST_HOME: $(Build.SourcesDirectory) # Setting autorest.home to local path to prevent conflict with other parralel jobs in the same machine.
+    steps:
+      - download: current
+        artifact: packages
+        displayName: Download packages(.tgz)
+
+      - script: |
+          autorestPkg="$(find $(Pipeline.Workspace)/packages -type f -regex ".*autorest-[0-9].*\.tgz" )"
+          corePkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-core-*.tgz" )"
+          modelerfourPkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-modelerfour-*.tgz" )"
+
+          [ -z "$autorestPkg" ] && echo "Error: Couldn't find autorest cli package" && exit 1
+          [ -z "$corePkg" ] && echo "Error: Couldn't find autorest core package" && exit 1
+          [ -z "$modelerfourPkg" ] && echo "Error: Couldn't find autorest modelerfour package" && exit 1
+
+          echo "Found autorest package $autorestPkg"
+          echo "Found core package $corePkg"
+          echo "Found modelerfour package $modelerfourPkg"
+
+          echo "##vso[task.setvariable variable=AUTOREST_CLI_PKG]$autorestPkg"
+          echo "##vso[task.setvariable variable=CORE_PKG]$corePkg"
+          echo "##vso[task.setvariable variable=M4_PKG]$modelerfourPkg"
+        displayName: Find packages path
+
+      - task: NodeTool@0
+        inputs:
+          versionSpec: ${{ parameters.nodeVersion }}
+        displayName: "Install Node.js"
+
+      - script: |
+          # npm install -g autorest
+          echo "Installing autorest from $AUTOREST_CLI_PKG"
+          npm install -g $AUTOREST_CLI_PKG
+        displayName: "Install autorest cli"
+
+      - pwsh: ./regression-tests/smoke-tests.ps1 -coreVersion $env:CORE_PKG -m4Version $env:M4_PKG
+        displayName: Run smoke tests
