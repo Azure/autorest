@@ -12,11 +12,11 @@ export const includeXDash = (dictionary: Record<string, unknown>): ExtensionKey[
  * Only return properties NOT starting with x-
  * @param dictionary
  */
-export const excludeXDash = <T extends Record<string, unknown>>(dictionary: T): string[] => {
+export const excludeXDash = <T extends {}>(dictionary: T): string[] => {
   return Object.keys(dictionary).filter((v, i, a) => !v.startsWith("x-"));
 };
 
-export function includeXDashProperties<T extends Record<string, unknown>>(obj: T | undefined): T | undefined {
+export function includeXDashProperties<T extends { [key: string]: unknown }>(obj: T | undefined): T | undefined {
   if (!obj) {
     return undefined;
   }
@@ -28,14 +28,14 @@ export function includeXDashProperties<T extends Record<string, unknown>>(obj: T
   return result;
 }
 
-export function omitXDashProperties<T extends Record<string, unknown>>(obj: T | undefined): T | undefined {
+export function omitXDashProperties<T extends {}>(obj: T | undefined): T | undefined {
   if (!obj) {
     return undefined;
   }
 
   const result: any = {};
   for (const key of excludeXDash(obj)) {
-    result[key] = obj[key];
+    result[key] = (obj as any)[key];
   }
   return result;
 }
