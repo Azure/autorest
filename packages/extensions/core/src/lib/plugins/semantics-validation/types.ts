@@ -5,6 +5,7 @@ export enum SemanticErrorCodes {
   PathParameterEmtpy = "PathParameterEmtpy",
   PathParameterMissingDefinition = "PathParameterMissingDefinition",
   OutdatedExtension = "OutdatedExtension",
+  IgnoredPropertyNextToRef = "IgnoredPropertyNextToRef",
 }
 
 export type SemanticErrorLevel = "error" | "warn";
