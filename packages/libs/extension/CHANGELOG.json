@@ -2,6 +2,18 @@
   "name": "@azure-tools/extension",
   "entries": [
     {
+      "version": "3.2.6",
+      "tag": "@azure-tools/extension_v3.2.6",
+      "date": "Tue, 27 Apr 2021 17:48:43 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Fallback to github release when version doesn't exists broken if using version range"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.2.5",
       "tag": "@azure-tools/extension_v3.2.5",
       "date": "Thu, 01 Apr 2021 15:46:41 GMT",

@@ -1,6 +1,13 @@
 # Change Log - @autorest/common
 
-This log was last generated on Fri, 09 Apr 2021 19:53:22 GMT and should not be manually modified.
+This log was last generated on Mon, 10 May 2021 18:01:37 GMT and should not be manually modified.
+
+## 1.1.4
+Mon, 10 May 2021 18:01:37 GMT
+
+### Patches
+
+- **Fix** Keep order of property when merging to allow interpolation from same file
 
 ## 1.1.3
 Fri, 09 Apr 2021 19:53:22 GMT

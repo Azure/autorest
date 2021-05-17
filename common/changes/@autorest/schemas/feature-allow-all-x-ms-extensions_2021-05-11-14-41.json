@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/schemas",
+      "comment": "**Update** Swagger 2.0 schema to allow custom extension with  `x-ms-` prefix",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/schemas",
+  "email": "tiguerin@microsoft.com"
+}

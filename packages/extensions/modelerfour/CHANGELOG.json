@@ -2,6 +2,52 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.19.1",
+      "tag": "@autorest/modelerfour_v4.19.1",
+      "date": "Tue, 04 May 2021 18:18:45 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Using multiple security layers(`AND`) now produce warning instead of error."
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.19.0",
+      "tag": "@autorest/modelerfour_v4.19.0",
+      "date": "Tue, 27 Apr 2021 17:48:43 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Added** Distinction between anything and anyobject"
+          },
+          {
+            "comment": "**Added** Support for openapi deprecation"
+          },
+          {
+            "comment": "**Added** Support known set of security scheme"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "**Perf** Major performance improvment to duplicate schema finder"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/codemodel\" from `~4.14.8` to `~4.15.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.3.0` to `~4.3.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.1.1` to `~3.1.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.18.4",
       "tag": "@autorest/modelerfour_v4.18.4",
       "date": "Mon, 19 Apr 2021 21:06:54 GMT",

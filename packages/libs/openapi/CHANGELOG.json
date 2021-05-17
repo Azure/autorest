@@ -2,6 +2,21 @@
   "name": "@azure-tools/openapi",
   "entries": [
     {
+      "version": "3.1.2",
+      "tag": "@azure-tools/openapi_v3.1.2",
+      "date": "Tue, 27 Apr 2021 17:48:43 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Update** deprecatable models"
+          },
+          {
+            "comment": "**Fix** SecurityRequirement type incorectly defining scopes as `string` instead of `string[]`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.1.1",
       "tag": "@azure-tools/openapi_v3.1.1",
       "date": "Tue, 16 Mar 2021 15:52:56 GMT",

@@ -1,6 +1,6 @@
 {
   "name": "@autorest/common",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Autorest common utilities",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -43,7 +43,7 @@
     "@types/commonmark": "^0.27.0"
   },
   "dependencies": {
-    "@azure-tools/datastore": "~4.3.0",
+    "@azure-tools/datastore": "~4.3.1",
     "@azure/logger": "^1.0.2",
     "commonmark": "^0.27.0"
   }
