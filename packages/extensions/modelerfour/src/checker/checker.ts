@@ -17,14 +17,14 @@ export class Checker {
     return this;
   }
 
-  public checkDuplicateOperationGroups() {
+  checkOperationGroups() {
     const duplicates = findDuplicates(this.codeModel.operationGroups, (x) => x.language.default.name);
     for (const [dupe] of Object.entries(duplicates)) {
       this.session.error(`Duplicate Operation group '${dupe}' detected .`, ["DuplicateOperationGroup"]);
     }
   }
 
-  public checkDuplicateOperations() {
+  checkOperations() {
     for (const group of this.codeModel.operationGroups) {
       const duplicates = findDuplicates(group.operations, (x) => x.language.default.name);
       for (const [dupe, operations] of Object.entries(duplicates)) {
@@ -36,29 +36,6 @@ export class Checker {
           `Duplicate Operation '${group.language.default.name}' > '${dupe}' detected(This is most likely due to 2 operation using the same 'operationId' or 'tags'). Duplicates have those paths:\n${paths}`,
           ["DuplicateOperation"],
         );
-      }
-    }
-  }
-
-  /**
-   * Find operations without a success response.
-   */
-  public checkNoSucessOperations() {
-    for (const group of this.codeModel.operationGroups) {
-      for (const operation of group.operations) {
-        if (operation.responses === undefined || operation.responses.length === 0) {
-          const name = `'${group.language.default.name}' > '${operation.language.default.name}'`;
-          if (operation.exceptions && operation.exceptions.length > 0) {
-            const errors = operation.exceptions.map(
-              (x) => ` - ${x.language.default.description} (statusCodes: ${x.protocol.http?.statusCodes.join(", ")})`,
-            );
-            this.session.error(`Operation ${name} only has error responses:\n${errors.join("\n")}`, [
-              "OperationNoSuccessResponse",
-            ]);
-          } else {
-            this.session.error(`Operation ${name} doesn't have any responses.`, ["OperationNoSuccessResponse"]);
-          }
-        }
       }
     }
   }
@@ -91,13 +68,9 @@ export class Checker {
 
   process() {
     if (this.options["additional-checks"] !== false) {
-      this.checkDuplicateOperationGroups();
+      this.checkOperationGroups();
 
-      this.checkDuplicateOperations();
-
-      if (!this.options["allow-operations-with-no-success"]) {
-        this.checkNoSucessOperations();
-      }
+      this.checkOperations();
 
       this.checkSchemas();
     }
