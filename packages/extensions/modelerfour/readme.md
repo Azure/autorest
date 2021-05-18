@@ -95,9 +95,6 @@ modelerfour:
   # In this case ChildSchema will be removed and all reference to it will be updated to point to ParentSchema
   remove-empty-child-schemas: false|true
 
-  # Disable validating operations that have no success response(Only exceptions can be produced.)
-  allow-operations-with-no-success: false|true
-
   # **TEMPORARY FLAG DO NOT DEPEND ON IT**
   # Disable anyobject type and default to type any instead.
   # This is a temporary flag to smooth transition. It WILL be removed in a future version.
