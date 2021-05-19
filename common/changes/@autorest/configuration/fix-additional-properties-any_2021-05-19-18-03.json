@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/configuration",
+      "comment": "**Remove** Old patch directive causing incorect swagger behavior",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/configuration",
+  "email": "tiguerin@microsoft.com"
+}

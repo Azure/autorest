@@ -10,7 +10,7 @@
     "url": "git+https://github.com/Azure/autorest.git"
   },
   "keywords": [
-    "autorest2",
+    "autorest",
     "swagger",
     "openapi"
   ],
