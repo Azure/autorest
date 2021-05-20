@@ -1,6 +1,13 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Mon, 10 May 2021 18:01:37 GMT and should not be manually modified.
+This log was last generated on Thu, 20 May 2021 16:41:13 GMT and should not be manually modified.
+
+## 1.4.0
+Thu, 20 May 2021 16:41:13 GMT
+
+### Minor changes
+
+- **Remove** Old patch directive causing incorect swagger behavior
 
 ## 1.3.1
 Mon, 10 May 2021 18:01:37 GMT

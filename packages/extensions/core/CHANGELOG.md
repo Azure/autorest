@@ -1,6 +1,16 @@
 # Change Log - @autorest/core
 
-This log was last generated on Mon, 10 May 2021 18:01:37 GMT and should not be manually modified.
+This log was last generated on Thu, 20 May 2021 16:41:13 GMT and should not be manually modified.
+
+## 3.4.3
+Thu, 20 May 2021 16:41:13 GMT
+
+### Patches
+
+- **Added** $ref sibling validation
+- **Fix** Keep `x-` extension next to $ref when tree shaking properties
+- **Bump** @autorest/configuration version
+- **Added** warning when using `x-ms-code-generation-settings` which is not supported in autorest v3
 
 ## 3.4.2
 Mon, 10 May 2021 18:01:37 GMT

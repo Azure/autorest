@@ -1,6 +1,13 @@
 # Change Log - @autorest/schemas
 
-This log was last generated on Tue, 13 Apr 2021 15:34:55 GMT and should not be manually modified.
+This log was last generated on Thu, 20 May 2021 16:41:13 GMT and should not be manually modified.
+
+## 1.1.3
+Thu, 20 May 2021 16:41:13 GMT
+
+### Patches
+
+- **Update** Swagger 2.0 schema to allow custom extension with  `x-ms-` prefix
 
 ## 1.1.2
 Tue, 13 Apr 2021 15:34:55 GMT
