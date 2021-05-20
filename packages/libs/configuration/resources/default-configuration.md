@@ -16,7 +16,6 @@ require:
   - $(this-folder)pipeline.md
   - $(this-folder)loader-openapi.md
   - $(this-folder)miscellaneous.md
-  - $(this-folder)patches.md
   - $(this-folder)plugin-powershell.md
   - $(this-folder)plugin-azureresourceschema.md
   - $(this-folder)plugin-csharp.md
