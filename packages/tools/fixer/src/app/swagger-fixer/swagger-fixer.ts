@@ -52,7 +52,7 @@ function forEachNestedDefinitions(
   handler: (definition: any, path: string[]) => any,
 ): any {
   if (typeof definition !== "object") {
-    return;
+    return definition;
   }
 
   definition = handler(definition, path);
