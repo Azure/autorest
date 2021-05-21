@@ -1,6 +1,20 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Tue, 27 Apr 2021 17:48:43 GMT and should not be manually modified.
+This log was last generated on Thu, 20 May 2021 16:41:13 GMT and should not be manually modified.
+
+## 4.19.2
+Thu, 20 May 2021 16:41:13 GMT
+
+### Patches
+
+- **Immproved** error message for duplicate operations
+
+## 4.19.1
+Tue, 04 May 2021 18:18:45 GMT
+
+### Patches
+
+- **Fix** Using multiple security layers(`AND`) now produce warning instead of error.
 
 ## 4.19.0
 Tue, 27 Apr 2021 17:48:43 GMT

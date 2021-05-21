@@ -20,6 +20,7 @@ export function validateDiscriminator(spec: oai3.Model): SemanticError[] {
       } else {
         if (!model.required || !model.required.includes(discriminator.propertyName)) {
           errors.push({
+            level: "error",
             code: SemanticErrorCodes.DiscriminatorNotRequired,
             params: { discriminator },
             message: "Discriminator must be a required property.",

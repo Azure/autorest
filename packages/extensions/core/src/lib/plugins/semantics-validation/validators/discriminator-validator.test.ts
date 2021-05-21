@@ -28,6 +28,7 @@ describe("Semantic Validation", () => {
       });
       expect(errors).toEqual([
         {
+          level: "error",
           code: SemanticErrorCodes.DiscriminatorNotRequired,
           message: "Discriminator must be a required property.",
           params: { discriminator: { propertyName: "type" } },

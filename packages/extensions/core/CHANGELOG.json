@@ -2,6 +2,70 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.4.3",
+      "tag": "@autorest/core_v3.4.3",
+      "date": "Thu, 20 May 2021 16:41:13 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Added** $ref sibling validation"
+          },
+          {
+            "comment": "**Fix** Keep `x-` extension next to $ref when tree shaking properties"
+          },
+          {
+            "comment": "**Bump** @autorest/configuration version"
+          },
+          {
+            "comment": "**Added** warning when using `x-ms-code-generation-settings` which is not supported in autorest v3"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/configuration\" from `~1.3.1` to `~1.4.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/schemas\" from `~1.1.2` to `~1.1.3`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.1.2` to `~3.1.3`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.4.2",
+      "tag": "@autorest/core_v3.4.2",
+      "date": "Mon, 10 May 2021 18:01:37 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update dependencies to include fix for interpolating config value from previous value in same file"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.1.3` to `~1.1.4`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/configuration\" from `~1.3.0` to `~1.3.1`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.4.1",
+      "tag": "@autorest/core_v3.4.1",
+      "date": "Tue, 04 May 2021 18:18:45 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Uncaught promise exception"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.4.0",
       "tag": "@autorest/core_v3.4.0",
       "date": "Tue, 27 Apr 2021 17:48:43 GMT",

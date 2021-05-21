@@ -15,6 +15,7 @@ import { PipelinePlugin } from "../../pipeline/common";
 import { values, length } from "@azure-tools/linq";
 import { createHash } from "crypto";
 import { SchemaStats } from "../../stats";
+import { includeXDashProperties } from "@azure-tools/openapi";
 import { parseJsonPointer } from "@azure-tools/json";
 
 /**
@@ -774,6 +775,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     // set the current location's object to be a $ref
     targetParent[key] = {
       value: {
+        ...includeXDashProperties(value),
         "$ref": `#${baseReferencePath}/${id}`,
         "description": value.description, // we violate spec to allow a unique description at the $ref spot, (ie: there are two fields that are of type 'color' -- one is 'borderColor' and one is 'fillColor' -- may be differen descriptions.)
         "x-ms-client-flatten": value["x-ms-client-flatten"], // we violate spec to allow flexibility in terms of flattening

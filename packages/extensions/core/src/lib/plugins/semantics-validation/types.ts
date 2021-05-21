@@ -4,9 +4,14 @@ export enum SemanticErrorCodes {
   DiscriminatorNotRequired = "DiscriminatorNotRequired",
   PathParameterEmtpy = "PathParameterEmtpy",
   PathParameterMissingDefinition = "PathParameterMissingDefinition",
+  OutdatedExtension = "OutdatedExtension",
+  IgnoredPropertyNextToRef = "IgnoredPropertyNextToRef",
 }
 
+export type SemanticErrorLevel = "error" | "warn";
+
 export interface SemanticError {
+  level: SemanticErrorLevel;
   code: string;
   message: string;
   params: Record<string, unknown>;
