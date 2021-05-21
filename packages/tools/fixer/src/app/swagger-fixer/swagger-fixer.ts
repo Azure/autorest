@@ -2,7 +2,17 @@ import { cloneDeep } from "lodash";
 import { Fix, FixCode, FixResult } from "../types";
 
 export function fixSwagger(filename: string, spec: any): FixResult {
-  return fixSwaggerMissingType(filename, spec);
+  let current: FixResult = { spec, fixes: [] };
+
+  const addResult = (result: FixResult) => {
+    current = {
+      spec: result.spec,
+      fixes: current.fixes.concat(result.fixes),
+    };
+  };
+  addResult(fixSwaggerMissingType(filename, current.spec));
+
+  return current;
 }
 
 /**
