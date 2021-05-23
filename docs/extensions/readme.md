@@ -798,7 +798,7 @@ Note: The extension is not tight to this particular scenario (you could model an
 Set the default value for a property or a parameter.
 
 With this extension, you can set a default value for a property or parameter that is independent of how the property / parameter's schema is handling a default. This is different than the `default` value
-you can speciy
+you can specify
 
 **Parent element**: [Parameter Objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#parameterObject) or [Property on the Schema Definition](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schemaObject).
 
@@ -858,8 +858,9 @@ The REST API guidelines define a common pattern for paging through lists of data
 Field Name | Type | Description
 ---|:---:|---
 itemName | `string` | Optional (default: `value`). Specifies the name of the property that provides the collection of pageable items.
-nextLinkName| `string` | Required. Specifies the name of the property that provides the next link (common: `nextLink`). If the model does not have a next link property then specify `null`. This is useful for services that return an object that has an array referenced by `itemName`. The object is then flattened in a way that the array is *directly* returned, no paging is used. This provides a better client side API to the end user.
+nextLinkName| `string` | Required. Specifies the name of the property that provides the next link or a continuation token. If the link / token is stored in a property in the response model, specify the name of the property here (common: `nextLink` for a next link, `token` for a continuation token). If the link / token is not a property on the response model, you can specify where to find the value with OpenApi's runtime expression syntax (example: `$response.header.nextLink`, see the Runtime Expression Syntax in their [links docs](https://swagger.io/docs/specification/links/) for more information). If there is no link / token property then specify `null`. This is useful for services that return an object that has an array referenced by `itemName`. The object is then flattened in a way that the array is *directly* returned, no paging is used. This provides a better client side API to the end user.
 operationName | `string` | Optional (default: `<operationName>Next`). Specifies the name of the operation for retrieving the next page.
+tokenParamName | `string` | Optional (default: `nextlink`). Contains the name of the continuation token parameter that is present in the next operation.
 
 **Parent element**:  [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
 
@@ -988,6 +989,45 @@ Generated signatures:
 ```C#
 IEnumerable<int?>       List(ISimpleAPIClient operations);
 Task<IEnumerable<int?>> ListAsync(ISimpleAPIClient operations, CancellationToken cancellationToken);
+```
+
+**Example 4: Passing the continuation token through an API parameter**
+
+```YAML
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+produces:
+  - application/json
+paths:
+  /getIntegers:
+    get:
+      operationId: list
+      description: "Gets those integers."
+      parameters:
+        - name: tokenHeader
+          in: header
+          type: string
+      x-ms-pageable:                            # EXTENSION
+        nextLinkName: token                     # property name for the continuation token
+        tokenParamName: tokenHeader             # parameter name for taking the continuation token as input to next call
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/PagedIntegerCollection'
+definitions:
+  PagedIntegerCollection:
+    description: "Page of integers."
+    type: object
+    properties:
+      item:                                  # the current page (referred to by "value")
+        type: array
+        items:
+          type: integer
+      token:                                 # token to pass to signify continued paging
+        type: string
 ```
 
 ## x-ms-long-running-operation
