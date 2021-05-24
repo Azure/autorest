@@ -9,8 +9,8 @@
     "type": "git",
     "url": "https://github.com/Azure/autorest"
   },
-  "homepage": "https://github.com/Azure/autorest#readme",
-  "readme": "https://github.com/Azure/autorest/blob/master/readme.md",
+  "homepage": "https://github.com/Azure/autorest",
+  "readme": "https://github.com/Azure/autorest/blob/main/readme.md",
   "keywords": [
     "autorest",
     "rest",

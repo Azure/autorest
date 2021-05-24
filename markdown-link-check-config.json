@@ -2,7 +2,7 @@
   "ignorePatterns": [],
   "replacementPatterns": [
     {
-      "pattern": "https://github\\.com/Azure/autorest/(?:blob|tree)/master/",
+      "pattern": "https://github\\.com/Azure/autorest/(?:blob|tree)/main/",
       "replacement": "{{BASEURL}}/"
     }
   ],
