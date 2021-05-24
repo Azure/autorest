@@ -17,7 +17,7 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 ### Autorest plugin configuration
 
 - Please don't edit this section unless you're re-configuring how the powershell extension plugs in to AutoRest
-  AutoRest needs the below config to pick this up as a plug-in - see https://github.com/Azure/autorest/blob/master/docs/developer/architecture/AutoRest-extension.md
+  AutoRest needs the below config to pick this up as a plug-in - see https://github.com/Azure/autorest/blob/main/docs/developer/architecture/AutoRest-extension.md
 
 ### ModelFour Options
 

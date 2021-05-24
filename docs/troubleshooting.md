@@ -37,11 +37,11 @@ If you would like to actually debug through a language generator's code, see our
 
 <!-- LINKS -->
 
-[main_docs]: https://github.com/Azure/autorest/blob/master/docs/openapi/readme.md
+[main_docs]: https://github.com/Azure/autorest/blob/main/docs/openapi/readme.md
 [autorest_issues]: https://github.com/Azure/autorest/issues
 [autorest_python_issues]: https://github.com/Azure/autorest.python/issues
 [autorest_python_repo]: https://github.com/Azure/autorest.python/tree/autorestv3
-[debugging_flags]: https://github.com/Azure/autorest/blob/master/docs/generate/flags.md#debugging-flags
+[debugging_flags]: https://github.com/Azure/autorest/blob/main/docs/generate/flags.md#debugging-flags
 [python_generation]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/troubleshooting.md#generation-errors
 [csharp_generation]: https://github.com/Azure/autorest.csharp/tree/feature/v3/docs/troubleshooting.md#generation-errors
 [typescript_generation]: https://github.com/Azure/autorest.typescript/tree/v6/docs/troubleshooting.md#generation-errors

@@ -2,7 +2,7 @@
 
 Autorest provides a set of built-in directives for common scenarios to simplify things.
 
-Those directives are defined [here](https://github.com/Azure/autorest/blob/master/packages/libs/configuration/resources/directives.md)
+Those directives are defined [here](https://github.com/Azure/autorest/blob/main/packages/libs/configuration/resources/directives.md)
 
 ## Selection
 

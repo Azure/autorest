@@ -36,8 +36,8 @@
   "bugs": {
     "url": "https://github.com/Azure/autorest.modelerfour/issues"
   },
-  "homepage": "https://github.com/Azure/autorest.modelerfour/tree/master/modelerfour#readme",
-  "readme": "https://github.com/Azure/autorest.modelerfour/tree/master/modelerfour/readme.md",
+  "homepage": "https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour",
+  "readme": "https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour/readme.md",
   "devDependencies": {
     "@autorest/codemodel": "~4.15.0",
     "@autorest/extension-base": "~3.2.1",

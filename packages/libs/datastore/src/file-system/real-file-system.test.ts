@@ -26,18 +26,18 @@ describe("MemoryFileSystem", () => {
 
   describe("accessing remote files", () => {
     it("should looks for readme.md when listing files", async () => {
-      const files = await fs.list("https://github.com/Azure/autorest/blob/master/");
+      const files = await fs.list("https://github.com/Azure/autorest/blob/main/");
       expect(files).toHaveLength(1);
-      expect(files[0]).toEqual("https://github.com/Azure/autorest/blob/master/readme.md");
+      expect(files[0]).toEqual("https://github.com/Azure/autorest/blob/main/readme.md");
     });
 
     it("should read local file content", async () => {
-      expect(await fs.read("https://github.com/Azure/autorest/blob/master/readme.md")).toContain("Autorest");
+      expect(await fs.read("https://github.com/Azure/autorest/blob/main/readme.md")).toContain("Autorest");
     });
 
     it("should throw error if the local file doesn't exists", async () => {
       await expect(() =>
-        fs.read("https://github.com/Azure/autorest/blob/master/this-file-doesnot-exists.md"),
+        fs.read("https://github.com/Azure/autorest/blob/main/this-file-doesnot-exists.md"),
       ).rejects.toThrowError(UriNotFoundError);
     });
   });
