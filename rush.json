@@ -9,7 +9,10 @@
   "ensureConsistentVersions": true,
   "projectFolderMinDepth": 3,
   "projectFolderMaxDepth": 3,
-  "repository": {},
+  "repository": {
+    "defaultBranch": "main",
+    "url": "https://github.com/Azure/autorest"
+  },
   "eventHooks": {
     "preRushInstall": [],
     "postRushInstall": [],
