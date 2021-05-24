@@ -38,13 +38,13 @@
 
 <!-- LINKS -->
 
-[introduction]: https://github.com/Azure/autorest/blob/master/docs/introduction.md
-[install]: https://github.com/Azure/autorest/blob/master/docs/install/readme.md
-[openapi]: https://github.com/Azure/autorest/blob/master/docs/openapi/readme.md
-[generate]: https://github.com/Azure/autorest/blob/master/docs/generate/readme.md
-[client]: https://github.com/Azure/autorest/blob/master/docs/client/readme.md
-[migrate]: https://github.com/Azure/autorest/blob/master/docs/migrate/readme.md
-[dev]: https://github.com/Azure/autorest/blob/master/docs/developer/readme.md
-[powershell]: https://github.com/Azure/autorest.powershell/blob/master/docs/readme.md
-[troubleshooting]: https://github.com/Azure/autorest/blob/master/docs/troubleshooting.md
-[faq]: https://github.com/Azure/autorest/blob/master/docs/faq.md
+[introduction]: https://github.com/Azure/autorest/blob/main/docs/introduction.md
+[install]: https://github.com/Azure/autorest/blob/main/docs/install/readme.md
+[openapi]: https://github.com/Azure/autorest/blob/main/docs/openapi/readme.md
+[generate]: https://github.com/Azure/autorest/blob/main/docs/generate/readme.md
+[client]: https://github.com/Azure/autorest/blob/main/docs/client/readme.md
+[migrate]: https://github.com/Azure/autorest/blob/main/docs/migrate/readme.md
+[dev]: https://github.com/Azure/autorest/blob/main/docs/developer/readme.md
+[powershell]: https://github.com/Azure/autorest.powershell/blob/main/docs/readme.md
+[troubleshooting]: https://github.com/Azure/autorest/blob/main/docs/troubleshooting.md
+[faq]: https://github.com/Azure/autorest/blob/main/docs/faq.md

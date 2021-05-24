@@ -33,8 +33,8 @@
   "bugs": {
     "url": "https://github.com/Azure/perks/issues"
   },
-  "homepage": "https://github.com/Azure/perks/tree/master/datastore#readme",
-  "readme": "https://github.com/Azure/perks/tree/master/datastore/readme.md",
+  "homepage": "https://github.com/Azure/autorest/tree/main/packages/libs/datastore",
+  "readme": "https://github.com/Azure/autorest/tree/main/packages/libs/datastore/readme.md",
   "devDependencies": {
     "@types/jest": "^26.0.20",
     "@types/jsonpath": "^0.2.0",
