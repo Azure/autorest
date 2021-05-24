@@ -23,6 +23,7 @@ want our generated code to have, and we specify our language through a command l
 | `--java`       | Java           |
 | `--typescript` | Typescript     |
 | `--go`         | Golang         |
+| `--powershell` | powershell     |
 | No flag yet    | Swift          |
 
 ### Common flags
