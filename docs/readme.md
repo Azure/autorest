@@ -45,6 +45,6 @@
 [client]: https://github.com/Azure/autorest/blob/main/docs/client/readme.md
 [migrate]: https://github.com/Azure/autorest/blob/main/docs/migrate/readme.md
 [dev]: https://github.com/Azure/autorest/blob/main/docs/developer/readme.md
-[powershell]: https://github.com/Azure/autorest.powershell/blob/main/docs/readme.md
+[powershell]: https://github.com/Azure/autorest.powershell/blob/master/docs/readme.md
 [troubleshooting]: https://github.com/Azure/autorest/blob/main/docs/troubleshooting.md
 [faq]: https://github.com/Azure/autorest/blob/main/docs/faq.md

@@ -408,13 +408,13 @@ For language-specific information about generation, please refer to our language
 [pets_v2_swagger]: https://github.com/Azure/autorest/blob/main/docs/openapi/examples/petsv2.json
 [tags_readme]: https://github.com/Azure/autorest/blob/main/docs/generate/examples/tags/readme.md
 [azure_rest_api_specs]: https://github.com/Azure/azure-rest-api-specs
-[mgmt_storage]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/storage/resource-manager
+[mgmt_storage]: https://github.com/Azure/azure-rest-api-specs/tree/master/specification/storage/resource-manager
 [how_autorest]: ./how-autorest-generates-code-from-openapi.md
 [python]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/generate/readme.md
 [java]: https://github.com/Azure/autorest.java/tree/v4/docs/generate/readme.md
 [csharp]: https://github.com/Azure/autorest.csharp/tree/feature/v3/readme.md
 [azure_sdk_for_python]: https://github.com/Azure/azure-sdk-for-python/tree/main/sdk
-[azure_sdk_for_java]: https://github.com/Azure/azure-sdk-for-java/tree/main/sdk
+[azure_sdk_for_java]: https://github.com/Azure/azure-sdk-for-java/tree/master/sdk
 [client]: https://github.com/Azure/autorest/blob/main/docs/client/readme.md
 [openapi_introduction]: https://github.com/Azure/autorest/blob/main/docs/openapi/readme.md
 [python_multiapi]: https://github.com/Azure/autorest.python/blob/autorestv3/docs/generate/multiapi.md
