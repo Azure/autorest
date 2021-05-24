@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/codemodel",
+      "comment": "Added anonymous security scheme",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/codemodel",
+  "email": "tiguerin@microsoft.com"
+}

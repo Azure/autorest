@@ -72,6 +72,16 @@ definitions:
       - uri
       - uuid
       - xor
+  AnonymousSecurityScheme:
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum:
+          - Anonymous
+    required:
+      - type
   AnyObjectSchema:
     type: object
     additionalProperties: false

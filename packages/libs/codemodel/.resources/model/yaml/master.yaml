@@ -16,6 +16,16 @@ definitions:
     required:
       - scopes
       - type
+  AnonymousSecurityScheme:
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+        enum:
+          - Anonymous
+    required:
+      - type
   ApiVersion:
     type: object
     description: |-
