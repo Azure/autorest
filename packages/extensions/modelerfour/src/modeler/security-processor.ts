@@ -1,4 +1,10 @@
-import { AADTokenSecurityScheme, AzureKeySecurityScheme, Security, SecurityScheme } from "@autorest/codemodel";
+import {
+  AADTokenSecurityScheme,
+  AnonymousSecurityScheme,
+  AzureKeySecurityScheme,
+  Security,
+  SecurityScheme,
+} from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
 import * as oai3 from "@azure-tools/openapi";
 import { dereference, ParameterLocation, Refable } from "@azure-tools/openapi";
@@ -8,6 +14,7 @@ import { arrayify } from "./utils";
 export enum KnownSecurityScheme {
   AADToken = "AADToken",
   AzureKey = "AzureKey",
+  Anonymous = "Anonymous",
 }
 
 const KnownSecuritySchemeList = Object.values(KnownSecurityScheme);
@@ -90,6 +97,8 @@ export class SecurityProcessor {
         return new AzureKeySecurityScheme({
           headerName: this.securityConfig.headerName,
         });
+      case KnownSecurityScheme.Anonymous:
+        return new AnonymousSecurityScheme();
       default:
         throw new Error(`Unexpected security scheme '${name}'. Only known schemes are ${KnownSecuritySchemeList}`);
     }
@@ -126,23 +135,23 @@ export class SecurityProcessor {
       }
 
       if (names.length === 0) {
-        throw new Error(`Invalid empty security requirement`);
-      }
-
-      const name = names[0];
-      const scheme = schemeMap.get(name);
-      if (!scheme) {
-        throw new Error(`Couldn't find a scheme defined in the securitySchemes with name: ${name}`);
-      }
-
-      const processedScheme = this.processSecurityScheme(name, oai3SecurityRequirement[name], scheme);
-      if (processedScheme !== undefined) {
-        schemes.push(processedScheme);
+        schemes.push(new AnonymousSecurityScheme());
       } else {
-        this.session.warning(
-          `Security scheme ${name} is unknown and will not be processed. Only supported types are ${KnownSecuritySchemeList}`,
-          ["UnkownSecurityScheme"],
-        );
+        const name = names[0];
+        const scheme = schemeMap.get(name);
+        if (!scheme) {
+          throw new Error(`Couldn't find a scheme defined in the securitySchemes with name: ${name}`);
+        }
+
+        const processedScheme = this.processSecurityScheme(name, oai3SecurityRequirement[name], scheme);
+        if (processedScheme !== undefined) {
+          schemes.push(processedScheme);
+        } else {
+          this.session.warning(
+            `Security scheme ${name} is unknown and will not be processed. Only supported types are ${KnownSecuritySchemeList}`,
+            ["UnkownSecurityScheme"],
+          );
+        }
       }
     }
 

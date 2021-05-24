@@ -50,3 +50,14 @@ export class AzureKeySecurityScheme implements AzureKeySecurityScheme {
     Object.assign(this, objectInitializer);
   }
 }
+
+export interface AnonymousSecurityScheme {
+  type: "Anonymous";
+}
+
+export class AnonymousSecurityScheme implements AnonymousSecurityScheme {
+  public constructor(objectInitializer?: DeepPartial<AnonymousSecurityScheme>) {
+    this.type = "Anonymous";
+    Object.assign(this, objectInitializer);
+  }
+}
