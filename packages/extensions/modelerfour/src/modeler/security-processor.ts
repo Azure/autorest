@@ -1,10 +1,4 @@
-import {
-  AADTokenSecurityScheme,
-  AnonymousSecurityScheme,
-  AzureKeySecurityScheme,
-  Security,
-  SecurityScheme,
-} from "@autorest/codemodel";
+import { AADTokenSecurityScheme, AzureKeySecurityScheme, Security, SecurityScheme } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
 import * as oai3 from "@azure-tools/openapi";
 import { dereference, ParameterLocation, Refable } from "@azure-tools/openapi";
@@ -38,6 +32,7 @@ export class SecurityProcessor {
 
   public async init() {
     this.securityConfig = await this.getSecurityConfig();
+    return this;
   }
 
   /**
@@ -80,14 +75,28 @@ export class SecurityProcessor {
    * Build the security object from the autorest configuration
    */
   private getSecurityFromConfig(): Security | undefined {
-    const schemes: SecurityScheme[] = this.securityConfig.security.map((x) => this.getSecuritySchemeFromConfig(x));
-    if (schemes.length === 0) {
+    const schemeList = this.securityConfig.security.map((x) => this.getSecuritySchemeFromConfig(x));
+    if (schemeList.length === 0) {
       return undefined;
     }
-    return new Security(true, { schemes });
+
+    const schemes = [];
+    let authenticationRequired = true;
+    for (const scheme of schemeList) {
+      if (scheme === undefined) {
+        authenticationRequired = false;
+      } else {
+        schemes.push(scheme);
+      }
+    }
+    return new Security(authenticationRequired, { schemes });
   }
 
-  private getSecuritySchemeFromConfig(name: string): SecurityScheme {
+  /**
+   * @param name Name of the security scheme
+   * @returns CodeModel security scheme with given name, undefined if this is anonymous security and throw an error if unknown.
+   */
+  private getSecuritySchemeFromConfig(name: string): SecurityScheme | undefined {
     switch (name) {
       case KnownSecurityScheme.AADToken:
         return new AADTokenSecurityScheme({
@@ -98,7 +107,7 @@ export class SecurityProcessor {
           headerName: this.securityConfig.headerName,
         });
       case KnownSecurityScheme.Anonymous:
-        return new AnonymousSecurityScheme();
+        return undefined;
       default:
         throw new Error(`Unexpected security scheme '${name}'. Only known schemes are ${KnownSecuritySchemeList}`);
     }
@@ -116,6 +125,7 @@ export class SecurityProcessor {
 
     const schemeMap = this.resolveOpenAPI3SecuritySchemes(oai3Schemes);
     const schemes: SecurityScheme[] = [];
+    let authenticationRequired = true;
     for (const oai3SecurityRequirement of security) {
       const names = Object.keys(oai3SecurityRequirement);
       if (names.length > 1) {
@@ -135,7 +145,7 @@ export class SecurityProcessor {
       }
 
       if (names.length === 0) {
-        schemes.push(new AnonymousSecurityScheme());
+        authenticationRequired = false;
       } else {
         const name = names[0];
         const scheme = schemeMap.get(name);
@@ -155,7 +165,7 @@ export class SecurityProcessor {
       }
     }
 
-    return new Security(true, {
+    return new Security(authenticationRequired, {
       schemes,
     });
   }

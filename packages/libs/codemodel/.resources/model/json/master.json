@@ -961,22 +961,6 @@
         }
       ]
     },
-    "AnonymousSecurityScheme": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "Anonymous"
-          ]
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "type"
-      ]
-    },
     "Example": {
       "description": "example data [UNFINISHED]",
       "type": "object",
