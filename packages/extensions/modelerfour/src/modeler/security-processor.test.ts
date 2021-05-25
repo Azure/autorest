@@ -114,6 +114,20 @@ describe("Security Processor", () => {
       expect(security.authenticationRequired).toBe(false);
       expect(security.schemes).toEqual([new AADTokenSecurityScheme({ scopes: ["https://myresource.com/.default"] })]);
     });
+
+    it("raise an error if referencing undefined security scheme", async () => {
+      await expect(() =>
+        runSecurity({
+          ...baseOpenapiSpec,
+          components: {
+            securitySchemes: {
+              AADToken: AADTokenSecuritySchemeDef,
+            },
+          },
+          security: [{ ThisIsNotDefined: ["https://myresource.com/.default"] }, {}],
+        }),
+      ).rejects.toThrowError("Couldn't find a scheme defined in the securitySchemes with name: ThisIsNotDefined");
+    });
   });
 
   describe("when defined in autorest configuration", () => {
@@ -159,6 +173,29 @@ describe("Security Processor", () => {
 
       expect(security.authenticationRequired).toBe(false);
       expect(security.schemes).toEqual([new AADTokenSecurityScheme({ scopes: ["https://myresource.com/.default"] })]);
+    });
+
+    it("raise an error if passing unknown security scheme", async () => {
+      await expect(() =>
+        runSecurity(baseOpenapiSpec, {
+          security: ["this-is-unknown"],
+        }),
+      ).rejects.toThrowError(
+        "Unexpected security scheme 'this-is-unknown'. Only known schemes are AADToken,AzureKey,Anonymous",
+      );
+    });
+  });
+
+  describe("when using --azure-arm flag", () => {
+    it("configure AAD token security", async () => {
+      const security = await runSecurity(baseOpenapiSpec, {
+        "azure-arm": true,
+      });
+
+      expect(security.authenticationRequired).toBe(true);
+      expect(security.schemes).toEqual([
+        new AADTokenSecurityScheme({ scopes: ["https://management.azure.com/.default"] }),
+      ]);
     });
   });
 });
