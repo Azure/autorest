@@ -95,6 +95,10 @@ modelerfour:
   # In this case ChildSchema will be removed and all reference to it will be updated to point to ParentSchema
   remove-empty-child-schemas: false|true
 
+  # List of header names that shouldn't be included in the codemodel.
+  # Those header would already be handled by the generator.
+  ignore-headers: string[]
+
   # **TEMPORARY FLAG DO NOT DEPEND ON IT**
   # Disable anyobject type and default to type any instead.
   # This is a temporary flag to smooth transition. It WILL be removed in a future version.
