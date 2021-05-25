@@ -115,4 +115,50 @@ describe("Security Processor", () => {
       expect(security.schemes).toEqual([new AADTokenSecurityScheme({ scopes: ["https://myresource.com/.default"] })]);
     });
   });
+
+  describe("when defined in autorest configuration", () => {
+    it("configure AAD token security", async () => {
+      const security = await runSecurity(baseOpenapiSpec, {
+        "security": ["AADToken"],
+        "security-scopes": ["https://myresource.com/.default"],
+      });
+
+      expect(security.authenticationRequired).toBe(true);
+      expect(security.schemes).toEqual([new AADTokenSecurityScheme({ scopes: ["https://myresource.com/.default"] })]);
+    });
+
+    it("configure Azure Key security", async () => {
+      const security = await runSecurity(baseOpenapiSpec, {
+        "security": ["AzureKey"],
+        "security-header-name": "my-header-name",
+      });
+
+      expect(security.authenticationRequired).toBe(true);
+      expect(security.schemes).toEqual([new AzureKeySecurityScheme({ headerName: "my-header-name" })]);
+    });
+
+    it("configure multiple security", async () => {
+      const security = await runSecurity(baseOpenapiSpec, {
+        "security": ["AADToken", "AzureKey"],
+        "security-scopes": ["https://myresource.com/.default"],
+        "security-header-name": "my-header-name",
+      });
+
+      expect(security.authenticationRequired).toBe(true);
+      expect(security.schemes).toEqual([
+        new AADTokenSecurityScheme({ scopes: ["https://myresource.com/.default"] }),
+        new AzureKeySecurityScheme({ headerName: "my-header-name" }),
+      ]);
+    });
+
+    it("configure anymous security with other security", async () => {
+      const security = await runSecurity(baseOpenapiSpec, {
+        "security": ["AADToken", "Anonymous"],
+        "security-scopes": ["https://myresource.com/.default"],
+      });
+
+      expect(security.authenticationRequired).toBe(false);
+      expect(security.schemes).toEqual([new AADTokenSecurityScheme({ scopes: ["https://myresource.com/.default"] })]);
+    });
+  });
 });
