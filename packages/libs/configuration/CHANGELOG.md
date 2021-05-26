@@ -1,6 +1,13 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Thu, 20 May 2021 16:41:13 GMT and should not be manually modified.
+This log was last generated on Wed, 26 May 2021 18:31:17 GMT and should not be manually modified.
+
+## 1.4.1
+Wed, 26 May 2021 18:31:17 GMT
+
+### Patches
+
+- **Fix** issue when using --use: it would try to use yarn but couldn't find yarn/cli.js location
 
 ## 1.4.0
 Thu, 20 May 2021 16:41:13 GMT
