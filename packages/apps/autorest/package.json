@@ -1,7 +1,7 @@
 {
   "name": "autorest",
   "version": "3.2.1",
-  "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is an OpenAPI spec that describes the REST API.",
+  "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is an OpenAPI spec that describes the REST API.2",
   "engines": {
     "node": ">=10.13.0"
   },
