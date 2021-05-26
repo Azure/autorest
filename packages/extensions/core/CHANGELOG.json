@@ -2,6 +2,26 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.4.4",
+      "tag": "@autorest/core_v3.4.4",
+      "date": "Wed, 26 May 2021 18:31:17 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Bump** @autorest/configuration with fix with yarn/cli.js not found"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/configuration\" from `~1.4.0` to `~1.4.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/extension\" from `~3.2.6` to `~3.2.7`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.4.3",
       "tag": "@autorest/core_v3.4.3",
       "date": "Thu, 20 May 2021 16:41:13 GMT",

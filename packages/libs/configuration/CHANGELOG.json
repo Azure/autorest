@@ -2,6 +2,23 @@
   "name": "@autorest/configuration",
   "entries": [
     {
+      "version": "1.4.1",
+      "tag": "@autorest/configuration_v1.4.1",
+      "date": "Wed, 26 May 2021 18:31:17 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** issue when using --use: it would try to use yarn but couldn't find yarn/cli.js location"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/extension\" from `~3.2.6` to `~3.2.7`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.4.0",
       "tag": "@autorest/configuration_v1.4.0",
       "date": "Thu, 20 May 2021 16:41:13 GMT",
