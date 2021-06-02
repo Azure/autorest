@@ -1,5 +1,6 @@
 dependencies:
-  '@azure-tools/adl': 0.10.0
+  '@azure-tools/adl': 0.11.0
+  '@azure-tools/adl-rest': 0.2.1
   '@azure-tools/async-io': 3.0.253
   '@azure-tools/eventing': 3.0.252
   '@azure-tools/linq': 3.1.262
@@ -118,10 +119,20 @@ dependencies:
   yarn: 1.22.10
 lockfileVersion: 5.2
 packages:
-  /@azure-tools/adl/0.10.0:
+  /@azure-tools/adl-rest/0.2.1:
+    dependencies:
+      '@azure-tools/adl': 0.11.0
+    dev: false
+    engines:
+      node: '>=14.0.0'
+    resolution:
+      integrity: sha512-nS2llGEeVGx1gMYUBh6/lpg+LBzVZQQHQoOS4O7ajY75iJiIPukoDLlw2kWiJAnFEV5JNgea9ko6KWzOlQB38g==
+  /@azure-tools/adl/0.11.0:
     dependencies:
       autorest: 3.0.6339
+      glob: 7.1.6
       mkdirp: 1.0.4
+      prettier: 2.2.1
       resolve: 1.20.0
       vscode-languageserver: 7.0.0
       vscode-languageserver-textdocument: 1.0.1
@@ -131,7 +142,7 @@ packages:
       node: '>=14.0.0'
     hasBin: true
     resolution:
-      integrity: sha512-TPs30I4ggr5xqvO91HQwr59NuOvJ4ZPFY+dI9enEP1tWrDQrIvz7VatbNmt6xO4RCbdd+Q7TPZMEFnivhcGDuA==
+      integrity: sha512-Wqwquh8BsURS2NJ6QB2yQVnrGhvoRL/DV4RXs31dApxqkwdoXQowD+vUZ+mKI/NIOIeY1uJG7KlIzymHYWHIUQ==
   /@azure-tools/async-io/3.0.253:
     dependencies:
       '@azure-tools/tasks': 3.0.253
@@ -9134,7 +9145,8 @@ packages:
       integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
   file:projects/adl.tgz_ts-node@9.1.1+webpack@5.18.0:
     dependencies:
-      '@azure-tools/adl': 0.10.0
+      '@azure-tools/adl': 0.11.0
+      '@azure-tools/adl-rest': 0.2.1
       '@types/jest': 26.0.20
       '@types/lodash': 4.14.168
       '@types/node': 14.14.34
@@ -9163,7 +9175,7 @@ packages:
       ts-node: '*'
       webpack: '*'
     resolution:
-      integrity: sha512-GUBWQ4r+zAu0spBiqWRQbmLgftEfh+ZVeb9MlMhiZAyFq213k/Q+w9kSluYSJY6RTqK0yS/v6esfF+7Kf6gBAA==
+      integrity: sha512-0Gv5mvppyn6R5C3R209qT9OVb0/YNGhBvcHiw3Mzcz8Run1JGQeCGRPwphz+fUyV45YfOi+yxAr18BmZrC4i0A==
       tarball: file:projects/adl.tgz
     version: 0.0.0
   file:projects/autorest.tgz_ts-node@9.1.1+webpack-cli@4.4.0:
@@ -9776,7 +9788,8 @@ packages:
     version: 0.0.0
 registry: ''
 specifiers:
-  '@azure-tools/adl': ~0.10.0
+  '@azure-tools/adl': ~0.11.0
+  '@azure-tools/adl-rest': ~0.2.1
   '@azure-tools/async-io': ~3.0.0
   '@azure-tools/eventing': ~3.0.0
   '@azure-tools/linq': ~3.1.0

@@ -1,24 +1,26 @@
 // TODO-TIM fix this in extension-base
 import { Channel, Host } from "@autorest/extension-base";
 import { fileURLToPath } from "url";
-import { compileAdl } from "./adl-compiler.js";
+import { compileAdlToCodeModel } from "./adl-compiler.js";
 
 export async function setupAdlCompilerPlugin(host: Host) {
   const inputFiles = await host.GetValue("inputFileUris");
   const entrypoint = inputFiles[0];
-  const result = await compileAdl(fileURLToPath(entrypoint));
+  const result = await compileAdlToCodeModel(fileURLToPath(entrypoint));
 
   if ("error" in result) {
     for (const diagnostic of result.error.diagnostics) {
       host.Message({
         Channel: Channel.Error,
         Text: diagnostic.message,
-        Source: [
-          {
-            document: `file:///${diagnostic.file.path.replace(/\\/g, "/")}`,
-            Position: indexToPosition(diagnostic.file.text, diagnostic.pos),
-          },
-        ],
+        Source: diagnostic.file
+          ? [
+              {
+                document: `file:///${diagnostic.file.path.replace(/\\/g, "/")}`,
+                Position: indexToPosition(diagnostic.file.text, diagnostic.pos ?? 0),
+              },
+            ]
+          : [],
       });
     }
 
@@ -26,7 +28,7 @@ export async function setupAdlCompilerPlugin(host: Host) {
   }
 
   for (const [name, content] of Object.entries(result.compiledFiles)) {
-    host.WriteFile(name, content, undefined, "swagger-document");
+    host.WriteFile(name, content, undefined, "code-model-v4-no-tags");
   }
 }
 

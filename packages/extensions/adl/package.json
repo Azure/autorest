@@ -60,7 +60,10 @@
     "typescript": "~4.2.3"
   },
   "dependencies": {
-    "@azure-tools/adl": "~0.10.0",
-    "@autorest/extension-base": "~3.2.1"
+    "@azure-tools/adl": "~0.11.0",
+    "@azure-tools/adl-rest": "~0.2.1",
+    "@autorest/extension-base": "~3.2.1",
+    "@autorest/codemodel": "~4.15.0",
+    "@azure-tools/codegen": "~2.5.294"
   }
 }
