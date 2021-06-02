@@ -140,6 +140,12 @@
       "projectFolder": "packages/extensions/modelerfour",
       "reviewCategory": "production",
       "shouldPublish": true
+    },
+    {
+      "packageName": "@autorest/adl",
+      "projectFolder": "packages/extensions/adl",
+      "reviewCategory": "production",
+      "shouldPublish": true
     }
   ]
 }

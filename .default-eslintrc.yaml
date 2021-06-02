@@ -64,6 +64,7 @@ rules:
   node/no-unsupported-features/es-syntax: off # Disabling this one otherwise it will complain about typescript imports which get transpiled.
   node/no-missing-import: off
   node/shebang: off
+  node/no-unpublished-import: off
 
   # =================================================
   # Jest plugin

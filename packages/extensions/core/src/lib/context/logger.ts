@@ -188,11 +188,11 @@ export class AutorestCoreLogger {
           }
         }
       } catch (e) {
-        this.log({
-          Channel: Channel.Debug,
-          Text: `Failed to blame ${JSON.stringify(s.Position)} in '${JSON.stringify(s.document)}' (${e})`,
-          Details: e,
-        });
+        // this.log({
+        //   Channel: Channel.Debug,
+        //   Text: `Failed to blame ${JSON.stringify(s.Position)} in '${JSON.stringify(s.document)}' (${e})`,
+        //   Details: e,
+        // });
         return [s];
       }
 

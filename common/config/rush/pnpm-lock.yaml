@@ -1,4 +1,5 @@
 dependencies:
+  '@azure-tools/adl': 0.10.0
   '@azure-tools/async-io': 3.0.253
   '@azure-tools/eventing': 3.0.252
   '@azure-tools/linq': 3.1.262
@@ -6,6 +7,7 @@ dependencies:
   '@azure-tools/tasks': 3.0.253
   '@azure-tools/uri': 3.1.1
   '@azure/logger': 1.0.2
+  '@rush-temp/adl': file:projects/adl.tgz_ts-node@9.1.1+webpack@5.18.0
   '@rush-temp/autorest': file:projects/autorest.tgz_ts-node@9.1.1+webpack-cli@4.4.0
   '@rush-temp/codegen': file:projects/codegen.tgz_prettier@2.2.1+ts-node@9.1.1
   '@rush-temp/codemodel': file:projects/codemodel.tgz_prettier@2.2.1
@@ -116,6 +118,20 @@ dependencies:
   yarn: 1.22.10
 lockfileVersion: 5.2
 packages:
+  /@azure-tools/adl/0.10.0:
+    dependencies:
+      autorest: 3.0.6339
+      mkdirp: 1.0.4
+      resolve: 1.20.0
+      vscode-languageserver: 7.0.0
+      vscode-languageserver-textdocument: 1.0.1
+      yargs: 16.2.0
+    dev: false
+    engines:
+      node: '>=14.0.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-TPs30I4ggr5xqvO91HQwr59NuOvJ4ZPFY+dI9enEP1tWrDQrIvz7VatbNmt6xO4RCbdd+Q7TPZMEFnivhcGDuA==
   /@azure-tools/async-io/3.0.253:
     dependencies:
       '@azure-tools/tasks': 3.0.253
@@ -1732,6 +1748,14 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
+  /autorest/3.0.6339:
+    dev: false
+    engines:
+      node: '>=10.13.0'
+    hasBin: true
+    requiresBuild: true
+    resolution:
+      integrity: sha512-OCCmAxi5gUnh7yPho5A4n8kDrnp5uz4DdFrqwMmp/bU5DVByIdVwrWERlB7EnCFqQ9jz86oZtsjy91B07+zLnw==
   /available-typed-arrays/1.0.2:
     dependencies:
       array-filter: 1.0.0
@@ -8562,6 +8586,19 @@ packages:
       node: '>=4.0.0 || >=6.0.0'
     resolution:
       integrity: sha512-T24Jb5V48e4VgYliUXMnZ379ItbrXgOimweKaJshD84z+8q7ZOZjJan0MeDe+Ugb+uqERDVV8SBmemaGMSMugA==
+  /vscode-jsonrpc/6.0.0:
+    dev: false
+    engines:
+      node: '>=8.0.0 || >=10.0.0'
+    resolution:
+      integrity: sha512-wnJA4BnEjOSyFMvjZdpiOwhSq9uDoK8e/kpRJDTaMYzwlkrhG1fwDIZI94CLsLzlCK5cIbMMtFlJlfR57Lavmg==
+  /vscode-languageserver-protocol/3.16.0:
+    dependencies:
+      vscode-jsonrpc: 6.0.0
+      vscode-languageserver-types: 3.16.0
+    dev: false
+    resolution:
+      integrity: sha512-sdeUoAawceQdgIfTI+sdcwkiK2KU+2cbEYA0agzM2uqaUy2UpnnGHtWTHVEtS0ES4zHU0eMFRGN+oQgDxlD66A==
   /vscode-languageserver-protocol/3.5.1:
     dependencies:
       vscode-jsonrpc: 3.5.0
@@ -8569,6 +8606,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-1fPDIwsAv1difCV+8daOrJEGunClNJWqnUHq/ncWrjhitKWXgGmRCjlwZ3gDUTt54yRcvXz1PXJDaRNvNH6pYA==
+  /vscode-languageserver-textdocument/1.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-UIcJDjX7IFkck7cSkNNyzIz5FyvpQfY7sdzVy+wkKN/BLaD4DQ0ppXQrKePomCxTS7RrolK1I0pey0bG9eh8dA==
+  /vscode-languageserver-types/3.16.0:
+    dev: false
+    resolution:
+      integrity: sha512-k8luDIWJWyenLc5ToFQQMaSrqCHiLwyKPHKPQZ5zz21vM+vIVUSvsRpcbiECH4WR88K2XZqc4ScRcZ7nk/jbeA==
   /vscode-languageserver-types/3.5.0:
     dev: false
     resolution:
@@ -8581,6 +8626,13 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-RYUKn0DgHTFcS8kS4VaNCjNMaQXYqiXdN9bKrFjXzu5RPKfjIYcoh47oVWwZj4L3R/DPB0Se7HPaDatvYY2XgQ==
+  /vscode-languageserver/7.0.0:
+    dependencies:
+      vscode-languageserver-protocol: 3.16.0
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-60HTx5ID+fLRcgdHfmz0LDZAXYEV68fzwG0JWwEPBode9NuMYTIxuYXPg4ngO8i8+Ou0lM7y6GzaYWbiDL0drw==
   /vscode-uri/1.0.8:
     dev: false
     resolution:
@@ -9080,6 +9132,40 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+  file:projects/adl.tgz_ts-node@9.1.1+webpack@5.18.0:
+    dependencies:
+      '@azure-tools/adl': 0.10.0
+      '@types/jest': 26.0.20
+      '@types/lodash': 4.14.168
+      '@types/node': 14.14.34
+      '@types/source-map-support': 0.5.3
+      '@types/webpack': 4.41.26
+      '@typescript-eslint/eslint-plugin': 4.17.0_3641211d697b4d4d12940eb9cf33dc28
+      '@typescript-eslint/parser': 4.17.0_eslint@7.21.0+typescript@4.2.3
+      chalk: 4.1.0
+      eslint: 7.21.0
+      eslint-plugin-jest: 24.3.2_f7a788bcd4fefc8ee2fd4a52e26bb045
+      eslint-plugin-node: 11.1.0_eslint@7.21.0
+      eslint-plugin-prettier: 3.2.0_eslint@7.21.0+prettier@2.2.1
+      eslint-plugin-unicorn: 27.0.0_eslint@7.21.0
+      jest: 26.6.3_ts-node@9.1.1
+      lodash: 4.17.21
+      prettier: 2.2.1
+      rimraf: 3.0.2
+      source-map-support: 0.5.19
+      ts-jest: 26.5.3_jest@26.6.3+typescript@4.2.3
+      ts-loader: 8.0.18_typescript@4.2.3+webpack@5.18.0
+      typescript: 4.2.3
+    dev: false
+    id: file:projects/adl.tgz
+    name: '@rush-temp/adl'
+    peerDependencies:
+      ts-node: '*'
+      webpack: '*'
+    resolution:
+      integrity: sha512-GUBWQ4r+zAu0spBiqWRQbmLgftEfh+ZVeb9MlMhiZAyFq213k/Q+w9kSluYSJY6RTqK0yS/v6esfF+7Kf6gBAA==
+      tarball: file:projects/adl.tgz
+    version: 0.0.0
   file:projects/autorest.tgz_ts-node@9.1.1+webpack-cli@4.4.0:
     dependencies:
       '@azure-tools/async-io': 3.0.253
@@ -9119,7 +9205,7 @@ packages:
       ts-node: '*'
       webpack-cli: '*'
     resolution:
-      integrity: sha512-YgHb38vMMY1D01KCnHKPg9bMueTFkYIsiBulFJR9aZzTBqiAMlMU7fem+BvDKu3ve+AYKUuIUB+3OIEmhHUYxw==
+      integrity: sha512-MlUncBZ8VtiPiuf4dj3/mlSRdV5g4BaFOw7sCAJpBHXRJdsmuYnt+4mFGJn8BOWORSg5PwY941xbM7/3CZ2Lsg==
       tarball: file:projects/autorest.tgz
     version: 0.0.0
   file:projects/codegen.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9239,7 +9325,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-KdyqzucPfBHTbFeBVjLb9F5tuwKpDs4eSdkpKvoIz3TqmquMP9zFJfUM+LDsp87Jn9rOS2CNX0F3CtCkl633pQ==
+      integrity: sha512-wZZvD39HK6SOXVdvjNqP9Yp+vp/gMiHdicGIbYn5S9EaN5QSFzCRCsfjkxkZza0NsydxfXbqATPBcGKlWc91Lg==
       tarball: file:projects/compare.tgz
     version: 0.0.0
   file:projects/configuration.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9268,7 +9354,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-zCFzii68Rf5WiXZqGCFWuTTVkr71YxquxL/7k78PZXFS/PbRWl314hW9KkMYa9j1VJqP42bLW3GXNGlLOvxbkA==
+      integrity: sha512-A13v+plc/QV1QpUVxfGc1891HZDkbmOcuf4wk2y6nLs8DeWSdV0j3ytVtPlkTTpizHymX3NmxJ+31FgCzVvPYA==
       tarball: file:projects/configuration.tgz
     version: 0.0.0
   file:projects/core.tgz_ts-node@9.1.1:
@@ -9324,7 +9410,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-3Ehu6vO3zwW94dXT1eUw/qjGB8u4LjOsqrP3+90Rav29Aojh7BCghE8b71hIuK+XcXn46h3s7rtGwc7uFlz/UQ==
+      integrity: sha512-bCuTFRtkwinuAKqfxBXpMg0JbvdkfN95h7S8TjnbbhC0HLCurl6qB7+mEW6/Pym6PjqjTnDFKWUv0QpQ/PwJQQ==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9664,7 +9750,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-LFX7x1uI5zTPmRKfqeuBgzftfdU+9HgVVaS6BP2uAoYjmBwZ/cJTV51j0t+uMj3NLr6jLsa986A0JPJ7Vpy2KA==
+      integrity: sha512-YqarcMSk/z640kPezvU25djnxGRgaXIJuBIVsKKo3pcYiIpDcDb8hfPMVU/NX/siU+6H/hLBZKtHtXAth9+W6A==
       tarball: file:projects/test-public-packages.tgz
     version: 0.0.0
   file:projects/test-utils.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9690,6 +9776,7 @@ packages:
     version: 0.0.0
 registry: ''
 specifiers:
+  '@azure-tools/adl': ~0.10.0
   '@azure-tools/async-io': ~3.0.0
   '@azure-tools/eventing': ~3.0.0
   '@azure-tools/linq': ~3.1.0
@@ -9697,6 +9784,7 @@ specifiers:
   '@azure-tools/tasks': ~3.0.0
   '@azure-tools/uri': ~3.1.1
   '@azure/logger': ^1.0.2
+  '@rush-temp/adl': file:./projects/adl.tgz
   '@rush-temp/autorest': file:./projects/autorest.tgz
   '@rush-temp/codegen': file:./projects/codegen.tgz
   '@rush-temp/codemodel': file:./projects/codemodel.tgz
