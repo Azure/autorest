@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/extension
 
-This log was last generated on Tue, 27 Apr 2021 17:48:43 GMT and should not be manually modified.
+This log was last generated on Wed, 26 May 2021 18:31:17 GMT and should not be manually modified.
+
+## 3.2.7
+Wed, 26 May 2021 18:31:17 GMT
+
+### Patches
+
+- **Export** fetchPackageMetadata for use without depending on local package manager
 
 ## 3.2.6
 Tue, 27 Apr 2021 17:48:43 GMT

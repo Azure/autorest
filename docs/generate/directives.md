@@ -27,7 +27,7 @@ Directives consist of three parts:
   - A `property` can be filtered by:
     - its location within its parent object
 
-- **Transform**: denoted by the field `transform`, the actions we would like to be applied on the specified objects. The list of available variables and functions can be found in [eval.ts](https://github.com/Azure/autorest/blob/master/packages/extensions/core/src/lib/plugins/transformer/eval.ts)
+- **Transform**: denoted by the field `transform`, the actions we would like to be applied on the specified objects. The list of available variables and functions can be found in [eval.ts](https://github.com/Azure/autorest/blob/main/packages/extensions/core/src/lib/plugins/transformer/eval.ts)
 
 ## Built-in Directives
 
@@ -279,5 +279,5 @@ For language-specific directives, see the ones for:
 [paths]: https://swagger.io/docs/specification/paths-and-operations/
 [parameters]: https://swagger.io/docs/specification/describing-parameters/
 [components]: https://swagger.io/docs/specification/components/
-[x_ms_client_name]: https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-client-name
-[x_ms_enum]: https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum
+[x_ms_client_name]: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-client-name
+[x_ms_enum]: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-enum

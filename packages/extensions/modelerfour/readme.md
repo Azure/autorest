@@ -17,7 +17,7 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 ### Autorest plugin configuration
 
 - Please don't edit this section unless you're re-configuring how the powershell extension plugs in to AutoRest
-  AutoRest needs the below config to pick this up as a plug-in - see https://github.com/Azure/autorest/blob/master/docs/developer/architecture/AutoRest-extension.md
+  AutoRest needs the below config to pick this up as a plug-in - see https://github.com/Azure/autorest/blob/main/docs/developer/architecture/AutoRest-extension.md
 
 ### ModelFour Options
 
@@ -94,9 +94,6 @@ modelerfour:
   # e.g. ChildSchema: {allOf: [ParentSchema]}.
   # In this case ChildSchema will be removed and all reference to it will be updated to point to ParentSchema
   remove-empty-child-schemas: false|true
-
-  # Disable validating operations that have no success response(Only exceptions can be produced.)
-  allow-operations-with-no-success: false|true
 
   # **TEMPORARY FLAG DO NOT DEPEND ON IT**
   # Disable anyobject type and default to type any instead.

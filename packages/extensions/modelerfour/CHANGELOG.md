@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Tue, 04 May 2021 18:18:45 GMT and should not be manually modified.
+This log was last generated on Thu, 20 May 2021 16:41:13 GMT and should not be manually modified.
+
+## 4.19.2
+Thu, 20 May 2021 16:41:13 GMT
+
+### Patches
+
+- **Immproved** error message for duplicate operations
 
 ## 4.19.1
 Tue, 04 May 2021 18:18:45 GMT

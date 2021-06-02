@@ -1,6 +1,18 @@
 # Change Log - autorest
 
-This log was last generated on Tue, 27 Apr 2021 17:48:43 GMT and should not be manually modified.
+This log was last generated on Wed, 26 May 2021 18:31:17 GMT and should not be manually modified.
+
+## 3.2.2
+Wed, 26 May 2021 18:31:17 GMT
+
+### Patches
+
+- **Bump** @autorest/configuration with fix with yarn/cli.js not found
+
+## 3.2.1
+Thu, 20 May 2021 16:41:13 GMT
+
+_Version update only_
 
 ## 3.2.0
 Tue, 27 Apr 2021 17:48:43 GMT
