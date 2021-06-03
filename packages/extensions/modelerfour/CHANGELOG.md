@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Thu, 20 May 2021 16:41:13 GMT and should not be manually modified.
+This log was last generated on Thu, 03 Jun 2021 22:37:55 GMT and should not be manually modified.
+
+## 4.19.3
+Thu, 03 Jun 2021 22:37:55 GMT
+
+### Patches
+
+- **Fix** Allow empty paths in operation
 
 ## 4.19.2
 Thu, 20 May 2021 16:41:13 GMT

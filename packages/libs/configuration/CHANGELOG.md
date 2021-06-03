@@ -1,6 +1,13 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Wed, 26 May 2021 18:31:17 GMT and should not be manually modified.
+This log was last generated on Thu, 03 Jun 2021 22:37:55 GMT and should not be manually modified.
+
+## 1.5.0
+Thu, 03 Jun 2021 22:37:55 GMT
+
+### Minor changes
+
+- Add support for adl
 
 ## 1.4.1
 Wed, 26 May 2021 18:31:17 GMT
