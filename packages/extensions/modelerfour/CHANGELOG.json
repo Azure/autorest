@@ -2,6 +2,18 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.19.3",
+      "tag": "@autorest/modelerfour_v4.19.3",
+      "date": "Thu, 03 Jun 2021 22:37:55 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Allow empty paths in operation"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.19.2",
       "tag": "@autorest/modelerfour_v4.19.2",
       "date": "Thu, 20 May 2021 16:41:13 GMT",

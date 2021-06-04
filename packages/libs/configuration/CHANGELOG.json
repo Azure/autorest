@@ -2,6 +2,18 @@
   "name": "@autorest/configuration",
   "entries": [
     {
+      "version": "1.5.0",
+      "tag": "@autorest/configuration_v1.5.0",
+      "date": "Thu, 03 Jun 2021 22:37:55 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add support for adl"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.4.1",
       "tag": "@autorest/configuration_v1.4.1",
       "date": "Wed, 26 May 2021 18:31:17 GMT",

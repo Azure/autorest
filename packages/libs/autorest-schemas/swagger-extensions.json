@@ -1685,7 +1685,16 @@
       ]
     },
     "xmsPaths": {
-      "$ref": "#/definitions/paths"
+      "type": "object",
+      "description": "Relative paths to the individual endpoints. They must be relative to the 'basePath'.",
+      "patternProperties": {
+        "^x-.*$": {
+          "$ref": "#/definitions/vendorExtension"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/pathItem"
+      }
     },
     "xmsExternal": {
       "type": "boolean"

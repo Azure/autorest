@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Wed, 26 May 2021 18:31:17 GMT and should not be manually modified.
+This log was last generated on Thu, 03 Jun 2021 22:37:55 GMT and should not be manually modified.
+
+## 3.4.5
+Thu, 03 Jun 2021 22:37:55 GMT
+
+### Patches
+
+- Blaming files not loaded by autorest
 
 ## 3.4.4
 Wed, 26 May 2021 18:31:17 GMT
