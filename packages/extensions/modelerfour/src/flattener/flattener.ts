@@ -14,7 +14,8 @@ import {
   Request,
 } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
-import { values, items, length, Dictionary, refCount, clone } from "@azure-tools/linq";
+import { values, items, length, refCount } from "@azure-tools/linq";
+import { isDefined } from "../utils";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
 
 const xmsThreshold = "x-ms-payload-flattening-threshold";
@@ -173,127 +174,151 @@ export class Flattener {
     schema.extensions[isCurrentlyFlattening] = false;
   }
 
-  process() {
+  public process() {
     // support 'x-ms-payload-flattening-threshold'  per-operation
     // support '--payload-flattening-threshold:X' global setting
 
     if (this.options["flatten-models"] === true) {
-      for (const schema of values(this.codeModel.schemas.objects)) {
-        this.flattenSchema(schema);
-      }
-
-      if (!this.options["keep-unused-flattened-models"]) {
-        let dirty = false;
-        do {
-          // reset on every pass
-          dirty = false;
-          // remove unreferenced models
-          for (const { key, value: schema } of items(this.codeModel.schemas.objects).toArray()) {
-            // only remove unreferenced models that have been flattened.
-            if (!schema.extensions?.[hasBeenFlattened]) {
-              continue;
-            }
-
-            if (schema.discriminatorValue || schema.discriminator) {
-              // it's polymorphic -- I don't think we can remove this
-              continue;
-            }
-
-            if (schema.children?.all || schema.parents?.all) {
-              // it's got either a parent or child schema.
-              continue;
-            }
-
-            if (refCount(this.codeModel, schema) === 1) {
-              this.codeModel.schemas.objects?.splice(key, 1);
-              dirty = true;
-              break;
-            }
-          }
-        } while (dirty);
-      }
-
-      for (const schema of values(this.codeModel.schemas.objects)) {
-        if (schema.extensions) {
-          delete schema.extensions[isCurrentlyFlattening];
-          // don't want this until I have removed the unreferenced models.
-          // delete schema.extensions[hasBeenFlattened];
-          if (length(schema.extensions) === 0) {
-            delete schema["extensions"];
-          }
-        }
-      }
+      this.flattenModels();
     }
     if (this.options["flatten-payloads"] === true) {
-      /**
-       * BodyParameter Payload Flattening
-       *
-       * A body parameter is flattened (one level) when:
-       *
-       *  - the body parameter schema is an object
-       *  - the body parameter schema is not polymorphic (is this true?)
-       *
-       *
-       *
-       *  and one of:
-       *  - the body parameter has x-ms-client-flatten: true
-       *  - the operation has x-ms-payload-flattening-threshold greater than zero and the property count in the body parameter is lessthan or equal to that.
-       *  - the global configuration option payload-flattening-threshold is greater than zero and the property count in the body parameter is lessthan or equal to that
-       *
-       */
-
-      // flatten payloads
-
-      for (const group of this.codeModel.operationGroups) {
-        for (const operation of group.operations) {
-          // when there are multiple requests in an operation
-          // and the generator asks not to flatten them
-          if (length(operation.requests) > 1 && this.options["multiple-request-parameter-flattening"] === false) {
-            continue;
-          }
-
-          for (const request of values(operation.requests)) {
-            const body = values(request.parameters).first(
-              (p) =>
-                p.protocol.http?.in === ParameterLocation.Body && p.implementation === ImplementationLocation.Method,
-            );
-
-            if (body && isObjectSchema(body.schema)) {
-              const schema = <ObjectSchema>body.schema;
-              if (schema.discriminator) {
-                // skip flattening on polymorphic payloads, since you don't know the actual type.
-                continue;
-              }
-
-              let flattenOperationPayload = body?.extensions?.[xmsFlatten];
-              if (flattenOperationPayload === false) {
-                // told not to explicitly.
-                continue;
-              }
-
-              if (!flattenOperationPayload) {
-                const threshold = <number>operation.extensions?.[xmsThreshold] ?? this.threshold;
-                if (threshold > 0) {
-                  // get the count of the (non-readonly) properties in the schema
-                  flattenOperationPayload =
-                    length(
-                      values(getAllProperties(schema)).where(
-                        (property) => property.readOnly !== true && property.schema.type !== SchemaType.Constant,
-                      ),
-                    ) <= threshold;
-                }
-              }
-
-              if (flattenOperationPayload) {
-                this.flattenPayload(request, body, schema);
-                request.updateSignatureParameters();
-              }
-            }
-          }
-        }
-      }
+      this.flattenPayloads();
     }
 
     return this.codeModel;
+  }
+
+  private flattenModels() {
+    for (const schema of values(this.codeModel.schemas.objects)) {
+      this.flattenSchema(schema);
+    }
+    const start = new Date().getTime();
+    if (!this.options["keep-unused-flattened-models"]) {
+      this.remoteUnusedFlattenModels();
+    }
+
+    console.error("Time", new Date().getTime() - start);
+
+    for (const schema of values(this.codeModel.schemas.objects)) {
+      if (schema.extensions) {
+        delete schema.extensions[isCurrentlyFlattening];
+        // don't want this until I have removed the unreferenced models.
+        // delete schema.extensions[hasBeenFlattened];
+        if (length(schema.extensions) === 0) {
+          delete schema["extensions"];
+        }
+      }
+    }
+  }
+
+  private remoteUnusedFlattenModels() {
+    if (!this.codeModel.schemas.objects) {
+      return;
+    }
+
+    const objects: Array<ObjectSchema | undefined> = this.codeModel.schemas.objects;
+
+    let dirty = false;
+    do {
+      // reset on every pass
+      dirty = false;
+      // remove unreferenced models
+      for (const [index, schema] of objects.entries()) {
+        if (schema === undefined) {
+          continue;
+        }
+        // only remove unreferenced models that have been flattened.
+        if (!schema.extensions?.[hasBeenFlattened]) {
+          continue;
+        }
+
+        if (schema.discriminatorValue || schema.discriminator) {
+          // it's polymorphic -- I don't think we can remove this
+          continue;
+        }
+
+        if (schema.children?.all || schema.parents?.all) {
+          // it's got either a parent or child schema.
+          continue;
+        }
+
+        if (refCount(this.codeModel, schema) === 1) {
+          objects[index] = undefined;
+          dirty = true;
+          break;
+        }
+      }
+    } while (dirty);
+
+    this.codeModel.schemas.objects = objects.filter(isDefined);
+  }
+
+  private flattenPayloads() {
+    /**
+     * BodyParameter Payload Flattening
+     *
+     * A body parameter is flattened (one level) when:
+     *
+     *  - the body parameter schema is an object
+     *  - the body parameter schema is not polymorphic (is this true?)
+     *
+     *
+     *
+     *  and one of:
+     *  - the body parameter has x-ms-client-flatten: true
+     *  - the operation has x-ms-payload-flattening-threshold greater than zero and the property count in the body parameter is lessthan or equal to that.
+     *  - the global configuration option payload-flattening-threshold is greater than zero and the property count in the body parameter is lessthan or equal to that
+     *
+     */
+
+    // flatten payloads
+
+    for (const group of this.codeModel.operationGroups) {
+      for (const operation of group.operations) {
+        // when there are multiple requests in an operation
+        // and the generator asks not to flatten them
+        if (length(operation.requests) > 1 && this.options["multiple-request-parameter-flattening"] === false) {
+          continue;
+        }
+
+        for (const request of values(operation.requests)) {
+          const body = values(request.parameters).first(
+            (p) => p.protocol.http?.in === ParameterLocation.Body && p.implementation === ImplementationLocation.Method,
+          );
+
+          if (body && isObjectSchema(body.schema)) {
+            const schema = <ObjectSchema>body.schema;
+            if (schema.discriminator) {
+              // skip flattening on polymorphic payloads, since you don't know the actual type.
+              continue;
+            }
+
+            let flattenOperationPayload = body?.extensions?.[xmsFlatten];
+            if (flattenOperationPayload === false) {
+              // told not to explicitly.
+              continue;
+            }
+
+            if (!flattenOperationPayload) {
+              const threshold = <number>operation.extensions?.[xmsThreshold] ?? this.threshold;
+              if (threshold > 0) {
+                // get the count of the (non-readonly) properties in the schema
+                flattenOperationPayload =
+                  length(
+                    values(getAllProperties(schema)).where(
+                      (property) => property.readOnly !== true && property.schema.type !== SchemaType.Constant,
+                    ),
+                  ) <= threshold;
+              }
+            }
+
+            if (flattenOperationPayload) {
+              this.flattenPayload(request, body, schema);
+              request.updateSignatureParameters();
+            }
+          }
+        }
+      }
+    }
   }
 }
