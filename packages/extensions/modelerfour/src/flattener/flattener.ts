@@ -1,12 +1,10 @@
 import {
   CodeModel,
-  Schema,
   ObjectSchema,
   isObjectSchema,
   SchemaType,
   Property,
   ParameterLocation,
-  Operation,
   Parameter,
   VirtualParameter,
   getAllProperties,
@@ -14,7 +12,7 @@ import {
   Request,
 } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
-import { values, items, length, refCount } from "@azure-tools/linq";
+import { values, items, length } from "@azure-tools/linq";
 import { isDefined } from "../utils";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
 
@@ -217,7 +215,7 @@ export class Flattener {
     }
 
     const objects: Array<ObjectSchema | undefined> = this.codeModel.schemas.objects;
-
+    let count = 0;
     let dirty = false;
     do {
       // reset on every pass
@@ -242,15 +240,36 @@ export class Flattener {
           continue;
         }
 
-        if (refCount(this.codeModel, schema) === 1) {
+        if (this.isReferencedByOthers(schema)) {
+          count++;
           objects[index] = undefined;
           dirty = true;
           break;
         }
       }
     } while (dirty);
-
+    console.error("Rerun", count);
     this.codeModel.schemas.objects = objects.filter(isDefined);
+  }
+
+  private isReferencedByOthers(schema: ObjectSchema) {
+    let count = 0;
+    let found = false;
+    find(
+      this.codeModel,
+      (obj) => {
+        if (obj === schema) {
+          count++;
+          if (count > 1) {
+            found = true;
+          }
+        }
+        return false;
+      },
+      new WeakSet<object>(),
+    );
+
+    return found;
   }
 
   private flattenPayloads() {
@@ -319,6 +338,53 @@ export class Flattener {
           }
         }
       }
+    }
+  }
+}
+
+function find(instance: any, visitor: (item: any) => boolean, visited: WeakSet<object>) {
+  if (instance === null || instance === undefined || visited.has(instance)) {
+    return;
+  }
+  visited.add(instance);
+
+  if (instance instanceof Set || Array.isArray(instance)) {
+    for (const each of instance) {
+      if (typeof each === "object") {
+        if (find(each, visitor, visited)) {
+          return true;
+        }
+      }
+      if (visitor(each)) {
+        return true;
+      }
+    }
+    return;
+  }
+
+  if (instance instanceof Map) {
+    // walk thru map members.
+    for (const [key, value] of instance.entries()) {
+      if (typeof value === "object") {
+        find(value, visitor, visited);
+      }
+      // yield the member after visiting children
+      if (visitor(value)) {
+        return true;
+      }
+    }
+    return;
+  }
+
+  // objects
+  for (const key of Object.keys(instance)) {
+    const value = instance[key];
+    if (typeof value === "object") {
+      find(value, visitor, visited);
+    }
+    // yield the member after visiting children
+    if (visitor(value)) {
+      return true;
     }
   }
 }
