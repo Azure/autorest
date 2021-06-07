@@ -190,7 +190,6 @@ export class Flattener {
     for (const schema of this.codeModel.schemas.objects ?? []) {
       this.flattenSchema(schema);
     }
-    const start = new Date().getTime();
     if (!this.options["keep-unused-flattened-models"]) {
       this.remoteUnusedFlattenModels();
     }
@@ -205,7 +204,6 @@ export class Flattener {
         }
       }
     }
-    console.error("Time", new Date().getTime() - start);
   }
 
   private remoteUnusedFlattenModels() {
@@ -214,7 +212,6 @@ export class Flattener {
     }
 
     const objects: Array<ObjectSchema | undefined> = this.codeModel.schemas.objects;
-    let count = 0;
     let dirty = false;
     do {
       // reset on every pass
@@ -240,7 +237,6 @@ export class Flattener {
         }
 
         if (!this.isReferencedByOthers(schema)) {
-          count++;
           objects[index] = undefined;
           dirty = true;
         }
