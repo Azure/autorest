@@ -240,36 +240,31 @@ export class Flattener {
           continue;
         }
 
-        if (this.isReferencedByOthers(schema)) {
+        if (!this.isReferencedByOthers(schema)) {
           count++;
           objects[index] = undefined;
           dirty = true;
-          break;
         }
       }
     } while (dirty);
-    console.error("Rerun", count);
     this.codeModel.schemas.objects = objects.filter(isDefined);
   }
 
   private isReferencedByOthers(schema: ObjectSchema) {
     let count = 0;
-    let found = false;
-    find(
+    return find(
       this.codeModel,
       (obj) => {
         if (obj === schema) {
           count++;
           if (count > 1) {
-            found = true;
+            return true;
           }
         }
         return false;
       },
       new WeakSet<object>(),
     );
-
-    return found;
   }
 
   private flattenPayloads() {
@@ -342,9 +337,9 @@ export class Flattener {
   }
 }
 
-function find(instance: any, visitor: (item: any) => boolean, visited: WeakSet<object>) {
+function find(instance: any, visitor: (item: any) => boolean, visited: WeakSet<object>): boolean {
   if (instance === null || instance === undefined || visited.has(instance)) {
-    return;
+    return false;
   }
   visited.add(instance);
 
@@ -359,32 +354,37 @@ function find(instance: any, visitor: (item: any) => boolean, visited: WeakSet<o
         return true;
       }
     }
-    return;
+    return false;
   }
 
   if (instance instanceof Map) {
     // walk thru map members.
     for (const [key, value] of instance.entries()) {
       if (typeof value === "object") {
-        find(value, visitor, visited);
+        if (find(value, visitor, visited)) {
+          return true;
+        }
       }
       // yield the member after visiting children
       if (visitor(value)) {
         return true;
       }
     }
-    return;
+    return false;
   }
 
   // objects
   for (const key of Object.keys(instance)) {
     const value = instance[key];
     if (typeof value === "object") {
-      find(value, visitor, visited);
+      if (find(value, visitor, visited)) {
+        return true;
+      }
     }
     // yield the member after visiting children
     if (visitor(value)) {
       return true;
     }
   }
+  return false;
 }
