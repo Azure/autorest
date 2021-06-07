@@ -12,9 +12,9 @@ import {
   Request,
 } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
-import { values, items, length } from "@azure-tools/linq";
 import { isDefined } from "../utils";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
+import { items } from "@azure-tools/linq";
 
 const xmsThreshold = "x-ms-payload-flattening-threshold";
 const xmsFlatten = "x-ms-client-flatten";
@@ -87,7 +87,7 @@ export class Flattener {
     // hide the original parameter
     parameter.flattened = true;
 
-    for (const property of values(getAllProperties(schema))) {
+    for (const property of getAllProperties(schema)) {
       if (property.readOnly) {
         // skip read-only properties
         continue;
@@ -123,14 +123,14 @@ export class Flattener {
 
     // ensure that parent schemas are done first -- this should remove
     // the problem when the order isn't just right.
-    for (const parent of values(schema.parents?.immediate)) {
+    for (const parent of schema.parents?.immediate ?? []) {
       if (isObjectSchema(parent)) {
         this.flattenSchema(parent);
       }
     }
 
     if (schema.properties) {
-      for (const { key: index, value: property } of items(schema.properties).toArray().reverse()) {
+      for (const [index, property] of [...schema.properties.entries()].reverse()) {
         if (isObjectSchema(property.schema) && property.extensions?.[xmsFlatten]) {
           // first, ensure tha the child is pre-flattened
           this.flattenSchema(property.schema);
@@ -140,7 +140,7 @@ export class Flattener {
 
           // copy all of the properties from the child into this
           // schema
-          for (const childProperty of values(getAllProperties(property.schema))) {
+          for (const childProperty of getAllProperties(property.schema)) {
             schema.addProperty(
               new Property(
                 childProperty.language.default.name,
@@ -160,7 +160,7 @@ export class Flattener {
 
           // remove the extension
           delete property.extensions[xmsFlatten];
-          if (length(property.extensions) === 0) {
+          if (Object.keys(property.extensions ?? {}).length === 0) {
             delete property["extensions"];
           }
           // and mark the child class as 'do-not-generate' ?
@@ -187,7 +187,7 @@ export class Flattener {
   }
 
   private flattenModels() {
-    for (const schema of values(this.codeModel.schemas.objects)) {
+    for (const schema of this.codeModel.schemas.objects ?? []) {
       this.flattenSchema(schema);
     }
     const start = new Date().getTime();
@@ -195,18 +195,17 @@ export class Flattener {
       this.remoteUnusedFlattenModels();
     }
 
-    console.error("Time", new Date().getTime() - start);
-
-    for (const schema of values(this.codeModel.schemas.objects)) {
+    for (const schema of this.codeModel.schemas.objects ?? []) {
       if (schema.extensions) {
         delete schema.extensions[isCurrentlyFlattening];
         // don't want this until I have removed the unreferenced models.
         // delete schema.extensions[hasBeenFlattened];
-        if (length(schema.extensions) === 0) {
+        if (schema.extensions && Object.keys(schema.extensions).length === 0) {
           delete schema["extensions"];
         }
       }
     }
+    console.error("Time", new Date().getTime() - start);
   }
 
   private remoteUnusedFlattenModels() {
@@ -247,6 +246,7 @@ export class Flattener {
         }
       }
     } while (dirty);
+
     this.codeModel.schemas.objects = objects.filter(isDefined);
   }
 
@@ -291,12 +291,16 @@ export class Flattener {
       for (const operation of group.operations) {
         // when there are multiple requests in an operation
         // and the generator asks not to flatten them
-        if (length(operation.requests) > 1 && this.options["multiple-request-parameter-flattening"] === false) {
+        if (
+          operation.requests &&
+          operation.requests.length > 1 &&
+          this.options["multiple-request-parameter-flattening"] === false
+        ) {
           continue;
         }
 
-        for (const request of values(operation.requests)) {
-          const body = values(request.parameters).first(
+        for (const request of operation.requests ?? []) {
+          const body = request.parameters?.find(
             (p) => p.protocol.http?.in === ParameterLocation.Body && p.implementation === ImplementationLocation.Method,
           );
 
@@ -318,11 +322,9 @@ export class Flattener {
               if (threshold > 0) {
                 // get the count of the (non-readonly) properties in the schema
                 flattenOperationPayload =
-                  length(
-                    values(getAllProperties(schema)).where(
-                      (property) => property.readOnly !== true && property.schema.type !== SchemaType.Constant,
-                    ),
-                  ) <= threshold;
+                  [...getAllProperties(schema)].filter(
+                    (property) => property.readOnly !== true && property.schema.type !== SchemaType.Constant,
+                  ).length <= threshold;
               }
             }
 
