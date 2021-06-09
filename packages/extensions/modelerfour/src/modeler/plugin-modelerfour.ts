@@ -11,7 +11,7 @@ import { codeModelSchema, CodeModel } from "@autorest/codemodel";
 
 export async function processRequest(host: Host) {
   const debug = (await host.GetValue("debug")) || false;
-
+  console.log("Foo");
   try {
     const session = await startSession<OpenAPI.Model>(host, undefined, undefined, "prechecked-openapi-document");
     const options = <any>await session.getValue("modelerfour", {});

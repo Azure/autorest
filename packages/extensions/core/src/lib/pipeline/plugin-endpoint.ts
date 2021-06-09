@@ -4,17 +4,19 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { DataHandle, DataSink, DataSource, LazyPromise, Mapping, SmartPosition } from "@azure-tools/datastore";
-import { EnsureIsFolderUri } from "@azure-tools/uri";
+import { ensureIsFolderUri } from "@azure-tools/uri";
 import { ChildProcess, fork } from "child_process";
 import { RawSourceMap } from "source-map";
-import { Readable, Writable } from "stream";
+import { Writable } from "stream";
 import { CancellationToken, createMessageConnection } from "vscode-jsonrpc";
+import * as rpc from "vscode-jsonrpc";
 import { Artifact } from "../artifact";
 import { AutorestContext } from "../context";
 import { EventEmitter } from "../events";
 import { Exception } from "@autorest/common";
 import { ArtifactMessage, Channel, Message } from "../message";
 import { IAutoRestPluginInitiator, IAutoRestPluginInitiatorTypes, IAutoRestPluginTargetTypes } from "./plugin-api";
+import { Readable } from "node:stream";
 
 interface IAutoRestPluginTargetEndpoint {
   GetPluginNames(cancellationToken: CancellationToken): Promise<Array<string>>;
@@ -76,6 +78,7 @@ export class AutoRestExtension extends EventEmitter {
     if (childProc.stdin === null) {
       throw new Error("Child Process has no stdin pipe.");
     }
+
     const plugin = new AutoRestExtension(extensionName, version, childProc.stdout, childProc.stdin, childProc);
     if (childProc.stderr !== null) {
       childProc.stderr.pipe(process.stderr);
@@ -123,7 +126,13 @@ export class AutoRestExtension extends EventEmitter {
     });
 
     // create channel
-    const channel = createMessageConnection(reader, writerProxy, console);
+    const channel = createMessageConnection(reader as any, writerProxy as any);
+    channel.onError((error) => {
+      console.error("THIS is an error", error);
+    });
+    channel.onUnhandledNotification((error) => {
+      console.error("THIS is an erro2r", error);
+    });
     channel.listen();
 
     // initiator
@@ -360,9 +369,7 @@ export class AutoRestExtension extends EventEmitter {
         // we'd like to be able to ask the host for a file directly (but only if it's supposed to be in the output-folder)
         const t = context.config.outputFolderUri.length;
         return (
-          await context.fileSystem.EnumerateFileUris(
-            EnsureIsFolderUri(`${context.config.outputFolderUri}${artifactType || ""}`),
-          )
+          await context.fileSystem.list(ensureIsFolderUri(`${context.config.outputFolderUri}${artifactType || ""}`))
         ).map((each) => each.substr(t));
       },
 

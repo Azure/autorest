@@ -107,7 +107,7 @@ dependencies:
   typescript: 4.2.3
   typescript-json-schema: 0.40.0
   untildify: 4.0.0
-  vscode-jsonrpc: 3.6.2
+  vscode-jsonrpc: 6.0.0
   vscode-languageserver: 3.5.1
   webpack: 5.18.0_webpack-cli@4.4.0
   webpack-cli: 4.4.0_webpack@5.18.0
@@ -8580,12 +8580,6 @@ packages:
       node: '>=4.0.0 || >=6.0.0'
     resolution:
       integrity: sha1-hyOdnhZrLXNSJFuKgTWXgEwdY6o=
-  /vscode-jsonrpc/3.6.2:
-    dev: false
-    engines:
-      node: '>=4.0.0 || >=6.0.0'
-    resolution:
-      integrity: sha512-T24Jb5V48e4VgYliUXMnZ379ItbrXgOimweKaJshD84z+8q7ZOZjJan0MeDe+Ugb+uqERDVV8SBmemaGMSMugA==
   /vscode-jsonrpc/6.0.0:
     dev: false
     engines:
@@ -9205,7 +9199,7 @@ packages:
       ts-node: '*'
       webpack-cli: '*'
     resolution:
-      integrity: sha512-MlUncBZ8VtiPiuf4dj3/mlSRdV5g4BaFOw7sCAJpBHXRJdsmuYnt+4mFGJn8BOWORSg5PwY941xbM7/3CZ2Lsg==
+      integrity: sha512-rHk6kravnst/yErhysOwhduWl95dC1cYAbbKkVRn4+ZCws8cq7rmpUjV1CGnYBIBbqMOYa6xVsnzC2bPiFk8zA==
       tarball: file:projects/autorest.tgz
     version: 0.0.0
   file:projects/codegen.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9325,7 +9319,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-wZZvD39HK6SOXVdvjNqP9Yp+vp/gMiHdicGIbYn5S9EaN5QSFzCRCsfjkxkZza0NsydxfXbqATPBcGKlWc91Lg==
+      integrity: sha512-CwTFg/grQ7So+gXOuz+NuoJ4zQ1XzcltPpTS339OzUr8BMC7PMaWg2MZq9J2R6t55CdwhyDh/3jDBDFnYgFhvg==
       tarball: file:projects/compare.tgz
     version: 0.0.0
   file:projects/configuration.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9398,7 +9392,7 @@ packages:
       ts-jest: 26.5.3_jest@26.6.3+typescript@4.2.3
       ts-loader: 8.0.18_typescript@4.2.3+webpack@5.18.0
       typescript: 4.2.3
-      vscode-jsonrpc: 3.6.2
+      vscode-jsonrpc: 6.0.0
       vscode-languageserver: 3.5.1
       webpack: 5.18.0_webpack-cli@4.4.0
       webpack-cli: 4.4.0_webpack@5.18.0
@@ -9410,7 +9404,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-bCuTFRtkwinuAKqfxBXpMg0JbvdkfN95h7S8TjnbbhC0HLCurl6qB7+mEW6/Pym6PjqjTnDFKWUv0QpQ/PwJQQ==
+      integrity: sha512-ZxBqkbwuQc+56RaCzh/BUELvJ5U1XioiTuBg4G6edqD23QYEbBtkbsv13SV+uONgcFzlLxNKWtyuqGs56dmHLQ==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9490,14 +9484,14 @@ packages:
       js-yaml: 4.0.0
       rimraf: 3.0.2
       typescript: 4.2.3
-      vscode-jsonrpc: 3.6.2
+      vscode-jsonrpc: 6.0.0
     dev: false
     id: file:projects/extension-base.tgz
     name: '@rush-temp/extension-base'
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-ykGM/5YZStuGK2kh5XqYc/BnHQdzy6pEG7tMl958CTYTqSrVqdP2H4svY7PgKqg8L3CgxjuaGtxqSLCP6lFGmw==
+      integrity: sha512-e78sgOobiyBsqxvES81scKE6rg2aVz0S+3L1xOqgNj3e1tNRSOV7g7kxtR7MqCk1Tn6rxcYk/gF57OZFecf01A==
       tarball: file:projects/extension-base.tgz
     version: 0.0.0
   file:projects/extension.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9750,7 +9744,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-YqarcMSk/z640kPezvU25djnxGRgaXIJuBIVsKKo3pcYiIpDcDb8hfPMVU/NX/siU+6H/hLBZKtHtXAth9+W6A==
+      integrity: sha512-Pujo9S7ukDFIRj6UyS3S2xirOwQOHgKTWbncF33wP1dKvcq/ougARAW7wK6GvwvjPmhGc3WAd4Pa4jQsg6bgNA==
       tarball: file:projects/test-public-packages.tgz
     version: 0.0.0
   file:projects/test-utils.tgz_prettier@2.2.1+ts-node@9.1.1:
@@ -9884,7 +9878,7 @@ specifiers:
   typescript: ~4.2.3
   typescript-json-schema: ~0.40.0
   untildify: ^4.0.0
-  vscode-jsonrpc: ^3.5.0
+  vscode-jsonrpc: ^6.0.0
   vscode-languageserver: 3.5.1
   webpack: ~5.18.0
   webpack-cli: ~4.4.0

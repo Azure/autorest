@@ -90,7 +90,7 @@
     "ts-jest": "^26.4.4",
     "ts-loader": "~8.0.14",
     "typescript": "~4.2.3",
-    "vscode-jsonrpc": "^3.5.0",
+    "vscode-jsonrpc": "^6.0.0",
     "vscode-languageserver": "3.5.1",
     "webpack-cli": "~4.4.0",
     "webpack-node-externals": "~2.5.2",
