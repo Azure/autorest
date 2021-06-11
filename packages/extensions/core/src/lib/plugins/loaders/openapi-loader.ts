@@ -36,23 +36,17 @@ export async function LoadLiterateOpenAPI(
   inputFileUri: string,
   sink: DataSink,
 ): Promise<DataHandle | null> {
-  console.log("BEFORE MEM", `${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
   const handle = await inputScope.readStrict(inputFileUri);
   await checkSyntaxFromData(inputFileUri, handle, config);
-  console.log("DURING MEM 1", `${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
   // const data = await ParseLiterateYaml(config, handle, sink);
-  console.log("DURING MEM 2", `${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
   if (!isOpenAPI3Spec(await handle.readObject<OpenAPI3Spec>())) {
     return null;
     // TODO: Should we throw or send an error message?
   }
-  console.log("DURING MEM3", `${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
   config.Message({ Channel: Channel.Verbose, Text: `Reading OpenAPI 3.0 file ${inputFileUri}` });
 
   const ast = CloneAst(await handle.readYamlAst());
   const mapping = identitySourceMapping(handle.key, ast);
-
-  console.log("AFTER MEM", `${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
   return sink.writeData(handle.description, StringifyAst(ast), [inputFileUri], "openapi-document", mapping, [handle]);
 }
 
