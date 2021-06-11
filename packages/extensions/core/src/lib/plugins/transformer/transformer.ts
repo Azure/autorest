@@ -175,12 +175,8 @@ export function createTransformerPlugin(): PipelinePlugin {
   return createPerFilePlugin(async (config) => {
     const isObject = config.GetEntry("is-object") === false ? false : true;
     const manipulator = new Manipulator(config);
-    console.log("TRANSFORMER VAL: BEFERERER2 MEM", `${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
     return async (fileIn, sink) => {
-      console.log("TRANSFORMER VAL: BEFERERER3 MEM", `${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
       const fileOut = await manipulator.process(fileIn, sink, isObject, fileIn.description);
-      console.log("TRANSFORMER VAL: AFTER MEM", `${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
-
       return sink.forward(fileIn.description, fileOut);
     };
   });
