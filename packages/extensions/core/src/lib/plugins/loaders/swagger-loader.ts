@@ -1,7 +1,6 @@
 import { PipelinePlugin } from "../../pipeline/common";
 import { Channel } from "../../message";
-import { CloneAst, DataHandle, DataSink, DataSource, QuickDataSource, StringifyAst } from "@azure-tools/datastore";
-import { identitySourceMapping } from "@autorest/common";
+import { DataHandle, DataSink, DataSource, QuickDataSource } from "@azure-tools/datastore";
 import { crawlReferences } from "../ref-crawling";
 import { AutorestContext } from "../../context";
 import { checkSyntaxFromData } from "./common";
@@ -14,8 +13,6 @@ export async function LoadLiterateSwaggers(
 ): Promise<Array<DataHandle>> {
   const rawSwaggers: Array<DataHandle> = [];
   for (const inputFileUri of inputFileUris) {
-    // read literate Swagger
-
     const pluginInput = await LoadLiterateSwagger(config, inputScope, inputFileUri, sink);
     if (pluginInput) {
       rawSwaggers.push(pluginInput);
@@ -39,10 +36,7 @@ export async function LoadLiterateSwagger(
   }
   config.Message({ Channel: Channel.Verbose, Text: `Reading OpenAPI 2.0 file ${inputFileUri}` });
 
-  const ast = CloneAst(await data.readYamlAst());
-  const mapping = identitySourceMapping(data.key, ast);
-
-  return sink.writeData(data.description, StringifyAst(ast), [inputFileUri], "swagger-document", mapping, [data]);
+  return data;
 }
 
 export function createSwaggerLoaderPlugin(): PipelinePlugin {
@@ -51,7 +45,7 @@ export function createSwaggerLoaderPlugin(): PipelinePlugin {
     const swaggers = await LoadLiterateSwaggers(config, input, inputs, sink);
 
     const foundAllFiles = swaggers.length !== inputs.length;
-    let result: Array<DataHandle> = [];
+    let result: DataHandle[] = [];
     if (swaggers.length === inputs.length) {
       result = await crawlReferences(config, input, swaggers, sink);
     }

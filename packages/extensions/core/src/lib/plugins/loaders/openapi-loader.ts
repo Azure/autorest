@@ -1,7 +1,6 @@
 import { PipelinePlugin } from "../../pipeline/common";
 import { Channel } from "../../message";
-import { CloneAst, DataHandle, DataSink, DataSource, QuickDataSource, StringifyAst } from "@azure-tools/datastore";
-import { identitySourceMapping } from "@autorest/common";
+import { DataHandle, DataSource, QuickDataSource } from "@azure-tools/datastore";
 import { crawlReferences } from "../ref-crawling";
 import { AutorestContext } from "../../context";
 import { checkSyntaxFromData } from "./common";
@@ -13,16 +12,15 @@ interface OpenAPI3Spec {
   components?: { schemas?: object };
 }
 
-export async function LoadLiterateOpenAPIs(
+export async function loadOpenAPIFiles(
   config: AutorestContext,
   inputScope: DataSource,
   inputFileUris: Array<string>,
-  sink: DataSink,
 ): Promise<Array<DataHandle>> {
   const rawOpenApis: Array<DataHandle> = [];
   for (const inputFileUri of inputFileUris) {
     // read literate Swagger
-    const pluginInput = await LoadLiterateOpenAPI(config, inputScope, inputFileUri, sink);
+    const pluginInput = await loadOpenAPIFile(config, inputScope, inputFileUri);
     if (pluginInput) {
       rawOpenApis.push(pluginInput);
     }
@@ -30,11 +28,10 @@ export async function LoadLiterateOpenAPIs(
   return rawOpenApis;
 }
 
-export async function LoadLiterateOpenAPI(
+export async function loadOpenAPIFile(
   config: AutorestContext,
   inputScope: DataSource,
   inputFileUri: string,
-  sink: DataSink,
 ): Promise<DataHandle | null> {
   const handle = await inputScope.readStrict(inputFileUri);
   await checkSyntaxFromData(inputFileUri, handle, config);
@@ -44,10 +41,7 @@ export async function LoadLiterateOpenAPI(
     // TODO: Should we throw or send an error message?
   }
   config.Message({ Channel: Channel.Verbose, Text: `Reading OpenAPI 3.0 file ${inputFileUri}` });
-
-  const ast = CloneAst(await handle.readYamlAst());
-  const mapping = identitySourceMapping(handle.key, ast);
-  return sink.writeData(handle.description, StringifyAst(ast), [inputFileUri], "openapi-document", mapping, [handle]);
+  return handle;
 }
 
 /**
@@ -62,8 +56,8 @@ function isOpenAPI3Spec(specObject: OpenAPI3Spec): boolean {
 export function createOpenApiLoaderPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
     const inputs = config.config.inputFileUris;
-    const openapis = await LoadLiterateOpenAPIs(config, input, inputs, sink);
-    let result: Array<DataHandle> = [];
+    const openapis = await loadOpenAPIFiles(config, input, inputs);
+    let result: DataHandle[] = [];
     if (openapis.length === inputs.length) {
       result = await crawlReferences(config, input, openapis, sink);
     }

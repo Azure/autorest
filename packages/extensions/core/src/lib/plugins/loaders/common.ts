@@ -12,7 +12,7 @@ export async function checkSyntaxFromData(
   configView: AutorestContext,
 ): Promise<void> {
   if (fileUri.toLowerCase().endsWith(".json")) {
-    const error = StrictJsonSyntaxCheck(await handle.ReadData());
+    const error = StrictJsonSyntaxCheck(await handle.readData());
     if (error) {
       configView.Message({
         Channel: Channel.Error,
