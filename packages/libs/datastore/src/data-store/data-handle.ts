@@ -1,4 +1,4 @@
-import { Delay, Lazy, LazyPromise } from "@azure-tools/tasks";
+import { Lazy, LazyPromise } from "@azure-tools/tasks";
 import { MappedPosition, Position, RawSourceMap, SourceMapConsumer } from "source-map";
 import { promises as fs } from "fs";
 import { ParseToAst as parseAst, YAMLNode, parseYaml, ParseNode } from "../yaml";
@@ -67,7 +67,6 @@ export class DataHandle {
   }
 
   private unload() {
-    console.error("Unload from memory", this.key, this.artifactType);
     if (!this.item.writeToDisk) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       this.item.writeToDisk = fs.writeFile(this.item.name, this.item.cached!);
@@ -123,7 +122,6 @@ export class DataHandle {
   public async readObject<T>(): Promise<T> {
     // we're going to use the data, so let's not let it expire.
     this.item.accessed = true;
-    console.log("READ OBJ", this.item.cachedObject !== undefined);
 
     // return the cached object, or get it, then return it.
     return this.item.cachedObject || (this.item.cachedObject = ParseNode<T>(await this.readYamlAst()));
