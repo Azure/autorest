@@ -102,11 +102,11 @@ export class Manipulator {
 
   public async process(data: DataHandle, sink: DataSink, isObject: boolean, documentId?: string): Promise<DataHandle> {
     const trans1 = !isObject
-      ? await sink.WriteObject(`trans_input?${data.key}`, await data.ReadData(), data.identity, data.artifactType)
+      ? await sink.writeObject(`trans_input?${data.key}`, await data.readData(), data.identity, data.artifactType)
       : data;
     const result = await this.processInternal(trans1, sink, documentId);
     return !isObject
-      ? sink.WriteData(`trans_output?${data.key}`, await result.ReadObject<string>(), data.identity, data.artifactType)
+      ? sink.writeData(`trans_output?${data.key}`, await result.readObject<string>(), data.identity, data.artifactType)
       : result;
   }
 }

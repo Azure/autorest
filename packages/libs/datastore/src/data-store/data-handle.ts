@@ -24,6 +24,8 @@ export interface Data {
 }
 
 export class DataHandle {
+  private unloadTimer: NodeJS.Timer | undefined;
+
   /**
    * @param autoUnload If the data unhandle should automatically unload files after they are not used for a while.
    */
@@ -31,7 +33,7 @@ export class DataHandle {
     // start the clock once this has been created.
     // this ensures that the data cache will be flushed if not
     // used in a reasonable amount of time
-    this.onTimer();
+    this.resetUnload();
   }
 
   public async serialize() {
@@ -45,30 +47,27 @@ export class DataHandle {
     });
   }
 
-  private onTimer() {
-    this.checkIfNeedToUnload().catch((e) => {
-      // eslint-disable-next-line no-console
-      console.error("Error while verifing DataHandle cache status", e);
-    });
-  }
+  private resetUnload() {
+    if (this.unloadTimer) {
+      clearTimeout(this.unloadTimer);
+    }
 
-  private async checkIfNeedToUnload() {
     if (!this.autoUnload) {
       return;
     }
 
-    await Delay(3000);
-    if (this.item.accessed) {
-      // it's been cached. start the timer!
-      this.onTimer();
-      // clear the accessed flag before we go.
-      this.item.accessed = false;
-      return;
-    }
-    // wasn't actually used since the delay. let's dump it.
-    // console.log(`flushing ${this.item.name}`);
-    // wait to make sure it's finished writing to disk tho'
-    // await this.item.writingToDisk;
+    setTimeout(() => {
+      if (this.item.accessed) {
+        this.item.accessed = false;
+        this.resetUnload();
+      } else {
+        this.unload();
+      }
+    }, 3000);
+  }
+
+  private unload() {
+    console.error("Unload from memory", this.key, this.artifactType);
     if (!this.item.writeToDisk) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       this.item.writeToDisk = fs.writeFile(this.item.name, this.item.cached!);
@@ -108,7 +107,7 @@ export class DataHandle {
         this.item.cached = await fs.readFile(this.item.name, "utf8");
 
         // start the timer again.
-        this.onTimer();
+        this.resetUnload();
       }
     }
 
@@ -118,13 +117,13 @@ export class DataHandle {
   public async readObjectFast<T>(): Promise<T> {
     // we're going to use the data, so let's not let it expire.
     this.item.accessed = true;
-
     return this.item.cachedObject || (this.item.cachedObject = parseYaml(await this.readData()));
   }
 
   public async readObject<T>(): Promise<T> {
     // we're going to use the data, so let's not let it expire.
     this.item.accessed = true;
+    console.log("READ OBJ", this.item.cachedObject !== undefined);
 
     // return the cached object, or get it, then return it.
     return this.item.cachedObject || (this.item.cachedObject = ParseNode<T>(await this.readYamlAst()));

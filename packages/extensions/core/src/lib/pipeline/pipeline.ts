@@ -325,7 +325,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
         // shortcut -- get the outputs directly from the cache.
         context.Message({
           Channel: times ? Channel.Information : Channel.Debug,
-          Text: `${nodeName} - CACHED inputs = ${(await inputScope.Enum()).length} [0.0 s]`,
+          Text: `${nodeName} - CACHED inputs = ${(await inputScope.enum()).length} [0.0 s]`,
         });
 
         return await readCache(cacheKey, context.DataStore.getDataSink(node.outputArtifact));
@@ -334,16 +334,17 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
       const t1 = process.uptime() * 100;
       context.Message({
         Channel: times ? Channel.Information : Channel.Debug,
-        Text: `${nodeName} - START inputs = ${(await inputScope.Enum()).length}`,
+        Text: `${nodeName} - START inputs = ${(await inputScope.enum()).length}`,
       });
 
       // creates the actual plugin.
       const scopeResult = await plugin(context, inputScope, context.DataStore.getDataSink(node.outputArtifact));
       const t2 = process.uptime() * 100;
 
+      const memSuffix = context.config.debug ? `[${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)} MB]` : "";
       context.Message({
         Channel: times ? Channel.Information : Channel.Debug,
-        Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]`,
+        Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]${memSuffix}`,
       });
 
       // if caching is enabled, let's cache this scopeResult.

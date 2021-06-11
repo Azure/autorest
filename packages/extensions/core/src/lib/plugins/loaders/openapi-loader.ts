@@ -1,7 +1,5 @@
 import { PipelinePlugin } from "../../pipeline/common";
-
 import { Channel } from "../../message";
-import { parse as ParseLiterateYaml } from "@autorest/common";
 import { CloneAst, DataHandle, DataSink, DataSource, QuickDataSource, StringifyAst } from "@azure-tools/datastore";
 import { identitySourceMapping } from "@autorest/common";
 import { crawlReferences } from "../ref-crawling";
@@ -38,19 +36,24 @@ export async function LoadLiterateOpenAPI(
   inputFileUri: string,
   sink: DataSink,
 ): Promise<DataHandle | null> {
-  const handle = await inputScope.ReadStrict(inputFileUri);
+  console.log("BEFORE MEM", `${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
+  const handle = await inputScope.readStrict(inputFileUri);
   await checkSyntaxFromData(inputFileUri, handle, config);
-  const data = await ParseLiterateYaml(config, handle, sink);
-  if (!isOpenAPI3Spec(await data.ReadObject<OpenAPI3Spec>())) {
+  console.log("DURING MEM 1", `${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
+  // const data = await ParseLiterateYaml(config, handle, sink);
+  console.log("DURING MEM 2", `${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
+  if (!isOpenAPI3Spec(await handle.readObject<OpenAPI3Spec>())) {
     return null;
     // TODO: Should we throw or send an error message?
   }
+  console.log("DURING MEM3", `${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
   config.Message({ Channel: Channel.Verbose, Text: `Reading OpenAPI 3.0 file ${inputFileUri}` });
 
-  const ast = CloneAst(await data.ReadYamlAst());
-  const mapping = identitySourceMapping(data.key, ast);
+  const ast = CloneAst(await handle.readYamlAst());
+  const mapping = identitySourceMapping(handle.key, ast);
 
-  return sink.WriteData(handle.Description, StringifyAst(ast), [inputFileUri], "openapi-document", mapping, [data]);
+  console.log("AFTER MEM", `${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
+  return sink.writeData(handle.description, StringifyAst(ast), [inputFileUri], "openapi-document", mapping, [handle]);
 }
 
 /**
