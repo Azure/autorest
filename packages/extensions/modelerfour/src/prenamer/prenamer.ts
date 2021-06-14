@@ -255,8 +255,15 @@ export class PreNamer {
       setNameAllowEmpty(operationGroup, this.format.operationGroup, operationGroup.$key, this.format.override, {
         removeDuplicates: false,
       });
+      const existingNames = new Set(
+        operationGroup.operations.map((x) =>
+          this.format.operation(x.language.default.name, false, this.format.override),
+        ),
+      );
       for (const operation of operationGroup.operations) {
-        setName(operation, this.format.operation, "", this.format.override);
+        setName(operation, this.format.operation, "", this.format.override, {
+          existingNames,
+        });
 
         this.setParameterNames(operation);
         for (const request of values(operation.requests)) {

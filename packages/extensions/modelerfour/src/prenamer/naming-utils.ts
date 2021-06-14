@@ -67,26 +67,21 @@ export function setNameAllowEmpty(
   const initialName =
     defaultValue && isUnassigned(thing.language.default.name) ? defaultValue : thing.language.default.name;
 
-  const namingOptions = [
-    ...(options.removeDuplicates ? [styler(initialName, true, overrides)] : []),
-    styler(initialName, false, overrides),
-  ];
+  let name = styler(initialName, false, overrides);
 
-  for (const newName of namingOptions) {
-    // Check if the new name is not yet taken or lenientModelDeduplication is enabled then we don't care about duplicates.
-    if (newName && (!options.existingNames?.has(newName) || options.lenientModelDeduplication)) {
-      options.existingNames?.add(newName);
-      thing.language.default.name = newName;
-      return;
+  if (options.removeDuplicates) {
+    const noDupName = styler(initialName, true, overrides);
+    if (noDupName !== name) {
+      if (!options.existingNames?.has(noDupName)) {
+        options.existingNames?.delete(name);
+        options.existingNames?.add(noDupName);
+        name = noDupName;
+      }
     }
   }
 
-  if (initialName != "") {
-    const namingOptionsStr = namingOptions.join(",");
-    throw new Error(
-      `Couldn't style name '${initialName}'. All of the following naming possibilities created duplicate names: [${namingOptionsStr}]. You can try using 'modelerfour.lenient-model-deduplication' to allow such duplicates.`,
-    );
-  }
+  options.existingNames?.add(name);
+  thing.language.default.name = name;
 }
 
 export function isUnassigned(value: string) {
