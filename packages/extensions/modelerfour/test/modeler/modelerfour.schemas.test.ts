@@ -249,15 +249,6 @@ describe("Modelerfour.Schemas", () => {
     it("works when allOf reference back to child.", async () => {
       const spec = createTestSpec();
 
-      addSchema(spec, "Parent", {
-        type: "object",
-        properties: {
-          child: {
-            $ref: "#/components/schemas/Child",
-          },
-        },
-      });
-
       addSchema(spec, "Child", {
         type: "object",
         allOf: [
@@ -265,6 +256,15 @@ describe("Modelerfour.Schemas", () => {
             $ref: "#/components/schemas/Parent",
           },
         ],
+      });
+
+      addSchema(spec, "Parent", {
+        type: "object",
+        properties: {
+          child: {
+            $ref: "#/components/schemas/Child",
+          },
+        },
       });
 
       const codeModel = await runModeler(spec);
