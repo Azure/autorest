@@ -251,6 +251,11 @@ describe("Modelerfour.Schemas", () => {
 
       addSchema(spec, "Parent", {
         type: "object",
+        properties: {
+          child: {
+            $ref: "#/components/schemas/Child",
+          },
+        },
       });
 
       addSchema(spec, "Child", {
@@ -264,14 +269,13 @@ describe("Modelerfour.Schemas", () => {
 
       const codeModel = await runModeler(spec);
 
-      const bar = findByName("Bar", codeModel.schemas.choices);
-      expect(bar).toBeDefined();
-      expect(bar?.choices.map((x) => x.value)).toEqual(["one", "two", "three", "four", "five"]);
+      const child = findByName("Child", codeModel.schemas.objects);
+      expect(child).toBeDefined();
+      const parent = findByName("Parent", codeModel.schemas.objects);
+      expect(parent).toBeDefined();
 
-      // Parent should not have changed
-      const foo = findByName("Foo", codeModel.schemas.choices);
-      expect(foo).toBeDefined();
-      expect(foo?.choices.map((x) => x.value)).toEqual(["one", "two"]);
+      expect(child?.parents?.immediate).toContain(parent);
+      expect(parent?.properties?.find((x) => x.serializedName === "child")?.schema).toEqual(child);
     });
   });
 });
