@@ -244,4 +244,38 @@ describe("Modelerfour.Schemas", () => {
       expect(model?.deprecated).toEqual({});
     });
   });
+
+  describe("Circular Dependency", () => {
+    it("works when allOf reference back to child.", async () => {
+      const spec = createTestSpec();
+
+      addSchema(spec, "Child", {
+        type: "object",
+        allOf: [
+          {
+            $ref: "#/components/schemas/Parent",
+          },
+        ],
+      });
+
+      addSchema(spec, "Parent", {
+        type: "object",
+        properties: {
+          child: {
+            $ref: "#/components/schemas/Child",
+          },
+        },
+      });
+
+      const codeModel = await runModeler(spec);
+
+      const child = findByName("Child", codeModel.schemas.objects);
+      expect(child).toBeDefined();
+      const parent = findByName("Parent", codeModel.schemas.objects);
+      expect(parent).toBeDefined();
+
+      expect(child?.parents?.immediate).toContain(parent);
+      expect(parent?.properties?.find((x) => x.serializedName === "child")?.schema).toEqual(child);
+    });
+  });
 });

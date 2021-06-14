@@ -78,7 +78,7 @@ import { fail, minimum, pascalCase, KnownMediaType } from "@azure-tools/codegen"
 import { ModelerFourOptions } from "./modelerfour-options";
 import { isContentTypeParameterDefined } from "./utils";
 import { BodyProcessor } from "./body-processor";
-import { isSchemaBinary } from "./schema-utils";
+import { isSchemaAnEnum, isSchemaBinary } from "./schema-utils";
 import { SecurityProcessor } from "./security-processor";
 
 /** adds only if the item is not in the collection already
@@ -1050,9 +1050,8 @@ export class ModelerFour {
     return this.schemaCache.process(schema, name) || fail("Unable to process schema.");
   }
 
-  trap = new Set();
-
-  processSchemaImpl(schema: OpenAPI.Schema, name: string): Schema {
+  private trap = new Set();
+  private processSchemaImpl(schema: OpenAPI.Schema, name: string): Schema {
     if (this.trap.has(schema)) {
       throw new Error(
         `RECURSING!  Saw schema ${schema.title || schema["x-ms-metadata"]?.name || name} more than once.`,
@@ -1060,14 +1059,8 @@ export class ModelerFour {
     }
     this.trap.add(schema);
 
-    const parents = schema.allOf?.map((x) => this.use(x, (n, i) => this.processSchema(n, i)));
-
     // handle enums differently early
-    if (
-      schema.enum ||
-      schema["x-ms-enum"] ||
-      parents?.find((x) => x.type === SchemaType.SealedChoice || x.type === SchemaType.Choice)
-    ) {
+    if (isSchemaAnEnum(schema, this.input)) {
       return this.processChoiceSchema(name, schema);
     }
 
