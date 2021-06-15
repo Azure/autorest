@@ -13,15 +13,13 @@ import {
   Request,
   Response,
   ChoiceSchema,
-  StringSchema,
   SealedChoiceSchema,
-  PrimitiveSchema,
 } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
 import { values, length, Dictionary, items } from "@azure-tools/linq";
-import { selectName, Style, Styler } from "@azure-tools/codegen";
+import { selectName, Style } from "@azure-tools/codegen";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
-import { getNameOptions, isUnassigned, setName, setNameAllowEmpty } from "./naming-utils";
+import { getNameOptions, isUnassigned, ScopeNamer, setName, setNameAllowEmpty } from "./naming-utils";
 
 /*
  * This function checks the `schemaNames` set for a proposed name for the
@@ -117,13 +115,16 @@ export class PreNamer {
     const deduplicateSchemaNames =
       !!this.options["lenient-model-deduplication"] || !!this.options["resolve-schema-name-collisons"];
 
-    const existingNames = new Set<string>();
+    const scopeNamer = new ScopeNamer(this.session, {
+      deduplicateNames: deduplicateSchemaNames,
+      overrides: this.format.override,
+    });
 
     // choice
-    this.processChoiceNames(this.codeModel.schemas.choices, existingNames, deduplicateSchemaNames);
+    this.processChoiceNames(this.codeModel.schemas.choices, scopeNamer);
 
     // sealed choice
-    this.processChoiceNames(this.codeModel.schemas.sealedChoices, existingNames, deduplicateSchemaNames);
+    this.processChoiceNames(this.codeModel.schemas.sealedChoices, scopeNamer);
 
     // constant
     for (const schema of values(this.codeModel.schemas.constants)) {
@@ -201,46 +202,12 @@ export class PreNamer {
       }
     }
 
-    const objectSchemaNames = new Set<string>();
     for (const schema of values(this.codeModel.schemas.objects)) {
-      setName(schema, this.format.type, "", this.format.override, {
-        existingNames,
-        lenientModelDeduplication: this.options["lenient-model-deduplication"],
-      });
-
-      if (deduplicateSchemaNames) {
-        deduplicateSchemaName(
-          schema,
-          objectSchemaNames,
-          this.session,
-          (schema: Schema, proposedName: string) => `${schema.language.default.namespace || ""}.${proposedName}`,
-        );
-      }
-
-      for (const property of values(schema.properties)) {
-        setName(property, this.format.property, "", this.format.override);
-      }
+      scopeNamer.add(schema, this.format.type, "");
     }
 
-    const groupSchemaNames = new Set<string>();
     for (const schema of values(this.codeModel.schemas.groups)) {
-      setName(schema, this.format.type, "", this.format.override, {
-        existingNames,
-        lenientModelDeduplication: this.options["lenient-model-deduplication"],
-      });
-
-      if (deduplicateSchemaNames) {
-        deduplicateSchemaName(
-          schema,
-          groupSchemaNames,
-          this.session,
-          (schema: Schema, proposedName: string) => `${schema.language.default.namespace || ""}.${proposedName}`,
-        );
-      }
-
-      for (const property of values(schema.properties)) {
-        setName(property, this.format.property, "", this.format.override);
-      }
+      scopeNamer.add(schema, this.format.type, "");
     }
 
     for (const parameter of values(this.codeModel.globalParameters)) {
@@ -255,15 +222,11 @@ export class PreNamer {
       setNameAllowEmpty(operationGroup, this.format.operationGroup, operationGroup.$key, this.format.override, {
         removeDuplicates: false,
       });
-      const existingNames = new Set(
-        operationGroup.operations.map((x) =>
-          this.format.operation(x.language.default.name, false, this.format.override),
-        ),
-      );
+      const operationScopeNamer = new ScopeNamer(this.session, {
+        overrides: this.format.override,
+      });
       for (const operation of operationGroup.operations) {
-        setName(operation, this.format.operation, "", this.format.override, {
-          existingNames,
-        });
+        operationScopeNamer.add(operation, this.format.operation, "");
 
         this.setParameterNames(operation);
         for (const request of values(operation.requests)) {
@@ -283,7 +246,11 @@ export class PreNamer {
           p.member = p.member ? this.format.operation(p.member, true, this.format.override) : undefined;
         }
       }
+
+      operationScopeNamer.process();
     }
+
+    scopeNamer.process();
 
     // set a styled client name
     setName(this.codeModel, this.format.client, this.codeModel.info.title, this.format.override);
@@ -297,25 +264,9 @@ export class PreNamer {
     return this.codeModel;
   }
 
-  private processChoiceNames(
-    choices: Array<ChoiceSchema | SealedChoiceSchema> | undefined,
-    existingNames: Set<string>,
-    deduplicateSchemaNames: boolean,
-  ) {
-    const choiceSchemaNames = new Set<string>();
+  private processChoiceNames(choices: Array<ChoiceSchema | SealedChoiceSchema> | undefined, scopeNamer: ScopeNamer) {
     for (const schema of values(choices)) {
-      setName(schema, this.format.choice, `Enum${this.enum++}`, this.format.override, {
-        existingNames,
-        lenientModelDeduplication: this.options["lenient-model-deduplication"],
-      });
-
-      if (deduplicateSchemaNames) {
-        deduplicateSchemaName(schema, choiceSchemaNames, this.session);
-      }
-
-      for (const choice of values(schema.choices)) {
-        setName(choice, this.format.choiceValue, "", this.format.override, { removeDuplicates: false });
-      }
+      scopeNamer.add(schema, this.format.choice, `Enum${this.enum++}`);
     }
   }
 
