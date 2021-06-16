@@ -36,7 +36,7 @@ export async function LoadLiterateSwagger(
   }
   config.Message({ Channel: Channel.Verbose, Text: `Reading OpenAPI 2.0 file ${inputFileUri}` });
 
-  return data;
+  return sink.writeData(data.description, await data.readData(), [inputFileUri], "swagger-document", [], [data]);
 }
 
 export function createSwaggerLoaderPlugin(): PipelinePlugin {
