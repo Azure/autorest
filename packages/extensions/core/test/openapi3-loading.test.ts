@@ -17,6 +17,7 @@ describe("OpenAPI3Loading", () => {
       config,
       dataStore.getReadThroughScope(new RealFileSystem()),
       inputFilesUris,
+      dataStore.getDataSink(),
     );
 
     assert.strictEqual(OpenAPIFilesLoaded.length, 0);
@@ -36,6 +37,7 @@ describe("OpenAPI3Loading", () => {
       config,
       dataStore.getReadThroughScope(new RealFileSystem()),
       inputFilesUris,
+      dataStore.getDataSink(),
     );
 
     assert.strictEqual(OpenAPIFilesLoaded.length, inputFilesUris.length);
@@ -55,6 +57,7 @@ describe("OpenAPI3Loading", () => {
       config,
       dataStore.getReadThroughScope(new RealFileSystem()),
       inputFilesUris,
+      dataStore.getDataSink(),
     );
 
     assert.strictEqual(OpenAPIFilesLoaded.length, 0);
@@ -78,6 +81,7 @@ describe("OpenAPI3Loading", () => {
       config,
       dataStore.getReadThroughScope(new RealFileSystem()),
       inputFilesUris,
+      dataStore.getDataSink(),
     );
 
     assert.strictEqual(OpenAPIFilesLoaded.length, inputFilesUris.length - nonOpenAPIFileUris.length);
