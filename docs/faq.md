@@ -2,6 +2,7 @@
 
 ### Q: I'm seeing heap out of memory errors, how do I resolve this?
 
+Large OpenAPI specs can cause autorest to require more than the default max memory.
 You can increase Node max memory by setting the `NODE_OPTIONS` environment variable with the `--max_old_space_size=<amount>` flag.
 
 For example
