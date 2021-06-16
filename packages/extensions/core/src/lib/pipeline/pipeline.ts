@@ -27,8 +27,10 @@ import { values } from "@azure-tools/linq";
 import { CORE_PLUGIN_MAP } from "../plugins";
 import { loadPlugins, PipelinePluginDefinition } from "./plugin-loader";
 import { mapValues, omitBy } from "lodash";
+import { promisify } from "util";
 
 const safeEval = createSandbox();
+const setImmediatePromise = promisify(setImmediate);
 
 const md5 = (content: any) => (content ? createHash("md5").update(JSON.stringify(content)).digest("hex") : undefined);
 
@@ -359,6 +361,10 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
           // not settable on fs inputs anyway.
         }
       }
+
+      console.log("YIIIIEEEDL");
+      // Yield the event loop.
+      await setImmediatePromise();
 
       return scopeResult;
     } catch (e) {
