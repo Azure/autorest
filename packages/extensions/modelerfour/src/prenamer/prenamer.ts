@@ -168,6 +168,10 @@ export class PreNamer {
 
     for (const schema of values(this.codeModel.schemas.objects)) {
       scopeNamer.add(schema, this.format.type, "");
+
+      for (const property of values(schema.properties)) {
+        setName(property, this.format.property, "", this.format.override);
+      }
     }
 
     for (const schema of values(this.codeModel.schemas.groups)) {
