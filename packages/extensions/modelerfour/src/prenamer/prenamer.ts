@@ -176,6 +176,10 @@ export class PreNamer {
 
     for (const schema of values(this.codeModel.schemas.groups)) {
       scopeNamer.add(schema, this.format.type, "");
+
+      for (const property of values(schema.properties)) {
+        setName(property, this.format.property, "", this.format.override);
+      }
     }
 
     for (const parameter of values(this.codeModel.globalParameters)) {
@@ -235,6 +239,10 @@ export class PreNamer {
   private processChoiceNames(choices: Array<ChoiceSchema | SealedChoiceSchema> | undefined, scopeNamer: ScopeNamer) {
     for (const schema of values(choices)) {
       scopeNamer.add(schema, this.format.choice, `Enum${this.enum++}`);
+
+      for (const choice of values(schema.choices)) {
+        setName(choice, this.format.choiceValue, "", this.format.override, { removeDuplicates: false });
+      }
     }
   }
 

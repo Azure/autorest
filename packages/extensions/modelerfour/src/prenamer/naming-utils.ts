@@ -74,12 +74,15 @@ export interface ScopeNamerOptions {
   overrides?: Record<string, string>;
 }
 
-export interface NamerEntry {
+interface NamerEntry {
   entity: Nameable;
   styler: Styler;
   initialName: string;
 }
 
+/**
+ * Class that will style and resolve unique names for entities in the same scope.
+ */
 export class ScopeNamer {
   private names = new Map<string, NamerEntry[]>();
 
@@ -87,9 +90,9 @@ export class ScopeNamer {
 
   /**
    * Add a nameable entity to be styled and named.
-   * @param entity
-   * @param styler
-   * @param defaultName
+   * @param entity Nameable entity.
+   * @param styler Styler to use to render name.
+   * @param defaultName Default name in case entity doesn't have any specified.
    */
   public add(entity: Nameable, styler: Styler, defaultName?: string) {
     const initialName =
@@ -125,6 +128,9 @@ export class ScopeNamer {
     }
   }
 
+  /**
+   * 1st pass of the name resolving where it tries to simplify names with duplicate consecutive words.
+   */
   private processSimplifyNames(): Map<string, [Nameable, Styler][]> {
     const processedNames = new Map<string, [Nameable, Styler][]>();
     for (const [name, entities] of this.names.entries()) {
@@ -149,6 +155,9 @@ export class ScopeNamer {
     return processedNames;
   }
 
+  /**
+   * 2nd pass of the name resolving where it will deduplicate names used twice.
+   */
   private deduplicateNames(names: Map<string, [Nameable, Styler][]>) {
     const entityNames = new Set(names.keys());
     for (const [_, entries] of names.entries()) {
@@ -160,7 +169,7 @@ export class ScopeNamer {
     }
   }
 
-  /*
+  /**
    * This function checks the `schemaNames` set for a proposed name for the
    * given `schema` using the `indexer` to generate the key to the set.  A
    * custom `indexer` would be used when there's a piece of information other
