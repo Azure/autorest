@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/modelerfour",
+      "comment": "**Improve** Duplicate schema resolution",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/modelerfour",
+  "email": "tiguerin@microsoft.com"
+}
