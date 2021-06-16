@@ -22,7 +22,7 @@ import {
   YAMLNode,
   YAMLSequence,
 } from "../yaml";
-import { IndexToPosition } from "./text-utility";
+import { indexToPosition } from "./text-utility";
 
 function ResolveMapProperty(node: YAMLMap, property: string): YAMLMapping | null {
   for (const mapping of node.mappings) {
@@ -157,14 +157,18 @@ export async function ResolvePath(yamlFile: DataHandle, jsonPath: JsonPath): Pro
   // let node = (await (await yamlFile.ReadMetadata).resolvePathCache)[stringify(jsonPath)];
   const yamlAst = await yamlFile.readYamlAst();
   const node = ResolveRelativeNode(yamlAst, yamlAst, jsonPath);
-  return CreateEnhancedPosition(yamlFile, jsonPath, node);
+  return createEnhancedPosition(yamlFile, jsonPath, node);
 }
 
-export function CreateEnhancedPosition(yamlFile: DataHandle, jsonPath: JsonPath, node: YAMLNode): EnhancedPosition {
+export async function createEnhancedPosition(
+  yamlFile: DataHandle,
+  jsonPath: JsonPath,
+  node: YAMLNode,
+): Promise<EnhancedPosition> {
   const startIdx = jsonPath.length === 0 ? 0 : node.startPosition;
   const endIdx = node.endPosition;
-  const startPos = IndexToPosition(yamlFile, startIdx);
-  const endPos = IndexToPosition(yamlFile, endIdx);
+  const startPos = await indexToPosition(yamlFile, startIdx);
+  const endPos = await indexToPosition(yamlFile, endIdx);
 
   const result: EnhancedPosition = { column: startPos.column, line: startPos.line };
   result.path = jsonPath;

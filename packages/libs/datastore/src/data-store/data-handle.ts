@@ -1,10 +1,10 @@
-import { Lazy, LazyPromise } from "@azure-tools/tasks";
+import { LazyPromise } from "@azure-tools/tasks";
 import { MappedPosition, Position, RawSourceMap, SourceMapConsumer } from "source-map";
 import { promises as fs } from "fs";
 import { ParseToAst as parseAst, YAMLNode, parseYaml, ParseNode } from "../yaml";
 
 export interface Metadata {
-  lineIndices: Lazy<Array<number>>;
+  lineIndices: LazyPromise<Array<number>>;
   sourceMap: LazyPromise<RawSourceMap>;
 
   // inputSourceMap: LazyPromise<RawSourceMap>;

@@ -1,5 +1,5 @@
 import { Channel, SourceLocation } from "../../message";
-import { DataHandle, IndexToPosition, StrictJsonSyntaxCheck } from "@azure-tools/datastore";
+import { DataHandle, indexToPosition, StrictJsonSyntaxCheck } from "@azure-tools/datastore";
 import { AutorestContext } from "../../context";
 
 /**
@@ -17,7 +17,7 @@ export async function checkSyntaxFromData(
       configView.Message({
         Channel: Channel.Error,
         Text: `Syntax Error Encountered:  ${error.message}`,
-        Source: [<SourceLocation>{ Position: IndexToPosition(handle, error.index), document: handle.key }],
+        Source: [<SourceLocation>{ Position: await indexToPosition(handle, error.index), document: handle.key }],
       });
     }
   }

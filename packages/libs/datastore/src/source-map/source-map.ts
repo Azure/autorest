@@ -6,7 +6,7 @@
 import { Position, SourceMapGenerator } from "source-map";
 import { DataHandle } from "../data-store";
 import { JsonPath, stringify } from "../json-path/json-path";
-import { IndexToPosition } from "../parsing/text-utility";
+import { indexToPosition } from "../parsing/text-utility";
 import * as yaml from "../parsing/yaml";
 import { Descendants, ToAst } from "../yaml";
 
@@ -63,7 +63,7 @@ export async function CompilePosition(position: SmartPosition, yamlFile: DataHan
       return await yaml.ResolvePath(yamlFile, (position as any).path);
     }
     if ((position as any).index) {
-      return IndexToPosition(yamlFile, (position as any).index);
+      return indexToPosition(yamlFile, (position as any).index);
     }
   }
   return <EnhancedPosition>position;
