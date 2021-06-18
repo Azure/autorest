@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/modelerfour",
+      "comment": "**Config** Add default configuration for LLC",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/modelerfour",
+  "email": "tiguerin@microsoft.com"
+}
