@@ -137,6 +137,13 @@ modelerfour:
   always-create-accept-parameter: true
 ```
 
+```yaml $(low-level-client)
+modelerfour:
+  group-parameters: false
+  flatten-models: false
+  flatten-payloads: false
+```
+
 #### ModelerFour
 
 ```yaml
