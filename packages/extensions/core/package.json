@@ -61,7 +61,7 @@
     "@types/jsonpath": "^0.2.0",
     "@types/lodash": "~4.14.168",
     "@types/node": "~14.14.20",
-    "@types/source-map": "0.5.0",
+
     "@types/webpack": "~4.41.26",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
@@ -86,15 +86,15 @@
     "rimraf": "^3.0.2",
     "safe-buffer": "5.2.0",
     "source-map-support": "^0.5.19",
-    "source-map": "0.5.6",
+    "source-map": "0.7.3",
     "ts-jest": "^26.4.4",
     "ts-loader": "~9.2.3",
     "typescript": "~4.3.4",
     "vscode-jsonrpc": "^3.5.0",
     "vscode-languageserver": "3.5.1",
-    "webpack-cli": "~4.4.0",
-    "webpack-node-externals": "~2.5.2",
-    "webpack": "~5.18.0",
+    "webpack-cli": "~4.7.2",
+    "webpack-node-externals": "~3.0.0",
+    "webpack": "~5.40.0",
     "yaml-ast-parser": "0.0.43"
   }
 }
