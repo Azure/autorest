@@ -14,7 +14,6 @@ import {
 import { Session } from "@autorest/extension-base";
 import { isDefined } from "../utils";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
-import { items } from "@azure-tools/linq";
 
 const xmsThreshold = "x-ms-payload-flattening-threshold";
 const xmsFlatten = "x-ms-client-flatten";
@@ -191,7 +190,7 @@ export class Flattener {
       this.flattenSchema(schema);
     }
     if (!this.options["keep-unused-flattened-models"]) {
-      this.remoteUnusedFlattenModels();
+      this.removeUnusedFlattenModels();
     }
 
     for (const schema of this.codeModel.schemas.objects ?? []) {
@@ -206,7 +205,7 @@ export class Flattener {
     }
   }
 
-  private remoteUnusedFlattenModels() {
+  private removeUnusedFlattenModels() {
     if (!this.codeModel.schemas.objects) {
       return;
     }
