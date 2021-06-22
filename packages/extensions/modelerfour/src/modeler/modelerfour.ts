@@ -154,6 +154,7 @@ export class ModelerFour {
   private uniqueNames: Dictionary<any> = {};
   private bodyProcessor: BodyProcessor;
   private securityProcessor: SecurityProcessor;
+  private ignoreHeaders: Set<string> = new Set();
 
   constructor(protected session: Session<oai3>) {
     this.input = session.model; // shadow(session.model, filename);
@@ -267,7 +268,7 @@ export class ModelerFour {
 
     this.profileFilter = await this.session.getValue("profile", []);
     this.apiVersionFilter = await this.session.getValue("api-version", []);
-
+    this.ignoreHeaders = new Set(this.options["ignore-headers"] ?? []);
     const apiVersionMode = await this.session.getValue("api-version-mode", "auto");
 
     const apiVersionParameter =
@@ -1950,95 +1951,102 @@ export class ModelerFour {
   }
 
   processParameters(httpOperation: OpenAPI.HttpOperation, operation: Operation, pathItem: OpenAPI.PathItem) {
-    values(httpOperation.parameters)
-      .select((each) => dereference(this.input, each))
-      .select((pp) => {
-        const parameter = pp.instance;
+    const parameters = Object.values(httpOperation.parameters ?? {})
+      .map((each) => dereference(this.input, each))
+      .filter((x) => !this.isParameterIgnoredHeader(x.instance));
 
-        this.use(parameter.schema, (name, schema) => {
-          if (this.apiVersionMode !== "none" && this.interpret.isApiVersionParameter(parameter)) {
-            return this.processApiVersionParameter(parameter, operation, pathItem);
+    for (const pp of parameters) {
+      const parameter = pp.instance;
+
+      this.use(parameter.schema, (name, schema) => {
+        if (this.apiVersionMode !== "none" && this.interpret.isApiVersionParameter(parameter)) {
+          return this.processApiVersionParameter(parameter, operation, pathItem);
+        }
+
+        // Not an APIVersion Parameter
+        const implementation = pp.fromRef
+          ? "method" === <any>parameter["x-ms-parameter-location"]
+            ? ImplementationLocation.Method
+            : ImplementationLocation.Client
+          : "client" === <any>parameter["x-ms-parameter-location"]
+          ? ImplementationLocation.Client
+          : ImplementationLocation.Method;
+
+        const preferredName = this.interpret.getPreferredName(parameter, schema["x-ms-client-name"] || parameter.name);
+        if (implementation === ImplementationLocation.Client) {
+          // check to see of it's already in the global parameters
+          const p = this.codeModel.findGlobalParameter((each) => each.language.default.name === preferredName);
+          if (p) {
+            return operation.addParameter(p);
           }
+        }
+        let parameterSchema = this.processSchema(name || "", schema);
 
-          // Not an APIVersion Parameter
-          const implementation = pp.fromRef
-            ? "method" === <any>parameter["x-ms-parameter-location"]
-              ? ImplementationLocation.Method
-              : ImplementationLocation.Client
-            : "client" === <any>parameter["x-ms-parameter-location"]
-            ? ImplementationLocation.Client
-            : ImplementationLocation.Method;
+        // Track the usage of this schema as an input with media type
+        this.trackSchemaUsage(parameterSchema, { usage: [SchemaContext.Input] });
 
-          const preferredName = this.interpret.getPreferredName(
-            parameter,
-            schema["x-ms-client-name"] || parameter.name,
+        if (parameter.in === ParameterLocation.Header && "x-ms-header-collection-prefix" in parameter) {
+          const dictionarySchema = this.codeModel.schemas.add(
+            new DictionarySchema(
+              parameterSchema.language.default.name,
+              parameterSchema.language.default.description,
+              parameterSchema,
+            ),
           );
-          if (implementation === ImplementationLocation.Client) {
-            // check to see of it's already in the global parameters
-            const p = this.codeModel.findGlobalParameter((each) => each.language.default.name === preferredName);
-            if (p) {
-              return operation.addParameter(p);
-            }
-          }
-          let parameterSchema = this.processSchema(name || "", schema);
+          this.trackSchemaUsage(dictionarySchema, { usage: [SchemaContext.Input] });
+          parameterSchema = dictionarySchema;
+        }
 
-          // Track the usage of this schema as an input with media type
-          this.trackSchemaUsage(parameterSchema, { usage: [SchemaContext.Input] });
-
-          if (parameter.in === ParameterLocation.Header && "x-ms-header-collection-prefix" in parameter) {
-            const dictionarySchema = this.codeModel.schemas.add(
-              new DictionarySchema(
-                parameterSchema.language.default.name,
-                parameterSchema.language.default.description,
-                parameterSchema,
+        /* regular, everyday parameter */
+        const newParam = operation.addParameter(
+          new Parameter(preferredName, this.interpret.getDescription("", parameter), parameterSchema, {
+            required: parameter.required ? true : undefined,
+            implementation,
+            extensions: this.interpret.getExtensionProperties(parameter),
+            deprecated: this.interpret.getDeprecation(parameter),
+            nullable: parameter.nullable || schema.nullable,
+            protocol: {
+              http: new HttpParameter(
+                parameter.in,
+                parameter.style
+                  ? {
+                      style: <SerializationStyle>(<unknown>parameter.style),
+                      explode: parameter.explode,
+                    }
+                  : undefined,
               ),
-            );
-            this.trackSchemaUsage(dictionarySchema, { usage: [SchemaContext.Input] });
-            parameterSchema = dictionarySchema;
-          }
-
-          /* regular, everyday parameter */
-          const newParam = operation.addParameter(
-            new Parameter(preferredName, this.interpret.getDescription("", parameter), parameterSchema, {
-              required: parameter.required ? true : undefined,
-              implementation,
-              extensions: this.interpret.getExtensionProperties(parameter),
-              deprecated: this.interpret.getDeprecation(parameter),
-              nullable: parameter.nullable || schema.nullable,
-              protocol: {
-                http: new HttpParameter(
-                  parameter.in,
-                  parameter.style
-                    ? {
-                        style: <SerializationStyle>(<unknown>parameter.style),
-                        explode: parameter.explode,
-                      }
-                    : undefined,
-                ),
+            },
+            language: {
+              default: {
+                serializedName: parameter.name,
               },
-              language: {
-                default: {
-                  serializedName: parameter.name,
-                },
-              },
-              clientDefaultValue: this.interpret.getClientDefault(parameter, schema),
-            }),
-          );
+            },
+            clientDefaultValue: this.interpret.getClientDefault(parameter, schema),
+          }),
+        );
 
-          // if allowReserved is present, add the extension attribute too.
-          if (parameter.allowReserved) {
-            newParam.extensions = newParam.extensions ?? {};
-            newParam.extensions["x-ms-skip-url-encoding"] = true;
-          }
+        // if allowReserved is present, add the extension attribute too.
+        if (parameter.allowReserved) {
+          newParam.extensions = newParam.extensions ?? {};
+          newParam.extensions["x-ms-skip-url-encoding"] = true;
+        }
 
-          if (implementation === ImplementationLocation.Client) {
-            this.codeModel.addGlobalParameter(newParam);
-          }
+        if (implementation === ImplementationLocation.Client) {
+          this.codeModel.addGlobalParameter(newParam);
+        }
 
-          return newParam;
-        });
-      })
-      .toArray();
+        return newParam;
+      });
+    }
+  }
+
+  /**
+   * Resolve if the parameter is a header that should be ignored.
+   * @param parmeter Operation parameter.
+   * @returns boolean if parameter should be ignored.
+   */
+  private isParameterIgnoredHeader(parmeter: OpenAPI.Parameter) {
+    return parmeter.in === ParameterLocation.Header && this.ignoreHeaders.has(parmeter.name);
   }
 
   processResponses(httpOperation: OpenAPI.HttpOperation, operation: Operation) {
