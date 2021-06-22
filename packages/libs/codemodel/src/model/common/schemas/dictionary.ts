@@ -16,7 +16,8 @@ export interface DictionarySchema<ElementType extends Schema = Schema> extends C
 
 export class DictionarySchema<ElementType extends Schema = Schema>
   extends Schema
-  implements DictionarySchema<ElementType> {
+  implements DictionarySchema<ElementType>
+{
   constructor(
     name: string,
     description: string,
