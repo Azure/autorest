@@ -2,9 +2,7 @@
 
 ![](https://img.shields.io/npm/v/autorest) ![](https://img.shields.io/npm/v/autorest/next)
 
-**For autorest documentation please see [here][docs]**
-
-This the the package for the autorest CLI.
+The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to _AutoRest_ is a spec that describes the REST API using the [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) format.
 
 ## Install
 
@@ -12,7 +10,7 @@ This the the package for the autorest CLI.
 npm install -g autorest
 ```
 
-## Usage
+## [Usage](docs)
 
 ```bash
 autorest --help
