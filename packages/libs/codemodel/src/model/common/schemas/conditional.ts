@@ -58,7 +58,8 @@ export class ConditionalValue extends Initializer {
 
 export class ConditionalSchema<ConditionalType extends PrimitiveSchema = StringSchema>
   extends Schema
-  implements ConditionalSchema<ConditionalType> {
+  implements ConditionalSchema<ConditionalType>
+{
   constructor(
     name: string,
     description: string,
@@ -88,7 +89,8 @@ export interface SealedConditionalSchema<ConditionalType extends PrimitiveSchema
 
 export class SealedConditionalSchema<ConditionalType extends PrimitiveSchema = StringSchema>
   extends Schema
-  implements SealedConditionalSchema<ConditionalType> {
+  implements SealedConditionalSchema<ConditionalType>
+{
   constructor(
     name: string,
     description: string,

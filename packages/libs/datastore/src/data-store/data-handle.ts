@@ -160,12 +160,12 @@ export class DataHandle {
 
   public async blame(position: Position): Promise<Array<MappedPosition>> {
     const metadata = this.metadata;
-    const consumer = new SourceMapConsumer(await metadata.sourceMap);
+    const consumer = await new SourceMapConsumer(await metadata.sourceMap);
     const mappedPosition = consumer.originalPositionFor(position);
     if (mappedPosition.line === null) {
       return [];
     }
-    return [mappedPosition];
+    return [mappedPosition as any];
   }
 
   /**

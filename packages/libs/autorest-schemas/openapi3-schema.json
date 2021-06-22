@@ -750,7 +750,7 @@
       },
       "additionalProperties": {
         "not": true,
-        "errorMessage": "should only have path names that start with `/` but found ${0#}"
+        "errorMessage": "must only have path names that start with `/` but found ${0#}"
       }
     },
     "PathItem": {
@@ -1797,44 +1797,15 @@
       "additionalProperties": false
     },
     "Link": {
-      "oneOf": [
-        {
-          "$ref": "#/definitions/LinkWithOperationRef"
-        },
-        {
-          "$ref": "#/definitions/LinkWithOperationId"
-        }
-      ]
-    },
-    "LinkWithOperationRef": {
-      "type": "object",
-      "properties": {
-        "operationRef": {
-          "type": "string"
-        },
-        "parameters": {
-          "type": "object",
-          "additionalProperties": {}
-        },
-        "requestBody": {},
-        "description": {
-          "type": "string"
-        },
-        "server": {
-          "$ref": "#/definitions/Server"
-        }
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false
-    },
-    "LinkWithOperationId": {
       "type": "object",
       "properties": {
         "operationId": {
           "type": "string"
         },
+        "operationRef": {
+          "type": "string",
+          "format": "uri-reference"
+        },
         "parameters": {
           "type": "object",
           "additionalProperties": {}
@@ -1850,7 +1821,11 @@
       "patternProperties": {
         "^x-": {}
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "not": {
+        "description": "Operation Id and Operation Ref are mutually exclusive",
+        "required": ["operationId", "operationRef"]
+      }
     },
     "Callback": {
       "type": "object",

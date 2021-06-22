@@ -3,7 +3,7 @@ import { AnyObject, Transformer, typeOf } from "./processor";
 
 export abstract class TransformerViaPointer<
   TInput extends object = AnyObject,
-  TOutput extends object = AnyObject
+  TOutput extends object = AnyObject,
 > extends Transformer<TInput, TOutput> {
   public async process(target: AnyObject, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {

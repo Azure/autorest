@@ -129,16 +129,18 @@ function ParseNodeInternal(
   }
 
   // important for anchors!
-  const memoize = (
-    factory: (cache: WeakMap<YAMLNode, any>, set: (o: any) => void) => any,
-  ): ((cache: WeakMap<YAMLNode, any>) => any) => (cache) => {
-    if (cache.has(yamlNode)) {
-      return cache.get(yamlNode);
-    }
-    const result = factory(cache, (o) => cache.set(yamlNode, o));
-    cache.set(yamlNode, result);
-    return result;
-  };
+  const memoize =
+    (
+      factory: (cache: WeakMap<YAMLNode, any>, set: (o: any) => void) => any,
+    ): ((cache: WeakMap<YAMLNode, any>) => any) =>
+    (cache) => {
+      if (cache.has(yamlNode)) {
+        return cache.get(yamlNode);
+      }
+      const result = factory(cache, (o) => cache.set(yamlNode, o));
+      cache.set(yamlNode, result);
+      return result;
+    };
 
   switch (yamlNode.kind) {
     case Kind.SCALAR: {
