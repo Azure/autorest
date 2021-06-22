@@ -87,10 +87,10 @@ function sortWithPriorty(a: any, b: any): number {
 }
 
 export function deserialize<T>(text: string, filename: string, schema: Schema = DEFAULT_SCHEMA): T {
-  return (load(text, {
+  return load(text, {
     schema,
     filename,
-  }) as any) as T;
+  }) as any as T;
 }
 
 export interface SerializeOptions {

@@ -328,7 +328,9 @@ export async function selectVersion(
       // try a prerelease version from github.
       try {
         const rv = requestedVersion.replace(/^[~|^]/g, "");
-        pkg = await (await extensionManager).findPackage(
+        pkg = await (
+          await extensionManager
+        ).findPackage(
           "core",
           `https://github.com/Azure/autorest/releases/download/autorest-core-${rv}/autorest-core-${rv}.tgz`,
         );
@@ -363,7 +365,9 @@ export async function selectVersion(
         console.log(`**Installing package** ${corePackageName}@${pkg.version}\n[This will take a few moments...]`);
       }
 
-      selectedVersion = await (await extensionManager).installPackage(pkg, force, 5 * 60 * 1000, (installer) =>
+      selectedVersion = await (
+        await extensionManager
+      ).installPackage(pkg, force, 5 * 60 * 1000, (installer) =>
         installer.Message.Subscribe((s, m) => {
           if (args.debug) console.log(`Installer: ${m}`);
         }),

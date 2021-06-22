@@ -1233,7 +1233,7 @@ A dictionary where a key's value can be null.
 ```
 
 **Example**:
-An object with an optional property.
+An object with a nullable property.
 
 ```json
 "Widget": {

@@ -213,7 +213,7 @@ export async function LiterateToJson(content: string): Promise<string> {
     });
     // run autorest and wait.
 
-    await (await autorest.Process()).finish;
+    await autorest.Process().finish;
     return result;
   } catch (x) {
     return "";
