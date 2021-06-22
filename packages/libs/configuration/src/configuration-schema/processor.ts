@@ -147,7 +147,7 @@ function processProperty<T extends ConfigurationProperty>(
     }
     const result: any = {};
 
-    for (const [key, dictValue] of Object.entries(value ?? {})) {
+    for (const [key, dictValue] of Object.entries<any>(value ?? {})) {
       const prop = processPrimitiveProperty(schema, [...path, key], dictValue, options);
       if ("errors" in prop) {
         return { errors: prop.errors };
