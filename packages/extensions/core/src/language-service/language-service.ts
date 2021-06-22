@@ -495,7 +495,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
           documentUri,
           await this.ReadFile(documentUri),
           openapiDefinition,
-          new SourceMap(openapiDefinitionMap),
+          await SourceMap.fromMap(openapiDefinitionMap),
         );
       }
     }

@@ -57,7 +57,7 @@ export const mapMarkdownTree = <K extends string, U extends TreeNodeMapping<K>>(
 
   validateRequiredMapping(sectionName, mapping, result);
 
-  return (result as unknown) as { [P in K]: InferType<U[P]> };
+  return result as unknown as { [P in K]: InferType<U[P]> };
 };
 
 const processMappings = (mapping: TreeNodeMapping<string>) => {

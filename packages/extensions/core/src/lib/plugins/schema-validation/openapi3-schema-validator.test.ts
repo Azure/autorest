@@ -22,9 +22,9 @@ describe("OpenAPI3 schema validator", () => {
     const errors = validator.validate(omit(baseSwaggerSpec, "info"));
     expect(errors).toEqual([
       {
-        dataPath: "",
+        instancePath: "",
         keyword: "required",
-        message: "should have required property 'info'",
+        message: "must have required property 'info'",
         params: { missingProperty: "info" },
         path: [],
         schemaPath: "#/required",
@@ -39,9 +39,9 @@ describe("OpenAPI3 schema validator", () => {
     });
     expect(errors).toEqual([
       {
-        dataPath: "/info",
+        instancePath: "/info",
         keyword: "additionalProperties",
-        message: "should NOT have additional properties",
+        message: "must NOT have additional properties",
         params: { additionalProperty: ["invalidProp", "otherProp"] },
         path: ["info"],
         schemaPath: "#/additionalProperties",
@@ -53,9 +53,9 @@ describe("OpenAPI3 schema validator", () => {
     const errors = validator.validate({ ...baseSwaggerSpec, paths: { "foo/bar": {} } });
     expect(errors).toEqual([
       {
-        dataPath: "/paths/foo~1bar",
+        instancePath: "/paths/foo~1bar",
         keyword: "errorMessage",
-        message: 'should only have path names that start with `/` but found "foo/bar"',
+        message: 'must only have path names that start with `/` but found "foo/bar"',
         params: expect.anything(),
         path: ["paths", "foo/bar"],
         schemaPath: "#/additionalProperties/errorMessage",

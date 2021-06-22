@@ -750,7 +750,7 @@
       },
       "additionalProperties": {
         "not": true,
-        "errorMessage": "should only have path names that start with `/` but found ${0#}"
+        "errorMessage": "must only have path names that start with `/` but found ${0#}"
       }
     },
     "PathItem": {
