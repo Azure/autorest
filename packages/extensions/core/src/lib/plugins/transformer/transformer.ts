@@ -154,15 +154,15 @@ export function createTextTransformerPlugin(): PipelinePlugin {
 
         if (modified) {
           result.push(
-            await sink.WriteData(
-              inputHandle.Description,
+            await sink.writeData(
+              inputHandle.description,
               contents || "",
               inputHandle.identity,
               inputHandle.artifactType,
             ),
           );
         } else {
-          result.push(await sink.Forward(inputHandle.Description, inputHandle));
+          result.push(await sink.Forward(inputHandle.description, inputHandle));
         }
       }
     }
@@ -176,8 +176,8 @@ export function createTransformerPlugin(): PipelinePlugin {
     const isObject = config.GetEntry("is-object") === false ? false : true;
     const manipulator = new Manipulator(config);
     return async (fileIn, sink) => {
-      const fileOut = await manipulator.process(fileIn, sink, isObject, fileIn.Description);
-      return sink.Forward(fileIn.Description, fileOut);
+      const fileOut = await manipulator.process(fileIn, sink, isObject, fileIn.description);
+      return sink.forward(fileIn.description, fileOut);
     };
   });
 }
@@ -186,14 +186,14 @@ export function createTransformerPlugin(): PipelinePlugin {
 export function createImmediateTransformerPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
     const isObject = config.GetEntry("is-object") === false ? false : true;
-    const files = await input.Enum(); // first all the immediate-configs, then a single swagger-document
-    const scopes = await Promise.all(files.slice(0, files.length - 1).map((f) => input.ReadStrict(f)));
+    const files = await input.enum(); // first all the immediate-configs, then a single swagger-document
+    const scopes = await Promise.all(files.slice(0, files.length - 1).map((f) => input.readStrict(f)));
     const manipulator = new Manipulator(
-      config.extendWith(...(await Promise.all(scopes.map((s) => s.ReadObject<any>())))),
+      config.extendWith(...(await Promise.all(scopes.map((s) => s.readObject<any>())))),
     );
     const file = files[files.length - 1];
-    const fileIn = await input.ReadStrict(file);
-    const fileOut = await manipulator.process(fileIn, sink, isObject, fileIn.Description);
+    const fileIn = await input.readStrict(file);
+    const fileOut = await manipulator.process(fileIn, sink, isObject, fileIn.description);
     return new QuickDataSource([await sink.Forward("swagger-document", fileOut)], input.pipeState);
   };
 }

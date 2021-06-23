@@ -67,7 +67,6 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
   descriptions = new Set();
   apiVersions = new Set();
   titles = new Set();
-  private time = 0;
   constructor(
     input: Array<DataHandle>,
     protected overrideTitle: string | undefined,
@@ -208,7 +207,6 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
   protected expandRefs(node: any) {
     walk(node, (value: any) => {
       if (value && typeof value === "object") {
-        const start = new Date().getTime();
         const ref = value.$ref;
         if (ref && typeof ref === "string" && ref.startsWith("#")) {
           const fullRef = `${(<DataHandle>this.currentInput).originalFullPath}${ref}`;
@@ -218,7 +216,6 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
             this.refs[fullRef] = this.refs[ref];
           }
         }
-        this.time += new Date().getTime() - start;
         return "visit-children";
       }
       return "stop";

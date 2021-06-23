@@ -32,9 +32,25 @@ export function Lines(text: string): Array<string> {
  * @param text Source.
  * @param index Index.
  */
-export function IndexToPosition(text: DataHandle | string, index: number): sourceMapPosition {
-  const startIndices = typeof text === "string" ? LineIndices(text) : text.metadata.lineIndices.Value;
+export function indexToPositionInText(text: string, index: number): sourceMapPosition {
+  return indexToPositionFromLineIndices(LineIndices(text), index);
+}
 
+/**
+ * Retrieve the position(Line,Column) from the index in the source.
+ * @param text Source.
+ * @param index Index.
+ */
+export async function indexToPosition(text: DataHandle, index: number): Promise<sourceMapPosition> {
+  return indexToPositionFromLineIndices(await text.metadata.lineIndices, index);
+}
+
+/**
+ * Retrieve the position(Line,Column) from the index in the source.
+ * @param text Source.
+ * @param index Index.
+ */
+export function indexToPositionFromLineIndices(startIndices: number[], index: number): sourceMapPosition {
   // bin. search for last `<item> <= index`
   let lineIndexMin = 0;
   let lineIndexMax = startIndices.length;

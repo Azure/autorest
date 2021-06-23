@@ -27,8 +27,10 @@ import { values } from "@azure-tools/linq";
 import { CORE_PLUGIN_MAP } from "../plugins";
 import { loadPlugins, PipelinePluginDefinition } from "./plugin-loader";
 import { mapValues, omitBy } from "lodash";
+import { promisify } from "util";
 
 const safeEval = createSandbox();
+const setImmediatePromise = promisify(setImmediate);
 
 const md5 = (content: any) => (content ? createHash("md5").update(JSON.stringify(content)).digest("hex") : undefined);
 
@@ -338,9 +340,10 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
       const scopeResult = await plugin(context, inputScope, context.DataStore.getDataSink(node.outputArtifact));
       const t2 = process.uptime() * 100;
 
+      const memSuffix = context.config.debug ? `[${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)} MB]` : "";
       context.Message({
         Channel: times ? Channel.Information : Channel.Debug,
-        Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]`,
+        Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]${memSuffix}`,
       });
 
       // if caching is enabled, let's cache this scopeResult.
@@ -355,6 +358,9 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
           // not settable on fs inputs anyway.
         }
       }
+
+      // Yield the event loop.
+      await setImmediatePromise();
 
       return scopeResult;
     } catch (e) {

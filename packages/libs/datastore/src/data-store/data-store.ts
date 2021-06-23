@@ -128,7 +128,7 @@ export class DataStore {
     });
 
     // metadata.inputSourceMap = new LazyPromise(() => this.createInputSourceMapFor(uri));
-    metadata.lineIndices = new Lazy<Array<number>>(() => LineIndices(data));
+    metadata.lineIndices = new LazyPromise<number[]>(async () => LineIndices(await result.readData()));
 
     return result;
   }
