@@ -359,7 +359,6 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
         }
       }
 
-      console.log("YIIIIEEEDL");
       // Yield the event loop.
       await setImmediatePromise();
 
