@@ -15,6 +15,8 @@ import { tmpdir } from "os";
 import { spawn } from "child_process";
 import { AutorestArgs } from "./args";
 import { VERSION } from "./constants";
+import { AutorestConfiguration } from "@autorest/configuration";
+import { parseMemory } from "./utils";
 
 const inWebpack = typeof __webpack_require__ === "function";
 const nodeRequire = inWebpack ? __non_webpack_require__ : require;
@@ -149,7 +151,22 @@ export async function resolveEntrypoint(localPath: string | null, entrypoint: st
   return null;
 }
 
-export async function runCoreOutOfProc(localPath: string | null, entrypoint: string): Promise<any> {
+export async function runCoreOutOfProc(
+  localPath: string | null,
+  entrypoint: string,
+  config?: AutorestConfiguration,
+): Promise<any> {
+  const env = {
+    ...process.env,
+  };
+
+  if (config?.memory) {
+    const maxMemory = parseMemory(config.memory);
+    if (maxMemory < 1024) {
+      throw new Error("Cannot set memory to be less than 1GB(1024MB)");
+    }
+    env.NODE_OPTIONS = `${env.NODE_OPTIONS} --max_old_space_size=${maxMemory}`;
+  }
   try {
     const ep = await resolveEntrypoint(localPath, entrypoint);
     if (ep) {
@@ -166,7 +183,7 @@ export async function runCoreOutOfProc(localPath: string | null, entrypoint: str
         .replace(/"/g, "'")
         .replace(/(\\(?![']))+/g, "/");
 
-      const p = spawn(process.execPath, ["-e", cmd], { stdio: ["inherit", "inherit", "inherit"] });
+      const p = spawn(process.execPath, ["-e", cmd], { stdio: ["inherit", "inherit", "inherit"], env });
       p.on("close", (code, signal) => {
         process.exit(code);
       });
@@ -180,7 +197,17 @@ export async function runCoreOutOfProc(localPath: string | null, entrypoint: str
   return null;
 }
 
-export async function tryRequire(localPath: string | null, entrypoint: string): Promise<any> {
+export async function runCoreWithRequire(
+  localPath: string | null,
+  entrypoint: string,
+  config?: AutorestConfiguration,
+): Promise<any> {
+  if (config?.memory) {
+    console.warn(
+      "Cannot use --memory flag when running in debugging mode. Use NODE_OPTIONS env variable with flag `--max_old_space_size` to set the node max memory.",
+    );
+  }
+
   try {
     const ep = await resolveEntrypoint(localPath, entrypoint);
     if (ep) {

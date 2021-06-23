@@ -100,6 +100,16 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
   "resolved-directive"?: any;
   "debugger"?: any;
 
+  /**
+   * Force updating the version of core even if there is a local version satisfying the requirement.
+   */
+  "force"?: boolean;
+
+  /**
+   * Configure max memory allowed for autorest process(s)
+   */
+  "memory"?: string;
+
   "github-auth-token"?: string;
 
   // TODO-TIM check what is this?
