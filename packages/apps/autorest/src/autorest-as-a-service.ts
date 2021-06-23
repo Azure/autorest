@@ -16,6 +16,7 @@ import { spawn } from "child_process";
 import { AutorestArgs } from "./args";
 import { VERSION } from "./constants";
 import { AutorestConfiguration } from "@autorest/configuration";
+import { parseMemory } from "./utils";
 
 const inWebpack = typeof __webpack_require__ === "function";
 const nodeRequire = inWebpack ? __non_webpack_require__ : require;
@@ -160,7 +161,10 @@ export async function runCoreOutOfProc(
   };
 
   if (config?.memory) {
-    const maxMemory = resolveMaxMemory(config.memory);
+    const maxMemory = parseMemory(config.memory);
+    if (maxMemory < 1024) {
+      throw new Error("Cannot set memory to be less than 1GB(1024MB)");
+    }
     env.NODE_OPTIONS = `${env.NODE_OPTIONS} --max_old_space_size=${maxMemory}`;
   }
   try {
@@ -191,42 +195,6 @@ export async function runCoreOutOfProc(
     console.log(E);
   }
   return null;
-}
-
-/**
- *
- * @param maxMemory Max memory string(2048m, 2g)
- * @returns Max memory that will be allowed for the cnode process in MB
- */
-function resolveMaxMemory(maxMemory: string): number {
-  const regex = /(\d+)([mg])/i;
-  const match = regex.exec(maxMemory);
-
-  if (!match) {
-    throw new Error(
-      `Couldn't parse memory setting ${maxMemory}. Please provide in this format: 2048m, 2g, etc. Supported units: m,g`,
-    );
-  }
-
-  const number = Number(match[0]);
-  const unit = match[1];
-  const value = number * getUnitMultiplier(unit);
-  if (value < 1024) {
-    throw new Error("Cannot set memory to be less than 1GB(1024MB)");
-  }
-
-  return value;
-}
-
-function getUnitMultiplier(unit: string): number {
-  switch (unit) {
-    case "m":
-      return 1; // = 1024 * 1024;
-    case "g":
-      return 1024; // 1024 * 1024 * 1024;
-    default:
-      throw new Error(`Unexpected unit ${unit}.`);
-  }
 }
 
 export async function runCoreWithRequire(

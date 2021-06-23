@@ -102,3 +102,34 @@ export async function resolveCoreVersion(config: AutorestConfiguration): Promise
   const selectedVersion = await selectVersion(requestedVersion, config.debugger);
   return selectedVersion.modulePath;
 }
+
+/**
+ *
+ * @param maxMemory Max memory string(2048m, 2g)
+ * @returns Max memory that will be allowed for the cnode process in MB
+ */
+export function parseMemory(maxMemory: string): number {
+  const regex = /(\d+)([mg])/i;
+  const match = regex.exec(maxMemory);
+
+  if (!match) {
+    throw new Error(
+      `Couldn't parse memory setting ${maxMemory}. Please provide in this format: 2048m, 2g, etc. Supported units: m,g`,
+    );
+  }
+
+  const number = Number(match[1]);
+  const unit = match[2];
+  return number * getUnitMultiplier(unit);
+}
+
+function getUnitMultiplier(unit: string): number {
+  switch (unit) {
+    case "m":
+      return 1; // = 1024 * 1024;
+    case "g":
+      return 1024; // 1024 * 1024 * 1024;
+    default:
+      throw new Error(`Unexpected unit ${unit}.`);
+  }
+}
