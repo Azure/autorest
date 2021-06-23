@@ -127,19 +127,21 @@ export class AutoRestExtension extends EventEmitter {
     channel.listen();
 
     // initiator
-    const dispatcher = (fnName: string) => async (sessionId: string, ...rest: Array<any>) => {
-      try {
-        const endpoint = this.apiInitiatorEndpoints[sessionId];
-        if (endpoint) {
-          return await (<any>endpoint)[fnName](...rest);
+    const dispatcher =
+      (fnName: string) =>
+      async (sessionId: string, ...rest: Array<any>) => {
+        try {
+          const endpoint = this.apiInitiatorEndpoints[sessionId];
+          if (endpoint) {
+            return await (<any>endpoint)[fnName](...rest);
+          }
+        } catch (e) {
+          if (e != "Cancellation requested.") {
+            // Suppress this from hitting the console.
+            // todo: we should see if we can put it out as an event.
+          }
         }
-      } catch (e) {
-        if (e != "Cancellation requested.") {
-          // Suppress this from hitting the console.
-          // todo: we should see if we can put it out as an event.
-        }
-      }
-    };
+      };
     this.apiInitiator = {
       ReadFile: dispatcher("ReadFile"),
       GetValue: dispatcher("GetValue"),

@@ -38,6 +38,11 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
   "github-auth-token": { type: "string" },
   "output-file": { type: "string" },
   "output-folder": { type: "string" },
+  "force": {
+    type: "boolean",
+    description: "Force updating the version of core even if there is a local version satisfying the requirement.",
+  },
+  "memory": { type: "string", description: "Configure max memory allowed for autorest process(s)" },
 
   // Feature flags
   "deduplicate-inline-models": { type: "boolean" },
@@ -57,4 +62,5 @@ export type AutorestRawConfiguration = RawConfiguration<typeof AUTOREST_CONFIGUR
 
 export const autorestConfigurationProcessor = new ConfigurationSchemaProcessor(AUTOREST_CONFIGURATION_SCHEMA);
 
-export const AUTOREST_INITIAL_CONFIG: AutorestNormalizedConfiguration = autorestConfigurationProcessor.getInitialConfig();
+export const AUTOREST_INITIAL_CONFIG: AutorestNormalizedConfiguration =
+  autorestConfigurationProcessor.getInitialConfig();

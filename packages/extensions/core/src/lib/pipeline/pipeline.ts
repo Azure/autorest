@@ -99,12 +99,9 @@ function buildPipeline(
     if (!cfg.scope) {
       scope = `pipeline.${stageName}`;
     }
-    const inputs: Array<string> = (!cfg.input
-      ? []
-      : Array.isArray(cfg.input)
-      ? cfg.input
-      : [cfg.input]
-    ).map((x: string) => resolvePipelineStageName(stageName, x));
+    const inputs: Array<string> = (!cfg.input ? [] : Array.isArray(cfg.input) ? cfg.input : [cfg.input]).map(
+      (x: string) => resolvePipelineStageName(stageName, x),
+    );
 
     const suffixes: Array<string> = [];
     // adds nodes using at least suffix `suffix`, the input nodes called `inputs` using the context `config`
@@ -310,7 +307,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
         // generate the key used to store/access cached content
         const names = await inputScope.Enum();
         const data = (
-          await Promise.all(names.map((name) => inputScope.ReadStrict(name).then((uri) => md5(uri.ReadData()))))
+          await Promise.all(names.map((name) => inputScope.readStrict(name).then((uri) => md5(uri.readData()))))
         ).sort();
 
         cacheKey = md5([context.configFileFolderUri, nodeName, ...data].join("«"));

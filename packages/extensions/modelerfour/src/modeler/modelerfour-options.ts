@@ -46,6 +46,12 @@ export interface ModelerFourOptions {
    * This is a temporary flag to smooth transition. It WILL be removed in a future version.
    */
   "treat-type-object-as-anything"?: boolean;
+
+  /**
+   * List of header names that shouldn't be included in the codemodel.
+   * Those header would already be handled by the generator.
+   */
+  "ignore-headers"?: string[];
 }
 
 export interface ModelerFourNamingOptions {
