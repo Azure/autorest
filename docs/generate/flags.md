@@ -110,6 +110,12 @@ Those flags are temporary and will be removed in the future. Those flags are her
 | `--openapi-type=arm\|data-plane` | Specify if you want to generate `data-plane` code or `arm` code.                                                                                                                                             |
 | `--armcore-connection`           | If set to `true`, we output the code with the `Connection` type specified in [`armcore`][armcore_connection]. If not, we output a new `Connection` constructor with the generated code. Defaults to `false`. |
 
+## Swift flags
+
+| Flag | Description
+|------------------|-------------
+|`--generate-as-internal="NAME=ALIAS,NAME=ALIAS..."`| Rename generated classes to the provided alias and mark them as internal. Can be used on models, clients, and enumerations.
+
 ## Debugging flags
 
 | Flag                              | Description                                                                                                                                                | Python | .NET | Java | TS  | Go  |
