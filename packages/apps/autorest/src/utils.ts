@@ -109,8 +109,8 @@ export async function resolveCoreVersion(config: AutorestConfiguration): Promise
  * @returns Max memory that will be allowed for the cnode process in MB
  */
 export function parseMemory(maxMemory: string): number {
-  const regex = /(\d+)([mg])/i;
-  const match = regex.exec(maxMemory);
+  const regex = /^(\d+)([mg])$/i;
+  const match = regex.exec(maxMemory.trim());
 
   if (!match) {
     throw new Error(
