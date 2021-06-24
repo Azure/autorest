@@ -48,6 +48,11 @@ export interface ModelerFourOptions {
   "treat-type-object-as-anything"?: boolean;
 
   /**
+   * Enable older inconsistent behavior that an enum with a single value would become a constant by default.
+   */
+  "seal-single-value-enum-by-default"?: boolean;
+
+  /**
    * List of header names that shouldn't be included in the codemodel.
    * Those header would already be handled by the generator.
    */

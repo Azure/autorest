@@ -713,8 +713,19 @@ export class ModelerFour {
     const type = this.getPrimitiveSchemaForEnum(schema);
     const choices = [...parentChoices, ...this.interpret.getEnumChoices(schema)];
 
+    if (this.options["seal-single-value-enum-by-default"]) {
+      this.session.warning(
+        "`seal-single-value-enum-by-default` is a temporary flag that **WILL** be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.",
+        ["Deprecated"],
+      );
+    }
+
+    const singleValueEnumSealed = this.options["seal-single-value-enum-by-default"]
+      ? !alwaysSeal && xmse?.modelAsString !== true
+      : sealed;
+
     // model as string forces it to be a choice/enum.
-    if (!alwaysSeal && xmse?.modelAsString !== true && choices.length === 1) {
+    if (singleValueEnumSealed && choices.length === 1) {
       const constVal = choices[0].value;
 
       return this.codeModel.schemas.add(
