@@ -722,7 +722,7 @@ export class ModelerFour {
 
     const singleValueEnumSealed = this.options["seal-single-value-enum-by-default"]
       ? !alwaysSeal && xmse?.modelAsString !== true
-      : sealed;
+      : !alwaysSeal && sealed;
 
     // model as string forces it to be a choice/enum.
     if (singleValueEnumSealed && choices.length === 1) {

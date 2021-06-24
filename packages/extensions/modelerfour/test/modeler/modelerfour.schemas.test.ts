@@ -1,7 +1,7 @@
 import { JsonType } from "@azure-tools/openapi";
 import assert from "assert";
 import { ChoiceSchema, ConstantSchema, SealedChoiceSchema } from "../../../../libs/codemodel/dist/exports";
-import { addSchema, createTestSpec, findByName } from "../utils";
+import { addSchema, assertSchema, createTestSpec, findByName } from "../utils";
 import { runModeler } from "./modelerfour-utils";
 
 describe("Modelerfour.Schemas", () => {
@@ -152,7 +152,7 @@ describe("Modelerfour.Schemas", () => {
     });
   });
 
-  describe.only("enums", () => {
+  describe("enums", () => {
     it("enums referencing other any with allOf include all their properties", async () => {
       const spec = createTestSpec();
 
@@ -287,6 +287,58 @@ describe("Modelerfour.Schemas", () => {
       expect(findByName("Foo", codeModel.schemas.choices)).toBeUndefined();
       const foo = findByName("Foo", codeModel.schemas.sealedChoices);
       expect(foo).toBeInstanceOf(SealedChoiceSchema);
+    });
+
+    it("always-seal-x-ms-enum configuration produces SealedChoiceSchema for all x-ms-enums", async () => {
+      const spec = createTestSpec();
+
+      addSchema(spec, "ModelAsString", {
+        "type": "string",
+        "enum": ["Apple", "Orange"],
+        "x-ms-enum": {
+          modelAsString: true,
+        },
+      });
+
+      addSchema(spec, "ShouldBeSealed", {
+        "type": "string",
+        "enum": ["Apple", "Orange"],
+        "x-ms-enum": {
+          modelAsString: false,
+        },
+      });
+
+      addSchema(spec, "SingleValueEnum", {
+        "type": "string",
+        "enum": ["Apple"],
+        "x-ms-enum": {
+          modelAsString: false,
+        },
+      });
+
+      const codeModelWithoutSetting = await runModeler(spec, {
+        modelerfour: {
+          "always-seal-x-ms-enums": false,
+        },
+      });
+
+      assertSchema("ModelAsString", codeModelWithoutSetting.schemas.choices, (s) => s.choiceType.type, "string");
+
+      assertSchema("ShouldBeSealed", codeModelWithoutSetting.schemas.sealedChoices, (s) => s.choiceType.type, "string");
+
+      assertSchema("SingleValueEnum", codeModelWithoutSetting.schemas.constants, (s) => s.valueType.type, "string");
+
+      const codeModelWithSetting = await runModeler(spec, {
+        modelerfour: {
+          "always-seal-x-ms-enums": true,
+        },
+      });
+
+      assertSchema("ModelAsString", codeModelWithSetting.schemas.sealedChoices, (s) => s.choiceType.type, "string");
+
+      assertSchema("ShouldBeSealed", codeModelWithSetting.schemas.sealedChoices, (s) => s.choiceType.type, "string");
+
+      assertSchema("SingleValueEnum", codeModelWithSetting.schemas.sealedChoices, (s) => s.choiceType.type, "string");
     });
   });
 
