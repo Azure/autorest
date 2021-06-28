@@ -61,6 +61,9 @@ help-content: # type: Help as defined in autorest-core/help.ts
       - key: base-folder
         type: string
         description: "path to resolve relative paths (input/output files/folders) against; default: directory of configuration file, current directory otherwise"
+      - key: eol
+        type: '"default" | "lf" | "crlf"'
+        description: "Configure the line endings for generated files. Options: `default`, `lf`, `crlf`"
       - key: message-format
         type: '"regular" | "json"'
         description: 'format of messages (e.g. from OpenAPI validation); default: "regular"'
