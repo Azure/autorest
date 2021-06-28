@@ -213,7 +213,6 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   const artifacts: Array<Artifact> = [];
   const clearFolders = new Set<string>();
   const protectFiles = new Set<string>();
-  let fastMode = false;
   const context = await api.view;
   const artifactWriter = new ArtifactWriter(context.config);
 
@@ -238,7 +237,6 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   if (context.config["resource-schema-batch"]) {
     return resourceSchemaBatch(api);
   }
-  fastMode = !!context.config["fast-mode"];
 
   if (context.config["batch"]) {
     await batch(api, args);
@@ -292,12 +290,6 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
 
     timestampDebugLog("Writing Outputs.");
     await artifactWriter.wait();
-
-    for (const artifact of artifacts) {
-      await (artifact.type === "binary-file"
-        ? writeBinary(artifact.uri, artifact.content)
-        : writeString(artifact.uri, artifact.content));
-    }
   }
   timestampLog("Generation Complete");
   // return the exit code to the caller.
