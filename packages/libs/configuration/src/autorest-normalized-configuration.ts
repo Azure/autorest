@@ -58,6 +58,11 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
   "perform-load"?: any;
 
   /**
+   * End of line for generated files.
+   */
+  "eol"?: "default" | "lf" | "crlf";
+
+  /**
    * Feature flags. Those flags enable/disable certain features
    */
   "deduplicate-inline-models"?: boolean;
