@@ -32,6 +32,11 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
   "use-extension": { type: "string", dictionary: true },
   "profile": { type: "string", array: true },
   "pass-thru": { type: "string", array: true },
+  "eol": {
+    type: "string",
+    enum: ["default", "lf", "crlf"],
+    description: "Change the end of line character for generated output.",
+  },
 
   "message-format": { type: "string", enum: ["json", "yaml", "regular"] },
   "title": { type: "string" },

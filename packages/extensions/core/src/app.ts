@@ -35,6 +35,7 @@ import { Exception } from "@autorest/common";
 import { Channel, Message } from "./lib/message";
 import { VERSION } from "./lib/constants";
 import { AutorestCoreLogger } from "./lib/context/logger";
+import { ArtifactWriter } from "./artifact-writer";
 
 let verbose = false;
 let debug = false;
@@ -212,10 +213,8 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   const artifacts: Array<Artifact> = [];
   const clearFolders = new Set<string>();
   const protectFiles = new Set<string>();
-  let fastMode = false;
-  const tasks = new Array<Promise<void>>();
-
   const context = await api.view;
+  const artifactWriter = new ArtifactWriter(context.config);
 
   api.GeneratedFile.Subscribe((_, artifact) => {
     if (context.config.help) {
@@ -224,12 +223,9 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     }
 
     protectFiles.add(artifact.uri);
-    tasks.push(
-      artifact.type === "binary-file"
-        ? writeBinary(artifact.uri, artifact.content)
-        : writeString(artifact.uri, artifact.content),
-    );
+    artifactWriter.writeArtifact(artifact);
   });
+
   api.Message.Subscribe((_, message) => {
     if (message.Channel === Channel.Protect && message.Details) {
       protectFiles.add(message.Details);
@@ -241,7 +237,6 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   if (context.config["resource-schema-batch"]) {
     return resourceSchemaBatch(api);
   }
-  fastMode = !!context.config["fast-mode"];
 
   if (context.config["batch"]) {
     await batch(api, args);
@@ -294,13 +289,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     await doClearFolders(protectFiles, clearFolders);
 
     timestampDebugLog("Writing Outputs.");
-    await Promise.all(tasks);
-
-    for (const artifact of artifacts) {
-      await (artifact.type === "binary-file"
-        ? writeBinary(artifact.uri, artifact.content)
-        : writeString(artifact.uri, artifact.content));
-    }
+    await artifactWriter.wait();
   }
   timestampLog("Generation Complete");
   // return the exit code to the caller.
@@ -474,6 +463,7 @@ async function mainImpl(): Promise<number> {
 function timestampLog(content: string) {
   console.log(color(`[${Math.floor(process.uptime() * 100) / 100} s] ${content}`));
 }
+
 function timestampDebugLog(content: string) {
   if (debug) {
     console.log(color(`[${Math.floor(process.uptime() * 100) / 100} s] ${content}`));
