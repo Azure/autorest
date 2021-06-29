@@ -73,6 +73,12 @@ help-content: # type: Help as defined in autorest-core/help.ts
       - key: output-converted-oai3
         type: string
         description: If enabled and the input-files are `swager 2.0` this will output the resulting OpenAPI3.0 converted files to the `output-folder`
+      - key: title
+        type: string
+        description: Override the service client's name listed in the swagger under `title`.
+      - key: override-client-name
+        type: string
+        description: Name to use for the generated client type. By default, uses the value of the 'Title' field from the input files
 
   _autorest-core-1:
     categoryFriendlyName: Core Functionality
