@@ -30,7 +30,7 @@ autorest --input-file=myfile.json --output-folder=./generated/code/ --namespace=
 
 ### Common Command-line Options
 
-See [flags][https://github.com/azure/autorest/blob/main/docs/generate/flags.md]
+See [flags](https://github.com/azure/autorest/blob/main/docs/generate/flags.md)
 
 #### Authentication
 
