@@ -1,0 +1,19 @@
+base-folder: .
+basic: true
+debug: false
+directive: []
+disable-validation: false
+exclude-file: []
+input-file: []
+output-artifact: []
+output-folder: generated
+pass-thru: []
+profile: []
+require:
+  - ./other.md
+shouldBeIncluded: true
+some: value
+try-require: []
+use: []
+use-extension: {}
+verbose: false
