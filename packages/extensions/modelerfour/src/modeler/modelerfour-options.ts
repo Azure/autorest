@@ -14,6 +14,8 @@ export interface ModelerFourOptions {
 
   "always-seal-x-ms-enums"?: boolean;
 
+  "content-type-extensible"?: boolean;
+
   "flatten-models"?: boolean;
 
   "flatten-payloads"?: boolean;
