@@ -188,7 +188,6 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
 
   visitServer(serverNode: Node<oai.Server>, targetServers: any) {
     const server = serverNode.value;
-    console.error("url", server);
     const url = this.resolveServerUrl(server.url);
     targetServers.__push__({
       value: { ...serverNode.value, url },
