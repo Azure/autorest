@@ -394,7 +394,7 @@
               "if": { "type": "boolean" },
               "then": {
                 "type": "boolean",
-                "errorMessage": "should be a Reference Object, Schema Object, or boolean value"
+                "errorMessage": "must be a Reference Object, Schema Object, or boolean value"
               }
             }
           ],
@@ -976,7 +976,7 @@
           },
           "then": {
             "description": "Some properties are not allowed if content is present",
-            "errorMessage": "should not have `style`, `explode`, `allowReserved`, `example`, or `examples` when `content` is present",
+            "errorMessage": "must not have `style`, `explode`, `allowReserved`, `example`, or `examples` when `content` is present",
             "allOf": [
               {
                 "not": {
@@ -1012,7 +1012,7 @@
           }
         }
       ],
-      "errorMessage": "should have either a `schema` or `content` property"
+      "errorMessage": "must have either a `schema` or `content` property"
     },
     "Parameter": {
       "type": "object",
