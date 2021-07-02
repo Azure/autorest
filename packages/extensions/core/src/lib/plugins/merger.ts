@@ -15,6 +15,7 @@ import * as oai from "@azure-tools/openapi";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
 import { URL } from "url";
+import { isDefined } from "@autorest/common";
 
 /**
  * Takes multiple input OAI3 files and creates one merged one.
@@ -186,7 +187,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     }
   }
 
-  visitServer(serverNode: Node<oai.Server>, targetServers: any) {
+  private visitServer(serverNode: Node<oai.Server>, targetServers: any) {
     const server = serverNode.value;
     const url = this.resolveServerUrl(server.url);
     targetServers.__push__({
@@ -219,15 +220,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
    * @returns the current OpenAPI spec host if it was loaded remotely.
    */
   private getCurrentSpecHost(): string | undefined {
-    const specUrl = (this.currentInput as DataHandle).identity?.[0];
-    if (!specUrl) {
-      return undefined;
-    }
-    const url = new URL(specUrl);
-    if (url.protocol === "http:" || url.protocol === "https:") {
-      return url.origin;
-    }
-    return undefined;
+    return getSpecHost(this.currentInput as DataHandle);
   }
 
   visitInfo(info: ProxyObject<Dictionary<oai.Info>>, nodes: Iterable<Node>) {
@@ -314,9 +307,34 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     const versions = [...this.apiVersions.values()];
     this.metadata.apiVersions = { value: versions, pointer: "/" };
     info.version = { value: versions[0], pointer: "/info/version" }; // todo: should this be the max version?
-
+    this.ensureServers(this.generated);
     // walk thru the generated document, find all the $refs and update them to the new location
     this.updateRefs(this.generated);
+  }
+
+  private ensureServers(model: oai.Model) {
+    if (model.servers && model.servers.length > 0) {
+      // Nothing to do, the server list should already have been resolved correctly.
+      return;
+    }
+
+    // If there is no server it should default to <spec-host>/ see https://swagger.io/docs/specification/api-host-and-base-path/#relative-urls
+    const hosts = [...new Set(this.inputs.map((x) => getSpecHost(x as DataHandle)).filter(isDefined))];
+
+    // Each spec is hosted on a different server we cannot know which one is the correct server.
+    if (hosts.length > 0) {
+      const hostStr = hosts.map((x) => ` - ${x}`).join("\n");
+      throw new Error(
+        `Couldn't resolve the server url. Spec doesn't contain a server definition and specs are hosted on different hosts:\n ${hostStr}`,
+      );
+    }
+
+    model.servers = [
+      {
+        url: hosts[0],
+        description: "Default server",
+      },
+    ];
   }
 
   protected updateRefs(node: any) {
@@ -521,4 +539,19 @@ async function merge(context: AutorestContext, input: DataSource, sink: DataSink
 /* @internal */
 export function createMultiApiMergerPlugin(): PipelinePlugin {
   return merge;
+}
+
+/**
+ * @returns the current OpenAPI spec host if it was loaded remotely.
+ */
+function getSpecHost(handle: DataHandle): string | undefined {
+  const specUrl = handle.identity?.[0];
+  if (!specUrl) {
+    return undefined;
+  }
+  const url = new URL(specUrl);
+  if (url.protocol === "http:" || url.protocol === "https:") {
+    return url.origin;
+  }
+  return undefined;
 }
