@@ -198,6 +198,11 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
   }
 
   private resolveServerUrl(url: string) {
+    // If url is not relative then we can ignore.
+    if (url[0] !== "/") {
+      return url;
+    }
+
     const specHost = this.getCurrentSpecHost();
 
     try {
