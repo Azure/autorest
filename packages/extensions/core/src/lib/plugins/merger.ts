@@ -214,6 +214,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
       }
     }
   }
+
   /**
    * @returns the current OpenAPI spec host if it was loaded remotely.
    */
