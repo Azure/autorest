@@ -112,7 +112,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
 
         case "servers":
           if (!this.isSecondaryFile) {
-            const array = <any>target.servers ?? this.newArray(target, key, pointer);
+            const array = <any>target.servers ?? this.newArray(target, "servers", pointer);
             for (const item of children) {
               this.visitServer(item, array);
             }
@@ -322,19 +322,23 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     const hosts = [...new Set(this.inputs.map((x) => getSpecHost(x as DataHandle)).filter(isDefined))];
 
     // Each spec is hosted on a different server we cannot know which one is the correct server.
-    if (hosts.length > 0) {
+    if (hosts.length > 1) {
       const hostStr = hosts.map((x) => ` - ${x}`).join("\n");
       throw new Error(
-        `Couldn't resolve the server url. Spec doesn't contain a server definition and specs are hosted on different hosts:\n ${hostStr}`,
+        `Couldn't resolve the server url. Spec doesn't contain a server definition and specs are hosted on different hosts:\n${hostStr}`,
       );
     }
 
-    model.servers = [
-      {
+    if (model.servers === undefined) {
+      this.newArray(model, "servers", "/servers");
+    }
+    (model.servers as any).__push__({
+      value: {
         url: hosts[0],
         description: "Default server",
       },
-    ];
+      pointer: `/servers/0`,
+    });
   }
 
   protected updateRefs(node: any) {
