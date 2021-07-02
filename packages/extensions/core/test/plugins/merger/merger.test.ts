@@ -4,7 +4,7 @@ import { createDataHandle } from "@autorest/test-utils";
 
 async function readData(file: string) {
   const content = await fs.promises.readFile(`${__dirname}/inputs/${file}`);
-  return createDataHandle(content.toString(), { name: file });
+  return createDataHandle(content.toString(), { name: `mem://${file}` });
 }
 async function runComponentCleaner(filenames: string[]) {
   const inputs = await Promise.all(filenames.map((x) => readData(x)));
