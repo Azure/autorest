@@ -948,102 +948,80 @@
       },
       "additionalProperties": false
     },
+    "ExampleXORExamples": {
+      "description": "Example and examples are mutually exclusive",
+      "errorMessage": "should not have both `example` and `examples`, as they are mutually exclusive",
+      "not": {
+        "required": ["example", "examples"]
+      }
+    },
+    "SchemaXORContent": {
+      "description": "Schema and content are mutually exclusive, at least one is required",
+      "allOf": [
+        {
+          "if": {
+            "required": ["schema", "content"]
+          },
+          "then": false
+        },
+        {
+          "if": {
+            "required": ["schema"]
+          },
+          "then": true
+        },
+        {
+          "if": {
+            "required": ["content"]
+          },
+          "then": {
+            "description": "Some properties are not allowed if content is present",
+            "errorMessage": "should not have `style`, `explode`, `allowReserved`, `example`, or `examples` when `content` is present",
+            "allOf": [
+              {
+                "not": {
+                  "required": ["style"]
+                }
+              },
+              {
+                "not": {
+                  "required": ["explode"]
+                }
+              },
+              {
+                "not": {
+                  "required": ["allowReserved"]
+                }
+              },
+              {
+                "not": {
+                  "required": ["example"]
+                }
+              },
+              {
+                "not": {
+                  "required": ["examples"]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "then": {
+            "required": ["schema", "content"]
+          }
+        }
+      ],
+      "errorMessage": "should have either a `schema` or `content` property"
+    },
     "Parameter": {
-      "oneOf": [
-        {
-          "$ref": "#/definitions/ParameterWithSchema"
-        },
-        {
-          "$ref": "#/definitions/ParameterWithContent"
-        }
-      ]
-    },
-    "ParameterWithSchema": {
-      "oneOf": [
-        {
-          "$ref": "#/definitions/ParameterWithSchemaWithExample"
-        },
-        {
-          "$ref": "#/definitions/ParameterWithSchemaWithExamples"
-        }
-      ]
-    },
-    "ParameterWithSchemaWithExample": {
-      "oneOf": [
-        {
-          "$ref": "#/definitions/ParameterWithSchemaWithExampleInPath"
-        },
-        {
-          "$ref": "#/definitions/ParameterWithSchemaWithExampleInQuery"
-        },
-        {
-          "$ref": "#/definitions/ParameterWithSchemaWithExampleInHeader"
-        },
-        {
-          "$ref": "#/definitions/ParameterWithSchemaWithExampleInCookie"
-        }
-      ]
-    },
-    "ParameterWithSchemaWithExampleInPath": {
       "type": "object",
-      "required": ["name", "in", "schema", "required"],
       "properties": {
         "name": {
           "type": "string"
         },
         "in": {
-          "type": "string",
-          "enum": ["path"]
-        },
-        "description": {
           "type": "string"
-        },
-        "required": {
-          "type": "boolean",
-          "enum": [true]
-        },
-        "deprecated": {
-          "type": "boolean",
-          "default": false
-        },
-        "allowEmptyValue": {
-          "type": "boolean",
-          "default": false
-        },
-        "style": {
-          "type": "string",
-          "enum": ["matrix", "label", "simple"],
-          "default": "simple"
-        },
-        "explode": {
-          "type": "boolean"
-        },
-        "allowReserved": {
-          "type": "boolean",
-          "default": false
-        },
-        "schema": {
-          "if": { "required": ["$ref"] },
-          "then": { "$ref": "#/definitions/Reference" },
-          "else": { "$ref": "#/definitions/Schema" }
-        },
-        "example": {}
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false
-    },
-    "ParameterWithSchemaWithExampleInQuery": {
-      "type": "object",
-      "required": ["name", "in", "schema"],
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "in": {
-          "type": "string",
-          "enum": ["query"]
         },
         "description": {
           "type": "string"
@@ -1061,9 +1039,7 @@
           "default": false
         },
         "style": {
-          "type": "string",
-          "enum": ["form", "spaceDelimited", "pipeDelimited", "deepObject"],
-          "default": "form"
+          "type": "string"
         },
         "explode": {
           "type": "boolean"
@@ -1073,396 +1049,15 @@
           "default": false
         },
         "schema": {
-          "if": { "required": ["$ref"] },
-          "then": { "$ref": "#/definitions/Reference" },
-          "else": { "$ref": "#/definitions/Schema" }
-        },
-        "example": {}
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false
-    },
-    "ParameterWithSchemaWithExampleInHeader": {
-      "type": "object",
-      "required": ["name", "in", "schema"],
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "in": {
-          "type": "string",
-          "enum": ["header"]
-        },
-        "description": {
-          "type": "string"
-        },
-        "required": {
-          "type": "boolean",
-          "default": false
-        },
-        "deprecated": {
-          "type": "boolean",
-          "default": false
-        },
-        "allowEmptyValue": {
-          "type": "boolean",
-          "default": false
-        },
-        "style": {
-          "type": "string",
-          "enum": ["simple"],
-          "default": "simple"
-        },
-        "explode": {
-          "type": "boolean"
-        },
-        "allowReserved": {
-          "type": "boolean",
-          "default": false
-        },
-        "schema": {
-          "if": { "required": ["$ref"] },
-          "then": { "$ref": "#/definitions/Reference" },
-          "else": { "$ref": "#/definitions/Schema" }
-        },
-        "example": {}
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false
-    },
-    "ParameterWithSchemaWithExampleInCookie": {
-      "type": "object",
-      "required": ["name", "in", "schema"],
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "in": {
-          "type": "string",
-          "enum": ["cookie"]
-        },
-        "description": {
-          "type": "string"
-        },
-        "required": {
-          "type": "boolean",
-          "default": false
-        },
-        "deprecated": {
-          "type": "boolean",
-          "default": false
-        },
-        "allowEmptyValue": {
-          "type": "boolean",
-          "default": false
-        },
-        "style": {
-          "type": "string",
-          "enum": ["form"],
-          "default": "form"
-        },
-        "explode": {
-          "type": "boolean"
-        },
-        "allowReserved": {
-          "type": "boolean",
-          "default": false
-        },
-        "schema": {
-          "if": { "required": ["$ref"] },
-          "then": { "$ref": "#/definitions/Reference" },
-          "else": { "$ref": "#/definitions/Schema" }
-        },
-        "example": {}
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false
-    },
-    "ParameterWithSchemaWithExamples": {
-      "oneOf": [
-        {
-          "$ref": "#/definitions/ParameterWithSchemaWithExamplesInPath"
-        },
-        {
-          "$ref": "#/definitions/ParameterWithSchemaWithExamplesInQuery"
-        },
-        {
-          "$ref": "#/definitions/ParameterWithSchemaWithExamplesInHeader"
-        },
-        {
-          "$ref": "#/definitions/ParameterWithSchemaWithExamplesInCookie"
-        }
-      ]
-    },
-    "ParameterWithSchemaWithExamplesInPath": {
-      "type": "object",
-      "required": ["name", "in", "schema", "required", "examples"],
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "in": {
-          "type": "string",
-          "enum": ["path"]
-        },
-        "description": {
-          "type": "string"
-        },
-        "required": {
-          "type": "boolean",
-          "enum": [true]
-        },
-        "deprecated": {
-          "type": "boolean",
-          "default": false
-        },
-        "allowEmptyValue": {
-          "type": "boolean",
-          "default": false
-        },
-        "style": {
-          "type": "string",
-          "enum": ["matrix", "label", "simple"],
-          "default": "simple"
-        },
-        "explode": {
-          "type": "boolean"
-        },
-        "allowReserved": {
-          "type": "boolean",
-          "default": false
-        },
-        "schema": {
-          "if": { "required": ["$ref"] },
-          "then": { "$ref": "#/definitions/Reference" },
-          "else": { "$ref": "#/definitions/Schema" }
-        },
-        "examples": {
-          "type": "object",
-          "additionalProperties": {
-            "if": { "required": ["$ref"] },
-            "then": { "$ref": "#/definitions/Reference" },
-            "else": { "$ref": "#/definitions/Example" }
+          "if": {
+            "required": ["$ref"]
+          },
+          "then": {
+            "$ref": "#/definitions/Reference"
+          },
+          "else": {
+            "$ref": "#/definitions/Schema"
           }
-        }
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false
-    },
-    "ParameterWithSchemaWithExamplesInQuery": {
-      "type": "object",
-      "required": ["name", "in", "schema", "examples"],
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "in": {
-          "type": "string",
-          "enum": ["query"]
-        },
-        "description": {
-          "type": "string"
-        },
-        "required": {
-          "type": "boolean",
-          "default": false
-        },
-        "deprecated": {
-          "type": "boolean",
-          "default": false
-        },
-        "allowEmptyValue": {
-          "type": "boolean",
-          "default": false
-        },
-        "style": {
-          "type": "string",
-          "enum": ["form", "spaceDelimited", "pipeDelimited", "deepObject"],
-          "default": "form"
-        },
-        "explode": {
-          "type": "boolean"
-        },
-        "allowReserved": {
-          "type": "boolean",
-          "default": false
-        },
-        "schema": {
-          "if": { "required": ["$ref"] },
-          "then": { "$ref": "#/definitions/Reference" },
-          "else": { "$ref": "#/definitions/Schema" }
-        },
-        "examples": {
-          "type": "object",
-          "additionalProperties": {
-            "if": { "required": ["$ref"] },
-            "then": { "$ref": "#/definitions/Reference" },
-            "else": { "$ref": "#/definitions/Example" }
-          }
-        }
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false
-    },
-    "ParameterWithSchemaWithExamplesInHeader": {
-      "type": "object",
-      "required": ["name", "in", "schema", "examples"],
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "in": {
-          "type": "string",
-          "enum": ["header"]
-        },
-        "description": {
-          "type": "string"
-        },
-        "required": {
-          "type": "boolean",
-          "default": false
-        },
-        "deprecated": {
-          "type": "boolean",
-          "default": false
-        },
-        "allowEmptyValue": {
-          "type": "boolean",
-          "default": false
-        },
-        "style": {
-          "type": "string",
-          "enum": ["simple"],
-          "default": "simple"
-        },
-        "explode": {
-          "type": "boolean"
-        },
-        "allowReserved": {
-          "type": "boolean",
-          "default": false
-        },
-        "schema": {
-          "if": { "required": ["$ref"] },
-          "then": { "$ref": "#/definitions/Reference" },
-          "else": { "$ref": "#/definitions/Schema" }
-        },
-        "examples": {
-          "type": "object",
-          "additionalProperties": {
-            "if": { "required": ["$ref"] },
-            "then": { "$ref": "#/definitions/Reference" },
-            "else": { "$ref": "#/definitions/Example" }
-          }
-        }
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false
-    },
-    "ParameterWithSchemaWithExamplesInCookie": {
-      "type": "object",
-      "required": ["name", "in", "schema", "examples"],
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "in": {
-          "type": "string",
-          "enum": ["cookie"]
-        },
-        "description": {
-          "type": "string"
-        },
-        "required": {
-          "type": "boolean",
-          "default": false
-        },
-        "deprecated": {
-          "type": "boolean",
-          "default": false
-        },
-        "allowEmptyValue": {
-          "type": "boolean",
-          "default": false
-        },
-        "style": {
-          "type": "string",
-          "enum": ["form"],
-          "default": "form"
-        },
-        "explode": {
-          "type": "boolean"
-        },
-        "allowReserved": {
-          "type": "boolean",
-          "default": false
-        },
-        "schema": {
-          "if": { "required": ["$ref"] },
-          "then": { "$ref": "#/definitions/Reference" },
-          "else": { "$ref": "#/definitions/Schema" }
-        },
-        "examples": {
-          "type": "object",
-          "additionalProperties": {
-            "if": { "required": ["$ref"] },
-            "then": { "$ref": "#/definitions/Reference" },
-            "else": { "$ref": "#/definitions/Example" }
-          }
-        }
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false
-    },
-    "ParameterWithContent": {
-      "oneOf": [
-        {
-          "$ref": "#/definitions/ParameterWithContentInPath"
-        },
-        {
-          "$ref": "#/definitions/ParameterWithContentNotInPath"
-        }
-      ]
-    },
-    "ParameterWithContentInPath": {
-      "type": "object",
-      "required": ["name", "in", "content"],
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "in": {
-          "type": "string",
-          "enum": ["path"]
-        },
-        "description": {
-          "type": "string"
-        },
-        "required": {
-          "type": "boolean",
-          "enum": [true]
-        },
-        "deprecated": {
-          "type": "boolean",
-          "default": false
-        },
-        "allowEmptyValue": {
-          "type": "boolean",
-          "default": false
         },
         "content": {
           "type": "object",
@@ -1471,52 +1066,134 @@
           },
           "minProperties": 1,
           "maxProperties": 1
-        }
-      },
-      "patternProperties": {
-        "^x-": {}
-      },
-      "additionalProperties": false
-    },
-    "ParameterWithContentNotInPath": {
-      "type": "object",
-      "required": ["name", "in", "content"],
-      "properties": {
-        "name": {
-          "type": "string"
         },
-        "in": {
-          "type": "string",
-          "enum": ["query", "header", "cookie"]
-        },
-        "description": {
-          "type": "string"
-        },
-        "required": {
-          "type": "boolean",
-          "default": false
-        },
-        "deprecated": {
-          "type": "boolean",
-          "default": false
-        },
-        "allowEmptyValue": {
-          "type": "boolean",
-          "default": false
-        },
-        "content": {
+        "example": {},
+        "examples": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/MediaType"
-          },
-          "minProperties": 1,
-          "maxProperties": 1
+            "if": {
+              "required": ["$ref"]
+            },
+            "then": {
+              "$ref": "#/definitions/Reference"
+            },
+            "else": {
+              "$ref": "#/definitions/Example"
+            }
+          }
         }
       },
       "patternProperties": {
         "^x-": {}
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": ["name", "in"],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExampleXORExamples"
+        },
+        {
+          "$ref": "#/definitions/SchemaXORContent"
+        },
+        {
+          "$ref": "#/definitions/ParameterLocation"
+        }
+      ]
+    },
+    "ParameterLocation": {
+      "description": "Parameter location",
+      "allOf": [
+        {
+          "if": {
+            "required": ["in"],
+            "properties": {
+              "in": {
+                "enum": ["path"]
+              }
+            }
+          },
+          "then": {
+            "description": "Parameter in path",
+            "required": ["required"],
+            "properties": {
+              "style": {
+                "enum": ["matrix", "label", "simple"],
+                "default": "simple"
+              },
+              "required": {
+                "enum": [true]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": ["in"],
+            "properties": {
+              "in": {
+                "enum": ["query"]
+              }
+            }
+          },
+          "then": {
+            "description": "Parameter in query",
+            "properties": {
+              "style": {
+                "enum": ["form", "spaceDelimited", "pipeDelimited", "deepObject"],
+                "default": "form"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": ["in"],
+            "properties": {
+              "in": {
+                "enum": ["header"]
+              }
+            }
+          },
+          "then": {
+            "description": "Parameter in header",
+            "properties": {
+              "style": {
+                "enum": ["simple"],
+                "default": "simple"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": ["in"],
+            "properties": {
+              "in": {
+                "enum": ["cookie"]
+              }
+            }
+          },
+          "then": {
+            "description": "Parameter in cookie",
+            "properties": {
+              "style": {
+                "enum": ["form"],
+                "default": "form"
+              }
+            }
+          }
+        },
+        {
+          "then": {
+            "required": ["in"],
+            "properties": {
+              "in": {
+                "enum": ["path", "query", "header", "cookie"]
+              }
+            }
+          }
+        }
+      ]
     },
     "RequestBody": {
       "type": "object",
