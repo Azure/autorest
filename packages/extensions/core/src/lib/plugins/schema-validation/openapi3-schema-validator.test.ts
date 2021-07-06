@@ -63,6 +63,37 @@ describe("OpenAPI3 schema validator", () => {
     ]);
   });
 
+  it("returns custom error if both example and examples are used  in parameter", () => {
+    const errors = validator.validate({
+      ...baseSwaggerSpec,
+      paths: {
+        "/test": {
+          get: {
+            parameters: [
+              {
+                in: "query",
+                name: "foo",
+                example: {},
+                examples: {},
+              },
+            ],
+            responses: { 200: { description: "ok" } },
+          },
+        },
+      },
+    });
+    expect(errors).toEqual([
+      {
+        instancePath: "/paths/~1test/get/parameters/0",
+        keyword: "errorMessage",
+        message: "must not have both `example` and `examples`, as they are mutually exclusive",
+        params: expect.anything(),
+        path: ["paths", "/test", "get", "parameters", "0"],
+        schemaPath: "#/definitions/ExampleXORExamples/errorMessage",
+      },
+    ]);
+  });
+
   describe("when validating a file", () => {
     let file: DataHandle;
     beforeEach(() => {
