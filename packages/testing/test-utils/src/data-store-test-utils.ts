@@ -15,9 +15,8 @@ export function createDataHandle(content: string, props: { name?: string } = {})
       identity: [name],
       artifactType: "",
       cached: content,
-      metadata: {
-        lineIndices: new LazyPromise<number[]>(() => Promise.resolve(LineIndices(content))),
-      } as any,
+      lineIndices: new LazyPromise<number[]>(() => Promise.resolve(LineIndices(content))),
+      sourceMap: undefined,
     },
     false,
   );
