@@ -131,6 +131,7 @@ export class AutorestContextLoader {
               definition.name,
               extension.version,
               await extension.start(enableDebugger),
+              config.interactive,
             ),
           ),
         };
