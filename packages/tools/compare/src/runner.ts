@@ -88,7 +88,6 @@ export const generateWithAutoRest = async (
     // The output-folder where generated files are written.  Specify both
     // styles of option due to inconsistencies between generators.
     `--output-folder="${outputPath}"`,
-    `--${language}.output-folder="$(output-folder)"`,
     `--output-artifact:configuration.yaml`,
     // Clear the output folder before generating
     `--${language}.clear-output-folder`,
