@@ -432,10 +432,6 @@ async function batch(api: AutoRest, args: AutorestCliArgs): Promise<void> {
       );
       throw result;
     }
-
-    console.error("DONE BATCH", batchTaskConfig);
-    await new Promise((r) => setTimeout(r, 5000));
-    debugger;
   }
 }
 
