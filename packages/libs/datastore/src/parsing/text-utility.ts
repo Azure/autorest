@@ -42,7 +42,7 @@ export function indexToPositionInText(text: string, index: number): sourceMapPos
  * @param index Index.
  */
 export async function indexToPosition(text: DataHandle, index: number): Promise<sourceMapPosition> {
-  return indexToPositionFromLineIndices(await text.metadata.lineIndices, index);
+  return indexToPositionFromLineIndices(await text.lineIndices(), index);
 }
 
 /**

@@ -1,22 +1,19 @@
-import { LazyPromise } from "@azure-tools/tasks";
 import { MappedPosition, Position, RawSourceMap, SourceMapConsumer } from "source-map";
 import { promises as fs } from "fs";
 import { ParseToAst as parseAst, YAMLNode, parseYaml, ParseNode } from "../yaml";
-
-export interface Metadata {
-  lineIndices: LazyPromise<Array<number>>;
-  sourceMap: LazyPromise<RawSourceMap>;
-
-  // inputSourceMap: LazyPromise<RawSourceMap>;
-}
+import { LineIndices } from "../parsing/text-utility";
 
 export interface Data {
+  status: "loaded" | "unloaded";
   name: string;
   artifactType: string;
-  metadata: Metadata;
   identity: Array<string>;
 
+  lineIndices?: number[];
+  sourceMap: RawSourceMap | undefined;
+
   writeToDisk?: Promise<void>;
+  writeSourceMapToDisk?: Promise<void>;
   cached?: string;
   cachedAst?: YAMLNode;
   cachedObject?: any;
@@ -71,10 +68,16 @@ export class DataHandle {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       this.item.writeToDisk = fs.writeFile(this.item.name, this.item.cached!);
     }
+    if (this.item.sourceMap && !this.item.writeSourceMapToDisk) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      this.item.writeSourceMapToDisk = fs.writeFile(`${this.item.name}.map`, JSON.stringify(this.item.sourceMap));
+    }
     // clear the caches.
+    this.item.status = "unloaded";
     this.item.cached = undefined;
     this.item.cachedObject = undefined;
     this.item.cachedAst = undefined;
+    this.item.sourceMap = undefined;
   }
 
   public get originalDirectory() {
@@ -99,11 +102,11 @@ export class DataHandle {
     if (this.item.cached === undefined) {
       // make sure the write-to-disk is finished.
       await this.item.writeToDisk;
-
       if (nocache) {
         return await fs.readFile(this.item.name, "utf8");
       } else {
         this.item.cached = await fs.readFile(this.item.name, "utf8");
+        this.item.status = "loaded";
 
         // start the timer again.
         this.resetUnload();
@@ -134,10 +137,6 @@ export class DataHandle {
     return this.item.cachedAst || (this.item.cachedAst = parseAst(await this.readData()));
   }
 
-  public get metadata(): Metadata {
-    return this.item.metadata;
-  }
-
   public get artifactType(): string {
     return this.item.artifactType;
   }
@@ -156,13 +155,24 @@ export class DataHandle {
   }
 
   public async blame(position: Position): Promise<Array<MappedPosition>> {
-    const metadata = this.metadata;
-    const consumer = await new SourceMapConsumer(await metadata.sourceMap);
+    await this.readData();
+    if (!this.item.sourceMap) {
+      return [];
+    }
+    const consumer = await new SourceMapConsumer(this.item.sourceMap);
     const mappedPosition = consumer.originalPositionFor(position);
     if (mappedPosition.line === null) {
       return [];
     }
     return [mappedPosition as any];
+  }
+
+  public async lineIndices() {
+    if (!this.item.lineIndices) {
+      this.item.lineIndices = LineIndices(await this.readData());
+    }
+
+    return this.item.lineIndices;
   }
 
   /**
@@ -185,7 +195,6 @@ export class DataHandle {
   public get Description(): string {
     return this.description;
   }
-
   /**
    * @deprecated use @see readData
    */

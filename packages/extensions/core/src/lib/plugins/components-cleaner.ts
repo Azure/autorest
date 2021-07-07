@@ -234,20 +234,12 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
 }
 
 async function clean(config: AutorestContext, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
+  const inputs = await Promise.all((await input.enum()).map(async (x) => input.readStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
     const processor = new ComponentsCleaner(each);
     const output = await processor.getOutput();
-    result.push(
-      await sink.WriteObject(
-        "oai3.cleaned.json",
-        output,
-        each.identity,
-        "openapi-document-cleaned",
-        await processor.getSourceMappings(),
-      ),
-    );
+    result.push(await sink.writeObject("oai3.cleaned.json", output, each.identity, "openapi-document-cleaned"));
   }
 
   return new QuickDataSource(result, input.pipeState);

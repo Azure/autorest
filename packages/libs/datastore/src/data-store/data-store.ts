@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { OperationCanceledException, Lazy, LazyPromise } from "@azure-tools/tasks";
+import { OperationCanceledException } from "@azure-tools/tasks";
 import { resolveUri } from "@azure-tools/uri";
 import { RawSourceMap, SourceMapGenerator } from "source-map";
 import { CancellationToken } from "../cancellation";
@@ -17,9 +17,8 @@ import { join } from "path";
 import { createHash } from "crypto";
 import { DataSource } from "./data-source";
 import { ReadThroughDataSource } from "./read-through-data-source";
-import { Data, DataHandle, Metadata } from "./data-handle";
+import { Data, DataHandle } from "./data-handle";
 import { DataSink } from "./data-sink";
-import { LineIndices } from "../parsing/text-utility";
 
 const md5 = (content: any) => (content ? createHash("md5").update(JSON.stringify(content)).digest("hex") : null);
 
@@ -64,14 +63,15 @@ export class DataStore {
 
   private uid = 0;
 
-  private async writeDataInternal(
-    uri: string,
+  public async writeData(
+    description: string,
     data: string,
     artifactType: string,
     identity: Array<string>,
-    metadata: Metadata,
+    sourceMapFactory?: (self: DataHandle) => Promise<RawSourceMap>,
   ): Promise<DataHandle> {
-    this.throwIfCancelled();
+    const uri = this.createUri(description);
+
     if (this.store[uri]) {
       throw new Error(`can only write '${uri}' once`);
     }
@@ -83,54 +83,23 @@ export class DataStore {
     }
     const name = join(await this.getCacheFolder(), filename);
 
-    this.store[uri] = {
+    const item: Data = {
+      status: "loaded",
       name,
       cached: data,
       artifactType,
       identity,
-      metadata,
+      sourceMap: undefined,
     };
+    this.store[uri] = item;
 
-    return this.read(uri);
-  }
-
-  public async writeData(
-    description: string,
-    data: string,
-    artifact: string,
-    identity: Array<string>,
-    sourceMapFactory?: (self: DataHandle) => Promise<RawSourceMap>,
-  ): Promise<DataHandle> {
-    const uri = this.createUri(description);
-
-    // metadata
-    const metadata: Metadata = {} as any;
-
-    const result = await this.writeDataInternal(uri, data, artifact, identity, metadata);
-
-    // metadata.artifactType = artifact;
-
-    metadata.sourceMap = new LazyPromise(async () => {
-      if (!sourceMapFactory) {
-        return new SourceMapGenerator().toJSON();
-      }
-      const sourceMap = await sourceMapFactory(result);
-
-      // validate
-      const inputFiles = sourceMap.sources.concat(sourceMap.file);
-      for (const inputFile of inputFiles) {
-        if (!this.store[inputFile]) {
-          throw new Error(`Source map of '${uri}' references '${inputFile}' which does not exist`);
-        }
-      }
-
-      return sourceMap;
-    });
-
-    // metadata.inputSourceMap = new LazyPromise(() => this.createInputSourceMapFor(uri));
-    metadata.lineIndices = new LazyPromise<number[]>(async () => LineIndices(await result.readData()));
-
-    return result;
+    const handle = await this.read(uri);
+    if (sourceMapFactory) {
+      item.sourceMap = await sourceMapFactory(handle);
+    } else {
+      item.sourceMap = new SourceMapGenerator().toJSON();
+    }
+    return handle;
   }
 
   private createUri(description: string): string {
@@ -144,7 +113,7 @@ export class DataStore {
       async (description, input) => {
         const uri = this.createUri(description);
         this.store[uri] = this.store[input.key];
-        return this.Read(uri);
+        return this.read(uri);
       },
     );
   }
@@ -176,36 +145,6 @@ export class DataStore {
       name: `blameRoot (${JSON.stringify(position)})`,
     });
   }
-
-  /*  input source map not enable at this time.
-  private async createInputSourceMapFor(absoluteUri: string): Promise<RawSourceMap> {
-    const data = this.readStrictSync(absoluteUri);
-
-    // retrieve all target positions
-    const targetPositions: SmartPosition[] = [];
-    const metadata = data.metadata;
-    const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
-    sourceMapConsumer.eachMapping((m) => targetPositions.push({ column: m.generatedColumn, line: m.generatedLine }));
-
-    // collect blame
-    const mappings: Array<Mapping> = [];
-    for (const targetPosition of targetPositions) {
-      const blameTree = await this.blame(absoluteUri, targetPosition);
-      const inputPositions = blameTree.getMappingLeafs();
-      for (const inputPosition of inputPositions) {
-        mappings.push({
-          name: inputPosition.name,
-          source: this.readStrictSync(inputPosition.source).description, // friendly name
-          generated: blameTree.node,
-          original: inputPosition,
-        });
-      }
-    }
-    const sourceMapGenerator = new SourceMapGenerator({ file: absoluteUri });
-    await Compile(mappings, sourceMapGenerator);
-    return sourceMapGenerator.toJSON();
-  }
-  */
 
   /**
    * @deprecated use @see getReadThroughScope

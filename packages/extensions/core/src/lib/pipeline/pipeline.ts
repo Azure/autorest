@@ -339,6 +339,8 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
       // creates the actual plugin.
       const scopeResult = await plugin(context, inputScope, context.DataStore.getDataSink(node.outputArtifact));
       const t2 = process.uptime() * 100;
+      await new Promise((r) => setTimeout(r, 5000));
+      global.gc();
 
       const memSuffix = context.config.debug ? `[${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)} MB]` : "";
       context.Message({
