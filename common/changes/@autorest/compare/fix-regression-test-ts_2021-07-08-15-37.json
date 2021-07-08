@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/compare",
+      "comment": "**Fix** Handle constructor with public/private parameters",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/compare",
+  "email": "tiguerin@microsoft.com"
+}
