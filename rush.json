@@ -43,7 +43,7 @@
       "packageName": "@autorest/compare",
       "projectFolder": "packages/tools/compare",
       "reviewCategory": "production",
-      "shouldPublish": false
+      "shouldPublish": true
     },
     {
       "packageName": "@autorest/schemas",
