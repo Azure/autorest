@@ -20,7 +20,6 @@ jobs:
 
           corePkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-core-*.tgz" )"
           modelerfourPkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-modelerfour-*.tgz" )"
-          comparePkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-compare-*.tgz" )"
 
           [ -z "$corePkg" ] && echo "Error: Couldn't find autorest core package" && exit 1
           [ -z "$modelerfourPkg" ] && echo "Error: Couldn't find autorest modelerfour package" && exit 1
@@ -31,8 +30,6 @@ jobs:
 
           sed -i "s,--version:../packages/extensions/core,--version:$corePkg," ./regression-tests/regression-compare.yaml
           sed -i "s,--use:../packages/extensions/modelerfour,--use:$modelerfourPkg," ./regression-tests/regression-compare.yaml
-
-          npm install -g $comparePkg
         displayName: Find packages path
 
       - task: NodeTool@0
@@ -46,10 +43,14 @@ jobs:
         displayName: Install Python 3
 
       - script: |
-          npm install
-          npm install -g @autorest/compare@~0.3.6
-          node -e "console.log('process env', process.env)"
+          rush update
+          rush rebuild
+          cd ./packages/tools/compare
+          npm link --force
         displayName: Install autorest-compare
+
+      - script: npm install
+        displayName: Install dependencies
         workingDirectory: regression-tests
 
       - script: autorest-compare --compare:./regression-tests/regression-compare.yaml --language:python
