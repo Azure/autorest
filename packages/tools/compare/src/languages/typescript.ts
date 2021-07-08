@@ -110,9 +110,12 @@ function extractField(fieldNode: Parser.SyntaxNode): FieldDetails {
 function extractParameter(parameterNode: Parser.SyntaxNode, ordinal: number): ParameterDetails {
   const [nameNode, typeNode] = parameterNode.namedChildren;
 
+  if(typeNode.children[1] === undefined) {
+    console.error("HHHHERREERR ERRRORORO", typeNode)
+  }
   return {
     name: nameNode.text,
-    type: typeNode ? typeNode.children[1]?.text : "any",
+    type: typeNode ? typeNode.children[1].text : "any",
     ordinal,
     isOptional: parameterNode.type === "optional_parameter",
   };
