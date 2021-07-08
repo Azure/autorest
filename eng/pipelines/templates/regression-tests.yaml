@@ -18,15 +18,19 @@ jobs:
       - script: |
           corePkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-core-*.tgz" )"
           modelerfourPkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-modelerfour-*.tgz" )"
+          comparePkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-compare-*.tgz" )"
 
           [ -z "$corePkg" ] && echo "Error: Couldn't find autorest core package" && exit 1
           [ -z "$modelerfourPkg" ] && echo "Error: Couldn't find autorest modelerfour package" && exit 1
+          [ -z "$comparePkg" ] && echo "Error: Couldn't find autorest compare package" && exit 1
 
           echo "Found core package $corePkg"
           echo "Found modelerfour package $modelerfourPkg"
 
           sed -i "s,--version:../packages/extensions/core,--version:$corePkg," ./regression-tests/regression-compare.yaml
           sed -i "s,--use:../packages/extensions/modelerfour,--use:$modelerfourPkg," ./regression-tests/regression-compare.yaml
+
+          npm install -g $comparePkg
         displayName: Find packages path
 
       - task: NodeTool@0
