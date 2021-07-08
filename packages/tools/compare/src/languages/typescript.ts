@@ -112,7 +112,7 @@ function extractParameter(parameterNode: Parser.SyntaxNode, ordinal: number): Pa
 
   return {
     name: nameNode.text,
-    type: typeNode ? typeNode.children?.[1].text : "any",
+    type: typeNode ? typeNode.children[1]?.text : "any",
     ordinal,
     isOptional: parameterNode.type === "optional_parameter",
   };
