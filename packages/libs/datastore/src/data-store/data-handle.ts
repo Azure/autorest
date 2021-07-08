@@ -1,7 +1,7 @@
 import { MappedPosition, Position, RawSourceMap, SourceMapConsumer } from "source-map";
 import { promises as fs } from "fs";
 import { ParseToAst as parseAst, YAMLNode, parseYaml, ParseNode } from "../yaml";
-import { LineIndices } from "../parsing/text-utility";
+import { getLineIndices } from "../parsing/text-utility";
 
 export interface Data {
   status: "loaded" | "unloaded";
@@ -169,7 +169,7 @@ export class DataHandle {
 
   public async lineIndices() {
     if (!this.item.lineIndices) {
-      this.item.lineIndices = LineIndices(await this.readData());
+      this.item.lineIndices = getLineIndices(await this.readData());
     }
 
     return this.item.lineIndices;

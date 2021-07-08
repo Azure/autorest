@@ -12,7 +12,7 @@ const regexNewLine = /\r?\n/g;
  * Return an array containg the indexes where each line start. Each cell has the index to its coresponding line.
  * @param text Text to index.
  */
-export function LineIndices(text: string): Array<number> {
+export function getLineIndices(text: string): Array<number> {
   const indices = [0];
 
   let match: RegExpExecArray | null;
@@ -33,7 +33,7 @@ export function Lines(text: string): Array<string> {
  * @param index Index.
  */
 export function indexToPositionInText(text: string, index: number): sourceMapPosition {
-  return indexToPositionFromLineIndices(LineIndices(text), index);
+  return indexToPositionFromLineIndices(getLineIndices(text), index);
 }
 
 /**
