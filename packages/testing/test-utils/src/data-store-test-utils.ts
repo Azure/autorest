@@ -1,4 +1,4 @@
-import { DataHandle, LineIndices } from "@azure-tools/datastore";
+import { DataHandle, getLineIndices } from "@azure-tools/datastore";
 
 /**
  * Create a data handle from some string content.
@@ -16,7 +16,7 @@ export function createDataHandle(content: string, props: { name?: string } = {})
       identity: [name],
       artifactType: "",
       cached: content,
-      lineIndices: LineIndices(content),
+      lineIndices: getLineIndices(content),
       sourceMap: undefined,
     },
     false,
