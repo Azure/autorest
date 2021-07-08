@@ -7,7 +7,7 @@ export interface Data {
   status: "loaded" | "unloaded";
   name: string;
   artifactType: string;
-  identity: Array<string>;
+  identity: string[];
 
   lineIndices?: number[];
   sourceMap: RawSourceMap | undefined;
@@ -69,7 +69,6 @@ export class DataHandle {
       this.item.writeToDisk = fs.writeFile(this.item.name, this.item.cached!);
     }
     if (this.item.sourceMap && !this.item.writeSourceMapToDisk) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       this.item.writeSourceMapToDisk = fs.writeFile(`${this.item.name}.map`, JSON.stringify(this.item.sourceMap));
     }
     // clear the caches.
@@ -156,10 +155,11 @@ export class DataHandle {
 
   public async blame(position: Position): Promise<Array<MappedPosition>> {
     await this.readData();
-    if (!this.item.sourceMap) {
+    const sourceMap = await this.getSourceMap();
+    if (!sourceMap) {
       return [];
     }
-    const consumer = await new SourceMapConsumer(this.item.sourceMap);
+    const consumer = await new SourceMapConsumer(sourceMap);
     const mappedPosition = consumer.originalPositionFor(position);
     if (mappedPosition.line === null) {
       return [];
@@ -173,6 +173,19 @@ export class DataHandle {
     }
 
     return this.item.lineIndices;
+  }
+
+  public async getSourceMap() {
+    if (!this.item.sourceMap) {
+      try {
+        const content = await fs.readFile(`${this.item.name}.map`, "utf8");
+        this.item.sourceMap = JSON.parse(content.toString());
+      } catch {
+        return undefined;
+      }
+    }
+
+    return this.item.sourceMap;
   }
 
   /**
