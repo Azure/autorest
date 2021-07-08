@@ -16,6 +16,8 @@ jobs:
         displayName: Download packages(.tgz)
 
       - script: |
+          ls $(Pipeline.Workspace)/packages
+
           corePkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-core-*.tgz" )"
           modelerfourPkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-modelerfour-*.tgz" )"
           comparePkg="$(find $(Pipeline.Workspace)/packages -type f -iname "autorest-compare-*.tgz" )"
