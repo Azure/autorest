@@ -40,8 +40,8 @@ jobs:
         displayName: Install Python 3
 
       - script: |
-          rush update
-          rush rebuild
+          npx @microsoft/rush update
+          npx @microsoft/rush rebuild
           cd ./packages/tools/compare
           npm link --force
         displayName: Install autorest-compare
