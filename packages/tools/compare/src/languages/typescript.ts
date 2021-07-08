@@ -115,7 +115,7 @@ function extractParameter(parameterNode: Parser.SyntaxNode, ordinal: number): Pa
   }
 
   if (typeNode.children[1] === undefined) {
-    console.error("HHHHERREERR ERRRORORO", typeNode);
+    console.error("HHHHERREERR ERRRORORO", nameNode, typeNode);
   }
 
   return {
