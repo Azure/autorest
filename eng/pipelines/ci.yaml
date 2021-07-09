@@ -58,11 +58,6 @@ stages:
     displayName: Regression Tests
     dependsOn: main
     jobs:
-      # autorest.typescript now only works on node 12+
-      # - template: ./templates/regression-tests.yaml
-      #   parameters:
-      #     name: node10
-      #     nodeVersion: 10.x
       - template: ./templates/regression-tests.yaml
         parameters:
           name: node12
