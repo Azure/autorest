@@ -107,6 +107,10 @@ modelerfour:
   # This is a temporary flag to smooth transition. It WILL be removed in a future version.
   treat-type-object-as-anything: false|true
 
+  # **TEMPORARY FLAG DO NOT DEPEND ON IT**
+  # Enable older inconsistent behavior that an enum with a single value would become a constant by default.
+  seal-single-value-enum-by-default: false|true
+
   # customization of the identifier normalization and naming provided by the prenamer.
   # pascal|pascalcase - MultiWordIdentifier
   # camel|camelcase - multiWordIdentifier

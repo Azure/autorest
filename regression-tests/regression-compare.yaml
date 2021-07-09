@@ -71,6 +71,7 @@ languages:
       - --use:../packages/extensions/modelerfour
       - --use:@autorest/python@5.7.0
       - --modelerfour.treat-type-object-as-anything
+      - --modelerfour.seal-single-value-enum-by-default
 
   - language: typescript
     outputPath: ./output/typescript
@@ -89,4 +90,6 @@ languages:
       - --modelerfour.treat-type-object-as-anything
       - --package-name:test-package
       - --title:TestClient
+      - --modelerfour.seal-single-value-enum-by-default
       - --use:@autorest/typescript@6.0.0-beta.5
+
