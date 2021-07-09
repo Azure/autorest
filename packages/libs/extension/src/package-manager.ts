@@ -1,5 +1,5 @@
 import { writeFile, access } from "fs/promises";
-import { join } from "node:path";
+import { join } from "path";
 
 export type PackageManagerType = "yarn" | "npm";
 
