@@ -95,9 +95,9 @@ dependencies:
   source-map: 0.7.3
   source-map-support: 0.5.19
   supertest: 6.1.3
-  tree-sitter: 0.17.2
-  tree-sitter-python: 0.16.1
-  tree-sitter-typescript: 0.16.1
+  tree-sitter: 0.19.0
+  tree-sitter-python: 0.19.0
+  tree-sitter-typescript: 0.19.0
   ts-jest: 27.0.3_jest@27.0.4+typescript@4.3.4
   ts-loader: 9.2.3_typescript@4.3.4+webpack@5.40.0
   ts-mocha: 6.0.0_mocha@6.2.3
@@ -8178,28 +8178,28 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-15Ih7phfcdP5YxqiB+iDtLoaTz4Nd35+IiAv0kQ5FNKHzXgdWqPoTIqEDDJmXceQt4JZk6lVPT8lnDlPpGDppw==
-  /tree-sitter-python/0.16.1:
+  /tree-sitter-python/0.19.0:
     dependencies:
       nan: 2.14.2
     dev: false
     requiresBuild: true
     resolution:
-      integrity: sha512-XUxJgecoSZwNYUD+Pfb16pjPmK16T+bqhNdGkX/pgXvaEniaeVLpZP0VSiRpBq7Dx5vaXQcTn1/2MhUxoVBCdg==
-  /tree-sitter-typescript/0.16.1:
+      integrity: sha512-UAJV73zCE+2b+X8XQOyL6C+MxVUV8BH0TxcOwhfgaDh6F6g4Ub0SqWGF19C1MDrGi25JNnZ8xlsH0aqrasyS3w==
+  /tree-sitter-typescript/0.19.0:
     dependencies:
       nan: 2.14.2
     dev: false
     requiresBuild: true
     resolution:
-      integrity: sha512-jyU5yl4W6JPn66v2YbzaO1ClDcdDnj+7YQNZz3STgEiUooSjpWI1Ucgw+S/qEGbf0fMXsC0fucpP+/M1uc9ubw==
-  /tree-sitter/0.17.2:
+      integrity: sha512-fDpenjG6HhHirBaMipxFlGlc9YUUc+CEJP7QLrs8Xi1NRS4h9WTntW68wORHfh2gd3XNQgLNGfev9iv2+7QjDg==
+  /tree-sitter/0.19.0:
     dependencies:
       nan: 2.14.2
       prebuild-install: 5.3.6
     dev: false
     requiresBuild: true
     resolution:
-      integrity: sha512-bxFEolb9xMxBdbwh4wqT730J8fu10J15EL8lM+iGr8LcKbhuQ7KHA0pPsmNPIpZlr6vyDKFojJnD45JtIBIV0w==
+      integrity: sha512-jw/BNCCRB9RCq/GFGU0VuhchGlIIlYRQFnjXgPKG3fBIo+c3ImuPITtAHJJ4XgTBNfeAQmt8XC4wShgBw8tgdg==
   /trim-newlines/2.0.0:
     dev: false
     engines:
@@ -9125,6 +9125,7 @@ packages:
       '@types/jest': 26.0.20
       '@types/node': 14.14.34
       '@types/semver': 5.5.0
+      '@types/source-map-support': 0.5.3
       '@types/webpack': 4.41.26
       '@typescript-eslint/eslint-plugin': 4.17.0_1160784d52d5049720154d5bb8e5522f
       '@typescript-eslint/parser': 4.17.0_eslint@7.21.0+typescript@4.3.4
@@ -9155,7 +9156,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-pLjau/b/meJpCc0dOzzkyMy8dwjj7NXQqbGYXsR3EQ/XqklVPSz+t5ftEhiv18Ae/f7tHC6tKiA9wVqE0R2NOQ==
+      integrity: sha512-7gTI10GQyhcx3Tjkw2W831CLYG0fry1cP7IXQcB+lmWuQK351lpbGxut5yLW5C7qj1rKOIi+5NpByXnFT7Q/sA==
       tarball: file:projects/autorest.tgz
     version: 0.0.0
   file:projects/codegen.tgz_prettier@2.3.1+ts-node@9.1.1:
@@ -9263,9 +9264,9 @@ packages:
       js-yaml: 4.0.0
       mocha: 6.2.3
       source-map-support: 0.5.19
-      tree-sitter: 0.17.2
-      tree-sitter-python: 0.16.1
-      tree-sitter-typescript: 0.16.1
+      tree-sitter: 0.19.0
+      tree-sitter-python: 0.19.0
+      tree-sitter-typescript: 0.19.0
       ts-mocha: 6.0.0_mocha@6.2.3
       ts-node: 9.1.1_typescript@4.3.4
       typescript: 4.3.4
@@ -9275,7 +9276,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-2j765tTPXk8sBI7+bsHaLHip2kGlgDWHXQhyugLZyeaYO2SXU0Sh+LwE6Ofy9V7KFuIuP9T4lO/sCwfgW2hncQ==
+      integrity: sha512-5fVO7R3o7ptRJlnexw6cs9aNWxzxdO/YrYptZRXpUSiwiQib/McCRbZYnWyeerfnkA2C+siSxx1/ytpIXxFK6A==
       tarball: file:projects/compare.tgz
     version: 0.0.0
   file:projects/configuration.tgz_prettier@2.3.1+ts-node@9.1.1:
@@ -9295,6 +9296,7 @@ packages:
       jest: 27.0.4_ts-node@9.1.1
       lodash: 4.17.21
       rimraf: 3.0.2
+      ts-jest: 27.0.3_jest@27.0.4+typescript@4.3.4
       typescript: 4.3.4
       untildify: 4.0.0
     dev: false
@@ -9304,7 +9306,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-2z5fpj0kDF/TxnlyWnZUoE++j6LV1C0V3kKtxfWoFRQtht4qxRbXZO281icCGQYXG2eFod60lMsaDEXfiCjZzA==
+      integrity: sha512-VHj/zHs9QkaZv00aOL2F11QTOINF//B4UhP46voCdYw0VyN+qbRYdlyKEbGGWr2hbF3+OtRKyN9xPhdpRiSQag==
       tarball: file:projects/configuration.tgz
     version: 0.0.0
   file:projects/core.tgz_ts-node@9.1.1:
@@ -9822,9 +9824,9 @@ specifiers:
   source-map: 0.7.3
   source-map-support: ^0.5.19
   supertest: ^6.0.1
-  tree-sitter: ^0.17.0
-  tree-sitter-python: 0.16.1
-  tree-sitter-typescript: 0.16.1
+  tree-sitter: '^0.19.0 '
+  tree-sitter-python: 0.19.0
+  tree-sitter-typescript: 0.19.0
   ts-jest: ^27.0.3
   ts-loader: ~9.2.3
   ts-mocha: ^6.0.0

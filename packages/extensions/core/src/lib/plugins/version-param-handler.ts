@@ -168,13 +168,7 @@ async function handleApiVersionParameter(config: AutorestContext, input: DataSou
       const processor = new ApiVersionParameterHandler(each);
       const output = await processor.getOutput();
       result.push(
-        await sink.WriteObject(
-          "oai3.noapiversion.json",
-          output,
-          each.identity,
-          "openapi-document-noapiversion",
-          await processor.getSourceMappings(),
-        ),
+        await sink.WriteObject("oai3.noapiversion.json", output, each.identity, "openapi-document-noapiversion"),
       );
     }
     return new QuickDataSource(result, input.pipeState);

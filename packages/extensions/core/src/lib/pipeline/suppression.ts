@@ -6,7 +6,7 @@
 import { AutorestConfiguration, ResolvedDirective, resolveDirectives } from "@autorest/configuration";
 import { JsonPath, matches } from "@azure-tools/datastore";
 import { From } from "linq-es2015";
-import { Message } from "../message";
+import { Channel, Message } from "../message";
 
 export class Suppressor {
   private suppressions: Array<ResolvedDirective>;
@@ -28,22 +28,22 @@ export class Suppressor {
   }
 
   public filter(m: Message): Message | null {
-    // the message does not have a source attached to it - assume it may pass
-    if (!m.Source || m.Source.length === 0) {
-      return m;
-    }
-
+    const hadSource = m.Source && m.Source.length > 0;
     // filter
     for (const sup of this.suppressions) {
       // matches key
       if (From(m.Key || []).Any((k) => From(sup.suppress).Any((s) => k.toLowerCase() === s.toLowerCase()))) {
         // filter applicable sources
-        m.Source = m.Source.filter((s) => !this.matchesSourceFilter(s.document, (<any>s.Position).path, sup));
+        if (m.Source && hadSource) {
+          m.Source = m.Source.filter((s) => !this.matchesSourceFilter(s.document, (<any>s.Position).path, sup));
+        } else {
+          return null;
+        }
       }
     }
 
     // drop message if all source locations have been stripped
-    if (m.Source.length === 0) {
+    if (hadSource && m.Source?.length === 0) {
       return null;
     }
 

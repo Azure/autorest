@@ -82,7 +82,7 @@ languages:
       - --modelerfour.treat-type-object-as-anything
       - --package-name:test-package
       - --title:TestClient
-      - --use:@autorest/typescript@6.0.0-alpha.20210415.6
+      - --use:@autorest/typescript@6.0.0-beta.5
     newArgs:
       - --v3
       - --version:../packages/extensions/core
@@ -90,5 +90,6 @@ languages:
       - --modelerfour.treat-type-object-as-anything
       - --package-name:test-package
       - --title:TestClient
-      - --use:@autorest/typescript@6.0.0-alpha.20210415.6
       - --modelerfour.seal-single-value-enum-by-default
+      - --use:@autorest/typescript@6.0.0-beta.5
+

@@ -37,6 +37,11 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
   "stats"?: boolean;
 
   /**
+   * Start the autorest.interactive plugin and cache traffic between extensions.
+   */
+  "interactive"?: boolean;
+
+  /**
    * Skip the semantic validation plugin.
    */
   "skip-semantics-validation"?: boolean;
@@ -56,6 +61,11 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
   "batch"?: boolean;
   "resource-schema-batch"?: any;
   "perform-load"?: any;
+
+  /**
+   * End of line for generated files.
+   */
+  "eol"?: "default" | "lf" | "crlf";
 
   /**
    * Feature flags. Those flags enable/disable certain features

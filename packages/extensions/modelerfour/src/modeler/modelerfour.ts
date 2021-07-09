@@ -1402,12 +1402,17 @@ export class ModelerFour {
     }
     const choices = http.mediaTypes.sort().map((each) => new ChoiceValue(each, `Content Type '${each}'`, each));
     const check = JSON.stringify(choices);
+    const extensible = this.options["content-type-extensible"];
+    const choiceList: (ChoiceSchema | SealedChoiceSchema)[] | undefined = extensible
+      ? this.codeModel.schemas.choices
+      : this.codeModel.schemas.sealedChoices;
+    const ctr = extensible ? SealedChoiceSchema : SealedChoiceSchema;
 
     // look for a sealed choice schema with that set of choices
     return (
-      this.codeModel.schemas.sealedChoices?.find((each) => JSON.stringify(each.choices) === check) ||
+      choiceList?.find((each: ChoiceSchema | SealedChoiceSchema) => JSON.stringify(each.choices) === check) ||
       this.codeModel.schemas.add(
-        new SealedChoiceSchema(this.getUniqueName("ContentType"), "Content type for upload", {
+        new ctr(this.getUniqueName("ContentType"), "Content type for upload", {
           choiceType: this.stringSchema,
           choices,
         }),

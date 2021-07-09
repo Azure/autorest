@@ -9,7 +9,7 @@ export function createSwaggerToOpenApi3Plugin(fileSystem?: IFileSystem): Pipelin
     const files = await input.Enum();
     const inputs: Array<DataHandle> = [];
     for (const file of files) {
-      inputs.push(await input.ReadStrict(file));
+      inputs.push(await input.readStrict(file));
     }
     const results = await convertOai2ToOai3Files(inputs);
     const resultHandles: Array<DataHandle> = [];
@@ -18,8 +18,8 @@ export function createSwaggerToOpenApi3Plugin(fileSystem?: IFileSystem): Pipelin
       if (input === undefined) {
         throw new Error(`Unexpected error while trying to map output of file ${name}. It cannot be found as an input.`);
       }
-      const out = await sink.WriteObject("OpenAPI", clone(result), input.identity);
-      resultHandles.push(await sink.Forward(input.Description, out));
+      const out = await sink.writeObject("OpenAPI", clone(result), input.identity);
+      resultHandles.push(await sink.Forward(input.description, out));
     }
     return new QuickDataSource(resultHandles, input.pipeState);
   };

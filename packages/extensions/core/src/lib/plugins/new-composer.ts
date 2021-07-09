@@ -485,7 +485,6 @@ async function compose(config: AutorestContext, input: DataSource, sink: DataSin
         // eslint-disable-next-line prefer-spread
         [].concat.apply([], <any>inputs.map((each) => each.identity)),
         "merged-oai3",
-        await composer.getSourceMappings(),
       ),
     ],
     input.pipeState,

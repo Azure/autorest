@@ -99,6 +99,9 @@ modelerfour:
   # Those header would already be handled by the generator.
   ignore-headers: string[]
 
+  # Make content-type property extensible for binary requests.
+  content-type-extensible: false|true
+
   # **TEMPORARY FLAG DO NOT DEPEND ON IT**
   # Disable anyobject type and default to type any instead.
   # This is a temporary flag to smooth transition. It WILL be removed in a future version.
