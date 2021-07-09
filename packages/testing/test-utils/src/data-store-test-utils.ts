@@ -1,4 +1,4 @@
-import { DataHandle, LazyPromise, LineIndices } from "@azure-tools/datastore";
+import { DataHandle, getLineIndices } from "@azure-tools/datastore";
 
 /**
  * Create a data handle from some string content.
@@ -11,13 +11,13 @@ export function createDataHandle(content: string, props: { name?: string } = {})
   return new DataHandle(
     key,
     {
+      status: "loaded",
       name,
       identity: [name],
       artifactType: "",
       cached: content,
-      metadata: {
-        lineIndices: new LazyPromise<number[]>(() => Promise.resolve(LineIndices(content))),
-      } as any,
+      lineIndices: getLineIndices(content),
+      sourceMap: undefined,
     },
     false,
   );

@@ -37,6 +37,11 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
   "stats"?: boolean;
 
   /**
+   * Start the autorest.interactive plugin and cache traffic between extensions.
+   */
+  "interactive"?: boolean;
+
+  /**
    * Skip the semantic validation plugin.
    */
   "skip-semantics-validation"?: boolean;

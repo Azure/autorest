@@ -510,7 +510,7 @@ function cleanRefs(instance: AnyObject): AnyObject {
 }
 
 async function merge(context: AutorestContext, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map((x) => input.ReadStrict(x)));
+  const inputs = await Promise.all((await input.enum()).map((x) => input.readStrict(x)));
   if (inputs.length === 1) {
     const model = await inputs[0].readObject<any>();
     if (model.info?.["x-ms-metadata"]?.merged) {
@@ -519,7 +519,7 @@ async function merge(context: AutorestContext, input: DataSource, sink: DataSink
       // we're just going to clean the refs and give it back the way it came in.
       cleanRefs(model);
       return new QuickDataSource(
-        [await sink.WriteObject("merged oai3 doc...", model, inputs[0].identity, "merged-oai3", undefined)],
+        [await sink.writeObject("merged oai3 doc...", model, inputs[0].identity, "merged-oai3", undefined)],
         input.pipeState,
       );
     }
@@ -538,7 +538,6 @@ async function merge(context: AutorestContext, input: DataSource, sink: DataSink
         // eslint-disable-next-line prefer-spread
         [].concat.apply([], <any>inputs.map((each) => each.identity)),
         "merged-oai3",
-        await processor.getSourceMappings(),
       ),
     ],
     input.pipeState,

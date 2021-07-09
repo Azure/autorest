@@ -496,7 +496,6 @@ async function filter(config: AutorestContext, input: DataSource, sink: DataSink
           output,
           each.identity,
           "openapi3-document-profile-filtered",
-          await processor.getSourceMappings(),
         ),
       );
     } else {

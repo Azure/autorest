@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { DataHandle, DataSink, DataSource, LazyPromise, Mapping, SmartPosition } from "@azure-tools/datastore";
-import { EnsureIsFolderUri } from "@azure-tools/uri";
+import { ensureIsFolderUri } from "@azure-tools/uri";
 import { ChildProcess, fork } from "child_process";
 import { RawSourceMap } from "source-map";
 import { Readable, Writable } from "stream";
@@ -48,6 +48,7 @@ export class AutoRestExtension extends EventEmitter {
       this.childProcess.kill();
     }
   }
+
   public static killAll() {
     for (const each of AutoRestExtension.processes) {
       if (!each.killed) {
@@ -60,15 +61,11 @@ export class AutoRestExtension extends EventEmitter {
     AutoRestExtension.processes.length = 0;
   }
 
-  public static async FromModule(modulePath: string): Promise<AutoRestExtension> {
-    const childProc = fork(modulePath, [], <any>{ silent: true });
-    return AutoRestExtension.fromChildProcess(modulePath, "", childProc);
-  }
-
   public static async fromChildProcess(
     extensionName: string,
     version: string,
     childProc: ChildProcess,
+    inspectTraffic = false,
   ): Promise<AutoRestExtension> {
     if (childProc.stdout === null) {
       throw new Error("Child Process has no stdout pipe.");
@@ -76,7 +73,14 @@ export class AutoRestExtension extends EventEmitter {
     if (childProc.stdin === null) {
       throw new Error("Child Process has no stdin pipe.");
     }
-    const plugin = new AutoRestExtension(extensionName, version, childProc.stdout, childProc.stdin, childProc);
+    const plugin = new AutoRestExtension(
+      extensionName,
+      version,
+      childProc.stdout,
+      childProc.stdin,
+      childProc,
+      inspectTraffic,
+    );
     if (childProc.stderr !== null) {
       childProc.stderr.pipe(process.stderr);
     }
@@ -100,23 +104,29 @@ export class AutoRestExtension extends EventEmitter {
     reader: Readable,
     writer: Writable,
     private childProcess: ChildProcess,
+    inspectTraffic = false,
   ) {
     super();
 
-    // hook in inspectors
-    reader.on("data", (chunk) => {
-      try {
-        this.__inspectTraffic.push([Date.now(), false, chunk.toString()]);
-      } catch {
-        // no worries
-      }
-    });
-    const writerProxy = new Writable({
-      write: (chunk: string | Buffer, encoding: BufferEncoding, callback: Function) => {
+    if (inspectTraffic) {
+      // hook in inspectors
+      reader.on("data", (chunk) => {
         try {
-          this.__inspectTraffic.push([Date.now(), true, chunk.toString()]);
+          this.__inspectTraffic.push([Date.now(), false, chunk.toString()]);
         } catch {
           // no worries
+        }
+      });
+    }
+
+    const writerProxy = new Writable({
+      write: (chunk: string | Buffer, encoding: BufferEncoding, callback: Function) => {
+        if (inspectTraffic) {
+          try {
+            this.__inspectTraffic.push([Date.now(), true, chunk.toString()]);
+          } catch {
+            // no worries
+          }
         }
         return writer.write(chunk, encoding, <any>callback);
       },
@@ -363,7 +373,7 @@ export class AutoRestExtension extends EventEmitter {
         const t = context.config.outputFolderUri.length;
         return (
           await context.fileSystem.EnumerateFileUris(
-            EnsureIsFolderUri(`${context.config.outputFolderUri}${artifactType || ""}`),
+            ensureIsFolderUri(`${context.config.outputFolderUri}${artifactType || ""}`),
           )
         ).map((each) => each.substr(t));
       },
