@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/codemodel",
+      "comment": "Drop support for node 10",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/codemodel",
+  "email": "tiguerin@microsoft.com"
+}

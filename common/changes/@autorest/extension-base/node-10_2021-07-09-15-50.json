@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/extension-base",
+      "comment": "Drop support for node 10",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/extension-base",
+  "email": "tiguerin@microsoft.com"
+}
