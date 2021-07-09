@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/extension",
+      "comment": "**Fix** Installing extension when parent directory to ~/.autorest had a package.json",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@azure-tools/extension",
+  "email": "tiguerin@microsoft.com"
+}
