@@ -342,7 +342,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
         url: hosts[0],
         description: "Default server",
       },
-      pointer: `/servers/0`,
+      recurse: false,
     });
   }
 
@@ -538,6 +538,8 @@ async function merge(context: AutorestContext, input: DataSource, sink: DataSink
         // eslint-disable-next-line prefer-spread
         [].concat.apply([], <any>inputs.map((each) => each.identity)),
         "merged-oai3",
+        await processor.getSourceMappings(),
+        inputs,
       ),
     ],
     input.pipeState,

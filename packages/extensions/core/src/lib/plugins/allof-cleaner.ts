@@ -33,8 +33,8 @@ export class AllOfCleaner {
 }
 
 async function allofCleaner(config: AutorestContext, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map(async (x) => input.readStrict(x)));
-  const result: Array<DataHandle> = [];
+  const inputs = await Promise.all((await input.enum()).map(async (x) => input.readStrict(x)));
+  const result: DataHandle[] = [];
 
   for (const each of inputs) {
     const fixer = new AllOfCleaner(each);

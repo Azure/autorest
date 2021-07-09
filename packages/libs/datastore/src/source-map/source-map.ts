@@ -92,6 +92,7 @@ export async function compileMapping(
 
   for (const mapping of mappings) {
     const compiledGenerated = await compilePos(mapping.generated, generatedFile);
+    console.log("Mapping", mapping);
     const compiledOriginal = await compilePos(mapping.original, mapping.source);
     target.addMapping({
       generated: compiledGenerated,
@@ -107,14 +108,14 @@ export async function compileMapping(
  * @description This does make an implicit assumption that the decendents of the 'generated' node are 1:1 with the descendents in the 'source' node.
  * In the event that is not true, elements in the target's source map will not be pointing to the correct elements in the source node.
  */
-export function CreateAssignmentMapping(
+export function createAssignmentMapping(
   assignedObject: any,
   sourceKey: string,
   sourcePath: JsonPath,
   targetPath: JsonPath,
   subject: string,
   recurse = true,
-  result = new Array<Mapping>(),
+  result: Mapping[] = [],
 ): Array<Mapping> {
   for (const descendant of Descendants(ToAst(assignedObject))) {
     const path = descendant.path;
