@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/openapi",
+      "comment": "Drop support for node 10",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@azure-tools/openapi",
+  "email": "tiguerin@microsoft.com"
+}

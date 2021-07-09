@@ -3,7 +3,7 @@
   "version": "3.2.7",
   "description": "Yarn-Based extension aquisition (for Azure Open Source Projects)",
   "engines": {
-    "node": ">=10.13.0"
+    "node": ">=12.0.0"
   },
   "main": "./dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
