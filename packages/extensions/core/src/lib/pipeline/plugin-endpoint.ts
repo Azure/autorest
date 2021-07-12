@@ -281,7 +281,7 @@ export class AutoRestExtension extends EventEmitter {
       let handle: DataHandle;
       if (typeof (<any>sourceMap).mappings === "string") {
         onFile(
-          (handle = await sink.WriteDataWithSourceMap(
+          (handle = await sink.writeDataWithSourceMap(
             filename,
             content,
             artifactType,
@@ -291,7 +291,7 @@ export class AutoRestExtension extends EventEmitter {
         );
       } else {
         onFile(
-          (handle = await sink.WriteData(
+          (handle = await sink.writeData(
             filename,
             content,
             ["fix-me-here2"],
@@ -315,12 +315,12 @@ export class AutoRestExtension extends EventEmitter {
       },
       async ReadFile(filename: string): Promise<string> {
         try {
-          const file = await inputScope.ReadStrict((await friendly2internal(filename)) || filename);
+          const file = await inputScope.readStrict((await friendly2internal(filename)) || filename);
           return await file.ReadData();
         } catch (E) {
           // try getting the file from the output-folder
           try {
-            const result = await context.fileSystem.ReadFile(`${context.config.outputFolderUri}${filename}`);
+            const result = await context.fileSystem.read(`${context.config.outputFolderUri}${filename}`);
             return result;
           } catch (E2) {
             // no file there!

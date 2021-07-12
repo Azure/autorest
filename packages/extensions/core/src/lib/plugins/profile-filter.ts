@@ -481,7 +481,7 @@ async function filter(config: AutorestContext, input: DataSource, sink: DataSink
         config.GetEntry("output-artifact") === "profile-filter-log"
       ) {
         result.push(
-          await sink.WriteData(
+          await sink.writeData(
             "profile-filter-log.yaml",
             serialize({ "files-used": [...specsReferencedAfterFiltering], "files-not-used": [...specsNotUsed] }),
             [],

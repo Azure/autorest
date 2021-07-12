@@ -40,8 +40,8 @@ export async function manipulateObject(
     const data = await src.ReadData();
     const newObject = transformer(null, data, []);
     if (newObject !== data) {
-      const resultHandle = await target.WriteData(
-        src.Description,
+      const resultHandle = await target.writeData(
+        src.description,
         newObject,
         src.identity,
         src.artifactType,
@@ -133,7 +133,7 @@ export async function manipulateObject(
   }
 
   // write back
-  const resultHandle = await target.WriteData(
+  const resultHandle = await target.writeData(
     "manipulated",
     StringifyAst(ast),
     src.identity,

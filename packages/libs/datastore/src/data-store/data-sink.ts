@@ -66,34 +66,6 @@ export class DataSink {
   }
 
   /**
-   * @deprecated use @see writeData
-   */
-  public async WriteData(
-    description: string,
-    data: string,
-    identity: Array<string>,
-    artifact?: string,
-    mappings: Array<Mapping> = [],
-    mappingSources: Array<DataHandle> = [],
-  ): Promise<DataHandle> {
-    return this.writeData(description, data, identity, artifact, mappings, mappingSources);
-  }
-
-  /**
-   * @deprecated use @see writeObject
-   */
-  public WriteObject<T>(
-    description: string,
-    obj: T,
-    identity: Array<string>,
-    artifact?: string,
-    mappings: Array<Mapping> = [],
-    mappingSources: Array<DataHandle> = [],
-  ): Promise<DataHandle> {
-    return this.writeObject(description, obj, identity, artifact, mappings, mappingSources);
-  }
-
-  /**
    * @deprecated use @see forward
    */
   public Forward(description: string, input: DataHandle): Promise<DataHandle> {
