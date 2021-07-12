@@ -91,8 +91,8 @@ export async function compileMapping(
   };
 
   for (const mapping of mappings) {
-    const compiledGenerated = await compilePos(mapping.generated, generatedFile);
     try {
+      const compiledGenerated = await compilePos(mapping.generated, generatedFile);
       const compiledOriginal = await compilePos(mapping.original, mapping.source);
       target.addMapping({
         generated: compiledGenerated,
@@ -101,7 +101,7 @@ export async function compileMapping(
         source: mapping.source,
       });
     } catch {
-      // Failed to acquire a mapping for the orignal position don't do anything.
+      // Failed to acquire a mapping for the orignal or generated position(probably means the entry got added or removed) don't do anything.
     }
   }
 }
