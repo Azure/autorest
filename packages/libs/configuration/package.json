@@ -29,6 +29,7 @@
   "homepage": "https://github.com/Azure/autorest#readme",
   "devDependencies": {
     "@autorest/test-utils": "~0.2.2",
+    "@types/commonmark": "^0.27.0",
     "@types/jest": "^26.0.20",
     "@types/lodash": "~4.14.168",
     "@types/node": "~14.14.20",
@@ -50,6 +51,7 @@
     "@azure-tools/extension": "~3.2.7",
     "@azure-tools/uri": "~3.1.1",
     "@azure-tools/async-io": "~3.0.0",
+    "commonmark": "^0.27.0",
     "lodash": "~4.17.20",
     "untildify": "^4.0.0"
   }

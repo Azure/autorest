@@ -1,4 +1,4 @@
-import { AutorestLogger, CodeBlock, OperationAbortedException, parseCodeBlocks } from "@autorest/common";
+import { AutorestLogger, OperationAbortedException } from "@autorest/common";
 import { DataHandle, DataSink } from "@azure-tools/datastore";
 import { parentFolderUri, isUri } from "@azure-tools/uri";
 import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
@@ -8,6 +8,7 @@ import {
   RawConfiguration,
 } from "../configuration-schema";
 import { desugarRawConfig } from "../desugar";
+import { CodeBlock, parseCodeBlocks } from "../literate-yaml";
 import { arrayOf } from "../utils";
 
 export interface ConfigurationFile {
