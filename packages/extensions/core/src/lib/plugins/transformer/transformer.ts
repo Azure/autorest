@@ -73,7 +73,7 @@ export function createGraphTransformerPlugin(): PipelinePlugin {
             await sink.writeObject(inputHandle.description, contents, inputHandle.identity, inputHandle.artifactType),
           );
         } else {
-          result.push(await sink.Forward(inputHandle.description, inputHandle));
+          result.push(await sink.forward(inputHandle.description, inputHandle));
         }
       }
     }
@@ -194,6 +194,6 @@ export function createImmediateTransformerPlugin(): PipelinePlugin {
     const file = files[files.length - 1];
     const fileIn = await input.readStrict(file);
     const fileOut = await manipulator.process(fileIn, sink, isObject, fileIn.description);
-    return new QuickDataSource([await sink.Forward("swagger-document", fileOut)], input.pipeState);
+    return new QuickDataSource([await sink.forward("swagger-document", fileOut)], input.pipeState);
   };
 }

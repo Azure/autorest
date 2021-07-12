@@ -51,24 +51,4 @@ export class DataSink {
   ): Promise<DataHandle> {
     return this.writeData(description, FastStringify(obj), identity, artifact, mappings, mappingSources);
   }
-
-  /**
-   * @deprecated use @see writeDataWithSourceMap
-   */
-  public async WriteDataWithSourceMap(
-    description: string,
-    data: string,
-    artifact: string | undefined,
-    identity: Array<string>,
-    sourceMapFactory: (readHandle: DataHandle) => Promise<RawSourceMap>,
-  ): Promise<DataHandle> {
-    return this.writeDataWithSourceMap(description, data, artifact, identity, sourceMapFactory);
-  }
-
-  /**
-   * @deprecated use @see forward
-   */
-  public Forward(description: string, input: DataHandle): Promise<DataHandle> {
-    return this.forward(description, input);
-  }
 }

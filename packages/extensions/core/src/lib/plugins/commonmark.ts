@@ -11,7 +11,7 @@ export function createCommonmarkProcessorPlugin(): PipelinePlugin {
       const fileIn = await input.ReadStrict(file);
       const fileOut = await processCodeModel(fileIn, sink);
       file = file.substr(file.indexOf("/output/") + "/output/".length);
-      results.push(await sink.Forward("code-model-v1", fileOut));
+      results.push(await sink.forward("code-model-v1", fileOut));
     }
     return new QuickDataSource(results, input.pipeState);
   };
