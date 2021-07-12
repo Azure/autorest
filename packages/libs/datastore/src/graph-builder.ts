@@ -1,7 +1,8 @@
 import { Mapping } from "source-map";
-import { JsonPointer, parseJsonPointer } from "./json-pointer/json-pointer";
-import { CreateAssignmentMapping } from "./source-map/source-map";
+import { JsonPointer } from "./json-pointer/json-pointer";
+import { createAssignmentMapping } from "./source-map/source-map";
 import { Exception } from "@azure-tools/tasks";
+import { parseJsonPointer } from "@azure-tools/json";
 
 export function createGraphProxy<T extends object>(
   originalFileName: string,
@@ -17,10 +18,10 @@ export function createGraphProxy<T extends object>(
     subject: string | undefined,
     recurse: boolean,
   ) => {
-    CreateAssignmentMapping(
+    createAssignmentMapping(
       value,
       filename,
-      parseJsonPointer(pointer),
+      parseJsonPointer(pointer).filter((each) => each !== ""),
       [...parseJsonPointer(targetPointer), key].filter((each) => each !== ""),
       subject || "",
       recurse,
@@ -28,22 +29,24 @@ export function createGraphProxy<T extends object>(
     );
   };
 
-  const push = (value: any) => {
+  const push = (value: { pointer?: string; value: any; recurse?: boolean; filename?: string; subject?: string }) => {
     instance.push(value.value);
     const filename = value.filename || originalFileName;
     if (!filename) {
       throw new Error("Assignment: filename must be specified when there is no default.");
     }
-    const pp = parseJsonPointer(value.pointer);
+    const pp = value.pointer ? parseJsonPointer(value.pointer) : [];
     const q = <any>parseInt(pp[pp.length - 1], 10);
     if (q >= 0) {
       pp[pp.length - 1] = q;
     }
-    CreateAssignmentMapping(
+    createAssignmentMapping(
       value.value,
       filename,
       pp,
-      [...parseJsonPointer(targetPointer), instance.length - 1].filter((each) => each !== ""),
+      [...parseJsonPointer(targetPointer).filter((each) => each !== ""), instance.length - 1].filter(
+        (each) => each !== "",
+      ),
       value.subject || "",
       value.recurse,
       mappings,

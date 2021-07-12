@@ -1,16 +1,18 @@
-import { DataHandle, get } from "@azure-tools/datastore";
+import { DataHandle, Mapping } from "@azure-tools/datastore";
+import { getFromJsonPointer } from "@azure-tools/json";
 import { Oai2ToOai3 } from "../converter";
 import { OpenAPI2Document } from "../oai2";
 import { loadInputFiles } from "./utils";
 
 export interface OaiToOai3FileInput {
   name: string;
-  schema: OpenAPI2Document; // OAI2 type?
+  schema: OpenAPI2Document;
 }
 
 export interface OaiToOai3FileOutput {
   name: string;
-  result: any; // OAI2 type?
+  result: any; // OAI3 type?
+  mappings: Mapping[];
 }
 
 export const convertOai2ToOai3Files = async (inputFiles: DataHandle[]): Promise<OaiToOai3FileOutput[]> => {
@@ -35,7 +37,7 @@ export const convertOai2ToOai3 = async (inputs: Map<string, OaiToOai3FileInput>)
       throw new Error(`Ref file ${targetfile} doesn't exists.`);
     }
 
-    return get(file.schema, refPath);
+    return getFromJsonPointer(file.schema, refPath);
   };
 
   const computeFile = async (input: OaiToOai3FileInput) => {
@@ -45,12 +47,13 @@ export const convertOai2ToOai3 = async (inputs: Map<string, OaiToOai3FileInput>)
     }
     resolvingFiles.add(input.name);
 
-    const result = await convertOai2ToOai3Schema(input, resolveReference);
+    const { result, mappings } = await convertOai2ToOai3Schema(input, resolveReference);
     completedFiles.set(input.name, {
       result,
       name: input.name,
+      mappings,
     });
-    return result;
+    return { result, mappings };
   };
 
   for (const input of inputs.values()) {
@@ -68,8 +71,13 @@ export type ResolveReferenceFn = (targetfile: string, reference: string) => Prom
 export const convertOai2ToOai3Schema = async (
   { name, schema }: OaiToOai3FileInput,
   resolveReference: ResolveReferenceFn,
-): Promise<any> => {
+): Promise<Oai2ToOai3Result> => {
   const converter = new Oai2ToOai3(name, schema, resolveReference);
   await converter.convert();
-  return converter.generated;
+  return { result: converter.generated, mappings: converter.mappings };
 };
+
+export interface Oai2ToOai3Result {
+  result: any;
+  mappings: Mapping[];
+}

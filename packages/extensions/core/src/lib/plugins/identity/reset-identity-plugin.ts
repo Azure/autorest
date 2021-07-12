@@ -1,6 +1,6 @@
 import { PipelinePlugin } from "../../pipeline/common";
 import { AutorestContext } from "../../context";
-import { DataSource, DataSink, DataHandle, QuickDataSource } from "@azure-tools/datastore";
+import { DataSource, DataSink, QuickDataSource } from "@azure-tools/datastore";
 import { uniqBy } from "lodash";
 
 /**
@@ -18,15 +18,15 @@ function insertIndexSuffix(name: string, suffix: number): string {
 }
 
 async function resetIdentity(context: AutorestContext, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map((x) => input.ReadStrict(x)));
-  const numberEachFile = inputs.length > 1 && uniqBy(inputs, (each) => each.Description);
+  const inputs = await Promise.all((await input.Enum()).map((x) => input.readStrict(x)));
+  const numberEachFile = inputs.length > 1 && uniqBy(inputs, (each) => each.description);
   const result = await Promise.all(
     inputs.map(async (input, index) => {
-      let name = `${context.config.name || input.Description}`;
+      let name = `${context.config.name || input.description}`;
       if (numberEachFile) {
         name = insertIndexSuffix(name, index);
       }
-      return await sink.WriteData(name, await input.ReadData(), input.identity, context.config.to);
+      return await sink.writeData(name, await input.readData(), input.identity, context.config.to);
     }),
   );
   return new QuickDataSource(result, input.pipeState);

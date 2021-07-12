@@ -91,14 +91,18 @@ export async function compileMapping(
   };
 
   for (const mapping of mappings) {
-    const compiledGenerated = await compilePos(mapping.generated, generatedFile);
-    const compiledOriginal = await compilePos(mapping.original, mapping.source);
-    target.addMapping({
-      generated: compiledGenerated,
-      original: compiledOriginal,
-      name: encodeEnhancedPositionInName(mapping.name, compiledOriginal),
-      source: mapping.source,
-    });
+    try {
+      const compiledGenerated = await compilePos(mapping.generated, generatedFile);
+      const compiledOriginal = await compilePos(mapping.original, mapping.source);
+      target.addMapping({
+        generated: compiledGenerated,
+        original: compiledOriginal,
+        name: encodeEnhancedPositionInName(mapping.name, compiledOriginal),
+        source: mapping.source,
+      });
+    } catch {
+      // Failed to acquire a mapping for the orignal or generated position(probably means the entry got added or removed) don't do anything.
+    }
   }
 }
 
@@ -107,14 +111,14 @@ export async function compileMapping(
  * @description This does make an implicit assumption that the decendents of the 'generated' node are 1:1 with the descendents in the 'source' node.
  * In the event that is not true, elements in the target's source map will not be pointing to the correct elements in the source node.
  */
-export function CreateAssignmentMapping(
+export function createAssignmentMapping(
   assignedObject: any,
   sourceKey: string,
   sourcePath: JsonPath,
   targetPath: JsonPath,
   subject: string,
   recurse = true,
-  result = new Array<Mapping>(),
+  result: Mapping[] = [],
 ): Array<Mapping> {
   for (const descendant of Descendants(ToAst(assignedObject))) {
     const path = descendant.path;

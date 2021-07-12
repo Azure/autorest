@@ -101,11 +101,15 @@ async function renameComponentsKeys(config: AutorestContext, input: DataSource, 
   for (const each of inputs) {
     const processor = new ComponentKeyRenamer(each);
     result.push(
-      await sink.WriteObject(
+      await sink.writeObject(
         "oai3.component-renamed.json",
         await processor.getOutput(),
         each.identity,
         "openapi-document-renamed",
+        {
+          mappings: await processor.getSourceMappings(),
+          mappingSources: [each],
+        },
       ),
     );
   }

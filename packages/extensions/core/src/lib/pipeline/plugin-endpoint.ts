@@ -262,11 +262,11 @@ export class AutoRestExtension extends EventEmitter {
     const friendly2internal: (name: string) => Promise<string | undefined> = async (name) =>
       (
         (await inputFileHandles).filter(
-          (h) => h.Description === name || decodeURIComponent(h.Description) === decodeURIComponent(name),
+          (h) => h.description === name || decodeURIComponent(h.description) === decodeURIComponent(name),
         )[0] || {}
       ).key;
     const internal2friendly: (name: string) => Promise<string | undefined> = async (key) =>
-      ((await inputScope.Read(key)) || <any>{}).Description;
+      ((await inputScope.read(key)) || <any>{}).description;
 
     const writeFileToSinkAndNotify = async (
       filename: string,
@@ -281,7 +281,7 @@ export class AutoRestExtension extends EventEmitter {
       let handle: DataHandle;
       if (typeof (<any>sourceMap).mappings === "string") {
         onFile(
-          (handle = await sink.WriteDataWithSourceMap(
+          (handle = await sink.writeDataWithSourceMap(
             filename,
             content,
             artifactType,
@@ -291,20 +291,16 @@ export class AutoRestExtension extends EventEmitter {
         );
       } else {
         onFile(
-          (handle = await sink.WriteData(
-            filename,
-            content,
-            ["fix-me-here2"],
-            artifactType,
-            <Array<Mapping>>sourceMap,
-            await inputFileHandles,
-          )),
+          (handle = await sink.writeData(filename, content, ["fix-me-here2"], artifactType, {
+            mappings: sourceMap as any,
+            mappingSources: await inputFileHandles,
+          })),
         );
       }
       return {
         uri: handle.key,
         type: handle.artifactType,
-        content: await handle.ReadData(),
+        content: await handle.readData(),
       };
     };
 
@@ -315,12 +311,12 @@ export class AutoRestExtension extends EventEmitter {
       },
       async ReadFile(filename: string): Promise<string> {
         try {
-          const file = await inputScope.ReadStrict((await friendly2internal(filename)) || filename);
+          const file = await inputScope.readStrict((await friendly2internal(filename)) || filename);
           return await file.ReadData();
         } catch (E) {
           // try getting the file from the output-folder
           try {
-            const result = await context.fileSystem.ReadFile(`${context.config.outputFolderUri}${filename}`);
+            const result = await context.fileSystem.read(`${context.config.outputFolderUri}${filename}`);
             return result;
           } catch (E2) {
             // no file there!
@@ -362,7 +358,7 @@ export class AutoRestExtension extends EventEmitter {
           .filter((x) => {
             return typeof artifactType !== "string" || artifactType === x.artifactType;
           })
-          .map((x) => x.Description);
+          .map((x) => x.description);
 
         // if the request returned items, or they didn't specify a path/artifacttype
         if (inputs.length > 0 || artifactType === null || artifactType === undefined) {
@@ -372,9 +368,7 @@ export class AutoRestExtension extends EventEmitter {
         // we'd like to be able to ask the host for a file directly (but only if it's supposed to be in the output-folder)
         const t = context.config.outputFolderUri.length;
         return (
-          await context.fileSystem.EnumerateFileUris(
-            ensureIsFolderUri(`${context.config.outputFolderUri}${artifactType || ""}`),
-          )
+          await context.fileSystem.list(ensureIsFolderUri(`${context.config.outputFolderUri}${artifactType || ""}`))
         ).map((each) => each.substr(t));
       },
 

@@ -481,7 +481,7 @@ async function filter(config: AutorestContext, input: DataSource, sink: DataSink
         config.GetEntry("output-artifact") === "profile-filter-log"
       ) {
         result.push(
-          await sink.WriteData(
+          await sink.writeData(
             "profile-filter-log.yaml",
             serialize({ "files-used": [...specsReferencedAfterFiltering], "files-not-used": [...specsNotUsed] }),
             [],
@@ -491,11 +491,15 @@ async function filter(config: AutorestContext, input: DataSource, sink: DataSink
       }
 
       result.push(
-        await sink.WriteObject(
+        await sink.writeObject(
           "oai3.profile-filtered.json",
           output,
           each.identity,
           "openapi3-document-profile-filtered",
+          {
+            mappings: await processor.getSourceMappings(),
+            mappingSources: [each],
+          },
         ),
       );
     } else {
