@@ -92,13 +92,17 @@ export async function compileMapping(
 
   for (const mapping of mappings) {
     const compiledGenerated = await compilePos(mapping.generated, generatedFile);
-    const compiledOriginal = await compilePos(mapping.original, mapping.source);
-    target.addMapping({
-      generated: compiledGenerated,
-      original: compiledOriginal,
-      name: encodeEnhancedPositionInName(mapping.name, compiledOriginal),
-      source: mapping.source,
-    });
+    try {
+      const compiledOriginal = await compilePos(mapping.original, mapping.source);
+      target.addMapping({
+        generated: compiledGenerated,
+        original: compiledOriginal,
+        name: encodeEnhancedPositionInName(mapping.name, compiledOriginal),
+        source: mapping.source,
+      });
+    } catch {
+      // Failed to acquire a mapping for the orignal position don't do anything.
+    }
   }
 }
 
