@@ -538,8 +538,10 @@ async function merge(context: AutorestContext, input: DataSource, sink: DataSink
         // eslint-disable-next-line prefer-spread
         [].concat.apply([], <any>inputs.map((each) => each.identity)),
         "merged-oai3",
-        await processor.getSourceMappings(),
-        inputs,
+        {
+          mappings: await processor.getSourceMappings(),
+          mappingSources: inputs,
+        },
       ),
     ],
     input.pipeState,

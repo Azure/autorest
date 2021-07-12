@@ -42,9 +42,7 @@ async function deduplicate(context: AutorestContext, input: DataSource, sink: Da
         await deduplicator.getOutput(),
         each.identity,
         "openapi-document-deduplicated",
-        [
-          /* fix-me: Construct source map from the mappings returned by the deduplicator.s*/
-        ],
+        /* fix-me: Construct source map from the mappings returned by the deduplicator.s*/
       ),
     );
   }

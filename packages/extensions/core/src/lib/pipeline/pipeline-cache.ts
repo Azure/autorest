@@ -45,14 +45,7 @@ export async function readCache(key: string | undefined, sink: DataSink): Promis
       if (await isDirectory(folder)) {
         for (const each of await readdir(folder)) {
           const item = JSON.parse(await readFile(join(folder, each)));
-          const dh = await sink.writeData(
-            item.key,
-            item.content,
-            item.identity,
-            item.artifactType,
-            undefined,
-            undefined,
-          );
+          const dh = await sink.writeData(item.key, item.content, item.identity, item.artifactType);
           handles.push(dh);
         }
       }

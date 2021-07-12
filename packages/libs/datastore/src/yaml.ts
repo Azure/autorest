@@ -217,13 +217,13 @@ export function CloneAst<T extends YAMLNode>(ast: T): T {
   return ParseToAst(StringifyAst(ast)) as T;
 }
 export function StringifyAst(ast: YAMLNode): string {
-  return FastStringify(ParseNode<any>(ast));
+  return fastStringify(ParseNode<any>(ast));
 }
 export function Clone<T>(object: T): T {
   if (object === undefined) {
     return object;
   }
-  return Parse<T>(FastStringify(object));
+  return Parse<T>(fastStringify(object));
 }
 
 /**
@@ -254,7 +254,7 @@ export function Normalize<T>(object: T): T {
   return clone;
 }
 export function ToAst<T>(object: T): YAMLNode {
-  return ParseToAst(FastStringify(object));
+  return ParseToAst(fastStringify(object));
 }
 
 export function Parse<T>(
@@ -272,7 +272,7 @@ export function Stringify<T>(object: T): string {
   return "---\n" + dump(object, { skipInvalid: true });
 }
 
-export function FastStringify<T>(obj: T): string {
+export function fastStringify<T>(obj: T): string {
   // has duplicate objects?
   const seen = new WeakSet();
   const losslessJsonSerializable = (o: any): boolean => {

@@ -240,14 +240,10 @@ async function clean(config: AutorestContext, input: DataSource, sink: DataSink)
     const processor = new ComponentsCleaner(each);
     const output = await processor.getOutput();
     result.push(
-      await sink.writeObject(
-        "oai3.cleaned.json",
-        output,
-        each.identity,
-        "openapi-document-cleaned",
-        await processor.getSourceMappings(),
-        [each],
-      ),
+      await sink.writeObject("oai3.cleaned.json", output, each.identity, "openapi-document-cleaned", {
+        mappings: await processor.getSourceMappings(),
+        mappingSources: [each],
+      }),
     );
   }
 

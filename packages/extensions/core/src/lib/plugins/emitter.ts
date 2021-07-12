@@ -59,44 +59,36 @@ async function emitArtifact(
     if (isOutputArtifactOrMapRequested(config, artifactType + ".yaml")) {
       const h = await sink.writeData(
         `${++emitCtr}.yaml`,
-        Stringify(await handle.ReadObject<any>()),
+        Stringify(await handle.readObject<any>()),
         ["fix-me"],
         artifactType,
-        [] /*disabled source maps long ago */,
-        [handle],
       );
       await emitArtifactInternal(config, artifactType + ".yaml", uri + ".yaml", h);
     }
     if (isOutputArtifactOrMapRequested(config, artifactType + ".norm.yaml")) {
       const h = await sink.writeData(
         `${++emitCtr}.norm.yaml`,
-        Stringify(Normalize(await handle.ReadObject<any>())),
+        Stringify(Normalize(await handle.readObject<any>())),
         ["fix-me"],
         artifactType,
-        [] /*disabled source maps long ago */,
-        [handle],
       );
       await emitArtifactInternal(config, artifactType + ".norm.yaml", uri + ".norm.yaml", h);
     }
     if (isOutputArtifactOrMapRequested(config, artifactType + ".json")) {
       const h = await sink.writeData(
         `${++emitCtr}.json`,
-        JSON.stringify(await handle.ReadObject<any>(), null, 2),
+        JSON.stringify(await handle.readObject<any>(), null, 2),
         ["fix-me"],
         artifactType,
-        [] /*disabled source maps long ago */,
-        [handle],
       );
       await emitArtifactInternal(config, artifactType + ".json", uri + ".json", h);
     }
     if (isOutputArtifactOrMapRequested(config, artifactType + ".norm.json")) {
       const h = await sink.writeData(
         `${++emitCtr}.norm.json`,
-        JSON.stringify(Normalize(await handle.ReadObject<any>()), null, 2),
+        JSON.stringify(Normalize(await handle.readObject<any>()), null, 2),
         ["fix-me"],
         artifactType,
-        [] /*disabled source maps long ago */,
-        [handle],
       );
       await emitArtifactInternal(config, artifactType + ".norm.json", uri + ".norm.json", h);
     }
@@ -112,7 +104,7 @@ export async function emitArtifacts(
   isObject: boolean,
 ): Promise<void> {
   const all = new Array<Promise<void>>();
-  for (const key of await scope.Enum()) {
+  for (const key of await scope.enum()) {
     const file = await scope.readStrict(key);
     const fileArtifact = file.artifactType;
     const ok = artifactTypeFilter
@@ -124,7 +116,7 @@ export async function emitArtifacts(
       : true; // if it's null, just emit it.
 
     if (ok) {
-      all.push(emitArtifact(config, uriResolver(file.Description), file, isObject));
+      all.push(emitArtifact(config, uriResolver(file.description), file, isObject));
     }
   }
   await Promise.all(all);

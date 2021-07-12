@@ -369,7 +369,6 @@ async function deduplicateSubsetSchemas(config: AutorestContext, input: DataSour
           model,
           each.identity,
           "openapi-document-schema-reduced",
-          [],
         ),
       );
       continue;
@@ -381,8 +380,10 @@ async function deduplicateSubsetSchemas(config: AutorestContext, input: DataSour
         await processor.getOutput(),
         each.identity,
         "openapi-document-schema-reduced",
-        await processor.getSourceMappings(),
-        [each],
+        {
+          mappings: await processor.getSourceMappings(),
+          mappingSources: [each],
+        },
       ),
     );
   }

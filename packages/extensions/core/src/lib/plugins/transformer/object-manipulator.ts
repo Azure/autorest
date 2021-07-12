@@ -40,14 +40,7 @@ export async function manipulateObject(
     const data = await src.ReadData();
     const newObject = transformer(null, data, []);
     if (newObject !== data) {
-      const resultHandle = await target.writeData(
-        src.description,
-        newObject,
-        src.identity,
-        src.artifactType,
-        undefined,
-        mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src],
-      );
+      const resultHandle = await target.writeData(src.description, newObject, src.identity, src.artifactType);
       return {
         anyHit: true,
         result: resultHandle,
@@ -133,14 +126,10 @@ export async function manipulateObject(
   }
 
   // write back
-  const resultHandle = await target.writeData(
-    "manipulated",
-    StringifyAst(ast),
-    src.identity,
-    undefined,
-    mapping,
-    mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src],
-  );
+  const resultHandle = await target.writeData("manipulated", StringifyAst(ast), src.identity, undefined, {
+    mappings: mapping,
+    mappingSources: mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src],
+  });
   return {
     anyHit: true,
     result: resultHandle,

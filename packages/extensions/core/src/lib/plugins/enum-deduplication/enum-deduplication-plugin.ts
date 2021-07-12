@@ -14,8 +14,10 @@ async function deduplicateEnums(config: AutorestContext, input: DataSource, sink
         await deduplicator.getOutput(),
         each.identity,
         "openapi-document-enum-deduplicated",
-        await deduplicator.getSourceMappings(),
-        [each],
+        {
+          mappings: await deduplicator.getSourceMappings(),
+          mappingSources: [each],
+        },
       ),
     );
   }
