@@ -16,7 +16,7 @@ async function deduplicate(context: AutorestContext, input: DataSource, sink: Da
   const idm = !!context.config["deduplicate-inline-models"];
 
   for (const each of values(inputs).where((input) => input.artifactType !== "profile-filter-log")) {
-    const model = <any>await each.ReadObject();
+    const model = <any>await each.readObject();
 
     /*
     Disabling for now -- not sure if we need to skip this in the simple case anyway.
@@ -31,19 +31,13 @@ async function deduplicate(context: AutorestContext, input: DataSource, sink: Da
     // skip if it's already marked that it was done.
     if (model.info?.["x-ms-metadata"]?.deduplicated) {
       result.push(
-        await sink.WriteObject(
-          "oai3.model-deduplicated.json",
-          model,
-          each.identity,
-          "openapi-document-deduplicated",
-          [],
-        ),
+        await sink.writeObject("oai3.model-deduplicated.json", model, each.identity, "openapi-document-deduplicated"),
       );
       continue;
     }
     const deduplicator = new Deduplicator(model, idm);
     result.push(
-      await sink.WriteObject(
+      await sink.writeObject(
         "oai3.model-deduplicated.json",
         await deduplicator.getOutput(),
         each.identity,

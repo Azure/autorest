@@ -479,12 +479,14 @@ async function compose(config: AutorestContext, input: DataSource, sink: DataSin
   const composer = new NewComposer(inputs[0]);
   return new QuickDataSource(
     [
-      await sink.WriteObject(
+      await sink.writeObject(
         "composed oai3 doc...",
         await composer.getOutput(),
         // eslint-disable-next-line prefer-spread
         [].concat.apply([], <any>inputs.map((each) => each.identity)),
         "merged-oai3",
+        await composer.getSourceMappings(),
+        [inputs[0]],
       ),
     ],
     input.pipeState,

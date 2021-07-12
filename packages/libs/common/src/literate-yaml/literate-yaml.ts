@@ -147,5 +147,5 @@ export async function mergeYamls(
     throw new OperationAbortedException();
   }
 
-  return sink.WriteObject("merged YAMLs", mergedGraph, newIdentity, undefined, mappings, yamlInputHandles);
+  return sink.writeObject("merged YAMLs", mergedGraph, newIdentity, undefined, mappings, yamlInputHandles);
 }

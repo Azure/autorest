@@ -92,7 +92,6 @@ export async function compileMapping(
 
   for (const mapping of mappings) {
     const compiledGenerated = await compilePos(mapping.generated, generatedFile);
-    console.log("Mapping", mapping);
     const compiledOriginal = await compilePos(mapping.original, mapping.source);
     target.addMapping({
       generated: compiledGenerated,
