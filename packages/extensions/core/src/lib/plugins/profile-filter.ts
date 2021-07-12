@@ -491,11 +491,13 @@ async function filter(config: AutorestContext, input: DataSource, sink: DataSink
       }
 
       result.push(
-        await sink.WriteObject(
+        await sink.writeObject(
           "oai3.profile-filtered.json",
           output,
           each.identity,
           "openapi3-document-profile-filtered",
+          await processor.getSourceMappings(),
+          [each],
         ),
       );
     } else {

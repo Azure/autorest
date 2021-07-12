@@ -18,7 +18,7 @@ export function createGraphTransformerPlugin(): PipelinePlugin {
     for (const file of await input.Enum()) {
       const inputHandle = await input.Read(file);
       if (inputHandle) {
-        const documentId = `/${inputHandle.Description || inputHandle.key}`;
+        const documentId = `/${inputHandle.description || inputHandle.key}`;
         let contents: AnyObject | undefined = undefined;
         let modified = false;
 
@@ -37,7 +37,7 @@ export function createGraphTransformerPlugin(): PipelinePlugin {
               // if the file should be processed, run it thru
               for (const transform of directive.transform) {
                 // get the whole document
-                contents = contents === undefined ? await inputHandle.ReadObjectFast() : contents;
+                contents = contents === undefined ? await inputHandle.readObjectFast() : contents;
 
                 // find the target nodes in the document
                 const targets = selectNodes(contents, where);
@@ -70,10 +70,10 @@ export function createGraphTransformerPlugin(): PipelinePlugin {
 
         if (modified) {
           result.push(
-            await sink.WriteObject(inputHandle.Description, contents, inputHandle.identity, inputHandle.artifactType),
+            await sink.writeObject(inputHandle.description, contents, inputHandle.identity, inputHandle.artifactType),
           );
         } else {
-          result.push(await sink.Forward(inputHandle.Description, inputHandle));
+          result.push(await sink.Forward(inputHandle.description, inputHandle));
         }
       }
     }
@@ -97,10 +97,10 @@ export function createTextTransformerPlugin(): PipelinePlugin {
     }
 
     const result: Array<DataHandle> = [];
-    for (const file of await input.Enum()) {
-      const inputHandle = await input.Read(file);
+    for (const file of await input.enum()) {
+      const inputHandle = await input.read(file);
       if (inputHandle) {
-        const documentId = `/${inputHandle.Description || inputHandle.key}`;
+        const documentId = `/${inputHandle.description || inputHandle.key}`;
         let contents: string | undefined = undefined;
         let modified = false;
 
@@ -162,7 +162,7 @@ export function createTextTransformerPlugin(): PipelinePlugin {
             ),
           );
         } else {
-          result.push(await sink.Forward(inputHandle.description, inputHandle));
+          result.push(await sink.forward(inputHandle.description, inputHandle));
         }
       }
     }
