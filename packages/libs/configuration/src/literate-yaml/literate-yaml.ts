@@ -12,9 +12,7 @@ import {
   Parse,
   Mapping,
 } from "@azure-tools/datastore";
-import { OperationAbortedException } from "../../../common/src/exceptions";
-import { AutorestLogger } from "../../../common/src/logging";
-import { identitySourceMapping, strictMerge } from "../../../common/src/merging";
+import { OperationAbortedException, AutorestLogger, identitySourceMapping, strictMerge } from "@autorest/common";
 import { LiterateYamlErrorCodes } from "./error-codes";
 import { parseCodeBlocksFromMarkdown } from "./markdown-parser";
 

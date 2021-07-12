@@ -1,7 +1,6 @@
 import { CancellationToken, DataStore } from "@azure-tools/datastore";
-
+import { AutorestError } from "@autorest/common";
 import { parse } from "./literate-yaml";
-import { AutorestError } from "../../../common/src/logging";
 
 describe("SyntaxValidation", () => {
   let errors: AutorestError[];
