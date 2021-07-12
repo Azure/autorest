@@ -24,9 +24,10 @@ export async function parseCodeBlocksFromMarkdown(
     const data = codeBlock.literal || "";
     const mappings = getSourceMapForCodeBlock(hConfigFile.key, codeBlock);
 
-    const hCodeBlock = await sink.WriteData(codeBlockKey, data, hConfigFile.identity, undefined, mappings, [
-      hConfigFile,
-    ]);
+    const hCodeBlock = await sink.writeData(codeBlockKey, data, hConfigFile.identity, undefined, {
+      mappings: mappings,
+      mappingSources: [hConfigFile],
+    });
     result.push({
       data: hCodeBlock,
       codeBlock,
