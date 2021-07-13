@@ -3,26 +3,17 @@
   "id": "https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
-  "required": [
-    "swagger",
-    "info",
-    "paths"
-  ],
+  "required": ["swagger", "info", "paths"],
   "additionalProperties": false,
   "patternProperties": {
-    "^x-(?!ms-).*$": {
-      "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/vendorExtension"
-    },
-    "^x-ms-sf-.*$": {
+    "^x-.*$": {
       "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/vendorExtension"
     }
   },
   "properties": {
     "swagger": {
       "type": "string",
-      "enum": [
-        "2.0"
-      ],
+      "enum": ["2.0"],
       "description": "The Swagger version of this document."
     },
     "info": {
@@ -85,22 +76,19 @@
     },
     "x-ms-secondary-file": {
       "type": "boolean"
+    },
+    "x-ms-permissions": {
+      "$ref": "#/definitions/xmsPermissions"
     }
   },
   "definitions": {
     "info": {
       "type": "object",
       "description": "General information about the API.",
-      "required": [
-        "version",
-        "title"
-      ],
+      "required": ["version", "title"],
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -155,19 +143,14 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
     },
     "license": {
       "type": "object",
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "additionalProperties": false,
       "properties": {
         "name": {
@@ -181,10 +164,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -193,10 +173,7 @@
       "type": "object",
       "description": "Relative paths to the individual endpoints. They must be relative to the 'basePath'.",
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         },
         "^/": {
@@ -230,9 +207,7 @@
       "type": "object",
       "additionalProperties": false,
       "description": "information about external documentation",
-      "required": [
-        "url"
-      ],
+      "required": ["url"],
       "properties": {
         "description": {
           "type": "string"
@@ -243,10 +218,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -261,15 +233,10 @@
     },
     "operation": {
       "type": "object",
-      "required": [
-        "responses"
-      ],
+      "required": ["responses"],
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -348,10 +315,7 @@
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -394,10 +358,7 @@
         "^([0-9]{3})$|^(default)$": {
           "$ref": "#/definitions/responseValue"
         },
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -405,10 +366,7 @@
         "type": "object",
         "additionalProperties": false,
         "patternProperties": {
-          "^x-(?!ms-).*$": {
-            "$ref": "#/definitions/vendorExtension"
-          },
-          "^x-ms-sf-.*$": {
+          "^x-.*$": {
             "$ref": "#/definitions/vendorExtension"
           }
         }
@@ -426,9 +384,7 @@
     },
     "response": {
       "type": "object",
-      "required": [
-        "description"
-      ],
+      "required": ["description"],
       "properties": {
         "description": {
           "type": "string"
@@ -458,10 +414,7 @@
       },
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -475,19 +428,11 @@
     "header": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "string",
-            "number",
-            "integer",
-            "boolean",
-            "array"
-          ]
+          "enum": ["string", "number", "integer", "boolean", "array"]
         },
         "format": {
           "type": "string"
@@ -559,10 +504,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -574,16 +516,9 @@
     },
     "bodyParameter": {
       "type": "object",
-      "required": [
-        "name",
-        "in",
-        "schema"
-      ],
+      "required": ["name", "in", "schema"],
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -599,9 +534,7 @@
         "in": {
           "type": "string",
           "description": "Determines the location of the parameter.",
-          "enum": [
-            "body"
-          ]
+          "enum": ["body"]
         },
         "required": {
           "type": "boolean",
@@ -640,10 +573,7 @@
     "headerParameterSubSchema": {
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -656,9 +586,7 @@
         "in": {
           "type": "string",
           "description": "Determines the location of the parameter.",
-          "enum": [
-            "header"
-          ]
+          "enum": ["header"]
         },
         "description": {
           "type": "string",
@@ -670,13 +598,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "string",
-            "number",
-            "boolean",
-            "integer",
-            "array"
-          ]
+          "enum": ["string", "number", "boolean", "integer", "array"]
         },
         "format": {
           "type": "string"
@@ -763,10 +685,7 @@
     "queryParameterSubSchema": {
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -779,9 +698,7 @@
         "in": {
           "type": "string",
           "description": "Determines the location of the parameter.",
-          "enum": [
-            "query"
-          ]
+          "enum": ["query"]
         },
         "description": {
           "type": "string",
@@ -798,13 +715,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "string",
-            "number",
-            "boolean",
-            "integer",
-            "array"
-          ]
+          "enum": ["string", "number", "boolean", "integer", "array"]
         },
         "format": {
           "type": "string"
@@ -887,10 +798,7 @@
     "formDataParameterSubSchema": {
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -903,9 +811,7 @@
         "in": {
           "type": "string",
           "description": "Determines the location of the parameter.",
-          "enum": [
-            "formData"
-          ]
+          "enum": ["formData"]
         },
         "description": {
           "type": "string",
@@ -922,14 +828,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "string",
-            "number",
-            "boolean",
-            "integer",
-            "array",
-            "file"
-          ]
+          "enum": ["string", "number", "boolean", "integer", "array", "file"]
         },
         "format": {
           "type": "string"
@@ -1009,30 +908,21 @@
     "pathParameterSubSchema": {
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
-      "required": [
-        "required"
-      ],
+      "required": ["required"],
       "properties": {
         "required": {
           "type": "boolean",
-          "enum": [
-            true
-          ],
+          "enum": [true],
           "description": "Determines whether or not this parameter is required or optional."
         },
         "in": {
           "type": "string",
           "description": "Determines the location of the parameter.",
-          "enum": [
-            "path"
-          ]
+          "enum": ["path"]
         },
         "description": {
           "type": "string",
@@ -1044,13 +934,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "string",
-            "number",
-            "boolean",
-            "integer",
-            "array"
-          ]
+          "enum": ["string", "number", "boolean", "integer", "array"]
         },
         "format": {
           "type": "string"
@@ -1132,11 +1016,7 @@
     },
     "nonBodyParameter": {
       "type": "object",
-      "required": [
-        "name",
-        "in",
-        "type"
-      ],
+      "required": ["name", "in", "type"],
       "oneOf": [
         {
           "$ref": "#/definitions/headerParameterSubSchema"
@@ -1171,10 +1051,7 @@
       "type": "object",
       "description": "A deterministic version of a JSON Schema object.",
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -1333,16 +1210,11 @@
       "type": "object",
       "description": "A deterministic version of a JSON Schema object.",
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "properties": {
         "format": {
           "type": "string"
@@ -1361,9 +1233,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "file"
-          ]
+          "enum": ["file"]
         },
         "readOnly": {
           "type": "boolean",
@@ -1442,10 +1312,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -1459,13 +1326,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "string",
-            "number",
-            "integer",
-            "boolean",
-            "array"
-          ]
+          "enum": ["string", "number", "integer", "boolean", "array"]
         }
       }
     },
@@ -1478,14 +1339,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "string",
-            "number",
-            "integer",
-            "boolean",
-            "array",
-            "file"
-          ]
+          "enum": ["string", "number", "integer", "boolean", "array", "file"]
         }
       }
     },
@@ -1512,10 +1366,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -1523,9 +1374,7 @@
     "tag": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "properties": {
         "name": {
           "type": "string"
@@ -1538,10 +1387,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -1574,34 +1420,18 @@
       "description": "The transfer protocol of the API.",
       "items": {
         "type": "string",
-        "enum": [
-          "http",
-          "https",
-          "ws",
-          "wss"
-        ]
+        "enum": ["http", "https", "ws", "wss"]
       },
       "uniqueItems": true
     },
     "collectionFormat": {
       "type": "string",
-      "enum": [
-        "csv",
-        "ssv",
-        "tsv",
-        "pipes"
-      ],
+      "enum": ["csv", "ssv", "tsv", "pipes"],
       "default": "csv"
     },
     "collectionFormatWithMulti": {
       "type": "string",
-      "enum": [
-        "csv",
-        "ssv",
-        "tsv",
-        "pipes",
-        "multi"
-      ],
+      "enum": ["csv", "ssv", "tsv", "pipes", "multi"],
       "default": "csv"
     },
     "title": {
@@ -1651,9 +1481,7 @@
     },
     "jsonReference": {
       "type": "object",
-      "required": [
-        "$ref"
-      ],
+      "required": ["$ref"],
       "additionalProperties": false,
       "properties": {
         "$ref": {
@@ -1674,9 +1502,7 @@
     },
     "xmsEnum": {
       "type": "object",
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "properties": {
         "name": {
           "type": "string"
@@ -1697,9 +1523,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "required": [
-              "value"
-            ],
+            "required": ["value"],
             "properties": {
               "value": {},
               "description": {
@@ -1723,15 +1547,10 @@
       "oneOf": [
         {
           "type": "object",
-          "required": [
-            "name"
-          ],
+          "required": ["name"],
           "properties": {
             "name": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             }
           },
           "additionalProperties": false
@@ -1740,10 +1559,7 @@
           "type": "object",
           "properties": {
             "postfix": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             }
           },
           "additionalProperties": false
@@ -1771,22 +1587,31 @@
       "type": "object",
       "properties": {
         "nextLinkName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "itemName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "operationName": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "xmsPermissions": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "type": "string"
+        },
+        "dataActions": {
+          "type": "string"
+        },
+        "rolesWithThesePermissions": {
+          "type": "string"
+        },
+        "moreInfoLink": {
+          "type": "string"
         }
       },
       "additionalProperties": false
@@ -1802,16 +1627,10 @@
         "final-state-via": {
           "description": "How to determine the final state of the operation. Possible Values:\n- `azure-async-operation` - poll until terminal state, the final response will be available at the uri pointed to by the header `Azure-AsyncOperation`\n- `location`  - poll until terminal state, the final response will be available at the uri pointed to by the header `Location`\n- `original-uri` - poll until terminal state, the final response will be available via GET at the original resource URI. Very common for PUT operations",
           "type": "string",
-          "enum": [
-            "azure-async-operation",
-            "location",
-            "original-uri"
-          ]
+          "enum": ["azure-async-operation", "location", "original-uri"]
         }
       },
-      "required": [
-        "final-state-via"
-      ]
+      "required": ["final-state-via"]
     },
     "xmsAzureResource": {
       "description": "Indicates whether a model definition is an Azure Resource. `true` value indicates that it is an Azure Resource.",
@@ -1846,10 +1665,7 @@
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -1876,30 +1692,19 @@
     },
     "xmsParameterLocation": {
       "type": "string",
-      "enum": [
-        "client",
-        "method"
-      ]
+      "enum": ["client", "method"]
     },
     "xmsApiVersion": {
       "type": "boolean"
     },
     "xmsClientDefault": {
-      "type": [
-        "string",
-        "boolean",
-        "number"
-      ]
+      "type": ["string", "boolean", "number"]
     },
     "xmsMutability": {
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "create",
-          "read",
-          "update"
-        ]
+        "enum": ["create", "read", "update"]
       },
       "uniqueItems": true
     },
