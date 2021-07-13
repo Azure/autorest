@@ -33,6 +33,36 @@ Directives consist of three parts:
 
 [See built in directives here](./built-in-directives.md)
 
+## Debug a directive
+
+### `debug` flag
+
+Directive provide a `debug` field that will enable verbose logging of the directive run.
+
+Example:
+
+```yaml
+directive:
+  - from: swagger-document
+    where: $.paths
+    debug: true
+    transform: >-
+      $["x-abc"] = true
+```
+
+### `$lib.log` function
+
+Along with some other available function to the transform context(See [eval.ts](https://github.com/Azure/autorest/blob/main/packages/extensions/core/src/lib/plugins/transformer/eval.ts)) `$lib.log` lets you log.
+
+```yaml
+directive:
+  - from: swagger-document
+    where: $.paths
+    transform: >-
+      $lib.log($);
+      $["x-abc"] = true
+```
+
 ## Directive Scenarios
 
 The following directives cover the most common tweaking scenarios for generation. Most of those have a `built-in` [directive](./built-in-directives.md) helper and are shown here as examples.

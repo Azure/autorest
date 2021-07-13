@@ -3,20 +3,18 @@ import { createPerFilePlugin, PipelinePlugin } from "../../pipeline/common";
 import { Manipulator } from "./manipulation";
 import { Channel } from "../../message";
 import { evalDirectiveTransform } from "./eval";
-import { resolveDirectives } from "@autorest/configuration";
 
 /* @internal */
 export function createGraphTransformerPlugin(): PipelinePlugin {
   return async (context, input, sink) => {
     // object transforms must have a where clause and a transform
-    const directives = resolveDirectives(
-      context.config,
+    const directives = context.resolveDirectives(
       (x) => x.from.length > 0 && x.transform.length > 0 && x.where.length > 0,
     ); // && (!!x.where && x.where.length > 0)
 
     const result: Array<DataHandle> = [];
-    for (const file of await input.Enum()) {
-      const inputHandle = await input.Read(file);
+    for (const file of await input.enum()) {
+      const inputHandle = await input.read(file);
       if (inputHandle) {
         const documentId = `/${inputHandle.description || inputHandle.key}`;
         let contents: AnyObject | undefined = undefined;

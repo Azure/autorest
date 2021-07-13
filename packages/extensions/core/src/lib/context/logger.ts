@@ -19,6 +19,13 @@ export class AutorestCoreLogger {
     this.suppressor = new Suppressor(config);
   }
 
+  public debug(message: string) {
+    this.log({
+      Channel: Channel.Debug,
+      Text: message,
+    });
+  }
+
   public verbose(message: string) {
     this.log({
       Channel: Channel.Verbose,

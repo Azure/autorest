@@ -22,6 +22,7 @@ import {
 import { AutorestContext } from "../../autorest-core";
 import { Channel } from "../../message";
 import { identitySourceMapping } from "@autorest/common";
+import { inspect } from "util";
 
 export async function manipulateObject(
   src: DataHandle,
@@ -30,6 +31,7 @@ export async function manipulateObject(
   transformer: (doc: any, obj: any, path: JsonPath) => any, // transforming to `undefined` results in removal
   config?: AutorestContext,
   transformationString?: string,
+  debug?: boolean,
   mappingInfo?: {
     transformerSourceHandle: DataHandle;
     transformerSourcePosition: SmartPosition;
@@ -37,9 +39,15 @@ export async function manipulateObject(
   },
 ): Promise<{ anyHit: boolean; result: DataHandle }> {
   if (whereJsonQuery === "$") {
-    const data = await src.ReadData();
+    if (debug && config) {
+      config.debug("Query is $ runnning directive transform on raw text.");
+    }
+    const data = await src.readData();
     const newObject = transformer(null, data, []);
     if (newObject !== data) {
+      if (debug && config) {
+        config.debug("Directive transform changed text. Skipping object transform.");
+      }
       const resultHandle = await target.writeData(src.description, newObject, src.identity, src.artifactType);
       return {
         anyHit: true,
@@ -50,7 +58,7 @@ export async function manipulateObject(
 
   // find paths matched by `whereJsonQuery`
 
-  let ast: YAMLNode = CloneAst(await src.ReadYamlAst());
+  let ast: YAMLNode = CloneAst(await src.readYamlAst());
   const doc = ParseNode<any>(ast);
   const hits = nodes(doc, whereJsonQuery).sort((a, b) => a.path.length - b.path.length);
   if (hits.length === 0) {
@@ -65,9 +73,19 @@ export async function manipulateObject(
     if (ast === undefined) {
       throw new Error("Cannot remove root node.");
     }
+    if (debug && config) {
+      config.debug(
+        `Directive transform match path ${hit.path}. Running on value:\n------------\n${inspect(
+          hit.value,
+        )}\n------------`,
+      );
+    }
 
     try {
       const newObject = transformer(doc, Clone(hit.value), hit.path);
+      if (debug && config) {
+        config.debug(`Transformed Result:\n------------\n${inspect(newObject)}\n------------`);
+      }
       const newAst = newObject === undefined ? undefined : ToAst(newObject); // <- can extend ToAst to also take an "ambient" object with AST, in order to create anchor refs for existing stuff!
       const oldAst = ResolveRelativeNode(ast, ast, hit.path);
       ast =

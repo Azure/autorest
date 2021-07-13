@@ -18,6 +18,11 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
       "transform": { type: "string", array: true },
       "text-transform": { type: "string", array: true },
       "test": { type: "string", array: true },
+      "debug": {
+        type: "boolean",
+        description:
+          "Debug this directive. When set to true autorest will log additional information regarding that directive.",
+      },
     },
   },
   "declare-directive": {
