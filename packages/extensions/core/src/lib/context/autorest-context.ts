@@ -46,6 +46,10 @@ export class AutorestContext implements AutorestLogger {
     return this.config.raw;
   }
 
+  public debug(message: string) {
+    this.logger.debug(message);
+  }
+
   public verbose(message: string) {
     this.logger.verbose(message);
   }
