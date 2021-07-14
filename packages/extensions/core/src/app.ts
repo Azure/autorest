@@ -423,6 +423,7 @@ function trackCliArgs(telemetryClient: TelemetryClient, args: AutorestCliArgs) {
     name: "CliArgs",
     properties,
   });
+  telemetryClient.flush();
 }
 
 async function main() {

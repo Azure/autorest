@@ -11,6 +11,6 @@ export function createTelemetryClient(options: TelemetryOptions) {
   if (options.disable || process.env.AUTOREST_DISABLE_TELEMETRY) {
     client.config.disableAppInsights = true;
   }
-
+  client.context.keys.cloudRoleInstance = "";
   return client;
 }
