@@ -7,7 +7,7 @@ export interface TelemetryOptions {
 }
 
 export function createTelemetryClient(options: TelemetryOptions) {
-  const client = new TelemetryClient(process.env.AUTOREST_AI_ || APPLICATION_INSIGHTS_IKEY);
+  const client = new TelemetryClient(process.env.AUTOREST_AI_IKEY || APPLICATION_INSIGHTS_IKEY);
   if (options.disable || process.env.AUTOREST_DISABLE_TELEMETRY) {
     client.config.disableAppInsights = true;
   }
