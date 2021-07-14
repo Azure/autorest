@@ -100,6 +100,8 @@ async function doClearFolders(protectFiles: Set<string>, clearFolders: Set<strin
   }
 }
 
+let globalTelemetryClient: TelemetryClient | undefined;
+
 async function currentMain(autorestArgs: Array<string>): Promise<number> {
   if (autorestArgs[0] === "init") {
     await autorestInit();
@@ -121,8 +123,11 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
 
   const logger = new RootLogger();
   const args = parseAutorestCliArgs([...autorestArgs, ...more], { logger });
+
   const telemetryClient = createTelemetryClient({ disable: args.options["disable-telemetry"] });
+  globalTelemetryClient = telemetryClient;
   trackCliArgs(telemetryClient, args);
+
   if (!args.options["message-format"] || args.options["message-format"] === "regular") {
     console.log(color(`> Loading AutoRest core      '${__dirname}' (${VERSION})`));
   }
@@ -433,6 +438,9 @@ async function main() {
   } catch {
     exitcode = 102;
   } finally {
+    if (globalTelemetryClient) {
+      globalTelemetryClient.flush();
+    }
     try {
       timestampDebugLog("Shutting Down.");
       await Shutdown();
