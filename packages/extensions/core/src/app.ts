@@ -4,10 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 /* eslint-disable no-console */
 import "source-map-support/register";
-import { omit } from "lodash";
-import { configureLibrariesLogger, createTelemetryClient } from "@autorest/common";
-import { EventEmitter } from "events";
 import { AutorestCliArgs, parseAutorestCliArgs } from "@autorest/configuration";
+import { configureLibrariesLogger } from "@autorest/common";
+import { createTelemetryClient } from "./telemetry";
+import { EventEmitter } from "events";
+import { omit } from "lodash";
 import { TelemetryClient } from "applicationinsights";
 
 EventEmitter.defaultMaxListeners = 100;
