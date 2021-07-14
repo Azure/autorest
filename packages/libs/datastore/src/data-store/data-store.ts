@@ -18,7 +18,7 @@ import { createHash } from "crypto";
 import { DataSource } from "./data-source";
 import { ReadThroughDataSource } from "./read-through-data-source";
 import { Data, DataHandle } from "./data-handle";
-import { DataSink } from "./data-sink";
+import { DataSink, DataSinkOptions } from "./data-sink";
 
 const md5 = (content: any) => (content ? createHash("md5").update(JSON.stringify(content)).digest("hex") : null);
 
@@ -106,8 +106,12 @@ export class DataStore {
     return resolveUri(this.BaseUri, `${this.uid++}?${encodeURIComponent(description)}`);
   }
 
-  public getDataSink(defaultArtifact: string = FALLBACK_DEFAULT_OUTPUT_ARTIFACT): DataSink {
+  public getDataSink(
+    dataSinkOptions: DataSinkOptions = { generateSourceMap: true },
+    defaultArtifact: string = FALLBACK_DEFAULT_OUTPUT_ARTIFACT,
+  ): DataSink {
     return new DataSink(
+      dataSinkOptions,
       (description, data, artifact, identity, sourceMapFactory) =>
         this.writeData(description, data, artifact || defaultArtifact, identity, sourceMapFactory),
       async (description, input) => {

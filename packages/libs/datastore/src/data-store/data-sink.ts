@@ -4,8 +4,13 @@ import { compileMapping, Mapping } from "../source-map/source-map";
 
 import { DataHandle } from "./data-handle";
 
+export interface DataSinkOptions {
+  generateSourceMap?: boolean;
+}
+
 export class DataSink {
   constructor(
+    private options: DataSinkOptions,
     private write: (
       description: string,
       rawData: string,
@@ -35,8 +40,10 @@ export class DataSink {
   ): Promise<DataHandle> {
     return this.writeDataWithSourceMap(description, data, artifact, identity, async (readHandle) => {
       const sourceMapGenerator = new SourceMapGenerator({ file: readHandle.key });
-      if (mappings) {
-        await compileMapping(mappings.mappings, sourceMapGenerator, mappings.mappingSources.concat(readHandle));
+      if (this.options.generateSourceMap) {
+        if (mappings) {
+          await compileMapping(mappings.mappings, sourceMapGenerator, mappings.mappingSources.concat(readHandle));
+        }
       }
       return sourceMapGenerator.toJSON();
     });

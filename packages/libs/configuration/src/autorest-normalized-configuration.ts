@@ -111,6 +111,11 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
   "debugger"?: any;
 
   /**
+   * Skip sourcemap generation. To speedup.
+   */
+  "skip-sourcemap"?: boolean;
+
+  /**
    * Force updating the version of core even if there is a local version satisfying the requirement.
    */
   "force"?: boolean;
