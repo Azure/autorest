@@ -427,7 +427,9 @@ function trackCliArgs(telemetryClient: TelemetryClient, args: AutorestCliArgs) {
   }
   telemetryClient.trackEvent({
     name: "CliArgs",
-    properties,
+    properties: {
+      args: properties,
+    },
   });
   telemetryClient.flush();
 }
