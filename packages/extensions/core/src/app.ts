@@ -5,9 +5,11 @@
 /* eslint-disable no-console */
 import "source-map-support/register";
 import { omit } from "lodash";
-import { configureLibrariesLogger } from "@autorest/common";
+import { configureLibrariesLogger, createTelemetryClient } from "@autorest/common";
 import { EventEmitter } from "events";
 import { AutorestCliArgs, parseAutorestCliArgs } from "@autorest/configuration";
+import { TelemetryClient } from "applicationinsights";
+
 EventEmitter.defaultMaxListeners = 100;
 process.env["ELECTRON_RUN_AS_NODE"] = "1";
 delete process.env["ELECTRON_NO_ATTACH_CONSOLE"];
@@ -18,15 +20,7 @@ const color: (text: string) => string = (<any>global).color ? (<any>global).colo
 // the console app starts for real here.
 
 import { EnhancedFileSystem, Parse, RealFileSystem } from "@azure-tools/datastore";
-import {
-  clearFolder,
-  createFolderUri,
-  makeRelativeUri,
-  readUri,
-  resolveUri,
-  writeBinary,
-  writeString,
-} from "@azure-tools/uri";
+import { clearFolder, createFolderUri, readUri, resolveUri, writeBinary, writeString } from "@azure-tools/uri";
 import { resolve as currentDirectory } from "path";
 import { Help } from "./help";
 import { Artifact } from "./lib/artifact";
@@ -36,6 +30,7 @@ import { Channel, Message } from "./lib/message";
 import { VERSION } from "./lib/constants";
 import { AutorestCoreLogger } from "./lib/context/logger";
 import { ArtifactWriter } from "./artifact-writer";
+import { autorestInit } from "./commands";
 
 let verbose = false;
 let debug = false;
@@ -85,60 +80,6 @@ function subscribeMessages(api: AutoRest, errorCounter: () => void) {
   });
 }
 
-async function autorestInit(title = "API-NAME", inputs: Array<string> = ["LIST INPUT FILES HERE"]) {
-  const cwdUri = createFolderUri(currentDirectory());
-  for (let i = 0; i < inputs.length; ++i) {
-    try {
-      inputs[i] = makeRelativeUri(cwdUri, inputs[i]);
-    } catch {
-      // no worries
-    }
-  }
-  console.log(
-    `# ${title}
-> see https://aka.ms/autorest
-
-This is the AutoRest configuration file for the ${title}.
-
----
-## Getting Started
-To build the SDK for ${title}, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
-
-> ~autorest~
-
-To see additional help and options, run:
-
-> ~autorest --help~
----
-
-## Configuration for generating APIs
-
-...insert-some-meanigful-notes-here...
-
----
-#### Basic Information
-These are the global settings for the API.
-
-~~~ yaml
-# list all the input OpenAPI files (may be YAML, JSON, or Literate- OpenAPI markdown)
-input-file:
-${inputs.map((x) => "  - " + x).join("\n")}
-~~~
-
----
-#### Language-specific settings: CSharp
-
-These settings apply only when ~--csharp~ is specified on the command line.
-
-~~~ yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: generated/csharp
-~~~
-`.replace(/~/g, "`"),
-  );
-}
-
 let exitcode = 0;
 
 let cleared = false;
@@ -180,7 +121,8 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
 
   const logger = new RootLogger();
   const args = parseAutorestCliArgs([...autorestArgs, ...more], { logger });
-
+  const telemetryClient = createTelemetryClient({ disable: args.options["disable-telemetry"] });
+  trackCliArgs(telemetryClient, args);
   if (!args.options["message-format"] || args.options["message-format"] === "regular") {
     console.log(color(`> Loading AutoRest core      '${__dirname}' (${VERSION})`));
   }
@@ -440,7 +382,6 @@ async function batch(api: AutoRest, args: AutorestCliArgs): Promise<void> {
  */
 async function mainImpl(): Promise<number> {
   let autorestArgs: Array<string> = [];
-  const exitcode = 0;
 
   try {
     autorestArgs = process.argv.slice(2);
@@ -468,6 +409,20 @@ function timestampDebugLog(content: string) {
   if (debug) {
     console.log(color(`[${Math.floor(process.uptime() * 100) / 100} s] ${content}`));
   }
+}
+
+function trackCliArgs(telemetryClient: TelemetryClient, args: AutorestCliArgs) {
+  const properties: Record<string, boolean> = {
+    configFileOrFolder: args.configFileOrFolder !== undefined,
+  };
+
+  for (const [key, value] of Object.entries(args.options)) {
+    properties[key] = value !== false && value !== undefined;
+  }
+  telemetryClient.trackEvent({
+    name: "CliArgs",
+    properties,
+  });
 }
 
 async function main() {

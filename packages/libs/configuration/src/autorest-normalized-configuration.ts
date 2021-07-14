@@ -111,6 +111,11 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
   "debugger"?: any;
 
   /**
+   * Disable telemetry collection. ONLY works in CLI flags.
+   */
+  "disable-telemetry"?: boolean;
+
+  /**
    * Force updating the version of core even if there is a local version satisfying the requirement.
    */
   "force"?: boolean;

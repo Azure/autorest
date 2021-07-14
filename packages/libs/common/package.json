@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "@azure-tools/datastore": "~4.3.1",
-    "@azure/logger": "^1.0.2"
+    "@azure/logger": "^1.0.2",
+    "applicationinsights": "~2.1.4"
   }
 }
