@@ -150,10 +150,11 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
 
   const githubToken = args.options["github-auth-token"] ?? process.env.GITHUB_AUTH_TOKEN;
   // get an instance of AutoRest and add the command line switches to the configuration.
-  const api = new AutoRest(
-    new EnhancedFileSystem(githubToken),
-    resolveUri(currentDirUri, args.configFileOrFolder ?? "."),
-  );
+  const api = new AutoRest({
+    fileSystem: new EnhancedFileSystem(githubToken),
+    configFileOrFolderUri: resolveUri(currentDirUri, args.configFileOrFolder ?? "."),
+    telemetryClient,
+  });
   api.AddConfiguration(args.options);
 
   // listen for output messages and file writes
@@ -299,7 +300,10 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
       }
 
       // Create the autorest instance for that item
-      const instance = new AutoRest(new RealFileSystem(), config.configFileFolderUri);
+      const instance = new AutoRest({
+        fileSystem: new RealFileSystem(),
+        configFileOrFolderUri: config.configFileFolderUri,
+      });
       instance.GeneratedFile.Subscribe((_, file) => {
         if (file.uri.endsWith(".json")) {
           const more = JSON.parse(file.content);
@@ -327,7 +331,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
       subscribeMessages(instance, () => exitcode++);
 
       // set configuration for that item
-      instance.AddConfiguration(omit(batchContext, "input-file"));
+      instance.AddConfiguration(omit(batchContext.config, "input-file"));
       instance.AddConfiguration({ "input-file": eachFile });
 
       console.log(`Running autorest for *${path}* `);

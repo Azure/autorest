@@ -9,25 +9,18 @@ import { Exception } from "@autorest/common";
 import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import { runPipeline } from "./pipeline/pipeline";
 export { AutorestContext } from "./context";
-import { isConfigurationDocument } from "@autorest/configuration";
+import { AutorestRawConfiguration, isConfigurationDocument } from "@autorest/configuration";
 import { homedir } from "os";
 import { Artifact } from "./artifact";
 import { DocumentType } from "./document-type";
 import { Channel, Message } from "./message";
 import { StatsCollector } from "./stats";
+import { TelemetryClient } from "applicationinsights";
 
-function IsIterable(target: any) {
-  return !!target && typeof target !== "string" && typeof target[Symbol.iterator] === "function";
-}
-
-function Push<T>(destination: Array<T>, source: any) {
-  if (source) {
-    if (IsIterable(source)) {
-      destination.push(...source);
-    } else {
-      destination.push(source);
-    }
-  }
+export interface AutorestOptions {
+  fileSystem?: IFileSystem;
+  configFileOrFolderUri?: string;
+  telemetryClient?: TelemetryClient;
 }
 
 /**
@@ -53,8 +46,13 @@ export class AutoRest extends EventEmitter {
    */
   @EventEmitter.Event public Message!: IEvent<AutoRest, Message>;
 
-  private _configurations = new Array<any>();
+  public configFileOrFolderUri?: string;
+  private fileSystem: IFileSystem;
+  private telemetryClient: TelemetryClient | undefined;
+
+  private _configurations: AutorestRawConfiguration[] = [];
   private _view: AutorestContext | undefined;
+
   public get view(): Promise<AutorestContext> {
     return this._view ? Promise.resolve(this._view) : this.RegenerateView(true);
   }
@@ -64,8 +62,12 @@ export class AutoRest extends EventEmitter {
    * @param fileSystem The implementation of the filesystem to load and save files from the host application.
    * @param configFileOrFolderUri The URI of the configuration file or folder containing the configuration file. Is null if no configuration file should be looked for.
    */
-  public constructor(private fileSystem: IFileSystem = new RealFileSystem(), public configFileOrFolderUri?: string) {
+  public constructor(options: AutorestOptions) {
     super();
+    this.fileSystem = options.fileSystem ?? new RealFileSystem();
+    this.configFileOrFolderUri = options.configFileOrFolderUri;
+    this.telemetryClient = options.telemetryClient;
+
     // ensure the environment variable for the home folder is set.
     process.env["autorest.home"] = process.env["AUTOREST_HOME"] || process.env["autorest.home"] || homedir();
   }
@@ -80,11 +82,12 @@ export class AutoRest extends EventEmitter {
     messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
 
     const stats = new StatsCollector();
-    return (this._view = await new AutorestContextLoader(this.fileSystem, stats, this.configFileOrFolderUri).createView(
-      messageEmitter,
-      includeDefault,
-      ...this._configurations,
-    ));
+    return (this._view = await new AutorestContextLoader(
+      this.fileSystem,
+      stats,
+      this.configFileOrFolderUri,
+      this.telemetryClient,
+    ).createView(messageEmitter, includeDefault, ...this._configurations));
   }
 
   public Invalidate() {
@@ -94,8 +97,8 @@ export class AutoRest extends EventEmitter {
     }
   }
 
-  public AddConfiguration(configuration: any): void {
-    Push(this._configurations, configuration);
+  public AddConfiguration(configuration: AutorestRawConfiguration): void {
+    this._configurations.push(configuration);
     this.Invalidate();
   }
 
@@ -200,11 +203,13 @@ export class AutoRest extends EventEmitter {
 export async function LiterateToJson(content: string): Promise<string> {
   try {
     const autorest = new AutoRest({
-      list: () => Promise.resolve([]),
-      read: (f: string) => Promise.resolve(f == "none:///empty-file.md" ? content || "# empty file" : "# empty file"),
-      EnumerateFileUris: () => Promise.resolve([]),
-      ReadFile: (f: string) =>
-        Promise.resolve(f == "none:///empty-file.md" ? content || "# empty file" : "# empty file"),
+      fileSystem: {
+        list: () => Promise.resolve([]),
+        read: (f: string) => Promise.resolve(f == "none:///empty-file.md" ? content || "# empty file" : "# empty file"),
+        EnumerateFileUris: () => Promise.resolve([]),
+        ReadFile: (f: string) =>
+          Promise.resolve(f == "none:///empty-file.md" ? content || "# empty file" : "# empty file"),
+      },
     });
     let result = "";
     autorest.AddConfiguration({ "input-file": "none:///empty-file.md", "output-artifact": ["swagger-document"] });
