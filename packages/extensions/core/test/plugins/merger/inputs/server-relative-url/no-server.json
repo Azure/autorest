@@ -1,0 +1,9 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Server url",
+    "version": "1.0.0"
+  },
+  "paths": {},
+  "components": {}
+}

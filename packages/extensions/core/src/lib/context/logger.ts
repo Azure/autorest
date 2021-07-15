@@ -6,6 +6,7 @@ import { Suppressor } from "../pipeline/suppression";
 import { MessageEmitter } from "./message-emitter";
 import { LoggingSession } from "./logging-session";
 import { flatMap } from "lodash";
+import { Position } from "source-map";
 
 export class AutorestCoreLogger {
   private suppressor: Suppressor;
@@ -16,6 +17,13 @@ export class AutorestCoreLogger {
     private asyncLogManager: LoggingSession,
   ) {
     this.suppressor = new Suppressor(config);
+  }
+
+  public debug(message: string) {
+    this.log({
+      Channel: Channel.Debug,
+      Text: message,
+    });
   }
 
   public verbose(message: string) {
@@ -223,7 +231,7 @@ export class AutorestCoreLogger {
 function resolveRanges(sources: SourceLocation[]): Range[] {
   return sources.map((source) => {
     const positionStart = source.Position;
-    const positionEnd = <sourceMap.Position>{
+    const positionEnd = <Position>{
       line: source.Position.line,
       column: source.Position.column + (source.Position.length || 3),
     };

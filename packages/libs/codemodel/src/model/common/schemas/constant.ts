@@ -35,7 +35,8 @@ export interface ConstantSchema<ConstantType extends Schema = Schema> extends Sc
 
 export class ConstantSchema<ConstantType extends Schema = Schema>
   extends Schema
-  implements ConstantSchema<ConstantType> {
+  implements ConstantSchema<ConstantType>
+{
   constructor(name: string, description: string, objectInitializer?: DeepPartial<ConstantSchema<ConstantType>>) {
     super(name, description, SchemaType.Constant);
     this.apply(objectInitializer);

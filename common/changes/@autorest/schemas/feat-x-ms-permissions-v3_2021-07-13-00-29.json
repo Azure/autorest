@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/schemas",
+      "comment": "**Feature** Add `x-ms-permissions` definition to swagger-schema\"",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/schemas",
+  "email": "tiguerin@microsoft.com"
+}

@@ -1,16 +1,4 @@
-/* eslint-disable no-useless-escape */
-import {
-  AnyObject,
-  DataHandle,
-  DataSink,
-  DataSource,
-  Node,
-  parseJsonPointer,
-  Transformer,
-  QuickDataSource,
-  JsonPath,
-  Source,
-} from "@azure-tools/datastore";
+import { DataHandle, DataSink, DataSource, QuickDataSource, Source } from "@azure-tools/datastore";
 import { Model, isReference, Refable, Schema } from "@azure-tools/openapi";
 
 import { AutorestContext } from "../context";
@@ -45,13 +33,13 @@ export class AllOfCleaner {
 }
 
 async function allofCleaner(config: AutorestContext, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
-  const result: Array<DataHandle> = [];
+  const inputs = await Promise.all((await input.enum()).map(async (x) => input.readStrict(x)));
+  const result: DataHandle[] = [];
 
   for (const each of inputs) {
     const fixer = new AllOfCleaner(each);
     result.push(
-      await sink.WriteObject("oai3.clean-allof.json", await fixer.getOutput(), each.identity, "openapi-clean-allof"),
+      await sink.writeObject("oai3.clean-allof.json", await fixer.getOutput(), each.identity, "openapi-clean-allof"),
     );
   }
   return new QuickDataSource(result, input.pipeState);

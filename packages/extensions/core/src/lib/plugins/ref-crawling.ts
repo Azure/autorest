@@ -47,8 +47,7 @@ export async function crawlReferences(
           : secondaryFileContent.openapi
           ? "openapi-document"
           : file.artifactType,
-        [],
-        [secondaryFile],
+        { mappings: [], mappingSources: [secondaryFile] },
       );
 
       // crawl that and add it to the secondary set.
@@ -59,7 +58,10 @@ export async function crawlReferences(
     await Promise.all(refProcessor.promises);
     const mapping = await refProcessor.getSourceMappings();
     // write the file to the data sink (this serializes the file, so it has to be done by this point.)
-    return sink.writeObject(file.description, output, file.identity, file.artifactType, mapping, [file]);
+    return sink.writeObject(file.description, output, file.identity, file.artifactType, {
+      mappings: mapping,
+      mappingSources: [file],
+    });
   }
 
   // this seems a bit convoluted, but in order to not break the order that

@@ -7,7 +7,7 @@
 /// <reference path="../definitions/vscode.d.ts" />
 
 // everything else.
-import { tryRequire, resolveEntrypoint, ensureAutorestHome, selectVersion } from "./autorest-as-a-service";
+import { runCoreWithRequire, resolveEntrypoint, ensureAutorestHome, selectVersion } from "./autorest-as-a-service";
 import { resolve } from "path";
 
 import { LanguageClient } from "vscode-languageclient";
@@ -185,7 +185,7 @@ async function ensureCoreLoaded(): Promise<IAutoRest> {
 
   if (modulePath && !coreModule) {
     // get the library entrypoint
-    coreModule = await tryRequire(modulePath, "main");
+    coreModule = await runCoreWithRequire(modulePath, "main");
 
     // assign the type to the Async Class Identity
     resolveAutoRest(coreModule.AutoRest);
@@ -214,7 +214,7 @@ export async function create(fileSystem?: IFileSystem, configFileOrFolderUri?: s
 
   if (modulePath && !coreModule) {
     // get the library entrypoint
-    coreModule = await tryRequire(modulePath, "main");
+    coreModule = await runCoreWithRequire(modulePath, "main");
 
     // assign the type to the Async Class Identity
     resolveAutoRest(coreModule.AutoRest);

@@ -364,24 +364,26 @@ async function deduplicateSubsetSchemas(config: AutorestContext, input: DataSour
     */
     if (model.info?.["x-ms-metadata"]?.schemaReduced) {
       result.push(
-        await sink.WriteObject(
+        await sink.writeObject(
           "oai3.subset-schema-reduced.json",
           model,
           each.identity,
           "openapi-document-schema-reduced",
-          [],
         ),
       );
       continue;
     }
     const processor = new SubsetSchemaDeduplicator(each);
     result.push(
-      await sink.WriteObject(
+      await sink.writeObject(
         "oai3.subset-schema-reduced.json",
         await processor.getOutput(),
         each.identity,
         "openapi-document-schema-reduced",
-        await processor.getSourceMappings(),
+        {
+          mappings: await processor.getSourceMappings(),
+          mappingSources: [each],
+        },
       ),
     );
   }

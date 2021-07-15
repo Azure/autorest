@@ -60,10 +60,6 @@ stages:
     jobs:
       - template: ./templates/regression-tests.yaml
         parameters:
-          name: node10
-          nodeVersion: 10.x
-      - template: ./templates/regression-tests.yaml
-        parameters:
           name: node12
           nodeVersion: 12.x
       - template: ./templates/regression-tests.yaml

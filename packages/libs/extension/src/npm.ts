@@ -1,6 +1,6 @@
 import { dirname, resolve } from "path";
 import { execute } from "./exec-cmd";
-import { InstallOptions, PackageManager } from "./package-manager";
+import { ensurePackageJsonExists, InstallOptions, PackageManager } from "./package-manager";
 
 export const DEFAULT_NPM_REGISTRY = "https://registry.npmjs.org";
 
@@ -22,6 +22,8 @@ export const execNpm = async (cwd: string, ...args: string[]) => {
 
 export class Npm implements PackageManager {
   public async install(directory: string, packages: string[], options?: InstallOptions) {
+    await ensurePackageJsonExists(directory);
+
     const output = await execNpm(
       directory,
       "install",
