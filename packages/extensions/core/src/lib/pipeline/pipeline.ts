@@ -499,6 +499,10 @@ async function runPlugin(
       duration,
       memory,
     },
+    properties: {
+      nodeName: nodeName,
+      pluginName: node.pluginName,
+    },
   });
   return scopeResult;
 }
