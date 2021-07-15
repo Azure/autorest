@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/configuration",
+      "comment": "**Added** `--disable-telemetry` flag to disable the telemetry",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/configuration",
+  "email": "tiguerin@microsoft.com"
+}
