@@ -21,6 +21,7 @@ Common properties added to each events:
 
 Event and data recorded
 
-| Name      | Description                                                                                                                          |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `CliArgs` | Event emitted on startup and contains the all the options passed in the cli with the value sanitized(Converted to `true` or `false`) |
+| Name        | Description                                                                                                                          |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `CliArgs`   | Event emitted on startup and contains the all the options passed in the cli with the value sanitized(Converted to `true` or `false`) |
+| `PluginEnd` | Event emitted on at the end of each plugin reporting its run duration and the current memory usage.                                  |
