@@ -54,7 +54,7 @@ describe("ObjectManipulator", () => {
   it("any hit", async () => {
     // setup
     const dataStore = new DataStore(CancellationToken.None);
-    const input = await dataStore.WriteData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
+    const input = await dataStore.writeData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
 
     const expectHit = async (jsonQuery: string, anyHit: boolean) => {
       const result = await manipulateObject(input, dataStore.getDataSink(), jsonQuery, (_, x) => x);
@@ -79,7 +79,7 @@ describe("ObjectManipulator", () => {
   it("removal", async () => {
     // setup
     const dataStore = new DataStore(CancellationToken.None);
-    const input = await dataStore.WriteData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
+    const input = await dataStore.writeData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
 
     // remove all models that don't have a description
     const result = await manipulateObject(
@@ -89,7 +89,7 @@ describe("ObjectManipulator", () => {
       (_, x) => undefined,
     );
     assert.strictEqual(result.anyHit, true);
-    const resultRaw = await result.result.ReadData();
+    const resultRaw = await result.result.readData();
     assert.ok(resultRaw.indexOf("NodeA") !== -1);
     assert.ok(resultRaw.indexOf("NodeB") === -1);
   });
@@ -97,7 +97,7 @@ describe("ObjectManipulator", () => {
   it("update", async () => {
     // setup
     const dataStore = new DataStore(CancellationToken.None);
-    const input = await dataStore.WriteData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
+    const input = await dataStore.writeData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
 
     {
       // override all existing model descriptions
@@ -109,7 +109,7 @@ describe("ObjectManipulator", () => {
         (_, x) => bestDescriptionEver,
       );
       assert.strictEqual(result.anyHit, true);
-      const resultObject = await result.result.ReadObject<any>();
+      const resultObject = await result.result.readObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, bestDescriptionEver);
     }
     {
@@ -151,7 +151,7 @@ describe("ObjectManipulator", () => {
   it("skip-transform-failure", async () => {
     // setup
     const dataStore = new DataStore(CancellationToken.None);
-    const input = await dataStore.WriteData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
+    const input = await dataStore.writeData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
 
     {
       // the first override should fail but the second should be still executed
@@ -169,7 +169,7 @@ describe("ObjectManipulator", () => {
       });
 
       assert.strictEqual(result.anyHit, true);
-      const resultObject = await result.result.ReadObject<any>();
+      const resultObject = await result.result.readObject<any>();
       assert.strictEqual(resultObject.paths["/api/circular"].get.description, "fun time");
       assert.strictEqual(resultObject.paths["/api/circular"].post.description, bestDescriptionEver);
     }
