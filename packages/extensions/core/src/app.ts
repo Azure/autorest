@@ -446,8 +446,8 @@ async function main() {
   } catch {
     exitcode = 102;
   } finally {
-    await new Promise((r) => {
-      globalTelemetryClient?.flush({ callback: () => r });
+    await new Promise<void>((r) => {
+      globalTelemetryClient?.flush({ callback: () => r() });
     });
     try {
       timestampDebugLog("Shutting Down.");
