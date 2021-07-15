@@ -1,7 +1,12 @@
 import { TelemetryClient } from "applicationinsights";
 import { VERSION } from "./lib/constants";
 
-const APPLICATION_INSIGHTS_IKEY = "bd4694df-6d6d-490e-ac2c-51175d08e2d9";
+const inWebpack = typeof __webpack_require__ === "function";
+
+const APPLICATION_INSIGHTS_IKEY_DEV = "bd4694df-6d6d-490e-ac2c-51175d08e2d9";
+const APPLICATION_INSIGHTS_IKEY_PROD = "bd4694df-6d6d-490e-ac2c-51175d08e2d9";
+
+const APPLICATION_INSIGHTS_IKEY = inWebpack ? APPLICATION_INSIGHTS_IKEY_PROD : APPLICATION_INSIGHTS_IKEY_DEV;
 
 export interface TelemetryOptions {
   disable?: boolean;
