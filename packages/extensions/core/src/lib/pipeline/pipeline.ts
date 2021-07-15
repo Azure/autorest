@@ -28,6 +28,7 @@ import { CORE_PLUGIN_MAP } from "../plugins";
 import { loadPlugins, PipelinePluginDefinition } from "./plugin-loader";
 import { mapValues, omitBy } from "lodash";
 import { promisify } from "util";
+import { PipelinePlugin } from "./common";
 
 const safeEval = createSandbox();
 const setImmediatePromise = promisify(setImmediate);
@@ -185,8 +186,8 @@ function isDrainRequired(p: PipelineNode) {
   return false;
 }
 
-export async function runPipeline(configView: AutorestContext, fileSystem: IFileSystem): Promise<void> {
-  const plugins = await loadPlugins(configView);
+export async function runPipeline(context: AutorestContext, fileSystem: IFileSystem): Promise<void> {
+  const plugins = await loadPlugins(context);
   const __extensionExtension = mapValues(
     omitBy(plugins, (x) => x.builtIn),
     (x) => x.extension,
@@ -194,7 +195,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
   // __status scope
   const startTime = Date.now();
-  configView.config.raw.__status = new Proxy<any>(
+  context.config.raw.__status = new Proxy<any>(
     {},
     {
       get(_, key) {
@@ -210,7 +211,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
               tasks,
               startTime,
               blame: (uri: string, position: any /*TODO: cleanup, nail type*/) => {
-                return configView.DataStore.blame(uri, position);
+                return context.DataStore.blame(uri, position);
               },
             }),
             (k, v) => (k === "dependencies" ? undefined : v),
@@ -225,9 +226,9 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
   // TODO: think about adding "number of files in scope" kind of validation in between pipeline steps
 
-  const fsInput = configView.DataStore.getReadThroughScope(fileSystem);
-  const pipeline = buildPipeline(configView, plugins);
-  const times = !!configView.config["timestamp"];
+  const fsInput = context.DataStore.getReadThroughScope(fileSystem);
+  const pipeline = buildPipeline(context, plugins);
+  const times = !!context.config["timestamp"];
   const tasks: { [name: string]: Promise<DataSource> } = {};
 
   const pipelineEmitterPlugin = createArtifactEmitterPlugin(
@@ -268,8 +269,8 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
           for (const pscope of inputScopes) {
             const scope = await pscope;
             pipeState = mergePipeStates(pipeState, scope.pipeState);
-            for (const handle of await scope.Enum()) {
-              handles.push(await scope.ReadStrict(handle));
+            for (const handle of await scope.enum()) {
+              handles.push(await scope.readStrict(handle));
             }
           }
           inputScope = new QuickDataSource(handles, pipeState);
@@ -284,10 +285,9 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     // or add pass-thru: true in a pipline configuration step.
     const configEntry = context.GetEntry(node.configScope.last.toString());
     const passthru =
-      configEntry?.["pass-thru"] === true ||
-      values(configView.GetEntry("pass-thru")).any((each) => each === pluginName);
+      configEntry?.["pass-thru"] === true || values(context.GetEntry("pass-thru")).any((each) => each === pluginName);
     const usenull =
-      configEntry?.["null"] === true || values(configView.GetEntry("null")).any((each) => each === pluginName);
+      configEntry?.["null"] === true || values(context.GetEntry("null")).any((each) => each === pluginName);
 
     const plugin = usenull
       ? CORE_PLUGIN_MAP.null
@@ -338,25 +338,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
         );
       }
 
-      const t1 = process.uptime() * 100;
-      context.Message({
-        Channel: times ? Channel.Information : Channel.Debug,
-        Text: `${nodeName} - START inputs = ${(await inputScope.enum()).length}`,
-      });
-
-      // creates the actual plugin.
-      const scopeResult = await plugin(
-        context,
-        inputScope,
-        context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }, node.outputArtifact),
-      );
-      const t2 = process.uptime() * 100;
-
-      const memSuffix = context.config.debug ? `[${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)} MB]` : "";
-      context.Message({
-        Channel: times ? Channel.Information : Channel.Debug,
-        Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]${memSuffix}`,
-      });
+      const scopeResult = await runPlugin(context, plugin, node, inputScope, nodeName);
 
       // if caching is enabled, let's cache this scopeResult.
       if (context.config.cachingEnabled && cacheKey) {
@@ -376,7 +358,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
       return scopeResult;
     } catch (e) {
-      if (configView.config.debug) {
+      if (context.config.debug) {
         // eslint-disable-next-line no-console
         console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);
       }
@@ -450,7 +432,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
   try {
     await barrier.wait();
-    await emitStats(configView);
+    await emitStats(context);
   } catch (e) {
     // wait for outstanding nodes
     try {
@@ -479,4 +461,44 @@ async function emitStats(context: AutorestContext) {
     new QuickDataSource([]),
     context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }),
   );
+}
+
+async function runPlugin(
+  context: AutorestContext,
+  plugin: PipelinePlugin,
+  node: PipelineNode,
+  inputScope: DataSource,
+  nodeName: string,
+): Promise<DataSource> {
+  const logTimestamp = !!context.config["timestamp"];
+
+  const startTime = process.uptime() * 100;
+  context.Message({
+    Channel: logTimestamp ? Channel.Information : Channel.Debug,
+    Text: `${nodeName} - START inputs = ${(await inputScope.enum()).length}`,
+  });
+
+  // creates the actual plugin.
+  const scopeResult = await plugin(
+    context,
+    inputScope,
+    context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }, node.outputArtifact),
+  );
+
+  const endTime = process.uptime() * 100;
+  const duration = Math.floor(endTime - startTime) / 100;
+  const memory = Math.round(process.memoryUsage().heapUsed / 1024 / 1024);
+  const memSuffix = context.config.debug ? `[${memory} MB]` : "";
+  context.Message({
+    Channel: logTimestamp ? Channel.Information : Channel.Debug,
+    Text: `${nodeName} - END [${duration} s]${memSuffix}`,
+  });
+  context.telemetryClient?.trackEvent({
+    name: "PluginEnd",
+    measurements: {
+      duration,
+      memory,
+    },
+  });
+  return scopeResult;
 }
