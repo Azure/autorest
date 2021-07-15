@@ -137,7 +137,7 @@ export async function manipulateObject(
     "manipulated",
     StringifyAst(ast),
     src.identity,
-    undefined,
+    src.artifactType,
     mapping,
     mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src],
   );
