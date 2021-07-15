@@ -45,52 +45,52 @@ async function emitArtifactInternal(
 
 let emitCtr = 0;
 async function emitArtifact(
-  config: AutorestContext,
+  context: AutorestContext,
   uri: string,
   handle: DataHandle,
   isObject: boolean,
 ): Promise<void> {
   const artifactType = handle.artifactType;
-  const result = emitArtifactInternal(config, artifactType, uri, handle);
+  const result = emitArtifactInternal(context, artifactType, uri, handle);
 
   if (isObject) {
-    const sink = config.DataStore.getDataSink();
+    const sink = context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] });
 
-    if (isOutputArtifactOrMapRequested(config, artifactType + ".yaml")) {
+    if (isOutputArtifactOrMapRequested(context, artifactType + ".yaml")) {
       const h = await sink.writeData(
         `${++emitCtr}.yaml`,
         Stringify(await handle.readObject<any>()),
         ["fix-me"],
         artifactType,
       );
-      await emitArtifactInternal(config, artifactType + ".yaml", uri + ".yaml", h);
+      await emitArtifactInternal(context, artifactType + ".yaml", uri + ".yaml", h);
     }
-    if (isOutputArtifactOrMapRequested(config, artifactType + ".norm.yaml")) {
+    if (isOutputArtifactOrMapRequested(context, artifactType + ".norm.yaml")) {
       const h = await sink.writeData(
         `${++emitCtr}.norm.yaml`,
         Stringify(Normalize(await handle.readObject<any>())),
         ["fix-me"],
         artifactType,
       );
-      await emitArtifactInternal(config, artifactType + ".norm.yaml", uri + ".norm.yaml", h);
+      await emitArtifactInternal(context, artifactType + ".norm.yaml", uri + ".norm.yaml", h);
     }
-    if (isOutputArtifactOrMapRequested(config, artifactType + ".json")) {
+    if (isOutputArtifactOrMapRequested(context, artifactType + ".json")) {
       const h = await sink.writeData(
         `${++emitCtr}.json`,
         JSON.stringify(await handle.readObject<any>(), null, 2),
         ["fix-me"],
         artifactType,
       );
-      await emitArtifactInternal(config, artifactType + ".json", uri + ".json", h);
+      await emitArtifactInternal(context, artifactType + ".json", uri + ".json", h);
     }
-    if (isOutputArtifactOrMapRequested(config, artifactType + ".norm.json")) {
+    if (isOutputArtifactOrMapRequested(context, artifactType + ".norm.json")) {
       const h = await sink.writeData(
         `${++emitCtr}.norm.json`,
         JSON.stringify(Normalize(await handle.readObject<any>()), null, 2),
         ["fix-me"],
         artifactType,
       );
-      await emitArtifactInternal(config, artifactType + ".norm.json", uri + ".norm.json", h);
+      await emitArtifactInternal(context, artifactType + ".norm.json", uri + ".norm.json", h);
     }
   }
   return result;

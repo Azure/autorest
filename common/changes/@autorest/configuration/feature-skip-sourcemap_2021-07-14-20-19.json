@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/configuration",
+      "comment": "**Added** `--skip-sourcemap` flag",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/configuration",
+  "email": "tiguerin@microsoft.com"
+}
