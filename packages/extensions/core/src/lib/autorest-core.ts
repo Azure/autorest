@@ -47,8 +47,8 @@ export class AutoRest extends EventEmitter {
   @EventEmitter.Event public Message!: IEvent<AutoRest, Message>;
 
   public configFileOrFolderUri?: string;
+  public telemetryClient: TelemetryClient | undefined;
   private fileSystem: IFileSystem;
-  private telemetryClient: TelemetryClient | undefined;
 
   private _configurations: AutorestRawConfiguration[] = [];
   private _view: AutorestContext | undefined;

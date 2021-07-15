@@ -303,6 +303,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
       const instance = new AutoRest({
         fileSystem: new RealFileSystem(),
         configFileOrFolderUri: config.configFileFolderUri,
+        telemetryClient: api.telemetryClient,
       });
       instance.GeneratedFile.Subscribe((_, file) => {
         if (file.uri.endsWith(".json")) {
@@ -445,9 +446,9 @@ async function main() {
   } catch {
     exitcode = 102;
   } finally {
-    if (globalTelemetryClient) {
-      globalTelemetryClient.flush();
-    }
+    await new Promise((r) => {
+      globalTelemetryClient?.flush({ callback: () => r });
+    });
     try {
       timestampDebugLog("Shutting Down.");
       await Shutdown();
