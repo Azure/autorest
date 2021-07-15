@@ -3,22 +3,20 @@ import { createPerFilePlugin, PipelinePlugin } from "../../pipeline/common";
 import { Manipulator } from "./manipulation";
 import { Channel } from "../../message";
 import { evalDirectiveTransform } from "./eval";
-import { resolveDirectives } from "@autorest/configuration";
 
 /* @internal */
 export function createGraphTransformerPlugin(): PipelinePlugin {
   return async (context, input, sink) => {
     // object transforms must have a where clause and a transform
-    const directives = resolveDirectives(
-      context.config,
+    const directives = context.resolveDirectives(
       (x) => x.from.length > 0 && x.transform.length > 0 && x.where.length > 0,
     ); // && (!!x.where && x.where.length > 0)
 
     const result: Array<DataHandle> = [];
-    for (const file of await input.Enum()) {
-      const inputHandle = await input.Read(file);
+    for (const file of await input.enum()) {
+      const inputHandle = await input.read(file);
       if (inputHandle) {
-        const documentId = `/${inputHandle.Description || inputHandle.key}`;
+        const documentId = `/${inputHandle.description || inputHandle.key}`;
         let contents: AnyObject | undefined = undefined;
         let modified = false;
 
@@ -37,7 +35,7 @@ export function createGraphTransformerPlugin(): PipelinePlugin {
               // if the file should be processed, run it thru
               for (const transform of directive.transform) {
                 // get the whole document
-                contents = contents === undefined ? await inputHandle.ReadObjectFast() : contents;
+                contents = contents === undefined ? await inputHandle.readObjectFast() : contents;
 
                 // find the target nodes in the document
                 const targets = selectNodes(contents, where);
@@ -70,10 +68,10 @@ export function createGraphTransformerPlugin(): PipelinePlugin {
 
         if (modified) {
           result.push(
-            await sink.WriteObject(inputHandle.Description, contents, inputHandle.identity, inputHandle.artifactType),
+            await sink.writeObject(inputHandle.description, contents, inputHandle.identity, inputHandle.artifactType),
           );
         } else {
-          result.push(await sink.Forward(inputHandle.Description, inputHandle));
+          result.push(await sink.forward(inputHandle.description, inputHandle));
         }
       }
     }
@@ -97,10 +95,10 @@ export function createTextTransformerPlugin(): PipelinePlugin {
     }
 
     const result: Array<DataHandle> = [];
-    for (const file of await input.Enum()) {
-      const inputHandle = await input.Read(file);
+    for (const file of await input.enum()) {
+      const inputHandle = await input.read(file);
       if (inputHandle) {
-        const documentId = `/${inputHandle.Description || inputHandle.key}`;
+        const documentId = `/${inputHandle.description || inputHandle.key}`;
         let contents: string | undefined = undefined;
         let modified = false;
 
@@ -154,15 +152,15 @@ export function createTextTransformerPlugin(): PipelinePlugin {
 
         if (modified) {
           result.push(
-            await sink.WriteData(
-              inputHandle.Description,
+            await sink.writeData(
+              inputHandle.description,
               contents || "",
               inputHandle.identity,
               inputHandle.artifactType,
             ),
           );
         } else {
-          result.push(await sink.Forward(inputHandle.Description, inputHandle));
+          result.push(await sink.forward(inputHandle.description, inputHandle));
         }
       }
     }
@@ -176,8 +174,8 @@ export function createTransformerPlugin(): PipelinePlugin {
     const isObject = config.GetEntry("is-object") === false ? false : true;
     const manipulator = new Manipulator(config);
     return async (fileIn, sink) => {
-      const fileOut = await manipulator.process(fileIn, sink, isObject, fileIn.Description);
-      return sink.Forward(fileIn.Description, fileOut);
+      const fileOut = await manipulator.process(fileIn, sink, isObject, fileIn.description);
+      return sink.forward(fileIn.description, fileOut);
     };
   });
 }
@@ -186,14 +184,14 @@ export function createTransformerPlugin(): PipelinePlugin {
 export function createImmediateTransformerPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
     const isObject = config.GetEntry("is-object") === false ? false : true;
-    const files = await input.Enum(); // first all the immediate-configs, then a single swagger-document
-    const scopes = await Promise.all(files.slice(0, files.length - 1).map((f) => input.ReadStrict(f)));
+    const files = await input.enum(); // first all the immediate-configs, then a single swagger-document
+    const scopes = await Promise.all(files.slice(0, files.length - 1).map((f) => input.readStrict(f)));
     const manipulator = new Manipulator(
-      config.extendWith(...(await Promise.all(scopes.map((s) => s.ReadObject<any>())))),
+      config.extendWith(...(await Promise.all(scopes.map((s) => s.readObject<any>())))),
     );
     const file = files[files.length - 1];
-    const fileIn = await input.ReadStrict(file);
-    const fileOut = await manipulator.process(fileIn, sink, isObject, fileIn.Description);
-    return new QuickDataSource([await sink.Forward("swagger-document", fileOut)], input.pipeState);
+    const fileIn = await input.readStrict(file);
+    const fileOut = await manipulator.process(fileIn, sink, isObject, fileIn.description);
+    return new QuickDataSource([await sink.forward("swagger-document", fileOut)], input.pipeState);
   };
 }

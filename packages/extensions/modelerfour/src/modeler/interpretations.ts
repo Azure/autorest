@@ -355,7 +355,7 @@ export class Interpretations {
 
   /** gets the operation path from metadata, falls back to the OAI3 path key */
   getPath(pathItem: OpenAPI.PathItem, operation: OpenAPI.HttpOperation, path: string) {
-    return this.xmsMeta(pathItem, "path") || this.xmsMeta(operation, "path") || path;
+    return this.xmsMeta(pathItem, "path") ?? this.xmsMeta(operation, "path") ?? path;
   }
 
   /*

@@ -34,7 +34,7 @@ describe("Semantic Validation: $ref siblings", () => {
         level: "warn",
         code: SemanticErrorCodes.IgnoredPropertyNextToRef,
         message:
-          "Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/master/docs/openapi/howto/$ref-siblings.md for allowed values",
+          "Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values",
         params: { keys: ["type"] },
         path: ["components", "schemas", "Pet", "properties", "foo"],
       },

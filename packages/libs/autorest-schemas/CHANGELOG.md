@@ -1,6 +1,13 @@
 # Change Log - @autorest/schemas
 
-This log was last generated on Thu, 20 May 2021 16:41:13 GMT and should not be manually modified.
+This log was last generated on Thu, 03 Jun 2021 22:37:55 GMT and should not be manually modified.
+
+## 1.1.4
+Thu, 03 Jun 2021 22:37:55 GMT
+
+### Patches
+
+- Allow x-ms-paths not to start with /
 
 ## 1.1.3
 Thu, 20 May 2021 16:41:13 GMT

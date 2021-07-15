@@ -67,7 +67,7 @@ export const detectConfigurationFiles = async (
     }
     // this *was* an actual file passed in, not a folder. don't make this harder than it has to be.
     throw new Error(
-      `Specified file '${originalConfigFileOrFolderUri}' is not a valid configuration file (missing magic string, see https://github.com/Azure/autorest/blob/master/docs/user/literate-file-formats/configuration.md#the-file-format).`,
+      `Specified file '${originalConfigFileOrFolderUri}' is not a valid configuration file (missing magic string, see https://github.com/Azure/autorest/blob/main/docs/user/literate-file-formats/configuration.md#the-file-format).`,
     );
   }
 

@@ -14,6 +14,8 @@ export interface ModelerFourOptions {
 
   "always-seal-x-ms-enums"?: boolean;
 
+  "content-type-extensible"?: boolean;
+
   "flatten-models"?: boolean;
 
   "flatten-payloads"?: boolean;
@@ -46,6 +48,17 @@ export interface ModelerFourOptions {
    * This is a temporary flag to smooth transition. It WILL be removed in a future version.
    */
   "treat-type-object-as-anything"?: boolean;
+
+  /**
+   * Enable older inconsistent behavior that an enum with a single value would become a constant by default.
+   */
+  "seal-single-value-enum-by-default"?: boolean;
+
+  /**
+   * List of header names that shouldn't be included in the codemodel.
+   * Those header would already be handled by the generator.
+   */
+  "ignore-headers"?: string[];
 }
 
 export interface ModelerFourNamingOptions {

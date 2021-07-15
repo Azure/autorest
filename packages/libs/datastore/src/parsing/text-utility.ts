@@ -12,7 +12,7 @@ const regexNewLine = /\r?\n/g;
  * Return an array containg the indexes where each line start. Each cell has the index to its coresponding line.
  * @param text Text to index.
  */
-export function LineIndices(text: string): Array<number> {
+export function getLineIndices(text: string): Array<number> {
   const indices = [0];
 
   let match: RegExpExecArray | null;
@@ -32,9 +32,25 @@ export function Lines(text: string): Array<string> {
  * @param text Source.
  * @param index Index.
  */
-export function IndexToPosition(text: DataHandle | string, index: number): sourceMapPosition {
-  const startIndices = typeof text === "string" ? LineIndices(text) : text.metadata.lineIndices.Value;
+export function indexToPositionInText(text: string, index: number): sourceMapPosition {
+  return indexToPositionFromLineIndices(getLineIndices(text), index);
+}
 
+/**
+ * Retrieve the position(Line,Column) from the index in the source.
+ * @param text Source.
+ * @param index Index.
+ */
+export async function indexToPosition(text: DataHandle, index: number): Promise<sourceMapPosition> {
+  return indexToPositionFromLineIndices(await text.lineIndices(), index);
+}
+
+/**
+ * Retrieve the position(Line,Column) from the index in the source.
+ * @param text Source.
+ * @param index Index.
+ */
+export function indexToPositionFromLineIndices(startIndices: number[], index: number): sourceMapPosition {
   // bin. search for last `<item> <= index`
   let lineIndexMin = 0;
   let lineIndexMax = startIndices.length;

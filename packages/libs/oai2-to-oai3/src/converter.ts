@@ -6,7 +6,6 @@ import {
   OpenAPI2ResponseHeader,
   OpenAPI2Operation,
   OpenAPI2OperationResponse,
-  OpenAPI2Parameter,
   OpenAPI2BodyParameter,
   OpenApi2FormDataParameter,
 } from "./oai2";

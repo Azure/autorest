@@ -30,7 +30,7 @@ export function validateRefsSiblings(spec: oai3.Model) {
         errors.push({
           level: "warn",
           code: SemanticErrorCodes.IgnoredPropertyNextToRef,
-          message: `Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/master/docs/openapi/howto/$ref-siblings.md for allowed values`,
+          message: `Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values`,
           path,
           params: {
             keys,

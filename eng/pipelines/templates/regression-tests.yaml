@@ -40,10 +40,14 @@ jobs:
         displayName: Install Python 3
 
       - script: |
-          npm install
-          npm install -g @autorest/compare@~0.3.6
-          node -e "console.log('process env', process.env)"
+          npx @microsoft/rush update
+          npx @microsoft/rush rebuild
+          cd ./packages/tools/compare
+          npm link --force
         displayName: Install autorest-compare
+
+      - script: npm install
+        displayName: Install dependencies
         workingDirectory: regression-tests
 
       - script: autorest-compare --compare:./regression-tests/regression-compare.yaml --language:python

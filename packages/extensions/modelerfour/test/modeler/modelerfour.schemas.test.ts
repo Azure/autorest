@@ -1,6 +1,7 @@
 import { JsonType } from "@azure-tools/openapi";
 import assert from "assert";
-import { addSchema, createTestSpec, findByName } from "../utils";
+import { ChoiceSchema, ConstantSchema, SealedChoiceSchema } from "../../../../libs/codemodel/dist/exports";
+import { addSchema, assertSchema, createTestSpec, findByName } from "../utils";
 import { runModeler } from "./modelerfour-utils";
 
 describe("Modelerfour.Schemas", () => {
@@ -214,6 +215,131 @@ describe("Modelerfour.Schemas", () => {
       expect(foo?.choiceType.type).toEqual("string");
       expect(foo?.choices.map((x) => x.value)).toEqual(["one", "two"]);
     });
+
+    it("creates an ChoiceSchema by default for single value enums", async () => {
+      const spec = createTestSpec();
+
+      addSchema(spec, "Foo", {
+        enum: ["one"],
+      });
+
+      const codeModel = await runModeler(spec);
+      const foo = findByName("Foo", codeModel.schemas.choices);
+      expect(foo).toBeInstanceOf(ChoiceSchema);
+    });
+
+    it("creates an Constant by default for single value enums if `seal-single-value-enum-by-default` is ON", async () => {
+      const spec = createTestSpec();
+
+      addSchema(spec, "Foo", {
+        enum: ["one"],
+      });
+
+      const codeModel = await runModeler(spec, {
+        modelerfour: {
+          "seal-single-value-enum-by-default": true,
+        },
+      });
+      expect(findByName("Foo", codeModel.schemas.choices)).toBeUndefined();
+      const foo = findByName("Foo", codeModel.schemas.constants);
+      expect(foo).toBeInstanceOf(ConstantSchema);
+    });
+
+    it("creates an Constant if enum is marked modelAsString=false for single value enums", async () => {
+      const spec = createTestSpec();
+
+      addSchema(spec, "Foo", {
+        "enum": ["one"],
+        "x-ms-enum": {
+          modelAsString: false,
+        },
+      });
+
+      const codeModel = await runModeler(spec);
+      expect(findByName("Foo", codeModel.schemas.choices)).toBeUndefined();
+      const foo = findByName("Foo", codeModel.schemas.constants);
+      expect(foo).toBeInstanceOf(ConstantSchema);
+    });
+
+    it("creates an ChoiceSchema by default for multi value enums", async () => {
+      const spec = createTestSpec();
+
+      addSchema(spec, "Foo", {
+        enum: ["one", "two"],
+      });
+
+      const codeModel = await runModeler(spec);
+      const foo = findByName("Foo", codeModel.schemas.choices);
+      expect(foo).toBeInstanceOf(ChoiceSchema);
+    });
+
+    it("creates an SealedChoice if enum is marked modelAsString=false for multu value enums", async () => {
+      const spec = createTestSpec();
+
+      addSchema(spec, "Foo", {
+        "enum": ["one", "two"],
+        "x-ms-enum": {
+          modelAsString: false,
+        },
+      });
+
+      const codeModel = await runModeler(spec);
+      expect(findByName("Foo", codeModel.schemas.choices)).toBeUndefined();
+      const foo = findByName("Foo", codeModel.schemas.sealedChoices);
+      expect(foo).toBeInstanceOf(SealedChoiceSchema);
+    });
+
+    it("always-seal-x-ms-enum configuration produces SealedChoiceSchema for all x-ms-enums", async () => {
+      const spec = createTestSpec();
+
+      addSchema(spec, "ModelAsString", {
+        "type": "string",
+        "enum": ["Apple", "Orange"],
+        "x-ms-enum": {
+          modelAsString: true,
+        },
+      });
+
+      addSchema(spec, "ShouldBeSealed", {
+        "type": "string",
+        "enum": ["Apple", "Orange"],
+        "x-ms-enum": {
+          modelAsString: false,
+        },
+      });
+
+      addSchema(spec, "SingleValueEnum", {
+        "type": "string",
+        "enum": ["Apple"],
+        "x-ms-enum": {
+          modelAsString: false,
+        },
+      });
+
+      const codeModelWithoutSetting = await runModeler(spec, {
+        modelerfour: {
+          "always-seal-x-ms-enums": false,
+        },
+      });
+
+      assertSchema("ModelAsString", codeModelWithoutSetting.schemas.choices, (s) => s.choiceType.type, "string");
+
+      assertSchema("ShouldBeSealed", codeModelWithoutSetting.schemas.sealedChoices, (s) => s.choiceType.type, "string");
+
+      assertSchema("SingleValueEnum", codeModelWithoutSetting.schemas.constants, (s) => s.valueType.type, "string");
+
+      const codeModelWithSetting = await runModeler(spec, {
+        modelerfour: {
+          "always-seal-x-ms-enums": true,
+        },
+      });
+
+      assertSchema("ModelAsString", codeModelWithSetting.schemas.sealedChoices, (s) => s.choiceType.type, "string");
+
+      assertSchema("ShouldBeSealed", codeModelWithSetting.schemas.sealedChoices, (s) => s.choiceType.type, "string");
+
+      assertSchema("SingleValueEnum", codeModelWithSetting.schemas.sealedChoices, (s) => s.choiceType.type, "string");
+    });
   });
 
   describe("Deprecation", () => {
@@ -242,6 +368,40 @@ describe("Modelerfour.Schemas", () => {
       const codeModel = await runModeler(spec);
       const model = findByName("DeprecatedModel", codeModel.schemas.objects);
       expect(model?.deprecated).toEqual({});
+    });
+  });
+
+  describe("Circular Dependency", () => {
+    it("works when allOf reference back to child.", async () => {
+      const spec = createTestSpec();
+
+      addSchema(spec, "Child", {
+        type: "object",
+        allOf: [
+          {
+            $ref: "#/components/schemas/Parent",
+          },
+        ],
+      });
+
+      addSchema(spec, "Parent", {
+        type: "object",
+        properties: {
+          child: {
+            $ref: "#/components/schemas/Child",
+          },
+        },
+      });
+
+      const codeModel = await runModeler(spec);
+
+      const child = findByName("Child", codeModel.schemas.objects);
+      expect(child).toBeDefined();
+      const parent = findByName("Parent", codeModel.schemas.objects);
+      expect(parent).toBeDefined();
+
+      expect(child?.parents?.immediate).toContain(parent);
+      expect(parent?.properties?.find((x) => x.serializedName === "child")?.schema).toEqual(child);
     });
   });
 });

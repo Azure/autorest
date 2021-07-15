@@ -2,6 +2,18 @@
   "name": "@azure-tools/extension",
   "entries": [
     {
+      "version": "3.2.7",
+      "tag": "@azure-tools/extension_v3.2.7",
+      "date": "Wed, 26 May 2021 18:31:17 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Export** fetchPackageMetadata for use without depending on local package manager"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.2.6",
       "tag": "@azure-tools/extension_v3.2.6",
       "date": "Tue, 27 Apr 2021 17:48:43 GMT",

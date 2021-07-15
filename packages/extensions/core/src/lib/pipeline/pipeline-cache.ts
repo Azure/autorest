@@ -7,14 +7,6 @@ import { createHash } from "crypto";
 
 const md5 = (content: any) => createHash("md5").update(JSON.stringify(content)).digest("hex");
 
-function encode(path: string) {
-  return Buffer.from(path).toString("base64");
-}
-
-function decode(str: string) {
-  return Buffer.from(str, "base64").toString("utf8");
-}
-
 let cacheFolder: string | undefined;
 async function getCacheFolder() {
   if (!cacheFolder) {
@@ -53,14 +45,7 @@ export async function readCache(key: string | undefined, sink: DataSink): Promis
       if (await isDirectory(folder)) {
         for (const each of await readdir(folder)) {
           const item = JSON.parse(await readFile(join(folder, each)));
-          const dh = await sink.WriteData(
-            item.key,
-            item.content,
-            item.identity,
-            item.artifactType,
-            undefined,
-            undefined,
-          );
+          const dh = await sink.writeData(item.key, item.content, item.identity, item.artifactType);
           handles.push(dh);
         }
       }

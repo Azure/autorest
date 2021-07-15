@@ -118,7 +118,12 @@ async function getFullPath(command: string, searchPath?: string): Promise<string
   return undefined;
 }
 
-async function fetchPackageMetadata(spec: string): Promise<any> {
+/**
+ * Resolve given package metadata.
+ * @param spec This can be a package name with version, the url to a tgz or a local folder.
+ * @returns Package metadata.
+ */
+export async function fetchPackageMetadata(spec: string): Promise<pacote.ManifestResult> {
   try {
     return await pacote.manifest(spec, {
       "cache": `${tmpdir()}/cache`,

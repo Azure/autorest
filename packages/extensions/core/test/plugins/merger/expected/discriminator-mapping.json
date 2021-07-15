@@ -28,7 +28,7 @@
           ],
           "name": "PetType",
           "originalLocations": [
-            "discriminator-mapping/discriminator-mapping.json#/components/schemas/PetType"
+            "mem://discriminator-mapping/discriminator-mapping.json#/components/schemas/PetType"
           ],
           "x-ms-secondary-file": false
         },
@@ -44,7 +44,7 @@
           ],
           "name": "Pet",
           "originalLocations": [
-            "discriminator-mapping/discriminator-mapping.json#/components/schemas/Pet"
+            "mem://discriminator-mapping/discriminator-mapping.json#/components/schemas/Pet"
           ],
           "x-ms-secondary-file": false
         },
@@ -79,7 +79,7 @@
           ],
           "name": "Cat",
           "originalLocations": [
-            "discriminator-mapping/discriminator-mapping.json#/components/schemas/Cat"
+            "mem://discriminator-mapping/discriminator-mapping.json#/components/schemas/Cat"
           ],
           "x-ms-secondary-file": false
         },
@@ -107,7 +107,7 @@
           ],
           "name": "Dog",
           "originalLocations": [
-            "discriminator-mapping/discriminator-mapping.json#/components/schemas/Dog"
+            "mem://discriminator-mapping/discriminator-mapping.json#/components/schemas/Dog"
           ],
           "x-ms-secondary-file": false
         },
@@ -135,7 +135,7 @@
           ],
           "name": "ModelWithMappingProp",
           "originalLocations": [
-            "discriminator-mapping/discriminator-mapping.json#/components/schemas/ModelWithMappingProp"
+            "mem://discriminator-mapping/discriminator-mapping.json#/components/schemas/ModelWithMappingProp"
           ],
           "x-ms-secondary-file": false
         },

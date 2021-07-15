@@ -364,4 +364,49 @@ describe("Modelerfour.Request", () => {
       expect(parameter?.deprecated).toEqual({});
     });
   });
+
+  describe("ignore headers with config", () => {
+    it("propagates extensions to request header definitions", async () => {
+      const spec = createTestSpec();
+      const operationDef = {
+        operationId: "headerToIgnore",
+        description: "Has header to ignore",
+        parameters: [
+          {
+            name: "foo",
+            in: "header",
+            schema: {
+              type: "string",
+            },
+          },
+          {
+            name: "bar",
+            in: "header",
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        responses: {
+          200: {
+            description: "Response with a header extension.",
+          },
+        },
+      };
+      addOperation(spec, "/headerToIgnore", {
+        post: operationDef,
+      });
+
+      const model = await runModeler(spec, {
+        modelerfour: {
+          "ignore-headers": ["foo"],
+        },
+      });
+      const parameters = model.operationGroups[0].operations[0].parameters;
+      assert(parameters);
+      expect(parameters).toHaveLength(2);
+      expect(parameters[1].language.default.serializedName).toEqual("bar");
+      expect(parameters[1].protocol).toEqual({ http: { in: "header" } });
+    });
+  });
 });

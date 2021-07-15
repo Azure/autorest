@@ -15,13 +15,13 @@ export function createPerFilePlugin(
 ): PipelinePlugin {
   return async (config, input, sink) => {
     const processor = await processorBuilder(config);
-    const files = await input.Enum();
+    const files = await input.enum();
     const result: Array<DataHandle> = [];
     for (const file of files) {
-      const fileIn = await input.ReadStrict(file);
+      const fileIn = await input.readStrict(file);
       try {
         // only keep/process files that actually have content in them (ie, no empty objects, no {directive:[]} files ).
-        const pluginInput = await fileIn.ReadObject<any>();
+        const pluginInput = await fileIn.readObject<any>();
 
         if (!(length(pluginInput) === 1 && pluginInput.directive) || length(pluginInput) === 0) {
           result.push(await processor(fileIn, sink));

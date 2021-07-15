@@ -1,12 +1,12 @@
 {
   "name": "@autorest/modelerfour",
-  "version": "4.19.2",
+  "version": "4.19.3",
   "description": "AutoRest Modeler Version Four (component)",
   "directories": {
     "doc": "docs"
   },
   "engines": {
-    "node": ">=10.13.0"
+    "node": ">=12.0.0"
   },
   "main": "dist/main.js",
   "typings": "dist/main.d.ts",
@@ -36,8 +36,8 @@
   "bugs": {
     "url": "https://github.com/Azure/autorest.modelerfour/issues"
   },
-  "homepage": "https://github.com/Azure/autorest.modelerfour/tree/master/modelerfour#readme",
-  "readme": "https://github.com/Azure/autorest.modelerfour/tree/master/modelerfour/readme.md",
+  "homepage": "https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour",
+  "readme": "https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour/readme.md",
   "devDependencies": {
     "@autorest/codemodel": "~4.15.0",
     "@autorest/extension-base": "~3.2.1",
@@ -58,20 +58,20 @@
     "chalk": "^4.1.0",
     "eslint-plugin-jest": "~24.3.2",
     "eslint-plugin-node": "~11.1.0",
-    "eslint-plugin-prettier": "~3.2.0",
-    "eslint-plugin-unicorn": "~27.0.0",
+    "eslint-plugin-prettier": "~3.4.0",
+    "eslint-plugin-unicorn": "~33.0.1",
     "eslint": "^7.17.0",
-    "jest": "^26.6.3",
+    "jest": "^27.0.4",
     "lodash": "~4.17.20",
-    "prettier": "~2.2.1",
+    "prettier": "~2.3.1",
     "recursive-diff": "~1.0.6",
     "rimraf": "^3.0.2",
     "source-map-support": "^0.5.19",
-    "ts-jest": "^26.4.4",
-    "ts-loader": "~8.0.14",
-    "typescript": "~4.2.3",
-    "webpack-cli": "~4.4.0",
-    "webpack": "~5.18.0"
+    "ts-jest": "^27.0.3",
+    "ts-loader": "~9.2.3",
+    "typescript": "~4.3.4",
+    "webpack-cli": "~4.7.2",
+    "webpack": "~5.40.0"
   },
   "dependencies": {}
 }

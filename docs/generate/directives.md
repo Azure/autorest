@@ -27,11 +27,41 @@ Directives consist of three parts:
   - A `property` can be filtered by:
     - its location within its parent object
 
-- **Transform**: denoted by the field `transform`, the actions we would like to be applied on the specified objects. The list of available variables and functions can be found in [eval.ts](https://github.com/Azure/autorest/blob/master/packages/extensions/core/src/lib/plugins/transformer/eval.ts)
+- **Transform**: denoted by the field `transform`, the actions we would like to be applied on the specified objects. The list of available variables and functions can be found in [eval.ts](https://github.com/Azure/autorest/blob/main/packages/extensions/core/src/lib/plugins/transformer/eval.ts)
 
 ## Built-in Directives
 
 [See built in directives here](./built-in-directives.md)
+
+## Debug a directive
+
+### `debug` flag
+
+Directive provide a `debug` field that will enable verbose logging of the directive run.
+
+Example:
+
+```yaml
+directive:
+  - from: swagger-document
+    where: $.paths
+    debug: true
+    transform: >-
+      $["x-abc"] = true
+```
+
+### `$lib.log` function
+
+Along with some other available function to the transform context(See [eval.ts](https://github.com/Azure/autorest/blob/main/packages/extensions/core/src/lib/plugins/transformer/eval.ts)) `$lib.log` lets you log.
+
+```yaml
+directive:
+  - from: swagger-document
+    where: $.paths
+    transform: >-
+      $lib.log($);
+      $["x-abc"] = true
+```
 
 ## Directive Scenarios
 
@@ -279,5 +309,5 @@ For language-specific directives, see the ones for:
 [paths]: https://swagger.io/docs/specification/paths-and-operations/
 [parameters]: https://swagger.io/docs/specification/describing-parameters/
 [components]: https://swagger.io/docs/specification/components/
-[x_ms_client_name]: https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-client-name
-[x_ms_enum]: https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum
+[x_ms_client_name]: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-client-name
+[x_ms_enum]: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-enum
