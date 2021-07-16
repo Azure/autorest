@@ -8,10 +8,10 @@ import {
   StringFormat,
   NumberFormat,
   MediaType,
-  filterOutXDash,
+  omitXDashProperties,
 } from "@azure-tools/openapi";
 import * as OpenAPI from "@azure-tools/openapi";
-import { items, values, Dictionary, length, keys } from "@azure-tools/linq";
+import { items, values, Dictionary, length } from "@azure-tools/linq";
 import {
   HttpMethod,
   HttpModel,
@@ -167,7 +167,7 @@ export class ModelerFour {
         contact: i.contact,
         license: i.license,
         termsOfService: i.termsOfService,
-        externalDocs: filterOutXDash<ExternalDocumentation>(this.input.externalDocs as any),
+        externalDocs: omitXDashProperties<ExternalDocumentation>(this.input.externalDocs as any),
         extensions: Interpretations.getExtensionProperties(i),
       },
       extensions: Interpretations.getExtensionProperties(this.input),
