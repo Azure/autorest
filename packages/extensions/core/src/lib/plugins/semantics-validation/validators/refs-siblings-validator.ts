@@ -1,5 +1,5 @@
 import { walk } from "@azure-tools/json";
-import oai3, { omitXDashKeys } from "@azure-tools/openapi";
+import oai3 from "@azure-tools/openapi";
 import { SemanticError, SemanticErrorCodes } from "../types";
 
 /**
@@ -23,7 +23,9 @@ export function validateRefsSiblings(spec: oai3.Model) {
       return "stop";
     }
     if (node.$ref && typeof node.$ref === "string") {
-      const keys = omitXDashKeys(Object.keys(node)).filter((x) => !allowedKeysNextToRef.has(x));
+      const keys = Object.keys(node)
+        .filter((x) => !allowedKeysNextToRef.has(x))
+        .filter((x) => !x.startsWith("x-"));
       if (keys.length > 0) {
         errors.push({
           level: "warn",
