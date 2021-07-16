@@ -5,8 +5,8 @@
   "directories": {
     "doc": "docs"
   },
-  "main": "dist/exports.js",
-  "typings": "dist/exports.d.ts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "engines": {
     "node": ">=12.0.0"
   },

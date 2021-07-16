@@ -1,6 +1,6 @@
 import { Session } from "@autorest/extension-base";
 import * as OpenAPI from "@azure-tools/openapi";
-import { values, length, items, ToDictionary, Dictionary } from "@azure-tools/linq";
+import { values, length, ToDictionary, Dictionary } from "@azure-tools/linq";
 import {
   ChoiceSchema,
   XmlSerlializationFormat,
@@ -10,7 +10,7 @@ import {
   ChoiceValue,
   SetType,
 } from "@autorest/codemodel";
-import { StringFormat, JsonType, ParameterLocation } from "@azure-tools/openapi";
+import { StringFormat, JsonType, ParameterLocation, includeXDashKeys } from "@azure-tools/openapi";
 import { getPascalIdentifier } from "@azure-tools/codegen";
 
 export interface XMSEnum {
@@ -420,7 +420,7 @@ export class Interpretations {
   }
 
   static getExtensionProperties(dictionary: Dictionary<any>): Dictionary<any> | undefined {
-    const result = ToDictionary(OpenAPI.includeXDash(dictionary), (each) => dictionary[each]);
+    const result = ToDictionary(includeXDashKeys(dictionary), (each) => dictionary[each]);
     for (const each of removeKnownParameters) {
       delete result[each];
     }
