@@ -111,6 +111,11 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
   "debugger"?: any;
 
   /**
+   * Disable telemetry collection. ONLY works in CLI flags.
+   */
+  "disable-telemetry"?: boolean;
+
+  /*
    * Skip sourcemap generation. To speedup.
    */
   "skip-sourcemap"?: boolean;

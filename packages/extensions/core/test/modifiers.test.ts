@@ -10,7 +10,7 @@ import { AppRoot } from "../src/lib/constants";
 import oai3 from "@azure-tools/openapi";
 
 const generate = async (additionalConfig: any): Promise<oai3.Model> => {
-  const autoRest = new AutoRest(new RealFileSystem());
+  const autoRest = new AutoRest({ fileSystem: new RealFileSystem() });
   autoRest.AddConfiguration({
     "input-file": join(AppRoot, "test", "resources", "tiny.yaml"),
     "use-extension": { "@autorest/modelerfour": join(AppRoot, "../modelerfour") },

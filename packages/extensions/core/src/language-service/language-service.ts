@@ -66,7 +66,7 @@ class Result {
   public ready = () => {};
 
   constructor(private readonly service: OpenApiLanguageService, private configurationUrl: string) {
-    this.AutoRest = new AutoRest(service, configurationUrl);
+    this.AutoRest = new AutoRest({ fileSystem: service, configFileOrFolderUri: configurationUrl });
 
     this.onDispose.push(this.AutoRest.GeneratedFile.Subscribe((a, artifact) => this.artifacts.push(artifact)));
     this.onDispose.push(
@@ -352,7 +352,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
 
   public async generate(documentUri: string, language: string, configuration: any): Promise<GenerationResults> {
     const cfgFile = await this.getConfiguration(documentUri);
-    const autorest = new AutoRest(this, cfgFile);
+    const autorest = new AutoRest({ fileSystem: this, configFileOrFolderUri: cfgFile });
     const cfg: any = {};
     cfg[language] = {
       "output-folder": "/generated",
@@ -709,7 +709,7 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
 
     // is there a config file that contains the document as an input?
     for (const configFile of configFiles) {
-      const a = new AutoRest(this, configFile);
+      const a = new AutoRest({ fileSystem: this, configFileOrFolderUri: configFile });
       const inputs = (await a.view).config.inputFileUris;
       for (const input of inputs) {
         if (input === documentUri || decodeURIComponent(input) == decodeURIComponent(documentUri)) {

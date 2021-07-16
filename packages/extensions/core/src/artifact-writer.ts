@@ -1,5 +1,4 @@
 import { Artifact } from "./lib/artifact";
-import { AutorestContext } from "./lib/context";
 import { writeBinary, writeString } from "@azure-tools/uri";
 import { AutorestConfiguration } from "../../../libs/configuration/dist";
 

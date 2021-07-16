@@ -20,6 +20,7 @@ import { VERSION } from "../constants";
 import { StatsCollector } from "../stats";
 import { LoggingSession } from "./logging-session";
 import { PipelinePluginDefinition } from "../pipeline/plugin-loader";
+import { TelemetryClient } from "applicationinsights";
 
 export class AutorestContext implements AutorestLogger {
   public config: AutorestConfiguration;
@@ -32,6 +33,7 @@ export class AutorestContext implements AutorestLogger {
     public messageEmitter: MessageEmitter,
     public stats: StatsCollector,
     public asyncLogManager: LoggingSession,
+    public telemetryClient?: TelemetryClient,
     private plugin?: PipelinePluginDefinition,
   ) {
     this.config = config;
@@ -205,6 +207,7 @@ export class AutorestContext implements AutorestLogger {
         this.messageEmitter,
         this.stats,
         this.asyncLogManager,
+        this.telemetryClient,
         plugin,
       );
     }
@@ -222,6 +225,7 @@ export class AutorestContext implements AutorestLogger {
       this.messageEmitter,
       this.stats,
       this.asyncLogManager,
+      this.telemetryClient,
       this.plugin,
     );
   }

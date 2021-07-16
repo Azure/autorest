@@ -4,10 +4,13 @@
  *--------------------------------------------------------------------------------------------*/
 /* eslint-disable no-console */
 import "source-map-support/register";
-import { omit } from "lodash";
-import { configureLibrariesLogger } from "@autorest/common";
-import { EventEmitter } from "events";
 import { AutorestCliArgs, parseAutorestCliArgs } from "@autorest/configuration";
+import { configureLibrariesLogger } from "@autorest/common";
+import { createTelemetryClient } from "./telemetry";
+import { EventEmitter } from "events";
+import { omit } from "lodash";
+import { TelemetryClient } from "applicationinsights";
+
 EventEmitter.defaultMaxListeners = 100;
 process.env["ELECTRON_RUN_AS_NODE"] = "1";
 delete process.env["ELECTRON_NO_ATTACH_CONSOLE"];
@@ -18,15 +21,7 @@ const color: (text: string) => string = (<any>global).color ? (<any>global).colo
 // the console app starts for real here.
 
 import { EnhancedFileSystem, Parse, RealFileSystem } from "@azure-tools/datastore";
-import {
-  clearFolder,
-  createFolderUri,
-  makeRelativeUri,
-  readUri,
-  resolveUri,
-  writeBinary,
-  writeString,
-} from "@azure-tools/uri";
+import { clearFolder, createFolderUri, readUri, resolveUri, writeBinary, writeString } from "@azure-tools/uri";
 import { resolve as currentDirectory } from "path";
 import { Help } from "./help";
 import { Artifact } from "./lib/artifact";
@@ -36,6 +31,7 @@ import { Channel, Message } from "./lib/message";
 import { VERSION } from "./lib/constants";
 import { AutorestCoreLogger } from "./lib/context/logger";
 import { ArtifactWriter } from "./artifact-writer";
+import { autorestInit } from "./commands";
 
 let verbose = false;
 let debug = false;
@@ -85,60 +81,6 @@ function subscribeMessages(api: AutoRest, errorCounter: () => void) {
   });
 }
 
-async function autorestInit(title = "API-NAME", inputs: Array<string> = ["LIST INPUT FILES HERE"]) {
-  const cwdUri = createFolderUri(currentDirectory());
-  for (let i = 0; i < inputs.length; ++i) {
-    try {
-      inputs[i] = makeRelativeUri(cwdUri, inputs[i]);
-    } catch {
-      // no worries
-    }
-  }
-  console.log(
-    `# ${title}
-> see https://aka.ms/autorest
-
-This is the AutoRest configuration file for the ${title}.
-
----
-## Getting Started
-To build the SDK for ${title}, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
-
-> ~autorest~
-
-To see additional help and options, run:
-
-> ~autorest --help~
----
-
-## Configuration for generating APIs
-
-...insert-some-meanigful-notes-here...
-
----
-#### Basic Information
-These are the global settings for the API.
-
-~~~ yaml
-# list all the input OpenAPI files (may be YAML, JSON, or Literate- OpenAPI markdown)
-input-file:
-${inputs.map((x) => "  - " + x).join("\n")}
-~~~
-
----
-#### Language-specific settings: CSharp
-
-These settings apply only when ~--csharp~ is specified on the command line.
-
-~~~ yaml $(csharp)
-csharp:
-  # override the default output folder
-  output-folder: generated/csharp
-~~~
-`.replace(/~/g, "`"),
-  );
-}
-
 let exitcode = 0;
 
 let cleared = false;
@@ -158,6 +100,8 @@ async function doClearFolders(protectFiles: Set<string>, clearFolders: Set<strin
     }
   }
 }
+
+let globalTelemetryClient: TelemetryClient | undefined;
 
 async function currentMain(autorestArgs: Array<string>): Promise<number> {
   if (autorestArgs[0] === "init") {
@@ -181,6 +125,10 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   const logger = new RootLogger();
   const args = parseAutorestCliArgs([...autorestArgs, ...more], { logger });
 
+  const telemetryClient = createTelemetryClient({ disable: args.options["disable-telemetry"] });
+  globalTelemetryClient = telemetryClient;
+  trackCliArgs(telemetryClient, args);
+
   if (!args.options["message-format"] || args.options["message-format"] === "regular") {
     console.log(color(`> Loading AutoRest core      '${__dirname}' (${VERSION})`));
   }
@@ -202,10 +150,11 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
 
   const githubToken = args.options["github-auth-token"] ?? process.env.GITHUB_AUTH_TOKEN;
   // get an instance of AutoRest and add the command line switches to the configuration.
-  const api = new AutoRest(
-    new EnhancedFileSystem(githubToken),
-    resolveUri(currentDirUri, args.configFileOrFolder ?? "."),
-  );
+  const api = new AutoRest({
+    fileSystem: new EnhancedFileSystem(githubToken),
+    configFileOrFolderUri: resolveUri(currentDirUri, args.configFileOrFolder ?? "."),
+    telemetryClient,
+  });
   api.AddConfiguration(args.options);
 
   // listen for output messages and file writes
@@ -351,7 +300,11 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
       }
 
       // Create the autorest instance for that item
-      const instance = new AutoRest(new RealFileSystem(), config.configFileFolderUri);
+      const instance = new AutoRest({
+        fileSystem: new RealFileSystem(),
+        configFileOrFolderUri: config.configFileFolderUri,
+        telemetryClient: api.telemetryClient,
+      });
       instance.GeneratedFile.Subscribe((_, file) => {
         if (file.uri.endsWith(".json")) {
           const more = JSON.parse(file.content);
@@ -379,7 +332,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
       subscribeMessages(instance, () => exitcode++);
 
       // set configuration for that item
-      instance.AddConfiguration(omit(batchContext, "input-file"));
+      instance.AddConfiguration(omit(batchContext.config, "input-file"));
       instance.AddConfiguration({ "input-file": eachFile });
 
       console.log(`Running autorest for *${path}* `);
@@ -440,7 +393,6 @@ async function batch(api: AutoRest, args: AutorestCliArgs): Promise<void> {
  */
 async function mainImpl(): Promise<number> {
   let autorestArgs: Array<string> = [];
-  const exitcode = 0;
 
   try {
     autorestArgs = process.argv.slice(2);
@@ -470,6 +422,23 @@ function timestampDebugLog(content: string) {
   }
 }
 
+function trackCliArgs(telemetryClient: TelemetryClient, args: AutorestCliArgs) {
+  const properties: Record<string, boolean> = {
+    configFileOrFolder: args.configFileOrFolder !== undefined,
+  };
+
+  for (const [key, value] of Object.entries(args.options)) {
+    properties[key] = value !== false && value !== undefined;
+  }
+  telemetryClient.trackEvent({
+    name: "CliArgs",
+    properties: {
+      args: properties,
+    },
+  });
+  telemetryClient.flush();
+}
+
 async function main() {
   let exitcode = 0;
   try {
@@ -477,6 +446,9 @@ async function main() {
   } catch {
     exitcode = 102;
   } finally {
+    await new Promise<void>((r) => {
+      globalTelemetryClient?.flush({ callback: () => r() });
+    });
     try {
       timestampDebugLog("Shutting Down.");
       await Shutdown();
