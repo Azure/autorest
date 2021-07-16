@@ -1,6 +1,5 @@
 import oai3 from "@azure-tools/openapi";
 import { SemanticErrorCodes } from "../types";
-import { validateDiscriminator } from "./discriminator-validator";
 import { validateRefsSiblings } from "./refs-siblings-validator";
 
 const baseModel: oai3.Model = {

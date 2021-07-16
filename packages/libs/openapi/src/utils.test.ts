@@ -40,7 +40,7 @@ describe("OpenAPI utils", () => {
   it("includeXDashProperties returns undefined if undefined is passed", () => {
     const result = includeXDashProperties(undefined);
     // Type validation
-    expect<undefined>(undefined).toEqual(undefined);
+    expect<undefined>(result).toEqual(undefined);
   });
 
   it("omitXDashProperties returns x- properties", () => {
@@ -60,6 +60,6 @@ describe("OpenAPI utils", () => {
   it("omitXDashProperties returns undefined if undefined is passed", () => {
     const result = omitXDashProperties(undefined);
     // Type validation
-    expect<undefined>(undefined).toEqual(undefined);
+    expect<undefined>(result).toEqual(undefined);
   });
 });

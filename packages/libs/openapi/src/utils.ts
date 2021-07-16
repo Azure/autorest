@@ -21,7 +21,7 @@ export function omitXDashKeys<T extends {}>(dictionary: T): Exclude<keyof T, Ext
 export function includeXDashProperties<T extends Record<string | ExtensionKey, any> | undefined>(
   obj: T,
 ): T extends undefined ? undefined : Pick<T, Extract<keyof T, ExtensionKey>> {
-  if (!obj) {
+  if (obj === undefined) {
     return undefined as any;
   }
 
@@ -35,7 +35,7 @@ export function includeXDashProperties<T extends Record<string | ExtensionKey, a
 export function omitXDashProperties<T extends {} | undefined>(
   obj: T,
 ): T extends undefined ? undefined : Pick<T, Exclude<keyof T, ExtensionKey>> {
-  if (!obj) {
+  if (obj === undefined) {
     return undefined as any;
   }
 
