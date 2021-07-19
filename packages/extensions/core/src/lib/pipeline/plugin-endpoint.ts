@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { DataHandle, DataSink, DataSource, LazyPromise, Mapping, SmartPosition } from "@azure-tools/datastore";
-import { EnsureIsFolderUri } from "@azure-tools/uri";
+import { ensureIsFolderUri } from "@azure-tools/uri";
 import { ChildProcess, fork } from "child_process";
 import { RawSourceMap } from "source-map";
 import { Readable, Writable } from "stream";
@@ -48,6 +48,7 @@ export class AutoRestExtension extends EventEmitter {
       this.childProcess.kill();
     }
   }
+
   public static killAll() {
     for (const each of AutoRestExtension.processes) {
       if (!each.killed) {
@@ -60,15 +61,11 @@ export class AutoRestExtension extends EventEmitter {
     AutoRestExtension.processes.length = 0;
   }
 
-  public static async FromModule(modulePath: string): Promise<AutoRestExtension> {
-    const childProc = fork(modulePath, [], <any>{ silent: true });
-    return AutoRestExtension.fromChildProcess(modulePath, "", childProc);
-  }
-
   public static async fromChildProcess(
     extensionName: string,
     version: string,
     childProc: ChildProcess,
+    inspectTraffic = false,
   ): Promise<AutoRestExtension> {
     if (childProc.stdout === null) {
       throw new Error("Child Process has no stdout pipe.");
@@ -76,7 +73,14 @@ export class AutoRestExtension extends EventEmitter {
     if (childProc.stdin === null) {
       throw new Error("Child Process has no stdin pipe.");
     }
-    const plugin = new AutoRestExtension(extensionName, version, childProc.stdout, childProc.stdin, childProc);
+    const plugin = new AutoRestExtension(
+      extensionName,
+      version,
+      childProc.stdout,
+      childProc.stdin,
+      childProc,
+      inspectTraffic,
+    );
     if (childProc.stderr !== null) {
       childProc.stderr.pipe(process.stderr);
     }
@@ -100,23 +104,29 @@ export class AutoRestExtension extends EventEmitter {
     reader: Readable,
     writer: Writable,
     private childProcess: ChildProcess,
+    inspectTraffic = false,
   ) {
     super();
 
-    // hook in inspectors
-    reader.on("data", (chunk) => {
-      try {
-        this.__inspectTraffic.push([Date.now(), false, chunk.toString()]);
-      } catch {
-        // no worries
-      }
-    });
-    const writerProxy = new Writable({
-      write: (chunk: string | Buffer, encoding: BufferEncoding, callback: Function) => {
+    if (inspectTraffic) {
+      // hook in inspectors
+      reader.on("data", (chunk) => {
         try {
-          this.__inspectTraffic.push([Date.now(), true, chunk.toString()]);
+          this.__inspectTraffic.push([Date.now(), false, chunk.toString()]);
         } catch {
           // no worries
+        }
+      });
+    }
+
+    const writerProxy = new Writable({
+      write: (chunk: string | Buffer, encoding: BufferEncoding, callback: Function) => {
+        if (inspectTraffic) {
+          try {
+            this.__inspectTraffic.push([Date.now(), true, chunk.toString()]);
+          } catch {
+            // no worries
+          }
         }
         return writer.write(chunk, encoding, <any>callback);
       },
@@ -127,19 +137,21 @@ export class AutoRestExtension extends EventEmitter {
     channel.listen();
 
     // initiator
-    const dispatcher = (fnName: string) => async (sessionId: string, ...rest: Array<any>) => {
-      try {
-        const endpoint = this.apiInitiatorEndpoints[sessionId];
-        if (endpoint) {
-          return await (<any>endpoint)[fnName](...rest);
+    const dispatcher =
+      (fnName: string) =>
+      async (sessionId: string, ...rest: Array<any>) => {
+        try {
+          const endpoint = this.apiInitiatorEndpoints[sessionId];
+          if (endpoint) {
+            return await (<any>endpoint)[fnName](...rest);
+          }
+        } catch (e) {
+          if (e != "Cancellation requested.") {
+            // Suppress this from hitting the console.
+            // todo: we should see if we can put it out as an event.
+          }
         }
-      } catch (e) {
-        if (e != "Cancellation requested.") {
-          // Suppress this from hitting the console.
-          // todo: we should see if we can put it out as an event.
-        }
-      }
-    };
+      };
     this.apiInitiator = {
       ReadFile: dispatcher("ReadFile"),
       GetValue: dispatcher("GetValue"),
@@ -250,11 +262,11 @@ export class AutoRestExtension extends EventEmitter {
     const friendly2internal: (name: string) => Promise<string | undefined> = async (name) =>
       (
         (await inputFileHandles).filter(
-          (h) => h.Description === name || decodeURIComponent(h.Description) === decodeURIComponent(name),
+          (h) => h.description === name || decodeURIComponent(h.description) === decodeURIComponent(name),
         )[0] || {}
       ).key;
     const internal2friendly: (name: string) => Promise<string | undefined> = async (key) =>
-      ((await inputScope.Read(key)) || <any>{}).Description;
+      ((await inputScope.read(key)) || <any>{}).description;
 
     const writeFileToSinkAndNotify = async (
       filename: string,
@@ -269,7 +281,7 @@ export class AutoRestExtension extends EventEmitter {
       let handle: DataHandle;
       if (typeof (<any>sourceMap).mappings === "string") {
         onFile(
-          (handle = await sink.WriteDataWithSourceMap(
+          (handle = await sink.writeDataWithSourceMap(
             filename,
             content,
             artifactType,
@@ -279,20 +291,16 @@ export class AutoRestExtension extends EventEmitter {
         );
       } else {
         onFile(
-          (handle = await sink.WriteData(
-            filename,
-            content,
-            ["fix-me-here2"],
-            artifactType,
-            <Array<Mapping>>sourceMap,
-            await inputFileHandles,
-          )),
+          (handle = await sink.writeData(filename, content, ["fix-me-here2"], artifactType, {
+            mappings: sourceMap as any,
+            mappingSources: await inputFileHandles,
+          })),
         );
       }
       return {
         uri: handle.key,
         type: handle.artifactType,
-        content: await handle.ReadData(),
+        content: await handle.readData(),
       };
     };
 
@@ -303,12 +311,12 @@ export class AutoRestExtension extends EventEmitter {
       },
       async ReadFile(filename: string): Promise<string> {
         try {
-          const file = await inputScope.ReadStrict((await friendly2internal(filename)) || filename);
+          const file = await inputScope.readStrict((await friendly2internal(filename)) || filename);
           return await file.ReadData();
         } catch (E) {
           // try getting the file from the output-folder
           try {
-            const result = await context.fileSystem.ReadFile(`${context.config.outputFolderUri}${filename}`);
+            const result = await context.fileSystem.read(`${context.config.outputFolderUri}${filename}`);
             return result;
           } catch (E2) {
             // no file there!
@@ -350,7 +358,7 @@ export class AutoRestExtension extends EventEmitter {
           .filter((x) => {
             return typeof artifactType !== "string" || artifactType === x.artifactType;
           })
-          .map((x) => x.Description);
+          .map((x) => x.description);
 
         // if the request returned items, or they didn't specify a path/artifacttype
         if (inputs.length > 0 || artifactType === null || artifactType === undefined) {
@@ -360,9 +368,7 @@ export class AutoRestExtension extends EventEmitter {
         // we'd like to be able to ask the host for a file directly (but only if it's supposed to be in the output-folder)
         const t = context.config.outputFolderUri.length;
         return (
-          await context.fileSystem.EnumerateFileUris(
-            EnsureIsFolderUri(`${context.config.outputFolderUri}${artifactType || ""}`),
-          )
+          await context.fileSystem.list(ensureIsFolderUri(`${context.config.outputFolderUri}${artifactType || ""}`))
         ).map((each) => each.substr(t));
       },
 

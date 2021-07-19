@@ -2,6 +2,26 @@
   "name": "@azure-tools/deduplication",
   "entries": [
     {
+      "version": "3.1.0",
+      "tag": "@azure-tools/deduplication_v3.1.0",
+      "date": "Mon, 19 Jul 2021 15:15:42 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Drop support for node 10"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.5.294` to `~2.6.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.3.1` to `~4.4.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.0.269",
       "tag": "@azure-tools/deduplication_v3.0.269",
       "date": "Fri, 09 Apr 2021 19:53:22 GMT",

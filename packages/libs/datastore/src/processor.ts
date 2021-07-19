@@ -2,7 +2,7 @@ import { clone, values } from "@azure-tools/linq";
 import { Mapping } from "source-map";
 import { ProxyObject } from "./graph-builder";
 import { createGraphProxy, Node, ProxyNode, visit } from "./main";
-import { parseJsonPointer, serializeJsonPointer } from "./json-pointer";
+import { parseJsonPointer, serializeJsonPointer } from "@azure-tools/json";
 
 export interface AnyObject {
   [key: string]: any;

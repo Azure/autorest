@@ -1,6 +1,18 @@
 # Change Log - @autorest/common
 
-This log was last generated on Mon, 10 May 2021 18:01:37 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Jul 2021 15:15:41 GMT and should not be manually modified.
+
+## 1.2.0
+Mon, 19 Jul 2021 15:15:41 GMT
+
+### Minor changes
+
+- **Moved** literate-yaml logic to @autorest/configuration
+- Drop support for node 10
+
+### Patches
+
+- **Added** utils `isDefined`
 
 ## 1.1.4
 Mon, 10 May 2021 18:01:37 GMT

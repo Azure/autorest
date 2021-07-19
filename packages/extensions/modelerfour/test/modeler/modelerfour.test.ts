@@ -4,24 +4,17 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import { Parameter, SchemaResponse, ConstantSchema, SealedChoiceSchema } from "@autorest/codemodel";
-import { addOperation, addSchema, createTestSpec, findByName, InitialTestSpec, response, responses } from "../utils";
+import {
+  addOperation,
+  addSchema,
+  assertSchema,
+  createTestSpec,
+  findByName,
+  InitialTestSpec,
+  response,
+  responses,
+} from "../utils";
 import { runModeler } from "./modelerfour-utils";
-
-function assertSchema(
-  schemaName: string,
-  schemaList: Array<any> | undefined,
-  accessor: (schema: any) => any,
-  expected: any,
-) {
-  expect(schemaList).not.toBeFalsy();
-
-  // We've already asserted, but make the compiler happy
-  if (schemaList) {
-    const schema = findByName(schemaName, schemaList);
-    expect(schema).not.toBeFalsy();
-    expect(accessor(schema)).toEqual(expected);
-  }
-}
 
 describe("Modeler", () => {
   it("preserves 'info' metadata", async () => {
@@ -181,29 +174,6 @@ describe("Modeler", () => {
 
     // Make sure a legitimate format is detected correctly
     assertSchema("Int64", codeModel.schemas.numbers, (s) => s.precision, 64);
-  });
-
-  it("modelAsString=true creates ChoiceSchema for single-value enum", async () => {
-    const spec = createTestSpec();
-
-    addSchema(spec, "ShouldBeConstant", {
-      type: "string",
-      enum: ["html_strip"],
-    });
-
-    addSchema(spec, "ShouldBeChoice", {
-      "type": "string",
-      "enum": ["html_strip"],
-      "x-ms-enum": {
-        modelAsString: true,
-      },
-    });
-
-    const codeModel = await runModeler(spec);
-
-    assertSchema("ShouldBeConstant", codeModel.schemas.constants, (s) => s.value.value, "html_strip");
-
-    assertSchema("ShouldBeChoice", codeModel.schemas.choices, (s) => s.choices[0].value, "html_strip");
   });
 
   it("propagates 'nullable' to properties, parameters, collections, and responses", async () => {
@@ -680,58 +650,6 @@ describe("Modeler", () => {
     const existingAcceptParam = hasAcceptHeader?.parameters?.[1];
     expect(existingAcceptParam!.language.default.serializedName).toEqual("Accept");
     expect(existingAcceptParam!.origin).toEqual(undefined);
-  });
-
-  it("always-seal-x-ms-enum configuration produces SealedChoiceSchema for all x-ms-enums", async () => {
-    const spec = createTestSpec();
-
-    addSchema(spec, "ModelAsString", {
-      "type": "string",
-      "enum": ["Apple", "Orange"],
-      "x-ms-enum": {
-        modelAsString: true,
-      },
-    });
-
-    addSchema(spec, "ShouldBeSealed", {
-      "type": "string",
-      "enum": ["Apple", "Orange"],
-      "x-ms-enum": {
-        modelAsString: false,
-      },
-    });
-
-    addSchema(spec, "SingleValueEnum", {
-      "type": "string",
-      "enum": ["Apple"],
-      "x-ms-enum": {
-        modelAsString: false,
-      },
-    });
-
-    const codeModelWithoutSetting = await runModeler(spec, {
-      modelerfour: {
-        "always-seal-x-ms-enums": false,
-      },
-    });
-
-    assertSchema("ModelAsString", codeModelWithoutSetting.schemas.choices, (s) => s.choiceType.type, "string");
-
-    assertSchema("ShouldBeSealed", codeModelWithoutSetting.schemas.sealedChoices, (s) => s.choiceType.type, "string");
-
-    assertSchema("SingleValueEnum", codeModelWithoutSetting.schemas.constants, (s) => s.valueType.type, "string");
-
-    const codeModelWithSetting = await runModeler(spec, {
-      modelerfour: {
-        "always-seal-x-ms-enums": true,
-      },
-    });
-
-    assertSchema("ModelAsString", codeModelWithSetting.schemas.sealedChoices, (s) => s.choiceType.type, "string");
-
-    assertSchema("ShouldBeSealed", codeModelWithSetting.schemas.sealedChoices, (s) => s.choiceType.type, "string");
-
-    assertSchema("SingleValueEnum", codeModelWithSetting.schemas.sealedChoices, (s) => s.choiceType.type, "string");
   });
 
   it("allows header parameters with 'x-ms-api-version: true' to become full api-version parameters", async () => {

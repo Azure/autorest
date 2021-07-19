@@ -2,6 +2,125 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.5.0",
+      "tag": "@autorest/core_v3.5.0",
+      "date": "Mon, 19 Jul 2021 15:15:41 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Added** `debug` flag to directive to enable additional logging"
+          },
+          {
+            "comment": "**Added** support for changing end of line of generated files with new `eol` config."
+          },
+          {
+            "comment": "**Feature** Resolve relative servers url using spec host"
+          },
+          {
+            "comment": "Allow suppressing warnings without source"
+          },
+          {
+            "comment": "Drop support for node 10"
+          },
+          {
+            "comment": "**Perf** Memory usage improvements"
+          },
+          {
+            "comment": "**Perf** Unload sourcemap from memory if not used"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "**Added** Flag to skip sourcemap generation"
+          },
+          {
+            "comment": "**Fix** sourcemap for multiple plugins"
+          },
+          {
+            "comment": "**Fix** Issue in directive manipulator preventing multiple directive to run on OpenApi3 documents"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.1.4` to `~1.2.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/configuration\" from `~1.5.0` to `~1.6.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/schemas\" from `~1.1.4` to `~1.2.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.2.2` to `~0.3.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.5.294` to `~2.6.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.3.1` to `~4.4.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/deduplication\" from `~3.0.269` to `~3.1.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/extension\" from `~3.2.7` to `~3.3.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/json\" from `~1.0.0` to `~1.1.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/jsonschema\" from `~1.0.0` to `~1.1.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/oai2-to-oai3\" from `~4.2.281` to `~4.3.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.1.3` to `~3.2.0`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.4.5",
+      "tag": "@autorest/core_v3.4.5",
+      "date": "Thu, 03 Jun 2021 22:37:55 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Blaming files not loaded by autorest"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/configuration\" from `~1.4.1` to `~1.5.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/schemas\" from `~1.1.3` to `~1.1.4`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.4.4",
+      "tag": "@autorest/core_v3.4.4",
+      "date": "Wed, 26 May 2021 18:31:17 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Bump** @autorest/configuration with fix with yarn/cli.js not found"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/configuration\" from `~1.4.0` to `~1.4.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/extension\" from `~3.2.6` to `~3.2.7`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.4.3",
       "tag": "@autorest/core_v3.4.3",
       "date": "Thu, 20 May 2021 16:41:13 GMT",

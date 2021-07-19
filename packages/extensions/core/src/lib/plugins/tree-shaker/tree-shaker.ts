@@ -806,7 +806,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 }
 
 async function shakeTree(context: AutorestContext, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
+  const inputs = await Promise.all((await input.Enum()).map(async (x) => input.readStrict(x)));
   const result: Array<DataHandle> = [];
   const isSimpleTreeShake = !!context.GetEntry("simple-tree-shake");
   for (const each of inputs) {
@@ -824,13 +824,10 @@ async function shakeTree(context: AutorestContext, input: DataSource, sink: Data
     });
 
     result.push(
-      await sink.writeObject(
-        "oai3.shaken.json",
-        output,
-        each.identity,
-        "openapi-document-shaken",
-        await shaker.getSourceMappings(),
-      ),
+      await sink.writeObject("oai3.shaken.json", output, each.identity, "openapi-document-shaken", {
+        mappings: await shaker.getSourceMappings(),
+        mappingSources: [each],
+      }),
     );
   }
   return new QuickDataSource(result, input.pipeState);

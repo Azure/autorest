@@ -2,7 +2,6 @@ export * from "./exec";
 export * from "./file-generator";
 export * from "./initializer";
 export * from "./intersect";
-export * from "./dictionary-filter";
 export * from "./pluralization";
 export * from "./text-manipulation";
 export * from "./utility";

@@ -1,6 +1,6 @@
 # <img align="center" src="./docs/images/logo.png"> AutoRest
 
-The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) format.
+The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to _AutoRest_ is a spec that describes the REST API using the [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) format.
 
 ## Packages
 
@@ -14,6 +14,7 @@ The **AutoRest** tool generates client libraries for accessing RESTful web servi
 | [@autorest/csharp][csharp_src]                  | [Changelog][csharp_chg]         | ![](https://img.shields.io/npm/v/@autorest/csharp)           |                                                                   |
 | [@autorest/go][go_src]                          | [Changelog][go_chg]             | ![](https://img.shields.io/npm/v/@autorest/go)               |                                                                   |
 | [@autorest/java][java_src]                      | [Changelog][java_chg]           | ![](https://img.shields.io/npm/v/@autorest/java)             |                                                                   |
+| [@autorest/powershell][powershell_src]          | [Changelog][powershell_chg]     | ![](https://img.shields.io/npm/v/@autorest/powershell)       |                                                                   |
 | [@autorest/python][python_src]                  | [Changelog][python_chg]         | ![](https://img.shields.io/npm/v/@autorest/python)           |                                                                   |
 | [@autorest/swift][swift_src]                    | [Changelog][swift_chg]          | ![](https://img.shields.io/npm/v/@autorest/swift)            |                                                                   |
 | [@autorest/typescript][typescript_src]          | [Changelog][typescript_chg]     | ![](https://img.shields.io/npm/v/@autorest/typescript)       |                                                                   |
@@ -39,10 +40,12 @@ The **AutoRest** tool generates client libraries for accessing RESTful web servi
 [java_src]: https://github.com/Azure/autorest.java
 [swift_src]: https://github.com/Azure/autorest.swift
 [typescript_src]: https://github.com/Azure/autorest.typescript
+[powershell_src]: https://github.com/Azure/autorest.powershell
 [codemodel_src]: packages/libs/codemodel
 [common_src]: packages/libs/common
 [configuration_src]: packages/libs/configuration
 [extension_base_src]: packages/libs/extension-base
+[oai2-to-oai3_src]: packages/libs/oai2-to-oai3_src
 [extension_src]: packages/libs/extension
 [codegen_src]: packages/libs/codegen
 [openapi_src]: packages/libs/openapi
@@ -58,6 +61,7 @@ The **AutoRest** tool generates client libraries for accessing RESTful web servi
 [java_chg]: https://github.com/Azure/autorest.java/releases
 [swift_chg]: https://github.com/Azure/autorest.swift
 [typescript_chg]: https://github.com/Azure/autorest.typescript
+[powershell_chg]: https://github.com/Azure/autorest.powershell/releases
 [codemodel_chg]: packages/libs/codemodel/CHANGELOG.md
 [common_chg]: packages/libs/common/CHANGELOG.md
 [configuration_chg]: packages/libs/configuration/CHANGELOG.md
@@ -89,5 +93,5 @@ Check our [internal developer docs](./docs/internal/readme.md) to learn about ou
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 <!--LINKS-->
-[docs_readme]: docs/readme.md
 
+[docs_readme]: docs/readme.md

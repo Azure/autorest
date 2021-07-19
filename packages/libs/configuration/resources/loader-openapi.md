@@ -4,7 +4,7 @@ This loads OpenAPI3 documents from the values in the configuration `input-file`.
 
 It requires no normalization, and will pass out the `openapi-document` artifacts.
 
-```yaml
+```yaml !$(adl)
 pipeline:
   openapi-document/loader-openapi:
     scope: perform-load
@@ -26,7 +26,7 @@ This loads OpenAPI2 documents from the values in the configuration `input-file`.
 It converts the files to OpenAPI3 and processes them to normalization as
 `openapi-document` artifacts.
 
-```yaml
+```yaml !$(adl)
 pipeline:
   swagger-document/loader-swagger:
     # plugin: loader # IMPLICIT: default to last item if split by '/'
@@ -60,4 +60,9 @@ pipeline:
   openapi-document/openapi-document-converter:
     input: swagger-document/identity
     # output-artifact: openapi-document
+```
+
+```yaml $(adl)
+use-extension:
+  "@autorest/adl": latest
 ```

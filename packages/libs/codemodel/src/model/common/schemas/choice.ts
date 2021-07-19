@@ -45,7 +45,8 @@ export class ChoiceValue extends Initializer {
 
 export class ChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema>
   extends Schema
-  implements ChoiceSchema<ChoiceType> {
+  implements ChoiceSchema<ChoiceType>
+{
   constructor(name: string, description: string, objectInitializer?: DeepPartial<ChoiceSchema<ChoiceType>>) {
     super(name, description, SchemaType.Choice);
     this.apply(objectInitializer);
@@ -66,7 +67,8 @@ export interface SealedChoiceSchema<ChoiceType extends PrimitiveSchema = StringS
 
 export class SealedChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema>
   extends Schema
-  implements SealedChoiceSchema<ChoiceType> {
+  implements SealedChoiceSchema<ChoiceType>
+{
   constructor(name: string, description: string, objectInitializer?: DeepPartial<ChoiceSchema<ChoiceType>>) {
     super(name, description, SchemaType.SealedChoice);
     this.apply(objectInitializer);

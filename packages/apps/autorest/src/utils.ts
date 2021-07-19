@@ -1,6 +1,6 @@
 import { AutorestArgs } from "./args";
-import { ConfigurationLoader } from "@autorest/configuration";
-import { AutorestLogger } from "../../../libs/configuration/node_modules/@autorest/common/dist";
+import { AutorestConfiguration, ConfigurationLoader } from "@autorest/configuration";
+import { AutorestLogger } from "@autorest/configuration/node_modules/@autorest/common";
 import { createFileOrFolderUri, createFolderUri, resolveUri } from "@azure-tools/uri";
 import { AppRoot } from "./constants";
 import { extensionManager, networkEnabled, selectVersion } from "./autorest-as-a-service";
@@ -28,11 +28,10 @@ export const getRequestedCoreVersion = (args: AutorestArgs): string | undefined 
 const cwd = process.cwd();
 
 /**
- * Tries to load the version of autorest core from a config file.
- * @param args CLI Version.
- * @param selectedVersion Path to or loaded version of @autorest/core.
+ * Tries to load the configuration of autorest.
+ * @param args CLI args.
  */
-export const findCoreVersionUsingConfiguration = async (args: AutorestArgs): Promise<string | undefined> => {
+export async function loadConfig(args: AutorestArgs): Promise<AutorestConfiguration> {
   const configFileOrFolder = resolveUri(createFolderUri(cwd), args.configFileOrFolder || ".");
   /* eslint-disable no-console */
   const logger: AutorestLogger = {
@@ -54,8 +53,8 @@ export const findCoreVersionUsingConfiguration = async (args: AutorestArgs): Pro
       chalk.yellow(`NOTE: AutoRest core version selected from configuration: ${chalk.yellow.bold(config.version)}.`),
     );
   }
-  return config.version;
-};
+  return config;
+}
 
 /**
  * Check if the requested version points to a local dev version of @autorest/core or there is one globally available.
@@ -81,34 +80,56 @@ export async function resolvePathForLocalVersion(requestedVersion: string | null
   return undefined;
 }
 
-export async function resolveCoreVersion(args: AutorestArgs): Promise<string> {
-  let requestedVersion: string | undefined = getRequestedCoreVersion(args);
-  if (!requestedVersion) {
-    const cfgVersion = await findCoreVersionUsingConfiguration(args);
+export async function resolveCoreVersion(config: AutorestConfiguration): Promise<string> {
+  const requestedVersion: string = getRequestedCoreVersion(config) ?? "latest-installed";
 
-    if (cfgVersion) {
-      requestedVersion = cfgVersion;
-    } else {
-      requestedVersion = "latest-installed";
-    }
-  }
-
-  const localVersion = await resolvePathForLocalVersion(args.version ? requestedVersion : null);
+  const localVersion = await resolvePathForLocalVersion(config.version ? requestedVersion : null);
   if (localVersion) {
     return localVersion;
   }
 
   // failing that, we'll continue on and see if NPM can do something with the version.
-  if (args.debug) {
+  if (config.debug) {
     // eslint-disable-next-line no-console
     console.log(`Network Enabled: ${await networkEnabled}`);
   }
 
   // wait for the bootstrapper check to finish.
-  await checkForAutoRestUpdate(args);
+  await checkForAutoRestUpdate(config);
 
   // logic to resolve and optionally install a autorest core package.
   // will throw if it's not doable.
-  const selectedVersion = await selectVersion(requestedVersion, args.force);
+  const selectedVersion = await selectVersion(requestedVersion, config.debugger);
   return selectedVersion.modulePath;
+}
+
+/**
+ *
+ * @param maxMemory Max memory string(2048m, 2g)
+ * @returns Max memory that will be allowed for the cnode process in MB
+ */
+export function parseMemory(maxMemory: string): number {
+  const regex = /^(\d+)([mg])$/i;
+  const match = regex.exec(maxMemory.trim());
+
+  if (!match) {
+    throw new Error(
+      `Couldn't parse memory setting ${maxMemory}. Please provide in this format: 2048m, 2g, etc. Supported units: m,g`,
+    );
+  }
+
+  const number = Number(match[1]);
+  const unit = match[2];
+  return number * getUnitMultiplier(unit);
+}
+
+function getUnitMultiplier(unit: string): number {
+  switch (unit) {
+    case "m":
+      return 1; // = 1024 * 1024;
+    case "g":
+      return 1024; // 1024 * 1024 * 1024;
+    default:
+      throw new Error(`Unexpected unit ${unit}.`);
+  }
 }

@@ -1,6 +1,25 @@
 # Change Log - @autorest/schemas
 
-This log was last generated on Thu, 20 May 2021 16:41:13 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Jul 2021 15:15:41 GMT and should not be manually modified.
+
+## 1.2.0
+Mon, 19 Jul 2021 15:15:41 GMT
+
+### Minor changes
+
+- **Feature** Add `x-ms-permissions` definition to swagger-schema"
+- **Improve** OpenAPI 3 schema for parameter: Give better error message when it doesn't match
+
+### Patches
+
+- **Fix** Link schema in OpenAPI3 can be empty
+
+## 1.1.4
+Thu, 03 Jun 2021 22:37:55 GMT
+
+### Patches
+
+- Allow x-ms-paths not to start with /
 
 ## 1.1.3
 Thu, 20 May 2021 16:41:13 GMT

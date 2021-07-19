@@ -17,7 +17,7 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 ### Autorest plugin configuration
 
 - Please don't edit this section unless you're re-configuring how the powershell extension plugs in to AutoRest
-  AutoRest needs the below config to pick this up as a plug-in - see https://github.com/Azure/autorest/blob/master/docs/developer/architecture/AutoRest-extension.md
+  AutoRest needs the below config to pick this up as a plug-in - see https://github.com/Azure/autorest/blob/main/docs/developer/architecture/AutoRest-extension.md
 
 ### ModelFour Options
 
@@ -95,10 +95,21 @@ modelerfour:
   # In this case ChildSchema will be removed and all reference to it will be updated to point to ParentSchema
   remove-empty-child-schemas: false|true
 
+  # List of header names that shouldn't be included in the codemodel.
+  # Those header would already be handled by the generator.
+  ignore-headers: string[]
+
+  # Make content-type property extensible for binary requests.
+  content-type-extensible: false|true
+
   # **TEMPORARY FLAG DO NOT DEPEND ON IT**
   # Disable anyobject type and default to type any instead.
   # This is a temporary flag to smooth transition. It WILL be removed in a future version.
   treat-type-object-as-anything: false|true
+
+  # **TEMPORARY FLAG DO NOT DEPEND ON IT**
+  # Enable older inconsistent behavior that an enum with a single value would become a constant by default.
+  seal-single-value-enum-by-default: false|true
 
   # customization of the identifier normalization and naming provided by the prenamer.
   # pascal|pascalcase - MultiWordIdentifier

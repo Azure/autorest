@@ -3,25 +3,24 @@
 //  Licensed under the MIT License. See License.txt in the project root for license information.
 // ---------------------------------------------------------------------------------------------
 
-import { RawSourceMap, SourceMapConsumer } from "source-map";
+import { RawSourceMap, SourceMapConsumer, MappingItem } from "source-map";
 
 /* @internal */
 export type JsonPath = Array<number | string>;
 
 /* @internal */
 export class SourceMap {
-  private consumer: SourceMapConsumer;
-
-  public constructor(map: RawSourceMap) {
-    this.consumer = new SourceMapConsumer(map);
+  public static async fromMap(map: RawSourceMap) {
+    return new SourceMap(await new SourceMapConsumer(map));
   }
+  public constructor(private consumer: SourceMapConsumer) {}
 
   /**
    * Uses the source map to determine which mappings are associated with a certain JSON path.
    * @param path  The JSON path to lookup.
    */
-  public LookupPath(path: JsonPath): Array<sourceMap.MappingItem> {
-    const result: Array<sourceMap.MappingItem> = [];
+  public LookupPath(path: JsonPath): Array<MappingItem> {
+    const result: Array<MappingItem> = [];
     this.consumer.eachMapping((mi) => {
       const itemPath = this.ExtractJsonPath(mi);
       if (
@@ -46,7 +45,7 @@ export class SourceMap {
     line: number,
     column: number,
   ): Array<{ line: number; column: number; path: JsonPath | null }> {
-    const sameLineResults: Array<sourceMap.MappingItem> = [];
+    const sameLineResults: Array<MappingItem> = [];
     this.consumer.eachMapping((mi) => {
       if (
         (mi.source === file || decodeURIComponent(mi.source) === decodeURIComponent(file)) &&
@@ -71,7 +70,7 @@ export class SourceMap {
     line: number,
     column: number,
   ): Array<{ file: string; line: number; column: number; path: JsonPath | null }> {
-    const sameLineResults: Array<sourceMap.MappingItem> = [];
+    const sameLineResults: Array<MappingItem> = [];
     this.consumer.eachMapping((mi) => {
       if (mi.generatedLine === line && mi.generatedColumn <= column) {
         sameLineResults.push(mi);
@@ -93,7 +92,7 @@ export class SourceMap {
    * This function tries to extract a JSON path from a mapping.
    * @param mi The mapping to extract the JSON path from.
    */
-  private ExtractJsonPath(mi: sourceMap.MappingItem): JsonPath | null {
+  private ExtractJsonPath(mi: MappingItem): JsonPath | null {
     try {
       const pathPart = mi.name.split("\n")[0];
       return JSON.parse(pathPart);

@@ -73,5 +73,9 @@ function parseValue(rawValue: string): any {
   rawValue = rawValue.match(/20\d\d-\d+-\d+/) ? `'${rawValue}'` : rawValue;
   // quote numbers with decimal point, we don't have any use for non-integer numbers (while on the other hand version strings may look like decimal numbers)
   rawValue = !isNaN(parseFloat(rawValue)) && rawValue.includes(".") ? `'${rawValue}'` : rawValue;
-  return Parse(rawValue);
+  try {
+    return Parse(rawValue);
+  } catch (e) {
+    return rawValue;
+  }
 }

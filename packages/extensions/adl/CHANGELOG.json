@@ -1,0 +1,23 @@
+{
+  "name": "@autorest/adl",
+  "entries": [
+    {
+      "version": "0.0.2",
+      "tag": "@autorest/adl_v0.0.2",
+      "date": "Mon, 19 Jul 2021 15:15:42 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/extension-base\" from `~3.2.1` to `~3.3.0`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.0.1",
+      "tag": "@autorest/adl_v0.0.1",
+      "date": "Thu, 03 Jun 2021 22:37:55 GMT",
+      "comments": {}
+    }
+  ]
+}

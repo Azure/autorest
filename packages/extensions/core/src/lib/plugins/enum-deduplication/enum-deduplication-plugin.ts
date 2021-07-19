@@ -4,17 +4,20 @@ import { PipelinePlugin } from "../../pipeline/common";
 import { EnumDeduplicator } from "./enum-deduplicator";
 
 async function deduplicateEnums(config: AutorestContext, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
+  const inputs = await Promise.all((await input.enum()).map(async (x) => input.readStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
     const deduplicator = new EnumDeduplicator(each);
     result.push(
-      await sink.WriteObject(
+      await sink.writeObject(
         "oai3.enum-deduplicated.json",
         await deduplicator.getOutput(),
         each.identity,
         "openapi-document-enum-deduplicated",
-        await deduplicator.getSourceMappings(),
+        {
+          mappings: await deduplicator.getSourceMappings(),
+          mappingSources: [each],
+        },
       ),
     );
   }

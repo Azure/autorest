@@ -57,35 +57,35 @@ function resolveNewIdentity(dataHandles: DataHandle[]): Map<string, string> {
   const map = new Map<string, string>();
 
   if (dataHandles.length === 1) {
-    const name = dataHandles[0].Description;
+    const name = dataHandles[0].description;
     return new Map([[name, basename(name)]]);
   }
 
-  const root = resolveCommonRoot(dataHandles.map((x) => x.Description));
+  const root = resolveCommonRoot(dataHandles.map((x) => x.description));
   for (const data of dataHandles) {
-    if (!data.Description.startsWith(root)) {
-      throw new Error(`Unexpected error: '${data.Description}' does not start with '${root}'`);
+    if (!data.description.startsWith(root)) {
+      throw new Error(`Unexpected error: '${data.description}' does not start with '${root}'`);
     }
-    map.set(data.Description, data.Description.substring(root.length));
+    map.set(data.description, data.description.substring(root.length));
   }
 
   return map;
 }
 
 async function normalizeIdentity(context: AutorestContext, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map((x) => input.ReadStrict(x)));
+  const inputs = await Promise.all((await input.enum()).map((x) => input.readStrict(x)));
   const identityMap = resolveNewIdentity(inputs);
 
   const results = await Promise.all(
     inputs.map(async (input) => {
-      const data = cloneDeep(await input.ReadObject());
-      const newName = identityMap.get(input.Description);
+      const data = cloneDeep(await input.readObject());
+      const newName = identityMap.get(input.description);
       if (!newName) {
-        throw new Error(`Unexpected error. Couldn't find mapping for data handle ${input.Description}`);
+        throw new Error(`Unexpected error. Couldn't find mapping for data handle ${input.description}`);
       }
       updateFileRefs(data, newName, identityMap);
 
-      return await sink.WriteData(newName, JSON.stringify(data, null, 2), input.identity, context.config.to);
+      return await sink.writeData(newName, JSON.stringify(data, null, 2), input.identity, context.config.to);
     }),
   );
 

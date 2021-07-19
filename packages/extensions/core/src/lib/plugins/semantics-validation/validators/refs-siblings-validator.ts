@@ -1,5 +1,5 @@
 import { walk } from "@azure-tools/json";
-import oai3, { excludeXDash, omitXDashProperties } from "@azure-tools/openapi";
+import oai3 from "@azure-tools/openapi";
 import { SemanticError, SemanticErrorCodes } from "../types";
 
 /**
@@ -30,7 +30,7 @@ export function validateRefsSiblings(spec: oai3.Model) {
         errors.push({
           level: "warn",
           code: SemanticErrorCodes.IgnoredPropertyNextToRef,
-          message: `Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/master/docs/openapi/howto/$ref-siblings.md for allowed values`,
+          message: `Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values`,
           path,
           params: {
             keys,

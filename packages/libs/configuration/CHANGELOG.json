@@ -2,6 +2,87 @@
   "name": "@autorest/configuration",
   "entries": [
     {
+      "version": "1.6.0",
+      "tag": "@autorest/configuration_v1.6.0",
+      "date": "Mon, 19 Jul 2021 15:15:41 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Docs** Add documenation about `--use`"
+          },
+          {
+            "comment": "**Added** New --memory configuration"
+          },
+          {
+            "comment": "**Added** `--skip-sourcemap` flag"
+          },
+          {
+            "comment": "**Fix** Handle invalid yaml in cli flag"
+          },
+          {
+            "comment": "Add `interactive` to config type"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "**Added** `debug` flag to directive to enable additional logging"
+          },
+          {
+            "comment": "**Added** Eol configuration"
+          },
+          {
+            "comment": "**Moved** literate-yaml logic from @autorest/common"
+          },
+          {
+            "comment": "Drop support for node 10"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.1.4` to `~1.2.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.3.1` to `~4.4.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/extension\" from `~3.2.7` to `~3.3.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.2.2` to `~0.3.0`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.5.0",
+      "tag": "@autorest/configuration_v1.5.0",
+      "date": "Thu, 03 Jun 2021 22:37:55 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add support for adl"
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.4.1",
+      "tag": "@autorest/configuration_v1.4.1",
+      "date": "Wed, 26 May 2021 18:31:17 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** issue when using --use: it would try to use yarn but couldn't find yarn/cli.js location"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/extension\" from `~3.2.6` to `~3.2.7`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.4.0",
       "tag": "@autorest/configuration_v1.4.0",
       "date": "Thu, 20 May 2021 16:41:13 GMT",

@@ -6,15 +6,13 @@
 import {
   DataHandle,
   DataSink,
-  IndexToPosition,
+  indexToPosition,
   ParseNode,
   StrictJsonSyntaxCheck,
   Parse,
   Mapping,
 } from "@azure-tools/datastore";
-import { OperationAbortedException } from "../exceptions";
-import { AutorestLogger } from "../logging";
-import { identitySourceMapping, strictMerge } from "../merging";
+import { OperationAbortedException, AutorestLogger, identitySourceMapping, strictMerge } from "@autorest/common";
 import { LiterateYamlErrorCodes } from "./error-codes";
 import { parseCodeBlocksFromMarkdown } from "./markdown-parser";
 
@@ -64,14 +62,14 @@ export async function parseCodeBlocks(
           logger.trackError({
             code: LiterateYamlErrorCodes.jsonParsingError,
             message: `Syntax Error Encountered:  ${error.message}`,
-            source: [{ position: IndexToPosition(data, error.index), document: data.key }],
+            source: [{ position: await indexToPosition(data, error.index), document: data.key }],
           });
           throw new OperationAbortedException();
         }
       }
 
       let failing = false;
-      const ast = await data.ReadYamlAst();
+      const ast = await data.readYamlAst();
 
       // quick syntax check.
       ParseNode(ast, async (message, index) => {
@@ -79,7 +77,7 @@ export async function parseCodeBlocks(
         logger.trackError({
           code: LiterateYamlErrorCodes.yamlParsingError,
           message: `Syntax Error Encountered:  ${message}`,
-          source: [{ position: IndexToPosition(data, index), document: data.key }],
+          source: [{ position: await indexToPosition(data, index), document: data.key }],
         });
       });
 
@@ -119,21 +117,21 @@ export async function mergeYamls(
   const newIdentity = ([] as string[]).concat(...yamlInputHandles.map((x) => x.identity));
 
   for (const yamlInputHandle of yamlInputHandles) {
-    const rawYaml = await yamlInputHandle.ReadData();
+    const rawYaml = await yamlInputHandle.readData();
     const inputGraph: any =
-      Parse(rawYaml, (message, index) => {
+      Parse(rawYaml, async (message, index) => {
         failed = true;
         if (logger) {
           logger.trackError({
             code: "yaml_parsing",
             message: message,
-            source: [{ document: yamlInputHandle.key, position: IndexToPosition(yamlInputHandle, index) }],
+            source: [{ document: yamlInputHandle.key, position: await indexToPosition(yamlInputHandle, index) }],
           });
         }
       }) || {};
 
     mergedGraph = strictMerge(mergedGraph, inputGraph);
-    const yaml = await yamlInputHandle.ReadYamlAst();
+    const yaml = await yamlInputHandle.readYamlAst();
     for (const mapping of identitySourceMapping(yamlInputHandle.key, yaml)) {
       mappings.push(mapping);
     }
@@ -147,5 +145,8 @@ export async function mergeYamls(
     throw new OperationAbortedException();
   }
 
-  return sink.WriteObject("merged YAMLs", mergedGraph, newIdentity, undefined, mappings, yamlInputHandles);
+  return sink.writeObject("merged YAMLs", mergedGraph, newIdentity, undefined, {
+    mappings: mappings,
+    mappingSources: yamlInputHandles,
+  });
 }

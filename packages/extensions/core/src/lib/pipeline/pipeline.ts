@@ -27,8 +27,10 @@ import { values } from "@azure-tools/linq";
 import { CORE_PLUGIN_MAP } from "../plugins";
 import { loadPlugins, PipelinePluginDefinition } from "./plugin-loader";
 import { mapValues, omitBy } from "lodash";
+import { promisify } from "util";
 
 const safeEval = createSandbox();
+const setImmediatePromise = promisify(setImmediate);
 
 const md5 = (content: any) => (content ? createHash("md5").update(JSON.stringify(content)).digest("hex") : undefined);
 
@@ -97,12 +99,9 @@ function buildPipeline(
     if (!cfg.scope) {
       scope = `pipeline.${stageName}`;
     }
-    const inputs: Array<string> = (!cfg.input
-      ? []
-      : Array.isArray(cfg.input)
-      ? cfg.input
-      : [cfg.input]
-    ).map((x: string) => resolvePipelineStageName(stageName, x));
+    const inputs: Array<string> = (!cfg.input ? [] : Array.isArray(cfg.input) ? cfg.input : [cfg.input]).map(
+      (x: string) => resolvePipelineStageName(stageName, x),
+    );
 
     const suffixes: Array<string> = [];
     // adds nodes using at least suffix `suffix`, the input nodes called `inputs` using the context `config`
@@ -234,7 +233,12 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
   const pipelineEmitterPlugin = createArtifactEmitterPlugin(
     async (context) =>
       new QuickDataSource([
-        await context.DataStore.getDataSink().writeObject("pipeline", pipeline.pipeline, ["fix-me-3"], "pipeline"),
+        await context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }).writeObject(
+          "pipeline",
+          pipeline.pipeline,
+          ["fix-me-3"],
+          "pipeline",
+        ),
       ]),
   );
 
@@ -308,7 +312,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
         // generate the key used to store/access cached content
         const names = await inputScope.Enum();
         const data = (
-          await Promise.all(names.map((name) => inputScope.ReadStrict(name).then((uri) => md5(uri.ReadData()))))
+          await Promise.all(names.map((name) => inputScope.readStrict(name).then((uri) => md5(uri.readData()))))
         ).sort();
 
         cacheKey = md5([context.configFileFolderUri, nodeName, ...data].join("«"));
@@ -325,25 +329,33 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
         // shortcut -- get the outputs directly from the cache.
         context.Message({
           Channel: times ? Channel.Information : Channel.Debug,
-          Text: `${nodeName} - CACHED inputs = ${(await inputScope.Enum()).length} [0.0 s]`,
+          Text: `${nodeName} - CACHED inputs = ${(await inputScope.enum()).length} [0.0 s]`,
         });
 
-        return await readCache(cacheKey, context.DataStore.getDataSink(node.outputArtifact));
+        return await readCache(
+          cacheKey,
+          context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }, node.outputArtifact),
+        );
       }
 
       const t1 = process.uptime() * 100;
       context.Message({
         Channel: times ? Channel.Information : Channel.Debug,
-        Text: `${nodeName} - START inputs = ${(await inputScope.Enum()).length}`,
+        Text: `${nodeName} - START inputs = ${(await inputScope.enum()).length}`,
       });
 
       // creates the actual plugin.
-      const scopeResult = await plugin(context, inputScope, context.DataStore.getDataSink(node.outputArtifact));
+      const scopeResult = await plugin(
+        context,
+        inputScope,
+        context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }, node.outputArtifact),
+      );
       const t2 = process.uptime() * 100;
 
+      const memSuffix = context.config.debug ? `[${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)} MB]` : "";
       context.Message({
         Channel: times ? Channel.Information : Channel.Debug,
-        Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]`,
+        Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]${memSuffix}`,
       });
 
       // if caching is enabled, let's cache this scopeResult.
@@ -358,6 +370,9 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
           // not settable on fs inputs anyway.
         }
       }
+
+      // Yield the event loop.
+      await setImmediatePromise();
 
       return scopeResult;
     } catch (e) {
@@ -451,7 +466,7 @@ async function emitStats(context: AutorestContext) {
   const plugin = createArtifactEmitterPlugin(
     async () =>
       new QuickDataSource([
-        await context.DataStore.getDataSink().writeObject(
+        await context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }).writeObject(
           "stats.json",
           context.stats.getAll(),
           ["stats"],
@@ -459,5 +474,9 @@ async function emitStats(context: AutorestContext) {
         ),
       ]),
   );
-  await plugin(context, new QuickDataSource([]), context.DataStore.getDataSink());
+  await plugin(
+    context,
+    new QuickDataSource([]),
+    context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }),
+  );
 }

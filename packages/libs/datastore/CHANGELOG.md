@@ -1,6 +1,20 @@
 # Change Log - @azure-tools/datastore
 
-This log was last generated on Tue, 27 Apr 2021 17:48:43 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Jul 2021 15:15:42 GMT and should not be manually modified.
+
+## 4.4.0
+Mon, 19 Jul 2021 15:15:42 GMT
+
+### Minor changes
+
+- **Remove** NodeT type
+- Drop support for node 10
+- **Perf** Memory usage improvements
+- **Perf** Unload sourcemap from memory if not used
+
+### Patches
+
+- **Fix** Sourcemap computation
 
 ## 4.3.1
 Tue, 27 Apr 2021 17:48:43 GMT
