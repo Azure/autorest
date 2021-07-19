@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/datastore",
+      "comment": "**Added** Support for yaml `<<` merge keyword in parser\"",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@azure-tools/datastore",
+  "email": "tiguerin@microsoft.com"
+}
