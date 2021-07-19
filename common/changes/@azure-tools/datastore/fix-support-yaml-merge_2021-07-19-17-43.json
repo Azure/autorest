@@ -3,7 +3,7 @@
     {
       "packageName": "@azure-tools/datastore",
       "comment": "**Added** Support for yaml `<<` merge keyword in parser\"",
-      "type": "patch"
+      "type": "minor"
     }
   ],
   "packageName": "@azure-tools/datastore",
