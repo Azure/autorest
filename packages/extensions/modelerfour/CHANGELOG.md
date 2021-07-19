@@ -1,6 +1,23 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Thu, 03 Jun 2021 22:37:55 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Jul 2021 15:15:41 GMT and should not be manually modified.
+
+## 4.20.0
+Mon, 19 Jul 2021 15:15:41 GMT
+
+### Minor changes
+
+- Added support for anonymous security scheme
+- **Added** New option to make Content-Type extensible
+- **Added** Configuration to ignore certain header names from being added to the model parameters lists
+- **Change** Single-value enums are extensible by default and will not generate a constant 
+- Drop support for node 10
+- **Perf** Flattener major performance improvement for large specs
+
+### Patches
+
+- **Fix** Ciruclar reference issue when using allOf parent referencing back to child in properties
+- **Improve** Duplicate schema resolution
 
 ## 4.19.3
 Thu, 03 Jun 2021 22:37:55 GMT

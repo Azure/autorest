@@ -1,6 +1,14 @@
 # Change Log - @azure-tools/openapi
 
-This log was last generated on Thu, 20 May 2021 16:41:13 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Jul 2021 15:15:42 GMT and should not be manually modified.
+
+## 3.2.0
+Mon, 19 Jul 2021 15:15:42 GMT
+
+### Minor changes
+
+- Drop support for node 10
+- **Update** include/exclude x-dash properties utils types
 
 ## 3.1.3
 Thu, 20 May 2021 16:41:13 GMT

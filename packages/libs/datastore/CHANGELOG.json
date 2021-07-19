@@ -2,6 +2,40 @@
   "name": "@azure-tools/datastore",
   "entries": [
     {
+      "version": "4.4.0",
+      "tag": "@azure-tools/datastore_v4.4.0",
+      "date": "Mon, 19 Jul 2021 15:15:42 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Remove** NodeT type"
+          },
+          {
+            "comment": "Drop support for node 10"
+          },
+          {
+            "comment": "**Perf** Memory usage improvements"
+          },
+          {
+            "comment": "**Perf** Unload sourcemap from memory if not used"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "**Fix** Sourcemap computation"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.5.294` to `~2.6.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/json\" from `~1.0.0` to `~1.1.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.3.1",
       "tag": "@azure-tools/datastore_v4.3.1",
       "date": "Tue, 27 Apr 2021 17:48:43 GMT",

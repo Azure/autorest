@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/oai2-to-oai3
 
-This log was last generated on Fri, 16 Apr 2021 15:18:54 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Jul 2021 15:15:42 GMT and should not be manually modified.
+
+## 4.3.0
+Mon, 19 Jul 2021 15:15:42 GMT
+
+### Minor changes
+
+- Drop support for node 10
 
 ## 4.2.281
 Fri, 16 Apr 2021 15:18:54 GMT

@@ -1,0 +1,27 @@
+{
+  "name": "@autorest/compare",
+  "entries": [
+    {
+      "version": "0.4.0",
+      "tag": "@autorest/compare_v0.4.0",
+      "date": "Mon, 19 Jul 2021 15:15:41 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Handle constructor with public/private parameters"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Drop support for node 10"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"autorest\" from `~3.2.3` to `~3.3.0`"
+          }
+        ]
+      }
+    }
+  ]
+}

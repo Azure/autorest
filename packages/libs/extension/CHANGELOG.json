@@ -2,6 +2,23 @@
   "name": "@azure-tools/extension",
   "entries": [
     {
+      "version": "3.3.0",
+      "tag": "@azure-tools/extension_v3.3.0",
+      "date": "Mon, 19 Jul 2021 15:15:42 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Installing extension when parent directory to ~/.autorest had a package.json"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Drop support for node 10"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.2.7",
       "tag": "@azure-tools/extension_v3.2.7",
       "date": "Wed, 26 May 2021 18:31:17 GMT",

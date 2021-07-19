@@ -2,6 +2,61 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.20.0",
+      "tag": "@autorest/modelerfour_v4.20.0",
+      "date": "Mon, 19 Jul 2021 15:15:41 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Added support for anonymous security scheme"
+          },
+          {
+            "comment": "**Added** New option to make Content-Type extensible"
+          },
+          {
+            "comment": "**Added** Configuration to ignore certain header names from being added to the model parameters lists"
+          },
+          {
+            "comment": "**Change** Single-value enums are extensible by default and will not generate a constant "
+          },
+          {
+            "comment": "Drop support for node 10"
+          },
+          {
+            "comment": "**Perf** Flattener major performance improvement for large specs"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "**Fix** Ciruclar reference issue when using allOf parent referencing back to child in properties"
+          },
+          {
+            "comment": "**Improve** Duplicate schema resolution"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/codemodel\" from `~4.15.0` to `~4.16.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/extension-base\" from `~3.2.1` to `~3.3.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.2.2` to `~0.3.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.5.294` to `~2.6.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.3.1` to `~4.4.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.1.3` to `~3.2.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.19.3",
       "tag": "@autorest/modelerfour_v4.19.3",
       "date": "Thu, 03 Jun 2021 22:37:55 GMT",

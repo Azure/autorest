@@ -1,6 +1,6 @@
 {
   "name": "@autorest/adl",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "AutoRest Adl",
   "engines": {
     "node": ">=14.0.0"
@@ -61,6 +61,6 @@
   },
   "dependencies": {
     "@azure-tools/adl": "~0.10.0",
-    "@autorest/extension-base": "~3.2.1"
+    "@autorest/extension-base": "~3.3.0"
   }
 }
