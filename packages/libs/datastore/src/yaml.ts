@@ -6,19 +6,8 @@
 // TODO: the following is only required because safeDump of "yaml-ast-parser" has this bug: https://github.com/mulesoft-labs/yaml-ast-parser/issues/30
 // PLEASE: remove the entire dependency to js-yaml once that is fixed!
 const { dump, load } = require("js-yaml");
-import yamlAst, {
-  YAMLNode,
-  YAMLScalar,
-  YAMLMapping,
-  YAMLSequence,
-  YAMLAnchorReference,
-  YamlMap,
-  Kind,
-  newMap,
-  newAnchorRef,
-  newMapping,
-  newScalar,
-} from "yaml-ast-parser";
+
+import * as yamlAst from "yaml-ast-parser";
 import { NewEmptyObject } from "./parsing/stable-object";
 import { JsonPath } from "./json-path/json-path";
 
@@ -26,11 +15,25 @@ import { JsonPath } from "./json-path/json-path";
  * reexport required elements
  */
 export { newScalar } from "yaml-ast-parser";
+export const Kind: {
+  SCALAR: number;
+  MAPPING: number;
+  MAP: number;
+  SEQ: number;
+  ANCHOR_REF: number;
+  INCLUDE_REF: number;
+} = yamlAst.Kind;
+export type YAMLNode = yamlAst.YAMLNode;
+export type YAMLScalar = yamlAst.YAMLScalar;
+export type YAMLMapping = yamlAst.YAMLMapping;
+export type YAMLMap = yamlAst.YamlMap;
+export type YAMLSequence = yamlAst.YAMLSequence;
+export type YAMLAnchorReference = yamlAst.YAMLAnchorReference;
 
-export const CreateYAMLAnchorRef: (key: string) => YamlMap = <any>newAnchorRef;
-export const CreateYamlMap: () => YamlMap = newMap;
-export const CreateYAMLMapping: (key: YAMLScalar, value: YAMLNode) => YAMLMapping = newMapping;
-export const CreateYAMLScalar: (value: string) => YAMLScalar = newScalar;
+export const CreateYAMLAnchorRef: (key: string) => YAMLMap = <any>yamlAst.newAnchorRef;
+export const CreateYAMLMap: () => YAMLMap = yamlAst.newMap;
+export const CreateYAMLMapping: (key: YAMLScalar, value: YAMLNode) => YAMLMapping = yamlAst.newMapping;
+export const CreateYAMLScalar: (value: string) => YAMLScalar = yamlAst.newScalar;
 
 export const parseYaml = load;
 
@@ -72,11 +75,11 @@ export function* Descendants(
           break;
         case Kind.MAP:
           if (deferResolvingMappings) {
-            for (const mapping of (todo.node as YamlMap).mappings) {
+            for (const mapping of (todo.node as YAMLMap).mappings) {
               todos.push({ node: mapping, path: todo.path.concat([mapping.key.value]) });
             }
           } else {
-            for (const mapping of (todo.node as YamlMap).mappings) {
+            for (const mapping of (todo.node as YAMLMap).mappings) {
               todos.push({ node: mapping, path: todo.path });
             }
           }
@@ -153,7 +156,7 @@ function ParseNodeInternal(
       onError("Syntax error: Encountered bare mapping.", yamlNode.startPosition);
       return ((yamlNode as any).valueFunc = () => null);
     case Kind.MAP: {
-      const yamlNodeMapping = yamlNode as YamlMap;
+      const yamlNodeMapping = yamlNode as YAMLMap;
       return ((yamlNode as any).valueFunc = memoize((cache, set) => {
         const result = NewEmptyObject();
         set(result);
