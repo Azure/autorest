@@ -260,6 +260,7 @@ export function Normalize<T>(object: T): T {
   norm(clone);
   return clone;
 }
+
 export function ToAst<T>(object: T): YAMLNode {
   return ParseToAst(fastStringify(object));
 }
