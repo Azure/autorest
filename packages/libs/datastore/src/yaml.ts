@@ -8,7 +8,6 @@
 const { dump, load } = require("js-yaml");
 
 import * as yamlAst from "yaml-ast-parser";
-import { NewEmptyObject } from "./parsing/stable-object";
 import { JsonPath } from "./json-path/json-path";
 
 /**
