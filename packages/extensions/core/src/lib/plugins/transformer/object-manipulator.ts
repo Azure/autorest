@@ -144,7 +144,7 @@ export async function manipulateObject(
   }
 
   // write back
-  const resultHandle = await target.writeData("manipulated", StringifyAst(ast), src.identity, undefined, {
+  const resultHandle = await target.writeData("manipulated", StringifyAst(ast), src.identity, src.artifactType, {
     mappings: mapping,
     mappingSources: mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src],
   });
