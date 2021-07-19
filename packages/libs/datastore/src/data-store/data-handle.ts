@@ -1,6 +1,6 @@
 import { MappedPosition, Position, RawSourceMap, SourceMapConsumer } from "source-map";
 import { promises as fs } from "fs";
-import { ParseToAst as parseAst, YAMLNode, parseYaml, parseNode } from "../yaml";
+import { ParseToAst as parseAst, YAMLNode, parseYAMLFast, parseNode } from "../yaml";
 import { getLineIndices } from "../parsing/text-utility";
 
 export interface Data {
@@ -118,7 +118,7 @@ export class DataHandle {
   public async readObjectFast<T>(): Promise<T> {
     // we're going to use the data, so let's not let it expire.
     this.item.accessed = true;
-    return this.item.cachedObject || (this.item.cachedObject = parseYaml(await this.readData()));
+    return this.item.cachedObject || (this.item.cachedObject = parseYAMLFast(await this.readData()));
   }
 
   public async readObject<T>(): Promise<T> {

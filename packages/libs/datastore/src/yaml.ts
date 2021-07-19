@@ -9,6 +9,7 @@ const { dump, load } = require("js-yaml");
 
 import * as yamlAst from "yaml-ast-parser";
 import { JsonPath } from "./json-path/json-path";
+import { cloneDeep } from "lodash";
 
 /**
  * reexport required elements
@@ -34,7 +35,7 @@ export const CreateYAMLMap: () => YAMLMap = yamlAst.newMap;
 export const CreateYAMLMapping: (key: YAMLScalar, value: YAMLNode) => YAMLMapping = yamlAst.newMapping;
 export const CreateYAMLScalar: (value: string) => YAMLScalar = yamlAst.newScalar;
 
-export const parseYaml = load;
+export const parseYAMLFast = load;
 
 export interface YAMLNodeWithPath {
   path: JsonPath;
@@ -239,19 +240,12 @@ export function StringifyAst(ast: YAMLNode): string {
   return fastStringify(parseNode<any>(ast).result);
 }
 
-export function Clone<T>(object: T): T {
-  if (object === undefined) {
-    return object;
-  }
-  return parseYAML<T>(fastStringify(object)).result;
-}
-
 /**
  * Normalizes the order of given object's keys (sorts recursively)
  */
 export function Normalize<T>(object: T): T {
   const seen = new WeakSet();
-  const clone = Clone<T>(object);
+  const clone = cloneDeep<T>(object);
   const norm = (o: any) => {
     if (Array.isArray(o)) {
       o.forEach(norm);

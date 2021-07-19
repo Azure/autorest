@@ -1,4 +1,4 @@
-import { parseYaml } from "@azure-tools/datastore";
+import { parseYAMLFast } from "@azure-tools/datastore";
 import { join } from "path";
 import untildify from "untildify";
 
@@ -74,7 +74,7 @@ function parseValue(rawValue: string): any {
   // quote numbers with decimal point, we don't have any use for non-integer numbers (while on the other hand version strings may look like decimal numbers)
   rawValue = !isNaN(parseFloat(rawValue)) && rawValue.includes(".") ? `'${rawValue}'` : rawValue;
   try {
-    return parseYaml(rawValue);
+    return parseYAMLFast(rawValue);
   } catch (e) {
     return rawValue;
   }

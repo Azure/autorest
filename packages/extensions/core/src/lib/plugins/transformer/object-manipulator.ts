@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import {
-  Clone,
   CloneAst,
   DataHandle,
   DataSink,
@@ -23,6 +22,7 @@ import { AutorestContext } from "../../autorest-core";
 import { Channel } from "../../message";
 import { identitySourceMapping } from "@autorest/common";
 import { inspect } from "util";
+import { cloneDeep } from "lodash";
 
 export async function manipulateObject(
   src: DataHandle,
@@ -82,7 +82,7 @@ export async function manipulateObject(
     }
 
     try {
-      const newObject = transformer(doc, Clone(hit.value), hit.path);
+      const newObject = transformer(doc, cloneDeep(hit.value), hit.path);
       if (debug && config) {
         config.debug(`Transformed Result:\n------------\n${inspect(newObject)}\n------------`);
       }
