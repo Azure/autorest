@@ -11,7 +11,7 @@ import {
   IsPrefix,
   JsonPath,
   nodes,
-  ParseNode,
+  parseNode,
   ReplaceNode,
   ResolveRelativeNode,
   SmartPosition,
@@ -59,7 +59,7 @@ export async function manipulateObject(
   // find paths matched by `whereJsonQuery`
 
   let ast: YAMLNode = CloneAst(await src.readYamlAst());
-  const doc = ParseNode<any>(ast);
+  const { result: doc } = parseNode<any>(ast);
   const hits = nodes(doc, whereJsonQuery).sort((a, b) => a.path.length - b.path.length);
   if (hits.length === 0) {
     return { anyHit: false, result: src };

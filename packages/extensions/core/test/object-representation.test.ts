@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ParseNode, ParseToAst, Stringify, StringifyAst, ToAst } from "@azure-tools/datastore";
+import { parseNode, ParseToAst, Stringify, StringifyAst, ToAst } from "@azure-tools/datastore";
 import { ConvertJsonx2Yaml, ConvertYaml2Jsonx } from "@azure-tools/datastore";
 import assert from "assert";
 
@@ -19,7 +19,7 @@ describe("ObjectRepresentation", () => {
     const yaml1 = Stringify(o);
     const yamlAst1 = ParseToAst(yaml1);
     const yamlAstJson1 = ConvertYaml2Jsonx(yamlAst1);
-    const yamlAstJson2 = ToAst(JSON.parse(JSON.stringify(ParseNode(yamlAstJson1))));
+    const yamlAstJson2 = ToAst(JSON.parse(JSON.stringify(parseNode(yamlAstJson1).result)));
     const yamlAst2 = ConvertJsonx2Yaml(yamlAstJson2);
     const yaml2 = StringifyAst(yamlAst2);
 

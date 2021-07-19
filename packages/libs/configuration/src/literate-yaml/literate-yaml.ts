@@ -7,9 +7,9 @@ import {
   DataHandle,
   DataSink,
   indexToPosition,
-  ParseNode,
+  parseNode,
   StrictJsonSyntaxCheck,
-  Parse,
+  parseYAML,
   Mapping,
 } from "@azure-tools/datastore";
 import { OperationAbortedException, AutorestLogger, identitySourceMapping, strictMerge } from "@autorest/common";
@@ -68,20 +68,19 @@ export async function parseCodeBlocks(
         }
       }
 
-      let failing = false;
       const ast = await data.readYamlAst();
 
       // quick syntax check.
-      ParseNode(ast, async (message, index) => {
-        failing = true;
-        logger.trackError({
-          code: LiterateYamlErrorCodes.yamlParsingError,
-          message: `Syntax Error Encountered:  ${message}`,
-          source: [{ position: await indexToPosition(data, index), document: data.key }],
-        });
-      });
+      const { errors } = parseNode(ast);
 
-      if (failing) {
+      if (errors.length > 0) {
+        for (const { message, position } of errors) {
+          logger.trackError({
+            code: LiterateYamlErrorCodes.yamlParsingError,
+            message: `Syntax Error Encountered:  ${message}`,
+            source: [{ position: await indexToPosition(data, position), document: data.key }],
+          });
+        }
         throw new OperationAbortedException();
       }
 
@@ -118,18 +117,19 @@ export async function mergeYamls(
 
   for (const yamlInputHandle of yamlInputHandles) {
     const rawYaml = await yamlInputHandle.readData();
-    const inputGraph: any =
-      Parse(rawYaml, async (message, index) => {
-        failed = true;
-        if (logger) {
+    const { result: inputGraph, errors } = parseYAML(rawYaml);
+    if (errors.length > 0) {
+      failed = true;
+      if (logger) {
+        for (const { message, position } of errors) {
           logger.trackError({
             code: "yaml_parsing",
             message: message,
-            source: [{ document: yamlInputHandle.key, position: await indexToPosition(yamlInputHandle, index) }],
+            source: [{ document: yamlInputHandle.key, position: await indexToPosition(yamlInputHandle, position) }],
           });
         }
-      }) || {};
-
+      }
+    }
     mergedGraph = strictMerge(mergedGraph, inputGraph);
     const yaml = await yamlInputHandle.readYamlAst();
     for (const mapping of identitySourceMapping(yamlInputHandle.key, yaml)) {

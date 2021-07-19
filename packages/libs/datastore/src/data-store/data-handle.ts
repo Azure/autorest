@@ -1,6 +1,6 @@
 import { MappedPosition, Position, RawSourceMap, SourceMapConsumer } from "source-map";
 import { promises as fs } from "fs";
-import { ParseToAst as parseAst, YAMLNode, parseYaml, ParseNode } from "../yaml";
+import { ParseToAst as parseAst, YAMLNode, parseYaml, parseNode } from "../yaml";
 import { getLineIndices } from "../parsing/text-utility";
 
 export interface Data {
@@ -126,7 +126,7 @@ export class DataHandle {
     this.item.accessed = true;
 
     // return the cached object, or get it, then return it.
-    return this.item.cachedObject || (this.item.cachedObject = ParseNode<T>(await this.readYamlAst()));
+    return this.item.cachedObject || (this.item.cachedObject = parseNode<T>(await this.readYamlAst()).result);
   }
 
   public async readYamlAst(): Promise<YAMLNode> {

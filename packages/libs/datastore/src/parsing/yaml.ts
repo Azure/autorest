@@ -14,7 +14,7 @@ import {
   CreateYAMLScalar,
   Descendants,
   Kind,
-  ParseNode,
+  parseNode,
   ResolveAnchorRef,
   YAMLAnchorReference,
   YAMLMap,
@@ -230,16 +230,16 @@ export function ConvertJsonx2Yaml(ast: YAMLNode): YAMLNode {
       const propId = ResolveMapProperty(yamlNodeMapping, "$id");
       let propRef = ResolveMapProperty(yamlNodeMapping, "$ref");
       const propReff = ResolveMapProperty(yamlNodeMapping, "$$ref");
-      if (propRef && isNaN(parseInt(ParseNode<any>(propRef.value) + ""))) {
+      if (propRef && isNaN(parseInt(parseNode<any>(propRef.value).result + ""))) {
         propRef = null;
       }
       propRef = propRef || propReff;
 
       if (propId) {
-        yamlNodeMapping.anchorId = ParseNode<any>(propId.value) + "";
+        yamlNodeMapping.anchorId = parseNode<any>(propId.value).result + "";
         ReplaceNode(ast, propId, undefined);
       } else if (propRef) {
-        ReplaceNode(ast, yamlNodeMapping, CreateYAMLAnchorRef(ParseNode<any>(propRef.value) + ""));
+        ReplaceNode(ast, yamlNodeMapping, CreateYAMLAnchorRef(parseNode<any>(propRef.value).result + ""));
       }
     }
   }
