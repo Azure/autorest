@@ -1,6 +1,25 @@
 # Change Log - @autorest/core
 
-This log was last generated on Thu, 03 Jun 2021 22:37:55 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Jul 2021 15:15:41 GMT and should not be manually modified.
+
+## 3.5.0
+Mon, 19 Jul 2021 15:15:41 GMT
+
+### Minor changes
+
+- **Added** `debug` flag to directive to enable additional logging
+- **Added** support for changing end of line of generated files with new `eol` config.
+- **Feature** Resolve relative servers url using spec host
+- Allow suppressing warnings without source
+- Drop support for node 10
+- **Perf** Memory usage improvements
+- **Perf** Unload sourcemap from memory if not used
+
+### Patches
+
+- **Added** Flag to skip sourcemap generation
+- **Fix** sourcemap for multiple plugins
+- **Fix** Issue in directive manipulator preventing multiple directive to run on OpenApi3 documents
 
 ## 3.4.5
 Thu, 03 Jun 2021 22:37:55 GMT

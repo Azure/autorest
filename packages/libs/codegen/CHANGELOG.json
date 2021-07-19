@@ -2,6 +2,21 @@
   "name": "@azure-tools/codegen",
   "entries": [
     {
+      "version": "2.6.0",
+      "tag": "@azure-tools/codegen_v2.6.0",
+      "date": "Mon, 19 Jul 2021 15:15:42 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Drop support for node 10"
+          },
+          {
+            "comment": "**Remove** include/exclude x-dash properties utils. Use @azure-tools/openapi instead for this functionality"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.5.294",
       "tag": "@azure-tools/codegen_v2.5.294",
       "date": "Tue, 16 Mar 2021 15:52:56 GMT",

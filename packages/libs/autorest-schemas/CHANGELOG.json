@@ -2,6 +2,26 @@
   "name": "@autorest/schemas",
   "entries": [
     {
+      "version": "1.2.0",
+      "tag": "@autorest/schemas_v1.2.0",
+      "date": "Mon, 19 Jul 2021 15:15:41 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Feature** Add `x-ms-permissions` definition to swagger-schema\""
+          },
+          {
+            "comment": "**Improve** OpenAPI 3 schema for parameter: Give better error message when it doesn't match"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "**Fix** Link schema in OpenAPI3 can be empty"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.4",
       "tag": "@autorest/schemas_v1.1.4",
       "date": "Thu, 03 Jun 2021 22:37:55 GMT",

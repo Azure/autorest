@@ -1,6 +1,24 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Thu, 03 Jun 2021 22:37:55 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Jul 2021 15:15:41 GMT and should not be manually modified.
+
+## 1.6.0
+Mon, 19 Jul 2021 15:15:41 GMT
+
+### Minor changes
+
+- **Added** `debug` flag to directive to enable additional logging
+- **Added** Eol configuration
+- **Moved** literate-yaml logic from @autorest/common
+- Drop support for node 10
+
+### Patches
+
+- **Docs** Add documenation about `--use`
+- **Added** New --memory configuration
+- **Added** `--skip-sourcemap` flag
+- **Fix** Handle invalid yaml in cli flag
+- Add `interactive` to config type
 
 ## 1.5.0
 Thu, 03 Jun 2021 22:37:55 GMT

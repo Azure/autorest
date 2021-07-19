@@ -1,6 +1,6 @@
 {
   "name": "@autorest/codemodel",
-  "version": "4.15.0",
+  "version": "4.16.0",
   "description": "AutoRest code model library",
   "directories": {
     "doc": "docs"
@@ -52,7 +52,7 @@
     "typescript": "~4.3.4"
   },
   "dependencies": {
-    "@azure-tools/codegen": "~2.5.294",
+    "@azure-tools/codegen": "~2.6.0",
     "@azure-tools/linq": "~3.1.0",
     "js-yaml": "~4.0.0"
   },

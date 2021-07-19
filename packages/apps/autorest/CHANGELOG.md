@@ -1,6 +1,14 @@
 # Change Log - autorest
 
-This log was last generated on Thu, 03 Jun 2021 22:37:55 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Jul 2021 15:15:42 GMT and should not be manually modified.
+
+## 3.3.0
+Mon, 19 Jul 2021 15:15:42 GMT
+
+### Minor changes
+
+- **Added** Support for new `--memory` flag to configure core max memory
+- Drop support for node 10
 
 ## 3.2.3
 Thu, 03 Jun 2021 22:37:55 GMT

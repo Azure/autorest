@@ -1,16 +1,15 @@
-# Changelog
+# Change Log - @autorest/compare
 
-### 0.3.7
- - **Update** update dependencies.
+This log was last generated on Mon, 19 Jul 2021 15:15:41 GMT and should not be manually modified.
 
-### 0.3.6
- - **Fix** race condition issue with downloading extensions
+## 0.4.0
+Mon, 19 Jul 2021 15:15:41 GMT
 
-### 0.3.5
- - **Update** `@autorest/autorest` -> `autorest` as former is deprecated.
+### Minor changes
 
-### 0.3.4
- - **fix** Issue with `tree-sitter-typescript` latest version failing the tool. Pinned to `0.16.1`
+- Drop support for node 10
 
-### 0.3.2
- - **fix** Issue with running on windows. [PR 12](https://github.com/Azure/autorest.compare/pull/12)
+### Patches
+
+- **Fix** Handle constructor with public/private parameters
+

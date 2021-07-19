@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/deduplication
 
-This log was last generated on Fri, 09 Apr 2021 19:53:22 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Jul 2021 15:15:42 GMT and should not be manually modified.
+
+## 3.1.0
+Mon, 19 Jul 2021 15:15:42 GMT
+
+### Minor changes
+
+- Drop support for node 10
 
 ## 3.0.269
 Fri, 09 Apr 2021 19:53:22 GMT
