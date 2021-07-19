@@ -142,6 +142,13 @@ function ParseNodeInternal(
       return result;
     };
 
+  if (yamlNode.mappings) {
+    for (const mapping of yamlNode.mappings) {
+      if (mapping.key.value === "<<") {
+        console.log("NODe", mapping);
+      }
+    }
+  }
   switch (yamlNode.kind) {
     case Kind.SCALAR: {
       const yamlNodeScalar = yamlNode as YAMLScalar;
@@ -166,7 +173,14 @@ function ParseNodeInternal(
           } else if (mapping.value === null) {
             onError("Syntax error: No mapping value found.", mapping.key.endPosition);
           } else {
-            result[mapping.key.value] = ParseNodeInternal(yamlRootNode, mapping.value, onError)(cache);
+            const parsed = ParseNodeInternal(yamlRootNode, mapping.value, onError)(cache);
+            if (mapping.key.value === "<<") {
+              for (const [key, value] of Object.entries(parsed)) {
+                result[key] = value;
+              }
+            } else {
+              result[mapping.key.value] = parsed;
+            }
           }
         }
         return result;
