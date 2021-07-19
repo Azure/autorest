@@ -61,6 +61,6 @@
     "js-yaml": "~4.0.0",
     "jsonpath": "1.0.0",
     "source-map": "0.7.3",
-    "yaml-ast-parser": "0.0.43"
+    "yaml-language-server-parser": "0.1.2"
   }
 }

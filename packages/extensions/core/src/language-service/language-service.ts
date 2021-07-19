@@ -21,7 +21,7 @@ import { isDirectory, readdir, readFile } from "@azure-tools/async-io";
 import { FileUriToPath, GetExtension, IsUri, ParentFolderUri, ResolveUri } from "@azure-tools/uri";
 import { createHash } from "crypto";
 import { From } from "linq-es2015";
-import { safeDump } from "yaml-ast-parser";
+import { safeDump } from "yaml-language-server-parser";
 import { detectConfigurationFile, detectConfigurationFiles, isConfigurationDocument } from "@autorest/configuration";
 import { DocumentAnalysis } from "./document-analysis";
 

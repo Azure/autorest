@@ -112,7 +112,7 @@ dependencies:
   webpack-cli: 4.7.2_webpack@5.40.0
   webpack-node-externals: 3.0.0
   winston: 3.3.3
-  yaml-ast-parser: 0.0.43
+  yaml-language-server-parser: 0.1.2
   yargs: 16.2.0
   yarn: 1.22.10
 lockfileVersion: 5.2
@@ -8975,6 +8975,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-2PTINUwsRqSd+s8XxKaJWQlUuEMHJQyEuh2edBbW8KNJz0SJPwUSD2zRWqezFEdN7IzAgeuYHFUCF7o8zRdZ0A==
+  /yaml-language-server-parser/0.1.2:
+    dev: false
+    resolution:
+      integrity: sha512-GQ2eRE5GcKBK8XVKBIcMyOfC8WMZmEs6gogtVc6knLKE6pG+e5L/lOMfBxZzAt2lqye5itMggQ9+6stXAVhMsw==
   /yargs-parser/10.1.0:
     dependencies:
       camelcase: 4.1.0
@@ -9113,7 +9117,7 @@ packages:
       ts-node: '*'
       webpack: '*'
     resolution:
-      integrity: sha512-ETjxEFETRwywVm0aeSXJhXqYKv/KPYAnpk+uhiWyG44BewVV/FNjy2jZyA6XM++94uD3kXFRsgwKhZoCGgOwVg==
+      integrity: sha512-cH7C2qFYemtXSc5oz+NgRo6itkF78AEPASDKiFx68+pQ7YALrYqN0aSSKCIGN8dEbRZR7yNfI6NjiblbCQv5WA==
       tarball: file:projects/adl.tgz
     version: 0.0.0
   file:projects/autorest.tgz_ts-node@9.1.1:
@@ -9156,7 +9160,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-7gTI10GQyhcx3Tjkw2W831CLYG0fry1cP7IXQcB+lmWuQK351lpbGxut5yLW5C7qj1rKOIi+5NpByXnFT7Q/sA==
+      integrity: sha512-XQoWKlDim0nemQSls8wrTnHYOws7zCUiBi08mHR5fSuDmuuMx8qayuw+TMjCCNU0o/ekMbIKSeP+0KW44FdQ3A==
       tarball: file:projects/autorest.tgz
     version: 0.0.0
   file:projects/codegen.tgz_prettier@2.3.1+ts-node@9.1.1:
@@ -9215,7 +9219,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-3RCGccQ49NaPoopQiUu7jykKKqCibJZMCGlCKdm2Dzgrf0YIBR15vNHSH3ZJlV5h50XOH4xbkQKDXFxNq3/wzA==
+      integrity: sha512-I3h+qo48ug5UDxBl4V7AhGCzB0pKlkezNgzyMi0P/OoHZRflEN4jfRCHVP7lxVnBP8Azbbo0Rlh26EyFf1hmFA==
       tarball: file:projects/codemodel.tgz
     version: 0.0.0
   file:projects/common.tgz_prettier@2.3.1+ts-node@9.1.1:
@@ -9242,7 +9246,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-FWUWyWvhgJixh4IlpbZRBm5Y1PVAXDWVE2NEBNcB73GqMB4DPb2pvd1JM7XRJCtNpioI1UpYXBnw/qL7gtth5A==
+      integrity: sha512-KjYWCECfLzbQmTjRbBXMVJuox2rQVRVQPZn7Lm5XOa3eOgjq4qN6jYiTVLf9qAMrjNGdtUP0UyVLh1p3ys3PEg==
       tarball: file:projects/common.tgz
     version: 0.0.0
   file:projects/compare.tgz_prettier@2.3.1:
@@ -9276,18 +9280,20 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-5fVO7R3o7ptRJlnexw6cs9aNWxzxdO/YrYptZRXpUSiwiQib/McCRbZYnWyeerfnkA2C+siSxx1/ytpIXxFK6A==
+      integrity: sha512-K4X7k7AvXHaCYpfh8b1coK0FLHq1HuPOCxmndfhsy820yh+dCVB0SGAdtWq/VcQCPogci+wZrdQo7lUUaiipMA==
       tarball: file:projects/compare.tgz
     version: 0.0.0
   file:projects/configuration.tgz_prettier@2.3.1+ts-node@9.1.1:
     dependencies:
       '@azure-tools/async-io': 3.0.253
       '@azure-tools/uri': 3.1.1
+      '@types/commonmark': 0.27.4
       '@types/jest': 26.0.20
       '@types/lodash': 4.14.168
       '@types/node': 14.14.34
       '@typescript-eslint/eslint-plugin': 4.17.0_1160784d52d5049720154d5bb8e5522f
       '@typescript-eslint/parser': 4.17.0_eslint@7.21.0+typescript@4.3.4
+      commonmark: 0.27.0
       eslint: 7.21.0
       eslint-plugin-jest: 24.3.2_44f8a152bedca6ee96cca2f179ba5495
       eslint-plugin-node: 11.1.0_eslint@7.21.0
@@ -9306,7 +9312,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-VHj/zHs9QkaZv00aOL2F11QTOINF//B4UhP46voCdYw0VyN+qbRYdlyKEbGGWr2hbF3+OtRKyN9xPhdpRiSQag==
+      integrity: sha512-LEdCj2KQ6AE+ZwBrDoIXRbSemlPVms1N+B/aPl2oMgtJ4Lppi6hHVOzxgUIuiv/5OPHCsPpUJVnAMIAqqfnerA==
       tarball: file:projects/configuration.tgz
     version: 0.0.0
   file:projects/core.tgz_ts-node@9.1.1:
@@ -9356,13 +9362,14 @@ packages:
       webpack-cli: 4.7.2_webpack@5.40.0
       webpack-node-externals: 3.0.0
       yaml-ast-parser: 0.0.43
+      yaml-language-server-parser: 0.1.2
     dev: false
     id: file:projects/core.tgz
     name: '@rush-temp/core'
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-0roAbzAVAbeN/eb4m2BISPECXH7K/a4AKZhAI1OriIrsWP9hK895Rlp/6JALTywUcs296Io779qjxjlMzPYCPA==
+      integrity: sha512-/np3Zx1GHwXmiUf198yntnt+yeo/DU5Q4nRHr9cArNbox49QKR3cgQjKJuSR23Yky+tzjlNJ2qf09igop5jdgQ==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.3.1+ts-node@9.1.1:
@@ -9390,6 +9397,7 @@ packages:
       ts-jest: 27.0.3_jest@27.0.4+typescript@4.3.4
       typescript: 4.3.4
       yaml-ast-parser: 0.0.43
+      yaml-language-server-parser: 0.1.2
     dev: false
     id: file:projects/datastore.tgz
     name: '@rush-temp/datastore'
@@ -9397,7 +9405,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-rD+YI4ZCkHG4EbqnhYtGmYduU3u1UDtoymX3Yi8X8c0X2y1Lq9GrUjWty5jrj1n0nXSwgWxCEX22wr2eRsYj5g==
+      integrity: sha512-ORIQOaxmEZv5t66QBptCej+MpiH5lHKAm2zkd6ymllXbyzHom9yqC7UrS2GZSXFuzCTy7Z2gWuT8sDchepUT9A==
       tarball: file:projects/datastore.tgz
     version: 0.0.0
   file:projects/deduplication.tgz_prettier@2.3.1+ts-node@9.1.1:
@@ -9425,7 +9433,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-my0Rzdxj7Z+Ob/Z2t8yYEjKbHFcFC+3tvMDVPsraCd4fT7fstQFldvSJY+EqMvzLZozlfT8j57P8w69ZUyPkwA==
+      integrity: sha512-wUFvGlOSgDrMYAJjqads/pbj/N4wfBQgIPWft5SKsH38ripi77sYETxsuOxFjolDwEFyKqFj8jQjhZ4uRbUhKg==
       tarball: file:projects/deduplication.tgz
     version: 0.0.0
   file:projects/extension-base.tgz_prettier@2.3.1:
@@ -9449,7 +9457,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-Tl9qDM2ivrf/Ndt0EbN1e1aZHAVkvREbdVpWqEkNMI21Bk7BvvoGbszxwsTK/nHEkRkYsy8FqnJacDaxK8SYnw==
+      integrity: sha512-YgpeLAcUJb9+CSbVXjZuRiUwbiJ9qvfddRtnwpa+hPHdNTwH9pVRarSeHaAjTiJtvN+c525xrc4/rVkIfY7PQA==
       tarball: file:projects/extension-base.tgz
     version: 0.0.0
   file:projects/extension.tgz_prettier@2.3.1+ts-node@9.1.1:
@@ -9624,7 +9632,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-+CQcDnz06sP2KJlKET8xVwZ0gA5lqmrbfyfoKo8OuiL9YYL0+0JUw1uXKHuBGcTDeSRPPzNgseCv8oOGwac0vw==
+      integrity: sha512-UL9w+RDoxTpckSfCyBZx+ndZZ/0xoa6YClkY8yLzvOqFDtOvTikVDvHUBUY+d4VYPrnl55XmkLJsG5zE3n1uRw==
       tarball: file:projects/modelerfour.tgz
     version: 0.0.0
   file:projects/oai2-to-oai3.tgz_prettier@2.3.1+ts-node@9.1.1:
@@ -9653,7 +9661,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-5uqTrwGV1OGUbgXZ0qjJ2pdX0MqpPTTi0hKeYF44L7TFmCT19g2AiTmelsYl43G9dJ5Cla7H9xO6o0qUDt7VtA==
+      integrity: sha512-GtmLnGCvGsGpnr3s9eMfdMaRin7kNuVZ0A9NulG6LeY93h7UfHtzEC+SF0l1LLBKCiiwosJSpj42vIp9QS9FoQ==
       tarball: file:projects/oai2-to-oai3.tgz
     version: 0.0.0
   file:projects/openapi.tgz_prettier@2.3.1+ts-node@9.1.1:
@@ -9702,7 +9710,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-lNGLv9LkJkdKv7vJTFnpJOraG6TJEd9kPb/2zVEkGfFLIIyTosqGeZKSwBSJZ56EGlh0OCHfTxJYQvkdDWlLxA==
+      integrity: sha512-NpyHgi3miFGRFPEszdUYUYYJIw5RHjU4aEQ08MvZH+ELxEOEduylB6BhskzgZZ5cYL8FphNBabaLcug05JXi3A==
       tarball: file:projects/test-public-packages.tgz
     version: 0.0.0
   file:projects/test-utils.tgz_prettier@2.3.1+ts-node@9.1.1:
@@ -9723,7 +9731,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-L1fA5Gt/mJbKr3hV2bCH6j15xu+GwcGCAwNEt0fI3hv/xt7AHgE5N9ORdkJQSeb55vLmd6dWqXHGW6OlRjUzQQ==
+      integrity: sha512-HPw6q8Lfmbyxy/b0JZ3zXXF68ua7KGegMKTWmBN82or64UjJI1WSf5mlbeQlZGQ5v2ISn/b5TeLeKFylcRIYjw==
       tarball: file:projects/test-utils.tgz
     version: 0.0.0
 registry: ''
@@ -9841,6 +9849,6 @@ specifiers:
   webpack-cli: ~4.7.2
   webpack-node-externals: ~3.0.0
   winston: ~3.3.3
-  yaml-ast-parser: 0.0.43
+  yaml-language-server-parser: 0.1.2
   yargs: ~16.2.0
   yarn: 1.22.10

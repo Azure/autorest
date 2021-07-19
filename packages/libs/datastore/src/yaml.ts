@@ -7,14 +7,14 @@
 // PLEASE: remove the entire dependency to js-yaml once that is fixed!
 const { dump, load } = require("js-yaml");
 
-import * as yamlAst from "yaml-ast-parser";
+import * as yamlAst from "yaml-language-server-parser";
 import { NewEmptyObject } from "./parsing/stable-object";
 import { JsonPath } from "./json-path/json-path";
 
 /**
  * reexport required elements
  */
-export { newScalar } from "yaml-ast-parser";
+export { newScalar } from "yaml-language-server-parser";
 export const Kind: {
   SCALAR: number;
   MAPPING: number;
@@ -145,12 +145,7 @@ function ParseNodeInternal(
   switch (yamlNode.kind) {
     case Kind.SCALAR: {
       const yamlNodeScalar = yamlNode as YAMLScalar;
-      return ((yamlNode as any).valueFunc =
-        yamlNodeScalar.valueObject !== undefined
-          ? memoize(() => yamlNodeScalar.valueObject)
-          : yamlNodeScalar.singleQuoted
-          ? memoize(() => yamlNodeScalar.value)
-          : memoize(() => load(yamlNodeScalar.rawValue)));
+      return ((yamlNode as any).valueFunc = memoize(() => load(yamlNodeScalar.rawValue)));
     }
     case Kind.MAPPING:
       onError("Syntax error: Encountered bare mapping.", yamlNode.startPosition);
@@ -212,7 +207,7 @@ export function ParseNode<T>(
 export function CloneAst<T extends YAMLNode>(ast: T): T {
   if (ast.kind === Kind.MAPPING) {
     const astMapping = ast as YAMLMapping;
-    return <T>CreateYAMLMapping(CloneAst(astMapping.key), CloneAst(astMapping.value));
+    return <T>CreateYAMLMapping(CloneAst(astMapping.key) as any, CloneAst(astMapping.value));
   }
   return ParseToAst(StringifyAst(ast)) as T;
 }
@@ -265,6 +260,7 @@ export function Parse<T>(
 ): T {
   const node = ParseToAst(rawYaml);
   const result = ParseNode<T>(node, onError);
+  console.log("Node", node, result);
   return result;
 }
 

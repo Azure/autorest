@@ -94,6 +94,6 @@
     "webpack-cli": "~4.7.2",
     "webpack-node-externals": "~3.0.0",
     "webpack": "~5.40.0",
-    "yaml-ast-parser": "0.0.43"
+    "yaml-language-server-parser": "0.1.2"
   }
 }
