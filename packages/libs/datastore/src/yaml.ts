@@ -168,7 +168,7 @@ function computeMapNodeValue<T>(yamlNodeMapping: YAMLMap, cache: WeakMap<YAMLNod
     } else if (mapping.value === null) {
       errors.push({ message: "Syntax error: No mapping value found.", position: mapping.key.endPosition });
     } else {
-      const parsed = parseNode<any>(mapping.value);
+      const parsed = parseNodeInternal<any>(mapping.value, cache);
       if (parsed.errors.length === 0) {
         if (mapping.key.value === "<<") {
           for (const [key, value] of Object.entries(parsed.result)) {
@@ -191,7 +191,7 @@ function computeSequenceNodeValue<T>(yamlNodeSequence: YAMLSequence, cache: Weak
   cache.set(yamlNodeSequence, result);
   let errors: YAMLParseError[] = [];
   for (const item of yamlNodeSequence.items) {
-    const itemResult = parseNode(item);
+    const itemResult = parseNodeInternal(item, cache);
     if (itemResult.errors.length === 0) {
       result.push(itemResult.result);
     } else {
@@ -221,7 +221,7 @@ function computeNodeValue<T>(yamlNode: YAMLNode, cache: WeakMap<YAMLNode, any>):
     }
     case Kind.ANCHOR_REF: {
       const yamlNodeRef = yamlNode as YAMLAnchorReference;
-      return parseNode(yamlNodeRef.value);
+      return parseNodeInternal(yamlNodeRef.value, cache);
     }
     case Kind.INCLUDE_REF:
       return {
