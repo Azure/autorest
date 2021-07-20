@@ -2,6 +2,18 @@
   "name": "@azure-tools/extension",
   "entries": [
     {
+      "version": "3.3.1",
+      "tag": "@azure-tools/extension_v3.3.1",
+      "date": "Mon, 19 Jul 2021 18:08:46 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Using `fs/promises` imort not supported on node 12"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.3.0",
       "tag": "@azure-tools/extension_v3.3.0",
       "date": "Mon, 19 Jul 2021 15:15:42 GMT",

@@ -2,6 +2,18 @@
   "name": "autorest",
   "entries": [
     {
+      "version": "3.3.2",
+      "tag": "autorest_v3.3.2",
+      "date": "Tue, 20 Jul 2021 16:57:32 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** `--memory` flag not working"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.3.0",
       "tag": "autorest_v3.3.0",
       "date": "Mon, 19 Jul 2021 15:15:42 GMT",

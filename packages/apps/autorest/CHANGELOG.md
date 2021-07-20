@@ -1,6 +1,13 @@
 # Change Log - autorest
 
-This log was last generated on Mon, 19 Jul 2021 15:15:42 GMT and should not be manually modified.
+This log was last generated on Tue, 20 Jul 2021 16:57:32 GMT and should not be manually modified.
+
+## 3.3.2
+Tue, 20 Jul 2021 16:57:32 GMT
+
+### Patches
+
+- **Fix** `--memory` flag not working
 
 ## 3.3.0
 Mon, 19 Jul 2021 15:15:42 GMT
