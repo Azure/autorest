@@ -6,10 +6,10 @@
 import { DataHandle } from "../data-store";
 import { JsonPath, JsonPathComponent, stringify } from "../json-path/json-path";
 import { EnhancedPosition } from "../source-map/source-map";
-import { Kind, ResolveAnchorRef, YAMLMap, YAMLMapping, YAMLNode, YAMLSequence } from "@azure-tools/yaml";
+import { Kind, ResolveAnchorRef, YamlMap, YamlMapping, YamlNode, YamlSequence } from "@azure-tools/yaml";
 import { indexToPosition } from "./text-utility";
 
-function ResolveMapProperty(node: YAMLMap, property: string): YAMLMapping | null {
+function ResolveMapProperty(node: YamlMap, property: string): YamlMapping | null {
   for (const mapping of node.mappings) {
     if (property === mapping.key.value) {
       return mapping;
@@ -26,11 +26,11 @@ function ResolveMapProperty(node: YAMLMap, property: string): YAMLMapping | null
  * @param deferResolvingMappings If set to true, if resolving to a mapping, will return the entire mapping node instead of just the value (useful if desiring keys)
  */
 function ResolvePathPart(
-  yamlAstRoot: YAMLNode,
-  yamlAstCurrent: YAMLNode,
+  yamlAstRoot: YamlNode,
+  yamlAstCurrent: YamlNode,
   jsonPathPart: JsonPathComponent,
   deferResolvingMappings: boolean,
-): YAMLNode {
+): YamlNode {
   switch (yamlAstCurrent.kind) {
     case Kind.SCALAR:
       throw new Error(`Trying to retrieve '${jsonPathPart}' from scalar value`);
@@ -71,10 +71,10 @@ function ResolvePathPart(
     case Kind.INCLUDE_REF:
       throw new Error("INCLUDE_REF not implemented");
   }
-  throw new Error(`Unexpected YAML AST node kind '${(yamlAstCurrent as YAMLNode).kind}'`);
+  throw new Error(`Unexpected YAML AST node kind '${(yamlAstCurrent as YamlNode).kind}'`);
 }
 
-export function ResolveRelativeNode(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPath: JsonPath): YAMLNode {
+export function ResolveRelativeNode(yamlAstRoot: YamlNode, yamlAstCurrent: YamlNode, jsonPath: JsonPath): YamlNode {
   try {
     for (const jsonPathPart of jsonPath) {
       yamlAstCurrent = ResolvePathPart(yamlAstRoot, yamlAstCurrent, jsonPathPart, true);
@@ -86,10 +86,10 @@ export function ResolveRelativeNode(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLN
 }
 
 export function ReplaceNode(
-  yamlAstRoot: YAMLNode,
-  target: YAMLNode,
-  value: YAMLNode | undefined,
-): YAMLNode | undefined {
+  yamlAstRoot: YamlNode,
+  target: YamlNode,
+  value: YamlNode | undefined,
+): YamlNode | undefined {
   // root replacement?
   if (target === yamlAstRoot) {
     return value;
@@ -98,7 +98,7 @@ export function ReplaceNode(
   const parent = target.kind === Kind.MAPPING ? target : target.parent;
   switch (parent.kind) {
     case Kind.MAPPING: {
-      const astSub = parent as YAMLMapping;
+      const astSub = parent as YamlMapping;
 
       // replace the mapping's value
       if (value !== undefined && value.kind !== Kind.MAPPING) {
@@ -107,17 +107,17 @@ export function ReplaceNode(
       }
 
       // replace the mapping
-      const parentMap = parent.parent as YAMLMap;
+      const parentMap = parent.parent as YamlMap;
       const index = parentMap.mappings.indexOf(astSub);
       if (value !== undefined) {
-        parentMap.mappings[index] = value as YAMLMapping;
+        parentMap.mappings[index] = value as YamlMapping;
       } else {
         parentMap.mappings = parentMap.mappings.filter((x, i) => i !== index);
       }
       return yamlAstRoot;
     }
     case Kind.SEQ: {
-      const astSub = parent as YAMLSequence;
+      const astSub = parent as YamlSequence;
       const index = astSub.items.indexOf(target);
       if (value !== undefined) {
         astSub.items[index] = value;
@@ -144,7 +144,7 @@ export async function ResolvePath(yamlFile: DataHandle, jsonPath: JsonPath): Pro
 export async function createEnhancedPosition(
   yamlFile: DataHandle,
   jsonPath: JsonPath,
-  node: YAMLNode,
+  node: YamlNode,
 ): Promise<EnhancedPosition> {
   const startIdx = jsonPath.length === 0 ? 0 : node.startPosition;
   const endIdx = node.endPosition;
@@ -156,7 +156,7 @@ export async function createEnhancedPosition(
 
   // enhance
   if (node.kind === Kind.MAPPING) {
-    const mappingNode = node as YAMLMapping;
+    const mappingNode = node as YamlMapping;
     result.length = mappingNode.key.endPosition - mappingNode.key.startPosition;
     result.valueOffset = mappingNode.value.startPosition - mappingNode.key.startPosition;
     result.valueLength = mappingNode.value.endPosition - mappingNode.value.startPosition;

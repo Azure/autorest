@@ -8,11 +8,11 @@
 import { dump, load } from "js-yaml";
 import { newMapping, safeLoad } from "yaml-ast-parser";
 import { cloneDeep } from "lodash";
-import { YAMLMap, YAMLMapping, YAMLNode, YAMLScalar, Kind, YAMLSequence } from "./types";
+import { YamlMap, YamlMapping, YamlNode, YamlScalar, Kind, YamlSequence } from "./types";
 
-export interface YAMLNodeWithPath {
+export interface YamlNodeWithPath {
   path: (string | number)[];
-  node: YAMLNode;
+  node: YamlNode;
 }
 
 /**
@@ -23,17 +23,17 @@ export const parseYAMLFast = load;
 /**
  * Parse YAML to AST tree.
  */
-export function parseYAMLAst(rawYaml: string): YAMLNode {
+export function parseYAMLAst(rawYaml: string): YamlNode {
   return safeLoad(rawYaml) as any;
 }
 
 export function* Descendants(
-  yamlAstNode: YAMLNode,
+  yamlAstNode: YamlNode,
   currentPath: string[] = [],
   deferResolvingMappings = false,
-): Iterable<YAMLNodeWithPath> {
-  const todos: Array<YAMLNodeWithPath> = [{ path: currentPath, node: yamlAstNode }];
-  let todo: YAMLNodeWithPath | undefined;
+): Iterable<YamlNodeWithPath> {
+  const todos: Array<YamlNodeWithPath> = [{ path: currentPath, node: yamlAstNode }];
+  let todo: YamlNodeWithPath | undefined;
   while ((todo = todos.pop())) {
     // report self
     yield todo;
@@ -52,11 +52,11 @@ export function* Descendants(
           break;
         case Kind.MAP:
           if (deferResolvingMappings) {
-            for (const mapping of (todo.node as YAMLMap).mappings) {
+            for (const mapping of (todo.node as YamlMap).mappings) {
               todos.push({ node: mapping, path: todo.path.concat([mapping.key.value]) });
             }
           } else {
-            for (const mapping of (todo.node as YAMLMap).mappings) {
+            for (const mapping of (todo.node as YamlMap).mappings) {
               todos.push({ node: mapping, path: todo.path });
             }
           }
@@ -73,9 +73,9 @@ export function* Descendants(
   }
 }
 
-export function ResolveAnchorRef(yamlAstRoot: YAMLNode, anchorRef: string): YAMLNodeWithPath {
+export function ResolveAnchorRef(yamlAstRoot: YamlNode, anchorRef: string): YamlNodeWithPath {
   for (const yamlAstNode of Descendants(yamlAstRoot)) {
-    if (yamlAstNode.node.anchorId === anchorRef) {
+    if (yamlAstNode.node.kind === Kind.ANCHOR_REF && yamlAstNode.node.anchorId === anchorRef) {
       return yamlAstNode;
     }
   }
@@ -92,11 +92,11 @@ export interface ParseResult<T> {
   errors: YAMLParseError[];
 }
 
-export function getYAMLNodeValue<T>(yamlNode: YAMLNode): ParseResult<T> {
+export function getYamlNodeValue<T>(yamlNode: YamlNode): ParseResult<T> {
   return computeNodeValue(yamlNode, new WeakMap());
 }
 
-function computeNodeValue<T>(yamlNode: YAMLNode, cache: WeakMap<YAMLNode, any>): ParseResult<T> {
+function computeNodeValue<T>(yamlNode: YamlNode, cache: WeakMap<YamlNode, any>): ParseResult<T> {
   if (yamlNode === undefined) {
     return { result: undefined as any, errors: [] };
   }
@@ -144,7 +144,7 @@ function computeNodeValue<T>(yamlNode: YAMLNode, cache: WeakMap<YAMLNode, any>):
   }
 }
 
-function computeScalarNodeValue<T>(yamlNodeScalar: YAMLScalar, cache: WeakMap<YAMLNode, any>): ParseResult<T> {
+function computeScalarNodeValue<T>(yamlNodeScalar: YamlScalar, cache: WeakMap<YamlNode, any>): ParseResult<T> {
   const value =
     yamlNodeScalar.valueObject !== undefined
       ? yamlNodeScalar.valueObject
@@ -156,7 +156,7 @@ function computeScalarNodeValue<T>(yamlNodeScalar: YAMLScalar, cache: WeakMap<YA
   return { result: value, errors: [] };
 }
 
-function computeMapNodeValue<T>(yamlNodeMapping: YAMLMap, cache: WeakMap<YAMLNode, any>): ParseResult<T> {
+function computeMapNodeValue<T>(yamlNodeMapping: YamlMap, cache: WeakMap<YamlNode, any>): ParseResult<T> {
   const result: any = {};
   cache.set(yamlNodeMapping, result);
 
@@ -188,7 +188,7 @@ function computeMapNodeValue<T>(yamlNodeMapping: YAMLMap, cache: WeakMap<YAMLNod
   return { result, errors };
 }
 
-function computeSequenceNodeValue<T>(yamlNodeSequence: YAMLSequence, cache: WeakMap<YAMLNode, any>): ParseResult<T> {
+function computeSequenceNodeValue<T>(yamlNodeSequence: YamlSequence, cache: WeakMap<YamlNode, any>): ParseResult<T> {
   const result: any[] = [];
   cache.set(yamlNodeSequence, result);
   let errors: YAMLParseError[] = [];
@@ -204,16 +204,15 @@ function computeSequenceNodeValue<T>(yamlNodeSequence: YAMLSequence, cache: Weak
   return { result: result as any, errors };
 }
 
-export function CloneAst<T extends YAMLNode>(ast: T): T {
+export function cloneYamlAst<T extends YamlNode>(ast: T): T {
   if (ast.kind === Kind.MAPPING) {
-    const astMapping = ast as YAMLMapping;
-    return <T>newMapping(CloneAst(astMapping.key), CloneAst(astMapping.value));
+    return <T>newMapping(cloneYamlAst(ast.key), cloneYamlAst(ast.value));
   }
   return parseYAMLAst(StringifyAst(ast)) as T;
 }
 
-export function StringifyAst(ast: YAMLNode): string {
-  return fastStringify(getYAMLNodeValue<any>(ast).result);
+export function StringifyAst(ast: YamlNode): string {
+  return fastStringify(getYamlNodeValue<any>(ast).result);
 }
 
 /**
@@ -247,13 +246,13 @@ export function Normalize<T>(object: T): T {
 /**
  * Create an AST tree of a given object.
  */
-export function valueToAst<T>(object: T): YAMLNode {
+export function valueToAst<T>(object: T): YamlNode {
   return parseYAMLAst(fastStringify(object));
 }
 
 export function parseYAML<T>(rawYaml: string): ParseResult<T> {
   const node = parseYAMLAst(rawYaml);
-  return getYAMLNodeValue<T>(node);
+  return getYamlNodeValue<T>(node);
 }
 
 export function Stringify<T>(object: T): string {

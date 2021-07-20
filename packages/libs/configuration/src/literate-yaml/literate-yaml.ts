@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { DataHandle, DataSink, indexToPosition, Mapping } from "@azure-tools/datastore";
-import { getYAMLNodeValue, StrictJsonSyntaxCheck, parseYAML } from "@azure-tools/yaml";
+import { getYamlNodeValue, StrictJsonSyntaxCheck, parseYAML } from "@azure-tools/yaml";
 import { OperationAbortedException, AutorestLogger, identitySourceMapping, strictMerge } from "@autorest/common";
 import { LiterateYamlErrorCodes } from "./error-codes";
 import { parseCodeBlocksFromMarkdown } from "./markdown-parser";
@@ -64,7 +64,7 @@ export async function parseCodeBlocks(
       const ast = await data.readYamlAst();
 
       // quick syntax check.
-      const { errors } = getYAMLNodeValue(ast);
+      const { errors } = getYamlNodeValue(ast);
 
       if (errors.length > 0) {
         for (const { message, position } of errors) {

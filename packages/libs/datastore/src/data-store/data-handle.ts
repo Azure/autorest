@@ -1,6 +1,6 @@
 import { MappedPosition, Position, RawSourceMap, SourceMapConsumer } from "source-map";
 import { promises as fs } from "fs";
-import { parseYAMLAst, YAMLNode, parseYAMLFast, getYAMLNodeValue } from "@azure-tools/yaml";
+import { parseYAMLAst, YamlNode, parseYAMLFast, getYamlNodeValue } from "@azure-tools/yaml";
 import { getLineIndices } from "../parsing/text-utility";
 
 export interface Data {
@@ -15,7 +15,7 @@ export interface Data {
   writeToDisk?: Promise<void>;
   writeSourceMapToDisk?: Promise<void>;
   cached?: string;
-  cachedAst?: YAMLNode;
+  cachedAst?: YamlNode;
   cachedObject?: any;
   accessed?: boolean;
 }
@@ -126,10 +126,10 @@ export class DataHandle {
     this.item.accessed = true;
 
     // return the cached object, or get it, then return it.
-    return this.item.cachedObject || (this.item.cachedObject = getYAMLNodeValue<T>(await this.readYamlAst()).result);
+    return this.item.cachedObject || (this.item.cachedObject = getYamlNodeValue<T>(await this.readYamlAst()).result);
   }
 
-  public async readYamlAst(): Promise<YAMLNode> {
+  public async readYamlAst(): Promise<YamlNode> {
     // we're going to use the data, so let's not let it expire.
     this.item.accessed = true;
     // return the cachedAst or get it, then return it.
@@ -232,7 +232,7 @@ export class DataHandle {
   /**
    * @deprecated use @see readYamlAst
    */
-  public async ReadYamlAst(): Promise<YAMLNode> {
+  public async ReadYamlAst(): Promise<YamlNode> {
     return this.readYamlAst();
   }
 }

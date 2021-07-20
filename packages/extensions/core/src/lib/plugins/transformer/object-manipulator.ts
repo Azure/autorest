@@ -13,7 +13,7 @@ import {
   ResolveRelativeNode,
   SmartPosition,
 } from "@azure-tools/datastore";
-import { StringifyAst, CloneAst, getYAMLNodeValue, valueToAst, YAMLNode } from "@azure-tools/yaml";
+import { StringifyAst, cloneYamlAst, getYamlNodeValue, valueToAst, YamlNode } from "@azure-tools/yaml";
 import { AutorestContext } from "../../autorest-core";
 import { Channel } from "../../message";
 import { identitySourceMapping } from "@autorest/common";
@@ -54,8 +54,8 @@ export async function manipulateObject(
 
   // find paths matched by `whereJsonQuery`
 
-  let ast: YAMLNode = CloneAst(await src.readYamlAst());
-  const { result: doc } = getYAMLNodeValue<any>(ast);
+  let ast: YamlNode = cloneYamlAst(await src.readYamlAst());
+  const { result: doc } = getYamlNodeValue<any>(ast);
   const hits = nodes(doc, whereJsonQuery).sort((a, b) => a.path.length - b.path.length);
   if (hits.length === 0) {
     return { anyHit: false, result: src };
