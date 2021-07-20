@@ -13,7 +13,7 @@ import {
   ResolveRelativeNode,
   SmartPosition,
 } from "@azure-tools/datastore";
-import { StringifyAst, CloneAst, getYAMLNodeValue, ToAst, YAMLNode } from "@azure-tools/yaml";
+import { StringifyAst, CloneAst, getYAMLNodeValue, valueToAst, YAMLNode } from "@azure-tools/yaml";
 import { AutorestContext } from "../../autorest-core";
 import { Channel } from "../../message";
 import { identitySourceMapping } from "@autorest/common";
@@ -82,7 +82,7 @@ export async function manipulateObject(
       if (debug && config) {
         config.debug(`Transformed Result:\n------------\n${inspect(newObject)}\n------------`);
       }
-      const newAst = newObject === undefined ? undefined : ToAst(newObject); // <- can extend ToAst to also take an "ambient" object with AST, in order to create anchor refs for existing stuff!
+      const newAst = newObject === undefined ? undefined : valueToAst(newObject); // <- can extend ToAst to also take an "ambient" object with AST, in order to create anchor refs for existing stuff!
       const oldAst = ResolveRelativeNode(ast, ast, hit.path);
       ast =
         ReplaceNode(ast, oldAst, newAst) ||

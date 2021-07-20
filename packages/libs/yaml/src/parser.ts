@@ -43,11 +43,10 @@ export function* Descendants(
       switch (todo.node.kind) {
         case Kind.MAPPING:
           {
-            const astSub = todo.node as YAMLMapping;
             if (deferResolvingMappings) {
-              todos.push({ node: astSub.value, path: todo.path });
+              todos.push({ node: todo.node.value, path: todo.path });
             } else {
-              todos.push({ node: astSub.value, path: todo.path.concat([astSub.key.value]) });
+              todos.push({ node: todo.node.value, path: todo.path.concat([todo.node.key.value]) });
             }
           }
           break;
@@ -64,9 +63,8 @@ export function* Descendants(
           break;
         case Kind.SEQ:
           {
-            const astSub = todo.node;
-            for (let i = 0; i < astSub.items.length; ++i) {
-              todos.push({ node: astSub.items[i], path: todo.path.concat([i]) });
+            for (let i = 0; i < todo.node.items.length; ++i) {
+              todos.push({ node: todo.node.items[i], path: todo.path.concat([i]) });
             }
           }
           break;
@@ -246,7 +244,10 @@ export function Normalize<T>(object: T): T {
   return clone;
 }
 
-export function ToAst<T>(object: T): YAMLNode {
+/**
+ * Create an AST tree of a given object.
+ */
+export function valueToAst<T>(object: T): YAMLNode {
   return parseYAMLAst(fastStringify(object));
 }
 
