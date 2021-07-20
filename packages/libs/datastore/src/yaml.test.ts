@@ -43,4 +43,15 @@ describe("Yaml parser", () => {
     // Should be a the same reference.
     expect(value.Colors).toBe(value.Other.color);
   });
+
+  it("parse circular dependency anchors", () => {
+    const value = parseYAML(`
+      Foo: &FOO
+        bar: &BAR
+          foo: *FOO
+    `);
+
+    // Should be a the same reference.
+    expect(value.Foo.bar.foo).toBe(value.Foo);
+  });
 });

@@ -56,8 +56,6 @@ export const CORE_PLUGIN_MAP = {
   "semantic-validator": createSemanticValidationPlugin(),
   "openapi-document-converter": createSwaggerToOpenApi3Plugin(),
   "component-modifiers": createComponentModifierPlugin(),
-  "yaml2jsonx": createYamlToJsonPlugin(),
-  "jsonx2yaml": createJsonToYamlPlugin(),
   "reflect-api-versions-cs": createCSharpReflectApiVersionPlugin(),
   "commonmarker": createCommonmarkProcessorPlugin(),
   "profile-definition-emitter": createArtifactEmitterPlugin(),

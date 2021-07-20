@@ -155,6 +155,7 @@ function computeScalarNodeValue<T>(yamlNodeScalar: YAMLScalar): ParseResult<T> {
 
 function computeMapNodeValue<T>(yamlNodeMapping: YAMLMap): ParseResult<T> {
   const result: any = {};
+  (yamlNodeMapping as YAMLNodeExt).cachedValue = result;
   let errors: YAMLParseError[] = [];
   for (const mapping of yamlNodeMapping.mappings) {
     if (mapping.key.kind !== Kind.SCALAR) {
@@ -185,6 +186,8 @@ function computeMapNodeValue<T>(yamlNodeMapping: YAMLMap): ParseResult<T> {
 
 function computeSequenceNodeValue<T>(yamlNodeSequence: YAMLSequence): ParseResult<T> {
   const result: any[] = [];
+  (yamlNodeSequence as YAMLNodeExt).cachedValue = result;
+
   let errors: YAMLParseError[] = [];
   for (const item of yamlNodeSequence.items) {
     const itemResult = parseNode(item);
@@ -217,6 +220,9 @@ function computeNodeValue<T>(yamlNode: YAMLNodeExt): ParseResult<T> {
     }
     case Kind.ANCHOR_REF: {
       const yamlNodeRef = yamlNode as YAMLAnchorReference;
+      if (yamlNodeRef.value === undefined) {
+        return { result: undefined as any, errors: [] };
+      }
       return parseNode(yamlNodeRef.value);
     }
     case Kind.INCLUDE_REF:
