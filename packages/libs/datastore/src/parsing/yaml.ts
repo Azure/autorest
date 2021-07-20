@@ -6,22 +6,7 @@
 import { DataHandle } from "../data-store";
 import { JsonPath, JsonPathComponent, stringify } from "../json-path/json-path";
 import { EnhancedPosition } from "../source-map/source-map";
-import {
-  CloneAst,
-  CreateYAMLAnchorRef,
-  CreateYAMLMap,
-  CreateYAMLMapping,
-  CreateYAMLScalar,
-  Descendants,
-  getYAMLNodeValue,
-  Kind,
-  ResolveAnchorRef,
-  YAMLAnchorReference,
-  YAMLMap,
-  YAMLMapping,
-  YAMLNode,
-  YAMLSequence,
-} from "@azure-tools/yaml";
+import { Kind, ResolveAnchorRef, YAMLMap, YAMLMapping, YAMLNode, YAMLSequence } from "@azure-tools/yaml";
 import { indexToPosition } from "./text-utility";
 
 function ResolveMapProperty(node: YAMLMap, property: string): YAMLMapping | null {
@@ -50,18 +35,16 @@ function ResolvePathPart(
     case Kind.SCALAR:
       throw new Error(`Trying to retrieve '${jsonPathPart}' from scalar value`);
     case Kind.MAPPING: {
-      const astSub = yamlAstCurrent as YAMLMapping;
       if (deferResolvingMappings) {
-        return ResolvePathPart(yamlAstRoot, astSub.value, jsonPathPart, deferResolvingMappings);
+        return ResolvePathPart(yamlAstRoot, yamlAstCurrent.value, jsonPathPart, deferResolvingMappings);
       }
-      if (jsonPathPart.toString() !== astSub.key.value) {
-        throw new Error(`Trying to retrieve '${jsonPathPart}' from mapping with key '${astSub.key.value}'`);
+      if (jsonPathPart.toString() !== yamlAstCurrent.key.value) {
+        throw new Error(`Trying to retrieve '${jsonPathPart}' from mapping with key '${yamlAstCurrent.key.value}'`);
       }
-      return astSub.value;
+      return yamlAstCurrent.value;
     }
     case Kind.MAP: {
-      const astSub = yamlAstCurrent as YAMLMap;
-      const mapping = ResolveMapProperty(astSub, jsonPathPart.toString());
+      const mapping = ResolveMapProperty(yamlAstCurrent, jsonPathPart.toString());
       if (mapping !== null) {
         return deferResolvingMappings
           ? mapping
@@ -70,27 +53,25 @@ function ResolvePathPart(
       throw new Error(`Trying to retrieve '${jsonPathPart}' from mapping that contains no such key`);
     }
     case Kind.SEQ: {
-      const astSub = yamlAstCurrent as YAMLSequence;
       const pathPartNumber = Number(jsonPathPart);
       if (typeof jsonPathPart !== "number" && isNaN(pathPartNumber)) {
         throw new Error(`Trying to retrieve non-string item '${jsonPathPart}' from sequence`);
       }
-      if (0 > pathPartNumber || pathPartNumber >= astSub.items.length) {
+      if (0 > pathPartNumber || pathPartNumber >= yamlAstCurrent.items.length) {
         throw new Error(
-          `Trying to retrieve item '${jsonPathPart}' from sequence with '${astSub.items.length}' items (index out of bounds)`,
+          `Trying to retrieve item '${jsonPathPart}' from sequence with '${yamlAstCurrent.items.length}' items (index out of bounds)`,
         );
       }
-      return astSub.items[pathPartNumber];
+      return yamlAstCurrent.items[pathPartNumber];
     }
     case Kind.ANCHOR_REF: {
-      const astSub = yamlAstCurrent as YAMLAnchorReference;
-      const newCurrent = ResolveAnchorRef(yamlAstRoot, astSub.referencesAnchor).node;
+      const newCurrent = ResolveAnchorRef(yamlAstRoot, yamlAstCurrent.referencesAnchor).node;
       return ResolvePathPart(yamlAstRoot, newCurrent, jsonPathPart, deferResolvingMappings);
     }
     case Kind.INCLUDE_REF:
       throw new Error("INCLUDE_REF not implemented");
   }
-  throw new Error(`unexpected YAML AST node kind '${yamlAstCurrent.kind}'`);
+  throw new Error(`Unexpected YAML AST node kind '${(yamlAstCurrent as YAMLNode).kind}'`);
 }
 
 export function ResolveRelativeNode(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPath: JsonPath): YAMLNode {
@@ -186,62 +167,4 @@ export async function createEnhancedPosition(
   }
 
   return result;
-}
-
-/**
- * REPRESENTATION
- */
-
-/**
- * rewrites anchors to $id/$$ref
- */
-export function ConvertYaml2Jsonx(ast: YAMLNode): YAMLNode {
-  ast = CloneAst(ast);
-  for (const nodeWithPath of Descendants(ast)) {
-    const node = nodeWithPath.node;
-    if (node.anchorId) {
-      if (node.kind === Kind.MAP) {
-        const yamlNodeMapping = node as YAMLMap;
-        yamlNodeMapping.mappings.push(CreateYAMLMapping(CreateYAMLScalar("$id"), CreateYAMLScalar(node.anchorId)));
-      }
-      node.anchorId = undefined;
-    }
-    if (node.kind === Kind.ANCHOR_REF) {
-      const yamlNodeAnchor = node as YAMLAnchorReference;
-      const map = CreateYAMLMap();
-      map.mappings.push(
-        CreateYAMLMapping(CreateYAMLScalar("$$ref"), CreateYAMLScalar(yamlNodeAnchor.referencesAnchor)),
-      );
-      ReplaceNode(ast, yamlNodeAnchor, map);
-    }
-  }
-  return ast;
-}
-
-/**
- * rewrites $id/$ref/$$ref to anchors
- */
-export function ConvertJsonx2Yaml(ast: YAMLNode): YAMLNode {
-  ast = CloneAst(ast);
-  for (const nodeWithPath of Descendants(ast)) {
-    const node = nodeWithPath.node;
-    if (node.kind === Kind.MAP) {
-      const yamlNodeMapping = node as YAMLMap;
-      const propId = ResolveMapProperty(yamlNodeMapping, "$id");
-      let propRef = ResolveMapProperty(yamlNodeMapping, "$ref");
-      const propReff = ResolveMapProperty(yamlNodeMapping, "$$ref");
-      if (propRef && isNaN(parseInt(getYAMLNodeValue<any>(propRef.value).result + ""))) {
-        propRef = null;
-      }
-      propRef = propRef || propReff;
-
-      if (propId) {
-        yamlNodeMapping.anchorId = getYAMLNodeValue<any>(propId.value).result + "";
-        ReplaceNode(ast, propId, undefined);
-      } else if (propRef) {
-        ReplaceNode(ast, yamlNodeMapping, CreateYAMLAnchorRef(getYAMLNodeValue<any>(propRef.value).result + ""));
-      }
-    }
-  }
-  return ast;
 }

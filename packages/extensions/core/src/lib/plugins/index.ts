@@ -1,4 +1,3 @@
-import { createCommonmarkProcessorPlugin } from "./commonmark";
 import { createAllOfCleaner } from "./allof-cleaner";
 import { createCommandPlugin } from "./command";
 
@@ -56,7 +55,6 @@ export const CORE_PLUGIN_MAP = {
   "openapi-document-converter": createSwaggerToOpenApi3Plugin(),
   "component-modifiers": createComponentModifierPlugin(),
   "reflect-api-versions-cs": createCSharpReflectApiVersionPlugin(),
-  "commonmarker": createCommonmarkProcessorPlugin(),
   "profile-definition-emitter": createArtifactEmitterPlugin(),
   "emitter": createArtifactEmitterPlugin(),
   "configuration-emitter": createArtifactEmitterPlugin(

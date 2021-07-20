@@ -6,34 +6,9 @@
 // TODO: the following is only required because safeDump of "yaml-ast-parser" has this bug: https://github.com/mulesoft-labs/yaml-ast-parser/issues/30
 // PLEASE: remove the entire dependency to js-yaml once that is fixed!
 import { dump, load } from "js-yaml";
-import * as yamlAst from "yaml-ast-parser";
+import { newMapping, safeLoad } from "yaml-ast-parser";
 import { cloneDeep } from "lodash";
-
-/**
- * reexport required elements
- */
-export { newScalar } from "yaml-ast-parser";
-export const Kind: {
-  SCALAR: number;
-  MAPPING: number;
-  MAP: number;
-  SEQ: number;
-  ANCHOR_REF: number;
-  INCLUDE_REF: number;
-} = yamlAst.Kind;
-export type YAMLNode = yamlAst.YAMLNode;
-export type YAMLScalar = yamlAst.YAMLScalar;
-export type YAMLMapping = yamlAst.YAMLMapping;
-export type YAMLMap = yamlAst.YamlMap;
-export type YAMLSequence = yamlAst.YAMLSequence;
-export type YAMLAnchorReference = yamlAst.YAMLAnchorReference;
-
-export const CreateYAMLAnchorRef: (key: string) => YAMLMap = <any>yamlAst.newAnchorRef;
-export const CreateYAMLMap: () => YAMLMap = yamlAst.newMap;
-export const CreateYAMLMapping: (key: YAMLScalar, value: YAMLNode) => YAMLMapping = yamlAst.newMapping;
-export const CreateYAMLScalar: (value: string) => YAMLScalar = yamlAst.newScalar;
-
-export const parseYAMLFast = load;
+import { YAMLMap, YAMLMapping, YAMLNode, YAMLScalar, Kind, YAMLSequence } from "./types";
 
 export interface YAMLNodeWithPath {
   path: (string | number)[];
@@ -41,10 +16,15 @@ export interface YAMLNodeWithPath {
 }
 
 /**
- * Parsing
+ * Parse YAML without creating the AST tree.
+ */
+export const parseYAMLFast = load;
+
+/**
+ * Parse YAML to AST tree.
  */
 export function parseYAMLAst(rawYaml: string): YAMLNode {
-  return yamlAst.safeLoad(rawYaml);
+  return safeLoad(rawYaml) as any;
 }
 
 export function* Descendants(
@@ -84,7 +64,7 @@ export function* Descendants(
           break;
         case Kind.SEQ:
           {
-            const astSub = todo.node as YAMLSequence;
+            const astSub = todo.node;
             for (let i = 0; i < astSub.items.length; ++i) {
               todos.push({ node: astSub.items[i], path: todo.path.concat([i]) });
             }
@@ -115,10 +95,10 @@ export interface ParseResult<T> {
 }
 
 export function getYAMLNodeValue<T>(yamlNode: YAMLNode): ParseResult<T> {
-  return parseNodeInternal(yamlNode, new WeakMap());
+  return computeNodeValue(yamlNode, new WeakMap());
 }
 
-function parseNodeInternal<T>(yamlNode: YAMLNode, cache: WeakMap<YAMLNode, any>): ParseResult<T> {
+function computeNodeValue<T>(yamlNode: YAMLNode, cache: WeakMap<YAMLNode, any>): ParseResult<T> {
   if (yamlNode === undefined) {
     return { result: undefined as any, errors: [] };
   }
@@ -137,7 +117,33 @@ function parseNodeInternal<T>(yamlNode: YAMLNode, cache: WeakMap<YAMLNode, any>)
     };
   }
 
-  return computeNodeValue<T>(yamlNode, cache);
+  switch (yamlNode.kind) {
+    case Kind.SCALAR: {
+      return computeScalarNodeValue(yamlNode, cache);
+    }
+    case Kind.MAPPING:
+      return {
+        result: undefined as any,
+        errors: [{ message: "Syntax error: Encountered bare mapping.", position: yamlNode.startPosition }],
+      };
+
+    case Kind.MAP: {
+      return computeMapNodeValue(yamlNode, cache);
+    }
+    case Kind.SEQ: {
+      return computeSequenceNodeValue(yamlNode, cache);
+    }
+    case Kind.ANCHOR_REF: {
+      return computeNodeValue(yamlNode.value, cache);
+    }
+    case Kind.INCLUDE_REF:
+      return {
+        result: undefined as any,
+        errors: [{ message: "Syntax error: INCLUDE_REF not implemented.", position: yamlNode.startPosition }],
+      };
+    default:
+      throw new Error("Unknown YAML node kind.");
+  }
 }
 
 function computeScalarNodeValue<T>(yamlNodeScalar: YAMLScalar, cache: WeakMap<YAMLNode, any>): ParseResult<T> {
@@ -166,7 +172,7 @@ function computeMapNodeValue<T>(yamlNodeMapping: YAMLMap, cache: WeakMap<YAMLNod
     } else if (mapping.value === null) {
       errors.push({ message: "Syntax error: No mapping value found.", position: mapping.key.endPosition });
     } else {
-      const parsed = parseNodeInternal<any>(mapping.value, cache);
+      const parsed = computeNodeValue<any>(mapping.value, cache);
       if (parsed.errors.length === 0) {
         if (mapping.key.value === "<<") {
           for (const [key, value] of Object.entries(parsed.result)) {
@@ -189,7 +195,7 @@ function computeSequenceNodeValue<T>(yamlNodeSequence: YAMLSequence, cache: Weak
   cache.set(yamlNodeSequence, result);
   let errors: YAMLParseError[] = [];
   for (const item of yamlNodeSequence.items) {
-    const itemResult = parseNodeInternal(item, cache);
+    const itemResult = computeNodeValue(item, cache);
     if (itemResult.errors.length === 0) {
       result.push(itemResult.result);
     } else {
@@ -200,41 +206,10 @@ function computeSequenceNodeValue<T>(yamlNodeSequence: YAMLSequence, cache: Weak
   return { result: result as any, errors };
 }
 
-function computeNodeValue<T>(yamlNode: YAMLNode, cache: WeakMap<YAMLNode, any>): ParseResult<T> {
-  switch (yamlNode.kind) {
-    case Kind.SCALAR: {
-      return computeScalarNodeValue(yamlNode as YAMLScalar, cache);
-    }
-    case Kind.MAPPING:
-      return {
-        result: undefined as any,
-        errors: [{ message: "Syntax error: Encountered bare mapping.", position: yamlNode.startPosition }],
-      };
-
-    case Kind.MAP: {
-      return computeMapNodeValue(yamlNode as YAMLMap, cache);
-    }
-    case Kind.SEQ: {
-      return computeSequenceNodeValue(yamlNode as YAMLSequence, cache);
-    }
-    case Kind.ANCHOR_REF: {
-      const yamlNodeRef = yamlNode as YAMLAnchorReference;
-      return parseNodeInternal(yamlNodeRef.value, cache);
-    }
-    case Kind.INCLUDE_REF:
-      return {
-        result: undefined as any,
-        errors: [{ message: "Syntax error: INCLUDE_REF not implemented.", position: yamlNode.startPosition }],
-      };
-    default:
-      throw new Error("Unknown YAML node kind.");
-  }
-}
-
 export function CloneAst<T extends YAMLNode>(ast: T): T {
   if (ast.kind === Kind.MAPPING) {
     const astMapping = ast as YAMLMapping;
-    return <T>CreateYAMLMapping(CloneAst(astMapping.key), CloneAst(astMapping.value));
+    return <T>newMapping(CloneAst(astMapping.key), CloneAst(astMapping.value));
   }
   return parseYAMLAst(StringifyAst(ast)) as T;
 }
