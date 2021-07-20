@@ -10,6 +10,7 @@ How to guides:
 
 - [Define binary/file requests](./howto/binary-payload.md)
 - [Add fields next to $ref](./howto/$ref-siblings.md)
+- [Polymorphism](./howto/polymorphism.md)
 
 <!-- LINKS -->
 
