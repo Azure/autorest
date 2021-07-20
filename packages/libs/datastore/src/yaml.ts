@@ -106,10 +106,6 @@ export function ResolveAnchorRef(yamlAstRoot: YAMLNode, anchorRef: string): YAML
   throw new Error(`Anchor '${anchorRef}' not found`);
 }
 
-export interface YAMLNodeExt extends YAMLNode {
-  cachedValue?: unknown;
-}
-
 export interface YAMLParseError {
   message: string;
   position: number;
@@ -121,9 +117,16 @@ export interface ParseResult<T> {
 }
 
 export function parseNode<T>(yamlNode: YAMLNode): ParseResult<T> {
-  const internalYamlNode: YAMLNodeExt = yamlNode;
-  if ("cachedValue" in yamlNode) {
-    return { result: internalYamlNode.cachedValue as T, errors: [] };
+  return parseNodeInternal(yamlNode, new WeakMap());
+}
+
+function parseNodeInternal<T>(yamlNode: YAMLNode, cache: WeakMap<YAMLNode, any>): ParseResult<T> {
+  if (yamlNode === undefined) {
+    return { result: undefined as any, errors: [] };
+  }
+  const cachedValue = cache.get(yamlNode);
+  if (cachedValue) {
+    return { result: cachedValue as T, errors: [] };
   }
 
   const errors = yamlNode.errors.filter((x) => !x.isWarning);
@@ -136,26 +139,25 @@ export function parseNode<T>(yamlNode: YAMLNode): ParseResult<T> {
     };
   }
 
-  const value = computeNodeValue<T>(internalYamlNode);
-  if (value.errors.length === 0) {
-    internalYamlNode.cachedValue = value.result;
-  }
-  return value;
+  return computeNodeValue<T>(yamlNode, cache);
 }
 
-function computeScalarNodeValue<T>(yamlNodeScalar: YAMLScalar): ParseResult<T> {
+function computeScalarNodeValue<T>(yamlNodeScalar: YAMLScalar, cache: WeakMap<YAMLNode, any>): ParseResult<T> {
   const value =
     yamlNodeScalar.valueObject !== undefined
       ? yamlNodeScalar.valueObject
       : yamlNodeScalar.singleQuoted
       ? yamlNodeScalar.value
       : load(yamlNodeScalar.rawValue);
+  cache.set(yamlNodeScalar, value);
+
   return { result: value, errors: [] };
 }
 
-function computeMapNodeValue<T>(yamlNodeMapping: YAMLMap): ParseResult<T> {
+function computeMapNodeValue<T>(yamlNodeMapping: YAMLMap, cache: WeakMap<YAMLNode, any>): ParseResult<T> {
   const result: any = {};
-  (yamlNodeMapping as YAMLNodeExt).cachedValue = result;
+  cache.set(yamlNodeMapping, result);
+
   let errors: YAMLParseError[] = [];
   for (const mapping of yamlNodeMapping.mappings) {
     if (mapping.key.kind !== Kind.SCALAR) {
@@ -184,10 +186,9 @@ function computeMapNodeValue<T>(yamlNodeMapping: YAMLMap): ParseResult<T> {
   return { result, errors };
 }
 
-function computeSequenceNodeValue<T>(yamlNodeSequence: YAMLSequence): ParseResult<T> {
+function computeSequenceNodeValue<T>(yamlNodeSequence: YAMLSequence, cache: WeakMap<YAMLNode, any>): ParseResult<T> {
   const result: any[] = [];
-  (yamlNodeSequence as YAMLNodeExt).cachedValue = result;
-
+  cache.set(yamlNodeSequence, result);
   let errors: YAMLParseError[] = [];
   for (const item of yamlNodeSequence.items) {
     const itemResult = parseNode(item);
@@ -201,10 +202,10 @@ function computeSequenceNodeValue<T>(yamlNodeSequence: YAMLSequence): ParseResul
   return { result: result as any, errors };
 }
 
-function computeNodeValue<T>(yamlNode: YAMLNodeExt): ParseResult<T> {
+function computeNodeValue<T>(yamlNode: YAMLNode, cache: WeakMap<YAMLNode, any>): ParseResult<T> {
   switch (yamlNode.kind) {
     case Kind.SCALAR: {
-      return computeScalarNodeValue(yamlNode as YAMLScalar);
+      return computeScalarNodeValue(yamlNode as YAMLScalar, cache);
     }
     case Kind.MAPPING:
       return {
@@ -213,16 +214,13 @@ function computeNodeValue<T>(yamlNode: YAMLNodeExt): ParseResult<T> {
       };
 
     case Kind.MAP: {
-      return computeMapNodeValue(yamlNode as YAMLMap);
+      return computeMapNodeValue(yamlNode as YAMLMap, cache);
     }
     case Kind.SEQ: {
-      return computeSequenceNodeValue(yamlNode as YAMLSequence);
+      return computeSequenceNodeValue(yamlNode as YAMLSequence, cache);
     }
     case Kind.ANCHOR_REF: {
       const yamlNodeRef = yamlNode as YAMLAnchorReference;
-      if (yamlNodeRef.value === undefined) {
-        return { result: undefined as any, errors: [] };
-      }
       return parseNode(yamlNodeRef.value);
     }
     case Kind.INCLUDE_REF:
@@ -242,6 +240,7 @@ export function CloneAst<T extends YAMLNode>(ast: T): T {
   }
   return ParseToAst(StringifyAst(ast)) as T;
 }
+
 export function StringifyAst(ast: YAMLNode): string {
   return fastStringify(parseNode<any>(ast).result);
 }
