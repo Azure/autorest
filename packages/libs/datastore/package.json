@@ -61,7 +61,6 @@
     "@azure-tools/yaml": "~1.0.0",
     "@azure/logger": "^1.0.2",
     "lodash": "~4.17.20",
-    "js-yaml": "~4.0.0",
     "jsonpath": "1.0.0",
     "source-map": "0.7.3"
   }
