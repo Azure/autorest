@@ -5,8 +5,7 @@
 
 // TODO: the following is only required because safeDump of "yaml-ast-parser" has this bug: https://github.com/mulesoft-labs/yaml-ast-parser/issues/30
 // PLEASE: remove the entire dependency to js-yaml once that is fixed!
-const { dump, load } = require("js-yaml");
-
+import { dump, load } from "js-yaml";
 import * as yamlAst from "yaml-ast-parser";
 import { cloneDeep } from "lodash";
 
