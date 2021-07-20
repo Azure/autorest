@@ -11,7 +11,6 @@ export * from "./data-store";
 export * from "./cancellation";
 export * from "./source-map/source-map";
 
-export * from "./yaml";
 export { Lazy, LazyPromise } from "./lazy";
 export * from "./parsing/text-utility";
 

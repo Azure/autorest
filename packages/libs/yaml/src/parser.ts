@@ -8,7 +8,6 @@
 const { dump, load } = require("js-yaml");
 
 import * as yamlAst from "yaml-ast-parser";
-import { JsonPath } from "./json-path/json-path";
 import { cloneDeep } from "lodash";
 
 /**
@@ -38,20 +37,20 @@ export const CreateYAMLScalar: (value: string) => YAMLScalar = yamlAst.newScalar
 export const parseYAMLFast = load;
 
 export interface YAMLNodeWithPath {
-  path: JsonPath;
+  path: (string | number)[];
   node: YAMLNode;
 }
 
 /**
  * Parsing
  */
-export function ParseToAst(rawYaml: string): YAMLNode {
+export function parseYAMLAst(rawYaml: string): YAMLNode {
   return yamlAst.safeLoad(rawYaml);
 }
 
 export function* Descendants(
   yamlAstNode: YAMLNode,
-  currentPath: JsonPath = [],
+  currentPath: string[] = [],
   deferResolvingMappings = false,
 ): Iterable<YAMLNodeWithPath> {
   const todos: Array<YAMLNodeWithPath> = [{ path: currentPath, node: yamlAstNode }];
@@ -116,7 +115,7 @@ export interface ParseResult<T> {
   errors: YAMLParseError[];
 }
 
-export function parseNode<T>(yamlNode: YAMLNode): ParseResult<T> {
+export function getYAMLNodeValue<T>(yamlNode: YAMLNode): ParseResult<T> {
   return parseNodeInternal(yamlNode, new WeakMap());
 }
 
@@ -238,11 +237,11 @@ export function CloneAst<T extends YAMLNode>(ast: T): T {
     const astMapping = ast as YAMLMapping;
     return <T>CreateYAMLMapping(CloneAst(astMapping.key), CloneAst(astMapping.value));
   }
-  return ParseToAst(StringifyAst(ast)) as T;
+  return parseYAMLAst(StringifyAst(ast)) as T;
 }
 
 export function StringifyAst(ast: YAMLNode): string {
-  return fastStringify(parseNode<any>(ast).result);
+  return fastStringify(getYAMLNodeValue<any>(ast).result);
 }
 
 /**
@@ -274,12 +273,12 @@ export function Normalize<T>(object: T): T {
 }
 
 export function ToAst<T>(object: T): YAMLNode {
-  return ParseToAst(fastStringify(object));
+  return parseYAMLAst(fastStringify(object));
 }
 
 export function parseYAML<T>(rawYaml: string): ParseResult<T> {
-  const node = ParseToAst(rawYaml);
-  return parseNode<T>(node);
+  const node = parseYAMLAst(rawYaml);
+  return getYAMLNodeValue<T>(node);
 }
 
 export function Stringify<T>(object: T): string {

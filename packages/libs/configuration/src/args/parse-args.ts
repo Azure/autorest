@@ -1,4 +1,4 @@
-import { parseYAMLFast } from "@azure-tools/datastore";
+import { parseYAMLFast } from "@azure-tools/yaml";
 import { join } from "path";
 import untildify from "untildify";
 

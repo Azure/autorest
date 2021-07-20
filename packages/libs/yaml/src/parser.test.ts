@@ -1,14 +1,32 @@
-import { parseNode, ParseToAst } from "./yaml";
+import { getYAMLNodeValue, parseYAMLAst } from "./parser";
 
 function parseYAML(yaml: string): any {
-  const ast = ParseToAst(yaml);
-  const { result, errors } = parseNode(ast);
+  const ast = parseYAMLAst(yaml);
+  const { result, errors } = getYAMLNodeValue(ast);
 
   expect(errors).toHaveLength(0);
   return result;
 }
 
 describe("Yaml parser", () => {
+  it("parse primitive types", () => {
+    const value = parseYAML(`
+      number: 123
+      boolean: true
+      string: foobar
+      quotedString: 'quotedString'
+      doubleQuotedString: "doubleQuotedString"
+    `);
+
+    expect(value).toEqual({
+      number: 123,
+      boolean: true,
+      string: "foobar",
+      doubleQuotedString: "doubleQuotedString",
+      quotedString: "quotedString",
+    });
+  });
+
   it("parse yaml merge constructs <<", () => {
     const value = parseYAML(`
       Colors: &COLORS

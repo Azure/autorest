@@ -1,6 +1,6 @@
 import { MappedPosition, Position, RawSourceMap, SourceMapConsumer } from "source-map";
 import { promises as fs } from "fs";
-import { ParseToAst as parseAst, YAMLNode, parseYAMLFast, parseNode } from "../yaml";
+import { parseYAMLAst, YAMLNode, parseYAMLFast, getYAMLNodeValue } from "@azure-tools/yaml";
 import { getLineIndices } from "../parsing/text-utility";
 
 export interface Data {
@@ -126,14 +126,14 @@ export class DataHandle {
     this.item.accessed = true;
 
     // return the cached object, or get it, then return it.
-    return this.item.cachedObject || (this.item.cachedObject = parseNode<T>(await this.readYamlAst()).result);
+    return this.item.cachedObject || (this.item.cachedObject = getYAMLNodeValue<T>(await this.readYamlAst()).result);
   }
 
   public async readYamlAst(): Promise<YAMLNode> {
     // we're going to use the data, so let's not let it expire.
     this.item.accessed = true;
     // return the cachedAst or get it, then return it.
-    return this.item.cachedAst || (this.item.cachedAst = parseAst(await this.readData()));
+    return this.item.cachedAst || (this.item.cachedAst = parseYAMLAst(await this.readData()));
   }
 
   public get artifactType(): string {

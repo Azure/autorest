@@ -29,7 +29,6 @@ import {
 } from "./transformer";
 import { createTreeShakerPlugin } from "./tree-shaker/tree-shaker";
 import { createApiVersionParameterHandlerPlugin } from "./version-param-handler";
-import { createJsonToYamlPlugin, createYamlToJsonPlugin } from "./yaml-and-json";
 import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from "./schema-validation";
 import { createOpenAPIStatsCollectorPlugin } from "./openapi-stats-collector";
 import { QuickDataSource } from "@azure-tools/datastore";

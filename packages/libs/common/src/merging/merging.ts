@@ -5,7 +5,8 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable no-prototype-builtins */
 
-import { JsonPath, Mapping, Stringify, YAMLNode, Descendants } from "@azure-tools/datastore";
+import { JsonPath, Mapping } from "@azure-tools/datastore";
+import { Stringify, YAMLNode, Descendants } from "@azure-tools/yaml";
 
 /**
  * Merge a and b by adding new properties of b into a. It will fail if a and b have the same property and the value is different.

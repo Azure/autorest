@@ -3,15 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import {
-  DataHandle,
-  DataSink,
-  indexToPosition,
-  parseNode,
-  StrictJsonSyntaxCheck,
-  parseYAML,
-  Mapping,
-} from "@azure-tools/datastore";
+import { DataHandle, DataSink, indexToPosition, Mapping } from "@azure-tools/datastore";
+import { getYAMLNodeValue, StrictJsonSyntaxCheck, parseYAML } from "@azure-tools/yaml";
 import { OperationAbortedException, AutorestLogger, identitySourceMapping, strictMerge } from "@autorest/common";
 import { LiterateYamlErrorCodes } from "./error-codes";
 import { parseCodeBlocksFromMarkdown } from "./markdown-parser";
@@ -71,7 +64,7 @@ export async function parseCodeBlocks(
       const ast = await data.readYamlAst();
 
       // quick syntax check.
-      const { errors } = parseNode(ast);
+      const { errors } = getYAMLNodeValue(ast);
 
       if (errors.length > 0) {
         for (const { message, position } of errors) {

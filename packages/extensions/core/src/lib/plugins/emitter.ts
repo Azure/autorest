@@ -1,4 +1,5 @@
-import { DataHandle, DataSource, Normalize, QuickDataSource, createSandbox, Stringify } from "@azure-tools/datastore";
+import { DataHandle, DataSource, QuickDataSource, createSandbox } from "@azure-tools/datastore";
+import { Normalize, Stringify } from "@azure-tools/yaml";
 import { resolveUri } from "@azure-tools/uri";
 import { AutorestContext } from "../context";
 import { Channel } from "../message";

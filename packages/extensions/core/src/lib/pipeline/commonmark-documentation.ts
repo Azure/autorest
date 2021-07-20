@@ -2,19 +2,17 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+import { DataHandle, DataSink, SmartPosition } from "@azure-tools/datastore";
 import {
   CloneAst,
   CreateYAMLScalar,
-  DataHandle,
-  DataSink,
   Descendants,
   Kind,
-  SmartPosition,
   StringifyAst,
   YAMLMap,
   YAMLMapping,
   YAMLNodeWithPath,
-} from "@azure-tools/datastore";
+} from "@azure-tools/yaml";
 import { Node, Parser } from "commonmark";
 import { identitySourceMapping } from "@autorest/common";
 

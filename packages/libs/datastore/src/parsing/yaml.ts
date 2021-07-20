@@ -13,15 +13,15 @@ import {
   CreateYAMLMapping,
   CreateYAMLScalar,
   Descendants,
+  getYAMLNodeValue,
   Kind,
-  parseNode,
   ResolveAnchorRef,
   YAMLAnchorReference,
   YAMLMap,
   YAMLMapping,
   YAMLNode,
   YAMLSequence,
-} from "../yaml";
+} from "@azure-tools/yaml";
 import { indexToPosition } from "./text-utility";
 
 function ResolveMapProperty(node: YAMLMap, property: string): YAMLMapping | null {
@@ -230,16 +230,16 @@ export function ConvertJsonx2Yaml(ast: YAMLNode): YAMLNode {
       const propId = ResolveMapProperty(yamlNodeMapping, "$id");
       let propRef = ResolveMapProperty(yamlNodeMapping, "$ref");
       const propReff = ResolveMapProperty(yamlNodeMapping, "$$ref");
-      if (propRef && isNaN(parseInt(parseNode<any>(propRef.value).result + ""))) {
+      if (propRef && isNaN(parseInt(getYAMLNodeValue<any>(propRef.value).result + ""))) {
         propRef = null;
       }
       propRef = propRef || propReff;
 
       if (propId) {
-        yamlNodeMapping.anchorId = parseNode<any>(propId.value).result + "";
+        yamlNodeMapping.anchorId = getYAMLNodeValue<any>(propId.value).result + "";
         ReplaceNode(ast, propId, undefined);
       } else if (propRef) {
-        ReplaceNode(ast, yamlNodeMapping, CreateYAMLAnchorRef(parseNode<any>(propRef.value).result + ""));
+        ReplaceNode(ast, yamlNodeMapping, CreateYAMLAnchorRef(getYAMLNodeValue<any>(propRef.value).result + ""));
       }
     }
   }

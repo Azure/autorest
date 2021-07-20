@@ -17,7 +17,8 @@ const color: (text: string) => string = (<any>global).color ? (<any>global).colo
 // start of autorest-ng
 // the console app starts for real here.
 
-import { EnhancedFileSystem, parseYAML, RealFileSystem } from "@azure-tools/datastore";
+import { EnhancedFileSystem, RealFileSystem } from "@azure-tools/datastore";
+import { parseYAML } from "@azure-tools/yaml";
 import {
   clearFolder,
   createFolderUri,

@@ -1,5 +1,6 @@
 import { Channel, SourceLocation } from "../../message";
-import { DataHandle, indexToPosition, StrictJsonSyntaxCheck } from "@azure-tools/datastore";
+import { DataHandle, indexToPosition } from "@azure-tools/datastore";
+import { StrictJsonSyntaxCheck } from "@azure-tools/yaml";
 import { AutorestContext } from "../../context";
 
 /**
