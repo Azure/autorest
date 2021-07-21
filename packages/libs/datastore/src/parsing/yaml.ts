@@ -65,8 +65,8 @@ function ResolvePathPart(
       return yamlAstCurrent.items[pathPartNumber];
     }
     case Kind.ANCHOR_REF: {
-      const newCurrent = ResolveAnchorRef(yamlAstRoot, yamlAstCurrent.referencesAnchor).node;
-      return ResolvePathPart(yamlAstRoot, newCurrent, jsonPathPart, deferResolvingMappings);
+      // const newCurrent = ResolveAnchorRef(yamlAstRoot, yamlAstCurrent.referencesAnchor).node;
+      return ResolvePathPart(yamlAstRoot, yamlAstCurrent.value, jsonPathPart, deferResolvingMappings);
     }
     case Kind.INCLUDE_REF:
       throw new Error("INCLUDE_REF not implemented");
