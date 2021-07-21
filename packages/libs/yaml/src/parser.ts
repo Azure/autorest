@@ -8,7 +8,8 @@
 import { dump, load } from "js-yaml";
 import { newMapping, safeLoad } from "yaml-ast-parser";
 import { cloneDeep } from "lodash";
-import { YamlMap, YamlMapping, YamlNode, YamlScalar, Kind, YamlSequence } from "./types";
+import { YamlMap, YamlNode, YamlScalar, Kind, YamlSequence } from "./types";
+import { listYamlAstDecendants } from "./utils";
 
 export interface YamlNodeWithPath {
   path: (string | number)[];
@@ -27,54 +28,8 @@ export function parseYAMLAst(rawYaml: string): YamlNode {
   return safeLoad(rawYaml) as any;
 }
 
-export function* Descendants(
-  yamlAstNode: YamlNode,
-  currentPath: string[] = [],
-  deferResolvingMappings = false,
-): Iterable<YamlNodeWithPath> {
-  const todos: Array<YamlNodeWithPath> = [{ path: currentPath, node: yamlAstNode }];
-  let todo: YamlNodeWithPath | undefined;
-  while ((todo = todos.pop())) {
-    // report self
-    yield todo;
-
-    // traverse
-    if (todo.node) {
-      switch (todo.node.kind) {
-        case Kind.MAPPING:
-          {
-            if (deferResolvingMappings) {
-              todos.push({ node: todo.node.value, path: todo.path });
-            } else {
-              todos.push({ node: todo.node.value, path: todo.path.concat([todo.node.key.value]) });
-            }
-          }
-          break;
-        case Kind.MAP:
-          if (deferResolvingMappings) {
-            for (const mapping of (todo.node as YamlMap).mappings) {
-              todos.push({ node: mapping, path: todo.path.concat([mapping.key.value]) });
-            }
-          } else {
-            for (const mapping of (todo.node as YamlMap).mappings) {
-              todos.push({ node: mapping, path: todo.path });
-            }
-          }
-          break;
-        case Kind.SEQ:
-          {
-            for (let i = 0; i < todo.node.items.length; ++i) {
-              todos.push({ node: todo.node.items[i], path: todo.path.concat([i]) });
-            }
-          }
-          break;
-      }
-    }
-  }
-}
-
 export function ResolveAnchorRef(yamlAstRoot: YamlNode, anchorRef: string): YamlNodeWithPath {
-  for (const yamlAstNode of Descendants(yamlAstRoot)) {
+  for (const yamlAstNode of listYamlAstDecendants(yamlAstRoot)) {
     if (yamlAstNode.node.kind === Kind.ANCHOR_REF && yamlAstNode.node.anchorId === anchorRef) {
       return yamlAstNode;
     }
@@ -208,10 +163,10 @@ export function cloneYamlAst<T extends YamlNode>(ast: T): T {
   if (ast.kind === Kind.MAPPING) {
     return <T>newMapping(cloneYamlAst(ast.key), cloneYamlAst(ast.value));
   }
-  return parseYAMLAst(StringifyAst(ast)) as T;
+  return parseYAMLAst(stringifyYamlAst(ast)) as T;
 }
 
-export function StringifyAst(ast: YamlNode): string {
+export function stringifyYamlAst(ast: YamlNode): string {
   return fastStringify(getYamlNodeValue<any>(ast).result);
 }
 

@@ -13,7 +13,7 @@ import {
   ResolveRelativeNode,
   SmartPosition,
 } from "@azure-tools/datastore";
-import { StringifyAst, cloneYamlAst, getYamlNodeValue, valueToAst, YamlNode } from "@azure-tools/yaml";
+import { stringifyYamlAst, cloneYamlAst, getYamlNodeValue, valueToAst, YamlNode } from "@azure-tools/yaml";
 import { AutorestContext } from "../../autorest-core";
 import { Channel } from "../../message";
 import { identitySourceMapping } from "@autorest/common";
@@ -140,7 +140,7 @@ export async function manipulateObject(
   }
 
   // write back
-  const resultHandle = await target.writeData("manipulated", StringifyAst(ast), src.identity, src.artifactType, {
+  const resultHandle = await target.writeData("manipulated", stringifyYamlAst(ast), src.identity, src.artifactType, {
     mappings: mapping,
     mappingSources: mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src],
   });

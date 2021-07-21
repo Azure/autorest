@@ -8,7 +8,7 @@ import { DataHandle } from "../data-store";
 import { JsonPath, stringify } from "../json-path/json-path";
 import { indexToPosition } from "../parsing/text-utility";
 import * as yaml from "../parsing/yaml";
-import { Descendants, valueToAst } from "@azure-tools/yaml";
+import { listYamlAstDecendants, valueToAst } from "@azure-tools/yaml";
 
 // information to attach to line/column based to get a richer experience
 export interface PositionEnhancements {
@@ -120,7 +120,7 @@ export function createAssignmentMapping(
   recurse = true,
   result: Mapping[] = [],
 ): Array<Mapping> {
-  for (const descendant of Descendants(valueToAst(assignedObject))) {
+  for (const descendant of listYamlAstDecendants(valueToAst(assignedObject))) {
     const path = descendant.path;
     result.push({
       name: `${subject} (${stringify(path)})`,
