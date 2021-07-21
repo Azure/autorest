@@ -17,7 +17,8 @@ const color: (text: string) => string = (<any>global).color ? (<any>global).colo
 // start of autorest-ng
 // the console app starts for real here.
 
-import { EnhancedFileSystem, Parse, RealFileSystem } from "@azure-tools/datastore";
+import { EnhancedFileSystem, RealFileSystem } from "@azure-tools/datastore";
+import { parseYAML } from "@azure-tools/yaml";
 import {
   clearFolder,
   createFolderUri,
@@ -261,9 +262,12 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     );
     // - format and print
     for (const helpArtifact of helpArtifacts) {
-      const help: Help = Parse(helpArtifact.content, (message, index) =>
-        console.error(color(`!Parsing error at **${helpArtifact.uri}**:__${index}: ${message}__`)),
-      );
+      const { result: help, errors } = parseYAML<Help>(helpArtifact.content);
+      if (errors.length > 0) {
+        for (const { message, position } of errors) {
+          console.error(color(`!Parsing error at **${helpArtifact.uri}**:__${position}: ${message}__`));
+        }
+      }
       if (!help) {
         continue;
       }

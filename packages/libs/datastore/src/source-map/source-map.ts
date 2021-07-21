@@ -7,8 +7,7 @@ import { Position, SourceMapGenerator } from "source-map";
 import { DataHandle } from "../data-store";
 import { JsonPath, stringify } from "../json-path/json-path";
 import { indexToPosition } from "../parsing/text-utility";
-import * as yaml from "../parsing/yaml";
-import { Descendants, ToAst } from "../yaml";
+import { walkYamlAst, valueToAst, getYamlNodeByPath, YamlNode, Kind, YamlMapping } from "@azure-tools/yaml";
 
 // information to attach to line/column based to get a richer experience
 export interface PositionEnhancements {
@@ -60,7 +59,7 @@ export function encodeEnhancedPositionInName(name: string | undefined, pos: Enha
 export async function CompilePosition(position: SmartPosition, yamlFile: DataHandle): Promise<EnhancedPosition> {
   if (!(position as EnhancedPosition).line) {
     if ((position as any).path) {
-      return await yaml.ResolvePath(yamlFile, (position as any).path);
+      return await resolvePathPosition(yamlFile, (position as any).path);
     }
     if ((position as any).index) {
       return indexToPosition(yamlFile, (position as any).index);
@@ -120,8 +119,17 @@ export function createAssignmentMapping(
   recurse = true,
   result: Mapping[] = [],
 ): Array<Mapping> {
-  for (const descendant of Descendants(ToAst(assignedObject))) {
-    const path = descendant.path;
+  if (!recurse) {
+    result.push({
+      name: `${subject} (${stringify([])})`,
+      source: sourceKey,
+      original: { path: sourcePath },
+      generated: { path: targetPath },
+    });
+    return result;
+  }
+
+  walkYamlAst(valueToAst(assignedObject), ({ path }) => {
     result.push({
       name: `${subject} (${stringify(path)})`,
       source: sourceKey,
@@ -130,9 +138,44 @@ export function createAssignmentMapping(
     });
 
     // if it's just the top node that is 1:1, break now.
-    if (!recurse) {
-      break;
-    }
+  });
+
+  return result;
+}
+
+/**
+ * Resolves the text position of a JSON path in raw YAML.
+ */
+export async function resolvePathPosition(yamlFile: DataHandle, jsonPath: JsonPath): Promise<EnhancedPosition> {
+  const yamlAst = await yamlFile.readYamlAst();
+  const node = getYamlNodeByPath(yamlAst, jsonPath);
+  return createEnhancedPosition(yamlFile, jsonPath, node);
+}
+
+async function createEnhancedPosition(
+  yamlFile: DataHandle,
+  jsonPath: JsonPath,
+  node: YamlNode,
+): Promise<EnhancedPosition> {
+  const startIdx = jsonPath.length === 0 ? 0 : node.startPosition;
+  const endIdx = node.endPosition;
+  const startPos = await indexToPosition(yamlFile, startIdx);
+  const endPos = await indexToPosition(yamlFile, endIdx);
+
+  const result: EnhancedPosition = { column: startPos.column, line: startPos.line };
+  result.path = jsonPath;
+
+  // enhance
+  if (node.kind === Kind.MAPPING) {
+    const mappingNode = node as YamlMapping;
+    result.length = mappingNode.key.endPosition - mappingNode.key.startPosition;
+    result.valueOffset = mappingNode.value.startPosition - mappingNode.key.startPosition;
+    result.valueLength = mappingNode.value.endPosition - mappingNode.value.startPosition;
+  } else {
+    result.length = endIdx - startIdx;
+    result.valueOffset = 0;
+    result.valueLength = result.length;
   }
+
   return result;
 }

@@ -1,7 +1,7 @@
 {
-  "name": "@autorest/configuration",
-  "version": "1.6.0",
-  "description": "Autorest configuration",
+  "name": "@azure-tools/yaml",
+  "version": "1.0.0",
+  "description": "Yaml parser and utilities",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "engines": {
@@ -26,11 +26,10 @@
   "bugs": {
     "url": "https://github.com/Azure/autorest/issues"
   },
-  "homepage": "https://github.com/Azure/autorest#readme",
+  "homepage": "https://github.com/Azure/autorest/tree/main/packages/libs/json",
   "devDependencies": {
-    "@autorest/test-utils": "~0.3.0",
-    "@types/commonmark": "^0.27.0",
     "@types/jest": "^26.0.20",
+    "@types/js-yaml": "~4.0.0",
     "@types/lodash": "~4.14.168",
     "@types/node": "~14.14.20",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
@@ -42,19 +41,11 @@
     "eslint": "^7.17.0",
     "jest": "^27.0.4",
     "rimraf": "^3.0.2",
-    "ts-jest": "^27.0.3",
     "typescript": "~4.3.4"
   },
   "dependencies": {
-    "@autorest/common": "~1.2.0",
-    "@azure-tools/datastore": "~4.4.0",
-    "@azure-tools/extension": "~3.3.1",
-    "@azure-tools/uri": "~3.1.1",
-    "@azure-tools/async-io": "~3.0.0",
-    "@azure-tools/json": "~1.1.0",
-    "@azure-tools/yaml": "~1.0.0",
-    "commonmark": "^0.27.0",
+    "js-yaml": "~4.0.0",
     "lodash": "~4.17.20",
-    "untildify": "^4.0.0"
+    "yaml-ast-parser": "0.0.43"
   }
 }

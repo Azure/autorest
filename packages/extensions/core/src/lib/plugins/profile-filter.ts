@@ -16,7 +16,6 @@ import {
   QuickDataSource,
   Transformer,
   visit,
-  ConvertJsonx2Yaml,
 } from "@azure-tools/datastore";
 import { Dictionary, items, values } from "@azure-tools/linq";
 import * as oai from "@azure-tools/openapi";

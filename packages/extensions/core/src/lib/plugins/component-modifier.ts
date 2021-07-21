@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Clone } from "@azure-tools/datastore";
 import { mergeOverwriteOrAppend } from "@autorest/common";
 import { createPerFilePlugin, PipelinePlugin } from "../pipeline/common";
+import { cloneDeep } from "lodash";
 
 function decorateSpecialProperties(o: any): void {
   if (o["implementation"]) {
@@ -23,7 +23,7 @@ export function createComponentModifierPlugin(): PipelinePlugin {
   const noWireExtension = "x-ms-no-wire";
 
   return createPerFilePlugin(async (context) => async (fileIn, sink) => {
-    const componentModifier = Clone(context.config.raw.components);
+    const componentModifier = cloneDeep(context.config.raw.components);
     if (componentModifier) {
       const o = await fileIn.ReadObject<any>();
 

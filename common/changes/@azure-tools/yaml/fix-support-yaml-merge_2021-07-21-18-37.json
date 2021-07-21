@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/yaml",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@azure-tools/yaml",
+  "email": "tiguerin@microsoft.com"
+}

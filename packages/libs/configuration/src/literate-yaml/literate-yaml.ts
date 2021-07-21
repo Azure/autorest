@@ -3,15 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import {
-  DataHandle,
-  DataSink,
-  indexToPosition,
-  ParseNode,
-  StrictJsonSyntaxCheck,
-  Parse,
-  Mapping,
-} from "@azure-tools/datastore";
+import { DataHandle, DataSink, indexToPosition, Mapping } from "@azure-tools/datastore";
+import { getYamlNodeValue, parseYAML } from "@azure-tools/yaml";
+import { validateJson } from "@azure-tools/json";
 import { OperationAbortedException, AutorestLogger, identitySourceMapping, strictMerge } from "@autorest/common";
 import { LiterateYamlErrorCodes } from "./error-codes";
 import { parseCodeBlocksFromMarkdown } from "./markdown-parser";
@@ -57,31 +51,30 @@ export async function parseCodeBlocks(
       // super-quick JSON block syntax check.
       if (/^(json)/i.test(codeBlock.info || "")) {
         // check syntax on JSON blocks with simple check first
-        const error = StrictJsonSyntaxCheck(await data.ReadData());
+        const error = validateJson(await data.readData());
         if (error) {
           logger.trackError({
             code: LiterateYamlErrorCodes.jsonParsingError,
             message: `Syntax Error Encountered:  ${error.message}`,
-            source: [{ position: await indexToPosition(data, error.index), document: data.key }],
+            source: [{ position: await indexToPosition(data, error.position), document: data.key }],
           });
           throw new OperationAbortedException();
         }
       }
 
-      let failing = false;
       const ast = await data.readYamlAst();
 
       // quick syntax check.
-      ParseNode(ast, async (message, index) => {
-        failing = true;
-        logger.trackError({
-          code: LiterateYamlErrorCodes.yamlParsingError,
-          message: `Syntax Error Encountered:  ${message}`,
-          source: [{ position: await indexToPosition(data, index), document: data.key }],
-        });
-      });
+      const { errors } = getYamlNodeValue(ast);
 
-      if (failing) {
+      if (errors.length > 0) {
+        for (const { message, position } of errors) {
+          logger.trackError({
+            code: LiterateYamlErrorCodes.yamlParsingError,
+            message: `Syntax Error Encountered:  ${message}`,
+            source: [{ position: await indexToPosition(data, position), document: data.key }],
+          });
+        }
         throw new OperationAbortedException();
       }
 
@@ -118,18 +111,19 @@ export async function mergeYamls(
 
   for (const yamlInputHandle of yamlInputHandles) {
     const rawYaml = await yamlInputHandle.readData();
-    const inputGraph: any =
-      Parse(rawYaml, async (message, index) => {
-        failed = true;
-        if (logger) {
+    const { result: inputGraph, errors } = parseYAML(rawYaml);
+    if (errors.length > 0) {
+      failed = true;
+      if (logger) {
+        for (const { message, position } of errors) {
           logger.trackError({
             code: "yaml_parsing",
             message: message,
-            source: [{ document: yamlInputHandle.key, position: await indexToPosition(yamlInputHandle, index) }],
+            source: [{ document: yamlInputHandle.key, position: await indexToPosition(yamlInputHandle, position) }],
           });
         }
-      }) || {};
-
+      }
+    }
     mergedGraph = strictMerge(mergedGraph, inputGraph);
     const yaml = await yamlInputHandle.readYamlAst();
     for (const mapping of identitySourceMapping(yamlInputHandle.key, yaml)) {

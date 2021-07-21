@@ -1,5 +1,5 @@
 import { RawSourceMap, SourceMapGenerator } from "source-map";
-import { fastStringify } from "../yaml";
+import { fastStringify } from "@azure-tools/yaml";
 import { compileMapping, Mapping } from "../source-map/source-map";
 
 import { DataHandle } from "./data-handle";

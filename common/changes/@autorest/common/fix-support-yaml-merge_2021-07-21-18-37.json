@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/common",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@autorest/common",
+  "email": "tiguerin@microsoft.com"
+}
