@@ -6,7 +6,7 @@
 /* eslint-disable no-prototype-builtins */
 
 import { JsonPath, Mapping } from "@azure-tools/datastore";
-import { Stringify, YamlNode, listYamlAstDecendants } from "@azure-tools/yaml";
+import { Stringify, YamlNode, walkYamlAst } from "@azure-tools/yaml";
 
 /**
  * Merge a and b by adding new properties of b into a. It will fail if a and b have the same property and the value is different.
@@ -248,12 +248,14 @@ function mergeArray(
 }
 
 export function identitySourceMapping(sourceYamlFileName: string, sourceYamlAst: YamlNode): Mapping[] {
-  return [...listYamlAstDecendants(sourceYamlAst)].map((x) => {
-    return {
+  const result: Mapping[] = [];
+  walkYamlAst(sourceYamlAst, (x) => {
+    result.push({
       generated: { path: x.path },
       original: { path: x.path },
       name: JSON.stringify(x.path),
       source: sourceYamlFileName,
-    };
+    });
   });
+  return result;
 }

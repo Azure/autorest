@@ -8,7 +8,7 @@ import { DataHandle } from "../data-store";
 import { JsonPath, stringify } from "../json-path/json-path";
 import { indexToPosition } from "../parsing/text-utility";
 import * as yaml from "../parsing/yaml";
-import { listYamlAstDecendants, valueToAst } from "@azure-tools/yaml";
+import { walkYamlAst, valueToAst } from "@azure-tools/yaml";
 
 // information to attach to line/column based to get a richer experience
 export interface PositionEnhancements {
@@ -120,8 +120,17 @@ export function createAssignmentMapping(
   recurse = true,
   result: Mapping[] = [],
 ): Array<Mapping> {
-  for (const descendant of listYamlAstDecendants(valueToAst(assignedObject))) {
-    const path = descendant.path;
+  if (!recurse) {
+    result.push({
+      name: `${subject} (${stringify([])})`,
+      source: sourceKey,
+      original: { path: sourcePath },
+      generated: { path: targetPath },
+    });
+    return result;
+  }
+
+  walkYamlAst(valueToAst(assignedObject), ({ path }) => {
     result.push({
       name: `${subject} (${stringify(path)})`,
       source: sourceKey,
@@ -130,9 +139,7 @@ export function createAssignmentMapping(
     });
 
     // if it's just the top node that is 1:1, break now.
-    if (!recurse) {
-      break;
-    }
-  }
+  });
+
   return result;
 }
