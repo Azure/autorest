@@ -33,6 +33,7 @@ The following documents describes AutoRest specific vendor extensions for [OpenA
 - [x-ms-azure-resource](#x-ms-azure-resource) - indicates that the [Definition Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schemaObject) is a resource as defined by the [Resource Manager API](https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx)
 - [x-ms-request-id](#x-ms-request-id) - allows to overwrite the request id header name
 - [x-ms-client-request-id](#x-ms-client-request-id) - allows to overwrite the client request id header name
+- [x-ms-arm-id-details](#x-ms-arm-id-details) - indicates the allowed resources that can be referred to by an `arm-id` formatted string field.
 
 # Generic Extensions
 
@@ -1168,6 +1169,127 @@ When set, specifies the header parameter to be used instead of `x-ms-client-requ
         "required": false,
         "x-ms-client-request-id": true
       }]
+    }
+  }
+}
+```
+
+## x-ms-arm-id-details
+
+Can only be set on `"type": "string"` fields with `"format": "arm-id"`.
+
+When set, specifies the set of resource types which can be referenced by this `arm-id`. If this extension isn't provided for a particular `arm-id`, the field can refer to any valid ARM ID.
+
+**Parent element**: [Parameter Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#parameterObject), [Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schemaObject), or [Items Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#itemsObject)
+
+**Schema**:
+
+| Field Name    | Type       | Description                                      |
+| ------------- | ---------- | ------------------------------------------------ |
+| allowedTypes  | `[string]` | **Required** An array of allowed ARM resource ID kinds. Each element represents a particular type of ARM resource which can be referred to by this `arm-id`. See [Allowed formats](#allowed-arm-id-formats) for a detailed descrition of the allowed formats. |
+
+### Allowed ARM ID formats
+The allowed format always follows the following template: `{scope}/providers/{resourceType}`.
+
+The `{scope}` segment has the following allowed values. These values were derived from the [scope field in ARM templates](https://docs.microsoft.com/azure/azure-resource-manager/templates/scope-extension-resources?tabs=azure-cli).
+| Scope                                  | Meaning                                                                                                                                                                                                      |
+| ---------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `/`                                    | The resource is deployed into a tenant                                                                                                                                                                       |
+| `/subscriptions`                       | The resource is deployed into a subscription                                                                                                                                                                 |
+| `/subscriptions/resourceGroups`        | The resource is deployed into a resource group                                                                                                                                                               |
+| `*`                                    | The resource is an extension resource and may be deployed in any of the above scopes, or as a subresource of another resource in any of the above scopes                                                     |
+
+Note that we do not currently support limiting references to an extension resource by the kind of resource it is on. For example you can refer to _any_ resource lock (`*/providers/Microsoft.Authorization/locks`) but not to a resource lock but only when it's on a resource group.
+
+Below is a table showing the different kinds of resources and an example of each
+Note: When reading the format column, parameterized fields such as `{provider}` must be given concrete values in the `allowedTypes` entry. See the example column for an example.
+
+| Resource kind                   | Format                                                                      | Example                                                                            |
+| ------------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Resource in a tenant            | `/providers/{provider}/{resourceType}`                                      | `/providers/Microsoft.Capacity/reservationOrders`                                  |
+| Resource in a subscription      | `/subscriptions/providers/{provider}/{resourceType}`                        | `/subscriptions/providers/Microsoft.Resources/resourceGroups`                      |
+| Resource in a resource group    | `/subscriptions/resourceGroups/providers/{provider}/{resourceType}`         | `/subscriptions/resourceGroups/providers/Microsoft.Network/virtualNetworks`        |
+| Extension resource              | `*/{provider}/{resourceTye}`                                                | `*/providers/Microsoft.Authorization/locks`                                        |
+
+Sub-resources are specified in the same manner as their parent resource but with additional paths on the end. For example to refer to a subnet: `/subscriptions/resourceGroups/providers/Microsoft.Network/virtualNetworks/subnets`.
+
+**Example**: An `arm-id` field with no additional information about what kind of resource it must refer to
+
+```json5
+"MyExampleType": {
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "arm-id"
+    }
+  }
+}
+```
+
+**Example**: An `arm-id` field that must refer to a virtual network
+```json5
+"MyExampleType": {
+  "properties": {
+    "vnetId": {
+      "type": "string",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedTypes": [
+          "/subscriptions/resourceGroups/providers/Microsoft.Network/virtualNetworks"
+        ]
+      }
+    }
+  }
+}
+```
+
+**Example (preferred)**: An `arm-id` field with no additional information about what kind of resource it must refer to, referring to the common type.
+```json5
+"MyExampleType": {
+  "properties": {
+    "id": {
+      "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ArmId",
+    }
+  }
+}
+```
+
+**Example (preferred)**: An `arm-id` field that must refer to a virtual network, via a referenced definition
+```json5
+"MyExampleType": {
+  "properties": {
+    "vnetId": {
+      "$ref": "#/definitions/VNetId",
+    }
+  }
+},
+"VNetId": {
+  "type": "string",
+  "format": "arm-id",
+  "x-ms-arm-id-details": {
+    "allowedTypes": [
+      "/subscriptions/resourceGroups/providers/Microsoft.Network/virtualNetworks"
+    ]
+  }
+}
+```
+
+**Example**: An array of `arm-id`'s that refer to a virtual network
+
+```json5
+"MyExampleType": {
+  "properties": {
+    "vnets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "arm-id",
+        "x-ms-arm-id-details": {
+          "allowedTypes": [
+            "/subscriptions/resourceGroups/providers/Microsoft.Network/virtualNetworks"
+          ]
+        }
+      }
     }
   }
 }
