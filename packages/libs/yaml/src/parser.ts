@@ -9,7 +9,6 @@ import { dump, load } from "js-yaml";
 import { newMapping, safeLoad } from "yaml-ast-parser";
 import { cloneDeep } from "lodash";
 import { YamlMap, YamlNode, YamlScalar, Kind, YamlSequence } from "./types";
-import { listYamlAstDecendants } from "./utils";
 
 export interface YamlNodeWithPath {
   path: (string | number)[];
@@ -26,15 +25,6 @@ export const parseYAMLFast = load;
  */
 export function parseYAMLAst(rawYaml: string): YamlNode {
   return safeLoad(rawYaml) as any;
-}
-
-export function ResolveAnchorRef(yamlAstRoot: YamlNode, anchorRef: string): YamlNodeWithPath {
-  for (const yamlAstNode of listYamlAstDecendants(yamlAstRoot)) {
-    if (yamlAstNode.node.kind === Kind.ANCHOR_REF && yamlAstNode.node.anchorId === anchorRef) {
-      return yamlAstNode;
-    }
-  }
-  throw new Error(`Anchor '${anchorRef}' not found`);
 }
 
 export interface YAMLParseError {

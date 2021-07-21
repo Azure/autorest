@@ -3,17 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { DataHandle, DataSink, IsPrefix, JsonPath, nodes, SmartPosition } from "@azure-tools/datastore";
 import {
-  DataHandle,
-  DataSink,
-  IsPrefix,
-  JsonPath,
-  nodes,
-  ReplaceNode,
-  ResolveRelativeNode,
-  SmartPosition,
-} from "@azure-tools/datastore";
-import { stringifyYamlAst, cloneYamlAst, getYamlNodeValue, valueToAst, YamlNode } from "@azure-tools/yaml";
+  stringifyYamlAst,
+  cloneYamlAst,
+  getYamlNodeValue,
+  valueToAst,
+  YamlNode,
+  getYamlNodeByPath,
+  replaceYamlAstNode,
+} from "@azure-tools/yaml";
 import { AutorestContext } from "../../autorest-core";
 import { Channel } from "../../message";
 import { identitySourceMapping } from "@autorest/common";
@@ -83,9 +82,9 @@ export async function manipulateObject(
         config.debug(`Transformed Result:\n------------\n${inspect(newObject)}\n------------`);
       }
       const newAst = newObject === undefined ? undefined : valueToAst(newObject); // <- can extend ToAst to also take an "ambient" object with AST, in order to create anchor refs for existing stuff!
-      const oldAst = ResolveRelativeNode(ast, ast, hit.path);
+      const oldAst = getYamlNodeByPath(ast, hit.path);
       ast =
-        ReplaceNode(ast, oldAst, newAst) ||
+        replaceYamlAstNode(ast, oldAst, newAst) ||
         (() => {
           throw new Error("Cannot remove root node.");
         })();
