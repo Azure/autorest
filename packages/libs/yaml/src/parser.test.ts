@@ -1,8 +1,8 @@
-import { getYAMLNodeValue, parseYAMLAst } from "./parser";
+import { getYamlNodeValue, parseYAMLAst } from "./parser";
 
 function parseYAML(yaml: string): any {
   const ast = parseYAMLAst(yaml);
-  const { result, errors } = getYAMLNodeValue(ast);
+  const { result, errors } = getYamlNodeValue(ast);
 
   expect(errors).toHaveLength(0);
   return result;
