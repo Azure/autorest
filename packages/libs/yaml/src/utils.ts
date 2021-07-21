@@ -19,7 +19,7 @@ function walkYamlAstInternal(
 
   switch (node.kind) {
     case Kind.MAPPING:
-      return walkYamlAstInternal(node.value, currentPath.concat([node.key.value]), walker);
+      walkYamlAstInternal(node.value, currentPath.concat([node.key.value]), walker);
       break;
     case Kind.MAP:
       for (const mapping of node.mappings) {
