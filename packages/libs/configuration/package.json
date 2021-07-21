@@ -51,6 +51,7 @@
     "@azure-tools/extension": "~3.3.1",
     "@azure-tools/uri": "~3.1.1",
     "@azure-tools/async-io": "~3.0.0",
+    "@azure-tools/json": "~1.1.0",
     "@azure-tools/yaml": "~1.0.0",
     "commonmark": "^0.27.0",
     "lodash": "~4.17.20",

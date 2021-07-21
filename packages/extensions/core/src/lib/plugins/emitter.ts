@@ -1,5 +1,5 @@
 import { DataHandle, DataSource, QuickDataSource, createSandbox } from "@azure-tools/datastore";
-import { Normalize, Stringify } from "@azure-tools/yaml";
+import { deepNormalize, Stringify } from "@azure-tools/yaml";
 import { resolveUri } from "@azure-tools/uri";
 import { AutorestContext } from "../context";
 import { Channel } from "../message";
@@ -69,7 +69,7 @@ async function emitArtifact(
     if (isOutputArtifactOrMapRequested(context, artifactType + ".norm.yaml")) {
       const h = await sink.writeData(
         `${++emitCtr}.norm.yaml`,
-        Stringify(Normalize(await handle.readObject<any>())),
+        Stringify(deepNormalize(await handle.readObject<any>())),
         ["fix-me"],
         artifactType,
       );
@@ -87,7 +87,7 @@ async function emitArtifact(
     if (isOutputArtifactOrMapRequested(context, artifactType + ".norm.json")) {
       const h = await sink.writeData(
         `${++emitCtr}.norm.json`,
-        JSON.stringify(Normalize(await handle.readObject<any>()), null, 2),
+        JSON.stringify(deepNormalize(await handle.readObject<any>()), null, 2),
         ["fix-me"],
         artifactType,
       );

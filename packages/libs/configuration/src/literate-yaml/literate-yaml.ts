@@ -4,7 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { DataHandle, DataSink, indexToPosition, Mapping } from "@azure-tools/datastore";
-import { getYamlNodeValue, StrictJsonSyntaxCheck, parseYAML } from "@azure-tools/yaml";
+import { getYamlNodeValue, parseYAML } from "@azure-tools/yaml";
+import { validateJson } from "@azure-tools/json";
 import { OperationAbortedException, AutorestLogger, identitySourceMapping, strictMerge } from "@autorest/common";
 import { LiterateYamlErrorCodes } from "./error-codes";
 import { parseCodeBlocksFromMarkdown } from "./markdown-parser";
@@ -50,12 +51,12 @@ export async function parseCodeBlocks(
       // super-quick JSON block syntax check.
       if (/^(json)/i.test(codeBlock.info || "")) {
         // check syntax on JSON blocks with simple check first
-        const error = StrictJsonSyntaxCheck(await data.ReadData());
+        const error = validateJson(await data.readData());
         if (error) {
           logger.trackError({
             code: LiterateYamlErrorCodes.jsonParsingError,
             message: `Syntax Error Encountered:  ${error.message}`,
-            source: [{ position: await indexToPosition(data, error.index), document: data.key }],
+            source: [{ position: await indexToPosition(data, error.position), document: data.key }],
           });
           throw new OperationAbortedException();
         }

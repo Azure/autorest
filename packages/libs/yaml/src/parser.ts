@@ -218,7 +218,7 @@ export function StringifyAst(ast: YamlNode): string {
 /**
  * Normalizes the order of given object's keys (sorts recursively)
  */
-export function Normalize<T>(object: T): T {
+export function deepNormalize<T>(object: T): T {
   const seen = new WeakSet();
   const clone = cloneDeep<T>(object);
   const norm = (o: any) => {
@@ -284,24 +284,4 @@ export function fastStringify<T>(obj: T): string {
     }
   }
   return Stringify(obj);
-}
-
-export function StrictJsonSyntaxCheck(json: string): { message: string; index: number } | null {
-  try {
-    // quick check on data.
-    JSON.parse(json);
-  } catch (e) {
-    if (e instanceof SyntaxError) {
-      const message = "" + e.message;
-      try {
-        return {
-          message: message.substring(0, message.lastIndexOf("at")).trim(),
-          index: parseInt(e.message.substring(e.message.lastIndexOf(" ")).trim()),
-        };
-      } catch {
-        // ignore.
-      }
-    }
-  }
-  return null;
 }
