@@ -7,6 +7,7 @@ export * from "./file-system";
 export * from "./json-path/json-path";
 export * from "./json-pointer";
 export * from "./graph-builder";
+export * from "./graph-builder-v2";
 export * from "./data-store";
 export * from "./cancellation";
 export * from "./source-map/source-map";

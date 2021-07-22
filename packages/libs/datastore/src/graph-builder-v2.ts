@@ -4,14 +4,14 @@ import { createAssignmentMapping } from "./source-map/source-map";
 import { Exception } from "@azure-tools/tasks";
 import { parseJsonPointer } from "@azure-tools/json";
 
-export function createGraphProxy<T extends object>(
+export function createGraphProxyV2<T extends object>(
   originalFileName: string,
   targetPointer: JsonPointer = "",
   mappings = new Array<Mapping>(),
   instance = <any>{},
-): ProxyObject<T> {
+): ProxyItem<T> {
   const tag = (
-    value: any,
+    value: T,
     filename: string,
     pointer: string,
     key: string | number,
@@ -57,50 +57,56 @@ export function createGraphProxy<T extends object>(
     instance[key] = value;
   };
 
-  return new Proxy<ProxyObject<T>>(instance, {
-    get(target: ProxyObject<T>, key: string | number | symbol): any {
+  const set = (key: string, value: ProxyValue<any>) => {
+    // check if this is a correct assignment.
+    if (value.value === undefined) {
+      throw new Error(`Assignment: Value '${String(key)}' may not be undefined.`);
+    }
+    if (value.pointer === undefined) {
+      throw new Error(`Assignment: for '${String(key)}', a json pointer property is required.`);
+    }
+    if (instance[key]) {
+      throw new Exception(`Collision detected inserting into object: ${String(key)}`); //-- ${JSON.stringify(instance, null, 2)}
+    }
+    const filename = value.filename || originalFileName;
+    if (!filename) {
+      throw new Error("Assignment: filename must be specified when there is no default.");
+    }
+
+    instance[key] = value.value;
+    tag(
+      value.value,
+      filename,
+      value.pointer,
+      typeof key === "symbol" ? String(key) : key,
+      value.subject,
+      value.recurse ? true : false,
+    );
+
+    return true;
+  };
+
+  return new Proxy<ProxyItem<T>>(instance, {
+    get(target: ProxyItem<T>, key: string | number | symbol): any {
       switch (key) {
         case "__push__":
           return push;
         case "__rewrite__":
           return rewrite;
+        case "__set__":
+          return set;
       }
 
       return instance[key];
     },
 
-    set(target: ProxyObject<T>, key, value: ProxyNode<any>): boolean {
-      // check if this is a correct assignment.
-      if (value.value === undefined) {
-        throw new Error(`Assignment: Value '${String(key)}' may not be undefined.`);
-      }
-      if (value.pointer === undefined) {
-        throw new Error(`Assignment: for '${String(key)}', a json pointer property is required.`);
-      }
-      if (instance[key]) {
-        throw new Exception(`Collision detected inserting into object: ${String(key)}`); //-- ${JSON.stringify(instance, null, 2)}
-      }
-      const filename = value.filename || originalFileName;
-      if (!filename) {
-        throw new Error("Assignment: filename must be specified when there is no default.");
-      }
-
-      instance[key] = value.value;
-      tag(
-        value.value,
-        filename,
-        value.pointer,
-        typeof key === "symbol" ? String(key) : key,
-        value.subject,
-        value.recurse ? true : false,
-      );
-
-      return true;
+    set(target: ProxyItem<T>, key, value): boolean {
+      throw new Error("cannot write");
     },
   });
 }
 
-export interface ProxyNode<T> {
+export interface ProxyValue<T> {
   value: T;
   pointer: string;
   filename?: string;
@@ -108,6 +114,22 @@ export interface ProxyNode<T> {
   recurse?: boolean;
 }
 
-export type ProxyObject<T> = {
-  [P in keyof T]: ProxyNode<T[P]> | T[P];
+export type ProxyObjectV2<T> = {
+  readonly [P in keyof T]: ProxyItem<T[P]>;
 };
+
+export interface ProxyArray<T> extends ReadonlyArray<ProxyItem<T>> {
+  __push__(value: ProxyValue<T>): void;
+  __set__(value: ProxyValue<T[]>): void;
+}
+
+export type ProxyItem<T> = T extends Array<any> ? ProxyArray<T[number]> : T extends {} ? ProxyObjectV2<T> : T;
+
+// export interface Foo {
+//   some: string;
+//   array: { value: string }[];
+// }
+
+// const a: ProxyObjectV2<Foo> = {} as any;
+// const str: string = a.some;
+// const str2: string = a.array[1].value;

@@ -1,4 +1,4 @@
-import { createGraphProxy, JsonPointer, Node, visit, get, typeOf } from "@azure-tools/datastore";
+import { createGraphProxy, JsonPointer, Node, visit, get, ProxyObject, ProxyNode } from "@azure-tools/datastore";
 import { Mapping } from "source-map";
 import { resolveOperationConsumes, resolveOperationProduces } from "./content-type-utils";
 import {
@@ -8,10 +8,12 @@ import {
   OpenAPI2OperationResponse,
   OpenAPI2BodyParameter,
   OpenApi2FormDataParameter,
+  HttpMethod,
 } from "./oai2";
 import { cleanElementName, convertOai2RefToOai3, parseOai2Ref } from "./refs-utils";
 import { ResolveReferenceFn } from "./runner";
 import { statusCodes } from "./status-codes";
+import oai3 from "@azure-tools/openapi";
 
 // NOTE: after testing references should be changed to OpenAPI 3.x.x references
 
@@ -682,12 +684,12 @@ export class Oai2ToOai3 {
     target[key] = { value, pointer, recurse: true };
   }
 
-  newArray(pointer: JsonPointer) {
-    return { value: createGraphProxy(this.originalFilename, pointer, this.mappings, new Array<any>()), pointer };
+  newArray<T>(pointer: JsonPointer): ProxyNode<T> {
+    return { value: createGraphProxy(this.originalFilename, pointer, this.mappings, new Array<any>()) as any, pointer };
   }
 
-  newObject(pointer: JsonPointer) {
-    return { value: createGraphProxy(this.originalFilename, pointer, this.mappings), pointer };
+  newObject<T>(pointer: JsonPointer): ProxyNode<T> {
+    return { value: createGraphProxy(this.originalFilename, pointer, this.mappings) as any, pointer };
   }
 
   async visitPaths(target: any, paths: Iterable<Node>, globalConsumes: Array<string>, globalProduces: Array<string>) {
@@ -749,7 +751,7 @@ export class Oai2ToOai3 {
 
   async visitOperation(
     pathItem: any,
-    httpMethod: string,
+    httpMethod: HttpMethod,
     jsonPointer: JsonPointer,
     operationItemMembers: Iterable<Node>,
     operationValue: OpenAPI2Operation,
@@ -904,7 +906,7 @@ export class Oai2ToOai3 {
     }
   }
 
-  async visitOperationParameter(
+  private async visitOperationParameter(
     targetOperation: any,
     parameterValue: any,
     pointer: string,
@@ -914,6 +916,7 @@ export class Oai2ToOai3 {
     if (parameterValue.in === "formData" || parameterValue.in === "body" || parameterValue.type === "file") {
       await this.visitOperationBodyParameter(targetOperation, parameterValue, pointer, parameterItemMembers, consumes);
     } else {
+      console.log("DOES IT EVEN HERE HERERE???????");
       if (targetOperation.parameters === undefined) {
         targetOperation.parameters = this.newArray(pointer);
       }
