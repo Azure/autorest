@@ -12,12 +12,11 @@ import {
   ProxyObject,
   QuickDataSource,
   Transformer,
-  visit,
 } from "@azure-tools/datastore";
-import { Dictionary } from "@azure-tools/linq";
 import * as oai from "@azure-tools/openapi";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
+import oai3 from "@azure-tools/openapi";
 
 /**
  * components-to-keep are the ones that:
@@ -51,6 +50,9 @@ interface ComponentTracker {
   callbacks: Set<string>;
 }
 
+/**
+ * Find unused components and remove them.
+ */
 export class ComponentsCleaner extends Transformer<any, oai.Model> {
   private visitedComponents: ComponentTracker = {
     schemas: new Set<string>(),
@@ -76,29 +78,39 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
     callbacks: new Set<string>(),
   };
 
-  private components: AnyObject = {};
+  private components: oai3.Components = {};
 
   async init() {
-    const doc = await this.inputs[0].ReadObject<AnyObject>();
-    this.components = doc.components;
+    console.time("Loading doc");
+    const doc = await this.inputs[0].ReadObject<oai3.Model>();
+    console.timeEnd("Loading doc");
+    this.components = doc.components!;
+    console.time("Loading Fix in paths");
     this.findComponentsToKeepInPaths(doc.paths);
+    console.timeEnd("Loading Fix in paths");
+
+    console.time("Loading Fix in components");
     this.findComponentsToKeepInComponents();
+    console.timeEnd("Loading Fix in components");
+
+    console.time("Loading Fix in poly");
     this.findComponentsToKeepFromPolymorphicRefs();
+    console.timeEnd("Loading Fix in poly");
   }
 
-  findComponentsToKeepInPaths(paths: AnyObject) {
-    for (const { value, key } of visit(paths)) {
+  private findComponentsToKeepInPaths(paths: AnyObject) {
+    for (const value of Object.values(paths)) {
       this.crawlObject(value);
     }
   }
 
-  findComponentsToKeepInComponents() {
-    for (const { children, key: containerType } of visit(this.components)) {
+  private findComponentsToKeepInComponents() {
+    for (const [containerType, container] of Object.entries(this.components)) {
       // Ignore extension properties(x-)
       if (!(containerType in this.visitedComponents)) {
         continue;
       }
-      for (const { value, key: id } of children) {
+      for (const [id, value] of Object.entries<any>(container)) {
         if (!value["x-ms-metadata"]["x-ms-secondary-file"]) {
           this.visitedComponents[containerType as keyof ComponentTracker].add(id);
           this.componentsToKeep[containerType as keyof ComponentTracker].add(id);
@@ -108,54 +120,26 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
     }
   }
 
-  findComponentsToKeepFromPolymorphicRefs() {
+  private findComponentsToKeepFromPolymorphicRefs() {
     let entryAdded = false;
     do {
       entryAdded = false;
 
-      for (const { children: containerChildren, key: containerType } of visit(this.components)) {
-        for (const { value: component, key: currentComponentUid, children: componentChildren } of containerChildren) {
+      for (const [containerType, containerComponents] of Object.entries(this.components)) {
+        for (const [currentComponentUid, component] of Object.entries<any>(containerComponents)) {
           // only apply polymorphic pull-thru on objects with a polymorphic discriminator
           if (component?.["x-ms-discriminator-value"]) {
-            for (const { value: componentField, key: componentFieldName } of componentChildren) {
-              switch (componentFieldName) {
-                case "allOf":
-                case "oneOf":
-                case "anyOf":
-                  for (const { value: obj } of visit(componentField)) {
-                    if (obj.$ref) {
-                      const refParts = obj.$ref.split("/");
-                      const componentRefUid = refParts.pop();
-                      const refType = refParts.pop();
-                      if (
-                        this.componentsToKeep[refType as keyof ComponentTracker].has(componentRefUid) &&
-                        !this.componentsToKeep[containerType as keyof ComponentTracker].has(currentComponentUid)
-                      ) {
-                        this.componentsToKeep[containerType as keyof ComponentTracker].add(currentComponentUid);
-                        this.crawlObject(component);
-                        entryAdded = true;
-                      }
-                    }
-                  }
-                  break;
-                case "not":
-                  if (componentField.$ref) {
-                    const refParts = componentField.$ref.split("/");
-                    const componentRefUid = refParts.pop();
-                    const refType = refParts.pop();
-                    if (
-                      this.componentsToKeep[refType as keyof ComponentTracker].has(componentRefUid) &&
-                      !this.componentsToKeep[containerType as keyof ComponentTracker].has(currentComponentUid)
-                    ) {
-                      this.componentsToKeep[containerType as keyof ComponentTracker].add(currentComponentUid);
-                      this.crawlObject(component);
-                      entryAdded = true;
-                    }
-                  }
-                  break;
-                default:
-                  break;
-              }
+            if (this.checkRef(containerType as keyof ComponentTracker, currentComponentUid, component, "allOf")) {
+              entryAdded = true;
+            }
+            if (this.checkRef(containerType as keyof ComponentTracker, currentComponentUid, component, "oneOf")) {
+              entryAdded = true;
+            }
+            if (this.checkRef(containerType as keyof ComponentTracker, currentComponentUid, component, "anyOf")) {
+              entryAdded = true;
+            }
+            if (this.checkRef(containerType as keyof ComponentTracker, currentComponentUid, component, "not")) {
+              entryAdded = true;
             }
           }
         }
@@ -163,8 +147,30 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
     } while (entryAdded);
   }
 
+  private checkRef(
+    containerType: keyof ComponentTracker,
+    currentComponentUid: string,
+    component: any,
+    prop: "allOf" | "anyOf" | "oneOf" | "not",
+  ) {
+    if (component[prop].$ref) {
+      const refParts = component[prop].$ref.split("/");
+      const componentRefUid = refParts.pop();
+      const refType = refParts.pop() as keyof ComponentTracker;
+      if (
+        this.componentsToKeep[refType].has(componentRefUid) &&
+        !this.componentsToKeep[containerType].has(currentComponentUid)
+      ) {
+        this.componentsToKeep[containerType].add(currentComponentUid);
+        this.crawlObject(component);
+        return true;
+      }
+    }
+    return false;
+  }
+
   private crawlObject(obj: any): void {
-    for (const { key, value } of visit(obj)) {
+    for (const [key, value] of Object.entries(obj)) {
       // We don't want to navigate the examples.
       if (key === "x-ms-examples") {
         continue;
@@ -176,7 +182,7 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
         if (!this.visitedComponents[t].has(componentUid)) {
           this.visitedComponents[t].add(componentUid);
           this.componentsToKeep[t].add(componentUid);
-          this.crawlObject(this.components[t][componentUid]);
+          this.crawlObject(this.components[t]?.[componentUid]);
         }
       } else if (value && typeof value === "object") {
         this.crawlObject(value);
@@ -185,6 +191,7 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
   }
 
   public async process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {
+    console.time("PROcess");
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
         case "components":
@@ -200,9 +207,10 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
           break;
       }
     }
+    console.timeEnd("PROcess");
   }
 
-  visitComponents(components: ProxyObject<Dictionary<oai.Components>>, nodes: Iterable<Node>) {
+  visitComponents(components: ProxyObject<Record<string, oai.Components>>, nodes: Iterable<Node>) {
     for (const {
       key: containerType,
       pointer: containerPointer,
