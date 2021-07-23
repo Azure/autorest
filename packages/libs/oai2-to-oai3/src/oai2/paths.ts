@@ -1,4 +1,4 @@
-import { OpenAPI2Definition, OpenAPI2Reference } from "./definition";
+import { OpenAPI2Definition, OpenAPI2Reference, Refable } from "./definition";
 import { OpenAPI2HeaderDefinition } from "./header";
 import { OpenAPI2Parameter } from "./parameter";
 
@@ -19,7 +19,7 @@ export interface OpenAPI2Operation {
   operationId: string;
   description: string;
   responses: OpenAPI2OperationResponses;
-  parameters?: OpenAPI2Parameter[];
+  parameters?: Refable<OpenAPI2Parameter>[];
   produces?: string[];
   consumes?: string[];
 }

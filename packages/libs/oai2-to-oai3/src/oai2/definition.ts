@@ -14,9 +14,11 @@ export interface OpenAPI2Definition {
   type?: OpenAPI2Type; // allow this to be optional to cover cases when this is missing
 }
 
-export interface OpenAPI2Reference {
+export interface OpenAPI2Reference<T = any> {
   $ref: string;
 }
+
+export type Refable<T> = OpenAPI2Reference<T> | T;
 
 export type OpenAPI2Type =
   | "array"

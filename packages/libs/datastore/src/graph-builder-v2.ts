@@ -7,12 +7,12 @@ import { JsonPath } from "./json-path/json-path";
 
 export function createGraphProxyV2<T extends object>(
   originalFileName: string,
-  targetPointer: JsonPointer = "",
+  targetPointer: JsonPointer | JsonPath = "",
   value: Partial<T>,
   mappings = new Array<Mapping>(),
 ): ProxyItem<T> {
   const instance: any = value;
-  const targetPointerPath = parseJsonPointer(targetPointer);
+  const targetPointerPath = typeof targetPointer === "string" ? parseJsonPointer(targetPointer) : targetPointer;
 
   const push = (value: ProxyValue<any>) => {
     const filename = value.sourceFilename || originalFileName;
@@ -20,18 +20,26 @@ export function createGraphProxyV2<T extends object>(
       throw new Error("Assignment: filename must be specified when there is no default.");
     }
 
-    instance.push(value.value);
+    const newPropertyPath = [...targetPointerPath, instance.length - 1];
+    let item;
+    if (typeof value.value === "object") {
+      item = createGraphProxyV2(originalFileName, newPropertyPath, value.value, mappings);
+    } else {
+      item = value.value;
+    }
+    instance.push(item);
 
     tag(
       value.value,
-      targetPointerPath,
+      newPropertyPath,
       filename,
       parseJsonPointerForArray(value.sourcePointer),
-      instance.length - 1,
       value.subject || "",
       value.recurse ?? false,
       mappings,
     );
+
+    return item;
   };
 
   const rewrite = (key: string, value: any) => {
@@ -54,13 +62,17 @@ export function createGraphProxyV2<T extends object>(
       throw new Error("Assignment: filename must be specified when there is no default.");
     }
 
-    instance[key] = value.value;
+    const newPropertyPath = [...targetPointerPath, typeof key === "symbol" ? String(key) : key];
+    if (typeof value.value === "object") {
+      instance[key] = createGraphProxyV2(originalFileName, newPropertyPath, value.value, mappings);
+    } else {
+      instance[key] = value.value;
+    }
     tag(
       value.value,
-      targetPointerPath,
+      newPropertyPath,
       filename,
       parseJsonPointer(value.sourcePointer),
-      typeof key === "symbol" ? String(key) : key,
       value.subject,
       value.recurse ? true : false,
       mappings,
@@ -84,7 +96,7 @@ export function createGraphProxyV2<T extends object>(
     },
 
     set(target: ProxyItem<T>, key, value): boolean {
-      throw new Error("cannot write");
+      throw new Error("Use __set__ or __push__ to modify proxy graph.");
     },
   });
 }
@@ -94,7 +106,6 @@ function tag<T>(
   targetPointerPath: JsonPath,
   sourceFilename: string,
   sourcePointerPath: JsonPath,
-  key: string | number,
   subject: string | undefined,
   recurse: boolean,
   mappings: Mapping[],
@@ -103,7 +114,7 @@ function tag<T>(
     value,
     sourceFilename,
     sourcePointerPath.filter((each) => each !== ""),
-    [...targetPointerPath, key].filter((each) => each !== ""),
+    targetPointerPath.filter((each) => each !== ""),
     subject || "",
     recurse,
     mappings,
@@ -147,10 +158,7 @@ export interface ProxyValue<T> {
 }
 
 export interface ProxyObjectV2Funcs<T> {
-  __set__<K extends keyof T>(
-    key: K,
-    value: ProxyValue<T[K]>,
-  ): asserts this is keyof T extends K ? {} : Required<{ [v in K]: ProxyValue<T[K]> }> & this;
+  __set__<K extends keyof T>(key: K, value: ProxyValue<T[K]>): void; //: asserts this is keyof T extends K ? {} : Required<{ [v in K]: ProxyValue<T[K]> }> & this;
 }
 
 export type ProxyObjectV2<T> = {
@@ -159,7 +167,7 @@ export type ProxyObjectV2<T> = {
   ProxyObjectV2Funcs<T>;
 
 export interface ProxyArray<T> extends ReadonlyArray<ProxyItem<T>> {
-  __push__(value: ProxyValue<T>): void;
+  __push__(value: ProxyValue<T>): ProxyItem<T>;
 }
 
 export type ProxyItem<T> = T extends Array<any> ? ProxyArray<T[number]> : T extends {} ? ProxyObjectV2<T> : T;
