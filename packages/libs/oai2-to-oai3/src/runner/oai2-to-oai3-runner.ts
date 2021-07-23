@@ -1,5 +1,5 @@
 import { DataHandle, Mapping } from "@azure-tools/datastore";
-import { getFromJsonPointer } from "@azure-tools/json";
+import { getFromJsonPointer, serializeJsonPointer } from "@azure-tools/json";
 import { Oai2ToOai3 } from "../converter";
 import { OpenAPI2Document } from "../oai2";
 import { loadInputFiles } from "./utils";
@@ -53,6 +53,12 @@ export const convertOai2ToOai3 = async (inputs: Map<string, OaiToOai3FileInput>)
       name: input.name,
       mappings,
     });
+    console.log(
+      "DONe",
+      mappings.map((x: any) => {
+        return `${serializeJsonPointer(x.original.path)} => ${serializeJsonPointer(x.generated.path)}`;
+      }),
+    );
     return { result, mappings };
   };
 

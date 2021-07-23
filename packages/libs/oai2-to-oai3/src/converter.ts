@@ -115,7 +115,7 @@ export class Oai2ToOai3 {
       }
 
       this.generated.__set__("servers", this.newArray("/x-ms-parameterized-host"));
-      this.generated.servers!.__push__({ value: server, sourcePointer: "/x-ms-parameterized-host", recurse: true });
+      this.generated.servers!.__push__({ value: server, sourcePointer: "/x-ms-parameterized-host" });
     } else if (this.original.host) {
       if (this.generated.servers === undefined) {
         this.generated.__set__("servers", this.newArray("/host"));
@@ -211,7 +211,7 @@ export class Oai2ToOai3 {
           break;
         // no changes to security from OA2 to OA3
         case "security":
-          this.generated.__set__("security", { value, sourcePointer: pointer, recurse: true });
+          this.generated.__set__("security", { value, sourcePointer: pointer });
           break;
         case "tags":
           this.generated.__set__("tags", this.newArray(pointer));
@@ -280,7 +280,7 @@ export class Oai2ToOai3 {
 
       for (const key of parameterUnchangedProperties) {
         if (parameterValue[key] !== undefined) {
-          parameterTarget.__set__(key, { value: parameterValue[key], sourcePointer, recurse: true });
+          parameterTarget.__set__(key, { value: parameterValue[key], sourcePointer });
         }
       }
 
@@ -362,7 +362,7 @@ export class Oai2ToOai3 {
           }
           await this.visitSchema(schema.items as any, parameterValue.items, childIterator);
         } else if (schemaKeys.indexOf(key) !== -1) {
-          schema.__set__(key, { value: parameterValue[key], sourcePointer, recurse: true });
+          schema.__set__(key, { value: parameterValue[key], sourcePointer });
         }
       }
 
@@ -564,7 +564,7 @@ export class Oai2ToOai3 {
         case "maxProperties":
         case "minProperties":
         case "readOnly":
-          target.__set__(key, { value, sourcePointer: pointer, recurse: true });
+          target.__set__(key, { value, sourcePointer: pointer });
           break;
         case "enum":
           target.__set__("enum", this.newArray(pointer));
@@ -598,7 +598,7 @@ export class Oai2ToOai3 {
           this.visitExternalDocs(target, key, value, pointer);
           break;
         case "example":
-          target.__set__("example", { value, sourcePointer: pointer, recurse: true });
+          target.__set__("example", { value, sourcePointer: pointer });
           break;
         case "x-nullable":
           target.__set__("nullable", { value, sourcePointer: pointer });
@@ -624,7 +624,7 @@ export class Oai2ToOai3 {
         target.__push__(this.newObject(pointer));
         await this.visitSchema(target[index], value, childIterator);
       } else {
-        target.__push__({ value, sourcePointer: pointer, recurse: true });
+        target.__push__({ value, sourcePointer: pointer });
       }
     }
   }
@@ -637,7 +637,7 @@ export class Oai2ToOai3 {
   }
 
   private visitXml(target: ProxyObjectV2<any>, key: string, value: any, sourcePointer: string) {
-    target.__set__(key, { value, sourcePointer, recurse: true });
+    target.__set__(key, { value, sourcePointer });
   }
 
   private async visitTags(targetTags: ProxyArray<oai3.Tag>, tags: Iterable<Node>) {
@@ -692,13 +692,13 @@ export class Oai2ToOai3 {
         target.__set__(key, { value: await this.convertReferenceToOai3(value), sourcePointer });
         break;
       default:
-        target.__set__(key, { value, sourcePointer, recurse: true });
+        target.__set__(key, { value, sourcePointer });
         break;
     }
   }
 
   private visitExternalDocs(target: ProxyObjectV2<any>, key: string, value: any, sourcePointer: string) {
-    target.__set__(key, { value, sourcePointer, recurse: true });
+    target.__set__(key, { value, sourcePointer });
   }
 
   private newArray<T>(pointer: JsonPointer): ProxyValue<T> {
@@ -826,7 +826,7 @@ export class Oai2ToOai3 {
         case "schemes":
           break;
         case "security":
-          operation.__set__("security", { value, sourcePointer: pointer, recurse: true });
+          operation.__set__("security", { value, sourcePointer: pointer });
           break;
         default:
           await this.visitExtensions(operation, key, value, pointer);
@@ -1074,7 +1074,7 @@ export class Oai2ToOai3 {
         }
 
         if (parameterValue.enum !== undefined) {
-          targetProperty.__set__("enum", { value: parameterValue.enum, sourcePointer, recurse: true });
+          targetProperty.__set__("enum", { value: parameterValue.enum, sourcePointer });
         }
 
         if (parameterValue.allOf !== undefined) {
@@ -1290,9 +1290,9 @@ export class Oai2ToOai3 {
         if (key === "schema") {
           await this.visitSchema(schema.items!, headerValue.items, childIterator);
         } else if (this.parameterTypeProperties.includes(key) || this.arrayProperties.includes(key)) {
-          schema.__set__(key, { value: headerValue[key], sourcePointer, recurse: true });
+          schema.__set__(key, { value: headerValue[key], sourcePointer });
         } else if (key.startsWith("x-") && targetHeader[key] === undefined) {
-          targetHeader.__set__(key, { value: headerValue[key], sourcePointer, recurse: true });
+          targetHeader.__set__(key, { value: headerValue[key], sourcePointer });
         }
       }
 

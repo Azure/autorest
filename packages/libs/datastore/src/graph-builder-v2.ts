@@ -1,9 +1,8 @@
-import { Mapping } from "source-map";
 import { JsonPointer } from "./json-pointer/json-pointer";
-import { createAssignmentMapping } from "./source-map/source-map";
 import { Exception } from "@azure-tools/tasks";
 import { parseJsonPointer } from "@azure-tools/json";
 import { JsonPath } from "./json-path/json-path";
+import { Mapping } from "./source-map";
 
 export function createGraphProxyV2<T extends object>(
   originalFileName: string,
@@ -60,15 +59,7 @@ function proxyObject<T extends object>(
     }
     instance.push(item);
 
-    tag(
-      value.value,
-      newPropertyPath,
-      filename,
-      parseJsonPointerForArray(value.sourcePointer),
-      value.subject || "",
-      value.recurse ?? false,
-      mappings,
-    );
+    tag(newPropertyPath, filename, parseJsonPointerForArray(value.sourcePointer), mappings);
 
     return item;
   };
@@ -99,15 +90,7 @@ function proxyObject<T extends object>(
     } else {
       instance[key] = value.value;
     }
-    tag(
-      value.value,
-      newPropertyPath,
-      filename,
-      parseJsonPointer(value.sourcePointer),
-      value.subject,
-      value.recurse ? true : false,
-      mappings,
-    );
+    tag(newPropertyPath, filename, parseJsonPointer(value.sourcePointer), mappings);
 
     return true;
   };
@@ -134,24 +117,12 @@ function proxyObject<T extends object>(
   });
 }
 
-function tag<T>(
-  value: T,
-  targetPointerPath: JsonPath,
-  sourceFilename: string,
-  sourcePointerPath: JsonPath,
-  subject: string | undefined,
-  recurse: boolean,
-  mappings: Mapping[],
-) {
-  createAssignmentMapping(
-    value,
-    sourceFilename,
-    sourcePointerPath.filter((each) => each !== ""),
-    targetPointerPath.filter((each) => each !== ""),
-    subject || "",
-    recurse,
-    mappings,
-  );
+function tag(targetPointerPath: JsonPath, sourceFilename: string, sourcePointerPath: JsonPath, mappings: Mapping[]) {
+  mappings.push({
+    source: sourceFilename,
+    original: { path: sourcePointerPath.filter((each) => each !== "") },
+    generated: { path: targetPointerPath.filter((each) => each !== "") },
+  });
 }
 
 /**
@@ -186,8 +157,6 @@ export interface ProxyValue<T> {
    * Source filename if different from the default.
    */
   sourceFilename?: string;
-  subject?: string;
-  recurse?: boolean;
 }
 
 export interface ProxyObjectV2Funcs<T> {
