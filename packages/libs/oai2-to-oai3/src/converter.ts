@@ -141,9 +141,7 @@ export class Oai2ToOai3 {
     }
 
     if (this.generated.servers === undefined) {
-      // NOTE: set to empty array to match behavior from https://github.com/fearthecowboy/swagger2openapi/blob/autorest-flavor/index.js
-      // In reality this should not be neccesary as severs is not required for the OAI definition to be complete.
-      this.generated.__set__("servers", this.newArray(""));
+      this.generated.__set__("servers", { value: [], sourcePointer: NoMapping });
     }
 
     // internal function to extract server parameters
