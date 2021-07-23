@@ -11,8 +11,39 @@ export function createGraphProxyV2<T extends object>(
   value: Partial<T>,
   mappings = new Array<Mapping>(),
 ): ProxyItem<T> {
-  const instance: any = value;
   const targetPointerPath = typeof targetPointer === "string" ? parseJsonPointer(targetPointer) : targetPointer;
+  return proxyDeepObject<T>(originalFileName, targetPointerPath, value, mappings);
+}
+
+function proxyDeepObject<T>(
+  originalFileName: string,
+  targetPointer: JsonPath,
+  obj: Partial<T>,
+  mappings: Mapping[],
+): ProxyItem<T> {
+  if (Array.isArray(obj)) {
+    const proxiedItems = obj.map((x, i) => proxyDeepObject(originalFileName, targetPointer.concat(i), x, mappings));
+    return proxyObject(originalFileName, targetPointer, proxiedItems, mappings) as any;
+  } else if (typeof obj === "object") {
+    const result: any = {};
+    for (const [key, value] of Object.entries<any>(obj)) {
+      result[key] = proxyDeepObject(originalFileName, targetPointer.concat(key), value, mappings);
+    }
+    return proxyObject(originalFileName, targetPointer, result, mappings) as any;
+  } else {
+    return obj;
+  }
+}
+
+function proxyObject<T extends object>(
+  originalFileName: string,
+  targetPointer: JsonPointer | JsonPath = "",
+  value: any,
+  mappings = new Array<Mapping>(),
+): ProxyItem<T> {
+  const targetPointerPath = typeof targetPointer === "string" ? parseJsonPointer(targetPointer) : targetPointer;
+
+  const instance: any = value;
 
   const push = (value: ProxyValue<any>) => {
     const filename = value.sourceFilename || originalFileName;
@@ -82,7 +113,7 @@ export function createGraphProxyV2<T extends object>(
   };
 
   return new Proxy<ProxyItem<T>>(instance, {
-    get(target: ProxyItem<T>, key: string | number | symbol): any {
+    get(_: ProxyItem<T>, key: string | number | symbol): any {
       switch (key) {
         case "__push__":
           return push;
@@ -95,8 +126,10 @@ export function createGraphProxyV2<T extends object>(
       return instance[key];
     },
 
-    set(target: ProxyItem<T>, key, value): boolean {
-      throw new Error("Use __set__ or __push__ to modify proxy graph.");
+    set(_: ProxyItem<T>, key, value): boolean {
+      throw new Error(
+        `Use __set__ or __push__ to modify proxy graph. Trying to set ${String(key)} with value: ${value}`,
+      );
     },
   });
 }
@@ -158,6 +191,11 @@ export interface ProxyValue<T> {
 }
 
 export interface ProxyObjectV2Funcs<T> {
+  /**
+   * Set the key with the given value.
+   * @param key key of object T
+   * @param value value properties
+   */
   __set__<K extends keyof T>(key: K, value: ProxyValue<T[K]>): void; //: asserts this is keyof T extends K ? {} : Required<{ [v in K]: ProxyValue<T[K]> }> & this;
 }
 
@@ -167,16 +205,11 @@ export type ProxyObjectV2<T> = {
   ProxyObjectV2Funcs<T>;
 
 export interface ProxyArray<T> extends ReadonlyArray<ProxyItem<T>> {
+  /**
+   * Push a new value at the end of the array.
+   * @param value value properties to set.
+   */
   __push__(value: ProxyValue<T>): ProxyItem<T>;
 }
 
 export type ProxyItem<T> = T extends Array<any> ? ProxyArray<T[number]> : T extends {} ? ProxyObjectV2<T> : T;
-
-// export interface Foo {
-//   some: string;
-//   array: { value: string }[];
-// }
-
-// const a: ProxyObjectV2<Foo> = {} as any;
-// const str: string = a.some;
-// const str2: string = a.array[1].value;
