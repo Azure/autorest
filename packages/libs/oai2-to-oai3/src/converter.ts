@@ -1085,8 +1085,8 @@ export class Oai2ToOai3 {
           // Support the case where an operation can accept multiple files
           if (contentType === "multipart/form-data" && parameterValue.items.type === "file") {
             targetProperty.__set__("items", this.newObject(sourcePointer));
-            targetProperty.items.type = { value: "string", sourcePointer: `${sourcePointer}/items` };
-            targetProperty.items.format = { value: "binary", sourcePointer: `${sourcePointer}/items` };
+            targetProperty.items.__set__("type", { value: "string", sourcePointer: `${sourcePointer}/items` });
+            targetProperty.items.__set__("format", { value: "binary", sourcePointer: `${sourcePointer}/items` });
           } else {
             targetProperty.__set__("items", { value: parameterValue.items as any, sourcePointer });
           }
