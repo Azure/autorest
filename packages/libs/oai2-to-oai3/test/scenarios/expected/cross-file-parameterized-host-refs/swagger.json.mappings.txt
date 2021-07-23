@@ -1,0 +1,10 @@
+/x-ms-parameterized-host => /servers
+/x-ms-parameterized-host => /servers/-1
+/$schema => /$schema
+/swagger => /openapi
+/info => /info
+/info/x-ms-metadata => /info/x-ms-metadata
+/info/title => /info/title
+/info/description => /info/description
+/info/version => /info/version
+/paths => /paths

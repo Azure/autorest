@@ -1,0 +1,16 @@
+ => /servers
+/$schema => /$schema
+/swagger => /openapi
+/info => /info
+/info/x-ms-metadata => /info/x-ms-metadata
+/info/title => /info/title
+/info/description => /info/description
+/info/version => /info/version
+/paths => /paths
+/definitions/MySchema => /components
+/definitions/MySchema => /components/schemas
+/definitions/MySchema => /components/schemas/MySchema
+/definitions/MySchema/type => /components/schemas/MySchema/type
+/definitions/MySchema/properties => /components/schemas/MySchema/properties
+/definitions/MySchema/properties/myProp => /components/schemas/MySchema/properties/myProp
+/definitions/MySchema/properties/myProp/$ref => /components/schemas/MySchema/properties/myProp/$ref
