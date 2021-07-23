@@ -62,7 +62,9 @@ function proxyObject<T extends object>(
     }
     instance.push(item);
 
-    tag(newPropertyPath, filename, parseJsonPointerForArray(value.sourcePointer), mappings);
+    if (value.sourcePointer) {
+      tag(newPropertyPath, filename, parseJsonPointerForArray(value.sourcePointer), mappings);
+    }
 
     return item;
   };
@@ -76,10 +78,8 @@ function proxyObject<T extends object>(
     if (value.value === undefined) {
       throw new Error(`Assignment: Value '${String(key)}' may not be undefined.`);
     }
-    if (value.sourcePointer === undefined) {
-      throw new Error(`Assignment: for '${String(key)}', a json pointer property is required.`);
-    }
-    if (instance[key]) {
+
+    if (Object.prototype.hasOwnProperty.call(instance, key)) {
       throw new Exception(`Collision detected inserting into object: ${String(key)}`); //-- ${JSON.stringify(instance, null, 2)}
     }
     const filename = value.sourceFilename || originalFileName;
@@ -93,7 +93,10 @@ function proxyObject<T extends object>(
     } else {
       instance[key] = value.value;
     }
-    tag(newPropertyPath, filename, parseJsonPointer(value.sourcePointer), mappings);
+
+    if (value.sourcePointer) {
+      tag(newPropertyPath, filename, parseJsonPointer(value.sourcePointer), mappings);
+    }
 
     return true;
   };
@@ -154,7 +157,7 @@ export interface ProxyValue<T> {
   /**
    * Source pointer.
    */
-  sourcePointer: string;
+  sourcePointer?: string;
 
   /**
    * Source filename if different from the default.

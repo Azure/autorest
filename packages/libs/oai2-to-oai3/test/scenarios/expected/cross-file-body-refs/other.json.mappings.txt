@@ -1,8 +1,6 @@
- => /servers
-/definitions/MyBodySchema => /components
-/definitions/MyBodySchema => /components/schemas
-/definitions/MyBodySchema => /components/schemas/MyBodySchema
-/definitions/MyBodySchema/type => /components/schemas/MyBodySchema/type
-/definitions/MyBodySchema/properties => /components/schemas/MyBodySchema/properties
-/definitions/MyBodySchema/properties/url => /components/schemas/MyBodySchema/properties/url
-/definitions/MyBodySchema/properties/url/type => /components/schemas/MyBodySchema/properties/url/type
+/components/schemas => /definitions
+/components/schemas/MyBodySchema => /definitions/MyBodySchema
+/components/schemas/MyBodySchema/type => /definitions/MyBodySchema/type
+/components/schemas/MyBodySchema/properties => /definitions/MyBodySchema/properties
+/components/schemas/MyBodySchema/properties/url => /definitions/MyBodySchema/properties/url
+/components/schemas/MyBodySchema/properties/url/type => /definitions/MyBodySchema/properties/url/type

@@ -29,7 +29,7 @@ const expectInputsMatchSnapshots = async (testName: string, filenames: string[])
     expect(jsonResult).toMatchRawFileSnapshot(join(expectedFolder, testName, result.name));
 
     const mappings = result.mappings
-      .map((x: any) => `${serializeJsonPointer(x.original.path)} => ${serializeJsonPointer(x.generated.path)}`)
+      .map((x: any) => `${serializeJsonPointer(x.generated.path)} => ${serializeJsonPointer(x.original.path)}`)
       .join("\n");
     expect(mappings).toMatchRawFileSnapshot(join(expectedFolder, testName, `${result.name}.mappings.txt`));
   }

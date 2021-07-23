@@ -9,8 +9,8 @@ import {
   createGraphProxyV2,
   ProxyValue,
   ProxyArray,
+  Mapping,
 } from "@azure-tools/datastore";
-import { Mapping } from "source-map";
 import { resolveOperationConsumes, resolveOperationProduces } from "./content-type-utils";
 import {
   OpenAPI2Document,
@@ -491,11 +491,11 @@ export class Oai2ToOai3 {
       childIterator: definitionsItemMembers,
     } of definitions) {
       if (this.generated.components === undefined) {
-        this.generated.__set__("components", this.newObject(jsonPointer));
+        this.generated.__set__("components", { value: {} });
       }
 
       if (this.generated.components!.schemas === undefined) {
-        this.generated.components?.__set__("schemas", this.newObject(jsonPointer));
+        this.generated.components?.__set__("schemas", { value: {}, sourcePointer: "/definitions" });
       }
 
       const cleanSchemaName = schemaName.replace(/\[|\]/g, "_");
