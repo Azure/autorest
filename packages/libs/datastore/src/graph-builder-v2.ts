@@ -20,6 +20,9 @@ function proxyDeepObject<T>(
   obj: Partial<T>,
   mappings: Mapping[],
 ): ProxyItem<T> {
+  if (obj === undefined || obj === null) {
+    return obj;
+  }
   if (Array.isArray(obj)) {
     const proxiedItems = obj.map((x, i) => proxyDeepObject(originalFileName, targetPointer.concat(i), x, mappings));
     return proxyObject(originalFileName, targetPointer, proxiedItems, mappings) as any;
