@@ -81,6 +81,7 @@ export enum EncodingStyle {
   Form = "form",
   SpaceDelimited = "spaceDelimited",
   PipeDelimited = "pipeDelimited",
+  TabsDelimited = "tabsDelimited",
   DeepObject = "deepObject",
 }
 
