@@ -59,12 +59,7 @@ function proxyObject<T extends object>(
     }
 
     const newPropertyPath = [...targetPointerPath, instance.length - 1];
-    let item;
-    if (typeof value.value === "object") {
-      item = createGraphProxyV2(originalFileName, newPropertyPath, value.value, mappings);
-    } else {
-      item = value.value;
-    }
+    const item = proxyDeepObject(originalFileName, newPropertyPath, value.value, mappings);
     instance.push(item);
 
     if (value.sourcePointer !== NoMapping) {
@@ -93,11 +88,7 @@ function proxyObject<T extends object>(
     }
 
     const newPropertyPath = [...targetPointerPath, typeof key === "symbol" ? String(key) : key];
-    if (typeof value.value === "object") {
-      instance[key] = createGraphProxyV2(originalFileName, newPropertyPath, value.value, mappings);
-    } else {
-      instance[key] = value.value;
-    }
+    instance[key] = proxyDeepObject(originalFileName, newPropertyPath, value.value, mappings);
 
     if (value.sourcePointer !== NoMapping) {
       tag(newPropertyPath, filename, parseJsonPointer(value.sourcePointer), mappings);
