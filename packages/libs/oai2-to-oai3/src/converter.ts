@@ -1,4 +1,14 @@
-import { createGraphProxy, JsonPointer, Node, visit, get, ProxyObject, ProxyNode } from "@azure-tools/datastore";
+import {
+  createGraphProxy,
+  JsonPointer,
+  Node,
+  visit,
+  get,
+  ProxyNode,
+  ProxyObjectV2,
+  createGraphProxyV2,
+  ProxyValue,
+} from "@azure-tools/datastore";
 import { Mapping } from "source-map";
 import { resolveOperationConsumes, resolveOperationProduces } from "./content-type-utils";
 import {
@@ -18,7 +28,7 @@ import oai3 from "@azure-tools/openapi";
 // NOTE: after testing references should be changed to OpenAPI 3.x.x references
 
 export class Oai2ToOai3 {
-  public generated: any;
+  public generated: ProxyObjectV2<oai3.Model>;
   public mappings = new Array<Mapping>();
 
   constructor(
@@ -26,7 +36,7 @@ export class Oai2ToOai3 {
     protected original: OpenAPI2Document,
     private resolveExternalReference?: ResolveReferenceFn,
   ) {
-    this.generated = createGraphProxy(this.originalFilename, "", this.mappings);
+    this.generated = createGraphProxyV2(this.originalFilename, "", this.mappings);
   }
 
   async convert() {
@@ -102,11 +112,11 @@ export class Oai2ToOai3 {
         }
       }
 
-      this.generated.servers = this.newArray("/x-ms-parameterized-host");
+      this.generated.__set__("servers", this.newArray("/x-ms-parameterized-host"));
       this.generated.servers.__push__({ value: server, pointer: "/x-ms-parameterized-host", recurse: true });
     } else if (this.original.host) {
       if (this.generated.servers === undefined) {
-        this.generated.servers = this.newArray("/host");
+        this.generated.__set__("servers", this.newArray("/host"));
       }
       for (const { value: s, pointer } of visit(this.original.schemes)) {
         const server: any = {};
@@ -115,7 +125,7 @@ export class Oai2ToOai3 {
 
         extractServerParameters(server);
 
-        this.generated.servers.__push__({ value: server, pointer });
+        this.generated.servers?.__push__({ value: server, pointer });
       }
     } else if (this.original.basePath) {
       const server: any = {};
@@ -130,7 +140,7 @@ export class Oai2ToOai3 {
     if (this.generated.servers === undefined) {
       // NOTE: set to empty array to match behavior from https://github.com/fearthecowboy/swagger2openapi/blob/autorest-flavor/index.js
       // In reality this should not be neccesary as severs is not required for the OAI definition to be complete.
-      this.generated.servers = this.newArray("");
+      this.generated.__set__("servers", this.newArray(""));
     }
 
     // internal function to extract server parameters
@@ -152,17 +162,17 @@ export class Oai2ToOai3 {
     for (const { value, key, pointer, children } of visit(this.original)) {
       switch (key) {
         case "swagger":
-          this.generated.openapi = { value: "3.0.0", pointer };
+          this.generated.__set__("openapi", { value: "3.0.0", pointer });
           break;
         case "info":
-          this.generated.info = this.newObject(pointer);
+          this.generated.__set__("info", this.newObject(pointer));
           await this.visitInfo(children);
           break;
         case "x-ms-paths":
         case "paths":
           {
             if (!this.generated[key]) {
-              this.generated[key] = this.newObject(pointer);
+              this.generated.__set__(key, this.newObject(pointer));
             }
             await this.visitPaths(this.generated[key], children, globalConsumes, globalProduces);
           }
@@ -185,24 +195,24 @@ export class Oai2ToOai3 {
           break;
         case "responses":
           if (!this.generated.components) {
-            this.generated.components = this.newObject(pointer);
+            this.generated.__set__("components", this.newObject(pointer));
           }
-          this.generated.components.responses = this.newObject(pointer);
+          this.generated.components?.__set__("responses", this.newObject(pointer));
           await this.visitResponsesDefinitions(children, globalProduces);
           break;
         case "securityDefinitions":
           if (!this.generated.components) {
-            this.generated.components = this.newObject(pointer);
+            this.generated.__set__("components", this.newObject(pointer));
           }
-          this.generated.components.securitySchemes = this.newObject(pointer);
+          this.generated.components?.__set__("securitySchemes", this.newObject(pointer));
           await this.visitSecurityDefinitions(children);
           break;
         // no changes to security from OA2 to OA3
         case "security":
-          this.generated.security = { value, pointer, recurse: true };
+          this.generated.__set__("security", { value, pointer, recurse: true });
           break;
         case "tags":
-          this.generated.tags = this.newArray(pointer);
+          this.generated.__set__("tags", this.newArray(pointer));
           await this.visitTags(children);
           break;
         case "externalDocs":
@@ -221,7 +231,7 @@ export class Oai2ToOai3 {
     for (const { key, value, pointer, childIterator } of parameters) {
       if (value.in !== "formData" && value.in !== "body" && value.type !== "file") {
         if (this.generated.components === undefined) {
-          this.generated.components = this.newObject(pointer);
+          this.generated.__set__("components", this.newObject(pointer));
         }
 
         if (this.generated.components.parameters === undefined) {
@@ -684,12 +694,15 @@ export class Oai2ToOai3 {
     target[key] = { value, pointer, recurse: true };
   }
 
-  newArray<T>(pointer: JsonPointer): ProxyNode<T> {
-    return { value: createGraphProxy(this.originalFilename, pointer, this.mappings, new Array<any>()) as any, pointer };
+  newArray<T>(pointer: JsonPointer): ProxyValue<T> {
+    return {
+      value: createGraphProxyV2(this.originalFilename, pointer, this.mappings, new Array<any>()) as any,
+      pointer,
+    };
   }
 
-  newObject<T>(pointer: JsonPointer): ProxyNode<T> {
-    return { value: createGraphProxy(this.originalFilename, pointer, this.mappings) as any, pointer };
+  newObject<T>(pointer: JsonPointer): ProxyValue<T> {
+    return { value: createGraphProxyV2(this.originalFilename, pointer, this.mappings) as any, pointer };
   }
 
   async visitPaths(target: any, paths: Iterable<Node>, globalConsumes: Array<string>, globalProduces: Array<string>) {

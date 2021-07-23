@@ -107,20 +107,27 @@ export function createGraphProxyV2<T extends object>(
 }
 
 export interface ProxyValue<T> {
-  value: T;
+  value: ProxyItem<T>;
   pointer: string;
   filename?: string;
   subject?: string;
   recurse?: boolean;
 }
 
+export interface ProxyObjectV2Funcs<T> {
+  __set__<K extends keyof T>(
+    key: K,
+    value: ProxyValue<T[K]>,
+  ): asserts this is Required<{ [v in K]: ProxyValue<T[K]> }> & this;
+}
+
 export type ProxyObjectV2<T> = {
   readonly [P in keyof T]: ProxyItem<T[P]>;
-};
+} &
+  ProxyObjectV2Funcs<T>;
 
 export interface ProxyArray<T> extends ReadonlyArray<ProxyItem<T>> {
   __push__(value: ProxyValue<T>): void;
-  __set__(value: ProxyValue<T[]>): void;
 }
 
 export type ProxyItem<T> = T extends Array<any> ? ProxyArray<T[number]> : T extends {} ? ProxyObjectV2<T> : T;
@@ -133,3 +140,4 @@ export type ProxyItem<T> = T extends Array<any> ? ProxyArray<T[number]> : T exte
 // const a: ProxyObjectV2<Foo> = {} as any;
 // const str: string = a.some;
 // const str2: string = a.array[1].value;
+new Map();
