@@ -10,6 +10,7 @@ import {
   ProxyValue,
   ProxyArray,
   Mapping,
+  NoMapping,
 } from "@azure-tools/datastore";
 import { resolveOperationConsumes, resolveOperationProduces } from "./content-type-utils";
 import {
@@ -491,7 +492,7 @@ export class Oai2ToOai3 {
       childIterator: definitionsItemMembers,
     } of definitions) {
       if (this.generated.components === undefined) {
-        this.generated.__set__("components", { value: {} });
+        this.generated.__set__("components", { value: {}, sourcePointer: NoMapping });
       }
 
       if (this.generated.components!.schemas === undefined) {

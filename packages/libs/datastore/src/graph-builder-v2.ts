@@ -4,6 +4,11 @@ import { parseJsonPointer } from "@azure-tools/json";
 import { JsonPath } from "./json-path/json-path";
 import { Mapping } from "./source-map";
 
+/**
+ * To explicitly specify that there is no mapping for this.
+ */
+export const NoMapping = Symbol("NoMapping");
+
 export function createGraphProxyV2<T extends object>(
   originalFileName: string,
   targetPointer: JsonPointer | JsonPath = "",
@@ -62,7 +67,7 @@ function proxyObject<T extends object>(
     }
     instance.push(item);
 
-    if (value.sourcePointer) {
+    if (value.sourcePointer !== NoMapping) {
       tag(newPropertyPath, filename, parseJsonPointerForArray(value.sourcePointer), mappings);
     }
 
@@ -94,7 +99,7 @@ function proxyObject<T extends object>(
       instance[key] = value.value;
     }
 
-    if (value.sourcePointer) {
+    if (value.sourcePointer !== NoMapping) {
       tag(newPropertyPath, filename, parseJsonPointer(value.sourcePointer), mappings);
     }
 
@@ -157,7 +162,7 @@ export interface ProxyValue<T> {
   /**
    * Source pointer.
    */
-  sourcePointer?: string;
+  sourcePointer: string | typeof NoMapping;
 
   /**
    * Source filename if different from the default.
