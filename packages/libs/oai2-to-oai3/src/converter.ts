@@ -5,12 +5,13 @@ import {
   Node,
   visit,
   get,
-  ProxyObjectV2,
-  createGraphProxyV2,
+  MappingTreeObject,
   ProxyValue,
-  ProxyArray,
+  MappingTreeArray,
   Mapping,
   NoMapping,
+  MappingTreeItem,
+  createMappingTree,
 } from "@azure-tools/datastore";
 import { resolveOperationConsumes, resolveOperationProduces } from "./content-type-utils";
 import {
@@ -30,7 +31,7 @@ import oai3, { EncodingStyle, HttpOperation, JsonType, PathItem, SecurityType } 
 // NOTE: after testing references should be changed to OpenAPI 3.x.x references
 
 export class Oai2ToOai3 {
-  public generated: ProxyObjectV2<oai3.Model>;
+  public generated: MappingTreeObject<oai3.Model>;
   public mappings = new Array<Mapping>();
 
   constructor(
@@ -38,7 +39,7 @@ export class Oai2ToOai3 {
     protected original: OpenAPI2Document,
     private resolveExternalReference?: ResolveReferenceFn,
   ) {
-    this.generated = createGraphProxyV2<oai3.Model>(this.originalFilename, "", {}, this.mappings);
+    this.generated = createMappingTree<oai3.Model>(this.originalFilename, {}, this.mappings);
   }
 
   async convert() {
@@ -252,7 +253,7 @@ export class Oai2ToOai3 {
   }
 
   private async visitParameter(
-    parameterTarget: ProxyObjectV2<oai3.Parameter>,
+    parameterTarget: MappingTreeObject<oai3.Parameter>,
     parameterValue: any,
     sourcePointer: string,
     parameterItemMembers: () => Iterable<Node>,
@@ -334,7 +335,7 @@ export class Oai2ToOai3 {
         parameterTarget.__set__("schema", this.newObject(sourcePointer));
       }
 
-      const schema: ProxyObjectV2<oai3.Schema> = parameterTarget.schema as any;
+      const schema: MappingTreeObject<oai3.Schema> = parameterTarget.schema as any;
 
       const schemaKeys = [
         "maximum",
@@ -406,7 +407,7 @@ export class Oai2ToOai3 {
       children: securityDefinitionsItemMembers,
     } of securityDefinitions) {
       this.generated.components?.securitySchemes?.__set__(schemeName, this.newObject(sourcePointer));
-      const securityScheme: ProxyObjectV2<oai3.SecurityScheme> = this.generated.components?.securitySchemes?.[
+      const securityScheme: MappingTreeObject<oai3.SecurityScheme> = this.generated.components?.securitySchemes?.[
         schemeName
       ]! as any;
       switch (v.type) {
@@ -504,18 +505,18 @@ export class Oai2ToOai3 {
     }
   }
 
-  private async visitProperties(target: ProxyObjectV2<any>, propertiesItemMembers: () => Iterable<Node>) {
+  private async visitProperties(target: MappingTreeObject<any>, propertiesItemMembers: () => Iterable<Node>) {
     for (const { key, value, pointer, childIterator } of propertiesItemMembers()) {
       target.__set__(key, this.newObject(pointer));
       await this.visitSchema(target[key], value, childIterator);
     }
   }
 
-  async visitResponsesDefinitions(responses: Iterable<Node>, globalProduces: Array<string>) {
+  async visitResponsesDefinitions(responses: Iterable<Node>, globalProduces: string[]) {
     for (const { key, pointer, value, childIterator } of responses) {
       this.generated.components?.responses?.__set__(key, this.newObject(pointer));
       await this.visitResponse(
-        this.generated.components!.responses![key] as ProxyObjectV2<oai3.Response>,
+        this.generated.components!.responses![key] as MappingTreeObject<oai3.Response>,
         value,
         key,
         childIterator,
@@ -526,7 +527,7 @@ export class Oai2ToOai3 {
   }
 
   private async visitSchema(
-    target: ProxyObjectV2<oai3.Schema>,
+    target: MappingTreeObject<oai3.Schema>,
     schemaValue: any,
     schemaItemMemebers: () => Iterable<Node>,
   ) {
@@ -617,7 +618,7 @@ export class Oai2ToOai3 {
     }
   }
 
-  private async visitEnum(target: ProxyArray<any>, members: () => Iterable<Node>) {
+  private async visitEnum(target: MappingTreeArray<any>, members: () => Iterable<Node>) {
     for (const { key: index, value, pointer, childIterator } of members()) {
       if (typeof value === "object") {
         target.__push__(this.newObject(pointer));
@@ -628,31 +629,31 @@ export class Oai2ToOai3 {
     }
   }
 
-  private async visitAllOf(target: ProxyArray<oai3.Refable<oai3.Schema>>, allOfMembers: () => Iterable<Node>) {
+  private async visitAllOf(target: MappingTreeArray<oai3.Refable<oai3.Schema>>, allOfMembers: () => Iterable<Node>) {
     for (const { key: index, value, pointer, childIterator } of allOfMembers()) {
       target.__push__(this.newObject(pointer));
       await this.visitSchema(target[index], value, childIterator);
     }
   }
 
-  private visitXml(target: ProxyObjectV2<any>, key: string, value: any, sourcePointer: string) {
+  private visitXml(target: MappingTreeObject<any>, key: string, value: any, sourcePointer: string) {
     target.__set__(key, { value, sourcePointer });
   }
 
-  private async visitTags(targetTags: ProxyArray<oai3.Tag>, tags: Iterable<Node>) {
+  private async visitTags(targetTags: MappingTreeArray<oai3.Tag>, tags: Iterable<Node>) {
     for (const { key: index, pointer, children: tagItemMembers } of tags) {
       await this.visitTag(targetTags, parseInt(index), pointer, tagItemMembers);
     }
   }
 
   private async visitTag(
-    targetTags: ProxyArray<oai3.Tag>,
+    targetTags: MappingTreeArray<oai3.Tag>,
     index: number,
     jsonPointer: JsonPointer,
     tagItemMembers: Iterable<Node>,
   ) {
     targetTags.__push__(this.newObject(jsonPointer));
-    const item: ProxyObjectV2<oai3.Tag> = targetTags[index];
+    const item: MappingTreeObject<oai3.Tag> = targetTags[index];
 
     for (const { key, pointer, value } of tagItemMembers) {
       switch (key) {
@@ -685,7 +686,7 @@ export class Oai2ToOai3 {
     }
   }
 
-  private async visitExtensions(target: ProxyObjectV2<any>, key: string, value: any, sourcePointer: string) {
+  private async visitExtensions(target: MappingTreeObject<any>, key: string, value: any, sourcePointer: string) {
     switch (key) {
       case "x-ms-odata":
         target.__set__(key, { value: await this.convertReferenceToOai3(value), sourcePointer });
@@ -696,7 +697,7 @@ export class Oai2ToOai3 {
     }
   }
 
-  private visitExternalDocs(target: ProxyObjectV2<any>, key: string, value: any, sourcePointer: string) {
+  private visitExternalDocs(target: MappingTreeObject<any>, key: string, value: any, sourcePointer: string) {
     target.__set__(key, { value, sourcePointer });
   }
 
@@ -712,10 +713,10 @@ export class Oai2ToOai3 {
   }
 
   private async visitPaths(
-    target: ProxyObjectV2<Record<string, oai3.PathItem>>,
+    target: MappingTreeObject<Record<string, oai3.PathItem>>,
     paths: Iterable<Node>,
-    globalConsumes: Array<string>,
-    globalProduces: Array<string>,
+    globalConsumes: string[],
+    globalProduces: string[],
   ) {
     for (const { key: uri, pointer, children: pathItemMembers } of paths) {
       await this.visitPath(target, uri, pointer, pathItemMembers, globalConsumes, globalProduces);
@@ -723,12 +724,12 @@ export class Oai2ToOai3 {
   }
 
   private async visitPath(
-    target: ProxyObjectV2<Record<string, oai3.PathItem>>,
+    target: MappingTreeObject<Record<string, oai3.PathItem>>,
     uri: string,
     jsonPointer: JsonPointer,
     pathItemMembers: Iterable<Node>,
-    globalConsumes: Array<string>,
-    globalProduces: Array<string>,
+    globalConsumes: string[],
+    globalProduces: string[],
   ) {
     target.__set__(uri, this.newObject(jsonPointer));
     const pathItem = target[uri]!;
@@ -774,13 +775,13 @@ export class Oai2ToOai3 {
   }
 
   async visitOperation(
-    pathItem: ProxyObjectV2<PathItem>,
+    pathItem: MappingTreeObject<PathItem>,
     httpMethod: HttpMethod,
     jsonPointer: JsonPointer,
     operationItemMembers: Iterable<Node>,
     operationValue: OpenAPI2Operation,
-    globalConsumes: Array<string>,
-    globalProduces: Array<string>,
+    globalConsumes: string[],
+    globalProduces: string[],
   ) {
     // trace was not supported on OpenAPI 2.0, it was an extension
     httpMethod = httpMethod !== "x-trace" ? httpMethod : "trace";
@@ -817,7 +818,7 @@ export class Oai2ToOai3 {
         case "responses":
           operation.__set__("responses", this.newObject(pointer));
           await this.visitResponses(
-            operation.responses as ProxyObjectV2<Record<string, oai3.Response>>,
+            operation.responses as MappingTreeObject<Record<string, oai3.Response>>,
             operationFieldItemMembers,
             produces,
           );
@@ -835,7 +836,7 @@ export class Oai2ToOai3 {
   }
 
   private async visitParameters(
-    targetOperation: ProxyObjectV2<oai3.HttpOperation>,
+    targetOperation: MappingTreeObject<oai3.HttpOperation>,
     parametersFieldItemMembers: any,
     consumes: any,
     sourcePointer: string,
@@ -916,7 +917,7 @@ export class Oai2ToOai3 {
       if ("$ref" in targetOperation.requestBody) {
         throw new Error();
       }
-      const requestBody: ProxyObjectV2<oai3.RequestBody> = targetOperation.requestBody;
+      const requestBody: MappingTreeObject<oai3.RequestBody> = targetOperation.requestBody;
 
       if (requestBodyTracker.wasParamRequired !== undefined) {
         requestBody.__set__("required", {
@@ -957,11 +958,11 @@ export class Oai2ToOai3 {
   }
 
   private async visitOperationParameter(
-    targetOperation: ProxyObjectV2<HttpOperation>,
+    targetOperation: MappingTreeObject<HttpOperation>,
     parameterValue: any,
     pointer: string,
     parameterItemMembers: () => Iterable<Node>,
-    consumes: Array<any>,
+    consumes: string[],
   ) {
     if (parameterValue.in === "formData" || parameterValue.in === "body" || parameterValue.type === "file") {
       await this.visitOperationBodyParameter(targetOperation, parameterValue, pointer, parameterItemMembers, consumes);
@@ -970,23 +971,25 @@ export class Oai2ToOai3 {
         targetOperation.__set__("parameters", this.newArray(pointer));
       }
 
-      const parameter = targetOperation.parameters!.__push__(this.newObject(pointer)) as ProxyObjectV2<oai3.Parameter>;
+      const parameter = targetOperation.parameters!.__push__(
+        this.newObject(pointer),
+      ) as MappingTreeObject<oai3.Parameter>;
       await this.visitParameter(parameter, parameterValue, pointer, parameterItemMembers);
     }
   }
 
   private async visitOperationBodyParameter(
-    targetOperation: ProxyObjectV2<HttpOperation>,
+    targetOperation: MappingTreeObject<HttpOperation>,
     parameterValue: OpenAPI2BodyParameter | OpenApi2FormDataParameter,
     sourcePointer: string,
     parameterItemMembers: () => Iterable<Node>,
-    consumes: Array<any>,
+    consumes: string[],
   ) {
     if (targetOperation.requestBody === undefined) {
       targetOperation.__set__("requestBody", this.newObject(sourcePointer));
     }
 
-    const requestBody: ProxyObjectV2<oai3.RequestBody> = targetOperation.requestBody! as any;
+    const requestBody: MappingTreeObject<oai3.RequestBody> = targetOperation.requestBody! as any;
     if (requestBody!.content === undefined) {
       requestBody!.__set__("content", this.newObject(sourcePointer));
     }
@@ -1031,7 +1034,7 @@ export class Oai2ToOai3 {
           }
         }
       } else {
-        const schema = requestBody.content[contentType].schema as ProxyObjectV2<oai3.Schema>;
+        const schema = requestBody.content[contentType].schema as MappingTreeObject<oai3.Schema>;
         if (schema.type === undefined) {
           schema.__set__("type", { value: JsonType.Object, sourcePointer });
         }
@@ -1143,9 +1146,9 @@ export class Oai2ToOai3 {
   }
 
   private async visitResponses(
-    target: ProxyObjectV2<Record<string, oai3.Response>>,
+    target: MappingTreeObject<Record<string, oai3.Response>>,
     responsesItemMembers: Iterable<Node>,
-    produces: Array<string>,
+    produces: string[],
   ) {
     for (const { key, value, pointer, childIterator } of responsesItemMembers) {
       target.__set__(key, this.newObject(pointer));
@@ -1160,12 +1163,12 @@ export class Oai2ToOai3 {
   }
 
   private async visitResponse(
-    responseTarget: ProxyObjectV2<oai3.Response>,
+    responseTarget: MappingTreeObject<oai3.Response>,
     responseValue: OpenAPI2OperationResponse,
     responseName: string,
     responsesFieldMembers: () => Iterable<Node>,
     sourcePointer: string,
-    produces: Array<string>,
+    produces: string[],
   ) {
     // NOTE: The previous converter patches the description of the response because
     // every response should have a description.
@@ -1266,7 +1269,7 @@ export class Oai2ToOai3 {
   arrayProperties = ["items", "minItems", "maxItems", "uniqueItems"];
 
   private async visitHeader(
-    targetHeader: ProxyObjectV2<oai3.Header>,
+    targetHeader: MappingTreeObject<oai3.Header>,
     headerValue: OpenAPI2ResponseHeader,
     sourcePointer: string,
   ) {
@@ -1284,7 +1287,7 @@ export class Oai2ToOai3 {
         targetHeader.__set__("description", { value: headerValue.description, sourcePointer });
       }
 
-      const schema: ProxyObjectV2<oai3.Schema> = targetHeader.schema as any;
+      const schema: MappingTreeObject<oai3.Schema> = targetHeader.schema as any;
       for (const { key, childIterator } of visit(headerValue)) {
         if (key === "schema") {
           await this.visitSchema(schema.items!, headerValue.items, childIterator);
