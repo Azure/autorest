@@ -114,7 +114,7 @@ function proxyObject<T extends object>(
       throw new Error("Assignment: filename must be specified when there is no default.");
     }
 
-    const newPropertyPath = [...targetPointerPath, instance.length - 1];
+    const newPropertyPath = [...targetPointerPath, instance.length];
     const item = proxyDeepObject(originalFileName, newPropertyPath, value.value, mappings);
     instance.push(item);
 
