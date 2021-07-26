@@ -21,7 +21,7 @@ export abstract class DataSource {
   }
 
   public async readStrict(uri: string): Promise<DataHandle> {
-    const result = await this.Read(uri);
+    const result = await this.read(uri);
     if (result === null) {
       throw new Error(`Could not read '${uri}'.`);
     }

@@ -1,4 +1,3 @@
-import { createCommonmarkProcessorPlugin } from "./commonmark";
 import { createAllOfCleaner } from "./allof-cleaner";
 import { createCommandPlugin } from "./command";
 
@@ -28,7 +27,6 @@ import {
 } from "./transformer";
 import { createTreeShakerPlugin } from "./tree-shaker/tree-shaker";
 import { createApiVersionParameterHandlerPlugin } from "./version-param-handler";
-import { createJsonToYamlPlugin, createYamlToJsonPlugin } from "./yaml-and-json";
 import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from "./schema-validation";
 import { createOpenAPIStatsCollectorPlugin } from "./openapi-stats-collector";
 import { QuickDataSource } from "@azure-tools/datastore";
@@ -55,10 +53,7 @@ export const CORE_PLUGIN_MAP = {
   "semantic-validator": createSemanticValidationPlugin(),
   "openapi-document-converter": createSwaggerToOpenApi3Plugin(),
   "component-modifiers": createComponentModifierPlugin(),
-  "yaml2jsonx": createYamlToJsonPlugin(),
-  "jsonx2yaml": createJsonToYamlPlugin(),
   "reflect-api-versions-cs": createCSharpReflectApiVersionPlugin(),
-  "commonmarker": createCommonmarkProcessorPlugin(),
   "profile-definition-emitter": createArtifactEmitterPlugin(),
   "emitter": createArtifactEmitterPlugin(),
   "configuration-emitter": createArtifactEmitterPlugin(

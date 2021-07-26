@@ -28,6 +28,7 @@ dependencies:
   '@rush-temp/schemas': file:projects/schemas.tgz
   '@rush-temp/test-public-packages': file:projects/test-public-packages.tgz_prettier@2.3.1
   '@rush-temp/test-utils': file:projects/test-utils.tgz_prettier@2.3.1+ts-node@9.1.1
+  '@rush-temp/yaml': file:projects/yaml.tgz_prettier@2.3.1+ts-node@9.1.1
   '@types/body-parser': 1.19.0
   '@types/command-exists': 1.2.0
   '@types/commonmark': 0.27.4
@@ -9242,7 +9243,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-KjYWCECfLzbQmTjRbBXMVJuox2rQVRVQPZn7Lm5XOa3eOgjq4qN6jYiTVLf9qAMrjNGdtUP0UyVLh1p3ys3PEg==
+      integrity: sha512-cAoMqXIRV+V3Z0+RjZiKJYpUhnUsNn4E94FZGOmf9M8hA4ghKc4/nrMUUbXWuFOBtZxOPRCIt0EDbDq3aHGf+A==
       tarball: file:projects/common.tgz
     version: 0.0.0
   file:projects/compare.tgz_prettier@2.3.1:
@@ -9308,7 +9309,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-7PXy/Tn71sJ83rZq76kUwiUfHYiRrL/OSp2hZeKcrM2VfPTAOHYqMSEau4PLXOC9NrwhYyujXnddtD8d75Wtuw==
+      integrity: sha512-xM1TG0yaamQTOO0BZX1O0QX7/+h73fBp00yNAN4fIE9cEoYPwNADAUwSAzGRDV/hvGWWyA2muKpbbP3lgzZELA==
       tarball: file:projects/configuration.tgz
     version: 0.0.0
   file:projects/core.tgz_ts-node@9.1.1:
@@ -9364,7 +9365,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-DLfXhYT1VB5zKDvbD+Hk30mXl0wviqVh1Hi6ieBOjqn1q1NNYpJBYOO2+aGO9CLamk+GZyLZ6oDjP5eZ4bz1pA==
+      integrity: sha512-os1ANs2y4xh8O7DAT3jDgJceix/6yHIIwzR+t9wpkk72aPXly89jxEdiRnzFJgCIkTn+bQcLqyJJkWkAhtOA8A==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.3.1+ts-node@9.1.1:
@@ -9375,6 +9376,7 @@ packages:
       '@azure/logger': 1.0.2
       '@types/jest': 26.0.20
       '@types/jsonpath': 0.2.0
+      '@types/lodash': 4.14.168
       '@types/node': 14.14.34
       '@types/source-map': 0.5.0
       '@typescript-eslint/eslint-plugin': 4.17.0_1160784d52d5049720154d5bb8e5522f
@@ -9387,6 +9389,7 @@ packages:
       jest: 27.0.4_ts-node@9.1.1
       js-yaml: 4.0.0
       jsonpath: 1.0.0
+      lodash: 4.17.21
       rimraf: 3.0.2
       source-map: 0.7.3
       ts-jest: 27.0.3_jest@27.0.4+typescript@4.3.4
@@ -9399,7 +9402,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-J+y6Ca+9BChbxMAJ3YAKb48GnlOd4d7nSR+QA9APVjrQKl42uzGxbPnXYAdF61aOxfqRhWRZvnP7ZdwRxUEH/w==
+      integrity: sha512-tfiP1VIhJ7gGkQvFlFvgZVrBvImrDghGrD6HGsb3tBQVoUB/89cMWIcNGhFEAwR/Y0BUhc9bl1vsf3SGOcbmZg==
       tarball: file:projects/datastore.tgz
     version: 0.0.0
   file:projects/deduplication.tgz_prettier@2.3.1+ts-node@9.1.1:
@@ -9728,6 +9731,35 @@ packages:
       integrity: sha512-HPw6q8Lfmbyxy/b0JZ3zXXF68ua7KGegMKTWmBN82or64UjJI1WSf5mlbeQlZGQ5v2ISn/b5TeLeKFylcRIYjw==
       tarball: file:projects/test-utils.tgz
     version: 0.0.0
+  file:projects/yaml.tgz_prettier@2.3.1+ts-node@9.1.1:
+    dependencies:
+      '@types/jest': 26.0.20
+      '@types/js-yaml': 4.0.0
+      '@types/lodash': 4.14.168
+      '@types/node': 14.14.34
+      '@typescript-eslint/eslint-plugin': 4.17.0_1160784d52d5049720154d5bb8e5522f
+      '@typescript-eslint/parser': 4.17.0_eslint@7.21.0+typescript@4.3.4
+      eslint: 7.21.0
+      eslint-plugin-jest: 24.3.2_44f8a152bedca6ee96cca2f179ba5495
+      eslint-plugin-node: 11.1.0_eslint@7.21.0
+      eslint-plugin-prettier: 3.4.0_eslint@7.21.0+prettier@2.3.1
+      eslint-plugin-unicorn: 33.0.1_eslint@7.21.0
+      jest: 27.0.4_ts-node@9.1.1
+      js-yaml: 4.0.0
+      lodash: 4.17.21
+      rimraf: 3.0.2
+      typescript: 4.3.4
+      yaml-ast-parser: 0.0.43
+    dev: false
+    id: file:projects/yaml.tgz
+    name: '@rush-temp/yaml'
+    peerDependencies:
+      prettier: '*'
+      ts-node: '*'
+    resolution:
+      integrity: sha512-3I7QY07OZ3q5UXyewow4CAAvK8GCECJlU2y2bUEmzmoOO9Z3tKDyLUuoQj4nnVJE1UTE7u9Py6RIq+qG5PZOTg==
+      tarball: file:projects/yaml.tgz
+    version: 0.0.0
 registry: ''
 specifiers:
   '@azure-tools/adl': ~0.10.0
@@ -9759,6 +9791,7 @@ specifiers:
   '@rush-temp/schemas': file:./projects/schemas.tgz
   '@rush-temp/test-public-packages': file:./projects/test-public-packages.tgz
   '@rush-temp/test-utils': file:./projects/test-utils.tgz
+  '@rush-temp/yaml': file:./projects/yaml.tgz
   '@types/body-parser': ^1.19.0
   '@types/command-exists': ~1.2.0
   '@types/commonmark': ^0.27.0
