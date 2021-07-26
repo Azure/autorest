@@ -10,10 +10,10 @@
 /paths/~1test/get => /paths/~1test/get
 /paths/~1test/get/operationId => /paths/~1test/get/operationId
 /paths/~1test/get/parameters => /paths/~1test/get/parameters/0
-/paths/~1test/get/parameters/-1 => /paths/~1test/get/parameters/0
-/paths/~1test/get/parameters/-1/$ref => /paths/~1test/get/parameters/0
-/paths/~1test/get/parameters/0 => /paths/~1test/get/parameters/1
-/paths/~1test/get/parameters/0/$ref => /paths/~1test/get/parameters/1
+/paths/~1test/get/parameters/0 => /paths/~1test/get/parameters/0
+/paths/~1test/get/parameters/0/$ref => /paths/~1test/get/parameters/0
+/paths/~1test/get/parameters/1 => /paths/~1test/get/parameters/1
+/paths/~1test/get/parameters/1/$ref => /paths/~1test/get/parameters/1
 /paths/~1test/get/responses => /paths/~1test/get/responses
 /paths/~1test/get/responses/200 => /paths/~1test/get/responses/200
 /paths/~1test/get/responses/200/description => /paths/~1test/get/responses/200

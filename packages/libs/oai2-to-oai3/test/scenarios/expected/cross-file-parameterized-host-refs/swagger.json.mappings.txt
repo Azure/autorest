@@ -1,5 +1,5 @@
 /servers => /x-ms-parameterized-host
-/servers/-1 => /x-ms-parameterized-host
+/servers/0 => /x-ms-parameterized-host
 /$schema => /$schema
 /openapi => /swagger
 /info => /info
