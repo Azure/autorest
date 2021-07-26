@@ -919,13 +919,6 @@ export class Oai2ToOai3 {
       }
       const requestBody: MappingTreeObject<oai3.RequestBody> = targetOperation.requestBody;
 
-      if (requestBodyTracker.wasParamRequired !== undefined) {
-        requestBody.__set__("required", {
-          value: requestBodyTracker.wasParamRequired,
-          sourcePointer,
-        });
-      }
-
       if (requestBodyTracker.description !== undefined && requestBody.description === undefined) {
         requestBody.__set__("description", { value: requestBodyTracker.description, sourcePointer });
       }
@@ -990,8 +983,15 @@ export class Oai2ToOai3 {
     }
 
     const requestBody: MappingTreeObject<oai3.RequestBody> = targetOperation.requestBody! as any;
-    if (requestBody!.content === undefined) {
-      requestBody!.__set__("content", this.newObject(sourcePointer));
+    if (
+      (parameterValue.in === "body" || parameterValue.type === "file") &&
+      parameterValue.in !== "formData" &&
+      parameterValue.required !== undefined
+    ) {
+      requestBody.__set__("required", {
+        value: parameterValue.required,
+        sourcePointer: `${sourcePointer}/required`,
+      });
     }
 
     if (parameterValue["x-ms-parameter-location"] && requestBody["x-ms-parameter-location"] === undefined) {
@@ -1011,6 +1011,10 @@ export class Oai2ToOai3 {
 
     if (parameterValue.allowEmptyValue !== undefined && requestBody.allowEmptyValue === undefined) {
       requestBody.__set__("allowEmptyValue", { value: parameterValue.allowEmptyValue, sourcePointer });
+    }
+
+    if (requestBody!.content === undefined) {
+      requestBody!.__set__("content", this.newObject(sourcePointer));
     }
 
     if (parameterValue.in === "formData") {
