@@ -33,9 +33,7 @@
             "$ref": "#/components/parameters/ApiVersionParameter"
           }
         ],
-        "tags": [
-          "Redis"
-        ],
+        "tags": ["Redis"],
         "responses": {
           "200": {
             "description": "A list of caches",
@@ -86,9 +84,7 @@
             "$ref": "#/components/parameters/ApiVersionParameter"
           }
         ],
-        "tags": [
-          "Redis"
-        ],
+        "tags": ["Redis"],
         "responses": {
           "200": {
             "description": "A list of caches",
@@ -122,8 +118,7 @@
           },
           "description": "body Parameter",
           "required": true
-        },
-        "x-ms-requestBody-index": 2
+        }
       },
       "put": {
         "operationId": "update",
@@ -152,9 +147,7 @@
             "$ref": "#/components/parameters/ApiVersionParameter"
           }
         ],
-        "tags": [
-          "Redis"
-        ],
+        "tags": ["Redis"],
         "responses": {
           "200": {
             "description": "A list of caches",
@@ -188,8 +181,7 @@
           },
           "description": "body Parameter",
           "required": true
-        },
-        "x-ms-requestBody-index": 2
+        }
       }
     }
   },
@@ -301,9 +293,7 @@
         "required": true,
         "schema": {
           "type": "string",
-          "enum": [
-            "123456"
-          ]
+          "enum": ["123456"]
         }
       },
       "ApiVersionParameter": {
@@ -313,9 +303,7 @@
         "required": true,
         "schema": {
           "type": "string",
-          "enum": [
-            "2014-04-01-preview"
-          ]
+          "enum": ["2014-04-01-preview"]
         }
       }
     }

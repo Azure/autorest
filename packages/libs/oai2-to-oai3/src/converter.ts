@@ -844,11 +844,8 @@ export class Oai2ToOai3 {
     const requestBodyTracker = {
       xmsname: undefined,
       name: undefined,
-      description: undefined,
       index: -1,
       keepTrackingIndex: true,
-      wasSpecialParameterFound: false,
-      wasParamRequired: undefined,
     };
 
     for (let { pointer, value, childIterator } of parametersFieldItemMembers) {
@@ -879,32 +876,22 @@ export class Oai2ToOai3 {
       }
 
       if (value.in === "body" || value.type === "file" || value.in === "formData") {
-        if (!requestBodyTracker.wasSpecialParameterFound && value.description !== undefined) {
-          requestBodyTracker.description = value.description;
-        } else {
-          requestBodyTracker.description = undefined;
-        }
-
         if (value["x-ms-client-name"]) {
           requestBodyTracker.xmsname = value["x-ms-client-name"];
         } else if (value.name) {
           requestBodyTracker.name = value.name;
         }
-
-        if ((value.in === "body" || value.type === "file") && value.in !== "formData") {
-          requestBodyTracker.wasParamRequired = value.required;
-        }
       }
 
-      if (requestBodyTracker.keepTrackingIndex) {
-        if (!(value.in === "body" || value.type === "file" || value.in === "formData")) {
-          if (requestBodyTracker.wasSpecialParameterFound) {
-            requestBodyTracker.keepTrackingIndex = false;
-          }
-        } else {
-          requestBodyTracker.wasSpecialParameterFound = true;
-        }
-      }
+      // if (requestBodyTracker.keepTrackingIndex) {
+      //   if (!(value.in === "body" || value.type === "file" || value.in === "formData")) {
+      //     if (requestBodyTracker.wasSpecialParameterFound) {
+      //       requestBodyTracker.keepTrackingIndex = false;
+      //     }
+      //   } else {
+      //     requestBodyTracker.wasSpecialParameterFound = true;
+      //   }
+      // }
 
       if (requestBodyTracker.keepTrackingIndex) {
         requestBodyTracker.index += 1;
@@ -918,10 +905,6 @@ export class Oai2ToOai3 {
         throw new Error();
       }
       const requestBody: MappingTreeObject<oai3.RequestBody> = targetOperation.requestBody;
-
-      if (requestBodyTracker.description !== undefined && requestBody.description === undefined) {
-        requestBody.__set__("description", { value: requestBodyTracker.description, sourcePointer });
-      }
 
       if (requestBodyTracker.xmsname) {
         if (requestBody["x-ms-client-name"] === undefined) {
@@ -940,12 +923,6 @@ export class Oai2ToOai3 {
           value: requestBodyTracker.name,
           sourcePointer,
         });
-      }
-
-      if (targetOperation.parameters === undefined) {
-        targetOperation.__set__("x-ms-requestBody-index", { value: 0, sourcePointer });
-      } else {
-        targetOperation.__set__("x-ms-requestBody-index", { value: requestBodyTracker.index, sourcePointer });
       }
     }
   }
@@ -991,6 +968,13 @@ export class Oai2ToOai3 {
       requestBody.__set__("required", {
         value: parameterValue.required,
         sourcePointer: `${sourcePointer}/required`,
+      });
+    }
+
+    if (parameterValue.description !== undefined && requestBody.description === undefined) {
+      requestBody.__set__("description", {
+        value: parameterValue.description,
+        sourcePointer: `${sourcePointer}/description`,
       });
     }
 
