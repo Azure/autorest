@@ -841,13 +841,6 @@ export class Oai2ToOai3 {
     consumes: any,
     sourcePointer: string,
   ) {
-    const requestBodyTracker = {
-      xmsname: undefined,
-      name: undefined,
-      index: -1,
-      keepTrackingIndex: true,
-    };
-
     for (let { pointer, value, childIterator } of parametersFieldItemMembers) {
       if (value.$ref) {
         const parsedRef = parseOai2Ref(value.$ref);
@@ -874,56 +867,7 @@ export class Oai2ToOai3 {
           throw new Error(`Reference ${value.$ref} is invalid. It should be referencing a parameter(#/parameters/xzy)`);
         }
       }
-
-      if (value.in === "body" || value.type === "file" || value.in === "formData") {
-        if (value["x-ms-client-name"]) {
-          requestBodyTracker.xmsname = value["x-ms-client-name"];
-        } else if (value.name) {
-          requestBodyTracker.name = value.name;
-        }
-      }
-
-      // if (requestBodyTracker.keepTrackingIndex) {
-      //   if (!(value.in === "body" || value.type === "file" || value.in === "formData")) {
-      //     if (requestBodyTracker.wasSpecialParameterFound) {
-      //       requestBodyTracker.keepTrackingIndex = false;
-      //     }
-      //   } else {
-      //     requestBodyTracker.wasSpecialParameterFound = true;
-      //   }
-      // }
-
-      if (requestBodyTracker.keepTrackingIndex) {
-        requestBodyTracker.index += 1;
-      }
-
       await this.visitOperationParameter(targetOperation, value, pointer, childIterator, consumes);
-    }
-
-    if (targetOperation.requestBody !== undefined) {
-      if ("$ref" in targetOperation.requestBody) {
-        throw new Error();
-      }
-      const requestBody: MappingTreeObject<oai3.RequestBody> = targetOperation.requestBody;
-
-      if (requestBodyTracker.xmsname) {
-        if (requestBody["x-ms-client-name"] === undefined) {
-          requestBody?.__set__("x-ms-client-name", {
-            value: requestBodyTracker.xmsname,
-            sourcePointer,
-          });
-        }
-
-        requestBody?.__set__("x-ms-requestBody-name", {
-          value: requestBodyTracker.xmsname,
-          sourcePointer,
-        });
-      } else if (requestBodyTracker.name) {
-        requestBody?.__set__("x-ms-requestBody-name", {
-          value: requestBodyTracker.name,
-          sourcePointer,
-        });
-      }
     }
   }
 
@@ -978,6 +922,27 @@ export class Oai2ToOai3 {
       });
     }
 
+    if (parameterValue["x-ms-client-name"]) {
+      if (requestBody["x-ms-client-name"] === undefined) {
+        requestBody?.__set__("x-ms-client-name", {
+          value: parameterValue["x-ms-client-name"],
+          sourcePointer: `${sourcePointer}/x-ms-client-name`,
+        });
+      }
+      if (requestBody["x-ms-requestBody-name"] === undefined) {
+        requestBody?.__set__("x-ms-requestBody-name", {
+          value: parameterValue["x-ms-client-name"],
+          sourcePointer: `${sourcePointer}/x-ms-client-name`,
+        });
+      }
+    } else if (parameterValue.name) {
+      if (requestBody["x-ms-requestBody-name"] === undefined) {
+        requestBody?.__set__("x-ms-requestBody-name", {
+          value: parameterValue.name,
+          sourcePointer: `${sourcePointer}/name`,
+        });
+      }
+    }
     if (parameterValue["x-ms-parameter-location"] && requestBody["x-ms-parameter-location"] === undefined) {
       requestBody.__set__("x-ms-parameter-location", {
         value: parameterValue["x-ms-parameter-location"],

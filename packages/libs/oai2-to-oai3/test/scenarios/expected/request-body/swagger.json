@@ -19,6 +19,7 @@
         "requestBody": {
           "required": true,
           "description": "A referenced body parameter.",
+          "x-ms-requestBody-name": "body_param",
           "content": {
             "application/json": {
               "schema": {
@@ -27,8 +28,7 @@
             }
           },
           "x-alternate-name": "person",
-          "x-test-property": true,
-          "x-ms-requestBody-name": "body_param"
+          "x-test-property": true
         },
         "responses": {
           "201": {
@@ -48,14 +48,14 @@
         "requestBody": {
           "required": true,
           "description": "The content of the new counterexample.",
+          "x-ms-requestBody-name": "body_param",
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Person"
               }
             }
-          },
-          "x-ms-requestBody-name": "body_param"
+          }
         },
         "responses": {
           "201": {
@@ -74,6 +74,7 @@
         "description": "Form params are referenced parameters.",
         "requestBody": {
           "description": "A file transmitted via a mimepart within a multipart form.",
+          "x-ms-requestBody-name": "form_part_1",
           "content": {
             "multipart/form-data": {
               "schema": {
@@ -100,8 +101,7 @@
                 "required": []
               }
             }
-          },
-          "x-ms-requestBody-name": "form_part_2"
+          }
         },
         "responses": {
           "201": {
@@ -120,6 +120,7 @@
         "description": "Form params are defined inline.",
         "requestBody": {
           "description": "A file transmitted via a mimepart within a multipart form.",
+          "x-ms-requestBody-name": "part_1",
           "content": {
             "multipart/form-data": {
               "schema": {
@@ -145,8 +146,7 @@
                 "required": []
               }
             }
-          },
-          "x-ms-requestBody-name": "part_2"
+          }
         },
         "responses": {
           "201": {

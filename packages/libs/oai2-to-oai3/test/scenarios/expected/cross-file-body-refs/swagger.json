@@ -18,14 +18,14 @@
         "operationId": "test",
         "requestBody": {
           "required": true,
+          "x-ms-requestBody-name": "MyBodyParam",
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/MyBodySchema"
               }
             }
-          },
-          "x-ms-requestBody-name": "MyBodyParam"
+          }
         },
         "responses": {
           "200": {

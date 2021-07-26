@@ -14,13 +14,13 @@
 /paths/~1v1~1bodytest1/post/requestBody => /parameters/BodyParam1
 /paths/~1v1~1bodytest1/post/requestBody/required => /parameters/BodyParam1/required
 /paths/~1v1~1bodytest1/post/requestBody/description => /parameters/BodyParam1/description
+/paths/~1v1~1bodytest1/post/requestBody/x-ms-requestBody-name => /parameters/BodyParam1/name
 /paths/~1v1~1bodytest1/post/requestBody/content => /parameters/BodyParam1
 /paths/~1v1~1bodytest1/post/requestBody/content/application~1json => /parameters/BodyParam1
 /paths/~1v1~1bodytest1/post/requestBody/content/application~1json/schema => /parameters/BodyParam1
 /paths/~1v1~1bodytest1/post/requestBody/content/application~1json/schema/$ref => /BodyParam1/schema/$ref
 /paths/~1v1~1bodytest1/post/requestBody/x-alternate-name => /BodyParam1/x-alternate-name
 /paths/~1v1~1bodytest1/post/requestBody/x-test-property => /BodyParam1/x-test-property
-/paths/~1v1~1bodytest1/post/requestBody/x-ms-requestBody-name => /paths/~1v1~1bodytest1/post/parameters
 /paths/~1v1~1bodytest1/post/responses => /paths/~1v1~1bodytest1/post/responses
 /paths/~1v1~1bodytest1/post/responses/201 => /paths/~1v1~1bodytest1/post/responses/201
 /paths/~1v1~1bodytest1/post/responses/201/description => /paths/~1v1~1bodytest1/post/responses/201
@@ -34,11 +34,11 @@
 /paths/~1v1~1bodytest2/post/requestBody => /paths/~1v1~1bodytest2/post/parameters/0
 /paths/~1v1~1bodytest2/post/requestBody/required => /paths/~1v1~1bodytest2/post/parameters/0/required
 /paths/~1v1~1bodytest2/post/requestBody/description => /paths/~1v1~1bodytest2/post/parameters/0/description
+/paths/~1v1~1bodytest2/post/requestBody/x-ms-requestBody-name => /paths/~1v1~1bodytest2/post/parameters/0/name
 /paths/~1v1~1bodytest2/post/requestBody/content => /paths/~1v1~1bodytest2/post/parameters/0
 /paths/~1v1~1bodytest2/post/requestBody/content/application~1json => /paths/~1v1~1bodytest2/post/parameters/0
 /paths/~1v1~1bodytest2/post/requestBody/content/application~1json/schema => /paths/~1v1~1bodytest2/post/parameters/0
 /paths/~1v1~1bodytest2/post/requestBody/content/application~1json/schema/$ref => /paths/~1v1~1bodytest2/post/parameters/0/schema/$ref
-/paths/~1v1~1bodytest2/post/requestBody/x-ms-requestBody-name => /paths/~1v1~1bodytest2/post/parameters
 /paths/~1v1~1bodytest2/post/responses => /paths/~1v1~1bodytest2/post/responses
 /paths/~1v1~1bodytest2/post/responses/201 => /paths/~1v1~1bodytest2/post/responses/201
 /paths/~1v1~1bodytest2/post/responses/201/description => /paths/~1v1~1bodytest2/post/responses/201
@@ -51,6 +51,7 @@
 /paths/~1v1~1formtest1/post/description => /paths/~1v1~1formtest1/post/description
 /paths/~1v1~1formtest1/post/requestBody => /parameters/FormParam1
 /paths/~1v1~1formtest1/post/requestBody/description => /parameters/FormParam1/description
+/paths/~1v1~1formtest1/post/requestBody/x-ms-requestBody-name => /parameters/FormParam1/name
 /paths/~1v1~1formtest1/post/requestBody/content => /parameters/FormParam1
 /paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data => /parameters/FormParam1
 /paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema => /parameters/FormParam1
@@ -69,7 +70,6 @@
 /paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/properties/form_part_2/type => /parameters/FormParam2
 /paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/properties/form_part_2/x-test-property => /FormParam2/x-test-property
 /paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/properties/form_part_2/x-alternate-name => /FormParam2/x-alternate-name
-/paths/~1v1~1formtest1/post/requestBody/x-ms-requestBody-name => /paths/~1v1~1formtest1/post/parameters
 /paths/~1v1~1formtest1/post/responses => /paths/~1v1~1formtest1/post/responses
 /paths/~1v1~1formtest1/post/responses/201 => /paths/~1v1~1formtest1/post/responses/201
 /paths/~1v1~1formtest1/post/responses/201/description => /paths/~1v1~1formtest1/post/responses/201
@@ -82,6 +82,7 @@
 /paths/~1v1~1formtest2/post/description => /paths/~1v1~1formtest2/post/description
 /paths/~1v1~1formtest2/post/requestBody => /paths/~1v1~1formtest2/post/parameters/0
 /paths/~1v1~1formtest2/post/requestBody/description => /paths/~1v1~1formtest2/post/parameters/0/description
+/paths/~1v1~1formtest2/post/requestBody/x-ms-requestBody-name => /paths/~1v1~1formtest2/post/parameters/0/name
 /paths/~1v1~1formtest2/post/requestBody/content => /paths/~1v1~1formtest2/post/parameters/0
 /paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data => /paths/~1v1~1formtest2/post/parameters/0
 /paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema => /paths/~1v1~1formtest2/post/parameters/0
@@ -99,7 +100,6 @@
 /paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema/properties/part_2/description => /paths/~1v1~1formtest2/post/parameters/1
 /paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema/properties/part_2/type => /paths/~1v1~1formtest2/post/parameters/1
 /paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema/properties/part_2/x-alternate-name => /paths/~1v1~1formtest2/post/parameters/1/x-alternate-name
-/paths/~1v1~1formtest2/post/requestBody/x-ms-requestBody-name => /paths/~1v1~1formtest2/post/parameters
 /paths/~1v1~1formtest2/post/responses => /paths/~1v1~1formtest2/post/responses
 /paths/~1v1~1formtest2/post/responses/201 => /paths/~1v1~1formtest2/post/responses/201
 /paths/~1v1~1formtest2/post/responses/201/description => /paths/~1v1~1formtest2/post/responses/201

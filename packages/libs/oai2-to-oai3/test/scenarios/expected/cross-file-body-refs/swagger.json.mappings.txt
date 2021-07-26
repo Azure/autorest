@@ -11,11 +11,11 @@
 /paths/~1test/get/operationId => /paths/~1test/get/operationId
 /paths/~1test/get/requestBody => /parameters/BodyParam
 /paths/~1test/get/requestBody/required => /parameters/BodyParam/required
+/paths/~1test/get/requestBody/x-ms-requestBody-name => /parameters/BodyParam/name
 /paths/~1test/get/requestBody/content => /parameters/BodyParam
 /paths/~1test/get/requestBody/content/application~1json => /parameters/BodyParam
 /paths/~1test/get/requestBody/content/application~1json/schema => /parameters/BodyParam
 /paths/~1test/get/requestBody/content/application~1json/schema/$ref => /BodyParam/schema/$ref
-/paths/~1test/get/requestBody/x-ms-requestBody-name => /paths/~1test/get/parameters
 /paths/~1test/get/responses => /paths/~1test/get/responses
 /paths/~1test/get/responses/200 => /paths/~1test/get/responses/200
 /paths/~1test/get/responses/200/description => /paths/~1test/get/responses/200
