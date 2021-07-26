@@ -1,5 +1,6 @@
 import fs from "fs";
 import { basename, join } from "path";
+import { serializeJsonPointer } from "../../../json/dist";
 import { convertOai2ToOai3, OaiToOai3FileInput } from "../../src";
 
 const inputsFolder = `${__dirname}/inputs/`;
@@ -26,6 +27,11 @@ const expectInputsMatchSnapshots = async (testName: string, filenames: string[])
   for (const result of results) {
     const jsonResult = JSON.stringify(result.result, null, 2);
     expect(jsonResult).toMatchRawFileSnapshot(join(expectedFolder, testName, result.name));
+
+    const mappings = result.mappings
+      .map((x: any) => `${serializeJsonPointer(x.generated.path)} => ${serializeJsonPointer(x.original.path)}`)
+      .join("\n");
+    expect(mappings).toMatchRawFileSnapshot(join(expectedFolder, testName, `${result.name}.mappings.txt`));
   }
 };
 

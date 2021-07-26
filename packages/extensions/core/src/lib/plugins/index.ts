@@ -18,7 +18,6 @@ import { createOpenApiLoaderPlugin, createSwaggerLoaderPlugin } from "./loaders"
 import { createMultiApiMergerPlugin } from "./merger";
 import { createNewComposerPlugin } from "./new-composer";
 import { createProfileFilterPlugin } from "./profile-filter";
-import { createQuickCheckPlugin } from "./quick-check";
 import { subsetSchemaDeduplicatorPlugin } from "./subset-schemas-deduplicator";
 import {
   createImmediateTransformerPlugin,
@@ -70,7 +69,6 @@ export const CORE_PLUGIN_MAP = {
   ),
   "tree-shaker": createTreeShakerPlugin(),
   "enum-deduplicator": createEnumDeduplicator(),
-  "quick-check": createQuickCheckPlugin(),
   "model-deduplicator": createDeduplicatorPlugin(),
   "subset-reducer": subsetSchemaDeduplicatorPlugin(),
   "multi-api-merger": createMultiApiMergerPlugin(),

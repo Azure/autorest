@@ -108,6 +108,6 @@ export interface ProxyNode<T> {
   recurse?: boolean;
 }
 
-export type ProxyObject<TG> = {
-  [P in keyof TG]: ProxyNode<TG[P]> | TG[P];
+export type ProxyObject<T> = {
+  [P in keyof T]: ProxyNode<T[P]> | T[P];
 };
