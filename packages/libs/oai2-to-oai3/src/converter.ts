@@ -26,7 +26,7 @@ import {
 import { cleanElementName, convertOai2RefToOai3, parseOai2Ref } from "./refs-utils";
 import { ResolveReferenceFn } from "./runner";
 import { statusCodes } from "./status-codes";
-import oai3, { EncodingStyle, HttpOperation, JsonType, PathItem, SecurityType } from "@azure-tools/openapi";
+import oai3, { EncodingStyle, HttpOperation, JsonType, PathItem, Schema, SecurityType } from "@azure-tools/openapi";
 
 // NOTE: after testing references should be changed to OpenAPI 3.x.x references
 
@@ -979,80 +979,16 @@ export class Oai2ToOai3 {
       if (requestBody.content[contentType].schema === undefined) {
         requestBody.content[contentType].__set__("schema", this.newObject(sourcePointer));
       }
+      const schema = requestBody.content[contentType].schema as MappingTreeObject<oai3.Schema>;
 
       if (parameterValue.schema !== undefined) {
         for (const { key, value, childIterator } of parameterItemMembers()) {
           if (key === "schema") {
-            await this.visitSchema(requestBody.content[contentType].schema!, value, childIterator);
+            await this.visitSchema(schema, value, childIterator);
           }
         }
       } else {
-        const schema = requestBody.content[contentType].schema as MappingTreeObject<oai3.Schema>;
-        if (schema.type === undefined) {
-          schema.__set__("type", { value: JsonType.Object, sourcePointer });
-        }
-
-        if (schema.properties === undefined) {
-          schema.__set__("properties", this.newObject(sourcePointer));
-        }
-
-        schema.properties!.__set__(parameterValue.name, this.newObject(sourcePointer));
-        const targetProperty = schema.properties![parameterValue.name];
-        if (parameterValue.description !== undefined) {
-          targetProperty.__set__("description", { value: parameterValue.description, sourcePointer });
-        }
-
-        if (parameterValue.example !== undefined) {
-          targetProperty.__set__("example", { value: parameterValue.example, sourcePointer });
-        }
-
-        if (parameterValue.type !== undefined) {
-          // OpenAPI 3 wants to see `type: file` as `type:string` with `format: binary`
-          if (parameterValue.type === "file") {
-            targetProperty.__set__("type", { value: JsonType.String, sourcePointer });
-            targetProperty.__set__("format", { value: "binary", sourcePointer });
-          } else {
-            targetProperty.__set__("type", { value: parameterValue.type as JsonType, sourcePointer });
-          }
-        }
-
-        if (schema.required === undefined) {
-          schema.__set__("required", this.newArray(sourcePointer));
-        }
-
-        if (parameterValue.required === true) {
-          schema.required!.__push__({ value: parameterValue.name, sourcePointer });
-        }
-
-        if (parameterValue.default !== undefined) {
-          targetProperty.__set__("default", { value: parameterValue.default, sourcePointer });
-        }
-
-        if (parameterValue.enum !== undefined) {
-          targetProperty.__set__("enum", { value: parameterValue.enum, sourcePointer });
-        }
-
-        if (parameterValue.allOf !== undefined) {
-          targetProperty.__set__("allOf", { value: parameterValue.allOf as any, sourcePointer });
-        }
-
-        if (parameterValue.type === "array" && parameterValue.items !== undefined) {
-          // Support the case where an operation can accept multiple files
-          if (contentType === "multipart/form-data" && parameterValue.items.type === "file") {
-            targetProperty.__set__("items", this.newObject(sourcePointer));
-            targetProperty.items.__set__("type", { value: "string", sourcePointer: `${sourcePointer}/items` });
-            targetProperty.items.__set__("format", { value: "binary", sourcePointer: `${sourcePointer}/items` });
-          } else {
-            targetProperty.__set__("items", { value: parameterValue.items as any, sourcePointer });
-          }
-        }
-
-        // copy extensions in target property
-        for (const { key, pointer: fieldPointer, value } of parameterItemMembers()) {
-          if (key.startsWith("x-")) {
-            targetProperty.__set__(key, { value: value, sourcePointer: fieldPointer });
-          }
-        }
+        this.addFormDataParameterToSchema(schema, parameterValue, sourcePointer, parameterItemMembers, contentType);
       }
     } else if (parameterValue.type === "file") {
       targetOperation.__set__("application/octet-stream", this.newObject(sourcePointer));
@@ -1094,6 +1030,83 @@ export class Oai2ToOai3 {
             requestBody.__set__(key, { value: value, sourcePointer: fieldPointer });
           }
         }
+      }
+    }
+  }
+
+  /**
+   * Add the form data parameter as a property to the request body schema.
+   */
+  private addFormDataParameterToSchema(
+    requestBodySchema: MappingTreeObject<oai3.Schema>,
+    parameterValue: OpenApi2FormDataParameter,
+    sourcePointer: string,
+    parameterItemMembers: () => Iterable<Node>,
+    contentType: string,
+  ) {
+    if (requestBodySchema.type === undefined) {
+      requestBodySchema.__set__("type", { value: JsonType.Object, sourcePointer });
+    }
+
+    if (requestBodySchema.properties === undefined) {
+      requestBodySchema.__set__("properties", this.newObject(sourcePointer));
+    }
+
+    requestBodySchema.properties!.__set__(parameterValue.name, this.newObject(sourcePointer));
+    const targetProperty = requestBodySchema.properties![parameterValue.name];
+    if (parameterValue.description !== undefined) {
+      targetProperty.__set__("description", { value: parameterValue.description, sourcePointer });
+    }
+
+    if (parameterValue.example !== undefined) {
+      targetProperty.__set__("example", { value: parameterValue.example, sourcePointer });
+    }
+
+    if (parameterValue.type !== undefined) {
+      // OpenAPI 3 wants to see `type: file` as `type:string` with `format: binary`
+      if (parameterValue.type === "file") {
+        targetProperty.__set__("type", { value: JsonType.String, sourcePointer });
+        targetProperty.__set__("format", { value: "binary", sourcePointer });
+      } else {
+        targetProperty.__set__("type", { value: parameterValue.type as JsonType, sourcePointer });
+      }
+    }
+
+    if (requestBodySchema.required === undefined) {
+      requestBodySchema.__set__("required", this.newArray(sourcePointer));
+    }
+
+    if (parameterValue.required === true) {
+      requestBodySchema.required!.__push__({ value: parameterValue.name, sourcePointer });
+    }
+
+    if (parameterValue.default !== undefined) {
+      targetProperty.__set__("default", { value: parameterValue.default, sourcePointer });
+    }
+
+    if (parameterValue.enum !== undefined) {
+      targetProperty.__set__("enum", { value: parameterValue.enum, sourcePointer });
+    }
+
+    if (parameterValue.allOf !== undefined) {
+      targetProperty.__set__("allOf", { value: parameterValue.allOf as any, sourcePointer });
+    }
+
+    if (parameterValue.type === "array" && parameterValue.items !== undefined) {
+      // Support the case where an operation can accept multiple files
+      if (contentType === "multipart/form-data" && parameterValue.items.type === "file") {
+        targetProperty.__set__("items", this.newObject(sourcePointer));
+        targetProperty.items.__set__("type", { value: "string", sourcePointer: `${sourcePointer}/items` });
+        targetProperty.items.__set__("format", { value: "binary", sourcePointer: `${sourcePointer}/items` });
+      } else {
+        targetProperty.__set__("items", { value: parameterValue.items as any, sourcePointer });
+      }
+    }
+
+    // copy extensions in target property
+    for (const { key, pointer: fieldPointer, value } of parameterItemMembers()) {
+      if (key.startsWith("x-")) {
+        targetProperty.__set__(key, { value: value, sourcePointer: fieldPointer });
       }
     }
   }
