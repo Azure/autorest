@@ -81,21 +81,11 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
   private components: oai3.Components = {};
 
   async init() {
-    console.time("Loading doc");
     const doc = await this.inputs[0].ReadObject<oai3.Model>();
-    console.timeEnd("Loading doc");
-    this.components = doc.components!;
-    console.time("Loading Fix in paths");
+    this.components = doc.components ?? {};
     this.findComponentsToKeepInPaths(doc.paths);
-    console.timeEnd("Loading Fix in paths");
-
-    console.time("Loading Fix in components");
     this.findComponentsToKeepInComponents();
-    console.timeEnd("Loading Fix in components");
-
-    console.time("Loading Fix in poly");
     this.findComponentsToKeepFromPolymorphicRefs();
-    console.timeEnd("Loading Fix in poly");
   }
 
   private findComponentsToKeepInPaths(paths: AnyObject) {
@@ -191,7 +181,6 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
   }
 
   public async process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {
-    console.time("PROcess");
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
         case "components":
@@ -207,7 +196,6 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
           break;
       }
     }
-    console.timeEnd("PROcess");
   }
 
   visitComponents(components: ProxyObject<Record<string, oai.Components>>, nodes: Iterable<Node>) {

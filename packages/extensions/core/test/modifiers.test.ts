@@ -14,8 +14,8 @@ const generate = async (additionalConfig: any): Promise<oai3.Model> => {
   autoRest.AddConfiguration({
     "input-file": join(AppRoot, "test", "resources", "tiny.yaml"),
     "use-extension": { "@autorest/modelerfour": join(AppRoot, "../modelerfour") },
-    "verbose": true,
-    "debug": true,
+    verbose: true,
+    debug: true,
     "output-artifact": ["openapi-document"],
   });
   autoRest.AddConfiguration(additionalConfig);
@@ -130,7 +130,7 @@ describe("Modifiers", () => {
       components: {
         operations: [
           {
-            "operationId": "Cowbell_Retrieve",
+            operationId: "Cowbell_Retrieve",
             "forward-to": "Cowbell_Get",
           },
         ],
@@ -212,7 +212,7 @@ describe("Modifiers", () => {
   it("remove a query parameter", async () => {
     const code = await generate({
       directive: {
-        "where": "$.paths..*",
+        where: "$.paths..*",
         "remove-parameter": {
           in: "query",
           name: "id",
