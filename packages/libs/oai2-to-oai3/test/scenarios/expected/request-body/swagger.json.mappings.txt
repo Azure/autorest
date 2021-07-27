@@ -58,7 +58,7 @@
 /paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/type => /parameters/FormParam1
 /paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/properties => /parameters/FormParam1
 /paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/properties/form_part_1 => /parameters/FormParam1
-/paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/properties/form_part_1/description => /parameters/FormParam1
+/paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/properties/form_part_1/description => /parameters/FormParam1/description
 /paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/properties/form_part_1/type => /parameters/FormParam1
 /paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/properties/form_part_1/format => /parameters/FormParam1
 /paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/required => /parameters/FormParam1
@@ -66,7 +66,7 @@
 /paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/properties/form_part_1/x-include-filename => /FormParam1/x-include-filename
 /paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/properties/form_part_1/x-alternate-name => /FormParam1/x-alternate-name
 /paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/properties/form_part_2 => /parameters/FormParam2
-/paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/properties/form_part_2/description => /parameters/FormParam2
+/paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/properties/form_part_2/description => /parameters/FormParam2/description
 /paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/properties/form_part_2/type => /parameters/FormParam2
 /paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/properties/form_part_2/x-test-property => /FormParam2/x-test-property
 /paths/~1v1~1formtest1/post/requestBody/content/multipart~1form-data/schema/properties/form_part_2/x-alternate-name => /FormParam2/x-alternate-name
@@ -89,7 +89,7 @@
 /paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema/type => /paths/~1v1~1formtest2/post/parameters/0
 /paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema/properties => /paths/~1v1~1formtest2/post/parameters/0
 /paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema/properties/part_1 => /paths/~1v1~1formtest2/post/parameters/0
-/paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema/properties/part_1/description => /paths/~1v1~1formtest2/post/parameters/0
+/paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema/properties/part_1/description => /paths/~1v1~1formtest2/post/parameters/0/description
 /paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema/properties/part_1/type => /paths/~1v1~1formtest2/post/parameters/0
 /paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema/properties/part_1/format => /paths/~1v1~1formtest2/post/parameters/0
 /paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema/required => /paths/~1v1~1formtest2/post/parameters/0
@@ -97,7 +97,7 @@
 /paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema/properties/part_1/x-include-filename => /paths/~1v1~1formtest2/post/parameters/0/x-include-filename
 /paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema/properties/part_1/x-alternate-name => /paths/~1v1~1formtest2/post/parameters/0/x-alternate-name
 /paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema/properties/part_2 => /paths/~1v1~1formtest2/post/parameters/1
-/paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema/properties/part_2/description => /paths/~1v1~1formtest2/post/parameters/1
+/paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema/properties/part_2/description => /paths/~1v1~1formtest2/post/parameters/1/description
 /paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema/properties/part_2/type => /paths/~1v1~1formtest2/post/parameters/1
 /paths/~1v1~1formtest2/post/requestBody/content/multipart~1form-data/schema/properties/part_2/x-alternate-name => /paths/~1v1~1formtest2/post/parameters/1/x-alternate-name
 /paths/~1v1~1formtest2/post/responses => /paths/~1v1~1formtest2/post/responses

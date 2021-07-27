@@ -1011,14 +1011,10 @@ export class Oai2ToOai3 {
     }
 
     requestBodySchema.properties!.__set__(parameterValue.name, this.newObject(sourcePointer));
-    const targetProperty = requestBodySchema.properties![parameterValue.name];
-    if (parameterValue.description !== undefined) {
-      targetProperty.__set__("description", { value: parameterValue.description, sourcePointer });
-    }
+    const targetProperty = requestBodySchema.properties![parameterValue.name] as MappingTreeObject<oai3.Schema>;
 
-    if (parameterValue.example !== undefined) {
-      targetProperty.__set__("example", { value: parameterValue.example, sourcePointer });
-    }
+    copyProperty(targetProperty, "description", parameterValue, sourcePointer);
+    copyProperty(targetProperty, "example", parameterValue, sourcePointer);
 
     if (parameterValue.type !== undefined) {
       // OpenAPI 3 wants to see `type: file` as `type:string` with `format: binary`
@@ -1054,8 +1050,9 @@ export class Oai2ToOai3 {
       // Support the case where an operation can accept multiple files
       if (contentType === "multipart/form-data" && parameterValue.items.type === "file") {
         targetProperty.__set__("items", this.newObject(sourcePointer));
-        targetProperty.items.__set__("type", { value: "string", sourcePointer: `${sourcePointer}/items` });
-        targetProperty.items.__set__("format", { value: "binary", sourcePointer: `${sourcePointer}/items` });
+        const items = targetProperty.items as MappingTreeObject<oai3.Schema>;
+        items.__set__("type", { value: "string", sourcePointer: `${sourcePointer}/items` });
+        items.__set__("format", { value: "binary", sourcePointer: `${sourcePointer}/items` });
       } else {
         targetProperty.__set__("items", { value: parameterValue.items as any, sourcePointer });
       }
@@ -1238,13 +1235,24 @@ export class Oai2ToOai3 {
   }
 }
 
+function copyProperty<T, K extends keyof T>(
+  target: MappingTreeObject<T>,
+  key: K,
+  input: { [key in K]: T[K] },
+  inputPointer: string,
+) {
+  if (input[key] !== undefined) {
+    target.__set__(key, { value: input[key], sourcePointer: `${inputPointer}/${key}` });
+  }
+}
+
 function copyPropertyIfNotSet<T, K extends keyof T>(
   target: MappingTreeObject<T>,
   key: K,
   input: { [key in K]: T[K] },
   inputPointer: string,
 ) {
-  if (input[key] !== undefined && target[key] === undefined) {
-    target.__set__(key, { value: input[key], sourcePointer: `${inputPointer}/${key}` });
+  if (target[key] === undefined) {
+    copyProperty(target, key, input, inputPointer);
   }
 }
