@@ -1003,7 +1003,7 @@ export class Oai2ToOai3 {
     contentType: string,
   ) {
     if (requestBodySchema.type === undefined) {
-      requestBodySchema.__set__("type", { value: JsonType.Object, sourcePointer });
+      requestBodySchema.__set__("type", { value: "object", sourcePointer });
     }
 
     if (requestBodySchema.properties === undefined) {
@@ -1019,7 +1019,7 @@ export class Oai2ToOai3 {
     if (parameterValue.type !== undefined) {
       // OpenAPI 3 wants to see `type: file` as `type:string` with `format: binary`
       if (parameterValue.type === "file") {
-        targetProperty.__set__("type", { value: JsonType.String, sourcePointer });
+        targetProperty.__set__("type", { value: "string", sourcePointer });
         targetProperty.__set__("format", { value: "binary", sourcePointer });
       } else {
         targetProperty.__set__("type", { value: parameterValue.type as JsonType, sourcePointer });
@@ -1220,7 +1220,7 @@ export class Oai2ToOai3 {
       }
 
       if (headerValue.type) {
-        schema.__set__("type", { value: headerValue.type as JsonType, sourcePointer });
+        schema.__set__("type", { value: headerValue.type, sourcePointer });
       }
       if (headerValue.items && headerValue.items.collectionFormat) {
         if (headerValue.collectionFormat === "csv") {
