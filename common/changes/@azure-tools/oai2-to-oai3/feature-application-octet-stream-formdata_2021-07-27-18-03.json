@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/oai2-to-oai3",
+      "comment": "Preserve `application/octet-stream` consume content-type when request body is formData",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@azure-tools/oai2-to-oai3",
+  "email": "tiguerin@microsoft.com"
+}
