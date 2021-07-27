@@ -77,10 +77,10 @@ export class ComponentsCleaner extends TransformerV2<any, oai.Model> {
     callbacks: new Set<string>(),
   };
 
-  private components: AnyObject = {};
+  private components: oai.Components = {};
 
   async init() {
-    const doc = await this.inputs[0].ReadObject<AnyObject>();
+    const doc = await this.inputs[0].readObject<oai.Components>();
     this.components = doc.components;
     this.findComponentsToKeepInPaths(doc.paths);
     this.findComponentsToKeepInComponents();
@@ -177,7 +177,8 @@ export class ComponentsCleaner extends TransformerV2<any, oai.Model> {
         if (!this.visitedComponents[t].has(componentUid)) {
           this.visitedComponents[t].add(componentUid);
           this.componentsToKeep[t].add(componentUid);
-          this.crawlObject(this.components[t][componentUid]);
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          this.crawlObject(this.components[t]![componentUid]);
         }
       } else if (value && typeof value === "object") {
         this.crawlObject(value);

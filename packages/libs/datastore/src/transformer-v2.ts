@@ -1,11 +1,8 @@
-import { clone, values } from "@azure-tools/linq";
 import { Mapping } from "source-map";
-import { Node, ProxyNode, visit } from "./main";
+import { Node, visit } from "./main";
 import { cloneDeep } from "lodash";
 import { DataHandle } from "./data-store";
 import { createMappingTree, MappingTreeItem, MappingTreeObject } from "./mapping-tree";
-
-type Real<T> = T extends null | undefined | never ? never : T;
 
 export class TransformerV2<TInput extends object = any, TOutput extends object = any> {
   protected generated: MappingTreeItem<TOutput>;
@@ -56,7 +53,7 @@ export class TransformerV2<TInput extends object = any, TOutput extends object =
     target: MappingTreeObject<TParent>,
     member: K,
     sourcePointer: string,
-  ): MappingTreeItem<Required<TParent[K]>> {
+  ): MappingTreeItem<NonNullable<TParent[K]>> {
     target.__set__(member, {
       value: {} as any,
       sourceFilename: this.currentInputFilename,
@@ -79,16 +76,6 @@ export class TransformerV2<TInput extends object = any, TOutput extends object =
 
     return target[member] as any;
   }
-
-  // protected copy<TParent extends object, K extends keyof TParent>(
-  //   target: MappingTreeObject<TParent>,
-  //   member: K,
-  //   pointer: string,
-  //   value: TParent[K],
-  //   recurse = true,
-  // ) {
-  //   return (target[member] = <ProxyNode<TParent[K]>>{ value, pointer, recurse, filename: this.currentInputFilename });
-  // }
 
   protected clone<TParent extends object, K extends keyof TParent>(
     target: MappingTreeObject<TParent>,
@@ -124,12 +111,12 @@ export class TransformerV2<TInput extends object = any, TOutput extends object =
   protected async runProcess() {
     if (!this.final) {
       await this.init();
-      for (this.currentInput of values(this.inputs)) {
-        this.current = await this.currentInput.ReadObject<TInput>();
+      for (this.currentInput of this.inputs) {
+        this.current = await this.currentInput.readObject<TInput>();
         await this.process(this.generated, visit(this.current));
       }
       await this.finish();
     }
-    this.final = clone(this.generated); // should we be freezing this?
+    this.final = cloneDeep<any>(this.generated); // should we be freezing this?
   }
 }
