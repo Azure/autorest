@@ -9,12 +9,11 @@ import { DeepPartial, KnownMediaType, Initializer } from "@azure-tools/codegen";
 import { Extensions } from "../common/extensions";
 import { GroupSchema } from "../common/schemas/object";
 import { Languages } from "../common/languages";
-import { Deprecation } from "../common/deprecation";
 
 /** extended metadata for HTTP operation parameters  */
 export interface HttpParameter extends Protocol {
   /** the location that this parameter is placed in the http request */
-  in: ParameterLocation;
+  in: `${ParameterLocation}`;
 
   /** the Serialization Style used for the parameter. */
   style?: SerializationStyle;
@@ -27,7 +26,7 @@ export interface HttpParameter extends Protocol {
 }
 
 export class HttpParameter extends Protocol {
-  constructor(location: ParameterLocation, objectInitializer?: DeepPartial<HttpParameter>) {
+  constructor(location: `${ParameterLocation}`, objectInitializer?: DeepPartial<HttpParameter>) {
     super();
     this.in = location;
     this.apply(objectInitializer);

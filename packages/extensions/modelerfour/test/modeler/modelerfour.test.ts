@@ -294,8 +294,8 @@ describe("Modeler", () => {
       nullable: true,
       properties: {
         hasDefaultValue: {
-          "type": "boolean",
-          "required": true,
+          type: "boolean",
+          required: true,
           "x-ms-client-default": true,
         },
       },
@@ -306,12 +306,12 @@ describe("Modeler", () => {
         operationId: "postIt",
         description: "Post it.",
         requestBody: {
-          "in": "body",
-          "description": "Input parameter",
-          "required": true,
+          in: "body",
+          description: "Input parameter",
+          required: true,
           "x-ms-client-default": "Bodied",
           "x-ms-requestBody-name": "defaultedBodyParam",
-          "content": {
+          content: {
             "application/json": {
               schema: {
                 type: "string",
@@ -321,11 +321,11 @@ describe("Modeler", () => {
         },
         parameters: [
           {
-            "name": "defaultedQueryParam",
-            "in": "query",
-            "description": "Input parameter",
+            name: "defaultedQueryParam",
+            in: "query",
+            description: "Input parameter",
             "x-ms-client-default": 42,
-            "schema": {
+            schema: {
               type: "number",
             },
           },
@@ -338,11 +338,11 @@ describe("Modeler", () => {
         operationId: "postMeme",
         description: "Gimmie ur memes.",
         requestBody: {
-          "description": "Input parameter",
-          "required": true,
+          description: "Input parameter",
+          required: true,
           "x-ms-requestBody-name": "defaultedBodyMeme",
           "x-ms-client-default": "meme.jpg",
-          "content": {
+          content: {
             "image/jpeg": {
               schema: {
                 type: "string",
@@ -441,7 +441,7 @@ describe("Modeler", () => {
                 "x-named-header": {
                   "x-ms-client-name": "NamedHeader",
                   // No description on purpose
-                  "schema": {
+                  schema: {
                     type: "string",
                   },
                 },
@@ -497,7 +497,7 @@ describe("Modeler", () => {
           type: "string",
           xml: {
             "x-ms-text": true,
-            "attribute": true,
+            attribute: true,
           },
         },
       },
@@ -661,11 +661,11 @@ describe("Modeler", () => {
         description: "Has an api-version header.",
         parameters: [
           {
-            "name": "api-version",
-            "in": "header",
-            "required": true,
+            name: "api-version",
+            in: "header",
+            required: true,
             "x-ms-api-version": true,
-            "schema": {
+            schema: {
               type: "string",
             },
           },
@@ -728,11 +728,11 @@ describe("Modeler", () => {
         description: "An api-version query param that is explicitly not a client api-version.",
         parameters: [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
+            name: "api-version",
+            in: "query",
+            required: true,
             "x-ms-api-version": false,
-            "schema": {
+            schema: {
               type: "string",
             },
           },

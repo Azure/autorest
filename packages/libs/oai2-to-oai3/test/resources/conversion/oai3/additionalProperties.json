@@ -47,8 +47,7 @@
             }
           },
           "required": true
-        },
-        "x-ms-requestBody-index": 0
+        }
       }
     },
     "/additionalProperties/true-subclass": {
@@ -87,8 +86,7 @@
             }
           },
           "required": true
-        },
-        "x-ms-requestBody-index": 0
+        }
       }
     },
     "/additionalProperties/type/object": {
@@ -127,8 +125,7 @@
             }
           },
           "required": true
-        },
-        "x-ms-requestBody-index": 0
+        }
       }
     },
     "/additionalProperties/type/string": {
@@ -167,8 +164,7 @@
             }
           },
           "required": true
-        },
-        "x-ms-requestBody-index": 0
+        }
       }
     },
     "/additionalProperties/in/properties": {
@@ -207,8 +203,7 @@
             }
           },
           "required": true
-        },
-        "x-ms-requestBody-index": 0
+        }
       }
     },
     "/additionalProperties/in/properties/with/additionalProperties/string": {
@@ -247,8 +242,7 @@
             }
           },
           "required": true
-        },
-        "x-ms-requestBody-index": 0
+        }
       }
     }
   },
@@ -268,9 +262,7 @@
       },
       "PetAPTrue": {
         "type": "object",
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "integer"
@@ -302,9 +294,7 @@
       },
       "PetAPObject": {
         "type": "object",
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "integer"
@@ -323,9 +313,7 @@
       },
       "PetAPString": {
         "type": "object",
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "integer"
@@ -344,9 +332,7 @@
       },
       "PetAPInProperties": {
         "type": "object",
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "integer"
@@ -368,10 +354,7 @@
       },
       "PetAPInPropertiesWithAPString": {
         "type": "object",
-        "required": [
-          "id",
-          "@odata.location"
-        ],
+        "required": ["id", "@odata.location"],
         "properties": {
           "id": {
             "type": "integer"

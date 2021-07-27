@@ -4,8 +4,8 @@ describe("OpenAPI utils", () => {
   it("includeXDashKeys returns x- properties keys", () => {
     // Type validation
     const result: ("x-foo" | "x-other")[] = includeXDashKeys({
-      "foo": 1,
-      "bar": 2,
+      foo: 1,
+      bar: 2,
       "x-foo": 3,
       "x-other": 4,
     });
@@ -15,8 +15,8 @@ describe("OpenAPI utils", () => {
   it("omitXDashKeys returns non x- properties keys", () => {
     // Type validation
     const result: ("foo" | "bar")[] = omitXDashKeys({
-      "foo": 1,
-      "bar": 2,
+      foo: 1,
+      bar: 2,
       "x-foo": 3,
       "x-other": 4,
     });
@@ -25,8 +25,8 @@ describe("OpenAPI utils", () => {
 
   it("includeXDashProperties returns x- properties", () => {
     const result = includeXDashProperties({
-      "foo": 1,
-      "bar": 2,
+      foo: 1,
+      bar: 2,
       "x-foo": 3,
       "x-other": 4,
     });
@@ -46,8 +46,8 @@ describe("OpenAPI utils", () => {
   it("omitXDashProperties returns x- properties", () => {
     // Type validation
     const result = omitXDashProperties({
-      "foo": 1,
-      "bar": 2,
+      foo: 1,
+      bar: 2,
       "x-foo": 3,
       "x-other": 4,
     });

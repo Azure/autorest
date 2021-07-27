@@ -65,4 +65,8 @@ describe("Scenario testings", () => {
     // The expected result is the $ref in `enum` has been updated to the openapi 3 format.
     await expectInputsMatchSnapshots("enums", ["swagger.json"]);
   });
+
+  it("request body - copying extensions", async () => {
+    await expectInputsMatchSnapshots("request-body", ["swagger.json"]);
+  });
 });
