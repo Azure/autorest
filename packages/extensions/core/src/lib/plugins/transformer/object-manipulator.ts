@@ -3,26 +3,21 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { DataHandle, DataSink, IsPrefix, JsonPath, nodes, SmartPosition } from "@azure-tools/datastore";
 import {
-  Clone,
-  CloneAst,
-  DataHandle,
-  DataSink,
-  IsPrefix,
-  JsonPath,
-  nodes,
-  ParseNode,
-  ReplaceNode,
-  ResolveRelativeNode,
-  SmartPosition,
-  StringifyAst,
-  ToAst,
-  YAMLNode,
-} from "@azure-tools/datastore";
+  stringifyYamlAst,
+  cloneYamlAst,
+  getYamlNodeValue,
+  valueToAst,
+  YamlNode,
+  getYamlNodeByPath,
+  replaceYamlAstNode,
+} from "@azure-tools/yaml";
 import { AutorestContext } from "../../autorest-core";
 import { Channel } from "../../message";
 import { identitySourceMapping } from "@autorest/common";
 import { inspect } from "util";
+import { cloneDeep } from "lodash";
 
 export async function manipulateObject(
   src: DataHandle,
@@ -58,8 +53,8 @@ export async function manipulateObject(
 
   // find paths matched by `whereJsonQuery`
 
-  let ast: YAMLNode = CloneAst(await src.readYamlAst());
-  const doc = ParseNode<any>(ast);
+  let ast: YamlNode = cloneYamlAst(await src.readYamlAst());
+  const { result: doc } = getYamlNodeValue<any>(ast);
   const hits = nodes(doc, whereJsonQuery).sort((a, b) => a.path.length - b.path.length);
   if (hits.length === 0) {
     return { anyHit: false, result: src };
@@ -82,14 +77,14 @@ export async function manipulateObject(
     }
 
     try {
-      const newObject = transformer(doc, Clone(hit.value), hit.path);
+      const newObject = transformer(doc, cloneDeep(hit.value), hit.path);
       if (debug && config) {
         config.debug(`Transformed Result:\n------------\n${inspect(newObject)}\n------------`);
       }
-      const newAst = newObject === undefined ? undefined : ToAst(newObject); // <- can extend ToAst to also take an "ambient" object with AST, in order to create anchor refs for existing stuff!
-      const oldAst = ResolveRelativeNode(ast, ast, hit.path);
+      const newAst = newObject === undefined ? undefined : valueToAst(newObject); // <- can extend ToAst to also take an "ambient" object with AST, in order to create anchor refs for existing stuff!
+      const oldAst = getYamlNodeByPath(ast, hit.path);
       ast =
-        ReplaceNode(ast, oldAst, newAst) ||
+        replaceYamlAstNode(ast, oldAst, newAst) ||
         (() => {
           throw new Error("Cannot remove root node.");
         })();
@@ -144,7 +139,7 @@ export async function manipulateObject(
   }
 
   // write back
-  const resultHandle = await target.writeData("manipulated", StringifyAst(ast), src.identity, src.artifactType, {
+  const resultHandle = await target.writeData("manipulated", stringifyYamlAst(ast), src.identity, src.artifactType, {
     mappings: mapping,
     mappingSources: mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src],
   });

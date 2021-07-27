@@ -1,4 +1,3 @@
-import { createCommonmarkProcessorPlugin } from "./commonmark";
 import { createAllOfCleaner } from "./allof-cleaner";
 import { createCommandPlugin } from "./command";
 
@@ -19,7 +18,6 @@ import { createOpenApiLoaderPlugin, createSwaggerLoaderPlugin } from "./loaders"
 import { createMultiApiMergerPlugin } from "./merger";
 import { createNewComposerPlugin } from "./new-composer";
 import { createProfileFilterPlugin } from "./profile-filter";
-import { createQuickCheckPlugin } from "./quick-check";
 import { subsetSchemaDeduplicatorPlugin } from "./subset-schemas-deduplicator";
 import {
   createImmediateTransformerPlugin,
@@ -29,7 +27,6 @@ import {
 } from "./transformer";
 import { createTreeShakerPlugin } from "./tree-shaker/tree-shaker";
 import { createApiVersionParameterHandlerPlugin } from "./version-param-handler";
-import { createJsonToYamlPlugin, createYamlToJsonPlugin } from "./yaml-and-json";
 import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from "./schema-validation";
 import { createOpenAPIStatsCollectorPlugin } from "./openapi-stats-collector";
 import { QuickDataSource } from "@azure-tools/datastore";
@@ -38,30 +35,27 @@ import { createComponentModifierPlugin } from "./component-modifier";
 import { createSemanticValidationPlugin } from "./semantics-validation";
 
 export const CORE_PLUGIN_MAP = {
-  "help": createHelpPlugin(),
-  "identity": createIdentityPlugin(),
-  "null": createNullPlugin(),
+  help: createHelpPlugin(),
+  identity: createIdentityPlugin(),
+  null: createNullPlugin(),
   "reset-identity": createIdentityResetPlugin(),
   "normalize-identity": createNormalizeIdentityPlugin(),
   "loader-swagger": createSwaggerLoaderPlugin(),
   "loader-openapi": createOpenApiLoaderPlugin(),
   "openapi-stats-collector": createOpenAPIStatsCollectorPlugin(),
-  "transform": createTransformerPlugin(),
+  transform: createTransformerPlugin(),
   "text-transform": createTextTransformerPlugin(),
   "new-transform": createGraphTransformerPlugin(),
   "transform-immediate": createImmediateTransformerPlugin(),
-  "compose": createNewComposerPlugin(),
+  compose: createNewComposerPlugin(),
   "schema-validator-openapi": createOpenApiSchemaValidatorPlugin(),
   "schema-validator-swagger": createSwaggerSchemaValidatorPlugin(),
   "semantic-validator": createSemanticValidationPlugin(),
   "openapi-document-converter": createSwaggerToOpenApi3Plugin(),
   "component-modifiers": createComponentModifierPlugin(),
-  "yaml2jsonx": createYamlToJsonPlugin(),
-  "jsonx2yaml": createJsonToYamlPlugin(),
   "reflect-api-versions-cs": createCSharpReflectApiVersionPlugin(),
-  "commonmarker": createCommonmarkProcessorPlugin(),
   "profile-definition-emitter": createArtifactEmitterPlugin(),
-  "emitter": createArtifactEmitterPlugin(),
+  emitter: createArtifactEmitterPlugin(),
   "configuration-emitter": createArtifactEmitterPlugin(
     async (context) =>
       new QuickDataSource([
@@ -75,7 +69,6 @@ export const CORE_PLUGIN_MAP = {
   ),
   "tree-shaker": createTreeShakerPlugin(),
   "enum-deduplicator": createEnumDeduplicator(),
-  "quick-check": createQuickCheckPlugin(),
   "model-deduplicator": createDeduplicatorPlugin(),
   "subset-reducer": subsetSchemaDeduplicatorPlugin(),
   "multi-api-merger": createMultiApiMergerPlugin(),
@@ -84,5 +77,5 @@ export const CORE_PLUGIN_MAP = {
   "api-version-parameter-handler": createApiVersionParameterHandlerPlugin(),
   "profile-filter": createProfileFilterPlugin(),
   "allof-cleaner": createAllOfCleaner(),
-  "command": createCommandPlugin(),
+  command: createCommandPlugin(),
 };

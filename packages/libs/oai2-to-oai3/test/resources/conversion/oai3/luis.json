@@ -166,9 +166,7 @@
                       "startIndex": 36,
                       "endIndex": 39,
                       "resolution": {
-                        "values": [
-                          "BankeName"
-                        ]
+                        "values": ["BankeName"]
                       }
                     }
                   ],
@@ -193,8 +191,7 @@
           },
           "description": "The utterance to predict.",
           "required": true
-        },
-        "x-ms-requestBody-index": 1
+        }
       }
     }
   },
@@ -270,11 +267,7 @@
             }
           }
         },
-        "required": [
-          "parentType",
-          "value",
-          "children"
-        ]
+        "required": ["parentType", "value", "children"]
       },
       "CompositeChildModel": {
         "description": "Child entity in a LUIS Composite Entity.",
@@ -289,10 +282,7 @@
             "description": "Value extracted by LUIS."
           }
         },
-        "required": [
-          "type",
-          "value"
-        ]
+        "required": ["type", "value"]
       },
       "IntentModel": {
         "description": "An intent detected from the utterance.",
@@ -335,12 +325,7 @@
           "type": "object",
           "description": "List of additional properties. For example, score and resolution values for pre-built LUIS entities."
         },
-        "required": [
-          "entity",
-          "type",
-          "startIndex",
-          "endIndex"
-        ]
+        "required": ["entity", "type", "startIndex", "endIndex"]
       },
       "EntityWithScore": {
         "allOf": [
@@ -357,9 +342,7 @@
                 "description": "Associated prediction score for the intent (float)."
               }
             },
-            "required": [
-              "score"
-            ]
+            "required": ["score"]
           }
         ]
       },
@@ -376,9 +359,7 @@
                 "description": "Resolution values for pre-built LUIS entities."
               }
             },
-            "required": [
-              "resolution"
-            ]
+            "required": ["resolution"]
           }
         ]
       },

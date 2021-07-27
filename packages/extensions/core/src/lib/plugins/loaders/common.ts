@@ -1,5 +1,6 @@
 import { Channel, SourceLocation } from "../../message";
-import { DataHandle, indexToPosition, StrictJsonSyntaxCheck } from "@azure-tools/datastore";
+import { DataHandle, indexToPosition } from "@azure-tools/datastore";
+import { validateJson } from "@azure-tools/json";
 import { AutorestContext } from "../../context";
 
 /**
@@ -12,12 +13,12 @@ export async function checkSyntaxFromData(
   configView: AutorestContext,
 ): Promise<void> {
   if (fileUri.toLowerCase().endsWith(".json")) {
-    const error = StrictJsonSyntaxCheck(await handle.readData());
+    const error = validateJson(await handle.readData());
     if (error) {
       configView.Message({
         Channel: Channel.Error,
         Text: `Syntax Error Encountered:  ${error.message}`,
-        Source: [<SourceLocation>{ Position: await indexToPosition(handle, error.index), document: handle.key }],
+        Source: [<SourceLocation>{ Position: await indexToPosition(handle, error.position), document: handle.key }],
       });
     }
   }

@@ -130,6 +130,12 @@
       "shouldPublish": true
     },
     {
+      "packageName": "@azure-tools/yaml",
+      "projectFolder": "packages/libs/yaml",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
       "packageName": "@azure-tools/jsonschema",
       "projectFolder": "packages/libs/jsonschema",
       "reviewCategory": "production",

@@ -6,17 +6,17 @@ import { arrayOf } from "./utils";
 const safeEval = createSandbox();
 
 export interface Directive {
-  "from"?: string[] | string;
-  "where"?: string[] | string;
-  "reason"?: string;
+  from?: string[] | string;
+  where?: string[] | string;
+  reason?: string;
 
   // one of:
-  "suppress"?: string[] | string;
-  "set"?: string[] | string;
-  "transform"?: string[] | string;
+  suppress?: string[] | string;
+  set?: string[] | string;
+  transform?: string[] | string;
   "text-transform"?: string[] | string;
-  "test"?: string[] | string;
-  "debug"?: boolean;
+  test?: string[] | string;
+  debug?: boolean;
 }
 
 export class ResolvedDirective {

@@ -120,7 +120,7 @@ describe("Modelerfour.Schemas", () => {
 
       addSchema(spec, "Dog", {
         "x-ms-discriminator-value": "dogType",
-        "allOf": [
+        allOf: [
           { $ref: "#/components/schemas/Pet" },
           {
             type: "object",
@@ -131,7 +131,7 @@ describe("Modelerfour.Schemas", () => {
 
       addSchema(spec, "Cat", {
         "x-ms-discriminator-value": "catType",
-        "allOf": [
+        allOf: [
           { $ref: "#/components/schemas/Pet" },
           {
             type: "object",
@@ -249,7 +249,7 @@ describe("Modelerfour.Schemas", () => {
       const spec = createTestSpec();
 
       addSchema(spec, "Foo", {
-        "enum": ["one"],
+        enum: ["one"],
         "x-ms-enum": {
           modelAsString: false,
         },
@@ -277,7 +277,7 @@ describe("Modelerfour.Schemas", () => {
       const spec = createTestSpec();
 
       addSchema(spec, "Foo", {
-        "enum": ["one", "two"],
+        enum: ["one", "two"],
         "x-ms-enum": {
           modelAsString: false,
         },
@@ -293,24 +293,24 @@ describe("Modelerfour.Schemas", () => {
       const spec = createTestSpec();
 
       addSchema(spec, "ModelAsString", {
-        "type": "string",
-        "enum": ["Apple", "Orange"],
+        type: "string",
+        enum: ["Apple", "Orange"],
         "x-ms-enum": {
           modelAsString: true,
         },
       });
 
       addSchema(spec, "ShouldBeSealed", {
-        "type": "string",
-        "enum": ["Apple", "Orange"],
+        type: "string",
+        enum: ["Apple", "Orange"],
         "x-ms-enum": {
           modelAsString: false,
         },
       });
 
       addSchema(spec, "SingleValueEnum", {
-        "type": "string",
-        "enum": ["Apple"],
+        type: "string",
+        enum: ["Apple"],
         "x-ms-enum": {
           modelAsString: false,
         },
