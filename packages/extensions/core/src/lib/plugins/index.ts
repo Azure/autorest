@@ -35,19 +35,19 @@ import { createComponentModifierPlugin } from "./component-modifier";
 import { createSemanticValidationPlugin } from "./semantics-validation";
 
 export const CORE_PLUGIN_MAP = {
-  "help": createHelpPlugin(),
-  "identity": createIdentityPlugin(),
-  "null": createNullPlugin(),
+  help: createHelpPlugin(),
+  identity: createIdentityPlugin(),
+  null: createNullPlugin(),
   "reset-identity": createIdentityResetPlugin(),
   "normalize-identity": createNormalizeIdentityPlugin(),
   "loader-swagger": createSwaggerLoaderPlugin(),
   "loader-openapi": createOpenApiLoaderPlugin(),
   "openapi-stats-collector": createOpenAPIStatsCollectorPlugin(),
-  "transform": createTransformerPlugin(),
+  transform: createTransformerPlugin(),
   "text-transform": createTextTransformerPlugin(),
   "new-transform": createGraphTransformerPlugin(),
   "transform-immediate": createImmediateTransformerPlugin(),
-  "compose": createNewComposerPlugin(),
+  compose: createNewComposerPlugin(),
   "schema-validator-openapi": createOpenApiSchemaValidatorPlugin(),
   "schema-validator-swagger": createSwaggerSchemaValidatorPlugin(),
   "semantic-validator": createSemanticValidationPlugin(),
@@ -55,7 +55,7 @@ export const CORE_PLUGIN_MAP = {
   "component-modifiers": createComponentModifierPlugin(),
   "reflect-api-versions-cs": createCSharpReflectApiVersionPlugin(),
   "profile-definition-emitter": createArtifactEmitterPlugin(),
-  "emitter": createArtifactEmitterPlugin(),
+  emitter: createArtifactEmitterPlugin(),
   "configuration-emitter": createArtifactEmitterPlugin(
     async (context) =>
       new QuickDataSource([
@@ -77,5 +77,5 @@ export const CORE_PLUGIN_MAP = {
   "api-version-parameter-handler": createApiVersionParameterHandlerPlugin(),
   "profile-filter": createProfileFilterPlugin(),
   "allof-cleaner": createAllOfCleaner(),
-  "command": createCommandPlugin(),
+  command: createCommandPlugin(),
 };

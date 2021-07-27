@@ -7,18 +7,18 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
   "input-file": { type: "string", array: true },
   "exclude-file": { type: "string", array: true },
   "base-folder": { type: "string" },
-  "directive": {
+  directive: {
     array: true,
     type: {
-      "from": { type: "string", array: true },
-      "where": { type: "string", array: true },
-      "reason": { type: "string" },
-      "suppress": { type: "string", array: true },
-      "set": { type: "string", array: true },
-      "transform": { type: "string", array: true },
+      from: { type: "string", array: true },
+      where: { type: "string", array: true },
+      reason: { type: "string" },
+      suppress: { type: "string", array: true },
+      set: { type: "string", array: true },
+      transform: { type: "string", array: true },
       "text-transform": { type: "string", array: true },
-      "test": { type: "string", array: true },
-      "debug": {
+      test: { type: "string", array: true },
+      debug: {
         type: "boolean",
         description:
           "Debug this directive. When set to true autorest will log additional information regarding that directive.",
@@ -30,29 +30,29 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
     type: "string",
   },
   "output-artifact": { type: "string", array: true },
-  "require": { type: "string", array: true, description: "Additional configuration files to include." },
+  require: { type: "string", array: true, description: "Additional configuration files to include." },
   "try-require": { type: "string", array: true, description: "Additional configuration files to include." },
-  "stats": { type: "boolean", description: "Output some statistics about current autorest run." },
-  "use": { type: "string", array: true },
+  stats: { type: "boolean", description: "Output some statistics about current autorest run." },
+  use: { type: "string", array: true },
   "use-extension": { type: "string", dictionary: true },
-  "profile": { type: "string", array: true },
+  profile: { type: "string", array: true },
   "pass-thru": { type: "string", array: true },
-  "eol": {
+  eol: {
     type: "string",
     enum: ["default", "lf", "crlf"],
     description: "Change the end of line character for generated output.",
   },
 
   "message-format": { type: "string", enum: ["json", "yaml", "regular"] },
-  "title": { type: "string" },
+  title: { type: "string" },
   "github-auth-token": { type: "string" },
   "output-file": { type: "string" },
   "output-folder": { type: "string" },
-  "force": {
+  force: {
     type: "boolean",
     description: "Force updating the version of core even if there is a local version satisfying the requirement.",
   },
-  "memory": { type: "string", description: "Configure max memory allowed for autorest process(s)" },
+  memory: { type: "string", description: "Configure max memory allowed for autorest process(s)" },
 
   // Feature flags
   "deduplicate-inline-models": { type: "boolean" },

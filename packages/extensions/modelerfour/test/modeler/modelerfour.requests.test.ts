@@ -199,10 +199,10 @@ describe("Modelerfour.Request", () => {
         description: "Has x-ms-header-collection-prefix on header",
         parameters: [
           {
-            "name": "x-ms-req-meta",
+            name: "x-ms-req-meta",
             "x-ms-client-name": "RequestHeaderWithExtension",
-            "in": "header",
-            "schema": {
+            in: "header",
+            schema: {
               type: "string",
             },
             "x-ms-parameter-location": "method",
@@ -223,7 +223,7 @@ describe("Modelerfour.Request", () => {
               "x-named-header": {
                 "x-ms-client-name": "HeaderWithExtension",
                 "x-ms-header-collection-prefix": "x-ms-res-meta",
-                "schema": {
+                schema: {
                   type: "string",
                 },
               },

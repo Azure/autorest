@@ -126,8 +126,8 @@ async function getFullPath(command: string, searchPath?: string): Promise<string
 export async function fetchPackageMetadata(spec: string): Promise<pacote.ManifestResult> {
   try {
     return await pacote.manifest(spec, {
-      "cache": `${tmpdir()}/cache`,
-      "registry": process.env.autorest_registry || "https://registry.npmjs.org",
+      cache: `${tmpdir()}/cache`,
+      registry: process.env.autorest_registry || "https://registry.npmjs.org",
       "full-metadata": true,
     });
   } catch (error) {

@@ -2,20 +2,20 @@ import { parseArgs } from "@autorest/configuration";
 
 export interface AutorestArgs {
   // Versioning
-  "v3"?: boolean;
-  "preview"?: boolean;
-  "prerelease"?: boolean;
-  "version"?: string;
-  "latest"?: boolean;
+  v3?: boolean;
+  preview?: boolean;
+  prerelease?: boolean;
+  version?: string;
+  latest?: boolean;
 
-  "reset"?: boolean;
-  "debug"?: boolean;
-  "info"?: boolean;
-  "json"?: boolean;
-  "configFileOrFolder"?: string;
-  "force"?: boolean;
+  reset?: boolean;
+  debug?: boolean;
+  info?: boolean;
+  json?: boolean;
+  configFileOrFolder?: string;
+  force?: boolean;
 
-  "verbose"?: boolean;
+  verbose?: boolean;
   "message-format"?: "regular" | "json" | "yaml";
   "list-available"?: boolean;
   "clear-temp"?: boolean;

@@ -27,8 +27,8 @@ describe("Json Pointer", () => {
 
   describe("getFromJsonPointer()", () => {
     const examples = {
-      "foo": ["bar", "baz"],
-      "bar": { baz: 10 },
+      foo: ["bar", "baz"],
+      bar: { baz: 10 },
       "": 0,
       "a/b": 1,
       "c%d": 2,

@@ -34,7 +34,7 @@ describe("Tree shaker", () => {
         components: {
           schemas: {
             Foo: {
-              "type": JsonType.Object,
+              type: JsonType.Object,
               "x-ms-client-name": "FooClient",
             },
           },
@@ -49,7 +49,7 @@ describe("Tree shaker", () => {
         paths: {
           "/mypath": {
             get: {
-              parameters: [{ "in": "query", "name": "some-param", "x-ms-client-name": "SomeParamClient" }],
+              parameters: [{ in: "query", name: "some-param", "x-ms-client-name": "SomeParamClient" }],
             },
           },
         },
@@ -68,8 +68,8 @@ describe("Tree shaker", () => {
               properties: {
                 bar: {
                   "x-ms-client-name": "barClient",
-                  "type": JsonType.Object,
-                  "properties": {
+                  type: JsonType.Object,
+                  properties: {
                     name: { type: JsonType.String },
                   },
                 },

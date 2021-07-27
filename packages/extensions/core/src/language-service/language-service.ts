@@ -199,8 +199,8 @@ class Result {
     this.AutoRest.AddConfiguration({
       "output-artifact": ["swagger-document.json", "swagger-document.json.map"],
       // debug and verbose messages are not sent by default, turn them on so client settings can decide to show or not.
-      "debug": true,
-      "verbose": true,
+      debug: true,
+      verbose: true,
     });
 
     // apply settings from the client

@@ -484,10 +484,10 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
       if (!value["x-ms-metadata"]) {
         component["x-ms-metadata"] = {
           value: {
-            "apiVersions": [this.current.info && this.current.info.version ? this.current.info.version : ""], // track the API version this came from
-            "filename": [this.currentInputFilename], // and the filename
+            apiVersions: [this.current.info && this.current.info.version ? this.current.info.version : ""], // track the API version this came from
+            filename: [this.currentInputFilename], // and the filename
             name,
-            "originalLocations": [originalLocation],
+            originalLocations: [originalLocation],
             "x-ms-secondary-file": this.isSecondaryFile,
           },
           pointer,
