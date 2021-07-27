@@ -27,6 +27,77 @@ import oai3 from "@azure-tools/openapi";
  *
  */
 
+/**
+ * Find unused components and remove them.
+ */
+export class ComponentsCleaner extends Transformer<any, oai.Model> {
+  private componentsToKeep: ComponentTracker = {
+    schemas: new Set<string>(),
+    responses: new Set<string>(),
+    parameters: new Set<string>(),
+    examples: new Set<string>(),
+    requestBodies: new Set<string>(),
+    headers: new Set<string>(),
+    securitySchemes: new Set<string>(),
+    links: new Set<string>(),
+    callbacks: new Set<string>(),
+  };
+
+  async init() {
+    const doc = await this.inputs[0].ReadObject<oai3.Model>();
+    const finder = new UnsuedComponentFinder(doc);
+    this.componentsToKeep = finder.find();
+  }
+
+  public async process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {
+    for (const { value, key, pointer, children } of originalNodes) {
+      switch (key) {
+        case "components":
+          {
+            const components =
+              <oai.Components>targetParent.components || this.newObject(targetParent, "components", pointer);
+            this.visitComponents(components, children);
+          }
+          break;
+
+        default:
+          this.clone(targetParent, key, pointer, value);
+          break;
+      }
+    }
+  }
+
+  private visitComponents(components: ProxyObject<Record<string, oai.Components>>, nodes: Iterable<Node>) {
+    for (const {
+      key: containerType,
+      pointer: containerPointer,
+      children: containerChildren,
+      value: containerValue,
+    } of nodes) {
+      switch (containerType) {
+        case "responses":
+        case "schemas":
+        case "parameters":
+        case "requestBodies":
+        case "headers":
+          this.newObject(components, containerType, containerPointer);
+          for (const { key: componentId, pointer: componentPointer, value: componentValue } of containerChildren) {
+            if (this.componentsToKeep[containerType].has(componentId)) {
+              this.clone(<AnyObject>components[containerType], componentId, componentPointer, componentValue);
+            }
+          }
+          break;
+        default:
+          if (components[containerType] === undefined) {
+            this.clone(components, containerType, containerPointer, containerValue);
+          }
+
+          break;
+      }
+    }
+  }
+}
+
 type ComponentType =
   | "schemas"
   | "responses"
@@ -51,9 +122,9 @@ interface ComponentTracker {
 }
 
 /**
- * Find unused components and remove them.
+ * Logic to find the unsued components
  */
-export class ComponentsCleaner extends Transformer<any, oai.Model> {
+class UnsuedComponentFinder {
   private visitedComponents: ComponentTracker = {
     schemas: new Set<string>(),
     responses: new Set<string>(),
@@ -78,14 +149,20 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
     callbacks: new Set<string>(),
   };
 
-  private components: oai3.Components = {};
+  private components: oai.Components;
 
-  async init() {
-    const doc = await this.inputs[0].ReadObject<oai3.Model>();
-    this.components = doc.components ?? {};
-    this.findComponentsToKeepInPaths(doc.paths);
+  public constructor(private document: oai3.Model) {
+    this.components = document.components ?? {};
+  }
+
+  /**
+   * @returns components that are used.
+   */
+  public find(): ComponentTracker {
+    this.findComponentsToKeepInPaths(this.document.paths);
     this.findComponentsToKeepInComponents();
     this.findComponentsToKeepFromPolymorphicRefs();
+    return this.componentsToKeep;
   }
 
   private findComponentsToKeepInPaths(paths: AnyObject) {
@@ -143,7 +220,7 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
     component: any,
     prop: "allOf" | "anyOf" | "oneOf" | "not",
   ) {
-    if (component[prop].$ref) {
+    if (component[prop]?.$ref) {
       const refParts = component[prop].$ref.split("/");
       const componentRefUid = refParts.pop();
       const refType = refParts.pop() as keyof ComponentTracker;
@@ -176,54 +253,6 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
         }
       } else if (value && typeof value === "object") {
         this.crawlObject(value);
-      }
-    }
-  }
-
-  public async process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {
-    for (const { value, key, pointer, children } of originalNodes) {
-      switch (key) {
-        case "components":
-          {
-            const components =
-              <oai.Components>targetParent.components || this.newObject(targetParent, "components", pointer);
-            this.visitComponents(components, children);
-          }
-          break;
-
-        default:
-          this.clone(targetParent, key, pointer, value);
-          break;
-      }
-    }
-  }
-
-  visitComponents(components: ProxyObject<Record<string, oai.Components>>, nodes: Iterable<Node>) {
-    for (const {
-      key: containerType,
-      pointer: containerPointer,
-      children: containerChildren,
-      value: containerValue,
-    } of nodes) {
-      switch (containerType) {
-        case "responses":
-        case "schemas":
-        case "parameters":
-        case "requestBodies":
-        case "headers":
-          this.newObject(components, containerType, containerPointer);
-          for (const { key: componentId, pointer: componentPointer, value: componentValue } of containerChildren) {
-            if (this.componentsToKeep[containerType].has(componentId)) {
-              this.clone(<AnyObject>components[containerType], componentId, componentPointer, componentValue);
-            }
-          }
-          break;
-        default:
-          if (components[containerType] === undefined) {
-            this.clone(components, containerType, containerPointer, containerValue);
-          }
-
-          break;
       }
     }
   }
