@@ -8,10 +8,11 @@ import {
   DataHandle,
   DataSink,
   DataSource,
+  MappingTreeItem,
   Node,
-  ProxyObject,
+  MappingTreeObject,
   QuickDataSource,
-  Transformer,
+  TransformerV2,
   visit,
 } from "@azure-tools/datastore";
 import { Dictionary } from "@azure-tools/linq";
@@ -51,7 +52,7 @@ interface ComponentTracker {
   callbacks: Set<string>;
 }
 
-export class ComponentsCleaner extends Transformer<any, oai.Model> {
+export class ComponentsCleaner extends TransformerV2<any, oai.Model> {
   private visitedComponents: ComponentTracker = {
     schemas: new Set<string>(),
     responses: new Set<string>(),
@@ -184,13 +185,12 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
     }
   }
 
-  public async process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {
+  public async process(targetParent: MappingTreeItem<oai.Model>, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer, children } of originalNodes) {
       switch (key) {
         case "components":
           {
-            const components =
-              <oai.Components>targetParent.components || this.newObject(targetParent, "components", pointer);
+            const components = targetParent.components || this.newObject(targetParent, "components", pointer);
             this.visitComponents(components, children);
           }
           break;
@@ -202,7 +202,7 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
     }
   }
 
-  visitComponents(components: ProxyObject<Dictionary<oai.Components>>, nodes: Iterable<Node>) {
+  visitComponents(components: MappingTreeObject<Dictionary<oai.Components>>, nodes: Iterable<Node>) {
     for (const {
       key: containerType,
       pointer: containerPointer,
@@ -218,7 +218,7 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
           this.newObject(components, containerType, containerPointer);
           for (const { key: componentId, pointer: componentPointer, value: componentValue } of containerChildren) {
             if (this.componentsToKeep[containerType].has(componentId)) {
-              this.clone(<AnyObject>components[containerType], componentId, componentPointer, componentValue);
+              this.clone(components[containerType], componentId, componentPointer, componentValue);
             }
           }
           break;

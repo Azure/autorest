@@ -18,6 +18,7 @@ export * from "./parsing/text-utility";
 export * from "./source-map/blaming";
 export * from "./parsing/stable-object";
 export * from "./processor";
+export * from "./transformer-v2";
 export * from "./transformer-via-pointer";
 
 export { safeEval, createSandbox } from "@azure-tools/codegen";
