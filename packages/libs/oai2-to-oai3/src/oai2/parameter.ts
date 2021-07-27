@@ -16,7 +16,6 @@ export interface OpenAPI2ParameterBase {
 export interface OpenAPI2BodyParameter extends OpenAPI2ParameterBase {
   name: string;
   in: "body";
-  type?: undefined;
   schema: OpenAPI2Definition;
   description?: string;
   required?: boolean;

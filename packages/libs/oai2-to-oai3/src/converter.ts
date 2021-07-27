@@ -954,23 +954,8 @@ export class Oai2ToOai3 {
       }
       const schema = requestBody.content[contentType].schema as MappingTreeObject<oai3.Schema>;
 
-      if (parameterValue.schema !== undefined) {
-        for (const { key, value, childIterator } of parameterItemMembers()) {
-          if (key === "schema") {
-            await this.visitSchema(schema, value, childIterator);
-          }
-        }
-      } else {
-        this.addFormDataParameterToSchema(schema, parameterValue, sourcePointer, parameterItemMembers, contentType);
-      }
-    } else if (parameterValue.type === "file") {
-      targetOperation.__set__("application/octet-stream", this.newObject(sourcePointer));
-      targetOperation["application/octet-stream"].__set__("schema", this.newObject(sourcePointer));
-      targetOperation["application/octet-stream"].schema.__set__("type", { value: "string", sourcePointer });
-      targetOperation["application/octet-stream"].schema.__set__("format", { value: "binary", sourcePointer });
-    }
-
-    if (parameterValue.in === "body") {
+      this.addFormDataParameterToSchema(schema, parameterValue, sourcePointer, parameterItemMembers, contentType);
+    } else if (parameterValue.in === "body") {
       const consumesTempArray = [...consumes];
       if (consumesTempArray.length === 0) {
         consumesTempArray.push("application/json");
