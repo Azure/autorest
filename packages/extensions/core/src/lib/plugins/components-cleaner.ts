@@ -162,6 +162,7 @@ class UnsuedComponentFinder {
     this.findComponentsToKeepInPaths(this.document.paths);
     this.findComponentsToKeepInComponents();
     this.findComponentsToKeepFromPolymorphicRefs();
+
     return this.componentsToKeep;
   }
 
@@ -196,16 +197,16 @@ class UnsuedComponentFinder {
         for (const [currentComponentUid, component] of Object.entries<any>(containerComponents)) {
           // only apply polymorphic pull-thru on objects with a polymorphic discriminator
           if (component?.["x-ms-discriminator-value"]) {
-            if (this.checkRef(containerType as keyof ComponentTracker, currentComponentUid, component, "allOf")) {
+            if (this.checkRef(containerType as ComponentType, currentComponentUid, component, "allOf")) {
               entryAdded = true;
             }
-            if (this.checkRef(containerType as keyof ComponentTracker, currentComponentUid, component, "oneOf")) {
+            if (this.checkRef(containerType as ComponentType, currentComponentUid, component, "oneOf")) {
               entryAdded = true;
             }
-            if (this.checkRef(containerType as keyof ComponentTracker, currentComponentUid, component, "anyOf")) {
+            if (this.checkRef(containerType as ComponentType, currentComponentUid, component, "anyOf")) {
               entryAdded = true;
             }
-            if (this.checkRef(containerType as keyof ComponentTracker, currentComponentUid, component, "not")) {
+            if (this.checkRef(containerType as ComponentType, currentComponentUid, component, "not")) {
               entryAdded = true;
             }
           }
@@ -215,7 +216,7 @@ class UnsuedComponentFinder {
   }
 
   private checkRef(
-    containerType: keyof ComponentTracker,
+    containerType: ComponentType,
     currentComponentUid: string,
     component: any,
     prop: "allOf" | "anyOf" | "oneOf" | "not",
