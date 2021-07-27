@@ -249,7 +249,11 @@ class UnsuedComponentFinder {
         if (!this.visitedComponents[t].has(componentUid)) {
           this.visitedComponents[t].add(componentUid);
           this.componentsToKeep[t].add(componentUid);
-          this.crawlObject(this.components[t]?.[componentUid]);
+          const componentTypes = this.components[t];
+          if (componentTypes === undefined) {
+            throw new Error(`Reference '${value}' could not be found.`);
+          }
+          this.crawlObject(componentTypes[componentUid]);
         }
       } else if (value && typeof value === "object") {
         this.crawlObject(value);
