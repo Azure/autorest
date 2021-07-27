@@ -10,7 +10,6 @@ import {
   MappingTreeArray,
   Mapping,
   NoMapping,
-  MappingTreeItem,
   createMappingTree,
 } from "@azure-tools/datastore";
 import { resolveOperationConsumes, resolveOperationProduces } from "./content-type-utils";
@@ -20,8 +19,9 @@ import {
   OpenAPI2Operation,
   OpenAPI2OperationResponse,
   OpenAPI2BodyParameter,
-  OpenApi2FormDataParameter,
+  OpenAPI2FormDataParameter,
   HttpMethod,
+  OpenAPI2Parameter,
 } from "./oai2";
 import { cleanElementName, convertOai2RefToOai3, parseOai2Ref } from "./refs-utils";
 import { ResolveReferenceFn } from "./runner";
@@ -873,12 +873,12 @@ export class Oai2ToOai3 {
 
   private async visitOperationParameter(
     targetOperation: MappingTreeObject<HttpOperation>,
-    parameterValue: any,
+    parameterValue: OpenAPI2Parameter,
     pointer: string,
     parameterItemMembers: () => Iterable<Node>,
     consumes: string[],
   ) {
-    if (parameterValue.in === "formData" || parameterValue.in === "body" || parameterValue.type === "file") {
+    if (parameterValue.in === "formData" || parameterValue.in === "body") {
       await this.visitOperationBodyParameter(targetOperation, parameterValue, pointer, parameterItemMembers, consumes);
     } else {
       if (targetOperation.parameters === undefined) {
@@ -894,7 +894,7 @@ export class Oai2ToOai3 {
 
   private async visitOperationBodyParameter(
     targetOperation: MappingTreeObject<HttpOperation>,
-    parameterValue: OpenAPI2BodyParameter | OpenApi2FormDataParameter,
+    parameterValue: OpenAPI2BodyParameter | OpenAPI2FormDataParameter,
     sourcePointer: string,
     parameterItemMembers: () => Iterable<Node>,
     consumes: string[],
@@ -904,22 +904,10 @@ export class Oai2ToOai3 {
     }
 
     const requestBody: MappingTreeObject<oai3.RequestBody> = targetOperation.requestBody! as any;
-    if (
-      (parameterValue.in === "body" || parameterValue.type === "file") &&
-      parameterValue.in !== "formData" &&
-      parameterValue.required !== undefined
-    ) {
-      requestBody.__set__("required", {
-        value: parameterValue.required,
-        sourcePointer: `${sourcePointer}/required`,
-      });
-    }
 
-    if (parameterValue.description !== undefined && requestBody.description === undefined) {
-      requestBody.__set__("description", {
-        value: parameterValue.description,
-        sourcePointer: `${sourcePointer}/description`,
-      });
+    copyPropertyIfNotSet(requestBody, "description", parameterValue, sourcePointer);
+    if (parameterValue.in === "body") {
+      copyPropertyIfNotSet(requestBody, "required", parameterValue, sourcePointer);
     }
 
     if (parameterValue["x-ms-client-name"]) {
@@ -943,24 +931,9 @@ export class Oai2ToOai3 {
         });
       }
     }
-    if (parameterValue["x-ms-parameter-location"] && requestBody["x-ms-parameter-location"] === undefined) {
-      requestBody.__set__("x-ms-parameter-location", {
-        value: parameterValue["x-ms-parameter-location"],
-        sourcePointer,
-      });
-    }
 
-    if (parameterValue["x-ms-client-flatten"] !== undefined && requestBody["x-ms-client-flatten"] === undefined) {
-      requestBody.__set__("x-ms-client-flatten", { value: parameterValue["x-ms-client-flatten"], sourcePointer });
-    }
-
-    if (parameterValue["x-ms-enum"] !== undefined && requestBody["x-ms-enum"] === undefined) {
-      requestBody.__set__("x-ms-enum", { value: parameterValue["x-ms-enum"], sourcePointer });
-    }
-
-    if (parameterValue.allowEmptyValue !== undefined && requestBody.allowEmptyValue === undefined) {
-      requestBody.__set__("allowEmptyValue", { value: parameterValue.allowEmptyValue, sourcePointer });
-    }
+    copyPropertyIfNotSet(requestBody, "x-ms-parameter-location", parameterValue, sourcePointer);
+    copyPropertyIfNotSet(requestBody, "x-ms-client-flatten", parameterValue, sourcePointer);
 
     if (requestBody!.content === undefined) {
       requestBody!.__set__("content", this.newObject(sourcePointer));
@@ -1039,7 +1012,7 @@ export class Oai2ToOai3 {
    */
   private addFormDataParameterToSchema(
     requestBodySchema: MappingTreeObject<oai3.Schema>,
-    parameterValue: OpenApi2FormDataParameter,
+    parameterValue: OpenAPI2FormDataParameter,
     sourcePointer: string,
     parameterItemMembers: () => Iterable<Node>,
     contentType: string,
@@ -1277,5 +1250,16 @@ export class Oai2ToOai3 {
         }
       }
     }
+  }
+}
+
+function copyPropertyIfNotSet<T, K extends keyof T>(
+  target: MappingTreeObject<T>,
+  key: K,
+  input: { [key in K]: T[K] },
+  inputPointer: string,
+) {
+  if (input[key] !== undefined && target[key] === undefined) {
+    target.__set__(key, { value: input[key], sourcePointer: `${inputPointer}/${key}` });
   }
 }

@@ -4,11 +4,16 @@ import { OpenAPI2HeaderDefinition } from "./header";
 export type OpenAPI2Parameter =
   | OpenAPI2BodyParameter
   | OpenAPI2HeaderParameter
-  | OpenApi2FormDataParameter
-  | OpenApi2QueryParameter
-  | OpenApi2PathParameter;
+  | OpenAPI2FormDataParameter
+  | OpenAPI2QueryParameter
+  | OpenAPI2PathParameter;
 
-export interface OpenAPI2BodyParameter {
+export interface OpenAPI2ParameterBase {
+  "x-ms-client-name"?: string;
+  "x-ms-parameter-location"?: string;
+}
+
+export interface OpenAPI2BodyParameter extends OpenAPI2ParameterBase {
   name: string;
   in: "body";
   type?: undefined;
@@ -17,15 +22,17 @@ export interface OpenAPI2BodyParameter {
   required?: boolean;
   allowEmptyValue?: boolean;
   example?: unknown;
+
+  "x-ms-client-flatten"?: boolean;
 }
 
-export interface OpenAPI2HeaderParameter extends OpenAPI2HeaderDefinition {
+export interface OpenAPI2HeaderParameter extends OpenAPI2HeaderDefinition, OpenAPI2ParameterBase {
   name: string;
   in: "header";
   required?: boolean;
 }
 
-export interface OpenApi2FormDataParameter {
+export interface OpenAPI2FormDataParameter extends OpenAPI2ParameterBase {
   name: string;
   in: "formData";
   type: "string" | "number" | "integer" | "boolean" | "array" | "file";
@@ -39,9 +46,11 @@ export interface OpenApi2FormDataParameter {
   allOf?: OpenAPI2Definition[];
   default?: unknown;
   items?: PrimitiveItems;
+
+  "x-ms-client-flatten"?: boolean;
 }
 
-export interface OpenApi2QueryParameter {
+export interface OpenAPI2QueryParameter extends OpenAPI2ParameterBase {
   name: string;
   in: "query";
   type: "string" | "number" | "integer" | "boolean" | "array";
@@ -52,7 +61,7 @@ export interface OpenApi2QueryParameter {
   enum?: string[];
 }
 
-export interface OpenApi2PathParameter {
+export interface OpenAPI2PathParameter extends OpenAPI2ParameterBase {
   name: string;
   in: "path";
   type: "string" | "number" | "integer" | "boolean" | "array";
@@ -63,7 +72,7 @@ export interface OpenApi2PathParameter {
   enum?: string[];
 }
 
-export interface PrimitiveItems {
+export interface PrimitiveItems extends OpenAPI2ParameterBase {
   type: "string" | "number" | "integer" | "boolean" | "array" | "file";
   format?: string;
   items?: PrimitiveItems;

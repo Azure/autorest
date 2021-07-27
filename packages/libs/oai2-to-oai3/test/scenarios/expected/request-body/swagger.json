@@ -17,8 +17,8 @@
         "summary": "Body parameter test 1",
         "description": "Body param is a referenced parameter.",
         "requestBody": {
-          "required": true,
           "description": "A referenced body parameter.",
+          "required": true,
           "x-ms-requestBody-name": "body_param",
           "content": {
             "application/json": {
@@ -46,8 +46,8 @@
         "summary": "Body parameter test 2",
         "description": "Body param is normal inline parameter.",
         "requestBody": {
-          "required": true,
           "description": "The content of the new counterexample.",
+          "required": true,
           "x-ms-requestBody-name": "body_param",
           "content": {
             "application/json": {

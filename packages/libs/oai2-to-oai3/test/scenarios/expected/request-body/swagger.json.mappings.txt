@@ -12,8 +12,8 @@
 /paths/~1v1~1bodytest1/post/summary => /paths/~1v1~1bodytest1/post/summary
 /paths/~1v1~1bodytest1/post/description => /paths/~1v1~1bodytest1/post/description
 /paths/~1v1~1bodytest1/post/requestBody => /parameters/BodyParam1
-/paths/~1v1~1bodytest1/post/requestBody/required => /parameters/BodyParam1/required
 /paths/~1v1~1bodytest1/post/requestBody/description => /parameters/BodyParam1/description
+/paths/~1v1~1bodytest1/post/requestBody/required => /parameters/BodyParam1/required
 /paths/~1v1~1bodytest1/post/requestBody/x-ms-requestBody-name => /parameters/BodyParam1/name
 /paths/~1v1~1bodytest1/post/requestBody/content => /parameters/BodyParam1
 /paths/~1v1~1bodytest1/post/requestBody/content/application~1json => /parameters/BodyParam1
@@ -32,8 +32,8 @@
 /paths/~1v1~1bodytest2/post/summary => /paths/~1v1~1bodytest2/post/summary
 /paths/~1v1~1bodytest2/post/description => /paths/~1v1~1bodytest2/post/description
 /paths/~1v1~1bodytest2/post/requestBody => /paths/~1v1~1bodytest2/post/parameters/0
-/paths/~1v1~1bodytest2/post/requestBody/required => /paths/~1v1~1bodytest2/post/parameters/0/required
 /paths/~1v1~1bodytest2/post/requestBody/description => /paths/~1v1~1bodytest2/post/parameters/0/description
+/paths/~1v1~1bodytest2/post/requestBody/required => /paths/~1v1~1bodytest2/post/parameters/0/required
 /paths/~1v1~1bodytest2/post/requestBody/x-ms-requestBody-name => /paths/~1v1~1bodytest2/post/parameters/0/name
 /paths/~1v1~1bodytest2/post/requestBody/content => /paths/~1v1~1bodytest2/post/parameters/0
 /paths/~1v1~1bodytest2/post/requestBody/content/application~1json => /paths/~1v1~1bodytest2/post/parameters/0

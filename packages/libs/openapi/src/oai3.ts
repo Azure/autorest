@@ -356,7 +356,11 @@ export interface RequestBody extends Extensions {
   description?: string;
   content: Dictionary<MediaType>;
   required?: boolean;
+
+  "x-ms-client-flatten"?: boolean;
+  "x-ms-parameter-location"?: string;
 }
+
 export interface Response extends Extensions {
   description: string;
   headers?: Dictionary<Reference<Header>>;
