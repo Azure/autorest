@@ -26,7 +26,15 @@ import {
 import { cleanElementName, convertOai2RefToOai3, parseOai2Ref } from "./refs-utils";
 import { ResolveReferenceFn } from "./runner";
 import { statusCodes } from "./status-codes";
-import oai3, { EncodingStyle, HttpOperation, JsonType, PathItem, Schema, SecurityType } from "@azure-tools/openapi";
+import oai3, {
+  EncodingStyle,
+  HttpOperation,
+  JsonType,
+  PathItem,
+  RequestBody,
+  Schema,
+  SecurityType,
+} from "@azure-tools/openapi";
 
 // NOTE: after testing references should be changed to OpenAPI 3.x.x references
 
@@ -838,7 +846,7 @@ export class Oai2ToOai3 {
   private async visitParameters(
     targetOperation: MappingTreeObject<oai3.HttpOperation>,
     parametersFieldItemMembers: any,
-    consumes: any,
+    consumes: string[],
     sourcePointer: string,
   ) {
     for (let { pointer, value, childIterator } of parametersFieldItemMembers) {
@@ -869,6 +877,41 @@ export class Oai2ToOai3 {
       }
       await this.visitOperationParameter(targetOperation, value, pointer, childIterator, consumes);
     }
+    this.visitUnassignedConsumesContentTypes(targetOperation, consumes, sourcePointer);
+  }
+
+  /**
+   * Check for some special content types that were not assigned using body or formData parameter and create an empty requestBody entry for it.
+   * This ensure you can have things like
+   * multipart/formdata and application/octet-stream with the body being formData but still allow a raw file(application/octet-stream) to be passed through
+   */
+  private visitUnassignedConsumesContentTypes(
+    targetOperation: MappingTreeObject<oai3.HttpOperation>,
+    consumes: string[],
+    sourcePointer: string,
+  ) {
+    if (consumes.length === 0) {
+      return;
+    }
+    if (consumes.indexOf("application/octet-stream") === -1) {
+      return;
+    }
+
+    if (targetOperation.requestBody === undefined) {
+      targetOperation.__set__("requestBody", this.newObject(sourcePointer));
+    }
+
+    const requestBody = targetOperation.requestBody as MappingTreeObject<oai3.RequestBody>;
+
+    if (requestBody.content["application/octet-stream"] !== undefined) {
+      return;
+    }
+
+    if (requestBody.content === undefined) {
+      requestBody.__set__("content", { value: {}, sourcePointer });
+    }
+
+    requestBody.content!.__set__("application/octet-stream", { value: {}, sourcePointer });
   }
 
   private async visitOperationParameter(
