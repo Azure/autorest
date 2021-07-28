@@ -378,7 +378,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     } catch (e) {
       if (configView.config.debug) {
         // eslint-disable-next-line no-console
-        console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);
+        console.error(`${__filename} - FAILURE`, e);
       }
       throw e;
     }
