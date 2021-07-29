@@ -1,5 +1,4 @@
 import { Languages } from "@autorest/codemodel";
-import { length, Dictionary } from "@azure-tools/linq";
 import { removeSequentialDuplicates, fixLeadingNumber, deconstruct, Style, Styler } from "@azure-tools/codegen";
 import { Session } from "@autorest/extension-base";
 
@@ -7,8 +6,8 @@ export function getNameOptions(typeName: string, components: Array<string>) {
   const result = new Set<string>();
 
   // add a variant for each incrementally inclusive parent naming scheme.
-  for (let i = 0; i < length(components); i++) {
-    const subset = Style.pascal([...removeSequentialDuplicates(components.slice(-1 * i, length(components)))]);
+  for (let i = 0; i < components.length; i++) {
+    const subset = Style.pascal([...removeSequentialDuplicates(components.slice(-1 * i, components.length))]);
     result.add(subset);
   }
 
@@ -41,7 +40,7 @@ export function setName(
   thing: Nameable,
   styler: Styler,
   defaultValue: string,
-  overrides: Dictionary<string>,
+  overrides: Record<string, string>,
   options?: SetNameOptions,
 ) {
   setNameAllowEmpty(thing, styler, defaultValue, overrides, options);
@@ -54,7 +53,7 @@ export function setNameAllowEmpty(
   thing: Nameable,
   styler: Styler,
   defaultValue: string,
-  overrides: Dictionary<string>,
+  overrides: Record<string, string>,
   options?: SetNameOptions,
 ) {
   options = { ...setNameDefaultOptions, ...options };

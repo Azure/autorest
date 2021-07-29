@@ -16,10 +16,10 @@ import {
   SealedChoiceSchema,
 } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
-import { values, length, Dictionary, items } from "@azure-tools/linq";
 import { selectName, Style } from "@azure-tools/codegen";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
 import { getNameOptions, isUnassigned, ScopeNamer, setName, setNameAllowEmpty } from "./naming-utils";
+import { partition } from "lodash";
 
 export class PreNamer {
   codeModel: CodeModel;
@@ -38,7 +38,7 @@ export class PreNamer {
     client: Style.pascal,
     local: Style.camel,
     global: Style.pascal,
-    override: <Dictionary<string>>{},
+    override: <Record<string, string>>{},
   };
 
   enum = 0;
@@ -271,14 +271,14 @@ export class PreNamer {
 
   private setResponseHeaderNames(response: Response) {
     if (response.protocol.http) {
-      for (const { value: header } of items(response.protocol.http.headers)) {
+      for (const header of Object.values(response.protocol.http.headers)) {
         setName(header as { language: Languages }, this.format.responseHeader, "", this.format.override);
       }
     }
   }
 
   fixParameterCollisions() {
-    for (const operation of values(this.codeModel.operationGroups).selectMany((each) => each.operations)) {
+    for (const operation of values(this.codeModel.operationGroups).flatMap((each) => each.operations)) {
       for (const request of values(operation.requests)) {
         const parameters = values(operation.signatureParameters).concat(values(request.signatureParameters));
 
@@ -312,10 +312,13 @@ export class PreNamer {
   }
 
   fixCollisions(schema: ObjectSchema) {
-    for (const each of values(schema.parents?.immediate).where((each) => isObjectSchema(each))) {
+    for (const each of values(schema.parents?.immediate).filter((each) => isObjectSchema(each))) {
       this.fixCollisions(<ObjectSchema>each);
     }
-    const [owned, flattened] = values(schema.properties).bifurcate((each) => length(each.flattenedNames) === 0);
+    const [owned, flattened] = partition(
+      schema.properties ?? [],
+      (each) => each.flattenedNames === undefined || each.flattenedNames.length === 0,
+    );
     const inherited = [...getAllParentProperties(schema)];
 
     const all = [...owned, ...inherited, ...flattened];
@@ -345,4 +348,8 @@ export class PreNamer {
       this.fixCollisions(schema);
     }
   }
+}
+
+function values<T>(item: T[] | undefined): T[] {
+  return Object.values(item ?? []);
 }
