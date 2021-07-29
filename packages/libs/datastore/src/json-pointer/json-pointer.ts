@@ -1,4 +1,3 @@
-import { Dictionary, items } from "@azure-tools/linq";
 import * as jp from "@azure-tools/json";
 
 export type JsonPointer = string;
@@ -87,26 +86,6 @@ export function remove(obj: any, pointer: JsonPointer | JsonPointerTokens) {
 }
 
 /**
- * Returns a (pointer -> value) dictionary for an object
- *
- * @param obj
- * @param {function} descend
- * @returns {}
- */
-export function toDictionary(obj: any, descend?: (value: any) => boolean) {
-  const results = new Dictionary<any>();
-
-  walk(
-    obj,
-    (value, pointer) => {
-      results[pointer] = value;
-    },
-    descend,
-  );
-  return results;
-}
-
-/**
  * Iterates over an object
  * Iterator: function (value, pointer) {}
  *
@@ -128,12 +107,12 @@ export function walk(
     });
   */
   const next = (cur: any) => {
-    for (const { key, value } of items(cur)) {
+    for (const [key, value] of Object.entries(cur)) {
       refTokens.push(String(key));
       if (descend(value)) {
         next(value);
       } else {
-        iterator(value, serializeJsonPointer(refTokens));
+        iterator(value, jp.serializeJsonPointer(refTokens));
       }
       refTokens.pop();
     }
@@ -160,9 +139,9 @@ export function _visit(
 ) {
   const refTokens = new Array<string>();
   const next = (cur: any) => {
-    for (const { key, value } of items(cur)) {
+    for (const [key, value] of Object.entries(cur)) {
       refTokens.push(String(key));
-      if (iterator(value, serializeJsonPointer(refTokens)) && descend(value)) {
+      if (iterator(value, jp.serializeJsonPointer(refTokens)) && descend(value)) {
         next(value);
       }
       refTokens.pop();
@@ -172,7 +151,7 @@ export function _visit(
 }
 
 export function* visit(obj: any, parentReference: JsonPointerTokens = new Array<string>()): Iterable<Node> {
-  for (const { key, value } of items(obj)) {
+  for (const [key, value] of Object.entries(obj)) {
     const reference = [...parentReference, key];
     yield {
       value,
