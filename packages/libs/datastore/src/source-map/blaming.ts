@@ -6,6 +6,7 @@
 import { MappedPosition } from "source-map";
 import { DataStore } from "../data-store/data-store";
 import { encodeEnhancedPositionInName, tryDecodeEnhancedPositionFromName } from "./source-map";
+import { uniqBy } from "lodash";
 
 /**
  * Represent a source mapping tree.
@@ -59,6 +60,6 @@ export class BlameTree {
     }
 
     // Return distrinct values.
-    return [...new Map(result.map((x) => [JSON.stringify(x), x])).values()];
+    return uniqBy(result, (x) => JSON.stringify(x));
   }
 }
