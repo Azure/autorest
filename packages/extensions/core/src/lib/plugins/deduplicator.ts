@@ -7,7 +7,6 @@ import { DataHandle, DataSink, DataSource, QuickDataSource } from "@azure-tools/
 import { Deduplicator } from "@azure-tools/deduplication";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
-import { values } from "@azure-tools/linq";
 
 async function deduplicate(context: AutorestContext, input: DataSource, sink: DataSink) {
   const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
@@ -15,7 +14,7 @@ async function deduplicate(context: AutorestContext, input: DataSource, sink: Da
 
   const idm = !!context.config["deduplicate-inline-models"];
 
-  for (const each of values(inputs).where((input) => input.artifactType !== "profile-filter-log")) {
+  for (const each of inputs.filter((input) => input.artifactType !== "profile-filter-log")) {
     const model = <any>await each.readObject();
 
     /*
