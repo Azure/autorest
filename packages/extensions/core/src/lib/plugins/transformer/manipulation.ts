@@ -10,6 +10,7 @@ import { Channel, Message, SourceLocation } from "../../message";
 import { manipulateObject } from "./object-manipulator";
 import { evalDirectiveTest, evalDirectiveTransform } from "./eval";
 import { ResolvedDirective, resolveDirectives } from "@autorest/configuration";
+import { expandRefs } from "../ref-crawling";
 
 export class Manipulator {
   private transformations: ResolvedDirective[];
@@ -125,8 +126,10 @@ export class Manipulator {
       ? await sink.writeObject(`trans_input?${data.key}`, await data.readData(), data.identity, data.artifactType)
       : data;
     const result = await this.processInternal(trans1, sink, documentId);
-    return !isObject
-      ? sink.writeData(`trans_output?${data.key}`, await result.readObject<string>(), data.identity, data.artifactType)
-      : result;
+
+    const output = await result.readObject<string>();
+    console.log("FAF", data.originalFullPath);
+    expandRefs(output, data.originalFullPath);
+    return !isObject ? sink.writeData(`trans_output?${data.key}`, output, data.identity, data.artifactType) : result;
   }
 }

@@ -1,8 +1,10 @@
 import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, visit } from "@azure-tools/datastore";
+import { walk } from "@azure-tools/json";
 import { resolveUri } from "@azure-tools/uri";
 import { AutorestContext } from "../context";
 import { Channel } from "../message";
 import { values, items, length } from "@azure-tools/linq";
+import { parseJsonRef } from "../../../../../libs/jsonschema/dist";
 
 export async function crawlReferences(
   config: AutorestContext,
@@ -163,4 +165,26 @@ class RefProcessor extends Transformer<any, any> {
     // don't use clone in this case, because it's still working.
     this.final = this.generated;
   }
+}
+
+/**
+ * Walk over the openapi or swagger model and expand the relative refs to be absolute.
+ * @param model Model to inspect.
+ * @param currentFileUri Uri of the current model.
+ */
+export function expandRefs(model: any, currentFileUri: string) {
+  walk(model, (value: any) => {
+    if (value && typeof value === "object") {
+      const ref = value.$ref;
+      if (ref && typeof ref === "string") {
+        const { file, path } = parseJsonRef(ref);
+        const newRefFileName = file ? resolveUri(currentFileUri, file) : currentFileUri;
+
+        const newReference = path ? `${newRefFileName}#${path}` : newRefFileName;
+        value.$ref = newReference;
+      }
+      return "visit-children";
+    }
+    return "stop";
+  });
 }
