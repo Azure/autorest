@@ -3,10 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AutorestConfiguration, ResolvedDirective, resolveDirectives } from "@autorest/configuration";
+import { arrayOf, AutorestConfiguration, ResolvedDirective, resolveDirectives } from "@autorest/configuration";
 import { JsonPath, matches } from "@azure-tools/datastore";
-import { From } from "linq-es2015";
-import { Channel, Message } from "../message";
+import { Message } from "../message";
 
 export class Suppressor {
   private suppressions: Array<ResolvedDirective>;
@@ -17,14 +16,14 @@ export class Suppressor {
 
   private matchesSourceFilter(document: string, path: JsonPath | undefined, supression: ResolvedDirective): boolean {
     // from
-    const from = From(supression.from);
-    const matchesFrom = !from.Any() || from.Any((d) => document.toLowerCase().endsWith(d.toLowerCase()));
+    const from = arrayOf(supression.from);
+    const matchesFrom = from.length === 0 || from.find((d) => document.toLowerCase().endsWith(d.toLowerCase()));
 
     // where
-    const where = From(supression.where);
-    const matchesWhere = !where.Any() || (path && where.Any((w) => matches(w, path))) || false;
+    const where = arrayOf(supression.where);
+    const matchesWhere = where.length === 0 || (path && where.find((w) => matches(w, path))) || false;
 
-    return matchesFrom && matchesWhere;
+    return Boolean(matchesFrom && matchesWhere);
   }
 
   public filter(m: Message): Message | null {
@@ -32,7 +31,8 @@ export class Suppressor {
     // filter
     for (const sup of this.suppressions) {
       // matches key
-      if (From(m.Key || []).Any((k) => From(sup.suppress).Any((s) => k.toLowerCase() === s.toLowerCase()))) {
+      const key = m.Key ? [...m.Key] : [];
+      if (key.find((k) => arrayOf(sup.suppress).find((s) => k.toLowerCase() === s.toLowerCase()))) {
         // filter applicable sources
         if (m.Source && hadSource) {
           m.Source = m.Source.filter((s) => !this.matchesSourceFilter(s.document, (<any>s.Position).path, sup));
