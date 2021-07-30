@@ -86,21 +86,10 @@ function realize<T>(f: ValueOrFactory<T>): T {
   return f instanceof Function ? f() : f;
 }
 
-function sortAscendingInvalidLast<T>(input: Array<T>, accessor: (each: T) => string | undefined): Array<T> {
+function sortAscendingInvalidLast<T>(input: Array<T>, accessor: (each: T) => number | undefined): Array<T> {
   return input.sort((a, b) => {
-    const pA = accessor(a);
-    const pB = accessor(b);
-
-    return pA === pB
-      ? 0
-      : pA !== undefined
-      ? pB !== undefined
-        ? pA < pB
-          ? -1
-          : 1 /* both exist */
-        : -1 /* a exists, b undefined */
-      : pB !== undefined
-      ? 1 /* b exists, a undefined */
-      : 0; /* neither exists */
+    const pA = accessor(a) ?? Number.MAX_VALUE;
+    const pB = accessor(b) ?? Number.MAX_VALUE;
+    return pA - pB;
   });
 }
