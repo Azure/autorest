@@ -12,11 +12,11 @@ import {
 } from "@azure-tools/datastore";
 import { AutorestContext } from "../../context";
 import { PipelinePlugin } from "../../pipeline/common";
-import { values, length } from "@azure-tools/linq";
 import { createHash } from "crypto";
 import { SchemaStats } from "../../stats";
 import { includeXDashProperties } from "@azure-tools/openapi";
 import { parseJsonPointer } from "@azure-tools/json";
+import { partition } from "lodash";
 
 /**
  * parses a json pointer, and inserts a string into the returned array
@@ -111,7 +111,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
   async process(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     // split out servers first.
-    const [servers, theNodes] = values(originalNodes).bifurcate((each) => each.key === "servers");
+    const [servers, theNodes] = partition([...originalNodes], (each) => each.key === "servers");
 
     // set the doc servers
     servers.forEach((s) => (this.docServers = s.value));
@@ -163,10 +163,11 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
   visitPath(targetParent: AnyObject, nodes: Iterable<Node>) {
     // split out the servers first.
-    const [servers, someNodes] = values(nodes).bifurcate((each) => each.key === "servers");
+    const [servers, someNodes] = partition([...nodes], (each) => each.key === "servers");
 
-    const [parameters, theNodes] = values(someNodes).bifurcate((each) => each.key === "parameters");
-    if (length(parameters) > 0) {
+    const [parameters, theNodes] = partition(someNodes, (each) => each.key === "parameters");
+
+    if (parameters.length > 0) {
       this.pathParameters = [];
       for (const { value, key, pointer, children } of parameters) {
         this.pathParameters.push(...children);
@@ -203,14 +204,15 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
   visitHttpOperation(targetParent: AnyObject, nodes: Iterable<Node>) {
     // split out the servers first.
-    const [servers, theNodes] = values(nodes).bifurcate((each) => each.key === "servers");
+    const [servers, theNodes] = partition([...nodes], (each) => each.key === "servers");
 
     // set the operationServers if they exist.
     servers.forEach((s) => (this.operationServers = s.value));
 
     this.clone(targetParent, "servers", "/", this.servers);
 
-    let newArray = length(this.pathParameters) > 0 ? this.newArray(targetParent, "parameters", "") : undefined;
+    let newArray =
+      this.pathParameters && this.pathParameters.length > 0 ? this.newArray(targetParent, "parameters", "") : undefined;
     if (newArray) {
       for (const child of this.pathParameters ?? []) {
         const p = this.dereference(
@@ -236,14 +238,14 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           {
             // parameters are a small special case, because they have to be tweaked when they are moved to the global parameter section.
             newArray = newArray || this.newArray(targetParent, key, pointer);
-
             for (const child of children) {
+              const index = (this.pathParameters ? this.pathParameters.length : 0) + Number(child.key);
               const p = this.dereference(
                 "/components/parameters",
                 this.parameters,
                 this.visitParameter,
                 newArray,
-                length(this.pathParameters) + child.key,
+                index.toString(),
                 child.pointer,
                 child.value,
                 child.children,
@@ -297,7 +299,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
   }
 
   visitParameter(targetParent: AnyObject, nodes: Iterable<Node>) {
-    const [requiredNodes, theOtherNodes] = values(nodes).bifurcate((each) => each.key === "required");
+    const [requiredNodes, theOtherNodes] = partition([...nodes], (each) => each.key === "required");
     const isRequired = requiredNodes.length > 0 ? !!requiredNodes[0].value : false;
     for (const { value, key, pointer, children } of theOtherNodes) {
       switch (key) {
@@ -335,7 +337,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
   visitSchema(targetParent: AnyObject, originalNodes: Iterable<Node>) {
     const object = "object";
-    const [requiredField, theNodes] = values(originalNodes).bifurcate((each) => each.key === "required");
+    const [requiredField, theNodes] = partition([...originalNodes], (each) => each.key === "required");
     const requiredProperties = new Array<string>();
     if (requiredField[0] !== undefined) {
       requiredProperties.push(...requiredField[0].value);

@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { values } from "@azure-tools/linq";
 import { MappedPosition } from "source-map";
 import { DataStore } from "../data-store/data-store";
 import { encodeEnhancedPositionInName, tryDecodeEnhancedPositionFromName } from "./source-map";
+import { uniqBy } from "lodash";
 
 /**
  * Represent a source mapping tree.
@@ -58,8 +58,8 @@ export class BlameTree {
       // recurse
       todos.push(...todo.blaming);
     }
-    return values(result)
-      .distinct((x) => JSON.stringify(x))
-      .toArray();
+
+    // Return distrinct values.
+    return uniqBy(result, (x) => JSON.stringify(x));
   }
 }

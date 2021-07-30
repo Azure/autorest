@@ -10,7 +10,6 @@ import {
   visit,
 } from "@azure-tools/datastore";
 import { walk } from "@azure-tools/json";
-import { visitor } from "@azure-tools/linq";
 import * as oai from "@azure-tools/openapi";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
