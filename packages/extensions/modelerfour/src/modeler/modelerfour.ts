@@ -80,7 +80,7 @@ import { isContentTypeParameterDefined } from "./utils";
 import { BodyProcessor } from "./body-processor";
 import { isSchemaAnEnum, isSchemaBinary } from "./schema-utils";
 import { SecurityProcessor } from "./security-processor";
-import { isDefined } from "utils";
+import { isDefined } from "../utils";
 
 /** adds only if the item is not in the collection already
  *
@@ -2084,14 +2084,13 @@ export class ModelerFour {
           operation.addResponse(rsp);
         }
       } else {
-        for (const [knownMediaType, mediatypes] of Object.entries(knownMediaTypes)) {
+        for (const [knownMediaType, mediatypes] of knownMediaTypes.entries()) {
           const allMt = mediatypes.map((each: any) => each.mediaType);
           for (const mediaType of allMt) {
             acceptTypes.add(mediaType);
           }
 
           const headers = this.processResponseHeaders(response.headers);
-
           if (knownMediaType === KnownMediaType.Binary) {
             // binary response needs different response type.
             const rsp = new BinaryResponse({

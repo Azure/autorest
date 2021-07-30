@@ -9,7 +9,13 @@ import {
   ChoiceValue,
   SetType,
 } from "@autorest/codemodel";
-import { StringFormat, JsonType, ParameterLocation, includeXDashKeys } from "@azure-tools/openapi";
+import {
+  StringFormat,
+  JsonType,
+  ParameterLocation,
+  includeXDashKeys,
+  includeXDashProperties,
+} from "@azure-tools/openapi";
 import { getPascalIdentifier } from "@azure-tools/codegen";
 import { keyBy } from "lodash";
 export interface XMSEnum {
@@ -428,7 +434,7 @@ export class Interpretations {
   }
 
   static getExtensionProperties(dictionary: Record<string, any>): Record<string, any> | undefined {
-    const result = keyBy(includeXDashKeys(dictionary), (each) => dictionary[each]);
+    const result: Record<string, any> = includeXDashProperties(dictionary);
     for (const each of removeKnownParameters) {
       delete result[each];
     }
