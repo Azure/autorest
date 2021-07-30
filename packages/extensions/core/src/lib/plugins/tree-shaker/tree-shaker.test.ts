@@ -83,4 +83,23 @@ describe("Tree shaker", () => {
       expect(result.components.schemas["Foo-bar"]["x-ms-client-name"]).toBeUndefined();
     });
   });
+
+  it("tree shake parameters", async () => {
+    const result = await shake({
+      paths: {
+        "/mypath": {
+          get: {
+            parameters: [{ in: "query", name: "some-param" }],
+          },
+        },
+      },
+    });
+
+    const operationParameters = result.paths["/mypath"].get.parameters;
+    expect(operationParameters).toHaveLength(1);
+    expect(operationParameters[0].$ref).toBeDefined();
+    const id = operationParameters[0].$ref.split("/").pop();
+    const parameter = result.components.parameters[id];
+    expect(parameter).toEqual({ in: "query", name: "some-param", "x-ms-parameter-location": "method" });
+  });
 });

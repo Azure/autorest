@@ -166,6 +166,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     const [servers, someNodes] = partition([...nodes], (each) => each.key === "servers");
 
     const [parameters, theNodes] = partition(someNodes, (each) => each.key === "parameters");
+
     if (parameters.length > 0) {
       this.pathParameters = [];
       for (const { value, key, pointer, children } of parameters) {
@@ -237,14 +238,14 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
           {
             // parameters are a small special case, because they have to be tweaked when they are moved to the global parameter section.
             newArray = newArray || this.newArray(targetParent, key, pointer);
-
             for (const child of children) {
+              const index = (this.pathParameters ? this.pathParameters.length : 0) + Number(child.key);
               const p = this.dereference(
                 "/components/parameters",
                 this.parameters,
                 this.visitParameter,
                 newArray,
-                (this.pathParameters ? this.pathParameters.length : 0) + child.key,
+                index.toString(),
                 child.pointer,
                 child.value,
                 child.children,
