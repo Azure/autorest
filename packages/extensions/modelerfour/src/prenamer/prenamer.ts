@@ -271,7 +271,7 @@ export class PreNamer {
 
   private setResponseHeaderNames(response: Response) {
     if (response.protocol.http) {
-      for (const header of Object.values(response.protocol.http.headers)) {
+      for (const header of Object.values(response.protocol.http.headers ?? {})) {
         setName(header as { language: Languages }, this.format.responseHeader, "", this.format.override);
       }
     }
