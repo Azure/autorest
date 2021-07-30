@@ -4,7 +4,6 @@ import { Info } from "./info";
 import { OperationGroup } from "./operation";
 import { DeepPartial, enableSourceTracking } from "@azure-tools/codegen";
 import { Parameter } from "./parameter";
-import { ValueOrFactory, realize, sort } from "@azure-tools/linq";
 import { Security } from "./security";
 
 /** the model that contains all the information required to generate a service api */
@@ -76,10 +75,32 @@ export class CodeModel extends Metadata implements CodeModel {
       }
       return p;
     } finally {
-      this.globalParameters = sort.numericly.ascendingInvalidLast(
-        this.globals,
-        (each) => each.extensions?.["x-ms-priority"],
-      );
+      this.globalParameters = sortAscendingInvalidLast(this.globals, (each) => each.extensions?.["x-ms-priority"]);
     }
   }
+}
+
+export type ValueOrFactory<T> = T | (() => T);
+
+function realize<T>(f: ValueOrFactory<T>): T {
+  return f instanceof Function ? f() : f;
+}
+
+function sortAscendingInvalidLast<T>(input: Array<T>, accessor: (each: T) => string | undefined): Array<T> {
+  return input.sort((a, b) => {
+    const pA = accessor(a);
+    const pB = accessor(b);
+
+    return pA === pB
+      ? 0
+      : pA !== undefined
+      ? pB !== undefined
+        ? pA < pB
+          ? -1
+          : 1 /* both exist */
+        : -1 /* a exists, b undefined */
+      : pB !== undefined
+      ? 1 /* b exists, a undefined */
+      : 0; /* neither exists */
+  });
 }

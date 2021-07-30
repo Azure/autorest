@@ -1,4 +1,3 @@
-import { Dictionary } from "@azure-tools/linq";
 import { Extensions } from "./extensions";
 import { Languages } from "./languages";
 import { Protocols } from "./protocols";
@@ -30,7 +29,7 @@ export class Metadata extends Initializer implements Metadata {
 }
 
 /** the bare-minimum fields for per-language metadata on a given aspect */
-export interface Language extends Dictionary<any> {
+export interface Language extends Record<string, any> {
   /** name used in actual implementation */
   name: string;
 
@@ -44,7 +43,7 @@ export interface CSharpLanguage {}
 export class CSharpLanguage implements CSharpLanguage {}
 
 /** the bare-minimum fields for per-protocol metadata on a given aspect */
-export interface Protocol extends Dictionary<any> {}
+export interface Protocol extends Record<string, any> {}
 
 export class Protocol extends Initializer implements Protocol {
   constructor(objectInitializer?: DeepPartial<Protocol>) {
