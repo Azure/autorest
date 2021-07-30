@@ -150,13 +150,17 @@ export function _visit(
   next(obj);
 }
 
-export function* visit(obj: any, parentReference: JsonPointerTokens = new Array<string>()): Iterable<Node> {
+export function* visit(obj: any | undefined, parentReference: JsonPointerTokens = new Array<string>()): Iterable<Node> {
+  if (!obj) {
+    return;
+  }
+
   for (const [key, value] of Object.entries(obj)) {
     const reference = [...parentReference, key];
     yield {
       value,
       key,
-      pointer: serializeJsonPointer(reference),
+      pointer: jp.serializeJsonPointer(reference),
       children: visit(value, reference),
       childIterator: () => visit(value, reference),
     };
