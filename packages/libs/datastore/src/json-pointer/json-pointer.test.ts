@@ -12,43 +12,6 @@ describe("JsonPointer", () => {
     expect(obj[1].test[0]).toEqual("expected");
   });
 
-  it("should return a dictionary (pointer -> value)", () => {
-    const obj = {
-        bla: {
-          test: "expected",
-        },
-        abc: "bla",
-      },
-      dict = pointer.toDictionary(obj);
-
-    expect(dict["/bla/test"]).toEqual("expected");
-    expect(dict["/abc"]).toEqual("bla");
-  });
-
-  it("should work with arrays", () => {
-    const obj = {
-        users: [{ name: "example 1" }, { name: "example 2" }],
-      },
-      dict = pointer.toDictionary(obj),
-      pointers = Object.keys(dict);
-
-    expect(pointers.length).toEqual(2);
-    expect(pointers[0]).toEqual("/users/0/name");
-    expect(pointers[1]).toEqual("/users/1/name");
-  });
-
-  it("should work with other arrays", () => {
-    const obj = {
-        bla: {
-          bli: [4, 5, 6],
-        },
-      },
-      dict = pointer.toDictionary(obj);
-    expect(dict["/bla/bli/0"]).toEqual(4);
-    expect(dict["/bla/bli/1"]).toEqual(5);
-    expect(dict["/bla/bli/2"]).toEqual(6);
-  });
-
   it("should return true when the pointer exists", () => {
     const obj = {
       bla: {

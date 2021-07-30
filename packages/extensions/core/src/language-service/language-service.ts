@@ -20,7 +20,6 @@ import { SourceMap } from "./source-map";
 import { isDirectory, readdir, readFile } from "@azure-tools/async-io";
 import { FileUriToPath, GetExtension, IsUri, ParentFolderUri, ResolveUri } from "@azure-tools/uri";
 import { createHash } from "crypto";
-import { From } from "linq-es2015";
 import { safeDump } from "yaml-ast-parser";
 import { detectConfigurationFile, detectConfigurationFiles, isConfigurationDocument } from "@autorest/configuration";
 import { DocumentAnalysis } from "./document-analysis";
@@ -481,14 +480,12 @@ class OpenApiLanguageService extends TextDocuments implements IFileSystem {
     if (result) {
       await result.busy; // wait for any current process to finish.
       const outputs = result.artifacts;
-      const openapiDefinition = From(outputs)
-        .Where((x) => x.type === "swagger-document.json")
-        .Select((x) => JSON.parse(x.content))
-        .FirstOrDefault();
-      const openapiDefinitionMap = From(outputs)
-        .Where((x) => x.type === "swagger-document.json.map")
-        .Select((x) => JSON.parse(x.content))
-        .FirstOrDefault();
+      const openapiDefinition = outputs
+        .filter((x) => x.type === "swagger-document.json")
+        .map((x) => JSON.parse(x.content))[0];
+      const openapiDefinitionMap = outputs
+        .filter((x) => x.type === "swagger-document.json.map")
+        .map((x) => JSON.parse(x.content))[0];
 
       if (openapiDefinition && openapiDefinitionMap) {
         return new DocumentAnalysis(
