@@ -3,7 +3,6 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Dictionary } from "@azure-tools/linq";
 import { Initializer, DeepPartial } from "@azure-tools/codegen";
 import { Extensions } from "../common/extensions";
 import { uri } from "../common/uri";
@@ -24,7 +23,7 @@ export interface AuthorizationCodeOAuthFlow extends Extensions {
   authorizationUrl: uri; // uriref
   tokenUrl: uri; // uriref
   refreshUrl?: uri; // uriref
-  scopes: Dictionary<string>;
+  scopes: Record<string, string>;
 }
 
 export interface BearerHTTPSecurityScheme extends Extensions {
@@ -37,13 +36,13 @@ export interface BearerHTTPSecurityScheme extends Extensions {
 export interface ClientCredentialsFlow extends Extensions {
   tokenUrl: uri; // uriref
   refreshUrl?: uri; // uriref
-  scopes: Dictionary<string>;
+  scopes: Record<string, string>;
 }
 
 export interface ImplicitOAuthFlow extends Extensions {
   authorizationUrl: uri; // uriref
   refreshUrl?: uri; // uriref
-  scopes: Dictionary<string>;
+  scopes: Record<string, string>;
 }
 
 export interface NonBearerHTTPSecurityScheme extends Extensions {
@@ -99,7 +98,7 @@ export class BearerHTTPSecurityScheme extends Initializer implements BearerHTTPS
 }
 
 export class ImplicitOAuthFlow extends Initializer implements ImplicitOAuthFlow {
-  scopes = new Dictionary<string>();
+  scopes: Record<string, string> = {};
 
   constructor(public authorizationUrl: string, initializer?: DeepPartial<ImplicitOAuthFlow>) {
     super();
@@ -147,11 +146,11 @@ export class OpenIdConnectSecurityScheme extends Initializer implements OpenIdCo
 export interface PasswordOAuthFlow extends Extensions {
   tokenUrl: uri; // uriref
   refreshUrl?: uri; // uriref
-  scopes: Dictionary<string>;
+  scopes: Record<string, string>;
 }
 
 export class PasswordOAuthFlow extends Initializer implements PasswordOAuthFlow {
-  scopes = new Dictionary<string>();
+  scopes: Record<string, string> = {};
 
   constructor(public tokenUrl: string, initializer?: DeepPartial<PasswordOAuthFlow>) {
     super();
@@ -160,7 +159,7 @@ export class PasswordOAuthFlow extends Initializer implements PasswordOAuthFlow 
 }
 
 export class AuthorizationCodeOAuthFlow extends Initializer implements AuthorizationCodeOAuthFlow {
-  scopes = new Dictionary<string>();
+  scopes: Record<string, string> = {};
   constructor(
     public authorizationUrl: string,
     tokenUrl: string,
@@ -171,7 +170,7 @@ export class AuthorizationCodeOAuthFlow extends Initializer implements Authoriza
   }
 }
 export class ClientCredentialsFlow extends Initializer implements ClientCredentialsFlow {
-  scopes = new Dictionary<string>();
+  scopes: Record<string, string> = {};
   constructor(public tokenUrl: string, initializer?: DeepPartial<ClientCredentialsFlow>) {
     super();
     this.apply(initializer);
@@ -182,4 +181,4 @@ export class ClientCredentialsFlow extends Initializer implements ClientCredenti
  * @description common ways of serializing simple parameters
  * @see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#style-values
  */
-export interface SecurityRequirement extends Dictionary<string> {}
+export interface SecurityRequirement extends Record<string, string> {}
