@@ -14,9 +14,9 @@ async function convert(spec: Partial<OpenAPI2Document>) {
   const converter = new Oai2ToOai3("source.json", doc);
   await converter.convert();
   return converter.mappings
-    .map((x: any) => ({
-      original: serializeJsonPointer(x.original.path),
-      generated: serializeJsonPointer(x.generated.path),
+    .map((x) => ({
+      original: serializeJsonPointer(x.original as any),
+      generated: serializeJsonPointer(x.generated as any),
     }))
     .filter(({ original }) => !defaultMappings.has(original));
 }
