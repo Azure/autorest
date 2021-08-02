@@ -64,7 +64,7 @@ export function indexToPositionFromLineIndices(startIndices: number[], index: nu
   }
 
   return {
-    column: 1 + index - startIndices[lineIndexMin],
+    column: index - startIndices[lineIndexMin],
     line: 1 + lineIndexMin,
   };
 }

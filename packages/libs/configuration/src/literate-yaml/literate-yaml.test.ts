@@ -21,9 +21,9 @@ describe("SyntaxValidation", () => {
   const parseRaw = async (value: string) => {
     const dataStore = new DataStore({} as CancellationToken);
     const uri = "mem:///config";
-    const h = await dataStore.WriteData(uri, value, "input-file", [uri]);
+    const h = await dataStore.writeData(uri, value, "input-file", [uri]);
     const result = await parse(logger, h, dataStore.getDataSink());
-    return await result.ReadObject();
+    return await result.readObject();
   };
 
   describe("when configuration is raw yaml/json", () => {
@@ -41,7 +41,7 @@ describe("SyntaxValidation", () => {
 
     it("report position for error", async () => {
       await expect(() => parseRaw("{ a: 3 ")).rejects.toThrow(Error);
-      expect(errors[0].source?.[0].position).toEqual({ line: 1, column: 8 });
+      expect(errors[0].source?.[0].position).toEqual({ line: 1, column: 9 });
     });
   });
 });
