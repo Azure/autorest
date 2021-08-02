@@ -147,13 +147,9 @@ export class DataStore {
   }
 
   public async blame(absoluteUri: string, position: SmartPosition): Promise<BlameTree> {
-    const data = this.readStrictSync(absoluteUri);
-    const resolvedPosition = await CompilePosition(position, data);
     return await BlameTree.create(this, {
       source: absoluteUri,
-      column: resolvedPosition.column,
-      line: resolvedPosition.line,
-      name: `blameRoot (${JSON.stringify(position)})`,
+      ...position,
     });
   }
 

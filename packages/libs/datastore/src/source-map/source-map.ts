@@ -116,7 +116,7 @@ export function createAssignmentMapping(
 /**
  * Resolves the text position of a JSON path in raw YAML.
  */
-export async function resolvePathPosition(yamlFile: DataHandle, jsonPath: JsonPath): Promise<EnhancedPosition> {
+export async function resolvePathPosition(yamlFile: DataHandle, jsonPath: JsonPath): Promise<Position> {
   const yamlAst = await yamlFile.readYamlAst();
   const node = getYamlNodeByPath(yamlAst, jsonPath);
   return createEnhancedPosition(yamlFile, jsonPath, node);

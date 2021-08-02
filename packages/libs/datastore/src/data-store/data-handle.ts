@@ -4,8 +4,8 @@ import { parseYAMLAst, YamlNode, parseYAMLFast, getYamlNodeValue } from "@azure-
 import { getLineIndices } from "../parsing/text-utility";
 import { PathMappedPosition, PathSourceMap } from "../source-map/path-source-map";
 import { PositionSourceMap } from "../source-map/position-source-map";
-import { EnhancedPosition } from "../source-map";
-import { stringify } from "../json-path/json-path";
+import { EnhancedPosition, resolvePathPosition } from "../source-map";
+import { JsonPath } from "../json-path/json-path";
 
 export interface Data {
   status: "loaded" | "unloaded";
@@ -164,16 +164,8 @@ export class DataHandle {
   }
 
   public async blame(position: EnhancedPosition): Promise<Array<MappedPosition | PathMappedPosition>> {
-    if (position.path) {
-      if (this.item.pathSourceMap) {
-        const mapping = await this.item.pathSourceMap.getOriginalLocation({ path: position.path });
-        if (mapping) {
-          return [mapping];
-        } else {
-          return [];
-        }
-      }
-      return [];
+    if (position.path && position.line === undefined) {
+      return this.blamePath(position.path);
     } else {
       if (this.item.positionSourceMap) {
         const mapping = await this.item.positionSourceMap.getOriginalLocation(position);
@@ -186,6 +178,28 @@ export class DataHandle {
     }
 
     return [];
+  }
+
+  public async blamePath(path: JsonPath): Promise<Array<MappedPosition | PathMappedPosition>> {
+    if (this.item.pathSourceMap) {
+      const mapping = await this.item.pathSourceMap.getOriginalLocation({ path });
+      if (mapping) {
+        return [mapping];
+      } else {
+        return [];
+      }
+    }
+
+    const resolvedPosition = await resolvePathPosition(this, path);
+    if (this.item.positionSourceMap) {
+      const mapping = await this.item.positionSourceMap.getOriginalLocation(resolvedPosition);
+      if (mapping) {
+        return [mapping];
+      } else {
+        return [];
+      }
+    }
+    return [{ source: this.key, ...resolvedPosition }];
   }
 
   public async lineIndices() {

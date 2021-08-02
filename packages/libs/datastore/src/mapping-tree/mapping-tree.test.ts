@@ -1,4 +1,4 @@
-import { Mapping } from "../source-map";
+import { PathMapping } from "../source-map";
 import { createMappingTree } from "./mapping-tree";
 
 interface Model {
@@ -9,7 +9,7 @@ interface Model {
   array: string[];
 }
 describe("MappingTree", () => {
-  let mappings: Mapping[];
+  let mappings: PathMapping[];
 
   beforeEach(() => {
     mappings = [];
