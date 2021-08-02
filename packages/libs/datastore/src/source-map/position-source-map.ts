@@ -8,7 +8,7 @@ export class PositionSourceMap {
   private data: PositionSourceMapData;
 
   public constructor(filename: string, mappings: RawSourceMap) {
-    this.data = new PositionSourceMapData(filename, mappings);
+    this.data = new PositionSourceMapData(`${filename}.map`, mappings);
   }
   public async getOriginalLocation(position: Position): Promise<MappedPosition | undefined> {
     const sourceMap = await this.data.get();

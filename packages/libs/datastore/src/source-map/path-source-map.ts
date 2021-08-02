@@ -38,7 +38,7 @@ export class PathSourceMap {
       map.set(mapping.generated, { path: mapping.original, source: mapping.source });
     }
 
-    this.data = new PathSourceMapData(filename, map);
+    this.data = new PathSourceMapData(`${filename}.pathmap`, map);
   }
   public async getOriginalLocation(position: PathPosition): Promise<OriginalPosition | undefined> {
     const mappings = await this.data.get();
