@@ -29,34 +29,6 @@ export interface Mapping {
   name?: string;
 }
 
-// for carrying over rich information into the realm of line/col based source maps
-// convention: <original name (contains no `nameWithPathSeparator`)>\n(<path>)
-const enhancedPositionSeparator = "\n\n(";
-const enhancedPositionEndMark = ")";
-
-export function tryDecodeEnhancedPositionFromName(name: string | undefined): EnhancedPosition | undefined {
-  try {
-    if (!name) {
-      return undefined;
-    }
-    const sepIndex = name.indexOf(enhancedPositionSeparator);
-    if (sepIndex === -1 || !name.endsWith(enhancedPositionEndMark)) {
-      return undefined;
-    }
-    const secondPart = name.slice(sepIndex + 3, name.length - 1);
-    return JSON.parse(secondPart);
-  } catch (e) {
-    return undefined;
-  }
-}
-
-export function encodeEnhancedPositionInName(name: string | undefined, pos: EnhancedPosition): string {
-  if (name && name.indexOf(enhancedPositionSeparator) !== -1) {
-    name = name.split(enhancedPositionSeparator)[0];
-  }
-  return (name || "") + enhancedPositionSeparator + JSON.stringify(pos, null, 2) + enhancedPositionEndMark;
-}
-
 export async function CompilePosition(position: SmartPosition, yamlFile: DataHandle): Promise<EnhancedPosition> {
   if (!(position as EnhancedPosition).line) {
     if ((position as any).path) {
@@ -97,7 +69,6 @@ export async function compileMapping(
       target.addMapping({
         generated: compiledGenerated,
         original: compiledOriginal,
-        name: encodeEnhancedPositionInName(mapping.name, compiledOriginal),
         source: mapping.source,
       });
     } catch {

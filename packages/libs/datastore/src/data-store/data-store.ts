@@ -5,7 +5,7 @@
 
 import { OperationCanceledException } from "@azure-tools/tasks";
 import { resolveUri } from "@azure-tools/uri";
-import { RawSourceMap, SourceMapGenerator } from "source-map";
+import { RawSourceMap, SourceMapConsumer, SourceMapGenerator } from "source-map";
 import { CancellationToken } from "../cancellation";
 import { IFileSystem } from "../file-system/file-system";
 import { BlameTree } from "../source-map/blaming";
@@ -101,10 +101,7 @@ export class DataStore {
     const handle = await this.read(uri);
     if (sourceMapFactory) {
       item.positionSourceMap = new PositionSourceMap(name, await sourceMapFactory(handle));
-    } else {
-      item.positionSourceMap = new PositionSourceMap(name, new SourceMapGenerator().toJSON());
     }
-
     if (mappings) {
       item.pathSourceMap = new PathSourceMap(name, mappings);
     }
