@@ -1,13 +1,13 @@
-import { Mapping } from "source-map";
 import { JsonPointer } from "./json-pointer/json-pointer";
 import { createAssignmentMapping } from "./source-map/source-map";
 import { Exception } from "@azure-tools/tasks";
 import { parseJsonPointer } from "@azure-tools/json";
+import { PathMapping } from "./source-map/path-source-map";
 
 export function createGraphProxy<T extends object>(
   originalFileName: string,
   targetPointer: JsonPointer = "",
-  mappings = new Array<Mapping>(),
+  mappings = new Array<PathMapping>(),
   instance = <any>{},
 ): ProxyObject<T> {
   const tag = (

@@ -19,6 +19,9 @@ import { DataSource } from "./data-source";
 import { ReadThroughDataSource } from "./read-through-data-source";
 import { Data, DataHandle } from "./data-handle";
 import { DataSink, DataSinkOptions } from "./data-sink";
+import { PathMapping, PathSourceMap } from "../source-map/path-source-map";
+import { SourceMapData } from "../source-map/source-map-data";
+import { PositionSourceMap } from "../source-map/position-source-map";
 
 const md5 = (content: any) => (content ? createHash("md5").update(JSON.stringify(content)).digest("hex") : null);
 
@@ -68,6 +71,7 @@ export class DataStore {
     data: string,
     artifactType: string,
     identity: Array<string>,
+    mappings?: PathMapping[],
     sourceMapFactory?: (self: DataHandle) => Promise<RawSourceMap>,
   ): Promise<DataHandle> {
     const uri = this.createUri(description);
@@ -89,16 +93,22 @@ export class DataStore {
       cached: data,
       artifactType,
       identity,
-      sourceMap: undefined,
+      pathSourceMap: undefined,
+      positionSourceMap: undefined,
     };
     this.store[uri] = item;
 
     const handle = await this.read(uri);
     if (sourceMapFactory) {
-      item.sourceMap = await sourceMapFactory(handle);
+      item.positionSourceMap = new PositionSourceMap(name, await sourceMapFactory(handle));
     } else {
-      item.sourceMap = new SourceMapGenerator().toJSON();
+      item.positionSourceMap = new PositionSourceMap(name, new SourceMapGenerator().toJSON());
     }
+
+    if (mappings) {
+      item.pathSourceMap = new PathSourceMap(name, mappings);
+    }
+
     return handle;
   }
 
@@ -167,7 +177,7 @@ export class DataStore {
     identity: Array<string>,
     sourceMapFactory?: (self: DataHandle) => Promise<RawSourceMap>,
   ): Promise<DataHandle> {
-    return this.writeData(description, data, artifact, identity, sourceMapFactory);
+    return this.writeData(description, data, artifact, identity, undefined, sourceMapFactory);
   }
 
   /**

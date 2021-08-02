@@ -2,7 +2,7 @@ import { JsonPointer } from "../json-pointer/json-pointer";
 import { Exception } from "@azure-tools/tasks";
 import { parseJsonPointer } from "@azure-tools/json";
 import { JsonPath } from "../json-path/json-path";
-import { Mapping } from "../source-map";
+import { Mapping, PathMapping } from "../source-map";
 
 /**
  * To explicitly specify that there is no mapping for this.
@@ -68,7 +68,7 @@ export type MappingTreeItem<T> = T extends Array<any>
 export function createMappingTree<T extends object>(
   sourceFilename: string,
   value: Partial<T>,
-  mappings: Mapping[],
+  mappings: PathMapping[],
   targetPointer: JsonPointer | JsonPath = "",
 ): MappingTreeItem<T> {
   const targetPointerPath = typeof targetPointer === "string" ? parseJsonPointer(targetPointer) : targetPointer;
@@ -79,7 +79,7 @@ function proxyDeepObject<T>(
   originalFileName: string,
   targetPointer: JsonPath,
   obj: Partial<T>,
-  mappings: Mapping[],
+  mappings: PathMapping[],
 ): MappingTreeItem<T> {
   if (obj === undefined || obj === null) {
     return obj;
@@ -102,7 +102,7 @@ function proxyObject<T extends object>(
   originalFileName: string,
   targetPointer: JsonPointer | JsonPath = "",
   value: any,
-  mappings = new Array<Mapping>(),
+  mappings = new Array<PathMapping>(),
 ): MappingTreeItem<T> {
   const targetPointerPath = typeof targetPointer === "string" ? parseJsonPointer(targetPointer) : targetPointer;
 
@@ -175,11 +175,16 @@ function proxyObject<T extends object>(
   });
 }
 
-function tag(targetPointerPath: JsonPath, sourceFilename: string, sourcePointerPath: JsonPath, mappings: Mapping[]) {
+function tag(
+  targetPointerPath: JsonPath,
+  sourceFilename: string,
+  sourcePointerPath: JsonPath,
+  mappings: PathMapping[],
+) {
   mappings.push({
     source: sourceFilename,
-    original: { path: sourcePointerPath.filter((each) => each !== "") },
-    generated: { path: targetPointerPath.filter((each) => each !== "") },
+    original: sourcePointerPath.filter((each) => each !== ""),
+    generated: targetPointerPath.filter((each) => each !== ""),
   });
 }
 

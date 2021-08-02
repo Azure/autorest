@@ -1,4 +1,4 @@
-import { DataHandle, Mapping } from "@azure-tools/datastore";
+import { DataHandle, PathMapping } from "@azure-tools/datastore";
 import { getFromJsonPointer } from "@azure-tools/json";
 import { Oai2ToOai3 } from "../converter";
 import { OpenAPI2Document } from "../oai2";
@@ -12,7 +12,7 @@ export interface OaiToOai3FileInput {
 export interface OaiToOai3FileOutput {
   name: string;
   result: any; // OAI3 type?
-  mappings: Mapping[];
+  mappings: PathMapping[];
 }
 
 export const convertOai2ToOai3Files = async (inputFiles: DataHandle[]): Promise<OaiToOai3FileOutput[]> => {
@@ -79,5 +79,5 @@ export const convertOai2ToOai3Schema = async (
 
 export interface Oai2ToOai3Result {
   result: any;
-  mappings: Mapping[];
+  mappings: PathMapping[];
 }

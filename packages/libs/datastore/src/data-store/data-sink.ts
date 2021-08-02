@@ -3,6 +3,7 @@ import { fastStringify } from "@azure-tools/yaml";
 import { compileMapping, Mapping } from "../source-map/source-map";
 
 import { DataHandle } from "./data-handle";
+import { PathMapping } from "../source-map/path-source-map";
 
 export interface DataSinkOptions {
   generateSourceMap?: boolean;
@@ -16,7 +17,8 @@ export class DataSink {
       rawData: string,
       artifact: string | undefined,
       identity: Array<string>,
-      metadataFactory: (readHandle: DataHandle) => Promise<RawSourceMap>,
+      mappings?: PathMapping[],
+      metadataFactory?: (readHandle: DataHandle) => Promise<RawSourceMap>,
     ) => Promise<DataHandle>,
     public forward: (description: string, input: DataHandle) => Promise<DataHandle>,
   ) {}
@@ -28,7 +30,7 @@ export class DataSink {
     identity: string[],
     sourceMapFactory: (readHandle: DataHandle) => Promise<RawSourceMap>,
   ): Promise<DataHandle> {
-    return this.write(description, data, artifact, identity, sourceMapFactory);
+    return this.write(description, data, artifact, identity, undefined, sourceMapFactory);
   }
 
   public async writeData(
@@ -38,15 +40,7 @@ export class DataSink {
     artifact?: string,
     mappings?: MappingParam,
   ): Promise<DataHandle> {
-    return this.writeDataWithSourceMap(description, data, artifact, identity, async (readHandle) => {
-      const sourceMapGenerator = new SourceMapGenerator({ file: readHandle.key });
-      if (this.options.generateSourceMap) {
-        if (mappings) {
-          await compileMapping(mappings.mappings, sourceMapGenerator, mappings.mappingSources.concat(readHandle));
-        }
-      }
-      return sourceMapGenerator.toJSON();
-    });
+    return this.write(description, data, artifact, identity, mappings?.mappings);
   }
 
   public writeObject<T>(
@@ -64,7 +58,7 @@ export interface MappingParam {
   /**
    * List of mappings from original to generated
    */
-  mappings: Mapping[];
+  mappings: PathMapping[];
 
   /**
    * Data handle of the source mapping.

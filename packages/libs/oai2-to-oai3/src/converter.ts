@@ -8,7 +8,7 @@ import {
   MappingTreeObject,
   ProxyValue,
   MappingTreeArray,
-  Mapping,
+  PathMapping,
   NoMapping,
   createMappingTree,
 } from "@azure-tools/datastore";
@@ -32,7 +32,7 @@ import oai3, { EncodingStyle, HttpOperation, JsonType, PathItem, Schema, Securit
 
 export class Oai2ToOai3 {
   public generated: MappingTreeObject<oai3.Model>;
-  public mappings = new Array<Mapping>();
+  public mappings: PathMapping[] = [];
 
   constructor(
     protected originalFilename: string,

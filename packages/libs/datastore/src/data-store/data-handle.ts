@@ -2,18 +2,22 @@ import { MappedPosition, Position, RawSourceMap, SourceMapConsumer } from "sourc
 import { promises as fs } from "fs";
 import { parseYAMLAst, YamlNode, parseYAMLFast, getYamlNodeValue } from "@azure-tools/yaml";
 import { getLineIndices } from "../parsing/text-utility";
+import { PathMappedPosition, PathSourceMap } from "../source-map/path-source-map";
+import { PositionSourceMap } from "../source-map/position-source-map";
+import { EnhancedPosition } from "../source-map";
+import { stringify } from "../json-path/json-path";
 
 export interface Data {
   status: "loaded" | "unloaded";
   name: string;
   artifactType: string;
   identity: string[];
+  pathSourceMap: PathSourceMap | undefined;
+  positionSourceMap: PositionSourceMap | undefined;
 
   lineIndices?: number[];
-  sourceMap: RawSourceMap | undefined;
 
   writeToDisk?: Promise<void>;
-  writeSourceMapToDisk?: Promise<void>;
   cached?: string;
   cachedAst?: YamlNode;
   cachedObject?: any;
@@ -68,15 +72,19 @@ export class DataHandle {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       this.item.writeToDisk = fs.writeFile(this.item.name, this.item.cached!);
     }
-    if (this.item.sourceMap && !this.item.writeSourceMapToDisk) {
-      this.item.writeSourceMapToDisk = fs.writeFile(`${this.item.name}.map`, JSON.stringify(this.item.sourceMap));
+
+    if (this.item.positionSourceMap) {
+      void this.item.positionSourceMap.unload();
+    }
+
+    if (this.item.pathSourceMap) {
+      void this.item.pathSourceMap.unload();
     }
     // clear the caches.
     this.item.status = "unloaded";
     this.item.cached = undefined;
     this.item.cachedObject = undefined;
     this.item.cachedAst = undefined;
-    this.item.sourceMap = undefined;
   }
 
   public get originalDirectory() {
@@ -155,18 +163,28 @@ export class DataHandle {
     }
   }
 
-  public async blame(position: Position): Promise<Array<MappedPosition>> {
-    await this.readData();
-    const sourceMap = await this.getSourceMap();
-    if (!sourceMap) {
+  public async blame(position: EnhancedPosition): Promise<Array<MappedPosition | PathMappedPosition>> {
+    if (position.path) {
+      if (this.item.pathSourceMap) {
+        const mapping = await this.item.pathSourceMap.getOriginalLocation({ path: position.path });
+        if (mapping) {
+          return [mapping];
+        } else {
+          return [];
+        }
+      }
       return [];
+    } else {
+      if (this.item.positionSourceMap) {
+        const mapping = await this.item.positionSourceMap.getOriginalLocation(position);
+        if (mapping) {
+          return [mapping];
+        } else {
+          return [];
+        }
+      }
     }
-    const consumer = await new SourceMapConsumer(sourceMap);
-    const mappedPosition = consumer.originalPositionFor(position);
-    if (mappedPosition.line === null) {
-      return [];
-    }
-    return [mappedPosition as any];
+    return [];
   }
 
   public async lineIndices() {
@@ -177,31 +195,11 @@ export class DataHandle {
     return this.item.lineIndices;
   }
 
-  public async getSourceMap() {
-    if (!this.item.sourceMap) {
-      try {
-        const content = await fs.readFile(`${this.item.name}.map`, "utf8");
-        this.item.sourceMap = JSON.parse(content.toString());
-      } catch {
-        return undefined;
-      }
-    }
-
-    return this.item.sourceMap;
-  }
-
   /**
    * @deprecated use @see isObject
    */
   public async IsObject(): Promise<boolean> {
     return this.isObject();
-  }
-
-  /**
-   * @deprecated use @see blame
-   */
-  public async Blame(position: Position): Promise<Array<MappedPosition>> {
-    return this.blame(position);
   }
 
   /**
@@ -237,4 +235,16 @@ export class DataHandle {
   public async ReadYamlAst(): Promise<YamlNode> {
     return this.readYamlAst();
   }
+}
+
+function computePositionSourceMapFromPath() {
+  // async (readHandle) => {
+  //   const sourceMapGenerator = new SourceMapGenerator({ file: readHandle.key });
+  //   if (this.options.generateSourceMap) {
+  //     if (mappings) {
+  //       await compileMapping(mappings.mappings, sourceMapGenerator, mappings.mappingSources.concat(readHandle));
+  //     }
+  //   }
+  //   return sourceMapGenerator.toJSON();
+  // };
 }

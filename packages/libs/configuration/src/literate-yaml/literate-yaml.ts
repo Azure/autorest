@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, indexToPosition, Mapping } from "@azure-tools/datastore";
+import { DataHandle, DataSink, indexToPosition, Mapping, PathMapping } from "@azure-tools/datastore";
 import { getYamlNodeValue, parseYAML } from "@azure-tools/yaml";
 import { validateJson } from "@azure-tools/json";
 import { OperationAbortedException, AutorestLogger, identitySourceMapping, strictMerge } from "@autorest/common";
@@ -102,7 +102,7 @@ export async function mergeYamls(
   sink: DataSink,
 ): Promise<DataHandle> {
   let mergedGraph: any = {};
-  const mappings: Mapping[] = [];
+  const mappings: PathMapping[] = [];
   const cancel = false;
   let failed = false;
 

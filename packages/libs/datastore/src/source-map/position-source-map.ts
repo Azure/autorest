@@ -10,6 +10,7 @@ export class PositionSourceMap {
   public constructor(filename: string, mappings: RawSourceMap) {
     this.data = new PositionSourceMapData(`${filename}.map`, mappings);
   }
+
   public async getOriginalLocation(position: Position): Promise<MappedPosition | undefined> {
     const sourceMap = await this.data.get();
     const consumer = await new SourceMapConsumer(sourceMap);
@@ -18,6 +19,10 @@ export class PositionSourceMap {
       return undefined;
     }
     return mappedPosition as MappedPosition;
+  }
+
+  public unload(): Promise<void> {
+    return this.data.unload();
   }
 }
 

@@ -1,8 +1,8 @@
-import { Mapping } from "source-map";
 import { ProxyObject } from "./graph-builder";
 import { createGraphProxy, Node, ProxyNode, visit } from "./main";
 import { parseJsonPointer, serializeJsonPointer } from "@azure-tools/json";
 import { cloneDeep } from "lodash";
+import { PathMapping } from "./source-map/path-source-map";
 
 export interface AnyObject {
   [key: string]: any;
@@ -20,7 +20,7 @@ export interface Source {
 
 export class Transformer<TInput extends object = AnyObject, TOutput extends object = AnyObject> {
   protected generated: TOutput;
-  protected mappings = new Array<Mapping>();
+  protected mappings = new Array<PathMapping>();
   protected final?: TOutput;
   protected current!: TInput;
   private targetPointers = new Map<object, string>();
@@ -30,7 +30,7 @@ export class Transformer<TInput extends object = AnyObject, TOutput extends obje
     return <TOutput>this.final;
   }
 
-  public async getSourceMappings(): Promise<Array<Mapping>> {
+  public async getSourceMappings(): Promise<Array<PathMapping>> {
     await this.runProcess();
     return this.mappings;
   }

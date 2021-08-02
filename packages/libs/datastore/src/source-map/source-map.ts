@@ -5,9 +5,10 @@
 
 import { Position, SourceMapGenerator } from "source-map";
 import { DataHandle } from "../data-store";
-import { JsonPath, stringify } from "../json-path/json-path";
+import { JsonPath } from "../json-path/json-path";
 import { indexToPosition } from "../parsing/text-utility";
 import { walkYamlAst, valueToAst, getYamlNodeByPath, YamlNode, Kind, YamlMapping } from "@azure-tools/yaml";
+import { PathMapping } from "./path-source-map";
 
 // information to attach to line/column based to get a richer experience
 export interface PositionEnhancements {
@@ -117,24 +118,22 @@ export function createAssignmentMapping(
   targetPath: JsonPath,
   subject: string,
   recurse = true,
-  result: Mapping[] = [],
-): Array<Mapping> {
+  result: PathMapping[] = [],
+): Array<PathMapping> {
   if (!recurse) {
     result.push({
-      name: `${subject} (${stringify([])})`,
       source: sourceKey,
-      original: { path: sourcePath },
-      generated: { path: targetPath },
+      original: sourcePath,
+      generated: targetPath,
     });
     return result;
   }
 
   walkYamlAst(valueToAst(assignedObject), ({ path }) => {
     result.push({
-      name: `${subject} (${stringify(path)})`,
       source: sourceKey,
-      original: { path: sourcePath.concat(path) },
-      generated: { path: targetPath.concat(path) },
+      original: sourcePath.concat(path),
+      generated: targetPath.concat(path),
     });
 
     // if it's just the top node that is 1:1, break now.
