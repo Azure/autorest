@@ -1,10 +1,10 @@
-import { MappedPosition, Position, RawSourceMap, SourceMapConsumer } from "source-map";
+import { MappedPosition, Position } from "source-map";
 import { promises as fs } from "fs";
-import { parseYAMLAst, YamlNode, parseYAMLFast, getYamlNodeValue } from "@azure-tools/yaml";
+import { parseYAMLAst, YamlNode, parseYAMLFast } from "@azure-tools/yaml";
 import { getLineIndices } from "../parsing/text-utility";
-import { PathMappedPosition, PathSourceMap } from "../source-map/path-source-map";
+import { PathMappedPosition, PathPosition, PathSourceMap } from "../source-map/path-source-map";
 import { PositionSourceMap } from "../source-map/position-source-map";
-import { EnhancedPosition, resolvePathPosition } from "../source-map";
+import { resolvePathPosition } from "../source-map";
 import { JsonPath } from "../json-path/json-path";
 
 export interface Data {
@@ -163,8 +163,8 @@ export class DataHandle {
     }
   }
 
-  public async blame(position: EnhancedPosition): Promise<Array<MappedPosition | PathMappedPosition>> {
-    if (position.path && position.line === undefined) {
+  public async blame(position: PathPosition | Position): Promise<Array<MappedPosition | PathMappedPosition>> {
+    if ("path" in position && !("line" in position)) {
       return this.blamePath(position.path);
     } else {
       if (this.item.positionSourceMap) {

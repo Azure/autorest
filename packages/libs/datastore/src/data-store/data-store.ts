@@ -5,11 +5,11 @@
 
 import { OperationCanceledException } from "@azure-tools/tasks";
 import { resolveUri } from "@azure-tools/uri";
-import { RawSourceMap, SourceMapConsumer, SourceMapGenerator } from "source-map";
+import { RawSourceMap } from "source-map";
 import { CancellationToken } from "../cancellation";
 import { IFileSystem } from "../file-system/file-system";
 import { BlameTree } from "../source-map/blaming";
-import { CompilePosition, SmartPosition } from "../source-map/source-map";
+import { SmartPosition } from "../source-map/source-map";
 import { promises as fs } from "fs";
 import { tmpdir } from "os";
 import { join } from "path";
@@ -20,7 +20,6 @@ import { ReadThroughDataSource } from "./read-through-data-source";
 import { Data, DataHandle } from "./data-handle";
 import { DataSink, DataSinkOptions } from "./data-sink";
 import { PathMapping, PathSourceMap } from "../source-map/path-source-map";
-import { SourceMapData } from "../source-map/source-map-data";
 import { PositionSourceMap } from "../source-map/position-source-map";
 
 const md5 = (content: any) => (content ? createHash("md5").update(JSON.stringify(content)).digest("hex") : null);
@@ -75,7 +74,6 @@ export class DataStore {
     sourceMapFactory?: (self: DataHandle) => Promise<RawSourceMap>,
   ): Promise<DataHandle> {
     const uri = this.createUri(description);
-
     if (this.store[uri]) {
       throw new Error(`can only write '${uri}' once`);
     }
@@ -147,6 +145,7 @@ export class DataStore {
   }
 
   public async blame(absoluteUri: string, position: SmartPosition): Promise<BlameTree> {
+    console.log("Will blame", absoluteUri);
     return await BlameTree.create(this, {
       source: absoluteUri,
       ...position,

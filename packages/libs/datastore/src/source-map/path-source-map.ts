@@ -1,4 +1,3 @@
-import { serialize } from "../../../codegen/dist";
 import { JsonPath, stringify } from "../json-path/json-path";
 import { SourceMapData } from "./source-map-data";
 
@@ -25,7 +24,7 @@ export interface PathMappedPosition {
 }
 
 export interface PathPosition {
-  path: string | JsonPath;
+  path: JsonPath;
 }
 
 /**
@@ -37,7 +36,7 @@ export class PathSourceMap {
   public constructor(filename: string, mappings: PathMapping[]) {
     const map = new Map<string, PathMappedPosition>();
     for (const mapping of mappings) {
-      map.set(serialize(mapping.generated), { path: mapping.original, source: mapping.source });
+      map.set(stringify(mapping.generated), { path: mapping.original, source: mapping.source });
     }
 
     this.data = new PathSourceMapData(`${filename}.pathmap`, map);
