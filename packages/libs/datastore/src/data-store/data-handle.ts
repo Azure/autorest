@@ -123,10 +123,12 @@ export class DataHandle {
 
   public async readObject<T>(): Promise<T> {
     // we're going to use the data, so let's not let it expire.
-    this.item.accessed = true;
+    // this.item.accessed = true;
 
-    // return the cached object, or get it, then return it.
-    return this.item.cachedObject || (this.item.cachedObject = getYamlNodeValue<T>(await this.readYamlAst()).result);
+    // // return the cached object, or get it, then return it.
+    // return this.item.cachedObject || (this.item.cachedObject = getYamlNodeValue<T>(await this.readYamlAst()).result);
+
+    return this.readObjectFast();
   }
 
   public async readYamlAst(): Promise<YamlNode> {
