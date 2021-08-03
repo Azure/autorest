@@ -123,20 +123,9 @@ export class DataHandle {
     return this.item.cached;
   }
 
-  public async readObjectFast<T>(): Promise<T> {
-    // we're going to use the data, so let's not let it expire.
+  public async readObject<T>(): Promise<T> {
     this.item.accessed = true;
     return this.item.cachedObject || (this.item.cachedObject = parseYAMLFast(await this.readData()));
-  }
-
-  public async readObject<T>(): Promise<T> {
-    // we're going to use the data, so let's not let it expire.
-    // this.item.accessed = true;
-
-    // // return the cached object, or get it, then return it.
-    // return this.item.cachedObject || (this.item.cachedObject = getYamlNodeValue<T>(await this.readYamlAst()).result);
-
-    return this.readObjectFast();
   }
 
   public async readYamlAst(): Promise<YamlNode> {
@@ -228,13 +217,6 @@ export class DataHandle {
    */
   public async ReadData(nocache = false): Promise<string> {
     return this.readData(nocache);
-  }
-
-  /**
-   * @deprecated use @see readObjectFast
-   */
-  public async ReadObjectFast<T>(): Promise<T> {
-    return this.readObjectFast();
   }
 
   /**

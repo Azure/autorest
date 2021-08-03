@@ -35,7 +35,7 @@ export function createGraphTransformerPlugin(): PipelinePlugin {
               // if the file should be processed, run it thru
               for (const transform of directive.transform) {
                 // get the whole document
-                contents = contents === undefined ? await inputHandle.readObjectFast() : contents;
+                contents = contents === undefined ? await inputHandle.readObject() : contents;
 
                 // find the target nodes in the document
                 const targets = selectNodes(contents, where);

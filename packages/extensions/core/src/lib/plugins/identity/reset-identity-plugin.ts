@@ -27,9 +27,7 @@ async function resetIdentity(context: AutorestContext, input: DataSource, sink: 
       if (numberEachFile) {
         name = insertIndexSuffix(name, index);
       }
-      return await sink.writeData(name, await input.readData(), input.identity, context.config.to, {
-        pathMappings: identitySourceMapping(input.key, await input.readYamlAst()),
-      });
+      return await sink.writeData(name, await input.readData(), input.identity, context.config.to);
     }),
   );
   return new QuickDataSource(result, input.pipeState);
