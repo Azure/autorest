@@ -3,10 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { OperationCanceledException } from "@azure-tools/tasks";
 import { resolveUri } from "@azure-tools/uri";
 import { RawSourceMap } from "source-map";
-import { CancellationToken } from "../cancellation";
 import { IFileSystem } from "../file-system/file-system";
 import { BlameTree } from "../source-map/blaming";
 import { promises as fs } from "fs";
@@ -38,19 +36,13 @@ export class DataStore {
   private store: Store = {};
   private cacheFolder?: string;
 
-  public constructor(private cancellationToken: CancellationToken = CancellationToken.None) {}
+  public constructor() {}
 
   private async getCacheFolder() {
     if (!this.cacheFolder) {
       this.cacheFolder = await fs.mkdtemp(join(tmpdir(), "autorest-"));
     }
     return this.cacheFolder;
-  }
-
-  private throwIfCancelled(): void {
-    if (this.cancellationToken.isCancellationRequested) {
-      throw new OperationCanceledException();
-    }
   }
 
   public getReadThroughScope(fs: IFileSystem): DataSource {
