@@ -42,11 +42,11 @@ function getSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark.
     result.push({
       generated: {
         line: i + 1,
-        column: 0,
+        column: 1,
       },
       original: {
         line: i + codeBlock.sourcepos[0][0] + (codeBlock.info === null ? 0 : 1),
-        column: codeBlock.sourcepos[0][1] - 1,
+        column: 1 + codeBlock.sourcepos[0][1] - 1,
       },
       source: sourceFileName,
       name: `Codeblock line '${i + 1}'`,
