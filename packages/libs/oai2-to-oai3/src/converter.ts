@@ -3,7 +3,6 @@
 import {
   Node,
   visit,
-  get,
   MappingTreeObject,
   ProxyValue,
   MappingTreeArray,
@@ -11,7 +10,7 @@ import {
   NoMapping,
   createMappingTree,
 } from "@azure-tools/datastore";
-import { JsonPointer } from "@azure-tools/json";
+import { JsonPointer, getFromJsonPointer } from "@azure-tools/json";
 import { resolveOperationConsumes, resolveOperationProduces } from "./content-type-utils";
 import {
   OpenAPI2Document,
@@ -677,7 +676,7 @@ export class Oai2ToOai3 {
 
   private async resolveReference(file: string, path: string): Promise<any | undefined> {
     if (file === "" || file === this.originalFilename) {
-      return get(this.original, path);
+      return getFromJsonPointer(this.original, path);
     } else {
       if (this.resolveExternalReference) {
         return await this.resolveExternalReference(file, path);
