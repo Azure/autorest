@@ -62,7 +62,7 @@ export async function manipulateObject(
 
   // process
   const mapping = identitySourceMapping(src.key, ast).filter(
-    (m) => !hits.some((hit) => IsPrefix(hit.path, (<any>m.generated).path)),
+    (m) => !hits.some((hit) => IsPrefix(hit.path, m.generated)),
   );
   for (const hit of hits) {
     if (ast === undefined) {
