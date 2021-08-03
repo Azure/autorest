@@ -11,7 +11,6 @@ export interface DataSinkOptions {
 
 export class DataSink {
   constructor(
-    private options: DataSinkOptions,
     private write: (
       description: string,
       rawData: string,
@@ -48,14 +47,8 @@ export class DataSink {
     }
     return this.write(description, data, artifact, identity, undefined, async (readHandle) => {
       const sourceMapGenerator = new SourceMapGenerator({ file: readHandle.key });
-      if (this.options.generateSourceMap) {
-        if (mappings) {
-          await compileMapping(
-            mappings.positionMappings,
-            sourceMapGenerator,
-            mappings.mappingSources.concat(readHandle),
-          );
-        }
+      if (mappings) {
+        await compileMapping(mappings.positionMappings, sourceMapGenerator, mappings.mappingSources.concat(readHandle));
       }
       return sourceMapGenerator.toJSON();
     });

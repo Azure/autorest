@@ -12,9 +12,9 @@ import { createFileUri } from "@azure-tools/uri";
 const generate = async (file: string): Promise<{ errors: Message[] }> => {
   const autoRest = new AutoRest(new RealFileSystem());
   autoRest.AddConfiguration({
-    "verbose": true,
-    "debug": true,
-    "require": [file],
+    verbose: true,
+    debug: true,
+    require: [file],
     "output-artifact": ["openapi-document"],
   });
 
@@ -62,7 +62,7 @@ describe("Blaming (e2e)", () => {
     expect(errors[0].Text).toEqual("Syntax Error Encountered:  Syntax error: duplicate key");
     expect(errors[0].Source).toEqual([
       {
-        Position: { column: 0, line: 10 },
+        Position: { column: 1, line: 10 },
         document: createFileUri(file),
       },
     ]);
@@ -75,7 +75,7 @@ describe("Blaming (e2e)", () => {
     expect(errors[0].Text).toEqual("Syntax Error Encountered:  Syntax error: bad indentation of a mapping entry");
     expect(errors[0].Source).toEqual([
       {
-        Position: { column: 0, line: 11 },
+        Position: { column: 1, line: 11 },
         document: createFileUri(file),
       },
     ]);

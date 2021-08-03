@@ -111,14 +111,10 @@ export class DataStore {
     return resolveUri(this.BaseUri, `${this.uid++}?${encodeURIComponent(description)}`);
   }
 
-  public getDataSink(
-    dataSinkOptions: DataSinkOptions = { generateSourceMap: true },
-    defaultArtifact: string = FALLBACK_DEFAULT_OUTPUT_ARTIFACT,
-  ): DataSink {
+  public getDataSink(defaultArtifact: string = FALLBACK_DEFAULT_OUTPUT_ARTIFACT): DataSink {
     return new DataSink(
-      dataSinkOptions,
-      (description, data, artifact, identity, sourceMapFactory) =>
-        this.writeData(description, data, artifact || defaultArtifact, identity, sourceMapFactory),
+      (description, data, artifact, identity, mappings, sourceMapFactory) =>
+        this.writeData(description, data, artifact || defaultArtifact, identity, mappings, sourceMapFactory),
       async (description, input) => {
         const uri = this.createUri(description);
         this.store[uri] = this.store[input.key];
@@ -145,7 +141,6 @@ export class DataStore {
   }
 
   public async blame(absoluteUri: string, position: SmartPosition): Promise<BlameTree> {
-    console.log("Will blame", absoluteUri);
     return await BlameTree.create(this, {
       source: absoluteUri,
       ...position,
