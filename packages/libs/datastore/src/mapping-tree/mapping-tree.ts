@@ -1,8 +1,7 @@
-import { JsonPointer } from "../json-pointer/json-pointer";
 import { Exception } from "@azure-tools/tasks";
-import { parseJsonPointer } from "@azure-tools/json";
+import { JsonPointer, parseJsonPointer } from "@azure-tools/json";
 import { JsonPath } from "../json-path/json-path";
-import { Mapping, PathMapping } from "../source-map";
+import { PathMapping } from "../source-map";
 
 /**
  * To explicitly specify that there is no mapping for this.
@@ -195,7 +194,7 @@ function tag(
  */
 function parseJsonPointerForArray(pointer: string): JsonPath {
   const pp = pointer ? parseJsonPointer(pointer) : [];
-  const q = <any>parseInt(pp[pp.length - 1], 10);
+  const q = <any>parseInt(pp[pp.length - 1] as any, 10);
   if (q >= 0) {
     pp[pp.length - 1] = q;
   }

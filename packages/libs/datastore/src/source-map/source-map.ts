@@ -9,6 +9,7 @@ import { JsonPath } from "../json-path/json-path";
 import { indexToPosition } from "../parsing/text-utility";
 import { walkYamlAst, valueToAst, getYamlNodeByPath, YamlNode, Kind, YamlMapping } from "@azure-tools/yaml";
 import { PathMapping } from "./path-source-map";
+import { JsonPointerTokens } from "@azure-tools/json";
 
 // information to attach to line/column based to get a richer experience
 export interface PositionEnhancements {
@@ -20,7 +21,7 @@ export interface PositionEnhancements {
 
 export type EnhancedPosition = Position & PositionEnhancements;
 
-export type SmartPosition = Position | { path: JsonPath };
+export type SmartPosition = Position | { path: JsonPointerTokens };
 
 export interface Mapping {
   generated: SmartPosition;
@@ -85,8 +86,8 @@ export async function compileMapping(
 export function createAssignmentMapping(
   assignedObject: any,
   sourceKey: string,
-  sourcePath: JsonPath,
-  targetPath: JsonPath,
+  sourcePath: JsonPointerTokens,
+  targetPath: JsonPointerTokens,
   subject: string,
   recurse = true,
   result: PathMapping[] = [],

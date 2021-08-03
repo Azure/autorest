@@ -1,16 +1,16 @@
-import { JsonPath, stringify } from "../json-path/json-path";
+import { JsonPointerTokens, serializeJsonPointer } from "@azure-tools/json";
 import { SourceMapData } from "./source-map-data";
 
 export interface PathMapping {
   /**
    * JsonPath of the target
    */
-  generated: JsonPath;
+  generated: JsonPointerTokens;
 
   /**
    * JsonPath of the original source.
    */
-  original: JsonPath;
+  original: JsonPointerTokens;
 
   /**
    * Source file.
@@ -19,12 +19,12 @@ export interface PathMapping {
 }
 
 export interface PathMappedPosition {
-  path: JsonPath;
+  path: JsonPointerTokens;
   source: string;
 }
 
 export interface PathPosition {
-  path: JsonPath;
+  path: JsonPointerTokens;
 }
 
 /**
@@ -36,7 +36,7 @@ export class PathSourceMap {
   public constructor(filename: string, mappings: PathMapping[]) {
     const map = new Map<string, PathMappedPosition>();
     for (const mapping of mappings) {
-      map.set(stringify(mapping.generated), { path: mapping.original, source: mapping.source });
+      map.set(serializeJsonPointer(mapping.generated), { path: mapping.original, source: mapping.source });
     }
 
     this.data = new PathSourceMapData(`${filename}.pathmap`, map);
@@ -44,7 +44,7 @@ export class PathSourceMap {
 
   public async getOriginalLocation(position: PathPosition): Promise<PathMappedPosition | undefined> {
     const mappings = await this.data.get();
-    const path = typeof position.path === "string" ? position.path : stringify(position.path);
+    const path = typeof position.path === "string" ? position.path : serializeJsonPointer(position.path);
     const mapping = mappings.get(path);
     if (!mapping) {
       return undefined;

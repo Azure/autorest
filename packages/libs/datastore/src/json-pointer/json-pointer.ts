@@ -1,7 +1,6 @@
 import * as jp from "@azure-tools/json";
+import { JsonPointer, JsonPointerTokens } from "@azure-tools/json";
 
-export type JsonPointer = string;
-export type JsonPointerTokens = Array<string>;
 export interface Node<T = any> {
   value: T;
   key: string;
@@ -20,43 +19,6 @@ export interface Node<T = any> {
  */
 export function get(obj: any, pointer: JsonPointer | JsonPointerTokens): any {
   return jp.getFromJsonPointer(obj, pointer);
-}
-
-/**
- * Sets a value on an object
- *
- * @param {Object} obj
- * @param {JsonPointer|JsonPointerTokens} pointer - pointer or tokens to a location
- * @param value
- */
-export function set(obj: any, pointer: JsonPointer | JsonPointerTokens, value: any) {
-  const refTokens = Array.isArray(pointer) ? pointer : parseJsonPointer(pointer);
-  let nextTok: string | number = refTokens[0];
-
-  if (refTokens.length === 0) {
-    throw Error("Can not set the root object");
-  }
-
-  for (let i = 0; i < refTokens.length - 1; ++i) {
-    let tok: string | number = refTokens[i];
-    if (tok === "-" && Array.isArray(obj)) {
-      tok = obj.length;
-    }
-    nextTok = refTokens[i + 1];
-
-    if (!(tok in obj)) {
-      if (nextTok.match(/^(\d+|-)$/)) {
-        obj[tok] = [];
-      } else {
-        obj[tok] = {};
-      }
-    }
-    obj = obj[tok];
-  }
-  if (nextTok === "-" && Array.isArray(obj)) {
-    nextTok = obj.length;
-  }
-  obj[nextTok] = value;
 }
 
 /**

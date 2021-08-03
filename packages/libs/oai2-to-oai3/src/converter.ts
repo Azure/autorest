@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
-  JsonPointer,
   Node,
   visit,
   get,
@@ -12,6 +11,7 @@ import {
   NoMapping,
   createMappingTree,
 } from "@azure-tools/datastore";
+import { JsonPointer } from "@azure-tools/json";
 import { resolveOperationConsumes, resolveOperationProduces } from "./content-type-utils";
 import {
   OpenAPI2Document,
@@ -26,7 +26,7 @@ import {
 import { cleanElementName, convertOai2RefToOai3, parseOai2Ref } from "./refs-utils";
 import { ResolveReferenceFn } from "./runner";
 import { statusCodes } from "./status-codes";
-import oai3, { EncodingStyle, HttpOperation, JsonType, PathItem, Schema, SecurityType } from "@azure-tools/openapi";
+import oai3, { EncodingStyle, HttpOperation, JsonType, PathItem, SecurityType } from "@azure-tools/openapi";
 
 // NOTE: after testing references should be changed to OpenAPI 3.x.x references
 
