@@ -86,30 +86,4 @@ describe("Swagger schema validator", () => {
       },
     ]);
   });
-
-  describe("when validating a file", () => {
-    let file: DataHandle;
-    beforeEach(() => {
-      const spec = {
-        ...baseSwaggerSpec,
-        info: {
-          ...baseSwaggerSpec.info,
-          unexpectedProperty: "value",
-        },
-      };
-      file = createDataHandle(JSON.stringify(spec, null, 2));
-    });
-
-    it("returns the line number where the error is", async () => {
-      const errors = await validator.validateFile(file);
-
-      expect(errors).toHaveLength(1);
-      expect(errors[0].position).toEqual(
-        expect.objectContaining({
-          column: 2,
-          length: 6,
-        }),
-      );
-    });
-  });
 });

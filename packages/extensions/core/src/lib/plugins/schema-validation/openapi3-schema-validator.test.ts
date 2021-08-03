@@ -1,6 +1,4 @@
-import { DataHandle } from "@azure-tools/datastore";
 import { omit } from "lodash";
-import { createDataHandle } from "@autorest/test-utils";
 import { OpenApi3SchemaValidator } from "./openapi3-schema-validator";
 const baseSwaggerSpec = {
   openapi: "3.0.0",
@@ -92,31 +90,5 @@ describe("OpenAPI3 schema validator", () => {
         schemaPath: "#/definitions/ExampleXORExamples/errorMessage",
       },
     ]);
-  });
-
-  describe("when validating a file", () => {
-    let file: DataHandle;
-    beforeEach(() => {
-      const spec = {
-        ...baseSwaggerSpec,
-        info: {
-          ...baseSwaggerSpec.info,
-          unexpectedProperty: "value",
-        },
-      };
-      file = createDataHandle(JSON.stringify(spec, null, 2));
-    });
-
-    it("returns the line number where the error is", async () => {
-      const errors = await validator.validateFile(file);
-
-      expect(errors).toHaveLength(1);
-      expect(errors[0].position).toEqual(
-        expect.objectContaining({
-          column: 2,
-          length: 6,
-        }),
-      );
-    });
   });
 });
