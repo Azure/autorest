@@ -28,7 +28,7 @@ async function resetIdentity(context: AutorestContext, input: DataSource, sink: 
         name = insertIndexSuffix(name, index);
       }
       return await sink.writeData(name, await input.readData(), input.identity, context.config.to, {
-        mappings: identitySourceMapping(input.key, await input.readYamlAst()),
+        pathMappings: identitySourceMapping(input.key, await input.readYamlAst()),
         mappingSources: [input],
       });
     }),

@@ -251,15 +251,3 @@ export class DataHandle {
     return this.readYamlAst();
   }
 }
-
-function computePositionSourceMapFromPath() {
-  // async (readHandle) => {
-  //   const sourceMapGenerator = new SourceMapGenerator({ file: readHandle.key });
-  //   if (this.options.generateSourceMap) {
-  //     if (mappings) {
-  //       await compileMapping(mappings.mappings, sourceMapGenerator, mappings.mappingSources.concat(readHandle));
-  //     }
-  //   }
-  //   return sourceMapGenerator.toJSON();
-  // };
-}

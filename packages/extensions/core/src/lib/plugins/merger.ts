@@ -541,7 +541,7 @@ async function merge(context: AutorestContext, input: DataSource, sink: DataSink
         [].concat.apply([], <any>inputs.map((each) => each.identity)),
         "merged-oai3",
         {
-          mappings: await processor.getSourceMappings(),
+          pathMappings: await processor.getSourceMappings(),
           mappingSources: inputs,
         },
       ),

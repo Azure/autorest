@@ -483,7 +483,7 @@ async function compose(config: AutorestContext, input: DataSource, sink: DataSin
         [].concat.apply([], <any>inputs.map((each) => each.identity)),
         "merged-oai3",
         {
-          mappings: await composer.getSourceMappings(),
+          pathMappings: await composer.getSourceMappings(),
           mappingSources: [inputs[0]],
         },
       ),

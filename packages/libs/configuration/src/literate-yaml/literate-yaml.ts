@@ -140,7 +140,7 @@ export async function mergeYamls(
   }
 
   return sink.writeObject("merged YAMLs", mergedGraph, newIdentity, undefined, {
-    mappings: mappings,
+    pathMappings: mappings,
     mappingSources: yamlInputHandles,
   });
 }

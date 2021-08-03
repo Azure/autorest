@@ -140,7 +140,7 @@ export async function manipulateObject(
 
   // write back
   const resultHandle = await target.writeData("manipulated", stringifyYamlAst(ast), src.identity, src.artifactType, {
-    mappings: mapping,
+    pathMappings: mapping,
     mappingSources: mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src],
   });
   return {

@@ -106,7 +106,7 @@ async function renameComponentsKeys(config: AutorestContext, input: DataSource, 
         each.identity,
         "openapi-document-renamed",
         {
-          mappings: await processor.getSourceMappings(),
+          pathMappings: await processor.getSourceMappings(),
           mappingSources: [each],
         },
       ),

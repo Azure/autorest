@@ -1,8 +1,9 @@
 import { RawSourceMap } from "source-map";
 import { fastStringify } from "@azure-tools/yaml";
-
+import { SourceMapGenerator } from "source-map";
 import { DataHandle } from "./data-handle";
 import { PathMapping } from "../source-map/path-source-map";
+import { compileMapping, Mapping } from "../source-map";
 
 export interface DataSinkOptions {
   generateSourceMap?: boolean;
@@ -39,7 +40,25 @@ export class DataSink {
     artifact?: string,
     mappings?: MappingParam,
   ): Promise<DataHandle> {
-    return this.write(description, data, artifact, identity, mappings?.mappings);
+    if (!mappings) {
+      return this.write(description, data, artifact, identity);
+    }
+    if ("pathMappings" in mappings) {
+      return this.write(description, data, artifact, identity, mappings?.pathMappings);
+    }
+    return this.write(description, data, artifact, identity, undefined, async (readHandle) => {
+      const sourceMapGenerator = new SourceMapGenerator({ file: readHandle.key });
+      if (this.options.generateSourceMap) {
+        if (mappings) {
+          await compileMapping(
+            mappings.positionMappings,
+            sourceMapGenerator,
+            mappings.mappingSources.concat(readHandle),
+          );
+        }
+      }
+      return sourceMapGenerator.toJSON();
+    });
   }
 
   public writeObject<T>(
@@ -53,11 +72,25 @@ export class DataSink {
   }
 }
 
-export interface MappingParam {
+export type MappingParam = PathMappingParam | PositionMappingParam;
+
+export interface PathMappingParam {
   /**
-   * List of mappings from original to generated
+   * List of mappings from original to generated using path
    */
-  mappings: PathMapping[];
+  pathMappings: PathMapping[];
+
+  /**
+   * Data handle of the source mapping.
+   */
+  mappingSources: DataHandle[];
+}
+
+export interface PositionMappingParam {
+  /**
+   * List of mappings from original to generated using positions
+   */
+  positionMappings: Mapping[];
 
   /**
    * Data handle of the source mapping.

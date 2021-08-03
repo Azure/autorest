@@ -271,7 +271,7 @@ async function clean(config: AutorestContext, input: DataSource, sink: DataSink)
     const output = await processor.getOutput();
     result.push(
       await sink.writeObject("oai3.cleaned.json", output, each.identity, "openapi-document-cleaned", {
-        mappings: await processor.getSourceMappings(),
+        pathMappings: await processor.getSourceMappings(),
         mappingSources: [each],
       }),
     );
