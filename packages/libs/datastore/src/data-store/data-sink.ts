@@ -68,11 +68,6 @@ export interface PathMappingParam {
    * List of mappings from original to generated using path
    */
   pathMappings: PathMapping[];
-
-  /**
-   * Data handle of the source mapping.
-   */
-  mappingSources: DataHandle[];
 }
 
 export interface PositionMappingParam {
@@ -80,9 +75,4 @@ export interface PositionMappingParam {
    * List of mappings from original to generated using positions
    */
   positionMappings: Mapping[];
-
-  /**
-   * Data handle of the source mapping.
-   */
-  mappingSources: DataHandle[];
 }

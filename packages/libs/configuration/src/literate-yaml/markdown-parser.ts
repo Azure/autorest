@@ -26,7 +26,6 @@ export async function parseCodeBlocksFromMarkdown(
 
     const hCodeBlock = await sink.writeData(codeBlockKey, data, hConfigFile.identity, undefined, {
       positionMappings: mappings,
-      mappingSources: [hConfigFile],
     });
     result.push({
       data: hCodeBlock,

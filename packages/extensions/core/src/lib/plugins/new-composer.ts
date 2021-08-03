@@ -484,7 +484,6 @@ async function compose(config: AutorestContext, input: DataSource, sink: DataSin
         "merged-oai3",
         {
           pathMappings: await composer.getSourceMappings(),
-          mappingSources: [inputs[0]],
         },
       ),
     ],

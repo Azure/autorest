@@ -542,7 +542,6 @@ async function merge(context: AutorestContext, input: DataSource, sink: DataSink
         "merged-oai3",
         {
           pathMappings: await processor.getSourceMappings(),
-          mappingSources: inputs,
         },
       ),
     ],

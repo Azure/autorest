@@ -29,7 +29,6 @@ async function resetIdentity(context: AutorestContext, input: DataSource, sink: 
       }
       return await sink.writeData(name, await input.readData(), input.identity, context.config.to, {
         pathMappings: identitySourceMapping(input.key, await input.readYamlAst()),
-        mappingSources: [input],
       });
     }),
   );

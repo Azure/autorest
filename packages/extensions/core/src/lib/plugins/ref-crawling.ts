@@ -46,7 +46,7 @@ export async function crawlReferences(
           : secondaryFileContent.openapi
           ? "openapi-document"
           : file.artifactType,
-        { pathMappings: [], mappingSources: [secondaryFile] },
+        { pathMappings: [] },
       );
 
       // crawl that and add it to the secondary set.
@@ -59,7 +59,6 @@ export async function crawlReferences(
     // write the file to the data sink (this serializes the file, so it has to be done by this point.)
     return sink.writeObject(file.description, output, file.identity, file.artifactType, {
       pathMappings: mapping,
-      mappingSources: [file],
     });
   }
 

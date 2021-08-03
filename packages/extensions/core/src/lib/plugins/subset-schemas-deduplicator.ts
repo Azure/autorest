@@ -380,7 +380,6 @@ async function deduplicateSubsetSchemas(config: AutorestContext, input: DataSour
         "openapi-document-schema-reduced",
         {
           pathMappings: await processor.getSourceMappings(),
-          mappingSources: [each],
         },
       ),
     );

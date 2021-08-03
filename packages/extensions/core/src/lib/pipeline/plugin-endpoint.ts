@@ -293,7 +293,6 @@ export class AutoRestExtension extends EventEmitter {
         onFile(
           (handle = await sink.writeData(filename, content, ["fix-me-here2"], artifactType, {
             pathMappings: sourceMap as any,
-            mappingSources: await inputFileHandles,
           })),
         );
       }
