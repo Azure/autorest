@@ -36,7 +36,7 @@ export async function parseCodeBlocks(
 ): Promise<CodeBlock[]> {
   let hsConfigFileBlocks: CodeBlock[] = [];
 
-  const rawMarkdown = await hLiterate.ReadData();
+  const rawMarkdown = await hLiterate.readData();
 
   // try parsing as literate YAML
   if (tryMarkdown(rawMarkdown)) {
@@ -105,7 +105,6 @@ export async function mergeYamls(
   const mappings: PathMapping[] = [];
   const cancel = false;
   let failed = false;
-
   //  ([] as string[]).concat(...x.map()) as an alternative for flatMap which is not availalbe on node 10.
   const newIdentity = ([] as string[]).concat(...yamlInputHandles.map((x) => x.identity));
 

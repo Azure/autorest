@@ -40,8 +40,8 @@ describe("SyntaxValidation", () => {
     });
 
     it("report position for error", async () => {
-      await expect(() => parseRaw("{ a: 3 ")).rejects.toThrow(Error);
-      expect(errors[0].source?.[0].position).toEqual({ line: 1, column: 8 });
+      await expect(() => parseRaw(`a: 3\na: 3\n`)).rejects.toThrow(Error);
+      expect(errors[0].source?.[0].position).toEqual({ line: 2, column: 1 });
     });
   });
 });
