@@ -176,7 +176,6 @@ export class AutorestCoreLogger {
               });
             }
           } catch (e) {
-            console.error("HERERE", e);
             if (!shouldComplain) {
               shouldComplain = true;
             }
