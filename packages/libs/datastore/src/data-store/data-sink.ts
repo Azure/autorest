@@ -3,11 +3,7 @@ import { fastStringify } from "@azure-tools/yaml";
 import { SourceMapGenerator } from "source-map";
 import { DataHandle } from "./data-handle";
 import { PathMapping } from "../source-map/path-source-map";
-import { compileMapping, Mapping } from "../source-map";
-
-export interface DataSinkOptions {
-  generateSourceMap?: boolean;
-}
+import { addMappingsToSourceMap, Mapping } from "../source-map";
 
 export class DataSink {
   constructor(
@@ -48,7 +44,7 @@ export class DataSink {
     return this.write(description, data, artifact, identity, undefined, async (readHandle) => {
       const sourceMapGenerator = new SourceMapGenerator({ file: readHandle.key });
       if (mappings) {
-        await compileMapping(mappings.positionMappings, sourceMapGenerator, mappings.mappingSources.concat(readHandle));
+        await addMappingsToSourceMap(mappings.positionMappings, sourceMapGenerator);
       }
       return sourceMapGenerator.toJSON();
     });

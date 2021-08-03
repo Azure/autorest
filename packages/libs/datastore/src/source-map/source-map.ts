@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Position, SourceMapGenerator } from "source-map";
+import { Position, SourceMapGenerator, Mapping } from "source-map";
 import { DataHandle } from "../data-store";
 import { JsonPath } from "../json-path/json-path";
 import { indexToPosition } from "../parsing/text-utility";
@@ -21,57 +21,10 @@ export interface PositionEnhancements {
 
 export type EnhancedPosition = Position & PositionEnhancements;
 
-export type SmartPosition = Position | { path: JsonPointerTokens };
-
-export interface Mapping {
-  generated: SmartPosition;
-  original: SmartPosition;
-  source: string;
-  name?: string;
-}
-
-export async function CompilePosition(position: SmartPosition, yamlFile: DataHandle): Promise<EnhancedPosition> {
-  if (!(position as EnhancedPosition).line) {
-    if ((position as any).path) {
-      return await resolvePathPosition(yamlFile, (position as any).path);
-    }
-    if ((position as any).index) {
-      return indexToPosition(yamlFile, (position as any).index);
-    }
-  }
-  return <EnhancedPosition>position;
-}
-
-export async function compileMapping(
-  mappings: Mapping[],
-  target: SourceMapGenerator,
-  yamlFiles: Array<DataHandle> = [],
-): Promise<void> {
-  // build lookup
-  const yamlFileLookup: { [key: string]: DataHandle } = {};
-  for (const yamlFile of yamlFiles) {
-    yamlFileLookup[yamlFile.key] = yamlFile;
-  }
-
-  const generatedFile = target.toJSON().file;
-  const compilePos = (position: SmartPosition, key: string) => {
-    if ((position as any).path && !yamlFileLookup[key]) {
-      throw new Error(
-        `File '${key}' was not passed along with 'yamlFiles' (got '${JSON.stringify(yamlFiles.map((x) => x.key))}')`,
-      );
-    }
-    return CompilePosition(position, yamlFileLookup[key]);
-  };
-
+export async function addMappingsToSourceMap(mappings: Mapping[], target: SourceMapGenerator): Promise<void> {
   for (const mapping of mappings) {
     try {
-      const compiledGenerated = await compilePos(mapping.generated, generatedFile);
-      const compiledOriginal = await compilePos(mapping.original, mapping.source);
-      target.addMapping({
-        generated: compiledGenerated,
-        original: compiledOriginal,
-        source: mapping.source,
-      });
+      target.addMapping(mapping);
     } catch {
       // Failed to acquire a mapping for the orignal or generated position(probably means the entry got added or removed) don't do anything.
     }

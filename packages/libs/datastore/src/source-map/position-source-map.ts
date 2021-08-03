@@ -1,6 +1,8 @@
 import { Position, RawSourceMap, MappedPosition, SourceMapConsumer } from "source-map";
 import { SourceMapData } from "./source-map-data";
 
+export { Mapping, Position } from "source-map";
+
 /**
  * Sourcemap based on json paths.
  */

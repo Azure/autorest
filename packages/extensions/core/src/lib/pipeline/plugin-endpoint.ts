@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, DataSource, LazyPromise, Mapping, SmartPosition } from "@azure-tools/datastore";
+import { DataHandle, DataSink, DataSource, LazyPromise, Mapping, PathPosition } from "@azure-tools/datastore";
 import { ensureIsFolderUri } from "@azure-tools/uri";
 import { ChildProcess, fork } from "child_process";
 import { RawSourceMap } from "source-map";
@@ -30,7 +30,7 @@ interface IAutoRestPluginInitiatorEndpoint {
   ProtectFiles(fileOrFolder: string): Promise<void>;
 
   WriteFile(filename: string, content: string, sourceMap?: Array<Mapping> | RawSourceMap): Promise<void>;
-  Message(message: Message, path?: SmartPosition, sourceFile?: string): Promise<void>;
+  Message(message: Message, path?: PathPosition, sourceFile?: string): Promise<void>;
 }
 
 export class AutoRestExtension extends EventEmitter {

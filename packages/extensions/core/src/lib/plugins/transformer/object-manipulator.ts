@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, IsPrefix, JsonPath, nodes, SmartPosition } from "@azure-tools/datastore";
+import { DataHandle, DataSink, IsPrefix, JsonPath, nodes, PathPosition } from "@azure-tools/datastore";
 import {
   stringifyYamlAst,
   cloneYamlAst,
@@ -29,7 +29,7 @@ export async function manipulateObject(
   debug?: boolean,
   mappingInfo?: {
     transformerSourceHandle: DataHandle;
-    transformerSourcePosition: SmartPosition;
+    transformerSourcePosition: PathPosition;
     reason: string;
   },
 ): Promise<{ anyHit: boolean; result: DataHandle }> {

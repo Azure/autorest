@@ -9,7 +9,6 @@ import { RawSourceMap } from "source-map";
 import { CancellationToken } from "../cancellation";
 import { IFileSystem } from "../file-system/file-system";
 import { BlameTree } from "../source-map/blaming";
-import { SmartPosition } from "../source-map/source-map";
 import { promises as fs } from "fs";
 import { tmpdir } from "os";
 import { join } from "path";
@@ -18,9 +17,8 @@ import { createHash } from "crypto";
 import { DataSource } from "./data-source";
 import { ReadThroughDataSource } from "./read-through-data-source";
 import { Data, DataHandle } from "./data-handle";
-import { DataSink, DataSinkOptions } from "./data-sink";
-import { PathMapping, PathSourceMap } from "../source-map/path-source-map";
-import { PositionSourceMap } from "../source-map/position-source-map";
+import { DataSink } from "./data-sink";
+import { PathMapping, PathPosition, PathSourceMap, Position, PositionSourceMap } from "../source-map";
 
 const md5 = (content: any) => (content ? createHash("md5").update(JSON.stringify(content)).digest("hex") : null);
 
@@ -140,7 +138,7 @@ export class DataStore {
     return new DataHandle(uri, data);
   }
 
-  public async blame(absoluteUri: string, position: SmartPosition): Promise<BlameTree> {
+  public async blame(absoluteUri: string, position: Position | PathPosition): Promise<BlameTree> {
     return await BlameTree.create(this, {
       source: absoluteUri,
       ...position,
@@ -184,7 +182,7 @@ export class DataStore {
   /**
    * @deprecated use @see blame
    */
-  public async Blame(absoluteUri: string, position: SmartPosition): Promise<BlameTree> {
+  public async Blame(absoluteUri: string, position: Position | PathPosition): Promise<BlameTree> {
     return this.blame(absoluteUri, position);
   }
 }
