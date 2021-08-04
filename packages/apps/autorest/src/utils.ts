@@ -34,12 +34,15 @@ const cwd = process.cwd();
 export async function loadConfig(args: AutorestArgs): Promise<AutorestConfiguration | undefined> {
   const configFileOrFolder = resolveUri(createFolderUri(cwd), args.configFileOrFolder || ".");
   /* eslint-disable no-console */
+
+  const enableLogging = args["debug-cli-config-loading"];
+
   const logger: AutorestLogger = {
-    fatal: (x) => args.verbose && console.error(x),
-    info: (x) => args.verbose && console.log(x),
-    verbose: (x) => args.verbose && console.log(x),
-    trackError: (x) => console.error(x),
-    trackWarning: (x) => console.error(x),
+    fatal: (x) => enableLogging && console.error(x),
+    info: (x) => enableLogging && console.log(x),
+    verbose: (x) => enableLogging && console.log(x),
+    trackError: (x) => enableLogging && console.error(x),
+    trackWarning: (x) => enableLogging && console.error(x),
   };
   /* eslint-enable no-console */
 

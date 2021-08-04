@@ -90,6 +90,7 @@ export class AutorestContextLoader {
           delete loadedExtensions[each];
         }
       }
+      await AutorestLoggingSession.waitForMessages();
     } catch {
       // no worries
     }
@@ -111,7 +112,6 @@ export class AutorestContextLoader {
       fileSystem: this.fileSystem,
       dataStore: messageEmitter.DataStore,
     });
-
     const { config, extensions } = await loader.load(configs, includeDefault);
     this.setupExtensions(config, extensions);
     return new AutorestContext(config, this.fileSystem, messageEmitter, this.stats, AutorestLoggingSession);
