@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 /* eslint-disable @typescript-eslint/triple-slash-reference */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /// <reference path="../definitions/core.d.ts" />
 /// <reference path="../definitions/vscode.d.ts" />
 

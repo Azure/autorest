@@ -11,7 +11,9 @@ import { dirname, join, resolve } from "path";
 import untildify from "untildify";
 
 const inWebpack = typeof __webpack_require__ === "function";
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const nodeRequire = inWebpack ? __non_webpack_require__! : require;
+
 const defaultConfigUri = inWebpack
   ? resolveUri(createFolderUri(AppRoot), `dist/resources/default-configuration.md`)
   : createFileOrFolderUri(nodeRequire.resolve("@autorest/configuration/resources/default-configuration.md"));
@@ -59,6 +61,7 @@ export async function loadConfig(args: AutorestArgs): Promise<AutorestConfigurat
     }
     return config;
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(chalk.yellow(`Warn: Error occured while loading configuration.`));
     return undefined;
   }

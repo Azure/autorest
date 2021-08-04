@@ -1,5 +1,6 @@
 /* eslint-disable no-process-exit */
 /* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { lookup } from "dns";
 import { Extension, ExtensionManager, Package } from "@azure-tools/extension";
 import { homedir } from "os";
