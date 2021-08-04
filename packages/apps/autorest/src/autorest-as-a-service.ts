@@ -175,6 +175,7 @@ export async function runCoreOutOfProc(
       // Creates the nodejs command to load the target core
       // - copies the argv parameters
       // - loads the js file with coloring (core expects a global function called 'color' )
+      //   This is needed currently for @autorest/core version older than 3.6.0(After autorest-core include the color itself.)
       // - loads the actual entrypoint that we expect is there.
       const cmd = `
         process.argv = ${JSON.stringify(process.argv)};
@@ -191,6 +192,7 @@ export async function runCoreOutOfProc(
       });
       // set up a promise to wait for the event to fire
       await When(p, "exit", "close");
+
       process.exit(0);
     }
   } catch (E) {

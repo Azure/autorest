@@ -42,6 +42,7 @@
   "devDependencies": {
     "@autorest/configuration": "~1.6.0",
     "@autorest/core": "~3.5.0",
+    "@autorest/common": "~1.2.0",
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/extension": "~3.3.1",
     "@azure-tools/tasks": "~3.0.0",

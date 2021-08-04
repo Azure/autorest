@@ -5,14 +5,12 @@
 /* eslint-disable no-console */
 import "source-map-support/register";
 import { omit } from "lodash";
-import { configureLibrariesLogger } from "@autorest/common";
+import { configureLibrariesLogger, color } from "@autorest/common";
 import { EventEmitter } from "events";
 import { AutorestCliArgs, parseAutorestCliArgs } from "@autorest/configuration";
 EventEmitter.defaultMaxListeners = 100;
 process.env["ELECTRON_RUN_AS_NODE"] = "1";
 delete process.env["ELECTRON_NO_ATTACH_CONSOLE"];
-
-const color: (text: string) => string = (<any>global).color ? (<any>global).color : (p) => p;
 
 // start of autorest-ng
 // the console app starts for real here.

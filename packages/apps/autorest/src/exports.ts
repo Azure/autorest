@@ -16,7 +16,9 @@ import { LanguageClient } from "vscode-languageclient";
 // exports the public AutoRest definitions
 import { GenerationResults, IFileSystem, AutoRest as IAutoRest } from "autorest-core";
 export { Message, Artifact, GenerationResults, IFileSystem } from "autorest-core";
-export { color } from "./coloring";
+
+// This is needed currently in autorest-as-service when starting @autorest/core out of proc for @autorest/core version older than 3.6.0
+export { color } from "@autorest/common";
 
 /**
  * The Channel that a message is registered with.
