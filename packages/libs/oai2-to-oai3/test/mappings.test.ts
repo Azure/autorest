@@ -15,8 +15,8 @@ async function convert(spec: Partial<OpenAPI2Document>) {
   await converter.convert();
   return converter.mappings
     .map((x) => ({
-      original: serializeJsonPointer(x.original as any),
-      generated: serializeJsonPointer(x.generated as any),
+      original: serializeJsonPointer(x.original),
+      generated: serializeJsonPointer(x.generated),
     }))
     .filter(({ original }) => !defaultMappings.has(original));
 }
