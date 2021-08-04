@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, IsPrefix, JsonPath, nodes, SmartPosition } from "@azure-tools/datastore";
+import { DataHandle, DataSink, IsPrefix, JsonPath, nodes, PathPosition } from "@azure-tools/datastore";
 import {
   stringifyYamlAst,
   cloneYamlAst,
@@ -29,7 +29,7 @@ export async function manipulateObject(
   debug?: boolean,
   mappingInfo?: {
     transformerSourceHandle: DataHandle;
-    transformerSourcePosition: SmartPosition;
+    transformerSourcePosition: PathPosition;
     reason: string;
   },
 ): Promise<{ anyHit: boolean; result: DataHandle }> {
@@ -62,7 +62,7 @@ export async function manipulateObject(
 
   // process
   const mapping = identitySourceMapping(src.key, ast).filter(
-    (m) => !hits.some((hit) => IsPrefix(hit.path, (<any>m.generated).path)),
+    (m) => !hits.some((hit) => IsPrefix(hit.path, m.generated)),
   );
   for (const hit of hits) {
     if (ast === undefined) {
@@ -140,8 +140,7 @@ export async function manipulateObject(
 
   // write back
   const resultHandle = await target.writeData("manipulated", stringifyYamlAst(ast), src.identity, src.artifactType, {
-    mappings: mapping,
-    mappingSources: mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src],
+    pathMappings: mapping,
   });
   return {
     anyHit: true,

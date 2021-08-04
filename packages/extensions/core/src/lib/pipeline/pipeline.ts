@@ -232,12 +232,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
   const pipelineEmitterPlugin = createArtifactEmitterPlugin(
     async (context) =>
       new QuickDataSource([
-        await context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }).writeObject(
-          "pipeline",
-          pipeline.pipeline,
-          ["fix-me-3"],
-          "pipeline",
-        ),
+        await context.DataStore.getDataSink().writeObject("pipeline", pipeline.pipeline, ["fix-me-3"], "pipeline"),
       ]),
   );
 
@@ -330,10 +325,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
           Text: `${nodeName} - CACHED inputs = ${(await inputScope.enum()).length} [0.0 s]`,
         });
 
-        return await readCache(
-          cacheKey,
-          context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }, node.outputArtifact),
-        );
+        return await readCache(cacheKey, context.DataStore.getDataSink(node.outputArtifact));
       }
 
       const t1 = process.uptime() * 100;
@@ -343,11 +335,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
       });
 
       // creates the actual plugin.
-      const scopeResult = await plugin(
-        context,
-        inputScope,
-        context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }, node.outputArtifact),
-      );
+      const scopeResult = await plugin(context, inputScope, context.DataStore.getDataSink(node.outputArtifact));
       const t2 = process.uptime() * 100;
 
       const memSuffix = context.config.debug ? `[${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)} MB]` : "";
@@ -464,7 +452,7 @@ async function emitStats(context: AutorestContext) {
   const plugin = createArtifactEmitterPlugin(
     async () =>
       new QuickDataSource([
-        await context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }).writeObject(
+        await context.DataStore.getDataSink().writeObject(
           "stats.json",
           context.stats.getAll(),
           ["stats"],
@@ -472,9 +460,5 @@ async function emitStats(context: AutorestContext) {
         ),
       ]),
   );
-  await plugin(
-    context,
-    new QuickDataSource([]),
-    context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }),
-  );
+  await plugin(context, new QuickDataSource([]), context.DataStore.getDataSink());
 }

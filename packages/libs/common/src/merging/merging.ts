@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable no-prototype-builtins */
 
-import { JsonPath, Mapping } from "@azure-tools/datastore";
+import { JsonPath, PathMapping } from "@azure-tools/datastore";
 import { Stringify, YamlNode, walkYamlAst } from "@azure-tools/yaml";
 
 /**
@@ -247,13 +247,12 @@ function mergeArray(
   }
 }
 
-export function identitySourceMapping(sourceYamlFileName: string, sourceYamlAst: YamlNode): Mapping[] {
-  const result: Mapping[] = [];
+export function identitySourceMapping(sourceYamlFileName: string, sourceYamlAst: YamlNode): PathMapping[] {
+  const result: PathMapping[] = [];
   walkYamlAst(sourceYamlAst, (x) => {
     result.push({
-      generated: { path: x.path },
-      original: { path: x.path },
-      name: JSON.stringify(x.path),
+      generated: x.path,
+      original: x.path,
       source: sourceYamlFileName,
     });
   });

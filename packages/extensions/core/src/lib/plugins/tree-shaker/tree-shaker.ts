@@ -827,8 +827,7 @@ async function shakeTree(context: AutorestContext, input: DataSource, sink: Data
 
     result.push(
       await sink.writeObject("oai3.shaken.json", output, each.identity, "openapi-document-shaken", {
-        mappings: await shaker.getSourceMappings(),
-        mappingSources: [each],
+        pathMappings: await shaker.getSourceMappings(),
       }),
     );
   }

@@ -1,4 +1,4 @@
-import { Mapping } from "../source-map";
+import { PathMapping } from "../source-map";
 import { createMappingTree } from "./mapping-tree";
 
 interface Model {
@@ -9,7 +9,7 @@ interface Model {
   array: string[];
 }
 describe("MappingTree", () => {
-  let mappings: Mapping[];
+  let mappings: PathMapping[];
 
   beforeEach(() => {
     mappings = [];
@@ -45,8 +45,8 @@ describe("MappingTree", () => {
     expect(root.id).toEqual(123);
     expect(mappings).toEqual([
       {
-        generated: { path: ["id"] },
-        original: { path: ["original", "path"] },
+        generated: ["id"],
+        original: ["original", "path"],
         source: "foo",
       },
     ]);
@@ -59,8 +59,8 @@ describe("MappingTree", () => {
 
     expect(mappings).toEqual([
       {
-        generated: { path: ["array", 0] },
-        original: { path: ["original", "path", 0] },
+        generated: ["array", 0],
+        original: ["original", "path", 0],
         source: "foo",
       },
     ]);

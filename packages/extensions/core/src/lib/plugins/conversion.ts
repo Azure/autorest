@@ -18,8 +18,9 @@ export function createSwaggerToOpenApi3Plugin(fileSystem?: IFileSystem): Pipelin
       if (input === undefined) {
         throw new Error(`Unexpected error while trying to map output of file ${name}. It cannot be found as an input.`);
       }
-      // TODO-TIM , mappings, inputs
-      const out = await sink.writeObject("OpenAPI", cloneDeep(result), input.identity, undefined);
+      const out = await sink.writeObject("OpenAPI", cloneDeep(result), input.identity, undefined, {
+        pathMappings: mappings,
+      });
       resultHandles.push(await sink.forward(input.description, out));
     }
     return new QuickDataSource(resultHandles, input.pipeState);

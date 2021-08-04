@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, indexToPosition, Mapping } from "@azure-tools/datastore";
-import { getYamlNodeValue, parseYAML } from "@azure-tools/yaml";
+import { DataHandle, DataSink, indexToPosition } from "@azure-tools/datastore";
+import { getYamlNodeValue } from "@azure-tools/yaml";
 import { validateJson } from "@azure-tools/json";
-import { OperationAbortedException, AutorestLogger, identitySourceMapping, strictMerge } from "@autorest/common";
+import { OperationAbortedException, AutorestLogger } from "@autorest/common";
 import { LiterateYamlErrorCodes } from "./error-codes";
 import { parseCodeBlocksFromMarkdown } from "./markdown-parser";
 
@@ -19,28 +19,21 @@ function tryMarkdown(rawMarkdownOrYaml: string): boolean {
   return /^#/gm.test(rawMarkdownOrYaml);
 }
 
-export async function parse(logger: AutorestLogger, literate: DataHandle, sink: DataSink): Promise<DataHandle> {
-  return parseInternal(logger, literate, sink);
-}
-
-async function parseInternal(logger: AutorestLogger, hLiterate: DataHandle, sink: DataSink): Promise<DataHandle> {
-  // merge the parsed codeblocks
-  const blocks = (await parseCodeBlocks(logger, hLiterate, sink)).map((each) => each.data);
-  return mergeYamls(logger, blocks, sink);
-}
-
-export async function parseCodeBlocks(
-  logger: AutorestLogger,
-  hLiterate: DataHandle,
-  sink: DataSink,
-): Promise<CodeBlock[]> {
+/**
+ * Parse an autorest config file either in markdown format(with multiple code blocks and guard) or as a yaml/json file.
+ * @param logger Logger.
+ * @param file File to parse.
+ * @param sink Data sink
+ * @returns List of parsed config blocks if markdown or a single one if a yaml/json file.
+ */
+export async function parseConfigFile(logger: AutorestLogger, file: DataHandle, sink: DataSink): Promise<CodeBlock[]> {
   let hsConfigFileBlocks: CodeBlock[] = [];
 
-  const rawMarkdown = await hLiterate.ReadData();
+  const rawMarkdown = await file.readData();
 
   // try parsing as literate YAML
   if (tryMarkdown(rawMarkdown)) {
-    const hsConfigFileBlocksWithContext = await parseCodeBlocksFromMarkdown(hLiterate, sink);
+    const hsConfigFileBlocksWithContext = await parseCodeBlocksFromMarkdown(file, sink);
 
     for (const { data, codeBlock } of hsConfigFileBlocksWithContext) {
       // only consider YAML/JSON blocks
@@ -84,63 +77,8 @@ export async function parseCodeBlocks(
 
   // fall back to raw YAML
   if (hsConfigFileBlocks.length === 0) {
-    hsConfigFileBlocks = [{ info: null, data: hLiterate }];
+    hsConfigFileBlocks = [{ info: null, data: file }];
   }
 
   return hsConfigFileBlocks;
-}
-
-/**
- * Merge a set of yaml code blocks.
- * @param logger
- * @param yamlInputHandles
- * @param sink
- */
-export async function mergeYamls(
-  logger: AutorestLogger,
-  yamlInputHandles: DataHandle[],
-  sink: DataSink,
-): Promise<DataHandle> {
-  let mergedGraph: any = {};
-  const mappings: Mapping[] = [];
-  const cancel = false;
-  let failed = false;
-
-  //  ([] as string[]).concat(...x.map()) as an alternative for flatMap which is not availalbe on node 10.
-  const newIdentity = ([] as string[]).concat(...yamlInputHandles.map((x) => x.identity));
-
-  for (const yamlInputHandle of yamlInputHandles) {
-    const rawYaml = await yamlInputHandle.readData();
-    const { result: inputGraph, errors } = parseYAML(rawYaml);
-    if (errors.length > 0) {
-      failed = true;
-      if (logger) {
-        for (const { message, position } of errors) {
-          logger.trackError({
-            code: "yaml_parsing",
-            message: message,
-            source: [{ document: yamlInputHandle.key, position: await indexToPosition(yamlInputHandle, position) }],
-          });
-        }
-      }
-    }
-    mergedGraph = strictMerge(mergedGraph, inputGraph);
-    const yaml = await yamlInputHandle.readYamlAst();
-    for (const mapping of identitySourceMapping(yamlInputHandle.key, yaml)) {
-      mappings.push(mapping);
-    }
-  }
-
-  if (failed) {
-    throw new Error("Syntax errors encountered.");
-  }
-
-  if (cancel) {
-    throw new OperationAbortedException();
-  }
-
-  return sink.writeObject("merged YAMLs", mergedGraph, newIdentity, undefined, {
-    mappings: mappings,
-    mappingSources: yamlInputHandles,
-  });
 }

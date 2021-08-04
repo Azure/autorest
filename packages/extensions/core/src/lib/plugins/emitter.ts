@@ -55,7 +55,7 @@ async function emitArtifact(
   const result = emitArtifactInternal(context, artifactType, uri, handle);
 
   if (isObject) {
-    const sink = context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] });
+    const sink = context.DataStore.getDataSink();
 
     if (isOutputArtifactOrMapRequested(context, artifactType + ".yaml")) {
       const h = await sink.writeData(

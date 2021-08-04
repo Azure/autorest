@@ -1,5 +1,5 @@
 import { Channel, Message, Range, SourceLocation } from "../message";
-import { BlameTree, stringify, tryDecodeEnhancedPositionFromName } from "@azure-tools/datastore";
+import { BlameTree, stringify } from "@azure-tools/datastore";
 import { Stringify } from "@azure-tools/yaml";
 import { AutorestError, AutorestWarning } from "@autorest/common";
 import { AutorestConfiguration } from "@autorest/configuration";
@@ -207,7 +207,7 @@ export class AutorestCoreLogger {
 
       return blameTree.getMappingLeafs().map((r) => ({
         document: r.source,
-        Position: { ...tryDecodeEnhancedPositionFromName(r.name), line: r.line, column: r.column },
+        Position: { line: r.line, column: r.column },
       }));
     });
 

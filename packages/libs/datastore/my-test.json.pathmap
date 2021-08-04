@@ -1,0 +1,1 @@
+[["$.components.schemas.Foo",{"path":["definitions","Foo"],"source":"source.json"}],["$.components.schemas.Bar",{"path":["definitions","Bar"],"source":"source.json"}],["$.components.parameters.filter",{"path":["parameters","filter"],"source":"source.json"}]]

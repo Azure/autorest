@@ -1,17 +1,16 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
-  JsonPointer,
   Node,
   visit,
-  get,
   MappingTreeObject,
   ProxyValue,
   MappingTreeArray,
-  Mapping,
+  PathMapping,
   NoMapping,
   createMappingTree,
 } from "@azure-tools/datastore";
+import { JsonPointer, getFromJsonPointer } from "@azure-tools/json";
 import { resolveOperationConsumes, resolveOperationProduces } from "./content-type-utils";
 import {
   OpenAPI2Document,
@@ -26,13 +25,13 @@ import {
 import { cleanElementName, convertOai2RefToOai3, parseOai2Ref } from "./refs-utils";
 import { ResolveReferenceFn } from "./runner";
 import { statusCodes } from "./status-codes";
-import oai3, { EncodingStyle, HttpOperation, JsonType, PathItem, Schema, SecurityType } from "@azure-tools/openapi";
+import oai3, { EncodingStyle, HttpOperation, JsonType, PathItem, SecurityType } from "@azure-tools/openapi";
 
 // NOTE: after testing references should be changed to OpenAPI 3.x.x references
 
 export class Oai2ToOai3 {
   public generated: MappingTreeObject<oai3.Model>;
-  public mappings = new Array<Mapping>();
+  public mappings: PathMapping[] = [];
 
   constructor(
     protected originalFilename: string,
@@ -677,7 +676,7 @@ export class Oai2ToOai3 {
 
   private async resolveReference(file: string, path: string): Promise<any | undefined> {
     if (file === "" || file === this.originalFilename) {
-      return get(this.original, path);
+      return getFromJsonPointer(this.original, path);
     } else {
       if (this.resolveExternalReference) {
         return await this.resolveExternalReference(file, path);

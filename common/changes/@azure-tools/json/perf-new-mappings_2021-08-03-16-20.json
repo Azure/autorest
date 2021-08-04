@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/json",
+      "comment": "**Tweaks** To the types to allow number in the path",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@azure-tools/json",
+  "email": "tiguerin@microsoft.com"
+}

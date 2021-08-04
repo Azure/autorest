@@ -1,22 +1,19 @@
-import { RawSourceMap, SourceMapGenerator } from "source-map";
+import { RawSourceMap } from "source-map";
 import { fastStringify } from "@azure-tools/yaml";
-import { compileMapping, Mapping } from "../source-map/source-map";
-
+import { SourceMapGenerator } from "source-map";
 import { DataHandle } from "./data-handle";
-
-export interface DataSinkOptions {
-  generateSourceMap?: boolean;
-}
+import { PathMapping } from "../source-map/path-source-map";
+import { addMappingsToSourceMap, Mapping } from "../source-map";
 
 export class DataSink {
   constructor(
-    private options: DataSinkOptions,
     private write: (
       description: string,
       rawData: string,
       artifact: string | undefined,
       identity: Array<string>,
-      metadataFactory: (readHandle: DataHandle) => Promise<RawSourceMap>,
+      mappings?: PathMapping[],
+      metadataFactory?: (readHandle: DataHandle) => Promise<RawSourceMap>,
     ) => Promise<DataHandle>,
     public forward: (description: string, input: DataHandle) => Promise<DataHandle>,
   ) {}
@@ -28,7 +25,7 @@ export class DataSink {
     identity: string[],
     sourceMapFactory: (readHandle: DataHandle) => Promise<RawSourceMap>,
   ): Promise<DataHandle> {
-    return this.write(description, data, artifact, identity, sourceMapFactory);
+    return this.write(description, data, artifact, identity, undefined, sourceMapFactory);
   }
 
   public async writeData(
@@ -38,12 +35,16 @@ export class DataSink {
     artifact?: string,
     mappings?: MappingParam,
   ): Promise<DataHandle> {
-    return this.writeDataWithSourceMap(description, data, artifact, identity, async (readHandle) => {
+    if (!mappings) {
+      return this.write(description, data, artifact, identity);
+    }
+    if ("pathMappings" in mappings) {
+      return this.write(description, data, artifact, identity, mappings?.pathMappings);
+    }
+    return this.write(description, data, artifact, identity, undefined, async (readHandle) => {
       const sourceMapGenerator = new SourceMapGenerator({ file: readHandle.key });
-      if (this.options.generateSourceMap) {
-        if (mappings) {
-          await compileMapping(mappings.mappings, sourceMapGenerator, mappings.mappingSources.concat(readHandle));
-        }
+      if (mappings) {
+        await addMappingsToSourceMap(mappings.positionMappings, sourceMapGenerator);
       }
       return sourceMapGenerator.toJSON();
     });
@@ -60,14 +61,18 @@ export class DataSink {
   }
 }
 
-export interface MappingParam {
-  /**
-   * List of mappings from original to generated
-   */
-  mappings: Mapping[];
+export type MappingParam = PathMappingParam | PositionMappingParam;
 
+export interface PathMappingParam {
   /**
-   * Data handle of the source mapping.
+   * List of mappings from original to generated using path
    */
-  mappingSources: DataHandle[];
+  pathMappings: PathMapping[];
+}
+
+export interface PositionMappingParam {
+  /**
+   * List of mappings from original to generated using positions
+   */
+  positionMappings: Mapping[];
 }

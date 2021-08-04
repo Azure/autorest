@@ -21,7 +21,7 @@ export class MessageEmitter extends EventEmitter {
 
   constructor() {
     super();
-    this.DataStore = new DataStore(this.CancellationToken);
+    this.DataStore = new DataStore();
   }
   /* @internal */ public DataStore: DataStore;
   /* @internal */ public get messageEmitter() {

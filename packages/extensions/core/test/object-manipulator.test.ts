@@ -2,7 +2,6 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { CancellationToken } from "vscode-jsonrpc";
 import { DataStore } from "@azure-tools/datastore";
 import { manipulateObject } from "../src/lib/plugins/transformer/object-manipulator";
 import { createSandbox } from "@azure-tools/datastore";
@@ -52,7 +51,7 @@ definitions:
 describe("ObjectManipulator", () => {
   it("any hit", async () => {
     // setup
-    const dataStore = new DataStore(CancellationToken.None);
+    const dataStore = new DataStore();
     const input = await dataStore.writeData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
 
     const expectHit = async (jsonQuery: string, anyHit: boolean) => {
@@ -77,7 +76,7 @@ describe("ObjectManipulator", () => {
 
   it("removal", async () => {
     // setup
-    const dataStore = new DataStore(CancellationToken.None);
+    const dataStore = new DataStore();
     const input = await dataStore.writeData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
 
     // remove all models that don't have a description
@@ -95,7 +94,7 @@ describe("ObjectManipulator", () => {
 
   it("update", async () => {
     // setup
-    const dataStore = new DataStore(CancellationToken.None);
+    const dataStore = new DataStore();
     const input = await dataStore.writeData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
 
     {
@@ -149,7 +148,7 @@ describe("ObjectManipulator", () => {
 
   it("skip-transform-failure", async () => {
     // setup
-    const dataStore = new DataStore(CancellationToken.None);
+    const dataStore = new DataStore();
     const input = await dataStore.writeData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
 
     {

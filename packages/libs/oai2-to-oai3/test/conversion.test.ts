@@ -17,13 +17,8 @@ const expectConvertingOpenAPI2 = async (openAPI2Name: string, openAPI3Name: stri
 
   const mfs = new datastore.MemoryFileSystem(map);
 
-  const cts: datastore.CancellationTokenSource = {
-    cancel() {},
-    dispose() {},
-    token: { isCancellationRequested: false, onCancellationRequested: <any>null },
-  };
-  const ds = new datastore.DataStore(cts.token);
-  const scope = ds.GetReadThroughScope(mfs);
+  const ds = new datastore.DataStore();
+  const scope = ds.getReadThroughScope(mfs);
   const swaggerDataHandle = await scope.Read(swaggerUri);
   const originalDataHandle = await scope.Read(oai3Uri);
 
