@@ -87,13 +87,13 @@ let modulePath: string | undefined = undefined;
 export async function getLanguageServiceEntrypoint(
   requestedVersion = "latest-installed",
   minimumVersion?: string,
-): Promise<string> {
+): Promise<string | undefined> {
   if (!modulePath && !busy) {
     // if we haven't already got autorest-core, let's do that now with the default settings.
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     await initialize(requestedVersion, minimumVersion);
   }
-  return resolveEntrypoint(modulePath, "language-service");
+  return resolveEntrypoint(modulePath!, "language-service");
 }
 
 /**
@@ -110,13 +110,13 @@ export async function getLanguageServiceEntrypoint(
 export async function getApplicationEntrypoint(
   requestedVersion = "latest-installed",
   minimumVersion?: string,
-): Promise<string> {
+): Promise<string | undefined> {
   if (!modulePath && !busy) {
     // if we haven't already got autorest-core, let's do that now with the default settings.
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     await initialize(requestedVersion, minimumVersion);
   }
-  return resolveEntrypoint(modulePath, "app");
+  return resolveEntrypoint(modulePath!, "app");
 }
 
 /**

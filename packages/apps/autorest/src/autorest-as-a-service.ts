@@ -19,7 +19,7 @@ import { AutorestConfiguration } from "@autorest/configuration";
 import { parseMemory } from "./utils";
 
 const inWebpack = typeof __webpack_require__ === "function";
-const nodeRequire = inWebpack ? __non_webpack_require__ : require;
+const nodeRequire = inWebpack ? __non_webpack_require__! : require;
 
 process.env["autorest.home"] = process.env["AUTOREST_HOME"] || process.env["autorest.home"] || homedir();
 
@@ -39,7 +39,7 @@ export const extensionManager: Promise<ExtensionManager> = ExtensionManager.Crea
 export const oldCorePackage = "@microsoft.azure/autorest-core";
 export const newCorePackage = "@autorest/core";
 
-const basePkgVersion = semver.parse(VERSION.indexOf("-") > -1 ? VERSION.substring(0, VERSION.indexOf("-")) : VERSION);
+const basePkgVersion = semver.parse(VERSION.indexOf("-") > -1 ? VERSION.substring(0, VERSION.indexOf("-")) : VERSION)!;
 
 /**
  * The version range of the core package required.
@@ -87,7 +87,7 @@ export async function installedCores() {
   return result.sort((a, b) => semver.compare(b.version, a.version));
 }
 
-export async function resolveEntrypoint(localPath: string | null, entrypoint: string): Promise<string | null> {
+export async function resolveEntrypoint(localPath: string, entrypoint: string): Promise<string | undefined> {
   try {
     // did they specify the package directory directly
     if (await isDirectory(localPath)) {
@@ -148,11 +148,11 @@ export async function resolveEntrypoint(localPath: string | null, entrypoint: st
   } catch {
     // no worries
   }
-  return null;
+  return undefined;
 }
 
 export async function runCoreOutOfProc(
-  localPath: string | null,
+  localPath: string,
   entrypoint: string,
   config?: AutorestConfiguration,
 ): Promise<any> {
@@ -186,7 +186,7 @@ export async function runCoreOutOfProc(
 
       const p = spawn(process.execPath, ["-e", cmd], { stdio: ["inherit", "inherit", "inherit"], env });
       p.on("close", (code, signal) => {
-        process.exit(code);
+        process.exit(code ?? -1);
       });
       // set up a promise to wait for the event to fire
       await When(p, "exit", "close");
@@ -199,7 +199,7 @@ export async function runCoreOutOfProc(
 }
 
 export async function runCoreWithRequire(
-  localPath: string | null,
+  localPath: string,
   entrypoint: string,
   config?: AutorestConfiguration,
 ): Promise<any> {
@@ -230,7 +230,7 @@ export async function selectVersion(
   minimumVersion?: string,
 ): Promise<Extension> {
   const installedVersions = await installedCores();
-  let currentVersion = installedVersions[0] || null;
+  let currentVersion: Extension | null = installedVersions[0] || null;
 
   // the consumer can say I want the latest-installed, but at least XXX.XXX
   if (minimumVersion && currentVersion && !semver.satisfies(currentVersion.version, minimumVersion)) {
@@ -254,7 +254,7 @@ export async function selectVersion(
     }
   }
 
-  let selectedVersion: Extension = null;
+  let selectedVersion: Extension | null = null;
   // take the highest version that satisfies the version range.
   for (const each of installedVersions.sort((a, b) => semver.compare(a?.version, b?.version))) {
     if (semver.satisfies(each.version, requestedVersion)) {
@@ -289,7 +289,7 @@ export async function selectVersion(
     }
     let corePackageName = newCorePackage;
 
-    let pkg: Package;
+    let pkg: Package | undefined = undefined;
     try {
       // try the package
       pkg = await (await extensionManager).findPackage(newCorePackage, requestedVersion);
