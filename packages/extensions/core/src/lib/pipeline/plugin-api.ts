@@ -7,7 +7,7 @@ import { RequestType0, RequestType2 } from "vscode-jsonrpc";
 import { NotificationType2, NotificationType4 } from "vscode-jsonrpc";
 import { Mapping, RawSourceMap } from "source-map";
 import { Message } from "../message";
-import { PathPosition } from "../../../../../libs/datastore/dist/source-map";
+import { PathPosition } from "@azure-tools/datastore";
 
 export namespace IAutoRestPluginTargetTypes {
   export const GetPluginNames = new RequestType0<Array<string>, Error, void>("GetPluginNames");

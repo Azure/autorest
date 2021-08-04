@@ -2,7 +2,6 @@ dependencies:
   '@azure-tools/adl': 0.10.0
   '@azure-tools/async-io': 3.0.253
   '@azure-tools/eventing': 3.0.252
-  '@azure-tools/linq': 3.1.262
   '@azure-tools/object-comparison': 3.0.252
   '@azure-tools/tasks': 3.0.253
   '@azure-tools/uri': 3.1.1
@@ -78,7 +77,6 @@ dependencies:
   jest-snapshot: 26.6.2
   js-yaml: 4.0.0
   jsonpath: 1.0.0
-  linq-es2015: 2.5.1
   lodash: 4.17.21
   mkdirp: 0.5.5
   mocha: 6.2.3
@@ -95,6 +93,7 @@ dependencies:
   semver: 5.7.1
   source-map: 0.7.3
   source-map-support: 0.5.19
+  strip-ansi: 6.0.0
   supertest: 6.1.3
   tree-sitter: 0.19.0
   tree-sitter-python: 0.19.0
@@ -9189,7 +9188,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-e1tfWK0bLjSIwQn71dReHAzZ4CLyjpLe2E59tmp7SFiImh6WqXKb6J9V9SmqUzj/d7ato4OaJO+OMUZRVX2N7w==
+      integrity: sha512-NBnC7GdO+d4dVSe0WKP9XDvOIwE7gnPNlMYBopb22avbgtn4TS2daImPwPd2GlXtUaYRoSCxVpdEC0VyTyAb0A==
       tarball: file:projects/codegen.tgz
     version: 0.0.0
   file:projects/codemodel.tgz_prettier@2.3.1:
@@ -9216,7 +9215,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-I3h+qo48ug5UDxBl4V7AhGCzB0pKlkezNgzyMi0P/OoHZRflEN4jfRCHVP7lxVnBP8Azbbo0Rlh26EyFf1hmFA==
+      integrity: sha512-tFlYNMC+JDJVW4WHVw1EjNU0d+etDLtpsnNe/UYX2UFa4y3QL+UFtKoX73DRQStGLZJBns1GKrWuQzt5p3AUdg==
       tarball: file:projects/codemodel.tgz
     version: 0.0.0
   file:projects/common.tgz_prettier@2.3.1+ts-node@9.1.1:
@@ -9350,6 +9349,7 @@ packages:
       safe-buffer: 5.2.0
       source-map: 0.7.3
       source-map-support: 0.5.19
+      strip-ansi: 6.0.0
       ts-jest: 27.0.3_jest@27.0.4+typescript@4.3.4
       ts-loader: 9.2.3_typescript@4.3.4+webpack@5.40.0
       typescript: 4.3.4
@@ -9365,7 +9365,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-os1ANs2y4xh8O7DAT3jDgJceix/6yHIIwzR+t9wpkk72aPXly89jxEdiRnzFJgCIkTn+bQcLqyJJkWkAhtOA8A==
+      integrity: sha512-9jBgADiM5khoUN/qcw7PeGuTMZjS0XR9ZHegDTFuB0IZgBVXXKKUNPFm7kLxB7Psssv8hgwKhFx4Zvg5SiMhIQ==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.3.1+ts-node@9.1.1:
@@ -9402,7 +9402,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-tfiP1VIhJ7gGkQvFlFvgZVrBvImrDghGrD6HGsb3tBQVoUB/89cMWIcNGhFEAwR/Y0BUhc9bl1vsf3SGOcbmZg==
+      integrity: sha512-MszvKEGjFfWV9jqOp6Ezsb4B5P0C6vxH5TdZIpLNQH7VAAwUDlTJPjTusPnoZsXMY+y5zY4+3S5tOskHIGaYkQ==
       tarball: file:projects/datastore.tgz
     version: 0.0.0
   file:projects/deduplication.tgz_prettier@2.3.1+ts-node@9.1.1:
@@ -9411,6 +9411,7 @@ packages:
       '@azure-tools/object-comparison': 3.0.252
       '@azure-tools/tasks': 3.0.253
       '@types/jest': 26.0.20
+      '@types/lodash': 4.14.168
       '@types/node': 14.14.34
       '@typescript-eslint/eslint-plugin': 4.17.0_1160784d52d5049720154d5bb8e5522f
       '@typescript-eslint/parser': 4.17.0_eslint@7.21.0+typescript@4.3.4
@@ -9421,6 +9422,7 @@ packages:
       eslint-plugin-prettier: 3.4.0_eslint@7.21.0+prettier@2.3.1
       eslint-plugin-unicorn: 33.0.1_eslint@7.21.0
       jest: 27.0.4_ts-node@9.1.1
+      lodash: 4.17.21
       rimraf: 3.0.2
       typescript: 4.3.4
     dev: false
@@ -9430,7 +9432,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-wUFvGlOSgDrMYAJjqads/pbj/N4wfBQgIPWft5SKsH38ripi77sYETxsuOxFjolDwEFyKqFj8jQjhZ4uRbUhKg==
+      integrity: sha512-RfGYob+3MW6omOHhDYk/0XS5A5n9GNPvGRlpe8HWJ7rLldsHuaOD/GUCeQqoVtF3GwOf9fWPn6lJ611ZL2lU1g==
       tarball: file:projects/deduplication.tgz
     version: 0.0.0
   file:projects/extension-base.tgz_prettier@2.3.1:
@@ -9629,7 +9631,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-UL9w+RDoxTpckSfCyBZx+ndZZ/0xoa6YClkY8yLzvOqFDtOvTikVDvHUBUY+d4VYPrnl55XmkLJsG5zE3n1uRw==
+      integrity: sha512-metQRKvRSk3p4t4i/TQNU8klcTm3VIM/XfTdiHE0Sc+o6d6HQdH6BYjIf7VWxVUUQMsAys/wxGCh9fo8zk2c2w==
       tarball: file:projects/modelerfour.tgz
     version: 0.0.0
   file:projects/oai2-to-oai3.tgz_prettier@2.3.1+ts-node@9.1.1:
@@ -9765,7 +9767,6 @@ specifiers:
   '@azure-tools/adl': ~0.10.0
   '@azure-tools/async-io': ~3.0.0
   '@azure-tools/eventing': ~3.0.0
-  '@azure-tools/linq': ~3.1.0
   '@azure-tools/object-comparison': ~3.0.0
   '@azure-tools/tasks': ~3.0.0
   '@azure-tools/uri': ~3.1.1
@@ -9841,7 +9842,6 @@ specifiers:
   jest-snapshot: ~26.6.2
   js-yaml: ~4.0.0
   jsonpath: 1.0.0
-  linq-es2015: ^2.4.25
   lodash: ~4.17.20
   mkdirp: ~0.5.1
   mocha: ^6.2.2
@@ -9858,6 +9858,7 @@ specifiers:
   semver: ^5.5.1
   source-map: 0.7.3
   source-map-support: ^0.5.19
+  strip-ansi: ~6.0.0
   supertest: ^6.0.1
   tree-sitter: '^0.19.0 '
   tree-sitter-python: 0.19.0
