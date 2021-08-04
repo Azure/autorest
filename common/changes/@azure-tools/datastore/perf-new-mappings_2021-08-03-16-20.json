@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/datastore",
+      "comment": "**Added** New path mapping sourcemap functionality to improve performance significantly by reducing the yaml ast parsing needed to construct position based sourcemap",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@azure-tools/datastore",
+  "email": "tiguerin@microsoft.com"
+}

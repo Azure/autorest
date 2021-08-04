@@ -8,8 +8,8 @@ import { Channel } from "../../message";
 import { createPerFilePlugin, PipelinePlugin } from "../../pipeline/common";
 import { AutorestContext } from "../../context";
 import { SwaggerSchemaValidator } from "./swagger-schema-validator";
-import { PositionedValidationError } from "./json-schema-validator";
 import { OpenApi3SchemaValidator } from "./openapi3-schema-validator";
+import { ValidationError } from "./json-schema-validator";
 
 export const SCHEMA_VIOLATION_ERROR_CODE = "schema_violation";
 
@@ -71,7 +71,7 @@ const IGNORED_AJV_PARAMS = new Set(["type", "errors"]);
 const logValidationError = (
   config: AutorestContext,
   fileIn: DataHandle,
-  error: PositionedValidationError,
+  error: ValidationError,
   type: "error" | "warning",
 ) => {
   const messageLines = [`Schema violation: ${error.message} (${error.path.join(" > ")})`];
@@ -83,7 +83,7 @@ const logValidationError = (
   const msg = {
     code: SCHEMA_VIOLATION_ERROR_CODE,
     message: messageLines.join("\n"),
-    source: [{ document: fileIn.key, position: error.position }],
+    source: [{ document: fileIn.key, position: { path: error.path } }],
     details: error,
   };
 

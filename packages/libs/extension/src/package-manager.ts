@@ -1,5 +1,7 @@
-import { writeFile, access } from "fs/promises";
+import { promises } from "fs";
 import { join } from "path";
+
+const { writeFile, access } = promises;
 
 export type PackageManagerType = "yarn" | "npm";
 

@@ -9,7 +9,6 @@ import {
   QuickDataSource,
   visit,
 } from "@azure-tools/datastore";
-import { clone, Dictionary } from "@azure-tools/linq";
 import * as oai from "@azure-tools/openapi";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
@@ -74,7 +73,7 @@ export class ApiVersionParameterHandler extends Transformer<any, oai.Model> {
     }
   }
 
-  visitPaths(paths: ProxyObject<Dictionary<oai.PathItem>>, nodes: Iterable<Node>) {
+  visitPaths(paths: ProxyObject<Record<string, oai.PathItem>>, nodes: Iterable<Node>) {
     for (const { value: pathValue, key: pathKey, pointer: pathPointer, children: pathMember } of nodes) {
       let hasApiVersion = false;
       const path = this.newObject(paths, pathKey, pathPointer);
@@ -151,7 +150,7 @@ export class ApiVersionParameterHandler extends Transformer<any, oai.Model> {
     }
   }
 
-  visitComponent<T>(type: string, container: ProxyObject<Dictionary<T>>, originalNodes: Iterable<Node>) {
+  visitComponent<T>(type: string, container: ProxyObject<Record<string, T>>, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer } of originalNodes) {
       if (value.name !== "api-version") {
         this.clone(container, key, pointer, value);
@@ -169,8 +168,7 @@ async function handleApiVersionParameter(config: AutorestContext, input: DataSou
       const output = await processor.getOutput();
       result.push(
         await sink.writeObject("oai3.noapiversion.json", output, each.identity, "openapi-document-noapiversion", {
-          mappings: await processor.getSourceMappings(),
-          mappingSources: [each],
+          pathMappings: await processor.getSourceMappings(),
         }),
       );
     }

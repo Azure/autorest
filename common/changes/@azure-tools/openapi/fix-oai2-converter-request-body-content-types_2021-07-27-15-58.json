@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/openapi",
+      "comment": "Tweaks types to allow string enums value to accept string literals",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@azure-tools/openapi",
+  "email": "tiguerin@microsoft.com"
+}

@@ -12,7 +12,7 @@ const modelerfourOptions: ModelerFourOptions = {
   "additional-checks": true,
   "always-create-accept-parameter": true,
   //'always-create-content-type-parameter': true,
-  "naming": {
+  naming: {
     override: {
       $host: "$host",
       cmyk: "CMYK",
@@ -23,7 +23,7 @@ const modelerfourOptions: ModelerFourOptions = {
 };
 
 const cfg = {
-  "modelerfour": modelerfourOptions,
+  modelerfour: modelerfourOptions,
   "payload-flattening-threshold": 2,
 };
 

@@ -32,7 +32,31 @@ describe("Swagger schema validator", () => {
     ]);
   });
 
-  it("combines erros", () => {
+  it("returns error if using type: file with non formData parameter", () => {
+    const errors = validator.validate({
+      ...baseSwaggerSpec,
+      paths: {
+        "/test": {
+          post: {
+            parameters: [{ in: "body", type: "file", name: "body", schema: { type: "string" } }],
+            responses: { 200: { description: "Ok." } },
+          },
+        },
+      },
+    });
+    expect(errors).toEqual([
+      {
+        instancePath: "/paths/~1test/post/parameters/0",
+        keyword: "additionalProperties",
+        message: "must NOT have additional properties",
+        params: { additionalProperty: "type" },
+        path: ["paths", "/test", "post", "parameters", "0"],
+        schemaPath: "#/additionalProperties",
+      },
+    ]);
+  });
+
+  it("combines errors", () => {
     const errors = validator.validate({
       ...baseSwaggerSpec,
       info: { ...baseSwaggerSpec.info, invalidProp: "foo", otherProp: "bar" },
@@ -61,31 +85,5 @@ describe("Swagger schema validator", () => {
         schemaPath: "#/additionalProperties/errorMessage",
       },
     ]);
-  });
-
-  describe("when validating a file", () => {
-    let file: DataHandle;
-    beforeEach(() => {
-      const spec = {
-        ...baseSwaggerSpec,
-        info: {
-          ...baseSwaggerSpec.info,
-          unexpectedProperty: "value",
-        },
-      };
-      file = createDataHandle(JSON.stringify(spec, null, 2));
-    });
-
-    it("returns the line number where the error is", async () => {
-      const errors = await validator.validateFile(file);
-
-      expect(errors).toHaveLength(1);
-      expect(errors[0].position).toEqual(
-        expect.objectContaining({
-          column: 2,
-          length: 6,
-        }),
-      );
-    });
   });
 });

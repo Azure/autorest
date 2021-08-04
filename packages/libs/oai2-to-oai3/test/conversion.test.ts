@@ -17,13 +17,8 @@ const expectConvertingOpenAPI2 = async (openAPI2Name: string, openAPI3Name: stri
 
   const mfs = new datastore.MemoryFileSystem(map);
 
-  const cts: datastore.CancellationTokenSource = {
-    cancel() {},
-    dispose() {},
-    token: { isCancellationRequested: false, onCancellationRequested: <any>null },
-  };
-  const ds = new datastore.DataStore(cts.token);
-  const scope = ds.GetReadThroughScope(mfs);
+  const ds = new datastore.DataStore();
+  const scope = ds.getReadThroughScope(mfs);
   const swaggerDataHandle = await scope.Read(swaggerUri);
   const originalDataHandle = await scope.Read(oai3Uri);
 
@@ -42,20 +37,8 @@ const expectConvertingOpenAPI2 = async (openAPI2Name: string, openAPI3Name: stri
 };
 
 describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
-  it("test conversion - simple", async () => {
-    await expectConvertingOpenAPI2("swagger.yaml", "openapi.yaml");
-  });
-
-  it("test conversion - tiny", async () => {
-    await expectConvertingOpenAPI2("tiny-swagger.yaml", "tiny-openapi.yaml");
-  });
-
   it("test conversion - ApiManagementClient", async () => {
     await expectConvertingOpenAPI2("ApiManagementClient-swagger.json", "ApiManagementClient-openapi.json");
-  });
-
-  it("request body - copying extensions", async () => {
-    await expectConvertingOpenAPI2("request-body-swagger.yaml", "request-body-openapi.yaml");
   });
 
   it("headers", async () => {

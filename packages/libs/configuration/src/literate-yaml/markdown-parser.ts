@@ -17,7 +17,7 @@ export async function parseCodeBlocksFromMarkdown(
   sink: DataSink,
 ): Promise<Array<{ data: DataHandle; codeBlock: commonmark.Node }>> {
   const result: Array<{ data: DataHandle; codeBlock: commonmark.Node }> = [];
-  const rawMarkdown = await hConfigFile.ReadData();
+  const rawMarkdown = await hConfigFile.readData();
   for (const codeBlock of parseCodeblocks(rawMarkdown)) {
     const codeBlockKey = `codeBlock_${codeBlock.sourcepos[0][0]}`;
 
@@ -25,8 +25,7 @@ export async function parseCodeBlocksFromMarkdown(
     const mappings = getSourceMapForCodeBlock(hConfigFile.key, codeBlock);
 
     const hCodeBlock = await sink.writeData(codeBlockKey, data, hConfigFile.identity, undefined, {
-      mappings: mappings,
-      mappingSources: [hConfigFile],
+      positionMappings: mappings,
     });
     result.push({
       data: hCodeBlock,
@@ -43,11 +42,11 @@ function getSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark.
     result.push({
       generated: {
         line: i + 1,
-        column: 0,
+        column: 1,
       },
       original: {
         line: i + codeBlock.sourcepos[0][0] + (codeBlock.info === null ? 0 : 1),
-        column: codeBlock.sourcepos[0][1] - 1,
+        column: 1 + codeBlock.sourcepos[0][1] - 1,
       },
       source: sourceFileName,
       name: `Codeblock line '${i + 1}'`,

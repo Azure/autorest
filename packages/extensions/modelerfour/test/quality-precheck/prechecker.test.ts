@@ -64,9 +64,9 @@ describe("Prechecker", () => {
     });
 
     addSchema(spec, "MainSchema", {
-      "type": "object",
+      type: "object",
       "x-ms-client-name": "MainSchema",
-      "properties": {
+      properties: {
         name: {
           type: "string",
         },

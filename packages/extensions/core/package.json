@@ -1,6 +1,6 @@
 {
   "name": "@autorest/core",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "description": "AutoRest core module",
   "engines": {
     "node": ">=12.0.0"
@@ -47,15 +47,15 @@
     "@azure-tools/codegen": "~2.6.0",
     "@azure-tools/datastore": "~4.4.0",
     "@azure-tools/deduplication": "~3.1.0",
-    "@azure-tools/extension": "~3.3.0",
+    "@azure-tools/extension": "~3.3.1",
     "@azure-tools/json": "~1.1.0",
     "@azure-tools/jsonschema": "~1.1.0",
-    "@azure-tools/linq": "~3.1.0",
     "@azure-tools/oai2-to-oai3": "~4.3.0",
     "@azure-tools/object-comparison": "~3.0.0",
     "@azure-tools/openapi": "~3.2.0",
     "@azure-tools/tasks": "~3.0.0",
     "@azure-tools/uri": "~3.1.1",
+    "@azure-tools/yaml": "~1.0.0",
     "@types/commonmark": "^0.27.0",
     "@types/jest": "^26.0.20",
     "@types/jsonpath": "^0.2.0",
@@ -78,7 +78,6 @@
     "eslint": "^7.17.0",
     "jest": "^27.0.4",
     "jsonpath": "1.0.0",
-    "linq-es2015": "^2.4.25",
     "lodash": "~4.17.20",
     "mkdirp": "~0.5.1",
     "prettier": "~2.3.1",

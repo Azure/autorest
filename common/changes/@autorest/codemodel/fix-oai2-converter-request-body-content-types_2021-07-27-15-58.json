@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/codemodel",
+      "comment": "Types tweak to allow string enums value to accept string literals",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/codemodel",
+  "email": "tiguerin@microsoft.com"
+}

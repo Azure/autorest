@@ -5,41 +5,41 @@ import { Directive } from "./directive";
  * i.e. The mapping of values passed via a config block, cli arguments, etc.
  */
 export interface AutorestNormalizedConfiguration extends AutorestRawConfigurationAlias {
-  "__status"?: any;
-  "__parents"?: any | undefined;
+  __status?: any;
+  __parents?: any | undefined;
 
   /**
    * Version of @autorest/core.
    */
-  "version"?: string;
+  version?: string;
 
   "allow-no-input"?: boolean;
   "input-file"?: Array<string>;
   "exclude-file"?: Array<string>;
   "base-folder"?: string;
-  "directive"?: Array<Directive>;
+  directive?: Array<Directive>;
   "declare-directive"?: { [name: string]: string };
   "output-artifact"?: Array<string>;
   "message-format"?: "json" | "yaml" | "regular";
-  "use"?: string[] | string;
+  use?: string[] | string;
   "use-extension"?: { [extensionName: string]: string };
-  "require"?: Array<string>;
+  require?: Array<string>;
   "try-require"?: Array<string>;
-  "help"?: any;
+  help?: any;
   "pass-thru"?: any[];
   "disable-validation"?: boolean;
-  "cache"?: any;
-  "vscode"?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
+  cache?: any;
+  vscode?: any; // activates VS Code specific behavior and does *NOT* influence the core's behavior (only consumed by VS Code extension)
 
   /**
    * Toggle outputting statistics for current specs.
    */
-  "stats"?: boolean;
+  stats?: boolean;
 
   /**
    * Start the autorest.interactive plugin and cache traffic between extensions.
    */
-  "interactive"?: boolean;
+  interactive?: boolean;
 
   /**
    * Skip the semantic validation plugin.
@@ -47,25 +47,25 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
   "skip-semantics-validation"?: boolean;
 
   "override-info"?: any; // make sure source maps are pulling it! (see "composite swagger" method)
-  "title"?: string;
-  "description"?: any;
-  "run"?: any;
+  title?: string;
+  description?: any;
+  run?: any;
 
-  "debug"?: boolean;
-  "verbose"?: boolean;
-  "time"?: boolean;
-  "timestamp"?: boolean;
+  debug?: boolean;
+  verbose?: boolean;
+  time?: boolean;
+  timestamp?: boolean;
   "fast-mode"?: boolean;
   "header-definitions"?: any;
-  "components"?: any;
-  "batch"?: boolean;
+  components?: any;
+  batch?: boolean;
   "resource-schema-batch"?: any;
   "perform-load"?: any;
 
   /**
    * End of line for generated files.
    */
-  "eol"?: "default" | "lf" | "crlf";
+  eol?: "default" | "lf" | "crlf";
 
   /**
    * Feature flags. Those flags enable/disable certain features
@@ -87,9 +87,9 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
 
   // from here on: CONVENTION, not cared about by the core
   "client-side-validation"?: boolean; // C#
-  "fluent"?: boolean;
+  fluent?: boolean;
   "azure-arm"?: boolean;
-  "namespace"?: string;
+  namespace?: string;
   "license-header"?: string;
   "add-credentials"?: boolean;
   "package-name"?: string; // Ruby, Python, ...
@@ -97,39 +97,34 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
   "sync-methods"?: "all" | "essential" | "none";
   "payload-flattening-threshold"?: number;
   "openapi-type"?: string; // the specification type (ARM/Data-Plane/Default)
-  "tag"?: string;
+  tag?: string;
   "simple-tree-shake"?: boolean;
 
   // multi-api specific
-  "profiles"?: any;
-  "profile"?: Array<string>;
+  profiles?: any;
+  profile?: Array<string>;
   "api-version"?: Array<string>;
 
   "pipeline-model"?: string;
 
   "resolved-directive"?: any;
-  "debugger"?: any;
-
-  /**
-   * Skip sourcemap generation. To speedup.
-   */
-  "skip-sourcemap"?: boolean;
+  debugger?: any;
 
   /**
    * Force updating the version of core even if there is a local version satisfying the requirement.
    */
-  "force"?: boolean;
+  force?: boolean;
 
   /**
    * Configure max memory allowed for autorest process(s)
    */
-  "memory"?: string;
+  memory?: string;
 
   "github-auth-token"?: string;
 
   // TODO-TIM check what is this?
-  "name"?: string;
-  "to"?: string;
+  name?: string;
+  to?: string;
 
   /**
    * This is property compiled.

@@ -1,34 +1,40 @@
 import { DataHandle, DataSink, DataSource, QuickDataSource, Source } from "@azure-tools/datastore";
-import { Model, isReference, Refable, Schema } from "@azure-tools/openapi";
-
+import { Model, isReference, Schema } from "@azure-tools/openapi";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
-import { values, length, items } from "@azure-tools/linq";
+import { isDefined } from "@autorest/common";
+import { cloneDeep } from "lodash";
 
-export class AllOfCleaner {
-  constructor(protected originalFile: Source) {}
-
-  public async getOutput(): Promise<Model> {
-    const output = await this.originalFile.ReadObject<Model>();
-    for (const { key, value: schema } of items(output.components?.schemas)) {
-      if (!isReference(schema) && length(schema.allOf) > 0 && !schema.properties) {
-        schema.allOf = <Array<Refable<Schema>>>values(schema.allOf)
-          .select((aSchema) => {
-            if (isReference(aSchema) || length(aSchema.allOf) > 0) {
-              return aSchema;
-            }
-            // otherwise, copy this schema stuff into the schema
-            for (const { key, value } of items(aSchema)) {
-              schema[key] = value;
-            }
-            return undefined;
-          })
-          .where((each) => each != undefined)
-          .toArray();
-      }
-    }
-
+async function cleanAllOfs(model: Model) {
+  const output = cloneDeep(model);
+  if (!output.components?.schemas) {
     return output;
+  }
+
+  for (const schema of Object.values(output.components?.schemas)) {
+    cleanAllOfForSchema(schema);
+  }
+
+  return output;
+}
+
+function cleanAllOfForSchema(schema: Schema) {
+  if (!schema.allOf) {
+    return;
+  }
+  if (!isReference(schema) && schema.allOf.length > 0 && !schema.properties) {
+    schema.allOf = schema.allOf
+      .map((aSchema) => {
+        if (isReference(aSchema) || (aSchema.allOf && aSchema.allOf.length > 0)) {
+          return aSchema;
+        }
+        // otherwise, copy this schema stuff into the schema
+        for (const [key, value] of Object.entries(aSchema)) {
+          schema[key] = value;
+        }
+        return undefined;
+      })
+      .filter(isDefined);
   }
 }
 
@@ -36,11 +42,9 @@ async function allofCleaner(config: AutorestContext, input: DataSource, sink: Da
   const inputs = await Promise.all((await input.enum()).map(async (x) => input.readStrict(x)));
   const result: DataHandle[] = [];
 
-  for (const each of inputs) {
-    const fixer = new AllOfCleaner(each);
-    result.push(
-      await sink.writeObject("oai3.clean-allof.json", await fixer.getOutput(), each.identity, "openapi-clean-allof"),
-    );
+  for (const input of inputs) {
+    const output = await cleanAllOfs(await input.readObject());
+    result.push(await sink.writeObject("oai3.clean-allof.json", output, input.identity, "openapi-clean-allof"));
   }
   return new QuickDataSource(result, input.pipeState);
 }

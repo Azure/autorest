@@ -10,12 +10,12 @@ import {
   visit,
 } from "@azure-tools/datastore";
 import { walk } from "@azure-tools/json";
-import { clone, Dictionary, visitor } from "@azure-tools/linq";
 import * as oai from "@azure-tools/openapi";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
 import { URL } from "url";
 import { isDefined } from "@autorest/common";
+import { cloneDeep } from "lodash";
 
 /**
  * Takes multiple input OAI3 files and creates one merged one.
@@ -152,7 +152,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
               (<oai.ExternalDocumentation>target.externalDocs)["x-ms-metadata"] ||
               this.newArray(<oai.ExternalDocumentation>target.externalDocs, "x-ms-metadata", pointer);
             docsMetadata.__push__({
-              value: clone(value),
+              value: cloneDeep(value),
               pointer,
               recurse: true,
             });
@@ -228,7 +228,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     return getSpecHost(this.currentInput as DataHandle);
   }
 
-  visitInfo(info: ProxyObject<Dictionary<oai.Info>>, nodes: Iterable<Node>) {
+  visitInfo(info: ProxyObject<Record<string, oai.Info>>, nodes: Iterable<Node>) {
     for (const { key, value, pointer } of nodes) {
       switch (key) {
         case "title":
@@ -383,7 +383,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     }
   }
 
-  visitPaths(paths: ProxyObject<Dictionary<oai.PathItem>>, nodes: Iterable<Node>) {
+  visitPaths(paths: ProxyObject<Record<string, oai.PathItem>>, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
       const uid = `path:${this.opCount++}`;
 
@@ -422,12 +422,12 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
           case "trace":
             {
               const childOperation = this.newObject(paths, `${uid}.${child.key}`, pointer);
-              childOperation["x-ms-metadata"] = clone(metadata);
+              childOperation["x-ms-metadata"] = cloneDeep(metadata);
               this.copy(childOperation, child.key, child.pointer, child.value);
               if (value.parameters) {
                 if (childOperation[child.key].parameters) {
                   childOperation[child.key].parameters.unshift(
-                    ...clone(value.parameters).filter((x: { in: string; name: string }) => {
+                    ...cloneDeep(value.parameters).filter((x: { in: string; name: string }) => {
                       for (const param of childOperation[child.key].parameters) {
                         if (x.in === param.in && x.name === param.name) {
                           return false;
@@ -438,7 +438,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
                     }),
                   );
                 } else {
-                  childOperation[child.key].parameters = clone(value.parameters);
+                  childOperation[child.key].parameters = cloneDeep(value.parameters);
                 }
               }
             }
@@ -452,7 +452,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
       }
     }
   }
-  visitComponents(components: ProxyObject<Dictionary<oai.Components>>, nodes: Iterable<Node>) {
+  visitComponents(components: ProxyObject<Record<string, oai.Components>>, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
       this.cCount[key] = this.cCount[key] || 0;
       if (components[key] === undefined) {
@@ -463,7 +463,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     }
   }
 
-  visitComponent<T>(type: string, container: ProxyObject<Dictionary<T>>, nodes: Iterable<Node>) {
+  visitComponent<T>(type: string, container: ProxyObject<Record<string, T>>, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
       const uid = `${type}:${this.cCount[type]++}`;
 
@@ -484,10 +484,10 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
       if (!value["x-ms-metadata"]) {
         component["x-ms-metadata"] = {
           value: {
-            "apiVersions": [this.current.info && this.current.info.version ? this.current.info.version : ""], // track the API version this came from
-            "filename": [this.currentInputFilename], // and the filename
+            apiVersions: [this.current.info && this.current.info.version ? this.current.info.version : ""], // track the API version this came from
+            filename: [this.currentInputFilename], // and the filename
             name,
-            "originalLocations": [originalLocation],
+            originalLocations: [originalLocation],
             "x-ms-secondary-file": this.isSecondaryFile,
           },
           pointer,
@@ -501,11 +501,13 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
 }
 
 function cleanRefs(instance: AnyObject): AnyObject {
-  for (const each of visitor(instance)) {
-    if (each.instance.$ref) {
-      each.instance.$ref = each.instance.$ref.substring(each.instance.$ref.indexOf("#"));
+  walk(instance, (value: any) => {
+    if (value.$ref) {
+      value.$ref = value.$ref.substring(value.$ref.indexOf("#"));
+      return "stop";
     }
-  }
+    return "visit-children";
+  });
   return instance;
 }
 
@@ -539,8 +541,7 @@ async function merge(context: AutorestContext, input: DataSource, sink: DataSink
         [].concat.apply([], <any>inputs.map((each) => each.identity)),
         "merged-oai3",
         {
-          mappings: await processor.getSourceMappings(),
-          mappingSources: inputs,
+          pathMappings: await processor.getSourceMappings(),
         },
       ),
     ],

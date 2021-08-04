@@ -1,6 +1,4 @@
 import { DataStore, CachingFileSystem } from "@azure-tools/datastore";
-import { clone } from "@azure-tools/linq";
-import { From } from "linq-es2015";
 import { basename, dirname } from "path";
 import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
 import { Artifact } from "../artifact";
@@ -20,6 +18,7 @@ import { VERSION } from "../constants";
 import { StatsCollector } from "../stats";
 import { LoggingSession } from "./logging-session";
 import { PipelinePluginDefinition } from "../pipeline/plugin-loader";
+import { cloneDeep } from "lodash";
 
 export class AutorestContext implements AutorestLogger {
   public config: AutorestConfiguration;
@@ -164,7 +163,7 @@ export class AutorestContext implements AutorestLogger {
   }
 
   public IsOutputArtifactRequested(artifact: string): boolean {
-    return From(arrayOf<string>(this.config["output-artifact"])).Contains(artifact);
+    return arrayOf<string>(this.config["output-artifact"]).includes(artifact);
   }
 
   /**
@@ -173,7 +172,7 @@ export class AutorestContext implements AutorestLogger {
    */
   public GetEntry(key: string): any {
     if (!key) {
-      return clone(this.config);
+      return cloneDeep(this.config);
     }
 
     if (key === "resolved-directive") {

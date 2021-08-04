@@ -3,13 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { OperationCanceledException } from "@azure-tools/tasks";
 import { resolveUri } from "@azure-tools/uri";
-import { RawSourceMap, SourceMapGenerator } from "source-map";
-import { CancellationToken } from "../cancellation";
+import { RawSourceMap } from "source-map";
 import { IFileSystem } from "../file-system/file-system";
 import { BlameTree } from "../source-map/blaming";
-import { CompilePosition, SmartPosition } from "../source-map/source-map";
 import { promises as fs } from "fs";
 import { tmpdir } from "os";
 import { join } from "path";
@@ -18,7 +15,8 @@ import { createHash } from "crypto";
 import { DataSource } from "./data-source";
 import { ReadThroughDataSource } from "./read-through-data-source";
 import { Data, DataHandle } from "./data-handle";
-import { DataSink, DataSinkOptions } from "./data-sink";
+import { DataSink } from "./data-sink";
+import { PathMapping, PathPosition, PathSourceMap, Position, PositionSourceMap } from "../source-map";
 
 const md5 = (content: any) => (content ? createHash("md5").update(JSON.stringify(content)).digest("hex") : null);
 
@@ -38,19 +36,13 @@ export class DataStore {
   private store: Store = {};
   private cacheFolder?: string;
 
-  public constructor(private cancellationToken: CancellationToken = CancellationToken.None) {}
+  public constructor() {}
 
   private async getCacheFolder() {
     if (!this.cacheFolder) {
       this.cacheFolder = await fs.mkdtemp(join(tmpdir(), "autorest-"));
     }
     return this.cacheFolder;
-  }
-
-  private throwIfCancelled(): void {
-    if (this.cancellationToken.isCancellationRequested) {
-      throw new OperationCanceledException();
-    }
   }
 
   public getReadThroughScope(fs: IFileSystem): DataSource {
@@ -68,10 +60,10 @@ export class DataStore {
     data: string,
     artifactType: string,
     identity: Array<string>,
+    mappings?: PathMapping[],
     sourceMapFactory?: (self: DataHandle) => Promise<RawSourceMap>,
   ): Promise<DataHandle> {
     const uri = this.createUri(description);
-
     if (this.store[uri]) {
       throw new Error(`can only write '${uri}' once`);
     }
@@ -89,16 +81,19 @@ export class DataStore {
       cached: data,
       artifactType,
       identity,
-      sourceMap: undefined,
+      pathSourceMap: undefined,
+      positionSourceMap: undefined,
     };
     this.store[uri] = item;
 
     const handle = await this.read(uri);
     if (sourceMapFactory) {
-      item.sourceMap = await sourceMapFactory(handle);
-    } else {
-      item.sourceMap = new SourceMapGenerator().toJSON();
+      item.positionSourceMap = new PositionSourceMap(name, await sourceMapFactory(handle));
     }
+    if (mappings) {
+      item.pathSourceMap = new PathSourceMap(name, mappings);
+    }
+
     return handle;
   }
 
@@ -106,14 +101,10 @@ export class DataStore {
     return resolveUri(this.BaseUri, `${this.uid++}?${encodeURIComponent(description)}`);
   }
 
-  public getDataSink(
-    dataSinkOptions: DataSinkOptions = { generateSourceMap: true },
-    defaultArtifact: string = FALLBACK_DEFAULT_OUTPUT_ARTIFACT,
-  ): DataSink {
+  public getDataSink(defaultArtifact: string = FALLBACK_DEFAULT_OUTPUT_ARTIFACT): DataSink {
     return new DataSink(
-      dataSinkOptions,
-      (description, data, artifact, identity, sourceMapFactory) =>
-        this.writeData(description, data, artifact || defaultArtifact, identity, sourceMapFactory),
+      (description, data, artifact, identity, mappings, sourceMapFactory) =>
+        this.writeData(description, data, artifact || defaultArtifact, identity, mappings, sourceMapFactory),
       async (description, input) => {
         const uri = this.createUri(description);
         this.store[uri] = this.store[input.key];
@@ -139,14 +130,10 @@ export class DataStore {
     return new DataHandle(uri, data);
   }
 
-  public async blame(absoluteUri: string, position: SmartPosition): Promise<BlameTree> {
-    const data = this.readStrictSync(absoluteUri);
-    const resolvedPosition = await CompilePosition(position, data);
+  public async blame(absoluteUri: string, position: Position | PathPosition): Promise<BlameTree> {
     return await BlameTree.create(this, {
       source: absoluteUri,
-      column: resolvedPosition.column,
-      line: resolvedPosition.line,
-      name: `blameRoot (${JSON.stringify(position)})`,
+      ...position,
     });
   }
 
@@ -167,7 +154,7 @@ export class DataStore {
     identity: Array<string>,
     sourceMapFactory?: (self: DataHandle) => Promise<RawSourceMap>,
   ): Promise<DataHandle> {
-    return this.writeData(description, data, artifact, identity, sourceMapFactory);
+    return this.writeData(description, data, artifact, identity, undefined, sourceMapFactory);
   }
 
   /**
@@ -187,7 +174,7 @@ export class DataStore {
   /**
    * @deprecated use @see blame
    */
-  public async Blame(absoluteUri: string, position: SmartPosition): Promise<BlameTree> {
+  public async Blame(absoluteUri: string, position: Position | PathPosition): Promise<BlameTree> {
     return this.blame(absoluteUri, position);
   }
 }

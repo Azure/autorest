@@ -1,5 +1,6 @@
 import fs from "fs";
 import { basename, join } from "path";
+import { serializeJsonPointer } from "../../../json/dist";
 import { convertOai2ToOai3, OaiToOai3FileInput } from "../../src";
 
 const inputsFolder = `${__dirname}/inputs/`;
@@ -26,6 +27,11 @@ const expectInputsMatchSnapshots = async (testName: string, filenames: string[])
   for (const result of results) {
     const jsonResult = JSON.stringify(result.result, null, 2);
     expect(jsonResult).toMatchRawFileSnapshot(join(expectedFolder, testName, result.name));
+
+    const mappings = result.mappings
+      .map((x) => `${serializeJsonPointer(x.generated)} => ${serializeJsonPointer(x.original)}`)
+      .join("\n");
+    expect(mappings).toMatchRawFileSnapshot(join(expectedFolder, testName, `${result.name}.mappings.txt`));
   }
 };
 
@@ -58,5 +64,9 @@ describe("Scenario testings", () => {
   it("Convert enums using $ref object as values", async () => {
     // The expected result is the $ref in `enum` has been updated to the openapi 3 format.
     await expectInputsMatchSnapshots("enums", ["swagger.json"]);
+  });
+
+  it("request body - copying extensions", async () => {
+    await expectInputsMatchSnapshots("request-body", ["swagger.json"]);
   });
 });

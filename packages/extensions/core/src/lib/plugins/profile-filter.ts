@@ -16,9 +16,7 @@ import {
   QuickDataSource,
   Transformer,
   visit,
-  ConvertJsonx2Yaml,
 } from "@azure-tools/datastore";
-import { Dictionary, items, values } from "@azure-tools/linq";
 import * as oai from "@azure-tools/openapi";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
@@ -38,7 +36,7 @@ interface PathMetadata {
   apiVersions: Array<string>;
   filename: Array<string>;
   path: string;
-  profiles: Dictionary<string>;
+  profiles: Record<string, string>;
   originalLocations: Array<string>;
 }
 
@@ -96,7 +94,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
   };
 
   // This holds allOf, anyOf, oneOf, not references
-  private polymorphicReferences = new Dictionary<Set<string>>();
+  private polymorphicReferences: Record<string, Set<string>> = {};
 
   private components: any;
   private profilesApiVersions: Array<string> = [];
@@ -317,20 +315,20 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
     });
 
     // map of '${profileName}:${value[x-ms-metadata].path}' -> '${path:uid} (no method included, like path:0.get, path:0.put, etc)'
-    const uniquePathPerProfile = new Dictionary<string>();
+    const uniquePathPerProfile: Record<string, string> = {};
 
     // filter paths
     for (const { value, key: pathKey, pointer, children } of nodes) {
       const path: string = value["x-ms-metadata"].path.replace(/\/*$/, "");
       const keyWithNoMethod = pathKey.split(".")[0];
       const originalApiVersions: Array<string> = value["x-ms-metadata"].apiVersions;
-      const profiles = new Dictionary<string>();
+      const profiles: Record<string, string> = {};
       const apiVersions = new Set<string>();
 
       let match = false;
       if (this.filterTargets.length > 0) {
         // Profile Mode
-        for (const each of values(this.filterTargets)) {
+        for (const each of Object.values(this.filterTargets)) {
           const id = `${each.profile}:${path}`;
           if (
             path.match(each.pathRegex) &&
@@ -424,7 +422,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
     }
   }
 
-  visitComponent<T>(type: string, container: ProxyObject<Dictionary<T>>, nodes: Iterable<Node>) {
+  visitComponent<T>(type: string, container: ProxyObject<Record<string, T>>, nodes: Iterable<Node>) {
     for (const { key, value, pointer } of nodes) {
       if (this.componentsToKeep[type as keyof ComponentTracker].has(key)) {
         this.clone(container, key, pointer, value);
@@ -497,8 +495,7 @@ async function filter(config: AutorestContext, input: DataSource, sink: DataSink
           each.identity,
           "openapi3-document-profile-filtered",
           {
-            mappings: await processor.getSourceMappings(),
-            mappingSources: [each],
+            pathMappings: await processor.getSourceMappings(),
           },
         ),
       );
@@ -554,15 +551,15 @@ function getFilesUsed(nodes: Iterable<Node>) {
   return filesUsed;
 }
 
-function validateProfiles(profiles: Dictionary<Profile>) {
+function validateProfiles(profiles: Record<string, Profile>) {
   // A resourceType shouldn't be included in two apiversions within the same provider namespace in the same profile.
-  const duplicatedResources = new Dictionary<Array<string>>();
+  const duplicatedResources: Record<string, string[]> = {};
   const resourcesFound = new Set<string>();
-  for (const profile of items(profiles)) {
-    for (const namespace of items(profile.value.resources)) {
-      for (const apiVersion of items(namespace.value)) {
-        for (const resource of apiVersion.value) {
-          const uid = `profile:${profile.key.toLowerCase()}/providerNamespace:${namespace.key.toLowerCase()}/resourceType:${resource.toLowerCase()}`;
+  for (const [profileKey, profile] of Object.entries(profiles)) {
+    for (const [namespaceKey, namespace] of Object.entries(profile.resources)) {
+      for (const [apiVersionKey, apiVersion] of Object.entries(namespace)) {
+        for (const resource of apiVersion) {
+          const uid = `profile:${profileKey.toLowerCase()}/providerNamespace:${namespaceKey.toLowerCase()}/resourceType:${resource.toLowerCase()}`;
           if (!resourcesFound.has(uid)) {
             resourcesFound.add(uid);
           } else {
@@ -570,7 +567,7 @@ function validateProfiles(profiles: Dictionary<Profile>) {
               duplicatedResources[uid] = [];
             }
 
-            duplicatedResources[uid].push(apiVersion.key);
+            duplicatedResources[uid].push(apiVersionKey);
           }
         }
       }
@@ -580,9 +577,9 @@ function validateProfiles(profiles: Dictionary<Profile>) {
   if (Object.keys(duplicatedResources).length > 0) {
     let errorMessage =
       "The following resourceTypes are defined in multiple api-versions within the same providerNamespace in the same profile: ";
-    for (const resourceType of items(duplicatedResources)) {
-      errorMessage += `\n*${resourceType.key}:`;
-      for (const duplicateEntry of resourceType.value) {
+    for (const [key, value] of Object.entries(duplicatedResources)) {
+      errorMessage += `\n*${key}:`;
+      for (const duplicateEntry of value) {
         errorMessage += `\n ---> conflicting api-versions: ${duplicateEntry}`;
       }
     }

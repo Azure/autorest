@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Text, TextPossibilities } from "./file-generator";
-import { Dictionary, values } from "@azure-tools/linq";
 
 let indentation = "    ";
 
@@ -43,11 +42,11 @@ Array.prototype.joinWith = function <T>(selector: (t: T) => string, separator?: 
 
 /** todo: can we remove this? */
 /* eslint-disable */
-if (!Array.prototype.hasOwnProperty('last')) {
-  Object.defineProperty(Array.prototype, 'last', {
+if (!Array.prototype.hasOwnProperty("last")) {
+  Object.defineProperty(Array.prototype, "last", {
     get() {
       return this[this.length - 1];
-    }
+    },
   });
 }
 
@@ -64,11 +63,11 @@ String.prototype.uncapitalize = function (): string {
 };
 /** Trims the string and removes multi leading spaces? */
 String.prototype.slim = function (): string {
-  return this.trim().replace(/([^ ])  +/g, '$1 ');
+  return this.trim().replace(/([^ ])  +/g, "$1 ");
 };
 
 export function join<T>(items: Array<T>, separator: string) {
-  return items.filter(v => v ? true : false).join(separator);
+  return items.filter((v) => (v ? true : false)).join(separator);
 }
 
 export function joinComma<T>(items: Array<T>, mapFn: (item: T) => string) {
@@ -84,11 +83,11 @@ export function sortByName(a: IHasName, b: IHasName): number {
 }
 
 export function setIndentation(spaces: number) {
-  indentation = ' '.repeat(spaces);
+  indentation = " ".repeat(spaces);
 }
 
 export function trimDots(content: string) {
-  return content.replace(/^[.\s]*(.*?)[.\s]*$/g, '$1');
+  return content.replace(/^[.\s]*(.*?)[.\s]*$/g, "$1");
 }
 
 export function toMap<T>(source: Array<T>, eachFn: (item: T) => string): Map<string, Array<T>> {
@@ -118,13 +117,13 @@ export function indent(content: string, factor: number = 1): string {
 
 export function comment(content: string, prefix = lineCommentPrefix, factor = 0, maxLength = 120) {
   const result = new Array<string>();
-  let line = '';
+  let line = "";
   prefix = indent(prefix, factor);
 
   content = content.trim();
   if (content) {
-    for (const word of content.replace(/\n+/g, ' » ').split(/\s+/g)) {
-      if (word === '»') {
+    for (const word of content.replace(/\n+/g, " » ").split(/\s+/g)) {
+      if (word === "»") {
         result.push(line);
         line = prefix;
         continue;
@@ -132,7 +131,7 @@ export function comment(content: string, prefix = lineCommentPrefix, factor = 0,
 
       if (maxLength < line.length) {
         result.push(line);
-        line = '';
+        line = "";
       }
 
       if (!line) {
@@ -147,7 +146,7 @@ export function comment(content: string, prefix = lineCommentPrefix, factor = 0,
 
     return result.join(EOL);
   }
-  return '';
+  return "";
 }
 
 export function docComment(content: string, prefix = docCommentPrefix, factor = 0, maxLength = 120) {
@@ -155,59 +154,107 @@ export function docComment(content: string, prefix = docCommentPrefix, factor = 
 }
 
 export function dotCombine(prefix: string, content: string) {
-  return trimDots([trimDots(prefix), trimDots(content)].join('.'));
+  return trimDots([trimDots(prefix), trimDots(content)].join("."));
 }
 
-
-export function map<T, U>(dictionary: Dictionary<T>, callbackfn: (key: string, value: T) => U, thisArg?: any): Array<U> {
+export function map<T, U>(
+  dictionary: Record<string, T>,
+  callbackfn: (key: string, value: T) => U,
+  thisArg?: any,
+): Array<U> {
   return Object.getOwnPropertyNames(dictionary).map((key) => callbackfn(key, dictionary[key]));
 }
 
-export function ToMap<T>(dictionary: Dictionary<T>): Map<string, T> {
+export function ToMap<T>(dictionary: Record<string, T>): Map<string, T> {
   const result = new Map<string, T>();
-  Object.getOwnPropertyNames(dictionary).map(key => result.set(key, dictionary[key]));
+  Object.getOwnPropertyNames(dictionary).map((key) => result.set(key, dictionary[key]));
   return result;
 }
 
 export function __selectMany<T>(multiArray: Array<Array<T>>): Array<T> {
   const result = new Array<T>();
-  multiArray.map(v => result.push(...v));
+  multiArray.map((v) => result.push(...v));
   return result;
 }
 
-
-export function pall<T, U>(array: Array<T>, callbackfn: (value: T, index: number, array: Array<T>) => Promise<U>, thisArg?: any): Promise<Array<U>> {
+export function pall<T, U>(
+  array: Array<T>,
+  callbackfn: (value: T, index: number, array: Array<T>) => Promise<U>,
+  thisArg?: any,
+): Promise<Array<U>> {
   return Promise.all(array.map(callbackfn));
 }
 
 export function deconstruct(identifier: string | Array<string>): Array<string> {
   if (Array.isArray(identifier)) {
-    return [...values(identifier).selectMany(deconstruct)];
+    return identifier.flatMap(deconstruct);
   }
-  return `${identifier}`.
-    replace(/([a-z]+)([A-Z])/g, '$1 $2').
-    replace(/(\d+)([a-z|A-Z]+)/g, '$1 $2').
-    replace(/\b([A-Z]+)([A-Z])([a-z])/, '$1 $2$3').
-    split(/[\W|_]+/).map(each => each.toLowerCase());
+  return `${identifier}`
+    .replace(/([a-z]+)([A-Z])/g, "$1 $2")
+    .replace(/(\d+)([a-z|A-Z]+)/g, "$1 $2")
+    .replace(/\b([A-Z]+)([A-Z])([a-z])/, "$1 $2$3")
+    .split(/[\W|_]+/)
+    .map((each) => each.toLowerCase());
 }
 
 export function isCapitalized(identifier: string): boolean {
   return /^[A-Z]/.test(identifier);
 }
 
-const ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
-const teens = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
-const tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
-const magnitude = ['thousand', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion', 'septillion', 'octillion'];
+const ones = [
+  "",
+  "one",
+  "two",
+  "three",
+  "four",
+  "five",
+  "six",
+  "seven",
+  "eight",
+  "nine",
+  "ten",
+  "eleven",
+  "twelve",
+  "thirteen",
+  "fourteen",
+  "fifteen",
+  "sixteen",
+  "seventeen",
+  "eighteen",
+  "nineteen",
+];
+const teens = [
+  "ten",
+  "eleven",
+  "twelve",
+  "thirteen",
+  "fourteen",
+  "fifteen",
+  "sixteen",
+  "seventeen",
+  "eighteen",
+  "nineteen",
+];
+const tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+const magnitude = [
+  "thousand",
+  "million",
+  "billion",
+  "trillion",
+  "quadrillion",
+  "quintillion",
+  "septillion",
+  "octillion",
+];
 const magvalues = [10 ** 3, 10 ** 6, 10 ** 9, 10 ** 12, 10 ** 15, 10 ** 18, 10 ** 21, 10 ** 24, 10 ** 27];
 
 export function* convert(num: number): Iterable<string> {
   if (!num) {
-    yield 'zero';
+    yield "zero";
     return;
   }
-  if (num > 1e+30) {
-    yield 'lots';
+  if (num > 1e30) {
+    yield "lots";
     return;
   }
 
@@ -218,13 +265,12 @@ export function* convert(num: number): Iterable<string> {
         yield* convert(Math.floor(num / c));
         yield magnitude[i];
         num = num % c;
-
       }
     }
   }
   if (num > 99) {
     yield ones[Math.floor(num / 100)];
-    yield 'hundred';
+    yield "hundred";
     num %= 100;
   }
   if (num > 19) {
@@ -243,10 +289,14 @@ export function fixLeadingNumber(identifier: Array<string>): Array<string> {
   return identifier;
 }
 
-export function removeProhibitedPrefix(identifier: string, prohibitedPrefix: string, skipIdentifiers?: Array<string>): string {
+export function removeProhibitedPrefix(
+  identifier: string,
+  prohibitedPrefix: string,
+  skipIdentifiers?: Array<string>,
+): string {
   if (identifier.toLowerCase().startsWith(prohibitedPrefix.toLowerCase())) {
-    const regex = new RegExp(`(^${prohibitedPrefix})(.*)`, 'i');
-    let newIdentifier = identifier.replace(regex, '$2');
+    const regex = new RegExp(`(^${prohibitedPrefix})(.*)`, "i");
+    let newIdentifier = identifier.replace(regex, "$2");
     if (newIdentifier.length < 2) {
       // if it results in an empty string or a single letter string
       // then, it is not really a word.
@@ -254,21 +304,24 @@ export function removeProhibitedPrefix(identifier: string, prohibitedPrefix: str
     }
 
     newIdentifier = isCapitalized(identifier) ? newIdentifier.capitalize() : newIdentifier.uncapitalize();
-    return (skipIdentifiers !== undefined) ? skipIdentifiers.includes(newIdentifier) ? identifier : newIdentifier : newIdentifier;
+    return skipIdentifiers !== undefined
+      ? skipIdentifiers.includes(newIdentifier)
+        ? identifier
+        : newIdentifier
+      : newIdentifier;
   }
 
   return identifier;
 }
 
-
 export function isEqual(s1: string, s2: string): boolean {
   // when s2 is undefined and s1 is the string 'undefined', it returns 0, making this true.
   // To prevent that, first we need to check if s2 is undefined.
-  return s2 !== undefined && !!s1 && !s1.localeCompare(s2, undefined, { sensitivity: 'base' });
+  return s2 !== undefined && !!s1 && !s1.localeCompare(s2, undefined, { sensitivity: "base" });
 }
 
 export function removeSequentialDuplicates(identifier: Iterable<string>) {
-  const ids = [...identifier].filter(each => !!each);
+  const ids = [...identifier].filter((each) => !!each);
   for (let i = 0; i < ids.length; i++) {
     while (isEqual(ids[i], ids[i - 1])) {
       ids.splice(i, 1);
@@ -282,25 +335,27 @@ export function removeSequentialDuplicates(identifier: Iterable<string>) {
 }
 
 export function pascalCase(identifier: string | Array<string>, removeDuplicates = true): string {
-  return identifier === undefined ? '' : typeof identifier === 'string' ?
-    pascalCase(fixLeadingNumber(deconstruct(identifier)), removeDuplicates) :
-    (removeDuplicates ? [...removeSequentialDuplicates(identifier)] : identifier).map(each => each.capitalize()).join('');
+  return identifier === undefined
+    ? ""
+    : typeof identifier === "string"
+    ? pascalCase(fixLeadingNumber(deconstruct(identifier)), removeDuplicates)
+    : (removeDuplicates ? [...removeSequentialDuplicates(identifier)] : identifier)
+        .map((each) => each.capitalize())
+        .join("");
 }
 
-
 export function camelCase(identifier: string | Array<string>): string {
-  if (typeof (identifier) === 'string') {
+  if (typeof identifier === "string") {
     return camelCase(fixLeadingNumber(deconstruct(identifier)));
   }
   switch (identifier.length) {
     case 0:
-      return '';
+      return "";
     case 1:
       return identifier[0].uncapitalize();
   }
   return `${identifier[0].uncapitalize()}${pascalCase(identifier.slice(1))}`;
 }
-
 
 export function getPascalIdentifier(name: string): string {
   return pascalCase(fixLeadingNumber(deconstruct(name)));
@@ -311,33 +366,35 @@ export function escapeString(text: string | undefined): string {
     const q = JSON.stringify(text);
     return q.substr(1, q.length - 2);
   }
-  return '';
+  return "";
 }
 
 /** emits c# to get the name of a property - uses nameof when it can, and uses a literal when it's an array value. */
 export function nameof(text: string): string {
-  if (text.indexOf('[') > -1) {
-    return `$"${text.replace(/\[(.*)\]/, '[{$1}]')}"`;
+  if (text.indexOf("[") > -1) {
+    return `$"${text.replace(/\[(.*)\]/, "[{$1}]")}"`;
   }
   return `nameof(${text})`;
 }
 
+export function* getRegions(source: string, prefix: string = "#", postfix: string = "") {
+  source = source.replace(/\r?\n|\r/g, "«");
 
-export function* getRegions(source: string, prefix: string = '#', postfix: string = '') {
-  source = source.replace(/\r?\n|\r/g, '«');
-
-  const rx = new RegExp(`(.*?)«?(\\s*${prefix}\\s*region\\s*(.*?)\\s*${postfix})\\s*«(.*?)«(\\s*${prefix}\\s*endregion\\s*${postfix})\\s*?«`, 'g');
+  const rx = new RegExp(
+    `(.*?)«?(\\s*${prefix}\\s*region\\s*(.*?)\\s*${postfix})\\s*«(.*?)«(\\s*${prefix}\\s*endregion\\s*${postfix})\\s*?«`,
+    "g",
+  );
   let match;
   let finalPosition = 0;
   /* eslint-disable */
-  while (match = rx.exec(source)) {
+  while ((match = rx.exec(source))) {
     if (match[1]) {
       // we have text before this region.
       yield {
-        name: '',
-        start: '',
-        content: match[1].replace(/«/g, '\n'),
-        end: ''
+        name: "",
+        start: "",
+        content: match[1].replace(/«/g, "\n"),
+        end: "",
       };
     }
 
@@ -345,8 +402,8 @@ export function* getRegions(source: string, prefix: string = '#', postfix: strin
     yield {
       name: match[3],
       start: match[2],
-      content: match[4].replace(/«/g, '\n'),
-      end: match[5]
+      content: match[4].replace(/«/g, "\n"),
+      end: match[5],
     };
     finalPosition = rx.lastIndex;
   }
@@ -354,17 +411,27 @@ export function* getRegions(source: string, prefix: string = '#', postfix: strin
   if (finalPosition < source.length) {
     // we have text after the last region.
     yield {
-      name: '',
-      start: '',
-      content: source.substring(finalPosition).replace(/«/g, '\n'),
-      end: '',
+      name: "",
+      start: "",
+      content: source.substring(finalPosition).replace(/«/g, "\n"),
+      end: "",
     };
   }
 }
 
-export function setRegion(source: string, region: string, content: TextPossibilities, prepend = true, prefix: string = '#', postfix: string = '') {
+export function setRegion(
+  source: string,
+  region: string,
+  content: TextPossibilities,
+  prepend = true,
+  prefix: string = "#",
+  postfix: string = "",
+) {
   const result = new Array<string>();
-  const ct = new Text(content).text.replace(/\r?\n|\r/g, '«').replace(/^«*/, '').replace(/«*$/, '');
+  const ct = new Text(content).text
+    .replace(/\r?\n|\r/g, "«")
+    .replace(/^«*/, "")
+    .replace(/«*$/, "");
   let found = false;
   for (const each of getRegions(source, prefix, postfix)) {
     if (each.name === region) {
@@ -372,12 +439,11 @@ export function setRegion(source: string, region: string, content: TextPossibili
       // (this also makes sure that we only have one region by that name when replacing/deleting)
       if (!found && ct) {
         // well, only if it has content, otherwise, we're deleting it.
-        result.push(each.start, ct, each.end, '«');
+        result.push(each.start, ct, each.end, "«");
         found = true;
       }
-    }
-    else {
-      result.push(each.start, each.content, each.end, '«');
+    } else {
+      result.push(each.start, each.content, each.end, "«");
     }
   }
   if (!found) {
@@ -387,21 +453,40 @@ export function setRegion(source: string, region: string, content: TextPossibili
       result.push(`${prefix} region ${region} ${postfix}`, ct, `${prefix} endregion ${postfix}«`);
     }
   }
-  return result.join('«').replace(/\r?\n|\r/g, '«').replace(/^«*/, '').replace(/«*$/, '').replace(/«««*/g, '««').replace(/«/g, '\n');
+  return result
+    .join("«")
+    .replace(/\r?\n|\r/g, "«")
+    .replace(/^«*/, "")
+    .replace(/«*$/, "")
+    .replace(/«««*/g, "««")
+    .replace(/«/g, "\n");
 }
 
 // Note: Where is this used?
-export function _setRegion(source: string, region: string, content: TextPossibilities, prepend = true, prefix: string = '#', postfix: string = '') {
-  const ct = new Text(content).text.replace(/\r?\n|\r/g, '«').replace(/^«*/, '').replace(/«*$/, '');
+export function _setRegion(
+  source: string,
+  region: string,
+  content: TextPossibilities,
+  prepend = true,
+  prefix: string = "#",
+  postfix: string = "",
+) {
+  const ct = new Text(content).text
+    .replace(/\r?\n|\r/g, "«")
+    .replace(/^«*/, "")
+    .replace(/«*$/, "");
 
-  source = source.replace(/\r?\n|\r/g, '«');
+  source = source.replace(/\r?\n|\r/g, "«");
 
-  const rx = new RegExp(`«(\\s*${prefix}\\s*region\\s*${region}\\s*${postfix})\\s*«.*?(«\\s*${prefix}\\s*endregion\\s*${postfix}«?)`, 'g');
+  const rx = new RegExp(
+    `«(\\s*${prefix}\\s*region\\s*${region}\\s*${postfix})\\s*«.*?(«\\s*${prefix}\\s*endregion\\s*${postfix}«?)`,
+    "g",
+  );
   if (rx.test(source)) {
     if (ct.length > 0) {
       source = source.replace(rx, `«$1«${ct}$2`);
     } else {
-      source = source.replace(rx, '');
+      source = source.replace(rx, "");
     }
   } else {
     if (ct.length > 0) {
@@ -409,7 +494,7 @@ export function _setRegion(source: string, region: string, content: TextPossibil
       source = prepend ? text + source : source + text;
     }
   }
-  source = source.replace(/«««*/g, '««').replace(/«/g, '\n');
+  source = source.replace(/«««*/g, "««").replace(/«/g, "\n");
   return source;
 }
 
@@ -423,7 +508,7 @@ export function selectName(nameOptions: Array<string>, reservedNames: Set<string
     }
   }
 
-  // hmm, none of the names were suitable. 
+  // hmm, none of the names were suitable.
   // use the first one, and tack on a number until we have a free value
   let i = 1;
   do {
@@ -439,4 +524,3 @@ export function selectName(nameOptions: Array<string>, reservedNames: Set<string
   // after an unreasonalbe search, return something invalid
   return `InvalidPropertyName${nameOptions[0]}`;
 }
-

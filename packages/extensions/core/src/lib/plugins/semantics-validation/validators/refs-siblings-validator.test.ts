@@ -67,7 +67,7 @@ describe("Semantic Validation: $ref siblings", () => {
           Pet: {
             properties: {
               foo: {
-                "$ref": "#/components/schemas/Bar",
+                $ref: "#/components/schemas/Bar",
                 "x-custom": "This is a description for the property",
               },
             },

@@ -165,7 +165,8 @@ export async function runCoreOutOfProc(
     if (maxMemory < 1024) {
       throw new Error("Cannot set memory to be less than 1GB(1024MB)");
     }
-    env.NODE_OPTIONS = `${env.NODE_OPTIONS} --max_old_space_size=${maxMemory}`;
+    env.NODE_OPTIONS = `${env.NODE_OPTIONS ?? ""} --max_old_space_size=${maxMemory}`;
+    console.log(`Setting memory to ${maxMemory}mb for @autorest/core`);
   }
   try {
     const ep = await resolveEntrypoint(localPath, entrypoint);

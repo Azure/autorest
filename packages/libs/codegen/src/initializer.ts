@@ -3,8 +3,6 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { keys, items } from "@azure-tools/linq";
-
 export type Primitive = string | number | boolean | bigint | symbol | undefined | null;
 
 export type XDeepPartial<T> = DeepPartial<T>;
@@ -55,7 +53,7 @@ function applyTo(source: any, target: any, exclusions: Set<string>, cache = new 
     throw new Error("Circular refrenced models are not permitted in apply() initializers.");
   }
 
-  for (const i of <any>keys(source)) {
+  for (const i of Object.keys(source ?? {})) {
     if (exclusions.has(i)) {
       continue;
     }
@@ -79,13 +77,13 @@ function applyTo(source: any, target: any, exclusions: Set<string>, cache = new 
         target[i] = source[i];
         continue;
 
-      /* bad idea? : 
+      /* bad idea? :
 
       this recursively cloned the contents of the intializer
-      but this has the effect of breaking referencs where I wanted 
+      but this has the effect of breaking referencs where I wanted
       them.
 
-      // copy toarray 
+      // copy toarray
       if (Array.isArray(source[i])) {
         cache.add(source);
         applyTo(source[i], target[i] = [], cache);

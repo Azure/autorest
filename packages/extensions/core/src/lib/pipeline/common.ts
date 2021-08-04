@@ -5,7 +5,6 @@
 
 import { DataHandle, DataSink, DataSource, QuickDataSource } from "@azure-tools/datastore";
 import { AutorestContext } from "../context";
-import { length } from "@azure-tools/linq";
 
 export type PipelinePlugin = (config: AutorestContext, input: DataSource, sink: DataSink) => Promise<DataSource>;
 
@@ -22,8 +21,9 @@ export function createPerFilePlugin(
       try {
         // only keep/process files that actually have content in them (ie, no empty objects, no {directive:[]} files ).
         const pluginInput = await fileIn.readObject<any>();
-
-        if (!(length(pluginInput) === 1 && pluginInput.directive) || length(pluginInput) === 0) {
+        const keysLength = Object.keys(pluginInput).length;
+        const isEmptyDirective = keysLength === 1 && pluginInput.directive;
+        if (!isEmptyDirective || keysLength === 0) {
           result.push(await processor(fileIn, sink));
         }
       } catch {

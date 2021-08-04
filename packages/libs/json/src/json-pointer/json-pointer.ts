@@ -1,5 +1,5 @@
 export type JsonPointer = string;
-export type JsonPointerTokens = string[];
+export type JsonPointerTokens = (string | number)[];
 
 /**
  * Escapes a reference token
@@ -7,8 +7,8 @@ export type JsonPointerTokens = string[];
  * @param str
  * @returns {string}
  */
-function escape(str: string): string {
-  return str.toString().replace(/~/g, "~0").replace(/\//g, "~1");
+function escape(str: string | number): string | number {
+  return typeof str === "string" ? str.toString().replace(/~/g, "~0").replace(/\//g, "~1") : str;
 }
 
 /**

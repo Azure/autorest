@@ -23,7 +23,6 @@ import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
 import { createArtifactEmitterPlugin } from "../plugins/emitter";
 import { createHash } from "crypto";
 import { isCached, readCache, writeCache } from "./pipeline-cache";
-import { values } from "@azure-tools/linq";
 import { CORE_PLUGIN_MAP } from "../plugins";
 import { loadPlugins, PipelinePluginDefinition } from "./plugin-loader";
 import { mapValues, omitBy } from "lodash";
@@ -233,12 +232,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
   const pipelineEmitterPlugin = createArtifactEmitterPlugin(
     async (context) =>
       new QuickDataSource([
-        await context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }).writeObject(
-          "pipeline",
-          pipeline.pipeline,
-          ["fix-me-3"],
-          "pipeline",
-        ),
+        await context.DataStore.getDataSink().writeObject("pipeline", pipeline.pipeline, ["fix-me-3"], "pipeline"),
       ]),
   );
 
@@ -284,10 +278,9 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     // or add pass-thru: true in a pipline configuration step.
     const configEntry = context.GetEntry(node.configScope.last.toString());
     const passthru =
-      configEntry?.["pass-thru"] === true ||
-      values(configView.GetEntry("pass-thru")).any((each) => each === pluginName);
+      configEntry?.["pass-thru"] === true || configView.config["pass-thru"]?.find((x) => x === pluginName);
     const usenull =
-      configEntry?.["null"] === true || values(configView.GetEntry("null")).any((each) => each === pluginName);
+      configEntry?.["null"] === true || configView.GetEntry("null")?.find((x: string) => x === pluginName);
 
     const plugin = usenull
       ? CORE_PLUGIN_MAP.null
@@ -332,10 +325,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
           Text: `${nodeName} - CACHED inputs = ${(await inputScope.enum()).length} [0.0 s]`,
         });
 
-        return await readCache(
-          cacheKey,
-          context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }, node.outputArtifact),
-        );
+        return await readCache(cacheKey, context.DataStore.getDataSink(node.outputArtifact));
       }
 
       const t1 = process.uptime() * 100;
@@ -345,11 +335,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
       });
 
       // creates the actual plugin.
-      const scopeResult = await plugin(
-        context,
-        inputScope,
-        context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }, node.outputArtifact),
-      );
+      const scopeResult = await plugin(context, inputScope, context.DataStore.getDataSink(node.outputArtifact));
       const t2 = process.uptime() * 100;
 
       const memSuffix = context.config.debug ? `[${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)} MB]` : "";
@@ -378,7 +364,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     } catch (e) {
       if (configView.config.debug) {
         // eslint-disable-next-line no-console
-        console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);
+        console.error(`${__filename} - FAILURE`, e);
       }
       throw e;
     }
@@ -466,7 +452,7 @@ async function emitStats(context: AutorestContext) {
   const plugin = createArtifactEmitterPlugin(
     async () =>
       new QuickDataSource([
-        await context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }).writeObject(
+        await context.DataStore.getDataSink().writeObject(
           "stats.json",
           context.stats.getAll(),
           ["stats"],
@@ -474,9 +460,5 @@ async function emitStats(context: AutorestContext) {
         ),
       ]),
   );
-  await plugin(
-    context,
-    new QuickDataSource([]),
-    context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }),
-  );
+  await plugin(context, new QuickDataSource([]), context.DataStore.getDataSink());
 }

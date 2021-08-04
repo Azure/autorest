@@ -6,14 +6,14 @@ import { Model } from "@azure-tools/openapi";
 import { codeModelSchema } from "@autorest/codemodel";
 
 const cfg = {
-  "modelerfour": {
+  modelerfour: {
     "flatten-models": true,
     "flatten-payloads": true,
     "group-parameters": true,
     "resolve-schema-name-collisons": true,
     "additional-checks": true,
     "always-create-content-type-parameter": true,
-    "naming": {
+    naming: {
       override: {
         $host: "$host",
         cmyk: "CMYK",

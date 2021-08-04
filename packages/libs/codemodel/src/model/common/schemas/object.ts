@@ -2,7 +2,6 @@ import { SchemaType } from "../schema-type";
 import { Schema, ComplexSchema } from "../schema";
 import { DeepPartial } from "@azure-tools/codegen";
 import { Property } from "../property";
-import { Dictionary, values } from "@azure-tools/linq";
 import { Parameter } from "../parameter";
 import { SchemaUsage } from "./usage";
 
@@ -19,8 +18,8 @@ export class Relations {
 
 export interface Discriminator {
   property: Property;
-  immediate: Dictionary<ComplexSchema>;
-  all: Dictionary<ComplexSchema>;
+  immediate: Record<string, ComplexSchema>;
+  all: Record<string, ComplexSchema>;
 }
 
 export class Discriminator implements Discriminator {
@@ -101,15 +100,15 @@ export function isObjectSchema(schema: Schema): schema is ObjectSchema {
 
 // gs01: todo/Note -- these two need to be commented out to run the schema generation script
 export function* getAllProperties(schema: ObjectSchema): Iterable<Property> {
-  for (const parent of values(schema.parents?.immediate)) {
+  for (const parent of schema.parents?.immediate ?? []) {
     if (isObjectSchema(parent)) {
       yield* getAllProperties(parent);
     }
   }
-  yield* values(schema.properties);
+  yield* schema.properties ?? [];
 }
 export function* getAllParentProperties(schema: ObjectSchema): Iterable<Property> {
-  for (const parent of values(schema.parents?.immediate)) {
+  for (const parent of schema.parents?.immediate ?? []) {
     if (isObjectSchema(parent)) {
       yield* getAllProperties(parent);
     }

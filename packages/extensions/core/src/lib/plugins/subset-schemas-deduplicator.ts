@@ -9,13 +9,11 @@ import {
   QuickDataSource,
   visit,
 } from "@azure-tools/datastore";
-import { clone, Dictionary, values } from "@azure-tools/linq";
 import { areSimilar } from "@azure-tools/object-comparison";
 import * as oai from "@azure-tools/openapi";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
-import { toSemver, maximum, gt, lt } from "@azure-tools/codegen";
-import { Channel } from "../message";
+import { maximum, gt, lt } from "@azure-tools/codegen";
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
@@ -60,7 +58,7 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
     }
   }
 
-  visitSchemas<T>(container: ProxyObject<Dictionary<T>>, originalNodes: () => Iterable<Node>) {
+  visitSchemas<T>(container: ProxyObject<Record<string, T>>, originalNodes: () => Iterable<Node>) {
     const xMsMetadata = "x-ms-metadata";
     const updatedSchemas: any = {};
 
@@ -381,8 +379,7 @@ async function deduplicateSubsetSchemas(config: AutorestContext, input: DataSour
         each.identity,
         "openapi-document-schema-reduced",
         {
-          mappings: await processor.getSourceMappings(),
-          mappingSources: [each],
+          pathMappings: await processor.getSourceMappings(),
         },
       ),
     );
