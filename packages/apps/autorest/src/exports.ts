@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 /* eslint-disable @typescript-eslint/triple-slash-reference */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /// <reference path="../definitions/core.d.ts" />
 /// <reference path="../definitions/vscode.d.ts" />
 
@@ -15,7 +16,9 @@ import { LanguageClient } from "vscode-languageclient";
 // exports the public AutoRest definitions
 import { GenerationResults, IFileSystem, AutoRest as IAutoRest } from "autorest-core";
 export { Message, Artifact, GenerationResults, IFileSystem } from "autorest-core";
-export { color } from "./coloring";
+
+// This is needed currently in autorest-as-service when starting @autorest/core out of proc for @autorest/core version older than 3.6.0
+export { color } from "@autorest/common";
 
 /**
  * The Channel that a message is registered with.
@@ -87,13 +90,13 @@ let modulePath: string | undefined = undefined;
 export async function getLanguageServiceEntrypoint(
   requestedVersion = "latest-installed",
   minimumVersion?: string,
-): Promise<string> {
+): Promise<string | undefined> {
   if (!modulePath && !busy) {
     // if we haven't already got autorest-core, let's do that now with the default settings.
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     await initialize(requestedVersion, minimumVersion);
   }
-  return resolveEntrypoint(modulePath, "language-service");
+  return resolveEntrypoint(modulePath!, "language-service");
 }
 
 /**
@@ -110,13 +113,13 @@ export async function getLanguageServiceEntrypoint(
 export async function getApplicationEntrypoint(
   requestedVersion = "latest-installed",
   minimumVersion?: string,
-): Promise<string> {
+): Promise<string | undefined> {
   if (!modulePath && !busy) {
     // if we haven't already got autorest-core, let's do that now with the default settings.
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     await initialize(requestedVersion, minimumVersion);
   }
-  return resolveEntrypoint(modulePath, "app");
+  return resolveEntrypoint(modulePath!, "app");
 }
 
 /**

@@ -1,5 +1,5 @@
 import { AutorestArgs } from "./args";
-import { AutorestConfiguration, ConfigurationLoader } from "@autorest/configuration";
+import { AutorestConfiguration, AutorestNormalizedConfiguration, ConfigurationLoader } from "@autorest/configuration";
 import { AutorestLogger } from "@autorest/configuration/node_modules/@autorest/common";
 import { createFileOrFolderUri, createFolderUri, resolveUri } from "@azure-tools/uri";
 import { AppRoot } from "./constants";
@@ -11,7 +11,9 @@ import { dirname, join, resolve } from "path";
 import untildify from "untildify";
 
 const inWebpack = typeof __webpack_require__ === "function";
-const nodeRequire = inWebpack ? __non_webpack_require__ : require;
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const nodeRequire = inWebpack ? __non_webpack_require__! : require;
+
 const defaultConfigUri = inWebpack
   ? resolveUri(createFolderUri(AppRoot), `dist/resources/default-configuration.md`)
   : createFileOrFolderUri(nodeRequire.resolve("@autorest/configuration/resources/default-configuration.md"));
@@ -22,7 +24,7 @@ const defaultConfigUri = inWebpack
  * @returns npm version/tag.
  */
 export const getRequestedCoreVersion = (args: AutorestArgs): string | undefined => {
-  return args.version || (args.latest && "latest") || (args.preview && "preview");
+  return args.version ?? args.latest ? "latest" : args.preview ? "preview" : undefined;
 };
 
 const cwd = process.cwd();
@@ -31,29 +33,38 @@ const cwd = process.cwd();
  * Tries to load the configuration of autorest.
  * @param args CLI args.
  */
-export async function loadConfig(args: AutorestArgs): Promise<AutorestConfiguration> {
+export async function loadConfig(args: AutorestArgs): Promise<AutorestConfiguration | undefined> {
   const configFileOrFolder = resolveUri(createFolderUri(cwd), args.configFileOrFolder || ".");
   /* eslint-disable no-console */
+
+  const enableLogging = args["debug-cli-config-loading"];
+
   const logger: AutorestLogger = {
-    fatal: (x) => args.verbose && console.error(x),
-    info: (x) => args.verbose && console.log(x),
-    verbose: (x) => args.verbose && console.log(x),
-    trackError: (x) => console.error(x),
-    trackWarning: (x) => console.error(x),
+    fatal: (x) => enableLogging && console.error(x),
+    info: (x) => enableLogging && console.log(x),
+    verbose: (x) => enableLogging && console.log(x),
+    trackError: (x) => enableLogging && console.error(x),
+    trackWarning: (x) => enableLogging && console.error(x),
   };
   /* eslint-enable no-console */
 
   const loader = new ConfigurationLoader(logger, defaultConfigUri, configFileOrFolder, {
     extensionManager: await extensionManager,
   });
-  const { config } = await loader.load([args], true);
-  if (config.version) {
+  try {
+    const { config } = await loader.load([args], true);
+    if (config.version) {
+      // eslint-disable-next-line no-console
+      console.log(
+        chalk.yellow(`NOTE: AutoRest core version selected from configuration: ${chalk.yellow.bold(config.version)}.`),
+      );
+    }
+    return config;
+  } catch (e) {
     // eslint-disable-next-line no-console
-    console.log(
-      chalk.yellow(`NOTE: AutoRest core version selected from configuration: ${chalk.yellow.bold(config.version)}.`),
-    );
+    console.log(chalk.yellow(`Warn: Error occured while loading configuration.`));
+    return undefined;
   }
-  return config;
 }
 
 /**
@@ -80,7 +91,7 @@ export async function resolvePathForLocalVersion(requestedVersion: string | null
   return undefined;
 }
 
-export async function resolveCoreVersion(config: AutorestConfiguration): Promise<string> {
+export async function resolveCoreVersion(config: AutorestNormalizedConfiguration = {}): Promise<string> {
   const requestedVersion: string = getRequestedCoreVersion(config) ?? "latest-installed";
 
   const localVersion = await resolvePathForLocalVersion(config.version ? requestedVersion : null);

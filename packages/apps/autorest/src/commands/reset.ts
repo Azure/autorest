@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { AutorestArgs } from "../args";
 import { extensionManager, rootFolder } from "../autorest-as-a-service";
-import { color } from "../coloring";
+import { color } from "@autorest/common";
 
 /**
  * Reset autorest, this will:

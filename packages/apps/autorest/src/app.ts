@@ -11,7 +11,6 @@ const cwd = process.cwd();
 
 import chalk from "chalk";
 import { newCorePackage, ensureAutorestHome, runCoreWithRequire, runCoreOutOfProc } from "./autorest-as-a-service";
-import { color } from "./coloring";
 import { parseAutorestArgs } from "./args";
 import { resetAutorest, showAvailableCoreVersions, showInstalledExtensions } from "./commands";
 import { clearTempData } from "./actions";
@@ -58,7 +57,7 @@ function logBanner() {
         )}]`,
       ),
     );
-    console.log(color("(C) 2018 **Microsoft Corporation.**"));
+    console.log(`(C) 2018 ${chalk.bold("Microsoft Corporation.")}`);
     console.log(chalk.blue.bold.underline("https://aka.ms/autorest"));
   }
 }
