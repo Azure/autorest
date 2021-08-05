@@ -87,9 +87,15 @@ export class Manipulator {
           }
         }
       }
-    } catch {
-      // TODO: Temporary comment. First I will make the modifiers for PowerShell work. It shouldn't fail with PowerShell modifiers.
-      // throw Error(`Directive given has something wrong. - ${JSON.stringify(trans['directive'], null, 2)} - It could be badly formatted or not being declared. Please check your configuration file. `);
+    } catch (e) {
+      this.context.trackError({
+        code: "directive/error",
+        message: `Error occured when running directive: ${e}`,
+        details: {
+          from: directive.from,
+          where: directive.where,
+        },
+      });
     }
 
     return data;

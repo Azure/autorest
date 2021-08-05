@@ -24,7 +24,7 @@ const defaultConfigUri = inWebpack
  * @returns npm version/tag.
  */
 export const getRequestedCoreVersion = (args: AutorestArgs): string | undefined => {
-  return args.version ?? args.latest ? "latest" : args.preview ? "preview" : undefined;
+  return args.version ?? (args.latest ? "latest" : args.preview ? "preview" : undefined);
 };
 
 const cwd = process.cwd();
@@ -93,6 +93,7 @@ export async function resolvePathForLocalVersion(requestedVersion: string | null
 
 export async function resolveCoreVersion(config: AutorestNormalizedConfiguration = {}): Promise<string> {
   const requestedVersion: string = getRequestedCoreVersion(config) ?? "latest-installed";
+  console.log("REsolve core version", config.version, requestedVersion);
 
   const localVersion = await resolvePathForLocalVersion(config.version ? requestedVersion : null);
   if (localVersion) {
