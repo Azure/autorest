@@ -7,9 +7,9 @@ import { Position, SourceMapGenerator, Mapping } from "source-map";
 import { DataHandle } from "../data-store";
 import { JsonPath } from "../json-path/json-path";
 import { indexToPosition } from "../parsing/text-utility";
-import { walkYamlAst, valueToAst, getYamlNodeByPath, YamlNode, Kind, YamlMapping } from "@azure-tools/yaml";
+import { getYamlNodeByPath, YamlNode, Kind, YamlMapping } from "@azure-tools/yaml";
 import { PathMapping } from "./path-source-map";
-import { JsonPointerTokens } from "@azure-tools/json";
+import { JsonPointerTokens, walk } from "@azure-tools/json";
 
 // information to attach to line/column based to get a richer experience
 export interface PositionEnhancements {
@@ -54,14 +54,13 @@ export function createAssignmentMapping(
     return result;
   }
 
-  walkYamlAst(valueToAst(assignedObject), ({ path }) => {
+  walk(assignedObject, (_, path) => {
     result.push({
       source: sourceKey,
       original: sourcePath.concat(path),
       generated: targetPath.concat(path),
     });
-
-    // if it's just the top node that is 1:1, break now.
+    return "visit-children";
   });
 
   return result;
