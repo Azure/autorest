@@ -93,7 +93,6 @@ export async function resolvePathForLocalVersion(requestedVersion: string | null
 
 export async function resolveCoreVersion(config: AutorestNormalizedConfiguration = {}): Promise<string> {
   const requestedVersion: string = getRequestedCoreVersion(config) ?? "latest-installed";
-  console.log("REsolve core version", config.version, requestedVersion);
 
   const localVersion = await resolvePathForLocalVersion(config.version ? requestedVersion : null);
   if (localVersion) {
