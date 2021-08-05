@@ -24,7 +24,7 @@ const defaultConfigUri = inWebpack
  * @returns npm version/tag.
  */
 export const getRequestedCoreVersion = (args: AutorestArgs): string | undefined => {
-  return args.version ?? args.latest ? "latest" : args.preview ? "preview" : undefined;
+  return args.version ?? (args.latest ? "latest" : args.preview ? "preview" : undefined);
 };
 
 const cwd = process.cwd();

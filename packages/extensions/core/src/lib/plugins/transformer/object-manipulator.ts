@@ -57,6 +57,9 @@ export async function manipulateObject(
   const { result: doc } = getYamlNodeValue<any>(ast);
   const hits = nodes(doc, whereJsonQuery).sort((a, b) => a.path.length - b.path.length);
   if (hits.length === 0) {
+    if (debug && config) {
+      config.debug(`Directive transform \`${whereJsonQuery}\` didn't match any path in the document`);
+    }
     return { anyHit: false, result: src };
   }
 
@@ -64,6 +67,7 @@ export async function manipulateObject(
   const mapping = identitySourceMapping(src.key, ast).filter(
     (m) => !hits.some((hit) => IsPrefix(hit.path, m.generated)),
   );
+
   for (const hit of hits) {
     if (ast === undefined) {
       throw new Error("Cannot remove root node.");
