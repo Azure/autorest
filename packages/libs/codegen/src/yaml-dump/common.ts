@@ -1,3 +1,8 @@
+/**
+ * This is a copy of https://github.com/nodeca/js-yaml/blob/master/lib/common.js LICENSED under MIT
+ * Used by yaml-dump.ts.
+ */
+
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 function isNothing(subject) {

@@ -1,3 +1,10 @@
+/**
+ * This is a copy of https://github.com/nodeca/js-yaml/blob/master/lib/dumper.js LICENSED under MIT
+ *
+ * It is modified to improve performance when finding duplicate refs.
+ * Instead of using an array with indexOf resulting in O(n2) it was changed to use es6 Set.
+ */
+
 /* eslint-disable prefer-const */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
