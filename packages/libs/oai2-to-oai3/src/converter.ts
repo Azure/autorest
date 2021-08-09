@@ -10,7 +10,7 @@ import {
   NoMapping,
   createMappingTree,
 } from "@azure-tools/datastore";
-import { JsonPointer, getFromJsonPointer } from "@azure-tools/json";
+import { JsonPointer, getFromJsonPointer, appendJsonPointer } from "@azure-tools/json";
 import { resolveOperationConsumes, resolveOperationProduces } from "./content-type-utils";
 import {
   OpenAPI2Document,
@@ -1161,20 +1161,16 @@ export class Oai2ToOai3 {
           content[mimetype]!.examples!.__set__("response", { value: example, sourcePointer });
         }
       }
-    }
 
-    // examples outside produces
-    for (const mimetype in responseValue.examples) {
-      if (responseTarget.content === undefined) {
-        responseTarget.__set__("content", this.newObject(sourcePointer));
-      }
-
-      if (responseTarget.content![mimetype] === undefined) {
-        this.logger.trackWarning({
-          code: "Oai2ToOai3/InvalidResponseExamples",
-          message: `Response examples has mime-type '${mimetype}' which is not define in the local or global produces. Example will be ignored.`,
-          source: [{ path: `${sourcePointer}/examples/${mimetype}`, document: this.originalFilename }],
-        });
+      // examples outside produces
+      for (const mimetype in responseValue.examples) {
+        if (responseTarget.content?.[mimetype] === undefined) {
+          this.logger.trackWarning({
+            code: "Oai2ToOai3/InvalidResponseExamples",
+            message: `Response examples has mime-type '${mimetype}' which is not define in the local or global produces. Example will be ignored.`,
+            source: [{ path: appendJsonPointer(sourcePointer, "examples", mimetype), document: this.originalFilename }],
+          });
+        }
       }
     }
 

@@ -41,6 +41,9 @@ const expectInputsMatchSnapshots = async (testName: string, filenames: string[])
 };
 
 describe("Scenario testings", () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
   it("Convert cross file schema references", async () => {
     // The expected result is for the body parameter to be copied over but not the schema.
     await expectInputsMatchSnapshots("cross-file-schema-refs", ["swagger.json", "other.json"]);
@@ -73,5 +76,29 @@ describe("Scenario testings", () => {
 
   it("request body - copying extensions", async () => {
     await expectInputsMatchSnapshots("request-body", ["swagger.json"]);
+  });
+
+  it("response examples - ignore invalid", async () => {
+    await expectInputsMatchSnapshots("responses-examples", ["swagger.json"]);
+    expect(logger.trackWarning).toHaveBeenCalledTimes(2);
+    expect(logger.trackWarning).toHaveBeenNthCalledWith(1, {
+      code: "Oai2ToOai3/InvalidResponseExamples",
+      message:
+        "Response examples has mime-type 'application/xml' which is not define in the local or global produces. Example will be ignored.",
+      source: [
+        {
+          document: "swagger.json",
+          path: "/paths/~1invalid-response-examples/get/responses/200/examples/application~1xml",
+        },
+      ],
+    });
+    expect(logger.trackWarning).toHaveBeenNthCalledWith(2, {
+      code: "Oai2ToOai3/InvalidResponseExamples",
+      message:
+        "Response examples has mime-type 'unknown' which is not define in the local or global produces. Example will be ignored.",
+      source: [
+        { document: "swagger.json", path: "/paths/~1invalid-response-examples/get/responses/200/examples/unknown" },
+      ],
+    });
   });
 });
