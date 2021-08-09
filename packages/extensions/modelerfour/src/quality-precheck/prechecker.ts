@@ -37,16 +37,11 @@ export async function processRequest(host: Host) {
 
     host.WriteFile(
       "prechecked-openapi-document.yaml",
-      serialize(result, { sortKeys: false }),
+      JSON.stringify(result, null, 2),
       undefined,
       "prechecked-openapi-document",
     );
-    host.WriteFile(
-      "original-openapi-document.yaml",
-      serialize(input, { sortKeys: false }),
-      undefined,
-      "openapi-document",
-    );
+    host.WriteFile("original-openapi-document.yaml", JSON.stringify(input, null, 2), undefined, "openapi-document");
   } catch (E) {
     if (debug) {
       // eslint-disable-next-line no-console
