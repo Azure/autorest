@@ -29,11 +29,45 @@ import oai3, { EncodingStyle, HttpOperation, JsonType, PathItem, SecurityType } 
 
 // NOTE: after testing references should be changed to OpenAPI 3.x.x references
 
+export interface SourceLocation {
+  document: string;
+  path: string;
+}
+
+export interface ConverterDiagnostic {
+  /**
+   * Reprensent the diagnostic code describing the type of issue.
+   * Diagnostic codes could be documented to help user understand how to resolve this type of issue
+   */
+  readonly code: string;
+
+  /**
+   * Message.
+   */
+  readonly message: string;
+
+  /**
+   * location where the problem was found.
+   */
+  readonly source?: SourceLocation[];
+
+  /**
+   * Additional details.
+   */
+  readonly details?: Error | unknown;
+}
+
+export interface ConverterLogger {
+  trackError(diag: ConverterDiagnostic): void;
+  trackWarning(diag: ConverterDiagnostic): void;
+}
+
 export class Oai2ToOai3 {
   public generated: MappingTreeObject<oai3.Model>;
   public mappings: PathMapping[] = [];
 
   constructor(
+    private logger: ConverterLogger,
     protected originalFilename: string,
     protected original: OpenAPI2Document,
     private resolveExternalReference?: ResolveReferenceFn,
@@ -1136,15 +1170,10 @@ export class Oai2ToOai3 {
       }
 
       if (responseTarget.content![mimetype] === undefined) {
-        responseTarget.content!.__set__(mimetype, this.newObject(sourcePointer));
-      }
-
-      if (responseTarget.content![mimetype].examples === undefined) {
-        responseTarget.content![mimetype].__set__("examples", this.newObject(sourcePointer));
-        responseTarget.content![mimetype].examples!.__set__("response", this.newObject(sourcePointer));
-        (responseTarget.content![mimetype].examples!.response! as any).__set__("value", {
-          value: responseValue.examples[mimetype],
-          sourcePointer,
+        this.logger.trackWarning({
+          code: "Oai2ToOai3/InvalidResponseExamples",
+          message: `Response examples has mime-type '${mimetype}' which is not define in the local or global produces. Example will be ignored.`,
+          source: [{ path: `${sourcePointer}/examples/${mimetype}`, document: this.originalFilename }],
         });
       }
     }

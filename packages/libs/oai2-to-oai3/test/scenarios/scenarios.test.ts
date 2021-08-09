@@ -1,10 +1,15 @@
 import fs from "fs";
 import { basename, join } from "path";
 import { serializeJsonPointer } from "../../../json/dist";
-import { convertOai2ToOai3, OaiToOai3FileInput } from "../../src";
+import { ConverterLogger, convertOai2ToOai3, OaiToOai3FileInput } from "../../src";
 
 const inputsFolder = `${__dirname}/inputs/`;
 const expectedFolder = `${__dirname}/expected/`;
+
+const logger: ConverterLogger = {
+  trackError: jest.fn(),
+  trackWarning: jest.fn(),
+};
 
 const getOAI3InputsFromTestFiles = async (
   testName: string,
@@ -23,7 +28,7 @@ const getOAI3InputsFromTestFiles = async (
 const expectInputsMatchSnapshots = async (testName: string, filenames: string[]) => {
   const map = await getOAI3InputsFromTestFiles(testName, filenames);
 
-  const results = await convertOai2ToOai3(map);
+  const results = await convertOai2ToOai3(logger, map);
   for (const result of results) {
     const jsonResult = JSON.stringify(result.result, null, 2);
     expect(jsonResult).toMatchRawFileSnapshot(join(expectedFolder, testName, result.name));
