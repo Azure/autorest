@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/modelerfour",
+      "comment": "**Fix** Dictionaries don't get xml serialization information passed into codemodel",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/modelerfour",
+  "email": "tiguerin@microsoft.com"
+}
