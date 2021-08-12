@@ -104,7 +104,7 @@ export async function manipulateObject(
         }
 
         config.trackWarning({
-          code: "Transform/CodeError",
+          code: "Transform/DirectiveCodeError",
           message: `${errorText}  '${error.message}'`,
           details: {
             error,
