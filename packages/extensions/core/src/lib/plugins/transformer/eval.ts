@@ -94,7 +94,7 @@ interface Lib {
  * @param transformCode Code to transform.
  * @returns the modified value.
  */
-export const evalDirectiveTransform = (transformCode: string, context: TransformOptions): unknown => {
+export function evalDirectiveTransform(transformCode: string, context: TransformOptions): unknown {
   const { config } = context;
 
   const evalContext: TransformEvalContext = {
@@ -113,7 +113,7 @@ export const evalDirectiveTransform = (transformCode: string, context: Transform
   };
 
   return safeEval<unknown>(`(() => { { ${transformCode} }; return $; })()`, evalContext);
-};
+}
 
 export const evalDirectiveTest = (testCode: string, options: TestOptions): unknown[] => {
   const context = {
