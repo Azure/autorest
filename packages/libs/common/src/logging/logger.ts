@@ -77,7 +77,7 @@ export class AutorestCoreLogger extends AutorestLoggerBase {
   // private suppressor: Suppressor;
 
   public constructor(options: AutorestLoggerOptions, private asyncLogManager: LoggingSession, dataStore: DataStore) {
-    super();
+    super(options.level);
     // this.suppressor = new Suppressor(config);
     this.logInfoEnhancer = new LogSourceEnhancer(dataStore);
     this.simpleLogger = new AutorestSimpleLogger(options);
