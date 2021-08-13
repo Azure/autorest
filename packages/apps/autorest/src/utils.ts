@@ -1,6 +1,6 @@
 import { AutorestArgs } from "./args";
 import { AutorestConfiguration, AutorestNormalizedConfiguration, ConfigurationLoader } from "@autorest/configuration";
-import { AutorestLogger } from "@autorest/configuration/node_modules/@autorest/common";
+import { AutorestNoopLogger, AutorestSimpleLogger } from "@autorest/common";
 import { createFileOrFolderUri, createFolderUri, resolveUri } from "@azure-tools/uri";
 import { AppRoot } from "./constants";
 import { extensionManager, networkEnabled, selectVersion } from "./autorest-as-a-service";
@@ -39,13 +39,7 @@ export async function loadConfig(args: AutorestArgs): Promise<AutorestConfigurat
 
   const enableLogging = args["debug-cli-config-loading"];
 
-  const logger: AutorestLogger = {
-    fatal: (x) => enableLogging && console.error(x),
-    info: (x) => enableLogging && console.log(x),
-    verbose: (x) => enableLogging && console.log(x),
-    trackError: (x) => enableLogging && console.error(x),
-    trackWarning: (x) => enableLogging && console.error(x),
-  };
+  const logger = enableLogging ? new AutorestSimpleLogger() : new AutorestNoopLogger();
   /* eslint-enable no-console */
 
   const loader = new ConfigurationLoader(logger, defaultConfigUri, configFileOrFolder, {

@@ -115,6 +115,15 @@ export class AutorestSimpleLogger extends AutorestLoggerBase {
   }
 }
 
+/**
+ * Logger that doesn't do anything.
+ */
+export class AutorestNoopLogger extends AutorestLoggerBase {
+  public logIgnoreLevel(log: LogInfo) {
+    // Nothing to do.
+  }
+}
+
 const LOG_LEVEL: Record<LogLevel, number> = {
   debug: 10,
   verbose: 20,
