@@ -7,7 +7,7 @@ const defaultConfigUri = `file:///${join(__dirname, "../resources/default-config
 
 async function testScenario(name: string) {
   const logger = new AutorestTestLogger();
-  const file = `file://${join(__dirname, "inputs", name, "main.md")}`;
+  const file = `file:///${join(__dirname, "inputs", name, "main.md")}`;
   const loader = new ConfigurationLoader(logger, defaultConfigUri, file);
   const config = await loader.load([], false);
 
