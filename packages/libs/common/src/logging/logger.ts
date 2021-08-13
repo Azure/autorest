@@ -1,5 +1,7 @@
 import { PathPosition, Position } from "@azure-tools/datastore";
 
+export type LogLevel = "debug" | "verbose" | "information" | "warning" | "error";
+
 /**
  * Represent a location in a document.
  */
