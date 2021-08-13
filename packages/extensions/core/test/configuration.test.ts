@@ -1,7 +1,7 @@
 import { AutorestConfiguration } from "@autorest/configuration";
 import { MemoryFileSystem } from "@azure-tools/datastore";
 import * as AutoRest from "../src/lib/autorest-core";
-import { createTestLogger } from "@autorest/test-utils";
+import { createMockLogger } from "@autorest/test-utils";
 
 describe("Configuration", () => {
   it("Test config", async () => {
@@ -49,7 +49,7 @@ csharp:
       ]),
     );
 
-    const autorest = new AutoRest.AutoRest(createTestLogger(), f, MemoryFileSystem.DefaultVirtualRootUri + "readme.md");
+    const autorest = new AutoRest.AutoRest(createMockLogger(), f, MemoryFileSystem.DefaultVirtualRootUri + "readme.md");
     const context = await autorest.view;
     const cfg = context.config;
 
@@ -133,7 +133,7 @@ value:
       ]),
     );
 
-    const autorest = new AutoRest.AutoRest(createTestLogger(), f, MemoryFileSystem.DefaultVirtualRootUri + "readme.md");
+    const autorest = new AutoRest.AutoRest(createMockLogger(), f, MemoryFileSystem.DefaultVirtualRootUri + "readme.md");
     autorest.AddConfiguration({ foo: true });
     let context = await autorest.view;
 

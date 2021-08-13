@@ -3,15 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import assert from "assert";
-import { AutoRest, Channel, Message } from "../src/exports";
+import { AutoRest } from "../src/exports";
 import { RealFileSystem } from "@azure-tools/datastore";
 import { join } from "path";
 import { AppRoot } from "../src/lib/constants";
 import oai3 from "@azure-tools/openapi";
-import { createTestLogger } from "@autorest/test-utils";
+import { AutorestTestLogger } from "@autorest/test-utils";
 
 const generate = async (additionalConfig: any): Promise<oai3.Model> => {
-  const autoRest = new AutoRest(createTestLogger(), new RealFileSystem());
+  const logger = new AutorestTestLogger();
+  const autoRest = new AutoRest(logger, new RealFileSystem());
   autoRest.AddConfiguration({
     "input-file": join(AppRoot, "test", "resources", "tiny.yaml"),
     "use-extension": { "@autorest/modelerfour": join(AppRoot, "../modelerfour") },
@@ -29,27 +30,11 @@ const generate = async (additionalConfig: any): Promise<oai3.Model> => {
     }
   });
 
-  const messages: Message[] = [];
-  const channels = new Set([
-    Channel.Information,
-    Channel.Warning,
-    Channel.Error,
-    Channel.Fatal,
-    Channel.Debug,
-    Channel.Verbose,
-  ]);
-
-  autoRest.Message.Subscribe((_, message) => {
-    if (channels.has(message.Channel)) {
-      messages.push(message);
-    }
-  });
-
   const success = await autoRest.Process().finish;
 
   if (!success) {
     // eslint-disable-next-line no-console
-    console.log("Messages", messages);
+    console.log("Messages", logger.logs.all);
     throw new Error("Autorest didn't complete with success.");
   }
 

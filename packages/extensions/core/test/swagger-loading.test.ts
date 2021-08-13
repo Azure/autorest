@@ -4,11 +4,11 @@ import { createFolderUri, resolveUri } from "@azure-tools/uri";
 import { AutoRest } from "../src/lib/autorest-core";
 import { LoadLiterateSwaggers } from "../src/lib/plugins/loaders";
 import { AppRoot } from "../src/lib/constants";
-import { createTestLogger } from "@autorest/test-utils";
+import { createMockLogger } from "@autorest/test-utils";
 
 describe("SwaggerLoading", () => {
   it("No input files provided", async () => {
-    const autoRest = new AutoRest(createTestLogger());
+    const autoRest = new AutoRest(createMockLogger());
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
@@ -25,7 +25,7 @@ describe("SwaggerLoading", () => {
   });
 
   it("All input files have a 2.0 version.", async () => {
-    const autoRest = new AutoRest(createTestLogger());
+    const autoRest = new AutoRest(createMockLogger());
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
@@ -46,7 +46,7 @@ describe("SwaggerLoading", () => {
   });
 
   it("All input files do not have a 2.0 version.", async () => {
-    const autoRest = new AutoRest(createTestLogger());
+    const autoRest = new AutoRest(createMockLogger());
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
@@ -66,7 +66,7 @@ describe("SwaggerLoading", () => {
   });
 
   it("Some input files have a 2.0 version and some input files do not have a 2.0 version.", async () => {
-    const autoRest = new AutoRest(createTestLogger());
+    const autoRest = new AutoRest(createMockLogger());
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 

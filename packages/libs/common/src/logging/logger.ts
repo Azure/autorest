@@ -5,15 +5,8 @@ import { DataStore } from "@azure-tools/datastore";
 import { LoggingSession } from "./logging-session";
 import { color } from "../utils";
 
-export interface AutorestLoggerOptions {
-  format?: "json" | "regular";
-  level?: LogLevel;
-}
-
 export abstract class AutorestLoggerBase implements AutorestLogger {
   public diagnostics: AutorestDiagnostic[] = [];
-
-  public constructor(private level: LogLevel = "information") {}
 
   public debug(message: string) {
     this.log({
@@ -61,39 +54,70 @@ export abstract class AutorestLoggerBase implements AutorestLogger {
     this.log(diag);
   }
 
-  public log(log: LogInfo): void {
-    if (!shouldLog(log, this.level)) {
-      return;
-    }
-    this.logIgnoreLevel(log);
-  }
+  public abstract log(log: LogInfo): void;
+}
 
-  public abstract logIgnoreLevel(log: LogInfo): void;
+export interface AutorestCoreLoggerOptions {
+  logger: AutorestLogger;
 }
 
 export class AutorestCoreLogger extends AutorestLoggerBase {
   private logInfoEnhancer: LogSourceEnhancer;
-  private simpleLogger: AutorestSimpleLogger;
+  private innerLogger: AutorestLogger;
   // private suppressor: Suppressor;
 
-  public constructor(options: AutorestLoggerOptions, private asyncLogManager: LoggingSession, dataStore: DataStore) {
-    super(options.level);
+  public constructor(
+    options: AutorestCoreLoggerOptions,
+    private asyncLogManager: LoggingSession,
+    dataStore: DataStore,
+  ) {
+    super();
     // this.suppressor = new Suppressor(config);
     this.logInfoEnhancer = new LogSourceEnhancer(dataStore);
-    this.simpleLogger = new AutorestSimpleLogger(options);
+    this.innerLogger = options.logger;
   }
 
-  public logIgnoreLevel(log: LogInfo) {
+  public log(log: LogInfo) {
     this.asyncLogManager.registerLog(() => this.logMessageAsync(log));
   }
 
   private async logMessageAsync(log: LogInfo) {
     const enhancedLog = await this.logInfoEnhancer.process(log);
     // eslint-disable-next-line no-console
-    this.simpleLogger.logIgnoreLevel(enhancedLog as any);
+    this.innerLogger.log(enhancedLog as any);
   }
 }
 
+export interface AutorestFilterLoggerOptions {
+  level: LogLevel;
+  logger: AutorestLogger;
+}
+
+/**
+ * Logger adding filtering functionality based on:
+ *  - level: only show log with level higher than the configuration.
+ */
+export class AutorestFilterLogger extends AutorestLoggerBase {
+  private level: LogLevel;
+  private innerLogger: AutorestLogger;
+
+  public constructor(options: AutorestFilterLoggerOptions) {
+    super();
+    this.level = options.level;
+    this.innerLogger = options.logger;
+  }
+
+  public log(log: LogInfo): void {
+    if (!shouldLog(log, this.level)) {
+      return;
+    }
+    this.innerLogger.log(log);
+  }
+}
+
+export interface AutorestSimpleLoggerOptions {
+  format?: "json" | "regular";
+}
 /**
  * Simple logger which takes log info as it is and logs it.
  * Doesn't resolve original source locations.
@@ -102,12 +126,12 @@ export class AutorestSimpleLogger extends AutorestLoggerBase {
   private formatter: LogFormatter;
   // private suppressor: Suppressor;
 
-  public constructor(options: AutorestLoggerOptions = {}) {
-    super(options.level);
+  public constructor(options: AutorestSimpleLoggerOptions = {}) {
+    super();
     this.formatter = createLogFormatter(options.format);
   }
 
-  public logIgnoreLevel(log: LogInfo) {
+  public log(log: LogInfo) {
     const line = this.formatter.log(log);
 
     // eslint-disable-next-line no-console
@@ -119,7 +143,7 @@ export class AutorestSimpleLogger extends AutorestLoggerBase {
  * Logger that doesn't do anything.
  */
 export class AutorestNoopLogger extends AutorestLoggerBase {
-  public logIgnoreLevel(log: LogInfo) {
+  public log(log: LogInfo) {
     // Nothing to do.
   }
 }

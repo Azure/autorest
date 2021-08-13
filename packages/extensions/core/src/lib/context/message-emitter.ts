@@ -9,6 +9,10 @@ export class MessageEmitter extends EventEmitter {
    */
   @EventEmitter.Event public GeneratedFile!: IEvent<MessageEmitter, Artifact>;
   /**
+   * Event: Signals when a File is asked to not be deleted on cleanup.
+   */
+  @EventEmitter.Event public ProtectFile!: IEvent<MessageEmitter, string>;
+  /**
    * Event: Signals when a Folder is supposed to be cleared
    */
   @EventEmitter.Event public ClearFolder!: IEvent<MessageEmitter, string>;

@@ -12,16 +12,13 @@ import { MessageEmitter } from "./message-emitter";
 import { IEvent } from "../events";
 import { AutorestConfiguration, arrayOf, extendAutorestConfiguration } from "@autorest/configuration";
 import {
-  AutorestCoreLogger,
   AutorestError,
+  AutorestFilterLogger,
   AutorestLogger,
-  AutorestLoggerOptions,
   AutorestWarning,
-  LoggingSession,
   LogInfo,
   LogLevel,
 } from "@autorest/common";
-import { Message } from "../message";
 import { VERSION } from "../constants";
 import { StatsCollector } from "../stats";
 import { PipelinePluginDefinition } from "../pipeline/plugin-loader";
@@ -30,22 +27,24 @@ import { cloneDeep } from "lodash";
 export class AutorestContext implements AutorestLogger {
   public config: AutorestConfiguration;
   public configFileFolderUri: string;
-  private logger: AutorestCoreLogger;
+  private logger: AutorestFilterLogger;
 
   public constructor(
     config: AutorestConfiguration,
     public fileSystem: CachingFileSystem,
     public messageEmitter: MessageEmitter,
+    logger: AutorestLogger,
     public stats: StatsCollector,
-    public asyncLogManager: LoggingSession,
     private plugin?: PipelinePluginDefinition,
   ) {
     this.config = config;
-    const loggerOptions: AutorestLoggerOptions = {
-      format: config["message-format"],
-      level: getLogLevel(config),
-    };
-    this.logger = new AutorestCoreLogger(loggerOptions, asyncLogManager, messageEmitter.DataStore);
+    this.logger =
+      logger instanceof AutorestFilterLogger
+        ? logger
+        : new AutorestFilterLogger({
+            level: getLogLevel(config),
+            logger,
+          });
     this.configFileFolderUri = config.configFileFolderUri;
   }
 
@@ -213,14 +212,7 @@ export class AutorestContext implements AutorestLogger {
    */
   public *getNestedConfiguration(scope: string, plugin?: PipelinePluginDefinition): Iterable<AutorestContext> {
     for (const nestedConfig of getNestedConfiguration(this.config, scope)) {
-      yield new AutorestContext(
-        nestedConfig,
-        this.fileSystem,
-        this.messageEmitter,
-        this.stats,
-        this.asyncLogManager,
-        plugin,
-      );
+      yield new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter, this.logger, this.stats, plugin);
     }
   }
 
@@ -234,13 +226,17 @@ export class AutorestContext implements AutorestLogger {
       nestedConfig,
       this.fileSystem,
       this.messageEmitter,
+      this.logger,
       this.stats,
-      this.asyncLogManager,
       this.plugin,
     );
   }
+
+  public protectFiles(filename: string) {
+    this.messageEmitter.ProtectFile.Dispatch(filename);
+  }
 }
 
-function getLogLevel(config: AutorestNormalizedConfiguration): LogLevel {
+export function getLogLevel(config: AutorestNormalizedConfiguration): LogLevel {
   return config.debug ? "debug" : config.verbose ? "verbose" : config.level ?? "information";
 }

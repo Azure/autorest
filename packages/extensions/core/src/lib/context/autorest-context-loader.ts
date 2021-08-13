@@ -15,9 +15,9 @@ import {
   mergeConfigurations,
   ResolvedExtension,
 } from "@autorest/configuration";
-import { AutorestContext } from "./autorest-context";
+import { AutorestContext, getLogLevel } from "./autorest-context";
 import { MessageEmitter } from "./message-emitter";
-import { AutorestCoreLogger, AutorestLogger, AutorestLoggingSession } from "@autorest/common";
+import { AutorestFilterLogger, AutorestLogger, AutorestLoggingSession } from "@autorest/common";
 import { createFileOrFolderUri, createFolderUri, resolveUri } from "@azure-tools/uri";
 import { AppRoot } from "../constants";
 import { homedir } from "os";
@@ -51,6 +51,7 @@ export class AutorestContextLoader {
    */
   public constructor(
     fileSystem: IFileSystem = new RealFileSystem(),
+    private logger: AutorestLogger,
     private stats: StatsCollector,
     private configFileOrFolderUri?: string,
   ) {
@@ -99,11 +100,10 @@ export class AutorestContextLoader {
     includeDefault: boolean,
     ...configs: AutorestRawConfiguration[]
   ): Promise<AutorestContext> {
-    const logger: AutorestLogger = new AutorestCoreLogger(
-      mergeConfigurations(configs) as any,
-      AutorestLoggingSession,
-      messageEmitter.DataStore,
-    );
+    const logger: AutorestLogger = new AutorestFilterLogger({
+      logger: this.logger,
+      level: getLogLevel(mergeConfigurations(configs) as any),
+    });
 
     const loader = new ConfigurationLoader(logger, defaultConfigUri, this.configFileOrFolderUri, {
       extensionManager: await AutorestContextLoader.extensionManager,
@@ -112,7 +112,7 @@ export class AutorestContextLoader {
     });
     const { config, extensions } = await loader.load(configs, includeDefault);
     this.setupExtensions(config, extensions);
-    return new AutorestContext(config, this.fileSystem, messageEmitter, this.stats, AutorestLoggingSession);
+    return new AutorestContext(config, this.fileSystem, messageEmitter, this.logger, this.stats);
   }
 
   private setupExtensions(config: AutorestConfiguration, extensions: ResolvedExtension[]) {

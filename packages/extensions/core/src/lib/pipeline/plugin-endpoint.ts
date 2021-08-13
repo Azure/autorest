@@ -5,7 +5,7 @@
 
 import { DataHandle, DataSink, DataSource, LazyPromise, Mapping, PathPosition } from "@azure-tools/datastore";
 import { ensureIsFolderUri } from "@azure-tools/uri";
-import { ChildProcess, fork } from "child_process";
+import { ChildProcess } from "child_process";
 import { RawSourceMap } from "source-map";
 import { Readable, Writable } from "stream";
 import { CancellationToken, createMessageConnection } from "vscode-jsonrpc";
@@ -227,7 +227,6 @@ export class AutoRestExtension extends EventEmitter {
       sink,
       onFile,
       onMessage,
-      cancellationToken,
     );
 
     // dispatch
@@ -250,7 +249,6 @@ export class AutoRestExtension extends EventEmitter {
     sink: DataSink,
     onFile: (data: DataHandle) => void,
     onMessage: (message: Message) => void,
-    cancellationToken: CancellationToken,
   ): IAutoRestPluginInitiatorEndpoint {
     const inputFileHandles = new LazyPromise(async () => {
       const names = await inputScope.Enum();

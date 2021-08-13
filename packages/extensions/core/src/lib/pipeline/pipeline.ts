@@ -17,9 +17,7 @@ import {
   mergePipeStates,
 } from "@azure-tools/datastore";
 import { AutorestContext } from "../context";
-import { Channel } from "../message";
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
-
 import { createArtifactEmitterPlugin } from "../plugins/emitter";
 import { createHash } from "crypto";
 import { isCached, readCache, writeCache } from "./pipeline-cache";

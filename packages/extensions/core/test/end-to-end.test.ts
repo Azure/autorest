@@ -2,15 +2,15 @@ import assert from "assert";
 
 import { AutoRest } from "../src/lib/autorest-core";
 import { RealFileSystem } from "@azure-tools/datastore";
-import { createTestLogger } from "@autorest/test-utils";
-import { Channel, Message } from "../src/lib/message";
+import { AutorestTestLogger, createMockLogger } from "@autorest/test-utils";
 import { createFolderUri, resolveUri } from "@azure-tools/uri";
 import { AppRoot } from "../src/lib/constants";
 import { AutorestConfiguration } from "@autorest/configuration";
 
 describe("EndToEnd", () => {
   it("network full game", async () => {
-    const autoRest = new AutoRest(createTestLogger(), new RealFileSystem());
+    const logger = new AutorestTestLogger();
+    const autoRest = new AutoRest(logger, new RealFileSystem());
     // PumpMessagesToConsole(autoRest);
     autoRest.AddConfiguration({
       "input-file": [
@@ -39,29 +39,13 @@ describe("EndToEnd", () => {
       },
     });
 
-    const messages: Message[] = [];
-    const channels = new Set([
-      Channel.Information,
-      Channel.Warning,
-      Channel.Error,
-      Channel.Fatal,
-      Channel.Debug,
-      Channel.Verbose,
-    ]);
-
-    autoRest.Message.Subscribe((_, message) => {
-      if (channels.has(message.Channel)) {
-        messages.push(message);
-      }
-    });
-
     // TODO: generate for all, probe results
 
     const success = await autoRest.Process().finish;
 
     if (!success) {
       // eslint-disable-next-line no-console
-      console.log("Messages", messages);
+      console.log("Messages", logger.logs.all);
       throw new Error("Autorest didn't complete with success.");
     }
 
@@ -70,7 +54,7 @@ describe("EndToEnd", () => {
 
   it("other configuration scenario", async () => {
     const autoRest = new AutoRest(
-      createTestLogger(),
+      createMockLogger(),
       new RealFileSystem(),
       resolveUri(createFolderUri(AppRoot), "test/resources/literate-example/readme-complicated.md"),
     );

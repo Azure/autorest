@@ -43,6 +43,9 @@ export function createExternalPlugin(host: AutoRestExtension, pluginName: string
               shouldSkip = message.Details.skip;
             }
             break;
+          case Channel.Protect:
+            context.protectFiles(message.Details);
+            break;
           default:
           // Other channels are handled by the pipeline.
         }

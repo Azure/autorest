@@ -5,7 +5,14 @@
 
 import { AutorestContextLoader, AutorestContext, MessageEmitter } from "./context";
 import { EventEmitter, IEvent } from "./events";
-import { AutorestLogger, AutorestLoggingSession, AutorestSimpleLogger, Exception } from "@autorest/common";
+import {
+  AutorestCoreLogger,
+  AutorestLogger,
+  AutorestLoggingSession,
+  AutorestSimpleLogger,
+  Exception,
+  LogInfo,
+} from "@autorest/common";
 import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import { runPipeline } from "./pipeline/pipeline";
 export { AutorestContext } from "./context";
@@ -45,13 +52,13 @@ export class AutoRest extends EventEmitter {
    */
   @EventEmitter.Event public GeneratedFile!: IEvent<AutoRest, Artifact>;
   /**
+   * Event: Signals when a File is asked not to be deleted when cleaning.
+   */
+  @EventEmitter.Event public ProtectFile!: IEvent<AutoRest, string>;
+  /**
    * Event: Signals when a Folder is supposed to be cleared
    */
   @EventEmitter.Event public ClearFolder!: IEvent<AutoRest, string>;
-  /**
-   * Event: Signals when a message is generated
-   */
-  @EventEmitter.Event public Message!: IEvent<AutoRest, Message>;
 
   private _configurations = new Array<any>();
   private _view: AutorestContext | undefined;
@@ -65,7 +72,7 @@ export class AutoRest extends EventEmitter {
    * @param configFileOrFolderUri The URI of the configuration file or folder containing the configuration file. Is null if no configuration file should be looked for.
    */
   public constructor(
-    logger: AutorestLogger,
+    private logger: AutorestLogger,
     private fileSystem: IFileSystem = new RealFileSystem(),
     public configFileOrFolderUri?: string,
   ) {
@@ -80,14 +87,23 @@ export class AutoRest extends EventEmitter {
 
     // subscribe to the events for the current configuration view
     messageEmitter.GeneratedFile.Subscribe((cfg, file) => this.GeneratedFile.Dispatch(file));
+    messageEmitter.ProtectFile.Subscribe((cfg, folder) => this.ProtectFile.Dispatch(folder));
     messageEmitter.ClearFolder.Subscribe((cfg, folder) => this.ClearFolder.Dispatch(folder));
 
+    const logger = new AutorestCoreLogger(
+      {
+        logger: this.logger,
+      },
+      AutorestLoggingSession,
+      messageEmitter.DataStore,
+    );
     const stats = new StatsCollector();
-    return (this._view = await new AutorestContextLoader(this.fileSystem, stats, this.configFileOrFolderUri).createView(
-      messageEmitter,
-      includeDefault,
-      ...this._configurations,
-    ));
+    return (this._view = await new AutorestContextLoader(
+      this.fileSystem,
+      logger,
+      stats,
+      this.configFileOrFolderUri,
+    ).createView(messageEmitter, includeDefault, ...this._configurations));
   }
 
   public Invalidate() {
@@ -162,25 +178,21 @@ export class AutoRest extends EventEmitter {
         view.messageEmitter.removeAllListeners();
         return true;
       } catch (e) {
-        const message = view?.config.debug
+        const message: LogInfo = view?.config.debug
           ? {
-              Channel: Channel.Debug,
-              Text: `Process() cancelled due to exception : ${e.message ? e.message : e} / ${e.stack ? e.stack : ""}`,
+              level: "fatal",
+              message: `Process() cancelled due to exception : ${e.message ? e.message : e} / ${
+                e.stack ? e.stack : ""
+              }`,
             }
           : {
-              Channel: Channel.Debug,
-              Text: "Process() cancelled due to failure ",
+              level: "fatal",
+              message: "Process() cancelled due to failure ",
             };
-        if (e instanceof Exception) {
-          // idea: don't throw exceptions, just visibly log them and return false
-          message.Channel = Channel.Fatal;
-          // eslint-disable-next-line no-ex-assign
-          e = false;
-        }
-        this.Message.Dispatch(message);
+        this.logger.log(message);
         // Wait for all logs to have been sent before shutting down.
         await AutorestLoggingSession.waitForMessages();
-        this.Finished.Dispatch(e);
+        this.Finished.Dispatch(false);
         if (view) {
           view.messageEmitter.removeAllListeners();
         }
