@@ -1,6 +1,6 @@
 import { serializeJsonPointer } from "@azure-tools/json";
 import { EnhancedPosition } from "@azure-tools/datastore";
-import { EnhancedLogInfo, EnhancedSourceLocation } from "./logger";
+import { EnhancedLogInfo, EnhancedSourceLocation } from "./types";
 
 export interface LogFormatter {
   log(log: EnhancedLogInfo): string;

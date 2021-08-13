@@ -1,4 +1,4 @@
-import { LogInfo, EnhancedLogInfo, SourceLocation, EnhancedSourceLocation } from "./logger";
+import { LogInfo, EnhancedLogInfo, SourceLocation, EnhancedSourceLocation } from "./types";
 import { BlameTree, DataStore } from "@azure-tools/datastore";
 
 export class LogSourceEnhancer {

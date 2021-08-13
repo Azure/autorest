@@ -1,104 +1,121 @@
-import { EnhancedPosition, PathPosition, Position } from "@azure-tools/datastore";
+import { createLogFormatter, LogFormatter } from "./formatter";
+import { LogSourceEnhancer } from "./log-source-enhancer";
+import { AutorestError, AutorestLogger, AutorestWarning, LogInfo, LogLevel } from "./types";
+import { DataStore } from "@azure-tools/datastore";
+import { LoggingSession } from "./logging-session";
 
-export type LogLevel = "debug" | "verbose" | "information" | "warning" | "error";
+export interface AutorestLoggerOptions {
+  format?: "json" | "regular";
+  level?: LogLevel;
+}
+
+export abstract class AutorestLoggerBase implements AutorestLogger {
+  public constructor(private level: LogLevel = "information") {}
+
+  public debug(message: string) {
+    this.log({
+      level: "debug",
+      message,
+    });
+  }
+
+  public verbose(message: string) {
+    this.log({
+      level: "verbose",
+      message,
+    });
+  }
+
+  public info(message: string) {
+    this.log({
+      level: "information",
+      message,
+    });
+  }
+
+  public fatal(message: string) {
+    this.log({
+      level: "fatal",
+      message,
+    });
+  }
+
+  public trackWarning(warning: AutorestWarning) {
+    this.log({
+      level: "warning",
+      ...warning,
+    });
+  }
+
+  public trackError(error: AutorestError) {
+    this.log({
+      level: "error",
+      ...error,
+    });
+  }
+
+  public log(log: LogInfo): void {
+    if (!shouldLog(log, this.level)) {
+      return;
+    }
+    this.logIgnoreLevel(log);
+  }
+
+  public abstract logIgnoreLevel(log: LogInfo): void;
+}
+
+export class AutorestCoreLogger extends AutorestLoggerBase {
+  private logInfoEnhancer: LogSourceEnhancer;
+  private simpleLogger: AutorestSimpleLogger;
+  // private suppressor: Suppressor;
+
+  public constructor(options: AutorestLoggerOptions, private asyncLogManager: LoggingSession, dataStore: DataStore) {
+    super();
+    // this.suppressor = new Suppressor(config);
+    this.logInfoEnhancer = new LogSourceEnhancer(dataStore);
+    this.simpleLogger = new AutorestSimpleLogger(options);
+  }
+
+  public logIgnoreLevel(log: LogInfo) {
+    this.asyncLogManager.registerLog(() => this.logMessageAsync(log));
+  }
+
+  private async logMessageAsync(log: LogInfo) {
+    const enhancedLog = await this.logInfoEnhancer.process(log);
+    // eslint-disable-next-line no-console
+    this.simpleLogger.logIgnoreLevel(enhancedLog as any);
+  }
+}
 
 /**
- * Represent a location in a document.
+ * Simple logger which takes log info as it is and logs it.
+ * Doesn't resolve original source locations.
  */
-export interface SourceLocation {
-  readonly document: string;
-  readonly position: Position | PathPosition;
+export class AutorestSimpleLogger extends AutorestLoggerBase {
+  private formatter: LogFormatter;
+  // private suppressor: Suppressor;
+
+  public constructor(private options: AutorestLoggerOptions) {
+    super();
+    this.formatter = createLogFormatter(options.format);
+  }
+
+  public logIgnoreLevel(log: LogInfo) {
+    const line = this.formatter.log(log);
+    // eslint-disable-next-line no-console
+    console.log(line);
+  }
 }
 
-export interface LogInfo {
-  /**
-   * Log level
-   */
-  readonly level: LogLevel;
-
-  /**
-   * Message.
-   */
-  readonly message: string;
-
-  /**
-   * Reprensent the diagnostic code describing the type of issue.
-   * Diagnostic codes could be documented to help user understand how to resolve this type of issue
-   */
-  readonly code?: string;
-
-  /**
-   * location where the problem was found.
-   */
-  readonly source?: SourceLocation[];
-
-  /**
-   * Additional details.
-   */
-  readonly details?: Error | unknown;
-}
-
-export interface AutorestDiagnostic {
-  /**
-   * Reprensent the diagnostic code describing the type of issue.
-   * Diagnostic codes could be documented to help user understand how to resolve this type of issue
-   */
-  readonly code: string;
-
-  /**
-   * Message.
-   */
-  readonly message: string;
-
-  /**
-   * location where the problem was found.
-   */
-  readonly source?: SourceLocation[];
-
-  /**
-   * Additional details.
-   */
-  readonly details?: Error | unknown;
-}
-
-export interface AutorestError extends AutorestDiagnostic {}
-
-export interface AutorestWarning extends AutorestDiagnostic {}
-
-/**
- * AutorestLogger is an interface for the autorest logger that can be passed around in plugins.
- * This can be used to log information, debug logs or track errors and warnings.
- */
-export interface AutorestLogger {
-  /**
-   * TODO-TIM:
-   * Idea here is to have stage be able to report error and warning with a defined code + message.
-   * The pipeline runner would then be able to fail if any error or warnings were reported either at the end of the stage or at the very end of the run.
-   * Provide a way for the user to supress some warnings.
-   */
-
-  verbose(message: string): void;
-
-  info(message: string): void;
-
-  fatal(message: string): void;
-
-  /**
-   * Track an error that occurred.
-   */
-  trackError(error: AutorestError): void;
-
-  /**
-   * Track an warning that occurred.
-   */
-  trackWarning(error: AutorestWarning): void;
-}
-
-export type EnhancedLogInfo = Omit<LogInfo, "source"> & {
-  readonly source?: EnhancedSourceLocation[];
+const LOG_LEVEL: Record<LogLevel, number> = {
+  debug: 10,
+  verbose: 20,
+  information: 30,
+  warning: 40,
+  error: 50,
+  fatal: 60,
 };
 
-export interface EnhancedSourceLocation {
-  document: string;
-  position: EnhancedPosition;
+export function shouldLog(log: LogInfo, level: LogLevel) {
+  return LOG_LEVEL[log.level] >= LOG_LEVEL[level];
 }

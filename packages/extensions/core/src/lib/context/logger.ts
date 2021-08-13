@@ -86,11 +86,6 @@ export class AutorestCoreLogger {
         m.Source = this.resolveOriginalDocumentNames(sources);
       }
 
-      // set range (dummy)
-      if (m.Source && typeof m.Source.map === "function") {
-        m.Range = resolveRanges(m.Source);
-      }
-
       // filter
       const mx = this.suppressor.filter(m);
 
@@ -153,20 +148,4 @@ export class AutorestCoreLogger {
       this.messageEmitter.Message.Dispatch({ Channel: Channel.Error, Text: `${e}` });
     }
   }
-}
-
-function resolveRanges(sources: SourceLocation[]): Range[] {
-  return sources.map((source) => {
-    const positionStart = source.Position;
-    const positionEnd = <Position>{
-      line: source.Position.line,
-      column: source.Position.column + (source.Position.length || 3),
-    };
-
-    return {
-      document: source.document,
-      start: positionStart,
-      end: positionEnd,
-    };
-  });
 }
