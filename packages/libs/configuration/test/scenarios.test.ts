@@ -13,7 +13,7 @@ async function testScenario(name: string) {
     trackError: jest.fn((x) => errors.push(x)),
     trackWarning: jest.fn((x) => errors.push(x)),
   };
-  const file = `file://${join(__dirname, "inputs", name, "main.md")}`;
+  const file = `file:///${join(__dirname, "inputs", name, "main.md")}`;
   const loader = new ConfigurationLoader(logger, defaultConfigUri, file);
   const config = await loader.load([], false);
 
