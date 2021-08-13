@@ -75,9 +75,8 @@ Those are flags that affect autorest only
 
 Those flags are temporary and will be removed in the future. Those flags are here to have a smoother rollout of certain feature.
 
-| Flag                             | Description                                                                                                                 |
-| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `--mark-oai3-errors-as-warnings` | Mark OpenAPI3 validation(schema) error as warnings. (When removed OpenAPI3 validation errors will always fail the pipeline) |
+| Flag | Description |
+| ---- | ----------- |
 
 ## Python Flags
 

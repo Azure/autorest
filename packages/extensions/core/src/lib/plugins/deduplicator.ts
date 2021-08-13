@@ -17,16 +17,6 @@ async function deduplicate(context: AutorestContext, input: DataSource, sink: Da
   for (const each of inputs.filter((input) => input.artifactType !== "profile-filter-log")) {
     const model = <any>await each.readObject();
 
-    /*
-    Disabling for now -- not sure if we need to skip this in the simple case anyway.
-    if ([...values(model?.info?.['x-ms-metadata']?.apiVersions).distinct()].length < 2) {
-      config.Message({ Channel: Channel.Verbose, Text: `Skipping Deduplication on single-api-version file ${each.identity}` });
-      result.push(await sink.WriteObject('oai3.model-deduplicated.json', model, each.identity, 'openapi-document-deduplicated', []));
-      continue;
-    }
-    config.Message({ Channel: Channel.Verbose, Text: `Processing deduplication on file ${each.identity}` });
-    */
-
     // skip if it's already marked that it was done.
     if (model.info?.["x-ms-metadata"]?.deduplicated) {
       result.push(

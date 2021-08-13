@@ -18,6 +18,7 @@ import {
   AutorestLoggerOptions,
   AutorestWarning,
   LoggingSession,
+  LogInfo,
   LogLevel,
 } from "@autorest/common";
 import { Message } from "../message";
@@ -77,6 +78,14 @@ export class AutorestContext implements AutorestLogger {
 
   public trackWarning(error: AutorestWarning) {
     this.logger.trackWarning(error);
+  }
+
+  public log(log: LogInfo) {
+    this.logger.log(log);
+  }
+
+  public get diagnostics() {
+    return this.logger.diagnostics;
   }
 
   // TODO-TIM remove this and sort non log channels

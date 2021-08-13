@@ -295,7 +295,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     }
 
     if (inputScope.skip) {
-      context.Message({ Channel: Channel.Debug, Text: `${nodeName} - SKIPPING` });
+      context.debug(`${nodeName} - SKIPPING`);
       return inputScope;
     }
     try {
@@ -320,18 +320,18 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
         (await isCached(cacheKey))
       ) {
         // shortcut -- get the outputs directly from the cache.
-        context.Message({
-          Channel: times ? Channel.Information : Channel.Debug,
-          Text: `${nodeName} - CACHED inputs = ${(await inputScope.enum()).length} [0.0 s]`,
+        context.log({
+          level: times ? "information" : "debug",
+          message: `${nodeName} - CACHED inputs = ${(await inputScope.enum()).length} [0.0 s]`,
         });
 
         return await readCache(cacheKey, context.DataStore.getDataSink(node.outputArtifact));
       }
 
       const t1 = process.uptime() * 100;
-      context.Message({
-        Channel: times ? Channel.Information : Channel.Debug,
-        Text: `${nodeName} - START inputs = ${(await inputScope.enum()).length}`,
+      context.log({
+        level: times ? "information" : "debug",
+        message: `${nodeName} - START inputs = ${(await inputScope.enum()).length}`,
       });
 
       // creates the actual plugin.
@@ -339,9 +339,9 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
       const t2 = process.uptime() * 100;
 
       const memSuffix = context.config.debug ? `[${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)} MB]` : "";
-      context.Message({
-        Channel: times ? Channel.Information : Channel.Debug,
-        Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]${memSuffix}`,
+      context.log({
+        level: times ? "information" : "debug",
+        message: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]${memSuffix}`,
       });
 
       // if caching is enabled, let's cache this scopeResult.

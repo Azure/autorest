@@ -27,7 +27,7 @@ export async function crawlReferences(
     for (const fileUri of [...refProcessor.filesReferenced].filter((each) => !queued.has(each))) {
       queued.add(fileUri);
 
-      config.Message({ Channel: Channel.Verbose, Text: `Reading $ref'd file ${fileUri}` });
+      config.verbose(`Reading $ref'd file ${fileUri}`);
       const secondaryFile = await inputScope.readStrict(fileUri);
 
       // mark secondary files with a tag so that we don't process operations for them.

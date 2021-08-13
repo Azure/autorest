@@ -61,14 +61,6 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
 
   // Feature flags
   "deduplicate-inline-models": { type: "boolean" },
-
-  // Temporary flag to disable later.
-  "mark-oai3-errors-as-warnings": {
-    type: "boolean",
-    deprecated: true,
-    description:
-      "Mark OpenAPI3 validation(schema) error as warnings. (Will be removed and OpenAPI3 validation errors will always fail the pipeline)",
-  },
 } as const;
 
 export type AutorestRawConfiguration = RawConfiguration<typeof AUTOREST_CONFIGURATION_SCHEMA> & {

@@ -39,6 +39,7 @@ export interface LogInfo {
 }
 
 export interface AutorestDiagnostic {
+  level: Extract<LogLevel, "error" | "warning">;
   /**
    * Reprensent the diagnostic code describing the type of issue.
    * Diagnostic codes could be documented to help user understand how to resolve this type of issue
@@ -61,22 +62,15 @@ export interface AutorestDiagnostic {
   readonly details?: Error | unknown;
 }
 
-export interface AutorestError extends AutorestDiagnostic {}
+export interface AutorestError extends Omit<AutorestDiagnostic, "level"> {}
 
-export interface AutorestWarning extends AutorestDiagnostic {}
+export interface AutorestWarning extends Omit<AutorestDiagnostic, "level"> {}
 
 /**
  * AutorestLogger is an interface for the autorest logger that can be passed around in plugins.
  * This can be used to log information, debug logs or track errors and warnings.
  */
 export interface AutorestLogger {
-  /**
-   * TODO-TIM:
-   * Idea here is to have stage be able to report error and warning with a defined code + message.
-   * The pipeline runner would then be able to fail if any error or warnings were reported either at the end of the stage or at the very end of the run.
-   * Provide a way for the user to supress some warnings.
-   */
-
   verbose(message: string): void;
 
   info(message: string): void;
@@ -92,6 +86,10 @@ export interface AutorestLogger {
    * Track an warning that occurred.
    */
   trackWarning(error: AutorestWarning): void;
+
+  log(log: LogInfo): void;
+
+  diagnostics: AutorestDiagnostic[];
 }
 
 export type EnhancedLogInfo = Omit<LogInfo, "source"> & {

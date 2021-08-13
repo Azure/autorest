@@ -27,6 +27,7 @@ export function createExternalPlugin(host: AutoRestExtension, pluginName: string
             shouldSkip = message.Details.skip;
           }
         } else {
+          // TODO-Tim change this
           config.Message(message);
         }
       },

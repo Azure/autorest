@@ -1,6 +1,6 @@
 import { createLogFormatter, LogFormatter } from "./formatter";
 import { LogSourceEnhancer } from "./log-source-enhancer";
-import { AutorestError, AutorestLogger, AutorestWarning, LogInfo, LogLevel } from "./types";
+import { AutorestDiagnostic, AutorestError, AutorestLogger, AutorestWarning, LogInfo, LogLevel } from "./types";
 import { DataStore } from "@azure-tools/datastore";
 import { LoggingSession } from "./logging-session";
 import { color } from "../utils";
@@ -11,6 +11,8 @@ export interface AutorestLoggerOptions {
 }
 
 export abstract class AutorestLoggerBase implements AutorestLogger {
+  public diagnostics: AutorestDiagnostic[] = [];
+
   public constructor(private level: LogLevel = "information") {}
 
   public debug(message: string) {
@@ -42,17 +44,21 @@ export abstract class AutorestLoggerBase implements AutorestLogger {
   }
 
   public trackWarning(warning: AutorestWarning) {
-    this.log({
+    const diag = {
       level: "warning",
       ...warning,
-    });
+    } as const;
+    this.diagnostics.push(diag);
+    this.log(diag);
   }
 
   public trackError(error: AutorestError) {
-    this.log({
+    const diag = {
       level: "error",
       ...error,
-    });
+    } as const;
+    this.diagnostics.push(diag);
+    this.log(diag);
   }
 
   public log(log: LogInfo): void {

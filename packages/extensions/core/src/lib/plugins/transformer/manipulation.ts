@@ -10,6 +10,7 @@ import { Channel, Message, SourceLocation } from "../../message";
 import { manipulateObject } from "./object-manipulator";
 import { evalDirectiveTest, evalDirectiveTransform } from "./eval";
 import { ResolvedDirective, resolveDirectives } from "@autorest/configuration";
+import { scrypt } from "node:crypto";
 
 export class Manipulator {
   private transformations: ResolvedDirective[];
@@ -74,14 +75,12 @@ export class Manipulator {
             for (const testResult of testResults) {
               if (testResult === false || typeof testResult !== "boolean") {
                 const messageText = typeof testResult === "string" ? testResult : "Custom test failed";
-                const message = (<Message>testResult).Text
-                  ? <Message>testResult
-                  : <Message>{ Text: messageText, Channel: Channel.Warning, Details: testResult };
-                message.Source = message.Source || [<SourceLocation>{ Position: { path: hit.path } }];
-                for (const src of message.Source) {
-                  src.document = src.document || data.key;
-                }
-                this.context.Message(message);
+                this.context.trackWarning({
+                  code: "Directive/TestFailed",
+                  message: messageText,
+                  details: testResult,
+                  source: [{ position: { path: hit.path }, document: data.key }],
+                });
               }
             }
           }
