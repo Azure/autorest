@@ -88,20 +88,6 @@ export class AutorestContext implements AutorestLogger {
     return this.logger.diagnostics;
   }
 
-  // TODO-TIM remove this and sort non log channels
-  /**
-   * @deprecated Use coresponding log method instead
-   */
-  public Message(m: Message) {
-    void this.logger.log({
-      level: m.Channel.toString() as any,
-      message: m.Text,
-      code: m.Key ? [...m.Key].join("/") : undefined,
-      details: m.Details,
-      source: m.Source?.map((x) => ({ document: x.document, position: x.Position as any })),
-    });
-  }
-
   public resolveDirectives(predicate?: (each: ResolvedDirective) => boolean) {
     return resolveDirectives(this.config, predicate);
   }

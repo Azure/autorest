@@ -1,6 +1,5 @@
 import { Artifact } from "../artifact";
 import { EventEmitter, IEvent } from "../events";
-import { Message } from "../message";
 import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
 import { DataStore } from "@azure-tools/datastore";
 
@@ -13,10 +12,6 @@ export class MessageEmitter extends EventEmitter {
    * Event: Signals when a Folder is supposed to be cleared
    */
   @EventEmitter.Event public ClearFolder!: IEvent<MessageEmitter, string>;
-  /**
-   * Event: Signals when a message is generated
-   */
-  @EventEmitter.Event public Message!: IEvent<MessageEmitter, Message>;
   private cancellationTokenSource = new CancellationTokenSource();
 
   constructor() {
