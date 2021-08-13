@@ -51,6 +51,7 @@ export class AutorestCoreLogger {
   public trackWarning(error: AutorestWarning) {
     this.log({
       Channel: Channel.Warning,
+      Key: [error.code],
       Text: error.message,
       Source: error.source?.map((x) => ({ document: x.document, Position: x.position as any })),
       Details: error.details,
@@ -60,6 +61,7 @@ export class AutorestCoreLogger {
   public trackError(error: AutorestError) {
     this.log({
       Channel: Channel.Error,
+      Key: [error.code],
       Text: error.message,
       Source: error.source?.map((x) => ({ document: x.document, Position: x.position as any })),
       Details: error.details,
