@@ -5,7 +5,7 @@
 
 import { AutorestContextLoader, AutorestContext, MessageEmitter } from "./context";
 import { EventEmitter, IEvent } from "./events";
-import { AutorestLoggingSession, Exception } from "@autorest/common";
+import { AutorestLogger, AutorestLoggingSession, AutorestSimpleLogger, Exception } from "@autorest/common";
 import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import { runPipeline } from "./pipeline/pipeline";
 export { AutorestContext } from "./context";
@@ -64,7 +64,11 @@ export class AutoRest extends EventEmitter {
    * @param fileSystem The implementation of the filesystem to load and save files from the host application.
    * @param configFileOrFolderUri The URI of the configuration file or folder containing the configuration file. Is null if no configuration file should be looked for.
    */
-  public constructor(private fileSystem: IFileSystem = new RealFileSystem(), public configFileOrFolderUri?: string) {
+  public constructor(
+    private logger: AutorestLogger,
+    private fileSystem: IFileSystem = new RealFileSystem(),
+    public configFileOrFolderUri?: string,
+  ) {
     super();
     // ensure the environment variable for the home folder is set.
     process.env["autorest.home"] = process.env["AUTOREST_HOME"] || process.env["autorest.home"] || homedir();
@@ -77,7 +81,6 @@ export class AutoRest extends EventEmitter {
     // subscribe to the events for the current configuration view
     messageEmitter.GeneratedFile.Subscribe((cfg, file) => this.GeneratedFile.Dispatch(file));
     messageEmitter.ClearFolder.Subscribe((cfg, folder) => this.ClearFolder.Dispatch(folder));
-    messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
 
     const stats = new StatsCollector();
     return (this._view = await new AutorestContextLoader(this.fileSystem, stats, this.configFileOrFolderUri).createView(
@@ -199,7 +202,7 @@ export class AutoRest extends EventEmitter {
  */
 export async function LiterateToJson(content: string): Promise<string> {
   try {
-    const autorest = new AutoRest({
+    const autorest = new AutoRest(new AutorestSimpleLogger(), {
       list: () => Promise.resolve([]),
       read: (f: string) => Promise.resolve(f == "none:///empty-file.md" ? content || "# empty file" : "# empty file"),
       EnumerateFileUris: () => Promise.resolve([]),

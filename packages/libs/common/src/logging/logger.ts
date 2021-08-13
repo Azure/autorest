@@ -3,6 +3,7 @@ import { LogSourceEnhancer } from "./log-source-enhancer";
 import { AutorestError, AutorestLogger, AutorestWarning, LogInfo, LogLevel } from "./types";
 import { DataStore } from "@azure-tools/datastore";
 import { LoggingSession } from "./logging-session";
+import { color } from "../utils";
 
 export interface AutorestLoggerOptions {
   format?: "json" | "regular";
@@ -95,15 +96,16 @@ export class AutorestSimpleLogger extends AutorestLoggerBase {
   private formatter: LogFormatter;
   // private suppressor: Suppressor;
 
-  public constructor(private options: AutorestLoggerOptions) {
-    super();
+  public constructor(options: AutorestLoggerOptions = {}) {
+    super(options.level);
     this.formatter = createLogFormatter(options.format);
   }
 
   public logIgnoreLevel(log: LogInfo) {
     const line = this.formatter.log(log);
+
     // eslint-disable-next-line no-console
-    console.log(line);
+    console.log(color(line));
   }
 }
 
