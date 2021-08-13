@@ -119,9 +119,6 @@ export class AutorestCoreLogger {
             }
             mx.FormattedMessage = JSON.stringify(mx.Details || mx, null, 2);
             break;
-          case "yaml":
-            mx.FormattedMessage = Stringify([mx.Details || mx]).replace(/^---/, "");
-            break;
           default: {
             const t =
               mx.Channel === Channel.Debug || mx.Channel === Channel.Verbose

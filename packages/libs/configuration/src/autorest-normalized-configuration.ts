@@ -20,7 +20,7 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
   directive?: Array<Directive>;
   "declare-directive"?: { [name: string]: string };
   "output-artifact"?: Array<string>;
-  "message-format"?: "json" | "yaml" | "regular";
+  "message-format"?: "json" | "regular";
   use?: string[] | string;
   "use-extension"?: { [extensionName: string]: string };
   require?: Array<string>;

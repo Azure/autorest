@@ -6,7 +6,8 @@ export interface EnhancedSourceLocation {
   document: string;
   position: EnhancedPosition;
 }
-export interface LogInfo {
+
+export interface EnhancedLogInfo {
   readonly level: LogLevel;
   readonly message: string;
   readonly code?: string;
@@ -15,11 +16,15 @@ export interface LogInfo {
 }
 
 export interface LogFormatter {
-  log(log: LogInfo): string;
+  log(log: EnhancedLogInfo): string;
+}
+
+export function createLogFormatter(format: "json" | "regular" | undefined): LogFormatter {
+  return format === "json" ? new JsonLogFormatter() : new PrettyLogFormatter();
 }
 
 export class PrettyLogFormatter implements LogFormatter {
-  public log(log: LogInfo): string {
+  public log(log: EnhancedLogInfo): string {
     const t = log.level === "debug" || log.level === "verbose" ? ` [${getUpTime()} s]` : "";
     let text = `${log.level.toUpperCase()}${log.code ? ` (${log.code})` : ""}${t}: ${log.message}`;
     for (const source of log.source ?? []) {
@@ -55,7 +60,7 @@ export class PrettyLogFormatter implements LogFormatter {
 }
 
 export class JsonLogFormatter implements LogFormatter {
-  public log(log: LogInfo): string {
+  public log(log: EnhancedLogInfo): string {
     const data = log.level === "verbose" || log.level === "debug" ? { ...log, uptime: getUpTime() } : log;
     return JSON.stringify(data, null, 2);
   }
