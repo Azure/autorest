@@ -1,13 +1,14 @@
 import assert from "assert";
 import { AutoRest } from "../src/lib/autorest-core";
 import { RealFileSystem } from "@azure-tools/datastore";
+import { createTestLogger } from "@autorest/test-utils";
 import { loadOpenAPIFiles } from "../src/lib/plugins/loaders";
 import { createFolderUri, resolveUri } from "@azure-tools/uri";
 import { AppRoot } from "../src/lib/constants";
 
 describe("OpenAPI3Loading", () => {
   it("No input files provided", async () => {
-    const autoRest = new AutoRest();
+    const autoRest = new AutoRest(createTestLogger());
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
@@ -24,7 +25,7 @@ describe("OpenAPI3Loading", () => {
   });
 
   it("All input files have a 3.*.* version.", async () => {
-    const autoRest = new AutoRest();
+    const autoRest = new AutoRest(createTestLogger());
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
@@ -44,7 +45,7 @@ describe("OpenAPI3Loading", () => {
   });
 
   it("All input files do not have a 3.*.* version.", async () => {
-    const autoRest = new AutoRest();
+    const autoRest = new AutoRest(createTestLogger());
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
@@ -64,7 +65,7 @@ describe("OpenAPI3Loading", () => {
   });
 
   it("Some input files have a 3.*.* version and some input files do not have a 3.*.* version.", async () => {
-    const autoRest = new AutoRest();
+    const autoRest = new AutoRest(createTestLogger());
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 

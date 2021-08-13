@@ -65,7 +65,7 @@ export class AutoRest extends EventEmitter {
    * @param configFileOrFolderUri The URI of the configuration file or folder containing the configuration file. Is null if no configuration file should be looked for.
    */
   public constructor(
-    private logger: AutorestLogger,
+    logger: AutorestLogger,
     private fileSystem: IFileSystem = new RealFileSystem(),
     public configFileOrFolderUri?: string,
   ) {

@@ -8,9 +8,10 @@ import { RealFileSystem } from "@azure-tools/datastore";
 import { join } from "path";
 import { AppRoot } from "../src/lib/constants";
 import oai3 from "@azure-tools/openapi";
+import { createTestLogger } from "@autorest/test-utils";
 
 const generate = async (additionalConfig: any): Promise<oai3.Model> => {
-  const autoRest = new AutoRest(new RealFileSystem());
+  const autoRest = new AutoRest(createTestLogger(), new RealFileSystem());
   autoRest.AddConfiguration({
     "input-file": join(AppRoot, "test", "resources", "tiny.yaml"),
     "use-extension": { "@autorest/modelerfour": join(AppRoot, "../modelerfour") },

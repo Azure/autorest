@@ -2,6 +2,7 @@ import assert from "assert";
 
 import { AutoRest } from "../src/lib/autorest-core";
 import { RealFileSystem } from "@azure-tools/datastore";
+import { createTestLogger } from "@autorest/test-utils";
 import { Channel, Message } from "../src/lib/message";
 import { createFolderUri, resolveUri } from "@azure-tools/uri";
 import { AppRoot } from "../src/lib/constants";
@@ -9,7 +10,7 @@ import { AutorestConfiguration } from "@autorest/configuration";
 
 describe("EndToEnd", () => {
   it("network full game", async () => {
-    const autoRest = new AutoRest(new RealFileSystem());
+    const autoRest = new AutoRest(createTestLogger(), new RealFileSystem());
     // PumpMessagesToConsole(autoRest);
     autoRest.AddConfiguration({
       "input-file": [
@@ -69,6 +70,7 @@ describe("EndToEnd", () => {
 
   it("other configuration scenario", async () => {
     const autoRest = new AutoRest(
+      createTestLogger(),
       new RealFileSystem(),
       resolveUri(createFolderUri(AppRoot), "test/resources/literate-example/readme-complicated.md"),
     );

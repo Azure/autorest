@@ -7,15 +7,16 @@ import { RealFileSystem } from "@azure-tools/datastore";
 import { join } from "path";
 import { AutorestContextLoader } from "../../src/lib/context";
 import { createFileUri } from "@azure-tools/uri";
-import { AutorestRawConfiguration } from "../../../../libs/configuration/dist";
 import { inspect } from "util";
+import { createTestLogger } from "@autorest/test-utils";
+import { AutorestRawConfiguration } from "@autorest/configuration";
 
 function getResource(name: string) {
   return join(__dirname, "resources", name);
 }
 
 async function generate(config: AutorestRawConfiguration): Promise<{ errors: Message[] }> {
-  const autoRest = new AutoRest(new RealFileSystem());
+  const autoRest = new AutoRest(createTestLogger(), new RealFileSystem());
   autoRest.AddConfiguration({
     verbose: true,
     // debug: true,

@@ -1,4 +1,5 @@
 import { AutorestLogger } from "@autorest/common";
+import { createTestLogger } from "@autorest/test-utils";
 import { ConfigurationSchemaProcessor, ProcessingErrorCode } from "./processor";
 import { RawConfiguration } from "./types";
 
@@ -31,13 +32,7 @@ const TestSchema = {
 
 const processor = new ConfigurationSchemaProcessor(TestSchema);
 
-const logger: AutorestLogger = {
-  info: jest.fn(),
-  verbose: jest.fn(),
-  fatal: jest.fn(),
-  trackWarning: jest.fn(),
-  trackError: jest.fn(),
-};
+const logger: AutorestLogger = createTestLogger();
 
 function processConfig(config: RawConfiguration<typeof TestSchema>) {
   return processor.processConfiguration(config, { logger });
