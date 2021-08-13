@@ -1,18 +1,12 @@
 import { join } from "path";
+import { AutorestTestLogger } from "@autorest/test-utils";
 import { serialize } from "../../codegen/dist/yaml";
 import { ConfigurationLoader } from "../src";
 
 const defaultConfigUri = `file:///${join(__dirname, "../resources/default-configuration.md")}`;
 
 async function testScenario(name: string) {
-  const errors = [];
-  const logger = {
-    verbose: jest.fn(),
-    info: jest.fn(),
-    fatal: jest.fn((x) => errors.push(x)),
-    trackError: jest.fn((x) => errors.push(x)),
-    trackWarning: jest.fn((x) => errors.push(x)),
-  };
+  const logger = new AutorestTestLogger();
   const file = `file://${join(__dirname, "inputs", name, "main.md")}`;
   const loader = new ConfigurationLoader(logger, defaultConfigUri, file);
   const config = await loader.load([], false);

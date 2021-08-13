@@ -1,5 +1,5 @@
 import { AutorestLogger } from "@autorest/common";
-import { createTestLogger } from "@autorest/test-utils";
+import { createMockLogger } from "@autorest/test-utils";
 import { ConfigurationSchemaProcessor, ProcessingErrorCode } from "./processor";
 import { RawConfiguration } from "./types";
 
@@ -32,7 +32,7 @@ const TestSchema = {
 
 const processor = new ConfigurationSchemaProcessor(TestSchema);
 
-const logger: AutorestLogger = createTestLogger();
+const logger: AutorestLogger = createMockLogger();
 
 function processConfig(config: RawConfiguration<typeof TestSchema>) {
   return processor.processConfiguration(config, { logger });
