@@ -8,18 +8,17 @@ import { DataHandle } from "../data-store";
 import { JsonPath } from "../json-path/json-path";
 import { indexToPosition } from "../parsing/text-utility";
 import { getYamlNodeByPath, YamlNode, Kind, YamlMapping } from "@azure-tools/yaml";
-import { PathMapping } from "./path-source-map";
+import { PathMapping, PathPosition } from "./path-source-map";
 import { JsonPointerTokens, walk } from "@azure-tools/json";
 
 // information to attach to line/column based to get a richer experience
 export interface PositionEnhancements {
-  path?: JsonPath;
   length?: number;
   valueOffset?: number;
   valueLength?: number;
 }
 
-export type EnhancedPosition = Position & PositionEnhancements;
+export type EnhancedPosition = Partial<Position> & Partial<PathPosition> & PositionEnhancements;
 
 export async function addMappingsToSourceMap(mappings: Mapping[], target: SourceMapGenerator): Promise<void> {
   for (const mapping of mappings) {
@@ -69,7 +68,10 @@ export function createAssignmentMapping(
 /**
  * Resolves the text position of a JSON path in raw YAML.
  */
-export async function resolvePathPosition(yamlFile: DataHandle, jsonPath: JsonPath): Promise<Position> {
+export async function resolvePathPosition(
+  yamlFile: DataHandle,
+  jsonPath: JsonPath,
+): Promise<EnhancedPosition & Position> {
   const yamlAst = await yamlFile.readYamlAst();
   const node = getYamlNodeByPath(yamlAst, jsonPath);
   return createEnhancedPosition(yamlFile, jsonPath, node);
@@ -79,13 +81,13 @@ async function createEnhancedPosition(
   yamlFile: DataHandle,
   jsonPath: JsonPath,
   node: YamlNode,
-): Promise<EnhancedPosition> {
+): Promise<EnhancedPosition & Position> {
   const startIdx = jsonPath.length === 0 ? 0 : node.startPosition;
   const endIdx = node.endPosition;
   const startPos = await indexToPosition(yamlFile, startIdx);
   const endPos = await indexToPosition(yamlFile, endIdx);
 
-  const result: EnhancedPosition = { column: startPos.column, line: startPos.line };
+  const result: EnhancedPosition & Position = { column: startPos.column, line: startPos.line };
   result.path = jsonPath;
 
   // enhance

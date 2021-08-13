@@ -1,12 +1,10 @@
 import { Channel, Message, Range, SourceLocation } from "../message";
-import { BlameTree, stringify } from "@azure-tools/datastore";
-import { Stringify } from "@azure-tools/yaml";
+import { stringify } from "@azure-tools/datastore";
 import { AutorestError, AutorestWarning } from "@autorest/common";
 import { AutorestConfiguration } from "@autorest/configuration";
 import { Suppressor } from "../pipeline/suppression";
 import { MessageEmitter } from "./message-emitter";
 import { LoggingSession } from "./logging-session";
-import { flatMap } from "lodash";
 import { Position } from "source-map";
 
 export class AutorestCoreLogger {
@@ -154,77 +152,6 @@ export class AutorestCoreLogger {
     } catch (e) {
       this.messageEmitter.Message.Dispatch({ Channel: Channel.Error, Text: `${e}` });
     }
-  }
-
-  private async resolveOriginalSources(message: Message, source: SourceLocation[]) {
-    const blameSources = source.map(async (s) => {
-      let blameTree: BlameTree | null = null;
-
-      try {
-        const originalPath = JSON.stringify(s.Position.path);
-        let shouldComplain = false;
-        while (blameTree === null) {
-          try {
-            blameTree = await this.messageEmitter.DataStore.blame(s.document, s.Position);
-            if (shouldComplain) {
-              await this.log({
-                Channel: Channel.Verbose,
-                Text: `\nDEVELOPER-WARNING: Path '${originalPath}' was corrected to ${JSON.stringify(
-                  s.Position.path,
-                )} on MESSAGE '${JSON.stringify(message.Text)}'\n`,
-              });
-            }
-          } catch (e) {
-            if (!shouldComplain) {
-              shouldComplain = true;
-            }
-            const path = <Array<string>>s.Position.path;
-            if (path) {
-              if (path.length === 0) {
-                throw e;
-              }
-              // adjustment
-              // 1) skip leading `$`
-              if (path[0] === "$") {
-                path.shift();
-              } else {
-                path.pop();
-              }
-            } else {
-              throw e;
-            }
-          }
-        }
-      } catch (e) {
-        // this.log({
-        //   Channel: Channel.Debug,
-        //   Text: `Failed to blame ${JSON.stringify(s.Position)} in '${JSON.stringify(s.document)}' (${e})`,
-        //   Details: e,
-        // });
-        return [s];
-      }
-
-      return blameTree.getMappingLeafs().map((r) => ({
-        document: r.source,
-        Position: { line: r.line, column: r.column },
-      }));
-    });
-
-    return flatMap(await Promise.all(blameSources));
-  }
-
-  private resolveOriginalDocumentNames(sources: SourceLocation[]) {
-    return sources.map((source) => {
-      if (source.Position) {
-        try {
-          const document = this.messageEmitter.DataStore.readStrictSync(source.document).description;
-          return { ...source, document };
-        } catch {
-          // no worries
-        }
-      }
-      return source;
-    });
   }
 }
 

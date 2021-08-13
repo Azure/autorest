@@ -1,19 +1,6 @@
 import { serializeJsonPointer } from "@azure-tools/json";
-import { EnhancedPosition } from "../../../datastore/dist/source-map";
-import { LogLevel } from "./logger";
-
-export interface EnhancedSourceLocation {
-  document: string;
-  position: EnhancedPosition;
-}
-
-export interface EnhancedLogInfo {
-  readonly level: LogLevel;
-  readonly message: string;
-  readonly code?: string;
-  readonly source?: EnhancedSourceLocation[];
-  readonly details?: Error | unknown;
-}
+import { EnhancedPosition } from "@azure-tools/datastore";
+import { EnhancedLogInfo, EnhancedSourceLocation } from "./logger";
 
 export interface LogFormatter {
   log(log: EnhancedLogInfo): string;
