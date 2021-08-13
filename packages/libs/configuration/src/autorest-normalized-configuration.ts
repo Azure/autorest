@@ -1,4 +1,4 @@
-import { LogLevel } from "../../common/dist";
+import { LogLevel, LogSuppression } from "@autorest/common";
 import { Directive } from "./directive";
 
 /**
@@ -66,6 +66,11 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
    * Set log level
    */
   level?: LogLevel;
+
+  /**
+   * List of suppressions
+   */
+  suppressions?: LogSuppression[];
 
   time?: boolean;
   timestamp?: boolean;

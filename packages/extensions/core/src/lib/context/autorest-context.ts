@@ -18,6 +18,7 @@ import {
   AutorestWarning,
   LogInfo,
   LogLevel,
+  LogSuppression,
 } from "@autorest/common";
 import { VERSION } from "../constants";
 import { StatsCollector } from "../stats";
@@ -43,6 +44,7 @@ export class AutorestContext implements AutorestLogger {
         ? logger
         : new AutorestFilterLogger({
             level: getLogLevel(config),
+            suppressions: getLogSuppressions(config),
             logger,
           });
     this.configFileFolderUri = config.configFileFolderUri;
@@ -239,4 +241,16 @@ export class AutorestContext implements AutorestLogger {
 
 export function getLogLevel(config: AutorestNormalizedConfiguration): LogLevel {
   return config.debug ? "debug" : config.verbose ? "verbose" : config.level ?? "information";
+}
+
+export function getLogSuppressions(config: AutorestConfiguration): LogSuppression[] {
+  const legacySuppressions: LogSuppression[] = resolveDirectives(config, (x) => x.suppress.length > 0).map((x) => {
+    return {
+      code: x.suppress.join("/"),
+      from: x.from,
+      where: x.where,
+    };
+  });
+
+  return [...(config.suppressions ?? []), ...legacySuppressions];
 }

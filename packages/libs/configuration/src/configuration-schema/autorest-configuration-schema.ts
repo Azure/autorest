@@ -14,7 +14,7 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
       from: { type: "string", array: true },
       where: { type: "string", array: true },
       reason: { type: "string" },
-      suppress: { type: "string", array: true },
+      suppress: { type: "string", array: true, deprecated: true },
       set: { type: "string", array: true },
       transform: { type: "string", array: true },
       "text-transform": { type: "string", array: true },
@@ -48,6 +48,15 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
   verbose: { type: "boolean" },
   debug: { type: "boolean" },
   level: { type: "string", enum: ["debug", "verbose", "information", "warning", "error", "fatal"] },
+  suppressions: {
+    array: true,
+    type: {
+      code: { type: "string" },
+      from: { type: "string", array: true },
+      where: { type: "string", array: true },
+      reason: { type: "string" },
+    },
+  },
 
   title: { type: "string" },
   "github-auth-token": { type: "string" },
