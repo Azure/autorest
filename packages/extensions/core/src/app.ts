@@ -5,7 +5,7 @@
 /* eslint-disable no-console */
 import "source-map-support/register";
 import { omit } from "lodash";
-import { configureLibrariesLogger, color } from "@autorest/common";
+import { configureLibrariesLogger, color, AutorestSimpleLogger } from "@autorest/common";
 import { EventEmitter } from "events";
 import { AutorestCliArgs, parseAutorestCliArgs } from "@autorest/configuration";
 EventEmitter.defaultMaxListeners = 100;
@@ -33,24 +33,10 @@ import { AutoRest, IsOpenApiDocument, Shutdown } from "./lib/autorest-core";
 import { Exception } from "@autorest/common";
 import { Channel, Message } from "./lib/message";
 import { VERSION } from "./lib/constants";
-import { AutorestCoreLogger } from "./lib/context/logger";
 import { ArtifactWriter } from "./artifact-writer";
 
 let verbose = false;
 let debug = false;
-
-// TODO remove this when redesigning the logger integration. This is a hack to reuse the logic of the AutorestCoreLogger
-// https://github.com/Azure/autorest/issues/4024
-class RootLogger extends AutorestCoreLogger {
-  public constructor() {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    super({} as any, null!, null!);
-  }
-
-  public log(message: Message) {
-    outputMessage(message, () => {});
-  }
-}
 
 function outputMessage(m: Message, errorCounter: () => void) {
   switch (m.Channel) {
@@ -177,7 +163,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   // We need to check if verbose logging should be enabled before parsing the args.
   verbose = verbose || autorestArgs.indexOf("--verbose") !== -1;
 
-  const logger = new RootLogger();
+  const logger = new AutorestSimpleLogger({ level: debug ? "debug" : verbose ? "verbose" : "information" });
   const args = parseAutorestCliArgs([...autorestArgs, ...more], { logger });
 
   if (!args.options["message-format"] || args.options["message-format"] === "regular") {
@@ -406,7 +392,7 @@ async function batch(api: AutoRest, args: AutorestCliArgs): Promise<void> {
   const batchTaskConfigReference: any = {};
   api.AddConfiguration(batchTaskConfigReference);
   for (const batchTaskConfig of config.GetEntry(<any>"batch")) {
-    const isjson = args.options["message-format"] === "json" || args.options["message-format"] === "yaml";
+    const isjson = args.options["message-format"] === "json";
     if (!isjson) {
       outputMessage(
         {

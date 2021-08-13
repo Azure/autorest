@@ -1,3 +1,4 @@
+import { LogLevel } from "../../common/dist";
 import { Directive } from "./directive";
 
 /**
@@ -51,8 +52,21 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
   description?: any;
   run?: any;
 
+  /**
+   * Set log level to `debug`
+   */
   debug?: boolean;
+
+  /**
+   * Set log level to `verbose`
+   */
   verbose?: boolean;
+
+  /**
+   * Set log level
+   */
+  level?: LogLevel;
+
   time?: boolean;
   timestamp?: boolean;
   "fast-mode"?: boolean;

@@ -11,12 +11,18 @@ import {
 import { MessageEmitter } from "./message-emitter";
 import { IEvent } from "../events";
 import { AutorestConfiguration, arrayOf, extendAutorestConfiguration } from "@autorest/configuration";
-import { AutorestError, AutorestLogger, AutorestWarning } from "@autorest/common";
+import {
+  AutorestCoreLogger,
+  AutorestError,
+  AutorestLogger,
+  AutorestLoggerOptions,
+  AutorestWarning,
+  LoggingSession,
+  LogLevel,
+} from "@autorest/common";
 import { Message } from "../message";
-import { AutorestCoreLogger } from "./logger";
 import { VERSION } from "../constants";
 import { StatsCollector } from "../stats";
-import { LoggingSession } from "./logging-session";
 import { PipelinePluginDefinition } from "../pipeline/plugin-loader";
 import { cloneDeep } from "lodash";
 
@@ -34,7 +40,11 @@ export class AutorestContext implements AutorestLogger {
     private plugin?: PipelinePluginDefinition,
   ) {
     this.config = config;
-    this.logger = new AutorestCoreLogger(config, messageEmitter, asyncLogManager);
+    const loggerOptions: AutorestLoggerOptions = {
+      format: config["message-format"],
+      level: getLogLevel(config),
+    };
+    this.logger = new AutorestCoreLogger(loggerOptions, asyncLogManager, messageEmitter.DataStore);
     this.configFileFolderUri = config.configFileFolderUri;
   }
 
@@ -69,8 +79,18 @@ export class AutorestContext implements AutorestLogger {
     this.logger.trackWarning(error);
   }
 
+  // TODO-TIM remove this and sort non log channels
+  /**
+   * @deprecated Use coresponding log method instead
+   */
   public Message(m: Message) {
-    void this.logger.log(m);
+    void this.logger.log({
+      level: m.Channel.toString() as any,
+      message: m.Text,
+      code: m.Key ? [...m.Key].join("/") : undefined,
+      details: m.Details,
+      source: m.Source?.map((x) => ({ document: x.document, position: x.Position as any })),
+    });
   }
 
   public resolveDirectives(predicate?: (each: ResolvedDirective) => boolean) {
@@ -224,4 +244,8 @@ export class AutorestContext implements AutorestLogger {
       this.plugin,
     );
   }
+}
+
+function getLogLevel(config: AutorestNormalizedConfiguration): LogLevel {
+  return config.debug ? "debug" : config.verbose ? "verbose" : config.level ?? "information";
 }

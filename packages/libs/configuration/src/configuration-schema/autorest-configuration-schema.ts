@@ -1,3 +1,4 @@
+import { LogLevel } from "../../../common/dist";
 import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
 import { ConfigurationSchemaProcessor } from "./processor";
 import { RawConfiguration } from "./types";
@@ -43,7 +44,11 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
     description: "Change the end of line character for generated output.",
   },
 
-  "message-format": { type: "string", enum: ["json", "yaml", "regular"] },
+  "message-format": { type: "string", enum: ["json", "regular"] },
+  verbose: { type: "boolean" },
+  debug: { type: "boolean" },
+  level: { type: "string", enum: ["debug", "verbose", "information", "warning", "error", "fatal"] },
+
   title: { type: "string" },
   "github-auth-token": { type: "string" },
   "output-file": { type: "string" },
