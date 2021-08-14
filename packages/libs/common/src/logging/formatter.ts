@@ -24,12 +24,12 @@ export function createLogFormatter(format: "json" | "regular" | undefined, optio
 }
 
 const LEVEL_STR: Record<LogLevel, string> = {
-  debug: "debug  ",
-  verbose: "verbose",
-  information: "info   ",
-  warning: "warn   ",
-  error: "error  ",
-  fatal: "fatal  ",
+  debug: "debug".padEnd(7),
+  verbose: "verbose".padEnd(7),
+  information: "info".padEnd(7),
+  warning: "warning".padEnd(7),
+  error: "error".padEnd(7),
+  fatal: "fatal".padEnd(7),
 };
 
 const LEVEL_COLORED_STR: Record<LogLevel, string> = {
