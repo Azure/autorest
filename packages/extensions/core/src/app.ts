@@ -5,13 +5,7 @@
 /* eslint-disable no-console */
 import "source-map-support/register";
 import { omit } from "lodash";
-import {
-  configureLibrariesLogger,
-  color,
-  AutorestSimpleLogger,
-  AutorestLogger,
-  AutorestFilterLogger,
-} from "@autorest/common";
+import { configureLibrariesLogger, color, ConsoleLogger, AutorestLogger, FilterLogger } from "@autorest/common";
 import { EventEmitter } from "events";
 import { AutorestCliArgs, parseAutorestCliArgs } from "@autorest/configuration";
 EventEmitter.defaultMaxListeners = 100;
@@ -137,8 +131,8 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   // We need to check if verbose logging should be enabled before parsing the args.
   verbose = verbose || autorestArgs.indexOf("--verbose") !== -1;
 
-  const logger = new AutorestFilterLogger({
-    logger: new AutorestSimpleLogger(),
+  const logger = new FilterLogger({
+    logger: new ConsoleLogger(),
     level: debug ? "debug" : verbose ? "verbose" : "information",
   });
   const args = parseAutorestCliArgs([...autorestArgs, ...more], { logger });

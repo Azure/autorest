@@ -17,7 +17,7 @@ import {
 } from "@autorest/configuration";
 import { AutorestContext, getLogLevel } from "./autorest-context";
 import { MessageEmitter } from "./message-emitter";
-import { AutorestFilterLogger, AutorestLogger, AutorestLoggingSession } from "@autorest/common";
+import { FilterLogger, AutorestLogger, AutorestLoggingSession } from "@autorest/common";
 import { createFileOrFolderUri, createFolderUri, resolveUri } from "@azure-tools/uri";
 import { AppRoot } from "../constants";
 import { homedir } from "os";
@@ -100,7 +100,7 @@ export class AutorestContextLoader {
     includeDefault: boolean,
     ...configs: AutorestRawConfiguration[]
   ): Promise<AutorestContext> {
-    const logger: AutorestLogger = new AutorestFilterLogger({
+    const logger: AutorestLogger = new FilterLogger({
       logger: this.logger,
       level: getLogLevel(mergeConfigurations(configs) as any),
     });

@@ -10,7 +10,7 @@ export interface LogSuppression {
   where?: string[] | string;
 }
 
-export interface AutorestFilterLoggerOptions {
+export interface FilterLoggerOptions {
   level: LogLevel;
   suppressions?: LogSuppression[];
   logger: AutorestLogger;
@@ -21,12 +21,12 @@ export interface AutorestFilterLoggerOptions {
  *  - level: only show log with level higher than the configuration.
  *  - suppression: List of code that should not be logged.
  */
-export class AutorestFilterLogger extends AutorestLoggerBase {
+export class FilterLogger extends AutorestLoggerBase {
   private level: LogLevel;
   private innerLogger: AutorestLogger;
   private suppressions: LogSuppression[];
 
-  public constructor(options: AutorestFilterLoggerOptions) {
+  public constructor(options: FilterLoggerOptions) {
     super();
     this.level = options.level;
     this.innerLogger = options.logger;

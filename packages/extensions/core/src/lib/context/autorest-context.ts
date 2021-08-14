@@ -13,7 +13,7 @@ import { IEvent } from "../events";
 import { AutorestConfiguration, arrayOf, extendAutorestConfiguration } from "@autorest/configuration";
 import {
   AutorestError,
-  AutorestFilterLogger,
+  FilterLogger,
   AutorestLogger,
   AutorestWarning,
   LogInfo,
@@ -28,7 +28,7 @@ import { cloneDeep } from "lodash";
 export class AutorestContext implements AutorestLogger {
   public config: AutorestConfiguration;
   public configFileFolderUri: string;
-  private logger: AutorestFilterLogger;
+  private logger: FilterLogger;
 
   public constructor(
     config: AutorestConfiguration,
@@ -40,9 +40,9 @@ export class AutorestContext implements AutorestLogger {
   ) {
     this.config = config;
     this.logger =
-      logger instanceof AutorestFilterLogger
+      logger instanceof FilterLogger
         ? logger
-        : new AutorestFilterLogger({
+        : new FilterLogger({
             level: getLogLevel(config),
             suppressions: getLogSuppressions(config),
             logger,

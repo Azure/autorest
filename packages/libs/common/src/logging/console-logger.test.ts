@@ -1,16 +1,17 @@
-import { AutorestSimpleLogger } from ".";
+/* eslint-disable no-console */
+import { ConsoleLogger } from ".";
 
 global.console = { log: jest.fn() } as any;
 
-describe("SimpleLogger", () => {
-  let logger: AutorestSimpleLogger;
+describe("ConsoleLogger", () => {
+  let logger: ConsoleLogger;
   beforeEach(() => {
     jest.resetAllMocks();
   });
 
   describe("pretty format", () => {
     beforeEach(() => {
-      logger = new AutorestSimpleLogger({
+      logger = new ConsoleLogger({
         color: false,
         timestamp: false,
       });
@@ -61,7 +62,7 @@ describe("SimpleLogger", () => {
 
   describe("json format", () => {
     beforeEach(() => {
-      logger = new AutorestSimpleLogger({
+      logger = new ConsoleLogger({
         format: "json",
         timestamp: false,
       });

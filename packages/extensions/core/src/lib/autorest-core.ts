@@ -9,7 +9,7 @@ import {
   AutorestCoreLogger,
   AutorestLogger,
   AutorestLoggingSession,
-  AutorestSimpleLogger,
+  ConsoleLogger,
   Exception,
   LogInfo,
 } from "@autorest/common";
@@ -20,7 +20,6 @@ import { isConfigurationDocument } from "@autorest/configuration";
 import { homedir } from "os";
 import { Artifact } from "./artifact";
 import { DocumentType } from "./document-type";
-import { Channel, Message } from "./message";
 import { StatsCollector } from "./stats";
 
 function IsIterable(target: any) {
@@ -214,7 +213,7 @@ export class AutoRest extends EventEmitter {
  */
 export async function LiterateToJson(content: string): Promise<string> {
   try {
-    const autorest = new AutoRest(new AutorestSimpleLogger(), {
+    const autorest = new AutoRest(new ConsoleLogger(), {
       list: () => Promise.resolve([]),
       read: (f: string) => Promise.resolve(f == "none:///empty-file.md" ? content || "# empty file" : "# empty file"),
       EnumerateFileUris: () => Promise.resolve([]),

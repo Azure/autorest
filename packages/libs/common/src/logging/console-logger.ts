@@ -2,7 +2,7 @@ import { createLogFormatter, LogFormatter } from "./formatter";
 import { AutorestLoggerBase } from "./logger";
 import { LogInfo } from "./types";
 
-export interface AutorestSimpleLoggerOptions {
+export interface ConsoleLoggerOptions {
   format?: "json" | "regular";
   color?: boolean;
   timestamp?: boolean;
@@ -12,11 +12,10 @@ export interface AutorestSimpleLoggerOptions {
  * Simple logger which takes log info as it is and logs it.
  * Doesn't resolve original source locations.
  */
-export class AutorestSimpleLogger extends AutorestLoggerBase {
+export class ConsoleLogger extends AutorestLoggerBase {
   private formatter: LogFormatter;
-  // private suppressor: Suppressor;
 
-  public constructor(options: AutorestSimpleLoggerOptions = {}) {
+  public constructor(options: ConsoleLoggerOptions = {}) {
     super();
     this.formatter = createLogFormatter(options.format, options);
   }
