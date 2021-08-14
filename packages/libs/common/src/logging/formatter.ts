@@ -1,23 +1,41 @@
 import { serializeJsonPointer } from "@azure-tools/json";
 import { EnhancedPosition } from "@azure-tools/datastore";
 import { EnhancedLogInfo, EnhancedSourceLocation } from "./types";
+import { color } from "../utils";
 
 export interface LogFormatter {
   log(log: EnhancedLogInfo): string;
 }
 
-export function createLogFormatter(format: "json" | "regular" | undefined): LogFormatter {
-  return format === "json" ? new JsonLogFormatter() : new PrettyLogFormatter();
+export interface FormatterOptions {
+  color?: boolean;
+  timestamp?: boolean;
+}
+
+const defaultOptions = {
+  color: true,
+  timestamp: true,
+};
+
+export function createLogFormatter(format: "json" | "regular" | undefined, options = {}): LogFormatter {
+  return format === "json" ? new JsonLogFormatter(options) : new PrettyLogFormatter(options);
 }
 
 export class PrettyLogFormatter implements LogFormatter {
+  private options: { color: boolean; timestamp: boolean };
+
+  public constructor(options: FormatterOptions) {
+    this.options = { ...defaultOptions, ...options };
+  }
+
   public log(log: EnhancedLogInfo): string {
-    const t = log.level === "debug" || log.level === "verbose" ? ` [${getUpTime()} s]` : "";
+    const addTimestamp = this.options.timestamp && (log.level === "debug" || log.level === "verbose");
+    const t = addTimestamp ? ` [${getUpTime()} s]` : "";
     let text = `${log.level.toUpperCase()}${log.code ? ` (${log.code})` : ""}${t}: ${log.message}`;
     for (const source of log.source ?? []) {
       text += this.formatSource(source);
     }
-    return text;
+    return this.options.color ? color(text) : text;
   }
 
   private formatSource(source: EnhancedSourceLocation): string {
@@ -47,9 +65,15 @@ export class PrettyLogFormatter implements LogFormatter {
 }
 
 export class JsonLogFormatter implements LogFormatter {
+  private options: { timestamp: boolean };
+  public constructor(options: { timestamp?: boolean }) {
+    this.options = { timestamp: true, ...options };
+  }
   public log(log: EnhancedLogInfo): string {
-    const data = log.level === "verbose" || log.level === "debug" ? { ...log, uptime: getUpTime() } : log;
-    return JSON.stringify(data, null, 2);
+    const addTimestamp = this.options.timestamp && (log.level === "debug" || log.level === "verbose");
+
+    const data = addTimestamp ? { ...log, uptime: getUpTime() } : log;
+    return JSON.stringify(data);
   }
 }
 
