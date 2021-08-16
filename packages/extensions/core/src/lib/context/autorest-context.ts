@@ -19,16 +19,18 @@ import {
   LogInfo,
   LogLevel,
   LogSuppression,
+  IAutorestLogger,
 } from "@autorest/common";
 import { VERSION } from "../constants";
 import { StatsCollector } from "../stats";
 import { PipelinePluginDefinition } from "../pipeline/plugin-loader";
 import { cloneDeep } from "lodash";
 
-export class AutorestContext implements AutorestLogger {
+export class AutorestContext implements IAutorestLogger {
   public config: AutorestConfiguration;
   public configFileFolderUri: string;
-  private logger: FilterLogger;
+  private logger: AutorestLogger;
+  private originalLogger: AutorestLogger;
 
   public constructor(
     config: AutorestConfiguration,
@@ -39,14 +41,14 @@ export class AutorestContext implements AutorestLogger {
     private plugin?: PipelinePluginDefinition,
   ) {
     this.config = config;
-    this.logger =
-      logger instanceof FilterLogger
-        ? logger
-        : new FilterLogger({
-            level: getLogLevel(config),
-            suppressions: getLogSuppressions(config),
-            logger,
-          });
+    this.originalLogger = logger;
+    this.logger = logger.with(
+      new FilterLogger({
+        level: getLogLevel(config),
+        suppressions: getLogSuppressions(config),
+      }),
+    );
+
     this.configFileFolderUri = config.configFileFolderUri;
   }
 
@@ -214,7 +216,14 @@ export class AutorestContext implements AutorestLogger {
    */
   public *getNestedConfiguration(scope: string, plugin?: PipelinePluginDefinition): Iterable<AutorestContext> {
     for (const nestedConfig of getNestedConfiguration(this.config, scope)) {
-      yield new AutorestContext(nestedConfig, this.fileSystem, this.messageEmitter, this.logger, this.stats, plugin);
+      yield new AutorestContext(
+        nestedConfig,
+        this.fileSystem,
+        this.messageEmitter,
+        this.originalLogger,
+        this.stats,
+        plugin,
+      );
     }
   }
 
@@ -228,7 +237,7 @@ export class AutorestContext implements AutorestLogger {
       nestedConfig,
       this.fileSystem,
       this.messageEmitter,
-      this.logger,
+      this.originalLogger,
       this.stats,
       this.plugin,
     );

@@ -10,7 +10,7 @@ import { createFileUri } from "@azure-tools/uri";
 import { AutorestRawConfiguration } from "@autorest/configuration";
 import { LogInfo } from "@autorest/common";
 import { inspect } from "util";
-import { AutorestTestLogger } from "../../../../testing/test-utils/dist";
+import { AutorestTestLogger } from "@autorest/test-utils";
 
 function getResource(name: string) {
   return join(__dirname, "resources", name);

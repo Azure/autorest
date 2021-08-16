@@ -70,7 +70,9 @@ export interface AutorestWarning extends Omit<AutorestDiagnostic, "level"> {}
  * AutorestLogger is an interface for the autorest logger that can be passed around in plugins.
  * This can be used to log information, debug logs or track errors and warnings.
  */
-export interface AutorestLogger {
+export interface IAutorestLogger {
+  debug(message: string): void;
+
   verbose(message: string): void;
 
   info(message: string): void;
@@ -88,10 +90,35 @@ export interface AutorestLogger {
   trackWarning(error: AutorestWarning): void;
 
   log(log: LogInfo): void;
+}
+
+export interface AutorestLogger extends IAutorestLogger {
+  with(...processors: LoggerProcessor[]): AutorestLogger;
 
   diagnostics: AutorestDiagnostic[];
 }
 
+export interface LoggerProcessor {
+  /**
+   * Transform the provided log info.
+   * Returns undefined if the log should not be emitted.
+   * @param log Log entry to process.
+   */
+  process(log: LogInfo): LogInfo | undefined;
+}
+
+export interface LoggerAsyncProcessor {
+  /**
+   * Transform the provided log info.
+   * Returns undefined if the log should not be emitted.
+   * @param log Log entry to process.
+   */
+  process(log: LogInfo): Promise<LogInfo | undefined>;
+}
+
+export interface LoggerSink {
+  log(info: LogInfo): void;
+}
 export type EnhancedLogInfo = Omit<LogInfo, "source"> & {
   readonly source?: EnhancedSourceLocation[];
 };

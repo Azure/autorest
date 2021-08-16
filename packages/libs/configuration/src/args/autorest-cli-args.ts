@@ -1,4 +1,4 @@
-import { ConsoleLogger, FilterLogger, OperationAbortedException } from "@autorest/common";
+import { AutorestSyncLogger, ConsoleLoggerSink, FilterLogger, OperationAbortedException } from "@autorest/common";
 import { CreateObject } from "@azure-tools/datastore";
 import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
 import { mergeConfigurations } from "../configuration-merging";
@@ -13,13 +13,17 @@ export interface AutorestCliArgs {
 export function parseAutorestCliArgs(cliArgs: string[]): AutorestCliArgs {
   const parsedArgs = parseArgs(cliArgs);
 
-  const logger = new FilterLogger({
-    logger: new ConsoleLogger(),
-    level: parsedArgs.options.debug
-      ? "debug"
-      : parsedArgs.options.verbose
-      ? "verbose"
-      : parsedArgs.options.level ?? "information",
+  const logger = new AutorestSyncLogger({
+    processors: [
+      new FilterLogger({
+        level: parsedArgs.options.debug
+          ? "debug"
+          : parsedArgs.options.verbose
+          ? "verbose"
+          : parsedArgs.options.level ?? "information",
+      }),
+    ],
+    sinks: [new ConsoleLoggerSink()],
   });
 
   if (parsedArgs.positional.length > 1) {

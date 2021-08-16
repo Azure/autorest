@@ -6,12 +6,14 @@
 import { AutorestContextLoader, AutorestContext, MessageEmitter } from "./context";
 import { EventEmitter, IEvent } from "./events";
 import {
-  AutorestCoreLogger,
-  AutorestLogger,
   AutorestLoggingSession,
   ConsoleLogger,
   Exception,
   LogInfo,
+  LoggerSink,
+  AutorestLoggerSourceEnhancer,
+  AutorestAsyncLogger,
+  AutorestLogger,
 } from "@autorest/common";
 import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import { runPipeline } from "./pipeline/pipeline";
@@ -71,7 +73,7 @@ export class AutoRest extends EventEmitter {
    * @param configFileOrFolderUri The URI of the configuration file or folder containing the configuration file. Is null if no configuration file should be looked for.
    */
   public constructor(
-    private logger: AutorestLogger,
+    private loggerSink: LoggerSink,
     private fileSystem: IFileSystem = new RealFileSystem(),
     public configFileOrFolderUri?: string,
   ) {
@@ -89,13 +91,12 @@ export class AutoRest extends EventEmitter {
     messageEmitter.ProtectFile.Subscribe((cfg, folder) => this.ProtectFile.Dispatch(folder));
     messageEmitter.ClearFolder.Subscribe((cfg, folder) => this.ClearFolder.Dispatch(folder));
 
-    const logger = new AutorestCoreLogger(
-      {
-        logger: this.logger,
-      },
-      AutorestLoggingSession,
-      messageEmitter.DataStore,
-    );
+    const logger: AutorestLogger = new AutorestAsyncLogger({
+      asyncSession: AutorestLoggingSession,
+      sinks: [this.loggerSink],
+      processors: [new AutorestLoggerSourceEnhancer(messageEmitter.DataStore)],
+    });
+
     const stats = new StatsCollector();
     return (this._view = await new AutorestContextLoader(
       this.fileSystem,
@@ -188,7 +189,7 @@ export class AutoRest extends EventEmitter {
               level: "fatal",
               message: "Process() cancelled due to failure ",
             };
-        this.logger.log(message);
+        this.loggerSink.log(message);
         // Wait for all logs to have been sent before shutting down.
         await AutorestLoggingSession.waitForMessages();
         this.Finished.Dispatch(false);

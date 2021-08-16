@@ -1,7 +1,7 @@
 import { matches, PathPosition } from "@azure-tools/datastore";
 import { JsonPointerTokens } from "@azure-tools/json";
+import { LoggerProcessor } from ".";
 import { arrayify } from "../utils";
-import { AutorestLoggerBase } from "./logger";
 import { AutorestLogger, LogInfo, LogLevel } from "./types";
 
 export interface LogSuppression {
@@ -13,7 +13,6 @@ export interface LogSuppression {
 export interface FilterLoggerOptions {
   level: LogLevel;
   suppressions?: LogSuppression[];
-  logger: AutorestLogger;
 }
 
 /**
@@ -21,29 +20,23 @@ export interface FilterLoggerOptions {
  *  - level: only show log with level higher than the configuration.
  *  - suppression: List of code that should not be logged.
  */
-export class FilterLogger extends AutorestLoggerBase {
+export class FilterLogger implements LoggerProcessor {
   private level: LogLevel;
-  private innerLogger: AutorestLogger;
   private suppressions: LogSuppression[];
 
   public constructor(options: FilterLoggerOptions) {
-    super();
     this.level = options.level;
-    this.innerLogger = options.logger;
     this.suppressions = options.suppressions ?? [];
   }
 
-  public log(log: LogInfo): void {
+  public process(log: LogInfo): LogInfo | undefined {
     if (!shouldLogLevel(log, this.level)) {
       return;
     }
-    const filteredLog = this.filter(log);
-    if (filteredLog !== undefined) {
-      this.innerLogger.log(log);
-    }
+    return this.filterSuppressions(log);
   }
 
-  private filter(log: LogInfo): LogInfo | undefined {
+  private filterSuppressions(log: LogInfo): LogInfo | undefined {
     const hadSource = log.source && log.source.length > 0;
     let currentLog = log;
     // filter

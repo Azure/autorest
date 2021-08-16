@@ -1,38 +1,39 @@
-import { FilterLogger } from ".";
+import { AutorestSyncLogger, FilterLogger, FilterLoggerOptions } from ".";
 
 describe("FilterLogger", () => {
-  const innerLogger = {
-    info: jest.fn(),
-    verbose: jest.fn(),
-    fatal: jest.fn(),
-    trackWarning: jest.fn(),
-    trackError: jest.fn(),
+  const sink = {
     log: jest.fn(),
-    diagnostics: [],
   };
 
   beforeEach(() => {
     jest.resetAllMocks();
   });
 
+  function createFilterLogger(options: FilterLoggerOptions) {
+    return new AutorestSyncLogger({
+      sinks: [sink],
+      processors: [new FilterLogger(options)],
+    });
+  }
+
   it("does not log level below configured level", () => {
-    const logger = new FilterLogger({ level: "verbose", logger: innerLogger });
+    const logger = createFilterLogger({ level: "verbose" });
     logger.debug("This is some debug");
-    expect(innerLogger.log).not.toHaveBeenCalled();
+    expect(sink.log).not.toHaveBeenCalled();
   });
 
   it("log same level as configured level", () => {
-    const logger = new FilterLogger({ level: "verbose", logger: innerLogger });
+    const logger = createFilterLogger({ level: "verbose" });
 
     logger.verbose("This is some verbose");
-    expect(innerLogger.log).toHaveBeenCalledTimes(1);
-    expect(innerLogger.log).toHaveBeenCalledWith({ level: "verbose", message: "This is some verbose" });
+    expect(sink.log).toHaveBeenCalledTimes(1);
+    expect(sink.log).toHaveBeenCalledWith({ level: "verbose", message: "This is some verbose" });
   });
 
   it("log level above configured level", () => {
-    const logger = new FilterLogger({ level: "verbose", logger: innerLogger });
+    const logger = createFilterLogger({ level: "verbose" });
     logger.info("This is some information");
-    expect(innerLogger.log).toHaveBeenCalledTimes(1);
-    expect(innerLogger.log).toHaveBeenCalledWith({ level: "information", message: "This is some information" });
+    expect(sink.log).toHaveBeenCalledTimes(1);
+    expect(sink.log).toHaveBeenCalledWith({ level: "information", message: "This is some information" });
   });
 });

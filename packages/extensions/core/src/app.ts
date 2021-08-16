@@ -5,7 +5,14 @@
 /* eslint-disable no-console */
 import "source-map-support/register";
 import { omit } from "lodash";
-import { configureLibrariesLogger, color, ConsoleLogger, AutorestLogger, FilterLogger } from "@autorest/common";
+import {
+  configureLibrariesLogger,
+  color,
+  ConsoleLogger,
+  FilterLogger,
+  AutorestLogger,
+  AutorestSyncLogger,
+} from "@autorest/common";
 import { EventEmitter } from "events";
 import { AutorestCliArgs, parseAutorestCliArgs } from "@autorest/configuration";
 EventEmitter.defaultMaxListeners = 100;
@@ -133,9 +140,9 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
 
   const args = parseAutorestCliArgs([...autorestArgs, ...more]);
 
-  const logger = new FilterLogger({
-    logger: new ConsoleLogger(),
-    level: getLogLevel(args.options),
+  const logger = new AutorestSyncLogger({
+    sinks: [new ConsoleLogger()],
+    processors: [new FilterLogger({ level: getLogLevel(args.options) })],
   });
 
   if (!args.options["message-format"] || args.options["message-format"] === "regular") {
