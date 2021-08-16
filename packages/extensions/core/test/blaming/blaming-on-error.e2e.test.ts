@@ -78,7 +78,7 @@ describe("Blaming (e2e)", () => {
     it("find original position when error in Swagger 2.0 schema", async () => {
       const file = getResource("error-in-spec/swagger-schema-error.json");
       const { errors } = await generate({ "input-file": [file] });
-      expect(errors).toHaveLength(2);
+      expect(errors).toHaveLength(1);
 
       expect(errors[0].message).toEqual(
         [
@@ -97,7 +97,7 @@ describe("Blaming (e2e)", () => {
     it("find original position when error in OpenAPI 3.0 schema", async () => {
       const file = getResource("error-in-spec/openapi-schema-error.json");
       const { errors } = await generate({ "input-file": [file] });
-      expect(errors).toHaveLength(2);
+      expect(errors).toHaveLength(1);
 
       expect(errors[0].message).toEqual(
         [
