@@ -31,7 +31,6 @@ import { Help } from "./help";
 import { Artifact } from "./lib/artifact";
 import { AutoRest, IsOpenApiDocument, Shutdown } from "./lib/autorest-core";
 import { Exception } from "@autorest/common";
-import { Channel, Message } from "./lib/message";
 import { VERSION } from "./lib/constants";
 import { ArtifactWriter } from "./artifact-writer";
 
@@ -138,7 +137,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   const args = parseAutorestCliArgs([...autorestArgs, ...more], { logger });
 
   if (!args.options["message-format"] || args.options["message-format"] === "regular") {
-    console.log(color(`> Loading AutoRest core      '${__dirname}' (${VERSION})`));
+    logger.info(`> Loading AutoRest core      '${__dirname}' (${VERSION})`);
   }
   verbose = verbose || (args.options["verbose"] ?? false);
   debug = debug || (args.options["debug"] ?? false);
@@ -338,7 +337,7 @@ async function resourceSchemaBatch(api: AutoRest, logger: AutorestLogger): Promi
       instance.AddConfiguration(omit(batchContext, "input-file"));
       instance.AddConfiguration({ "input-file": eachFile });
 
-      console.log(`Running autorest for *${path}* `);
+      logger.info(`Running autorest for *${path}* `);
 
       // ok, kick off the process for that one.
       await instance.Process().finish.then(async (result) => {
