@@ -69,3 +69,13 @@ export function getFromJsonPointer<T>(obj: any, pointer: JsonPointer | JsonPoint
   }
   return obj;
 }
+
+/**
+ * Add a new segment to a json pointer
+ * @param pointer Pointer
+ * @param suffix Suffix
+ * @returns new json pointer
+ */
+export function appendJsonPointer(pointer: string, ...suffixes: string[]): string {
+  return serializeJsonPointer(parseJsonPointer(pointer).concat(suffixes));
+}
