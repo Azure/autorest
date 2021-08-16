@@ -33,6 +33,7 @@ import { AutoRest, IsOpenApiDocument, Shutdown } from "./lib/autorest-core";
 import { Exception } from "@autorest/common";
 import { VERSION } from "./lib/constants";
 import { ArtifactWriter } from "./artifact-writer";
+import { getLogLevel } from "./lib/context";
 
 let verbose = false;
 let debug = false;
@@ -130,11 +131,12 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   // We need to check if verbose logging should be enabled before parsing the args.
   verbose = verbose || autorestArgs.indexOf("--verbose") !== -1;
 
+  const args = parseAutorestCliArgs([...autorestArgs, ...more]);
+
   const logger = new FilterLogger({
     logger: new ConsoleLogger(),
-    level: debug ? "debug" : verbose ? "verbose" : "information",
+    level: getLogLevel(args.options),
   });
-  const args = parseAutorestCliArgs([...autorestArgs, ...more], { logger });
 
   if (!args.options["message-format"] || args.options["message-format"] === "regular") {
     logger.info(`> Loading AutoRest core      '${__dirname}' (${VERSION})`);
@@ -144,7 +146,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
 
   // Only show library logs if in verbose or debug mode.
   if (verbose || debug) {
-    configureLibrariesLogger("verbose", console.log);
+    configureLibrariesLogger("verbose", (...x) => logger.debug(x.join(" ")));
   }
 
   // identify where we are starting from.

@@ -1,4 +1,5 @@
 import { DataStore } from "@azure-tools/datastore";
+import { AutorestDiagnostic, EnhancedLogInfo } from ".";
 import { LogSourceEnhancer } from "./log-source-enhancer";
 import { AutorestLoggerBase } from "./logger";
 import { LoggingSession } from "./logging-session";
@@ -26,9 +27,20 @@ export class AutorestCoreLogger extends AutorestLoggerBase {
     this.asyncLogManager.registerLog(() => this.logMessageAsync(log));
   }
 
+  public override trackDiagnostic(diagnostic: AutorestDiagnostic) {
+    this.asyncLogManager.registerLog(() => this.trackDiagnosticAsync(diagnostic));
+  }
+
   private async logMessageAsync(log: LogInfo) {
     const enhancedLog = await this.logInfoEnhancer.process(log);
     // eslint-disable-next-line no-console
     this.innerLogger.log(enhancedLog as any);
+  }
+
+  private async trackDiagnosticAsync(diagnostic: AutorestDiagnostic) {
+    const enhancedDiag = await this.logInfoEnhancer.process(diagnostic);
+    // eslint-disable-next-line no-console
+    this.innerLogger.log(enhancedDiag as any);
+    this.diagnostics.push(enhancedDiag as any);
   }
 }

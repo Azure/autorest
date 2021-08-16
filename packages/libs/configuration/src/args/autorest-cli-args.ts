@@ -1,21 +1,27 @@
-import { AutorestLogger, OperationAbortedException } from "@autorest/common";
+import { ConsoleLogger, FilterLogger, OperationAbortedException } from "@autorest/common";
 import { CreateObject } from "@azure-tools/datastore";
 import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
 import { mergeConfigurations } from "../configuration-merging";
 import { autorestConfigurationProcessor, AUTOREST_INITIAL_CONFIG } from "../configuration-schema";
 import { parseArgs } from "./parse-args";
 
-export interface ParseAutorestCliArgsOptions {
-  logger: AutorestLogger;
-}
-
 export interface AutorestCliArgs {
   options: AutorestNormalizedConfiguration;
   configFileOrFolder: string | undefined;
 }
 
-export function parseAutorestCliArgs(cliArgs: string[], options: ParseAutorestCliArgsOptions): AutorestCliArgs {
+export function parseAutorestCliArgs(cliArgs: string[]): AutorestCliArgs {
   const parsedArgs = parseArgs(cliArgs);
+
+  const logger = new FilterLogger({
+    logger: new ConsoleLogger(),
+    level: parsedArgs.options.debug
+      ? "debug"
+      : parsedArgs.options.verbose
+      ? "verbose"
+      : parsedArgs.options.level ?? "information",
+  });
+
   if (parsedArgs.positional.length > 1) {
     throw new Error(`Found multiple configuration file arguments: '${parsedArgs.positional.join(",")}'`);
   }
@@ -26,12 +32,12 @@ export function parseAutorestCliArgs(cliArgs: string[], options: ParseAutorestCl
     arrayMergeStrategy: "low-pri-first",
   });
   const result = autorestConfigurationProcessor.processConfiguration(config, {
-    logger: options.logger,
+    logger: logger,
   });
 
   if ("errors" in result) {
     for (const error of result.errors) {
-      options.logger.trackError({
+      logger.trackError({
         code: error.code,
         message: `Invalid Cli Flag: ${error.message}. For flag '${error.path.join(".")}'`,
       });

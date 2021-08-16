@@ -176,7 +176,7 @@ export class AutoRest extends EventEmitter {
 
         view.messageEmitter.removeAllListeners();
         return true;
-      } catch (e) {
+      } catch (e: any) {
         const message: LogInfo = view?.config.debug
           ? {
               level: "fatal",

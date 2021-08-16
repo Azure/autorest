@@ -32,21 +32,22 @@ export abstract class AutorestLoggerBase implements AutorestLogger {
   }
 
   public trackWarning(warning: AutorestWarning) {
-    const diag = {
+    this.trackDiagnostic({
       level: "warning",
       ...warning,
-    } as const;
-    this.diagnostics.push(diag);
-    this.log(diag);
+    });
   }
 
   public trackError(error: AutorestError) {
-    const diag = {
+    this.trackDiagnostic({
       level: "error",
       ...error,
-    } as const;
-    this.diagnostics.push(diag);
-    this.log(diag);
+    });
+  }
+
+  public trackDiagnostic(diagnostic: AutorestDiagnostic) {
+    this.diagnostics.push(diagnostic);
+    this.log(diagnostic);
   }
 
   public abstract log(log: LogInfo): void;
