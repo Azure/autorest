@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/test-utils",
+      "comment": "**Added** Test helper for mocking logging",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/test-utils",
+  "email": "tiguerin@microsoft.com"
+}
