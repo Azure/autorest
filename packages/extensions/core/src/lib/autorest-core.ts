@@ -179,16 +179,16 @@ export class AutoRest extends EventEmitter {
         return true;
       } catch (e: any) {
         const message = view?.config.debug
-          ? {
+          ? ({
               level: "fatal",
               message: `Process() cancelled due to exception : ${e.message ? e.message : e} / ${
                 e.stack ? e.stack : ""
               }`,
-            }
-          : {
+            } as const)
+          : ({
               level: "fatal",
               message: "Process() cancelled due to failure ",
-            };
+            } as const);
         this.loggerSink.log(message);
         // Wait for all logs to have been sent before shutting down.
         await AutorestLoggingSession.waitForMessages();
