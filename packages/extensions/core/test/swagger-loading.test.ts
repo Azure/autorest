@@ -1,14 +1,14 @@
 import assert from "assert";
-
 import { RealFileSystem } from "@azure-tools/datastore";
-import { CreateFolderUri, ResolveUri } from "@azure-tools/uri";
+import { createFolderUri, resolveUri } from "@azure-tools/uri";
 import { AutoRest } from "../src/lib/autorest-core";
 import { LoadLiterateSwaggers } from "../src/lib/plugins/loaders";
 import { AppRoot } from "../src/lib/constants";
+import { createMockLogger } from "@autorest/test-utils";
 
 describe("SwaggerLoading", () => {
   it("No input files provided", async () => {
-    const autoRest = new AutoRest();
+    const autoRest = new AutoRest(createMockLogger());
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
@@ -25,14 +25,14 @@ describe("SwaggerLoading", () => {
   });
 
   it("All input files have a 2.0 version.", async () => {
-    const autoRest = new AutoRest();
+    const autoRest = new AutoRest(createMockLogger());
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
     const inputFilesUris = [
-      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file1.json"),
-      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file2.json"),
-      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file3.yaml"),
+      resolveUri(createFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file1.json"),
+      resolveUri(createFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file2.json"),
+      resolveUri(createFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file3.yaml"),
     ];
 
     const swaggerFilesLoaded = await LoadLiterateSwaggers(
@@ -46,13 +46,13 @@ describe("SwaggerLoading", () => {
   });
 
   it("All input files do not have a 2.0 version.", async () => {
-    const autoRest = new AutoRest();
+    const autoRest = new AutoRest(createMockLogger());
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
     const inputFilesUris = [
-      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/non-swagger-file1.yaml"),
-      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/non-swagger-file2.yaml"),
+      resolveUri(createFolderUri(AppRoot), "test/resources/swagger-loading/non-swagger-file1.yaml"),
+      resolveUri(createFolderUri(AppRoot), "test/resources/swagger-loading/non-swagger-file2.yaml"),
     ];
 
     const swaggerFilesLoaded = await LoadLiterateSwaggers(
@@ -66,19 +66,19 @@ describe("SwaggerLoading", () => {
   });
 
   it("Some input files have a 2.0 version and some input files do not have a 2.0 version.", async () => {
-    const autoRest = new AutoRest();
+    const autoRest = new AutoRest(createMockLogger());
     const config = await autoRest.view;
     const dataStore = config.DataStore;
 
     const nonSwaggerFileUris = [
-      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/non-swagger-file1.yaml"),
-      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/non-swagger-file2.yaml"),
+      resolveUri(createFolderUri(AppRoot), "test/resources/swagger-loading/non-swagger-file1.yaml"),
+      resolveUri(createFolderUri(AppRoot), "test/resources/swagger-loading/non-swagger-file2.yaml"),
     ];
 
     const swaggerFileUris = [
-      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file1.json"),
-      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file2.json"),
-      ResolveUri(CreateFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file3.yaml"),
+      resolveUri(createFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file1.json"),
+      resolveUri(createFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file2.json"),
+      resolveUri(createFolderUri(AppRoot), "test/resources/swagger-loading/swagger-file3.yaml"),
     ];
 
     const inputFilesUris = [...swaggerFileUris, ...nonSwaggerFileUris];

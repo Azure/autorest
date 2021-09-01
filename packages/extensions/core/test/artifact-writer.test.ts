@@ -1,7 +1,7 @@
 jest.mock("@azure-tools/uri");
 
+import { AutorestRawConfiguration } from "@autorest/configuration";
 import { writeString, writeBinary } from "@azure-tools/uri";
-import { AutorestRawConfiguration } from "../../../libs/configuration/dist";
 import { ArtifactWriter } from "../src/artifact-writer";
 
 const TestStrings = {

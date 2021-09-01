@@ -40,25 +40,14 @@ export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
   return createPerFilePlugin(async (context) => async (fileIn, sink) => {
     const obj = await fileIn.readObject<any>();
     const isSecondary = !!obj["x-ms-secondary-file"];
-    const markErrorAsWarnings = context.config["mark-oai3-errors-as-warnings"];
     const errors = await validator.validateFile(fileIn);
     if (errors.length > 0) {
       for (const error of errors) {
-        const level = markErrorAsWarnings || isSecondary ? "warning" : "error";
+        const level = isSecondary ? "warning" : "error";
         logValidationError(context, fileIn, error as any, level);
       }
 
-      if (!isSecondary && !markErrorAsWarnings) {
-        context.Message({
-          Channel: Channel.Error,
-          Plugin: "schema-validator-openapi",
-          Text: [
-            `Unrecoverable schema validation errors were encountered in OpenAPI 3 input files.`,
-            `You can use --mark-oai3-errors-as-warnings to keep mark as warning and let autorest keep going.`,
-            `If you believe this the validation error is incorrect, please open an issue at https://github.com/Azure/autorest`,
-            `NOTE: in the future this flag will be removed and validation error will fail the pipeline.`,
-          ].join("\n"),
-        });
+      if (!isSecondary) {
         throw new OperationAbortedException();
       }
     }

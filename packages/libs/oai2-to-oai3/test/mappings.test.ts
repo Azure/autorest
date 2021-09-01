@@ -1,4 +1,4 @@
-import { serializeJsonPointer } from "../../json/dist";
+import { serializeJsonPointer } from "@azure-tools/json";
 import { ConverterLogger, Oai2ToOai3 } from "../src";
 import { OpenAPI2Document } from "../src/oai2";
 

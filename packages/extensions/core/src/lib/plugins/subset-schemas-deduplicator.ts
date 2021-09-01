@@ -348,18 +348,8 @@ async function deduplicateSubsetSchemas(config: AutorestContext, input: DataSour
   const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
-    const model = <any>await each.ReadObject();
-    /*
-    Disabling for now -- not sure if we need to skip this in the simple case anyway.
+    const model = <any>await each.readObject();
 
-    if ([...values(model?.info?.['x-ms-metadata']?.apiVersions).distinct()].length < 2) {
-      // if there is a single API version in the doc, let's not bother.
-      config.Message({ Channel: Channel.Verbose, Text: `Skipping subset deduplication on single-api-version file ${each.identity}` });
-      result.push(await sink.WriteObject('oai3.subset-schema-reduced.json', model, each.identity, 'openapi-document-schema-reduced', []));
-      continue;
-    }
-    config.Message({ Channel: Channel.Verbose, Text: `Processing subset deduplication on file ${each.identity}` });
-    */
     if (model.info?.["x-ms-metadata"]?.schemaReduced) {
       result.push(
         await sink.writeObject(

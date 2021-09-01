@@ -13,6 +13,7 @@ require:
   - ./other.md
 shouldBeIncluded: true
 some: value
+suppressions: []
 try-require: []
 use: []
 use-extension: {}
