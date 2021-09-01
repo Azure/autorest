@@ -42,7 +42,6 @@ export class EnumDeduplicator extends TransformerViaPointer<oai3.Model, oai3.Mod
   public async finish() {
     // time to consolodate the enums
     for (const value of this.enums.values()) {
-      console.error("Found dup", value);
       // first sort them according to api-version order
       const enumSet = value.sort((a, b) =>
         compareVersions(
