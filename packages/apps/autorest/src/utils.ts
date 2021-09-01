@@ -1,6 +1,6 @@
 import { AutorestArgs } from "./args";
 import { AutorestConfiguration, AutorestNormalizedConfiguration, ConfigurationLoader } from "@autorest/configuration";
-import { AutorestLogger } from "@autorest/configuration/node_modules/@autorest/common";
+import { AutorestSyncLogger, ConsoleLoggerSink } from "@autorest/common";
 import { createFileOrFolderUri, createFolderUri, resolveUri } from "@azure-tools/uri";
 import { AppRoot } from "./constants";
 import { extensionManager, networkEnabled, selectVersion } from "./autorest-as-a-service";
@@ -35,18 +35,11 @@ const cwd = process.cwd();
  */
 export async function loadConfig(args: AutorestArgs): Promise<AutorestConfiguration | undefined> {
   const configFileOrFolder = resolveUri(createFolderUri(cwd), args.configFileOrFolder || ".");
-  /* eslint-disable no-console */
-
   const enableLogging = args["debug-cli-config-loading"];
 
-  const logger: AutorestLogger = {
-    fatal: (x) => enableLogging && console.error(x),
-    info: (x) => enableLogging && console.log(x),
-    verbose: (x) => enableLogging && console.log(x),
-    trackError: (x) => enableLogging && console.error(x),
-    trackWarning: (x) => enableLogging && console.error(x),
-  };
-  /* eslint-enable no-console */
+  const logger = new AutorestSyncLogger({
+    sinks: enableLogging ? [new ConsoleLoggerSink()] : [],
+  });
 
   const loader = new ConfigurationLoader(logger, defaultConfigUri, configFileOrFolder, {
     extensionManager: await extensionManager,
@@ -62,7 +55,7 @@ export async function loadConfig(args: AutorestArgs): Promise<AutorestConfigurat
     return config;
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.log(chalk.yellow(`Warn: Error occured while loading configuration.`));
+    logger.log({ level: "warning", message: "Error occured while loading configuration." });
     return undefined;
   }
 }

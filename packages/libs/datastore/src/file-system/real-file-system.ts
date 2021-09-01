@@ -45,7 +45,7 @@ export async function readUriWithRetries(uri: string, headers: { [name: string]:
   for (;;) {
     try {
       return await readUri(uri, headers);
-    } catch (e) {
+    } catch (e: any) {
       tryed++;
       if (isRetryableStatusCode(e.statusCode) && tryed <= MAX_RETRY_COUNT) {
         // eslint-disable-next-line no-console

@@ -379,7 +379,7 @@ export class ExtensionManager {
       progress.NotifyMessage(`Package Install completed ${pkg.name}, ${pkg.version}`);
 
       return extension;
-    } catch (e) {
+    } catch (e: any) {
       progress.NotifyMessage(e);
       if (e.stack) {
         progress.NotifyMessage(e.stack);

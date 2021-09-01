@@ -75,9 +75,8 @@ Those are flags that affect autorest only
 
 Those flags are temporary and will be removed in the future. Those flags are here to have a smoother rollout of certain feature.
 
-| Flag                             | Description                                                                                                                 |
-| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `--mark-oai3-errors-as-warnings` | Mark OpenAPI3 validation(schema) error as warnings. (When removed OpenAPI3 validation errors will always fail the pipeline) |
+| Flag | Description |
+| ---- | ----------- |
 
 ## Python Flags
 
@@ -189,7 +188,7 @@ Those flags are temporary and will be removed in the future. Those flags are her
 [java_context]: https://azuresdkdocs.blob.core.windows.net/$web/java/azure-core/1.0.0/index.html?com/azure/core/util/Context.html
 [artifact_id]: https://maven.apache.org/guides/mini/guide-naming-conventions.html
 [fluent_docs]: https://github.com/Azure/autorest.java#additional-settings-for-fluent
-[armcore_connection]: https://github.com/Azure/azure-sdk-for-go/blob/master/sdk/armcore/connection.go
+[armcore_connection]: https://github.com/Azure/azure-sdk-for-go/blob/main/sdk/azcore/arm/connection.go
 [debugging]: https://github.com/Azure/autorest/blob/main/docs/troubleshooting.md#debugging
 [black]: https://pypi.org/project/black/
 [ts_async_iterator]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-3.html#async-iterators

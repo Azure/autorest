@@ -1,6 +1,6 @@
 import { AutorestNormalizedConfiguration } from "./autorest-normalized-configuration";
 import { IFileSystem } from "@azure-tools/datastore";
-import { CreateFileOrFolderUri, EnsureIsFolderUri, IsUri, ResolveUri } from "@azure-tools/uri";
+import { createFileOrFolderUri, ensureIsFolderUri, isUri, resolveUri, simplifyUri } from "@azure-tools/uri";
 import { cwd } from "process";
 import { mergeConfigurations } from "./configuration-merging";
 import { arrayOf } from "./utils";
@@ -144,10 +144,10 @@ export const resolveAsPath = (
 ): Promise<string> => {
   // is there even a potential for a parent folder from the input configuruation
   const parentFolder = config.__parents?.[path];
-  const fromBaseUri = ResolveUri(getBaseFolderUri(configFileFolderUri, config), path);
+  const fromBaseUri = simplifyUri(resolveUri(getBaseFolderUri(configFileFolderUri, config), path));
 
   // if it's an absolute uri already, give it back that way.
-  if (IsUri(path) || !parentFolder) {
+  if (isUri(path) || !parentFolder) {
     return Promise.resolve(fromBaseUri);
   }
 
@@ -155,24 +155,25 @@ export const resolveAsPath = (
   // if the relative-to-parent path isn't valid, we fall back to original behavior
   // where the file path is relative to the base uri.
   // (and we don't even check to see if that's valid, try-require wouldn't need valid files)
-  const fromLoadedFile = ResolveUri(parentFolder, path);
-  return fileSystem.ReadFile(fromLoadedFile).then(
+  const fromLoadedFile = resolveUri(parentFolder, path);
+
+  return fileSystem.read(fromLoadedFile).then(
     () => fromLoadedFile,
     () => fromBaseUri,
   );
 };
 
 export const getBaseFolderUri = (configFileFolderUri: string, config: AutorestNormalizedConfiguration) =>
-  EnsureIsFolderUri(ResolveUri(configFileFolderUri, <string>config["base-folder"]));
+  ensureIsFolderUri(resolveUri(configFileFolderUri, <string>config["base-folder"]));
 
 const resolveAsFolder = (baseFolderUri: string, path: string): string => {
-  return EnsureIsFolderUri(ResolveUri(baseFolderUri, path));
+  return ensureIsFolderUri(resolveUri(baseFolderUri, path));
 };
 
 const resolveAsWriteableFolder = (baseFolderUri: string, path: string): string => {
   // relative paths are relative to the local folder when the base-folder is remote.
   if (!baseFolderUri.startsWith("file:")) {
-    return EnsureIsFolderUri(ResolveUri(CreateFileOrFolderUri(cwd() + "/"), path));
+    return ensureIsFolderUri(resolveUri(createFileOrFolderUri(cwd() + "/"), path));
   }
   return resolveAsFolder(baseFolderUri, path);
 };

@@ -42,12 +42,12 @@ export async function processRequest(host: Host) {
       "prechecked-openapi-document",
     );
     host.WriteFile("original-openapi-document.yaml", JSON.stringify(input, null, 2), undefined, "openapi-document");
-  } catch (E) {
+  } catch (error: any) {
     if (debug) {
       // eslint-disable-next-line no-console
-      console.error(`${__filename} - FAILURE  ${JSON.stringify(E)} ${E.stack}`);
+      console.error(`${__filename} - FAILURE  ${JSON.stringify(error)} ${error.stack}`);
     }
-    throw E;
+    throw error;
   }
 }
 
