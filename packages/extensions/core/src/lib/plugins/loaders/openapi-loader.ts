@@ -15,10 +15,10 @@ interface OpenAPI3Spec {
 export async function loadOpenAPIFiles(
   config: AutorestContext,
   inputScope: DataSource,
-  inputFileUris: Array<string>,
+  inputFileUris: string[],
   sink: DataSink,
 ): Promise<Array<DataHandle>> {
-  const rawOpenApis: Array<DataHandle> = [];
+  const rawOpenApis: DataHandle[] = [];
   for (const inputFileUri of inputFileUris) {
     // read literate Swagger
     const pluginInput = await loadOpenAPIFile(config, inputScope, inputFileUri, sink);
