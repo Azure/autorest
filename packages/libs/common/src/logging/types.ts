@@ -40,6 +40,7 @@ export interface LogInfo {
 
 export interface AutorestDiagnostic {
   level: Extract<LogLevel, "error" | "warning">;
+
   /**
    * Reprensent the diagnostic code describing the type of issue.
    * Diagnostic codes could be documented to help user understand how to resolve this type of issue

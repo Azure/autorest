@@ -1,6 +1,6 @@
+import { serializeJsonPointer } from "@azure-tools/json";
 import fs from "fs";
 import { basename, join } from "path";
-import { serializeJsonPointer } from "../../../json/dist";
 import { ConverterLogger, convertOai2ToOai3, OaiToOai3FileInput } from "../../src";
 
 const inputsFolder = `${__dirname}/inputs/`;

@@ -1,4 +1,3 @@
-import { LogLevel } from "../../../common/dist";
 import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
 import { ConfigurationSchemaProcessor } from "./processor";
 import { RawConfiguration } from "./types";
