@@ -158,7 +158,7 @@ export class AutoRestExtension {
           },
         });
         return true;
-      } catch (e) {
+      } catch (e: any) {
         if (await channel.sendRequest(IAutoRestPluginInitiatorTypes.GetValue, sessionId, "debug")) {
           // eslint-disable-next-line no-console
           console.error(`PLUGIN FAILURE: ${e.message}, ${e.stack}, ${JSON.stringify(e, null, 2)}`);

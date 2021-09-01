@@ -23,7 +23,7 @@ export function createPerFilePlugin(
         const pluginInput = await fileIn.readObject<any>();
         const keysLength = Object.keys(pluginInput).length;
         const isEmptyDirective = keysLength === 1 && pluginInput.directive;
-        if (!isEmptyDirective || keysLength === 0) {
+        if (keysLength === 0 || !isEmptyDirective) {
           result.push(await processor(fileIn, sink));
         }
       } catch {

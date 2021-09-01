@@ -38,8 +38,8 @@ export async function compileAdl(
     });
     return { compiledFiles: output };
   } catch (e) {
-    if ("diagnostics" in e) {
-      return { error: e };
+    if (typeof e === "object" && e !== null && "diagnostics" in e) {
+      return { error: e as DiagnosticError };
     }
     throw e;
   }

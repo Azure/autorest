@@ -11,7 +11,7 @@ export const processRequest = (route: MockRouteDefinition, request: RequestExt, 
   const requestDef = route.request;
   try {
     validateRequest(requestDef, request);
-  } catch (e) {
+  } catch (e: any) {
     logger.warn(
       [`Request validation failed: ${e.message}:`, ` Expected:\n ${e.expected}`, ` Actual: \n${e.actual}`].join("\n"),
     );
