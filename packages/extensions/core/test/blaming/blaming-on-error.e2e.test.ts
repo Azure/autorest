@@ -2,20 +2,24 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { AutoRest, Channel, Message } from "../../src/exports";
+import { AutoRest } from "../../src/exports";
 import { RealFileSystem } from "@azure-tools/datastore";
 import { join } from "path";
 import { AutorestContextLoader } from "../../src/lib/context";
 import { createFileUri } from "@azure-tools/uri";
-import { AutorestRawConfiguration } from "../../../../libs/configuration/dist";
+import { AutorestRawConfiguration } from "@autorest/configuration";
+import { LogInfo } from "@autorest/common";
 import { inspect } from "util";
+import { AutorestTestLogger } from "@autorest/test-utils";
 
 function getResource(name: string) {
   return join(__dirname, "resources", name);
 }
 
-async function generate(config: AutorestRawConfiguration): Promise<{ errors: Message[] }> {
-  const autoRest = new AutoRest(new RealFileSystem());
+async function generate(config: AutorestRawConfiguration): Promise<{ errors: LogInfo[] }> {
+  const logger = new AutorestTestLogger();
+
+  const autoRest = new AutoRest(logger, new RealFileSystem());
   autoRest.AddConfiguration({
     verbose: true,
     // debug: true,
@@ -23,35 +27,18 @@ async function generate(config: AutorestRawConfiguration): Promise<{ errors: Mes
     ...config,
   });
 
-  const messages: Message[] = [];
-  const channels = new Set([
-    Channel.Information,
-    Channel.Warning,
-    Channel.Error,
-    Channel.Fatal,
-    Channel.Debug,
-    Channel.Verbose,
-  ]);
-
-  autoRest.Message.Subscribe((_, message) => {
-    if (channels.has(message.Channel)) {
-      messages.push(message);
-    }
-  });
-
   const success = await autoRest.Process().finish;
   await AutorestContextLoader.shutdown();
 
   if (success === true) {
     // eslint-disable-next-line no-console
-    console.log("Messages", messages);
+    console.log("Messages", logger.logs.all);
     throw new Error("Autorest complete with success but should have failed.");
   }
-  const errors = messages.filter((x) => x.Channel === Channel.Error);
-
+  const errors = logger.logs.error;
   if (errors.length === 0) {
     // eslint-disable-next-line no-console
-    console.log("Messages", messages);
+    console.log("Messages", logger.logs.all);
     throw new Error("Autorest should have logged errors");
   }
   return { errors };
@@ -64,10 +51,10 @@ describe("Blaming (e2e)", () => {
       const { errors } = await generate({ require: [file] });
       expect(errors).toHaveLength(2);
 
-      expect(errors[0].Text).toEqual("Syntax Error Encountered:  Syntax error: duplicate key");
-      expect(errors[0].Source).toEqual([
+      expect(errors[0].message).toEqual("Syntax Error Encountered:  Syntax error: duplicate key");
+      expect(errors[0].source).toEqual([
         {
-          Position: { column: 1, line: 10 },
+          position: { column: 1, line: 10 },
           document: createFileUri(file),
         },
       ]);
@@ -77,10 +64,10 @@ describe("Blaming (e2e)", () => {
       const file = getResource("error-in-config/invalid-indent-yaml.md");
       const { errors } = await generate({ require: [file] });
       expect(errors).toHaveLength(3);
-      expect(errors[0].Text).toEqual("Syntax Error Encountered:  Syntax error: bad indentation of a mapping entry");
-      expect(errors[0].Source).toEqual([
+      expect(errors[0].message).toEqual("Syntax Error Encountered:  Syntax error: bad indentation of a mapping entry");
+      expect(errors[0].source).toEqual([
         {
-          Position: { column: 1, line: 11 },
+          position: { column: 1, line: 11 },
           document: createFileUri(file),
         },
       ]);
@@ -91,17 +78,17 @@ describe("Blaming (e2e)", () => {
     it("find original position when error in Swagger 2.0 schema", async () => {
       const file = getResource("error-in-spec/swagger-schema-error.json");
       const { errors } = await generate({ "input-file": [file] });
-      expect(errors).toHaveLength(2);
+      expect(errors).toHaveLength(1);
 
-      expect(errors[0].Text).toEqual(
+      expect(errors[0].message).toEqual(
         [
           "Schema violation: must NOT have additional properties (definitions > MyDefinitionWithError)",
           "  additionalProperty: unknownProperty",
         ].join("\n"),
       );
-      expect(errors[0].Source).toEqual([
+      expect(errors[0].source).toEqual([
         {
-          Position: { column: 5, line: 12 },
+          position: { column: 5, line: 12 },
           document: createFileUri(file),
         },
       ]);
@@ -110,17 +97,17 @@ describe("Blaming (e2e)", () => {
     it("find original position when error in OpenAPI 3.0 schema", async () => {
       const file = getResource("error-in-spec/openapi-schema-error.json");
       const { errors } = await generate({ "input-file": [file] });
-      expect(errors).toHaveLength(4);
+      expect(errors).toHaveLength(1);
 
-      expect(errors[0].Text).toEqual(
+      expect(errors[0].message).toEqual(
         [
           "Schema violation: must NOT have additional properties (components > schemas > MySchemaWithError)",
           "  additionalProperty: unknownProperty",
         ].join("\n"),
       );
-      expect(errors[0].Source).toEqual([
+      expect(errors[0].source).toEqual([
         {
-          Position: { column: 7, line: 11 },
+          position: { column: 7, line: 11 },
           document: createFileUri(file),
         },
       ]);
@@ -131,7 +118,7 @@ describe("Blaming (e2e)", () => {
       const { errors } = await generate({ "input-file": [file] });
       expect(errors).toHaveLength(1);
 
-      expect(errors[0].Text).toEqual(
+      expect(errors[0].message).toEqual(
         [
           "Semantic violation: Path parameter 'missingParam' referenced in path '/test/{missingParam}' needs to be defined in every operation at either the path or operation level. (Missing in 'get') (paths > /test/{missingParam})",
           `  **paramName**: ${inspect("missingParam", { colors: true })}`,
@@ -139,9 +126,9 @@ describe("Blaming (e2e)", () => {
           `  **methods**: ${inspect(["get"], { colors: true })}`,
         ].join("\n"),
       );
-      expect(errors[0].Source).toEqual([
+      expect(errors[0].source).toEqual([
         {
-          Position: { line: 11, column: 5 },
+          position: { line: 11, column: 5 },
           document: createFileUri(file),
         },
       ]);

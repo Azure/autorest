@@ -34,7 +34,7 @@ export async function LoadLiterateSwagger(
     return null;
     // TODO: Should we throw or send an error message?
   }
-  config.Message({ Channel: Channel.Verbose, Text: `Reading OpenAPI 2.0 file ${inputFileUri}` });
+  config.verbose(`Reading OpenAPI 2.0 file ${inputFileUri}`);
 
   return sink.writeData(data.description, await data.readData(), [inputFileUri], "swagger-document");
 }

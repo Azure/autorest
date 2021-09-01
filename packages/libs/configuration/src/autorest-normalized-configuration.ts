@@ -1,3 +1,4 @@
+import { LogLevel, LogSuppression } from "@autorest/common";
 import { Directive } from "./directive";
 
 /**
@@ -20,7 +21,7 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
   directive?: Array<Directive>;
   "declare-directive"?: { [name: string]: string };
   "output-artifact"?: Array<string>;
-  "message-format"?: "json" | "yaml" | "regular";
+  "message-format"?: "json" | "regular";
   use?: string[] | string;
   "use-extension"?: { [extensionName: string]: string };
   require?: Array<string>;
@@ -51,8 +52,26 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
   description?: any;
   run?: any;
 
+  /**
+   * Set log level to `debug`
+   */
   debug?: boolean;
+
+  /**
+   * Set log level to `verbose`
+   */
   verbose?: boolean;
+
+  /**
+   * Set log level
+   */
+  level?: LogLevel;
+
+  /**
+   * List of suppressions
+   */
+  suppressions?: LogSuppression[];
+
   time?: boolean;
   timestamp?: boolean;
   "fast-mode"?: boolean;
@@ -75,10 +94,6 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
   // --------------------------------------
   // Temporary flags to deprecate features:
 
-  /**
-   * Mark OpenAPI3 validation(schema) error as warnings. (Will be removed and OpenAPI3 validation errors will always fail the pipeline)
-   */
-  "mark-oai3-errors-as-warnings"?: boolean;
   // --------------------------------------
 
   // plugin specific

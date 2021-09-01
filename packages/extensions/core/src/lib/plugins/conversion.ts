@@ -2,8 +2,8 @@ import { DataHandle, IFileSystem, QuickDataSource } from "@azure-tools/datastore
 import { PipelinePlugin } from "../pipeline/common";
 import { ConverterDiagnostic, ConverterLogger, convertOai2ToOai3Files } from "@azure-tools/oai2-to-oai3";
 import { cloneDeep } from "lodash";
-import { AutorestDiagnostic } from "../../../../../libs/common/dist";
-import { parseJsonPointer } from "../../../../../libs/json/dist";
+import { AutorestDiagnostic } from "@autorest/common";
+import { parseJsonPointer } from "@azure-tools/json";
 
 /* @internal */
 export function createSwaggerToOpenApi3Plugin(fileSystem?: IFileSystem): PipelinePlugin {
@@ -34,7 +34,7 @@ export function createSwaggerToOpenApi3Plugin(fileSystem?: IFileSystem): Pipelin
   };
 }
 
-function convertDiagnostic(diag: ConverterDiagnostic): AutorestDiagnostic {
+function convertDiagnostic(diag: ConverterDiagnostic): Omit<AutorestDiagnostic, "level"> {
   return {
     ...diag,
     source: diag.source?.map((x) => {

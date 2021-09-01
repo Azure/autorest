@@ -1,65 +1,201 @@
-import { PathPosition, Position } from "@azure-tools/datastore";
+import { LoggingSession } from "./logging-session";
+import {
+  AutorestDiagnostic,
+  AutorestError,
+  AutorestLogger,
+  AutorestWarning,
+  LoggerAsyncProcessor,
+  LoggerProcessor,
+  LoggerSink,
+  LogInfo,
+} from "./types";
 
-/**
- * Represent a location in a document.
- */
-export interface SourceLocation {
-  readonly document: string;
-  readonly position: Position | PathPosition;
+export interface AutorestLoggerBaseOptions<T> {
+  processors?: T[];
+  sinks: LoggerSink[];
 }
 
-export interface AutorestDiagnostic {
-  /**
-   * Reprensent the diagnostic code describing the type of issue.
-   * Diagnostic codes could be documented to help user understand how to resolve this type of issue
-   */
-  readonly code: string;
+export abstract class AutorestLoggerBase<T> implements AutorestLogger {
+  public diagnostics: AutorestDiagnostic[] = [];
+  protected sinks: LoggerSink[];
+  protected processors: T[];
 
-  /**
-   * Message.
-   */
-  readonly message: string;
+  public constructor(options: AutorestLoggerBaseOptions<T>) {
+    this.sinks = options.sinks;
+    this.processors = options.processors ?? [];
+  }
 
-  /**
-   * location where the problem was found.
-   */
-  readonly source?: SourceLocation[];
+  public debug(message: string) {
+    this.log({
+      level: "debug",
+      message,
+    });
+  }
 
-  /**
-   * Additional details.
-   */
-  readonly details?: Error | unknown;
+  public verbose(message: string) {
+    this.log({
+      level: "verbose",
+      message,
+    });
+  }
+
+  public info(message: string) {
+    this.log({
+      level: "information",
+      message,
+    });
+  }
+
+  public fatal(message: string) {
+    this.log({
+      level: "fatal",
+      message,
+    });
+  }
+
+  public trackWarning(warning: AutorestWarning) {
+    this.trackDiagnostic({
+      level: "warning",
+      ...warning,
+    });
+  }
+
+  public trackError(error: AutorestError) {
+    this.trackDiagnostic({
+      level: "error",
+      ...error,
+    });
+  }
+
+  protected emitLog(log: LogInfo) {
+    for (const sink of this.sinks) {
+      sink.log(log);
+    }
+  }
+
+  public abstract with(...processors: LoggerProcessor[]): AutorestLogger;
+  public abstract trackDiagnostic(diagnostic: AutorestDiagnostic): void;
+  public abstract log(log: LogInfo): void;
 }
 
-export interface AutorestError extends AutorestDiagnostic {}
+export interface AutorestLoggerOptions extends AutorestLoggerBaseOptions<LoggerProcessor> {}
 
-export interface AutorestWarning extends AutorestDiagnostic {}
+export class AutorestSyncLogger extends AutorestLoggerBase<LoggerProcessor> {
+  public diagnostics: AutorestDiagnostic[] = [];
 
-/**
- * AutorestLogger is an interface for the autorest logger that can be passed around in plugins.
- * This can be used to log information, debug logs or track errors and warnings.
- */
-export interface AutorestLogger {
-  /**
-   * TODO-TIM:
-   * Idea here is to have stage be able to report error and warning with a defined code + message.
-   * The pipeline runner would then be able to fail if any error or warnings were reported either at the end of the stage or at the very end of the run.
-   * Provide a way for the user to supress some warnings.
-   */
+  public constructor(options: AutorestLoggerOptions) {
+    super(options);
+  }
 
-  verbose(message: string): void;
+  public with(...processors: LoggerProcessor[]) {
+    return new AutorestSyncLogger({
+      sinks: this.sinks,
+      processors: [...processors, ...this.processors],
+    });
+  }
 
-  info(message: string): void;
+  public override trackDiagnostic(diagnostic: AutorestDiagnostic) {
+    const processed = this.process(diagnostic);
+    if (processed === undefined) {
+      return;
+    }
+    this.diagnostics.push(processed as any);
+    this.emitLog(processed);
+  }
 
-  fatal(message: string): void;
+  public override log(log: LogInfo) {
+    const processed = this.process(log);
+    if (processed === undefined) {
+      return;
+    }
+    this.emitLog(processed);
+  }
 
-  /**
-   * Track an error that occurred.
-   */
-  trackError(error: AutorestError): void;
+  protected emitLog(log: LogInfo) {
+    for (const sink of this.sinks) {
+      sink.log(log);
+    }
+  }
 
-  /**
-   * Track an warning that occurred.
-   */
-  trackWarning(error: AutorestWarning): void;
+  protected process(log: LogInfo): LogInfo | undefined {
+    let current = log;
+
+    for (const processor of this.processors) {
+      const processed = processor.process(log);
+      if (processed === undefined) {
+        return undefined;
+      } else {
+        current = processed;
+      }
+    }
+
+    return current;
+  }
+}
+
+export interface AutorestAsyncLoggerOptions extends AutorestLoggerBaseOptions<LoggerProcessor | LoggerAsyncProcessor> {
+  asyncSession: LoggingSession;
+}
+
+export class AutorestAsyncLogger extends AutorestLoggerBase<LoggerProcessor | LoggerAsyncProcessor> {
+  public diagnostics: AutorestDiagnostic[] = [];
+  private asyncSession: LoggingSession;
+
+  public constructor(options: AutorestAsyncLoggerOptions) {
+    super(options);
+    this.asyncSession = options.asyncSession;
+  }
+
+  public with(...processors: Array<LoggerProcessor | LoggerAsyncProcessor>) {
+    return new AutorestAsyncLogger({
+      asyncSession: this.asyncSession,
+      sinks: this.sinks,
+      processors: [...processors, ...this.processors],
+    });
+  }
+
+  protected emitLog(log: LogInfo) {
+    for (const sink of this.sinks) {
+      sink.log(log);
+    }
+  }
+
+  public override log(log: LogInfo) {
+    this.asyncSession.registerLog(() => this.logMessageAsync(log));
+  }
+
+  public override trackDiagnostic(diagnostic: AutorestDiagnostic) {
+    this.asyncSession.registerLog(() => this.trackDiagnosticAsync(diagnostic));
+  }
+
+  private async logMessageAsync(log: LogInfo) {
+    const processed = await this.process(log);
+    if (processed === undefined) {
+      return;
+    }
+    this.emitLog(processed);
+  }
+
+  private async trackDiagnosticAsync(diagnostic: AutorestDiagnostic) {
+    const processed = await this.process(diagnostic);
+    if (processed === undefined) {
+      return;
+    }
+    this.diagnostics.push(processed as any);
+    this.emitLog(processed);
+  }
+
+  protected async process(log: LogInfo): Promise<LogInfo | undefined> {
+    let current = log;
+    for (const processor of this.processors) {
+      const processed = await processor.process(log);
+      if (processed === undefined) {
+        return undefined;
+      } else {
+        current = processed;
+      }
+    }
+
+    return current;
+  }
 }

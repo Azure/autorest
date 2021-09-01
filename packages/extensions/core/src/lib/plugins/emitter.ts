@@ -12,24 +12,23 @@ function isOutputArtifactOrMapRequested(config: AutorestContext, artifactType: s
 }
 
 async function emitArtifactInternal(
-  config: AutorestContext,
+  context: AutorestContext,
   artifactType: string,
   uri: string,
   handle: DataHandle,
 ): Promise<void> {
-  if (config.IsOutputArtifactRequested(artifactType)) {
-    const content = await handle.ReadData(true);
+  if (context.IsOutputArtifactRequested(artifactType)) {
+    const content = await handle.readData(true);
     if (content !== "") {
-      config.Message({ Channel: Channel.Debug, Text: `Emitting '${artifactType}' at ${uri}` });
+      context.debug(`Emitting '${artifactType}' at ${uri}`);
       if (uri.startsWith("stdout://")) {
-        config.Message({
-          Channel: Channel.Information,
-          Details: { type: artifactType, uri, content },
-          Text: `Artifact '${uri.slice("stdout://".length)}' of type '${artifactType}' has been emitted.`,
-          Plugin: "emitter",
+        context.log({
+          level: "information",
+          message: `Artifact '${uri.slice("stdout://".length)}' of type '${artifactType}' has been emitted.`,
+          details: { type: artifactType, uri, content, plugin: "emitter" },
         });
       } else {
-        config.GeneratedFile.Dispatch({ type: artifactType, uri, content });
+        context.GeneratedFile.Dispatch({ type: artifactType, uri, content });
       }
       /* DISABLING SOURCE MAP SUPPORT
           if (config.IsOutputArtifactRequested(artifactType + '.map')) {

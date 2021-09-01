@@ -42,7 +42,7 @@ export async function loadOpenAPIFile(
     return null;
     // TODO: Should we throw or send an error message?
   }
-  config.Message({ Channel: Channel.Verbose, Text: `Reading OpenAPI 3.0 file ${inputFileUri}` });
+  config.verbose(`Reading OpenAPI 3.0 file ${inputFileUri}`);
   return sink.writeData(handle.description, await handle.readData(), [inputFileUri], "openapi-document");
 }
 

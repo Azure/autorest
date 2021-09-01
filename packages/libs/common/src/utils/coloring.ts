@@ -13,12 +13,6 @@ export function color(text: string): string {
     .replace(/_(.*)_/gm, (_, x) => chalk.italic(x))
     .replace(/^>(.*)/gm, (_, x) => chalk.cyan(`  ${x}`))
     .replace(/^!(.*)/gm, (_, x) => chalk.red.bold(`  ${x}`))
-    .replace(/^(ERROR) (.*?):(.*)/gm, (_, a, b, c) => `\n${chalk.red.bold(a)} ${chalk.green(b)}:${c}`)
-    .replace(/^(WARNING) (.*?):(.*)/gm, (_, a, b, c) => `\n${chalk.yellow.bold(a)} ${chalk.green(b)}:${c}`)
-    .replace(
-      /^(\s* - \w*:\/\/\S*):(\d*):(\d*) (.*)/gm,
-      (_, a, b, c, d) => `${chalk.cyan(a)}:${chalk.cyan.bold(b)}:${chalk.cyan.bold(c)} ${d}`,
-    )
     .replace(/```(.*)```/gs, (_, x) => indentAllLines(x, `  ${chalk.gray("|")} `))
     .replace(/`(.+?)`/gm, (_, x) => chalk.gray(x))
     .replace(/(".*?")/gm, (_, x) => chalk.gray(x))
