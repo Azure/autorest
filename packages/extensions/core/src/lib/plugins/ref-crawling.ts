@@ -97,7 +97,8 @@ class RefProcessor extends Transformer<any, any> {
           const refPath = value.$ref.indexOf("#") === -1 ? value.$ref : value.$ref.split("#")[0];
           const refUri = resolveUri(this.originalFileLocation, refPath);
           const handle = await this.inputScope.readStrict(refUri);
-          xmsExamples[key] = await handle.readObject<AnyObject>();
+          const exampleData = await handle.readObject<AnyObject>();
+          xmsExamples[key] = { ...exampleData, "x-ms-original-file": refUri };
         } catch {
           // skip examples that are not nice to us.
         }
