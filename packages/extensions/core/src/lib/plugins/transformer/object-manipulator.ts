@@ -91,7 +91,7 @@ export async function manipulateObject(
         (() => {
           throw new Error("Cannot remove root node.");
         })();
-    } catch (error) {
+    } catch (error: any) {
       // Background: it can happen that one transformation fails but the others are still valid. One typical use case is
       // the common parameters versus normal HTTP operations. They are on the same level in the path, so the commonly used
       // '$.paths.*.*' "where selection" finds both, however, most probably the transformation should and can be executed

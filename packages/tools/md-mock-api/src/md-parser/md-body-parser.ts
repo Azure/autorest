@@ -57,7 +57,7 @@ const parseContent = (
       case "xml":
         return undefined;
     }
-  } catch (e) {
+  } catch (e: any) {
     throw new Error(`Failed to parse body defined in '${sectionName}'. Code is not valid '${language}': ${e.message}`);
   }
 };

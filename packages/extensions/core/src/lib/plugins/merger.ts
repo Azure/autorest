@@ -208,7 +208,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     try {
       const urlObj = new URL(url, specHost);
       return urlObj.toString();
-    } catch (e) {
+    } catch (e: any) {
       if (e.code === "ERR_INVALID_URL") {
         if (specHost) {
           throw new Error(`Server url ${url} is invalid`);
