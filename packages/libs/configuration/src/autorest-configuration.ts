@@ -75,7 +75,6 @@ export const createAutorestConfiguration = async (
     ),
   );
 
-  console.log("inputFiles", inputFiles);
   config.inputFileUris = inputFiles.filter((x) => !filesToExclude.includes(x));
   return config;
 };
