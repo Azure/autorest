@@ -1,6 +1,6 @@
 import { DataHandle, PathMapping } from "@azure-tools/datastore";
 import { getFromJsonPointer } from "@azure-tools/json";
-import { Oai2ToOai3 } from "../converter";
+import { ConverterDiagnostic, ConverterLogger, Oai2ToOai3 } from "../converter";
 import { OpenAPI2Document } from "../oai2";
 import { loadInputFiles } from "./utils";
 
@@ -15,18 +15,31 @@ export interface OaiToOai3FileOutput {
   mappings: PathMapping[];
 }
 
-export async function convertOai2ToOai3Files(inputFiles: DataHandle[]): Promise<OaiToOai3FileOutput[]> {
+export async function convertOai2ToOai3Files(
+  logger: ConverterLogger,
+  inputFiles: DataHandle[],
+): Promise<OaiToOai3FileOutput[]> {
   const files = await loadInputFiles(inputFiles);
   const map = new Map<string, OaiToOai3FileInput>();
   for (const file of files) {
     map.set(file.name, file);
   }
-  const result = await convertOai2ToOai3(map);
 
   const sourceMapping = {};
   for (const input of inputFiles) {
     sourceMapping[input.originalFullPath] = input.key;
   }
+
+  const mapOriginalSpecName = (diag: ConverterDiagnostic): ConverterDiagnostic => {
+    return { ...diag, source: diag.source?.map((s) => ({ ...s, document: sourceMapping[s.document] })) };
+  };
+  const proxyLogger: ConverterLogger = {
+    trackWarning: (x) => logger.trackWarning(mapOriginalSpecName(x)),
+    trackError: (x) => logger.trackError(mapOriginalSpecName(x)),
+  };
+
+  const result = await convertOai2ToOai3(proxyLogger, map);
+
   return result.map((x) => {
     return {
       ...x,
@@ -40,7 +53,10 @@ export async function convertOai2ToOai3Files(inputFiles: DataHandle[]): Promise<
   });
 }
 
-export const convertOai2ToOai3 = async (inputs: Map<string, OaiToOai3FileInput>): Promise<OaiToOai3FileOutput[]> => {
+export async function convertOai2ToOai3(
+  logger: ConverterLogger,
+  inputs: Map<string, OaiToOai3FileInput>,
+): Promise<OaiToOai3FileOutput[]> {
   const resolvingFiles = new Set<string>();
   const completedFiles = new Map<string, OaiToOai3FileOutput>();
 
@@ -62,7 +78,7 @@ export const convertOai2ToOai3 = async (inputs: Map<string, OaiToOai3FileInput>)
       throw new Error(`Circular dependency with file ${input.name}`);
     }
     resolvingFiles.add(input.name);
-    const { result, mappings } = await convertOai2ToOai3Schema(input, resolveReference);
+    const { result, mappings } = await convertOai2ToOai3Schema(logger, input, resolveReference);
     completedFiles.set(input.name, {
       result,
       name: input.name,
@@ -75,7 +91,7 @@ export const convertOai2ToOai3 = async (inputs: Map<string, OaiToOai3FileInput>)
     await computeFile(input);
   }
   return [...completedFiles.values()];
-};
+}
 
 /**
  * Callback to resolve a reference.
@@ -84,10 +100,11 @@ export type AddMappingFn = (oldRef: string, newRef: string, referencedEl: any) =
 export type ResolveReferenceFn = (targetfile: string, reference: string) => Promise<any | undefined>;
 
 export const convertOai2ToOai3Schema = async (
+  logger: ConverterLogger,
   { name, schema }: OaiToOai3FileInput,
   resolveReference: ResolveReferenceFn,
 ): Promise<Oai2ToOai3Result> => {
-  const converter = new Oai2ToOai3(name, schema, resolveReference);
+  const converter = new Oai2ToOai3(logger, name, schema, resolveReference);
   await converter.convert();
   return { result: converter.generated, mappings: converter.mappings };
 };

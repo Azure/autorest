@@ -1,17 +1,24 @@
 import { DataHandle, IFileSystem, QuickDataSource } from "@azure-tools/datastore";
 import { PipelinePlugin } from "../pipeline/common";
-import { convertOai2ToOai3Files } from "@azure-tools/oai2-to-oai3";
+import { ConverterDiagnostic, ConverterLogger, convertOai2ToOai3Files } from "@azure-tools/oai2-to-oai3";
 import { cloneDeep } from "lodash";
+import { AutorestDiagnostic } from "../../../../../libs/common/dist";
+import { parseJsonPointer } from "../../../../../libs/json/dist";
 
 /* @internal */
 export function createSwaggerToOpenApi3Plugin(fileSystem?: IFileSystem): PipelinePlugin {
-  return async (config, input, sink) => {
+  return async (context, input, sink) => {
     const files = await input.enum();
     const inputs: DataHandle[] = [];
     for (const file of files) {
       inputs.push(await input.readStrict(file));
     }
-    const results = await convertOai2ToOai3Files(inputs);
+
+    const logger: ConverterLogger = {
+      trackError: (x) => context.trackError(convertDiagnostic(x)),
+      trackWarning: (x) => context.trackWarning(convertDiagnostic(x)),
+    };
+    const results = await convertOai2ToOai3Files(logger, inputs);
     const resultHandles: DataHandle[] = [];
     for (const { result, name, mappings } of results) {
       const input = inputs.find((x) => x.originalFullPath === name);
@@ -24,5 +31,14 @@ export function createSwaggerToOpenApi3Plugin(fileSystem?: IFileSystem): Pipelin
       resultHandles.push(await sink.forward(input.description, out));
     }
     return new QuickDataSource(resultHandles, input.pipeState);
+  };
+}
+
+function convertDiagnostic(diag: ConverterDiagnostic): AutorestDiagnostic {
+  return {
+    ...diag,
+    source: diag.source?.map((x) => {
+      return { document: x.document, position: { path: parseJsonPointer(x.path) } };
+    }),
   };
 }

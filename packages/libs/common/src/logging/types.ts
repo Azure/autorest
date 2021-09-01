@@ -119,6 +119,7 @@ export interface LoggerAsyncProcessor {
 export interface LoggerSink {
   log(info: LogInfo): void;
 }
+
 export type EnhancedLogInfo = Omit<LogInfo, "source"> & {
   readonly source?: EnhancedSourceLocation[];
 };

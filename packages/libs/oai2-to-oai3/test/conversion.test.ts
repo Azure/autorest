@@ -1,8 +1,13 @@
 import * as datastore from "@azure-tools/datastore";
-import { Oai2ToOai3 } from "../src/converter";
+import { ConverterLogger, Oai2ToOai3 } from "../src/converter";
 import { OpenAPI2Document } from "../src/oai2";
 import { join } from "path";
 import fs from "fs";
+
+const logger: ConverterLogger = {
+  trackError: jest.fn(),
+  trackWarning: jest.fn(),
+};
 
 const expectConvertingOpenAPI2 = async (openAPI2Name: string, openAPI3Name: string) => {
   const swaggerUri = "mem://swagger.yaml";
@@ -26,9 +31,9 @@ const expectConvertingOpenAPI2 = async (openAPI2Name: string, openAPI3Name: stri
   expect(originalDataHandle).not.toBeNull();
 
   if (swaggerDataHandle && originalDataHandle) {
-    const swag = await swaggerDataHandle.ReadObject<OpenAPI2Document>();
-    const original = await originalDataHandle.ReadObject();
-    const convert = new Oai2ToOai3(swaggerUri, swag);
+    const swag = await swaggerDataHandle.readObject<OpenAPI2Document>();
+    const original = await originalDataHandle.readObject();
+    const convert = new Oai2ToOai3(logger, swaggerUri, swag);
 
     // run the conversion
     await convert.convert();

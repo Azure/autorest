@@ -787,6 +787,9 @@ export class ModelerFour {
       this.interpret.getName(name, schema),
       this.interpret.getDescription("", schema),
       null,
+      {
+        serialization: this.interpret.getSerialization(schema),
+      },
     );
     // cache this now before we accidentally recurse on this type.
     this.schemaCache.set(schema, dictSchema);
