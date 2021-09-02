@@ -1,4 +1,4 @@
-import { CompilerHost, createProgram, DiagnosticError } from "@azure-tools/adl";
+import { CompilerHost, createProgram, DiagnosticError } from "@cadl-lang/compiler";
 import { readdir, readFile, realpath, stat } from "fs/promises";
 import { join, resolve } from "path";
 import { fileURLToPath, pathToFileURL } from "url";
