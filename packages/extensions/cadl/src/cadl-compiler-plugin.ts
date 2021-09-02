@@ -1,24 +1,26 @@
-// TODO-TIM fix this in extension-base
 import { Channel, Host } from "@autorest/extension-base";
 import { fileURLToPath } from "url";
-import { compileAdl } from "./adl-compiler.js";
+import { compileAdl } from "./cadl-compiler.js";
 
 export async function setupAdlCompilerPlugin(host: Host) {
   const inputFiles = await host.GetValue("inputFileUris");
   const entrypoint = inputFiles[0];
   const result = await compileAdl(fileURLToPath(entrypoint));
 
-  if ("error" in result) {
-    for (const diagnostic of result.error.diagnostics) {
+  if ("diagnostics" in result) {
+    for (const diagnostic of result.diagnostics) {
       host.Message({
         Channel: Channel.Error,
         Text: diagnostic.message,
-        Source: [
-          {
-            document: `file:///${diagnostic.file.path.replace(/\\/g, "/")}`,
-            Position: indexToPosition(diagnostic.file.text, diagnostic.pos),
-          },
-        ],
+        Source:
+          diagnostic.file !== undefined
+            ? [
+                {
+                  document: `file:///${diagnostic.file.path.replace(/\\/g, "/")}`,
+                  Position: indexToPosition(diagnostic.file.text, diagnostic.pos ?? 1),
+                },
+              ]
+            : undefined,
       });
     }
 

@@ -1,4 +1,4 @@
-import { compileAdl } from "adl-compiler";
+import { compileAdl } from "cadl-compiler";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
