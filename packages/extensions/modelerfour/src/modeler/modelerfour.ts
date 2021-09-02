@@ -850,7 +850,7 @@ export class ModelerFour {
         maxProperties: schema.maxProperties ? Number(schema.maxProperties) : undefined,
         language: {
           default: {
-            summary: schema.summary || schema.title,
+            summary: schema.title,
           },
         },
       }),
@@ -866,7 +866,7 @@ export class ModelerFour {
           new Property(
             this.interpret.getPreferredName(propertyDeclaration, propertyName),
             propertyDeclaration.description ||
-              this.interpret.getDescription(pType.language.default.description, property),
+              this.interpret.getDescription(pType.language.default.description, property as any),
             pType,
             {
               readOnly: propertyDeclaration.readOnly || pSchema.readOnly,
@@ -1568,7 +1568,7 @@ export class ModelerFour {
             new Parameter(
               propertyName,
               propertyDeclaration.description ||
-                this.interpret.getDescription(pType.language.default.description, property),
+                this.interpret.getDescription(pType.language.default.description, property as any),
               pType,
               {
                 schema: pType,
@@ -2014,7 +2014,7 @@ export class ModelerFour {
             implementation,
             extensions: this.interpret.getExtensionProperties(parameter),
             deprecated: this.interpret.getDeprecation(parameter),
-            nullable: parameter.nullable || schema.nullable,
+            nullable: schema.nullable,
             protocol: {
               http: new HttpParameter(
                 parameter.in,

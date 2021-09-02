@@ -216,7 +216,11 @@ export class QualityPreChecker {
               continue;
             }
 
-            const $ref = schema?.allOf?.[0]?.$ref;
+            const firstParent = schema?.allOf?.[0];
+            if (firstParent && !("$ref" in firstParent)) {
+              throw new Error("Unexpected allOf should be a ref");
+            }
+            const $ref = firstParent?.$ref;
 
             const text = JSON.stringify(this.input);
             this.input = JSON.parse(

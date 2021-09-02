@@ -1,5 +1,5 @@
 import { Session } from "@autorest/extension-base";
-import oai3, { dereference, Dereferenced, JsonType, Schema } from "@azure-tools/openapi";
+import oai3, { dereference, Dereferenced, JsonType, Refable, Schema } from "@azure-tools/openapi";
 import { groupBy } from "lodash";
 import { ModelerFourOptions } from "modeler/modelerfour-options";
 import { getDiff, rdiffResult } from "recursive-diff";
@@ -191,7 +191,7 @@ export class DuplicateSchemaMerger {
     spec: oai3.Model,
     schemas: DereferencedSchema[],
   ): { keep: DereferencedSchema; remove: DereferencedSchema[] } {
-    const nonRefSchema = schemas.find((x) => spec.components?.schemas?.[x.key].$ref === undefined);
+    const nonRefSchema = schemas.find((x) => (spec.components?.schemas?.[x.key] as Refable<any>).$ref === undefined);
     if (nonRefSchema) {
       return { keep: nonRefSchema, remove: schemas.filter((x) => x.key !== nonRefSchema.key) };
     } else {

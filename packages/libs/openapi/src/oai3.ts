@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { EnumStr, Refable as Reference } from "./common";
+import { EnumStr, Refable as Reference, ExtensionKey } from "./common";
 
 export type Dictionary<T> = { [key: string]: T };
 
@@ -11,7 +11,7 @@ export type Dictionary<T> = { [key: string]: T };
 
 /** Nearly all classes can support additional key-value pairs where the key starts with 'x-' */
 export interface Extensions {
-  [key: string]: any;
+  [key: ExtensionKey]: any;
 }
 
 /** Properties, Parameters, Operations and Schemas require additional support */
@@ -19,9 +19,13 @@ export interface Implementation<T> {}
 
 export interface Details {}
 
-/** Property References may have additional data that's not in the target reference */
+/**
+ * Property References may have additional data that's not in the target reference
+ */
 export interface PropertyDetails extends Details, Extensions {
   description?: string;
+  readOnly?: boolean;
+  nullable?: boolean;
 }
 
 export interface ParameterDetails extends Details {}
@@ -122,7 +126,7 @@ export type PathEncodingStyle = EncodingStyle.Matrix | EncodingStyle.Label | Enc
 
 export interface Model extends Extensions {
   paths: Dictionary<PathItem>;
-  openApi: string;
+  openapi: string;
   info: Info;
   externalDocs?: ExternalDocumentation;
   servers?: Array<Server>;
