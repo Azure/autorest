@@ -25,7 +25,14 @@ import {
 import { cleanElementName, convertOai2RefToOai3, parseOai2Ref } from "./refs-utils";
 import { ResolveReferenceFn } from "./runner";
 import { statusCodes } from "./status-codes";
-import oai3, { EncodingStyle, HttpOperation, JsonType, PathItem, SecurityType } from "@azure-tools/openapi";
+import oai3, {
+  EncodingStyle,
+  HttpOperation,
+  isExtensionKey,
+  JsonType,
+  PathItem,
+  SecurityType,
+} from "@azure-tools/openapi";
 
 // NOTE: after testing references should be changed to OpenAPI 3.x.x references
 
@@ -1006,7 +1013,11 @@ export class Oai2ToOai3 {
         if (parameterValue.schema !== undefined) {
           for (const { key, value, childIterator } of parameterItemMembers()) {
             if (key === "schema") {
-              await this.visitSchema(requestBody.content[mimetype].schema!, value, childIterator);
+              await this.visitSchema(
+                requestBody.content[mimetype].schema as MappingTreeObject<oai3.Schema>,
+                value,
+                childIterator,
+              );
             }
           }
         } else {
@@ -1016,7 +1027,7 @@ export class Oai2ToOai3 {
 
       // copy extensions in requestBody
       for (const { key, pointer: fieldPointer, value } of parameterItemMembers()) {
-        if (key.startsWith("x-")) {
+        if (isExtensionKey(key)) {
           if (!requestBody[key]) {
             requestBody.__set__(key, { value: value, sourcePointer: fieldPointer });
           }
@@ -1093,7 +1104,7 @@ export class Oai2ToOai3 {
 
     // copy extensions in target property
     for (const { key, pointer: fieldPointer, value } of parameterItemMembers()) {
-      if (key.startsWith("x-")) {
+      if (isExtensionKey(key)) {
         targetProperty.__set__(key, { value: value, sourcePointer: fieldPointer });
       }
     }
@@ -1108,7 +1119,7 @@ export class Oai2ToOai3 {
       target.__set__(key, this.newObject(pointer));
       if (value.$ref) {
         target[key].__set__("$ref", { value: await this.convertReferenceToOai3(value.$ref), sourcePointer: pointer });
-      } else if (key.startsWith("x-")) {
+      } else if (isExtensionKey(key)) {
         await this.visitExtensions(target[key], key, value, pointer);
       } else {
         await this.visitResponse(target[key], value, key, childIterator, pointer, produces);
@@ -1184,7 +1195,7 @@ export class Oai2ToOai3 {
 
     // copy extensions
     for (const { key, pointer: fieldPointer, value } of responsesFieldMembers()) {
-      if (key.startsWith("x-") && responseTarget[key] === undefined) {
+      if (isExtensionKey(key) && responseTarget[key] === undefined) {
         responseTarget.__set__(key, { value: value, sourcePointer: fieldPointer });
       }
     }
@@ -1238,7 +1249,7 @@ export class Oai2ToOai3 {
           await this.visitSchema(schema.items!, headerValue.items, childIterator);
         } else if (this.parameterTypeProperties.includes(key) || this.arrayProperties.includes(key)) {
           schema.__set__(key, { value: headerValue[key], sourcePointer });
-        } else if (key.startsWith("x-") && targetHeader[key] === undefined) {
+        } else if (isExtensionKey(key) && targetHeader[key] === undefined) {
           targetHeader.__set__(key, { value: headerValue[key], sourcePointer });
         }
       }

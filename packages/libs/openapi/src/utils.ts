@@ -88,3 +88,7 @@ export function dereference<T>(document: any, item: Refable<T>, stack: string[] 
   }
   return { instance: item, name: "", fromRef: false };
 }
+
+export function isExtensionKey(key: string): key is ExtensionKey {
+  return key.startsWith("x-");
+}
