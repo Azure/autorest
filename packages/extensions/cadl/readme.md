@@ -21,12 +21,12 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 ```yaml
 pipeline:
-  adl/adl-compiler:
+  cadl/cadl-compiler:
     output-artifact: swagger-document
     scope: perform-load
 
   openapi-document/openapi-document-converter:
-    input: adl/adl-compiler
+    input: cadl/cadl-compiler
 
   swagger-document/loader-swagger:
     null: true

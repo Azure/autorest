@@ -7,7 +7,7 @@ export function createAdlHost(writeFile: (path: string, content: string) => Prom
   return {
     readFile: async (path: string) => createSourceFile((await readFile(path, "utf-8")).toString(), path),
     resolveAbsolutePath: (path: string) => resolve(path),
-    getExecutionRoot: () => resolve(fileURLToPath(import.meta.url), "../../node_modules/@azure-tools/adl"),
+    getExecutionRoot: () => resolve(fileURLToPath(import.meta.url), "../../node_modules/@cadl-lang/compiler"),
     getJsImport: (path: string) => import(pathToFileURL(path).href),
     writeFile,
     getLibDirs() {
