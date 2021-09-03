@@ -2,7 +2,7 @@ jest.mock("@azure-tools/uri");
 
 import { AutorestRawConfiguration } from "@autorest/configuration";
 import { writeString, writeBinary } from "@azure-tools/uri";
-import { ArtifactWriter } from "../src/artifact-writer";
+import { ArtifactWriter } from "./artifact-writer";
 
 const TestStrings = {
   mixed: "some\ndifferent\r\nline\nendings\r\n",

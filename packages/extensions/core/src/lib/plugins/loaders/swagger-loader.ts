@@ -1,19 +1,18 @@
 import { PipelinePlugin } from "../../pipeline/common";
-import { Channel } from "../../message";
 import { DataHandle, DataSink, DataSource, QuickDataSource } from "@azure-tools/datastore";
 import { crawlReferences } from "../ref-crawling";
-import { AutorestContext } from "../../context";
 import { checkSyntaxFromData } from "./common";
+import { IAutorestLogger } from "@autorest/common";
 
-export async function LoadLiterateSwaggers(
-  config: AutorestContext,
+export async function loadSwaggerFiles(
+  logger: IAutorestLogger,
   inputScope: DataSource,
   inputFileUris: Array<string>,
   sink: DataSink,
 ): Promise<Array<DataHandle>> {
   const rawSwaggers: Array<DataHandle> = [];
   for (const inputFileUri of inputFileUris) {
-    const pluginInput = await LoadLiterateSwagger(config, inputScope, inputFileUri, sink);
+    const pluginInput = await loadSwaggerFile(logger, inputScope, inputFileUri, sink);
     if (pluginInput) {
       rawSwaggers.push(pluginInput);
     }
@@ -21,20 +20,20 @@ export async function LoadLiterateSwaggers(
   return rawSwaggers;
 }
 
-export async function LoadLiterateSwagger(
-  config: AutorestContext,
+export async function loadSwaggerFile(
+  logger: IAutorestLogger,
   inputScope: DataSource,
   inputFileUri: string,
   sink: DataSink,
 ): Promise<DataHandle | null> {
   const data = await inputScope.readStrict(inputFileUri);
-  await checkSyntaxFromData(inputFileUri, data, config);
+  await checkSyntaxFromData(inputFileUri, data, logger);
   // check OpenAPI version
   if ((await data.readObject<any>()).swagger !== "2.0") {
     return null;
     // TODO: Should we throw or send an error message?
   }
-  config.verbose(`Reading OpenAPI 2.0 file ${inputFileUri}`);
+  logger.verbose(`Reading OpenAPI 2.0 file ${inputFileUri}`);
 
   return sink.writeData(data.description, await data.readData(), [inputFileUri], "swagger-document");
 }
@@ -42,7 +41,7 @@ export async function LoadLiterateSwagger(
 export function createSwaggerLoaderPlugin(): PipelinePlugin {
   return async (config, input, sink) => {
     const inputs = config.config.inputFileUris;
-    const swaggers = await LoadLiterateSwaggers(config, input, inputs, sink);
+    const swaggers = await loadSwaggerFiles(config, input, inputs, sink);
 
     const foundAllFiles = swaggers.length !== inputs.length;
     let result: DataHandle[] = [];

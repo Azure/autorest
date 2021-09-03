@@ -20,7 +20,7 @@ export class MessageEmitter extends EventEmitter {
 
   constructor() {
     super();
-    this.DataStore = new DataStore();
+    this.DataStore = new DataStore({ autoUnloadData: true });
   }
   /* @internal */ public DataStore: DataStore;
   /* @internal */ public get messageEmitter() {

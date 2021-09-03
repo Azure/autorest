@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/configuration",
+      "comment": "Configuration loader will not auto unloadcode blocks",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/configuration",
+  "email": "tiguerin@microsoft.com"
+}

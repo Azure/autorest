@@ -65,7 +65,7 @@ export class ConfigurationLoader {
   ) {
     const fileSystem = options.fileSystem ?? new RealFileSystem();
     this.fileSystem = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
-    this.dataStore = options.dataStore ?? new DataStore();
+    this.dataStore = options.dataStore ?? new DataStore({ autoUnloadData: false });
     this.extensionManager = options.extensionManager;
   }
 

@@ -27,8 +27,11 @@
     "autorest-language-service": "./entrypoints/language-service.js"
   },
   "scripts": {
-    "test": "jest --coverage=false --forceExit --runInBand",
-    "test:ci": "jest --ci --forceExit --runInBand",
+    "test": "jest --coverage=false --watch",
+    "test:unit:ci": "jest --ci",
+    "test:e2e": "jest --forceExit --runInBand --config ./jest.e2e.config.js",
+    "test:e2e:ci": "jest --ci --forceExit --runInBand --config ./jest.e2e.config.js",
+    "test:ci": "npm run test:unit:ci && npm run test:e2e:ci",
     "watch": "tsc -p ./tsconfig.build.json --watch",
     "build": "tsc -p ./tsconfig.build.json",
     "build:prod": "webpack",

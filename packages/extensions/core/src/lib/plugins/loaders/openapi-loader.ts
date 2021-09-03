@@ -1,9 +1,8 @@
 import { PipelinePlugin } from "../../pipeline/common";
-import { Channel } from "../../message";
 import { DataHandle, DataSink, DataSource, QuickDataSource } from "@azure-tools/datastore";
 import { crawlReferences } from "../ref-crawling";
-import { AutorestContext } from "../../context";
 import { checkSyntaxFromData } from "./common";
+import { IAutorestLogger } from "@autorest/common";
 
 interface OpenAPI3Spec {
   openapi?: string;
@@ -13,7 +12,7 @@ interface OpenAPI3Spec {
 }
 
 export async function loadOpenAPIFiles(
-  config: AutorestContext,
+  logger: IAutorestLogger,
   inputScope: DataSource,
   inputFileUris: string[],
   sink: DataSink,
@@ -21,7 +20,7 @@ export async function loadOpenAPIFiles(
   const rawOpenApis: DataHandle[] = [];
   for (const inputFileUri of inputFileUris) {
     // read literate Swagger
-    const pluginInput = await loadOpenAPIFile(config, inputScope, inputFileUri, sink);
+    const pluginInput = await loadOpenAPIFile(logger, inputScope, inputFileUri, sink);
     if (pluginInput) {
       rawOpenApis.push(pluginInput);
     }
@@ -30,19 +29,19 @@ export async function loadOpenAPIFiles(
 }
 
 export async function loadOpenAPIFile(
-  config: AutorestContext,
+  logger: IAutorestLogger,
   inputScope: DataSource,
   inputFileUri: string,
   sink: DataSink,
 ): Promise<DataHandle | null> {
   const handle = await inputScope.readStrict(inputFileUri);
-  await checkSyntaxFromData(inputFileUri, handle, config);
+  await checkSyntaxFromData(inputFileUri, handle, logger);
   // const data = await ParseLiterateYaml(config, handle, sink);
   if (!isOpenAPI3Spec(await handle.readObject<OpenAPI3Spec>())) {
     return null;
     // TODO: Should we throw or send an error message?
   }
-  config.verbose(`Reading OpenAPI 3.0 file ${inputFileUri}`);
+  logger.verbose(`Reading OpenAPI 3.0 file ${inputFileUri}`);
   return sink.writeData(handle.description, await handle.readData(), [inputFileUri], "openapi-document");
 }
 
