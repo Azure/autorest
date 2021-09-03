@@ -70,6 +70,39 @@ describe("EnumDeduplicator", () => {
     });
   });
 
+  it("merge x- properties of enums", async () => {
+    const fooEnum1 = {
+      "x-ms-metadata": { name: "Foo", apiVersions: "1.0.0" },
+      type: JsonType.String,
+      enum: ["one", "two"],
+      "x-namespace": "My.Service",
+    };
+
+    const fooEnum2 = {
+      "x-ms-metadata": { name: "Foo", apiVersions: "1.1.0" },
+      type: JsonType.String,
+      enum: ["one", "two"],
+      "x-namespace": "My.Service",
+    };
+
+    const result = await runEnumDeduplicator({
+      components: {
+        schemas: {
+          "schemas:0": fooEnum1,
+          "schemas:1": fooEnum2,
+        },
+      },
+    });
+
+    expect(result.components?.schemas).toHaveProperty("Foo");
+    expect(result.components?.schemas?.["Foo"]).toEqual({
+      enum: ["one", "two"],
+      type: "string",
+      "x-ms-metadata": { apiVersions: "1.0.0", name: "Foo" },
+      "x-namespace": "My.Service",
+    });
+  });
+
   describe("enum referencing other enums", () => {
     const fooEnum = {
       "x-ms-metadata": { name: "Foo" },
