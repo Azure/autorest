@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import { DataStore } from "@azure-tools/datastore";
-import { manipulateObject } from "../src/lib/plugins/transformer/object-manipulator";
+import { manipulateObject } from "./object-manipulator";
 import { createSandbox } from "@azure-tools/datastore";
 
 const safeEval = createSandbox();
@@ -51,7 +51,7 @@ definitions:
 describe("ObjectManipulator", () => {
   it("any hit", async () => {
     // setup
-    const dataStore = new DataStore();
+    const dataStore = new DataStore({ autoUnloadData: false });
     const input = await dataStore.writeData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
 
     const expectHit = async (jsonQuery: string, anyHit: boolean) => {
