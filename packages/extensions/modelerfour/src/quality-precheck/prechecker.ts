@@ -1,4 +1,6 @@
-import { Session } from "@autorest/extension-base";
+import { Session, Host, startSession } from "@autorest/extension-base";
+
+import { serialize } from "@azure-tools/codegen";
 import {
   Model as oai3,
   Refable,
@@ -9,11 +11,9 @@ import {
   StringFormat,
 } from "@azure-tools/openapi";
 
-import { serialize } from "@azure-tools/codegen";
-import { Host, startSession } from "@autorest/extension-base";
+import { getDiff } from "recursive-diff";
 import { Interpretations } from "../modeler/interpretations";
 
-import { getDiff } from "recursive-diff";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
 import { DuplicateSchemaMerger } from "./duplicate-schema-merger";
 

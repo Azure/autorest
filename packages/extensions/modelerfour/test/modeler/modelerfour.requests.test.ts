@@ -1,12 +1,12 @@
 /* eslint-disable jest/no-standalone-expect */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
+import assert from "assert";
 import { CodeModel, DictionarySchema, HttpHeader, Operation, Parameter, SealedChoiceSchema } from "@autorest/codemodel";
 import { HttpOperation, JsonType, ParameterLocation, RequestBody } from "@azure-tools/openapi";
+import * as oai3 from "@azure-tools/openapi";
 import { addOperation, createTestSpec, findByName } from "../utils";
 import { runModeler } from "./modelerfour-utils";
-import * as oai3 from "@azure-tools/openapi";
-import assert from "assert";
 
 async function runModelerWithOperation(
   method: string,

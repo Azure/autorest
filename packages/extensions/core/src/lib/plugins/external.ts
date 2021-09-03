@@ -1,5 +1,5 @@
-import { DataHandle, QuickDataSource, mergePipeStates } from "@azure-tools/datastore";
 import { LogLevel } from "@autorest/common";
+import { DataHandle, QuickDataSource, mergePipeStates } from "@azure-tools/datastore";
 import { Channel, Message } from "../message";
 import { PipelinePlugin } from "../pipeline/common";
 import { AutoRestExtension } from "../pipeline/plugin-endpoint";

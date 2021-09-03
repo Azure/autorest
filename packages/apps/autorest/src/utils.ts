@@ -1,14 +1,14 @@
-import { AutorestArgs } from "./args";
-import { AutorestConfiguration, AutorestNormalizedConfiguration, ConfigurationLoader } from "@autorest/configuration";
-import { AutorestSyncLogger, ConsoleLoggerSink } from "@autorest/common";
-import { createFileOrFolderUri, createFolderUri, resolveUri } from "@azure-tools/uri";
-import { AppRoot } from "./constants";
-import { extensionManager, networkEnabled, selectVersion } from "./autorest-as-a-service";
-import chalk from "chalk";
-import { checkForAutoRestUpdate } from "./actions";
-import { isFile } from "@azure-tools/async-io";
 import { dirname, join, resolve } from "path";
+import { AutorestSyncLogger, ConsoleLoggerSink } from "@autorest/common";
+import { AutorestConfiguration, AutorestNormalizedConfiguration, ConfigurationLoader } from "@autorest/configuration";
+import { isFile } from "@azure-tools/async-io";
+import { createFileOrFolderUri, createFolderUri, resolveUri } from "@azure-tools/uri";
+import chalk from "chalk";
 import untildify from "untildify";
+import { checkForAutoRestUpdate } from "./actions";
+import { AutorestArgs } from "./args";
+import { extensionManager, networkEnabled, selectVersion } from "./autorest-as-a-service";
+import { AppRoot } from "./constants";
 
 const inWebpack = typeof __webpack_require__ === "function";
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

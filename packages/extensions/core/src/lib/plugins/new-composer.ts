@@ -1,3 +1,4 @@
+import { maximum, toSemver } from "@azure-tools/codegen";
 import {
   AnyObject,
   DataSink,
@@ -9,10 +10,9 @@ import {
   visit,
 } from "@azure-tools/datastore";
 import { areSimilar } from "@azure-tools/object-comparison";
-import { PipelinePlugin } from "../pipeline/common";
-import { maximum, toSemver } from "@azure-tools/codegen";
 import compareVersions from "compare-versions";
 import { AutorestContext } from "../context";
+import { PipelinePlugin } from "../pipeline/common";
 
 /**
  * Prepares an OpenAPI document for the generation-2 code generators

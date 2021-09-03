@@ -1,10 +1,10 @@
 import "source-map-support/register";
 import { AutoRestExtension } from "@autorest/extension-base";
-import { processRequest as modelerfour } from "./modeler/plugin-modelerfour";
-import { processRequest as preNamer } from "./prenamer/plugin-prenamer";
+import { processRequest as checker } from "./checker/plugin-checker";
 import { processRequest as flattener } from "./flattener/plugin-flattener";
 import { processRequest as grouper } from "./grouper/plugin-grouper";
-import { processRequest as checker } from "./checker/plugin-checker";
+import { processRequest as modelerfour } from "./modeler/plugin-modelerfour";
+import { processRequest as preNamer } from "./prenamer/plugin-prenamer";
 import { processRequest as prechecker } from "./quality-precheck/prechecker";
 
 export async function initializePlugins(pluginHost: AutoRestExtension) {

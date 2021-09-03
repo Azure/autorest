@@ -4,7 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 /* eslint-disable no-console */
 import "source-map-support/register";
-import { omit } from "lodash";
+import { EventEmitter } from "events";
+import { resolve as currentDirectory } from "path";
 import {
   configureLibrariesLogger,
   color,
@@ -12,8 +13,9 @@ import {
   FilterLogger,
   AutorestLogger,
   AutorestSyncLogger,
+  Exception,
 } from "@autorest/common";
-import { EventEmitter } from "events";
+
 import { AutorestCliArgs, parseAutorestCliArgs } from "@autorest/configuration";
 EventEmitter.defaultMaxListeners = 100;
 process.env["ELECTRON_RUN_AS_NODE"] = "1";
@@ -23,7 +25,6 @@ delete process.env["ELECTRON_NO_ATTACH_CONSOLE"];
 // the console app starts for real here.
 
 import { EnhancedFileSystem, RealFileSystem } from "@azure-tools/datastore";
-import { parseYAML } from "@azure-tools/yaml";
 import {
   clearFolder,
   createFolderUri,
@@ -33,13 +34,13 @@ import {
   writeBinary,
   writeString,
 } from "@azure-tools/uri";
-import { resolve as currentDirectory } from "path";
+import { parseYAML } from "@azure-tools/yaml";
+import { omit } from "lodash";
+import { ArtifactWriter } from "./artifact-writer";
 import { Help } from "./help";
 import { Artifact } from "./lib/artifact";
 import { AutoRest, IsOpenApiDocument, Shutdown } from "./lib/autorest-core";
-import { Exception } from "@autorest/common";
 import { VERSION } from "./lib/constants";
-import { ArtifactWriter } from "./artifact-writer";
 import { getLogLevel } from "./lib/context";
 
 let verbose = false;

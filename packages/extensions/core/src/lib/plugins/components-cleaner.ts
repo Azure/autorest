@@ -14,9 +14,9 @@ import {
   Transformer,
 } from "@azure-tools/datastore";
 import * as oai from "@azure-tools/openapi";
+import oai3 from "@azure-tools/openapi";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
-import oai3 from "@azure-tools/openapi";
 
 /**
  * components-to-keep are the ones that:

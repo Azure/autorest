@@ -1,5 +1,5 @@
-import { Channel, Host } from "@autorest/extension-base";
 import { fileURLToPath } from "url";
+import { Channel, Host } from "@autorest/extension-base";
 import { compileAdl } from "./cadl-compiler.js";
 
 export async function setupAdlCompilerPlugin(host: Host) {

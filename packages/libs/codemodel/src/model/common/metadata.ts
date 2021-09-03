@@ -1,8 +1,8 @@
+import { Initializer, DeepPartial } from "@azure-tools/codegen";
+import { SetType } from "../../tag";
 import { Extensions } from "./extensions";
 import { Languages } from "./languages";
 import { Protocols } from "./protocols";
-import { Initializer, DeepPartial } from "@azure-tools/codegen";
-import { SetType } from "../../tag";
 
 /** common pattern for Metadata on aspects */
 export interface Metadata extends Extensions {

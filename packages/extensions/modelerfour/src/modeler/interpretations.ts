@@ -1,5 +1,3 @@
-import { Session } from "@autorest/extension-base";
-import * as OpenAPI from "@azure-tools/openapi";
 import {
   ChoiceSchema,
   XmlSerlializationFormat,
@@ -9,6 +7,9 @@ import {
   ChoiceValue,
   SetType,
 } from "@autorest/codemodel";
+import { Session } from "@autorest/extension-base";
+import { getPascalIdentifier } from "@azure-tools/codegen";
+import * as OpenAPI from "@azure-tools/openapi";
 import {
   StringFormat,
   JsonType,
@@ -16,7 +17,6 @@ import {
   includeXDashKeys,
   includeXDashProperties,
 } from "@azure-tools/openapi";
-import { getPascalIdentifier } from "@azure-tools/codegen";
 import { keyBy } from "lodash";
 export interface XMSEnum {
   modelAsString?: boolean;

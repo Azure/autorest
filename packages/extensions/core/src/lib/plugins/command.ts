@@ -1,8 +1,8 @@
-import { PipelinePlugin } from "../pipeline/common";
-import { AutorestContext } from "../context";
-import { DataSource, DataSink, DataHandle, QuickDataSource } from "@azure-tools/datastore";
 import { execute, cmdlineToArray } from "@azure-tools/codegen";
+import { DataSource, DataSink, DataHandle, QuickDataSource } from "@azure-tools/datastore";
 import { FileUriToPath } from "@azure-tools/uri";
+import { AutorestContext } from "../context";
+import { PipelinePlugin } from "../pipeline/common";
 
 async function command(context: AutorestContext, input: DataSource, sink: DataSink) {
   const c = context.config.raw.run;

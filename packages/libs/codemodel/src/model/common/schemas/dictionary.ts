@@ -1,6 +1,6 @@
-import { SchemaType } from "../schema-type";
-import { Schema, ComplexSchema } from "../schema";
 import { DeepPartial } from "@azure-tools/codegen";
+import { Schema, ComplexSchema } from "../schema";
+import { SchemaType } from "../schema-type";
 
 /** a schema that represents a key-value collection */
 export interface DictionarySchema<ElementType extends Schema = Schema> extends ComplexSchema {

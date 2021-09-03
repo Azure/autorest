@@ -1,8 +1,8 @@
 import { QuickDataSource, DataHandle, AnyObject, selectNodes } from "@azure-tools/datastore";
-import { createPerFilePlugin, PipelinePlugin } from "../../pipeline/common";
-import { Manipulator } from "./manipulation";
 import { Channel } from "../../message";
+import { createPerFilePlugin, PipelinePlugin } from "../../pipeline/common";
 import { evalDirectiveTransform } from "./eval";
+import { Manipulator } from "./manipulation";
 
 /* @internal */
 export function createGraphTransformerPlugin(): PipelinePlugin {

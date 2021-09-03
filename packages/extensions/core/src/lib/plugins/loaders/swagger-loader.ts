@@ -1,8 +1,8 @@
-import { PipelinePlugin } from "../../pipeline/common";
+import { IAutorestLogger } from "@autorest/common";
 import { DataHandle, DataSink, DataSource, QuickDataSource } from "@azure-tools/datastore";
+import { PipelinePlugin } from "../../pipeline/common";
 import { crawlReferences } from "../ref-crawling";
 import { checkSyntaxFromData } from "./common";
-import { IAutorestLogger } from "@autorest/common";
 
 export async function loadSwaggerFiles(
   logger: IAutorestLogger,

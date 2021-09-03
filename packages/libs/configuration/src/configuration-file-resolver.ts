@@ -1,7 +1,7 @@
 import { AutorestLogger } from "@autorest/common";
 import { IFileSystem } from "@azure-tools/datastore";
-import { parseYAMLAst } from "@azure-tools/yaml";
 import { ensureIsFolderUri, resolveUri } from "@azure-tools/uri";
+import { parseYAMLAst } from "@azure-tools/yaml";
 import { DefaultConfiguration, MagicString } from "./contants";
 
 /**

@@ -1,22 +1,21 @@
 /* eslint-disable no-process-exit */
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { spawn } from "child_process";
 import { lookup } from "dns";
-import { Extension, ExtensionManager, Package } from "@azure-tools/extension";
-import { homedir } from "os";
-import { join } from "path";
+import { mkdtempSync, rmdirSync } from "fs";
+import { homedir, tmpdir } from "os";
 
-import { Exception } from "@azure-tools/tasks";
+import { join } from "path";
+import { AutorestConfiguration } from "@autorest/configuration";
+import { isFile, mkdir, isDirectory } from "@azure-tools/async-io";
+import { Extension, ExtensionManager, Package } from "@azure-tools/extension";
+
+import { Exception, When } from "@azure-tools/tasks";
 
 import * as semver from "semver";
-import { isFile, mkdir, isDirectory } from "@azure-tools/async-io";
-import { When } from "@azure-tools/tasks";
-import { mkdtempSync, rmdirSync } from "fs";
-import { tmpdir } from "os";
-import { spawn } from "child_process";
 import { AutorestArgs } from "./args";
 import { VERSION } from "./constants";
-import { AutorestConfiguration } from "@autorest/configuration";
 import { parseMemory } from "./utils";
 
 const inWebpack = typeof __webpack_require__ === "function";

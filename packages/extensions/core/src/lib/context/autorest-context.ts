@@ -1,16 +1,4 @@
-import { DataStore, CachingFileSystem } from "@azure-tools/datastore";
 import { basename, dirname } from "path";
-import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
-import { Artifact } from "../artifact";
-import {
-  AutorestNormalizedConfiguration,
-  getNestedConfiguration,
-  ResolvedDirective,
-  resolveDirectives,
-} from "@autorest/configuration";
-import { MessageEmitter } from "./message-emitter";
-import { IEvent } from "../events";
-import { AutorestConfiguration, arrayOf, extendAutorestConfiguration } from "@autorest/configuration";
 import {
   AutorestError,
   FilterLogger,
@@ -21,10 +9,25 @@ import {
   LogSuppression,
   IAutorestLogger,
 } from "@autorest/common";
-import { VERSION } from "../constants";
-import { StatsCollector } from "../stats";
-import { PipelinePluginDefinition } from "../pipeline/plugin-loader";
+import {
+  AutorestNormalizedConfiguration,
+  getNestedConfiguration,
+  ResolvedDirective,
+  resolveDirectives,
+  AutorestConfiguration,
+  arrayOf,
+  extendAutorestConfiguration,
+} from "@autorest/configuration";
+
+import { DataStore, CachingFileSystem } from "@azure-tools/datastore";
 import { cloneDeep } from "lodash";
+import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
+import { Artifact } from "../artifact";
+import { VERSION } from "../constants";
+import { IEvent } from "../events";
+import { PipelinePluginDefinition } from "../pipeline/plugin-loader";
+import { StatsCollector } from "../stats";
+import { MessageEmitter } from "./message-emitter";
 
 export class AutorestContext implements IAutorestLogger {
   public config: AutorestConfiguration;

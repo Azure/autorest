@@ -1,5 +1,5 @@
-import { patchPythonPath, PythonCommandLine, resolvePythonRequirement, updatePythonPath } from "./python";
 import { execute } from "../exec-cmd";
+import { patchPythonPath, PythonCommandLine, resolvePythonRequirement, updatePythonPath } from "./python";
 
 jest.mock("../exec-cmd");
 

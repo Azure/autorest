@@ -1,8 +1,8 @@
 import { enumerateFiles, readUri, writeString } from "@azure-tools/uri";
-import { IFileSystem } from "./file-system";
 import * as Constants from "../constants";
-import { UriNotFoundError } from "./errors";
 import { logger } from "../logger";
+import { UriNotFoundError } from "./errors";
+import { IFileSystem } from "./file-system";
 
 export class RealFileSystem implements IFileSystem {
   public constructor() {}

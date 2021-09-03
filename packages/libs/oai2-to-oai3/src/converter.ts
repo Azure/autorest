@@ -11,6 +11,7 @@ import {
   createMappingTree,
 } from "@azure-tools/datastore";
 import { JsonPointer, getFromJsonPointer, appendJsonPointer } from "@azure-tools/json";
+import oai3, { EncodingStyle, HttpOperation, JsonType, PathItem, SecurityType } from "@azure-tools/openapi";
 import { resolveOperationConsumes, resolveOperationProduces } from "./content-type-utils";
 import {
   OpenAPI2Document,
@@ -25,7 +26,6 @@ import {
 import { cleanElementName, convertOai2RefToOai3, parseOai2Ref } from "./refs-utils";
 import { ResolveReferenceFn } from "./runner";
 import { statusCodes } from "./status-codes";
-import oai3, { EncodingStyle, HttpOperation, JsonType, PathItem, SecurityType } from "@azure-tools/openapi";
 
 // NOTE: after testing references should be changed to OpenAPI 3.x.x references
 

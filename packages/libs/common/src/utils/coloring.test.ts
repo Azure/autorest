@@ -1,5 +1,5 @@
-import { color } from "./coloring";
 import chalk from "chalk";
+import { color } from "./coloring";
 
 describe("Coloring", () => {
   it("bold text", () => {

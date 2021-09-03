@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { toSemver, maximum } from "@azure-tools/codegen";
 import { visit } from "@azure-tools/datastore";
 import { areSimilar } from "@azure-tools/object-comparison";
-import compareVersions from "compare-versions";
-import { toSemver, maximum } from "@azure-tools/codegen";
 import { YieldCPU } from "@azure-tools/tasks";
+import compareVersions from "compare-versions";
 import { cloneDeep } from "lodash";
 
 type componentType =

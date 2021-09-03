@@ -17,9 +17,9 @@ import {
 } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
 import { selectName, Style } from "@azure-tools/codegen";
+import { partition } from "lodash";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
 import { getNameOptions, isUnassigned, ScopeNamer, setName, setNameAllowEmpty } from "./naming-utils";
-import { partition } from "lodash";
 
 export class PreNamer {
   codeModel: CodeModel;

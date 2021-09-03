@@ -1,11 +1,11 @@
-import { MappedPosition, Position } from "source-map";
 import { promises as fs } from "fs";
 import { parseYAMLAst, YamlNode, parseYAMLFast } from "@azure-tools/yaml";
+import { MappedPosition, Position } from "source-map";
+import { JsonPath } from "../json-path/json-path";
 import { getLineIndices } from "../parsing/text-utility";
+import { resolvePathPosition } from "../source-map";
 import { PathMappedPosition, PathPosition, PathSourceMap } from "../source-map/path-source-map";
 import { PositionSourceMap } from "../source-map/position-source-map";
-import { resolvePathPosition } from "../source-map";
-import { JsonPath } from "../json-path/json-path";
 
 export interface Data {
   status: "loaded" | "unloaded";

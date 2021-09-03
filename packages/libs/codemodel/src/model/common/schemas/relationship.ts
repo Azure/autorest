@@ -1,6 +1,6 @@
+import { DeepPartial } from "@azure-tools/codegen";
 import { ComplexSchema, Schema } from "../schema";
 import { SchemaType } from "../schema-type";
-import { DeepPartial } from "@azure-tools/codegen";
 
 /** an OR relationship between several schemas
  *

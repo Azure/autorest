@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Position, RawSourceMap } from "source-map";
 import { EnhancedPosition, Mapping } from "@azure-tools/datastore";
+import { Position, RawSourceMap } from "source-map";
 import { Artifact } from "./artifact";
 
 /**

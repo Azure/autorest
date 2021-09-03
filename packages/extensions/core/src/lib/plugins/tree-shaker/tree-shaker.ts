@@ -1,4 +1,5 @@
 /* eslint-disable no-useless-escape */
+import { createHash } from "crypto";
 import {
   AnyObject,
   DataHandle,
@@ -10,13 +11,12 @@ import {
   JsonPath,
   Source,
 } from "@azure-tools/datastore";
+import { parseJsonPointer } from "@azure-tools/json";
+import { includeXDashProperties } from "@azure-tools/openapi";
+import { partition } from "lodash";
 import { AutorestContext } from "../../context";
 import { PipelinePlugin } from "../../pipeline/common";
-import { createHash } from "crypto";
 import { SchemaStats } from "../../stats";
-import { includeXDashProperties } from "@azure-tools/openapi";
-import { parseJsonPointer } from "@azure-tools/json";
-import { partition } from "lodash";
 
 /**
  * parses a json pointer, and inserts a string into the returned array

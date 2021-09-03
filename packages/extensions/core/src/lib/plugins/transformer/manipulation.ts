@@ -3,14 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { ResolvedDirective, resolveDirectives } from "@autorest/configuration";
 import { DataHandle, DataSink, nodes } from "@azure-tools/datastore";
 import { YieldCPU } from "@azure-tools/tasks";
+import { scrypt } from "node:crypto";
 import { AutorestContext } from "../../autorest-core";
 import { Channel, Message, SourceLocation } from "../../message";
-import { manipulateObject } from "./object-manipulator";
 import { evalDirectiveTest, evalDirectiveTransform } from "./eval";
-import { ResolvedDirective, resolveDirectives } from "@autorest/configuration";
-import { scrypt } from "node:crypto";
+import { manipulateObject } from "./object-manipulator";
 
 export class Manipulator {
   private transformations: ResolvedDirective[];

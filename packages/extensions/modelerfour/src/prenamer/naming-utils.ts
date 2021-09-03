@@ -1,6 +1,6 @@
 import { Languages } from "@autorest/codemodel";
-import { removeSequentialDuplicates, fixLeadingNumber, deconstruct, Style, Styler } from "@azure-tools/codegen";
 import { Session } from "@autorest/extension-base";
+import { removeSequentialDuplicates, fixLeadingNumber, deconstruct, Style, Styler } from "@azure-tools/codegen";
 
 export function getNameOptions(typeName: string, components: Array<string>) {
   const result = new Set<string>();

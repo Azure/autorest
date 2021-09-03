@@ -2,26 +2,24 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-
-import { AutorestContextLoader, AutorestContext, MessageEmitter } from "./context";
-import { EventEmitter, IEvent } from "./events";
+import { homedir } from "os";
 import {
   AutorestLoggingSession,
   ConsoleLogger,
   Exception,
-  LogInfo,
   LoggerSink,
   AutorestLoggerSourceEnhancer,
   AutorestAsyncLogger,
   AutorestLogger,
 } from "@autorest/common";
+import { isConfigurationDocument } from "@autorest/configuration";
 import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
+import { Artifact } from "./artifact";
+import { AutorestContextLoader, AutorestContext, MessageEmitter } from "./context";
+import { DocumentType } from "./document-type";
+import { EventEmitter, IEvent } from "./events";
 import { runPipeline } from "./pipeline/pipeline";
 export { AutorestContext } from "./context";
-import { isConfigurationDocument } from "@autorest/configuration";
-import { homedir } from "os";
-import { Artifact } from "./artifact";
-import { DocumentType } from "./document-type";
 import { StatsCollector } from "./stats";
 
 function IsIterable(target: any) {

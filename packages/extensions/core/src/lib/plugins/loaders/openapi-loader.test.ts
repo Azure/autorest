@@ -1,8 +1,8 @@
+import { IAutorestLogger } from "@autorest/common";
+import { createMockLogger } from "@autorest/test-utils";
 import { DataStore, IFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import { createFolderUri, resolveUri } from "@azure-tools/uri";
 import { AppRoot } from "../../constants";
-import { createMockLogger } from "@autorest/test-utils";
-import { IAutorestLogger } from "@autorest/common";
 import { loadOpenAPIFiles } from "./openapi-loader";
 
 describe("SwaggerLoading", () => {

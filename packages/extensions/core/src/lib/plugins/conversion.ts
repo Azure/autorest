@@ -1,9 +1,9 @@
+import { AutorestDiagnostic } from "@autorest/common";
 import { DataHandle, IFileSystem, QuickDataSource } from "@azure-tools/datastore";
-import { PipelinePlugin } from "../pipeline/common";
+import { parseJsonPointer } from "@azure-tools/json";
 import { ConverterDiagnostic, ConverterLogger, convertOai2ToOai3Files } from "@azure-tools/oai2-to-oai3";
 import { cloneDeep } from "lodash";
-import { AutorestDiagnostic } from "@autorest/common";
-import { parseJsonPointer } from "@azure-tools/json";
+import { PipelinePlugin } from "../pipeline/common";
 
 /* @internal */
 export function createSwaggerToOpenApi3Plugin(fileSystem?: IFileSystem): PipelinePlugin {

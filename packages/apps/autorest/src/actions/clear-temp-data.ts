@@ -1,7 +1,7 @@
-import { isDirectory, readdir, rmdir } from "@azure-tools/async-io";
-import chalk from "chalk";
 import { tmpdir } from "os";
 import { join } from "path";
+import { isDirectory, readdir, rmdir } from "@azure-tools/async-io";
+import chalk from "chalk";
 
 /**
  * Clears out all autorest-temp folders from the temp folder.

@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { uniqBy } from "lodash";
 import { MappedPosition } from "source-map";
 import { DataStore } from "../data-store/data-store";
-import { uniqBy } from "lodash";
 import { PathMappedPosition } from "./path-source-map";
 
 /**

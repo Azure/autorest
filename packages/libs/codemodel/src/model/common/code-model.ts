@@ -1,9 +1,9 @@
-import { Metadata } from "./metadata";
-import { Schemas } from "./schemas";
-import { Info } from "./info";
-import { OperationGroup } from "./operation";
 import { DeepPartial, enableSourceTracking } from "@azure-tools/codegen";
+import { Info } from "./info";
+import { Metadata } from "./metadata";
+import { OperationGroup } from "./operation";
 import { Parameter } from "./parameter";
+import { Schemas } from "./schemas";
 import { Security } from "./security";
 
 /** the model that contains all the information required to generate a service api */

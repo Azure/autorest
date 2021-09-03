@@ -4,12 +4,12 @@
 import fs from "fs";
 import path from "path";
 import chalk from "chalk";
-import { RunConfiguration, LanguageConfiguration } from "./config";
-import { generateWithAutoRest, AutoRestGenerateResult, getBaseResult, runAutoRest } from "./runner";
 import { compareOutputFiles, CompareResult } from "./comparers";
-import { compareFile as compareTypeScriptFile } from "./languages/typescript";
+import { RunConfiguration, LanguageConfiguration } from "./config";
 import { compareFile as comparePythonFile } from "./languages/python";
+import { compareFile as compareTypeScriptFile } from "./languages/typescript";
 import { printCompareMessage } from "./printer";
+import { generateWithAutoRest, AutoRestGenerateResult, getBaseResult, runAutoRest } from "./runner";
 
 export abstract class Operation {
   abstract runForSpec(languageConfig: LanguageConfiguration, specPath: string, debug: boolean): Promise<void>;

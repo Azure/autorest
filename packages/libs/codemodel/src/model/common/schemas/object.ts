@@ -1,8 +1,8 @@
-import { SchemaType } from "../schema-type";
-import { Schema, ComplexSchema } from "../schema";
 import { DeepPartial } from "@azure-tools/codegen";
-import { Property } from "../property";
 import { Parameter } from "../parameter";
+import { Property } from "../property";
+import { Schema, ComplexSchema } from "../schema";
+import { SchemaType } from "../schema-type";
 import { SchemaUsage } from "./usage";
 
 export interface Relations {

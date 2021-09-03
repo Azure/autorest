@@ -1,3 +1,4 @@
+import { maximum, gt, lt } from "@azure-tools/codegen";
 import {
   AnyObject,
   DataHandle,
@@ -13,7 +14,6 @@ import { areSimilar } from "@azure-tools/object-comparison";
 import * as oai from "@azure-tools/openapi";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
-import { maximum, gt, lt } from "@azure-tools/codegen";
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
 

@@ -1,9 +1,8 @@
-import { RawSourceMap } from "source-map";
 import { fastStringify } from "@azure-tools/yaml";
-import { SourceMapGenerator } from "source-map";
-import { DataHandle } from "./data-handle";
-import { PathMapping } from "../source-map/path-source-map";
+import { SourceMapGenerator, RawSourceMap } from "source-map";
 import { addMappingsToSourceMap, Mapping } from "../source-map";
+import { PathMapping } from "../source-map/path-source-map";
+import { DataHandle } from "./data-handle";
 
 export class DataSink {
   constructor(
