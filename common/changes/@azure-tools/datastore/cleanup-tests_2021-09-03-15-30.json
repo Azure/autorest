@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/datastore",
+      "comment": "**Added** Option to disable auto unloading of data in DataStore",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@azure-tools/datastore",
+  "email": "tiguerin@microsoft.com"
+}
