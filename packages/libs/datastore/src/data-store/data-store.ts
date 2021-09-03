@@ -30,13 +30,20 @@ interface Store {
   [uri: string]: Data;
 }
 
+export interface DataStoreOptions {
+  /**
+   * Enable auto unloading data to release memory.
+   */
+  autoUnloadData?: boolean;
+}
+
 export class DataStore {
   public static readonly BaseUri = "mem://";
   public readonly BaseUri = DataStore.BaseUri;
   private store: Store = {};
   private cacheFolder?: string;
 
-  public constructor() {}
+  public constructor(private options: DataStoreOptions = {}) {}
 
   private async getCacheFolder() {
     if (!this.cacheFolder) {
@@ -118,7 +125,7 @@ export class DataStore {
     if (entry === undefined) {
       throw new Error(`Object '${absoluteUri}' does not exist.`);
     }
-    return new DataHandle(absoluteUri, entry);
+    return new DataHandle(absoluteUri, entry, this.options.autoUnloadData);
   }
 
   public async read(uri: string): Promise<DataHandle> {
