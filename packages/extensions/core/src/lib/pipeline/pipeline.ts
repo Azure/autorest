@@ -5,6 +5,8 @@
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
+import { createHash } from "crypto";
+import { promisify } from "util";
 import {
   DataHandle,
   DataSource,
@@ -16,15 +18,13 @@ import {
   PipeState,
   mergePipeStates,
 } from "@azure-tools/datastore";
+import { mapValues, omitBy } from "lodash";
 import { AutorestContext } from "../context";
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
-import { createArtifactEmitterPlugin } from "../plugins/emitter";
-import { createHash } from "crypto";
-import { isCached, readCache, writeCache } from "./pipeline-cache";
 import { CORE_PLUGIN_MAP } from "../plugins";
+import { createArtifactEmitterPlugin } from "../plugins/emitter";
+import { isCached, readCache, writeCache } from "./pipeline-cache";
 import { loadPlugins, PipelinePluginDefinition } from "./plugin-loader";
-import { mapValues, omitBy } from "lodash";
-import { promisify } from "util";
 
 const safeEval = createSandbox();
 const setImmediatePromise = promisify(setImmediate);

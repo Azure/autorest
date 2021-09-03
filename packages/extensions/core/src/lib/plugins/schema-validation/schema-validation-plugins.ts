@@ -2,14 +2,14 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { DataHandle } from "@azure-tools/datastore";
 import { OperationAbortedException } from "@autorest/common";
+import { DataHandle } from "@azure-tools/datastore";
+import { AutorestContext } from "../../context";
 import { Channel } from "../../message";
 import { createPerFilePlugin, PipelinePlugin } from "../../pipeline/common";
-import { AutorestContext } from "../../context";
-import { SwaggerSchemaValidator } from "./swagger-schema-validator";
-import { OpenApi3SchemaValidator } from "./openapi3-schema-validator";
 import { ValidationError } from "./json-schema-validator";
+import { OpenApi3SchemaValidator } from "./openapi3-schema-validator";
+import { SwaggerSchemaValidator } from "./swagger-schema-validator";
 
 export const SCHEMA_VIOLATION_ERROR_CODE = "schema_violation";
 

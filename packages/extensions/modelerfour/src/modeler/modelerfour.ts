@@ -1,18 +1,4 @@
 import {
-  Model as oai3,
-  Dereferenced,
-  dereference,
-  Refable,
-  JsonType,
-  IntegerFormat,
-  StringFormat,
-  NumberFormat,
-  MediaType,
-  omitXDashProperties,
-} from "@azure-tools/openapi";
-import { uniq, every } from "lodash";
-import * as OpenAPI from "@azure-tools/openapi";
-import {
   HttpMethod,
   HttpModel,
   CodeModel,
@@ -73,14 +59,28 @@ import {
   AnyObjectSchema,
 } from "@autorest/codemodel";
 import { Session, Channel } from "@autorest/extension-base";
-import { Interpretations, XMSEnum } from "./interpretations";
 import { fail, minimum, pascalCase, KnownMediaType } from "@azure-tools/codegen";
-import { ModelerFourOptions } from "./modelerfour-options";
-import { isContentTypeParameterDefined } from "./utils";
+import {
+  Model as oai3,
+  Dereferenced,
+  dereference,
+  Refable,
+  JsonType,
+  IntegerFormat,
+  StringFormat,
+  NumberFormat,
+  MediaType,
+  omitXDashProperties,
+} from "@azure-tools/openapi";
+import * as OpenAPI from "@azure-tools/openapi";
+import { uniq, every } from "lodash";
+import { isDefined } from "../utils";
 import { BodyProcessor } from "./body-processor";
+import { Interpretations, XMSEnum } from "./interpretations";
+import { ModelerFourOptions } from "./modelerfour-options";
 import { isSchemaAnEnum, isSchemaBinary } from "./schema-utils";
 import { SecurityProcessor } from "./security-processor";
-import { isDefined } from "../utils";
+import { isContentTypeParameterDefined } from "./utils";
 
 /** adds only if the item is not in the collection already
  *

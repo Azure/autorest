@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { mergeOverwriteOrAppend } from "@autorest/common";
-import { createPerFilePlugin, PipelinePlugin } from "../pipeline/common";
 import { cloneDeep } from "lodash";
+import { createPerFilePlugin, PipelinePlugin } from "../pipeline/common";
 
 function decorateSpecialProperties(o: any): void {
   if (o["implementation"]) {

@@ -1,8 +1,8 @@
 import { matches, PathPosition } from "@azure-tools/datastore";
 import { JsonPointerTokens } from "@azure-tools/json";
-import { LoggerProcessor } from ".";
 import { arrayify } from "../utils";
 import { AutorestLogger, LogInfo, LogLevel } from "./types";
+import { LoggerProcessor } from ".";
 
 export interface LogSuppression {
   code: string;

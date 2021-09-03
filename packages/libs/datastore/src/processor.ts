@@ -1,7 +1,7 @@
-import { ProxyObject } from "./graph-builder";
-import { createGraphProxy, Node, ProxyNode, visit } from "./main";
 import { parseJsonPointer, serializeJsonPointer } from "@azure-tools/json";
 import { cloneDeep } from "lodash";
+import { ProxyObject } from "./graph-builder";
+import { createGraphProxy, Node, ProxyNode, visit } from "./main";
 import { PathMapping } from "./source-map/path-source-map";
 
 export interface AnyObject {

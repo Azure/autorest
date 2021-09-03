@@ -3,13 +3,13 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { JsonPointerTokens, walk } from "@azure-tools/json";
+import { getYamlNodeByPath, YamlNode, Kind, YamlMapping } from "@azure-tools/yaml";
 import { Position, SourceMapGenerator, Mapping } from "source-map";
 import { DataHandle } from "../data-store";
 import { JsonPath } from "../json-path/json-path";
 import { indexToPosition } from "../parsing/text-utility";
-import { getYamlNodeByPath, YamlNode, Kind, YamlMapping } from "@azure-tools/yaml";
 import { PathMapping, PathPosition } from "./path-source-map";
-import { JsonPointerTokens, walk } from "@azure-tools/json";
 
 // information to attach to line/column based to get a richer experience
 export interface PositionEnhancements {

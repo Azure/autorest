@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import { DataStore } from "@azure-tools/datastore";
-import { manipulateObject } from "./object-manipulator";
 import { createSandbox } from "@azure-tools/datastore";
+import { manipulateObject } from "./object-manipulator";
 
 const safeEval = createSandbox();
 

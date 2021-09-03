@@ -1,7 +1,7 @@
-import { CompilerHost, createProgram, Diagnostic, createSourceFile } from "@cadl-lang/compiler";
 import { readFile, realpath, stat } from "fs/promises";
 import { join, resolve } from "path";
 import { fileURLToPath, pathToFileURL } from "url";
+import { CompilerHost, createProgram, Diagnostic, createSourceFile } from "@cadl-lang/compiler";
 
 export function createAdlHost(writeFile: (path: string, content: string) => Promise<void>): CompilerHost {
   return {

@@ -1,7 +1,7 @@
+import { createDataHandle } from "@autorest/test-utils";
 import { DataHandle } from "@azure-tools/datastore";
 import { omit } from "lodash";
 import { SwaggerSchemaValidator } from "./swagger-schema-validator";
-import { createDataHandle } from "@autorest/test-utils";
 const baseSwaggerSpec = {
   swagger: "2.0",
   info: {

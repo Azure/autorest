@@ -1,6 +1,6 @@
+import pacote from "pacote";
 import { ExtensionManager } from "../main";
 import { Extension } from "./extension";
-import pacote from "pacote";
 
 /**
  * A Package is a representation of a npm package.

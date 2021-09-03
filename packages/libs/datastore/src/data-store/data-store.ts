@@ -3,20 +3,20 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { resolveUri } from "@azure-tools/uri";
-import { RawSourceMap } from "source-map";
-import { IFileSystem } from "../file-system/file-system";
-import { BlameTree } from "../source-map/blaming";
+import { createHash } from "crypto";
 import { promises as fs } from "fs";
 import { tmpdir } from "os";
 import { join } from "path";
+import { resolveUri } from "@azure-tools/uri";
+import { RawSourceMap } from "source-map";
+import { IFileSystem } from "../file-system/file-system";
+import { PathMapping, PathPosition, PathSourceMap, Position, PositionSourceMap } from "../source-map";
+import { BlameTree } from "../source-map/blaming";
 
-import { createHash } from "crypto";
-import { DataSource } from "./data-source";
-import { ReadThroughDataSource } from "./read-through-data-source";
 import { Data, DataHandle } from "./data-handle";
 import { DataSink } from "./data-sink";
-import { PathMapping, PathPosition, PathSourceMap, Position, PositionSourceMap } from "../source-map";
+import { DataSource } from "./data-source";
+import { ReadThroughDataSource } from "./read-through-data-source";
 
 const md5 = (content: any) => (content ? createHash("md5").update(JSON.stringify(content)).digest("hex") : null);
 

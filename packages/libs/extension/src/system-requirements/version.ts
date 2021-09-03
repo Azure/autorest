@@ -1,6 +1,5 @@
-import { SystemRequirement, SystemRequirementError, SystemRequirementResolution } from "./models";
-
 import semver from "semver";
+import { SystemRequirement, SystemRequirementError, SystemRequirementResolution } from "./models";
 
 /**
  * Validate the provided system requirement resolution is satisfying the version requirement if applicable.

@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { serialize } from "@azure-tools/codegen";
-import { Host, startSession } from "@autorest/extension-base";
 import { codeModelSchema, CodeModel } from "@autorest/codemodel";
+import { Host, startSession } from "@autorest/extension-base";
+import { serialize } from "@azure-tools/codegen";
 import { Flattener } from "./flattener";
 
 export async function processRequest(host: Host) {

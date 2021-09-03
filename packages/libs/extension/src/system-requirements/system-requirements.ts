@@ -1,12 +1,12 @@
+import { DotnetExeName, resolveDotnetRequirement } from "./dotnet";
+import { resolveGenericSystemRequirement } from "./generic";
+import { JavaExeName, resolveJavaRequirement } from "./java";
 import {
   ExtensionSystemRequirements,
   SystemRequirementError,
   SystemRequirement,
   SystemRequirementResolution,
 } from "./models";
-import { DotnetExeName, resolveDotnetRequirement } from "./dotnet";
-import { resolveGenericSystemRequirement } from "./generic";
-import { JavaExeName, resolveJavaRequirement } from "./java";
 import { PythonRequirement, resolvePythonRequirement } from "./python";
 
 /**

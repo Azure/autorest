@@ -1,9 +1,9 @@
-import { Aspect } from "./aspect";
-import { SerializationFormats } from "./formats";
-import { AllSchemaTypes } from "./schema-type";
 import { DeepPartial } from "@azure-tools/codegen";
+import { Aspect } from "./aspect";
 import { Extensions } from "./extensions";
+import { SerializationFormats } from "./formats";
 import { Languages } from "./languages";
+import { AllSchemaTypes } from "./schema-type";
 
 export interface SerializationFormat extends Extensions, Record<string, any> {}
 

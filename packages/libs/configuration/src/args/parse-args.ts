@@ -1,5 +1,5 @@
-import { parseYAMLFast } from "@azure-tools/yaml";
 import { join } from "path";
+import { parseYAMLFast } from "@azure-tools/yaml";
 import untildify from "untildify";
 
 interface CliArgs {

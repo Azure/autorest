@@ -1,8 +1,8 @@
+import { Initializer, DeepPartial } from "@azure-tools/codegen";
+import { Schema } from "./schema";
 import { uid } from "./uid";
 
-import { Initializer, DeepPartial } from "@azure-tools/codegen";
 import { Value } from "./value";
-import { Schema } from "./schema";
 
 /** a property is a child value in an object */
 export interface Property extends Value {

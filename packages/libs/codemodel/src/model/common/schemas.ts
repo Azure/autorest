@@ -1,21 +1,21 @@
-import { ChoiceSchema, SealedChoiceSchema } from "./schemas/choice";
+import { finished } from "stream";
 import { camelCase } from "@azure-tools/codegen";
+import { Schema, PrimitiveSchema } from "./schema";
 import { SchemaType } from "./schema-type";
+import { AnyObjectSchema, AnySchema } from "./schemas/any";
 import { ArraySchema, ByteArraySchema } from "./schemas/array";
+import { BinarySchema } from "./schemas/binary";
+import { ChoiceSchema, SealedChoiceSchema } from "./schemas/choice";
+import { ConditionalSchema, SealedConditionalSchema } from "./schemas/conditional";
+import { ConstantSchema } from "./schemas/constant";
 import { DictionarySchema } from "./schemas/dictionary";
-import { BooleanSchema, CharSchema } from "./schemas/primitive";
+import { FlagSchema } from "./schemas/flag";
 import { NumberSchema } from "./schemas/number";
 import { ObjectSchema, GroupSchema } from "./schemas/object";
+import { BooleanSchema, CharSchema } from "./schemas/primitive";
+import { OrSchema, XorSchema } from "./schemas/relationship";
 import { StringSchema, UuidSchema, UriSchema, CredentialSchema, ODataQuerySchema } from "./schemas/string";
 import { UnixTimeSchema, DateSchema, DateTimeSchema, DurationSchema, TimeSchema } from "./schemas/time";
-import { Schema, PrimitiveSchema } from "./schema";
-import { ConditionalSchema, SealedConditionalSchema } from "./schemas/conditional";
-import { FlagSchema } from "./schemas/flag";
-import { ConstantSchema } from "./schemas/constant";
-import { OrSchema, XorSchema } from "./schemas/relationship";
-import { BinarySchema } from "./schemas/binary";
-import { finished } from "stream";
-import { AnyObjectSchema, AnySchema } from "./schemas/any";
 
 export { SchemaUsage, SchemaContext } from "./schemas/usage";
 

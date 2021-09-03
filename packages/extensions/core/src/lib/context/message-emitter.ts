@@ -1,7 +1,7 @@
+import { DataStore } from "@azure-tools/datastore";
+import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
 import { Artifact } from "../artifact";
 import { EventEmitter, IEvent } from "../events";
-import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
-import { DataStore } from "@azure-tools/datastore";
 
 export class MessageEmitter extends EventEmitter {
   /**

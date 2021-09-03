@@ -3,10 +3,9 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { CachingFileSystem, IFileSystem, LazyPromise, RealFileSystem } from "@azure-tools/datastore";
-import { Extension, ExtensionManager } from "@azure-tools/extension";
+import { homedir } from "os";
 import { join } from "path";
-import { AutoRestExtension } from "../pipeline/plugin-endpoint";
+import { FilterLogger, AutorestLoggingSession, AutorestLogger } from "@autorest/common";
 import {
   AutorestConfiguration,
   AutorestRawConfiguration,
@@ -15,13 +14,14 @@ import {
   mergeConfigurations,
   ResolvedExtension,
 } from "@autorest/configuration";
-import { AutorestContext, getLogLevel } from "./autorest-context";
-import { MessageEmitter } from "./message-emitter";
-import { FilterLogger, AutorestLoggingSession, AutorestLogger } from "@autorest/common";
+import { CachingFileSystem, IFileSystem, LazyPromise, RealFileSystem } from "@azure-tools/datastore";
+import { Extension, ExtensionManager } from "@azure-tools/extension";
 import { createFileOrFolderUri, createFolderUri, resolveUri } from "@azure-tools/uri";
 import { AppRoot } from "../constants";
-import { homedir } from "os";
+import { AutoRestExtension } from "../pipeline/plugin-endpoint";
 import { StatsCollector } from "../stats";
+import { AutorestContext, getLogLevel } from "./autorest-context";
+import { MessageEmitter } from "./message-emitter";
 
 const inWebpack = typeof __webpack_require__ === "function";
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

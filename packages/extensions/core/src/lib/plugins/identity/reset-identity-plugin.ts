@@ -1,8 +1,8 @@
-import { PipelinePlugin } from "../../pipeline/common";
-import { AutorestContext } from "../../context";
-import { DataSource, DataSink, QuickDataSource } from "@azure-tools/datastore";
 import { identitySourceMapping } from "@autorest/common";
+import { DataSource, DataSink, QuickDataSource } from "@azure-tools/datastore";
 import { uniqBy } from "lodash";
+import { AutorestContext } from "../../context";
+import { PipelinePlugin } from "../../pipeline/common";
 
 /**
  * Add the given suffix to the given filename before the file extension.

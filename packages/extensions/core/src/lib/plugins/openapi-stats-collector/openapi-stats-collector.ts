@@ -1,7 +1,7 @@
 import { DataSource } from "@azure-tools/datastore";
+import * as oai3 from "@azure-tools/openapi";
 import { AutorestContext } from "../../context";
 import { PipelinePlugin } from "../../pipeline/common";
-import * as oai3 from "@azure-tools/openapi";
 
 export async function collectOpenAPIStats(context: AutorestContext, dataSource: DataSource) {
   const inputs = await dataSource.enum();

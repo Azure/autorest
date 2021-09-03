@@ -1,5 +1,5 @@
-import { resolveDotnetRequirement } from "./dotnet";
 import { execute } from "../exec-cmd";
+import { resolveDotnetRequirement } from "./dotnet";
 
 jest.mock("../exec-cmd");
 

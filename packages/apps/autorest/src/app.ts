@@ -10,12 +10,12 @@ declare const isDebuggerEnabled: boolean;
 const cwd = process.cwd();
 
 import chalk from "chalk";
-import { newCorePackage, ensureAutorestHome, runCoreWithRequire, runCoreOutOfProc } from "./autorest-as-a-service";
-import { parseAutorestArgs } from "./args";
-import { resetAutorest, showAvailableCoreVersions, showInstalledExtensions } from "./commands";
 import { clearTempData } from "./actions";
-import { loadConfig, resolveCoreVersion } from "./utils";
+import { parseAutorestArgs } from "./args";
+import { newCorePackage, ensureAutorestHome, runCoreWithRequire, runCoreOutOfProc } from "./autorest-as-a-service";
+import { resetAutorest, showAvailableCoreVersions, showInstalledExtensions } from "./commands";
 import { VERSION } from "./constants";
+import { loadConfig, resolveCoreVersion } from "./utils";
 
 const launchCore = isDebuggerEnabled ? runCoreWithRequire : runCoreOutOfProc;
 

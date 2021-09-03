@@ -1,3 +1,5 @@
+import { basename, dirname } from "path";
+import { Readable } from "stream";
 import {
   createMessageConnection,
   Logger,
@@ -7,9 +9,7 @@ import {
   NotificationType2,
   NotificationType4,
 } from "vscode-jsonrpc";
-import { Readable } from "stream";
 import { Mapping, Message, RawSourceMap, Channel } from "./types";
-import { basename, dirname } from "path";
 
 namespace IAutoRestPluginTargetTypes {
   export const GetPluginNames = new RequestType0<Array<string>, Error, void>("GetPluginNames");

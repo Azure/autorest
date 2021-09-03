@@ -1,5 +1,5 @@
-import { Package } from "@azure-tools/extension";
 import { color } from "@autorest/common";
+import { Package } from "@azure-tools/extension";
 import { gt } from "semver";
 import { AutorestArgs } from "../args";
 import { extensionManager, networkEnabled } from "../autorest-as-a-service";

@@ -3,8 +3,6 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AutorestContextLoader, AutorestContext, MessageEmitter } from "./context";
-import { EventEmitter, IEvent } from "./events";
 import {
   AutorestLoggingSession,
   ConsoleLogger,
@@ -16,6 +14,8 @@ import {
   AutorestLogger,
 } from "@autorest/common";
 import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
+import { AutorestContextLoader, AutorestContext, MessageEmitter } from "./context";
+import { EventEmitter, IEvent } from "./events";
 import { runPipeline } from "./pipeline/pipeline";
 export { AutorestContext } from "./context";
 import { isConfigurationDocument } from "@autorest/configuration";

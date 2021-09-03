@@ -1,7 +1,7 @@
 import { createDataHandle } from "@autorest/test-utils";
-import { EnumDeduplicator } from "./enum-deduplicator";
 import * as oai3 from "@azure-tools/openapi";
 import { JsonType } from "@azure-tools/openapi";
+import { EnumDeduplicator } from "./enum-deduplicator";
 
 async function runEnumDeduplicator(data: Partial<oai3.Model>): Promise<oai3.Model> {
   const source = createDataHandle(JSON.stringify(data));

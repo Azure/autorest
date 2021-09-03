@@ -3,6 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { inspect } from "util";
+import { identitySourceMapping } from "@autorest/common";
 import { DataHandle, DataSink, IsPrefix, JsonPath, nodes, PathPosition } from "@azure-tools/datastore";
 import {
   stringifyYamlAst,
@@ -13,10 +15,8 @@ import {
   getYamlNodeByPath,
   replaceYamlAstNode,
 } from "@azure-tools/yaml";
-import { AutorestContext } from "../../autorest-core";
-import { identitySourceMapping } from "@autorest/common";
-import { inspect } from "util";
 import { cloneDeep } from "lodash";
+import { AutorestContext } from "../../autorest-core";
 
 export async function manipulateObject(
   src: DataHandle,

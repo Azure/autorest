@@ -2,8 +2,8 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import jsonpath from "jsonpath";
 import { createSandbox } from "@azure-tools/codegen";
+import jsonpath from "jsonpath";
 
 const safeEval = createSandbox();
 

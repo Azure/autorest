@@ -1,7 +1,7 @@
-import { isFile, writeFile } from "@azure-tools/async-io";
 import { readFileSync } from "fs";
 import { tmpdir } from "os";
 import { join, resolve } from "path";
+import { isFile, writeFile } from "@azure-tools/async-io";
 import { execute } from "./exec-cmd";
 import { DEFAULT_NPM_REGISTRY } from "./npm";
 import { ensurePackageJsonExists, InstallOptions, PackageManager } from "./package-manager";

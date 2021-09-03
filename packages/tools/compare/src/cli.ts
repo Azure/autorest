@@ -4,7 +4,6 @@
 import fs from "fs";
 import path from "path";
 import chalk from "chalk";
-import { AutoRestLanguages, AutoRestLanguage } from "./runner";
 import {
   RunConfiguration,
   loadConfiguration,
@@ -13,6 +12,7 @@ import {
   UseExistingOutput,
 } from "./config";
 import { CompareOperation, BaselineOperation, Operation } from "./operations";
+import { AutoRestLanguages, AutoRestLanguage } from "./runner";
 
 /**
  * Parses an argument of one of the following forms and returns the argument and

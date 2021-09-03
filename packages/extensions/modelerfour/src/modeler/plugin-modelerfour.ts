@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { deserialize, serialize } from "@azure-tools/codegen";
+import { codeModelSchema, CodeModel } from "@autorest/codemodel";
 import { Host, startSession } from "@autorest/extension-base";
+import { deserialize, serialize } from "@azure-tools/codegen";
 import * as OpenAPI from "@azure-tools/openapi";
 import { ModelerFour } from "./modelerfour";
-import { codeModelSchema, CodeModel } from "@autorest/codemodel";
 
 export async function processRequest(host: Host) {
   const debug = (await host.GetValue("debug")) || false;

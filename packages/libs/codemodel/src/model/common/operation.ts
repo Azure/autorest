@@ -1,9 +1,9 @@
+import { DeepPartial } from "@azure-tools/codegen";
+import { ApiVersion } from "./api-version";
+import { Aspect } from "./aspect";
+import { Metadata } from "./metadata";
 import { Parameter, ImplementationLocation } from "./parameter";
 import { Response } from "./response";
-import { Metadata } from "./metadata";
-import { Aspect } from "./aspect";
-import { ApiVersion } from "./api-version";
-import { DeepPartial } from "@azure-tools/codegen";
 import { SchemaType } from "./schema-type";
 
 /** represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)  */

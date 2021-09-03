@@ -11,7 +11,7 @@
     "node": ">=12.0.0"
   },
   "scripts": {
-    "lint:fix": "eslint  . --fix --ext .ts",
+    "lint:fix": "eslint  ./src --fix --ext .ts",
     "lint": "eslint  ./src --ext .ts --max-warnings=0",
     "test": "jest --watchAll --coverage=false",
     "test:ci": "jest --ci",

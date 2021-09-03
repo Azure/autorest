@@ -1,3 +1,5 @@
+import { URL } from "url";
+import { isDefined } from "@autorest/common";
 import {
   AnyObject,
   DataHandle,
@@ -11,11 +13,9 @@ import {
 } from "@azure-tools/datastore";
 import { walk } from "@azure-tools/json";
 import * as oai from "@azure-tools/openapi";
+import { cloneDeep } from "lodash";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
-import { URL } from "url";
-import { isDefined } from "@autorest/common";
-import { cloneDeep } from "lodash";
 
 /**
  * Takes multiple input OAI3 files and creates one merged one.
