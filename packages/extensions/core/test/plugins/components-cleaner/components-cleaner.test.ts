@@ -11,7 +11,7 @@ const readData = async (file: string) => {
   map.set(inputUri, inputText.toString());
 
   const mfs = new MemoryFileSystem(map);
-  const ds = new DataStore();
+  const ds = new DataStore({ autoUnloadData: false });
   const scope = ds.getReadThroughScope(mfs);
   return await scope.read(inputUri);
 };

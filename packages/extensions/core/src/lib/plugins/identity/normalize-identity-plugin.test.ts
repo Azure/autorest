@@ -14,7 +14,7 @@ describe("NormalizeIdentityPlugin", () => {
     context = {
       config: {},
     } as any;
-    const ds = new DataStore();
+    const ds = new DataStore({ autoUnloadData: false });
     sink = ds.getDataSink();
   });
 
