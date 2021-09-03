@@ -49,9 +49,13 @@ definitions:
         "$ref": "#/definitions/NodeB"`;
 
 describe("ObjectManipulator", () => {
+  let dataStore: DataStore;
+
+  beforeEach(() => {
+    dataStore = new DataStore({ autoUnloadData: false });
+  });
   it("any hit", async () => {
     // setup
-    const dataStore = new DataStore({ autoUnloadData: false });
     const input = await dataStore.writeData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
 
     const expectHit = async (jsonQuery: string, anyHit: boolean) => {
@@ -76,7 +80,6 @@ describe("ObjectManipulator", () => {
 
   it("removal", async () => {
     // setup
-    const dataStore = new DataStore();
     const input = await dataStore.writeData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
 
     // remove all models that don't have a description
@@ -94,7 +97,6 @@ describe("ObjectManipulator", () => {
 
   it("update", async () => {
     // setup
-    const dataStore = new DataStore();
     const input = await dataStore.writeData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
 
     {
@@ -148,7 +150,6 @@ describe("ObjectManipulator", () => {
 
   it("skip-transform-failure", async () => {
     // setup
-    const dataStore = new DataStore();
     const input = await dataStore.writeData("mem://input.yaml", exampleObject, "input-file", ["input.yaml"]);
 
     {
