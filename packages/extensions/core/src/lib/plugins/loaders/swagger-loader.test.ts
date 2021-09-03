@@ -1,7 +1,7 @@
 import { DataStore, IFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import { createFolderUri, resolveUri } from "@azure-tools/uri";
-import { loadSwaggerFiles } from "../src/lib/plugins/loaders";
-import { AppRoot } from "../src/lib/constants";
+import { loadSwaggerFiles } from ".";
+import { AppRoot } from "../../constants";
 import { createMockLogger } from "@autorest/test-utils";
 import { IAutorestLogger } from "@autorest/common";
 

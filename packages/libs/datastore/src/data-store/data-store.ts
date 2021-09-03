@@ -134,7 +134,7 @@ export class DataStore {
     if (!data) {
       throw new Error(`Could not read '${uri}'.`);
     }
-    return new DataHandle(uri, data);
+    return new DataHandle(uri, data, this.options.autoUnloadData);
   }
 
   public async blame(absoluteUri: string, position: Position | PathPosition): Promise<BlameTree> {
