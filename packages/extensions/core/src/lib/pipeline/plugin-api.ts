@@ -5,8 +5,8 @@
 
 import { PathPosition } from "@azure-tools/datastore";
 import { Mapping, RawSourceMap } from "source-map";
-import { RequestType0, RequestType2 } from "vscode-jsonrpc";
-import { NotificationType2, NotificationType4 } from "vscode-jsonrpc";
+import { RequestType0, RequestType2, NotificationType2, NotificationType4 } from "vscode-jsonrpc";
+
 import { Message } from "../message";
 
 export namespace IAutoRestPluginTargetTypes {

@@ -1,5 +1,5 @@
-import { Session } from "@autorest/extension-base";
-import { Host, startSession } from "@autorest/extension-base";
+import { Session, Host, startSession } from "@autorest/extension-base";
+
 import { serialize } from "@azure-tools/codegen";
 import {
   Model as oai3,

@@ -17,6 +17,9 @@ extends:
   - plugin:@typescript-eslint/recommended
   - plugin:node/recommended
   - plugin:jest/recommended
+  - plugin:jest/recommended
+  - plugin:import/recommended
+  - plugin:import/typescript
 
 globals:
   Atomics: readonly
@@ -82,6 +85,7 @@ rules:
   import/no-default-export: warn
   import/no-self-import: warn # This cause many circular dependency issues with index files.
   import/no-internal-modules: off
+  import/no-unresolved: off
   import/order:
     - warn
     - groups: ["builtin", "external", "parent", "sibling", "index"]

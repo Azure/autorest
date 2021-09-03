@@ -14,8 +14,11 @@ import {
   getNestedConfiguration,
   ResolvedDirective,
   resolveDirectives,
+  AutorestConfiguration,
+  arrayOf,
+  extendAutorestConfiguration,
 } from "@autorest/configuration";
-import { AutorestConfiguration, arrayOf, extendAutorestConfiguration } from "@autorest/configuration";
+
 import { DataStore, CachingFileSystem } from "@azure-tools/datastore";
 import { cloneDeep } from "lodash";
 import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";

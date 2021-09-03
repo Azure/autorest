@@ -13,8 +13,9 @@ import {
   FilterLogger,
   AutorestLogger,
   AutorestSyncLogger,
+  Exception,
 } from "@autorest/common";
-import { Exception } from "@autorest/common";
+
 import { AutorestCliArgs, parseAutorestCliArgs } from "@autorest/configuration";
 EventEmitter.defaultMaxListeners = 100;
 process.env["ELECTRON_RUN_AS_NODE"] = "1";

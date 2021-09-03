@@ -1,6 +1,5 @@
 import { fastStringify } from "@azure-tools/yaml";
-import { RawSourceMap } from "source-map";
-import { SourceMapGenerator } from "source-map";
+import { SourceMapGenerator, RawSourceMap } from "source-map";
 import { addMappingsToSourceMap, Mapping } from "../source-map";
 import { PathMapping } from "../source-map/path-source-map";
 import { DataHandle } from "./data-handle";

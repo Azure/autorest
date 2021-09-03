@@ -4,16 +4,15 @@
 import { spawn } from "child_process";
 import { lookup } from "dns";
 import { mkdtempSync, rmdirSync } from "fs";
-import { homedir } from "os";
-import { tmpdir } from "os";
+import { homedir, tmpdir } from "os";
+
 import { join } from "path";
 import { AutorestConfiguration } from "@autorest/configuration";
 import { isFile, mkdir, isDirectory } from "@azure-tools/async-io";
 import { Extension, ExtensionManager, Package } from "@azure-tools/extension";
 
-import { Exception } from "@azure-tools/tasks";
+import { Exception, When } from "@azure-tools/tasks";
 
-import { When } from "@azure-tools/tasks";
 import * as semver from "semver";
 import { AutorestArgs } from "./args";
 import { VERSION } from "./constants";
