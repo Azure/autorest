@@ -1,9 +1,9 @@
 import { DataStore, IFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import { createFolderUri, resolveUri } from "@azure-tools/uri";
-import { loadSwaggerFiles } from "./swagger-loader";
 import { AppRoot } from "../../constants";
 import { createMockLogger } from "@autorest/test-utils";
 import { IAutorestLogger } from "@autorest/common";
+import { loadOpenAPIFiles } from "./openapi-loader";
 
 describe("SwaggerLoading", () => {
   let dataStore: DataStore;
@@ -18,10 +18,10 @@ describe("SwaggerLoading", () => {
 
   async function loadSwagger(files: string[]) {
     const inputFilesUris = files.map((x) => {
-      return resolveUri(createFolderUri(AppRoot), `test/resources/swagger-loading/${x}`);
+      return resolveUri(createFolderUri(AppRoot), `test/resources/openapi3-loading/${x}`);
     });
 
-    return await loadSwaggerFiles(logger, dataStore.getReadThroughScope(fs), inputFilesUris, dataStore.getDataSink());
+    return await loadOpenAPIFiles(logger, dataStore.getReadThroughScope(fs), inputFilesUris, dataStore.getDataSink());
   }
 
   it("doesn't load anything if no input files provided", async () => {
@@ -30,26 +30,26 @@ describe("SwaggerLoading", () => {
     expect(swaggerFilesLoaded).toHaveLength(0);
   });
 
-  it("All input files have a 2.0 version.", async () => {
-    const inputFilesUris = ["swagger-file1.json", "swagger-file2.json", "swagger-file3.yaml"];
+  it("All input files have a 3.*.* version.", async () => {
+    const inputFilesUris = ["oa3-file1.yaml", "oa3-file2.yaml"];
 
     const swaggerFilesLoaded = await loadSwagger(inputFilesUris);
 
     expect(swaggerFilesLoaded).toHaveLength(inputFilesUris.length);
   });
 
-  it("All input files do not have a 2.0 version.", async () => {
-    const inputFilesUris = ["non-swagger-file1.yaml", "non-swagger-file2.yaml"];
+  it("All input files do not have a 3.*.* version.", async () => {
+    const inputFilesUris = ["non-oa3-file1.yaml", "non-oa3-file2.yaml"];
 
     const swaggerFilesLoaded = await loadSwagger(inputFilesUris);
 
     expect(swaggerFilesLoaded).toHaveLength(0);
   });
 
-  it("Some input files have a 2.0 version and some input files do not have a 2.0 version.", async () => {
-    const nonSwaggerFileUris = ["non-swagger-file1.yaml", "non-swagger-file2.yaml"];
+  it("Some input files have a 3.*.* version and some input files do not have a 3.*.* version.", async () => {
+    const nonSwaggerFileUris = ["non-oa3-file1.yaml", "non-oa3-file2.yaml"];
 
-    const swaggerFileUris = ["swagger-file1.json", "swagger-file2.json", "swagger-file3.yaml"];
+    const swaggerFileUris = ["oa3-file2.yaml"];
 
     const inputFilesUris = [...swaggerFileUris, ...nonSwaggerFileUris];
 
