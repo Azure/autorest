@@ -1,6 +1,6 @@
 {
   "name": "@autorest/extension-base",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "Library for creating AutoRest extensions",
   "main": "dist/exports.js",
   "typings": "./dist/exports.d.ts",
@@ -43,6 +43,6 @@
   "dependencies": {
     "js-yaml": "~4.0.0",
     "vscode-jsonrpc": "^3.5.0",
-    "@azure-tools/codegen": "~2.6.0"
+    "@azure-tools/codegen": "~2.7.0"
   }
 }
