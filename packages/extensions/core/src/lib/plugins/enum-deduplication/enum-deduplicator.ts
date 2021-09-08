@@ -3,13 +3,24 @@ import { AnyObject, Node, TransformerViaPointer, visit } from "@azure-tools/data
 import * as oai3 from "@azure-tools/openapi";
 import compareVersions from "compare-versions";
 import { cloneDeep } from "lodash";
+import { includeXDashKeys } from "@azure-tools/openapi";
+
+interface EnumEntry {
+  target: AnyObject;
+  value: AnyObject;
+  key: string;
+  pointer: string;
+  originalNodes: Iterable<Node>;
+}
+
+/**
+ * List of x- properties that shouldn't be merged automatically
+ */
+const excludedProperties = new Set(["x-ms-enum", "x-ms-metadata"]);
 
 export class EnumDeduplicator extends TransformerViaPointer<oai3.Model, oai3.Model> {
   private newRefs: Record<string, string> = {};
-  protected enums = new Map<
-    string,
-    Array<{ target: AnyObject; value: AnyObject; key: string; pointer: string; originalNodes: Iterable<Node> }>
-  >();
+  protected enums = new Map<string, EnumEntry[]>();
 
   async visitLeaf(target: AnyObject, value: AnyObject, key: string, pointer: string, originalNodes: Iterable<Node>) {
     if (value && pointer.startsWith("/components/schemas/") && value.enum) {
@@ -74,6 +85,12 @@ export class EnumDeduplicator extends TransformerViaPointer<oai3.Model, oai3.Mod
         }
         const originalRef = `#/components/schemas/${each.key}`;
         this.newRefs[originalRef] = newRef;
+
+        for (const prop of includeXDashKeys(each.value).filter((x) => !excludedProperties.has(x))) {
+          if (!(prop in mergedEnum)) {
+            this.clone(mergedEnum, prop, each.pointer, each.value[prop]);
+          }
+        }
       }
     }
 
