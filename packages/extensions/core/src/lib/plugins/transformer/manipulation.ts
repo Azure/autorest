@@ -6,9 +6,7 @@
 import { ResolvedDirective, resolveDirectives } from "@autorest/configuration";
 import { DataHandle, DataSink, nodes } from "@azure-tools/datastore";
 import { YieldCPU } from "@azure-tools/tasks";
-import { scrypt } from "node:crypto";
 import { AutorestContext } from "../../autorest-core";
-import { Channel, Message, SourceLocation } from "../../message";
 import { evalDirectiveTest, evalDirectiveTransform } from "./eval";
 import { manipulateObject } from "./object-manipulator";
 
