@@ -1,6 +1,21 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Mon, 19 Jul 2021 15:15:41 GMT and should not be manually modified.
+This log was last generated on Wed, 08 Sep 2021 15:39:22 GMT and should not be manually modified.
+
+## 1.7.0
+Wed, 08 Sep 2021 15:39:22 GMT
+
+### Minor changes
+
+- **Rename** `adl` -> `cadl`
+- **Remove** Yaml logging message format
+-  **Update** to new path mapping sourcemap functionality and remove unused parsing logic
+- **Remove** quick-check plugin from defautl configuration
+
+### Patches
+
+- Configuration loader will not auto unloadcode blocks
+- **Fix** Input files with `..` in path would cause duplicate loading and cause issues down the line
 
 ## 1.6.0
 Mon, 19 Jul 2021 15:15:41 GMT

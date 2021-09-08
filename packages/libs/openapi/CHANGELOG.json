@@ -2,6 +2,21 @@
   "name": "@azure-tools/openapi",
   "entries": [
     {
+      "version": "3.2.1",
+      "tag": "@azure-tools/openapi_v3.2.1",
+      "date": "Wed, 08 Sep 2021 15:39:22 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Types update"
+          },
+          {
+            "comment": "Tweaks types to allow string enums value to accept string literals"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.2.0",
       "tag": "@azure-tools/openapi_v3.2.0",
       "date": "Mon, 19 Jul 2021 15:15:42 GMT",

@@ -1,6 +1,18 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Mon, 19 Jul 2021 15:15:41 GMT and should not be manually modified.
+This log was last generated on Wed, 08 Sep 2021 15:39:22 GMT and should not be manually modified.
+
+## 4.21.0
+Wed, 08 Sep 2021 15:39:22 GMT
+
+### Minor changes
+
+- **Internal** Remove @azure-tools/linq library"
+- **Perf** Modified yaml dump improving serialization
+
+### Patches
+
+- **Fix** Dictionaries don't get xml serialization information passed into codemodel
 
 ## 4.20.0
 Mon, 19 Jul 2021 15:15:41 GMT

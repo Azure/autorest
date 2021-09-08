@@ -1,6 +1,17 @@
 # Change Log - autorest
 
-This log was last generated on Tue, 20 Jul 2021 16:57:32 GMT and should not be manually modified.
+This log was last generated on Wed, 08 Sep 2021 15:39:22 GMT and should not be manually modified.
+
+## 3.4.0
+Wed, 08 Sep 2021 15:39:22 GMT
+
+### Minor changes
+
+- *Uptake** New logger
+
+### Patches
+
+- **Fix** If an error occures in the config loading, ignore and try to load a version of @autorest/core
 
 ## 3.3.2
 Tue, 20 Jul 2021 16:57:32 GMT

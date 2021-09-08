@@ -1,6 +1,16 @@
 # Change Log - @azure-tools/oai2-to-oai3
 
-This log was last generated on Mon, 19 Jul 2021 15:15:42 GMT and should not be manually modified.
+This log was last generated on Wed, 08 Sep 2021 15:39:22 GMT and should not be manually modified.
+
+## 4.4.0
+Wed, 08 Sep 2021 15:39:22 GMT
+
+### Minor changes
+
+- **Updated** to use new tree source map builder
+- Add warning and ignore invalid response examples
+- Tweaking request body processing and removed some invalid swagger  processing with `type: file` with non `formData` parmaeter
+-  **Update** to new path mapping sourcemap functionality
 
 ## 4.3.0
 Mon, 19 Jul 2021 15:15:42 GMT
