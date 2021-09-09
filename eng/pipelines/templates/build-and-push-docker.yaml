@@ -12,7 +12,6 @@ parameters:
 jobs:
   - job: ${{ parameters.name }}
     displayName: Publish to docker ${{ parameters.dockerFolder }}
-    dependsOn: stable
     steps:
       - task: DockerInstaller@0
         inputs:
