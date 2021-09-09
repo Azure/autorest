@@ -58,6 +58,6 @@ jobs:
             -e DOCKERHUB_USERNAME="azuresdk" \
             -e DOCKERHUB_PASSWORD="$(DockerHub-azuresdkPass)" \
             -e DOCKERHUB_REPOSITORY='azuresdk/autorest' \
-            -e README_FILEPATH='./docker/base/ubuntu/README.md' \
+            -e README_FILEPATH='./docker/base/readme.md' \
             peterevans/dockerhub-description:2.1.0
         displayName: Update readme
