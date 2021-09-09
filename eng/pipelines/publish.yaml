@@ -41,7 +41,7 @@ jobs:
           dockerVersion: "17.09.0-ce"
 
       - script: |
-          docker login --username azuresdk --password $(DockerHub-azuresdkPass)
+          echo "$(DockerHub-azuresdkPass)" | docker login -u "azuresdk" --password-stdin
         displayName: Login to docker hub.
 
       - script: |
