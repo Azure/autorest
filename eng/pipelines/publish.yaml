@@ -52,3 +52,11 @@ jobs:
       - script: |
           docker push azuresdk/autorest
         displayName: Publish image
+
+      - script: |
+        docker run -v $PWD:/workspace \
+          -e DOCKERHUB_USERNAME="azuresdk" \
+          -e DOCKERHUB_PASSWORD="$(DockerHub-azuresdkPass)" \
+          -e DOCKERHUB_REPOSITORY='azuresdk/autorest' \
+          -e README_FILEPATH='./docker/base/ubuntu/README.md' \
+          peterevans/dockerhub-description:2.1.0
