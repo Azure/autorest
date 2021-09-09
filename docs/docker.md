@@ -1,6 +1,10 @@
-# Use autorest with docker
+# Use AutoRest with docker
 
-Autorest provide some docker images.
+AutoRest provide some docker images:
+
+| Image               | Description            | Ubuntu |
+| ------------------- | ---------------------- | ------ |
+| `azuresdk/autorest` | This is the base image | ✔️     |
 
 ## Usage
 
