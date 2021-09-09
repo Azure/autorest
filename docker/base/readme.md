@@ -8,4 +8,4 @@ This image contains the base autorest cli without any installed plugin.
 
 # How to Use the Image
 
-See the [documentation](https://github.com/Azure/autorest/blob/feature/docker/docs/docker.md)
+See the [documentation](https://github.com/Azure/autorest/blob/main/docs/docker.md)
