@@ -8,56 +8,41 @@ trigger:
 
 pool:
   vmImage: "ubuntu-latest"
-jobs:
-  # - job: stable
-  #   displayName: Publish stable
-  #   steps:
-  #     - template: ./templates/build.yaml
 
-  #     - script: npx @microsoft/rush publish --publish --pack --include-all
-  #       displayName: Pack packages
+stages:
+  # - stage: npm
+  #   jobs:
+  #     jobs:
+  #       - job: stable
+  #         displayName: Publish stable
+  #         steps:
+  #           - template: ./templates/build.yaml
 
-  #     - script: |
-  #         NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --include-all --set-access-level public
-  #       displayName: Publish packages
+  #           - script: npx @microsoft/rush publish --publish --pack --include-all
+  #             displayName: Pack packages
 
-  # - job: prerelease
-  #   displayName: Publish prerelease
-  #   dependsOn: stable # Publish prerelease after to prevent race condition.
-  #   steps:
-  #     - template: ./templates/build.yaml
+  #           - script: |
+  #               NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --include-all --set-access-level public
+  #             displayName: Publish packages
 
-  #     - script: node ./eng/bump-for-prerelease.js
-  #       displayName: Bump version to prerelease targets
+  #       - job: prerelease
+  #         displayName: Publish prerelease
+  #         dependsOn: stable # Publish prerelease after to prevent race condition.
+  #         steps:
+  #           - template: ./templates/build.yaml
 
-  #     - script: |
-  #         NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --include-all --set-access-level public --tag next
-  #       displayName: Publish packages
-  - job: docker
-    displayName: Publish to docker
-    steps:
-      - task: DockerInstaller@0
-        inputs:
-          dockerVersion: "17.09.0-ce"
+  #           - script: node ./eng/bump-for-prerelease.js
+  #             displayName: Bump version to prerelease targets
 
-      - script: |
-          echo "$(DockerHub-azuresdkPass)" | docker login -u "azuresdk" --password-stdin
-        displayName: Login to docker hub.
-
-      - script: |
-          docker build -t azuresdk/autorest .
-        displayName: Build image
-        workingDirectory: ./docker/base/ubuntu
-
-      - script: |
-          docker push azuresdk/autorest
-        displayName: Publish image
-
-      - script: |
-          docker run -v $PWD/docker:/worksdpace \
-            -e DOCKERHUB_USERNAME="azuresdk" \
-            -e DOCKERHUB_PASSWORD="$(DockerHub-azuresdkPass)" \
-            -e DOCKERHUB_REPOSITORY='azuresdk/autorest' \
-            -e README_FILEPATH='/worksdpace/base/readme.md' \
-            peterevans/dockerhub-description:2.1.0
-        displayName: Update readme
+  #           - script: |
+  #               NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --include-all --set-access-level public --tag next
+  #             displayName: Publish packages
+  - stage: Docker
+    # dependsOn: npm
+    jobs:
+      - template: ./templates/build-and-push-docker.yaml
+        parameters:
+          name: base
+          image: azuresdk/autorest
+          dockerFolder: ./docker/base/ubuntu
+          readmePath: ./docker/base/readme.md
