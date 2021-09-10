@@ -46,3 +46,15 @@ stages:
           image: azuresdk/autorest
           dockerFolder: ./docker/base/ubuntu
           readmePath: ./docker/base/readme.md
+      - template: ./templates/build-and-push-docker.yaml
+        parameters:
+          name: base
+          image: azuresdk/autorest-dotnet
+          dockerFolder: ./docker/dotnet/ubuntu
+          readmePath: ./docker/dotnet/readme.md
+      - template: ./templates/build-and-push-docker.yaml
+        parameters:
+          name: base
+          image: azuresdk/autorest-python
+          dockerFolder: ./docker/python/ubuntu
+          readmePath: ./docker/python/readme.md
