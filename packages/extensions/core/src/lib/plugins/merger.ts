@@ -1,3 +1,5 @@
+import { URL } from "url";
+import { isDefined } from "@autorest/common";
 import {
   AnyObject,
   DataHandle,
@@ -10,9 +12,8 @@ import {
   visit,
 } from "@azure-tools/datastore";
 import { walk } from "@azure-tools/json";
-import { clone, Dictionary, visitor } from "@azure-tools/linq";
-
 import * as oai from "@azure-tools/openapi";
+import { cloneDeep } from "lodash";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
 
@@ -67,7 +68,6 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
   descriptions = new Set();
   apiVersions = new Set();
   titles = new Set();
-  private time = 0;
   constructor(
     input: Array<DataHandle>,
     protected overrideTitle: string | undefined,
@@ -111,6 +111,13 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
           break;
 
         case "servers":
+          if (!this.isSecondaryFile) {
+            const array = <any>target.servers ?? this.newArray(target, "servers", pointer);
+            for (const item of children) {
+              this.visitServer(item, array);
+            }
+          }
+          break;
         case "security":
         case "tags":
           if (!this.isSecondaryFile) {
@@ -145,7 +152,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
               (<oai.ExternalDocumentation>target.externalDocs)["x-ms-metadata"] ||
               this.newArray(<oai.ExternalDocumentation>target.externalDocs, "x-ms-metadata", pointer);
             docsMetadata.__push__({
-              value: clone(value),
+              value: cloneDeep(value),
               pointer,
               recurse: true,
             });
@@ -180,7 +187,48 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     }
   }
 
-  visitInfo(info: ProxyObject<Dictionary<oai.Info>>, nodes: Iterable<Node>) {
+  private visitServer(serverNode: Node<oai.Server>, targetServers: any) {
+    const server = serverNode.value;
+    const url = this.resolveServerUrl(server.url);
+    targetServers.__push__({
+      value: { ...serverNode.value, url },
+      pointer: serverNode.pointer,
+      recurse: true,
+    });
+  }
+
+  private resolveServerUrl(url: string) {
+    // If url is not relative then we can ignore.
+    if (url[0] !== "/") {
+      return url;
+    }
+
+    const specHost = this.getCurrentSpecHost();
+
+    try {
+      const urlObj = new URL(url, specHost);
+      return urlObj.toString();
+    } catch (e: any) {
+      if (e.code === "ERR_INVALID_URL") {
+        if (specHost) {
+          throw new Error(`Server url ${url} is invalid`);
+        } else {
+          throw new Error(
+            `Server url '${url}' cannot be resolved to an absolute url. Update to be an absolute url or load OpenAPI document from host to automatically resolve the url relative to it.`,
+          );
+        }
+      }
+    }
+  }
+
+  /**
+   * @returns the current OpenAPI spec host if it was loaded remotely.
+   */
+  private getCurrentSpecHost(): string | undefined {
+    return getSpecHost(this.currentInput as DataHandle);
+  }
+
+  visitInfo(info: ProxyObject<Record<string, oai.Info>>, nodes: Iterable<Node>) {
     for (const { key, value, pointer } of nodes) {
       switch (key) {
         case "title":
@@ -208,7 +256,6 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
   protected expandRefs(node: any) {
     walk(node, (value: any) => {
       if (value && typeof value === "object") {
-        const start = new Date().getTime();
         const ref = value.$ref;
         if (ref && typeof ref === "string" && ref.startsWith("#")) {
           const fullRef = `${(<DataHandle>this.currentInput).originalFullPath}${ref}`;
@@ -218,7 +265,6 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
             this.refs[fullRef] = this.refs[ref];
           }
         }
-        this.time += new Date().getTime() - start;
         return "visit-children";
       }
       return "stop";
@@ -266,9 +312,38 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     const versions = [...this.apiVersions.values()];
     this.metadata.apiVersions = { value: versions, pointer: "/" };
     info.version = { value: versions[0], pointer: "/info/version" }; // todo: should this be the max version?
-
+    this.ensureServers(this.generated);
     // walk thru the generated document, find all the $refs and update them to the new location
     this.updateRefs(this.generated);
+  }
+
+  private ensureServers(model: oai.Model) {
+    if (model.servers && model.servers.length > 0) {
+      // Nothing to do, the server list should already have been resolved correctly.
+      return;
+    }
+
+    // If there is no server it should default to <spec-host>/ see https://swagger.io/docs/specification/api-host-and-base-path/#relative-urls
+    const hosts = [...new Set(this.inputs.map((x) => getSpecHost(x as DataHandle)).filter(isDefined))];
+
+    // Each spec is hosted on a different server we cannot know which one is the correct server.
+    if (hosts.length > 1) {
+      const hostStr = hosts.map((x) => ` - ${x}`).join("\n");
+      throw new Error(
+        `Couldn't resolve the server url. Spec doesn't contain a server definition and specs are hosted on different hosts:\n${hostStr}`,
+      );
+    }
+
+    if (model.servers === undefined) {
+      this.newArray(model, "servers", "/servers");
+    }
+    (model.servers as any).__push__({
+      value: {
+        url: hosts[0],
+        description: "Default server",
+      },
+      recurse: false,
+    });
   }
 
   protected updateRefs(node: any) {
@@ -308,7 +383,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     }
   }
 
-  visitPaths(paths: ProxyObject<Dictionary<oai.PathItem>>, nodes: Iterable<Node>) {
+  visitPaths(paths: ProxyObject<Record<string, oai.PathItem>>, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
       const uid = `path:${this.opCount++}`;
 
@@ -347,12 +422,12 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
           case "trace":
             {
               const childOperation = this.newObject(paths, `${uid}.${child.key}`, pointer);
-              childOperation["x-ms-metadata"] = clone(metadata);
+              childOperation["x-ms-metadata"] = cloneDeep(metadata);
               this.copy(childOperation, child.key, child.pointer, child.value);
               if (value.parameters) {
                 if (childOperation[child.key].parameters) {
                   childOperation[child.key].parameters.unshift(
-                    ...clone(value.parameters).filter((x: { in: string; name: string }) => {
+                    ...cloneDeep(value.parameters).filter((x: { in: string; name: string }) => {
                       for (const param of childOperation[child.key].parameters) {
                         if (x.in === param.in && x.name === param.name) {
                           return false;
@@ -363,7 +438,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
                     }),
                   );
                 } else {
-                  childOperation[child.key].parameters = clone(value.parameters);
+                  childOperation[child.key].parameters = cloneDeep(value.parameters);
                 }
               }
             }
@@ -377,7 +452,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
       }
     }
   }
-  visitComponents(components: ProxyObject<Dictionary<oai.Components>>, nodes: Iterable<Node>) {
+  visitComponents(components: ProxyObject<Record<string, oai.Components>>, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
       this.cCount[key] = this.cCount[key] || 0;
       if (components[key] === undefined) {
@@ -388,7 +463,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     }
   }
 
-  visitComponent<T>(type: string, container: ProxyObject<Dictionary<T>>, nodes: Iterable<Node>) {
+  visitComponent<T>(type: string, container: ProxyObject<Record<string, T>>, nodes: Iterable<Node>) {
     for (const { key, value, pointer, children } of nodes) {
       const uid = `${type}:${this.cCount[type]++}`;
 
@@ -409,10 +484,10 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
       if (!value["x-ms-metadata"]) {
         component["x-ms-metadata"] = {
           value: {
-            "apiVersions": [this.current.info && this.current.info.version ? this.current.info.version : ""], // track the API version this came from
-            "filename": [this.currentInputFilename], // and the filename
+            apiVersions: [this.current.info && this.current.info.version ? this.current.info.version : ""], // track the API version this came from
+            filename: [this.currentInputFilename], // and the filename
             name,
-            "originalLocations": [originalLocation],
+            originalLocations: [originalLocation],
             "x-ms-secondary-file": this.isSecondaryFile,
           },
           pointer,
@@ -426,44 +501,48 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
 }
 
 function cleanRefs(instance: AnyObject): AnyObject {
-  for (const each of visitor(instance)) {
-    if (each.instance.$ref) {
-      each.instance.$ref = each.instance.$ref.substring(each.instance.$ref.indexOf("#"));
+  walk(instance, (value: any) => {
+    if (value.$ref) {
+      value.$ref = value.$ref.substring(value.$ref.indexOf("#"));
+      return "stop";
     }
-  }
+    return "visit-children";
+  });
   return instance;
 }
 
-async function merge(config: AutorestContext, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map((x) => input.ReadStrict(x)));
+async function merge(context: AutorestContext, input: DataSource, sink: DataSink) {
+  const inputs = await Promise.all((await input.enum()).map((x) => input.readStrict(x)));
   if (inputs.length === 1) {
-    const model = await inputs[0].ReadObject<any>();
+    const model = await inputs[0].readObject<any>();
     if (model.info?.["x-ms-metadata"]?.merged) {
       // this file is alone, and has been thru the merger before.
       // (this can happen if we use an OAI3 file that was captured after going thru the pipeline)
       // we're just going to clean the refs and give it back the way it came in.
       cleanRefs(model);
       return new QuickDataSource(
-        [await sink.WriteObject("merged oai3 doc...", model, inputs[0].identity, "merged-oai3", undefined)],
+        [await sink.writeObject("merged oai3 doc...", model, inputs[0].identity, "merged-oai3", undefined)],
         input.pipeState,
       );
     }
   }
 
-  const overrideInfo = config.GetEntry("override-info");
-  const overrideTitle = (overrideInfo && overrideInfo.title) || config.GetEntry("title");
-  const overrideDescription = (overrideInfo && overrideInfo.description) || config.GetEntry("description");
+  const overrideInfo = context.GetEntry("override-info");
+  const overrideTitle = (overrideInfo && overrideInfo.title) || context.GetEntry("title");
+  const overrideDescription = (overrideInfo && overrideInfo.description) || context.GetEntry("description");
   const processor = new MultiAPIMerger(inputs, overrideTitle, overrideDescription);
 
   return new QuickDataSource(
     [
-      await sink.WriteObject(
+      await sink.writeObject(
         "merged oai3 doc...",
         await processor.getOutput(),
         // eslint-disable-next-line prefer-spread
         [].concat.apply([], <any>inputs.map((each) => each.identity)),
         "merged-oai3",
-        await processor.getSourceMappings(),
+        {
+          pathMappings: await processor.getSourceMappings(),
+        },
       ),
     ],
     input.pipeState,
@@ -473,4 +552,19 @@ async function merge(config: AutorestContext, input: DataSource, sink: DataSink)
 /* @internal */
 export function createMultiApiMergerPlugin(): PipelinePlugin {
   return merge;
+}
+
+/**
+ * @returns the current OpenAPI spec host if it was loaded remotely.
+ */
+function getSpecHost(handle: DataHandle): string | undefined {
+  const specUrl = handle.identity?.[0];
+  if (!specUrl) {
+    return undefined;
+  }
+  const url = new URL(specUrl);
+  if (url.protocol === "http:" || url.protocol === "https:") {
+    return url.origin;
+  }
+  return undefined;
 }

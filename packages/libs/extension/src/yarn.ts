@@ -1,10 +1,10 @@
-import { isFile, writeFile } from "@azure-tools/async-io";
 import { readFileSync } from "fs";
 import { tmpdir } from "os";
 import { join, resolve } from "path";
+import { isFile, writeFile } from "@azure-tools/async-io";
 import { execute } from "./exec-cmd";
 import { DEFAULT_NPM_REGISTRY } from "./npm";
-import { InstallOptions, PackageManager } from "./package-manager";
+import { ensurePackageJsonExists, InstallOptions, PackageManager } from "./package-manager";
 
 let _cli: string | undefined;
 const getPathToYarnCli = async () => {
@@ -36,6 +36,7 @@ export class Yarn implements PackageManager {
   public constructor(private pathToYarnCli: string | undefined = undefined) {}
 
   public async install(directory: string, packages: string[], options?: InstallOptions) {
+    await ensurePackageJsonExists(directory);
     const output = await this.execYarn(
       directory,
       "add",

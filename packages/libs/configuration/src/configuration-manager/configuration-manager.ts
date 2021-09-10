@@ -1,16 +1,17 @@
-import { evaluateGuard, mergeOverwriteOrAppend } from "@autorest/common";
+import { mergeOverwriteOrAppend } from "@autorest/common";
 import { IFileSystem } from "@azure-tools/datastore";
 import { AutorestConfiguration, createAutorestConfiguration } from "../autorest-configuration";
 import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
 import { AUTOREST_INITIAL_CONFIG } from "../configuration-schema";
 import { desugarRawConfig } from "../desugar";
+import { evaluateGuard } from "../literate-yaml";
 import { ConditionalConfiguration, ConfigurationFile } from "./configuration-file";
 
 const defaultConfig: AutorestNormalizedConfiguration = Object.freeze({
   "base-folder": ".",
   "output-folder": "generated",
-  "debug": false,
-  "verbose": false,
+  debug: false,
+  verbose: false,
   "disable-validation": false,
 });
 

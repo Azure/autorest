@@ -853,7 +853,7 @@ Note: The extension is not tight to this particular scenario (you could model an
 Set the default value for a property or a parameter.
 
 With this extension, you can set a default value for a property or parameter that is independent of how the property / parameter's schema is handling a default. This is different than the `default` value
-you can speciy
+you can specify
 
 **Parent element**: [Parameter Objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#parameterObject) or [Property on the Schema Definition](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schemaObject).
 
@@ -1233,7 +1233,7 @@ A dictionary where a key's value can be null.
 ```
 
 **Example**:
-An object with an optional property.
+An object with a nullable property.
 
 ```json
 "Widget": {

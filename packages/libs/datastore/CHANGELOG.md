@@ -1,6 +1,32 @@
 # Change Log - @azure-tools/datastore
 
-This log was last generated on Tue, 27 Apr 2021 17:48:43 GMT and should not be manually modified.
+This log was last generated on Wed, 08 Sep 2021 15:39:22 GMT and should not be manually modified.
+
+## 4.5.0
+Wed, 08 Sep 2021 15:39:22 GMT
+
+### Minor changes
+
+- **Added** Option to disable auto unloading of data in DataStore
+- **Added** New tree source map builder replacing graph builder
+- **Added** Support for yaml `<<` merge keyword in parser"
+- Extract yaml logic in own package `@azure-tools/yaml`
+- **Perf** Improvement to perf when buildingraph mappings
+- **Added** New path mapping sourcemap functionality to improve performance significantly by reducing the yaml ast parsing needed to construct position based sourcemap
+
+## 4.4.0
+Mon, 19 Jul 2021 15:15:42 GMT
+
+### Minor changes
+
+- **Remove** NodeT type
+- Drop support for node 10
+- **Perf** Memory usage improvements
+- **Perf** Unload sourcemap from memory if not used
+
+### Patches
+
+- **Fix** Sourcemap computation
 
 ## 4.3.1
 Tue, 27 Apr 2021 17:48:43 GMT

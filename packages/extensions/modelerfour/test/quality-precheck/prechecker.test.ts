@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { addSchema, createTestSessionFromModel, createTestSpec } from "../utils";
-import { QualityPreChecker } from "../../src/quality-precheck/prechecker";
+import assert from "assert";
 import { Model, Refable, Dereferenced, dereference, Schema } from "@azure-tools/openapi";
 import { ModelerFourOptions } from "modeler/modelerfour-options";
-import assert from "assert";
+import { QualityPreChecker } from "../../src/quality-precheck/prechecker";
+import { addSchema, createTestSessionFromModel, createTestSpec } from "../utils";
 
 class PreCheckerClient {
   private constructor(private input: Model, public result: Model) {}
@@ -64,9 +64,9 @@ describe("Prechecker", () => {
     });
 
     addSchema(spec, "MainSchema", {
-      "type": "object",
+      type: "object",
       "x-ms-client-name": "MainSchema",
-      "properties": {
+      properties: {
         name: {
           type: "string",
         },

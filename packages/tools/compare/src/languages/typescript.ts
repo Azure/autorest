@@ -108,8 +108,10 @@ function extractField(fieldNode: Parser.SyntaxNode): FieldDetails {
 }
 
 function extractParameter(parameterNode: Parser.SyntaxNode, ordinal: number): ParameterDetails {
-  const [nameNode, typeNode] = parameterNode.namedChildren;
+  const children =
+    parameterNode.namedChildren.length === 3 ? parameterNode.namedChildren.slice(1) : parameterNode.namedChildren;
 
+  const [nameNode, typeNode] = children;
   return {
     name: nameNode.text,
     type: typeNode ? typeNode.children[1].text : "any",

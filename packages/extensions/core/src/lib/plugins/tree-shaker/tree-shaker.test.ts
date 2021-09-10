@@ -34,7 +34,7 @@ describe("Tree shaker", () => {
         components: {
           schemas: {
             Foo: {
-              "type": JsonType.Object,
+              type: JsonType.Object,
               "x-ms-client-name": "FooClient",
             },
           },
@@ -49,7 +49,7 @@ describe("Tree shaker", () => {
         paths: {
           "/mypath": {
             get: {
-              parameters: [{ "in": "query", "name": "some-param", "x-ms-client-name": "SomeParamClient" }],
+              parameters: [{ in: "query", name: "some-param", "x-ms-client-name": "SomeParamClient" }],
             },
           },
         },
@@ -68,8 +68,8 @@ describe("Tree shaker", () => {
               properties: {
                 bar: {
                   "x-ms-client-name": "barClient",
-                  "type": JsonType.Object,
-                  "properties": {
+                  type: JsonType.Object,
+                  properties: {
                     name: { type: JsonType.String },
                   },
                 },
@@ -82,5 +82,24 @@ describe("Tree shaker", () => {
       expect(result.components.schemas.Foo.properties.bar["x-ms-client-name"]).toEqual("barClient");
       expect(result.components.schemas["Foo-bar"]["x-ms-client-name"]).toBeUndefined();
     });
+  });
+
+  it("tree shake parameters", async () => {
+    const result = await shake({
+      paths: {
+        "/mypath": {
+          get: {
+            parameters: [{ in: "query", name: "some-param" }],
+          },
+        },
+      },
+    });
+
+    const operationParameters = result.paths["/mypath"].get.parameters;
+    expect(operationParameters).toHaveLength(1);
+    expect(operationParameters[0].$ref).toBeDefined();
+    const id = operationParameters[0].$ref.split("/").pop();
+    const parameter = result.components.parameters[id];
+    expect(parameter).toEqual({ in: "query", name: "some-param", "x-ms-parameter-location": "method" });
   });
 });

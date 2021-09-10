@@ -40,7 +40,7 @@ specs:
       - httpInfrastructure.json
       - httpInfrastructure.quirks.json
       - lro.json
-      - media_types.json
+      # - media_types.json https://github.com/Azure/autorest/issues/4246
       - model-flattening.json
       - multiapi-v1.json
       - multiapi-v2.json
@@ -71,6 +71,7 @@ languages:
       - --use:../packages/extensions/modelerfour
       - --use:@autorest/python@5.7.0
       - --modelerfour.treat-type-object-as-anything
+      - --modelerfour.seal-single-value-enum-by-default
 
   - language: typescript
     outputPath: ./output/typescript
@@ -81,7 +82,7 @@ languages:
       - --modelerfour.treat-type-object-as-anything
       - --package-name:test-package
       - --title:TestClient
-      - --use:@autorest/typescript@6.0.0-alpha.20210415.6
+      - --use:@autorest/typescript@6.0.0-beta.5
     newArgs:
       - --v3
       - --version:../packages/extensions/core
@@ -89,4 +90,5 @@ languages:
       - --modelerfour.treat-type-object-as-anything
       - --package-name:test-package
       - --title:TestClient
-      - --use:@autorest/typescript@6.0.0-alpha.20210415.6
+      - --modelerfour.seal-single-value-enum-by-default
+      - --use:@autorest/typescript@6.0.0-beta.5

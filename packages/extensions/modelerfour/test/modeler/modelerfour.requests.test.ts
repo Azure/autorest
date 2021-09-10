@@ -1,12 +1,12 @@
 /* eslint-disable jest/no-standalone-expect */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
+import assert from "assert";
 import { CodeModel, DictionarySchema, HttpHeader, Operation, Parameter, SealedChoiceSchema } from "@autorest/codemodel";
 import { HttpOperation, JsonType, ParameterLocation, RequestBody } from "@azure-tools/openapi";
+import * as oai3 from "@azure-tools/openapi";
 import { addOperation, createTestSpec, findByName } from "../utils";
 import { runModeler } from "./modelerfour-utils";
-import * as oai3 from "@azure-tools/openapi";
-import assert from "assert";
 
 async function runModelerWithOperation(
   method: string,
@@ -199,10 +199,10 @@ describe("Modelerfour.Request", () => {
         description: "Has x-ms-header-collection-prefix on header",
         parameters: [
           {
-            "name": "x-ms-req-meta",
+            name: "x-ms-req-meta",
             "x-ms-client-name": "RequestHeaderWithExtension",
-            "in": "header",
-            "schema": {
+            in: "header",
+            schema: {
               type: "string",
             },
             "x-ms-parameter-location": "method",
@@ -223,7 +223,7 @@ describe("Modelerfour.Request", () => {
               "x-named-header": {
                 "x-ms-client-name": "HeaderWithExtension",
                 "x-ms-header-collection-prefix": "x-ms-res-meta",
-                "schema": {
+                schema: {
                   type: "string",
                 },
               },
@@ -362,6 +362,51 @@ describe("Modelerfour.Request", () => {
 
       const parameter = findByName("deprecatedHeaderParam", operation.parameters);
       expect(parameter?.deprecated).toEqual({});
+    });
+  });
+
+  describe("ignore headers with config", () => {
+    it("propagates extensions to request header definitions", async () => {
+      const spec = createTestSpec();
+      const operationDef = {
+        operationId: "headerToIgnore",
+        description: "Has header to ignore",
+        parameters: [
+          {
+            name: "foo",
+            in: "header",
+            schema: {
+              type: "string",
+            },
+          },
+          {
+            name: "bar",
+            in: "header",
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        responses: {
+          200: {
+            description: "Response with a header extension.",
+          },
+        },
+      };
+      addOperation(spec, "/headerToIgnore", {
+        post: operationDef,
+      });
+
+      const model = await runModeler(spec, {
+        modelerfour: {
+          "ignore-headers": ["foo"],
+        },
+      });
+      const parameters = model.operationGroups[0].operations[0].parameters;
+      assert(parameters);
+      expect(parameters).toHaveLength(2);
+      expect(parameters[1].language.default.serializedName).toEqual("bar");
+      expect(parameters[1].protocol).toEqual({ http: { in: "header" } });
     });
   });
 });

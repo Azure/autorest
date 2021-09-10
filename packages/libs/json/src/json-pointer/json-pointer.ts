@@ -1,5 +1,5 @@
 export type JsonPointer = string;
-export type JsonPointerTokens = string[];
+export type JsonPointerTokens = (string | number)[];
 
 /**
  * Escapes a reference token
@@ -7,8 +7,8 @@ export type JsonPointerTokens = string[];
  * @param str
  * @returns {string}
  */
-function escape(str: string): string {
-  return str.toString().replace(/~/g, "~0").replace(/\//g, "~1");
+function escape(str: string | number): string | number {
+  return typeof str === "string" ? str.toString().replace(/~/g, "~0").replace(/\//g, "~1") : str;
 }
 
 /**
@@ -68,4 +68,14 @@ export function getFromJsonPointer<T>(obj: any, pointer: JsonPointer | JsonPoint
     obj = obj[tok];
   }
   return obj;
+}
+
+/**
+ * Add a new segment to a json pointer
+ * @param pointer Pointer
+ * @param suffix Suffix
+ * @returns new json pointer
+ */
+export function appendJsonPointer(pointer: string, ...suffixes: string[]): string {
+  return serializeJsonPointer(parseJsonPointer(pointer).concat(suffixes));
 }

@@ -1,14 +1,10 @@
-import { CompilePosition, DataHandle, JsonPath, parseJsonPointer } from "@azure-tools/datastore";
+import { DataHandle, JsonPath } from "@azure-tools/datastore";
+import { parseJsonPointer } from "@azure-tools/json";
 import Ajv, { AnySchemaObject, ErrorObject } from "ajv";
 import ajvErrors from "ajv-errors";
-import { Position } from "source-map";
 
 export interface ValidationError extends ErrorObject {
   path: JsonPath;
-}
-
-export interface PositionedValidationError extends ValidationError {
-  position: Position;
 }
 
 export abstract class JsonSchemaValidator {
@@ -27,23 +23,15 @@ export abstract class JsonSchemaValidator {
     if (valid || !validate.errors) {
       return [];
     } else {
-      return condenseErrors(validate.errors).map((x) => ({ ...x, path: parseJsonPointer(x.dataPath) }));
+      return condenseErrors(validate.errors).map((x) => ({ ...x, path: parseJsonPointer(x.instancePath) }));
     }
   }
 
-  public async validateFile(file: DataHandle): Promise<PositionedValidationError[]> {
-    const spec = await file.ReadObject();
+  public async validateFile(file: DataHandle): Promise<ValidationError[]> {
+    const spec = await file.readObject();
     const errors = this.validate(spec);
-    const mappedErrors = errors.map((x) => extendWithPosition(x, file));
-    return Promise.all(mappedErrors);
+    return Promise.all(errors);
   }
-}
-
-async function extendWithPosition(error: ValidationError, file: DataHandle): Promise<PositionedValidationError> {
-  return {
-    ...error,
-    position: await CompilePosition({ path: error.path }, file),
-  };
 }
 
 const IGNORE_ERROR = new Set(["if"]);
@@ -55,16 +43,16 @@ export function condenseErrors(errors: ErrorObject[]): ErrorObject[] {
   }
 
   for (const err of errors.filter((x) => !IGNORE_ERROR.has(x.keyword))) {
-    const { dataPath, message } = err;
+    const { instancePath, message } = err;
     if (!message) {
       continue;
     }
-    if (tree[dataPath] && tree[dataPath][message]) {
-      tree[dataPath][message].push(err);
-    } else if (tree[dataPath]) {
-      tree[dataPath][message] = [err];
+    if (tree[instancePath] && tree[instancePath][message]) {
+      tree[instancePath][message].push(err);
+    } else if (tree[instancePath]) {
+      tree[instancePath][message] = [err];
     } else {
-      tree[dataPath] = {
+      tree[instancePath] = {
         [message]: [err],
       };
     }

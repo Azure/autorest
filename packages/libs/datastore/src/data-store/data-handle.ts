@@ -1,29 +1,32 @@
-import { Delay, Lazy, LazyPromise } from "@azure-tools/tasks";
-import { MappedPosition, Position, RawSourceMap, SourceMapConsumer } from "source-map";
 import { promises as fs } from "fs";
-import { ParseToAst as parseAst, YAMLNode, parseYaml, ParseNode } from "../yaml";
-
-export interface Metadata {
-  lineIndices: Lazy<Array<number>>;
-  sourceMap: LazyPromise<RawSourceMap>;
-
-  // inputSourceMap: LazyPromise<RawSourceMap>;
-}
+import { parseYAMLAst, YamlNode, parseYAMLFast } from "@azure-tools/yaml";
+import { MappedPosition, Position } from "source-map";
+import { JsonPath } from "../json-path/json-path";
+import { getLineIndices } from "../parsing/text-utility";
+import { resolvePathPosition } from "../source-map";
+import { PathMappedPosition, PathPosition, PathSourceMap } from "../source-map/path-source-map";
+import { PositionSourceMap } from "../source-map/position-source-map";
 
 export interface Data {
+  status: "loaded" | "unloaded";
   name: string;
   artifactType: string;
-  metadata: Metadata;
-  identity: Array<string>;
+  identity: string[];
+  pathSourceMap: PathSourceMap | undefined;
+  positionSourceMap: PositionSourceMap | undefined;
+
+  lineIndices?: number[];
 
   writeToDisk?: Promise<void>;
   cached?: string;
-  cachedAst?: YAMLNode;
+  cachedAst?: YamlNode;
   cachedObject?: any;
   accessed?: boolean;
 }
 
 export class DataHandle {
+  private unloadTimer: NodeJS.Timer | undefined;
+
   /**
    * @param autoUnload If the data unhandle should automatically unload files after they are not used for a while.
    */
@@ -31,7 +34,7 @@ export class DataHandle {
     // start the clock once this has been created.
     // this ensures that the data cache will be flushed if not
     // used in a reasonable amount of time
-    this.onTimer();
+    this.resetUnload();
   }
 
   public async serialize() {
@@ -45,35 +48,40 @@ export class DataHandle {
     });
   }
 
-  private onTimer() {
-    this.checkIfNeedToUnload().catch((e) => {
-      // eslint-disable-next-line no-console
-      console.error("Error while verifing DataHandle cache status", e);
-    });
-  }
+  private resetUnload() {
+    if (this.unloadTimer) {
+      clearTimeout(this.unloadTimer);
+    }
 
-  private async checkIfNeedToUnload() {
     if (!this.autoUnload) {
       return;
     }
 
-    await Delay(3000);
-    if (this.item.accessed) {
-      // it's been cached. start the timer!
-      this.onTimer();
-      // clear the accessed flag before we go.
-      this.item.accessed = false;
-      return;
-    }
-    // wasn't actually used since the delay. let's dump it.
-    // console.log(`flushing ${this.item.name}`);
-    // wait to make sure it's finished writing to disk tho'
-    // await this.item.writingToDisk;
+    setTimeout(() => {
+      if (this.item.accessed) {
+        this.item.accessed = false;
+        this.resetUnload();
+      } else {
+        this.unload();
+      }
+    }, 3000);
+  }
+
+  private unload() {
     if (!this.item.writeToDisk) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       this.item.writeToDisk = fs.writeFile(this.item.name, this.item.cached!);
     }
+
+    if (this.item.positionSourceMap) {
+      void this.item.positionSourceMap.unload();
+    }
+
+    if (this.item.pathSourceMap) {
+      void this.item.pathSourceMap.unload();
+    }
     // clear the caches.
+    this.item.status = "unloaded";
     this.item.cached = undefined;
     this.item.cachedObject = undefined;
     this.item.cachedAst = undefined;
@@ -101,44 +109,30 @@ export class DataHandle {
     if (this.item.cached === undefined) {
       // make sure the write-to-disk is finished.
       await this.item.writeToDisk;
-
       if (nocache) {
         return await fs.readFile(this.item.name, "utf8");
       } else {
         this.item.cached = await fs.readFile(this.item.name, "utf8");
+        this.item.status = "loaded";
 
         // start the timer again.
-        this.onTimer();
+        this.resetUnload();
       }
     }
 
     return this.item.cached;
   }
 
-  public async readObjectFast<T>(): Promise<T> {
-    // we're going to use the data, so let's not let it expire.
-    this.item.accessed = true;
-
-    return this.item.cachedObject || (this.item.cachedObject = parseYaml(await this.readData()));
-  }
-
   public async readObject<T>(): Promise<T> {
-    // we're going to use the data, so let's not let it expire.
     this.item.accessed = true;
-
-    // return the cached object, or get it, then return it.
-    return this.item.cachedObject || (this.item.cachedObject = ParseNode<T>(await this.readYamlAst()));
+    return this.item.cachedObject || (this.item.cachedObject = parseYAMLFast(await this.readData()));
   }
 
-  public async readYamlAst(): Promise<YAMLNode> {
+  public async readYamlAst(): Promise<YamlNode> {
     // we're going to use the data, so let's not let it expire.
     this.item.accessed = true;
     // return the cachedAst or get it, then return it.
-    return this.item.cachedAst || (this.item.cachedAst = parseAst(await this.readData()));
-  }
-
-  public get metadata(): Metadata {
-    return this.item.metadata;
+    return this.item.cachedAst || (this.item.cachedAst = parseYAMLAst(await this.readData()));
   }
 
   public get artifactType(): string {
@@ -158,14 +152,51 @@ export class DataHandle {
     }
   }
 
-  public async blame(position: Position): Promise<Array<MappedPosition>> {
-    const metadata = this.metadata;
-    const consumer = new SourceMapConsumer(await metadata.sourceMap);
-    const mappedPosition = consumer.originalPositionFor(position);
-    if (mappedPosition.line === null) {
-      return [];
+  public async blame(position: PathPosition | Position): Promise<Array<MappedPosition | PathMappedPosition>> {
+    if ("path" in position && !("line" in position)) {
+      return this.blamePath(position.path);
+    } else {
+      if (this.item.positionSourceMap) {
+        const mapping = await this.item.positionSourceMap.getOriginalLocation(position);
+        if (mapping) {
+          return [mapping];
+        } else {
+          return [];
+        }
+      }
     }
-    return [mappedPosition];
+
+    return [];
+  }
+
+  public async blamePath(path: JsonPath): Promise<Array<MappedPosition | PathMappedPosition>> {
+    if (this.item.pathSourceMap) {
+      const mapping = await this.item.pathSourceMap.getOriginalLocation({ path });
+      if (mapping) {
+        return [mapping];
+      } else {
+        return [];
+      }
+    }
+
+    const resolvedPosition = await resolvePathPosition(this, path);
+    if (this.item.positionSourceMap) {
+      const mapping = await this.item.positionSourceMap.getOriginalLocation(resolvedPosition);
+      if (mapping) {
+        return [mapping];
+      } else {
+        return [];
+      }
+    }
+    return [{ source: this.key, ...resolvedPosition }];
+  }
+
+  public async lineIndices() {
+    if (!this.item.lineIndices) {
+      this.item.lineIndices = getLineIndices(await this.readData());
+    }
+
+    return this.item.lineIndices;
   }
 
   /**
@@ -176,31 +207,16 @@ export class DataHandle {
   }
 
   /**
-   * @deprecated use @see blame
-   */
-  public async Blame(position: Position): Promise<Array<MappedPosition>> {
-    return this.blame(position);
-  }
-
-  /**
    * @deprecated use @see description
    */
   public get Description(): string {
     return this.description;
   }
-
   /**
    * @deprecated use @see readData
    */
   public async ReadData(nocache = false): Promise<string> {
     return this.readData(nocache);
-  }
-
-  /**
-   * @deprecated use @see readObjectFast
-   */
-  public async ReadObjectFast<T>(): Promise<T> {
-    return this.readObjectFast();
   }
 
   /**
@@ -213,7 +229,7 @@ export class DataHandle {
   /**
    * @deprecated use @see readYamlAst
    */
-  public async ReadYamlAst(): Promise<YAMLNode> {
+  public async ReadYamlAst(): Promise<YamlNode> {
     return this.readYamlAst();
   }
 }

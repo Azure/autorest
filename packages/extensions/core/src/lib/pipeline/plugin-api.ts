@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestType0, RequestType1, RequestType2 } from "vscode-jsonrpc";
-import { NotificationType2, NotificationType4 } from "vscode-jsonrpc";
-import { SmartPosition } from "@azure-tools/datastore";
+import { PathPosition } from "@azure-tools/datastore";
 import { Mapping, RawSourceMap } from "source-map";
+import { RequestType0, RequestType2, NotificationType2, NotificationType4 } from "vscode-jsonrpc";
+
 import { Message } from "../message";
 
 export namespace IAutoRestPluginTargetTypes {
@@ -33,7 +33,7 @@ export namespace IAutoRestPluginInitiatorTypes {
   /* @internal */ export const Message = new NotificationType4<
     string,
     Message,
-    SmartPosition | undefined,
+    PathPosition | undefined,
     string | undefined,
     void
   >("Message");
@@ -45,5 +45,5 @@ export interface IAutoRestPluginInitiator {
   ListInputs(sessionId: string, artifactType?: string): Promise<Array<string>>;
 
   WriteFile(sessionId: string, filename: string, content: string, sourceMap?: Array<Mapping> | RawSourceMap): void;
-  Message(sessionId: string, message: Message, path?: SmartPosition, sourceFile?: string): void;
+  Message(sessionId: string, message: Message, path?: PathPosition, sourceFile?: string): void;
 }

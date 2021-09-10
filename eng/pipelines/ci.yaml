@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-  - master
+  - main
 
 pool:
   vmImage: "ubuntu-latest"
@@ -58,10 +58,6 @@ stages:
     displayName: Regression Tests
     dependsOn: main
     jobs:
-      - template: ./templates/regression-tests.yaml
-        parameters:
-          name: node10
-          nodeVersion: 10.x
       - template: ./templates/regression-tests.yaml
         parameters:
           name: node12

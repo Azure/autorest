@@ -1,5 +1,4 @@
 import { Session } from "@autorest/extension-base";
-import { length } from "@azure-tools/linq";
 import oai3, { dereference, Dereferenced, JsonType, Schema } from "@azure-tools/openapi";
 import { groupBy } from "lodash";
 import { ModelerFourOptions } from "modeler/modelerfour-options";
@@ -212,13 +211,15 @@ export class DuplicateSchemaMerger {
 
       case JsonType.Object:
         // empty objects don't worry.
-        if (length(schema.properties) === 0 && length(schema.allOf) === 0) {
+        if (Object.keys(schema.properties ?? {}).length === 0 && Object.keys(schema.allOf ?? {}).length === 0) {
           return false;
         }
         return true;
 
       default:
-        return length(schema.properties) > 0 || length(schema.allOf) > 0 ? true : false;
+        return Object.keys(schema.properties ?? {}).length > 0 || Object.keys(schema.allOf ?? {}).length > 0
+          ? true
+          : false;
     }
   }
 }

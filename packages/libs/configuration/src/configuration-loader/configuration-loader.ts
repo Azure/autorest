@@ -1,15 +1,15 @@
+import { AutorestLogger, OperationAbortedException } from "@autorest/common";
+import { exists, filePath } from "@azure-tools/async-io";
 import { DataStore, IFileSystem, RealFileSystem, CachingFileSystem } from "@azure-tools/datastore";
 import { Extension, ExtensionManager, LocalExtension } from "@azure-tools/extension";
 import { createFileUri, resolveUri, simplifyUri, fileUriToPath } from "@azure-tools/uri";
-import { AutorestLogger, OperationAbortedException } from "@autorest/common";
 import untildify from "untildify";
 import { AutorestConfiguration } from "../autorest-configuration";
+import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
 import { detectConfigurationFile } from "../configuration-file-resolver";
 import { ConfigurationManager, readConfigurationFile } from "../configuration-manager";
-import { getIncludedConfigurationFiles } from "./configuration-require-resolver";
-import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
-import { exists, filePath } from "@azure-tools/async-io";
 import { autorestConfigurationProcessor, AutorestRawConfiguration } from "../configuration-schema";
+import { getIncludedConfigurationFiles } from "./configuration-require-resolver";
 
 export interface AutorestConfigurationResult {
   config: AutorestConfiguration;
@@ -65,7 +65,7 @@ export class ConfigurationLoader {
   ) {
     const fileSystem = options.fileSystem ?? new RealFileSystem();
     this.fileSystem = fileSystem instanceof CachingFileSystem ? fileSystem : new CachingFileSystem(fileSystem);
-    this.dataStore = options.dataStore ?? new DataStore({ isCancellationRequested: false } as any);
+    this.dataStore = options.dataStore ?? new DataStore({ autoUnloadData: false });
     this.extensionManager = options.extensionManager;
   }
 

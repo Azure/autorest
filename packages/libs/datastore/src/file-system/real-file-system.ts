@@ -1,8 +1,8 @@
 import { enumerateFiles, readUri, writeString } from "@azure-tools/uri";
-import { IFileSystem } from "./file-system";
 import * as Constants from "../constants";
-import { UriNotFoundError } from "./errors";
 import { logger } from "../logger";
+import { UriNotFoundError } from "./errors";
+import { IFileSystem } from "./file-system";
 
 export class RealFileSystem implements IFileSystem {
   public constructor() {}
@@ -45,7 +45,7 @@ export async function readUriWithRetries(uri: string, headers: { [name: string]:
   for (;;) {
     try {
       return await readUri(uri, headers);
-    } catch (e) {
+    } catch (e: any) {
       tryed++;
       if (isRetryableStatusCode(e.statusCode) && tryed <= MAX_RETRY_COUNT) {
         // eslint-disable-next-line no-console

@@ -1,11 +1,11 @@
 {
   "name": "@azure-tools/datastore",
-  "version": "4.3.1",
+  "version": "4.5.0",
   "description": "Virtualized Filesystem with parsing and sourcemaps (AutoRest)",
   "main": "./dist/main.js",
   "typings": "./dist/main.d.ts",
   "engines": {
-    "node": ">=10.13.0"
+    "node": ">=12.0.0"
   },
   "repository": {
     "type": "git",
@@ -38,30 +38,30 @@
   "devDependencies": {
     "@types/jest": "^26.0.20",
     "@types/jsonpath": "^0.2.0",
+    "@types/lodash": "~4.14.168",
     "@types/node": "~14.14.20",
-    "@types/source-map": "0.5.0",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
     "eslint-plugin-jest": "~24.3.2",
     "eslint-plugin-node": "~11.1.0",
-    "eslint-plugin-prettier": "~3.2.0",
-    "eslint-plugin-unicorn": "~27.0.0",
+    "eslint-plugin-prettier": "~3.4.0",
+    "eslint-plugin-unicorn": "~33.0.1",
+    "eslint-plugin-import": "~2.24.2",
     "eslint": "^7.17.0",
-    "jest": "^26.6.3",
+    "jest": "^27.0.4",
     "rimraf": "^3.0.2",
-    "ts-jest": "^26.4.4",
-    "typescript": "~4.2.3"
+    "ts-jest": "^27.0.3",
+    "typescript": "~4.4.2"
   },
   "dependencies": {
-    "@azure-tools/codegen": "~2.5.294",
-    "@azure-tools/json": "~1.0.0",
-    "@azure-tools/linq": "~3.1.0",
+    "@azure-tools/codegen": "~2.7.0",
+    "@azure-tools/json": "~1.2.0",
     "@azure-tools/tasks": "~3.0.0",
     "@azure-tools/uri": "~3.1.1",
+    "@azure-tools/yaml": "~1.0.0",
     "@azure/logger": "^1.0.2",
-    "js-yaml": "~4.0.0",
+    "lodash": "~4.17.20",
     "jsonpath": "1.0.0",
-    "source-map": "0.5.6",
-    "yaml-ast-parser": "0.0.43"
+    "source-map": "0.7.3"
   }
 }

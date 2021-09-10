@@ -1,7 +1,7 @@
+import { createDataHandle } from "@autorest/test-utils";
 import { DataHandle } from "@azure-tools/datastore";
 import { omit } from "lodash";
 import { SwaggerSchemaValidator } from "./swagger-schema-validator";
-import { createDataHandle } from "@autorest/test-utils";
 const baseSwaggerSpec = {
   swagger: "2.0",
   info: {
@@ -22,9 +22,9 @@ describe("Swagger schema validator", () => {
     const errors = validator.validate(omit(baseSwaggerSpec, "info"));
     expect(errors).toEqual([
       {
-        dataPath: "",
+        instancePath: "",
         keyword: "required",
-        message: "should have required property 'info'",
+        message: "must have required property 'info'",
         params: { missingProperty: "info" },
         path: [],
         schemaPath: "#/required",
@@ -32,16 +32,40 @@ describe("Swagger schema validator", () => {
     ]);
   });
 
-  it("combines erros", () => {
+  it("returns error if using type: file with non formData parameter", () => {
+    const errors = validator.validate({
+      ...baseSwaggerSpec,
+      paths: {
+        "/test": {
+          post: {
+            parameters: [{ in: "body", type: "file", name: "body", schema: { type: "string" } }],
+            responses: { 200: { description: "Ok." } },
+          },
+        },
+      },
+    });
+    expect(errors).toEqual([
+      {
+        instancePath: "/paths/~1test/post/parameters/0",
+        keyword: "additionalProperties",
+        message: "must NOT have additional properties",
+        params: { additionalProperty: "type" },
+        path: ["paths", "/test", "post", "parameters", "0"],
+        schemaPath: "#/additionalProperties",
+      },
+    ]);
+  });
+
+  it("combines errors", () => {
     const errors = validator.validate({
       ...baseSwaggerSpec,
       info: { ...baseSwaggerSpec.info, invalidProp: "foo", otherProp: "bar" },
     });
     expect(errors).toEqual([
       {
-        dataPath: "/info",
+        instancePath: "/info",
         keyword: "additionalProperties",
-        message: "should NOT have additional properties",
+        message: "must NOT have additional properties",
         params: { additionalProperty: ["invalidProp", "otherProp"] },
         path: ["info"],
         schemaPath: "#/additionalProperties",
@@ -53,39 +77,13 @@ describe("Swagger schema validator", () => {
     const errors = validator.validate({ ...baseSwaggerSpec, paths: { "foo/bar": {} } });
     expect(errors).toEqual([
       {
-        dataPath: "/paths/foo~1bar",
+        instancePath: "/paths/foo~1bar",
         keyword: "errorMessage",
-        message: 'should only have path names that start with `/` but found "foo/bar"',
+        message: 'must only have path names that start with `/` but found "foo/bar"',
         params: expect.anything(),
         path: ["paths", "foo/bar"],
         schemaPath: "#/additionalProperties/errorMessage",
       },
     ]);
-  });
-
-  describe("when validating a file", () => {
-    let file: DataHandle;
-    beforeEach(() => {
-      const spec = {
-        ...baseSwaggerSpec,
-        info: {
-          ...baseSwaggerSpec.info,
-          unexpectedProperty: "value",
-        },
-      };
-      file = createDataHandle(JSON.stringify(spec, null, 2));
-    });
-
-    it("returns the line number where the error is", async () => {
-      const errors = await validator.validateFile(file);
-
-      expect(errors).toHaveLength(1);
-      expect(errors[0].position).toEqual(
-        expect.objectContaining({
-          column: 2,
-          length: 6,
-        }),
-      );
-    });
   });
 });

@@ -1,8 +1,8 @@
-import { SchemaType } from "../schema-type";
-import { Schema, ValueSchema, PrimitiveSchema } from "../schema";
-import { Languages } from "../languages";
-import { Extensions } from "../extensions";
 import { Initializer, DeepPartial } from "@azure-tools/codegen";
+import { Extensions } from "../extensions";
+import { Languages } from "../languages";
+import { Schema, ValueSchema, PrimitiveSchema } from "../schema";
+import { SchemaType } from "../schema-type";
 
 /** returns true if the given schema is a NumberSchema */
 export function isNumberSchema(schema: Schema): schema is NumberSchema {

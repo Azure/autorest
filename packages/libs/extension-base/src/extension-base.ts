@@ -1,3 +1,5 @@
+import { basename, dirname } from "path";
+import { Readable } from "stream";
 import {
   createMessageConnection,
   Logger,
@@ -7,9 +9,7 @@ import {
   NotificationType2,
   NotificationType4,
 } from "vscode-jsonrpc";
-import { Readable } from "stream";
 import { Mapping, Message, RawSourceMap, Channel } from "./types";
-import { basename, dirname } from "path";
 
 namespace IAutoRestPluginTargetTypes {
   export const GetPluginNames = new RequestType0<Array<string>, Error, void>("GetPluginNames");
@@ -158,7 +158,7 @@ export class AutoRestExtension {
           },
         });
         return true;
-      } catch (e) {
+      } catch (e: any) {
         if (await channel.sendRequest(IAutoRestPluginInitiatorTypes.GetValue, sessionId, "debug")) {
           // eslint-disable-next-line no-console
           console.error(`PLUGIN FAILURE: ${e.message}, ${e.stack}, ${JSON.stringify(e, null, 2)}`);

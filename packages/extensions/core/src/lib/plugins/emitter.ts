@@ -1,5 +1,6 @@
-import { DataHandle, DataSource, Normalize, QuickDataSource, createSandbox, Stringify } from "@azure-tools/datastore";
-import { ResolveUri } from "@azure-tools/uri";
+import { DataHandle, DataSource, QuickDataSource, createSandbox } from "@azure-tools/datastore";
+import { resolveUri } from "@azure-tools/uri";
+import { deepNormalize, Stringify } from "@azure-tools/yaml";
 import { AutorestContext } from "../context";
 import { Channel } from "../message";
 import { PipelinePlugin } from "../pipeline/common";
@@ -11,24 +12,23 @@ function isOutputArtifactOrMapRequested(config: AutorestContext, artifactType: s
 }
 
 async function emitArtifactInternal(
-  config: AutorestContext,
+  context: AutorestContext,
   artifactType: string,
   uri: string,
   handle: DataHandle,
 ): Promise<void> {
-  if (config.IsOutputArtifactRequested(artifactType)) {
-    const content = await handle.ReadData(true);
+  if (context.IsOutputArtifactRequested(artifactType)) {
+    const content = await handle.readData(true);
     if (content !== "") {
-      config.Message({ Channel: Channel.Debug, Text: `Emitting '${artifactType}' at ${uri}` });
+      context.debug(`Emitting '${artifactType}' at ${uri}`);
       if (uri.startsWith("stdout://")) {
-        config.Message({
-          Channel: Channel.Information,
-          Details: { type: artifactType, uri, content },
-          Text: `Artifact '${uri.slice("stdout://".length)}' of type '${artifactType}' has been emitted.`,
-          Plugin: "emitter",
+        context.log({
+          level: "information",
+          message: `Artifact '${uri.slice("stdout://".length)}' of type '${artifactType}' has been emitted.`,
+          details: { type: artifactType, uri, content, plugin: "emitter" },
         });
       } else {
-        config.GeneratedFile.Dispatch({ type: artifactType, uri, content });
+        context.GeneratedFile.Dispatch({ type: artifactType, uri, content });
       }
       /* DISABLING SOURCE MAP SUPPORT
           if (config.IsOutputArtifactRequested(artifactType + '.map')) {
@@ -45,60 +45,52 @@ async function emitArtifactInternal(
 
 let emitCtr = 0;
 async function emitArtifact(
-  config: AutorestContext,
+  context: AutorestContext,
   uri: string,
   handle: DataHandle,
   isObject: boolean,
 ): Promise<void> {
   const artifactType = handle.artifactType;
-  const result = emitArtifactInternal(config, artifactType, uri, handle);
+  const result = emitArtifactInternal(context, artifactType, uri, handle);
 
   if (isObject) {
-    const sink = config.DataStore.getDataSink();
+    const sink = context.DataStore.getDataSink();
 
-    if (isOutputArtifactOrMapRequested(config, artifactType + ".yaml")) {
-      const h = await sink.WriteData(
+    if (isOutputArtifactOrMapRequested(context, artifactType + ".yaml")) {
+      const h = await sink.writeData(
         `${++emitCtr}.yaml`,
-        Stringify(await handle.ReadObject<any>()),
+        Stringify(await handle.readObject<any>()),
         ["fix-me"],
         artifactType,
-        [] /*disabled source maps long ago */,
-        [handle],
       );
-      await emitArtifactInternal(config, artifactType + ".yaml", uri + ".yaml", h);
+      await emitArtifactInternal(context, artifactType + ".yaml", uri + ".yaml", h);
     }
-    if (isOutputArtifactOrMapRequested(config, artifactType + ".norm.yaml")) {
-      const h = await sink.WriteData(
+    if (isOutputArtifactOrMapRequested(context, artifactType + ".norm.yaml")) {
+      const h = await sink.writeData(
         `${++emitCtr}.norm.yaml`,
-        Stringify(Normalize(await handle.ReadObject<any>())),
+        Stringify(deepNormalize(await handle.readObject<any>())),
         ["fix-me"],
         artifactType,
-        [] /*disabled source maps long ago */,
-        [handle],
       );
-      await emitArtifactInternal(config, artifactType + ".norm.yaml", uri + ".norm.yaml", h);
+      await emitArtifactInternal(context, artifactType + ".norm.yaml", uri + ".norm.yaml", h);
     }
-    if (isOutputArtifactOrMapRequested(config, artifactType + ".json")) {
-      const h = await sink.WriteData(
+    if (isOutputArtifactOrMapRequested(context, artifactType + ".json")) {
+      const h = await sink.writeData(
         `${++emitCtr}.json`,
-        JSON.stringify(await handle.ReadObject<any>(), null, 2),
+        JSON.stringify(await handle.readObject<any>(), null, 2),
         ["fix-me"],
         artifactType,
-        [] /*disabled source maps long ago */,
-        [handle],
       );
-      await emitArtifactInternal(config, artifactType + ".json", uri + ".json", h);
+      await emitArtifactInternal(context, artifactType + ".json", uri + ".json", h);
     }
-    if (isOutputArtifactOrMapRequested(config, artifactType + ".norm.json")) {
-      const h = await sink.WriteData(
+    if (isOutputArtifactOrMapRequested(context, artifactType + ".norm.json")) {
+      const h = await sink.writeData(
         `${++emitCtr}.norm.json`,
-        JSON.stringify(Normalize(await handle.ReadObject<any>()), null, 2),
+        JSON.stringify(deepNormalize(await handle.readObject<any>()), null, 2),
         ["fix-me"],
         artifactType,
-        [] /*disabled source maps long ago */,
-        [handle],
       );
-      await emitArtifactInternal(config, artifactType + ".norm.json", uri + ".norm.json", h);
+      await emitArtifactInternal(context, artifactType + ".norm.json", uri + ".norm.json", h);
     }
   }
   return result;
@@ -112,8 +104,8 @@ export async function emitArtifacts(
   isObject: boolean,
 ): Promise<void> {
   const all = new Array<Promise<void>>();
-  for (const key of await scope.Enum()) {
-    const file = await scope.ReadStrict(key);
+  for (const key of await scope.enum()) {
+    const file = await scope.readStrict(key);
     const fileArtifact = file.artifactType;
     const ok = artifactTypeFilter
       ? typeof artifactTypeFilter === "string"
@@ -124,7 +116,7 @@ export async function emitArtifacts(
       : true; // if it's null, just emit it.
 
     if (ok) {
-      all.push(emitArtifact(config, uriResolver(file.Description), file, isObject));
+      all.push(emitArtifact(config, uriResolver(file.description), file, isObject));
     }
   }
   await Promise.all(all);
@@ -148,7 +140,7 @@ export function createArtifactEmitterPlugin(
       context,
       context.GetEntry("input-artifact") || null,
       (key) =>
-        ResolveUri(
+        resolveUri(
           context.config.outputFolderUri,
           safeEval<string>(context.GetEntry("output-uri-expr") || "$key", {
             $key: key,

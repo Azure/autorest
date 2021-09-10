@@ -1,12 +1,11 @@
-import { Aspect } from "./aspect";
-import { SerializationFormats } from "./formats";
-import { AllSchemaTypes, SchemaType } from "./schema-type";
 import { DeepPartial } from "@azure-tools/codegen";
-import { Dictionary } from "@azure-tools/linq";
+import { Aspect } from "./aspect";
 import { Extensions } from "./extensions";
+import { SerializationFormats } from "./formats";
 import { Languages } from "./languages";
+import { AllSchemaTypes } from "./schema-type";
 
-export interface SerializationFormat extends Extensions, Dictionary<any> {}
+export interface SerializationFormat extends Extensions, Record<string, any> {}
 
 /** The Schema Object allows the definition of input and output data types. */
 export interface Schema extends Aspect {

@@ -6,6 +6,7 @@ plugins:
   - unicorn
   - node
   - jest
+  - import
 
 env:
   es6: true
@@ -16,6 +17,9 @@ extends:
   - plugin:@typescript-eslint/recommended
   - plugin:node/recommended
   - plugin:jest/recommended
+  - plugin:jest/recommended
+  - plugin:import/recommended
+  - plugin:import/typescript
 
 globals:
   Atomics: readonly
@@ -27,30 +31,30 @@ parserOptions:
   project: ./tsconfig.json
 
 rules:
-  "@typescript-eslint/no-this-alias": "off"
-  "@typescript-eslint/interface-name-prefix": "off"
-  "@typescript-eslint/explicit-function-return-type": "off"
-  "@typescript-eslint/no-explicit-any": "off"
-  "@typescript-eslint/no-empty-interface": "off"
-  "@typescript-eslint/no-namespace": "off"
-  "@typescript-eslint/explicit-member-accessibility": "off"
-  "@typescript-eslint/no-unused-vars": "off"
-  "@typescript-eslint/no-parameter-properties": "off"
-  "@typescript-eslint/no-angle-bracket-type-assertion": "off"
-  "@typescript-eslint/no-use-before-define": "off"
-  "@typescript-eslint/no-var-requires": "off"
-  "@typescript-eslint/no-empty-function": "off"
-  "@typescript-eslint/explicit-module-boundary-types": "off"
-  "@typescript-eslint/ban-types": "off"
-  "@typescript-eslint/consistent-type-assertions": "off"
-  "@typescript-eslint/no-floating-promises": "warn"
+  "@typescript-eslint/no-this-alias": off
+  "@typescript-eslint/interface-name-prefix": off
+  "@typescript-eslint/explicit-function-return-type": off
+  "@typescript-eslint/no-explicit-any": off
+  "@typescript-eslint/no-empty-interface": off
+  "@typescript-eslint/no-namespace": off
+  "@typescript-eslint/explicit-member-accessibility": off
+  "@typescript-eslint/no-unused-vars": off
+  "@typescript-eslint/no-parameter-properties": off
+  "@typescript-eslint/no-angle-bracket-type-assertion": off
+  "@typescript-eslint/no-use-before-define": off
+  "@typescript-eslint/no-var-requires": off
+  "@typescript-eslint/no-empty-function": off
+  "@typescript-eslint/explicit-module-boundary-types": off
+  "@typescript-eslint/ban-types": off
+  "@typescript-eslint/consistent-type-assertions": off
+  "@typescript-eslint/no-floating-promises": warn
 
-  "require-atomic-updates": "off"
+  "require-atomic-updates": off
 
   # Prettier config https://github.com/prettier/eslint-plugin-prettier#recommended-configuration
-  prettier/prettier: "warn"
-  arrow-body-style: "off"
-  prefer-arrow-callback: "off"
+  prettier/prettier: warn
+  arrow-body-style: off
+  prefer-arrow-callback: off
 
   # Unicorn plugin config
   unicorn/filename-case: warn
@@ -59,11 +63,12 @@ rules:
   # Node plugin
   # =================================================
   # Prevent from using method that are not yet availalbe in the supported version of node.(see engines field of package.json)
-  node/no-unsupported-features/node-builtins: [error, { "ignores": ["fs.promises"] }]
+  node/no-unsupported-features/node-builtins: error
   node/no-unsupported-features/es-builtins: error
   node/no-unsupported-features/es-syntax: off # Disabling this one otherwise it will complain about typescript imports which get transpiled.
   node/no-missing-import: off
   node/shebang: off
+  node/no-unpublished-import: off
 
   # =================================================
   # Jest plugin
@@ -74,10 +79,24 @@ rules:
   jest/no-focused-tests: warn
   jest/no-identical-title: warn
 
+  # =================================================
+  # Import plugin
+  # =================================================
+  import/no-default-export: warn
+  import/no-self-import: warn # This cause many circular dependency issues with index files.
+  import/no-internal-modules: off
+  import/no-unresolved: off
+  import/order:
+    - warn
+    - groups: ["builtin", "external", "parent", "sibling", "index"]
+      alphabetize:
+        order: "asc"
+        caseInsensitive: true
+
   # Basic config
   no-console: warn
-  no-undef: "off"
-  no-unused-vars: "off"
+  no-undef: off
+  no-unused-vars: off
   no-multiple-empty-lines:
     - warn
     - max: 2

@@ -3,9 +3,9 @@
 // Licensed under the MIT License.
 import "source-map-support/register";
 
+import { getOperationFromArgs } from "./cli";
 import { runOperation } from "./operations";
 import { AutoRestLanguages } from "./runner";
-import { getOperationFromArgs } from "./cli";
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);

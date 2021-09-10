@@ -1,3 +1,4 @@
+import { maximum, gt, lt } from "@azure-tools/codegen";
 import {
   AnyObject,
   DataHandle,
@@ -9,13 +10,10 @@ import {
   QuickDataSource,
   visit,
 } from "@azure-tools/datastore";
-import { clone, Dictionary, values } from "@azure-tools/linq";
 import { areSimilar } from "@azure-tools/object-comparison";
 import * as oai from "@azure-tools/openapi";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
-import { toSemver, maximum, gt, lt } from "@azure-tools/codegen";
-import { Channel } from "../message";
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
@@ -60,7 +58,7 @@ export class SubsetSchemaDeduplicator extends Transformer<any, oai.Model> {
     }
   }
 
-  visitSchemas<T>(container: ProxyObject<Dictionary<T>>, originalNodes: () => Iterable<Node>) {
+  visitSchemas<T>(container: ProxyObject<Record<string, T>>, originalNodes: () => Iterable<Node>) {
     const xMsMetadata = "x-ms-metadata";
     const updatedSchemas: any = {};
 
@@ -350,38 +348,29 @@ async function deduplicateSubsetSchemas(config: AutorestContext, input: DataSour
   const inputs = await Promise.all((await input.Enum()).map(async (x) => input.ReadStrict(x)));
   const result: Array<DataHandle> = [];
   for (const each of inputs) {
-    const model = <any>await each.ReadObject();
-    /*
-    Disabling for now -- not sure if we need to skip this in the simple case anyway.
+    const model = <any>await each.readObject();
 
-    if ([...values(model?.info?.['x-ms-metadata']?.apiVersions).distinct()].length < 2) {
-      // if there is a single API version in the doc, let's not bother.
-      config.Message({ Channel: Channel.Verbose, Text: `Skipping subset deduplication on single-api-version file ${each.identity}` });
-      result.push(await sink.WriteObject('oai3.subset-schema-reduced.json', model, each.identity, 'openapi-document-schema-reduced', []));
-      continue;
-    }
-    config.Message({ Channel: Channel.Verbose, Text: `Processing subset deduplication on file ${each.identity}` });
-    */
     if (model.info?.["x-ms-metadata"]?.schemaReduced) {
       result.push(
-        await sink.WriteObject(
+        await sink.writeObject(
           "oai3.subset-schema-reduced.json",
           model,
           each.identity,
           "openapi-document-schema-reduced",
-          [],
         ),
       );
       continue;
     }
     const processor = new SubsetSchemaDeduplicator(each);
     result.push(
-      await sink.WriteObject(
+      await sink.writeObject(
         "oai3.subset-schema-reduced.json",
         await processor.getOutput(),
         each.identity,
         "openapi-document-schema-reduced",
-        await processor.getSourceMappings(),
+        {
+          pathMappings: await processor.getSourceMappings(),
+        },
       ),
     );
   }

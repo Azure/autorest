@@ -1,6 +1,6 @@
 {
   "name": "@autorest/codemodel",
-  "version": "4.15.0",
+  "version": "4.17.0",
   "description": "AutoRest code model library",
   "directories": {
     "doc": "docs"
@@ -8,7 +8,7 @@
   "main": "dist/exports.js",
   "typings": "dist/exports.d.ts",
   "engines": {
-    "node": ">=10.13.0"
+    "node": ">=12.0.0"
   },
   "scripts": {
     "build": "tsc -p .",
@@ -42,18 +42,18 @@
     "@typescript-eslint/parser": "^4.12.0",
     "eslint-plugin-jest": "~24.3.2",
     "eslint-plugin-node": "~11.1.0",
-    "eslint-plugin-prettier": "~3.2.0",
-    "eslint-plugin-unicorn": "~27.0.0",
+    "eslint-plugin-prettier": "~3.4.0",
+    "eslint-plugin-unicorn": "~33.0.1",
+    "eslint-plugin-import": "~2.24.2",
     "eslint": "^7.17.0",
     "glob": "~7.1.4",
     "rimraf": "^3.0.2",
     "ts-morph": "~4.0.1",
     "typescript-json-schema": "~0.40.0",
-    "typescript": "~4.2.3"
+    "typescript": "~4.4.2"
   },
   "dependencies": {
-    "@azure-tools/codegen": "~2.5.294",
-    "@azure-tools/linq": "~3.1.0",
+    "@azure-tools/codegen": "~2.7.0",
     "js-yaml": "~4.0.0"
   },
   "publishConfig": {

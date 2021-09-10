@@ -1,8 +1,13 @@
-import * as datastore from "@azure-tools/datastore";
-import { Oai2ToOai3 } from "../src/converter";
-import { OpenAPI2Document } from "../src/oai2";
-import { join } from "path";
 import fs from "fs";
+import { join } from "path";
+import * as datastore from "@azure-tools/datastore";
+import { ConverterLogger, Oai2ToOai3 } from "../src/converter";
+import { OpenAPI2Document } from "../src/oai2";
+
+const logger: ConverterLogger = {
+  trackError: jest.fn(),
+  trackWarning: jest.fn(),
+};
 
 const expectConvertingOpenAPI2 = async (openAPI2Name: string, openAPI3Name: string) => {
   const swaggerUri = "mem://swagger.yaml";
@@ -17,13 +22,8 @@ const expectConvertingOpenAPI2 = async (openAPI2Name: string, openAPI3Name: stri
 
   const mfs = new datastore.MemoryFileSystem(map);
 
-  const cts: datastore.CancellationTokenSource = {
-    cancel() {},
-    dispose() {},
-    token: { isCancellationRequested: false, onCancellationRequested: <any>null },
-  };
-  const ds = new datastore.DataStore(cts.token);
-  const scope = ds.GetReadThroughScope(mfs);
+  const ds = new datastore.DataStore();
+  const scope = ds.getReadThroughScope(mfs);
   const swaggerDataHandle = await scope.Read(swaggerUri);
   const originalDataHandle = await scope.Read(oai3Uri);
 
@@ -31,9 +31,9 @@ const expectConvertingOpenAPI2 = async (openAPI2Name: string, openAPI3Name: stri
   expect(originalDataHandle).not.toBeNull();
 
   if (swaggerDataHandle && originalDataHandle) {
-    const swag = await swaggerDataHandle.ReadObject<OpenAPI2Document>();
-    const original = await originalDataHandle.ReadObject();
-    const convert = new Oai2ToOai3(swaggerUri, swag);
+    const swag = await swaggerDataHandle.readObject<OpenAPI2Document>();
+    const original = await originalDataHandle.readObject();
+    const convert = new Oai2ToOai3(logger, swaggerUri, swag);
 
     // run the conversion
     await convert.convert();
@@ -42,20 +42,8 @@ const expectConvertingOpenAPI2 = async (openAPI2Name: string, openAPI3Name: stri
 };
 
 describe("OpenAPI2 -> OpenAPI3 Conversion", () => {
-  it("test conversion - simple", async () => {
-    await expectConvertingOpenAPI2("swagger.yaml", "openapi.yaml");
-  });
-
-  it("test conversion - tiny", async () => {
-    await expectConvertingOpenAPI2("tiny-swagger.yaml", "tiny-openapi.yaml");
-  });
-
   it("test conversion - ApiManagementClient", async () => {
     await expectConvertingOpenAPI2("ApiManagementClient-swagger.json", "ApiManagementClient-openapi.json");
-  });
-
-  it("request body - copying extensions", async () => {
-    await expectConvertingOpenAPI2("request-body-swagger.yaml", "request-body-openapi.yaml");
   });
 
   it("headers", async () => {

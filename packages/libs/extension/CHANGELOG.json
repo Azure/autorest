@@ -2,6 +2,47 @@
   "name": "@azure-tools/extension",
   "entries": [
     {
+      "version": "3.3.1",
+      "tag": "@azure-tools/extension_v3.3.1",
+      "date": "Mon, 19 Jul 2021 18:08:46 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Using `fs/promises` imort not supported on node 12"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.3.0",
+      "tag": "@azure-tools/extension_v3.3.0",
+      "date": "Mon, 19 Jul 2021 15:15:42 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Installing extension when parent directory to ~/.autorest had a package.json"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Drop support for node 10"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.2.7",
+      "tag": "@azure-tools/extension_v3.2.7",
+      "date": "Wed, 26 May 2021 18:31:17 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Export** fetchPackageMetadata for use without depending on local package manager"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.2.6",
       "tag": "@azure-tools/extension_v3.2.6",
       "date": "Tue, 27 Apr 2021 17:48:43 GMT",

@@ -10,15 +10,14 @@ declare const isDebuggerEnabled: boolean;
 const cwd = process.cwd();
 
 import chalk from "chalk";
-import { newCorePackage, ensureAutorestHome, tryRequire, runCoreOutOfProc } from "./autorest-as-a-service";
-import { color } from "./coloring";
-import { parseAutorestArgs } from "./args";
-import { resetAutorest, showAvailableCoreVersions, showInstalledExtensions } from "./commands";
 import { clearTempData } from "./actions";
-import { resolveCoreVersion } from "./core-version-utils";
+import { parseAutorestArgs } from "./args";
+import { newCorePackage, ensureAutorestHome, runCoreWithRequire, runCoreOutOfProc } from "./autorest-as-a-service";
+import { resetAutorest, showAvailableCoreVersions, showInstalledExtensions } from "./commands";
 import { VERSION } from "./constants";
+import { loadConfig, resolveCoreVersion } from "./utils";
 
-const launchCore = isDebuggerEnabled ? tryRequire : runCoreOutOfProc;
+const launchCore = isDebuggerEnabled ? runCoreWithRequire : runCoreOutOfProc;
 
 // aliases, round one.
 if (process.argv.indexOf("--no-upgrade-check") !== -1) {
@@ -44,27 +43,31 @@ if (args["v3"] && !args["version"]) {
   args["version"] = "^3.2.0";
 }
 
-// Suppress the banner if the message-format is set to something other than regular.
-if (!args["message-format"] || args["message-format"] === "regular") {
-  console.log(
-    chalk.green.bold.underline(
-      `AutoRest code generation utility [cli version: ${chalk.white.bold(VERSION)}; node: ${chalk.white.bold(
-        process.version,
-      )}, max-memory: ${
-        Math.round(require("v8").getHeapStatistics().heap_size_limit / (1024 * 1024)) & 0xffffffff00
-      } MB]`,
-    ),
-  );
-  console.log(color("(C) 2018 **Microsoft Corporation.**"));
-  console.log(chalk.blue.bold.underline("https://aka.ms/autorest"));
-}
-
 // argument tweakin'
 args.info = args.version === "" || (args.version as any) === true || args.info; // show --info if they use unparameterized --version.
 const listAvailable: boolean = args["list-available"] || false;
 
-/** Main Entrypoint for AutoRest Bootstrapper */
+function logBanner() {
+  // Suppress the banner if the message-format is set to something other than regular.
+  if (!args["message-format"] || args["message-format"] === "regular") {
+    console.log(
+      chalk.green.bold.underline(
+        `AutoRest code generation utility [cli version: ${chalk.white.bold(VERSION)}; node: ${chalk.white.bold(
+          process.version,
+        )}]`,
+      ),
+    );
+    console.log(`(C) 2018 ${chalk.bold("Microsoft Corporation.")}`);
+    console.log(chalk.blue.bold.underline("https://aka.ms/autorest"));
+  }
+}
+
+/**
+ * Main Entrypoint for AutoRest Bootstrapper
+ */
 async function main() {
+  logBanner();
+
   try {
     // did they ask for what is available?
     if (listAvailable) {
@@ -93,8 +96,8 @@ async function main() {
     } catch {
       // We have a chance to fail again later if this proves problematic.
     }
-
-    const coreVersionPath = await resolveCoreVersion(args);
+    const config = await loadConfig(args);
+    const coreVersionPath = await resolveCoreVersion(config);
 
     // let's strip the extra stuff from the command line before we require the core module.
     const newArgs: string[] = [];
@@ -135,7 +138,7 @@ async function main() {
     // reset the working folder to the correct place.
     process.chdir(cwd);
 
-    const result = await launchCore(coreVersionPath, "app.js");
+    const result = await launchCore(coreVersionPath, "app.js", config);
     if (!result) {
       throw new Error(`Unable to start AutoRest Core from ${coreVersionPath}`);
     }

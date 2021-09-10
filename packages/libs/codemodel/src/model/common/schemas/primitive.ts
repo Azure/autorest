@@ -1,6 +1,6 @@
-import { SchemaType } from "../schema-type";
-import { Schema, PrimitiveSchema } from "../schema";
 import { Initializer, DeepPartial } from "@azure-tools/codegen";
+import { Schema, PrimitiveSchema } from "../schema";
+import { SchemaType } from "../schema-type";
 
 /** a schema that represents a boolean value */
 export interface BooleanSchema extends PrimitiveSchema {

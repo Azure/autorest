@@ -4,9 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { createSandbox, deserialize } from "@azure-tools/codegen";
+import { Schema, DEFAULT_SCHEMA } from "js-yaml";
 import { Host } from "./exports";
 import { Channel, Message, Mapping, RawSourceMap, JsonPath, Position } from "./types";
-import { Schema, DEFAULT_SCHEMA } from "js-yaml";
 
 const safeEval = createSandbox();
 

@@ -1,6 +1,5 @@
-import { clone } from "@azure-tools/linq";
 import * as oai3 from "@azure-tools/openapi";
-
+import { cloneDeep } from "lodash";
 export const InitialTestSpec = Object.freeze({
   info: {
     title: "Test OpenAPI 3 Specification",
@@ -24,7 +23,7 @@ export type TestSpecCustomizer = (spec: any) => any;
 export function createTestSpec(...customizers: Array<TestSpecCustomizer>): any {
   return customizers.reduce<any>(
     (spec: any, customizer: TestSpecCustomizer) => customizer(spec),
-    clone(InitialTestSpec),
+    cloneDeep(InitialTestSpec),
   );
 }
 

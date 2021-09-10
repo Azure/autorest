@@ -1,6 +1,60 @@
 # Change Log - @autorest/core
 
-This log was last generated on Thu, 20 May 2021 16:41:13 GMT and should not be manually modified.
+This log was last generated on Wed, 08 Sep 2021 15:39:22 GMT and should not be manually modified.
+
+## 3.6.0
+Wed, 08 Sep 2021 15:39:22 GMT
+
+### Minor changes
+
+- **Uptake** New logger
+- Uptake new changes to Swagger->OpenApi3 converter
+- `x-ms-examples` loaded via $ref will save orignal location with `x-ms-original-file` extension property
+- Keep `x-` extension properties when merging enums
+- **Perf** Small perf improvement for components cleaner plugin
+-  **Update** to new path mapping sourcemap functionality
+- **Remove** quick-check plugin
+
+### Patches
+
+- **Perf** Minor perf in merger plugin
+- **Perf** Minor performance improvement in allof cleaner plugin
+- Log error when directive where clause is invalid
+- Improve erorr message for directive when there is an error in the transform code
+- **Fix** Error in config loading would not be logged as the logging session would not be awaited on
+
+## 3.5.0
+Mon, 19 Jul 2021 15:15:41 GMT
+
+### Minor changes
+
+- **Added** `debug` flag to directive to enable additional logging
+- **Added** support for changing end of line of generated files with new `eol` config.
+- **Feature** Resolve relative servers url using spec host
+- Allow suppressing warnings without source
+- Drop support for node 10
+- **Perf** Memory usage improvements
+- **Perf** Unload sourcemap from memory if not used
+
+### Patches
+
+- **Added** Flag to skip sourcemap generation
+- **Fix** sourcemap for multiple plugins
+- **Fix** Issue in directive manipulator preventing multiple directive to run on OpenApi3 documents
+
+## 3.4.5
+Thu, 03 Jun 2021 22:37:55 GMT
+
+### Patches
+
+- Blaming files not loaded by autorest
+
+## 3.4.4
+Wed, 26 May 2021 18:31:17 GMT
+
+### Patches
+
+- **Bump** @autorest/configuration with fix with yarn/cli.js not found
 
 ## 3.4.3
 Thu, 20 May 2021 16:41:13 GMT

@@ -12,17 +12,13 @@
   },
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis": {
       "get": {
-        "tags": [
-          "Apis"
-        ],
+        "tags": ["Apis"],
         "operationId": "Apis_ListByService",
         "description": "Lists all APIs of the API Management service instance.",
         "externalDocs": {
@@ -87,9 +83,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}": {
       "get": {
-        "tags": [
-          "Apis"
-        ],
+        "tags": ["Apis"],
         "operationId": "Apis_Get",
         "description": "Gets the details of the API specified by its identifier.",
         "parameters": [
@@ -171,9 +165,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Apis"
-        ],
+        "tags": ["Apis"],
         "operationId": "Apis_CreateOrUpdate",
         "description": "Creates new or updates existing specified API of the API Management service instance.",
         "parameters": [
@@ -231,13 +223,10 @@
           },
           "description": "Create or update parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "patch": {
-        "tags": [
-          "Apis"
-        ],
+        "tags": ["Apis"],
         "operationId": "Apis_Update",
         "description": "Updates the specified API of the API Management service instance.",
         "parameters": [
@@ -292,13 +281,10 @@
           },
           "description": "Patch parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "delete": {
-        "tags": [
-          "Apis"
-        ],
+        "tags": ["Apis"],
         "operationId": "Apis_Delete",
         "description": "Deletes the specified API of the API Management service instance.",
         "parameters": [
@@ -346,9 +332,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations": {
       "get": {
-        "tags": [
-          "ApiOperations"
-        ],
+        "tags": ["ApiOperations"],
         "operationId": "ApiOperations_ListByApi",
         "description": "Lists a collection of the operations for the specified API.",
         "parameters": [
@@ -413,9 +397,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}": {
       "get": {
-        "tags": [
-          "ApiOperations"
-        ],
+        "tags": ["ApiOperations"],
         "operationId": "ApiOperations_Get",
         "description": "Gets the details of the API Operation specified by its identifier.",
         "parameters": [
@@ -470,9 +452,7 @@
         }
       },
       "put": {
-        "tags": [
-          "ApiOperations"
-        ],
+        "tags": ["ApiOperations"],
         "operationId": "ApiOperations_CreateOrUpdate",
         "description": "Creates a new API operation or updates an existing one.",
         "parameters": [
@@ -524,13 +504,10 @@
           },
           "description": "Create parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 4
+        }
       },
       "patch": {
-        "tags": [
-          "ApiOperations"
-        ],
+        "tags": ["ApiOperations"],
         "operationId": "ApiOperations_Update",
         "description": "Updates the details of the operation specified by its identifier.",
         "parameters": [
@@ -588,13 +565,10 @@
           },
           "description": "Update parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 4
+        }
       },
       "delete": {
-        "tags": [
-          "ApiOperations"
-        ],
+        "tags": ["ApiOperations"],
         "operationId": "ApiOperations_Delete",
         "description": "Deletes the specified operation.",
         "parameters": [
@@ -645,9 +619,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/products": {
       "get": {
-        "tags": [
-          "ApiProducts"
-        ],
+        "tags": ["ApiProducts"],
         "operationId": "ApiProducts_ListByApi",
         "description": "Lists all API associated products.",
         "parameters": [
@@ -712,9 +684,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions": {
       "get": {
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "operationId": "Subscriptions_ListByService",
         "description": "Lists all subscriptions of the API Management service instance.",
         "externalDocs": {
@@ -779,9 +749,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions/{sid}": {
       "get": {
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "operationId": "Subscriptions_Get",
         "description": "Gets the specified Subscription entity.",
         "parameters": [
@@ -839,9 +807,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "operationId": "Subscriptions_CreateOrUpdate",
         "description": "Creates or updates the subscription of specified user to the specified product.",
         "parameters": [
@@ -899,13 +865,10 @@
           },
           "description": "Create parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "patch": {
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "operationId": "Subscriptions_Update",
         "description": "Updates the details of a subscription specificied by its identifier.",
         "parameters": [
@@ -966,13 +929,10 @@
           },
           "description": "Update parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "delete": {
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "operationId": "Subscriptions_Delete",
         "description": "Deletes the specified subscription.",
         "parameters": [
@@ -1026,9 +986,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions/{sid}/regeneratePrimaryKey": {
       "post": {
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "operationId": "Subscriptions_RegeneratePrimaryKey",
         "description": "Regenerates primary key of existing subscription of the API Management service instance.",
         "parameters": [
@@ -1073,9 +1031,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions/{sid}/regenerateSecondaryKey": {
       "post": {
-        "tags": [
-          "Subscriptions"
-        ],
+        "tags": ["Subscriptions"],
         "operationId": "Subscriptions_RegenerateSecondaryKey",
         "description": "Regenerates secondary key of existing subscription of the API Management service instance.",
         "parameters": [
@@ -1120,9 +1076,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products": {
       "get": {
-        "tags": [
-          "Products"
-        ],
+        "tags": ["Products"],
         "operationId": "Products_ListByService",
         "description": "Lists a collection of products in the specified service instance.",
         "externalDocs": {
@@ -1196,9 +1150,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}": {
       "get": {
-        "tags": [
-          "Products"
-        ],
+        "tags": ["Products"],
         "operationId": "Products_Get",
         "description": "Gets the details of the product specified by its identifier.",
         "parameters": [
@@ -1250,9 +1202,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Products"
-        ],
+        "tags": ["Products"],
         "operationId": "Products_CreateOrUpdate",
         "description": "Creates or Updates a product.",
         "parameters": [
@@ -1301,13 +1251,10 @@
           },
           "description": "Create or update parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "patch": {
-        "tags": [
-          "Products"
-        ],
+        "tags": ["Products"],
         "operationId": "Products_Update",
         "description": "Update product.",
         "parameters": [
@@ -1362,13 +1309,10 @@
           },
           "description": "Update parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "delete": {
-        "tags": [
-          "Products"
-        ],
+        "tags": ["Products"],
         "operationId": "Products_Delete",
         "description": "Delete product.",
         "parameters": [
@@ -1425,9 +1369,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis": {
       "get": {
-        "tags": [
-          "ProductApis"
-        ],
+        "tags": ["ProductApis"],
         "operationId": "ProductApis_ListByProduct",
         "description": "Lists a collection of the APIs associated with a product.",
         "parameters": [
@@ -1492,9 +1434,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis/{apiId}": {
       "put": {
-        "tags": [
-          "ProductApis"
-        ],
+        "tags": ["ProductApis"],
         "operationId": "ProductApis_Add",
         "description": "Adds an API to the specified product.",
         "parameters": [
@@ -1537,9 +1477,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "ProductApis"
-        ],
+        "tags": ["ProductApis"],
         "operationId": "ProductApis_Remove",
         "description": "Deletes the specified API from the specified product.",
         "parameters": [
@@ -1581,9 +1519,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups": {
       "get": {
-        "tags": [
-          "ProductGroups"
-        ],
+        "tags": ["ProductGroups"],
         "operationId": "ProductGroups_ListByProduct",
         "description": "Lists the collection of developer groups associated with the specified product.",
         "parameters": [
@@ -1648,9 +1584,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups/{groupId}": {
       "put": {
-        "tags": [
-          "ProductGroups"
-        ],
+        "tags": ["ProductGroups"],
         "operationId": "ProductGroups_Add",
         "description": "Adds the association between the specified developer group with the specified product.",
         "parameters": [
@@ -1693,9 +1627,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "ProductGroups"
-        ],
+        "tags": ["ProductGroups"],
         "operationId": "ProductGroups_Remove",
         "description": "Deletes the association between the specified group and product.",
         "parameters": [
@@ -1747,9 +1679,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups": {
       "get": {
-        "tags": [
-          "Groups"
-        ],
+        "tags": ["Groups"],
         "operationId": "Groups_ListByService",
         "description": "Lists a collection of groups defined within a service instance.",
         "externalDocs": {
@@ -1804,9 +1734,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}": {
       "get": {
-        "tags": [
-          "Groups"
-        ],
+        "tags": ["Groups"],
         "operationId": "Groups_Get",
         "description": "Gets the details of the group specified by its identifier.",
         "parameters": [
@@ -1858,9 +1786,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Groups"
-        ],
+        "tags": ["Groups"],
         "operationId": "Groups_CreateOrUpdate",
         "description": "Creates or Updates a group.",
         "parameters": [
@@ -1909,13 +1835,10 @@
           },
           "description": "Create parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "patch": {
-        "tags": [
-          "Groups"
-        ],
+        "tags": ["Groups"],
         "operationId": "Groups_Update",
         "description": "Updates the details of the group specified by its identifier.",
         "parameters": [
@@ -1980,13 +1903,10 @@
           },
           "description": "Update parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "delete": {
-        "tags": [
-          "Groups"
-        ],
+        "tags": ["Groups"],
         "operationId": "Groups_Delete",
         "description": "Deletes specific group of the API Management service instance.",
         "parameters": [
@@ -2044,9 +1964,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users": {
       "get": {
-        "tags": [
-          "GroupUsers"
-        ],
+        "tags": ["GroupUsers"],
         "operationId": "GroupUsers_ListByGroup",
         "description": "Lists a collection of the members of the group, specified by its identifier.",
         "parameters": [
@@ -2111,9 +2029,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users/{uid}": {
       "put": {
-        "tags": [
-          "GroupUsers"
-        ],
+        "tags": ["GroupUsers"],
         "operationId": "GroupUsers_Add",
         "description": "Adds a user to the specified group.",
         "parameters": [
@@ -2166,9 +2082,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "GroupUsers"
-        ],
+        "tags": ["GroupUsers"],
         "operationId": "GroupUsers_Remove",
         "description": "Remove existing user from existing group.",
         "parameters": [
@@ -2220,9 +2134,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/certificates": {
       "get": {
-        "tags": [
-          "Certificates"
-        ],
+        "tags": ["Certificates"],
         "operationId": "Certificates_ListByService",
         "description": "Lists a collection of all certificates in the specified service instance.",
         "externalDocs": {
@@ -2287,9 +2199,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/certificates/{certificateId}": {
       "get": {
-        "tags": [
-          "Certificates"
-        ],
+        "tags": ["Certificates"],
         "operationId": "Certificates_Get",
         "description": "Gets the details of the certificate specified by its identifier.",
         "parameters": [
@@ -2347,9 +2257,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Certificates"
-        ],
+        "tags": ["Certificates"],
         "operationId": "Certificates_CreateOrUpdate",
         "description": "Creates or updates the certificate being used for authentication with the backend.",
         "externalDocs": {
@@ -2420,13 +2328,10 @@
           },
           "description": "Create parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "delete": {
-        "tags": [
-          "Certificates"
-        ],
+        "tags": ["Certificates"],
         "operationId": "Certificates_Delete",
         "description": "Deletes specific certificate.",
         "parameters": [
@@ -2480,9 +2385,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policySnippets": {
       "get": {
-        "tags": [
-          "PolicySnippets"
-        ],
+        "tags": ["PolicySnippets"],
         "operationId": "PolicySnippets_ListByService",
         "description": "Lists all policy snippets.",
         "parameters": [
@@ -2503,13 +2406,7 @@
                 "modelAsString": false
               },
               "type": "string",
-              "enum": [
-                "Tenant",
-                "Product",
-                "Api",
-                "Operation",
-                "All"
-              ]
+              "enum": ["Tenant", "Product", "Api", "Operation", "All"]
             }
           },
           {
@@ -2538,9 +2435,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/subscriptions": {
       "get": {
-        "tags": [
-          "ProductSubscriptions"
-        ],
+        "tags": ["ProductSubscriptions"],
         "operationId": "ProductSubscriptions_ListByProduct",
         "description": "Lists the collection of subscriptions to the specified product.",
         "parameters": [
@@ -2605,9 +2500,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "operationId": "Users_ListByService",
         "description": "Lists a collection of registered users in the specified service instance.",
         "externalDocs": {
@@ -2672,9 +2565,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "operationId": "Users_Get",
         "description": "Gets the details of the user specified by its identifier.",
         "parameters": [
@@ -2726,9 +2617,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "operationId": "Users_CreateOrUpdate",
         "description": "Creates or Updates a user.",
         "parameters": [
@@ -2777,13 +2666,10 @@
           },
           "description": "Create or update parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "patch": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "operationId": "Users_Update",
         "description": "Updates the details of the user specified by its identifier.",
         "parameters": [
@@ -2848,13 +2734,10 @@
           },
           "description": "Update parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "delete": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "operationId": "Users_Delete",
         "description": "Deletes specific user.",
         "parameters": [
@@ -2921,9 +2804,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/generateSsoUrl": {
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "operationId": "Users_GenerateSsoUrl",
         "description": "Retrieves a redirection URL containing an authentication token for signing a given user into the developer portal.",
         "parameters": [
@@ -2970,9 +2851,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/groups": {
       "get": {
-        "tags": [
-          "UserGroups"
-        ],
+        "tags": ["UserGroups"],
         "operationId": "UserGroups_ListByUser",
         "description": "Lists all user groups.",
         "parameters": [
@@ -3037,9 +2916,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/subscriptions": {
       "get": {
-        "tags": [
-          "UserSubscriptions"
-        ],
+        "tags": ["UserSubscriptions"],
         "operationId": "UserSubscriptions_ListByUser",
         "description": "Lists the collection of subscriptions of the specified user.",
         "parameters": [
@@ -3104,9 +2981,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationServers": {
       "get": {
-        "tags": [
-          "AuthorizationServers"
-        ],
+        "tags": ["AuthorizationServers"],
         "operationId": "AuthorizationServers_ListByService",
         "description": "Lists a collection of authorization servers defined within a service instance.",
         "externalDocs": {
@@ -3161,9 +3036,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationServers/{authsid}": {
       "get": {
-        "tags": [
-          "AuthorizationServers"
-        ],
+        "tags": ["AuthorizationServers"],
         "operationId": "AuthorizationServers_Get",
         "description": "Gets the details of the authorization server specified by its identifier.",
         "parameters": [
@@ -3223,9 +3096,7 @@
         }
       },
       "put": {
-        "tags": [
-          "AuthorizationServers"
-        ],
+        "tags": ["AuthorizationServers"],
         "operationId": "AuthorizationServers_CreateOrUpdate",
         "description": "Creates new authorization server or updates an existing authorization server.",
         "parameters": [
@@ -3282,13 +3153,10 @@
           },
           "description": "Create or update parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "patch": {
-        "tags": [
-          "AuthorizationServers"
-        ],
+        "tags": ["AuthorizationServers"],
         "operationId": "AuthorizationServers_Update",
         "description": "Updates the details of the authorization server specified by its identifier.",
         "parameters": [
@@ -3349,13 +3217,10 @@
           },
           "description": "OAuth2 Server settings Update parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "delete": {
-        "tags": [
-          "AuthorizationServers"
-        ],
+        "tags": ["AuthorizationServers"],
         "operationId": "AuthorizationServers_Delete",
         "description": "Deletes specific authorization server instance.",
         "parameters": [
@@ -3409,9 +3274,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/regions": {
       "get": {
-        "tags": [
-          "Regions"
-        ],
+        "tags": ["Regions"],
         "operationId": "Regions_ListByService",
         "description": "Lists all azure regions in which the service exists.",
         "parameters": [
@@ -3447,9 +3310,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/identities": {
       "get": {
-        "tags": [
-          "UserIdentities"
-        ],
+        "tags": ["UserIdentities"],
         "operationId": "UserIdentities_ListByUser",
         "description": "Lists all user identities.",
         "parameters": [
@@ -3498,9 +3359,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/{aggregation}": {
       "get": {
-        "tags": [
-          "Reports"
-        ],
+        "tags": ["Reports"],
         "operationId": "Reports_ListByService",
         "description": "Lists report records.",
         "parameters": [
@@ -3521,15 +3380,7 @@
                 "modelAsString": false
               },
               "type": "string",
-              "enum": [
-                "byApi",
-                "byGeo",
-                "byOperation",
-                "byProduct",
-                "bySubscription",
-                "byTime",
-                "byUser"
-              ]
+              "enum": ["byApi", "byGeo", "byOperation", "byProduct", "bySubscription", "byTime", "byUser"]
             }
           },
           {
@@ -3583,9 +3434,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/access": {
       "get": {
-        "tags": [
-          "TenantAccess"
-        ],
+        "tags": ["TenantAccess"],
         "operationId": "TenantAccess_Get",
         "description": "Get tenant access information details.",
         "parameters": [
@@ -3624,9 +3473,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "TenantAccess"
-        ],
+        "tags": ["TenantAccess"],
         "operationId": "TenantAccess_Update",
         "description": "Update tenant access information details.",
         "parameters": [
@@ -3678,15 +3525,12 @@
           },
           "description": "Parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 2
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/access/regeneratePrimaryKey": {
       "post": {
-        "tags": [
-          "TenantAccess"
-        ],
+        "tags": ["TenantAccess"],
         "operationId": "TenantAccess_RegeneratePrimaryKey",
         "description": "Regenerate primary access key.",
         "parameters": [
@@ -3722,9 +3566,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/access/regenerateSecondaryKey": {
       "post": {
-        "tags": [
-          "TenantAccess"
-        ],
+        "tags": ["TenantAccess"],
         "operationId": "TenantAccess_RegenerateSecondaryKey",
         "description": "Regenerate secondary access key.",
         "parameters": [
@@ -3760,9 +3602,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers": {
       "get": {
-        "tags": [
-          "Loggers"
-        ],
+        "tags": ["Loggers"],
         "operationId": "Loggers_ListByService",
         "description": "Lists a collection of loggers in the specified service instance.",
         "externalDocs": {
@@ -3827,9 +3667,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers/{loggerid}": {
       "get": {
-        "tags": [
-          "Loggers"
-        ],
+        "tags": ["Loggers"],
         "operationId": "Loggers_Get",
         "description": "Gets the details of the logger specified by its identifier.",
         "parameters": [
@@ -3887,9 +3725,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Loggers"
-        ],
+        "tags": ["Loggers"],
         "operationId": "Loggers_CreateOrUpdate",
         "description": "Creates or Updates a logger.",
         "parameters": [
@@ -3946,13 +3782,10 @@
           },
           "description": "Create parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "patch": {
-        "tags": [
-          "Loggers"
-        ],
+        "tags": ["Loggers"],
         "operationId": "Loggers_Update",
         "description": "Updates an existing logger.",
         "parameters": [
@@ -4013,13 +3846,10 @@
           },
           "description": "Update parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "delete": {
-        "tags": [
-          "Loggers"
-        ],
+        "tags": ["Loggers"],
         "operationId": "Loggers_Delete",
         "description": "Deletes the specified logger.",
         "parameters": [
@@ -4073,9 +3903,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/properties": {
       "get": {
-        "tags": [
-          "Property"
-        ],
+        "tags": ["Property"],
         "operationId": "Property_ListByService",
         "description": "Lists a collection of properties defined within a service instance.",
         "externalDocs": {
@@ -4130,9 +3958,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/properties/{propId}": {
       "get": {
-        "tags": [
-          "Property"
-        ],
+        "tags": ["Property"],
         "operationId": "Property_Get",
         "description": "Gets the details of the property specified by its identifier.",
         "parameters": [
@@ -4190,9 +4016,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Property"
-        ],
+        "tags": ["Property"],
         "operationId": "Property_CreateOrUpdate",
         "description": "Creates or updates a property.",
         "parameters": [
@@ -4249,13 +4073,10 @@
           },
           "description": "Create parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "patch": {
-        "tags": [
-          "Property"
-        ],
+        "tags": ["Property"],
         "operationId": "Property_Update",
         "description": "Updates the specific property.",
         "parameters": [
@@ -4316,13 +4137,10 @@
           },
           "description": "Update parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "delete": {
-        "tags": [
-          "Property"
-        ],
+        "tags": ["Property"],
         "operationId": "Property_Delete",
         "description": "Deletes specific property from the the API Management service instance.",
         "parameters": [
@@ -4386,9 +4204,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders": {
       "get": {
-        "tags": [
-          "OpenIdConnectProviders"
-        ],
+        "tags": ["OpenIdConnectProviders"],
         "operationId": "OpenIdConnectProviders_ListByService",
         "description": "Lists all OpenID Connect Providers.",
         "parameters": [
@@ -4440,9 +4256,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}": {
       "get": {
-        "tags": [
-          "OpenIdConnectProviders"
-        ],
+        "tags": ["OpenIdConnectProviders"],
         "operationId": "OpenIdConnectProviders_Get",
         "description": "Gets specific OpenID Connect Provider.",
         "parameters": [
@@ -4500,9 +4314,7 @@
         }
       },
       "put": {
-        "tags": [
-          "OpenIdConnectProviders"
-        ],
+        "tags": ["OpenIdConnectProviders"],
         "operationId": "OpenIdConnectProviders_CreateOrUpdate",
         "description": "Creates or updates the OpenID Connect Provider.",
         "parameters": [
@@ -4559,13 +4371,10 @@
           },
           "description": "Create parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "patch": {
-        "tags": [
-          "OpenIdConnectProviders"
-        ],
+        "tags": ["OpenIdConnectProviders"],
         "operationId": "OpenIdConnectProviders_Update",
         "description": "Updates the specific OpenID Connect Provider.",
         "parameters": [
@@ -4626,13 +4435,10 @@
           },
           "description": "Update parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "delete": {
-        "tags": [
-          "OpenIdConnectProviders"
-        ],
+        "tags": ["OpenIdConnectProviders"],
         "operationId": "OpenIdConnectProviders_Delete",
         "description": "Deletes specific OpenID Connect Provider of the API Management service instance.",
         "parameters": [
@@ -4696,9 +4502,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/access/git": {
       "get": {
-        "tags": [
-          "TenantAccessGit"
-        ],
+        "tags": ["TenantAccessGit"],
         "operationId": "TenantAccessGit_Get",
         "description": "Gets the Git access configuration for the tenant.",
         "parameters": [
@@ -4749,9 +4553,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/access/git/regeneratePrimaryKey": {
       "post": {
-        "tags": [
-          "TenantAccessGit"
-        ],
+        "tags": ["TenantAccessGit"],
         "operationId": "TenantAccessGit_RegeneratePrimaryKey",
         "description": "Regenerate primary access key for GIT.",
         "parameters": [
@@ -4787,9 +4589,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/access/git/regenerateSecondaryKey": {
       "post": {
-        "tags": [
-          "TenantAccessGit"
-        ],
+        "tags": ["TenantAccessGit"],
         "operationId": "TenantAccessGit_RegenerateSecondaryKey",
         "description": "Regenerate secondary access key for GIT.",
         "parameters": [
@@ -4825,9 +4625,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/configuration/deploy": {
       "post": {
-        "tags": [
-          "TenantConfiguration"
-        ],
+        "tags": ["TenantConfiguration"],
         "operationId": "TenantConfiguration_Deploy",
         "description": "This operation applies changes from the specified Git branch to the configuration database. This is a long running operation and could take several minutes to complete.",
         "externalDocs": {
@@ -4882,15 +4680,12 @@
           },
           "description": "Deploy Configuration parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 2
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/configuration/save": {
       "post": {
-        "tags": [
-          "TenantConfiguration"
-        ],
+        "tags": ["TenantConfiguration"],
         "operationId": "TenantConfiguration_Save",
         "description": "This operation creates a commit with the current configuration snapshot to the specified branch in the repository. This is a long running operation and could take several minutes to complete.",
         "externalDocs": {
@@ -4945,15 +4740,12 @@
           },
           "description": "Save Configuration parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 2
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/configuration/validate": {
       "post": {
-        "tags": [
-          "TenantConfiguration"
-        ],
+        "tags": ["TenantConfiguration"],
         "operationId": "TenantConfiguration_Validate",
         "description": "This operation validates the changes in the specified Git branch. This is a long running operation and could take several minutes to complete.",
         "parameters": [
@@ -5004,15 +4796,12 @@
           },
           "description": "Validate Configuration parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 2
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/configuration/syncState": {
       "get": {
-        "tags": [
-          "TenantConfigurationSyncState"
-        ],
+        "tags": ["TenantConfigurationSyncState"],
         "operationId": "TenantConfigurationSyncState_Get",
         "description": "Gets the status of the most recent synchronization between the configuration database and the Git repository.",
         "parameters": [
@@ -5045,9 +4834,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends": {
       "get": {
-        "tags": [
-          "Backends"
-        ],
+        "tags": ["Backends"],
         "operationId": "Backends_ListByService",
         "description": "Lists a collection of backends in the specified service instance.",
         "externalDocs": {
@@ -5112,9 +4899,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendid}": {
       "get": {
-        "tags": [
-          "Backends"
-        ],
+        "tags": ["Backends"],
         "operationId": "Backends_Get",
         "description": "Gets the details of the backend specified by its identifier.",
         "parameters": [
@@ -5166,9 +4951,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Backends"
-        ],
+        "tags": ["Backends"],
         "operationId": "Backends_CreateOrUpdate",
         "description": "Creates or Updates a backend.",
         "parameters": [
@@ -5217,13 +5000,10 @@
           },
           "description": "Create parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "patch": {
-        "tags": [
-          "Backends"
-        ],
+        "tags": ["Backends"],
         "operationId": "Backends_Update",
         "description": "Updates an existing backend.",
         "parameters": [
@@ -5278,13 +5058,10 @@
           },
           "description": "Update parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "delete": {
-        "tags": [
-          "Backends"
-        ],
+        "tags": ["Backends"],
         "operationId": "Backends_Delete",
         "description": "Deletes the specified backend.",
         "parameters": [
@@ -5332,9 +5109,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identityProviders": {
       "get": {
-        "tags": [
-          "IdentityProvider"
-        ],
+        "tags": ["IdentityProvider"],
         "operationId": "IdentityProviders_ListByService",
         "description": "Lists a collection of Identity Provider configured in the specified service instance.",
         "parameters": [
@@ -5377,9 +5152,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identityProviders/{identityProviderName}": {
       "get": {
-        "tags": [
-          "IdentityProvider"
-        ],
+        "tags": ["IdentityProvider"],
         "operationId": "IdentityProviders_Get",
         "description": "Gets the configuration details of the identity Provider configured in specified service instance.",
         "parameters": [
@@ -5431,9 +5204,7 @@
         }
       },
       "put": {
-        "tags": [
-          "IdentityProvider"
-        ],
+        "tags": ["IdentityProvider"],
         "operationId": "IdentityProviders_CreateOrUpdate",
         "description": "Creates or Updates the IdentityProvider configuration.",
         "parameters": [
@@ -5482,13 +5253,10 @@
           },
           "description": "Create parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "patch": {
-        "tags": [
-          "IdentityProviders"
-        ],
+        "tags": ["IdentityProviders"],
         "operationId": "IdentityProviders_Update",
         "description": "Updates an existing IdentityProvider configuration.",
         "parameters": [
@@ -5543,13 +5311,10 @@
           },
           "description": "Update parameters.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       },
       "delete": {
-        "tags": [
-          "IdentityProvider"
-        ],
+        "tags": ["IdentityProvider"],
         "operationId": "IdentityProviders_Delete",
         "description": "Deletes the specified identity provider configuration.",
         "parameters": [
@@ -5597,9 +5362,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}": {
       "get": {
-        "tags": [
-          "QuotaByCounterKeys"
-        ],
+        "tags": ["QuotaByCounterKeys"],
         "operationId": "QuotaByCounterKeys_ListByService",
         "description": "Lists a collection of current quota counter periods associated with the counter-key configured in the policy on the specified service instance. The api does not support paging yet.",
         "externalDocs": {
@@ -5647,9 +5410,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "QuotaByCounterKeys"
-        ],
+        "tags": ["QuotaByCounterKeys"],
         "operationId": "QuotaByCounterKeys_Update",
         "description": "Updates all the quota counter values specified with the existing quota counter key to a value in the specified service instance. This should be used for reset of the quota counter values.",
         "parameters": [
@@ -5695,15 +5456,12 @@
           },
           "description": "The value of the quota counter to be applied to all quota counter periods.",
           "required": true
-        },
-        "x-ms-requestBody-index": 3
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/{quotaPeriodKey}": {
       "get": {
-        "tags": [
-          "QuotaByPeriodKeys"
-        ],
+        "tags": ["QuotaByPeriodKeys"],
         "operationId": "QuotaByPeriodKeys_Get",
         "description": "Gets the value of the quota counter associated with the counter-key in the policy for the specific period in service instance.",
         "externalDocs": {
@@ -5754,9 +5512,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "QuotaByPeriodKeys"
-        ],
+        "tags": ["QuotaByPeriodKeys"],
         "operationId": "QuotaByPeriodKeys_Update",
         "description": "Updates an existing quota counter value in the specified service instance.",
         "parameters": [
@@ -5805,17 +5561,14 @@
           },
           "description": "The value of the Quota counter to be applied on the specified period.",
           "required": true
-        },
-        "x-ms-requestBody-index": 4
+        }
       }
     }
   },
   "x-ms-paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}?export=true": {
       "get": {
-        "tags": [
-          "Apis"
-        ],
+        "tags": ["Apis"],
         "operationId": "Apis_Export",
         "description": "Gets the details of the API specified by its identifier.",
         "parameters": [
@@ -5935,10 +5688,7 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": [
-                "Http",
-                "Https"
-              ],
+              "enum": ["Http", "Https"],
               "x-ms-enum": {
                 "name": "ApiProtocolContract",
                 "modelAsString": false
@@ -5957,22 +5707,14 @@
           "type": {
             "type": "string",
             "description": "Type of API.",
-            "enum": [
-              "Http",
-              "Soap"
-            ],
+            "enum": ["Http", "Soap"],
             "x-ms-enum": {
               "name": "ApiTypeContract",
               "modelAsString": false
             }
           }
         },
-        "required": [
-          "name",
-          "serviceUrl",
-          "path",
-          "protocols"
-        ],
+        "required": ["name", "serviceUrl", "path", "protocols"],
         "description": "API details."
       },
       "ApiCollection": {
@@ -6003,9 +5745,7 @@
             "description": "json value."
           }
         },
-        "required": [
-          "RawJson"
-        ],
+        "required": ["RawJson"],
         "description": "Parameters supplied to the Patch operations."
       },
       "ApiExportResult": {
@@ -6017,14 +5757,7 @@
           },
           "statusCode": {
             "type": "string",
-            "enum": [
-              "Continue",
-              "OK",
-              "Created",
-              "Accepted",
-              "NotFound",
-              "Conflict"
-            ],
+            "enum": ["Continue", "OK", "Created", "Accepted", "NotFound", "Conflict"],
             "x-ms-enum": {
               "name": "HttpStatusCode",
               "modelAsString": false
@@ -6066,10 +5799,7 @@
             "description": "Parameter values."
           }
         },
-        "required": [
-          "name",
-          "type"
-        ],
+        "required": ["name", "type"],
         "description": "Operation parameters details."
       },
       "RepresentationContract": {
@@ -6083,9 +5813,7 @@
             "description": "An example of the representation."
           }
         },
-        "required": [
-          "contentType"
-        ],
+        "required": ["contentType"],
         "description": "Operation request/response representation details."
       },
       "RequestContract": {
@@ -6139,9 +5867,7 @@
             "description": "Collection of operation response representations."
           }
         },
-        "required": [
-          "statusCode"
-        ],
+        "required": ["statusCode"],
         "description": "Operation response details."
       },
       "OperationContract": {
@@ -6195,11 +5921,7 @@
             "description": "Array of Operation responses."
           }
         },
-        "required": [
-          "name",
-          "method",
-          "urlTemplate"
-        ],
+        "required": ["name", "method", "urlTemplate"],
         "description": "Api Operation details."
       },
       "OperationCollection": {
@@ -6263,10 +5985,7 @@
           "state": {
             "type": "string",
             "description": "whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is NotPublished.",
-            "enum": [
-              "NotPublished",
-              "Published"
-            ],
+            "enum": ["NotPublished", "Published"],
             "default": "NotPublished",
             "x-ms-enum": {
               "name": "ProductStateContract",
@@ -6274,9 +5993,7 @@
             }
           }
         },
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "description": "Product profile."
       },
       "ProductCollection": {
@@ -6324,14 +6041,7 @@
           "state": {
             "type": "string",
             "description": "Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
-            "enum": [
-              "Suspended",
-              "Active",
-              "Expired",
-              "Submitted",
-              "Rejected",
-              "Cancelled"
-            ],
+            "enum": ["Suspended", "Active", "Expired", "Submitted", "Rejected", "Cancelled"],
             "x-ms-enum": {
               "name": "SubscriptionStateContract",
               "modelAsString": false
@@ -6434,25 +6144,14 @@
           "state": {
             "type": "string",
             "description": "Initial subscription state. If no value is specified, subscription is created with Submitted state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
-            "enum": [
-              "Suspended",
-              "Active",
-              "Expired",
-              "Submitted",
-              "Rejected",
-              "Cancelled"
-            ],
+            "enum": ["Suspended", "Active", "Expired", "Submitted", "Rejected", "Cancelled"],
             "x-ms-enum": {
               "name": "SubscriptionStateContract",
               "modelAsString": false
             }
           }
         },
-        "required": [
-          "userId",
-          "productId",
-          "name"
-        ],
+        "required": ["userId", "productId", "name"],
         "description": "Parameters supplied to the Create subscription operation."
       },
       "SubscriptionUpdateParameters": {
@@ -6489,14 +6188,7 @@
           "state": {
             "type": "string",
             "description": "Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
-            "enum": [
-              "Suspended",
-              "Active",
-              "Expired",
-              "Submitted",
-              "Rejected",
-              "Cancelled"
-            ],
+            "enum": ["Suspended", "Active", "Expired", "Submitted", "Rejected", "Cancelled"],
             "x-ms-enum": {
               "name": "SubscriptionStateContract",
               "modelAsString": false
@@ -6543,10 +6235,7 @@
           "state": {
             "type": "string",
             "description": "whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators.",
-            "enum": [
-              "NotPublished",
-              "Published"
-            ],
+            "enum": ["NotPublished", "Published"],
             "x-ms-enum": {
               "name": "ProductStateContract",
               "modelAsString": false
@@ -6582,11 +6271,7 @@
             "type": "string",
             "description": "Group type.",
             "readOnly": true,
-            "enum": [
-              "Custom",
-              "System",
-              "External"
-            ],
+            "enum": ["Custom", "System", "External"],
             "x-ms-enum": {
               "name": "GroupTypeContract",
               "modelAsString": false
@@ -6598,9 +6283,7 @@
             "readOnly": true
           }
         },
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "description": "Developer group."
       },
       "GroupCollection": {
@@ -6639,11 +6322,7 @@
           "type": {
             "type": "string",
             "description": "Group type.",
-            "enum": [
-              "Custom",
-              "System",
-              "External"
-            ],
+            "enum": ["Custom", "System", "External"],
             "x-ms-enum": {
               "name": "GroupTypeContract",
               "modelAsString": false
@@ -6654,9 +6333,7 @@
             "description": "Identifier for an external group."
           }
         },
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "description": "Parameters supplied to the Create Group operation."
       },
       "GroupUpdateParameters": {
@@ -6674,11 +6351,7 @@
           "type": {
             "type": "string",
             "description": "Group type.",
-            "enum": [
-              "Custom",
-              "System",
-              "External"
-            ],
+            "enum": ["Custom", "System", "External"],
             "x-ms-enum": {
               "name": "GroupTypeContract",
               "modelAsString": false
@@ -6725,10 +6398,7 @@
           "state": {
             "type": "string",
             "description": "User state.",
-            "enum": [
-              "Active",
-              "Blocked"
-            ],
+            "enum": ["Active", "Blocked"],
             "x-ms-enum": {
               "name": "UserStateContract",
               "modelAsString": false
@@ -6796,11 +6466,7 @@
             "description": "Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
           }
         },
-        "required": [
-          "subject",
-          "thumbprint",
-          "expirationDate"
-        ],
+        "required": ["subject", "thumbprint", "expirationDate"],
         "description": "Certificate details."
       },
       "CertificateCollection": {
@@ -6835,10 +6501,7 @@
             "description": "Password for the Certificate"
           }
         },
-        "required": [
-          "data",
-          "password"
-        ],
+        "required": ["data", "password"],
         "description": "Parameters supplied to the CreateOrUpdate certificate operation."
       },
       "PolicySnippetContract": {
@@ -6861,13 +6524,7 @@
           "scope": {
             "type": "string",
             "description": "Snippet scope.",
-            "enum": [
-              "Tenant",
-              "Product",
-              "Api",
-              "Operation",
-              "All"
-            ],
+            "enum": ["Tenant", "Product", "Api", "Operation", "All"],
             "readOnly": true,
             "x-ms-enum": {
               "name": "PolicyScopeContract",
@@ -6904,10 +6561,7 @@
           "state": {
             "type": "string",
             "description": "Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.",
-            "enum": [
-              "Active",
-              "Blocked"
-            ],
+            "enum": ["Active", "Blocked"],
             "default": "Active",
             "x-ms-enum": {
               "name": "UserStateContract",
@@ -6919,12 +6573,7 @@
             "description": "Optional note about a user set by the administrator."
           }
         },
-        "required": [
-          "email",
-          "password",
-          "firstName",
-          "lastName"
-        ],
+        "required": ["email", "password", "firstName", "lastName"],
         "description": "Parameters supplied to the Create User operation."
       },
       "UserUpdateParameters": {
@@ -6952,10 +6601,7 @@
           "state": {
             "type": "string",
             "description": "Account state.",
-            "enum": [
-              "Active",
-              "Blocked"
-            ],
+            "enum": ["Active", "Blocked"],
             "x-ms-enum": {
               "name": "UserStateContract",
               "modelAsString": false
@@ -6988,10 +6634,7 @@
             "description": "body parameter value."
           }
         },
-        "required": [
-          "name",
-          "value"
-        ],
+        "required": ["name", "value"],
         "description": "OAuth acquire token request body parameter (www-url-form-encoded)."
       },
       "OAuth2AuthorizationServerContract": {
@@ -7023,16 +6666,7 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": [
-                "HEAD",
-                "OPTIONS",
-                "TRACE",
-                "GET",
-                "POST",
-                "PUT",
-                "PATCH",
-                "DELETE"
-              ],
+              "enum": ["HEAD", "OPTIONS", "TRACE", "GET", "POST", "PUT", "PATCH", "DELETE"],
               "x-ms-enum": {
                 "name": "MethodContract",
                 "modelAsString": false
@@ -7044,10 +6678,7 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": [
-                "Basic",
-                "Body"
-              ],
+              "enum": ["Basic", "Body"],
               "x-ms-enum": {
                 "name": "ClientAuthenticationMethodContract",
                 "modelAsString": false
@@ -7087,12 +6718,7 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": [
-                "authorizationCode",
-                "implicit",
-                "resourceOwnerPassword",
-                "clientCredentials"
-              ],
+              "enum": ["authorizationCode", "implicit", "resourceOwnerPassword", "clientCredentials"],
               "x-ms-enum": {
                 "name": "GrantTypesContract",
                 "modelAsString": false
@@ -7107,10 +6733,7 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": [
-                "authorizationHeader",
-                "query"
-              ],
+              "enum": ["authorizationHeader", "query"],
               "x-ms-enum": {
                 "name": "BearerTokenSendingMethodsContract",
                 "modelAsString": false
@@ -7138,13 +6761,7 @@
             "description": "Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner password."
           }
         },
-        "required": [
-          "name",
-          "clientRegistrationEndpoint",
-          "authorizationEndpoint",
-          "clientId",
-          "grantTypes"
-        ],
+        "required": ["name", "clientRegistrationEndpoint", "authorizationEndpoint", "clientId", "grantTypes"],
         "description": "External OAuth authorization server settings.",
         "example": {
           "id": "/authorizationServers/554be23d0fce600674232c33",
@@ -7152,22 +6769,14 @@
           "description": null,
           "clientRegistrationEndpoint": "https://contoso.com/",
           "authorizationEndpoint": "https://login.microsoftonline.com/55abb68a-8ews-4565-8675-927722a8a005/oauth2/authorize?api-version=1.0",
-          "authorizationMethods": [
-            "GET"
-          ],
-          "clientAuthenticationMethod": [
-            "Body"
-          ],
+          "authorizationMethods": ["GET"],
+          "clientAuthenticationMethod": ["Body"],
           "tokenBodyParameters": [],
           "tokenEndpoint": "https://login.microsoftonline.com/55abb68a-8ews-4565-8675-927722a8a005/oauth2/token?api-version=1.0",
           "supportState": false,
           "defaultScope": null,
-          "grantTypes": [
-            "authorizationCode"
-          ],
-          "bearerTokenSendingMethods": [
-            "authorizationHeader"
-          ],
+          "grantTypes": ["authorizationCode"],
+          "bearerTokenSendingMethods": ["authorizationHeader"],
           "clientId": "demo",
           "clientSecret": "demo",
           "resourceOwnerUsername": null,
@@ -7219,16 +6828,7 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": [
-                "HEAD",
-                "OPTIONS",
-                "TRACE",
-                "GET",
-                "POST",
-                "PUT",
-                "PATCH",
-                "DELETE"
-              ],
+              "enum": ["HEAD", "OPTIONS", "TRACE", "GET", "POST", "PUT", "PATCH", "DELETE"],
               "x-ms-enum": {
                 "name": "MethodContract",
                 "modelAsString": false
@@ -7240,10 +6840,7 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": [
-                "Basic",
-                "Body"
-              ],
+              "enum": ["Basic", "Body"],
               "x-ms-enum": {
                 "name": "ClientAuthenticationMethodContract",
                 "modelAsString": false
@@ -7283,12 +6880,7 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": [
-                "authorizationCode",
-                "implicit",
-                "resourceOwnerPassword",
-                "clientCredentials"
-              ],
+              "enum": ["authorizationCode", "implicit", "resourceOwnerPassword", "clientCredentials"],
               "x-ms-enum": {
                 "name": "GrantTypesContract",
                 "modelAsString": false
@@ -7303,10 +6895,7 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": [
-                "authorizationHeader",
-                "query"
-              ],
+              "enum": ["authorizationHeader", "query"],
               "x-ms-enum": {
                 "name": "BearerTokenSendingMethodsContract",
                 "modelAsString": false
@@ -7347,10 +6936,7 @@
             "description": "whether Region is the master region."
           }
         },
-        "required": [
-          "name",
-          "isMasterRegion"
-        ],
+        "required": ["name", "isMasterRegion"],
         "description": "Region profile."
       },
       "RegionListResult": {
@@ -7541,9 +7127,7 @@
             "description": "Tenant access information of the API Management service."
           }
         },
-        "required": [
-          "enabled"
-        ],
+        "required": ["enabled"],
         "description": "Tenant access information update parameters of the API Management service."
       },
       "LoggerResponse": {
@@ -7556,9 +7140,7 @@
           "type": {
             "type": "string",
             "description": "Logger type.",
-            "enum": [
-              "AzureEventHub"
-            ],
+            "enum": ["AzureEventHub"],
             "x-ms-enum": {
               "name": "LoggerTypeContract",
               "modelAsString": false
@@ -7586,10 +7168,7 @@
             "default": true
           }
         },
-        "required": [
-          "type",
-          "credentials"
-        ],
+        "required": ["type", "credentials"],
         "description": "The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs."
       },
       "LoggerCollection": {
@@ -7618,9 +7197,7 @@
           "type": {
             "type": "string",
             "description": "Logger type.",
-            "enum": [
-              "AzureEventHub"
-            ],
+            "enum": ["AzureEventHub"],
             "x-ms-enum": {
               "name": "LoggerTypeContract",
               "modelAsString": false
@@ -7646,10 +7223,7 @@
             "description": "Whether records are buffered in the logger before publishing. Default is assumed to be true."
           }
         },
-        "required": [
-          "type",
-          "credentials"
-        ],
+        "required": ["type", "credentials"],
         "description": "Parameters supplied to the Create Logger operation."
       },
       "LoggerUpdateParameters": {
@@ -7657,9 +7231,7 @@
           "type": {
             "type": "string",
             "description": "Logger type.",
-            "enum": [
-              "AzureEventHub"
-            ],
+            "enum": ["AzureEventHub"],
             "x-ms-enum": {
               "name": "LoggerTypeContract",
               "modelAsString": false
@@ -7681,9 +7253,7 @@
             "description": "whether records are buffered in the logger before publishing. Default is assumed to be true."
           }
         },
-        "required": [
-          "type"
-        ],
+        "required": ["type"],
         "description": "Parameters supplied to the Update Logger operation."
       },
       "BackendResponse": {
@@ -7736,9 +7306,7 @@
             "default": false
           }
         },
-        "required": [
-          "host"
-        ],
+        "required": ["host"],
         "description": "Parameters supplied to the Create Backend operation."
       },
       "BackendUpdateParameters": {
@@ -7786,13 +7354,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "facebook",
-              "google",
-              "microsoft",
-              "twitter",
-              "aad"
-            ],
+            "enum": ["facebook", "google", "microsoft", "twitter", "aad"],
             "x-ms-enum": {
               "name": "IdentityProviderNameType",
               "modelAsString": true
@@ -7808,10 +7370,7 @@
             "description": "List of Allowed Tenants when configuring Azure Active Directory login."
           }
         },
-        "required": [
-          "clientId",
-          "clientSecret"
-        ],
+        "required": ["clientId", "clientSecret"],
         "description": "The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users."
       },
       "IdentityProviderUpdateParameters": {
@@ -7870,10 +7429,7 @@
             "description": "Determines whether the value is a secret and should be encrypted or not. Default value is false."
           }
         },
-        "required": [
-          "name",
-          "value"
-        ],
+        "required": ["name", "value"],
         "description": "Property details."
       },
       "PropertyCollection": {
@@ -7925,10 +7481,7 @@
             "description": "Determines whether the value is a secret and should be encrypted or not. Default value is false."
           }
         },
-        "required": [
-          "name",
-          "value"
-        ],
+        "required": ["name", "value"],
         "description": "Parameters supplied to the Create Property operation."
       },
       "PropertyUpdateParameters": {
@@ -7989,11 +7542,7 @@
             "description": "Client Secret of developer console which is the client application."
           }
         },
-        "required": [
-          "name",
-          "metadataEndpoint",
-          "clientId"
-        ],
+        "required": ["name", "metadataEndpoint", "clientId"],
         "description": "OpenID Connect Providers Contract."
       },
       "OpenIdConnectProviderCollection": {
@@ -8041,11 +7590,7 @@
             "description": "Client Secret of developer console which is the client application."
           }
         },
-        "required": [
-          "name",
-          "metadataEndpoint",
-          "clientId"
-        ],
+        "required": ["name", "metadataEndpoint", "clientId"],
         "description": "Parameters supplied to the Create OpenID Connect Provider operation."
       },
       "OpenidConnectProviderUpdateContract": {
@@ -8085,9 +7630,7 @@
             "description": "The value enforcing deleting subscriptions to products that are deleted in this update."
           }
         },
-        "required": [
-          "branch"
-        ],
+        "required": ["branch"],
         "description": "Parameters supplied to the Deploy Configuration operation."
       },
       "TenantLongRunningOperationResult": {
@@ -8104,11 +7647,7 @@
           "status": {
             "type": "string",
             "description": "Current status of the operation.",
-            "enum": [
-              "InProgress",
-              "Succeeded",
-              "Failed"
-            ],
+            "enum": ["InProgress", "Succeeded", "Failed"],
             "x-ms-enum": {
               "name": "OperationStatus",
               "modelAsString": false
@@ -8116,14 +7655,7 @@
           },
           "statusCode": {
             "type": "string",
-            "enum": [
-              "Continue",
-              "OK",
-              "Created",
-              "Accepted",
-              "NotFound",
-              "Conflict"
-            ],
+            "enum": ["Continue", "OK", "Created", "Accepted", "NotFound", "Conflict"],
             "x-ms-enum": {
               "name": "HttpStatusCode",
               "modelAsString": false
@@ -8181,12 +7713,7 @@
           "status": {
             "type": "string",
             "description": "Status of an async operation.",
-            "enum": [
-              "Started",
-              "InProgress",
-              "Succeeded",
-              "Failed"
-            ],
+            "enum": ["Started", "InProgress", "Succeeded", "Failed"],
             "x-ms-enum": {
               "name": "AsyncOperationState",
               "modelAsString": false
@@ -8223,9 +7750,7 @@
             "description": "The value if true, the current configuration database is committed to the Git repository, even if the Git repository has newer changes that would be overwritten."
           }
         },
-        "required": [
-          "branch"
-        ],
+        "required": ["branch"],
         "description": "Parameters supplied to the Save Tenant Configuration operation."
       },
       "TenantConfigurationSyncStateContract": {
@@ -8312,12 +7837,7 @@
             "$ref": "#/components/schemas/QuotaCounterValueContract"
           }
         ],
-        "required": [
-          "counterKey",
-          "periodKey",
-          "periodStartTime",
-          "periodEndTime"
-        ],
+        "required": ["counterKey", "periodKey", "periodStartTime", "periodEndTime"],
         "description": "Quota counter details."
       },
       "QuotaCounterValueContract": {
@@ -8492,13 +8012,7 @@
             "modelAsString": true
           },
           "type": "string",
-          "enum": [
-            "facebook",
-            "google",
-            "microsoft",
-            "twitter",
-            "aad"
-          ]
+          "enum": ["facebook", "google", "microsoft", "twitter", "aad"]
         }
       },
       "QuotaCounterKeyParameter": {

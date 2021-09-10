@@ -1,7 +1,7 @@
-import { RawSourceMap, SourceMapGenerator } from "source-map";
-import { FastStringify } from "../yaml";
-import { compileMapping, Mapping } from "../source-map/source-map";
-
+import { fastStringify } from "@azure-tools/yaml";
+import { SourceMapGenerator, RawSourceMap } from "source-map";
+import { addMappingsToSourceMap, Mapping } from "../source-map";
+import { PathMapping } from "../source-map/path-source-map";
 import { DataHandle } from "./data-handle";
 
 export class DataSink {
@@ -11,7 +11,8 @@ export class DataSink {
       rawData: string,
       artifact: string | undefined,
       identity: Array<string>,
-      metadataFactory: (readHandle: DataHandle) => Promise<RawSourceMap>,
+      mappings?: PathMapping[],
+      metadataFactory?: (readHandle: DataHandle) => Promise<RawSourceMap>,
     ) => Promise<DataHandle>,
     public forward: (description: string, input: DataHandle) => Promise<DataHandle>,
   ) {}
@@ -23,7 +24,7 @@ export class DataSink {
     identity: string[],
     sourceMapFactory: (readHandle: DataHandle) => Promise<RawSourceMap>,
   ): Promise<DataHandle> {
-    return this.write(description, data, artifact, identity, sourceMapFactory);
+    return this.write(description, data, artifact, identity, undefined, sourceMapFactory);
   }
 
   public async writeData(
@@ -31,12 +32,19 @@ export class DataSink {
     data: string,
     identity: string[],
     artifact?: string,
-    mappings: Mapping[] = [],
-    mappingSources: DataHandle[] = [],
+    mappings?: MappingParam,
   ): Promise<DataHandle> {
-    return this.writeDataWithSourceMap(description, data, artifact, identity, async (readHandle) => {
+    if (!mappings) {
+      return this.write(description, data, artifact, identity);
+    }
+    if ("pathMappings" in mappings) {
+      return this.write(description, data, artifact, identity, mappings?.pathMappings);
+    }
+    return this.write(description, data, artifact, identity, undefined, async (readHandle) => {
       const sourceMapGenerator = new SourceMapGenerator({ file: readHandle.key });
-      await compileMapping(mappings, sourceMapGenerator, mappingSources.concat(readHandle));
+      if (mappings) {
+        await addMappingsToSourceMap(mappings.positionMappings, sourceMapGenerator);
+      }
       return sourceMapGenerator.toJSON();
     });
   }
@@ -46,57 +54,24 @@ export class DataSink {
     obj: T,
     identity: Array<string>,
     artifact?: string,
-    mappings: Array<Mapping> = [],
-    mappingSources: Array<DataHandle> = [],
+    mappings?: MappingParam,
   ): Promise<DataHandle> {
-    return this.writeData(description, FastStringify(obj), identity, artifact, mappings, mappingSources);
+    return this.writeData(description, fastStringify(obj), identity, artifact, mappings);
   }
+}
 
-  /**
-   * @deprecated use @see writeDataWithSourceMap
-   */
-  public async WriteDataWithSourceMap(
-    description: string,
-    data: string,
-    artifact: string | undefined,
-    identity: Array<string>,
-    sourceMapFactory: (readHandle: DataHandle) => Promise<RawSourceMap>,
-  ): Promise<DataHandle> {
-    return this.writeDataWithSourceMap(description, data, artifact, identity, sourceMapFactory);
-  }
+export type MappingParam = PathMappingParam | PositionMappingParam;
 
+export interface PathMappingParam {
   /**
-   * @deprecated use @see writeData
+   * List of mappings from original to generated using path
    */
-  public async WriteData(
-    description: string,
-    data: string,
-    identity: Array<string>,
-    artifact?: string,
-    mappings: Array<Mapping> = [],
-    mappingSources: Array<DataHandle> = [],
-  ): Promise<DataHandle> {
-    return this.writeData(description, data, identity, artifact, mappings, mappingSources);
-  }
+  pathMappings: PathMapping[];
+}
 
+export interface PositionMappingParam {
   /**
-   * @deprecated use @see writeObject
+   * List of mappings from original to generated using positions
    */
-  public WriteObject<T>(
-    description: string,
-    obj: T,
-    identity: Array<string>,
-    artifact?: string,
-    mappings: Array<Mapping> = [],
-    mappingSources: Array<DataHandle> = [],
-  ): Promise<DataHandle> {
-    return this.writeObject(description, obj, identity, artifact, mappings, mappingSources);
-  }
-
-  /**
-   * @deprecated use @see forward
-   */
-  public Forward(description: string, input: DataHandle): Promise<DataHandle> {
-    return this.forward(description, input);
-  }
+  positionMappings: Mapping[];
 }

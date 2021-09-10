@@ -33,6 +33,47 @@ Directives consist of three parts:
 
 [See built in directives here](./built-in-directives.md)
 
+## Debug a directive
+
+### JsonPath.com
+
+To make sure the `where` clause is defined correctly you can use https://jsonpath.com to verify all the elements wanted are selected.
+Usage:
+
+1. Paste `where` clause in the `JSONPath Syntax` input
+1. Paste spec in the `Inputs` section
+1. Evaluation result should be an array of all the object that were matched with the given path.
+
+**NOTE**: The library used in this website is slightly different and there could be inconsistency for some edge cases. You can use the next [section](#debug) to debug the issue and check if autorest is selecting the same elements.
+
+### `debug` flag
+
+Directive provide a `debug` field that will enable verbose logging of the directive run.
+
+Example:
+
+```yaml
+directive:
+  - from: swagger-document
+    where: $.paths
+    debug: true
+    transform: |
+      $["x-abc"] = true
+```
+
+### `$lib.log` function
+
+Along with some other available function to the transform context(See [eval.ts](https://github.com/Azure/autorest/blob/main/packages/extensions/core/src/lib/plugins/transformer/eval.ts)) `$lib.log` lets you log.
+
+```yaml
+directive:
+  - from: swagger-document
+    where: $.paths
+    transform: |
+      $lib.log($);
+      $["x-abc"] = true
+```
+
 ## Directive Scenarios
 
 The following directives cover the most common tweaking scenarios for generation. Most of those have a `built-in` [directive](./built-in-directives.md) helper and are shown here as examples.

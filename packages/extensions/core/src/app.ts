@@ -4,20 +4,27 @@
  *--------------------------------------------------------------------------------------------*/
 /* eslint-disable no-console */
 import "source-map-support/register";
-import { omit } from "lodash";
-import { configureLibrariesLogger } from "@autorest/common";
 import { EventEmitter } from "events";
+import { resolve as currentDirectory } from "path";
+import {
+  configureLibrariesLogger,
+  color,
+  ConsoleLogger,
+  FilterLogger,
+  AutorestLogger,
+  AutorestSyncLogger,
+  Exception,
+} from "@autorest/common";
+
 import { AutorestCliArgs, parseAutorestCliArgs } from "@autorest/configuration";
 EventEmitter.defaultMaxListeners = 100;
 process.env["ELECTRON_RUN_AS_NODE"] = "1";
 delete process.env["ELECTRON_NO_ATTACH_CONSOLE"];
 
-const color: (text: string) => string = (<any>global).color ? (<any>global).color : (p) => p;
-
 // start of autorest-ng
 // the console app starts for real here.
 
-import { EnhancedFileSystem, Parse, RealFileSystem } from "@azure-tools/datastore";
+import { EnhancedFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import {
   clearFolder,
   createFolderUri,
@@ -27,62 +34,17 @@ import {
   writeBinary,
   writeString,
 } from "@azure-tools/uri";
-import { resolve as currentDirectory } from "path";
+import { parseYAML } from "@azure-tools/yaml";
+import { omit } from "lodash";
+import { ArtifactWriter } from "./artifact-writer";
 import { Help } from "./help";
 import { Artifact } from "./lib/artifact";
 import { AutoRest, IsOpenApiDocument, Shutdown } from "./lib/autorest-core";
-import { Exception } from "@autorest/common";
-import { Channel, Message } from "./lib/message";
 import { VERSION } from "./lib/constants";
-import { AutorestCoreLogger } from "./lib/context/logger";
+import { getLogLevel } from "./lib/context";
 
 let verbose = false;
 let debug = false;
-
-// TODO remove this when redesigning the logger integration. This is a hack to reuse the logic of the AutorestCoreLogger
-// https://github.com/Azure/autorest/issues/4024
-class RootLogger extends AutorestCoreLogger {
-  public constructor() {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    super({} as any, null!, null!);
-  }
-
-  public log(message: Message) {
-    outputMessage(message, () => {});
-  }
-}
-
-function outputMessage(m: Message, errorCounter: () => void) {
-  switch (m.Channel) {
-    case Channel.Debug:
-      if (debug) {
-        console.log(color(m.FormattedMessage || m.Text));
-      }
-      break;
-    case Channel.Verbose:
-      if (verbose) {
-        console.log(color(m.FormattedMessage || m.Text));
-      }
-      break;
-    case Channel.Information:
-      console.log(color(m.FormattedMessage || m.Text));
-      break;
-    case Channel.Warning:
-      console.log(color(m.FormattedMessage || m.Text));
-      break;
-    case Channel.Error:
-    case Channel.Fatal:
-      errorCounter();
-      console.error(color(m.FormattedMessage || m.Text));
-      break;
-  }
-}
-
-function subscribeMessages(api: AutoRest, errorCounter: () => void) {
-  api.Message.Subscribe((_, m) => {
-    return outputMessage(m, errorCounter);
-  });
-}
 
 async function autorestInit(title = "API-NAME", inputs: Array<string> = ["LIST INPUT FILES HERE"]) {
   const cwdUri = createFolderUri(currentDirectory());
@@ -177,18 +139,22 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   // We need to check if verbose logging should be enabled before parsing the args.
   verbose = verbose || autorestArgs.indexOf("--verbose") !== -1;
 
-  const logger = new RootLogger();
-  const args = parseAutorestCliArgs([...autorestArgs, ...more], { logger });
+  const args = parseAutorestCliArgs([...autorestArgs, ...more]);
+
+  const logger = new AutorestSyncLogger({
+    sinks: [new ConsoleLogger()],
+    processors: [new FilterLogger({ level: getLogLevel(args.options) })],
+  });
 
   if (!args.options["message-format"] || args.options["message-format"] === "regular") {
-    console.log(color(`> Loading AutoRest core      '${__dirname}' (${VERSION})`));
+    logger.info(`> Loading AutoRest core      '${__dirname}' (${VERSION})`);
   }
   verbose = verbose || (args.options["verbose"] ?? false);
   debug = debug || (args.options["debug"] ?? false);
 
   // Only show library logs if in verbose or debug mode.
   if (verbose || debug) {
-    configureLibrariesLogger("verbose", console.log);
+    configureLibrariesLogger("verbose", (...x) => logger.debug(x.join(" ")));
   }
 
   // identify where we are starting from.
@@ -202,20 +168,18 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
   const githubToken = args.options["github-auth-token"] ?? process.env.GITHUB_AUTH_TOKEN;
   // get an instance of AutoRest and add the command line switches to the configuration.
   const api = new AutoRest(
+    logger,
     new EnhancedFileSystem(githubToken),
     resolveUri(currentDirUri, args.configFileOrFolder ?? "."),
   );
   api.AddConfiguration(args.options);
 
   // listen for output messages and file writes
-  subscribeMessages(api, () => exitcode++);
   const artifacts: Array<Artifact> = [];
   const clearFolders = new Set<string>();
   const protectFiles = new Set<string>();
-  let fastMode = false;
-  const tasks = new Array<Promise<void>>();
-
   const context = await api.view;
+  const artifactWriter = new ArtifactWriter(context.config);
 
   api.GeneratedFile.Subscribe((_, artifact) => {
     if (context.config.help) {
@@ -224,27 +188,21 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     }
 
     protectFiles.add(artifact.uri);
-    tasks.push(
-      artifact.type === "binary-file"
-        ? writeBinary(artifact.uri, artifact.content)
-        : writeString(artifact.uri, artifact.content),
-    );
+    artifactWriter.writeArtifact(artifact);
   });
-  api.Message.Subscribe((_, message) => {
-    if (message.Channel === Channel.Protect && message.Details) {
-      protectFiles.add(message.Details);
-    }
+
+  api.ProtectFile.Subscribe((_, filename) => {
+    protectFiles.add(filename);
   });
   api.ClearFolder.Subscribe((_, folder) => clearFolders.add(folder));
 
   // maybe a resource schema batch process
   if (context.config["resource-schema-batch"]) {
-    return resourceSchemaBatch(api);
+    return resourceSchemaBatch(api, logger);
   }
-  fastMode = !!context.config["fast-mode"];
 
   if (context.config["batch"]) {
-    await batch(api, args);
+    await batch(api, args, logger);
   } else {
     const result = await api.Process().finish;
     if (result !== true) {
@@ -266,9 +224,12 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     );
     // - format and print
     for (const helpArtifact of helpArtifacts) {
-      const help: Help = Parse(helpArtifact.content, (message, index) =>
-        console.error(color(`!Parsing error at **${helpArtifact.uri}**:__${index}: ${message}__`)),
-      );
+      const { result: help, errors } = parseYAML<Help>(helpArtifact.content);
+      if (errors.length > 0) {
+        for (const { message, position } of errors) {
+          console.error(color(`!Parsing error at **${helpArtifact.uri}**:__${position}: ${message}__`));
+        }
+      }
       if (!help) {
         continue;
       }
@@ -294,13 +255,7 @@ async function currentMain(autorestArgs: Array<string>): Promise<number> {
     await doClearFolders(protectFiles, clearFolders);
 
     timestampDebugLog("Writing Outputs.");
-    await Promise.all(tasks);
-
-    for (const artifact of artifacts) {
-      await (artifact.type === "binary-file"
-        ? writeBinary(artifact.uri, artifact.content)
-        : writeString(artifact.uri, artifact.content));
-    }
+    await artifactWriter.wait();
   }
   timestampLog("Generation Complete");
   // return the exit code to the caller.
@@ -341,7 +296,7 @@ function getRds(schema: any, path: string): Array<string> {
   return result;
 }
 
-async function resourceSchemaBatch(api: AutoRest): Promise<number> {
+async function resourceSchemaBatch(api: AutoRest, logger: AutorestLogger): Promise<number> {
   // get the configuration
   const outputs = new Map<string, string>();
   const schemas = new Array<string>();
@@ -362,7 +317,7 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
       }
 
       // Create the autorest instance for that item
-      const instance = new AutoRest(new RealFileSystem(), config.configFileFolderUri);
+      const instance = new AutoRest(logger, new RealFileSystem(), config.configFileFolderUri);
       instance.GeneratedFile.Subscribe((_, file) => {
         if (file.uri.endsWith(".json")) {
           const more = JSON.parse(file.content);
@@ -387,13 +342,12 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
           }
         }
       });
-      subscribeMessages(instance, () => exitcode++);
 
       // set configuration for that item
       instance.AddConfiguration(omit(batchContext, "input-file"));
       instance.AddConfiguration({ "input-file": eachFile });
 
-      console.log(`Running autorest for *${path}* `);
+      logger.info(`Running autorest for *${path}* `);
 
       // ok, kick off the process for that one.
       await instance.Process().finish.then(async (result) => {
@@ -410,20 +364,14 @@ async function resourceSchemaBatch(api: AutoRest): Promise<number> {
   return exitcode;
 }
 
-async function batch(api: AutoRest, args: AutorestCliArgs): Promise<void> {
+async function batch(api: AutoRest, args: AutorestCliArgs, logger: AutorestLogger): Promise<void> {
   const config = await api.view;
   const batchTaskConfigReference: any = {};
   api.AddConfiguration(batchTaskConfigReference);
   for (const batchTaskConfig of config.GetEntry(<any>"batch")) {
-    const isjson = args.options["message-format"] === "json" || args.options["message-format"] === "yaml";
+    const isjson = args.options["message-format"] === "json";
     if (!isjson) {
-      outputMessage(
-        {
-          Channel: Channel.Information,
-          Text: `Processing batch task - ${JSON.stringify(batchTaskConfig)} .`,
-        },
-        () => {},
-      );
+      logger.info(`Processing batch task - ${JSON.stringify(batchTaskConfig)} .`);
     }
     // update batch task config section
     for (const key of Object.keys(batchTaskConfigReference)) {
@@ -434,13 +382,10 @@ async function batch(api: AutoRest, args: AutorestCliArgs): Promise<void> {
 
     const result = await api.Process().finish;
     if (result !== true) {
-      outputMessage(
-        {
-          Channel: Channel.Error,
-          Text: `Failure during batch task - ${JSON.stringify(batchTaskConfig)} -- ${result}.`,
-        },
-        () => {},
-      );
+      logger.trackError({
+        code: "Batch/Error",
+        message: `Failure during batch task - ${JSON.stringify(batchTaskConfig)}  -- ${result}`,
+      });
       throw result;
     }
   }
@@ -474,6 +419,7 @@ async function mainImpl(): Promise<number> {
 function timestampLog(content: string) {
   console.log(color(`[${Math.floor(process.uptime() * 100) / 100} s] ${content}`));
 }
+
 function timestampDebugLog(content: string) {
   if (debug) {
     console.log(color(`[${Math.floor(process.uptime() * 100) / 100} s] ${content}`));

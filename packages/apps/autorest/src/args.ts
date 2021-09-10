@@ -2,21 +2,25 @@ import { parseArgs } from "@autorest/configuration";
 
 export interface AutorestArgs {
   // Versioning
-  "v3"?: boolean;
-  "preview"?: boolean;
-  "prerelease"?: boolean;
-  "version"?: string;
-  "latest"?: boolean;
+  v3?: boolean;
+  preview?: boolean;
+  prerelease?: boolean;
+  version?: string;
+  latest?: boolean;
 
-  "reset"?: boolean;
-  "debug"?: boolean;
-  "info"?: boolean;
-  "json"?: boolean;
-  "configFileOrFolder"?: string;
-  "force"?: boolean;
+  reset?: boolean;
+  debug?: boolean;
+  info?: boolean;
+  json?: boolean;
+  configFileOrFolder?: string;
+  force?: boolean;
 
-  "verbose"?: boolean;
-  "message-format"?: "regular" | "json" | "yaml";
+  verbose?: boolean;
+  /**
+   * To enable logs of the config loading in the cli.
+   */
+  "debug-cli-config-loading"?: boolean;
+  "message-format"?: "regular" | "json";
   "list-available"?: boolean;
   "clear-temp"?: boolean;
   "list-installed"?: boolean;

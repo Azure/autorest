@@ -1,18 +1,4 @@
 import {
-  Model as oai3,
-  Dereferenced,
-  dereference,
-  Refable,
-  JsonType,
-  IntegerFormat,
-  StringFormat,
-  NumberFormat,
-  MediaType,
-  filterOutXDash,
-} from "@azure-tools/openapi";
-import * as OpenAPI from "@azure-tools/openapi";
-import { items, values, Dictionary, length, keys } from "@azure-tools/linq";
-import {
   HttpMethod,
   HttpModel,
   CodeModel,
@@ -73,13 +59,28 @@ import {
   AnyObjectSchema,
 } from "@autorest/codemodel";
 import { Session, Channel } from "@autorest/extension-base";
-import { Interpretations, XMSEnum } from "./interpretations";
 import { fail, minimum, pascalCase, KnownMediaType } from "@azure-tools/codegen";
-import { ModelerFourOptions } from "./modelerfour-options";
-import { isContentTypeParameterDefined } from "./utils";
+import {
+  Model as oai3,
+  Dereferenced,
+  dereference,
+  Refable,
+  JsonType,
+  IntegerFormat,
+  StringFormat,
+  NumberFormat,
+  MediaType,
+  omitXDashProperties,
+} from "@azure-tools/openapi";
+import * as OpenAPI from "@azure-tools/openapi";
+import { uniq, every } from "lodash";
+import { isDefined } from "../utils";
 import { BodyProcessor } from "./body-processor";
-import { isSchemaBinary } from "./schema-utils";
+import { Interpretations, XMSEnum } from "./interpretations";
+import { ModelerFourOptions } from "./modelerfour-options";
+import { isSchemaAnEnum, isSchemaBinary } from "./schema-utils";
 import { SecurityProcessor } from "./security-processor";
+import { isContentTypeParameterDefined } from "./utils";
 
 /** adds only if the item is not in the collection already
  *
@@ -151,9 +152,10 @@ export class ModelerFour {
     this.processSchemaImpl(schema, name),
   );
   private options: ModelerFourOptions = {};
-  private uniqueNames: Dictionary<any> = {};
+  private uniqueNames: Record<string, any> = {};
   private bodyProcessor: BodyProcessor;
   private securityProcessor: SecurityProcessor;
+  private ignoreHeaders: Set<string> = new Set();
 
   constructor(protected session: Session<oai3>) {
     this.input = session.model; // shadow(session.model, filename);
@@ -166,7 +168,7 @@ export class ModelerFour {
         contact: i.contact,
         license: i.license,
         termsOfService: i.termsOfService,
-        externalDocs: filterOutXDash<ExternalDocumentation>(this.input.externalDocs as any),
+        externalDocs: omitXDashProperties<ExternalDocumentation>(this.input.externalDocs as any),
         extensions: Interpretations.getExtensionProperties(i),
       },
       extensions: Interpretations.getExtensionProperties(this.input),
@@ -214,10 +216,11 @@ export class ModelerFour {
     }
 
     // see how many api versions there are for all the operations
-    const allApiVersions = values(this.inputOperations)
-      .selectMany((each) => <Array<string>>this.interpret.xmsMetaFallback(each.operation, each.pathItem, "apiVersions"))
-      .distinct()
-      .toArray();
+    const allApiVersions = uniq(
+      this.inputOperations.flatMap(
+        (each) => <Array<string>>this.interpret.xmsMetaFallback(each.operation, each.pathItem, "apiVersions"),
+      ),
+    );
     switch (allApiVersions.length) {
       case 0:
         this.useModelNamespace = false;
@@ -230,11 +233,9 @@ export class ModelerFour {
     }
 
     // multiple api versions in play.
-    const multiVersionPerOperation = values(this.inputOperations)
-      .select((each) =>
-        length(<Array<string>>this.interpret.xmsMetaFallback(each.operation, each.pathItem, "apiVersions")),
-      )
-      .any((each) => each > 1);
+    const multiVersionPerOperation = this.inputOperations
+      .map((each) => this.interpret.xmsMetaFallback(each.operation, each.pathItem, "apiVersions").length)
+      .find((each) => each > 1);
     if (!multiVersionPerOperation) {
       // operations have one single api version each
       this.apiVersionParameter = apiVersionParameter || "constant";
@@ -267,7 +268,7 @@ export class ModelerFour {
 
     this.profileFilter = await this.session.getValue("profile", []);
     this.apiVersionFilter = await this.session.getValue("api-version", []);
-
+    this.ignoreHeaders = new Set(this.options["ignore-headers"] ?? []);
     const apiVersionMode = await this.session.getValue("api-version-mode", "auto");
 
     const apiVersionParameter =
@@ -312,13 +313,13 @@ export class ModelerFour {
     return (source ?? []).map((each) => dereference(this.input, each).instance);
   }
 
-  resolveDictionary<T>(source?: Dictionary<Refable<T>>) {
-    return items(source)
-      .linq.select((each) => ({
-        key: each.key,
-        value: dereference(this.input, each.value).instance,
+  resolveDictionary<T>(source?: Record<string, Refable<T>>) {
+    return Object.entries(source ?? {})
+      .map(([key, value]) => ({
+        key,
+        value: dereference(this.input, value).instance,
       }))
-      .where((each) => each.value !== undefined);
+      .filter(isDefined);
   }
 
   location(obj: any): string {
@@ -660,7 +661,7 @@ export class ModelerFour {
       case JsonType.Integer:
         return this.processIntegerSchema("integer", schema);
       case undefined:
-        if (length(schema.enum) > 0 && values(schema.enum).all((each) => typeof each === "string")) {
+        if (schema.enum && schema.enum.length > 0 && every(schema.enum, (x) => typeof x === "string")) {
           this.session.warning(
             `The enum schema '${schema?.["x-ms-metadata"]?.name}' with an undefined type and enum values is ambiguous. This has been auto-corrected to 'type:string'`,
             ["Modeler", "MissingType"],
@@ -712,8 +713,19 @@ export class ModelerFour {
     const type = this.getPrimitiveSchemaForEnum(schema);
     const choices = [...parentChoices, ...this.interpret.getEnumChoices(schema)];
 
+    if (this.options["seal-single-value-enum-by-default"]) {
+      this.session.warning(
+        "`seal-single-value-enum-by-default` is a temporary flag that **WILL** be removed in the future. Please change the spec to add x-ms-enum.modelAsString=false for enums with this issue.",
+        ["Deprecated"],
+      );
+    }
+
+    const singleValueEnumSealed = this.options["seal-single-value-enum-by-default"]
+      ? !alwaysSeal && xmse?.modelAsString !== true
+      : !alwaysSeal && sealed;
+
     // model as string forces it to be a choice/enum.
-    if (!alwaysSeal && xmse?.modelAsString !== true && choices.length === 1) {
+    if (singleValueEnumSealed && choices.length === 1) {
       const constVal = choices[0].value;
 
       return this.codeModel.schemas.add(
@@ -775,6 +787,9 @@ export class ModelerFour {
       this.interpret.getName(name, schema),
       this.interpret.getDescription("", schema),
       null,
+      {
+        serialization: this.interpret.getSerialization(schema),
+      },
     );
     // cache this now before we accidentally recurse on this type.
     this.schemaCache.set(schema, dictSchema);
@@ -843,7 +858,7 @@ export class ModelerFour {
 
     // cache this now before we accidentally recurse on this type.
     this.schemaCache.set(schema, objectSchema);
-    for (const { key: propertyName, value: propertyDeclaration } of items(schema.properties)) {
+    for (const [propertyName, propertyDeclaration] of Object.entries(schema.properties ?? {})) {
       const property = this.resolve(propertyDeclaration);
       this.use(<OpenAPI.Refable<OpenAPI.Schema>>propertyDeclaration, (pSchemaName, pSchema) => {
         const pType = this.processSchema(pSchemaName || `type·for·${propertyName}`, pSchema);
@@ -880,11 +895,12 @@ export class ModelerFour {
     const dictionaryDef = schema.additionalProperties;
 
     // is this more than a straightforward object?
-    const parentCount = length(schema.allOf);
-    const isMoreThanObject = parentCount + length(schema.anyOf) + length(schema.oneOf) > 0 || !!dictionaryDef;
+    const parentCount = schema.allOf?.length ?? 0;
+    const isMoreThanObject =
+      parentCount + (schema.anyOf?.length ?? 0) + (schema.oneOf?.length ?? 0) > 0 || !!dictionaryDef;
 
     // do we have properties at all?
-    const hasProperties = length(schema.properties) > 0;
+    const hasProperties = schema.properties && Object.keys(schema.properties).length > 0;
 
     if (!isMoreThanObject && !hasProperties) {
       // it's an empty object?
@@ -900,37 +916,27 @@ export class ModelerFour {
     const objectSchema = this.createObjectSchema(name, schema);
 
     let i = 0;
-    const parents: Array<ComplexSchema> = <any>values(schema.allOf)
-      .select((sch) =>
-        this.use(sch, (n, s) => {
-          return this.processSchema(n || `${name}.allOf.${i++}`, s);
-        }),
-      )
-      .toArray();
-    const orTypes = values(schema.anyOf)
-      .select((sch) =>
-        this.use(sch, (n, s) => {
-          return this.processSchema(n || `${name}.anyOf.${i++}`, s);
-        }),
-      )
-      .toArray();
-    const xorTypes = values(schema.oneOf)
-      .select((sch) =>
-        this.use(sch, (n, s) => {
-          return this.processSchema(n || `${name}.oneOf.${i++}`, s);
-        }),
-      )
-      .toArray();
+    const parents: Array<ComplexSchema> = Object.values(schema.allOf ?? {}).map((sch) =>
+      this.use(sch, (n, s) => {
+        return this.processSchema(n || `${name}.allOf.${i++}`, s);
+      }),
+    );
+    const orTypes = Object.values(schema.anyOf ?? {}).map((sch) =>
+      this.use(sch, (n, s) => {
+        return this.processSchema(n || `${name}.anyOf.${i++}`, s);
+      }),
+    );
+    const xorTypes = Object.values(schema.oneOf ?? {}).map((sch) =>
+      this.use(sch, (n, s) => {
+        return this.processSchema(n || `${name}.oneOf.${i++}`, s);
+      }),
+    );
 
     // add it to the upcoming and schema set
     // andTypes.unshift(objectSchema);
 
     // set the apiversion namespace
-    const m = minimum(
-      values(objectSchema.apiVersions)
-        .select((each) => each.version)
-        .toArray(),
-    );
+    const m = minimum((objectSchema.apiVersions ?? []).map((each) => each.version));
     objectSchema.language.default.namespace = this.useModelNamespace ? pascalCase(`Api ${m}`, false) : "";
 
     // tell it should be internal if possible
@@ -1050,9 +1056,8 @@ export class ModelerFour {
     return this.schemaCache.process(schema, name) || fail("Unable to process schema.");
   }
 
-  trap = new Set();
-
-  processSchemaImpl(schema: OpenAPI.Schema, name: string): Schema {
+  private trap = new Set();
+  private processSchemaImpl(schema: OpenAPI.Schema, name: string): Schema {
     if (this.trap.has(schema)) {
       throw new Error(
         `RECURSING!  Saw schema ${schema.title || schema["x-ms-metadata"]?.name || name} more than once.`,
@@ -1060,14 +1065,8 @@ export class ModelerFour {
     }
     this.trap.add(schema);
 
-    const parents = schema.allOf?.map((x) => this.use(x, (n, i) => this.processSchema(n, i)));
-
     // handle enums differently early
-    if (
-      schema.enum ||
-      schema["x-ms-enum"] ||
-      parents?.find((x) => x.type === SchemaType.SealedChoice || x.type === SchemaType.Choice)
-    ) {
+    if (isSchemaAnEnum(schema, this.input)) {
       return this.processChoiceSchema(name, schema);
     }
 
@@ -1294,7 +1293,7 @@ export class ModelerFour {
     throw new Error(`Unrecognized schema type:'${schema.type}' / format: ${schema.format} ${JSON.stringify(schema)} `);
   }
 
-  filterMediaTypes(oai3Content: Dictionary<MediaType> | undefined) {
+  filterMediaTypes(oai3Content: Record<string, MediaType> | undefined) {
     const mediaTypeGroups = this.bodyProcessor.groupMediaTypes(oai3Content);
 
     // filter out invalid combinations
@@ -1397,12 +1396,17 @@ export class ModelerFour {
     }
     const choices = http.mediaTypes.sort().map((each) => new ChoiceValue(each, `Content Type '${each}'`, each));
     const check = JSON.stringify(choices);
+    const extensible = this.options["content-type-extensible"];
+    const choiceList: (ChoiceSchema | SealedChoiceSchema)[] | undefined = extensible
+      ? this.codeModel.schemas.choices
+      : this.codeModel.schemas.sealedChoices;
+    const ctr = extensible ? SealedChoiceSchema : SealedChoiceSchema;
 
     // look for a sealed choice schema with that set of choices
     return (
-      this.codeModel.schemas.sealedChoices?.find((each) => JSON.stringify(each.choices) === check) ||
+      choiceList?.find((each: ChoiceSchema | SealedChoiceSchema) => JSON.stringify(each.choices) === check) ||
       this.codeModel.schemas.add(
-        new SealedChoiceSchema(this.getUniqueName("ContentType"), "Content type for upload", {
+        new ctr(this.getUniqueName("ContentType"), "Content type for upload", {
           choiceType: this.stringSchema,
           choices,
         }),
@@ -1471,7 +1475,7 @@ export class ModelerFour {
 
     const bodyName = body.instance?.["x-ms-requestBody-name"] ?? "data";
 
-    const requestSchema = values(kmtBinary).first((each) => !!each.schema.instance)?.schema;
+    const requestSchema = kmtBinary.find((x) => !!x.schema.instance)?.schema;
 
     const pSchema =
       kmt === KnownMediaType.Text
@@ -1545,7 +1549,7 @@ export class ModelerFour {
       );
     }
 
-    const requestSchema = values(kmtObject).first((each) => !!each.schema.instance)?.schema;
+    const requestSchema = kmtObject.find((each) => !!each.schema.instance)?.schema;
 
     if (kmt === KnownMediaType.Multipart || kmt === KnownMediaType.Form) {
       if (!requestSchema || !requestSchema.instance) {
@@ -1556,7 +1560,7 @@ export class ModelerFour {
       // multipart/form-data parameters be modeled as object schema properties
       // but we must turn them back into operation parameters so that code
       // generators will generate them as method parameters.
-      for (const { key: propertyName, value: propertyDeclaration } of items(requestSchema.instance.properties)) {
+      for (const [propertyName, propertyDeclaration] of Object.entries(requestSchema.instance.properties ?? {})) {
         const property = this.resolve(propertyDeclaration);
         this.use(<OpenAPI.Refable<OpenAPI.Schema>>propertyDeclaration, (pSchemaName, pSchema) => {
           const pType = this.processSchema(pSchemaName || `type·for·${propertyName}`, pSchema);
@@ -1681,7 +1685,7 @@ export class ModelerFour {
     let baseUri = "";
     // create $host parameters from servers information.
     // $host is comprised of []
-    const servers = values(httpOperation.servers).toArray();
+    const servers = httpOperation.servers ?? [];
 
     switch (servers.length) {
       case 0:
@@ -1700,7 +1704,7 @@ export class ModelerFour {
           const uri =
             server.url.endsWith("/") && path.startsWith("/") ? server.url.substr(0, server.url.length - 1) : server.url;
 
-          if (length(server.variables) === 0) {
+          if (server.variables === undefined || Object.keys(server.variables).length === 0) {
             // scenario 1 : single static value
 
             // check if we have the $host parameter foor this uri yet.
@@ -1732,7 +1736,7 @@ export class ModelerFour {
           } else {
             // scenario 3 : single parameterized value
 
-            for (const { key: variableName, value: variable } of items(server.variables).where((each) => !!each.key)) {
+            for (const [variableName, variable] of Object.entries(server.variables ?? {}).filter(([key]) => !!key)) {
               const sch = this.getServerVariableSchema(variableName, variable);
 
               const clientdefault = variable.default ? variable.default : undefined;
@@ -1787,7 +1791,7 @@ export class ModelerFour {
         break;
 
       default: {
-        if (values(servers).any((each) => length(each.variables) > 0)) {
+        if (servers.find((each) => Object.keys(each.variables ?? {}).length > 0)) {
           // scenario 4 : multiple parameterized value - not valid.
           throw new Error(
             `Operation ${pathItem?.["x-ms-metadata"]?.path} has multiple server information with parameterized values.`,
@@ -1957,95 +1961,102 @@ export class ModelerFour {
   }
 
   processParameters(httpOperation: OpenAPI.HttpOperation, operation: Operation, pathItem: OpenAPI.PathItem) {
-    values(httpOperation.parameters)
-      .select((each) => dereference(this.input, each))
-      .select((pp) => {
-        const parameter = pp.instance;
+    const parameters = Object.values(httpOperation.parameters ?? {})
+      .map((each) => dereference(this.input, each))
+      .filter((x) => !this.isParameterIgnoredHeader(x.instance));
 
-        this.use(parameter.schema, (name, schema) => {
-          if (this.apiVersionMode !== "none" && this.interpret.isApiVersionParameter(parameter)) {
-            return this.processApiVersionParameter(parameter, operation, pathItem);
+    for (const pp of parameters) {
+      const parameter = pp.instance;
+
+      this.use(parameter.schema, (name, schema) => {
+        if (this.apiVersionMode !== "none" && this.interpret.isApiVersionParameter(parameter)) {
+          return this.processApiVersionParameter(parameter, operation, pathItem);
+        }
+
+        // Not an APIVersion Parameter
+        const implementation = pp.fromRef
+          ? "method" === <any>parameter["x-ms-parameter-location"]
+            ? ImplementationLocation.Method
+            : ImplementationLocation.Client
+          : "client" === <any>parameter["x-ms-parameter-location"]
+          ? ImplementationLocation.Client
+          : ImplementationLocation.Method;
+
+        const preferredName = this.interpret.getPreferredName(parameter, schema["x-ms-client-name"] || parameter.name);
+        if (implementation === ImplementationLocation.Client) {
+          // check to see of it's already in the global parameters
+          const p = this.codeModel.findGlobalParameter((each) => each.language.default.name === preferredName);
+          if (p) {
+            return operation.addParameter(p);
           }
+        }
+        let parameterSchema = this.processSchema(name || "", schema);
 
-          // Not an APIVersion Parameter
-          const implementation = pp.fromRef
-            ? "method" === <any>parameter["x-ms-parameter-location"]
-              ? ImplementationLocation.Method
-              : ImplementationLocation.Client
-            : "client" === <any>parameter["x-ms-parameter-location"]
-            ? ImplementationLocation.Client
-            : ImplementationLocation.Method;
+        // Track the usage of this schema as an input with media type
+        this.trackSchemaUsage(parameterSchema, { usage: [SchemaContext.Input] });
 
-          const preferredName = this.interpret.getPreferredName(
-            parameter,
-            schema["x-ms-client-name"] || parameter.name,
+        if (parameter.in === ParameterLocation.Header && "x-ms-header-collection-prefix" in parameter) {
+          const dictionarySchema = this.codeModel.schemas.add(
+            new DictionarySchema(
+              parameterSchema.language.default.name,
+              parameterSchema.language.default.description,
+              parameterSchema,
+            ),
           );
-          if (implementation === ImplementationLocation.Client) {
-            // check to see of it's already in the global parameters
-            const p = this.codeModel.findGlobalParameter((each) => each.language.default.name === preferredName);
-            if (p) {
-              return operation.addParameter(p);
-            }
-          }
-          let parameterSchema = this.processSchema(name || "", schema);
+          this.trackSchemaUsage(dictionarySchema, { usage: [SchemaContext.Input] });
+          parameterSchema = dictionarySchema;
+        }
 
-          // Track the usage of this schema as an input with media type
-          this.trackSchemaUsage(parameterSchema, { usage: [SchemaContext.Input] });
-
-          if (parameter.in === ParameterLocation.Header && "x-ms-header-collection-prefix" in parameter) {
-            const dictionarySchema = this.codeModel.schemas.add(
-              new DictionarySchema(
-                parameterSchema.language.default.name,
-                parameterSchema.language.default.description,
-                parameterSchema,
+        /* regular, everyday parameter */
+        const newParam = operation.addParameter(
+          new Parameter(preferredName, this.interpret.getDescription("", parameter), parameterSchema, {
+            required: parameter.required ? true : undefined,
+            implementation,
+            extensions: this.interpret.getExtensionProperties(parameter),
+            deprecated: this.interpret.getDeprecation(parameter),
+            nullable: parameter.nullable || schema.nullable,
+            protocol: {
+              http: new HttpParameter(
+                parameter.in,
+                parameter.style
+                  ? {
+                      style: <SerializationStyle>(<unknown>parameter.style),
+                      explode: parameter.explode,
+                    }
+                  : undefined,
               ),
-            );
-            this.trackSchemaUsage(dictionarySchema, { usage: [SchemaContext.Input] });
-            parameterSchema = dictionarySchema;
-          }
-
-          /* regular, everyday parameter */
-          const newParam = operation.addParameter(
-            new Parameter(preferredName, this.interpret.getDescription("", parameter), parameterSchema, {
-              required: parameter.required ? true : undefined,
-              implementation,
-              extensions: this.interpret.getExtensionProperties(parameter),
-              deprecated: this.interpret.getDeprecation(parameter),
-              nullable: parameter.nullable || schema.nullable,
-              protocol: {
-                http: new HttpParameter(
-                  parameter.in,
-                  parameter.style
-                    ? {
-                        style: <SerializationStyle>(<unknown>parameter.style),
-                        explode: parameter.explode,
-                      }
-                    : undefined,
-                ),
+            },
+            language: {
+              default: {
+                serializedName: parameter.name,
               },
-              language: {
-                default: {
-                  serializedName: parameter.name,
-                },
-              },
-              clientDefaultValue: this.interpret.getClientDefault(parameter, schema),
-            }),
-          );
+            },
+            clientDefaultValue: this.interpret.getClientDefault(parameter, schema),
+          }),
+        );
 
-          // if allowReserved is present, add the extension attribute too.
-          if (parameter.allowReserved) {
-            newParam.extensions = newParam.extensions ?? {};
-            newParam.extensions["x-ms-skip-url-encoding"] = true;
-          }
+        // if allowReserved is present, add the extension attribute too.
+        if (parameter.allowReserved) {
+          newParam.extensions = newParam.extensions ?? {};
+          newParam.extensions["x-ms-skip-url-encoding"] = true;
+        }
 
-          if (implementation === ImplementationLocation.Client) {
-            this.codeModel.addGlobalParameter(newParam);
-          }
+        if (implementation === ImplementationLocation.Client) {
+          this.codeModel.addGlobalParameter(newParam);
+        }
 
-          return newParam;
-        });
-      })
-      .toArray();
+        return newParam;
+      });
+    }
+  }
+
+  /**
+   * Resolve if the parameter is a header that should be ignored.
+   * @param parmeter Operation parameter.
+   * @returns boolean if parameter should be ignored.
+   */
+  private isParameterIgnoredHeader(parmeter: OpenAPI.Parameter) {
+    return parmeter.in === ParameterLocation.Header && this.ignoreHeaders.has(parmeter.name);
   }
 
   processResponses(httpOperation: OpenAPI.HttpOperation, operation: Operation) {
@@ -2057,7 +2068,7 @@ export class ModelerFour {
 
       const knownMediaTypes = this.filterMediaTypes(response.content);
 
-      if (length(knownMediaTypes) === 0) {
+      if (knownMediaTypes.size === 0) {
         // it has no actual response *payload*
         // so we just want to create a simple response .
         const rsp = new Response({
@@ -2076,14 +2087,13 @@ export class ModelerFour {
           operation.addResponse(rsp);
         }
       } else {
-        for (const { key: knownMediaType, value: mediatypes } of items(knownMediaTypes)) {
-          const allMt = mediatypes.map((each) => each.mediaType);
+        for (const [knownMediaType, mediatypes] of knownMediaTypes.entries()) {
+          const allMt = mediatypes.map((each: any) => each.mediaType);
           for (const mediaType of allMt) {
             acceptTypes.add(mediaType);
           }
 
           const headers = this.processResponseHeaders(response.headers);
-
           if (knownMediaType === KnownMediaType.Binary) {
             // binary response needs different response type.
             const rsp = new BinaryResponse({
@@ -2165,9 +2175,9 @@ export class ModelerFour {
     const mediaTypes = Array.from(acceptTypes);
     if (this.options["always-create-accept-parameter"] === true && acceptTypes.size > 0) {
       const acceptSchema = this.getAcceptParameterSchema(mediaTypes);
-      if (!values(operation.parameters).first(isAcceptHeaderParam)) {
-        for (const request of values(operation.requests)) {
-          if (values(request.parameters).first(isAcceptHeaderParam)) {
+      if (!operation.parameters?.find(isAcceptHeaderParam)) {
+        for (const request of operation.requests ?? []) {
+          if (request.parameters?.find(isAcceptHeaderParam)) {
             // Already has an accept parameter, move on to the next.
             continue;
           }
@@ -2192,7 +2202,7 @@ export class ModelerFour {
     }
   }
 
-  private processResponseHeaders(responseHeaders: Dictionary<Refable<OpenAPI.Header>> | undefined): HttpHeader[] {
+  private processResponseHeaders(responseHeaders: Record<string, Refable<OpenAPI.Header>> | undefined): HttpHeader[] {
     const headers: HttpHeader[] = [];
     for (const { key: headerName, value: header } of this.resolveDictionary(responseHeaders)) {
       this.use(header.schema, (_name, sch) => {
@@ -2287,7 +2297,7 @@ export class ModelerFour {
         this.processSerializedObject(KnownMediaType.Multipart, kmtMultipart, operation, requestBody);
       }
       // ensure the protocol information is set on the requests
-      for (const request of values(operation.requests)) {
+      for (const request of operation.requests ?? []) {
         is(request.protocol.http);
         request.protocol.http.method = httpMethod;
         request.protocol.http.path = path;
@@ -2395,10 +2405,10 @@ export class ModelerFour {
           schema.children?.all?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
           schema.children?.immediate?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
 
-          items(schema.discriminator?.all).forEach(({ key: k, value: d }) => {
+          Object.values(schema.discriminator?.all ?? {}).forEach((d) => {
             innerApplySchemaUsage(d, schemaUsage);
           });
-          values(schema.discriminator?.immediate).forEach((d) => {
+          Object.values(schema.discriminator?.immediate ?? {}).forEach((d) => {
             innerApplySchemaUsage(d, schemaUsage);
           });
         }

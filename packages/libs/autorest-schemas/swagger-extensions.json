@@ -6,10 +6,7 @@
   "required": ["swagger", "info", "paths"],
   "additionalProperties": false,
   "patternProperties": {
-    "^x-(?!ms-).*$": {
-      "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/vendorExtension"
-    },
-    "^x-ms-sf-.*$": {
+    "^x-.*$": {
       "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/vendorExtension"
     }
   },
@@ -79,6 +76,9 @@
     },
     "x-ms-secondary-file": {
       "type": "boolean"
+    },
+    "x-ms-permissions": {
+      "$ref": "#/definitions/xmsPermissions"
     }
   },
   "definitions": {
@@ -182,7 +182,7 @@
       },
       "additionalProperties": {
         "not": true,
-        "errorMessage": "should only have path names that start with `/` but found ${0#}"
+        "errorMessage": "must only have path names that start with `/` but found ${0#}"
       }
     },
     "definitions": {
@@ -369,11 +369,8 @@
         "type": "object",
         "additionalProperties": false,
         "patternProperties": {
-          "^x-(?!ms-).*$": {
-            "$ref": "#/definitions/vendorExtension"
-          },
-          "^x-ms-sf-.*$": {
-            "$ref": "#/definitions/vendorExtension"
+          "^x-.*$": {
+            "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/vendorExtension"
           }
         }
       }
@@ -1685,7 +1682,16 @@
       ]
     },
     "xmsPaths": {
-      "$ref": "#/definitions/paths"
+      "type": "object",
+      "description": "Relative paths to the individual endpoints. They must be relative to the 'basePath'.",
+      "patternProperties": {
+        "^x-.*$": {
+          "$ref": "#/definitions/vendorExtension"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/pathItem"
+      }
     },
     "xmsExternal": {
       "type": "boolean"
@@ -1712,6 +1718,24 @@
         },
         "operationName": {
           "type": ["string", "null"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "xmsPermissions": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "type": "string"
+        },
+        "dataActions": {
+          "type": "string"
+        },
+        "rolesWithThesePermissions": {
+          "type": "string"
+        },
+        "moreInfoLink": {
+          "type": "string"
         }
       },
       "additionalProperties": false

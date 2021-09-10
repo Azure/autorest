@@ -1,7 +1,7 @@
-import { MatcherState } from "expect";
 import * as fs from "fs";
-import SnapshotState from "jest-snapshot/build/State";
 import * as path from "path";
+import { MatcherState } from "expect";
+import SnapshotState from "jest-snapshot/build/State";
 
 declare global {
   namespace jest {

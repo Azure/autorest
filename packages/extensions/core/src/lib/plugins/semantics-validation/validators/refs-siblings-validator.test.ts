@@ -1,6 +1,5 @@
 import oai3 from "@azure-tools/openapi";
 import { SemanticErrorCodes } from "../types";
-import { validateDiscriminator } from "./discriminator-validator";
 import { validateRefsSiblings } from "./refs-siblings-validator";
 
 const baseModel: oai3.Model = {
@@ -68,7 +67,7 @@ describe("Semantic Validation: $ref siblings", () => {
           Pet: {
             properties: {
               foo: {
-                "$ref": "#/components/schemas/Bar",
+                $ref: "#/components/schemas/Bar",
                 "x-custom": "This is a description for the property",
               },
             },

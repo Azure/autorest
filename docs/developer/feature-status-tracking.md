@@ -7,12 +7,14 @@ This is a table tracking the implementation of new features across Autorest gene
 | [`AnyObject` vs `Any`][any-feat]         |              | `4.19.0`            | `5.8.0` | `v3.0.0-beta.20210428.3`            |
 | [Security standarization][security-feat] |              | `4.19.0`            |         | [WIP: PR#1128][security-csharp-wip] |
 | [Deprecation][deprecation-feat]          |              | `4.19.0`            |
+| [Header ignore][header-ignore]           |              | `4.20.0`            |
 
 <!-- Feature links -->
 
 [any-feat]: https://github.com/Azure/autorest/pull/4067
 [security-feat]: https://github.com/Azure/autorest/pull/4018
 [deprecation-feat]: https://github.com/Azure/autorest/pull/4033
+[header-ignore]: https://github.com/Azure/autorest/pull/4147
 
 <!-- Generator links -->
 

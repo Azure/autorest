@@ -1,15 +1,8 @@
-import { items, clone, values, keys, Dictionary } from "@azure-tools/linq";
-import { typeOf, isPrimitive } from "./type";
+import { typeOf } from "./type";
 
-const sourceMarker = "_#source#_";
-const mapMarker = "_#map#_";
 const getMap = "_#get-map#_";
 const getPosition = "_#get-position#_";
 const getActualValue = "_#get-value#_";
-const noSource = {
-  $f: "none",
-  $p: "none",
-};
 
 export function getMappings(instance: any) {
   return instance[getMap];
@@ -19,7 +12,7 @@ export function enableSourceTracking<T extends object>(
   instance: T,
   enforce = true,
   path = "$",
-  map = new Dictionary<any>(),
+  map: Record<string, any> = {},
   cache = new Map<string, any>(),
 ): T {
   let proxy = cache.get(path);

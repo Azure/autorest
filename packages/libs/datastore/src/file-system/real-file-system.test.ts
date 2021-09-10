@@ -1,5 +1,5 @@
-import { ResolveUri, CreateFileOrFolderUri } from "@azure-tools/uri";
 import { join } from "path";
+import { ResolveUri, CreateFileOrFolderUri } from "@azure-tools/uri";
 import { UriNotFoundError } from "./errors";
 import { RealFileSystem } from "./real-file-system";
 

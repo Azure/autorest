@@ -1,5 +1,5 @@
 import { walk } from "@azure-tools/json";
-import oai3, { excludeXDash, omitXDashProperties } from "@azure-tools/openapi";
+import oai3 from "@azure-tools/openapi";
 import { SemanticError, SemanticErrorCodes } from "../types";
 
 /**

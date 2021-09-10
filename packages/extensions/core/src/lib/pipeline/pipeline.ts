@@ -5,6 +5,8 @@
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
+import { createHash } from "crypto";
+import { promisify } from "util";
 import {
   DataHandle,
   DataSource,
@@ -16,19 +18,16 @@ import {
   PipeState,
   mergePipeStates,
 } from "@azure-tools/datastore";
-import { AutorestContext } from "../context";
-import { Channel } from "../message";
-import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
-
-import { createArtifactEmitterPlugin } from "../plugins/emitter";
-import { createHash } from "crypto";
-import { isCached, readCache, writeCache } from "./pipeline-cache";
-import { values } from "@azure-tools/linq";
-import { CORE_PLUGIN_MAP } from "../plugins";
-import { loadPlugins, PipelinePluginDefinition } from "./plugin-loader";
 import { mapValues, omitBy } from "lodash";
+import { AutorestContext } from "../context";
+import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
+import { CORE_PLUGIN_MAP } from "../plugins";
+import { createArtifactEmitterPlugin } from "../plugins/emitter";
+import { isCached, readCache, writeCache } from "./pipeline-cache";
+import { loadPlugins, PipelinePluginDefinition } from "./plugin-loader";
 
 const safeEval = createSandbox();
+const setImmediatePromise = promisify(setImmediate);
 
 const md5 = (content: any) => (content ? createHash("md5").update(JSON.stringify(content)).digest("hex") : undefined);
 
@@ -97,12 +96,9 @@ function buildPipeline(
     if (!cfg.scope) {
       scope = `pipeline.${stageName}`;
     }
-    const inputs: Array<string> = (!cfg.input
-      ? []
-      : Array.isArray(cfg.input)
-      ? cfg.input
-      : [cfg.input]
-    ).map((x: string) => resolvePipelineStageName(stageName, x));
+    const inputs: Array<string> = (!cfg.input ? [] : Array.isArray(cfg.input) ? cfg.input : [cfg.input]).map(
+      (x: string) => resolvePipelineStageName(stageName, x),
+    );
 
     const suffixes: Array<string> = [];
     // adds nodes using at least suffix `suffix`, the input nodes called `inputs` using the context `config`
@@ -280,10 +276,9 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     // or add pass-thru: true in a pipline configuration step.
     const configEntry = context.GetEntry(node.configScope.last.toString());
     const passthru =
-      configEntry?.["pass-thru"] === true ||
-      values(configView.GetEntry("pass-thru")).any((each) => each === pluginName);
+      configEntry?.["pass-thru"] === true || configView.config["pass-thru"]?.find((x) => x === pluginName);
     const usenull =
-      configEntry?.["null"] === true || values(configView.GetEntry("null")).any((each) => each === pluginName);
+      configEntry?.["null"] === true || configView.GetEntry("null")?.find((x: string) => x === pluginName);
 
     const plugin = usenull
       ? CORE_PLUGIN_MAP.null
@@ -298,7 +293,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     }
 
     if (inputScope.skip) {
-      context.Message({ Channel: Channel.Debug, Text: `${nodeName} - SKIPPING` });
+      context.debug(`${nodeName} - SKIPPING`);
       return inputScope;
     }
     try {
@@ -308,7 +303,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
         // generate the key used to store/access cached content
         const names = await inputScope.Enum();
         const data = (
-          await Promise.all(names.map((name) => inputScope.ReadStrict(name).then((uri) => md5(uri.ReadData()))))
+          await Promise.all(names.map((name) => inputScope.readStrict(name).then((uri) => md5(uri.readData()))))
         ).sort();
 
         cacheKey = md5([context.configFileFolderUri, nodeName, ...data].join("«"));
@@ -323,27 +318,28 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
         (await isCached(cacheKey))
       ) {
         // shortcut -- get the outputs directly from the cache.
-        context.Message({
-          Channel: times ? Channel.Information : Channel.Debug,
-          Text: `${nodeName} - CACHED inputs = ${(await inputScope.Enum()).length} [0.0 s]`,
+        context.log({
+          level: times ? "information" : "debug",
+          message: `${nodeName} - CACHED inputs = ${(await inputScope.enum()).length} [0.0 s]`,
         });
 
         return await readCache(cacheKey, context.DataStore.getDataSink(node.outputArtifact));
       }
 
       const t1 = process.uptime() * 100;
-      context.Message({
-        Channel: times ? Channel.Information : Channel.Debug,
-        Text: `${nodeName} - START inputs = ${(await inputScope.Enum()).length}`,
+      context.log({
+        level: times ? "information" : "debug",
+        message: `${nodeName} - START inputs = ${(await inputScope.enum()).length}`,
       });
 
       // creates the actual plugin.
       const scopeResult = await plugin(context, inputScope, context.DataStore.getDataSink(node.outputArtifact));
       const t2 = process.uptime() * 100;
 
-      context.Message({
-        Channel: times ? Channel.Information : Channel.Debug,
-        Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]`,
+      const memSuffix = context.config.debug ? `[${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)} MB]` : "";
+      context.log({
+        level: times ? "information" : "debug",
+        message: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]${memSuffix}`,
       });
 
       // if caching is enabled, let's cache this scopeResult.
@@ -359,11 +355,14 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
         }
       }
 
+      // Yield the event loop.
+      await setImmediatePromise();
+
       return scopeResult;
     } catch (e) {
       if (configView.config.debug) {
         // eslint-disable-next-line no-console
-        console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);
+        console.error(`${__filename} - FAILURE`, e);
       }
       throw e;
     }

@@ -1,6 +1,44 @@
 # Change Log - autorest
 
-This log was last generated on Thu, 20 May 2021 16:41:13 GMT and should not be manually modified.
+This log was last generated on Wed, 08 Sep 2021 15:39:22 GMT and should not be manually modified.
+
+## 3.4.0
+Wed, 08 Sep 2021 15:39:22 GMT
+
+### Minor changes
+
+- *Uptake** New logger
+
+### Patches
+
+- **Fix** If an error occures in the config loading, ignore and try to load a version of @autorest/core
+
+## 3.3.2
+Tue, 20 Jul 2021 16:57:32 GMT
+
+### Patches
+
+- **Fix** `--memory` flag not working
+
+## 3.3.0
+Mon, 19 Jul 2021 15:15:42 GMT
+
+### Minor changes
+
+- **Added** Support for new `--memory` flag to configure core max memory
+- Drop support for node 10
+
+## 3.2.3
+Thu, 03 Jun 2021 22:37:55 GMT
+
+_Version update only_
+
+## 3.2.2
+Wed, 26 May 2021 18:31:17 GMT
+
+### Patches
+
+- **Bump** @autorest/configuration with fix with yarn/cli.js not found
 
 ## 3.2.1
 Thu, 20 May 2021 16:41:13 GMT

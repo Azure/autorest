@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { isDirectory, isFile, readdir } from "@azure-tools/async-io";
 import { spawn } from "child_process";
 import * as path from "path";
+import { isDirectory, isFile, readdir } from "@azure-tools/async-io";
 
 export function cmdlineToArray(
   text: string,

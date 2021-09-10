@@ -1,6 +1,3 @@
-import { Session } from "@autorest/extension-base";
-import * as OpenAPI from "@azure-tools/openapi";
-import { values, length, items, ToDictionary, Dictionary } from "@azure-tools/linq";
 import {
   ChoiceSchema,
   XmlSerlializationFormat,
@@ -10,9 +7,17 @@ import {
   ChoiceValue,
   SetType,
 } from "@autorest/codemodel";
-import { StringFormat, JsonType, ParameterLocation } from "@azure-tools/openapi";
+import { Session } from "@autorest/extension-base";
 import { getPascalIdentifier } from "@azure-tools/codegen";
-
+import * as OpenAPI from "@azure-tools/openapi";
+import {
+  StringFormat,
+  JsonType,
+  ParameterLocation,
+  includeXDashKeys,
+  includeXDashProperties,
+} from "@azure-tools/openapi";
+import { keyBy } from "lodash";
 export interface XMSEnum {
   modelAsString?: boolean;
   values: [{ value: any; description?: string; name?: string }];
@@ -37,7 +42,7 @@ const specialCharacterMapping: { [character: string]: string } = {
   "!": "exclamation mark",
   '"': "quotation mark",
   "#": "number sign",
-  "$": "dollar sign",
+  $: "dollar sign",
   "%": "percent sign",
   "&": "ampersand",
   "'": "apostrophe",
@@ -60,7 +65,7 @@ const specialCharacterMapping: { [character: string]: string } = {
   "\\": "backslash",
   "]": "right square bracket",
   "^": "caret",
-  "_": "underscore",
+  _: "underscore",
   "`": "grave accent",
   "{": "left curly brace",
   "|": "vertical bar",
@@ -195,10 +200,16 @@ export class Interpretations {
     const hasAdditionalProps =
       typeof schema.additionalProperties === "boolean"
         ? schema.additionalProperties
-        : length(schema.additionalProperties) !== 0;
+        : Object.keys(schema.additionalProperties ?? {}).length !== 0;
+
+    const allOfCount = schema.allOf?.length ?? 0;
+    const anyOfCount = schema.anyOf?.length ?? 0;
+    const oneOfCount = schema.oneOf?.length ?? 0;
+    const propertyCount = Object.keys(schema.properties ?? {}).length;
+
     return (
       schema.type === JsonType.Object &&
-      length(schema.allOf) + length(schema.anyOf) + length(schema.oneOf) + length(schema.properties) === 0 &&
+      allOfCount + anyOfCount + oneOfCount + propertyCount === 0 &&
       !hasAdditionalProps &&
       !schema.discriminator
     );
@@ -240,23 +251,20 @@ export class Interpretations {
   }
   getApiVersions(schema: OpenAPI.Schema | OpenAPI.HttpOperation | OpenAPI.PathItem): Array<ApiVersion> | undefined {
     if (schema["x-ms-metadata"] && schema["x-ms-metadata"]["apiVersions"]) {
-      const v = values(<Array<string>>schema["x-ms-metadata"]["apiVersions"])
-        .select((each) =>
-          SetType(ApiVersion, {
-            version: each.replace(/^-/, "").replace(/\+$/, ""),
-            range: each.startsWith("-") ? <any>"-" : each.endsWith("+") ? "+" : undefined,
-          }),
-        )
-        .toArray();
+      const v = (schema["x-ms-metadata"]["apiVersions"] ?? []).map((each: string) =>
+        SetType(ApiVersion, {
+          version: each.replace(/^-/, "").replace(/\+$/, ""),
+          range: each.startsWith("-") ? <any>"-" : each.endsWith("+") ? "+" : undefined,
+        }),
+      );
+
       return v;
     }
     return undefined;
   }
   getApiVersionValues(node: OpenAPI.Schema | OpenAPI.HttpOperation | OpenAPI.PathItem): Array<string> {
     if (node["x-ms-metadata"] && node["x-ms-metadata"]["apiVersions"]) {
-      return values(<Array<string>>node["x-ms-metadata"]["apiVersions"])
-        .distinct()
-        .toArray();
+      return [...new Set<string>((node["x-ms-metadata"]["apiVersions"] as any) ?? [])];
     }
     return [];
   }
@@ -308,9 +316,9 @@ export class Interpretations {
     }
 
     // synthesize from tags.
-    if (original.tags && length(original.tags) > 0) {
+    if (original.tags && original.tags.length > 0) {
       const newOperationId =
-        length(original.tags) === 1 ? `${original.tags[0]}` : `${original.tags[0]}_${original.tags[1]}`;
+        original.tags.length === 1 ? `${original.tags[0]}` : `${original.tags[0]}_${original.tags[1]}`;
 
       this.session.warning(
         `Generating 'operationId' to '${newOperationId}' for '${httpMethod}' operation on path '${path}' `,
@@ -355,7 +363,7 @@ export class Interpretations {
 
   /** gets the operation path from metadata, falls back to the OAI3 path key */
   getPath(pathItem: OpenAPI.PathItem, operation: OpenAPI.HttpOperation, path: string) {
-    return this.xmsMeta(pathItem, "path") || this.xmsMeta(operation, "path") || path;
+    return this.xmsMeta(pathItem, "path") ?? this.xmsMeta(operation, "path") ?? path;
   }
 
   /*
@@ -405,7 +413,10 @@ export class Interpretations {
     return new ChoiceSchema(name, this.getDescription("MISSING-SERVER-VARIABLE-ENUM-DESCRIPTION", somethingWithEnum));
   }
 
-  getExtensionProperties(dictionary: Dictionary<any>, additional?: Dictionary<any>): Dictionary<any> | undefined {
+  getExtensionProperties(
+    dictionary: Record<string, any>,
+    additional?: Record<string, any>,
+  ): Record<string, any> | undefined {
     const main = Interpretations.getExtensionProperties(dictionary);
     if (additional) {
       const more = Interpretations.getExtensionProperties(additional);
@@ -415,15 +426,18 @@ export class Interpretations {
     }
     return main;
   }
-  getClientDefault(dictionary: Dictionary<any>, additional?: Dictionary<any>): string | number | boolean | undefined {
+  getClientDefault(
+    dictionary: Record<string, any>,
+    additional?: Record<string, any>,
+  ): string | number | boolean | undefined {
     return dictionary?.["x-ms-client-default"] || additional?.["x-ms-client-default"] || undefined;
   }
 
-  static getExtensionProperties(dictionary: Dictionary<any>): Dictionary<any> | undefined {
-    const result = ToDictionary(OpenAPI.includeXDash(dictionary), (each) => dictionary[each]);
+  static getExtensionProperties(dictionary: Record<string, any>): Record<string, any> | undefined {
+    const result: Record<string, any> = includeXDashProperties(dictionary);
     for (const each of removeKnownParameters) {
       delete result[each];
     }
-    return length(result) === 0 ? undefined : result;
+    return Object.keys(result).length === 0 ? undefined : result;
   }
 }
