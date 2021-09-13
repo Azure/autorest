@@ -46,6 +46,6 @@ If you would like to actually debug through a language generator's code, see our
 [csharp_generation]: https://github.com/Azure/autorest.csharp/tree/feature/v3/docs/troubleshooting.md#generation-errors
 [typescript_generation]: https://github.com/Azure/autorest.typescript/tree/v6/docs/troubleshooting.md#generation-errors
 [python_debug]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/troubleshooting.md#debugging
-[java_debug]: https://github.com/Azure/autorest.java/blob/v4/docs/client/troubleshooting.md#debugging
+[java_debug]: https://github.com/Azure/autorest.java/blob/main/docs/client/troubleshooting.md#debugging
 [csharp_debug]: https://github.com/Azure/autorest.csharp/tree/feature/v3/docs/troubleshooting.md#debugging
 [typescript_debug]: https://github.com/Azure/autorest.typescript/tree/v6/docs/troubleshooting.md#debugging

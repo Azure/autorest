@@ -38,6 +38,6 @@ For language-specific information about migration and changes, please refer to o
 [language_flags]: https://github.com/Azure/autorest/blob/main/docs/generate/readme.md#language-flags
 [guidelines]: https://azure.github.io/azure-sdk/general_introduction.html
 [python]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/migrate/readme.md
-[java]: https://github.com/Azure/autorest.java/tree/v4/docs/migrate/readme.md
+[java]: https://github.com/Azure/autorest.java/blob/main/docs/migrate/readme.md
 [csharp]: https://github.com/Azure/autorest.csharp/tree/feature/v3/docs/migrate/readme.md
 [typescript]: https://github.com/Azure/autorest.typescript/tree/v6/docs/migrate/readme.md
