@@ -54,6 +54,9 @@ stages:
               sudo npm install -g markdown-link-check
               find docs -name "*.md" -print0 | xargs -0  -n1 markdown-link-check -c ./markdown-link-check-config.json
             displayName: Find
+
+      - task: ComponentGovernanceComponentDetection@0
+        displayName: "Component Detection"
   - stage: regressiontests
     displayName: Regression Tests
     dependsOn: main
