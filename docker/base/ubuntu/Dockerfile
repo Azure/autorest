@@ -1,9 +1,10 @@
 FROM ubuntu:latest
 
 RUN apt update && apt install -y \
-    curl
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt install nodejs -y
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt install nodejs -y && rm -rf /var/lib/apt/lists/*
 
 RUN npm install -g autorest
 
