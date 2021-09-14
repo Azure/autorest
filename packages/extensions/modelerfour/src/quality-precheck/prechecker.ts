@@ -380,7 +380,7 @@ export class QualityPreChecker {
             this.session.error(
               lines.join("\n"),
               ["PreCheck", "AllOfTypeDifferent"],
-              `#/components/schemas/${key}/allOf/${index}`,
+              ["components", "schemas", key, "allOf", index],
             );
           }
         }
