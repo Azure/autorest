@@ -1,6 +1,4 @@
 import { Session, Host, startSession } from "@autorest/extension-base";
-
-import { serialize } from "@azure-tools/codegen";
 import {
   Model as oai3,
   Refable,
@@ -356,6 +354,40 @@ export class QualityPreChecker {
     }
   }
 
+  private checkParentSameType() {
+    const schemas = this.input.components?.schemas;
+    if (!schemas) {
+      return;
+    }
+
+    for (const { key, instance: schema, name } of Object.entries(schemas).map(([key, value]) => ({
+      key: key,
+      ...this.resolve(value),
+    }))) {
+      if (schema.allOf && schema.type) {
+        const schemaName = getSchemaName(schema, name);
+        for (const { instance: parent, name, index } of schema.allOf.map((x, index) => ({
+          index,
+          ...this.resolve(x),
+        }))) {
+          if (parent.type && parent.type !== schema.type) {
+            const parentName = getSchemaName(parent, name);
+            const lines = [
+              `Schema '${schemaName}' has an allOf reference to '${parentName}' but those schema have different types:`,
+              `  - ${schemaName}: ${schema.type}`,
+              `  - ${parentName}: ${parent.type}`,
+            ];
+            this.session.error(
+              lines.join("\n"),
+              ["PreCheck", "AllOfTypeDifferent"],
+              ["components", "schemas", key, "allOf", index],
+            );
+          }
+        }
+      }
+    }
+  }
+
   process() {
     if (this.options["remove-empty-child-schemas"]) {
       this.fixUpSchemasThatUseAllOfInsteadOfJustRef();
@@ -366,6 +398,8 @@ export class QualityPreChecker {
     this.fixUpSchemasWithEmptyObjectParent();
 
     this.checkForDuplicateSchemas();
+
+    this.checkParentSameType();
 
     let onlyOnce = new WeakSet<Schema>();
     for (const { instance: schema, name, fromRef } of Object.values(this.input.components?.schemas ?? {}).map((s) =>
@@ -383,4 +417,8 @@ export class QualityPreChecker {
 
     return this.input;
   }
+}
+
+function getSchemaName(schema: Schema, id: string) {
+  return schema["x-ms-metadata"]?.name || id;
 }
