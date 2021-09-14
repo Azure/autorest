@@ -21,14 +21,14 @@ jobs:
           echo "$(DockerHub-azuresdkPass)" | docker login -u "azuresdk" --password-stdin
         displayName: Login to docker hub.
 
-      # - script: |
-      #     docker build -t ${{ parameters.image }} .
-      #   displayName: Build image
-      #   workingDirectory: ${{ parameters.dockerFolder }}
+      - script: |
+          docker build -t ${{ parameters.image }} .
+        displayName: Build image
+        workingDirectory: ${{ parameters.dockerFolder }}
 
-      # - script: |
-      #     docker push ${{ parameters.image }}
-      #   displayName: Publish image
+      - script: |
+          docker push ${{ parameters.image }}
+        displayName: Publish image
 
       - script: |
           echo '/workspace/${{parameters.readmePath}}'
