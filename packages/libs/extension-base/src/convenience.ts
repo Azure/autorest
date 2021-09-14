@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { createSandbox, deserialize } from "@azure-tools/codegen";
+import { createSandbox, deserialize, ShadowedNodePath } from "@azure-tools/codegen";
 import { Schema, DEFAULT_SCHEMA } from "js-yaml";
 import {
   Channel,
@@ -260,9 +260,12 @@ function getPosition(document: string, source: LogSource): SourceLocation | unde
     return { Position: { path: source }, document };
   }
 
-  if ("_#get-position#_" in source) {
-    return source["_#get-position#_"];
+  if (source[ShadowedNodePath]) {
+    return { Position: { path: source[ShadowedNodePath] }, document };
   }
 
-  return { Position: source, document };
+  if ("path" in source || "line" in source) {
+    return { Position: source as any, document };
+  }
+  return undefined;
 }

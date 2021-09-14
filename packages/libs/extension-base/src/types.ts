@@ -1,3 +1,5 @@
+import { ShadowedObject } from "@azure-tools/codegen";
+
 export interface Position {
   line: number;
   column: number;
@@ -9,6 +11,7 @@ export interface PathPosition {
    */
   path: JsonPointerSegments | string;
 }
+
 export type JsonPointerSegments = Array<string | number>;
 
 export interface SourceLocation {
@@ -86,8 +89,4 @@ export interface Mapping {
   name?: string;
 }
 
-export interface CodeModelObject {
-  "_#get-position#_": SourceLocation | undefined;
-}
-
-export type LogSource = string | Position | PathPosition | CodeModelObject;
+export type LogSource = string | Position | PathPosition | ShadowedObject<any>;
