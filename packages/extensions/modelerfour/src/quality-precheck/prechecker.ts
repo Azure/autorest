@@ -360,13 +360,16 @@ export class QualityPreChecker {
       return;
     }
 
-    for (const { instance: schema, name } of Object.entries(schemas).map(([key, value]) => ({
+    for (const { key, instance: schema, name } of Object.entries(schemas).map(([key, value]) => ({
       key: key,
       ...this.resolve(value),
     }))) {
       if (schema.allOf && schema.type) {
         const schemaName = getSchemaName(schema, name);
-        for (const { instance: parent, name } of schema.allOf.map((x) => this.resolve(x))) {
+        for (const { instance: parent, name, index } of schema.allOf.map((x, index) => ({
+          index,
+          ...this.resolve(x),
+        }))) {
           if (parent.type && parent.type !== schema.type) {
             const parentName = getSchemaName(parent, name);
             const lines = [
@@ -374,7 +377,11 @@ export class QualityPreChecker {
               `  - ${schemaName}: ${schema.type}`,
               `  - ${parentName}: ${parent.type}`,
             ];
-            this.session.error(lines.join("\n"), ["PreCheck", "AllOfTypeDifferent"]);
+            this.session.error(
+              lines.join("\n"),
+              ["PreCheck", "AllOfTypeDifferent"],
+              `#/components/schemas/${key}/allOf/${index}`,
+            );
           }
         }
       }
