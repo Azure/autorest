@@ -158,7 +158,7 @@ export class ModelerFour {
   private ignoreHeaders: Set<string> = new Set();
 
   constructor(protected session: Session<oai3>) {
-    this.input = shadowPosition(session.model);
+    this.input = session.model; //shadowPosition(session.model);
 
     const i = this.input.info;
 
