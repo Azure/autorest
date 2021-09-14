@@ -6,6 +6,7 @@
 /* eslint-disable no-prototype-builtins */
 
 import { JsonPath, PathMapping } from "@azure-tools/datastore";
+import { walk } from "@azure-tools/json";
 import { Stringify, YamlNode, walkYamlAst } from "@azure-tools/yaml";
 
 /**
@@ -247,14 +248,15 @@ function mergeArray(
   }
 }
 
-export function identitySourceMapping(sourceYamlFileName: string, sourceYamlAst: YamlNode): PathMapping[] {
+export function identitySourceMapping(sourceYamlFileName: string, model: object): PathMapping[] {
   const result: PathMapping[] = [];
-  walkYamlAst(sourceYamlAst, (x) => {
+  walk(model, (_, path) => {
     result.push({
-      generated: x.path,
-      original: x.path,
+      generated: path,
+      original: path,
       source: sourceYamlFileName,
     });
+    return "visit-children";
   });
   return result;
 }
