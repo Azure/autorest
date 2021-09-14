@@ -189,12 +189,12 @@ export class Session<TInputModel> {
   }
 
   protected msg(channel: Channel, message: string, key: Array<string>, objectOrPath?: string | Object, details?: any) {
-    const sourcePosition = objectOrPath ? (<any>objectOrPath)["_#get-position#_"] || String(objectOrPath) : undefined;
-    if (objectOrPath && (<any>objectOrPath)["_#get-position#_"])
+    const sourcePosition = objectOrPath ? (<any>objectOrPath)["_#get-position#_"] || objectOrPath : undefined;
+    if (sourcePosition)
       this.message({
         Channel: channel,
         Key: key,
-        Source: [sourcePosition],
+        Source: [{ Position: { path: sourcePosition }, document: this.filename }],
         Text: message,
         Details: details,
       });

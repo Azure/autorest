@@ -24,6 +24,7 @@ export class LogSourceEnhancer {
           try {
             blameTree = await this.dataStore.blame(s.document, s.position);
           } catch (e) {
+            console.error("CaTch ", e);
             if ("path" in s.position) {
               const path = s.position.path;
               if (path.length === 0) {

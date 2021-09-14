@@ -41,6 +41,7 @@ export function getYamlNodeByPath(base: YamlNode, jsonPath: Array<string | numbe
     }
     return base;
   } catch (error) {
+    console.error("HERE", jsonPath);
     throw new Error(`Error retrieving '${jsonPath.join(">")}' (${error})`);
   }
 }
