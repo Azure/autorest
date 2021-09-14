@@ -37,7 +37,7 @@ stages:
   #             NPM_AUTH_TOKEN="$(azure-sdk-npm-token)" npx @microsoft/rush publish --publish --include-all --set-access-level public --tag next
   #           displayName: Publish packages
   - stage: Docker
-    dependsOn: npm
+    # dependsOn: npm
     jobs:
       - template: ./templates/build-and-push-docker.yaml
         parameters:
