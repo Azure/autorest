@@ -135,4 +135,34 @@ describe("EnumDeduplicator", () => {
       });
     });
   });
+
+  describe("2 boolean enums with same name", () => {
+    const falseEnum: oai3.Schema = {
+      "x-ms-metadata": { apiVersions: ["2021-01-01"] },
+      type: "boolean",
+      enum: [false],
+      "x-ms-enum": {
+        name: "FalseConst",
+        modelAsString: false,
+      },
+    };
+
+    it("combine into 1", async () => {
+      const result = await runEnumDeduplicator({
+        components: {
+          schemas: {
+            "schemas:0": { ...falseEnum },
+            "schemas:1": { ...falseEnum },
+          },
+        },
+      });
+      expect(Object.keys(result.components?.schemas ?? [])).toHaveLength(1);
+      expect(result.components?.schemas?.["FalseConst"]).toEqual({
+        enum: [false],
+        type: "boolean",
+        "x-ms-enum": { modelAsString: false, name: "FalseConst" },
+        "x-ms-metadata": { apiVersions: ["2021-01-01"] },
+      });
+    });
+  });
 });
