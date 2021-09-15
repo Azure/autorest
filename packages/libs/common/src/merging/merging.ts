@@ -247,16 +247,3 @@ function mergeArray(
     return [...new Set(lowerPriorityArray.concat(higherPriority))];
   }
 }
-
-export function identitySourceMapping(sourceYamlFileName: string, model: object): PathMapping[] {
-  const result: PathMapping[] = [];
-  walk(model, (_, path) => {
-    result.push({
-      generated: path,
-      original: path,
-      source: sourceYamlFileName,
-    });
-    return "visit-children";
-  });
-  return result;
-}

@@ -1,7 +1,7 @@
 import { fastStringify } from "@azure-tools/yaml";
 import { SourceMapGenerator, RawSourceMap } from "source-map";
 import { addMappingsToSourceMap, Mapping } from "../source-map";
-import { PathMapping } from "../source-map/path-source-map";
+import { IdentityPathMappings, PathMapping } from "../source-map/path-source-map";
 import { DataHandle } from "./data-handle";
 
 export class DataSink {
@@ -11,7 +11,7 @@ export class DataSink {
       rawData: string,
       artifact: string | undefined,
       identity: Array<string>,
-      mappings?: PathMapping[],
+      mappings?: PathMapping[] | IdentityPathMappings,
       metadataFactory?: (readHandle: DataHandle) => Promise<RawSourceMap>,
     ) => Promise<DataHandle>,
     public forward: (description: string, input: DataHandle) => Promise<DataHandle>,
@@ -66,7 +66,7 @@ export interface PathMappingParam {
   /**
    * List of mappings from original to generated using path
    */
-  pathMappings: PathMapping[];
+  pathMappings: PathMapping[] | IdentityPathMappings;
 }
 
 export interface PositionMappingParam {
