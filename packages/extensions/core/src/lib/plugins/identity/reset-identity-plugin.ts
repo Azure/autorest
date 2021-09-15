@@ -22,16 +22,16 @@ async function resetIdentity(context: AutorestContext, input: DataSource, sink: 
   const inputs = await Promise.all((await input.enum()).map((x) => input.readStrict(x)));
   const numberEachFile = inputs.length > 1 && uniqBy(inputs, (each) => each.description);
   // TODO-TIM why we need this plugin??
-  // const result = await Promise.all(
-  //   inputs.map(async (input, index) => {
-  //     let name = `${context.config.name || input.description}`;
-  //     if (numberEachFile) {
-  //       name = insertIndexSuffix(name, index);
-  //     }
-  //     return await sink.writeData(name, await input.readData(), input.identity, context.config.to);
-  //   }),
-  // );
-  return new QuickDataSource(inputs, input.pipeState);
+  const result = await Promise.all(
+    inputs.map(async (input, index) => {
+      let name = `${context.config.name || input.description}`;
+      if (numberEachFile) {
+        name = insertIndexSuffix(name, index);
+      }
+      return await sink.writeData(name, await input.readData(), input.identity, context.config.to);
+    }),
+  );
+  return new QuickDataSource(result, input.pipeState);
 }
 
 /* @internal */
