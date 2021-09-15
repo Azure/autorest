@@ -3,7 +3,7 @@ import { DataHandle, DataSink, DataStore, QuickDataSource } from "@azure-tools/d
 import { AutorestContext } from "../../context";
 import { createIdentityResetPlugin } from "./reset-identity-plugin";
 
-describe("ResetIdentityPlugin", () => {
+describe.skip("ResetIdentityPlugin", () => {
   const plugin = createIdentityResetPlugin();
   let context: AutorestContext;
   let sink: DataSink;
