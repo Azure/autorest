@@ -23,7 +23,7 @@ foreach ($input in Get-Content (Join-Path $PSScriptRoot "smoke-tests.yaml"))
         $readme = $Matches["readme"]
 
         Write-Host "Testing spec: $readme"
-        autorest --version=$coreVersion --use:$m4Version --verbose --debug $readme
+        autorest --version=$coreVersion --use:$m4Version --memory=4g $readme
         if($LastExitCode -ne 0)
         {
             throw "Command failed to execute: $command"
