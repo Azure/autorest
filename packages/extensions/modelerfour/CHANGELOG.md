@@ -1,6 +1,14 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Wed, 08 Sep 2021 15:39:22 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Sep 2021 18:49:17 GMT and should not be manually modified.
+
+## 4.21.1
+Thu, 16 Sep 2021 18:49:17 GMT
+
+### Patches
+
+- **Add** validation when schema use allOf referencing a schema with a different type
+- **Tweak** Better error message when enum has an empty value
 
 ## 4.21.0
 Wed, 08 Sep 2021 15:39:22 GMT

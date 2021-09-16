@@ -2,6 +2,21 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.21.1",
+      "tag": "@autorest/modelerfour_v4.21.1",
+      "date": "Thu, 16 Sep 2021 18:49:17 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Add** validation when schema use allOf referencing a schema with a different type"
+          },
+          {
+            "comment": "**Tweak** Better error message when enum has an empty value"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.21.0",
       "tag": "@autorest/modelerfour_v4.21.0",
       "date": "Wed, 08 Sep 2021 15:39:22 GMT",
