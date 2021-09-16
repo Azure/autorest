@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Wed, 08 Sep 2021 15:39:22 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Sep 2021 18:49:17 GMT and should not be manually modified.
+
+## 3.6.1
+Thu, 16 Sep 2021 18:49:17 GMT
+
+### Patches
+
+- **Fix** Deduplicating `boolean` enums changed type to `string`
 
 ## 3.6.0
 Wed, 08 Sep 2021 15:39:22 GMT

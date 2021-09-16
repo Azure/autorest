@@ -2,6 +2,18 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.6.1",
+      "tag": "@autorest/core_v3.6.1",
+      "date": "Thu, 16 Sep 2021 18:49:17 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Deduplicating `boolean` enums changed type to `string`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.6.0",
       "tag": "@autorest/core_v3.6.0",
       "date": "Wed, 08 Sep 2021 15:39:22 GMT",
