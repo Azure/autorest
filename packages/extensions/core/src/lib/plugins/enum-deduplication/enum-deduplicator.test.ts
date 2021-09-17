@@ -181,7 +181,7 @@ describe("EnumDeduplicator", () => {
       },
     };
 
-    it("combine into 1", async () => {
+    it("combine into 1 keeping type: boolean", async () => {
       const result = await runEnumDeduplicator({
         components: {
           schemas: {
@@ -195,6 +195,38 @@ describe("EnumDeduplicator", () => {
         enum: [false],
         type: "boolean",
         "x-ms-enum": { modelAsString: false, name: "FalseConst" },
+        "x-ms-metadata": { apiVersions: ["2021-01-01"] },
+      });
+    });
+  });
+
+  describe("2 enums with format with same name", () => {
+    const falseEnum: oai3.Schema = {
+      "x-ms-metadata": { apiVersions: ["2021-01-01"] },
+      type: "string",
+      format: "decimal",
+      enum: [123],
+      "x-ms-enum": {
+        name: "NumConst",
+        modelAsString: false,
+      },
+    };
+
+    it("combine into 1 keeping format property", async () => {
+      const result = await runEnumDeduplicator({
+        components: {
+          schemas: {
+            "schemas:0": { ...falseEnum },
+            "schemas:1": { ...falseEnum },
+          },
+        },
+      });
+      expect(Object.keys(result.components?.schemas ?? [])).toHaveLength(1);
+      expect(result.components?.schemas?.["NumConst"]).toEqual({
+        enum: [123],
+        type: "string",
+        format: "decimal",
+        "x-ms-enum": { modelAsString: false, name: "NumConst" },
         "x-ms-metadata": { apiVersions: ["2021-01-01"] },
       });
     });

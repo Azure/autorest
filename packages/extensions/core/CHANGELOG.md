@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Thu, 16 Sep 2021 18:49:17 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Sep 2021 17:52:01 GMT and should not be manually modified.
+
+## 3.6.2
+Fri, 17 Sep 2021 17:52:01 GMT
+
+### Patches
+
+- **Fix** Deduplicating enums dropped `format` property
 
 ## 3.6.1
 Thu, 16 Sep 2021 18:49:17 GMT

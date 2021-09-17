@@ -75,6 +75,9 @@ export class EnumDeduplicator extends TransformerViaPointer<oai3.Model, oai3.Mod
       if (first.value["x-ms-enum"]) {
         this.clone(mergedEnum, "x-ms-enum", first.pointer, first.value["x-ms-enum"]);
       }
+      if (first.value["format"]) {
+        this.clone(mergedEnum, "format", first.pointer, first.value["format"]);
+      }
       const newRef = `#/components/schemas/${name}`;
       this.newArray(mergedEnum, "enum", "");
 
