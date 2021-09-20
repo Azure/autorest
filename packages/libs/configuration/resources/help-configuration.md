@@ -80,7 +80,7 @@ help-content: # type: Help as defined in autorest-core/help.ts
         description: Text to include as a header comment in generated files (magic strings:MICROSOFT_MIT, MICROSOFT_APACHE, MICROSOFT_MIT_NO_VERSION, MICROSOFT_APACHE_NO_VERSION, MICROSOFT_MIT_NO_CODEGEN)
         type: string
       - key: openapi-type
-        description: Open API Type: "arm" or "data-plane"
+        description: 'Open API Type: "arm" or "data-plane"'
         type: string
       - key: max-memory-size
         type: string
