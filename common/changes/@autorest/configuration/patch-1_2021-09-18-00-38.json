@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/configuration",
+      "comment": "Added missing help text for command line arguments",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/configuration",
+  "email": "chlowe@microsoft.com"
+}
