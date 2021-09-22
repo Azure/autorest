@@ -62,23 +62,23 @@ languages:
   - language: python
     outputPath: ./output/python
     oldArgs:
+      - --debug
       - --version:3.6.2
-      - --use:@autorest/modelerfour@4.18.4
-      - --use:@autorest/python@5.7.0
+      - --use:@autorest/modelerfour@4.21.1
+      - --use:@autorest/python@5.8.4
       - --modelerfour.treat-type-object-as-anything
     newArgs:
       - --version:../packages/extensions/core
       - --use:../packages/extensions/modelerfour
-      - --use:@autorest/python@5.7.0
+      - --use:@autorest/python@5.8.4
       - --modelerfour.treat-type-object-as-anything
-      - --modelerfour.seal-single-value-enum-by-default
 
   - language: typescript
     outputPath: ./output/typescript
     oldArgs:
       - --v3
       - --version:3.6.2
-      - --use:@autorest/modelerfour@4.18.4
+      - --use:@autorest/modelerfour@4.21.1
       - --modelerfour.treat-type-object-as-anything
       - --package-name:test-package
       - --title:TestClient
@@ -90,5 +90,4 @@ languages:
       - --modelerfour.treat-type-object-as-anything
       - --package-name:test-package
       - --title:TestClient
-      - --modelerfour.seal-single-value-enum-by-default
       - --use:@autorest/typescript@6.0.0-beta.13
