@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/compare",
+      "comment": "**Fix** Issue when parsing parameter with public/private and default value",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/compare",
+  "email": "tiguerin@microsoft.com"
+}
