@@ -62,7 +62,6 @@ languages:
   - language: python
     outputPath: ./output/python
     oldArgs:
-      - --debug
       - --version:3.6.2
       - --use:@autorest/modelerfour@4.21.1
       - --use:@autorest/python@5.8.4
