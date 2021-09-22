@@ -1960,6 +1960,22 @@ export class ModelerFour {
     throw new Error(`Invalid api-version-parameter: ${this.apiVersionParameter}`);
   }
 
+  private getParameterSchemaRef(parameter: OpenAPI.Parameter): {
+    contentType: string | undefined;
+    schemaRef: Refable<OpenAPI.Schema>;
+  } {
+    if (parameter.schema) {
+      return { contentType: undefined, schemaRef: parameter.schema };
+    }
+
+    if (parameter.content) {
+      const [contentType, schemaRef] = Object.entries(parameter.content)[0];
+      return { contentType, schemaRef };
+    }
+
+    throw new Error(`Parameter ${parameter.name} in ${parameter.in} is missing a schema or a content property.`);
+  }
+
   processParameters(httpOperation: OpenAPI.HttpOperation, operation: Operation, pathItem: OpenAPI.PathItem) {
     const parameters = Object.values(httpOperation.parameters ?? {})
       .map((each) => dereference(this.input, each))
@@ -1967,8 +1983,8 @@ export class ModelerFour {
 
     for (const pp of parameters) {
       const parameter = pp.instance;
-
-      this.use(parameter.schema, (name, schema) => {
+      const { contentType, schemaRef } = this.getParameterSchemaRef(parameter);
+      this.use(schemaRef, (name, schema) => {
         if (this.apiVersionMode !== "none" && this.interpret.isApiVersionParameter(parameter)) {
           return this.processApiVersionParameter(parameter, operation, pathItem);
         }
