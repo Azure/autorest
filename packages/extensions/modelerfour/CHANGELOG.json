@@ -2,6 +2,18 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.21.2",
+      "tag": "@autorest/modelerfour_v4.21.2",
+      "date": "Wed, 22 Sep 2021 15:23:39 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** log error when using parameter with `content.<mediaType>` as not being supported"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.21.1",
       "tag": "@autorest/modelerfour_v4.21.1",
       "date": "Thu, 16 Sep 2021 18:49:17 GMT",

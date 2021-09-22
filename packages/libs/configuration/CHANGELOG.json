@@ -2,6 +2,18 @@
   "name": "@autorest/configuration",
   "entries": [
     {
+      "version": "1.7.1",
+      "tag": "@autorest/configuration_v1.7.1",
+      "date": "Wed, 22 Sep 2021 15:23:39 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added missing help text for command line arguments"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.7.0",
       "tag": "@autorest/configuration_v1.7.0",
       "date": "Wed, 08 Sep 2021 15:39:22 GMT",
