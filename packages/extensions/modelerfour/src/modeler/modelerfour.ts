@@ -1967,7 +1967,14 @@ export class ModelerFour {
 
     for (const pp of parameters) {
       const parameter = pp.instance;
-
+      if (parameter.content) {
+        this.session.error(
+          `Parameter '${parameter.name}' in '${parameter.in}' has content.<mediaType> which is not supported right now. Use schema instead. See https://github.com/Azure/autorest/issues/4303`,
+          ["Modelerfour/ParameterContentNotSupported"],
+          parameter,
+        );
+        continue;
+      }
       this.use(parameter.schema, (name, schema) => {
         if (this.apiVersionMode !== "none" && this.interpret.isApiVersionParameter(parameter)) {
           return this.processApiVersionParameter(parameter, operation, pathItem);
