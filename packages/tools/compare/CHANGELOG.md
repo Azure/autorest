@@ -1,6 +1,13 @@
 # Change Log - @autorest/compare
 
-This log was last generated on Wed, 08 Sep 2021 15:39:22 GMT and should not be manually modified.
+This log was last generated on Wed, 22 Sep 2021 20:33:38 GMT and should not be manually modified.
+
+## 0.4.2
+Wed, 22 Sep 2021 20:33:38 GMT
+
+### Patches
+
+- **Fix** Issue when parsing parameter with public/private and default value
 
 ## 0.4.1
 Wed, 08 Sep 2021 15:39:22 GMT
