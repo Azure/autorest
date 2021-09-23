@@ -1,6 +1,13 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Wed, 22 Sep 2021 15:23:39 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Sep 2021 19:51:32 GMT and should not be manually modified.
+
+## 1.7.2
+Thu, 23 Sep 2021 19:51:32 GMT
+
+### Patches
+
+- **Added** `include-x-ms-examples-original-file` flag to activate `x-ms-original-file` injection in `x-ms-examples`
 
 ## 1.7.1
 Wed, 22 Sep 2021 15:23:39 GMT
