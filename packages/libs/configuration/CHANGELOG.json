@@ -2,6 +2,18 @@
   "name": "@autorest/configuration",
   "entries": [
     {
+      "version": "1.7.2",
+      "tag": "@autorest/configuration_v1.7.2",
+      "date": "Thu, 23 Sep 2021 19:51:32 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Added** `include-x-ms-examples-original-file` flag to activate `x-ms-original-file` injection in `x-ms-examples`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.7.1",
       "tag": "@autorest/configuration_v1.7.1",
       "date": "Wed, 22 Sep 2021 15:23:39 GMT",
