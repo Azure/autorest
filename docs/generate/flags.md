@@ -156,7 +156,7 @@ Those flags are temporary and will be removed in the future. Those flags are her
 
 ## Debugging flags
 
-| Flag                              | Description                                                                                                                                                | Python | .NET | Java | TS  | Go  |
+| Flag                              | Description                                                                                                                                                | Python | .NET | Java | TS  | Go  |     |
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ---- | ---- | --- | --- | --- |
 | `--verbose`                       | Log verbose-level information during generation time                                                                                                       | x      | x    | x    | x   | x   |
 | `--debug`                         | Log debug-level information during generation time                                                                                                         | x      | x    | x    | x   | x   |
