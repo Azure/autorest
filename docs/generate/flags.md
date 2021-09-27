@@ -130,9 +130,9 @@ Those flags are temporary and will be removed in the future. Those flags are her
 | `--customization-jar-path=FILEPATH`                            | Pass in the path to your .jar file that contains customizations to the output files. This will allow AutoRest to dynamically load the class you provide in `--customization-class`.                                                                                                                                                                                                                              |
 | `--customization-class=NAME`                                   | Use in conjunction with `--customization-jar-path`. That flag tells AutoRest where to look for your custom class, while `--customization-class` tells AutoRest the name of your custom class.                                                                                                                                                                                                                    |
 
-## TS Flags
+## TypeScript Flags
 
-| Flag                                  | Description                                                                                                                                                                         |
+| Flag                                  | Description                                                                                                                                                                         |     |     |     |     |
 | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- | --- | --- | --- |
 | `--source-code-folder-path=DIRECTORY` | Where to output the generated code inside the `output-folder`. Use in the scenario when you are going to write a convenience layer on top of the generated code. Defaults to `src`. |     |     |     | x   |
 | `--generate-metadata`                 | Whether to generate extra metadata in your package. For instance, generates a README file, license file etc if set to `true`. Defaults to `false`.                                  |
