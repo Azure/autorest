@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Thu, 16 Sep 2021 18:49:17 GMT and should not be manually modified.
+This log was last generated on Wed, 22 Sep 2021 15:23:39 GMT and should not be manually modified.
+
+## 4.21.2
+Wed, 22 Sep 2021 15:23:39 GMT
+
+### Patches
+
+- **Fix** log error when using parameter with `content.<mediaType>` as not being supported
 
 ## 4.21.1
 Thu, 16 Sep 2021 18:49:17 GMT

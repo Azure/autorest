@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Fri, 17 Sep 2021 17:52:01 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Sep 2021 19:51:32 GMT and should not be manually modified.
+
+## 3.6.3
+Thu, 23 Sep 2021 19:51:32 GMT
+
+### Patches
+
+- **Added** `include-x-ms-examples-original-file` flag to activate `x-ms-original-file` injection in `x-ms-examples`
 
 ## 3.6.2
 Fri, 17 Sep 2021 17:52:01 GMT

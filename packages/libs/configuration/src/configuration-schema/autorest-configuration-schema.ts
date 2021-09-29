@@ -66,6 +66,10 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
     description: "Force updating the version of core even if there is a local version satisfying the requirement.",
   },
   memory: { type: "string", description: "Configure max memory allowed for autorest process(s)" },
+  "include-x-ms-examples-original-file": {
+    type: "boolean",
+    description: "Include x-ms-original-file property in x-ms-examples",
+  },
 
   // Feature flags
   "deduplicate-inline-models": { type: "boolean" },

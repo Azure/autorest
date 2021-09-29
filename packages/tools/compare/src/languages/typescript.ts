@@ -108,16 +108,30 @@ function extractField(fieldNode: Parser.SyntaxNode): FieldDetails {
 }
 
 function extractParameter(parameterNode: Parser.SyntaxNode, ordinal: number): ParameterDetails {
-  const children =
-    parameterNode.namedChildren.length === 3 ? parameterNode.namedChildren.slice(1) : parameterNode.namedChildren;
-
-  const [nameNode, typeNode] = children;
+  const { nameNode, typeNode } = parseParameterNode(parameterNode);
   return {
     name: nameNode.text,
     type: typeNode ? typeNode.children[1].text : "any",
     ordinal,
     isOptional: parameterNode.type === "optional_parameter",
   };
+}
+
+function parseParameterNode(parameterNode: Parser.SyntaxNode) {
+  // For private options: MyType;
+  if (parameterNode.namedChildren.length === 3) {
+    const [accessibility, nameNode, typeNode] = parameterNode.namedChildren;
+    return { nameNode, typeNode };
+  }
+  // For private options: MyType = initialValue;
+  if (parameterNode.namedChildren.length === 4) {
+    const [accessibility, nameNode, typeNode, value] = parameterNode.namedChildren;
+    return { nameNode, typeNode };
+  }
+
+  // For options: MyType;
+  const [nameNode, typeNode] = parameterNode.namedChildren;
+  return { nameNode, typeNode };
 }
 
 function extractGenericParameter(genericParamNode: Parser.SyntaxNode, ordinal: number): GenericTypeParameterDetails {

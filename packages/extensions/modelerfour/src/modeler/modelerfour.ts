@@ -2039,7 +2039,10 @@ export class ModelerFour {
                       style: <SerializationStyle>(<unknown>parameter.style),
                       explode: parameter.explode,
                     }
-                  : undefined,
+                  : {
+                      style: contentType as any,
+                      explode: parameter.explode,
+                    },
               ),
             },
             language: {
