@@ -159,7 +159,7 @@ Let's start by examining what behavior we want to have when generating. The sugg
 Let's say we want to generate our first [pets.json][pets_swagger] if you specify `--tag=v1`, and we want to generate our second [petsv2.json][pets_v2_swagger]
 if `--tag=v2` is specified on the command line. Let's go about putting in the markdown code to make this possible.
 
-Starting with the flags we wantin both cases, we add in a `yaml` code block with no condition for entry.
+Starting with the flags we want in both cases, we add in a `yaml` code block with no condition for entry.
 
 ````
 ### General settings
