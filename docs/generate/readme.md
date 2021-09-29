@@ -44,7 +44,7 @@ For a full-set of flags, go to our [flag index][flags]
 The first step in an AutoRest journey usually starts with generating a single OpenAPI file. We will also show
 how to set options during generation by building up our command-line step-by-step.
 
-The first step here is to have your OpenAPI file definition of your client ([docs][openapi_introduction]) on how to do that).
+The first step here is to have your OpenAPI file definition of your client ([docs][openapi_introduction] on how to do that).
 This example will use an example OpenAPI definition found [here][pets_swagger], so feel free to follow along with
 our sample code. To get things started, the command that starts AutoRest on the command line is `autorest`, so this is what our command line
 looks like to start with:
