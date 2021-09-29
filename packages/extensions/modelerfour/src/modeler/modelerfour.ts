@@ -1198,7 +1198,7 @@ export class ModelerFour {
             // so treat this as an `integer` with no format.
             this.session.warning(
               `Integer schema '${name}' with unknown format: '${schema.format}' is not valid.  Treating it as 'int32'.`,
-              ["Modeler"],
+              ["Modeler", "UnknownFormatType"],
               schema,
             );
             return this.processIntegerSchema(name, schema);
@@ -1218,11 +1218,12 @@ export class ModelerFour {
             return this.processIntegerSchema(name, schema);
 
           default:
-            this.session.error(
-              `Number schema '${name}' with unknown format: '${schema.format}' is not valid`,
-              ["Modeler"],
+            this.session.warning(
+              `Number schema '${name}' with unknown format: '${schema.format}'. Will ignore.`,
+              ["Modeler", "UnknownFormatType"],
               schema,
             );
+            return this.processIntegerSchema(name, schema);
         }
         break;
 

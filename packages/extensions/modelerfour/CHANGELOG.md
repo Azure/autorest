@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Wed, 22 Sep 2021 15:23:39 GMT and should not be manually modified.
+This log was last generated on Wed, 29 Sep 2021 15:39:07 GMT and should not be manually modified.
+
+## 4.21.3
+Wed, 29 Sep 2021 15:39:07 GMT
+
+### Patches
+
+- **Fix** Unknown format for number schema should not be an error.
 
 ## 4.21.2
 Wed, 22 Sep 2021 15:23:39 GMT
