@@ -17,9 +17,9 @@ import {
 } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
 import { selectName, Style } from "@azure-tools/codegen";
+import { partition } from "lodash";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
 import { getNameOptions, isUnassigned, ScopeNamer, setName, setNameAllowEmpty } from "./naming-utils";
-import { partition } from "lodash";
 
 export class PreNamer {
   codeModel: CodeModel;
@@ -241,7 +241,10 @@ export class PreNamer {
       scopeNamer.add(schema, this.format.choice, `Enum${this.enum++}`);
 
       for (const choice of values(schema.choices)) {
-        setName(choice, this.format.choiceValue, "", this.format.override, { removeDuplicates: false });
+        setName(choice, this.format.choiceValue, "", this.format.override, {
+          removeDuplicates: false,
+          nameEmptyErrorMessage: `Enum '${schema.language.default.name}' cannot have a value '${choice.value}' that result in an empty name. Use x-ms-enum.values to specify the name of the values.`,
+        });
       }
     }
   }

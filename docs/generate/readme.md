@@ -44,7 +44,7 @@ For a full-set of flags, go to our [flag index][flags]
 The first step in an AutoRest journey usually starts with generating a single OpenAPI file. We will also show
 how to set options during generation by building up our command-line step-by-step.
 
-The first step here is to have your OpenAPI file definition of your client ([docs][openapi_introduction]) on how to do that).
+The first step here is to have your OpenAPI file definition of your client ([docs][openapi_introduction] on how to do that).
 This example will use an example OpenAPI definition found [here][pets_swagger], so feel free to follow along with
 our sample code. To get things started, the command that starts AutoRest on the command line is `autorest`, so this is what our command line
 looks like to start with:
@@ -159,7 +159,7 @@ Let's start by examining what behavior we want to have when generating. The sugg
 Let's say we want to generate our first [pets.json][pets_swagger] if you specify `--tag=v1`, and we want to generate our second [petsv2.json][pets_v2_swagger]
 if `--tag=v2` is specified on the command line. Let's go about putting in the markdown code to make this possible.
 
-Starting with the flags we wantin both cases, we add in a `yaml` code block with no condition for entry.
+Starting with the flags we want in both cases, we add in a `yaml` code block with no condition for entry.
 
 ````
 ### General settings
@@ -411,7 +411,7 @@ For language-specific information about generation, please refer to our language
 [mgmt_storage]: https://github.com/Azure/azure-rest-api-specs/tree/master/specification/storage/resource-manager
 [how_autorest]: ./how-autorest-generates-code-from-openapi.md
 [python]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/generate/readme.md
-[java]: https://github.com/Azure/autorest.java/tree/v4/docs/generate/readme.md
+[java]: https://github.com/Azure/autorest.java/blob/main/docs/generate/readme.md
 [csharp]: https://github.com/Azure/autorest.csharp/tree/feature/v3/readme.md
 [azure_sdk_for_python]: https://github.com/Azure/azure-sdk-for-python/tree/master/sdk
 [azure_sdk_for_java]: https://github.com/Azure/azure-sdk-for-java/tree/master/sdk

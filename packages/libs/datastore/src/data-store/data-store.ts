@@ -3,20 +3,20 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { resolveUri } from "@azure-tools/uri";
-import { RawSourceMap } from "source-map";
-import { IFileSystem } from "../file-system/file-system";
-import { BlameTree } from "../source-map/blaming";
+import { createHash } from "crypto";
 import { promises as fs } from "fs";
 import { tmpdir } from "os";
 import { join } from "path";
+import { resolveUri } from "@azure-tools/uri";
+import { RawSourceMap } from "source-map";
+import { IFileSystem } from "../file-system/file-system";
+import { PathMapping, PathPosition, PathSourceMap, Position, PositionSourceMap } from "../source-map";
+import { BlameTree } from "../source-map/blaming";
 
-import { createHash } from "crypto";
-import { DataSource } from "./data-source";
-import { ReadThroughDataSource } from "./read-through-data-source";
 import { Data, DataHandle } from "./data-handle";
 import { DataSink } from "./data-sink";
-import { PathMapping, PathPosition, PathSourceMap, Position, PositionSourceMap } from "../source-map";
+import { DataSource } from "./data-source";
+import { ReadThroughDataSource } from "./read-through-data-source";
 
 const md5 = (content: any) => (content ? createHash("md5").update(JSON.stringify(content)).digest("hex") : null);
 
@@ -30,13 +30,20 @@ interface Store {
   [uri: string]: Data;
 }
 
+export interface DataStoreOptions {
+  /**
+   * Enable auto unloading data to release memory.
+   */
+  autoUnloadData?: boolean;
+}
+
 export class DataStore {
   public static readonly BaseUri = "mem://";
   public readonly BaseUri = DataStore.BaseUri;
   private store: Store = {};
   private cacheFolder?: string;
 
-  public constructor() {}
+  public constructor(private options: DataStoreOptions = {}) {}
 
   private async getCacheFolder() {
     if (!this.cacheFolder) {
@@ -118,7 +125,7 @@ export class DataStore {
     if (entry === undefined) {
       throw new Error(`Object '${absoluteUri}' does not exist.`);
     }
-    return new DataHandle(absoluteUri, entry);
+    return new DataHandle(absoluteUri, entry, this.options.autoUnloadData);
   }
 
   public async read(uri: string): Promise<DataHandle> {
@@ -127,7 +134,7 @@ export class DataStore {
     if (!data) {
       throw new Error(`Could not read '${uri}'.`);
     }
-    return new DataHandle(uri, data);
+    return new DataHandle(uri, data, this.options.autoUnloadData);
   }
 
   public async blame(absoluteUri: string, position: Position | PathPosition): Promise<BlameTree> {

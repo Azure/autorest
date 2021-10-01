@@ -1,6 +1,6 @@
+import { DeepPartial } from "@azure-tools/codegen";
 import { PrimitiveSchema, Schema } from "../schema";
 import { SchemaType } from "../schema-type";
-import { DeepPartial } from "@azure-tools/codegen";
 
 /** a Schema that represents a string value */
 export interface StringSchema extends PrimitiveSchema {

@@ -1,4 +1,4 @@
-import { Session } from "@autorest/extension-base";
+import { Session, Host, startSession } from "@autorest/extension-base";
 import {
   Model as oai3,
   Refable,
@@ -9,11 +9,9 @@ import {
   StringFormat,
 } from "@azure-tools/openapi";
 
-import { serialize } from "@azure-tools/codegen";
-import { Host, startSession } from "@autorest/extension-base";
+import { getDiff } from "recursive-diff";
 import { Interpretations } from "../modeler/interpretations";
 
-import { getDiff } from "recursive-diff";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
 import { DuplicateSchemaMerger } from "./duplicate-schema-merger";
 
@@ -37,22 +35,17 @@ export async function processRequest(host: Host) {
 
     host.WriteFile(
       "prechecked-openapi-document.yaml",
-      serialize(result, { sortKeys: false }),
+      JSON.stringify(result, null, 2),
       undefined,
       "prechecked-openapi-document",
     );
-    host.WriteFile(
-      "original-openapi-document.yaml",
-      serialize(input, { sortKeys: false }),
-      undefined,
-      "openapi-document",
-    );
-  } catch (E) {
+    host.WriteFile("original-openapi-document.yaml", JSON.stringify(input, null, 2), undefined, "openapi-document");
+  } catch (error: any) {
     if (debug) {
       // eslint-disable-next-line no-console
-      console.error(`${__filename} - FAILURE  ${JSON.stringify(E)} ${E.stack}`);
+      console.error(`${__filename} - FAILURE  ${JSON.stringify(error)} ${error.stack}`);
     }
-    throw E;
+    throw error;
   }
 }
 
@@ -361,6 +354,40 @@ export class QualityPreChecker {
     }
   }
 
+  private checkParentSameType() {
+    const schemas = this.input.components?.schemas;
+    if (!schemas) {
+      return;
+    }
+
+    for (const { key, instance: schema, name } of Object.entries(schemas).map(([key, value]) => ({
+      key: key,
+      ...this.resolve(value),
+    }))) {
+      if (schema.allOf && schema.type) {
+        const schemaName = getSchemaName(schema, name);
+        for (const { instance: parent, name, index } of schema.allOf.map((x, index) => ({
+          index,
+          ...this.resolve(x),
+        }))) {
+          if (parent.type && parent.type !== schema.type) {
+            const parentName = getSchemaName(parent, name);
+            const lines = [
+              `Schema '${schemaName}' has an allOf reference to '${parentName}' but those schema have different types:`,
+              `  - ${schemaName}: ${schema.type}`,
+              `  - ${parentName}: ${parent.type}`,
+            ];
+            this.session.error(
+              lines.join("\n"),
+              ["PreCheck", "AllOfTypeDifferent"],
+              ["components", "schemas", key, "allOf", index],
+            );
+          }
+        }
+      }
+    }
+  }
+
   process() {
     if (this.options["remove-empty-child-schemas"]) {
       this.fixUpSchemasThatUseAllOfInsteadOfJustRef();
@@ -371,6 +398,8 @@ export class QualityPreChecker {
     this.fixUpSchemasWithEmptyObjectParent();
 
     this.checkForDuplicateSchemas();
+
+    this.checkParentSameType();
 
     let onlyOnce = new WeakSet<Schema>();
     for (const { instance: schema, name, fromRef } of Object.values(this.input.components?.schemas ?? {}).map((s) =>
@@ -388,4 +417,8 @@ export class QualityPreChecker {
 
     return this.input;
   }
+}
+
+function getSchemaName(schema: Schema, id: string) {
+  return schema["x-ms-metadata"]?.name || id;
 }

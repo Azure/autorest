@@ -3,11 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestType0, RequestType2 } from "vscode-jsonrpc";
-import { NotificationType2, NotificationType4 } from "vscode-jsonrpc";
-import { Mapping, RawSourceMap } from "source-map";
-import { Message } from "../message";
 import { PathPosition } from "@azure-tools/datastore";
+import { Mapping, RawSourceMap } from "source-map";
+import { RequestType0, RequestType2, NotificationType2, NotificationType4 } from "vscode-jsonrpc";
+
+import { Message } from "../message";
 
 export namespace IAutoRestPluginTargetTypes {
   export const GetPluginNames = new RequestType0<Array<string>, Error, void>("GetPluginNames");

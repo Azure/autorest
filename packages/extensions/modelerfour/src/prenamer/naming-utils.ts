@@ -1,6 +1,6 @@
 import { Languages } from "@autorest/codemodel";
-import { removeSequentialDuplicates, fixLeadingNumber, deconstruct, Style, Styler } from "@azure-tools/codegen";
 import { Session } from "@autorest/extension-base";
+import { removeSequentialDuplicates, fixLeadingNumber, deconstruct, Style, Styler } from "@azure-tools/codegen";
 
 export function getNameOptions(typeName: string, components: Array<string>) {
   const result = new Set<string>();
@@ -26,10 +26,16 @@ interface SetNameOptions {
    * @example "FooBarBarSomething" -> "FooBarSomething"
    */
   removeDuplicates?: boolean;
+
+  /**
+   * Error message if a name is empty.
+   */
+  nameEmptyErrorMessage?: string;
 }
 
 const setNameDefaultOptions: SetNameOptions = Object.freeze({
   removeDuplicates: true,
+  nameEmptyErrorMessage: `Name cannot be empty.`,
 });
 
 export interface Nameable {
@@ -45,7 +51,7 @@ export function setName(
 ) {
   setNameAllowEmpty(thing, styler, defaultValue, overrides, options);
   if (!thing.language.default.name) {
-    throw new Error("Name is empty!");
+    throw new Error(options?.nameEmptyErrorMessage ?? setNameDefaultOptions.nameEmptyErrorMessage);
   }
 }
 

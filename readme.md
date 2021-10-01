@@ -2,6 +2,8 @@
 
 The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to _AutoRest_ is a spec that describes the REST API using the [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) format.
 
+[Release notes](./docs/releases)
+
 ## Packages
 
 | Name                                            | Changelog                       | Latest                                                       | Next                                                              |

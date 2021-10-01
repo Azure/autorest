@@ -1,8 +1,8 @@
-import { createTestSessionFromModel } from "../../test/utils";
-import { SecurityProcessor } from "./security-processor";
-import oai3, { ParameterLocation, SecurityType } from "@azure-tools/openapi";
-import { Interpretations } from "./interpretations";
 import { AADTokenSecurityScheme, AzureKeySecurityScheme } from "@autorest/codemodel";
+import oai3, { ParameterLocation, SecurityType } from "@azure-tools/openapi";
+import { createTestSessionFromModel } from "../../test/utils";
+import { Interpretations } from "./interpretations";
+import { SecurityProcessor } from "./security-processor";
 
 const baseOpenapiSpec = {
   openApi: "3.0.0",

@@ -1,5 +1,5 @@
-import { Exception } from "@azure-tools/tasks";
 import { JsonPointer, parseJsonPointer } from "@azure-tools/json";
+import { Exception } from "@azure-tools/tasks";
 import { JsonPath } from "../json-path/json-path";
 import { PathMapping } from "../source-map";
 

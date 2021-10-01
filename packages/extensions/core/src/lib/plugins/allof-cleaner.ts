@@ -1,9 +1,9 @@
+import { isDefined } from "@autorest/common";
 import { DataHandle, DataSink, DataSource, QuickDataSource, Source } from "@azure-tools/datastore";
 import { Model, isReference, Schema } from "@azure-tools/openapi";
+import { cloneDeep } from "lodash";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
-import { isDefined } from "@autorest/common";
-import { cloneDeep } from "lodash";
 
 async function cleanAllOfs(model: Model) {
   const output = cloneDeep(model);

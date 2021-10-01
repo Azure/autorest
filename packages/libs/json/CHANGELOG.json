@@ -2,6 +2,21 @@
   "name": "@azure-tools/json",
   "entries": [
     {
+      "version": "1.2.0",
+      "tag": "@azure-tools/json_v1.2.0",
+      "date": "Wed, 08 Sep 2021 15:39:22 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Added** appenJsonPointer util"
+          },
+          {
+            "comment": "**Tweaks** To the types to allow number in the path"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.0",
       "tag": "@azure-tools/json_v1.1.0",
       "date": "Mon, 19 Jul 2021 15:15:42 GMT",

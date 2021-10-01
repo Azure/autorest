@@ -2,6 +2,30 @@
   "name": "@autorest/compare",
   "entries": [
     {
+      "version": "0.4.2",
+      "tag": "@autorest/compare_v0.4.2",
+      "date": "Wed, 22 Sep 2021 20:33:38 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Issue when parsing parameter with public/private and default value"
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.4.1",
+      "tag": "@autorest/compare_v0.4.1",
+      "date": "Wed, 08 Sep 2021 15:39:22 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"autorest\" from `~3.3.2` to `~3.4.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.4.0",
       "tag": "@autorest/compare_v0.4.0",
       "date": "Mon, 19 Jul 2021 15:15:41 GMT",

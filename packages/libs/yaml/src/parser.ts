@@ -6,8 +6,8 @@
 // TODO: the following is only required because safeDump of "yaml-ast-parser" has this bug: https://github.com/mulesoft-labs/yaml-ast-parser/issues/30
 // PLEASE: remove the entire dependency to js-yaml once that is fixed!
 import { dump, load } from "js-yaml";
-import { newMapping, safeLoad } from "yaml-ast-parser";
 import { cloneDeep } from "lodash";
+import { newMapping, safeLoad } from "yaml-ast-parser";
 import { YamlMap, YamlNode, YamlScalar, Kind, YamlSequence } from "./types";
 
 export interface YamlNodeWithPath {

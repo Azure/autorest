@@ -1,9 +1,9 @@
-import { SchemaType } from "../schema-type";
-import { PrimitiveSchema, ValueSchema, Schema } from "../schema";
-import { Languages } from "../languages";
-import { Extensions } from "../extensions";
-import { StringSchema } from "./string";
 import { Initializer, DeepPartial } from "@azure-tools/codegen";
+import { Extensions } from "../extensions";
+import { Languages } from "../languages";
+import { PrimitiveSchema, ValueSchema, Schema } from "../schema";
+import { SchemaType } from "../schema-type";
+import { StringSchema } from "./string";
 
 /** a schema that represents a choice of several values (ie, an 'enum') */
 export interface ChoiceSchema<ChoiceType extends PrimitiveSchema = StringSchema> extends ValueSchema {

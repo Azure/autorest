@@ -1,11 +1,11 @@
-import { PipelinePlugin } from "../../pipeline/common";
-import oai3, { dereference, Refable } from "@azure-tools/openapi";
-import { validateOpenAPISemantics } from "./semantics-validation";
-import { DataHandle } from "@azure-tools/datastore";
-import { AutorestContext } from "../../context";
 import util from "util";
-import { SemanticError } from "./types";
+import { DataHandle } from "@azure-tools/datastore";
 import { JsonRef, parseJsonRef, stringifyJsonRef } from "@azure-tools/jsonschema";
+import oai3, { dereference, Refable } from "@azure-tools/openapi";
+import { AutorestContext } from "../../context";
+import { PipelinePlugin } from "../../pipeline/common";
+import { validateOpenAPISemantics } from "./semantics-validation";
+import { SemanticError } from "./types";
 
 export function createSemanticValidationPlugin(): PipelinePlugin {
   return async (context, input, sink) => {

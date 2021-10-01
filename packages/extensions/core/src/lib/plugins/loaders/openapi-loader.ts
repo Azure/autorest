@@ -1,8 +1,7 @@
-import { PipelinePlugin } from "../../pipeline/common";
-import { Channel } from "../../message";
+import { IAutorestLogger } from "@autorest/common";
 import { DataHandle, DataSink, DataSource, QuickDataSource } from "@azure-tools/datastore";
+import { PipelinePlugin } from "../../pipeline/common";
 import { crawlReferences } from "../ref-crawling";
-import { AutorestContext } from "../../context";
 import { checkSyntaxFromData } from "./common";
 
 interface OpenAPI3Spec {
@@ -13,15 +12,15 @@ interface OpenAPI3Spec {
 }
 
 export async function loadOpenAPIFiles(
-  config: AutorestContext,
+  logger: IAutorestLogger,
   inputScope: DataSource,
-  inputFileUris: Array<string>,
+  inputFileUris: string[],
   sink: DataSink,
 ): Promise<Array<DataHandle>> {
-  const rawOpenApis: Array<DataHandle> = [];
+  const rawOpenApis: DataHandle[] = [];
   for (const inputFileUri of inputFileUris) {
     // read literate Swagger
-    const pluginInput = await loadOpenAPIFile(config, inputScope, inputFileUri, sink);
+    const pluginInput = await loadOpenAPIFile(logger, inputScope, inputFileUri, sink);
     if (pluginInput) {
       rawOpenApis.push(pluginInput);
     }
@@ -30,19 +29,19 @@ export async function loadOpenAPIFiles(
 }
 
 export async function loadOpenAPIFile(
-  config: AutorestContext,
+  logger: IAutorestLogger,
   inputScope: DataSource,
   inputFileUri: string,
   sink: DataSink,
 ): Promise<DataHandle | null> {
   const handle = await inputScope.readStrict(inputFileUri);
-  await checkSyntaxFromData(inputFileUri, handle, config);
+  await checkSyntaxFromData(inputFileUri, handle, logger);
   // const data = await ParseLiterateYaml(config, handle, sink);
   if (!isOpenAPI3Spec(await handle.readObject<OpenAPI3Spec>())) {
     return null;
     // TODO: Should we throw or send an error message?
   }
-  config.Message({ Channel: Channel.Verbose, Text: `Reading OpenAPI 3.0 file ${inputFileUri}` });
+  logger.verbose(`Reading OpenAPI 3.0 file ${inputFileUri}`);
   return sink.writeData(handle.description, await handle.readData(), [inputFileUri], "openapi-document");
 }
 

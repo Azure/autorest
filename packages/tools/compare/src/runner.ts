@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import * as path from "path";
 import * as cp from "child_process";
-import { getPathsRecursively } from "./util";
-import { parseArgument } from "./cli";
 import * as os from "os";
+import * as path from "path";
+import { parseArgument } from "./cli";
+import { getPathsRecursively } from "./util";
 
 /**
  * Details for the output of an AutoRest run (pre-existing or not).

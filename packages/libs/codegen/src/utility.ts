@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as aio from "@azure-tools/async-io";
 import { join } from "path";
+import * as aio from "@azure-tools/async-io";
 
 function getAllPropertyNames(obj: any) {
   const props = new Array<string>();

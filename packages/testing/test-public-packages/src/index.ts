@@ -1,3 +1,4 @@
+/* eslint-disable import/export */
 import "source-map-support/register";
 
 export * from "./test-autorest";

@@ -1,7 +1,9 @@
+import { QuickDataSource } from "@azure-tools/datastore";
 import { createAllOfCleaner } from "./allof-cleaner";
 import { createCommandPlugin } from "./command";
 
 import { createComponentKeyRenamerPlugin } from "./component-key-renamer";
+import { createComponentModifierPlugin } from "./component-modifier";
 import { createComponentsCleanerPlugin } from "./components-cleaner";
 import { createSwaggerToOpenApi3Plugin } from "./conversion";
 import { createDeduplicatorPlugin } from "./deduplicator";
@@ -16,8 +18,12 @@ import {
 } from "./identity";
 import { createOpenApiLoaderPlugin, createSwaggerLoaderPlugin } from "./loaders";
 import { createMultiApiMergerPlugin } from "./merger";
+import { createCSharpReflectApiVersionPlugin } from "./metadata-generation";
 import { createNewComposerPlugin } from "./new-composer";
+import { createOpenAPIStatsCollectorPlugin } from "./openapi-stats-collector";
 import { createProfileFilterPlugin } from "./profile-filter";
+import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from "./schema-validation";
+import { createSemanticValidationPlugin } from "./semantics-validation";
 import { subsetSchemaDeduplicatorPlugin } from "./subset-schemas-deduplicator";
 import {
   createImmediateTransformerPlugin,
@@ -27,12 +33,6 @@ import {
 } from "./transformer";
 import { createTreeShakerPlugin } from "./tree-shaker/tree-shaker";
 import { createApiVersionParameterHandlerPlugin } from "./version-param-handler";
-import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from "./schema-validation";
-import { createOpenAPIStatsCollectorPlugin } from "./openapi-stats-collector";
-import { QuickDataSource } from "@azure-tools/datastore";
-import { createCSharpReflectApiVersionPlugin } from "./metadata-generation";
-import { createComponentModifierPlugin } from "./component-modifier";
-import { createSemanticValidationPlugin } from "./semantics-validation";
 
 export const CORE_PLUGIN_MAP = {
   help: createHelpPlugin(),

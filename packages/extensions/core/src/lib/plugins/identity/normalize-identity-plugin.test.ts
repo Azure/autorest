@@ -14,7 +14,7 @@ describe("NormalizeIdentityPlugin", () => {
     context = {
       config: {},
     } as any;
-    const ds = new DataStore();
+    const ds = new DataStore({ autoUnloadData: false });
     sink = ds.getDataSink();
   });
 
@@ -23,7 +23,7 @@ describe("NormalizeIdentityPlugin", () => {
     const result = await plugin(context, source, sink);
     const results = await result.enum();
 
-    return Promise.all(results.map((x) => result.ReadStrict(x)));
+    return Promise.all(results.map((x) => result.readStrict(x)));
   };
 
   it("keeps only the filename if there is a single file", async () => {

@@ -2,14 +2,14 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { DataHandle } from "@azure-tools/datastore";
 import { OperationAbortedException } from "@autorest/common";
+import { DataHandle } from "@azure-tools/datastore";
+import { AutorestContext } from "../../context";
 import { Channel } from "../../message";
 import { createPerFilePlugin, PipelinePlugin } from "../../pipeline/common";
-import { AutorestContext } from "../../context";
-import { SwaggerSchemaValidator } from "./swagger-schema-validator";
-import { OpenApi3SchemaValidator } from "./openapi3-schema-validator";
 import { ValidationError } from "./json-schema-validator";
+import { OpenApi3SchemaValidator } from "./openapi3-schema-validator";
+import { SwaggerSchemaValidator } from "./swagger-schema-validator";
 
 export const SCHEMA_VIOLATION_ERROR_CODE = "schema_violation";
 
@@ -40,25 +40,14 @@ export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
   return createPerFilePlugin(async (context) => async (fileIn, sink) => {
     const obj = await fileIn.readObject<any>();
     const isSecondary = !!obj["x-ms-secondary-file"];
-    const markErrorAsWarnings = context.config["mark-oai3-errors-as-warnings"];
     const errors = await validator.validateFile(fileIn);
     if (errors.length > 0) {
       for (const error of errors) {
-        const level = markErrorAsWarnings || isSecondary ? "warning" : "error";
+        const level = isSecondary ? "warning" : "error";
         logValidationError(context, fileIn, error as any, level);
       }
 
-      if (!isSecondary && !markErrorAsWarnings) {
-        context.Message({
-          Channel: Channel.Error,
-          Plugin: "schema-validator-openapi",
-          Text: [
-            `Unrecoverable schema validation errors were encountered in OpenAPI 3 input files.`,
-            `You can use --mark-oai3-errors-as-warnings to keep mark as warning and let autorest keep going.`,
-            `If you believe this the validation error is incorrect, please open an issue at https://github.com/Azure/autorest`,
-            `NOTE: in the future this flag will be removed and validation error will fail the pipeline.`,
-          ].join("\n"),
-        });
+      if (!isSecondary) {
         throw new OperationAbortedException();
       }
     }

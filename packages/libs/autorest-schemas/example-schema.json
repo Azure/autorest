@@ -32,6 +32,10 @@
           "$ref": "#/xmsResponseExample"
         }
       }
+    },
+    "x-ms-original-file": {
+      "type": "string",
+      "description": "INTERNAL: Value added coresponding to the uri of the examples when loaded via $ref"
     }
   },
   "xmsParametersExample": {

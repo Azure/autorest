@@ -3,16 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { ChildProcess } from "child_process";
+import { Readable, Writable } from "stream";
+import { Exception } from "@autorest/common";
 import { DataHandle, DataSink, DataSource, LazyPromise, Mapping, PathPosition } from "@azure-tools/datastore";
 import { ensureIsFolderUri } from "@azure-tools/uri";
-import { ChildProcess, fork } from "child_process";
 import { RawSourceMap } from "source-map";
-import { Readable, Writable } from "stream";
 import { CancellationToken, createMessageConnection } from "vscode-jsonrpc";
 import { Artifact } from "../artifact";
 import { AutorestContext } from "../context";
 import { EventEmitter } from "../events";
-import { Exception } from "@autorest/common";
 import { ArtifactMessage, Channel, Message } from "../message";
 import { IAutoRestPluginInitiator, IAutoRestPluginInitiatorTypes, IAutoRestPluginTargetTypes } from "./plugin-api";
 
@@ -227,7 +227,6 @@ export class AutoRestExtension extends EventEmitter {
       sink,
       onFile,
       onMessage,
-      cancellationToken,
     );
 
     // dispatch
@@ -250,7 +249,6 @@ export class AutoRestExtension extends EventEmitter {
     sink: DataSink,
     onFile: (data: DataHandle) => void,
     onMessage: (message: Message) => void,
-    cancellationToken: CancellationToken,
   ): IAutoRestPluginInitiatorEndpoint {
     const inputFileHandles = new LazyPromise(async () => {
       const names = await inputScope.Enum();

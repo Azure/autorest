@@ -2,6 +2,18 @@
   "name": "@autorest/extension-base",
   "entries": [
     {
+      "version": "3.3.1",
+      "tag": "@autorest/extension-base_v3.3.1",
+      "date": "Wed, 08 Sep 2021 15:39:22 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.6.0` to `~2.7.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.3.0",
       "tag": "@autorest/extension-base_v3.3.0",
       "date": "Mon, 19 Jul 2021 15:15:41 GMT",

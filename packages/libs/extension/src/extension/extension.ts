@@ -1,8 +1,8 @@
 import { ChildProcess } from "child_process";
-import { isFile, readdir, readFile } from "@azure-tools/async-io";
-import { normalize } from "path";
-import { Package } from "./package";
 import { readFileSync } from "fs";
+import { normalize } from "path";
+import { isFile, readdir, readFile } from "@azure-tools/async-io";
+import { Package } from "./package";
 
 /**
  * Extension is an installed Package

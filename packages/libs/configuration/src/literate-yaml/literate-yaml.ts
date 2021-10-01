@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, indexToPosition } from "@azure-tools/datastore";
-import { getYamlNodeValue } from "@azure-tools/yaml";
-import { validateJson } from "@azure-tools/json";
 import { OperationAbortedException, AutorestLogger } from "@autorest/common";
+import { DataHandle, DataSink, indexToPosition } from "@azure-tools/datastore";
+import { validateJson } from "@azure-tools/json";
+import { getYamlNodeValue } from "@azure-tools/yaml";
 import { LiterateYamlErrorCodes } from "./error-codes";
 import { parseCodeBlocksFromMarkdown } from "./markdown-parser";
 

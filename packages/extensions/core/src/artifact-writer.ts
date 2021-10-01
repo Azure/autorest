@@ -1,7 +1,6 @@
-import { Artifact } from "./lib/artifact";
-import { AutorestContext } from "./lib/context";
+import { AutorestConfiguration } from "@autorest/configuration";
 import { writeBinary, writeString } from "@azure-tools/uri";
-import { AutorestConfiguration } from "../../../libs/configuration/dist";
+import { Artifact } from "./lib/artifact";
 
 export class ArtifactWriter {
   private tasks: Promise<void>[] = [];

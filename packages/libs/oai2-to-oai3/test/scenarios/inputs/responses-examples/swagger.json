@@ -1,0 +1,32 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "test",
+    "description": "Test"
+  },
+  "produces": ["application/json"],
+  "consumes": ["application/json"],
+  "paths": {
+    "/invalid-response-examples": {
+      "get": {
+        "operationId": "InvalidResponseExamples",
+        "consumes": [],
+        "produces": ["application/json", "text/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": { "type": "string" },
+            "examples": {
+              "application/json": "This example is valid  as 'application/json' is defined in the global produces",
+              "text/json": "This example is valid  as 'text/json' is defined in the operation produces",
+              "application/xml": "This example is invvalid  as 'application/xml' is NOT defined in the produces. It shouldn't be carried to oai3",
+              "unknown": "This example is invvalid as 'unknown' is NOT defined in the produces. It shouldn't be carried to oai3"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {}
+}

@@ -20,10 +20,10 @@ export class CachingFileSystem implements IFileSystem {
       const data = await this.actualFileSystem.read(uri);
       this.cache.set(uri, data);
       return data;
-    } catch (E) {
+    } catch (error: any) {
       // not available, but remember that.
-      this.cache.set(uri, E);
-      throw E;
+      this.cache.set(uri, error);
+      throw error;
     }
   }
 

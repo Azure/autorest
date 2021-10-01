@@ -1,0 +1,43 @@
+{
+  "servers": [],
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0",
+    "title": "test",
+    "description": "Test"
+  },
+  "paths": {
+    "/invalid-response-examples": {
+      "get": {
+        "operationId": "InvalidResponseExamples",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "response": {
+                    "value": "This example is valid  as 'application/json' is defined in the global produces"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "response": {
+                    "value": "This example is valid  as 'text/json' is defined in the operation produces"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

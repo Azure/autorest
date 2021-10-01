@@ -1,6 +1,48 @@
 # Change Log - @autorest/core
 
-This log was last generated on Mon, 19 Jul 2021 15:15:41 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Sep 2021 19:51:32 GMT and should not be manually modified.
+
+## 3.6.3
+Thu, 23 Sep 2021 19:51:32 GMT
+
+### Patches
+
+- **Added** `include-x-ms-examples-original-file` flag to activate `x-ms-original-file` injection in `x-ms-examples`
+
+## 3.6.2
+Fri, 17 Sep 2021 17:52:01 GMT
+
+### Patches
+
+- **Fix** Deduplicating enums dropped `format` property
+
+## 3.6.1
+Thu, 16 Sep 2021 18:49:17 GMT
+
+### Patches
+
+- **Fix** Deduplicating `boolean` enums changed type to `string`
+
+## 3.6.0
+Wed, 08 Sep 2021 15:39:22 GMT
+
+### Minor changes
+
+- **Uptake** New logger
+- Uptake new changes to Swagger->OpenApi3 converter
+- `x-ms-examples` loaded via $ref will save orignal location with `x-ms-original-file` extension property
+- Keep `x-` extension properties when merging enums
+- **Perf** Small perf improvement for components cleaner plugin
+-  **Update** to new path mapping sourcemap functionality
+- **Remove** quick-check plugin
+
+### Patches
+
+- **Perf** Minor perf in merger plugin
+- **Perf** Minor performance improvement in allof cleaner plugin
+- Log error when directive where clause is invalid
+- Improve erorr message for directive when there is an error in the transform code
+- **Fix** Error in config loading would not be logged as the logging session would not be awaited on
 
 ## 3.5.0
 Mon, 19 Jul 2021 15:15:41 GMT

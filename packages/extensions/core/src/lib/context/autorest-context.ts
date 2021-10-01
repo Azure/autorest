@@ -1,40 +1,57 @@
-import { DataStore, CachingFileSystem } from "@azure-tools/datastore";
 import { basename, dirname } from "path";
-import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
-import { Artifact } from "../artifact";
+import {
+  AutorestError,
+  FilterLogger,
+  AutorestLogger,
+  AutorestWarning,
+  LogInfo,
+  LogLevel,
+  LogSuppression,
+  IAutorestLogger,
+} from "@autorest/common";
 import {
   AutorestNormalizedConfiguration,
   getNestedConfiguration,
   ResolvedDirective,
   resolveDirectives,
+  AutorestConfiguration,
+  arrayOf,
+  extendAutorestConfiguration,
 } from "@autorest/configuration";
-import { MessageEmitter } from "./message-emitter";
-import { IEvent } from "../events";
-import { AutorestConfiguration, arrayOf, extendAutorestConfiguration } from "@autorest/configuration";
-import { AutorestError, AutorestLogger, AutorestWarning } from "@autorest/common";
-import { Message } from "../message";
-import { AutorestCoreLogger } from "./logger";
-import { VERSION } from "../constants";
-import { StatsCollector } from "../stats";
-import { LoggingSession } from "./logging-session";
-import { PipelinePluginDefinition } from "../pipeline/plugin-loader";
-import { cloneDeep } from "lodash";
 
-export class AutorestContext implements AutorestLogger {
+import { DataStore, CachingFileSystem } from "@azure-tools/datastore";
+import { cloneDeep } from "lodash";
+import { CancellationToken, CancellationTokenSource } from "vscode-jsonrpc";
+import { Artifact } from "../artifact";
+import { VERSION } from "../constants";
+import { IEvent } from "../events";
+import { PipelinePluginDefinition } from "../pipeline/plugin-loader";
+import { StatsCollector } from "../stats";
+import { MessageEmitter } from "./message-emitter";
+
+export class AutorestContext implements IAutorestLogger {
   public config: AutorestConfiguration;
   public configFileFolderUri: string;
-  private logger: AutorestCoreLogger;
+  private logger: AutorestLogger;
+  private originalLogger: AutorestLogger;
 
   public constructor(
     config: AutorestConfiguration,
     public fileSystem: CachingFileSystem,
     public messageEmitter: MessageEmitter,
+    logger: AutorestLogger,
     public stats: StatsCollector,
-    public asyncLogManager: LoggingSession,
     private plugin?: PipelinePluginDefinition,
   ) {
     this.config = config;
-    this.logger = new AutorestCoreLogger(config, messageEmitter, asyncLogManager);
+    this.originalLogger = logger;
+    this.logger = logger.with(
+      new FilterLogger({
+        level: getLogLevel(config),
+        suppressions: getLogSuppressions(config),
+      }),
+    );
+
     this.configFileFolderUri = config.configFileFolderUri;
   }
 
@@ -69,8 +86,12 @@ export class AutorestContext implements AutorestLogger {
     this.logger.trackWarning(error);
   }
 
-  public Message(m: Message) {
-    void this.logger.log(m);
+  public log(log: LogInfo) {
+    this.logger.log(log);
+  }
+
+  public get diagnostics() {
+    return this.logger.diagnostics;
   }
 
   public resolveDirectives(predicate?: (each: ResolvedDirective) => boolean) {
@@ -202,8 +223,8 @@ export class AutorestContext implements AutorestLogger {
         nestedConfig,
         this.fileSystem,
         this.messageEmitter,
+        this.originalLogger,
         this.stats,
-        this.asyncLogManager,
         plugin,
       );
     }
@@ -219,9 +240,29 @@ export class AutorestContext implements AutorestLogger {
       nestedConfig,
       this.fileSystem,
       this.messageEmitter,
+      this.originalLogger,
       this.stats,
-      this.asyncLogManager,
       this.plugin,
     );
   }
+
+  public protectFiles(filename: string) {
+    this.messageEmitter.ProtectFile.Dispatch(filename);
+  }
+}
+
+export function getLogLevel(config: AutorestNormalizedConfiguration): LogLevel {
+  return config.debug ? "debug" : config.verbose ? "verbose" : config.level ?? "information";
+}
+
+export function getLogSuppressions(config: AutorestConfiguration): LogSuppression[] {
+  const legacySuppressions: LogSuppression[] = resolveDirectives(config, (x) => x.suppress.length > 0).map((x) => {
+    return {
+      code: x.suppress.join("/"),
+      from: x.from,
+      where: x.where,
+    };
+  });
+
+  return [...(config.suppressions ?? []), ...legacySuppressions];
 }

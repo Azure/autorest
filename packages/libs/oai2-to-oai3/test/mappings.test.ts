@@ -1,5 +1,5 @@
-import { serializeJsonPointer } from "../../json/dist";
-import { Oai2ToOai3 } from "../src";
+import { serializeJsonPointer } from "@azure-tools/json";
+import { ConverterLogger, Oai2ToOai3 } from "../src";
 import { OpenAPI2Document } from "../src/oai2";
 
 const defaultOpenApi2 = {
@@ -8,10 +8,15 @@ const defaultOpenApi2 = {
   definitions: {},
 } as const;
 
+const logger: ConverterLogger = {
+  trackError: jest.fn(),
+  trackWarning: jest.fn(),
+};
+
 const defaultMappings = new Set(["", "/swagger", "/paths"]);
 async function convert(spec: Partial<OpenAPI2Document>) {
   const doc = { ...defaultOpenApi2, ...spec };
-  const converter = new Oai2ToOai3("source.json", doc);
+  const converter = new Oai2ToOai3(logger, "source.json", doc);
   await converter.convert();
   return converter.mappings
     .map((x) => ({

@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Value } from "./value";
 import { DeepPartial } from "@azure-tools/codegen";
-import { Schema } from "./schema";
 import { Property } from "./property";
+import { Schema } from "./schema";
+import { Value } from "./value";
 
 export enum ImplementationLocation {
   /** should be exposed as a method parameter in the operation */

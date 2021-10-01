@@ -13,7 +13,7 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
       from: { type: "string", array: true },
       where: { type: "string", array: true },
       reason: { type: "string" },
-      suppress: { type: "string", array: true },
+      suppress: { type: "string", array: true, deprecated: true },
       set: { type: "string", array: true },
       transform: { type: "string", array: true },
       "text-transform": { type: "string", array: true },
@@ -43,7 +43,20 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
     description: "Change the end of line character for generated output.",
   },
 
-  "message-format": { type: "string", enum: ["json", "yaml", "regular"] },
+  "message-format": { type: "string", enum: ["json", "regular"] },
+  verbose: { type: "boolean" },
+  debug: { type: "boolean" },
+  level: { type: "string", enum: ["debug", "verbose", "information", "warning", "error", "fatal"] },
+  suppressions: {
+    array: true,
+    type: {
+      code: { type: "string" },
+      from: { type: "string", array: true },
+      where: { type: "string", array: true },
+      reason: { type: "string" },
+    },
+  },
+
   title: { type: "string" },
   "github-auth-token": { type: "string" },
   "output-file": { type: "string" },
@@ -53,17 +66,13 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
     description: "Force updating the version of core even if there is a local version satisfying the requirement.",
   },
   memory: { type: "string", description: "Configure max memory allowed for autorest process(s)" },
+  "include-x-ms-examples-original-file": {
+    type: "boolean",
+    description: "Include x-ms-original-file property in x-ms-examples",
+  },
 
   // Feature flags
   "deduplicate-inline-models": { type: "boolean" },
-
-  // Temporary flag to disable later.
-  "mark-oai3-errors-as-warnings": {
-    type: "boolean",
-    deprecated: true,
-    description:
-      "Mark OpenAPI3 validation(schema) error as warnings. (Will be removed and OpenAPI3 validation errors will always fail the pipeline)",
-  },
 } as const;
 
 export type AutorestRawConfiguration = RawConfiguration<typeof AUTOREST_CONFIGURATION_SCHEMA> & {

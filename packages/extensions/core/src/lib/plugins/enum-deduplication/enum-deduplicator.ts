@@ -1,15 +1,26 @@
-import { AnyObject, Node, TransformerViaPointer, visit } from "@azure-tools/datastore";
-import compareVersions from "compare-versions";
 import { toSemver, maximum, pascalCase } from "@azure-tools/codegen";
+import { AnyObject, Node, TransformerViaPointer, visit } from "@azure-tools/datastore";
 import * as oai3 from "@azure-tools/openapi";
+import { includeXDashKeys } from "@azure-tools/openapi";
+import compareVersions from "compare-versions";
 import { cloneDeep } from "lodash";
+
+interface EnumEntry {
+  target: AnyObject;
+  value: AnyObject;
+  key: string;
+  pointer: string;
+  originalNodes: Iterable<Node>;
+}
+
+/**
+ * List of x- properties that shouldn't be merged automatically
+ */
+const excludedProperties = new Set(["x-ms-enum", "x-ms-metadata"]);
 
 export class EnumDeduplicator extends TransformerViaPointer<oai3.Model, oai3.Model> {
   private newRefs: Record<string, string> = {};
-  protected enums = new Map<
-    string,
-    Array<{ target: AnyObject; value: AnyObject; key: string; pointer: string; originalNodes: Iterable<Node> }>
-  >();
+  protected enums = new Map<string, EnumEntry[]>();
 
   async visitLeaf(target: AnyObject, value: AnyObject, key: string, pointer: string, originalNodes: Iterable<Node>) {
     if (value && pointer.startsWith("/components/schemas/") && value.enum) {
@@ -19,8 +30,7 @@ export class EnumDeduplicator extends TransformerViaPointer<oai3.Model, oai3.Mod
         return false;
       }
       // use the given name if specified, otherwise fallback to the metadata name
-      const name = pascalCase(value["x-ms-enum"] ? value["x-ms-enum"].name : value["x-ms-metadata"].name);
-
+      const name = pascalCase(getEnumName(value));
       const e = this.enums.get(name) || this.enums.set(name, []).get(name) || [];
       e.push({ target, value, key, pointer, originalNodes });
       return true;
@@ -40,7 +50,7 @@ export class EnumDeduplicator extends TransformerViaPointer<oai3.Model, oai3.Mod
       );
 
       const first = enumSet[0];
-      const name = first.value["x-ms-enum"] ? first.value["x-ms-enum"].name : first.value["x-ms-metadata"].name;
+      const name = getEnumName(first.value);
       if (enumSet.length === 1) {
         const originalRef = `#/components/schemas/${first.key}`;
         const newRef = `#/components/schemas/${name}`;
@@ -59,10 +69,15 @@ export class EnumDeduplicator extends TransformerViaPointer<oai3.Model, oai3.Mod
       if (first.value.description) {
         this.clone(mergedEnum, "description", first.pointer, first.value.description);
       }
+      if (first.value.type) {
+        this.clone(mergedEnum, "type", first.pointer, first.value.type);
+      }
       if (first.value["x-ms-enum"]) {
         this.clone(mergedEnum, "x-ms-enum", first.pointer, first.value["x-ms-enum"]);
       }
-      this.clone(mergedEnum, "type", first.pointer, "string");
+      if (first.value["format"]) {
+        this.clone(mergedEnum, "format", first.pointer, first.value["format"]);
+      }
       const newRef = `#/components/schemas/${name}`;
       this.newArray(mergedEnum, "enum", "");
 
@@ -74,6 +89,12 @@ export class EnumDeduplicator extends TransformerViaPointer<oai3.Model, oai3.Mod
         }
         const originalRef = `#/components/schemas/${each.key}`;
         this.newRefs[originalRef] = newRef;
+
+        for (const prop of includeXDashKeys(each.value).filter((x) => !excludedProperties.has(x))) {
+          if (!(prop in mergedEnum)) {
+            this.clone(mergedEnum, prop, each.pointer, each.value[prop]);
+          }
+        }
       }
     }
 
@@ -99,4 +120,13 @@ export class EnumDeduplicator extends TransformerViaPointer<oai3.Model, oai3.Mod
       }
     }
   }
+}
+
+/**
+ * Returns the name of the enum. Either provided via `x-ms-enum.name` or resolved automatically.
+ * @param value Enum Schema
+ * @returns name of the enum.
+ */
+function getEnumName(value: oai3.Schema): string {
+  return value["x-ms-enum"]?.name ? value["x-ms-enum"].name : value["x-ms-metadata"].name;
 }

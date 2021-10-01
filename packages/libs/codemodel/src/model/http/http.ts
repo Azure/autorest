@@ -1,14 +1,14 @@
-import { SerializationStyle } from "./serialization-style";
-import { HttpMethod } from "./http-method";
-import { ParameterLocation } from "./parameter-location";
-import { Protocol } from "../common/metadata";
-import { StatusCode } from "./status-code";
-import { SecurityRequirement } from "./security";
-import { Schema } from "../common/schema";
 import { DeepPartial, KnownMediaType, Initializer } from "@azure-tools/codegen";
 import { Extensions } from "../common/extensions";
-import { GroupSchema } from "../common/schemas/object";
 import { Languages } from "../common/languages";
+import { Protocol } from "../common/metadata";
+import { Schema } from "../common/schema";
+import { GroupSchema } from "../common/schemas/object";
+import { HttpMethod } from "./http-method";
+import { ParameterLocation } from "./parameter-location";
+import { SecurityRequirement } from "./security";
+import { SerializationStyle } from "./serialization-style";
+import { StatusCode } from "./status-code";
 
 /** extended metadata for HTTP operation parameters  */
 export interface HttpParameter extends Protocol {

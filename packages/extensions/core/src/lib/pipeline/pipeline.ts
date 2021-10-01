@@ -5,6 +5,8 @@
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
+import { createHash } from "crypto";
+import { promisify } from "util";
 import {
   DataHandle,
   DataSource,
@@ -16,17 +18,13 @@ import {
   PipeState,
   mergePipeStates,
 } from "@azure-tools/datastore";
-import { AutorestContext } from "../context";
-import { Channel } from "../message";
-import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
-
-import { createArtifactEmitterPlugin } from "../plugins/emitter";
-import { createHash } from "crypto";
-import { isCached, readCache, writeCache } from "./pipeline-cache";
-import { CORE_PLUGIN_MAP } from "../plugins";
-import { loadPlugins, PipelinePluginDefinition } from "./plugin-loader";
 import { mapValues, omitBy } from "lodash";
-import { promisify } from "util";
+import { AutorestContext } from "../context";
+import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
+import { CORE_PLUGIN_MAP } from "../plugins";
+import { createArtifactEmitterPlugin } from "../plugins/emitter";
+import { isCached, readCache, writeCache } from "./pipeline-cache";
+import { loadPlugins, PipelinePluginDefinition } from "./plugin-loader";
 
 const safeEval = createSandbox();
 const setImmediatePromise = promisify(setImmediate);
@@ -295,7 +293,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     }
 
     if (inputScope.skip) {
-      context.Message({ Channel: Channel.Debug, Text: `${nodeName} - SKIPPING` });
+      context.debug(`${nodeName} - SKIPPING`);
       return inputScope;
     }
     try {
@@ -320,18 +318,18 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
         (await isCached(cacheKey))
       ) {
         // shortcut -- get the outputs directly from the cache.
-        context.Message({
-          Channel: times ? Channel.Information : Channel.Debug,
-          Text: `${nodeName} - CACHED inputs = ${(await inputScope.enum()).length} [0.0 s]`,
+        context.log({
+          level: times ? "information" : "debug",
+          message: `${nodeName} - CACHED inputs = ${(await inputScope.enum()).length} [0.0 s]`,
         });
 
         return await readCache(cacheKey, context.DataStore.getDataSink(node.outputArtifact));
       }
 
       const t1 = process.uptime() * 100;
-      context.Message({
-        Channel: times ? Channel.Information : Channel.Debug,
-        Text: `${nodeName} - START inputs = ${(await inputScope.enum()).length}`,
+      context.log({
+        level: times ? "information" : "debug",
+        message: `${nodeName} - START inputs = ${(await inputScope.enum()).length}`,
       });
 
       // creates the actual plugin.
@@ -339,9 +337,9 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
       const t2 = process.uptime() * 100;
 
       const memSuffix = context.config.debug ? `[${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)} MB]` : "";
-      context.Message({
-        Channel: times ? Channel.Information : Channel.Debug,
-        Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]${memSuffix}`,
+      context.log({
+        level: times ? "information" : "debug",
+        message: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]${memSuffix}`,
       });
 
       // if caching is enabled, let's cache this scopeResult.

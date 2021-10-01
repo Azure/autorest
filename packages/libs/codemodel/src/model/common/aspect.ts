@@ -1,8 +1,8 @@
+import { DeepPartial } from "@azure-tools/codegen";
 import { ApiVersions } from "./api-version";
 import { Deprecation } from "./deprecation";
 import { ExternalDocumentation } from "./external-documentation";
 import { Metadata } from "./metadata";
-import { DeepPartial } from "@azure-tools/codegen";
 
 /** the base interface that represents an aspect of the model. */
 export interface Aspect extends Metadata {

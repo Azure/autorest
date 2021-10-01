@@ -32,9 +32,11 @@
 
    - [How][powershell] do I use AutoRest to build `Powershell` cmdlets?
 
-9. [Troubleshooting][troubleshooting]
+9. Use `autorest` via [docker][docker]
 
-10. [FAQ][faq]
+10. [Troubleshooting][troubleshooting]
+
+11. [FAQ][faq]
 
 <!-- LINKS -->
 
@@ -46,5 +48,6 @@
 [migrate]: https://github.com/Azure/autorest/blob/main/docs/migrate/readme.md
 [dev]: https://github.com/Azure/autorest/blob/main/docs/developer/readme.md
 [powershell]: https://github.com/Azure/autorest.powershell/blob/master/docs/readme.md
+[docker]: https://github.com/Azure/autorest/blob/main/docs/docker.md
 [troubleshooting]: https://github.com/Azure/autorest/blob/main/docs/troubleshooting.md
 [faq]: https://github.com/Azure/autorest/blob/main/docs/faq.md

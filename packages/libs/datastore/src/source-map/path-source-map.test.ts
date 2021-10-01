@@ -1,3 +1,4 @@
+import fs from "fs";
 import { PathSourceMap } from "./path-source-map";
 
 const store = new Map();
@@ -8,7 +9,6 @@ jest.mock("fs", () => ({
     readFile: jest.fn((file) => store.get(file)),
   },
 }));
-import fs from "fs";
 
 const source = "source.json";
 

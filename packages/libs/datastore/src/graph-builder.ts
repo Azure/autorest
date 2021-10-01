@@ -1,7 +1,7 @@
-import { createAssignmentMapping } from "./source-map/source-map";
-import { Exception } from "@azure-tools/tasks";
 import { JsonPointer, parseJsonPointer } from "@azure-tools/json";
+import { Exception } from "@azure-tools/tasks";
 import { PathMapping } from "./source-map/path-source-map";
+import { createAssignmentMapping } from "./source-map/source-map";
 
 export function createGraphProxy<T extends object>(
   originalFileName: string,
