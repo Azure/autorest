@@ -1,5 +1,5 @@
-import { fixSwaggerMissingType } from ".";
 import { FixCode } from "../types";
+import { fixSwaggerMissingType } from "./swagger-fixer";
 
 const ObjectMissingType = Object.freeze({
   properties: {
