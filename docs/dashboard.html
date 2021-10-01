@@ -106,7 +106,12 @@
           ];
           const reportsByRepo /*: { [repo: string]: { version: string, uri: string }[]] }*/ = {};
           for (const report of reports) {
-            const [match, repo, version] = /^autorest\.(.+)_(.+)\.md$/.exec(report);
+            const didMatch = /^autorest\.(.+)_(.+)\.md$/.exec(report);
+            if (!didMatch) {
+              console.error("Unexpected report name", report);
+              continue;
+            }
+            const [match, repo, version] = didMatch;
             if (!reportsByRepo[repo]) reportsByRepo[repo] = [];
             reportsByRepo[repo].push({ version: version, uri: `${azureBlobContainer_coverage}/${report}` });
           }
