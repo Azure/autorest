@@ -10,15 +10,19 @@ First, make sure when generating you are using AutoRest V3. Follow the steps in 
 
 AutoRest 3.0 finally supports OpenAPI3 files as an input format, with the following caveats:
 
-- existing AutoRest v2 generators may not support all features from OpenAPI3. (see next section)
 - `anyOf`, `oneOf` are not currently supported
 - other OpenAPI3 specific features may not be entirely supported.
 
-### Generators
+### Generators - **Breaking**
 
 A new set of language generator plugins are being written that adopt the lighter-weight patterns for Azure Core libraries.<br>
 
 **The older generators are only compatible with Autorest V2.**
+
+| Generator   | Packages names                         | Autorest Core |
+| ----------- | -------------------------------------- | ------------- |
+| V2 (Track1) | `@microsoft.azure/autorest.<language>` | `2.x`         |
+| V3 (Track2) | `@autorest/<language>`                 | `3.x`         |
 
 ### Generate More Idiomatic SDKs
 
