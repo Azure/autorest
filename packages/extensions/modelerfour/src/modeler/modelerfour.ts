@@ -1963,7 +1963,7 @@ export class ModelerFour {
 
   processParameters(httpOperation: OpenAPI.HttpOperation, operation: Operation, pathItem: OpenAPI.PathItem) {
     const parameters = Object.values(httpOperation.parameters ?? {})
-      .map((each) => dereference(this.input, each))
+      .map((x) => ({ ...dereference<OpenAPI.Parameter>(this.input, x), original: x }))
       .filter((x) => !this.isParameterIgnoredHeader(x.instance));
 
     for (const pp of parameters) {
@@ -1983,10 +1983,10 @@ export class ModelerFour {
 
         // Not an APIVersion Parameter
         const implementation = pp.fromRef
-          ? "method" === <any>parameter["x-ms-parameter-location"]
+          ? "method" === parameter["x-ms-parameter-location"]
             ? ImplementationLocation.Method
             : ImplementationLocation.Client
-          : "client" === <any>parameter["x-ms-parameter-location"]
+          : "client" === parameter["x-ms-parameter-location"]
           ? ImplementationLocation.Client
           : ImplementationLocation.Method;
 
@@ -2015,9 +2015,10 @@ export class ModelerFour {
           parameterSchema = dictionarySchema;
         }
 
+        const description = pp.original.description || this.interpret.getDescription("", parameter);
         /* regular, everyday parameter */
         const newParam = operation.addParameter(
-          new Parameter(preferredName, this.interpret.getDescription("", parameter), parameterSchema, {
+          new Parameter(preferredName, description, parameterSchema, {
             required: parameter.required ? true : undefined,
             implementation,
             extensions: this.interpret.getExtensionProperties(parameter),
