@@ -1,10 +1,10 @@
+import { relative, dirname, basename } from "path";
+import { URL } from "url";
 import { DataHandle, DataSink, DataSource, QuickDataSource, visit } from "@azure-tools/datastore";
 import { parseJsonRef, stringifyJsonRef, updateJsonRefs } from "@azure-tools/jsonschema";
 import { cloneDeep } from "lodash";
 import { AutorestContext } from "../../context";
 import { PipelinePlugin } from "../../pipeline/common";
-import { URL } from "url";
-import { relative, dirname, basename } from "path";
 
 function resolveRelativeRef(currentFile: string, newRef: string) {
   return relative(dirname(currentFile), newRef).replace(/\\/g, "/");

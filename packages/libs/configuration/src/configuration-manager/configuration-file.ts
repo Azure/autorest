@@ -8,7 +8,7 @@ import {
   RawConfiguration,
 } from "../configuration-schema";
 import { desugarRawConfig } from "../desugar";
-import { CodeBlock, parseCodeBlocks } from "../literate-yaml";
+import { CodeBlock, parseConfigFile } from "../literate-yaml";
 import { arrayOf } from "../utils";
 
 export interface ConfigurationFile {
@@ -43,7 +43,7 @@ export const readConfigurationFile = async (
   };
 
   // load config
-  const hConfig = await parseCodeBlocks(logger, configFile, sink);
+  const hConfig = await parseConfigFile(logger, configFile, sink);
   if (hConfig.length === 1 && hConfig[0].info === null && configFile.description.toLowerCase().endsWith(".md")) {
     // this is a whole file, and it's a markdown file.
     return { ...base };

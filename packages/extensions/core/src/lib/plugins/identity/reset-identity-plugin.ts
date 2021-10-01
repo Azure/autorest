@@ -1,7 +1,8 @@
-import { PipelinePlugin } from "../../pipeline/common";
-import { AutorestContext } from "../../context";
+import { identitySourceMapping } from "@autorest/common";
 import { DataSource, DataSink, QuickDataSource } from "@azure-tools/datastore";
 import { uniqBy } from "lodash";
+import { AutorestContext } from "../../context";
+import { PipelinePlugin } from "../../pipeline/common";
 
 /**
  * Add the given suffix to the given filename before the file extension.
@@ -18,7 +19,7 @@ function insertIndexSuffix(name: string, suffix: number): string {
 }
 
 async function resetIdentity(context: AutorestContext, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map((x) => input.readStrict(x)));
+  const inputs = await Promise.all((await input.enum()).map((x) => input.readStrict(x)));
   const numberEachFile = inputs.length > 1 && uniqBy(inputs, (each) => each.description);
   const result = await Promise.all(
     inputs.map(async (input, index) => {

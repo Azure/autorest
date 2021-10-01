@@ -94,7 +94,7 @@ interface Lib {
  * @param transformCode Code to transform.
  * @returns the modified value.
  */
-export const evalDirectiveTransform = (transformCode: string, context: TransformOptions): unknown => {
+export function evalDirectiveTransform(transformCode: string, context: TransformOptions): unknown {
   const { config } = context;
 
   const evalContext: TransformEvalContext = {
@@ -104,8 +104,8 @@ export const evalDirectiveTransform = (transformCode: string, context: Transform
     $documentPath: context.documentPath,
     $parent: context.parent,
     $lib: {
-      debug: (text: string) => config.Message({ Channel: Channel.Debug, Text: text }),
-      verbose: (text: string) => config.Message({ Channel: Channel.Debug, Text: text }),
+      debug: (text: string) => config.debug(text),
+      verbose: (text: string) => config.verbose(text),
       // eslint-disable-next-line no-console
       log: (text: string) => console.error(text),
       config,
@@ -113,7 +113,7 @@ export const evalDirectiveTransform = (transformCode: string, context: Transform
   };
 
   return safeEval<unknown>(`(() => { { ${transformCode} }; return $; })()`, evalContext);
-};
+}
 
 export const evalDirectiveTest = (testCode: string, options: TestOptions): unknown[] => {
   const context = {

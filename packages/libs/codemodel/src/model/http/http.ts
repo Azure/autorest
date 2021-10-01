@@ -1,20 +1,19 @@
-import { SerializationStyle } from "./serialization-style";
-import { HttpMethod } from "./http-method";
-import { ParameterLocation } from "./parameter-location";
-import { Protocol } from "../common/metadata";
-import { StatusCode } from "./status-code";
-import { SecurityRequirement } from "./security";
-import { Schema } from "../common/schema";
 import { DeepPartial, KnownMediaType, Initializer } from "@azure-tools/codegen";
 import { Extensions } from "../common/extensions";
-import { GroupSchema } from "../common/schemas/object";
 import { Languages } from "../common/languages";
-import { Deprecation } from "../common/deprecation";
+import { Protocol } from "../common/metadata";
+import { Schema } from "../common/schema";
+import { GroupSchema } from "../common/schemas/object";
+import { HttpMethod } from "./http-method";
+import { ParameterLocation } from "./parameter-location";
+import { SecurityRequirement } from "./security";
+import { SerializationStyle } from "./serialization-style";
+import { StatusCode } from "./status-code";
 
 /** extended metadata for HTTP operation parameters  */
 export interface HttpParameter extends Protocol {
   /** the location that this parameter is placed in the http request */
-  in: ParameterLocation;
+  in: `${ParameterLocation}`;
 
   /** the Serialization Style used for the parameter. */
   style?: SerializationStyle;
@@ -27,7 +26,7 @@ export interface HttpParameter extends Protocol {
 }
 
 export class HttpParameter extends Protocol {
-  constructor(location: ParameterLocation, objectInitializer?: DeepPartial<HttpParameter>) {
+  constructor(location: `${ParameterLocation}`, objectInitializer?: DeepPartial<HttpParameter>) {
     super();
     this.in = location;
     this.apply(objectInitializer);

@@ -11,7 +11,7 @@ A declaration such as
 
 ```yaml false
 declare-directive:
-  my-directive: >-
+  my-directive: |
     [
       {
         transform: `some transformer, parameterized with '${JSON.stringify($)}'`
@@ -41,18 +41,18 @@ In the above example, `directive` gets expanded to:
 
 ```yaml false
 directive:
-  - transform: >-
+  - transform: |
       some transformer, parameterized with '{ "foo": \"bar\", "baz": 42 }'
   - from: code-model-v1
-    transform: >-
+    transform: |
       some other transformer, parameterized with '{ "foo": \"bar\", "baz": 42 }'
   - from: a
     where: b
-    transform: >-
+    transform: |
       some transformer, parameterized with '42'
   - from: a
     where: b
-    transform: >-
+    transform: |
       some other transformer, parameterized with '42'
 ```
 
@@ -64,7 +64,7 @@ Formerly implemented in the AutoRest core itself, `set` is now just syntactic su
 
 ```yaml
 declare-directive:
-  set: >-
+  set: |
     { transform: `return ${JSON.stringify($)}` }
 ```
 

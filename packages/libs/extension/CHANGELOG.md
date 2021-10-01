@@ -1,6 +1,24 @@
 # Change Log - @azure-tools/extension
 
-This log was last generated on Wed, 26 May 2021 18:31:17 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Jul 2021 18:08:46 GMT and should not be manually modified.
+
+## 3.3.1
+Mon, 19 Jul 2021 18:08:46 GMT
+
+### Patches
+
+- **Fix** Using `fs/promises` imort not supported on node 12
+
+## 3.3.0
+Mon, 19 Jul 2021 15:15:42 GMT
+
+### Minor changes
+
+- Drop support for node 10
+
+### Patches
+
+- **Fix** Installing extension when parent directory to ~/.autorest had a package.json
 
 ## 3.2.7
 Wed, 26 May 2021 18:31:17 GMT

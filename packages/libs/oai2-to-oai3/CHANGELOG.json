@@ -2,6 +2,67 @@
   "name": "@azure-tools/oai2-to-oai3",
   "entries": [
     {
+      "version": "4.4.0",
+      "tag": "@azure-tools/oai2-to-oai3_v4.4.0",
+      "date": "Wed, 08 Sep 2021 15:39:22 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Updated** to use new tree source map builder"
+          },
+          {
+            "comment": "Add warning and ignore invalid response examples"
+          },
+          {
+            "comment": "Tweaking request body processing and removed some invalid swagger  processing with `type: file` with non `formData` parmaeter"
+          },
+          {
+            "comment": " **Update** to new path mapping sourcemap functionality"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.4.0` to `~4.5.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.2.0` to `~3.2.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/json\" from `~1.1.0` to `~1.2.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.3.0` to `~0.4.0`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.3.0",
+      "tag": "@azure-tools/oai2-to-oai3_v4.3.0",
+      "date": "Mon, 19 Jul 2021 15:15:42 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Drop support for node 10"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.3.1` to `~4.4.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.1.3` to `~3.2.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/json\" from `~1.0.0` to `~1.1.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.2.2` to `~0.3.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.2.281",
       "tag": "@azure-tools/oai2-to-oai3_v4.2.281",
       "date": "Fri, 16 Apr 2021 15:18:54 GMT",

@@ -9,14 +9,13 @@ import {
   QuickDataSource,
   visit,
 } from "@azure-tools/datastore";
-import { clone, Dictionary } from "@azure-tools/linq";
 import * as oai from "@azure-tools/openapi";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
 
 export class ComponentKeyRenamer extends Transformer<any, oai.Model> {
   // oldRefs -> newRefs;
-  newRefs = new Dictionary<string>();
+  private newRefs: Record<string, string> = {};
 
   public async process(targetParent: ProxyObject<oai.Model>, originalNodes: Iterable<Node>) {
     // initialize certain things ahead of time:
@@ -64,7 +63,7 @@ export class ComponentKeyRenamer extends Transformer<any, oai.Model> {
     }
   }
 
-  visitComponent<T>(type: string, container: ProxyObject<Dictionary<T>>, originalNodes: Iterable<Node>) {
+  visitComponent<T>(type: string, container: ProxyObject<Record<string, T>>, originalNodes: Iterable<Node>) {
     for (const { value, key, pointer } of originalNodes) {
       const name = value["x-ms-metadata"].name;
       this.newRefs[`#/components/${type}/${key}`] = `#/components/${type}/${name}`;
@@ -107,8 +106,7 @@ async function renameComponentsKeys(config: AutorestContext, input: DataSource, 
         each.identity,
         "openapi-document-renamed",
         {
-          mappings: await processor.getSourceMappings(),
-          mappingSources: [each],
+          pathMappings: await processor.getSourceMappings(),
         },
       ),
     );

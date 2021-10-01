@@ -1,19 +1,19 @@
-import { createTestSessionFromFiles } from "../utils";
-import { ModelerFour } from "../../src/modeler/modelerfour";
 import { readdirSync } from "fs";
+import { codeModelSchema } from "@autorest/codemodel";
 import { serialize } from "@azure-tools/codegen";
 import { Model } from "@azure-tools/openapi";
-import { codeModelSchema } from "@autorest/codemodel";
+import { ModelerFour } from "../../src/modeler/modelerfour";
+import { createTestSessionFromFiles } from "../utils";
 
 const cfg = {
-  "modelerfour": {
+  modelerfour: {
     "flatten-models": true,
     "flatten-payloads": true,
     "group-parameters": true,
     "resolve-schema-name-collisons": true,
     "additional-checks": true,
     "always-create-content-type-parameter": true,
-    "naming": {
+    naming: {
       override: {
         $host: "$host",
         cmyk: "CMYK",

@@ -9,6 +9,6 @@
     "url": "https://github.com/Azure/autorest/issues"
   },
   "devDependencies": {
-    "@microsoft.azure/autorest.testserver": "^3.0.21"
+    "@microsoft.azure/autorest.testserver": "^3.0.40"
   }
 }

@@ -1,8 +1,8 @@
+import { isDirectory, exists } from "@azure-tools/async-io";
 import { fetchPackageMetadata } from "@azure-tools/extension";
+import { isUri } from "@azure-tools/uri";
 import { omit } from "lodash";
 import { AutorestNormalizedConfiguration } from "./autorest-normalized-configuration";
-import { isUri } from "@azure-tools/uri";
-import { isDirectory, exists } from "@azure-tools/async-io";
 
 const desugarUseField = async (use: string[] | string) => {
   // Create an empty extension manager to be able to call findPackages.

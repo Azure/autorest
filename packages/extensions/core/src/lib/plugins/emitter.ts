@@ -1,5 +1,6 @@
-import { DataHandle, DataSource, Normalize, QuickDataSource, createSandbox, Stringify } from "@azure-tools/datastore";
+import { DataHandle, DataSource, QuickDataSource, createSandbox } from "@azure-tools/datastore";
 import { resolveUri } from "@azure-tools/uri";
+import { deepNormalize, Stringify } from "@azure-tools/yaml";
 import { AutorestContext } from "../context";
 import { Channel } from "../message";
 import { PipelinePlugin } from "../pipeline/common";
@@ -11,24 +12,23 @@ function isOutputArtifactOrMapRequested(config: AutorestContext, artifactType: s
 }
 
 async function emitArtifactInternal(
-  config: AutorestContext,
+  context: AutorestContext,
   artifactType: string,
   uri: string,
   handle: DataHandle,
 ): Promise<void> {
-  if (config.IsOutputArtifactRequested(artifactType)) {
-    const content = await handle.ReadData(true);
+  if (context.IsOutputArtifactRequested(artifactType)) {
+    const content = await handle.readData(true);
     if (content !== "") {
-      config.Message({ Channel: Channel.Debug, Text: `Emitting '${artifactType}' at ${uri}` });
+      context.debug(`Emitting '${artifactType}' at ${uri}`);
       if (uri.startsWith("stdout://")) {
-        config.Message({
-          Channel: Channel.Information,
-          Details: { type: artifactType, uri, content },
-          Text: `Artifact '${uri.slice("stdout://".length)}' of type '${artifactType}' has been emitted.`,
-          Plugin: "emitter",
+        context.log({
+          level: "information",
+          message: `Artifact '${uri.slice("stdout://".length)}' of type '${artifactType}' has been emitted.`,
+          details: { type: artifactType, uri, content, plugin: "emitter" },
         });
       } else {
-        config.GeneratedFile.Dispatch({ type: artifactType, uri, content });
+        context.GeneratedFile.Dispatch({ type: artifactType, uri, content });
       }
       /* DISABLING SOURCE MAP SUPPORT
           if (config.IsOutputArtifactRequested(artifactType + '.map')) {
@@ -54,7 +54,7 @@ async function emitArtifact(
   const result = emitArtifactInternal(context, artifactType, uri, handle);
 
   if (isObject) {
-    const sink = context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] });
+    const sink = context.DataStore.getDataSink();
 
     if (isOutputArtifactOrMapRequested(context, artifactType + ".yaml")) {
       const h = await sink.writeData(
@@ -68,7 +68,7 @@ async function emitArtifact(
     if (isOutputArtifactOrMapRequested(context, artifactType + ".norm.yaml")) {
       const h = await sink.writeData(
         `${++emitCtr}.norm.yaml`,
-        Stringify(Normalize(await handle.readObject<any>())),
+        Stringify(deepNormalize(await handle.readObject<any>())),
         ["fix-me"],
         artifactType,
       );
@@ -86,7 +86,7 @@ async function emitArtifact(
     if (isOutputArtifactOrMapRequested(context, artifactType + ".norm.json")) {
       const h = await sink.writeData(
         `${++emitCtr}.norm.json`,
-        JSON.stringify(Normalize(await handle.readObject<any>()), null, 2),
+        JSON.stringify(deepNormalize(await handle.readObject<any>()), null, 2),
         ["fix-me"],
         artifactType,
       );

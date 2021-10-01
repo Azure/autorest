@@ -1,5 +1,4 @@
-import { Session } from "@autorest/extension-base";
-import { values, items, length } from "@azure-tools/linq";
+import { Session, Host, startSession } from "@autorest/extension-base";
 import {
   Model as oai3,
   Refable,
@@ -10,11 +9,9 @@ import {
   StringFormat,
 } from "@azure-tools/openapi";
 
-import { serialize } from "@azure-tools/codegen";
-import { Host, startSession } from "@autorest/extension-base";
+import { getDiff } from "recursive-diff";
 import { Interpretations } from "../modeler/interpretations";
 
-import { getDiff } from "recursive-diff";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
 import { DuplicateSchemaMerger } from "./duplicate-schema-merger";
 
@@ -38,22 +35,17 @@ export async function processRequest(host: Host) {
 
     host.WriteFile(
       "prechecked-openapi-document.yaml",
-      serialize(result, { sortKeys: false }),
+      JSON.stringify(result, null, 2),
       undefined,
       "prechecked-openapi-document",
     );
-    host.WriteFile(
-      "original-openapi-document.yaml",
-      serialize(input, { sortKeys: false }),
-      undefined,
-      "openapi-document",
-    );
-  } catch (E) {
+    host.WriteFile("original-openapi-document.yaml", JSON.stringify(input, null, 2), undefined, "openapi-document");
+  } catch (error: any) {
     if (debug) {
       // eslint-disable-next-line no-console
-      console.error(`${__filename} - FAILURE  ${JSON.stringify(E)} ${E.stack}`);
+      console.error(`${__filename} - FAILURE  ${JSON.stringify(error)} ${error.stack}`);
     }
-    throw E;
+    throw error;
   }
 }
 
@@ -79,10 +71,10 @@ export class QualityPreChecker {
   }
 
   getProperties(schema: Schema) {
-    return items(schema.properties).select((each) => ({
-      key: each.key,
-      name: <string>this.interpret.getPreferredName(each.value, each.key),
-      property: this.resolve(each.value).instance,
+    return Object.entries(schema.properties ?? {}).map(([key, value]) => ({
+      key: key,
+      name: <string>this.interpret.getPreferredName(value, key),
+      property: this.resolve(value).instance,
     }));
     //return items(schema.properties).toMap(each => <string>this.interpret.getPreferredName(each.value, each.key), each => this.resolve(each.value).instance);
   }
@@ -91,7 +83,7 @@ export class QualityPreChecker {
     tag: string,
     schemas: Array<Refable<Schema>> | undefined,
   ): Iterable<{ name: string; schema: Schema; tag: string }> {
-    return values(schemas).select((a) => {
+    return Object.values(schemas ?? []).map((a) => {
       const { instance: schema, name } = this.resolve(a);
       return {
         name: this.interpret.getName(name, schema),
@@ -121,7 +113,7 @@ export class QualityPreChecker {
     completed.add(schema);
 
     if (schema.allOf && schema.properties) {
-      const myProperties = this.getProperties(schema).toArray();
+      const myProperties = this.getProperties(schema);
 
       for (const { name: parentName, schema: parentSchema } of this.getAllParents(schemaName, schema)) {
         this.checkForHiddenProperties(parentName, parentSchema, completed);
@@ -207,15 +199,15 @@ export class QualityPreChecker {
   fixUpSchemasThatUseAllOfInsteadOfJustRef() {
     const schemas = this.input.components?.schemas;
     if (schemas) {
-      for (const { key, instance: schema, name, fromRef } of items(schemas).select((s) => ({
-        key: s.key,
-        ...this.resolve(s.value),
+      for (const { key, instance: schema } of Object.entries(schemas).map(([key, value]) => ({
+        key: key,
+        ...this.resolve(value),
       }))) {
         // we're looking for schemas that offer no possible value
         // because they just use allOf instead of $ref
         if (!schema.type || schema.type === JsonType.Object) {
-          if (length(schema.allOf) === 1) {
-            if (length(schema.properties) > 0) {
+          if (Object.keys(schema.allOf ?? {}).length === 1) {
+            if (Object.keys(schema.properties ?? {}).length > 0) {
               continue;
             }
             if (schema.additionalProperties) {
@@ -251,7 +243,7 @@ export class QualityPreChecker {
   }
 
   fixUpObjectsWithoutType() {
-    for (const { instance: schema, name, fromRef } of values(this.input.components?.schemas).select((s) =>
+    for (const { instance: schema, name, fromRef } of Object.values(this.input.components?.schemas ?? {}).map((s) =>
       this.resolve(s),
     )) {
       if (<any>schema.type === "file" || <any>schema.format === "file" || <any>schema.format === "binary") {
@@ -317,7 +309,11 @@ export class QualityPreChecker {
   }
 
   isEmptyObjectSchema(schema: Schema): boolean {
-    if (length(schema.properties) > 0 || length(schema.allOf) > 0 || schema.additionalProperties === true) {
+    if (
+      Object.keys(schema.properties ?? {}).length > 0 ||
+      Object.keys(schema.allOf ?? {}).length > 0 ||
+      schema.additionalProperties === true
+    ) {
       return false;
     }
 
@@ -332,12 +328,12 @@ export class QualityPreChecker {
   fixUpSchemasWithEmptyObjectParent() {
     const schemas = this.input.components?.schemas;
     if (schemas) {
-      for (const { key, instance: schema, name, fromRef } of items(schemas).select((s) => ({
-        key: s.key,
-        ...this.resolve(s.value),
+      for (const { key, instance: schema, name, fromRef } of Object.entries(schemas).map(([key, value]) => ({
+        key: key,
+        ...this.resolve(value),
       }))) {
         if (schema.type === JsonType.Object) {
-          if (length(schema.allOf) > 1) {
+          if (Object.keys(schema.allOf ?? {}).length > 1) {
             const schemaName = schema["x-ms-metadata"]?.name || name;
             schema.allOf = schema.allOf?.filter((p) => {
               const parent = this.resolve(p).instance;
@@ -358,6 +354,40 @@ export class QualityPreChecker {
     }
   }
 
+  private checkParentSameType() {
+    const schemas = this.input.components?.schemas;
+    if (!schemas) {
+      return;
+    }
+
+    for (const { key, instance: schema, name } of Object.entries(schemas).map(([key, value]) => ({
+      key: key,
+      ...this.resolve(value),
+    }))) {
+      if (schema.allOf && schema.type) {
+        const schemaName = getSchemaName(schema, name);
+        for (const { instance: parent, name, index } of schema.allOf.map((x, index) => ({
+          index,
+          ...this.resolve(x),
+        }))) {
+          if (parent.type && parent.type !== schema.type) {
+            const parentName = getSchemaName(parent, name);
+            const lines = [
+              `Schema '${schemaName}' has an allOf reference to '${parentName}' but those schema have different types:`,
+              `  - ${schemaName}: ${schema.type}`,
+              `  - ${parentName}: ${parent.type}`,
+            ];
+            this.session.error(
+              lines.join("\n"),
+              ["PreCheck", "AllOfTypeDifferent"],
+              ["components", "schemas", key, "allOf", index],
+            );
+          }
+        }
+      }
+    }
+  }
+
   process() {
     if (this.options["remove-empty-child-schemas"]) {
       this.fixUpSchemasThatUseAllOfInsteadOfJustRef();
@@ -369,15 +399,17 @@ export class QualityPreChecker {
 
     this.checkForDuplicateSchemas();
 
+    this.checkParentSameType();
+
     let onlyOnce = new WeakSet<Schema>();
-    for (const { instance: schema, name, fromRef } of values(this.input.components?.schemas).select((s) =>
+    for (const { instance: schema, name, fromRef } of Object.values(this.input.components?.schemas ?? {}).map((s) =>
       this.resolve(s),
     )) {
       this.checkForHiddenProperties(this.interpret.getName(name, schema), schema, onlyOnce);
     }
 
     onlyOnce = new WeakSet<Schema>();
-    for (const { instance: schema, name, fromRef } of values(this.input.components?.schemas).select((s) =>
+    for (const { instance: schema, name, fromRef } of Object.values(this.input.components?.schemas ?? {}).map((s) =>
       this.resolve(s),
     )) {
       this.checkForDuplicateParents(this.interpret.getName(name, schema), schema, onlyOnce);
@@ -385,4 +417,8 @@ export class QualityPreChecker {
 
     return this.input;
   }
+}
+
+function getSchemaName(schema: Schema, id: string) {
+  return schema["x-ms-metadata"]?.name || id;
 }

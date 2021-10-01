@@ -1617,7 +1617,7 @@
     },
     "xmsEnum": {
       "type": "object",
-      "required": ["name"],
+      "required": [],
       "properties": {
         "name": {
           "type": "string"

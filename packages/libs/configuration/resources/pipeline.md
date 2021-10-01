@@ -51,9 +51,6 @@ pipeline:
   openapi-document/subset-reducer:
     input: enum-deduplicator
 
-  openapi-document/quick-check:
-    input: subset-reducer
-
   openapi-document/multi-api/reset-identity:
     input: subset-reducer
     to: openapi-document

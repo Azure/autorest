@@ -3,25 +3,15 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { ChildProcess, spawn } from "child_process";
+import { homedir, tmpdir } from "os";
+import { basename, delimiter, dirname, extname, isAbsolute, join, normalize, resolve } from "path";
 import { exists, isDirectory, isFile, mkdir, readdir, readFile, rmdir } from "@azure-tools/async-io";
 import { Progress, Subscribe } from "@azure-tools/eventing";
 import { CriticalSection, Delay, Exception, Mutex, shallowCopy, SharedLock } from "@azure-tools/tasks";
-import { ChildProcess, spawn } from "child_process";
 import { resolve as npmResolvePackage } from "npm-package-arg";
-import { homedir, tmpdir } from "os";
 import * as pacote from "pacote";
-import { basename, delimiter, dirname, extname, isAbsolute, join, normalize, resolve } from "path";
 import * as semver from "semver";
-import { Npm } from "./npm";
-import { PackageManager, PackageManagerType } from "./package-manager";
-import { Yarn } from "./yarn";
-import {
-  patchPythonPath,
-  PythonCommandLine,
-  ExtensionSystemRequirements,
-  validateExtensionSystemRequirements,
-} from "./system-requirements";
-import { Extension, Package } from "./extension";
 import {
   UnresolvedPackageException,
   InvalidPackageIdentityException,
@@ -30,7 +20,17 @@ import {
   MissingStartCommandException,
   UnsatisfiedSystemRequirementException,
 } from "./exceptions";
+import { Extension, Package } from "./extension";
 import { logger } from "./logger";
+import { Npm } from "./npm";
+import { PackageManager, PackageManagerType } from "./package-manager";
+import {
+  patchPythonPath,
+  PythonCommandLine,
+  ExtensionSystemRequirements,
+  validateExtensionSystemRequirements,
+} from "./system-requirements";
+import { Yarn } from "./yarn";
 
 function quoteIfNecessary(text: string): string {
   if (text && text.indexOf(" ") > -1 && text.charAt(0) != '"') {
@@ -126,8 +126,8 @@ async function getFullPath(command: string, searchPath?: string): Promise<string
 export async function fetchPackageMetadata(spec: string): Promise<pacote.ManifestResult> {
   try {
     return await pacote.manifest(spec, {
-      "cache": `${tmpdir()}/cache`,
-      "registry": process.env.autorest_registry || "https://registry.npmjs.org",
+      cache: `${tmpdir()}/cache`,
+      registry: process.env.autorest_registry || "https://registry.npmjs.org",
       "full-metadata": true,
     });
   } catch (error) {
@@ -379,7 +379,7 @@ export class ExtensionManager {
       progress.NotifyMessage(`Package Install completed ${pkg.name}, ${pkg.version}`);
 
       return extension;
-    } catch (e) {
+    } catch (e: any) {
       progress.NotifyMessage(e);
       if (e.stack) {
         progress.NotifyMessage(e.stack);

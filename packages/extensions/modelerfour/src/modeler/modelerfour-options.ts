@@ -30,9 +30,9 @@ export interface ModelerFourOptions {
 
   "lenient-model-deduplication"?: boolean;
 
-  "naming"?: ModelerFourNamingOptions;
+  naming?: ModelerFourNamingOptions;
 
-  "prenamer"?: boolean;
+  prenamer?: boolean;
 
   "resolve-schema-name-collisons"?: boolean;
 
@@ -63,18 +63,18 @@ export interface ModelerFourOptions {
 
 export interface ModelerFourNamingOptions {
   "preserve-uppercase-max-length"?: number;
-  "parameter"?: string;
-  "property"?: string;
-  "operation"?: string;
-  "operationGroup"?: string;
-  "header"?: string;
-  "choice"?: string;
-  "choiceValue"?: string;
-  "constant"?: string;
-  "constantParameter"?: string;
-  "client"?: string;
-  "type"?: string;
-  "global"?: string;
-  "local"?: string;
-  "override"?: any;
+  parameter?: string;
+  property?: string;
+  operation?: string;
+  operationGroup?: string;
+  header?: string;
+  choice?: string;
+  choiceValue?: string;
+  constant?: string;
+  constantParameter?: string;
+  client?: string;
+  type?: string;
+  global?: string;
+  local?: string;
+  override?: any;
 }

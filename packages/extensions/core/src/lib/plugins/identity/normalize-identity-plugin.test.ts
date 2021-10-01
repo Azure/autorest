@@ -1,5 +1,5 @@
 import { createDataHandle } from "@autorest/test-utils";
-import { CancellationTokenSource, DataHandle, DataSink, DataStore, QuickDataSource } from "@azure-tools/datastore";
+import { DataHandle, DataSink, DataStore, QuickDataSource } from "@azure-tools/datastore";
 import { AutorestContext } from "../../context";
 import { createNormalizeIdentityPlugin } from "./normalize-identity-plugin";
 
@@ -14,27 +14,22 @@ describe("NormalizeIdentityPlugin", () => {
     context = {
       config: {},
     } as any;
-    const cts: CancellationTokenSource = {
-      cancel() {},
-      dispose() {},
-      token: { isCancellationRequested: false, onCancellationRequested: <any>null },
-    };
-    const ds = new DataStore(cts.token);
+    const ds = new DataStore({ autoUnloadData: false });
     sink = ds.getDataSink();
   });
 
   const runPlugin = async (files: DataHandle[]): Promise<DataHandle[]> => {
     const source = new QuickDataSource(files);
     const result = await plugin(context, source, sink);
-    const results = await result.Enum();
+    const results = await result.enum();
 
-    return Promise.all(results.map((x) => result.ReadStrict(x)));
+    return Promise.all(results.map((x) => result.readStrict(x)));
   };
 
   it("keeps only the filename if there is a single file", async () => {
     const result = await runPlugin([file1]);
     expect(result).toHaveLength(1);
-    expect(result[0].Description).toEqual("foo.json");
+    expect(result[0].description).toEqual("foo.json");
   });
 
   it("finds the common ancestor to files and update file uri to be relative to it", async () => {
@@ -44,9 +39,9 @@ describe("NormalizeIdentityPlugin", () => {
       createDataHandle("{}", { name: "myproject/shared/common.json" }),
     ]);
     expect(result).toHaveLength(3);
-    expect(result[0].Description).toEqual("project1/main.json");
-    expect(result[1].Description).toEqual("project2/data.json");
-    expect(result[2].Description).toEqual("shared/common.json");
+    expect(result[0].description).toEqual("project1/main.json");
+    expect(result[1].description).toEqual("project2/data.json");
+    expect(result[2].description).toEqual("shared/common.json");
   });
 
   it("finds the common ancestor to files and update file uri to be relative to it when using urls", async () => {
@@ -56,9 +51,9 @@ describe("NormalizeIdentityPlugin", () => {
       createDataHandle("{}", { name: "https://github.com/myorg/myproject/shared/common.json" }),
     ]);
     expect(result).toHaveLength(3);
-    expect(result[0].Description).toEqual("project1/main.json");
-    expect(result[1].Description).toEqual("project2/data.json");
-    expect(result[2].Description).toEqual("shared/common.json");
+    expect(result[0].description).toEqual("project1/main.json");
+    expect(result[1].description).toEqual("project2/data.json");
+    expect(result[2].description).toEqual("shared/common.json");
   });
 
   it("update refs accordingly", async () => {
@@ -72,7 +67,7 @@ describe("NormalizeIdentityPlugin", () => {
       createDataHandle(`{"foo": "bar"}`, { name: "https://github.com/myorg/myproject/project2/data.json" }),
     ]);
     expect(result).toHaveLength(2);
-    const data = await result[0].ReadObject<typeof mainContent>();
+    const data = await result[0].readObject<typeof mainContent>();
     expect(data.definitions.$ref).toEqual("../project2/data.json#/foo");
   });
 });

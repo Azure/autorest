@@ -1,6 +1,6 @@
+import { inspect } from "util";
 import { AutorestLogger } from "@autorest/common";
 import { flatMap } from "lodash";
-import { inspect } from "util";
 import {
   ConfigurationProperty,
   ConfigurationSchema,

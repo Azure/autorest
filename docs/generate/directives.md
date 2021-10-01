@@ -35,6 +35,17 @@ Directives consist of three parts:
 
 ## Debug a directive
 
+### JsonPath.com
+
+To make sure the `where` clause is defined correctly you can use https://jsonpath.com to verify all the elements wanted are selected.
+Usage:
+
+1. Paste `where` clause in the `JSONPath Syntax` input
+1. Paste spec in the `Inputs` section
+1. Evaluation result should be an array of all the object that were matched with the given path.
+
+**NOTE**: The library used in this website is slightly different and there could be inconsistency for some edge cases. You can use the next [section](#debug) to debug the issue and check if autorest is selecting the same elements.
+
 ### `debug` flag
 
 Directive provide a `debug` field that will enable verbose logging of the directive run.
@@ -46,7 +57,7 @@ directive:
   - from: swagger-document
     where: $.paths
     debug: true
-    transform: >-
+    transform: |
       $["x-abc"] = true
 ```
 
@@ -58,7 +69,7 @@ Along with some other available function to the transform context(See [eval.ts](
 directive:
   - from: swagger-document
     where: $.paths
-    transform: >-
+    transform: |
       $lib.log($);
       $["x-abc"] = true
 ```

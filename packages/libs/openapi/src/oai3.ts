@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Refable as Reference } from "./common";
+import { EnumStr, Refable as Reference } from "./common";
 
 export type Dictionary<T> = { [key: string]: T };
 
@@ -81,6 +81,7 @@ export enum EncodingStyle {
   Form = "form",
   SpaceDelimited = "spaceDelimited",
   PipeDelimited = "pipeDelimited",
+  TabDelimited = "tabDelimited",
   DeepObject = "deepObject",
 }
 
@@ -145,7 +146,7 @@ export interface Components extends Extensions {
 export interface APIKeySecurityScheme extends Extensions {
   type: SecurityType.ApiKey;
   name: string;
-  in: ParameterLocation;
+  in: EnumStr<ParameterLocation>;
   description?: string;
 }
 export interface AuthorizationCodeOAuthFlow extends Extensions {
@@ -320,12 +321,12 @@ export interface Parameter
     Partial<HasExamples>,
     Extensions {
   name: string;
-  in: ParameterLocation;
+  in: EnumStr<ParameterLocation>;
 
   description?: string;
   allowEmptyValue?: boolean;
   required?: boolean;
-  style?: EncodingStyle;
+  style?: EnumStr<EncodingStyle>;
 
   allowReserved?: boolean;
 }
@@ -355,7 +356,11 @@ export interface RequestBody extends Extensions {
   description?: string;
   content: Dictionary<MediaType>;
   required?: boolean;
+
+  "x-ms-client-flatten"?: boolean;
+  "x-ms-parameter-location"?: string;
 }
+
 export interface Response extends Extensions {
   description: string;
   headers?: Dictionary<Reference<Header>>;
@@ -365,7 +370,7 @@ export interface Response extends Extensions {
 
 export interface Schema extends Deprecatable, Extensions, Implementation<SchemaDetails> {
   /* common properties */
-  type?: JsonType;
+  type?: EnumStr<JsonType>;
   title?: string;
   description?: string;
   format?: string;

@@ -1,15 +1,14 @@
 import { fixLeadingNumber, removeSequentialDuplicates } from "../text-manipulation";
-import { Dictionary, values } from "@azure-tools/linq";
 
 export type Styler = (
   identifier: string | Array<string>,
   removeDuplicates: boolean | undefined,
-  overrides: Dictionary<string> | undefined,
+  overrides: Record<string, string> | undefined,
 ) => string;
 type StylerWithUppercasePreservation = (
   identifier: string | Array<string>,
   removeDuplicates: boolean | undefined,
-  overrides: Dictionary<string> | undefined,
+  overrides: Record<string, string> | undefined,
   maxUppercasePreserve: number | undefined,
 ) => string;
 
@@ -40,7 +39,7 @@ function IsFullyUpperCase(identifier: string, maxUppercasePreserve: number) {
 
 function deconstruct(identifier: string | Array<string>, maxUppercasePreserve: number): Array<string> {
   if (Array.isArray(identifier)) {
-    return [...values(identifier).selectMany((each) => deconstruct(each, maxUppercasePreserve))];
+    return [...identifier.flatMap((each) => deconstruct(each, maxUppercasePreserve))];
   }
 
   return `${identifier}`
@@ -71,7 +70,7 @@ function wrap(
 
 function applyFormat(
   normalizedContent: Array<string>,
-  overrides: Dictionary<string> = {},
+  overrides: Record<string, string> = {},
   separator = "",
   formatter: (s: string, i: number) => string = (s, i) => s,
 ) {
@@ -83,7 +82,7 @@ function applyFormat(
 function normalize(
   identifier: string | Array<string>,
   removeDuplicates = true,
-  overrides: Dictionary<string> = {},
+  overrides: Record<string, string> = {},
   maxUppercasePreserve = 0,
 ): Array<string> {
   if (!identifier || identifier.length === 0) {
@@ -136,7 +135,7 @@ export class Style {
   static kebab(
     identifier: string | Array<string>,
     removeDuplicates = true,
-    overrides: Dictionary<string> = {},
+    overrides: Record<string, string> = {},
     maxUppercasePreserve = 0,
   ): string {
     return (
@@ -151,7 +150,7 @@ export class Style {
   static space(
     identifier: string | Array<string>,
     removeDuplicates = true,
-    overrides: Dictionary<string> = {},
+    overrides: Record<string, string> = {},
     maxUppercasePreserve = 0,
   ): string {
     return (
@@ -166,7 +165,7 @@ export class Style {
   static snake(
     identifier: string | Array<string>,
     removeDuplicates = true,
-    overrides: Dictionary<string> = {},
+    overrides: Record<string, string> = {},
     maxUppercasePreserve = 0,
   ): string {
     return (
@@ -181,7 +180,7 @@ export class Style {
   static upper(
     identifier: string | Array<string>,
     removeDuplicates = true,
-    overrides: Dictionary<string> = {},
+    overrides: Record<string, string> = {},
     maxUppercasePreserve = 0,
   ): string {
     return (
@@ -195,7 +194,7 @@ export class Style {
   static pascal(
     identifier: string | Array<string>,
     removeDuplicates = true,
-    overrides: Dictionary<string> = {},
+    overrides: Record<string, string> = {},
     maxUppercasePreserve = 0,
   ): string {
     return (
@@ -209,7 +208,7 @@ export class Style {
   static camel(
     identifier: string | Array<string>,
     removeDuplicates = true,
-    overrides: Dictionary<string> = {},
+    overrides: Record<string, string> = {},
     maxUppercasePreserve = 0,
   ): string {
     return (

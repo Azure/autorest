@@ -1,6 +1,22 @@
 # Change Log - @azure-tools/openapi
 
-This log was last generated on Thu, 20 May 2021 16:41:13 GMT and should not be manually modified.
+This log was last generated on Wed, 08 Sep 2021 15:39:22 GMT and should not be manually modified.
+
+## 3.2.1
+Wed, 08 Sep 2021 15:39:22 GMT
+
+### Patches
+
+- Types update
+- Tweaks types to allow string enums value to accept string literals
+
+## 3.2.0
+Mon, 19 Jul 2021 15:15:42 GMT
+
+### Minor changes
+
+- Drop support for node 10
+- **Update** include/exclude x-dash properties utils types
 
 ## 3.1.3
 Thu, 20 May 2021 16:41:13 GMT

@@ -1,6 +1,7 @@
 import { AutorestLogger } from "@autorest/common";
-import { IFileSystem, ParseToAst } from "@azure-tools/datastore";
-import { EnsureIsFolderUri, ResolveUri } from "@azure-tools/uri";
+import { IFileSystem } from "@azure-tools/datastore";
+import { ensureIsFolderUri, resolveUri } from "@azure-tools/uri";
+import { parseYAMLAst } from "@azure-tools/yaml";
 import { DefaultConfiguration, MagicString } from "./contants";
 
 /**
@@ -58,7 +59,7 @@ export const detectConfigurationFiles = async (
       return [configFileOrFolderUri];
     }
     try {
-      const ast = ParseToAst(content);
+      const ast = parseYAMLAst(content);
       if (ast) {
         return [configFileOrFolderUri];
       }
@@ -73,7 +74,7 @@ export const detectConfigurationFiles = async (
 
   // scan the filesystem items for configurations.
   const results = new Array<string>();
-  for (const name of await fileSystem.EnumerateFileUris(EnsureIsFolderUri(configFileOrFolderUri))) {
+  for (const name of await fileSystem.EnumerateFileUris(ensureIsFolderUri(configFileOrFolderUri))) {
     if (name.endsWith(".md")) {
       const content = await fileSystem.ReadFile(name);
       if (content.indexOf(MagicString) > -1) {
@@ -84,7 +85,7 @@ export const detectConfigurationFiles = async (
 
   if (walkUpFolders) {
     // walk up
-    const newUriToConfigFileOrWorkingFolder = ResolveUri(configFileOrFolderUri, "..");
+    const newUriToConfigFileOrWorkingFolder = resolveUri(configFileOrFolderUri, "..");
     if (newUriToConfigFileOrWorkingFolder !== configFileOrFolderUri) {
       results.push(
         ...(await detectConfigurationFiles(fileSystem, newUriToConfigFileOrWorkingFolder, logger, walkUpFolders)),

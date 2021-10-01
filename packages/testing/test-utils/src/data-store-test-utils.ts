@@ -17,7 +17,8 @@ export function createDataHandle(content: string, props: { name?: string } = {})
       artifactType: "",
       cached: content,
       lineIndices: getLineIndices(content),
-      sourceMap: undefined,
+      positionSourceMap: undefined,
+      pathSourceMap: undefined,
     },
     false,
   );

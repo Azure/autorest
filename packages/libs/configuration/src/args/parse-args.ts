@@ -1,5 +1,5 @@
-import { CreateObject, Parse } from "@azure-tools/datastore";
 import { join } from "path";
+import { parseYAMLFast } from "@azure-tools/yaml";
 import untildify from "untildify";
 
 interface CliArgs {
@@ -74,7 +74,7 @@ function parseValue(rawValue: string): any {
   // quote numbers with decimal point, we don't have any use for non-integer numbers (while on the other hand version strings may look like decimal numbers)
   rawValue = !isNaN(parseFloat(rawValue)) && rawValue.includes(".") ? `'${rawValue}'` : rawValue;
   try {
-    return Parse(rawValue);
+    return parseYAMLFast(rawValue);
   } catch (e) {
     return rawValue;
   }

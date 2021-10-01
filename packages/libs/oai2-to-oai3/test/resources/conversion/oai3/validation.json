@@ -48,9 +48,7 @@
             "$ref": "#/components/parameters/ApiVersionParameter"
           }
         ],
-        "tags": [
-          "Redis"
-        ],
+        "tags": ["Redis"],
         "responses": {
           "200": {
             "description": "A list of caches",
@@ -110,9 +108,7 @@
             "$ref": "#/components/parameters/ApiVersionParameter"
           }
         ],
-        "tags": [
-          "Redis"
-        ],
+        "tags": ["Redis"],
         "responses": {
           "200": {
             "description": "A list of caches",
@@ -144,8 +140,7 @@
               }
             }
           }
-        },
-        "x-ms-requestBody-index": 3
+        }
       }
     },
     "/validation/constantsInPath/{constantParam}/value": {
@@ -158,9 +153,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "constant"
-              ]
+              "enum": ["constant"]
             }
           }
         ],
@@ -179,9 +172,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": [
-                "constant"
-              ]
+              "enum": ["constant"]
             }
           }
         ],
@@ -206,8 +197,7 @@
               }
             }
           }
-        },
-        "x-ms-requestBody-index": 1
+        }
       }
     }
   },
@@ -216,12 +206,7 @@
       "Product": {
         "type": "object",
         "description": "The product documentation.",
-        "required": [
-          "child",
-          "constString",
-          "constInt",
-          "constChild"
-        ],
+        "required": ["child", "constString", "constInt", "constChild"],
         "properties": {
           "display_names": {
             "type": "array",
@@ -255,23 +240,17 @@
           "constInt": {
             "type": "integer",
             "description": "Constant int",
-            "enum": [
-              0
-            ]
+            "enum": [0]
           },
           "constString": {
             "type": "string",
             "description": "Constant string",
-            "enum": [
-              "constant"
-            ]
+            "enum": ["constant"]
           },
           "constStringAsEnum": {
             "type": "string",
             "description": "Constant string as Enum",
-            "enum": [
-              "constant_string_as_enum"
-            ],
+            "enum": ["constant_string_as_enum"],
             "x-ms-enum": {
               "name": "EnumConst",
               "modelAsString": false
@@ -282,16 +261,12 @@
       "ChildProduct": {
         "type": "object",
         "description": "The product documentation.",
-        "required": [
-          "constProperty"
-        ],
+        "required": ["constProperty"],
         "properties": {
           "constProperty": {
             "type": "string",
             "description": "Constant string",
-            "enum": [
-              "constant"
-            ]
+            "enum": ["constant"]
           },
           "count": {
             "type": "integer",
@@ -302,24 +277,17 @@
       "ConstantProduct": {
         "type": "object",
         "description": "The product documentation.",
-        "required": [
-          "constProperty",
-          "constProperty2"
-        ],
+        "required": ["constProperty", "constProperty2"],
         "properties": {
           "constProperty": {
             "type": "string",
             "description": "Constant string",
-            "enum": [
-              "constant"
-            ]
+            "enum": ["constant"]
           },
           "constProperty2": {
             "type": "string",
             "description": "Constant string2",
-            "enum": [
-              "constant2"
-            ]
+            "enum": ["constant2"]
           }
         }
       },

@@ -1,6 +1,53 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Thu, 03 Jun 2021 22:37:55 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Sep 2021 19:51:32 GMT and should not be manually modified.
+
+## 1.7.2
+Thu, 23 Sep 2021 19:51:32 GMT
+
+### Patches
+
+- **Added** `include-x-ms-examples-original-file` flag to activate `x-ms-original-file` injection in `x-ms-examples`
+
+## 1.7.1
+Wed, 22 Sep 2021 15:23:39 GMT
+
+### Patches
+
+- Added missing help text for command line arguments
+
+## 1.7.0
+Wed, 08 Sep 2021 15:39:22 GMT
+
+### Minor changes
+
+- **Rename** `adl` -> `cadl`
+- **Remove** Yaml logging message format
+-  **Update** to new path mapping sourcemap functionality and remove unused parsing logic
+- **Remove** quick-check plugin from defautl configuration
+
+### Patches
+
+- Configuration loader will not auto unloadcode blocks
+- **Fix** Input files with `..` in path would cause duplicate loading and cause issues down the line
+
+## 1.6.0
+Mon, 19 Jul 2021 15:15:41 GMT
+
+### Minor changes
+
+- **Added** `debug` flag to directive to enable additional logging
+- **Added** Eol configuration
+- **Moved** literate-yaml logic from @autorest/common
+- Drop support for node 10
+
+### Patches
+
+- **Docs** Add documenation about `--use`
+- **Added** New --memory configuration
+- **Added** `--skip-sourcemap` flag
+- **Fix** Handle invalid yaml in cli flag
+- Add `interactive` to config type
 
 ## 1.5.0
 Thu, 03 Jun 2021 22:37:55 GMT

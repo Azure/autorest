@@ -18,3 +18,5 @@ export type Reference<T> = T;
 export type Refable<T> = T | PathReference;
 
 export type ExtensionKey = `x-${string}`;
+
+export type EnumStr<T extends string> = `${T}`;

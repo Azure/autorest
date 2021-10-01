@@ -10,8 +10,8 @@ import { ConditionalConfiguration, ConfigurationFile } from "./configuration-fil
 const defaultConfig: AutorestNormalizedConfiguration = Object.freeze({
   "base-folder": ".",
   "output-folder": "generated",
-  "debug": false,
-  "verbose": false,
+  debug: false,
+  verbose: false,
   "disable-validation": false,
 });
 

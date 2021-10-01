@@ -1,3 +1,4 @@
+import { maximum, toSemver } from "@azure-tools/codegen";
 import {
   AnyObject,
   DataSink,
@@ -8,12 +9,10 @@ import {
   QuickDataSource,
   visit,
 } from "@azure-tools/datastore";
-import { values, Dictionary } from "@azure-tools/linq";
 import { areSimilar } from "@azure-tools/object-comparison";
-import { PipelinePlugin } from "../pipeline/common";
-import { maximum, toSemver } from "@azure-tools/codegen";
 import compareVersions from "compare-versions";
 import { AutorestContext } from "../context";
+import { PipelinePlugin } from "../pipeline/common";
 
 /**
  * Prepares an OpenAPI document for the generation-2 code generators
@@ -38,7 +37,7 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
 
   // there could be more than one global parameter called api-version
   private apiVersionParamReferences = new Set<string>();
-  refs = new Dictionary<string>();
+  private refs: Record<string, string> = {};
 
   get components(): AnyObject {
     if (this.generated.components) {
@@ -368,14 +367,12 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
   protected visitSchemas(target: AnyObject, originalNodes: Iterable<Node>) {
     // since some models are going to be duplicated and this composer is used to mimic autorest v2
     // the best behavior is to have the latest models.
-    const sortedNodes = values(originalNodes)
-      .toArray()
-      .sort((a, b) =>
-        compareVersions(
-          toSemver(maximum(b.value["x-ms-metadata"].apiVersions)),
-          toSemver(maximum(a.value["x-ms-metadata"].apiVersions)),
-        ),
-      );
+    const sortedNodes = [...originalNodes].sort((a, b) =>
+      compareVersions(
+        toSemver(maximum(b.value["x-ms-metadata"].apiVersions)),
+        toSemver(maximum(a.value["x-ms-metadata"].apiVersions)),
+      ),
+    );
     for (const { key, value, pointer } of sortedNodes) {
       // schemas have to keep their name
       const schemaName = !value["type"] || value["type"] === "object" ? value["x-ms-metadata"].name : key;
@@ -486,8 +483,7 @@ async function compose(config: AutorestContext, input: DataSource, sink: DataSin
         [].concat.apply([], <any>inputs.map((each) => each.identity)),
         "merged-oai3",
         {
-          mappings: await composer.getSourceMappings(),
-          mappingSources: [inputs[0]],
+          pathMappings: await composer.getSourceMappings(),
         },
       ),
     ],

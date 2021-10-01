@@ -1,11 +1,9 @@
 import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, visit } from "@azure-tools/datastore";
 import { resolveUri } from "@azure-tools/uri";
 import { AutorestContext } from "../context";
-import { Channel } from "../message";
-import { values, items, length } from "@azure-tools/linq";
 
 export async function crawlReferences(
-  config: AutorestContext,
+  context: AutorestContext,
   inputScope: DataSource,
   filesToCrawl: Array<DataHandle>,
   sink: DataSink,
@@ -22,13 +20,15 @@ export async function crawlReferences(
 
   /** crawls a file for $refs and then recurses to get the $ref'd files */
   async function crawl(file: DataHandle) {
-    const refProcessor = new RefProcessor(file, inputScope);
+    const refProcessor = new RefProcessor(file, inputScope, {
+      includeXmsExamplesOriginalFileLocation: context.config["include-x-ms-examples-original-file"],
+    });
     const output = await refProcessor.getOutput();
 
-    for (const fileUri of values(refProcessor.filesReferenced).where((each) => !queued.has(each))) {
+    for (const fileUri of [...refProcessor.filesReferenced].filter((each) => !queued.has(each))) {
       queued.add(fileUri);
 
-      config.Message({ Channel: Channel.Verbose, Text: `Reading $ref'd file ${fileUri}` });
+      context.verbose(`Reading $ref'd file ${fileUri}`);
       const secondaryFile = await inputScope.readStrict(fileUri);
 
       // mark secondary files with a tag so that we don't process operations for them.
@@ -47,7 +47,7 @@ export async function crawlReferences(
           : secondaryFileContent.openapi
           ? "openapi-document"
           : file.artifactType,
-        { mappings: [], mappingSources: [secondaryFile] },
+        { pathMappings: [] },
       );
 
       // crawl that and add it to the secondary set.
@@ -59,8 +59,7 @@ export async function crawlReferences(
     const mapping = await refProcessor.getSourceMappings();
     // write the file to the data sink (this serializes the file, so it has to be done by this point.)
     return sink.writeObject(file.description, output, file.identity, file.artifactType, {
-      mappings: mapping,
-      mappingSources: [file],
+      pathMappings: mapping,
     });
   }
 
@@ -79,12 +78,16 @@ export async function crawlReferences(
   return [...primary, ...secondary];
 }
 
+interface RefProcessorOptions {
+  includeXmsExamplesOriginalFileLocation?: boolean;
+}
+
 class RefProcessor extends Transformer<any, any> {
   public promises = new Array<Promise<void>>();
   public filesReferenced = new Set<string>();
   private originalFileLocation: string;
 
-  constructor(originalFile: DataHandle, private inputScope: DataSource) {
+  constructor(originalFile: DataHandle, private inputScope: DataSource, private options: RefProcessorOptions = {}) {
     super(originalFile);
 
     this.originalFileLocation = resolveUri(originalFile.originalDirectory, originalFile.identity[0]);
@@ -93,13 +96,16 @@ class RefProcessor extends Transformer<any, any> {
   async processXMSExamples(targetParent: AnyObject, examples: AnyObject) {
     const xmsExamples: any = {};
 
-    for (const { key, value } of items(examples)) {
+    for (const [key, value] of Object.entries(examples)) {
       if (value.$ref) {
         try {
           const refPath = value.$ref.indexOf("#") === -1 ? value.$ref : value.$ref.split("#")[0];
           const refUri = resolveUri(this.originalFileLocation, refPath);
           const handle = await this.inputScope.readStrict(refUri);
-          xmsExamples[key] = await handle.readObject<AnyObject>();
+          const exampleData = await handle.readObject<AnyObject>();
+          xmsExamples[key] = this.options.includeXmsExamplesOriginalFileLocation
+            ? { ...exampleData, "x-ms-original-file": refUri }
+            : exampleData;
         } catch {
           // skip examples that are not nice to us.
         }
@@ -109,7 +115,7 @@ class RefProcessor extends Transformer<any, any> {
       }
     }
 
-    if (length(xmsExamples) > 0) {
+    if (Object.keys(xmsExamples).length > 0) {
       targetParent["x-ms-examples"] = { value: xmsExamples, pointer: "" };
     }
   }
@@ -153,7 +159,7 @@ class RefProcessor extends Transformer<any, any> {
   protected async runProcess() {
     if (!this.final) {
       await this.init();
-      for (this.currentInput of values(this.inputs)) {
+      for (this.currentInput of this.inputs) {
         this.current = await this.currentInput.ReadObject<any>();
         await this.process(this.generated, visit(this.current));
       }

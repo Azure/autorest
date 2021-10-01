@@ -2,6 +2,36 @@
   "name": "@azure-tools/openapi",
   "entries": [
     {
+      "version": "3.2.1",
+      "tag": "@azure-tools/openapi_v3.2.1",
+      "date": "Wed, 08 Sep 2021 15:39:22 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Types update"
+          },
+          {
+            "comment": "Tweaks types to allow string enums value to accept string literals"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.2.0",
+      "tag": "@azure-tools/openapi_v3.2.0",
+      "date": "Mon, 19 Jul 2021 15:15:42 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Drop support for node 10"
+          },
+          {
+            "comment": "**Update** include/exclude x-dash properties utils types"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.1.3",
       "tag": "@azure-tools/openapi_v3.1.3",
       "date": "Thu, 20 May 2021 16:41:13 GMT",

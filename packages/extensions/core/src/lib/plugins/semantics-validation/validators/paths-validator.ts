@@ -1,5 +1,5 @@
-import { ResolveReferenceFn, SemanticError, SemanticErrorCodes } from "../types";
 import oai3, { ParameterLocation, Refable } from "@azure-tools/openapi";
+import { ResolveReferenceFn, SemanticError, SemanticErrorCodes } from "../types";
 import { createReferenceResolver } from "../utils";
 
 export const PATH_TEMPLATES_REGEX = /\{(.*?)\}/g;

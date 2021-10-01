@@ -12,8 +12,8 @@ import {
   Request,
 } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
-import { isDefined } from "../utils";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
+import { isDefined } from "../utils";
 
 const xmsThreshold = "x-ms-payload-flattening-threshold";
 const xmsFlatten = "x-ms-client-flatten";

@@ -1,23 +1,19 @@
-import { Channel, SourceLocation } from "../../message";
-import { DataHandle, indexToPosition, StrictJsonSyntaxCheck } from "@azure-tools/datastore";
-import { AutorestContext } from "../../context";
+import { IAutorestLogger } from "@autorest/common";
+import { DataHandle, indexToPosition } from "@azure-tools/datastore";
+import { validateJson } from "@azure-tools/json";
 
 /**
  * If a JSON file is provided, it checks that the syntax is correct.
  * And if the syntax is incorrect, it puts an error message .
  */
-export async function checkSyntaxFromData(
-  fileUri: string,
-  handle: DataHandle,
-  configView: AutorestContext,
-): Promise<void> {
+export async function checkSyntaxFromData(fileUri: string, handle: DataHandle, logger: IAutorestLogger): Promise<void> {
   if (fileUri.toLowerCase().endsWith(".json")) {
-    const error = StrictJsonSyntaxCheck(await handle.readData());
+    const error = validateJson(await handle.readData());
     if (error) {
-      configView.Message({
-        Channel: Channel.Error,
-        Text: `Syntax Error Encountered:  ${error.message}`,
-        Source: [<SourceLocation>{ Position: await indexToPosition(handle, error.index), document: handle.key }],
+      logger.trackError({
+        code: "JsonSpec/SyntaxError",
+        message: `Syntax Error Encountered:  ${error.message}`,
+        source: [{ position: await indexToPosition(handle, error.position), document: handle.key }],
       });
     }
   }

@@ -53,9 +53,9 @@ describe("ParseArgs", () => {
 
   it("parse multipe args", () => {
     expect(parseArgs(["--debug", "--input-file=/path/to/folder", "--preview:false"]).options).toEqual({
-      "debug": true,
+      debug: true,
       "input-file": "/path/to/folder",
-      "preview": false,
+      preview: false,
     });
   });
 });
