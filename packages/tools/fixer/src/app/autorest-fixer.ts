@@ -1,9 +1,9 @@
 import { readFile, writeFile } from "fs/promises";
+import chalk from "chalk";
 import { logger } from "../logger";
 import { findFiles } from "../utils";
 import { AutorestFixerConfig } from "./autorest-fixer-config";
 import { fixSwagger } from "./swagger-fixer";
-import chalk from "chalk";
 
 export class AutorestFixer {
   public constructor(private config: AutorestFixerConfig) {}
