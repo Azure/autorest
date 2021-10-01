@@ -63,3 +63,9 @@ stages:
           image: azuresdk/autorest-java
           dockerFolder: ./docker/java/ubuntu
           readmePath: docker/java/readme.md
+      - template: ./templates/build-and-push-docker.yaml
+        parameters:
+          name: java
+          image: azuresdk/autorest-all
+          dockerFolder: ./docker/all/ubuntu
+          readmePath: docker/all/readme.md
