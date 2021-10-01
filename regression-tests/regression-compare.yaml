@@ -40,7 +40,7 @@ specs:
       - httpInfrastructure.json
       - httpInfrastructure.quirks.json
       - lro.json
-      # - media_types.json https://github.com/Azure/autorest/issues/4246
+      - media_types.json
       - model-flattening.json
       - multiapi-v1.json
       - multiapi-v2.json
@@ -64,12 +64,12 @@ languages:
     oldArgs:
       - --version:3.6.2
       - --use:@autorest/modelerfour@4.21.1
-      - --use:@autorest/python@5.8.4
+      - --use:@autorest/python@5.9.1
       - --modelerfour.treat-type-object-as-anything
     newArgs:
       - --version:../packages/extensions/core
       - --use:../packages/extensions/modelerfour
-      - --use:@autorest/python@5.8.4
+      - --use:@autorest/python@5.9.1
       - --modelerfour.treat-type-object-as-anything
 
   - language: typescript
