@@ -18,6 +18,7 @@ dependencies:
   '@rush-temp/deduplication': file:projects/deduplication.tgz_prettier@2.3.2+ts-node@9.1.1
   '@rush-temp/extension': file:projects/extension.tgz_prettier@2.3.2+ts-node@9.1.1
   '@rush-temp/extension-base': file:projects/extension-base.tgz_prettier@2.3.2
+  '@rush-temp/fixer': file:projects/fixer.tgz_ts-node@9.1.1
   '@rush-temp/json': file:projects/json.tgz_prettier@2.3.2+ts-node@9.1.1
   '@rush-temp/jsonschema': file:projects/jsonschema.tgz_prettier@2.3.2+ts-node@9.1.1
   '@rush-temp/md-mock-api': file:projects/md-mock-api.tgz_ts-node@9.1.1
@@ -9190,7 +9191,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-dOH8WRjKXCEuXdPiYqotheYfy719AYopCbp12x1lYXMqCW+dfGoDjMV1VNcGs70eHa3uzul4tSiUi2VqxMderA==
+      integrity: sha512-OVeXR+8NDnJgJkJyUTzM8Js4g6tQ0RHG/MdP9LUV72j30aqQgXEGcGmyzCEDB28NfvLj3g+ifEku2P5G2XLD3A==
       tarball: file:projects/autorest.tgz
     version: 0.0.0
   file:projects/cadl.tgz_ts-node@9.1.1+webpack@5.40.0:
@@ -9433,7 +9434,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-F86bUgXO2Pqu/ze0uTxZDXxGUTEmKwCpHdwC1NqA7UfeSWZvgEmgsH19StpBxwK6OxOfEgh9ylaBSNOMthx+oQ==
+      integrity: sha512-TkL/z4SM5fGGP6RHyCrsChzkD2zx2LyR4endGy0IhQNklDwbxzjuU9soFiQ9HfOfyRunmN4F/AxLGa0a47iXEQ==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9568,6 +9569,42 @@ packages:
     resolution:
       integrity: sha512-tM8yL4UBOkGwtoyj20dlyq6p4cFJEUrKuuLYrYYi1rGez00HbIXx8auCniJw8OZuQuQ4XpxZhY6utHYaPFPFaA==
       tarball: file:projects/extension.tgz
+    version: 0.0.0
+  file:projects/fixer.tgz_ts-node@9.1.1:
+    dependencies:
+      '@types/glob': 7.1.4
+      '@types/jest': 26.0.24
+      '@types/js-yaml': 4.0.3
+      '@types/lodash': 4.14.172
+      '@types/node': 14.14.45
+      '@types/yargs': 15.0.14
+      '@typescript-eslint/eslint-plugin': 4.31.0_a690ff3776b01e92cf0b93501bb5ae6a
+      '@typescript-eslint/parser': 4.31.0_eslint@7.32.0+typescript@4.4.2
+      chalk: 4.1.2
+      eslint: 7.32.0
+      eslint-plugin-import: 2.24.2_eslint@7.32.0
+      eslint-plugin-jest: 24.3.7_80324fdcea7a89344953345da3522ce6
+      eslint-plugin-node: 11.1.0_eslint@7.32.0
+      eslint-plugin-prettier: 3.4.1_eslint@7.32.0+prettier@2.3.2
+      eslint-plugin-unicorn: 33.0.1_eslint@7.32.0
+      glob: 7.1.7
+      jest: 27.1.1_ts-node@9.1.1
+      lodash: 4.17.21
+      prettier: 2.3.2
+      rimraf: 3.0.2
+      source-map-support: 0.5.19
+      ts-jest: 27.0.5_b0de3831a3508d250bf516b99371e877
+      typescript: 4.4.2
+      winston: 3.3.3
+      yargs: 16.2.0
+    dev: false
+    id: file:projects/fixer.tgz
+    name: '@rush-temp/fixer'
+    peerDependencies:
+      ts-node: '*'
+    resolution:
+      integrity: sha512-zkgxeJwtxtHq44NPO5fAjgbtGVxAg4wh2O/kbj/KoThA++BkNXjwIgJrCuNreP79orP7nKKrGuyTqRNLtYsvPg==
+      tarball: file:projects/fixer.tgz
     version: 0.0.0
   file:projects/json.tgz_prettier@2.3.2+ts-node@9.1.1:
     dependencies:
@@ -9780,7 +9817,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-CUMZt2gkrXTJzOTJkeQfoVIYHXT99v/DEcuctVg4bvhSWy78vncFY4jweJd4baGMyUi0ydasw6vpJceBdiYqjw==
+      integrity: sha512-qyjJL+5/hyJbeCF38NSkgiNd5TAK/i5ibrc3MH9g8YLiFcn5t/fmF6gQ44hAP0XLYPyAzqlTJu7hhZhqDE44QA==
       tarball: file:projects/test-public-packages.tgz
     version: 0.0.0
   file:projects/test-utils.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9835,6 +9872,7 @@ packages:
       integrity: sha512-qi2rEcvBtxQHnMA94NCGN35/2sAgi13XqbhkQHhVSZP8ccQObBI+HLAHNHBQToR5bRn9KvzRdqewz3HXkcW3Lw==
       tarball: file:projects/yaml.tgz
     version: 0.0.0
+registry: ''
 specifiers:
   '@azure-tools/async-io': ~3.0.0
   '@azure-tools/eventing': ~3.0.0
@@ -9855,6 +9893,7 @@ specifiers:
   '@rush-temp/deduplication': file:./projects/deduplication.tgz
   '@rush-temp/extension': file:./projects/extension.tgz
   '@rush-temp/extension-base': file:./projects/extension-base.tgz
+  '@rush-temp/fixer': file:./projects/fixer.tgz
   '@rush-temp/json': file:./projects/json.tgz
   '@rush-temp/jsonschema': file:./projects/jsonschema.tgz
   '@rush-temp/md-mock-api': file:./projects/md-mock-api.tgz
