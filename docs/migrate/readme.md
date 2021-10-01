@@ -2,8 +2,7 @@
 
 ## General Guidance
 
-First, make sure when generating you are using AutoRest V3. Follow the steps in [our installation section][install] for information on upgrading
-and confirming your new AutoRest version.
+First, make sure when generating you are using AutoRest V3. Follow the steps in [our installation section][install] for information on upgrading and confirming your new AutoRest version.
 
 ## New Features
 
@@ -18,8 +17,8 @@ AutoRest 3.0 finally supports OpenAPI3 files as an input format, with the follow
 ### Generators
 
 A new set of language generator plugins are being written that adopt the lighter-weight patterns for Azure Core libraries.<br>
-Existing V2 generators will default to processing with the AutoRest 2 pipeline. <br>
-See the language generator flags [here][language_flags]
+
+**The older generators are only compatible with Autorest V2.**
 
 ### Generate More Idiomatic SDKs
 
