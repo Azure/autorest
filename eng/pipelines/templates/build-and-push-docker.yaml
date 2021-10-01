@@ -31,10 +31,11 @@ jobs:
         displayName: Publish image
 
       - script: |
-          docker run -v $(parameters.readmePath):/workspace/readme.md \
+          echo '/workspace/${{parameters.readmePath}}'
+          docker run -v $PWD:/workspace \
             -e DOCKERHUB_USERNAME="azuresdk" \
             -e DOCKERHUB_PASSWORD="$(DockerHub-azuresdkPass)" \
-            -e DOCKERHUB_REPOSITORY='azuresdk/autorest' \
-            -e README_FILEPATH='/workspace/readme.md' \
+            -e DOCKERHUB_REPOSITORY='${{ parameters.image }}' \
+            -e README_FILEPATH='/workspace/${{parameters.readmePath}}' \
             peterevans/dockerhub-description:2.1.0
         displayName: Update readme

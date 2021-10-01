@@ -1198,7 +1198,7 @@ export class ModelerFour {
             // so treat this as an `integer` with no format.
             this.session.warning(
               `Integer schema '${name}' with unknown format: '${schema.format}' is not valid.  Treating it as 'int32'.`,
-              ["Modeler"],
+              ["Modeler", "UnknownFormatType"],
               schema,
             );
             return this.processIntegerSchema(name, schema);
@@ -1218,11 +1218,12 @@ export class ModelerFour {
             return this.processIntegerSchema(name, schema);
 
           default:
-            this.session.error(
-              `Number schema '${name}' with unknown format: '${schema.format}' is not valid`,
-              ["Modeler"],
+            this.session.warning(
+              `Number schema '${name}' with unknown format: '${schema.format}'. Will ignore.`,
+              ["Modeler", "UnknownFormatType"],
               schema,
             );
+            return this.processIntegerSchema(name, schema);
         }
         break;
 
@@ -1967,7 +1968,14 @@ export class ModelerFour {
 
     for (const pp of parameters) {
       const parameter = pp.instance;
-
+      if (parameter.content) {
+        this.session.error(
+          `Parameter '${parameter.name}' in '${parameter.in}' has content.<mediaType> which is not supported right now. Use schema instead. See https://github.com/Azure/autorest/issues/4303`,
+          ["Modelerfour/ParameterContentNotSupported"],
+          parameter,
+        );
+        continue;
+      }
       this.use(parameter.schema, (name, schema) => {
         if (this.apiVersionMode !== "none" && this.interpret.isApiVersionParameter(parameter)) {
           return this.processApiVersionParameter(parameter, operation, pathItem);

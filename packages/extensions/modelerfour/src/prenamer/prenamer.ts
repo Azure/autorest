@@ -241,7 +241,10 @@ export class PreNamer {
       scopeNamer.add(schema, this.format.choice, `Enum${this.enum++}`);
 
       for (const choice of values(schema.choices)) {
-        setName(choice, this.format.choiceValue, "", this.format.override, { removeDuplicates: false });
+        setName(choice, this.format.choiceValue, "", this.format.override, {
+          removeDuplicates: false,
+          nameEmptyErrorMessage: `Enum '${schema.language.default.name}' cannot have a value '${choice.value}' that result in an empty name. Use x-ms-enum.values to specify the name of the values.`,
+        });
       }
     }
   }

@@ -70,6 +70,18 @@ help-content: # type: Help as defined in autorest-core/help.ts
       - key: github-auth-token
         type: string
         description: OAuth token to use when pointing AutoRest at files living in a private GitHub repository
+      - key: azure-arm
+        description: Generate code in Azure flavor.
+        type: boolean
+      - key: head-as-boolean
+        description: When `true`, HEAD calls to non-existent resources (404) will not raise an error. Instead, if the resource exists, we return `true`, else `false`. Forced to be `true` if `--azure-arm` is set, otherwise defaults to `false`.
+        type: boolean
+      - key: header-text
+        description: Text to include as a header comment in generated files (magic strings:MICROSOFT_MIT, MICROSOFT_APACHE, MICROSOFT_MIT_NO_VERSION, MICROSOFT_APACHE_NO_VERSION, MICROSOFT_MIT_NO_CODEGEN)
+        type: string
+      - key: openapi-type
+        description: 'Open API Type: "arm" or "data-plane"'
+        type: string
       - key: max-memory-size
         type: string
         description: Increases the maximum memory size in MB used by Node.js when running AutoRest (translates to the Node.js parameter --max-old-space-size)

@@ -87,6 +87,11 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
   eol?: "default" | "lf" | "crlf";
 
   /**
+   * Include x-ms-original-file property to x-ms-examples to get path to the original file where example was.
+   */
+  "include-x-ms-examples-original-file"?: boolean;
+
+  /**
    * Feature flags. Those flags enable/disable certain features
    */
   "deduplicate-inline-models"?: boolean;

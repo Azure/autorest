@@ -1,6 +1,28 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Wed, 08 Sep 2021 15:39:22 GMT and should not be manually modified.
+This log was last generated on Wed, 29 Sep 2021 15:39:07 GMT and should not be manually modified.
+
+## 4.21.3
+Wed, 29 Sep 2021 15:39:07 GMT
+
+### Patches
+
+- **Fix** Unknown format for number schema should not be an error.
+
+## 4.21.2
+Wed, 22 Sep 2021 15:23:39 GMT
+
+### Patches
+
+- **Fix** log error when using parameter with `content.<mediaType>` as not being supported
+
+## 4.21.1
+Thu, 16 Sep 2021 18:49:17 GMT
+
+### Patches
+
+- **Add** validation when schema use allOf referencing a schema with a different type
+- **Tweak** Better error message when enum has an empty value
 
 ## 4.21.0
 Wed, 08 Sep 2021 15:39:22 GMT
