@@ -46,7 +46,12 @@ jobs:
           npm link --force
         displayName: Install autorest-compare
 
-      - script: npm install
+      - script: |
+          npm install
+
+          echo "Autorest TestServer Version"
+          npm ls "@microsoft.azure/autorest.testserver"
+
         displayName: Install dependencies
         workingDirectory: regression-tests
 

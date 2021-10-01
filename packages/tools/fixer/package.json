@@ -1,0 +1,61 @@
+{
+  "name": "@autorest/fixer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "bin": {
+    "autorest-fixer": "./dist/cli/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p ./tsconfig.build.json",
+    "watch": "tsc -p ./tsconfig.build.json --watch",
+    "lint:fix": "eslint ./src --fix --ext .ts",
+    "lint": "eslint ./src --ext .ts --max-warnings=0",
+    "prepare": "npm run build",
+    "test": "jest --watchAll --coverage=false",
+    "test:ci": "jest --ci",
+    "clean": "rimraf ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/autorest.git"
+  },
+  "keywords": [
+    "autorest"
+  ],
+  "author": "Microsoft",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/autorest/issues"
+  },
+  "homepage": "https://github.com/Azure/autorest/blob/master/packages/tools/fixer",
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/jest": "^26.0.20",
+    "@types/js-yaml": "~4.0.0",
+    "@types/lodash": "~4.14.168",
+    "@types/node": "~14.14.20",
+    "@types/yargs": "~15.0.12",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
+    "eslint-plugin-import": "~2.24.2",
+    "eslint-plugin-jest": "~24.3.2",
+    "eslint-plugin-node": "~11.1.0",
+    "eslint-plugin-prettier": "~3.4.0",
+    "eslint-plugin-unicorn": "~33.0.1",
+    "eslint": "^7.17.0",
+    "jest": "^27.0.4",
+    "prettier": "~2.3.1",
+    "rimraf": "^3.0.2",
+    "typescript": "~4.4.2"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "glob": "~7.1.4",
+    "lodash": "~4.17.20",
+    "source-map-support": "^0.5.19",
+    "ts-jest": "^27.0.3",
+    "winston": "~3.3.3",
+    "yargs": "~16.2.0"
+  }
+}

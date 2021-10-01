@@ -1198,7 +1198,7 @@ export class ModelerFour {
             // so treat this as an `integer` with no format.
             this.session.warning(
               `Integer schema '${name}' with unknown format: '${schema.format}' is not valid.  Treating it as 'int32'.`,
-              ["Modeler"],
+              ["Modeler", "UnknownFormatType"],
               schema,
             );
             return this.processIntegerSchema(name, schema);
@@ -1218,11 +1218,12 @@ export class ModelerFour {
             return this.processIntegerSchema(name, schema);
 
           default:
-            this.session.error(
-              `Number schema '${name}' with unknown format: '${schema.format}' is not valid`,
-              ["Modeler"],
+            this.session.warning(
+              `Number schema '${name}' with unknown format: '${schema.format}'. Will ignore.`,
+              ["Modeler", "UnknownFormatType"],
               schema,
             );
+            return this.processIntegerSchema(name, schema);
         }
         break;
 
@@ -1962,12 +1963,19 @@ export class ModelerFour {
 
   processParameters(httpOperation: OpenAPI.HttpOperation, operation: Operation, pathItem: OpenAPI.PathItem) {
     const parameters = Object.values(httpOperation.parameters ?? {})
-      .map((each) => dereference(this.input, each))
+      .map((x) => ({ ...dereference<OpenAPI.Parameter>(this.input, x), original: x }))
       .filter((x) => !this.isParameterIgnoredHeader(x.instance));
 
     for (const pp of parameters) {
       const parameter = pp.instance;
-
+      if (parameter.content) {
+        this.session.error(
+          `Parameter '${parameter.name}' in '${parameter.in}' has content.<mediaType> which is not supported right now. Use schema instead. See https://github.com/Azure/autorest/issues/4303`,
+          ["Modelerfour/ParameterContentNotSupported"],
+          parameter,
+        );
+        continue;
+      }
       this.use(parameter.schema, (name, schema) => {
         if (this.apiVersionMode !== "none" && this.interpret.isApiVersionParameter(parameter)) {
           return this.processApiVersionParameter(parameter, operation, pathItem);
@@ -1975,10 +1983,10 @@ export class ModelerFour {
 
         // Not an APIVersion Parameter
         const implementation = pp.fromRef
-          ? "method" === <any>parameter["x-ms-parameter-location"]
+          ? "method" === parameter["x-ms-parameter-location"]
             ? ImplementationLocation.Method
             : ImplementationLocation.Client
-          : "client" === <any>parameter["x-ms-parameter-location"]
+          : "client" === parameter["x-ms-parameter-location"]
           ? ImplementationLocation.Client
           : ImplementationLocation.Method;
 
@@ -2007,9 +2015,10 @@ export class ModelerFour {
           parameterSchema = dictionarySchema;
         }
 
+        const description = pp.original.description || this.interpret.getDescription("", parameter);
         /* regular, everyday parameter */
         const newParam = operation.addParameter(
-          new Parameter(preferredName, this.interpret.getDescription("", parameter), parameterSchema, {
+          new Parameter(preferredName, description, parameterSchema, {
             required: parameter.required ? true : undefined,
             implementation,
             extensions: this.interpret.getExtensionProperties(parameter),

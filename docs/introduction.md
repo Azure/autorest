@@ -1,7 +1,7 @@
 # <img align="center" src="./images/logo.png">  Introduction to AutoRest
 
 The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) format.
-Here we go into some of the general terms you'll see when gonig through our documentation and interacting with AutoRests.
+Here we go into some of the general terms you'll see when going through our documentation and interacting with AutoRests.
 
 ## What is OpenAPI?
 
