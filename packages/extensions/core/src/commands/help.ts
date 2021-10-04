@@ -64,18 +64,31 @@ function groupFlagsByCategory(def: ConfigurationSchemaDefinition<any, any>): Cat
 
 function printHelpForConfigurationSchema(def: ConfigurationSchemaDefinition<any, any>) {
   const categories = groupFlagsByCategory(def);
+  let maxKeyAndTypeLength = 0;
+  const processed = categories.map((category) => {
+    return {
+      ...category,
+      options: category.options.map((option) => {
+        const keyPart = `--${option.key}`;
+        const typePart = printConfiguarationPropertyType(option.type);
+        const keyAndType = `${keyPart}\`${typePart}\``;
+        if (keyAndType.length > maxKeyAndTypeLength) {
+          maxKeyAndTypeLength = keyAndType.length;
+        }
 
-  for (const category of categories) {
+        return { keyAndType, description: option.description };
+      }),
+    };
+  });
+
+  for (const category of processed) {
     console.log("");
     console.log(color(`### ${category.name}`));
     if (category.description) {
       console.log(color(category.description));
     }
     for (const option of category.options) {
-      const keyPart = `--${option.key}`;
-      const typePart = printConfiguarationPropertyType(option.type);
-      const settingPart = `${keyPart}\`${typePart}\``;
-      console.log(color(`  ${settingPart.padEnd(30)}  **${option.description}**`));
+      console.log(color(`  ${option.keyAndType.padEnd(maxKeyAndTypeLength + 1)}  **${option.description}**`));
     }
   }
 }
