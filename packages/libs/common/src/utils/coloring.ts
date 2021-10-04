@@ -4,8 +4,8 @@ const NOT_EMPTY_LINE_REGEXP = /^(?!$)/gm;
 
 export function color(text: string): string {
   return text
+    .replace(/(\[.*?\])/gm, (_, x) => chalk.yellow.bold(x))
     .replace(/\*\*(.*?)\*\*/gm, (_, x) => chalk.bold(x))
-    .replace(/(\[.*?s\])/gm, (_, x) => chalk.yellow.bold(x))
     .replace(/^# (.*)/gm, (_, x) => chalk.greenBright(x))
     .replace(/^## (.*)/gm, (_, x) => chalk.green(x))
     .replace(/^### (.*)/gm, (_, x) => chalk.cyanBright(x))

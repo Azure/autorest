@@ -17,19 +17,25 @@ const TestSchema = {
     enum: ["one", "two", "three"],
   },
   numberArray: {
-    type: "number",
-    array: true,
+    type: "array",
+    items: { type: "number" },
   },
   numberDict: {
-    type: "number",
-    dictionary: true,
+    type: "dictionary",
+    items: { type: "number" },
   },
   nested: {
-    nestedNumber: { type: "number" },
+    type: "object",
+    properties: {
+      nestedNumber: { type: "number" },
+    },
   },
 } as const;
 
-const processor = new ConfigurationSchemaProcessor(TestSchema);
+const processor = new ConfigurationSchemaProcessor({
+  schema: TestSchema,
+  categories: { default: { name: "default" } },
+});
 
 const logger = createMockLogger();
 

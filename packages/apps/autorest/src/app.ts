@@ -6,7 +6,6 @@
 /* eslint-disable no-console */
 import "source-map-support/register";
 
-declare const isDebuggerEnabled: boolean;
 const cwd = process.cwd();
 
 import chalk from "chalk";
@@ -17,6 +16,9 @@ import { resetAutorest, showAvailableCoreVersions, showInstalledExtensions } fro
 import { VERSION } from "./constants";
 import { loadConfig, resolveCoreVersion } from "./utils";
 
+const isDebuggerEnabled =
+  // eslint-disable-next-line node/no-unsupported-features/node-builtins
+  !!require("inspector").url() || global.v8debug || /--debug|--inspect/.test(process.execArgv.join(" "));
 const launchCore = isDebuggerEnabled ? runCoreWithRequire : runCoreOutOfProc;
 
 // aliases, round one.

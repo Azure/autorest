@@ -43,4 +43,16 @@ describe("Coloring", () => {
   it("gray ` quoted text", () => {
     expect(color("some `backtick quote text`")).toEqual(`some ${chalk.gray("backtick quote text")}`);
   });
+
+  it("color [] wrapped text", () => {
+    expect(color("some [arg] with [option]")).toEqual(
+      `some ${chalk.yellow.bold("[arg]")} with ${chalk.yellow.bold("[option]")}`,
+    );
+  });
+
+  it("color [] wrapped text with bold elements", () => {
+    expect(color("**some** [arg] with [option]")).toEqual(
+      `${chalk.bold("some")} ${chalk.yellow.bold("[arg]")} with ${chalk.yellow.bold("[option]")}`,
+    );
+  });
 });
