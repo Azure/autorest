@@ -2,6 +2,18 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.21.4",
+      "tag": "@autorest/modelerfour_v4.21.4",
+      "date": "Mon, 04 Oct 2021 18:15:27 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Flatten nullable property doesn't propagate."
+          }
+        ]
+      }
+    },
+    {
       "version": "4.21.3",
       "tag": "@autorest/modelerfour_v4.21.3",
       "date": "Wed, 29 Sep 2021 15:39:07 GMT",
