@@ -1,7 +1,3 @@
 #!/usr/bin/env node
-
-global.isDebuggerEnabled =
-  !!require("inspector").url() || global.v8debug || /--debug|--inspect/.test(process.execArgv.join(" "));
-
-// TODO-TIM do we need this file?
-require(`${__dirname}/../dist/app.js`);
+// Need to have this intermediate file due to rush issue with generated bin https://github.com/microsoft/rushstack/issues/2400
+require("../dist/app.js");
