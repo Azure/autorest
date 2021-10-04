@@ -146,12 +146,13 @@ export class Flattener {
                 childProperty.language.default.description,
                 childProperty.schema,
                 {
-                  ...(<any>childProperty),
+                  ...childProperty,
                   flattenedNames: [
                     property.serializedName,
                     ...(childProperty.flattenedNames ? childProperty.flattenedNames : [childProperty.serializedName]),
                   ],
                   required: property.required && childProperty.required,
+                  nullable: property.nullable ?? childProperty.nullable,
                 },
               ),
             );
