@@ -7,7 +7,7 @@ export {
   Mapping,
   RawSourceMap,
   SourceLocation,
-  JsonPath,
+  JsonPointerSegments,
   Position,
 } from "./types";
 export * from "./convenience";

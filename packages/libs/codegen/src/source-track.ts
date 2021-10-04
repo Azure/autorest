@@ -92,231 +92,51 @@ export function enableSourceTracking<T extends object>(
   return proxy;
 }
 
-export function shadow<T extends object>(source: T, document: string, path = "$", cache = new Map<string, any>()): T {
-  let proxy = cache.get(path);
-
-  if (!proxy) {
-    proxy = new Proxy<T>(source, {
-      get(target: any, p: PropertyKey, receiver: any) {
-        if (p === getPosition) {
-          // they want the source location for this node.
-          return {
-            document,
-            Position: { path: [path] },
-          };
-        }
-        if (p === getActualValue) {
-          return target.valueOf();
-        }
-
-        const value = target[p];
-        switch (typeOf(value)) {
-          case "undefined":
-          case "null":
-          case "function":
-            return value;
-
-          case "string":
-          case "boolean":
-          case "number":
-            return shadow(new Object(value), document, `${path}.${String(p)}`, cache);
-
-          case "object":
-            return shadow(value, document, `${path}.${String(p)}`, cache);
-
-          case "array":
-            return shadow(value, document, `${path}[${String(p)}]`, cache);
-
-          default:
-            throw new Error(`Unhandled shadow of type '${typeOf(value)}' `);
-        }
-      },
-    });
-    cache.set(path, proxy);
-  }
-  return proxy;
+export const ShadowedNodePath = Symbol("ObjectPosition");
+export interface ProxyPosition {
+  [ShadowedNodePath]: Array<string | number>;
 }
 
-/*
-export function shadow1(source: any, sourceFile: string, path = '$', hash = new WeakMap()) {
-  if (hash.has(source)) {
-    // cyclic reference
-    return hash.get(source);
-  }
+export type ShadowedObject<T> = T & ProxyPosition;
 
-  if (source[sourceMarker]) {
-    return source;
-  }
-
-  switch (typeOf(source)) {
-    case 'null':
-    case 'undefined':
-    case 'symbol':
-      return source;
-
-    case 'string':
-    case 'number':
-    case 'boolean': {
-      const v: any = new Object(source);
-      v[sourceMarker] = {
-        $f: sourceFile,
-        $p: path
-      };
-      return v;
-    }
-
-    case 'date': {
-      const v: any = new Date(source);
-      v[sourceMarker] = {
-        $f: sourceFile,
-        $p: path
-      };
-      return v;
-    }
-
-    case 'array': {
-      const v: any = [];
-      hash.set(source, v);
-      for (const { key, value } of items(source)) {
-        v[key] = shadow1(value, sourceFile, `${path}[${key}]`, hash);
-      }
-      v[sourceMarker] = {
-        $f: sourceFile,
-        $p: path
-      };
-      return v;
-    }
-
-    case 'set': {
-      const v: any = new Set();
-      hash.set(source, v);
-      let index = 0;
-      for (const value of values(source)) {
-        v[index] = shadow1(value, sourceFile, `${path}[${index}]`, hash);
-        index++;
-      }
-      v[sourceMarker] = {
-        $f: sourceFile,
-        $p: path
-      };
-      return v;
-    }
-
-    case 'map': {
-      const v: any = new Map();
-      hash.set(source, v);
-      for (const { key, value } of items(source)) {
-        v[key] = shadow1(value, sourceFile, `${path}[${key}]`, hash);
-      }
-      v[sourceMarker] = {
-        $f: sourceFile,
-        $p: path
-      };
-      return v;
-    }
-
-    case 'object': {
-      const v: any = {};
-      hash.set(source, v);
-      for (const { key, value } of items(source)) {
-        v[key] = shadow1(value, sourceFile, `${path}.${key}`, hash);
-      }
-      v[sourceMarker] = {
-        $f: sourceFile,
-        $p: path
-      };
-      return v;
-    }
-  }
-  // some other object type.
-  // we should throw, as we should know what we're dealing with.
-}
-
-export function attachMap<T extends object>(instance: T, enforce = true, $map: any = {}): T {
-  // does this already hav a map attached?
-  if ((<any>instance)[mapMarker]) {
-    return instance;
-  }
-
-  // is it something that we can't work with?
-  if (instance === null || instance === undefined) {
-    return instance;
-  }
-
-  // set the marker on the original
-  (<any>instance)[mapMarker] = $map;
-
-  return new Proxy(instance, {
-    ownKeys: (target: T): Array<PropertyKey> => Object.keys(target).filter(each => !each.startsWith('_#')),
-    get: (target: T, p: PropertyKey, receiver: any): any => {
-      if (p === getMap) {
-        return (<any>target)[sourceMarker];
-      }
-      if (p === getActualValue) {
-        return target.valueOf();
+export function shadowPosition<T extends object>(source: T, path: Array<string | number> = []): ShadowedObject<T> {
+  return new Proxy<ShadowedObject<T>>(source as any, {
+    get(target: any, p: PropertyKey) {
+      if (p === ShadowedNodePath) {
+        // they want the source location for this node.
+        return path;
       }
 
-      const v: any = (<any>target)[p];
-      const type = typeof (v);
+      const value = target[p];
+      const key = getKey(p);
+      switch (typeOf(value)) {
+        case "undefined":
+        case "null":
+        case "function":
+        case "string":
+        case "boolean":
+        case "number":
+          return value;
+        case "array":
+          return shadowPosition(value, [...path, key]);
+        case "object":
+          return shadowPosition(value, [...path, key]);
 
-      if (v === undefined || v === null || type === 'function') {
-        return v;
+        default:
+          throw new Error(`Unhandled shadow of type '${typeOf(value)}' `);
       }
-
-      if (type === 'object') {
-        // we're asked to return a member of the object
-        // if we check and see that the member isn't
-        // proxied, maybe we should stop and replace it with
-        // a proxied version before giving it back.
-        if (!v[mapMarker]) {
-          (<any>target)[p] = attachMap(v, enforce, $map);
-        }
-        return v[getActualValue];
-      }
-      // whatever it is, just let it go.
-
-      return v.valueOf();
     },
-
-    set: (target: T, p: PropertyKey, value: any, receiver: any): boolean => {
-
-      if (value === undefined || value === null) {
-        // remove the existing value
-        delete (<any>target)[p];
-        return true;
-      }
-
-      // does the object have source data?
-      const sm = value[sourceMarker];
-      if (sm) {
-
-        // yes!
-        if (value.valueOf() === value) {
-          (<any>target)[p] = attachMap(clone(value), enforce);
-        } else {
-
-          const vv: any = new Object(value.valueOf());
-          vv[sourceMarker] = sm;
-          console.log(`p has sm obj ${JSON.stringify(vv[sourceMarker])}`);
-          (<any>target)[p] = attachMap(vv, enforce);
-        }
-        return true;
-      }
-
-      // no source data, just set the object value
-      if (enforce) {
-        throw new Error(`Must supply source informaton on property '${new String(p)}' when enforce is true.`);
-      }
-
-      if (isPrimitive(value)) {
-        console.log('prim');
-        // wrap it first!
-        (<any>target)[p] = attachMap(new Object(value), enforce);
-        return true;
-      }
-
-      (<any>target)[p] = attachMap(value, enforce);
-      return true;
-    }
   });
-}*/
+}
+
+function getKey(p: PropertyKey) {
+  switch (typeof p) {
+    case "symbol":
+      return p.toString();
+    case "number":
+      return p;
+    case "string": {
+      return isNaN(p as any) || isNaN(parseFloat(p)) ? p : parseInt(p, 10);
+    }
+  }
+}

@@ -1,16 +1,22 @@
-/* line: 1-based, column: 0-based */
-export type Position =
-  | {
-      line: number; // 1-based
-      column: number; // 0-based
-    }
-  | { path?: JsonPath };
+import { ShadowedObject } from "@azure-tools/codegen";
 
-export type JsonPath = Array<string | number>;
+export interface Position {
+  line: number;
+  column: number;
+}
+
+export interface PathPosition {
+  /**
+   * Path to the element. Either as a json pointer string or as an array of segements.
+   */
+  path: JsonPointerSegments | string;
+}
+
+export type JsonPointerSegments = Array<string | number>;
 
 export interface SourceLocation {
   document: string;
-  Position: Position;
+  Position: Position | PathPosition;
 }
 
 export interface Artifact {
@@ -59,7 +65,7 @@ export interface Message {
   Key?: Iterable<string>;
   Details?: any;
   Text: string;
-  Source?: Array<SourceLocation>;
+  Source?: SourceLocation[];
 }
 
 export interface ArtifactMessage extends Message {
@@ -82,3 +88,5 @@ export interface Mapping {
   source: string;
   name?: string;
 }
+
+export type LogSource = string | Position | PathPosition | ShadowedObject<any>;

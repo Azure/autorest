@@ -59,7 +59,7 @@ import {
   AnyObjectSchema,
 } from "@autorest/codemodel";
 import { Session, Channel } from "@autorest/extension-base";
-import { fail, minimum, pascalCase, KnownMediaType } from "@azure-tools/codegen";
+import { fail, minimum, pascalCase, KnownMediaType, shadowPosition } from "@azure-tools/codegen";
 import {
   Model as oai3,
   Dereferenced,
@@ -158,7 +158,7 @@ export class ModelerFour {
   private ignoreHeaders: Set<string> = new Set();
 
   constructor(protected session: Session<oai3>) {
-    this.input = session.model; // shadow(session.model, filename);
+    this.input = session.model; //shadowPosition(session.model);
 
     const i = this.input.info;
 

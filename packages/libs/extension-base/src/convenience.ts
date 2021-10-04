@@ -3,10 +3,20 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { createSandbox, deserialize } from "@azure-tools/codegen";
+import { createSandbox, deserialize, ShadowedNodePath } from "@azure-tools/codegen";
 import { Schema, DEFAULT_SCHEMA } from "js-yaml";
-import { Host } from "./exports";
-import { Channel, Message, Mapping, RawSourceMap, JsonPath, Position } from "./types";
+import {
+  Channel,
+  Message,
+  Mapping,
+  RawSourceMap,
+  JsonPointerSegments,
+  Position,
+  PathPosition,
+  SourceLocation,
+  LogSource,
+} from "./types";
+import { Host } from ".";
 
 const safeEval = createSandbox();
 
@@ -94,7 +104,7 @@ export class Session<TInputModel> {
     (<any>this.model).language.default[key] = value;
   }
 
-  async listInputs(artifactType?: string | undefined): Promise<Array<string>> {
+  async listInputs(artifactType?: string | undefined): Promise<string[]> {
     return this.service.ListInputs(artifactType);
   }
 
@@ -188,41 +198,33 @@ export class Session<TInputModel> {
     }
   }
 
-  protected msg(channel: Channel, message: string, key: Array<string>, objectOrPath?: string | Object, details?: any) {
-    const sourcePosition = objectOrPath ? (<any>objectOrPath)["_#get-position#_"] || String(objectOrPath) : undefined;
-    if (objectOrPath && (<any>objectOrPath)["_#get-position#_"])
-      this.message({
-        Channel: channel,
-        Key: key,
-        Source: [sourcePosition],
-        Text: message,
-        Details: details,
-      });
-    else {
-      this.message({
-        Channel: channel,
-        Key: key,
-        Source: [],
-        Text: message,
-        Details: details,
-      });
-    }
+  protected msg(channel: Channel, message: string, key: string[], source?: LogSource, details?: any) {
+    const sourcePosition = source ? getPosition(this.filename, source) : undefined;
+
+    const sources = sourcePosition ? [sourcePosition] : [];
+    this.message({
+      Channel: channel,
+      Key: key,
+      Source: sources,
+      Text: message,
+      Details: details,
+    });
   }
 
-  public warning(message: string, key: Array<string>, objectOrPath?: string | Object, details?: any) {
-    this.msg(Channel.Warning, message, key, objectOrPath, details);
+  public warning(message: string, key: string[], source?: LogSource, details?: any) {
+    this.msg(Channel.Warning, message, key, source, details);
   }
-  public hint(message: string, key: Array<string>, objectOrPath?: string | Object, details?: any) {
-    this.msg(Channel.Hint, message, key, objectOrPath, details);
+  public hint(message: string, key: string[], source?: LogSource, details?: any) {
+    this.msg(Channel.Hint, message, key, source, details);
   }
 
-  public error(message: string, key: Array<string>, objectOrPath?: string | Object, details?: any) {
+  public error(message: string, key: string[], source?: LogSource, details?: any) {
     this.errorCount++;
-    this.msg(Channel.Error, message, key, objectOrPath, details);
+    this.msg(Channel.Error, message, key, source, details);
   }
-  public fatal(message: string, key: Array<string>, objectOrPath?: string | Object, details?: any) {
+  public fatal(message: string, key: string[], source?: LogSource, details?: any) {
     this.errorCount++;
-    this.msg(Channel.Fatal, message, key, objectOrPath, details);
+    this.msg(Channel.Fatal, message, key, source, details);
   }
 
   protected output(channel: Channel, message: string, details?: any) {
@@ -251,4 +253,19 @@ export async function startSession<TInputModel>(
   artifactType?: string,
 ) {
   return await new Session<TInputModel>(service).init(project, schema, artifactType);
+}
+
+function getPosition(document: string, source: LogSource): SourceLocation | undefined {
+  if (typeof source === "string") {
+    return { Position: { path: source }, document };
+  }
+
+  if (source[ShadowedNodePath]) {
+    return { Position: { path: source[ShadowedNodePath] }, document };
+  }
+
+  if ("path" in source || "line" in source) {
+    return { Position: source as any, document };
+  }
+  return undefined;
 }

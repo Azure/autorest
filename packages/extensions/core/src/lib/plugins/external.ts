@@ -1,5 +1,13 @@
 import { LogLevel } from "@autorest/common";
-import { DataHandle, QuickDataSource, mergePipeStates } from "@azure-tools/datastore";
+import {
+  DataHandle,
+  QuickDataSource,
+  mergePipeStates,
+  EnhancedPosition,
+  Position,
+  PathPosition,
+} from "@azure-tools/datastore";
+import { parseJsonPointer } from "@azure-tools/json";
 import { Channel, Message } from "../message";
 import { PipelinePlugin } from "../pipeline/common";
 import { AutoRestExtension } from "../pipeline/plugin-endpoint";
@@ -35,7 +43,10 @@ export function createExternalPlugin(host: AutoRestExtension, pluginName: string
               message: message.Text,
               code: message.Key ? [...message.Key].join("/") : undefined,
               details: message.Details,
-              source: message.Source?.map((x) => ({ document: x.document, position: x.Position as any })),
+              source: message.Source?.map((x) => ({
+                document: x.document,
+                position: processPosition(x.Position),
+              })),
             });
             break;
           case Channel.Control:
@@ -58,4 +69,21 @@ export function createExternalPlugin(host: AutoRestExtension, pluginName: string
     }
     return new QuickDataSource(results, mergePipeStates(input.pipeState, { skipping: shouldSkip }));
   };
+}
+
+function processPosition(position: EnhancedPosition): Position | PathPosition {
+  if (position.path) {
+    if (typeof position.path === "string") {
+      try {
+        return { path: parseJsonPointer(position.path) };
+      } catch (e) {
+        return { path: [] };
+      }
+    }
+    return { path: position.path };
+  } else if (position.line) {
+    return { column: position.column ?? 1, line: position.line };
+  }
+
+  return { path: [] };
 }
