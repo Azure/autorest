@@ -1,18 +1,17 @@
 /* eslint-disable no-console */
 import { color } from "@autorest/common";
 import {
-  AUTOREST_CONFIGURATION_DEFINITION,
+  AUTOREST_CONFIGURATION_DEFINITION_FOR_HELP,
   ConfigurationPropertyType,
   ConfigurationSchemaDefinition,
   RootConfigurationProperty,
 } from "@autorest/configuration";
 import { parseYAML } from "@azure-tools/yaml";
-import { Help } from "../help";
 import { Artifact } from "../lib/artifact";
 
 export function printAutorestHelp(artifacts: Artifact[]) {
   printHelpHeader();
-  printHelpForConfigurationSchema(AUTOREST_CONFIGURATION_DEFINITION);
+  printHelpForConfigurationSchema(AUTOREST_CONFIGURATION_DEFINITION_FOR_HELP);
 
   printHelpFromHelpContent(artifacts);
 }
@@ -100,6 +99,20 @@ function printConfiguarationPropertyType(type: ConfigurationPropertyType): strin
     default:
       return `=<${type}>`;
   }
+}
+
+export interface Help {
+  categoryFriendlyName: string; // e.g. "Output Verbosity", "C# generator"
+  activationScope?: string; // e.g. "csharp"
+  description?: string; // inline markdown allowed
+  settings: Array<SettingHelp>;
+}
+
+export interface SettingHelp {
+  required?: boolean; // defaults to "false"
+  key: string; // e.g. "namespace"
+  type?: string; // not specified => flag; otherwise, please use TypeScript syntax
+  description: string; // inline markdown allowed
 }
 
 /**

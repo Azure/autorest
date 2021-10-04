@@ -22,7 +22,7 @@ export const AUTOREST_CONFIGURATION_CATEGORIES = {
   },
 };
 
-const SUPPORTED_EXTENSIONS_SCHEMA = {
+export const SUPPORTED_EXTENSIONS_SCHEMA = {
   csharp: {
     type: "boolean",
     category: "extensions",
@@ -305,7 +305,6 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
     type: "array",
     items: { type: "string" },
   },
-  ...SUPPORTED_EXTENSIONS_SCHEMA,
 } as const;
 
 export type AutorestRawConfiguration = RawConfiguration<typeof AUTOREST_CONFIGURATION_SCHEMA> & {
@@ -315,6 +314,11 @@ export type AutorestRawConfiguration = RawConfiguration<typeof AUTOREST_CONFIGUR
 export const AUTOREST_CONFIGURATION_DEFINITION = {
   categories: AUTOREST_CONFIGURATION_CATEGORIES,
   schema: AUTOREST_CONFIGURATION_SCHEMA,
+};
+export const AUTOREST_CONFIGURATION_DEFINITION_FOR_HELP = {
+  categories: AUTOREST_CONFIGURATION_CATEGORIES,
+  // SUPPORTED_EXTENSIONS_SCHEMA can either be a flag to enable or a scope which cause issue with the validation.
+  schema: { ...AUTOREST_CONFIGURATION_SCHEMA, ...SUPPORTED_EXTENSIONS_SCHEMA },
 };
 
 export const autorestConfigurationProcessor = new ConfigurationSchemaProcessor(AUTOREST_CONFIGURATION_DEFINITION);
