@@ -1,7 +1,6 @@
 import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
 import { ConfigurationSchemaProcessor } from "./processor";
 import { RawConfiguration } from "./types";
-import { RootConfigurationSchema } from ".";
 
 export const AUTOREST_CONFIGURATION_CATEGORIES = {
   logging: {
@@ -16,7 +15,62 @@ export const AUTOREST_CONFIGURATION_CATEGORIES = {
   feature: {
     name: "Feature flags",
   },
+  extensions: {
+    name: "Generators and extensions",
+    description:
+      "> While AutoRest can be extended arbitrarily by 3rd parties (say, with a custom generator),\n> we officially support and maintain the following functionality.\n> More specific help is shown when combining the following switches with `--help` .",
+  },
 };
+
+const SUPPORTED_EXTENSIONS_SCHEMA = {
+  csharp: {
+    type: "boolean",
+    category: "extensions",
+    description: "Generate C# client code",
+  },
+  go: {
+    type: "boolean",
+    category: "extensions",
+    description: "Generate Go client code",
+  },
+  java: {
+    type: "boolean",
+    category: "extensions",
+    description: "Generate Java client code",
+  },
+  python: {
+    type: "boolean",
+    category: "extensions",
+    description: "Generate Python client code",
+  },
+  az: {
+    type: "boolean",
+    category: "extensions",
+    description: "Generate Az cli code",
+  },
+  typescript: {
+    type: "boolean",
+    category: "extensions",
+    description: "Generate TypeScript client code",
+  },
+  azureresourceschema: {
+    type: "boolean",
+    category: "extensions",
+    description: "Generate Azurer resource schemas",
+  },
+  "model-validator": {
+    type: "boolean",
+    category: "extensions",
+    description:
+      "Validates an OpenAPI document against linked examples (see https://github.com/Azure/azure-rest-api-specs/search?q=x-ms-examples ",
+  },
+  "azure-validator": {
+    type: "boolean",
+    category: "extensions",
+    description:
+      "Validates an OpenAPI document against guidelines to improve quality (and optionally Azure guidelines)",
+  },
+} as const;
 
 // Switch next 2 lines to have autocomplete when writting configuration. Make sure to revert otherwise it lose the detailed typing for each option.
 // export const AUTOREST_CONFIGURATION_SCHEMA : RootConfigurationSchema<keyof typeof AUTOREST_CONFIGURATION_CATEGORIES> = {
@@ -251,16 +305,19 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
     type: "array",
     items: { type: "string" },
   },
+  ...SUPPORTED_EXTENSIONS_SCHEMA,
 } as const;
 
 export type AutorestRawConfiguration = RawConfiguration<typeof AUTOREST_CONFIGURATION_SCHEMA> & {
   [key: string]: any;
 };
 
-export const autorestConfigurationProcessor = new ConfigurationSchemaProcessor({
+export const AUTOREST_CONFIGURATION_DEFINITION = {
   categories: AUTOREST_CONFIGURATION_CATEGORIES,
   schema: AUTOREST_CONFIGURATION_SCHEMA,
-});
+};
+
+export const autorestConfigurationProcessor = new ConfigurationSchemaProcessor(AUTOREST_CONFIGURATION_DEFINITION);
 
 export const AUTOREST_INITIAL_CONFIG: AutorestNormalizedConfiguration =
   autorestConfigurationProcessor.getInitialConfig();

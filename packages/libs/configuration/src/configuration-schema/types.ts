@@ -17,6 +17,7 @@ export type ConfigurationPropertyType = "string" | "number" | "boolean" | "array
 
 export type CategoryDefinition = {
   name: string;
+  description?: string;
 };
 
 export type RootConfigurationProperty<C extends string> = ConfigurationProperty & {
