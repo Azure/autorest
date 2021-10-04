@@ -3,16 +3,21 @@ import { parseYAMLAst, YamlNode, parseYAMLFast } from "@azure-tools/yaml";
 import { MappedPosition, Position } from "source-map";
 import { JsonPath } from "../json-path/json-path";
 import { getLineIndices } from "../parsing/text-utility";
-import { resolvePathPosition } from "../source-map";
-import { PathMappedPosition, PathPosition, PathSourceMap } from "../source-map/path-source-map";
-import { PositionSourceMap } from "../source-map/position-source-map";
+import {
+  IdentityPathMappings,
+  PathMappedPosition,
+  PathPosition,
+  PathSourceMap,
+  resolvePathPosition,
+  PositionSourceMap,
+} from "../source-map";
 
 export interface Data {
   status: "loaded" | "unloaded";
   name: string;
   artifactType: string;
   identity: string[];
-  pathSourceMap: PathSourceMap | undefined;
+  pathSourceMap: PathSourceMap | IdentityPathMappings | undefined;
   positionSourceMap: PositionSourceMap | undefined;
 
   lineIndices?: number[];
@@ -77,7 +82,7 @@ export class DataHandle {
       void this.item.positionSourceMap.unload();
     }
 
-    if (this.item.pathSourceMap) {
+    if (this.item.pathSourceMap && this.item.pathSourceMap instanceof PathSourceMap) {
       void this.item.pathSourceMap.unload();
     }
     // clear the caches.
@@ -171,6 +176,9 @@ export class DataHandle {
 
   public async blamePath(path: JsonPath): Promise<Array<MappedPosition | PathMappedPosition>> {
     if (this.item.pathSourceMap) {
+      if (this.item.pathSourceMap instanceof IdentityPathMappings) {
+        return [{ path, source: this.item.pathSourceMap.source }];
+      }
       const mapping = await this.item.pathSourceMap.getOriginalLocation({ path });
       if (mapping) {
         return [mapping];

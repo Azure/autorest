@@ -2,15 +2,15 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { AutoRest } from "../../src/exports";
-import { RealFileSystem } from "@azure-tools/datastore";
 import { join } from "path";
-import { AutorestContextLoader } from "../../src/lib/context";
-import { createFileUri } from "@azure-tools/uri";
-import { AutorestRawConfiguration } from "@autorest/configuration";
-import { LogInfo } from "@autorest/common";
 import { inspect } from "util";
+import { LogInfo } from "@autorest/common";
+import { AutorestRawConfiguration } from "@autorest/configuration";
 import { AutorestTestLogger } from "@autorest/test-utils";
+import { RealFileSystem } from "@azure-tools/datastore";
+import { createFileUri } from "@azure-tools/uri";
+import { AutoRest } from "../../src/exports";
+import { AutorestContextLoader } from "../../src/lib/context";
 
 function getResource(name: string) {
   return join(__dirname, "resources", name);

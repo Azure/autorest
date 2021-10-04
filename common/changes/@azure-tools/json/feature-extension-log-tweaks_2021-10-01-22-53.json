@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/json",
+      "comment": "**Fix** stack overflow when walking circular tree",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@azure-tools/json",
+  "email": "tiguerin@microsoft.com"
+}
