@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import assert from "assert";
-import { AutoRest } from "../src/exports";
-import { RealFileSystem } from "@azure-tools/datastore";
 import { join } from "path";
-import { AppRoot } from "../src/lib/constants";
-import oai3 from "@azure-tools/openapi";
 import { AutorestTestLogger } from "@autorest/test-utils";
+import { RealFileSystem } from "@azure-tools/datastore";
+import oai3 from "@azure-tools/openapi";
+import { AutoRest } from "../src/exports";
+import { AppRoot } from "../src/lib/constants";
 
 const generate = async (additionalConfig: any): Promise<oai3.Model> => {
   const logger = new AutorestTestLogger();

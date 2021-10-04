@@ -7,13 +7,23 @@ export type WalkStatus = "stop" | "visit-children";
  * @param visitor Vistor function.
  */
 export function walk(obj: unknown, visitor: (value: unknown, path: string[]) => WalkStatus) {
-  return walkInternal(obj, [], visitor);
+  const visisted = new Set();
+  return walkInternal(obj, [], visisted, visitor);
 }
 
-function walkInternal(obj: unknown, path: string[], visitor: (value: unknown, path: string[]) => WalkStatus) {
+function walkInternal(
+  obj: unknown,
+  path: string[],
+  visisted: Set<any>,
+  visitor: (value: unknown, path: string[]) => WalkStatus,
+) {
   if (!obj) {
     return undefined;
   }
+  if (visisted.has(obj)) {
+    return;
+  }
+  visisted.add(obj);
 
   if (visitor(obj, path) !== "visit-children") {
     return;
@@ -21,12 +31,12 @@ function walkInternal(obj: unknown, path: string[], visitor: (value: unknown, pa
 
   if (Array.isArray(obj)) {
     for (const [index, item] of obj.entries()) {
-      walkInternal(item, [...path, index.toString()], visitor);
+      walkInternal(item, [...path, index.toString()], visisted, visitor);
     }
   } else if (typeof obj === "object") {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     for (const [key, item] of Object.entries(obj!)) {
-      walkInternal(item, [...path, key], visitor);
+      walkInternal(item, [...path, key], visisted, visitor);
     }
   }
   return false;

@@ -168,12 +168,14 @@ describe("Prechecker", () => {
         Channel: "error",
         Details: undefined,
         Key: ["PreCheck", "AllOfTypeDifferent"],
-        Source: [],
         Text: [
           "Schema 'ChildSchema' has an allOf reference to 'StringSchema' but those schema have different types:",
           "  - ChildSchema: object",
           "  - StringSchema: string",
         ].join("\n"),
+        Source: [
+          { Position: { path: ["components", "schemas", "ChildSchema", "allOf", 0] }, document: "openapi-3.json" },
+        ],
       });
     });
   });

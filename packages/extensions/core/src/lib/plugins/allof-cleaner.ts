@@ -1,5 +1,5 @@
 import { isDefined } from "@autorest/common";
-import { DataHandle, DataSink, DataSource, QuickDataSource, Source } from "@azure-tools/datastore";
+import { DataHandle, DataSink, DataSource, IdentityPathMappings, QuickDataSource } from "@azure-tools/datastore";
 import { Model, isReference, Schema } from "@azure-tools/openapi";
 import { cloneDeep } from "lodash";
 import { AutorestContext } from "../context";
@@ -44,7 +44,11 @@ async function allofCleaner(config: AutorestContext, input: DataSource, sink: Da
 
   for (const input of inputs) {
     const output = await cleanAllOfs(await input.readObject());
-    result.push(await sink.writeObject("oai3.clean-allof.json", output, input.identity, "openapi-clean-allof"));
+    result.push(
+      await sink.writeObject("oai3.clean-allof.json", output, input.identity, "openapi-clean-allof", {
+        pathMappings: new IdentityPathMappings(input.key),
+      }),
+    );
   }
   return new QuickDataSource(result, input.pipeState);
 }

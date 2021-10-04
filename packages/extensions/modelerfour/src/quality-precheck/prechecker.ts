@@ -1,4 +1,5 @@
-import { Session, Host, startSession } from "@autorest/extension-base";
+import { Session, Host, startSession, JsonPointerSegments } from "@autorest/extension-base";
+import { ShadowedNodePath, shadowPosition } from "@azure-tools/codegen";
 import {
   Model as oai3,
   Refable,
@@ -55,7 +56,7 @@ export class QualityPreChecker {
   protected interpret: Interpretations;
 
   constructor(protected session: Session<oai3>) {
-    this.input = session.model; // shadow(session.model, filename);
+    this.input = shadowPosition(session.model); // shadow(session.model, filename);
     this.interpret = new Interpretations(session);
   }
 
@@ -197,45 +198,37 @@ export class QualityPreChecker {
   }
 
   fixUpSchemasThatUseAllOfInsteadOfJustRef() {
-    const schemas = this.input.components?.schemas;
-    if (schemas) {
-      for (const { key, instance: schema } of Object.entries(schemas).map(([key, value]) => ({
-        key: key,
-        ...this.resolve(value),
-      }))) {
-        // we're looking for schemas that offer no possible value
-        // because they just use allOf instead of $ref
-        if (!schema.type || schema.type === JsonType.Object) {
-          if (Object.keys(schema.allOf ?? {}).length === 1) {
-            if (Object.keys(schema.properties ?? {}).length > 0) {
-              continue;
-            }
-            if (schema.additionalProperties) {
-              continue;
-            }
+    for (const { schema, key } of this.listSchemas()) {
+      // we're looking for schemas that offer no possible value
+      // because they just use allOf instead of $ref
+      if (!schema.type || schema.type === JsonType.Object) {
+        if (Object.keys(schema.allOf ?? {}).length === 1) {
+          if (Object.keys(schema.properties ?? {}).length > 0) {
+            continue;
+          }
+          if (schema.additionalProperties) {
+            continue;
+          }
 
-            const $ref = schema?.allOf?.[0]?.$ref;
+          const $ref = schema?.allOf?.[0]?.$ref;
 
-            const text = JSON.stringify(this.input);
-            this.input = JSON.parse(
-              text.replace(new RegExp(`"\\#\\/components\\/schemas\\/${key}"`, "g"), `"${$ref}"`),
+          const text = JSON.stringify(this.input);
+          this.input = JSON.parse(text.replace(new RegExp(`"\\#\\/components\\/schemas\\/${key}"`, "g"), `"${$ref}"`));
+          const location = schema["x-ms-metadata"].originalLocations?.[0]?.replace(/^.*\//, "");
+          delete this.input.components?.schemas?.[key];
+          if (schema["x-internal-autorest-anonymous-schema"]) {
+            this.session.warning(
+              `An anonymous inline schema for property '${location.replace(
+                /-/g,
+                ".",
+              )}' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.`,
+              ["PreCheck", "AllOfWhenYouMeantRef"],
             );
-            const location = schema["x-ms-metadata"].originalLocations?.[0]?.replace(/^.*\//, "");
-            delete this.input.components?.schemas?.[key];
-            if (schema["x-internal-autorest-anonymous-schema"]) {
-              this.session.warning(
-                `An anonymous inline schema for property '${location.replace(
-                  /-/g,
-                  ".",
-                )}' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.`,
-                ["PreCheck", "AllOfWhenYouMeantRef"],
-              );
-            } else {
-              this.session.warning(
-                `Schema '${location}' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.`,
-                ["PreCheck", "AllOfWhenYouMeantRef"],
-              );
-            }
+          } else {
+            this.session.warning(
+              `Schema '${location}' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.`,
+              ["PreCheck", "AllOfWhenYouMeantRef"],
+            );
           }
         }
       }
@@ -243,9 +236,7 @@ export class QualityPreChecker {
   }
 
   fixUpObjectsWithoutType() {
-    for (const { instance: schema, name, fromRef } of Object.values(this.input.components?.schemas ?? {}).map((s) =>
-      this.resolve(s),
-    )) {
+    for (const { name, schema } of this.listSchemas()) {
       if (<any>schema.type === "file" || <any>schema.format === "file" || <any>schema.format === "binary") {
         // handle inconsistency in file format handling.
         this.session.hint(
@@ -326,50 +317,35 @@ export class QualityPreChecker {
   }
 
   fixUpSchemasWithEmptyObjectParent() {
-    const schemas = this.input.components?.schemas;
-    if (schemas) {
-      for (const { key, instance: schema, name, fromRef } of Object.entries(schemas).map(([key, value]) => ({
-        key: key,
-        ...this.resolve(value),
-      }))) {
-        if (schema.type === JsonType.Object) {
-          if (Object.keys(schema.allOf ?? {}).length > 1) {
-            const schemaName = schema["x-ms-metadata"]?.name || name;
-            schema.allOf = schema.allOf?.filter((p) => {
-              const parent = this.resolve(p).instance;
+    for (const { name, schema } of this.listSchemas()) {
+      if (schema.type === JsonType.Object) {
+        if (Object.keys(schema.allOf ?? {}).length > 1) {
+          const schemaName = schema["x-ms-metadata"]?.name || name;
+          schema.allOf = schema.allOf?.filter((p, index) => {
+            const parent = this.resolve(p).instance;
 
-              if (this.isEmptyObjectSchema(parent)) {
-                this.session.warning(
-                  `Schema '${schemaName}' has an allOf list with an empty object schema as a parent, removing it.`,
-                  ["PreCheck", "EmptyParentSchemaWarning"],
-                );
-                return false;
-              }
+            if (this.isEmptyObjectSchema(parent)) {
+              this.session.warning(
+                `Schema '${schemaName}' has an allOf list with an empty object schema as a parent, removing it.`,
+                ["PreCheck", "EmptyParentSchemaWarning"],
+                p,
+              );
+              return false;
+            }
 
-              return true;
-            });
-          }
+            return true;
+          });
         }
       }
     }
   }
 
   private checkParentSameType() {
-    const schemas = this.input.components?.schemas;
-    if (!schemas) {
-      return;
-    }
-
-    for (const { key, instance: schema, name } of Object.entries(schemas).map(([key, value]) => ({
-      key: key,
-      ...this.resolve(value),
-    }))) {
+    for (const { name, schema } of this.listSchemas()) {
       if (schema.allOf && schema.type) {
         const schemaName = getSchemaName(schema, name);
-        for (const { instance: parent, name, index } of schema.allOf.map((x, index) => ({
-          index,
-          ...this.resolve(x),
-        }))) {
+        for (const parentRef of schema.allOf) {
+          const parent = this.resolve(parentRef).instance;
           if (parent.type && parent.type !== schema.type) {
             const parentName = getSchemaName(parent, name);
             const lines = [
@@ -377,11 +353,7 @@ export class QualityPreChecker {
               `  - ${schemaName}: ${schema.type}`,
               `  - ${parentName}: ${parent.type}`,
             ];
-            this.session.error(
-              lines.join("\n"),
-              ["PreCheck", "AllOfTypeDifferent"],
-              ["components", "schemas", key, "allOf", index],
-            );
+            this.session.error(lines.join("\n"), ["PreCheck", "AllOfTypeDifferent"], parentRef);
           }
         }
       }
@@ -402,20 +374,31 @@ export class QualityPreChecker {
     this.checkParentSameType();
 
     let onlyOnce = new WeakSet<Schema>();
-    for (const { instance: schema, name, fromRef } of Object.values(this.input.components?.schemas ?? {}).map((s) =>
-      this.resolve(s),
-    )) {
+    for (const { name, schema } of this.listSchemas()) {
       this.checkForHiddenProperties(this.interpret.getName(name, schema), schema, onlyOnce);
     }
 
     onlyOnce = new WeakSet<Schema>();
-    for (const { instance: schema, name, fromRef } of Object.values(this.input.components?.schemas ?? {}).map((s) =>
-      this.resolve(s),
-    )) {
+    for (const { name, schema } of this.listSchemas()) {
       this.checkForDuplicateParents(this.interpret.getName(name, schema), schema, onlyOnce);
     }
 
     return this.input;
+  }
+
+  private listSchemas(): Array<{ schema: Schema; name: string; key: string }> {
+    const schemas = this.input.components?.schemas;
+    if (!schemas) {
+      return [];
+    }
+    return Object.entries(schemas).map(([key, value]) => {
+      const { instance, name } = this.resolve(value);
+      return {
+        key,
+        schema: instance,
+        name,
+      };
+    });
   }
 }
 

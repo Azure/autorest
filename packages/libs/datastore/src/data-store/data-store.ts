@@ -10,7 +10,14 @@ import { join } from "path";
 import { resolveUri } from "@azure-tools/uri";
 import { RawSourceMap } from "source-map";
 import { IFileSystem } from "../file-system/file-system";
-import { PathMapping, PathPosition, PathSourceMap, Position, PositionSourceMap } from "../source-map";
+import {
+  PathMapping,
+  PathPosition,
+  PathSourceMap,
+  Position,
+  PositionSourceMap,
+  IdentityPathMappings,
+} from "../source-map";
 import { BlameTree } from "../source-map/blaming";
 
 import { Data, DataHandle } from "./data-handle";
@@ -67,7 +74,7 @@ export class DataStore {
     data: string,
     artifactType: string,
     identity: Array<string>,
-    mappings?: PathMapping[],
+    mappings?: PathMapping[] | IdentityPathMappings,
     sourceMapFactory?: (self: DataHandle) => Promise<RawSourceMap>,
   ): Promise<DataHandle> {
     const uri = this.createUri(description);
@@ -98,7 +105,7 @@ export class DataStore {
       item.positionSourceMap = new PositionSourceMap(name, await sourceMapFactory(handle));
     }
     if (mappings) {
-      item.pathSourceMap = new PathSourceMap(name, mappings);
+      item.pathSourceMap = mappings instanceof IdentityPathMappings ? mappings : new PathSourceMap(name, mappings);
     }
 
     return handle;

@@ -1,6 +1,14 @@
 import { JsonPointerTokens, serializeJsonPointer } from "@azure-tools/json";
 import { SourceMapData } from "./source-map-data";
 
+/**
+ * PathSourceMap where the path between the source and generated documeent are a 1:1 mapping.
+ * To use when a plugin doesn't change the structure.
+ */
+export class IdentityPathMappings {
+  public constructor(public source: string) {}
+}
+
 export interface PathMapping {
   /**
    * JsonPath of the target

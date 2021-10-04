@@ -1,5 +1,4 @@
-import { identitySourceMapping } from "@autorest/common";
-import { DataSource, DataSink, QuickDataSource } from "@azure-tools/datastore";
+import { DataSource, DataSink, QuickDataSource, IdentityPathMappings } from "@azure-tools/datastore";
 import { uniqBy } from "lodash";
 import { AutorestContext } from "../../context";
 import { PipelinePlugin } from "../../pipeline/common";
@@ -27,7 +26,9 @@ async function resetIdentity(context: AutorestContext, input: DataSource, sink: 
       if (numberEachFile) {
         name = insertIndexSuffix(name, index);
       }
-      return await sink.writeData(name, await input.readData(), input.identity, context.config.to);
+      return await sink.writeData(name, await input.readData(), input.identity, context.config.to, {
+        pathMappings: new IdentityPathMappings(input.key),
+      });
     }),
   );
   return new QuickDataSource(result, input.pipeState);
