@@ -29,8 +29,8 @@ export class Checker {
       const duplicates = findDuplicates(group.operations, (x) => x.language.default.name);
       for (const [dupe, operations] of Object.entries(duplicates)) {
         const paths = operations
-          .map((x) => x.requests?.[0].protocol.http?.path)
-          .map((x) => `  - ${x}`)
+          .map((x) => x.requests?.[0].protocol.http)
+          .map((x) => `  - ${x?.method} ${x?.path}`)
           .join("\n");
         this.session.error(
           `Duplicate Operation '${group.language.default.name}' > '${dupe}' detected(This is most likely due to 2 operation using the same 'operationId' or 'tags'). Duplicates have those paths:\n${paths}`,
