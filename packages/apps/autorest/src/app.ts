@@ -9,6 +9,7 @@ import "source-map-support/register";
 declare const isDebuggerEnabled: boolean;
 const cwd = process.cwd();
 
+import { AutorestSyncLogger, ConsoleLoggerSink } from "@autorest/common";
 import chalk from "chalk";
 import { clearTempData } from "./actions";
 import { parseAutorestArgs } from "./args";
@@ -16,7 +17,6 @@ import { newCorePackage, ensureAutorestHome, runCoreWithRequire, runCoreOutOfPro
 import { resetAutorest, showAvailableCoreVersions, showInstalledExtensions } from "./commands";
 import { VERSION } from "./constants";
 import { loadConfig, resolveCoreVersion } from "./utils";
-import { AutorestSyncLogger, ConsoleLoggerSink } from "@autorest/common";
 
 const launchCore = isDebuggerEnabled ? runCoreWithRequire : runCoreOutOfProc;
 
