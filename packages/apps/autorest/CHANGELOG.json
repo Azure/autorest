@@ -2,6 +2,18 @@
   "name": "autorest",
   "entries": [
     {
+      "version": "3.4.1",
+      "tag": "autorest_v3.4.1",
+      "date": "Tue, 05 Oct 2021 17:04:21 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**fix** Respect `message-format` option"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.4.0",
       "tag": "autorest_v3.4.0",
       "date": "Wed, 08 Sep 2021 15:39:22 GMT",
