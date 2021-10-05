@@ -1,5 +1,5 @@
 import { dirname, join, resolve } from "path";
-import { AutorestSyncLogger, ConsoleLoggerSink } from "@autorest/common";
+import { AutorestLogger, AutorestSyncLogger, ConsoleLoggerSink, IAutorestLogger, LoggerSink } from "@autorest/common";
 import { AutorestConfiguration, AutorestNormalizedConfiguration, ConfigurationLoader } from "@autorest/configuration";
 import { isFile } from "@azure-tools/async-io";
 import { createFileOrFolderUri, createFolderUri, resolveUri } from "@azure-tools/uri";
@@ -33,12 +33,11 @@ const cwd = process.cwd();
  * Tries to load the configuration of autorest.
  * @param args CLI args.
  */
-export async function loadConfig(args: AutorestArgs): Promise<AutorestConfiguration | undefined> {
+export async function loadConfig(sink: LoggerSink, args: AutorestArgs): Promise<AutorestConfiguration | undefined> {
   const configFileOrFolder = resolveUri(createFolderUri(cwd), args.configFileOrFolder || ".");
   const enableLogging = args["debug-cli-config-loading"];
-
   const logger = new AutorestSyncLogger({
-    sinks: enableLogging ? [new ConsoleLoggerSink()] : [],
+    sinks: enableLogging ? [sink] : [],
   });
 
   const loader = new ConfigurationLoader(logger, defaultConfigUri, configFileOrFolder, {
@@ -46,12 +45,6 @@ export async function loadConfig(args: AutorestArgs): Promise<AutorestConfigurat
   });
   try {
     const { config } = await loader.load([args], true);
-    if (config.version) {
-      // eslint-disable-next-line no-console
-      console.log(
-        chalk.yellow(`NOTE: AutoRest core version selected from configuration: ${chalk.yellow.bold(config.version)}.`),
-      );
-    }
     return config;
   } catch (e) {
     // eslint-disable-next-line no-console
