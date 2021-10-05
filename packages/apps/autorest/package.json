@@ -41,7 +41,7 @@
   "typings": "./dist/exports.d.ts",
   "devDependencies": {
     "@autorest/configuration": "~1.7.2",
-    "@autorest/core": "~3.6.3",
+    "@autorest/core": "~3.6.4",
     "@autorest/common": "~1.3.0",
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/extension": "~3.3.1",
