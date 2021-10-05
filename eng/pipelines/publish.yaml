@@ -65,7 +65,7 @@ stages:
           readmePath: docker/java/readme.md
       - template: ./templates/build-and-push-docker.yaml
         parameters:
-          name: java
+          name: all
           image: azuresdk/autorest-all
           dockerFolder: ./docker/all/ubuntu
           readmePath: docker/all/readme.md
