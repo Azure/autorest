@@ -9,6 +9,7 @@ import "source-map-support/register";
 declare const isDebuggerEnabled: boolean;
 const cwd = process.cwd();
 
+import { AutorestSyncLogger, ConsoleLoggerSink } from "@autorest/common";
 import chalk from "chalk";
 import { clearTempData } from "./actions";
 import { parseAutorestArgs } from "./args";
@@ -96,7 +97,15 @@ async function main() {
     } catch {
       // We have a chance to fail again later if this proves problematic.
     }
-    const config = await loadConfig(args);
+    const sink = new ConsoleLoggerSink({ format: args["message-format"] });
+    const logger = new AutorestSyncLogger({
+      sinks: [sink],
+    });
+    const config = await loadConfig(sink, args);
+    if (config?.version) {
+      logger.info(`AutoRest core version selected from configuration: ${chalk.yellow.bold(config.version)}.`);
+    }
+
     const coreVersionPath = await resolveCoreVersion(config);
 
     // let's strip the extra stuff from the command line before we require the core module.
@@ -132,7 +141,7 @@ async function main() {
     process.argv = newArgs;
 
     if (args.debug) {
-      console.log(`Starting ${newCorePackage} from ${coreVersionPath}`);
+      logger.debug(`Starting ${newCorePackage} from ${coreVersionPath}`);
     }
 
     // reset the working folder to the correct place.

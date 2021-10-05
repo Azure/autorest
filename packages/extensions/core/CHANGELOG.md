@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Thu, 23 Sep 2021 19:51:32 GMT and should not be manually modified.
+This log was last generated on Tue, 05 Oct 2021 16:39:50 GMT and should not be manually modified.
+
+## 3.6.4
+Tue, 05 Oct 2021 16:39:50 GMT
+
+### Patches
+
+- **Fix** `message-format` not being respected
 
 ## 3.6.3
 Thu, 23 Sep 2021 19:51:32 GMT
