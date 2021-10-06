@@ -101,8 +101,6 @@ csharp:
   );
 }
 
-let exitcode = 0;
-
 let cleared = false;
 async function doClearFolders(protectFiles: Set<string>, clearFolders: Set<string>, logger: IAutorestLogger) {
   if (!cleared) {
@@ -235,7 +233,7 @@ async function currentMain(logger: IAutorestLogger, args: AutorestCliArgs): Prom
   }
   logger.info("Generation Complete");
   // return the exit code to the caller.
-  return exitcode;
+  return 0;
 }
 
 function shallowMerge(existing: any, more: any) {
@@ -279,6 +277,7 @@ async function resourceSchemaBatch(api: AutoRest, logger: IAutorestLogger): Prom
 
   let outstanding: Promise<void> = Promise.resolve();
 
+  let exitCode = 0;
   // ask for the view without
   const config = await api.RegenerateView();
   for (const batchContext of config.getNestedConfiguration("resource-schema-batch")) {
@@ -287,7 +286,7 @@ async function resourceSchemaBatch(api: AutoRest, logger: IAutorestLogger): Prom
       const path = resolveUri(config.configFileFolderUri, eachFile);
       const content = await readUri(path);
       if (!(await IsOpenApiDocument(content))) {
-        exitcode++;
+        exitCode++;
         console.error(color(`!File ${path} is not a OpenAPI file.`));
         continue;
       }
@@ -328,7 +327,7 @@ async function resourceSchemaBatch(api: AutoRest, logger: IAutorestLogger): Prom
       // ok, kick off the process for that one.
       await instance.Process().finish.then(async (result) => {
         if (result !== true) {
-          exitcode++;
+          exitCode++;
           throw result;
         }
       });
@@ -337,7 +336,7 @@ async function resourceSchemaBatch(api: AutoRest, logger: IAutorestLogger): Prom
 
   await outstanding;
 
-  return exitcode;
+  return exitCode;
 }
 
 async function batch(api: AutoRest, logger: IAutorestLogger): Promise<void> {
@@ -381,6 +380,7 @@ async function main() {
   try {
     return await currentMain(logger, args);
   } catch (e) {
+    exitCode = 1;
     // be very careful about the following check:
     // - doing the inversion (instanceof Error) doesn't reliably work since that seems to return false on Errors marshalled from safeEval
     if (e instanceof Exception) {
@@ -399,7 +399,7 @@ async function main() {
     } finally {
       logger.debug("Exiting.");
       // eslint-disable-next-line no-process-exit
-      process.exit(exitcode);
+      process.exit(exitCode);
     }
   }
 }
