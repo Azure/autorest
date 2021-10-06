@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Tue, 05 Oct 2021 16:39:50 GMT and should not be manually modified.
+This log was last generated on Wed, 06 Oct 2021 17:36:17 GMT and should not be manually modified.
+
+## 3.6.5
+Wed, 06 Oct 2021 17:36:17 GMT
+
+### Patches
+
+- **Fix** exit code always 0
 
 ## 3.6.4
 Tue, 05 Oct 2021 16:39:50 GMT
