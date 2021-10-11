@@ -1,7 +1,7 @@
-import { ComponentsCleaner } from "../../../src/lib/plugins/components-cleaner";
+import assert from "assert";
 import fs from "fs";
 import { DataStore, MemoryFileSystem } from "@azure-tools/datastore";
-import assert from "assert";
+import { ComponentsCleaner } from "../../../src/lib/plugins/components-cleaner";
 
 const readData = async (file: string) => {
   const map = new Map<string, string>();
@@ -54,5 +54,9 @@ describe("ComponentCleaner", () => {
   it("ignores x- properties under components", async () => {
     const { input, output } = await runComponentCleaner("components-extensions");
     expect(output).toEqual(input);
+  });
+
+  it("doesn't remove polymorhique types", async () => {
+    await expectScenarioToMatchSnapshot("polymorphism");
   });
 });

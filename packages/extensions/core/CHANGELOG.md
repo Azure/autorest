@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Wed, 06 Oct 2021 17:36:17 GMT and should not be manually modified.
+This log was last generated on Mon, 11 Oct 2021 21:01:13 GMT and should not be manually modified.
+
+## 3.6.6
+Mon, 11 Oct 2021 21:01:13 GMT
+
+### Patches
+
+- **Fix** Unreferenced discriminated union option being removed
 
 ## 3.6.5
 Wed, 06 Oct 2021 17:36:17 GMT
