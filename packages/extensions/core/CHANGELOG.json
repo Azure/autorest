@@ -2,6 +2,18 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.6.6",
+      "tag": "@autorest/core_v3.6.6",
+      "date": "Mon, 11 Oct 2021 21:01:13 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Unreferenced discriminated union option being removed"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.6.5",
       "tag": "@autorest/core_v3.6.5",
       "date": "Wed, 06 Oct 2021 17:36:17 GMT",
