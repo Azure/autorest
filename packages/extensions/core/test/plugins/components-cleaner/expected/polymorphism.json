@@ -1,0 +1,82 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": ""
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "MainFileObj": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "x-ms-secondary-file": false
+        },
+        "type": "object",
+        "properties": {
+          "pet": {
+            "$ref": "#/components/schemas/Pet"
+          }
+        }
+      },
+      "Pet": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "x-ms-secondary-file": true
+        },
+        "type": "object",
+        "discriminator": "type",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "Cat": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "x-ms-secondary-file": true
+        },
+        "type": "object",
+        "x-ms-discriminator-value": "Cat",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Pet"
+          }
+        ],
+        "properties": {
+          "type": {
+            "meow": "string"
+          }
+        }
+      },
+      "Dog": {
+        "x-ms-metadata": {
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "x-ms-secondary-file": true
+        },
+        "type": "object",
+        "x-ms-discriminator-value": "Dog",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Pet"
+          }
+        ],
+        "properties": {
+          "type": {
+            "bark": "string"
+          }
+        }
+      }
+    }
+  }
+}
