@@ -3,6 +3,7 @@
  * Licensed under the MIT License.See License.txt in the project root for license information.
  * --------------------------------------------------------------------------------------------*/
 
+import { arrayify } from "@autorest/common";
 import {
   AnyObject,
   DataHandle,
@@ -218,20 +219,27 @@ class UnsuedComponentFinder {
   private checkRef(
     containerType: ComponentType,
     currentComponentUid: string,
-    component: any,
+    component: oai3.Schema,
     prop: "allOf" | "anyOf" | "oneOf" | "not",
   ) {
-    if (component[prop]?.$ref) {
-      const refParts = component[prop].$ref.split("/");
-      const componentRefUid = refParts.pop();
-      const refType = refParts.pop() as keyof ComponentTracker;
-      if (
-        this.componentsToKeep[refType].has(componentRefUid) &&
-        !this.componentsToKeep[containerType].has(currentComponentUid)
-      ) {
-        this.componentsToKeep[containerType].add(currentComponentUid);
-        this.crawlObject(component);
-        return true;
+    const items = component[prop];
+    if (items === undefined) {
+      return;
+    }
+
+    for (const item of arrayify(items)) {
+      if (item.$ref) {
+        const refParts = item.$ref.split("/");
+        const componentRefUid = refParts.pop();
+        const refType = refParts.pop() as keyof ComponentTracker;
+        if (
+          this.componentsToKeep[refType].has(componentRefUid) &&
+          !this.componentsToKeep[containerType].has(currentComponentUid)
+        ) {
+          this.componentsToKeep[containerType].add(currentComponentUid);
+          this.crawlObject(component);
+          return true;
+        }
       }
     }
     return false;
