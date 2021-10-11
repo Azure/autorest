@@ -1211,24 +1211,26 @@ When set, specifies the set of resource types which can be referenced by this `a
 The allowed format always follows the following template: `{scope}/providers/{resourceType}`.
 
 The `{scope}` segment has the following allowed values. These values were derived from the [scope field in ARM templates](https://docs.microsoft.com/azure/azure-resource-manager/templates/scope-extension-resources?tabs=azure-cli).
-| Scope                                  | Meaning                                                                                                                                                                                                      |
-| ---------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `/`                                    | The resource is deployed into a tenant                                                                                                                                                                       |
-| `/subscriptions`                       | The resource is deployed into a subscription                                                                                                                                                                 |
-| `/subscriptions/resourceGroups`        | The resource is deployed into a resource group                                                                                                                                                               |
-| `*`                                    | The resource is an extension resource and may be deployed in any of the above scopes, or as a subresource of another resource in any of the above scopes                                                     |
+| Scope                                    | Meaning                                                                                                                                                                                                      |
+| -----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `/`                                      | The resource is deployed into a tenant                                                                                                                                                                       |
+| `/subscriptions`                         | The resource is deployed into a subscription                                                                                                                                                                 |
+| `/subscriptions/resourceGroups`          | The resource is deployed into a resource group                                                                                                                                                               |
+| `/Microsoft.Management/managementGroups` | The resource is deployed into a management group                                                                                                                                                             |
+| `*`                                      | The resource is an extension resource and may be deployed in any of the above scopes, or as a subresource of another resource in any of the above scopes                                                     |
 
 Note that we do not currently support limiting references to an extension resource by the kind of resource it is on. For example you can refer to _any_ resource lock (`*/providers/Microsoft.Authorization/locks`) but not to a resource lock but only when it's on a resource group.
 
 Below is a table showing the different kinds of resources and an example of each
 Note: When reading the format column, parameterized fields such as `{provider}` must be given concrete values in the `allowedTypes` entry. See the example column for an example.
 
-| Resource kind                   | Format                                                                      | Example                                                                            |
-| ------------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Resource in a tenant            | `/providers/{provider}/{resourceType}`                                      | `/providers/Microsoft.Capacity/reservationOrders`                                  |
-| Resource in a subscription      | `/subscriptions/providers/{provider}/{resourceType}`                        | `/subscriptions/providers/Microsoft.Resources/resourceGroups`                      |
-| Resource in a resource group    | `/subscriptions/resourceGroups/providers/{provider}/{resourceType}`         | `/subscriptions/resourceGroups/providers/Microsoft.Network/virtualNetworks`        |
-| Extension resource              | `*/{provider}/{resourceTye}`                                                | `*/providers/Microsoft.Authorization/locks`                                        |
+| Resource kind                   | Format                                                                                 | Example                                                                                               |
+| ------------------------------- | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Resource in a tenant            | `/providers/{provider}/{resourceType}`                                                 | `/providers/Microsoft.Capacity/reservationOrders`                                                     |
+| Resource in a subscription      | `/subscriptions/providers/{provider}/{resourceType}`                                   | `/subscriptions/providers/Microsoft.Resources/resourceGroups`                                         |
+| Resource in a resource group    | `/subscriptions/resourceGroups/providers/{provider}/{resourceType}`                    | `/subscriptions/resourceGroups/providers/Microsoft.Network/virtualNetworks`                           |
+| Resource in a management group  | `/providers/Microsoft.Management/managementGroups/providers/{provider}/{resourceType}` | `/providers/Microsoft.Management/managementGroups/provivders/Microsoft.Authorization/roleAssignments` |
+| Extension resource              | `*/{provider}/{resourceTye}`                                                           | `*/providers/Microsoft.Authorization/locks`                                                           |
 
 Sub-resources are specified in the same manner as their parent resource but with additional paths on the end. For example to refer to a subnet: `/subscriptions/resourceGroups/providers/Microsoft.Network/virtualNetworks/subnets`.
 
