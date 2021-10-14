@@ -157,6 +157,9 @@ function processProperty<T extends ConfigurationProperty>(
 
     return { value: result };
   } else {
+    if (value === undefined) {
+      return { value: undefined as any };
+    }
     return processPrimitiveProperty(schema, path, value as InferredRawPrimitiveType<T>, options) as any;
   }
 }
@@ -220,7 +223,7 @@ function createInvalidTypeError(value: unknown, expectedType: string, path: stri
 
   return {
     code: ProcessingErrorCode.InvalidType,
-    message: `Expected a ${expectedType} but got ${typeof value}: ${serializedValue}`,
+    message: `Expected a ${expectedType} but got ${typeof value} at ${path.join("/")}: ${serializedValue}`,
     path,
   };
 }

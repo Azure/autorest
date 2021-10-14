@@ -941,7 +941,7 @@ export class EnglishPluralizationService {
     const de = deconstruct(word);
 
     // singularize the last word only
-    de[de.length - 1] = this.capitalize(de.last, (w) => this.internalSingularize(w));
+    de[de.length - 1] = this.capitalize(de[de.length - 1], (w) => this.internalSingularize(w));
 
     // return the pascal cased whole thing.
     return pascalCase(de);

@@ -19,52 +19,16 @@ const acronyms = new Set([
   "vm", //  'ssl', 'https', 'http', ''
 ]);
 
-declare global {
-  interface Array<T> {
-    joinWith(selector: (t: T) => string, separator?: string): string;
-    last: T;
+export function capitalize(str: string): string {
+  if (acronyms.has(str)) {
+    return str.toUpperCase();
   }
-
-  interface String {
-    capitalize(): string;
-    uncapitalize(): string;
-    slim(): string;
-  }
+  return str ? `${str.charAt(0).toUpperCase()}${str.substr(1)}` : str;
 }
 
-/** joins an array by passing thru a selector and uses the separator string (defaults to comma) */
-Array.prototype.joinWith = function <T>(selector: (t: T) => string, separator?: string): string {
-  return (<Array<T>>this)
-    .map(selector)
-    .filter((v) => (v ? true : false))
-    .join(separator || CommaChar);
-};
-
-/** todo: can we remove this? */
-/* eslint-disable */
-if (!Array.prototype.hasOwnProperty("last")) {
-  Object.defineProperty(Array.prototype, "last", {
-    get() {
-      return this[this.length - 1];
-    },
-  });
+export function uncapitalize(str: string): string {
+  return str ? `${str.charAt(0).toLowerCase()}${str.substr(1)}` : str;
 }
-
-String.prototype.capitalize = function (): string {
-  const result = <string>this;
-  if (acronyms.has(result)) {
-    return result.toUpperCase();
-  }
-  return result ? `${result.charAt(0).toUpperCase()}${result.substr(1)}` : result;
-};
-String.prototype.uncapitalize = function (): string {
-  const result = <string>this;
-  return result ? `${result.charAt(0).toLowerCase()}${result.substr(1)}` : result;
-};
-/** Trims the string and removes multi leading spaces? */
-String.prototype.slim = function (): string {
-  return this.trim().replace(/([^ ])  +/g, "$1 ");
-};
 
 export function join<T>(items: Array<T>, separator: string) {
   return items.filter((v) => (v ? true : false)).join(separator);
@@ -109,7 +73,7 @@ export function fixEOL(content: string) {
   return content.replace(/\r\n/g, EOL);
 }
 
-export function indent(content: string, factor: number = 1): string {
+export function indent(content: string, factor = 1): string {
   const i = indentation.repeat(factor);
   content = i + fixEOL(content.trim());
   return content.split(/\n/g).join(`${EOL}${i}`);
@@ -303,7 +267,7 @@ export function removeProhibitedPrefix(
       return identifier;
     }
 
-    newIdentifier = isCapitalized(identifier) ? newIdentifier.capitalize() : newIdentifier.uncapitalize();
+    newIdentifier = isCapitalized(identifier) ? capitalize(newIdentifier) : uncapitalize(newIdentifier);
     return skipIdentifiers !== undefined
       ? skipIdentifiers.includes(newIdentifier)
         ? identifier
@@ -340,7 +304,7 @@ export function pascalCase(identifier: string | Array<string>, removeDuplicates 
     : typeof identifier === "string"
     ? pascalCase(fixLeadingNumber(deconstruct(identifier)), removeDuplicates)
     : (removeDuplicates ? [...removeSequentialDuplicates(identifier)] : identifier)
-        .map((each) => each.capitalize())
+        .map((each) => capitalize(each))
         .join("");
 }
 
@@ -352,9 +316,9 @@ export function camelCase(identifier: string | Array<string>): string {
     case 0:
       return "";
     case 1:
-      return identifier[0].uncapitalize();
+      return uncapitalize(identifier[0]);
   }
-  return `${identifier[0].uncapitalize()}${pascalCase(identifier.slice(1))}`;
+  return `${uncapitalize(identifier[0])}${pascalCase(identifier.slice(1))}`;
 }
 
 export function getPascalIdentifier(name: string): string {
@@ -377,7 +341,7 @@ export function nameof(text: string): string {
   return `nameof(${text})`;
 }
 
-export function* getRegions(source: string, prefix: string = "#", postfix: string = "") {
+export function* getRegions(source: string, prefix = "#", postfix = "") {
   source = source.replace(/\r?\n|\r/g, "«");
 
   const rx = new RegExp(

@@ -3,6 +3,7 @@ import { exists, filePath } from "@azure-tools/async-io";
 import { DataStore, IFileSystem, RealFileSystem, CachingFileSystem } from "@azure-tools/datastore";
 import { Extension, ExtensionManager, LocalExtension } from "@azure-tools/extension";
 import { createFileUri, resolveUri, simplifyUri, fileUriToPath } from "@azure-tools/uri";
+import { last } from "lodash";
 import untildify from "untildify";
 import { AutorestConfiguration } from "../autorest-configuration";
 import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
@@ -251,7 +252,8 @@ export class ConfigurationLoader {
     }
 
     // trim off the '@org' and 'autorest.' from the name.
-    const shortname = extensionDef.name.split("/").last.replace(/^autorest\./gi, "");
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const shortname = last(extensionDef.name.split("/"))!.replace(/^autorest\./gi, "");
 
     // Add a hint here to make legacy users to be aware that the default version has been bumped to 3.0+.
     if (shortname === "powershell") {
