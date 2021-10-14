@@ -223,7 +223,7 @@ function createInvalidTypeError(value: unknown, expectedType: string, path: stri
 
   return {
     code: ProcessingErrorCode.InvalidType,
-    message: `Expected a ${expectedType} but got ${typeof value} at ${path.join("/")}: ${serializedValue}`,
+    message: `Expected a ${expectedType} but got ${typeof value}: ${serializedValue}`,
     path,
   };
 }
