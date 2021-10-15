@@ -1,6 +1,14 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Wed, 29 Sep 2021 15:39:07 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Oct 2021 15:41:45 GMT and should not be manually modified.
+
+## 4.21.4
+Mon, 04 Oct 2021 18:15:27 GMT
+
+### Patches
+
+- **Fix** Flatten nullable property doesn't propagate.
+- **Internal** remove use of string and array extension method `.last`.
 
 ## 4.21.3
 Wed, 29 Sep 2021 15:39:07 GMT
