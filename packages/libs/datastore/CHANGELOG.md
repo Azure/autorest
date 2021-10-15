@@ -1,6 +1,11 @@
 # Change Log - @azure-tools/datastore
 
-This log was last generated on Wed, 08 Sep 2021 15:39:22 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Oct 2021 23:03:29 GMT and should not be manually modified.
+
+## 4.5.1
+Thu, 14 Oct 2021 23:03:29 GMT
+
+_Version update only_
 
 ## 4.5.0
 Wed, 08 Sep 2021 15:39:22 GMT

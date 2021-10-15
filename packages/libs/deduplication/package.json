@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/deduplication",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "Deduplication of elements in OpenAPI 3 documents",
   "main": "./dist/main.js",
   "typings": "./dist/main.d.ts",
@@ -52,8 +52,8 @@
     "typescript": "~4.4.2"
   },
   "dependencies": {
-    "@azure-tools/codegen": "~2.7.0",
-    "@azure-tools/datastore": "~4.5.0",
+    "@azure-tools/codegen": "~2.8.0",
+    "@azure-tools/datastore": "~4.5.1",
     "@azure-tools/object-comparison": "~3.0.0",
     "@azure-tools/tasks": "~3.0.0",
     "compare-versions": "^3.4.0",

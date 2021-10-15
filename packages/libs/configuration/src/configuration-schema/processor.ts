@@ -157,6 +157,9 @@ function processProperty<T extends ConfigurationProperty>(
 
     return { value: result };
   } else {
+    if (value === undefined) {
+      return { value: undefined as any };
+    }
     return processPrimitiveProperty(schema, path, value as InferredRawPrimitiveType<T>, options) as any;
   }
 }

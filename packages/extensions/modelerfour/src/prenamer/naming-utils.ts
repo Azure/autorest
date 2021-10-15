@@ -1,6 +1,7 @@
 import { Languages } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
 import { removeSequentialDuplicates, fixLeadingNumber, deconstruct, Style, Styler } from "@azure-tools/codegen";
+import { last } from "lodash";
 
 export function getNameOptions(typeName: string, components: Array<string>) {
   const result = new Set<string>();
@@ -14,7 +15,8 @@ export function getNameOptions(typeName: string, components: Array<string>) {
   // add a second-to-last-ditch option as <typename>.<name>
   result.add(
     Style.pascal([
-      ...removeSequentialDuplicates([...fixLeadingNumber(deconstruct(typeName)), ...deconstruct(components.last)]),
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      ...removeSequentialDuplicates([...fixLeadingNumber(deconstruct(typeName)), ...deconstruct(last(components)!)]),
     ]),
   );
   return [...result.values()];
