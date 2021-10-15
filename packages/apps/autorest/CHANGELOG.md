@@ -1,6 +1,13 @@
 # Change Log - autorest
 
-This log was last generated on Tue, 05 Oct 2021 17:04:21 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Oct 2021 16:48:57 GMT and should not be manually modified.
+
+## 3.4.2
+Tue, 15 Oct 2021 17:00:00 GMT
+
+### Patches
+
+- **fix** issue with extension method causing conflict when loading autorest core v2
 
 ## 3.4.1
 Tue, 05 Oct 2021 17:04:21 GMT
@@ -112,7 +119,7 @@ Thu, 11 Feb 2021 18:03:07 GMT
 
 ### Patches
 
-- **Update** @azure-tools/extension to ~3.1.272
+- **Update** @azure-tools/extension to ~3.1.272 
 - **Internals** Update chalk dependency to ^4.1.0
 
 ## 3.0.6338
@@ -150,7 +157,7 @@ Mon, 10 Feb 2020 00:00:00 GMT
 - drop unreferenced requestBodies during merge
 - supports v2 generators (and will by default, fall back to a v2 core unless overriden with `--version:`
 - if a v3 generator is loaded via `--use:` , it should not attempt to load v2 generator  even if `--[generator]` is specified (ie, `--python` `--use:./python` ) should be perfectly fine
-- the v3 generator name in `package.json` should be `@autorest/[name]` - ie `@autorest/csharp`
-- it will only assume `--tag=all-api-versions`  if either `--profile:`... or `--api-version:`... is specified.
+- the v3 generator name in `package.json` should be `@autorest/[name]` - ie `@autorest/csharp` 
+- it will only assume `--tag=all-api-versions`  if either `--profile:`... or `--api-version:`... is specified. 
 - rebuild to pick up newer extension library that supports python interpreter detection
 
