@@ -1,6 +1,27 @@
 # Change Log - @autorest/core
 
-This log was last generated on Thu, 23 Sep 2021 19:51:32 GMT and should not be manually modified.
+This log was last generated on Mon, 11 Oct 2021 21:01:13 GMT and should not be manually modified.
+
+## 3.6.6
+Mon, 11 Oct 2021 21:01:13 GMT
+
+### Patches
+
+- **Fix** Unreferenced discriminated union option being removed
+
+## 3.6.5
+Wed, 06 Oct 2021 17:36:17 GMT
+
+### Patches
+
+- **Fix** exit code always 0
+
+## 3.6.4
+Tue, 05 Oct 2021 16:39:50 GMT
+
+### Patches
+
+- **Fix** `message-format` not being respected
 
 ## 3.6.3
 Thu, 23 Sep 2021 19:51:32 GMT

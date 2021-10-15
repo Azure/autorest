@@ -18,7 +18,7 @@ import {
   PipeState,
   mergePipeStates,
 } from "@azure-tools/datastore";
-import { mapValues, omitBy } from "lodash";
+import { last, mapValues, omitBy } from "lodash";
 import { AutorestContext } from "../context";
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
 import { CORE_PLUGIN_MAP } from "../plugins";
@@ -274,7 +274,8 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
     // you can have --pass-thru:FOO on the command line
     // or add pass-thru: true in a pipline configuration step.
-    const configEntry = context.GetEntry(node.configScope.last.toString());
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const configEntry = context.GetEntry(last(node.configScope)!.toString());
     const passthru =
       configEntry?.["pass-thru"] === true || configView.config["pass-thru"]?.find((x) => x === pluginName);
     const usenull =

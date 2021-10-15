@@ -2,6 +2,42 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.6.6",
+      "tag": "@autorest/core_v3.6.6",
+      "date": "Mon, 11 Oct 2021 21:01:13 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Unreferenced discriminated union option being removed"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.6.5",
+      "tag": "@autorest/core_v3.6.5",
+      "date": "Wed, 06 Oct 2021 17:36:17 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** exit code always 0"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.6.4",
+      "tag": "@autorest/core_v3.6.4",
+      "date": "Tue, 05 Oct 2021 16:39:50 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** `message-format` not being respected"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.6.3",
       "tag": "@autorest/core_v3.6.3",
       "date": "Thu, 23 Sep 2021 19:51:32 GMT",
