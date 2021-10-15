@@ -141,12 +141,11 @@ Those flags are temporary and will be removed in the future. Those flags are her
 
 ## Go flags
 
-| Flag                             | Description                                                                                                                                                                                                  |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `--module=NAME`                  | The name of the module. This is the name your module will be published under.                                                                                                                                |
-| `--file-prefix=PREFIX`           | Optional prefix to file names. For example, if you set your file prefix to "zzz", all generated code files will begin with "zzz".                                                                            |
-| `--openapi-type=arm\|data-plane` | Specify if you want to generate `data-plane` code or `arm` code.                                                                                                                                             |
-| `--armcore-connection`           | If set to `true`, we output the code with the `Connection` type specified in [`armcore`][armcore_connection]. If not, we output a new `Connection` constructor with the generated code. Defaults to `false`. |
+| Flag                             | Description                                                                                                                       |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `--module=NAME`                  | The name of the module. This is the name your module will be published under.                                                     |
+| `--file-prefix=PREFIX`           | Optional prefix to file names. For example, if you set your file prefix to "zzz", all generated code files will begin with "zzz". |
+| `--openapi-type=arm\|data-plane` | Specify if you want to generate `data-plane` code or `arm` code.                                                                  |
 
 ## Swift flags
 

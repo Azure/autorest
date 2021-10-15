@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/codegen
 
-This log was last generated on Wed, 08 Sep 2021 15:39:22 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Oct 2021 23:03:29 GMT and should not be manually modified.
+
+## 2.8.0
+Thu, 14 Oct 2021 23:03:29 GMT
+
+### Minor changes
+
+- **Removed** Array and String extension methods(`.last`, `.captialize`, etc.) causing polution and conflicts.
 
 ## 2.7.0
 Wed, 08 Sep 2021 15:39:22 GMT

@@ -54,7 +54,7 @@ export function createGraphTransformerPlugin(): PipelinePlugin {
                       documentPath: inputHandle.key,
                     });
 
-                    parent[path.last] = output;
+                    parent[path[path.length - 1]] = output;
 
                     // assuming this for now.
                     modified = true;

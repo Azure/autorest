@@ -1,6 +1,13 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Thu, 23 Sep 2021 19:51:32 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Oct 2021 23:03:28 GMT and should not be manually modified.
+
+## 1.7.3
+Thu, 14 Oct 2021 23:03:28 GMT
+
+### Patches
+
+- **Fix** Issue with undefined properties
 
 ## 1.7.2
 Thu, 23 Sep 2021 19:51:32 GMT
