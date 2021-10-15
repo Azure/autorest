@@ -9,6 +9,9 @@
         "patch": [
           {
             "comment": "**Fix** Flatten nullable property doesn't propagate."
+          },
+          {
+            "comment": "**Internal** remove use of string and array extension method `.last`."
           }
         ]
       }
