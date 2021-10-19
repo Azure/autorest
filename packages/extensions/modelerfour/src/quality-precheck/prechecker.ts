@@ -235,6 +235,27 @@ export class QualityPreChecker {
     }
   }
 
+  fixUpSchemaUsingAllOfProperties() {
+    for (const { schema, key } of this.listSchemas()) {
+      // we're looking for schemas that offer no possible value
+      // because they just use allOf instead of $ref
+      if (!schema.type || schema.type === JsonType.Object) {
+        if (Object.keys(schema.allOf ?? {}).length === 1) {
+          if (Object.keys(schema.properties ?? {}).length > 0) {
+            continue;
+          }
+          if (schema.additionalProperties) {
+            continue;
+          }
+
+          const $ref = schema?.allOf?.[0]?.$ref;
+          schema.$ref = $ref;
+          delete schema.allOf;
+        }
+      }
+    }
+  }
+
   fixUpObjectsWithoutType() {
     for (const { name, schema } of this.listSchemas()) {
       if (<any>schema.type === "file" || <any>schema.format === "file" || <any>schema.format === "binary") {
@@ -361,9 +382,11 @@ export class QualityPreChecker {
   }
 
   process() {
-    if (this.options["remove-empty-child-schemas"]) {
-      this.fixUpSchemasThatUseAllOfInsteadOfJustRef();
-    }
+    // if (this.options["remove-empty-child-schemas"]) {
+    //   this.fixUpSchemasThatUseAllOfInsteadOfJustRef();
+    // }
+
+    this.fixUpSchemaUsingAllOfProperties();
 
     this.fixUpObjectsWithoutType();
 

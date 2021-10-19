@@ -754,6 +754,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     isAnonymous = false,
   ) {
     if (value.$ref) {
+      console.log("IS a ref", value);
       // it's a reference already.
       return this.clone(targetParent, key, pointer, value);
     }
