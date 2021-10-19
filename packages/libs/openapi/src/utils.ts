@@ -1,4 +1,5 @@
 import { Dereferenced, ExtensionKey, PathReference, Refable } from "./common";
+import { HttpMethod } from "./oai3";
 
 /**
  * Only return properties starting with x-
@@ -87,4 +88,10 @@ export function dereference<T>(document: any, item: Refable<T>, stack: string[] 
     return { instance: node, name: name || "", fromRef: true };
   }
   return { instance: item, name: "", fromRef: false };
+}
+
+const methods = new Set<HttpMethod>(["get", "put", "post", "patch", "delete", "head", "options", "trace"]);
+
+export function isHttpMethod(key: string): key is HttpMethod {
+  return methods.has(key as any);
 }

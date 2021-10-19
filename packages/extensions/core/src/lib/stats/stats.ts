@@ -1,3 +1,5 @@
+import { HttpMethod } from "@azure-tools/openapi";
+
 export type StatGroup = { [key: string]: Stat };
 export type Stat = number | StatGroup;
 
@@ -12,9 +14,27 @@ export interface SchemaStats extends StatGroup {
 }
 
 export interface OperationStats extends StatGroup {
+  /**
+   * Total number of operations(Number of path * operation per path)
+   */
   total: number;
+
+  /**
+   * Number of paths in the spec
+   */
+  paths: number;
+
+  /**
+   * Number of operation that are defined as Long running operations.
+   */
   longRunning: number;
+
+  /**
+   * Number of operation that are defined as pageable.
+   */
   pageable: number;
+
+  methods: Required<Record<HttpMethod, number>>;
 }
 
 export interface OpenAPIPerSpecStats extends StatGroup {

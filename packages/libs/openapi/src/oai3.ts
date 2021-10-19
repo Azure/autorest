@@ -346,6 +346,7 @@ export interface PasswordOAuthFlow extends Extensions {
   refreshUrl?: string; // uriref
   scopes?: Dictionary<string>;
 }
+
 export interface PathItem extends Extensions {
   $ref?: string | PathItem;
   summary?: string;
@@ -361,6 +362,8 @@ export interface PathItem extends Extensions {
   servers?: Server[];
   parameters?: ParameterReference<Parameter>[];
 }
+
+export type HttpMethod = "get" | "put" | "post" | "patch" | "delete" | "head" | "options" | "trace";
 
 export interface RequestBody extends Extensions {
   description?: string;
