@@ -745,7 +745,13 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     if (!value.allOf) {
       return false;
     }
-    if(value.allOf.length )
+    if (value.allOf.length !== 1) {
+      return false;
+    }
+
+    if ("properties" in value || "additionalProperties" in value) {
+      return false;
+    }
   }
 
   dereference(
@@ -761,7 +767,6 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     isAnonymous = false,
   ) {
     if (value.$ref) {
-      console.log("IS a ref", value);
       // it's a reference already.
       return this.clone(targetParent, key, pointer, value);
     }
