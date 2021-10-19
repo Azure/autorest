@@ -741,6 +741,13 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     }
   }
 
+  isSimpleAllOfRef(value: any) {
+    if (!value.allOf) {
+      return false;
+    }
+    if(value.allOf.length )
+  }
+
   dereference(
     baseReferencePath: string,
     targetCollection: AnyObject,
