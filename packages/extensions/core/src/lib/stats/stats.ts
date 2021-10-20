@@ -35,6 +35,11 @@ export interface OperationStats extends StatGroup {
   pageable: number;
 
   methods: Required<Record<HttpMethod, number>>;
+  parameters: {
+    avg: number;
+    min: number;
+    max: number;
+  };
 }
 
 export interface OpenAPIPerSpecStats extends StatGroup {
