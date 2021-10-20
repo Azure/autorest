@@ -34,7 +34,7 @@ const FALLBACK_DEFAULT_OUTPUT_ARTIFACT = "";
  ********************************************/
 
 interface Store {
-  [uri: string]: Data;
+  [uri: string]: DataHandle;
 }
 
 export interface DataStoreOptions {
@@ -98,9 +98,7 @@ export class DataStore {
       pathSourceMap: undefined,
       positionSourceMap: undefined,
     };
-    this.store[uri] = item;
-
-    const handle = await this.read(uri);
+    const handle = (this.store[uri] = new DataHandle(uri, item, this.options.autoUnloadData));
     if (sourceMapFactory) {
       item.positionSourceMap = new PositionSourceMap(name, await sourceMapFactory(handle));
     }
@@ -132,7 +130,7 @@ export class DataStore {
     if (entry === undefined) {
       throw new Error(`Object '${absoluteUri}' does not exist.`);
     }
-    return new DataHandle(absoluteUri, entry, this.options.autoUnloadData);
+    return entry;
   }
 
   public async read(uri: string): Promise<DataHandle> {
@@ -141,7 +139,7 @@ export class DataStore {
     if (!data) {
       throw new Error(`Could not read '${uri}'.`);
     }
-    return new DataHandle(uri, data, this.options.autoUnloadData);
+    return data;
   }
 
   public async blame(absoluteUri: string, position: Position | PathPosition): Promise<BlameTree> {
