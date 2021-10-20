@@ -3,7 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DEFAULT_SCHEMA, dump, load, Schema } from "js-yaml";
+import { DEFAULT_SCHEMA, load, Schema } from "js-yaml";
+import { dump } from "./yaml-dump";
 
 const propertyPriority = [
   "info",

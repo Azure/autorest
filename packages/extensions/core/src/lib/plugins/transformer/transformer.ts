@@ -1,8 +1,8 @@
 import { QuickDataSource, DataHandle, AnyObject, selectNodes } from "@azure-tools/datastore";
-import { createPerFilePlugin, PipelinePlugin } from "../../pipeline/common";
-import { Manipulator } from "./manipulation";
 import { Channel } from "../../message";
+import { createPerFilePlugin, PipelinePlugin } from "../../pipeline/common";
 import { evalDirectiveTransform } from "./eval";
+import { Manipulator } from "./manipulation";
 
 /* @internal */
 export function createGraphTransformerPlugin(): PipelinePlugin {
@@ -35,15 +35,14 @@ export function createGraphTransformerPlugin(): PipelinePlugin {
               // if the file should be processed, run it thru
               for (const transform of directive.transform) {
                 // get the whole document
-                contents = contents === undefined ? await inputHandle.readObjectFast() : contents;
+                contents = contents === undefined ? await inputHandle.readObject() : contents;
 
                 // find the target nodes in the document
                 const targets = selectNodes(contents, where);
                 if (targets.length > 0) {
-                  context.Message({
-                    Channel: Channel.Debug,
-                    Text: `Running object transform '${directive.from}/${directive.reason}' on ${inputHandle.key} `,
-                  });
+                  context.debug(
+                    `Running object transform '${directive.from}/${directive.reason}' on ${inputHandle.key} `,
+                  );
 
                   for (const { path, value, parent } of targets) {
                     const output = evalDirectiveTransform(transform, {
@@ -55,7 +54,7 @@ export function createGraphTransformerPlugin(): PipelinePlugin {
                       documentPath: inputHandle.key,
                     });
 
-                    parent[path.last] = output;
+                    parent[path[path.length - 1]] = output;
 
                     // assuming this for now.
                     modified = true;
@@ -119,10 +118,7 @@ export function createTextTransformerPlugin(): PipelinePlugin {
               // grab the contents (don't extend the cache tho')
               contents = contents === undefined ? await inputHandle.ReadData(true) : contents;
 
-              config.Message({
-                Channel: Channel.Debug,
-                Text: `Running text transform '${directive.from}/${directive.reason}' on ${inputHandle.key} `,
-              });
+              config.debug(`Running text transform '${directive.from}/${directive.reason}' on ${inputHandle.key} `);
 
               const output = evalDirectiveTransform(transform, {
                 config,

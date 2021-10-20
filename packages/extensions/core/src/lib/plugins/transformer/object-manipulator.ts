@@ -3,7 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle, DataSink, IsPrefix, JsonPath, nodes, SmartPosition } from "@azure-tools/datastore";
+import { inspect } from "util";
+import {
+  DataHandle,
+  DataSink,
+  IdentityPathMappings,
+  IsPrefix,
+  JsonPath,
+  nodes,
+  PathPosition,
+} from "@azure-tools/datastore";
 import {
   stringifyYamlAst,
   cloneYamlAst,
@@ -13,11 +22,8 @@ import {
   getYamlNodeByPath,
   replaceYamlAstNode,
 } from "@azure-tools/yaml";
-import { AutorestContext } from "../../autorest-core";
-import { Channel } from "../../message";
-import { identitySourceMapping } from "@autorest/common";
-import { inspect } from "util";
 import { cloneDeep } from "lodash";
+import { AutorestContext } from "../../autorest-core";
 
 export async function manipulateObject(
   src: DataHandle,
@@ -29,7 +35,7 @@ export async function manipulateObject(
   debug?: boolean,
   mappingInfo?: {
     transformerSourceHandle: DataHandle;
-    transformerSourcePosition: SmartPosition;
+    transformerSourcePosition: PathPosition;
     reason: string;
   },
 ): Promise<{ anyHit: boolean; result: DataHandle }> {
@@ -57,13 +63,12 @@ export async function manipulateObject(
   const { result: doc } = getYamlNodeValue<any>(ast);
   const hits = nodes(doc, whereJsonQuery).sort((a, b) => a.path.length - b.path.length);
   if (hits.length === 0) {
+    if (debug && config) {
+      config.debug(`Directive transform \`${whereJsonQuery}\` didn't match any path in the document`);
+    }
     return { anyHit: false, result: src };
   }
 
-  // process
-  const mapping = identitySourceMapping(src.key, ast).filter(
-    (m) => !hits.some((hit) => IsPrefix(hit.path, (<any>m.generated).path)),
-  );
   for (const hit of hits) {
     if (ast === undefined) {
       throw new Error("Cannot remove root node.");
@@ -88,21 +93,24 @@ export async function manipulateObject(
         (() => {
           throw new Error("Cannot remove root node.");
         })();
-    } catch (err) {
+    } catch (error: any) {
       // Background: it can happen that one transformation fails but the others are still valid. One typical use case is
       // the common parameters versus normal HTTP operations. They are on the same level in the path, so the commonly used
       // '$.paths.*.*' "where selection" finds both, however, most probably the transformation should and can be executed
       // either on the parameters or on the HTTP operations, i.e. one of the transformations will fail.
       if (config != null) {
-        let errorText = `Directive with 'where' clause '${whereJsonQuery}' failed by path '${hit.path}`;
+        let errorText = `Directive with 'where' clause '${whereJsonQuery}' failed by path '${hit.path}:\n`;
         if (transformationString != null) {
-          errorText = `Directive with 'where' clause '${whereJsonQuery}' failed to execute transformation '${transformationString}' in path '${hit.path}`;
+          const formattedCode = `\`\`\`\n${transformationString}\n\`\`\``;
+          errorText = `Directive with 'where' clause '${whereJsonQuery}' failed to execute transformation in path '${hit.path}':\n ${formattedCode}\n`;
         }
 
-        config.Message({
-          Channel: Channel.Warning,
-          Details: err,
-          Text: `${errorText}: '${err.message}'`,
+        config.trackWarning({
+          code: "Transform/DirectiveCodeError",
+          message: `${errorText}  '${error.message}'`,
+          details: {
+            error,
+          },
         });
       }
     }
@@ -140,8 +148,7 @@ export async function manipulateObject(
 
   // write back
   const resultHandle = await target.writeData("manipulated", stringifyYamlAst(ast), src.identity, src.artifactType, {
-    mappings: mapping,
-    mappingSources: mappingInfo ? [src, mappingInfo.transformerSourceHandle] : [src],
+    pathMappings: new IdentityPathMappings(src.key),
   });
   return {
     anyHit: true,

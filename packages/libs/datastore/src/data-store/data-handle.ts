@@ -1,19 +1,28 @@
-import { MappedPosition, Position, RawSourceMap, SourceMapConsumer } from "source-map";
 import { promises as fs } from "fs";
-import { parseYAMLAst, YamlNode, parseYAMLFast, getYamlNodeValue } from "@azure-tools/yaml";
+import { parseYAMLAst, YamlNode, parseYAMLFast } from "@azure-tools/yaml";
+import { MappedPosition, Position } from "source-map";
+import { JsonPath } from "../json-path/json-path";
 import { getLineIndices } from "../parsing/text-utility";
+import {
+  IdentityPathMappings,
+  PathMappedPosition,
+  PathPosition,
+  PathSourceMap,
+  resolvePathPosition,
+  PositionSourceMap,
+} from "../source-map";
 
 export interface Data {
   status: "loaded" | "unloaded";
   name: string;
   artifactType: string;
   identity: string[];
+  pathSourceMap: PathSourceMap | IdentityPathMappings | undefined;
+  positionSourceMap: PositionSourceMap | undefined;
 
   lineIndices?: number[];
-  sourceMap: RawSourceMap | undefined;
 
   writeToDisk?: Promise<void>;
-  writeSourceMapToDisk?: Promise<void>;
   cached?: string;
   cachedAst?: YamlNode;
   cachedObject?: any;
@@ -68,15 +77,19 @@ export class DataHandle {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       this.item.writeToDisk = fs.writeFile(this.item.name, this.item.cached!);
     }
-    if (this.item.sourceMap && !this.item.writeSourceMapToDisk) {
-      this.item.writeSourceMapToDisk = fs.writeFile(`${this.item.name}.map`, JSON.stringify(this.item.sourceMap));
+
+    if (this.item.positionSourceMap) {
+      void this.item.positionSourceMap.unload();
+    }
+
+    if (this.item.pathSourceMap && this.item.pathSourceMap instanceof PathSourceMap) {
+      void this.item.pathSourceMap.unload();
     }
     // clear the caches.
     this.item.status = "unloaded";
     this.item.cached = undefined;
     this.item.cachedObject = undefined;
     this.item.cachedAst = undefined;
-    this.item.sourceMap = undefined;
   }
 
   public get originalDirectory() {
@@ -115,18 +128,9 @@ export class DataHandle {
     return this.item.cached;
   }
 
-  public async readObjectFast<T>(): Promise<T> {
-    // we're going to use the data, so let's not let it expire.
+  public async readObject<T>(): Promise<T> {
     this.item.accessed = true;
     return this.item.cachedObject || (this.item.cachedObject = parseYAMLFast(await this.readData()));
-  }
-
-  public async readObject<T>(): Promise<T> {
-    // we're going to use the data, so let's not let it expire.
-    this.item.accessed = true;
-
-    // return the cached object, or get it, then return it.
-    return this.item.cachedObject || (this.item.cachedObject = getYamlNodeValue<T>(await this.readYamlAst()).result);
   }
 
   public async readYamlAst(): Promise<YamlNode> {
@@ -153,18 +157,46 @@ export class DataHandle {
     }
   }
 
-  public async blame(position: Position): Promise<Array<MappedPosition>> {
-    await this.readData();
-    const sourceMap = await this.getSourceMap();
-    if (!sourceMap) {
-      return [];
+  public async blame(position: PathPosition | Position): Promise<Array<MappedPosition | PathMappedPosition>> {
+    if ("path" in position && !("line" in position)) {
+      return this.blamePath(position.path);
+    } else {
+      if (this.item.positionSourceMap) {
+        const mapping = await this.item.positionSourceMap.getOriginalLocation(position);
+        if (mapping) {
+          return [mapping];
+        } else {
+          return [];
+        }
+      }
     }
-    const consumer = await new SourceMapConsumer(sourceMap);
-    const mappedPosition = consumer.originalPositionFor(position);
-    if (mappedPosition.line === null) {
-      return [];
+
+    return [];
+  }
+
+  public async blamePath(path: JsonPath): Promise<Array<MappedPosition | PathMappedPosition>> {
+    if (this.item.pathSourceMap) {
+      if (this.item.pathSourceMap instanceof IdentityPathMappings) {
+        return [{ path, source: this.item.pathSourceMap.source }];
+      }
+      const mapping = await this.item.pathSourceMap.getOriginalLocation({ path });
+      if (mapping) {
+        return [mapping];
+      } else {
+        return [];
+      }
     }
-    return [mappedPosition as any];
+
+    const resolvedPosition = await resolvePathPosition(this, path);
+    if (this.item.positionSourceMap) {
+      const mapping = await this.item.positionSourceMap.getOriginalLocation(resolvedPosition);
+      if (mapping) {
+        return [mapping];
+      } else {
+        return [];
+      }
+    }
+    return [{ source: this.key, ...resolvedPosition }];
   }
 
   public async lineIndices() {
@@ -175,31 +207,11 @@ export class DataHandle {
     return this.item.lineIndices;
   }
 
-  public async getSourceMap() {
-    if (!this.item.sourceMap) {
-      try {
-        const content = await fs.readFile(`${this.item.name}.map`, "utf8");
-        this.item.sourceMap = JSON.parse(content.toString());
-      } catch {
-        return undefined;
-      }
-    }
-
-    return this.item.sourceMap;
-  }
-
   /**
    * @deprecated use @see isObject
    */
   public async IsObject(): Promise<boolean> {
     return this.isObject();
-  }
-
-  /**
-   * @deprecated use @see blame
-   */
-  public async Blame(position: Position): Promise<Array<MappedPosition>> {
-    return this.blame(position);
   }
 
   /**
@@ -213,13 +225,6 @@ export class DataHandle {
    */
   public async ReadData(nocache = false): Promise<string> {
     return this.readData(nocache);
-  }
-
-  /**
-   * @deprecated use @see readObjectFast
-   */
-  public async ReadObjectFast<T>(): Promise<T> {
-    return this.readObjectFast();
   }
 
   /**

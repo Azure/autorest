@@ -46,6 +46,12 @@
       "shouldPublish": true
     },
     {
+      "packageName": "@autorest/fixer",
+      "projectFolder": "packages/tools/fixer",
+      "reviewCategory": "production",
+      "shouldPublish": false
+    },
+    {
       "packageName": "@autorest/schemas",
       "projectFolder": "packages/libs/autorest-schemas",
       "reviewCategory": "production",
@@ -148,8 +154,8 @@
       "shouldPublish": true
     },
     {
-      "packageName": "@autorest/adl",
-      "projectFolder": "packages/extensions/adl",
+      "packageName": "@autorest/cadl",
+      "projectFolder": "packages/extensions/cadl",
       "reviewCategory": "production",
       "shouldPublish": true
     }

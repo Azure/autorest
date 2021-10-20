@@ -1,6 +1,22 @@
 # Change Log - @autorest/codemodel
 
-This log was last generated on Mon, 19 Jul 2021 15:15:41 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Oct 2021 23:03:29 GMT and should not be manually modified.
+
+## 4.17.1
+Thu, 14 Oct 2021 23:03:29 GMT
+
+_Version update only_
+
+## 4.17.0
+Wed, 08 Sep 2021 15:39:22 GMT
+
+### Minor changes
+
+- **Internal** Remove need for @azure-tools/linq library
+
+### Patches
+
+- Types tweak to allow string enums value to accept string literals
 
 ## 4.16.0
 Mon, 19 Jul 2021 15:15:41 GMT

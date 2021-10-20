@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataHandle } from "../data-store";
 import { Position as sourceMapPosition } from "source-map";
+import { DataHandle } from "../data-store";
 
 const regexNewLine = /\r?\n/g;
 
@@ -64,7 +64,7 @@ export function indexToPositionFromLineIndices(startIndices: number[], index: nu
   }
 
   return {
-    column: index - startIndices[lineIndexMin],
+    column: 1 + index - startIndices[lineIndexMin],
     line: 1 + lineIndexMin,
   };
 }

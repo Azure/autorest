@@ -10,13 +10,9 @@ export * from "./graph-builder";
 export * from "./mapping-tree";
 export * from "./data-store";
 export * from "./cancellation";
-export * from "./source-map/source-map";
-
+export * from "./source-map";
 export { Lazy, LazyPromise } from "./lazy";
 export * from "./parsing/text-utility";
-
-export * from "./source-map/blaming";
-export * from "./parsing/stable-object";
 export * from "./processor";
 export * from "./transformer-via-pointer";
 

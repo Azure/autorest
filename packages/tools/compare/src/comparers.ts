@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 
 import path from "path";
-import { AutoRestGenerateResult } from "./runner";
 import * as Diff from "diff";
+import { AutoRestGenerateResult } from "./runner";
 
 /**
  * A function which compares two items and returns a CompareResult.

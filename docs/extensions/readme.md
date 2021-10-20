@@ -850,10 +850,13 @@ Note: The extension is not tight to this particular scenario (you could model an
 
 ## x-ms-client-default
 
-Set the default value for a property or a parameter.
+Set the default value for a property or a parameter on the client.
+With this extension, you can set a default value for a property or parameter that is independent of how the property / parameter's schema is handling a default.
 
-With this extension, you can set a default value for a property or parameter that is independent of how the property / parameter's schema is handling a default. This is different than the `default` value
-you can specify
+**`x-ms-client-default` vs `default`:**
+
+- `default`: This represent the server default. From the point of view of the client this is just documentation, it will be ignored.
+- `x-ms-client-default`: This represent the default on the client. It can be used to make a required property optional.
 
 **Parent element**: [Parameter Objects](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#parameterObject) or [Property on the Schema Definition](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schemaObject).
 

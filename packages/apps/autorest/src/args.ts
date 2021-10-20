@@ -16,7 +16,11 @@ export interface AutorestArgs {
   force?: boolean;
 
   verbose?: boolean;
-  "message-format"?: "regular" | "json" | "yaml";
+  /**
+   * To enable logs of the config loading in the cli.
+   */
+  "debug-cli-config-loading"?: boolean;
+  "message-format"?: "regular" | "json";
   "list-available"?: boolean;
   "clear-temp"?: boolean;
   "list-installed"?: boolean;

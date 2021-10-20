@@ -2,8 +2,8 @@ import { Session } from "@autorest/extension-base";
 import { knownMediaType, KnownMediaType } from "@azure-tools/codegen";
 import * as OpenAPI from "@azure-tools/openapi";
 import { dereference, Dereferenced } from "@azure-tools/openapi";
-import { isSchemaBinary } from "./schema-utils";
 import { groupBy } from "lodash";
+import { isSchemaBinary } from "./schema-utils";
 
 export interface KnownMediaTypeGroupItem {
   mediaType: string;

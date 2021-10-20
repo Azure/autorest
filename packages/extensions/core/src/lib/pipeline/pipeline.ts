@@ -5,6 +5,8 @@
 
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
+import { createHash } from "crypto";
+import { promisify } from "util";
 import {
   DataHandle,
   DataSource,
@@ -16,18 +18,13 @@ import {
   PipeState,
   mergePipeStates,
 } from "@azure-tools/datastore";
+import { last, mapValues, omitBy } from "lodash";
 import { AutorestContext } from "../context";
-import { Channel } from "../message";
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
-
-import { createArtifactEmitterPlugin } from "../plugins/emitter";
-import { createHash } from "crypto";
-import { isCached, readCache, writeCache } from "./pipeline-cache";
-import { values } from "@azure-tools/linq";
 import { CORE_PLUGIN_MAP } from "../plugins";
+import { createArtifactEmitterPlugin } from "../plugins/emitter";
+import { isCached, readCache, writeCache } from "./pipeline-cache";
 import { loadPlugins, PipelinePluginDefinition } from "./plugin-loader";
-import { mapValues, omitBy } from "lodash";
-import { promisify } from "util";
 
 const safeEval = createSandbox();
 const setImmediatePromise = promisify(setImmediate);
@@ -233,12 +230,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
   const pipelineEmitterPlugin = createArtifactEmitterPlugin(
     async (context) =>
       new QuickDataSource([
-        await context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }).writeObject(
-          "pipeline",
-          pipeline.pipeline,
-          ["fix-me-3"],
-          "pipeline",
-        ),
+        await context.DataStore.getDataSink().writeObject("pipeline", pipeline.pipeline, ["fix-me-3"], "pipeline"),
       ]),
   );
 
@@ -282,12 +274,12 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
 
     // you can have --pass-thru:FOO on the command line
     // or add pass-thru: true in a pipline configuration step.
-    const configEntry = context.GetEntry(node.configScope.last.toString());
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const configEntry = context.GetEntry(last(node.configScope)!.toString());
     const passthru =
-      configEntry?.["pass-thru"] === true ||
-      values(configView.GetEntry("pass-thru")).any((each) => each === pluginName);
+      configEntry?.["pass-thru"] === true || configView.config["pass-thru"]?.find((x) => x === pluginName);
     const usenull =
-      configEntry?.["null"] === true || values(configView.GetEntry("null")).any((each) => each === pluginName);
+      configEntry?.["null"] === true || configView.GetEntry("null")?.find((x: string) => x === pluginName);
 
     const plugin = usenull
       ? CORE_PLUGIN_MAP.null
@@ -302,7 +294,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     }
 
     if (inputScope.skip) {
-      context.Message({ Channel: Channel.Debug, Text: `${nodeName} - SKIPPING` });
+      context.debug(`${nodeName} - SKIPPING`);
       return inputScope;
     }
     try {
@@ -327,35 +319,28 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
         (await isCached(cacheKey))
       ) {
         // shortcut -- get the outputs directly from the cache.
-        context.Message({
-          Channel: times ? Channel.Information : Channel.Debug,
-          Text: `${nodeName} - CACHED inputs = ${(await inputScope.enum()).length} [0.0 s]`,
+        context.log({
+          level: times ? "information" : "debug",
+          message: `${nodeName} - CACHED inputs = ${(await inputScope.enum()).length} [0.0 s]`,
         });
 
-        return await readCache(
-          cacheKey,
-          context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }, node.outputArtifact),
-        );
+        return await readCache(cacheKey, context.DataStore.getDataSink(node.outputArtifact));
       }
 
       const t1 = process.uptime() * 100;
-      context.Message({
-        Channel: times ? Channel.Information : Channel.Debug,
-        Text: `${nodeName} - START inputs = ${(await inputScope.enum()).length}`,
+      context.log({
+        level: times ? "information" : "debug",
+        message: `${nodeName} - START inputs = ${(await inputScope.enum()).length}`,
       });
 
       // creates the actual plugin.
-      const scopeResult = await plugin(
-        context,
-        inputScope,
-        context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }, node.outputArtifact),
-      );
+      const scopeResult = await plugin(context, inputScope, context.DataStore.getDataSink(node.outputArtifact));
       const t2 = process.uptime() * 100;
 
       const memSuffix = context.config.debug ? `[${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)} MB]` : "";
-      context.Message({
-        Channel: times ? Channel.Information : Channel.Debug,
-        Text: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]${memSuffix}`,
+      context.log({
+        level: times ? "information" : "debug",
+        message: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]${memSuffix}`,
       });
 
       // if caching is enabled, let's cache this scopeResult.
@@ -378,7 +363,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
     } catch (e) {
       if (configView.config.debug) {
         // eslint-disable-next-line no-console
-        console.error(`${__filename} - FAILURE ${JSON.stringify(e)}`);
+        console.error(`${__filename} - FAILURE`, e);
       }
       throw e;
     }
@@ -466,7 +451,7 @@ async function emitStats(context: AutorestContext) {
   const plugin = createArtifactEmitterPlugin(
     async () =>
       new QuickDataSource([
-        await context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }).writeObject(
+        await context.DataStore.getDataSink().writeObject(
           "stats.json",
           context.stats.getAll(),
           ["stats"],
@@ -474,9 +459,5 @@ async function emitStats(context: AutorestContext) {
         ),
       ]),
   );
-  await plugin(
-    context,
-    new QuickDataSource([]),
-    context.DataStore.getDataSink({ generateSourceMap: !context.config["skip-sourcemap"] }),
-  );
+  await plugin(context, new QuickDataSource([]), context.DataStore.getDataSink());
 }

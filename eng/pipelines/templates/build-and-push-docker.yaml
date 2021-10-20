@@ -1,0 +1,41 @@
+# Template building a docker image and publishing it
+parameters:
+  - name: name
+    type: string
+  - name: image
+    type: string
+  - name: dockerFolder
+    type: string
+  - name: readmePath
+    type: string
+
+jobs:
+  - job: ${{ parameters.name }}
+    displayName: Publish to docker ${{ parameters.dockerFolder }}
+    steps:
+      - task: DockerInstaller@0
+        inputs:
+          dockerVersion: "17.09.0-ce"
+
+      - script: |
+          echo "$(DockerHub-azuresdkPass)" | docker login -u "azuresdk" --password-stdin
+        displayName: Login to docker hub.
+
+      - script: |
+          docker build -t ${{ parameters.image }} .
+        displayName: Build image
+        workingDirectory: ${{ parameters.dockerFolder }}
+
+      - script: |
+          docker push ${{ parameters.image }}
+        displayName: Publish image
+
+      - script: |
+          echo '/workspace/${{parameters.readmePath}}'
+          docker run -v $PWD:/workspace \
+            -e DOCKERHUB_USERNAME="azuresdk" \
+            -e DOCKERHUB_PASSWORD="$(DockerHub-azuresdkPass)" \
+            -e DOCKERHUB_REPOSITORY='${{ parameters.image }}' \
+            -e README_FILEPATH='/workspace/${{parameters.readmePath}}' \
+            peterevans/dockerhub-description:2.1.0
+        displayName: Update readme

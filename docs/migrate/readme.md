@@ -2,8 +2,7 @@
 
 ## General Guidance
 
-First, make sure when generating you are using AutoRest V3. Follow the steps in [our installation section][install] for information on upgrading
-and confirming your new AutoRest version.
+First, make sure when generating you are using AutoRest V3. Follow the steps in [our installation section][install] for information on upgrading and confirming your new AutoRest version.
 
 ## New Features
 
@@ -11,15 +10,19 @@ and confirming your new AutoRest version.
 
 AutoRest 3.0 finally supports OpenAPI3 files as an input format, with the following caveats:
 
-- existing AutoRest v2 generators may not support all features from OpenAPI3. (see next section)
 - `anyOf`, `oneOf` are not currently supported
 - other OpenAPI3 specific features may not be entirely supported.
 
-### Generators
+### Generators - **Breaking**
 
 A new set of language generator plugins are being written that adopt the lighter-weight patterns for Azure Core libraries.<br>
-Existing V2 generators will default to processing with the AutoRest 2 pipeline. <br>
-See the language generator flags [here][language_flags]
+
+**The older generators are only compatible with Autorest V2.**
+
+| Generator   | Packages names                         | Autorest Core |
+| ----------- | -------------------------------------- | ------------- |
+| V2 (Track1) | `@microsoft.azure/autorest.<language>` | `2.x`         |
+| V3 (Track2) | `@autorest/<language>`                 | `3.x`         |
 
 ### Generate More Idiomatic SDKs
 
@@ -38,6 +41,6 @@ For language-specific information about migration and changes, please refer to o
 [language_flags]: https://github.com/Azure/autorest/blob/main/docs/generate/readme.md#language-flags
 [guidelines]: https://azure.github.io/azure-sdk/general_introduction.html
 [python]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/migrate/readme.md
-[java]: https://github.com/Azure/autorest.java/tree/v4/docs/migrate/readme.md
+[java]: https://github.com/Azure/autorest.java/blob/main/docs/migrate/readme.md
 [csharp]: https://github.com/Azure/autorest.csharp/tree/feature/v3/docs/migrate/readme.md
 [typescript]: https://github.com/Azure/autorest.typescript/tree/v6/docs/migrate/readme.md

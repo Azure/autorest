@@ -1,6 +1,6 @@
-import { JsonType } from "@azure-tools/openapi";
 import assert from "assert";
-import { ChoiceSchema, ConstantSchema, SealedChoiceSchema } from "../../../../libs/codemodel/dist/exports";
+import { ChoiceSchema, ConstantSchema, SealedChoiceSchema } from "@autorest/codemodel";
+import { JsonType } from "@azure-tools/openapi";
 import { addSchema, assertSchema, createTestSpec, findByName } from "../utils";
 import { runModeler } from "./modelerfour-utils";
 

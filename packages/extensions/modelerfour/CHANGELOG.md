@@ -1,6 +1,48 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Mon, 19 Jul 2021 15:15:41 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Oct 2021 15:41:45 GMT and should not be manually modified.
+
+## 4.21.4
+Mon, 04 Oct 2021 18:15:27 GMT
+
+### Patches
+
+- **Fix** Flatten nullable property doesn't propagate.
+- **Internal** remove use of string and array extension method `.last`.
+
+## 4.21.3
+Wed, 29 Sep 2021 15:39:07 GMT
+
+### Patches
+
+- **Fix** Unknown format for number schema should not be an error.
+
+## 4.21.2
+Wed, 22 Sep 2021 15:23:39 GMT
+
+### Patches
+
+- **Fix** log error when using parameter with `content.<mediaType>` as not being supported
+
+## 4.21.1
+Thu, 16 Sep 2021 18:49:17 GMT
+
+### Patches
+
+- **Add** validation when schema use allOf referencing a schema with a different type
+- **Tweak** Better error message when enum has an empty value
+
+## 4.21.0
+Wed, 08 Sep 2021 15:39:22 GMT
+
+### Minor changes
+
+- **Internal** Remove @azure-tools/linq library"
+- **Perf** Modified yaml dump improving serialization
+
+### Patches
+
+- **Fix** Dictionaries don't get xml serialization information passed into codemodel
 
 ## 4.20.0
 Mon, 19 Jul 2021 15:15:41 GMT

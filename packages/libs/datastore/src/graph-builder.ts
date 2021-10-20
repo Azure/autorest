@@ -1,13 +1,12 @@
-import { Mapping } from "source-map";
-import { JsonPointer } from "./json-pointer/json-pointer";
-import { createAssignmentMapping } from "./source-map/source-map";
+import { JsonPointer, parseJsonPointer } from "@azure-tools/json";
 import { Exception } from "@azure-tools/tasks";
-import { parseJsonPointer } from "@azure-tools/json";
+import { PathMapping } from "./source-map/path-source-map";
+import { createAssignmentMapping } from "./source-map/source-map";
 
 export function createGraphProxy<T extends object>(
   originalFileName: string,
   targetPointer: JsonPointer = "",
-  mappings = new Array<Mapping>(),
+  mappings = new Array<PathMapping>(),
   instance = <any>{},
 ): ProxyObject<T> {
   const tag = (
@@ -36,7 +35,7 @@ export function createGraphProxy<T extends object>(
       throw new Error("Assignment: filename must be specified when there is no default.");
     }
     const pp = value.pointer ? parseJsonPointer(value.pointer) : [];
-    const q = <any>parseInt(pp[pp.length - 1], 10);
+    const q = <any>parseInt(pp[pp.length - 1] as any, 10);
     if (q >= 0) {
       pp[pp.length - 1] = q;
     }

@@ -1,10 +1,9 @@
+import { DeepPartial } from "@azure-tools/codegen";
+import { ApiVersion } from "./api-version";
+import { Aspect } from "./aspect";
+import { Metadata } from "./metadata";
 import { Parameter, ImplementationLocation } from "./parameter";
 import { Response } from "./response";
-import { Metadata } from "./metadata";
-import { Aspect } from "./aspect";
-import { ApiVersion } from "./api-version";
-import { Dictionary, values } from "@azure-tools/linq";
-import { DeepPartial } from "@azure-tools/codegen";
 import { SchemaType } from "./schema-type";
 
 /** represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)  */
@@ -25,7 +24,7 @@ export interface Operation extends Aspect {
   exceptions?: Array<Response>;
 
   /** the apiVersion to use for a given profile name */
-  profile?: Dictionary<ApiVersion>;
+  profile?: Record<string, ApiVersion>;
 }
 
 export interface Request extends Metadata {
@@ -50,15 +49,13 @@ export class Request extends Metadata implements Request {
 
   updateSignatureParameters() {
     if (this.parameters) {
-      this.signatureParameters = values(this.parameters)
-        .where(
-          (each) =>
-            each.schema.type !== SchemaType.Constant &&
-            each.implementation !== ImplementationLocation.Client &&
-            !each.groupedBy &&
-            !each.flattened,
-        )
-        .toArray();
+      this.signatureParameters = (this.parameters ?? []).filter(
+        (each) =>
+          each.schema.type !== SchemaType.Constant &&
+          each.implementation !== ImplementationLocation.Client &&
+          !each.groupedBy &&
+          !each.flattened,
+      );
     }
   }
 }
@@ -82,15 +79,13 @@ export class Operation extends Aspect implements Operation {
 
   updateSignatureParameters() {
     if (this.parameters) {
-      this.signatureParameters = values(this.parameters)
-        .where(
-          (each) =>
-            each.schema.type !== SchemaType.Constant &&
-            each.implementation !== ImplementationLocation.Client &&
-            !each.groupedBy &&
-            !each.flattened,
-        )
-        .toArray();
+      this.signatureParameters = (this.parameters ?? []).filter(
+        (each) =>
+          each.schema.type !== SchemaType.Constant &&
+          each.implementation !== ImplementationLocation.Client &&
+          !each.groupedBy &&
+          !each.flattened,
+      );
     }
   }
 

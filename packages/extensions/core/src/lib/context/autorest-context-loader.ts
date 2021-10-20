@@ -3,10 +3,9 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { CachingFileSystem, IFileSystem, LazyPromise, RealFileSystem } from "@azure-tools/datastore";
-import { Extension, ExtensionManager } from "@azure-tools/extension";
+import { homedir } from "os";
 import { join } from "path";
-import { AutoRestExtension } from "../pipeline/plugin-endpoint";
+import { FilterLogger, AutorestLoggingSession, AutorestLogger } from "@autorest/common";
 import {
   AutorestConfiguration,
   AutorestRawConfiguration,
@@ -15,15 +14,15 @@ import {
   mergeConfigurations,
   ResolvedExtension,
 } from "@autorest/configuration";
-import { AutorestContext } from "./autorest-context";
-import { MessageEmitter } from "./message-emitter";
-import { AutorestLogger } from "@autorest/common";
-import { AutorestCoreLogger } from "./logger";
+import { CachingFileSystem, IFileSystem, LazyPromise, RealFileSystem } from "@azure-tools/datastore";
+import { Extension, ExtensionManager } from "@azure-tools/extension";
 import { createFileOrFolderUri, createFolderUri, resolveUri } from "@azure-tools/uri";
+import { last } from "lodash";
 import { AppRoot } from "../constants";
-import { homedir } from "os";
+import { AutoRestExtension } from "../pipeline/plugin-endpoint";
 import { StatsCollector } from "../stats";
-import { AutorestLoggingSession } from "./logging-session";
+import { AutorestContext, getLogLevel } from "./autorest-context";
+import { MessageEmitter } from "./message-emitter";
 
 const inWebpack = typeof __webpack_require__ === "function";
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -53,6 +52,7 @@ export class AutorestContextLoader {
    */
   public constructor(
     fileSystem: IFileSystem = new RealFileSystem(),
+    private logger: AutorestLogger,
     private stats: StatsCollector,
     private configFileOrFolderUri?: string,
   ) {
@@ -90,6 +90,7 @@ export class AutorestContextLoader {
           delete loadedExtensions[each];
         }
       }
+      await AutorestLoggingSession.waitForMessages();
     } catch {
       // no worries
     }
@@ -100,27 +101,23 @@ export class AutorestContextLoader {
     includeDefault: boolean,
     ...configs: AutorestRawConfiguration[]
   ): Promise<AutorestContext> {
-    const logger: AutorestLogger = new AutorestCoreLogger(
-      mergeConfigurations(configs) as any,
-      messageEmitter,
-      AutorestLoggingSession,
-    );
+    const logger = this.logger.with(new FilterLogger({ level: getLogLevel(mergeConfigurations(configs) as any) }));
 
     const loader = new ConfigurationLoader(logger, defaultConfigUri, this.configFileOrFolderUri, {
       extensionManager: await AutorestContextLoader.extensionManager,
       fileSystem: this.fileSystem,
       dataStore: messageEmitter.DataStore,
     });
-
     const { config, extensions } = await loader.load(configs, includeDefault);
     this.setupExtensions(config, extensions);
-    return new AutorestContext(config, this.fileSystem, messageEmitter, this.stats, AutorestLoggingSession);
+    return new AutorestContext(config, this.fileSystem, messageEmitter, this.logger, this.stats);
   }
 
   private setupExtensions(config: AutorestConfiguration, extensions: ResolvedExtension[]) {
     for (const { extension, definition } of extensions) {
       if (!loadedExtensions[definition.fullyQualified]) {
-        const shortname = definition.name.split("/").last.replace(/^autorest\./gi, "");
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        const shortname = last(definition.name.split("/"))!.replace(/^autorest\./gi, "");
         const nestedConfig = [...getNestedConfiguration(config, shortname)][0];
         const enableDebugger = nestedConfig?.["debugger"];
 

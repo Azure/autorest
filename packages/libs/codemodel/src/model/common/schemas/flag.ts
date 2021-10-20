@@ -1,8 +1,8 @@
-import { SchemaType } from "../schema-type";
-import { Schema, ValueSchema } from "../schema";
-import { Languages } from "../languages";
-import { Extensions } from "../extensions";
 import { Initializer, DeepPartial } from "@azure-tools/codegen";
+import { Extensions } from "../extensions";
+import { Languages } from "../languages";
+import { Schema, ValueSchema } from "../schema";
+import { SchemaType } from "../schema-type";
 
 export interface FlagValue extends Extensions {
   /** per-language information for this value */

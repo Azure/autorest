@@ -1,6 +1,21 @@
 # Change Log - @azure-tools/codegen
 
-This log was last generated on Mon, 19 Jul 2021 15:15:42 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Oct 2021 23:03:29 GMT and should not be manually modified.
+
+## 2.8.0
+Thu, 14 Oct 2021 23:03:29 GMT
+
+### Minor changes
+
+- **Removed** Array and String extension methods(`.last`, `.captialize`, etc.) causing polution and conflicts.
+
+## 2.7.0
+Wed, 08 Sep 2021 15:39:22 GMT
+
+### Minor changes
+
+- **Internal** Remove @azure-tools/linq library"
+- **Perf** Modified yaml dump improving serialization
 
 ## 2.6.0
 Mon, 19 Jul 2021 15:15:42 GMT

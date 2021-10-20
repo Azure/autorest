@@ -24,7 +24,10 @@ export interface PropertyDetails extends Details, Extensions {
   description?: string;
 }
 
-export interface ParameterDetails extends Details {}
+/** Parameter References may have additional data that's not in the target reference */
+export interface ParameterDetails extends Details, Extensions {
+  description?: string;
+}
 
 export interface SchemaDetails extends Details {}
 
@@ -67,8 +70,15 @@ export function isQueryParameter(parameter: Parameter): parameter is InQuery & P
   return parameter.in === ParameterLocation.Query ? true : false;
 }
 
-/** Properties have additional data when referencing them */
+/**
+ * Properties have additional data when referencing them
+ */
 export type PropertyReference<T> = PropertyDetails & Reference<T>;
+
+/**
+ * Parameter references could have additional data to override the shared parameter value.
+ */
+export type ParameterReference<T> = ParameterDetails & Reference<T>;
 
 /**
  * @description common ways of serializing simple parameters
@@ -269,7 +279,7 @@ export interface HttpOperation extends Deprecatable, Extensions, Implementation<
   description?: string;
   externalDocs?: ExternalDocumentation;
   operationId?: string;
-  parameters?: Array<Reference<Parameter>>;
+  parameters?: ParameterReference<Parameter>[];
   requestBody?: Reference<RequestBody>;
   responses: Dictionary<Reference<Response>>;
   callbacks?: Dictionary<Reference<Callback>>;
@@ -348,8 +358,8 @@ export interface PathItem extends Extensions {
   head?: HttpOperation;
   patch?: HttpOperation;
   trace?: HttpOperation;
-  servers?: Array<Server>;
-  parameters?: Array<Reference<Parameter>>;
+  servers?: Server[];
+  parameters?: ParameterReference<Parameter>[];
 }
 
 export interface RequestBody extends Extensions {

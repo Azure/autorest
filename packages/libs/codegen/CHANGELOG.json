@@ -2,6 +2,33 @@
   "name": "@azure-tools/codegen",
   "entries": [
     {
+      "version": "2.8.0",
+      "tag": "@azure-tools/codegen_v2.8.0",
+      "date": "Thu, 14 Oct 2021 23:03:29 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Removed** Array and String extension methods(`.last`, `.captialize`, etc.) causing polution and conflicts."
+          }
+        ]
+      }
+    },
+    {
+      "version": "2.7.0",
+      "tag": "@azure-tools/codegen_v2.7.0",
+      "date": "Wed, 08 Sep 2021 15:39:22 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Internal** Remove @azure-tools/linq library\""
+          },
+          {
+            "comment": "**Perf** Modified yaml dump improving serialization"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.6.0",
       "tag": "@azure-tools/codegen_v2.6.0",
       "date": "Mon, 19 Jul 2021 15:15:42 GMT",

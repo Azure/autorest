@@ -3,9 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { values, Dictionary, items } from "@azure-tools/linq";
-import * as aio from "@azure-tools/async-io";
 import { join } from "path";
+import * as aio from "@azure-tools/async-io";
 
 function getAllPropertyNames(obj: any) {
   const props = new Array<string>();
@@ -17,7 +16,7 @@ function getAllPropertyNames(obj: any) {
       }
     });
     /* eslint-disable */
-  } while (obj = Object.getPrototypeOf(obj));
+  } while ((obj = Object.getPrototypeOf(obj)));
 
   return props;
 }
@@ -26,27 +25,40 @@ export function fail(text: string): never {
   throw new Error(text);
 }
 
-export function applyOverrides(content: string, overrides: Dictionary<string>): string {
-  for (const { key: from, value: to } of items(overrides)) {
-    content = content.replace(new RegExp(from, 'g'), to);
+export function applyOverrides(content: string, overrides: Record<string, string>): string {
+  for (const [from, to] of Object.entries(overrides)) {
+    content = content.replace(new RegExp(from, "g"), to);
   }
   return content;
 }
 
-export async function copyResources(sourceFolder: string, fileWriter: (filename: string, content: string) => Promise<void>, overrides: Dictionary<string> = {}, contentManipulator: (content: string) => Promise<string> = async (i) => { return i; }) {
+export async function copyResources(
+  sourceFolder: string,
+  fileWriter: (filename: string, content: string) => Promise<void>,
+  overrides: Record<string, string> = {},
+  contentManipulator: (content: string) => Promise<string> = async (i) => {
+    return i;
+  },
+) {
   const done = new Array<Promise<void>>();
   try {
     const files = await aio.readdir(sourceFolder);
 
-    for (const file of values(files)) {
+    for (const file of files) {
       const fullPath = join(sourceFolder, file);
       if (await aio.isDirectory(fullPath)) {
-        done.push(copyResources(fullPath, async (f, c) => fileWriter(`${file}/${f}`, c), overrides, contentManipulator));
+        done.push(
+          copyResources(fullPath, async (f, c) => fileWriter(`${file}/${f}`, c), overrides, contentManipulator),
+        );
         continue;
       }
       if (await aio.isFile(fullPath)) {
-        done.push(aio.readFile(fullPath).then(contentManipulator).then(async (content) => fileWriter(file, applyOverrides(content, overrides))
-        ));
+        done.push(
+          aio
+            .readFile(fullPath)
+            .then(contentManipulator)
+            .then(async (content) => fileWriter(file, applyOverrides(content, overrides))),
+        );
       }
     }
   } catch {
@@ -55,12 +67,15 @@ export async function copyResources(sourceFolder: string, fileWriter: (filename:
   await Promise.all(done);
 }
 
-export async function copyBinaryResources(sourceFolder: string, fileWriter: (filename: string, content: string) => Promise<void>) {
+export async function copyBinaryResources(
+  sourceFolder: string,
+  fileWriter: (filename: string, content: string) => Promise<void>,
+) {
   const done = new Array<Promise<void>>();
   try {
     const files = await aio.readdir(sourceFolder);
 
-    for (const file of values(files)) {
+    for (const file of files) {
       const fullPath = join(sourceFolder, file);
       if (await aio.isDirectory(fullPath)) {
         done.push(copyBinaryResources(fullPath, async (f, c) => fileWriter(`${file}/${f}`, c)));
@@ -81,5 +96,18 @@ function quartet() {
 }
 
 export function guid() {
-  return (quartet() + quartet() + '-' + quartet() + '-4' + quartet().substr(0, 3) + '-' + quartet() + '-' + quartet() + quartet() + quartet()).toLowerCase();
+  return (
+    quartet() +
+    quartet() +
+    "-" +
+    quartet() +
+    "-4" +
+    quartet().substr(0, 3) +
+    "-" +
+    quartet() +
+    "-" +
+    quartet() +
+    quartet() +
+    quartet()
+  ).toLowerCase();
 }

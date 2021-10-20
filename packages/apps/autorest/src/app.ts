@@ -6,18 +6,20 @@
 /* eslint-disable no-console */
 import "source-map-support/register";
 
-declare const isDebuggerEnabled: boolean;
 const cwd = process.cwd();
 
+import { AutorestSyncLogger, ConsoleLoggerSink } from "@autorest/common";
 import chalk from "chalk";
-import { newCorePackage, ensureAutorestHome, runCoreWithRequire, runCoreOutOfProc } from "./autorest-as-a-service";
-import { color } from "./coloring";
-import { parseAutorestArgs } from "./args";
-import { resetAutorest, showAvailableCoreVersions, showInstalledExtensions } from "./commands";
 import { clearTempData } from "./actions";
-import { loadConfig, resolveCoreVersion } from "./utils";
+import { parseAutorestArgs } from "./args";
+import { newCorePackage, ensureAutorestHome, runCoreWithRequire, runCoreOutOfProc } from "./autorest-as-a-service";
+import { resetAutorest, showAvailableCoreVersions, showInstalledExtensions } from "./commands";
 import { VERSION } from "./constants";
+import { loadConfig, resolveCoreVersion } from "./utils";
 
+const isDebuggerEnabled =
+  // eslint-disable-next-line node/no-unsupported-features/node-builtins
+  !!require("inspector").url() || global.v8debug || /--debug|--inspect/.test(process.execArgv.join(" "));
 const launchCore = isDebuggerEnabled ? runCoreWithRequire : runCoreOutOfProc;
 
 // aliases, round one.
@@ -58,7 +60,7 @@ function logBanner() {
         )}]`,
       ),
     );
-    console.log(color("(C) 2018 **Microsoft Corporation.**"));
+    console.log(`(C) 2018 ${chalk.bold("Microsoft Corporation.")}`);
     console.log(chalk.blue.bold.underline("https://aka.ms/autorest"));
   }
 }
@@ -97,7 +99,15 @@ async function main() {
     } catch {
       // We have a chance to fail again later if this proves problematic.
     }
-    const config = await loadConfig(args);
+    const sink = new ConsoleLoggerSink({ format: args["message-format"] });
+    const logger = new AutorestSyncLogger({
+      sinks: [sink],
+    });
+    const config = await loadConfig(sink, args);
+    if (config?.version) {
+      logger.info(`AutoRest core version selected from configuration: ${chalk.yellow.bold(config.version)}.`);
+    }
+
     const coreVersionPath = await resolveCoreVersion(config);
 
     // let's strip the extra stuff from the command line before we require the core module.
@@ -133,7 +143,7 @@ async function main() {
     process.argv = newArgs;
 
     if (args.debug) {
-      console.log(`Starting ${newCorePackage} from ${coreVersionPath}`);
+      logger.debug(`Starting ${newCorePackage} from ${coreVersionPath}`);
     }
 
     // reset the working folder to the correct place.

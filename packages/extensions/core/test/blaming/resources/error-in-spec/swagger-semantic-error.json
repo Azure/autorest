@@ -1,0 +1,27 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "test",
+    "description": "Test"
+  },
+  "produces": ["application/json"],
+  "consumes": ["application/json"],
+  "paths": {
+    "/test/{missingParam}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Ok."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MyDefinitionWithError": {
+      "type": "object"
+    }
+  },
+  "parameters": {}
+}

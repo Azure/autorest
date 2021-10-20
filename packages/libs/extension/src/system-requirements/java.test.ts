@@ -1,5 +1,5 @@
-import { resolveJavaRequirement } from "./java";
 import { execute } from "../exec-cmd";
+import { resolveJavaRequirement } from "./java";
 
 jest.mock("../exec-cmd");
 

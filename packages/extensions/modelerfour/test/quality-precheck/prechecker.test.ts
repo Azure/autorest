@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { addSchema, createTestSessionFromModel, createTestSpec } from "../utils";
-import { QualityPreChecker } from "../../src/quality-precheck/prechecker";
+import assert from "assert";
 import { Model, Refable, Dereferenced, dereference, Schema } from "@azure-tools/openapi";
 import { ModelerFourOptions } from "modeler/modelerfour-options";
-import assert from "assert";
+import { QualityPreChecker } from "../../src/quality-precheck/prechecker";
+import { addSchema, createTestSessionFromModel, createTestSpec } from "../utils";
 
 class PreCheckerClient {
   private constructor(private input: Model, public result: Model) {}
@@ -127,6 +127,56 @@ describe("Prechecker", () => {
       const foo = schemas["Foo"] as any;
       expect(foo).not.toBeUndefined();
       expect(foo.properties.child.$ref).toEqual("#/components/schemas/ParentSchema");
+    });
+  });
+
+  describe("Validate allOf schemas are the same types", () => {
+    let spec: any;
+
+    beforeEach(() => {
+      spec = createTestSpec();
+    });
+
+    it("Log error if allOf is string and base is object", async () => {
+      addSchema(
+        spec,
+        "ChildSchema",
+        {
+          type: "object",
+          properties: {
+            id: { type: "string" },
+          },
+          allOf: [{ $ref: "#/components/schemas/StringSchema" }],
+        },
+        { name: "ChildSchema" },
+      );
+
+      addSchema(
+        spec,
+        "StringSchema",
+        {
+          type: "string",
+        },
+        { name: "StringSchema" },
+      );
+
+      const { session, errors } = await createTestSessionFromModel<Model>({}, spec);
+      const prechecker = await new QualityPreChecker(session).init();
+      prechecker.process();
+      expect(errors).toHaveLength(1);
+      expect(errors[0]).toEqual({
+        Channel: "error",
+        Details: undefined,
+        Key: ["PreCheck", "AllOfTypeDifferent"],
+        Text: [
+          "Schema 'ChildSchema' has an allOf reference to 'StringSchema' but those schema have different types:",
+          "  - ChildSchema: object",
+          "  - StringSchema: string",
+        ].join("\n"),
+        Source: [
+          { Position: { path: ["components", "schemas", "ChildSchema", "allOf", 0] }, document: "openapi-3.json" },
+        ],
+      });
     });
   });
 });

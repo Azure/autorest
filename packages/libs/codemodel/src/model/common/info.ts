@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Extensions } from "./extensions";
-import { uri } from "./uri";
-import { ExternalDocumentation } from "./external-documentation";
 import { Initializer, DeepPartial } from "@azure-tools/codegen";
+import { Extensions } from "./extensions";
+import { ExternalDocumentation } from "./external-documentation";
+import { uri } from "./uri";
 
 export type email = string;
 

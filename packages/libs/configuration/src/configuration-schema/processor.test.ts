@@ -1,4 +1,4 @@
-import { AutorestLogger } from "@autorest/common";
+import { createMockLogger } from "@autorest/test-utils";
 import { ConfigurationSchemaProcessor, ProcessingErrorCode } from "./processor";
 import { RawConfiguration } from "./types";
 
@@ -17,27 +17,27 @@ const TestSchema = {
     enum: ["one", "two", "three"],
   },
   numberArray: {
-    type: "number",
-    array: true,
+    type: "array",
+    items: { type: "number" },
   },
   numberDict: {
-    type: "number",
-    dictionary: true,
+    type: "dictionary",
+    items: { type: "number" },
   },
   nested: {
-    nestedNumber: { type: "number" },
+    type: "object",
+    properties: {
+      nestedNumber: { type: "number" },
+    },
   },
 } as const;
 
-const processor = new ConfigurationSchemaProcessor(TestSchema);
+const processor = new ConfigurationSchemaProcessor({
+  schema: TestSchema,
+  categories: { default: { name: "default" } },
+});
 
-const logger: AutorestLogger = {
-  info: jest.fn(),
-  verbose: jest.fn(),
-  fatal: jest.fn(),
-  trackWarning: jest.fn(),
-  trackError: jest.fn(),
-};
+const logger = createMockLogger();
 
 function processConfig(config: RawConfiguration<typeof TestSchema>) {
   return processor.processConfiguration(config, { logger });

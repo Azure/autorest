@@ -1,6 +1,6 @@
+import { DeepPartial } from "@azure-tools/codegen";
 import { Schema } from "../schema";
 import { SchemaType } from "../schema-type";
-import { DeepPartial } from "@azure-tools/codegen";
 
 export interface AnySchema extends Schema {}
 

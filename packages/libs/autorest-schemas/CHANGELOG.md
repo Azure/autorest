@@ -1,6 +1,20 @@
 # Change Log - @autorest/schemas
 
-This log was last generated on Mon, 19 Jul 2021 15:15:41 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Sep 2021 17:52:01 GMT and should not be manually modified.
+
+## 1.3.1
+Fri, 17 Sep 2021 17:52:01 GMT
+
+### Patches
+
+- **Change** remove "name" requirement
+
+## 1.3.0
+Wed, 08 Sep 2021 15:39:22 GMT
+
+### Minor changes
+
+- **Added** `x-ms-original-file` to the `x-ms-examples` schema
 
 ## 1.2.0
 Mon, 19 Jul 2021 15:15:41 GMT

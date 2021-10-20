@@ -3,13 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { ResolvedDirective, resolveDirectives } from "@autorest/configuration";
 import { DataHandle, DataSink, nodes } from "@azure-tools/datastore";
 import { YieldCPU } from "@azure-tools/tasks";
 import { AutorestContext } from "../../autorest-core";
-import { Channel, Message, SourceLocation } from "../../message";
-import { manipulateObject } from "./object-manipulator";
 import { evalDirectiveTest, evalDirectiveTransform } from "./eval";
-import { ResolvedDirective, resolveDirectives } from "@autorest/configuration";
+import { manipulateObject } from "./object-manipulator";
 
 export class Manipulator {
   private transformations: ResolvedDirective[];
@@ -74,22 +73,26 @@ export class Manipulator {
             for (const testResult of testResults) {
               if (testResult === false || typeof testResult !== "boolean") {
                 const messageText = typeof testResult === "string" ? testResult : "Custom test failed";
-                const message = (<Message>testResult).Text
-                  ? <Message>testResult
-                  : <Message>{ Text: messageText, Channel: Channel.Warning, Details: testResult };
-                message.Source = message.Source || [<SourceLocation>{ Position: { path: hit.path } }];
-                for (const src of message.Source) {
-                  src.document = src.document || data.key;
-                }
-                this.context.Message(message);
+                this.context.trackWarning({
+                  code: "Directive/TestFailed",
+                  message: messageText,
+                  details: testResult,
+                  source: [{ position: { path: hit.path }, document: data.key }],
+                });
               }
             }
           }
         }
       }
-    } catch {
-      // TODO: Temporary comment. First I will make the modifiers for PowerShell work. It shouldn't fail with PowerShell modifiers.
-      // throw Error(`Directive given has something wrong. - ${JSON.stringify(trans['directive'], null, 2)} - It could be badly formatted or not being declared. Please check your configuration file. `);
+    } catch (e) {
+      this.context.trackError({
+        code: "directive/error",
+        message: `Error occured when running directive: ${e}`,
+        details: {
+          from: directive.from,
+          where: directive.where,
+        },
+      });
     }
 
     return data;

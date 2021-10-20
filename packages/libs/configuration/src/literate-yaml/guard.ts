@@ -1,5 +1,5 @@
-import { createSandbox } from "@azure-tools/datastore";
 import { resolveRValue } from "@autorest/common";
+import { createSandbox } from "@azure-tools/datastore";
 
 const safeEval = createSandbox();
 

@@ -100,8 +100,7 @@
         },
         "version": {
           "type": "string",
-          "description": "A semantic version number of the API.",
-          "minLength": 1
+          "description": "A semantic version number of the API."
         },
         "description": {
           "type": "string",
@@ -1617,7 +1616,7 @@
     },
     "xmsEnum": {
       "type": "object",
-      "required": ["name"],
+      "required": [],
       "properties": {
         "name": {
           "type": "string"

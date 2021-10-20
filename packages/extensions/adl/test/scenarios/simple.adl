@@ -1,4 +1,0 @@
-model Foo {
-    bar: string;
-    other: string;
-}

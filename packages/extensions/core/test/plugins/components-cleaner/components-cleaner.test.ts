@@ -1,7 +1,7 @@
-import { ComponentsCleaner } from "../../../src/lib/plugins/components-cleaner";
-import fs from "fs";
-import { CancellationTokenSource, DataStore, MemoryFileSystem } from "@azure-tools/datastore";
 import assert from "assert";
+import fs from "fs";
+import { DataStore, MemoryFileSystem } from "@azure-tools/datastore";
+import { ComponentsCleaner } from "../../../src/lib/plugins/components-cleaner";
 
 const readData = async (file: string) => {
   const map = new Map<string, string>();
@@ -11,16 +11,7 @@ const readData = async (file: string) => {
   map.set(inputUri, inputText.toString());
 
   const mfs = new MemoryFileSystem(map);
-  const cts: CancellationTokenSource = {
-    cancel() {
-      /* unused */
-    },
-    dispose() {
-      /* unused */
-    },
-    token: { isCancellationRequested: false, onCancellationRequested: <any>null },
-  };
-  const ds = new DataStore(cts.token);
+  const ds = new DataStore({ autoUnloadData: false });
   const scope = ds.getReadThroughScope(mfs);
   return await scope.read(inputUri);
 };
@@ -63,5 +54,9 @@ describe("ComponentCleaner", () => {
   it("ignores x- properties under components", async () => {
     const { input, output } = await runComponentCleaner("components-extensions");
     expect(output).toEqual(input);
+  });
+
+  it("doesn't remove polymorhique types", async () => {
+    await expectScenarioToMatchSnapshot("polymorphism");
   });
 });

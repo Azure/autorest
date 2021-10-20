@@ -2,6 +2,100 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.21.4",
+      "tag": "@autorest/modelerfour_v4.21.4",
+      "date": "Mon, 04 Oct 2021 18:15:27 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Flatten nullable property doesn't propagate."
+          },
+          {
+            "comment": "**Internal** remove use of string and array extension method `.last`."
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.21.3",
+      "tag": "@autorest/modelerfour_v4.21.3",
+      "date": "Wed, 29 Sep 2021 15:39:07 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Unknown format for number schema should not be an error."
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.21.2",
+      "tag": "@autorest/modelerfour_v4.21.2",
+      "date": "Wed, 22 Sep 2021 15:23:39 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** log error when using parameter with `content.<mediaType>` as not being supported"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.21.1",
+      "tag": "@autorest/modelerfour_v4.21.1",
+      "date": "Thu, 16 Sep 2021 18:49:17 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Add** validation when schema use allOf referencing a schema with a different type"
+          },
+          {
+            "comment": "**Tweak** Better error message when enum has an empty value"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.21.0",
+      "tag": "@autorest/modelerfour_v4.21.0",
+      "date": "Wed, 08 Sep 2021 15:39:22 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Dictionaries don't get xml serialization information passed into codemodel"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "**Internal** Remove @azure-tools/linq library\""
+          },
+          {
+            "comment": "**Perf** Modified yaml dump improving serialization"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/codemodel\" from `~4.16.0` to `~4.17.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/extension-base\" from `~3.3.0` to `~3.3.1`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.3.0` to `~0.4.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.6.0` to `~2.7.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.4.0` to `~4.5.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.2.0` to `~3.2.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.20.0",
       "tag": "@autorest/modelerfour_v4.20.0",
       "date": "Mon, 19 Jul 2021 15:15:41 GMT",

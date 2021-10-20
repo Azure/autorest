@@ -1,7 +1,7 @@
+import { createDataHandle } from "@autorest/test-utils";
 import { DataHandle } from "@azure-tools/datastore";
 import { omit } from "lodash";
 import { SwaggerSchemaValidator } from "./swagger-schema-validator";
-import { createDataHandle } from "@autorest/test-utils";
 const baseSwaggerSpec = {
   swagger: "2.0",
   info: {
@@ -85,31 +85,5 @@ describe("Swagger schema validator", () => {
         schemaPath: "#/additionalProperties/errorMessage",
       },
     ]);
-  });
-
-  describe("when validating a file", () => {
-    let file: DataHandle;
-    beforeEach(() => {
-      const spec = {
-        ...baseSwaggerSpec,
-        info: {
-          ...baseSwaggerSpec.info,
-          unexpectedProperty: "value",
-        },
-      };
-      file = createDataHandle(JSON.stringify(spec, null, 2));
-    });
-
-    it("returns the line number where the error is", async () => {
-      const errors = await validator.validateFile(file);
-
-      expect(errors).toHaveLength(1);
-      expect(errors[0].position).toEqual(
-        expect.objectContaining({
-          column: 2,
-          length: 6,
-        }),
-      );
-    });
   });
 });
