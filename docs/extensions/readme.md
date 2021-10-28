@@ -96,7 +96,7 @@ In C# and Java, an enum type is generated and is declared as the type of the rel
 | Field Name    |                          Type                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | ------------- | :-----------------------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | name          |                        `string`                         | **Required**. Specifies the name for the Enum.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| modelAsString |                        `boolean`                        | **Default: false** When set to `true` the enum will be modeled as a string. No validation will happen. When set to `false`, it will be modeled as an enum if that language supports enums. Validation will happen, irrespective of support of enums in that language.                                                                                                                                                                                                                                                                                 |
+| modelAsString |                        `boolean`                        | **Default: true** When set to `true` the enum will be modeled as a string. No validation will happen. When set to `false`, it will be modeled as an enum if that language supports enums. Validation will happen, irrespective of support of enums in that language.                                                                                                                                                                                                                                                                                  |
 | values        | `[{ value: any, description?: string, name?: string }]` | **Default: undefined** When set, this will override the values specified with `enum`, while also enabling further customization. We recommend still specifying `enum` as a fallback for consumers that don't understand `x-ms-enum`. Each item in `x-ms-enum` corresponds to an enum item. Property `value` is mandatory and corresponds to the value one would also have specified using `enum`. Properties `description` and `name` are optional. `name` allows overriding the name of the enum value that would usually be derived from the value. |
 
 **Example**:
@@ -125,11 +125,16 @@ accountType:
       - value: Premium_LRS
 ```
 
-### Single value enum as a constant
+### Single value enum
 
-- If the **single value** enum is a **required** model property or a **required** parameter then it is always treated as a constant. The `x-ms-enum` extension **is ignored**.
-  - Explanation: The above condition specifies that the server always expects the model property or the parameter and with a specific value. Hence, it makes sense to treat it as a constant. In the future, if more values are added to the enum then, it is a breaking change to the API provided by the client library.
-- If the **single value** enum is an **optional** model property or an **optional** parameter and if `x-ms-enum` extension is provided then it will be honoured.
+- `x-ms-enum.modelAsString=true` **(Default)**
+
+Will be treated as an extensible enum(Same as with multi value enum)
+
+- `x-ms-enum.modelAsString=false`
+
+- If the **single value** enum is a **required** model property or a **required** then it will be treated as a Constant behind the scene. The SDK should automatically set that value and the parameter will not be on the operation signature.
+- If the **single value** enum is an **optional** model property or an **optional** parameter, it will be treated as an optional parameter where the enum value can be set or not to that unique option.
 
 ## x-ms-parameter-grouping
 
