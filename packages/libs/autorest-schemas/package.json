@@ -9,6 +9,11 @@
     "lint": "echo 'No lint'",
     "lint:fix": "echo 'No lint'"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Azure/autorest.git",
+    "directory": "packages/libs/autorest/schemas"
+  },
   "author": "",
   "license": "ISC"
 }
