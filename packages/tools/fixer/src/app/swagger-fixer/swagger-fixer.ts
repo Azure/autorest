@@ -1,7 +1,8 @@
 import { cloneDeep } from "lodash";
+import { AllFixers } from "..";
 import { Fix, FixCode, FixResult } from "../types";
 
-export function fixSwagger(filename: string, spec: any): FixResult {
+export function fixSwagger(filename: string, spec: any, fixers: FixCode[] | typeof AllFixers): FixResult {
   let current: FixResult = { spec, fixes: [] };
 
   const addResult = (result: FixResult) => {
@@ -10,8 +11,14 @@ export function fixSwagger(filename: string, spec: any): FixResult {
       fixes: current.fixes.concat(result.fixes),
     };
   };
-  // addResult(fixSwaggerMissingType(filename, current.spec));
-  addResult(fixSingleValueEnumConstant(filename, current.spec));
+
+  const runFixer = (name: FixCode, callback: () => FixResult) => {
+    if (fixers === AllFixers || fixers.includes(name)) {
+      addResult(callback());
+    }
+  };
+  runFixer(FixCode.MissingTypeObject, () => fixSwaggerMissingType(filename, current.spec));
+  runFixer(FixCode.SingleValueEnumConstant, () => fixSingleValueEnumConstant(filename, current.spec));
 
   return current;
 }

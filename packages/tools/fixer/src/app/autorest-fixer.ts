@@ -4,11 +4,22 @@ import { logger } from "../logger";
 import { findFiles } from "../utils";
 import { AutorestFixerConfig } from "./autorest-fixer-config";
 import { fixSwagger } from "./swagger-fixer";
+import { FixCode } from "./types";
+import { AllFixers } from ".";
 
 export class AutorestFixer {
   public constructor(private config: AutorestFixerConfig) {}
 
   public async fix() {
+    if (this.config.fixers === AllFixers) {
+      logger.info(`Running all fixers:\n${Object.values(FixCode).map((x) => ` - ${x}\n`)}`);
+    } else if (this.config.fixers.length === 0) {
+      logger.info(`No fixers passed. Use --fixers to specify which fixer to use.`);
+      return;
+    } else {
+      logger.info(`Running fixers:\n${this.config.fixers.map((x) => ` - ${x}\n`)}`);
+    }
+
     const files = await findFiles(this.config.include);
     logger.info(`${this.config.dryRun ? "[DRY RUN] " : ""}Running fixer on ${files.length} files`);
 
@@ -16,7 +27,7 @@ export class AutorestFixer {
     for (const path of files) {
       const file = await loadSpec(path);
       if (file.type === "swagger") {
-        const result = fixSwagger(path, file.spec);
+        const result = fixSwagger(path, file.spec, this.config.fixers);
         for (const fix of result.fixes) {
           logger.info(`${chalk.blue(fix.code)}: ${fix.message} in ${path} at #/${fix.path.join("/")}`);
           fixes.push(fix);
