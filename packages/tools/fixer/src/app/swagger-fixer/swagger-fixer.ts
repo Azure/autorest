@@ -52,7 +52,7 @@ export function fixSingleValueEnumConstant(filename: string, spec: any): FixResu
   const newSpec = cloneDeep(spec);
   const fixes: Fix[] = [];
 
-  forEachDefinitions(newSpec, (definition, path) => {
+  findRecursive(newSpec, [], (definition, path) => {
     if (definition.enum && definition.enum.length === 1 && definition["x-ms-enum"]?.modelAsString === undefined) {
       // Set type:object as the "first" property.
       fixes.push({
@@ -61,7 +61,12 @@ export function fixSingleValueEnumConstant(filename: string, spec: any): FixResu
         message: `Schema is defining a single value enum that used to be a constant. Explicitly setting to be a constant`,
         path,
       });
-      return { "x-ms-enum": { modelAsString: false, ...(definition["x-ms-enum"] ?? {}) }, ...definition };
+      const copy = { ...definition };
+      if (!copy["x-ms-enum"]) {
+        copy["x-ms-enum"] = {};
+      }
+      copy["x-ms-enum"].modelAsString = false;
+      return copy;
     }
     return definition;
   });
@@ -81,6 +86,31 @@ function forEachDefinitions(spec: any, handler: (definition: any, path: string[]
   for (const [name, definition] of Object.entries<any>(spec.definitions)) {
     spec.definitions[name] = forEachNestedDefinitions(definition, ["definitions", name], handler);
   }
+}
+
+function findRecursive(obj: any, currentPath: string[], handler: (definition: any, path: string[]) => any) {
+  if (!obj) {
+    return obj;
+  }
+
+  obj = handler(obj, currentPath);
+
+  if (Array.isArray(obj)) {
+    for (const [key, item] of obj.entries()) {
+      const result = findRecursive(item, [...currentPath, key as any], handler);
+      if (result !== item) {
+        obj[key] = result;
+      }
+    }
+  } else if (typeof obj === "object") {
+    for (const [key, item] of Object.entries(obj)) {
+      const result = findRecursive(item, [...currentPath, key], handler);
+      if (result !== item) {
+        obj[key] = result;
+      }
+    }
+  }
+  return obj;
 }
 
 function forEachNestedDefinitions(
