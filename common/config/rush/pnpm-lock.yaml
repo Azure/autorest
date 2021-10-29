@@ -50,7 +50,7 @@ dependencies:
   '@types/source-map-support': 0.5.4
   '@types/supertest': 2.0.11
   '@types/webpack': 4.41.30
-  '@types/yargs': 15.0.14
+  '@types/yargs': 17.0.4
   '@typescript-eslint/eslint-plugin': 4.31.0_a690ff3776b01e92cf0b93501bb5ae6a
   '@typescript-eslint/parser': 4.31.0_eslint@7.32.0+typescript@4.4.2
   ajv: 8.6.2
@@ -113,7 +113,7 @@ dependencies:
   webpack-node-externals: 3.0.0
   winston: 3.3.3
   yaml-ast-parser: 0.0.43
-  yargs: 16.2.0
+  yargs: 17.2.1
   yarn: 1.22.10
 lockfileVersion: 5.2
 packages:
@@ -1220,6 +1220,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-T8Yc9wt/5LbJyCaLiHPReJa0kApcIgJ7Bn735GjItUfh08Z1pJvu8QZqb9s+mMvKV6WUQRV7K2R46YbjMXTTJw==
+  /@types/yargs/17.0.4:
+    dependencies:
+      '@types/yargs-parser': 20.2.1
+    dev: false
+    resolution:
+      integrity: sha512-D/wihO9WFYqwsmJI0e0qS+U09wIQtYRSBJlXWjTFGjouEuOCy0BU4N/ZK5utb00S5lW/9LO7vOpvGDd8M06NvQ==
   /@typescript-eslint/eslint-plugin/4.31.0_a690ff3776b01e92cf0b93501bb5ae6a:
     dependencies:
       '@typescript-eslint/experimental-utils': 4.31.0_eslint@7.32.0+typescript@4.4.2
@@ -9124,6 +9130,20 @@ packages:
       node: '>=12'
     resolution:
       integrity: sha512-xBBulfCc8Y6gLFcrPvtqKz9hz8SO0l1Ni8GgDekvBX2ro0HRQImDGnikfc33cgzcYUSncapnNcZDjVFIH3f6KQ==
+  /yargs/17.2.1:
+    dependencies:
+      cliui: 7.0.4
+      escalade: 3.1.1
+      get-caller-file: 2.0.5
+      require-directory: 2.1.1
+      string-width: 4.2.2
+      y18n: 5.0.8
+      yargs-parser: 20.2.9
+    dev: false
+    engines:
+      node: '>=12'
+    resolution:
+      integrity: sha512-XfR8du6ua4K6uLGm5S6fA+FIJom/MdJcFNVY8geLlp2v8GYbOXD4EB1tPNZsRn4vBzKGMgb5DRZMeWuFc2GO8Q==
   /yarn/1.22.10:
     dev: false
     engines:
@@ -9191,7 +9211,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-OVeXR+8NDnJgJkJyUTzM8Js4g6tQ0RHG/MdP9LUV72j30aqQgXEGcGmyzCEDB28NfvLj3g+ifEku2P5G2XLD3A==
+      integrity: sha512-MpNqbnbGTn2/x4A+5vzCiGLqBrb3oVtjif9njDDo80AMkwVFDi+/2jkQ7PPOWK22W9am3CPEdeZqBRwjM2lqtA==
       tarball: file:projects/autorest.tgz
     version: 0.0.0
   file:projects/cadl.tgz_ts-node@9.1.1+webpack@5.40.0:
@@ -9226,7 +9246,7 @@ packages:
       ts-node: '*'
       webpack: '*'
     resolution:
-      integrity: sha512-vxvPXgPJTt0yrvFH5oFumu7Ivqdtw4hww5d7nSoy6ICTnPdoZSVK6Pa4Zbpin1+9fpBZAMIu+SBxBfcYZfbPZQ==
+      integrity: sha512-mkJpA8Z3+oRed++5iLDcFJZhEy/WoxartWsu8P8I5Wb+38Fna/0hU4JEF/oF4Wck9Kn5aEtqti28Z4DGICdV6g==
       tarball: file:projects/cadl.tgz
     version: 0.0.0
   file:projects/codegen.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9285,7 +9305,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-mFz2VfiQVtof+igNYv0kUIsWBL4yKDcNowdGLB46upeKfjS6IoZtJww0HaywCS8JbY1yBOA00TjtFyeCV3x86A==
+      integrity: sha512-QCZ1c+ryLL7x7CKKccHrYVKJXittu3jcDkJAM3IOAaJ6Qgikqcy/5FkHlLIr2zc44N+v+gqlgUk2rAYt5JxlpQ==
       tarball: file:projects/codemodel.tgz
     version: 0.0.0
   file:projects/common.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9312,7 +9332,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-VlWPj+ryuGsUB3pc/obhBVIVpM/4S5WD+c5Tr0UYU1iumP0jKmRLyXA0iEOSqa1FyrZQZd4YEQjL0CXRDLunIQ==
+      integrity: sha512-1Hw9B8MqUGJv3N3E0nc/ihlLR5zn1FnQkX0WeTpWq8m2AybiEkQvCKBhp+seMJFrJnzbrhn+IlAQub18zTrI/Q==
       tarball: file:projects/common.tgz
     version: 0.0.0
   file:projects/compare.tgz_prettier@2.3.2:
@@ -9347,7 +9367,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-TF01wD/AzM6WP4tkyMk8zI4UNKfBBXa0kmh18GvBMWBiLa1+4dI+LTJ9f2qUwlSIi5WMiNkvwbWVDjRfxGwajw==
+      integrity: sha512-m6OwVTxymkE9FAdUpQgQ5064myIJBvaBPMmpphLCGJtk/HvRpHcMJBdMvuGmoQDiuiAwGk2Dx7V9csQO2N5Qvg==
       tarball: file:projects/compare.tgz
     version: 0.0.0
   file:projects/configuration.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9380,7 +9400,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-ixI+T6Q45pf5aZy9px0d/Zr73UMZ5GUYNQ6G/I3tLTagI9we6rcaRUefSHk66xiO0KrMrXK3njM7rFMLJfmCxw==
+      integrity: sha512-UZ53gfYOZaoEX2tIDjPUiKfj1wfI64Gbzw4cTFpw7q5gZX/YTG/20NK/1TntyP88Q7H8+p0wNCRiJlwKBODoPQ==
       tarball: file:projects/configuration.tgz
     version: 0.0.0
   file:projects/core.tgz_ts-node@9.1.1:
@@ -9434,7 +9454,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-TkL/z4SM5fGGP6RHyCrsChzkD2zx2LyR4endGy0IhQNklDwbxzjuU9soFiQ9HfOfyRunmN4F/AxLGa0a47iXEQ==
+      integrity: sha512-ZrW67YCTpZODtn6Cz50S7J6e9z4PqER4kAIAckI/PNfRyO4RgcAmpokXXVATQpRHfotmT0ww+jzzI6tC0TL/Ow==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9468,7 +9488,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-TbjyFxINESWXHSXfu724HtdQcUEkL3/X4TkOPQCGlF4KXsegpg4t33Ji6qLmXA3amutFwS+7gqXnZX05KdEJKQ==
+      integrity: sha512-pkpfsGRn8PBbFx0WOghfw0JSJPY4J01etP36eCfPf5BOUSVQP0VfhYtuajDoqd89Amv+Legq1DFakLsRWJZKQw==
       tarball: file:projects/datastore.tgz
     version: 0.0.0
   file:projects/deduplication.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9498,7 +9518,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-MYQ8DPYd8PRILUdoR1N+jrLvOJuM3W8wm2AK3xez8Z1Y2UyV/bYNhaww9aYB/q5BwXMl6c0x19sOKacKGm3ybw==
+      integrity: sha512-OLaxADMpKCeiBvlh/gr55kLVVB7oEOpeO55cLpYvMgnzP59j4VmOPQttEvo8ZmMzBr0iNMNoc1HW1uBNMWBFXA==
       tarball: file:projects/deduplication.tgz
     version: 0.0.0
   file:projects/extension-base.tgz_prettier@2.3.2:
@@ -9523,7 +9543,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-IY5+GFmGnLIMllhmV0yuTR6ShoQWsCIjymoXxTmVGY5wxy9WdRuYCpZu/MKkrebu/nD2VHIyvpXaf1JqwI12tQ==
+      integrity: sha512-m1X/JYvivbdTric3atlDqaqHLCbJTECxX96dGHiTRcbIM56jROVbSLsw4oe737MTx0ShOUUEq+vZK7gUdRgZSw==
       tarball: file:projects/extension-base.tgz
     version: 0.0.0
   file:projects/extension.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9577,7 +9597,7 @@ packages:
       '@types/js-yaml': 4.0.3
       '@types/lodash': 4.14.172
       '@types/node': 14.14.45
-      '@types/yargs': 15.0.14
+      '@types/yargs': 17.0.4
       '@typescript-eslint/eslint-plugin': 4.31.0_a690ff3776b01e92cf0b93501bb5ae6a
       '@typescript-eslint/parser': 4.31.0_eslint@7.32.0+typescript@4.4.2
       chalk: 4.1.2
@@ -9596,14 +9616,14 @@ packages:
       ts-jest: 27.0.5_b0de3831a3508d250bf516b99371e877
       typescript: 4.4.2
       winston: 3.3.3
-      yargs: 16.2.0
+      yargs: 17.2.1
     dev: false
     id: file:projects/fixer.tgz
     name: '@rush-temp/fixer'
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-zkgxeJwtxtHq44NPO5fAjgbtGVxAg4wh2O/kbj/KoThA++BkNXjwIgJrCuNreP79orP7nKKrGuyTqRNLtYsvPg==
+      integrity: sha512-k6dagCzeXL/6xnECsEdZWxCJKHRHgARN1z9SJMTn91AnT3+z3dQcqNvrhgpylXXRujZr2X7daPkwYi8ub+zC2w==
       tarball: file:projects/fixer.tgz
     version: 0.0.0
   file:projects/json.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9669,7 +9689,7 @@ packages:
       '@types/mustache': 4.1.2
       '@types/node': 14.14.45
       '@types/supertest': 2.0.11
-      '@types/yargs': 15.0.14
+      '@types/yargs': 17.0.4
       '@typescript-eslint/eslint-plugin': 4.31.0_a690ff3776b01e92cf0b93501bb5ae6a
       '@typescript-eslint/parser': 4.31.0_eslint@7.32.0+typescript@4.4.2
       body-parser: 1.19.0
@@ -9692,14 +9712,14 @@ packages:
       ts-jest: 27.0.5_b0de3831a3508d250bf516b99371e877
       typescript: 4.4.2
       winston: 3.3.3
-      yargs: 16.2.0
+      yargs: 17.2.1
     dev: false
     id: file:projects/md-mock-api.tgz
     name: '@rush-temp/md-mock-api'
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-grjTCGc9nHmVHbEGtUNz3+6lA9xo9NEtpf+Hx3RP/td8rOQYXx6x1Wq3epAQzR7n13dPAlM4SSMlM/QTyCZ3gA==
+      integrity: sha512-JkaawWf9eWe1156fIiYFJw4rqd27q+26nqLmA99LD+NmbXNB8CZGOv3Y2Nx9zBW8LBbNTHf4VRGuMUAp1Wz7Pw==
       tarball: file:projects/md-mock-api.tgz
     version: 0.0.0
   file:projects/modelerfour.tgz_ts-node@9.1.1:
@@ -9737,7 +9757,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-T/lhdQdhW3dDTLx/hKUeJqxeXIMlQu1ND+DLUwsXY3lc/NRnP6rC5V+1RGTMjiMUuzb6VnaCkJWw5HwOzUfMsQ==
+      integrity: sha512-wbAs7xv5ovUIfZgMjBg4Jbpym2NOEG79mo/FbGadIvnSmZEHh2h5/ncm9IfYcDJsEjUIN3pVhPW8c/7514Ivhw==
       tarball: file:projects/modelerfour.tgz
     version: 0.0.0
   file:projects/oai2-to-oai3.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9766,7 +9786,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-6YP89sECKf2MF6e9cl8NYvhXIU8OeEi6NW5G61thiZzmB8mwOulJ2yNraLs8S150feF4nWbJtfJu1CvMi0iIPg==
+      integrity: sha512-w7ZHAKyQ3PnoCkSaq/W5SDWVQBORIddI4yvCvGTLoeTi4axtImIGhZ8cncslZocFBkKsW8lScnYJ1AQHtXMkJA==
       tarball: file:projects/oai2-to-oai3.tgz
     version: 0.0.0
   file:projects/openapi.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9817,7 +9837,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-qyjJL+5/hyJbeCF38NSkgiNd5TAK/i5ibrc3MH9g8YLiFcn5t/fmF6gQ44hAP0XLYPyAzqlTJu7hhZhqDE44QA==
+      integrity: sha512-b5uy+rnnvde68qRG9NkFEncryV0ZNel4NZh5HRiFANmC2dbIf4OWpVTJPTIPXo1AJT4Is43e6fSIu8copnn7Tw==
       tarball: file:projects/test-public-packages.tgz
     version: 0.0.0
   file:projects/test-utils.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9839,7 +9859,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-KgD9TLvgY49dTKkpIcjQwxn6z0efwqwj6COGl/8yOsQxDA5neMoBwaBtHm6edMOv5yLgnX9gd4CtYeP8Bzw2uA==
+      integrity: sha512-whu9IiGZUbreZKk3Y+hhawjOOucfiBiFlnaRaFG36E9lK9X9uvmkMunHsS1zM2mqRKuiYz2uRqP7cSym7jGSUg==
       tarball: file:projects/test-utils.tgz
     version: 0.0.0
   file:projects/yaml.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9925,7 +9945,7 @@ specifiers:
   '@types/source-map-support': ^0.5.3
   '@types/supertest': ^2.0.10
   '@types/webpack': ~4.41.26
-  '@types/yargs': ~15.0.12
+  '@types/yargs': ~17.0.4
   '@typescript-eslint/eslint-plugin': ^4.12.0
   '@typescript-eslint/parser': ^4.12.0
   ajv: ^8.6.0
@@ -9988,5 +10008,5 @@ specifiers:
   webpack-node-externals: ~3.0.0
   winston: ~3.3.3
   yaml-ast-parser: 0.0.43
-  yargs: ~16.2.0
+  yargs: 17.2.1
   yarn: 1.22.10

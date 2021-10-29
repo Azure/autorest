@@ -12,4 +12,5 @@ export interface Fix {
 
 export enum FixCode {
   MissingTypeObject = "missing-type-object",
+  SingleValueEnumConstant = "single-value-enum-constant",
 }

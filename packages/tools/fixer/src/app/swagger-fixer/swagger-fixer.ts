@@ -10,7 +10,8 @@ export function fixSwagger(filename: string, spec: any): FixResult {
       fixes: current.fixes.concat(result.fixes),
     };
   };
-  addResult(fixSwaggerMissingType(filename, current.spec));
+  // addResult(fixSwaggerMissingType(filename, current.spec));
+  addResult(fixSingleValueEnumConstant(filename, current.spec));
 
   return current;
 }
@@ -35,6 +36,32 @@ export function fixSwaggerMissingType(filename: string, spec: any): FixResult {
         path,
       });
       return { type: "object", ...definition };
+    }
+    return definition;
+  });
+
+  return { spec: newSpec, fixes };
+}
+/**
+ * Find definitions with missing type: object that should be object according to autorest historic behavior.
+ * @param filename Filename
+ * @param spec Spec.
+ * @returns FixResult
+ */
+export function fixSingleValueEnumConstant(filename: string, spec: any): FixResult {
+  const newSpec = cloneDeep(spec);
+  const fixes: Fix[] = [];
+
+  forEachDefinitions(newSpec, (definition, path) => {
+    if (definition.enum && definition.enum.length === 1 && definition["x-ms-enum"]?.modelAsString === undefined) {
+      // Set type:object as the "first" property.
+      fixes.push({
+        filename,
+        code: FixCode.SingleValueEnumConstant,
+        message: `Schema is defining a single value enum that used to be a constant. Explicitly setting to be a constant`,
+        path,
+      });
+      return { "x-ms-enum": { modelAsString: false, ...(definition["x-ms-enum"] ?? {}) }, ...definition };
     }
     return definition;
   });
