@@ -783,6 +783,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
         "x-ms-client-flatten": value["x-ms-client-flatten"], // we violate spec to allow flexibility in terms of flattening
         "x-ms-client-name": value["x-ms-client-name"], // we violate spec to allow flexibility in terms of naming too. *sigh*
         readOnly: value.readOnly,
+        nullable: value.nullable,
       },
       pointer,
     };
