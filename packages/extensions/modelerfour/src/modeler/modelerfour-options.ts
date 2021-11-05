@@ -44,6 +44,11 @@ export interface ModelerFourOptions {
   "remove-empty-child-schemas"?: boolean;
 
   /**
+   * Path to a previous modelerfour file that will be attempted to be merged.
+   */
+  "merge-with-older-version"?: string;
+
+  /**
    * Disable anyobject type and default to type any instead.
    * This is a temporary flag to smooth transition. It WILL be removed in a future version.
    */

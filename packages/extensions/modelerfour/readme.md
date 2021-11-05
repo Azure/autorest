@@ -204,8 +204,11 @@ pipeline:
       - modelerfour/pre-namer/new-transform
       - prechecker
 
-  modelerfour/identity:
+  modelerfour/previous-versions-merger:
     input: modelerfour/checker
+
+  modelerfour/identity:
+    input: modelerfour/previous-versions-merger
 
   modelerfour/emitter:
     input: modelerfour/identity

@@ -309,7 +309,7 @@ export class AutoRestExtension extends EventEmitter {
       async ReadFile(filename: string): Promise<string> {
         try {
           const file = await inputScope.readStrict((await friendly2internal(filename)) || filename);
-          return await file.ReadData();
+          return await file.readData();
         } catch (E) {
           // try getting the file from the output-folder
           try {

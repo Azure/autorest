@@ -14,6 +14,13 @@ export interface Operation extends Aspect {
   /** a common filtered list of parameters that is (assumably) the actual method signature parameters */
   signatureParameters?: Array<Parameter>;
 
+  /**
+   * A list of overload for the operation. Those are parameter list that would have been present in previous api.
+   * All the parameter list here are subset of the signatureParameters above and should always be required.
+   * @see https://github.com/Azure/autorest/issues/4354
+   */
+  signatureParametersOverloads?: ParametersOverload[];
+
   /** the different possibilities to build the request. */
   requests?: Array<Request>;
 
@@ -33,6 +40,18 @@ export interface Request extends Metadata {
 
   /** a filtered list of parameters that is (assumably) the actual method signature parameters */
   signatureParameters?: Array<Parameter>;
+}
+
+export interface ParametersOverload {
+  /**
+   * Version where this overload was used.
+   */
+  version: string;
+
+  /**
+   * List of the parameters.
+   */
+  parameters: Parameter[];
 }
 
 export class Request extends Metadata implements Request {
