@@ -221,9 +221,9 @@ async function main() {
     }
   }
 
-  schema.definitions["Dictionary<string>"].additionalProperties = { type: "string" };
-  schema.definitions["Dictionary<any>"].additionalProperties = { type: "object" };
-  schema.definitions["Dictionary<ComplexSchema>"].additionalProperties = { $ref: `#/definitions/ComplexSchema` };
+  schema.definitions["Record<string,string>"].additionalProperties = { type: "string" };
+  schema.definitions["Record<string,any>"].additionalProperties = { type: "object" };
+  schema.definitions["Record<string,ComplexSchema>"].additionalProperties = { $ref: `#/definitions/ComplexSchema` };
   schema.definitions["Language"].additionalProperties = { type: "object" };
   schema.definitions["Languages"].additionalProperties = false; //  { type: 'object' };
   schema.definitions["Protocols"].additionalProperties = false; // { type: 'object' };
@@ -365,4 +365,7 @@ async function writemodels(name, folder, schema) {
   await fs.writeFile(`${__dirname}/../.resources/${folder}/json/${name}.json`, json);
 }
 
-main();
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

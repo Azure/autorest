@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
     "CompoundSchemaTypes": {
+      "description": "Compound schemas are used to construct complex objects or offer choices of a set of schemas.\n\n(ie, allOf, anyOf, oneOf )",
       "enum": [
         "or",
         "xor"
@@ -9,6 +10,7 @@
       "type": "string"
     },
     "PrimitiveSchemaTypes": {
+      "description": "Schema types that are primitive language values",
       "enum": [
         "boolean",
         "char",
@@ -27,6 +29,7 @@
       "type": "string"
     },
     "ValueSchemaTypes": {
+      "description": "schema types that are non-object or complex types",
       "enum": [
         "array",
         "boolean",
@@ -52,6 +55,7 @@
       "type": "string"
     },
     "ObjectSchemaTypes": {
+      "description": "schema types that can be objects",
       "enum": [
         "dictionary",
         "object",
