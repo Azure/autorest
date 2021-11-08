@@ -93,32 +93,46 @@ function validateParamsAreCompatible(
     failed = true;
   }
 
-  let index = 0;
+  const previousParamsMap = groupParamsByName(previousParams);
+  const currentParamsMap = groupParamsByName(currentParams);
+
   // Verify all the params present in the previous version are the same.
-  for (const previousParam of previousParams) {
-    const currentParam = currentParams[index];
-    if (!areParamTheSame(currentParam, previousParam)) {
+  for (const [name, previousParam] of previousParamsMap.entries()) {
+    const currentParam = currentParamsMap.get(name);
+    if (currentParam === undefined) {
       fail(
-        `Cannot merge older version with this spec. The parameter at index ${index} named '${currentParam.language.default.name}' for operation '${operationName}' is not compatible with the older spec.`,
+        `Cannot merge older version with this spec. The parameternamed '${name}' for operation '${operationName}' is not found in the current spec.`,
+        ["ModelerMerger/ParamRemoved"],
+      );
+    } else if (!areParamTheSame(currentParam, previousParam)) {
+      fail(
+        `Cannot merge older version with this spec. The parameter named '${name}' for operation '${operationName}' is not compatible with the older spec.`,
         ["ModelerMerger/IncompatibleParam"],
       );
     }
-    index++;
+
+    currentParamsMap.delete(name);
   }
 
   // Verify the remaining params that were added are optional params
-  while (index < currentParams.length) {
-    const currentParam = currentParams[index];
+  for (const [name, currentParam] of currentParamsMap.entries()) {
     if (currentParam.required) {
       fail(
-        `Cannot merge older version with this spec. The parameter at index ${index} named '${currentParam.language.default.name}' for operation '${operationName}' is not optional, this is a breaking change.`,
+        `Cannot merge older version with this spec. The parameter named '${name}' for operation '${operationName}' is not optional, this is a breaking change.`,
         ["ModelerMerger/IncompatibleParam"],
       );
     }
-    index++;
   }
 
   return failed;
+}
+
+function groupParamsByName(params: Parameter[]): Map<string, Parameter> {
+  const map = new Map<string, Parameter>();
+  for (const param of params) {
+    map.set(param.language.default.name, param);
+  }
+  return map;
 }
 
 /**
