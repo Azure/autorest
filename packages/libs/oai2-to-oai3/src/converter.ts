@@ -16,7 +16,6 @@ import oai3, {
   HttpOperation,
   includeXDashKeys,
   JsonType,
-  omitXDashProperties,
   PathItem,
   SecurityType,
 } from "@azure-tools/openapi";
