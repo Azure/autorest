@@ -5,8 +5,8 @@
 /components/parameters/GlobalEndpoint/in => /parameters/GlobalEndpoint
 /components/parameters/GlobalEndpoint/description => /parameters/GlobalEndpoint
 /components/parameters/GlobalEndpoint/required => /parameters/GlobalEndpoint
-/components/parameters/GlobalEndpoint/x-ms-parameter-location => /parameters/GlobalEndpoint
 /components/parameters/GlobalEndpoint/x-ms-skip-url-encoding => /parameters/GlobalEndpoint
+/components/parameters/GlobalEndpoint/x-ms-parameter-location => /parameters/GlobalEndpoint
 /components/parameters/GlobalEndpoint/schema => /parameters/GlobalEndpoint
 /components/parameters/GlobalEndpoint/schema/default => /parameters/GlobalEndpoint
 /components/parameters/GlobalEndpoint/schema/type => /parameters/GlobalEndpoint

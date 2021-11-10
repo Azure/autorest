@@ -324,7 +324,7 @@ export class Oai2ToOai3 {
       /**
        * List of extension properties that shouldn't just be passed through.
        */
-      const extensionPropertiesCustom = new Set(["x-ms-skip-url-encoding"]);
+      const extensionPropertiesCustom = new Set(["x-ms-skip-url-encoding", "x-ms-original", "x-ms-enum"]);
 
       for (const key of includeXDashKeys(parameterValue)) {
         if (parameterValue[key] !== undefined && !extensionPropertiesCustom.has(key)) {
