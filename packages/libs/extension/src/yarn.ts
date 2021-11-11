@@ -39,7 +39,7 @@ export class Yarn implements PackageManager {
     directory: string,
     packages: string[],
     options?: InstallOptions,
-    reportProgress?: (id: number, progress: number) => void,
+    reportProgress?: (progress: number) => void,
   ) {
     await ensurePackageJsonExists(directory);
 
@@ -48,15 +48,15 @@ export class Yarn implements PackageManager {
       switch (event.type) {
         case "progressStart":
           if (event.data.total !== 0) {
-            reportProgress?.(event.data.id, 0);
+            reportProgress?.(0);
             total = event.data.total;
           }
           break;
         case "progressFinish":
-          reportProgress?.(event.data.id, 100);
+          reportProgress?.(100);
           break;
         case "progressTick":
-          reportProgress?.(event.data.id, Math.min(100, (event.data.current / total) * 100));
+          reportProgress?.(Math.min(100, (event.data.current / total) * 100));
           break;
       }
     };

@@ -14,7 +14,7 @@ export interface PackageManager {
     directory: string,
     packages: string[],
     options?: InstallOptions,
-    reportProgress?: (progressId: number, progress: number) => void,
+    reportProgress?: (progress: number) => void,
   ): Promise<void>;
 
   clean(directory: string): Promise<void>;

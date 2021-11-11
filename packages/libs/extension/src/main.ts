@@ -35,11 +35,6 @@ export interface PackageInstallProgress {
   pkg: Package;
 
   /**
-   * Multiple progress.
-   */
-  progressId: number;
-
-  /**
    * Progress form 0 -> 100
    */
   progress: number;
@@ -340,8 +335,6 @@ export class ExtensionManager {
       throw new Exception("Extension manager has been disposed.");
     }
 
-    const progressBase = { pkg };
-
     // will throw if the CriticalSection lock can't be acquired.
     // we need this so that only one extension at a time can start installing
     // in this process (since to use NPM right, we have to do a change dir before runinng it)
@@ -354,12 +347,10 @@ export class ExtensionManager {
 
     const extension = new Extension(pkg, this.installationPath);
     const release = await new Mutex(extension.location).acquire(maxWait / 2);
-    const cwd = process.cwd();
 
     try {
       // change directory
       process.chdir(this.installationPath);
-      // reportProgress({ ...progressBase, progressId: progress: 1 });
 
       if (await isDirectory(extension.location)) {
         if (!force) {
@@ -381,30 +372,21 @@ export class ExtensionManager {
       // create the folder
       await mkdir(extension.location);
 
-      // progress.NotifyMessage(`Installing ${pkg.name}, ${pkg.version}`);
-
       const results = this.packageManager.install(
         extension.location,
         [pkg.packageMetadata._resolved],
         { force },
-        (progressId, progress) => {
-          reportProgress({ ...progressBase, progressId, progress });
+        (progress) => {
+          reportProgress({ pkg, progress });
         },
       );
       await extensionRelease();
 
       await results;
-      // progress.NotifyMessage(`Package Install completed ${pkg.name}, ${pkg.version}`);
-
       return extension;
     } catch (e: any) {
-      // progress.NotifyMessage(e.message);
-      // if (e.stack) {
-      //   progress.NotifyMessage(e.stack);
-      // }
       // clean up the attempted install directory
       if (await isDirectory(extension.location)) {
-        // progress.NotifyMessage(`Cleaning up failed installation: ${extension.location}`);
         await Delay(100);
         await rmdir(extension.location);
       }

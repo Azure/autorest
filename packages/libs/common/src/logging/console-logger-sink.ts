@@ -26,9 +26,19 @@ export class ConsoleLoggerSink implements LoggerSink {
   }
 
   public startProgress(): ProgressTracker {
-    const cli = new progressBar.SingleBar({}, progressBar.Presets.legacy);
-    cli.start(100, 0);
+    const cli = new progressBar.SingleBar(
+      {
+        format: "progress [{bar}] {percentage}% | ETA: {eta}s",
+      },
+      progressBar.Presets.legacy,
+    );
+
+    let started = false;
     const update = (progress: number) => {
+      if (!started) {
+        started = true;
+        cli.start(100, 0);
+      }
       cli.update(progress);
     };
 
