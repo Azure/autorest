@@ -67,8 +67,25 @@ export interface AutorestError extends Omit<AutorestDiagnostic, "level"> {}
 
 export interface AutorestWarning extends Omit<AutorestDiagnostic, "level"> {}
 
+export interface Progress {
+  /**
+   * Current step.
+   */
+  current: number;
+
+  /**
+   * Total number of steps.
+   */
+  total: number;
+
+  /**
+   * Optional name
+   */
+  name?: string;
+}
+
 export interface ProgressTracker {
-  update(progress: number): void;
+  update(progress: Progress): void;
   stop(): void;
 }
 
@@ -97,7 +114,7 @@ export interface IAutorestLogger {
 
   log(log: LogInfo): void;
 
-  startProgress(): ProgressTracker;
+  startProgress(initialName?: string): ProgressTracker;
 }
 
 export interface AutorestLogger extends IAutorestLogger {
@@ -126,7 +143,7 @@ export interface LoggerAsyncProcessor {
 
 export interface LoggerSink {
   log(info: LogInfo): void;
-  startProgress(): ProgressTracker;
+  startProgress(initialName?: string): ProgressTracker;
 }
 
 export type EnhancedLogInfo = Omit<LogInfo, "source"> & {

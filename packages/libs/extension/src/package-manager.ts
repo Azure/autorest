@@ -9,12 +9,29 @@ export interface InstallOptions {
   force?: boolean;
 }
 
+export interface PackageManagerProgress {
+  /**
+   * Current step.
+   */
+  current: number;
+
+  /**
+   * Total number of steps.
+   */
+  total: number;
+
+  /**
+   * In the case there is multiple progress
+   */
+  id?: number;
+}
+
 export interface PackageManager {
   install(
     directory: string,
     packages: string[],
     options?: InstallOptions,
-    reportProgress?: (progress: number) => void,
+    reportProgress?: (progress: PackageManagerProgress) => void,
   ): Promise<void>;
 
   clean(directory: string): Promise<void>;

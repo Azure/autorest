@@ -280,10 +280,12 @@ export class ConfigurationLoader {
       } else {
         // acquire extension
         const pack = await extMgr.findPackage(extensionDef.name, extensionDef.source);
-        this.logger.info(`> Installing AutoRest extension '${extensionDef.name}' (${extensionDef.source})`);
-        const progress = this.logger.startProgress();
+        this.logger.info(
+          `> Installing AutoRest extension '${extensionDef.name}' (${extensionDef.source} -> ${pack.version})`,
+        );
+        const progress = this.logger.startProgress("installing...");
         const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, (status: PackageInstallProgress) => {
-          progress.update(status.progress);
+          progress.update({ ...status });
         });
         progress.stop();
         this.logger.info(

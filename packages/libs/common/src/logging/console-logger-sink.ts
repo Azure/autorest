@@ -1,7 +1,7 @@
 import progressBar from "cli-progress";
 import { createLogFormatter, LogFormatter } from "./formatter";
 import { AutorestSyncLogger } from "./logger";
-import { LoggerSink, LogInfo, ProgressTracker } from "./types";
+import { LoggerSink, LogInfo, Progress, ProgressTracker } from "./types";
 
 export interface ConsoleLoggerSinkOptions {
   format?: "json" | "regular";
@@ -25,21 +25,24 @@ export class ConsoleLoggerSink implements LoggerSink {
     console.log(line);
   }
 
-  public startProgress(): ProgressTracker {
+  public startProgress(initialName?: string): ProgressTracker {
     const cli = new progressBar.SingleBar(
       {
-        format: "progress [{bar}] {percentage}% | ETA: {eta}s",
+        format: "{name} [{bar}] {percentage}% | ETA: {eta}s | {value}/{total}",
       },
       progressBar.Presets.legacy,
     );
 
     let started = false;
-    const update = (progress: number) => {
+    const update = (progress: Progress) => {
+      const name = progress.name ?? initialName ?? "progress";
       if (!started) {
         started = true;
-        cli.start(100, 0);
+        cli.start(progress.total, 0);
+      } else {
+        cli.setTotal(progress.total);
       }
-      cli.update(progress);
+      cli.update(progress.current, { name });
     };
 
     const stop = () => {

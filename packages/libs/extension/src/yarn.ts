@@ -4,7 +4,7 @@ import { join, resolve } from "path";
 import { isFile, writeFile } from "@azure-tools/async-io";
 import { execute } from "./exec-cmd";
 import { DEFAULT_NPM_REGISTRY } from "./npm";
-import { ensurePackageJsonExists, InstallOptions, PackageManager } from "./package-manager";
+import { ensurePackageJsonExists, InstallOptions, PackageManager, PackageManagerProgress } from "./package-manager";
 
 let _cli: string | undefined;
 const getPathToYarnCli = async () => {
@@ -39,7 +39,7 @@ export class Yarn implements PackageManager {
     directory: string,
     packages: string[],
     options?: InstallOptions,
-    reportProgress?: (progress: number) => void,
+    reportProgress?: (progress: PackageManagerProgress) => void,
   ) {
     await ensurePackageJsonExists(directory);
 
@@ -48,15 +48,15 @@ export class Yarn implements PackageManager {
       switch (event.type) {
         case "progressStart":
           if (event.data.total !== 0) {
-            reportProgress?.(0);
+            reportProgress?.({ current: 0, total, id: event.data.id });
             total = event.data.total;
           }
           break;
         case "progressFinish":
-          reportProgress?.(100);
+          reportProgress?.({ current: 100, total, id: event.data.id });
           break;
         case "progressTick":
-          reportProgress?.(Math.min(100, (event.data.current / total) * 100));
+          reportProgress?.({ current: Math.min(event.data.current, total), total, id: event.data.id });
           break;
       }
     };

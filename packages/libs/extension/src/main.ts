@@ -22,7 +22,7 @@ import {
 import { Extension, Package } from "./extension";
 import { logger } from "./logger";
 import { Npm } from "./npm";
-import { PackageManager, PackageManagerType } from "./package-manager";
+import { PackageManager, PackageManagerProgress, PackageManagerType } from "./package-manager";
 import {
   patchPythonPath,
   PythonCommandLine,
@@ -31,13 +31,8 @@ import {
 } from "./system-requirements";
 import { Yarn } from "./yarn";
 
-export interface PackageInstallProgress {
+export interface PackageInstallProgress extends PackageManagerProgress {
   pkg: Package;
-
-  /**
-   * Progress form 0 -> 100
-   */
-  progress: number;
 }
 
 function quoteIfNecessary(text: string): string {
@@ -377,7 +372,7 @@ export class ExtensionManager {
         [pkg.packageMetadata._resolved],
         { force },
         (progress) => {
-          reportProgress({ pkg, progress });
+          reportProgress({ pkg, ...progress });
         },
       );
       await extensionRelease();
