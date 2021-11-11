@@ -38,7 +38,7 @@ export class ConsoleLoggerSink implements LoggerSink {
       const name = progress.name ?? initialName ?? "progress";
       if (!started) {
         started = true;
-        cli.start(progress.total, 0);
+        cli.start(progress.total, 0, { name });
       } else {
         cli.setTotal(progress.total);
       }

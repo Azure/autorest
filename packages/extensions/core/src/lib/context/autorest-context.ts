@@ -32,7 +32,7 @@ import { MessageEmitter } from "./message-emitter";
 export class AutorestContext implements IAutorestLogger {
   public config: AutorestConfiguration;
   public configFileFolderUri: string;
-  private logger: AutorestLogger;
+  public logger: AutorestLogger;
   private originalLogger: AutorestLogger;
 
   public constructor(
@@ -88,6 +88,10 @@ export class AutorestContext implements IAutorestLogger {
 
   public log(log: LogInfo) {
     this.logger.log(log);
+  }
+
+  public startProgress(initialName?: string) {
+    return this.logger.startProgress(initialName);
   }
 
   public get diagnostics() {

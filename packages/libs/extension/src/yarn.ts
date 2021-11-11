@@ -4,7 +4,14 @@ import { join, resolve } from "path";
 import { isFile, writeFile } from "@azure-tools/async-io";
 import { execute } from "./exec-cmd";
 import { DEFAULT_NPM_REGISTRY } from "./npm";
-import { ensurePackageJsonExists, InstallOptions, PackageManager, PackageManagerProgress } from "./package-manager";
+import {
+  ensurePackageJsonExists,
+  InstallOptions,
+  PackageInstallationResult,
+  PackageManager,
+  PackageManagerLogEntry,
+  PackageManagerProgress,
+} from "./package-manager";
 
 let _cli: string | undefined;
 const getPathToYarnCli = async () => {
@@ -40,10 +47,11 @@ export class Yarn implements PackageManager {
     packages: string[],
     options?: InstallOptions,
     reportProgress?: (progress: PackageManagerProgress) => void,
-  ) {
+  ): Promise<PackageInstallationResult> {
     await ensurePackageJsonExists(directory);
 
     let total = 1;
+    const logs: PackageManagerLogEntry[] = [];
     const handleYarnEvent = (event: YarnEvent) => {
       switch (event.type) {
         case "progressStart":
@@ -58,6 +66,14 @@ export class Yarn implements PackageManager {
         case "progressTick":
           reportProgress?.({ current: Math.min(event.data.current, total), total, id: event.data.id });
           break;
+        case "error":
+        case "info":
+        case "warning":
+          logs.push({ severity: event.type, message: event.data });
+          break;
+        case "step":
+          logs.push({ severity: "info", message: ` Step: ${event.data.message}` });
+          break;
       }
     };
     const output = await this.execYarn(
@@ -66,13 +82,15 @@ export class Yarn implements PackageManager {
       handleYarnEvent,
     );
     if (output.error) {
-      /* eslint-disable no-console */
-      console.error("Yarn log:");
-      console.log("-".repeat(50));
-      console.error(output.log);
-      console.log("-".repeat(50));
-      /* eslint-enable no-console */
-      throw new Error(`Failed to install package '${packages}' -- ${output.error}`);
+      return {
+        success: false,
+        error: {
+          message: `Failed to install package '${packages}' -- ${output.error}`,
+          logs,
+        },
+      };
+    } else {
+      return { success: true };
     }
   }
 
@@ -142,7 +160,7 @@ interface YarnProgressFinish {
 
 interface YarnStep {
   type: "step";
-  data: { messages: string; current: number; total: number };
+  data: { message: string; current: number; total: number };
 }
 interface YarnLog {
   type: "info" | "warning" | "error";

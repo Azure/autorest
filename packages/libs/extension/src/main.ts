@@ -6,6 +6,7 @@
 import { ChildProcess, spawn } from "child_process";
 import { homedir, tmpdir } from "os";
 import { basename, delimiter, dirname, extname, isAbsolute, join, normalize, resolve } from "path";
+import { off } from "process";
 import { exists, isDirectory, isFile, mkdir, readdir, readFile, rmdir } from "@azure-tools/async-io";
 import { CriticalSection, Delay, Exception, Mutex, shallowCopy, SharedLock } from "@azure-tools/tasks";
 import { resolve as npmResolvePackage } from "npm-package-arg";
@@ -22,7 +23,7 @@ import {
 import { Extension, Package } from "./extension";
 import { logger } from "./logger";
 import { Npm } from "./npm";
-import { PackageManager, PackageManagerProgress, PackageManagerType } from "./package-manager";
+import { PackageManager, PackageManagerLogEntry, PackageManagerProgress, PackageManagerType } from "./package-manager";
 import {
   patchPythonPath,
   PythonCommandLine,
@@ -367,7 +368,7 @@ export class ExtensionManager {
       // create the folder
       await mkdir(extension.location);
 
-      const results = this.packageManager.install(
+      const promise = this.packageManager.install(
         extension.location,
         [pkg.packageMetadata._resolved],
         { force },
@@ -377,8 +378,13 @@ export class ExtensionManager {
       );
       await extensionRelease();
 
-      await results;
-      return extension;
+      const result = await promise;
+      if (result.success) {
+        return extension;
+      } else {
+        const message = [result.error.message, "", "Installation logs: ", formatLogEntries(result.error.logs)];
+        throw new PackageInstallationException(pkg.name, pkg.version, message.join("\n"));
+      }
     } catch (e: any) {
       // clean up the attempted install directory
       if (await isDirectory(extension.location)) {
@@ -387,6 +393,9 @@ export class ExtensionManager {
       }
 
       if (e instanceof Exception) {
+        throw e;
+      }
+      if (e instanceof PackageInstallationException) {
         throw e;
       }
       if (e instanceof Error) {
@@ -508,4 +517,15 @@ export class ExtensionManager {
       throw new UnsatisfiedSystemRequirementException(extension, errors);
     }
   }
+}
+
+function formatLogEntries(entries: PackageManagerLogEntry[]): string {
+  const lines = ["```", ...entries.map(formatLogEntry), "```"];
+  return lines.join("\n");
+}
+
+function formatLogEntry(entry: PackageManagerLogEntry): string {
+  const [first, ...lines] = entry.message.split("\n");
+  const spacing = " ".repeat(entry.severity.length);
+  return [`${entry.severity}: ${first}`, ...lines.map((x) => `${spacing}  ${x}`)].join("\n");
 }

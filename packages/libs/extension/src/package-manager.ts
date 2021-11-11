@@ -26,13 +26,32 @@ export interface PackageManagerProgress {
   id?: number;
 }
 
+export type PackageInstallationResult = { success: false; error: InstallationError } | { success: true };
+
+export interface InstallationError {
+  /**
+   * Main error message.
+   */
+  message: string;
+
+  /**
+   * Log entries for the package manager.
+   */
+  logs: PackageManagerLogEntry[];
+}
+
+export interface PackageManagerLogEntry {
+  severity: "info" | "warning" | "error";
+  message: string;
+}
+
 export interface PackageManager {
   install(
     directory: string,
     packages: string[],
     options?: InstallOptions,
     reportProgress?: (progress: PackageManagerProgress) => void,
-  ): Promise<void>;
+  ): Promise<PackageInstallationResult>;
 
   clean(directory: string): Promise<void>;
 
