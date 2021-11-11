@@ -35,15 +35,35 @@ const getPathToYarnCli = async () => {
 export class Yarn implements PackageManager {
   public constructor(private pathToYarnCli: string | undefined = undefined) {}
 
-  public async install(directory: string, packages: string[], options?: InstallOptions) {
+  public async install(
+    directory: string,
+    packages: string[],
+    options?: InstallOptions,
+    reportProgress?: (id: number, progress: number) => void,
+  ) {
     await ensurePackageJsonExists(directory);
+
+    let total = 1;
+    const handleYarnEvent = (event: YarnEvent) => {
+      switch (event.type) {
+        case "progressStart":
+          if (event.data.total !== 0) {
+            reportProgress?.(event.data.id, 0);
+            total = event.data.total;
+          }
+          break;
+        case "progressFinish":
+          reportProgress?.(event.data.id, 100);
+          break;
+        case "progressTick":
+          reportProgress?.(event.data.id, Math.min(100, (event.data.current / total) * 100));
+          break;
+      }
+    };
     const output = await this.execYarn(
       directory,
-      "add",
-      "--global-folder",
-      directory.replace(/\\/g, "/"),
-      ...(options?.force ? ["--force"] : []),
-      ...packages,
+      ["add", "--global-folder", directory.replace(/\\/g, "/"), ...(options?.force ? ["--force"] : []), ...packages],
+      handleYarnEvent,
     );
     if (output.error) {
       /* eslint-disable no-console */
@@ -52,20 +72,20 @@ export class Yarn implements PackageManager {
       console.error(output.log);
       console.log("-".repeat(50));
       /* eslint-enable no-console */
-      throw Error(`Failed to install package '${packages}' -- ${output.error}`);
+      throw new Error(`Failed to install package '${packages}' -- ${output.error}`);
     }
   }
 
   public async clean(directory: string): Promise<void> {
-    await this.execYarn(directory, "cache", "clean", "--force");
+    await this.execYarn(directory, ["cache", "clean", "--force"]);
   }
 
   public async getPackageVersions(directory: string, packageName: string): Promise<string[]> {
-    const result = await this.execYarn(directory, "info", packageName, "versions", "--json");
+    const result = await this.execYarn(directory, ["info", packageName, "versions", "--json"]);
     return JSON.parse(result.stdout).data;
   }
 
-  public async execYarn(cwd: string, ...args: string[]) {
+  public async execYarn(cwd: string, args: string[], onYarnEvent?: (event: YarnEvent) => void) {
     const procArgs = [
       this.pathToYarnCli ?? (await getPathToYarnCli()),
       "--no-node-version-check",
@@ -81,6 +101,50 @@ export class Yarn implements PackageManager {
       YARN_IGNORE_PATH: "1", // Prevent yarn from using a different version if configured in ~/.yarnrc
     };
 
-    return await execute(process.execPath, procArgs, { cwd, env: newEnv });
+    const handleYarnLog = (buffer: Buffer) => {
+      const str = buffer.toString();
+      for (const line of str.split(/\r?\n/).filter((x) => x !== "")) {
+        try {
+          const data = JSON.parse(line);
+          onYarnEvent?.(data);
+          // if (data.type !== "progressTick") {
+          //   console.error("Foo", data);
+          // }
+        } catch (e) {
+          // NOOP
+        }
+      }
+    };
+    return await execute(process.execPath, procArgs, {
+      cwd,
+      env: newEnv,
+      onStdOutData: handleYarnLog,
+      onStdErrData: handleYarnLog,
+    });
   }
+}
+
+type YarnEvent = YarnProgressTick | YarnProgressStart | YarnProgressFinish | YarnStep | YarnLog;
+
+interface YarnProgressTick {
+  type: "progressTick";
+  data: { id: number; current: number };
+}
+
+interface YarnProgressStart {
+  type: "progressStart";
+  data: { id: number; total: number };
+}
+interface YarnProgressFinish {
+  type: "progressFinish";
+  data: { id: number };
+}
+
+interface YarnStep {
+  type: "step";
+  data: { messages: string; current: number; total: number };
+}
+interface YarnLog {
+  type: "info" | "warning" | "error";
+  data: string;
 }

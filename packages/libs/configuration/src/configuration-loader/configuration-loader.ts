@@ -1,7 +1,7 @@
 import { AutorestLogger, OperationAbortedException } from "@autorest/common";
 import { exists, filePath } from "@azure-tools/async-io";
 import { DataStore, IFileSystem, RealFileSystem, CachingFileSystem } from "@azure-tools/datastore";
-import { Extension, ExtensionManager, LocalExtension } from "@azure-tools/extension";
+import { Extension, ExtensionManager, LocalExtension, PackageInstallProgress } from "@azure-tools/extension";
 import { createFileUri, resolveUri, simplifyUri, fileUriToPath } from "@azure-tools/uri";
 import { last } from "lodash";
 import untildify from "untildify";
@@ -281,9 +281,11 @@ export class ConfigurationLoader {
         // acquire extension
         const pack = await extMgr.findPackage(extensionDef.name, extensionDef.source);
         this.logger.info(`> Installing AutoRest extension '${extensionDef.name}' (${extensionDef.source})`);
-        const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, (progressInit: any) =>
-          progressInit.Message.Subscribe((s: any, m: any) => this.logger.verbose(m)),
-        );
+        const progress = this.logger.startProgress();
+        const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, (status: PackageInstallProgress) => {
+          progress.update(status.progress);
+        });
+        progress.stop();
         this.logger.info(
           `> Installed AutoRest extension '${extensionDef.name}' (${extensionDef.source}->${extension.version})`,
         );

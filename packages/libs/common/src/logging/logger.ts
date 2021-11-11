@@ -67,6 +67,27 @@ export abstract class AutorestLoggerBase<T> implements AutorestLogger {
     });
   }
 
+  public startProgress() {
+    const sinkProgressTrackers = this.sinks.map((x) => x.startProgress());
+
+    const update = (progress: number) => {
+      for (const tracker of sinkProgressTrackers) {
+        tracker.update(progress);
+      }
+    };
+
+    const stop = () => {
+      for (const tracker of sinkProgressTrackers) {
+        tracker.stop();
+      }
+    };
+
+    return {
+      update,
+      stop,
+    };
+  }
+
   protected emitLog(log: LogInfo) {
     for (const sink of this.sinks) {
       sink.log(log);

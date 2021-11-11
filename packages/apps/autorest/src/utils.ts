@@ -41,7 +41,7 @@ export async function loadConfig(sink: LoggerSink, args: AutorestArgs): Promise<
   });
 
   const loader = new ConfigurationLoader(logger, defaultConfigUri, configFileOrFolder, {
-    extensionManager: await extensionManager,
+    // extensionManager: await extensionManager,
   });
   try {
     const { config } = await loader.load([args], true);

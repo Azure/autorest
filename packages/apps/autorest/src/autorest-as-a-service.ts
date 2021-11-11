@@ -338,11 +338,9 @@ export async function selectVersion(
 
       selectedVersion = await (
         await extensionManager
-      ).installPackage(pkg, force, 5 * 60 * 1000, (installer) =>
-        installer.Message.Subscribe((s, m) => {
-          if (args.debug) console.log(`Installer: ${m}`);
-        }),
-      );
+      ).installPackage(pkg, force, 5 * 60 * 1000, (installer) => {
+        // TODO-TIM log here progress?
+      });
       if (args.debug) {
         console.log(`Extension location: ${selectedVersion.packageJsonPath}`);
       }

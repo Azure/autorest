@@ -10,7 +10,12 @@ export interface InstallOptions {
 }
 
 export interface PackageManager {
-  install(directory: string, packages: string[], options?: InstallOptions): Promise<void>;
+  install(
+    directory: string,
+    packages: string[],
+    options?: InstallOptions,
+    reportProgress?: (progressId: number, progress: number) => void,
+  ): Promise<void>;
 
   clean(directory: string): Promise<void>;
 
