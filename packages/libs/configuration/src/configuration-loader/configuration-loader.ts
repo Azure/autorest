@@ -296,6 +296,9 @@ export class ConfigurationLoader {
             false,
             5 * 60 * 1000,
             (status: PackageInstallProgress) => {
+              if (status.current % 100 === 0) {
+                this.logger.debug("Ping " + status.current);
+              }
               progress.update({ ...status });
             },
           );

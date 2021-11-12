@@ -1,12 +1,23 @@
+import { WriteStream } from "tty";
 import progressBar from "cli-progress";
 import { createLogFormatter, LogFormatter } from "./formatter";
 import { AutorestSyncLogger } from "./logger";
 import { LoggerSink, LogInfo, Progress, ProgressTracker } from "./types";
 
 export interface ConsoleLoggerSinkOptions {
+  /**
+   * Stream to use for output. (@default stdout)
+   */
+  stream?: NodeJS.WritableStream;
+
   format?: "json" | "regular";
   color?: boolean;
   timestamp?: boolean;
+
+  /**
+   * Enable output for non TTY output(e.g. file) for the progress file.
+   */
+  progressNoTTYOutput?: boolean;
 }
 
 /**
@@ -14,45 +25,104 @@ export interface ConsoleLoggerSinkOptions {
  */
 export class ConsoleLoggerSink implements LoggerSink {
   private formatter: LogFormatter;
+  private currentProgressBar: progressBar.MultiBar | undefined;
+  private bars: progressBar.SingleBar[] = [];
+  private pendingLogs: string[] = [];
+  private format: "json" | "regular";
+  private stream: NodeJS.WritableStream;
 
-  public constructor(options: ConsoleLoggerSinkOptions = {}) {
+  public constructor(private options: ConsoleLoggerSinkOptions = {}) {
+    this.stream = options.stream ?? process.stdout;
+    this.format = options.format ?? "regular";
     this.formatter = createLogFormatter(options.format, options);
   }
 
   public log(log: LogInfo) {
     const line = this.formatter.log(log);
-    // eslint-disable-next-line no-console
-    console.log(line);
+    if (this.currentProgressBar) {
+      this.pendingLogs.push(line);
+    } else {
+      this.writeLine(line);
+    }
   }
 
   public startProgress(initialName?: string): ProgressTracker {
-    const cli = new progressBar.SingleBar(
-      {
-        format: "{name} [{bar}] {percentage}% | ETA: {eta}s | {value}/{total}",
-      },
-      progressBar.Presets.legacy,
-    );
+    if (this.format === "regular") {
+      return this.startProgressBar(initialName);
+    } else {
+      return NoopProgress;
+    }
+  }
 
-    let started = false;
+  private startProgressBar(initialName?: string): ProgressTracker {
+    if (this.currentProgressBar === undefined) {
+      this.currentProgressBar = new progressBar.MultiBar(
+        {
+          stream: this.stream,
+          noTTYOutput: this.options.progressNoTTYOutput,
+          format: "{name} [{bar}] {percentage}% | {value}/{total}",
+          forceRedraw: true, // without this the bar is flickering,
+          stopOnComplete: true,
+        },
+        progressBar.Presets.legacy,
+      );
+    }
+    const multiBar = this.currentProgressBar;
+
+    multiBar.on("redraw-pre", () => {
+      if (this.pendingLogs.length > 0) {
+        if ("clearLine" in this.stream) {
+          (this.stream as WriteStream).clearLine(1);
+        }
+      }
+      while (this.pendingLogs.length > 0) {
+        this.writeLine(this.pendingLogs.shift());
+      }
+    });
+
+    multiBar.on("stop", () => {
+      this.currentProgressBar = undefined;
+      while (this.pendingLogs.length > 0) {
+        this.writeLine(this.pendingLogs.shift());
+      }
+    });
+
+    let bar: progressBar.SingleBar | undefined;
+
     const update = (progress: Progress) => {
       const name = progress.name ?? initialName ?? "progress";
-      if (!started) {
-        started = true;
-        cli.start(progress.total, 0, { name });
+      if (bar === undefined) {
+        bar = multiBar.create(progress.total, 0, { name });
+        this.bars.push(bar);
       } else {
-        cli.setTotal(progress.total);
+        bar.setTotal(progress.total);
       }
-      cli.update(progress.current, { name });
+
+      bar.update(progress.current, { name });
     };
 
     const stop = () => {
-      cli.stop();
+      if (bar) {
+        bar.stop();
+        multiBar.remove(bar);
+        this.bars = this.bars.filter((x) => x !== bar);
+        if (this.bars.length === 0) {
+          multiBar.stop();
+          this.currentProgressBar = undefined;
+        }
+      }
     };
 
     return {
       update,
       stop,
     };
+  }
+
+  private writeLine(line: string | undefined) {
+    if (line !== undefined) {
+      this.stream.write(Buffer.from(`${line}\n`));
+    }
   }
 }
 
@@ -65,3 +135,8 @@ export class ConsoleLogger extends AutorestSyncLogger {
     super({ sinks: [new ConsoleLoggerSink(options)] });
   }
 }
+
+const NoopProgress = {
+  update: () => null,
+  stop: () => null,
+};
