@@ -58,11 +58,11 @@ export class ConsoleLoggerSink implements LoggerSink {
     if (this.currentProgressBar === undefined) {
       this.currentProgressBar = new progressBar.MultiBar(
         {
+          hideCursor: true,
           stream: this.stream,
           noTTYOutput: this.options.progressNoTTYOutput,
           format: "{name} [{bar}] {percentage}% | {value}/{total}",
           forceRedraw: true, // without this the bar is flickering,
-          stopOnComplete: true,
         },
         progressBar.Presets.legacy,
       );
@@ -103,6 +103,7 @@ export class ConsoleLoggerSink implements LoggerSink {
 
     const stop = () => {
       if (bar) {
+        bar.update(bar.getTotal());
         bar.stop();
         multiBar.remove(bar);
         this.bars = this.bars.filter((x) => x !== bar);

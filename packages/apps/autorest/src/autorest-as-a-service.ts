@@ -17,7 +17,7 @@ import * as semver from "semver";
 import { AutorestArgs } from "./args";
 import { VERSION } from "./constants";
 import { parseMemory } from "./utils";
-import { AutorestLogger, IAutorestLogger } from "@autorest/common";
+import { AutorestLogger, ConsoleLogger, IAutorestLogger } from "@autorest/common";
 
 const inWebpack = typeof __webpack_require__ === "function";
 const nodeRequire = inWebpack ? __non_webpack_require__! : require;
@@ -330,14 +330,15 @@ export async function selectVersion(
         console.log(`**Installing package** ${corePackageName}@${pkg.version}\n[This will take a few moments...]`);
       }
 
-      const progress = logger.startProgress("installing...");
-
+      // @autorest/core install too fast and this doesn't look good right now as Yarn doesn't give info fast enough.
+      // If we migrate to yarn v2 with the api we might be able to get more info and reenable that
+      // const progress = logger.startProgress("installing core...");
       selectedVersion = await (
         await extensionManager
       ).installPackage(pkg, force, 5 * 60 * 1000, (status) => {
-        progress.update({ ...status });
+        // progress.update({ ...status });
       });
-      progress.stop();
+      // progress.stop();
 
       if (args.debug) {
         console.log(`Extension location: ${selectedVersion.packageJsonPath}`);
