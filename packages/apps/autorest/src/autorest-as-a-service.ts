@@ -1,10 +1,12 @@
 /* eslint-disable no-process-exit */
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { spawn } from "child_process";
 import { lookup } from "dns";
 import { mkdtempSync, rmdirSync } from "fs";
 import { homedir, tmpdir } from "os";
 import { join } from "path";
+import { IAutorestLogger } from "@autorest/common";
 import { AutorestConfiguration } from "@autorest/configuration";
 import { isFile, mkdir, isDirectory } from "@azure-tools/async-io";
 import { Extension, ExtensionManager, Package } from "@azure-tools/extension";
@@ -13,7 +15,6 @@ import * as semver from "semver";
 import { AutorestArgs } from "./args";
 import { VERSION } from "./constants";
 import { parseMemory } from "./utils";
-import { IAutorestLogger } from "@autorest/common";
 
 const inWebpack = typeof __webpack_require__ === "function";
 const nodeRequire = inWebpack ? __non_webpack_require__! : require;
