@@ -8,7 +8,8 @@ import "source-map-support/register";
 
 const cwd = process.cwd();
 
-import { AutorestSyncLogger, ConsoleLoggerSink } from "@autorest/common";
+import { AutorestSyncLogger, ConsoleLoggerSink, FilterLogger } from "@autorest/common";
+import { getLogLevel } from "@autorest/configuration";
 import chalk from "chalk";
 import { clearTempData } from "./actions";
 import { parseAutorestArgs } from "./args";
@@ -108,7 +109,10 @@ async function main() {
       logger.info(`AutoRest core version selected from configuration: ${chalk.yellow.bold(config.version)}.`);
     }
 
-    const coreVersionPath = await resolveCoreVersion(config);
+    const coreVersionPath = await resolveCoreVersion(
+      logger.with(new FilterLogger({ level: getLogLevel({ ...args, ...config }) })),
+      config,
+    );
 
     // let's strip the extra stuff from the command line before we require the core module.
     const newArgs: string[] = [];

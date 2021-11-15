@@ -10,6 +10,7 @@
 // everything else.
 import { resolve } from "path";
 
+import { IAutorestLogger } from "@autorest/common";
 import { GenerationResults, IFileSystem, AutoRest as IAutoRest } from "autorest-core";
 import { LanguageClient } from "vscode-languageclient";
 
@@ -77,29 +78,6 @@ let busy = false;
 let modulePath: string | undefined = undefined;
 
 /**
- * Returns the language service entrypoint for autorest-core, bootstrapping the core if necessary
- *
- * If initialize has already been called, then it returns the version that was initialized, regardless of parameters
- *
- * @param requestedVersion an npm package reference for the version requested @see {@link https://docs.npmjs.com/cli/install#description}
- *
- * @param minimumVersion - a semver string representing the lowest autorest- core version that is considered acceptable.
- *
- * @see { @link initialize }
- */
-export async function getLanguageServiceEntrypoint(
-  requestedVersion = "latest-installed",
-  minimumVersion?: string,
-): Promise<string | undefined> {
-  if (!modulePath && !busy) {
-    // if we haven't already got autorest-core, let's do that now with the default settings.
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    await initialize(requestedVersion, minimumVersion);
-  }
-  return resolveEntrypoint(modulePath!, "language-service");
-}
-
-/**
  * Returns the command-line application entrypoint for autorest-core, bootstrapping the core if necessary
  *
  * If initialize has already been called, then it returns the version that was initialized, regardless of parameters
@@ -111,13 +89,14 @@ export async function getLanguageServiceEntrypoint(
  * @see {@link initialize}
  * */
 export async function getApplicationEntrypoint(
+  logger: IAutorestLogger,
   requestedVersion = "latest-installed",
   minimumVersion?: string,
 ): Promise<string | undefined> {
   if (!modulePath && !busy) {
     // if we haven't already got autorest-core, let's do that now with the default settings.
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    await initialize(requestedVersion, minimumVersion);
+    await initialize(logger, requestedVersion, minimumVersion);
   }
   return resolveEntrypoint(modulePath!, "app");
 }
@@ -137,7 +116,11 @@ export async function getApplicationEntrypoint(
  *
  * @param minimumVersion - a semver string representing the lowest autorest-core version that is considered acceptable.
  */
-export async function initialize(requestedVersion = "latest-installed", minimumVersion?: string) {
+export async function initialize(
+  logger: IAutorestLogger,
+  requestedVersion = "latest-installed",
+  minimumVersion?: string,
+) {
   if (modulePath) {
     return;
   }
@@ -166,7 +149,7 @@ export async function initialize(requestedVersion = "latest-installed", minimumV
 
     // logic to resolve and optionally install a autorest core package.
     // will throw if it's not doable.
-    const selectedVersion = await selectVersion(requestedVersion, false, minimumVersion);
+    const selectedVersion = await selectVersion(logger, requestedVersion, false, minimumVersion);
     modulePath = await resolveEntrypoint(await selectedVersion.modulePath, "module");
     if (!modulePath) {
       rejectAutoRest(
@@ -180,10 +163,10 @@ export async function initialize(requestedVersion = "latest-installed", minimumV
 }
 
 /** Bootstraps the core module if it's not already done and returns the AutoRest class. */
-async function ensureCoreLoaded(): Promise<IAutoRest> {
+async function ensureCoreLoaded(logger: IAutorestLogger): Promise<IAutoRest> {
   if (!modulePath && !busy) {
     // if we haven't already got autorest-core, let's do that now with the default settings.
-    await initialize();
+    await initialize(logger);
   }
 
   if (modulePath && !coreModule) {
@@ -209,10 +192,14 @@ async function ensureCoreLoaded(): Promise<IAutoRest> {
  *
  * @param configFileOrFolderUri - a URI pointing to the folder or autorest configuration file
  */
-export async function create(fileSystem?: IFileSystem, configFileOrFolderUri?: string): Promise<AutoRest> {
+export async function create(
+  logger: IAutorestLogger,
+  fileSystem?: IFileSystem,
+  configFileOrFolderUri?: string,
+): Promise<AutoRest> {
   if (!modulePath && !busy) {
     // if we haven't already got autorest-core, let's do that now with the default settings.
-    await initialize();
+    await initialize(logger);
   }
 
   if (modulePath && !coreModule) {
@@ -235,8 +222,8 @@ export async function create(fileSystem?: IFileSystem, configFileOrFolderUri?: s
  *
  * @param content - the document content to evaluate
  */
-export async function isOpenApiDocument(content: string): Promise<boolean> {
-  await ensureCoreLoaded();
+export async function isOpenApiDocument(logger: IAutorestLogger, content: string): Promise<boolean> {
+  await ensureCoreLoaded(logger);
   return coreModule.IsOpenApiDocument(content);
 }
 
@@ -250,8 +237,8 @@ export async function isOpenApiDocument(content: string): Promise<boolean> {
  *
  * @see {@link DocumentType}
  */
-export async function identifyDocument(content: string): Promise<DocumentType> {
-  await ensureCoreLoaded();
+export async function identifyDocument(logger: IAutorestLogger, content: string): Promise<DocumentType> {
+  await ensureCoreLoaded(logger);
   return await coreModule.IdentifyDocument(content);
 }
 
@@ -261,124 +248,7 @@ export async function identifyDocument(content: string): Promise<DocumentType> {
  *
  * @returns the content as a JSON string (not a JSON DOM)
  */
-export async function toJSON(content: string): Promise<string> {
-  await ensureCoreLoaded();
+export async function toJSON(logger: IAutorestLogger, content: string): Promise<string> {
+  await ensureCoreLoaded(logger);
   return await coreModule.LiterateToJson(content);
-}
-
-/** This is a convenience class for accessing the requests supported by AutoRest when used as a language service */
-export class AutoRestLanguageService {
-  /**
-   * Represents a convenience layer on the remote language service functions (on top of LSP-defined functions)
-   *
-   * @constructor
-   *
-   * this requires a reference to the language client so that the methods can await the onReady signal
-   * before attempting to send requests.
-   */
-  public constructor(private languageClient: LanguageClient) {}
-
-  /**
-   * Runs autorest to process a file
-   *
-   * @param documentUri The OpenApi document or AutoRest configuration file to use for the generation
-   *
-   * @param language The language to generate code for. (This is a convenience; it could have been expressed in the configuration)
-   *
-   * @param configuration Additional configuration to pass to AutoRest -- this overrides any defaults or content in the configuration file
-   * @returns async: a 'generated' object containg the output from the generation run.
-   *    @see generated
-   *
-   */
-
-  public async generate(documentUri: string, language: string, configuration: any): Promise<GenerationResults> {
-    // don't call before the client is ready.
-    await this.languageClient.onReady();
-    return await this.languageClient.sendRequest<GenerationResults>("generate", {
-      documentUri: documentUri,
-      language: language,
-      configuration: configuration,
-    });
-  }
-
-  /**
-   * Determines if a file is an OpenAPI document (2.0)
-   *
-   * @param contentOrUri either a URL to a file on disk or http/s, or the content of a file itself.
-   * @returns async:
-   *     true - the file is an OpenAPI 2.0 document
-   *     false - the file was not recognized.
-   */
-  public async isOpenApiDocument(contentOrUri: string): Promise<boolean> {
-    // don't call before the client is ready.
-    await this.languageClient.onReady();
-
-    return await this.languageClient.sendRequest<boolean>("isOpenApiDocument", { contentOrUri: contentOrUri });
-  }
-
-  /**
-   * Determines if a file is an AutoRest configuration file (checks for the magic string `\n> see https://aka.ms/autorest` )
-   *
-   * @param contentOrUri either a URL to a file on disk or http/s, or the content of a file itself.
-   * @returns async:
-   *     true - the file is an autorest configuration file
-   *     false - the file was not recognized.
-   */
-  public async isConfigurationDocument(contentOrUri: string): Promise<boolean> {
-    // don't call before the client is ready.
-    await this.languageClient.onReady();
-
-    return await this.languageClient.sendRequest<boolean>("isConfigurationDocument", { contentOrUri: contentOrUri });
-  }
-
-  /**
-   * Returns the file as a JSON string. This can be a .YAML, .MD or .JSON file to begin with.
-   *
-   * @param contentOrUri either a URL to a file on disk or http/s, or the content of a file itself.
-   * @returns async: string containing the file as JSON
-   */
-  public async toJSON(contentOrUri: string): Promise<string> {
-    // don't call before the client is ready.
-    await this.languageClient.onReady();
-
-    return await this.languageClient.sendRequest<string>("toJSON", { contentOrUri: contentOrUri });
-  }
-
-  /**
-   * Finds the configuration file for a given document URI.
-   *
-   * @param documentUri the URL to a file on disk or http/s.  The passed in file can be an OpenAPI file or an AutoRest configuration file.
-   * @returns async: the URI to the configuration file or an empty string if no configuration could be found.
-   *
-   */
-  public async detectConfigurationFile(documentUri: string): Promise<string> {
-    // don't call before the client is ready.
-    await this.languageClient.onReady();
-
-    return await this.languageClient.sendRequest<string>("detectConfigurationFile", { documentUri: documentUri });
-  }
-
-  /**
-   * Determines if a file is an OpenAPI document or a configuration file in one attempt.
-   *
-   * @param contentOrUri either a URL to a file on disk or http/s, or the content of a file itself.
-   * @returns async:
-   *     true - the file is a configuration file or OpenAPI (2.0) file
-   *     false - the file was not recognized.
-   */
-  public async isSupportedDocument(languageId: string, contentOrUri: string): Promise<boolean> {
-    // don't call before the client is ready.
-    await this.languageClient.onReady();
-
-    return await this.languageClient.sendRequest<boolean>("isSupportedDocument", {
-      languageId: languageId,
-      contentOrUri: contentOrUri,
-    });
-  }
-
-  public async identifyDocument(contentOrUri: string): Promise<DocumentType> {
-    // don't call before the client is ready.
-    await this.languageClient.onReady();
-    return await this.languageClient.sendRequest<DocumentType>("identifyDocument", { contentOrUri: contentOrUri });
-  }
 }

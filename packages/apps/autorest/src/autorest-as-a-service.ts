@@ -5,14 +5,12 @@ import { spawn } from "child_process";
 import { lookup } from "dns";
 import { mkdtempSync, rmdirSync } from "fs";
 import { homedir, tmpdir } from "os";
-
 import { join } from "path";
+import { IAutorestLogger } from "@autorest/common";
 import { AutorestConfiguration } from "@autorest/configuration";
 import { isFile, mkdir, isDirectory } from "@azure-tools/async-io";
 import { Extension, ExtensionManager, Package } from "@azure-tools/extension";
-
 import { Exception, When } from "@azure-tools/tasks";
-
 import * as semver from "semver";
 import { AutorestArgs } from "./args";
 import { VERSION } from "./constants";
@@ -227,6 +225,7 @@ export async function ensureAutorestHome() {
 }
 
 export async function selectVersion(
+  logger: IAutorestLogger,
   requestedVersion: string,
   force: boolean,
   minimumVersion?: string,
@@ -240,20 +239,14 @@ export async function selectVersion(
   }
 
   if (currentVersion) {
-    if (args.debug) {
-      console.log(`The most recent installed version is ${currentVersion.version}`);
-    }
+    logger.debug(`The most recent installed version is ${currentVersion.version}`);
 
     if (requestedVersion === "latest-installed" || (requestedVersion === "latest" && false == (await networkEnabled))) {
-      if (args.debug) {
-        console.log(`requesting current version '${currentVersion.version}'`);
-      }
+      logger.debug(`requesting current version '${currentVersion.version}'`);
       requestedVersion = currentVersion.version;
     }
   } else {
-    if (args.debug) {
-      console.log(`No ${newCorePackage} (or ${oldCorePackage}) is installed.`);
-    }
+    logger.debug(`No ${newCorePackage} (or ${oldCorePackage}) is installed.`);
   }
 
   let selectedVersion: Extension | null = null;
@@ -267,9 +260,7 @@ export async function selectVersion(
   // is the requested version installed?
   if (!selectedVersion || force) {
     if (!force) {
-      if (args.debug) {
-        console.log(`${requestedVersion} was not satisfied directly by a previous installation.`);
-      }
+      logger.debug(`${requestedVersion} was not satisfied directly by a previous installation.`);
     }
 
     // if it's not a file, and the network isn't available, we can't continue.
@@ -336,13 +327,16 @@ export async function selectVersion(
         console.log(`**Installing package** ${corePackageName}@${pkg.version}\n[This will take a few moments...]`);
       }
 
+      // @autorest/core install too fast and this doesn't look good right now as Yarn doesn't give info fast enough.
+      // If we migrate to yarn v2 with the api we might be able to get more info and reenable that
+      // const progress = logger.startProgress("installing core...");
       selectedVersion = await (
         await extensionManager
-      ).installPackage(pkg, force, 5 * 60 * 1000, (installer) =>
-        installer.Message.Subscribe((s, m) => {
-          if (args.debug) console.log(`Installer: ${m}`);
-        }),
-      );
+      ).installPackage(pkg, force, 5 * 60 * 1000, (status) => {
+        // progress.update({ ...status });
+      });
+      // progress.stop();
+
       if (args.debug) {
         console.log(`Extension location: ${selectedVersion.packageJsonPath}`);
       }

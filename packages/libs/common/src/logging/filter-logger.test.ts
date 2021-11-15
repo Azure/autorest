@@ -3,6 +3,7 @@ import { AutorestSyncLogger, FilterLogger, FilterLoggerOptions } from ".";
 describe("FilterLogger", () => {
   const sink = {
     log: jest.fn(),
+    startProgress: jest.fn(),
   };
 
   beforeEach(() => {

@@ -1,11 +1,23 @@
+import { WriteStream } from "tty";
+import progressBar from "cli-progress";
 import { createLogFormatter, LogFormatter } from "./formatter";
 import { AutorestSyncLogger } from "./logger";
-import { LoggerSink, LogInfo } from "./types";
+import { LoggerSink, LogInfo, Progress, ProgressTracker } from "./types";
 
 export interface ConsoleLoggerSinkOptions {
+  /**
+   * Stream to use for output. (@default stdout)
+   */
+  stream?: NodeJS.WritableStream;
+
   format?: "json" | "regular";
   color?: boolean;
   timestamp?: boolean;
+
+  /**
+   * Enable output for non TTY output(e.g. file) for the progress file.
+   */
+  progressNoTTYOutput?: boolean;
 }
 
 /**
@@ -13,15 +25,105 @@ export interface ConsoleLoggerSinkOptions {
  */
 export class ConsoleLoggerSink implements LoggerSink {
   private formatter: LogFormatter;
+  private currentProgressBar: progressBar.MultiBar | undefined;
+  private bars: progressBar.SingleBar[] = [];
+  private pendingLogs: string[] = [];
+  private format: "json" | "regular";
+  private stream: NodeJS.WritableStream;
 
-  public constructor(options: ConsoleLoggerSinkOptions = {}) {
+  public constructor(private options: ConsoleLoggerSinkOptions = {}) {
+    this.stream = options.stream ?? process.stdout;
+    this.format = options.format ?? "regular";
     this.formatter = createLogFormatter(options.format, options);
   }
 
   public log(log: LogInfo) {
     const line = this.formatter.log(log);
-    // eslint-disable-next-line no-console
-    console.log(line);
+    if (this.currentProgressBar) {
+      this.pendingLogs.push(line);
+    } else {
+      this.writeLine(line);
+    }
+  }
+
+  public startProgress(initialName?: string): ProgressTracker {
+    if (this.format === "regular") {
+      return this.startProgressBar(initialName);
+    } else {
+      return NoopProgress;
+    }
+  }
+
+  private startProgressBar(initialName?: string): ProgressTracker {
+    if (this.currentProgressBar === undefined) {
+      this.currentProgressBar = new progressBar.MultiBar(
+        {
+          hideCursor: true,
+          stream: this.stream,
+          noTTYOutput: this.options.progressNoTTYOutput,
+          format: "{name} [{bar}] {percentage}% | {value}/{total}",
+          forceRedraw: true, // without this the bar is flickering,
+        },
+        progressBar.Presets.legacy,
+      );
+    }
+    const multiBar = this.currentProgressBar;
+
+    multiBar.on("redraw-pre", () => {
+      if (this.pendingLogs.length > 0) {
+        if ("clearLine" in this.stream) {
+          (this.stream as WriteStream).clearLine(1);
+        }
+      }
+      while (this.pendingLogs.length > 0) {
+        this.writeLine(this.pendingLogs.shift());
+      }
+    });
+
+    multiBar.on("stop", () => {
+      this.currentProgressBar = undefined;
+      while (this.pendingLogs.length > 0) {
+        this.writeLine(this.pendingLogs.shift());
+      }
+    });
+
+    let bar: progressBar.SingleBar | undefined;
+
+    const update = (progress: Progress) => {
+      const name = progress.name ?? initialName ?? "progress";
+      if (bar === undefined) {
+        bar = multiBar.create(progress.total, 0, { name });
+        this.bars.push(bar);
+      } else {
+        bar.setTotal(progress.total);
+      }
+
+      bar.update(progress.current, { name });
+    };
+
+    const stop = () => {
+      if (bar) {
+        bar.update(bar.getTotal());
+        bar.stop();
+        multiBar.remove(bar);
+        this.bars = this.bars.filter((x) => x !== bar);
+        if (this.bars.length === 0) {
+          multiBar.stop();
+          this.currentProgressBar = undefined;
+        }
+      }
+    };
+
+    return {
+      update,
+      stop,
+    };
+  }
+
+  private writeLine(line: string | undefined) {
+    if (line !== undefined) {
+      this.stream.write(Buffer.from(`${line}\n`));
+    }
   }
 }
 
@@ -34,3 +136,8 @@ export class ConsoleLogger extends AutorestSyncLogger {
     super({ sinks: [new ConsoleLoggerSink(options)] });
   }
 }
+
+const NoopProgress = {
+  update: () => null,
+  stop: () => null,
+};

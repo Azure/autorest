@@ -11,13 +11,12 @@ import {
   color,
   ConsoleLogger,
   FilterLogger,
-  AutorestLogger,
   AutorestSyncLogger,
   Exception,
   IAutorestLogger,
 } from "@autorest/common";
+import { AutorestCliArgs, parseAutorestCliArgs, getLogLevel } from "@autorest/configuration";
 
-import { AutorestCliArgs, parseAutorestCliArgs } from "@autorest/configuration";
 EventEmitter.defaultMaxListeners = 100;
 process.env["ELECTRON_RUN_AS_NODE"] = "1";
 delete process.env["ELECTRON_NO_ATTACH_CONSOLE"];
@@ -41,7 +40,6 @@ import { printAutorestHelp } from "./commands";
 import { Artifact } from "./lib/artifact";
 import { AutoRest, IsOpenApiDocument, Shutdown } from "./lib/autorest-core";
 import { VERSION } from "./lib/constants";
-import { getLogLevel } from "./lib/context";
 
 let verbose = false;
 let debug = false;

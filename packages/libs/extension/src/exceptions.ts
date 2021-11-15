@@ -1,4 +1,5 @@
 import { Extension } from "./extension";
+import { PackageManagerLogEntry } from "./package-manager";
 import { SystemRequirementError } from "./system-requirements";
 
 export class UnresolvedPackageException extends Error {
