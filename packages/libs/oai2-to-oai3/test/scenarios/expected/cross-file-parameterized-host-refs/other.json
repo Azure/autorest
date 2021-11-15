@@ -7,8 +7,8 @@
         "in": "path",
         "description": "Shared endpoint param.",
         "required": true,
-        "x-ms-parameter-location": "client",
         "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client",
         "schema": {
           "default": "https://api.cognitive.microsoft.com",
           "type": "string"

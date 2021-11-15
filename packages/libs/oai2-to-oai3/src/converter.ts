@@ -11,7 +11,14 @@ import {
   createMappingTree,
 } from "@azure-tools/datastore";
 import { JsonPointer, getFromJsonPointer, appendJsonPointer } from "@azure-tools/json";
-import oai3, { EncodingStyle, HttpOperation, JsonType, PathItem, SecurityType } from "@azure-tools/openapi";
+import oai3, {
+  EncodingStyle,
+  HttpOperation,
+  includeXDashKeys,
+  JsonType,
+  PathItem,
+  SecurityType,
+} from "@azure-tools/openapi";
 import { resolveOperationConsumes, resolveOperationProduces } from "./content-type-utils";
 import {
   OpenAPI2Document,
@@ -294,22 +301,7 @@ export class Oai2ToOai3 {
     if ("$ref" in parameterValue) {
       parameterTarget.__set__("$ref", { value: await this.convertReferenceToOai3(parameterValue.$ref), sourcePointer });
     } else {
-      const parameterUnchangedProperties = [
-        "name",
-        "in",
-        "description",
-        "allowEmptyValue",
-        "required",
-        "x-ms-parameter-location",
-        "x-ms-api-version",
-        "x-comment",
-        "x-ms-parameter-grouping",
-        "x-ms-client-name",
-        "x-ms-client-default",
-        "x-ms-client-flatten",
-        "x-ms-client-request-id",
-        "x-ms-header-collection-prefix",
-      ];
+      const parameterUnchangedProperties = ["name", "in", "description", "allowEmptyValue", "required"];
 
       for (const key of parameterUnchangedProperties) {
         if (parameterValue[key] !== undefined) {
@@ -325,6 +317,17 @@ export class Oai2ToOai3 {
             value: parameterValue["x-ms-skip-url-encoding"],
             sourcePointer,
           });
+        }
+      }
+
+      /**
+       * List of extension properties that shouldn't just be passed through.
+       */
+      const extensionPropertiesCustom = new Set(["x-ms-skip-url-encoding", "x-ms-original", "x-ms-enum"]);
+
+      for (const key of includeXDashKeys(parameterValue)) {
+        if (parameterValue[key] !== undefined && !extensionPropertiesCustom.has(key)) {
+          parameterTarget.__set__(key, { value: parameterValue[key], sourcePointer });
         }
       }
 
