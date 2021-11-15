@@ -6,7 +6,6 @@
 import { ChildProcess, spawn } from "child_process";
 import { homedir, tmpdir } from "os";
 import { basename, delimiter, dirname, extname, isAbsolute, join, normalize, resolve } from "path";
-import { off } from "process";
 import { exists, isDirectory, isFile, mkdir, readdir, readFile, rmdir } from "@azure-tools/async-io";
 import { CriticalSection, Delay, Exception, Mutex, shallowCopy, SharedLock } from "@azure-tools/tasks";
 import { resolve as npmResolvePackage } from "npm-package-arg";

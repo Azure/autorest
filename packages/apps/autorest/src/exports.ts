@@ -15,6 +15,7 @@ import { LanguageClient } from "vscode-languageclient";
 
 // exports the public AutoRest definitions
 import { runCoreWithRequire, resolveEntrypoint, ensureAutorestHome, selectVersion } from "./autorest-as-a-service";
+import { IAutorestLogger } from "@autorest/common";
 export { Message, Artifact, GenerationResults, IFileSystem } from "autorest-core";
 
 // This is needed currently in autorest-as-service when starting @autorest/core out of proc for @autorest/core version older than 3.6.0
@@ -77,29 +78,6 @@ let busy = false;
 let modulePath: string | undefined = undefined;
 
 /**
- * Returns the language service entrypoint for autorest-core, bootstrapping the core if necessary
- *
- * If initialize has already been called, then it returns the version that was initialized, regardless of parameters
- *
- * @param requestedVersion an npm package reference for the version requested @see {@link https://docs.npmjs.com/cli/install#description}
- *
- * @param minimumVersion - a semver string representing the lowest autorest- core version that is considered acceptable.
- *
- * @see { @link initialize }
- */
-export async function getLanguageServiceEntrypoint(
-  requestedVersion = "latest-installed",
-  minimumVersion?: string,
-): Promise<string | undefined> {
-  if (!modulePath && !busy) {
-    // if we haven't already got autorest-core, let's do that now with the default settings.
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    await initialize(requestedVersion, minimumVersion);
-  }
-  return resolveEntrypoint(modulePath!, "language-service");
-}
-
-/**
  * Returns the command-line application entrypoint for autorest-core, bootstrapping the core if necessary
  *
  * If initialize has already been called, then it returns the version that was initialized, regardless of parameters
@@ -111,13 +89,14 @@ export async function getLanguageServiceEntrypoint(
  * @see {@link initialize}
  * */
 export async function getApplicationEntrypoint(
+  logger: IAutorestLogger,
   requestedVersion = "latest-installed",
   minimumVersion?: string,
 ): Promise<string | undefined> {
   if (!modulePath && !busy) {
     // if we haven't already got autorest-core, let's do that now with the default settings.
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    await initialize(requestedVersion, minimumVersion);
+    await initialize(logger, requestedVersion, minimumVersion);
   }
   return resolveEntrypoint(modulePath!, "app");
 }
@@ -137,7 +116,11 @@ export async function getApplicationEntrypoint(
  *
  * @param minimumVersion - a semver string representing the lowest autorest-core version that is considered acceptable.
  */
-export async function initialize(requestedVersion = "latest-installed", minimumVersion?: string) {
+export async function initialize(
+  logger: IAutorestLogger,
+  requestedVersion = "latest-installed",
+  minimumVersion?: string,
+) {
   if (modulePath) {
     return;
   }
@@ -166,7 +149,7 @@ export async function initialize(requestedVersion = "latest-installed", minimumV
 
     // logic to resolve and optionally install a autorest core package.
     // will throw if it's not doable.
-    const selectedVersion = await selectVersion(requestedVersion, false, minimumVersion);
+    const selectedVersion = await selectVersion(logger, requestedVersion, false, minimumVersion);
     modulePath = await resolveEntrypoint(await selectedVersion.modulePath, "module");
     if (!modulePath) {
       rejectAutoRest(
@@ -180,10 +163,10 @@ export async function initialize(requestedVersion = "latest-installed", minimumV
 }
 
 /** Bootstraps the core module if it's not already done and returns the AutoRest class. */
-async function ensureCoreLoaded(): Promise<IAutoRest> {
+async function ensureCoreLoaded(logger: IAutorestLogger): Promise<IAutoRest> {
   if (!modulePath && !busy) {
     // if we haven't already got autorest-core, let's do that now with the default settings.
-    await initialize();
+    await initialize(logger);
   }
 
   if (modulePath && !coreModule) {
@@ -209,10 +192,14 @@ async function ensureCoreLoaded(): Promise<IAutoRest> {
  *
  * @param configFileOrFolderUri - a URI pointing to the folder or autorest configuration file
  */
-export async function create(fileSystem?: IFileSystem, configFileOrFolderUri?: string): Promise<AutoRest> {
+export async function create(
+  logger: IAutorestLogger,
+  fileSystem?: IFileSystem,
+  configFileOrFolderUri?: string,
+): Promise<AutoRest> {
   if (!modulePath && !busy) {
     // if we haven't already got autorest-core, let's do that now with the default settings.
-    await initialize();
+    await initialize(logger);
   }
 
   if (modulePath && !coreModule) {
@@ -235,8 +222,8 @@ export async function create(fileSystem?: IFileSystem, configFileOrFolderUri?: s
  *
  * @param content - the document content to evaluate
  */
-export async function isOpenApiDocument(content: string): Promise<boolean> {
-  await ensureCoreLoaded();
+export async function isOpenApiDocument(logger: IAutorestLogger, content: string): Promise<boolean> {
+  await ensureCoreLoaded(logger);
   return coreModule.IsOpenApiDocument(content);
 }
 
@@ -250,8 +237,8 @@ export async function isOpenApiDocument(content: string): Promise<boolean> {
  *
  * @see {@link DocumentType}
  */
-export async function identifyDocument(content: string): Promise<DocumentType> {
-  await ensureCoreLoaded();
+export async function identifyDocument(logger: IAutorestLogger, content: string): Promise<DocumentType> {
+  await ensureCoreLoaded(logger);
   return await coreModule.IdentifyDocument(content);
 }
 
@@ -261,8 +248,8 @@ export async function identifyDocument(content: string): Promise<DocumentType> {
  *
  * @returns the content as a JSON string (not a JSON DOM)
  */
-export async function toJSON(content: string): Promise<string> {
-  await ensureCoreLoaded();
+export async function toJSON(logger: IAutorestLogger, content: string): Promise<string> {
+  await ensureCoreLoaded(logger);
   return await coreModule.LiterateToJson(content);
 }
 

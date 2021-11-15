@@ -17,6 +17,7 @@ import * as semver from "semver";
 import { AutorestArgs } from "./args";
 import { VERSION } from "./constants";
 import { parseMemory } from "./utils";
+import { AutorestLogger, IAutorestLogger } from "@autorest/common";
 
 const inWebpack = typeof __webpack_require__ === "function";
 const nodeRequire = inWebpack ? __non_webpack_require__! : require;
@@ -227,6 +228,7 @@ export async function ensureAutorestHome() {
 }
 
 export async function selectVersion(
+  logger: IAutorestLogger,
   requestedVersion: string,
   force: boolean,
   minimumVersion?: string,
@@ -240,20 +242,14 @@ export async function selectVersion(
   }
 
   if (currentVersion) {
-    if (args.debug) {
-      console.log(`The most recent installed version is ${currentVersion.version}`);
-    }
+    logger.debug(`The most recent installed version is ${currentVersion.version}`);
 
     if (requestedVersion === "latest-installed" || (requestedVersion === "latest" && false == (await networkEnabled))) {
-      if (args.debug) {
-        console.log(`requesting current version '${currentVersion.version}'`);
-      }
+      logger.debug(`requesting current version '${currentVersion.version}'`);
       requestedVersion = currentVersion.version;
     }
   } else {
-    if (args.debug) {
-      console.log(`No ${newCorePackage} (or ${oldCorePackage}) is installed.`);
-    }
+    logger.debug(`No ${newCorePackage} (or ${oldCorePackage}) is installed.`);
   }
 
   let selectedVersion: Extension | null = null;
@@ -267,9 +263,7 @@ export async function selectVersion(
   // is the requested version installed?
   if (!selectedVersion || force) {
     if (!force) {
-      if (args.debug) {
-        console.log(`${requestedVersion} was not satisfied directly by a previous installation.`);
-      }
+      logger.debug(`${requestedVersion} was not satisfied directly by a previous installation.`);
     }
 
     // if it's not a file, and the network isn't available, we can't continue.
@@ -336,11 +330,15 @@ export async function selectVersion(
         console.log(`**Installing package** ${corePackageName}@${pkg.version}\n[This will take a few moments...]`);
       }
 
+      const progress = logger.startProgress("installing...");
+
       selectedVersion = await (
         await extensionManager
-      ).installPackage(pkg, force, 5 * 60 * 1000, (installer) => {
-        // TODO-TIM log here progress?
+      ).installPackage(pkg, force, 5 * 60 * 1000, (status) => {
+        progress.update({ ...status });
       });
+      progress.stop();
+
       if (args.debug) {
         console.log(`Extension location: ${selectedVersion.packageJsonPath}`);
       }

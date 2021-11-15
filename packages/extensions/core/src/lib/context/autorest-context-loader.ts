@@ -10,6 +10,7 @@ import {
   AutorestConfiguration,
   AutorestRawConfiguration,
   ConfigurationLoader,
+  getLogLevel,
   getNestedConfiguration,
   mergeConfigurations,
   ResolvedExtension,
@@ -21,7 +22,7 @@ import { last } from "lodash";
 import { AppRoot } from "../constants";
 import { AutoRestExtension } from "../pipeline/plugin-endpoint";
 import { StatsCollector } from "../stats";
-import { AutorestContext, getLogLevel } from "./autorest-context";
+import { AutorestContext } from "./autorest-context";
 import { MessageEmitter } from "./message-emitter";
 
 const inWebpack = typeof __webpack_require__ === "function";

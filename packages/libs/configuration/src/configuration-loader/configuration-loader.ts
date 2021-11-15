@@ -1,13 +1,7 @@
 import { AutorestLogger, OperationAbortedException } from "@autorest/common";
 import { exists, filePath } from "@azure-tools/async-io";
 import { DataStore, IFileSystem, RealFileSystem, CachingFileSystem } from "@azure-tools/datastore";
-import {
-  Extension,
-  ExtensionManager,
-  LocalExtension,
-  PackageInstallationException,
-  PackageInstallProgress,
-} from "@azure-tools/extension";
+import { Extension, ExtensionManager, LocalExtension, PackageInstallProgress } from "@azure-tools/extension";
 import { createFileUri, resolveUri, simplifyUri, fileUriToPath } from "@azure-tools/uri";
 import { last } from "lodash";
 import untildify from "untildify";
@@ -50,6 +44,11 @@ export interface ConfigurationLoaderOptions {
    */
   extensionManager?: ExtensionManager;
 }
+
+/**
+ * Timeout in ms.
+ */
+const InstallPackageTimeout = 5 * 60 * 1000;
 
 /**
  * Class handling the loading of an autorest configuration.
@@ -294,11 +293,8 @@ export class ConfigurationLoader {
           const extension = await extMgr.installPackage(
             pack,
             false,
-            5 * 60 * 1000,
+            InstallPackageTimeout,
             (status: PackageInstallProgress) => {
-              if (status.current % 100 === 0) {
-                this.logger.debug("Ping " + status.current);
-              }
               progress.update({ ...status });
             },
           );

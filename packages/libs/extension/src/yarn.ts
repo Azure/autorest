@@ -125,9 +125,6 @@ export class Yarn implements PackageManager {
         try {
           const data = JSON.parse(line);
           onYarnEvent?.(data);
-          // if (data.type !== "progressTick") {
-          //   console.error("Foo", data);
-          // }
         } catch (e) {
           // NOOP
         }

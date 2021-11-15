@@ -17,6 +17,7 @@ import {
   AutorestConfiguration,
   arrayOf,
   extendAutorestConfiguration,
+  getLogLevel,
 } from "@autorest/configuration";
 
 import { DataStore, CachingFileSystem } from "@azure-tools/datastore";
@@ -253,10 +254,6 @@ export class AutorestContext implements IAutorestLogger {
   public protectFiles(filename: string) {
     this.messageEmitter.ProtectFile.Dispatch(filename);
   }
-}
-
-export function getLogLevel(config: AutorestNormalizedConfiguration): LogLevel {
-  return config.debug ? "debug" : config.verbose ? "verbose" : config.level ?? "information";
 }
 
 export function getLogSuppressions(config: AutorestConfiguration): LogSuppression[] {
