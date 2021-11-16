@@ -101,7 +101,7 @@ function validateParamsAreCompatible(
     const currentParam = currentParamsMap.get(name);
     if (currentParam === undefined) {
       fail(
-        `Cannot merge older version with this spec. The parameternamed '${name}' for operation '${operationName}' is not found in the current spec.`,
+        `Cannot merge older version with this spec. The parameter named '${name}' for operation '${operationName}' is not found in the current spec.`,
         ["ModelerMerger/ParamRemoved"],
       );
     } else if (!areParamTheSame(currentParam, previousParam)) {
@@ -124,7 +124,7 @@ function validateParamsAreCompatible(
     }
   }
 
-  return failed;
+  return !failed;
 }
 
 function groupParamsByName(params: Parameter[]): Map<string, Parameter> {
