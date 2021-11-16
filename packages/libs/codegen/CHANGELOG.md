@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/codegen
 
-This log was last generated on Thu, 14 Oct 2021 23:03:29 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Nov 2021 17:02:17 GMT and should not be manually modified.
+
+## 2.9.0
+Tue, 16 Nov 2021 17:02:17 GMT
+
+### Minor changes
+
+- **Removed** `shadow` and replace with `shadowPosition`
 
 ## 2.8.0
 Thu, 14 Oct 2021 23:03:29 GMT

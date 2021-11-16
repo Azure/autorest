@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/openapi
 
-This log was last generated on Wed, 08 Sep 2021 15:39:22 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Nov 2021 17:02:17 GMT and should not be manually modified.
+
+## 3.2.2
+Tue, 16 Nov 2021 17:02:17 GMT
+
+### Patches
+
+- Tweak types for description next to parameter
 
 ## 3.2.1
 Wed, 08 Sep 2021 15:39:22 GMT

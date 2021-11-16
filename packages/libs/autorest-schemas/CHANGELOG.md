@@ -1,6 +1,13 @@
 # Change Log - @autorest/schemas
 
-This log was last generated on Fri, 17 Sep 2021 17:52:01 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Nov 2021 17:02:17 GMT and should not be manually modified.
+
+## 1.3.2
+Tue, 16 Nov 2021 17:02:17 GMT
+
+### Patches
+
+- **Remove** empty version validation from schema validator
 
 ## 1.3.1
 Fri, 17 Sep 2021 17:52:01 GMT

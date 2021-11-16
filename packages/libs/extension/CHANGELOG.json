@@ -2,6 +2,18 @@
   "name": "@azure-tools/extension",
   "entries": [
     {
+      "version": "3.4.0",
+      "tag": "@azure-tools/extension_v3.4.0",
+      "date": "Tue, 16 Nov 2021 17:02:17 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Added** Progress tracking for installation and imrpvoed error reporting"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.3.1",
       "tag": "@azure-tools/extension_v3.3.1",
       "date": "Mon, 19 Jul 2021 18:08:46 GMT",

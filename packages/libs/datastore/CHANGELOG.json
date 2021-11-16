@@ -2,6 +2,31 @@
   "name": "@azure-tools/datastore",
   "entries": [
     {
+      "version": "4.6.0",
+      "tag": "@azure-tools/datastore_v4.6.0",
+      "date": "Tue, 16 Nov 2021 17:02:17 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Added support for identity sourcemap type"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "**Fix** Performance issue with not reusing DataHandle causing multiple instance of sourcemaps to be loaded at the same time"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.8.0` to `~2.9.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/json\" from `~1.2.0` to `~1.2.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.5.1",
       "tag": "@azure-tools/datastore_v4.5.1",
       "date": "Thu, 14 Oct 2021 23:03:29 GMT",

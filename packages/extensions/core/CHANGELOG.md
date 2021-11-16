@@ -1,6 +1,21 @@
 # Change Log - @autorest/core
 
-This log was last generated on Mon, 11 Oct 2021 21:01:13 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Nov 2021 17:02:17 GMT and should not be manually modified.
+
+## 3.7.0
+Tue, 16 Nov 2021 17:02:17 GMT
+
+### Minor changes
+
+- **Updated** `--help` to use configuration schema and be consistent
+- **Added** Support for sourcemap in autorest extensions
+- Uptake change to @autorest/extension package.
+
+### Patches
+
+- **Fix** --help crash
+- **Internal** Remove use of extension method `.last`
+- **Fix** Nullable on certain properties during tree shaking
 
 ## 3.6.6
 Mon, 11 Oct 2021 21:01:13 GMT

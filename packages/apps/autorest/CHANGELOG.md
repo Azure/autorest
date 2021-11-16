@@ -1,6 +1,14 @@
 # Change Log - autorest
 
-This log was last generated on Fri, 15 Oct 2021 16:48:57 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Nov 2021 17:02:17 GMT and should not be manually modified.
+
+## 3.5.0
+Tue, 16 Nov 2021 17:02:17 GMT
+
+### Minor changes
+
+- **Remove** legacy code
+- Uptake change to @autorest/extension package.
 
 ## 3.4.2
 Tue, 15 Oct 2021 17:00:00 GMT

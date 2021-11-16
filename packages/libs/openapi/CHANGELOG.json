@@ -2,6 +2,18 @@
   "name": "@azure-tools/openapi",
   "entries": [
     {
+      "version": "3.2.2",
+      "tag": "@azure-tools/openapi_v3.2.2",
+      "date": "Tue, 16 Nov 2021 17:02:17 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Tweak types for description next to parameter"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.2.1",
       "tag": "@azure-tools/openapi_v3.2.1",
       "date": "Wed, 08 Sep 2021 15:39:22 GMT",

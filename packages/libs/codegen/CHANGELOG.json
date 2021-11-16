@@ -2,6 +2,18 @@
   "name": "@azure-tools/codegen",
   "entries": [
     {
+      "version": "2.9.0",
+      "tag": "@azure-tools/codegen_v2.9.0",
+      "date": "Tue, 16 Nov 2021 17:02:17 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Removed** `shadow` and replace with `shadowPosition`"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.8.0",
       "tag": "@azure-tools/codegen_v2.8.0",
       "date": "Thu, 14 Oct 2021 23:03:29 GMT",

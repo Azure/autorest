@@ -1,6 +1,13 @@
 # Change Log - @autorest/extension-base
 
-This log was last generated on Thu, 14 Oct 2021 23:03:29 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Nov 2021 17:02:17 GMT and should not be manually modified.
+
+## 3.4.0
+Tue, 16 Nov 2021 17:02:17 GMT
+
+### Minor changes
+
+- **Breaking** updated logging api to provide sourcemap support 
 
 ## 3.3.2
 Thu, 14 Oct 2021 23:03:29 GMT
