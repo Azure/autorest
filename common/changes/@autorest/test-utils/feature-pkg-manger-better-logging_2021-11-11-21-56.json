@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/test-utils",
+      "comment": "Uptake change to logger",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/test-utils",
+  "email": "tiguerin@microsoft.com"
+}

@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "autorest",
+      "comment": "Uptake change to @autorest/extension package.",
+      "type": "minor"
+    }
+  ],
+  "packageName": "autorest",
+  "email": "tiguerin@microsoft.com"
+}
