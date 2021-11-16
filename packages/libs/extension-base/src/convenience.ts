@@ -3,21 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { WriteFileOptions } from "fs";
 import { createSandbox, deserialize, ShadowedNodePath } from "@azure-tools/codegen";
 import { Schema, DEFAULT_SCHEMA } from "js-yaml";
-import {
-  Channel,
-  Message,
-  Mapping,
-  RawSourceMap,
-  JsonPointerSegments,
-  Position,
-  PathPosition,
-  SourceLocation,
-  LogSource,
-} from "./types";
-import { AutorestExtensionHost } from ".";
+import { AutorestExtensionHost, WriteFileOptions } from "./autorest-extension-host";
+import { Channel, Message, SourceLocation, LogSource } from "./types";
 
 const safeEval = createSandbox();
 
@@ -77,7 +66,7 @@ export class Session<TInputModel> {
 
     // fall back to the configuration
     if (value == null || value === undefined) {
-      value = await this.service.GetValue(key);
+      value = await this.service.getValue(key);
     }
 
     // try as a safe eval execution.

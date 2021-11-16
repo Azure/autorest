@@ -1,5 +1,5 @@
-import { Session, Host, startSession, JsonPointerSegments } from "@autorest/extension-base";
-import { ShadowedNodePath, shadowPosition } from "@azure-tools/codegen";
+import { Session, AutorestExtensionHost, startSession, JsonPointerSegments } from "@autorest/extension-base";
+import { shadowPosition } from "@azure-tools/codegen";
 import {
   Model as oai3,
   Refable,
@@ -16,8 +16,8 @@ import { Interpretations } from "../modeler/interpretations";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
 import { DuplicateSchemaMerger } from "./duplicate-schema-merger";
 
-export async function processRequest(host: Host) {
-  const debug = (await host.GetValue("debug")) || false;
+export async function processRequest(host: AutorestExtensionHost) {
+  const debug = (await host.getValue("debug")) || false;
 
   try {
     const session = await startSession<oai3>(host);
@@ -34,13 +34,16 @@ export async function processRequest(host: Host) {
       session.checkpoint();
     }
 
-    host.WriteFile(
-      "prechecked-openapi-document.yaml",
-      JSON.stringify(result, null, 2),
-      undefined,
-      "prechecked-openapi-document",
-    );
-    host.WriteFile("original-openapi-document.yaml", JSON.stringify(input, null, 2), undefined, "openapi-document");
+    host.writeFile({
+      filename: "prechecked-openapi-document.yaml",
+      content: JSON.stringify(result, null, 2),
+      artifactType: "prechecked-openapi-document",
+    });
+    host.writeFile({
+      filename: "original-openapi-document.yaml",
+      content: JSON.stringify(input, null, 2),
+      artifactType: "openapi-document",
+    });
   } catch (error: any) {
     if (debug) {
       // eslint-disable-next-line no-console
