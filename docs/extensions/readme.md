@@ -2,7 +2,7 @@
 
 ### Introduction
 
-The following documents describes AutoRest specific vendor extensions for [OpenAPI 2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md) schema. Some of the extensions are only metadatas and would not trigger code generator update, some are applicable to ARM APIs only. Code generation impact and support may vary per language.
+The following documents describes AutoRest specific vendor extensions for [OpenAPI 2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md) schema. Code generation impact and support may vary per language. Some of the extensions are applicable to ARM APIs only, some are only metadatas and would not trigger code generator update.
 
 ### Metadata extensions
 
@@ -44,7 +44,7 @@ Those extensions are defined as additional description of the RestAPI, and do no
 
 ## x-ms-secret
 
-This extension is used to annotate the secret property. The value type is boolean and the allowed value is either true or false. Secrets should never expose on a GET.
+This extension is used to annotate the secret property. The value type is boolean and the allowed value is either true or false. Secrets should never expose on a GET. If a secret does need to be returned after the fact, a POST api can be used to allow for granular RBAC.
  
 **Rule**
 
