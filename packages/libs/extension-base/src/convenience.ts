@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { WriteFileOptions } from "fs";
 import { createSandbox, deserialize, ShadowedNodePath } from "@azure-tools/codegen";
 import { Schema, DEFAULT_SCHEMA } from "js-yaml";
 import {
@@ -16,17 +17,17 @@ import {
   SourceLocation,
   LogSource,
 } from "./types";
-import { Host } from ".";
+import { AutorestExtensionHost } from ".";
 
 const safeEval = createSandbox();
 
-async function getModel<T>(service: Host, yamlSchema: Schema = DEFAULT_SCHEMA, artifactType?: string) {
-  const files = await service.ListInputs(artifactType);
+async function getModel<T>(service: AutorestExtensionHost, yamlSchema: Schema = DEFAULT_SCHEMA, artifactType?: string) {
+  const files = await service.listInputs(artifactType);
   const filename = files[0];
   if (files.length === 0) {
     throw new Error("Inputs missing.");
   }
-  const content = await service.ReadFile(filename);
+  const content = await service.readFile(filename);
 
   return {
     filename,
@@ -41,7 +42,7 @@ export class Session<TInputModel> {
   model!: TInputModel;
   filename!: string;
 
-  /* @internal */ constructor(public readonly service: Host) {}
+  /* @internal */ constructor(public readonly service: AutorestExtensionHost) {}
 
   /* @internal */ async init<TProject>(project?: TProject, schema: Schema = DEFAULT_SCHEMA, artifactType?: string) {
     const m = await getModel<TInputModel>(this.service, schema, artifactType);
@@ -56,7 +57,7 @@ export class Session<TInputModel> {
 
   /* @internal */ async initContext<TP>(project?: TP) {
     this.context = this.context || {
-      $config: await this.service.GetValue(""),
+      $config: await this.service.getValue(""),
       $project: project,
       $lib: {
         path: require("path"),
@@ -66,7 +67,7 @@ export class Session<TInputModel> {
   }
 
   async readFile(filename: string): Promise<string> {
-    return this.service.ReadFile(filename);
+    return this.service.readFile(filename);
   }
 
   async getValue<V>(key: string, defaultValue?: V): Promise<V> {
@@ -105,48 +106,38 @@ export class Session<TInputModel> {
   }
 
   async listInputs(artifactType?: string | undefined): Promise<string[]> {
-    return this.service.ListInputs(artifactType);
+    return this.service.listInputs(artifactType);
   }
 
   async protectFiles(path: string): Promise<void> {
-    return this.service.ProtectFiles(path);
-  }
-  writeFile(
-    filename: string,
-    content: string,
-    sourceMap?: Array<Mapping> | RawSourceMap | undefined,
-    artifactType?: string | undefined,
-  ): void {
-    return this.service.WriteFile(filename, content, sourceMap, artifactType);
+    return this.service.protectFiles(path);
   }
 
-  message(message: Message): void {
+  public writeFile(options: WriteFileOptions): void {
+    return this.service.writeFile(options);
+  }
+
+  public message(message: Message): void {
     if (message.Channel === Channel.Debug && this._debug === false) {
       return;
     }
     if (message.Channel === Channel.Verbose && this._verbose === false) {
       return;
     }
-    return this.service.Message(message);
+    return this.service.message(message);
   }
 
-  updateConfigurationFile(filename: string, content: string): void {
-    return this.service.UpdateConfigurationFile(filename, content);
-  }
-  async getConfigurationFile(filename: string): Promise<string> {
-    return this.service.GetConfigurationFile(filename);
-  }
   protected errorCount = 0;
 
-  protected static async getModel<T>(service: Host) {
-    const files = await service.ListInputs();
+  protected static async getModel<T>(service: AutorestExtensionHost) {
+    const files = await service.listInputs();
     const filename = files[0];
     if (files.length === 0) {
       throw new Error("Inputs missing.");
     }
     return {
       filename,
-      model: deserialize<T>(await service.ReadFile(filename), filename),
+      model: deserialize<T>(await service.readFile(filename), filename),
     };
   }
 
@@ -247,7 +238,7 @@ export class Session<TInputModel> {
 }
 
 export async function startSession<TInputModel>(
-  service: Host,
+  service: AutorestExtensionHost,
   project?: any,
   schema: Schema = DEFAULT_SCHEMA,
   artifactType?: string,

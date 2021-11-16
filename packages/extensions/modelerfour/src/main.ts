@@ -8,18 +8,18 @@ import { processRequest as preNamer } from "./prenamer/plugin-prenamer";
 import { processRequest as prechecker } from "./quality-precheck/prechecker";
 
 export async function initializePlugins(pluginHost: AutoRestExtension) {
-  pluginHost.Add("prechecker", prechecker);
-  pluginHost.Add("modelerfour", modelerfour);
-  pluginHost.Add("grouper", grouper);
-  pluginHost.Add("pre-namer", preNamer);
-  pluginHost.Add("flattener", flattener);
-  pluginHost.Add("checker", checker);
+  pluginHost.add("prechecker", prechecker);
+  pluginHost.add("modelerfour", modelerfour);
+  pluginHost.add("grouper", grouper);
+  pluginHost.add("pre-namer", preNamer);
+  pluginHost.add("flattener", flattener);
+  pluginHost.add("checker", checker);
 }
 
 async function main() {
   const pluginHost = new AutoRestExtension();
   await initializePlugins(pluginHost);
-  await pluginHost.Run();
+  await pluginHost.run();
 }
 
 main().catch((e) => {
