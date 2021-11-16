@@ -23,7 +23,7 @@ export async function processRequest(host: AutorestExtensionHost) {
     const session = await startSession<oai3>(host);
 
     // process
-    const plugin = await new QualityPreChecker(session).init();
+    const plugin = new QualityPreChecker(session);
 
     const input = plugin.input;
     // go!
@@ -55,19 +55,13 @@ export async function processRequest(host: AutorestExtensionHost) {
 
 export class QualityPreChecker {
   input: oai3;
-  options: ModelerFourOptions = {};
+  private options: ModelerFourOptions;
   protected interpret: Interpretations;
 
   constructor(protected session: Session<oai3>) {
     this.input = shadowPosition(session.model); // shadow(session.model, filename);
+    this.options = this.session.configuration.modelerfour;
     this.interpret = new Interpretations(session);
-  }
-
-  async init() {
-    // get our configuration for this run.
-    this.options = await this.session.getValue("modelerfour", {});
-
-    return this;
   }
 
   private resolve<T>(item: Refable<T>): Dereferenced<T> {

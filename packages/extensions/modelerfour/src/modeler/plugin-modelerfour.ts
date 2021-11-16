@@ -13,7 +13,7 @@ export async function processRequest(host: AutorestExtensionHost) {
   const debug = (await host.getValue("debug")) || false;
 
   try {
-    const session = await startSession<OpenAPI.Model>(host, undefined, undefined, "prechecked-openapi-document");
+    const session = await startSession<OpenAPI.Model>(host, undefined, "prechecked-openapi-document");
     const options = <any>await session.getValue("modelerfour", {});
 
     // process

@@ -12,7 +12,7 @@ export async function processRequest(host: AutorestExtensionHost) {
   const debug = (await host.getValue("debug")) || false;
 
   try {
-    const session = await startSession<CodeModel>(host, {}, codeModelSchema);
+    const session = await startSession<CodeModel>(host, codeModelSchema);
     const options = <any>await session.getValue("modelerfour", {});
 
     // process

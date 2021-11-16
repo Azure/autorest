@@ -1,7 +1,6 @@
 import { createMessageConnection, RequestType0, RequestType2 } from "vscode-jsonrpc";
-import { AutorestExtensionHost, IAutoRestPluginInitiatorTypes } from "./autorest-extension-host";
-import { Message } from "./types";
-import { Channel } from ".";
+import { AutorestExtensionHost } from "./autorest-extension-host";
+import { Channel } from "./types";
 
 namespace IAutoRestPluginTargetTypes {
   export const GetPluginNames = new RequestType0<Array<string>, Error, void>("GetPluginNames");
