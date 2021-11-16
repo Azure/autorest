@@ -1,6 +1,5 @@
 dependencies:
   '@azure-tools/async-io': 3.0.254
-  '@azure-tools/eventing': 3.0.253
   '@azure-tools/object-comparison': 3.0.253
   '@azure-tools/tasks': 3.0.255
   '@azure-tools/uri': 3.1.1
@@ -30,6 +29,7 @@ dependencies:
   '@rush-temp/test-utils': file:projects/test-utils.tgz_prettier@2.3.2+ts-node@9.1.1
   '@rush-temp/yaml': file:projects/yaml.tgz_prettier@2.3.2+ts-node@9.1.1
   '@types/body-parser': 1.19.1
+  '@types/cli-progress': 3.9.2
   '@types/command-exists': 1.2.0
   '@types/commonmark': 0.27.5
   '@types/deep-equal': 1.0.1
@@ -58,6 +58,7 @@ dependencies:
   ajv-formats: 2.1.1
   body-parser: 1.19.0
   chalk: 4.1.2
+  cli-progress: 3.9.1
   command-exists: 1.2.9
   commonmark: 0.27.0
   compare-versions: 3.6.0
@@ -968,6 +969,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-a6bTJ21vFOGIkwM0kzh9Yr89ziVxq4vYH2fQ6N8AeipEzai/cFK6aGMArIkUeIdRIgpwQa+2bXiLuUJCpSf2Cg==
+  /@types/cli-progress/3.9.2:
+    dependencies:
+      '@types/node': 14.14.45
+    dev: false
+    resolution:
+      integrity: sha512-VO5/X5Ij+oVgEVjg5u0IXVe3JQSKJX+Ev8C5x+0hPy0AuWyW+bF8tbajR7cPFnDGhs7pidztcac+ccrDtk5teA==
   /@types/command-exists/1.2.0:
     dev: false
     resolution:
@@ -1118,10 +1125,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-DssMqTV9UnnoxDWu959sDLZzfvqCF0qDNRjaWeYSui9xkFe61kKo4l1TWNTQONpuXEm+gLMRvdlzvNHBamzmEw==
-  /@types/node/16.11.6:
+  /@types/node/16.11.7:
     dev: false
     resolution:
-      integrity: sha512-ua7PgUoeQFjmWPcoo9khiPum3Pd60k4/2ZGXt18sm2Slk0W0xZTqt5Y0Ny1NyBiN1EVQ/+FaF9NcY4Qe6rwk5w==
+      integrity: sha512-QB5D2sqfSjCmTuWcBWyJ+/44bcjO7VbjSbOE0ucoVbAsSNQc4Lt6QkgkVXkTDwkL4z/beecZNDvVX15D4P8Jbw==
   /@types/normalize-package-data/2.4.1:
     dev: false
     resolution:
@@ -2271,6 +2278,15 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-jffHquUf02h06PjQW5GAvBGj/tc=
+  /cli-progress/3.9.1:
+    dependencies:
+      colors: 1.4.0
+      string-width: 4.2.2
+    dev: false
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-AXxiCe2a0Lm0VN+9L0jzmfQSkcZm5EYspfqXKaSIQKqIk+0hnkZ3/v1E9B39mkD6vYhKih3c/RPsJBSwq9O99Q==
   /cliui/5.0.0:
     dependencies:
       string-width: 3.1.0
@@ -8293,14 +8309,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-WHXLtFDcIRwoqaiu0elAoZ/AmI+SwwDafnPKjgJmdwJ2gRVO0jMKBt88rV2liT/c6MTsXyuWbGFiHe9MRddWJw==
-  /ts-node/10.4.0_2c72a0939282779ef5fe9881d62c4ae1:
+  /ts-node/10.4.0_14ac04250daa6adbbcd3191c2a9ff551:
     dependencies:
       '@cspotcode/source-map-support': 0.7.0
       '@tsconfig/node10': 1.0.8
       '@tsconfig/node12': 1.0.9
       '@tsconfig/node14': 1.0.1
       '@tsconfig/node16': 1.0.2
-      '@types/node': 16.11.6
+      '@types/node': 16.11.7
       acorn: 8.5.0
       acorn-walk: 8.2.0
       arg: 4.1.3
@@ -8458,10 +8474,10 @@ packages:
   /typescript-json-schema/0.51.0:
     dependencies:
       '@types/json-schema': 7.0.9
-      '@types/node': 16.11.6
+      '@types/node': 16.11.7
       glob: 7.1.7
       json-stable-stringify: 1.0.1
-      ts-node: 10.4.0_2c72a0939282779ef5fe9881d62c4ae1
+      ts-node: 10.4.0_14ac04250daa6adbbcd3191c2a9ff551
       typescript: 4.2.4
       yargs: 17.2.1
     dev: false
@@ -9153,6 +9169,7 @@ packages:
       cpy-cli: 2.0.0
       eslint: 7.32.0
       eslint-plugin-import: 2.24.2_eslint@7.32.0
+      eslint-plugin-jest: 24.3.7_80324fdcea7a89344953345da3522ce6
       eslint-plugin-node: 11.1.0_eslint@7.32.0
       eslint-plugin-prettier: 3.4.1_eslint@7.32.0+prettier@2.3.2
       eslint-plugin-unicorn: 33.0.1_eslint@7.32.0
@@ -9176,7 +9193,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-MpNqbnbGTn2/x4A+5vzCiGLqBrb3oVtjif9njDDo80AMkwVFDi+/2jkQ7PPOWK22W9am3CPEdeZqBRwjM2lqtA==
+      integrity: sha512-NAOmeynox9HXPyFxwnQWc7itRw7+F9dkEgZNwxx7VisaHpDDsC3N0y1aExT00aM+/Y/PE90Q5sLaCQ028uFQaQ==
       tarball: file:projects/autorest.tgz
     version: 0.0.0
   file:projects/cadl.tgz_ts-node@9.1.1+webpack@5.40.0:
@@ -9276,11 +9293,13 @@ packages:
   file:projects/common.tgz_prettier@2.3.2+ts-node@9.1.1:
     dependencies:
       '@azure/logger': 1.0.2
+      '@types/cli-progress': 3.9.2
       '@types/jest': 26.0.24
       '@types/node': 14.14.45
       '@typescript-eslint/eslint-plugin': 4.31.0_a690ff3776b01e92cf0b93501bb5ae6a
       '@typescript-eslint/parser': 4.31.0_eslint@7.32.0+typescript@4.4.2
       chalk: 4.1.2
+      cli-progress: 3.9.1
       eslint: 7.32.0
       eslint-plugin-import: 2.24.2_eslint@7.32.0
       eslint-plugin-jest: 24.3.7_80324fdcea7a89344953345da3522ce6
@@ -9297,7 +9316,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-1Hw9B8MqUGJv3N3E0nc/ihlLR5zn1FnQkX0WeTpWq8m2AybiEkQvCKBhp+seMJFrJnzbrhn+IlAQub18zTrI/Q==
+      integrity: sha512-n5+YUUj+JxPXjIAZ66Hi4H7A8OOPKCF8V3KX4Gd0JPvA5IOZ8xiA5OBtc4lf6/lSl6okYHgQR4ly8THLbg4s6g==
       tarball: file:projects/common.tgz
     version: 0.0.0
   file:projects/compare.tgz_prettier@2.3.2:
@@ -9374,6 +9393,7 @@ packages:
       '@azure-tools/object-comparison': 3.0.253
       '@azure-tools/tasks': 3.0.255
       '@azure-tools/uri': 3.1.1
+      '@types/cli-progress': 3.9.2
       '@types/commonmark': 0.27.5
       '@types/jest': 26.0.24
       '@types/jsonpath': 0.2.0
@@ -9385,6 +9405,7 @@ packages:
       ajv: 8.6.2
       ajv-errors: 3.0.0_ajv@8.6.2
       ajv-formats: 2.1.1
+      cli-progress: 3.9.1
       commonmark: 0.27.0
       compare-versions: 3.6.0
       copy-webpack-plugin: 7.0.0_webpack@5.40.0
@@ -9552,7 +9573,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-tM8yL4UBOkGwtoyj20dlyq6p4cFJEUrKuuLYrYYi1rGez00HbIXx8auCniJw8OZuQuQ4XpxZhY6utHYaPFPFaA==
+      integrity: sha512-jpSfbjbNzvaCAXempq/JLTmHe5YLzSnB2xbnyw8MMOoKhCepybR0onj/V1X9N93yE4ebi6Vjo773JKCFQJrHPg==
       tarball: file:projects/extension.tgz
     version: 0.0.0
   file:projects/fixer.tgz_ts-node@9.1.1:
@@ -9860,7 +9881,6 @@ packages:
 registry: ''
 specifiers:
   '@azure-tools/async-io': ~3.0.0
-  '@azure-tools/eventing': ~3.0.0
   '@azure-tools/object-comparison': ~3.0.0
   '@azure-tools/tasks': ~3.0.0
   '@azure-tools/uri': ~3.1.1
@@ -9890,6 +9910,7 @@ specifiers:
   '@rush-temp/test-utils': file:./projects/test-utils.tgz
   '@rush-temp/yaml': file:./projects/yaml.tgz
   '@types/body-parser': ^1.19.0
+  '@types/cli-progress': ~3.9.2
   '@types/command-exists': ~1.2.0
   '@types/commonmark': ^0.27.0
   '@types/deep-equal': ^1.0.1
@@ -9918,6 +9939,7 @@ specifiers:
   ajv-formats: ^2.1.0
   body-parser: ^1.19.0
   chalk: ^4.1.0
+  cli-progress: ~3.9.1
   command-exists: ~1.2.9
   commonmark: ^0.27.0
   compare-versions: ^3.4.0

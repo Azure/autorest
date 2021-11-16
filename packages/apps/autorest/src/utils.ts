@@ -41,7 +41,7 @@ export async function loadConfig(sink: LoggerSink, args: AutorestArgs): Promise<
   });
 
   const loader = new ConfigurationLoader(logger, defaultConfigUri, configFileOrFolder, {
-    extensionManager: await extensionManager,
+    // extensionManager: await extensionManager,
   });
   try {
     const { config } = await loader.load([args], true);
@@ -77,7 +77,10 @@ export async function resolvePathForLocalVersion(requestedVersion: string | null
   return undefined;
 }
 
-export async function resolveCoreVersion(config: AutorestNormalizedConfiguration = {}): Promise<string> {
+export async function resolveCoreVersion(
+  logger: IAutorestLogger,
+  config: AutorestNormalizedConfiguration = {},
+): Promise<string> {
   const requestedVersion: string = getRequestedCoreVersion(config) ?? "latest-installed";
 
   const localVersion = await resolvePathForLocalVersion(config.version ? requestedVersion : null);
@@ -88,7 +91,7 @@ export async function resolveCoreVersion(config: AutorestNormalizedConfiguration
   // failing that, we'll continue on and see if NPM can do something with the version.
   if (config.debug) {
     // eslint-disable-next-line no-console
-    console.log(`Network Enabled: ${await networkEnabled}`);
+    logger.debug(`Network Enabled: ${await networkEnabled}`);
   }
 
   // wait for the bootstrapper check to finish.
@@ -96,7 +99,7 @@ export async function resolveCoreVersion(config: AutorestNormalizedConfiguration
 
   // logic to resolve and optionally install a autorest core package.
   // will throw if it's not doable.
-  const selectedVersion = await selectVersion(requestedVersion, config.debugger);
+  const selectedVersion = await selectVersion(logger, requestedVersion, config.debugger);
   return selectedVersion.modulePath;
 }
 

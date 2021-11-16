@@ -8,6 +8,7 @@ describe("Logger", () => {
   beforeEach(() => {
     sink = {
       log: jest.fn(),
+      startProgress: jest.fn(),
     };
   });
 
@@ -28,6 +29,7 @@ describe("Logger", () => {
     it("sends message to each sink", () => {
       const otherSink = {
         log: jest.fn(),
+        startProgress: jest.fn(),
       };
 
       const logger = new AutorestSyncLogger({

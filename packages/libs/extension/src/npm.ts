@@ -1,6 +1,6 @@
 import { dirname, resolve } from "path";
 import { execute } from "./exec-cmd";
-import { ensurePackageJsonExists, InstallOptions, PackageManager } from "./package-manager";
+import { ensurePackageJsonExists, InstallOptions, PackageInstallationResult, PackageManager } from "./package-manager";
 
 export const DEFAULT_NPM_REGISTRY = "https://registry.npmjs.org";
 
@@ -21,7 +21,11 @@ export const execNpm = async (cwd: string, ...args: string[]) => {
 };
 
 export class Npm implements PackageManager {
-  public async install(directory: string, packages: string[], options?: InstallOptions) {
+  public async install(
+    directory: string,
+    packages: string[],
+    options?: InstallOptions,
+  ): Promise<PackageInstallationResult> {
     await ensurePackageJsonExists(directory);
 
     const output = await execNpm(
@@ -34,14 +38,16 @@ export class Npm implements PackageManager {
       ...packages,
     );
     if (output.error) {
-      /* eslint-disable no-console */
-      console.error("NPM log:");
-      console.log("-".repeat(50));
-      console.error(output.log);
-      console.log("-".repeat(50));
-      /* eslint-enable no-console */
-      throw Error(`Failed to install package '${packages}' -- ${output.error}`);
+      return {
+        success: false,
+        error: {
+          message: `Failed to install package '${packages}' -- ${output.error}`,
+          logs: output.log.split("\n").map((x) => ({ severity: "info", message: x })),
+        },
+      };
     }
+
+    return { success: true };
   }
 
   public async clean(directory: string): Promise<void> {

@@ -14,4 +14,10 @@ module.exports = {
     ...baseWebpackConfig.output,
     path: path.resolve(__dirname, "dist"),
   },
+  resolve: {
+    ...baseWebpackConfig.resolve,
+    alias: {
+      jsonpath: path.resolve(__dirname, "node_modules", "jsonpath", "jsonpath.min.js"),
+    },
+  },
 };

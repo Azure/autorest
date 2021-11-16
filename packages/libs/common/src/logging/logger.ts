@@ -9,6 +9,7 @@ import {
   LoggerSink,
   LogInfo,
 } from "./types";
+import { Progress } from ".";
 
 export interface AutorestLoggerBaseOptions<T> {
   processors?: T[];
@@ -65,6 +66,27 @@ export abstract class AutorestLoggerBase<T> implements AutorestLogger {
       level: "error",
       ...error,
     });
+  }
+
+  public startProgress(initialName?: string) {
+    const sinkProgressTrackers = this.sinks.map((x) => x.startProgress(initialName));
+
+    const update = (progress: Progress) => {
+      for (const tracker of sinkProgressTrackers) {
+        tracker.update(progress);
+      }
+    };
+
+    const stop = () => {
+      for (const tracker of sinkProgressTrackers) {
+        tracker.stop();
+      }
+    };
+
+    return {
+      update,
+      stop,
+    };
   }
 
   protected emitLog(log: LogInfo) {

@@ -41,7 +41,6 @@
   },
   "dependencies": {
     "@azure-tools/async-io": "~3.0.0",
-    "@azure-tools/eventing": "~3.0.0",
     "@azure-tools/tasks": "~3.0.0",
     "@azure/logger": "^1.0.2",
     "command-exists": "~1.2.9",

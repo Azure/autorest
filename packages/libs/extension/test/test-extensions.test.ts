@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
-import * as asyncio from "@azure-tools/async-io";
-import * as tasks from "@azure-tools/tasks";
 import assert from "assert";
 import * as fs from "fs";
 import * as os from "os";
+import * as asyncio from "@azure-tools/async-io";
+import * as tasks from "@azure-tools/tasks";
 import { ExtensionManager, InvalidPackageIdentityException, UnresolvedPackageException } from "../src";
 
 const tmpFolder = fs.mkdtempSync(`${fs.mkdtempSync(`${os.tmpdir()}/test`)}/install-pkg`);
@@ -41,11 +41,7 @@ describe("TestExtensions", () => {
         console.log("Installing Once");
         // install it once
         const dni = await extensionManager.findPackage("echo-cli", "*");
-        const installing = extensionManager.installPackage(dni, false, 60000, (i) =>
-          i.Message.Subscribe((s, m) => {
-            console.log(`Installer:${m}`);
-          }),
-        );
+        const installing = extensionManager.installPackage(dni, false, 60000, (i) => {});
         const extension = await installing;
         assert.notEqual(await extension.configuration, "the configuration file isnt where it should be?");
       }
@@ -54,19 +50,11 @@ describe("TestExtensions", () => {
         console.log("Attempt Overwrite");
         // install/overwrite
         const dni = await extensionManager.findPackage("echo-cli", "*");
-        const installing = extensionManager.installPackage(dni, true, 60000, (i) =>
-          i.Message.Subscribe((s, m) => {
-            console.log(`Installer2:${m}`);
-          }),
-        );
+        const installing = extensionManager.installPackage(dni, true, 60000, (i) => {});
 
         // install at the same time?
         const dni2 = await extensionManager.findPackage("echo-cli", "*");
-        const installing2 = extensionManager.installPackage(dni2, true, 60000, (i) =>
-          i.Message.Subscribe((s, m) => {
-            console.log(`Installer3:${m}`);
-          }),
-        );
+        const installing2 = extensionManager.installPackage(dni2, true, 60000, (i) => {});
 
         // wait for it.
         const extension = await installing;
@@ -149,11 +137,7 @@ describe("TestExtensions", () => {
     "Install Extension",
     async () => {
       const dni = await extensionManager.findPackage("echo-cli", "1.0.8");
-      const installing = extensionManager.installPackage(dni, false, 5 * 60 * 1000, (installing) => {
-        installing.Message.Subscribe((s, m) => {
-          console.log(`Installer:${m}`);
-        });
-      });
+      const installing = extensionManager.installPackage(dni, false, 5 * 60 * 1000, (installing) => {});
 
       const extension = await installing;
 
@@ -176,11 +160,7 @@ describe("TestExtensions", () => {
     "Install Extension via star",
     async () => {
       const dni = await extensionManager.findPackage("echo-cli", "*");
-      const installing = extensionManager.installPackage(dni, false, 5 * 60 * 1000, (installing) => {
-        installing.Message.Subscribe((s, m) => {
-          console.log(`Installer:${m}`);
-        });
-      });
+      const installing = extensionManager.installPackage(dni, false, 5 * 60 * 1000, (installing) => {});
       const extension = await installing;
 
       assert.notEqual(await extension.configuration, "");
@@ -202,11 +182,7 @@ describe("TestExtensions", () => {
     "Force install",
     async () => {
       const dni = await extensionManager.findPackage("echo-cli", "*");
-      const installing = extensionManager.installPackage(dni, false, 5 * 60 * 1000, (installing) => {
-        installing.Message.Subscribe((s, m) => {
-          console.log(`Installer:${m}`);
-        });
-      });
+      const installing = extensionManager.installPackage(dni, false, 5 * 60 * 1000, (installing) => {});
       const extension = await installing;
       assert.notEqual(await extension.configuration, "");
 
@@ -214,11 +190,7 @@ describe("TestExtensions", () => {
       await asyncio.rmFile(await extension.configurationPath);
 
       // reinstall with force!
-      const installing2 = extensionManager.installPackage(dni, true, 5 * 60 * 1000, (installing) => {
-        installing.Message.Subscribe((s, m) => {
-          console.log(`Installer:${m}`);
-        });
-      });
+      const installing2 = extensionManager.installPackage(dni, true, 5 * 60 * 1000, (installing) => {});
       const extension2 = await installing2;
 
       // is the file back?
@@ -232,11 +204,7 @@ describe("TestExtensions", () => {
     async () => {
       try {
         const dni = await extensionManager.findPackage("none", "fearthecowboy/echo-cli");
-        const installing = extensionManager.installPackage(dni, false, 5 * 60 * 1000, (installing) => {
-          installing.Message.Subscribe((s, m) => {
-            console.log(`Installer:${m}`);
-          });
-        });
+        const installing = extensionManager.installPackage(dni, false, 5 * 60 * 1000, (installing) => {});
         const extension = await installing;
         assert.notEqual(await extension.configuration, "");
         const proc = await extension.start();
