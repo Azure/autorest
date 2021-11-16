@@ -6,6 +6,7 @@
 import { createSandbox, deserialize, ShadowedNodePath } from "@azure-tools/codegen";
 import { Schema, DEFAULT_SCHEMA } from "js-yaml";
 import { AutorestExtensionHost, WriteFileOptions } from "./autorest-extension-host";
+import { LogLevel } from "./extension-logger";
 import { Channel, Message, SourceLocation, LogSource } from "./types";
 
 const safeEval = createSandbox();
@@ -178,51 +179,41 @@ export class Session<TInputModel> {
     }
   }
 
-  protected msg(channel: Channel, message: string, key: string[], source?: LogSource, details?: any) {
+  protected msg(level: LogLevel, message: string, key?: string[], source?: LogSource, details?: any) {
     const sourcePosition = source ? getPosition(this.filename, source) : undefined;
-
-    const sources = sourcePosition ? [sourcePosition] : [];
-    this.message({
-      Channel: channel,
-      Key: key,
-      Source: sources,
-      Text: message,
-      Details: details,
+    this.service.logger.log({
+      level,
+      message,
+      key,
+      source: sourcePosition,
+      details,
     });
   }
 
-  public warning(message: string, key: string[], source?: LogSource, details?: any) {
-    this.msg(Channel.Warning, message, key, source, details);
+  public debug(message: string) {
+    this.msg("debug", message);
   }
-  public hint(message: string, key: string[], source?: LogSource, details?: any) {
-    this.msg(Channel.Hint, message, key, source, details);
+
+  public verbose(message: string) {
+    this.msg("verbose", message);
+  }
+
+  public info(message: string) {
+    this.msg("info", message);
+  }
+
+  public warning(message: string, key: string[], source?: LogSource, details?: any) {
+    this.msg("warning", message, key, source, details);
   }
 
   public error(message: string, key: string[], source?: LogSource, details?: any) {
     this.errorCount++;
-    this.msg(Channel.Error, message, key, source, details);
+    this.msg("error", message, key, source, details);
   }
+
   public fatal(message: string, key: string[], source?: LogSource, details?: any) {
     this.errorCount++;
-    this.msg(Channel.Fatal, message, key, source, details);
-  }
-
-  protected output(channel: Channel, message: string, details?: any) {
-    this.message({
-      Channel: channel,
-      Text: message,
-      Details: details,
-    });
-  }
-
-  public debug(message: string, details: any) {
-    this.output(Channel.Debug, message, details);
-  }
-  public verbose(message: string, details: any) {
-    this.output(Channel.Verbose, message, details);
-  }
-  public log(message: string, details: any) {
-    this.output(Channel.Information, message, details);
+    this.msg("fatal", message, key, source, details);
   }
 }
 

@@ -242,7 +242,7 @@ export class QualityPreChecker {
     for (const { name, schema } of this.listSchemas()) {
       if (<any>schema.type === "file" || <any>schema.format === "file" || <any>schema.format === "binary") {
         // handle inconsistency in file format handling.
-        this.session.hint(
+        this.session.warning(
           `'The schema ${schema?.["x-ms-metadata"]?.name || name} with 'type: ${schema.type}', format: ${
             schema.format
           }' will be treated as a binary blob for binary media types.`,

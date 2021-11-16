@@ -1,5 +1,6 @@
 import { basename, dirname } from "path";
 import { RequestType2, NotificationType2, NotificationType4, MessageConnection } from "vscode-jsonrpc";
+import { AutorestExtensionLogger } from "./extension-logger";
 import { Mapping, Message, RawSourceMap, Channel } from "./types";
 
 export namespace IAutoRestPluginInitiatorTypes {
@@ -40,7 +41,11 @@ export interface WriteFileOptions {
 }
 
 export class AutorestExtensionHost {
-  public constructor(private channel: MessageConnection, private sessionId: string) {}
+  public logger: AutorestExtensionLogger;
+
+  public constructor(private channel: MessageConnection, private sessionId: string) {
+    this.logger = new AutorestExtensionLogger(this);
+  }
 
   /**
    * Protect files that will not be cleared when using clear-output-folder.
