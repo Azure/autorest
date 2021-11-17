@@ -31,9 +31,11 @@ export class AutorestExtensionLogger {
   public debug(message: string) {
     this.log({ level: "debug", message });
   }
-  public verbpse(message: string) {
+
+  public verbose(message: string) {
     this.log({ level: "verbose", message });
   }
+
   public info(message: string) {
     this.log({ level: "info", message });
   }

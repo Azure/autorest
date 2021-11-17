@@ -1,5 +1,5 @@
 import { createMessageConnection, RequestType0, RequestType2 } from "vscode-jsonrpc";
-import { AutorestExtensionHost } from "./autorest-extension-host";
+import { AutorestExtensionHost, AutorestExtensionRpcHost } from "./autorest-extension-host";
 import { Channel } from "./types";
 
 namespace IAutoRestPluginTargetTypes {
@@ -42,7 +42,7 @@ export class AutoRestExtension {
 
     channel.onRequest(IAutoRestPluginTargetTypes.GetPluginNames, async () => Object.keys(this.plugins));
     channel.onRequest(IAutoRestPluginTargetTypes.Process, async (pluginName: string, sessionId: string) => {
-      const host = new AutorestExtensionHost(channel, sessionId);
+      const host = new AutorestExtensionRpcHost(channel, sessionId);
 
       try {
         const handler = this.plugins[pluginName];

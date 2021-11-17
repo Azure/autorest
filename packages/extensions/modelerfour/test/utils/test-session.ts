@@ -1,7 +1,6 @@
-import { Session, startSession } from "@autorest/extension-base";
+import { Session, startSession, WriteFileOptions } from "@autorest/extension-base";
 import { readFile } from "@azure-tools/async-io";
 import { deserialize, fail } from "@azure-tools/codegen";
-import { Model } from "@azure-tools/openapi";
 
 export interface TestSessionInput {
   model: any;
@@ -58,13 +57,21 @@ export async function createTestSession<TInputModel>(
   const models = Array.isArray(inputs) ? inputs.reduce((m, x) => m.set(x.filename, x), new Map()) : inputs;
   const errors: Array<any> = [];
   const session = await startSession<TInputModel>({
-    ReadFile: (filename: string) =>
+    logger: {
+      debug: jest.fn(),
+      verbose: jest.fn(),
+      info: jest.fn(),
+      warning: jest.fn(),
+      error: jest.fn(),
+      fatal: jest.fn(),
+    },
+    readFile: (filename: string) =>
       Promise.resolve(models.get(filename)?.content ?? fail(`missing input '${filename}'`)),
-    GetValue: (key: string) => Promise.resolve(key ? config[key] : config),
-    ListInputs: (artifactType?: string) => Promise.resolve([...models.values()].map((x) => x.filename)),
-    ProtectFiles: (path: string) => Promise.resolve(),
-    WriteFile: (filename: string, content: string, sourceMap?: any, artifactType?: string) => Promise.resolve(),
-    Message: (message: any): void => {
+    getValue: (key: string) => Promise.resolve(key ? config[key] : config),
+    listInputs: (artifactType?: string) => Promise.resolve([...models.values()].map((x) => x.filename)),
+    protectFiles: (path: string) => Promise.resolve(),
+    writeFile: (options: WriteFileOptions) => Promise.resolve(),
+    message: (message: any): void => {
       if (message.Channel === "warning" || message.Channel === "error" || message.Channel === "verbose") {
         // console.error(`${message.Channel} ${message.Text}`);
         if (message.Channel === "error") {

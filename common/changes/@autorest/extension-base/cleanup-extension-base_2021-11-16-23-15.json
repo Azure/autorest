@@ -3,7 +3,7 @@
     {
       "packageName": "@autorest/extension-base",
       "comment": "**BREAKING** Refactor host, session. Rename PascalCase methods, cleanup",
-      "type": "major"
+      "type": "minor"
     }
   ],
   "packageName": "@autorest/extension-base",

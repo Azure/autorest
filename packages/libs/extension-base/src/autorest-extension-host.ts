@@ -40,7 +40,28 @@ export interface WriteFileOptions {
   artifactType?: string;
 }
 
-export class AutorestExtensionHost {
+export interface AutorestExtensionHost {
+  logger: AutorestExtensionLogger;
+
+  protectFiles(path: string): Promise<void>;
+  readFile(filename: string): Promise<string>;
+  getValue<T>(key: string): Promise<T | undefined>;
+  listInputs(artifactType?: string): Promise<Array<string>>;
+  writeFile({ filename, content, sourceMap, artifactType }: WriteFileOptions): void;
+  message(message: Message): void;
+
+  /**
+   * @deprecated
+   */
+  UpdateConfigurationFile(filename: string, content: string): void;
+
+  /**
+   * @deprecated
+   */
+  GetConfigurationFile(filename: string): Promise<string>;
+}
+
+export class AutorestExtensionRpcHost implements AutorestExtensionHost {
   public logger: AutorestExtensionLogger;
 
   public constructor(private channel: MessageConnection, private sessionId: string) {
