@@ -1072,7 +1072,7 @@ export class ModelerFour {
 
     if (isSchemaBinary(schema)) {
       // handle inconsistency in file format handling.
-      this.session.hint(
+      this.session.warning(
         `'The schema ${schema?.["x-ms-metadata"]?.name || name} with 'type: ${schema.type}', format: ${
           schema.format
         }' will be treated as a binary blob for binary media types.`,

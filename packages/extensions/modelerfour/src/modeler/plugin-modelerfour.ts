@@ -3,17 +3,17 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { codeModelSchema, CodeModel } from "@autorest/codemodel";
-import { Host, startSession } from "@autorest/extension-base";
-import { deserialize, serialize } from "@azure-tools/codegen";
+import { codeModelSchema } from "@autorest/codemodel";
+import { AutorestExtensionHost, startSession } from "@autorest/extension-base";
+import { serialize } from "@azure-tools/codegen";
 import * as OpenAPI from "@azure-tools/openapi";
 import { ModelerFour } from "./modelerfour";
 
-export async function processRequest(host: Host) {
-  const debug = (await host.GetValue("debug")) || false;
+export async function processRequest(host: AutorestExtensionHost) {
+  const debug = (await host.getValue("debug")) || false;
 
   try {
-    const session = await startSession<OpenAPI.Model>(host, undefined, undefined, "prechecked-openapi-document");
+    const session = await startSession<OpenAPI.Model>(host, undefined, "prechecked-openapi-document");
     const options = <any>await session.getValue("modelerfour", {});
 
     // process
@@ -29,10 +29,18 @@ export async function processRequest(host: Host) {
 
     // output the model to the pipeline
     if (options["emit-yaml-tags"] !== false) {
-      host.WriteFile("code-model-v4.yaml", serialize(codeModel, codeModelSchema), undefined, "code-model-v4");
+      host.writeFile({
+        filename: "code-model-v4.yaml",
+        content: serialize(codeModel, codeModelSchema),
+        artifactType: "code-model-v4",
+      });
     }
     if (options["emit-yaml-tags"] !== true) {
-      host.WriteFile("code-model-v4-no-tags.yaml", serialize(codeModel), undefined, "code-model-v4-no-tags");
+      host.writeFile({
+        filename: "code-model-v4-no-tags.yaml",
+        content: serialize(codeModel),
+        artifactType: "code-model-v4-no-tags",
+      });
     }
   } catch (error: any) {
     if (debug) {

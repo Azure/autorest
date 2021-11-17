@@ -14,7 +14,7 @@ class PreCheckerClient {
 
   static async create(spec: Model, config: ModelerFourOptions = {}): Promise<PreCheckerClient> {
     const { session, errors } = await createTestSessionFromModel<Model>({ modelerfour: config }, spec);
-    const prechecker = await new QualityPreChecker(session).init();
+    const prechecker = new QualityPreChecker(session);
     expect(errors.length).toBe(0);
 
     return new PreCheckerClient(prechecker.input, prechecker.process());
@@ -161,7 +161,7 @@ describe("Prechecker", () => {
       );
 
       const { session, errors } = await createTestSessionFromModel<Model>({}, spec);
-      const prechecker = await new QualityPreChecker(session).init();
+      const prechecker = new QualityPreChecker(session);
       prechecker.process();
       expect(errors).toHaveLength(1);
       expect(errors[0]).toEqual({

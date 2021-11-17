@@ -1,9 +1,9 @@
 import { readdirSync } from "fs";
 import { codeModelSchema } from "@autorest/codemodel";
+import { createTestSessionFromFiles } from "@autorest/extension-base/testing";
 import { serialize } from "@azure-tools/codegen";
 import { Model } from "@azure-tools/openapi";
 import { ModelerFour } from "../../src/modeler/modelerfour";
-import { createTestSessionFromFiles } from "../utils";
 
 const cfg = {
   modelerfour: {

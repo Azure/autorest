@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/cadl",
+      "comment": "**Uptake** breaking change from e",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/cadl",
+  "email": "tiguerin@microsoft.com"
+}
