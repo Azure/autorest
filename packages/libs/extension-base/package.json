@@ -3,6 +3,10 @@
   "version": "3.3.2",
   "description": "Library for creating AutoRest extensions",
   "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./testing": "./dist/testing/index.js"
+  },
   "typings": "./dist/index.d.ts",
   "engines": {
     "node": ">=12.0.0"

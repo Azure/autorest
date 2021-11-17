@@ -9,7 +9,6 @@ import {
   JsonType,
   StringFormat,
 } from "@azure-tools/openapi";
-import {} from "@autorest/extension-base/testing";
 import { getDiff } from "recursive-diff";
 import { Interpretations } from "../modeler/interpretations";
 
