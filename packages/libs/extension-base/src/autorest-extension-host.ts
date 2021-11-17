@@ -3,7 +3,7 @@ import { RequestType2, NotificationType2, NotificationType4, MessageConnection }
 import { AutorestExtensionLogger } from "./extension-logger";
 import { Mapping, Message, RawSourceMap, Channel } from "./types";
 
-export namespace IAutoRestPluginInitiatorTypes {
+namespace IAutoRestPluginInitiatorTypes {
   export const ReadFile = new RequestType2<string, string, string, Error, void>("ReadFile");
   export const GetValue = new RequestType2<string, string, any, Error, void>("GetValue");
   export const ListInputs = new RequestType2<string, string | undefined, Array<string>, Error, void>("ListInputs");
