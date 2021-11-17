@@ -137,7 +137,7 @@ describe("Prechecker", () => {
       spec = createTestSpec();
     });
 
-    it.only("Log error if allOf is string and base is object", async () => {
+    it("Log error if allOf is string and base is object", async () => {
       addSchema(
         spec,
         "ChildSchema",

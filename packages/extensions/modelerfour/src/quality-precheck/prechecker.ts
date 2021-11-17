@@ -350,7 +350,6 @@ export class QualityPreChecker {
               `  - ${schemaName}: ${schema.type}`,
               `  - ${parentName}: ${parent.type}`,
             ];
-            console.log("All error", schema);
 
             this.session.error(lines.join("\n"), ["PreCheck", "AllOfTypeDifferent"], parentRef);
           }
