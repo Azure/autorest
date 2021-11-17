@@ -64,7 +64,8 @@ export async function createTestSession<TInputModel>(
       warning: jest.fn(),
       error: jest.fn(),
       fatal: jest.fn(),
-    },
+      log: jest.fn(),
+    } as any,
     readFile: (filename: string) =>
       Promise.resolve(models.get(filename)?.content ?? fail(`missing input '${filename}'`)),
     getValue: (key: string) => Promise.resolve(key ? config[key] : config),
