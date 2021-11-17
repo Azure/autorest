@@ -33,6 +33,11 @@ module.exports = {
     new CopyPlugin({
       patterns: [{ from: "node_modules/@autorest/configuration/resources", to: "resources" }],
     }),
+
+    // We need to copy mappings.wasm so it can be loaded by SourceMapConsumer https://github.com/mozilla/source-map
+    new CopyPlugin({
+      patterns: [{ from: "node_modules/source-map/lib/mappings.wasm", to: "mappings.wasm" }],
+    }),
   ],
   optimization: {
     ...baseWebpackConfig.optimization,
