@@ -1,8 +1,8 @@
 // @ts-check
 
 const path = require("path");
-const baseWebpackConfig = require("../../../common/config/webpack.base.config");
 const CopyPlugin = require("copy-webpack-plugin");
+const baseWebpackConfig = require("../../../common/config/webpack.base.config");
 
 /**
  * @type {import("webpack").Configuration}
@@ -10,9 +10,9 @@ const CopyPlugin = require("copy-webpack-plugin");
 module.exports = {
   ...baseWebpackConfig,
   entry: {
-    "app": "./src/app.ts",
+    app: "./src/app.ts",
     "language-service": "./src/language-service/language-service.ts",
-    "exports": "./src/exports.ts",
+    exports: "./src/exports.ts",
   },
   output: {
     ...baseWebpackConfig.output,
@@ -34,6 +34,11 @@ module.exports = {
     // We need to copy the default configuration resources files.
     new CopyPlugin({
       patterns: [{ from: "node_modules/@autorest/configuration/resources", to: "resources" }],
+    }),
+
+    // We need to copy mappings.wasm so it can be loaded by SourceMapConsumer https://github.com/mozilla/source-map
+    new CopyPlugin({
+      patterns: [{ from: "node_modules/source-map/lib/mappings.wasm", to: "mappings.wasm" }],
     }),
   ],
   optimization: {
