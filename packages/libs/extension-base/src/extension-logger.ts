@@ -1,6 +1,4 @@
-import { AutorestExtensionHost } from "./autorest-extension-host";
-import { SourceLocation } from "./types";
-import { Channel } from ".";
+import { SourceLocation, Channel, Message } from "./types";
 
 export type LogLevel = "debug" | "verbose" | "info" | "warning" | "error" | "fatal";
 
@@ -26,7 +24,7 @@ export interface LogInfo {
 }
 
 export class AutorestExtensionLogger {
-  public constructor(private host: AutorestExtensionHost) {}
+  public constructor(private sendMessage: (message: Message) => void) {}
 
   public debug(message: string) {
     this.log({ level: "debug", message });
@@ -54,7 +52,7 @@ export class AutorestExtensionLogger {
 
   public log(info: LogInfo) {
     const sources = info.source ? [info.source] : [];
-    this.host.message({
+    this.sendMessage({
       Channel: getChannel(info.level),
       Key: info.key,
       Source: sources,

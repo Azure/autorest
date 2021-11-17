@@ -60,7 +60,7 @@ export class QualityPreChecker {
 
   constructor(protected session: Session<oai3>) {
     this.input = shadowPosition(session.model); // shadow(session.model, filename);
-    this.options = this.session.configuration.modelerfour;
+    this.options = this.session.configuration.modelerfour ?? {};
     this.interpret = new Interpretations(session);
   }
 
@@ -350,6 +350,8 @@ export class QualityPreChecker {
               `  - ${schemaName}: ${schema.type}`,
               `  - ${parentName}: ${parent.type}`,
             ];
+            console.log("All error", schema);
+
             this.session.error(lines.join("\n"), ["PreCheck", "AllOfTypeDifferent"], parentRef);
           }
         }

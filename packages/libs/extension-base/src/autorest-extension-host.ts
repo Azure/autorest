@@ -65,7 +65,7 @@ export class AutorestExtensionRpcHost implements AutorestExtensionHost {
   public logger: AutorestExtensionLogger;
 
   public constructor(private channel: MessageConnection, private sessionId: string) {
-    this.logger = new AutorestExtensionLogger(this);
+    this.logger = new AutorestExtensionLogger((x) => this.message(x));
   }
 
   /**
