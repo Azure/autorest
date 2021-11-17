@@ -1,4 +1,5 @@
 export { AutoRestExtension } from "./autorest-extension";
-export * from "./autorest-extension-host";
+export * from "./extension-host";
+export * from "./extension-logger";
 export * from "./types";
-export * from "./convenience";
+export * from "./session";

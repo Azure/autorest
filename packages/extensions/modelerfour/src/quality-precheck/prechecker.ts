@@ -1,4 +1,4 @@
-import { Session, AutorestExtensionHost, startSession, JsonPointerSegments } from "@autorest/extension-base";
+import { Session, AutorestExtensionHost, startSession } from "@autorest/extension-base";
 import { shadowPosition } from "@azure-tools/codegen";
 import {
   Model as oai3,
@@ -9,7 +9,7 @@ import {
   JsonType,
   StringFormat,
 } from "@azure-tools/openapi";
-
+import {} from "@autorest/extension-base/testing";
 import { getDiff } from "recursive-diff";
 import { Interpretations } from "../modeler/interpretations";
 

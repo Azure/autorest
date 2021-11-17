@@ -1,5 +1,5 @@
 import { createMessageConnection, RequestType0, RequestType2 } from "vscode-jsonrpc";
-import { AutorestExtensionHost, AutorestExtensionRpcHost } from "./autorest-extension-host";
+import { AutorestExtensionHost, AutorestExtensionRpcHost } from "./extension-host";
 import { Channel } from "./types";
 
 namespace IAutoRestPluginTargetTypes {

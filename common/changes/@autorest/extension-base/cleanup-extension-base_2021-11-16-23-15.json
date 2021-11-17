@@ -4,6 +4,11 @@
       "packageName": "@autorest/extension-base",
       "comment": "**BREAKING** Refactor host, session. Rename PascalCase methods, cleanup",
       "type": "minor"
+    },
+    {
+      "packageName": "@autorest/extension-base",
+      "comment": "**Added** testing functionality for extension via @autorest/extension-base/testing import",
+      "type": "minor"
     }
   ],
   "packageName": "@autorest/extension-base",
