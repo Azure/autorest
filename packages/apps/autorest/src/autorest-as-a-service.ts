@@ -329,13 +329,13 @@ export async function selectVersion(
 
       // @autorest/core install too fast and this doesn't look good right now as Yarn doesn't give info fast enough.
       // If we migrate to yarn v2 with the api we might be able to get more info and reenable that
-      // const progress = logger.startProgress("installing core...");
+      const progress = logger.startProgress("installing core...");
       selectedVersion = await (
         await extensionManager
       ).installPackage(pkg, force, 5 * 60 * 1000, (status) => {
-        // progress.update({ ...status });
+        progress.update({ ...status });
       });
-      // progress.stop();
+      progress.stop();
 
       if (args.debug) {
         console.log(`Extension location: ${selectedVersion.packageJsonPath}`);
