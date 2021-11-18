@@ -12,7 +12,7 @@ const runPrenamer = async (model: CodeModel, options: ModelerFourOptions = {}) =
 
 describe("Prenamer", () => {
   let model: CodeModel;
-  let stringSchema = new StringSchema("", "");
+  const stringSchema = new StringSchema("", "");
   beforeEach(() => {
     model = new CodeModel("TestPrenamer");
   });
