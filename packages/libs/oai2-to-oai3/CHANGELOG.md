@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/oai2-to-oai3
 
-This log was last generated on Wed, 08 Sep 2021 15:39:22 GMT and should not be manually modified.
+This log was last generated on Fri, 19 Nov 2021 04:23:43 GMT and should not be manually modified.
+
+## 4.5.0
+Fri, 19 Nov 2021 04:23:43 GMT
+
+### Minor changes
+
+- Copy all extensions on parameters
 
 ## 4.4.0
 Wed, 08 Sep 2021 15:39:22 GMT

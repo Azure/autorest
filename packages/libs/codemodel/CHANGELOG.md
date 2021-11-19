@@ -1,6 +1,11 @@
 # Change Log - @autorest/codemodel
 
-This log was last generated on Thu, 14 Oct 2021 23:03:29 GMT and should not be manually modified.
+This log was last generated on Fri, 19 Nov 2021 04:23:43 GMT and should not be manually modified.
+
+## 4.17.2
+Fri, 19 Nov 2021 04:23:43 GMT
+
+_Version update only_
 
 ## 4.17.1
 Thu, 14 Oct 2021 23:03:29 GMT

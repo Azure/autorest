@@ -1,6 +1,18 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Thu, 14 Oct 2021 23:03:28 GMT and should not be manually modified.
+This log was last generated on Fri, 19 Nov 2021 04:23:42 GMT and should not be manually modified.
+
+## 1.8.0
+Fri, 19 Nov 2021 04:23:42 GMT
+
+### Minor changes
+
+- **Consolidate** configuration schema to add description and missing settings
+- Uptake changes to the extension loader and report installation progress
+
+### Patches
+
+- Relax directive validation
 
 ## 1.7.3
 Thu, 14 Oct 2021 23:03:28 GMT

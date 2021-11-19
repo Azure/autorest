@@ -1,6 +1,23 @@
 {
-  "name": "@autorest/adl",
+  "name": "@autorest/cadl",
   "entries": [
+    {
+      "version": "0.1.0",
+      "tag": "@autorest/cadl_v0.1.0",
+      "date": "Fri, 19 Nov 2021 04:23:42 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Uptake** breaking change from e"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/extension-base\" from `~3.3.2` to `~3.4.0`"
+          }
+        ]
+      }
+    },
     {
       "version": "0.0.2",
       "tag": "@autorest/adl_v0.0.2",

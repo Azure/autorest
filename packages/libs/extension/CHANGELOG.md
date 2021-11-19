@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/extension
 
-This log was last generated on Mon, 19 Jul 2021 18:08:46 GMT and should not be manually modified.
+This log was last generated on Fri, 19 Nov 2021 04:23:43 GMT and should not be manually modified.
+
+## 3.4.0
+Fri, 19 Nov 2021 04:23:43 GMT
+
+### Minor changes
+
+- **Added** Progress tracking for installation and imrpvoed error reporting
 
 ## 3.3.1
 Mon, 19 Jul 2021 18:08:46 GMT
