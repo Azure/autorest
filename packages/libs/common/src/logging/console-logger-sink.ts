@@ -104,6 +104,7 @@ export class ConsoleLoggerSink implements LoggerSink {
     const stop = () => {
       if (bar) {
         bar.update(bar.getTotal());
+        bar.render();
         bar.stop();
         multiBar.remove(bar);
         this.bars = this.bars.filter((x) => x !== bar);
