@@ -8,9 +8,6 @@
       "comments": {
         "minor": [
           {
-            "comment": "**Uptake** breaking change from e"
-          },
-          {
             "comment": "Uptake change to extension-base to provide sourcemap support for errors"
           },
           {
