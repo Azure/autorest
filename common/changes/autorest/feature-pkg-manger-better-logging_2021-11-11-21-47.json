@@ -2,7 +2,12 @@
   "changes": [
     {
       "packageName": "autorest",
-      "comment": "Uptake change to @autorest/extension package.",
+      "comment": "Add installation status of extension with a progress bar.",
+      "type": "minor"
+    },
+    {
+      "packageName": "autorest",
+      "comment": "Improve error reporting when extension fails to install.",
       "type": "minor"
     }
   ],
