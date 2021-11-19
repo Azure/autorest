@@ -1,6 +1,6 @@
 {
   "name": "@autorest/cadl",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "AutoRest Cadl plugin",
   "engines": {
     "node": ">=14.0.0"
@@ -62,6 +62,6 @@
   },
   "dependencies": {
     "@cadl-lang/compiler": "~0.19.0 ",
-    "@autorest/extension-base": "~3.3.2"
+    "@autorest/extension-base": "~3.4.0"
   }
 }

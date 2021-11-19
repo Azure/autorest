@@ -2,6 +2,29 @@
   "name": "@autorest/extension-base",
   "entries": [
     {
+      "version": "3.4.0",
+      "tag": "@autorest/extension-base_v3.4.0",
+      "date": "Fri, 19 Nov 2021 04:23:42 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**BREAKING** Refactor host, session. Rename PascalCase methods, cleanup"
+          },
+          {
+            "comment": "**Added** testing functionality for extension via @autorest/extension-base/testing import"
+          },
+          {
+            "comment": "**Breaking** updated logging api to provide sourcemap support "
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.8.0` to `~2.9.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.3.2",
       "tag": "@autorest/extension-base_v3.3.2",
       "date": "Thu, 14 Oct 2021 23:03:29 GMT",

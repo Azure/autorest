@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/json
 
-This log was last generated on Wed, 08 Sep 2021 15:39:22 GMT and should not be manually modified.
+This log was last generated on Fri, 19 Nov 2021 04:23:43 GMT and should not be manually modified.
+
+## 1.2.1
+Fri, 19 Nov 2021 04:23:43 GMT
+
+### Patches
+
+- **Fix** stack overflow when walking circular tree
 
 ## 1.2.0
 Wed, 08 Sep 2021 15:39:22 GMT

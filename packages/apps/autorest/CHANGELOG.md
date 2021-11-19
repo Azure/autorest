@@ -1,6 +1,20 @@
 # Change Log - autorest
 
-This log was last generated on Fri, 15 Oct 2021 16:48:57 GMT and should not be manually modified.
+This log was last generated on Fri, 19 Nov 2021 04:23:43 GMT and should not be manually modified.
+
+## 3.5.0
+Fri, 19 Nov 2021 04:23:43 GMT
+
+### Minor changes
+
+- **Remove** legacy code
+- Add installation status of extension with a progress bar.
+- Improve error reporting when extension fails to install.
+
+### Patches
+
+- **Fix** Sourcemap library fails to load when packed with webpack
+- Render progress bar when installing core
 
 ## 3.4.2
 Tue, 15 Oct 2021 17:00:00 GMT

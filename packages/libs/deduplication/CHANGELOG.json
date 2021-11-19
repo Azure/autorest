@@ -2,6 +2,21 @@
   "name": "@azure-tools/deduplication",
   "entries": [
     {
+      "version": "3.1.3",
+      "tag": "@azure-tools/deduplication_v3.1.3",
+      "date": "Fri, 19 Nov 2021 04:23:43 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.8.0` to `~2.9.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.5.1` to `~4.6.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.1.2",
       "tag": "@azure-tools/deduplication_v3.1.2",
       "date": "Thu, 14 Oct 2021 23:03:29 GMT",

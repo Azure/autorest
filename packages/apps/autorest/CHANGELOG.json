@@ -2,6 +2,46 @@
   "name": "autorest",
   "entries": [
     {
+      "version": "3.5.0",
+      "tag": "autorest_v3.5.0",
+      "date": "Fri, 19 Nov 2021 04:23:43 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Remove** legacy code"
+          },
+          {
+            "comment": "Add installation status of extension with a progress bar."
+          },
+          {
+            "comment": "Improve error reporting when extension fails to install."
+          }
+        ],
+        "patch": [
+          {
+            "comment": "**Fix** Sourcemap library fails to load when packed with webpack"
+          },
+          {
+            "comment": "Render progress bar when installing core"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/configuration\" from `~1.7.3` to `~1.8.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/core\" from `~3.6.6` to `~3.7.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.3.0` to `~1.4.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/extension\" from `~3.3.1` to `~3.4.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.4.2",
       "tag": "autorest_v3.4.2",
       "date": "Tue, 15 Oct 2021 17:00:00 GMT",
