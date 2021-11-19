@@ -22,7 +22,7 @@ Previous version of autorest core resolved many cases where extension would fail
 
 This version will now display nicely the inner log from the installation in case of a failure
 
-![](./images/progress-failure.png)
+![](./images/installation-failure.png)
 
 ## Other
 
