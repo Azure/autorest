@@ -3,7 +3,7 @@
 The V3 version of the Java Generator.
 
 ```yaml $(java) && !$(legacy) && !$(v2) && !isRequested('@microsoft.azure/autorest.java')
-version: ~3.1.0
+version: ^3.7.0
 
 use-extension:
   "@autorest/java": "^4.0.24"

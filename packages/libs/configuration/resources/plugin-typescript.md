@@ -3,7 +3,7 @@
 The V3 version of the Typescript Generator.
 
 ``` yaml $(typescript) && !$(legacy) && !$(v2) && !isRequested('@microsoft.azure/autorest.typescript')
-version: ~3.1.0
+version: ^3.7.0
 
 use-extension:
   "@autorest/typescript": "latest"
