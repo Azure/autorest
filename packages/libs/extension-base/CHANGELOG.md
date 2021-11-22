@@ -1,6 +1,13 @@
 # Change Log - @autorest/extension-base
 
-This log was last generated on Fri, 19 Nov 2021 04:23:42 GMT and should not be manually modified.
+This log was last generated on Mon, 22 Nov 2021 21:55:51 GMT and should not be manually modified.
+
+## 3.4.2
+Mon, 22 Nov 2021 21:55:51 GMT
+
+### Patches
+
+- **Fix** bring back old methods(deprecated) that introduced breaking change to smooth out the transition
 
 ## 3.4.0
 Fri, 19 Nov 2021 04:23:42 GMT
