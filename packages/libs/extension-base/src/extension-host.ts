@@ -59,6 +59,21 @@ export interface AutorestExtensionHost {
    * @deprecated
    */
   GetConfigurationFile(filename: string): Promise<string>;
+
+  /**
+   * @deprecated use #writeFile
+   */
+  WriteFile(filename: string, content: string): void;
+
+  /**
+   * @deprecated use #getValue
+   */
+  GetValue(key: string): any;
+
+  /**
+   * @deprecated use #message
+   */
+  Message(message: Message): any;
 }
 
 export class AutorestExtensionRpcHost implements AutorestExtensionHost {
@@ -67,7 +82,6 @@ export class AutorestExtensionRpcHost implements AutorestExtensionHost {
   public constructor(private channel: MessageConnection, private sessionId: string) {
     this.logger = new AutorestExtensionLogger((x) => this.message(x));
   }
-
   /**
    * Protect files that will not be cleared when using clear-output-folder.
    * @param path Path to the file/folder to protect.
@@ -131,6 +145,27 @@ export class AutorestExtensionRpcHost implements AutorestExtensionHost {
    */
   public message(message: Message): void {
     this.channel.sendNotification(IAutoRestPluginInitiatorTypes.Message, this.sessionId, message);
+  }
+
+  /**
+   * @deprecated
+   */
+  public WriteFile(filename: string, content: string) {
+    return this.writeFile({ filename, content });
+  }
+
+  /**
+   * @deprecated
+   */
+  public GetValue(key: string) {
+    return this.getValue(key);
+  }
+
+  /**
+   * @deprecated
+   */
+  public Message(message: Message) {
+    return this.message(message);
   }
 
   /**

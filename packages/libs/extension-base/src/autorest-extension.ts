@@ -68,4 +68,17 @@ export class AutoRestExtension {
     // activate
     channel.listen();
   }
+
+  /**
+   * @deprecated Use #add
+   */
+  public Add(name: string, handler: AutoRestPluginHandler) {
+    return this.add(name, handler);
+  }
+  /**
+   * @deprecated Use #run
+   */
+  public Run(input: NodeJS.ReadableStream = process.stdin, output: NodeJS.WritableStream = process.stdout) {
+    return this.run(input, output);
+  }
 }
