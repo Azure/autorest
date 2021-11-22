@@ -123,6 +123,13 @@ export class Session<TInputModel> {
     this.msg("fatal", message, key, source, details);
   }
 
+  /**
+   * @deprecated use #info
+   */
+  public log(message: string) {
+    this.info(message);
+  }
+
   protected msg(level: LogLevel, message: string, key?: string[], source?: LogSource, details?: any) {
     const sourcePosition = source ? getPosition(this.filename, source) : undefined;
     this.service.logger.log({
