@@ -1,6 +1,6 @@
 {
   "name": "@autorest/extension-base",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "description": "Library for creating AutoRest extensions",
   "main": "dist/index.js",
   "exports": {
