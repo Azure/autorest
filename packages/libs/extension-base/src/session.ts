@@ -155,8 +155,9 @@ export async function startSession<TInputModel>(
   artifactType?: string,
 ) {
   // This is just to make it work with older version so the older method definition is also valid.
-  if (schema === undefined || (schema as any) === {}) {
+  if (artifactType?.constructor.name === "Schema") {
     schema = artifactType as any;
+    artifactType = undefined;
   }
   const { model, filename } = await getModel<TInputModel>(host, schema, artifactType);
   const configuration = await host.getValue("");
