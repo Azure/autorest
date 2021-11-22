@@ -28,7 +28,10 @@
             "comment": "**Added** Support for sourcemap in autorest extensions"
           },
           {
-            "comment": "Uptake change to @autorest/extension package."
+            "comment": "Add installation status of extension with a progress bar."
+          },
+          {
+            "comment": "Improve error reporting when extension fails to install."
           }
         ],
         "dependency": [
