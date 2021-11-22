@@ -72,6 +72,6 @@ export async function createTestSession<TInputModel>(
     message: sendMessage,
     UpdateConfigurationFile: (filename: string, content: string) => {},
     GetConfigurationFile: (filename: string) => Promise.resolve(""),
-  });
+  } as any);
   return { session, errors };
 }

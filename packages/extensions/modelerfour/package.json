@@ -40,7 +40,7 @@
   "readme": "https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour/readme.md",
   "devDependencies": {
     "@autorest/codemodel": "~4.17.2",
-    "@autorest/extension-base": "~3.4.0",
+    "@autorest/extension-base": "~3.4.2",
     "@autorest/test-utils": "~0.5.0",
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/codegen": "~2.9.0",

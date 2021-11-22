@@ -2,6 +2,18 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.22.1",
+      "tag": "@autorest/modelerfour_v4.22.1",
+      "date": "Mon, 22 Nov 2021 21:55:51 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/extension-base\" from `~3.4.0` to `~3.4.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.22.0",
       "tag": "@autorest/modelerfour_v4.22.0",
       "date": "Fri, 19 Nov 2021 04:23:42 GMT",

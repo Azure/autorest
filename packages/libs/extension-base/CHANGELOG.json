@@ -2,6 +2,18 @@
   "name": "@autorest/extension-base",
   "entries": [
     {
+      "version": "3.4.2",
+      "tag": "@autorest/extension-base_v3.4.2",
+      "date": "Mon, 22 Nov 2021 21:55:51 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** bring back old methods(deprecated) that introduced breaking change to smooth out the transition"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.4.0",
       "tag": "@autorest/extension-base_v3.4.0",
       "date": "Fri, 19 Nov 2021 04:23:42 GMT",
