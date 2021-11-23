@@ -2,7 +2,13 @@
 
 ### Introduction
 
-The following documents describes AutoRest specific vendor extensions for [OpenAPI 2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md) schema. Some of the extensions are only applicable to Microsoft Azure and as such are only available in Azure code generators (e.g. Azure.CSharp, Azure.NodeJS, etc.).
+The following documents describes AutoRest specific vendor extensions for [OpenAPI 2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md) schema. Code generation impact and support may vary per language. Some of the extensions are applicable to ARM APIs only, some are only metadatas and would not trigger code generator update.
+
+### Metadata extensions
+
+Those extensions are defined as additional description of the RestAPI, and do not trigger at the moment any changes in code generation.
+
+- [x-ms-secret](#x-ms-secret) - This extension is used to annotate the secret property.
 
 ### Generic Extensions
 
@@ -33,6 +39,44 @@ The following documents describes AutoRest specific vendor extensions for [OpenA
 - [x-ms-azure-resource](#x-ms-azure-resource) - indicates that the [Definition Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schemaObject) is a resource as defined by the [Resource Manager API](https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx)
 - [x-ms-request-id](#x-ms-request-id) - allows to overwrite the request id header name
 - [x-ms-client-request-id](#x-ms-client-request-id) - allows to overwrite the client request id header name
+
+# Metadata Extensions
+
+## x-ms-secret
+
+This extension is used to annotate the secret property. The value type is boolean and the allowed value is either true or false. Secrets should never expose on a GET. If a secret does need to be returned after the fact, a POST api can be used to allow for granular RBAC.
+ 
+**Rule**
+
+* When applying this extensions as: "x-ms-secret": true; means that this property must not exist in response.
+* When applying this extensions as: "x-ms-secret": false, it has same effect as not applying it.
+* When a property is modeled as both "required" and "x-ms-secret": true, which means that this property must not exist in the response but has to be present in request.
+* "x-ms-secret": true is equivalent to "x-ms-mutability": ["create", "update"].
+* When a property is modeled as "x-ms-mutability": ["read"], then applying this extension as "x-ms-secret": true is not allowed.
+* When a property is modeled as "readonly": true, then applying this extension as "x-ms-secret": true is not allowed.
+
+**Schema**:
+`true|false`
+
+**Example**:
+
+```json5
+"SecretAuthInfo": {
+      "type": "object",
+      "description": "The authentication info when authType is secret",
+      "properties": {
+        "name": {
+          "description": "Username or account name for secret auth.",
+          "type": "string"
+        },
+        "secret": {
+          "description": "Password or account key for secret auth.",
+          "type": "string",
+          "x-ms-secret": true
+        }
+    }
+}
+```
 
 # Generic Extensions
 
