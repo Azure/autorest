@@ -4,12 +4,6 @@
 
 The following documents describes AutoRest specific vendor extensions for [OpenAPI 2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md) schema. Code generation impact and support may vary per language. Some of the extensions are applicable to ARM APIs only, some are only metadatas and would not trigger code generator update.
 
-### Metadata extensions
-
-Those extensions are defined as additional description of the RestAPI, and do not trigger at the moment any changes in code generation.
-
-- [x-ms-secret](#x-ms-secret) - This extension is used to annotate the secret property.
-
 ### Generic Extensions
 
 - [x-ms-code-generation-settings](#x-ms-code-generation-settings) - enables passing code generation settings via OpenAPI definition (_deprecated! Please use configuration files instead._)
@@ -40,43 +34,13 @@ Those extensions are defined as additional description of the RestAPI, and do no
 - [x-ms-request-id](#x-ms-request-id) - allows to overwrite the request id header name
 - [x-ms-client-request-id](#x-ms-client-request-id) - allows to overwrite the client request id header name
 
-# Metadata Extensions
+### Metadata extensions
 
-## x-ms-secret
+Those extensions are defined as additional description of the RestAPI, and do not trigger at the moment any changes in code generation.
 
-This extension is used to annotate the secret property. The value type is boolean and the allowed value is either true or false. Secrets should never expose on a GET. If a secret does need to be returned after the fact, a POST api can be used to allow for granular RBAC.
- 
-**Rule**
+- [x-ms-secret](#x-ms-secret) - This extension is used to annotate the secret property.
 
-* When applying this extensions as: "x-ms-secret": true; means that this property must not exist in response.
-* When applying this extensions as: "x-ms-secret": false, it has same effect as not applying it.
-* When a property is modeled as both "required" and "x-ms-secret": true, which means that this property must not exist in the response but has to be present in request.
-* "x-ms-secret": true is equivalent to "x-ms-mutability": ["create", "update"].
-* When a property is modeled as "x-ms-mutability": ["read"], then applying this extension as "x-ms-secret": true is not allowed.
-* When a property is modeled as "readonly": true, then applying this extension as "x-ms-secret": true is not allowed.
-
-**Schema**:
-`true|false`
-
-**Example**:
-
-```json5
-"SecretAuthInfo": {
-      "type": "object",
-      "description": "The authentication info when authType is secret",
-      "properties": {
-        "name": {
-          "description": "Username or account name for secret auth.",
-          "type": "string"
-        },
-        "secret": {
-          "description": "Password or account key for secret auth.",
-          "type": "string",
-          "x-ms-secret": true
-        }
-    }
-}
-```
+- [x-ms-identifiers](#x-ms-identifiers) - (InProgress) indicates the identifying properties of objects in the array
 
 # Generic Extensions
 
@@ -1366,3 +1330,67 @@ headers:
 ```
 
 What is returned to users is just `key: value`.
+
+# Metadata Extensions
+
+## x-ms-secret
+
+This extension is used to annotate the secret property. The value type is boolean and the allowed value is either true or false. Secrets should never expose on a GET. If a secret does need to be returned after the fact, a POST api can be used to allow for granular RBAC.
+ 
+**Rule**
+
+* When applying this extensions as: "x-ms-secret": true; means that this property must not exist in response.
+* When applying this extensions as: "x-ms-secret": false, it has same effect as not applying it.
+* When a property is modeled as both "required" and "x-ms-secret": true, which means that this property must not exist in the response but has to be present in request.
+* "x-ms-secret": true is equivalent to "x-ms-mutability": ["create", "update"].
+* When a property is modeled as "x-ms-mutability": ["read"], then applying this extension as "x-ms-secret": true is not allowed.
+* When a property is modeled as "readonly": true, then applying this extension as "x-ms-secret": true is not allowed.
+
+**Schema**:
+`true|false`
+
+**Example**:
+
+```json5
+"SecretAuthInfo": {
+      "type": "object",
+      "description": "The authentication info when authType is secret",
+      "properties": {
+        "name": {
+          "description": "Username or account name for secret auth.",
+          "type": "string"
+        },
+        "secret": {
+          "description": "Password or account key for secret auth.",
+          "type": "string",
+          "x-ms-secret": true
+        }
+    }
+}
+```
+
+## x-ms-identifiers
+
+(InProgress) This extension is used to indicate the identifying properties of objects in the array, e.g., `id`, `name`, `uid`.
+
+**Rule**
+
+* The default identifying property is `id`.
+* If there is no appropriate identifying properties, leave it as an empty array.
+* You can provide multiple properties to form the composite identifier.
+* User [json pointer](https://datatracker.ietf.org/doc/html/rfc6901) if the identifying property is an inner property. E.g., `/properties/subnet/id`
+
+**Schema**:
+`array`
+
+**Example**:
+
+```json5
+"myArrayProperty": {​
+  "type":"array",
+  "items": { 
+    "$ref":"#/definitions/Example"​
+  },
+  "x-ms-identifiers": ["propertyName"]​
+}
+```
