@@ -40,7 +40,7 @@ Those extensions are defined as additional description of the RestAPI, and do no
 
 - [x-ms-secret](#x-ms-secret) - This extension is used to annotate the secret property.
 
-- [x-ms-identifiers](#x-ms-identifiers) - indicates the identifying properties of objects in the array
+- [x-ms-identifiers](#x-ms-identifiers) - (InProgress) indicates the identifying properties of objects in the array
 
 # Generic Extensions
 
@@ -1371,7 +1371,7 @@ This extension is used to annotate the secret property. The value type is boolea
 
 ## x-ms-identifiers
 
-This extension is used to indicate the identifying properties of objects in the array, e.g., `id`, `name`, `uid`.
+(InProgress) This extension is used to indicate the identifying properties of objects in the array, e.g., `id`, `name`, `uid`.
 
 **Rule**
 
