@@ -217,7 +217,7 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
         from: { type: "array", items: { type: "string" } },
         // directive is also used in the powershell extension (where and set in particular are object there) https://github.com/Azure/autorest.powershell/blob/main/docs/directives.md
         // where: { type: "array", items: { type: "string" } },
-        reason: { type: "string" },
+        reason: { type: "array", items: { type: "string" } },
         suppress: { type: "array", deprecated: true, items: { type: "string" } },
         // set: { type: "array", items: { type: "string" } },
         transform: { type: "array", items: { type: "string" } },
