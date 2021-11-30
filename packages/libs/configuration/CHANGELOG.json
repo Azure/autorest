@@ -2,6 +2,18 @@
   "name": "@autorest/configuration",
   "entries": [
     {
+      "version": "1.8.1",
+      "tag": "@autorest/configuration_v1.8.1",
+      "date": "Tue, 30 Nov 2021 15:50:35 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Allow multiple `reason` on directive"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.8.0",
       "tag": "@autorest/configuration_v1.8.0",
       "date": "Fri, 19 Nov 2021 04:23:42 GMT",
