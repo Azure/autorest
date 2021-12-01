@@ -1,6 +1,13 @@
 # Change Log - @autorest/common
 
-This log was last generated on Fri, 19 Nov 2021 04:23:42 GMT and should not be manually modified.
+This log was last generated on Wed, 01 Dec 2021 22:39:16 GMT and should not be manually modified.
+
+## 1.4.1
+Wed, 01 Dec 2021 22:39:16 GMT
+
+### Patches
+
+- **Fix** configuration loading issue with nested config `az:`
 
 ## 1.4.0
 Fri, 19 Nov 2021 04:23:42 GMT

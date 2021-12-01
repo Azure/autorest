@@ -1,6 +1,11 @@
 # Change Log - @autorest/core
 
-This log was last generated on Tue, 30 Nov 2021 15:50:35 GMT and should not be manually modified.
+This log was last generated on Wed, 01 Dec 2021 22:39:16 GMT and should not be manually modified.
+
+## 3.7.2
+Wed, 01 Dec 2021 22:39:16 GMT
+
+_Version update only_
 
 ## 3.7.1
 Tue, 30 Nov 2021 15:50:35 GMT
