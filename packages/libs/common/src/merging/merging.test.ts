@@ -68,6 +68,12 @@ describe("Merging", () => {
       });
     });
 
+    it("override true if lower priority is an object", () => {
+      expect(mergeOverwriteOrAppend(true, { foo: "bar" }, { concatListPathFilter: (_) => false })).toEqual({
+        foo: "bar",
+      });
+    });
+
     it("combine a complex object", () => {
       const value = mergeOverwriteOrAppend(
         { a: 1, b: 1, c: { a: 1, b: { a: 1, b: 1 } }, d: [{ a: 1, b: 1 }] },
