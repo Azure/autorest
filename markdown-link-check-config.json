@@ -1,5 +1,9 @@
 {
-  "ignorePatterns": [],
+  "ignorePatterns": [
+    {
+      "pattern": "^https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx"
+    }
+  ],
   "replacementPatterns": [
     {
       "pattern": "https://github\\.com/Azure/autorest/(?:blob|tree)/main/",
