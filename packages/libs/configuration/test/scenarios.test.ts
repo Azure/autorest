@@ -22,4 +22,8 @@ describe("Configuration scenarios", () => {
   it("require", async () => {
     await testScenario("require");
   });
+
+  it("nested-flag", async () => {
+    await testScenario("nested-flag");
+  });
 });

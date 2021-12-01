@@ -116,7 +116,6 @@ export class ConfigurationLoader {
       await manager.addConfig(result.value);
     }
     await resolveRequiredConfigs(this.fileSystem);
-
     // 2. file
     if (configFileUri != null && configFileUri !== undefined) {
       // add loaded files to the input files.
