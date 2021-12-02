@@ -2,6 +2,18 @@
   "name": "@autorest/common",
   "entries": [
     {
+      "version": "1.4.1",
+      "tag": "@autorest/common_v1.4.1",
+      "date": "Wed, 01 Dec 2021 22:39:16 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** configuration loading issue with nested config `az:`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.4.0",
       "tag": "@autorest/common_v1.4.0",
       "date": "Fri, 19 Nov 2021 04:23:42 GMT",

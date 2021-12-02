@@ -2,6 +2,30 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.7.2",
+      "tag": "@autorest/core_v3.7.2",
+      "date": "Wed, 01 Dec 2021 22:39:16 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.4.0` to `~1.4.1`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.7.1",
+      "tag": "@autorest/core_v3.7.1",
+      "date": "Tue, 30 Nov 2021 15:50:35 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/configuration\" from `~1.8.0` to `~1.8.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.7.0",
       "tag": "@autorest/core_v3.7.0",
       "date": "Fri, 19 Nov 2021 04:23:42 GMT",

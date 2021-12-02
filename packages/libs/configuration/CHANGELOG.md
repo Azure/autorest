@@ -1,6 +1,13 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Fri, 19 Nov 2021 04:23:42 GMT and should not be manually modified.
+This log was last generated on Tue, 30 Nov 2021 15:50:35 GMT and should not be manually modified.
+
+## 1.8.1
+Tue, 30 Nov 2021 15:50:35 GMT
+
+### Patches
+
+- Allow multiple `reason` on directive
 
 ## 1.8.0
 Fri, 19 Nov 2021 04:23:42 GMT

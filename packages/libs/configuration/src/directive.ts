@@ -8,7 +8,7 @@ const safeEval = createSandbox();
 export interface Directive {
   from?: string[] | string;
   where?: string[] | string;
-  reason?: string;
+  reason?: string[];
 
   // one of:
   suppress?: string[] | string;
@@ -22,7 +22,7 @@ export interface Directive {
 export class ResolvedDirective {
   from: string[];
   where: string[];
-  reason?: string;
+  reason?: string[];
   suppress: string[];
   transform: string[];
   test: string[];
