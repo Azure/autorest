@@ -53,7 +53,7 @@
     "@azure-tools/extension": "~3.4.0",
     "@azure-tools/json": "~1.2.1",
     "@azure-tools/jsonschema": "~1.1.0",
-    "@azure-tools/oai2-to-oai3": "~4.5.0",
+    "@azure-tools/oai2-to-oai3": "~4.5.1",
     "@azure-tools/object-comparison": "~3.0.0",
     "@azure-tools/openapi": "~3.2.2",
     "@azure-tools/tasks": "~3.0.0",

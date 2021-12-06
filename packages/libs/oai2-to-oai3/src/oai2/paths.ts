@@ -10,7 +10,7 @@ export type HttpMethodCustom = "x-trace";
 export type HttpMethod = "get" | "post" | "patch" | "put" | "delete" | "options" | "head" | "trace" | "x-trace";
 
 export type OpenAPI2Path = {
-  [method in HttpMethod]: OpenAPI2Path;
+  [method in HttpMethod]: OpenAPI2Operation;
 } & {
   parameters: any[];
 };

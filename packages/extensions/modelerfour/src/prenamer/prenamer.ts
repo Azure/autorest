@@ -170,13 +170,12 @@ export class PreNamer {
       scopeNamer.add(schema, this.format.type, "");
 
       const propertyScopeName = new ScopeNamer(this.session, {
-        deduplicateNames: true,
+        deduplicateNames: false,
         overrides: this.format.override,
       });
 
       for (const property of values(schema.properties)) {
         propertyScopeName.add(property, this.format.property, "");
-        // setName(property, this.format.property, "", this.format.override);
       }
       propertyScopeName.process();
     }

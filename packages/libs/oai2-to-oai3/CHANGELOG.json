@@ -2,6 +2,18 @@
   "name": "@azure-tools/oai2-to-oai3",
   "entries": [
     {
+      "version": "4.5.1",
+      "tag": "@azure-tools/oai2-to-oai3_v4.5.1",
+      "date": "Mon, 06 Dec 2021 20:16:04 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Internal** type fix"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.5.0",
       "tag": "@azure-tools/oai2-to-oai3_v4.5.0",
       "date": "Fri, 19 Nov 2021 04:23:43 GMT",
