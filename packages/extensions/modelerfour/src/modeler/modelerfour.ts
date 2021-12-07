@@ -819,10 +819,13 @@ export class ModelerFour {
     return this.codeModel.schemas.add(dictSchema);
   }
 
-  findPolymorphicDiscriminator(schema: OpenAPI.Schema | undefined): OpenAPI.Discriminator | undefined {
+  findPolymorphicDiscriminator(
+    schema: OpenAPI.Schema | undefined,
+    skipFirst = false,
+  ): OpenAPI.Discriminator | undefined {
     if (schema) {
       if (schema.type === JsonType.Object) {
-        if (schema.discriminator) {
+        if (schema.discriminator && !skipFirst) {
           return schema.discriminator;
         }
         return this.resolveArray(schema.allOf)
@@ -952,7 +955,7 @@ export class ModelerFour {
 
     if (parents.length > 0 && xorTypes.length === 0 && orTypes.length === 0) {
       // craft the and type for the model.
-      const discriminator = this.findPolymorphicDiscriminator(schema);
+      const discriminator = this.findPolymorphicDiscriminator(schema, true);
       objectSchema.discriminatorValue = discriminator
         ? this.findDiscriminatorValue(discriminator, name, schema)
         : undefined;
