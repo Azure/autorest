@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Mon, 06 Dec 2021 20:16:04 GMT and should not be manually modified.
+This log was last generated on Tue, 07 Dec 2021 16:58:46 GMT and should not be manually modified.
+
+## 4.22.3
+Tue, 07 Dec 2021 16:58:46 GMT
+
+### Patches
+
+- **fix** discriminator value added to top level if it has some allOf
 
 ## 4.22.2
 Mon, 06 Dec 2021 20:16:04 GMT

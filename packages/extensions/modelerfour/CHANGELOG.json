@@ -2,6 +2,18 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.22.3",
+      "tag": "@autorest/modelerfour_v4.22.3",
+      "date": "Tue, 07 Dec 2021 16:58:46 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**fix** discriminator value added to top level if it has some allOf"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.22.2",
       "tag": "@autorest/modelerfour_v4.22.2",
       "date": "Mon, 06 Dec 2021 20:16:04 GMT",
