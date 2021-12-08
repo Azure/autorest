@@ -1,13 +1,12 @@
 import { dirname, join, resolve } from "path";
-import { AutorestLogger, AutorestSyncLogger, ConsoleLoggerSink, IAutorestLogger, LoggerSink } from "@autorest/common";
+import { AutorestSyncLogger, IAutorestLogger, LoggerSink } from "@autorest/common";
 import { AutorestConfiguration, AutorestNormalizedConfiguration, ConfigurationLoader } from "@autorest/configuration";
 import { isFile } from "@azure-tools/async-io";
 import { createFileOrFolderUri, createFolderUri, resolveUri } from "@azure-tools/uri";
-import chalk from "chalk";
 import untildify from "untildify";
 import { checkForAutoRestUpdate } from "./actions";
 import { AutorestArgs } from "./args";
-import { extensionManager, networkEnabled, selectVersion } from "./autorest-as-a-service";
+import { networkEnabled, selectVersion } from "./autorest-as-a-service";
 import { AppRoot } from "./constants";
 
 const inWebpack = typeof __webpack_require__ === "function";

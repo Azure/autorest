@@ -26,7 +26,6 @@ import {
   writeString,
 } from "@azure-tools/uri";
 import { omit } from "lodash";
-import { SourceMapConsumer } from "source-map";
 import { ArtifactWriter } from "./artifact-writer";
 import { printAutorestHelp } from "./commands";
 import { Artifact } from "./lib/artifact";
@@ -35,14 +34,6 @@ import { VERSION } from "./lib/constants";
 
 let verbose = false;
 let debug = false;
-
-// Need to copy this file in webpack over and tell SourceMapConsumer where it is.
-const inWebpack = typeof __webpack_require__ === "function";
-if (inWebpack) {
-  (SourceMapConsumer as any).initialize({
-    "lib/mappings.wasm": join(__dirname, "mappings.wasm"),
-  });
-}
 
 async function autorestInit(title = "API-NAME", inputs: Array<string> = ["LIST INPUT FILES HERE"]) {
   const cwdUri = createFolderUri(currentDirectory());
@@ -122,6 +113,10 @@ async function currentMain(logger: IAutorestLogger, args: AutorestCliArgs): Prom
   }
   verbose = verbose || (args.options["verbose"] ?? false);
   debug = debug || (args.options["debug"] ?? false);
+
+  if (args.options["detailed-stacktrace"]) {
+    require("longjohn");
+  }
 
   // Only show library logs if in verbose or debug mode.
   if (verbose || debug) {

@@ -1,11 +1,9 @@
 /* eslint-disable no-process-exit */
 /* eslint-disable no-console */
 import "source-map-support/register";
-import { join } from "path";
 import { AutorestSyncLogger, ConsoleLoggerSink, FilterLogger } from "@autorest/common";
 import { getLogLevel } from "@autorest/configuration";
 import chalk from "chalk";
-import { SourceMapConsumer } from "source-map";
 import { clearTempData } from "./actions";
 import { parseAutorestArgs } from "./args";
 import { newCorePackage, ensureAutorestHome, runCoreWithRequire, runCoreOutOfProc } from "./autorest-as-a-service";
@@ -13,20 +11,16 @@ import { resetAutorest, showAvailableCoreVersions, showInstalledExtensions } fro
 import { VERSION } from "./constants";
 import { loadConfig, resolveCoreVersion } from "./utils";
 
-// Need to copy this file in webpack over and tell SourceMapConsumer where it is.
-const inWebpack = typeof __webpack_require__ === "function";
-if (inWebpack) {
-  (SourceMapConsumer as any).initialize({
-    "lib/mappings.wasm": join(__dirname, "mappings.wasm"),
-  });
-}
-
 const cwd = process.cwd();
 
 const isDebuggerEnabled =
   // eslint-disable-next-line node/no-unsupported-features/node-builtins
   !!require("inspector").url() || global.v8debug || /--debug|--inspect/.test(process.execArgv.join(" "));
 const launchCore = isDebuggerEnabled ? runCoreWithRequire : runCoreOutOfProc;
+
+if (process.argv.indexOf("--detailed-stacktrace")) {
+  require("longjohn");
+}
 
 // aliases, round one.
 if (process.argv.indexOf("--no-upgrade-check") !== -1) {

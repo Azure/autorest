@@ -83,6 +83,7 @@
     "jest": "^27.0.4",
     "jsonpath": "1.0.0",
     "lodash": "~4.17.20",
+    "longjohn": "~0.2.12",
     "mkdirp": "~0.5.1",
     "prettier": "~2.3.1",
     "rimraf": "^3.0.2",

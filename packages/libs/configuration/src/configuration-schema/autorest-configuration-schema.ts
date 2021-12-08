@@ -80,6 +80,11 @@ export const AUTOREST_CONFIGURATION_SCHEMA = {
    */
   verbose: { type: "boolean", category: "logging", description: "Display verbose logging information" },
   debug: { type: "boolean", category: "logging", description: "Display debug logging information" },
+  "detailed-stacktrace": {
+    type: "boolean",
+    category: "logging",
+    description: "Display detailed stacktrace. Can have performance issues.",
+  },
   level: {
     type: "string",
     category: "logging",

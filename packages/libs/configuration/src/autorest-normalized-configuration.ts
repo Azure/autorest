@@ -68,6 +68,11 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
   level?: LogLevel;
 
   /**
+   * Show detailed stacktrace. With longjohn.
+   */
+  "detailed-stacktrace"?: boolean;
+
+  /**
    * List of suppressions
    */
   suppressions?: LogSuppression[];
