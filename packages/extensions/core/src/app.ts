@@ -115,6 +115,7 @@ async function currentMain(logger: IAutorestLogger, args: AutorestCliArgs): Prom
   debug = debug || (args.options["debug"] ?? false);
 
   if (args.options["detailed-stacktrace"]) {
+    console.log("Using detailed stacktrace in @autorest/core");
     require("longjohn");
   }
 

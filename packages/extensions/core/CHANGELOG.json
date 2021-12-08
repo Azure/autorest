@@ -2,6 +2,23 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.7.4",
+      "tag": "@autorest/core_v3.7.4",
+      "date": "Wed, 08 Dec 2021 20:03:51 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added `detail-stacktrace` flag to show async stacktrace"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/configuration\" from `~1.8.2` to `~1.8.3`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.7.2",
       "tag": "@autorest/core_v3.7.2",
       "date": "Tue, 07 Dec 2021 22:39:16 GMT",

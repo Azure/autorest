@@ -19,6 +19,7 @@ const isDebuggerEnabled =
 const launchCore = isDebuggerEnabled ? runCoreWithRequire : runCoreOutOfProc;
 
 if (process.argv.indexOf("--detailed-stacktrace")) {
+  console.log("Using detailed stacktrace in CLI");
   require("longjohn");
 }
 

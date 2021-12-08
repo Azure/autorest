@@ -1,6 +1,13 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Tue, 07 Dec 2021 16:36:46 GMT and should not be manually modified.
+This log was last generated on Wed, 08 Dec 2021 20:03:51 GMT and should not be manually modified.
+
+## 1.8.3
+Wed, 08 Dec 2021 20:03:51 GMT
+
+### Patches
+
+- Added `detail-stacktrace` flag
 
 ## 1.8.2
 Tue, 07 Dec 2021 16:36:46 GMT

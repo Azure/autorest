@@ -2,6 +2,18 @@
   "name": "@autorest/configuration",
   "entries": [
     {
+      "version": "1.8.3",
+      "tag": "@autorest/configuration_v1.8.3",
+      "date": "Wed, 08 Dec 2021 20:03:51 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added `detail-stacktrace` flag"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.8.2",
       "tag": "@autorest/configuration_v1.8.2",
       "date": "Tue, 07 Dec 2021 16:36:46 GMT",

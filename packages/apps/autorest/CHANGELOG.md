@@ -1,6 +1,13 @@
 # Change Log - autorest
 
-This log was last generated on Tue, 30 Nov 2021 15:50:35 GMT and should not be manually modified.
+This log was last generated on Wed, 08 Dec 2021 20:03:51 GMT and should not be manually modified.
+
+## 3.5.2
+Wed, 08 Dec 2021 20:03:51 GMT
+
+### Patches
+
+- Added `detail-stacktrace` flag to show async stacktrace
 
 ## 3.5.1
 Tue, 30 Nov 2021 15:50:35 GMT

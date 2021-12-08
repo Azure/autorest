@@ -1,6 +1,6 @@
 {
   "name": "@autorest/configuration",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "description": "Autorest configuration",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
