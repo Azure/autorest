@@ -1,6 +1,13 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Tue, 30 Nov 2021 15:50:35 GMT and should not be manually modified.
+This log was last generated on Tue, 07 Dec 2021 16:36:46 GMT and should not be manually modified.
+
+## 1.8.2
+Tue, 07 Dec 2021 16:36:46 GMT
+
+### Patches
+
+- **Remove** removal of additionalProperties=false for v2 generator 
 
 ## 1.8.1
 Tue, 30 Nov 2021 15:50:35 GMT

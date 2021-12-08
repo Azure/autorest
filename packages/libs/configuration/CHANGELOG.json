@@ -2,6 +2,18 @@
   "name": "@autorest/configuration",
   "entries": [
     {
+      "version": "1.8.2",
+      "tag": "@autorest/configuration_v1.8.2",
+      "date": "Tue, 07 Dec 2021 16:36:46 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Remove** removal of additionalProperties=false for v2 generator "
+          }
+        ]
+      }
+    },
+    {
       "version": "1.8.1",
       "tag": "@autorest/configuration_v1.8.1",
       "date": "Tue, 30 Nov 2021 15:50:35 GMT",
