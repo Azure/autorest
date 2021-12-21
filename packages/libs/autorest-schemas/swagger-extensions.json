@@ -1313,6 +1313,9 @@
         },
         "x-ms-mutability": {
           "$ref": "#/definitions/xmsMutability"
+        },
+        "x-ms-identifiers": {
+          "$ref": "#/definitions/xmsIdentifiers"
         }
       },
       "additionalProperties": false
@@ -1613,6 +1616,13 @@
     "xmsSecret": {
       "description": "Indicates whether the entity on which this extension is applied is to be considered a secret (ie, password, certificate, etc) or not. `true` value indicates that it is a secret.",
       "type": "boolean"
+    },
+    "xmsIdentifiers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
     },
     "xmsEnum": {
       "type": "object",
