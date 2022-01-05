@@ -2,7 +2,7 @@
   "changes": [
     {
       "packageName": "@azure-tools/openapi",
-      "comment": "Do not update $ref in `x-` exten",
+      "comment": "Added `isExtension` util function.",
       "type": "patch"
     }
   ],
