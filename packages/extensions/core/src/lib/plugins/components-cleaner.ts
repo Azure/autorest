@@ -15,7 +15,7 @@ import {
   Transformer,
 } from "@azure-tools/datastore";
 import * as oai from "@azure-tools/openapi";
-import oai3, { isExtensionKey } from "@azure-tools/openapi";
+import oai3 from "@azure-tools/openapi";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
 
@@ -248,7 +248,7 @@ class UnsuedComponentFinder {
   private crawlObject(obj: any): void {
     for (const [key, value] of Object.entries(obj)) {
       // We don't want to navigate the examples.
-      if (isExtensionKey(key) && key !== "x-ms-original") {
+      if (key === "x-ms-examples") {
         continue;
       }
       if (key === "$ref" && typeof value === "string") {
@@ -262,7 +262,6 @@ class UnsuedComponentFinder {
           if (componentTypes === undefined) {
             throw new Error(`Reference '${value}' could not be found.`);
           }
-
           this.crawlObject(componentTypes[componentUid]);
         }
       } else if (value && typeof value === "object") {

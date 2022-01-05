@@ -13,7 +13,6 @@ import {
 } from "@azure-tools/datastore";
 import { walk } from "@azure-tools/json";
 import * as oai from "@azure-tools/openapi";
-import { isExtensionKey } from "@azure-tools/openapi";
 import { cloneDeep } from "lodash";
 import { AutorestContext } from "../context";
 import { PipelinePlugin } from "../pipeline/common";
@@ -349,8 +348,8 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
 
   protected updateRefs(node: any) {
     for (const { key, value } of visit(node)) {
-      // We don't want to navigate the extensions.
-      if (isExtensionKey(key) && key !== "x-ms-original") {
+      // We don't want to navigate the examples.
+      if (key === "x-ms-examples") {
         continue;
       }
       if (value && typeof value === "object") {
@@ -366,8 +365,6 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
               // most of the time it's not.
               value.$ref = newRef;
             }
-          } else {
-            throw new Error(`$ref to original location '${ref}' is not found in the new refs collection`);
           }
         }
 
