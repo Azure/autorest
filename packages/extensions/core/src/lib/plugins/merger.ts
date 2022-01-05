@@ -350,7 +350,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
   protected updateRefs(node: any) {
     for (const { key, value } of visit(node)) {
       // We don't want to navigate the extensions.
-      if (isExtensionKey(key)) {
+      if (isExtensionKey(key) && key !== "x-ms-original") {
         continue;
       }
       if (value && typeof value === "object") {
