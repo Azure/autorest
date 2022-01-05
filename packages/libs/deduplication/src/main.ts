@@ -390,7 +390,7 @@ export class Deduplicator {
   private async crawlObject(obj: any) {
     for (const { key, value } of visit(obj)) {
       // We don't want to navigate the examples.
-      if (key === "x-ms-examples") {
+      if (key.startsWith("x-")) {
         continue;
       }
 
@@ -408,7 +408,7 @@ export class Deduplicator {
   private updateRefs(obj: any): void {
     for (const { key, value } of visit(obj)) {
       // We don't want to navigate the examples.
-      if (key === "x-ms-examples") {
+      if (key.startsWith("x-")) {
         continue;
       }
 
