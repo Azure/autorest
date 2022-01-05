@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/openapi",
+      "comment": "Do not update $ref in `x-` exten",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@azure-tools/openapi",
+  "email": "tiguerin@microsoft.com"
+}
