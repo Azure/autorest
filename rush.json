@@ -49,7 +49,7 @@
       "packageName": "@autorest/fixer",
       "projectFolder": "packages/tools/fixer",
       "reviewCategory": "production",
-      "shouldPublish": false
+      "shouldPublish": true
     },
     {
       "packageName": "@autorest/schemas",

@@ -365,8 +365,6 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
               // most of the time it's not.
               value.$ref = newRef;
             }
-          } else {
-            throw new Error(`$ref to original location '${ref}' is not found in the new refs collection`);
           }
         }
 
