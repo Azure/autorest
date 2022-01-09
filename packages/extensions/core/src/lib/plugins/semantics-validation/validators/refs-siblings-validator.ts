@@ -9,7 +9,7 @@ const allowedKeysNextToRef = new Set([
   "$ref",
   "description",
   "title",
-  "readonly",
+  "readOnly",
   "nullable",
   "x-ms-client-name",
   "x-ms-client-flatten",

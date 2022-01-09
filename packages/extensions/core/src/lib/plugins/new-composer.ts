@@ -147,8 +147,6 @@ export class NewComposer extends Transformer<AnyObject, AnyObject> {
           const newRef = this.refs[ref];
           if (newRef) {
             value.$ref = newRef;
-          } else {
-            // throw new Error(`$ref to original location '${ref}' is not found in the new refs collection`);
           }
         }
         // now, recurse into this object

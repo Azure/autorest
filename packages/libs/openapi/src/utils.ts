@@ -1,13 +1,20 @@
 import { Dereferenced, ExtensionKey, PathReference, Refable } from "./common";
 
 /**
+ * Returns true if the key starts with `x-`
+ */
+export function isExtensionKey(key: string | ExtensionKey): key is ExtensionKey {
+  return key.startsWith("x-");
+}
+
+/**
  * Only return properties starting with x-
  * @param dictionary
  */
 export function includeXDashKeys<T extends Record<string | ExtensionKey, any>>(
   dictionary: T,
 ): Extract<keyof T, ExtensionKey>[] {
-  return Object.keys(dictionary).filter((v) => v.startsWith("x-")) as any;
+  return Object.keys(dictionary).filter(isExtensionKey) as any;
 }
 
 /**

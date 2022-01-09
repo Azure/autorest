@@ -1,6 +1,14 @@
-import { omitXDashKeys, includeXDashKeys, includeXDashProperties, omitXDashProperties } from "./utils";
+import { omitXDashKeys, includeXDashKeys, includeXDashProperties, omitXDashProperties, isExtensionKey } from "./utils";
 
 describe("OpenAPI utils", () => {
+  it("isExtensionKey returns true when starts with x-", () => {
+    expect(isExtensionKey("x-foo")).toBe(true);
+  });
+
+  it("isExtensionKey returns false when does not starts with x-", () => {
+    expect(isExtensionKey("foo")).toBe(false);
+  });
+
   it("includeXDashKeys returns x- properties keys", () => {
     // Type validation
     const result: ("x-foo" | "x-other")[] = includeXDashKeys({
