@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "@azure-tools/datastore": "~4.6.0",
-    "@azure-tools/openapi": "~3.2.2",
+    "@azure-tools/openapi": "~3.2.3",
     "@azure-tools/json": "~1.2.1",
     "source-map": "0.7.3"
   }
