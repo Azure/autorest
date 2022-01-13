@@ -2,6 +2,29 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.7.4",
+      "tag": "@autorest/core_v3.7.4",
+      "date": "Wed, 12 Jan 2022 22:31:57 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** semantic validator allowing `readonly` instead of `readOnly` next to $ref"
+          },
+          {
+            "comment": "Do not update $ref in `x-` extensions"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/deduplication\" from `~3.1.3` to `~3.1.4`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.2.2` to `~3.2.3`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.7.2",
       "tag": "@autorest/core_v3.7.2",
       "date": "Tue, 07 Dec 2021 22:39:16 GMT",
