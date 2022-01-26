@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/schemas",
+      "comment": "Added `operation-location` as option for lro `final-state-via`",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/schemas",
+  "email": "tiguerin@microsoft.com"
+}
