@@ -2,6 +2,18 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.7.5",
+      "tag": "@autorest/core_v3.7.5",
+      "date": "Wed, 26 Jan 2022 22:31:57 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update swagger schema changes"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.7.4",
       "tag": "@autorest/core_v3.7.4",
       "date": "Wed, 12 Jan 2022 22:31:57 GMT",
