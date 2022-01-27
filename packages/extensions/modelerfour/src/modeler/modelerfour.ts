@@ -1600,10 +1600,7 @@ export class ModelerFour {
         });
       }
     } else {
-      const pSchema = this.processSchema(
-        requestSchema?.name || "requestBody",
-        requestSchema?.instance || <OpenAPI.Schema>{},
-      );
+      const pSchema = this.processSchema(requestSchema?.name || "requestBody", requestSchema ?? {});
 
       // Track the usage of this schema as an input with media type
       this.trackSchemaUsage(pSchema, { usage: [SchemaContext.Input], serializationFormats: [kmt] });

@@ -61,16 +61,11 @@ export class BodyProcessor {
       return [];
     }
 
-    console.error(
-      "vales",
-      Object.values(oai3Content).map((x) => x.schema),
-    );
     const entries = Object.entries(oai3Content).map(([mediaType, value]) => ({
       mediaType,
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       schema: dereference(this.session.model, value.schema).instance!,
     }));
-
     const groups = new Map<string, { schema: OpenAPI.Schema; mediaTypes: string[] }>();
     for (const entry of entries) {
       const key = JSON.stringify(entry.schema, Object.keys(entry.schema).sort());
@@ -98,7 +93,7 @@ export class BodyProcessor {
     }
     const types = mediaTypes.map((x) => knownMediaType(x));
     const type = types[0];
-    const differentType = types.find((x) => x === type);
+    const differentType = types.find((x) => x !== type);
     if (differentType !== undefined) {
       this.session.error(
         `Operation ${operationName} content types [${type}, ${differentType}] have the same body schema but cannot be used together.`,
