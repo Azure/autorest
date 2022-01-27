@@ -1086,11 +1086,12 @@ See [Azure RPC Spec](https://github.com/Azure/azure-resource-manager-rpc/blob/ma
 **Schema**:
 Field Name | Type | Description
 ---|:---:|---
-final-state-via | `string` - one of `azure-async-operation` or `location` or `original-uri` | `final-state-via` SHOULD BE one of
+final-state-via | `string` - one of `azure-async-operation` or `location` or `original-uri` or `operation-location` | `final-state-via` SHOULD BE one of
 
 - `azure-async-operation` - (default if not specified) poll until terminal state, the final response will be available at the uri pointed to by the header `Azure-AsyncOperation`
 - `location` - poll until terminal state, the final response will be available at the uri pointed to by the header `Location`
 - `original-uri` - poll until terminal state, the final response will be available via GET at the original resource URI. Very common for PUT operations.
+- `operation-location` - poll until terminal state, the final response will be available at the uri pointed to by the header `Operation-Location`
 
 It will keep on polling at regular intervals till the request reaches one of the terminal states: Succeeded, Failed, or Canceled.
 
@@ -1336,15 +1337,15 @@ What is returned to users is just `key: value`.
 ## x-ms-secret
 
 This extension is used to annotate the secret property. The value type is boolean and the allowed value is either true or false. Secrets should never expose on a GET. If a secret does need to be returned after the fact, a POST api can be used to allow for granular RBAC.
- 
+
 **Rule**
 
-* When applying this extensions as: "x-ms-secret": true; means that this property must not exist in response.
-* When applying this extensions as: "x-ms-secret": false, it has same effect as not applying it.
-* When a property is modeled as both "required" and "x-ms-secret": true, which means that this property must not exist in the response but has to be present in request.
-* "x-ms-secret": true is equivalent to "x-ms-mutability": ["create", "update"].
-* When a property is modeled as "x-ms-mutability": ["read"], then applying this extension as "x-ms-secret": true is not allowed.
-* When a property is modeled as "readonly": true, then applying this extension as "x-ms-secret": true is not allowed.
+- When applying this extensions as: "x-ms-secret": true; means that this property must not exist in response.
+- When applying this extensions as: "x-ms-secret": false, it has same effect as not applying it.
+- When a property is modeled as both "required" and "x-ms-secret": true, which means that this property must not exist in the response but has to be present in request.
+- "x-ms-secret": true is equivalent to "x-ms-mutability": ["create", "update"].
+- When a property is modeled as "x-ms-mutability": ["read"], then applying this extension as "x-ms-secret": true is not allowed.
+- When a property is modeled as "readonly": true, then applying this extension as "x-ms-secret": true is not allowed.
 
 **Schema**:
 `true|false`
@@ -1375,10 +1376,10 @@ This extension is used to annotate the secret property. The value type is boolea
 
 **Rule**
 
-* The default identifying property is `id`.
-* If there is no appropriate identifying properties, leave it as an empty array.
-* You can provide multiple properties to form the composite identifier.
-* User [json pointer](https://datatracker.ietf.org/doc/html/rfc6901) if the identifying property is an inner property. E.g., `/properties/subnet/id`
+- The default identifying property is `id`.
+- If there is no appropriate identifying properties, leave it as an empty array.
+- You can provide multiple properties to form the composite identifier.
+- User [json pointer](https://datatracker.ietf.org/doc/html/rfc6901) if the identifying property is an inner property. E.g., `/properties/subnet/id`
 
 **Schema**:
 `array`
@@ -1388,7 +1389,7 @@ This extension is used to annotate the secret property. The value type is boolea
 ```json5
 "myArrayProperty": {​
   "type":"array",
-  "items": { 
+  "items": {
     "$ref":"#/definitions/Example"​
   },
   "x-ms-identifiers": ["propertyName"]​
