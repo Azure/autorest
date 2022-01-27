@@ -135,7 +135,11 @@ export class BodyProcessor {
   }
 
   public validateBodyContentTypes(httpMethod: HttpMethod, httpOperation: OpenAPI.HttpOperation, operationName: string) {
-    const kmtCount = httpOperation.requestBody ? Object.keys(httpOperation.requestBody).length : 0;
+    if (httpOperation.requestBody === undefined) {
+      return;
+    }
+
+    const kmtCount = Object.keys(httpOperation.requestBody).length;
 
     switch (httpMethod.toLowerCase()) {
       case "get":
