@@ -4,7 +4,7 @@ import { knownMediaType, KnownMediaType } from "@azure-tools/codegen";
 import * as OpenAPI from "@azure-tools/openapi";
 import { dereference, Dereferenced, HttpMethod } from "@azure-tools/openapi";
 import { groupBy, values } from "lodash";
-import { isSchemaBinary } from "./schema-utils";
+import { isSchemaBinary, isSchemaString } from "./schema-utils";
 
 export interface KnownMediaTypeGroupItem {
   mediaType: string;
@@ -117,6 +117,11 @@ export class BodyProcessor {
     if (isSchemaBinary(body)) {
       return KnownMediaType.Binary;
     }
+
+    if (isSchemaString(body)) {
+      return KnownMediaType.Text;
+    }
+
     const types = mediaTypes.map((x) => knownMediaType(x));
     const type = types[0];
     const differentType = types.find((x) => x !== type);
