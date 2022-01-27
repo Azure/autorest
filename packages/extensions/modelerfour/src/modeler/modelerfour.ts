@@ -2265,7 +2265,6 @@ export class ModelerFour {
         case KnownMediaType.Binary:
         case KnownMediaType.Text:
           this.processBinary(group, operation, requestBody);
-          this.processBinary(group, operation, requestBody);
           break;
         case KnownMediaType.Json:
         case KnownMediaType.Xml:

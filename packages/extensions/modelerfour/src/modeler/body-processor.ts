@@ -1,4 +1,4 @@
-import { HttpRequest, Operation, OperationGroup, Request } from "@autorest/codemodel";
+import { HttpRequest, Operation, OperationGroup, Request, Schema } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
 import { knownMediaType, KnownMediaType } from "@azure-tools/codegen";
 import * as OpenAPI from "@azure-tools/openapi";
@@ -61,11 +61,18 @@ export class BodyProcessor {
       return [];
     }
 
-    const entries = Object.entries(oai3Content).map(([mediaType, value]) => ({
-      mediaType,
+    const entries = Object.entries(oai3Content).map(([mediaType, value]) => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      schema: dereference(this.session.model, value.schema).instance!,
-    }));
+      const schema = dereference(this.session.model, value.schema).instance!;
+      const type = knownMediaType(mediaType);
+      return {
+        mediaType,
+        type,
+        schema: schema,
+      };
+    });
+    this.cleanupInvalidBodies(entries);
+
     const groups = new Map<string, { schema: OpenAPI.Schema; mediaTypes: string[] }>();
     for (const entry of entries) {
       const key = JSON.stringify(entry.schema, Object.keys(entry.schema).sort());
@@ -76,7 +83,6 @@ export class BodyProcessor {
       }
       item.mediaTypes.push(entry.mediaType);
     }
-
     const result: any = [...groups.values()].map(({ schema, mediaTypes }) => {
       return {
         schema,
@@ -85,6 +91,26 @@ export class BodyProcessor {
       };
     });
     return result;
+  }
+
+  /**
+   * Cleanup body types that are invalid for the content type.
+   * This can happen when converting swagger 2.0 which only let one type of body but can accept different content types.
+   */
+  private cleanupInvalidBodies(
+    entries: {
+      mediaType: string;
+      type: KnownMediaType;
+      schema: OpenAPI.Schema;
+    }[],
+  ) {
+    for (const entry of entries) {
+      if (entry.type === KnownMediaType.Binary && !isSchemaBinary(entry.schema)) {
+        entry.schema = { type: "string", format: "binary" };
+      } else if (entry.type === KnownMediaType.Text && entry.schema.type !== "string") {
+        entry.schema = { type: "string" };
+      }
+    }
   }
 
   private getKnownMediaType(body: OpenAPI.Schema, mediaTypes: string[], operationName: string) {
