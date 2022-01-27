@@ -200,7 +200,10 @@ async function main() {
           .map((i) => i.trim())
           .filter(
             (each) =>
-              each != "Extensions" && each != "Dictionary<any>" && each != "Dictionary<string>" && each != "Aspect",
+              each != "Extensions" &&
+              each != "Record<string,any>" &&
+              each != "Record<string,string>" &&
+              each != "Aspect",
           );
         if (parents.length > 0) {
           const parent = parents[0];
@@ -223,9 +226,9 @@ async function main() {
     }
   }
 
-  schema.definitions["Dictionary<string>"].additionalProperties = { type: "string" };
-  schema.definitions["Dictionary<any>"].additionalProperties = { type: "object" };
-  schema.definitions["Dictionary<ComplexSchema>"].additionalProperties = { $ref: `#/definitions/ComplexSchema` };
+  schema.definitions["Record<string,string>"].additionalProperties = { type: "string" };
+  schema.definitions["Record<string,any>"].additionalProperties = { type: "object" };
+  schema.definitions["Record<string,ComplexSchema>"].additionalProperties = { $ref: `#/definitions/ComplexSchema` };
   schema.definitions["Language"].additionalProperties = { type: "object" };
   schema.definitions["Languages"].additionalProperties = false; //  { type: 'object' };
   schema.definitions["Protocols"].additionalProperties = false; // { type: 'object' };

@@ -96,7 +96,7 @@ definitions:
         description: the actual value
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
       language:
         description: per-language information for this value
         $ref: ./master.yaml#/definitions/Languages
@@ -118,7 +118,7 @@ definitions:
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
   Deprecation:
     type: object
     description: Represent information about a deprecation
@@ -127,30 +127,14 @@ definitions:
       reason:
         type: string
         description: Reason why this was deprecated.
-  Dictionary<ApiVersion>:
-    type: object
-    additionalProperties:
-      $ref: ./master.yaml#/definitions/ApiVersion
-  Dictionary<ComplexSchema>:
-    type: object
-    additionalProperties:
-      $ref: ./schemas.yaml#/definitions/ComplexSchema
-  Dictionary<any>:
-    type: object
-    additionalProperties:
-      type: object
-  Dictionary<string>:
-    type: object
-    additionalProperties:
-      type: string
   Discriminator:
     type: object
     additionalProperties: false
     properties:
       all:
-        $ref: ./master.yaml#/definitions/Dictionary<ComplexSchema>
+        $ref: ./master.yaml#/definitions/Record<string,ComplexSchema>
       immediate:
-        $ref: ./master.yaml#/definitions/Dictionary<ComplexSchema>
+        $ref: ./master.yaml#/definitions/Record<string,ComplexSchema>
       property:
         $ref: ./master.yaml#/definitions/Property
     required:
@@ -176,7 +160,7 @@ definitions:
     properties:
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
   ExternalDocumentation:
     type: object
     description: a reference to external documentation
@@ -189,7 +173,7 @@ definitions:
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
     required:
       - url
   FlagValue:
@@ -200,7 +184,7 @@ definitions:
         type: number
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
       language:
         description: per-language information for this value
         $ref: ./master.yaml#/definitions/Languages
@@ -248,7 +232,7 @@ definitions:
         description: the title of this service.
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
     required:
       - title
   Language:
@@ -314,7 +298,7 @@ definitions:
         description: an uri pointing to the full license text
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
     required:
       - name
   Metadata:
@@ -324,7 +308,7 @@ definitions:
     properties:
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
       language:
         description: per-language information for this aspect
         $ref: ./master.yaml#/definitions/Languages
@@ -366,7 +350,10 @@ definitions:
           $ref: ./master.yaml#/definitions/Parameter
       profile:
         description: the apiVersion to use for a given profile name
-        $ref: ./master.yaml#/definitions/Dictionary<ApiVersion>
+        $ref: ./master.yaml#/definitions/Record<string,ApiVersion>
+      requestMediaTypes:
+        description: Mapping of all the content types available for this operation to the coresponding request.
+        $ref: ./master.yaml#/definitions/Record<string,Request>
       requests:
         type: array
         description: the different possibilities to build the request.
@@ -387,7 +374,7 @@ definitions:
         description: a short description
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
       language:
         description: per-language information for this aspect
         $ref: ./master.yaml#/definitions/Languages
@@ -486,6 +473,24 @@ definitions:
         $ref: ./master.yaml#/definitions/Protocol
       http:
         $ref: ./master.yaml#/definitions/Protocol
+  Record<string,ApiVersion>:
+    type: object
+    additionalProperties: false
+  Record<string,ComplexSchema>:
+    type: object
+    additionalProperties:
+      $ref: ./schemas.yaml#/definitions/ComplexSchema
+  Record<string,Request>:
+    type: object
+    additionalProperties: false
+  Record<string,any>:
+    type: object
+    additionalProperties:
+      type: object
+  Record<string,string>:
+    type: object
+    additionalProperties:
+      type: string
   Relations:
     type: object
     additionalProperties: false
@@ -571,7 +576,7 @@ definitions:
       schemes:
         type: array
         items:
-          $ref: ./http.yaml#/definitions/SecurityScheme
+          type: SecuritySchemeFull
     required:
       - authenticationRequired
       - schemes
@@ -581,7 +586,7 @@ definitions:
     properties:
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
   SerializationFormats:
     type: object
     description: custom extensible metadata for individual serialization formats
@@ -633,7 +638,7 @@ definitions:
         description: a short description
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
       language:
         description: per-language information for this aspect
         $ref: ./master.yaml#/definitions/Languages
@@ -644,6 +649,11 @@ definitions:
       - language
       - protocol
       - schema
+  ValueOrFactory:
+    anyOf:
+      - $ref: ./master.yaml#/definitions/ApiVersion
+      - type: object
+        additionalProperties: false
   VirtualParameter:
     type: object
     additionalProperties: false
@@ -716,7 +726,7 @@ properties:
     $ref: ./master.yaml#/definitions/Security
   extensions:
     description: additional metadata extensions dictionary
-    $ref: ./master.yaml#/definitions/Dictionary<any>
+    $ref: ./master.yaml#/definitions/Record<string,any>
   language:
     description: per-language information for this aspect
     $ref: ./master.yaml#/definitions/Languages

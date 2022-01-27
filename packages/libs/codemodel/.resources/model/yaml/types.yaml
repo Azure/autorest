@@ -37,17 +37,23 @@ definitions:
       - xor
   CompoundSchemaTypes:
     type: string
+    description: |-
+      Compound schemas are used to construct complex objects or offer choices of a set of schemas.
+
+      (ie, allOf, anyOf, oneOf )
     enum:
       - or
       - xor
   ObjectSchemaTypes:
     type: string
+    description: schema types that can be objects
     enum:
       - dictionary
       - object
       - or
   PrimitiveSchemaTypes:
     type: string
+    description: Schema types that are primitive language values
     enum:
       - boolean
       - char
@@ -64,6 +70,7 @@ definitions:
       - uuid
   ValueSchemaTypes:
     type: string
+    description: schema types that are non-object or complex types
     enum:
       - array
       - boolean
