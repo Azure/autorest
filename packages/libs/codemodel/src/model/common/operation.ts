@@ -14,6 +14,11 @@ export interface Operation extends Aspect {
   /** a common filtered list of parameters that is (assumably) the actual method signature parameters */
   signatureParameters?: Array<Parameter>;
 
+  /**
+   * Mapping of all the content types available for this operation to the coresponding request.
+   */
+  requestMediaTypes?: Record<string, Request>;
+
   /** the different possibilities to build the request. */
   requests?: Array<Request>;
 

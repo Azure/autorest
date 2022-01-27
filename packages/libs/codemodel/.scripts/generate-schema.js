@@ -1,3 +1,5 @@
+// @ts-check
+
 const jsyaml = require("js-yaml");
 const fs = require("fs").promises;
 
