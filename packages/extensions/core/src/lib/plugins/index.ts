@@ -22,6 +22,7 @@ import { createCSharpReflectApiVersionPlugin } from "./metadata-generation";
 import { createNewComposerPlugin } from "./new-composer";
 import { createOpenAPIStatsCollectorPlugin } from "./openapi-stats-collector";
 import { createProfileFilterPlugin } from "./profile-filter";
+import { createSaveInPlacePlugin } from "./save-in-place";
 import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from "./schema-validation";
 import { createSemanticValidationPlugin } from "./semantics-validation";
 import { subsetSchemaDeduplicatorPlugin } from "./subset-schemas-deduplicator";
@@ -77,5 +78,6 @@ export const CORE_PLUGIN_MAP = {
   "api-version-parameter-handler": createApiVersionParameterHandlerPlugin(),
   "profile-filter": createProfileFilterPlugin(),
   "allof-cleaner": createAllOfCleaner(),
+  "save-in-place": createSaveInPlacePlugin(),
   command: createCommandPlugin(),
 };

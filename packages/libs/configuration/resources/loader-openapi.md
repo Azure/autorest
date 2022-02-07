@@ -66,3 +66,14 @@ pipeline:
 use-extension:
   "@autorest/adl": latest
 ```
+
+## Configuration for `--apply-transforms-in-place`
+
+```yaml $(apply-transforms-in-place)
+pipeline:
+  openapi-document/individual/save-in-place:
+    input: individual/schema-validator-openapi
+
+  swagger-document/individual/save-in-place:
+    input: individual/schema-validator-swagger
+```
