@@ -1,6 +1,20 @@
 # Change Log - @autorest/core
 
-This log was last generated on Wed, 12 Jan 2022 22:31:57 GMT and should not be manually modified.
+This log was last generated on Tue, 01 Feb 2022 23:06:50 GMT and should not be manually modified.
+
+## 3.7.6
+Tue, 01 Feb 2022 23:06:50 GMT
+
+### Patches
+
+- **Fix** Issue with emitting converted openapi
+
+## 3.7.5
+Wed, 26 Jan 2022 22:31:57 GMT
+
+### Patches
+
+- Update swagger schema changes
 
 ## 3.7.4
 Wed, 12 Jan 2022 22:31:57 GMT
