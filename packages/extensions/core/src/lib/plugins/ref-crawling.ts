@@ -1,4 +1,5 @@
 import { AnyObject, DataHandle, DataSink, DataSource, Node, Transformer, visit } from "@azure-tools/datastore";
+import { parseJsonRef } from "@azure-tools/jsonschema";
 import { resolveUri } from "@azure-tools/uri";
 import { AutorestContext } from "../context";
 
@@ -129,19 +130,21 @@ class RefProcessor extends Transformer<any, any> {
       }
       // If the key is $ref and the value is a string then it should be a json reference. Otherwise it might be a property called $ref if it is another type.
       if (key === "$ref" && typeof value === "string") {
-        const refFileName = value.indexOf("#") === -1 ? value : value.split("#")[0];
-        const refPointer = value.indexOf("#") === -1 ? undefined : value.split("#")[1];
-        const newRefFileName = resolveUri(this.originalFileLocation, refFileName);
+        const { file, path } = parseJsonRef(value);
 
-        if (!refPointer) {
+        // const refFileName = value.indexOf("#") === -1 ? value : value.split("#")[0];
+        // const refPointer = value.indexOf("#") === -1 ? undefined : value.split("#")[1];
+        const newRefFileName = resolveUri(this.originalFileLocation, file ?? "");
+
+        if (!path) {
           // points to a whole file? Huh?
           continue;
         }
 
-        const newReference = refPointer ? `${newRefFileName}#${refPointer}` : newRefFileName;
+        // const newReference = refPointer ? `${newRefFileName}#${refPointer}` : newRefFileName;
         this.filesReferenced.add(newRefFileName);
 
-        this.clone(targetParent, key, pointer, newReference);
+        this.clone(targetParent, key, pointer, value);
       } else if (Array.isArray(value)) {
         await this.process(this.newArray(targetParent, key, pointer), children);
       } else if (value && typeof value === "object") {
