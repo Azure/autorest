@@ -9,6 +9,7 @@ import { createSwaggerToOpenApi3Plugin } from "./conversion";
 import { createDeduplicatorPlugin } from "./deduplicator";
 import { createArtifactEmitterPlugin } from "./emitter";
 import { createEnumDeduplicator } from "./enum-deduplication";
+import { createFullRefResolverPlugin } from "./full-ref-resolver";
 import { createHelpPlugin } from "./help";
 import {
   createIdentityPlugin,
@@ -40,6 +41,7 @@ export const CORE_PLUGIN_MAP = {
   identity: createIdentityPlugin(),
   null: createNullPlugin(),
   "reset-identity": createIdentityResetPlugin(),
+  "full-ref-resolver": createFullRefResolverPlugin(),
   "normalize-identity": createNormalizeIdentityPlugin(),
   "loader-swagger": createSwaggerLoaderPlugin(),
   "loader-openapi": createOpenApiLoaderPlugin(),

@@ -15,8 +15,11 @@ pipeline:
   openapi-document/individual/schema-validator-openapi:
     input: individual/transform
 
-  openapi-document/individual/identity:
+  openapi-document/individual/full-ref-resolver:
     input: individual/schema-validator-openapi
+
+  openapi-document/individual/identity:
+    input: individual/full-ref-resolver
 ```
 
 # Default Configuration -- OpenAPI2 loader
@@ -41,8 +44,11 @@ pipeline:
     input: individual/transform
     output-artifact: swagger-document
 
-  swagger-document/individual/identity:
+  swagger-document/individual/full-ref-resolver:
     input: individual/schema-validator-swagger
+
+  swagger-document/individual/identity:
+    input: individual/full-ref-resolver
     output-artifact: swagger-document
 
   #  swagger-document/transform-immediate:
@@ -53,7 +59,7 @@ pipeline:
 
   swagger-document/identity:
     # input: swagger-document/transform-immediate
-    input: individual/schema-validator-swagger
+    input: individual/full-ref-resolver
     output-artifact: swagger-document
 
   # OpenAPI

@@ -11,10 +11,10 @@ export async function crawlReferences(
 ): Promise<Array<DataHandle>> {
   // primary files should be in the order they were referenced; the order of the operations can affect the order
   // that API classes are generated in.
-  const primary: Array<DataHandle> = [];
+  const primary: DataHandle[] = [];
 
   // secondary files shouldn't matter (since we don't process their operations)
-  const secondary: Array<DataHandle> = [];
+  const secondary: DataHandle[] = [];
 
   // files that have been queued up to resolve references
   const queued = new Set<string>();
@@ -84,7 +84,7 @@ interface RefProcessorOptions {
 }
 
 class RefProcessor extends Transformer<any, any> {
-  public promises = new Array<Promise<void>>();
+  public promises: Array<Promise<void>> = [];
   public filesReferenced = new Set<string>();
   private originalFileLocation: string;
 
@@ -131,9 +131,6 @@ class RefProcessor extends Transformer<any, any> {
       // If the key is $ref and the value is a string then it should be a json reference. Otherwise it might be a property called $ref if it is another type.
       if (key === "$ref" && typeof value === "string") {
         const { file, path } = parseJsonRef(value);
-
-        // const refFileName = value.indexOf("#") === -1 ? value : value.split("#")[0];
-        // const refPointer = value.indexOf("#") === -1 ? undefined : value.split("#")[1];
         const newRefFileName = resolveUri(this.originalFileLocation, file ?? "");
 
         if (!path) {
@@ -141,7 +138,6 @@ class RefProcessor extends Transformer<any, any> {
           continue;
         }
 
-        // const newReference = refPointer ? `${newRefFileName}#${refPointer}` : newRefFileName;
         this.filesReferenced.add(newRefFileName);
 
         this.clone(targetParent, key, pointer, value);
