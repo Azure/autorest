@@ -1852,7 +1852,7 @@
           "$ref": "#/definitions/jsonReference"
         },
         "else": {
-          "$ref": "https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json#"
+          "$ref": "https://raw.githubusercontent.com/Azure/autorest/main/packages/libs/autorest-schemas/example-schema.json#"
         }
       }
     }
