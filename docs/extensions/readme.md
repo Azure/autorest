@@ -1077,23 +1077,25 @@ Task<IEnumerable<int?>> ListAsync(ISimpleAPIClient operations, CancellationToken
 
 Some requests like creating/deleting a resource cannot be carried out immediately. In such a situation, the server sends a 201 (Created) or 202 (Accepted) and provides a link to monitor the status of the request. When such an operation is marked with extension `"x-ms-long-running-operation": true`, in OpenAPI, the generated code will know how to fetch the link to monitor the status. It will keep on polling at regular intervals till the request reaches one of the terminal states: Succeeded, Failed, or Canceled.
 
-### x-ms-long-running-operation-options
+## x-ms-long-running-operation-options
 
-When `x-ms-long-running-operation` is specified, there should also be a `x-ms-long-running-operation-options` specified.
+When `x-ms-long-running-operation-options` is specified, there should also be a `x-ms-long-running-operation: true` specified.
 
 See [Azure RPC Spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations) for asynchronous operation notes.
+
+**You probably don't need to use this option if you follow ARM guidelines**. This option is designed for cases where the server do NOT follow ARM, and we need to guide the runtime through a peculiar flow.
 
 **Schema**:
 Field Name | Type | Description
 ---|:---:|---
 final-state-via | `string` - one of `azure-async-operation` or `location` or `original-uri` or `operation-location` | `final-state-via` SHOULD BE one of
 
-- `azure-async-operation` - (default if not specified) poll until terminal state, the final response will be available at the uri pointed to by the header `Azure-AsyncOperation`
-- `location` - poll until terminal state, the final response will be available at the uri pointed to by the header `Location`
-- `original-uri` - poll until terminal state, the final response will be available via GET at the original resource URI. Very common for PUT operations.
-- `operation-location` - poll until terminal state, the final response will be available at the uri pointed to by the header `Operation-Location`
+- `azure-async-operation` - poll until terminal state, skip any final GET on Location or Origin-URI and use the final response at the uri pointed to by the header `Azure-AsyncOperation`.
+- `location` - poll until terminal state, if the initial response had a `Location` header, a final GET will be done. Default behavior for POST operation.
+- `original-uri` - poll until terminal state, a final GET will be done at the original resource URI. Default behavior for PUT operations.
+- `operation-location` - poll until terminal state, skip any final GET on Location or Origin-URI and use the final response at the uri pointed to by the header `Operation-Location`
 
-It will keep on polling at regular intervals till the request reaches one of the terminal states: Succeeded, Failed, or Canceled.
+The polling mechanism in itself remains unchanged, the only impact of this option could be to do an additional final GET, or skip a final GET.
 
 **Parent element**: [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
 

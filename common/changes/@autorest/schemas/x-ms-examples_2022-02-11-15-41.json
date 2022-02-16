@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/schemas",
+      "comment": "Fix `x-ms-examples` schema reference",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/schemas",
+  "email": "leni@microsoft.com"
+}
