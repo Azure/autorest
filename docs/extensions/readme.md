@@ -1379,7 +1379,7 @@ This extension is used to annotate the secret property. The value type is boolea
 - The default identifying property is `id`. You don't need to add this annotataion if there is the `id` property in the object model.
 - If there is no appropriate identifying properties, leave it as an empty array.
 - You can provide multiple properties to form the composite identifier.
-- User [json pointer](https://datatracker.ietf.org/doc/html/rfc6901) if the identifying property is an inner property. E.g., `/properties/subnet/id`
+- Use [json pointer](https://datatracker.ietf.org/doc/html/rfc6901) if the identifying property is an inner property. E.g., `"x-ms-identifiers": ["/properties/subnet/id"]`
 
 **Schema**:
 `array`
