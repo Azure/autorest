@@ -135,6 +135,8 @@ export async function fetchPackageMetadata(spec: string): Promise<pacote.Manifes
     });
   } catch (error) {
     logger.error(`Error resolving package ${spec}`, error);
+    // eslint-disable-next-line no-console
+    console.error(`Error resolving package ${spec}`, error);
     throw new UnresolvedPackageException(spec);
   }
 }
