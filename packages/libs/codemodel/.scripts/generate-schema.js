@@ -1,11 +1,18 @@
+// @ts-check
+
 const jsyaml = require("js-yaml");
-const fs = require("fs").promises;
 
 const g = require("glob");
 const TJS = require("typescript-json-schema");
 const tsm = require("ts-morph");
+const { writeFile } = require("fs/promises");
+const { resolve } = require("path");
 
-const project = new tsm.Project({ tsConfigFilePath: `${__dirname}/../tsconfig.json` });
+const projectRoot = resolve(__dirname, `..`);
+// TJS seems to have issue if the cwd is not the project dir.
+process.chdir(projectRoot);
+
+const project = new tsm.Project({ tsConfigFilePath: resolve(projectRoot, `tsconfig.json`) });
 
 const x = project.getSourceFiles().map((each) => each.getInterfaces());
 
@@ -138,16 +145,14 @@ async function main() {
     excludePrivate: true,
     noExtraProps: true,
   };
-
   const program = TJS.getProgramFromFiles(
-    g.sync(`${__dirname}/../src/model/**/*.ts`),
+    g.sync(`${projectRoot}/src/model/**/*.ts`),
     { downlevelIteration: true },
-    __dirname,
+    resolve(__dirname, ".."),
   );
 
   // We can either get the schema for one file and one type...
   let schema = TJS.generateSchema(program, "*", settings);
-
   schema = fixmodel(schema);
 
   delete schema.definitions["ValueSchemas"];
@@ -198,7 +203,10 @@ async function main() {
           .map((i) => i.trim())
           .filter(
             (each) =>
-              each != "Extensions" && each != "Dictionary<any>" && each != "Dictionary<string>" && each != "Aspect",
+              each != "Extensions" &&
+              each != "Record<string,any>" &&
+              each != "Record<string,string>" &&
+              each != "Aspect",
           );
         if (parents.length > 0) {
           const parent = parents[0];
@@ -221,9 +229,9 @@ async function main() {
     }
   }
 
-  schema.definitions["Dictionary<string>"].additionalProperties = { type: "string" };
-  schema.definitions["Dictionary<any>"].additionalProperties = { type: "object" };
-  schema.definitions["Dictionary<ComplexSchema>"].additionalProperties = { $ref: `#/definitions/ComplexSchema` };
+  schema.definitions["Record<string,string>"].additionalProperties = { type: "string" };
+  schema.definitions["Record<string,any>"].additionalProperties = { type: "object" };
+  schema.definitions["Record<string,ComplexSchema>"].additionalProperties = { $ref: `#/definitions/ComplexSchema` };
   schema.definitions["Language"].additionalProperties = { type: "object" };
   schema.definitions["Languages"].additionalProperties = false; //  { type: 'object' };
   schema.definitions["Protocols"].additionalProperties = false; // { type: 'object' };
@@ -361,8 +369,8 @@ async function writemodels(name, folder, schema) {
   const yaml = serialize(schema);
   const json = JSON.stringify(schema, undefined, 2);
 
-  await fs.writeFile(`${__dirname}/../.resources/${folder}/yaml/${name}.yaml`, yaml.replace(/\.json/g, ".yaml"));
-  await fs.writeFile(`${__dirname}/../.resources/${folder}/json/${name}.json`, json);
+  await writeFile(`${__dirname}/../.resources/${folder}/yaml/${name}.yaml`, yaml.replace(/\.json/g, ".yaml"));
+  await writeFile(`${__dirname}/../.resources/${folder}/json/${name}.json`, json);
 }
 
 main();

@@ -51,7 +51,7 @@
           "description": "per-protocol information for this aspect"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -99,6 +99,120 @@
     },
     "ComplexSchema": {
       "description": "schema types that can be objects",
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "./schemas.json#/definitions/Schema"
+        }
+      ]
+    },
+    "AnySchema": {
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "./schemas.json#/definitions/Schema"
+        }
+      ]
+    },
+    "AnyObjectSchema": {
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "./schemas.json#/definitions/Schema"
+        }
+      ]
+    },
+    "ArraySchema": {
+      "description": "a Schema that represents and array of values",
+      "type": "object",
+      "properties": {
+        "elementType": {
+          "$ref": "./schemas.json#/definitions/Schema",
+          "description": "elementType of the array"
+        },
+        "maxItems": {
+          "description": "maximum number of elements in the array",
+          "type": "number"
+        },
+        "minItems": {
+          "description": "minimum number of elements in the array",
+          "type": "number"
+        },
+        "uniqueItems": {
+          "description": "if the elements in the array should be unique",
+          "type": "boolean"
+        },
+        "nullableItems": {
+          "description": "if elements in the array should be nullable",
+          "type": "boolean"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "elementType",
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "./schemas.json#/definitions/ValueSchema"
+        }
+      ]
+    },
+    "ByteArraySchema": {
+      "description": "a schema that represents a ByteArray value",
+      "type": "object",
+      "properties": {
+        "format": {
+          "description": "date-time format",
+          "enum": [
+            "base64url",
+            "byte"
+          ],
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "format",
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "./schemas.json#/definitions/ValueSchema"
+        }
+      ]
+    },
+    "BinarySchema": {
       "type": "object",
       "properties": {},
       "defaultProperties": [],
@@ -238,37 +352,34 @@
         }
       ]
     },
-    "ArraySchema": {
-      "description": "a Schema that represents and array of values",
+    "ConditionalSchema": {
+      "description": "a schema that represents a value dependent on another",
       "type": "object",
       "properties": {
-        "elementType": {
-          "$ref": "./schemas.json#/definitions/Schema",
-          "description": "elementType of the array"
+        "conditionalType": {
+          "$ref": "./schemas.json#/definitions/PrimitiveSchema",
+          "description": "the primitive type for the conditional"
         },
-        "maxItems": {
-          "description": "maximum number of elements in the array",
-          "type": "number"
+        "conditions": {
+          "description": "the possible conditinal values",
+          "type": "array",
+          "items": {
+            "$ref": "./master.json#/definitions/ConditionalValue"
+          }
         },
-        "minItems": {
-          "description": "minimum number of elements in the array",
-          "type": "number"
-        },
-        "uniqueItems": {
-          "description": "if the elements in the array should be unique",
-          "type": "boolean"
-        },
-        "nullableItems": {
-          "description": "if elements in the array should be nullable",
-          "type": "boolean"
+        "sourceValue": {
+          "$ref": "./master.json#/definitions/Value",
+          "description": "the source value that drives the target value (property or parameter)"
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "elementType",
+        "conditionalType",
+        "conditions",
         "language",
         "protocol",
+        "sourceValue",
         "type"
       ],
       "allOf": [
@@ -277,30 +388,67 @@
         }
       ]
     },
-    "ByteArraySchema": {
-      "description": "a schema that represents a ByteArray value",
+    "SealedConditionalSchema": {
+      "description": "a schema that represents a value dependent on another (not overridable)",
       "type": "object",
       "properties": {
-        "format": {
-          "description": "date-time format",
-          "enum": [
-            "base64url",
-            "byte"
-          ],
-          "type": "string"
+        "conditionalType": {
+          "$ref": "./schemas.json#/definitions/PrimitiveSchema",
+          "description": "the primitive type for the condition"
+        },
+        "conditions": {
+          "description": "the possible conditional values",
+          "type": "array",
+          "items": {
+            "$ref": "./master.json#/definitions/ConditionalValue"
+          }
+        },
+        "sourceValue": {
+          "$ref": "./master.json#/definitions/Value",
+          "description": "the source value that drives the target value"
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "format",
+        "conditionalType",
+        "conditions",
         "language",
         "protocol",
+        "sourceValue",
         "type"
       ],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/ValueSchema"
+        }
+      ]
+    },
+    "ConstantSchema": {
+      "description": "a schema that represents a constant value",
+      "type": "object",
+      "properties": {
+        "valueType": {
+          "$ref": "./schemas.json#/definitions/Schema",
+          "description": "the schema type of the constant value (ie, StringSchema, NumberSchema, etc)"
+        },
+        "value": {
+          "$ref": "./schemas.json#/definitions/ConstantValue",
+          "description": "the actual constant value"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type",
+        "value",
+        "valueType"
+      ],
+      "allOf": [
+        {
+          "$ref": "./schemas.json#/definitions/Schema"
         }
       ]
     },
@@ -331,37 +479,28 @@
         }
       ]
     },
-    "BooleanSchema": {
-      "description": "a schema that represents a boolean value",
+    "FlagSchema": {
       "type": "object",
-      "properties": {},
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "./schemas.json#/definitions/PrimitiveSchema"
+      "properties": {
+        "choices": {
+          "description": "the possible choices for in the set",
+          "type": "array",
+          "items": {
+            "$ref": "./master.json#/definitions/FlagValue"
+          }
         }
-      ]
-    },
-    "CharSchema": {
-      "description": "a schema that represents a Char value",
-      "type": "object",
-      "properties": {},
+      },
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
+        "choices",
         "language",
         "protocol",
         "type"
       ],
       "allOf": [
         {
-          "$ref": "./schemas.json#/definitions/PrimitiveSchema"
+          "$ref": "./schemas.json#/definitions/ValueSchema"
         }
       ]
     },
@@ -483,6 +622,115 @@
         }
       ]
     },
+    "BooleanSchema": {
+      "description": "a schema that represents a boolean value",
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "./schemas.json#/definitions/PrimitiveSchema"
+        }
+      ]
+    },
+    "CharSchema": {
+      "description": "a schema that represents a Char value",
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "./schemas.json#/definitions/PrimitiveSchema"
+        }
+      ]
+    },
+    "OrSchema": {
+      "description": "an OR relationship between several schemas",
+      "type": "object",
+      "properties": {
+        "anyOf": {
+          "description": "the set of schemas that this schema is composed of. Every schema is optional",
+          "type": "array",
+          "items": {
+            "$ref": "./schemas.json#/definitions/ComplexSchema"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "anyOf",
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "./schemas.json#/definitions/ComplexSchema"
+        }
+      ]
+    },
+    "XorSchema": {
+      "description": "an XOR relationship between several schemas",
+      "type": "object",
+      "properties": {
+        "oneOf": {
+          "description": "the set of schemas that this must be one and only one of.",
+          "type": "array",
+          "items": {
+            "$ref": "./schemas.json#/definitions/Schema"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "oneOf",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "./schemas.json#/definitions/Schema"
+        }
+      ]
+    },
+    "NotSchema": {
+      "description": "a NOT relationship between schemas",
+      "type": "object",
+      "properties": {
+        "not": {
+          "$ref": "./schemas.json#/definitions/Schema",
+          "description": "the schema that this may not be."
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "not",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "./schemas.json#/definitions/Schema"
+        }
+      ]
+    },
     "DurationSchema": {
       "description": "a schema that represents a Duration value",
       "type": "object",
@@ -575,254 +823,6 @@
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/PrimitiveSchema"
-        }
-      ]
-    },
-    "ConditionalSchema": {
-      "description": "a schema that represents a value dependent on another",
-      "type": "object",
-      "properties": {
-        "conditionalType": {
-          "$ref": "./schemas.json#/definitions/PrimitiveSchema",
-          "description": "the primitive type for the conditional"
-        },
-        "conditions": {
-          "description": "the possible conditinal values",
-          "type": "array",
-          "items": {
-            "$ref": "./master.json#/definitions/ConditionalValue"
-          }
-        },
-        "sourceValue": {
-          "$ref": "./master.json#/definitions/Value",
-          "description": "the source value that drives the target value (property or parameter)"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "conditionalType",
-        "conditions",
-        "language",
-        "protocol",
-        "sourceValue",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "./schemas.json#/definitions/ValueSchema"
-        }
-      ]
-    },
-    "SealedConditionalSchema": {
-      "description": "a schema that represents a value dependent on another (not overridable)",
-      "type": "object",
-      "properties": {
-        "conditionalType": {
-          "$ref": "./schemas.json#/definitions/PrimitiveSchema",
-          "description": "the primitive type for the condition"
-        },
-        "conditions": {
-          "description": "the possible conditional values",
-          "type": "array",
-          "items": {
-            "$ref": "./master.json#/definitions/ConditionalValue"
-          }
-        },
-        "sourceValue": {
-          "$ref": "./master.json#/definitions/Value",
-          "description": "the source value that drives the target value"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "conditionalType",
-        "conditions",
-        "language",
-        "protocol",
-        "sourceValue",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "./schemas.json#/definitions/ValueSchema"
-        }
-      ]
-    },
-    "FlagSchema": {
-      "type": "object",
-      "properties": {
-        "choices": {
-          "description": "the possible choices for in the set",
-          "type": "array",
-          "items": {
-            "$ref": "./master.json#/definitions/FlagValue"
-          }
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "choices",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "./schemas.json#/definitions/ValueSchema"
-        }
-      ]
-    },
-    "ConstantSchema": {
-      "description": "a schema that represents a constant value",
-      "type": "object",
-      "properties": {
-        "valueType": {
-          "$ref": "./schemas.json#/definitions/Schema",
-          "description": "the schema type of the constant value (ie, StringSchema, NumberSchema, etc)"
-        },
-        "value": {
-          "$ref": "./schemas.json#/definitions/ConstantValue",
-          "description": "the actual constant value"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type",
-        "value",
-        "valueType"
-      ],
-      "allOf": [
-        {
-          "$ref": "./schemas.json#/definitions/Schema"
-        }
-      ]
-    },
-    "OrSchema": {
-      "description": "an OR relationship between several schemas",
-      "type": "object",
-      "properties": {
-        "anyOf": {
-          "description": "the set of schemas that this schema is composed of. Every schema is optional",
-          "type": "array",
-          "items": {
-            "$ref": "./schemas.json#/definitions/ComplexSchema"
-          }
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "anyOf",
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "./schemas.json#/definitions/ComplexSchema"
-        }
-      ]
-    },
-    "XorSchema": {
-      "description": "an XOR relationship between several schemas",
-      "type": "object",
-      "properties": {
-        "oneOf": {
-          "description": "the set of schemas that this must be one and only one of.",
-          "type": "array",
-          "items": {
-            "$ref": "./schemas.json#/definitions/Schema"
-          }
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "language",
-        "oneOf",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "./schemas.json#/definitions/Schema"
-        }
-      ]
-    },
-    "NotSchema": {
-      "description": "a NOT relationship between schemas",
-      "type": "object",
-      "properties": {
-        "not": {
-          "$ref": "./schemas.json#/definitions/Schema",
-          "description": "the schema that this may not be."
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "language",
-        "not",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "./schemas.json#/definitions/Schema"
-        }
-      ]
-    },
-    "BinarySchema": {
-      "type": "object",
-      "properties": {},
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "./schemas.json#/definitions/Schema"
-        }
-      ]
-    },
-    "AnySchema": {
-      "type": "object",
-      "properties": {},
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "./schemas.json#/definitions/Schema"
-        }
-      ]
-    },
-    "AnyObjectSchema": {
-      "type": "object",
-      "properties": {},
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "./schemas.json#/definitions/Schema"
         }
       ]
     },
@@ -1059,7 +1059,7 @@
           ]
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -1120,7 +1120,7 @@
           "description": "per-protocol information for this aspect"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -1144,7 +1144,7 @@
           "description": "the actual constant value to use"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
