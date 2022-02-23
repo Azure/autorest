@@ -2,13 +2,13 @@
 const { spawn, spawnSync } = require("child_process");
 const { resolve } = require("path");
 
-export const repoRoot = resolve(__dirname, "../..");
-export const prettier = resolve(repoRoot, "packages/extensions/core/node_modules/.bin/prettier");
-export const tsc = resolve(repoRoot, "packages/extensions/core/node_modules/.bin/tsc");
+const repoRoot = resolve(__dirname, "../..");
+const prettier = resolve(repoRoot, "packages/extensions/core/node_modules/.bin/prettier");
+const tsc = resolve(repoRoot, "packages/extensions/core/node_modules/.bin/tsc");
 
 const isCmdOnWindows = ["rush", "npm", "code", "code-insiders", tsc, prettier];
 
-export function run(command, args, options) {
+function run(command, args, options) {
   console.log();
   console.log(`> ${command} ${args.join(" ")}`);
 
@@ -37,9 +37,17 @@ export function run(command, args, options) {
   return proc;
 }
 
-export class CommandFailedError extends Error {
+class CommandFailedError extends Error {
   constructor(msg, proc) {
     super(msg);
     this.proc = proc;
   }
 }
+
+module.exports = {
+  repoRoot,
+  prettier,
+  tsc,
+  run,
+  CommandFailedError,
+};
