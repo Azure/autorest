@@ -14,6 +14,11 @@ export interface Operation extends Aspect {
   /** a common filtered list of parameters that is (assumably) the actual method signature parameters */
   signatureParameters?: Array<Parameter>;
 
+  /**
+   * List of the headers that the generator should automatically handle.
+   */
+  specialHeaders?: string[];
+
   /** the different possibilities to build the request. */
   requests?: Array<Request>;
 
