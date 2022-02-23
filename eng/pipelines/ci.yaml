@@ -33,6 +33,15 @@ stages:
           - script: npx @microsoft/rush lint -v
             displayName: Lint
 
+          - script: rush regen-codemodel
+            displayName: Regen codemodel schema
+
+          - script: rush regen-codemodel
+            displayName: Regen codemodel schema
+
+          - script: node eng/scripts/check-for-changed-files.js
+            displayName: Check Git Status For Changed Files
+
           - script: |
               commitId=$(git rev-parse --short HEAD)
               npx @microsoft/rush publish --apply --prerelease-name="ci.$commitId"
@@ -54,6 +63,7 @@ stages:
               sudo npm install -g markdown-link-check
               find docs -name "*.md" -print0 | xargs -0  -n1 markdown-link-check -c ./markdown-link-check-config.json
             displayName: Find
+
   - stage: regressiontests
     displayName: Regression Tests
     dependsOn: main
