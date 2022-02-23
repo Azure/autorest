@@ -12,6 +12,12 @@
   "commands": [
     {
       "commandKind": "global",
+      "name": "regen-codemodel",
+      "summary": "set the patch version in the package.json files",
+      "shellCommand": "node ./packages/libs/codemodel/.scripts/generate-schema.js"
+    },
+    {
+      "commandKind": "global",
       "name": "set-versions",
       "summary": "set the patch version in the package.json files",
       "shellCommand": "node .scripts/set-versions.js"
