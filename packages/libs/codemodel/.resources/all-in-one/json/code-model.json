@@ -881,7 +881,7 @@
           }
         },
         "specialHeaders": {
-          "description": "List of the headers that the generator should automatically handle.",
+          "description": "List of headers that parameters should not handle as parameters but with special logic.\nSee https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour for configuration `skip-special-headers` to exclude headers.",
           "type": "array",
           "items": {
             "type": "string"

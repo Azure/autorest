@@ -15,7 +15,8 @@ export interface Operation extends Aspect {
   signatureParameters?: Array<Parameter>;
 
   /**
-   * List of the headers that the generator should automatically handle.
+   * List of headers that parameters should not handle as parameters but with special logic.
+   * See https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour for configuration `skip-special-headers` to exclude headers.
    */
   specialHeaders?: string[];
 
