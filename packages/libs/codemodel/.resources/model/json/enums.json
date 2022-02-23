@@ -69,6 +69,35 @@
       ],
       "type": "string"
     },
+    "ParameterLocation": {
+      "description": "the location that this parameter is placed in the http request",
+      "enum": [
+        "body",
+        "cookie",
+        "header",
+        "none",
+        "path",
+        "query",
+        "uri",
+        "virtual"
+      ],
+      "type": "string"
+    },
+    "Scheme": {
+      "type": "string",
+      "enum": [
+        "bearer"
+      ]
+    },
+    "SecurityType": {
+      "enum": [
+        "apiKey",
+        "http",
+        "oauth2",
+        "openIdConnect"
+      ],
+      "type": "string"
+    },
     "SerializationStyle": {
       "description": "The Serialization Style used for the parameter.\n\nDescribes how the parameter value will be serialized depending on the type of the parameter value.",
       "enum": [
@@ -100,20 +129,6 @@
         "label",
         "matrix",
         "simple"
-      ],
-      "type": "string"
-    },
-    "ParameterLocation": {
-      "description": "the location that this parameter is placed in the http request",
-      "enum": [
-        "body",
-        "cookie",
-        "header",
-        "none",
-        "path",
-        "query",
-        "uri",
-        "virtual"
       ],
       "type": "string"
     },
@@ -191,21 +206,6 @@
         511,
         "default"
       ]
-    },
-    "Scheme": {
-      "type": "string",
-      "enum": [
-        "bearer"
-      ]
-    },
-    "SecurityType": {
-      "enum": [
-        "apiKey",
-        "http",
-        "oauth2",
-        "openIdConnect"
-      ],
-      "type": "string"
     },
     "KnownMediaType": {
       "enum": [

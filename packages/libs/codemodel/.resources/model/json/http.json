@@ -30,10 +30,10 @@
           "type": "string"
         },
         "scopes": {
-          "$ref": "./master.json#/definitions/Dictionary<string>"
+          "$ref": "./master.json#/definitions/Record<string,string>"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -67,7 +67,7 @@
           "type": "string"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -90,10 +90,10 @@
           "type": "string"
         },
         "scopes": {
-          "$ref": "./master.json#/definitions/Dictionary<string>"
+          "$ref": "./master.json#/definitions/Record<string,string>"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -116,10 +116,10 @@
           "type": "string"
         },
         "scopes": {
-          "$ref": "./master.json#/definitions/Dictionary<string>"
+          "$ref": "./master.json#/definitions/Record<string,string>"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -146,7 +146,7 @@
           ]
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -173,7 +173,7 @@
           "type": "string"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -200,7 +200,7 @@
           "$ref": "./http.json#/definitions/AuthorizationCodeOAuthFlow"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -236,7 +236,7 @@
           "type": "string"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -265,7 +265,7 @@
           "type": "string"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -288,10 +288,10 @@
           "type": "string"
         },
         "scopes": {
-          "$ref": "./master.json#/definitions/Dictionary<string>"
+          "$ref": "./master.json#/definitions/Record<string,string>"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -313,8 +313,18 @@
       "type": "object",
       "properties": {
         "in": {
-          "$ref": "./enums.json#/definitions/ParameterLocation",
-          "description": "the location that this parameter is placed in the http request"
+          "description": "the location that this parameter is placed in the http request",
+          "enum": [
+            "body",
+            "cookie",
+            "header",
+            "none",
+            "path",
+            "query",
+            "uri",
+            "virtual"
+          ],
+          "type": "string"
         },
         "style": {
           "$ref": "./enums.json#/definitions/SerializationStyle",
@@ -466,7 +476,7 @@
           "$ref": "./master.json#/definitions/Languages"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
