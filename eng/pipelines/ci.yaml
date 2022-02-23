@@ -33,10 +33,7 @@ stages:
           - script: npx @microsoft/rush lint -v
             displayName: Lint
 
-          - script: rush regen-codemodel
-            displayName: Regen codemodel schema
-
-          - script: rush regen-codemodel
+          - script: npx @microsoft/rush regen-codemodel
             displayName: Regen codemodel schema
 
           - script: node eng/scripts/check-for-changed-files.js
