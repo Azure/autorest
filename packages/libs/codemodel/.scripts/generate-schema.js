@@ -1,13 +1,18 @@
 // @ts-check
 
 const jsyaml = require("js-yaml");
-const fs = require("fs").promises;
 
 const g = require("glob");
 const TJS = require("typescript-json-schema");
 const tsm = require("ts-morph");
+const { writeFile } = require("fs/promises");
+const { resolve } = require("path");
 
-const project = new tsm.Project({ tsConfigFilePath: `${__dirname}/../tsconfig.json` });
+const projectRoot = resolve(__dirname, `..`);
+// TJS seems to have issue if the cwd is not the project dir.
+process.chdir(projectRoot);
+
+const project = new tsm.Project({ tsConfigFilePath: resolve(projectRoot, `tsconfig.json`) });
 
 const x = project.getSourceFiles().map((each) => each.getInterfaces());
 
@@ -140,16 +145,14 @@ async function main() {
     excludePrivate: true,
     noExtraProps: true,
   };
-
   const program = TJS.getProgramFromFiles(
-    g.sync(`${__dirname}/../src/model/**/*.ts`),
+    g.sync(`${projectRoot}/src/model/**/*.ts`),
     { downlevelIteration: true },
-    __dirname,
+    resolve(__dirname, ".."),
   );
 
   // We can either get the schema for one file and one type...
   let schema = TJS.generateSchema(program, "*", settings);
-
   schema = fixmodel(schema);
 
   delete schema.definitions["ValueSchemas"];
@@ -366,8 +369,8 @@ async function writemodels(name, folder, schema) {
   const yaml = serialize(schema);
   const json = JSON.stringify(schema, undefined, 2);
 
-  await fs.writeFile(`${__dirname}/../.resources/${folder}/yaml/${name}.yaml`, yaml.replace(/\.json/g, ".yaml"));
-  await fs.writeFile(`${__dirname}/../.resources/${folder}/json/${name}.json`, json);
+  await writeFile(`${__dirname}/../.resources/${folder}/yaml/${name}.yaml`, yaml.replace(/\.json/g, ".yaml"));
+  await writeFile(`${__dirname}/../.resources/${folder}/json/${name}.json`, json);
 }
 
 main();
