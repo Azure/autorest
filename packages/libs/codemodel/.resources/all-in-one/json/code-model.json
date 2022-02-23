@@ -880,6 +880,13 @@
             "$ref": "#/definitions/Parameter"
           }
         },
+        "specialHeaders": {
+          "description": "List of the headers that the generator should automatically handle.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "requests": {
           "description": "the different possibilities to build the request.",
           "type": "array",

@@ -366,6 +366,11 @@ definitions:
         description: a common filtered list of parameters that is (assumably) the actual method signature parameters
         items:
           $ref: ./master.yaml#/definitions/Parameter
+      specialHeaders:
+        type: array
+        description: List of the headers that the generator should automatically handle.
+        items:
+          type: string
       summary:
         type: string
         description: a short description
