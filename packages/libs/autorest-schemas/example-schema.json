@@ -1,6 +1,6 @@
 {
   "title": "A JSON Schema for x-ms-examples extension in Swagger 2.0 API.",
-  "$id": "https://raw.githubusercontent.com/Azure/autorest/master/packages/libs/autorest-schemas/example-schema.json#",
+  "$id": "https://raw.githubusercontent.com/Azure/autorest/main/packages/libs/autorest-schemas/example-schema.json#",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "required": ["parameters", "responses"],
