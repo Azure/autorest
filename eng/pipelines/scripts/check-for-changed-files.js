@@ -1,3 +1,5 @@
+// @ts-check
+
 const { run } = require("./helpers.js");
 
 const proc = run("git", ["status", "--porcelain"], {
