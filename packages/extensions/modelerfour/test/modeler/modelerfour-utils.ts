@@ -1,8 +1,9 @@
-import { CodeModel } from "@autorest/codemodel";
-import { Model } from "@azure-tools/openapi";
+import assert from "assert";
+import { CodeModel, Operation } from "@autorest/codemodel";
+import oai3, { Model } from "@azure-tools/openapi";
 import { ModelerFourOptions } from "modeler/modelerfour-options";
 import { ModelerFour } from "../../src/modeler/modelerfour";
-import { createTestSessionFromModel } from "../utils";
+import { addOperation, createTestSessionFromModel, createTestSpec } from "../utils";
 
 const modelerfourOptions: ModelerFourOptions = {
   "flatten-models": true,
@@ -34,4 +35,21 @@ export async function runModeler(spec: any, config: { modelerfour: ModelerFourOp
   expect(errors.length).toBe(0);
 
   return modeler.process();
+}
+
+export async function runModelerWithOperation(
+  method: string,
+  path: string,
+  operation: oai3.HttpOperation,
+): Promise<Operation> {
+  const spec = createTestSpec();
+
+  addOperation(spec, path, {
+    [method]: operation,
+  });
+
+  const codeModel = await runModeler(spec);
+  const m4Operation = codeModel.operationGroups[0]?.operations[0];
+  assert(m4Operation);
+  return m4Operation;
 }
