@@ -35,7 +35,7 @@ export const parseArgs = (argv: string[]): CliConfig => {
       default: DEFAULT_PORT,
     });
 
-  const options = cli.argv;
+  const options = cli.argv as any;
   return {
     ...options,
   };

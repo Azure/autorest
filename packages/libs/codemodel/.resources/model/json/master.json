@@ -626,6 +626,13 @@
           "$ref": "./master.json#/definitions/Record<string,Request>",
           "description": "Mapping of all the content types available for this operation to the coresponding request."
         },
+        "specialHeaders": {
+          "description": "List of headers that parameters should not handle as parameters but with special logic.\nSee https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour for configuration `skip-special-headers` to exclude headers.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "requests": {
           "description": "the different possibilities to build the request.",
           "type": "array",

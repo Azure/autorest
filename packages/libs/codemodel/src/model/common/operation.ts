@@ -19,6 +19,12 @@ export interface Operation extends Aspect {
    */
   requestMediaTypes?: Record<string, Request>;
 
+  /**
+   * List of headers that parameters should not handle as parameters but with special logic.
+   * See https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour for configuration `skip-special-headers` to exclude headers.
+   */
+  specialHeaders?: string[];
+
   /** the different possibilities to build the request. */
   requests?: Array<Request>;
 

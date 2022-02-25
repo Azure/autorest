@@ -286,7 +286,7 @@ export async function selectVersion(
     try {
       // try the package
       pkg = await (await extensionManager).findPackage(newCorePackage, requestedVersion);
-    } catch {
+    } catch (error) {
       // try a prerelease version from github.
       try {
         const rv = requestedVersion.replace(/^[~|^]/g, "");
@@ -305,6 +305,7 @@ export async function selectVersion(
         }
       }
       if (!pkg) {
+        logger.debug(`Error trying to resolve @autorest/core version ${requestedVersion}: ${error}`);
         throw new Exception(
           `Unable to find a valid AutoRest core package '${newCorePackage}' @ '${requestedVersion}'.`,
         );

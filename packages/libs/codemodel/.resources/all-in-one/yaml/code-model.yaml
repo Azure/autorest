@@ -1322,6 +1322,13 @@ definitions:
         description: a common filtered list of parameters that is (assumably) the actual method signature parameters
         items:
           $ref: '#/definitions/Parameter'
+      specialHeaders:
+        type: array
+        description: |-
+          List of headers that parameters should not handle as parameters but with special logic.
+          See https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour for configuration `skip-special-headers` to exclude headers.
+        items:
+          type: string
       summary:
         type: string
         description: a short description

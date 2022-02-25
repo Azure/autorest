@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "autorest",
+      "comment": "**Fix** Library logging not configured",
+      "type": "patch"
+    }
+  ],
+  "packageName": "autorest",
+  "email": "tiguerin@microsoft.com"
+}

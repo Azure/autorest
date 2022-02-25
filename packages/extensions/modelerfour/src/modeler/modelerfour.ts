@@ -76,6 +76,7 @@ import * as OpenAPI from "@azure-tools/openapi";
 import { uniq, every } from "lodash";
 import { isDefined } from "../utils";
 import { BodyProcessor, RequestBodyGroup } from "./body-processor";
+import { KnownSpecialHeaders } from "./constants";
 import { Interpretations, XMSEnum } from "./interpretations";
 import { ModelerFourOptions } from "./modelerfour-options";
 import { isSchemaAnEnum, isSchemaBinary } from "./schema-utils";
@@ -155,6 +156,7 @@ export class ModelerFour {
   private bodyProcessor: BodyProcessor;
   private securityProcessor: SecurityProcessor;
   private ignoreHeaders: Set<string> = new Set();
+  private specialHeaders: Set<string> = new Set();
 
   constructor(protected session: Session<oai3>) {
     this.input = session.model; //shadowPosition(session.model);
@@ -268,6 +270,7 @@ export class ModelerFour {
     this.profileFilter = await this.session.getValue("profile", []);
     this.apiVersionFilter = await this.session.getValue("api-version", []);
     this.ignoreHeaders = new Set(this.options["ignore-headers"] ?? []);
+    this.specialHeaders = new Set(KnownSpecialHeaders.filter((x) => this.options["skip-special-headers"]?.includes(x)));
     const apiVersionMode = await this.session.getValue("api-version-mode", "auto");
 
     const apiVersionParameter =
@@ -1963,12 +1966,23 @@ export class ModelerFour {
   }
 
   processParameters(httpOperation: OpenAPI.HttpOperation, operation: Operation, pathItem: OpenAPI.PathItem) {
-    const parameters = Object.values(httpOperation.parameters ?? {})
-      .map((x) => ({ ...dereference<OpenAPI.Parameter>(this.input, x), original: x }))
-      .filter((x) => !this.isParameterIgnoredHeader(x.instance));
+    const parameters = Object.values(httpOperation.parameters ?? {}).map((x) => ({
+      ...dereference<OpenAPI.Parameter>(this.input, x),
+      original: x,
+    }));
 
     for (const pp of parameters) {
       const parameter = pp.instance;
+      if (this.isParameterSpecialHeader(parameter)) {
+        if (operation.specialHeaders === undefined) {
+          operation.specialHeaders = [];
+        }
+        operation.specialHeaders.push(parameter.name);
+        continue;
+      }
+      if (this.isParameterIgnoredHeader(parameter)) {
+        continue;
+      }
       if (parameter.content) {
         this.session.error(
           `Parameter '${parameter.name}' in '${parameter.in}' has content.<mediaType> which is not supported right now. Use schema instead. See https://github.com/Azure/autorest/issues/4303`,
@@ -2058,6 +2072,15 @@ export class ModelerFour {
         return newParam;
       });
     }
+  }
+
+  /**
+   * Resolve if the parameter is a header that should be ignored.
+   * @param parmeter Operation parameter.
+   * @returns boolean if parameter should be ignored.
+   */
+  private isParameterSpecialHeader(parmeter: OpenAPI.Parameter) {
+    return parmeter.in === ParameterLocation.Header && this.specialHeaders.has(parmeter.name);
   }
 
   /**
