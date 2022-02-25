@@ -44,10 +44,28 @@ class CommandFailedError extends Error {
   }
 }
 
+function runPrettier(...args) {
+  run(
+    prettier,
+    [
+      ...args,
+      "--config",
+      ".prettierrc.yml",
+      "--ignore-path",
+      ".prettierignore",
+      "**/*.{ts,js,cjs,mjs,json,yml,yaml,cadl,md}",
+    ],
+    {
+      cwd: repoRoot,
+    },
+  );
+}
+
 module.exports = {
   repoRoot,
   prettier,
   tsc,
   run,
+  runPrettier,
   CommandFailedError,
 };

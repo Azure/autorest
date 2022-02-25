@@ -36,7 +36,7 @@ stages:
           - script: npx @microsoft/rush regen-codemodel
             displayName: Regen codemodel schema
 
-          - script: node ./eng/check-for-changed-files.js
+          - script: node ./eng/scripts/check-for-changed-files.js
             displayName: Check Git Status For Changed Files
 
           - script: |

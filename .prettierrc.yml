@@ -1,4 +1,4 @@
 trailingComma: "all"
 printWidth: 120
-endOfLine: "auto"
+endOfLine: lf
 arrowParens: always
