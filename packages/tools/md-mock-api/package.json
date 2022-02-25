@@ -15,8 +15,8 @@
     "lint": "eslint  ./src --ext .ts --max-warnings=0",
     "test": "jest --watchAll --coverage=false",
     "test:ci": "jest --ci",
-    "watch": "tsc -p ./tsconfig.build.json --watch",
-    "build": "tsc -p ./tsconfig.build.json"
+    "watch": "tsc -p tsconfig.build.json --watch",
+    "build": "tsc -p tsconfig.build.json"
   },
   "repository": {
     "type": "git",

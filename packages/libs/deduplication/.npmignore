@@ -3,6 +3,7 @@ test/
 dist/test/
 package/
 .npmignore
+*.tsbuildinfo
 tsconfig.json
 *.ts
 changelog.md
@@ -13,9 +14,6 @@ changelog.md
 .scripts
 attic/
 generated/
-notes.md
-Examples/
-samples/
 *.log
 package-deps.json
 tslint.json

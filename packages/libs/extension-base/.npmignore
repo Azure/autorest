@@ -3,6 +3,7 @@ test/
 dist/test/
 package/
 .npmignore
+*.tsbuildinfo
 tsconfig.json
 *.ts
 changelog.md

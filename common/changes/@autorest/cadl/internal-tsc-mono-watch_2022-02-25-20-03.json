@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/cadl",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@autorest/cadl",
+  "email": "tiguerin@microsoft.com"
+}

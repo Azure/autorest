@@ -2,8 +2,8 @@
   "name": "@azure-tools/oai2-to-oai3",
   "version": "4.5.1",
   "description": "OpenAPI2 to OpenAPI3 conversion library that maintains souremaps for use with AutoRest",
-  "main": "./dist/src/index.js",
-  "typings": "./dist/src/index.d.ts",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "engines": {
     "node": ">=12.0.0"
   },
@@ -12,14 +12,14 @@
     "url": "git+https://github.com/Azure/perks.git"
   },
   "scripts": {
-    "build": "tsc -p .",
-    "watch": "tsc -p . --watch",
+    "watch": "tsc -p tsconfig.build.json --watch",
+    "build": "tsc -p tsconfig.build.json",
     "lint:fix": "eslint  . --fix --ext .ts",
     "lint": "eslint  . --ext .ts",
     "prepare": "npm run build",
     "test": "jest --watchAll --coverage=false",
     "test:ci": "jest --ci",
-    "clean": "rimraf ./dist"
+    "clean": "rimraf ./dist ./temp"
   },
   "keywords": [
     "perks",

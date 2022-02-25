@@ -32,13 +32,13 @@
     "test:e2e": "jest --forceExit --runInBand --config ./jest.e2e.config.js",
     "test:e2e:ci": "jest --ci --forceExit --runInBand --config ./jest.e2e.config.js",
     "test:ci": "npm run test:unit:ci && npm run test:e2e:ci",
-    "watch": "tsc -p ./tsconfig.build.json --watch",
-    "build": "tsc -p ./tsconfig.build.json",
+    "watch": "tsc -p tsconfig.build.json --watch",
+    "build": "tsc -p tsconfig.build.json",
     "build:prod": "webpack",
     "lint:fix": "eslint ./src --fix --ext .ts",
     "lint": "eslint ./src --ext .ts --max-warnings=0",
     "prepack": "npm run clean && npm run build:prod",
-    "clean": "rimraf ./dist && rimraf ./*.log"
+    "clean": "rimraf ./dist ./temp ./*.log"
   },
   "typings": "./dist/exports.d.ts",
   "devDependencies": {
