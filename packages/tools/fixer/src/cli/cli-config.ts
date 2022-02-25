@@ -13,4 +13,9 @@ export interface CliConfig {
    * If this should just be a dry run.
    */
   "dry-run"?: boolean;
+
+  /**
+   * List of fixers to run.
+   */
+  fixers?: string;
 }
