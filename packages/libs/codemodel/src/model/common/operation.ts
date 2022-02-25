@@ -14,6 +14,12 @@ export interface Operation extends Aspect {
   /** a common filtered list of parameters that is (assumably) the actual method signature parameters */
   signatureParameters?: Array<Parameter>;
 
+  /**
+   * List of headers that parameters should not handle as parameters but with special logic.
+   * See https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour for configuration `skip-special-headers` to exclude headers.
+   */
+  specialHeaders?: string[];
+
   /** the different possibilities to build the request. */
   requests?: Array<Request>;
 
