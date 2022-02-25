@@ -1,11 +1,11 @@
 import assert from "assert";
 
-import { AutoRest } from "../src/lib/autorest-core";
-import { RealFileSystem } from "@azure-tools/datastore";
-import { AutorestTestLogger, createMockLogger } from "@autorest/test-utils";
-import { createFolderUri, resolveUri } from "@azure-tools/uri";
-import { AppRoot } from "../src/lib/constants";
 import { AutorestConfiguration } from "@autorest/configuration";
+import { AutorestTestLogger, createMockLogger } from "@autorest/test-utils";
+import { RealFileSystem } from "@azure-tools/datastore";
+import { createFolderUri, resolveUri } from "@azure-tools/uri";
+import { AutoRest } from "../src/lib/autorest-core";
+import { AppRoot } from "../src/lib/constants";
 
 describe("EndToEnd", () => {
   it("network full game", async () => {
@@ -43,7 +43,7 @@ describe("EndToEnd", () => {
 
     const success = await autoRest.Process().finish;
 
-    if (!success) {
+    if (success !== true) {
       // eslint-disable-next-line no-console
       console.log("Messages", logger.logs.all);
       throw new Error("Autorest didn't complete with success.");

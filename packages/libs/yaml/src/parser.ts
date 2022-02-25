@@ -200,8 +200,15 @@ export function parseYAML<T>(rawYaml: string): ParseResult<T> {
   return getYamlNodeValue<T>(node);
 }
 
+/**
+ * @deprecated use @see stringify
+ */
 export function Stringify<T>(object: T): string {
   return "---\n" + dump(object, { skipInvalid: true });
+}
+
+export function stringify(object: unknown) {
+  return dump(object);
 }
 
 export function fastStringify<T>(obj: T): string {
