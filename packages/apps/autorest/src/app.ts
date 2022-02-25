@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import "source-map-support/register";
 import { join } from "path";
-import { AutorestSyncLogger, ConsoleLoggerSink, FilterLogger } from "@autorest/common";
+import { AutorestSyncLogger, configureLibrariesLogger, ConsoleLoggerSink, FilterLogger } from "@autorest/common";
 import { getLogLevel } from "@autorest/configuration";
 import chalk from "chalk";
 import { SourceMapConsumer } from "source-map";
@@ -118,6 +118,10 @@ async function main() {
       logger.with(new FilterLogger({ level: getLogLevel({ ...args, ...config }) })),
       config,
     );
+
+    if (args.verbose || args.debug) {
+      configureLibrariesLogger("verbose", (...x) => logger.debug(x.join(" ")));
+    }
 
     // let's strip the extra stuff from the command line before we require the core module.
     const newArgs: string[] = [];
