@@ -16,8 +16,8 @@
     "test-run": "ts-node src/index.ts --typescript --spec-path:redis/resource-manager --spec-root-path:../azure-rest-api-specs/specification --output-path:generated/ --compare-base --version:^2.0.0 --compare-next --version:3.0.6170",
     "test-generate": "ts-node src/index.ts --generate-baseline --typescript --spec-path:redis/resource-manager --spec-root-path:../azure-rest-api-specs/specification --output-path:generated/ --compare-base --version:^2.0.0 --compare-next --version:3.0.6170",
     "test-python": "ts-node src/index.ts --python --output-path:generated/python/ --spec-path:body-string.json --spec-root-path:/home/daviwil/Projects/Code/autorest.modelerfour/modelerfour/node_modules/@microsoft.azure/autorest.testserver/__files/ --compare-old --v3 --version=3.0.6199 --use=@autorest/python@5.0.0_20200124 --use:@autorest/modelerfour@4.3.142 --debug --compare-new --v3 --version=3.0.6199 --use=@autorest/python@5.0.0_20200124  --use:/home/daviwil/Projects/Code/autorest.modelerfour/modelerfour --debug --verbose",
-    "build": "tsc -p ./tsconfig.build.json",
-    "watch": "tsc -p ./tsconfig.build.json --watch",
+    "watch": "tsc -p tsconfig.build.json --watch",
+    "build": "tsc -p tsconfig.build.json",
     "lint:fix": "eslint ./src --fix --ext .ts",
     "lint": "eslint ./src --ext .ts --max-warnings=0"
   },

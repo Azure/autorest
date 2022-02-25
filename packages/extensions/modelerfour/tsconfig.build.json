@@ -1,4 +1,12 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["**/*.test.*", "test/**/*"]
+  "exclude": ["**/*.test.*", "test/**/*"],
+  "references": [
+    { "path": "../../libs/codemodel/tsconfig.build.json" },
+    { "path": "../../libs/codegen/tsconfig.build.json" },
+    { "path": "../../libs/datastore/tsconfig.build.json" },
+    { "path": "../../libs/openapi/tsconfig.build.json" },
+    { "path": "../../libs/extension-base/tsconfig.build.json" },
+    { "path": "../../testing/test-utils/tsconfig.build.json" }
+  ]
 }

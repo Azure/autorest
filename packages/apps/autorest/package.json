@@ -39,7 +39,7 @@
     "lint": "eslint ./src --ext .ts --max-warnings=0",
     "preinstall": "node ./.scripts/preinstall-check",
     "prepack": "npm run clean && npm run build:prod",
-    "clean": "rimraf ./dist"
+    "clean": "rimraf ./dist ./temp"
   },
   "typings": "./dist/exports.d.ts",
   "devDependencies": {

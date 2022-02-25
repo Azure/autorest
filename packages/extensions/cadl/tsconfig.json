@@ -1,9 +1,10 @@
 {
-  "extends": "../../../tsconfig.json",
+  "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
     "module": "es2020",
     "moduleResolution": "node",
     "outDir": "dist",
+    "tsBuildInfoFile": "temp/.tsbuildinfo",
     "baseUrl": "src"
   },
   "include": ["src/**/*.ts", "test/**/*.ts"]

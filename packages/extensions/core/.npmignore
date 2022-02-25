@@ -7,5 +7,6 @@ test/
 dist/test/
 package/
 .npmignore
+*.tsbuildinfo
 *.tgz
-!/post-install.js 
+!/post-install.js

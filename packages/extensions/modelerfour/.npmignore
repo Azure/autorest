@@ -4,6 +4,7 @@ dist/test/
 test/
 package/
 .npmignore
+*.tsbuildinfo
 tsconfig.json
 *.ts
 .eslint*

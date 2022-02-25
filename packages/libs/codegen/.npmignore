@@ -3,6 +3,7 @@ src/
 dist/test/
 package/
 .npmignore
+*.tsbuildinfo
 tsconfig.json
 *.ts
 changelog.md
@@ -18,4 +19,3 @@ Examples/
 samples/
 *.log
 package-deps.json
-tslint.json

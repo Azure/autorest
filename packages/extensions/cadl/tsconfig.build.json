@@ -1,4 +1,5 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["**/*.test.*", "test/**/*"]
+  "exclude": ["**/*.test.*", "test/**/*"],
+  "references": [{ "path": "../../libs/extension-base/tsconfig.build.json" }]
 }

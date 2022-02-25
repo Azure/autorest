@@ -1,4 +1,8 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["**/*.test.*", "test/**/*"]
+  "exclude": ["**/*.test.*", "test/**/*"],
+  "references": [
+    { "path": "../common/tsconfig.build.json" },
+    { "path": "../../testing/test-utils/tsconfig.build.json" }
+  ]
 }

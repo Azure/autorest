@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": ["**/*.test.*", "test/**/*"],
+  "references": [{ "path": "../codegen/tsconfig.build.json" }]
+}

@@ -294,3 +294,5 @@ common/config/rush/shrinkwrap.yaml
 core/test/regression
 regression-tests/output
 
+# TS incremental build cache
+*.tsbuildinfo
