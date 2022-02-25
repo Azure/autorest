@@ -1304,6 +1304,9 @@ definitions:
       profile:
         description: the apiVersion to use for a given profile name
         $ref: '#/definitions/Record<string,ApiVersion>'
+      requestMediaTypes:
+        description: Mapping of all the content types available for this operation to the coresponding request.
+        $ref: '#/definitions/Record<string,Request>'
       requests:
         type: array
         description: the different possibilities to build the request.
@@ -1524,6 +1527,9 @@ definitions:
     type: object
     additionalProperties:
       $ref: '#/definitions/ComplexSchema'
+  Record<string,Request>:
+    type: object
+    additionalProperties: false
   Record<string,any>:
     type: object
     additionalProperties:

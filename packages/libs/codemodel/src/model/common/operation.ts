@@ -15,6 +15,11 @@ export interface Operation extends Aspect {
   signatureParameters?: Array<Parameter>;
 
   /**
+   * Mapping of all the content types available for this operation to the coresponding request.
+   */
+  requestMediaTypes?: Record<string, Request>;
+
+  /**
    * List of headers that parameters should not handle as parameters but with special logic.
    * See https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour for configuration `skip-special-headers` to exclude headers.
    */

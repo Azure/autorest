@@ -63,6 +63,12 @@ export interface ModelerFourOptions {
    * Those header would already be handled by the generator.
    */
   "ignore-headers"?: string[];
+
+  /**
+   * Use legacy request body resolution.
+   * Used for transition period DO NOT DEPEND on this.
+   */
+  "legacy-request-body"?: boolean;
 }
 
 export interface ModelerFourNamingOptions {

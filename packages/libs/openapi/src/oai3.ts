@@ -346,18 +346,13 @@ export interface PasswordOAuthFlow extends Extensions {
   refreshUrl?: string; // uriref
   scopes?: Dictionary<string>;
 }
-export interface PathItem extends Extensions {
+
+export type HttpMethod = "get" | "put" | "post" | "delete" | "options" | "head" | "patch" | "trace";
+
+export interface PathItem extends Extensions, Partial<Record<HttpMethod, HttpOperation>> {
   $ref?: string | PathItem;
   summary?: string;
   description?: string;
-  get?: HttpOperation;
-  put?: HttpOperation;
-  post?: HttpOperation;
-  delete?: HttpOperation;
-  options?: HttpOperation;
-  head?: HttpOperation;
-  patch?: HttpOperation;
-  trace?: HttpOperation;
   servers?: Server[];
   parameters?: ParameterReference<Parameter>[];
 }

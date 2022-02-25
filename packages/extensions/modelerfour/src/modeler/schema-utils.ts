@@ -5,6 +5,10 @@ export function isSchemaBinary(schema: OpenAPI.Schema) {
   return <any>schema.type === "file" || schema.format === "file" || schema.format === "binary";
 }
 
+export function isSchemaString(schema: OpenAPI.Schema) {
+  return schema.type === "string";
+}
+
 /**
  * Figure out if a schema should be an enum. This is either it is marked itself as an enum or that it has allOf of an enum.
  * @param schema Schema.

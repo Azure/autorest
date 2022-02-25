@@ -6,6 +6,10 @@
 - Generally swaggers are kept in [this][azure_rest_api_specs] repo
 - Additional OpenAPI validation done by [Prechecker][prechecker]
 
+Autorest interpretation of swagger specs:
+
+- [Request body](./request-body.md)
+
 How to guides:
 
 - [Define binary/file requests](./howto/binary-payload.md)

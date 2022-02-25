@@ -1,25 +1,15 @@
 /* eslint-disable no-process-exit */
 /* eslint-disable no-console */
 import "source-map-support/register";
-import { join } from "path";
 import { AutorestSyncLogger, configureLibrariesLogger, ConsoleLoggerSink, FilterLogger } from "@autorest/common";
 import { getLogLevel } from "@autorest/configuration";
 import chalk from "chalk";
-import { SourceMapConsumer } from "source-map";
 import { clearTempData } from "./actions";
 import { parseAutorestArgs } from "./args";
 import { newCorePackage, ensureAutorestHome, runCoreWithRequire, runCoreOutOfProc } from "./autorest-as-a-service";
 import { resetAutorest, showAvailableCoreVersions, showInstalledExtensions } from "./commands";
 import { VERSION } from "./constants";
 import { loadConfig, resolveCoreVersion } from "./utils";
-
-// Need to copy this file in webpack over and tell SourceMapConsumer where it is.
-const inWebpack = typeof __webpack_require__ === "function";
-if (inWebpack) {
-  (SourceMapConsumer as any).initialize({
-    "lib/mappings.wasm": join(__dirname, "mappings.wasm"),
-  });
-}
 
 const cwd = process.cwd();
 
