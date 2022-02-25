@@ -125,10 +125,19 @@ export class BodyProcessor {
     const types = mediaTypes.map((x) => knownMediaType(x));
     const type = types[0];
     const differentType = types.find((x) => x !== type);
+
+    // Special case if both json and xml are supported just pick json.
+    const isXmlAndJson =
+      (type === KnownMediaType.Json && differentType === KnownMediaType.Xml) ||
+      (type === KnownMediaType.Xml && differentType === KnownMediaType.Json);
+    if (isXmlAndJson) {
+      return KnownMediaType.Json;
+    }
     if (differentType !== undefined) {
       this.session.error(
-        `Operation ${operationName} content types [${type}, ${differentType}] have the same body schema but cannot be used together.`,
+        `Operation '${operationName}' content types [${type}, ${differentType}] have the same body schema but cannot be used together.`,
         ["Modelerfour", "IncompatibleRequestBodies"],
+        body,
       );
     }
     return type;
