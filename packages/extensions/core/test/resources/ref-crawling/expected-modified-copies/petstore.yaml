@@ -23,7 +23,7 @@ paths:
             type: integer
             format: int32
       responses:
-        '200':
+        "200":
           description: A paged array of pets
           headers:
             x-next:
@@ -31,7 +31,7 @@ paths:
               schema:
                 type: string
           content:
-            application/json:    
+            application/json:
               schema:
                 $ref: "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/80fd1186608a4fa549ca797e74eb44c2b386df75/examples/v3.0/petstore.yaml#/components/schemas/Pets"
         default:
@@ -46,7 +46,7 @@ paths:
       tags:
         - pets
       responses:
-        '201':
+        "201":
           description: Null response
         default:
           description: unexpected error
@@ -68,7 +68,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Expected response to a valid request
           content:
             application/json:

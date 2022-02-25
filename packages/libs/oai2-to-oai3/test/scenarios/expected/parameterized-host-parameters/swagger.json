@@ -33,10 +33,7 @@
           "description": "Shared endpoint param.",
           "x-required": true,
           "x-type": "string",
-          "enum": [
-            "v1",
-            "v2"
-          ],
+          "enum": ["v1", "v2"],
           "default": "v1",
           "x-ms-parameter-location": "client",
           "x-ms-original": {
@@ -50,9 +47,7 @@
   "openapi": "3.0.0",
   "info": {
     "x-ms-metadata": {
-      "apiVersions": [
-        "test-0.1"
-      ]
+      "apiVersions": ["test-0.1"]
     },
     "title": "Test",
     "description": "test",
@@ -90,10 +85,7 @@
         "required": true,
         "x-ms-parameter-location": "client",
         "schema": {
-          "enum": [
-            "v1",
-            "v2"
-          ],
+          "enum": ["v1", "v2"],
           "default": "v1",
           "type": "string"
         }

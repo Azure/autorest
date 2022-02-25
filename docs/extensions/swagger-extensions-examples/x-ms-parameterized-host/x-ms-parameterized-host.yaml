@@ -1,5 +1,5 @@
 ---
-swagger: '2.0'
+swagger: "2.0"
 info:
   version: 1.0.0
   title: Swagger Petstore
@@ -10,18 +10,18 @@ x-ms-parameterized-host:
   useSchemePrefix: false
   positionInOperation: last
   parameters:
-  - name: petStoreBaseUrl
-    description: PetStore base url eg. https://mydomain.petstore
-    required: true
-    type: string
-    in: path
-    x-ms-skip-url-encoding: true
+    - name: petStoreBaseUrl
+      description: PetStore base url eg. https://mydomain.petstore
+      required: true
+      type: string
+      in: path
+      x-ms-skip-url-encoding: true
 schemes:
-- https
+  - https
 consumes:
-- application/json
+  - application/json
 produces:
-- application/json
+  - application/json
 paths:
   "/pets/{opsPath}/{serverLoc}":
     put:
@@ -29,23 +29,23 @@ paths:
       summary: Add a pet
       operationId: addPet
       tags:
-      - pets
+        - pets
       parameters:
-      - name: petReq
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/Pet"
-      - name: opsPath
-        in: path
-        required: true
-        type: string
-      - name: serverLoc
-        in: path
-        required: true
-        type: string
+        - name: petReq
+          in: body
+          required: true
+          schema:
+            "$ref": "#/definitions/Pet"
+        - name: opsPath
+          in: path
+          required: true
+          type: string
+        - name: serverLoc
+          in: path
+          required: true
+          type: string
       responses:
-        '200':
+        "200":
           description: OK
 definitions:
   Pet:
@@ -57,5 +57,5 @@ definitions:
         type: string
     discriminator: name
     required:
-    - name
-    - petType
+      - name
+      - petType

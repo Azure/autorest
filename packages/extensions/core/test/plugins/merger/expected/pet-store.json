@@ -11,10 +11,7 @@
     },
     "x-ms-metadata": {
       "merged": true,
-      "apiVersions": [
-        "1.0.0",
-        "1.0.2"
-      ]
+      "apiVersions": ["1.0.0", "1.0.2"]
     },
     "title": "Swagger Petstore",
     "description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
@@ -65,35 +62,21 @@
   "paths": {
     "path:0": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/pet",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1pet"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1pet"]
       }
     },
     "path:0.post": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/pet",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1pet"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1pet"]
       },
       "post": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Add a new pet to the store",
         "description": "",
         "operationId": "addPet",
@@ -104,10 +87,7 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ],
         "requestBody": {
@@ -132,21 +112,13 @@
     },
     "path:0.put": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/pet",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1pet"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1pet"]
       },
       "put": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Update an existing pet",
         "description": "",
         "operationId": "updatePet",
@@ -163,10 +135,7 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ],
         "requestBody": {
@@ -191,35 +160,21 @@
     },
     "path:1": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/pet/findByStatus",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1pet~1findByStatus"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1pet~1findByStatus"]
       }
     },
     "path:1.get": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/pet/findByStatus",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1pet~1findByStatus"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1pet~1findByStatus"]
       },
       "get": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Finds Pets by status",
         "description": "Multiple status values can be provided with comma separated strings",
         "operationId": "findPetsByStatus",
@@ -234,11 +189,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": [
-                  "available",
-                  "pending",
-                  "sold"
-                ],
+                "enum": ["available", "pending", "sold"],
                 "default": "available"
               }
             }
@@ -272,45 +223,28 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ]
       }
     },
     "path:2": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/pet/findByTags",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1pet~1findByTags"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1pet~1findByTags"]
       }
     },
     "path:2.get": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/pet/findByTags",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1pet~1findByTags"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1pet~1findByTags"]
       },
       "get": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Finds Pets by tags",
         "description": "Muliple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
         "operationId": "findPetsByTags",
@@ -357,10 +291,7 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ],
         "deprecated": true
@@ -368,35 +299,21 @@
     },
     "path:3": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/pet/{petId}",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1pet~1{petId}"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1pet~1{petId}"]
       }
     },
     "path:3.get": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/pet/{petId}",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1pet~1{petId}"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1pet~1{petId}"]
       },
       "get": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Find pet by ID",
         "description": "Returns a single pet",
         "operationId": "getPetById",
@@ -444,21 +361,13 @@
     },
     "path:3.post": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/pet/{petId}",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1pet~1{petId}"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1pet~1{petId}"]
       },
       "post": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Updates a pet in the store with form data",
         "description": "",
         "operationId": "updatePetWithForm",
@@ -481,10 +390,7 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ],
         "requestBody": {
@@ -513,21 +419,13 @@
     },
     "path:3.delete": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/pet/{petId}",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1pet~1{petId}"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1pet~1{petId}"]
       },
       "delete": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Deletes a pet",
         "description": "",
         "operationId": "deletePet",
@@ -561,45 +459,28 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ]
       }
     },
     "path:4": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/pet/{petId}/uploadImage",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1pet~1{petId}~1uploadImage"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1pet~1{petId}~1uploadImage"]
       }
     },
     "path:4.post": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/pet/{petId}/uploadImage",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1pet~1{petId}~1uploadImage"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1pet~1{petId}~1uploadImage"]
       },
       "post": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "uploads an image",
         "description": "",
         "operationId": "uploadFile",
@@ -629,10 +510,7 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ],
         "requestBody": {
@@ -661,35 +539,21 @@
     },
     "path:5": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/store/inventory",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1store~1inventory"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1store~1inventory"]
       }
     },
     "path:5.get": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/store/inventory",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1store~1inventory"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1store~1inventory"]
       },
       "get": {
-        "tags": [
-          "store"
-        ],
+        "tags": ["store"],
         "summary": "Returns pet inventories by status",
         "description": "Returns a map of status codes to quantities",
         "operationId": "getInventory",
@@ -718,35 +582,21 @@
     },
     "path:6": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/store/order",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1store~1order"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1store~1order"]
       }
     },
     "path:6.post": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/store/order",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1store~1order"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1store~1order"]
       },
       "post": {
-        "tags": [
-          "store"
-        ],
+        "tags": ["store"],
         "summary": "Place an order for a pet",
         "description": "",
         "operationId": "placeOrder",
@@ -787,35 +637,21 @@
     },
     "path:7": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/store/order/{orderId}",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1store~1order~1{orderId}"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1store~1order~1{orderId}"]
       }
     },
     "path:7.get": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/store/order/{orderId}",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1store~1order~1{orderId}"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1store~1order~1{orderId}"]
       },
       "get": {
-        "tags": [
-          "store"
-        ],
+        "tags": ["store"],
         "summary": "Find purchase order by ID",
         "description": "For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions",
         "operationId": "getOrderById",
@@ -860,21 +696,13 @@
     },
     "path:7.delete": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/store/order/{orderId}",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1store~1order~1{orderId}"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1store~1order~1{orderId}"]
       },
       "delete": {
-        "tags": [
-          "store"
-        ],
+        "tags": ["store"],
         "summary": "Delete purchase order by ID",
         "description": "For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors",
         "operationId": "deleteOrder",
@@ -903,35 +731,21 @@
     },
     "path:8": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/user",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1user"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1user"]
       }
     },
     "path:8.post": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/user",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1user"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1user"]
       },
       "post": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Create user",
         "description": "This can only be done by the logged in user.",
         "operationId": "createUser",
@@ -957,35 +771,21 @@
     },
     "path:9": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/user/createWithArray",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1user~1createWithArray"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1user~1createWithArray"]
       }
     },
     "path:9.post": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/user/createWithArray",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1user~1createWithArray"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1user~1createWithArray"]
       },
       "post": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Creates list of users with given input array",
         "description": "",
         "operationId": "createUsersWithArrayInput",
@@ -1014,35 +814,21 @@
     },
     "path:10": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/user/createWithList",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1user~1createWithList"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1user~1createWithList"]
       }
     },
     "path:10.post": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/user/createWithList",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1user~1createWithList"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1user~1createWithList"]
       },
       "post": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Creates list of users with given input array",
         "description": "",
         "operationId": "createUsersWithListInput",
@@ -1071,35 +857,21 @@
     },
     "path:11": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/user/login",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1user~1login"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1user~1login"]
       }
     },
     "path:11.get": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/user/login",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1user~1login"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1user~1login"]
       },
       "get": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Logs user into the system",
         "description": "",
         "operationId": "loginUser",
@@ -1164,35 +936,21 @@
     },
     "path:12": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/user/logout",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1user~1logout"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1user~1logout"]
       }
     },
     "path:12.get": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/user/logout",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1user~1logout"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1user~1logout"]
       },
       "get": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Logs out current logged in user session",
         "description": "",
         "operationId": "logoutUser",
@@ -1205,35 +963,21 @@
     },
     "path:13": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/user/{username}",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1user~1{username}"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1user~1{username}"]
       }
     },
     "path:13.get": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/user/{username}",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1user~1{username}"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1user~1{username}"]
       },
       "get": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Get user by user name",
         "description": "",
         "operationId": "getUserByName",
@@ -1275,21 +1019,13 @@
     },
     "path:13.put": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/user/{username}",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1user~1{username}"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1user~1{username}"]
       },
       "put": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Updated user",
         "description": "This can only be done by the logged in user.",
         "operationId": "updateUser",
@@ -1329,21 +1065,13 @@
     },
     "path:13.delete": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.0"
-        ],
-        "filename": [
-          "mem://pet-store/input.json"
-        ],
+        "apiVersions": ["1.0.0"],
+        "filename": ["mem://pet-store/input.json"],
         "path": "/user/{username}",
-        "originalLocations": [
-          "mem://pet-store/input.json#/paths/~1user~1{username}"
-        ]
+        "originalLocations": ["mem://pet-store/input.json#/paths/~1user~1{username}"]
       },
       "delete": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Delete user",
         "description": "This can only be done by the logged in user.",
         "operationId": "deleteUser",
@@ -1370,35 +1098,21 @@
     },
     "path:14": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/pet",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1pet"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1pet"]
       }
     },
     "path:14.post": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/pet",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1pet"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1pet"]
       },
       "post": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Add a new pet to the store",
         "description": "v1.0.2 -",
         "operationId": "addPet",
@@ -1409,10 +1123,7 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ],
         "requestBody": {
@@ -1437,21 +1148,13 @@
     },
     "path:14.put": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/pet",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1pet"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1pet"]
       },
       "put": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Update an existing pet",
         "description": "v1.0.2 -",
         "operationId": "updatePet",
@@ -1468,10 +1171,7 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ],
         "requestBody": {
@@ -1496,35 +1196,21 @@
     },
     "path:15": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/pet/findByStatus",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1pet~1findByStatus"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1pet~1findByStatus"]
       }
     },
     "path:15.get": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/pet/findByStatus",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1pet~1findByStatus"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1pet~1findByStatus"]
       },
       "get": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Finds Pets by status",
         "description": "v1.0.2 -Multiple status values can be provided with comma separated strings",
         "operationId": "findPetsByStatus",
@@ -1539,11 +1225,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": [
-                  "available",
-                  "pending",
-                  "sold"
-                ],
+                "enum": ["available", "pending", "sold"],
                 "default": "available"
               }
             }
@@ -1577,45 +1259,28 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ]
       }
     },
     "path:16": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/pet/findByTags",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1pet~1findByTags"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1pet~1findByTags"]
       }
     },
     "path:16.get": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/pet/findByTags",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1pet~1findByTags"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1pet~1findByTags"]
       },
       "get": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Finds Pets by tags",
         "description": "v1.0.2 -Muliple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
         "operationId": "findPetsByTags",
@@ -1662,10 +1327,7 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ],
         "deprecated": true
@@ -1673,35 +1335,21 @@
     },
     "path:17": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/pet/{petId}",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1pet~1{petId}"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1pet~1{petId}"]
       }
     },
     "path:17.get": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/pet/{petId}",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1pet~1{petId}"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1pet~1{petId}"]
       },
       "get": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Find pet by ID",
         "description": "v1.0.2 -Returns a single pet",
         "operationId": "getPetById",
@@ -1749,21 +1397,13 @@
     },
     "path:17.post": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/pet/{petId}",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1pet~1{petId}"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1pet~1{petId}"]
       },
       "post": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Updates a pet in the store with form data",
         "description": "v1.0.2 -",
         "operationId": "updatePetWithForm",
@@ -1786,10 +1426,7 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ],
         "requestBody": {
@@ -1818,21 +1455,13 @@
     },
     "path:17.delete": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/pet/{petId}",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1pet~1{petId}"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1pet~1{petId}"]
       },
       "delete": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Deletes a pet",
         "description": "v1.0.2 -",
         "operationId": "deletePet",
@@ -1866,45 +1495,28 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ]
       }
     },
     "path:18": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/pet/{petId}/uploadImage",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1pet~1{petId}~1uploadImage"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1pet~1{petId}~1uploadImage"]
       }
     },
     "path:18.post": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/pet/{petId}/uploadImage",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1pet~1{petId}~1uploadImage"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1pet~1{petId}~1uploadImage"]
       },
       "post": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "uploads an image",
         "description": "v1.0.2 -",
         "operationId": "uploadFile",
@@ -1934,10 +1546,7 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ],
         "requestBody": {
@@ -1966,35 +1575,21 @@
     },
     "path:19": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/store/inventory",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1store~1inventory"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1store~1inventory"]
       }
     },
     "path:19.get": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/store/inventory",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1store~1inventory"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1store~1inventory"]
       },
       "get": {
-        "tags": [
-          "store"
-        ],
+        "tags": ["store"],
         "summary": "Returns pet inventories by status",
         "description": "v1.0.2 -Returns a map of status codes to quantities",
         "operationId": "getInventory",
@@ -2023,35 +1618,21 @@
     },
     "path:20": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/store/order",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1store~1order"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1store~1order"]
       }
     },
     "path:20.post": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/store/order",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1store~1order"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1store~1order"]
       },
       "post": {
-        "tags": [
-          "store"
-        ],
+        "tags": ["store"],
         "summary": "Place an order for a pet",
         "description": "v1.0.2 -",
         "operationId": "placeOrder",
@@ -2092,35 +1673,21 @@
     },
     "path:21": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/store/order/{orderId}",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1store~1order~1{orderId}"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1store~1order~1{orderId}"]
       }
     },
     "path:21.get": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/store/order/{orderId}",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1store~1order~1{orderId}"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1store~1order~1{orderId}"]
       },
       "get": {
-        "tags": [
-          "store"
-        ],
+        "tags": ["store"],
         "summary": "Find purchase order by ID",
         "description": "v1.0.2 -For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions",
         "operationId": "getOrderById",
@@ -2165,21 +1732,13 @@
     },
     "path:21.delete": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/store/order/{orderId}",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1store~1order~1{orderId}"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1store~1order~1{orderId}"]
       },
       "delete": {
-        "tags": [
-          "store"
-        ],
+        "tags": ["store"],
         "summary": "Delete purchase order by ID",
         "description": "v1.0.2 -For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors",
         "operationId": "deleteOrder",
@@ -2208,35 +1767,21 @@
     },
     "path:22": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/user",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1user"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1user"]
       }
     },
     "path:22.post": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/user",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1user"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1user"]
       },
       "post": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Create user",
         "description": "v1.0.2 -This can only be done by the logged in user.",
         "operationId": "createUser",
@@ -2262,35 +1807,21 @@
     },
     "path:23": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/user/createWithArray",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1user~1createWithArray"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1user~1createWithArray"]
       }
     },
     "path:23.post": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/user/createWithArray",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1user~1createWithArray"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1user~1createWithArray"]
       },
       "post": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Creates list of users with given input array",
         "description": "v1.0.2 -",
         "operationId": "createUsersWithArrayInput",
@@ -2319,35 +1850,21 @@
     },
     "path:24": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/user/createWithList",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1user~1createWithList"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1user~1createWithList"]
       }
     },
     "path:24.post": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/user/createWithList",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1user~1createWithList"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1user~1createWithList"]
       },
       "post": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Creates list of users with given input array",
         "description": "v1.0.2 -",
         "operationId": "createUsersWithListInput",
@@ -2376,35 +1893,21 @@
     },
     "path:25": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/user/login",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1user~1login"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1user~1login"]
       }
     },
     "path:25.get": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/user/login",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1user~1login"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1user~1login"]
       },
       "get": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Logs user into the system",
         "description": "v1.0.2 -",
         "operationId": "loginUser",
@@ -2469,35 +1972,21 @@
     },
     "path:26": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/user/logout",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1user~1logout"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1user~1logout"]
       }
     },
     "path:26.get": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/user/logout",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1user~1logout"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1user~1logout"]
       },
       "get": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Logs out current logged in user session",
         "description": "v1.0.2 -",
         "operationId": "logoutUser",
@@ -2510,35 +1999,21 @@
     },
     "path:27": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/user/{username}",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1user~1{username}"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1user~1{username}"]
       }
     },
     "path:27.get": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/user/{username}",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1user~1{username}"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1user~1{username}"]
       },
       "get": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Get user by user name",
         "description": "v1.0.2 -",
         "operationId": "getUserByName",
@@ -2580,21 +2055,13 @@
     },
     "path:27.put": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/user/{username}",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1user~1{username}"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1user~1{username}"]
       },
       "put": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Updated user",
         "description": "v1.0.2 -This can only be done by the logged in user.",
         "operationId": "updateUser",
@@ -2634,21 +2101,13 @@
     },
     "path:27.delete": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "1.0.2"
-        ],
-        "filename": [
-          "mem://pet-store/input2.json"
-        ],
+        "apiVersions": ["1.0.2"],
+        "filename": ["mem://pet-store/input2.json"],
         "path": "/user/{username}",
-        "originalLocations": [
-          "mem://pet-store/input2.json#/paths/~1user~1{username}"
-        ]
+        "originalLocations": ["mem://pet-store/input2.json#/paths/~1user~1{username}"]
       },
       "delete": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Delete user",
         "description": "v1.0.2 -This can only be done by the logged in user.",
         "operationId": "deleteUser",
@@ -2700,16 +2159,10 @@
     "securitySchemes": {
       "securitySchemes:0": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.0"
-          ],
-          "filename": [
-            "mem://pet-store/input.json"
-          ],
+          "apiVersions": ["1.0.0"],
+          "filename": ["mem://pet-store/input.json"],
           "name": "petstore_auth",
-          "originalLocations": [
-            "mem://pet-store/input.json#/components/securitySchemes/petstore_auth"
-          ],
+          "originalLocations": ["mem://pet-store/input.json#/components/securitySchemes/petstore_auth"],
           "x-ms-secondary-file": false
         },
         "type": "oauth2",
@@ -2725,16 +2178,10 @@
       },
       "securitySchemes:1": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.0"
-          ],
-          "filename": [
-            "mem://pet-store/input.json"
-          ],
+          "apiVersions": ["1.0.0"],
+          "filename": ["mem://pet-store/input.json"],
           "name": "api_key",
-          "originalLocations": [
-            "mem://pet-store/input.json#/components/securitySchemes/api_key"
-          ],
+          "originalLocations": ["mem://pet-store/input.json#/components/securitySchemes/api_key"],
           "x-ms-secondary-file": false
         },
         "type": "apiKey",
@@ -2743,16 +2190,10 @@
       },
       "securitySchemes:2": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.2"
-          ],
-          "filename": [
-            "mem://pet-store/input2.json"
-          ],
+          "apiVersions": ["1.0.2"],
+          "filename": ["mem://pet-store/input2.json"],
           "name": "petstore_auth",
-          "originalLocations": [
-            "mem://pet-store/input2.json#/components/securitySchemes/petstore_auth"
-          ],
+          "originalLocations": ["mem://pet-store/input2.json#/components/securitySchemes/petstore_auth"],
           "x-ms-secondary-file": false
         },
         "type": "oauth2",
@@ -2768,16 +2209,10 @@
       },
       "securitySchemes:3": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.2"
-          ],
-          "filename": [
-            "mem://pet-store/input2.json"
-          ],
+          "apiVersions": ["1.0.2"],
+          "filename": ["mem://pet-store/input2.json"],
           "name": "api_key",
-          "originalLocations": [
-            "mem://pet-store/input2.json#/components/securitySchemes/api_key"
-          ],
+          "originalLocations": ["mem://pet-store/input2.json#/components/securitySchemes/api_key"],
           "x-ms-secondary-file": false
         },
         "type": "apiKey",
@@ -2788,16 +2223,10 @@
     "schemas": {
       "schemas:0": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.0"
-          ],
-          "filename": [
-            "mem://pet-store/input.json"
-          ],
+          "apiVersions": ["1.0.0"],
+          "filename": ["mem://pet-store/input.json"],
           "name": "Order",
-          "originalLocations": [
-            "mem://pet-store/input.json#/components/schemas/Order"
-          ],
+          "originalLocations": ["mem://pet-store/input.json#/components/schemas/Order"],
           "x-ms-secondary-file": false
         },
         "type": "object",
@@ -2821,11 +2250,7 @@
           "status": {
             "type": "string",
             "description": "Order Status",
-            "enum": [
-              "placed",
-              "approved",
-              "delivered"
-            ]
+            "enum": ["placed", "approved", "delivered"]
           },
           "complete": {
             "type": "boolean",
@@ -2838,16 +2263,10 @@
       },
       "schemas:1": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.0"
-          ],
-          "filename": [
-            "mem://pet-store/input.json"
-          ],
+          "apiVersions": ["1.0.0"],
+          "filename": ["mem://pet-store/input.json"],
           "name": "Category",
-          "originalLocations": [
-            "mem://pet-store/input.json#/components/schemas/Category"
-          ],
+          "originalLocations": ["mem://pet-store/input.json#/components/schemas/Category"],
           "x-ms-secondary-file": false
         },
         "type": "object",
@@ -2866,16 +2285,10 @@
       },
       "schemas:2": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.0"
-          ],
-          "filename": [
-            "mem://pet-store/input.json"
-          ],
+          "apiVersions": ["1.0.0"],
+          "filename": ["mem://pet-store/input.json"],
           "name": "User",
-          "originalLocations": [
-            "mem://pet-store/input.json#/components/schemas/User"
-          ],
+          "originalLocations": ["mem://pet-store/input.json#/components/schemas/User"],
           "x-ms-secondary-file": false
         },
         "type": "object",
@@ -2914,16 +2327,10 @@
       },
       "schemas:3": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.0"
-          ],
-          "filename": [
-            "mem://pet-store/input.json"
-          ],
+          "apiVersions": ["1.0.0"],
+          "filename": ["mem://pet-store/input.json"],
           "name": "Tag",
-          "originalLocations": [
-            "mem://pet-store/input.json#/components/schemas/Tag"
-          ],
+          "originalLocations": ["mem://pet-store/input.json#/components/schemas/Tag"],
           "x-ms-secondary-file": false
         },
         "type": "object",
@@ -2942,23 +2349,14 @@
       },
       "schemas:4": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.0"
-          ],
-          "filename": [
-            "mem://pet-store/input.json"
-          ],
+          "apiVersions": ["1.0.0"],
+          "filename": ["mem://pet-store/input.json"],
           "name": "Pet",
-          "originalLocations": [
-            "mem://pet-store/input.json#/components/schemas/Pet"
-          ],
+          "originalLocations": ["mem://pet-store/input.json#/components/schemas/Pet"],
           "x-ms-secondary-file": false
         },
         "type": "object",
-        "required": [
-          "name",
-          "photoUrls"
-        ],
+        "required": ["name", "photoUrls"],
         "properties": {
           "id": {
             "type": "integer",
@@ -2994,11 +2392,7 @@
           "status": {
             "type": "string",
             "description": "pet status in the store",
-            "enum": [
-              "available",
-              "pending",
-              "sold"
-            ]
+            "enum": ["available", "pending", "sold"]
           }
         },
         "xml": {
@@ -3007,16 +2401,10 @@
       },
       "schemas:5": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.0"
-          ],
-          "filename": [
-            "mem://pet-store/input.json"
-          ],
+          "apiVersions": ["1.0.0"],
+          "filename": ["mem://pet-store/input.json"],
           "name": "ApiResponse",
-          "originalLocations": [
-            "mem://pet-store/input.json#/components/schemas/ApiResponse"
-          ],
+          "originalLocations": ["mem://pet-store/input.json#/components/schemas/ApiResponse"],
           "x-ms-secondary-file": false
         },
         "type": "object",
@@ -3035,16 +2423,10 @@
       },
       "schemas:6": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.2"
-          ],
-          "filename": [
-            "mem://pet-store/input2.json"
-          ],
+          "apiVersions": ["1.0.2"],
+          "filename": ["mem://pet-store/input2.json"],
           "name": "Order",
-          "originalLocations": [
-            "mem://pet-store/input2.json#/components/schemas/Order"
-          ],
+          "originalLocations": ["mem://pet-store/input2.json#/components/schemas/Order"],
           "x-ms-secondary-file": false
         },
         "type": "object",
@@ -3068,11 +2450,7 @@
           "status": {
             "type": "string",
             "description": "v1.0.2 -This is the Order Status description for api 1.0.2",
-            "enum": [
-              "placed",
-              "approved",
-              "delivered"
-            ]
+            "enum": ["placed", "approved", "delivered"]
           },
           "complete": {
             "type": "boolean",
@@ -3085,16 +2463,10 @@
       },
       "schemas:7": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.2"
-          ],
-          "filename": [
-            "mem://pet-store/input2.json"
-          ],
+          "apiVersions": ["1.0.2"],
+          "filename": ["mem://pet-store/input2.json"],
           "name": "Category",
-          "originalLocations": [
-            "mem://pet-store/input2.json#/components/schemas/Category"
-          ],
+          "originalLocations": ["mem://pet-store/input2.json#/components/schemas/Category"],
           "x-ms-secondary-file": false
         },
         "type": "object",
@@ -3113,16 +2485,10 @@
       },
       "schemas:8": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.2"
-          ],
-          "filename": [
-            "mem://pet-store/input2.json"
-          ],
+          "apiVersions": ["1.0.2"],
+          "filename": ["mem://pet-store/input2.json"],
           "name": "User",
-          "originalLocations": [
-            "mem://pet-store/input2.json#/components/schemas/User"
-          ],
+          "originalLocations": ["mem://pet-store/input2.json#/components/schemas/User"],
           "x-ms-secondary-file": false
         },
         "type": "object",
@@ -3161,16 +2527,10 @@
       },
       "schemas:9": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.2"
-          ],
-          "filename": [
-            "mem://pet-store/input2.json"
-          ],
+          "apiVersions": ["1.0.2"],
+          "filename": ["mem://pet-store/input2.json"],
           "name": "Tag",
-          "originalLocations": [
-            "mem://pet-store/input2.json#/components/schemas/Tag"
-          ],
+          "originalLocations": ["mem://pet-store/input2.json#/components/schemas/Tag"],
           "x-ms-secondary-file": false
         },
         "type": "object",
@@ -3189,23 +2549,14 @@
       },
       "schemas:10": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.2"
-          ],
-          "filename": [
-            "mem://pet-store/input2.json"
-          ],
+          "apiVersions": ["1.0.2"],
+          "filename": ["mem://pet-store/input2.json"],
           "name": "Pet",
-          "originalLocations": [
-            "mem://pet-store/input2.json#/components/schemas/Pet"
-          ],
+          "originalLocations": ["mem://pet-store/input2.json#/components/schemas/Pet"],
           "x-ms-secondary-file": false
         },
         "type": "object",
-        "required": [
-          "name",
-          "photoUrls"
-        ],
+        "required": ["name", "photoUrls"],
         "properties": {
           "id": {
             "type": "integer",
@@ -3241,11 +2592,7 @@
           "status": {
             "type": "string",
             "description": "v1.0.2 -this is the pet status in the store for version 1.0.2",
-            "enum": [
-              "available",
-              "pending",
-              "sold"
-            ]
+            "enum": ["available", "pending", "sold"]
           }
         },
         "xml": {
@@ -3254,16 +2601,10 @@
       },
       "schemas:11": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.2"
-          ],
-          "filename": [
-            "mem://pet-store/input2.json"
-          ],
+          "apiVersions": ["1.0.2"],
+          "filename": ["mem://pet-store/input2.json"],
           "name": "ApiResponse",
-          "originalLocations": [
-            "mem://pet-store/input2.json#/components/schemas/ApiResponse"
-          ],
+          "originalLocations": ["mem://pet-store/input2.json#/components/schemas/ApiResponse"],
           "x-ms-secondary-file": false
         },
         "type": "object",

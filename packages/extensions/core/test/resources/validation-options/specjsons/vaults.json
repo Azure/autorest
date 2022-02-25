@@ -8,26 +8,16 @@
     }
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}": {
       "get": {
-        "tags": [
-          "Vaults"
-        ],
+        "tags": ["Vaults"],
         "description": "Get the Vault details.",
         "operationId": "Vaults_Get",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -53,17 +43,11 @@
         "deprecated": false
       },
       "put": {
-        "tags": [
-          "Vaults"
-        ],
+        "tags": ["Vaults"],
         "description": "Creates or updates a Recovery Services vault.",
         "operationId": "Vaults_CreateOrUpdate",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -104,14 +88,10 @@
         "deprecated": false
       },
       "delete": {
-        "tags": [
-          "Vaults"
-        ],
+        "tags": ["Vaults"],
         "description": "Deletes a vault.",
         "operationId": "Vaults_Delete",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -134,17 +114,11 @@
         "deprecated": false
       },
       "patch": {
-        "tags": [
-          "Vaults"
-        ],
+        "tags": ["Vaults"],
         "description": "Updates the vault.",
         "operationId": "Vaults_Update",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -334,17 +308,12 @@
     },
     "Sku": {
       "description": "Identifies the unique system identifier for each Azure resource.",
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "type": "object",
       "properties": {
         "name": {
           "description": "The Sku name.",
-          "enum": [
-            "Standard",
-            "RS0"
-          ],
+          "enum": ["Standard", "RS0"],
           "type": "string",
           "x-ms-enum": {
             "name": "SkuName",
@@ -356,15 +325,13 @@
     "TrackedResource": {
       "description": "Tracked resource with location.",
       "type": "object",
-      "required": [
-        "location"
-      ],
+      "required": ["location"],
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
       ],
-      "properties":{
+      "properties": {
         "location": {
           "description": "Resource location.",
           "type": "string"
@@ -407,12 +374,7 @@
         },
         "status": {
           "description": "Status of the vault upgrade operation.",
-          "enum": [
-            "Unknown",
-            "InProgress",
-            "Upgraded",
-            "Failed"
-          ],
+          "enum": ["Unknown", "InProgress", "Upgraded", "Failed"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -427,10 +389,7 @@
         },
         "triggerType": {
           "description": "The way the vault upgradation was triggered.",
-          "enum": [
-            "UserTriggered",
-            "ForcedUpgrade"
-          ],
+          "enum": ["UserTriggered", "ForcedUpgrade"],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -543,9 +502,7 @@
   },
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ]
 }

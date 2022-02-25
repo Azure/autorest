@@ -321,3 +321,6 @@ dist
 schema/
 Samples/
 core/test/resources/
+
+# This file isnt' actually yaml
+regression-tests/smoke-tests.yaml

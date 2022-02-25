@@ -6,9 +6,7 @@
     "description": "Test Infrastructure for AutoRest"
   },
   "host": "localhost:3000",
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/additionalProperties/true": {
       "put": {
@@ -38,12 +36,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/additionalProperties/true-subclass": {
@@ -74,12 +68,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/additionalProperties/type/object": {
@@ -110,12 +100,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/additionalProperties/type/string": {
@@ -146,12 +132,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/additionalProperties/in/properties": {
@@ -182,12 +164,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/additionalProperties/in/properties/with/additionalProperties/string": {
@@ -218,12 +196,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     }
   },
@@ -242,9 +216,7 @@
     },
     "PetAPTrue": {
       "type": "object",
-      "required": [
-        "id"
-      ],
+      "required": ["id"],
       "properties": {
         "id": {
           "type": "integer"
@@ -276,9 +248,7 @@
     },
     "PetAPObject": {
       "type": "object",
-      "required": [
-        "id"
-      ],
+      "required": ["id"],
       "properties": {
         "id": {
           "type": "integer"
@@ -297,9 +267,7 @@
     },
     "PetAPString": {
       "type": "object",
-      "required": [
-        "id"
-      ],
+      "required": ["id"],
       "properties": {
         "id": {
           "type": "integer"
@@ -318,9 +286,7 @@
     },
     "PetAPInProperties": {
       "type": "object",
-      "required": [
-        "id"
-      ],
+      "required": ["id"],
       "properties": {
         "id": {
           "type": "integer"
@@ -342,10 +308,7 @@
     },
     "PetAPInPropertiesWithAPString": {
       "type": "object",
-      "required": [
-        "id",
-        "@odata.location"
-      ],
+      "required": ["id", "@odata.location"],
       "properties": {
         "id": {
           "type": "integer"

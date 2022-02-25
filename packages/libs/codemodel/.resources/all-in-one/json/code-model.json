@@ -10,18 +10,13 @@
           "type": "string"
         },
         "range": {
-          "enum": [
-            "+",
-            "-"
-          ],
+          "enum": ["+", "-"],
           "type": "string"
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "version"
-      ]
+      "required": ["version"]
     },
     "ApiVersions": {
       "description": "a collection of api versions",
@@ -86,11 +81,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ]
+      "required": ["language", "protocol", "type"]
     },
     "Deprecation": {
       "description": "Represent information about a deprecation",
@@ -138,9 +129,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "url"
-      ]
+      "required": ["url"]
     },
     "Languages": {
       "description": "custom extensible metadata for individual language generators",
@@ -191,9 +180,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "default"
-      ]
+      "required": ["default"]
     },
     "Protocols": {
       "description": "custom extensible metadata for individual protocols (ie, HTTP, etc)",
@@ -234,10 +221,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol"
-      ]
+      "required": ["language", "protocol"]
     },
     "Language": {
       "description": "the bare-minimum fields for per-language metadata on a given aspect",
@@ -256,10 +240,7 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": [
-        "description",
-        "name"
-      ]
+      "required": ["description", "name"]
     },
     "CSharpLanguage": {
       "type": "object",
@@ -316,9 +297,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "name"
-      ]
+      "required": ["name"]
     },
     "Info": {
       "description": "code model information",
@@ -355,9 +334,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "title"
-      ]
+      "required": ["title"]
     },
     "XmlSerlializationFormat": {
       "type": "object",
@@ -383,11 +360,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "attribute",
-        "text",
-        "wrapped"
-      ],
+      "required": ["attribute", "text", "wrapped"],
       "allOf": [
         {
           "$ref": "#/definitions/SerializationFormat"
@@ -454,10 +427,7 @@
     },
     "CompoundSchemaTypes": {
       "description": "Compound schemas are used to construct complex objects or offer choices of a set of schemas.\n\n(ie, allOf, anyOf, oneOf )",
-      "enum": [
-        "or",
-        "xor"
-      ],
+      "enum": ["or", "xor"],
       "type": "string"
     },
     "PrimitiveSchemaTypes": {
@@ -507,11 +477,7 @@
     },
     "ObjectSchemaTypes": {
       "description": "schema types that can be objects",
-      "enum": [
-        "dictionary",
-        "object",
-        "or"
-      ],
+      "enum": ["dictionary", "object", "or"],
       "type": "string"
     },
     "AllSchemaTypes": {
@@ -568,11 +534,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/Schema"
@@ -585,11 +547,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/ValueSchema"
@@ -602,11 +560,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/Schema"
@@ -674,11 +628,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "schema"
-      ]
+      "required": ["language", "protocol", "schema"]
     },
     "Property": {
       "description": "a property is a child value in an object",
@@ -706,12 +656,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "schema",
-        "serializedName"
-      ],
+      "required": ["language", "protocol", "schema", "serializedName"],
       "allOf": [
         {
           "$ref": "#/definitions/Value"
@@ -719,11 +664,7 @@
       ]
     },
     "ImplementationLocation": {
-      "enum": [
-        "Client",
-        "Context",
-        "Method"
-      ],
+      "enum": ["Client", "Context", "Method"],
       "type": "string"
     },
     "Parameter": {
@@ -749,11 +690,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "schema"
-      ],
+      "required": ["language", "protocol", "schema"],
       "allOf": [
         {
           "$ref": "#/definitions/Value"
@@ -781,14 +718,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "originalParameter",
-        "pathToProperty",
-        "protocol",
-        "schema",
-        "targetProperty"
-      ],
+      "required": ["language", "originalParameter", "pathToProperty", "protocol", "schema", "targetProperty"],
       "allOf": [
         {
           "$ref": "#/definitions/Parameter"
@@ -801,10 +731,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol"
-      ],
+      "required": ["language", "protocol"],
       "allOf": [
         {
           "$ref": "#/definitions/Metadata"
@@ -818,18 +745,12 @@
         "binary": {
           "description": "indicates that this response is a binary stream",
           "type": "boolean",
-          "enum": [
-            true
-          ]
+          "enum": [true]
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "binary",
-        "language",
-        "protocol"
-      ],
+      "required": ["binary", "language", "protocol"],
       "allOf": [
         {
           "$ref": "#/definitions/Response"
@@ -851,11 +772,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "schema"
-      ],
+      "required": ["language", "protocol", "schema"],
       "allOf": [
         {
           "$ref": "#/definitions/Response"
@@ -955,10 +872,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol"
-      ]
+      "required": ["language", "protocol"]
     },
     "Request": {
       "type": "object",
@@ -980,10 +894,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol"
-      ],
+      "required": ["language", "protocol"],
       "allOf": [
         {
           "$ref": "#/definitions/Metadata"
@@ -1006,12 +917,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "$key",
-        "language",
-        "operations",
-        "protocol"
-      ],
+      "required": ["$key", "language", "operations", "protocol"],
       "allOf": [
         {
           "$ref": "#/definitions/Metadata"
@@ -1023,11 +929,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/Schema"
@@ -1039,11 +941,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/Schema"
@@ -1077,12 +975,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "elementType",
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["elementType", "language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/ValueSchema"
@@ -1095,21 +988,13 @@
       "properties": {
         "format": {
           "description": "date-time format",
-          "enum": [
-            "base64url",
-            "byte"
-          ],
+          "enum": ["base64url", "byte"],
           "type": "string"
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "format",
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["format", "language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/ValueSchema"
@@ -1121,11 +1006,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/Schema"
@@ -1151,11 +1032,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/PrimitiveSchema"
@@ -1168,11 +1045,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/Schema"
@@ -1198,11 +1071,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/PrimitiveSchema"
@@ -1228,11 +1097,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/PrimitiveSchema"
@@ -1245,11 +1110,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/PrimitiveSchema"
@@ -1274,13 +1135,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "choiceType",
-        "choices",
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["choiceType", "choices", "language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/ValueSchema"
@@ -1297,11 +1152,7 @@
         },
         "value": {
           "description": "the actual value",
-          "type": [
-            "string",
-            "number",
-            "boolean"
-          ]
+          "type": ["string", "number", "boolean"]
         },
         "extensions": {
           "$ref": "#/definitions/Record<string,any>",
@@ -1310,10 +1161,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "value"
-      ]
+      "required": ["language", "value"]
     },
     "SealedChoiceSchema": {
       "description": "a schema that represents a choice of several values (ie, an 'enum')",
@@ -1333,13 +1181,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "choiceType",
-        "choices",
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["choiceType", "choices", "language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/ValueSchema"
@@ -1368,14 +1210,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "conditionalType",
-        "conditions",
-        "language",
-        "protocol",
-        "sourceValue",
-        "type"
-      ],
+      "required": ["conditionalType", "conditions", "language", "protocol", "sourceValue", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/ValueSchema"
@@ -1392,19 +1227,11 @@
         },
         "target": {
           "description": "the actual value",
-          "type": [
-            "string",
-            "number",
-            "boolean"
-          ]
+          "type": ["string", "number", "boolean"]
         },
         "source": {
           "description": "the actual value",
-          "type": [
-            "string",
-            "number",
-            "boolean"
-          ]
+          "type": ["string", "number", "boolean"]
         },
         "extensions": {
           "$ref": "#/definitions/Record<string,any>",
@@ -1413,11 +1240,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "source",
-        "target"
-      ]
+      "required": ["language", "source", "target"]
     },
     "SealedConditionalSchema": {
       "description": "a schema that represents a value dependent on another (not overridable)",
@@ -1441,14 +1264,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "conditionalType",
-        "conditions",
-        "language",
-        "protocol",
-        "sourceValue",
-        "type"
-      ],
+      "required": ["conditionalType", "conditions", "language", "protocol", "sourceValue", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/ValueSchema"
@@ -1473,9 +1289,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "value"
-      ]
+      "required": ["value"]
     },
     "ConstantSchema": {
       "description": "a schema that represents a constant value",
@@ -1492,13 +1306,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type",
-        "value",
-        "valueType"
-      ],
+      "required": ["language", "protocol", "type", "value", "valueType"],
       "allOf": [
         {
           "$ref": "#/definitions/Schema"
@@ -1520,12 +1328,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "elementType",
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["elementType", "language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/ComplexSchema"
@@ -1549,10 +1352,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "value"
-      ]
+      "required": ["language", "value"]
     },
     "FlagSchema": {
       "type": "object",
@@ -1567,12 +1367,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "choices",
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["choices", "language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/ValueSchema"
@@ -1610,12 +1405,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "precision",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "precision", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/PrimitiveSchema"
@@ -1623,11 +1413,7 @@
       ]
     },
     "SchemaContext": {
-      "enum": [
-        "exception",
-        "input",
-        "output"
-      ],
+      "enum": ["exception", "input", "output"],
       "type": "string"
     },
     "SchemaUsage": {
@@ -1669,10 +1455,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "all",
-        "immediate"
-      ]
+      "required": ["all", "immediate"]
     },
     "Discriminator": {
       "type": "object",
@@ -1689,11 +1472,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "all",
-        "immediate",
-        "property"
-      ]
+      "required": ["all", "immediate", "property"]
     },
     "GroupProperty": {
       "type": "object",
@@ -1707,13 +1486,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "originalParameter",
-        "protocol",
-        "schema",
-        "serializedName"
-      ],
+      "required": ["language", "originalParameter", "protocol", "schema", "serializedName"],
       "allOf": [
         {
           "$ref": "#/definitions/Property"
@@ -1732,11 +1505,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/Schema"
@@ -1781,11 +1550,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/ComplexSchema"
@@ -1801,11 +1566,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/PrimitiveSchema"
@@ -1818,11 +1579,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/PrimitiveSchema"
@@ -1843,12 +1600,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "anyOf",
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["anyOf", "language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/ComplexSchema"
@@ -1869,12 +1621,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "oneOf",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "oneOf", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/Schema"
@@ -1892,12 +1639,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "not",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "not", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/Schema"
@@ -1910,11 +1652,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/PrimitiveSchema"
@@ -1927,21 +1665,13 @@
       "properties": {
         "format": {
           "description": "date-time format",
-          "enum": [
-            "date-time",
-            "date-time-rfc1123"
-          ],
+          "enum": ["date-time", "date-time-rfc1123"],
           "type": "string"
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "format",
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["format", "language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/PrimitiveSchema"
@@ -1954,11 +1684,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/PrimitiveSchema"
@@ -1971,11 +1697,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/PrimitiveSchema"
@@ -1988,11 +1710,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/PrimitiveSchema"
@@ -2232,10 +1950,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "authenticationRequired",
-        "schemes"
-      ]
+      "required": ["authenticationRequired", "schemes"]
     },
     "SecurityScheme": {
       "type": "object",
@@ -2246,9 +1961,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "type"
-      ]
+      "required": ["type"]
     },
     "AADTokenSecurityScheme": {
       "type": "object",
@@ -2262,10 +1975,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "scopes",
-        "type"
-      ],
+      "required": ["scopes", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/SecurityScheme"
@@ -2281,10 +1991,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "headerName",
-        "type"
-      ],
+      "required": ["headerName", "type"],
       "allOf": [
         {
           "$ref": "#/definitions/SecurityScheme"
@@ -2324,45 +2031,20 @@
     },
     "HttpMethod": {
       "description": "standard HTTP protocol methods",
-      "enum": [
-        "delete",
-        "get",
-        "head",
-        "options",
-        "patch",
-        "post",
-        "put",
-        "trace"
-      ],
+      "enum": ["delete", "get", "head", "options", "patch", "post", "put", "trace"],
       "type": "string"
     },
     "ParameterLocation": {
       "description": "the location that this parameter is placed in the http request",
-      "enum": [
-        "body",
-        "cookie",
-        "header",
-        "none",
-        "path",
-        "query",
-        "uri",
-        "virtual"
-      ],
+      "enum": ["body", "cookie", "header", "none", "path", "query", "uri", "virtual"],
       "type": "string"
     },
     "Scheme": {
       "type": "string",
-      "enum": [
-        "bearer"
-      ]
+      "enum": ["bearer"]
     },
     "SecurityType": {
-      "enum": [
-        "apiKey",
-        "http",
-        "oauth2",
-        "openIdConnect"
-      ],
+      "enum": ["apiKey", "http", "oauth2", "openIdConnect"],
       "type": "string"
     },
     "AuthorizationCodeOAuthFlow": {
@@ -2390,29 +2072,21 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "authorizationUrl",
-        "scopes",
-        "tokenUrl"
-      ]
+      "required": ["authorizationUrl", "scopes", "tokenUrl"]
     },
     "BearerHTTPSecurityScheme": {
       "type": "object",
       "properties": {
         "scheme": {
           "type": "string",
-          "enum": [
-            "bearer"
-          ]
+          "enum": ["bearer"]
         },
         "bearerFormat": {
           "type": "string"
         },
         "type": {
           "type": "string",
-          "enum": [
-            "http"
-          ]
+          "enum": ["http"]
         },
         "description": {
           "type": "string"
@@ -2424,10 +2098,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "scheme",
-        "type"
-      ]
+      "required": ["scheme", "type"]
     },
     "ClientCredentialsFlow": {
       "type": "object",
@@ -2450,10 +2121,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "scopes",
-        "tokenUrl"
-      ]
+      "required": ["scopes", "tokenUrl"]
     },
     "ImplicitOAuthFlow": {
       "type": "object",
@@ -2476,10 +2144,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "authorizationUrl",
-        "scopes"
-      ]
+      "required": ["authorizationUrl", "scopes"]
     },
     "NonBearerHTTPSecurityScheme": {
       "type": "object",
@@ -2492,9 +2157,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "http"
-          ]
+          "enum": ["http"]
         },
         "extensions": {
           "$ref": "#/definitions/Record<string,any>",
@@ -2503,19 +2166,14 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "scheme",
-        "type"
-      ]
+      "required": ["scheme", "type"]
     },
     "OAuth2SecurityScheme": {
       "type": "object",
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "oauth2"
-          ]
+          "enum": ["oauth2"]
         },
         "flows": {
           "$ref": "#/definitions/OAuthFlows"
@@ -2530,10 +2188,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "flows",
-        "type"
-      ]
+      "required": ["flows", "type"]
     },
     "OAuthFlows": {
       "type": "object",
@@ -2573,9 +2228,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "apiKey"
-          ]
+          "enum": ["apiKey"]
         },
         "name": {
           "type": "string"
@@ -2593,20 +2246,14 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "in",
-        "name",
-        "type"
-      ]
+      "required": ["in", "name", "type"]
     },
     "OpenIdConnectSecurityScheme": {
       "type": "object",
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "openIdConnect"
-          ]
+          "enum": ["openIdConnect"]
         },
         "openIdConnectUrl": {
           "description": "an URI",
@@ -2622,10 +2269,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "openIdConnectUrl",
-        "type"
-      ]
+      "required": ["openIdConnectUrl", "type"]
     },
     "PasswordOAuthFlow": {
       "type": "object",
@@ -2648,10 +2292,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "scopes",
-        "tokenUrl"
-      ]
+      "required": ["scopes", "tokenUrl"]
     },
     "SecurityRequirement": {
       "description": "common ways of serializing simple parameters",
@@ -2677,28 +2318,17 @@
       "type": "string"
     },
     "QueryEncodingStyle": {
-      "enum": [
-        "deepObject",
-        "form",
-        "pipeDelimited",
-        "spaceDelimited"
-      ],
+      "enum": ["deepObject", "form", "pipeDelimited", "spaceDelimited"],
       "type": "string"
     },
     "PathEncodingStyle": {
-      "enum": [
-        "label",
-        "matrix",
-        "simple"
-      ],
+      "enum": ["label", "matrix", "simple"],
       "type": "string"
     },
     "Default": {
       "description": "A catch-all for all un-handled response codes.",
       "type": "string",
-      "enum": [
-        "default"
-      ]
+      "enum": ["default"]
     },
     "StatusCode": {
       "enum": [
@@ -2774,16 +2404,7 @@
       "properties": {
         "in": {
           "description": "the location that this parameter is placed in the http request",
-          "enum": [
-            "body",
-            "cookie",
-            "header",
-            "none",
-            "path",
-            "query",
-            "uri",
-            "virtual"
-          ],
+          "enum": ["body", "cookie", "header", "none", "path", "query", "uri", "virtual"],
           "type": "string"
         },
         "style": {
@@ -2801,9 +2422,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "in"
-      ],
+      "required": ["in"],
       "allOf": [
         {
           "$ref": "#/definitions/Protocol"
@@ -2829,11 +2448,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "method",
-        "path",
-        "uri"
-      ],
+      "required": ["method", "path", "uri"],
       "allOf": [
         {
           "$ref": "#/definitions/Protocol"
@@ -2857,13 +2472,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "knownMediaType",
-        "mediaTypes",
-        "method",
-        "path",
-        "uri"
-      ],
+      "required": ["knownMediaType", "mediaTypes", "method", "path", "uri"],
       "allOf": [
         {
           "$ref": "#/definitions/HttpRequest"
@@ -2875,21 +2484,12 @@
       "properties": {
         "binary": {
           "type": "boolean",
-          "enum": [
-            true
-          ]
+          "enum": [true]
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "binary",
-        "knownMediaType",
-        "mediaTypes",
-        "method",
-        "path",
-        "uri"
-      ],
+      "required": ["binary", "knownMediaType", "mediaTypes", "method", "path", "uri"],
       "allOf": [
         {
           "$ref": "#/definitions/HttpWithBodyRequest"
@@ -2902,21 +2502,12 @@
         "multipart": {
           "description": "indicates that the HTTP Request should be a multipart request\n\nie, that it has multiple requests in a single request.",
           "type": "boolean",
-          "enum": [
-            true
-          ]
+          "enum": [true]
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "knownMediaType",
-        "mediaTypes",
-        "method",
-        "multipart",
-        "path",
-        "uri"
-      ],
+      "required": ["knownMediaType", "mediaTypes", "method", "multipart", "path", "uri"],
       "allOf": [
         {
           "$ref": "#/definitions/HttpWithBodyRequest"
@@ -2942,11 +2533,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "header",
-        "language",
-        "schema"
-      ]
+      "required": ["header", "language", "schema"]
     },
     "HttpResponse": {
       "type": "object",
@@ -3051,9 +2638,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "statusCodes"
-      ],
+      "required": ["statusCodes"],
       "allOf": [
         {
           "$ref": "#/definitions/Protocol"
@@ -3066,17 +2651,12 @@
         "binary": {
           "description": "binary responses",
           "type": "boolean",
-          "enum": [
-            true
-          ]
+          "enum": [true]
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "binary",
-        "statusCodes"
-      ],
+      "required": ["binary", "statusCodes"],
       "allOf": [
         {
           "$ref": "#/definitions/HttpResponse"
@@ -3176,11 +2756,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ]
+      "required": ["language", "protocol", "type"]
     },
     "Record<string,ComplexSchema>": {
       "type": "object",
@@ -3197,15 +2773,7 @@
       }
     },
     "KnownMediaType": {
-      "enum": [
-        "binary",
-        "form",
-        "json",
-        "multipart",
-        "text",
-        "unknown",
-        "xml"
-      ],
+      "enum": ["binary", "form", "json", "multipart", "text", "unknown", "xml"],
       "type": "string"
     }
   },
@@ -3252,13 +2820,6 @@
   },
   "defaultProperties": [],
   "additionalProperties": false,
-  "required": [
-    "info",
-    "language",
-    "operationGroups",
-    "protocol",
-    "schemas",
-    "security"
-  ],
+  "required": ["info", "language", "operationGroups", "protocol", "schemas", "security"],
   "title": "CodeModel"
 }

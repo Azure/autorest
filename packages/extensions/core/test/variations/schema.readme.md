@@ -1,14 +1,17 @@
 # AutoRest configuration schema
 
-``` yaml
-version: <semver>|latest|current...
-  # version of autorest to use 
+```yaml
+version:
+  <semver>|latest|current...
+  # version of autorest to use
 
-azure-arm: false|true
+azure-arm:
+  false|true
   # false - is not an azure resource - no azure rules apply
   # true - is intended to be an azure resource
-  
-process: single|composite|both 
+
+process:
+  single|composite|both
   # when processing multiple swagger input documents:
   # single - process each document independently
   # composite - merge the input files into a single swagger document
@@ -16,34 +19,33 @@ process: single|composite|both
 
 output-folder: <path>
 
-namespace: <string> 
+namespace:
+  <string>
   # the code namespace to generate the target files into
 
 directive: #array of directives:
-  - from: <document-identity>             # document-id to match (swagger 'title' )
-    where: <document-query>               # jsonpath query to match 
-    reason: <string>                      # [?]comment as to why this directive is added
+  - from: <document-identity> # document-id to match (swagger 'title' )
+    where: <document-query> # jsonpath query to match
+    reason: <string> # [?]comment as to why this directive is added
     # one of:
-    suppress: <message-id to suppress>     # suppress messages with matching message-id and this selection node
-    set: <document-change>                # modify DOM with change before sending to plugin
-    transform: <document-transformation>  # modify document via code before sending to plugin
+    suppress: <message-id to suppress> # suppress messages with matching message-id and this selection node
+    set: <document-change> # modify DOM with change before sending to plugin
+    transform: <document-transformation> # modify document via code before sending to plugin
 ```
 
+### Built-in meta-variables
 
-### Built-in meta-variables 
-``` yaml
-
-base-folder: 
+```yaml
+base-folder:
   # the folder that the configuration file is installed in.
 
-document:identity: 
+document:identity:
   # the name of the current document being processed (in swagger, this is the 'title' )
 ```
 
 ### Plugins:
-``` yaml
-# specifing a plugin in the configuration will make that 
-<plugin-name>: 
 
-
+```yaml
+# specifing a plugin in the configuration will make that
+<plugin-name>:
 ```

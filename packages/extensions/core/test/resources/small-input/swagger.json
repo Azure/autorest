@@ -6,20 +6,12 @@
     "version": "2016-07-07"
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -36,9 +28,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/{quotaPeriodKey}": {
       "get": {
-        "tags": [
-          "QuotaByPeriodKeys"
-        ],
+        "tags": ["QuotaByPeriodKeys"],
         "operationId": "QuotaByPeriodKeys_Get",
         "description": "Gets the value of the quota counter associated with the counter-key in the policy for the specific period in service instance.",
         "externalDocs": {
@@ -81,9 +71,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "QuotaByPeriodKeys"
-        ],
+        "tags": ["QuotaByPeriodKeys"],
         "operationId": "QuotaByPeriodKeys_Update",
         "description": "Updates an existing quota counter value in the specified service instance.",
         "parameters": [
@@ -203,10 +191,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [
-              "Http",
-              "Https"
-            ],
+            "enum": ["Http", "Https"],
             "x-ms-enum": {
               "name": "ApiProtocolContract",
               "modelAsString": false
@@ -225,22 +210,14 @@
         "type": {
           "type": "string",
           "description": "Type of API.",
-          "enum": [
-            "Http",
-            "Soap"
-          ],
+          "enum": ["Http", "Soap"],
           "x-ms-enum": {
             "name": "ApiTypeContract",
             "modelAsString": false
           }
         }
       },
-      "required": [
-        "name",
-        "serviceUrl",
-        "path",
-        "protocols"
-      ],
+      "required": ["name", "serviceUrl", "path", "protocols"],
       "description": "API details."
     },
     "ApiCollection": {
@@ -271,9 +248,7 @@
           "description": "json value."
         }
       },
-      "required": [
-        "RawJson"
-      ],
+      "required": ["RawJson"],
       "description": "Parameters supplied to the Patch operations."
     },
     "ApiExportResult": {
@@ -285,14 +260,7 @@
         },
         "statusCode": {
           "type": "string",
-          "enum": [
-            "Continue",
-            "OK",
-            "Created",
-            "Accepted",
-            "NotFound",
-            "Conflict"
-          ],
+          "enum": ["Continue", "OK", "Created", "Accepted", "NotFound", "Conflict"],
           "x-ms-enum": {
             "name": "HttpStatusCode",
             "modelAsString": false
@@ -334,10 +302,7 @@
           "description": "Parameter values."
         }
       },
-      "required": [
-        "name",
-        "type"
-      ],
+      "required": ["name", "type"],
       "description": "Operation parameters details."
     },
     "RepresentationContract": {
@@ -351,9 +316,7 @@
           "description": "An example of the representation."
         }
       },
-      "required": [
-        "contentType"
-      ],
+      "required": ["contentType"],
       "description": "Operation request/response representation details."
     },
     "RequestContract": {
@@ -407,9 +370,7 @@
           "description": "Collection of operation response representations."
         }
       },
-      "required": [
-        "statusCode"
-      ],
+      "required": ["statusCode"],
       "description": "Operation response details."
     },
     "OperationContract": {
@@ -463,11 +424,7 @@
           "description": "Array of Operation responses."
         }
       },
-      "required": [
-        "name",
-        "method",
-        "urlTemplate"
-      ],
+      "required": ["name", "method", "urlTemplate"],
       "description": "Api Operation details."
     },
     "OperationCollection": {
@@ -531,10 +488,7 @@
         "state": {
           "type": "string",
           "description": "whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is NotPublished.",
-          "enum": [
-            "NotPublished",
-            "Published"
-          ],
+          "enum": ["NotPublished", "Published"],
           "default": "NotPublished",
           "x-ms-enum": {
             "name": "ProductStateContract",
@@ -542,9 +496,7 @@
           }
         }
       },
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "description": "Product profile."
     },
     "ProductCollection": {
@@ -592,14 +544,7 @@
         "state": {
           "type": "string",
           "description": "Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
-          "enum": [
-            "Suspended",
-            "Active",
-            "Expired",
-            "Submitted",
-            "Rejected",
-            "Cancelled"
-          ],
+          "enum": ["Suspended", "Active", "Expired", "Submitted", "Rejected", "Cancelled"],
           "x-ms-enum": {
             "name": "SubscriptionStateContract",
             "modelAsString": false
@@ -702,25 +647,14 @@
         "state": {
           "type": "string",
           "description": "Initial subscription state. If no value is specified, subscription is created with Submitted state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
-          "enum": [
-            "Suspended",
-            "Active",
-            "Expired",
-            "Submitted",
-            "Rejected",
-            "Cancelled"
-          ],
+          "enum": ["Suspended", "Active", "Expired", "Submitted", "Rejected", "Cancelled"],
           "x-ms-enum": {
             "name": "SubscriptionStateContract",
             "modelAsString": false
           }
         }
       },
-      "required": [
-        "userId",
-        "productId",
-        "name"
-      ],
+      "required": ["userId", "productId", "name"],
       "description": "Parameters supplied to the Create subscription operation."
     },
     "SubscriptionUpdateParameters": {
@@ -757,14 +691,7 @@
         "state": {
           "type": "string",
           "description": "Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.",
-          "enum": [
-            "Suspended",
-            "Active",
-            "Expired",
-            "Submitted",
-            "Rejected",
-            "Cancelled"
-          ],
+          "enum": ["Suspended", "Active", "Expired", "Submitted", "Rejected", "Cancelled"],
           "x-ms-enum": {
             "name": "SubscriptionStateContract",
             "modelAsString": false
@@ -811,10 +738,7 @@
         "state": {
           "type": "string",
           "description": "whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators.",
-          "enum": [
-            "NotPublished",
-            "Published"
-          ],
+          "enum": ["NotPublished", "Published"],
           "x-ms-enum": {
             "name": "ProductStateContract",
             "modelAsString": false
@@ -850,11 +774,7 @@
           "type": "string",
           "description": "Group type.",
           "readOnly": true,
-          "enum": [
-            "Custom",
-            "System",
-            "External"
-          ],
+          "enum": ["Custom", "System", "External"],
           "x-ms-enum": {
             "name": "GroupTypeContract",
             "modelAsString": false
@@ -866,9 +786,7 @@
           "readOnly": true
         }
       },
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "description": "Developer group."
     },
     "GroupCollection": {
@@ -907,11 +825,7 @@
         "type": {
           "type": "string",
           "description": "Group type.",
-          "enum": [
-            "Custom",
-            "System",
-            "External"
-          ],
+          "enum": ["Custom", "System", "External"],
           "x-ms-enum": {
             "name": "GroupTypeContract",
             "modelAsString": false
@@ -922,9 +836,7 @@
           "description": "Identifier for an external group."
         }
       },
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "description": "Parameters supplied to the Create Group operation."
     },
     "GroupUpdateParameters": {
@@ -942,11 +854,7 @@
         "type": {
           "type": "string",
           "description": "Group type.",
-          "enum": [
-            "Custom",
-            "System",
-            "External"
-          ],
+          "enum": ["Custom", "System", "External"],
           "x-ms-enum": {
             "name": "GroupTypeContract",
             "modelAsString": false
@@ -993,10 +901,7 @@
         "state": {
           "type": "string",
           "description": "User state.",
-          "enum": [
-            "Active",
-            "Blocked"
-          ],
+          "enum": ["Active", "Blocked"],
           "x-ms-enum": {
             "name": "UserStateContract",
             "modelAsString": false
@@ -1064,11 +969,7 @@
           "description": "Expiration date of the certificate. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         }
       },
-      "required": [
-        "subject",
-        "thumbprint",
-        "expirationDate"
-      ],
+      "required": ["subject", "thumbprint", "expirationDate"],
       "description": "Certificate details."
     },
     "CertificateCollection": {
@@ -1103,10 +1004,7 @@
           "description": "Password for the Certificate"
         }
       },
-      "required": [
-        "data",
-        "password"
-      ],
+      "required": ["data", "password"],
       "description": "Parameters supplied to the CreateOrUpdate certificate operation."
     },
     "PolicySnippetContract": {
@@ -1129,13 +1027,7 @@
         "scope": {
           "type": "string",
           "description": "Snippet scope.",
-          "enum": [
-            "Tenant",
-            "Product",
-            "Api",
-            "Operation",
-            "All"
-          ],
+          "enum": ["Tenant", "Product", "Api", "Operation", "All"],
           "readOnly": true,
           "x-ms-enum": {
             "name": "PolicyScopeContract",
@@ -1172,10 +1064,7 @@
         "state": {
           "type": "string",
           "description": "Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.",
-          "enum": [
-            "Active",
-            "Blocked"
-          ],
+          "enum": ["Active", "Blocked"],
           "default": "Active",
           "x-ms-enum": {
             "name": "UserStateContract",
@@ -1187,12 +1076,7 @@
           "description": "Optional note about a user set by the administrator."
         }
       },
-      "required": [
-        "email",
-        "password",
-        "firstName",
-        "lastName"
-      ],
+      "required": ["email", "password", "firstName", "lastName"],
       "description": "Parameters supplied to the Create User operation."
     },
     "ErrorFieldContract": {
@@ -1260,12 +1144,7 @@
           "$ref": "#/definitions/QuotaCounterValueContract"
         }
       ],
-      "required": [
-        "counterKey",
-        "periodKey",
-        "periodStartTime",
-        "periodEndTime"
-      ],
+      "required": ["counterKey", "periodKey", "periodStartTime", "periodEndTime"],
       "description": "Quota counter details."
     },
     "QuotaCounterValueContract": {

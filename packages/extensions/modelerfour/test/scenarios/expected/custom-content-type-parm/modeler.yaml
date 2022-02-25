@@ -1,63 +1,63 @@
-!CodeModel 
-info: !Info 
+!CodeModel
+info: !Info
   description: Acceptance test for file with custom content type.
   title: Operation where there is a custom Content-Type parameter.
-schemas: !Schemas 
+schemas: !Schemas
   booleans:
     - !BooleanSchema &ref_6
       type: boolean
-      language: !Languages 
+      language: !Languages
         default:
           name: response
-          description: ''
+          description: ""
       protocol: !Protocols {}
   strings:
     - !StringSchema &ref_0
       type: string
-      language: !Languages 
+      language: !Languages
         default:
           name: string
           description: simple string
       protocol: !Protocols {}
     - !StringSchema &ref_1
       type: string
-      language: !Languages 
+      language: !Languages
         default:
-          name: ''
-          description: ''
+          name: ""
+          description: ""
       protocol: !Protocols {}
   binaries:
     - !BinarySchema &ref_3
       type: binary
-      language: !Languages 
+      language: !Languages
         default:
           name: binary
-          description: ''
+          description: ""
       protocol: !Protocols {}
 globalParameters:
   - !Parameter &ref_7
     schema: *ref_0
-    clientDefaultValue: ''
+    clientDefaultValue: ""
     implementation: Client
     origin: modelerfour:synthesized/host
     required: true
     extensions:
       x-ms-skip-url-encoding: true
-    language: !Languages 
+    language: !Languages
       default:
         name: $host
         description: server parameter
         serializedName: $host
-    protocol: !Protocols 
-      http: !HttpParameter 
+    protocol: !Protocols
+      http: !HttpParameter
         in: uri
 operationGroups:
-  - !OperationGroup 
-    $key: ''
+  - !OperationGroup
+    $key: ""
     operations:
-      - !Operation 
+      - !Operation
         apiVersions:
-          - !ApiVersion 
+          - !ApiVersion
             version: 1.0.0
         parameters:
           - *ref_7
@@ -65,13 +65,13 @@ operationGroups:
             schema: *ref_1
             implementation: Method
             required: true
-            language: !Languages 
+            language: !Languages
               default:
                 name: multipartContentType
-                description: 'Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID>'
+                description: "Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID>"
                 serializedName: Content-Type
-            protocol: !Protocols 
-              http: !HttpParameter 
+            protocol: !Protocols
+              http: !HttpParameter
                 in: header
         requestMediaTypes:
           application/json: !Request &ref_5
@@ -79,63 +79,63 @@ operationGroups:
               - !Parameter &ref_4
                 schema: *ref_3
                 implementation: Method
-                language: !Languages 
+                language: !Languages
                   default:
                     name: data
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
+                    description: ""
+                protocol: !Protocols
+                  http: !HttpParameter
                     in: body
                     style: binary
             signatureParameters:
               - *ref_4
-            language: !Languages 
+            language: !Languages
               default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpBinaryRequest 
+                name: ""
+                description: ""
+            protocol: !Protocols
+              http: !HttpBinaryRequest
                 path: /api/User/HasUser
                 method: post
                 binary: true
                 knownMediaType: binary
                 mediaTypes:
                   - application/json
-                uri: '{$host}'
+                uri: "{$host}"
         requests:
           - *ref_5
         signatureParameters:
           - *ref_2
         responses:
-          - !SchemaResponse 
+          - !SchemaResponse
             schema: *ref_6
-            language: !Languages 
+            language: !Languages
               default:
-                name: ''
+                name: ""
                 description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
+            protocol: !Protocols
+              http: !HttpResponse
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
-                  - '200'
-        language: !Languages 
+                  - "200"
+        language: !Languages
           default:
             name: postWithCustomContentType
-            description: ''
+            description: ""
         protocol: !Protocols {}
-    language: !Languages 
+    language: !Languages
       default:
-        name: ''
-        description: ''
+        name: ""
+        description: ""
     protocol: !Protocols {}
-security: !Security 
+security: !Security
   authenticationRequired: false
   schemes: []
-language: !Languages 
+language: !Languages
   default:
-    name: ''
-    description: ''
-protocol: !Protocols 
+    name: ""
+    description: ""
+protocol: !Protocols
   http: !HttpModel {}

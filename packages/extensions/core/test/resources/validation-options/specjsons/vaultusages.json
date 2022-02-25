@@ -8,26 +8,16 @@
     }
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/operations": {
       "get": {
-        "tags": [
-          "Operations"
-        ],
+        "tags": ["Operations"],
         "description": "Returns the list of available operations.",
         "operationId": "Operations_List",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -55,14 +45,10 @@
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/usages": {
       "get": {
-        "tags": [
-          "VaultUsages"
-        ],
+        "tags": ["VaultUsages"],
         "description": "Fetches the usages of the vault.",
         "operationId": "Usages_ListByVaults",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
@@ -99,14 +85,7 @@
       "properties": {
         "unit": {
           "description": "Unit of the usage.",
-          "enum": [
-            "Count",
-            "Bytes",
-            "Seconds",
-            "Percent",
-            "CountPerSecond",
-            "BytesPerSecond"
-          ],
+          "enum": ["Count", "Bytes", "Seconds", "Percent", "CountPerSecond", "BytesPerSecond"],
           "type": "string",
           "x-ms-enum": {
             "name": "UsagesUnit",
@@ -211,9 +190,7 @@
   },
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ]
 }

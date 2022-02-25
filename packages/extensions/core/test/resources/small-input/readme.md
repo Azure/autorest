@@ -3,9 +3,10 @@
 > see https://aka.ms/autorest
 
 ## Validation Settings
-``` yaml 
+
+```yaml
 input-file:
-- swagger.json 
+  - swagger.json
 
 azure-validator: true
 ```

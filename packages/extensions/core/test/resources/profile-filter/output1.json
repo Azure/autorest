@@ -4,25 +4,15 @@
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.",
     "x-ms-metadata": {
-      "profiles": [
-        "2017-11-09-profile",
-        "2018-01-01-hybrid"
-      ],
-      "apiVersions": [
-        "2014-04-01",
-        "2015-05-01-preview",
-        "2017-03-01-preview",
-        "2017-10-01-preview"
-      ]
+      "profiles": ["2017-11-09-profile", "2018-01-01-hybrid"],
+      "apiVersions": ["2014-04-01", "2015-05-01-preview", "2017-03-01-preview", "2017-10-01-preview"]
     },
     "version": "2017-10-01-preview"
   },
   "paths": {
     "path:45": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2015-05-01-preview"
-        ],
+        "apiVersions": ["2015-05-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2015-05-01-preview",
           "2018-01-01-hybrid": "2015-05-01-preview"
@@ -36,9 +26,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "FailoverGroups"
-        ],
+        "tags": ["FailoverGroups"],
         "description": "Gets a failover group.",
         "operationId": "FailoverGroups_Get",
         "parameters": [
@@ -87,9 +75,7 @@
         }
       },
       "put": {
-        "tags": [
-          "FailoverGroups"
-        ],
+        "tags": ["FailoverGroups"],
         "description": "Creates or updates a failover group.",
         "operationId": "FailoverGroups_CreateOrUpdate",
         "parameters": [
@@ -165,9 +151,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "tags": [
-          "FailoverGroups"
-        ],
+        "tags": ["FailoverGroups"],
         "description": "Deletes a failover group.",
         "operationId": "FailoverGroups_Delete",
         "parameters": [
@@ -216,9 +200,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "tags": [
-          "FailoverGroups"
-        ],
+        "tags": ["FailoverGroups"],
         "description": "Updates a failover group.",
         "operationId": "FailoverGroups_Update",
         "parameters": [
@@ -286,9 +268,7 @@
     },
     "path:46": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2015-05-01-preview"
-        ],
+        "apiVersions": ["2015-05-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2015-05-01-preview",
           "2018-01-01-hybrid": "2015-05-01-preview"
@@ -302,9 +282,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "FailoverGroups"
-        ],
+        "tags": ["FailoverGroups"],
         "description": "Lists the failover groups in a server.",
         "operationId": "FailoverGroups_ListByServer",
         "parameters": [
@@ -349,9 +327,7 @@
     },
     "path:47": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2015-05-01-preview"
-        ],
+        "apiVersions": ["2015-05-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2015-05-01-preview",
           "2018-01-01-hybrid": "2015-05-01-preview"
@@ -365,9 +341,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "FailoverGroups"
-        ],
+        "tags": ["FailoverGroups"],
         "description": "Fails over from the current primary server to this server.",
         "operationId": "FailoverGroups_Failover",
         "parameters": [
@@ -422,9 +396,7 @@
     },
     "path:48": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2015-05-01-preview"
-        ],
+        "apiVersions": ["2015-05-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2015-05-01-preview",
           "2018-01-01-hybrid": "2015-05-01-preview"
@@ -438,9 +410,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "FailoverGroups"
-        ],
+        "tags": ["FailoverGroups"],
         "description": "Fails over from the current primary server to this server. This operation might result in data loss.",
         "operationId": "FailoverGroups_ForceFailoverAllowDataLoss",
         "parameters": [
@@ -495,9 +465,7 @@
     },
     "path:65": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2015-05-01-preview"
-        ],
+        "apiVersions": ["2015-05-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2015-05-01-preview",
           "2018-01-01-hybrid": "2015-05-01-preview"
@@ -511,9 +479,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "SyncGroups"
-        ],
+        "tags": ["SyncGroups"],
         "description": "Gets a collection of sync group logs.",
         "operationId": "SyncGroups_ListLogs",
         "parameters": [
@@ -565,12 +531,7 @@
             "description": "The types of logs to retrieve.",
             "required": true,
             "schema": {
-              "enum": [
-                "All",
-                "Error",
-                "Warning",
-                "Success"
-              ],
+              "enum": ["All", "Error", "Warning", "Success"],
               "type": "string"
             }
           },
@@ -612,9 +573,7 @@
     },
     "path:124": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -627,9 +586,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Databases"
-        ],
+        "tags": ["Databases"],
         "description": "Cancels the asynchronous operation on the database.",
         "operationId": "DatabaseOperations_Cancel",
         "parameters": [
@@ -671,9 +628,7 @@
     },
     "path:125": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -686,9 +641,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "Databases"
-        ],
+        "tags": ["Databases"],
         "description": "Gets a list of operations performed on the database.",
         "operationId": "DatabaseOperations_ListByDatabase",
         "parameters": [
@@ -730,9 +683,7 @@
     },
     "path:126": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -745,9 +696,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "ElasticPools"
-        ],
+        "tags": ["ElasticPools"],
         "description": "Cancels the asynchronous operation on the elastic pool.",
         "operationId": "ElasticPoolOperations_Cancel",
         "parameters": [
@@ -794,9 +743,7 @@
     },
     "path:127": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -809,9 +756,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "ElasticPools"
-        ],
+        "tags": ["ElasticPools"],
         "description": "Gets a list of operations performed on the elastic pool.",
         "operationId": "ElasticPoolOperations_ListByElasticPool",
         "parameters": [
@@ -858,9 +803,7 @@
     },
     "path:128": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -873,9 +816,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "LocationCapabilities"
-        ],
+        "tags": ["LocationCapabilities"],
         "description": "Gets the subscription capabilities available for the specified location.",
         "operationId": "Capabilities_ListByLocation",
         "parameters": [
@@ -899,11 +840,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "supportedEditions",
-                "supportedElasticPoolEditions",
-                "supportedManagedInstanceVersions"
-              ],
+              "enum": ["supportedEditions", "supportedElasticPoolEditions", "supportedManagedInstanceVersions"],
               "type": "string"
             }
           },
@@ -933,9 +870,7 @@
     },
     "path:129": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -948,9 +883,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Databases"
-        ],
+        "tags": ["Databases"],
         "description": "Upgrades a data warehouse.",
         "operationId": "Databases_UpgradeDataWarehouse",
         "parameters": [
@@ -992,9 +925,7 @@
     },
     "path:130": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -1007,9 +938,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "Databases"
-        ],
+        "tags": ["Databases"],
         "description": "Gets a list of databases.",
         "operationId": "Databases_ListByServer",
         "parameters": [
@@ -1048,9 +977,7 @@
     },
     "path:131": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -1063,9 +990,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "Databases"
-        ],
+        "tags": ["Databases"],
         "description": "Gets a database.",
         "operationId": "Databases_Get",
         "parameters": [
@@ -1102,9 +1027,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Databases"
-        ],
+        "tags": ["Databases"],
         "description": "Creates a new database or updates an existing database.",
         "operationId": "Databases_CreateOrUpdate",
         "parameters": [
@@ -1168,9 +1091,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "tags": [
-          "Databases"
-        ],
+        "tags": ["Databases"],
         "description": "Deletes the database.",
         "operationId": "Databases_Delete",
         "parameters": [
@@ -1207,9 +1128,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "tags": [
-          "Databases"
-        ],
+        "tags": ["Databases"],
         "description": "Updates an existing database.",
         "operationId": "Databases_Update",
         "parameters": [
@@ -1265,9 +1184,7 @@
     },
     "path:132": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -1280,9 +1197,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "Databases"
-        ],
+        "tags": ["Databases"],
         "description": "Gets a list of databases in an elastic pool.",
         "operationId": "Databases_ListByElasticPool",
         "parameters": [
@@ -1330,9 +1245,7 @@
     },
     "path:133": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -1345,9 +1258,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Databases"
-        ],
+        "tags": ["Databases"],
         "description": "Pauses a database.",
         "operationId": "Databases_Pause",
         "parameters": [
@@ -1396,9 +1307,7 @@
     },
     "path:134": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -1411,9 +1320,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Databases"
-        ],
+        "tags": ["Databases"],
         "description": "Resumes a database.",
         "operationId": "Databases_Resume",
         "parameters": [
@@ -1462,9 +1369,7 @@
     },
     "path:135": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -1477,9 +1382,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "Databases"
-        ],
+        "tags": ["Databases"],
         "description": "Renames a database.",
         "operationId": "Databases_Rename",
         "parameters": [
@@ -1530,9 +1433,7 @@
     },
     "path:136": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -1545,9 +1446,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "ElasticPools"
-        ],
+        "tags": ["ElasticPools"],
         "description": "Gets all elastic pools in a server.",
         "operationId": "ElasticPools_ListByServer",
         "parameters": [
@@ -1595,9 +1494,7 @@
     },
     "path:137": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -1610,9 +1507,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "ElasticPools"
-        ],
+        "tags": ["ElasticPools"],
         "description": "Gets an elastic pool.",
         "operationId": "ElasticPools_Get",
         "parameters": [
@@ -1655,9 +1550,7 @@
         }
       },
       "put": {
-        "tags": [
-          "ElasticPools"
-        ],
+        "tags": ["ElasticPools"],
         "description": "Creates or updates an elastic pool.",
         "operationId": "ElasticPools_CreateOrUpdate",
         "parameters": [
@@ -1727,9 +1620,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "tags": [
-          "ElasticPools"
-        ],
+        "tags": ["ElasticPools"],
         "description": "Deletes an elastic pool.",
         "operationId": "ElasticPools_Delete",
         "parameters": [
@@ -1772,9 +1663,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "tags": [
-          "ElasticPools"
-        ],
+        "tags": ["ElasticPools"],
         "description": "Updates an elastic pool.",
         "operationId": "ElasticPools_Update",
         "parameters": [
@@ -1836,9 +1725,7 @@
     },
     "path:138": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -1851,9 +1738,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "DatabaseVulnerabilityAssessmentScans"
-        ],
+        "tags": ["DatabaseVulnerabilityAssessmentScans"],
         "description": "Gets a vulnerability assessment scan record of a database.",
         "operationId": "DatabaseVulnerabilityAssessmentScans_Get",
         "parameters": [
@@ -1877,9 +1762,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "default"
-              ],
+              "enum": ["default"],
               "type": "string"
             }
           },
@@ -1918,9 +1801,7 @@
     },
     "path:139": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -1933,9 +1814,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "DatabaseVulnerabilityAssessmentScans"
-        ],
+        "tags": ["DatabaseVulnerabilityAssessmentScans"],
         "description": "Executes a Vulnerability Assessment database scan.",
         "operationId": "DatabaseVulnerabilityAssessmentScans_InitiateScan",
         "parameters": [
@@ -1959,9 +1838,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "default"
-              ],
+              "enum": ["default"],
               "type": "string"
             }
           },
@@ -1997,9 +1874,7 @@
     },
     "path:140": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -2012,9 +1887,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "DatabaseVulnerabilityAssessmentScans"
-        ],
+        "tags": ["DatabaseVulnerabilityAssessmentScans"],
         "description": "Lists the vulnerability assessment scans of a database.",
         "operationId": "DatabaseVulnerabilityAssessmentScans_ListByDatabase",
         "parameters": [
@@ -2038,9 +1911,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "default"
-              ],
+              "enum": ["default"],
               "type": "string"
             }
           },
@@ -2073,9 +1944,7 @@
     },
     "path:141": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -2088,9 +1957,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "DatabaseVulnerabilityAssessmentScansExport"
-        ],
+        "tags": ["DatabaseVulnerabilityAssessmentScansExport"],
         "description": "Convert an existing scan result to a human readable format. If already exists nothing happens",
         "operationId": "DatabaseVulnerabilityAssessmentScans_Export",
         "parameters": [
@@ -2120,9 +1987,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "default"
-              ],
+              "enum": ["default"],
               "type": "string"
             }
           },
@@ -2171,9 +2036,7 @@
     },
     "path:142": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -2186,9 +2049,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "ManagedDatabaseVulnerabilityAssesmentRuleBaselines"
-        ],
+        "tags": ["ManagedDatabaseVulnerabilityAssesmentRuleBaselines"],
         "description": "Gets a database's vulnerability assessment rule baseline.",
         "operationId": "ManagedDatabaseVulnerabilityAssessmentRuleBaselines_Get",
         "parameters": [
@@ -2224,9 +2085,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "default"
-              ],
+              "enum": ["default"],
               "type": "string"
             }
           },
@@ -2250,10 +2109,7 @@
               "oldModelAsString": false
             },
             "schema": {
-              "enum": [
-                "master",
-                "default"
-              ],
+              "enum": ["master", "default"],
               "type": "string"
             }
           },
@@ -2281,9 +2137,7 @@
         }
       },
       "put": {
-        "tags": [
-          "ManagedDatabaseVulnerabilityAssesmentRuleBaselines"
-        ],
+        "tags": ["ManagedDatabaseVulnerabilityAssesmentRuleBaselines"],
         "description": "Creates or updates a database's vulnerability assessment rule baseline.",
         "operationId": "ManagedDatabaseVulnerabilityAssessmentRuleBaselines_CreateOrUpdate",
         "parameters": [
@@ -2319,9 +2173,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "default"
-              ],
+              "enum": ["default"],
               "type": "string"
             }
           },
@@ -2345,10 +2197,7 @@
               "oldModelAsString": false
             },
             "schema": {
-              "enum": [
-                "master",
-                "default"
-              ],
+              "enum": ["master", "default"],
               "type": "string"
             }
           },
@@ -2389,9 +2238,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "ManagedDatabaseVulnerabilityAssesmentRuleBaselines"
-        ],
+        "tags": ["ManagedDatabaseVulnerabilityAssesmentRuleBaselines"],
         "description": "Removes the database's vulnerability assessment rule baseline.",
         "operationId": "ManagedDatabaseVulnerabilityAssessmentRuleBaselines_Delete",
         "parameters": [
@@ -2427,9 +2274,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "default"
-              ],
+              "enum": ["default"],
               "type": "string"
             }
           },
@@ -2453,10 +2298,7 @@
               "oldModelAsString": false
             },
             "schema": {
-              "enum": [
-                "master",
-                "default"
-              ],
+              "enum": ["master", "default"],
               "type": "string"
             }
           },
@@ -2479,9 +2321,7 @@
     },
     "path:143": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -2494,9 +2334,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "ManagedDatabaseVulnerabilityAssessmentScans"
-        ],
+        "tags": ["ManagedDatabaseVulnerabilityAssessmentScans"],
         "description": "Lists the vulnerability assessment scans of a database.",
         "operationId": "ManagedDatabaseVulnerabilityAssessmentScans_ListByDatabase",
         "parameters": [
@@ -2526,9 +2364,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "default"
-              ],
+              "enum": ["default"],
               "type": "string"
             }
           },
@@ -2561,9 +2397,7 @@
     },
     "path:144": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -2576,9 +2410,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "ManagedDatabaseVulnerabilityAssessmentScans"
-        ],
+        "tags": ["ManagedDatabaseVulnerabilityAssessmentScans"],
         "description": "Gets a vulnerability assessment scan record of a database.",
         "operationId": "ManagedDatabaseVulnerabilityAssessmentScans_Get",
         "parameters": [
@@ -2608,9 +2440,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "default"
-              ],
+              "enum": ["default"],
               "type": "string"
             }
           },
@@ -2649,9 +2479,7 @@
     },
     "path:145": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -2664,9 +2492,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "ManagedDatabaseVulnerabilityAssessmentScansExecute"
-        ],
+        "tags": ["ManagedDatabaseVulnerabilityAssessmentScansExecute"],
         "description": "Executes a Vulnerability Assessment database scan.",
         "operationId": "ManagedDatabaseVulnerabilityAssessmentScans_InitiateScan",
         "parameters": [
@@ -2696,9 +2522,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "default"
-              ],
+              "enum": ["default"],
               "type": "string"
             }
           },
@@ -2734,9 +2558,7 @@
     },
     "path:146": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -2749,9 +2571,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "ManagedDatabaseVulnerabilityAssessmentScansExport"
-        ],
+        "tags": ["ManagedDatabaseVulnerabilityAssessmentScansExport"],
         "description": "Convert an existing scan result to a human readable format. If already exists nothing happens",
         "operationId": "ManagedDatabaseVulnerabilityAssessmentScans_Export",
         "parameters": [
@@ -2787,9 +2607,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "default"
-              ],
+              "enum": ["default"],
               "type": "string"
             }
           },
@@ -2838,9 +2656,7 @@
     },
     "path:147": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -2853,9 +2669,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "ManagedDatabaseVulnerabilityAssessments"
-        ],
+        "tags": ["ManagedDatabaseVulnerabilityAssessments"],
         "description": "Gets the database's vulnerability assessment.",
         "operationId": "ManagedDatabaseVulnerabilityAssessments_Get",
         "parameters": [
@@ -2891,9 +2705,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "default"
-              ],
+              "enum": ["default"],
               "type": "string"
             }
           },
@@ -2921,9 +2733,7 @@
         }
       },
       "put": {
-        "tags": [
-          "ManagedDatabaseVulnerabilityAssessments"
-        ],
+        "tags": ["ManagedDatabaseVulnerabilityAssessments"],
         "description": "Creates or updates the database's vulnerability assessment.",
         "operationId": "ManagedDatabaseVulnerabilityAssessments_CreateOrUpdate",
         "parameters": [
@@ -2959,9 +2769,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "default"
-              ],
+              "enum": ["default"],
               "type": "string"
             }
           },
@@ -3012,9 +2820,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "ManagedDatabaseVulnerabilityAssessments"
-        ],
+        "tags": ["ManagedDatabaseVulnerabilityAssessments"],
         "description": "Removes the database's vulnerability assessment.",
         "operationId": "ManagedDatabaseVulnerabilityAssessments_Delete",
         "parameters": [
@@ -3050,9 +2856,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "default"
-              ],
+              "enum": ["default"],
               "type": "string"
             }
           },
@@ -3075,9 +2879,7 @@
     },
     "path:148": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -3090,9 +2892,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "InstanceFailoverGroups"
-        ],
+        "tags": ["InstanceFailoverGroups"],
         "description": "Gets a failover group.",
         "operationId": "InstanceFailoverGroups_Get",
         "parameters": [
@@ -3141,9 +2941,7 @@
         }
       },
       "put": {
-        "tags": [
-          "InstanceFailoverGroups"
-        ],
+        "tags": ["InstanceFailoverGroups"],
         "description": "Creates or updates a failover group.",
         "operationId": "InstanceFailoverGroups_CreateOrUpdate",
         "parameters": [
@@ -3219,9 +3017,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "tags": [
-          "InstanceFailoverGroups"
-        ],
+        "tags": ["InstanceFailoverGroups"],
         "description": "Deletes a failover group.",
         "operationId": "InstanceFailoverGroups_Delete",
         "parameters": [
@@ -3272,9 +3068,7 @@
     },
     "path:149": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -3287,9 +3081,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "InstanceFailoverGroups"
-        ],
+        "tags": ["InstanceFailoverGroups"],
         "description": "Lists the failover groups in a location.",
         "operationId": "InstanceFailoverGroups_ListByLocation",
         "parameters": [
@@ -3334,9 +3126,7 @@
     },
     "path:150": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -3349,9 +3139,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "InstanceFailoverGroups"
-        ],
+        "tags": ["InstanceFailoverGroups"],
         "description": "Fails over from the current primary managed instance to this managed instance.",
         "operationId": "InstanceFailoverGroups_Failover",
         "parameters": [
@@ -3406,9 +3194,7 @@
     },
     "path:151": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -3421,9 +3207,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "InstanceFailoverGroups"
-        ],
+        "tags": ["InstanceFailoverGroups"],
         "description": "Fails over from the current primary managed instance to this managed instance. This operation might result in data loss.",
         "operationId": "InstanceFailoverGroups_ForceFailoverAllowDataLoss",
         "parameters": [
@@ -3478,9 +3262,7 @@
     },
     "path:152": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -3493,9 +3275,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "BackupShortTermRetentionPolicies"
-        ],
+        "tags": ["BackupShortTermRetentionPolicies"],
         "description": "Gets a database's short term retention policy.",
         "operationId": "BackupShortTermRetentionPolicies_Get",
         "parameters": [
@@ -3519,9 +3299,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "default"
-              ],
+              "enum": ["default"],
               "type": "string"
             }
           },
@@ -3549,9 +3327,7 @@
         }
       },
       "put": {
-        "tags": [
-          "BackupShortTermRetentionPolicies"
-        ],
+        "tags": ["BackupShortTermRetentionPolicies"],
         "description": "Updates a database's short term retention policy.",
         "operationId": "BackupShortTermRetentionPolicies_CreateOrUpdate",
         "parameters": [
@@ -3575,9 +3351,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "default"
-              ],
+              "enum": ["default"],
               "type": "string"
             }
           },
@@ -3622,9 +3396,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "tags": [
-          "BackupShortTermRetentionPolicies"
-        ],
+        "tags": ["BackupShortTermRetentionPolicies"],
         "description": "Updates a database's short term retention policy.",
         "operationId": "BackupShortTermRetentionPolicies_Update",
         "parameters": [
@@ -3648,9 +3420,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "default"
-              ],
+              "enum": ["default"],
               "type": "string"
             }
           },
@@ -3697,9 +3467,7 @@
     },
     "path:153": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -3712,9 +3480,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "BackupShortTermRetentionPolicies"
-        ],
+        "tags": ["BackupShortTermRetentionPolicies"],
         "description": "Gets a database's short term retention policy.",
         "operationId": "BackupShortTermRetentionPolicies_ListByDatabase",
         "parameters": [
@@ -3756,9 +3522,7 @@
     },
     "path:154": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -3771,9 +3535,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "TdeCertificates"
-        ],
+        "tags": ["TdeCertificates"],
         "description": "Creates a TDE certificate for a given server.",
         "operationId": "TdeCertificates_Create",
         "parameters": [
@@ -3819,9 +3581,7 @@
     },
     "path:155": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -3834,9 +3594,7 @@
         ]
       },
       "post": {
-        "tags": [
-          "ManagedInstanceTdeCertificates"
-        ],
+        "tags": ["ManagedInstanceTdeCertificates"],
         "description": "Creates a TDE certificate for a given server.",
         "operationId": "ManagedInstanceTdeCertificates_Create",
         "parameters": [
@@ -3882,9 +3640,7 @@
     },
     "path:156": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -3897,9 +3653,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "ManagedInstanceKeys"
-        ],
+        "tags": ["ManagedInstanceKeys"],
         "description": "Gets a list of managed instance keys.",
         "operationId": "ManagedInstanceKeys_ListByInstance",
         "parameters": [
@@ -3947,9 +3701,7 @@
     },
     "path:157": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -3962,9 +3714,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "ManagedInstanceKeys"
-        ],
+        "tags": ["ManagedInstanceKeys"],
         "description": "Gets a managed instance key.",
         "operationId": "ManagedInstanceKeys_Get",
         "parameters": [
@@ -4007,9 +3757,7 @@
         }
       },
       "put": {
-        "tags": [
-          "ManagedInstanceKeys"
-        ],
+        "tags": ["ManagedInstanceKeys"],
         "description": "Creates or updates a managed instance key.",
         "operationId": "ManagedInstanceKeys_CreateOrUpdate",
         "parameters": [
@@ -4079,9 +3827,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "tags": [
-          "ManagedInstanceKeys"
-        ],
+        "tags": ["ManagedInstanceKeys"],
         "description": "Deletes the managed instance key with the given name.",
         "operationId": "ManagedInstanceKeys_Delete",
         "parameters": [
@@ -4126,9 +3872,7 @@
     },
     "path:158": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -4141,9 +3885,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "ManagedInstanceEncryptionProtectors"
-        ],
+        "tags": ["ManagedInstanceEncryptionProtectors"],
         "description": "Gets a list of managed instance encryption protectors",
         "operationId": "ManagedInstanceEncryptionProtectors_ListByInstance",
         "parameters": [
@@ -4182,9 +3924,7 @@
     },
     "path:159": {
       "x-ms-metadata": {
-        "apiVersions": [
-          "2017-10-01-preview"
-        ],
+        "apiVersions": ["2017-10-01-preview"],
         "profiles": {
           "2017-11-09-profile": "2017-10-01-preview"
         },
@@ -4197,9 +3937,7 @@
         ]
       },
       "get": {
-        "tags": [
-          "ManagedInstanceEncryptionProtectors"
-        ],
+        "tags": ["ManagedInstanceEncryptionProtectors"],
         "description": "Gets a managed instance encryption protector.",
         "operationId": "ManagedInstanceEncryptionProtectors_Get",
         "parameters": [
@@ -4220,9 +3958,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "current"
-              ],
+              "enum": ["current"],
               "type": "string"
             }
           },
@@ -4250,9 +3986,7 @@
         }
       },
       "put": {
-        "tags": [
-          "ManagedInstanceEncryptionProtectors"
-        ],
+        "tags": ["ManagedInstanceEncryptionProtectors"],
         "description": "Updates an existing encryption protector.",
         "operationId": "ManagedInstanceEncryptionProtectors_CreateOrUpdate",
         "parameters": [
@@ -4273,9 +4007,7 @@
               "oldModelAsString": true
             },
             "schema": {
-              "enum": [
-                "current"
-              ],
+              "enum": ["current"],
               "type": "string"
             }
           },
@@ -4325,9 +4057,7 @@
     "schemas": {
       "schemas:81": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///862?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FfailoverGroups.json"
           ],
@@ -4338,10 +4068,7 @@
           "x-ms-secondary-file": false
         },
         "description": "Properties of a failover group.",
-        "required": [
-          "readWriteEndpoint",
-          "partnerServers"
-        ],
+        "required": ["readWriteEndpoint", "partnerServers"],
         "type": "object",
         "properties": {
           "readWriteEndpoint": {
@@ -4354,10 +4081,7 @@
           },
           "replicationRole": {
             "description": "Local replication role of the failover group instance.",
-            "enum": [
-              "Primary",
-              "Secondary"
-            ],
+            "enum": ["Primary", "Secondary"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -4377,10 +4101,7 @@
             "items": {
               "$ref": "#/components/schemas/schemas:84"
             },
-            "x-ms-mutability": [
-              "read",
-              "create"
-            ]
+            "x-ms-mutability": ["read", "create"]
           },
           "databases": {
             "description": "List of databases in the failover group.",
@@ -4393,9 +4114,7 @@
       },
       "schemas:82": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///862?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FfailoverGroups.json"
           ],
@@ -4406,17 +4125,12 @@
           "x-ms-secondary-file": false
         },
         "description": "Read-write endpoint of the failover group instance.",
-        "required": [
-          "failoverPolicy"
-        ],
+        "required": ["failoverPolicy"],
         "type": "object",
         "properties": {
           "failoverPolicy": {
             "description": "Failover policy of the read-write endpoint for the failover group. If failoverPolicy is Automatic then failoverWithDataLossGracePeriodMinutes is required.",
-            "enum": [
-              "Manual",
-              "Automatic"
-            ],
+            "enum": ["Manual", "Automatic"],
             "type": "string",
             "x-ms-enum": {
               "name": "ReadWriteEndpointFailoverPolicy",
@@ -4433,9 +4147,7 @@
       },
       "schemas:83": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///862?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FfailoverGroups.json"
           ],
@@ -4450,10 +4162,7 @@
         "properties": {
           "failoverPolicy": {
             "description": "Failover policy of the read-only endpoint for the failover group.",
-            "enum": [
-              "Disabled",
-              "Enabled"
-            ],
+            "enum": ["Disabled", "Enabled"],
             "type": "string",
             "x-ms-enum": {
               "name": "ReadOnlyEndpointFailoverPolicy",
@@ -4465,9 +4174,7 @@
       },
       "schemas:84": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///862?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FfailoverGroups.json"
           ],
@@ -4478,9 +4185,7 @@
           "x-ms-secondary-file": false
         },
         "description": "Partner server information for the failover group.",
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "type": "object",
         "properties": {
           "id": {
@@ -4494,10 +4199,7 @@
           },
           "replicationRole": {
             "description": "Replication role of the partner server.",
-            "enum": [
-              "Primary",
-              "Secondary"
-            ],
+            "enum": ["Primary", "Secondary"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -4510,9 +4212,7 @@
       },
       "schemas:85": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///862?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FfailoverGroups.json"
           ],
@@ -4551,9 +4251,7 @@
       },
       "schemas:86": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///862?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FfailoverGroups.json"
           ],
@@ -4582,9 +4280,7 @@
       },
       "schemas:87": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///862?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FfailoverGroups.json"
           ],
@@ -4616,9 +4312,7 @@
       },
       "schemas:88": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///862?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FfailoverGroups.json"
           ],
@@ -4648,9 +4342,7 @@
       },
       "schemas:116": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///868?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FsyncGroups.json"
           ],
@@ -4680,9 +4372,7 @@
       },
       "schemas:117": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///868?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FsyncGroups.json"
           ],
@@ -4703,12 +4393,7 @@
           },
           "type": {
             "description": "Type of the sync group log.",
-            "enum": [
-              "All",
-              "Error",
-              "Warning",
-              "Success"
-            ],
+            "enum": ["All", "Error", "Warning", "Success"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -4742,9 +4427,7 @@
       },
       "schemas:203": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///882?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelOperations.json"
           ],
@@ -4774,9 +4457,7 @@
       },
       "schemas:204": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///882?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelOperations.json"
           ],
@@ -4803,9 +4484,7 @@
       },
       "schemas:205": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///882?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelOperations.json"
           ],
@@ -4852,14 +4531,7 @@
           },
           "state": {
             "description": "The operation state.",
-            "enum": [
-              "Pending",
-              "InProgress",
-              "Succeeded",
-              "Failed",
-              "CancelInProgress",
-              "Cancelled"
-            ],
+            "enum": ["Pending", "InProgress", "Succeeded", "Failed", "CancelInProgress", "Cancelled"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -4910,9 +4582,7 @@
       },
       "schemas:206": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///883?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelPoolOperations.json"
           ],
@@ -4942,9 +4612,7 @@
       },
       "schemas:207": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///883?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelPoolOperations.json"
           ],
@@ -5036,9 +4704,7 @@
       },
       "schemas:208": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///883?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelPoolOperations.json"
           ],
@@ -5065,9 +4731,7 @@
       },
       "schemas:209": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -5103,12 +4767,7 @@
           },
           "status": {
             "description": "The status of the capability.",
-            "enum": [
-              "Visible",
-              "Available",
-              "Default",
-              "Disabled"
-            ],
+            "enum": ["Visible", "Available", "Default", "Disabled"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -5125,9 +4784,7 @@
       },
       "schemas:210": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -5163,12 +4820,7 @@
           },
           "status": {
             "description": "The status of the capability.",
-            "enum": [
-              "Visible",
-              "Available",
-              "Default",
-              "Disabled"
-            ],
+            "enum": ["Visible", "Available", "Default", "Disabled"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -5185,9 +4837,7 @@
       },
       "schemas:211": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -5215,12 +4865,7 @@
           },
           "status": {
             "description": "The status of the capability.",
-            "enum": [
-              "Visible",
-              "Available",
-              "Default",
-              "Disabled"
-            ],
+            "enum": ["Visible", "Available", "Default", "Disabled"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -5237,9 +4882,7 @@
       },
       "schemas:212": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -5272,12 +4915,7 @@
           },
           "status": {
             "description": "The status of the capability.",
-            "enum": [
-              "Visible",
-              "Available",
-              "Default",
-              "Disabled"
-            ],
+            "enum": ["Visible", "Available", "Default", "Disabled"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -5294,9 +4932,7 @@
       },
       "schemas:213": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -5329,12 +4965,7 @@
           },
           "status": {
             "description": "The status of the capability.",
-            "enum": [
-              "Visible",
-              "Available",
-              "Default",
-              "Disabled"
-            ],
+            "enum": ["Visible", "Available", "Default", "Disabled"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -5351,9 +4982,7 @@
       },
       "schemas:214": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -5381,12 +5010,7 @@
           },
           "status": {
             "description": "The status of the capability.",
-            "enum": [
-              "Visible",
-              "Available",
-              "Default",
-              "Disabled"
-            ],
+            "enum": ["Visible", "Available", "Default", "Disabled"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -5403,9 +5027,7 @@
       },
       "schemas:215": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -5462,12 +5084,7 @@
           },
           "status": {
             "description": "The status of the capability.",
-            "enum": [
-              "Visible",
-              "Available",
-              "Default",
-              "Disabled"
-            ],
+            "enum": ["Visible", "Available", "Default", "Disabled"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -5484,9 +5101,7 @@
       },
       "schemas:216": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -5554,12 +5169,7 @@
           },
           "status": {
             "description": "The status of the capability.",
-            "enum": [
-              "Visible",
-              "Available",
-              "Default",
-              "Disabled"
-            ],
+            "enum": ["Visible", "Available", "Default", "Disabled"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -5576,9 +5186,7 @@
       },
       "schemas:217": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -5632,12 +5240,7 @@
           },
           "status": {
             "description": "The status of the capability.",
-            "enum": [
-              "Visible",
-              "Available",
-              "Default",
-              "Disabled"
-            ],
+            "enum": ["Visible", "Available", "Default", "Disabled"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -5654,9 +5257,7 @@
       },
       "schemas:218": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -5691,12 +5292,7 @@
           },
           "status": {
             "description": "The status of the capability.",
-            "enum": [
-              "Visible",
-              "Available",
-              "Default",
-              "Disabled"
-            ],
+            "enum": ["Visible", "Available", "Default", "Disabled"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -5713,9 +5309,7 @@
       },
       "schemas:219": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -5736,10 +5330,7 @@
           },
           "unit": {
             "description": "Unit type used to measure performance level.",
-            "enum": [
-              "DTU",
-              "VCores"
-            ],
+            "enum": ["DTU", "VCores"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -5752,9 +5343,7 @@
       },
       "schemas:220": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -5774,12 +5363,7 @@
           },
           "status": {
             "description": "The status of the capability.",
-            "enum": [
-              "Visible",
-              "Available",
-              "Default",
-              "Disabled"
-            ],
+            "enum": ["Visible", "Available", "Default", "Disabled"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -5796,9 +5380,7 @@
       },
       "schemas:221": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -5819,12 +5401,7 @@
           },
           "unit": {
             "description": "The units that the limit is expressed in.",
-            "enum": [
-              "Megabytes",
-              "Gigabytes",
-              "Terabytes",
-              "Petabytes"
-            ],
+            "enum": ["Megabytes", "Gigabytes", "Terabytes", "Petabytes"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -5837,9 +5414,7 @@
       },
       "schemas:222": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -5860,10 +5435,7 @@
           },
           "unit": {
             "description": "Unit type used to measure performance level.",
-            "enum": [
-              "DTU",
-              "VCores"
-            ],
+            "enum": ["DTU", "VCores"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -5882,12 +5454,7 @@
           },
           "status": {
             "description": "The status of the capability.",
-            "enum": [
-              "Visible",
-              "Available",
-              "Default",
-              "Disabled"
-            ],
+            "enum": ["Visible", "Available", "Default", "Disabled"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -5904,9 +5471,7 @@
       },
       "schemas:223": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -5932,12 +5497,7 @@
           },
           "status": {
             "description": "The status of the capability.",
-            "enum": [
-              "Visible",
-              "Available",
-              "Default",
-              "Disabled"
-            ],
+            "enum": ["Visible", "Available", "Default", "Disabled"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -5954,9 +5514,7 @@
       },
       "schemas:224": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -5977,13 +5535,7 @@
           },
           "unit": {
             "description": "The units that the limit is expressed in.",
-            "enum": [
-              "Megabytes",
-              "Gigabytes",
-              "Terabytes",
-              "Petabytes",
-              "Percent"
-            ],
+            "enum": ["Megabytes", "Gigabytes", "Terabytes", "Petabytes", "Percent"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -5996,9 +5548,7 @@
       },
       "schemas:225": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -6019,10 +5569,7 @@
           },
           "unit": {
             "description": "Unit type used to measure performance level.",
-            "enum": [
-              "DTU",
-              "VCores"
-            ],
+            "enum": ["DTU", "VCores"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -6033,12 +5580,7 @@
           },
           "status": {
             "description": "The status of the capability.",
-            "enum": [
-              "Visible",
-              "Available",
-              "Default",
-              "Disabled"
-            ],
+            "enum": ["Visible", "Available", "Default", "Disabled"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -6055,9 +5597,7 @@
       },
       "schemas:226": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///885?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fdatabases.json"
           ],
@@ -6087,9 +5627,7 @@
       },
       "schemas:227": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///885?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fdatabases.json"
           ],
@@ -6122,17 +5660,12 @@
               "modelAsString": true,
               "oldModelAsString": true
             },
-            "x-ms-mutability": [
-              "create"
-            ]
+            "x-ms-mutability": ["create"]
           },
           "collation": {
             "description": "The collation of the database.",
             "type": "string",
-            "x-ms-mutability": [
-              "read",
-              "create"
-            ]
+            "x-ms-mutability": ["read", "create"]
           },
           "maxSizeBytes": {
             "format": "int64",
@@ -6141,20 +5674,14 @@
           },
           "sampleName": {
             "description": "The name of the sample schema to apply when creating this database.",
-            "enum": [
-              "AdventureWorksLT",
-              "WideWorldImportersStd",
-              "WideWorldImportersFull"
-            ],
+            "enum": ["AdventureWorksLT", "WideWorldImportersStd", "WideWorldImportersFull"],
             "type": "string",
             "x-ms-enum": {
               "name": "SampleName",
               "modelAsString": true,
               "oldModelAsString": true
             },
-            "x-ms-mutability": [
-              "create"
-            ]
+            "x-ms-mutability": ["create"]
           },
           "elasticPoolId": {
             "description": "The resource identifier of the elastic pool containing this database.",
@@ -6163,9 +5690,7 @@
           "sourceDatabaseId": {
             "description": "The resource identifier of the source database associated with create operation of this database.",
             "type": "string",
-            "x-ms-mutability": [
-              "create"
-            ]
+            "x-ms-mutability": ["create"]
           },
           "status": {
             "description": "The status of the database.",
@@ -6233,62 +5758,44 @@
             "format": "date-time",
             "description": "Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database.",
             "type": "string",
-            "x-ms-mutability": [
-              "create"
-            ]
+            "x-ms-mutability": ["create"]
           },
           "sourceDatabaseDeletionDate": {
             "format": "date-time",
             "description": "Specifies the time that the database was deleted.",
             "type": "string",
-            "x-ms-mutability": [
-              "create"
-            ]
+            "x-ms-mutability": ["create"]
           },
           "recoveryServicesRecoveryPointId": {
             "description": "The resource identifier of the recovery point associated with create operation of this database.",
             "type": "string",
-            "x-ms-mutability": [
-              "create"
-            ]
+            "x-ms-mutability": ["create"]
           },
           "longTermRetentionBackupResourceId": {
             "description": "The resource identifier of the long term retention backup associated with create operation of this database.",
             "type": "string",
-            "x-ms-mutability": [
-              "create"
-            ]
+            "x-ms-mutability": ["create"]
           },
           "recoverableDatabaseId": {
             "description": "The resource identifier of the recoverable database associated with create operation of this database.",
             "type": "string",
-            "x-ms-mutability": [
-              "create"
-            ]
+            "x-ms-mutability": ["create"]
           },
           "restorableDroppedDatabaseId": {
             "description": "The resource identifier of the restorable dropped database associated with create operation of this database.",
             "type": "string",
-            "x-ms-mutability": [
-              "create"
-            ]
+            "x-ms-mutability": ["create"]
           },
           "catalogCollation": {
             "description": "Collation of the metadata catalog.",
-            "enum": [
-              "DATABASE_DEFAULT",
-              "SQL_Latin1_General_CP1_CI_AS"
-            ],
+            "enum": ["DATABASE_DEFAULT", "SQL_Latin1_General_CP1_CI_AS"],
             "type": "string",
             "x-ms-enum": {
               "name": "CatalogCollationType",
               "modelAsString": true,
               "oldModelAsString": true
             },
-            "x-ms-mutability": [
-              "read",
-              "create"
-            ]
+            "x-ms-mutability": ["read", "create"]
           },
           "zoneRedundant": {
             "description": "Whether or not this database is zone redundant, which means the replicas of this database will be spread across multiple availability zones.",
@@ -6296,10 +5803,7 @@
           },
           "licenseType": {
             "description": "The license type to apply for this database.",
-            "enum": [
-              "LicenseIncluded",
-              "BasePrice"
-            ],
+            "enum": ["LicenseIncluded", "BasePrice"],
             "type": "string",
             "x-ms-enum": {
               "name": "DatabaseLicenseType",
@@ -6321,20 +5825,14 @@
           },
           "readScale": {
             "description": "The state of read-only routing. If enabled, connections that have application intent set to readonly in their connection string may be routed to a readonly secondary replica in the same region.",
-            "enum": [
-              "Enabled",
-              "Disabled"
-            ],
+            "enum": ["Enabled", "Disabled"],
             "type": "string",
             "x-ms-enum": {
               "name": "DatabaseReadScale",
               "modelAsString": true,
               "oldModelAsString": true
             },
-            "x-ms-mutability": [
-              "read",
-              "update"
-            ]
+            "x-ms-mutability": ["read", "update"]
           },
           "currentSku": {
             "$ref": "#/components/schemas/schemas:279",
@@ -6345,9 +5843,7 @@
       },
       "schemas:228": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///885?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fdatabases.json"
           ],
@@ -6358,9 +5854,7 @@
           "x-ms-secondary-file": false
         },
         "description": "A database resource.",
-        "required": [
-          "location"
-        ],
+        "required": ["location"],
         "type": "object",
         "allOf": [
           {
@@ -6391,9 +5885,7 @@
       },
       "schemas:229": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///885?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fdatabases.json"
           ],
@@ -6426,9 +5918,7 @@
       },
       "schemas:230": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///885?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fdatabases.json"
           ],
@@ -6439,9 +5929,7 @@
           "x-ms-secondary-file": false
         },
         "description": "Contains the information necessary to perform a resource move (rename).",
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "type": "object",
         "properties": {
           "id": {
@@ -6452,9 +5940,7 @@
       },
       "schemas:231": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///886?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FelasticPools.json"
           ],
@@ -6484,9 +5970,7 @@
       },
       "schemas:232": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///886?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FelasticPools.json"
           ],
@@ -6501,11 +5985,7 @@
         "properties": {
           "state": {
             "description": "The state of the elastic pool.",
-            "enum": [
-              "Creating",
-              "Ready",
-              "Disabled"
-            ],
+            "enum": ["Creating", "Ready", "Disabled"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -6535,10 +6015,7 @@
           },
           "licenseType": {
             "description": "The license type to apply for this elastic pool.",
-            "enum": [
-              "LicenseIncluded",
-              "BasePrice"
-            ],
+            "enum": ["LicenseIncluded", "BasePrice"],
             "type": "string",
             "x-ms-enum": {
               "name": "ElasticPoolLicenseType",
@@ -6550,9 +6027,7 @@
       },
       "schemas:233": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///886?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FelasticPools.json"
           ],
@@ -6579,9 +6054,7 @@
       },
       "schemas:234": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///886?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FelasticPools.json"
           ],
@@ -6592,9 +6065,7 @@
           "x-ms-secondary-file": false
         },
         "description": "An elastic pool.",
-        "required": [
-          "location"
-        ],
+        "required": ["location"],
         "type": "object",
         "allOf": [
           {
@@ -6619,9 +6090,7 @@
       },
       "schemas:235": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///886?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FelasticPools.json"
           ],
@@ -6653,9 +6122,7 @@
       },
       "schemas:236": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///886?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FelasticPools.json"
           ],
@@ -6683,10 +6150,7 @@
           },
           "licenseType": {
             "description": "The license type to apply for this elastic pool.",
-            "enum": [
-              "LicenseIncluded",
-              "BasePrice"
-            ],
+            "enum": ["LicenseIncluded", "BasePrice"],
             "type": "string",
             "x-ms-enum": {
               "name": "ElasticPoolLicenseType",
@@ -6698,9 +6162,7 @@
       },
       "schemas:238": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///887?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FdatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -6720,10 +6182,7 @@
           },
           "triggerType": {
             "description": "The scan trigger type.",
-            "enum": [
-              "OnDemand",
-              "Recurring"
-            ],
+            "enum": ["OnDemand", "Recurring"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -6734,12 +6193,7 @@
           },
           "state": {
             "description": "The scan status.",
-            "enum": [
-              "Passed",
-              "Failed",
-              "FailedToRun",
-              "InProgress"
-            ],
+            "enum": ["Passed", "Failed", "FailedToRun", "InProgress"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -6783,9 +6237,7 @@
       },
       "schemas:239": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///887?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FdatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -6812,9 +6264,7 @@
       },
       "schemas:240": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///887?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FdatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -6841,9 +6291,7 @@
       },
       "schemas:241": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///887?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FdatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -6873,9 +6321,7 @@
       },
       "schemas:242": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///887?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FdatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -6897,9 +6343,7 @@
       },
       "schemas:243": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///887?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FdatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -6926,9 +6370,7 @@
       },
       "schemas:244": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///888?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssesmentRuleBaselines.json"
           ],
@@ -6939,9 +6381,7 @@
           "x-ms-secondary-file": false
         },
         "description": "Properties of a database Vulnerability Assessment rule baseline.",
-        "required": [
-          "baselineResults"
-        ],
+        "required": ["baselineResults"],
         "type": "object",
         "properties": {
           "baselineResults": {
@@ -6955,9 +6395,7 @@
       },
       "schemas:245": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///888?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssesmentRuleBaselines.json"
           ],
@@ -6968,9 +6406,7 @@
           "x-ms-secondary-file": false
         },
         "description": "Properties for an Azure SQL Database Vulnerability Assessment rule baseline's result.",
-        "required": [
-          "result"
-        ],
+        "required": ["result"],
         "type": "object",
         "properties": {
           "result": {
@@ -6984,9 +6420,7 @@
       },
       "schemas:246": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///888?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssesmentRuleBaselines.json"
           ],
@@ -7013,9 +6447,7 @@
       },
       "schemas:247": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///889?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -7045,9 +6477,7 @@
       },
       "schemas:248": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///889?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -7067,10 +6497,7 @@
           },
           "triggerType": {
             "description": "The scan trigger type.",
-            "enum": [
-              "OnDemand",
-              "Recurring"
-            ],
+            "enum": ["OnDemand", "Recurring"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -7081,12 +6508,7 @@
           },
           "state": {
             "description": "The scan status.",
-            "enum": [
-              "Passed",
-              "Failed",
-              "FailedToRun",
-              "InProgress"
-            ],
+            "enum": ["Passed", "Failed", "FailedToRun", "InProgress"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -7130,9 +6552,7 @@
       },
       "schemas:249": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///889?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -7159,9 +6579,7 @@
       },
       "schemas:250": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///889?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -7188,9 +6606,7 @@
       },
       "schemas:251": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///889?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -7212,9 +6628,7 @@
       },
       "schemas:252": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///889?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -7241,9 +6655,7 @@
       },
       "schemas:253": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///890?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessments.json"
           ],
@@ -7254,34 +6666,23 @@
           "x-ms-secondary-file": false
         },
         "description": "Properties of a database Vulnerability Assessment.",
-        "required": [
-          "storageContainerPath"
-        ],
+        "required": ["storageContainerPath"],
         "type": "object",
         "properties": {
           "storageContainerPath": {
             "description": "A blob storage container path to hold the scan results (e.g. https://myStorage.blob.core.windows.net/VaScans/).",
             "type": "string",
-            "x-ms-mutability": [
-              "create",
-              "update"
-            ]
+            "x-ms-mutability": ["create", "update"]
           },
           "storageContainerSasKey": {
             "description": "A shared access signature (SAS Key) that has write access to the blob container specified in 'storageContainerPath' parameter. If 'storageAccountAccessKey' isn't specified, StorageContainerSasKey is required.",
             "type": "string",
-            "x-ms-mutability": [
-              "create",
-              "update"
-            ]
+            "x-ms-mutability": ["create", "update"]
           },
           "storageAccountAccessKey": {
             "description": "Specifies the identifier key of the vulnerability assessment storage account. If 'StorageContainerSasKey' isn't specified, storageAccountAccessKey is required.",
             "type": "string",
-            "x-ms-mutability": [
-              "create",
-              "update"
-            ]
+            "x-ms-mutability": ["create", "update"]
           },
           "recurringScans": {
             "$ref": "#/components/schemas/schemas:254",
@@ -7291,9 +6692,7 @@
       },
       "schemas:254": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///890?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessments.json"
           ],
@@ -7326,9 +6725,7 @@
       },
       "schemas:255": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///890?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessments.json"
           ],
@@ -7355,9 +6752,7 @@
       },
       "schemas:256": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///891?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FinstanceFailoverGroups.json"
           ],
@@ -7368,11 +6763,7 @@
           "x-ms-secondary-file": false
         },
         "description": "Properties of a instance failover group.",
-        "required": [
-          "readWriteEndpoint",
-          "partnerRegions",
-          "managedInstancePairs"
-        ],
+        "required": ["readWriteEndpoint", "partnerRegions", "managedInstancePairs"],
         "type": "object",
         "properties": {
           "readWriteEndpoint": {
@@ -7385,10 +6776,7 @@
           },
           "replicationRole": {
             "description": "Local replication role of the failover group instance.",
-            "enum": [
-              "Primary",
-              "Secondary"
-            ],
+            "enum": ["Primary", "Secondary"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -7408,10 +6796,7 @@
             "items": {
               "$ref": "#/components/schemas/schemas:259"
             },
-            "x-ms-mutability": [
-              "read",
-              "create"
-            ]
+            "x-ms-mutability": ["read", "create"]
           },
           "managedInstancePairs": {
             "description": "List of managed instance pairs in the failover group.",
@@ -7424,9 +6809,7 @@
       },
       "schemas:257": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///891?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FinstanceFailoverGroups.json"
           ],
@@ -7437,17 +6820,12 @@
           "x-ms-secondary-file": false
         },
         "description": "Read-write endpoint of the failover group instance.",
-        "required": [
-          "failoverPolicy"
-        ],
+        "required": ["failoverPolicy"],
         "type": "object",
         "properties": {
           "failoverPolicy": {
             "description": "Failover policy of the read-write endpoint for the failover group. If failoverPolicy is Automatic then failoverWithDataLossGracePeriodMinutes is required.",
-            "enum": [
-              "Manual",
-              "Automatic"
-            ],
+            "enum": ["Manual", "Automatic"],
             "type": "string",
             "x-ms-enum": {
               "name": "ReadWriteEndpointFailoverPolicy",
@@ -7464,9 +6842,7 @@
       },
       "schemas:258": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///891?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FinstanceFailoverGroups.json"
           ],
@@ -7481,10 +6857,7 @@
         "properties": {
           "failoverPolicy": {
             "description": "Failover policy of the read-only endpoint for the failover group.",
-            "enum": [
-              "Disabled",
-              "Enabled"
-            ],
+            "enum": ["Disabled", "Enabled"],
             "type": "string",
             "x-ms-enum": {
               "name": "ReadOnlyEndpointFailoverPolicy",
@@ -7496,9 +6869,7 @@
       },
       "schemas:259": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///891?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FinstanceFailoverGroups.json"
           ],
@@ -7517,10 +6888,7 @@
           },
           "replicationRole": {
             "description": "Replication role of the partner managed instances.",
-            "enum": [
-              "Primary",
-              "Secondary"
-            ],
+            "enum": ["Primary", "Secondary"],
             "type": "string",
             "readOnly": true,
             "x-ms-enum": {
@@ -7533,9 +6901,7 @@
       },
       "schemas:260": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///891?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FinstanceFailoverGroups.json"
           ],
@@ -7560,9 +6926,7 @@
       },
       "schemas:261": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///891?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FinstanceFailoverGroups.json"
           ],
@@ -7589,9 +6953,7 @@
       },
       "schemas:262": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///891?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FinstanceFailoverGroups.json"
           ],
@@ -7621,9 +6983,7 @@
       },
       "schemas:263": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///892?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FshortTermRetentionPolicies.json"
           ],
@@ -7645,9 +7005,7 @@
       },
       "schemas:264": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///892?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FshortTermRetentionPolicies.json"
           ],
@@ -7674,9 +7032,7 @@
       },
       "schemas:265": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///892?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FshortTermRetentionPolicies.json"
           ],
@@ -7706,9 +7062,7 @@
       },
       "schemas:266": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///893?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FTdeCertificates.json"
           ],
@@ -7719,34 +7073,24 @@
           "x-ms-secondary-file": false
         },
         "description": "Properties of a TDE certificate.",
-        "required": [
-          "privateBlob"
-        ],
+        "required": ["privateBlob"],
         "type": "object",
         "properties": {
           "privateBlob": {
             "description": "The base64 encoded certificate private blob.",
             "type": "string",
-            "x-ms-mutability": [
-              "create",
-              "update"
-            ]
+            "x-ms-mutability": ["create", "update"]
           },
           "certPassword": {
             "description": "The certificate password.",
             "type": "string",
-            "x-ms-mutability": [
-              "create",
-              "update"
-            ]
+            "x-ms-mutability": ["create", "update"]
           }
         }
       },
       "schemas:267": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///893?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FTdeCertificates.json"
           ],
@@ -7773,9 +7117,7 @@
       },
       "schemas:268": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///894?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceTdeCertificates.json"
           ],
@@ -7786,34 +7128,24 @@
           "x-ms-secondary-file": false
         },
         "description": "Properties of a TDE certificate.",
-        "required": [
-          "privateBlob"
-        ],
+        "required": ["privateBlob"],
         "type": "object",
         "properties": {
           "privateBlob": {
             "description": "The base64 encoded certificate private blob.",
             "type": "string",
-            "x-ms-mutability": [
-              "create",
-              "update"
-            ]
+            "x-ms-mutability": ["create", "update"]
           },
           "certPassword": {
             "description": "The certificate password.",
             "type": "string",
-            "x-ms-mutability": [
-              "create",
-              "update"
-            ]
+            "x-ms-mutability": ["create", "update"]
           }
         }
       },
       "schemas:269": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///894?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceTdeCertificates.json"
           ],
@@ -7840,9 +7172,7 @@
       },
       "schemas:270": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///895?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceKeys.json"
           ],
@@ -7872,9 +7202,7 @@
       },
       "schemas:271": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///895?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceKeys.json"
           ],
@@ -7885,33 +7213,24 @@
           "x-ms-secondary-file": false
         },
         "description": "Properties for a key execution.",
-        "required": [
-          "serverKeyType"
-        ],
+        "required": ["serverKeyType"],
         "type": "object",
         "properties": {
           "serverKeyType": {
             "description": "The key type like 'ServiceManaged', 'AzureKeyVault'.",
-            "enum": [
-              "ServiceManaged",
-              "AzureKeyVault"
-            ],
+            "enum": ["ServiceManaged", "AzureKeyVault"],
             "type": "string",
             "x-ms-enum": {
               "name": "ServerKeyType",
               "modelAsString": true,
               "oldModelAsString": true
             },
-            "x-ms-mutability": [
-              "create"
-            ]
+            "x-ms-mutability": ["create"]
           },
           "uri": {
             "description": "The URI of the key. If the ServerKeyType is AzureKeyVault, then the URI is required.",
             "type": "string",
-            "x-ms-mutability": [
-              "create"
-            ]
+            "x-ms-mutability": ["create"]
           },
           "thumbprint": {
             "description": "Thumbprint of the key.",
@@ -7928,9 +7247,7 @@
       },
       "schemas:272": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///895?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceKeys.json"
           ],
@@ -7962,9 +7279,7 @@
       },
       "schemas:273": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///896?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceEncryptionProtectors.json"
           ],
@@ -7994,9 +7309,7 @@
       },
       "schemas:274": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///896?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceEncryptionProtectors.json"
           ],
@@ -8007,9 +7320,7 @@
           "x-ms-secondary-file": false
         },
         "description": "Properties for an encryption protector execution.",
-        "required": [
-          "serverKeyType"
-        ],
+        "required": ["serverKeyType"],
         "type": "object",
         "properties": {
           "serverKeyName": {
@@ -8018,10 +7329,7 @@
           },
           "serverKeyType": {
             "description": "The encryption protector type like 'ServiceManaged', 'AzureKeyVault'.",
-            "enum": [
-              "ServiceManaged",
-              "AzureKeyVault"
-            ],
+            "enum": ["ServiceManaged", "AzureKeyVault"],
             "type": "string",
             "x-ms-enum": {
               "name": "ServerKeyType",
@@ -8043,9 +7351,7 @@
       },
       "schemas:275": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///896?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceEncryptionProtectors.json"
           ],
@@ -8077,9 +7383,7 @@
       },
       "schemas:276": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0"
-          ],
+          "apiVersions": ["1.0"],
           "filename": [
             "mem:///897?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2Fcommon%2Fv1%2Ftypes.json"
           ],
@@ -8112,9 +7416,7 @@
       },
       "schemas:277": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0"
-          ],
+          "apiVersions": ["1.0"],
           "filename": [
             "mem:///897?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2Fcommon%2Fv1%2Ftypes.json"
           ],
@@ -8135,9 +7437,7 @@
       },
       "schemas:278": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0"
-          ],
+          "apiVersions": ["1.0"],
           "filename": [
             "mem:///897?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2Fcommon%2Fv1%2Ftypes.json"
           ],
@@ -8148,9 +7448,7 @@
           "x-ms-secondary-file": true
         },
         "description": "ARM tracked top level resource.",
-        "required": [
-          "location"
-        ],
+        "required": ["location"],
         "type": "object",
         "allOf": [
           {
@@ -8161,10 +7459,7 @@
           "location": {
             "description": "Resource location.",
             "type": "string",
-            "x-ms-mutability": [
-              "read",
-              "create"
-            ]
+            "x-ms-mutability": ["read", "create"]
           },
           "tags": {
             "description": "Resource tags.",
@@ -8177,9 +7472,7 @@
       },
       "schemas:279": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0"
-          ],
+          "apiVersions": ["1.0"],
           "filename": [
             "mem:///897?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2Fcommon%2Fv1%2Ftypes.json"
           ],
@@ -8213,17 +7506,13 @@
             "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
           }
         },
-        "required": [
-          "name"
-        ]
+        "required": ["name"]
       }
     },
     "parameters": {
       "parameters:41": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///862?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FfailoverGroups.json"
           ],
@@ -8244,9 +7533,7 @@
       },
       "parameters:42": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///862?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FfailoverGroups.json"
           ],
@@ -8267,9 +7554,7 @@
       },
       "parameters:43": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///862?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FfailoverGroups.json"
           ],
@@ -8290,9 +7575,7 @@
       },
       "parameters:78": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///868?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FsyncGroups.json"
           ],
@@ -8313,9 +7596,7 @@
       },
       "parameters:79": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///868?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FsyncGroups.json"
           ],
@@ -8336,9 +7617,7 @@
       },
       "parameters:80": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///868?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FsyncGroups.json"
           ],
@@ -8359,9 +7638,7 @@
       },
       "parameters:81": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///868?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FsyncGroups.json"
           ],
@@ -8382,9 +7659,7 @@
       },
       "parameters:201": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///882?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelOperations.json"
           ],
@@ -8405,9 +7680,7 @@
       },
       "parameters:202": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///882?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelOperations.json"
           ],
@@ -8428,9 +7701,7 @@
       },
       "parameters:203": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///882?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelOperations.json"
           ],
@@ -8451,9 +7722,7 @@
       },
       "parameters:204": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///882?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelOperations.json"
           ],
@@ -8474,9 +7743,7 @@
       },
       "parameters:206": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///882?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelOperations.json"
           ],
@@ -8497,9 +7764,7 @@
       },
       "parameters:211": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///883?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelPoolOperations.json"
           ],
@@ -8520,9 +7785,7 @@
       },
       "parameters:212": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///883?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelPoolOperations.json"
           ],
@@ -8543,9 +7806,7 @@
       },
       "parameters:213": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///883?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelPoolOperations.json"
           ],
@@ -8566,9 +7827,7 @@
       },
       "parameters:214": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///883?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelPoolOperations.json"
           ],
@@ -8589,9 +7848,7 @@
       },
       "parameters:221": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -8612,9 +7869,7 @@
       },
       "parameters:222": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -8635,9 +7890,7 @@
       },
       "parameters:231": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///885?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fdatabases.json"
           ],
@@ -8658,9 +7911,7 @@
       },
       "parameters:232": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///885?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fdatabases.json"
           ],
@@ -8681,9 +7932,7 @@
       },
       "parameters:233": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///885?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fdatabases.json"
           ],
@@ -8704,9 +7953,7 @@
       },
       "parameters:234": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///885?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fdatabases.json"
           ],
@@ -8727,9 +7974,7 @@
       },
       "parameters:236": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///885?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fdatabases.json"
           ],
@@ -8750,9 +7995,7 @@
       },
       "parameters:241": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///886?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FelasticPools.json"
           ],
@@ -8773,9 +8016,7 @@
       },
       "parameters:242": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///886?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FelasticPools.json"
           ],
@@ -8796,9 +8037,7 @@
       },
       "parameters:243": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///886?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FelasticPools.json"
           ],
@@ -8819,9 +8058,7 @@
       },
       "parameters:244": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///886?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FelasticPools.json"
           ],
@@ -8842,9 +8079,7 @@
       },
       "parameters:251": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///887?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FdatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -8865,9 +8100,7 @@
       },
       "parameters:252": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///887?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FdatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -8888,9 +8121,7 @@
       },
       "parameters:253": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///887?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FdatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -8911,9 +8142,7 @@
       },
       "parameters:254": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///887?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FdatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -8934,9 +8163,7 @@
       },
       "parameters:256": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///887?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FdatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -8957,9 +8184,7 @@
       },
       "parameters:261": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///888?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssesmentRuleBaselines.json"
           ],
@@ -8980,9 +8205,7 @@
       },
       "parameters:262": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///888?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssesmentRuleBaselines.json"
           ],
@@ -9003,9 +8226,7 @@
       },
       "parameters:263": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///888?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssesmentRuleBaselines.json"
           ],
@@ -9026,9 +8247,7 @@
       },
       "parameters:271": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///889?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -9049,9 +8268,7 @@
       },
       "parameters:272": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///889?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -9072,9 +8289,7 @@
       },
       "parameters:273": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///889?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -9095,9 +8310,7 @@
       },
       "parameters:276": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///889?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -9118,9 +8331,7 @@
       },
       "parameters:281": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///890?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessments.json"
           ],
@@ -9141,9 +8352,7 @@
       },
       "parameters:282": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///890?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessments.json"
           ],
@@ -9164,9 +8373,7 @@
       },
       "parameters:283": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///890?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessments.json"
           ],
@@ -9187,9 +8394,7 @@
       },
       "parameters:291": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///891?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FinstanceFailoverGroups.json"
           ],
@@ -9210,9 +8415,7 @@
       },
       "parameters:292": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///891?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FinstanceFailoverGroups.json"
           ],
@@ -9233,9 +8436,7 @@
       },
       "parameters:293": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///891?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FinstanceFailoverGroups.json"
           ],
@@ -9256,9 +8457,7 @@
       },
       "parameters:301": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///892?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FshortTermRetentionPolicies.json"
           ],
@@ -9279,9 +8478,7 @@
       },
       "parameters:302": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///892?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FshortTermRetentionPolicies.json"
           ],
@@ -9302,9 +8499,7 @@
       },
       "parameters:303": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///892?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FshortTermRetentionPolicies.json"
           ],
@@ -9325,9 +8520,7 @@
       },
       "parameters:304": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///892?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FshortTermRetentionPolicies.json"
           ],
@@ -9348,9 +8541,7 @@
       },
       "parameters:306": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///892?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FshortTermRetentionPolicies.json"
           ],
@@ -9371,9 +8562,7 @@
       },
       "parameters:311": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///893?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FTdeCertificates.json"
           ],
@@ -9394,9 +8583,7 @@
       },
       "parameters:312": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///893?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FTdeCertificates.json"
           ],
@@ -9417,9 +8604,7 @@
       },
       "parameters:313": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///893?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FTdeCertificates.json"
           ],
@@ -9440,9 +8625,7 @@
       },
       "parameters:314": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///893?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FTdeCertificates.json"
           ],
@@ -9463,9 +8646,7 @@
       },
       "parameters:321": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///894?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceTdeCertificates.json"
           ],
@@ -9486,9 +8667,7 @@
       },
       "parameters:322": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///894?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceTdeCertificates.json"
           ],
@@ -9509,9 +8688,7 @@
       },
       "parameters:323": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///894?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceTdeCertificates.json"
           ],
@@ -9532,9 +8709,7 @@
       },
       "parameters:325": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///894?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceTdeCertificates.json"
           ],
@@ -9555,9 +8730,7 @@
       },
       "parameters:331": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///895?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceKeys.json"
           ],
@@ -9578,9 +8751,7 @@
       },
       "parameters:332": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///895?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceKeys.json"
           ],
@@ -9601,9 +8772,7 @@
       },
       "parameters:333": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///895?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceKeys.json"
           ],
@@ -9624,9 +8793,7 @@
       },
       "parameters:335": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///895?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceKeys.json"
           ],
@@ -9647,9 +8814,7 @@
       },
       "parameters:341": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///896?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceEncryptionProtectors.json"
           ],
@@ -9670,9 +8835,7 @@
       },
       "parameters:342": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///896?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceEncryptionProtectors.json"
           ],
@@ -9693,9 +8856,7 @@
       },
       "parameters:343": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///896?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceEncryptionProtectors.json"
           ],
@@ -9716,9 +8877,7 @@
       },
       "parameters:345": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///896?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceEncryptionProtectors.json"
           ],
@@ -9741,9 +8900,7 @@
     "securitySchemes": {
       "securitySchemes:0": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2014-04-01"
-          ],
+          "apiVersions": ["2014-04-01"],
           "filename": [
             "mem:///844?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fstable%2F2014-04-01%2Fbackups.json"
           ],
@@ -9766,9 +8923,7 @@
       },
       "securitySchemes:1": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2014-04-01"
-          ],
+          "apiVersions": ["2014-04-01"],
           "filename": [
             "mem:///845?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fstable%2F2014-04-01%2FcheckNameAvailability.json"
           ],
@@ -9791,9 +8946,7 @@
       },
       "securitySchemes:2": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2014-04-01"
-          ],
+          "apiVersions": ["2014-04-01"],
           "filename": [
             "mem:///846?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fstable%2F2014-04-01%2FconnectionPolicies.json"
           ],
@@ -9816,9 +8969,7 @@
       },
       "securitySchemes:3": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2014-04-01"
-          ],
+          "apiVersions": ["2014-04-01"],
           "filename": [
             "mem:///847?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fstable%2F2014-04-01%2FdatabaseSecurityAlertPolicies.json"
           ],
@@ -9841,9 +8992,7 @@
       },
       "securitySchemes:4": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2014-04-01"
-          ],
+          "apiVersions": ["2014-04-01"],
           "filename": [
             "mem:///848?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fstable%2F2014-04-01%2FdataMasking.json"
           ],
@@ -9866,9 +9015,7 @@
       },
       "securitySchemes:5": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2014-04-01"
-          ],
+          "apiVersions": ["2014-04-01"],
           "filename": [
             "mem:///849?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fstable%2F2014-04-01%2FfirewallRules.json"
           ],
@@ -9891,9 +9038,7 @@
       },
       "securitySchemes:6": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2014-04-01"
-          ],
+          "apiVersions": ["2014-04-01"],
           "filename": [
             "mem:///850?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fstable%2F2014-04-01%2FgeoBackupPolicies.json"
           ],
@@ -9916,9 +9061,7 @@
       },
       "securitySchemes:7": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2014-04-01"
-          ],
+          "apiVersions": ["2014-04-01"],
           "filename": [
             "mem:///851?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fstable%2F2014-04-01%2FimportExport.json"
           ],
@@ -9941,9 +9084,7 @@
       },
       "securitySchemes:8": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2014-04-01"
-          ],
+          "apiVersions": ["2014-04-01"],
           "filename": [
             "mem:///852?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fstable%2F2014-04-01%2Fmetrics.json"
           ],
@@ -9966,9 +9107,7 @@
       },
       "securitySchemes:9": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2014-04-01"
-          ],
+          "apiVersions": ["2014-04-01"],
           "filename": [
             "mem:///853?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fstable%2F2014-04-01%2FrecommendedElasticPoolsDecoupled.json"
           ],
@@ -9991,9 +9130,7 @@
       },
       "securitySchemes:10": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2014-04-01"
-          ],
+          "apiVersions": ["2014-04-01"],
           "filename": [
             "mem:///854?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fstable%2F2014-04-01%2FreplicationLinks.json"
           ],
@@ -10016,9 +9153,7 @@
       },
       "securitySchemes:11": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2014-04-01"
-          ],
+          "apiVersions": ["2014-04-01"],
           "filename": [
             "mem:///855?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fstable%2F2014-04-01%2FserverAzureADAdministrators.json"
           ],
@@ -10041,9 +9176,7 @@
       },
       "securitySchemes:12": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2014-04-01"
-          ],
+          "apiVersions": ["2014-04-01"],
           "filename": [
             "mem:///856?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fstable%2F2014-04-01%2FserverCommunicationLinks.json"
           ],
@@ -10066,9 +9199,7 @@
       },
       "securitySchemes:13": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2014-04-01"
-          ],
+          "apiVersions": ["2014-04-01"],
           "filename": [
             "mem:///857?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fstable%2F2014-04-01%2FserviceObjectives.json"
           ],
@@ -10091,9 +9222,7 @@
       },
       "securitySchemes:14": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2014-04-01"
-          ],
+          "apiVersions": ["2014-04-01"],
           "filename": [
             "mem:///858?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fstable%2F2014-04-01%2Fsql.core.json"
           ],
@@ -10116,9 +9245,7 @@
       },
       "securitySchemes:15": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2014-04-01"
-          ],
+          "apiVersions": ["2014-04-01"],
           "filename": [
             "mem:///859?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fstable%2F2014-04-01%2Fusages.json"
           ],
@@ -10141,9 +9268,7 @@
       },
       "securitySchemes:16": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///860?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FdatabaseAutomaticTuning.json"
           ],
@@ -10166,9 +9291,7 @@
       },
       "securitySchemes:17": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///861?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FencryptionProtectors.json"
           ],
@@ -10191,9 +9314,7 @@
       },
       "securitySchemes:18": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///862?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FfailoverGroups.json"
           ],
@@ -10216,9 +9337,7 @@
       },
       "securitySchemes:19": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///863?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FmanagedInstances.json"
           ],
@@ -10241,9 +9360,7 @@
       },
       "securitySchemes:20": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///864?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2Foperations.json"
           ],
@@ -10266,9 +9383,7 @@
       },
       "securitySchemes:21": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///865?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FserverKeys.json"
           ],
@@ -10291,9 +9406,7 @@
       },
       "securitySchemes:22": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///866?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2Fservers.json"
           ],
@@ -10316,9 +9429,7 @@
       },
       "securitySchemes:23": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///867?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FsyncAgents.json"
           ],
@@ -10341,9 +9452,7 @@
       },
       "securitySchemes:24": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///868?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FsyncGroups.json"
           ],
@@ -10366,9 +9475,7 @@
       },
       "securitySchemes:25": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///869?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FsyncMembers.json"
           ],
@@ -10391,9 +9498,7 @@
       },
       "securitySchemes:26": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///870?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2Fusages.json"
           ],
@@ -10416,9 +9521,7 @@
       },
       "securitySchemes:27": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2015-05-01-preview"
-          ],
+          "apiVersions": ["2015-05-01-preview"],
           "filename": [
             "mem:///871?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2015-05-01-preview%2FvirtualNetworkRules.json"
           ],
@@ -10441,9 +9544,7 @@
       },
       "securitySchemes:28": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-03-01-preview"
-          ],
+          "apiVersions": ["2017-03-01-preview"],
           "filename": [
             "mem:///872?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-03-01-preview%2FblobAuditing.json"
           ],
@@ -10466,9 +9567,7 @@
       },
       "securitySchemes:29": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-03-01-preview"
-          ],
+          "apiVersions": ["2017-03-01-preview"],
           "filename": [
             "mem:///873?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-03-01-preview%2FdatabaseVulnerabilityAssessmentBaselines.json"
           ],
@@ -10491,9 +9590,7 @@
       },
       "securitySchemes:30": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-03-01-preview"
-          ],
+          "apiVersions": ["2017-03-01-preview"],
           "filename": [
             "mem:///874?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-03-01-preview%2FdatabaseVulnerabilityAssessments.json"
           ],
@@ -10516,9 +9613,7 @@
       },
       "securitySchemes:31": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-03-01-preview"
-          ],
+          "apiVersions": ["2017-03-01-preview"],
           "filename": [
             "mem:///875?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-03-01-preview%2Fjobs.json"
           ],
@@ -10541,9 +9636,7 @@
       },
       "securitySchemes:32": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-03-01-preview"
-          ],
+          "apiVersions": ["2017-03-01-preview"],
           "filename": [
             "mem:///876?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-03-01-preview%2FlongTermRetention.json"
           ],
@@ -10566,9 +9659,7 @@
       },
       "securitySchemes:33": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-03-01-preview"
-          ],
+          "apiVersions": ["2017-03-01-preview"],
           "filename": [
             "mem:///877?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-03-01-preview%2FmanagedDatabases.json"
           ],
@@ -10591,9 +9682,7 @@
       },
       "securitySchemes:34": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-03-01-preview"
-          ],
+          "apiVersions": ["2017-03-01-preview"],
           "filename": [
             "mem:///878?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-03-01-preview%2FserverAutomaticTuning.json"
           ],
@@ -10616,9 +9705,7 @@
       },
       "securitySchemes:35": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-03-01-preview"
-          ],
+          "apiVersions": ["2017-03-01-preview"],
           "filename": [
             "mem:///879?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-03-01-preview%2FserverDnsAliases.json"
           ],
@@ -10641,9 +9728,7 @@
       },
       "securitySchemes:36": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-03-01-preview"
-          ],
+          "apiVersions": ["2017-03-01-preview"],
           "filename": [
             "mem:///880?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-03-01-preview%2FserverSecurityAlertPolicies.json"
           ],
@@ -10666,9 +9751,7 @@
       },
       "securitySchemes:37": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-03-01-preview"
-          ],
+          "apiVersions": ["2017-03-01-preview"],
           "filename": [
             "mem:///881?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-03-01-preview%2FrestorePoints.json"
           ],
@@ -10691,9 +9774,7 @@
       },
       "securitySchemes:38": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///882?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelOperations.json"
           ],
@@ -10716,9 +9797,7 @@
       },
       "securitySchemes:39": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///883?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FcancelPoolOperations.json"
           ],
@@ -10741,9 +9820,7 @@
       },
       "securitySchemes:40": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///884?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fcapabilities.json"
           ],
@@ -10766,9 +9843,7 @@
       },
       "securitySchemes:41": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///885?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2Fdatabases.json"
           ],
@@ -10791,9 +9866,7 @@
       },
       "securitySchemes:42": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///886?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FelasticPools.json"
           ],
@@ -10816,9 +9889,7 @@
       },
       "securitySchemes:43": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///887?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FdatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -10841,9 +9912,7 @@
       },
       "securitySchemes:44": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///888?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssesmentRuleBaselines.json"
           ],
@@ -10866,9 +9935,7 @@
       },
       "securitySchemes:45": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///889?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessmentScans.json"
           ],
@@ -10891,9 +9958,7 @@
       },
       "securitySchemes:46": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///890?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FmanagedDatabaseVulnerabilityAssessments.json"
           ],
@@ -10916,9 +9981,7 @@
       },
       "securitySchemes:47": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///891?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FinstanceFailoverGroups.json"
           ],
@@ -10941,9 +10004,7 @@
       },
       "securitySchemes:48": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///892?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FshortTermRetentionPolicies.json"
           ],
@@ -10966,9 +10027,7 @@
       },
       "securitySchemes:49": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///893?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FTdeCertificates.json"
           ],
@@ -10991,9 +10050,7 @@
       },
       "securitySchemes:50": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///894?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceTdeCertificates.json"
           ],
@@ -11016,9 +10073,7 @@
       },
       "securitySchemes:51": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///895?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceKeys.json"
           ],
@@ -11041,9 +10096,7 @@
       },
       "securitySchemes:52": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "2017-10-01-preview"
-          ],
+          "apiVersions": ["2017-10-01-preview"],
           "filename": [
             "mem:///896?file%3A%2F%2F%2Fc%3A%2Ftmp%2Fazure-rest-api-specs%2Fspecification%2Fsql%2Fresource-manager%2FMicrosoft.Sql%2Fpreview%2F2017-10-01-preview%2FManagedInstanceEncryptionProtectors.json"
           ],

@@ -1,9 +1,9 @@
 # Default Configuration - az
 
-``` yaml $(az)
+```yaml $(az)
 use-extension:
   "@autorest/az": "latest"
-try-require: 
+try-require:
   - ./readme.az.md
   - ./readme.cli.md
   - ./readme.python.md

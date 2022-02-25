@@ -57,11 +57,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ]
+      "required": ["language", "protocol", "type"]
     },
     "ValueSchema": {
       "description": "schema types that are non-object or complex types",
@@ -69,11 +65,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/Schema"
@@ -86,11 +78,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/ValueSchema"
@@ -103,11 +91,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/Schema"
@@ -119,11 +103,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/Schema"
@@ -135,11 +115,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/Schema"
@@ -173,12 +149,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "elementType",
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["elementType", "language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/ValueSchema"
@@ -191,21 +162,13 @@
       "properties": {
         "format": {
           "description": "date-time format",
-          "enum": [
-            "base64url",
-            "byte"
-          ],
+          "enum": ["base64url", "byte"],
           "type": "string"
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "format",
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["format", "language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/ValueSchema"
@@ -217,11 +180,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/Schema"
@@ -247,11 +206,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/PrimitiveSchema"
@@ -264,11 +219,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/Schema"
@@ -294,11 +245,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/PrimitiveSchema"
@@ -324,11 +271,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/PrimitiveSchema"
@@ -341,11 +284,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/PrimitiveSchema"
@@ -374,14 +313,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "conditionalType",
-        "conditions",
-        "language",
-        "protocol",
-        "sourceValue",
-        "type"
-      ],
+      "required": ["conditionalType", "conditions", "language", "protocol", "sourceValue", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/ValueSchema"
@@ -410,14 +342,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "conditionalType",
-        "conditions",
-        "language",
-        "protocol",
-        "sourceValue",
-        "type"
-      ],
+      "required": ["conditionalType", "conditions", "language", "protocol", "sourceValue", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/ValueSchema"
@@ -439,13 +364,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type",
-        "value",
-        "valueType"
-      ],
+      "required": ["language", "protocol", "type", "value", "valueType"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/Schema"
@@ -467,12 +386,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "elementType",
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["elementType", "language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/ComplexSchema"
@@ -492,12 +406,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "choices",
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["choices", "language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/ValueSchema"
@@ -535,12 +444,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "precision",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "precision", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/PrimitiveSchema"
@@ -559,11 +463,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/Schema"
@@ -608,11 +508,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/ComplexSchema"
@@ -628,11 +524,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/PrimitiveSchema"
@@ -645,11 +537,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/PrimitiveSchema"
@@ -670,12 +558,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "anyOf",
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["anyOf", "language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/ComplexSchema"
@@ -696,12 +579,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "oneOf",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "oneOf", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/Schema"
@@ -719,12 +597,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "not",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "not", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/Schema"
@@ -737,11 +610,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/PrimitiveSchema"
@@ -754,21 +623,13 @@
       "properties": {
         "format": {
           "description": "date-time format",
-          "enum": [
-            "date-time",
-            "date-time-rfc1123"
-          ],
+          "enum": ["date-time", "date-time-rfc1123"],
           "type": "string"
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "format",
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["format", "language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/PrimitiveSchema"
@@ -781,11 +642,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/PrimitiveSchema"
@@ -798,11 +655,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/PrimitiveSchema"
@@ -815,11 +668,7 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ],
+      "required": ["language", "protocol", "type"],
       "allOf": [
         {
           "$ref": "./schemas.json#/definitions/PrimitiveSchema"
@@ -1052,11 +901,7 @@
         },
         "value": {
           "description": "the actual value",
-          "type": [
-            "string",
-            "number",
-            "boolean"
-          ]
+          "type": ["string", "number", "boolean"]
         },
         "extensions": {
           "$ref": "./master.json#/definitions/Record<string,any>",
@@ -1065,10 +910,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "value"
-      ]
+      "required": ["language", "value"]
     },
     "ConstantType": {
       "type": "object",
@@ -1126,11 +968,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "language",
-        "protocol",
-        "type"
-      ]
+      "required": ["language", "protocol", "type"]
     },
     "ConstantValue": {
       "description": "a container for the actual constant value",
@@ -1150,9 +988,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "value"
-      ]
+      "required": ["value"]
     }
   }
 }

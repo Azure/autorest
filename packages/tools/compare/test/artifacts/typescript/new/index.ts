@@ -19,7 +19,6 @@ function someFunction(genericParam: number): string {
 interface SomeInterface {}
 class DifferentBaseClass {}
 
-export class ExportedClass extends DifferentBaseClass
-  implements SomeInterface {}
+export class ExportedClass extends DifferentBaseClass implements SomeInterface {}
 
 let SomeConst: SomeOtherUnion = "blue";

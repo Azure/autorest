@@ -4,9 +4,7 @@
   "openapi": "3.0.0",
   "info": {
     "x-ms-metadata": {
-      "apiVersions": [
-        "test-0.1"
-      ]
+      "apiVersions": ["test-0.1"]
     },
     "title": "Test",
     "description": "test",

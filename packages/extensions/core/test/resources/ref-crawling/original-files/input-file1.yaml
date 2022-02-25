@@ -3,8 +3,8 @@ project:
   name: json-refs
 
 array:
-  - $ref: '#/project/name'
-  - $ref: '#/project/description'
+  - $ref: "#/project/name"
+  - $ref: "#/project/description"
 
 definitions:
   HumanName:
@@ -20,20 +20,20 @@ definitions:
       age:
         type: integer
       name:
-        $ref: '#/definitions/HumanName'
+        $ref: "#/definitions/HumanName"
 
 # Local reference
 local1:
-  $ref: '#/project/name'
+  $ref: "#/project/name"
 
 local2:
   level2:
     level3:
-      $ref: '#/project/description'
+      $ref: "#/project/description"
 
 # Remote references
 remote:
   absolute:
-    $ref: 'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/80fd1186608a4fa549ca797e74eb44c2b386df75/examples/v3.0/petstore.yaml'
+    $ref: "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/80fd1186608a4fa549ca797e74eb44c2b386df75/examples/v3.0/petstore.yaml"
   relative-file:
-    $ref: './examples/file-a.yaml'
+    $ref: "./examples/file-a.yaml"

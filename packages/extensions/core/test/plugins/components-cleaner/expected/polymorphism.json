@@ -10,9 +10,7 @@
     "schemas": {
       "MainFileObj": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.0"
-          ],
+          "apiVersions": ["1.0.0"],
           "x-ms-secondary-file": false
         },
         "type": "object",
@@ -24,9 +22,7 @@
       },
       "Pet": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.0"
-          ],
+          "apiVersions": ["1.0.0"],
           "x-ms-secondary-file": true
         },
         "type": "object",
@@ -39,9 +35,7 @@
       },
       "Cat": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.0"
-          ],
+          "apiVersions": ["1.0.0"],
           "x-ms-secondary-file": true
         },
         "type": "object",
@@ -59,9 +53,7 @@
       },
       "Dog": {
         "x-ms-metadata": {
-          "apiVersions": [
-            "1.0.0"
-          ],
+          "apiVersions": ["1.0.0"],
           "x-ms-secondary-file": true
         },
         "type": "object",

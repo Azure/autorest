@@ -1,6 +1,6 @@
 # Prechecker
 
-Prechecker is a step that runs before the modeler that will validate and fix up the OpenAPI spec. 
+Prechecker is a step that runs before the modeler that will validate and fix up the OpenAPI spec.
 
 ## Rules
 
@@ -16,7 +16,8 @@ Prechecker will look for schemas that use `allOf` referencing an empty schema. I
 
 ### Duplicate schema
 
-Prechecker will compare all the schemas and check for duplicates. 
+Prechecker will compare all the schemas and check for duplicates.
+
 - If the 2 duplicates are exacty the same they will be merged together.
 - If the 2 schemas have the same name but are different it will then raise an error.
 
@@ -24,6 +25,7 @@ Prechecker will compare all the schemas and check for duplicates.
 
 Prechecker will check redefinition of properties in child schemas. If a child schema redefine a property already defined in a parent schema(Using `allOf`).
 It will:
+
 - If the property is the same, just remove the redefinition and log a warning.
 - If the property only difference is changing the `readOnly` property it will remove the redefinition and log a warning(Ignoring the change to `readOnly`).
 - If the property is different it will raise an error.

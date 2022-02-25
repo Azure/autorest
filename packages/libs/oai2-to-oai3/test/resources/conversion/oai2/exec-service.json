@@ -5,13 +5,11 @@
     "title": "ExecService",
     "description": "Azure Dev Spaces ExecService v3.2"
   },
-  
+
   "paths": {
     "/api/v3.2/AzdsTraces": {
       "post": {
-        "tags": [
-          "AzdsTraces"
-        ],
+        "tags": ["AzdsTraces"],
         "operationId": "AzdsTraces_PostAzdsUserClusterLogsAsync",
         "consumes": [],
         "produces": ["application/json"],
@@ -45,16 +43,9 @@
     },
     "/api/v3.2/Build/spaces/{spaceName}/services/{serviceName}/log": {
       "post": {
-        "tags": [
-          "Build"
-        ],
+        "tags": ["Build"],
         "operationId": "Build_PostBuildLogs",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
         "produces": ["application/json"],
         "parameters": [
           {
@@ -105,16 +96,10 @@
     },
     "/api/v3.2/Config/{path}": {
       "get": {
-        "tags": [
-          "Config"
-        ],
+        "tags": ["Config"],
         "operationId": "Config_GetConfigDocument",
         "consumes": [],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "produces": ["text/plain", "application/json", "text/json"],
         "parameters": [
           {
             "name": "path",
@@ -147,9 +132,7 @@
     },
     "/api/v3.2/Liveness": {
       "get": {
-        "tags": [
-          "Liveness"
-        ],
+        "tags": ["Liveness"],
         "operationId": "Liveness_LivenessCheck",
         "consumes": [],
         "produces": ["application/json"],
@@ -169,9 +152,7 @@
     },
     "/api/v3.2/Ping/auth": {
       "get": {
-        "tags": [
-          "Ping"
-        ],
+        "tags": ["Ping"],
         "operationId": "Ping_CheckUserAuth",
         "consumes": [],
         "produces": ["application/json"],
@@ -197,9 +178,7 @@
     },
     "/api/v3.2/Ping/auth/whitelist": {
       "get": {
-        "tags": [
-          "Ping"
-        ],
+        "tags": ["Ping"],
         "operationId": "Ping_CheckWhitelistAndUserAuth",
         "consumes": [],
         "produces": ["application/json"],
@@ -225,9 +204,7 @@
     },
     "/api/v3.2/Ping/auth/whitelistonly": {
       "get": {
-        "tags": [
-          "Ping"
-        ],
+        "tags": ["Ping"],
         "operationId": "Ping_CheckWhitelistOnlyAuth",
         "consumes": [],
         "produces": ["application/json"],
@@ -253,16 +230,10 @@
     },
     "/api/v3.2/Ping": {
       "get": {
-        "tags": [
-          "Ping"
-        ],
+        "tags": ["Ping"],
         "operationId": "Ping_PingCheck",
         "consumes": [],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "produces": ["text/plain", "application/json", "text/json"],
         "parameters": [],
         "responses": {
           "200": {
@@ -282,9 +253,7 @@
     },
     "/api/v3.2/Spaces/{spaceName}": {
       "post": {
-        "tags": [
-          "Spaces"
-        ],
+        "tags": ["Spaces"],
         "operationId": "Spaces_CreateSpace",
         "consumes": [],
         "produces": ["application/json"],
@@ -321,9 +290,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Spaces"
-        ],
+        "tags": ["Spaces"],
         "operationId": "Spaces_DeleteSpace",
         "consumes": [],
         "produces": ["application/json"],
@@ -370,9 +337,7 @@
     },
     "/api/v3.2/Spaces/{namespaceName}": {
       "put": {
-        "tags": [
-          "Spaces"
-        ],
+        "tags": ["Spaces"],
         "operationId": "Spaces_CreateSpaceFromNamespace",
         "consumes": [],
         "produces": ["application/json"],
@@ -411,16 +376,10 @@
     },
     "/api/v3.2/Spaces": {
       "get": {
-        "tags": [
-          "Spaces"
-        ],
+        "tags": ["Spaces"],
         "operationId": "Spaces_ListSpaces",
         "consumes": [],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "produces": ["text/plain", "application/json", "text/json"],
         "parameters": [],
         "responses": {
           "200": {
@@ -450,9 +409,7 @@
     },
     "/api/v3.2/Traces/request": {
       "post": {
-        "tags": [
-          "Traces"
-        ],
+        "tags": ["Traces"],
         "operationId": "Traces_ReportRequestAsync",
         "consumes": [],
         "produces": ["application/json"],
@@ -478,9 +435,7 @@
     },
     "/api/v3.2/Traces/response": {
       "post": {
-        "tags": [
-          "Traces"
-        ],
+        "tags": ["Traces"],
         "operationId": "Traces_ReportResponseAsync",
         "consumes": [],
         "produces": ["application/json"],
@@ -506,21 +461,10 @@
     },
     "/api/v3.2/UserPod": {
       "post": {
-        "tags": [
-          "UserPod"
-        ],
+        "tags": ["UserPod"],
         "operationId": "UserPod_CreatePodPatchOperation",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["text/plain", "application/json", "text/json"],
         "parameters": [
           {
             "name": "request",
@@ -555,14 +499,10 @@
     },
     "/api/v3.2/Workspace/spaces/{spaceName}/services/{serviceName}/workspaces/{name}": {
       "get": {
-        "tags": [
-          "Workspace"
-        ],
+        "tags": ["Workspace"],
         "operationId": "Workspace_DownloadSource",
         "consumes": [],
-        "produces": [
-          "application/gzip"
-        ],
+        "produces": ["application/gzip"],
         "parameters": [
           {
             "name": "spaceName",
@@ -623,10 +563,7 @@
       }
     },
     "Space": {
-      "required": [
-        "name",
-        "parentSpaceName"
-      ],
+      "required": ["name", "parentSpaceName"],
       "type": "object",
       "properties": {
         "name": {

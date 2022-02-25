@@ -10,9 +10,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "type"
-      ]
+      "required": ["type"]
     },
     "AuthorizationCodeOAuthFlow": {
       "type": "object",
@@ -39,29 +37,21 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "authorizationUrl",
-        "scopes",
-        "tokenUrl"
-      ]
+      "required": ["authorizationUrl", "scopes", "tokenUrl"]
     },
     "BearerHTTPSecurityScheme": {
       "type": "object",
       "properties": {
         "scheme": {
           "type": "string",
-          "enum": [
-            "bearer"
-          ]
+          "enum": ["bearer"]
         },
         "bearerFormat": {
           "type": "string"
         },
         "type": {
           "type": "string",
-          "enum": [
-            "http"
-          ]
+          "enum": ["http"]
         },
         "description": {
           "type": "string"
@@ -73,10 +63,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "scheme",
-        "type"
-      ]
+      "required": ["scheme", "type"]
     },
     "ClientCredentialsFlow": {
       "type": "object",
@@ -99,10 +86,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "scopes",
-        "tokenUrl"
-      ]
+      "required": ["scopes", "tokenUrl"]
     },
     "ImplicitOAuthFlow": {
       "type": "object",
@@ -125,10 +109,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "authorizationUrl",
-        "scopes"
-      ]
+      "required": ["authorizationUrl", "scopes"]
     },
     "NonBearerHTTPSecurityScheme": {
       "type": "object",
@@ -141,9 +122,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "http"
-          ]
+          "enum": ["http"]
         },
         "extensions": {
           "$ref": "./master.json#/definitions/Record<string,any>",
@@ -152,19 +131,14 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "scheme",
-        "type"
-      ]
+      "required": ["scheme", "type"]
     },
     "OAuth2SecurityScheme": {
       "type": "object",
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "oauth2"
-          ]
+          "enum": ["oauth2"]
         },
         "flows": {
           "$ref": "./http.json#/definitions/OAuthFlows"
@@ -179,10 +153,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "flows",
-        "type"
-      ]
+      "required": ["flows", "type"]
     },
     "OAuthFlows": {
       "type": "object",
@@ -222,9 +193,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "apiKey"
-          ]
+          "enum": ["apiKey"]
         },
         "name": {
           "type": "string"
@@ -242,20 +211,14 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "in",
-        "name",
-        "type"
-      ]
+      "required": ["in", "name", "type"]
     },
     "OpenIdConnectSecurityScheme": {
       "type": "object",
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "openIdConnect"
-          ]
+          "enum": ["openIdConnect"]
         },
         "openIdConnectUrl": {
           "description": "an URI",
@@ -271,10 +234,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "openIdConnectUrl",
-        "type"
-      ]
+      "required": ["openIdConnectUrl", "type"]
     },
     "PasswordOAuthFlow": {
       "type": "object",
@@ -297,10 +257,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "scopes",
-        "tokenUrl"
-      ]
+      "required": ["scopes", "tokenUrl"]
     },
     "SecurityRequirement": {
       "description": "common ways of serializing simple parameters",
@@ -314,16 +271,7 @@
       "properties": {
         "in": {
           "description": "the location that this parameter is placed in the http request",
-          "enum": [
-            "body",
-            "cookie",
-            "header",
-            "none",
-            "path",
-            "query",
-            "uri",
-            "virtual"
-          ],
+          "enum": ["body", "cookie", "header", "none", "path", "query", "uri", "virtual"],
           "type": "string"
         },
         "style": {
@@ -341,9 +289,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "in"
-      ],
+      "required": ["in"],
       "allOf": [
         {
           "$ref": "./master.json#/definitions/Protocol"
@@ -369,11 +315,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "method",
-        "path",
-        "uri"
-      ],
+      "required": ["method", "path", "uri"],
       "allOf": [
         {
           "$ref": "./master.json#/definitions/Protocol"
@@ -397,13 +339,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "knownMediaType",
-        "mediaTypes",
-        "method",
-        "path",
-        "uri"
-      ],
+      "required": ["knownMediaType", "mediaTypes", "method", "path", "uri"],
       "allOf": [
         {
           "$ref": "./http.json#/definitions/HttpRequest"
@@ -415,21 +351,12 @@
       "properties": {
         "binary": {
           "type": "boolean",
-          "enum": [
-            true
-          ]
+          "enum": [true]
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "binary",
-        "knownMediaType",
-        "mediaTypes",
-        "method",
-        "path",
-        "uri"
-      ],
+      "required": ["binary", "knownMediaType", "mediaTypes", "method", "path", "uri"],
       "allOf": [
         {
           "$ref": "./http.json#/definitions/HttpWithBodyRequest"
@@ -442,21 +369,12 @@
         "multipart": {
           "description": "indicates that the HTTP Request should be a multipart request\n\nie, that it has multiple requests in a single request.",
           "type": "boolean",
-          "enum": [
-            true
-          ]
+          "enum": [true]
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "knownMediaType",
-        "mediaTypes",
-        "method",
-        "multipart",
-        "path",
-        "uri"
-      ],
+      "required": ["knownMediaType", "mediaTypes", "method", "multipart", "path", "uri"],
       "allOf": [
         {
           "$ref": "./http.json#/definitions/HttpWithBodyRequest"
@@ -482,11 +400,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "header",
-        "language",
-        "schema"
-      ]
+      "required": ["header", "language", "schema"]
     },
     "HttpResponse": {
       "type": "object",
@@ -591,9 +505,7 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "statusCodes"
-      ],
+      "required": ["statusCodes"],
       "allOf": [
         {
           "$ref": "./master.json#/definitions/Protocol"
@@ -606,17 +518,12 @@
         "binary": {
           "description": "binary responses",
           "type": "boolean",
-          "enum": [
-            true
-          ]
+          "enum": [true]
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": [
-        "binary",
-        "statusCodes"
-      ],
+      "required": ["binary", "statusCodes"],
       "allOf": [
         {
           "$ref": "./http.json#/definitions/HttpResponse"

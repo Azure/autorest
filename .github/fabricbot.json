@@ -50,9 +50,7 @@
         }
       ],
       "eventType": "issue",
-      "eventNames": [
-        "issue_comment"
-      ]
+      "eventNames": ["issue_comment"]
     }
   },
   {
@@ -93,10 +91,7 @@
         }
       ],
       "eventType": "issue",
-      "eventNames": [
-        "issues",
-        "project_card"
-      ]
+      "eventNames": ["issues", "project_card"]
     }
   },
   {
@@ -126,9 +121,7 @@
         }
       ],
       "eventType": "issue",
-      "eventNames": [
-        "issue_comment"
-      ]
+      "eventNames": ["issue_comment"]
     }
   },
   {
@@ -141,51 +134,37 @@
       "frequency": [
         {
           "weekDay": 0,
-          "hours": [
-            1
-          ],
+          "hours": [1],
           "timezoneOffset": -7
         },
         {
           "weekDay": 1,
-          "hours": [
-            1
-          ],
+          "hours": [1],
           "timezoneOffset": -7
         },
         {
           "weekDay": 2,
-          "hours": [
-            1
-          ],
+          "hours": [1],
           "timezoneOffset": -7
         },
         {
           "weekDay": 3,
-          "hours": [
-            1
-          ],
+          "hours": [1],
           "timezoneOffset": -7
         },
         {
           "weekDay": 4,
-          "hours": [
-            1
-          ],
+          "hours": [1],
           "timezoneOffset": -7
         },
         {
           "weekDay": 5,
-          "hours": [
-            1
-          ],
+          "hours": [1],
           "timezoneOffset": -7
         },
         {
           "weekDay": 6,
-          "hours": [
-            1
-          ],
+          "hours": [1],
           "timezoneOffset": -7
         }
       ],
@@ -235,72 +214,37 @@
       "frequency": [
         {
           "weekDay": 0,
-          "hours": [
-            1,
-            7,
-            13,
-            19
-          ],
+          "hours": [1, 7, 13, 19],
           "timezoneOffset": -7
         },
         {
           "weekDay": 1,
-          "hours": [
-            1,
-            7,
-            13,
-            19
-          ],
+          "hours": [1, 7, 13, 19],
           "timezoneOffset": -7
         },
         {
           "weekDay": 2,
-          "hours": [
-            1,
-            7,
-            13,
-            19
-          ],
+          "hours": [1, 7, 13, 19],
           "timezoneOffset": -7
         },
         {
           "weekDay": 3,
-          "hours": [
-            1,
-            7,
-            13,
-            19
-          ],
+          "hours": [1, 7, 13, 19],
           "timezoneOffset": -7
         },
         {
           "weekDay": 4,
-          "hours": [
-            1,
-            7,
-            13,
-            19
-          ],
+          "hours": [1, 7, 13, 19],
           "timezoneOffset": -7
         },
         {
           "weekDay": 5,
-          "hours": [
-            1,
-            7,
-            13,
-            19
-          ],
+          "hours": [1, 7, 13, 19],
           "timezoneOffset": -7
         },
         {
           "weekDay": 6,
-          "hours": [
-            1,
-            7,
-            13,
-            19
-          ],
+          "hours": [1, 7, 13, 19],
           "timezoneOffset": -7
         }
       ],
@@ -416,10 +360,7 @@
         ]
       },
       "eventType": "issue",
-      "eventNames": [
-        "issues",
-        "project_card"
-      ],
+      "eventNames": ["issues", "project_card"],
       "taskName": "Add customer-reported label to issues coming from non-collaborators",
       "actions": [
         {
@@ -510,9 +451,7 @@
         ]
       },
       "eventType": "issue",
-      "eventNames": [
-        "issue_comment"
-      ],
+      "eventNames": ["issue_comment"],
       "taskName": "For issues closed due to inactivity, re-open an issue if issue author posts a reply within 7 days.",
       "actions": [
         {
@@ -588,9 +527,7 @@
         ]
       },
       "eventType": "issue",
-      "eventNames": [
-        "issue_comment"
-      ],
+      "eventNames": ["issue_comment"],
       "taskName": "For issues closed with no activity over 7 days, ask non-contributor to consider opening a new issue instead.",
       "actions": [
         {
@@ -626,10 +563,7 @@
         ]
       },
       "eventType": "issue",
-      "eventNames": [
-        "issues",
-        "project_card"
-      ],
+      "eventNames": ["issues", "project_card"],
       "taskName": "Remove needs* labels when needs-author-feedback label is added",
       "actions": [
         {
@@ -720,11 +654,7 @@
         ]
       },
       "eventType": "pull_request",
-      "eventNames": [
-        "pull_request",
-        "issues",
-        "project_card"
-      ],
+      "eventNames": ["pull_request", "issues", "project_card"],
       "taskName": "Add customer-reported label to PRs from customers ",
       "actions": [
         {
@@ -829,10 +759,7 @@
         ]
       },
       "eventType": "issue",
-      "eventNames": [
-        "issues",
-        "project_card"
-      ],
+      "eventNames": ["issues", "project_card"],
       "taskName": "Ensure 'needs-team-attention' label is assigned to issues not in a milestone",
       "actions": [
         {
@@ -899,11 +826,7 @@
         ]
       },
       "eventType": "pull_request",
-      "eventNames": [
-        "pull_request",
-        "issues",
-        "project_card"
-      ],
+      "eventNames": ["pull_request", "issues", "project_card"],
       "taskName": "[Auto Merge] Reset Approvals on Untrusted Changes",
       "actions": [
         {
@@ -934,10 +857,7 @@
         ]
       },
       "eventType": "issue",
-      "eventNames": [
-        "issues",
-        "project_card"
-      ],
+      "eventNames": ["issues", "project_card"],
       "taskName": "[Resolve Workflow] Issue Addressed Label Applied",
       "actions": [
         {
@@ -988,72 +908,37 @@
       "frequency": [
         {
           "weekDay": 0,
-          "hours": [
-            0,
-            6,
-            12,
-            18
-          ],
+          "hours": [0, 6, 12, 18],
           "timezoneOffset": -4
         },
         {
           "weekDay": 1,
-          "hours": [
-            0,
-            6,
-            12,
-            18
-          ],
+          "hours": [0, 6, 12, 18],
           "timezoneOffset": -4
         },
         {
           "weekDay": 2,
-          "hours": [
-            0,
-            6,
-            12,
-            18
-          ],
+          "hours": [0, 6, 12, 18],
           "timezoneOffset": -4
         },
         {
           "weekDay": 3,
-          "hours": [
-            0,
-            6,
-            12,
-            18
-          ],
+          "hours": [0, 6, 12, 18],
           "timezoneOffset": -4
         },
         {
           "weekDay": 4,
-          "hours": [
-            0,
-            6,
-            12,
-            18
-          ],
+          "hours": [0, 6, 12, 18],
           "timezoneOffset": -4
         },
         {
           "weekDay": 5,
-          "hours": [
-            0,
-            6,
-            12,
-            18
-          ],
+          "hours": [0, 6, 12, 18],
           "timezoneOffset": -4
         },
         {
           "weekDay": 6,
-          "hours": [
-            0,
-            6,
-            12,
-            18
-          ],
+          "hours": [0, 6, 12, 18],
           "timezoneOffset": -4
         }
       ],
@@ -1143,9 +1028,7 @@
         ]
       },
       "eventType": "issue",
-      "eventNames": [
-        "issue_comment"
-      ],
+      "eventNames": ["issue_comment"],
       "taskName": "[Resolve Workflow] Unresolve Command by Author",
       "actions": [
         {
@@ -1231,9 +1114,7 @@
         ]
       },
       "eventType": "issue",
-      "eventNames": [
-        "issue_comment"
-      ],
+      "eventNames": ["issue_comment"],
       "taskName": "[Resolve Workflow] Unresolve Command Without Permissions",
       "actions": [
         {
@@ -1302,10 +1183,7 @@
         ]
       },
       "eventType": "issue",
-      "eventNames": [
-        "issues",
-        "project_card"
-      ],
+      "eventNames": ["issues", "project_card"],
       "taskName": "[Resolve Workflow] Unresolve on WIP Labels",
       "actions": [
         {
@@ -1362,11 +1240,7 @@
         ]
       },
       "eventType": "pull_request",
-      "eventNames": [
-        "pull_request",
-        "issues",
-        "project_card"
-      ],
+      "eventNames": ["pull_request", "issues", "project_card"],
       "taskName": "[Stale Pull Requests] Remove Stale PR Designation on Activity",
       "actions": [
         {
@@ -1400,9 +1274,7 @@
         ]
       },
       "eventType": "pull_request",
-      "eventNames": [
-        "pull_request_review"
-      ],
+      "eventNames": ["pull_request_review"],
       "taskName": "[Stale Pull Requests] Remove Stale PR Designation on on Review",
       "actions": [
         {
@@ -1469,9 +1341,7 @@
         ]
       },
       "eventType": "pull_request",
-      "eventNames": [
-        "issue_comment"
-      ],
+      "eventNames": ["issue_comment"],
       "taskName": "[Stale Pull Requests] Remove Stale PR Designation on on Comment",
       "actions": [
         {
@@ -1492,72 +1362,37 @@
       "frequency": [
         {
           "weekDay": 0,
-          "hours": [
-            1,
-            7,
-            13,
-            19
-          ],
+          "hours": [1, 7, 13, 19],
           "timezoneOffset": -4
         },
         {
           "weekDay": 1,
-          "hours": [
-            1,
-            7,
-            13,
-            19
-          ],
+          "hours": [1, 7, 13, 19],
           "timezoneOffset": -4
         },
         {
           "weekDay": 2,
-          "hours": [
-            1,
-            7,
-            13,
-            19
-          ],
+          "hours": [1, 7, 13, 19],
           "timezoneOffset": -4
         },
         {
           "weekDay": 3,
-          "hours": [
-            1,
-            7,
-            13,
-            19
-          ],
+          "hours": [1, 7, 13, 19],
           "timezoneOffset": -4
         },
         {
           "weekDay": 4,
-          "hours": [
-            1,
-            7,
-            13,
-            19
-          ],
+          "hours": [1, 7, 13, 19],
           "timezoneOffset": -4
         },
         {
           "weekDay": 5,
-          "hours": [
-            1,
-            7,
-            13,
-            19
-          ],
+          "hours": [1, 7, 13, 19],
           "timezoneOffset": -4
         },
         {
           "weekDay": 6,
-          "hours": [
-            1,
-            7,
-            13,
-            19
-          ],
+          "hours": [1, 7, 13, 19],
           "timezoneOffset": -4
         }
       ],
@@ -1656,9 +1491,7 @@
         ]
       },
       "eventType": "pull_request",
-      "eventNames": [
-        "issue_comment"
-      ],
+      "eventNames": ["issue_comment"],
       "taskName": "[Stale Pull Requests] Reopen Command",
       "actions": [
         {
@@ -1683,9 +1516,7 @@
       "frequency": [
         {
           "weekDay": 5,
-          "hours": [
-            5
-          ],
+          "hours": [5],
           "timezoneOffset": -5
         }
       ],

@@ -8,7 +8,7 @@ as an object (instead of serializing them to text)
 This configures the emitter that will emit the pipeline graph itself.
 Used by the autorest-interactive tool to show what the pipeline graph looks like.
 
-``` yaml
+```yaml
 pipeline:
   pipeline-emitter: # emits the pipeline graph
     scope: scope-pipeline-emitter
@@ -25,7 +25,7 @@ scope-pipeline-emitter:
 This configures the emitter that will emit the configuration graph itself.
 It allows the configuration graph itself to be retrieved.
 
-``` yaml
+```yaml
 pipeline:
   configuration-emitter: # emits the configuration graph
     scope: scope-configuration-emitter

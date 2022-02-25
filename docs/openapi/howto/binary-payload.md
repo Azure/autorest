@@ -124,7 +124,6 @@ The overall response should look like this(Replace `{{INSERT_CONTENT_TYPE}}` wit
 }
 ```
 
-
 ## Examples
 
 ### Upload and return a png
