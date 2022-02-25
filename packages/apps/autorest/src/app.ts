@@ -1,21 +1,27 @@
 /* eslint-disable no-process-exit */
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
 /* eslint-disable no-console */
 import "source-map-support/register";
-
-const cwd = process.cwd();
-
-import { AutorestSyncLogger, ConsoleLoggerSink } from "@autorest/common";
+import { join } from "path";
+import { AutorestSyncLogger, ConsoleLoggerSink, FilterLogger } from "@autorest/common";
+import { getLogLevel } from "@autorest/configuration";
 import chalk from "chalk";
+import { SourceMapConsumer } from "source-map";
 import { clearTempData } from "./actions";
 import { parseAutorestArgs } from "./args";
 import { newCorePackage, ensureAutorestHome, runCoreWithRequire, runCoreOutOfProc } from "./autorest-as-a-service";
 import { resetAutorest, showAvailableCoreVersions, showInstalledExtensions } from "./commands";
 import { VERSION } from "./constants";
 import { loadConfig, resolveCoreVersion } from "./utils";
+
+// Need to copy this file in webpack over and tell SourceMapConsumer where it is.
+const inWebpack = typeof __webpack_require__ === "function";
+if (inWebpack) {
+  (SourceMapConsumer as any).initialize({
+    "lib/mappings.wasm": join(__dirname, "mappings.wasm"),
+  });
+}
+
+const cwd = process.cwd();
 
 const isDebuggerEnabled =
   // eslint-disable-next-line node/no-unsupported-features/node-builtins
@@ -108,7 +114,10 @@ async function main() {
       logger.info(`AutoRest core version selected from configuration: ${chalk.yellow.bold(config.version)}.`);
     }
 
-    const coreVersionPath = await resolveCoreVersion(config);
+    const coreVersionPath = await resolveCoreVersion(
+      logger.with(new FilterLogger({ level: getLogLevel({ ...args, ...config }) })),
+      config,
+    );
 
     // let's strip the extra stuff from the command line before we require the core module.
     const newArgs: string[] = [];

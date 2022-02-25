@@ -2,6 +2,18 @@
   "name": "@autorest/compare",
   "entries": [
     {
+      "version": "0.4.3",
+      "tag": "@autorest/compare_v0.4.3",
+      "date": "Fri, 19 Nov 2021 04:23:43 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"autorest\" from `~3.4.1` to `~3.5.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.4.2",
       "tag": "@autorest/compare_v0.4.2",
       "date": "Wed, 22 Sep 2021 20:33:38 GMT",

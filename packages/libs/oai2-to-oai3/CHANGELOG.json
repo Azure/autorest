@@ -2,6 +2,44 @@
   "name": "@azure-tools/oai2-to-oai3",
   "entries": [
     {
+      "version": "4.5.1",
+      "tag": "@azure-tools/oai2-to-oai3_v4.5.1",
+      "date": "Mon, 06 Dec 2021 20:16:04 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Internal** type fix"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.5.0",
+      "tag": "@azure-tools/oai2-to-oai3_v4.5.0",
+      "date": "Fri, 19 Nov 2021 04:23:43 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Copy all extensions on parameters"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.5.1` to `~4.6.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.2.1` to `~3.2.2`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/json\" from `~1.2.0` to `~1.2.1`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.4.0` to `~0.5.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.4.0",
       "tag": "@azure-tools/oai2-to-oai3_v4.4.0",
       "date": "Wed, 08 Sep 2021 15:39:22 GMT",

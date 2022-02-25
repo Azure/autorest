@@ -2,7 +2,7 @@
 
 ### Introduction
 
-The following documents describes AutoRest specific vendor extensions for [OpenAPI 2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md) schema. Some of the extensions are only applicable to Microsoft Azure and as such are only available in Azure code generators (e.g. Azure.CSharp, Azure.NodeJS, etc.).
+The following documents describes AutoRest specific vendor extensions for [OpenAPI 2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md) schema. Code generation impact and support may vary per language. Some of the extensions are applicable to ARM APIs only, some are only metadatas and would not trigger code generator update.
 
 ### Generic Extensions
 
@@ -33,6 +33,14 @@ The following documents describes AutoRest specific vendor extensions for [OpenA
 - [x-ms-azure-resource](#x-ms-azure-resource) - indicates that the [Definition Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schemaObject) is a resource as defined by the [Resource Manager API](https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx)
 - [x-ms-request-id](#x-ms-request-id) - allows to overwrite the request id header name
 - [x-ms-client-request-id](#x-ms-client-request-id) - allows to overwrite the client request id header name
+
+### Metadata extensions
+
+Those extensions are defined as additional description of the RestAPI, and do not trigger at the moment any changes in code generation.
+
+- [x-ms-secret](#x-ms-secret) - This extension is used to annotate the secret property.
+
+- [x-ms-identifiers](#x-ms-identifiers) - (InProgress) indicates the identifying properties of objects in the array
 
 # Generic Extensions
 
@@ -1069,22 +1077,25 @@ Task<IEnumerable<int?>> ListAsync(ISimpleAPIClient operations, CancellationToken
 
 Some requests like creating/deleting a resource cannot be carried out immediately. In such a situation, the server sends a 201 (Created) or 202 (Accepted) and provides a link to monitor the status of the request. When such an operation is marked with extension `"x-ms-long-running-operation": true`, in OpenAPI, the generated code will know how to fetch the link to monitor the status. It will keep on polling at regular intervals till the request reaches one of the terminal states: Succeeded, Failed, or Canceled.
 
-### x-ms-long-running-operation-options
+## x-ms-long-running-operation-options
 
-When `x-ms-long-running-operation` is specified, there should also be a `x-ms-long-running-operation-options` specified.
+When `x-ms-long-running-operation-options` is specified, there should also be a `x-ms-long-running-operation: true` specified.
 
 See [Azure RPC Spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations) for asynchronous operation notes.
+
+**You probably don't need to use this option if you follow ARM guidelines**. This option is designed for cases where the server do NOT follow ARM, and we need to guide the runtime through a peculiar flow.
 
 **Schema**:
 Field Name | Type | Description
 ---|:---:|---
-final-state-via | `string` - one of `azure-async-operation` or `location` or `original-uri` | `final-state-via` SHOULD BE one of
+final-state-via | `string` - one of `azure-async-operation` or `location` or `original-uri` or `operation-location` | `final-state-via` SHOULD BE one of
 
-- `azure-async-operation` - (default if not specified) poll until terminal state, the final response will be available at the uri pointed to by the header `Azure-AsyncOperation`
-- `location` - poll until terminal state, the final response will be available at the uri pointed to by the header `Location`
-- `original-uri` - poll until terminal state, the final response will be available via GET at the original resource URI. Very common for PUT operations.
+- `azure-async-operation` - poll until terminal state, skip any final GET on Location or Origin-URI and use the final response at the uri pointed to by the header `Azure-AsyncOperation`.
+- `location` - poll until terminal state, if the initial response had a `Location` header, a final GET will be done. Default behavior for POST operation.
+- `original-uri` - poll until terminal state, a final GET will be done at the original resource URI. Default behavior for PUT operations.
+- `operation-location` - poll until terminal state, skip any final GET on Location or Origin-URI and use the final response at the uri pointed to by the header `Operation-Location`
 
-It will keep on polling at regular intervals till the request reaches one of the terminal states: Succeeded, Failed, or Canceled.
+The polling mechanism in itself remains unchanged, the only impact of this option could be to do an additional final GET, or skip a final GET.
 
 **Parent element**: [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
 
@@ -1322,3 +1333,67 @@ headers:
 ```
 
 What is returned to users is just `key: value`.
+
+# Metadata Extensions
+
+## x-ms-secret
+
+This extension is used to annotate the secret property. The value type is boolean and the allowed value is either true or false. Secrets should never expose on a GET. If a secret does need to be returned after the fact, a POST api can be used to allow for granular RBAC.
+
+**Rule**
+
+- When applying this extensions as: "x-ms-secret": true; means that this property must not exist in response.
+- When applying this extensions as: "x-ms-secret": false, it has same effect as not applying it.
+- When a property is modeled as both "required" and "x-ms-secret": true, which means that this property must not exist in the response but has to be present in request.
+- "x-ms-secret": true is equivalent to "x-ms-mutability": ["create", "update"].
+- When a property is modeled as "x-ms-mutability": ["read"], then applying this extension as "x-ms-secret": true is not allowed.
+- When a property is modeled as "readonly": true, then applying this extension as "x-ms-secret": true is not allowed.
+
+**Schema**:
+`true|false`
+
+**Example**:
+
+```json5
+"SecretAuthInfo": {
+      "type": "object",
+      "description": "The authentication info when authType is secret",
+      "properties": {
+        "name": {
+          "description": "Username or account name for secret auth.",
+          "type": "string"
+        },
+        "secret": {
+          "description": "Password or account key for secret auth.",
+          "type": "string",
+          "x-ms-secret": true
+        }
+    }
+}
+```
+
+## x-ms-identifiers
+
+(InProgress) This extension is used to indicate the identifying properties of objects in the array, e.g., `id`, `name`, `uid`.
+
+**Rule**
+
+- The default identifying property is `id`. You don't need to add this annotataion if there is the `id` property in the object model.
+- If there is no appropriate identifying properties, leave it as an empty array.
+- You can provide multiple properties to form the composite identifier.
+- Use [json pointer](https://datatracker.ietf.org/doc/html/rfc6901) if the identifying property is an inner property. E.g., `"x-ms-identifiers": ["/properties/subnet/id"]`
+
+**Schema**:
+`array`
+
+**Example**:
+
+```json5
+"myArrayProperty": {​
+  "type":"array",
+  "items": {
+    "$ref":"#/definitions/Example"​
+  },
+  "x-ms-identifiers": ["propertyName"]​
+}
+```

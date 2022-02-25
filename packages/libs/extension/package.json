@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/extension",
-  "version": "3.3.1",
+  "version": "3.4.0",
   "description": "Yarn-Based extension aquisition (for Azure Open Source Projects)",
   "engines": {
     "node": ">=12.0.0"
@@ -41,7 +41,6 @@
   },
   "dependencies": {
     "@azure-tools/async-io": "~3.0.0",
-    "@azure-tools/eventing": "~3.0.0",
     "@azure-tools/tasks": "~3.0.0",
     "@azure/logger": "^1.0.2",
     "command-exists": "~1.2.9",

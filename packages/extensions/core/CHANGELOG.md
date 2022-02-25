@@ -1,6 +1,60 @@
 # Change Log - @autorest/core
 
-This log was last generated on Mon, 11 Oct 2021 21:01:13 GMT and should not be manually modified.
+This log was last generated on Tue, 01 Feb 2022 23:06:50 GMT and should not be manually modified.
+
+## 3.7.6
+Tue, 01 Feb 2022 23:06:50 GMT
+
+### Patches
+
+- **Fix** Issue with emitting converted openapi
+
+## 3.7.5
+Wed, 26 Jan 2022 22:31:57 GMT
+
+### Patches
+
+- Update swagger schema changes
+
+## 3.7.4
+Wed, 12 Jan 2022 22:31:57 GMT
+
+### Patches
+
+- **Fix** semantic validator allowing `readonly` instead of `readOnly` next to $ref
+- Do not update $ref in `x-` extensions
+
+## 3.7.2
+Tue, 07 Dec 2021 22:39:16 GMT
+
+_Version update only_
+
+## 3.7.2
+Wed, 01 Dec 2021 22:39:16 GMT
+
+_Version update only_
+
+## 3.7.1
+Tue, 30 Nov 2021 15:50:35 GMT
+
+_Version update only_
+
+## 3.7.0
+Fri, 19 Nov 2021 04:23:42 GMT
+
+### Minor changes
+
+- **Updated** `--help` to use configuration schema and be consistent
+- **Added** Support for sourcemap in autorest extensions
+- Add installation status of extension with a progress bar.
+- Improve error reporting when extension fails to install.
+
+### Patches
+
+- **Fix** --help crash
+- **Internal** Remove use of extension method `.last`
+- **Fix** Nullable on certain properties during tree shaking
+- **Fix** Sourcemap library fails to load when packed with webpack
 
 ## 3.6.6
 Mon, 11 Oct 2021 21:01:13 GMT

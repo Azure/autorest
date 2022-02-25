@@ -64,7 +64,7 @@ We also need to tell AutoRest what language we want our SDK to be in, which we s
 let's say we want to generate Python code. Adding this to our command line, we get
 
 ```
-autorest --input=file=pets.json --python
+autorest --input-file=pets.json --python
 ```
 
 In our final step, we can tell AutoRest where to output the generated SDK. By default AutoRest generates files in output folder `./generated`. However, we can

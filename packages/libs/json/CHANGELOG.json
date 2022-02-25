@@ -2,6 +2,18 @@
   "name": "@azure-tools/json",
   "entries": [
     {
+      "version": "1.2.1",
+      "tag": "@azure-tools/json_v1.2.1",
+      "date": "Fri, 19 Nov 2021 04:23:43 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** stack overflow when walking circular tree"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.2.0",
       "tag": "@azure-tools/json_v1.2.0",
       "date": "Wed, 08 Sep 2021 15:39:22 GMT",

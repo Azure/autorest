@@ -1,5 +1,5 @@
-import { Session, Host, startSession, JsonPointerSegments } from "@autorest/extension-base";
-import { ShadowedNodePath, shadowPosition } from "@azure-tools/codegen";
+import { Session, AutorestExtensionHost, startSession } from "@autorest/extension-base";
+import { shadowPosition } from "@azure-tools/codegen";
 import {
   Model as oai3,
   Refable,
@@ -9,21 +9,20 @@ import {
   JsonType,
   StringFormat,
 } from "@azure-tools/openapi";
-
 import { getDiff } from "recursive-diff";
 import { Interpretations } from "../modeler/interpretations";
 
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
 import { DuplicateSchemaMerger } from "./duplicate-schema-merger";
 
-export async function processRequest(host: Host) {
-  const debug = (await host.GetValue("debug")) || false;
+export async function processRequest(host: AutorestExtensionHost) {
+  const debug = (await host.getValue("debug")) || false;
 
   try {
     const session = await startSession<oai3>(host);
 
     // process
-    const plugin = await new QualityPreChecker(session).init();
+    const plugin = new QualityPreChecker(session);
 
     const input = plugin.input;
     // go!
@@ -34,13 +33,16 @@ export async function processRequest(host: Host) {
       session.checkpoint();
     }
 
-    host.WriteFile(
-      "prechecked-openapi-document.yaml",
-      JSON.stringify(result, null, 2),
-      undefined,
-      "prechecked-openapi-document",
-    );
-    host.WriteFile("original-openapi-document.yaml", JSON.stringify(input, null, 2), undefined, "openapi-document");
+    host.writeFile({
+      filename: "prechecked-openapi-document.yaml",
+      content: JSON.stringify(result, null, 2),
+      artifactType: "prechecked-openapi-document",
+    });
+    host.writeFile({
+      filename: "original-openapi-document.yaml",
+      content: JSON.stringify(input, null, 2),
+      artifactType: "openapi-document",
+    });
   } catch (error: any) {
     if (debug) {
       // eslint-disable-next-line no-console
@@ -52,19 +54,13 @@ export async function processRequest(host: Host) {
 
 export class QualityPreChecker {
   input: oai3;
-  options: ModelerFourOptions = {};
+  private options: ModelerFourOptions;
   protected interpret: Interpretations;
 
   constructor(protected session: Session<oai3>) {
     this.input = shadowPosition(session.model); // shadow(session.model, filename);
+    this.options = this.session.configuration.modelerfour ?? {};
     this.interpret = new Interpretations(session);
-  }
-
-  async init() {
-    // get our configuration for this run.
-    this.options = await this.session.getValue("modelerfour", {});
-
-    return this;
   }
 
   private resolve<T>(item: Refable<T>): Dereferenced<T> {
@@ -239,7 +235,7 @@ export class QualityPreChecker {
     for (const { name, schema } of this.listSchemas()) {
       if (<any>schema.type === "file" || <any>schema.format === "file" || <any>schema.format === "binary") {
         // handle inconsistency in file format handling.
-        this.session.hint(
+        this.session.warning(
           `'The schema ${schema?.["x-ms-metadata"]?.name || name} with 'type: ${schema.type}', format: ${
             schema.format
           }' will be treated as a binary blob for binary media types.`,
@@ -353,6 +349,7 @@ export class QualityPreChecker {
               `  - ${schemaName}: ${schema.type}`,
               `  - ${parentName}: ${parent.type}`,
             ];
+
             this.session.error(lines.join("\n"), ["PreCheck", "AllOfTypeDifferent"], parentRef);
           }
         }

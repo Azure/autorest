@@ -1,6 +1,20 @@
 # Change Log - @autorest/schemas
 
-This log was last generated on Fri, 17 Sep 2021 17:52:01 GMT and should not be manually modified.
+This log was last generated on Tue, 01 Feb 2022 23:06:50 GMT and should not be manually modified.
+
+## 1.3.3
+Tue, 01 Feb 2022 23:06:50 GMT
+
+### Patches
+
+- Added `operation-location` as option for lro `final-state-via`
+
+## 1.3.2
+Fri, 19 Nov 2021 04:23:42 GMT
+
+### Patches
+
+- **Remove** empty version validation from schema validator
 
 ## 1.3.1
 Fri, 17 Sep 2021 17:52:01 GMT

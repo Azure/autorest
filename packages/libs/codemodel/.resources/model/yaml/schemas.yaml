@@ -105,7 +105,7 @@ definitions:
         description: the actual value
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
       language:
         description: per-language information for this value
         $ref: ./master.yaml#/definitions/Languages
@@ -200,7 +200,7 @@ definitions:
         description: a short description
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
       language:
         description: per-language information for Schema
         $ref: ./master.yaml#/definitions/Languages
@@ -220,7 +220,7 @@ definitions:
         description: the actual constant value to use
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
       language:
         description: per-language information for this value
         $ref: ./master.yaml#/definitions/Languages
@@ -481,7 +481,7 @@ definitions:
         description: a short description
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
       language:
         description: per-language information for Schema
         $ref: ./master.yaml#/definitions/Languages

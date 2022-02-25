@@ -32,7 +32,7 @@ definitions:
         $ref: '#/definitions/ParameterLocation'
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - in
       - name
@@ -159,13 +159,13 @@ definitions:
         type: string
         description: an URI
       scopes:
-        $ref: '#/definitions/Dictionary<string>'
+        $ref: '#/definitions/Record<string,string>'
       tokenUrl:
         type: string
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - authorizationUrl
       - scopes
@@ -199,7 +199,7 @@ definitions:
           - bearer
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - scheme
       - type
@@ -303,7 +303,7 @@ definitions:
         description: the actual value
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         description: per-language information for this value
         $ref: '#/definitions/Languages'
@@ -318,13 +318,13 @@ definitions:
         type: string
         description: an URI
       scopes:
-        $ref: '#/definitions/Dictionary<string>'
+        $ref: '#/definitions/Record<string,string>'
       tokenUrl:
         type: string
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - scopes
       - tokenUrl
@@ -340,6 +340,10 @@ definitions:
       - type
   CompoundSchemaTypes:
     type: string
+    description: |-
+      Compound schemas are used to construct complex objects or offer choices of a set of schemas.
+
+      (ie, allOf, anyOf, oneOf )
     enum:
       - or
       - xor
@@ -387,7 +391,7 @@ definitions:
         description: the actual value
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         description: per-language information for this value
         $ref: '#/definitions/Languages'
@@ -448,7 +452,7 @@ definitions:
         description: a short description
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         description: per-language information for Schema
         $ref: '#/definitions/Languages'
@@ -468,7 +472,7 @@ definitions:
         description: the actual constant value to use
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         description: per-language information for this value
         $ref: '#/definitions/Languages'
@@ -488,7 +492,7 @@ definitions:
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
   CredentialSchema:
     type: object
     description: a schema that represents a Credential value
@@ -550,22 +554,6 @@ definitions:
       reason:
         type: string
         description: Reason why this was deprecated.
-  Dictionary<ApiVersion>:
-    type: object
-    additionalProperties:
-      $ref: '#/definitions/ApiVersion'
-  Dictionary<ComplexSchema>:
-    type: object
-    additionalProperties:
-      $ref: '#/definitions/ComplexSchema'
-  Dictionary<any>:
-    type: object
-    additionalProperties:
-      type: object
-  Dictionary<string>:
-    type: object
-    additionalProperties:
-      type: string
   DictionarySchema:
     type: object
     description: a schema that represents a key-value collection
@@ -589,9 +577,9 @@ definitions:
     additionalProperties: false
     properties:
       all:
-        $ref: '#/definitions/Dictionary<ComplexSchema>'
+        $ref: '#/definitions/Record<string,ComplexSchema>'
       immediate:
-        $ref: '#/definitions/Dictionary<ComplexSchema>'
+        $ref: '#/definitions/Record<string,ComplexSchema>'
       property:
         $ref: '#/definitions/Property'
     required:
@@ -627,7 +615,7 @@ definitions:
     properties:
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
   ExternalDocumentation:
     type: object
     description: a reference to external documentation
@@ -640,7 +628,7 @@ definitions:
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - url
   FlagSchema:
@@ -667,7 +655,7 @@ definitions:
         type: number
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         description: per-language information for this value
         $ref: '#/definitions/Languages'
@@ -750,7 +738,7 @@ definitions:
         type: string
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         $ref: '#/definitions/Languages'
     required:
@@ -813,8 +801,17 @@ definitions:
         type: boolean
         description: when set, 'form' style parameters generate separate parameters for each value of an array.
       in:
+        type: string
         description: the location that this parameter is placed in the http request
-        $ref: '#/definitions/ParameterLocation'
+        enum:
+          - body
+          - cookie
+          - header
+          - none
+          - path
+          - query
+          - uri
+          - virtual
       skipUriEncoding:
         type: boolean
         description: when set, this indicates that the content of the parameter should not be subject to URI encoding rules.
@@ -982,10 +979,10 @@ definitions:
         type: string
         description: an URI
       scopes:
-        $ref: '#/definitions/Dictionary<string>'
+        $ref: '#/definitions/Record<string,string>'
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - authorizationUrl
       - scopes
@@ -1014,7 +1011,7 @@ definitions:
         description: the title of this service.
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - title
   KnownMediaType:
@@ -1090,7 +1087,7 @@ definitions:
         description: an uri pointing to the full license text
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - name
   Metadata:
@@ -1100,7 +1097,7 @@ definitions:
     properties:
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         description: per-language information for this aspect
         $ref: '#/definitions/Languages'
@@ -1124,7 +1121,7 @@ definitions:
         type: string
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - scheme
       - type
@@ -1187,7 +1184,7 @@ definitions:
         $ref: '#/definitions/OAuthFlows'
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - flows
       - type
@@ -1205,7 +1202,7 @@ definitions:
         $ref: '#/definitions/PasswordOAuthFlow'
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
   ODataQuerySchema:
     type: object
     description: a schema that represents a ODataQuery value
@@ -1250,6 +1247,7 @@ definitions:
       - type
   ObjectSchemaTypes:
     type: string
+    description: schema types that can be objects
     enum:
       - dictionary
       - object
@@ -1269,7 +1267,7 @@ definitions:
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - openIdConnectUrl
       - type
@@ -1305,7 +1303,7 @@ definitions:
           $ref: '#/definitions/Parameter'
       profile:
         description: the apiVersion to use for a given profile name
-        $ref: '#/definitions/Dictionary<ApiVersion>'
+        $ref: '#/definitions/Record<string,ApiVersion>'
       requests:
         type: array
         description: the different possibilities to build the request.
@@ -1326,7 +1324,7 @@ definitions:
         description: a short description
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         description: per-language information for this aspect
         $ref: '#/definitions/Languages'
@@ -1414,13 +1412,13 @@ definitions:
         type: string
         description: an URI
       scopes:
-        $ref: '#/definitions/Dictionary<string>'
+        $ref: '#/definitions/Record<string,string>'
       tokenUrl:
         type: string
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - scopes
       - tokenUrl
@@ -1442,6 +1440,7 @@ definitions:
       - type
   PrimitiveSchemaTypes:
     type: string
+    description: Schema types that are primitive language values
     enum:
       - boolean
       - char
@@ -1511,6 +1510,21 @@ definitions:
       - form
       - pipeDelimited
       - spaceDelimited
+  Record<string,ApiVersion>:
+    type: object
+    additionalProperties: false
+  Record<string,ComplexSchema>:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/ComplexSchema'
+  Record<string,any>:
+    type: object
+    additionalProperties:
+      type: object
+  Record<string,string>:
+    type: object
+    additionalProperties:
+      type: string
   Relations:
     type: object
     additionalProperties: false
@@ -1588,7 +1602,7 @@ definitions:
         description: a short description
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         description: per-language information for Schema
         $ref: '#/definitions/Languages'
@@ -1890,7 +1904,7 @@ definitions:
       schemes:
         type: array
         items:
-          $ref: '#/definitions/SecurityScheme'
+          type: SecuritySchemeFull
     required:
       - authenticationRequired
       - schemes
@@ -1919,7 +1933,7 @@ definitions:
     properties:
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
   SerializationFormats:
     type: object
     description: custom extensible metadata for individual serialization formats
@@ -2125,7 +2139,7 @@ definitions:
         description: a short description
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         description: per-language information for this aspect
         $ref: '#/definitions/Languages'
@@ -2136,6 +2150,11 @@ definitions:
       - language
       - protocol
       - schema
+  ValueOrFactory:
+    anyOf:
+      - $ref: '#/definitions/ApiVersion'
+      - type: object
+        additionalProperties: false
   ValueSchema:
     type: object
     description: schema types that are non-object or complex types
@@ -2148,6 +2167,7 @@ definitions:
       - type
   ValueSchemaTypes:
     type: string
+    description: schema types that are non-object or complex types
     enum:
       - array
       - boolean
@@ -2258,7 +2278,7 @@ properties:
     $ref: '#/definitions/Security'
   extensions:
     description: additional metadata extensions dictionary
-    $ref: '#/definitions/Dictionary<any>'
+    $ref: '#/definitions/Record<string,any>'
   language:
     description: per-language information for this aspect
     $ref: '#/definitions/Languages'

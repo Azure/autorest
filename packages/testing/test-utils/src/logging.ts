@@ -17,6 +17,10 @@ export function createMockLogger(overrides: Partial<AutorestLogger> = {}): Autor
     trackError: jest.fn(),
     log: jest.fn(),
     with: jest.fn(() => logger),
+    startProgress: jest.fn(() => ({
+      update: jest.fn(),
+      stop: jest.fn(),
+    })),
     diagnostics: [],
     ...overrides,
   };
@@ -35,7 +39,17 @@ export class AutorestTestLogger extends AutorestLoggerBase<LoggerProcessor> {
   };
 
   public constructor() {
-    super({ sinks: [{ log: (x) => this.log(x) }] });
+    super({
+      sinks: [
+        {
+          log: (x) => this.log(x),
+          startProgress: jest.fn(() => ({
+            update: jest.fn(),
+            stop: jest.fn(),
+          })),
+        },
+      ],
+    });
   }
 
   public log(log: LogInfo): void {

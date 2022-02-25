@@ -67,6 +67,28 @@ export interface AutorestError extends Omit<AutorestDiagnostic, "level"> {}
 
 export interface AutorestWarning extends Omit<AutorestDiagnostic, "level"> {}
 
+export interface Progress {
+  /**
+   * Current step.
+   */
+  current: number;
+
+  /**
+   * Total number of steps.
+   */
+  total: number;
+
+  /**
+   * Optional name
+   */
+  name?: string;
+}
+
+export interface ProgressTracker {
+  update(progress: Progress): void;
+  stop(): void;
+}
+
 /**
  * AutorestLogger is an interface for the autorest logger that can be passed around in plugins.
  * This can be used to log information, debug logs or track errors and warnings.
@@ -91,6 +113,8 @@ export interface IAutorestLogger {
   trackWarning(error: AutorestWarning): void;
 
   log(log: LogInfo): void;
+
+  startProgress(initialName?: string): ProgressTracker;
 }
 
 export interface AutorestLogger extends IAutorestLogger {
@@ -119,6 +143,7 @@ export interface LoggerAsyncProcessor {
 
 export interface LoggerSink {
   log(info: LogInfo): void;
+  startProgress(initialName?: string): ProgressTracker;
 }
 
 export type EnhancedLogInfo = Omit<LogInfo, "source"> & {

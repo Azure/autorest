@@ -1,15 +1,16 @@
 import { fileURLToPath } from "url";
-import { Channel, Host } from "@autorest/extension-base";
+import { AutorestExtensionHost, Channel } from "@autorest/extension-base";
 import { compileAdl } from "./cadl-compiler.js";
 
-export async function setupAdlCompilerPlugin(host: Host) {
-  const inputFiles = await host.GetValue("inputFileUris");
-  const entrypoint = inputFiles[0];
+export async function setupAdlCompilerPlugin(host: AutorestExtensionHost) {
+  const inputFiles = await host.getValue<string[]>("inputFileUris");
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const entrypoint = inputFiles![0];
   const result = await compileAdl(fileURLToPath(entrypoint));
 
   if ("diagnostics" in result) {
     for (const diagnostic of result.diagnostics) {
-      host.Message({
+      host.message({
         Channel: Channel.Error,
         Text: diagnostic.message,
         Source:
@@ -28,7 +29,7 @@ export async function setupAdlCompilerPlugin(host: Host) {
   }
 
   for (const [name, content] of Object.entries(result.compiledFiles)) {
-    host.WriteFile(name, content, undefined, "swagger-document");
+    host.writeFile({ filename: name, content, artifactType: "swagger-document" });
   }
 }
 

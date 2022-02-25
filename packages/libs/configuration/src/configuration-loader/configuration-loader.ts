@@ -1,7 +1,7 @@
 import { AutorestLogger, OperationAbortedException } from "@autorest/common";
 import { exists, filePath } from "@azure-tools/async-io";
 import { DataStore, IFileSystem, RealFileSystem, CachingFileSystem } from "@azure-tools/datastore";
-import { Extension, ExtensionManager, LocalExtension } from "@azure-tools/extension";
+import { Extension, ExtensionManager, LocalExtension, PackageInstallProgress } from "@azure-tools/extension";
 import { createFileUri, resolveUri, simplifyUri, fileUriToPath } from "@azure-tools/uri";
 import { last } from "lodash";
 import untildify from "untildify";
@@ -44,6 +44,11 @@ export interface ConfigurationLoaderOptions {
    */
   extensionManager?: ExtensionManager;
 }
+
+/**
+ * Timeout in ms.
+ */
+const InstallPackageTimeout = 5 * 60 * 1000;
 
 /**
  * Class handling the loading of an autorest configuration.
@@ -111,7 +116,6 @@ export class ConfigurationLoader {
       await manager.addConfig(result.value);
     }
     await resolveRequiredConfigs(this.fileSystem);
-
     // 2. file
     if (configFileUri != null && configFileUri !== undefined) {
       // add loaded files to the input files.
@@ -280,14 +284,29 @@ export class ConfigurationLoader {
       } else {
         // acquire extension
         const pack = await extMgr.findPackage(extensionDef.name, extensionDef.source);
-        this.logger.info(`> Installing AutoRest extension '${extensionDef.name}' (${extensionDef.source})`);
-        const extension = await extMgr.installPackage(pack, false, 5 * 60 * 1000, (progressInit: any) =>
-          progressInit.Message.Subscribe((s: any, m: any) => this.logger.verbose(m)),
-        );
         this.logger.info(
-          `> Installed AutoRest extension '${extensionDef.name}' (${extensionDef.source}->${extension.version})`,
+          `> Installing AutoRest extension '${extensionDef.name}' (${extensionDef.source} -> ${pack.version})`,
         );
-        return extension;
+        const progress = this.logger.startProgress("installing...");
+        try {
+          const extension = await extMgr.installPackage(
+            pack,
+            false,
+            InstallPackageTimeout,
+            (status: PackageInstallProgress) => {
+              progress.update({ ...status });
+            },
+          );
+          progress.stop();
+
+          this.logger.info(
+            `> Installed AutoRest extension '${extensionDef.name}' (${extensionDef.source}->${extension.version})`,
+          );
+          return extension;
+        } catch (e) {
+          progress.stop();
+          throw e;
+        }
       }
     }
   }

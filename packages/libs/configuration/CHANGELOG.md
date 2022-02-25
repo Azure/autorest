@@ -1,6 +1,32 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Thu, 14 Oct 2021 23:03:28 GMT and should not be manually modified.
+This log was last generated on Tue, 07 Dec 2021 16:36:46 GMT and should not be manually modified.
+
+## 1.8.2
+Tue, 07 Dec 2021 16:36:46 GMT
+
+### Patches
+
+- **Remove** removal of additionalProperties=false for v2 generator 
+
+## 1.8.1
+Tue, 30 Nov 2021 15:50:35 GMT
+
+### Patches
+
+- Allow multiple `reason` on directive
+
+## 1.8.0
+Fri, 19 Nov 2021 04:23:42 GMT
+
+### Minor changes
+
+- **Consolidate** configuration schema to add description and missing settings
+- Uptake changes to the extension loader and report installation progress
+
+### Patches
+
+- Relax directive validation
 
 ## 1.7.3
 Thu, 14 Oct 2021 23:03:28 GMT

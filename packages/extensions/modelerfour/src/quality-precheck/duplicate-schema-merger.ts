@@ -23,7 +23,7 @@ export class DuplicateSchemaMerger {
         break;
       }
     }
-    this.session.verbose(`Found and removed ${count} duplicate schema`, {});
+    this.session.verbose(`Found and removed ${count} duplicate schema`);
     this.findDifferentSchemasWithSameName(spec);
 
     return spec;
@@ -162,7 +162,6 @@ export class DuplicateSchemaMerger {
 
     this.session.verbose(
       `Schema ${name} has multiple identical declarations, reducing to just one - removing: ${schemasToRemove.length}, keeping: ${schemaToKeep.key}`,
-      ["PreCheck", "ReducingSchema"],
     );
 
     return newSpec;

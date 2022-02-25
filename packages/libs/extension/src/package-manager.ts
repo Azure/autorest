@@ -9,8 +9,49 @@ export interface InstallOptions {
   force?: boolean;
 }
 
+export interface PackageManagerProgress {
+  /**
+   * Current step.
+   */
+  current: number;
+
+  /**
+   * Total number of steps.
+   */
+  total: number;
+
+  /**
+   * In the case there is multiple progress
+   */
+  id?: number;
+}
+
+export type PackageInstallationResult = { success: false; error: InstallationError } | { success: true };
+
+export interface InstallationError {
+  /**
+   * Main error message.
+   */
+  message: string;
+
+  /**
+   * Log entries for the package manager.
+   */
+  logs: PackageManagerLogEntry[];
+}
+
+export interface PackageManagerLogEntry {
+  severity: "info" | "warning" | "error";
+  message: string;
+}
+
 export interface PackageManager {
-  install(directory: string, packages: string[], options?: InstallOptions): Promise<void>;
+  install(
+    directory: string,
+    packages: string[],
+    options?: InstallOptions,
+    reportProgress?: (progress: PackageManagerProgress) => void,
+  ): Promise<PackageInstallationResult>;
 
   clean(directory: string): Promise<void>;
 

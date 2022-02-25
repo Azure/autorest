@@ -1,6 +1,6 @@
 {
   "name": "@autorest/codemodel",
-  "version": "4.17.1",
+  "version": "4.17.2",
   "description": "AutoRest code model library",
   "directories": {
     "doc": "docs"
@@ -48,12 +48,12 @@
     "eslint": "^7.17.0",
     "glob": "~7.1.4",
     "rimraf": "^3.0.2",
-    "ts-morph": "~4.0.1",
-    "typescript-json-schema": "~0.40.0",
+    "ts-morph": "~13.0.3",
+    "typescript-json-schema": "~0.53.0",
     "typescript": "~4.4.2"
   },
   "dependencies": {
-    "@azure-tools/codegen": "~2.8.0",
+    "@azure-tools/codegen": "~2.9.0",
     "js-yaml": "~4.0.0"
   },
   "publishConfig": {

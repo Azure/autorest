@@ -2,6 +2,30 @@
   "name": "@azure-tools/openapi",
   "entries": [
     {
+      "version": "3.2.3",
+      "tag": "@azure-tools/openapi_v3.2.3",
+      "date": "Wed, 12 Jan 2022 22:31:57 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added `isExtension` util function."
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.2.2",
+      "tag": "@azure-tools/openapi_v3.2.2",
+      "date": "Fri, 19 Nov 2021 04:23:43 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Tweak types for description next to parameter"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.2.1",
       "tag": "@azure-tools/openapi_v3.2.1",
       "date": "Wed, 08 Sep 2021 15:39:22 GMT",

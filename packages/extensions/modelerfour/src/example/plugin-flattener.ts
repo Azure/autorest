@@ -4,15 +4,15 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { codeModelSchema, CodeModel } from "@autorest/codemodel";
-import { Host, startSession } from "@autorest/extension-base";
+import { AutorestExtensionHost, startSession } from "@autorest/extension-base";
 import { serialize } from "@azure-tools/codegen";
 import { Example } from "./example";
 
-export async function processRequest(host: Host) {
-  const debug = (await host.GetValue("debug")) || false;
+export async function processRequest(host: AutorestExtensionHost) {
+  const debug = (await host.getValue("debug")) || false;
 
   try {
-    const session = await startSession<CodeModel>(host, {}, codeModelSchema);
+    const session = await startSession<CodeModel>(host, codeModelSchema);
 
     // process
     const plugin = new Example(session);
@@ -21,8 +21,16 @@ export async function processRequest(host: Host) {
     const result = plugin.process();
 
     // output the model to the pipeline
-    host.WriteFile("code-model-v4.yaml", serialize(result, codeModelSchema), undefined, "code-model-v4");
-    host.WriteFile("code-model-v4-no-tags.yaml", serialize(result), undefined, "code-model-v4-no-tags");
+    host.writeFile({
+      filename: "code-model-v4.yaml",
+      content: serialize(result, codeModelSchema),
+      artifactType: "code-model-v4",
+    });
+    host.writeFile({
+      filename: "code-model-v4-no-tags.yaml",
+      content: serialize(result),
+      artifactType: "code-model-v4-no-tags",
+    });
   } catch (error: any) {
     if (debug) {
       // eslint-disable-next-line no-console

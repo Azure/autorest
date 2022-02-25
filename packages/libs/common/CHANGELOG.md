@@ -1,6 +1,26 @@
 # Change Log - @autorest/common
 
-This log was last generated on Wed, 08 Sep 2021 15:39:22 GMT and should not be manually modified.
+This log was last generated on Wed, 01 Dec 2021 22:39:16 GMT and should not be manually modified.
+
+## 1.4.1
+Wed, 01 Dec 2021 22:39:16 GMT
+
+### Patches
+
+- **Fix** configuration loading issue with nested config `az:`
+
+## 1.4.0
+Fri, 19 Nov 2021 04:23:42 GMT
+
+### Minor changes
+
+- **Removed** identitySourceMapping
+- **Added** progress bar reporting to the logger
+
+### Patches
+
+- **Fix** Issue with coloring [] wrapped elements
+- Render progress bar before closing to force it to 100%
 
 ## 1.3.0
 Wed, 08 Sep 2021 15:39:22 GMT

@@ -4,27 +4,17 @@
  *--------------------------------------------------------------------------------------------*/
 /* eslint-disable no-console */
 import "source-map-support/register";
-import { EventEmitter } from "events";
-import { resolve as currentDirectory } from "path";
+import { join, resolve as currentDirectory } from "path";
 import {
   configureLibrariesLogger,
   color,
   ConsoleLogger,
   FilterLogger,
-  AutorestLogger,
   AutorestSyncLogger,
   Exception,
   IAutorestLogger,
 } from "@autorest/common";
-
-import { AutorestCliArgs, parseAutorestCliArgs } from "@autorest/configuration";
-EventEmitter.defaultMaxListeners = 100;
-process.env["ELECTRON_RUN_AS_NODE"] = "1";
-delete process.env["ELECTRON_NO_ATTACH_CONSOLE"];
-
-// start of autorest-ng
-// the console app starts for real here.
-
+import { AutorestCliArgs, parseAutorestCliArgs, getLogLevel } from "@autorest/configuration";
 import { EnhancedFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import {
   clearFolder,
@@ -36,15 +26,23 @@ import {
   writeString,
 } from "@azure-tools/uri";
 import { omit } from "lodash";
+import { SourceMapConsumer } from "source-map";
 import { ArtifactWriter } from "./artifact-writer";
 import { printAutorestHelp } from "./commands";
 import { Artifact } from "./lib/artifact";
 import { AutoRest, IsOpenApiDocument, Shutdown } from "./lib/autorest-core";
 import { VERSION } from "./lib/constants";
-import { getLogLevel } from "./lib/context";
 
 let verbose = false;
 let debug = false;
+
+// Need to copy this file in webpack over and tell SourceMapConsumer where it is.
+const inWebpack = typeof __webpack_require__ === "function";
+if (inWebpack) {
+  (SourceMapConsumer as any).initialize({
+    "lib/mappings.wasm": join(__dirname, "mappings.wasm"),
+  });
+}
 
 async function autorestInit(title = "API-NAME", inputs: Array<string> = ["LIST INPUT FILES HERE"]) {
   const cwdUri = createFolderUri(currentDirectory());

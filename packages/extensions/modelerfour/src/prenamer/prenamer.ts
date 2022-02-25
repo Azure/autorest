@@ -169,9 +169,15 @@ export class PreNamer {
     for (const schema of values(this.codeModel.schemas.objects)) {
       scopeNamer.add(schema, this.format.type, "");
 
+      const propertyScopeName = new ScopeNamer(this.session, {
+        deduplicateNames: false,
+        overrides: this.format.override,
+      });
+
       for (const property of values(schema.properties)) {
-        setName(property, this.format.property, "", this.format.override);
+        propertyScopeName.add(property, this.format.property, "");
       }
+      propertyScopeName.process();
     }
 
     for (const schema of values(this.codeModel.schemas.groups)) {
