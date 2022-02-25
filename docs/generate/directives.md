@@ -74,6 +74,19 @@ directive:
       $["x-abc"] = true
 ```
 
+## Use directive to permanently update inputs
+
+Directives lets you modify the input files on the fly but there might be cases where you just want to fix the input files intead of patching it JIT.
+For that you can run autorest with the `--apply-transforms-in-place`. This will take all the directives meant to be run on the Swagger 2.0 or OpenAPI 3.0 files and update the files themself.
+
+```bash
+# Apply transforms defined in the mytransforms.md config file to the openapi.yaml file.
+autorest --apply-transforms-in-place --input-file=openapi.yaml --require=./mytransforms.md
+
+# Apply transforms defined in the mytransforms.md config file to all the input files reference in the readme config.
+autorest --apply-transforms-in-place --require=./mytransforms.md ./readme.md
+```
+
 ## Directive Scenarios
 
 The following directives cover the most common tweaking scenarios for generation. Most of those have a `built-in` [directive](./built-in-directives.md) helper and are shown here as examples.
