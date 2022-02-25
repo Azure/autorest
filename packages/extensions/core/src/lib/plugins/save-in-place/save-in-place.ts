@@ -19,8 +19,10 @@ export function createSaveInPlacePlugin(): PipelinePlugin {
         });
         continue;
       }
-      const data = await dataHandle.readObject();
+      const data = await dataHandle.readObject<any>();
 
+      // This property gets added to secondary files(Files not in input-files but referenced via $ref)
+      delete data["x-ms-secondary-file"];
       const isYaml = originalPath.endsWith(".yaml") || originalPath.endsWith(".yml");
       const content = isYaml ? stringify(data) : JSON.stringify(data, null, 2);
 
