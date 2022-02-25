@@ -9,6 +9,7 @@ import { createSwaggerToOpenApi3Plugin } from "./conversion";
 import { createDeduplicatorPlugin } from "./deduplicator";
 import { createArtifactEmitterPlugin } from "./emitter";
 import { createEnumDeduplicator } from "./enum-deduplication";
+import { createFullRefResolverPlugin } from "./full-ref-resolver";
 import { createHelpPlugin } from "./help";
 import {
   createIdentityPlugin,
@@ -22,6 +23,7 @@ import { createCSharpReflectApiVersionPlugin } from "./metadata-generation";
 import { createNewComposerPlugin } from "./new-composer";
 import { createOpenAPIStatsCollectorPlugin } from "./openapi-stats-collector";
 import { createProfileFilterPlugin } from "./profile-filter";
+import { createSaveInPlacePlugin } from "./save-in-place";
 import { createOpenApiSchemaValidatorPlugin, createSwaggerSchemaValidatorPlugin } from "./schema-validation";
 import { createSemanticValidationPlugin } from "./semantics-validation";
 import { subsetSchemaDeduplicatorPlugin } from "./subset-schemas-deduplicator";
@@ -39,6 +41,7 @@ export const CORE_PLUGIN_MAP = {
   identity: createIdentityPlugin(),
   null: createNullPlugin(),
   "reset-identity": createIdentityResetPlugin(),
+  "full-ref-resolver": createFullRefResolverPlugin(),
   "normalize-identity": createNormalizeIdentityPlugin(),
   "loader-swagger": createSwaggerLoaderPlugin(),
   "loader-openapi": createOpenApiLoaderPlugin(),
@@ -77,5 +80,6 @@ export const CORE_PLUGIN_MAP = {
   "api-version-parameter-handler": createApiVersionParameterHandlerPlugin(),
   "profile-filter": createProfileFilterPlugin(),
   "allof-cleaner": createAllOfCleaner(),
+  "save-in-place": createSaveInPlacePlugin(),
   command: createCommandPlugin(),
 };
