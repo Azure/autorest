@@ -66,11 +66,14 @@ languages:
       - --use:@autorest/modelerfour@4.22.3
       - --use:@autorest/python@5.12.0
       - --modelerfour.treat-type-object-as-anything
+      - --modelerfour.legacy-request-body
+
     newArgs:
       - --version:../packages/extensions/core
       - --use:../packages/extensions/modelerfour
       - --use:@autorest/python@5.12.0
       - --modelerfour.treat-type-object-as-anything
+      - --modelerfour.legacy-request-body
 
   - language: typescript
     outputPath: ./output/typescript
@@ -82,6 +85,8 @@ languages:
       - --package-name:test-package
       - --title:TestClient
       - --use:@autorest/typescript@6.0.0-beta.13
+      - --modelerfour.legacy-request-body
+
     newArgs:
       - --v3
       - --version:../packages/extensions/core
@@ -90,3 +95,4 @@ languages:
       - --package-name:test-package
       - --title:TestClient
       - --use:@autorest/typescript@6.0.0-beta.13
+      - --modelerfour.legacy-request-body
