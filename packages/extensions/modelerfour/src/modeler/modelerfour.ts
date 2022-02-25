@@ -2327,12 +2327,12 @@ export class ModelerFour {
     path: string,
     baseUri: string,
   ) {
-    const getGroup = (type: KnownMediaType, kmt: KnownMediaTypeGroupItem[]) => {
+    const getGroup = (type: KnownMediaType, kmt: KnownMediaTypeGroupItem[]): RequestBodyGroup => {
       return {
         type,
         mediaTypes: kmt.map((each) => each.mediaType),
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        schema: kmt.find((x) => !!x.schema.instance)!.schema!,
+        schema: kmt.find((x) => !!x.schema.instance)!.schema!.instance!,
       };
     };
 
