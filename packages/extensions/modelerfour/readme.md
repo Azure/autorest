@@ -95,6 +95,9 @@ modelerfour:
   # In this case ChildSchema will be removed and all reference to it will be updated to point to ParentSchema
   remove-empty-child-schemas: false|true
 
+  # Prevent the given headers from being handled automatically. Instead they will remain as parameters.
+  skip-special-headers: string[]
+
   # List of header names that shouldn't be included in the codemodel.
   # Those header would already be handled by the generator.
   ignore-headers: string[]
