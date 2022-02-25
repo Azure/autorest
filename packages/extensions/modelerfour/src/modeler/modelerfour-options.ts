@@ -55,6 +55,10 @@ export interface ModelerFourOptions {
   "seal-single-value-enum-by-default"?: boolean;
 
   /**
+   * Ignore the special treament of the given header name.
+   */
+  "skip-special-headers"?: string[];
+  /**
    * List of header names that shouldn't be included in the codemodel.
    * Those header would already be handled by the generator.
    */
