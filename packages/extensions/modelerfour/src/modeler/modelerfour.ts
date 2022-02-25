@@ -75,7 +75,7 @@ import {
 import * as OpenAPI from "@azure-tools/openapi";
 import { uniq, every } from "lodash";
 import { isDefined } from "../utils";
-import { BodyProcessor, RequestBodyGroup } from "./body-processor";
+import { BodyProcessor, KnownMediaTypeGroupItem, RequestBodyGroup } from "./body-processor";
 import { KnownSpecialHeaders } from "./constants";
 import { Interpretations, XMSEnum } from "./interpretations";
 import { ModelerFourOptions } from "./modelerfour-options";
@@ -1675,7 +1675,11 @@ export class ModelerFour {
     this.processParameters(httpOperation, operation, pathItem);
 
     // === Requests ===
-    this.processRequestBody(httpOperation, method, operationGroup, operation, path, baseUri);
+    if (!this.options["legacy-request-body"]) {
+      this.processRequestBody(httpOperation, method, operationGroup, operation, path, baseUri);
+    } else {
+      this.processRequestBodyLegacy(httpOperation, method, operationGroup, operation, path, baseUri);
+    }
 
     // === Response ===
     this.processResponses(httpOperation, operation);
@@ -2309,6 +2313,106 @@ export class ModelerFour {
       for (const mediaType of request.protocol.http.mediaTypes) {
         operation.requestMediaTypes[mediaType] = request;
       }
+    }
+  }
+
+  /**
+   * LEGACY Body processing as changed in https://github.com/Azure/autorest/pull/4405
+   */
+  processRequestBodyLegacy(
+    httpOperation: OpenAPI.HttpOperation,
+    httpMethod: string,
+    operationGroup: OperationGroup,
+    operation: Operation,
+    path: string,
+    baseUri: string,
+  ) {
+    const getGroup = (type: KnownMediaType, kmt: KnownMediaTypeGroupItem[]) => {
+      return {
+        type,
+        mediaTypes: kmt.map((each) => each.mediaType),
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        schema: kmt.find((x) => !!x.schema.instance)!.schema!,
+      };
+    };
+
+    const requestBody = this.resolve(httpOperation.requestBody);
+    if (requestBody.instance) {
+      const groupedMediaTypes = this.bodyProcessor.groupMediaTypes(requestBody.instance.content);
+      const kmtCount = groupedMediaTypes.size;
+      switch (httpMethod.toLowerCase()) {
+        case "get":
+        case "head":
+        case "delete":
+          if (kmtCount > 0) {
+            this.session.warning(
+              `Operation '${operationGroup.language.default.name}/${operation.language.default.name}' really should not have a media type (because there should be no body)`,
+              ["?"],
+              httpOperation.requestBody,
+            );
+          }
+          break;
+        case "options":
+        case "trace":
+        case "put":
+        case "patch":
+        case "post":
+          if (kmtCount === 0) {
+            throw new Error(
+              `Operation '${operationGroup.language.default.name}/${operation.language.default.name}' must have a media type.`,
+            );
+          }
+      }
+
+      const kmtBinary = groupedMediaTypes.get(KnownMediaType.Binary);
+      const kmtJSON = groupedMediaTypes.get(KnownMediaType.Json);
+      if (kmtBinary) {
+        this.processBinary(getGroup(KnownMediaType.Binary, kmtBinary), operation, requestBody);
+      }
+      const kmtText = groupedMediaTypes.get(KnownMediaType.Text);
+      if (kmtText) {
+        this.processBinary(getGroup(KnownMediaType.Text, kmtText), operation, requestBody);
+      }
+      if (kmtJSON) {
+        this.processSerializedObject(getGroup(KnownMediaType.Json, kmtJSON), operation, requestBody);
+      }
+      const kmtXML = groupedMediaTypes.get(KnownMediaType.Xml);
+      if (kmtXML && !kmtJSON) {
+        // only do XML if there is not a JSON body
+        this.processSerializedObject(getGroup(KnownMediaType.Xml, kmtXML), operation, requestBody);
+      }
+      const kmtForm = groupedMediaTypes.get(KnownMediaType.Form);
+      if (kmtForm && !kmtXML && !kmtJSON) {
+        // only do FORM if there is not an JSON or XML body
+        this.processSerializedObject(getGroup(KnownMediaType.Form, kmtForm), operation, requestBody);
+      }
+      const kmtMultipart = groupedMediaTypes.get(KnownMediaType.Multipart);
+      if (kmtMultipart) {
+        // create multipart form upload for this.
+        this.processSerializedObject(getGroup(KnownMediaType.Multipart, kmtMultipart), operation, requestBody);
+      }
+      // ensure the protocol information is set on the requests
+      for (const request of operation.requests ?? []) {
+        is(request.protocol.http);
+        request.protocol.http.method = httpMethod;
+        request.protocol.http.path = path;
+        request.protocol.http.uri = baseUri;
+      }
+    } else {
+      // no request body present
+      // which means there should just be a simple request with no parameters
+      // added to the operation.
+      operation.addRequest(
+        new Request({
+          protocol: {
+            http: new HttpRequest({
+              method: httpMethod,
+              path: path,
+              uri: baseUri,
+            }),
+          },
+        }),
+      );
     }
   }
 
