@@ -35,7 +35,7 @@
     "@types/js-yaml": "~4.0.0",
     "@types/lodash": "~4.14.168",
     "@types/node": "~14.14.20",
-    "@types/yargs": "~15.0.12",
+    "@types/yargs": "~17.0.4",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
     "eslint-plugin-import": "~2.24.2",
@@ -56,6 +56,6 @@
     "source-map-support": "^0.5.19",
     "ts-jest": "^27.0.3",
     "winston": "~3.3.3",
-    "yargs": "~16.2.0"
+    "yargs": "17.2.1"
   }
 }

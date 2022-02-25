@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/fixer",
+      "comment": "Add new fixer for legacy behavior: Single value enum will have modelAsString=false added to them",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/fixer",
+  "email": "tiguerin@microsoft.com"
+}

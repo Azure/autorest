@@ -50,7 +50,7 @@ dependencies:
   '@types/source-map-support': 0.5.4
   '@types/supertest': 2.0.11
   '@types/webpack': 4.41.30
-  '@types/yargs': 15.0.14
+  '@types/yargs': 17.0.4
   '@typescript-eslint/eslint-plugin': 4.31.0_a690ff3776b01e92cf0b93501bb5ae6a
   '@typescript-eslint/parser': 4.31.0_eslint@7.32.0+typescript@4.4.2
   ajv: 8.6.2
@@ -114,7 +114,7 @@ dependencies:
   webpack-node-externals: 3.0.0
   winston: 3.3.3
   yaml-ast-parser: 0.0.43
-  yargs: 16.2.0
+  yargs: 17.2.1
   yarn: 1.22.10
 lockfileVersion: 5.2
 packages:
@@ -1261,6 +1261,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-T8Yc9wt/5LbJyCaLiHPReJa0kApcIgJ7Bn735GjItUfh08Z1pJvu8QZqb9s+mMvKV6WUQRV7K2R46YbjMXTTJw==
+  /@types/yargs/17.0.4:
+    dependencies:
+      '@types/yargs-parser': 20.2.1
+    dev: false
+    resolution:
+      integrity: sha512-D/wihO9WFYqwsmJI0e0qS+U09wIQtYRSBJlXWjTFGjouEuOCy0BU4N/ZK5utb00S5lW/9LO7vOpvGDd8M06NvQ==
   /@typescript-eslint/eslint-plugin/4.31.0_a690ff3776b01e92cf0b93501bb5ae6a:
     dependencies:
       '@typescript-eslint/experimental-utils': 4.31.0_eslint@7.32.0+typescript@4.4.2
@@ -9617,7 +9623,7 @@ packages:
       '@types/js-yaml': 4.0.3
       '@types/lodash': 4.14.172
       '@types/node': 14.14.45
-      '@types/yargs': 15.0.14
+      '@types/yargs': 17.0.4
       '@typescript-eslint/eslint-plugin': 4.31.0_a690ff3776b01e92cf0b93501bb5ae6a
       '@typescript-eslint/parser': 4.31.0_eslint@7.32.0+typescript@4.4.2
       chalk: 4.1.2
@@ -9636,14 +9642,14 @@ packages:
       ts-jest: 27.0.5_b0de3831a3508d250bf516b99371e877
       typescript: 4.4.2
       winston: 3.3.3
-      yargs: 16.2.0
+      yargs: 17.2.1
     dev: false
     id: file:projects/fixer.tgz
     name: '@rush-temp/fixer'
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-zkgxeJwtxtHq44NPO5fAjgbtGVxAg4wh2O/kbj/KoThA++BkNXjwIgJrCuNreP79orP7nKKrGuyTqRNLtYsvPg==
+      integrity: sha512-k6dagCzeXL/6xnECsEdZWxCJKHRHgARN1z9SJMTn91AnT3+z3dQcqNvrhgpylXXRujZr2X7daPkwYi8ub+zC2w==
       tarball: file:projects/fixer.tgz
     version: 0.0.0
   file:projects/json.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9709,7 +9715,7 @@ packages:
       '@types/mustache': 4.1.2
       '@types/node': 14.14.45
       '@types/supertest': 2.0.11
-      '@types/yargs': 15.0.14
+      '@types/yargs': 17.0.4
       '@typescript-eslint/eslint-plugin': 4.31.0_a690ff3776b01e92cf0b93501bb5ae6a
       '@typescript-eslint/parser': 4.31.0_eslint@7.32.0+typescript@4.4.2
       body-parser: 1.19.0
@@ -9732,14 +9738,14 @@ packages:
       ts-jest: 27.0.5_b0de3831a3508d250bf516b99371e877
       typescript: 4.4.2
       winston: 3.3.3
-      yargs: 16.2.0
+      yargs: 17.2.1
     dev: false
     id: file:projects/md-mock-api.tgz
     name: '@rush-temp/md-mock-api'
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-grjTCGc9nHmVHbEGtUNz3+6lA9xo9NEtpf+Hx3RP/td8rOQYXx6x1Wq3epAQzR7n13dPAlM4SSMlM/QTyCZ3gA==
+      integrity: sha512-JkaawWf9eWe1156fIiYFJw4rqd27q+26nqLmA99LD+NmbXNB8CZGOv3Y2Nx9zBW8LBbNTHf4VRGuMUAp1Wz7Pw==
       tarball: file:projects/md-mock-api.tgz
     version: 0.0.0
   file:projects/modelerfour.tgz_ts-node@9.1.1:
@@ -9965,7 +9971,7 @@ specifiers:
   '@types/source-map-support': ^0.5.3
   '@types/supertest': ^2.0.10
   '@types/webpack': ~4.41.26
-  '@types/yargs': ~15.0.12
+  '@types/yargs': ~17.0.4
   '@typescript-eslint/eslint-plugin': ^4.12.0
   '@typescript-eslint/parser': ^4.12.0
   ajv: ^8.6.0
@@ -10029,5 +10035,5 @@ specifiers:
   webpack-node-externals: ~3.0.0
   winston: ~3.3.3
   yaml-ast-parser: 0.0.43
-  yargs: ~16.2.0
+  yargs: 17.2.1
   yarn: 1.22.10
