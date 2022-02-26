@@ -10,13 +10,18 @@
           "type": "string"
         },
         "range": {
-          "enum": ["+", "-"],
+          "enum": [
+            "+",
+            "-"
+          ],
           "type": "string"
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["version"]
+      "required": [
+        "version"
+      ]
     },
     "ApiVersions": {
       "description": "a collection of api versions",
@@ -71,7 +76,9 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["url"]
+      "required": [
+        "url"
+      ]
     },
     "Languages": {
       "description": "custom extensible metadata for individual language generators",
@@ -122,7 +129,9 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["default"]
+      "required": [
+        "default"
+      ]
     },
     "Protocols": {
       "description": "custom extensible metadata for individual protocols (ie, HTTP, etc)",
@@ -163,7 +172,10 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["language", "protocol"]
+      "required": [
+        "language",
+        "protocol"
+      ]
     },
     "Language": {
       "description": "the bare-minimum fields for per-language metadata on a given aspect",
@@ -182,7 +194,10 @@
       "additionalProperties": {
         "type": "object"
       },
-      "required": ["description", "name"]
+      "required": [
+        "description",
+        "name"
+      ]
     },
     "CSharpLanguage": {
       "type": "object",
@@ -239,7 +254,9 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["name"]
+      "required": [
+        "name"
+      ]
     },
     "Info": {
       "description": "code model information",
@@ -276,7 +293,9 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["title"]
+      "required": [
+        "title"
+      ]
     },
     "XmlSerlializationFormat": {
       "type": "object",
@@ -302,7 +321,11 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["attribute", "text", "wrapped"],
+      "required": [
+        "attribute",
+        "text",
+        "wrapped"
+      ],
       "allOf": [
         {
           "$ref": "./master.json#/definitions/SerializationFormat"
@@ -401,7 +424,11 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["language", "protocol", "schema"]
+      "required": [
+        "language",
+        "protocol",
+        "schema"
+      ]
     },
     "Property": {
       "description": "a property is a child value in an object",
@@ -429,7 +456,12 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["language", "protocol", "schema", "serializedName"],
+      "required": [
+        "language",
+        "protocol",
+        "schema",
+        "serializedName"
+      ],
       "allOf": [
         {
           "$ref": "./master.json#/definitions/Value"
@@ -459,7 +491,11 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["language", "protocol", "schema"],
+      "required": [
+        "language",
+        "protocol",
+        "schema"
+      ],
       "allOf": [
         {
           "$ref": "./master.json#/definitions/Value"
@@ -487,7 +523,14 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["language", "originalParameter", "pathToProperty", "protocol", "schema", "targetProperty"],
+      "required": [
+        "language",
+        "originalParameter",
+        "pathToProperty",
+        "protocol",
+        "schema",
+        "targetProperty"
+      ],
       "allOf": [
         {
           "$ref": "./master.json#/definitions/Parameter"
@@ -500,7 +543,10 @@
       "properties": {},
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["language", "protocol"],
+      "required": [
+        "language",
+        "protocol"
+      ],
       "allOf": [
         {
           "$ref": "./master.json#/definitions/Metadata"
@@ -514,12 +560,18 @@
         "binary": {
           "description": "indicates that this response is a binary stream",
           "type": "boolean",
-          "enum": [true]
+          "enum": [
+            true
+          ]
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["binary", "language", "protocol"],
+      "required": [
+        "binary",
+        "language",
+        "protocol"
+      ],
       "allOf": [
         {
           "$ref": "./master.json#/definitions/Response"
@@ -541,7 +593,11 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["language", "protocol", "schema"],
+      "required": [
+        "language",
+        "protocol",
+        "schema"
+      ],
       "allOf": [
         {
           "$ref": "./master.json#/definitions/Response"
@@ -641,7 +697,10 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["language", "protocol"]
+      "required": [
+        "language",
+        "protocol"
+      ]
     },
     "Request": {
       "type": "object",
@@ -663,7 +722,10 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["language", "protocol"],
+      "required": [
+        "language",
+        "protocol"
+      ],
       "allOf": [
         {
           "$ref": "./master.json#/definitions/Metadata"
@@ -686,7 +748,12 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["$key", "language", "operations", "protocol"],
+      "required": [
+        "$key",
+        "language",
+        "operations",
+        "protocol"
+      ],
       "allOf": [
         {
           "$ref": "./master.json#/definitions/Metadata"
@@ -703,11 +770,19 @@
         },
         "target": {
           "description": "the actual value",
-          "type": ["string", "number", "boolean"]
+          "type": [
+            "string",
+            "number",
+            "boolean"
+          ]
         },
         "source": {
           "description": "the actual value",
-          "type": ["string", "number", "boolean"]
+          "type": [
+            "string",
+            "number",
+            "boolean"
+          ]
         },
         "extensions": {
           "$ref": "./master.json#/definitions/Record<string,any>",
@@ -716,7 +791,11 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["language", "source", "target"]
+      "required": [
+        "language",
+        "source",
+        "target"
+      ]
     },
     "FlagValue": {
       "type": "object",
@@ -735,7 +814,10 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["language", "value"]
+      "required": [
+        "language",
+        "value"
+      ]
     },
     "SchemaUsage": {
       "type": "object",
@@ -776,7 +858,10 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["all", "immediate"]
+      "required": [
+        "all",
+        "immediate"
+      ]
     },
     "Discriminator": {
       "type": "object",
@@ -793,7 +878,11 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["all", "immediate", "property"]
+      "required": [
+        "all",
+        "immediate",
+        "property"
+      ]
     },
     "GroupProperty": {
       "type": "object",
@@ -807,7 +896,13 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["language", "originalParameter", "protocol", "schema", "serializedName"],
+      "required": [
+        "language",
+        "originalParameter",
+        "protocol",
+        "schema",
+        "serializedName"
+      ],
       "allOf": [
         {
           "$ref": "./master.json#/definitions/Property"
@@ -831,7 +926,10 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["authenticationRequired", "schemes"]
+      "required": [
+        "authenticationRequired",
+        "schemes"
+      ]
     },
     "AADTokenSecurityScheme": {
       "type": "object",
@@ -845,7 +943,10 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["scopes", "type"],
+      "required": [
+        "scopes",
+        "type"
+      ],
       "allOf": [
         {
           "$ref": "./http.json#/definitions/SecurityScheme"
@@ -861,7 +962,10 @@
       },
       "defaultProperties": [],
       "additionalProperties": false,
-      "required": ["headerName", "type"],
+      "required": [
+        "headerName",
+        "type"
+      ],
       "allOf": [
         {
           "$ref": "./http.json#/definitions/SecurityScheme"
@@ -974,6 +1078,13 @@
   },
   "defaultProperties": [],
   "additionalProperties": false,
-  "required": ["info", "language", "operationGroups", "protocol", "schemas", "security"],
+  "required": [
+    "info",
+    "language",
+    "operationGroups",
+    "protocol",
+    "schemas",
+    "security"
+  ],
   "title": "CodeModel"
 }

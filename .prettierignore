@@ -324,3 +324,9 @@ core/test/resources/
 
 # This file isnt' actually yaml
 regression-tests/smoke-tests.yaml
+
+# Generated codemodel
+packages/libs/codemodel/.resources
+
+# Scenario tests
+**/test/scenarios/**/*.yaml

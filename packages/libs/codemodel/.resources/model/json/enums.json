@@ -40,29 +40,62 @@
       "type": "string"
     },
     "ImplementationLocation": {
-      "enum": ["Client", "Context", "Method"],
+      "enum": [
+        "Client",
+        "Context",
+        "Method"
+      ],
       "type": "string"
     },
     "SchemaContext": {
-      "enum": ["exception", "input", "output"],
+      "enum": [
+        "exception",
+        "input",
+        "output"
+      ],
       "type": "string"
     },
     "HttpMethod": {
       "description": "standard HTTP protocol methods",
-      "enum": ["delete", "get", "head", "options", "patch", "post", "put", "trace"],
+      "enum": [
+        "delete",
+        "get",
+        "head",
+        "options",
+        "patch",
+        "post",
+        "put",
+        "trace"
+      ],
       "type": "string"
     },
     "ParameterLocation": {
       "description": "the location that this parameter is placed in the http request",
-      "enum": ["body", "cookie", "header", "none", "path", "query", "uri", "virtual"],
+      "enum": [
+        "body",
+        "cookie",
+        "header",
+        "none",
+        "path",
+        "query",
+        "uri",
+        "virtual"
+      ],
       "type": "string"
     },
     "Scheme": {
       "type": "string",
-      "enum": ["bearer"]
+      "enum": [
+        "bearer"
+      ]
     },
     "SecurityType": {
-      "enum": ["apiKey", "http", "oauth2", "openIdConnect"],
+      "enum": [
+        "apiKey",
+        "http",
+        "oauth2",
+        "openIdConnect"
+      ],
       "type": "string"
     },
     "SerializationStyle": {
@@ -83,17 +116,28 @@
       "type": "string"
     },
     "QueryEncodingStyle": {
-      "enum": ["deepObject", "form", "pipeDelimited", "spaceDelimited"],
+      "enum": [
+        "deepObject",
+        "form",
+        "pipeDelimited",
+        "spaceDelimited"
+      ],
       "type": "string"
     },
     "PathEncodingStyle": {
-      "enum": ["label", "matrix", "simple"],
+      "enum": [
+        "label",
+        "matrix",
+        "simple"
+      ],
       "type": "string"
     },
     "Default": {
       "description": "A catch-all for all un-handled response codes.",
       "type": "string",
-      "enum": ["default"]
+      "enum": [
+        "default"
+      ]
     },
     "StatusCode": {
       "enum": [
@@ -164,7 +208,15 @@
       ]
     },
     "KnownMediaType": {
-      "enum": ["binary", "form", "json", "multipart", "text", "unknown", "xml"],
+      "enum": [
+        "binary",
+        "form",
+        "json",
+        "multipart",
+        "text",
+        "unknown",
+        "xml"
+      ],
       "type": "string"
     }
   }

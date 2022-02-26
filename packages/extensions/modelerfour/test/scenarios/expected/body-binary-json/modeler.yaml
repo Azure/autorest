@@ -1,12 +1,12 @@
-!CodeModel
-info: !Info
+!CodeModel 
+info: !Info 
   description: Acceptance test for file with json content type.
-  title: "Binary with content-type: application/json"
-schemas: !Schemas
+  title: 'Binary with content-type: application/json'
+schemas: !Schemas 
   strings:
     - !StringSchema &ref_0
       type: string
-      language: !Languages
+      language: !Languages 
         default:
           name: string
           description: simple string
@@ -14,10 +14,10 @@ schemas: !Schemas
   constants:
     - !ConstantSchema &ref_1
       type: constant
-      value: !ConstantValue
+      value: !ConstantValue 
         value: application/json
       valueType: *ref_0
-      language: !Languages
+      language: !Languages 
         default:
           name: application/json
           description: Content Type 'application/json'
@@ -25,110 +25,110 @@ schemas: !Schemas
   binaries:
     - !BinarySchema &ref_2
       type: binary
-      language: !Languages
+      language: !Languages 
         default:
           name: binary
-          description: ""
+          description: ''
       protocol: !Protocols {}
 globalParameters:
   - !Parameter &ref_5
     schema: *ref_0
-    clientDefaultValue: ""
+    clientDefaultValue: ''
     implementation: Client
     origin: modelerfour:synthesized/host
     required: true
     extensions:
       x-ms-skip-url-encoding: true
-    language: !Languages
+    language: !Languages 
       default:
         name: $host
         description: server parameter
         serializedName: $host
-    protocol: !Protocols
-      http: !HttpParameter
+    protocol: !Protocols 
+      http: !HttpParameter 
         in: uri
 operationGroups:
-  - !OperationGroup
+  - !OperationGroup 
     $key: Upload
     operations:
-      - !Operation
+      - !Operation 
         apiVersions:
-          - !ApiVersion
+          - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_5
         requestMediaTypes:
           application/json: !Request &ref_4
             parameters:
-              - !Parameter
+              - !Parameter 
                 schema: *ref_1
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
-                language: !Languages
+                language: !Languages 
                   default:
                     name: content-type
                     description: Upload file type
                     serializedName: Content-Type
-                protocol: !Protocols
-                  http: !HttpParameter
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
               - !Parameter &ref_3
                 schema: *ref_2
                 implementation: Method
                 required: true
-                language: !Languages
+                language: !Languages 
                   default:
                     name: data
                     description: Foo bar
-                protocol: !Protocols
-                  http: !HttpParameter
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: body
                     style: binary
             signatureParameters:
               - *ref_3
-            language: !Languages
+            language: !Languages 
               default:
-                name: ""
-                description: ""
-            protocol: !Protocols
-              http: !HttpBinaryRequest
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpBinaryRequest 
                 path: /file
                 method: post
                 binary: true
                 knownMediaType: binary
                 mediaTypes:
                   - application/json
-                uri: "{$host}"
+                uri: '{$host}'
         requests:
           - *ref_4
         signatureParameters: []
         responses:
-          - !Response
-            language: !Languages
+          - !Response 
+            language: !Languages 
               default:
-                name: ""
+                name: ''
                 description: Upload successful
-            protocol: !Protocols
-              http: !HttpResponse
+            protocol: !Protocols 
+              http: !HttpResponse 
                 statusCodes:
-                  - "204"
-        language: !Languages
+                  - '204'
+        language: !Languages 
           default:
             name: File
             description: Uploading json file
         protocol: !Protocols {}
-    language: !Languages
+    language: !Languages 
       default:
         name: Upload
-        description: ""
+        description: ''
     protocol: !Protocols {}
-security: !Security
+security: !Security 
   authenticationRequired: false
   schemes: []
-language: !Languages
+language: !Languages 
   default:
-    name: ""
-    description: ""
-protocol: !Protocols
+    name: ''
+    description: ''
+protocol: !Protocols 
   http: !HttpModel {}

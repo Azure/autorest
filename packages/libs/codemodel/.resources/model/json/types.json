@@ -3,7 +3,10 @@
   "definitions": {
     "CompoundSchemaTypes": {
       "description": "Compound schemas are used to construct complex objects or offer choices of a set of schemas.\n\n(ie, allOf, anyOf, oneOf )",
-      "enum": ["or", "xor"],
+      "enum": [
+        "or",
+        "xor"
+      ],
       "type": "string"
     },
     "PrimitiveSchemaTypes": {
@@ -53,7 +56,11 @@
     },
     "ObjectSchemaTypes": {
       "description": "schema types that can be objects",
-      "enum": ["dictionary", "object", "or"],
+      "enum": [
+        "dictionary",
+        "object",
+        "or"
+      ],
       "type": "string"
     },
     "AllSchemaTypes": {
