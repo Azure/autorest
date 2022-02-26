@@ -67,7 +67,6 @@ directive:
     suppress: # filter on event/messages
       - TOO_MANY_PARAMETERS # I like lots of parameters
       - NO_CAMEL_CASE # life's too short to ride camel-case identifiers.
-
 ```
 
 #### Example: call listed in a single directive section:
@@ -99,7 +98,6 @@ directive:
     suppress: # filter on event/messages
       - TOO_MANY_PARAMETERS # I like lots of parameters
       - NO_CAMEL_CASE # life's too short to ride camel-case identifiers.
-
 ```
 
 #### Example: Same thing, in JSON
