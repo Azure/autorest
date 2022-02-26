@@ -11,6 +11,7 @@ export interface Operation extends Aspect {
   /**
    * Original Operation ID if present.
    * This can be used to identify the original id of an operation before it is styled.
+   * THIS IS NOT the name of the operation that should be used in the generator. Use `.language.default.name` for this
    */
   operationId?: string;
 

@@ -609,7 +609,7 @@
       "type": "object",
       "properties": {
         "operationId": {
-          "description": "Original Operation ID if present.\nThis can be used to identify the original id of an operation before it is styled.",
+          "description": "Original Operation ID if present.\nThis can be used to identify the original id of an operation before it is styled.\nTHIS IS NOT the name of the operation that should be used in the generator. Use `.language.default.name` for this",
           "type": "string"
         },
         "parameters": {
