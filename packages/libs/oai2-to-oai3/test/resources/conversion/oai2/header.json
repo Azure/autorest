@@ -6,23 +6,15 @@
     "version": "1.0.0"
   },
   "host": "localhost:3000",
-  "schemes": [
-    "http"
-  ],
-  "produces": [
-    "application/json"
-  ],
-  "consumes": [
-    "application/json"
-  ],
+  "schemes": ["http"],
+  "produces": ["application/json"],
+  "consumes": ["application/json"],
   "paths": {
     "/header/param/existingkey": {
       "post": {
         "operationId": "header_paramExistingKey",
         "description": "Send a post request with header value \"User-Agent\": \"overwrite\"",
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "parameters": [
           {
             "description": "Send a post request with header value \"User-Agent\": \"overwrite\"",
@@ -49,9 +41,7 @@
       "post": {
         "operationId": "header_responseExistingKey",
         "description": "Get a response with header value \"User-Agent\": \"overwrite\"",
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "responses": {
           "200": {
             "description": "Empty Response",
@@ -75,9 +65,7 @@
       "post": {
         "operationId": "header_paramProtectedKey",
         "description": "Send a post request with header value \"Content-Type\": \"text/html\"",
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "parameters": [
           {
             "description": "Send a post request with header value \"Content-Type\": \"text/html\"",
@@ -104,9 +92,7 @@
       "post": {
         "operationId": "header_responseProtectedKey",
         "description": "Get a response with header value \"Content-Type\": \"text/html\"",
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "responses": {
           "200": {
             "description": "Empty Response",
@@ -130,9 +116,7 @@
       "post": {
         "operationId": "header_paramInteger",
         "description": "Send a post request with header values \"scenario\": \"positive\", \"value\": 1 or \"scenario\": \"negative\", \"value\": -2 ",
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "parameters": [
           {
             "description": "Send a post request with header values \"scenario\": \"positive\" or \"negative\"",
@@ -176,9 +160,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "responses": {
           "200": {
             "description": "Empty Response",
@@ -203,9 +185,7 @@
       "post": {
         "operationId": "header_paramLong",
         "description": "Send a post request with header values \"scenario\": \"positive\", \"value\": 105 or \"scenario\": \"negative\", \"value\": -2 ",
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "parameters": [
           {
             "description": "Send a post request with header values \"scenario\": \"positive\" or \"negative\"",
@@ -249,9 +229,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "responses": {
           "200": {
             "description": "Empty Response",
@@ -276,9 +254,7 @@
       "post": {
         "operationId": "header_paramFloat",
         "description": "Send a post request with header values \"scenario\": \"positive\", \"value\": 0.07 or \"scenario\": \"negative\", \"value\": -3.0",
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "parameters": [
           {
             "description": "Send a post request with header values \"scenario\": \"positive\" or \"negative\"",
@@ -322,9 +298,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "responses": {
           "200": {
             "description": "Empty Response",
@@ -349,9 +323,7 @@
       "post": {
         "operationId": "header_paramDouble",
         "description": "Send a post request with header values \"scenario\": \"positive\", \"value\": 7e120 or \"scenario\": \"negative\", \"value\": -3.0",
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "parameters": [
           {
             "description": "Send a post request with header values \"scenario\": \"positive\" or \"negative\"",
@@ -395,9 +367,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "responses": {
           "200": {
             "description": "Empty Response",
@@ -422,9 +392,7 @@
       "post": {
         "operationId": "header_paramBool",
         "description": "Send a post request with header values \"scenario\": \"true\", \"value\": true or \"scenario\": \"false\", \"value\": false",
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "parameters": [
           {
             "description": "Send a post request with header values \"scenario\": \"true\" or \"false\"",
@@ -467,9 +435,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "responses": {
           "200": {
             "description": "Empty Response",
@@ -493,9 +459,7 @@
       "post": {
         "operationId": "header_paramString",
         "description": "Send a post request with header values \"scenario\": \"valid\", \"value\": \"The quick brown fox jumps over the lazy dog\" or \"scenario\": \"null\", \"value\": null or \"scenario\": \"empty\", \"value\": \"\"",
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "parameters": [
           {
             "description": "Send a post request with header values \"scenario\": \"valid\" or \"null\" or \"empty\"",
@@ -538,9 +502,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "responses": {
           "200": {
             "description": "Empty Response",
@@ -564,9 +526,7 @@
       "post": {
         "operationId": "header_paramDate",
         "description": "Send a post request with header values \"scenario\": \"valid\", \"value\": \"2010-01-01\" or \"scenario\": \"min\", \"value\": \"0001-01-01\"",
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "parameters": [
           {
             "description": "Send a post request with header values \"scenario\": \"valid\" or \"min\"",
@@ -610,9 +570,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "responses": {
           "200": {
             "description": "Empty Response",
@@ -637,9 +595,7 @@
       "post": {
         "operationId": "header_paramDatetime",
         "description": "Send a post request with header values \"scenario\": \"valid\", \"value\": \"2010-01-01T12:34:56Z\" or \"scenario\": \"min\", \"value\": \"0001-01-01T00:00:00Z\"",
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "parameters": [
           {
             "description": "Send a post request with header values \"scenario\": \"valid\" or \"min\"",
@@ -683,9 +639,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "responses": {
           "200": {
             "description": "Empty Response",
@@ -710,9 +664,7 @@
       "post": {
         "operationId": "header_paramDatetimeRfc1123",
         "description": "Send a post request with header values \"scenario\": \"valid\", \"value\": \"Wed, 01 Jan 2010 12:34:56 GMT\" or \"scenario\": \"min\", \"value\": \"Mon, 01 Jan 0001 00:00:00 GMT\"",
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "parameters": [
           {
             "description": "Send a post request with header values \"scenario\": \"valid\" or \"min\"",
@@ -749,15 +701,13 @@
         "parameters": [
           {
             "description": "Send a post request with header values \"scenario\": \"valid\" or \"min\"",
-             "name": "scenario",
+            "name": "scenario",
             "in": "header",
             "type": "string",
             "required": true
           }
         ],
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "responses": {
           "200": {
             "description": "Empty Response",
@@ -782,9 +732,7 @@
       "post": {
         "operationId": "header_paramDuration",
         "description": "Send a post request with header values \"scenario\": \"valid\", \"value\": \"P123DT22H14M12.011S\"",
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "parameters": [
           {
             "description": "Send a post request with header values \"scenario\": \"valid\"",
@@ -819,9 +767,7 @@
       "post": {
         "operationId": "header_responseDuration",
         "description": "Get a response with header values \"P123DT22H14M12.011S\"",
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "parameters": [
           {
             "description": "Send a post request with header values \"scenario\": \"valid\"",
@@ -855,9 +801,7 @@
       "post": {
         "operationId": "header_paramByte",
         "description": "Send a post request with header values \"scenario\": \"valid\", \"value\": \"啊齄丂狛狜隣郎隣兀﨩\"",
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "parameters": [
           {
             "description": "Send a post request with header values \"scenario\": \"valid\"",
@@ -901,9 +845,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "responses": {
           "200": {
             "description": "Empty Response",
@@ -928,9 +870,7 @@
       "post": {
         "operationId": "header_paramEnum",
         "description": "Send a post request with header values \"scenario\": \"valid\", \"value\": \"GREY\" or \"scenario\": \"null\", \"value\": null",
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "parameters": [
           {
             "description": "Send a post request with header values \"scenario\": \"valid\" or \"null\" or \"empty\"",
@@ -944,8 +884,8 @@
             "name": "value",
             "in": "header",
             "type": "string",
-            "enum": [ "White", "black", "GREY" ],
-            "x-ms-enum": { "name": "GreyscaleColors", "modelAsString": false},
+            "enum": ["White", "black", "GREY"],
+            "x-ms-enum": { "name": "GreyscaleColors", "modelAsString": false },
             "required": false
           }
         ],
@@ -975,9 +915,7 @@
             "required": true
           }
         ],
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "responses": {
           "200": {
             "description": "Empty Response",
@@ -985,8 +923,8 @@
               "value": {
                 "description": "response with header values \"GREY\" or null",
                 "type": "string",
-                "enum": [ "White", "black", "GREY" ],
-                "x-ms-enum": { "name": "GreyscaleColors", "modelAsString": false}
+                "enum": ["White", "black", "GREY"],
+                "x-ms-enum": { "name": "GreyscaleColors", "modelAsString": false }
               }
             }
           },
@@ -1003,9 +941,7 @@
       "post": {
         "operationId": "header_customRequestId",
         "description": "Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request",
-        "tags": [
-          "Header Operations"
-        ],
+        "tags": ["Header Operations"],
         "responses": {
           "200": {
             "description": "Empty Response indicates that x-ms-client-request-id was successfuly received"
@@ -1022,7 +958,7 @@
   },
   "definitions": {
     "Error": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "status": {
           "type": "integer",

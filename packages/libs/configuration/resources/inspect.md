@@ -1,7 +1,6 @@
 # Inspect Configuration (extended pipeline)
 
-
-``` yaml $(inspector)
+```yaml $(inspector)
 pipeline-model: v3
 inspector:
   output-folder: inspector
@@ -65,10 +64,9 @@ pipeline:
     is-object: true
 
 output-artifact: inspect-document
-
 ```
 
-``` yaml $(output-oai3)
+```yaml $(output-oai3)
 pipeline-model: v3
 
 pipeline:
@@ -81,5 +79,4 @@ pipeline:
     is-object: true
 
 output-artifact: oai3-document
-
 ```

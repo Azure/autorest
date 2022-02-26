@@ -7,14 +7,14 @@ test, and publish an extension for AutoRest v3.
 
 ### Extension Packaging
 
-AutoRest extensions are delivered via Node.js' `npm` ecosystem.  No matter which
+AutoRest extensions are delivered via Node.js' `npm` ecosystem. No matter which
 language you use to write your AutoRest extension, you must create a
 `package.json` file which provides the necessary metadata to AutoRest and
 enables it to be shipped via `npm`.
 
 The most important part of the `package.json` file will be the `scripts` section
 because the `install` and `start` commands will be used by AutoRest to set up
-and run your extension.  Here's a boilerplate `package.json` example that you
+and run your extension. Here's a boilerplate `package.json` example that you
 can use as a starting point:
 
 #### Example `package.json`
@@ -48,12 +48,13 @@ more fields that you use to can supply additional information.
 Autorest can automatically check for command line executable to be availaible in the path to ensure the start command succeed.
 
 Schema:
+
 ```json
 {
   "systemRequirements": {
     "<exe-name>": {
       "version": "<version-requirement [optional]>",
-      "environmentVariable": "<environment variable name [optional]>",
+      "environmentVariable": "<environment variable name [optional]>"
     }
   }
 }
@@ -65,10 +66,10 @@ Schema:
 | `version`             | Optional  | This is the version requirement for the executable. It is only supported for [known commands](#known-commands)                                 | `>=3.6`                    |
 | `environmentVariable` | Optional  | This is a name of an environment variable where the extension could expect the user to configure the path to the exe to use for this extension | `AUTOREST_PYTHON_EXE_PATH` |
 
-
 ##### Known commands
 
 This is a list of known commands that will be able to retrieve the version of.
+
 - `dotnet`
 - `java`
 - `python`: Python(only python 3+) will automatically look for `py`, `python3` and `python` for a compatible version.
@@ -78,23 +79,23 @@ This is a list of known commands that will be able to retrieve the version of.
 You can consume the `@azure-tools/extension` package to use any of the `resolveXYZRequirement` to get the same results and/or get the path to the command.
 
 ```ts
-import {resolvePythonRequirement} from "@azure-tools/extensions"
+import { resolvePythonRequirement } from "@azure-tools/extensions";
 
-const resolution = await resolvePythonRequirement({version: ">=3.6"});
-if(resolution.error) {
-  console.error("Error", resolution)
+const resolution = await resolvePythonRequirement({ version: ">=3.6" });
+if (resolution.error) {
+  console.error("Error", resolution);
 } else {
-  console.log("Command for python 3.6 is:", resolution.command)
+  console.log("Command for python 3.6 is:", resolution.command);
 }
 ```
 
 ### RPC Channel
 
 AutoRest uses [JSON-RPC](https://www.jsonrpc.org/specification) to communicate
-with AutoRest extensions that are loaded into the pipeline.  When AutoRest
+with AutoRest extensions that are loaded into the pipeline. When AutoRest
 starts your extension process via the `start` script of your `package.json`, it
 will expect to communicate via JSON-RPC over the standard input and output
-(`stdin`/`stdout`) streams of your process.  Messages sent by AutoRest will be
+(`stdin`/`stdout`) streams of your process. Messages sent by AutoRest will be
 read by the extension from `stdin` and messages sent to AutoRest should be
 written to `stdout`.
 
@@ -110,12 +111,11 @@ Here's the general process of how AutoRest will communicate with your extension:
 1. AutoRest will run through the pipeline, and once it reaches the phase for your extension, it will run `npm run start` which invokes the command in your `package.json` as described above.
 2. AutoRest will attach to `stdio` and `stdout` of your process to establish the RPC channel
 3. AutoRest will send the `GetPluginNames` request which should be responded to with the plugin name(s) your extension provides (typically a name like `python` or whatever language you are providing a generator for)
-4. AutoRest will send a `Process` message to your extension for the plugin it wants to launch, providing a `sessionId` to be used for all future messages.  **Do not** respond to this message yet!  AutoRest uses the response to determine when the extension has finished processing files.
-5. Your extension *may* send a `ListFiles` request to find the file(s) it needs to process (you can skip this step if you will just be asking for `@autorest/modelerfour`'s `code-model-v4.yaml`).
+4. AutoRest will send a `Process` message to your extension for the plugin it wants to launch, providing a `sessionId` to be used for all future messages. **Do not** respond to this message yet! AutoRest uses the response to determine when the extension has finished processing files.
+5. Your extension _may_ send a `ListFiles` request to find the file(s) it needs to process (you can skip this step if you will just be asking for `@autorest/modelerfour`'s `code-model-v4.yaml`).
 6. Your extension will send a `ReadFile` request to read the specific file it wants to process (ask for `code-model-v4.yaml` if writing an AutoRest v3 language generator).
-7. Your extension will build its output files based on the code model and then send `WriteFile` notifications for each file that should be written to the output folder.  You can send as many `WriteFile` notifications you like at any time, no need to wait for a response.
+7. Your extension will build its output files based on the code model and then send `WriteFile` notifications for each file that should be written to the output folder. You can send as many `WriteFile` notifications you like at any time, no need to wait for a response.
 8. Once your extension is finished writing output files, it should send a response to the `Process` request and then exit with a code of `0`.
-
 
 ### Extension Messages
 
@@ -154,7 +154,6 @@ containing a single string, the name of the plugin that you register in the
 }
 ```
 
-
 #### `Process` Request
 
 The `Process` message is sent to the extension to initiate processing of its
@@ -163,7 +162,7 @@ inputs.
 ##### Parameters
 
 - `pluginName` - A string representing the name of the plugin to launch, typically the one you registered in your extension configuration.
-- `sessionId` - A string representing the unique ID of the AutoRest session.  This should be sent back to AutoRest as a parameter in requests or notifications.
+- `sessionId` - A string representing the unique ID of the AutoRest session. This should be sent back to AutoRest as a parameter in requests or notifications.
 
 ##### Example
 
@@ -321,12 +320,11 @@ The `Message` message notifies AutoRest to write out a message to the execution 
 - `sessionId` - The sessionId that was provided in the `Process` request
 - `message` - The message object having the structure described below
 
-
 ##### `Message` object structure
 
 The `Message` object is a JSON object with the following fields:
 
-- `Channel` - The 'channel' to which the message will be logged.  It must be one of the following strings:
+- `Channel` - The 'channel' to which the message will be logged. It must be one of the following strings:
   - `information` - For informational purposes, not actionable
   - `hint` - For informational purposes, not actionable
   - `warning` - Considered important but not fatal

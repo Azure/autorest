@@ -2,7 +2,7 @@
 
 `autorest-compare` provides a regression testing tool which can compare the
 output of two AutoRest runs to determine whether there are any material changes
-to the generated source for a given service spec.  Comparisons can be made between:
+to the generated source for a given service spec. Comparisons can be made between:
 
 - Versions of the AutoRest CLI (v2 versus v3)
 - Versions of AutoRest Core
@@ -48,7 +48,7 @@ npm install --global windows-build-tools
 
 ### Linux
 
-Install gcc and  . For Debian/Ubuntu, the following command should work:
+Install gcc and . For Debian/Ubuntu, the following command should work:
 
 ```shell
 sudo apt-get install build-essential python
@@ -56,7 +56,7 @@ sudo apt-get install build-essential python
 
 ### macOS
 
-On macOS, Python should be installed by default.  The C/C++ compiler can be
+On macOS, Python should be installed by default. The C/C++ compiler can be
 installed with XCode by running the following command:
 
 ```shell
@@ -66,9 +66,9 @@ xcode-select --install
 ## Running `autorest-compare`
 
 Running `autorest-compare --help` will display the list of arguments you might
-wish to use.  Specific usage scenarios are described in the following sections.
+wish to use. Specific usage scenarios are described in the following sections.
 
-* Comparing the Python output between two versions of `@autorest/modelerfour`:
+- Comparing the Python output between two versions of `@autorest/modelerfour`:
 
   ```shell
   autorest-compare --compare --language:python --spec-path:path/to/spec.json \
@@ -77,7 +77,7 @@ wish to use.  Specific usage scenarios are described in the following sections.
     --new-args --use:@autorest/modelerfour@4.1.60
   ```
 
-* Comparing the TypeScript output of generating a set of specs in the
+- Comparing the TypeScript output of generating a set of specs in the
   `azure-rest-api-specs` repository between AutoRest v2 and AutoRest v3:
 
   ```shell
@@ -97,10 +97,9 @@ wish to use.  Specific usage scenarios are described in the following sections.
 
 > TODO: Fill this in.
 
-
 # Contributing
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
+This project welcomes contributions and suggestions. Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
 the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
 

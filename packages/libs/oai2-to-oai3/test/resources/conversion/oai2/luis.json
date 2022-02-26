@@ -86,9 +86,7 @@
             "type": "boolean"
           }
         ],
-        "consumes": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
         "responses": {
           "200": {
             "description": "Prediction, based on the input query, containing intent(s) and entities.",
@@ -103,9 +101,7 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "x-ms-examples": {
           "Successful Get Predictions From Endpoint Via Post request": {
             "parameters": {
@@ -156,9 +152,7 @@
                       "startIndex": 36,
                       "endIndex": 39,
                       "resolution": {
-                        "values": [
-                          "BankeName"
-                        ]
+                        "values": ["BankeName"]
                       }
                     }
                   ],
@@ -245,11 +239,7 @@
           }
         }
       },
-      "required": [
-        "parentType",
-        "value",
-        "children"
-      ]
+      "required": ["parentType", "value", "children"]
     },
     "CompositeChildModel": {
       "description": "Child entity in a LUIS Composite Entity.",
@@ -264,10 +254,7 @@
           "description": "Value extracted by LUIS."
         }
       },
-      "required": [
-        "type",
-        "value"
-      ]
+      "required": ["type", "value"]
     },
     "IntentModel": {
       "description": "An intent detected from the utterance.",
@@ -310,12 +297,7 @@
         "type": "object",
         "description": "List of additional properties. For example, score and resolution values for pre-built LUIS entities."
       },
-      "required": [
-        "entity",
-        "type",
-        "startIndex",
-        "endIndex"
-      ]
+      "required": ["entity", "type", "startIndex", "endIndex"]
     },
     "EntityWithScore": {
       "allOf": [
@@ -332,9 +314,7 @@
               "description": "Associated prediction score for the intent (float)."
             }
           },
-          "required": [
-            "score"
-          ]
+          "required": ["score"]
         }
       ]
     },
@@ -351,9 +331,7 @@
               "description": "Resolution values for pre-built LUIS entities."
             }
           },
-          "required": [
-            "resolution"
-          ]
+          "required": ["resolution"]
         }
       ]
     },

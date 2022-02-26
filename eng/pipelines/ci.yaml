@@ -30,6 +30,9 @@ stages:
               summaryFileLocation: $(Build.SourcesDirectory)/packages/**/coverage/cobertura-coverage.xml
               reportDirectory: $(Build.SourcesDirectory)/packages/**/coverage
 
+          - script: npx @microsoft/rush check-format
+            displayName: Check formatting
+
           - script: npx @microsoft/rush lint -v
             displayName: Lint
 

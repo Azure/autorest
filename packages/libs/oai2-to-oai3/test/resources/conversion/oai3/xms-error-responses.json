@@ -160,9 +160,7 @@
             "$ref": "#/components/schemas/BaseError"
           }
         ],
-        "required": [
-          "whatNotFound"
-        ],
+        "required": ["whatNotFound"],
         "discriminator": {
           "propertyName": "whatNotFound"
         }
@@ -224,9 +222,7 @@
             "description": "the error message"
           }
         },
-        "required": [
-          "errorType"
-        ],
+        "required": ["errorType"],
         "discriminator": {
           "propertyName": "errorType"
         }

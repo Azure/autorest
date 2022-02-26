@@ -6,9 +6,7 @@
     "description": "PetStore"
   },
   "host": "localhost:3000",
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/extensibleenums/pet/{petId}": {
       "get": {
@@ -26,12 +24,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/extensibleenums/pet/addPet": {
@@ -54,12 +48,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     }
   },
@@ -73,15 +63,7 @@
         "DaysOfWeek": {
           "type": "string",
           "description": "Type of Pet",
-          "enum": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday"
-          ],
+          "enum": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
           "x-ms-enum": {
             "name": "DaysOfWeekExtensibleEnum",
             "modelAsString": true
@@ -91,11 +73,7 @@
         "IntEnum": {
           "type": "string",
           "description": "",
-          "enum": [
-            "1",
-            "2",
-            "3"
-          ],
+          "enum": ["1", "2", "3"],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "IntEnum",
@@ -104,37 +82,25 @@
                 "value": "1",
                 "description": "one",
                 "name": "1",
-                "allowedValues": [
-                  "1.1",
-                  "1.2",
-                  "1.3"
-                ]
+                "allowedValues": ["1.1", "1.2", "1.3"]
               },
               {
                 "value": "2",
                 "description": "two",
                 "name": "2",
-                "allowedValues": [
-                  "2.1",
-                  "2.2"
-                ]
+                "allowedValues": ["2.1", "2.2"]
               },
               {
                 "value": "3",
                 "description": "three",
                 "name": "3",
-                "allowedValues": [
-                  "3.1",
-                  "3.3"
-                ]
+                "allowedValues": ["3.1", "3.3"]
               }
             ]
           }
         }
       },
-      "required": [
-        "IntEnum"
-      ]
+      "required": ["IntEnum"]
     }
   },
   "parameters": {

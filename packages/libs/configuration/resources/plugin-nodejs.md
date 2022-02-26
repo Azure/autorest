@@ -2,9 +2,8 @@
 
 The V2 version of the NodeJS Generator.
 
-
-``` yaml $(nodejs) && $(preview) && !isRequested('@autorest/nodejs')
-# default the v2 generator to using the last stable @microsoft.azure/autorest-core 
+```yaml $(nodejs) && $(preview) && !isRequested('@autorest/nodejs')
+# default the v2 generator to using the last stable @microsoft.azure/autorest-core
 version: ~2.0.4413
 
 use-extension:
@@ -12,8 +11,8 @@ use-extension:
 try-require: ./readme.nodejs.md
 ```
 
-``` yaml $(nodejs) && !isRequested('@autorest/nodejs')
-# default the v2 generator to using the last stable @microsoft.azure/autorest-core 
+```yaml $(nodejs) && !isRequested('@autorest/nodejs')
+# default the v2 generator to using the last stable @microsoft.azure/autorest-core
 version: ~2.0.4413
 
 use-extension:

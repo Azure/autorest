@@ -6,9 +6,10 @@ functionality to deduplicate elements in OpenAPI 3 documents.
 (development-in-progress)
 
 Including:
+
 - deduplication of components in OpenAPI documents.
 
-----
+---
 
 # Contributing
 

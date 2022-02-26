@@ -23,8 +23,7 @@ interface BaseInterface {}
 export interface AnotherInterface extends BaseInterface {}
 
 class BaseClass {}
-export class ExportedClass extends BaseClass
-  implements SomeInterface, AnotherInterface {}
+export class ExportedClass extends BaseClass implements SomeInterface, AnotherInterface {}
 
 export type SomeUnion = "red" | "green" | "brurple";
 

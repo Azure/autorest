@@ -4,51 +4,49 @@
 
 ## First Chapter
 
-``` yaml $(42 == 3 + 39)
+```yaml $(42 == 3 + 39)
 true0: true
 ```
 
-``` yaml
+```yaml
 true1: true
 ```
 
-``` yaml $(42 == 3 + 38)
+```yaml $(42 == 3 + 38)
 true1: false
 ```
 
-``` yaml $(cmd-line-true)
+```yaml $(cmd-line-true)
 true2: true
 ```
 
-``` yaml $(cmd-line-false)
+```yaml $(cmd-line-false)
 true2: false
 ```
 
-``` yaml $($["cmd-line-complex"].true)
+```yaml $($["cmd-line-complex"].true)
 true3: true
 ```
 
-``` yaml $($["cmd-line-complex"].false)
+```yaml $($["cmd-line-complex"].false)
 true3: false
 ```
 
-``` yaml $(true0 && true1 && true2 && true3)
+```yaml $(true0 && true1 && true2 && true3)
 true4: true
 ```
 
-``` yaml $(true4)
+```yaml $(true4)
 azure-validator: true
 openapi-type: arm
 input-file:
-- swagger.md
+  - swagger.md
 ```
 
-``` yaml !$(notdefined)  
+```yaml !$(notdefined)
 shouldwork: true
-
 ```
 
-``` yaml $(notdefined)  
+```yaml $(notdefined)
 shouldnotwork: true
-
 ```

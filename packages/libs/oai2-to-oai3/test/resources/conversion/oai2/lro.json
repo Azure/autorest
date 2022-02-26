@@ -6,18 +6,14 @@
     "description": "Long-running Operation for AutoRest"
   },
   "host": "localhost:3000",
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/lro/put/200/succeeded": {
       "put": {
         "x-ms-long-running-operation": true,
         "operationId": "LROs_put200Succeeded",
         "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -45,12 +41,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/put/200/succeeded/nostate": {
@@ -58,9 +50,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_put200SucceededNoState",
         "description": "Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -85,12 +75,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/put/202/retry/200": {
@@ -98,9 +84,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_put202Retry200",
         "description": "Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -125,12 +109,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/put/201/creating/succeeded/200": {
@@ -138,9 +118,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_put201CreatingSucceeded200",
         "description": "Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -171,12 +149,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/put/200/updating/succeeded/200": {
@@ -184,9 +158,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_put200UpdatingSucceeded204",
         "description": "Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -211,12 +183,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/put/201/created/failed/200": {
@@ -224,9 +192,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_put201CreatingFailed200",
         "description": "Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -257,12 +223,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/put/200/accepted/canceled/200": {
@@ -270,9 +232,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_put200Acceptedcanceled200",
         "description": "Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -297,12 +257,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/put/noheader/202/200": {
@@ -310,9 +266,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_putNoHeaderInRetry",
         "description": "Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.",
-        "tags": [
-          "LROs Operations"
-        ],
+        "tags": ["LROs Operations"],
         "parameters": [
           {
             "name": "product",
@@ -343,12 +297,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/putasync/retry/succeeded": {
@@ -356,9 +306,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_putAsyncRetrySucceeded",
         "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -398,12 +346,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/putasync/noretry/succeeded": {
@@ -411,9 +355,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_putAsyncNoRetrySucceeded",
         "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -448,12 +390,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/putasync/retry/failed": {
@@ -461,9 +399,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_putAsyncRetryFailed",
         "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -503,12 +439,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/putasync/noretry/canceled": {
@@ -516,9 +448,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_putAsyncNoRetrycanceled",
         "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -553,12 +483,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/putasync/noheader/201/200": {
@@ -566,9 +492,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_putAsyncNoHeaderInRetry",
         "description": "Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.",
-        "tags": [
-          "LROs Operations"
-        ],
+        "tags": ["LROs Operations"],
         "parameters": [
           {
             "name": "product",
@@ -598,12 +522,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/putnonresource/202/200": {
@@ -611,9 +531,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_putNonResource",
         "description": "Long running put request with non resource.",
-        "tags": [
-          "LROs Operations"
-        ],
+        "tags": ["LROs Operations"],
         "parameters": [
           {
             "name": "sku",
@@ -638,12 +556,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/putnonresourceasync/202/200": {
@@ -651,9 +565,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_putAsyncNonResource",
         "description": "Long running put request with non resource.",
-        "tags": [
-          "LROs Operations"
-        ],
+        "tags": ["LROs Operations"],
         "parameters": [
           {
             "name": "sku",
@@ -678,12 +590,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/putsubresource/202/200": {
@@ -691,9 +599,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_putSubResource",
         "description": "Long running put request with sub resource.",
-        "tags": [
-          "LROs Operations"
-        ],
+        "tags": ["LROs Operations"],
         "parameters": [
           {
             "name": "product",
@@ -718,12 +624,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/putsubresourceasync/202/200": {
@@ -731,9 +633,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_putAsyncSubResource",
         "description": "Long running put request with sub resource.",
-        "tags": [
-          "LROs Operations"
-        ],
+        "tags": ["LROs Operations"],
         "parameters": [
           {
             "name": "product",
@@ -758,12 +658,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/delete/provisioning/202/accepted/200/succeeded": {
@@ -771,9 +667,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_deleteProvisioning202Accepted200Succeeded",
         "description": "Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "responses": {
           "200": {
             "description": "Response after completion, with ProvisioningState='Succeeded'",
@@ -805,12 +699,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/delete/provisioning/202/deleting/200/failed": {
@@ -818,9 +708,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_deleteProvisioning202DeletingFailed200",
         "description": "Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "responses": {
           "200": {
             "description": "Initial response with ProvisioningState='Updating'",
@@ -852,12 +740,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/delete/provisioning/202/deleting/200/canceled": {
@@ -865,9 +749,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_deleteProvisioning202Deletingcanceled200",
         "description": "Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "responses": {
           "200": {
             "description": "Initial response with ProvisioningState='Updating'",
@@ -899,12 +781,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/delete/204/succeeded": {
@@ -912,9 +790,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_delete204Succeeded",
         "description": "Long running delete succeeds and returns right away",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "responses": {
           "204": {
             "description": "Response after completion, with ProvisioningState='Succeeded'"
@@ -926,12 +802,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/delete/202/retry/200": {
@@ -939,9 +811,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_delete202Retry200",
         "description": "Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "responses": {
           "200": {
             "description": "Response after completion, with ProvisioningState='Succeeded'",
@@ -970,12 +840,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/delete/202/noretry/204": {
@@ -983,9 +849,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_delete202NoRetry204",
         "description": "Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "responses": {
           "200": {
             "description": "Response after completion, with ProvisioningState='Succeeded'",
@@ -1014,12 +878,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/delete/noheader": {
@@ -1027,9 +887,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_deleteNoHeaderInRetry",
         "description": "Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "responses": {
           "204": {
             "description": "Response after completion"
@@ -1050,12 +908,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/deleteasync/noheader/202/204": {
@@ -1063,9 +917,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_deleteAsyncNoHeaderInRetry",
         "description": "Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "responses": {
           "204": {
             "description": "Response after completion"
@@ -1086,12 +938,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/deleteasync/retry/succeeded": {
@@ -1099,9 +947,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_deleteAsyncRetrySucceeded",
         "description": "Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "responses": {
           "202": {
             "description": "Initial response with ProvisioningState='Updating'",
@@ -1128,12 +974,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/deleteasync/noretry/succeeded": {
@@ -1141,9 +983,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_deleteAsyncNoRetrySucceeded",
         "description": "Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "responses": {
           "202": {
             "description": "Initial response with ProvisioningState='Updating'",
@@ -1170,12 +1010,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/deleteasync/retry/failed": {
@@ -1183,9 +1019,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_deleteAsyncRetryFailed",
         "description": "Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "responses": {
           "202": {
             "description": "Initial response with ProvisioningState='Updating'",
@@ -1212,12 +1046,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/deleteasync/retry/canceled": {
@@ -1225,9 +1055,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_deleteAsyncRetrycanceled",
         "description": "Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "responses": {
           "202": {
             "description": "Initial response with ProvisioningState='Updating'",
@@ -1254,12 +1082,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/post/payload/200": {
@@ -1267,9 +1091,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_post200WithPayload",
         "description": "Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "responses": {
           "202": {
             "description": "Initial response, with ProvisioningState = 'Creating'",
@@ -1290,12 +1112,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/post/202/retry/200": {
@@ -1303,9 +1121,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_post202Retry200",
         "description": "Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -1338,12 +1154,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/post/202/noretry/204": {
@@ -1351,9 +1163,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_post202NoRetry204",
         "description": "Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -1389,12 +1199,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/LROPostDoubleHeadersFinalLocationGet": {
@@ -1405,9 +1211,7 @@
         },
         "operationId": "LROs_postDoubleHeadersFinalLocationGet",
         "description": "Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "responses": {
           "202": {
             "description": "Response after completion.",
@@ -1422,12 +1226,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/LROPostDoubleHeadersFinalAzureHeaderGet": {
@@ -1438,9 +1238,7 @@
         },
         "operationId": "LROs_postDoubleHeadersFinalAzureHeaderGet",
         "description": "Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "responses": {
           "202": {
             "description": "Response after completion.",
@@ -1455,12 +1253,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/LROPostDoubleHeadersFinalAzureHeaderGetDefault": {
@@ -1468,9 +1262,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_postDoubleHeadersFinalAzureHeaderGetDefault",
         "description": "Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object if you support initial Autorest behavior.",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "responses": {
           "202": {
             "description": "Response after completion.",
@@ -1485,12 +1277,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/postasync/retry/succeeded": {
@@ -1498,9 +1286,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_postAsyncRetrySucceeded",
         "description": "Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -1543,12 +1329,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/postasync/noretry/succeeded": {
@@ -1556,9 +1338,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_postAsyncNoRetrySucceeded",
         "description": "Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -1601,12 +1381,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/postasync/retry/failed": {
@@ -1614,9 +1390,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_postAsyncRetryFailed",
         "description": "Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -1653,12 +1427,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/postasync/retry/canceled": {
@@ -1666,9 +1436,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROs_postAsyncRetrycanceled",
         "description": "Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -1705,12 +1473,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/retryerror/put/201/creating/succeeded/200": {
@@ -1718,9 +1482,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LRORetrys_put201CreatingSucceeded200",
         "description": "Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
-        "tags": [
-          "LRORetry Operations"
-        ],
+        "tags": ["LRORetry Operations"],
         "parameters": [
           {
             "name": "product",
@@ -1751,12 +1513,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/retryerror/putasync/retry/succeeded": {
@@ -1764,9 +1522,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LRORetrys_putAsyncRelativeRetrySucceeded",
         "description": "Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRORetry Operations"
-        ],
+        "tags": ["LRORetry Operations"],
         "parameters": [
           {
             "name": "product",
@@ -1806,12 +1562,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/retryerror/delete/provisioning/202/accepted/200/succeeded": {
@@ -1819,9 +1571,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LRORetrys_deleteProvisioning202Accepted200Succeeded",
         "description": "Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
-        "tags": [
-          "LRORetry Operations"
-        ],
+        "tags": ["LRORetry Operations"],
         "responses": {
           "200": {
             "description": "Response after completion, with ProvisioningState='Succeeded'",
@@ -1853,12 +1603,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/retryerror/delete/202/retry/200": {
@@ -1866,9 +1612,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LRORetrys_delete202Retry200",
         "description": "Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
-        "tags": [
-          "LRORetry Operations"
-        ],
+        "tags": ["LRORetry Operations"],
         "responses": {
           "202": {
             "description": "Initial response, with no entity body",
@@ -1891,12 +1635,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/retryerror/deleteasync/retry/succeeded": {
@@ -1904,9 +1644,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LRORetrys_deleteAsyncRelativeRetrySucceeded",
         "description": "Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRORetry Operations"
-        ],
+        "tags": ["LRORetry Operations"],
         "responses": {
           "202": {
             "description": "Initial response with ProvisioningState='Updating'",
@@ -1933,12 +1671,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/retryerror/post/202/retry/200": {
@@ -1946,9 +1680,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LRORetrys_post202Retry200",
         "description": "Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success",
-        "tags": [
-          "LRORetry Operations"
-        ],
+        "tags": ["LRORetry Operations"],
         "parameters": [
           {
             "name": "product",
@@ -1981,12 +1713,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/retryerror/postasync/retry/succeeded": {
@@ -1994,9 +1722,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LRORetrys_postAsyncRelativeRetrySucceeded",
         "description": "Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRORetry Operations"
-        ],
+        "tags": ["LRORetry Operations"],
         "parameters": [
           {
             "name": "product",
@@ -2033,12 +1759,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/nonretryerror/put/400": {
@@ -2046,9 +1768,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_putNonRetry400",
         "description": "Long running put request, service returns a 400 to the initial request",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "parameters": [
           {
             "name": "product",
@@ -2079,12 +1799,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/nonretryerror/put/201/creating/400": {
@@ -2092,9 +1808,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_putNonRetry201Creating400",
         "description": "Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "parameters": [
           {
             "name": "product",
@@ -2125,12 +1839,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/nonretryerror/put/201/creating/400/invalidjson": {
@@ -2138,9 +1848,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_putNonRetry201Creating400InvalidJson",
         "description": "Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "parameters": [
           {
             "name": "product",
@@ -2171,12 +1879,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/nonretryerror/putasync/retry/400": {
@@ -2184,9 +1888,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_putAsyncRelativeRetry400",
         "description": "Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "parameters": [
           {
             "name": "product",
@@ -2226,12 +1928,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/nonretryerror/delete/400": {
@@ -2239,9 +1937,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_deleteNonRetry400",
         "description": "Long running delete request, service returns a 400 with an error body",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "responses": {
           "202": {
             "description": "Initial response, with no entity body",
@@ -2264,12 +1960,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/nonretryerror/delete/202/retry/400": {
@@ -2277,9 +1969,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_delete202NonRetry400",
         "description": "Long running delete request, service returns a 202 with a location header",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "responses": {
           "202": {
             "description": "Initial response, with no entity body",
@@ -2302,12 +1992,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/nonretryerror/deleteasync/retry/400": {
@@ -2315,9 +2001,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_deleteAsyncRelativeRetry400",
         "description": "Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "responses": {
           "202": {
             "description": "For completion only will not return",
@@ -2344,12 +2028,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/nonretryerror/post/400": {
@@ -2357,9 +2037,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_postNonRetry400",
         "description": "Long running post request, service returns a 400 with no error body",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "parameters": [
           {
             "name": "product",
@@ -2392,12 +2070,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/nonretryerror/post/202/retry/400": {
@@ -2405,9 +2079,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_post202NonRetry400",
         "description": "Long running post request, service returns a 202 with a location header",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "parameters": [
           {
             "name": "product",
@@ -2440,12 +2112,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/nonretryerror/postasync/retry/400": {
@@ -2453,9 +2121,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_postAsyncRelativeRetry400",
         "description": "Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "parameters": [
           {
             "name": "product",
@@ -2492,12 +2158,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/error/put/201/noprovisioningstatepayload": {
@@ -2505,9 +2167,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_putError201NoProvisioningStatePayload",
         "description": "Long running put request, service returns a 201 to the initial request with no payload",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "parameters": [
           {
             "name": "product",
@@ -2538,12 +2198,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/error/putasync/retry/nostatus": {
@@ -2551,9 +2207,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_putAsyncRelativeRetryNoStatus",
         "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "parameters": [
           {
             "name": "product",
@@ -2593,12 +2247,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/error/putasync/retry/nostatuspayload": {
@@ -2606,9 +2256,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_putAsyncRelativeRetryNoStatusPayload",
         "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "parameters": [
           {
             "name": "product",
@@ -2648,12 +2296,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/error/delete/204/nolocation": {
@@ -2661,9 +2305,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_delete204Succeeded",
         "description": "Long running delete request, service returns a 204 to the initial request, indicating success.",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "responses": {
           "204": {
             "description": "Final response"
@@ -2675,12 +2317,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/error/deleteasync/retry/nostatus": {
@@ -2688,9 +2326,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_deleteAsyncRelativeRetryNoStatus",
         "description": "Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "responses": {
           "202": {
             "description": "Initial response with ProvisioningState='Updating'",
@@ -2717,12 +2353,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/error/post/202/nolocation": {
@@ -2730,9 +2362,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_post202NoLocation",
         "description": "Long running post request, service returns a 202 to the initial request, without a location header.",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "parameters": [
           {
             "name": "product",
@@ -2765,12 +2395,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/error/postasync/retry/nopayload": {
@@ -2778,9 +2404,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_postAsyncRelativeRetryNoPayload",
         "description": "Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "parameters": [
           {
             "name": "product",
@@ -2817,12 +2441,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/error/put/200/invalidjson": {
@@ -2830,9 +2450,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_put200InvalidJson",
         "description": "Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "parameters": [
           {
             "name": "product",
@@ -2860,12 +2478,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/error/putasync/retry/invalidheader": {
@@ -2873,9 +2487,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_putAsyncRelativeRetryInvalidHeader",
         "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "parameters": [
           {
             "name": "product",
@@ -2915,12 +2527,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/error/putasync/retry/invalidjsonpolling": {
@@ -2928,9 +2536,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_putAsyncRelativeRetryInvalidJsonPolling",
         "description": "Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "parameters": [
           {
             "name": "product",
@@ -2970,12 +2576,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/error/delete/202/retry/invalidheader": {
@@ -2983,9 +2585,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_delete202RetryInvalidHeader",
         "description": "Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "responses": {
           "202": {
             "description": "Initial response, with no entity body",
@@ -3008,12 +2608,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/error/deleteasync/retry/invalidheader": {
@@ -3021,9 +2617,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_deleteAsyncRelativeRetryInvalidHeader",
         "description": "Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "responses": {
           "202": {
             "description": "Initial response with ProvisioningState='Updating'",
@@ -3050,12 +2644,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/error/deleteasync/retry/invalidjsonpolling": {
@@ -3063,9 +2653,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_deleteAsyncRelativeRetryInvalidJsonPolling",
         "description": "Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "responses": {
           "202": {
             "description": "Initial response with ProvisioningState='Updating'",
@@ -3092,12 +2680,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/error/post/202/retry/invalidheader": {
@@ -3105,9 +2689,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_post202RetryInvalidHeader",
         "description": "Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "parameters": [
           {
             "name": "product",
@@ -3140,12 +2722,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/error/postasync/retry/invalidheader": {
@@ -3153,9 +2731,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_postAsyncRelativeRetryInvalidHeader",
         "description": "Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "parameters": [
           {
             "name": "product",
@@ -3192,12 +2768,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/error/postasync/retry/invalidjsonpolling": {
@@ -3205,9 +2777,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROSADs_postAsyncRelativeRetryInvalidJsonPolling",
         "description": "Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LROSAD Operations"
-        ],
+        "tags": ["LROSAD Operations"],
         "parameters": [
           {
             "name": "product",
@@ -3244,12 +2814,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/customheader/putasync/retry/succeeded": {
@@ -3257,9 +2823,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROsCustomHeader_putAsyncRetrySucceeded",
         "description": "x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -3299,12 +2863,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/customheader/put/201/creating/succeeded/200": {
@@ -3312,9 +2872,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROsCustomHeader_put201CreatingSucceeded200",
         "description": "x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -3345,12 +2903,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/customheader/post/202/retry/200": {
@@ -3358,9 +2912,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROsCustomHeader_post202Retry200",
         "description": "x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -3393,12 +2945,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/lro/customheader/postasync/retry/succeeded": {
@@ -3406,9 +2954,7 @@
         "x-ms-long-running-operation": true,
         "operationId": "LROsCustomHeader_postAsyncRetrySucceeded",
         "description": "x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status",
-        "tags": [
-          "LRO Operations"
-        ],
+        "tags": ["LRO Operations"],
         "parameters": [
           {
             "name": "product",
@@ -3445,12 +2991,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     }
   },

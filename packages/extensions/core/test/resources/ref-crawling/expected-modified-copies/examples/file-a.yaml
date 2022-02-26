@@ -1,7 +1,0 @@
-x-ms-secondary-file: true
-external-ref-1:
-  - $ref: 'https://raw.githubusercontent.com/Azure/autorest/b39cc11e2577662c97a47511a08665fa6e4d712d/src/autorest-core/test/resources/ref-crawling/original-files/examples/file-b.yaml'
-external-ref-2:
-  $ref: 'https://raw.githubusercontent.com/Azure/autorest/b39cc11e2577662c97a47511a08665fa6e4d712d/src/autorest-core/test/resources/ref-crawling/original-files/examples/file-c.yaml#hello/hello'
-local-reference:
-  $ref: 'https://raw.githubusercontent.com/Azure/autorest/b39cc11e2577662c97a47511a08665fa6e4d712d/src/autorest-core/test/resources/ref-crawling/original-files/examples/file-a.yaml#external-ref-1'
