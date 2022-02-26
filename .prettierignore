@@ -321,3 +321,16 @@ dist
 schema/
 Samples/
 core/test/resources/
+
+# This file isnt' actually yaml
+regression-tests/smoke-tests.yaml
+
+# Generated codemodel
+packages/libs/codemodel/.resources
+
+# Scenario tests
+**/*.snap.json
+**/*.snap.yaml
+**/test/scenarios/expected/**/*.yaml
+**/test/scenarios/expected/**/*.json
+packages/extensions/core/test/plugins/*/expected/*.json

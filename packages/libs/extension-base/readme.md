@@ -1,7 +1,6 @@
-
 # Contributing
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
+This project welcomes contributions and suggestions. Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
 the rights to use your contribution. For details, visit https://cla.microsoft.com.
 
@@ -16,11 +15,11 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 # AutoRest Extension Base
 
 Allows to easily create an AutoRest extension.
-See https://github.com/azure/autorest-extension-helloworld for an example of how to reference and use this package. We recommend using *that* as a starting point.
+See https://github.com/azure/autorest-extension-helloworld for an example of how to reference and use this package. We recommend using _that_ as a starting point.
 
 ## Usage
 
-``` JavaScript
+```JavaScript
 import { AutoRestExtension } from "@autorest/extension-base";
 
 const extension = new AutoRestExtension();

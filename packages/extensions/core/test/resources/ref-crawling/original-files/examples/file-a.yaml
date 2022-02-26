@@ -1,6 +1,0 @@
-external-ref-1:
-  - $ref: './file-b.yaml'
-external-ref-2:
-  $ref: './file-c.yaml#hello/hello'
-local-reference:
-  $ref: '#external-ref-1'

@@ -1,47 +1,46 @@
 {
-    "openapi": "3.0.0",
-    "info": {
+  "openapi": "3.0.0",
+  "info": {
+    "x-ms-metadata": {
+      "apiVersions": ["test-0.1"]
+    },
+    "title": "Test",
+    "description": "test",
+    "version": "test-0.1"
+  },
+  "paths": {
+    "/dictionary/nested": {
       "x-ms-metadata": {
         "apiVersions": ["test-0.1"]
       },
-      "title": "Test",
-      "description": "test",
-      "version": "test-0.1"
-    },
-    "paths": {
-      "/dictionary/nested": {
-        "x-ms-metadata": {
-          "apiVersions": ["test-0.1"]
-        },
-        "get": {
-          "operationId": "dictionary_getDictionaryValid",
-          "responses": {
-            "200": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/DictOfDict"
-                  }
+      "get": {
+        "operationId": "dictionary_getDictionaryValid",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DictOfDict"
                 }
               }
             }
           }
         }
       }
-    },
-    "components": {
-      "schemas": {
-        "DictOfDict": {
+    }
+  },
+  "components": {
+    "schemas": {
+      "DictOfDict": {
+        "type": "object",
+        "additionalProperties": {
           "type": "object",
           "additionalProperties": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
+            "type": "string"
           }
         }
       }
-    },
-    "servers": []
-  }
-  
+    }
+  },
+  "servers": []
+}

@@ -6,9 +6,7 @@
     "description": "Some cool documentation."
   },
   "host": "localhost:3000",
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis": {
       "get": {
@@ -30,9 +28,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "tags": [
-          "Redis"
-        ],
+        "tags": ["Redis"],
         "responses": {
           "200": {
             "description": "A list of caches",
@@ -47,12 +43,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       },
       "post": {
         "operationId": "create",
@@ -86,9 +78,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "tags": [
-          "Redis"
-        ],
+        "tags": ["Redis"],
         "responses": {
           "200": {
             "description": "A list of caches",
@@ -103,12 +93,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       },
       "put": {
         "operationId": "update",
@@ -142,9 +128,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "tags": [
-          "Redis"
-        ],
+        "tags": ["Redis"],
         "responses": {
           "200": {
             "description": "A list of caches",
@@ -159,12 +143,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     }
   },
@@ -274,9 +254,7 @@
       "description": "Subscription ID.",
       "required": true,
       "type": "string",
-      "enum": [
-        "123456"
-      ]
+      "enum": ["123456"]
     },
     "ApiVersionParameter": {
       "name": "api-version",
@@ -284,9 +262,7 @@
       "description": "API ID.",
       "required": true,
       "type": "string",
-      "enum": [
-        "2014-04-01-preview"
-      ]
+      "enum": ["2014-04-01-preview"]
     }
   }
 }

@@ -6,7 +6,7 @@ The following are configurations for Azure Functions plugins for autorest. For m
 
 The Azure Functions Python Generator.
 
-``` yaml $(azure-functions-python)
+```yaml $(azure-functions-python)
 use-extension:
   "@autorest/azure-functions-python": "latest"
 ```
@@ -15,7 +15,7 @@ use-extension:
 
 The Azure Functions C# Generator.
 
-``` yaml $(azure-functions-csharp)
+```yaml $(azure-functions-csharp)
 use-extension:
   "@autorest/azure-functions-csharp": "latest"
 ```
@@ -24,7 +24,7 @@ use-extension:
 
 The Azure Functions Java Generator.
 
-``` yaml $(azure-functions-java)
+```yaml $(azure-functions-java)
 use-extension:
   "@autorest/azure-functions-java": "latest"
 ```
@@ -33,7 +33,7 @@ use-extension:
 
 The Azure Functions TypeScript Generator.
 
-``` yaml $(azure-functions-typescript)
+```yaml $(azure-functions-typescript)
 use-extension:
   "@autorest/azure-functions-typescript": "latest"
 ```

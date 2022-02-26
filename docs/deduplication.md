@@ -1,6 +1,6 @@
 # Model Deduplication and Path Deduplication
 
-## Models 
+## Models
 
 ### **Property's 'description' modified**
 
@@ -51,9 +51,9 @@ Description is generally used for documentation purposes. Discard the old model 
 
 ### Conflict:
 
-From Compute 2015-06-15 -> 2016-03-30 -> 2017-03-30 
+From Compute 2015-06-15 -> 2016-03-30 -> 2017-03-30
 
-```json 
+```json
 "VirtualMachine": {
       "properties": {
         "plan": {
@@ -218,7 +218,6 @@ Naming: TBD
 
 ```
 
-
 ### **'required' field added**
 
 ### Conflict:
@@ -246,7 +245,9 @@ From Compute 2015-06-15 -> 2016-03-30
       "description": "The List Usages operation response."
     }
 ```
+
 ### Resolution:
+
 Keep latest.
 
 ```json
@@ -301,6 +302,7 @@ From Compute 2015-06-15 -> 2016-03-30
 ```
 
 ### Resolution:
+
 Keep latest.
 
 ```json
@@ -353,6 +355,7 @@ Keep latest.
 ```
 
 ### Resolution:
+
 Keep latest.
 
 ```json
@@ -382,9 +385,9 @@ Keep latest.
 
 ### **'allOf' field added**
 
-From Compute 2016-03-30 -> 2017-03-03 
+From Compute 2016-03-30 -> 2017-03-03
 
-```json 
+```json
 "ImageReference": {
       "properties": {
         "publisher": {
@@ -423,11 +426,11 @@ From Compute 2016-03-30 -> 2017-03-03
 +->    }
 ```
 
-Resolution: 
+Resolution:
 
-The model after allOf is resolved is equivalent to a model with additional properties and one extra field. So we can use composition: 
+The model after allOf is resolved is equivalent to a model with additional properties and one extra field. So we can use composition:
 
-```json 
+```json
 "ImageReference": {
       "properties": {
         "publisher": {
@@ -497,6 +500,7 @@ From Compute 2016-03-30 -> 2017-03-30
 ```
 
 ### Resolution:
+
 Keep latest.
 
 ```json
@@ -533,11 +537,11 @@ Keep latest.
 
 From Compute 2016-03-30 -> 2017-03-30
 
-```json 
+```json
 
 "HardwareProfile": {
       "properties": {
-        "vmSize": { 
+        "vmSize": {
           "type": "string",
           "description": "Specifies the size of the virtual ...",
           "enum": [
@@ -576,11 +580,11 @@ From Compute 2016-03-30 -> 2017-03-30
     }
 ```
 
-### Resolution: 
+### Resolution:
 
 Keep the latest.
 
-```json 
+```json
 
 "HardwareProfile": {
       "properties": {
@@ -650,6 +654,7 @@ From Compute 2016-03-30 -> 2017-03-30
 ```
 
 ### Resolution:
+
 If after resolution they refer to similar models, then just take the latest, and if they refer to non-similar models, keep both:
 
 ```json
@@ -693,7 +698,6 @@ If after resolution they refer to similar models, then just take the latest, and
 
 ```
 
-
 ### **'allOf' reference removed**
 
 From /2017-12-01/Compute.json -> /2018-04-01/Compute.json
@@ -719,6 +723,7 @@ From /2017-12-01/Compute.json -> /2018-04-01/Compute.json
 ```
 
 ### Resolution:
+
 Keep both.
 
 ### **'modelAsString' changed**
@@ -726,6 +731,7 @@ Keep both.
 ### Conflict:
 
 From Compute 2017-03-30 -> 2017-12-01
+
 ```json
 "StorageAccountType": {
       "type": "string",
@@ -743,11 +749,12 @@ From Compute 2017-03-30 -> 2017-12-01
 ```
 
 ### Resolution:
-Keep the latest. 
 
-### **'properties' of 'properties' of model changed
+Keep the latest.
 
-### Conflict: 
+### \*\*'properties' of 'properties' of model changed
+
+### Conflict:
 
 From Compute/disk.json 2018-04-01 -> 2018-06-01
 
@@ -776,7 +783,8 @@ From Compute/disk.json 2018-04-01 -> 2018-06-01
       "description": "Snapshot resource."
     }
 ```
-### Resolution 
+
+### Resolution
 
 If the references refer to a similar schemas after the reference is resolved, then they are duplicates, and the latest is kept. Otherwise, keep both.
 
@@ -832,7 +840,7 @@ If the references refer to a similar schemas after the reference is resolved, th
 
 ### **property of 'properties' of 'properties' removed**
 
-From Web/AppServiceEnviroments.json 2016-09-01 to 2018-02-01 
+From Web/AppServiceEnviroments.json 2016-09-01 to 2018-02-01
 
 ### Conflict:
 
@@ -848,7 +856,7 @@ From Web/AppServiceEnviroments.json 2016-09-01 to 2018-02-01
       "properties": {
         "properties": {
           "description": "MetricDefinition resource specific properties",
-          "properties": {              
+          "properties": {
 -->         "name": {
 -->           "description": "Name of the metric.",
 -->           "type": "string",
@@ -890,7 +898,7 @@ Keep Both.
 
 ### **changed property from 'renderingType' to 'type'**
 
-From network/Diagnotics.json 2016-09-01 to 2018-02-01 
+From network/Diagnotics.json 2016-09-01 to 2018-02-01
 
 ```json
 "Rendering": {
@@ -898,7 +906,7 @@ From network/Diagnotics.json 2016-09-01 to 2018-02-01
       "type": "object",
       "properties": {
 +->       "type": {
--->       "renderingType":{      
+-->       "renderingType":{
           "description": "Rendering Type",
           "enum": [
             "NoGraph",
@@ -982,7 +990,7 @@ Keep both.
     }
 ```
 
-### **x-ms extension added to properties of model
+### \*\*x-ms extension added to properties of model
 
 ### Conflict:
 
@@ -1020,7 +1028,7 @@ Keep both.
     }
 ```
 
-### Resolution: 
+### Resolution:
 
 Keep both.
 
@@ -1058,8 +1066,7 @@ Keep both.
     }
 ```
 
-
-### **change in  capitalization of property names**
+### **change in capitalization of property names**
 
 From iothub 2017-07-01 to 2018-01-22
 
@@ -1084,7 +1091,7 @@ From iothub 2017-07-01 to 2018-01-22
 
 ### Resolution:
 
-Keep both. 
+Keep both.
 
 ```json
 "OperationInputs": {
@@ -1110,7 +1117,7 @@ Keep both.
 
 Compute 2016-03-30 -> 2017-03-30
 
-```json 
+```json
 "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}": {
       "put": {
         "tags": [
@@ -1143,7 +1150,7 @@ Compute 2016-03-30 -> 2017-03-30
 
 Keep the latest.
 
-```json 
+```json
 "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}": {
       "put": {
         "tags": [
