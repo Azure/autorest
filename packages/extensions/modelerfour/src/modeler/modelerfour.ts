@@ -1642,11 +1642,12 @@ export class ModelerFour {
     path = p > -1 ? path.substring(0, p) : path;
 
     // get group and operation name
-    const { group, member } = this.interpret.getOperationId(method, path, httpOperation);
+    const { group, member, operationId } = this.interpret.getOperationId(method, path, httpOperation);
     const memberName = httpOperation["x-ms-client-name"] ?? member;
     const operationGroup = this.codeModel.getOperationGroup(group);
     const operation = operationGroup.addOperation(
       new Operation(memberName, this.interpret.getDescription("", httpOperation), {
+        operationId,
         extensions: this.interpret.getExtensionProperties(httpOperation),
         apiVersions: this.interpret.getApiVersions(pathItem),
         deprecated: this.interpret.getDeprecation(httpOperation),

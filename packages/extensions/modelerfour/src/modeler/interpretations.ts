@@ -310,9 +310,16 @@ export class Interpretations {
     );
   }
 
-  getOperationId(httpMethod: string, path: string, original: OpenAPI.HttpOperation) {
+  getOperationId(
+    httpMethod: string,
+    path: string,
+    original: OpenAPI.HttpOperation,
+  ): { member: string; group: string; operationId?: string } {
     if (original.operationId) {
-      return this.splitOpId(original.operationId);
+      return {
+        ...this.splitOpId(original.operationId),
+        operationId: original.operationId,
+      };
     }
 
     // synthesize from tags.

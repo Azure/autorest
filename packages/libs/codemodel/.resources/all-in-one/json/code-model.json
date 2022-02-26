@@ -866,6 +866,10 @@
       "description": "represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)",
       "type": "object",
       "properties": {
+        "operationId": {
+          "description": "Original Operation ID if present.\nThis can be used to identify the original id of an operation before it is styled.",
+          "type": "string"
+        },
         "parameters": {
           "description": "common parameters when there are multiple requests",
           "type": "array",

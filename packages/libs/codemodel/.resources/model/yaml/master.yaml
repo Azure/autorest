@@ -323,6 +323,11 @@ definitions:
     description: represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)
     additionalProperties: false
     properties:
+      operationId:
+        type: string
+        description: |-
+          Original Operation ID if present.
+          This can be used to identify the original id of an operation before it is styled.
       apiVersions:
         type: array
         description: API versions that this applies to. Undefined means all versions
