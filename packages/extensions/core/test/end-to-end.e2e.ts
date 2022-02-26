@@ -7,7 +7,7 @@ import { createFolderUri, resolveUri } from "@azure-tools/uri";
 import { AutoRest } from "../src/lib/autorest-core";
 import { AppRoot } from "../src/lib/constants";
 
-describe.only("EndToEnd", () => {
+describe("EndToEnd", () => {
   it("network full game", async () => {
     const logger = new AutorestTestLogger();
     const autoRest = new AutoRest(logger, new RealFileSystem());
