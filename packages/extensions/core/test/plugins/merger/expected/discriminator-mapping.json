@@ -3,7 +3,9 @@
   "info": {
     "x-ms-metadata": {
       "merged": true,
-      "apiVersions": ["1.0.0"]
+      "apiVersions": [
+        "1.0.0"
+      ]
     },
     "title": "Pet Store",
     "version": "1.0.0"
@@ -18,20 +20,32 @@
     "schemas": {
       "schemas:0": {
         "x-ms-metadata": {
-          "apiVersions": ["1.0.0"],
-          "filename": ["mem://discriminator-mapping/discriminator-mapping.json"],
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem://discriminator-mapping/discriminator-mapping.json"
+          ],
           "name": "PetType",
-          "originalLocations": ["mem://discriminator-mapping/discriminator-mapping.json#/components/schemas/PetType"],
+          "originalLocations": [
+            "mem://discriminator-mapping/discriminator-mapping.json#/components/schemas/PetType"
+          ],
           "x-ms-secondary-file": false
         },
         "type": "string"
       },
       "schemas:1": {
         "x-ms-metadata": {
-          "apiVersions": ["1.0.0"],
-          "filename": ["mem://discriminator-mapping/discriminator-mapping.json"],
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem://discriminator-mapping/discriminator-mapping.json"
+          ],
           "name": "Pet",
-          "originalLocations": ["mem://discriminator-mapping/discriminator-mapping.json#/components/schemas/Pet"],
+          "originalLocations": [
+            "mem://discriminator-mapping/discriminator-mapping.json#/components/schemas/Pet"
+          ],
           "x-ms-secondary-file": false
         },
         "type": "object",
@@ -43,7 +57,10 @@
             "$ref": "#/components/schemas/schemas:0"
           }
         },
-        "required": ["name", "pet_type"],
+        "required": [
+          "name",
+          "pet_type"
+        ],
         "discriminator": {
           "propertyName": "pet_type",
           "mapping": {
@@ -54,10 +71,16 @@
       },
       "schemas:2": {
         "x-ms-metadata": {
-          "apiVersions": ["1.0.0"],
-          "filename": ["mem://discriminator-mapping/discriminator-mapping.json"],
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem://discriminator-mapping/discriminator-mapping.json"
+          ],
           "name": "Cat",
-          "originalLocations": ["mem://discriminator-mapping/discriminator-mapping.json#/components/schemas/Cat"],
+          "originalLocations": [
+            "mem://discriminator-mapping/discriminator-mapping.json#/components/schemas/Cat"
+          ],
           "x-ms-secondary-file": false
         },
         "allOf": [
@@ -76,10 +99,16 @@
       },
       "schemas:3": {
         "x-ms-metadata": {
-          "apiVersions": ["1.0.0"],
-          "filename": ["mem://discriminator-mapping/discriminator-mapping.json"],
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem://discriminator-mapping/discriminator-mapping.json"
+          ],
           "name": "Dog",
-          "originalLocations": ["mem://discriminator-mapping/discriminator-mapping.json#/components/schemas/Dog"],
+          "originalLocations": [
+            "mem://discriminator-mapping/discriminator-mapping.json#/components/schemas/Dog"
+          ],
           "x-ms-secondary-file": false
         },
         "allOf": [
@@ -98,8 +127,12 @@
       },
       "schemas:4": {
         "x-ms-metadata": {
-          "apiVersions": ["1.0.0"],
-          "filename": ["mem://discriminator-mapping/discriminator-mapping.json"],
+          "apiVersions": [
+            "1.0.0"
+          ],
+          "filename": [
+            "mem://discriminator-mapping/discriminator-mapping.json"
+          ],
           "name": "ModelWithMappingProp",
           "originalLocations": [
             "mem://discriminator-mapping/discriminator-mapping.json#/components/schemas/ModelWithMappingProp"

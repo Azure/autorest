@@ -84,7 +84,10 @@
                     "description": "A file transmitted via a mimepart within a multipart form.",
                     "type": "string",
                     "format": "binary",
-                    "x-file-content-types": ["application/zip", "application/octet-stream"],
+                    "x-file-content-types": [
+                      "application/zip",
+                      "application/octet-stream"
+                    ],
                     "x-include-filename": true,
                     "x-alternate-name": "filePart"
                   },
@@ -127,7 +130,10 @@
                     "description": "A file transmitted via a mimepart within a multipart form.",
                     "type": "string",
                     "format": "binary",
-                    "x-file-content-types": ["application/gzip", "application/jpg"],
+                    "x-file-content-types": [
+                      "application/gzip",
+                      "application/jpg"
+                    ],
                     "x-include-filename": false,
                     "x-alternate-name": "filePart"
                   },
@@ -166,7 +172,10 @@
             "description": "The person's age."
           }
         },
-        "required": ["name", "age"],
+        "required": [
+          "name",
+          "age"
+        ],
         "x-test-property": "a value"
       }
     }

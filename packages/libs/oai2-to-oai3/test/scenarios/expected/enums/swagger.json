@@ -11,11 +11,18 @@
     "schemas": {
       "MyStringEnum": {
         "type": "object",
-        "enum": ["foo", "bar"]
+        "enum": [
+          "foo",
+          "bar"
+        ]
       },
       "MyNumberEnum": {
         "type": "object",
-        "enum": [7, 998, 12310]
+        "enum": [
+          7,
+          998,
+          12310
+        ]
       },
       "MyObjectEnum": {
         "type": "object",

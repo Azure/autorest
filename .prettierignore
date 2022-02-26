@@ -329,4 +329,6 @@ regression-tests/smoke-tests.yaml
 packages/libs/codemodel/.resources
 
 # Scenario tests
-**/test/scenarios/**/*.yaml
+**/test/scenarios/expected/**/*.yaml
+**/test/scenarios/expected/**/*.json
+packages/extensions/core/test/plugins/*/expected/*.json
