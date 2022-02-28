@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/codemodel",
+      "comment": "Add `operationId` on Operation",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/codemodel",
+  "email": "tiguerin@microsoft.com"
+}

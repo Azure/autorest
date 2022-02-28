@@ -8,6 +8,13 @@ import { SchemaType } from "./schema-type";
 
 /** represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)  */
 export interface Operation extends Aspect {
+  /**
+   * Original Operation ID if present.
+   * This can be used to identify the original id of an operation before it is styled.
+   * THIS IS NOT the name of the operation that should be used in the generator. Use `.language.default.name` for this
+   */
+  operationId?: string;
+
   /** common parameters when there are multiple requests */
   parameters?: Array<Parameter>;
 

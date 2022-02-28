@@ -52,6 +52,7 @@ operationGroups:
     $key: Upload
     operations:
       - !Operation 
+        operationId: Upload_File
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
