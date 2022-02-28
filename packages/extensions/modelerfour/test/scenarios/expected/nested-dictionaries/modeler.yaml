@@ -57,6 +57,7 @@ operationGroups:
     $key: dictionary
     operations:
       - !Operation 
+        operationId: dictionary_getDictionaryValid
         apiVersions:
           - !ApiVersion 
             version: test-0.1
