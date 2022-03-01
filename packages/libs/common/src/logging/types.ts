@@ -36,6 +36,18 @@ export interface LogInfo {
    * Additional details.
    */
   readonly details?: Error | unknown;
+
+  /**
+   * Name of the plugin currently emitting this warning
+   * @example "emitter", "python", "m2r"
+   */
+  readonly pluginName?: string;
+
+  /**
+   * Name of the extension currently emitting this warning
+   * @example "@autorest/modelerfour", "@autorest/pyton"
+   */
+  readonly extensionName?: string;
 }
 
 export interface AutorestDiagnostic {
