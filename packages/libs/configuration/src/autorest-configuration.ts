@@ -130,7 +130,7 @@ export function* getNestedConfiguration(config: AutorestConfiguration, scope: st
     return;
   }
 
-  for (const section of arrayOf<any>(config.raw[pluginName as keyof AutorestNormalizedConfiguration])) {
+  for (const section of arrayOf<any>(config.raw[scope as keyof AutorestNormalizedConfiguration])) {
     if (section) {
       yield extendAutorestConfiguration(config, section === true ? [] : [section]);
     }
