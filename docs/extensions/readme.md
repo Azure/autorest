@@ -1434,12 +1434,12 @@ Actual permissions required to call API:
 
 **Schema**:
 
-| Field Name | Type | Description |
-|---|:---:|---|
-| `actions` | `string` | List of the required action permissions for this API. |
-| `dataActions` | `string` | List of the required data action permissions for this API. |
-| `rolesWithThesePermissions` | `string` | Comma separated list of roles that have the required permissions for this API. |
-| `moreInfoLink` | `string` | Link formatted as markdown with more information about the permissions for this API. |
+| Field Name                  |   Type   | Description                                                                          |
+| --------------------------- | :------: | ------------------------------------------------------------------------------------ |
+| `actions`                   | `string` | List of the required action permissions for this API.                                |
+| `dataActions`               | `string` | List of the required data action permissions for this API.                           |
+| `rolesWithThesePermissions` | `string` | Comma separated list of roles that have the required permissions for this API.       |
+| `moreInfoLink`              | `string` | Link formatted as markdown with more information about the permissions for this API. |
 
 ```json5
 "xmsPermissions": {
