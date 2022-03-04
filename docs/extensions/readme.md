@@ -1201,40 +1201,50 @@ When set, specifies the set of resource types which can be referenced by this `a
 
 **Parent element**: [Parameter Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#parameterObject), [Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schemaObject), or [Items Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#itemsObject)
 
-**Schema**:
+### Schema
 
-| Field Name    | Type       | Description                                      |
-| ------------- | ---------- | ------------------------------------------------ |
-| allowedTypes  | `[string]` | **Required** An array of allowed ARM resource ID kinds. Each element represents a particular type of ARM resource which can be referred to by this `arm-id`. See [Allowed formats](#allowed-arm-id-formats) for a detailed descrition of the allowed formats. |
+| Field Name        | Type                | Description                                      |
+| ----------------- | ------------------- | ------------------------------------------------ |
+| allowedResources  | `[AllowedResource]` | **Required** An array of allowed ARM resources. Each element represents a particular type of ARM resource which can be referred to by this `arm-id`. |
 
-### Allowed ARM ID formats
-The allowed format always follows the following template: `{scope}/providers/{resourceType}`.
+**AllowedResource schema**:
 
-The `{scope}` segment has the following allowed values. These values were derived from the [scope field in ARM templates](https://docs.microsoft.com/azure/azure-resource-manager/templates/scope-extension-resources?tabs=azure-cli).
-| Scope                                    | Meaning                                                                                                                                                                                                      |
-| -----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `/`                                      | The resource is deployed into a tenant                                                                                                                                                                       |
-| `/subscriptions`                         | The resource is deployed into a subscription                                                                                                                                                                 |
-| `/subscriptions/resourceGroups`          | The resource is deployed into a resource group                                                                                                                                                               |
-| `/Microsoft.Management/managementGroups` | The resource is deployed into a management group                                                                                                                                                             |
-| `*`                                      | The resource is an extension resource and may be deployed in any of the above scopes, or as a subresource of another resource in any of the above scopes                                                     |
+| Field Name  | Type       | Description                                                                                                                                                                                                         |
+| ----------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| scopes      | `[string]` | An array of scopes. See [Allowed Scopes](#allowed-scopes). If not specified, the default scope is `["ResourceGroup"]`.                                                                                              |
+| type        | `string`   | **Required** The type of resource that is being referred to. For example `Microsoft.Network/virtualNetworks` or `Microsoft.Network/virtualNetworks/subnets`. See [Example Types](#example-types) for more examples. |
 
-Note that we do not currently support limiting references to an extension resource by the kind of resource it is on. For example you can refer to _any_ resource lock (`*/providers/Microsoft.Authorization/locks`) but not to a resource lock but only when it's on a resource group.
+#### Allowed Scopes
+The following values are allowed for `scopes`. These values were derived from the [scope field in ARM templates](https://docs.microsoft.com/azure/azure-resource-manager/templates/scope-extension-resources?tabs=azure-cli).
+| Scope             | URL prefix                                                                      | Meaning                                                                                                                                                       |
+| ----------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Tenant`          | `/`                                                                             | The resource is deployed into a tenant                                                                                                                        |
+| `Subscription`    | `/subscriptions/{subscriptionId}/`                                              | The resource is deployed into a subscription                                                                                                                  |
+| `ResourceGroup`   | `/subscriptions/{subscriptionId}/resourceGroups/{group}`                        | The resource is deployed into a resource group                                                                                                                |
+| `ManagementGroup` | `/providers/Microsoft.Management/managementGroups/{managementGroupName}/`       | The resource is deployed into a management group                                                                                                              |
+| `Extension`       | `{parentScope}/providers/{extensionNamespace}/{extensionType}/{extensionName}/` | The resource is an extension resource and may be deployed as a subresource of another resource. `parentScope` may be a resource in any of the above scopes.   |
+| `*`               | Any of the above                                                                | The resource may be deployed into any of the above scopes. This is identical to `["Tenant", "Subscription", "ResourceGroup", "ManagementGroup", "Extension"`] |
 
-Below is a table showing the different kinds of resources and an example of each
-Note: When reading the format column, parameterized fields such as `{provider}` must be given concrete values in the `allowedTypes` entry. See the example column for an example.
+#### Example Types
+Below is a table showing an example entry for various different kinds of resource types
 
-| Resource kind                   | Format                                                                                 | Example                                                                                               |
-| ------------------------------- | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Resource in a tenant            | `/providers/{provider}/{resourceType}`                                                 | `/providers/Microsoft.Capacity/reservationOrders`                                                     |
-| Resource in a subscription      | `/subscriptions/providers/{provider}/{resourceType}`                                   | `/subscriptions/providers/Microsoft.Resources/resourceGroups`                                         |
-| Resource in a resource group    | `/subscriptions/resourceGroups/providers/{provider}/{resourceType}`                    | `/subscriptions/resourceGroups/providers/Microsoft.Network/virtualNetworks`                           |
-| Resource in a management group  | `/providers/Microsoft.Management/managementGroups/providers/{provider}/{resourceType}` | `/providers/Microsoft.Management/managementGroups/provivders/Microsoft.Authorization/roleAssignments` |
-| Extension resource              | `*/{provider}/{resourceTye}`                                                           | `*/providers/Microsoft.Authorization/locks`                                                           |
+| Resource kind                           | Example                                                                                               |
+| --------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Resource in a tenant                    | `{"scopes": ["Tenant"], "type": "Microsoft.Capacity/reservationOrders"}`                              |
+| Resource in a subscription              | `{"scopes": ["Subscription"], "type": "Microsoft.Resources/resourceGroups"}`                          |
+| Resource in a resource group            | `{"scopes": ["ResourceGroup"], "type": "Microsoft.Network/virtualNetworks"}`                          |
+| Resource in a management group          | `{"scopes": ["ManagementGroup"], "type": "Microsoft.Blueprint/blueprints"}`                           |
+| Extension resource                      | `{"scopes": ["Extension"], "type": "Microsoft.Authorization/locks"}`                                  |
+| Any resource in resource group          | `{"scopes": ["ResourceGroup"], "type": "*"}`                                                          |
+| Any compute resource in resource group  | `{"scopes": ["ResourceGroup"], "type": "Microsoft.Compute/*"}`                                        |
 
-Sub-resources are specified in the same manner as their parent resource but with additional paths on the end. For example to refer to a subnet: `/subscriptions/resourceGroups/providers/Microsoft.Network/virtualNetworks/subnets`.
+Sub-resources are specified in the same manner as their parent resource but with additional paths on the end. For example to refer to a subnet: `Microsoft.Network/virtualNetworks/subnets`.
 
-**Example**: An `arm-id` field with no additional information about what kind of resource it must refer to
+**Note** that we do not currently support limiting references to an extension resource by the kind of resource it is on. For example you can refer to _any_ resource lock (`Microsoft.Authorization/locks`) but not to a resource lock but only when it's on a CosmosDB.
+
+#### Examples
+
+**Example**: An `arm-id` field that can refer to any ARM resource ID.
 
 ```json5
 "MyExampleType": {
@@ -1255,8 +1265,10 @@ Sub-resources are specified in the same manner as their parent resource but with
       "type": "string",
       "format": "arm-id",
       "x-ms-arm-id-details": {
-        "allowedTypes": [
-          "/subscriptions/resourceGroups/providers/Microsoft.Network/virtualNetworks"
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks"
+          }
         ]
       }
     }
@@ -1288,14 +1300,16 @@ Sub-resources are specified in the same manner as their parent resource but with
   "type": "string",
   "format": "arm-id",
   "x-ms-arm-id-details": {
-    "allowedTypes": [
-      "/subscriptions/resourceGroups/providers/Microsoft.Network/virtualNetworks"
+    "allowedResources": [
+      {
+        "type": "Microsoft.Network/virtualNetworks"
+      }
     ]
   }
 }
 ```
 
-**Example**: An array of `arm-id`'s that refer to a virtual network
+**Example**: An array of `arm-id`'s that refer to a subnet
 
 ```json5
 "MyExampleType": {
@@ -1306,8 +1320,10 @@ Sub-resources are specified in the same manner as their parent resource but with
         "type": "string",
         "format": "arm-id",
         "x-ms-arm-id-details": {
-          "allowedTypes": [
-            "/subscriptions/resourceGroups/providers/Microsoft.Network/virtualNetworks"
+          "allowedResources": [
+            {
+              "type": "Microsoft.Network/virtualNetworks/subnets"
+            }
           ]
         }
       }
