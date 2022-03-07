@@ -270,7 +270,9 @@ export class ModelerFour {
     this.profileFilter = await this.session.getValue("profile", []);
     this.apiVersionFilter = await this.session.getValue("api-version", []);
     this.ignoreHeaders = new Set(this.options["ignore-headers"] ?? []);
-    this.specialHeaders = new Set(KnownSpecialHeaders.filter((x) => this.options["skip-special-headers"]?.map((x) => x.toLowerCase())?.includes(x)));
+    this.specialHeaders = new Set(
+      KnownSpecialHeaders.filter((x) => this.options["skip-special-headers"]?.map((x) => x.toLowerCase())?.includes(x)),
+    );
     const apiVersionMode = await this.session.getValue("api-version-mode", "auto");
 
     const apiVersionParameter =
