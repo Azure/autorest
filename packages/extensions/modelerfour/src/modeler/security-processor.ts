@@ -1,4 +1,4 @@
-import { AADTokenSecurityScheme, AzureKeySecurityScheme, Security, SecurityScheme } from "@autorest/codemodel";
+import { OAuth2SecurityScheme, KeySecurityScheme, Security, SecurityScheme } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
 import * as oai3 from "@azure-tools/openapi";
 import { dereference, ParameterLocation, Refable } from "@azure-tools/openapi";
@@ -65,7 +65,7 @@ export class SecurityProcessor {
 
     return new Security(true, {
       schemes: [
-        new AADTokenSecurityScheme({
+        new OAuth2SecurityScheme({
           scopes: this.securityConfig.scopes ?? [ArmDefaultScope],
         }),
       ],
@@ -99,12 +99,13 @@ export class SecurityProcessor {
   private getSecuritySchemeFromConfig(name: string): SecurityScheme | undefined {
     switch (name) {
       case KnownSecurityScheme.AADToken:
-        return new AADTokenSecurityScheme({
+        return new OAuth2SecurityScheme({
           scopes: this.securityConfig.scopes,
         });
       case KnownSecurityScheme.AzureKey:
-        return new AzureKeySecurityScheme({
-          headerName: this.securityConfig.headerName,
+        return new KeySecurityScheme({
+          in: "header",
+          name: this.securityConfig.headerName,
         });
       case KnownSecurityScheme.Anonymous:
         return undefined;
@@ -153,7 +154,7 @@ export class SecurityProcessor {
           throw new Error(`Couldn't find a scheme defined in the securitySchemes with name: ${name}`);
         }
 
-        const processedScheme = this.processSecurityScheme(name, oai3SecurityRequirement[name], scheme);
+        const processedScheme = this.processSecurityScheme(oai3SecurityRequirement[name], scheme);
         if (processedScheme !== undefined) {
           schemes.push(processedScheme);
         } else {
@@ -183,26 +184,19 @@ export class SecurityProcessor {
     return map;
   }
 
-  private processSecurityScheme(
-    name: string,
-    scopes: string[],
-    scheme: oai3.SecurityScheme,
-  ): SecurityScheme | undefined {
-    if (name === KnownSecurityScheme.AADToken) {
-      return new AADTokenSecurityScheme({
+  private processSecurityScheme(scopes: string[], scheme: oai3.SecurityScheme): SecurityScheme | undefined {
+    if (scheme.type === "oauth2") {
+      return new OAuth2SecurityScheme({
         scopes: scopes,
       });
-    } else if (name === KnownSecurityScheme.AzureKey) {
-      if (scheme.type !== oai3.SecurityType.ApiKey) {
-        throw new Error(`AzureKey security scheme should be of type 'apiKey' but was '${scheme.type}'`);
-      }
-
+    } else if (scheme.type === "apiKey") {
       if (scheme.in !== ParameterLocation.Header) {
         throw new Error(`AzureKey security scheme should be of in 'header' but was '${scheme.in}'`);
       }
 
-      return new AzureKeySecurityScheme({
-        headerName: scheme.name,
+      return new KeySecurityScheme({
+        name: scheme.name,
+        in: "header",
       });
     } else {
       return undefined;

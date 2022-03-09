@@ -1,1 +1,1 @@
-export const KnownSpecialHeaders = ["Repeatability-Request-Id", "Repeatability-First-Send"];
+export const KnownSpecialHeaders = ["repeatability-request-id", "repeatability-first-sent"];

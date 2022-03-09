@@ -1,4 +1,4 @@
-import { AADTokenSecurityScheme, AzureKeySecurityScheme } from "@autorest/codemodel";
+import { OAuth2SecurityScheme, KeySecurityScheme } from "@autorest/codemodel";
 import oai3, { ParameterLocation, SecurityType } from "@azure-tools/openapi";
 import { createTestSessionFromModel } from "../../test/utils";
 import { Interpretations } from "./interpretations";
@@ -13,7 +13,7 @@ const baseOpenapiSpec = {
   paths: {},
 };
 
-const AADTokenSecuritySchemeDef: oai3.SecurityScheme = {
+const OAuth2SecuritySchemeDef: oai3.SecurityScheme = {
   "x-ms-metadata": {
     name: "AADToken",
   },
@@ -26,7 +26,7 @@ const AADTokenSecuritySchemeDef: oai3.SecurityScheme = {
   },
 };
 
-const AzureKeySecuritySchemeDef: oai3.SecurityScheme = {
+const KeySecuritySchemeDef: oai3.SecurityScheme = {
   "x-ms-metadata": {
     name: "AzureKey",
   },
@@ -56,14 +56,14 @@ describe("Security Processor", () => {
         ...baseOpenapiSpec,
         components: {
           securitySchemes: {
-            AADToken: AADTokenSecuritySchemeDef,
+            AADToken: OAuth2SecuritySchemeDef,
           },
         },
         security: [{ AADToken: ["https://myresource.com/.default"] }],
       });
 
       expect(security.authenticationRequired).toBe(true);
-      expect(security.schemes).toEqual([new AADTokenSecurityScheme({ scopes: ["https://myresource.com/.default"] })]);
+      expect(security.schemes).toEqual([new OAuth2SecurityScheme({ scopes: ["https://myresource.com/.default"] })]);
     });
 
     it("configure Azure Key security", async () => {
@@ -71,14 +71,14 @@ describe("Security Processor", () => {
         ...baseOpenapiSpec,
         components: {
           securitySchemes: {
-            AzureKey: AzureKeySecuritySchemeDef,
+            AzureKey: KeySecuritySchemeDef,
           },
         },
         security: [{ AzureKey: [] }],
       });
 
       expect(security.authenticationRequired).toBe(true);
-      expect(security.schemes).toEqual([new AzureKeySecurityScheme({ headerName: "my-header-name" })]);
+      expect(security.schemes).toEqual([new KeySecurityScheme({ in: "header", name: "my-header-name" })]);
     });
 
     it("configure multiple security", async () => {
@@ -86,8 +86,8 @@ describe("Security Processor", () => {
         ...baseOpenapiSpec,
         components: {
           securitySchemes: {
-            AADToken: AADTokenSecuritySchemeDef,
-            AzureKey: AzureKeySecuritySchemeDef,
+            AADToken: OAuth2SecuritySchemeDef,
+            AzureKey: KeySecuritySchemeDef,
           },
         },
         security: [{ AADToken: ["https://myresource.com/.default"] }, { AzureKey: [] }],
@@ -95,8 +95,8 @@ describe("Security Processor", () => {
 
       expect(security.authenticationRequired).toBe(true);
       expect(security.schemes).toEqual([
-        new AADTokenSecurityScheme({ scopes: ["https://myresource.com/.default"] }),
-        new AzureKeySecurityScheme({ headerName: "my-header-name" }),
+        new OAuth2SecurityScheme({ scopes: ["https://myresource.com/.default"] }),
+        new KeySecurityScheme({ in: "header", name: "my-header-name" }),
       ]);
     });
 
@@ -105,14 +105,14 @@ describe("Security Processor", () => {
         ...baseOpenapiSpec,
         components: {
           securitySchemes: {
-            AADToken: AADTokenSecuritySchemeDef,
+            AADToken: OAuth2SecuritySchemeDef,
           },
         },
         security: [{ AADToken: ["https://myresource.com/.default"] }, {}],
       });
 
       expect(security.authenticationRequired).toBe(false);
-      expect(security.schemes).toEqual([new AADTokenSecurityScheme({ scopes: ["https://myresource.com/.default"] })]);
+      expect(security.schemes).toEqual([new OAuth2SecurityScheme({ scopes: ["https://myresource.com/.default"] })]);
     });
 
     it("raise an error if referencing undefined security scheme", async () => {
@@ -121,7 +121,7 @@ describe("Security Processor", () => {
           ...baseOpenapiSpec,
           components: {
             securitySchemes: {
-              AADToken: AADTokenSecuritySchemeDef,
+              AADToken: OAuth2SecuritySchemeDef,
             },
           },
           security: [{ ThisIsNotDefined: ["https://myresource.com/.default"] }, {}],
@@ -138,7 +138,7 @@ describe("Security Processor", () => {
       });
 
       expect(security.authenticationRequired).toBe(true);
-      expect(security.schemes).toEqual([new AADTokenSecurityScheme({ scopes: ["https://myresource.com/.default"] })]);
+      expect(security.schemes).toEqual([new OAuth2SecurityScheme({ scopes: ["https://myresource.com/.default"] })]);
     });
 
     it("configure Azure Key security", async () => {
@@ -148,7 +148,7 @@ describe("Security Processor", () => {
       });
 
       expect(security.authenticationRequired).toBe(true);
-      expect(security.schemes).toEqual([new AzureKeySecurityScheme({ headerName: "my-header-name" })]);
+      expect(security.schemes).toEqual([new KeySecurityScheme({ in: "header", name: "my-header-name" })]);
     });
 
     it("configure multiple security", async () => {
@@ -160,8 +160,8 @@ describe("Security Processor", () => {
 
       expect(security.authenticationRequired).toBe(true);
       expect(security.schemes).toEqual([
-        new AADTokenSecurityScheme({ scopes: ["https://myresource.com/.default"] }),
-        new AzureKeySecurityScheme({ headerName: "my-header-name" }),
+        new OAuth2SecurityScheme({ scopes: ["https://myresource.com/.default"] }),
+        new KeySecurityScheme({ in: "header", name: "my-header-name" }),
       ]);
     });
 
@@ -172,7 +172,7 @@ describe("Security Processor", () => {
       });
 
       expect(security.authenticationRequired).toBe(false);
-      expect(security.schemes).toEqual([new AADTokenSecurityScheme({ scopes: ["https://myresource.com/.default"] })]);
+      expect(security.schemes).toEqual([new OAuth2SecurityScheme({ scopes: ["https://myresource.com/.default"] })]);
     });
 
     it("raise an error if passing unknown security scheme", async () => {
@@ -194,7 +194,7 @@ describe("Security Processor", () => {
 
       expect(security.authenticationRequired).toBe(true);
       expect(security.schemes).toEqual([
-        new AADTokenSecurityScheme({ scopes: ["https://management.azure.com/.default"] }),
+        new OAuth2SecurityScheme({ scopes: ["https://management.azure.com/.default"] }),
       ]);
     });
   });

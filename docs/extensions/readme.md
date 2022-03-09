@@ -668,7 +668,7 @@ It is an array of strings with three possible values. The array cannot have repe
   - if the x-ms-mutability extension is applied then it can **only have "read" value in the array**.
   - applying the extension as `"x-ms-mutability": ["read"]` or not applying it will have the same effect.
 - When the property is modeled as **`"readonly": false`** then,
-  - applying the extension as `"x-ms-mutability": ["read"]` is not allowed.
+  - applying the extension as `"x-ms-mutability": ["read"]` can be used to work around Swagger 2.0 spec limitation when `readonly: true` is not allowed.(e.g. Have a response property `readonly` that will always be present in the model.)
   - applying the extension as `"x-ms-mutability": ["create", "read", "update"]` or not applying it will have the same effect.
   - applying the extension with another **permissible valid combination** should be fine.
 - When this extension is applied on a collection (array, dictionary) then this will have effects on the mutability (adding/removing elements) of the collection. Mutability of the collection cannot be applied on its elements. The mutability of the element will be governed based on the mutability defined in the element's definition.

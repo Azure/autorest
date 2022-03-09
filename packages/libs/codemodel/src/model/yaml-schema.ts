@@ -26,7 +26,7 @@ import { BooleanSchema, CharSchema } from "./common/schemas/primitive";
 import { OrSchema, XorSchema } from "./common/schemas/relationship";
 import { StringSchema, ODataQuerySchema, CredentialSchema, UriSchema, UuidSchema } from "./common/schemas/string";
 import { DurationSchema, DateTimeSchema, DateSchema, UnixTimeSchema, TimeSchema } from "./common/schemas/time";
-import { AADTokenSecurityScheme, AzureKeySecurityScheme, Security } from "./common/security";
+import { OAuth2SecurityScheme, KeySecurityScheme, Security } from "./common/security";
 import { Value } from "./common/value";
 import {
   HttpWithBodyRequest,
@@ -138,8 +138,8 @@ export const codeModelSchema = DEFAULT_SCHEMA.extend([
   TypeInfo(License),
   TypeInfo(OperationGroup),
 
-  TypeInfo(AADTokenSecurityScheme),
-  TypeInfo(AzureKeySecurityScheme),
+  TypeInfo(OAuth2SecurityScheme),
+  TypeInfo(KeySecurityScheme),
   TypeInfo(Languages),
   TypeInfo(Language),
   TypeInfo(CSharpLanguage),

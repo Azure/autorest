@@ -3,19 +3,6 @@ description: the model that contains all the information required to generate a 
 $schema: http://json-schema.org/draft-07/schema#
 additionalProperties: false
 definitions:
-  AADTokenSecurityScheme:
-    type: object
-    additionalProperties: false
-    allOf:
-      - $ref: ./http.yaml#/definitions/SecurityScheme
-    properties:
-      scopes:
-        type: array
-        items:
-          type: string
-    required:
-      - scopes
-      - type
   ApiVersion:
     type: object
     description: |-
@@ -47,17 +34,6 @@ definitions:
     description: a collection of api versions
     items:
       $ref: ./master.yaml#/definitions/ApiVersion
-  AzureKeySecurityScheme:
-    type: object
-    additionalProperties: false
-    allOf:
-      - $ref: ./http.yaml#/definitions/SecurityScheme
-    properties:
-      headerName:
-        type: string
-    required:
-      - headerName
-      - type
   BinaryResponse:
     type: object
     description: a response where the content should be treated as a binary instead of a value or object
@@ -235,6 +211,22 @@ definitions:
         $ref: ./master.yaml#/definitions/Record<string,any>
     required:
       - title
+  KeySecurityScheme:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: ./http.yaml#/definitions/SecurityScheme
+    properties:
+      name:
+        type: string
+      in:
+        type: string
+        enum:
+          - header
+    required:
+      - in
+      - name
+      - type
   Language:
     type: object
     description: the bare-minimum fields for per-language metadata on a given aspect
