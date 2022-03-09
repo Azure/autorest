@@ -83,11 +83,23 @@ declare-directive:
           return { from: "code-model-v1", where: `$.operations[*].methods[?(@.serializedName == ${JSON.stringify($)})]` };
 
         case "openapi-document":
-          return { from: "openapi-document", where: `$..paths.*[?(@.operationId =~ /${$}/)]` };
+          return { from: "openapi-document", where: `$..paths.*[?(@.operationId == ${JSON.stringify($)})]` };
 
         case "swagger-document":
         default:
-          return { from: "swagger-document", where: `$.paths.*[?(@.operationId =~ /${$}/)]` };
+          return { from: "swagger-document", where: `$.paths.*[?(@.operationId == ${JSON.stringify($)})]` };
+      }
+    })()
+  # Find operation with regex.
+  where-operation-match: >-
+    (() => {
+      switch ($context.from) {
+        case "openapi-document":
+          return { from: "openapi-document", where: `$.paths.*[?(@.operationId =~ ${$})]` };
+
+        case "swagger-document":
+        default:
+          return { from: "swagger-document", where: `$.paths.*[?(@.operationId =~ ${$})]` };
       }
     })()
   where-model: >-
@@ -125,8 +137,19 @@ declare-directive:
       from: 'swagger-document',
       "where-operation": $,
       transform: '$ = undefined'
-    }
-    ]
+    }]
+  # Remove operation with regex.
+  remove-operation-match: >-
+    [{
+      from: 'openapi-document',
+      "where-operation-match": $,
+      transform: '$ = undefined'
+    },
+    {
+      from: 'swagger-document',
+      "where-operation-match": $,
+      transform: '$ = undefined'
+    }]
   rename-operation: >-
     [{
       from: 'swagger-document',
