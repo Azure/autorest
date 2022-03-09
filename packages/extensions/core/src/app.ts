@@ -343,7 +343,7 @@ async function main() {
     logger.log({
       level: "error",
       message:
-        "Autorest completed with an error. If you think the error message is unclear, or is a bug, please declare an issues at https://github.com/Azure/autorest/issues with the error message you are seeing",
+        "Autorest completed with an error. If you think the error message is unclear, or is a bug, please declare an issues at https://github.com/Azure/autorest/issues with the error message you are seeing.",
     });
   } finally {
     try {
