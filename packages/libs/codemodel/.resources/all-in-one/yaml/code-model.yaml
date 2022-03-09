@@ -3,19 +3,6 @@ description: the model that contains all the information required to generate a 
 $schema: http://json-schema.org/draft-07/schema#
 additionalProperties: false
 definitions:
-  AADTokenSecurityScheme:
-    type: object
-    additionalProperties: false
-    allOf:
-      - $ref: '#/definitions/SecurityScheme'
-    properties:
-      scopes:
-        type: array
-        items:
-          type: string
-    required:
-      - scopes
-      - type
   APIKeySecurityScheme:
     type: object
     additionalProperties: false
@@ -170,17 +157,6 @@ definitions:
       - authorizationUrl
       - scopes
       - tokenUrl
-  AzureKeySecurityScheme:
-    type: object
-    additionalProperties: false
-    allOf:
-      - $ref: '#/definitions/SecurityScheme'
-    properties:
-      headerName:
-        type: string
-    required:
-      - headerName
-      - type
   BearerHTTPSecurityScheme:
     type: object
     additionalProperties: false
@@ -1014,6 +990,22 @@ definitions:
         $ref: '#/definitions/Record<string,any>'
     required:
       - title
+  KeySecurityScheme:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/SecurityScheme'
+    properties:
+      name:
+        type: string
+      in:
+        type: string
+        enum:
+          - header
+    required:
+      - in
+      - name
+      - type
   KnownMediaType:
     type: string
     enum:
@@ -1173,20 +1165,15 @@ definitions:
   OAuth2SecurityScheme:
     type: object
     additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/SecurityScheme'
     properties:
-      type:
-        type: string
-        enum:
-          - oauth2
-      description:
-        type: string
-      flows:
-        $ref: '#/definitions/OAuthFlows'
-      extensions:
-        description: additional metadata extensions dictionary
-        $ref: '#/definitions/Record<string,any>'
+      scopes:
+        type: array
+        items:
+          type: string
     required:
-      - flows
+      - scopes
       - type
   OAuthFlows:
     type: object

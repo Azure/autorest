@@ -14,6 +14,28 @@
         "type"
       ]
     },
+    "OAuth2SecurityScheme": {
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "scopes",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "./http.json#/definitions/SecurityScheme"
+        }
+      ]
+    },
     "AuthorizationCodeOAuthFlow": {
       "type": "object",
       "properties": {
@@ -154,33 +176,6 @@
       "additionalProperties": false,
       "required": [
         "scheme",
-        "type"
-      ]
-    },
-    "OAuth2SecurityScheme": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "oauth2"
-          ]
-        },
-        "flows": {
-          "$ref": "./http.json#/definitions/OAuthFlows"
-        },
-        "description": {
-          "type": "string"
-        },
-        "extensions": {
-          "$ref": "./master.json#/definitions/Record<string,any>",
-          "description": "additional metadata extensions dictionary"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "flows",
         "type"
       ]
     },
