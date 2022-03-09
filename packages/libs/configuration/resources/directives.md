@@ -83,11 +83,11 @@ declare-directive:
           return { from: "code-model-v1", where: `$.operations[*].methods[?(@.serializedName == ${JSON.stringify($)})]` };
 
         case "openapi-document":
-          return { from: "openapi-document", where: `$..paths.*[?(@.operationId == ${JSON.stringify($)})]` };
+          return { from: "openapi-document", where: `$..paths.*[?(@.operationId =~ /${$}/)]` };
 
         case "swagger-document":
         default:
-          return { from: "swagger-document", where: `$.paths.*[?(@.operationId == ${JSON.stringify($)})]` };
+          return { from: "swagger-document", where: `$.paths.*[?(@.operationId =~ /${$}/)]` };
       }
     })()
   where-model: >-
