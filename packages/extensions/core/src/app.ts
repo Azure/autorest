@@ -181,14 +181,14 @@ async function currentMain(logger: IAutorestLogger, args: AutorestCliArgs): Prom
     logger.debug("Writing Outputs.");
     await artifactWriter.wait();
   }
-  printCompleteSummary(logger);
+  printCompleteSummary(logger, artifactWriter);
   // return the exit code to the caller.
   return 0;
 }
 
-function printCompleteSummary(logger: IAutorestLogger) {
+function printCompleteSummary(logger: IAutorestLogger, artifactWriter: ArtifactWriter) {
   const runtime = Math.round(process.uptime() * 100) / 100;
-  logger.info(`Autorest completed in ${runtime}s.`);
+  logger.info(`Autorest completed in ${runtime}s. ${artifactWriter.stats.writeCompleted} files generated.`);
 }
 
 function shallowMerge(existing: any, more: any) {
