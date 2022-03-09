@@ -104,7 +104,8 @@ export class SecurityProcessor {
         });
       case KnownSecurityScheme.AzureKey:
         return new KeySecurityScheme({
-          headerName: this.securityConfig.headerName,
+          in: "header",
+          name: this.securityConfig.headerName,
         });
       case KnownSecurityScheme.Anonymous:
         return undefined;
@@ -194,7 +195,7 @@ export class SecurityProcessor {
       }
 
       return new KeySecurityScheme({
-        headerName: scheme.name,
+        name: scheme.name,
         in: "header",
       });
     } else {

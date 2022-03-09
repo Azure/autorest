@@ -42,7 +42,7 @@ export class OAuth2SecurityScheme implements OAuth2SecurityScheme {
 export interface KeySecurityScheme extends SecurityScheme {
   type: "Key";
   in: "header";
-  headerName: string;
+  name: string;
 }
 
 export class KeySecurityScheme implements KeySecurityScheme {
