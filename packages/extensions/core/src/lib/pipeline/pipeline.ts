@@ -11,7 +11,6 @@ import {
   DataHandle,
   DataSource,
   IFileSystem,
-  JsonPath,
   QuickDataSource,
   createSandbox,
   stringify,
@@ -23,152 +22,14 @@ import { AutorestContext } from "../context";
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
 import { CORE_PLUGIN_MAP } from "../plugins";
 import { createArtifactEmitterPlugin } from "../plugins/emitter";
+import { buildPipeline, PipelineNode } from "./pipeline-builder";
 import { isCached, readCache, writeCache } from "./pipeline-cache";
-import { loadPlugins, PipelinePluginDefinition } from "./plugin-loader";
+import { loadPlugins } from "./plugin-loader";
 
 const safeEval = createSandbox();
 const setImmediatePromise = promisify(setImmediate);
 
 const md5 = (content: any) => (content ? createHash("md5").update(JSON.stringify(content)).digest("hex") : undefined);
-
-interface PipelineNode {
-  outputArtifact?: string;
-  pluginName: string;
-  configScope: JsonPath;
-  inputs: Array<string>;
-  skip: boolean;
-  requireDrain?: boolean;
-  dependencies: Array<PipelineNode>;
-}
-
-function buildPipeline(
-  context: AutorestContext,
-  plugins: { [key: string]: PipelinePluginDefinition },
-): { pipeline: { [name: string]: PipelineNode }; configs: { [jsonPath: string]: AutorestContext } } {
-  const cfgPipeline = context.GetEntry("pipeline");
-  const pipeline: { [name: string]: PipelineNode } = {};
-  const configCache: { [jsonPath: string]: AutorestContext } = {};
-
-  // Resolves a pipeline stage name using the current stage's name and the relative name.
-  // It considers the actually existing pipeline stages.
-  // Example:
-  // (csharp/cm/transform, commonmarker)
-  //    --> csharp/cm/commonmarker       if such a stage exists
-  //    --> csharp/commonmarker          if such a stage exists
-  //    --> commonmarker                 if such a stage exists
-  //    --> THROWS                       otherwise
-  const resolvePipelineStageName = (currentStageName: string, relativeName: string) => {
-    let stageName = currentStageName;
-    const stageTried: string[] = [];
-    while (stageName !== "") {
-      stageName = stageName.substring(0, stageName.length - 1);
-      stageName = stageName.substring(0, stageName.lastIndexOf("/") + 1);
-
-      const resolvedStageName = stageName + relativeName;
-      stageTried.push(resolvedStageName);
-      if (cfgPipeline[resolvedStageName]) {
-        return resolvedStageName;
-      }
-    }
-    const search = stageTried.map((x) => ` - ${x}`).join("\n");
-    throw new Error(
-      `Cannot resolve pipeline stage '${relativeName}' for stage '${currentStageName}'. Looked for pipeline stages:\n${search}\n`,
-    );
-  };
-
-  // One pipeline stage can generate multiple nodes in the pipeline graph
-  // if the stage is associated with a configuration scope that has multiple entries.
-  // Example: multiple generator calls
-  const createNodesAndSuffixes: (stageName: string) => { name: string; suffixes: Array<string> } = (stageName) => {
-    const cfg = cfgPipeline[stageName];
-    if (!cfg) {
-      throw new Error(`Cannot find pipeline stage '${stageName}'.`);
-    }
-    if (cfg.suffixes) {
-      return { name: stageName, suffixes: cfg.suffixes };
-    }
-
-    // derive information about given pipeline stage
-    const pluginName = cfg.plugin || stageName.split("/").reverse()[0];
-    const plugin = plugins[pluginName];
-    const outputArtifact = cfg["output-artifact"];
-    let scope = cfg.scope;
-    if (!cfg.scope) {
-      scope = `pipeline.${stageName}`;
-    }
-    const inputs: Array<string> = (!cfg.input ? [] : Array.isArray(cfg.input) ? cfg.input : [cfg.input]).map(
-      (x: string) => resolvePipelineStageName(stageName, x),
-    );
-
-    const suffixes: Array<string> = [];
-    // adds nodes using at least suffix `suffix`, the input nodes called `inputs` using the context `config`
-    // AFTER considering all the input nodes `inputNodes`
-    // Example:
-    // ("", [], cfg, [{ name: "a", suffixes: ["/0", "/1"] }])
-    // --> ("/0", ["a/0"], cfg of "a/0", [])
-    //     --> adds node `${stageName}/0`
-    // --> ("/1", ["a/1"], cfg of "a/1", [])
-    //     --> adds node `${stageName}/1`
-    // Note: inherits the config of the LAST input node (affects for example `.../generate`)
-    const addNodesAndSuffixes = (
-      suffix: string,
-      inputs: Array<string>,
-      configScope: JsonPath,
-      inputNodes: Array<{ name: string; suffixes: Array<string> }>,
-    ) => {
-      if (inputNodes.length === 0) {
-        const config = configCache[stringify(configScope)];
-        const configs = scope ? [...config.getNestedConfiguration(scope, plugin)] : [config];
-        for (let i = 0; i < configs.length; ++i) {
-          const newSuffix = configs.length === 1 ? "" : "/" + i;
-          suffixes.push(suffix + newSuffix);
-          const path: JsonPath = configScope.slice();
-          if (scope) {
-            path.push(scope);
-          }
-          if (configs.length !== 1) {
-            path.push(i);
-          }
-          configCache[stringify(path)] = configs[i];
-          pipeline[stageName + suffix + newSuffix] = {
-            pluginName: pluginName,
-            outputArtifact,
-            configScope: path,
-            inputs,
-            dependencies: [],
-            skip: false,
-          };
-        }
-      } else {
-        const inputSuffixesHead = inputNodes[0];
-        const inputSuffixesTail = inputNodes.slice(1);
-        for (const inputSuffix of inputSuffixesHead.suffixes) {
-          const additionalInput = inputSuffixesHead.name + inputSuffix;
-          addNodesAndSuffixes(
-            suffix + inputSuffix,
-            inputs.concat([additionalInput]),
-            pipeline[additionalInput].configScope,
-            inputSuffixesTail,
-          );
-        }
-      }
-    };
-
-    configCache[stringify([])] = context;
-    addNodesAndSuffixes("", [], [], inputs.map(createNodesAndSuffixes));
-
-    return { name: stageName, suffixes: (cfg.suffixes = suffixes) };
-  };
-
-  for (const pipelineStepName of Object.keys(cfgPipeline)) {
-    createNodesAndSuffixes(pipelineStepName);
-  }
-
-  return {
-    pipeline,
-    configs: configCache,
-  };
-}
 
 function isDrainRequired(p: PipelineNode) {
   if (p.requireDrain && p.dependencies) {

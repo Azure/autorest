@@ -116,11 +116,12 @@ export const extendAutorestConfiguration = (
   return newConfig;
 };
 
-export function* getNestedConfiguration(
-  config: AutorestConfiguration,
-  pluginName: string,
-): Iterable<AutorestConfiguration> {
-  const pp = pluginName.split(".");
+export function* getNestedConfiguration(config: AutorestConfiguration, scope: string): Iterable<AutorestConfiguration> {
+  const pp = scope.split(".");
+  // The default scope gets `pipeline.` prepended. Remove it as we don't want to load the config.pipeline nested config.
+  if (scope.startsWith("pipeline.")) {
+    scope = scope.slice("pipeline.".length);
+  }
   if (pp.length > 1) {
     const n = getNestedConfiguration(config, pp[0]);
     for (const s of n) {
@@ -129,7 +130,7 @@ export function* getNestedConfiguration(
     return;
   }
 
-  for (const section of arrayOf<any>(config.raw[pluginName as keyof AutorestNormalizedConfiguration])) {
+  for (const section of arrayOf<any>(config.raw[scope as keyof AutorestNormalizedConfiguration])) {
     if (section) {
       yield extendAutorestConfiguration(config, section === true ? [] : [section]);
     }
