@@ -996,15 +996,15 @@ definitions:
     allOf:
       - $ref: '#/definitions/SecurityScheme'
     properties:
-      headerName:
+      name:
         type: string
       in:
         type: string
         enum:
           - header
     required:
-      - headerName
       - in
+      - name
       - type
   KnownMediaType:
     type: string

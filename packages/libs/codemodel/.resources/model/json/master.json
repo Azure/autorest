@@ -944,15 +944,15 @@
             "header"
           ]
         },
-        "headerName": {
+        "name": {
           "type": "string"
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "headerName",
         "in",
+        "name",
         "type"
       ],
       "allOf": [

@@ -217,15 +217,15 @@ definitions:
     allOf:
       - $ref: ./http.yaml#/definitions/SecurityScheme
     properties:
-      headerName:
+      name:
         type: string
       in:
         type: string
         enum:
           - header
     required:
-      - headerName
       - in
+      - name
       - type
   Language:
     type: object
