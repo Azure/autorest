@@ -1,35 +1,28 @@
-/* eslint-disable no-console */
 import * as fs from "fs";
 import * as os from "os";
 import * as asyncio from "@azure-tools/async-io";
 import * as tasks from "@azure-tools/tasks";
 import { ExtensionManager, InvalidPackageIdentityException, UnresolvedPackageException } from "../src";
 
-const tmpFolder = fs.mkdtempSync(`${fs.mkdtempSync(`${os.tmpdir()}/test`)}/install-pkg`);
+const rootTmpFolder = fs.mkdtempSync(`${os.tmpdir()}/test`);
 
 // Those test do install pacakge and could take a little bit of time. Increasing timeout to 50s.
 const TEST_TIMEOUT = 50_000;
 
 describe("TestExtensions", () => {
   let extensionManager: ExtensionManager;
+  let tmpFolder: string;
+
   beforeEach(async () => {
+    tmpFolder = fs.mkdtempSync(`${rootTmpFolder}/install-pkg`);
+
     extensionManager = await ExtensionManager.Create(tmpFolder);
   });
 
   afterEach(async () => {
-    try {
-      await extensionManager.dispose();
-      try {
-        await tasks.Delay(500);
-        await asyncio.rmdir(tmpFolder);
-      } catch (E) {
-        console.error("rmdir is giving grief... [probably intermittent]");
-      }
-    } catch (e) {
-      console.error("ABORTING\n");
-      console.error(e);
-      throw "AFTER TEST ABORTED";
-    }
+    await extensionManager.dispose();
+    await tasks.Delay(500);
+    // await fs.promises.rm(tmpFolder, { force: true, recursive: true });
   });
 
   it(
@@ -37,7 +30,6 @@ describe("TestExtensions", () => {
     async () => {
       await extensionManager.reset();
       {
-        console.log("Installing Once");
         // install it once
         const dni = await extensionManager.findPackage("echo-cli", "*");
         const installing = extensionManager.installPackage(dni, false, 60000, (i) => {});
@@ -46,7 +38,6 @@ describe("TestExtensions", () => {
       }
 
       {
-        console.log("Attempt Overwrite");
         // install/overwrite
         const dni = await extensionManager.findPackage("echo-cli", "*");
         const installing = extensionManager.installPackage(dni, true, 60000, (i) => {});
@@ -186,14 +177,12 @@ describe("TestExtensions", () => {
     TEST_TIMEOUT,
   );
 
-  it.only(
+  it(
     "Test Start",
     async () => {
       const dni = await extensionManager.findPackage("none", "fearthecowboy/echo-cli");
-      console.log("DNI", dni);
-      const installing = extensionManager.installPackage(dni, false, 5 * 60 * 1000, (installing) => {});
-      const extension = await installing;
-      expect(await extension.configuration).toEqual("");
+      const extension = await extensionManager.installPackage(dni, false, 5 * 60 * 1000, (installing) => {});
+      expect(await extension.configuration).not.toEqual("");
       const proc = await extension.start();
       await tasks.When(proc, "exit");
     },
