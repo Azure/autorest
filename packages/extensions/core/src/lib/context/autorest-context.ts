@@ -88,7 +88,11 @@ export class AutorestContext implements IAutorestLogger {
   }
 
   public log(log: LogInfo) {
-    this.logger.log(log);
+    this.logger.log({
+      pluginName: this.plugin?.name,
+      extensionName: this.plugin?.extension?.extensionName,
+      ...log,
+    });
   }
 
   public startProgress(initialName?: string) {
@@ -233,6 +237,17 @@ export class AutorestContext implements IAutorestLogger {
         plugin,
       );
     }
+  }
+
+  public getContextForPlugin(plugin: PipelinePluginDefinition) {
+    return new AutorestContext(
+      this.config,
+      this.fileSystem,
+      this.messageEmitter,
+      this.originalLogger,
+      this.stats,
+      plugin,
+    );
   }
 
   /**
