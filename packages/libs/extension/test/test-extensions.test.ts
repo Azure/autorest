@@ -29,40 +29,32 @@ describe("TestExtensions", () => {
     "reset",
     async () => {
       await extensionManager.reset();
-      {
-        // install it once
-        const dni = await extensionManager.findPackage("echo-cli", "*");
-        const installing = extensionManager.installPackage(dni, false, 60000, (i) => {});
-        const extension = await installing;
-        expect(await extension.configuration).not.toEqual("the configuration file isnt where it should be?");
+      // install it once
+      const pkg1 = await extensionManager.findPackage("echo-cli", "*");
+      const extension1 = await extensionManager.installPackage(pkg1, false, 60000, (i) => {});
+      expect(await extension1.configuration).not.toEqual("");
+      // install/overwrite
+      const dni = await extensionManager.findPackage("echo-cli", "*");
+      const installing = extensionManager.installPackage(dni, true, 60000, (i) => {});
+
+      // install at the same time?
+      const dni2 = await extensionManager.findPackage("echo-cli", "*");
+      const installing2 = extensionManager.installPackage(dni2, true, 60000, (i) => {});
+
+      // wait for it.
+      const extension = await installing;
+      expect(await extension.configuration).not.toEqual("");
+
+      const extension2 = await installing2;
+      expect(await extension2.configuration).not.toEqual("");
+
+      const installedExtensions = await extensionManager.getInstalledExtensions();
+      expect(installedExtensions).not.toHaveLength(0);
+
+      for (const each of installedExtensions) {
+        expect(each.name).toEqual("echo-cli");
       }
-
-      {
-        // install/overwrite
-        const dni = await extensionManager.findPackage("echo-cli", "*");
-        const installing = extensionManager.installPackage(dni, true, 60000, (i) => {});
-
-        // install at the same time?
-        const dni2 = await extensionManager.findPackage("echo-cli", "*");
-        const installing2 = extensionManager.installPackage(dni2, true, 60000, (i) => {});
-
-        // wait for it.
-        const extension = await installing;
-        expect(await extension.configuration).not.toEqual("");
-
-        const extension2 = await installing2;
-        expect(await extension2.configuration).not.toEqual("");
-
-        let done = false;
-        for (const each of await extensionManager.getInstalledExtensions()) {
-          done = true;
-          // make sure we have one extension installed and that it is echo-cli (for testing)
-          expect(each.name).toEqual("echo-cli");
-        }
-
-        expect(done).toBe(true);
-        //await tasks.Delay(5000);
-      }
+      await tasks.Delay(5000);
     },
     TEST_TIMEOUT,
   );
