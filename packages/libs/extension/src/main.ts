@@ -366,8 +366,8 @@ export class ExtensionManager {
       // create the folder
       await mkdir(extension.location);
 
-      const pkgName = cleanPkgName(pkg.packageMetadata._resolved);
-      const promise = this.packageManager.install(extension.location, [pkgName], { force }, (progress) => {
+      const pkgRef = getPkgRef(pkg.packageMetadata);
+      const promise = this.packageManager.install(extension.location, [pkgRef], { force }, (progress) => {
         reportProgress({ pkg, ...progress });
       });
       await extensionRelease();
@@ -524,10 +524,11 @@ function formatLogEntry(entry: PackageManagerLogEntry): string {
   return [`${entry.severity}: ${first}`, ...lines.map((x) => `${spacing}  ${x}`)].join("\n");
 }
 
-function cleanPkgName(name: string) {
-  // See https://github.com/yarnpkg/yarn/issues/6417
-  if (name.startsWith("git+ssh://")) {
-    return name.replace("git+ssh://", "git+https://");
+function getPkgRef(pkg: pacote.ManifestResult) {
+  // Change in pacote https://github.com/npm/pacote/issues/20
+  // Issue with git+ssh in yarn + performance of git+https is much worse that github https://github.com/yarnpkg/yarn/issues/6417
+  if (pkg._from.startsWith("github:")) {
+    return pkg._from;
   }
-  return name;
+  return pkg._resolved;
 }
