@@ -527,8 +527,8 @@ function formatLogEntry(entry: PackageManagerLogEntry): string {
 function getPkgRef(pkg: pacote.ManifestResult) {
   // Change in pacote https://github.com/npm/pacote/issues/20
   // Issue with git+ssh in yarn + performance of git+https is much worse that github https://github.com/yarnpkg/yarn/issues/6417
-  if (pkg._from.startsWith("github:")) {
-    return pkg._from;
-  }
+  // if (pkg._from.startsWith("github:")) {
+  //   return pkg._from;
+  // }
   return pkg._resolved;
 }
