@@ -26,20 +26,6 @@ describe("TestExtensions", () => {
     // await fs.promises.rm(tmpFolder, { force: true, recursive: true });
   });
 
-  it.only("test lock", async () => {
-    const section = new CriticalSection();
-
-    async function run() {
-      const rel = await section.acquire();
-      Delay(3000);
-      await rel();
-    }
-
-    const p1 = run();
-    const p2 = run();
-    await Promise.all([p1, p2]);
-  });
-
   it(
     "reset",
     async () => {
