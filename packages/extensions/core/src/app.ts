@@ -186,9 +186,14 @@ async function currentMain(
     logger.debug("Writing Outputs.");
     await artifactWriter.wait();
   }
-  logger.info("Generation Complete");
+  printCompleteSummary(logger, artifactWriter);
   // return the exit code to the caller.
   return 0;
+}
+
+function printCompleteSummary(logger: IAutorestLogger, artifactWriter: ArtifactWriter) {
+  const runtime = Math.round(process.uptime() * 100) / 100;
+  logger.info(`Autorest completed in ${runtime}s. ${artifactWriter.stats.writeCompleted} files generated.`);
 }
 
 function shallowMerge(existing: any, more: any) {

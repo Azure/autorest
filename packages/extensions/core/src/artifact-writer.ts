@@ -2,16 +2,36 @@ import { AutorestConfiguration } from "@autorest/configuration";
 import { writeBinary, writeString } from "@azure-tools/uri";
 import { Artifact } from "./lib/artifact";
 
+export interface ArtifactWriterStats {
+  /**
+   * Number of write that have been requested.
+   */
+  writeRequested: number;
+
+  /**
+   * Number of that have been completed.
+   */
+  writeCompleted: number;
+}
+
 export class ArtifactWriter {
+  public stats: ArtifactWriterStats = {
+    writeRequested: 0,
+    writeCompleted: 0,
+  };
   private tasks: Promise<void>[] = [];
   public constructor(private config: AutorestConfiguration) {}
 
   public writeArtifact(artifact: Artifact) {
-    this.tasks.push(
+    this.stats.writeRequested++;
+    const action = async () => {
       artifact.type === "binary-file"
-        ? writeBinary(artifact.uri, artifact.content)
-        : writeString(artifact.uri, this.fixEol(artifact.content)),
-    );
+        ? await writeBinary(artifact.uri, artifact.content)
+        : await writeString(artifact.uri, this.fixEol(artifact.content));
+
+      this.stats.writeCompleted++;
+    };
+    this.tasks.push(action());
   }
 
   public async wait(): Promise<void> {
