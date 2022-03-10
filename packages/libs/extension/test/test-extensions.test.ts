@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import assert from "assert";
 import * as fs from "fs";
 import * as os from "os";
 import * as asyncio from "@azure-tools/async-io";
@@ -43,7 +42,7 @@ describe("TestExtensions", () => {
         const dni = await extensionManager.findPackage("echo-cli", "*");
         const installing = extensionManager.installPackage(dni, false, 60000, (i) => {});
         const extension = await installing;
-        assert.notEqual(await extension.configuration, "the configuration file isnt where it should be?");
+        expect(await extension.configuration).not.toEqual("the configuration file isnt where it should be?");
       }
 
       {
@@ -58,19 +57,19 @@ describe("TestExtensions", () => {
 
         // wait for it.
         const extension = await installing;
-        assert.notEqual(await extension.configuration, "");
+        expect(await extension.configuration).not.toEqual("");
 
         const extension2 = await installing2;
-        assert.notEqual(await extension.configuration, "");
+        expect(await extension2.configuration).not.toEqual("");
 
         let done = false;
         for (const each of await extensionManager.getInstalledExtensions()) {
           done = true;
           // make sure we have one extension installed and that it is echo-cli (for testing)
-          assert.equal(each.name, "echo-cli");
+          expect(each.name).toEqual("echo-cli");
         }
 
-        assert.equal(done, true, "Package is not installed");
+        expect(done).toBe(true);
         //await tasks.Delay(5000);
       }
     },
@@ -89,7 +88,7 @@ describe("TestExtensions", () => {
     "FindPackage- in npm",
     async () => {
       const p = await extensionManager.findPackage("autorest");
-      assert.equal(p.name, "autorest");
+      expect(p.name).toEqual("autorest");
     },
     TEST_TIMEOUT,
   );
@@ -97,15 +96,9 @@ describe("TestExtensions", () => {
   it(
     "FindPackage- unknown package",
     async () => {
-      let threw = false;
-      try {
-        const p = await extensionManager.findPackage("koooopasdpasdppasdpa");
-      } catch (e) {
-        if (e instanceof UnresolvedPackageException) {
-          threw = true;
-        }
-      }
-      assert.equal(threw, true, "Expected unknown package to throw UnresolvedPackageException");
+      await expect(async () => {
+        await extensionManager.findPackage("koooopasdpasdppasdpa");
+      }).rejects.toThrowError(UnresolvedPackageException);
     },
     TEST_TIMEOUT,
   );
@@ -113,15 +106,9 @@ describe("TestExtensions", () => {
   it(
     "BadPackageID- garbage name",
     async () => {
-      let threw = false;
-      try {
+      await expect(async () => {
         await extensionManager.findPackage("LLLLl", "$DDFOIDFJIODFJ");
-      } catch (e) {
-        if (e instanceof InvalidPackageIdentityException) {
-          threw = true;
-        }
-      }
-      assert.equal(threw, true, "Expected bad package id to throw InvalidPackageIdentityException");
+      }).rejects.toThrowError(InvalidPackageIdentityException);
     },
     TEST_TIMEOUT,
   );
@@ -130,7 +117,7 @@ describe("TestExtensions", () => {
     // gets a package
     const pkg = await extensionManager.findPackage("echo-cli");
     // finds out if there are more versions
-    assert.equal((await pkg.allVersions).length > 5, true);
+    expect((await pkg.allVersions).length > 5).toBe(true);
   });
 
   it(
@@ -141,17 +128,17 @@ describe("TestExtensions", () => {
 
       const extension = await installing;
 
-      assert.notEqual(await extension.configuration, "");
+      expect(await extension.configuration).not.toEqual("");
 
       let done = false;
 
       for (const each of await extensionManager.getInstalledExtensions()) {
         done = true;
         // make sure we have one extension installed and that it is echo-cli (for testing)
-        assert.equal(each.name, "echo-cli");
+        expect(each.name).toEqual("echo-cli");
       }
 
-      assert.equal(done, true, "Package is not installed");
+      expect(done).toBe(true);
     },
     TEST_TIMEOUT,
   );
@@ -163,17 +150,17 @@ describe("TestExtensions", () => {
       const installing = extensionManager.installPackage(dni, false, 5 * 60 * 1000, (installing) => {});
       const extension = await installing;
 
-      assert.notEqual(await extension.configuration, "");
+      expect(await extension.configuration).not.toEqual("");
 
       let done = false;
 
       for (const each of await extensionManager.getInstalledExtensions()) {
         done = true;
         // make sure we have one extension installed and that it is echo-cli (for testing)
-        assert.equal(each.name, "echo-cli");
+        expect(each.name).toEqual("echo-cli");
       }
 
-      assert.equal(done, true, "Package is not installed");
+      expect(done).toBe(true);
     },
     TEST_TIMEOUT,
   );
@@ -184,7 +171,7 @@ describe("TestExtensions", () => {
       const dni = await extensionManager.findPackage("echo-cli", "*");
       const installing = extensionManager.installPackage(dni, false, 5 * 60 * 1000, (installing) => {});
       const extension = await installing;
-      assert.notEqual(await extension.configuration, "");
+      expect(await extension.configuration).not.toEqual("");
 
       // erase the readme.md file in the installed folder (check if force works to reinstall)
       await asyncio.rmFile(await extension.configurationPath);
@@ -194,26 +181,21 @@ describe("TestExtensions", () => {
       const extension2 = await installing2;
 
       // is the file back?
-      assert.notEqual(await extension2.configuration, "");
+      expect(await extension2.configuration).not.toEqual("");
     },
     TEST_TIMEOUT,
   );
 
-  it(
+  it.only(
     "Test Start",
     async () => {
-      try {
-        const dni = await extensionManager.findPackage("none", "fearthecowboy/echo-cli");
-        const installing = extensionManager.installPackage(dni, false, 5 * 60 * 1000, (installing) => {});
-        const extension = await installing;
-        assert.notEqual(await extension.configuration, "");
-        const proc = await extension.start();
-        await tasks.When(proc, "exit");
-      } catch (E) {
-        // oh well...
-        console.error(E);
-        assert(false, "FAILED DURING START TEST.");
-      }
+      const dni = await extensionManager.findPackage("none", "fearthecowboy/echo-cli");
+      console.log("DNI", dni);
+      const installing = extensionManager.installPackage(dni, false, 5 * 60 * 1000, (installing) => {});
+      const extension = await installing;
+      expect(await extension.configuration).toEqual("");
+      const proc = await extension.start();
+      await tasks.When(proc, "exit");
     },
     TEST_TIMEOUT,
   );
