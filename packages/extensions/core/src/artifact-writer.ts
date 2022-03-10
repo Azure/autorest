@@ -24,14 +24,14 @@ export class ArtifactWriter {
 
   public writeArtifact(artifact: Artifact) {
     this.stats.writeRequested++;
-    this.tasks.push(
-      (artifact.type === "binary-file"
-        ? writeBinary(artifact.uri, artifact.content)
-        : writeString(artifact.uri, this.fixEol(artifact.content))
-      ).then(() => {
-        this.stats.writeCompleted++;
-      }),
-    );
+    const action = async () => {
+      artifact.type === "binary-file"
+        ? await writeBinary(artifact.uri, artifact.content)
+        : await writeString(artifact.uri, this.fixEol(artifact.content));
+
+      this.stats.writeCompleted++;
+    };
+    this.tasks.push(action());
   }
 
   public async wait(): Promise<void> {
