@@ -57,13 +57,7 @@ export async function availableVersions() {
       const vers = (await (await extensionManager).getPackageVersions(newCorePackage)).sort((b, a) =>
         semver.compare(a, b),
       );
-      const result = new Array<string>();
-      for (const ver of vers) {
-        if (semver.satisfies(ver, versionRange)) {
-          result.push(ver);
-        }
-      }
-      return result;
+      return vers.filter((x) => semver.satisfies(x, versionRange));
     } catch (e) {
       console.info(`No available versions of package ${newCorePackage} found.`);
     }

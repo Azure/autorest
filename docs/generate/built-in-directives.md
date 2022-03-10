@@ -8,11 +8,22 @@ Those directives are defined [here](https://github.com/Azure/autorest/blob/main/
 
 ### Selecting operation
 
-```yaml
+````yaml
 directive:
   - where-operation: <operationId>
     transform: ... # Your transform code
-```
+
+  - where-operation-match: <fullregex with // and flags>
+    transform: ... # Your transform code
+
+Example:
+```yaml
+  - where-operation: MyOperation
+    transform: $["x-marked"] = true
+
+  - where-operation-match: /mygroup_.*/i
+    transform: $["x-marked"] = true
+````
 
 ### Selecting model
 
@@ -28,7 +39,7 @@ directive:
 
 ```yaml
 directive:
-  - remove-operation: <operationId>
+  - remove-operation: <operationId>  | <regex>
 ```
 
 Examples:

@@ -935,39 +935,24 @@
         "schemes"
       ]
     },
-    "AADTokenSecurityScheme": {
+    "KeySecurityScheme": {
       "type": "object",
       "properties": {
-        "scopes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "scopes",
-        "type"
-      ],
-      "allOf": [
-        {
-          "$ref": "./http.json#/definitions/SecurityScheme"
-        }
-      ]
-    },
-    "AzureKeySecurityScheme": {
-      "type": "object",
-      "properties": {
-        "headerName": {
+        "in": {
+          "type": "string",
+          "enum": [
+            "header"
+          ]
+        },
+        "name": {
           "type": "string"
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "headerName",
+        "in",
+        "name",
         "type"
       ],
       "allOf": [

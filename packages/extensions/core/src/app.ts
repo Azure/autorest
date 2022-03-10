@@ -13,6 +13,7 @@ import {
   AutorestSyncLogger,
   Exception,
   IAutorestLogger,
+  AutorestLogger,
 } from "@autorest/common";
 import { AutorestCliArgs, parseAutorestCliArgs, getLogLevel } from "@autorest/configuration";
 import { EnhancedFileSystem, RealFileSystem } from "@azure-tools/datastore";
@@ -107,7 +108,11 @@ async function doClearFolders(protectFiles: Set<string>, clearFolders: Set<strin
   }
 }
 
-async function currentMain(logger: IAutorestLogger, args: AutorestCliArgs): Promise<number> {
+async function currentMain(
+  logger: AutorestLogger,
+  loggerSink: IAutorestLogger,
+  args: AutorestCliArgs,
+): Promise<number> {
   if (!args.options["message-format"] || args.options["message-format"] === "regular") {
     logger.info(`> Loading AutoRest core      '${__dirname}' (${VERSION})`);
   }
@@ -130,7 +135,7 @@ async function currentMain(logger: IAutorestLogger, args: AutorestCliArgs): Prom
   const githubToken = args.options["github-auth-token"] ?? process.env.GITHUB_AUTH_TOKEN;
   // get an instance of AutoRest and add the command line switches to the configuration.
   const api = new AutoRest(
-    logger,
+    loggerSink,
     new EnhancedFileSystem(githubToken),
     resolveUri(currentDirUri, args.configFileOrFolder ?? "."),
   );
@@ -181,9 +186,14 @@ async function currentMain(logger: IAutorestLogger, args: AutorestCliArgs): Prom
     logger.debug("Writing Outputs.");
     await artifactWriter.wait();
   }
-  logger.info("Generation Complete");
+  printCompleteSummary(logger, artifactWriter);
   // return the exit code to the caller.
   return 0;
+}
+
+function printCompleteSummary(logger: IAutorestLogger, artifactWriter: ArtifactWriter) {
+  const runtime = Math.round(process.uptime() * 100) / 100;
+  logger.info(`Autorest completed in ${runtime}s. ${artifactWriter.stats.writeCompleted} files generated.`);
 }
 
 function shallowMerge(existing: any, more: any) {
@@ -321,14 +331,15 @@ async function main() {
   }
 
   const args = await getCliArgs(argv);
+  const loggerSink = new ConsoleLogger({ format: args.options["message-format"] });
   const logger = new AutorestSyncLogger({
-    sinks: [new ConsoleLogger({ format: args.options["message-format"] })],
+    sinks: [loggerSink],
     processors: [new FilterLogger({ level: getLogLevel(args.options) })],
   });
 
   let exitCode = 0;
   try {
-    return await currentMain(logger, args);
+    return await currentMain(logger, loggerSink, args);
   } catch (e) {
     exitCode = 1;
     // be very careful about the following check:
@@ -340,6 +351,11 @@ async function main() {
     if (e !== false) {
       logger.log({ level: "error", message: `!${e}` });
     }
+    logger.log({
+      level: "error",
+      message:
+        "Autorest completed with an error. If you think the error message is unclear, or is a bug, please declare an issues at https://github.com/Azure/autorest/issues with the error message you are seeing.",
+    });
   } finally {
     try {
       logger.debug("Shutting Down.");

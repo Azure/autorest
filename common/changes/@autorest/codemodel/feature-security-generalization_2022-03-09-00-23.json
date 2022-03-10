@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/codemodel",
+      "comment": "**Breaking** Renamed `AADTokenSecurityScheme` to `OAuth2SecurityScheme` and renamed `AzureKeySecurityScheme` to `KeySecurityScheme`",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/codemodel",
+  "email": "tiguerin@microsoft.com"
+}

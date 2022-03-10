@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "Log information at the end of autorest run (Runtime, number of files generated).",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/core",
+  "email": "tiguerin@microsoft.com"
+}
