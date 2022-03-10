@@ -2,6 +2,7 @@ import * as fs from "fs";
 import * as os from "os";
 import * as asyncio from "@azure-tools/async-io";
 import * as tasks from "@azure-tools/tasks";
+import { CriticalSection, Delay } from "@azure-tools/tasks";
 import { ExtensionManager, InvalidPackageIdentityException, UnresolvedPackageException } from "../src";
 
 const rootTmpFolder = fs.mkdtempSync(`${os.tmpdir()}/test`);
@@ -23,6 +24,20 @@ describe("TestExtensions", () => {
     await extensionManager.dispose();
     await tasks.Delay(500);
     // await fs.promises.rm(tmpFolder, { force: true, recursive: true });
+  });
+
+  it.only("test lock", async () => {
+    const section = new CriticalSection();
+
+    async function run() {
+      const rel = await section.acquire();
+      Delay(3000);
+      await rel();
+    }
+
+    const p1 = run();
+    const p2 = run();
+    await Promise.all([p1, p2]);
   });
 
   it(
