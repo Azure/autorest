@@ -46,7 +46,7 @@
     "command-exists": "~1.2.9",
     "npm-package-arg": "^9.0.0",
     "npm": "6.14.9",
-    "pacote": "13.0.3",
+    "pacote": "~13.0.3",
     "rimraf": "^3.0.2",
     "semver": "^7.3.5",
     "yarn": "1.22.17"

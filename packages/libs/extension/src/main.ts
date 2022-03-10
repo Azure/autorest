@@ -366,14 +366,10 @@ export class ExtensionManager {
       // create the folder
       await mkdir(extension.location);
 
-      const promise = this.packageManager.install(
-        extension.location,
-        [pkg.packageMetadata._resolved],
-        { force },
-        (progress) => {
-          reportProgress({ pkg, ...progress });
-        },
-      );
+      const pkgName = cleanPkgName(pkg.packageMetadata._resolved);
+      const promise = this.packageManager.install(extension.location, [pkgName], { force }, (progress) => {
+        reportProgress({ pkg, ...progress });
+      });
       await extensionRelease();
 
       const result = await promise;
@@ -526,4 +522,12 @@ function formatLogEntry(entry: PackageManagerLogEntry): string {
   const [first, ...lines] = entry.message.split("\n");
   const spacing = " ".repeat(entry.severity.length);
   return [`${entry.severity}: ${first}`, ...lines.map((x) => `${spacing}  ${x}`)].join("\n");
+}
+
+function cleanPkgName(name: string) {
+  // See https://github.com/yarnpkg/yarn/issues/6417
+  if (name.startsWith("git+ssh://")) {
+    return name.replace("git+ssh://", "git+https://");
+  }
+  return name;
 }

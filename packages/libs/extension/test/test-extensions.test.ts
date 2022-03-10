@@ -178,7 +178,7 @@ describe("TestExtensions", () => {
   );
 
   it(
-    "Test Start",
+    "start extension",
     async () => {
       const dni = await extensionManager.findPackage("none", "fearthecowboy/echo-cli");
       const extension = await extensionManager.installPackage(dni, false, 5 * 60 * 1000, (installing) => {});
