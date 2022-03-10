@@ -6,7 +6,7 @@
 import { ChildProcess, spawn } from "child_process";
 import { homedir, tmpdir } from "os";
 import { basename, delimiter, dirname, extname, isAbsolute, join, normalize, resolve } from "path";
-import { exists, isDirectory, isFile, mkdir, readdir, readFile, rmdir } from "@azure-tools/async-io";
+import { exists, isDirectory, isFile, mkdir, readdir, rmdir } from "@azure-tools/async-io";
 import { CriticalSection, Delay, Exception, Mutex, shallowCopy, SharedLock } from "@azure-tools/tasks";
 import { resolve as npmResolvePackage } from "npm-package-arg";
 import * as pacote from "pacote";
@@ -207,9 +207,15 @@ export class ExtensionManager {
     private packageManager: PackageManager,
   ) {}
 
-  public async getPackageVersions(name: string): Promise<Array<string>> {
-    const versions = await this.packageManager.getPackageVersions(process.cwd(), name);
-    return versions.sort((b, a) => semver.compare(a, b));
+  /**
+   * Return the list of version for the given package name [+ version range]
+   *
+   * @param name Name of the package with or without version range.
+   * @returns List of semver versions
+   */
+  public async getPackageVersions(name: string): Promise<string[]> {
+    const packument = await pacote.packument(name);
+    return Object.keys(packument.versions);
   }
 
   public async findPackage(name: string, version = "latest"): Promise<Package> {
@@ -222,15 +228,8 @@ export class ExtensionManager {
       // version can be a version or any one of the formats that
       // npm accepts (path, targz, git repo)
       const resolved = resolveName(name, version);
-      let resolvedName = resolved.raw;
+      const resolvedName = resolved.raw;
 
-      // get all matching package versions for that
-      if (version.startsWith("~") || version.startsWith("^")) {
-        const vers = (await this.getPackageVersions(resolved.raw)).filter((each) => semver.satisfies(each, version));
-        if (vers.length > 0) {
-          resolvedName = `${resolved.name}@${vers[0]}`;
-        }
-      }
       // get the package metadata
       const pm = await fetchPackageMetadata(resolvedName);
       return new Package(resolved, pm, this);

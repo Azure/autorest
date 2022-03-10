@@ -53,10 +53,4 @@ export class Npm implements PackageManager {
   public async clean(directory: string): Promise<void> {
     await execNpm(directory, "cache", "clean", "--force");
   }
-
-  public async getPackageVersions(directory: string, packageName: string): Promise<string[]> {
-    const result = await execNpm(directory, "view", packageName, "versions", "--json");
-
-    return JSON.parse(result.stdout).data;
-  }
 }
