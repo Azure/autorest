@@ -14,8 +14,11 @@
     "lint:fix": "eslint ./src --fix --ext .ts",
     "lint": "eslint ./src --ext .ts --max-warnings=0",
     "prepare": "npm run build",
-    "test": "jest --watchAll --coverage=false",
-    "test:ci": "jest --ci",
+    "test": "jest --coverage=false --watch",
+    "test:unit:ci": "jest --ci",
+    "test:e2e": "jest --forceExit --runInBand --config ./jest.e2e.config.js",
+    "test:e2e:ci": "jest --ci --forceExit --runInBand --config ./jest.e2e.config.js",
+    "test:ci": "npm run test:unit:ci && npm run test:e2e:ci",
     "clean": "rimraf ./dist ./temp"
   },
   "repository": {
@@ -44,14 +47,12 @@
     "@azure-tools/tasks": "~3.0.0",
     "@azure/logger": "^1.0.2",
     "command-exists": "~1.2.9",
-    "npm-normalize-package-bin": "1.0.1",
-    "npm-package-arg": "^8.1.0",
+    "npm-package-arg": "^9.0.0",
     "npm": "6.14.9",
-    "pacote": "9.2.3",
+    "pacote": "~9.5.12",
     "rimraf": "^3.0.2",
-    "safe-buffer": "5.2.0",
-    "semver": "^5.5.1",
-    "yarn": "1.22.10"
+    "semver": "^7.3.5",
+    "yarn": "1.22.17"
   },
   "devDependencies": {
     "@types/jest": "^26.0.20",

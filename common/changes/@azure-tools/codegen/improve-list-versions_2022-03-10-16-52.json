@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/codegen",
+      "comment": "Bump `semver` dependency",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@azure-tools/codegen",
+  "email": "tiguerin@microsoft.com"
+}

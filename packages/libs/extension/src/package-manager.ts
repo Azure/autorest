@@ -54,8 +54,6 @@ export interface PackageManager {
   ): Promise<PackageInstallationResult>;
 
   clean(directory: string): Promise<void>;
-
-  getPackageVersions(directory: string, packageName: string): Promise<any[]>;
 }
 
 /**

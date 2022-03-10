@@ -85,14 +85,13 @@ dependencies:
   morgan: 1.10.0
   mustache: 4.2.0
   npm: 6.14.9
-  npm-normalize-package-bin: 1.0.1
-  npm-package-arg: 8.1.5
-  pacote: 9.2.3
+  npm-package-arg: 9.0.0
+  pacote: 9.5.12
   prettier: 2.3.2
   recursive-diff: 1.0.8
   rimraf: 3.0.2
   safe-buffer: 5.2.0
-  semver: 5.7.1
+  semver: 7.3.5
   source-map: 0.7.3
   source-map-support: 0.5.21
   supertest: 6.2.2
@@ -115,7 +114,7 @@ dependencies:
   winston: 3.3.4
   yaml-ast-parser: 0.0.43
   yargs: 17.2.1
-  yarn: 1.22.10
+  yarn: 1.22.17
 lockfileVersion: 5.2
 packages:
   /@ampproject/remapping/2.1.2:
@@ -2130,13 +2129,14 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==
-  /cacache/11.3.3:
+  /cacache/12.0.4:
     dependencies:
       bluebird: 3.7.2
       chownr: 1.1.4
       figgy-pudding: 3.5.2
       glob: 7.1.7
       graceful-fs: 4.2.9
+      infer-owner: 1.0.4
       lru-cache: 5.1.1
       mississippi: 3.0.0
       mkdirp: 0.5.5
@@ -2148,7 +2148,7 @@ packages:
       y18n: 4.0.3
     dev: false
     resolution:
-      integrity: sha512-p8WcneCytvzPxhDvYp31PD039vi77I12W+/KfR9S8AZbaiARFBCpsPJS+9uhWfeBfeAtW7o/4vt3MUqLkbY6nA==
+      integrity: sha512-a0tMB40oefvuInr4Cwb3GerbL9xTj1D5yg0T5xrjGCGyfvbxseIXX7BAO/u/hIXdafzOI5JC3wDwHyf24buOAQ==
   /cache-base/1.0.1:
     dependencies:
       collection-visit: 1.0.0
@@ -4350,6 +4350,10 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-Sl/W0nzDMvN+VBmlBNu4NxBckok=
+  /infer-owner/1.0.4:
+    dev: false
+    resolution:
+      integrity: sha512-IClj+Xz94+d7irH5qRyfJonOdfTzuDaifE6ZPWfx0N0+/ATZCbuTPq2prFl526urkQd90WyUKIh1DfBQ2hMz9A==
   /inflight/1.0.6:
     dependencies:
       once: 1.4.0
@@ -5739,13 +5743,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-W0b4AUft7leIcPCG0Eghz5mOVR8=
-  /lru-cache/4.1.5:
-    dependencies:
-      pseudomap: 1.0.2
-      yallist: 2.1.2
-    dev: false
-    resolution:
-      integrity: sha512-sWZlbEP2OsHNkXrMl5GYk/jKk70MBng6UU4YI/qGDYbgf6YbP4EvmqISbXCoJiRKs+1bSpFHVgQxvJ17F2li5g==
   /lru-cache/5.1.1:
     dependencies:
       yallist: 3.1.1
@@ -5781,10 +5778,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-s8UhlNe7vPKomQhC1qFelMokr/Sc3AgNbso3n74mVPA5LTZwkB9NlXf4XPamLxJE8h0gh73rM94xvwRT2CVInw==
-  /make-fetch-happen/4.0.2:
+  /make-fetch-happen/5.0.2:
     dependencies:
       agentkeepalive: 3.5.2
-      cacache: 11.3.3
+      cacache: 12.0.4
       http-cache-semantics: 3.8.1
       http-proxy-agent: 2.1.0
       https-proxy-agent: 2.2.4
@@ -5796,7 +5793,7 @@ packages:
       ssri: 6.0.2
     dev: false
     resolution:
-      integrity: sha512-YMJrAjHSb/BordlsDEcVcPyTbiJKkzqMf48N8dAJZT9Zjctrkb6Yg4TY9Sq2AwSIQJFn5qBBKVTYt3vP5FMIHA==
+      integrity: sha512-07JHC0r1ykIoruKO8ifMXu+xEU8qOXDFETylktdug6vJDACnP+HKevOu3PXyNPzFyTSlz8vrBYlBO1JZRe8Cag==
   /makeerror/1.0.12:
     dependencies:
       tmpl: 1.0.5
@@ -6252,16 +6249,16 @@ packages:
     dev: false
     resolution:
       integrity: sha512-qBpssaL3IOZWi5vEKUKW0cO7kzLeT+EQO9W8RsLOZf76KF9E/K9+wH0C7t06HXPpaH8WH5xF1MExLuCwbTqRUg==
-  /npm-package-arg/8.1.5:
+  /npm-package-arg/9.0.0:
     dependencies:
       hosted-git-info: 4.1.0
       semver: 7.3.5
       validate-npm-package-name: 3.0.0
     dev: false
     engines:
-      node: '>=10'
+      node: ^12.13.0 || ^14.15.0 || >=16
     resolution:
-      integrity: sha512-LhgZrg0n0VgvzVdSm1oiZworPbTxYHUJCgtsJW8mGvlDpxTM1vSJc3m5QZeUkhAHIzbz3VCHd/R4osi1L1Tg/Q==
+      integrity: sha512-yhzXxeor+Zfhe5MGwPdDumz6HtNlj2pMekWB95IX3CC6uDNgde0oPKHDCLDPoJqQfd0HqAWt+y4Hs5m7CK1+9Q==
   /npm-packlist/1.4.8:
     dependencies:
       ignore-walk: 3.0.4
@@ -6270,25 +6267,26 @@ packages:
     dev: false
     resolution:
       integrity: sha512-5+AZgwru5IevF5ZdnFglB5wNlHG1AOOuw28WhUq8/8emhBmLv6jX5by4WJCh7lW0uSYZYS6DXqIsyZVIXRZU9A==
-  /npm-pick-manifest/2.2.3:
+  /npm-pick-manifest/3.0.2:
     dependencies:
       figgy-pudding: 3.5.2
       npm-package-arg: 6.1.1
       semver: 5.7.1
     dev: false
     resolution:
-      integrity: sha512-+IluBC5K201+gRU85vFlUwX3PFShZAbAgDNp2ewJdWMVSppdo/Zih0ul2Ecky/X7b51J7LrrUAP+XOmOCvYZqA==
-  /npm-registry-fetch/3.9.1:
+      integrity: sha512-wNprTNg+X5nf+tDi+hbjdHhM4bX+mKqv6XmPh7B5eG+QY9VARfQPfCEH013H5GqfNj6ee8Ij2fg8yk0mzps1Vw==
+  /npm-registry-fetch/4.0.7:
     dependencies:
       JSONStream: 1.3.5
       bluebird: 3.7.2
       figgy-pudding: 3.5.2
       lru-cache: 5.1.1
-      make-fetch-happen: 4.0.2
+      make-fetch-happen: 5.0.2
       npm-package-arg: 6.1.1
+      safe-buffer: 5.2.1
     dev: false
     resolution:
-      integrity: sha512-VQCEZlydXw4AwLROAXWUR7QDfe2Y8Id/vpAgp6TI1/H78a4SiQ1kQrKZALm5/zxM5n4HIi+aYb+idUAV/RuY0Q==
+      integrity: sha512-cny9v0+Mq6Tjz+e0erFAB+RYJ/AVGzkjnISiobqP8OWj9c9FLoZZu8/SPSKJWE17F1tk4018wfjV+ZbIbqC7fQ==
   /npm-run-path/2.0.2:
     dependencies:
       path-key: 2.0.1
@@ -6693,24 +6691,27 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
-  /pacote/9.2.3:
+  /pacote/9.5.12:
     dependencies:
       bluebird: 3.7.2
-      cacache: 11.3.3
+      cacache: 12.0.4
+      chownr: 1.1.4
       figgy-pudding: 3.5.2
       get-stream: 4.1.0
       glob: 7.1.7
-      lru-cache: 4.1.5
-      make-fetch-happen: 4.0.2
+      infer-owner: 1.0.4
+      lru-cache: 5.1.1
+      make-fetch-happen: 5.0.2
       minimatch: 3.1.2
       minipass: 2.9.0
       mississippi: 3.0.0
       mkdirp: 0.5.5
       normalize-package-data: 2.5.0
+      npm-normalize-package-bin: 1.0.1
       npm-package-arg: 6.1.1
       npm-packlist: 1.4.8
-      npm-pick-manifest: 2.2.3
-      npm-registry-fetch: 3.9.1
+      npm-pick-manifest: 3.0.2
+      npm-registry-fetch: 4.0.7
       osenv: 0.1.5
       promise-inflight: 1.0.1
       promise-retry: 1.1.1
@@ -6724,7 +6725,7 @@ packages:
       which: 1.3.1
     dev: false
     resolution:
-      integrity: sha512-Y3+yY3nBRAxMlZWvr62XLJxOwCmG9UmkGZkFurWHoCjqF0cZL72cTOCRJTvWw8T4OhJS2RTg13x4oYYriauvEw==
+      integrity: sha512-BUIj/4kKbwWg4RtnBncXPJd15piFSVNpTzY0rysSr3VnMowTYgkGKcaHrbReepAkjTr8lH2CVWRi58Spg2CicQ==
   /parallel-transform/1.2.0:
     dependencies:
       cyclist: 1.0.1
@@ -7027,10 +7028,6 @@ packages:
       node: '>= 0.10'
     resolution:
       integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==
-  /pseudomap/1.0.2:
-    dev: false
-    resolution:
-      integrity: sha1-8FKijacOYYkX7wqKw0wa5aaChrM=
   /psl/1.8.0:
     dev: false
     resolution:
@@ -8967,7 +8964,7 @@ packages:
       integrity: sha512-QGkOQc8XL6Bt5PwnsExKBPuMKBxnGxWWW3fU55Xt4feHozMUhdUMaBCk290qpm/wG5u/RSKzwdAC4i51YigihA==
   /wide-align/1.1.5:
     dependencies:
-      string-width: 1.0.2
+      string-width: 4.2.3
     dev: false
     resolution:
       integrity: sha512-eDMORYaPNZ4sQIuuYPDHdQvf4gyCF9rEEV/yPxGfwPkRodwEgiMUUXTx/dex+Me0wxx53S+NgUHaP7y3MGlDmg==
@@ -9082,10 +9079,6 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==
-  /yallist/2.1.2:
-    dev: false
-    resolution:
-      integrity: sha1-HBH5IY8HYImkfdUS+TxmmaaoHVI=
   /yallist/3.1.1:
     dev: false
     resolution:
@@ -9184,14 +9177,14 @@ packages:
       node: '>=12'
     resolution:
       integrity: sha512-XfR8du6ua4K6uLGm5S6fA+FIJom/MdJcFNVY8geLlp2v8GYbOXD4EB1tPNZsRn4vBzKGMgb5DRZMeWuFc2GO8Q==
-  /yarn/1.22.10:
+  /yarn/1.22.17:
     dev: false
     engines:
       node: '>=4.0.0'
     hasBin: true
     requiresBuild: true
     resolution:
-      integrity: sha512-IanQGI9RRPAN87VGTF7zs2uxkSyQSrSPsju0COgbsKQOOXr5LtcVPeyXWgwVa0ywG3d8dg6kSYKGBuYK021qeA==
+      integrity: sha512-H0p241BXaH0UN9IeH//RT82tl5PfNraVpSpEoW+ET7lmopNC61eZ+A+IDvU8FM6Go5vx162SncDL8J1ZjRBriQ==
   /yn/2.0.0:
     dev: false
     engines:
@@ -9238,7 +9231,7 @@ packages:
       prettier: 2.3.2
       rimraf: 3.0.2
       safe-buffer: 5.2.0
-      semver: 5.7.1
+      semver: 7.3.5
       source-map: 0.7.3
       source-map-support: 0.5.21
       ts-jest: 27.1.3_292c4e99862771b539f45e23f67003cc
@@ -9253,7 +9246,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-XloMFBAw1oi4A9cythhKy4B1XH/PaEFyQI5GN/9SQo2/SYTxhDJSMMhTQ9ktB8KzmK/2R3n3/vHXCanctYn/LQ==
+      integrity: sha512-CgBJweMQtsK8peEGdCCHO6qNSQueEsMgsYhiHXjEN5JeyGl7wgpvNVMmSbZCdSisxxj5tVUIyvOdv8BUyq7KWw==
       tarball: file:projects/autorest.tgz
     version: 0.0.0
   file:projects/cadl.tgz_ts-node@9.1.1+webpack@5.40.0:
@@ -9309,7 +9302,7 @@ packages:
       jest: 27.5.1_ts-node@9.1.1
       js-yaml: 4.0.0
       rimraf: 3.0.2
-      semver: 5.7.1
+      semver: 7.3.5
       source-map-support: 0.5.21
       ts-jest: 27.1.3_292c4e99862771b539f45e23f67003cc
       typescript: 4.4.4
@@ -9320,7 +9313,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-G+bprtkqcXKoat2JELN9SYYHCsBAUhYXxUoW+4hOoxParpLTnw2xX4pt60VBE8jrfyisZrclXX9CYj21ufNzsQ==
+      integrity: sha512-2o1naqmqzOv9pJeeUzrkO3rXvyaUjVn/Lrc2CVhYjrYCL6y9aQMTpoJL66CHlI3u3Gy4Jsp1L341IK8MpP1+mg==
       tarball: file:projects/codegen.tgz
     version: 0.0.0
   file:projects/codemodel.tgz_prettier@2.3.2:
@@ -9615,14 +9608,14 @@ packages:
       mkdirp: 0.5.5
       npm: 6.14.9
       npm-normalize-package-bin: 1.0.1
-      npm-package-arg: 8.1.5
-      pacote: 9.2.3
+      npm-package-arg: 9.0.0
+      pacote: 9.5.12
       rimraf: 3.0.2
       safe-buffer: 5.2.0
-      semver: 5.7.1
+      semver: 7.3.5
       source-map-support: 0.5.21
       typescript: 4.4.4
-      yarn: 1.22.10
+      yarn: 1.22.17
     dev: false
     id: file:projects/extension.tgz
     name: '@rush-temp/extension'
@@ -9630,7 +9623,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-jpSfbjbNzvaCAXempq/JLTmHe5YLzSnB2xbnyw8MMOoKhCepybR0onj/V1X9N93yE4ebi6Vjo773JKCFQJrHPg==
+      integrity: sha512-G8EMr8cYd8S/lo9KjbXdwACY6TKjkqdFGth6ofn+86LqjG4+OifXT1NVLMlwghNXddsPzabcCIQp6aLm465Ccw==
       tarball: file:projects/extension.tgz
     version: 0.0.0
   file:projects/fixer.tgz_ts-node@9.1.1:
@@ -9935,6 +9928,7 @@ packages:
       integrity: sha512-qi2rEcvBtxQHnMA94NCGN35/2sAgi13XqbhkQHhVSZP8ccQObBI+HLAHNHBQToR5bRn9KvzRdqewz3HXkcW3Lw==
       tarball: file:projects/yaml.tgz
     version: 0.0.0
+registry: ''
 specifiers:
   '@azure-tools/async-io': ~3.0.0
   '@azure-tools/object-comparison': ~3.0.0
@@ -10022,14 +10016,13 @@ specifiers:
   morgan: ^1.10.0
   mustache: ^4.1.0
   npm: 6.14.9
-  npm-normalize-package-bin: 1.0.1
-  npm-package-arg: ^8.1.0
-  pacote: 9.2.3
+  npm-package-arg: ^9.0.0
+  pacote: ~9.5.12
   prettier: ~2.3.1
   recursive-diff: ~1.0.6
   rimraf: ^3.0.2
   safe-buffer: 5.2.0
-  semver: ^5.5.1
+  semver: ^7.3.5
   source-map: 0.7.3
   source-map-support: ^0.5.19
   supertest: ^6.0.1
@@ -10052,4 +10045,4 @@ specifiers:
   winston: ~3.3.3
   yaml-ast-parser: 0.0.43
   yargs: 17.2.1
-  yarn: 1.22.10
+  yarn: 1.22.17

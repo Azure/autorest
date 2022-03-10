@@ -98,11 +98,6 @@ export class Yarn implements PackageManager {
     await this.execYarn(directory, ["cache", "clean", "--force"]);
   }
 
-  public async getPackageVersions(directory: string, packageName: string): Promise<string[]> {
-    const result = await this.execYarn(directory, ["info", packageName, "versions", "--json"]);
-    return JSON.parse(result.stdout).data;
-  }
-
   public async execYarn(cwd: string, args: string[], onYarnEvent?: (event: YarnEvent) => void) {
     const procArgs = [
       this.pathToYarnCli ?? (await getPathToYarnCli()),
