@@ -1,0 +1,13 @@
+export interface PathReference {
+  $ref: string;
+}
+
+export type Refable<T> = T | PathReference;
+
+export interface Dereferenced<T> {
+  instance: T;
+  name: string;
+  fromRef?: boolean;
+}
+
+export type ExtensionKey = `x-${string}`;
