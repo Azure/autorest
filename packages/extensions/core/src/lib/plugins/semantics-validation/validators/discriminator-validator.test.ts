@@ -7,7 +7,7 @@ const baseModel: oai3.Model = {
     title: "Semantic Validation Unit Tests",
     version: "1.0",
   },
-  openApi: "3.0.0",
+  openapi: "3.0.0",
   paths: {},
 };
 

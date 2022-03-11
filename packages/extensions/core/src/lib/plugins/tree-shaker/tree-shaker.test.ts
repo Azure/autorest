@@ -4,7 +4,7 @@ import { OAI3Shaker } from "./tree-shaker";
 
 const createTestModel = (model: Partial<Model>): Model => {
   return {
-    openApi: "3.0.0",
+    openapi: "3.0.0",
     paths: {},
     info: {
       title: "Test spec",
