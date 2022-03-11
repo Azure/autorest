@@ -1,4 +1,5 @@
-import { OpenAPI2Definition, OpenAPI2Reference, Refable } from "./definition";
+import { PathReference, Refable } from "../common";
+import { OpenAPI2Definition } from "./definition";
 import { OpenAPI2HeaderDefinition } from "./header";
 import { OpenAPI2Parameter } from "./parameter";
 
@@ -33,4 +34,4 @@ export interface OpenAPI2OperationResponse {
   headers?: { [headerName: string]: OpenAPI2ResponseHeader };
 }
 
-export type OpenAPI2ResponseHeader = OpenAPI2Reference & OpenAPI2HeaderDefinition;
+export type OpenAPI2ResponseHeader = PathReference & OpenAPI2HeaderDefinition;

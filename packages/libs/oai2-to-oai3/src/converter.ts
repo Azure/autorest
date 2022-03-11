@@ -11,7 +11,7 @@ import {
   createMappingTree,
 } from "@azure-tools/datastore";
 import { JsonPointer, getFromJsonPointer, appendJsonPointer } from "@azure-tools/json";
-import { includeXDashKeys } from "@azure-tools/openapi";
+import { includeXDashKeys, Refable } from "@azure-tools/openapi";
 import {
   OpenAPI2Document,
   OpenAPI2ResponseHeader,
@@ -659,7 +659,7 @@ export class Oai2ToOai3 {
     }
   }
 
-  private async visitAllOf(target: MappingTreeArray<oai3.Refable<oai3.Schema>>, allOfMembers: () => Iterable<Node>) {
+  private async visitAllOf(target: MappingTreeArray<Refable<oai3.Schema>>, allOfMembers: () => Iterable<Node>) {
     for (const { key: index, value, pointer, childIterator } of allOfMembers()) {
       target.__push__(this.newObject(pointer));
       await this.visitSchema(target[index], value, childIterator);

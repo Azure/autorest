@@ -1,24 +1,20 @@
+import { PathReference } from "../common";
+
 export interface OpenAPI2Definition {
   [key: string]: unknown;
 
-  additionalProperties?: OpenAPI2Definition | OpenAPI2Reference | boolean;
+  additionalProperties?: OpenAPI2Definition | PathReference | boolean;
   allOf?: OpenAPI2Definition[];
   description?: string;
   enum?: string[];
   format?: string;
-  items?: OpenAPI2Definition | OpenAPI2Reference;
-  oneOf?: (OpenAPI2Definition | OpenAPI2Reference)[];
-  properties?: { [index: string]: OpenAPI2Definition | OpenAPI2Reference };
+  items?: OpenAPI2Definition | PathReference;
+  oneOf?: (OpenAPI2Definition | PathReference)[];
+  properties?: { [index: string]: OpenAPI2Definition | PathReference };
   required?: string[];
   title?: string;
   type?: OpenAPI2Type; // allow this to be optional to cover cases when this is missing
 }
-
-export interface OpenAPI2Reference<T = any> {
-  $ref: string;
-}
-
-export type Refable<T> = OpenAPI2Reference<T> | T;
 
 export type OpenAPI2Type =
   | "array"

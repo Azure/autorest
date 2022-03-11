@@ -1,4 +1,4 @@
-import { Dereferenced, ExtensionKey, PathReference, Refable } from "./v3/common";
+import { Dereferenced, ExtensionKey, PathReference, Refable } from "./common";
 
 /**
  * Returns true if the key starts with `x-`

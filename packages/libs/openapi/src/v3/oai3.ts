@@ -3,7 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { EnumStr, Refable as Reference } from "./common";
+import { Refable } from "../common";
+import { EnumStr } from "./common";
 
 export type Dictionary<T> = { [key: string]: T };
 
@@ -73,12 +74,12 @@ export function isQueryParameter(parameter: Parameter): parameter is InQuery & P
 /**
  * Properties have additional data when referencing them
  */
-export type PropertyReference<T> = PropertyDetails & Reference<T>;
+export type PropertyReference<T> = PropertyDetails & Refable<T>;
 
 /**
  * Parameter references could have additional data to override the shared parameter value.
  */
-export type ParameterReference<T> = ParameterDetails & Reference<T>;
+export type ParameterReference<T> = ParameterDetails & Refable<T>;
 
 /**
  * @description common ways of serializing simple parameters
@@ -142,15 +143,15 @@ export interface Model extends Extensions {
 }
 
 export interface Components extends Extensions {
-  schemas?: Dictionary<Reference<Schema>>;
-  responses?: Dictionary<Reference<Response>>;
-  parameters?: Dictionary<Reference<Parameter>>;
-  examples?: Dictionary<Reference<Example>>;
-  requestBodies?: Dictionary<Reference<RequestBody>>;
-  headers?: Dictionary<Reference<Header>>;
-  securitySchemes?: Dictionary<Reference<SecurityScheme>>;
-  links?: Dictionary<Reference<Link>>;
-  callbacks?: Dictionary<Reference<Callback>>;
+  schemas?: Dictionary<Refable<Schema>>;
+  responses?: Dictionary<Refable<Response>>;
+  parameters?: Dictionary<Refable<Parameter>>;
+  examples?: Dictionary<Refable<Example>>;
+  requestBodies?: Dictionary<Refable<RequestBody>>;
+  headers?: Dictionary<Refable<Header>>;
+  securitySchemes?: Dictionary<Refable<SecurityScheme>>;
+  links?: Dictionary<Refable<Link>>;
+  callbacks?: Dictionary<Refable<Callback>>;
 }
 
 export interface APIKeySecurityScheme extends Extensions {
@@ -188,7 +189,7 @@ export interface Discriminator extends Extensions {
 }
 export interface Encoding extends Extensions {
   contentType?: string;
-  headers?: Dictionary<Reference<Header>>;
+  headers?: Dictionary<Refable<Header>>;
   style?: QueryEncodingStyle;
   explode?: boolean;
   allowReserved?: boolean;
@@ -248,7 +249,7 @@ export interface MediaType extends Extensions, Partial<HasExample>, Partial<HasE
   /** A map between a property name and its encoding information. The key, being the property name, MUST exist in the schema as a property. The encoding object SHALL only apply to requestBody objects when the media type is multipart or application/x-www-form-urlencoded. */
   encoding?: Dictionary<Encoding>;
   /** The schema defining the type used for the request body. */
-  schema?: Reference<Schema>;
+  schema?: Refable<Schema>;
 }
 
 export interface NonBearerHTTPSecurityScheme extends Extensions {
@@ -280,9 +281,9 @@ export interface HttpOperation extends Deprecatable, Extensions, Implementation<
   externalDocs?: ExternalDocumentation;
   operationId?: string;
   parameters?: ParameterReference<Parameter>[];
-  requestBody?: Reference<RequestBody>;
-  responses: Dictionary<Reference<Response>>;
-  callbacks?: Dictionary<Reference<Callback>>;
+  requestBody?: Refable<RequestBody>;
+  responses: Dictionary<Refable<Response>>;
+  callbacks?: Dictionary<Refable<Callback>>;
 
   security?: Array<SecurityRequirement>;
   servers?: Array<Server>;
@@ -293,7 +294,7 @@ export interface Deprecatable {
 }
 
 export interface HasSchema {
-  schema: Reference<Schema>;
+  schema: Refable<Schema>;
   explode?: boolean;
 }
 export interface HasContent {
@@ -303,7 +304,7 @@ export interface HasExample {
   example: any;
 }
 export interface HasExamples {
-  examples: Dictionary<Reference<HasExample>>;
+  examples: Dictionary<Refable<HasExample>>;
 }
 export interface InCookie extends HasSchema, Partial<HasExample>, Partial<HasExamples> {
   in: ParameterLocation.Cookie;
@@ -368,9 +369,9 @@ export interface RequestBody extends Extensions {
 
 export interface Response extends Extensions {
   description: string;
-  headers?: Dictionary<Reference<Header>>;
+  headers?: Dictionary<Refable<Header>>;
   content?: Dictionary<MediaType>;
-  links?: Dictionary<Reference<Link>>;
+  links?: Dictionary<Refable<Link>>;
 }
 
 export interface Schema extends Deprecatable, Extensions, Implementation<SchemaDetails> {
@@ -418,13 +419,13 @@ export interface Schema extends Deprecatable, Extensions, Implementation<SchemaD
   enum?: Array<any>;
 
   /* properties with potential references */
-  not?: Reference<Schema>;
-  allOf?: Array<Reference<Schema>>;
-  oneOf?: Array<Reference<Schema>>;
-  anyOf?: Array<Reference<Schema>>;
-  items?: Reference<Schema>;
+  not?: Refable<Schema>;
+  allOf?: Array<Refable<Schema>>;
+  oneOf?: Array<Refable<Schema>>;
+  anyOf?: Array<Refable<Schema>>;
+  items?: Refable<Schema>;
   properties?: Dictionary<PropertyReference<Schema>>;
-  additionalProperties?: boolean | Reference<Schema>;
+  additionalProperties?: boolean | Refable<Schema>;
 }
 
 export interface Server extends Extensions {
