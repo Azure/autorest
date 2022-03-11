@@ -592,7 +592,7 @@ export class Oai2ToOai3 {
     for (const { key, value, pointer, childIterator } of schemaItemMemebers()) {
       switch (key) {
         case "$ref":
-          await this.copyRef(target as any, value, pointer);
+          await this.copyRef(target as any, { $ref: value }, pointer);
           break;
         case "additionalProperties":
           if (typeof value === "boolean") {
