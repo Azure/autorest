@@ -268,7 +268,7 @@ export class ProfileFilter extends Transformer<any, oai.Model> {
           break;
 
         default:
-          this.clone(targetParent, key, pointer, value);
+          this.clone(targetParent, key as any, pointer, value);
           break;
       }
     }

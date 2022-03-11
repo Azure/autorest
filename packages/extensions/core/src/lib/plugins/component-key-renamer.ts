@@ -31,7 +31,7 @@ export class ComponentKeyRenamer extends Transformer<any, oai.Model> {
 
         // copy these over without worrying about moving things down to components.
         default:
-          this.clone(targetParent, key, pointer, value);
+          this.clone(targetParent, key as any, pointer, value);
           break;
       }
     }

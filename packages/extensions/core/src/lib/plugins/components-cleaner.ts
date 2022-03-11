@@ -55,14 +55,13 @@ export class ComponentsCleaner extends Transformer<any, oai.Model> {
       switch (key) {
         case "components":
           {
-            const components =
-              <oai.Components>targetParent.components || this.newObject(targetParent, "components", pointer);
+            const components = targetParent.components || this.newObject(targetParent, "components", pointer);
             this.visitComponents(components, children);
           }
           break;
 
         default:
-          this.clone(targetParent, key, pointer, value);
+          this.clone(targetParent, key as any, pointer, value);
           break;
       }
     }
@@ -228,12 +227,12 @@ class UnsuedComponentFinder {
     }
 
     for (const item of arrayify(items)) {
-      if (item.$ref) {
+      if ("$ref" in item) {
         const refParts = item.$ref.split("/");
         const componentRefUid = refParts.pop();
         const refType = refParts.pop() as keyof ComponentTracker;
         if (
-          this.componentsToKeep[refType].has(componentRefUid) &&
+          this.componentsToKeep[refType].has(componentRefUid as string) &&
           !this.componentsToKeep[containerType].has(currentComponentUid)
         ) {
           this.componentsToKeep[containerType].add(currentComponentUid);

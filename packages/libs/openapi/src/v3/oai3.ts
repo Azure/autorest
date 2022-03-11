@@ -3,26 +3,25 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Refable } from "../common";
+import { Extensions, Refable } from "../common";
 import { EnumStr } from "./common";
 
 export type Dictionary<T> = { [key: string]: T };
 
 // OAI3 variants for the basic model definitions.
 
-/** Nearly all classes can support additional key-value pairs where the key starts with 'x-' */
-export interface Extensions {
-  [key: string]: any;
-}
-
 /** Properties, Parameters, Operations and Schemas require additional support */
 export interface Implementation<T> {}
 
 export interface Details {}
 
-/** Property References may have additional data that's not in the target reference */
+/**
+ * Property References may have additional data that's not in the target reference
+ */
 export interface PropertyDetails extends Details, Extensions {
   description?: string;
+  readOnly?: boolean;
+  nullable?: boolean;
 }
 
 /** Parameter References may have additional data that's not in the target reference */
@@ -131,9 +130,9 @@ export type QueryEncodingStyle =
   | EncodingStyle.DeepObject;
 export type PathEncodingStyle = EncodingStyle.Matrix | EncodingStyle.Label | EncodingStyle.Simple;
 
-export interface Model extends Extensions {
+export interface OpenAPI3Document extends Extensions {
   paths: Dictionary<PathItem>;
-  openApi: string;
+  openapi: string;
   info: Info;
   externalDocs?: ExternalDocumentation;
   servers?: Array<Server>;
@@ -143,15 +142,15 @@ export interface Model extends Extensions {
 }
 
 export interface Components extends Extensions {
-  schemas?: Dictionary<Refable<Schema>>;
-  responses?: Dictionary<Refable<Response>>;
-  parameters?: Dictionary<Refable<Parameter>>;
-  examples?: Dictionary<Refable<Example>>;
-  requestBodies?: Dictionary<Refable<RequestBody>>;
-  headers?: Dictionary<Refable<Header>>;
-  securitySchemes?: Dictionary<Refable<SecurityScheme>>;
-  links?: Dictionary<Refable<Link>>;
-  callbacks?: Dictionary<Refable<Callback>>;
+  schemas?: Dictionary<Schema>;
+  responses?: Dictionary<Response>;
+  parameters?: Dictionary<Parameter>;
+  examples?: Dictionary<Example>;
+  requestBodies?: Dictionary<RequestBody>;
+  headers?: Dictionary<Header>;
+  securitySchemes?: Dictionary<SecurityScheme>;
+  links?: Dictionary<Link>;
+  callbacks?: Dictionary<Callback>;
 }
 
 export interface APIKeySecurityScheme extends Extensions {

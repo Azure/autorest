@@ -43,13 +43,13 @@ export class ApiVersionParameterHandler extends Transformer<any, oai.Model> {
 
         case "paths":
           {
-            const paths = <oai.PathItem>targetParent.paths || this.newObject(targetParent, "paths", pointer);
-            this.visitPaths(paths, children);
+            const paths = targetParent.paths || this.newObject(targetParent, "paths", pointer);
+            this.visitPaths(paths as any, children);
           }
           break;
 
         default:
-          this.clone(targetParent, key, pointer, value);
+          this.clone(targetParent, key as any, pointer, value);
           break;
       }
     }

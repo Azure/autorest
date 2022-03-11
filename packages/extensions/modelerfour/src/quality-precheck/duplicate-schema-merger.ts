@@ -187,10 +187,10 @@ export class DuplicateSchemaMerger {
    * @returns Schema to keep and list of schema to remove.
    */
   private findSchemaToRemove(
-    spec: oai3.Model,
+    spec: oai3.OpenAPI3Document,
     schemas: DereferencedSchema[],
   ): { keep: DereferencedSchema; remove: DereferencedSchema[] } {
-    const nonRefSchema = schemas.find((x) => spec.components?.schemas?.[x.key].$ref === undefined);
+    const nonRefSchema = schemas.find((x) => (spec.components?.schemas?.[x.key] as any).$ref === undefined);
     if (nonRefSchema) {
       return { keep: nonRefSchema, remove: schemas.filter((x) => x.key !== nonRefSchema.key) };
     } else {

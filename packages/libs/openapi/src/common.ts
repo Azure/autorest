@@ -11,3 +11,7 @@ export interface Dereferenced<T> {
 }
 
 export type ExtensionKey = `x-${string}`;
+
+export type Extensions = {
+  [key in ExtensionKey]: any;
+};
