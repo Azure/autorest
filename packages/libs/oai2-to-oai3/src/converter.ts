@@ -11,15 +11,7 @@ import {
   createMappingTree,
 } from "@azure-tools/datastore";
 import { JsonPointer, getFromJsonPointer, appendJsonPointer } from "@azure-tools/json";
-import oai3, {
-  EncodingStyle,
-  HttpOperation,
-  includeXDashKeys,
-  JsonType,
-  PathItem,
-  SecurityType,
-} from "@azure-tools/openapi";
-import { resolveOperationConsumes, resolveOperationProduces } from "./content-type-utils";
+import { includeXDashKeys } from "@azure-tools/openapi";
 import {
   OpenAPI2Document,
   OpenAPI2ResponseHeader,
@@ -29,7 +21,9 @@ import {
   OpenAPI2FormDataParameter,
   HttpMethod,
   OpenAPI2Parameter,
-} from "./oai2";
+} from "@azure-tools/openapi/v2";
+import oai3, { EncodingStyle, HttpOperation, JsonType, PathItem, SecurityType } from "@azure-tools/openapi/v3";
+import { resolveOperationConsumes, resolveOperationProduces } from "./content-type-utils";
 import { cleanElementName, convertOai2RefToOai3, parseOai2Ref } from "./refs-utils";
 import { ResolveReferenceFn } from "./runner";
 import { statusCodes } from "./status-codes";
