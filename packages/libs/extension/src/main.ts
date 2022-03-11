@@ -7,7 +7,7 @@ import { ChildProcess, spawn } from "child_process";
 import { homedir, tmpdir } from "os";
 import { basename, delimiter, dirname, extname, isAbsolute, join, normalize, resolve } from "path";
 import { exists, isDirectory, isFile, mkdir, readdir, rmdir } from "@azure-tools/async-io";
-import { CriticalSection, Delay, Exception, Mutex, shallowCopy, SharedLock } from "@azure-tools/tasks";
+import { Delay, Exception, Mutex, SharedLock } from "@azure-tools/tasks";
 import { resolve as npmResolvePackage } from "npm-package-arg";
 import * as pacote from "pacote";
 import * as semver from "semver";
@@ -20,6 +20,7 @@ import {
   UnsatisfiedSystemRequirementException,
 } from "./exceptions";
 import { Extension, Package } from "./extension";
+import { AsyncLock } from "./locks/async-lock";
 import { logger } from "./logger";
 import { Npm } from "./npm";
 import { PackageManager, PackageManagerLogEntry, PackageManagerProgress, PackageManagerType } from "./package-manager";
@@ -317,7 +318,7 @@ export class ExtensionManager {
     return results;
   }
 
-  private static criticalSection = new CriticalSection();
+  private static lock = new AsyncLock();
 
   public async installPackage(
     pkg: Package,
@@ -333,7 +334,7 @@ export class ExtensionManager {
     // we need this so that only one extension at a time can start installing
     // in this process (since to use NPM right, we have to do a change dir before runinng it)
     // if we ran NPM out-of-proc, this probably wouldn't be necessary.
-    const extensionRelease = await ExtensionManager.criticalSection.acquire(maxWait);
+    const extensionRelease = await ExtensionManager.lock.acquire(maxWait);
 
     if (!(await exists(this.installationPath))) {
       await mkdir(this.installationPath);
@@ -432,7 +433,7 @@ export class ExtensionManager {
       throw new MissingStartCommandException(extension);
     }
     // add each engine into the front of the path.
-    const env = shallowCopy(process.env);
+    const env = { ...process.env };
 
     // add potential .bin folders (depends on platform and npm version)
     env[PathVar] = `${join(extension.modulePath, "node_modules", ".bin")}${delimiter}${env[PathVar]}`;
