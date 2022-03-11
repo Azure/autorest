@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "Uptake change in typing in openapi library",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/core",
+  "email": "tiguerin@microsoft.com"
+}

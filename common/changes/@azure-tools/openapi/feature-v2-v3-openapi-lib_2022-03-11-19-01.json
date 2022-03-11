@@ -2,7 +2,12 @@
   "changes": [
     {
       "packageName": "@azure-tools/openapi",
-      "comment": "Add `/v2` scope to load OpenAPI2 schema types",
+      "comment": "Add `/v2` scope to load OpenAPI2 schema types.",
+      "type": "minor"
+    },
+    {
+      "packageName": "@azure-tools/openapi",
+      "comment": "Update OpenAPI 3.0 types to be more accurate.",
       "type": "minor"
     }
   ],
