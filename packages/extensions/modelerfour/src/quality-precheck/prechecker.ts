@@ -206,7 +206,7 @@ export class QualityPreChecker {
             continue;
           }
 
-          const $ref = schema?.allOf?.[0]?.$ref;
+          const $ref = (schema?.allOf?.[0] as any)?.$ref;
 
           const text = JSON.stringify(this.input);
           this.input = JSON.parse(text.replace(new RegExp(`"\\#\\/components\\/schemas\\/${key}"`, "g"), `"${$ref}"`));

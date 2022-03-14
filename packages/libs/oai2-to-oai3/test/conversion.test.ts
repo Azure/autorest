@@ -1,8 +1,8 @@
 import fs from "fs";
 import { join } from "path";
 import * as datastore from "@azure-tools/datastore";
+import { OpenAPI2Document } from "@azure-tools/openapi/v2";
 import { ConverterLogger, Oai2ToOai3 } from "../src/converter";
-import { OpenAPI2Document } from "../src/oai2";
 
 const logger: ConverterLogger = {
   trackError: jest.fn(),

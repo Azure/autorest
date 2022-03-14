@@ -1,7 +1,7 @@
 import { DataHandle, PathMapping } from "@azure-tools/datastore";
 import { getFromJsonPointer } from "@azure-tools/json";
 import { ConverterDiagnostic, ConverterLogger, Oai2ToOai3 } from "../converter";
-import { OpenAPI2Document } from "../oai2";
+import { OpenAPI2Document } from "@azure-tools/openapi/v2";
 import { loadInputFiles } from "./utils";
 
 export interface OaiToOai3FileInput {

@@ -30,7 +30,7 @@ function cleanAllOfForSchema(schema: Schema) {
         }
         // otherwise, copy this schema stuff into the schema
         for (const [key, value] of Object.entries(aSchema)) {
-          schema[key] = value;
+          schema[key as any] = value;
         }
         return undefined;
       })

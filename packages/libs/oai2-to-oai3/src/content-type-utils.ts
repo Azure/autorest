@@ -1,4 +1,4 @@
-import { OpenAPI2Operation } from "./oai2";
+import { OpenAPI2Operation } from "@azure-tools/openapi/v2";
 
 /**
  * Resolve the list of content types produced by an operation.

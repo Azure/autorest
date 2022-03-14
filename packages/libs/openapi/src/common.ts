@@ -1,11 +1,8 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
-
 export interface PathReference {
   $ref: string;
 }
+
+export type Refable<T> = T | PathReference;
 
 export interface Dereferenced<T> {
   instance: T;
@@ -13,10 +10,8 @@ export interface Dereferenced<T> {
   fromRef?: boolean;
 }
 
-export type Reference<T> = T;
-
-export type Refable<T> = T | PathReference;
-
 export type ExtensionKey = `x-${string}`;
 
-export type EnumStr<T extends string> = `${T}`;
+export type Extensions = {
+  [key in ExtensionKey]: any;
+};

@@ -79,7 +79,7 @@ describe("Prechecker", () => {
     expect(schemas["SiblingSchema"]).toBeUndefined();
     expect(schemas["MainSchema"]).not.toBeUndefined();
     const mainSchema: Schema = schemas["MainSchema"] as any;
-    expect(mainSchema.properties?.name.type).toEqual("string");
+    expect((mainSchema.properties?.name as any).type).toEqual("string");
   });
 
   describe("Remove child types with no additional properties", () => {

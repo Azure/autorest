@@ -1,8 +1,9 @@
-import { OpenAPI2Definition, OpenAPI2Reference } from "./definition";
+import { PathReference } from "../common";
+import { OpenAPI2Definition } from "./definition";
 
 export interface OpenAPI2HeaderDefinition {
   type: "string" | "number" | "integer" | "boolean" | "array";
-  schema: OpenAPI2Reference & OpenAPI2Definition;
+  schema: PathReference & OpenAPI2Definition;
   items: any;
   collectionFormat: "csv" | "ssv" | "tsv" | "pipes" | "multi";
   description?: string;

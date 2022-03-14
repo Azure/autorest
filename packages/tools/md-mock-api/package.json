@@ -55,7 +55,7 @@
     "commonmark": "^0.27.0",
     "deep-equal": "^2.0.5",
     "express": "~4.17.1",
-    "jest": "^27.0.4",
+    "jest": "^28.0.0-alpha.7",
     "js-yaml": "~4.0.0",
     "morgan": "^1.10.0",
     "mustache": "^4.1.0",
