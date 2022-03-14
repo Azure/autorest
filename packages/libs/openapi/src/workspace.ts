@@ -4,7 +4,7 @@ import { OpenAPI2Document } from "./v2";
 import { OpenAPI3Document } from "./v3";
 
 export interface WorkspaceConfig<T extends OpenAPI2Document | OpenAPI3Document> {
-  specs: { [filePath: string]: T };
+  specs: { [filePath: string]: T } | Map<string, T>;
 }
 
 export interface ResolveReferenceRelativeTo {
@@ -41,7 +41,7 @@ export interface TargetedJsonRef {
 export type ResolveReferenceArgs = TargetedJsonRef | ResolveReferenceRelativeTo;
 
 export interface OpenAPIWorkspace<T extends OpenAPI2Document | OpenAPI3Document> {
-  specs: { [filePath: string]: T };
+  specs: Map<string, T>;
 
   resolveReference<T>(args: ResolveReferenceArgs): T;
 }
@@ -51,11 +51,11 @@ export class InvalidRefError extends Error {}
 export function createOpenAPIWorkspace<T extends OpenAPI2Document | OpenAPI3Document>(
   workspace: WorkspaceConfig<T>,
 ): OpenAPIWorkspace<T> {
-  const specs = workspace.specs;
+  const specs = workspace.specs instanceof Map ? workspace.specs : new Map(Object.entries(workspace.specs));
 
   function resolveReference<T>(args: ResolveReferenceArgs): T {
     const ref = parseRef(args);
-    const spec = specs[ref.file];
+    const spec = specs.get(ref.file);
     if (spec === undefined) {
       throw new InvalidRefError(`Ref file '${ref}' doesn't exists in workspace.`);
     }
