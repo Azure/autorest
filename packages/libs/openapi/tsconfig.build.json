@@ -3,5 +3,6 @@
   "compilerOptions": {
     "rootDir": "src"
   },
-  "exclude": ["**/*.test.*", "test/**/*"]
+  "exclude": ["**/*.test.*", "test/**/*"],
+  "references": [{ "path": "../json/tsconfig.build.json" }, { "path": "../jsonschema/tsconfig.build.json" }]
 }

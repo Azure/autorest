@@ -1,10 +1,15 @@
 /**
  * Represent a json reference.
  */
-export interface JsonRef {
-  file?: string;
-  path?: string;
-}
+export type JsonRef =
+  | {
+      file: string;
+      path?: string;
+    }
+  | {
+      path: string;
+      file?: string;
+    };
 
 /**
  * Parse a json reference into its file and path.
