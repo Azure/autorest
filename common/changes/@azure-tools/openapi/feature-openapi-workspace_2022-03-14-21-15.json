@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/openapi",
+      "comment": "Add workspace heplper to navigate across multiple files",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@azure-tools/openapi",
+  "email": "tiguerin@microsoft.com"
+}

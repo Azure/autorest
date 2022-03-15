@@ -33,7 +33,8 @@ export function createSemanticValidationPlugin(): PipelinePlugin {
         throw new Error(`Cannot find spec '${file}' referenced in ${stringifyJsonRef({ file, path: ref.path })}`);
       }
       return dereference<T>(entry.spec, {
-        $ref: stringifyJsonRef({ path: ref.path }),
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        $ref: stringifyJsonRef({ path: ref.path! }),
       }).instance;
     };
 
