@@ -72,6 +72,18 @@ modelerfour:
   debug: true
 ```
 
+## Core: New built-in directives
+
+Added directives `where-operation-match` and `remove-operation-match` which takes regexp.
+
+Example:
+
+```yaml
+directive:
+  - where-operation-match: /mygroup_.*/i
+    transform: $["x-marked"] = true
+```
+
 ## Modelerfour: Improvements to request body interpretation
 
 Modelerfour use to have an inconsitent behavior when interpreting the request bodies. This produce some operation that had invalid overload due to conflicting body types. This release introduce a redesign of the behavior.

@@ -14,7 +14,7 @@
             "comment": "Tweak to nested configuration resolution"
           },
           {
-            "comment": "Update where-operation to allow regex as input"
+            "comment": "Added directives `where-operation-match` and `remove-operation-match` which takes regexp."
           }
         ],
         "dependency": [
