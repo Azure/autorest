@@ -1,6 +1,13 @@
 # Change Log - @autorest/schemas
 
-This log was last generated on Tue, 01 Feb 2022 23:06:50 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Mar 2022 16:00:38 GMT and should not be manually modified.
+
+## 1.3.4
+Tue, 15 Mar 2022 16:00:38 GMT
+
+### Patches
+
+- Fix `x-ms-examples` schema reference
 
 ## 1.3.3
 Tue, 01 Feb 2022 23:06:50 GMT

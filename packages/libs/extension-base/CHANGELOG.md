@@ -1,6 +1,11 @@
 # Change Log - @autorest/extension-base
 
-This log was last generated on Mon, 22 Nov 2021 21:55:51 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Mar 2022 16:00:38 GMT and should not be manually modified.
+
+## 3.4.4
+Tue, 15 Mar 2022 16:00:38 GMT
+
+_Version update only_
 
 ## 3.4.2
 Mon, 22 Nov 2021 21:55:51 GMT

@@ -2,6 +2,18 @@
   "name": "@azure-tools/jsonschema",
   "entries": [
     {
+      "version": "1.2.0",
+      "tag": "@azure-tools/jsonschema_v1.2.0",
+      "date": "Tue, 15 Mar 2022 16:00:38 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Tweak `JsonRef` type"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.0",
       "tag": "@azure-tools/jsonschema_v1.1.0",
       "date": "Mon, 19 Jul 2021 15:15:42 GMT",

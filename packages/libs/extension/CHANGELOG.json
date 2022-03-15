@@ -2,6 +2,21 @@
   "name": "@azure-tools/extension",
   "entries": [
     {
+      "version": "3.5.0",
+      "tag": "@azure-tools/extension_v3.5.0",
+      "date": "Tue, 15 Mar 2022 16:00:38 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Stop using shell call to `yarn` or `npm` to resolve list of available version and use `pactote` library. Improving reliability and performance."
+          },
+          {
+            "comment": "Reimplement locking mechanism causing ghost promise to be left hanging"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.4.0",
       "tag": "@azure-tools/extension_v3.4.0",
       "date": "Fri, 19 Nov 2021 04:23:43 GMT",

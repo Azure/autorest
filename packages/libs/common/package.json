@@ -1,6 +1,6 @@
 {
   "name": "@autorest/common",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Autorest common utilities",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -44,8 +44,8 @@
     "typescript": "~4.4.2"
   },
   "dependencies": {
-    "@azure-tools/datastore": "~4.6.0",
-    "@azure-tools/yaml": "~1.0.0",
+    "@azure-tools/datastore": "~4.6.1",
+    "@azure-tools/yaml": "~1.1.0",
     "@azure-tools/json": "~1.2.1",
     "@azure/logger": "^1.0.2",
     "chalk": "^4.1.0",

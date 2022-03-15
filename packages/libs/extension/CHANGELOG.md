@@ -1,6 +1,14 @@
 # Change Log - @azure-tools/extension
 
-This log was last generated on Fri, 19 Nov 2021 04:23:43 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Mar 2022 16:00:38 GMT and should not be manually modified.
+
+## 3.5.0
+Tue, 15 Mar 2022 16:00:38 GMT
+
+### Minor changes
+
+- Stop using shell call to `yarn` or `npm` to resolve list of available version and use `pactote` library. Improving reliability and performance.
+- Reimplement locking mechanism causing ghost promise to be left hanging
 
 ## 3.4.0
 Fri, 19 Nov 2021 04:23:43 GMT
