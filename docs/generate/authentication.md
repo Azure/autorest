@@ -2,8 +2,8 @@
 
 Autorest only supports 2 types of authentication, any other will need to be handled manually:
 
-- `AADToken`: Represent an AzureAD OAuth2 authentication
-- `AzureKey`: Represent an api key authentication
+- `oauth2`: Represent an OAuth2 authentication
+- `apiKey` with `in: header`: Represent an api key authentication sent via header
 
 This can be either configured in OpenAPI spec or using flags/config
 
