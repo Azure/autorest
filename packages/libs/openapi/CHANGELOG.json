@@ -2,6 +2,32 @@
   "name": "@azure-tools/openapi",
   "entries": [
     {
+      "version": "3.3.0",
+      "tag": "@azure-tools/openapi_v3.3.0",
+      "date": "Tue, 15 Mar 2022 16:00:38 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add workspace heplper to navigate across multiple files"
+          },
+          {
+            "comment": "Added `HttpMethod` enum"
+          },
+          {
+            "comment": "Add `/v2` scope to load OpenAPI2 schema types."
+          },
+          {
+            "comment": "Update OpenAPI 3.0 types to be more accurate."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/jsonschema\" from `~1.1.0` to `~1.2.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.2.3",
       "tag": "@azure-tools/openapi_v3.2.3",
       "date": "Wed, 12 Jan 2022 22:31:57 GMT",

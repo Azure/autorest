@@ -1,6 +1,15 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Tue, 07 Dec 2021 16:36:46 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Mar 2022 16:00:38 GMT and should not be manually modified.
+
+## 1.9.0
+Tue, 15 Mar 2022 16:00:38 GMT
+
+### Minor changes
+
+- **Added** configuration for `--apply-transforms-in-place`
+- Tweak to nested configuration resolution
+- Update where-operation to allow regex as input
 
 ## 1.8.2
 Tue, 07 Dec 2021 16:36:46 GMT

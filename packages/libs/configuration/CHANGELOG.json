@@ -2,6 +2,41 @@
   "name": "@autorest/configuration",
   "entries": [
     {
+      "version": "1.9.0",
+      "tag": "@autorest/configuration_v1.9.0",
+      "date": "Tue, 15 Mar 2022 16:00:38 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Added** configuration for `--apply-transforms-in-place`"
+          },
+          {
+            "comment": "Tweak to nested configuration resolution"
+          },
+          {
+            "comment": "Update where-operation to allow regex as input"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.4.1` to `~1.5.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.6.0` to `~4.6.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/extension\" from `~3.4.0` to `~3.5.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/yaml\" from `~1.0.0` to `~1.1.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.5.0` to `~0.5.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.8.2",
       "tag": "@autorest/configuration_v1.8.2",
       "date": "Tue, 07 Dec 2021 16:36:46 GMT",

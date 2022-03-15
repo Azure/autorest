@@ -1,6 +1,21 @@
 # Change Log - @autorest/core
 
-This log was last generated on Tue, 01 Feb 2022 23:06:50 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Mar 2022 16:00:38 GMT and should not be manually modified.
+
+## 3.8.0
+Tue, 15 Mar 2022 16:00:38 GMT
+
+### Minor changes
+
+- Log information at the end of autorest run (Runtime, number of files generated).
+- `--help` usage include `yaml` and `json` as config file formats
+- **Added** new plugin to save transformed input in place
+- Enable ability to override the logger log level in specific plugins
+- Uptake change in typing in openapi library
+
+### Patches
+
+- Add helper error message on failure
 
 ## 3.7.6
 Tue, 01 Feb 2022 23:06:50 GMT

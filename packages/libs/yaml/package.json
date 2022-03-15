@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/yaml",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Yaml parser and utilities",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
