@@ -2302,6 +2302,37 @@
         }
       ]
     },
+    "ValueOrFactory": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/ApiVersion"
+        },
+        {
+          "type": "object",
+          "defaultProperties": [],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Example": {
+      "description": "example data [UNFINISHED]",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "value": {},
+        "externalValue": {
+          "description": "an URI",
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false
+    },
     "AADTokenSecurityScheme": {
       "type": "object",
       "properties": {
@@ -2342,37 +2373,6 @@
           "$ref": "#/definitions/SecurityScheme"
         }
       ]
-    },
-    "ValueOrFactory": {
-      "anyOf": [
-        {
-          "$ref": "#/definitions/ApiVersion"
-        },
-        {
-          "type": "object",
-          "defaultProperties": [],
-          "additionalProperties": false
-        }
-      ]
-    },
-    "Example": {
-      "description": "example data [UNFINISHED]",
-      "type": "object",
-      "properties": {
-        "summary": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "value": {},
-        "externalValue": {
-          "description": "an URI",
-          "type": "string"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false
     },
     "HttpMethod": {
       "description": "standard HTTP protocol methods",

@@ -961,6 +961,37 @@
         }
       ]
     },
+    "ValueOrFactory": {
+      "anyOf": [
+        {
+          "$ref": "./master.json#/definitions/ApiVersion"
+        },
+        {
+          "type": "object",
+          "defaultProperties": [],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Example": {
+      "description": "example data [UNFINISHED]",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "value": {},
+        "externalValue": {
+          "description": "an URI",
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false
+    },
     "AADTokenSecurityScheme": {
       "type": "object",
       "properties": {
@@ -1001,37 +1032,6 @@
           "$ref": "./http.json#/definitions/SecurityScheme"
         }
       ]
-    },
-    "ValueOrFactory": {
-      "anyOf": [
-        {
-          "$ref": "./master.json#/definitions/ApiVersion"
-        },
-        {
-          "type": "object",
-          "defaultProperties": [],
-          "additionalProperties": false
-        }
-      ]
-    },
-    "Example": {
-      "description": "example data [UNFINISHED]",
-      "type": "object",
-      "properties": {
-        "summary": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "value": {},
-        "externalValue": {
-          "description": "an URI",
-          "type": "string"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false
     },
     "Record<string,any>": {
       "type": "object",

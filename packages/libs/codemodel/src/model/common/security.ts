@@ -51,33 +51,3 @@ export class KeySecurityScheme implements KeySecurityScheme {
     Object.assign(this, objectInitializer);
   }
 }
-
-/**
- * @deprecated use @see OAuth2SecurityScheme
- */
-export interface AADTokenSecurityScheme extends SecurityScheme {
-  type: "AADToken";
-  scopes: string[];
-}
-
-export class AADTokenSecurityScheme implements AADTokenSecurityScheme {
-  public constructor(objectInitializer?: DeepPartial<AADTokenSecurityScheme>) {
-    this.type = "AADToken";
-    Object.assign(this, objectInitializer);
-  }
-}
-
-/**
- * @deprecated use @see KeySecurityScheme
- */
-export interface AzureKeySecurityScheme extends SecurityScheme {
-  type: "AzureKey";
-  headerName: string;
-}
-
-export class AzureKeySecurityScheme implements AzureKeySecurityScheme {
-  public constructor(objectInitializer?: DeepPartial<AzureKeySecurityScheme>) {
-    this.type = "AzureKey";
-    Object.assign(this, objectInitializer);
-  }
-}
