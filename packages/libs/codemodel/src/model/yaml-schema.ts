@@ -28,6 +28,7 @@ import { StringSchema, ODataQuerySchema, CredentialSchema, UriSchema, UuidSchema
 import { DurationSchema, DateTimeSchema, DateSchema, UnixTimeSchema, TimeSchema } from "./common/schemas/time";
 import { OAuth2SecurityScheme, KeySecurityScheme, Security } from "./common/security";
 import { Value } from "./common/value";
+import { AADTokenSecurityScheme, AzureKeySecurityScheme } from "./deprecated";
 import {
   HttpWithBodyRequest,
   HttpParameter,
@@ -140,6 +141,7 @@ export const codeModelSchema = DEFAULT_SCHEMA.extend([
 
   TypeInfo(OAuth2SecurityScheme),
   TypeInfo(KeySecurityScheme),
+
   TypeInfo(Languages),
   TypeInfo(Language),
   TypeInfo(CSharpLanguage),
@@ -147,5 +149,7 @@ export const codeModelSchema = DEFAULT_SCHEMA.extend([
   TypeInfo(ApiVersion),
   TypeInfo(Metadata),
 
-  // new Type('!set', { kind: 'mapping', instanceOf: Set, represent: (o: any) => [...o], construct: (i) => new Set(i) }),
+  // Deprecated types for backward compatiblity only.
+  TypeInfo(AADTokenSecurityScheme),
+  TypeInfo(AzureKeySecurityScheme),
 ]);
