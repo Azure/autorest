@@ -1,4 +1,4 @@
-import { IAutorestLogger, OperationAbortedException, PluginUserError } from "@autorest/common";
+import { IAutorestLogger, PluginUserError } from "@autorest/common";
 import { IdentityPathMappings, QuickDataSource } from "@azure-tools/datastore";
 import { InvalidJsonPointer } from "@azure-tools/json";
 import { parseJsonRef } from "@azure-tools/jsonschema";
