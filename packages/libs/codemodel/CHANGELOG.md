@@ -1,6 +1,13 @@
 # Change Log - @autorest/codemodel
 
-This log was last generated on Wed, 16 Mar 2022 15:14:54 GMT and should not be manually modified.
+This log was last generated on Wed, 16 Mar 2022 19:40:12 GMT and should not be manually modified.
+
+## 4.18.2
+Wed, 16 Mar 2022 19:40:12 GMT
+
+### Patches
+
+- Yaml schema missing deprecated models
 
 ## 4.18.1
 Wed, 16 Mar 2022 15:14:54 GMT
