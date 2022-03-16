@@ -3,6 +3,19 @@ description: the model that contains all the information required to generate a 
 $schema: http://json-schema.org/draft-07/schema#
 additionalProperties: false
 definitions:
+  AADTokenSecurityScheme:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/SecurityScheme'
+    properties:
+      scopes:
+        type: array
+        items:
+          type: string
+    required:
+      - scopes
+      - type
   APIKeySecurityScheme:
     type: object
     additionalProperties: false
@@ -157,6 +170,17 @@ definitions:
       - authorizationUrl
       - scopes
       - tokenUrl
+  AzureKeySecurityScheme:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/SecurityScheme'
+    properties:
+      headerName:
+        type: string
+    required:
+      - headerName
+      - type
   BearerHTTPSecurityScheme:
     type: object
     additionalProperties: false

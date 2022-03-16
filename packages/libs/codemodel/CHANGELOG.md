@@ -1,6 +1,13 @@
 # Change Log - @autorest/codemodel
 
-This log was last generated on Tue, 15 Mar 2022 16:00:38 GMT and should not be manually modified.
+This log was last generated on Wed, 16 Mar 2022 15:14:54 GMT and should not be manually modified.
+
+## 4.18.1
+Wed, 16 Mar 2022 15:14:54 GMT
+
+### Patches
+
+- Add back old security types to prevent breaking changes
 
 ## 4.18.0
 Tue, 15 Mar 2022 16:00:38 GMT
