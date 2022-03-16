@@ -1,8 +1,8 @@
 import { Source } from "@azure-tools/datastore";
-import { JsonType, Model } from "@azure-tools/openapi";
+import { JsonType, OpenAPI3Document } from "@azure-tools/openapi";
 import { OAI3Shaker } from "./tree-shaker";
 
-const createTestModel = (model: Partial<Model>): Model => {
+const createTestModel = (model: Partial<OpenAPI3Document>): OpenAPI3Document => {
   return {
     openapi: "3.0.0",
     paths: {},
@@ -18,7 +18,7 @@ const createTestModel = (model: Partial<Model>): Model => {
   };
 };
 
-const shake = async (model: any) => {
+const shake = async (model: Partial<OpenAPI3Document>) => {
   const source: Source = {
     ReadObject: () => Promise.resolve<any>(createTestModel(model)),
     key: "test",
@@ -50,6 +50,7 @@ describe("Tree shaker", () => {
           "/mypath": {
             get: {
               parameters: [{ in: "query", name: "some-param", "x-ms-client-name": "SomeParamClient" }],
+              responses: {},
             },
           },
         },
@@ -57,6 +58,27 @@ describe("Tree shaker", () => {
 
       const param = Object.values<any>(result.components.parameters)[0];
       expect(param["x-ms-client-name"]).toEqual("SomeParamClient");
+    });
+
+    it("keeps x-ms-client-name on the extraced type when used in items of an array", async () => {
+      const result = await shake({
+        components: {
+          schemas: {
+            Foo: {
+              type: "array",
+              items: {
+                "x-ms-client-name": "CustomFooClientItem",
+                type: "object",
+                properties: {
+                  name: { type: "string" },
+                },
+              },
+            },
+          },
+        },
+      });
+
+      expect(result.components.schemas["FooItem"]["x-ms-client-name"]).toEqual("CustomFooClientItem");
     });
 
     it("removes x-ms-client-name on shaked model when used on property with inline model definition", async () => {
@@ -90,6 +112,7 @@ describe("Tree shaker", () => {
         "/mypath": {
           get: {
             parameters: [{ in: "query", name: "some-param" }],
+            responses: {},
           },
         },
       },
