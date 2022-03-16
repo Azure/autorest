@@ -34,7 +34,7 @@ describe("Tree shaker", () => {
         components: {
           schemas: {
             Foo: {
-              type: JsonType.Object,
+              type: "object",
               "x-ms-client-name": "FooClient",
             },
           },
@@ -86,14 +86,36 @@ describe("Tree shaker", () => {
         components: {
           schemas: {
             Foo: {
-              type: JsonType.Object,
+              type: "object",
               properties: {
                 bar: {
                   "x-ms-client-name": "barClient",
-                  type: JsonType.Object,
+                  type: "object",
                   properties: {
                     name: { type: JsonType.String },
                   },
+                },
+              },
+            },
+          },
+        },
+      });
+
+      expect(result.components.schemas.Foo.properties.bar["x-ms-client-name"]).toEqual("barClient");
+      expect(result.components.schemas["Foo-bar"]["x-ms-client-name"]).toBeUndefined();
+    });
+
+    it("removes x-ms-client-name on shaked model when used on property with inline enum definition", async () => {
+      const result = await shake({
+        components: {
+          schemas: {
+            Foo: {
+              type: "object",
+              properties: {
+                bar: {
+                  "x-ms-client-name": "barClient",
+                  type: "string",
+                  enum: ["one", "two"],
                 },
               },
             },

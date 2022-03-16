@@ -534,6 +534,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
               value,
               children,
               nameHint,
+              true,
             );
           }
           break;
@@ -803,7 +804,6 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
 
     if (isAnonymous) {
       this.stats.anonymous++;
-      newRef["x-internal-autorest-anonymous-schema"] = { value: { anonymous: true }, pointer: "" };
     }
     return newRef;
   }
