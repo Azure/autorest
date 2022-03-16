@@ -75,7 +75,7 @@ export async function manipulateObject(
     }
     if (debug && config) {
       config.debug(
-        `Directive transform match path ${hit.path}. Running on value:\n------------\n${inspect(
+        `Directive transform match path '/${hit.path.join("/")}'. Running on value:\n------------\n${inspect(
           hit.value,
         )}\n------------`,
       );

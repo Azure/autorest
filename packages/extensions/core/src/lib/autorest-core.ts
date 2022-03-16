@@ -11,6 +11,7 @@ import {
   AutorestLoggerSourceEnhancer,
   AutorestAsyncLogger,
   AutorestLogger,
+  PluginUserError,
 } from "@autorest/common";
 import { isConfigurationDocument } from "@autorest/configuration";
 import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
@@ -178,18 +179,15 @@ export class AutoRest extends EventEmitter {
         view.messageEmitter.removeAllListeners();
         return true;
       } catch (e: any) {
-        const message = view?.config.debug
-          ? ({
-              level: "fatal",
-              message: `Process() cancelled due to exception : ${e.message ? e.message : e} / ${
-                e.stack ? e.stack : ""
-              }`,
-            } as const)
-          : ({
-              level: "fatal",
-              message: "Process() cancelled due to failure ",
-            } as const);
-        this.loggerSink.log(message);
+        if (e instanceof PluginUserError) {
+          this.loggerSink.log({ level: "fatal", message: e.message });
+        } else {
+          const message = view?.config.debug
+            ? `Process() cancelled due to exception : ${e.message ? e.message : e} / ${e.stack ? e.stack : ""}`
+            : "Process() cancelled due to failure ";
+          this.loggerSink.log({ level: "fatal", message });
+        }
+
         // Wait for all logs to have been sent before shutting down.
         await AutorestLoggingSession.waitForMessages();
         this.Finished.Dispatch(false);
