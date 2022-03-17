@@ -2,10 +2,9 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { OperationAbortedException } from "@autorest/common";
+import { PluginUserError } from "@autorest/common";
 import { DataHandle } from "@azure-tools/datastore";
 import { AutorestContext } from "../../context";
-import { Channel } from "../../message";
 import { createPerFilePlugin, PipelinePlugin } from "../../pipeline/common";
 import { ValidationError } from "./json-schema-validator";
 import { OpenApi3SchemaValidator } from "./openapi3-schema-validator";
@@ -16,7 +15,7 @@ export const SCHEMA_VIOLATION_ERROR_CODE = "schema_violation";
 export function createSwaggerSchemaValidatorPlugin(): PipelinePlugin {
   const swaggerValidator = new SwaggerSchemaValidator();
 
-  return createPerFilePlugin(async (config) => async (fileIn, sink) => {
+  return createPerFilePlugin(async (context) => async (fileIn, sink) => {
     const obj = await fileIn.readObject<any>();
     const isSecondary = !!obj["x-ms-secondary-file"];
 
@@ -24,10 +23,10 @@ export function createSwaggerSchemaValidatorPlugin(): PipelinePlugin {
     if (errors.length > 0) {
       for (const error of errors) {
         // secondary files have reduced schema compliancy, so we're gonna just warn them for now.
-        logValidationError(config, fileIn, error, isSecondary ? "warning" : "error");
+        logValidationError(context, fileIn, error, isSecondary ? "warning" : "error");
       }
       if (!isSecondary) {
-        throw new OperationAbortedException();
+        throw new PluginUserError(context.pluginName ?? "");
       }
     }
     return sink.forward(fileIn.description, fileIn);
@@ -48,7 +47,7 @@ export function createOpenApiSchemaValidatorPlugin(): PipelinePlugin {
       }
 
       if (!isSecondary) {
-        throw new OperationAbortedException();
+        throw new PluginUserError(context.pluginName ?? "");
       }
     }
     return sink.forward(fileIn.description, fileIn);

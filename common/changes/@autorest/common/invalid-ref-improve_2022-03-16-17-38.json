@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/common",
+      "comment": "Add `PluginUserError` error type",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/common",
+  "email": "tiguerin@microsoft.com"
+}
