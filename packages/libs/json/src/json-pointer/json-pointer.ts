@@ -50,6 +50,7 @@ export function serializeJsonPointer(refTokens: JsonPointerTokens): string {
   return `/${refTokens.map(escape).join("/")}`;
 }
 
+export class InvalidJsonPointer extends Error {}
 /**
  * Lookup a json pointer in an object
  *
@@ -63,7 +64,7 @@ export function getFromJsonPointer<T>(obj: any, pointer: JsonPointer | JsonPoint
   for (let i = 0; i < refTokens.length; ++i) {
     const tok = refTokens[i];
     if (!(typeof obj === "object" && tok in obj)) {
-      throw new Error("Invalid reference token: " + tok);
+      throw new InvalidJsonPointer("Invalid reference token: " + tok);
     }
     obj = obj[tok];
   }
