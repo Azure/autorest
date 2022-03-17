@@ -212,20 +212,10 @@ export class QualityPreChecker {
           this.input = JSON.parse(text.replace(new RegExp(`"\\#\\/components\\/schemas\\/${key}"`, "g"), `"${$ref}"`));
           const location = schema["x-ms-metadata"].originalLocations?.[0]?.replace(/^.*\//, "");
           delete this.input.components?.schemas?.[key];
-          if (schema["x-internal-autorest-anonymous-schema"]) {
-            this.session.warning(
-              `An anonymous inline schema for property '${location.replace(
-                /-/g,
-                ".",
-              )}' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.`,
-              ["PreCheck", "AllOfWhenYouMeantRef"],
-            );
-          } else {
-            this.session.warning(
-              `Schema '${location}' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.`,
-              ["PreCheck", "AllOfWhenYouMeantRef"],
-            );
-          }
+          this.session.warning(
+            `Schema '${location}' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.`,
+            ["PreCheck", "AllOfWhenYouMeantRef"],
+          );
         }
       }
     }

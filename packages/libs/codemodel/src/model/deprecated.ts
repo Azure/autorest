@@ -14,6 +14,9 @@ export interface AADTokenSecurityScheme extends SecurityScheme {
   scopes: string[];
 }
 
+/**
+ * @deprecated use @see OAuth2SecurityScheme
+ */
 export class AADTokenSecurityScheme implements AADTokenSecurityScheme {
   public constructor(objectInitializer?: DeepPartial<AADTokenSecurityScheme>) {
     this.type = "AADToken";
@@ -29,6 +32,9 @@ export interface AzureKeySecurityScheme extends SecurityScheme {
   headerName: string;
 }
 
+/**
+ * @deprecated use @see OAuth2SecurityScheme
+ */
 export class AzureKeySecurityScheme implements AzureKeySecurityScheme {
   public constructor(objectInitializer?: DeepPartial<AzureKeySecurityScheme>) {
     this.type = "AzureKey";
