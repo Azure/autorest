@@ -1,0 +1,16 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/modelerfour",
+      "comment": "Fix: Request body with `type: string, format: bytes` being treated as string instead of base64 json",
+      "type": "patch"
+    },
+    {
+      "packageName": "@autorest/modelerfour",
+      "comment": "Fix: Request body with `type: string, format: duration` being treated as date time",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/modelerfour",
+  "email": "tiguerin@microsoft.com"
+}
