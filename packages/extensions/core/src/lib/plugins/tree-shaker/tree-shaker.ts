@@ -1,5 +1,6 @@
 /* eslint-disable no-useless-escape */
 import { createHash } from "crypto";
+import { isDefined } from "@autorest/common";
 import {
   AnyObject,
   DataHandle,
@@ -533,6 +534,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
               value,
               children,
               nameHint,
+              true,
             );
           }
           break;
@@ -795,22 +797,21 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
     // copy the parts of the parameter across
     visitor.bind(this)(newRef, children);
 
-    if (baseReferencePath === "/components/schemas") {
+    if (isAnonymous && baseReferencePath === "/components/schemas") {
       // x-ms-client-name correspond to the property, parameter, etc. name, not the model.
       delete newRef["x-ms-client-name"];
     }
 
     if (isAnonymous) {
       this.stats.anonymous++;
-      newRef["x-internal-autorest-anonymous-schema"] = { value: { anonymous: true }, pointer: "" };
     }
     return newRef;
   }
 }
 
 async function shakeTree(context: AutorestContext, input: DataSource, sink: DataSink) {
-  const inputs = await Promise.all((await input.Enum()).map(async (x) => input.readStrict(x)));
-  const result: Array<DataHandle> = [];
+  const inputs = await Promise.all((await input.enum()).map((x) => input.readStrict(x)));
+  const result: DataHandle[] = [];
   const isSimpleTreeShake = !!context.GetEntry("simple-tree-shake");
   for (const each of inputs) {
     const shaker = new OAI3Shaker(each, isSimpleTreeShake);
@@ -819,7 +820,7 @@ async function shakeTree(context: AutorestContext, input: DataSource, sink: Data
     context.stats.track({
       openapi: {
         specs: {
-          [each.identity[0]]: {
+          [each.originalFullPath]: {
             schemas: { ...shaker.stats },
           },
         },
@@ -851,9 +852,9 @@ function generateSchemaIdFromJsonPath(pointer: string): string {
         .filter((each) => each)
         .join("-"),
     )
-    .filter((each) => each)
+    .filter(isDefined)
     .join("·");
-  return `${value}`.replace(/\·+/g, "·");
+  return value.replace(/\·+/g, "·");
 }
 
 function getNameHint(
