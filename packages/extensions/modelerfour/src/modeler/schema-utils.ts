@@ -9,7 +9,7 @@ export function isSchemaBinary(schema: OpenAPI.Schema) {
  * @returns true if the schema is a basic string without format.
  */
 export function isSchemaString(schema: OpenAPI.Schema) {
-  return schema.type === "string" && schema.format === undefined;
+  return schema.type === "string" && schema.format === undefined && schema.enum === undefined;
 }
 
 /**

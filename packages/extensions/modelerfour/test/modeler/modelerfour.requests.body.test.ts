@@ -6,6 +6,7 @@ import assert from "assert";
 import {
   BinarySchema,
   ByteArraySchema,
+  ChoiceSchema,
   CodeModel,
   DateTimeSchema,
   DictionarySchema,
@@ -329,19 +330,20 @@ describe("Modelerfour.Request.Body", () => {
 
     describe("application/json, type: string, custom format types", () => {
       const scenarios = [
-        ["byte", ByteArraySchema],
-        ["date-time", DateTimeSchema],
-        ["duration", DurationSchema],
+        [{ format: "byte" }, ByteArraySchema],
+        [{ format: "date-time" }, DateTimeSchema],
+        [{ format: "duration" }, DurationSchema],
+        [{ enum: ["one", "two"] }, ChoiceSchema],
       ] as const;
-      scenarios.forEach(([format, type]) => {
-        describe(`format:${format} with application/json`, () => {
+      scenarios.forEach(([extra, type]) => {
+        describe(`format:${extra} with application/json`, () => {
           let operation: Operation;
 
           beforeEach(async () => {
             operation = await runModelerWithBody({
               content: {
                 "application/json": {
-                  schema: { type: JsonType.String, format },
+                  schema: { type: "string", ...(extra as any) },
                 },
               },
             });
