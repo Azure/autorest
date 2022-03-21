@@ -55,7 +55,7 @@
   },
   "dependencies": {
     "@azure-tools/codegen": "~2.9.1",
-    "@azure-tools/json": "~1.2.1",
+    "@azure-tools/json": "~1.2.2",
     "@azure-tools/tasks": "~3.0.0",
     "@azure-tools/uri": "~3.1.1",
     "@azure-tools/yaml": "~1.1.0",
