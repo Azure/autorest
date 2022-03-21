@@ -1,6 +1,14 @@
 # Change Log - @autorest/core
 
-This log was last generated on Tue, 15 Mar 2022 16:00:38 GMT and should not be manually modified.
+This log was last generated on Mon, 21 Mar 2022 15:38:03 GMT and should not be manually modified.
+
+## 3.8.1
+Mon, 21 Mar 2022 15:38:03 GMT
+
+### Patches
+
+- Fix issue with x-ms-client-name not respected when used inside `type:array` `items`
+- Full ref resolver validate the refs are valid
 
 ## 3.8.0
 Tue, 15 Mar 2022 16:00:38 GMT

@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Tue, 15 Mar 2022 16:00:38 GMT and should not be manually modified.
+This log was last generated on Mon, 21 Mar 2022 15:38:03 GMT and should not be manually modified.
+
+## 4.23.1
+Mon, 21 Mar 2022 15:38:03 GMT
+
+### Patches
+
+- Fix: Request body with `type: string, format: bytes|duration|date-time` being treated as string instead of base64 json
 
 ## 4.23.0
 Tue, 15 Mar 2022 16:00:38 GMT
