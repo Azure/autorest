@@ -56,6 +56,9 @@ export class AutorestContext implements IAutorestLogger {
     this.configFileFolderUri = config.configFileFolderUri;
   }
 
+  public get pluginName() {
+    return this.plugin?.name;
+  }
   /**
    * @deprecated Use .config.raw instead. Keeping this for backward compatibility in the `autorest` module.
    */

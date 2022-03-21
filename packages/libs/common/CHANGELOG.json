@@ -2,6 +2,23 @@
   "name": "@autorest/common",
   "entries": [
     {
+      "version": "1.5.1",
+      "tag": "@autorest/common_v1.5.1",
+      "date": "Mon, 21 Mar 2022 15:38:03 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add `PluginUserError` error type"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/json\" from `~1.2.1` to `~1.2.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.5.0",
       "tag": "@autorest/common_v1.5.0",
       "date": "Tue, 15 Mar 2022 16:00:38 GMT",

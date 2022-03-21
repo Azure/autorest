@@ -2,6 +2,29 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.8.1",
+      "tag": "@autorest/core_v3.8.1",
+      "date": "Mon, 21 Mar 2022 15:38:03 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix issue with x-ms-client-name not respected when used inside `type:array` `items`"
+          },
+          {
+            "comment": "Full ref resolver validate the refs are valid"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.5.0` to `~1.5.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/json\" from `~1.2.1` to `~1.2.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.8.0",
       "tag": "@autorest/core_v3.8.0",
       "date": "Tue, 15 Mar 2022 16:00:38 GMT",

@@ -1,6 +1,13 @@
 # Change Log - @autorest/common
 
-This log was last generated on Tue, 15 Mar 2022 16:00:38 GMT and should not be manually modified.
+This log was last generated on Mon, 21 Mar 2022 15:38:03 GMT and should not be manually modified.
+
+## 1.5.1
+Mon, 21 Mar 2022 15:38:03 GMT
+
+### Patches
+
+- Add `PluginUserError` error type
 
 ## 1.5.0
 Tue, 15 Mar 2022 16:00:38 GMT

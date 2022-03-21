@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/json
 
-This log was last generated on Fri, 19 Nov 2021 04:23:43 GMT and should not be manually modified.
+This log was last generated on Mon, 21 Mar 2022 15:38:03 GMT and should not be manually modified.
+
+## 1.2.2
+Mon, 21 Mar 2022 15:38:03 GMT
+
+### Patches
+
+- parseJsonPointer emit `InvalidJsonPointer` error instead of generic `Error`
 
 ## 1.2.1
 Fri, 19 Nov 2021 04:23:43 GMT
