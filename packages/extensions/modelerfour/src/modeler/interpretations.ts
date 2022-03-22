@@ -294,8 +294,8 @@ export class Interpretations {
 
     return p != -1
       ? {
-          group: opId.substr(0, p),
-          member: opId.substr(p + 1),
+          group: opId.slice(0, p),
+          member: opId.slice(p + 1),
         }
       : {
           group: "",

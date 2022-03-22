@@ -366,7 +366,7 @@ export class AutoRestExtension extends EventEmitter {
         const t = context.config.outputFolderUri.length;
         return (
           await context.fileSystem.list(ensureIsFolderUri(`${context.config.outputFolderUri}${artifactType || ""}`))
-        ).map((each) => each.substr(t));
+        ).map((each) => each.slice(t));
       },
 
       async WriteFile(filename: string, content: string, sourceMap?: Array<Mapping> | RawSourceMap): Promise<void> {

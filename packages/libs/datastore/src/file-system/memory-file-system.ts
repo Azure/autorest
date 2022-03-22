@@ -28,7 +28,7 @@ export class MemoryFileSystem implements IFileSystem {
       if (!uri.startsWith(folderUri)) {
         return false;
       }
-      return uri.substr(folderUri.length).indexOf("/") === -1;
+      return uri.slice(folderUri.length).indexOf("/") === -1;
     });
   }
 

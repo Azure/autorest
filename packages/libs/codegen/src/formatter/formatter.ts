@@ -13,11 +13,11 @@ type StylerWithUppercasePreservation = (
 ) => string;
 
 function capitalize(s: string): string {
-  return s ? `${s.charAt(0).toUpperCase()}${s.substr(1)}` : s;
+  return s ? `${s.charAt(0).toUpperCase()}${s.slice(1)}` : s;
 }
 
 function uncapitalize(s: string): string {
-  return s ? `${s.charAt(0).toLowerCase()}${s.substr(1)}` : s;
+  return s ? `${s.charAt(0).toLowerCase()}${s.slice(1)}` : s;
 }
 
 function IsFullyUpperCase(identifier: string, maxUppercasePreserve: number) {
