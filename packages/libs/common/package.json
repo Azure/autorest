@@ -1,6 +1,6 @@
 {
   "name": "@autorest/common",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Autorest common utilities",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -49,6 +49,6 @@
     "@azure-tools/json": "~1.2.2",
     "@azure/logger": "^1.0.2",
     "chalk": "^4.1.0",
-    "cli-progress": "~3.9.1"
+    "cli-progress": "~3.10.0"
   }
 }

@@ -1,6 +1,13 @@
 # Change Log - @autorest/common
 
-This log was last generated on Mon, 21 Mar 2022 15:38:03 GMT and should not be manually modified.
+This log was last generated on Tue, 22 Mar 2022 16:33:04 GMT and should not be manually modified.
+
+## 1.5.2
+Tue, 22 Mar 2022 16:33:04 GMT
+
+### Patches
+
+- Fix progress Bar crashing autorest when stdout redirected to file
 
 ## 1.5.1
 Mon, 21 Mar 2022 15:38:03 GMT

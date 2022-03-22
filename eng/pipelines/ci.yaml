@@ -58,6 +58,7 @@ stages:
               - template: ./templates/create-tryit-comment.yaml
       - job: lintdocs
         displayName: Lint docs
+        continueOnError: true
         steps:
           - script: |
               sudo npm install -g markdown-link-check

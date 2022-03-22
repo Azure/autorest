@@ -2,6 +2,13 @@
 
 This log was last generated on Tue, 15 Mar 2022 16:00:38 GMT and should not be manually modified.
 
+## 3.6.1
+Tue, 22 Mar 2022 00:17:01 GMT
+
+### Patches
+
+- Fix progress Bar crashing autorest when stdout redirected to file
+
 ## 3.6.0
 Tue, 15 Mar 2022 16:00:38 GMT
 
