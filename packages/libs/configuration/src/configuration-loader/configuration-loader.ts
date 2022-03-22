@@ -185,10 +185,8 @@ export class ConfigurationLoader {
 
     if (config["pipeline-model"]) {
       await manager.addHighPriorityConfig({ "pipeline-model": config["pipeline-model"] });
-      return { config: await manager.resolveConfig(), extensions };
-    } else {
-      return { config, extensions };
     }
+    return { config: await manager.resolveConfig(), extensions };
   }
 
   /**
