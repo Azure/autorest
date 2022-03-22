@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Mon, 21 Mar 2022 15:38:03 GMT and should not be manually modified.
+This log was last generated on Tue, 22 Mar 2022 00:17:01 GMT and should not be manually modified.
+
+## 3.8.2
+Tue, 22 Mar 2022 00:17:01 GMT
+
+### Patches
+
+- Fix crash when having invalid cli arguments
 
 ## 3.8.1
 Mon, 21 Mar 2022 15:38:03 GMT

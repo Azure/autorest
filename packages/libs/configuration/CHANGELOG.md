@@ -1,6 +1,13 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Tue, 15 Mar 2022 16:00:38 GMT and should not be manually modified.
+This log was last generated on Tue, 22 Mar 2022 00:17:01 GMT and should not be manually modified.
+
+## 1.9.1
+Tue, 22 Mar 2022 00:17:01 GMT
+
+### Patches
+
+- Fix crash when having invalid cli arguments
 
 ## 1.9.0
 Tue, 15 Mar 2022 16:00:38 GMT
@@ -16,7 +23,7 @@ Tue, 07 Dec 2021 16:36:46 GMT
 
 ### Patches
 
-- **Remove** removal of additionalProperties=false for v2 generator
+- **Remove** removal of additionalProperties=false for v2 generator 
 
 ## 1.8.1
 Tue, 30 Nov 2021 15:50:35 GMT
