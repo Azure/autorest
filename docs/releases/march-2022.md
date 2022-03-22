@@ -47,7 +47,7 @@ When working on or trying to diagnostic a specific plugin or extension you can n
 
 ```
 # Set logging level to debug for modelerfour
---modelerfour.logLevel=debug
+--modelerfour.level=debug
 
 # Set logging level to verbose for modelerfour
 --modelerfour.verbose
@@ -61,7 +61,7 @@ When working on or trying to diagnostic a specific plugin or extension you can n
 ```yaml
 # Set logging level to debug for modelerfour
 modelerfour:
-  logLevel: 'debug'
+  level: 'debug'
 
 # Set logging level to verbose for modelerfour
 modelerfour:
