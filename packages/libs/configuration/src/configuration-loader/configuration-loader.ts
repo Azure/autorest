@@ -175,6 +175,14 @@ export class ConfigurationLoader {
     // If the pipeline-model was set we set it at the beginning and reload the config.
     // There is some configuration in `default-configuration.md` that depends on pipeline-model but some plugins are setting up pipeline-model.
 
+    // Perform-load false disable the loaders(swagger, openapi3, cadl.)
+    // Default should be true. Check if it not set first and if allow-no-input is not there.
+    if (config["perform-load"] === undefined) {
+      if (!config["allow-no-input"] && !config["help"]) {
+        await manager.addConfig({ "perform-load": true });
+      }
+    }
+
     if (config["pipeline-model"]) {
       await manager.addHighPriorityConfig({ "pipeline-model": config["pipeline-model"] });
       return { config: await manager.resolveConfig(), extensions };
