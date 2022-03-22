@@ -42,7 +42,7 @@ V2 generators will have their core module version defaulting to the latest v2 co
 > AutoRest v2 core modules are called `@microsoft.azure/autorest-core` <br>
 > AutoRest v3 core modules are called `@autorest/core`<br>
 >
-> See the [Managing Versions](#Managing-Versions) section below<br> > &nbsp;
+> See the [Managing Versions](#managing-versions) section below<br> > &nbsp;
 
 ## Extension Modules
 
@@ -74,7 +74,7 @@ If you want to pin to a specific version of an extension or to load one that is 
 > AutoRest v2 extension modules are generally called `@microsoft.azure/autorest.[LANGUAGE]` <br>
 > AutoRest v3 extension modules are called `@autorest/[LANGUAGE]`<br>
 >
-> See the [Managing Versions](#Managing-Versions) section below<br> > &nbsp;
+> See the [Managing Versions](#managing-versions) section below<br> > &nbsp;
 
 ## Managing Versions
 
