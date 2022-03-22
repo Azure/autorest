@@ -20,6 +20,8 @@ export interface ConsoleLoggerSinkOptions {
   progressNoTTYOutput?: boolean;
 }
 
+const ProgressBarUnavailable = Symbol("NoBar");
+
 /**
  * Logger sink to output logs to the console.
  */
@@ -54,7 +56,19 @@ export class ConsoleLoggerSink implements LoggerSink {
     }
   }
 
+  private isTTY(): boolean {
+    return (this.stream as any).isTTY;
+  }
+
   private startProgressBar(initialName?: string): ProgressTracker {
+    // If in a non TTY stream do not even start the progress bar.
+    if (!this.isTTY() && !this.options.progressNoTTYOutput) {
+      return {
+        update: (progress: Progress) => {},
+        stop: () => {},
+      };
+    }
+
     if (this.currentProgressBar === undefined) {
       this.currentProgressBar = new progressBar.MultiBar(
         {
@@ -87,13 +101,23 @@ export class ConsoleLoggerSink implements LoggerSink {
       }
     });
 
-    let bar: progressBar.SingleBar | undefined;
+    let bar: progressBar.SingleBar | typeof ProgressBarUnavailable | undefined;
 
     const update = (progress: Progress) => {
+      if (bar === ProgressBarUnavailable) {
+        return;
+      }
       const name = progress.name ?? initialName ?? "progress";
       if (bar === undefined) {
-        bar = multiBar.create(progress.total, 0, { name });
-        this.bars.push(bar);
+        const createdBar = multiBar.create(progress.total, 0, { name });
+        // Can return undefined if the stream is not TTY.
+        if (createdBar === undefined) {
+          bar = ProgressBarUnavailable;
+          return;
+        } else {
+          bar = createdBar;
+          this.bars.push(bar);
+        }
       } else {
         bar.setTotal(progress.total);
       }
@@ -102,16 +126,17 @@ export class ConsoleLoggerSink implements LoggerSink {
     };
 
     const stop = () => {
-      if (bar) {
+      if (bar && bar !== ProgressBarUnavailable) {
         bar.update(bar.getTotal());
         bar.render();
         bar.stop();
         multiBar.remove(bar);
         this.bars = this.bars.filter((x) => x !== bar);
-        if (this.bars.length === 0) {
-          multiBar.stop();
-          this.currentProgressBar = undefined;
-        }
+      }
+
+      if (this.bars.length === 0) {
+        multiBar.stop();
+        this.currentProgressBar = undefined;
       }
     };
 

@@ -58,7 +58,7 @@ dependencies:
   ajv-formats: 2.1.1
   body-parser: 1.19.2
   chalk: 4.1.2
-  cli-progress: 3.9.1
+  cli-progress: 3.10.0
   command-exists: 1.2.9
   commonmark: 0.27.0
   compare-versions: 3.6.0
@@ -2308,15 +2308,14 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-jffHquUf02h06PjQW5GAvBGj/tc=
-  /cli-progress/3.9.1:
+  /cli-progress/3.10.0:
     dependencies:
-      colors: 1.4.0
       string-width: 4.2.3
     dev: false
     engines:
       node: '>=4'
     resolution:
-      integrity: sha512-AXxiCe2a0Lm0VN+9L0jzmfQSkcZm5EYspfqXKaSIQKqIk+0hnkZ3/v1E9B39mkD6vYhKih3c/RPsJBSwq9O99Q==
+      integrity: sha512-kLORQrhYCAtUPLZxqsAt2YJGOvRdt34+O6jl5cQGb7iF3dM55FQZlTR+rQyIK9JUcO9bBMwZsTlND+3dmFU2Cw==
   /cliui/5.0.0:
     dependencies:
       string-width: 3.1.0
@@ -2421,12 +2420,6 @@ packages:
       node: '>=0.1.90'
     resolution:
       integrity: sha1-fQAj6usVTo7p/Oddy5I9DtFmd3Q=
-  /colors/1.4.0:
-    dev: false
-    engines:
-      node: '>=0.1.90'
-    resolution:
-      integrity: sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==
   /colorspace/1.1.4:
     dependencies:
       color: 3.2.1
@@ -9040,7 +9033,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-+RoFLyH5wIBjUYAe6b1wBVwBzMTj4GmjkHSRnLlroFmM3i94ghJub28r4YhjqRn9X35S5FWNKFbIem3y33z/4Q==
+      integrity: sha512-Knosjg2PjwMrCoKxX394BiTVdrgMIV0vqAuV+HP+7EVu7wIXmU4m5CtujSNXbaZl4btYTMPieaWJlumfsrRbPA==
       tarball: file:projects/autorest.tgz
     version: 0.0.0
   file:projects/cadl.tgz_ts-node@9.1.1+webpack@5.40.0:
@@ -9134,7 +9127,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-ukP0FovBz3WRvz8/yXFi5hg4kel1iL6CQdWJpdZgwxHQqVBKN90wkkKC/4njARyI10CfN+EAHKz6xN2w7eo8Kw==
+      integrity: sha512-FhrAZGDbfvPE2xm9GnoHaZM3iEQ77AXJ8xmss2se1XdE/LQvF3FyWIKpw0zDeAAlt4s0Xx5oXDV6iKwsSBvZAA==
       tarball: file:projects/codemodel.tgz
     version: 0.0.0
   file:projects/common.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9146,7 +9139,7 @@ packages:
       '@typescript-eslint/eslint-plugin': 4.33.0_cc617358c89d3f38c52462f6d809db4c
       '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.4.4
       chalk: 4.1.2
-      cli-progress: 3.9.1
+      cli-progress: 3.10.0
       eslint: 7.32.0
       eslint-plugin-import: 2.24.2_eslint@7.32.0
       eslint-plugin-jest: 24.3.7_f178490c6a6949e5c714e48d3ab36f98
@@ -9163,7 +9156,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-kfSR/2j/C4mMOZqoEU3Gc1rZTVtPzcCIpMn+3H9BqKw3AmrMBMPr91yRjgXg6HbrdfgUEmVZDRcU4ICDePVcNQ==
+      integrity: sha512-CSwlXK5IzBX1DAB0z0BuyS0YgZHzVNU6Z1wC3tyw8q1CQIbwGUBYvro2n4dv6n8KTzjaLq16/t1JknUsL3k/ww==
       tarball: file:projects/common.tgz
     version: 0.0.0
   file:projects/compare.tgz_prettier@2.3.2:
@@ -9198,7 +9191,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-5Dzgs+UFMcpkiI5Kc3tS0OsZp+LHIiFHggEq9HE1KS7TUfkoPiI4B+EYZ+AWU2U4mu7upeVBTiPPpuAbRoqKTw==
+      integrity: sha512-6dfGiZMPs7iSrzePOibryg8fm/j0Gk95CzcmN/rsV+J9ULzVO7f+RPsbS776H05/ktmruUI8fRRQPEvnauYUCA==
       tarball: file:projects/compare.tgz
     version: 0.0.0
   file:projects/configuration.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9231,7 +9224,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-kqb5KtNJZA/YJXyC5F6OD0FqOyga4tbchWkESr4ewFuiYY3ennOtjYtwkZvMRqxaGevgn98ZGjg9ao4wgTGjKA==
+      integrity: sha512-Hv9AVBJefYkt/FwKayCfVJVpUX/JP7gQ2UgIYGF+6R812EcDSaVLcLtiXvlP4MrEapiaFcxNPAU/LJf/gDIJgA==
       tarball: file:projects/configuration.tgz
     version: 0.0.0
   file:projects/core.tgz_ts-node@9.1.1:
@@ -9285,7 +9278,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-jw+zUewyho1jM+lO2/f4F1luq2VQGLJbi/2s6sytsrtdzvg5/vMBqGYxueJYYwixaNN4kWHX2IDZ1hsbxj6rsg==
+      integrity: sha512-4foLwwRPpMQYn6102Vfql5dQa2F+Ry0ESmAR2MqoUkQm0dfL2KPLmHdo42cfpX9xyr2+iCkgAgjPWMsxXqOcGQ==
       tarball: file:projects/core.tgz
     version: 0.0.0
   file:projects/datastore.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9319,7 +9312,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-MdfXME1sxc9805AJW5uBB1BMfo/1LHX+t2tXFigLaR+qqSPPM3RObGgBLJ4CyOozF5IY3R3kC/Qg0eAIeOS0wA==
+      integrity: sha512-53x0HNq8faFk8M75UNO7olR8RmTKRVwFjaKw3Ivao3yxtNthzuFrYuWPJe8ulBFGQkCdj0QByQwW1bA6Hu4ujQ==
       tarball: file:projects/datastore.tgz
     version: 0.0.0
   file:projects/deduplication.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9349,7 +9342,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-b1KJmI6iZpQEqJCrqxfK7B76kIX31zhXAKk7CqzReqR31DGDyyAh8b0RX1AHzRzo3p5YX2+YhKNJhHGRLHT8gA==
+      integrity: sha512-GygeSgCupwHAsW1s5i5Yu41+ysLA57lHFoRm92n03U+DRlBJpMW5muz+6Q5MlRPyhypRlOV779pLmGmeYWrKbA==
       tarball: file:projects/deduplication.tgz
     version: 0.0.0
   file:projects/extension-base.tgz_prettier@2.3.2:
@@ -9374,7 +9367,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-0+5e7UaKkyrM6AzjlYzvGR2W0mjooetbIUDG+vJRWByrWVVGI9s+kKZFZxAjrlankXdxpKXXaQgFH/fFtMFXOw==
+      integrity: sha512-0vtD+uDbwnZDeyilAlL+QSPzQR+MEYA2m5Zb2WC00AKrDwfNRdRKcGnApLVi6TOd9+Pdof8ahqhC2+0alCfUdQ==
       tarball: file:projects/extension-base.tgz
     version: 0.0.0
   file:projects/extension.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9587,7 +9580,7 @@ packages:
     peerDependencies:
       ts-node: '*'
     resolution:
-      integrity: sha512-tsKHBsZ0WMk4nAijW4GtVCAB0ItRXkcSkSkpGUl/bkc9T/TyJxY+RdWou4D882HXVDXx5XqZa5cZf7pIWDwZtw==
+      integrity: sha512-LUaO3uY4qfEqjzttBwOpuzjkO1izK33C0DKQtiCM9MDromkE1kCg1S2A03VVhYqk5ppy2381A2fIBFahAgk8ig==
       tarball: file:projects/modelerfour.tgz
     version: 0.0.0
   file:projects/oai2-to-oai3.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9616,7 +9609,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-uCFffxdzJHgbFZKG3xSnxp2ndmQXjGA1oVX0GsNagiTJDQeKy7sDTo3WMFEhzM1BLcFAwCC3NzIW1m3jf3pmAQ==
+      integrity: sha512-pzr0IffF81eQsvaRF27CxANKcJc5tzVmNBw1XNwoQwGyLP2xNWZPLNvG+l0VXYlrzXyhqvaLXECf7mPdAFOykg==
       tarball: file:projects/oai2-to-oai3.tgz
     version: 0.0.0
   file:projects/openapi.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9641,7 +9634,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-kg4M13/p7qJ6pkI4lrlIYN3aq8Vx+VAqyeeAWeSUxgpcRKi166LdVVa2ehz8sj43EX/UtcmC/D/GHYIAFTDeuQ==
+      integrity: sha512-YxcqO0n7lJZ3j5m0IuGwSKBdV/oeOaogpCJoHlG09sMp/tSYBJYZhiE/GpLhebBq/Q7gTuwzGVmsTHId/u45ow==
       tarball: file:projects/openapi.tgz
     version: 0.0.0
   file:projects/schemas.tgz:
@@ -9667,7 +9660,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-P1b/4BQdegqyztaghMr28SCC2EHM6KbraQDlqJeM3g+0za9g18Hy6ncgrpA1eCXudzSe05Fc76hRsbnT2dRBiQ==
+      integrity: sha512-gXEwfowVRvtw3blKFAWYS1cx0jYtRjaqozfqpjDbaTNNfNVbFTLGYmoYgi/rTb02ZH1dxFxiLjtqNUYpHiDPPQ==
       tarball: file:projects/test-public-packages.tgz
     version: 0.0.0
   file:projects/test-utils.tgz_5881cafc48bf8869a383fbba5699651c:
@@ -9690,7 +9683,7 @@ packages:
       prettier: '*'
       ts-node: '*'
     resolution:
-      integrity: sha512-yxRYW3EvmqrzBPZakd+CUihcLZflw1i1kuGphG8JfFdDR9wnDfQ87LeBJVcgUdPcNwLTIkDw5QeU6ikwwJGung==
+      integrity: sha512-/YtDWG9ik6vj6bPSSOpVtxYFFj1h7C7Y2lZnhHA9Kg+nDJRtQvg8wTal8WdWS71XhBHOQ2WDYa3p5uenUTQbTQ==
       tarball: file:projects/test-utils.tgz
     version: 0.0.0
   file:projects/yaml.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9784,7 +9777,7 @@ specifiers:
   ajv-formats: ^2.1.0
   body-parser: ^1.19.0
   chalk: ^4.1.0
-  cli-progress: ~3.9.1
+  cli-progress: ~3.10.0
   command-exists: ~1.2.9
   commonmark: ^0.27.0
   compare-versions: ^3.4.0
