@@ -331,6 +331,11 @@ async function main() {
   }
 
   const args = await getCliArgs(argv);
+  if (args === undefined) {
+    // eslint-disable-next-line no-process-exit
+    process.exit(1);
+  }
+
   const loggerSink = new ConsoleLogger({ format: args.options["message-format"] });
   const logger = new AutorestSyncLogger({
     sinks: [loggerSink],
