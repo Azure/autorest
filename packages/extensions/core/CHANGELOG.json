@@ -9,6 +9,9 @@
         "patch": [
           {
             "comment": "Fix crash when having invalid cli arguments"
+          },
+          {
+            "comment": "Fix progress Bar crashing autorest when stdout redirected to file"
           }
         ],
         "dependency": [
