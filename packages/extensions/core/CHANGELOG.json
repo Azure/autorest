@@ -2,6 +2,18 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.8.3",
+      "tag": "@autorest/core_v3.8.3",
+      "date": "Tue, 22 Mar 2022 20:26:28 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "`allow-no-input` will not stop autorest run immidiately"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.8.2",
       "tag": "@autorest/core_v3.8.2",
       "date": "Tue, 22 Mar 2022 00:17:01 GMT",
