@@ -44,7 +44,7 @@ Usage:
 1. Paste spec in the `Inputs` section
 1. Evaluation result should be an array of all the object that were matched with the given path.
 
-**NOTE**: The library used in this website is slightly different and there could be inconsistency for some edge cases. You can use the next [section](#debug) to debug the issue and check if autorest is selecting the same elements.
+**NOTE**: The library used in this website is slightly different and there could be inconsistency for some edge cases. You can use the next [section](#debug-flag) to debug the issue and check if autorest is selecting the same elements.
 
 ### `debug` flag
 
