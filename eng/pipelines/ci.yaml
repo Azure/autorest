@@ -60,7 +60,7 @@ stages:
         displayName: Lint docs
         steps:
           - script: |
-              sudo npm install -g markdown-link-check@3.9.3
+              sudo npm install -g markdown-link-check
               find docs -name "*.md" -print0 | xargs -0  -n1 markdown-link-check -c ./markdown-link-check-config.json
             displayName: Find
 
