@@ -1,4 +1,5 @@
-const { runPrettier } = require("./helpers.js");
+// @ts-check
+const { runPrettier, CommandFailedError } = require("./helpers.js");
 try {
   runPrettier("--list-different");
 } catch (err) {
