@@ -1441,6 +1441,8 @@ Actual permissions required to call API:
 | `rolesWithThesePermissions` | `string` | Comma separated list of roles that have the required permissions for this API.       |
 | `moreInfoLink`              | `string` | Link formatted as markdown with more information about the permissions for this API. |
 
+ For a list roles, see [Azure built-in roles](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles).
+
 ```json5
 "xmsPermissions": {
   "type": "object",
