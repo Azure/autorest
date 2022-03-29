@@ -158,76 +158,68 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
       context.debug(`${nodeName} - SKIPPING`);
       return inputScope;
     }
-    try {
-      let cacheKey: string | undefined;
+    let cacheKey: string | undefined;
 
-      if (context.config.cachingEnabled) {
-        // generate the key used to store/access cached content
-        const names = await inputScope.Enum();
-        const data = (
-          await Promise.all(names.map((name) => inputScope.readStrict(name).then((uri) => md5(uri.readData()))))
-        ).sort();
+    if (context.config.cachingEnabled) {
+      // generate the key used to store/access cached content
+      const names = await inputScope.Enum();
+      const data = (
+        await Promise.all(names.map((name) => inputScope.readStrict(name).then((uri) => md5(uri.readData()))))
+      ).sort();
 
-        cacheKey = md5([context.configFileFolderUri, nodeName, ...data].join("«"));
-      }
-
-      // if caching is enabled, see if we can find a scopeResult in the cache first.
-      // key = inputScope names + md5(inputScope content)
-      if (
-        context.config.cachingEnabled &&
-        inputScope.cachable &&
-        context.config.cacheExclude.indexOf(nodeName) === -1 &&
-        (await isCached(cacheKey))
-      ) {
-        // shortcut -- get the outputs directly from the cache.
-        context.log({
-          level: times ? "information" : "debug",
-          message: `${nodeName} - CACHED inputs = ${(await inputScope.enum()).length} [0.0 s]`,
-        });
-
-        return await readCache(cacheKey, context.DataStore.getDataSink(node.outputArtifact));
-      }
-
-      const t1 = process.uptime() * 100;
-      context.log({
-        level: times ? "information" : "debug",
-        message: `${nodeName} - START inputs = ${(await inputScope.enum()).length}`,
-      });
-
-      // creates the actual plugin.
-      const scopeResult = await plugin(context, inputScope, context.DataStore.getDataSink(node.outputArtifact));
-      const t2 = process.uptime() * 100;
-
-      const memSuffix = context.config.debug ? `[${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)} MB]` : "";
-      context.log({
-        level: times ? "information" : "debug",
-        message: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]${memSuffix}`,
-      });
-
-      // if caching is enabled, let's cache this scopeResult.
-      if (context.config.cachingEnabled && cacheKey) {
-        await writeCache(cacheKey, scopeResult);
-      }
-      // if this node wasn't able to load from the cache, then subsequent nodes shall not either
-      if (!inputScope.cachable || context.config.cacheExclude.indexOf(nodeName) !== -1) {
-        try {
-          scopeResult.cachable = false;
-        } catch {
-          // not settable on fs inputs anyway.
-        }
-      }
-
-      // Yield the event loop.
-      await setImmediatePromise();
-
-      return scopeResult;
-    } catch (e) {
-      if (configView.config.debug) {
-        // eslint-disable-next-line no-console
-        console.error(`${__filename} - FAILURE`, e);
-      }
-      throw e;
+      cacheKey = md5([context.configFileFolderUri, nodeName, ...data].join("«"));
     }
+
+    // if caching is enabled, see if we can find a scopeResult in the cache first.
+    // key = inputScope names + md5(inputScope content)
+    if (
+      context.config.cachingEnabled &&
+      inputScope.cachable &&
+      context.config.cacheExclude.indexOf(nodeName) === -1 &&
+      (await isCached(cacheKey))
+    ) {
+      // shortcut -- get the outputs directly from the cache.
+      context.log({
+        level: times ? "information" : "debug",
+        message: `${nodeName} - CACHED inputs = ${(await inputScope.enum()).length} [0.0 s]`,
+      });
+
+      return await readCache(cacheKey, context.DataStore.getDataSink(node.outputArtifact));
+    }
+
+    const t1 = process.uptime() * 100;
+    context.log({
+      level: times ? "information" : "debug",
+      message: `${nodeName} - START inputs = ${(await inputScope.enum()).length}`,
+    });
+
+    // creates the actual plugin.
+    const scopeResult = await plugin(context, inputScope, context.DataStore.getDataSink(node.outputArtifact));
+    const t2 = process.uptime() * 100;
+
+    const memSuffix = context.config.debug ? `[${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)} MB]` : "";
+    context.log({
+      level: times ? "information" : "debug",
+      message: `${nodeName} - END [${Math.floor(t2 - t1) / 100} s]${memSuffix}`,
+    });
+
+    // if caching is enabled, let's cache this scopeResult.
+    if (context.config.cachingEnabled && cacheKey) {
+      await writeCache(cacheKey, scopeResult);
+    }
+    // if this node wasn't able to load from the cache, then subsequent nodes shall not either
+    if (!inputScope.cachable || context.config.cacheExclude.indexOf(nodeName) !== -1) {
+      try {
+        scopeResult.cachable = false;
+      } catch {
+        // not settable on fs inputs anyway.
+      }
+    }
+
+    // Yield the event loop.
+    await setImmediatePromise();
+
+    return scopeResult;
   };
 
   // schedule pipeline

@@ -1,6 +1,6 @@
 import { serializeJsonPointer } from "@azure-tools/json";
+import { OpenAPI2Document } from "@azure-tools/openapi/v2";
 import { ConverterLogger, Oai2ToOai3 } from "../src";
-import { OpenAPI2Document } from "../src/oai2";
 
 const defaultOpenApi2 = {
   swagger: "2.0",

@@ -2,6 +2,18 @@
   "name": "@azure-tools/yaml",
   "entries": [
     {
+      "version": "1.1.0",
+      "tag": "@azure-tools/yaml_v1.1.0",
+      "date": "Tue, 15 Mar 2022 16:00:38 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Tweak to stringify"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.0",
       "tag": "@azure-tools/yaml_v1.0.0",
       "date": "Wed, 08 Sep 2021 15:39:22 GMT",

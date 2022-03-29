@@ -3,6 +3,7 @@ import { CreateObject } from "@azure-tools/datastore";
 import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
 import { mergeConfigurations } from "../configuration-merging";
 import { autorestConfigurationProcessor, AUTOREST_INITIAL_CONFIG } from "../configuration-schema";
+import { getLogLevel } from "../utils";
 import { parseArgs } from "./parse-args";
 
 export interface AutorestCliArgs {
@@ -10,19 +11,11 @@ export interface AutorestCliArgs {
   configFileOrFolder: string | undefined;
 }
 
-export function parseAutorestCliArgs(cliArgs: string[]): AutorestCliArgs {
+export function parseAutorestCliArgs(cliArgs: string[]): AutorestCliArgs | undefined {
   const parsedArgs = parseArgs(cliArgs);
 
   const logger = new AutorestSyncLogger({
-    processors: [
-      new FilterLogger({
-        level: parsedArgs.options.debug
-          ? "debug"
-          : parsedArgs.options.verbose
-          ? "verbose"
-          : parsedArgs.options.level ?? "information",
-      }),
-    ],
+    processors: [new FilterLogger({ level: getLogLevel(parsedArgs.options) })],
     sinks: [new ConsoleLoggerSink()],
   });
 
@@ -46,7 +39,7 @@ export function parseAutorestCliArgs(cliArgs: string[]): AutorestCliArgs {
         message: `Invalid Cli Flag: ${error.message}. For flag '${error.path.join(".")}'`,
       });
     }
-    throw new OperationAbortedException();
+    return undefined;
   }
   return { options: result.value, configFileOrFolder };
 }

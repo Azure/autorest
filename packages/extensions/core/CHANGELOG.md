@@ -1,6 +1,37 @@
 # Change Log - @autorest/core
 
-This log was last generated on Tue, 01 Feb 2022 23:06:50 GMT and should not be manually modified.
+This log was last generated on Tue, 22 Mar 2022 00:17:01 GMT and should not be manually modified.
+
+## 3.8.2
+Tue, 22 Mar 2022 00:17:01 GMT
+
+### Patches
+
+- Fix crash when having invalid cli arguments
+- Fix progress Bar crashing autorest when stdout redirected to file
+
+## 3.8.1
+Mon, 21 Mar 2022 15:38:03 GMT
+
+### Patches
+
+- Fix issue with x-ms-client-name not respected when used inside `type:array` `items`
+- Full ref resolver validate the refs are valid
+
+## 3.8.0
+Tue, 15 Mar 2022 16:00:38 GMT
+
+### Minor changes
+
+- Log information at the end of autorest run (Runtime, number of files generated).
+- `--help` usage include `yaml` and `json` as config file formats
+- **Added** new plugin to save transformed input in place
+- Enable ability to override the logger log level in specific plugins
+- Uptake change in typing in openapi library
+
+### Patches
+
+- Add helper error message on failure
 
 ## 3.7.6
 Tue, 01 Feb 2022 23:06:50 GMT
@@ -208,7 +239,7 @@ Fri, 09 Apr 2021 19:53:22 GMT
 
 ### Minor changes
 
-- **Added** Semantic validator plugin 
+- **Added** Semantic validator plugin
 - **Feature** Add sourcemap support for errors providing original location of problem
 - **Added** support for emitting statistics of the specs and resuting model
 
@@ -354,7 +385,7 @@ Tue, 4 Feb 2020 00:00:00 GMT
 
 - rebuild to pick up latest data-store to fix the caching filename size
 - OAI2-to-OAI3 converter update in perks.
-- TransformerViaPointer was turning null into {} 
+- TransformerViaPointer was turning null into {}
 - rebuild to fix NPM publishing problem.
 - remove additionalProperties: false so v2 generators don't choke.
 - rebuild to pick up perks change to fix multibyte utf8 over byte boundary problem

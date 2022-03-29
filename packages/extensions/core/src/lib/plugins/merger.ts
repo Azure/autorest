@@ -98,14 +98,14 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
         case "x-ms-paths":
           // Merge paths and x-ms-paths together under paths.
           if (!this.isSecondaryFile) {
-            const paths = <oai.PathItem>target.paths || this.newObject(target, "paths", pointer);
-            this.visitPaths(paths, children);
+            const paths = target.paths || this.newObject(target, "paths", pointer);
+            this.visitPaths(paths as any, children);
           }
           break;
 
         case "components":
           {
-            const components = <oai.Components>target.components || this.newObject(target, "components", pointer);
+            const components = target.components || this.newObject(target, "components", pointer);
             this.visitComponents(components, children);
           }
           break;
@@ -150,7 +150,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
             }
             const docsMetadata =
               (<oai.ExternalDocumentation>target.externalDocs)["x-ms-metadata"] ||
-              this.newArray(<oai.ExternalDocumentation>target.externalDocs, "x-ms-metadata", pointer);
+              this.newArray(<oai.ExternalDocumentation>target.externalDocs, "x-ms-metadata" as any, pointer);
             docsMetadata.__push__({
               value: cloneDeep(value),
               pointer,
@@ -169,8 +169,8 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
 
         default:
           if (!this.isSecondaryFile) {
-            if (!target[key]) {
-              this.copy(target, key, pointer, value);
+            if (!target[key as any]) {
+              this.copy(target, key as any, pointer, value);
             }
           }
           break;
@@ -457,7 +457,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
         this.newObject(components, key, pointer);
       }
 
-      this.visitComponent(key, components[key], children);
+      this.visitComponent(key, components[key] as any, children);
     }
   }
 

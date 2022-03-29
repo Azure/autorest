@@ -5,7 +5,7 @@ import { Interpretations } from "./interpretations";
 import { SecurityProcessor } from "./security-processor";
 
 const baseOpenapiSpec = {
-  openApi: "3.0.0",
+  openapi: "3.0.0",
   info: {
     title: "Base spec",
     version: "1.0",

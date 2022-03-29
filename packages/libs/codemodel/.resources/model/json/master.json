@@ -992,6 +992,47 @@
       "defaultProperties": [],
       "additionalProperties": false
     },
+    "AADTokenSecurityScheme": {
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "scopes",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "./http.json#/definitions/SecurityScheme"
+        }
+      ]
+    },
+    "AzureKeySecurityScheme": {
+      "type": "object",
+      "properties": {
+        "headerName": {
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "headerName",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "./http.json#/definitions/SecurityScheme"
+        }
+      ]
+    },
     "Record<string,any>": {
       "type": "object",
       "defaultProperties": [],

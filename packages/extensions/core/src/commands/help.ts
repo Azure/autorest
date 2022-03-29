@@ -21,7 +21,7 @@ function printHelpHeader() {
     [
       "",
       "",
-      color("**Usage**: autorest `[configuration-file.md] with [...options]`"),
+      color("**Usage**: `autorest [config-file.{md|json|yaml}] [...additional options]`"),
       "",
       color("  See: https://aka.ms/autorest/cli for additional documentation"),
     ].join("\n"),

@@ -857,7 +857,7 @@ export class ModelerFour {
         maxProperties: schema.maxProperties ? Number(schema.maxProperties) : undefined,
         language: {
           default: {
-            summary: schema.summary || schema.title,
+            summary: schema.title,
           },
         },
       }),
@@ -866,14 +866,13 @@ export class ModelerFour {
     // cache this now before we accidentally recurse on this type.
     this.schemaCache.set(schema, objectSchema);
     for (const [propertyName, propertyDeclaration] of Object.entries(schema.properties ?? {})) {
-      const property = this.resolve(propertyDeclaration);
       this.use(<OpenAPI.Refable<OpenAPI.Schema>>propertyDeclaration, (pSchemaName, pSchema) => {
         const pType = this.processSchema(pSchemaName || `type·for·${propertyName}`, pSchema);
         const prop = objectSchema.addProperty(
           new Property(
             this.interpret.getPreferredName(propertyDeclaration, propertyName),
             propertyDeclaration.description ||
-              this.interpret.getDescription(pType.language.default.description, property),
+              this.interpret.getDescription(pType.language.default.description, pSchema),
             pType,
             {
               readOnly: propertyDeclaration.readOnly || pSchema.readOnly,
@@ -881,8 +880,8 @@ export class ModelerFour {
               required: schema.required ? schema.required.indexOf(propertyName) > -1 : undefined,
               serializedName: propertyName,
               isDiscriminator: discriminatorProperty === propertyName ? true : undefined,
-              extensions: this.interpret.getExtensionProperties(property, propertyDeclaration),
-              clientDefaultValue: this.interpret.getClientDefault(property.instance, propertyDeclaration),
+              extensions: this.interpret.getExtensionProperties(pSchema, propertyDeclaration),
+              clientDefaultValue: this.interpret.getClientDefault(pSchema, propertyDeclaration),
             },
           ),
         );
@@ -1487,7 +1486,7 @@ export class ModelerFour {
     const pSchema =
       requestBodyGroup.type === KnownMediaType.Text
         ? this.stringSchema
-        : this.processBinarySchema(requestSchema?.name || "upload", requestSchema || <OpenAPI.Schema>{});
+        : this.processBinarySchema((requestSchema as any)?.name || "upload", requestSchema || <OpenAPI.Schema>{});
     // add a stream parameter for the body
     httpRequest.addParameter(
       new Parameter(bodyName, this.interpret.getDescription("", body?.instance || {}), pSchema, {
@@ -1568,14 +1567,13 @@ export class ModelerFour {
       // but we must turn them back into operation parameters so that code
       // generators will generate them as method parameters.
       for (const [propertyName, propertyDeclaration] of Object.entries(requestSchema.properties ?? {})) {
-        const property = this.resolve(propertyDeclaration);
         this.use(<OpenAPI.Refable<OpenAPI.Schema>>propertyDeclaration, (pSchemaName, pSchema) => {
           const pType = this.processSchema(pSchemaName || `type·for·${propertyName}`, pSchema);
           httpRequest.addParameter(
             new Parameter(
               propertyName,
               propertyDeclaration.description ||
-                this.interpret.getDescription(pType.language.default.description, property),
+                this.interpret.getDescription(pType.language.default.description, pSchema),
               pType,
               {
                 schema: pType,
@@ -1605,7 +1603,7 @@ export class ModelerFour {
         });
       }
     } else {
-      const pSchema = this.processSchema(requestSchema?.name || "requestBody", requestSchema ?? {});
+      const pSchema = this.processSchema((requestSchema as any)?.name || "requestBody", requestSchema ?? {});
 
       // Track the usage of this schema as an input with media type
       this.trackSchemaUsage(pSchema, { usage: [SchemaContext.Input], serializationFormats: [kmt] });
@@ -1618,7 +1616,7 @@ export class ModelerFour {
           {
             extensions: this.interpret.getExtensionProperties(body.instance),
             required: !!body.instance.required,
-            nullable: requestSchema?.instance?.nullable,
+            nullable: requestSchema?.nullable,
             protocol: {
               http: new HttpParameter(ParameterLocation.Body, {
                 style: <SerializationStyle>(<any>kmt),
@@ -2045,7 +2043,7 @@ export class ModelerFour {
             implementation,
             extensions: this.interpret.getExtensionProperties(parameter),
             deprecated: this.interpret.getDeprecation(parameter),
-            nullable: parameter.nullable || schema.nullable,
+            nullable: (parameter as any).nullable || schema.nullable,
             protocol: {
               http: new HttpParameter(
                 parameter.in,

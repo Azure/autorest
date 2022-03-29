@@ -1,6 +1,6 @@
 {
   "name": "@autorest/common",
-  "version": "1.4.1",
+  "version": "1.5.2",
   "description": "Autorest common utilities",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -39,16 +39,16 @@
     "eslint-plugin-unicorn": "~33.0.1",
     "eslint-plugin-import": "~2.24.2",
     "eslint": "^7.17.0",
-    "jest": "^27.0.4",
+    "jest": "^28.0.0-alpha.7",
     "rimraf": "^3.0.2",
     "typescript": "~4.4.2"
   },
   "dependencies": {
-    "@azure-tools/datastore": "~4.6.0",
-    "@azure-tools/yaml": "~1.0.0",
-    "@azure-tools/json": "~1.2.1",
+    "@azure-tools/datastore": "~4.6.1",
+    "@azure-tools/yaml": "~1.1.0",
+    "@azure-tools/json": "~1.2.2",
     "@azure/logger": "^1.0.2",
     "chalk": "^4.1.0",
-    "cli-progress": "~3.9.1"
+    "cli-progress": "~3.10.0"
   }
 }

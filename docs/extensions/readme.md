@@ -33,6 +33,7 @@ The following documents describes AutoRest specific vendor extensions for [OpenA
 - [x-ms-azure-resource](#x-ms-azure-resource) - indicates that the [Definition Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schemaObject) is a resource as defined by the [Resource Manager API](https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx)
 - [x-ms-request-id](#x-ms-request-id) - allows to overwrite the request id header name
 - [x-ms-client-request-id](#x-ms-client-request-id) - allows to overwrite the client request id header name
+- [x-ms-arm-id-details](#x-ms-arm-id-details) - indicates the allowed resources that can be referred to by an `arm-id` formatted string field.
 
 ### Metadata extensions
 
@@ -1187,6 +1188,150 @@ When set, specifies the header parameter to be used instead of `x-ms-client-requ
         "required": false,
         "x-ms-client-request-id": true
       }]
+    }
+  }
+}
+```
+
+## x-ms-arm-id-details
+
+Can only be set on `"type": "string"` fields with `"format": "arm-id"`.
+
+When set, specifies the set of resource types which can be referenced by this `arm-id`. If this extension isn't provided for a particular `arm-id`, the field can refer to any valid ARM ID.
+
+**Parent element**: [Parameter Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#parameterObject), [Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schemaObject), or [Items Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#itemsObject)
+
+### Schema
+
+| Field Name       | Type                | Description                                                                                                                                          |
+| ---------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| allowedResources | `[AllowedResource]` | **Required** An array of allowed ARM resources. Each element represents a particular type of ARM resource which can be referred to by this `arm-id`. |
+
+**AllowedResource schema**:
+
+| Field Name | Type       | Description                                                                                                                                                                                                         |
+| ---------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| scopes     | `[string]` | An array of scopes. See [Allowed Scopes](#allowed-scopes). If not specified, the default scope is `["ResourceGroup"]`.                                                                                              |
+| type       | `string`   | **Required** The type of resource that is being referred to. For example `Microsoft.Network/virtualNetworks` or `Microsoft.Network/virtualNetworks/subnets`. See [Example Types](#example-types) for more examples. |
+
+#### Allowed Scopes
+
+The following values are allowed for `scopes`. These values were derived from the [scope field in ARM templates](https://docs.microsoft.com/azure/azure-resource-manager/templates/scope-extension-resources?tabs=azure-cli).
+| Scope | URL prefix | Meaning |
+| ----------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Tenant` | `/` | The resource is deployed into a tenant |
+| `Subscription` | `/subscriptions/{subscriptionId}/` | The resource is deployed into a subscription |
+| `ResourceGroup` | `/subscriptions/{subscriptionId}/resourceGroups/{group}` | The resource is deployed into a resource group |
+| `ManagementGroup` | `/providers/Microsoft.Management/managementGroups/{managementGroupName}/` | The resource is deployed into a management group |
+| `Extension` | `{parentScope}/providers/{extensionNamespace}/{extensionType}/{extensionName}/` | The resource is an extension resource and may be deployed as a subresource of another resource. `parentScope` may be a resource in any of the above scopes. |
+| `*` | Any of the above | The resource may be deployed into any of the above scopes. This is identical to `["Tenant", "Subscription", "ResourceGroup", "ManagementGroup", "Extension"`] |
+
+#### Example Types
+
+Below is a table showing an example entry for various different kinds of resource types
+
+| Resource kind                          | Example                                                                      |
+| -------------------------------------- | ---------------------------------------------------------------------------- |
+| Resource in a tenant                   | `{"scopes": ["Tenant"], "type": "Microsoft.Capacity/reservationOrders"}`     |
+| Resource in a subscription             | `{"scopes": ["Subscription"], "type": "Microsoft.Resources/resourceGroups"}` |
+| Resource in a resource group           | `{"scopes": ["ResourceGroup"], "type": "Microsoft.Network/virtualNetworks"}` |
+| Resource in a management group         | `{"scopes": ["ManagementGroup"], "type": "Microsoft.Blueprint/blueprints"}`  |
+| Extension resource                     | `{"scopes": ["Extension"], "type": "Microsoft.Authorization/locks"}`         |
+| Any resource in resource group         | `{"scopes": ["ResourceGroup"], "type": "*"}`                                 |
+| Any compute resource in resource group | `{"scopes": ["ResourceGroup"], "type": "Microsoft.Compute/*"}`               |
+
+Sub-resources are specified in the same manner as their parent resource but with additional paths on the end. For example to refer to a subnet: `Microsoft.Network/virtualNetworks/subnets`.
+
+**Note** that we do not currently support limiting references to an extension resource by the kind of resource it is on. For example you can refer to _any_ resource lock (`Microsoft.Authorization/locks`) but not to a resource lock but only when it's on a CosmosDB.
+
+#### Examples
+
+**Example**: An `arm-id` field that can refer to any ARM resource ID.
+
+```json5
+"MyExampleType": {
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "arm-id"
+    }
+  }
+}
+```
+
+**Example**: An `arm-id` field that must refer to a virtual network
+
+```json5
+"MyExampleType": {
+  "properties": {
+    "vnetId": {
+      "type": "string",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks"
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+**Example (preferred)**: An `arm-id` field with no additional information about what kind of resource it must refer to, referring to the common type.
+
+```json5
+"MyExampleType": {
+  "properties": {
+    "id": {
+      "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ArmId",
+    }
+  }
+}
+```
+
+**Example (preferred)**: An `arm-id` field that must refer to a virtual network, via a referenced definition
+
+```json5
+"MyExampleType": {
+  "properties": {
+    "vnetId": {
+      "$ref": "#/definitions/VNetId",
+    }
+  }
+},
+"VNetId": {
+  "type": "string",
+  "format": "arm-id",
+  "x-ms-arm-id-details": {
+    "allowedResources": [
+      {
+        "type": "Microsoft.Network/virtualNetworks"
+      }
+    ]
+  }
+}
+```
+
+**Example**: An array of `arm-id`'s that refer to a subnet
+
+```json5
+"MyExampleType": {
+  "properties": {
+    "vnets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "arm-id",
+        "x-ms-arm-id-details": {
+          "allowedResources": [
+            {
+              "type": "Microsoft.Network/virtualNetworks/subnets"
+            }
+          ]
+        }
+      }
     }
   }
 }

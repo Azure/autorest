@@ -1,0 +1,17 @@
+{
+  "name": "@autorest/fixer",
+  "entries": [
+    {
+      "version": "1.1.0",
+      "tag": "@autorest/fixer_v1.1.0",
+      "date": "Tue, 15 Mar 2022 16:00:38 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add new fixer for legacy behavior: Single value enum will have modelAsString=false added to them"
+          }
+        ]
+      }
+    }
+  ]
+}

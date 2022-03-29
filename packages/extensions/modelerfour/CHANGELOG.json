@@ -2,6 +2,64 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.23.1",
+      "tag": "@autorest/modelerfour_v4.23.1",
+      "date": "Mon, 21 Mar 2022 15:38:03 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix: Request body with `type: string, format: bytes|duration|date-time` being treated as string instead of base64 json"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.23.0",
+      "tag": "@autorest/modelerfour_v4.23.0",
+      "date": "Tue, 15 Mar 2022 16:00:38 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add support for setting original `operationId` on operation"
+          },
+          {
+            "comment": "**Update** to the logic for resolving operation requests. Group request by body types instead of content-types to prevent overload issues\""
+          },
+          {
+            "comment": "Generalize security scheme by allowing AAD Token "
+          },
+          {
+            "comment": "Added support for special headers: headers automatically handled by the generator"
+          },
+          {
+            "comment": "Uptake change in typing in openapi library"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Fix name of special headers, and compare using lowercase."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/codemodel\" from `~4.17.2` to `~4.18.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.5.0` to `~0.5.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.9.0` to `~2.9.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.6.0` to `~4.6.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.2.3` to `~3.3.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.22.3",
       "tag": "@autorest/modelerfour_v4.22.3",
       "date": "Tue, 07 Dec 2021 16:58:46 GMT",

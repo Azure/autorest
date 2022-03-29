@@ -1,6 +1,6 @@
 {
   "name": "@autorest/modelerfour",
-  "version": "4.22.3",
+  "version": "4.23.1",
   "description": "AutoRest Modeler Version Four (component)",
   "directories": {
     "doc": "docs"
@@ -39,13 +39,13 @@
   "homepage": "https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour",
   "readme": "https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour/readme.md",
   "devDependencies": {
-    "@autorest/codemodel": "~4.17.2",
+    "@autorest/codemodel": "~4.18.2",
     "@autorest/extension-base": "~3.4.2",
-    "@autorest/test-utils": "~0.5.0",
+    "@autorest/test-utils": "~0.5.1",
     "@azure-tools/async-io": "~3.0.0",
-    "@azure-tools/codegen": "~2.9.0",
-    "@azure-tools/datastore": "~4.6.0",
-    "@azure-tools/openapi": "~3.2.3",
+    "@azure-tools/codegen": "~2.9.1",
+    "@azure-tools/datastore": "~4.6.1",
+    "@azure-tools/openapi": "~3.3.0",
     "@azure-tools/tasks": "~3.0.0",
     "@azure-tools/uri": "~3.1.1",
     "@types/jest": "^26.0.20",
@@ -61,7 +61,7 @@
     "eslint-plugin-unicorn": "~33.0.1",
     "eslint-plugin-import": "~2.24.2",
     "eslint": "^7.17.0",
-    "jest": "^27.0.4",
+    "jest": "^28.0.0-alpha.7",
     "lodash": "~4.17.20",
     "prettier": "~2.3.1",
     "recursive-diff": "~1.0.6",

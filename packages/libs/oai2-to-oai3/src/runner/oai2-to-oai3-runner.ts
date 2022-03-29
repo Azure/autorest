@@ -1,7 +1,8 @@
 import { DataHandle, PathMapping } from "@azure-tools/datastore";
 import { getFromJsonPointer } from "@azure-tools/json";
+import { createOpenAPIWorkspace } from "@azure-tools/openapi";
+import { OpenAPI2Document } from "@azure-tools/openapi/v2";
 import { ConverterDiagnostic, ConverterLogger, Oai2ToOai3 } from "../converter";
-import { OpenAPI2Document } from "../oai2";
 import { loadInputFiles } from "./utils";
 
 export interface OaiToOai3FileInput {
@@ -60,16 +61,15 @@ export async function convertOai2ToOai3(
   const resolvingFiles = new Set<string>();
   const completedFiles = new Map<string, OaiToOai3FileOutput>();
 
+  const workspace = createOpenAPIWorkspace<OpenAPI2Document>({
+    specs: new Map([...inputs.entries()].map(([k, v]) => [k, v.schema])),
+  });
+
   const resolveReference: ResolveReferenceFn = async (
     targetfile: string,
     refPath: string,
   ): Promise<any | undefined> => {
-    const file = inputs.get(targetfile);
-    if (file === undefined) {
-      throw new Error(`Ref file ${targetfile} doesn't exists.`);
-    }
-
-    return getFromJsonPointer(file.schema, refPath);
+    return workspace.resolveReference({ file: targetfile, path: refPath });
   };
 
   const computeFile = async (input: OaiToOai3FileInput) => {

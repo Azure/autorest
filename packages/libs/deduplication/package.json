@@ -47,13 +47,13 @@
     "eslint-plugin-unicorn": "~33.0.1",
     "eslint-plugin-import": "~2.24.2",
     "eslint": "^7.17.0",
-    "jest": "^27.0.4",
+    "jest": "^28.0.0-alpha.7",
     "rimraf": "^3.0.2",
     "typescript": "~4.4.2"
   },
   "dependencies": {
-    "@azure-tools/codegen": "~2.9.0",
-    "@azure-tools/datastore": "~4.6.0",
+    "@azure-tools/codegen": "~2.9.1",
+    "@azure-tools/datastore": "~4.6.1",
     "@azure-tools/object-comparison": "~3.0.0",
     "@azure-tools/tasks": "~3.0.0",
     "compare-versions": "^3.4.0",

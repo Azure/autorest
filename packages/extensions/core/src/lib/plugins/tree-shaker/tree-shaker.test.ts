@@ -1,10 +1,10 @@
 import { Source } from "@azure-tools/datastore";
-import { JsonType, Model } from "@azure-tools/openapi";
+import { JsonType, OpenAPI3Document } from "@azure-tools/openapi";
 import { OAI3Shaker } from "./tree-shaker";
 
-const createTestModel = (model: Partial<Model>): Model => {
+const createTestModel = (model: Partial<OpenAPI3Document>): OpenAPI3Document => {
   return {
-    openApi: "3.0.0",
+    openapi: "3.0.0",
     paths: {},
     info: {
       title: "Test spec",
@@ -18,7 +18,7 @@ const createTestModel = (model: Partial<Model>): Model => {
   };
 };
 
-const shake = async (model: any) => {
+const shake = async (model: Partial<OpenAPI3Document>) => {
   const source: Source = {
     ReadObject: () => Promise.resolve<any>(createTestModel(model)),
     key: "test",
@@ -34,7 +34,7 @@ describe("Tree shaker", () => {
         components: {
           schemas: {
             Foo: {
-              type: JsonType.Object,
+              type: "object",
               "x-ms-client-name": "FooClient",
             },
           },
@@ -50,6 +50,7 @@ describe("Tree shaker", () => {
           "/mypath": {
             get: {
               parameters: [{ in: "query", name: "some-param", "x-ms-client-name": "SomeParamClient" }],
+              responses: {},
             },
           },
         },
@@ -59,19 +60,62 @@ describe("Tree shaker", () => {
       expect(param["x-ms-client-name"]).toEqual("SomeParamClient");
     });
 
+    it("keeps x-ms-client-name on the extraced type when used in items of an array", async () => {
+      const result = await shake({
+        components: {
+          schemas: {
+            Foo: {
+              type: "array",
+              items: {
+                "x-ms-client-name": "CustomFooClientItem",
+                type: "object",
+                properties: {
+                  name: { type: "string" },
+                },
+              },
+            },
+          },
+        },
+      });
+
+      expect(result.components.schemas["FooItem"]["x-ms-client-name"]).toEqual("CustomFooClientItem");
+    });
+
     it("removes x-ms-client-name on shaked model when used on property with inline model definition", async () => {
       const result = await shake({
         components: {
           schemas: {
             Foo: {
-              type: JsonType.Object,
+              type: "object",
               properties: {
                 bar: {
                   "x-ms-client-name": "barClient",
-                  type: JsonType.Object,
+                  type: "object",
                   properties: {
                     name: { type: JsonType.String },
                   },
+                },
+              },
+            },
+          },
+        },
+      });
+
+      expect(result.components.schemas.Foo.properties.bar["x-ms-client-name"]).toEqual("barClient");
+      expect(result.components.schemas["Foo-bar"]["x-ms-client-name"]).toBeUndefined();
+    });
+
+    it("removes x-ms-client-name on shaked model when used on property with inline enum definition", async () => {
+      const result = await shake({
+        components: {
+          schemas: {
+            Foo: {
+              type: "object",
+              properties: {
+                bar: {
+                  "x-ms-client-name": "barClient",
+                  type: "string",
+                  enum: ["one", "two"],
                 },
               },
             },
@@ -90,6 +134,7 @@ describe("Tree shaker", () => {
         "/mypath": {
           get: {
             parameters: [{ in: "query", name: "some-param" }],
+            responses: {},
           },
         },
       },

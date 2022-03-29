@@ -11,15 +11,7 @@ import {
   createMappingTree,
 } from "@azure-tools/datastore";
 import { JsonPointer, getFromJsonPointer, appendJsonPointer } from "@azure-tools/json";
-import oai3, {
-  EncodingStyle,
-  HttpOperation,
-  includeXDashKeys,
-  JsonType,
-  PathItem,
-  SecurityType,
-} from "@azure-tools/openapi";
-import { resolveOperationConsumes, resolveOperationProduces } from "./content-type-utils";
+import { includeXDashKeys, isExtensionKey, PathReference, Refable } from "@azure-tools/openapi";
 import {
   OpenAPI2Document,
   OpenAPI2ResponseHeader,
@@ -29,7 +21,17 @@ import {
   OpenAPI2FormDataParameter,
   HttpMethod,
   OpenAPI2Parameter,
-} from "./oai2";
+} from "@azure-tools/openapi/v2";
+import oai3, {
+  OpenAPI3Document,
+  EncodingStyle,
+  HttpOperation,
+  JsonType,
+  PathItem,
+  SecurityType,
+  OAuth2SecurityScheme,
+} from "@azure-tools/openapi/v3";
+import { resolveOperationConsumes, resolveOperationProduces } from "./content-type-utils";
 import { cleanElementName, convertOai2RefToOai3, parseOai2Ref } from "./refs-utils";
 import { ResolveReferenceFn } from "./runner";
 import { statusCodes } from "./status-codes";
@@ -70,7 +72,7 @@ export interface ConverterLogger {
 }
 
 export class Oai2ToOai3 {
-  public generated: MappingTreeObject<oai3.Model>;
+  public generated: MappingTreeObject<OpenAPI3Document>;
   public mappings: PathMapping[] = [];
 
   constructor(
@@ -291,127 +293,146 @@ export class Oai2ToOai3 {
       }
     }
   }
-
   private async visitParameter(
+    parameterTarget: MappingTreeObject<Refable<oai3.Parameter>>,
+    parameterValue: any,
+    sourcePointer: string,
+    parameterItemMembers: () => Iterable<Node>,
+  ) {
+    if (this.isTargetReference(parameterTarget, parameterValue)) {
+      return this.copyRef(parameterTarget, parameterValue, sourcePointer);
+    } else {
+      await this.visitParameterDefinition(parameterTarget, parameterValue, sourcePointer, parameterItemMembers);
+    }
+  }
+
+  private isTargetReference<I, T>(
+    target: MappingTreeObject<Refable<T>>,
+    value: Refable<I>,
+  ): target is MappingTreeObject<PathReference> {
+    return "$ref" in value;
+  }
+
+  private async copyRef(target: MappingTreeObject<PathReference>, value: PathReference, sourcePointer: string) {
+    target.__set__("$ref", { value: await this.convertReferenceToOai3(value.$ref), sourcePointer });
+  }
+
+  private async visitParameterDefinition(
     parameterTarget: MappingTreeObject<oai3.Parameter>,
     parameterValue: any,
     sourcePointer: string,
     parameterItemMembers: () => Iterable<Node>,
   ) {
-    if ("$ref" in parameterValue) {
-      parameterTarget.__set__("$ref", { value: await this.convertReferenceToOai3(parameterValue.$ref), sourcePointer });
-    } else {
-      const parameterUnchangedProperties = ["name", "in", "description", "allowEmptyValue", "required"];
+    const parameterUnchangedProperties = ["name", "in", "description", "allowEmptyValue", "required"];
 
-      for (const key of parameterUnchangedProperties) {
-        if (parameterValue[key] !== undefined) {
-          parameterTarget.__set__(key, { value: parameterValue[key], sourcePointer });
-        }
+    for (const key of parameterUnchangedProperties) {
+      if (parameterValue[key] !== undefined) {
+        parameterTarget.__set__(key as any, { value: parameterValue[key], sourcePointer });
       }
+    }
 
-      if (parameterValue["x-ms-skip-url-encoding"] !== undefined) {
+    if (parameterValue["x-ms-skip-url-encoding"] !== undefined) {
+      if (parameterValue.in === "query") {
+        parameterTarget.__set__("allowReserved", { value: true, sourcePointer });
+      } else {
+        parameterTarget.__set__("x-ms-skip-url-encoding", {
+          value: parameterValue["x-ms-skip-url-encoding"],
+          sourcePointer,
+        });
+      }
+    }
+
+    /**
+     * List of extension properties that shouldn't just be passed through.
+     */
+    const extensionPropertiesCustom = new Set(["x-ms-skip-url-encoding", "x-ms-original", "x-ms-enum"]);
+
+    for (const key of includeXDashKeys(parameterValue)) {
+      if (parameterValue[key] !== undefined && !extensionPropertiesCustom.has(key)) {
+        parameterTarget.__set__(key, { value: parameterValue[key], sourcePointer });
+      }
+    }
+
+    // Collection Format
+    if (parameterValue.type === "array") {
+      parameterValue.collectionFormat = parameterValue.collectionFormat || "csv";
+      if (
+        parameterValue.collectionFormat === "csv" &&
+        (parameterValue.in === "query" || parameterValue.in === "cookie")
+      ) {
+        parameterTarget.__set__("style", { value: EncodingStyle.Form, sourcePointer });
+      }
+      if (
+        parameterValue.collectionFormat === "csv" &&
+        (parameterValue.in === "path" || parameterValue.in === "header")
+      ) {
+        parameterTarget.__set__("style", { value: EncodingStyle.Simple, sourcePointer });
+      }
+      if (parameterValue.collectionFormat === "ssv") {
         if (parameterValue.in === "query") {
-          parameterTarget.__set__("allowReserved", { value: true, sourcePointer });
-        } else {
-          parameterTarget.__set__("x-ms-skip-url-encoding", {
-            value: parameterValue["x-ms-skip-url-encoding"],
-            sourcePointer,
-          });
+          parameterTarget.__set__("style", { value: EncodingStyle.SpaceDelimited, sourcePointer });
         }
       }
-
-      /**
-       * List of extension properties that shouldn't just be passed through.
-       */
-      const extensionPropertiesCustom = new Set(["x-ms-skip-url-encoding", "x-ms-original", "x-ms-enum"]);
-
-      for (const key of includeXDashKeys(parameterValue)) {
-        if (parameterValue[key] !== undefined && !extensionPropertiesCustom.has(key)) {
-          parameterTarget.__set__(key, { value: parameterValue[key], sourcePointer });
+      if (parameterValue.collectionFormat === "pipes") {
+        if (parameterValue.in === "query") {
+          parameterTarget.__set__("style", { value: EncodingStyle.PipeDelimited, sourcePointer });
         }
       }
-
-      // Collection Format
-      if (parameterValue.type === "array") {
-        parameterValue.collectionFormat = parameterValue.collectionFormat || "csv";
-        if (
-          parameterValue.collectionFormat === "csv" &&
-          (parameterValue.in === "query" || parameterValue.in === "cookie")
-        ) {
-          parameterTarget.__set__("style", { value: EncodingStyle.Form, sourcePointer });
-        }
-        if (
-          parameterValue.collectionFormat === "csv" &&
-          (parameterValue.in === "path" || parameterValue.in === "header")
-        ) {
-          parameterTarget.__set__("style", { value: EncodingStyle.Simple, sourcePointer });
-        }
-        if (parameterValue.collectionFormat === "ssv") {
-          if (parameterValue.in === "query") {
-            parameterTarget.__set__("style", { value: EncodingStyle.SpaceDelimited, sourcePointer });
-          }
-        }
-        if (parameterValue.collectionFormat === "pipes") {
-          if (parameterValue.in === "query") {
-            parameterTarget.__set__("style", { value: EncodingStyle.PipeDelimited, sourcePointer });
-          }
-        }
-        if (parameterValue.collectionFormat === "multi") {
-          parameterTarget.__set__("style", { value: EncodingStyle.Form, sourcePointer });
-          parameterTarget.__set__("explode", { value: true, sourcePointer });
-        }
-
-        // tsv is no longer supported in OAI3, but we still need to support this.
-        if (parameterValue.collectionFormat === "tsv") {
-          parameterTarget.__set__("style", { value: EncodingStyle.TabDelimited, sourcePointer });
-        }
+      if (parameterValue.collectionFormat === "multi") {
+        parameterTarget.__set__("style", { value: EncodingStyle.Form, sourcePointer });
+        parameterTarget.__set__("explode", { value: true, sourcePointer });
       }
 
-      if (parameterTarget.schema === undefined) {
-        parameterTarget.__set__("schema", this.newObject(sourcePointer));
+      // tsv is no longer supported in OAI3, but we still need to support this.
+      if (parameterValue.collectionFormat === "tsv") {
+        parameterTarget.__set__("style", { value: EncodingStyle.TabDelimited, sourcePointer });
       }
+    }
 
-      const schema: MappingTreeObject<oai3.Schema> = parameterTarget.schema as any;
+    if (parameterTarget.schema === undefined) {
+      parameterTarget.__set__("schema", this.newObject(sourcePointer));
+    }
 
-      const schemaKeys = [
-        "maximum",
-        "exclusiveMaximum",
-        "minimum",
-        "exclusiveMinimum",
-        "maxLength",
-        "minLength",
-        "pattern",
-        "maxItems",
-        "minItems",
-        "uniqueItems",
-        "enum",
-        "x-ms-enum",
-        "multipleOf",
-        "default",
-        "format",
-      ];
+    const schema: MappingTreeObject<oai3.Schema> = parameterTarget.schema as any;
 
-      for (const { key, childIterator, pointer: jsonPointer } of parameterItemMembers()) {
-        if (key === "schema") {
-          if (schema.items === undefined) {
-            schema.__set__("items", this.newObject(jsonPointer));
-          }
+    const schemaKeys = [
+      "maximum",
+      "exclusiveMaximum",
+      "minimum",
+      "exclusiveMinimum",
+      "maxLength",
+      "minLength",
+      "pattern",
+      "maxItems",
+      "minItems",
+      "uniqueItems",
+      "enum",
+      "x-ms-enum",
+      "multipleOf",
+      "default",
+      "format",
+    ];
+
+    for (const { key, childIterator, pointer: jsonPointer } of parameterItemMembers()) {
+      if (key === "schema") {
+        if (schema.items === undefined) {
+          schema.__set__("items", this.newObject(jsonPointer));
+        }
+        await this.visitSchema(schema.items as any, parameterValue.items, childIterator);
+      } else if (schemaKeys.indexOf(key) !== -1) {
+        schema.__set__(key as any, { value: parameterValue[key], sourcePointer });
+      }
+    }
+
+    if (parameterValue.type !== undefined) {
+      schema.__set__("type", { value: parameterValue.type, sourcePointer });
+    }
+
+    if (parameterValue.items !== undefined) {
+      schema?.__set__("items", this.newObject(sourcePointer));
+      for (const { key, childIterator } of parameterItemMembers()) {
+        if (key === "items") {
           await this.visitSchema(schema.items as any, parameterValue.items, childIterator);
-        } else if (schemaKeys.indexOf(key) !== -1) {
-          schema.__set__(key, { value: parameterValue[key], sourcePointer });
-        }
-      }
-
-      if (parameterValue.type !== undefined) {
-        schema.__set__("type", { value: parameterValue.type, sourcePointer });
-      }
-
-      if (parameterValue.items !== undefined) {
-        schema?.__set__("items", this.newObject(sourcePointer));
-        for (const { key, childIterator } of parameterItemMembers()) {
-          if (key === "items") {
-            await this.visitSchema(schema.items as any, parameterValue.items, childIterator);
-          }
         }
       }
     }
@@ -454,7 +475,7 @@ export class Oai2ToOai3 {
               case "description":
               case "name":
               case "in":
-                securityScheme.__set__(key, { value, sourcePointer: pointer });
+                securityScheme.__set__(key as any, { value, sourcePointer: pointer });
                 break;
               default:
                 await this.visitExtensions(securityScheme, key, value, pointer);
@@ -470,7 +491,7 @@ export class Oai2ToOai3 {
                 break;
               case "type":
                 securityScheme.__set__("type", { value: SecurityType.Http, sourcePointer: pointer });
-                securityScheme.__set__("scheme", { value: "basic", sourcePointer: pointer });
+                securityScheme.__set__("scheme" as any, { value: "basic", sourcePointer: pointer });
                 break;
               default:
                 await this.visitExtensions(securityScheme, key, value, pointer);
@@ -480,12 +501,13 @@ export class Oai2ToOai3 {
           break;
         case "oauth2":
           {
+            const oauth2Scheme: MappingTreeObject<OAuth2SecurityScheme> = securityScheme as any;
             if (v.description !== undefined) {
-              securityScheme.__set__("description", { value: v.description, sourcePointer });
+              oauth2Scheme.__set__("description", { value: v.description, sourcePointer });
             }
 
-            securityScheme.__set__("type", { value: v.type, sourcePointer });
-            securityScheme.__set__("flows", this.newObject(sourcePointer));
+            oauth2Scheme.__set__("type", { value: v.type, sourcePointer });
+            oauth2Scheme.__set__("flows", this.newObject(sourcePointer));
             let flowName = v.flow;
 
             // convert flow names to OpenAPI 3 flow names
@@ -497,22 +519,22 @@ export class Oai2ToOai3 {
               flowName = "authorizationCode";
             }
 
-            securityScheme.flows.__set__(flowName, this.newObject(sourcePointer));
+            oauth2Scheme.flows.__set__(flowName, this.newObject(sourcePointer));
             let authorizationUrl;
             let tokenUrl;
 
             if (v.authorizationUrl) {
               authorizationUrl = v.authorizationUrl.split("?")[0].trim() || "/";
-              securityScheme.flows[flowName].__set__("authorizationUrl", { value: authorizationUrl, sourcePointer });
+              oauth2Scheme.flows[flowName].__set__("authorizationUrl", { value: authorizationUrl, sourcePointer });
             }
 
             if (v.tokenUrl) {
               tokenUrl = v.tokenUrl.split("?")[0].trim() || "/";
-              securityScheme.flows[flowName].__set__("tokenUrl", { value: tokenUrl, sourcePointer });
+              oauth2Scheme.flows[flowName].__set__("tokenUrl", { value: tokenUrl, sourcePointer });
             }
 
             const scopes = v.scopes || {};
-            securityScheme.flows[flowName].__set__("scopes", { value: scopes, sourcePointer });
+            oauth2Scheme.flows[flowName].__set__("scopes", { value: scopes, sourcePointer });
           }
           break;
       }
@@ -570,7 +592,7 @@ export class Oai2ToOai3 {
     for (const { key, value, pointer, childIterator } of schemaItemMemebers()) {
       switch (key) {
         case "$ref":
-          target.__set__("$ref", { value: await this.convertReferenceToOai3(value), sourcePointer: pointer });
+          await this.copyRef(target as any, { $ref: value }, pointer);
           break;
         case "additionalProperties":
           if (typeof value === "boolean") {
@@ -579,7 +601,7 @@ export class Oai2ToOai3 {
             } // false is assumed anyway in autorest.
           } else {
             target.__set__(key, this.newObject(pointer));
-            await this.visitSchema(target[key]!, value, childIterator);
+            await this.visitSchema(target[key]! as any, value, childIterator);
           }
           break;
         case "required":
@@ -612,7 +634,7 @@ export class Oai2ToOai3 {
           break;
         case "items":
           target.__set__(key, this.newObject(pointer));
-          await this.visitSchema(target[key]!, value, childIterator);
+          await this.visitSchema(target[key]! as any, value, childIterator);
           break;
         case "properties":
           target.__set__(key, this.newObject(pointer));
@@ -665,7 +687,7 @@ export class Oai2ToOai3 {
     }
   }
 
-  private async visitAllOf(target: MappingTreeArray<oai3.Refable<oai3.Schema>>, allOfMembers: () => Iterable<Node>) {
+  private async visitAllOf(target: MappingTreeArray<Refable<oai3.Schema>>, allOfMembers: () => Iterable<Node>) {
     for (const { key: index, value, pointer, childIterator } of allOfMembers()) {
       target.__push__(this.newObject(pointer));
       await this.visitSchema(target[index], value, childIterator);
@@ -1009,7 +1031,7 @@ export class Oai2ToOai3 {
         if (parameterValue.schema !== undefined) {
           for (const { key, value, childIterator } of parameterItemMembers()) {
             if (key === "schema") {
-              await this.visitSchema(requestBody.content[mimetype].schema!, value, childIterator);
+              await this.visitSchema(requestBody.content[mimetype].schema! as any, value, childIterator);
             }
           }
         } else {
@@ -1019,7 +1041,7 @@ export class Oai2ToOai3 {
 
       // copy extensions in requestBody
       for (const { key, pointer: fieldPointer, value } of parameterItemMembers()) {
-        if (key.startsWith("x-")) {
+        if (isExtensionKey(key)) {
           if (!requestBody[key]) {
             requestBody.__set__(key, { value: value, sourcePointer: fieldPointer });
           }
@@ -1096,7 +1118,7 @@ export class Oai2ToOai3 {
 
     // copy extensions in target property
     for (const { key, pointer: fieldPointer, value } of parameterItemMembers()) {
-      if (key.startsWith("x-")) {
+      if (isExtensionKey(key)) {
         targetProperty.__set__(key, { value: value, sourcePointer: fieldPointer });
       }
     }
@@ -1109,9 +1131,9 @@ export class Oai2ToOai3 {
   ) {
     for (const { key, value, pointer, childIterator } of responsesItemMembers) {
       target.__set__(key, this.newObject(pointer));
-      if (value.$ref) {
-        target[key].__set__("$ref", { value: await this.convertReferenceToOai3(value.$ref), sourcePointer: pointer });
-      } else if (key.startsWith("x-")) {
+      if (this.isTargetReference(target, value)) {
+        return this.copyRef(target, value, pointer);
+      } else if (isExtensionKey(key)) {
         await this.visitExtensions(target[key], key, value, pointer);
       } else {
         await this.visitResponse(target[key], value, key, childIterator, pointer, produces);
@@ -1181,13 +1203,13 @@ export class Oai2ToOai3 {
       responseTarget.__set__("headers", this.newObject(sourcePointer));
       for (const h in responseValue.headers) {
         responseTarget.headers!.__set__(h, this.newObject(sourcePointer));
-        await this.visitHeader(responseTarget.headers![h]!, responseValue.headers[h], sourcePointer);
+        await this.visitHeader(responseTarget.headers![h]! as any, responseValue.headers[h], sourcePointer);
       }
     }
 
     // copy extensions
     for (const { key, pointer: fieldPointer, value } of responsesFieldMembers()) {
-      if (key.startsWith("x-") && responseTarget[key] === undefined) {
+      if (isExtensionKey(key) && responseTarget[key] === undefined) {
         responseTarget.__set__(key, { value: value, sourcePointer: fieldPointer });
       }
     }
@@ -1221,11 +1243,8 @@ export class Oai2ToOai3 {
     headerValue: OpenAPI2ResponseHeader,
     sourcePointer: string,
   ) {
-    if (headerValue.$ref) {
-      targetHeader.__set__("$ref", {
-        value: this.convertReferenceToOai3(headerValue.schema.$ref),
-        sourcePointer,
-      });
+    if (this.isTargetReference(targetHeader, headerValue)) {
+      return this.copyRef(targetHeader, headerValue.schema, sourcePointer);
     } else {
       if (headerValue.type && headerValue.schema === undefined) {
         targetHeader.__set__("schema", this.newObject(sourcePointer));
@@ -1238,10 +1257,10 @@ export class Oai2ToOai3 {
       const schema: MappingTreeObject<oai3.Schema> = targetHeader.schema as any;
       for (const { key, childIterator } of visit(headerValue)) {
         if (key === "schema") {
-          await this.visitSchema(schema.items!, headerValue.items, childIterator);
+          await this.visitSchema(schema.items! as any, headerValue.items, childIterator);
         } else if (this.parameterTypeProperties.includes(key) || this.arrayProperties.includes(key)) {
-          schema.__set__(key, { value: headerValue[key], sourcePointer });
-        } else if (key.startsWith("x-") && targetHeader[key] === undefined) {
+          schema.__set__(key as any, { value: headerValue[key], sourcePointer });
+        } else if (isExtensionKey(key) && targetHeader[key] === undefined) {
           targetHeader.__set__(key, { value: headerValue[key], sourcePointer });
         }
       }
@@ -1251,7 +1270,7 @@ export class Oai2ToOai3 {
       }
       if (headerValue.items && headerValue.items.collectionFormat) {
         if (headerValue.collectionFormat === "csv") {
-          targetHeader.__set__("style", { value: "simple", sourcePointer });
+          targetHeader.__set__("style" as any, { value: "simple", sourcePointer });
         }
 
         if (headerValue.collectionFormat === "multi") {

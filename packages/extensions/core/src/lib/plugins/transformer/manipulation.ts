@@ -39,7 +39,7 @@ export class Manipulator {
     if (directive.debug) {
       const action = match ? "will" : "will not";
       this.context.debug(
-        `Directive \`${directive.name}\` **${action}** run on document \`${data.description} (${data.artifactType})\``,
+        `Directive \`${directive.name}\` **${action}** run on document \`${data.identity[0]} (${data.artifactType})\``,
       );
     }
     // matches filter?

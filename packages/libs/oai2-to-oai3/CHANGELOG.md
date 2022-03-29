@@ -1,6 +1,14 @@
 # Change Log - @azure-tools/oai2-to-oai3
 
-This log was last generated on Mon, 06 Dec 2021 20:16:04 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Mar 2022 16:00:38 GMT and should not be manually modified.
+
+## 4.6.0
+Tue, 15 Mar 2022 16:00:38 GMT
+
+### Minor changes
+
+- Make use of openapi workspace
+- Extract OpenAPI2 types into @azure-tools/openapi package
 
 ## 4.5.1
 Mon, 06 Dec 2021 20:16:04 GMT

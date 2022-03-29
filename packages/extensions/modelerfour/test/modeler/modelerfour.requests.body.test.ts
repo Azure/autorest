@@ -5,8 +5,12 @@
 import assert from "assert";
 import {
   BinarySchema,
+  ByteArraySchema,
+  ChoiceSchema,
   CodeModel,
+  DateTimeSchema,
   DictionarySchema,
+  DurationSchema,
   HttpHeader,
   HttpRequest,
   ObjectSchema,
@@ -321,6 +325,43 @@ describe("Modelerfour.Request.Body", () => {
 
         expect(queryParam?.language.default.name).toEqual(queryParam);
         expect(queryParam?.isPartialBody).toBeFalsy();
+      });
+    });
+
+    describe("application/json, type: string, custom format types", () => {
+      const scenarios = [
+        [{ format: "byte" }, ByteArraySchema],
+        [{ format: "date-time" }, DateTimeSchema],
+        [{ format: "duration" }, DurationSchema],
+        [{ enum: ["one", "two"] }, ChoiceSchema],
+      ] as const;
+      scenarios.forEach(([extra, type]) => {
+        describe(`format:${extra} with application/json`, () => {
+          let operation: Operation;
+
+          beforeEach(async () => {
+            operation = await runModelerWithBody({
+              content: {
+                "application/json": {
+                  schema: { type: "string", ...(extra as any) },
+                },
+              },
+            });
+          });
+
+          it("only create one request", async () => {
+            expect(operation.requests).toHaveLength(1);
+          });
+
+          it(`parameter should be of type ${type.name}`, async () => {
+            const request = operation.requests?.[0]!;
+            const param = findByName("content-type", request.parameters);
+            expect(param).toBe(undefined);
+            expect(request.protocol.http!.mediaTypes).toEqual(["application/json"]);
+
+            expect(getBody(request).schema instanceof type).toBe(true);
+          });
+        });
       });
     });
   });

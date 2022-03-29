@@ -44,3 +44,4 @@ export * from "./model/common/schemas/relationship";
 export * from "./model/common/schemas/string";
 export * from "./model/common/schemas/time";
 export * from "./model/common/security";
+export * from "./model/deprecated";

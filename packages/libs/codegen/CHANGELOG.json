@@ -2,6 +2,18 @@
   "name": "@azure-tools/codegen",
   "entries": [
     {
+      "version": "2.9.1",
+      "tag": "@azure-tools/codegen_v2.9.1",
+      "date": "Tue, 15 Mar 2022 16:00:38 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump `semver` dependency"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.9.0",
       "tag": "@azure-tools/codegen_v2.9.0",
       "date": "Fri, 19 Nov 2021 04:23:42 GMT",
