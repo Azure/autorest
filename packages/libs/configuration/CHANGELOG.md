@@ -1,6 +1,13 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Tue, 22 Mar 2022 00:17:01 GMT and should not be manually modified.
+This log was last generated on Thu, 31 Mar 2022 16:50:54 GMT and should not be manually modified.
+
+## 1.9.2
+Thu, 31 Mar 2022 16:50:54 GMT
+
+### Patches
+
+- Fix cadl invalid config
 
 ## 1.9.1
 Tue, 22 Mar 2022 00:17:01 GMT
