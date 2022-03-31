@@ -3,6 +3,7 @@
     { "path": "packages/apps/autorest/tsconfig.build.json" },
 
     { "path": "packages/extensions/core/tsconfig.build.json" },
+    { "path": "packages/extensions/cadl/tsconfig.build.json" },
     { "path": "packages/extensions/modelerfour/tsconfig.build.json" },
 
     { "path": "packages/libs/codegen/tsconfig.build.json" },

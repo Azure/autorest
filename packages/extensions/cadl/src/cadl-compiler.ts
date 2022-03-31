@@ -1,29 +1,25 @@
 import { readFile, realpath, stat } from "fs/promises";
-import { join, resolve } from "path";
-import { fileURLToPath, pathToFileURL } from "url";
-import { CompilerHost, createProgram, Diagnostic, createSourceFile } from "@cadl-lang/compiler";
-
-export function createAdlHost(writeFile: (path: string, content: string) => Promise<void>): CompilerHost {
+import { dirname, resolve } from "path";
+import { pathToFileURL } from "url";
+import { AutorestExtensionLogger } from "@autorest/extension-base";
+import { CompilerHost, Diagnostic } from "@cadl-lang/compiler";
+import { resolveModule, ResolveModuleHost } from "./module-resolver.js";
+export function createCadlHost(
+  logger: AutorestExtensionLogger,
+  writeFile: (path: string, content: string) => Promise<void>,
+  host: CompilerHost,
+): CompilerHost {
   return {
-    readFile: async (path: string) => createSourceFile((await readFile(path, "utf-8")).toString(), path),
-    resolveAbsolutePath: (path: string) => resolve(path),
-    getExecutionRoot: () => resolve(fileURLToPath(import.meta.url), "../../node_modules/@cadl-lang/compiler"),
-    getJsImport: (path: string) => import(pathToFileURL(path).href),
+    ...host,
     writeFile,
-    getLibDirs() {
-      const rootDir = this.getExecutionRoot();
-      return [join(rootDir, "lib"), join(rootDir, "dist/lib")];
-    },
-    stat(path: string) {
-      return stat(path);
-    },
-    realpath(path) {
-      return realpath(path);
+    logSink: {
+      log: (x) => logger.debug(`${x.code ? `${x.code}: ` : ""}${x.message}`),
     },
   };
 }
 
-export async function compileAdl(
+export async function compileCadl(
+  logger: AutorestExtensionLogger,
   entrypoint: string,
 ): Promise<{ compiledFiles: Record<string, string> } | { diagnostics: readonly Diagnostic[] }> {
   const output: Record<string, string> = {};
@@ -31,8 +27,12 @@ export async function compileAdl(
     output[path] = content;
   };
 
+  const baseDir = resolve(dirname(entrypoint));
   try {
-    const program = await createProgram(createAdlHost(writeFile), entrypoint);
+    const { createProgram, NodeHost } = await importCadl(baseDir);
+    const program = await createProgram(createCadlHost(logger, writeFile, NodeHost), entrypoint, {
+      emitters: ["@azure-tools/cadl-autorest"],
+    });
     if (program.diagnostics.length > 0) {
       return { diagnostics: program.diagnostics };
     }
@@ -42,5 +42,26 @@ export async function compileAdl(
       return { diagnostics: (e as any).diagnostics };
     }
     throw e;
+  }
+}
+
+export async function importCadl(baseDir: string): Promise<typeof import("@cadl-lang/compiler")> {
+  try {
+    const host: ResolveModuleHost = {
+      realpath,
+      readFile: async (path: string) => await readFile(path, "utf-8"),
+      stat,
+    };
+    const resolved = await resolveModule(host, "@cadl-lang/compiler", {
+      baseDir,
+    });
+    return import(pathToFileURL(resolved).toString());
+  } catch (err: any) {
+    if (err.code === "MODULE_NOT_FOUND") {
+      // Resolution from cwd failed: use current package.
+      return import("@cadl-lang/compiler");
+    } else {
+      throw err;
+    }
   }
 }
