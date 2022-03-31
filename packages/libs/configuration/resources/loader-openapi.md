@@ -70,7 +70,7 @@ pipeline:
 
 ```yaml $(cadl)
 use-extension:
-  "@autorest/adl": latest
+  "@autorest/cadl": latest
 ```
 
 ## Configuration for `--apply-transforms-in-place`
