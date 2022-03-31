@@ -85,7 +85,7 @@ export class DataStore {
     // make a sanitized name
     let filename = uri.replace(/[^\w.()]+/g, "-");
     if (filename.length > 64) {
-      filename = `${md5(filename)}-${filename.substr(filename.length - 64)}`;
+      filename = `${md5(filename)}-${filename.slice(-64)}`;
     }
     const name = join(await this.getCacheFolder(), filename);
 

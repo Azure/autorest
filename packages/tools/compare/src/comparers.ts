@@ -311,7 +311,7 @@ export interface CompareSourceOptions {
  * path) using a comparer that is selected based on the file's extension.
  */
 export function compareFile(oldFile: FileDetails, newFile: FileDetails, options: CompareSourceOptions): CompareResult {
-  const extension = path.extname(oldFile.name).substr(1);
+  const extension = path.extname(oldFile.name).slice(1);
   const comparer = options.comparersByType[extension];
   return comparer ? comparer(oldFile, newFile) : undefined;
 }
