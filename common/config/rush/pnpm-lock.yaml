@@ -95,7 +95,7 @@ dependencies:
   source-map: 0.7.3
   source-map-support: 0.5.21
   supertest: 6.2.2
-  tree-sitter: 0.19.0
+  tree-sitter: 0.20.0
   tree-sitter-python: 0.19.0
   tree-sitter-typescript: 0.19.0
   ts-jest: 27.1.3_b93d78d59b3f3d5698ca6f71874d802c
@@ -6208,10 +6208,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-9DRUSKhTz71cDSYyDyR3qwUm/i8=
-  /noop-logger/0.1.1:
-    dev: false
-    resolution:
-      integrity: sha1-lKKxYzxPExdVMAfYlm/Q6EG2pMI=
   /normalize-package-data/2.5.0:
     dependencies:
       hosted-git-info: 2.8.9
@@ -6912,7 +6908,7 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=
-  /prebuild-install/5.3.6:
+  /prebuild-install/6.1.4:
     dependencies:
       detect-libc: 1.0.3
       expand-template: 2.0.3
@@ -6921,20 +6917,18 @@ packages:
       mkdirp-classic: 0.5.3
       napi-build-utils: 1.0.2
       node-abi: 2.30.1
-      noop-logger: 0.1.1
       npmlog: 4.1.2
       pump: 3.0.0
       rc: 1.2.8
       simple-get: 3.1.1
       tar-fs: 2.1.1
       tunnel-agent: 0.6.0
-      which-pm-runs: 1.1.0
     dev: false
     engines:
       node: '>=6'
     hasBin: true
     resolution:
-      integrity: sha512-s8Aai8++QQGi4sSbs/M1Qku62PFK49Jm1CbgXklGz4nmHveDq0wzJkg7Na5QbnO1uNH8K7iqx2EQ/mV0MZEmOg==
+      integrity: sha512-Z4vpywnK1lBg+zdPCVCsKq0xO66eEV9rWo2zrROGGiRS4JtueBOdlB1FnY8lcy7JsUud/Q3ijUxyWN26Ika0vQ==
   /prelude-ls/1.1.2:
     dev: false
     engines:
@@ -8254,14 +8248,14 @@ packages:
     requiresBuild: true
     resolution:
       integrity: sha512-fDpenjG6HhHirBaMipxFlGlc9YUUc+CEJP7QLrs8Xi1NRS4h9WTntW68wORHfh2gd3XNQgLNGfev9iv2+7QjDg==
-  /tree-sitter/0.19.0:
+  /tree-sitter/0.20.0:
     dependencies:
       nan: 2.15.0
-      prebuild-install: 5.3.6
+      prebuild-install: 6.1.4
     dev: false
     requiresBuild: true
     resolution:
-      integrity: sha512-jw/BNCCRB9RCq/GFGU0VuhchGlIIlYRQFnjXgPKG3fBIo+c3ImuPITtAHJJ4XgTBNfeAQmt8XC4wShgBw8tgdg==
+      integrity: sha512-tqTdtD1T2cN4aEES0sZCjKTQrc9Ls8H/iYlzpskhGy8yCwNPKBIbK9YuuCg/AxACr8RAY4wMoeCigM1X/A79yg==
   /trim-newlines/2.0.0:
     dev: false
     engines:
@@ -8880,12 +8874,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-2e8H3Od7mQK4o6j6SzHD4/fm6Ho=
-  /which-pm-runs/1.1.0:
-    dev: false
-    engines:
-      node: '>=4'
-    resolution:
-      integrity: sha512-n1brCuqClxfFfq/Rb0ICg9giSZqCS+pLtccdag6C2HyufBrh3fBOiy9nb6ggRMvWOVH5GrdJskj5iGTZNxd7SA==
   /which-typed-array/1.1.7:
     dependencies:
       available-typed-arrays: 1.0.5
@@ -9321,7 +9309,7 @@ packages:
       js-yaml: 4.0.0
       mocha: 6.2.3
       source-map-support: 0.5.21
-      tree-sitter: 0.19.0
+      tree-sitter: 0.20.0
       tree-sitter-python: 0.19.0
       tree-sitter-typescript: 0.19.0
       ts-mocha: 6.0.0_mocha@6.2.3
@@ -9333,7 +9321,7 @@ packages:
     peerDependencies:
       prettier: '*'
     resolution:
-      integrity: sha512-6dfGiZMPs7iSrzePOibryg8fm/j0Gk95CzcmN/rsV+J9ULzVO7f+RPsbS776H05/ktmruUI8fRRQPEvnauYUCA==
+      integrity: sha512-bvtkvtsKgKUNTa6ly4GZyp/gUm7Jme5VKdqYCkXfBPyasMCziGJ2PKrZxP4U77NUo5BlfeJurl1bU/CicHB8IA==
       tarball: file:projects/compare.tgz
     version: 0.0.0
   file:projects/configuration.tgz_prettier@2.3.2+ts-node@9.1.1:
@@ -9956,7 +9944,7 @@ specifiers:
   source-map: 0.7.3
   source-map-support: ^0.5.19
   supertest: ^6.0.1
-  tree-sitter: '^0.19.0 '
+  tree-sitter: '^0.20.0 '
   tree-sitter-python: 0.19.0
   tree-sitter-typescript: 0.19.0
   ts-jest: ^27.0.3
