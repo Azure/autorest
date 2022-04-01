@@ -79,7 +79,7 @@ export interface AutorestNormalizedConfiguration extends AutorestRawConfiguratio
   components?: any;
   batch?: boolean;
   "resource-schema-batch"?: any;
-  "perform-load"?: any;
+  "perform-load"?: boolean;
 
   /**
    * End of line for generated files.

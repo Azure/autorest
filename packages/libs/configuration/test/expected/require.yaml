@@ -8,6 +8,7 @@ input-file: []
 output-artifact: []
 output-folder: generated
 pass-thru: []
+perform-load: true
 profile: []
 require:
   - ./other.md

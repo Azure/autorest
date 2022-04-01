@@ -56,10 +56,6 @@ track2: true
 
 If we don't specify `--help`, we will trigger the setting to load files
 
-```yaml !$(help)
-perform-load: true # kick off loading
-```
-
 ```yaml enableAllVersionsMode()
 # when an autorest-v3 generator is loading, and a profile or api-verison is specified,
 # we need to force the tag: all-api-versions so that it loads the whole api set.
