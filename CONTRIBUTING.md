@@ -1,8 +1,11 @@
-# Autorest Development
+# Developping autorest
 
 ## Requirements
 
 - `node` (LTS recommended)
+  - **On windows**: Make sure to choose to install the native build dependencies in the setup
+  - Alternatively follow instruction here https://github.com/nodejs/node-gyp
+- `python` 3.x
 
 Optional recommendation:
 
