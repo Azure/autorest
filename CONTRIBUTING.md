@@ -115,3 +115,15 @@ autorest --use:<path-to-repo>/packages/extensions/modelerfour
 ```bash
 node <path-to-repo>/packages/apps/autorest/entrypoints/app.js
 ```
+
+# Before making a pull request
+
+Steps to do before making a pull request:
+
+1. Run `rush change` and describe the change and if it should be a `major`, `minor` or `patch` version.
+
+   - `major`: If there is a breaking change.(Except `autorest`, `@autorest/core` and `@autorest/modelefour` packages which should use minor bump for that.)
+   - `minor`: If there is a new feature but not breaking(Except `autorest`, `@autorest/core` and `@autorest/modelefour` packages)
+   - `patch`: For any bug fix.
+
+2. Run `rush format` to ensure the code is formatted correctly.
