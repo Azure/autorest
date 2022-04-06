@@ -1,6 +1,21 @@
 # Change Log - @autorest/core
 
-This log was last generated on Mon, 21 Mar 2022 15:38:03 GMT and should not be manually modified.
+This log was last generated on Tue, 22 Mar 2022 20:26:28 GMT and should not be manually modified.
+
+## 3.8.3
+Tue, 22 Mar 2022 20:26:28 GMT
+
+### Patches
+
+- `allow-no-input` will not stop autorest run immidiately
+
+## 3.8.2
+Tue, 22 Mar 2022 00:17:01 GMT
+
+### Patches
+
+- Fix crash when having invalid cli arguments
+- Fix progress Bar crashing autorest when stdout redirected to file
 
 ## 3.8.1
 Mon, 21 Mar 2022 15:38:03 GMT

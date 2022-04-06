@@ -1,11 +1,11 @@
 {
   "changes": [
     {
-      "packageName": "@autorest/cadl",
+      "packageName": "@autorest/compare",
       "comment": "",
       "type": "none"
     }
   ],
-  "packageName": "@autorest/cadl",
+  "packageName": "@autorest/compare",
   "email": "tiguerin@microsoft.com"
 }

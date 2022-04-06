@@ -1711,8 +1711,7 @@ export class ModelerFour {
         {
           const server = servers[0];
           // trim extraneous slash .
-          const uri =
-            server.url.endsWith("/") && path.startsWith("/") ? server.url.substr(0, server.url.length - 1) : server.url;
+          const uri = server.url.endsWith("/") && path.startsWith("/") ? server.url.slice(0, -1) : server.url;
 
           if (server.variables === undefined || Object.keys(server.variables).length === 0) {
             // scenario 1 : single static value

@@ -23,11 +23,11 @@ export function capitalize(str: string): string {
   if (acronyms.has(str)) {
     return str.toUpperCase();
   }
-  return str ? `${str.charAt(0).toUpperCase()}${str.substr(1)}` : str;
+  return str ? `${str.charAt(0).toUpperCase()}${str.slice(1)}` : str;
 }
 
 export function uncapitalize(str: string): string {
-  return str ? `${str.charAt(0).toLowerCase()}${str.substr(1)}` : str;
+  return str ? `${str.charAt(0).toLowerCase()}${str.slice(1)}` : str;
 }
 
 export function join<T>(items: Array<T>, separator: string) {
@@ -328,7 +328,7 @@ export function getPascalIdentifier(name: string): string {
 export function escapeString(text: string | undefined): string {
   if (text) {
     const q = JSON.stringify(text);
-    return q.substr(1, q.length - 2);
+    return q.slice(1, -1);
   }
   return "";
 }

@@ -1,8 +1,8 @@
 import { AutoRestExtension } from "@autorest/extension-base";
-import { setupAdlCompilerPlugin } from "./cadl-compiler-plugin.js";
+import { setupCadlCompilerPlugin } from "./cadl-compiler-plugin.js";
 
 export async function initializePlugins(pluginHost: AutoRestExtension) {
-  pluginHost.add("adl-compiler", setupAdlCompilerPlugin);
+  pluginHost.add("cadl-compiler", setupCadlCompilerPlugin);
 }
 
 async function main() {

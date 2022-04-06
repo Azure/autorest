@@ -146,17 +146,12 @@ export class AutoRest extends EventEmitter {
           }
         };
         if (view.config.inputFileUris.length === 0) {
-          if (view.GetEntry("allow-no-input")) {
-            this.Finished.Dispatch(true);
-            return true;
-          } else {
-            // if this is using perform-load we don't need to require files.
-            // if it's using batch, we might not have files in the main body
-            if (view.config.raw["perform-load"] !== false) {
-              return new Exception(
-                "No input files provided.\n\nUse --help to get help information or see https://aka.ms/autorest/cli for additional documentation",
-              );
-            }
+          // if this is using perform-load we don't need to require files.
+          // if it's using batch, we might not have files in the main body
+          if (view.config["perform-load"] !== false && !view.config["allow-no-input"]) {
+            return new Exception(
+              "No input files provided.\n\nUse --help to get help information or see https://aka.ms/autorest/cli for additional documentation",
+            );
           }
         }
 
