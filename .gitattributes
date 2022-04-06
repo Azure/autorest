@@ -1,2 +1,5 @@
 # Use unix line endings always, even on Windows
 *                            text=auto eol=lf
+
+# Allow comments in JSON in GitHub rendering
+*.json                       linguist-language=JSON-with-Comments
