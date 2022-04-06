@@ -10,6 +10,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
@@ -23,8 +25,5 @@ jobs:
           then
             echo "Publish label was included in the PR, won't be checking for changelog."
           else
-            npm install -g @microsoft/rush
-            rush change --verify
+            npx @microsoft/rush change --verify || { echo 'If you run the rush publish command locally and meant to publish the changes, add the publish label to the pr.' ; exit 1; }
           fi
-
-      # || { echo 'If you run the rush publish command locally and meant to publish the changes, add the publish label to the pr.' ; exit 1; }
