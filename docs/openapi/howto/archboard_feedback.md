@@ -69,8 +69,7 @@ becomes
 
 -	Use operation groups, and name them as you want your subclients to be called. Operation group can be create in Swagger by using the `_` character in the OperationID 
 (`OperationGroupName_OperationName`)
--	For C#:
-  - Use `single-top-level-client: true`
+-	For C#, use `single-top-level-client: true`
 
 For instance, this:
 ``` json
