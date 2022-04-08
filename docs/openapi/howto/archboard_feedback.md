@@ -121,7 +121,7 @@ Since attribute name are used in JSON serialization, we need to declare a mappin
 
 ## Operation should be pageable
 
-You will get this feedback is your operation is returning a list of objects. Contrary to a common misconception: you do not need to support paging on the server, to design an operation as a pageable. Pageable is a design, not a server capability.
+You will get this feedback if your operation is returning a list of objects. Contrary to a common misconception: you do not need to support paging on the server to design an operation as a pageable. Pageable is a design, not a server capability.
 
 The full documentation for pageable is available here: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-pageable
 
