@@ -1,6 +1,8 @@
-IF you went to SDK archboard as a service team, you may have encounter feedback on modification that you have to apply to your Swagger going forward 
+## Archboard DPG feedback loop
+
+If you went to SDK archboard as a service team, you may have encounter feedback on modification that you have to apply to your Swagger going forward 
 to generate your SDK using [DPG](https://aka.ms/azsdk/dpcodegena). This document tries to clarify some common patterns and well known modifications you need to
-apply to your Swagger.
+apply to your Swagger and/or Readme.
 
 # Need for more/less SDK package(s)
 
@@ -13,8 +15,10 @@ specification/
 ├─ myservice/
 │  ├─ data-plane/
 │  │  ├─ package1/
+│  │  │  ├─ Microsoft.MyService/ (swaggers for package 1)
 │  │  │  ├─ readme.md
 │  │  ├─ package2/
+│  │  │  ├─ Microsoft.MyService/ (swaggers for package 2)
 │  │  │  ├─ readme.md
 ```
 
@@ -24,14 +28,42 @@ Operation name are directly OperationID in Swagger. Just rename the OperationID 
 
 Note: If your operation contains an `_`, just change the second part as the first is an operation group.
 
+``` json
+ "operationId": "SomethingToDoOperation",
+ ...
+ "operationId": "MyGroup_SomethingElseToDoOperation",
+```
+becomes
+``` json
+ "operationId": "BuildTheThing",
+ ...
+ "operationId": "MyGroup_BuildSomethingElse",
+```
+
 # Rename an operation group (or rename a sub-client)
 
 Operation groups are the first part of an OperationID in Swagger, before the `_` character. To rename an operation group, you need to rename all OperationID that
 starts with the operation group prefix (there is likely many of them).
 
+``` json
+ "operationId": "MyGroup_BuildSomethingElse",
+```
+becomes
+``` json
+ "operationId": "NewGroup_BuildSomethingElse",
+```
+
 # Need one client to have all operations directly on it (no sub-client)
 
 Don't use operation groups in your OperationID (remove them if they exist). For any operation with an `_` character, remove the first part.
+
+``` json
+ "operationId": "MyGroup_BuildSomethingElse",
+```
+becomes
+``` json
+ "operationId": "BuildSomethingElse",
+```
 
 # Need one client/builder with sub-clients
 
@@ -39,6 +71,19 @@ Don't use operation groups in your OperationID (remove them if they exist). For 
 (`OperationGroupName_OperationName`)
 -	For C#:
   - Use `single-top-level-client: true`
+
+For instance, this:
+``` json
+ "operationId": "MyGroup_BuildSomethingElse",
+```
+
+Will create a subclient for MyGroup, that will have an operation called BuildSomethingElse.
+In various languages this could looks like (pseudo-code):
+```
+MyServiceClient(endpoint, credentials).MyGroup().BuildSomethingElse() // C#
+
+MyServiceClient(endpoint, credentials).my_group.build_something_else() # Python
+```
 
 # Need two or more service clients (regardless of if some needs subclients or not)
 
@@ -74,3 +119,24 @@ Since attribute name are used in JSON serialization, we need to declare a mappin
       }
     }
 ```
+
+# Operation should be pageable
+
+You will get this feedback is your operation is returning a list of objects. Contrary to a common misconception: you do not need to support paging on the server, to design an operation as a pageable. Pageable is a design, not a server capability.
+
+The full documentation for pageable is available here: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-pageable
+
+At a glance:
+- Add `x-ms-pageable` node to your operation definition
+- Make sure your return schema is an array of T (T could be anything).
+- `nextLinkName` can be `null` if your service do not support paging yet, otherwise should be the JSON key where the next link is (usually `nextLink`).
+- For more complex pageable (different verb than GET, complex URL building, etc.), please refer to x[-ms-pageable full doc](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-pageable)
+
+```json
+"/myservice/subscriptions" :
+  "get": {
+    "operationId": "GetMySubscription",
+    "x-ms-pageable": {
+       "nextLinkName": null
+    }
+ ```
