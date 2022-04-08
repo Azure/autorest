@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Mon, 21 Mar 2022 15:38:03 GMT and should not be manually modified.
+This log was last generated on Thu, 07 Apr 2022 20:47:30 GMT and should not be manually modified.
+
+## 4.23.2
+Thu, 07 Apr 2022 20:47:30 GMT
+
+### Patches
+
+- Modelerfour set correct known media type when `application/json` with `type: string`
 
 ## 4.23.1
 Mon, 21 Mar 2022 15:38:03 GMT
