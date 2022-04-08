@@ -112,7 +112,7 @@ Since attribute name are used in JSON serialization, we need to declare a mappin
       "description": "This model is very helpful.",
       "properties": {
         "attributeName": {
-          "x-ms-client-name": "betterSDKNameForThisAttribute,
+          "x-ms-client-name": "betterSDKNameForThisAttribute",
           "type": "string"
         }
       }
