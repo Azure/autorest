@@ -4,6 +4,17 @@ If you went to SDK archboard as a service team, you may have encounter feedback 
 to generate your SDK using [DPG](https://aka.ms/azsdk/dpcodegena). This document tries to clarify some common patterns and well known modifications you need to
 apply to your Swagger and/or Readme.
 
+Content:
+- [Need for more/less SDK package(s)](#need-for-moreless-sdk-packages)
+- [Rename an operation](#rename-an-operation)
+- [Rename an operation group (or rename a sub-client)](#rename-an-operation-group-or-rename-a-sub-client)
+- [Need one client to have all operations directly on it (no sub-client)](#need-one-client-to-have-all-operations-directly-on-it-no-sub-client)
+- [Need one client/builder with sub-clients](#need-one-clientbuilder-with-sub-clients)
+- [Need two or more service clients (regardless of if some needs subclients or not)](#need-two-or-more-service-clients-regardless-of-if-some-needs-subclients-or-not)
+- [Rename a model name](#rename-a-model-name)
+- [Rename a model attribute](#rename-a-model-attribute)
+- [Operation should be pageable](#operation-should-be-pageable)
+
 ## Need for more/less SDK package(s)
 
 If you got as a feedback that your API needs to split across several packages, or two packages should be merged into one, then
