@@ -44,7 +44,7 @@
     "jest": "^28.0.0-alpha.7",
     "rimraf": "^3.0.2",
     "ts-jest": "^27.0.3",
-    "typescript": "~4.4.2"
+    "typescript": "~4.6.3"
   },
   "dependencies": {
     "@autorest/common": "~1.5.2",
