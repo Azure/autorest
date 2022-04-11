@@ -1,5 +1,5 @@
-import { execute } from "../exec-cmd";
 import { getExecutablePath } from "./common";
+import { execute } from "./exec-cmd";
 import { SystemRequirement, SystemRequirementError, SystemRequirementResolution } from "./models";
 import { validateVersionRequirement } from "./version";
 
