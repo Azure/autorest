@@ -73,7 +73,7 @@
     "commonmark": "^0.27.0",
     "compare-versions": "^3.4.0",
     "copy-webpack-plugin": "^7.0.0",
-    "cpy-cli": "~2.0.0",
+    "cpy-cli": "~4.1.0",
     "eslint-plugin-jest": "~24.3.2",
     "eslint-plugin-node": "~11.1.0",
     "eslint-plugin-prettier": "~3.4.0",
