@@ -52,7 +52,7 @@
     "rimraf": "^3.0.2",
     "source-map-support": "^0.5.19",
     "ts-jest": "^27.0.3",
-    "typescript": "~4.4.2"
+    "typescript": "~4.6.3"
   },
   "dependencies": {
     "@azure-tools/async-io": "~3.0.0",
