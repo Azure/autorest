@@ -99,7 +99,7 @@ specifiers:
   supertest: ^6.0.1
   tree-sitter: '^0.20.0 '
   tree-sitter-python: 0.19.0
-  tree-sitter-typescript: 0.19.0
+  tree-sitter-typescript: ~0.20.1
   ts-jest: ^27.0.3
   ts-loader: ~9.2.3
   ts-mocha: ^6.0.0
@@ -217,7 +217,7 @@ dependencies:
   supertest: 6.2.2
   tree-sitter: 0.20.0
   tree-sitter-python: 0.19.0
-  tree-sitter-typescript: 0.19.0
+  tree-sitter-typescript: 0.20.1
   ts-jest: 27.1.4_8283b64a811631407f131b7f2b54c5cc
   ts-loader: 9.2.8_typescript@4.4.4+webpack@5.40.0
   ts-mocha: 6.0.0_mocha@6.2.3
@@ -7847,8 +7847,8 @@ packages:
       nan: 2.15.0
     dev: false
 
-  /tree-sitter-typescript/0.19.0:
-    resolution: {integrity: sha512-fDpenjG6HhHirBaMipxFlGlc9YUUc+CEJP7QLrs8Xi1NRS4h9WTntW68wORHfh2gd3XNQgLNGfev9iv2+7QjDg==}
+  /tree-sitter-typescript/0.20.1:
+    resolution: {integrity: sha512-wqpnhdVYX26ATNXeZtprib4+mF2GlYQB1cjRPibYGxDRiugx5OfjWwLE4qPPxEGdp2ZLSmZVesGUjLWzfKo6rA==}
     requiresBuild: true
     dependencies:
       nan: 2.15.0
@@ -8877,7 +8877,7 @@ packages:
     dev: false
 
   file:projects/compare.tgz_prettier@2.3.2:
-    resolution: {integrity: sha512-bvtkvtsKgKUNTa6ly4GZyp/gUm7Jme5VKdqYCkXfBPyasMCziGJ2PKrZxP4U77NUo5BlfeJurl1bU/CicHB8IA==, tarball: file:projects/compare.tgz}
+    resolution: {integrity: sha512-RyfzMJwT535ez+eG1l1b6sBHZJzMoHVdtPUKnqYppOaKpUn00k9NqkMPAHhp4i1FlQ0kCqu9gMCt3YRHsa60RQ==, tarball: file:projects/compare.tgz}
     id: file:projects/compare.tgz
     name: '@rush-temp/compare'
     version: 0.0.0
@@ -8902,7 +8902,7 @@ packages:
       source-map-support: 0.5.21
       tree-sitter: 0.20.0
       tree-sitter-python: 0.19.0
-      tree-sitter-typescript: 0.19.0
+      tree-sitter-typescript: 0.20.1
       ts-mocha: 6.0.0_mocha@6.2.3
       ts-node: 9.1.1_typescript@4.4.4
       typescript: 4.4.4
