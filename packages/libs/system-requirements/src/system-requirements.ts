@@ -1,13 +1,13 @@
 import { DotnetExeName, resolveDotnetRequirement } from "./dotnet";
 import { resolveGenericSystemRequirement } from "./generic";
 import { JavaExeName, resolveJavaRequirement } from "./java";
+import { PythonRequirement, resolvePythonRequirement } from "./python";
 import {
   ExtensionSystemRequirements,
   SystemRequirementError,
   SystemRequirement,
   SystemRequirementResolution,
-} from "./models";
-import { PythonRequirement, resolvePythonRequirement } from "./python";
+} from "./types";
 
 /**
  * Resolve the extension requirements and returns a list of errors.
