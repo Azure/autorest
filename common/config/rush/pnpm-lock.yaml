@@ -86,7 +86,7 @@ specifiers:
   mocha: ^6.2.2
   morgan: ^1.10.0
   mustache: ^4.1.0
-  npm: 6.14.9
+  npm: ~8.6.0
   npm-package-arg: ^9.0.0
   pacote: ~9.5.12
   prettier: ~2.3.1
@@ -204,7 +204,7 @@ dependencies:
   mocha: 6.2.3
   morgan: 1.10.0
   mustache: 4.2.0
-  npm: 6.14.9
+  npm: 8.6.0
   npm-package-arg: 9.0.2
   pacote: 9.5.12
   prettier: 2.3.2
@@ -6092,134 +6092,83 @@ packages:
       path-key: 3.1.1
     dev: false
 
-  /npm/6.14.9:
-    resolution: {integrity: sha512-yHi1+i9LyAZF1gAmgyYtVk+HdABlLy94PMIDoK1TRKWvmFQAt5z3bodqVwKvzY0s6dLqQPVsRLiwhJfNtiHeCg==}
-    engines: {node: 6 >=6.2.0 || 8 || >=9.3.0}
+  /npm/8.6.0:
+    resolution: {integrity: sha512-icekvN8FJFESIFkLaFEVl05Nocl5Id5HnoVhJzhCUvtNY8tj9kfUlH/J527fZq/8ltsAUqpettfutwRjQYS2fA==}
+    engines: {node: ^12.13.0 || ^14.15.0 || >=16}
     hasBin: true
     dev: false
     bundledDependencies:
+      - '@isaacs/string-locale-compare'
+      - '@npmcli/arborist'
+      - '@npmcli/ci-detect'
+      - '@npmcli/config'
+      - '@npmcli/fs'
+      - '@npmcli/map-workspaces'
+      - '@npmcli/package-json'
+      - '@npmcli/run-script'
       - abbrev
       - ansicolors
       - ansistyles
-      - aproba
       - archy
-      - bin-links
-      - bluebird
-      - byte-size
       - cacache
-      - call-limit
+      - chalk
       - chownr
-      - ci-info
       - cli-columns
       - cli-table3
-      - cmd-shim
       - columnify
-      - config-chain
-      - debuglog
-      - detect-indent
-      - detect-newline
-      - dezalgo
-      - editor
-      - figgy-pudding
-      - find-npm-prefix
-      - fs-vacuum
-      - fs-write-stream-atomic
-      - gentle-fs
+      - fastest-levenshtein
       - glob
       - graceful-fs
-      - has-unicode
       - hosted-git-info
-      - iferr
-      - imurmurhash
-      - infer-owner
-      - inflight
-      - inherits
       - ini
       - init-package-json
       - is-cidr
-      - json-parse-better-errors
-      - JSONStream
-      - lazy-property
-      - libcipm
-      - libnpm
+      - json-parse-even-better-errors
       - libnpmaccess
+      - libnpmdiff
+      - libnpmexec
+      - libnpmfund
       - libnpmhook
       - libnpmorg
+      - libnpmpack
+      - libnpmpublish
       - libnpmsearch
       - libnpmteam
-      - libnpx
-      - lock-verify
-      - lockfile
-      - lodash._baseindexof
-      - lodash._baseuniq
-      - lodash._bindcallback
-      - lodash._cacheindexof
-      - lodash._createcache
-      - lodash._getnative
-      - lodash.clonedeep
-      - lodash.restparam
-      - lodash.union
-      - lodash.uniq
-      - lodash.without
-      - lru-cache
-      - meant
-      - mississippi
+      - libnpmversion
+      - make-fetch-happen
+      - minipass
+      - minipass-pipeline
       - mkdirp
-      - move-concurrently
+      - mkdirp-infer-owner
+      - ms
       - node-gyp
       - nopt
-      - normalize-package-data
       - npm-audit-report
-      - npm-cache-filename
       - npm-install-checks
-      - npm-lifecycle
       - npm-package-arg
-      - npm-packlist
       - npm-pick-manifest
       - npm-profile
       - npm-registry-fetch
       - npm-user-validate
       - npmlog
-      - once
       - opener
-      - osenv
       - pacote
-      - path-is-inside
-      - promise-inflight
+      - parse-conflict-json
+      - proc-log
       - qrcode-terminal
-      - query-string
-      - qw
-      - read-cmd-shim
-      - read-installed
-      - read-package-json
-      - read-package-tree
       - read
-      - readable-stream
+      - read-package-json
+      - read-package-json-fast
       - readdir-scoped-modules
-      - request
-      - retry
       - rimraf
-      - safe-buffer
       - semver
-      - sha
-      - slide
-      - sorted-object
-      - sorted-union-stream
       - ssri
-      - stringify-package
       - tar
       - text-table
       - tiny-relative-date
-      - uid-number
-      - umask
-      - unique-filename
-      - unpipe
-      - update-notifier
-      - uuid
-      - validate-npm-package-license
+      - treeverse
       - validate-npm-package-name
       - which
-      - worker-farm
       - write-file-atomic
 
   /npmlog/4.1.2:
@@ -9164,7 +9113,7 @@ packages:
     dev: false
 
   file:projects/extension.tgz_prettier@2.3.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-XFXyGn5idlvzZtvtEEOhwml4ZSRo96ovwIQ/S8pqrvma7hKt4RRee0BXtokcuFIJjzlhcrTfY/W8I/yYz+BEhg==, tarball: file:projects/extension.tgz}
+    resolution: {integrity: sha512-wW7f379Q8G1ozh51T+lAfIr+A1Npq6+ZBzIjK5I79PH/NayQdB86Jv28uEZbhjRmeHqqhyZXZY3NSBF1AjiCeg==, tarball: file:projects/extension.tgz}
     id: file:projects/extension.tgz
     name: '@rush-temp/extension'
     version: 0.0.0
@@ -9190,7 +9139,7 @@ packages:
       eslint-plugin-unicorn: 33.0.1_eslint@7.32.0
       jest: 28.0.0-alpha.8_5076b77de2277d7bd3e529e70437d1c6
       mkdirp: 0.5.6
-      npm: 6.14.9
+      npm: 8.6.0
       npm-package-arg: 9.0.2
       pacote: 9.5.12
       rimraf: 3.0.2
