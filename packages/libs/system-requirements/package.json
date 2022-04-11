@@ -1,7 +1,7 @@
 {
-  "name": "@azure-tools/extension",
-  "version": "3.5.0",
-  "description": "Yarn-Based extension aquisition (for Azure Open Source Projects)",
+  "name": "@autorest/system-requirements",
+  "version": "1.0.0",
+  "description": "System requirement validation and resolution for autorest",
   "engines": {
     "node": ">=12.0.0"
   },
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Azure/perks.git"
+    "url": "git+https://github.com/Azure/autorest.git"
   },
   "keywords": [
     "perks",
@@ -33,11 +33,12 @@
   "author": "Microsoft",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Azure/perks/issues"
+    "url": "https://github.com/Azure/autorest/issues"
   },
   "homepage": "https://github.com/Azure/autorest/tree/main/packages/libs/system-requirements",
   "readme": "https://github.com/Azure/autorest/tree/main/packages/libs/system-requirements/readme.md",
   "dependencies": {
+    "@azure/logger": "^1.0.2",
     "command-exists": "~1.2.9",
     "semver": "^7.3.5"
   },

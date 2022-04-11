@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Azure/perks.git"
+    "url": "git+https://github.com/Azure/autorest.git"
   },
   "scripts": {
     "watch": "tsc -p tsconfig.build.json --watch",
@@ -49,7 +49,7 @@
   "author": "Microsoft",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Azure/perks/issues"
+    "url": "https://github.com/Azure/autorest/issues"
   },
   "homepage": "https://github.com/Azure/autorest/tree/main/packages/libs/openapi",
   "readme": "https://github.com/Azure/autorest/tree/main/packages/libs/openapi/readme.md",
