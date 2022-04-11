@@ -8,7 +8,7 @@
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "scripts": {
-    "before-build": "mkdirp ./dist/yarn && cpy ./node_modules/yarn/lib/cli.js ./dist/yarn",
+    "before-build": "mkdirp ./dist/yarn && cpy  --flat ./node_modules/yarn/lib/cli.js ./dist/yarn",
     "watch": "tsc -p tsconfig.build.json --watch",
     "build": "npm run -s before-build && tsc -p tsconfig.build.json",
     "lint:fix": "eslint ./src --fix --ext .ts",
