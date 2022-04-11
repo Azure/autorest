@@ -55,7 +55,7 @@
     "lodash": "~4.17.20",
     "source-map-support": "^0.5.19",
     "ts-jest": "^27.0.3",
-    "winston": "~3.3.3",
+    "winston": "~3.7.2",
     "yargs": "17.2.1"
   }
 }
