@@ -1,9 +1,4 @@
-import * as assert from "assert";
 import * as jp from "./json-path";
-
-const roundTrip = (s: string): string => {
-  return jp.stringify(jp.parse(s));
-};
 
 describe("JsonPath", () => {
   it("IsPrefix", () => {
@@ -49,11 +44,5 @@ describe("JsonPath", () => {
     expect(jp.nodes(obj, "$..[2]").length).toEqual(1);
     expect(jp.nodes(obj, "$..[?(@.a[2] === 3)]").length).toEqual(1);
     expect(jp.nodes(obj, "$..[?(@.a.reduce((x,y) => x+y, 0) === 6)]").length).toEqual(1);
-    //expect(jp.nodes(obj, "$..[(@.length - 1)]").length).toEqual( 1);
-    //expect(jp.nodes(obj, "$..[(1 + 1)]").length).toEqual( 1);
-  });
-
-  it("accept number in paths", () => {
-    expect(jp.stringify(["foo", 123 as any, "other"])).toEqual("$['foo'][123]['other']");
   });
 });

@@ -39,10 +39,6 @@ export function parse(jsonPath: string): JsonPath {
   return (JSONPath as any as JSONPathExt).toPathArray(jsonPath).slice(1);
 }
 
-export function stringify(jsonPath: JsonPath): string {
-  return (JSONPath as any as JSONPathExt).toPathString(["$", ...jsonPath]);
-}
-
 export function paths<T>(obj: T, jsonQuery: string): Array<JsonPath> {
   return nodes(obj, jsonQuery).map((x) => x.path);
 }
