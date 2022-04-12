@@ -22,7 +22,7 @@ export async function loadAllReferencedFiles(
   /** crawls a file for $refs and then recurses to get the $ref'd files */
   async function crawl(file: DataHandle) {
     const uri = resolveUri(file.originalDirectory, file.identity[0]);
-    const filesReferenced = findReferencedFiles(uri, file.readObject());
+    const filesReferenced = findReferencedFiles(uri, await file.readObject());
     for (const fileUri of filesReferenced.filter((each) => !queued.has(each))) {
       queued.add(fileUri);
 
