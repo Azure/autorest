@@ -14,10 +14,7 @@
     "lint": "eslint ./src --ext .ts --max-warnings=0",
     "prepare": "npm run build",
     "test": "jest --coverage=false --watch",
-    "test:unit:ci": "jest --ci",
-    "test:e2e": "jest --forceExit --runInBand --config ./jest.e2e.config.js",
-    "test:e2e:ci": "jest --ci --forceExit --runInBand --config ./jest.e2e.config.js",
-    "test:ci": "npm run test:unit:ci && npm run test:e2e:ci",
+    "test:ci": "jest --ci",
     "clean": "rimraf ./dist ./temp"
   },
   "repository": {
