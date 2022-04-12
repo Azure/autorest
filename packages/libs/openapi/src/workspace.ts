@@ -1,3 +1,4 @@
+import { inspect } from "util";
 import { getFromJsonPointer } from "@azure-tools/json";
 import { parseJsonRef } from "@azure-tools/jsonschema";
 import { OpenAPI2Document } from "./v2";
@@ -57,7 +58,7 @@ export function createOpenAPIWorkspace<T extends OpenAPI2Document | OpenAPI3Docu
     const ref = parseRef(args);
     const spec = specs.get(ref.file);
     if (spec === undefined) {
-      throw new InvalidRefError(`Ref file '${ref}' doesn't exists in workspace.`);
+      throw new InvalidRefError(`Ref file '${inspect(ref)}' doesn't exists in workspace.`);
     }
 
     const result = ref.path ? getFromJsonPointer(spec, ref.path) : spec;
