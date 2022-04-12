@@ -27,6 +27,7 @@ specifiers:
   '@rush-temp/oai2-to-oai3': file:./projects/oai2-to-oai3.tgz
   '@rush-temp/openapi': file:./projects/openapi.tgz
   '@rush-temp/schemas': file:./projects/schemas.tgz
+  '@rush-temp/system-requirements': file:./projects/system-requirements.tgz
   '@rush-temp/test-public-packages': file:./projects/test-public-packages.tgz
   '@rush-temp/test-utils': file:./projects/test-utils.tgz
   '@rush-temp/yaml': file:./projects/yaml.tgz
@@ -145,6 +146,7 @@ dependencies:
   '@rush-temp/oai2-to-oai3': file:projects/oai2-to-oai3.tgz_prettier@2.3.2+ts-node@9.1.1
   '@rush-temp/openapi': file:projects/openapi.tgz_prettier@2.3.2+ts-node@9.1.1
   '@rush-temp/schemas': file:projects/schemas.tgz
+  '@rush-temp/system-requirements': file:projects/system-requirements.tgz_prettier@2.3.2+ts-node@9.1.1
   '@rush-temp/test-public-packages': file:projects/test-public-packages.tgz_prettier@2.3.2
   '@rush-temp/test-utils': file:projects/test-utils.tgz_5881cafc48bf8869a383fbba5699651c
   '@rush-temp/yaml': file:projects/yaml.tgz_prettier@2.3.2+ts-node@9.1.1
@@ -9064,7 +9066,7 @@ packages:
     dev: false
 
   file:projects/extension.tgz_prettier@2.3.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-27HsZX4+i8G/kNsVCLExkFB3hFl9BQCUIapLbsyJ7BNaWz7YlcBlKN9mTigag96roCLpBQH9ZiNJn5bUOOxSJA==, tarball: file:projects/extension.tgz}
+    resolution: {integrity: sha512-lVBWs9omyZVv1+0mz8HeThSQFrDCDKrDdfV6ye4Bckyp/ctPSWVlWk9s8m42f/3k/ZMD0Qm3HFIgrhx1QlDI6w==, tarball: file:projects/extension.tgz}
     id: file:projects/extension.tgz
     name: '@rush-temp/extension'
     version: 0.0.0
@@ -9366,6 +9368,39 @@ packages:
     resolution: {integrity: sha512-R4SNYE56Q0TOMYcT8gSTZIInxE9vVJH1k54SR8Ksvg8HNkzG+Pko1NIxb8zpWFB74VEmx3TDaruHnodgJjUrvQ==, tarball: file:projects/schemas.tgz}
     name: '@rush-temp/schemas'
     version: 0.0.0
+    dev: false
+
+  file:projects/system-requirements.tgz_prettier@2.3.2+ts-node@9.1.1:
+    resolution: {integrity: sha512-W01jHZ9w5/U/zllacjXM8T+uewjMKIkSvoRveSN8Y9aBkKkmI/riD9ktjE0CqGrSQkjxHf72vZm+j6BL6hVRVw==, tarball: file:projects/system-requirements.tgz}
+    id: file:projects/system-requirements.tgz
+    name: '@rush-temp/system-requirements'
+    version: 0.0.0
+    dependencies:
+      '@azure/logger': 1.0.3
+      '@types/command-exists': 1.2.0
+      '@types/jest': 26.0.24
+      '@types/node': 14.14.45
+      '@types/semver': 5.5.0
+      '@typescript-eslint/eslint-plugin': 4.33.0_0c49e12669280545a7ea3f36dba6eb0a
+      '@typescript-eslint/parser': 4.33.0_eslint@7.32.0+typescript@4.6.3
+      command-exists: 1.2.9
+      eslint: 7.32.0
+      eslint-plugin-import: 2.24.2_eslint@7.32.0
+      eslint-plugin-jest: 24.3.7_012529635eb9b641f5155884af76fbb6
+      eslint-plugin-node: 11.1.0_eslint@7.32.0
+      eslint-plugin-prettier: 3.4.1_eslint@7.32.0+prettier@2.3.2
+      eslint-plugin-unicorn: 33.0.1_eslint@7.32.0
+      jest: 28.0.0-alpha.8_5076b77de2277d7bd3e529e70437d1c6
+      rimraf: 3.0.2
+      semver: 7.3.6
+      source-map-support: 0.5.21
+      typescript: 4.6.3
+    transitivePeerDependencies:
+      - eslint-config-prettier
+      - node-notifier
+      - prettier
+      - supports-color
+      - ts-node
     dev: false
 
   file:projects/test-public-packages.tgz_prettier@2.3.2:

@@ -1,5 +1,5 @@
 import commandExists from "command-exists";
-import { SystemRequirementError, SystemRequirementResolution } from "./models";
+import { SystemRequirementError, SystemRequirementResolution } from "./types";
 
 export const resolveGenericSystemRequirement = async (
   name: string,

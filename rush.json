@@ -118,6 +118,12 @@
       "shouldPublish": false
     },
     {
+      "packageName": "@autorest/system-requirements",
+      "projectFolder": "packages/libs/system-requirements",
+      "reviewCategory": "production",
+      "shouldPublish": true
+    },
+    {
       "packageName": "@azure-tools/extension",
       "projectFolder": "packages/libs/extension",
       "reviewCategory": "production",

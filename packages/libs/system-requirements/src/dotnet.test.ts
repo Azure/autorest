@@ -1,7 +1,7 @@
-import { execute } from "../exec-cmd";
 import { resolveDotnetRequirement } from "./dotnet";
+import { execute } from "./exec-cmd";
 
-jest.mock("../exec-cmd");
+jest.mock("./exec-cmd");
 
 const mockExecute = execute as jest.Mock;
 

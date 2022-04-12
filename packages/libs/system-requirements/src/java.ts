@@ -1,5 +1,5 @@
-import { execute } from "../exec-cmd";
 import { defineKnownRequirement } from "./common";
+import { execute } from "./exec-cmd";
 
 export const JavaExeName = "java";
 

@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Azure/perks.git"
+    "url": "git+https://github.com/Azure/autorest.git"
   },
   "keywords": [
     "AutoRest",
@@ -31,10 +31,10 @@
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Azure/perks/issues"
+    "url": "https://github.com/Azure/autorest/issues"
   },
-  "homepage": "https://github.com/Azure/perks/tree/master/codegen#readme",
-  "readme": "https://github.com/Azure/perks/tree/master/codegen/readme.md",
+  "homepage": "https://github.com/Azure/autorest/tree/main/packages/libs/codegen#readme",
+  "readme": "https://github.com/Azure/autorest/tree/main/packages/libs/codegen/readme.md",
   "devDependencies": {
     "@types/jest": "^26.0.20",
     "@types/js-yaml": "~4.0.0",

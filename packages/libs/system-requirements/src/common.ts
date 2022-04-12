@@ -1,4 +1,4 @@
-import { SystemRequirement, SystemRequirementResolution } from "./models";
+import { SystemRequirement, SystemRequirementResolution } from "./types";
 import { validateVersionRequirement } from "./version";
 
 /**
