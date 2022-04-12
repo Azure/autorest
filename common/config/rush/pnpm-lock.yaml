@@ -82,7 +82,7 @@ specifiers:
   jest-snapshot: ~26.6.2
   js-yaml: ~4.0.0
   jsonpath: 1.0.0
-  jsonpath-plus: 5.0.4
+  jsonpath-plus: ~6.0.1
   lodash: ~4.17.20
   mkdirp: ~0.5.1
   mocha: ^9.2.2
@@ -202,7 +202,7 @@ dependencies:
   jest-snapshot: 26.6.2
   js-yaml: 4.0.0
   jsonpath: 1.0.0
-  jsonpath-plus: 5.0.4
+  jsonpath-plus: 6.0.1
   lodash: 4.17.21
   mkdirp: 0.5.6
   mocha: 9.2.2
@@ -5371,8 +5371,8 @@ packages:
     engines: {'0': node >= 0.2.0}
     dev: false
 
-  /jsonpath-plus/5.0.4:
-    resolution: {integrity: sha512-w3pI3PewtwIrrGRCFvTkCkKu8IrOwjsqoYRxvxuXQjPB0udEtAuBY0B6/SEztsxMmuIHVHGFQ0knVnTCPW9qYw==}
+  /jsonpath-plus/6.0.1:
+    resolution: {integrity: sha512-EvGovdvau6FyLexFH2OeXfIITlgIbgZoAZe3usiySeaIDm5QS+A10DKNpaPBBqqRSZr2HN6HVNXxtwUAr2apEw==}
     engines: {node: '>=10.0.0'}
     dev: false
 
@@ -8983,7 +8983,7 @@ packages:
     dev: false
 
   file:projects/datastore.tgz_prettier@2.3.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-OqZpjEJpfgeksNHyUggOr+N3v8j3nP75Za6EnvhgR1xYOYcw+0DEQD4M8ZdBh6OLqGxT22LAFyFKCZeAGk532A==, tarball: file:projects/datastore.tgz}
+    resolution: {integrity: sha512-jAYBdZDn9aiM4ejjetS6hsEiZb75Xu6VqUzudb7OeiC3kzkiFVsWXgqvg7iB9DsyBPHsqtwARAsW4zB3RgX/BA==, tarball: file:projects/datastore.tgz}
     id: file:projects/datastore.tgz
     name: '@rush-temp/datastore'
     version: 0.0.0
@@ -9003,7 +9003,7 @@ packages:
       eslint-plugin-prettier: 3.4.1_eslint@7.32.0+prettier@2.3.2
       eslint-plugin-unicorn: 33.0.1_eslint@7.32.0
       jest: 28.0.0-alpha.8_5076b77de2277d7bd3e529e70437d1c6
-      jsonpath-plus: 5.0.4
+      jsonpath-plus: 6.0.1
       lodash: 4.17.21
       rimraf: 3.0.2
       source-map: 0.7.3
