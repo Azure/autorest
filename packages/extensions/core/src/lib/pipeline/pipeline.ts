@@ -122,7 +122,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
             const scope = await pscope;
             pipeState = mergePipeStates(pipeState, scope.pipeState);
             for (const handle of await scope.Enum()) {
-              handles.push(await scope.ReadStrict(handle));
+              handles.push(await scope.readStrict(handle));
             }
           }
           inputScope = new QuickDataSource(handles, pipeState);
