@@ -1,7 +1,7 @@
-# <img align="center" src="./images/logo.png">  Introduction to AutoRest
+# <img align="center" src="./images/logo.png"> Introduction to AutoRest
 
-The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) format.
-Here we go into some of the general terms you'll see when gonig through our documentation and interacting with AutoRests.
+The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to _AutoRest_ is a spec that describes the REST API using the [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) format.
+Here we go into some of the general terms you'll see when going through our documentation and interacting with AutoRests.
 
 ## What is OpenAPI?
 
@@ -22,6 +22,7 @@ At the core of AutoRest is a flexible pipeline where a series of pre-configured 
 See our [landing page][landing_page] to get started with writing your OpenAPI definitions and generating with AutoRest!
 
 <!--LINKS-->
+
 [rest]: https://en.wikipedia.org/wiki/Representational_state_transfer
 [swagger_basic_structure]: https://swagger.io/docs/specification/basic-structure/
 [swagger_docs]: https://swagger.io/docs/

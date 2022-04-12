@@ -1,6 +1,41 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
+    "SecurityScheme": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ]
+    },
+    "OAuth2SecurityScheme": {
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "scopes",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "./http.json#/definitions/SecurityScheme"
+        }
+      ]
+    },
     "AuthorizationCodeOAuthFlow": {
       "type": "object",
       "properties": {
@@ -17,10 +52,10 @@
           "type": "string"
         },
         "scopes": {
-          "$ref": "./master.json#/definitions/Dictionary<string>"
+          "$ref": "./master.json#/definitions/Record<string,string>"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -54,7 +89,7 @@
           "type": "string"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -77,10 +112,10 @@
           "type": "string"
         },
         "scopes": {
-          "$ref": "./master.json#/definitions/Dictionary<string>"
+          "$ref": "./master.json#/definitions/Record<string,string>"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -103,10 +138,10 @@
           "type": "string"
         },
         "scopes": {
-          "$ref": "./master.json#/definitions/Dictionary<string>"
+          "$ref": "./master.json#/definitions/Record<string,string>"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -133,7 +168,7 @@
           ]
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -141,33 +176,6 @@
       "additionalProperties": false,
       "required": [
         "scheme",
-        "type"
-      ]
-    },
-    "OAuth2SecurityScheme": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": [
-            "oauth2"
-          ]
-        },
-        "flows": {
-          "$ref": "./http.json#/definitions/OAuthFlows"
-        },
-        "description": {
-          "type": "string"
-        },
-        "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
-          "description": "additional metadata extensions dictionary"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "flows",
         "type"
       ]
     },
@@ -187,7 +195,7 @@
           "$ref": "./http.json#/definitions/AuthorizationCodeOAuthFlow"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -201,25 +209,6 @@
         },
         {
           "$ref": "./http.json#/definitions/NonBearerHTTPSecurityScheme"
-        }
-      ]
-    },
-    "SecurityScheme": {
-      "anyOf": [
-        {
-          "$ref": "./http.json#/definitions/BearerHTTPSecurityScheme"
-        },
-        {
-          "$ref": "./http.json#/definitions/NonBearerHTTPSecurityScheme"
-        },
-        {
-          "$ref": "./http.json#/definitions/OAuth2SecurityScheme"
-        },
-        {
-          "$ref": "./http.json#/definitions/APIKeySecurityScheme"
-        },
-        {
-          "$ref": "./http.json#/definitions/OpenIdConnectSecurityScheme"
         }
       ]
     },
@@ -242,7 +231,7 @@
           "type": "string"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -271,7 +260,7 @@
           "type": "string"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -294,10 +283,10 @@
           "type": "string"
         },
         "scopes": {
-          "$ref": "./master.json#/definitions/Dictionary<string>"
+          "$ref": "./master.json#/definitions/Record<string,string>"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -319,8 +308,18 @@
       "type": "object",
       "properties": {
         "in": {
-          "$ref": "./enums.json#/definitions/ParameterLocation",
-          "description": "the location that this parameter is placed in the http request"
+          "description": "the location that this parameter is placed in the http request",
+          "enum": [
+            "body",
+            "cookie",
+            "header",
+            "none",
+            "path",
+            "query",
+            "uri",
+            "virtual"
+          ],
+          "type": "string"
         },
         "style": {
           "$ref": "./enums.json#/definitions/SerializationStyle",
@@ -472,7 +471,7 @@
           "$ref": "./master.json#/definitions/Languages"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -561,10 +560,10 @@
         },
         "knownMediaType": {
           "$ref": "./enums.json#/definitions/KnownMediaType",
-          "description": "canonical response type (ie, 'json')"
+          "description": "canonical response type (ie, 'json')."
         },
         "mediaTypes": {
-          "description": "the possible media types that this response MUST match one of",
+          "description": "The possible media types that this response MUST match one of.",
           "type": "array",
           "items": {
             "type": "string"
@@ -588,8 +587,6 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "knownMediaType",
-        "mediaTypes",
         "statusCodes"
       ],
       "allOf": [
@@ -613,8 +610,6 @@
       "additionalProperties": false,
       "required": [
         "binary",
-        "knownMediaType",
-        "mediaTypes",
         "statusCodes"
       ],
       "allOf": [

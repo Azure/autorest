@@ -62,28 +62,37 @@ languages:
   - language: python
     outputPath: ./output/python
     oldArgs:
-      - --version:3.0.6371
-      - --use:@autorest/modelerfour@4.18.0-dev.1
-      - --use:@autorest/python@5.5.0
+      - --version:3.6.2
+      - --use:@autorest/modelerfour@4.22.3
+      - --use:@autorest/python@5.12.0
+      - --modelerfour.treat-type-object-as-anything
+      - --modelerfour.legacy-request-body
+
     newArgs:
-      - --version:3.0.6371
+      - --version:../packages/extensions/core
       - --use:../packages/extensions/modelerfour
-      - --use:@autorest/python@5.5.0
+      - --use:@autorest/python@5.12.0
+      - --modelerfour.treat-type-object-as-anything
+      - --modelerfour.legacy-request-body
 
   - language: typescript
     outputPath: ./output/typescript
     oldArgs:
       - --v3
-      - --version:3.0.6371
-      - --use:@autorest/modelerfour@4.18.0-dev.1
+      - --version:3.6.2
+      - --use:@autorest/modelerfour@4.22.3
+      - --modelerfour.treat-type-object-as-anything
       - --package-name:test-package
       - --title:TestClient
-      - --use:@autorest/typescript@6.0.0-dev.20201208.1
+      - --use:@autorest/typescript@6.0.0-beta.13
+      - --modelerfour.legacy-request-body
+
     newArgs:
       - --v3
-      - --debug
       - --version:../packages/extensions/core
       - --use:../packages/extensions/modelerfour
+      - --modelerfour.treat-type-object-as-anything
       - --package-name:test-package
       - --title:TestClient
-      - --use:@autorest/typescript@6.0.0-dev.20201208.1
+      - --use:@autorest/typescript@6.0.0-beta.13
+      - --modelerfour.legacy-request-body

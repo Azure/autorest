@@ -9,16 +9,15 @@ export class OutstandingTaskAwaiter {
   private locked = false;
   private outstandingTasks: Array<Promise<any>> = [];
 
-  public async Wait(): Promise<void> {
+  public async wait(): Promise<void> {
     this.locked = true;
     await Promise.all(this.outstandingTasks);
   }
 
-  public async Await<T>(task: Promise<T>): Promise<T> {
+  public await<T>(task: Promise<T>) {
     if (this.locked) {
       throw new OutstandingTaskAlreadyCompletedException();
     }
     this.outstandingTasks.push(task);
-    return task;
   }
 }

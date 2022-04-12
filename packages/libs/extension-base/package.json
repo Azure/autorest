@@ -1,24 +1,28 @@
 {
   "name": "@autorest/extension-base",
-  "version": "3.2.0",
+  "version": "3.4.4",
   "description": "Library for creating AutoRest extensions",
-  "main": "dist/exports.js",
-  "typings": "./dist/exports.d.ts",
+  "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./testing": "./dist/testing/index.js"
+  },
+  "typings": "./dist/index.d.ts",
   "engines": {
-    "node": ">=10.13.0"
+    "node": ">=12.0.0"
   },
   "scripts": {
-    "build": "tsc -p .",
-    "watch": "tsc -p . --watch",
+    "watch": "tsc -p tsconfig.build.json --watch",
+    "build": "tsc -p tsconfig.build.json",
     "lint:fix": "eslint ./src --fix --ext .ts",
     "lint": "eslint ./src --ext .ts --max-warnings=0",
     "test": "echo 'No tests'",
     "test:ci": "echo 'No tests'",
-    "clean": "rimraf ./dist"
+    "clean": "rimraf ./dist ./temp"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/azure/perks.git"
+    "url": "git+https://github.com/Azure/autorest.git"
   },
   "keywords": [
     "autorest",
@@ -31,16 +35,18 @@
     "@types/node": "~14.14.20",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
+    "eslint-plugin-jest": "~24.3.2",
     "eslint-plugin-node": "~11.1.0",
-    "eslint-plugin-prettier": "~3.2.0",
-    "eslint-plugin-unicorn": "~27.0.0",
+    "eslint-plugin-prettier": "~3.4.0",
+    "eslint-plugin-unicorn": "~33.0.1",
+    "eslint-plugin-import": "~2.24.2",
     "eslint": "^7.17.0",
     "rimraf": "^3.0.2",
-    "typescript": "~4.2.3"
+    "typescript": "~4.6.3"
   },
   "dependencies": {
     "js-yaml": "~4.0.0",
     "vscode-jsonrpc": "^3.5.0",
-    "@azure-tools/codegen": "~2.5.293"
+    "@azure-tools/codegen": "~2.9.1"
   }
 }

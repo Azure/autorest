@@ -1,16 +1,22 @@
-/* line: 1-based, column: 0-based */
-export type Position =
-  | {
-      line: number; // 1-based
-      column: number; // 0-based
-    }
-  | { path?: JsonPath };
+import { ShadowedObject } from "@azure-tools/codegen";
 
-export type JsonPath = Array<string | number>;
+export interface Position {
+  line: number;
+  column: number;
+}
+
+export interface PathPosition {
+  /**
+   * Path to the element. Either as a json pointer string or as an array of segements.
+   */
+  path: JsonPointerSegments | string;
+}
+
+export type JsonPointerSegments = Array<string | number>;
 
 export interface SourceLocation {
   document: string;
-  Position: Position;
+  Position: Position | PathPosition;
 }
 
 export interface Artifact {
@@ -24,34 +30,34 @@ export interface Artifact {
  */
 export enum Channel {
   /** Information is considered the mildest of responses; not necesarily actionable. */
-  Information = <any>"information",
+  Information = "information",
 
   /** Warnings are considered important for best practices, but not catastrophic in nature. */
-  Warning = <any>"warning",
+  Warning = "warning",
 
   /** Errors are considered blocking issues that block a successful operation.  */
-  Error = <any>"error",
+  Error = "error",
 
   /** Debug messages are designed for the developer to communicate internal autorest implementation details. */
-  Debug = <any>"debug",
+  Debug = "debug",
 
   /** Verbose messages give the user additional clarity on the process. */
-  Verbose = <any>"verbose",
+  Verbose = "verbose",
 
   /** Catastrophic failure, likely abending the process.  */
-  Fatal = <any>"fatal",
+  Fatal = "fatal",
 
   /** Hint messages offer guidance or support without forcing action. */
-  Hint = <any>"hint",
+  Hint = "hint",
 
   /** File represents a file output from an extension. Details are a Artifact and are required.  */
-  File = <any>"file",
+  File = "file",
 
   /** content represents an update/creation of a configuration file. The final uri will be in the same folder as the primary config file. */
-  Configuration = <any>"configuration",
+  Configuration = "configuration",
 
   /** Protect is a path to not remove during a clear-output-folder.  */
-  Protect = <any>"protect",
+  Protect = "protect",
 }
 
 export interface Message {
@@ -59,7 +65,7 @@ export interface Message {
   Key?: Iterable<string>;
   Details?: any;
   Text: string;
-  Source?: Array<SourceLocation>;
+  Source?: SourceLocation[];
 }
 
 export interface ArtifactMessage extends Message {
@@ -82,3 +88,5 @@ export interface Mapping {
   source: string;
   name?: string;
 }
+
+export type LogSource = string | Position | PathPosition | ShadowedObject<any>;

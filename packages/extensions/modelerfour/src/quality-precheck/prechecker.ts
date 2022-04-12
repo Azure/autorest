@@ -1,31 +1,28 @@
-import { Session } from "@autorest/extension-base";
-import { values, items, length, Dictionary, refCount, clone, keys } from "@azure-tools/linq";
+import { Session, AutorestExtensionHost, startSession } from "@autorest/extension-base";
+import { shadowPosition } from "@azure-tools/codegen";
 import {
   Model as oai3,
   Refable,
   Dereferenced,
   dereference,
   Schema,
-  PropertyDetails,
   JsonType,
   StringFormat,
 } from "@azure-tools/openapi";
-
-import { serialize } from "@azure-tools/codegen";
-import { Host, startSession } from "@autorest/extension-base";
+import { getDiff } from "recursive-diff";
 import { Interpretations } from "../modeler/interpretations";
 
-import { getDiff } from "recursive-diff";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
+import { DuplicateSchemaMerger } from "./duplicate-schema-merger";
 
-export async function processRequest(host: Host) {
-  const debug = (await host.GetValue("debug")) || false;
+export async function processRequest(host: AutorestExtensionHost) {
+  const debug = (await host.getValue("debug")) || false;
 
   try {
     const session = await startSession<oai3>(host);
 
     // process
-    const plugin = await new QualityPreChecker(session).init();
+    const plugin = new QualityPreChecker(session);
 
     const input = plugin.input;
     // go!
@@ -36,47 +33,34 @@ export async function processRequest(host: Host) {
       session.checkpoint();
     }
 
-    host.WriteFile(
-      "prechecked-openapi-document.yaml",
-      serialize(result, { sortKeys: false }),
-      undefined,
-      "prechecked-openapi-document",
-    );
-    host.WriteFile(
-      "original-openapi-document.yaml",
-      serialize(input, { sortKeys: false }),
-      undefined,
-      "openapi-document",
-    );
-  } catch (E) {
+    host.writeFile({
+      filename: "prechecked-openapi-document.yaml",
+      content: JSON.stringify(result, null, 2),
+      artifactType: "prechecked-openapi-document",
+    });
+    host.writeFile({
+      filename: "original-openapi-document.yaml",
+      content: JSON.stringify(input, null, 2),
+      artifactType: "openapi-document",
+    });
+  } catch (error: any) {
     if (debug) {
       // eslint-disable-next-line no-console
-      console.error(`${__filename} - FAILURE  ${JSON.stringify(E)} ${E.stack}`);
+      console.error(`${__filename} - FAILURE  ${JSON.stringify(error)} ${error.stack}`);
     }
-    throw E;
+    throw error;
   }
-}
-
-interface DereferencedSchema {
-  key: string;
-  value: Dereferenced<Schema>;
 }
 
 export class QualityPreChecker {
   input: oai3;
-  options: ModelerFourOptions = {};
+  private options: ModelerFourOptions;
   protected interpret: Interpretations;
 
   constructor(protected session: Session<oai3>) {
-    this.input = session.model; // shadow(session.model, filename);
+    this.input = shadowPosition(session.model); // shadow(session.model, filename);
+    this.options = this.session.configuration.modelerfour ?? {};
     this.interpret = new Interpretations(session);
-  }
-
-  async init() {
-    // get our configuration for this run.
-    this.options = await this.session.getValue("modelerfour", {});
-
-    return this;
   }
 
   private resolve<T>(item: Refable<T>): Dereferenced<T> {
@@ -84,10 +68,10 @@ export class QualityPreChecker {
   }
 
   getProperties(schema: Schema) {
-    return items(schema.properties).select((each) => ({
-      key: each.key,
-      name: <string>this.interpret.getPreferredName(each.value, each.key),
-      property: this.resolve(each.value).instance,
+    return Object.entries(schema.properties ?? {}).map(([key, value]) => ({
+      key: key,
+      name: <string>this.interpret.getPreferredName(value, key),
+      property: this.resolve(value).instance,
     }));
     //return items(schema.properties).toMap(each => <string>this.interpret.getPreferredName(each.value, each.key), each => this.resolve(each.value).instance);
   }
@@ -96,7 +80,7 @@ export class QualityPreChecker {
     tag: string,
     schemas: Array<Refable<Schema>> | undefined,
   ): Iterable<{ name: string; schema: Schema; tag: string }> {
-    return values(schemas).select((a) => {
+    return Object.values(schemas ?? []).map((a) => {
       const { instance: schema, name } = this.resolve(a);
       return {
         name: this.interpret.getName(name, schema),
@@ -126,7 +110,7 @@ export class QualityPreChecker {
     completed.add(schema);
 
     if (schema.allOf && schema.properties) {
-      const myProperties = this.getProperties(schema).toArray();
+      const myProperties = this.getProperties(schema);
 
       for (const { name: parentName, schema: parentSchema } of this.getAllParents(schemaName, schema)) {
         this.checkForHiddenProperties(parentName, parentSchema, completed);
@@ -199,215 +183,49 @@ export class QualityPreChecker {
     }
   }
 
-  isObjectOrEnum(schema: Schema) {
-    switch (schema.type) {
-      case JsonType.Array:
-      case JsonType.Boolean:
-      case JsonType.Number:
-        return false;
-
-      case JsonType.String:
-        return schema.enum || schema["x-ms-enum"];
-
-      case JsonType.Object:
-        // empty objects don't worry.
-        if (length(schema.properties) === 0 && length(schema.allOf) === 0) {
-          return false;
-        }
-        return true;
-
-      default:
-        return length(schema.properties) > 0 || length(schema.allOf) > 0 ? true : false;
-    }
-  }
-
-  checkForDuplicateSchemas(): undefined {
+  checkForDuplicateSchemas() {
     this.session.warning(
       "Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.",
       ["PreCheck", "CheckDuplicateSchemas"],
     );
 
-    // Returns true if scanning should be restarted
-    const innerCheckForDuplicateSchemas = (): any => {
-      const errors = new Set<string>();
-      if (this.input.components && this.input.components.schemas) {
-        const dupedNames = items(this.input.components?.schemas)
-          .select((s) => ({ key: s.key, value: this.resolve(s.value) }))
-          .groupBy(
-            // Make sure to check x-ms-client-name first to see if the schema is already being renamed
-            (each) => each.value.instance["x-ms-client-name"] || each.value.instance["x-ms-metadata"]?.name,
-            (each) => each,
-          );
-
-        for (const [name, schemas] of dupedNames.entries()) {
-          if (name && schemas.length > 1) {
-            const diff = getDiff(schemas[0].value.instance, schemas[1].value.instance).filter(
-              (each) => each.path[0] !== "description" && each.path[0] !== "x-ms-metadata",
-            );
-
-            if (diff.length === 0) {
-              // found two schemas that are indeed the same.
-              // stop, find all the $refs to the second one, and rewrite them to go to the first one.
-              // then go back and start again.
-              this.removeDuplicateSchemas(name, schemas[0], schemas[1]);
-              // Restart the scan now that the duplicate has been removed
-              return true;
-            }
-
-            // it may not be identical, but if it's not an object, I'm not sure we care too much.
-            if (values(schemas).any((each) => this.isObjectOrEnum(each.value.instance))) {
-              const rdiff = getDiff(schemas[1].value.instance, schemas[0].value.instance).filter(
-                (each) => each.path[0] !== "description" && each.path[0] !== "x-ms-metadata",
-              );
-              if (diff.length > 0) {
-                const details = diff
-                  .map((each) => {
-                    const path = each.path.join(".");
-                    let iValue = each.op === "add" ? "<none>" : JSON.stringify(each.oldVal);
-                    if (each.op !== "update") {
-                      const v = rdiff.find((each) => each.path.join(".") === path);
-                      iValue = JSON.stringify(v?.val);
-                    }
-                    const nValue = each.op === "delete" ? "<none>" : JSON.stringify(each.val);
-                    return `${path}: ${iValue} => ${nValue}`;
-                  })
-                  .join(",");
-                errors.add(`Duplicate Schema named ${name} -- ${details} `);
-                continue;
-              }
-            }
-          }
-        }
-      }
-
-      for (const each of errors) {
-        // Allow duplicate schemas if requested
-        if (this.options["lenient-model-deduplication"]) {
-          this.session.warning(each, ["PreCheck", "DuplicateSchema"]);
-        } else {
-          this.session.error(
-            `${each}; This error can be *temporarily* avoided by using the 'modelerfour.lenient-model-deduplication' setting.  NOTE: This setting will be removed in a future version of @autorest/modelerfour; schemas should be updated to fix this issue sooner than that.`,
-            ["PreCheck", "DuplicateSchema"],
-          );
-        }
-      }
-    };
-
-    while (innerCheckForDuplicateSchemas()) {
-      // Loop until the scan is complete
-    }
-
-    return undefined;
-  }
-
-  private findSchemaToRemove(
-    schema1: DereferencedSchema,
-    schema2: DereferencedSchema,
-  ): { keep: DereferencedSchema; remove: DereferencedSchema } {
-    const schema1Ref = this.input.components?.schemas?.[schema1.key].$ref;
-    // If schema1 is pointing to schema2 then we should delete schema1
-    if (schema1Ref && schema1Ref === `#/components/schemas/${schema2.key}`) {
-      return { remove: schema1, keep: schema2 };
-    }
-    return { remove: schema2, keep: schema1 };
-  }
-
-  private removeDuplicateSchemas(name: string, schema1: DereferencedSchema, schema2: DereferencedSchema) {
-    const { keep: schemaToKeep, remove: schemaToRemove } = this.findSchemaToRemove(schema1, schema2);
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    delete this.input.components!.schemas![schemaToRemove.key];
-    const text = JSON.stringify(this.input);
-    this.input = JSON.parse(
-      text.replace(
-        new RegExp(`"\\#\\/components\\/schemas\\/${schemaToRemove.key}"`, "g"),
-        `"#/components/schemas/${schemaToKeep.key}"`,
-      ),
-    );
-
-    // update metadata to match
-    if (this.input?.components?.schemas?.[schemaToKeep.key]) {
-      const primarySchema = this.resolve(this.input.components.schemas[schemaToKeep.key]);
-      const primaryMetadata = primarySchema.instance["x-ms-metadata"];
-      const secondaryMetadata = schemaToRemove.value.instance["x-ms-metadata"];
-
-      if (primaryMetadata && secondaryMetadata) {
-        primaryMetadata.apiVersions = [
-          ...new Set<string>([...(primaryMetadata.apiVersions || []), ...(secondaryMetadata.apiVersions || [])]),
-        ];
-        primaryMetadata.filename = [
-          ...new Set<string>([...(primaryMetadata.filename || []), ...(secondaryMetadata.filename || [])]),
-        ];
-        primaryMetadata.originalLocations = [
-          ...new Set<string>([
-            ...(primaryMetadata.originalLocations || []),
-            ...(secondaryMetadata.originalLocations || []),
-          ]),
-        ];
-        primaryMetadata["x-ms-secondary-file"] = !(
-          !primaryMetadata["x-ms-secondary-file"] || !secondaryMetadata["x-ms-secondary-file"]
-        );
-      }
-    }
-
-    this.session.verbose(
-      `Schema ${name} has multiple identical declarations, reducing to just one - removing: ${schemaToRemove.key}, keeping: ${schemaToKeep.key}`,
-      ["PreCheck", "ReducingSchema"],
-    );
+    const duplicateSchemaChecker = new DuplicateSchemaMerger(this.session, this.options);
+    this.input = duplicateSchemaChecker.findDuplicateSchemas(this.input);
   }
 
   fixUpSchemasThatUseAllOfInsteadOfJustRef() {
-    const schemas = this.input.components?.schemas;
-    if (schemas) {
-      for (const { key, instance: schema, name, fromRef } of items(schemas).select((s) => ({
-        key: s.key,
-        ...this.resolve(s.value),
-      }))) {
-        // we're looking for schemas that offer no possible value
-        // because they just use allOf instead of $ref
-        if (!schema.type || schema.type === JsonType.Object) {
-          if (length(schema.allOf) === 1) {
-            if (length(schema.properties) > 0) {
-              continue;
-            }
-            if (schema.additionalProperties) {
-              continue;
-            }
-
-            const $ref = schema?.allOf?.[0]?.$ref;
-
-            const text = JSON.stringify(this.input);
-            this.input = JSON.parse(
-              text.replace(new RegExp(`"\\#\\/components\\/schemas\\/${key}"`, "g"), `"${$ref}"`),
-            );
-            const location = schema["x-ms-metadata"].originalLocations?.[0]?.replace(/^.*\//, "");
-            delete this.input.components?.schemas?.[key];
-            if (schema["x-internal-autorest-anonymous-schema"]) {
-              this.session.warning(
-                `An anonymous inline schema for property '${location.replace(
-                  /-/g,
-                  ".",
-                )}' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code. Don't do that. - removing.`,
-                ["PreCheck", "AllOfWhenYouMeantRef"],
-              );
-            } else {
-              this.session.warning(
-                `Schema '${location}' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.`,
-                ["PreCheck", "AllOfWhenYouMeantRef"],
-              );
-            }
+    for (const { schema, key } of this.listSchemas()) {
+      // we're looking for schemas that offer no possible value
+      // because they just use allOf instead of $ref
+      if (!schema.type || schema.type === JsonType.Object) {
+        if (Object.keys(schema.allOf ?? {}).length === 1) {
+          if (Object.keys(schema.properties ?? {}).length > 0) {
+            continue;
           }
+          if (schema.additionalProperties) {
+            continue;
+          }
+
+          const $ref = (schema?.allOf?.[0] as any)?.$ref;
+
+          const text = JSON.stringify(this.input);
+          this.input = JSON.parse(text.replace(new RegExp(`"\\#\\/components\\/schemas\\/${key}"`, "g"), `"${$ref}"`));
+          const location = schema["x-ms-metadata"].originalLocations?.[0]?.replace(/^.*\//, "");
+          delete this.input.components?.schemas?.[key];
+          this.session.warning(
+            `Schema '${location}' is using an 'allOf' instead of a $ref. This creates a wasteful anonymous type when generating code.`,
+            ["PreCheck", "AllOfWhenYouMeantRef"],
+          );
         }
       }
     }
   }
 
   fixUpObjectsWithoutType() {
-    for (const { instance: schema, name, fromRef } of values(this.input.components?.schemas).select((s) =>
-      this.resolve(s),
-    )) {
+    for (const { name, schema } of this.listSchemas()) {
       if (<any>schema.type === "file" || <any>schema.format === "file" || <any>schema.format === "binary") {
         // handle inconsistency in file format handling.
-        this.session.hint(
+        this.session.warning(
           `'The schema ${schema?.["x-ms-metadata"]?.name || name} with 'type: ${schema.type}', format: ${
             schema.format
           }' will be treated as a binary blob for binary media types.`,
@@ -428,7 +246,7 @@ export class QualityPreChecker {
             this.session.warning(
               `The schema '${
                 schema?.["x-ms-metadata"]?.name || name
-              }' with an undefined type and decalared properties is a bit ambigious. This has been auto-corrected to 'type:object'`,
+              }' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'`,
               ["PreCheck", "SchemaMissingType"],
               schema,
             );
@@ -441,7 +259,7 @@ export class QualityPreChecker {
             this.session.warning(
               `The schema '${
                 schema?.["x-ms-metadata"]?.name || name
-              }' with an undefined type and additionalProperties is a bit ambigious. This has been auto-corrected to 'type:object'`,
+              }' with an undefined type and additionalProperties is a bit ambiguous. This has been auto-corrected to 'type:object'`,
               ["PreCheck", "SchemaMissingType"],
               schema,
             );
@@ -455,7 +273,7 @@ export class QualityPreChecker {
             this.session.warning(
               `The schema '${
                 schema?.["x-ms-metadata"]?.name || name
-              }' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambigious. This has been auto-corrected to 'type:object'`,
+              }' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'`,
               ["PreCheck", "SchemaMissingType"],
               schema,
             );
@@ -468,7 +286,11 @@ export class QualityPreChecker {
   }
 
   isEmptyObjectSchema(schema: Schema): boolean {
-    if (length(schema.properties) > 0 || length(schema.allOf) > 0 || schema.additionalProperties === true) {
+    if (
+      Object.keys(schema.properties ?? {}).length > 0 ||
+      Object.keys(schema.allOf ?? {}).length > 0 ||
+      schema.additionalProperties === true
+    ) {
       return false;
     }
 
@@ -481,28 +303,44 @@ export class QualityPreChecker {
   }
 
   fixUpSchemasWithEmptyObjectParent() {
-    const schemas = this.input.components?.schemas;
-    if (schemas) {
-      for (const { key, instance: schema, name, fromRef } of items(schemas).select((s) => ({
-        key: s.key,
-        ...this.resolve(s.value),
-      }))) {
-        if (schema.type === JsonType.Object) {
-          if (length(schema.allOf) > 1) {
-            const schemaName = schema["x-ms-metadata"]?.name || name;
-            schema.allOf = schema.allOf?.filter((p) => {
-              const parent = this.resolve(p).instance;
+    for (const { name, schema } of this.listSchemas()) {
+      if (schema.type === JsonType.Object) {
+        if (Object.keys(schema.allOf ?? {}).length > 1) {
+          const schemaName = schema["x-ms-metadata"]?.name || name;
+          schema.allOf = schema.allOf?.filter((p, index) => {
+            const parent = this.resolve(p).instance;
 
-              if (this.isEmptyObjectSchema(parent)) {
-                this.session.warning(
-                  `Schema '${schemaName}' has an allOf list with an empty object schema as a parent, removing it.`,
-                  ["PreCheck", "EmptyParentSchemaWarning"],
-                );
-                return false;
-              }
+            if (this.isEmptyObjectSchema(parent)) {
+              this.session.warning(
+                `Schema '${schemaName}' has an allOf list with an empty object schema as a parent, removing it.`,
+                ["PreCheck", "EmptyParentSchemaWarning"],
+                p,
+              );
+              return false;
+            }
 
-              return true;
-            });
+            return true;
+          });
+        }
+      }
+    }
+  }
+
+  private checkParentSameType() {
+    for (const { name, schema } of this.listSchemas()) {
+      if (schema.allOf && schema.type) {
+        const schemaName = getSchemaName(schema, name);
+        for (const parentRef of schema.allOf) {
+          const parent = this.resolve(parentRef).instance;
+          if (parent.type && parent.type !== schema.type) {
+            const parentName = getSchemaName(parent, name);
+            const lines = [
+              `Schema '${schemaName}' has an allOf reference to '${parentName}' but those schema have different types:`,
+              `  - ${schemaName}: ${schema.type}`,
+              `  - ${parentName}: ${parent.type}`,
+            ];
+
+            this.session.error(lines.join("\n"), ["PreCheck", "AllOfTypeDifferent"], parentRef);
           }
         }
       }
@@ -520,20 +358,37 @@ export class QualityPreChecker {
 
     this.checkForDuplicateSchemas();
 
+    this.checkParentSameType();
+
     let onlyOnce = new WeakSet<Schema>();
-    for (const { instance: schema, name, fromRef } of values(this.input.components?.schemas).select((s) =>
-      this.resolve(s),
-    )) {
+    for (const { name, schema } of this.listSchemas()) {
       this.checkForHiddenProperties(this.interpret.getName(name, schema), schema, onlyOnce);
     }
 
     onlyOnce = new WeakSet<Schema>();
-    for (const { instance: schema, name, fromRef } of values(this.input.components?.schemas).select((s) =>
-      this.resolve(s),
-    )) {
+    for (const { name, schema } of this.listSchemas()) {
       this.checkForDuplicateParents(this.interpret.getName(name, schema), schema, onlyOnce);
     }
 
     return this.input;
   }
+
+  private listSchemas(): Array<{ schema: Schema; name: string; key: string }> {
+    const schemas = this.input.components?.schemas;
+    if (!schemas) {
+      return [];
+    }
+    return Object.entries(schemas).map(([key, value]) => {
+      const { instance, name } = this.resolve(value);
+      return {
+        key,
+        schema: instance,
+        name,
+      };
+    });
+  }
+}
+
+function getSchemaName(schema: Schema, id: string) {
+  return schema["x-ms-metadata"]?.name || id;
 }

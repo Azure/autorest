@@ -1,5 +1,5 @@
-import { Schema } from "../schema";
 import { DeepPartial } from "@azure-tools/codegen";
+import { Schema } from "../schema";
 import { SchemaType } from "../schema-type";
 
 export interface BinarySchema extends Schema {}

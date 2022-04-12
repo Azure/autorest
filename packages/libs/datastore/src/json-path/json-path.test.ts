@@ -7,65 +7,65 @@ const roundTrip = (s: string): string => {
 
 describe("JsonPath", () => {
   it("IsPrefix", () => {
-    assert.strictEqual(jp.IsPrefix(jp.parse("$.a.b.c"), jp.parse("$.a.b.c.d")), true);
-    assert.strictEqual(jp.IsPrefix(jp.parse("$.a.b.c"), jp.parse("$.a.b.c")), true);
-    assert.strictEqual(jp.IsPrefix(jp.parse("$.a.b.c"), jp.parse("$.a.b")), false);
+    expect(jp.IsPrefix(jp.parse("$.a.b.c"), jp.parse("$.a.b.c.d"))).toEqual(true);
+    expect(jp.IsPrefix(jp.parse("$.a.b.c"), jp.parse("$.a.b.c"))).toEqual(true);
+    expect(jp.IsPrefix(jp.parse("$.a.b.c"), jp.parse("$.a.b"))).toEqual(false);
   });
 
   it("matches", async () => {
-    assert.strictEqual(jp.matches("$..*", jp.parse("$.a.b.c")), true);
-    assert.strictEqual(jp.matches("$..c", jp.parse("$.a.b.c")), true);
-    assert.strictEqual(jp.matches("$..b", jp.parse("$.a.b.c")), false);
-    assert.strictEqual(jp.matches("$.a.b.c", jp.parse("$.a.b.c")), true);
-    assert.strictEqual(jp.matches("$.a.b", jp.parse("$.a.b.c")), false);
-    assert.strictEqual(jp.matches("$.a..*", jp.parse("$.a.b.c")), true);
-    assert.strictEqual(jp.matches("$.a.b.c.d", jp.parse("$.a.b.c")), false);
+    expect(jp.matches("$..*", jp.parse("$.a.b.c"))).toEqual(true);
+    expect(jp.matches("$..c", jp.parse("$.a.b.c"))).toEqual(true);
+    expect(jp.matches("$..b", jp.parse("$.a.b.c"))).toEqual(false);
+    expect(jp.matches("$.a.b.c", jp.parse("$.a.b.c"))).toEqual(true);
+    expect(jp.matches("$.a.b", jp.parse("$.a.b.c"))).toEqual(false);
+    expect(jp.matches("$.a..*", jp.parse("$.a.b.c"))).toEqual(true);
+    expect(jp.matches("$.a.b.c.d", jp.parse("$.a.b.c"))).toEqual(false);
   });
 
   it("querying", () => {
-    assert.strictEqual(jp.nodes({ a: 1, b: 2, c: 3 }, "$..*").length, 3);
-    assert.strictEqual(jp.nodes({ a: 1, b: 2, c: 3 }, "$..a").length, 1);
-    assert.strictEqual(jp.nodes({ a: 1, b: 2, c: 3 }, "$.a").length, 1);
-    assert.strictEqual(jp.nodes({ a: 1, b: 2, c: 3 }, "$.d").length, 0);
+    expect(jp.nodes({ a: 1, b: 2, c: 3 }, "$..*").length).toEqual(3);
+    expect(jp.nodes({ a: 1, b: 2, c: 3 }, "$..a").length).toEqual(1);
+    expect(jp.nodes({ a: 1, b: 2, c: 3 }, "$.a").length).toEqual(1);
+    expect(jp.nodes({ a: 1, b: 2, c: 3 }, "$.d").length).toEqual(0);
 
-    assert.strictEqual(jp.paths({ a: 1, b: 2, c: 3 }, "$..*").length, 3);
-    assert.strictEqual(jp.paths({ a: 1, b: 2, c: 3 }, "$..a").length, 1);
-    assert.strictEqual(jp.paths({ a: 1, b: 2, c: 3 }, "$.a").length, 1);
-    assert.strictEqual(jp.paths({ a: 1, b: 2, c: 3 }, "$.d").length, 0);
+    expect(jp.paths({ a: 1, b: 2, c: 3 }, "$..*").length).toEqual(3);
+    expect(jp.paths({ a: 1, b: 2, c: 3 }, "$..a").length).toEqual(1);
+    expect(jp.paths({ a: 1, b: 2, c: 3 }, "$.a").length).toEqual(1);
+    expect(jp.paths({ a: 1, b: 2, c: 3 }, "$.d").length).toEqual(0);
 
-    assert.strictEqual(jp.paths({ x: { $ref: "x" }, y: { $re: "x" } }, "$[?(@.$ref)]").length, 1);
-    assert.strictEqual(jp.paths({ a: { x: { $ref: "x" } }, b: { x: { $re: "x" } } }, "$..*[?(@.$ref)]").length, 1);
+    expect(jp.paths({ x: { $ref: "x" }, y: { $re: "x" } }, "$[?(@.$ref)]").length).toEqual(1);
+    expect(jp.paths({ a: { x: { $ref: "x" } }, b: { x: { $re: "x" } } }, "$..*[?(@.$ref)]").length).toEqual(1);
   });
 
   it("querying features", () => {
     const obj = { a: 1, b: 2, c: 3, d: { a: [1, 2, 3], b: 2, c: 3 } };
-    assert.strictEqual(jp.nodes(obj, "$.*").length, 4);
-    assert.strictEqual(jp.nodes(obj, "$.*.*").length, 3);
-    assert.strictEqual(jp.nodes(obj, "$..*.*").length, 6);
-    assert.strictEqual(jp.nodes(obj, "$..*").length, 10);
-    assert.strictEqual(jp.nodes(obj, "$..[*]").length, 10);
-    assert.strictEqual(jp.nodes(obj, "$..['d']").length, 1);
-    assert.strictEqual(jp.nodes(obj, "$..d").length, 1);
-    assert.strictEqual(jp.nodes(obj, "$..[2]").length, 1);
-    assert.strictEqual(jp.nodes(obj, "$..[?(@.a[2] === 3)]").length, 1);
-    assert.strictEqual(jp.nodes(obj, "$..[?(@.a.reduce((x,y) => x+y, 0) === 6)]").length, 1);
-    //assert.strictEqual(jp.nodes(obj, "$..[(@.length - 1)]").length, 1);
-    //assert.strictEqual(jp.nodes(obj, "$..[(1 + 1)]").length, 1);
+    expect(jp.nodes(obj, "$.*").length).toEqual(4);
+    expect(jp.nodes(obj, "$.*.*").length).toEqual(3);
+    expect(jp.nodes(obj, "$..*.*").length).toEqual(6);
+    expect(jp.nodes(obj, "$..*").length).toEqual(10);
+    expect(jp.nodes(obj, "$..[*]").length).toEqual(10);
+    expect(jp.nodes(obj, "$..['d']").length).toEqual(1);
+    expect(jp.nodes(obj, "$..d").length).toEqual(1);
+    expect(jp.nodes(obj, "$..[2]").length).toEqual(1);
+    expect(jp.nodes(obj, "$..[?(@.a[2] === 3)]").length).toEqual(1);
+    expect(jp.nodes(obj, "$..[?(@.a.reduce((x,y) => x+y, 0) === 6)]").length).toEqual(1);
+    //expect(jp.nodes(obj, "$..[(@.length - 1)]").length).toEqual( 1);
+    //expect(jp.nodes(obj, "$..[(1 + 1)]").length).toEqual( 1);
   });
 
   it("round trip identity", () => {
     const roundTrips = (s: string) => expect(roundTrip(s)).toEqual(s);
-    roundTrips("$['asd']['qwe'][1]['zxc']");
-    roundTrips("$[1][42]['asd qwe']");
-    roundTrips("$[1]");
+    roundTrips("$.asd.qwe[1].zxc");
+    roundTrips('$[1][42]["asd qwe"]');
+    roundTrips('$[1]["1"]');
   });
 
   it("accept number in paths", () => {
     expect(jp.stringify(["foo", 123 as any, "other"])).toEqual("$['foo'][123]['other']");
   });
 
-  xit("round trip simplification", () => {
-    assert.equal(roundTrip('$["definitely"]["add"]["more"]["cowbell"]'), "$.definitely.add.more.cowbell");
-    assert.equal(roundTrip('$[1]["even"]["more cowbell"]'), '$[1].even["more cowbell"]');
+  it("round trip simplification", () => {
+    expect(roundTrip('$["definitely"]["add"]["more"]["cowbell"]')).toEqual("$.definitely.add.more.cowbell");
+    expect(roundTrip('$[1]["even"]["more cowbell"]')).toEqual('$[1].even["more cowbell"]');
   });
 });

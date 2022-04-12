@@ -4,7 +4,7 @@ info: !Info
   title: Operation where there is a custom Content-Type parameter.
 schemas: !Schemas 
   booleans:
-    - !BooleanSchema &ref_5
+    - !BooleanSchema &ref_6
       type: boolean
       language: !Languages 
         default:
@@ -35,7 +35,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
 globalParameters:
-  - !Parameter &ref_6
+  - !Parameter &ref_7
     schema: *ref_0
     clientDefaultValue: ''
     implementation: Client
@@ -56,11 +56,12 @@ operationGroups:
     $key: ''
     operations:
       - !Operation 
+        operationId: postWithCustomContentType
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_6
+          - *ref_7
           - !Parameter &ref_2
             schema: *ref_1
             implementation: Method
@@ -73,8 +74,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-        requests:
-          - !Request 
+        requestMediaTypes:
+          application/json: !Request &ref_5
             parameters:
               - !Parameter &ref_4
                 schema: *ref_3
@@ -102,11 +103,13 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_5
         signatureParameters:
           - *ref_2
         responses:
           - !SchemaResponse 
-            schema: *ref_5
+            schema: *ref_6
             language: !Languages 
               default:
                 name: ''
@@ -130,6 +133,7 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: false
+  schemes: []
 language: !Languages 
   default:
     name: ''

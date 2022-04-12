@@ -3,16 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { serialize } from "@azure-tools/codegen";
-import { Host, startSession } from "@autorest/extension-base";
 import { codeModelSchema, CodeModel } from "@autorest/codemodel";
+import { AutorestExtensionHost, startSession } from "@autorest/extension-base";
+import { serialize } from "@azure-tools/codegen";
 import { Grouper } from "./grouper";
 
-export async function processRequest(host: Host) {
-  const debug = (await host.GetValue("debug")) || false;
+export async function processRequest(host: AutorestExtensionHost) {
+  const debug = (await host.getValue("debug")) || false;
 
   try {
-    const session = await startSession<CodeModel>(host, {}, codeModelSchema);
+    const session = await startSession<CodeModel>(host, codeModelSchema);
     const options = <any>await session.getValue("modelerfour", {});
 
     // process
@@ -23,17 +23,25 @@ export async function processRequest(host: Host) {
 
     // output the model to the pipeline
     if (options["emit-yaml-tags"] !== false) {
-      host.WriteFile("code-model-v4.yaml", serialize(result, codeModelSchema), undefined, "code-model-v4");
+      host.writeFile({
+        filename: "code-model-v4.yaml",
+        content: serialize(result, codeModelSchema),
+        artifactType: "code-model-v4",
+      });
     }
 
     if (options["emit-yaml-tags"] !== true) {
-      host.WriteFile("code-model-v4-no-tags.yaml", serialize(result), undefined, "code-model-v4-no-tags");
+      host.writeFile({
+        filename: "code-model-v4-no-tags.yaml",
+        content: serialize(result),
+        artifactType: "code-model-v4-no-tags",
+      });
     }
-  } catch (E) {
+  } catch (error: any) {
     if (debug) {
       // eslint-disable-next-line no-console
-      console.error(`${__filename} - FAILURE  ${JSON.stringify(E)} ${E.stack}`);
+      console.error(`${__filename} - FAILURE  ${JSON.stringify(error)} ${error.stack}`);
     }
-    throw E;
+    throw error;
   }
 }

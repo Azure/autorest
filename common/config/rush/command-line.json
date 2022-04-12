@@ -12,21 +12,28 @@
   "commands": [
     {
       "commandKind": "global",
-      "name": "set-versions",
+      "name": "regen-codemodel",
       "summary": "set the patch version in the package.json files",
-      "shellCommand": "node .scripts/set-versions.js"
+      "shellCommand": "node ./packages/libs/codemodel/.scripts/generate-schema.js"
     },
     {
       "commandKind": "global",
-      "name": "reset-versions",
-      "summary": "reset the patch version in the package.json files to .0",
-      "shellCommand": "node .scripts/set-versions.js --reset"
+      "safeForSimultaneousRushProcesses": true,
+      "name": "watch",
+      "summary": "(CUSTOM) Runs TypeScript compiler in watch mode on all projects.",
+      "shellCommand": "node eng/scripts/watch.js"
     },
     {
       "commandKind": "global",
-      "name": "sync-versions",
-      "summary": "sync versions of sibling projects",
-      "shellCommand": "node .scripts/sync-versions.js"
+      "name": "format",
+      "summary": "(CUSTOM) Formats all code with Prettier.",
+      "shellCommand": "node eng/scripts/format.js"
+    },
+    {
+      "commandKind": "global",
+      "name": "check-format",
+      "summary": "(CUSTOM) Checks formatting of all code with with Prettier.",
+      "shellCommand": "node eng/scripts/check-format.js"
     },
     {
       "commandKind": "bulk",

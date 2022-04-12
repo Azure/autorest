@@ -1,22 +1,22 @@
 ---
-swagger: '3.0'
+swagger: "3.0"
 info:
   title: Pet Client
   description: Example service client that also manages pets
 host: localhost:3000
 schemes:
-- http
+  - http
 consumes:
-- application/json
+  - application/json
 produces:
-- application/json
+  - application/json
 paths:
   "/pets":
     get:
       operationId: getDog
       description: Get a dog
       responses:
-        '200':
+        "200":
           description: A 200 OK Dog
           schema:
             "$ref": "#/definitions/Dog"
@@ -28,14 +28,14 @@ paths:
       operationId: putCat
       description: Put a cat onto our servers
       parameters:
-      - name: cat
-        in: body
-        description: Cat
-        schema:
-          "$ref": "#/definitions/Cat"
-        required: true
+        - name: cat
+          in: body
+          description: Cat
+          schema:
+            "$ref": "#/definitions/Cat"
+          required: true
       responses:
-        '200':
+        "200":
           description: Received correct cat
           schema:
             type: string
@@ -43,14 +43,14 @@ paths:
       operationId: postKitten
       description: Post a kitten onto our servers
       parameters:
-      - name: kitten
-        in: body
-        description: Kitten
-        schema:
-          "$ref": "#/definitions/Kitten"
-        required: true
+        - name: kitten
+          in: body
+          description: Kitten
+          schema:
+            "$ref": "#/definitions/Kitten"
+          required: true
       responses:
-        '200':
+        "200":
           description: Received correct kitten
           schema:
             type: string
@@ -66,7 +66,7 @@ definitions:
   Dog:
     type: object
     required:
-    - name
+      - name
     properties:
       name:
         type: string
@@ -81,7 +81,7 @@ definitions:
         type: boolean
   Kitten:
     allOf:
-    - "$ref": "#/definitions/Cat"
+      - "$ref": "#/definitions/Cat"
     type: object
     properties:
       eatsMiceYet:

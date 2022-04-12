@@ -57,6 +57,7 @@ operationGroups:
     $key: dictionary
     operations:
       - !Operation 
+        operationId: dictionary_getDictionaryValid
         apiVersions:
           - !ApiVersion 
             version: test-0.1
@@ -99,6 +100,7 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: false
+  schemes: []
 language: !Languages 
   default:
     name: ''

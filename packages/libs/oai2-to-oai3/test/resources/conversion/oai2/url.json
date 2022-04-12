@@ -6,26 +6,20 @@
     "description": "Test Infrastructure for AutoRest"
   },
   "host": "localhost:3000",
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/paths/bool/true/{boolPath}": {
       "get": {
         "operationId": "paths_getBooleanTrue",
         "description": "Get true Boolean value on path",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "boolPath",
             "in": "path",
             "description": "true boolean value",
             "type": "boolean",
-            "enum": [
-              true
-            ],
+            "enum": [true],
             "required": true
           }
         ],
@@ -40,30 +34,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/bool/false/{boolPath}": {
       "get": {
         "operationId": "paths_getBooleanFalse",
         "description": "Get false Boolean value on path",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "boolPath",
             "in": "path",
             "description": "false boolean value",
             "type": "boolean",
-            "enum": [
-              false
-            ],
+            "enum": [false],
             "required": true
           }
         ],
@@ -78,30 +64,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/int/1000000/{intPath}": {
       "get": {
         "operationId": "paths_getIntOneMillion",
         "description": "Get '1000000' integer value",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "intPath",
             "in": "path",
             "description": "'1000000' integer value",
             "type": "integer",
-            "enum": [
-              1000000
-            ],
+            "enum": [1000000],
             "required": true
           }
         ],
@@ -116,30 +94,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/int/-1000000/{intPath}": {
       "get": {
         "operationId": "paths_getIntNegativeOneMillion",
         "description": "Get '-1000000' integer value",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "intPath",
             "in": "path",
             "description": "'-1000000' integer value",
             "type": "integer",
-            "enum": [
-              -1000000
-            ],
+            "enum": [-1000000],
             "required": true
           }
         ],
@@ -154,21 +124,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/long/10000000000/{longPath}": {
       "get": {
         "operationId": "paths_getTenBillion",
         "description": "Get '10000000000' 64 bit integer value",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "longPath",
@@ -176,9 +140,7 @@
             "description": "'10000000000' 64 bit integer value",
             "type": "integer",
             "format": "int64",
-            "enum": [
-              10000000000
-            ],
+            "enum": [10000000000],
             "required": true
           }
         ],
@@ -193,21 +155,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/long/-10000000000/{longPath}": {
       "get": {
         "operationId": "paths_getNegativeTenBillion",
         "description": "Get '-10000000000' 64 bit integer value",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "longPath",
@@ -215,9 +171,7 @@
             "description": "'-10000000000' 64 bit integer value",
             "type": "integer",
             "format": "int64",
-            "enum": [
-              -10000000000
-            ],
+            "enum": [-10000000000],
             "required": true
           }
         ],
@@ -232,30 +186,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/float/1.034E+20/{floatPath}": {
       "get": {
         "operationId": "paths_floatScientificPositive",
         "description": "Get '1.034E+20' numeric value",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "floatPath",
             "in": "path",
             "description": "'1.034E+20'numeric value",
             "type": "number",
-            "enum": [
-              103400000000000000000
-            ],
+            "enum": [103400000000000000000],
             "required": true
           }
         ],
@@ -270,30 +216,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/float/-1.034E-20/{floatPath}": {
       "get": {
         "operationId": "paths_floatScientificNegative",
         "description": "Get '-1.034E-20' numeric value",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "floatPath",
             "in": "path",
             "description": "'-1.034E-20'numeric value",
             "type": "number",
-            "enum": [
-              -1.034e-20
-            ],
+            "enum": [-1.034e-20],
             "required": true
           }
         ],
@@ -308,21 +246,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/double/9999999.999/{doublePath}": {
       "get": {
         "operationId": "paths_doubleDecimalPositive",
         "description": "Get '9999999.999' numeric value",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "doublePath",
@@ -330,9 +262,7 @@
             "description": "'9999999.999'numeric value",
             "type": "number",
             "format": "double",
-            "enum": [
-              9999999.999
-            ],
+            "enum": [9999999.999],
             "required": true
           }
         ],
@@ -347,21 +277,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/double/-9999999.999/{doublePath}": {
       "get": {
         "operationId": "paths_doubleDecimalNegative",
         "description": "Get '-9999999.999' numeric value",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "doublePath",
@@ -369,9 +293,7 @@
             "description": "'-9999999.999'numeric value",
             "type": "number",
             "format": "double",
-            "enum": [
-              -9999999.999
-            ],
+            "enum": [-9999999.999],
             "required": true
           }
         ],
@@ -386,30 +308,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/string/unicode/{stringPath}": {
       "get": {
         "operationId": "paths_stringUnicode",
         "description": "Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "stringPath",
             "in": "path",
             "description": "'啊齄丂狛狜隣郎隣兀﨩'multi-byte string value",
             "type": "string",
-            "enum": [
-              "啊齄丂狛狜隣郎隣兀﨩"
-            ],
+            "enum": ["啊齄丂狛狜隣郎隣兀﨩"],
             "required": true
           }
         ],
@@ -424,30 +338,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}": {
       "get": {
         "operationId": "paths_stringUrlEncoded",
         "description": "Get 'begin!*'();:@ &=+$,/?#[]end",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "stringPath",
             "in": "path",
             "description": "'begin!*'();:@ &=+$,/?#[]end' url encoded string value",
             "type": "string",
-            "enum": [
-              "begin!*'();:@ &=+$,/?#[]end"
-            ],
+            "enum": ["begin!*'();:@ &=+$,/?#[]end"],
             "required": true
           }
         ],
@@ -462,30 +368,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/string/empty/{stringPath}": {
       "get": {
         "operationId": "paths_stringEmpty",
         "description": "Get ''",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "stringPath",
             "in": "path",
             "description": "'' string value",
             "type": "string",
-            "enum": [
-              ""
-            ],
+            "enum": [""],
             "required": true
           }
         ],
@@ -500,21 +398,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/string/null/{stringPath}": {
       "get": {
         "operationId": "paths_stringNull",
         "description": "Get null (should throw)",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "stringPath",
@@ -535,32 +427,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/enum/green%20color/{enumPath}": {
       "get": {
         "operationId": "paths_enumValid",
         "description": "Get using uri with 'green color' in path parameter",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "enumPath",
             "in": "path",
             "description": "send the value green",
             "type": "string",
-            "enum": [
-              "red color",
-              "green color",
-              "blue color"
-            ],
+            "enum": ["red color", "green color", "blue color"],
             "x-ms-enum": {
               "name": "UriColor"
             },
@@ -578,32 +460,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/string/null/{enumPath}": {
       "get": {
         "operationId": "paths_enumNull",
         "description": "Get null (should throw on the client before the request is sent on wire)",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "enumPath",
             "in": "path",
             "type": "string",
             "description": "send null should throw",
-            "enum": [
-              "red color",
-              "green color",
-              "blue color"
-            ],
+            "enum": ["red color", "green color", "blue color"],
             "x-ms-enum": {
               "name": "UriColor"
             },
@@ -621,21 +493,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/byte/multibyte/{bytePath}": {
       "get": {
         "operationId": "paths_byteMultiByte",
         "description": "Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "bytePath",
@@ -657,21 +523,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/byte/empty/{bytePath}": {
       "get": {
         "operationId": "paths_byteEmpty",
         "description": "Get '' as byte array",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "bytePath",
@@ -679,9 +539,7 @@
             "description": "'' as byte array",
             "type": "string",
             "format": "byte",
-            "enum": [
-              ""
-            ],
+            "enum": [""],
             "required": true
           }
         ],
@@ -696,21 +554,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/byte/null/{bytePath}": {
       "get": {
         "operationId": "paths_byteNull",
         "description": "Get null as byte array (should throw)",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "bytePath",
@@ -732,21 +584,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/date/2012-01-01/{datePath}": {
       "get": {
         "operationId": "paths_DateValid",
         "description": "Get '2012-01-01' as date",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "datePath",
@@ -754,9 +600,7 @@
             "description": "'2012-01-01' as date",
             "type": "string",
             "format": "date",
-            "enum": [
-              "2012-01-01"
-            ],
+            "enum": ["2012-01-01"],
             "required": true
           }
         ],
@@ -771,21 +615,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/date/null/{datePath}": {
       "get": {
         "operationId": "paths_DateNull",
         "description": "Get null as date - this should throw or be unusable on the client side, depending on date representation",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "datePath",
@@ -807,21 +645,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}": {
       "get": {
         "operationId": "paths_DateTimeValid",
         "description": "Get '2012-01-01T01:01:01Z' as date-time",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "dateTimePath",
@@ -829,9 +661,7 @@
             "description": "'2012-01-01T01:01:01Z' as date-time",
             "type": "string",
             "format": "date-time",
-            "enum": [
-              "2012-01-01T01:01:01Z"
-            ],
+            "enum": ["2012-01-01T01:01:01Z"],
             "required": true
           }
         ],
@@ -846,21 +676,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/datetime/null/{dateTimePath}": {
       "get": {
         "operationId": "paths_DateTimeNull",
         "description": "Get null as date-time, should be disallowed or throw depending on representation of date-time",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "dateTimePath",
@@ -882,21 +706,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/string/bG9yZW0/{base64UrlPath}": {
       "get": {
         "operationId": "paths_base64Url",
         "description": "Get 'lorem' encoded value as 'bG9yZW0' (base64url)",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "base64UrlPath",
@@ -918,21 +736,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}": {
       "get": {
         "operationId": "paths_ArrayCsvInPath",
         "description": "Get an array of string ['ArrayPath1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "arrayPath",
@@ -957,21 +769,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/paths/int/1460505600/{unixTimeUrlPath}": {
       "get": {
         "operationId": "paths_unixTimeUrl",
         "description": "Get the date 2016-04-13 encoded value as '1460505600' (Unix time)",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "unixTimeUrlPath",
@@ -993,30 +799,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/bool/true": {
       "get": {
         "operationId": "queries_getBooleanTrue",
         "description": "Get true Boolean value on path",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "boolQuery",
             "in": "query",
             "description": "true boolean value",
             "type": "boolean",
-            "enum": [
-              true
-            ],
+            "enum": [true],
             "required": true
           }
         ],
@@ -1031,30 +829,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/bool/false": {
       "get": {
         "operationId": "queries_getBooleanFalse",
         "description": "Get false Boolean value on path",
-        "tags": [
-          "Path Operations"
-        ],
+        "tags": ["Path Operations"],
         "parameters": [
           {
             "name": "boolQuery",
             "in": "query",
             "description": "false boolean value",
             "type": "boolean",
-            "enum": [
-              false
-            ],
+            "enum": [false],
             "required": true
           }
         ],
@@ -1069,21 +859,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/bool/null": {
       "get": {
         "operationId": "queries_getBooleanNull",
         "description": "Get null Boolean value on query (query string should be absent)",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "boolQuery",
@@ -1103,30 +887,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/int/1000000": {
       "get": {
         "operationId": "queries_getIntOneMillion",
         "description": "Get '1000000' integer value",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "intQuery",
             "in": "query",
             "description": "'1000000' integer value",
             "type": "integer",
-            "enum": [
-              1000000
-            ],
+            "enum": [1000000],
             "required": true
           }
         ],
@@ -1141,30 +917,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/int/-1000000": {
       "get": {
         "operationId": "queries_getIntNegativeOneMillion",
         "description": "Get '-1000000' integer value",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "intQuery",
             "in": "query",
             "description": "'-1000000' integer value",
             "type": "integer",
-            "enum": [
-              -1000000
-            ],
+            "enum": [-1000000],
             "required": true
           }
         ],
@@ -1179,21 +947,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/int/null": {
       "get": {
         "operationId": "queries_getIntNull",
         "description": "Get null integer value (no query parameter)",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "intQuery",
@@ -1213,21 +975,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/long/10000000000": {
       "get": {
         "operationId": "queries_getTenBillion",
         "description": "Get '10000000000' 64 bit integer value",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "longQuery",
@@ -1235,9 +991,7 @@
             "description": "'10000000000' 64 bit integer value",
             "type": "integer",
             "format": "int64",
-            "enum": [
-              10000000000
-            ],
+            "enum": [10000000000],
             "required": true
           }
         ],
@@ -1252,21 +1006,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/long/-10000000000": {
       "get": {
         "operationId": "queries_getNegativeTenBillion",
         "description": "Get '-10000000000' 64 bit integer value",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "longQuery",
@@ -1274,9 +1022,7 @@
             "description": "'-10000000000' 64 bit integer value",
             "type": "integer",
             "format": "int64",
-            "enum": [
-              -10000000000
-            ],
+            "enum": [-10000000000],
             "required": true
           }
         ],
@@ -1291,21 +1037,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/long/null": {
       "get": {
         "operationId": "queries_getLongNull",
         "description": "Get 'null 64 bit integer value (no query param in uri)",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "longQuery",
@@ -1326,30 +1066,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/float/1.034E+20": {
       "get": {
         "operationId": "queries_floatScientificPositive",
         "description": "Get '1.034E+20' numeric value",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "floatQuery",
             "in": "query",
             "description": "'1.034E+20'numeric value",
             "type": "number",
-            "enum": [
-              103400000000000000000
-            ],
+            "enum": [103400000000000000000],
             "required": true
           }
         ],
@@ -1364,30 +1096,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/float/-1.034E-20": {
       "get": {
         "operationId": "queries_floatScientificNegative",
         "description": "Get '-1.034E-20' numeric value",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "floatQuery",
             "in": "query",
             "description": "'-1.034E-20'numeric value",
             "type": "number",
-            "enum": [
-              -1.034e-20
-            ],
+            "enum": [-1.034e-20],
             "required": true
           }
         ],
@@ -1402,21 +1126,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/float/null": {
       "get": {
         "operationId": "queries_floatNull",
         "description": "Get null numeric value (no query parameter)",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "floatQuery",
@@ -1436,21 +1154,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/double/9999999.999": {
       "get": {
         "operationId": "queries_doubleDecimalPositive",
         "description": "Get '9999999.999' numeric value",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "doubleQuery",
@@ -1458,9 +1170,7 @@
             "description": "'9999999.999'numeric value",
             "type": "number",
             "format": "double",
-            "enum": [
-              9999999.999
-            ],
+            "enum": [9999999.999],
             "required": true
           }
         ],
@@ -1475,21 +1185,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/double/-9999999.999": {
       "get": {
         "operationId": "queries_doubleDecimalNegative",
         "description": "Get '-9999999.999' numeric value",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "doubleQuery",
@@ -1497,9 +1201,7 @@
             "description": "'-9999999.999'numeric value",
             "type": "number",
             "format": "double",
-            "enum": [
-              -9999999.999
-            ],
+            "enum": [-9999999.999],
             "required": true
           }
         ],
@@ -1514,21 +1216,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/double/null": {
       "get": {
         "operationId": "queries_doubleNull",
         "description": "Get null numeric value (no query parameter)",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "doubleQuery",
@@ -1549,30 +1245,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/string/unicode/": {
       "get": {
         "operationId": "queries_stringUnicode",
         "description": "Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "stringQuery",
             "in": "query",
             "description": "'啊齄丂狛狜隣郎隣兀﨩'multi-byte string value",
             "type": "string",
-            "enum": [
-              "啊齄丂狛狜隣郎隣兀﨩"
-            ],
+            "enum": ["啊齄丂狛狜隣郎隣兀﨩"],
             "required": true
           }
         ],
@@ -1587,30 +1275,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend": {
       "get": {
         "operationId": "queries_stringUrlEncoded",
         "description": "Get 'begin!*'();:@ &=+$,/?#[]end",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "stringQuery",
             "in": "query",
             "description": "'begin!*'();:@ &=+$,/?#[]end' url encoded string value",
             "type": "string",
-            "enum": [
-              "begin!*'();:@ &=+$,/?#[]end"
-            ],
+            "enum": ["begin!*'();:@ &=+$,/?#[]end"],
             "required": true
           }
         ],
@@ -1625,30 +1305,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/string/empty": {
       "get": {
         "operationId": "queries_stringEmpty",
         "description": "Get ''",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "stringQuery",
             "in": "query",
             "description": "'' string value",
             "type": "string",
-            "enum": [
-              ""
-            ],
+            "enum": [""],
             "required": true
           }
         ],
@@ -1663,21 +1335,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/string/null": {
       "get": {
         "operationId": "queries_stringNull",
         "description": "Get null (no query parameter in url)",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "stringQuery",
@@ -1697,32 +1363,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/enum/green%20color": {
       "get": {
         "operationId": "queries_enumValid",
         "description": "Get using uri with query parameter 'green color'",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "enumQuery",
             "in": "query",
             "description": "'green color' enum value",
             "type": "string",
-            "enum": [
-              "red color",
-              "green color",
-              "blue color"
-            ],
+            "enum": ["red color", "green color", "blue color"],
             "x-ms-enum": {
               "name": "UriColor"
             }
@@ -1739,32 +1395,22 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/enum/null": {
       "get": {
         "operationId": "queries_enumNull",
         "description": "Get null (no query parameter in url)",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "enumQuery",
             "in": "query",
             "description": "null string value",
             "type": "string",
-            "enum": [
-              "red color",
-              "green color",
-              "blue color"
-            ],
+            "enum": ["red color", "green color", "blue color"],
             "x-ms-enum": {
               "name": "UriColor"
             }
@@ -1781,21 +1427,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/byte/multibyte": {
       "get": {
         "operationId": "queries_byteMultiByte",
         "description": "Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "byteQuery",
@@ -1816,21 +1456,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/byte/empty": {
       "get": {
         "operationId": "queries_byteEmpty",
         "description": "Get '' as byte array",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "byteQuery",
@@ -1838,9 +1472,7 @@
             "description": "'' as byte array",
             "type": "string",
             "format": "byte",
-            "enum": [
-              ""
-            ],
+            "enum": [""],
             "required": true
           }
         ],
@@ -1855,21 +1487,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/byte/null": {
       "get": {
         "operationId": "queries_byteNull",
         "description": "Get null as byte array (no query parameters in uri)",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "byteQuery",
@@ -1890,21 +1516,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/date/2012-01-01": {
       "get": {
         "operationId": "queries_DateValid",
         "description": "Get '2012-01-01' as date",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "dateQuery",
@@ -1912,9 +1532,7 @@
             "description": "'2012-01-01' as date",
             "type": "string",
             "format": "date",
-            "enum": [
-              "2012-01-01"
-            ],
+            "enum": ["2012-01-01"],
             "required": true
           }
         ],
@@ -1929,21 +1547,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/date/null": {
       "get": {
         "operationId": "queries_DateNull",
         "description": "Get null as date - this should result in no query parameters in uri",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "dateQuery",
@@ -1964,21 +1576,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/datetime/2012-01-01T01%3A01%3A01Z": {
       "get": {
         "operationId": "queries_DateTimeValid",
         "description": "Get '2012-01-01T01:01:01Z' as date-time",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "dateTimeQuery",
@@ -1986,9 +1592,7 @@
             "description": "'2012-01-01T01:01:01Z' as date-time",
             "type": "string",
             "format": "date-time",
-            "enum": [
-              "2012-01-01T01:01:01Z"
-            ],
+            "enum": ["2012-01-01T01:01:01Z"],
             "required": true
           }
         ],
@@ -2003,21 +1607,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/datetime/null": {
       "get": {
         "operationId": "queries_DateTimeNull",
         "description": "Get null as date-time, should result in no query parameters in uri",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "dateTimeQuery",
@@ -2038,21 +1636,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/array/csv/string/valid": {
       "get": {
         "operationId": "queries_ArrayStringCsvValid",
         "description": "Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the csv-array format",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "arrayQuery",
@@ -2076,21 +1668,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/array/csv/string/null": {
       "get": {
         "operationId": "queries_ArrayStringCsvNull",
         "description": "Get a null array of string using the csv-array format",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "arrayQuery",
@@ -2114,21 +1700,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/array/csv/string/empty": {
       "get": {
         "operationId": "queries_ArrayStringCsvEmpty",
         "description": "Get an empty array [] of string using the csv-array format",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "arrayQuery",
@@ -2152,21 +1732,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/array/ssv/string/valid": {
       "get": {
         "operationId": "queries_ArrayStringSsvValid",
         "description": "Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the ssv-array format",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "arrayQuery",
@@ -2190,21 +1764,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/array/tsv/string/valid": {
       "get": {
         "operationId": "queries_ArrayStringTsvValid",
         "description": "Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the tsv-array format",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "arrayQuery",
@@ -2228,21 +1796,15 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/queries/array/pipes/string/valid": {
       "get": {
         "operationId": "queries_ArrayStringPipesValid",
         "description": "Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the pipes-array format",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "arrayQuery",
@@ -2266,12 +1828,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery": {
@@ -2299,9 +1857,7 @@
       "get": {
         "operationId": "pathItems_getAllWithValues",
         "description": "send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "localStringPath",
@@ -2328,12 +1884,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery": {
@@ -2361,9 +1913,7 @@
       "get": {
         "operationId": "pathItems_getGlobalQueryNull",
         "description": "send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "localStringPath",
@@ -2390,12 +1940,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null": {
@@ -2423,9 +1969,7 @@
       "get": {
         "operationId": "pathItems_getGlobalAndLocalQueryNull",
         "description": "send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "localStringPath",
@@ -2452,12 +1996,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null": {
@@ -2485,9 +2025,7 @@
       "get": {
         "operationId": "pathItems_getLocalPathItemQueryNull",
         "description": "send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "localStringPath",
@@ -2514,12 +2052,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     }
   },

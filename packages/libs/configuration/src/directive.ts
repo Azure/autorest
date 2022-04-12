@@ -6,25 +6,27 @@ import { arrayOf } from "./utils";
 const safeEval = createSandbox();
 
 export interface Directive {
-  "from"?: string[] | string;
-  "where"?: string[] | string;
-  "reason"?: string;
+  from?: string[] | string;
+  where?: string[] | string;
+  reason?: string[];
 
   // one of:
-  "suppress"?: string[] | string;
-  "set"?: string[] | string;
-  "transform"?: string[] | string;
+  suppress?: string[] | string;
+  set?: string[] | string;
+  transform?: string[] | string;
   "text-transform"?: string[] | string;
-  "test"?: string[] | string;
+  test?: string[] | string;
+  debug?: boolean;
 }
 
 export class ResolvedDirective {
   from: string[];
   where: string[];
-  reason?: string;
+  reason?: string[];
   suppress: string[];
   transform: string[];
   test: string[];
+  debug: boolean;
 
   constructor(directive: Directive) {
     // copy untyped content over
@@ -37,6 +39,11 @@ export class ResolvedDirective {
     this.suppress = arrayOf(directive["suppress"]);
     this.transform = arrayOf(directive["transform"] || directive["text-transform"]);
     this.test = arrayOf(directive["test"]);
+    this.debug = directive.debug ?? false;
+  }
+
+  public get name() {
+    return `${this.from} @ ${this.where}`;
   }
 }
 

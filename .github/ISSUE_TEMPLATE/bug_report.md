@@ -1,15 +1,20 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: ''
+title: ""
 labels: Bug
-assignees: ''
-
+assignees: ""
 ---
 
+**Before filling a bug**
+
+- [ ] have you checked the [faq](https://github.com/Azure/autorest/tree/main/docs/faq.md) for known issues.
+- [ ] have you checked existing issues
+
 **Describe the bug**
+
 ```
-Please provide as much information as you can. This would be: 
+Please provide as much information as you can. This would be:
 - OpenAPI files having the issues
 - Autorest command used
 ```

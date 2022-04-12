@@ -1,113 +1,14 @@
+/* eslint-disable jest/no-standalone-expect */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
+import assert from "assert";
 import { CodeModel, DictionarySchema, HttpHeader, Operation, Parameter } from "@autorest/codemodel";
-import { HttpOperation, JsonType, ParameterLocation, RequestBody } from "@azure-tools/openapi";
-import { addOperation, createTestSpec, findByName } from "../utils";
-import { runModeler } from "./modelerfour-utils";
+import { JsonType, ParameterLocation } from "@azure-tools/openapi";
 import * as oai3 from "@azure-tools/openapi";
+import { addOperation, createTestSpec, findByName } from "../utils";
+import { runModeler, runModelerWithOperation } from "./modelerfour-utils";
 
 describe("Modelerfour.Request", () => {
-  describe("Body", () => {
-    describe("Required attribute", () => {
-      const runModelerWithBody = async (body: RequestBody) => {
-        const spec = createTestSpec();
-
-        addOperation(spec, "/test", {
-          post: {
-            requestBody: {
-              ...body,
-            },
-          },
-        });
-
-        const codeModel = await runModeler(spec);
-        const parameter = codeModel.operationGroups[0]?.operations[0]?.requests?.[0]?.parameters?.[0];
-
-        expect(parameter).not.toBeNull();
-        return parameter;
-      };
-
-      const defaultBody = {
-        content: {
-          "application/octet-stream": {
-            schema: {
-              type: JsonType.Object,
-              format: "file",
-            },
-          },
-        },
-      };
-
-      it("mark body as required if required: true", async () => {
-        const parameter = await runModelerWithBody({ ...defaultBody, required: true });
-        expect(parameter?.required).toBe(true);
-      });
-
-      it("mark body as not required if required: false", async () => {
-        const parameter = await runModelerWithBody({ ...defaultBody, required: true });
-        expect(parameter?.required).toBe(true);
-      });
-
-      it("mark body as not required by default", async () => {
-        const parameter = await runModelerWithBody(defaultBody);
-        expect(parameter?.required).toBe(undefined);
-      });
-    });
-  });
-
-  describe("multipart/form-data", () => {
-    let parameters: Parameter[] | undefined;
-
-    beforeEach(async () => {
-      const spec = createTestSpec();
-      const operation: HttpOperation = {
-        requestBody: {
-          content: {
-            "multipart/form-data": {
-              schema: {
-                type: JsonType.Object,
-                properties: {
-                  id: {
-                    type: JsonType.String,
-                  },
-                  address: {
-                    type: JsonType.String,
-                  },
-                },
-              },
-            },
-          },
-        },
-        parameters: [{ in: ParameterLocation.Query, name: "queryParam", schema: { type: JsonType.String } }],
-        responses: { "200": { description: "Ok." } },
-      };
-
-      addOperation(spec, "/test", {
-        post: operation,
-      });
-
-      const codeModel = await runModeler(spec);
-      parameters = codeModel.operationGroups[0]?.operations[0]?.requests?.[0]?.parameters;
-      expect(parameters).not.toBeNull();
-    });
-
-    it("mark body parameter as isInMultipart", async () => {
-      const idParameter = parameters?.[0];
-      const addressParameter = parameters?.[1];
-      expect(idParameter?.language.default.name).toEqual("id");
-      expect(idParameter?.isPartialBody).toBe(true);
-      expect(addressParameter?.language.default.name).toEqual("address");
-      expect(idParameter?.isPartialBody).toBe(true);
-    });
-
-    it("doesn't mark other parameter as isInMultipart", async () => {
-      const queryParam = parameters?.[2];
-
-      expect(queryParam?.language.default.name).toEqual(queryParam);
-      expect(queryParam?.isPartialBody).toBeFalsy();
-    });
-  });
-
   describe("x-ms-header-collection-prefix headers", () => {
     let spec: oai3.Model;
 
@@ -123,10 +24,10 @@ describe("Modelerfour.Request", () => {
         description: "Has x-ms-header-collection-prefix on header",
         parameters: [
           {
-            "name": "x-ms-req-meta",
+            name: "x-ms-req-meta",
             "x-ms-client-name": "RequestHeaderWithExtension",
-            "in": "header",
-            "schema": {
+            in: "header",
+            schema: {
               type: "string",
             },
             "x-ms-parameter-location": "method",
@@ -147,7 +48,7 @@ describe("Modelerfour.Request", () => {
               "x-named-header": {
                 "x-ms-client-name": "HeaderWithExtension",
                 "x-ms-header-collection-prefix": "x-ms-res-meta",
-                "schema": {
+                schema: {
                   type: "string",
                 },
               },
@@ -163,14 +64,14 @@ describe("Modelerfour.Request", () => {
       codeModel = await runModeler(spec);
       operation = findByName("hasHeaderWithExtension", codeModel.operationGroups[0].operations)!;
       operation2 = findByName("hasHeaderWithExtension2", codeModel.operationGroups[0].operations)!;
-      expect(operation).not.toBeNull();
+      assert(operation);
     });
 
     describe("response header", () => {
       let header: HttpHeader;
       beforeEach(() => {
         header = findByName<HttpHeader>("HeaderWithExtension", operation.responses?.[0].protocol.http!.headers)!;
-        expect(header).toBeDefined();
+        assert(header);
       });
 
       it("propagates extensions to response header definitions", async () => {
@@ -205,7 +106,7 @@ describe("Modelerfour.Request", () => {
       let parameter: Parameter;
       beforeEach(() => {
         parameter = findByName("RequestHeaderWithExtension", operation.parameters)!;
-        expect(parameter).toBeDefined();
+        assert(parameter);
       });
 
       it("propagates extensions to request header definitions", async () => {
@@ -233,6 +134,104 @@ describe("Modelerfour.Request", () => {
         // It should be the exact same object
         expect(parameter.schema).toBe(parameter2.schema);
       });
+    });
+  });
+
+  describe("deprecation", () => {
+    it("doesn't set deprecated property by default", async () => {
+      const operation = await runModelerWithOperation("get", "/depreacted", {
+        responses: {},
+      });
+
+      expect(operation.deprecated).toEqual(undefined);
+    });
+
+    it("mark request as deprecated if deprecated: true", async () => {
+      const operation = await runModelerWithOperation("get", "/depreacted", {
+        deprecated: true,
+        responses: {},
+      });
+
+      expect(operation.deprecated).toEqual({});
+    });
+
+    it("mark query parameter as deprecated", async () => {
+      const operation = await runModelerWithOperation("get", "/depreacted", {
+        responses: {},
+        parameters: [
+          {
+            name: "deprecatedQueryParam",
+            in: ParameterLocation.Query,
+            schema: { type: JsonType.String },
+            deprecated: true,
+          },
+        ],
+      });
+
+      const parameter = findByName("deprecatedQueryParam", operation.parameters);
+      expect(parameter?.deprecated).toEqual({});
+    });
+
+    it("mark header parameter as deprecated", async () => {
+      const operation = await runModelerWithOperation("get", "/depreacted", {
+        responses: {},
+        parameters: [
+          {
+            name: "deprecatedHeaderParam",
+            in: ParameterLocation.Header,
+            schema: { type: JsonType.String },
+            deprecated: true,
+          },
+        ],
+      });
+
+      const parameter = findByName("deprecatedHeaderParam", operation.parameters);
+      expect(parameter?.deprecated).toEqual({});
+    });
+  });
+
+  describe("ignore headers with config", () => {
+    it("propagates extensions to request header definitions", async () => {
+      const spec = createTestSpec();
+      const operationDef = {
+        operationId: "headerToIgnore",
+        description: "Has header to ignore",
+        parameters: [
+          {
+            name: "foo",
+            in: "header",
+            schema: {
+              type: "string",
+            },
+          },
+          {
+            name: "bar",
+            in: "header",
+            schema: {
+              type: "string",
+            },
+          },
+        ],
+        responses: {
+          200: {
+            description: "Response with a header extension.",
+          },
+        },
+      };
+      addOperation(spec, "/headerToIgnore", {
+        post: operationDef,
+      });
+
+      const model = await runModeler(spec, {
+        modelerfour: {
+          "ignore-headers": ["foo"],
+        },
+      });
+      const parameters = model.operationGroups[0].operations[0].parameters;
+      assert(parameters);
+      expect(parameters).toHaveLength(2);
+      expect(parameters[1].language.default.serializedName).toEqual("bar");
+      expect(parameters[1].protocol).toEqual({ http: { in: "header" } });
     });
   });
 });

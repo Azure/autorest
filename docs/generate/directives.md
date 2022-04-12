@@ -4,7 +4,7 @@ Directives are used to tweak the generated code prior to generation, and are inc
 
 We usually recommend changing the swagger before going the directive route, but if you'd like the original swagger to remain untouched (for example, you want to rename the generated model in the Python SDK, but not in other SDKs), directives are the route for you.
 
->Stylistic note: we recommend annotating your directives in your config file with a header about what the directive is doing.
+> Stylistic note: we recommend annotating your directives in your config file with a header about what the directive is doing.
 
 ## Structure and Terminology
 
@@ -13,6 +13,7 @@ Directives consist of three parts:
 - **Location**: denoted by the field `from`, which document are we trying to transform. For swagger transformations, it's always `from: swagger-document`.
 
 - **Filter**: denoted by the field `where`, contains the criteria to select the object.
+
   - An `operation` is filtered by
     - its path in the swagger's [`paths`][paths] object AND
     - it's HTTP verb
@@ -26,11 +27,69 @@ Directives consist of three parts:
   - A `property` can be filtered by:
     - its location within its parent object
 
-- **Transform**: denoted by the field `transform`, the actions we would like to be applied on the specified objects. The list of available variables and functions can be found in [eval.ts](https://github.com/Azure/autorest/blob/master/packages/extensions/core/src/lib/pipeline/plugins/transformer/eval.ts)
+- **Transform**: denoted by the field `transform`, the actions we would like to be applied on the specified objects. The list of available variables and functions can be found in [eval.ts](https://github.com/Azure/autorest/blob/main/packages/extensions/core/src/lib/plugins/transformer/eval.ts)
+
+## Built-in Directives
+
+[See built in directives here](./built-in-directives.md)
+
+## Debug a directive
+
+### JsonPath.com
+
+To make sure the `where` clause is defined correctly you can use https://jsonpath.com to verify all the elements wanted are selected.
+Usage:
+
+1. Paste `where` clause in the `JSONPath Syntax` input
+1. Paste spec in the `Inputs` section
+1. Evaluation result should be an array of all the object that were matched with the given path.
+
+**NOTE**: The library used in this website is slightly different and there could be inconsistency for some edge cases. You can use the next [section](#debug-flag) to debug the issue and check if autorest is selecting the same elements.
+
+### `debug` flag
+
+Directive provide a `debug` field that will enable verbose logging of the directive run.
+
+Example:
+
+```yaml
+directive:
+  - from: swagger-document
+    where: $.paths
+    debug: true
+    transform: |
+      $["x-abc"] = true
+```
+
+### `$lib.log` function
+
+Along with some other available function to the transform context(See [eval.ts](https://github.com/Azure/autorest/blob/main/packages/extensions/core/src/lib/plugins/transformer/eval.ts)) `$lib.log` lets you log.
+
+```yaml
+directive:
+  - from: swagger-document
+    where: $.paths
+    transform: |
+      $lib.log($);
+      $["x-abc"] = true
+```
+
+## Use directive to permanently update inputs
+
+Directives lets you modify the input files on the fly but there might be cases where you just want to fix the input files intead of patching it JIT.
+For that you can run autorest with the `--apply-transforms-in-place`. This will take all the directives meant to be run on the Swagger 2.0 or OpenAPI 3.0 files and update the files themself.
+
+```bash
+# Apply transforms defined in the mytransforms.md config file to the openapi.yaml file.
+autorest --apply-transforms-in-place --input-file=openapi.yaml --require=./mytransforms.md
+
+# Apply transforms defined in the mytransforms.md config file to all the input files reference in the readme config.
+autorest --apply-transforms-in-place --require=./mytransforms.md ./readme.md
+```
 
 ## Directive Scenarios
 
-The following directives cover the most common tweaking scenarios for generation.
+The following directives cover the most common tweaking scenarios for generation. Most of those have a `built-in` [directive](./built-in-directives.md) helper and are shown here as examples.
 
 - [Operation Rename](#operation-rename "Operation Rename")
 - [Parameter Rename](#parameter-rename "Parameter Rename")
@@ -60,13 +119,13 @@ and you'd like to rename it from `getVirtualMachine` to `getVM`. You would refer
 As always, you use `from: swagger-document` to specify you're changing your swagger document. Finally, what you're transforming is the `"operationId"`.
 Putting this together, your directive looks like:
 
-``` yaml
+```yaml
 ### Directive renaming operation from "getVirtualMachine" to "getVM"
 directive:
-    from: swagger-document
-    where: '$.paths["/vm"].get'
-    transform: >
-        $["operationId"] = "getVM";
+  from: swagger-document
+  where: '$.paths["/vm"].get'
+  transform: >
+    $["operationId"] = "getVM";
 ```
 
 ### Parameter Rename
@@ -98,38 +157,32 @@ Referring to the parameter's location in the operation, our filter would be `whe
 so you could apply your transform to the `name` field. However, it's better to change the [`x-ms-client-name`][x_ms_client_name] field instead, since there could be
 this field defined for your parameter, and this field overrides the `name` field. This becomes
 
-``` yaml
+```yaml
 ### Directive renaming "getVirtualMachine"'s parameter "id" to "identifier".
 directive:
-    from: swagger-document
-    where: '$.paths["/vm"].get.parameters[0]'
-    transform: >
-        $["x-ms-client-name"] = "identifier";
+  from: swagger-document
+  where: '$.paths["/vm"].get.parameters[0]'
+  transform: >
+    $["x-ms-client-name"] = "identifier";
 ```
 
 #### Parameter defined in the "Parameters" section
 
 ```yaml
-...
-"parameters": {
-    "Id": {
-        "name": "id",
-        ...
-    }
-
-}
+---
+"parameters": { "Id": { "name": "id", ... } }
 ```
 
 Now, we refer to the parameters location within the swagger's `parameters` object. This changes our filter to `where: '$.parameters["Id"]'`, and leads us
 to the following directive:
 
-``` yaml
+```yaml
 ### Directive renaming "getVirtualMachine"'s parameter "id" to "identifier".
 directive:
-    from: swagger-document
-    where: '$.parameters["Id"]'
-    transform: >
-        $["x-ms-client-name"] = "identifier";
+  from: swagger-document
+  where: '$.parameters["Id"]'
+  transform: >
+    $["x-ms-client-name"] = "identifier";
 ```
 
 ### Model Rename
@@ -150,13 +203,13 @@ We have the following swagger:
 and we'd like to rename the model `VM` to `VirtualMachine`. We refer to the model with filter `where: #.definitions.VM`. Since the location we're trying to transform
 is listed as a key in the swagger dictionary and not a field, we change the model's name by adding in field [`x-ms-client-name`][x_ms_client_name]. Thus, our directive looks like
 
-``` yaml
+```yaml
 ### Directive renaming "VM" model to "VirtualMachine"
 directive:
-    from: swagger-document
-    where: '$.definitions.VM'
-    transform: >
-        $["x-ms-client-name"] = "VirtualMachine";
+  from: swagger-document
+  where: "$.definitions.VM"
+  transform: >
+    $["x-ms-client-name"] = "VirtualMachine";
 ```
 
 ### Property Rename
@@ -181,13 +234,13 @@ Let's say we want to rename the following property from `id` to `identifier`.
 We refer to the property based on its location in its parent object, giving us filter `where: #.definitions.VM.properties.id`. Similar to a [model](#model-rename "model"), we have to use
 [`x-ms-client-name`][x_ms_client_name] since there's no `name` field to change. This gives us
 
-``` yaml
+```yaml
 ### Directive renaming "id" property to "identifier"
 directive:
-    from: swagger-document
-    where: '$.definitions.VM.properties.id'
-    transform: >
-        $["x-ms-client-name"] = "identifier";
+  from: swagger-document
+  where: "$.definitions.VM.properties.id"
+  transform: >
+    $["x-ms-client-name"] = "identifier";
 ```
 
 ### Enum Value Rename
@@ -227,13 +280,13 @@ As you can see from the swagger:
 
 This gives us directive
 
-``` yaml
+```yaml
 ### Directive renaming enum AzureVM to AzureVirtualMachine
 directive:
-    from: swagger-document
-    where: '$.definitions.VM.properties.virtualMachineType.x-ms-enum.values[0]'
-    transform: >
-        $["x-ms-client-name"] = "AzureVirtualMachine";
+  from: swagger-document
+  where: "$.definitions.VM.properties.virtualMachineType.x-ms-enum.values[0]"
+  transform: >
+    $["x-ms-client-name"] = "AzureVirtualMachine";
 ```
 
 Now, we would access the enum through `VirtualMachineTypes.AzureVirtualMachine` instead of `VirtualMachineTypes.AzureVM`.
@@ -242,7 +295,7 @@ Now, we would access the enum through `VirtualMachineTypes.AzureVirtualMachine` 
 
 Changing a description is very similar whether you're changing an operation's description or a model's description etc. The only thing that varies is how to refer to the object whose description your changing. Since this is covered in the previous examples, we won't do separate sections for this. Instead, we will show you how to change a property's description, which can be easily extended to another object, i.e. an operation.
 
-Let's say we [renamed the property](#property-rename "Property Rename") from `id` to `identifier`, and we want to change all references in the  description of `id` to `identifier`:
+Let's say we [renamed the property](#property-rename "Property Rename") from `id` to `identifier`, and we want to change all references in the description of `id` to `identifier`:
 
 ```yaml
 ...
@@ -261,22 +314,24 @@ Let's say we [renamed the property](#property-rename "Property Rename") from `id
 
 We once again refer to the property's location as `where: #.definitions.VM.properties.id`, and we want to change the `description` field in the property. This gives uss
 
-``` yaml
+```yaml
 ### Directive changing references of 'id' to 'identifier' in the 'identifier' property's description
 directive:
-    from: swagger-document
-    where: '$.definitions.VM.properties.id'
-    transform: >
-        $["description"] = $["description].replace("'id'", "'identifier'");
+  from: swagger-document
+  where: "$.definitions.VM.properties.id"
+  transform: >
+    $["description"] = $["description].replace("'id'", "'identifier'");
 ```
 
 For language-specific directives, see the ones for:
+
 - [Python][python]
 
 <!-- LINKS -->
+
 [python]: https://github.com/Azure/autorest.python/blob/autorestv3/docs/generate/directives.md
 [paths]: https://swagger.io/docs/specification/paths-and-operations/
 [parameters]: https://swagger.io/docs/specification/describing-parameters/
 [components]: https://swagger.io/docs/specification/components/
-[x_ms_client_name]: https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-client-name
-[x_ms_enum]: https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-enum
+[x_ms_client_name]: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-client-name
+[x_ms_enum]: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-enum

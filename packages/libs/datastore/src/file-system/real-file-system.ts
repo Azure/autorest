@@ -1,13 +1,14 @@
-import { EnumerateFiles, ReadUri, WriteString } from "@azure-tools/uri";
-import { IFileSystem } from "./file-system";
+import { enumerateFiles, readUri, writeString } from "@azure-tools/uri";
 import * as Constants from "../constants";
+import { logger } from "../logger";
 import { UriNotFoundError } from "./errors";
+import { IFileSystem } from "./file-system";
 
 export class RealFileSystem implements IFileSystem {
   public constructor() {}
 
   public list(folderUri: string): Promise<Array<string>> {
-    return EnumerateFiles(folderUri, [Constants.DefaultConfiguration]);
+    return enumerateFiles(folderUri, [Constants.DefaultConfiguration]);
   }
 
   public async read(uri: string, headers: { [name: string]: string } = {}): Promise<string> {
@@ -15,7 +16,7 @@ export class RealFileSystem implements IFileSystem {
   }
 
   public async write(uri: string, content: string): Promise<void> {
-    return WriteString(uri, content);
+    return writeString(uri, content);
   }
 
   /**
@@ -43,12 +44,12 @@ export async function readUriWithRetries(uri: string, headers: { [name: string]:
   let tryed = 1;
   for (;;) {
     try {
-      return await ReadUri(uri, headers);
-    } catch (e) {
+      return await readUri(uri, headers);
+    } catch (e: any) {
       tryed++;
       if (isRetryableStatusCode(e.statusCode) && tryed <= MAX_RETRY_COUNT) {
         // eslint-disable-next-line no-console
-        console.error(`Failed to load uri ${uri}, trying again (${tryed}/${MAX_RETRY_COUNT})`, e);
+        logger.error(`Failed to load uri ${uri}, trying again (${tryed}/${MAX_RETRY_COUNT})`, e);
       } else {
         throw processError(uri, e);
       }

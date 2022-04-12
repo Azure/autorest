@@ -2,8 +2,8 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { JSONPath } from "jsonpath-plus";
 import { createSandbox } from "@azure-tools/codegen";
+import { JSONPath } from "jsonpath-plus";
 
 export type JsonPath = JsonPathComponent[];
 export type JsonPathComponent = string | number;
@@ -36,11 +36,11 @@ JSONPath.prototype.vm = {
 };
 
 export function parse(jsonPath: string): JsonPath {
-  return ((JSONPath as any) as JSONPathExt).toPathArray(jsonPath).slice(1);
+  return (JSONPath as any as JSONPathExt).toPathArray(jsonPath).slice(1);
 }
 
 export function stringify(jsonPath: JsonPath): string {
-  return ((JSONPath as any) as JSONPathExt).toPathString(["$", ...jsonPath]);
+  return (JSONPath as any as JSONPathExt).toPathString(["$", ...jsonPath]);
 }
 
 export function paths<T>(obj: T, jsonQuery: string): Array<JsonPath> {
@@ -123,12 +123,4 @@ export function matches(jsonQuery: string, jsonPath: JsonPath): boolean {
 
   // check that `jsonQuery` on that object returns the `leafNode`
   return nodes(obj, jsonQuery).some((res) => res.value === leafNode);
-}
-
-export function parseJsonPointer(jsonPointer: string): JsonPath {
-  return jsonPointer
-    .split("/")
-    .slice(1)
-    .map((part) => part.replace(/~1/g, "/").replace(/~0/g, "~"))
-    .filter((each) => each !== "");
 }

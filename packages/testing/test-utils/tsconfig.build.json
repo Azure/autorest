@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src"
+  },
+  "exclude": ["**/*.test.*", "test/**/*"],
+  "references": [
+    { "path": "../../libs/common/tsconfig.build.json" },
+    { "path": "../../libs/datastore/tsconfig.build.json" }
+  ]
+}

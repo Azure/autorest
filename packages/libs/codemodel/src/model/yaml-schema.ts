@@ -1,33 +1,34 @@
 import { Schema, Type, DEFAULT_SCHEMA } from "js-yaml";
-
-import { CodeModel, Security } from "./common/code-model";
-import { Metadata, CSharpLanguage, Language } from "./common/metadata";
-import { Parameter, VirtualParameter } from "./common/parameter";
-import { Property } from "./common/property";
-import { Value } from "./common/value";
-import { Operation, Request, OperationGroup } from "./common/operation";
-
-import { ChoiceSchema, ChoiceValue, SealedChoiceSchema } from "./common/schemas/choice";
+import { ApiVersion } from "./common/api-version";
 import { Aspect } from "./common/aspect";
-import { Schemas } from "./common/schemas";
+import { CodeModel } from "./common/code-model";
 import { ExternalDocumentation } from "./common/external-documentation";
 import { Contact, Info, License } from "./common/info";
-import {
-  APIKeySecurityScheme,
-  BearerHTTPSecurityScheme,
-  ImplicitOAuthFlow,
-  NonBearerHTTPSecurityScheme,
-  OAuth2SecurityScheme,
-  OAuthFlows,
-  OpenIdConnectSecurityScheme,
-  PasswordOAuthFlow,
-  AuthorizationCodeOAuthFlow,
-  ClientCredentialsFlow,
-} from "./http/security";
 import { Languages } from "./common/languages";
-
+import { Metadata, CSharpLanguage, Language } from "./common/metadata";
+import { Operation, Request, OperationGroup } from "./common/operation";
+import { Parameter, VirtualParameter } from "./common/parameter";
+import { Property } from "./common/property";
 import { Protocols } from "./common/protocols";
-import { ApiVersion } from "./common/api-version";
+import { Response, SchemaResponse, BinaryResponse } from "./common/response";
+import { Schemas } from "./common/schemas";
+import { AnySchema, AnyObjectSchema } from "./common/schemas/any";
+import { ArraySchema, ByteArraySchema } from "./common/schemas/array";
+import { BinarySchema } from "./common/schemas/binary";
+import { ChoiceSchema, ChoiceValue, SealedChoiceSchema } from "./common/schemas/choice";
+import { ConditionalValue, ConditionalSchema, SealedConditionalSchema } from "./common/schemas/conditional";
+import { ConstantValue, ConstantSchema } from "./common/schemas/constant";
+import { DictionarySchema } from "./common/schemas/dictionary";
+import { FlagSchema, FlagValue } from "./common/schemas/flag";
+import { NumberSchema } from "./common/schemas/number";
+import { GroupSchema, ObjectSchema, Discriminator, Relations, GroupProperty } from "./common/schemas/object";
+import { BooleanSchema, CharSchema } from "./common/schemas/primitive";
+import { OrSchema, XorSchema } from "./common/schemas/relationship";
+import { StringSchema, ODataQuerySchema, CredentialSchema, UriSchema, UuidSchema } from "./common/schemas/string";
+import { DurationSchema, DateTimeSchema, DateSchema, UnixTimeSchema, TimeSchema } from "./common/schemas/time";
+import { OAuth2SecurityScheme, KeySecurityScheme, Security } from "./common/security";
+import { Value } from "./common/value";
+import { AADTokenSecurityScheme, AzureKeySecurityScheme } from "./deprecated";
 import {
   HttpWithBodyRequest,
   HttpParameter,
@@ -39,20 +40,6 @@ import {
   HttpModel,
   HttpHeader,
 } from "./http/http";
-import { Response, SchemaResponse, BinaryResponse } from "./common/response";
-import { GroupSchema, ObjectSchema, Discriminator, Relations, GroupProperty } from "./common/schemas/object";
-import { FlagSchema, FlagValue } from "./common/schemas/flag";
-import { NumberSchema } from "./common/schemas/number";
-import { StringSchema, ODataQuerySchema, CredentialSchema, UriSchema, UuidSchema } from "./common/schemas/string";
-import { ArraySchema, ByteArraySchema } from "./common/schemas/array";
-import { ConstantValue, ConstantSchema } from "./common/schemas/constant";
-import { BooleanSchema, CharSchema } from "./common/schemas/primitive";
-import { DurationSchema, DateTimeSchema, DateSchema, UnixTimeSchema, TimeSchema } from "./common/schemas/time";
-import { AnySchema } from "./common/schemas/any";
-import { DictionarySchema } from "./common/schemas/dictionary";
-import { OrSchema, XorSchema } from "./common/schemas/relationship";
-import { BinarySchema } from "./common/schemas/binary";
-import { ConditionalValue, ConditionalSchema, SealedConditionalSchema } from "./common/schemas/conditional";
 
 function TypeInfo<U extends new (...args: any) => any>(type: U) {
   return new Type(`!${type.name}`, {
@@ -131,6 +118,7 @@ export const codeModelSchema = DEFAULT_SCHEMA.extend([
   TypeInfo(TimeSchema),
   TypeInfo(CharSchema),
   TypeInfo(AnySchema),
+  TypeInfo(AnyObjectSchema),
   TypeInfo(ByteArraySchema),
   TypeInfo(UnixTimeSchema),
   TypeInfo(DictionarySchema),
@@ -151,16 +139,9 @@ export const codeModelSchema = DEFAULT_SCHEMA.extend([
   TypeInfo(License),
   TypeInfo(OperationGroup),
 
-  TypeInfo(APIKeySecurityScheme),
-  TypeInfo(BearerHTTPSecurityScheme),
-  TypeInfo(ImplicitOAuthFlow),
-  TypeInfo(NonBearerHTTPSecurityScheme),
   TypeInfo(OAuth2SecurityScheme),
-  TypeInfo(OAuthFlows),
-  TypeInfo(OpenIdConnectSecurityScheme),
-  TypeInfo(PasswordOAuthFlow),
-  TypeInfo(AuthorizationCodeOAuthFlow),
-  TypeInfo(ClientCredentialsFlow),
+  TypeInfo(KeySecurityScheme),
+
   TypeInfo(Languages),
   TypeInfo(Language),
   TypeInfo(CSharpLanguage),
@@ -168,5 +149,7 @@ export const codeModelSchema = DEFAULT_SCHEMA.extend([
   TypeInfo(ApiVersion),
   TypeInfo(Metadata),
 
-  // new Type('!set', { kind: 'mapping', instanceOf: Set, represent: (o: any) => [...o], construct: (i) => new Set(i) }),
+  // Deprecated types for backward compatiblity only.
+  TypeInfo(AADTokenSecurityScheme),
+  TypeInfo(AzureKeySecurityScheme),
 ]);

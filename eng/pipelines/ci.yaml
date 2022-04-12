@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-  - master
+  - main
 
 pool:
   vmImage: "ubuntu-latest"
@@ -16,9 +16,6 @@ stages:
       - job: main
         displayName: "Build and Unit test"
         steps:
-          - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-              - template: ./templates/verify-changes.yaml
-
           - template: ./templates/build.yaml
 
           - script: npx @microsoft/rush test:ci -v
@@ -30,8 +27,17 @@ stages:
               summaryFileLocation: $(Build.SourcesDirectory)/packages/**/coverage/cobertura-coverage.xml
               reportDirectory: $(Build.SourcesDirectory)/packages/**/coverage
 
+          - script: npx @microsoft/rush check-format
+            displayName: Check formatting
+
           - script: npx @microsoft/rush lint -v
             displayName: Lint
+
+          - script: npx @microsoft/rush regen-codemodel
+            displayName: Regen codemodel schema
+
+          - script: node ./eng/scripts/check-for-changed-files.js
+            displayName: Check Git Status For Changed Files
 
           - script: |
               commitId=$(git rev-parse --short HEAD)
@@ -49,24 +55,35 @@ stages:
               - template: ./templates/create-tryit-comment.yaml
       - job: lintdocs
         displayName: Lint docs
+        continueOnError: true
         steps:
           - script: |
               sudo npm install -g markdown-link-check
               find docs -name "*.md" -print0 | xargs -0  -n1 markdown-link-check -c ./markdown-link-check-config.json
             displayName: Find
+
   - stage: regressiontests
     displayName: Regression Tests
     dependsOn: main
     jobs:
       - template: ./templates/regression-tests.yaml
         parameters:
-          name: node10
-          nodeVersion: 10.x
-      - template: ./templates/regression-tests.yaml
-        parameters:
           name: node12
           nodeVersion: 12.x
       - template: ./templates/regression-tests.yaml
+        parameters:
+          name: node14
+          nodeVersion: 14.x
+      - template: ./templates/regression-tests.yaml
+        parameters:
+          name: node16
+          nodeVersion: 16.x
+
+  - stage: smoketests
+    displayName: Smoke Tests
+    dependsOn: main
+    jobs:
+      - template: ./templates/smoke-tests.yaml
         parameters:
           name: node14
           nodeVersion: 14.x

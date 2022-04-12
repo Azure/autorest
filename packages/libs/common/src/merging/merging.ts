@@ -5,7 +5,9 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable no-prototype-builtins */
 
-import { JsonPath, Mapping, Stringify, YAMLNode, Descendants } from "@azure-tools/datastore";
+import { JsonPath, PathMapping } from "@azure-tools/datastore";
+import { walk } from "@azure-tools/json";
+import { Stringify, YamlNode, walkYamlAst } from "@azure-tools/yaml";
 
 /**
  * Merge a and b by adding new properties of b into a. It will fail if a and b have the same property and the value is different.
@@ -169,6 +171,15 @@ export function mergeOverwriteOrAppend(
     interpolationContext: options.interpolationContext ?? higherPriority,
   };
 
+  // if (higherPriority === true && typeof lowerPriority.extensions) {
+  //   console.log("Merge", higherPriority, lowerPriority);
+  // }
+
+  // Take care of the case where an option is enable via a flag `--az` and then nested config under it don't work(az.extensions)
+  if (higherPriority === true && typeof lowerPriority === "object") {
+    return lowerPriority;
+  }
+
   // scalars/arrays involved
   if (
     typeof higherPriority !== "object" ||
@@ -182,10 +193,7 @@ export function mergeOverwriteOrAppend(
   // object nodes - iterate all members
   const result: any = {};
 
-  const keys = [
-    ...new Set(Object.getOwnPropertyNames(higherPriority).concat(Object.getOwnPropertyNames(lowerPriority))),
-  ];
-  // keys = keys.filter((v, i) => { const idx = keys.indexOf(v); return idx === -1 || idx >= i; }); // distinct
+  const keys = getKeysInOrder(higherPriority, lowerPriority, computedOptions);
 
   for (const key of keys) {
     const subpath = path.concat(key);
@@ -213,6 +221,23 @@ export function mergeOverwriteOrAppend(
   return result;
 }
 
+/**
+ *
+ * @param higherPriority Higher priority object
+ * @param lowerPriority Lower priority object
+ * @param options Merge options.
+ * @returns List of unique keys used in both object in the order defined in the options.
+ */
+function getKeysInOrder(higherPriority: any, lowerPriority: any, options: MergeOptions): string[] {
+  const lowPriKeys = Object.getOwnPropertyNames(lowerPriority);
+  const highPriKeys = Object.getOwnPropertyNames(higherPriority);
+  return [
+    ...new Set(
+      options.arrayMergeStrategy === "low-pri-first" ? lowPriKeys.concat(highPriKeys) : highPriKeys.concat(lowPriKeys),
+    ),
+  ];
+}
+
 function mergeArray(
   higherPriority: unknown,
   lowerPriority: unknown,
@@ -231,15 +256,4 @@ function mergeArray(
   } else {
     return [...new Set(lowerPriorityArray.concat(higherPriority))];
   }
-}
-
-export function identitySourceMapping(sourceYamlFileName: string, sourceYamlAst: YAMLNode): Mapping[] {
-  return [...Descendants(sourceYamlAst)].map((x) => {
-    return {
-      generated: { path: x.path },
-      original: { path: x.path },
-      name: JSON.stringify(x.path),
-      source: sourceYamlFileName,
-    };
-  });
 }

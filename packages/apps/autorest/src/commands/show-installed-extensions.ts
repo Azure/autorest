@@ -2,7 +2,6 @@
 import chalk from "chalk";
 import { AutorestArgs } from "../args";
 import { extensionManager, newCorePackage, oldCorePackage } from "../autorest-as-a-service";
-import { color } from "../coloring";
 
 /**
  * Shows all the autorest extensions that are installed.
@@ -24,16 +23,15 @@ export const showInstalledExtensions = async (args: AutorestArgs): Promise<numbe
   if (args.json) {
     console.log(JSON.stringify(extensions, null, "  "));
   } else {
+    const title = `\n\n${chalk.greenBright("Showing All Installed Extensions")}\n`;
     if (table) {
       console.log(
-        color(
-          `\n\n# Showing All Installed Extensions\n\n ${chalk.underline("Type".padEnd(10))} ${chalk.underline(
-            "Extension Name".padEnd(40),
-          )} ${chalk.underline("Version".padEnd(12))} ${chalk.underline("Location")} ${table}\n\n`,
-        ),
+        `${title}\n ${chalk.underline("Type".padEnd(10))} ${chalk.underline(
+          "Extension Name".padEnd(40),
+        )} ${chalk.underline("Version".padEnd(12))} ${chalk.underline("Location")} ${table}\n\n`,
       );
     } else {
-      console.log(color("\n\n# Showing All Installed Extensions\n\n > No Extensions are currently installed.\n\n"));
+      console.log(`${title}\n ${chalk.cyan("No Extensions are currently installed.")}\n\n`);
     }
   }
   return 0;

@@ -115,7 +115,7 @@ const convertCodeBlockToYaml = <T>(code: ExtractedCodeBlock, sectionName: string
   if (result === undefined) {
     throw new Error(`Couldn't parse yaml: ${code.content}`);
   }
-  return (result as unknown) as T;
+  return result as unknown as T;
 };
 
 const extractRoutesFromTreeNode = (node: MarkdownTreeNode): MockRouteDefinition[] => {

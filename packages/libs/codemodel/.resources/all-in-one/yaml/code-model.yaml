@@ -3,6 +3,19 @@ description: the model that contains all the information required to generate a 
 $schema: http://json-schema.org/draft-07/schema#
 additionalProperties: false
 definitions:
+  AADTokenSecurityScheme:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/SecurityScheme'
+    properties:
+      scopes:
+        type: array
+        items:
+          type: string
+    required:
+      - scopes
+      - type
   APIKeySecurityScheme:
     type: object
     additionalProperties: false
@@ -19,7 +32,7 @@ definitions:
         $ref: '#/definitions/ParameterLocation'
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - in
       - name
@@ -29,6 +42,7 @@ definitions:
     description: all schema types
     enum:
       - any
+      - any-object
       - array
       - binary
       - boolean
@@ -58,6 +72,15 @@ definitions:
       - uri
       - uuid
       - xor
+  AnyObjectSchema:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/Schema'
+    required:
+      - language
+      - protocol
+      - type
   AnySchema:
     type: object
     additionalProperties: false
@@ -136,17 +159,28 @@ definitions:
         type: string
         description: an URI
       scopes:
-        $ref: '#/definitions/Dictionary<string>'
+        $ref: '#/definitions/Record<string,string>'
       tokenUrl:
         type: string
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - authorizationUrl
       - scopes
       - tokenUrl
+  AzureKeySecurityScheme:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/SecurityScheme'
+    properties:
+      headerName:
+        type: string
+    required:
+      - headerName
+      - type
   BearerHTTPSecurityScheme:
     type: object
     additionalProperties: false
@@ -165,7 +199,7 @@ definitions:
           - bearer
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - scheme
       - type
@@ -269,7 +303,7 @@ definitions:
         description: the actual value
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         description: per-language information for this value
         $ref: '#/definitions/Languages'
@@ -284,13 +318,13 @@ definitions:
         type: string
         description: an URI
       scopes:
-        $ref: '#/definitions/Dictionary<string>'
+        $ref: '#/definitions/Record<string,string>'
       tokenUrl:
         type: string
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - scopes
       - tokenUrl
@@ -306,6 +340,10 @@ definitions:
       - type
   CompoundSchemaTypes:
     type: string
+    description: |-
+      Compound schemas are used to construct complex objects or offer choices of a set of schemas.
+
+      (ie, allOf, anyOf, oneOf )
     enum:
       - or
       - xor
@@ -353,7 +391,7 @@ definitions:
         description: the actual value
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         description: per-language information for this value
         $ref: '#/definitions/Languages'
@@ -395,7 +433,8 @@ definitions:
       defaultValue:
         description: If the value isn't sent on the wire, the service will assume this
       deprecated:
-        description: deprecation information -- ie, when this aspect doesn't apply and why
+        description: Represent the deprecation information if api is deprecated.
+        default: undefined
         $ref: '#/definitions/Deprecation'
       example:
         description: example information
@@ -413,7 +452,7 @@ definitions:
         description: a short description
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         description: per-language information for Schema
         $ref: '#/definitions/Languages'
@@ -433,7 +472,7 @@ definitions:
         description: the actual constant value to use
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         description: per-language information for this value
         $ref: '#/definitions/Languages'
@@ -453,7 +492,7 @@ definitions:
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
   CredentialSchema:
     type: object
     description: a schema that represents a Credential value
@@ -509,36 +548,12 @@ definitions:
       - default
   Deprecation:
     type: object
-    description: represents  deprecation information for a given aspect
+    description: Represent information about a deprecation
     additionalProperties: false
     properties:
-      apiVersions:
-        type: array
-        description: the api versions that this deprecation is applicable to.
-        items:
-          $ref: '#/definitions/ApiVersion'
-      message:
+      reason:
         type: string
-        description: the reason why this aspect
-    required:
-      - apiVersions
-      - message
-  Dictionary<ApiVersion>:
-    type: object
-    additionalProperties:
-      $ref: '#/definitions/ApiVersion'
-  Dictionary<ComplexSchema>:
-    type: object
-    additionalProperties:
-      $ref: '#/definitions/ComplexSchema'
-  Dictionary<any>:
-    type: object
-    additionalProperties:
-      type: object
-  Dictionary<string>:
-    type: object
-    additionalProperties:
-      type: string
+        description: Reason why this was deprecated.
   DictionarySchema:
     type: object
     description: a schema that represents a key-value collection
@@ -562,9 +577,9 @@ definitions:
     additionalProperties: false
     properties:
       all:
-        $ref: '#/definitions/Dictionary<ComplexSchema>'
+        $ref: '#/definitions/Record<string,ComplexSchema>'
       immediate:
-        $ref: '#/definitions/Dictionary<ComplexSchema>'
+        $ref: '#/definitions/Record<string,ComplexSchema>'
       property:
         $ref: '#/definitions/Property'
     required:
@@ -600,7 +615,7 @@ definitions:
     properties:
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
   ExternalDocumentation:
     type: object
     description: a reference to external documentation
@@ -613,7 +628,7 @@ definitions:
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - url
   FlagSchema:
@@ -640,7 +655,7 @@ definitions:
         type: number
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         description: per-language information for this value
         $ref: '#/definitions/Languages'
@@ -712,8 +727,6 @@ definitions:
           - true
     required:
       - binary
-      - knownMediaType
-      - mediaTypes
       - statusCodes
   HttpHeader:
     type: object
@@ -725,7 +738,7 @@ definitions:
         type: string
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         $ref: '#/definitions/Languages'
     required:
@@ -788,8 +801,17 @@ definitions:
         type: boolean
         description: when set, 'form' style parameters generate separate parameters for each value of an array.
       in:
+        type: string
         description: the location that this parameter is placed in the http request
-        $ref: '#/definitions/ParameterLocation'
+        enum:
+          - body
+          - cookie
+          - header
+          - none
+          - path
+          - query
+          - uri
+          - virtual
       skipUriEncoding:
         type: boolean
         description: when set, this indicates that the content of the parameter should not be subject to URI encoding rules.
@@ -842,11 +864,11 @@ definitions:
         items:
           $ref: '#/definitions/HttpHeader'
       knownMediaType:
-        description: canonical response type (ie, 'json')
+        description: canonical response type (ie, 'json').
         $ref: '#/definitions/KnownMediaType'
       mediaTypes:
         type: array
-        description: the possible media types that this response MUST match one of
+        description: The possible media types that this response MUST match one of.
         items:
           type: string
       statusCodes:
@@ -919,8 +941,6 @@ definitions:
             - 511
             - default
     required:
-      - knownMediaType
-      - mediaTypes
       - statusCodes
   HttpWithBodyRequest:
     type: object
@@ -959,10 +979,10 @@ definitions:
         type: string
         description: an URI
       scopes:
-        $ref: '#/definitions/Dictionary<string>'
+        $ref: '#/definitions/Record<string,string>'
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - authorizationUrl
       - scopes
@@ -991,9 +1011,25 @@ definitions:
         description: the title of this service.
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - title
+  KeySecurityScheme:
+    type: object
+    additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/SecurityScheme'
+    properties:
+      name:
+        type: string
+      in:
+        type: string
+        enum:
+          - header
+    required:
+      - in
+      - name
+      - type
   KnownMediaType:
     type: string
     enum:
@@ -1067,7 +1103,7 @@ definitions:
         description: an uri pointing to the full license text
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - name
   Metadata:
@@ -1077,7 +1113,7 @@ definitions:
     properties:
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         description: per-language information for this aspect
         $ref: '#/definitions/Languages'
@@ -1101,7 +1137,7 @@ definitions:
         type: string
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - scheme
       - type
@@ -1153,20 +1189,15 @@ definitions:
   OAuth2SecurityScheme:
     type: object
     additionalProperties: false
+    allOf:
+      - $ref: '#/definitions/SecurityScheme'
     properties:
-      type:
-        type: string
-        enum:
-          - oauth2
-      description:
-        type: string
-      flows:
-        $ref: '#/definitions/OAuthFlows'
-      extensions:
-        description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+      scopes:
+        type: array
+        items:
+          type: string
     required:
-      - flows
+      - scopes
       - type
   OAuthFlows:
     type: object
@@ -1182,7 +1213,7 @@ definitions:
         $ref: '#/definitions/PasswordOAuthFlow'
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
   ODataQuerySchema:
     type: object
     description: a schema that represents a ODataQuery value
@@ -1227,6 +1258,7 @@ definitions:
       - type
   ObjectSchemaTypes:
     type: string
+    description: schema types that can be objects
     enum:
       - dictionary
       - object
@@ -1246,7 +1278,7 @@ definitions:
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - openIdConnectUrl
       - type
@@ -1255,13 +1287,20 @@ definitions:
     description: represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)
     additionalProperties: false
     properties:
+      operationId:
+        type: string
+        description: |-
+          Original Operation ID if present.
+          This can be used to identify the original id of an operation before it is styled.
+          THIS IS NOT the name of the operation that should be used in the generator. Use `.language.default.name` for this
       apiVersions:
         type: array
         description: API versions that this applies to. Undefined means all versions
         items:
           $ref: '#/definitions/ApiVersion'
       deprecated:
-        description: deprecation information -- ie, when this aspect doesn't apply and why
+        description: Represent the deprecation information if api is deprecated.
+        default: undefined
         $ref: '#/definitions/Deprecation'
       exceptions:
         type: array
@@ -1281,7 +1320,10 @@ definitions:
           $ref: '#/definitions/Parameter'
       profile:
         description: the apiVersion to use for a given profile name
-        $ref: '#/definitions/Dictionary<ApiVersion>'
+        $ref: '#/definitions/Record<string,ApiVersion>'
+      requestMediaTypes:
+        description: Mapping of all the content types available for this operation to the coresponding request.
+        $ref: '#/definitions/Record<string,Request>'
       requests:
         type: array
         description: the different possibilities to build the request.
@@ -1297,12 +1339,19 @@ definitions:
         description: a common filtered list of parameters that is (assumably) the actual method signature parameters
         items:
           $ref: '#/definitions/Parameter'
+      specialHeaders:
+        type: array
+        description: |-
+          List of headers that parameters should not handle as parameters but with special logic.
+          See https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour for configuration `skip-special-headers` to exclude headers.
+        items:
+          type: string
       summary:
         type: string
         description: a short description
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         description: per-language information for this aspect
         $ref: '#/definitions/Languages'
@@ -1390,13 +1439,13 @@ definitions:
         type: string
         description: an URI
       scopes:
-        $ref: '#/definitions/Dictionary<string>'
+        $ref: '#/definitions/Record<string,string>'
       tokenUrl:
         type: string
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
     required:
       - scopes
       - tokenUrl
@@ -1418,6 +1467,7 @@ definitions:
       - type
   PrimitiveSchemaTypes:
     type: string
+    description: Schema types that are primitive language values
     enum:
       - boolean
       - char
@@ -1487,6 +1537,24 @@ definitions:
       - form
       - pipeDelimited
       - spaceDelimited
+  Record<string,ApiVersion>:
+    type: object
+    additionalProperties: false
+  Record<string,ComplexSchema>:
+    type: object
+    additionalProperties:
+      $ref: '#/definitions/ComplexSchema'
+  Record<string,Request>:
+    type: object
+    additionalProperties: false
+  Record<string,any>:
+    type: object
+    additionalProperties:
+      type: object
+  Record<string,string>:
+    type: object
+    additionalProperties:
+      type: string
   Relations:
     type: object
     additionalProperties: false
@@ -1545,7 +1613,8 @@ definitions:
       defaultValue:
         description: If the value isn't sent on the wire, the service will assume this
       deprecated:
-        description: deprecation information -- ie, when this aspect doesn't apply and why
+        description: Represent the deprecation information if api is deprecated.
+        default: undefined
         $ref: '#/definitions/Deprecation'
       example:
         description: example information
@@ -1563,7 +1632,7 @@ definitions:
         description: a short description
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         description: per-language information for Schema
         $ref: '#/definitions/Languages'
@@ -1602,6 +1671,7 @@ definitions:
     description: possible schema types that indicate the type of schema.
     enum:
       - any
+      - any-object
       - array
       - binary
       - boolean
@@ -1655,6 +1725,10 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/AnySchema'
+      anyObjects:
+        type: array
+        items:
+          $ref: '#/definitions/AnyObjectSchema'
       arrays:
         type: array
         description: a collection of items
@@ -1857,19 +1931,25 @@ definitions:
       authenticationRequired:
         type: boolean
         description: indicates that the API surface requires authentication
+      schemes:
+        type: array
+        items:
+          type: SecuritySchemeFull
     required:
       - authenticationRequired
+      - schemes
   SecurityRequirement:
     type: object
     description: common ways of serializing simple parameters
     additionalProperties: false
   SecurityScheme:
-    anyOf:
-      - $ref: '#/definitions/BearerHTTPSecurityScheme'
-      - $ref: '#/definitions/NonBearerHTTPSecurityScheme'
-      - $ref: '#/definitions/OAuth2SecurityScheme'
-      - $ref: '#/definitions/APIKeySecurityScheme'
-      - $ref: '#/definitions/OpenIdConnectSecurityScheme'
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+    required:
+      - type
   SecurityType:
     type: string
     enum:
@@ -1883,7 +1963,7 @@ definitions:
     properties:
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
   SerializationFormats:
     type: object
     description: custom extensible metadata for individual serialization formats
@@ -2069,7 +2149,8 @@ definitions:
       clientDefaultValue:
         description: the value that the client should provide if the consumer doesn't provide one
       deprecated:
-        description: deprecation information -- ie, when this aspect doesn't apply and why
+        description: Represent the deprecation information if api is deprecated.
+        default: undefined
         $ref: '#/definitions/Deprecation'
       externalDocs:
         description: External Documentation Links
@@ -2088,7 +2169,7 @@ definitions:
         description: a short description
       extensions:
         description: additional metadata extensions dictionary
-        $ref: '#/definitions/Dictionary<any>'
+        $ref: '#/definitions/Record<string,any>'
       language:
         description: per-language information for this aspect
         $ref: '#/definitions/Languages'
@@ -2099,6 +2180,11 @@ definitions:
       - language
       - protocol
       - schema
+  ValueOrFactory:
+    anyOf:
+      - $ref: '#/definitions/ApiVersion'
+      - type: object
+        additionalProperties: false
   ValueSchema:
     type: object
     description: schema types that are non-object or complex types
@@ -2111,6 +2197,7 @@ definitions:
       - type
   ValueSchemaTypes:
     type: string
+    description: schema types that are non-object or complex types
     enum:
       - array
       - boolean
@@ -2221,7 +2308,7 @@ properties:
     $ref: '#/definitions/Security'
   extensions:
     description: additional metadata extensions dictionary
-    $ref: '#/definitions/Dictionary<any>'
+    $ref: '#/definitions/Record<string,any>'
   language:
     description: per-language information for this aspect
     $ref: '#/definitions/Languages'

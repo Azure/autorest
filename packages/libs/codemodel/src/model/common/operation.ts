@@ -1,19 +1,36 @@
+import { DeepPartial } from "@azure-tools/codegen";
+import { ApiVersion } from "./api-version";
+import { Aspect } from "./aspect";
+import { Metadata } from "./metadata";
 import { Parameter, ImplementationLocation } from "./parameter";
 import { Response } from "./response";
-import { Metadata } from "./metadata";
-import { Aspect } from "./aspect";
-import { ApiVersion } from "./api-version";
-import { Dictionary, values } from "@azure-tools/linq";
-import { DeepPartial } from "@azure-tools/codegen";
 import { SchemaType } from "./schema-type";
 
 /** represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)  */
 export interface Operation extends Aspect {
+  /**
+   * Original Operation ID if present.
+   * This can be used to identify the original id of an operation before it is styled.
+   * THIS IS NOT the name of the operation that should be used in the generator. Use `.language.default.name` for this
+   */
+  operationId?: string;
+
   /** common parameters when there are multiple requests */
   parameters?: Array<Parameter>;
 
   /** a common filtered list of parameters that is (assumably) the actual method signature parameters */
   signatureParameters?: Array<Parameter>;
+
+  /**
+   * Mapping of all the content types available for this operation to the coresponding request.
+   */
+  requestMediaTypes?: Record<string, Request>;
+
+  /**
+   * List of headers that parameters should not handle as parameters but with special logic.
+   * See https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour for configuration `skip-special-headers` to exclude headers.
+   */
+  specialHeaders?: string[];
 
   /** the different possibilities to build the request. */
   requests?: Array<Request>;
@@ -25,7 +42,7 @@ export interface Operation extends Aspect {
   exceptions?: Array<Response>;
 
   /** the apiVersion to use for a given profile name */
-  profile?: Dictionary<ApiVersion>;
+  profile?: Record<string, ApiVersion>;
 }
 
 export interface Request extends Metadata {
@@ -50,15 +67,13 @@ export class Request extends Metadata implements Request {
 
   updateSignatureParameters() {
     if (this.parameters) {
-      this.signatureParameters = values(this.parameters)
-        .where(
-          (each) =>
-            each.schema.type !== SchemaType.Constant &&
-            each.implementation !== ImplementationLocation.Client &&
-            !each.groupedBy &&
-            !each.flattened,
-        )
-        .toArray();
+      this.signatureParameters = (this.parameters ?? []).filter(
+        (each) =>
+          each.schema.type !== SchemaType.Constant &&
+          each.implementation !== ImplementationLocation.Client &&
+          !each.groupedBy &&
+          !each.flattened,
+      );
     }
   }
 }
@@ -82,15 +97,13 @@ export class Operation extends Aspect implements Operation {
 
   updateSignatureParameters() {
     if (this.parameters) {
-      this.signatureParameters = values(this.parameters)
-        .where(
-          (each) =>
-            each.schema.type !== SchemaType.Constant &&
-            each.implementation !== ImplementationLocation.Client &&
-            !each.groupedBy &&
-            !each.flattened,
-        )
-        .toArray();
+      this.signatureParameters = (this.parameters ?? []).filter(
+        (each) =>
+          each.schema.type !== SchemaType.Constant &&
+          each.implementation !== ImplementationLocation.Client &&
+          !each.groupedBy &&
+          !each.flattened,
+      );
     }
   }
 

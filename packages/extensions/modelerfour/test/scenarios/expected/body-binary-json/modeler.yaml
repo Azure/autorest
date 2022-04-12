@@ -31,7 +31,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
 globalParameters:
-  - !Parameter &ref_4
+  - !Parameter &ref_5
     schema: *ref_0
     clientDefaultValue: ''
     implementation: Client
@@ -52,13 +52,14 @@ operationGroups:
     $key: Upload
     operations:
       - !Operation 
+        operationId: Upload_File
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_4
-        requests:
-          - !Request 
+          - *ref_5
+        requestMediaTypes:
+          application/json: !Request &ref_4
             parameters:
               - !Parameter 
                 schema: *ref_1
@@ -100,6 +101,8 @@ operationGroups:
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
+        requests:
+          - *ref_4
         signatureParameters: []
         responses:
           - !Response 
@@ -123,6 +126,7 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: false
+  schemes: []
 language: !Languages 
   default:
     name: ''

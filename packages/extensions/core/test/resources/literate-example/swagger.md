@@ -4,7 +4,7 @@
 
 > the above JSON query pushes this markdown section into node `$.info.description` of the OpenAPI definition.
 > Furthermore, it "enters" scope `$.info`, meaning that all annotations on subheadings will have `@` point to that node (see below for examples).
-> 
+>
 > The second part (`description`) can be omitted, but is useful for specifying other fields like `summary`.
 >
 > To set a description without entering a scope, one could have used (`$`, `info.description`)
@@ -12,27 +12,27 @@
 This client that can be used to manage Azure Search services and API keys.
 
 ```yaml
-swagger: '2.0'
+swagger: "2.0"
 info:
   title: Search Management
   # `description` will be injected.
   # If it was specified here, it would be overridden.
-  version: '2015-02-28'
+  version: "2015-02-28"
 host: management.azure.com
 schemes:
-- https
+  - https
 consumes:
-- application/json
+  - application/json
 produces:
-- application/json
+  - application/json
 ```
 
 ## Security
 
 ```yaml
 security:
-- azure_auth:
-  - user_impersonation
+  - azure_auth:
+      - user_impersonation
 securityDefinitions:
   azure_auth:
     type: oauth2
@@ -53,25 +53,25 @@ Returns the list of query API keys for the given Azure Search service.
 
 ```yaml
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/listQueryKeys':
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}/listQueryKeys":
     get:
       tags:
-      - QueryKeys
+        - QueryKeys
       operationId: QueryKeys_List
       externalDocs:
         url: https://msdn.microsoft.com/library/azure/dn832701.aspx
       parameters:
-      - '$ref': '#/parameters/ResourceGroupName'
-      - '$ref': '#/parameters/SearchServiceName'
-      - '$ref': '#/parameters/ApiVersion'
-      - '$ref': '#/parameters/SubscriptionId'
+        - "$ref": "#/parameters/ResourceGroupName"
+        - "$ref": "#/parameters/SearchServiceName"
+        - "$ref": "#/parameters/ApiVersion"
+        - "$ref": "#/parameters/SubscriptionId"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            '$ref': '#/definitions/ListQueryKeysResult'
+            "$ref": "#/definitions/ListQueryKeysResult"
         default:
-          '$ref': '#/responses/error'
+          "$ref": "#/responses/error"
 ```
 
 #### Parameter: Search Service Name (`@.parameters[1]`)
@@ -90,13 +90,15 @@ definitions:
         readOnly: true
         type: array
         items:
-          '$ref': '#/definitions/QueryKey'
+          "$ref": "#/definitions/QueryKey"
 ```
 
 #### Examples
-I am content under a subheading 
+
+I am content under a subheading
 
 #### Property: value (`@.properties.value`)
+
 The query keys for the Azure Search service.
 
 ### Model Definition: QueryKey (`$.definitions.QueryKey`)
@@ -116,9 +118,11 @@ definitions:
 ```
 
 #### Property: name (`@.properties.name`)
+
 The name of the query API key; may be empty.
 
 #### Property: key (`@.properties.key`)
+
 The value of the query API key.
 
 ## Operations on Services
@@ -130,38 +134,39 @@ If the Search service already exists, all properties will be updated with the gi
 
 ```yaml
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}':
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}":
     put:
       tags:
-      - Services
+        - Services
       operationId: Services_CreateOrUpdate
       externalDocs:
         url: https://msdn.microsoft.com/library/azure/dn832687.aspx
       parameters:
-      - '$ref': '#/parameters/ResourceGroupName'
-      - '$ref': '#/parameters/SearchServiceName'
-      - name: parameters
-        in: body
-        required: true
-        schema:
-          '$ref': '#/definitions/SearchServiceCreateOrUpdateParameters'
-        description: '#parameter-parameters'
-      - '$ref': '#/parameters/ApiVersion'
-      - '$ref': '#/parameters/SubscriptionId'
+        - "$ref": "#/parameters/ResourceGroupName"
+        - "$ref": "#/parameters/SearchServiceName"
+        - name: parameters
+          in: body
+          required: true
+          schema:
+            "$ref": "#/definitions/SearchServiceCreateOrUpdateParameters"
+          description: "#parameter-parameters"
+        - "$ref": "#/parameters/ApiVersion"
+        - "$ref": "#/parameters/SubscriptionId"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            '$ref': '#/definitions/SearchServiceResource'
-        '201':
+            "$ref": "#/definitions/SearchServiceResource"
+        "201":
           description: Created
           schema:
-            '$ref': '#/definitions/SearchServiceResource'
+            "$ref": "#/definitions/SearchServiceResource"
         default:
-          '$ref': '#/responses/error'
+          "$ref": "#/responses/error"
 ```
 
 #### Parameter: parameters (`@.parameters[?(@.name == "parameters")]`)
+
 The properties to set or update on the Search service.
 
 ### Delete (`#Services_Delete`)
@@ -170,27 +175,27 @@ Deletes a Search service in the given resource group, along with its associated 
 
 ```yaml
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}':
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{serviceName}":
     delete:
       tags:
-      - Services
+        - Services
       operationId: Services_Delete
       externalDocs:
         url: https://msdn.microsoft.com/library/azure/dn832692.aspx
       parameters:
-      - '$ref': '#/parameters/ResourceGroupName'
-      - '$ref': '#/parameters/SearchServiceName'
-      - '$ref': '#/parameters/ApiVersion'
-      - '$ref': '#/parameters/SubscriptionId'
+        - "$ref": "#/parameters/ResourceGroupName"
+        - "$ref": "#/parameters/SearchServiceName"
+        - "$ref": "#/parameters/ApiVersion"
+        - "$ref": "#/parameters/SubscriptionId"
       responses:
-        '200':
+        "200":
           description: OK
-        '204':
+        "204":
           description: No Content
-        '404':
+        "404":
           description: Not Found
         default:
-          '$ref': '#/responses/error'
+          "$ref": "#/responses/error"
 ```
 
 ### List (`#Services_List`)
@@ -199,24 +204,24 @@ Returns a list of all Search services in the given resource group.
 
 ```yaml
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices':
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices":
     get:
       tags:
-      - Services
+        - Services
       operationId: Services_List
       externalDocs:
         url: https://msdn.microsoft.com/library/azure/dn832688.aspx
       parameters:
-      - '$ref': '#/parameters/ResourceGroupName'
-      - '$ref': '#/parameters/ApiVersion'
-      - '$ref': '#/parameters/SubscriptionId'
+        - "$ref": "#/parameters/ResourceGroupName"
+        - "$ref": "#/parameters/ApiVersion"
+        - "$ref": "#/parameters/SubscriptionId"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            '$ref': '#/definitions/SearchServiceListResult'
+            "$ref": "#/definitions/SearchServiceListResult"
         default:
-          '$ref': '#/responses/error'
+          "$ref": "#/responses/error"
 ```
 
 ### Model Definition: SearchServiceProperties (`$.definitions.SearchServiceProperties`)
@@ -238,9 +243,11 @@ definitions:
 ```
 
 #### Property: replicaCount (`@.properties.replicaCount`)
+
 The number of replicas in the Search service.
 
 #### Property: partitionCount (`@.properties.partitionCount`)
+
 The number of partitions in the Search service; if specified, it can be 1, 2, 3, 4, 6, or 12.
 
 ### Model Definition: SearchServiceCreateOrUpdateParameters (`$.definitions.SearchServiceCreateOrUpdateParameters`)
@@ -258,16 +265,19 @@ definitions:
         additionalProperties:
           type: string
       properties:
-        '$ref': '#/definitions/SearchServiceProperties'
+        "$ref": "#/definitions/SearchServiceProperties"
 ```
 
 #### Property: location (`@.properties.location`)
+
 The geographic location of the Search service.
 
 #### Property: tags (`@.properties.tags`)
+
 Tags to help categorize the Search service in the Azure Portal.
 
 #### Property: properties (`@.properties.properties`)
+
 Properties of the Search service.
 
 ### Model Definition: SearchServiceResource (`$.definitions.SearchServiceResource`)
@@ -294,15 +304,19 @@ definitions:
 ```
 
 #### Property: id (`@.properties.id`)
+
 The resource Id of the Azure Search service.
 
 #### Property: name (`@.properties.name`)
+
 The name of the Search service.
 
 #### Property: location (`@.properties.location`)
+
 The geographic location of the Search service.
 
 #### Property: tags (`@.properties.tags`)
+
 Tags to help categorize the Search service in the Azure Portal.
 
 ### Model Definition: SearchServiceListResult (`$.definitions.SearchServiceListResult`)
@@ -317,10 +331,11 @@ definitions:
         readOnly: true
         type: array
         items:
-          '$ref': '#/definitions/SearchServiceResource'
+          "$ref": "#/definitions/SearchServiceResource"
 ```
 
 #### Property: value (`@.properties.value`)
+
 The Search services in the resource group.
 
 ## Common Parameters (`$.parameters`, -)
@@ -328,6 +343,7 @@ The Search services in the resource group.
 > The "-" makes sure we inject nothing here, we just wanna enter the scope.
 
 ### Client: SubscriptionId (`@.SubscriptionId`)
+
 Gets subscription credentials which uniquely identify Microsoft Azure subscription.
 The subscription ID forms part of the URI for every service call.
 
@@ -341,6 +357,7 @@ parameters:
 ```
 
 ### Client: ApiVersion (`@.ApiVersion`)
+
 The client API version.
 
 ```yaml
@@ -353,6 +370,7 @@ parameters:
 ```
 
 ### ResourceGroupName (`@.ResourceGroupName`)
+
 The name of the resource group within the current subscription.
 
 ```yaml
@@ -366,9 +384,10 @@ parameters:
 ```
 
 ### SearchServiceName (`@.SearchServiceName`)
+
 The name of the Search service to operate on.
 
-``` yaml
+```yaml
 parameters:
   SearchServiceName:
     name: serviceName
@@ -382,7 +401,7 @@ parameters:
 
 The default response will be deserialized as per the Error defintion and will be part of the exception.
 
-```  yaml
+```yaml
 definitions:
   Error:
     type: object
@@ -397,5 +416,5 @@ responses:
   error:
     description: OK
     schema:
-      '$ref': '#/definitions/Error'
+      "$ref": "#/definitions/Error"
 ```

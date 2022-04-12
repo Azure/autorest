@@ -15,26 +15,16 @@
   },
   "host": "petstore.swagger.io",
   "basePath": "/v2",
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/pet?testing_byte_array=true": {
       "post": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Fake endpoint to test byte array in body parameter for adding a new pet to the store",
         "description": "",
         "operationId": "addPetUsingByteArray",
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "consumes": ["application/json", "application/xml"],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "in": "body",
@@ -54,30 +44,19 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ]
       }
     },
     "/pet": {
       "post": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Add a new pet to the store",
         "description": "Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.",
         "operationId": "addPet",
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "consumes": ["application/json", "application/xml"],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "in": "body",
@@ -96,28 +75,17 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ]
       },
       "put": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Update an existing pet",
         "description": "",
         "operationId": "updatePet",
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "consumes": ["application/json", "application/xml"],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "in": "body",
@@ -142,26 +110,18 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ]
       }
     },
     "/pet/findByStatus": {
       "get": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Finds Pets by status",
         "description": "Multiple status values can be provided with comma seperated strings",
         "operationId": "findPetsByStatus",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "name": "status",
@@ -192,26 +152,18 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ]
       }
     },
     "/pet/findByTags": {
       "get": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Finds Pets by tags",
         "description": "Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.",
         "operationId": "findPetsByTags",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "name": "tags",
@@ -241,26 +193,18 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ]
       }
     },
     "/pet/{petId}?testing_byte_array=true": {
       "get": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Fake endpoint to test byte array return by 'Find pet by ID'",
         "description": "Returns a pet when ID < 10.  ID > 10 or nonintegers will simulate API error conditions",
         "operationId": "findPetsWithByteArray",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "name": "petId",
@@ -291,26 +235,18 @@
             "api_key": []
           },
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ]
       }
     },
     "/pet/{petId}": {
       "get": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Find pet by ID",
         "description": "Returns a pet when ID < 10.  ID > 10 or nonintegers will simulate API error conditions",
         "operationId": "getPetById",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "name": "petId",
@@ -340,27 +276,17 @@
             "api_key": []
           },
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ]
       },
       "post": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Updates a pet in the store with form data",
         "description": "",
         "operationId": "updatePetWithForm",
-        "consumes": [
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "consumes": ["application/x-www-form-urlencoded"],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "name": "petId",
@@ -391,24 +317,16 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ]
       },
       "delete": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Deletes a pet",
         "description": "",
         "operationId": "deletePet",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "name": "api_key",
@@ -433,29 +351,19 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ]
       }
     },
     "/pet/{petId}/uploadImage": {
       "post": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "uploads an image",
         "description": "",
         "operationId": "uploadFile",
-        "consumes": [
-          "multipart/form-data"
-        ],
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "name": "petId",
@@ -487,26 +395,18 @@
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "petstore_auth": ["write:pets", "read:pets"]
           }
         ]
       }
     },
     "/store/inventory": {
       "get": {
-        "tags": [
-          "store"
-        ],
+        "tags": ["store"],
         "summary": "Returns pet inventories by status",
         "description": "Returns a map of status codes to quantities",
         "operationId": "getInventory",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "produces": ["application/json", "application/xml"],
         "responses": {
           "200": {
             "description": "successful operation",
@@ -528,16 +428,11 @@
     },
     "/store/order": {
       "post": {
-        "tags": [
-          "store"
-        ],
+        "tags": ["store"],
         "summary": "Place an order for a pet",
         "description": "",
         "operationId": "placeOrder",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "in": "body",
@@ -570,16 +465,11 @@
     },
     "/store/order/{orderId}": {
       "get": {
-        "tags": [
-          "store"
-        ],
+        "tags": ["store"],
         "summary": "Find purchase order by ID",
         "description": "For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions",
         "operationId": "getOrderById",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "name": "orderId",
@@ -613,16 +503,11 @@
         ]
       },
       "delete": {
-        "tags": [
-          "store"
-        ],
+        "tags": ["store"],
         "summary": "Delete purchase order by ID",
         "description": "For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors",
         "operationId": "deleteOrder",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "name": "orderId",
@@ -644,16 +529,11 @@
     },
     "/user": {
       "post": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Create user",
         "description": "This can only be done by the logged in user.",
         "operationId": "createUser",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "in": "body",
@@ -674,16 +554,11 @@
     },
     "/user/createWithArray": {
       "post": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Creates list of users with given input array",
         "description": "",
         "operationId": "createUsersWithArrayInput",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "in": "body",
@@ -707,16 +582,11 @@
     },
     "/user/createWithList": {
       "post": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Creates list of users with given input array",
         "description": "",
         "operationId": "createUsersWithListInput",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "in": "body",
@@ -740,16 +610,11 @@
     },
     "/user/login": {
       "get": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Logs user into the system",
         "description": "",
         "operationId": "loginUser",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "name": "username",
@@ -781,16 +646,11 @@
     },
     "/user/logout": {
       "get": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Logs out current logged in user session",
         "description": "",
         "operationId": "logoutUser",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "produces": ["application/json", "application/xml"],
         "responses": {
           "default": {
             "description": "successful operation"
@@ -800,16 +660,11 @@
     },
     "/user/{username}": {
       "get": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Get user by user name",
         "description": "",
         "operationId": "getUserByName",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "name": "username",
@@ -847,16 +702,11 @@
         }
       },
       "put": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Updated user",
         "description": "This can only be done by the logged in user.",
         "operationId": "updateUser",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "name": "username",
@@ -885,16 +735,11 @@
         }
       },
       "delete": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Delete user",
         "description": "This can only be done by the logged in user.",
         "operationId": "deleteUser",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
+        "produces": ["application/json", "application/xml"],
         "parameters": [
           {
             "name": "username",
@@ -1001,10 +846,7 @@
       }
     },
     "Pet": {
-      "required": [
-        "name",
-        "photoUrls"
-      ],
+      "required": ["name", "photoUrls"],
       "properties": {
         "id": {
           "type": "integer",
@@ -1042,11 +884,7 @@
         "status": {
           "type": "string",
           "description": "pet status in the store",
-          "enum": [
-            "available",
-            "pending",
-            "sold"
-          ]
+          "enum": ["available", "pending", "sold"]
         }
       },
       "title": "A pet",
@@ -1091,11 +929,7 @@
         "status": {
           "type": "string",
           "description": "Order Status",
-          "enum": [
-            "placed",
-            "approved",
-            "delivered"
-          ]
+          "enum": ["placed", "approved", "delivered"]
         },
         "complete": {
           "type": "boolean"

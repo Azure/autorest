@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/codegen",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@azure-tools/codegen"
+}

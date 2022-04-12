@@ -1,5 +1,5 @@
-import { fileURLToPath, URL, Url } from "url";
-import fs from "fs";
+import { LogLevel } from "@autorest/common";
+import { AutorestNormalizedConfiguration } from "./autorest-normalized-configuration";
 
 export function isIterable(target: any): target is Iterable<any> {
   return !!target && typeof target[Symbol.iterator] === "function";
@@ -25,4 +25,34 @@ export function arrayOf<T>(value: T | T[] | undefined): T[] {
       break;
   }
   return [value];
+}
+
+export interface LogOptions {
+  debug?: boolean;
+  verbose?: boolean;
+  level?: LogLevel | string;
+}
+
+export function getLogLevel(config: LogOptions): LogLevel {
+  return config.debug
+    ? "debug"
+    : config.verbose
+    ? "verbose"
+    : config.level && isValidLogLevel(config.level)
+    ? config.level
+    : "information";
+}
+
+export function isValidLogLevel(level: string): level is LogLevel {
+  switch (level) {
+    case "debug":
+    case "verbose":
+    case "information":
+    case "warning":
+    case "error":
+    case "fatal":
+      return true;
+    default:
+      return false;
+  }
 }

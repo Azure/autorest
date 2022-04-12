@@ -1,39 +1,65 @@
 import { Dereferenced, ExtensionKey, PathReference, Refable } from "./common";
 
 /**
+ * Returns true if the key starts with `x-`
+ */
+export function isExtensionKey(key: string | ExtensionKey): key is ExtensionKey {
+  return key.startsWith("x-");
+}
+
+/**
  * Only return properties starting with x-
  * @param dictionary
  */
-export const includeXDash = (dictionary: Record<string, unknown>): ExtensionKey[] => {
-  return Object.keys(dictionary).filter((v, i, a) => v.startsWith("x-")) as any;
-};
+export function includeXDashKeys<T extends Record<string | ExtensionKey, any>>(
+  dictionary: T,
+): Extract<keyof T, ExtensionKey>[] {
+  return Object.keys(dictionary).filter(isExtensionKey) as any;
+}
 
 /**
  * Only return properties NOT starting with x-
  * @param dictionary
  */
-export const excludeXDash = <T extends Record<string, unknown>>(dictionary: T): string[] => {
-  return Object.keys(dictionary).filter((v, i, a) => !v.startsWith("x-"));
-};
+export function omitXDashKeys<T extends {}>(dictionary: T): Exclude<keyof T, ExtensionKey>[] {
+  return Object.keys(dictionary).filter((v) => !v.startsWith("x-")) as any;
+}
 
-export const filterOutXDash = <T>(obj: T | undefined): T | undefined => {
-  if (obj) {
-    const result = <any>{};
-    for (const [key, value] of Object.entries(obj).filter(([key, value]) => !key.startsWith("x-"))) {
-      result[key] = <any>value;
-    }
-    return result;
+export function includeXDashProperties<T extends Record<string | ExtensionKey, any> | undefined>(
+  obj: T,
+): T extends undefined ? undefined : Pick<T, Extract<keyof T, ExtensionKey>> {
+  if (obj === undefined) {
+    return undefined as any;
   }
-  return undefined;
-};
+
+  const result: any = {};
+  for (const key of includeXDashKeys(obj)) {
+    result[key] = obj[key];
+  }
+  return result;
+}
+
+export function omitXDashProperties<T extends {} | undefined>(
+  obj: T,
+): T extends undefined ? undefined : Pick<T, Exclude<keyof T, ExtensionKey>> {
+  if (obj === undefined) {
+    return undefined as any;
+  }
+
+  const result: any = {};
+  for (const key of omitXDashKeys(obj)) {
+    result[key] = (obj as any)[key];
+  }
+  return result;
+}
 
 /**
  * Identifies if a given refable is a reference or an instance
  * @param item Check if item is a reference.
  */
-export const isReference = <T>(item: Refable<T>): item is PathReference => {
+export function isReference<T>(item: Refable<T>): item is PathReference {
   return item && (<PathReference>item).$ref ? true : false;
-};
+}
 
 /**
  * Gets an object instance for the item, regardless if it's a reference or not.
@@ -41,7 +67,7 @@ export const isReference = <T>(item: Refable<T>): item is PathReference => {
  * @param item Reference item.
  * @param stack Stack for circular dependencies.
  */
-export const dereference = <T>(document: any, item: Refable<T>, stack: string[] = []): Dereferenced<T> => {
+export function dereference<T>(document: any, item: Refable<T>, stack: string[] = []): Dereferenced<T> {
   let name: string | undefined;
 
   if (isReference(item)) {
@@ -68,4 +94,4 @@ export const dereference = <T>(document: any, item: Refable<T>, stack: string[] 
     return { instance: node, name: name || "", fromRef: true };
   }
   return { instance: item, name: "", fromRef: false };
-};
+}

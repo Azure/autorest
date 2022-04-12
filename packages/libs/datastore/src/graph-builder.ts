@@ -1,12 +1,12 @@
-import { Mapping } from "source-map";
-import { JsonPointer, parsePointer } from "./json-pointer/json-pointer";
-import { CreateAssignmentMapping } from "./source-map/source-map";
+import { JsonPointer, parseJsonPointer } from "@azure-tools/json";
 import { Exception } from "@azure-tools/tasks";
+import { PathMapping } from "./source-map/path-source-map";
+import { createAssignmentMapping } from "./source-map/source-map";
 
 export function createGraphProxy<T extends object>(
   originalFileName: string,
   targetPointer: JsonPointer = "",
-  mappings = new Array<Mapping>(),
+  mappings = new Array<PathMapping>(),
   instance = <any>{},
 ): ProxyObject<T> {
   const tag = (
@@ -17,33 +17,35 @@ export function createGraphProxy<T extends object>(
     subject: string | undefined,
     recurse: boolean,
   ) => {
-    CreateAssignmentMapping(
+    createAssignmentMapping(
       value,
       filename,
-      parsePointer(pointer),
-      [...parsePointer(targetPointer), key].filter((each) => each !== ""),
+      parseJsonPointer(pointer).filter((each) => each !== ""),
+      [...parseJsonPointer(targetPointer), key].filter((each) => each !== ""),
       subject || "",
       recurse,
       mappings,
     );
   };
 
-  const push = (value: any) => {
+  const push = (value: { pointer?: string; value: any; recurse?: boolean; filename?: string; subject?: string }) => {
     instance.push(value.value);
     const filename = value.filename || originalFileName;
     if (!filename) {
       throw new Error("Assignment: filename must be specified when there is no default.");
     }
-    const pp = parsePointer(value.pointer);
-    const q = <any>parseInt(pp[pp.length - 1], 10);
+    const pp = value.pointer ? parseJsonPointer(value.pointer) : [];
+    const q = <any>parseInt(pp[pp.length - 1] as any, 10);
     if (q >= 0) {
       pp[pp.length - 1] = q;
     }
-    CreateAssignmentMapping(
+    createAssignmentMapping(
       value.value,
       filename,
       pp,
-      [...parsePointer(targetPointer), instance.length - 1].filter((each) => each !== ""),
+      [...parseJsonPointer(targetPointer).filter((each) => each !== ""), instance.length - 1].filter(
+        (each) => each !== "",
+      ),
       value.subject || "",
       value.recurse,
       mappings,
@@ -105,6 +107,6 @@ export interface ProxyNode<T> {
   recurse?: boolean;
 }
 
-export type ProxyObject<TG> = {
-  [P in keyof TG]: ProxyNode<TG[P]> | TG[P];
+export type ProxyObject<T> = {
+  [P in keyof T]: ProxyNode<T[P]> | T[P];
 };

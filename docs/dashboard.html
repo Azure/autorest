@@ -72,7 +72,7 @@
       const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
       const azureBlobContainer_coverage = "https://autorestci.blob.core.windows.net/autorest-ci-coverage-report";
-      const coverageCategories = ["General", "Azure"];
+      const coverageCategories = ["General", "Azure", "Optional", "DPG"];
 
       function semverCompare(v1, v2) {
         const v1parts = v1.split(/[^\d]+/).map(Number);
@@ -106,7 +106,12 @@
           ];
           const reportsByRepo /*: { [repo: string]: { version: string, uri: string }[]] }*/ = {};
           for (const report of reports) {
-            const [match, repo, version] = /^autorest\.(.+)_(.+)\.md$/.exec(report);
+            const didMatch = /^autorest\.(.+)_(.+)\.md$/.exec(report);
+            if (!didMatch) {
+              console.error("Unexpected report name", report);
+              continue;
+            }
+            const [match, repo, version] = didMatch;
             if (!reportsByRepo[repo]) reportsByRepo[repo] = [];
             reportsByRepo[repo].push({ version: version, uri: `${azureBlobContainer_coverage}/${report}` });
           }
@@ -147,7 +152,7 @@
                   const response = await request;
                   const coverage = +/ (\d+)%/.exec(
                     response.split("\n").filter((l) => l.startsWith("##") && l.includes(cat))[0],
-                  )[1];
+                  )?.[1];
                   const color = `hsl(${coverage === 100 ? 120 : (Math.pow(coverage / 100, 1.8) * 70) | 0},100%,60%)`;
                   return $("<div>")
                     .text(coverage + "%")

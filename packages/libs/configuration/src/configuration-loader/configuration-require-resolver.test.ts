@@ -1,6 +1,6 @@
 import { IFileSystem, MemoryFileSystem } from "@azure-tools/datastore";
 import { createConfigFromRawConfig } from "../autorest-configuration";
-import { AutorestRawConfiguration } from "../autorest-raw-configuration";
+import { AutorestNormalizedConfiguration } from "../autorest-normalized-configuration";
 import { getIncludedConfigurationFiles } from "./configuration-require-resolver";
 
 const configFile1 = "foo.md";
@@ -10,7 +10,7 @@ const defaultConfig = { "base-folder": "file://.", "output-folder": "./generated
 describe("getIncludedConfigurationFiles", () => {
   let fs: IFileSystem;
 
-  const getRequiredFiles = async (raw: AutorestRawConfiguration) => {
+  const getRequiredFiles = async (raw: AutorestNormalizedConfiguration) => {
     const result: string[] = [];
 
     const config = createConfigFromRawConfig(".", { ...defaultConfig, ...raw }, []);
@@ -33,12 +33,12 @@ describe("getIncludedConfigurationFiles", () => {
       expect(result).toEqual(["file://./foo.md", "file://./bar.md"]);
     });
 
-    it("it still resolve file path if they don't exists", async () => {
+    it("still resolve file path if they don't exists", async () => {
       const result = await getRequiredFiles({ require: ["doesnot-exists.md"] });
       expect(result).toEqual(["file://./doesnot-exists.md"]);
     });
 
-    it("it resolve duplicate require only once", async () => {
+    it("resolve duplicate require only once", async () => {
       const result = await getRequiredFiles({ require: ["foo.md", "bar.md", "foo.md", "bar.md"] });
       expect(result).toEqual(["file://./foo.md", "file://./bar.md"]);
     });

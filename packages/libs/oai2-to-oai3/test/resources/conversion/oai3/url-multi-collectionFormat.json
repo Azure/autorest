@@ -15,9 +15,7 @@
       "get": {
         "operationId": "queries_ArrayStringMultiNull",
         "description": "Get a null array of string using the multi-array format",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "arrayQuery",
@@ -54,9 +52,7 @@
       "get": {
         "operationId": "queries_ArrayStringMultiEmpty",
         "description": "Get an empty array [] of string using the multi-array format",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "arrayQuery",
@@ -93,9 +89,7 @@
       "get": {
         "operationId": "queries_ArrayStringMultiValid",
         "description": "Get an array of string ['ArrayQuery1', 'begin!*'();:@ &=+$,/?#[]end' , null, ''] using the mult-array format",
-        "tags": [
-          "query Operations"
-        ],
+        "tags": ["query Operations"],
         "parameters": [
           {
             "name": "arrayQuery",

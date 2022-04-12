@@ -1,8 +1,8 @@
 {
-  "extends": "../../../tsconfig.json",
+  "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "strictNullChecks": false,
+    "tsBuildInfoFile": "temp/.tsbuildinfo",
     "types": ["node", "jest"]
   },
   "include": ["src/**/*.ts", "definitions/**/*.d.ts", "test/**/*.ts"]

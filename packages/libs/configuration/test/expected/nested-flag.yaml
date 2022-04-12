@@ -1,0 +1,19 @@
+az:
+  extension: myextension
+base-folder: .
+debug: false
+directive: []
+disable-validation: false
+exclude-file: []
+input-file: []
+output-artifact: []
+output-folder: generated
+pass-thru: []
+perform-load: true
+profile: []
+require: []
+suppressions: []
+try-require: []
+use: []
+use-extension: {}
+verbose: false

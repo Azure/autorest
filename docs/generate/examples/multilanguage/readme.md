@@ -1,5 +1,6 @@
 ### General settings
-``` yaml
+
+```yaml
 tag: v2
 license-header: MICROSOFT_MIT_NO_VERSION
 ```

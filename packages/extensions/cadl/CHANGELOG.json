@@ -1,0 +1,52 @@
+{
+  "name": "@autorest/cadl",
+  "entries": [
+    {
+      "version": "0.2.0",
+      "tag": "@autorest/cadl_v0.2.0",
+      "date": "Thu, 31 Mar 2022 16:50:54 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Fix using latest version of cadl"
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.1.0",
+      "tag": "@autorest/cadl_v0.1.0",
+      "date": "Fri, 19 Nov 2021 04:23:42 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Uptake** breaking change from e"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/extension-base\" from `~3.3.2` to `~3.4.0`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.0.2",
+      "tag": "@autorest/adl_v0.0.2",
+      "date": "Mon, 19 Jul 2021 15:15:42 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/extension-base\" from `~3.2.1` to `~3.3.0`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "0.0.1",
+      "tag": "@autorest/adl_v0.0.1",
+      "date": "Thu, 03 Jun 2021 22:37:55 GMT",
+      "comments": {}
+    }
+  ]
+}

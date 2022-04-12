@@ -6,15 +6,9 @@
     "version": "1.0.0"
   },
   "host": "localhost:3000",
-  "schemes": [
-    "http"
-  ],
-  "produces": [
-    "application/json"
-  ],
-  "consumes": [
-    "application/json"
-  ],
+  "schemes": ["http"],
+  "produces": ["application/json"],
+  "consumes": ["application/json"],
   "parameters": {
     "required-global-path": {
       "name": "required-global-path",
@@ -759,7 +753,7 @@
   },
   "definitions": {
     "Error": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "status": {
           "type": "integer",
@@ -771,10 +765,8 @@
       }
     },
     "int-wrapper": {
-      "type":  "object",
-      "required": [
-        "value"
-      ],
+      "type": "object",
+      "required": ["value"],
       "properties": {
         "value": {
           "type": "integer",
@@ -783,7 +775,7 @@
       }
     },
     "int-optional-wrapper": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "value": {
           "type": "integer",
@@ -792,10 +784,8 @@
       }
     },
     "string-wrapper": {
-      "type":  "object",
-      "required": [
-        "value"
-      ],
+      "type": "object",
+      "required": ["value"],
       "properties": {
         "value": {
           "type": "string"
@@ -803,7 +793,7 @@
       }
     },
     "string-optional-wrapper": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "value": {
           "type": "string"
@@ -811,10 +801,8 @@
       }
     },
     "array-wrapper": {
-      "type":  "object",
-      "required": [
-        "value"
-      ],
+      "type": "object",
+      "required": ["value"],
       "properties": {
         "value": {
           "type": "array",
@@ -825,7 +813,7 @@
       }
     },
     "array-optional-wrapper": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -836,10 +824,8 @@
       }
     },
     "class-wrapper": {
-      "type":  "object",
-      "required": [
-        "value"
-      ],
+      "type": "object",
+      "required": ["value"],
       "properties": {
         "value": {
           "$ref": "#/definitions/product"
@@ -847,7 +833,7 @@
       }
     },
     "class-optional-wrapper": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "value": {
           "$ref": "#/definitions/product"
@@ -855,10 +841,8 @@
       }
     },
     "product": {
-      "type":  "object",
-      "required": [
-        "id"
-      ],
+      "type": "object",
+      "required": ["id"],
       "properties": {
         "id": {
           "type": "integer"

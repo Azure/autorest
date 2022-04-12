@@ -167,12 +167,12 @@ describe("ConfigurationManager", () => {
         configs: [
           {
             config: {
-              directive: { from: "swagger-document", transform: "$.swagger=true" },
+              directive: [{ from: "swagger-document", transform: "$.swagger=true" }],
             },
           },
           {
             config: {
-              directive: { from: "openapi-document", transform: "$.openapi3=true" },
+              directive: [{ from: "openapi-document", transform: "$.openapi3=true" }],
             },
           },
         ],
@@ -222,7 +222,7 @@ describe("ConfigurationManager", () => {
       expect(output["namespace"]).toEqual("FooBarOverride.Client");
     });
 
-    it("interpolate with higher priority value(defined before) instead of the one in the same block", async () => {
+    it("interpolate with higher priority value(defined in previous config) instead of the one in the same block", async () => {
       await manager.addConfig({
         name: "FooBarOverride",
       });
@@ -243,7 +243,28 @@ describe("ConfigurationManager", () => {
       expect(output["namespace"]).toEqual("FooBarOverride.Client");
     });
 
-    it("interpolate from the last block", async () => {
+    it("interpolate from previous block", async () => {
+      manager.addConfigFile({
+        type: "file",
+        fullPath: "/dev/path/readme.md",
+        configs: [
+          {
+            config: {
+              name: "FooBar",
+            },
+          },
+          {
+            config: {
+              namespace: "$(name).Client",
+            },
+          },
+        ],
+      });
+      const output = await manager.resolveConfig();
+      expect(output["namespace"]).toEqual("FooBar.Client");
+    });
+
+    it("interpolate with value from same block overriding the last block value", async () => {
       manager.addConfigFile({
         type: "file",
         fullPath: "/dev/path/readme.md",
@@ -265,7 +286,7 @@ describe("ConfigurationManager", () => {
       expect(output["namespace"]).toEqual("FooBarOverride.Client");
     });
 
-    it("interpolate from the last block", async () => {
+    it("interpolate from the previous config", async () => {
       await manager.addConfig({
         name: "FooBarCLIOverride",
       });

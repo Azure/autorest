@@ -9,9 +9,7 @@
   "paths": {
     "/api/v3.2/AzdsTraces": {
       "post": {
-        "tags": [
-          "AzdsTraces"
-        ],
+        "tags": ["AzdsTraces"],
         "operationId": "AzdsTraces_PostAzdsUserClusterLogsAsync",
         "parameters": [
           {
@@ -49,9 +47,7 @@
     },
     "/api/v3.2/Build/spaces/{spaceName}/services/{serviceName}/log": {
       "post": {
-        "tags": [
-          "Build"
-        ],
+        "tags": ["Build"],
         "operationId": "Build_PostBuildLogs",
         "parameters": [
           {
@@ -125,15 +121,12 @@
               }
             }
           }
-        },
-        "x-ms-requestBody-index": 3
+        }
       }
     },
     "/api/v3.2/Config/{path}": {
       "get": {
-        "tags": [
-          "Config"
-        ],
+        "tags": ["Config"],
         "operationId": "Config_GetConfigDocument",
         "parameters": [
           {
@@ -197,9 +190,7 @@
     },
     "/api/v3.2/Liveness": {
       "get": {
-        "tags": [
-          "Liveness"
-        ],
+        "tags": ["Liveness"],
         "operationId": "Liveness_LivenessCheck",
         "responses": {
           "200": {
@@ -220,9 +211,7 @@
     },
     "/api/v3.2/Ping/auth": {
       "get": {
-        "tags": [
-          "Ping"
-        ],
+        "tags": ["Ping"],
         "operationId": "Ping_CheckUserAuth",
         "responses": {
           "200": {
@@ -249,9 +238,7 @@
     },
     "/api/v3.2/Ping/auth/whitelist": {
       "get": {
-        "tags": [
-          "Ping"
-        ],
+        "tags": ["Ping"],
         "operationId": "Ping_CheckWhitelistAndUserAuth",
         "responses": {
           "200": {
@@ -278,9 +265,7 @@
     },
     "/api/v3.2/Ping/auth/whitelistonly": {
       "get": {
-        "tags": [
-          "Ping"
-        ],
+        "tags": ["Ping"],
         "operationId": "Ping_CheckWhitelistOnlyAuth",
         "responses": {
           "200": {
@@ -307,9 +292,7 @@
     },
     "/api/v3.2/Ping": {
       "get": {
-        "tags": [
-          "Ping"
-        ],
+        "tags": ["Ping"],
         "operationId": "Ping_PingCheck",
         "responses": {
           "200": {
@@ -357,9 +340,7 @@
     },
     "/api/v3.2/Spaces/{spaceName}": {
       "post": {
-        "tags": [
-          "Spaces"
-        ],
+        "tags": ["Spaces"],
         "operationId": "Spaces_CreateSpace",
         "parameters": [
           {
@@ -402,9 +383,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Spaces"
-        ],
+        "tags": ["Spaces"],
         "operationId": "Spaces_DeleteSpace",
         "parameters": [
           {
@@ -459,9 +438,7 @@
     },
     "/api/v3.2/Spaces/{namespaceName}": {
       "put": {
-        "tags": [
-          "Spaces"
-        ],
+        "tags": ["Spaces"],
         "operationId": "Spaces_CreateSpaceFromNamespace",
         "parameters": [
           {
@@ -506,9 +483,7 @@
     },
     "/api/v3.2/Spaces": {
       "get": {
-        "tags": [
-          "Spaces"
-        ],
+        "tags": ["Spaces"],
         "operationId": "Spaces_ListSpaces",
         "responses": {
           "200": {
@@ -574,9 +549,7 @@
     },
     "/api/v3.2/Traces/request": {
       "post": {
-        "tags": [
-          "Traces"
-        ],
+        "tags": ["Traces"],
         "operationId": "Traces_ReportRequestAsync",
         "responses": {
           "200": {
@@ -603,9 +576,7 @@
     },
     "/api/v3.2/Traces/response": {
       "post": {
-        "tags": [
-          "Traces"
-        ],
+        "tags": ["Traces"],
         "operationId": "Traces_ReportResponseAsync",
         "responses": {
           "200": {
@@ -632,9 +603,7 @@
     },
     "/api/v3.2/UserPod": {
       "post": {
-        "tags": [
-          "UserPod"
-        ],
+        "tags": ["UserPod"],
         "operationId": "UserPod_CreatePodPatchOperation",
         "responses": {
           "200": {
@@ -709,15 +678,12 @@
               }
             }
           }
-        },
-        "x-ms-requestBody-index": 0
+        }
       }
     },
     "/api/v3.2/Workspace/spaces/{spaceName}/services/{serviceName}/workspaces/{name}": {
       "get": {
-        "tags": [
-          "Workspace"
-        ],
+        "tags": ["Workspace"],
         "operationId": "Workspace_DownloadSource",
         "parameters": [
           {
@@ -795,10 +761,7 @@
         }
       },
       "Space": {
-        "required": [
-          "name",
-          "parentSpaceName"
-        ],
+        "required": ["name", "parentSpaceName"],
         "type": "object",
         "properties": {
           "name": {

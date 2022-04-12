@@ -5,23 +5,13 @@
     "version": "2015-05-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json",
-    "text/json"
-  ],
-  "produces": [
-    "application/json",
-    "text/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json", "text/json"],
+  "produces": ["application/json", "text/json"],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability": {
       "post": {
-        "tags": [
-          "StorageAccounts"
-        ],
+        "tags": ["StorageAccounts"],
         "operationId": "StorageAccounts_CheckNameAvailability",
         "description": "Checks that account name is valid and is not in use.",
         "parameters": [
@@ -53,9 +43,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}": {
       "put": {
-        "tags": [
-          "StorageAccounts"
-        ],
+        "tags": ["StorageAccounts"],
         "operationId": "StorageAccounts_Create",
         "description": "Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned. ",
         "parameters": [
@@ -99,9 +87,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "tags": [
-          "StorageAccounts"
-        ],
+        "tags": ["StorageAccounts"],
         "operationId": "StorageAccounts_Delete",
         "description": "Deletes a storage account in Microsoft Azure.",
         "parameters": [
@@ -132,9 +118,7 @@
         }
       },
       "get": {
-        "tags": [
-          "StorageAccounts"
-        ],
+        "tags": ["StorageAccounts"],
         "operationId": "StorageAccounts_GetProperties",
         "description": "Returns the properties for the specified storage account including but not limited to name, account type, location, and account status. The ListKeys operation should be used to retrieve storage keys.",
         "parameters": [
@@ -165,9 +149,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "StorageAccounts"
-        ],
+        "tags": ["StorageAccounts"],
         "operationId": "StorageAccounts_Update",
         "description": "Updates the account type or tags for a storage account. It can also be used to add a custom domain (note that custom domains cannot be added via the Create operation). Only one custom domain is supported per storage account. This API can only be used to update one of tags, accountType, or customDomain per call. To update multiple of these properties, call the API multiple times with one change per call. This call does not change the storage keys for the account. If you want to change storage account keys, use the RegenerateKey operation. The location and name of the storage account cannot be changed after creation.",
         "parameters": [
@@ -209,9 +191,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys": {
       "post": {
-        "tags": [
-          "StorageAccounts"
-        ],
+        "tags": ["StorageAccounts"],
         "operationId": "StorageAccounts_ListKeys",
         "description": "Lists the access keys for the specified storage account.",
         "parameters": [
@@ -244,9 +224,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts": {
       "get": {
-        "tags": [
-          "StorageAccounts"
-        ],
+        "tags": ["StorageAccounts"],
         "operationId": "StorageAccounts_List",
         "description": "Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.",
         "parameters": [
@@ -270,9 +248,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts": {
       "get": {
-        "tags": [
-          "StorageAccounts"
-        ],
+        "tags": ["StorageAccounts"],
         "operationId": "StorageAccounts_ListByResourceGroup",
         "description": "Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.",
         "parameters": [
@@ -299,9 +275,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey": {
       "post": {
-        "tags": [
-          "StorageAccounts"
-        ],
+        "tags": ["StorageAccounts"],
         "operationId": "StorageAccounts_RegenerateKey",
         "description": "Regenerates the access keys for the specified storage account.",
         "parameters": [
@@ -343,9 +317,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages": {
       "get": {
-        "tags": [
-          "Usage"
-        ],
+        "tags": ["Usage"],
         "operationId": "Usage_List",
         "description": "Gets the current usage count and the limit for the resources under the subscription.",
         "parameters": [
@@ -369,7 +341,7 @@
   },
   "definitions": {
     "StorageAccountCheckNameAvailabilityParameters": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string"
@@ -379,12 +351,10 @@
           "default": "Microsoft.Storage/storageAccounts"
         }
       },
-      "required": [
-        "name"
-      ]    
+      "required": ["name"]
     },
     "CheckNameAvailabilityResult": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "nameAvailable": {
           "type": "boolean",
@@ -393,10 +363,7 @@
         "reason": {
           "type": "string",
           "description": "Gets the reason that a storage account name could not be used. The Reason element is only returned if NameAvailable is false.",
-          "enum": [
-            "AccountNameInvalid",
-            "AlreadyExists"
-          ],
+          "enum": ["AccountNameInvalid", "AlreadyExists"],
           "x-ms-enum": { "name": "Reason" }
         },
         "message": {
@@ -407,24 +374,18 @@
       "description": "The CheckNameAvailability operation response."
     },
     "StorageAccountPropertiesCreateParameters": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "accountType": {
           "type": "string",
           "description": "Gets or sets the account type.",
-          "enum": [
-            "Standard_LRS",
-            "Standard_ZRS",
-            "Standard_GRS",
-            "Standard_RAGRS",
-            "Premium_LRS"
-          ],
+          "enum": ["Standard_LRS", "Standard_ZRS", "Standard_GRS", "Standard_RAGRS", "Premium_LRS"],
           "x-ms-enum": { "name": "AccountType" }
         }
       }
     },
     "StorageAccountCreateParameters": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -433,13 +394,13 @@
       },
       "allOf": [
         {
-            "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "The parameters to provide for the account."
     },
     "Endpoints": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "blob": {
           "type": "string",
@@ -465,7 +426,7 @@
       "description": "The URIs that are used to perform a retrieval of a public blob, queue or table object."
     },
     "Foo": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "Bar.Point": {
           "$ref": "#/definitions/Bar",
@@ -475,7 +436,7 @@
       "description": "The URIs that are used to perform a retrieval of a public blob, queue or table object."
     },
     "Bar": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "RecursivePoint": {
           "$ref": "#/definitions/Endpoints",
@@ -485,7 +446,7 @@
       "description": "The URIs that are used to perform a retrieval of a public blob, queue or table object."
     },
     "CustomDomain": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -499,28 +460,18 @@
       "description": "The custom domain assigned to this storage account. This can be set via Update."
     },
     "StorageAccountProperties": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "provisioningState": {
           "type": "string",
           "description": "Gets the status of the storage account at the time the operation was called.",
-          "enum": [
-            "Creating",
-            "ResolvingDNS",
-            "Succeeded"
-          ],
+          "enum": ["Creating", "ResolvingDNS", "Succeeded"],
           "x-ms-enum": { "name": "ProvisioningState" }
         },
         "accountType": {
           "type": "string",
           "description": "Gets the type of the storage account.",
-          "enum": [
-            "Standard_LRS",
-            "Standard_ZRS",
-            "Standard_GRS",
-            "Standard_RAGRS",
-            "Premium_LRS"
-          ],
+          "enum": ["Standard_LRS", "Standard_ZRS", "Standard_GRS", "Standard_RAGRS", "Premium_LRS"],
           "x-ms-enum": { "name": "AccountType" }
         },
         "primaryEndpoints": {
@@ -534,10 +485,7 @@
         "statusOfPrimary": {
           "type": "string",
           "description": "Gets the status indicating whether the primary location of the storage account is available or unavailable.",
-          "enum": [
-            "Available",
-            "Unavailable"
-          ],
+          "enum": ["Available", "Unavailable"],
           "x-ms-enum": { "name": "AccountStatus" }
         },
         "lastGeoFailoverTime": {
@@ -552,10 +500,7 @@
         "statusOfSecondary": {
           "type": "string",
           "description": "Gets the status indicating whether the secondary location of the storage account is available or unavailable. Only available if the accountType is StandardGRS or StandardRAGRS.",
-          "enum": [
-            "Available",
-            "Unavailable"
-          ],
+          "enum": ["Available", "Unavailable"],
           "x-ms-enum": { "name": "AccountStatus" }
         },
         "creationTime": {
@@ -574,7 +519,7 @@
       }
     },
     "StorageAccount": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -583,13 +528,13 @@
       },
       "allOf": [
         {
-            "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "The storage account."
     },
     "StorageAccountKeys": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "key1": {
           "type": "string",
@@ -603,7 +548,7 @@
       "description": "The access keys for the storage account."
     },
     "StorageAccountListResult": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -620,18 +565,12 @@
       "description": "The list storage accounts operation response."
     },
     "StorageAccountPropertiesUpdateParameters": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "accountType": {
           "type": "string",
           "description": "Gets or sets the account type. Note that StandardZRS and PremiumLRS accounts cannot be changed to other account types, and other account types cannot be changed to StandardZRS or PremiumLRS.",
-          "enum": [
-            "Standard_LRS",
-            "Standard_ZRS",
-            "Standard_GRS",
-            "Standard_RAGRS",
-            "Premium_LRS"
-          ],
+          "enum": ["Standard_LRS", "Standard_ZRS", "Standard_GRS", "Standard_RAGRS", "Premium_LRS"],
           "x-ms-enum": { "name": "AccountType" }
         },
         "customDomain": {
@@ -641,7 +580,7 @@
       }
     },
     "StorageAccountUpdateParameters": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -650,26 +589,23 @@
       },
       "allOf": [
         {
-            "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "The parameters to update on the account."
     },
     "StorageAccountRegenerateKeyParameters": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "keyName": {
           "type": "string",
-          "enum": [
-            "key1",
-            "key2"
-          ],
+          "enum": ["key1", "key2"],
           "x-ms-enum": { "name": "KeyName" }
         }
       }
     },
     "UsageName": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "value": {
           "type": "string",
@@ -683,19 +619,12 @@
       "description": "The Usage Names."
     },
     "Usage": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "unit": {
           "type": "string",
           "description": "Gets the unit of measurement.",
-          "enum": [
-            "Count",
-            "Bytes",
-            "Seconds",
-            "Percent",
-            "CountsPerSecond",
-            "BytesPerSecond"
-          ],
+          "enum": ["Count", "Bytes", "Seconds", "Percent", "CountsPerSecond", "BytesPerSecond"],
           "x-ms-enum": { "name": "UsageUnit" }
         },
         "currentValue": {
@@ -716,7 +645,7 @@
       "description": "Describes Storage Resource Usage."
     },
     "UsageListResult": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -729,7 +658,7 @@
       "description": "The List Usages operation response."
     },
     "Resource": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -758,13 +687,11 @@
           "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
+      "required": ["location"],
       "x-ms-azure-resource": true
     },
     "SubResource": {
-      "type":  "object",
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",

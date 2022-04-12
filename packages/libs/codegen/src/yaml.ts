@@ -3,7 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DEFAULT_SCHEMA, dump, load, Schema } from "js-yaml";
+import { DEFAULT_SCHEMA, load, Schema } from "js-yaml";
+import { dump } from "./yaml-dump";
 
 const propertyPriority = [
   "info",
@@ -87,10 +88,10 @@ function sortWithPriorty(a: any, b: any): number {
 }
 
 export function deserialize<T>(text: string, filename: string, schema: Schema = DEFAULT_SCHEMA): T {
-  return (load(text, {
+  return load(text, {
     schema,
     filename,
-  }) as any) as T;
+  }) as any as T;
 }
 
 export interface SerializeOptions {

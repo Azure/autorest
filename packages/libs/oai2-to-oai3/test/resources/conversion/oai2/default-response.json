@@ -6,9 +6,7 @@
     "description": "Test Infrastructure for AutoRest"
   },
   "host": "localhost:3000",
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "paths": {},
   "responses": {
     "200": {

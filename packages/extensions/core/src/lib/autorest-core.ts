@@ -2,18 +2,26 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-
-import { AutorestContextLoader, AutorestContext, MessageEmitter } from "./configuration";
-import { EventEmitter, IEvent } from "./events";
-import { Exception } from "@autorest/common";
-import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
-import { runPipeline } from "./pipeline/pipeline";
-export { AutorestContext } from "./configuration";
-import { isConfigurationDocument } from "@autorest/configuration";
 import { homedir } from "os";
+import {
+  AutorestLoggingSession,
+  ConsoleLogger,
+  Exception,
+  LoggerSink,
+  AutorestLoggerSourceEnhancer,
+  AutorestAsyncLogger,
+  AutorestLogger,
+  PluginUserError,
+} from "@autorest/common";
+import { isConfigurationDocument } from "@autorest/configuration";
+import { IFileSystem, RealFileSystem } from "@azure-tools/datastore";
 import { Artifact } from "./artifact";
+import { AutorestContextLoader, AutorestContext, MessageEmitter } from "./context";
 import { DocumentType } from "./document-type";
-import { Channel, Message } from "./message";
+import { EventEmitter, IEvent } from "./events";
+import { runPipeline } from "./pipeline/pipeline";
+export { AutorestContext } from "./context";
+import { StatsCollector } from "./stats";
 
 function IsIterable(target: any) {
   return !!target && typeof target !== "string" && typeof target[Symbol.iterator] === "function";
@@ -44,13 +52,13 @@ export class AutoRest extends EventEmitter {
    */
   @EventEmitter.Event public GeneratedFile!: IEvent<AutoRest, Artifact>;
   /**
+   * Event: Signals when a File is asked not to be deleted when cleaning.
+   */
+  @EventEmitter.Event public ProtectFile!: IEvent<AutoRest, string>;
+  /**
    * Event: Signals when a Folder is supposed to be cleared
    */
   @EventEmitter.Event public ClearFolder!: IEvent<AutoRest, string>;
-  /**
-   * Event: Signals when a message is generated
-   */
-  @EventEmitter.Event public Message!: IEvent<AutoRest, Message>;
 
   private _configurations = new Array<any>();
   private _view: AutorestContext | undefined;
@@ -63,7 +71,11 @@ export class AutoRest extends EventEmitter {
    * @param fileSystem The implementation of the filesystem to load and save files from the host application.
    * @param configFileOrFolderUri The URI of the configuration file or folder containing the configuration file. Is null if no configuration file should be looked for.
    */
-  public constructor(private fileSystem: IFileSystem = new RealFileSystem(), public configFileOrFolderUri?: string) {
+  public constructor(
+    private loggerSink: LoggerSink,
+    private fileSystem: IFileSystem = new RealFileSystem(),
+    public configFileOrFolderUri?: string,
+  ) {
     super();
     // ensure the environment variable for the home folder is set.
     process.env["autorest.home"] = process.env["AUTOREST_HOME"] || process.env["autorest.home"] || homedir();
@@ -75,14 +87,22 @@ export class AutoRest extends EventEmitter {
 
     // subscribe to the events for the current configuration view
     messageEmitter.GeneratedFile.Subscribe((cfg, file) => this.GeneratedFile.Dispatch(file));
+    messageEmitter.ProtectFile.Subscribe((cfg, folder) => this.ProtectFile.Dispatch(folder));
     messageEmitter.ClearFolder.Subscribe((cfg, folder) => this.ClearFolder.Dispatch(folder));
-    messageEmitter.Message.Subscribe((cfg, message) => this.Message.Dispatch(message));
 
-    return (this._view = await new AutorestContextLoader(this.fileSystem, this.configFileOrFolderUri).CreateView(
-      messageEmitter,
-      includeDefault,
-      ...this._configurations,
-    ));
+    const logger: AutorestLogger = new AutorestAsyncLogger({
+      asyncSession: AutorestLoggingSession,
+      sinks: [this.loggerSink],
+      processors: [new AutorestLoggerSourceEnhancer(messageEmitter.DataStore)],
+    });
+
+    const stats = new StatsCollector();
+    return (this._view = await new AutorestContextLoader(
+      this.fileSystem,
+      logger,
+      stats,
+      this.configFileOrFolderUri,
+    ).createView(messageEmitter, includeDefault, ...this._configurations));
   }
 
   public Invalidate() {
@@ -126,15 +146,12 @@ export class AutoRest extends EventEmitter {
           }
         };
         if (view.config.inputFileUris.length === 0) {
-          if (view.GetEntry("allow-no-input")) {
-            this.Finished.Dispatch(true);
-            return true;
-          } else {
-            // if this is using perform-load we don't need to require files.
-            // if it's using batch, we might not have files in the main body
-            if (view.config.raw["perform-load"] !== false) {
-              return new Exception("No input files provided.\n\nUse --help to get help information.");
-            }
+          // if this is using perform-load we don't need to require files.
+          // if it's using batch, we might not have files in the main body
+          if (view.config["perform-load"] !== false && !view.config["allow-no-input"]) {
+            return new Exception(
+              "No input files provided.\n\nUse --help to get help information or see https://aka.ms/autorest/cli for additional documentation",
+            );
           }
         }
 
@@ -148,30 +165,27 @@ export class AutoRest extends EventEmitter {
           new Promise((_, rej) => view.CancellationToken.onCancellationRequested(() => rej("Cancellation requested."))),
         ]);
 
+        // Wait for all logs to have been sent before shutting down.
+        await AutorestLoggingSession.waitForMessages();
+
         // finished -- return status (if cancelled, returns false.)
         this.Finished.Dispatch(!view.CancellationTokenSource.token.isCancellationRequested);
 
         view.messageEmitter.removeAllListeners();
         return true;
-      } catch (e) {
-        const message = view?.config.debug
-          ? {
-              Channel: Channel.Debug,
-              Text: `Process() cancelled due to exception : ${e.message ? e.message : e} / ${e.stack ? e.stack : ""}`,
-            }
-          : {
-              Channel: Channel.Debug,
-              Text: "Process() cancelled due to failure ",
-            };
-        if (e instanceof Exception) {
-          // idea: don't throw exceptions, just visibly log them and return false
-          message.Channel = Channel.Fatal;
-          // eslint-disable-next-line no-ex-assign
-          e = false;
+      } catch (e: any) {
+        if (e instanceof PluginUserError) {
+          this.loggerSink.log({ level: "fatal", message: e.message });
+        } else {
+          const message = view?.config.debug
+            ? `Process() cancelled due to exception : ${e.message ? e.message : e} / ${e.stack ? e.stack : ""}`
+            : "Process() cancelled due to failure ";
+          this.loggerSink.log({ level: "fatal", message });
         }
-        this.Message.Dispatch(message);
 
-        this.Finished.Dispatch(e);
+        // Wait for all logs to have been sent before shutting down.
+        await AutorestLoggingSession.waitForMessages();
+        this.Finished.Dispatch(false);
         if (view) {
           view.messageEmitter.removeAllListeners();
         }
@@ -193,7 +207,7 @@ export class AutoRest extends EventEmitter {
  */
 export async function LiterateToJson(content: string): Promise<string> {
   try {
-    const autorest = new AutoRest({
+    const autorest = new AutoRest(new ConsoleLogger(), {
       list: () => Promise.resolve([]),
       read: (f: string) => Promise.resolve(f == "none:///empty-file.md" ? content || "# empty file" : "# empty file"),
       EnumerateFileUris: () => Promise.resolve([]),
@@ -207,7 +221,7 @@ export async function LiterateToJson(content: string): Promise<string> {
     });
     // run autorest and wait.
 
-    await (await autorest.Process()).finish;
+    await autorest.Process().finish;
     return result;
   } catch (x) {
     return "";

@@ -1,0 +1,6 @@
+/components/schemas => /definitions
+/components/schemas/MySharedSchema => /definitions/MySharedSchema
+/components/schemas/MySharedSchema/type => /definitions/MySharedSchema/type
+/components/schemas/MySharedSchema/properties => /definitions/MySharedSchema/properties
+/components/schemas/MySharedSchema/properties/name => /definitions/MySharedSchema/properties/name
+/components/schemas/MySharedSchema/properties/name/type => /definitions/MySharedSchema/properties/name/type

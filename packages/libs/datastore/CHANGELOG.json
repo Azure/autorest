@@ -2,6 +2,212 @@
   "name": "@azure-tools/datastore",
   "entries": [
     {
+      "version": "4.6.1",
+      "tag": "@azure-tools/datastore_v4.6.1",
+      "date": "Tue, 15 Mar 2022 16:00:38 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.9.0` to `~2.9.1`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/yaml\" from `~1.0.0` to `~1.1.0`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.6.0",
+      "tag": "@azure-tools/datastore_v4.6.0",
+      "date": "Fri, 19 Nov 2021 04:23:42 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Added support for identity sourcemap type"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "**Fix** Performance issue with not reusing DataHandle causing multiple instance of sourcemaps to be loaded at the same time"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.8.0` to `~2.9.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/json\" from `~1.2.0` to `~1.2.1`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.5.1",
+      "tag": "@azure-tools/datastore_v4.5.1",
+      "date": "Thu, 14 Oct 2021 23:03:29 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.7.0` to `~2.8.0`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.5.0",
+      "tag": "@azure-tools/datastore_v4.5.0",
+      "date": "Wed, 08 Sep 2021 15:39:22 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Added** Option to disable auto unloading of data in DataStore"
+          },
+          {
+            "comment": "**Added** New tree source map builder replacing graph builder"
+          },
+          {
+            "comment": "**Added** Support for yaml `<<` merge keyword in parser\""
+          },
+          {
+            "comment": "Extract yaml logic in own package `@azure-tools/yaml`"
+          },
+          {
+            "comment": "**Perf** Improvement to perf when buildingraph mappings"
+          },
+          {
+            "comment": "**Added** New path mapping sourcemap functionality to improve performance significantly by reducing the yaml ast parsing needed to construct position based sourcemap"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.6.0` to `~2.7.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/json\" from `~1.1.0` to `~1.2.0`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.4.0",
+      "tag": "@azure-tools/datastore_v4.4.0",
+      "date": "Mon, 19 Jul 2021 15:15:42 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Remove** NodeT type"
+          },
+          {
+            "comment": "Drop support for node 10"
+          },
+          {
+            "comment": "**Perf** Memory usage improvements"
+          },
+          {
+            "comment": "**Perf** Unload sourcemap from memory if not used"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "**Fix** Sourcemap computation"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.5.294` to `~2.6.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/json\" from `~1.0.0` to `~1.1.0`"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.3.1",
+      "tag": "@azure-tools/datastore_v4.3.1",
+      "date": "Tue, 27 Apr 2021 17:48:43 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Deprecate** json-pointer functionality as it is moved to seperate package"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.3.0",
+      "tag": "@azure-tools/datastore_v4.3.0",
+      "date": "Fri, 09 Apr 2021 19:53:22 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Added** sourcemap support"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.2.2",
+      "tag": "@azure-tools/datastore_v4.2.2",
+      "date": "Thu, 01 Apr 2021 15:46:41 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @azure-tools/uri version to ~3.1.1"
+          },
+          {
+            "comment": "**Update** Logging to use `@azure/logger` instead of `console`"
+          },
+          {
+            "comment": "**Refactor** datastore and deprecated PascalCase methods"
+          },
+          {
+            "comment": "**Fix vulnerability** incomplete url sanitization when adding github auth token"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.2.1",
+      "tag": "@azure-tools/datastore_v4.2.1",
+      "date": "Tue, 16 Mar 2021 19:28:18 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Revert** logging when failed to load file as it creates too much noise"
+          }
+        ]
+      }
+    },
+    {
+      "version": "4.2.0",
+      "tag": "@azure-tools/datastore_v4.2.0",
+      "date": "Tue, 16 Mar 2021 15:52:56 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Update** TransformerViaPointer to take Generic Input/Output types"
+          },
+          {
+            "comment": "Bump dependencies versions"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Added retry logic for loading uris."
+          },
+          {
+            "comment": "**Refactor** abstract file system. Moved CachingFileSystem from @autorest/configuration."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/codegen\" from `~2.5.293` to `~2.5.294`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.1.271",
       "tag": "@azure-tools/datastore_v4.1.271",
       "date": "Thu, 04 Feb 2021 19:05:18 GMT",

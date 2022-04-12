@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-import * as path from "path";
 import * as cp from "child_process";
-import { getPathsRecursively } from "./util";
-import { parseArgument } from "./cli";
 import * as os from "os";
+import * as path from "path";
+import { parseArgument } from "./cli";
+import { getPathsRecursively } from "./util";
 
 /**
  * Details for the output of an AutoRest run (pre-existing or not).
@@ -88,8 +88,7 @@ export const generateWithAutoRest = async (
     // The output-folder where generated files are written.  Specify both
     // styles of option due to inconsistencies between generators.
     `--output-folder="${outputPath}"`,
-    `--${language}.output-folder="$(output-folder)"`,
-
+    `--output-artifact:configuration.yaml`,
     // Clear the output folder before generating
     `--${language}.clear-output-folder`,
 

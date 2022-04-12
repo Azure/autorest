@@ -1,25 +1,25 @@
 {
   "name": "@azure-tools/oai2-to-oai3",
-  "version": "4.2.277",
+  "version": "4.6.0",
   "description": "OpenAPI2 to OpenAPI3 conversion library that maintains souremaps for use with AutoRest",
-  "main": "./dist/src/index.js",
-  "typings": "./dist/src/index.d.ts",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "engines": {
-    "node": ">=10.13.0"
+    "node": ">=12.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Azure/perks.git"
+    "url": "git+https://github.com/Azure/autorest.git"
   },
   "scripts": {
-    "build": "tsc -p .",
-    "watch": "tsc -p . --watch",
+    "watch": "tsc -p tsconfig.build.json --watch",
+    "build": "tsc -p tsconfig.build.json",
     "lint:fix": "eslint  . --fix --ext .ts",
     "lint": "eslint  . --ext .ts",
     "prepare": "npm run build",
     "test": "jest --watchAll --coverage=false",
     "test:ci": "jest --ci",
-    "clean": "rimraf ./dist"
+    "clean": "rimraf ./dist ./temp"
   },
   "keywords": [
     "perks",
@@ -31,31 +31,33 @@
   "author": "Microsoft",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Azure/perks/issues"
+    "url": "https://github.com/Azure/autorest/issues"
   },
-  "homepage": "https://github.com/Azure/perks/tree/master/oai2-to-oai3#readme",
-  "readme": "https://github.com/Azure/perks/tree/master/oai2-to-oai3/readme.md",
+  "homepage": "https://github.com/Azure/autorest/tree/main/packages/libs/oai2-to-oai3",
+  "readme": "https://github.com/Azure/autorest/tree/main/packages/libs/oai2-to-oai3/readme.md",
   "devDependencies": {
-    "@autorest/test-utils": "~0.1.0",
+    "@autorest/test-utils": "~0.5.1",
     "@types/jest": "^26.0.20",
     "@types/js-yaml": "~4.0.0",
     "@types/node": "~14.14.20",
-    "@types/source-map": "0.5.0",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
+    "eslint-plugin-jest": "~24.3.2",
     "eslint-plugin-node": "~11.1.0",
-    "eslint-plugin-prettier": "~3.2.0",
-    "eslint-plugin-unicorn": "~27.0.0",
+    "eslint-plugin-prettier": "~3.4.0",
+    "eslint-plugin-unicorn": "~33.0.1",
+    "eslint-plugin-import": "~2.24.2",
     "eslint": "^7.17.0",
-    "jest": "^26.6.3",
+    "jest": "^28.0.0-alpha.7",
     "rimraf": "^3.0.2",
     "source-map-support": "^0.5.19",
-    "ts-jest": "^26.4.4",
-    "typescript": "~4.2.3"
+    "ts-jest": "^27.0.3",
+    "typescript": "~4.6.3"
   },
   "dependencies": {
-    "@azure-tools/datastore": "~4.1.271",
-    "@azure-tools/openapi": "~3.1.0",
-    "source-map": "0.5.6"
+    "@azure-tools/datastore": "~4.6.1",
+    "@azure-tools/openapi": "~3.3.0",
+    "@azure-tools/json": "~1.2.2",
+    "source-map": "0.7.3"
   }
 }

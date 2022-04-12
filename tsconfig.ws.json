@@ -1,0 +1,25 @@
+{
+  "references": [
+    { "path": "packages/apps/autorest/tsconfig.build.json" },
+
+    { "path": "packages/extensions/core/tsconfig.build.json" },
+    { "path": "packages/extensions/cadl/tsconfig.build.json" },
+    { "path": "packages/extensions/modelerfour/tsconfig.build.json" },
+
+    { "path": "packages/libs/codegen/tsconfig.build.json" },
+    { "path": "packages/libs/codemodel/tsconfig.build.json" },
+    { "path": "packages/libs/common/tsconfig.build.json" },
+    { "path": "packages/libs/configuration/tsconfig.build.json" },
+    { "path": "packages/libs/datastore/tsconfig.build.json" },
+    { "path": "packages/libs/deduplication/tsconfig.build.json" },
+    { "path": "packages/libs/extension-base/tsconfig.build.json" },
+    { "path": "packages/libs/extension/tsconfig.build.json" },
+    { "path": "packages/libs/json/tsconfig.build.json" },
+    { "path": "packages/libs/jsonschema/tsconfig.build.json" },
+    { "path": "packages/libs/oai2-to-oai3/tsconfig.build.json" },
+    { "path": "packages/libs/openapi/tsconfig.build.json" },
+    { "path": "packages/libs/system-requirements/tsconfig.build.json" },
+    { "path": "packages/libs/yaml/tsconfig.build.json" }
+  ],
+  "files": []
+}

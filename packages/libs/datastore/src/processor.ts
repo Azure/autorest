@@ -1,7 +1,8 @@
-import { clone, values } from "@azure-tools/linq";
-import { Mapping } from "source-map";
+import { parseJsonPointer, serializeJsonPointer } from "@azure-tools/json";
+import { cloneDeep } from "lodash";
 import { ProxyObject } from "./graph-builder";
 import { createGraphProxy, Node, ProxyNode, visit } from "./main";
+import { PathMapping } from "./source-map/path-source-map";
 
 export interface AnyObject {
   [key: string]: any;
@@ -19,7 +20,7 @@ export interface Source {
 
 export class Transformer<TInput extends object = AnyObject, TOutput extends object = AnyObject> {
   protected generated: TOutput;
-  protected mappings = new Array<Mapping>();
+  protected mappings = new Array<PathMapping>();
   protected final?: TOutput;
   protected current!: TInput;
   private targetPointers = new Map<object, string>();
@@ -29,7 +30,7 @@ export class Transformer<TInput extends object = AnyObject, TOutput extends obje
     return <TOutput>this.final;
   }
 
-  public async getSourceMappings(): Promise<Array<Mapping>> {
+  public async getSourceMappings(): Promise<Array<PathMapping>> {
     await this.runProcess();
     return this.mappings;
   }
@@ -67,10 +68,10 @@ export class Transformer<TInput extends object = AnyObject, TOutput extends obje
     member: K,
     pointer: string,
   ): AnyObject {
-    const value = <ProxyObject<TParent[K]>>(
-      (<any>createGraphProxy(this.currentInputFilename, `${this.targetPointers.get(target)}/${member}`, this.mappings))
-    );
-    this.targetPointers.set(value, `${this.targetPointers.get(target)}/${member}`);
+    const parentTargetPointer = parseJsonPointer(this.targetPointers.get(target) ?? "");
+    const targetPointer = serializeJsonPointer([...parentTargetPointer, member as string]);
+    const value = <ProxyObject<TParent[K]>>createGraphProxy(this.currentInputFilename, targetPointer, this.mappings);
+    this.targetPointers.set(value, targetPointer);
     target[member] = {
       value: <TParent[typeof member]>value,
       filename: this.currentInputFilename,
@@ -85,17 +86,13 @@ export class Transformer<TInput extends object = AnyObject, TOutput extends obje
     member: K,
     pointer: string,
   ) {
+    const parentTargetPointer = parseJsonPointer(this.targetPointers.get(target) ?? "");
+    const targetPointer = serializeJsonPointer([...parentTargetPointer, member as string]);
+
     const value = <ProxyObject<TParent[K]>>(
-      (<any>(
-        createGraphProxy(
-          this.currentInputFilename,
-          `${this.targetPointers.get(target)}/${member}`,
-          this.mappings,
-          new Array<any>(),
-        )
-      ))
+      createGraphProxy(this.currentInputFilename, targetPointer, this.mappings, new Array<any>())
     );
-    this.targetPointers.set(value, `${this.targetPointers.get(target)}/${member}`);
+    this.targetPointers.set(value, targetPointer);
     target[member] = {
       value: <TParent[typeof member]>value,
       filename: this.currentInputFilename,
@@ -123,7 +120,7 @@ export class Transformer<TInput extends object = AnyObject, TOutput extends obje
   ) {
     // return target[member] = <ProxyNode<TParent[K]>>{ value: JSON.parse(JSON.stringify(value)), pointer, recurse, filename: this.key };
     return (target[member] = <ProxyNode<TParent[K]>>{
-      value: clone(value),
+      value: cloneDeep(value),
       pointer,
       recurse,
       filename: this.currentInputFilename,
@@ -150,13 +147,13 @@ export class Transformer<TInput extends object = AnyObject, TOutput extends obje
   protected async runProcess() {
     if (!this.final) {
       await this.init();
-      for (this.currentInput of values(this.inputs)) {
+      for (this.currentInput of this.inputs) {
         this.current = await this.currentInput.ReadObject<TInput>();
         await this.process(this.generated, visit(this.current));
       }
       await this.finish();
     }
-    this.final = clone(this.generated); // should we be freezing this?
+    this.final = cloneDeep(this.generated); // should we be freezing this?
   }
 }
 

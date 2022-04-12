@@ -1,28 +1,37 @@
-# <img align="center" src="../images/logo.png">  How AutoRest Generates Code From an OpenAPI Definition
+# <img align="center" src="../images/logo.png"> How AutoRest Generates Code From an OpenAPI Definition
 
 ## Contents
-- [Data Types](#data-types)
-	- [Primitive Data Types](#primitive-data-types)
-	- [`byte[]`, `DateTime`, `int`, `long`](#byte-datetime-int-long)
-	- [Arrays and Sequences](#arrays-and-sequences)
-	- [Dictionaries](#dictionaries)
-	- [Inheritance and Polymorphism](#inheritance-and-polymorphism)
-		- [Inheritance](#inheritance)
-		- [Polymorphism](#polymorphism)
-		- [Constants](#constants)
-	- [Type Name Generation](#type-name-generation)
-- [Operations](#operations)
-	- [Generating Operation Classes](#generating-operation-classes)
-	- [Specifying required parameters and properties](#specifying-required-parameters-and-properties)
-	- [Error Modeling](#error-modeling)
-	- DEPRECATED : [Composite Clients](#composite-clients)
-- [Extensions](#extensions)
+
+- [<img align="center" src="../images/logo.png"> How AutoRest Generates Code From an OpenAPI Definition](#-how-autorest-generates-code-from-an-openapi-definition)
+  - [Contents](#contents)
+  - [Data Types](#data-types)
+    - [Primitive Data Types](#primitive-data-types)
+    - [`byte[]`, `DateTime`, `int`, `long`](#byte-datetime-int-long)
+    - [Arrays and Sequences](#arrays-and-sequences)
+    - [Dictionaries](#dictionaries)
+      - [Dictionaries as a member.](#dictionaries-as-a-member)
+      - [Dictionaries as a catch-all for unlisted properties.](#dictionaries-as-a-catch-all-for-unlisted-properties)
+    - [Constants](#constants)
+    - [Inheritance and Polymorphism](#inheritance-and-polymorphism)
+      - [Inheritance](#inheritance)
+      - [Polymorphism](#polymorphism)
+    - [Type Name Generation](#type-name-generation)
+  - [Operations](#operations)
+    - [Generating Operation Classes](#generating-operation-classes)
+    - [Specifying required parameters and properties](#specifying-required-parameters-and-properties)
+    - [Error Modeling](#error-modeling)
+    - [DEPRECATED - Composite Clients](#deprecated---composite-clients)
+      - [DEPRECATED: Generating Composite Clients](#deprecated-generating-composite-clients)
+  - [Extensions](#extensions)
 
 ## Data Types
+
 ### Primitive Data Types
-The primitive types are based on [JSON-Schema Draft 4][JSON-primitive-types]. More details in the OpenAPI Specification [here][OpenAPI-primitive-types].
+
+The primitive types are based on [JSON-Schema Draft 4][json-primitive-types]. More details in the OpenAPI Specification [here][openapi-primitive-types].
 
 **Example:**
+
 ```json
 "definitions": {
   "pet": {
@@ -37,7 +46,9 @@ The primitive types are based on [JSON-Schema Draft 4][JSON-primitive-types]. Mo
   }
 }
 ```
+
 Generates C# client model type:
+
 ```csharp
 public partial class Pet
 {
@@ -61,16 +72,18 @@ public partial class Pet
 ```
 
 ### `byte[]`, `DateTime`, `int`, `long`
+
 - **`byte[]`**
-To represent `byte` arrays in the generated code, the property of the OpenAPI definition should have `string` as its type and `byte` as its format. This indicates binary data that will be represented as a base64-encoded string in requests and responses. The generated client will automatically do this encoding when processing requests and responses.
+  To represent `byte` arrays in the generated code, the property of the OpenAPI definition should have `string` as its type and `byte` as its format. This indicates binary data that will be represented as a base64-encoded string in requests and responses. The generated client will automatically do this encoding when processing requests and responses.
 
 - **`DateTime`**
-AutoRest generates `DateTime` typed properties in generated C# code for OpenAPI properties that have `string` as the type and `date-time` as the format.
+  AutoRest generates `DateTime` typed properties in generated C# code for OpenAPI properties that have `string` as the type and `date-time` as the format.
 
 - **`int` / `long`**
-Both `int` and `long` properties in the generated code correspond to `integer` types in OpenAPI properties. If the format of the OpenAPI property is `int32`, `int` will be generated; if the format is `int64`, `long` will be generated. If the format field of the OpenAPI property is not set, AutoRest use  format `int32`.
+  Both `int` and `long` properties in the generated code correspond to `integer` types in OpenAPI properties. If the format of the OpenAPI property is `int32`, `int` will be generated; if the format is `int64`, `long` will be generated. If the format field of the OpenAPI property is not set, AutoRest use format `int32`.
 
 **Example:**
+
 ```json
 "pet": {
   "properties": {
@@ -94,7 +107,9 @@ Both `int` and `long` properties in the generated code correspond to `integer` t
   }
 }
 ```
+
 Generates C# client model type:
+
 ```csharp
 public partial class Pet
 {
@@ -128,8 +143,10 @@ public partial class Pet
 ```
 
 ### Arrays and Sequences
+
 AutoRest builds sequences from schemas with type `array`.
 The following definition
+
 ```json
 "pet": {
   "properties": {
@@ -142,7 +159,9 @@ The following definition
   }
 }
 ```
+
 Generates C# client model type
+
 ```csharp
 public partial class Pet
 {
@@ -161,14 +180,17 @@ public partial class Pet
 ```
 
 ### Dictionaries
-AutoRest generates dictionaries (or hash maps in some contexts) using `additionalProperties` from [JSON-Schema Draft 4][JSON-schema-validation-properties]. The additionalProperties element should specify the OpenAPI schema of the values in the dictionary . The keys of the generated dictionary will be of type `string`.
+
+AutoRest generates dictionaries (or hash maps in some contexts) using `additionalProperties` from [JSON-Schema Draft 4][json-schema-validation-properties]. The additionalProperties element should specify the OpenAPI schema of the values in the dictionary . The keys of the generated dictionary will be of type `string`.
 
 There are two basic patterns when generating dictionaries in AutoRest.
 
 #### Dictionaries as a member.
+
 A dictionary can be generated as a member in a object schema, when there are no `properties` defined, the dictionary will be generated for the entire member.
 
 The following definition
+
 ```json
 "StringDictionary": {
   "additionalProperties": {
@@ -176,7 +198,9 @@ The following definition
   }
 }
 ```
+
 will generate C# client library
+
 ```csharp
 public partial class Pet
 {
@@ -195,6 +219,7 @@ public partial class Pet
 ```
 
 OpenAPI and AutoRest also support Dictionary in Dictionary and Array in Dictionary. For example
+
 ```json
 "additionalProperties": {
    "type": "object",
@@ -203,7 +228,9 @@ OpenAPI and AutoRest also support Dictionary in Dictionary and Array in Dictiona
    }
 }
 ```
+
 becomes
+
 ```csharp
 public partial class Pet
 {
@@ -222,11 +249,12 @@ public partial class Pet
 ```
 
 #### Dictionaries as a catch-all for unlisted properties.
+
 A dictionary can be also generated as way of accepting data for unlisted properties. The code generator (c#, in this case) will emit code that instructs the deserializer to send all unspecified values in the object to the generated `AdditionalProperties` member
 
 The code :
 
-``` yaml
+```yaml
 definitions:
   MyResponseObject:
     type: object
@@ -241,7 +269,7 @@ definitions:
 
 Generates code :
 
-``` c#
+```c#
 public partial class MyResponseObject
 {
     /// <summary>
@@ -273,9 +301,11 @@ public partial class MyResponseObject
 ```
 
 ### Constants
+
 AutoRest generates constant value for _required_ parameters and properties defined with _one_ enum value. Constant operation parameters are not exposed to the end user and are injected in the method body. Constant definition properties are also automatically added to the payload body.
 
 Example of a constant in a definition:
+
 ```js
 "Product": {
    "description": "The product documentation.",
@@ -289,8 +319,10 @@ Example of a constant in a definition:
    }
  }
 ```
+
 becomes
-``` cs
+
+```cs
 /// <summary>
 /// The product documentation.
 /// </summary>
@@ -316,8 +348,8 @@ public partial class Product
     public static string ConstProperty { get; private set; }
 ```
 
-
 Example of a constant in an operation:
+
 ```js
 "post": {
   "operationId": "myOperation",
@@ -332,7 +364,9 @@ Example of a constant in an operation:
   ]
 }
 ```
+
 becomes
+
 ```cs
 public async Task<HttpOperationResponse> MyOperationWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
 {
@@ -342,12 +376,15 @@ public async Task<HttpOperationResponse> MyOperationWithHttpMessagesAsync(Dictio
 ```
 
 ### Inheritance and Polymorphism
+
 #### Inheritance
+
 AutoRest builds inheritance between types if an `allOf` field is specified in a OpenAPI definition with ONLY one reference to another OpenAPI definition. The following example demonstrate a `Cat` type inheriting a `Pet` with its `allOf` set to `[{"$ref": "Pet"}]`.
 
 > Note: Only `allOf` fields with one schema reference will be treated as inheritance. If `allOf` contains more than one schema that has `"$ref"` as the key, the properties from the referenced schemas will be composed without inheritance. However, if an `allOf` contains multiple inline schemas and a single schema reference, the generated model type will use inheritance.
 
 **Example:**
+
 ```json
 "Pet": {
   "properties": {
@@ -422,7 +459,9 @@ public partial class Pet
 ```
 
 #### Polymorphism
+
 To describe polymorphic inheritance between types, OpenAPI uses an extra "discriminator" field to indicate the exact serialization of the object on the wire. To make a set of classes polymorphic, use 'allOf' with a schema reference to indicate inheritance from a base schema and a discriminator field to the base schema. In the example above, adding a discriminator field named `objectType` to `Pet` will make the generated set of classes polymorphic:
+
 ```json
 "Pet": {
   "discriminator": "Type",
@@ -439,6 +478,7 @@ To describe polymorphic inheritance between types, OpenAPI uses an extra "discri
   }
 }
 ```
+
 The generated models in C# code are nearly identical, with `objectType` property excluded and a special `JsonConverter` added in the client `Initialize` method:
 
 ```csharp
@@ -459,13 +499,15 @@ public partial class MyClient : ServiceClient<AutoRestComplexTestService>, IAuto
 ```
 
 ### Type Name Generation
+
 Type name generation is straightforward if a OpenAPI schema is defined in the "#/definitions" block. The name of the OpenAPI Schema will be respected in the corresponding generated model type, like the `Pet` model in the examples above. Invalid characters will be filtered, and type capitalization is changed to comply with language-specific coding guidelines, but the generated model name should make sense if the one in the OpenAPI definitions list makes sense.
 
-Type name generation becomes tricky in inline schema definitions. There are three scenarios when AutoRest generates a name on its own. The names are generated using the context of the schema in the OpenAPI specification so that the correlation between model type and OpenAPI schema is easy to find.  A generated type name can easily be changed by moving the corresponding schema into the "#/definitions" list and referencing the schema from the parameters and responses where it appears in the OpenAPI specification.
+Type name generation becomes tricky in inline schema definitions. There are three scenarios when AutoRest generates a name on its own. The names are generated using the context of the schema in the OpenAPI specification so that the correlation between model type and OpenAPI schema is easy to find. A generated type name can easily be changed by moving the corresponding schema into the "#/definitions" list and referencing the schema from the parameters and responses where it appears in the OpenAPI specification.
 
 - **Inline parameters**
-*A Schema defined inside a `body` parameter.* The parameter name will be used for the generated type name.
-The following example will generate a model type named `Style`.
+  _A Schema defined inside a `body` parameter._ The parameter name will be used for the generated type name.
+  The following example will generate a model type named `Style`.
+
 ```json
 "parameters": [
   {
@@ -486,8 +528,9 @@ The following example will generate a model type named `Style`.
 ```
 
 - **Inline responses**
-*A response with a schema definition inside.* The model type name will be `operationId` + `http status code` + "Response".
-The following example will generate a type `AddPetOkResponse`.
+  _A response with a schema definition inside._ The model type name will be `operationId` + `http status code` + "Response".
+  The following example will generate a type `AddPetOkResponse`.
+
 ```json
 ......
 "operationId": "addPet",
@@ -509,8 +552,9 @@ The following example will generate a type `AddPetOkResponse`.
 ```
 
 - **Inline properties**
-*A property of a reference type contains an inline OpenAPI schema definition.* The type name for the generated model is composed of the parent class's type name concatenated with the property's name.
-The following example will generate a type `PetStyle`.
+  _A property of a reference type contains an inline OpenAPI schema definition._ The type name for the generated model is composed of the parent class's type name concatenated with the property's name.
+  The following example will generate a type `PetStyle`.
+
 ```json
 "Pet": {
   "properties": {
@@ -529,8 +573,9 @@ The following example will generate a type `PetStyle`.
 ```
 
 - **Schemas in sequences and dictionaries**
-*A schema defined in the 'items' property of a sequence or the 'additionalProperties' value of a dictionary.* Model types corresponding to Items of a sequence are named using the parent class's name concatenated with "Item". Model types corresponding to the 'additionalProperties' value of a dictionary are named using the parent class's name concatenated with "Value".
-The following example will generate types `PetFavFoodItem` and `PetFavFoodBrandValue`.
+  _A schema defined in the 'items' property of a sequence or the 'additionalProperties' value of a dictionary._ Model types corresponding to Items of a sequence are named using the parent class's name concatenated with "Item". Model types corresponding to the 'additionalProperties' value of a dictionary are named using the parent class's name concatenated with "Value".
+  The following example will generate types `PetFavFoodItem` and `PetFavFoodBrandValue`.
+
 ```json
 "Pet": {
   "properties": {
@@ -561,11 +606,14 @@ The following example will generate types `PetFavFoodItem` and `PetFavFoodBrandV
 ```
 
 ## Operations
+
 ### Generating Operation Classes
+
 In many cases, client operations are intended to be grouped by resource type for better usability. AutoRest supports categorizing operations using `_` in the `operationId` field of a OpenAPI Operation. The part appearing before `_` will be treated as the operations' class name, and the part after will be treated as the method name.
 
 **Example:**
 The following OpenAPI specification:
+
 ```json
 "paths": {
   "/api/Values/{id}": {
@@ -576,14 +624,17 @@ The following OpenAPI specification:
       "operationId": "Values_Get",
 ............
 ```
+
 will generate a `Get` method inside a `Values` class. The end user will access the method by calling `client.Values.Get()`. This is a neat way of organizing your client if you have multiple operations with the same operation name but different underlying resources.
 
 If the `-OutputFile` parameter is not specified when invoking the AutoRest Command Line Interface, generated files will also be organized by namespaces. If you have `operationId`s `ns1_get` and `ns2_get`, you will have `ns1.cs` and `ns2.cs` in the generated C# client library.
 
 ### Specifying required parameters and properties
+
 Parameters and properties in OpenAPI schema use different notations and conventions to determine if they are required or optional.
 
 Parameters in the 'path' or 'body' are **always** required. Parameters may also use a `'required'` Boolean property to indicate that they are required for the operation, as in the example shown below.
+
 ```json
 "parameters": [
   {
@@ -605,7 +656,9 @@ Parameters in the 'path' or 'body' are **always** required. Parameters may also 
   }
 ]
 ```
+
 Generates C# client side method of
+
 ```csharp
 public async Task<HttpOperationResponse<Product>> ListWithOperationResponseAsync(int? subscriptionId, string resourceGroupName, int? apiVersion, CancellationToken cancellationToken)
 {
@@ -620,6 +673,7 @@ public async Task<HttpOperationResponse<Product>> ListWithOperationResponseAsync
 > Note that parameters that have field `in` as path are always required and the `required` field will be ignored.
 
 Properties in OpenAPI Schema do not contain a required field. Instead, Each definition schema can provide a `'required'` array that specifies which properties are required. An example is shown below.
+
 ```json
 "Product": {
   "required": [
@@ -646,10 +700,12 @@ Properties in OpenAPI Schema do not contain a required field. Instead, Each defi
 ```
 
 ### Error Modeling
-At runtime, if the server returns an unexpected status code,  the generated client throws an exception of type `HttpOperationException`. The exception instance will contain the request of type `HttpRequestMessage` (in property `Request`), the response of type `HttpResponseMessage` (in property `Response`), and the error model (in property `Body`). The error model must be defined as the schema of the `default` response.
+
+At runtime, if the server returns an unexpected status code, the generated client throws an exception of type `HttpOperationException`. The exception instance will contain the request of type `HttpRequestMessage` (in property `Request`), the response of type `HttpResponseMessage` (in property `Response`), and the error model (in property `Body`). The error model must be defined as the schema of the `default` response.
 
 **Example:**
 A response of
+
 ```json
 "default": {
   "description": "Unexpected error",
@@ -658,7 +714,9 @@ A response of
   }
 }
 ```
+
 together with its definition
+
 ```json
 "Error": {
   "properties": {
@@ -675,7 +733,9 @@ together with its definition
   }
 }
 ```
+
 Generates the following error handling code:
+
 ```csharp
 if ((int)_statusCode != 200)
 {
@@ -711,26 +771,29 @@ if ((int)_statusCode != 200)
 See [Error Handling](../client/readme.md) for details on how to catch and use the exceptions from generated clients.
 
 ### DEPRECATED - Composite Clients
+
 AutoRest supports a concept of a composite client where multiple OpenAPI documents are merged together to generate a single ServiceClient. To use this feature the OpenAPI documents need to conform to the following rules:
 
-   1. All OpenAPI documents must share the same `host` and `basePath` values
-   2. All definitions with same names must be identical
-   3. All global client parameters with same names must be identical
-   4. Methods with the same `operationId` but different signature are allowed. However, there should be no methods with the same `operationId` and same signature.
+1.  All OpenAPI documents must share the same `host` and `basePath` values
+2.  All definitions with same names must be identical
+3.  All global client parameters with same names must be identical
+4.  Methods with the same `operationId` but different signature are allowed. However, there should be no methods with the same `operationId` and same signature.
 
 For Azure generators, composite clients will not have ApiVersion global property but will instead have apiVersion operation constants.
 
 #### DEPRECATED: Generating Composite Clients
+
 In order to generate a composite client a custom metadata needs to be created.
 
 **Schema**:
 
-Field Name | Type | Description
----|:---:|---
-info| [`Info Object`](http://swagger.io/specification/#infoObject) | **Required**. The info object defines the name and description of the composite client.
-documents| string[] | **Required**. Collection of URLs or local paths that point to individual OpenAPI documents. These URLs or paths are relative to the current working directory and as such it is strongly recommended to use absolute URLs.
+| Field Name |                             Type                             | Description                                                                                                                                                                                                                |
+| ---------- | :----------------------------------------------------------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| info       | [`Info Object`](http://swagger.io/specification/#infoObject) | **Required**. The info object defines the name and description of the composite client.                                                                                                                                    |
+| documents  |                           string[]                           | **Required**. Collection of URLs or local paths that point to individual OpenAPI documents. These URLs or paths are relative to the current working directory and as such it is strongly recommended to use absolute URLs. |
 
 **Example**:
+
 ```js
 {
   "info": {
@@ -752,11 +815,11 @@ A `CompositeSwagger` modeler should be used to generate composite clients. For e
 autorest.exe -modeler CompositeSwagger -input compositeDoc.json -output C:\Temp -codeGenerator CSharp
 ```
 
-
 ## Extensions
+
 AutoRest supports a number of extensions used to configure generated clients. Please refer to [Swagger Extensions](../extensions/readme.md) document for details.
 
-[OpenAPI-spec2.0]: https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md
-[JSON-primitive-types]: http://json-schema.org/latest/json-schema-core.html#anchor8
-[OpenAPI-primitive-types]: https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#datatypes
-[JSON-schema-validation-properties]: http://json-schema.org/latest/json-schema-validation.html#anchor64
+[openapi-spec2.0]: https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md
+[json-primitive-types]: http://json-schema.org/latest/json-schema-core.html#anchor8
+[openapi-primitive-types]: https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#datatypes
+[json-schema-validation-properties]: http://json-schema.org/latest/json-schema-validation.html#anchor64

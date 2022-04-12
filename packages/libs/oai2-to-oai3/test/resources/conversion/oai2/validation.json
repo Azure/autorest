@@ -6,9 +6,7 @@
     "description": "Test Infrastructure for AutoRest. No server backend exists for these tests."
   },
   "host": "localhost:3000",
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}": {
       "get": {
@@ -43,9 +41,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "tags": [
-          "Redis"
-        ],
+        "tags": ["Redis"],
         "responses": {
           "200": {
             "description": "A list of caches",
@@ -60,12 +56,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       },
       "put": {
         "operationId": "validationOfBody",
@@ -106,9 +98,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "tags": [
-          "Redis"
-        ],
+        "tags": ["Redis"],
         "responses": {
           "200": {
             "description": "A list of caches",
@@ -123,12 +113,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     },
     "/validation/constantsInPath/{constantParam}/value": {
@@ -138,9 +124,7 @@
           {
             "name": "constantParam",
             "type": "string",
-            "enum": [
-              "constant"
-            ],
+            "enum": ["constant"],
             "in": "path",
             "required": true
           }
@@ -150,12 +134,8 @@
             "description": "Success"
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       },
       "post": {
         "operationId": "postWithConstantInBody",
@@ -163,9 +143,7 @@
           {
             "name": "constantParam",
             "type": "string",
-            "enum": [
-              "constant"
-            ],
+            "enum": ["constant"],
             "in": "path",
             "required": true
           },
@@ -185,12 +163,8 @@
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        "produces": ["application/json"],
+        "consumes": ["application/json"]
       }
     }
   },
@@ -198,12 +172,7 @@
     "Product": {
       "type": "object",
       "description": "The product documentation.",
-      "required": [
-        "child",
-        "constString",
-        "constInt",
-        "constChild"
-      ],
+      "required": ["child", "constString", "constInt", "constChild"],
       "properties": {
         "display_names": {
           "type": "array",
@@ -237,23 +206,17 @@
         "constInt": {
           "type": "integer",
           "description": "Constant int",
-          "enum": [
-            0
-          ]
+          "enum": [0]
         },
         "constString": {
           "type": "string",
           "description": "Constant string",
-          "enum": [
-            "constant"
-          ]
+          "enum": ["constant"]
         },
         "constStringAsEnum": {
           "type": "string",
           "description": "Constant string as Enum",
-          "enum": [
-            "constant_string_as_enum"
-          ],
+          "enum": ["constant_string_as_enum"],
           "x-ms-enum": {
             "name": "EnumConst",
             "modelAsString": false
@@ -264,16 +227,12 @@
     "ChildProduct": {
       "type": "object",
       "description": "The product documentation.",
-      "required": [
-        "constProperty"
-      ],
+      "required": ["constProperty"],
       "properties": {
         "constProperty": {
           "type": "string",
           "description": "Constant string",
-          "enum": [
-            "constant"
-          ]
+          "enum": ["constant"]
         },
         "count": {
           "type": "integer",
@@ -284,24 +243,17 @@
     "ConstantProduct": {
       "type": "object",
       "description": "The product documentation.",
-      "required": [
-        "constProperty",
-        "constProperty2"
-      ],
+      "required": ["constProperty", "constProperty2"],
       "properties": {
         "constProperty": {
           "type": "string",
           "description": "Constant string",
-          "enum": [
-            "constant"
-          ]
+          "enum": ["constant"]
         },
         "constProperty2": {
           "type": "string",
           "description": "Constant string2",
-          "enum": [
-            "constant2"
-          ]
+          "enum": ["constant2"]
         }
       }
     },

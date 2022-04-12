@@ -6,15 +6,13 @@ import {
   SourceDetails,
   compareClass,
   compareParameter,
-  compareMethod
+  compareMethod,
 } from "../../src/languages/typescript";
 import { MessageType } from "../../src/comparers";
 
-describe("TypeScript Parser", function() {
-  it("extracts semantic elements from source", function() {
-    const parseTree = parseFile(
-      path.resolve(__dirname, "../artifacts/typescript/old/index.ts")
-    );
+describe("TypeScript Parser", function () {
+  it("extracts semantic elements from source", function () {
+    const parseTree = parseFile(path.resolve(__dirname, "../artifacts/typescript/old/index.ts"));
     const sourceDetails: SourceDetails = extractSourceDetails(parseTree);
 
     assert.deepEqual(sourceDetails, {
@@ -34,9 +32,9 @@ describe("TypeScript Parser", function() {
                   name: "optional",
                   type: "string",
                   ordinal: 0,
-                  isOptional: true
-                }
-              ]
+                  isOptional: true,
+                },
+              ],
             },
             {
               name: "changedParamType",
@@ -49,14 +47,13 @@ describe("TypeScript Parser", function() {
                   name: "firstParam",
                   type: "string",
                   ordinal: 0,
-                  isOptional: false
-                }
-              ]
+                  isOptional: false,
+                },
+              ],
             },
             {
               name: "changedReturnType",
-              body:
-                '{\n    const booString = "boo";\n    return booString;\n  }',
+              body: '{\n    const booString = "boo";\n    return booString;\n  }',
               returnType: "string",
               visibility: "public",
               genericTypes: [],
@@ -65,9 +62,9 @@ describe("TypeScript Parser", function() {
                   name: "firstParam",
                   type: "string",
                   ordinal: 0,
-                  isOptional: false
-                }
-              ]
+                  isOptional: false,
+                },
+              ],
             },
             {
               name: "reorderedParams",
@@ -80,15 +77,15 @@ describe("TypeScript Parser", function() {
                   name: "firstParam",
                   type: "string",
                   ordinal: 0,
-                  isOptional: false
+                  isOptional: false,
                 },
                 {
                   name: "secondParam",
                   type: "string",
                   ordinal: 1,
-                  isOptional: false
-                }
-              ]
+                  isOptional: false,
+                },
+              ],
             },
             {
               name: "hasGenericParam",
@@ -98,18 +95,18 @@ describe("TypeScript Parser", function() {
               genericTypes: [
                 {
                   name: "T",
-                  ordinal: 0
-                }
+                  ordinal: 0,
+                },
               ],
               parameters: [
                 {
                   name: "genericParam",
                   isOptional: false,
                   ordinal: 0,
-                  type: "T"
-                }
-              ]
-            }
+                  type: "T",
+                },
+              ],
+            },
           ],
           fields: [
             {
@@ -117,29 +114,29 @@ describe("TypeScript Parser", function() {
               type: "string",
               value: undefined,
               isReadOnly: false,
-              visibility: "private"
+              visibility: "private",
             },
             {
               name: "visibilityChangedField",
               type: "Namespace.Type",
               value: undefined,
               isReadOnly: false,
-              visibility: "public"
+              visibility: "public",
             },
             {
               name: "readOnlyChangedField",
               type: "any",
               value: `"stuff"`,
               isReadOnly: true,
-              visibility: "private"
-            }
-          ]
+              visibility: "private",
+            },
+          ],
         },
         {
           name: "BaseClass",
           methods: [],
           fields: [],
-          isExported: false
+          isExported: false,
         },
         {
           name: "ExportedClass",
@@ -147,36 +144,36 @@ describe("TypeScript Parser", function() {
           interfaces: ["SomeInterface", "AnotherInterface"],
           methods: [],
           fields: [],
-          isExported: true
-        }
+          isExported: true,
+        },
       ],
       interfaces: [
         {
           name: "SomeInterface",
           methods: [],
           fields: [],
-          isExported: false
+          isExported: false,
         },
         {
           name: "BaseInterface",
           methods: [],
           fields: [],
-          isExported: false
+          isExported: false,
         },
         {
           name: "AnotherInterface",
           interfaces: ["BaseInterface"],
           methods: [],
           fields: [],
-          isExported: true
-        }
+          isExported: true,
+        },
       ],
       types: [
         {
           name: "SomeUnion",
           type: `"red" | "green" | "brurple"`,
-          isExported: true
-        }
+          isExported: true,
+        },
       ],
       functions: [
         {
@@ -185,19 +182,19 @@ describe("TypeScript Parser", function() {
           genericTypes: [
             {
               name: "T",
-              ordinal: 0
-            }
+              ordinal: 0,
+            },
           ],
           parameters: [
             {
               name: "genericParam",
               type: "T",
               ordinal: 0,
-              isOptional: false
-            }
+              isOptional: false,
+            },
           ],
-          returnType: "string"
-        }
+          returnType: "string",
+        },
       ],
       variables: [
         {
@@ -205,9 +202,9 @@ describe("TypeScript Parser", function() {
           type: "SomeUnion",
           value: `"red"`,
           isExported: true,
-          isConst: true
-        }
-      ]
+          isConst: true,
+        },
+      ],
     } as SourceDetails);
   });
 
@@ -217,14 +214,14 @@ describe("TypeScript Parser", function() {
         name: "firstParam",
         type: "string",
         ordinal: 0,
-        isOptional: false
+        isOptional: false,
       },
       {
         name: "firstParam",
         type: "number",
         ordinal: 0,
-        isOptional: true
-      }
+        isOptional: true,
+      },
     );
 
     assert.deepEqual(result, {
@@ -236,18 +233,18 @@ describe("TypeScript Parser", function() {
           type: MessageType.Outline,
           children: [
             { message: "string", type: MessageType.Removed },
-            { message: "number", type: MessageType.Added }
-          ]
+            { message: "number", type: MessageType.Added },
+          ],
         },
         {
           message: "Optional",
           type: MessageType.Outline,
           children: [
             { message: "false", type: MessageType.Removed },
-            { message: "true", type: MessageType.Added }
-          ]
-        }
-      ]
+            { message: "true", type: MessageType.Added },
+          ],
+        },
+      ],
     });
   });
 
@@ -258,15 +255,15 @@ describe("TypeScript Parser", function() {
         baseClass: "BaseClass",
         methods: [],
         fields: [],
-        isExported: false
+        isExported: false,
       },
       {
         name: "SomeClass",
         baseClass: "AnotherClass",
         methods: [],
         fields: [],
-        isExported: false
-      }
+        isExported: false,
+      },
     );
 
     assert.deepEqual(result, {
@@ -278,10 +275,10 @@ describe("TypeScript Parser", function() {
           type: MessageType.Outline,
           children: [
             { message: "BaseClass", type: MessageType.Removed },
-            { message: "AnotherClass", type: MessageType.Added }
-          ]
-        }
-      ]
+            { message: "AnotherClass", type: MessageType.Added },
+          ],
+        },
+      ],
     });
   });
 
@@ -291,15 +288,15 @@ describe("TypeScript Parser", function() {
         name: "SomeClass",
         methods: [],
         fields: [],
-        isExported: false
+        isExported: false,
       },
       {
         name: "SomeClass",
         interfaces: ["InterfaceA", "InterfaceB"],
         methods: [],
         fields: [],
-        isExported: false
-      }
+        isExported: false,
+      },
     );
 
     assert.deepEqual(result, {
@@ -311,10 +308,10 @@ describe("TypeScript Parser", function() {
           type: MessageType.Outline,
           children: [
             { message: "InterfaceA", type: MessageType.Added },
-            { message: "InterfaceB", type: MessageType.Added }
-          ]
-        }
-      ]
+            { message: "InterfaceB", type: MessageType.Added },
+          ],
+        },
+      ],
     });
   });
 
@@ -329,9 +326,9 @@ describe("TypeScript Parser", function() {
             name: "firstParam",
             type: "string",
             ordinal: 0,
-            isOptional: false
-          }
-        ]
+            isOptional: false,
+          },
+        ],
       },
       {
         name: "theFunc",
@@ -342,10 +339,10 @@ describe("TypeScript Parser", function() {
             name: "differentParam",
             type: "number",
             ordinal: 0,
-            isOptional: true
-          }
-        ]
-      }
+            isOptional: true,
+          },
+        ],
+      },
     );
 
     assert.deepEqual(result, {
@@ -357,18 +354,18 @@ describe("TypeScript Parser", function() {
           type: MessageType.Outline,
           children: [
             { message: "firstParam", type: MessageType.Removed },
-            { message: "differentParam", type: MessageType.Added }
-          ]
+            { message: "differentParam", type: MessageType.Added },
+          ],
         },
         {
           message: "Return Type",
           type: MessageType.Outline,
           children: [
             { message: "string", type: MessageType.Removed },
-            { message: "any", type: MessageType.Added }
-          ]
-        }
-      ]
+            { message: "any", type: MessageType.Added },
+          ],
+        },
+      ],
     });
   });
 });

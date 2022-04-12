@@ -4,7 +4,6 @@ This is a tool that lets you define a mock api in markdown.
 
 [Examples](./examples)
 
-
 ## Installation
 
 ### From npm
@@ -14,6 +13,7 @@ This is a tool that lets you define a mock api in markdown.
 ### Locally
 
 Create the executable. (At the root repo `rush update` if you haven't done yet.)
+
 ```
 npm link
 ```

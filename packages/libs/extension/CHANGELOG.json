@@ -2,6 +2,110 @@
   "name": "@azure-tools/extension",
   "entries": [
     {
+      "version": "3.5.0",
+      "tag": "@azure-tools/extension_v3.5.0",
+      "date": "Tue, 15 Mar 2022 16:00:38 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Stop using shell call to `yarn` or `npm` to resolve list of available version and use `pactote` library. Improving reliability and performance."
+          },
+          {
+            "comment": "Reimplement locking mechanism causing ghost promise to be left hanging"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.4.0",
+      "tag": "@azure-tools/extension_v3.4.0",
+      "date": "Fri, 19 Nov 2021 04:23:43 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "**Added** Progress tracking for installation and imrpvoed error reporting"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.3.1",
+      "tag": "@azure-tools/extension_v3.3.1",
+      "date": "Mon, 19 Jul 2021 18:08:46 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Using `fs/promises` imort not supported on node 12"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.3.0",
+      "tag": "@azure-tools/extension_v3.3.0",
+      "date": "Mon, 19 Jul 2021 15:15:42 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Installing extension when parent directory to ~/.autorest had a package.json"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Drop support for node 10"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.2.7",
+      "tag": "@azure-tools/extension_v3.2.7",
+      "date": "Wed, 26 May 2021 18:31:17 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Export** fetchPackageMetadata for use without depending on local package manager"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.2.6",
+      "tag": "@azure-tools/extension_v3.2.6",
+      "date": "Tue, 27 Apr 2021 17:48:43 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** Fallback to github release when version doesn't exists broken if using version range"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.2.5",
+      "tag": "@azure-tools/extension_v3.2.5",
+      "date": "Thu, 01 Apr 2021 15:46:41 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Add** Logging when fail to fetch pacakge metadata"
+          }
+        ]
+      }
+    },
+    {
+      "version": "3.2.4",
+      "tag": "@azure-tools/extension_v3.2.4",
+      "date": "Tue, 16 Mar 2021 15:52:56 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump dependencies versions"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.2.3",
       "tag": "@azure-tools/extension_v3.2.3",
       "date": "Fri, 05 Mar 2021 16:31:29 GMT",

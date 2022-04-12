@@ -1,6 +1,6 @@
 {
   "name": "@autorest/schemas",
-  "version": "1.0.1",
+  "version": "1.3.4",
   "description": "Internal package storing schemas",
   "scripts": {
     "test": "echo 'No Test'",
@@ -8,6 +8,11 @@
     "build": "echo 'No Build'",
     "lint": "echo 'No lint'",
     "lint:fix": "echo 'No lint'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Azure/autorest.git",
+    "directory": "packages/libs/autorest/schemas"
   },
   "author": "",
   "license": "ISC"

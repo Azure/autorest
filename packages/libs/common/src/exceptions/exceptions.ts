@@ -34,3 +34,14 @@ export class OperationAbortedException extends Exception {
     Object.setPrototypeOf(this, OperationAbortedException.prototype);
   }
 }
+
+/**
+ * Represent an error emitted by a plugin where the plugin contains some failure due to the user input. This will make autorest close with a better error message.
+ */
+export class PluginUserError extends Error {
+  public code = "PluginUserError";
+
+  public constructor(public pluginName: string) {
+    super(`Plugin '${pluginName}' completed with some error.`);
+  }
+}

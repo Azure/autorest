@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { visit } from "@azure-tools/datastore";
-import { Dictionary, items, clone } from "@azure-tools/linq";
-import { areSimilar } from "@azure-tools/object-comparison";
-import compareVersions from "compare-versions";
 import { toSemver, maximum } from "@azure-tools/codegen";
+import { visit } from "@azure-tools/datastore";
+import { areSimilar } from "@azure-tools/object-comparison";
 import { YieldCPU } from "@azure-tools/tasks";
+import compareVersions from "compare-versions";
+import { cloneDeep } from "lodash";
 
 type componentType =
   | "schemas"
@@ -22,26 +22,24 @@ type componentType =
   | "callbacks";
 
 function getMergedProfilesMetadata(
-  dict1: Dictionary<string>,
-  dict2: Dictionary<string>,
+  dict1: Record<string, string>,
+  dict2: Record<string, string>,
   path: string,
   originalLocations: Array<string>,
 ): { [key: string]: string } {
   const result: { [key: string]: string } = {};
-  for (const { value, key } of items(dict1)) {
+  for (const [key, value] of Object.entries(dict1)) {
     result[key] = value;
   }
 
-  for (const item of items(dict2)) {
-    if (result[item.key] !== undefined && result[item.key] !== item.value) {
+  for (const [key, value] of Object.entries(dict2)) {
+    if (result[key] !== undefined && result[key] !== value) {
       throw Error(
-        `Deduplicator: There's a conflict trying to deduplicate these two path objects with path ${path}, and with original locations ${originalLocations}. Both come from the same profile ${
-          item.key
-        }, but they have different api-versions: ${result[item.key]} and ${item.value}`,
+        `Deduplicator: There's a conflict trying to deduplicate these two path objects with path ${path}, and with original locations ${originalLocations}. Both come from the same profile ${key}, but they have different api-versions: ${result[key]} and ${value}`,
       );
     }
 
-    result[item.key] = item.value;
+    result[key] = value;
   }
 
   return result;
@@ -53,11 +51,11 @@ export class Deduplicator {
   // table:
   // prevPointers -> newPointers
   // this will serve to generate a source map externally
-  private mappings = new Dictionary<string>();
+  private mappings: Record<string, string> = {};
 
   // table:
   // oldRefs -> newRefs
-  private refs = new Dictionary<string>();
+  private refs: Record<string, string> = {};
 
   // sets containing the UIDs of already deduplicated components
   private deduplicatedComponents = {
@@ -102,7 +100,7 @@ export class Deduplicator {
   // initially the target is the same as the original object
   private target: any;
   constructor(originalFile: any, protected deduplicateInlineModels = false) {
-    this.target = clone(originalFile);
+    this.target = cloneDeep(originalFile);
     this.target.info["x-ms-metadata"].deduplicated = true;
   }
 

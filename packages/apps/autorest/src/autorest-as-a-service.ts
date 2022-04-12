@@ -1,24 +1,24 @@
 /* eslint-disable no-process-exit */
 /* eslint-disable no-console */
-import { lookup } from "dns";
-import { Extension, ExtensionManager, Package } from "@azure-tools/extension";
-import { homedir } from "os";
-import { dirname, join, resolve } from "path";
-
-import { Exception } from "@azure-tools/tasks";
-
-import * as semver from "semver";
-import { isFile, mkdir, isDirectory } from "@azure-tools/async-io";
-import { When } from "@azure-tools/tasks";
-import { mkdtempSync, rmdirSync } from "fs";
-import { tmpdir } from "os";
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { spawn } from "child_process";
+import { lookup } from "dns";
+import { mkdtempSync, rmdirSync } from "fs";
+import { homedir, tmpdir } from "os";
+import { join } from "path";
+import { IAutorestLogger } from "@autorest/common";
+import { AutorestConfiguration } from "@autorest/configuration";
+import { isFile, mkdir, isDirectory } from "@azure-tools/async-io";
+import { Extension, ExtensionManager, Package } from "@azure-tools/extension";
+import { Exception, When } from "@azure-tools/tasks";
+import * as semver from "semver";
 import { AutorestArgs } from "./args";
+import { VERSION } from "./constants";
+import { parseMemory } from "./utils";
 
 const inWebpack = typeof __webpack_require__ === "function";
-const nodeRequire = inWebpack ? __non_webpack_require__ : require;
+const nodeRequire = inWebpack ? __non_webpack_require__! : require;
 
-export const pkgVersion: string = require(`../package.json`).version;
 process.env["autorest.home"] = process.env["AUTOREST_HOME"] || process.env["autorest.home"] || homedir();
 
 try {
@@ -37,9 +37,7 @@ export const extensionManager: Promise<ExtensionManager> = ExtensionManager.Crea
 export const oldCorePackage = "@microsoft.azure/autorest-core";
 export const newCorePackage = "@autorest/core";
 
-const basePkgVersion = semver.parse(
-  pkgVersion.indexOf("-") > -1 ? pkgVersion.substring(0, pkgVersion.indexOf("-")) : pkgVersion,
-);
+const basePkgVersion = semver.parse(VERSION.indexOf("-") > -1 ? VERSION.substring(0, VERSION.indexOf("-")) : VERSION)!;
 
 /**
  * The version range of the core package required.
@@ -59,13 +57,7 @@ export async function availableVersions() {
       const vers = (await (await extensionManager).getPackageVersions(newCorePackage)).sort((b, a) =>
         semver.compare(a, b),
       );
-      const result = new Array<string>();
-      for (const ver of vers) {
-        if (semver.satisfies(ver, versionRange)) {
-          result.push(ver);
-        }
-      }
-      return result;
+      return vers.filter((x) => semver.satisfies(x, versionRange));
     } catch (e) {
       console.info(`No available versions of package ${newCorePackage} found.`);
     }
@@ -83,30 +75,11 @@ export async function installedCores() {
           (ext) =>
             (ext.name === newCorePackage || ext.name === oldCorePackage) && semver.satisfies(ext.version, versionRange),
         )
-      : new Array<Extension>();
+      : [];
   return result.sort((a, b) => semver.compare(b.version, a.version));
 }
 
-export function resolvePathForLocalVersion(requestedVersion: string | null): string | null {
-  try {
-    // untildify!
-    if (/^~[/|\\]/g.exec(requestedVersion)) {
-      requestedVersion = join(homedir(), requestedVersion.substring(2));
-    }
-    return requestedVersion ? resolve(requestedVersion) : dirname(nodeRequire.resolve("@autorest/core/package.json"));
-  } catch (e) {
-    // fallback to old-core name
-    try {
-      // eslint-disable-next-line node/no-missing-require
-      return dirname(nodeRequire.resolve("@microsoft.azure/autorest-core/package.json"));
-    } catch {
-      // no dice
-    }
-  }
-  return null;
-}
-
-export async function resolveEntrypoint(localPath: string | null, entrypoint: string): Promise<string | null> {
+export async function resolveEntrypoint(localPath: string, entrypoint: string): Promise<string | undefined> {
   try {
     // did they specify the package directory directly
     if (await isDirectory(localPath)) {
@@ -167,16 +140,33 @@ export async function resolveEntrypoint(localPath: string | null, entrypoint: st
   } catch {
     // no worries
   }
-  return null;
+  return undefined;
 }
 
-export async function runCoreOutOfProc(localPath: string | null, entrypoint: string): Promise<any> {
+export async function runCoreOutOfProc(
+  localPath: string,
+  entrypoint: string,
+  config?: AutorestConfiguration,
+): Promise<any> {
+  const env = {
+    ...process.env,
+  };
+
+  if (config?.memory) {
+    const maxMemory = parseMemory(config.memory);
+    if (maxMemory < 1024) {
+      throw new Error("Cannot set memory to be less than 1GB(1024MB)");
+    }
+    env.NODE_OPTIONS = `${env.NODE_OPTIONS ?? ""} --max_old_space_size=${maxMemory}`;
+    console.log(`Setting memory to ${maxMemory}mb for @autorest/core`);
+  }
   try {
     const ep = await resolveEntrypoint(localPath, entrypoint);
     if (ep) {
       // Creates the nodejs command to load the target core
       // - copies the argv parameters
       // - loads the js file with coloring (core expects a global function called 'color' )
+      //   This is needed currently for @autorest/core version older than 3.6.0(After autorest-core include the color itself.)
       // - loads the actual entrypoint that we expect is there.
       const cmd = `
         process.argv = ${JSON.stringify(process.argv)};
@@ -187,12 +177,13 @@ export async function runCoreOutOfProc(localPath: string | null, entrypoint: str
         .replace(/"/g, "'")
         .replace(/(\\(?![']))+/g, "/");
 
-      const p = spawn(process.execPath, ["-e", cmd], { stdio: ["inherit", "inherit", "inherit"] });
+      const p = spawn(process.execPath, ["-e", cmd], { stdio: ["inherit", "inherit", "inherit"], env });
       p.on("close", (code, signal) => {
-        process.exit(code);
+        process.exit(code ?? -1);
       });
       // set up a promise to wait for the event to fire
       await When(p, "exit", "close");
+
       process.exit(0);
     }
   } catch (E) {
@@ -201,7 +192,17 @@ export async function runCoreOutOfProc(localPath: string | null, entrypoint: str
   return null;
 }
 
-export async function tryRequire(localPath: string | null, entrypoint: string): Promise<any> {
+export async function runCoreWithRequire(
+  localPath: string,
+  entrypoint: string,
+  config?: AutorestConfiguration,
+): Promise<any> {
+  if (config?.memory) {
+    console.warn(
+      "Cannot use --memory flag when running in debugging mode. Use NODE_OPTIONS env variable with flag `--max_old_space_size` to set the node max memory.",
+    );
+  }
+
   try {
     const ep = await resolveEntrypoint(localPath, entrypoint);
     if (ep) {
@@ -218,12 +219,13 @@ export async function ensureAutorestHome() {
 }
 
 export async function selectVersion(
+  logger: IAutorestLogger,
   requestedVersion: string,
   force: boolean,
   minimumVersion?: string,
 ): Promise<Extension> {
   const installedVersions = await installedCores();
-  let currentVersion = installedVersions[0] || null;
+  let currentVersion: Extension | null = installedVersions[0] || null;
 
   // the consumer can say I want the latest-installed, but at least XXX.XXX
   if (minimumVersion && currentVersion && !semver.satisfies(currentVersion.version, minimumVersion)) {
@@ -231,23 +233,17 @@ export async function selectVersion(
   }
 
   if (currentVersion) {
-    if (args.debug) {
-      console.log(`The most recent installed version is ${currentVersion.version}`);
-    }
+    logger.debug(`The most recent installed version is ${currentVersion.version}`);
 
     if (requestedVersion === "latest-installed" || (requestedVersion === "latest" && false == (await networkEnabled))) {
-      if (args.debug) {
-        console.log(`requesting current version '${currentVersion.version}'`);
-      }
+      logger.debug(`requesting current version '${currentVersion.version}'`);
       requestedVersion = currentVersion.version;
     }
   } else {
-    if (args.debug) {
-      console.log(`No ${newCorePackage} (or ${oldCorePackage}) is installed.`);
-    }
+    logger.debug(`No ${newCorePackage} (or ${oldCorePackage}) is installed.`);
   }
 
-  let selectedVersion: Extension = null;
+  let selectedVersion: Extension | null = null;
   // take the highest version that satisfies the version range.
   for (const each of installedVersions.sort((a, b) => semver.compare(a?.version, b?.version))) {
     if (semver.satisfies(each.version, requestedVersion)) {
@@ -258,9 +254,7 @@ export async function selectVersion(
   // is the requested version installed?
   if (!selectedVersion || force) {
     if (!force) {
-      if (args.debug) {
-        console.log(`${requestedVersion} was not satisfied directly by a previous installation.`);
-      }
+      logger.debug(`${requestedVersion} was not satisfied directly by a previous installation.`);
     }
 
     // if it's not a file, and the network isn't available, we can't continue.
@@ -282,15 +276,17 @@ export async function selectVersion(
     }
     let corePackageName = newCorePackage;
 
-    let pkg: Package;
+    let pkg: Package | undefined = undefined;
     try {
       // try the package
       pkg = await (await extensionManager).findPackage(newCorePackage, requestedVersion);
-    } catch {
+    } catch (error) {
       // try a prerelease version from github.
       try {
         const rv = requestedVersion.replace(/^[~|^]/g, "");
-        pkg = await (await extensionManager).findPackage(
+        pkg = await (
+          await extensionManager
+        ).findPackage(
           "core",
           `https://github.com/Azure/autorest/releases/download/autorest-core-${rv}/autorest-core-${rv}.tgz`,
         );
@@ -303,6 +299,7 @@ export async function selectVersion(
         }
       }
       if (!pkg) {
+        logger.debug(`Error trying to resolve @autorest/core version ${requestedVersion}: ${error}`);
         throw new Exception(
           `Unable to find a valid AutoRest core package '${newCorePackage}' @ '${requestedVersion}'.`,
         );
@@ -325,11 +322,16 @@ export async function selectVersion(
         console.log(`**Installing package** ${corePackageName}@${pkg.version}\n[This will take a few moments...]`);
       }
 
-      selectedVersion = await (await extensionManager).installPackage(pkg, force, 5 * 60 * 1000, (installer) =>
-        installer.Message.Subscribe((s, m) => {
-          if (args.debug) console.log(`Installer: ${m}`);
-        }),
-      );
+      // @autorest/core install too fast and this doesn't look good right now as Yarn doesn't give info fast enough.
+      // If we migrate to yarn v2 with the api we might be able to get more info and reenable that
+      const progress = logger.startProgress("installing core...");
+      selectedVersion = await (
+        await extensionManager
+      ).installPackage(pkg, force, 5 * 60 * 1000, (status) => {
+        progress.update({ ...status });
+      });
+      progress.stop();
+
       if (args.debug) {
         console.log(`Extension location: ${selectedVersion.packageJsonPath}`);
       }

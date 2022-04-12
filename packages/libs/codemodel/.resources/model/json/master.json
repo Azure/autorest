@@ -31,34 +31,23 @@
       }
     },
     "Deprecation": {
-      "description": "represents  deprecation information for a given aspect",
+      "description": "Represent information about a deprecation",
       "type": "object",
       "properties": {
-        "message": {
-          "description": "the reason why this aspect",
+        "reason": {
+          "description": "Reason why this was deprecated.",
           "type": "string"
-        },
-        "apiVersions": {
-          "description": "the api versions that this deprecation is applicable to.",
-          "type": "array",
-          "items": {
-            "$ref": "./master.json#/definitions/ApiVersion"
-          }
         }
       },
       "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "apiVersions",
-        "message"
-      ]
+      "additionalProperties": false
     },
     "Extensions": {
       "description": "A dictionary of open-ended 'x-*' extensions propogated from the original source document.",
       "type": "object",
       "properties": {
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -81,7 +70,7 @@
           "type": "string"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -177,7 +166,7 @@
           "description": "per-protocol information for this aspect"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -220,6 +209,93 @@
       "type": "object",
       "defaultProperties": [],
       "additionalProperties": false
+    },
+    "email": {
+      "type": "string"
+    },
+    "Contact": {
+      "description": "contact information",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "description": "an URI",
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "extensions": {
+          "$ref": "./master.json#/definitions/Record<string,any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false
+    },
+    "License": {
+      "description": "license information",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "the nameof the license",
+          "type": "string"
+        },
+        "url": {
+          "description": "an uri pointing to the full license text",
+          "type": "string"
+        },
+        "extensions": {
+          "$ref": "./master.json#/definitions/Record<string,any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ]
+    },
+    "Info": {
+      "description": "code model information",
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "the title of this service.",
+          "type": "string"
+        },
+        "description": {
+          "description": "a text description of the service",
+          "type": "string"
+        },
+        "termsOfService": {
+          "description": "an uri to the terms of service specified to access the service",
+          "type": "string"
+        },
+        "contact": {
+          "$ref": "./master.json#/definitions/Contact",
+          "description": "contact information for the service"
+        },
+        "license": {
+          "$ref": "./master.json#/definitions/License",
+          "description": "license information for th service"
+        },
+        "externalDocs": {
+          "$ref": "./master.json#/definitions/ExternalDocumentation",
+          "description": "External Documentation"
+        },
+        "extensions": {
+          "$ref": "./master.json#/definitions/Record<string,any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "title"
+      ]
     },
     "XmlSerlializationFormat": {
       "type": "object",
@@ -280,7 +356,7 @@
       "type": "object",
       "properties": {
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -322,7 +398,8 @@
         },
         "deprecated": {
           "$ref": "./master.json#/definitions/Deprecation",
-          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+          "description": "Represent the deprecation information if api is deprecated.",
+          "default": "undefined"
         },
         "origin": {
           "description": "where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')",
@@ -341,7 +418,7 @@
           "description": "per-protocol information for this aspect"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -460,242 +537,6 @@
         }
       ]
     },
-    "SchemaUsage": {
-      "type": "object",
-      "properties": {
-        "usage": {
-          "description": "contexts in which the schema is used",
-          "type": "array",
-          "items": {
-            "$ref": "./schemas.json#/definitions/SchemaContext"
-          }
-        },
-        "serializationFormats": {
-          "description": "Known media types in which this schema can be serialized",
-          "type": "array",
-          "items": {
-            "$ref": "./enums.json#/definitions/KnownMediaType"
-          }
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false
-    },
-    "Relations": {
-      "type": "object",
-      "properties": {
-        "immediate": {
-          "type": "array",
-          "items": {
-            "$ref": "./schemas.json#/definitions/ComplexSchema"
-          }
-        },
-        "all": {
-          "type": "array",
-          "items": {
-            "$ref": "./schemas.json#/definitions/ComplexSchema"
-          }
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "all",
-        "immediate"
-      ]
-    },
-    "Discriminator": {
-      "type": "object",
-      "properties": {
-        "property": {
-          "$ref": "./master.json#/definitions/Property"
-        },
-        "immediate": {
-          "$ref": "./master.json#/definitions/Dictionary<ComplexSchema>"
-        },
-        "all": {
-          "$ref": "./master.json#/definitions/Dictionary<ComplexSchema>"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "all",
-        "immediate",
-        "property"
-      ]
-    },
-    "GroupProperty": {
-      "type": "object",
-      "properties": {
-        "originalParameter": {
-          "type": "array",
-          "items": {
-            "$ref": "./master.json#/definitions/Parameter"
-          }
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "language",
-        "originalParameter",
-        "protocol",
-        "schema",
-        "serializedName"
-      ],
-      "allOf": [
-        {
-          "$ref": "./master.json#/definitions/Property"
-        }
-      ]
-    },
-    "ConditionalValue": {
-      "description": "an individual value in a ConditionalSchema",
-      "type": "object",
-      "properties": {
-        "language": {
-          "$ref": "./master.json#/definitions/Languages",
-          "description": "per-language information for this value"
-        },
-        "target": {
-          "description": "the actual value",
-          "type": [
-            "string",
-            "number",
-            "boolean"
-          ]
-        },
-        "source": {
-          "description": "the actual value",
-          "type": [
-            "string",
-            "number",
-            "boolean"
-          ]
-        },
-        "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
-          "description": "additional metadata extensions dictionary"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "language",
-        "source",
-        "target"
-      ]
-    },
-    "FlagValue": {
-      "type": "object",
-      "properties": {
-        "language": {
-          "$ref": "./master.json#/definitions/Languages",
-          "description": "per-language information for this value"
-        },
-        "value": {
-          "type": "number"
-        },
-        "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
-          "description": "additional metadata extensions dictionary"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "language",
-        "value"
-      ]
-    },
-    "email": {
-      "type": "string"
-    },
-    "Contact": {
-      "description": "contact information",
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "url": {
-          "description": "an URI",
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
-          "description": "additional metadata extensions dictionary"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false
-    },
-    "License": {
-      "description": "license information",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "the nameof the license",
-          "type": "string"
-        },
-        "url": {
-          "description": "an uri pointing to the full license text",
-          "type": "string"
-        },
-        "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
-          "description": "additional metadata extensions dictionary"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "name"
-      ]
-    },
-    "Info": {
-      "description": "code model information",
-      "type": "object",
-      "properties": {
-        "title": {
-          "description": "the title of this service.",
-          "type": "string"
-        },
-        "description": {
-          "description": "a text description of the service",
-          "type": "string"
-        },
-        "termsOfService": {
-          "description": "an uri to the terms of service specified to access the service",
-          "type": "string"
-        },
-        "contact": {
-          "$ref": "./master.json#/definitions/Contact",
-          "description": "contact information for the service"
-        },
-        "license": {
-          "$ref": "./master.json#/definitions/License",
-          "description": "license information for th service"
-        },
-        "externalDocs": {
-          "$ref": "./master.json#/definitions/ExternalDocumentation",
-          "description": "External Documentation"
-        },
-        "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
-          "description": "additional metadata extensions dictionary"
-        }
-      },
-      "defaultProperties": [],
-      "additionalProperties": false,
-      "required": [
-        "title"
-      ]
-    },
     "Response": {
       "description": "a response from a service.",
       "type": "object",
@@ -767,6 +608,10 @@
       "description": "represents a single callable endpoint with a discrete set of inputs, and any number of output possibilities (responses or exceptions)",
       "type": "object",
       "properties": {
+        "operationId": {
+          "description": "Original Operation ID if present.\nThis can be used to identify the original id of an operation before it is styled.\nTHIS IS NOT the name of the operation that should be used in the generator. Use `.language.default.name` for this",
+          "type": "string"
+        },
         "parameters": {
           "description": "common parameters when there are multiple requests",
           "type": "array",
@@ -779,6 +624,17 @@
           "type": "array",
           "items": {
             "$ref": "./master.json#/definitions/Parameter"
+          }
+        },
+        "requestMediaTypes": {
+          "$ref": "./master.json#/definitions/Record<string,Request>",
+          "description": "Mapping of all the content types available for this operation to the coresponding request."
+        },
+        "specialHeaders": {
+          "description": "List of headers that parameters should not handle as parameters but with special logic.\nSee https://github.com/Azure/autorest/tree/main/packages/extensions/modelerfour for configuration `skip-special-headers` to exclude headers.",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         },
         "requests": {
@@ -803,7 +659,7 @@
           }
         },
         "profile": {
-          "$ref": "./master.json#/definitions/Dictionary<ApiVersion>",
+          "$ref": "./master.json#/definitions/Record<string,ApiVersion>",
           "description": "the apiVersion to use for a given profile name"
         },
         "summary": {
@@ -819,7 +675,8 @@
         },
         "deprecated": {
           "$ref": "./master.json#/definitions/Deprecation",
-          "description": "deprecation information -- ie, when this aspect doesn't apply and why"
+          "description": "Represent the deprecation information if api is deprecated.",
+          "default": "undefined"
         },
         "origin": {
           "description": "where did this aspect come from (jsonpath or 'modelerfour:<soemthing>')",
@@ -838,7 +695,7 @@
           "description": "per-protocol information for this aspect"
         },
         "extensions": {
-          "$ref": "./master.json#/definitions/Dictionary<any>",
+          "$ref": "./master.json#/definitions/Record<string,any>",
           "description": "additional metadata extensions dictionary"
         }
       },
@@ -907,6 +764,155 @@
         }
       ]
     },
+    "ConditionalValue": {
+      "description": "an individual value in a ConditionalSchema",
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "./master.json#/definitions/Languages",
+          "description": "per-language information for this value"
+        },
+        "target": {
+          "description": "the actual value",
+          "type": [
+            "string",
+            "number",
+            "boolean"
+          ]
+        },
+        "source": {
+          "description": "the actual value",
+          "type": [
+            "string",
+            "number",
+            "boolean"
+          ]
+        },
+        "extensions": {
+          "$ref": "./master.json#/definitions/Record<string,any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "source",
+        "target"
+      ]
+    },
+    "FlagValue": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "$ref": "./master.json#/definitions/Languages",
+          "description": "per-language information for this value"
+        },
+        "value": {
+          "type": "number"
+        },
+        "extensions": {
+          "$ref": "./master.json#/definitions/Record<string,any>",
+          "description": "additional metadata extensions dictionary"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "value"
+      ]
+    },
+    "SchemaUsage": {
+      "type": "object",
+      "properties": {
+        "usage": {
+          "description": "contexts in which the schema is used",
+          "type": "array",
+          "items": {
+            "$ref": "./schemas.json#/definitions/SchemaContext"
+          }
+        },
+        "serializationFormats": {
+          "description": "Known media types in which this schema can be serialized",
+          "type": "array",
+          "items": {
+            "$ref": "./enums.json#/definitions/KnownMediaType"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false
+    },
+    "Relations": {
+      "type": "object",
+      "properties": {
+        "immediate": {
+          "type": "array",
+          "items": {
+            "$ref": "./schemas.json#/definitions/ComplexSchema"
+          }
+        },
+        "all": {
+          "type": "array",
+          "items": {
+            "$ref": "./schemas.json#/definitions/ComplexSchema"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "all",
+        "immediate"
+      ]
+    },
+    "Discriminator": {
+      "type": "object",
+      "properties": {
+        "property": {
+          "$ref": "./master.json#/definitions/Property"
+        },
+        "immediate": {
+          "$ref": "./master.json#/definitions/Record<string,ComplexSchema>"
+        },
+        "all": {
+          "$ref": "./master.json#/definitions/Record<string,ComplexSchema>"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "all",
+        "immediate",
+        "property"
+      ]
+    },
+    "GroupProperty": {
+      "type": "object",
+      "properties": {
+        "originalParameter": {
+          "type": "array",
+          "items": {
+            "$ref": "./master.json#/definitions/Parameter"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "originalParameter",
+        "protocol",
+        "schema",
+        "serializedName"
+      ],
+      "allOf": [
+        {
+          "$ref": "./master.json#/definitions/Property"
+        }
+      ]
+    },
     "Security": {
       "description": "The security information for the API surface",
       "type": "object",
@@ -914,12 +920,57 @@
         "authenticationRequired": {
           "description": "indicates that the API surface requires authentication",
           "type": "boolean"
+        },
+        "schemes": {
+          "items": {
+            "type": "SecuritySchemeFull"
+          },
+          "type": "array"
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "authenticationRequired"
+        "authenticationRequired",
+        "schemes"
+      ]
+    },
+    "KeySecurityScheme": {
+      "type": "object",
+      "properties": {
+        "in": {
+          "type": "string",
+          "enum": [
+            "header"
+          ]
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "in",
+        "name",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "./http.json#/definitions/SecurityScheme"
+        }
+      ]
+    },
+    "ValueOrFactory": {
+      "anyOf": [
+        {
+          "$ref": "./master.json#/definitions/ApiVersion"
+        },
+        {
+          "type": "object",
+          "defaultProperties": [],
+          "additionalProperties": false
+        }
       ]
     },
     "Example": {
@@ -941,33 +992,77 @@
       "defaultProperties": [],
       "additionalProperties": false
     },
-    "Dictionary<any>": {
+    "AADTokenSecurityScheme": {
       "type": "object",
+      "properties": {
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "scopes",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "./http.json#/definitions/SecurityScheme"
+        }
+      ]
+    },
+    "AzureKeySecurityScheme": {
+      "type": "object",
+      "properties": {
+        "headerName": {
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "headerName",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "./http.json#/definitions/SecurityScheme"
+        }
+      ]
+    },
+    "Record<string,any>": {
+      "type": "object",
+      "defaultProperties": [],
       "additionalProperties": {
         "type": "object"
-      },
-      "defaultProperties": []
+      }
     },
-    "Dictionary<ComplexSchema>": {
+    "Record<string,Request>": {
       "type": "object",
+      "defaultProperties": [],
+      "additionalProperties": false
+    },
+    "Record<string,ApiVersion>": {
+      "type": "object",
+      "defaultProperties": [],
+      "additionalProperties": false
+    },
+    "Record<string,ComplexSchema>": {
+      "type": "object",
+      "defaultProperties": [],
       "additionalProperties": {
         "$ref": "./schemas.json#/definitions/ComplexSchema"
-      },
-      "defaultProperties": []
+      }
     },
-    "Dictionary<ApiVersion>": {
+    "Record<string,string>": {
       "type": "object",
-      "additionalProperties": {
-        "$ref": "./master.json#/definitions/ApiVersion"
-      },
-      "defaultProperties": []
-    },
-    "Dictionary<string>": {
-      "type": "object",
+      "defaultProperties": [],
       "additionalProperties": {
         "type": "string"
-      },
-      "defaultProperties": []
+      }
     }
   },
   "description": "the model that contains all the information required to generate a service api",
@@ -1007,7 +1102,7 @@
       "description": "per-protocol information for this aspect"
     },
     "extensions": {
-      "$ref": "./master.json#/definitions/Dictionary<any>",
+      "$ref": "./master.json#/definitions/Record<string,any>",
       "description": "additional metadata extensions dictionary"
     }
   },

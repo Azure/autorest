@@ -24,7 +24,6 @@ export * from "./model/common/formats/xml";
 export * from "./model/http/http";
 export * from "./model/http/http-method";
 export * from "./model/http/parameter-location";
-export * from "./model/http/security";
 export * from "./model/http/serialization-style";
 
 export * from "./model/http/status-code";
@@ -44,3 +43,5 @@ export * from "./model/common/schemas/primitive";
 export * from "./model/common/schemas/relationship";
 export * from "./model/common/schemas/string";
 export * from "./model/common/schemas/time";
+export * from "./model/common/security";
+export * from "./model/deprecated";

@@ -5,15 +5,9 @@
     "description": "Example service client that also manages pets"
   },
   "host": "localhost:3000",
-  "schemes": [
-    "http"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/pets": {
       "get": {
@@ -120,9 +114,7 @@
     },
     "Dog": {
       "type": "object",
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "properties": {
         "name": {
           "type": "string",

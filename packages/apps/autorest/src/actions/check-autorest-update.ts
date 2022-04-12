@@ -1,8 +1,9 @@
+import { color } from "@autorest/common";
 import { Package } from "@azure-tools/extension";
 import { gt } from "semver";
 import { AutorestArgs } from "../args";
-import { extensionManager, networkEnabled, pkgVersion } from "../autorest-as-a-service";
-import { color } from "../coloring";
+import { extensionManager, networkEnabled } from "../autorest-as-a-service";
+import { VERSION } from "../constants";
 
 /**
  * Check if there is any updates to the autorest package and display message to use if there is.
@@ -29,5 +30,5 @@ export const checkForAutoRestUpdate = async (args: AutorestArgs) => {
 
 const isAutorestUpdateAvailable = async (npmTag: string): Promise<Package | undefined> => {
   const pkg = await (await extensionManager).findPackage("autorest", npmTag);
-  return gt(pkg.version, pkgVersion) ? pkg : undefined;
+  return gt(pkg.version, VERSION) ? pkg : undefined;
 };

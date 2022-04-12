@@ -3,12 +3,14 @@
 This package contains common code for the developer tools for generating Azure SDKs.
 
 Including:
+
 - AutoRest
 
 ### Description
+
 ExtensionManager
 
-----
+---
 
 # Contributing
 

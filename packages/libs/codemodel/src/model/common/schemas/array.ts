@@ -1,6 +1,6 @@
+import { DeepPartial } from "@azure-tools/codegen";
 import { Schema, ValueSchema } from "../schema";
 import { SchemaType } from "../schema-type";
-import { DeepPartial } from "@azure-tools/codegen";
 
 /** a Schema that represents and array of values */
 export interface ArraySchema<ElementType extends Schema = Schema> extends ValueSchema {

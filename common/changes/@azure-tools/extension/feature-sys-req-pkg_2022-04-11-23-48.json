@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/extension",
+      "comment": "Extracted system-requirements into own package `@autorest/system-requirements`",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@azure-tools/extension"
+}

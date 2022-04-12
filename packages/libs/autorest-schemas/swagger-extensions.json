@@ -6,10 +6,7 @@
   "required": ["swagger", "info", "paths"],
   "additionalProperties": false,
   "patternProperties": {
-    "^x-(?!ms-).*$": {
-      "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/vendorExtension"
-    },
-    "^x-ms-sf-.*$": {
+    "^x-.*$": {
       "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/vendorExtension"
     }
   },
@@ -79,6 +76,9 @@
     },
     "x-ms-secondary-file": {
       "type": "boolean"
+    },
+    "x-ms-permissions": {
+      "$ref": "#/definitions/xmsPermissions"
     }
   },
   "definitions": {
@@ -88,10 +88,7 @@
       "required": ["version", "title"],
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -103,8 +100,7 @@
         },
         "version": {
           "type": "string",
-          "description": "A semantic version number of the API.",
-          "minLength": 1
+          "description": "A semantic version number of the API."
         },
         "description": {
           "type": "string",
@@ -146,10 +142,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -170,10 +163,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -182,10 +172,7 @@
       "type": "object",
       "description": "Relative paths to the individual endpoints. They must be relative to the 'basePath'.",
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         },
         "^/": {
@@ -194,7 +181,7 @@
       },
       "additionalProperties": {
         "not": true,
-        "errorMessage": "should only have path names that start with `/` but found ${0#}"
+        "errorMessage": "must only have path names that start with `/` but found ${0#}"
       }
     },
     "definitions": {
@@ -233,10 +220,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -254,10 +238,7 @@
       "required": ["responses"],
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -336,10 +317,7 @@
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -382,10 +360,7 @@
         "^([0-9]{3})$|^(default)$": {
           "$ref": "#/definitions/responseValue"
         },
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -393,11 +368,8 @@
         "type": "object",
         "additionalProperties": false,
         "patternProperties": {
-          "^x-(?!ms-).*$": {
-            "$ref": "#/definitions/vendorExtension"
-          },
-          "^x-ms-sf-.*$": {
-            "$ref": "#/definitions/vendorExtension"
+          "^x-.*$": {
+            "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/vendorExtension"
           }
         }
       }
@@ -445,10 +417,7 @@
       },
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -538,10 +507,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -555,10 +521,7 @@
       "type": "object",
       "required": ["name", "in", "schema"],
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -613,10 +576,7 @@
     "headerParameterSubSchema": {
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -728,10 +688,7 @@
     "queryParameterSubSchema": {
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -844,10 +801,7 @@
     "formDataParameterSubSchema": {
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -957,10 +911,7 @@
     "pathParameterSubSchema": {
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -1211,10 +1162,7 @@
       "type": "object",
       "description": "A deterministic version of a JSON Schema object.",
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -1373,10 +1321,7 @@
       "type": "object",
       "description": "A deterministic version of a JSON Schema object.",
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -1478,10 +1423,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -1556,10 +1498,7 @@
         }
       },
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       }
@@ -1677,7 +1616,7 @@
     },
     "xmsEnum": {
       "type": "object",
-      "required": ["name"],
+      "required": [],
       "properties": {
         "name": {
           "type": "string"
@@ -1742,7 +1681,16 @@
       ]
     },
     "xmsPaths": {
-      "$ref": "#/definitions/paths"
+      "type": "object",
+      "description": "Relative paths to the individual endpoints. They must be relative to the 'basePath'.",
+      "patternProperties": {
+        "^x-.*$": {
+          "$ref": "#/definitions/vendorExtension"
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/definitions/pathItem"
+      }
     },
     "xmsExternal": {
       "type": "boolean"
@@ -1773,6 +1721,24 @@
       },
       "additionalProperties": false
     },
+    "xmsPermissions": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "type": "string"
+        },
+        "dataActions": {
+          "type": "string"
+        },
+        "rolesWithThesePermissions": {
+          "type": "string"
+        },
+        "moreInfoLink": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "xmsLongRunningOperation": {
       "description": "Indicates whether the operation is long running (asynchronous). `true` value indicates that it is a long running operation.",
       "type": "boolean"
@@ -1782,9 +1748,9 @@
       "type": "object",
       "properties": {
         "final-state-via": {
-          "description": "How to determine the final state of the operation. Possible Values:\n- `azure-async-operation` - poll until terminal state, the final response will be available at the uri pointed to by the header `Azure-AsyncOperation`\n- `location`  - poll until terminal state, the final response will be available at the uri pointed to by the header `Location`\n- `original-uri` - poll until terminal state, the final response will be available via GET at the original resource URI. Very common for PUT operations",
+          "description": "How to determine the final state of the operation. Possible Values:\n- `azure-async-operation` - poll until terminal state, the final response will be available at the uri pointed to by the header `Azure-AsyncOperation`\n- `location`  - poll until terminal state, the final response will be available at the uri pointed to by the header `Location`\n- `operation-location` - poll until terminal state, the final response will be available at the uri pointed to by the header `Operation-Location`",
           "type": "string",
-          "enum": ["azure-async-operation", "location", "original-uri"]
+          "enum": ["azure-async-operation", "location", "original-uri", "operation-location"]
         }
       },
       "required": ["final-state-via"]
@@ -1823,10 +1789,7 @@
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
-        "^x-(?!ms-).*$": {
-          "$ref": "#/definitions/vendorExtension"
-        },
-        "^x-ms-sf-.*$": {
+        "^x-.*$": {
           "$ref": "#/definitions/vendorExtension"
         }
       },
@@ -1889,7 +1852,7 @@
           "$ref": "#/definitions/jsonReference"
         },
         "else": {
-          "$ref": "https://raw.githubusercontent.com/Azure/autorest/master/schema/example-schema.json#"
+          "$ref": "https://raw.githubusercontent.com/Azure/autorest/main/packages/libs/autorest-schemas/example-schema.json#"
         }
       }
     }

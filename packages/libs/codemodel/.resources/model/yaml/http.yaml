@@ -16,7 +16,7 @@ definitions:
         $ref: ./enums.yaml#/definitions/ParameterLocation
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
     required:
       - in
       - name
@@ -32,13 +32,13 @@ definitions:
         type: string
         description: an URI
       scopes:
-        $ref: ./master.yaml#/definitions/Dictionary<string>
+        $ref: ./master.yaml#/definitions/Record<string,string>
       tokenUrl:
         type: string
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
     required:
       - authorizationUrl
       - scopes
@@ -61,7 +61,7 @@ definitions:
           - bearer
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
     required:
       - scheme
       - type
@@ -73,13 +73,13 @@ definitions:
         type: string
         description: an URI
       scopes:
-        $ref: ./master.yaml#/definitions/Dictionary<string>
+        $ref: ./master.yaml#/definitions/Record<string,string>
       tokenUrl:
         type: string
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
     required:
       - scopes
       - tokenUrl
@@ -117,8 +117,6 @@ definitions:
           - true
     required:
       - binary
-      - knownMediaType
-      - mediaTypes
       - statusCodes
   HttpHeader:
     type: object
@@ -130,7 +128,7 @@ definitions:
         type: string
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
       language:
         $ref: ./master.yaml#/definitions/Languages
     required:
@@ -181,8 +179,17 @@ definitions:
         type: boolean
         description: when set, 'form' style parameters generate separate parameters for each value of an array.
       in:
+        type: string
         description: the location that this parameter is placed in the http request
-        $ref: ./enums.yaml#/definitions/ParameterLocation
+        enum:
+          - body
+          - cookie
+          - header
+          - none
+          - path
+          - query
+          - uri
+          - virtual
       skipUriEncoding:
         type: boolean
         description: when set, this indicates that the content of the parameter should not be subject to URI encoding rules.
@@ -235,11 +242,11 @@ definitions:
         items:
           $ref: ./http.yaml#/definitions/HttpHeader
       knownMediaType:
-        description: canonical response type (ie, 'json')
+        description: canonical response type (ie, 'json').
         $ref: ./enums.yaml#/definitions/KnownMediaType
       mediaTypes:
         type: array
-        description: the possible media types that this response MUST match one of
+        description: The possible media types that this response MUST match one of.
         items:
           type: string
       statusCodes:
@@ -312,8 +319,6 @@ definitions:
             - 511
             - default
     required:
-      - knownMediaType
-      - mediaTypes
       - statusCodes
   HttpWithBodyRequest:
     type: object
@@ -346,10 +351,10 @@ definitions:
         type: string
         description: an URI
       scopes:
-        $ref: ./master.yaml#/definitions/Dictionary<string>
+        $ref: ./master.yaml#/definitions/Record<string,string>
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
     required:
       - authorizationUrl
       - scopes
@@ -367,27 +372,22 @@ definitions:
         type: string
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
     required:
       - scheme
       - type
   OAuth2SecurityScheme:
     type: object
     additionalProperties: false
+    allOf:
+      - $ref: ./http.yaml#/definitions/SecurityScheme
     properties:
-      type:
-        type: string
-        enum:
-          - oauth2
-      description:
-        type: string
-      flows:
-        $ref: ./http.yaml#/definitions/OAuthFlows
-      extensions:
-        description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+      scopes:
+        type: array
+        items:
+          type: string
     required:
-      - flows
+      - scopes
       - type
   OAuthFlows:
     type: object
@@ -403,7 +403,7 @@ definitions:
         $ref: ./http.yaml#/definitions/PasswordOAuthFlow
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
   OpenIdConnectSecurityScheme:
     type: object
     additionalProperties: false
@@ -419,7 +419,7 @@ definitions:
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
     required:
       - openIdConnectUrl
       - type
@@ -431,13 +431,13 @@ definitions:
         type: string
         description: an URI
       scopes:
-        $ref: ./master.yaml#/definitions/Dictionary<string>
+        $ref: ./master.yaml#/definitions/Record<string,string>
       tokenUrl:
         type: string
         description: an URI
       extensions:
         description: additional metadata extensions dictionary
-        $ref: ./master.yaml#/definitions/Dictionary<any>
+        $ref: ./master.yaml#/definitions/Record<string,any>
     required:
       - scopes
       - tokenUrl
@@ -446,9 +446,10 @@ definitions:
     description: common ways of serializing simple parameters
     additionalProperties: false
   SecurityScheme:
-    anyOf:
-      - $ref: ./http.yaml#/definitions/BearerHTTPSecurityScheme
-      - $ref: ./http.yaml#/definitions/NonBearerHTTPSecurityScheme
-      - $ref: ./http.yaml#/definitions/OAuth2SecurityScheme
-      - $ref: ./http.yaml#/definitions/APIKeySecurityScheme
-      - $ref: ./http.yaml#/definitions/OpenIdConnectSecurityScheme
+    type: object
+    additionalProperties: false
+    properties:
+      type:
+        type: string
+    required:
+      - type

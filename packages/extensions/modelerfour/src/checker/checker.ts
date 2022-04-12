@@ -1,20 +1,6 @@
-import {
-  CodeModel,
-  Schema,
-  ObjectSchema,
-  isObjectSchema,
-  SchemaType,
-  Property,
-  ParameterLocation,
-  Operation,
-  Parameter,
-  VirtualParameter,
-  getAllProperties,
-  ImplementationLocation,
-  DictionarySchema,
-} from "@autorest/codemodel";
+import { CodeModel } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
-import { values, items, length, Dictionary, refCount, clone } from "@azure-tools/linq";
+import { flatMap, groupBy, pickBy } from "lodash";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
 
 export class Checker {
@@ -32,39 +18,47 @@ export class Checker {
   }
 
   checkOperationGroups() {
-    for (const dupe of values(this.codeModel.operationGroups)
-      .select((each) => each.language.default.name)
-      .duplicates()) {
-      this.session.error(`Duplicate Operation group '${dupe}' detected .`, []);
+    const duplicates = findDuplicates(this.codeModel.operationGroups, (x) => x.language.default.name);
+    for (const [dupe] of Object.entries(duplicates)) {
+      this.session.error(`Duplicate Operation group '${dupe}' detected .`, ["DuplicateOperationGroup"]);
     }
   }
 
   checkOperations() {
     for (const group of this.codeModel.operationGroups) {
-      for (const dupe of values(group.operations)
-        .select((each) => each.language.default.name)
-        .duplicates()) {
-        this.session.error(`Duplicate Operation '${dupe}' detected.`, []);
+      const duplicates = findDuplicates(group.operations, (x) => x.language.default.name);
+      for (const [dupe, operations] of Object.entries(duplicates)) {
+        const paths = operations
+          .map((x) => x.requests?.[0].protocol.http)
+          .map((x) => `  - ${x?.method} ${x?.path}`)
+          .join("\n");
+        this.session.error(
+          `Duplicate Operation '${group.language.default.name}' > '${dupe}' detected(This is most likely due to 2 operation using the same 'operationId' or 'tags'). Duplicates have those paths:\n${paths}`,
+          ["DuplicateOperation"],
+        );
       }
     }
   }
 
   checkSchemas() {
-    const allSchemas = values(<Dictionary<Array<Schema>>>(<any>this.codeModel.schemas))
-      .selectMany((schemas) => (Array.isArray(schemas) ? values(schemas) : []))
-      .toArray();
+    const allSchemas = flatMap(Object.values(this.codeModel.schemas), (schemas) =>
+      Array.isArray(schemas) ? schemas : [],
+    );
 
-    for (const each of values(allSchemas).where((each) => !each.language.default.name)) {
-      this.session.warning(`Schema Missing Name '${JSON.stringify(each)}'.`, []);
+    for (const name of allSchemas.filter((x) => !x.language.default.name)) {
+      this.session.warning(`Schema Missing Name '${JSON.stringify(name)}'.`, []);
     }
 
-    const types = values(<Array<Schema>>this.codeModel.schemas.objects)
-      .concat(values(this.codeModel.schemas.groups))
-      .concat(values(this.codeModel.schemas.choices))
-      .concat(values(this.codeModel.schemas.sealedChoices))
-      .toArray();
-    for (const dupe of values(types).duplicates((each) => each.language.default.name)) {
-      this.session.error(`Duplicate object schemas with '${dupe.language.default.name}' name  detected.`, []);
+    const types = [
+      ...(this.codeModel.schemas.objects ?? []),
+      ...(this.codeModel.schemas.groups ?? []),
+      ...(this.codeModel.schemas.choices ?? []),
+      ...(this.codeModel.schemas.sealedChoices ?? []),
+    ];
+
+    const duplicates = findDuplicates(types, (each) => each.language.default.name);
+    for (const name of Object.keys(duplicates)) {
+      this.session.error(`Duplicate object schemas with '${name}' name  detected.`, []);
     }
 
     /* for (const dupe of values(this.codeModel.schemas.numbers).select(each => each.type).duplicates()) {
@@ -82,4 +76,9 @@ export class Checker {
     }
     return this.codeModel;
   }
+}
+
+function findDuplicates<T>(items: T[], groupByFn: (item: T) => string): Record<string, T[]> {
+  const grouped = groupBy(items, groupByFn);
+  return pickBy(grouped, (x) => x.length > 1);
 }

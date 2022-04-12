@@ -4,7 +4,7 @@ This package contains common code for the developer tools for generating Azure S
 
 (development-in-progress)
 
-----
+---
 
 # Contributing
 

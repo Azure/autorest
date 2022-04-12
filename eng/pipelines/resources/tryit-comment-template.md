@@ -3,8 +3,8 @@ You may test this build by running `autorest --reset` and then either:
 <hr>
 Add the following CLI flags
 
-| Pacakge               | Flag                                         | Description                   |
-| --------------------- | -------------------------------------------- | ----------------------------- |
+| Pacakge               | Flag                                          | Description                   |
+| --------------------- | --------------------------------------------- | ----------------------------- |
 | @autorest/core        | `--version:{{AUTOREST_CORE_DOWNLOAD_URL}}`    | For changes to autorest core. |
 | @autorest/modelerfour | `--use:{{AUTOREST_MODELERFOUR_DOWNLOAD_URL}}` | For changes to modelerfour.   |
 

@@ -3,42 +3,35 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { values } from "@azure-tools/linq";
+import { uniqBy } from "lodash";
 import { MappedPosition } from "source-map";
 import { DataStore } from "../data-store/data-store";
-import { JsonPath } from "../json-path/json-path";
-import { EncodeEnhancedPositionInName, TryDecodeEnhancedPositionFromName } from "./source-map";
+import { PathMappedPosition } from "./path-source-map";
 
+/**
+ * Represent a source mapping tree.
+ */
 export class BlameTree {
-  public static async Create(dataStore: DataStore, position: MappedPosition): Promise<BlameTree> {
-    const data = dataStore.ReadStrictSync(position.source);
-    const blames = await data.Blame(position);
-
-    // propagate smart position
-    const enhanced = TryDecodeEnhancedPositionFromName(position.name);
-    if (enhanced !== undefined) {
-      for (const blame of blames) {
-        blame.name = EncodeEnhancedPositionInName(blame.name, {
-          ...enhanced,
-          ...TryDecodeEnhancedPositionFromName(blame.name),
-        });
-      }
-    }
-
-    const s = new Array<BlameTree>();
+  public static async create(dataStore: DataStore, position: MappedPosition | PathMappedPosition): Promise<BlameTree> {
+    const data = dataStore.readStrictSync(position.source);
+    const blames = await data.blame(position as any);
+    const children = [];
     for (const pos of blames) {
-      s.push(await BlameTree.Create(dataStore, pos));
+      children.push(await BlameTree.create(dataStore, pos));
     }
 
-    return new BlameTree(position, s);
+    return new BlameTree(position, children);
   }
 
   private constructor(
-    public readonly node: MappedPosition & { path?: JsonPath },
-    public readonly blaming: Array<BlameTree>,
+    public readonly node: MappedPosition | PathMappedPosition,
+    public readonly blaming: BlameTree[],
   ) {}
 
-  public BlameLeafs(): Array<MappedPosition> {
+  /**
+   * @returns List of mapped positions at the leaf of the tree.(i.e. the original file(s) posistions)
+   */
+  public getMappingLeafs(): Array<MappedPosition> {
     const result: Array<MappedPosition> = [];
 
     const todos: Array<BlameTree> = [this];
@@ -46,18 +39,19 @@ export class BlameTree {
     while ((todo = todos.pop())) {
       // report self
       if (todo.blaming.length === 0) {
-        result.push({
-          column: todo.node.column,
-          line: todo.node.line,
-          name: todo.node.name,
-          source: todo.node.source,
-        });
+        if ("line" in todo.node) {
+          result.push({
+            column: todo.node.column,
+            line: todo.node.line,
+            source: todo.node.source,
+          });
+        }
       }
       // recurse
       todos.push(...todo.blaming);
     }
-    return values(result)
-      .distinct((x) => JSON.stringify(x))
-      .toArray();
+
+    // Return distrinct values.
+    return uniqBy(result, (x) => JSON.stringify(x));
   }
 }

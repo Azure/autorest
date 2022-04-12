@@ -16,7 +16,6 @@ import {
   SchemaContext,
 } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
-import { values, items, length, Dictionary, refCount, clone } from "@azure-tools/linq";
 import { pascalCase, camelCase } from "@azure-tools/codegen";
 import { ModelerFourOptions } from "../modeler/modelerfour-options";
 
@@ -26,7 +25,7 @@ const xmsParameterGrouping = "x-ms-parameter-grouping";
 export class Grouper {
   codeModel: CodeModel;
   options: ModelerFourOptions = {};
-  groups: Dictionary<GroupSchema> = {};
+  groups: Record<string, GroupSchema> = {};
 
   constructor(protected session: Session<CodeModel>) {
     this.codeModel = session.model; // shadow(session.model, filename);
@@ -42,7 +41,7 @@ export class Grouper {
     if (this.options["group-parameters"] === true) {
       for (const group of this.codeModel.operationGroups) {
         for (const operation of group.operations) {
-          for (const request of values(operation.requests)) {
+          for (const request of operation.requests ?? []) {
             this.processParameterGroup(group, operation, request);
             request.updateSignatureParameters();
           }
@@ -101,7 +100,7 @@ export class Grouper {
         const schema = this.groups[groupName];
 
         // see if the group has this parameter.
-        const existingProperty = values(schema.properties).first(
+        const existingProperty = schema.properties?.find(
           (each) => each.language.default.name === parameter.language.default.name,
         );
         if (existingProperty) {
@@ -144,7 +143,7 @@ export class Grouper {
         // remove the grouping extension from the original parameter.
         if (parameter.extensions) {
           delete parameter.extensions[xmsParameterGrouping];
-          if (length(parameter.extensions) === 0) {
+          if (parameter.extensions.length === 0) {
             delete parameter["extensions"];
           }
         }
