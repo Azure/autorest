@@ -53,19 +53,7 @@ describe("JsonPath", () => {
     //expect(jp.nodes(obj, "$..[(1 + 1)]").length).toEqual( 1);
   });
 
-  it("round trip identity", () => {
-    const roundTrips = (s: string) => expect(roundTrip(s)).toEqual(s);
-    roundTrips("$.asd.qwe[1].zxc");
-    roundTrips('$[1][42]["asd qwe"]');
-    roundTrips('$[1]["1"]');
-  });
-
   it("accept number in paths", () => {
     expect(jp.stringify(["foo", 123 as any, "other"])).toEqual("$['foo'][123]['other']");
-  });
-
-  it("round trip simplification", () => {
-    expect(roundTrip('$["definitely"]["add"]["more"]["cowbell"]')).toEqual("$.definitely.add.more.cowbell");
-    expect(roundTrip('$[1]["even"]["more cowbell"]')).toEqual('$[1].even["more cowbell"]');
   });
 });
