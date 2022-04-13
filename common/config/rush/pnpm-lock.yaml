@@ -41,7 +41,6 @@ specifiers:
   '@types/glob': ^7.1.3
   '@types/jest': ^26.0.20
   '@types/js-yaml': ~4.0.0
-  '@types/jsonpath': ^0.2.0
   '@types/lodash': ~4.14.168
   '@types/mocha': ^5.2.7
   '@types/morgan': ^1.9.2
@@ -81,7 +80,6 @@ specifiers:
   jest: ^28.0.0-alpha.7
   jest-snapshot: ~26.6.2
   js-yaml: ~4.0.0
-  jsonpath: 1.0.0
   jsonpath-plus: ~6.0.1
   lodash: ~4.17.20
   mkdirp: ~0.5.1
@@ -161,7 +159,6 @@ dependencies:
   '@types/glob': 7.2.0
   '@types/jest': 26.0.24
   '@types/js-yaml': 4.0.5
-  '@types/jsonpath': 0.2.0
   '@types/lodash': 4.14.181
   '@types/mocha': 5.2.7
   '@types/morgan': 1.9.3
@@ -201,7 +198,6 @@ dependencies:
   jest: 28.0.0-alpha.8_5076b77de2277d7bd3e529e70437d1c6
   jest-snapshot: 26.6.2
   js-yaml: 4.0.0
-  jsonpath: 1.0.0
   jsonpath-plus: 6.0.1
   lodash: 4.17.21
   mkdirp: 0.5.6
@@ -8649,7 +8645,7 @@ packages:
     dev: false
 
   file:projects/autorest.tgz_ts-node@9.1.1:
-    resolution: {integrity: sha512-KPmeR/goWtdDg60/uPVSwcKV8Hg6oFN+LScAe9TXazZm0nRi942SAaJEJiWoqSamiaHItJUYmWS++4SAw10WvA==, tarball: file:projects/autorest.tgz}
+    resolution: {integrity: sha512-q5gLxvXWwC/bPiJ4QSaqEQkgpr6UsXjRIkQUmbx9z05Pnppbl0w1nT+TPpEGqA6UEsUGg4LgnOwK2WFKcOy2qQ==, tarball: file:projects/autorest.tgz}
     id: file:projects/autorest.tgz
     name: '@rush-temp/autorest'
     version: 0.0.0
@@ -8918,7 +8914,7 @@ packages:
     dev: false
 
   file:projects/core.tgz_ts-node@9.1.1:
-    resolution: {integrity: sha512-TVrvxaFSkMfvfrhBqwparFCydxcZq6fxAztIvuC+eHUZeX1v5LY0VNc5nWABmjqy/gfncQvBxQ3UdiCmUboCRA==, tarball: file:projects/core.tgz}
+    resolution: {integrity: sha512-5e8sqRAZRnTXkjUplDGWQu11ai/GeIKAgAce6arUs0iVXlhvQSBqct3hB24pfex7ahZa0DzM3v4OtPWzclDVVw==, tarball: file:projects/core.tgz}
     id: file:projects/core.tgz
     name: '@rush-temp/core'
     version: 0.0.0
