@@ -1,8 +1,8 @@
 import { IAutorestLogger } from "@autorest/common";
 import { DataHandle, DataSink, DataSource, QuickDataSource } from "@azure-tools/datastore";
 import { PipelinePlugin } from "../../pipeline/common";
-import { crawlReferences } from "../ref-crawling";
 import { checkSyntaxFromData } from "./common";
+import { loadAllReferencedFiles } from "./referenced-file-resolver";
 
 interface OpenAPI3Spec {
   openapi?: string;
@@ -60,7 +60,7 @@ export function createOpenApiLoaderPlugin(): PipelinePlugin {
     const openapis = await loadOpenAPIFiles(config, input, inputs, sink);
     let result: DataHandle[] = [];
     if (openapis.length === inputs.length) {
-      result = await crawlReferences(config, input, openapis, sink);
+      result = await loadAllReferencedFiles(config, input, openapis, sink);
     }
     return new QuickDataSource(result, { skipping: openapis.length !== inputs.length });
   };
