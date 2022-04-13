@@ -68,7 +68,6 @@
     "eslint-plugin-import": "~2.24.2",
     "eslint": "^7.17.0",
     "jest": "^28.0.0-alpha.7",
-    "jsonpath": "1.0.0",
     "mkdirp": "~0.5.1",
     "prettier": "~2.3.1",
     "rimraf": "^3.0.2",

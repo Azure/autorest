@@ -13,10 +13,10 @@ import {
   IFileSystem,
   QuickDataSource,
   createSandbox,
-  stringify,
   PipeState,
   mergePipeStates,
 } from "@azure-tools/datastore";
+import { serializeJsonPointer } from "@azure-tools/json";
 import { last, mapValues, omitBy } from "lodash";
 import { AutorestContext } from "../context";
 import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
@@ -130,7 +130,7 @@ export async function runPipeline(configView: AutorestContext, fileSystem: IFile
         break;
     }
 
-    const context = pipeline.configs[stringify(node.configScope)];
+    const context = pipeline.configs[serializeJsonPointer(node.configScope)];
     const pluginName = node.pluginName;
 
     // you can have --pass-thru:FOO on the command line
