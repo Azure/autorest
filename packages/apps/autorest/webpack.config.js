@@ -1,8 +1,8 @@
 // @ts-check
 
 const path = require("path");
-const baseWebpackConfig = require("../../../common/config/webpack.base.config");
 const CopyPlugin = require("copy-webpack-plugin");
+const baseWebpackConfig = require("../../../common/config/webpack.base.config");
 /**
  * @type {import("webpack").Configuration}
  */
@@ -16,12 +16,6 @@ module.exports = {
     ...baseWebpackConfig.output,
     path: path.resolve(__dirname, "dist"),
     libraryTarget: "commonjs2",
-  },
-  resolve: {
-    ...baseWebpackConfig.resolve,
-    alias: {
-      jsonpath: path.resolve(__dirname, "node_modules", "jsonpath", "jsonpath.min.js"),
-    },
   },
   plugins: [
     // We need to copy the yarn cli.js so @azure-tools/extensions can call the file as it is.(Not bundled in the webpack bundle.)

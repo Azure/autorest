@@ -1,7 +1,7 @@
-import { execute } from "../exec-cmd";
+import { execute } from "./exec-cmd";
 import { resolveJavaRequirement } from "./java";
 
-jest.mock("../exec-cmd");
+jest.mock("./exec-cmd");
 
 const mockExecute = execute as jest.Mock;
 

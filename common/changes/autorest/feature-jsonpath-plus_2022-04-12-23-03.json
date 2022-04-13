@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "autorest",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "autorest"
+}

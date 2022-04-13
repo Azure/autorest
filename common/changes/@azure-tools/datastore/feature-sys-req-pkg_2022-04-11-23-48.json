@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/datastore",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@azure-tools/datastore"
+}

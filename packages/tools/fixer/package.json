@@ -47,7 +47,7 @@
     "jest": "^28.0.0-alpha.7",
     "prettier": "~2.3.1",
     "rimraf": "^3.0.2",
-    "typescript": "~4.4.2"
+    "typescript": "~4.6.3"
   },
   "dependencies": {
     "chalk": "^4.1.0",
@@ -55,7 +55,7 @@
     "lodash": "~4.17.20",
     "source-map-support": "^0.5.19",
     "ts-jest": "^27.0.3",
-    "winston": "~3.3.3",
+    "winston": "~3.7.2",
     "yargs": "17.2.1"
   }
 }
