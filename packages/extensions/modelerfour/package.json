@@ -6,7 +6,7 @@
     "doc": "docs"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=14.0.0"
   },
   "main": "dist/main.js",
   "typings": "dist/main.d.ts",

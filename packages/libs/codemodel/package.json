@@ -8,7 +8,7 @@
   "main": "dist/exports.js",
   "typings": "dist/exports.d.ts",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=14.0.0"
   },
   "scripts": {
     "watch": "tsc -p tsconfig.build.json --watch",
