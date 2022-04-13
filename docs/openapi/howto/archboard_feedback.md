@@ -1,7 +1,7 @@
 # Archboard DPG feedback loop
 
 If you went to SDK archboard as a service team, you may have encounter feedback on modification that you have to apply to your Swagger going forward 
-to generate your SDK using [DPG](https://aka.ms/azsdk/dpcodegena). This document tries to clarify some common patterns and well known modifications you need to
+to generate your SDK using [DPG](https://aka.ms/azsdk/dpcodegen). This document tries to clarify some common patterns and well known modifications you need to
 apply to your Swagger and/or Readme.
 
 Content:
