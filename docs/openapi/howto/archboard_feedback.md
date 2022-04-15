@@ -137,7 +137,7 @@ You will get this feedback if your operation is returning a list of objects. Con
 The full documentation for pageable is available here: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-pageable
 
 At a glance:
-- Add `x-ms-pageable` node to your operation definition
+- Add `x-ms-pageable` node to your operation definition.
 - Make sure your return schema is an array of T (T could be anything).
 - `nextLinkName` can be `null` if your service do not support paging yet, otherwise should be the JSON key where the next link is (usually `nextLink`).
 - For more complex pageable (different verb than GET, complex URL building, etc.), please refer to x[-ms-pageable full doc](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-pageable)
