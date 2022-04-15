@@ -115,7 +115,10 @@ Just rename the model name directly in Swagger. Since this name is not use in JS
 
 ## Rename a model attribute
 
-Since attribute name are used in JSON serialization, we need to declare a mapping between the SDK name and the JSON name. It's achieved with the extensions 
+Since attribute name are used in JSON serialization, the recommendation will vary depending on the status of your API.
+
+- If you API is still in design or in preview, we encourage to update the RestAPI server implementation to the new name, and then update the Swagger accordingly.
+- If you API is GA and changing the server name would be a breaking change, we need to declare a mapping between the SDK name and the JSON name. It's achieved with the extensions 
 `x-ms-client-name` :
 
 ``` json
