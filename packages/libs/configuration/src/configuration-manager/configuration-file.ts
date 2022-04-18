@@ -44,13 +44,15 @@ export const readConfigurationFile = async (
 
   // load config
   const hConfig = await parseConfigFile(logger, configFile, sink);
+  if (configFile.originalFullPath === "file:///C:/dev/azsdk/playground/readme.md") {
+    console.log("HConfig", await hConfig[0].data.readData());
+  }
   if (hConfig.length === 1 && hConfig[0].info === null && configFile.description.toLowerCase().endsWith(".md")) {
     // this is a whole file, and it's a markdown file.
     return { ...base };
   }
 
   const configs = await Promise.all(hConfig.filter((x) => x).map((x) => codeBlockToRawConfig(logger, parentFolder, x)));
-
   return {
     ...base,
     configs,
