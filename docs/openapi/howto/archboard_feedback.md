@@ -1,3 +1,5 @@
+(This page can be linked as: https://aka.ms/azsdk/swagger-update)
+
 # Archboard DPG/RLC feedback loop
 
 If you went to SDK archboard as a service team, you may have encounter feedback on modification that you have to apply to your Swagger going forward 
