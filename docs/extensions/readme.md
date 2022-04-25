@@ -926,7 +926,7 @@ With this extension, you can set a default value for a property or parameter tha
 
 The REST API guidelines define a common pattern for paging through lists of data. The operation response is modeled in OpenAPI as a list of items (a "page") and a link to the next page, effectively resembling a singly linked list. Tag the operation as `x-ms-pageable` and the generated code will include methods for navigating between pages.
 
-**Note:** The request to get the nextPage will always be a `GET` request
+**Note:** The request to the nextLink URL will be a `GET` request unless `operationName` is specified. If `operationName` is specified, the request will use the HTTP method for that operation.
 
 **Schema**:
 
@@ -934,7 +934,7 @@ The REST API guidelines define a common pattern for paging through lists of data
 | ------------- | :------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | itemName      | `string` | Optional (default: `value`). Specifies the name of the property that provides the collection of pageable items.                                                                                                                                                                                                                                                                                                           |
 | nextLinkName  | `string` | Required. Specifies the name of the property that provides the next link (common: `nextLink`). If the model does not have a next link property then specify `null`. This is useful for services that return an object that has an array referenced by `itemName`. The object is then flattened in a way that the array is _directly_ returned, no paging is used. This provides a better client side API to the end user. |
-| operationName | `string` | Optional (default: `<operationName>Next`). Specifies the name of the operation for retrieving the next page.                                                                                                                                                                                                                                                                                                              |
+| operationName | `string` | Optional (default: `<operationName>Next`). Specifies the name (operationId) of the operation for retrieving the next page.                                                                                                                                                                                                                                                                                                |
 
 **Parent element**: [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
 

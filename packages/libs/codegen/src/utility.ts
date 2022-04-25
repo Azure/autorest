@@ -102,7 +102,7 @@ export function guid() {
     "-" +
     quartet() +
     "-4" +
-    quartet().substr(0, 3) +
+    quartet().slice(0, 3) +
     "-" +
     quartet() +
     "-" +

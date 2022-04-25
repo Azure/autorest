@@ -1,5 +1,5 @@
 import { IAutorestLogger, PluginUserError } from "@autorest/common";
-import { IdentityPathMappings, QuickDataSource } from "@azure-tools/datastore";
+import { DataSource, IdentityPathMappings, QuickDataSource } from "@azure-tools/datastore";
 import { InvalidJsonPointer } from "@azure-tools/json";
 import { parseJsonRef } from "@azure-tools/jsonschema";
 import { createOpenAPIWorkspace, OpenAPIWorkspace } from "@azure-tools/openapi";
@@ -22,7 +22,12 @@ export function createFullRefResolverPlugin(): PipelinePlugin {
       ),
     );
 
-    if (!resolveRefs(context.logger, specs)) {
+    const options: RefProcessorOptions = {
+      includeXmsExamplesOriginalFileLocation: context.config["include-x-ms-examples-original-file"],
+    };
+    if (
+      !(await resolveRefs(context.logger, context.DataStore.getReadThroughScope(context.fileSystem), specs, options))
+    ) {
       throw new PluginUserError(context.pluginName ?? "");
     }
 
@@ -39,56 +44,77 @@ export function createFullRefResolverPlugin(): PipelinePlugin {
   };
 }
 
-function resolveRefs(logger: IAutorestLogger, specs: Record<string, any>) {
+async function resolveRefs(
+  logger: IAutorestLogger,
+  dataSource: DataSource,
+  specs: Record<string, any>,
+  options: RefProcessorOptions,
+) {
   const workspace = createOpenAPIWorkspace({ specs });
   let success = true;
   for (const [uri, spec] of Object.entries(specs)) {
-    if (!crawlRefs(logger, uri, spec, workspace, [])) {
+    if (!(await crawlRefs(logger, dataSource, uri, spec, workspace, options))) {
       success = false;
     }
   }
   return success;
 }
 
-function crawlRefs(
+async function crawlRefs(
   logger: IAutorestLogger,
+  dataSource: DataSource,
   originalFileLocation: string,
-  obj: any,
+  spec: any,
   workspace: OpenAPIWorkspace<any>,
-  pointer: string[],
+  options: RefProcessorOptions,
 ) {
-  let success = true;
-  for (const [key, value] of Object.entries(obj)) {
-    // We don't want to navigate the examples.
-    if (key === "x-ms-examples") {
-      continue;
-    }
-    if (key === "$ref" && typeof value === "string") {
-      const { file, path } = parseJsonRef(value);
-      const newRefFileName = resolveUri(originalFileLocation, file ?? "");
+  const promises: Promise<void>[] = [];
+  function visit(obj: any, pointer: string[]) {
+    let success = true;
+    for (const [key, value] of Object.entries(obj)) {
+      // We don't want to navigate the examples.
+      if (key === "x-ms-examples") {
+        promises.push(
+          (async () => {
+            const examples = await loadXmsExamples(dataSource, originalFileLocation, value as any, options);
+            if (examples) {
+              obj[key] = examples;
+            }
+          })(),
+        );
+        continue;
+      }
+      if (key === "$ref" && typeof value === "string") {
+        const { file, path } = parseJsonRef(value);
+        const newRefFileName = resolveUri(originalFileLocation, file ?? "");
 
-      const newReference = path ? `${newRefFileName}#${path}` : newRefFileName;
+        const newReference = path ? `${newRefFileName}#${path}` : newRefFileName;
 
-      if (!checkReferenceIsValid(workspace, newRefFileName, path)) {
-        success = false;
-        logger.trackError({
-          code: "InvalidRef",
-          message: `Ref '${value}' is not referencing a valid location.`,
-          source: [{ document: originalFileLocation, position: { path: pointer } }],
-        });
-      }
-      obj[key] = newReference;
-    } else if (Array.isArray(value)) {
-      if (!crawlRefs(logger, originalFileLocation, value, workspace, [...pointer, key])) {
-        success = false;
-      }
-    } else if (value && typeof value === "object") {
-      if (!crawlRefs(logger, originalFileLocation, value, workspace, [...pointer, key])) {
-        success = false;
+        if (!checkReferenceIsValid(workspace, newRefFileName, path)) {
+          success = false;
+          logger.trackError({
+            code: "InvalidRef",
+            message: `Ref '${value}' is not referencing a valid location.`,
+            source: [{ document: originalFileLocation, position: { path: pointer } }],
+          });
+        }
+        obj[key] = newReference;
+      } else if (Array.isArray(value)) {
+        if (!visit(value, [...pointer, key])) {
+          success = false;
+        }
+      } else if (value && typeof value === "object") {
+        if (!visit(value, [...pointer, key])) {
+          success = false;
+        }
       }
     }
+    return success;
   }
-  return success;
+
+  const result = visit(spec, []);
+  await Promise.all(promises);
+  return result;
 }
 
 function checkReferenceIsValid(workspace: OpenAPIWorkspace<any>, file: string, path: string | undefined): boolean {
@@ -100,5 +126,44 @@ function checkReferenceIsValid(workspace: OpenAPIWorkspace<any>, file: string, p
       return false;
     }
     throw e;
+  }
+}
+
+interface RefProcessorOptions {
+  includeXmsExamplesOriginalFileLocation?: boolean;
+}
+
+async function loadXmsExamples(
+  dataSoure: DataSource,
+  originalFileLocation: string,
+  examples: Record<string, any>,
+  options: RefProcessorOptions,
+) {
+  const xmsExamples: any = {};
+
+  for (const [key, value] of Object.entries(examples)) {
+    if (value.$ref) {
+      try {
+        const { file } = parseJsonRef(value.$ref);
+
+        const refUri = resolveUri(originalFileLocation, file ?? "");
+        const handle = await dataSoure.readStrict(refUri);
+        const exampleData = await handle.readObject<any>();
+        xmsExamples[key] = options.includeXmsExamplesOriginalFileLocation
+          ? { ...exampleData, "x-ms-original-file": refUri }
+          : exampleData;
+      } catch (e) {
+        // skip examples that are not nice to us.
+      }
+    } else {
+      // copy whatever was there I guess.
+      xmsExamples[key] = value;
+    }
+  }
+
+  if (Object.keys(xmsExamples).length > 0) {
+    return xmsExamples;
+  } else {
+    return undefined;
   }
 }

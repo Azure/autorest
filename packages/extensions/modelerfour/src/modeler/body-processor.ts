@@ -118,7 +118,10 @@ export class BodyProcessor {
       return KnownMediaType.Binary;
     }
 
-    if (isSchemaString(body)) {
+    if (
+      isSchemaString(body) &&
+      (mediaTypes.length !== 1 || (mediaTypes[0] !== "application/json" && mediaTypes[0] !== "application/xml"))
+    ) {
       return KnownMediaType.Text;
     }
 

@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "`x-ms-examples` are loaded latter in the pipeline. This allow plugins to get the raw openapi specs right after load.",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/core"
+}

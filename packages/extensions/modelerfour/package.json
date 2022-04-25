@@ -1,6 +1,6 @@
 {
   "name": "@autorest/modelerfour",
-  "version": "4.23.1",
+  "version": "4.23.2",
   "description": "AutoRest Modeler Version Four (component)",
   "directories": {
     "doc": "docs"
@@ -69,7 +69,7 @@
     "source-map-support": "^0.5.19",
     "ts-jest": "^27.0.3",
     "ts-loader": "~9.2.3",
-    "typescript": "~4.4.2",
+    "typescript": "~4.6.3",
     "webpack-cli": "~4.7.2",
     "webpack": "~5.40.0"
   },

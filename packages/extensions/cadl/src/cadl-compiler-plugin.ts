@@ -1,31 +1,33 @@
 import { fileURLToPath } from "url";
 import { AutorestExtensionHost, Channel } from "@autorest/extension-base";
-import { compileAdl } from "./cadl-compiler.js";
+import { getSourceLocation } from "@cadl-lang/compiler";
+import { compileCadl } from "./cadl-compiler.js";
 
-export async function setupAdlCompilerPlugin(host: AutorestExtensionHost) {
+export async function setupCadlCompilerPlugin(host: AutorestExtensionHost) {
   const inputFiles = await host.getValue<string[]>("inputFileUris");
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const entrypoint = inputFiles![0];
-  const result = await compileAdl(fileURLToPath(entrypoint));
+  const result = await compileCadl(host.logger, fileURLToPath(entrypoint));
 
   if ("diagnostics" in result) {
     for (const diagnostic of result.diagnostics) {
+      const location = typeof diagnostic.target === "symbol" ? undefined : getSourceLocation(diagnostic.target);
       host.message({
         Channel: Channel.Error,
         Text: diagnostic.message,
         Source:
-          diagnostic.file !== undefined
+          location !== undefined
             ? [
                 {
-                  document: `file:///${diagnostic.file.path.replace(/\\/g, "/")}`,
-                  Position: indexToPosition(diagnostic.file.text, diagnostic.pos ?? 1),
+                  document: `file:///${location.file.path.replace(/\\/g, "/")}`,
+                  Position: indexToPosition(location.file.text, location.pos ?? 1),
                 },
               ]
             : undefined,
       });
     }
 
-    throw new Error("ADL Compiler errored.");
+    throw new Error("Cadl Compiler errored.");
   }
 
   for (const [name, content] of Object.entries(result.compiledFiles)) {

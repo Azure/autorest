@@ -1188,7 +1188,7 @@ export class EnglishPluralizationService {
       if (result.length === 0) {
         return result;
       }
-      return result.charAt(0).toUpperCase() + result.substr(1);
+      return result.charAt(0).toUpperCase() + result.slice(1);
     } else {
       return result;
     }
@@ -1204,8 +1204,8 @@ export class EnglishPluralizationService {
     // use the last space to separate the words
     const lastSpaceIndex = word.lastIndexOf(" ");
     return {
-      prefixWord: word.substr(0, lastSpaceIndex + 1),
-      suffixWord: word.substr(lastSpaceIndex + 1),
+      prefixWord: word.slice(0, lastSpaceIndex + 1),
+      suffixWord: word.slice(lastSpaceIndex + 1),
     };
     //
   }

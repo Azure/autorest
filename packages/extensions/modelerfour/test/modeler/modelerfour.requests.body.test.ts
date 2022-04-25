@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
 import assert from "assert";
+import { inspect } from "util";
 import {
   BinarySchema,
   ByteArraySchema,
@@ -20,6 +21,7 @@ import {
   SealedChoiceSchema,
   StringSchema,
 } from "@autorest/codemodel";
+import { KnownMediaType } from "@azure-tools/codegen";
 import { HttpOperation, JsonType, ParameterLocation, RequestBody } from "@azure-tools/openapi";
 import * as oai3 from "@azure-tools/openapi";
 import { addOperation, createTestSpec, findByName } from "../utils";
@@ -104,6 +106,28 @@ describe("Modelerfour.Request.Body", () => {
         expect(param?.schema.type).toEqual("sealed-choice");
         const schema = param?.schema as SealedChoiceSchema;
         expect(schema.choices.map((x) => x.value)).toEqual(["application/octet-stream", "image/png"]);
+      });
+    });
+
+    describe("Body schema is type: string with application/json content type", () => {
+      let operation: Operation;
+
+      beforeEach(async () => {
+        operation = await runModelerWithBody({
+          content: {
+            "application/json": {
+              schema: { type: JsonType.String },
+            },
+          },
+        });
+      });
+
+      it("only create one request", async () => {
+        expect(operation.requests).toHaveLength(1);
+      });
+
+      it("known media type is json", async () => {
+        expect(operation.requests![0].protocol.http!.knownMediaType).toEqual(KnownMediaType.Json);
       });
     });
 
@@ -336,7 +360,7 @@ describe("Modelerfour.Request.Body", () => {
         [{ enum: ["one", "two"] }, ChoiceSchema],
       ] as const;
       scenarios.forEach(([extra, type]) => {
-        describe(`format:${extra} with application/json`, () => {
+        describe(`format:${inspect(extra)} with application/json`, () => {
           let operation: Operation;
 
           beforeEach(async () => {

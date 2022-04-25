@@ -2,6 +2,18 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.23.2",
+      "tag": "@autorest/modelerfour_v4.23.2",
+      "date": "Thu, 07 Apr 2022 20:47:30 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Modelerfour set correct known media type when `application/json` with `type: string`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.23.1",
       "tag": "@autorest/modelerfour_v4.23.1",
       "date": "Mon, 21 Mar 2022 15:38:03 GMT",

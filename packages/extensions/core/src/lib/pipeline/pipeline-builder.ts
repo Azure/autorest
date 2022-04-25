@@ -1,5 +1,6 @@
 import { arrayify } from "@autorest/common";
-import { JsonPath, stringify } from "@azure-tools/datastore";
+import { JsonPath } from "@azure-tools/datastore";
+import { JsonPointerTokens, serializeJsonPointer } from "@azure-tools/json";
 import { AutorestContext } from "../context";
 import { PipelinePluginDefinition } from "./plugin-loader";
 
@@ -90,11 +91,11 @@ export function buildPipeline(
     const addNodesAndSuffixes = (
       suffix: string,
       inputs: string[],
-      configScope: JsonPath,
+      configScope: JsonPointerTokens,
       inputNodes: Array<{ name: string; suffixes: string[] }>,
     ) => {
       if (inputNodes.length === 0) {
-        const config = configCache[stringify(configScope)];
+        const config = configCache[serializeJsonPointer(configScope)];
         const configs = scope
           ? [...config.getNestedConfiguration(scope, plugin)]
           : [config.getContextForPlugin(plugin)];
@@ -102,14 +103,14 @@ export function buildPipeline(
         for (let i = 0; i < configs.length; ++i) {
           const newSuffix = configs.length === 1 ? "" : "/" + i;
           suffixes.push(suffix + newSuffix);
-          const path: JsonPath = configScope.slice();
+          const path: JsonPointerTokens = configScope.slice();
           if (scope) {
             path.push(scope);
           }
           if (configs.length !== 1) {
             path.push(i);
           }
-          configCache[stringify(path)] = configs[i];
+          configCache[serializeJsonPointer(path)] = configs[i];
           pipeline[stageName + suffix + newSuffix] = {
             pluginName: pluginName,
             outputArtifact,
@@ -133,7 +134,7 @@ export function buildPipeline(
       }
     };
 
-    configCache[stringify([])] = context;
+    configCache[serializeJsonPointer([])] = context;
     addNodesAndSuffixes("", [], [], inputs.map(createNodesAndSuffixes));
 
     return { name: stageName, suffixes: (cfg.suffixes = suffixes) };

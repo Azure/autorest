@@ -29,10 +29,8 @@ function tryMarkdown(rawMarkdownOrYaml: string): boolean {
 export async function parseConfigFile(logger: AutorestLogger, file: DataHandle, sink: DataSink): Promise<CodeBlock[]> {
   let hsConfigFileBlocks: CodeBlock[] = [];
 
-  const rawMarkdown = await file.readData();
-
   // try parsing as literate YAML
-  if (tryMarkdown(rawMarkdown)) {
+  if (file.originalFullPath.toLowerCase().endsWith(".md") || tryMarkdown(await file.readData())) {
     const hsConfigFileBlocksWithContext = await parseCodeBlocksFromMarkdown(file, sink);
 
     for (const { data, codeBlock } of hsConfigFileBlocksWithContext) {

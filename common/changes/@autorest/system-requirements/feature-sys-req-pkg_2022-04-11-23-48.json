@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/system-requirements",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@autorest/system-requirements"
+}

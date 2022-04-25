@@ -309,15 +309,19 @@ export class AutoRestExtension extends EventEmitter {
       async ReadFile(filename: string): Promise<string> {
         try {
           const file = await inputScope.readStrict((await friendly2internal(filename)) || filename);
-          return await file.ReadData();
-        } catch (E) {
-          // try getting the file from the output-folder
+          return await file.readData();
+        } catch (e) {
           try {
-            const result = await context.fileSystem.read(`${context.config.outputFolderUri}${filename}`);
-            return result;
-          } catch (E2) {
-            // no file there!
-            throw E;
+            // Try reading it from the filesystem
+            return await context.fileSystem.read(filename);
+          } catch (e2) {
+            // try getting the file from the output-folder
+            try {
+              return await context.fileSystem.read(`${context.config.outputFolderUri}${filename}`);
+            } catch (e3) {
+              // no file there!
+              throw e;
+            }
           }
         }
       },
@@ -366,7 +370,7 @@ export class AutoRestExtension extends EventEmitter {
         const t = context.config.outputFolderUri.length;
         return (
           await context.fileSystem.list(ensureIsFolderUri(`${context.config.outputFolderUri}${artifactType || ""}`))
-        ).map((each) => each.substr(t));
+        ).map((each) => each.slice(t));
       },
 
       async WriteFile(filename: string, content: string, sourceMap?: Array<Mapping> | RawSourceMap): Promise<void> {

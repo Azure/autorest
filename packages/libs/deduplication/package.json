@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Azure/perks.git"
+    "url": "git+https://github.com/Azure/autorest.git"
   },
   "scripts": {
     "watch": "tsc -p tsconfig.build.json --watch",
@@ -31,7 +31,7 @@
   "author": "Microsoft",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Azure/perks/issues"
+    "url": "https://github.com/Azure/autorest/issues"
   },
   "homepage": "https://github.com/Azure/autorest/tree/main/packages/libs/deduplication",
   "readme": "https://github.com/Azure/autorest/tree/main/packages/libs/deduplication/readme.md",
@@ -49,7 +49,7 @@
     "eslint": "^7.17.0",
     "jest": "^28.0.0-alpha.7",
     "rimraf": "^3.0.2",
-    "typescript": "~4.4.2"
+    "typescript": "~4.6.3"
   },
   "dependencies": {
     "@azure-tools/codegen": "~2.9.1",
