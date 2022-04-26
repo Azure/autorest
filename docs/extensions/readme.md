@@ -1579,12 +1579,12 @@ Actual permissions required to call API:
 
 **Schema**:
 
-| Field Name                  |   Type   | Description                                                                          |
-| --------------------------- | :------: | ------------------------------------------------------------------------------------ |
-| `actions`                   | `string` | List of the required action permissions for this API.                                |
-| `dataActions`               | `string` | List of the required data action permissions for this API.                           |
-| `rolesWithThesePermissions` | `string` | Comma separated list of roles that have the required permissions for this API.       |
-| `moreInfoLink`              | `string` | Link formatted as markdown with more information about the permissions for this API. |
+| Field Name                  |   Type     | Description                                                                          |
+| --------------------------- | :--------: | ------------------------------------------------------------------------------------ |
+| `actions`                   | `string`   | List of the required action permissions for this API.                                |
+| `dataActions`               | `string`   | List of the required data action permissions for this API.                           |
+| `rolesWithThesePermissions` | `[string]` | An array of roles that have the required permissions for this API.                   |
+| `moreInfoLink`              | `string`   | Link formatted as markdown with more information about the permissions for this API. |
 
  For a list roles, see [Azure built-in roles](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles).
 
@@ -1598,9 +1598,9 @@ Actual permissions required to call API:
     "dataActions": {
       "type": "string"
     },
-    "rolesWithThesePermissions": {
+    "rolesWithThesePermissions": [
       "type": "string"
-    },
+    ],
     "moreInfoLink": {
       "type": "string"
     }
@@ -1614,7 +1614,9 @@ Actual permissions required to call API:
 "x-ms-azure-rbac-permissions-required": {
   "actions": "Microsoft.Blueprint/blueprintAssignments/write and Microsoft.ManagedIdentity/userAssignedIdentities/assign/action",
   "dataActions": "",
-  "rolesWithThesePermissions": "Blueprint Operator",
+  "rolesWithThesePermissions": [
+    "Blueprint Operator"
+  ],
   "moreInfoLink": "[Learn more](https://docs.microsoft.com/azure/governance/blueprints/how-to/configure-for-blueprint-operator)"
 }
 ```
@@ -1625,7 +1627,10 @@ Actual permissions required to call API:
 "x-ms-azure-rbac-permissions-required": {
   "actions": "",
   "dataActions": "Microsoft.Storage/storageAccounts/queueServices/queues/messages/process/action or (Microsoft.Storage/storageAccounts/queueServices/queues/messages/delete and Microsoft.Storage/storageAccounts/queueServices/queues/messages/read)",
-  "rolesWithThesePermissions": "Storage Queue Data Message Processor, Storage Queue Data Contributor",
+  "rolesWithThesePermissions": [
+    "Storage Queue Data Message Processor",
+    "Storage Queue Data Contributor"
+  ],
   "moreInfoLink": "[Authorize access to blobs and queues using Azure Active Directory](https://docs.microsoft.com/azure/storage/blobs/authorize-access-azure-active-directory)"
 }
 ```
