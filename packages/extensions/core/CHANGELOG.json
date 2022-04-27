@@ -8,7 +8,10 @@
       "comments": {
         "patch": [
           {
-            "comment": "Fix issue with using $ref in responses inserterting $ref in the parent"
+            "comment": "Fix issue with using $ref in responses inserterting $ref in the parent."
+          },
+          {
+            "comment": "Fix issue with `x-ms-client-name` on inline array type."
           }
         ]
       }

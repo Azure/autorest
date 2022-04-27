@@ -7,7 +7,8 @@ Wed, 27 Apr 2022 18:53:11 GMT
 
 ### Patches
 
-- Fix issue with using $ref in responses inserterting $ref in the parent
+- Fix issue with using $ref in responses inserterting $ref in the parent.
+- "Fix issue with `x-ms-client-name` on inline array type.
 
 ## 3.8.3
 Tue, 22 Mar 2022 20:26:28 GMT
