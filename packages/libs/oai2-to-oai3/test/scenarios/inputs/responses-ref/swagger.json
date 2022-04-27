@@ -1,0 +1,32 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "test",
+    "description": "Test"
+  },
+  "produces": ["application/json"],
+  "consumes": ["application/json"],
+  "paths": {
+    "/calling": {
+      "delete": {
+        "tags": ["Recording"],
+        "summary": "Stop recording the call.",
+        "operationId": "ServerCalls_StopRecording",
+        "responses": {
+          "401": {
+            "$ref": "#/responses/401"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "401": {
+      "description": "Unauthorized",
+      "schema": {
+        "type": "object"
+      }
+    }
+  }
+}
