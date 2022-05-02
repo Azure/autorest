@@ -268,6 +268,7 @@ export class Oai2ToOai3 {
           break;
       }
     }
+
     return this.generated;
   }
 
@@ -1131,8 +1132,8 @@ export class Oai2ToOai3 {
   ) {
     for (const { key, value, pointer, childIterator } of responsesItemMembers) {
       target.__set__(key, this.newObject(pointer));
-      if (this.isTargetReference(target, value)) {
-        return this.copyRef(target, value, pointer);
+      if (this.isTargetReference(target[key], value)) {
+        return this.copyRef(target[key] as any, value, pointer);
       } else if (isExtensionKey(key)) {
         await this.visitExtensions(target[key], key, value, pointer);
       } else {
