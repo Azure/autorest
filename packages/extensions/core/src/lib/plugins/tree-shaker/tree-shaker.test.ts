@@ -81,6 +81,30 @@ describe("Tree shaker", () => {
       expect(result.components.schemas["FooItem"]["x-ms-client-name"]).toEqual("CustomFooClientItem");
     });
 
+    it("remove x-ms-client-name on the extraced type on inline array type", async () => {
+      const result = await shake({
+        components: {
+          schemas: {
+            Foo: {
+              properties: {
+                prop: {
+                  type: "array",
+                  "x-ms-client-name": "CustomFooClientItem",
+                  items: {
+                    type: "object",
+                    properties: {
+                      name: { type: "string" },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      });
+      expect(result.components.schemas["Foo-prop"]["x-ms-client-name"]).toBeUndefined();
+    });
+
     it("removes x-ms-client-name on shaked model when used on property with inline model definition", async () => {
       const result = await shake({
         components: {
