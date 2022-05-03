@@ -16,6 +16,7 @@ Content:
 - [Rename a model name](#rename-a-model-name)
 - [Rename a model attribute](#rename-a-model-attribute)
 - [Operation should be pageable](#operation-should-be-pageable)
+- [Operation should be LRO](#operation-should-be-lro)
 
 ## Need for more/less SDK package(s)
 
@@ -155,3 +156,27 @@ At a glance:
        "nextLinkName": null
     }
  ```
+
+## Operation should be LRO
+
+You will get this feedback if your operation is a Long Running Operation (LRO), and follow the LRO protocol (usually using Location, Operation-Location, etc.). Those operations need to be tagged as LRO in the Swagger, as this makes SDK generates a specific return type as a poller.
+
+```json
+"/myservice/subscriptions" :
+  "put": {
+    "operationId": "CreateVirtualMachine",
+    "x-ms-long-running-operation": true
+ ```
+ 
+ For most of the time, _there is no additional information to provide_ as the language runtime will auto-detect what polling mechanism to use.
+ 
+ Some options can be configured with the node "x-ms-long-running-operation-options":
+ - "final-state-via": Is here to prematuraly stop the polling in case your service do not respect the LRO correctly. _Do not use this option if you think your service respects the LRO guidelines, as you could break SDK_. In doubt about this option, please talk to the RestAPI stewardship board.
+
+Example:
+```json
+    "x-ms-long-running-operation": true,
+    "x-ms-long-running-operation-options": {
+      "final-state-via": "location"
+    }
+```    
