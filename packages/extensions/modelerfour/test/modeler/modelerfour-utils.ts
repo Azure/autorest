@@ -32,9 +32,11 @@ export async function runModeler(spec: any, config: { modelerfour: ModelerFourOp
   const { session, errors } = await createTestSessionFromModel<Model>(config, spec);
   const modeler = await new ModelerFour(session).init();
 
-  expect(errors.length).toBe(0);
+  expect(errors).toHaveLength(0);
 
-  return modeler.process();
+  const result = modeler.process();
+  expect(errors).toHaveLength(0);
+  return result;
 }
 
 export async function runModelerWithOperation(
@@ -45,7 +47,7 @@ export async function runModelerWithOperation(
   const spec = createTestSpec();
 
   addOperation(spec, path, {
-    [method]: operation,
+    [method]: { operationId: "test", ...operation },
   });
 
   const codeModel = await runModeler(spec);
