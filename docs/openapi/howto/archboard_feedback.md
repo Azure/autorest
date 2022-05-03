@@ -159,7 +159,7 @@ At a glance:
 
 ## Operation should be LRO
 
-You will get this feedback if your operation is a Long Running Operation (LRO), and follow the LRO protocol (usually using Location, Operation-Location, etc.). Those operations need to be tagged as LRO in the Swagger, as this makes SDK generates a specific return type as a poller.
+You will get this feedback if your operation is a Long Running Operation (LRO), and follow the LRO protocol (usually using Location, Operation-Location, etc.). Those operations need to be tagged as LRO in the Swagger, as this makes SDK generates a specific return type as a poller. For this, use the ["x-ms-long-running-operation"](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-long-running-operation) option.
 
 ```json
 "/myservice/subscriptions" :
@@ -170,7 +170,7 @@ You will get this feedback if your operation is a Long Running Operation (LRO), 
  
 For most of the time, _there is no additional information to provide_ as the language runtime will auto-detect what polling mechanism to use.
  
-Some options can be configured with the node "x-ms-long-running-operation-options":
+Some options can be configured with the node ["x-ms-long-running-operation-options"](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-long-running-operation-options):
  - "final-state-via": Is here to prematuraly stop the polling in case your service do not respect the LRO correctly. _Do not use this option if you think your service respects the LRO guidelines, as you could break SDK_. In doubt about this option, please talk to the RestAPI stewardship board.
 
 Example:
