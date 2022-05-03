@@ -2,6 +2,18 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.23.3",
+      "tag": "@autorest/modelerfour_v4.23.3",
+      "date": "Tue, 03 May 2022 20:20:34 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "**Fix** issue when using unknown media types with a known one. Ignore those."
+          }
+        ]
+      }
+    },
+    {
       "version": "4.23.2",
       "tag": "@autorest/modelerfour_v4.23.2",
       "date": "Thu, 07 Apr 2022 20:47:30 GMT",
