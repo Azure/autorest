@@ -125,7 +125,11 @@ export class BodyProcessor {
       return KnownMediaType.Text;
     }
 
-    const types = mediaTypes.map((x) => knownMediaType(x));
+    const types = mediaTypes.map((x) => knownMediaType(x)).filter((x) => x !== KnownMediaType.Unknown);
+    if (types.length === 0) {
+      return KnownMediaType.Unknown;
+    }
+
     const type = types[0];
     const differentType = types.find((x) => x !== type);
 

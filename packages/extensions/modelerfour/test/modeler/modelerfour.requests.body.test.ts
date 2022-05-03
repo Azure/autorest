@@ -22,7 +22,7 @@ import {
   StringSchema,
 } from "@autorest/codemodel";
 import { KnownMediaType } from "@azure-tools/codegen";
-import { HttpOperation, JsonType, ParameterLocation, RequestBody } from "@azure-tools/openapi";
+import { HttpOperation, JsonType, ParameterLocation, RequestBody, Schema } from "@azure-tools/openapi";
 import * as oai3 from "@azure-tools/openapi";
 import { addOperation, createTestSpec, findByName } from "../utils";
 import { runModeler, runModelerWithOperation } from "./modelerfour-utils";
@@ -35,6 +35,7 @@ function getBody(request: Request) {
 
 async function runModelerWithBody(body: RequestBody): Promise<Operation> {
   return runModelerWithOperation("post", "/test", {
+    operationId: "test",
     requestBody: {
       ...body,
     },
@@ -305,6 +306,7 @@ describe("Modelerfour.Request.Body", () => {
       beforeEach(async () => {
         const spec = createTestSpec();
         const operation: HttpOperation = {
+          operationId: "test",
           requestBody: {
             content: {
               "multipart/form-data": {
@@ -386,6 +388,33 @@ describe("Modelerfour.Request.Body", () => {
             expect(getBody(request).schema instanceof type).toBe(true);
           });
         });
+      });
+    });
+
+    describe("Body schema is type: object with application/json and x-json-stream content type", () => {
+      let operation: Operation;
+
+      beforeEach(async () => {
+        const bodyType: Schema = { type: "object", properties: { name: { type: "string" } } };
+        operation = await runModelerWithBody({
+          content: {
+            "application/json": {
+              schema: bodyType,
+            },
+            "x-json-stream": {
+              schema: bodyType,
+            },
+          },
+        });
+      });
+
+      it("doesn't create errors", () => {});
+      it("only create one request", async () => {
+        expect(operation.requests).toHaveLength(1);
+      });
+
+      it("known media type is json (ignored unknown x-json-stream)", async () => {
+        expect(operation.requests![0].protocol.http!.knownMediaType).toEqual(KnownMediaType.Json);
       });
     });
   });
