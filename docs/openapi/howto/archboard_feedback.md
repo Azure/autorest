@@ -166,11 +166,11 @@ You will get this feedback if your operation is a Long Running Operation (LRO), 
   "put": {
     "operationId": "CreateVirtualMachine",
     "x-ms-long-running-operation": true
- ```
+```
  
- For most of the time, _there is no additional information to provide_ as the language runtime will auto-detect what polling mechanism to use.
+For most of the time, _there is no additional information to provide_ as the language runtime will auto-detect what polling mechanism to use.
  
- Some options can be configured with the node "x-ms-long-running-operation-options":
+Some options can be configured with the node "x-ms-long-running-operation-options":
  - "final-state-via": Is here to prematuraly stop the polling in case your service do not respect the LRO correctly. _Do not use this option if you think your service respects the LRO guidelines, as you could break SDK_. In doubt about this option, please talk to the RestAPI stewardship board.
 
 Example:
