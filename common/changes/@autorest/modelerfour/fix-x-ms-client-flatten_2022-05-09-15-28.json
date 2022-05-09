@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/modelerfour",
+      "comment": "Fix `x-ms-client-flatten` defined at the root of the model would always flatten that model when referemced in properties",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/modelerfour"
+}
