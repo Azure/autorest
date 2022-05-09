@@ -140,7 +140,6 @@ export class Flattener {
           // copy all of the properties from the child into this
           // schema
           for (const childProperty of getAllProperties(property.schema)) {
-            console.log("S", schema);
             schema.addProperty(
               new Property(
                 childProperty.language.default.name,
