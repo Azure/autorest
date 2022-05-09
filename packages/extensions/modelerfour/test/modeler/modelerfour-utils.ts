@@ -2,9 +2,9 @@ import assert from "assert";
 import { CodeModel, Operation } from "@autorest/codemodel";
 import oai3, { Model } from "@azure-tools/openapi";
 import { ModelerFourOptions } from "modeler/modelerfour-options";
+import { Flattener } from "../../src/flattener/flattener";
 import { ModelerFour } from "../../src/modeler/modelerfour";
 import { addOperation, createTestSessionFromModel, createTestSpec } from "../utils";
-import { Flattener } from "../../src/flattener/flattener";
 
 const modelerfourOptions: ModelerFourOptions = {
   "flatten-models": true,

@@ -1,9 +1,9 @@
 import assert from "assert";
 import { ChoiceSchema, ConstantSchema, SealedChoiceSchema } from "@autorest/codemodel";
 import { JsonType, OpenAPI3Document } from "@azure-tools/openapi";
+import { ModelerFourOptions } from "modeler/modelerfour-options";
 import { addSchema, assertSchema, createTestSpec, findByName } from "../utils";
 import { runFlattener, runModeler } from "./modelerfour-utils";
-import { ModelerFourOptions } from "modeler/modelerfour-options";
 
 describe("Modelerfour.Schemas", () => {
   describe("additionalProperties", () => {
@@ -471,7 +471,7 @@ describe("Modelerfour.Schemas", () => {
 
       const nestedBarProp = findByName("nestedBar", foo?.properties);
       expect(nestedBarProp).toBeDefined();
-      expect(nestedBarProp!.schema).toEqual(bar);
+      expect(nestedBarProp?.schema).toEqual(bar);
     });
   });
 });
