@@ -867,6 +867,7 @@ export class ModelerFour {
     this.schemaCache.set(schema, objectSchema);
     for (const [propertyName, propertyDeclaration] of Object.entries(schema.properties ?? {})) {
       this.use(<OpenAPI.Refable<OpenAPI.Schema>>propertyDeclaration, (pSchemaName, pSchema) => {
+        const property = this.resolve(propertyDeclaration);
         const pType = this.processSchema(pSchemaName || `type·for·${propertyName}`, pSchema);
         const prop = objectSchema.addProperty(
           new Property(
@@ -880,8 +881,8 @@ export class ModelerFour {
               required: schema.required ? schema.required.indexOf(propertyName) > -1 : undefined,
               serializedName: propertyName,
               isDiscriminator: discriminatorProperty === propertyName ? true : undefined,
-              extensions: this.interpret.getExtensionProperties(pSchema, propertyDeclaration),
-              clientDefaultValue: this.interpret.getClientDefault(pSchema, propertyDeclaration),
+              extensions: this.interpret.getExtensionProperties(property, propertyDeclaration),
+              clientDefaultValue: this.interpret.getClientDefault(property, propertyDeclaration),
             },
           ),
         );

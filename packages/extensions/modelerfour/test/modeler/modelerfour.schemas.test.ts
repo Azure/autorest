@@ -1,8 +1,9 @@
 import assert from "assert";
 import { ChoiceSchema, ConstantSchema, SealedChoiceSchema } from "@autorest/codemodel";
-import { JsonType } from "@azure-tools/openapi";
+import { JsonType, OpenAPI3Document } from "@azure-tools/openapi";
+import { ModelerFourOptions } from "modeler/modelerfour-options";
 import { addSchema, assertSchema, createTestSpec, findByName } from "../utils";
-import { runModeler } from "./modelerfour-utils";
+import { runFlattener, runModeler } from "./modelerfour-utils";
 
 describe("Modelerfour.Schemas", () => {
   describe("additionalProperties", () => {
@@ -402,6 +403,75 @@ describe("Modelerfour.Schemas", () => {
 
       expect(child?.parents?.immediate).toContain(parent);
       expect(parent?.properties?.find((x) => x.serializedName === "child")?.schema).toEqual(child);
+    });
+  });
+
+  describe("x-ms-client-flatten", () => {
+    async function runModelerWithFlattener(spec: OpenAPI3Document, config: { modelerfour: ModelerFourOptions }) {
+      const codeModel = await runModeler(spec, config);
+      return runFlattener(codeModel, config);
+    }
+
+    it("doesn't flatten if x-ms-client-flatten is specified on the property", async () => {
+      const spec = createTestSpec();
+
+      addSchema(spec, "Foo", {
+        type: "object",
+        properties: {
+          nestedBar: { $ref: "#/components/schemas/Bar", "x-ms-client-flatten": true },
+        },
+      });
+
+      addSchema(spec, "Bar", {
+        type: "object",
+        properties: {
+          bar: {
+            type: "string",
+          },
+        },
+      });
+
+      const codeModel = await runModelerWithFlattener(spec, { modelerfour: { "flatten-models": true } });
+
+      const foo = findByName("Foo", codeModel.schemas.objects);
+      expect(foo).toBeDefined();
+
+      const nestedBarProp = findByName("nestedBar", foo?.properties);
+      expect(nestedBarProp).not.toBeDefined();
+      const flattendBarProp = findByName("bar", foo?.properties);
+      expect(flattendBarProp).toBeDefined();
+    });
+
+    it("doesn't flatten if x-ms-client-flatten is specified on the target model", async () => {
+      const spec = createTestSpec();
+
+      addSchema(spec, "Foo", {
+        type: "object",
+        properties: {
+          nestedBar: { $ref: "#/components/schemas/Bar" },
+        },
+      });
+
+      addSchema(spec, "Bar", {
+        "x-ms-client-flatten": true,
+        type: "object",
+        properties: {
+          bar: {
+            type: "string",
+          },
+        },
+      });
+
+      const codeModel = await runModelerWithFlattener(spec, { modelerfour: { "flatten-models": true } });
+
+      const foo = findByName("Foo", codeModel.schemas.objects);
+      expect(foo).toBeDefined();
+      const bar = findByName("Bar", codeModel.schemas.objects);
+      expect(bar).toBeDefined();
+
+      const nestedBarProp = findByName("nestedBar", foo?.properties);
+      expect(nestedBarProp).toBeDefined();
+      expect(nestedBarProp?.schema).toEqual(bar);
     });
   });
 });
