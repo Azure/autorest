@@ -1,0 +1,39 @@
+{
+  "servers": [],
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0",
+    "title": "test",
+    "description": "Test"
+  },
+  "paths": {
+    "/calling": {
+      "delete": {
+        "tags": [
+          "Recording"
+        ],
+        "summary": "Stop recording the call.",
+        "operationId": "ServerCalls_StopRecording",
+        "responses": {
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "401": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  }
+}

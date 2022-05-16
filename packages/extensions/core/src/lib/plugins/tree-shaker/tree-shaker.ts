@@ -477,6 +477,7 @@ export class OAI3Shaker extends Transformer<AnyObject, AnyObject> {
         value,
         children,
         nameHint,
+        true,
       );
     }
   }

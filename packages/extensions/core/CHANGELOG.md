@@ -1,6 +1,14 @@
 # Change Log - @autorest/core
 
-This log was last generated on Tue, 22 Mar 2022 20:26:28 GMT and should not be manually modified.
+This log was last generated on Wed, 27 Apr 2022 18:53:11 GMT and should not be manually modified.
+
+## 3.8.4
+Wed, 27 Apr 2022 18:53:11 GMT
+
+### Patches
+
+- Fix issue with using $ref in responses inserterting $ref in the parent.
+- "Fix issue with `x-ms-client-name` on inline array type.
 
 ## 3.8.3
 Tue, 22 Mar 2022 20:26:28 GMT
@@ -246,7 +254,7 @@ Fri, 09 Apr 2021 19:53:22 GMT
 
 ### Minor changes
 
-- **Added** Semantic validator plugin 
+- **Added** Semantic validator plugin
 - **Feature** Add sourcemap support for errors providing original location of problem
 - **Added** support for emitting statistics of the specs and resuting model
 
@@ -392,7 +400,7 @@ Tue, 4 Feb 2020 00:00:00 GMT
 
 - rebuild to pick up latest data-store to fix the caching filename size
 - OAI2-to-OAI3 converter update in perks.
-- TransformerViaPointer was turning null into {} 
+- TransformerViaPointer was turning null into {}
 - rebuild to fix NPM publishing problem.
 - remove additionalProperties: false so v2 generators don't choke.
 - rebuild to pick up perks change to fix multibyte utf8 over byte boundary problem
