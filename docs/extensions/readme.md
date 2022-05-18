@@ -1579,14 +1579,14 @@ Actual permissions required to call API:
 
 **Schema**:
 
-| Field Name                  |   Type     | Description                                                                          |
+| Field Name                  |    Type    | Description                                                                          |
 | --------------------------- | :--------: | ------------------------------------------------------------------------------------ |
-| `actions`                   | `string`   | List of the required action permissions for this API.                                |
-| `dataActions`               | `string`   | List of the required data action permissions for this API.                           |
+| `actions`                   |  `string`  | List of the required action permissions for this API.                                |
+| `dataActions`               |  `string`  | List of the required data action permissions for this API.                           |
 | `rolesWithThesePermissions` | `[string]` | An array of roles that have the required permissions for this API.                   |
-| `moreInfoLink`              | `string`   | Link formatted as markdown with more information about the permissions for this API. |
+| `moreInfoLink`              |  `string`  | Link formatted as markdown with more information about the permissions for this API. |
 
- For a list roles, see [Azure built-in roles](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles).
+For a list roles, see [Azure built-in roles](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles).
 
 ```json5
 "xmsPermissions": {
