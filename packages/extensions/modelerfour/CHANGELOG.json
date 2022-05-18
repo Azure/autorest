@@ -2,6 +2,18 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.23.5",
+      "tag": "@autorest/modelerfour_v4.23.5",
+      "date": "Wed, 18 May 2022 02:34:13 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix name bgeneration for contenttype and accept parameters only incrementing to 1"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.23.4",
       "tag": "@autorest/modelerfour_v4.23.4",
       "date": "Mon, 09 May 2022 15:29:40 GMT",
