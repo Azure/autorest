@@ -1,6 +1,20 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Thu, 07 Apr 2022 20:47:30 GMT and should not be manually modified.
+This log was last generated on Mon, 09 May 2022 15:29:40 GMT and should not be manually modified.
+
+## 4.23.4
+Mon, 09 May 2022 15:29:40 GMT
+
+### Patches
+
+- Fix `x-ms-client-flatten` defined at the root of the model would always flatten that model when referemced in properties
+
+## 4.23.3
+Tue, 03 May 2022 20:20:34 GMT
+
+### Patches
+
+- **Fix** issue when using unknown media types with a known one. Ignore those.
 
 ## 4.23.2
 Thu, 07 Apr 2022 20:47:30 GMT

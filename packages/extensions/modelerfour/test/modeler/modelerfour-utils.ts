@@ -2,6 +2,7 @@ import assert from "assert";
 import { CodeModel, Operation } from "@autorest/codemodel";
 import oai3, { Model } from "@azure-tools/openapi";
 import { ModelerFourOptions } from "modeler/modelerfour-options";
+import { Flattener } from "../../src/flattener/flattener";
 import { ModelerFour } from "../../src/modeler/modelerfour";
 import { addOperation, createTestSessionFromModel, createTestSpec } from "../utils";
 
@@ -32,9 +33,26 @@ export async function runModeler(spec: any, config: { modelerfour: ModelerFourOp
   const { session, errors } = await createTestSessionFromModel<Model>(config, spec);
   const modeler = await new ModelerFour(session).init();
 
-  expect(errors.length).toBe(0);
+  expect(errors).toHaveLength(0);
 
-  return modeler.process();
+  const result = modeler.process();
+  expect(errors).toHaveLength(0);
+  return result;
+}
+
+export async function runFlattener(
+  codemodel: CodeModel,
+  config: { modelerfour: ModelerFourOptions } = cfg,
+): Promise<CodeModel> {
+  const { session, errors } = await createTestSessionFromModel<CodeModel>(config, codemodel);
+  session.model = codemodel;
+  const flattener = await new Flattener(session).init();
+
+  expect(errors).toHaveLength(0);
+
+  const result = flattener.process();
+  expect(errors).toHaveLength(0);
+  return result;
 }
 
 export async function runModelerWithOperation(
@@ -45,7 +63,7 @@ export async function runModelerWithOperation(
   const spec = createTestSpec();
 
   addOperation(spec, path, {
-    [method]: operation,
+    [method]: { operationId: "test", ...operation },
   });
 
   const codeModel = await runModeler(spec);

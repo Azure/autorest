@@ -1,6 +1,13 @@
 # Change Log - @azure-tools/oai2-to-oai3
 
-This log was last generated on Tue, 15 Mar 2022 16:00:38 GMT and should not be manually modified.
+This log was last generated on Wed, 27 Apr 2022 18:53:11 GMT and should not be manually modified.
+
+## 4.6.1
+Wed, 27 Apr 2022 18:53:11 GMT
+
+### Patches
+
+- Fix issue with using $ref in responses inserterting $ref in the parent
 
 ## 4.6.0
 Tue, 15 Mar 2022 16:00:38 GMT
