@@ -1383,10 +1383,12 @@ export class ModelerFour {
   }
 
   getUniqueName(baseName: string): string {
-    let nameCount = this.uniqueNames[baseName];
-    if (typeof nameCount == "number") {
-      this.uniqueNames[baseName] = nameCount++;
-      return `${baseName}${nameCount}`;
+    const nameCount = this.uniqueNames[baseName];
+
+    if (typeof nameCount === "number") {
+      const newCount = nameCount + 1;
+      this.uniqueNames[baseName] = newCount;
+      return `${baseName}${newCount}`;
     } else {
       this.uniqueNames[baseName] = 0;
       return baseName;

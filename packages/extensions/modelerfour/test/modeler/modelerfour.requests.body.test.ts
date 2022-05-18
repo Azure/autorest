@@ -418,4 +418,70 @@ describe("Modelerfour.Request.Body", () => {
       });
     });
   });
+
+  it("generate unique names for ContentType enums", async () => {
+    const spec = createTestSpec();
+
+    const bodyType = { type: "string", format: "binary" };
+
+    addOperation(spec, "/test1", {
+      post: {
+        operationId: "test1",
+        requestBody: {
+          content: {
+            "application/json": {
+              schema: bodyType,
+            },
+            "application/png": {
+              schema: bodyType,
+            },
+          },
+        },
+        responses: {},
+      },
+    });
+    addOperation(spec, "/test2", {
+      post: {
+        operationId: "test2",
+        requestBody: {
+          content: {
+            "application/jpeg": {
+              schema: bodyType,
+            },
+            "application/png": {
+              schema: bodyType,
+            },
+          },
+        },
+        responses: {},
+      },
+    });
+    addOperation(spec, "/test3", {
+      post: {
+        operationId: "test3",
+        requestBody: {
+          content: {
+            "application/pdf": {
+              schema: bodyType,
+            },
+            "application/jpeg": {
+              schema: bodyType,
+            },
+          },
+        },
+        responses: {},
+      },
+    });
+
+    const codeModel = await runModeler(spec);
+    const contentType0 = findByName("ContentType", codeModel.schemas.sealedChoices);
+    assert(contentType0);
+    expect(contentType0.choices.map((x) => x.value)).toEqual(["application/json", "application/png"]);
+    const contentType1 = findByName("ContentType1", codeModel.schemas.sealedChoices);
+    assert(contentType1);
+    expect(contentType1.choices.map((x) => x.value)).toEqual(["application/jpeg", "application/png"]);
+    const contentType2 = findByName("ContentType2", codeModel.schemas.sealedChoices);
+    assert(contentType2);
+    expect(contentType2.choices.map((x) => x.value)).toEqual(["application/jpeg", "application/pdf"]);
+  });
 });
