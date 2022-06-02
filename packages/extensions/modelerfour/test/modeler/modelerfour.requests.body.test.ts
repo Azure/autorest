@@ -273,6 +273,37 @@ describe("Modelerfour.Request.Body", () => {
       });
     });
 
+    describe("Body is an object with multiple serialization format: application/json, application/xml, application/x-www-form-urlencoded", () => {
+      let operation: Operation;
+
+      beforeEach(async () => {
+        const schema: Schema = { type: "object", properties: { name: { type: "string" } } };
+        operation = await runModelerWithBody({
+          content: {
+            "application/json": { schema },
+            "application/x-www-form-urlencoded": { schema },
+            "application/xml": { schema },
+          },
+        });
+      });
+
+      it("creates 1 requests", async () => {
+        expect(operation.requests).toHaveLength(1);
+      });
+
+      it("request should cover the application/json case and ignore the others", async () => {
+        const request = operation.requests?.[0]!;
+        const param = findByName("content-type", request.parameters);
+        expect(param).toBe(undefined);
+        expect(request.protocol.http!.mediaTypes).toEqual([
+          "application/json",
+          "application/x-www-form-urlencoded",
+          "application/xml",
+        ]);
+        expect(getBody(request).schema instanceof ObjectSchema).toBe(true);
+      });
+    });
+
     describe("Body is an string and text/plain content type", () => {
       let operation: Operation;
 
