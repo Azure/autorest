@@ -334,3 +334,6 @@ packages/libs/codemodel/.resources
 **/test/scenarios/expected/**/*.yaml
 **/test/scenarios/expected/**/*.json
 packages/extensions/core/test/plugins/*/expected/*.json
+
+# MICROSOFT SECURITY.md
+/SECURITY.md
