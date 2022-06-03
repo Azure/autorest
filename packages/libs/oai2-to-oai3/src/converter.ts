@@ -1289,7 +1289,7 @@ function copyProperty<T, K extends keyof T>(
   inputPointer: string,
 ) {
   if (input[key] !== undefined) {
-    target.__set__(key, { value: input[key], sourcePointer: `${inputPointer}/${key}` });
+    target.__set__(key, { value: input[key], sourcePointer: `${inputPointer}/${key.toString()}` });
   }
 }
 

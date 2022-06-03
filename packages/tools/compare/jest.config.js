@@ -4,8 +4,7 @@ const defaultConfig = require("../../../jest.default.config");
 
 const config = {
   ...defaultConfig,
-  testMatch: ["<rootDir>/src/**/*.test.ts", "<rootDir>/test/**/*.test.ts"],
-  setupFilesAfterEnv: ["<rootDir>/test/setup-jest.ts"],
+  testMatch: ["<rootDir>/src/**/*.spec.ts", "<rootDir>/test/**/*.spec.ts"],
 };
 
 module.exports = config;

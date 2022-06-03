@@ -38,19 +38,19 @@
   "devDependencies": {
     "@types/js-yaml": "~4.0.0",
     "@types/node": "~14.14.20",
-    "@typescript-eslint/eslint-plugin": "^4.12.0",
-    "@typescript-eslint/parser": "^4.12.0",
-    "eslint-plugin-jest": "~24.3.2",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "eslint-plugin-jest": "~26.4.6",
     "eslint-plugin-node": "~11.1.0",
-    "eslint-plugin-prettier": "~3.4.0",
-    "eslint-plugin-unicorn": "~33.0.1",
-    "eslint-plugin-import": "~2.24.2",
-    "eslint": "^7.17.0",
+    "eslint-plugin-prettier": "~4.0.0",
+    "eslint-plugin-unicorn": "~42.0.0",
+    "eslint-plugin-import": "~2.26.0",
+    "eslint": "^8.16.0",
     "glob": "~7.1.4",
     "rimraf": "^3.0.2",
     "ts-morph": "~13.0.3",
     "typescript-json-schema": "~0.53.0",
-    "typescript": "~4.6.3"
+    "typescript": "~4.7.2"
   },
   "dependencies": {
     "@azure-tools/codegen": "~2.9.1",

@@ -1,9 +1,9 @@
 import * as assert from "assert";
 import * as path from "path";
-import { parseFile, compareFile, extractSourceDetails, SourceDetails } from "../../src/languages/python";
 import { MessageType } from "../../src/comparers";
+import { parseFile, compareFile, extractSourceDetails, SourceDetails } from "../../src/languages/python";
 
-describe.only("Python Parser", function () {
+describe("Python Parser", function () {
   it("extracts semantic elements from source", function () {
     const parseTree = parseFile(path.resolve(__dirname, "../artifacts/python/old/models.py"));
     const sourceDetails: SourceDetails = extractSourceDetails(parseTree);
