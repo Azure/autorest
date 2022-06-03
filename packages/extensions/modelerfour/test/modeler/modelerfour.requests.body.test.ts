@@ -273,6 +273,37 @@ describe("Modelerfour.Request.Body", () => {
       });
     });
 
+    describe("Body is an object with multiple serialization format: application/json, application/xml, application/x-www-form-urlencoded", () => {
+      let operation: Operation;
+
+      beforeEach(async () => {
+        const schema: Schema = { type: "object", properties: { name: { type: "string" } } };
+        operation = await runModelerWithBody({
+          content: {
+            "application/json": { schema },
+            "application/x-www-form-urlencoded": { schema },
+            "application/xml": { schema },
+          },
+        });
+      });
+
+      it("creates 1 requests", async () => {
+        expect(operation.requests).toHaveLength(1);
+      });
+
+      it("request should cover the application/json case and ignore the others", async () => {
+        const request = operation.requests?.[0]!;
+        const param = findByName("content-type", request.parameters);
+        expect(param).toBe(undefined);
+        expect(request.protocol.http!.mediaTypes).toEqual([
+          "application/json",
+          "application/x-www-form-urlencoded",
+          "application/xml",
+        ]);
+        expect(getBody(request).schema instanceof ObjectSchema).toBe(true);
+      });
+    });
+
     describe("Body is an string and text/plain content type", () => {
       let operation: Operation;
 
@@ -417,5 +448,71 @@ describe("Modelerfour.Request.Body", () => {
         expect(operation.requests![0].protocol.http!.knownMediaType).toEqual(KnownMediaType.Json);
       });
     });
+  });
+
+  it("generate unique names for ContentType enums", async () => {
+    const spec = createTestSpec();
+
+    const bodyType = { type: "string", format: "binary" };
+
+    addOperation(spec, "/test1", {
+      post: {
+        operationId: "test1",
+        requestBody: {
+          content: {
+            "application/json": {
+              schema: bodyType,
+            },
+            "application/png": {
+              schema: bodyType,
+            },
+          },
+        },
+        responses: {},
+      },
+    });
+    addOperation(spec, "/test2", {
+      post: {
+        operationId: "test2",
+        requestBody: {
+          content: {
+            "application/jpeg": {
+              schema: bodyType,
+            },
+            "application/png": {
+              schema: bodyType,
+            },
+          },
+        },
+        responses: {},
+      },
+    });
+    addOperation(spec, "/test3", {
+      post: {
+        operationId: "test3",
+        requestBody: {
+          content: {
+            "application/pdf": {
+              schema: bodyType,
+            },
+            "application/jpeg": {
+              schema: bodyType,
+            },
+          },
+        },
+        responses: {},
+      },
+    });
+
+    const codeModel = await runModeler(spec);
+    const contentType0 = findByName("ContentType", codeModel.schemas.sealedChoices);
+    assert(contentType0);
+    expect(contentType0.choices.map((x) => x.value)).toEqual(["application/json", "application/png"]);
+    const contentType1 = findByName("ContentType1", codeModel.schemas.sealedChoices);
+    assert(contentType1);
+    expect(contentType1.choices.map((x) => x.value)).toEqual(["application/jpeg", "application/png"]);
+    const contentType2 = findByName("ContentType2", codeModel.schemas.sealedChoices);
+    assert(contentType2);
+    expect(contentType2.choices.map((x) => x.value)).toEqual(["application/jpeg", "application/pdf"]);
   });
 });

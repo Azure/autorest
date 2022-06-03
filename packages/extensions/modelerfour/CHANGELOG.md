@@ -1,6 +1,20 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Mon, 09 May 2022 15:29:40 GMT and should not be manually modified.
+This log was last generated on Fri, 27 May 2022 15:55:11 GMT and should not be manually modified.
+
+## 4.23.6
+Fri, 27 May 2022 15:55:11 GMT
+
+### Patches
+
+- Fix issue with having `application/json` and `application/x-www-form-urlencoded` content type for the request body. Json now takes precedence
+
+## 4.23.5
+Wed, 18 May 2022 02:34:13 GMT
+
+### Patches
+
+- Fix name bgeneration for contenttype and accept parameters only incrementing to 1
 
 ## 4.23.4
 Mon, 09 May 2022 15:29:40 GMT
