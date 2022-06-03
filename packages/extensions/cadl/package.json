@@ -61,7 +61,7 @@
     "typescript": "~4.6.3"
   },
   "dependencies": {
-    "@cadl-lang/compiler": "~0.29.0",
+    "@cadl-lang/compiler": "~0.31.0",
     "@autorest/extension-base": "~3.4.2"
   }
 }
