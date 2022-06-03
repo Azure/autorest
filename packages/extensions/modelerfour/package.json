@@ -63,7 +63,7 @@
     "eslint": "^8.16.0",
     "jest": "^28.1.0",
     "lodash": "~4.17.20",
-    "prettier": "~2.3.1",
+    "prettier": "~2.6.2",
     "recursive-diff": "~1.0.6",
     "rimraf": "^3.0.2",
     "source-map-support": "^0.5.19",
