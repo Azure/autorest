@@ -45,7 +45,7 @@
     "@azure/logger": "^1.0.2",
     "command-exists": "~1.2.9",
     "npm-package-arg": "^9.0.0",
-    "npm": "~8.6.0",
+    "npm": "~8.12.1",
     "pacote": "~9.5.12",
     "rimraf": "^3.0.2",
     "semver": "^7.3.5",
