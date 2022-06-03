@@ -1,5 +1,6 @@
 import * as assert from "assert";
 import * as path from "path";
+import { MessageType } from "../../src/comparers";
 import {
   parseFile,
   extractSourceDetails,
@@ -8,14 +9,13 @@ import {
   compareParameter,
   compareMethod,
 } from "../../src/languages/typescript";
-import { MessageType } from "../../src/comparers";
 
 describe("TypeScript Parser", function () {
   it("extracts semantic elements from source", function () {
     const parseTree = parseFile(path.resolve(__dirname, "../artifacts/typescript/old/index.ts"));
     const sourceDetails: SourceDetails = extractSourceDetails(parseTree);
 
-    assert.deepEqual(sourceDetails, {
+    expect(sourceDetails).toEqual({
       classes: [
         {
           name: "SomeClass",
@@ -127,7 +127,7 @@ describe("TypeScript Parser", function () {
               name: "readOnlyChangedField",
               type: "any",
               value: `"stuff"`,
-              isReadOnly: true,
+              isReadOnly: false,
               visibility: "private",
             },
           ],
@@ -162,7 +162,6 @@ describe("TypeScript Parser", function () {
         },
         {
           name: "AnotherInterface",
-          interfaces: ["BaseInterface"],
           methods: [],
           fields: [],
           isExported: true,
@@ -329,7 +328,7 @@ describe("TypeScript Parser", function () {
             isOptional: false,
           },
         ],
-      },
+      } as any,
       {
         name: "theFunc",
         returnType: "any",
@@ -342,10 +341,10 @@ describe("TypeScript Parser", function () {
             isOptional: true,
           },
         ],
-      },
+      } as any,
     );
 
-    assert.deepEqual(result, {
+    expect(result).toEqual({
       message: "theFunc",
       type: MessageType.Changed,
       children: [
