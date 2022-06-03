@@ -37,7 +37,7 @@
   "homepage": "https://github.com/Azure/autorest.modelerfour/tree/master/modelerfour#readme",
   "readme": "https://github.com/Azure/autorest.modelerfour/tree/master/modelerfour/readme.md",
   "devDependencies": {
-    "@types/jest": "^26.0.20",
+    "@types/jest": "^28.1.0",
     "@types/lodash": "~4.14.168",
     "@types/node": "~14.14.20",
     "@types/webpack": "~4.41.26",
@@ -51,12 +51,12 @@
     "eslint-plugin-unicorn": "~33.0.1",
     "eslint-plugin-import": "~2.24.2",
     "eslint": "^7.17.0",
-    "jest": "^28.0.0-alpha.7",
+    "jest": "^28.1.0",
     "lodash": "~4.17.20",
     "prettier": "~2.3.1",
     "rimraf": "^3.0.2",
     "source-map-support": "^0.5.19",
-    "ts-jest": "^27.0.3",
+    "ts-jest": "^28.0.3",
     "ts-loader": "~9.2.3",
     "typescript": "~4.6.3"
   },
