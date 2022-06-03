@@ -10,7 +10,7 @@ import {
   compareMethod,
 } from "../../src/languages/typescript";
 
-describe("TypeScript Parser", function () {
+describe.skip("TypeScript Parser", function () {
   it("extracts semantic elements from source", function () {
     const parseTree = parseFile(path.resolve(__dirname, "../artifacts/typescript/old/index.ts"));
     const sourceDetails: SourceDetails = extractSourceDetails(parseTree);

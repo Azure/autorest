@@ -18,7 +18,7 @@ jobs:
           node-version: 16.x
       - run: |
           LABEL_NAME=Publish
-          LABEL_URL=https://api.github.com/repos/$BUILD_REPOSITORY_ID/issues/$PR_NUMBER/labels
+          LABEL_URL=https://api.github.com/repos/Azure/autorest/issues/$PR_NUMBER/labels
 
           echo "Getting labels using $LABEL_URL"
           if curl -s "$LABEL_URL" | grep "\"name\": \"$LABEL_NAME\""
