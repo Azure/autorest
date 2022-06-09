@@ -99,8 +99,16 @@ export interface ProxyPosition {
 
 export type ShadowedObject<T> = T & ProxyPosition;
 
-export function shadowPosition<T extends object>(source: T, path: Array<string | number> = []): ShadowedObject<T> {
-  return new Proxy<ShadowedObject<T>>(source as any, {
+export function shadowPosition<T extends object>(
+  source: T,
+  cache: WeakMap<any, any> = new WeakMap(),
+  path: Array<string | number> = [],
+): ShadowedObject<T> {
+  const cached = cache.get(source);
+  if (cached) {
+    return cached;
+  }
+  const proxy = new Proxy<ShadowedObject<T>>(source as any, {
     get(target: any, p: PropertyKey) {
       if (p === ShadowedNodePath) {
         // they want the source location for this node.
@@ -118,15 +126,18 @@ export function shadowPosition<T extends object>(source: T, path: Array<string |
         case "number":
           return value;
         case "array":
-          return shadowPosition(value, [...path, key]);
+          return shadowPosition(value, cache, [...path, key]);
         case "object":
-          return shadowPosition(value, [...path, key]);
+          return shadowPosition(value, cache, [...path, key]);
 
         default:
           throw new Error(`Unhandled shadow of type '${typeOf(value)}' `);
       }
     },
   });
+
+  cache.set(source, proxy);
+  return proxy;
 }
 
 function getKey(p: PropertyKey) {
