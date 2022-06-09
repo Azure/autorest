@@ -13,6 +13,10 @@ describe("JsonSchema Refs", () => {
     it("parse file only", () => {
       expect(parseJsonRef("bar.json")).toEqual({ file: "bar.json" });
     });
+
+    it("parse with path containing url encoded", () => {
+      expect(parseJsonRef("#/definitions/%24Foo")).toEqual({ path: "/definitions/$Foo" });
+    });
   });
 
   describe("stringifyJsonRef", () => {
