@@ -1,0 +1,15 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/modelerfour",
+      "comment": "Errors emitted in 'modelerfour' step  will have sourcemap.",
+      "type": "minor"
+    },
+    {
+      "packageName": "@autorest/modelerfour",
+      "comment": "Improved 'name is empty' error to contain more information.",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/modelerfour"
+}
