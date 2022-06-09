@@ -29,7 +29,7 @@ describe("Modeler", () => {
     expect(codeModel.info.contact?.email).toEqual(InitialTestSpec.info.contact.email);
   });
 
-  it("tracks schema usage", async () => {
+  it.only("tracks schema usage", async () => {
     const testSchema = {
       type: "object",
       properties: {

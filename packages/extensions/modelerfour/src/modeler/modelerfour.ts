@@ -159,7 +159,7 @@ export class ModelerFour {
   private specialHeaders: Set<string> = new Set();
 
   constructor(protected session: Session<OpenAPI3Document>) {
-    this.input = shadowPosition(session.model);
+    this.input = session.model; // shadowPosition(session.model);
 
     const i = this.input.info;
 
