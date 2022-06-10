@@ -1,5 +1,5 @@
 import { IAutorestLogger, PluginUserError } from "@autorest/common";
-import { DataSource, IdentityPathMappings, QuickDataSource } from "@azure-tools/datastore";
+import { DataHandle, DataSource, IdentityPathMappings, QuickDataSource } from "@azure-tools/datastore";
 import { InvalidJsonPointer } from "@azure-tools/json";
 import { parseJsonRef } from "@azure-tools/jsonschema";
 import { createOpenAPIWorkspace, OpenAPIWorkspace } from "@azure-tools/openapi";
@@ -13,11 +13,17 @@ export function createFullRefResolverPlugin(): PipelinePlugin {
   return async (context, input, sink) => {
     const files = await input.enum();
     const dataHandles = await Promise.all(files.map((x) => input.readStrict(x)));
-    const specs = Object.fromEntries(
+    const specs: Record<string, { spec: any; dataHandle: DataHandle }> = Object.fromEntries(
       await Promise.all(
         dataHandles.map(async (dataHandle) => {
           const uri = resolveUri(dataHandle.originalDirectory, dataHandle.identity[0]);
-          return [uri, await dataHandle.readObject()];
+          return [
+            uri,
+            {
+              dataHandle,
+              spec: await dataHandle.readObject(),
+            },
+          ];
         }),
       ),
     );
@@ -34,7 +40,7 @@ export function createFullRefResolverPlugin(): PipelinePlugin {
     const results = await Promise.all(
       dataHandles.map(async (dataHandle) => {
         const uri = resolveUri(dataHandle.originalDirectory, dataHandle.identity[0]);
-        return sink.writeObject(dataHandle.description, specs[uri], dataHandle.identity, dataHandle.artifactType, {
+        return sink.writeObject(dataHandle.description, specs[uri].spec, dataHandle.identity, dataHandle.artifactType, {
           pathMappings: new IdentityPathMappings(dataHandle.key),
         });
       }),
@@ -47,13 +53,15 @@ export function createFullRefResolverPlugin(): PipelinePlugin {
 async function resolveRefs(
   logger: IAutorestLogger,
   dataSource: DataSource,
-  specs: Record<string, any>,
+  specs: Record<string, { dataHandle: DataHandle; spec: any }>,
   options: RefProcessorOptions,
 ) {
-  const workspace = createOpenAPIWorkspace({ specs });
+  const workspace = createOpenAPIWorkspace({
+    specs: Object.fromEntries(Object.entries(specs).map(([k, { spec }]) => [k, spec])),
+  });
   let success = true;
-  for (const [uri, spec] of Object.entries(specs)) {
-    if (!(await crawlRefs(logger, dataSource, uri, spec, workspace, options))) {
+  for (const [uri, { dataHandle, spec }] of Object.entries(specs)) {
+    if (!(await crawlRefs(logger, dataSource, dataHandle, uri, spec, workspace, options))) {
       success = false;
     }
   }
@@ -63,6 +71,7 @@ async function resolveRefs(
 async function crawlRefs(
   logger: IAutorestLogger,
   dataSource: DataSource,
+  dataHandle: DataHandle,
   originalFileLocation: string,
   spec: any,
   workspace: OpenAPIWorkspace<any>,
@@ -94,8 +103,8 @@ async function crawlRefs(
           success = false;
           logger.trackError({
             code: "InvalidRef",
-            message: `Ref '${value}' is not referencing a valid location.`,
-            source: [{ document: originalFileLocation, position: { path: pointer } }],
+            message: `Ref '${value}' is not referencing a valid location. ${pointer}`,
+            source: [{ document: dataHandle.key, position: { path: pointer } }],
           });
         }
         obj[key] = newReference;
