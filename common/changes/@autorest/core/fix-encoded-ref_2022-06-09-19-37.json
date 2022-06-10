@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "Fix: `$ref` contains percent-encoding.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/core"
+}
