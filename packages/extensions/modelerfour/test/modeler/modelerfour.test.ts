@@ -29,17 +29,7 @@ describe("Modeler", () => {
     expect(codeModel.info.contact?.email).toEqual(InitialTestSpec.info.contact.email);
   });
 
-  it.only("tracks schema usage", async () => {
-    const testSchema = {
-      type: "object",
-      properties: {
-        "prop-one": {
-          type: "integer",
-          format: "int32",
-        },
-      },
-    };
-
+  it("tracks schema usage", async () => {
     const spec = createTestSpec();
 
     addSchema(spec, "Input", {
