@@ -1653,6 +1653,7 @@ export class ModelerFour {
         extensions: this.interpret.getExtensionProperties(httpOperation),
         apiVersions: this.interpret.getApiVersions(pathItem),
         deprecated: this.interpret.getDeprecation(httpOperation),
+        externalDocs: this.interpret.getExternalDocs(httpOperation),
         language: {
           default: {
             summary: httpOperation.summary,
