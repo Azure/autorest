@@ -30,16 +30,6 @@ describe("Modeler", () => {
   });
 
   it("tracks schema usage", async () => {
-    const testSchema = {
-      type: "object",
-      properties: {
-        "prop-one": {
-          type: "integer",
-          format: "int32",
-        },
-      },
-    };
-
     const spec = createTestSpec();
 
     addSchema(spec, "Input", {

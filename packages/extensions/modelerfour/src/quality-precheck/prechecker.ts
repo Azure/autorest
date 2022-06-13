@@ -37,11 +37,13 @@ export async function processRequest(host: AutorestExtensionHost) {
       filename: "prechecked-openapi-document.yaml",
       content: JSON.stringify(result, null, 2),
       artifactType: "prechecked-openapi-document",
+      sourceMap: { type: "identity", source: session.filename },
     });
     host.writeFile({
       filename: "original-openapi-document.yaml",
       content: JSON.stringify(input, null, 2),
       artifactType: "openapi-document",
+      sourceMap: { type: "identity", source: session.filename },
     });
   } catch (error: any) {
     if (debug) {

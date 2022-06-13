@@ -59,7 +59,7 @@ import {
   AnyObjectSchema,
 } from "@autorest/codemodel";
 import { Session, Channel } from "@autorest/extension-base";
-import { fail, minimum, pascalCase, KnownMediaType } from "@azure-tools/codegen";
+import { fail, minimum, pascalCase, KnownMediaType, shadowPosition } from "@azure-tools/codegen";
 import {
   Model as oai3,
   Dereferenced,
@@ -71,6 +71,7 @@ import {
   NumberFormat,
   MediaType,
   omitXDashProperties,
+  OpenAPI3Document,
 } from "@azure-tools/openapi";
 import * as OpenAPI from "@azure-tools/openapi";
 import { uniq, every } from "lodash";
@@ -147,7 +148,6 @@ export class ModelerFour {
   private apiVersionParameter!: "choice" | "constant" | undefined;
   private useModelNamespace!: boolean | undefined;
   private profileFilter!: Array<string>;
-  private apiVersionFilter!: Array<string>;
   private schemaCache = new ProcessingCache((schema: OpenAPI.Schema, name: string) =>
     this.processSchemaImpl(schema, name),
   );
@@ -158,8 +158,8 @@ export class ModelerFour {
   private ignoreHeaders: Set<string> = new Set();
   private specialHeaders: Set<string> = new Set();
 
-  constructor(protected session: Session<oai3>) {
-    this.input = session.model; //shadowPosition(session.model);
+  constructor(protected session: Session<OpenAPI3Document>) {
+    this.input = session.model; // shadowPosition(session.model);
 
     const i = this.input.info;
 
@@ -268,7 +268,6 @@ export class ModelerFour {
     }
 
     this.profileFilter = await this.session.getValue("profile", []);
-    this.apiVersionFilter = await this.session.getValue("api-version", []);
     this.ignoreHeaders = new Set(this.options["ignore-headers"] ?? []);
     this.specialHeaders = new Set(
       KnownSpecialHeaders.filter((x) => this.options["skip-special-headers"]?.map((x) => x.toLowerCase())?.includes(x)),
