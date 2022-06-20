@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Fri, 27 May 2022 15:55:11 GMT and should not be manually modified.
+This log was last generated on Mon, 20 Jun 2022 17:54:18 GMT and should not be manually modified.
+
+## 4.23.7
+Mon, 20 Jun 2022 17:54:18 GMT
+
+### Patches
+
+- Added: Include `externalDocs` information in codemodel
 
 ## 4.23.6
 Fri, 27 May 2022 15:55:11 GMT

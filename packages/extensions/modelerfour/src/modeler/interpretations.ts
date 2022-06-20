@@ -16,6 +16,7 @@ import {
   ParameterLocation,
   includeXDashKeys,
   includeXDashProperties,
+  omitXDashProperties,
 } from "@azure-tools/openapi";
 import { keyBy } from "lodash";
 export interface XMSEnum {
@@ -243,8 +244,13 @@ export class Interpretations {
     }
     return undefined;
   }
-  getExternalDocs(schema: OpenAPI.Schema): ExternalDocumentation | undefined {
-    return undefined;
+
+  getExternalDocs(item: { externalDocs?: OpenAPI.ExternalDocumentation }): ExternalDocumentation | undefined {
+    return item.externalDocs
+      ? new ExternalDocumentation(item.externalDocs.url, {
+          description: item.externalDocs.description,
+        })
+      : undefined;
   }
   getExample(schema: OpenAPI.Schema): any {
     return undefined;
