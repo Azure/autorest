@@ -6,7 +6,15 @@
 import { ChildProcess } from "child_process";
 import { Readable, Writable } from "stream";
 import { Exception } from "@autorest/common";
-import { DataHandle, DataSink, DataSource, LazyPromise, Mapping, PathPosition } from "@azure-tools/datastore";
+import {
+  DataHandle,
+  DataSink,
+  DataSource,
+  IdentityPathMappings,
+  LazyPromise,
+  Mapping,
+  PathPosition,
+} from "@azure-tools/datastore";
 import { ensureIsFolderUri } from "@azure-tools/uri";
 import { RawSourceMap } from "source-map";
 import { CancellationToken, createMessageConnection } from "vscode-jsonrpc";
@@ -270,11 +278,12 @@ export class AutoRestExtension extends EventEmitter {
       filename: string,
       content: string,
       artifactType?: string,
-      sourceMap?: Array<Mapping> | RawSourceMap,
+      sourceMap?: Mapping[] | RawSourceMap | { type: "identity"; source: string },
     ): Promise<Artifact> => {
       if (!sourceMap) {
         sourceMap = [];
       }
+
       // TODO: transform mappings so friendly names are replaced by internals
       let handle: DataHandle;
       if (typeof (<any>sourceMap).mappings === "string") {
@@ -290,7 +299,10 @@ export class AutoRestExtension extends EventEmitter {
       } else {
         onFile(
           (handle = await sink.writeData(filename, content, ["fix-me-here2"], artifactType, {
-            pathMappings: sourceMap as any,
+            pathMappings:
+              "type" in sourceMap && sourceMap.type === "identity"
+                ? new IdentityPathMappings((await friendly2internal(sourceMap.source)) ?? sourceMap.source)
+                : <any>sourceMap,
           })),
         );
       }
@@ -309,15 +321,19 @@ export class AutoRestExtension extends EventEmitter {
       async ReadFile(filename: string): Promise<string> {
         try {
           const file = await inputScope.readStrict((await friendly2internal(filename)) || filename);
-          return await file.ReadData();
-        } catch (E) {
-          // try getting the file from the output-folder
+          return await file.readData();
+        } catch (e) {
           try {
-            const result = await context.fileSystem.read(`${context.config.outputFolderUri}${filename}`);
-            return result;
-          } catch (E2) {
-            // no file there!
-            throw E;
+            // Try reading it from the filesystem
+            return await context.fileSystem.read(filename);
+          } catch (e2) {
+            // try getting the file from the output-folder
+            try {
+              return await context.fileSystem.read(`${context.config.outputFolderUri}${filename}`);
+            } catch (e3) {
+              // no file there!
+              throw e;
+            }
           }
         }
       },

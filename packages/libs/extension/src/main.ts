@@ -6,6 +6,12 @@
 import { ChildProcess, spawn } from "child_process";
 import { homedir, tmpdir } from "os";
 import { basename, delimiter, dirname, extname, isAbsolute, join, normalize, resolve } from "path";
+import {
+  patchPythonPath,
+  PythonCommandLine,
+  ExtensionSystemRequirements,
+  validateExtensionSystemRequirements,
+} from "@autorest/system-requirements";
 import { exists, isDirectory, isFile, mkdir, readdir, rmdir } from "@azure-tools/async-io";
 import { Delay, Exception, Mutex, SharedLock } from "@azure-tools/tasks";
 import { resolve as npmResolvePackage } from "npm-package-arg";
@@ -24,12 +30,6 @@ import { AsyncLock } from "./locks/async-lock";
 import { logger } from "./logger";
 import { Npm } from "./npm";
 import { PackageManager, PackageManagerLogEntry, PackageManagerProgress, PackageManagerType } from "./package-manager";
-import {
-  patchPythonPath,
-  PythonCommandLine,
-  ExtensionSystemRequirements,
-  validateExtensionSystemRequirements,
-} from "./system-requirements";
 import { Yarn } from "./yarn";
 
 export interface PackageInstallProgress extends PackageManagerProgress {

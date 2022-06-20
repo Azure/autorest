@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
 import assert from "assert";
+import { inspect } from "util";
 import {
   BinarySchema,
   ByteArraySchema,
@@ -20,7 +21,8 @@ import {
   SealedChoiceSchema,
   StringSchema,
 } from "@autorest/codemodel";
-import { HttpOperation, JsonType, ParameterLocation, RequestBody } from "@azure-tools/openapi";
+import { KnownMediaType } from "@azure-tools/codegen";
+import { HttpOperation, JsonType, ParameterLocation, RequestBody, Schema } from "@azure-tools/openapi";
 import * as oai3 from "@azure-tools/openapi";
 import { addOperation, createTestSpec, findByName } from "../utils";
 import { runModeler, runModelerWithOperation } from "./modelerfour-utils";
@@ -33,6 +35,7 @@ function getBody(request: Request) {
 
 async function runModelerWithBody(body: RequestBody): Promise<Operation> {
   return runModelerWithOperation("post", "/test", {
+    operationId: "test",
     requestBody: {
       ...body,
     },
@@ -104,6 +107,28 @@ describe("Modelerfour.Request.Body", () => {
         expect(param?.schema.type).toEqual("sealed-choice");
         const schema = param?.schema as SealedChoiceSchema;
         expect(schema.choices.map((x) => x.value)).toEqual(["application/octet-stream", "image/png"]);
+      });
+    });
+
+    describe("Body schema is type: string with application/json content type", () => {
+      let operation: Operation;
+
+      beforeEach(async () => {
+        operation = await runModelerWithBody({
+          content: {
+            "application/json": {
+              schema: { type: JsonType.String },
+            },
+          },
+        });
+      });
+
+      it("only create one request", async () => {
+        expect(operation.requests).toHaveLength(1);
+      });
+
+      it("known media type is json", async () => {
+        expect(operation.requests![0].protocol.http!.knownMediaType).toEqual(KnownMediaType.Json);
       });
     });
 
@@ -248,6 +273,37 @@ describe("Modelerfour.Request.Body", () => {
       });
     });
 
+    describe("Body is an object with multiple serialization format: application/json, application/xml, application/x-www-form-urlencoded", () => {
+      let operation: Operation;
+
+      beforeEach(async () => {
+        const schema: Schema = { type: "object", properties: { name: { type: "string" } } };
+        operation = await runModelerWithBody({
+          content: {
+            "application/json": { schema },
+            "application/x-www-form-urlencoded": { schema },
+            "application/xml": { schema },
+          },
+        });
+      });
+
+      it("creates 1 requests", async () => {
+        expect(operation.requests).toHaveLength(1);
+      });
+
+      it("request should cover the application/json case and ignore the others", async () => {
+        const request = operation.requests?.[0]!;
+        const param = findByName("content-type", request.parameters);
+        expect(param).toBe(undefined);
+        expect(request.protocol.http!.mediaTypes).toEqual([
+          "application/json",
+          "application/x-www-form-urlencoded",
+          "application/xml",
+        ]);
+        expect(getBody(request).schema instanceof ObjectSchema).toBe(true);
+      });
+    });
+
     describe("Body is an string and text/plain content type", () => {
       let operation: Operation;
 
@@ -281,6 +337,7 @@ describe("Modelerfour.Request.Body", () => {
       beforeEach(async () => {
         const spec = createTestSpec();
         const operation: HttpOperation = {
+          operationId: "test",
           requestBody: {
             content: {
               "multipart/form-data": {
@@ -336,7 +393,7 @@ describe("Modelerfour.Request.Body", () => {
         [{ enum: ["one", "two"] }, ChoiceSchema],
       ] as const;
       scenarios.forEach(([extra, type]) => {
-        describe(`format:${extra} with application/json`, () => {
+        describe(`format:${inspect(extra)} with application/json`, () => {
           let operation: Operation;
 
           beforeEach(async () => {
@@ -364,5 +421,98 @@ describe("Modelerfour.Request.Body", () => {
         });
       });
     });
+
+    describe("Body schema is type: object with application/json and x-json-stream content type", () => {
+      let operation: Operation;
+
+      beforeEach(async () => {
+        const bodyType: Schema = { type: "object", properties: { name: { type: "string" } } };
+        operation = await runModelerWithBody({
+          content: {
+            "application/json": {
+              schema: bodyType,
+            },
+            "x-json-stream": {
+              schema: bodyType,
+            },
+          },
+        });
+      });
+
+      it("doesn't create errors", () => {});
+      it("only create one request", async () => {
+        expect(operation.requests).toHaveLength(1);
+      });
+
+      it("known media type is json (ignored unknown x-json-stream)", async () => {
+        expect(operation.requests![0].protocol.http!.knownMediaType).toEqual(KnownMediaType.Json);
+      });
+    });
+  });
+
+  it("generate unique names for ContentType enums", async () => {
+    const spec = createTestSpec();
+
+    const bodyType = { type: "string", format: "binary" };
+
+    addOperation(spec, "/test1", {
+      post: {
+        operationId: "test1",
+        requestBody: {
+          content: {
+            "application/json": {
+              schema: bodyType,
+            },
+            "application/png": {
+              schema: bodyType,
+            },
+          },
+        },
+        responses: {},
+      },
+    });
+    addOperation(spec, "/test2", {
+      post: {
+        operationId: "test2",
+        requestBody: {
+          content: {
+            "application/jpeg": {
+              schema: bodyType,
+            },
+            "application/png": {
+              schema: bodyType,
+            },
+          },
+        },
+        responses: {},
+      },
+    });
+    addOperation(spec, "/test3", {
+      post: {
+        operationId: "test3",
+        requestBody: {
+          content: {
+            "application/pdf": {
+              schema: bodyType,
+            },
+            "application/jpeg": {
+              schema: bodyType,
+            },
+          },
+        },
+        responses: {},
+      },
+    });
+
+    const codeModel = await runModeler(spec);
+    const contentType0 = findByName("ContentType", codeModel.schemas.sealedChoices);
+    assert(contentType0);
+    expect(contentType0.choices.map((x) => x.value)).toEqual(["application/json", "application/png"]);
+    const contentType1 = findByName("ContentType1", codeModel.schemas.sealedChoices);
+    assert(contentType1);
+    expect(contentType1.choices.map((x) => x.value)).toEqual(["application/jpeg", "application/png"]);
+    const contentType2 = findByName("ContentType2", codeModel.schemas.sealedChoices);
+    assert(contentType2);
+    expect(contentType2.choices.map((x) => x.value)).toEqual(["application/jpeg", "application/pdf"]);
   });
 });

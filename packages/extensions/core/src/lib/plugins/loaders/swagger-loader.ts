@@ -1,8 +1,8 @@
 import { IAutorestLogger } from "@autorest/common";
 import { DataHandle, DataSink, DataSource, QuickDataSource } from "@azure-tools/datastore";
 import { PipelinePlugin } from "../../pipeline/common";
-import { crawlReferences } from "../ref-crawling";
 import { checkSyntaxFromData } from "./common";
+import { loadAllReferencedFiles } from "./referenced-file-resolver";
 
 export async function loadSwaggerFiles(
   logger: IAutorestLogger,
@@ -46,7 +46,7 @@ export function createSwaggerLoaderPlugin(): PipelinePlugin {
     const foundAllFiles = swaggers.length !== inputs.length;
     let result: DataHandle[] = [];
     if (swaggers.length === inputs.length) {
-      result = await crawlReferences(config, input, swaggers, sink);
+      result = await loadAllReferencedFiles(config, input, swaggers, sink);
     }
 
     return new QuickDataSource(result, { skipping: foundAllFiles });

@@ -39,8 +39,7 @@ export interface MappingTreeObjectV2Funcs<T> {
 
 export type MappingTreeObject<T> = {
   readonly [P in keyof T]: MappingTreeItem<T[P]>;
-} &
-  MappingTreeObjectV2Funcs<T>;
+} & MappingTreeObjectV2Funcs<T>;
 
 export interface MappingTreeArray<T> extends ReadonlyArray<MappingTreeItem<T>> {
   /**

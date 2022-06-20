@@ -21,6 +21,9 @@ export async function processRequest(host: AutorestExtensionHost) {
     // go!
     const result = plugin.process();
 
+    // throw on errors.
+    session.checkpoint();
+
     // output the model to the pipeline
     if (options["emit-yaml-tags"] !== false) {
       host.writeFile({

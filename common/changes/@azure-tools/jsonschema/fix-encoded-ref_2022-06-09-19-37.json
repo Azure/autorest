@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/jsonschema",
+      "comment": "Fix: `$ref` contains percent-encoding.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@azure-tools/jsonschema"
+}

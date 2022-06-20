@@ -2,6 +2,18 @@
   "name": "@azure-tools/oai2-to-oai3",
   "entries": [
     {
+      "version": "4.6.1",
+      "tag": "@azure-tools/oai2-to-oai3_v4.6.1",
+      "date": "Wed, 27 Apr 2022 18:53:11 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix issue with using $ref in responses inserterting $ref in the parent"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.6.0",
       "tag": "@azure-tools/oai2-to-oai3_v4.6.0",
       "date": "Tue, 15 Mar 2022 16:00:38 GMT",

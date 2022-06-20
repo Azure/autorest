@@ -50,7 +50,6 @@ export const readConfigurationFile = async (
   }
 
   const configs = await Promise.all(hConfig.filter((x) => x).map((x) => codeBlockToRawConfig(logger, parentFolder, x)));
-
   return {
     ...base,
     configs,

@@ -16,9 +16,6 @@ stages:
       - job: main
         displayName: "Build and Unit test"
         steps:
-          - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-              - template: ./templates/verify-changes.yaml
-
           - template: ./templates/build.yaml
 
           - script: npx @microsoft/rush test:ci -v

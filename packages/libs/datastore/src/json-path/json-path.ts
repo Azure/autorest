@@ -3,82 +3,75 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import { createSandbox } from "@azure-tools/codegen";
-import jsonpath from "jsonpath";
+import { JSONPath } from "jsonpath-plus";
 
-const safeEval = createSandbox();
+export type JsonPath = JsonPathComponent[];
+export type JsonPathComponent = string | number;
 
-// patch in smart filter expressions
-const handlers = (<any>jsonpath).handlers;
-handlers.register("subscript-descendant-filter_expression", function (component: any, partial: any, count: any) {
-  const src = component.expression.value.slice(1);
-
-  const passable = function (key: any, value: any) {
-    try {
-      return safeEval(src.replace(/@/g, "$$$$"), { $$: value });
-    } catch (e) {
-      return false;
-    }
-  };
-
-  return eval("this").traverse(partial, null, passable, count);
-});
-handlers.register("subscript-child-filter_expression", function (component: any, partial: any, count: any) {
-  const src = component.expression.value.slice(1);
-
-  const passable = function (key: any, value: any) {
-    try {
-      return safeEval(src.replace(/@/g, "$$$$"), { $$: value });
-    } catch (e) {
-      return false;
-    }
-  };
-
-  return eval("this").descend(partial, null, passable, count);
-});
-// patch end
-
-export type JsonPathComponent = jsonpath.PathComponent;
-export type JsonPath = Array<JsonPathComponent>;
-
-export function parse(jsonPath: string): JsonPath {
-  return jsonpath
-    .parse(jsonPath)
-    .map((part) => part.expression.value)
-    .slice(1);
+interface JSONPathExt {
+  toPathArray: (path: string) => string[];
+  toPathString: (path: JsonPathComponent[]) => string;
 }
 
-export function stringify(jsonPath: JsonPath): string {
-  return jsonpath.stringify(["$" as JsonPathComponent].concat(jsonPath));
+interface JsonPathResult {
+  path: string;
+  value: any;
+  parent: any;
+  parentProperty: string;
+  hasArrExpr: boolean;
+  pointer: string;
+}
+
+// Override the vm used in jsonpath to use our safeEval and ignore errors.
+const safeEval = createSandbox();
+JSONPath.prototype.vm = {
+  runInNewContext: (code: string, context: Record<string, any>) => {
+    try {
+      return safeEval(code, context);
+    } catch (e) {
+      // We just ignore javascript errors.
+      return false;
+    }
+  },
+};
+
+export function parse(jsonPath: string): JsonPath {
+  return (JSONPath as any as JSONPathExt).toPathArray(jsonPath).slice(1);
 }
 
 export function paths<T>(obj: T, jsonQuery: string): Array<JsonPath> {
   return nodes(obj, jsonQuery).map((x) => x.path);
 }
 
-export function nodes<T>(obj: T, jsonQuery: string): Array<{ path: JsonPath; value: any }> {
+function run(obj: any, query: string): JsonPathResult[] {
+  return JSONPath({ path: query, json: obj as any, resultType: "all" });
+}
+
+export function nodes<T>(obj: T, query: string): Array<{ path: JsonPath; value: any }> {
   // jsonpath only accepts objects
   if (obj instanceof Object) {
-    let result = jsonpath.nodes(obj, jsonQuery).map((x) => ({ path: x.path.slice(1), value: x.value }));
-    const comp = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
-    result = result.sort((a, b) => comp(JSON.stringify(a.path), JSON.stringify(b.path)));
-    result = result.filter((x, i) => i === 0 || JSON.stringify(x.path) !== JSON.stringify(result[i - 1].path));
-    return result;
+    const compare = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
+    const result = run(obj, query);
+    return result
+      .map((x) => ({ path: parse(x.path), value: x.value }))
+      .sort((a, b) => compare(JSON.stringify(a.path), JSON.stringify(b.path)))
+      .filter((x, i) => i === 0 || JSON.stringify(x.path) !== JSON.stringify(result[i - 1].path));
   } else {
-    return matches(jsonQuery, []) ? [{ path: [], value: obj }] : [];
+    return matches(query, []) ? [{ path: [], value: obj }] : [];
   }
 }
 
 export function selectNodes<T>(obj: T, jsonQuery: string): Array<{ path: JsonPath; value: any; parent: any }> {
   // jsonpath only accepts objects
   if (obj instanceof Object) {
-    const result = new Array<{ path: JsonPath; value: any; parent: any }>();
+    const result: { path: JsonPath; value: any; parent: any }[] = [];
     const keys = new Set<string>();
 
-    for (const node of jsonpath.nodes(obj, jsonQuery)) {
-      const p = jsonpath.stringify(node.path);
+    for (const node of run(obj, jsonQuery)) {
+      const p = node.path;
       if (!keys.has(p)) {
         keys.add(p);
-        result.push({ path: node.path.slice(1), value: node.value, parent: jsonpath.parent(obj, p) });
+        result.push({ path: parse(node.path), value: node.value, parent: node.parent });
       }
     }
     return result;

@@ -18,6 +18,18 @@ namespace IAutoRestPluginInitiatorTypes {
   export const Message = new NotificationType2<string, Message, void>("Message");
 }
 
+/**
+ * Sepecify that the source file and current file is a 1:1 mapping.
+ */
+export interface IdentitySourceMap {
+  type: "identity";
+
+  /**1
+   * Name of the file that this file is mapping to.
+   */
+  source: string;
+}
+
 export interface WriteFileOptions {
   /**
    * @param filename Name of the file.
@@ -32,7 +44,7 @@ export interface WriteFileOptions {
   /**
    * @param sourceMap Source map that can be used to trace back source position in case of error.
    */
-  sourceMap?: Mapping[] | RawSourceMap;
+  sourceMap?: Mapping[] | RawSourceMap | IdentitySourceMap;
 
   /**
    * @param artifactType Artifact type

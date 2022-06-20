@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "Enable identity sourcemap for extensions",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/core"
+}

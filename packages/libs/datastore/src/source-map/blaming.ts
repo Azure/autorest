@@ -14,6 +14,7 @@ import { PathMappedPosition } from "./path-source-map";
 export class BlameTree {
   public static async create(dataStore: DataStore, position: MappedPosition | PathMappedPosition): Promise<BlameTree> {
     const data = dataStore.readStrictSync(position.source);
+
     const blames = await data.blame(position as any);
     const children = [];
     for (const pos of blames) {

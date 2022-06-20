@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/openapi",
+      "comment": "Improve InvalidRefError message",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@azure-tools/openapi"
+}

@@ -118,28 +118,35 @@ export class BodyProcessor {
       return KnownMediaType.Binary;
     }
 
-    if (isSchemaString(body)) {
+    if (
+      isSchemaString(body) &&
+      (mediaTypes.length !== 1 || (mediaTypes[0] !== "application/json" && mediaTypes[0] !== "application/xml"))
+    ) {
       return KnownMediaType.Text;
     }
 
-    const types = mediaTypes.map((x) => knownMediaType(x));
+    const types = mediaTypes.map((x) => knownMediaType(x)).filter((x) => x !== KnownMediaType.Unknown);
+    if (types.length === 0) {
+      return KnownMediaType.Unknown;
+    }
+
     const type = types[0];
     const differentType = types.find((x) => x !== type);
+    if (differentType === undefined) {
+      return type;
+    }
 
-    // Special case if both json and xml are supported just pick json.
-    const isXmlAndJson =
-      (type === KnownMediaType.Json && differentType === KnownMediaType.Xml) ||
-      (type === KnownMediaType.Xml && differentType === KnownMediaType.Json);
-    if (isXmlAndJson) {
+    // Special case if json and other known serializations format are specified pick json
+    const hasJson = types.find((x) => x === KnownMediaType.Json);
+    if (hasJson && types.every((x) => KnownSerializationTypes.has(x))) {
       return KnownMediaType.Json;
     }
-    if (differentType !== undefined) {
-      this.session.error(
-        `Operation '${operationName}' content types [${type}, ${differentType}] have the same body schema but cannot be used together.`,
-        ["Modelerfour", "IncompatibleRequestBodies"],
-        body,
-      );
-    }
+
+    this.session.error(
+      `Operation '${operationName}' content types [${type}, ${differentType}] have the same body schema but cannot be used together.`,
+      ["Modelerfour", "IncompatibleRequestBodies"],
+      body,
+    );
     return type;
   }
 
@@ -187,3 +194,8 @@ export class BodyProcessor {
     );
   }
 }
+
+/**
+ * List of serialization media types for objects.
+ */
+const KnownSerializationTypes = new Set([KnownMediaType.Json, KnownMediaType.Xml, KnownMediaType.Form]);

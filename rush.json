@@ -1,6 +1,6 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
-  "rushVersion": "5.64.0",
+  "rushVersion": "5.71.0",
   "pnpmVersion": "6.32.4",
   "pnpmOptions": {},
   "nodeSupportedVersionRange": ">=12.0.0",
@@ -32,12 +32,6 @@
       "projectFolder": "packages/apps/autorest",
       "reviewCategory": "production",
       "shouldPublish": true
-    },
-    {
-      "packageName": "md-mock-api",
-      "projectFolder": "packages/tools/md-mock-api",
-      "reviewCategory": "production",
-      "shouldPublish": false
     },
     {
       "packageName": "@autorest/compare",
@@ -116,6 +110,12 @@
       "projectFolder": "packages/testing/test-public-packages",
       "reviewCategory": "production",
       "shouldPublish": false
+    },
+    {
+      "packageName": "@autorest/system-requirements",
+      "projectFolder": "packages/libs/system-requirements",
+      "reviewCategory": "production",
+      "shouldPublish": true
     },
     {
       "packageName": "@azure-tools/extension",

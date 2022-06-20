@@ -30,16 +30,6 @@ describe("Modeler", () => {
   });
 
   it("tracks schema usage", async () => {
-    const testSchema = {
-      type: "object",
-      properties: {
-        "prop-one": {
-          type: "integer",
-          format: "int32",
-        },
-      },
-    };
-
     const spec = createTestSpec();
 
     addSchema(spec, "Input", {
@@ -92,6 +82,7 @@ describe("Modeler", () => {
 
     addOperation(spec, "/test", {
       get: {
+        operationId: "testGet",
         description: "An operation.",
         responses: responses(
           response(200, "application/json", {
@@ -106,6 +97,7 @@ describe("Modeler", () => {
         ),
       },
       post: {
+        operationId: "testPost",
         description: "Post it.",
         parameters: [
           {
@@ -238,6 +230,7 @@ describe("Modeler", () => {
 
     addOperation(spec, "/test", {
       post: {
+        operationId: "test",
         description: "Post it.",
         parameters: [
           {
@@ -907,6 +900,7 @@ describe("Modeler", () => {
       const spec = createTestSpec();
       addOperation(spec, "/test", {
         get: {
+          operationId: "test",
           responses: {
             "204": {
               description: "Foo bar test description",
@@ -926,6 +920,7 @@ describe("Modeler", () => {
       const spec = createTestSpec();
       addOperation(spec, "/test", {
         get: {
+          operationId: "test",
           responses: {
             "200": {
               description: "Foo bar test description",

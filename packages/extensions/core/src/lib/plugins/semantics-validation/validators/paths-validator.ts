@@ -1,4 +1,4 @@
-import oai3, { ParameterLocation, Refable } from "@azure-tools/openapi";
+import oai3, { OpenAPI3Document, ParameterLocation, Refable } from "@azure-tools/openapi";
 import { ResolveReferenceFn, SemanticError, SemanticErrorCodes } from "../types";
 import { createReferenceResolver } from "../utils";
 
@@ -12,7 +12,7 @@ const operationKeys = new Set(["get", "post", "put", "delete", "options", "head"
  * @param resolveReference
  * @returns
  */
-export function validatePaths(spec: oai3.Model, resolve?: ResolveReferenceFn): SemanticError[] {
+export function validatePaths(spec: OpenAPI3Document, resolve?: ResolveReferenceFn): SemanticError[] {
   const resolveReference = createReferenceResolver(spec, resolve);
   const paths = spec.paths;
   const errors: SemanticError[] = [];
