@@ -1,4 +1,4 @@
-FROM azuresdk/autorest
+FROM azsdkengsys.azurecr.io/azuresdk/autorest
 
 # DOTNET
 ENV DOTNET_VERSION=5.0
