@@ -2,4 +2,5 @@
 * @daviwil @timotheeguerin
 
 # Git Hub bot rules
-/.github/fabricbot.json  @jsquire
+/.github/CODEOWNERS  @jsquire @ronniegeraghty
+/.github/fabricbot.json  @jsquire @ronniegeraghty
