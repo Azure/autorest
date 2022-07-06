@@ -17,9 +17,11 @@ jobs:
         inputs:
           dockerVersion: "17.09.0-ce"
 
-      - script: |
-          echo "$(DockerHub-azuresdkPass)" | docker login -u "azuresdk" --password-stdin
-        displayName: Login to docker hub.
+      - task: Docker@2
+        displayName: Login to ACR
+        inputs:
+          command: login
+          containerRegistry: azsdkengsys
 
       - script: |
           docker build -t ${{ parameters.image }} .
@@ -29,13 +31,3 @@ jobs:
       - script: |
           docker push ${{ parameters.image }}
         displayName: Publish image
-
-      - script: |
-          echo '/workspace/${{parameters.readmePath}}'
-          docker run -v $PWD:/workspace \
-            -e DOCKERHUB_USERNAME="azuresdk" \
-            -e DOCKERHUB_PASSWORD="$(DockerHub-azuresdkPass)" \
-            -e DOCKERHUB_REPOSITORY='${{ parameters.image }}' \
-            -e README_FILEPATH='/workspace/${{parameters.readmePath}}' \
-            peterevans/dockerhub-description:2.1.0
-        displayName: Update readme
