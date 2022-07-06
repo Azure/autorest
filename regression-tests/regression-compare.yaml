@@ -64,12 +64,12 @@ languages:
     oldArgs:
       - --version:3.6.2
       - --use:@autorest/modelerfour@4.23.0
-      - --use:@autorest/python@5.12.0
+      - --use:@autorest/python@6.0.1
 
     newArgs:
       - --version:../packages/extensions/core
       - --use:../packages/extensions/modelerfour
-      - --use:@autorest/python@5.12.0
+      - --use:@autorest/python@6.0.1
 
   - language: typescript
     outputPath: ./output/typescript
@@ -79,7 +79,7 @@ languages:
       - --use:@autorest/modelerfour@4.23.0
       - --package-name:test-package
       - --title:TestClient
-      - --use:@autorest/typescript@6.0.0-beta.13
+      - --use:@autorest/typescript@6.0.0-rc.1
 
     newArgs:
       - --v3
@@ -87,4 +87,4 @@ languages:
       - --use:../packages/extensions/modelerfour
       - --package-name:test-package
       - --title:TestClient
-      - --use:@autorest/typescript@6.0.0-beta.13
+      - --use:@autorest/typescript@6.0.0-rc.1
