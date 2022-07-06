@@ -23,7 +23,7 @@ RUN curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin -Channel ${
 
 
 # PYTHON
-ENV PYTHON_VERSION=3.8
+ENV PYTHON_VERSION=3.10
 
 RUN apt-get update &&  apt-get install -y \
     python${PYTHON_VERSION} \
