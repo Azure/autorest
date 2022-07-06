@@ -1279,37 +1279,31 @@ Sub-resources are specified in the same manner as their parent resource but with
 }
 ```
 
-**Example (preferred)**: An `arm-id` field with no additional information about what kind of resource it must refer to, referring to the common type.
+**Example**: An `arm-id` field in a parameter.
+
+```json5
+"parameters": [
+  {
+    "name": "scope",
+    "in": "path",
+    "required": true,
+    "type": "string",
+    "format": "arm-id",
+    "x-ms-skip-url-encoding": true
+  },
+  ...
+]
+```
+
+**Example**: An `arm-id` field that can refer to any ARM resource ID.
 
 ```json5
 "MyExampleType": {
   "properties": {
     "id": {
-      "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ArmId",
+      "type": "string",
+      "format": "arm-id"
     }
-  }
-}
-```
-
-**Example (preferred)**: An `arm-id` field that must refer to a virtual network, via a referenced definition
-
-```json5
-"MyExampleType": {
-  "properties": {
-    "vnetId": {
-      "$ref": "#/definitions/VNetId",
-    }
-  }
-},
-"VNetId": {
-  "type": "string",
-  "format": "arm-id",
-  "x-ms-arm-id-details": {
-    "allowedResources": [
-      {
-        "type": "Microsoft.Network/virtualNetworks"
-      }
-    ]
   }
 }
 ```
