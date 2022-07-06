@@ -43,30 +43,30 @@ stages:
       - template: ./templates/build-and-push-docker.yaml
         parameters:
           name: base
-          image: azuresdk/autorest
+          image: azsdkengsys.azurecr.io/azuresdk/autorest
           dockerFolder: ./docker/base/ubuntu
           readmePath: docker/base/readme.md
       - template: ./templates/build-and-push-docker.yaml
         parameters:
           name: dotnet
-          image: azuresdk/autorest-dotnet
+          image: azsdkengsys.azurecr.io/azuresdk/autorest-dotnet
           dockerFolder: ./docker/dotnet/ubuntu
           readmePath: docker/dotnet/readme.md
       - template: ./templates/build-and-push-docker.yaml
         parameters:
           name: python
-          image: azuresdk/autorest-python
+          image: azsdkengsys.azurecr.io/azuresdk/autorest-python
           dockerFolder: ./docker/python/ubuntu
           readmePath: docker/python/readme.md
       - template: ./templates/build-and-push-docker.yaml
         parameters:
           name: java
-          image: azuresdk/autorest-java
+          image: azsdkengsys.azurecr.io/azuresdk/autorest-java
           dockerFolder: ./docker/java/ubuntu
           readmePath: docker/java/readme.md
       - template: ./templates/build-and-push-docker.yaml
         parameters:
           name: all
-          image: azuresdk/autorest-all
+          image: azsdkengsys.azurecr.io/azuresdk/autorest-all
           dockerFolder: ./docker/all/ubuntu
           readmePath: docker/all/readme.md
