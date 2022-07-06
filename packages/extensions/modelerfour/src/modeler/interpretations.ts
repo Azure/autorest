@@ -134,6 +134,7 @@ export class Interpretations {
             return value;
 
           case StringFormat.Url:
+          case StringFormat.Uri:
             return value;
 
           case StringFormat.Password:
