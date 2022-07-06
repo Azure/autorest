@@ -39,7 +39,7 @@ definitions:
       - petType
   Cat:
     description: A representation of a cat
-    x-ms-discriminator-value: Microsoft.PetStore.PetType
+    x-ms-discriminator-value: Microsoft.PetStore.Cat
     allOf:
       - "$ref": "#/definitions/Pet"
       - properties:
@@ -56,7 +56,7 @@ definitions:
           - huntingSkill
   Dog:
     description: A representation of a dog
-    x-ms-discriminator-value: Microsoft.PetStore.PetType
+    x-ms-discriminator-value: Microsoft.PetStore.Dog
     allOf:
       - "$ref": "#/definitions/Pet"
       - properties:
