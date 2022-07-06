@@ -39,7 +39,12 @@ export enum StringFormat {
   /** @description a base64url string of characters, represented as a byte array (see RFC 4648 ) */
   Base64Url = "base64url",
 
-  /** @description a string that should be an URL */
+  /** @description a string that should be an URI */
+  Uri = "uri",
+
+  /**
+   * @description a string that should be an URI. Alias of uri
+   */
   Url = "url",
 
   /** @description an encoded odata query string */

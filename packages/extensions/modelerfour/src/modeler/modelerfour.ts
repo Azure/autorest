@@ -640,6 +640,7 @@ export class ModelerFour {
         return this.processUuidSchema("", schema);
 
       case StringFormat.Url:
+      case StringFormat.Uri:
         return this.processUriSchema("", schema);
 
       case StringFormat.Password:
@@ -1273,6 +1274,7 @@ export class ModelerFour {
             return this.processUuidSchema(name, schema);
 
           case StringFormat.Url:
+          case StringFormat.Uri:
             return this.processUriSchema(name, schema);
 
           case StringFormat.Password:
