@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/openapi",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@azure-tools/openapi"
+}
