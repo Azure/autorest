@@ -1,9 +1,10 @@
 FROM azsdkengsys.azurecr.io/azuresdk/autorest
 
 # DOTNET
-ENV DOTNET_VERSION=5.0
+ENV DOTNET_VERSION=6.0
 
-RUN apt-get update \
+RUN echo 'deb http://security.ubuntu.com/ubuntu impish-security main' | tee /etc/apt/sources.list.d/impish-security.list && \
+    apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     curl \
     ca-certificates \
@@ -12,7 +13,6 @@ RUN apt-get update \
     libc6 \
     libgcc1 \
     libgssapi-krb5-2 \
-    libicu66 \
     libssl1.1 \
     libstdc++6 \
     zlib1g \
