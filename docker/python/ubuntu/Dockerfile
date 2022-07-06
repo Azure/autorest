@@ -1,4 +1,4 @@
-FROM azuresdk/autorest
+FROM azsdkengsys.azurecr.io/azuresdk/autorest
 
 ENV PYTHON_VERSION=3.8
 
