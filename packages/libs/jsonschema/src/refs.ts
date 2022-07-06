@@ -18,7 +18,10 @@ export type JsonRef =
  */
 export function parseJsonRef(ref: string): JsonRef {
   const [file, path] = ref.split("#");
-  return { file: file === "" ? undefined : file, path };
+  return {
+    file: file === "" ? undefined : file,
+    path: path === undefined ? (undefined as any) : decodeURIComponent(path),
+  };
 }
 
 /**

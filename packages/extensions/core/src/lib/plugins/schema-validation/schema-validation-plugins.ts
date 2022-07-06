@@ -18,7 +18,6 @@ export function createSwaggerSchemaValidatorPlugin(): PipelinePlugin {
   return createPerFilePlugin(async (context) => async (fileIn, sink) => {
     const obj = await fileIn.readObject<any>();
     const isSecondary = !!obj["x-ms-secondary-file"];
-
     const errors = await swaggerValidator.validateFile(fileIn);
     if (errors.length > 0) {
       for (const error of errors) {

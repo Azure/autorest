@@ -1,0 +1,31 @@
+name: Consitency checks
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - run: |
+          LABEL_NAME=Publish
+          LABEL_URL=https://api.github.com/repos/Azure/autorest/issues/$PR_NUMBER/labels
+
+          echo "Getting labels using $LABEL_URL"
+          if curl -s "$LABEL_URL" | grep "\"name\": \"$LABEL_NAME\""
+          then
+            echo "Publish label was included in the PR, won't be checking for changelog."
+          else
+            npx @microsoft/rush change --verify || { echo 'If you run the rush publish command locally and meant to publish the changes, add the publish label to the pr.' ; exit 1; }
+          fi
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}

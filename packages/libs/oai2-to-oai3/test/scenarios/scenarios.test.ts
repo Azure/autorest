@@ -101,4 +101,8 @@ describe("Scenario testings", () => {
       ],
     });
   });
+
+  it("responses using ref keep reference", async () => {
+    await expectInputsMatchSnapshots("responses-ref", ["swagger.json"]);
+  });
 });

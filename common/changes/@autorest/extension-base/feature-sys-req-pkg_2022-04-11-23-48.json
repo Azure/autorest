@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/extension-base",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@autorest/extension-base"
+}
