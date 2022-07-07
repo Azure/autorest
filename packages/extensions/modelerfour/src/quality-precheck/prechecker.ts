@@ -225,7 +225,7 @@ export class QualityPreChecker {
 
   fixUpObjectsWithoutType() {
     for (const { name, schema } of this.listSchemas()) {
-      if (<any>schema.type === "file" || <any>schema.format === "file" || <any>schema.format === "binary") {
+      if (<any>schema.type === "file" || <any>schema.format === "file" || (<any>schema.format === "binary" && <any>schema.type !== "string")) {
         // handle inconsistency in file format handling.
         this.session.warning(
           `'The schema ${schema?.["x-ms-metadata"]?.name || name} with 'type: ${schema.type}', format: ${
