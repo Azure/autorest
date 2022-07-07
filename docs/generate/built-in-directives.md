@@ -140,7 +140,7 @@ Examples:
 directive:
   # Rename property foo to bar on model named MyModel
   - where-model: MyModel
-    remove-property:
+    rename-property:
       from: foo
       to: bar
 ```
