@@ -59,6 +59,11 @@ export enum SchemaType {
   /** an URI of some kind */
   Uri = "uri",
 
+  /**
+   * Represent a Azure Resource Manager Resource ID.
+   */
+  ArmId = "arm-id",
+
   /** a password or credential  */
   Credential = "credential",
 
@@ -126,6 +131,7 @@ export type PrimitiveSchemaTypes =
   | SchemaType.UnixTime
   | SchemaType.Uri
   | SchemaType.Uuid
+  | SchemaType.ArmId
   | SchemaType.Boolean
   | SchemaType.Integer
   | SchemaType.Number

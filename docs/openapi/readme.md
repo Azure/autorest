@@ -9,6 +9,7 @@
 Autorest interpretation of swagger specs:
 
 - [Request body](./request-body.md)
+- [Formats](./formats.md) Supported formats by autorest
 
 How to guides:
 

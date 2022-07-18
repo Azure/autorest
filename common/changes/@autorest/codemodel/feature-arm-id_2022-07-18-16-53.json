@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/codemodel",
+      "comment": "Added `ArmIdSchema` to represent Azure Resource Manager Resource Identifiers",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/codemodel"
+}

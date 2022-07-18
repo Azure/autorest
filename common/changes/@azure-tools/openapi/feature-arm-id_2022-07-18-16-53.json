@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@azure-tools/openapi",
+      "comment": "Added `arm-id` to list of known formats",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@azure-tools/openapi"
+}

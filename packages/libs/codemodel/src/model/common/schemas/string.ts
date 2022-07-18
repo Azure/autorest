@@ -80,6 +80,7 @@ export class UriSchema extends PrimitiveSchema implements UriSchema {
     this.apply(objectInitializer);
   }
 }
+
 /** a schema that represents a Uuid value */
 export interface UuidSchema extends PrimitiveSchema {
   /** the schema type  */
@@ -89,6 +90,19 @@ export interface UuidSchema extends PrimitiveSchema {
 export class UuidSchema extends PrimitiveSchema implements UuidSchema {
   constructor(name: string, description: string, objectInitializer?: DeepPartial<UuidSchema>) {
     super(name, description, SchemaType.Uuid);
+    this.apply(objectInitializer);
+  }
+}
+
+/** a schema that represents a Uuid value */
+export interface ArmIdSchema extends PrimitiveSchema {
+  /** the schema type  */
+  type: SchemaType.Uuid;
+}
+
+export class ArmIdSchema extends PrimitiveSchema implements ArmIdSchema {
+  constructor(name: string, description: string, objectInitializer?: DeepPartial<ArmIdSchema>) {
+    super(name, description, SchemaType.ArmId);
     this.apply(objectInitializer);
   }
 }

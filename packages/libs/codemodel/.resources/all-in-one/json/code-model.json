@@ -419,6 +419,7 @@
       "enum": [
         "any",
         "any-object",
+        "arm-id",
         "array",
         "binary",
         "boolean",
@@ -463,6 +464,7 @@
     "PrimitiveSchemaTypes": {
       "description": "Schema types that are primitive language values",
       "enum": [
+        "arm-id",
         "boolean",
         "char",
         "credential",
@@ -482,6 +484,7 @@
     "ValueSchemaTypes": {
       "description": "schema types that are non-object or complex types",
       "enum": [
+        "arm-id",
         "array",
         "boolean",
         "byte-array",
@@ -519,6 +522,7 @@
       "enum": [
         "any",
         "any-object",
+        "arm-id",
         "array",
         "binary",
         "boolean",
@@ -1244,6 +1248,23 @@
       ]
     },
     "UuidSchema": {
+      "description": "a schema that represents a Uuid value",
+      "type": "object",
+      "properties": {},
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "protocol",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveSchema"
+        }
+      ]
+    },
+    "ArmIdSchema": {
       "description": "a schema that represents a Uuid value",
       "type": "object",
       "properties": {},
