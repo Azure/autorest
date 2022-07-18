@@ -394,6 +394,7 @@ export class ModelerFour {
       ),
     );
   }
+
   processStringSchema(name: string, schema: OpenAPI.Schema): StringSchema {
     return this.codeModel.schemas.add(
       new StringSchema(this.interpret.getName(name, schema), this.interpret.getDescription("", schema), {
@@ -411,6 +412,7 @@ export class ModelerFour {
       }),
     );
   }
+
   processCredentialSchema(name: string, schema: OpenAPI.Schema): CredentialSchema {
     return this.codeModel.schemas.add(
       new CredentialSchema(this.interpret.getName(name, schema), this.interpret.getDescription("", schema), {
