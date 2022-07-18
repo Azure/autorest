@@ -18,6 +18,16 @@ definitions:
       - language
       - protocol
       - type
+  ArmIdSchema:
+    type: object
+    description: a schema that represents a Uuid value
+    additionalProperties: false
+    allOf:
+      - $ref: ./schemas.yaml#/definitions/PrimitiveSchema
+    required:
+      - language
+      - protocol
+      - type
   ArraySchema:
     type: object
     description: a Schema that represents and array of values

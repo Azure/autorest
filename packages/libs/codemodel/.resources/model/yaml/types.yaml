@@ -6,6 +6,7 @@ definitions:
     enum:
       - any
       - any-object
+      - arm-id
       - array
       - binary
       - boolean
@@ -55,6 +56,7 @@ definitions:
     type: string
     description: Schema types that are primitive language values
     enum:
+      - arm-id
       - boolean
       - char
       - credential
@@ -72,6 +74,7 @@ definitions:
     type: string
     description: schema types that are non-object or complex types
     enum:
+      - arm-id
       - array
       - boolean
       - byte-array

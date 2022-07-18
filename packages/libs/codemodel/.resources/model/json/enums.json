@@ -6,6 +6,7 @@
       "enum": [
         "any",
         "any-object",
+        "arm-id",
         "array",
         "binary",
         "boolean",

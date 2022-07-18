@@ -12,6 +12,7 @@
     "PrimitiveSchemaTypes": {
       "description": "Schema types that are primitive language values",
       "enum": [
+        "arm-id",
         "boolean",
         "char",
         "credential",
@@ -31,6 +32,7 @@
     "ValueSchemaTypes": {
       "description": "schema types that are non-object or complex types",
       "enum": [
+        "arm-id",
         "array",
         "boolean",
         "byte-array",
@@ -68,6 +70,7 @@
       "enum": [
         "any",
         "any-object",
+        "arm-id",
         "array",
         "binary",
         "boolean",
