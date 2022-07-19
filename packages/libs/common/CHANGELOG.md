@@ -1,6 +1,11 @@
 # Change Log - @autorest/common
 
-This log was last generated on Tue, 22 Mar 2022 16:33:04 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Jul 2022 15:09:55 GMT and should not be manually modified.
+
+## 1.5.3
+Tue, 19 Jul 2022 15:09:55 GMT
+
+_Version update only_
 
 ## 1.5.2
 Tue, 22 Mar 2022 16:33:04 GMT

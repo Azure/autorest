@@ -2,6 +2,21 @@
   "name": "@azure-tools/extension",
   "entries": [
     {
+      "version": "3.6.0",
+      "tag": "@azure-tools/extension_v3.6.0",
+      "date": "Tue, 19 Jul 2022 15:09:55 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Extracted system-requirements into own package `@autorest/system-requirements`"
+          },
+          {
+            "comment": "Update dependencies(npm)"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.5.0",
       "tag": "@azure-tools/extension_v3.5.0",
       "date": "Tue, 15 Mar 2022 16:00:38 GMT",

@@ -1,6 +1,13 @@
 # Change Log - @autorest/codemodel
 
-This log was last generated on Wed, 16 Mar 2022 19:40:12 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Jul 2022 15:09:55 GMT and should not be manually modified.
+
+## 4.19.0
+Tue, 19 Jul 2022 15:09:55 GMT
+
+### Minor changes
+
+- Added `ArmIdSchema` to represent Azure Resource Manager Resource Identifiers
 
 ## 4.18.2
 Wed, 16 Mar 2022 19:40:12 GMT

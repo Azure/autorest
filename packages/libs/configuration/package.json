@@ -1,6 +1,6 @@
 {
   "name": "@autorest/configuration",
-  "version": "1.9.2",
+  "version": "1.10.0",
   "description": "Autorest configuration",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/Azure/autorest#readme",
   "devDependencies": {
-    "@autorest/test-utils": "~0.5.1",
+    "@autorest/test-utils": "~0.5.2",
     "@types/commonmark": "^0.27.0",
     "@types/jest": "^28.1.0",
     "@types/lodash": "~4.14.168",
@@ -47,9 +47,9 @@
     "typescript": "~4.7.2"
   },
   "dependencies": {
-    "@autorest/common": "~1.5.2",
-    "@azure-tools/datastore": "~4.6.1",
-    "@azure-tools/extension": "~3.5.0",
+    "@autorest/common": "~1.5.3",
+    "@azure-tools/datastore": "~4.7.0",
+    "@azure-tools/extension": "~3.6.0",
     "@azure-tools/uri": "~3.1.1",
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/json": "~1.2.2",

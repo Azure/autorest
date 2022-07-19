@@ -2,6 +2,18 @@
   "name": "@azure-tools/jsonschema",
   "entries": [
     {
+      "version": "1.2.1",
+      "tag": "@azure-tools/jsonschema_v1.2.1",
+      "date": "Tue, 19 Jul 2022 15:09:55 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix: `$ref` contains percent-encoding."
+          }
+        ]
+      }
+    },
+    {
       "version": "1.2.0",
       "tag": "@azure-tools/jsonschema_v1.2.0",
       "date": "Tue, 15 Mar 2022 16:00:38 GMT",

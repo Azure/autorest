@@ -2,6 +2,47 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.24.0",
+      "tag": "@autorest/modelerfour_v4.24.0",
+      "date": "Tue, 19 Jul 2022 15:09:55 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Added support for `format:arm-id` creating a ]`ArmIdSchema` to represent Azure Resource Manager Resource Identifiers"
+          },
+          {
+            "comment": "Added: Include `externalDocs` information in codemodel"
+          },
+          {
+            "comment": "Treat `format: uri` as `format: url`"
+          },
+          {
+            "comment": "Errors emitted in 'modelerfour' step  will have sourcemap."
+          },
+          {
+            "comment": "Improved 'name is empty' error to contain more information."
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/codemodel\" from `~4.18.2` to `~4.19.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/extension-base\" from `~3.4.2` to `~3.5.0`"
+          },
+          {
+            "comment": "Updating dependency \"@autorest/test-utils\" from `~0.5.1` to `~0.5.2`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.6.1` to `~4.7.0`"
+          },
+          {
+            "comment": "Updating dependency \"@azure-tools/openapi\" from `~3.3.0` to `~3.4.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.23.6",
       "tag": "@autorest/modelerfour_v4.23.6",
       "date": "Fri, 27 May 2022 15:55:11 GMT",

@@ -1,6 +1,18 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Thu, 31 Mar 2022 16:50:54 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Jul 2022 15:09:55 GMT and should not be manually modified.
+
+## 1.10.0
+Tue, 19 Jul 2022 15:09:55 GMT
+
+### Minor changes
+
+- make Go v4 code generator the default for Go
+
+### Patches
+
+- **Bump** @autorest/java default version to 4.1.0
+- Fix loading markdown config starting with codeblock
 
 ## 1.9.2
 Thu, 31 Mar 2022 16:50:54 GMT

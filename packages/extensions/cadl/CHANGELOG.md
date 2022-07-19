@@ -1,6 +1,11 @@
 # Change Log - @autorest/cadl
 
-This log was last generated on Thu, 31 Mar 2022 16:50:54 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Jul 2022 15:09:55 GMT and should not be manually modified.
+
+## 0.2.1
+Tue, 19 Jul 2022 15:09:55 GMT
+
+_Version update only_
 
 ## 0.2.0
 Thu, 31 Mar 2022 16:50:54 GMT
