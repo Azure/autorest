@@ -2,6 +2,18 @@
   "name": "@azure-tools/deduplication",
   "entries": [
     {
+      "version": "3.1.5",
+      "tag": "@azure-tools/deduplication_v3.1.5",
+      "date": "Tue, 19 Jul 2022 15:09:55 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@azure-tools/datastore\" from `~4.6.1` to `~4.7.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.1.4",
       "tag": "@azure-tools/deduplication_v3.1.4",
       "date": "Wed, 12 Jan 2022 22:31:57 GMT",

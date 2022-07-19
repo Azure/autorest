@@ -1,6 +1,17 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Fri, 27 May 2022 15:55:11 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Jul 2022 15:09:55 GMT and should not be manually modified.
+
+## 4.24.0
+Tue, 19 Jul 2022 15:09:55 GMT
+
+### Minor changes
+
+- Added support for `format:arm-id` creating a ]`ArmIdSchema` to represent Azure Resource Manager Resource Identifiers
+- Added: Include `externalDocs` information in codemodel
+- Treat `format: uri` as `format: url`
+- Errors emitted in 'modelerfour' step  will have sourcemap.
+- Improved 'name is empty' error to contain more information.
 
 ## 4.23.6
 Fri, 27 May 2022 15:55:11 GMT

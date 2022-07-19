@@ -1,6 +1,17 @@
 # Change Log - @azure-tools/openapi
 
-This log was last generated on Tue, 15 Mar 2022 16:00:38 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Jul 2022 15:09:55 GMT and should not be manually modified.
+
+## 3.4.0
+Tue, 19 Jul 2022 15:09:55 GMT
+
+### Minor changes
+
+- Added `arm-id` to list of known formats
+
+### Patches
+
+- Improve InvalidRefError message
 
 ## 3.3.0
 Tue, 15 Mar 2022 16:00:38 GMT
