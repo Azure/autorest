@@ -95,11 +95,11 @@ declare-directive:
     (() => {
       switch ($context.from) {
         case "openapi-document":
-          return { from: "openapi-document", where: `$.paths.*[?(@.operationId =~ ${$})]` };
+          return { from: "openapi-document", where: `$.paths.*[?(@.operationId.match(${$}))]` };
 
         case "swagger-document":
         default:
-          return { from: "swagger-document", where: `$.paths.*[?(@.operationId =~ ${$})]` };
+          return { from: "swagger-document", where: `$.paths.*[?(@.operationId.match(${$}))]` };
       }
     })()
   where-model: >-
