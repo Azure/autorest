@@ -20,11 +20,11 @@ directive:
 Examples:
 
 ```yaml
-  - where-operation: MyOperation
-    transform: $["x-marked"] = true
+- where-operation: MyOperation
+  transform: $["x-marked"] = true
 
-  - where-operation-match: /mygroup_.*/i
-    transform: $["x-marked"] = true
+- where-operation-match: /mygroup_.*/i
+  transform: $["x-marked"] = true
 ```
 
 ### Selecting model
