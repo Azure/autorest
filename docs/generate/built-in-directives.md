@@ -39,7 +39,7 @@ directive:
 
 ```yaml
 directive:
-  - remove-operation: <operationId>  | <regex>
+  - remove-operation: <operationId>
 ```
 
 Examples:

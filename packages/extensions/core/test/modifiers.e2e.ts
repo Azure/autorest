@@ -97,6 +97,17 @@ describe("Modifiers", () => {
     expect(findOperation(code, "Cowbell_Get")).toBe(undefined);
   });
 
+  it("remove an operation using a regex", async () => {
+    const code = await generate({
+      directive: {
+        "remove-operation-match": "/^cowbell_g.*/i",
+      },
+    });
+
+    expect(findOperation(code, "Cowbell_Get")).toBe(undefined);
+    expect(findOperation(code, "Cowbell_Add")).toBeDefined();
+  });
+
   it("rename an operation", async () => {
     const code = await generate({
       directive: {

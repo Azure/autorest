@@ -1,6 +1,13 @@
 # Change Log - @autorest/configuration
 
-This log was last generated on Tue, 19 Jul 2022 15:09:55 GMT and should not be manually modified.
+This log was last generated on Wed, 27 Jul 2022 17:44:10 GMT and should not be manually modified.
+
+## 1.10.1
+Wed, 27 Jul 2022 17:44:10 GMT
+
+### Patches
+
+- Fix `where-operation-match` built-in directive
 
 ## 1.10.0
 Tue, 19 Jul 2022 15:09:55 GMT
