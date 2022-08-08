@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/modelerfour",
+      "comment": "Fix `format: arm-id` wasn't doing anything",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/modelerfour"
+}

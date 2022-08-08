@@ -1742,6 +1742,11 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/AnyObjectSchema'
+      armIds:
+        type: array
+        description: an URI of some kind
+        items:
+          $ref: '#/definitions/ArmIdSchema'
       arrays:
         type: array
         description: a collection of items

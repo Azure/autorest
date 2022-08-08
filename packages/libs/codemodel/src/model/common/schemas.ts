@@ -14,7 +14,7 @@ import { NumberSchema } from "./schemas/number";
 import { ObjectSchema, GroupSchema } from "./schemas/object";
 import { BooleanSchema, CharSchema } from "./schemas/primitive";
 import { OrSchema, XorSchema } from "./schemas/relationship";
-import { StringSchema, UuidSchema, UriSchema, CredentialSchema, ODataQuerySchema } from "./schemas/string";
+import { StringSchema, UuidSchema, UriSchema, CredentialSchema, ODataQuerySchema, ArmIdSchema } from "./schemas/string";
 import { UnixTimeSchema, DateSchema, DateTimeSchema, DurationSchema, TimeSchema } from "./schemas/time";
 
 export { SchemaUsage, SchemaContext } from "./schemas/usage";
@@ -68,6 +68,9 @@ export interface Schemas {
 
   /** an URI of some kind */
   uris?: Array<UriSchema>;
+
+  /** an URI of some kind */
+  armIds?: ArmIdSchema[];
 
   /** a password or credential  */
   credentials?: Array<CredentialSchema>;

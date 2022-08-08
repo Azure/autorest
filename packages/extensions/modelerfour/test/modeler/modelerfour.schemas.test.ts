@@ -1,5 +1,5 @@
 import assert from "assert";
-import { ChoiceSchema, ConstantSchema, SealedChoiceSchema } from "@autorest/codemodel";
+import { ArmIdSchema, ChoiceSchema, ConstantSchema, SealedChoiceSchema, UriSchema } from "@autorest/codemodel";
 import { JsonType, OpenAPI3Document } from "@azure-tools/openapi";
 import { ModelerFourOptions } from "modeler/modelerfour-options";
 import { addSchema, assertSchema, createTestSpec, findByName } from "../utils";
@@ -472,6 +472,53 @@ describe("Modelerfour.Schemas", () => {
       const nestedBarProp = findByName("nestedBar", foo?.properties);
       expect(nestedBarProp).toBeDefined();
       expect(nestedBarProp?.schema).toEqual(bar);
+    });
+  });
+
+  describe("string formats", () => {
+    it("format: arm-id create ArmIdSchema", async () => {
+      const spec = createTestSpec();
+
+      addSchema(spec, "Foo", {
+        type: "string",
+        format: "arm-id",
+      });
+
+      const codeModel = await runModeler(spec);
+
+      const schema = codeModel.schemas.armIds?.[0];
+      expect(schema).toBeDefined();
+      expect(schema).toBeInstanceOf(ArmIdSchema);
+    });
+
+    it("format: url create UriSchema", async () => {
+      const spec = createTestSpec();
+
+      addSchema(spec, "Foo", {
+        type: "string",
+        format: "url",
+      });
+
+      const codeModel = await runModeler(spec);
+
+      const schema = codeModel.schemas.uris?.[0];
+      expect(schema).toBeDefined();
+      expect(schema).toBeInstanceOf(UriSchema);
+    });
+
+    it("format: uri create UriSchema", async () => {
+      const spec = createTestSpec();
+
+      addSchema(spec, "Foo", {
+        type: "string",
+        format: "uri",
+      });
+
+      const codeModel = await runModeler(spec);
+
+      const schema = codeModel.schemas.uris?.[0];
+      expect(schema).toBeDefined();
+      expect(schema).toBeInstanceOf(UriSchema);
     });
   });
 });

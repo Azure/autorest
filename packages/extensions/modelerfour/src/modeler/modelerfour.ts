@@ -57,6 +57,7 @@ import {
   TimeSchema,
   HttpMultipartRequest,
   AnyObjectSchema,
+  ArmIdSchema,
 } from "@autorest/codemodel";
 import { Session, Channel } from "@autorest/extension-base";
 import { fail, minimum, pascalCase, KnownMediaType, shadowPosition } from "@azure-tools/codegen";
@@ -447,6 +448,22 @@ export class ModelerFour {
       }),
     );
   }
+
+  processArmId(name: string, schema: OpenAPI.Schema): ArmIdSchema {
+    return this.codeModel.schemas.add(
+      new ArmIdSchema(this.interpret.getName(name, schema), this.interpret.getDescription("", schema), {
+        extensions: this.interpret.getExtensionProperties(schema),
+        summary: schema.title,
+        defaultValue: schema.default,
+        deprecated: this.interpret.getDeprecation(schema),
+        apiVersions: this.interpret.getApiVersions(schema),
+        example: this.interpret.getExample(schema),
+        externalDocs: this.interpret.getExternalDocs(schema),
+        serialization: this.interpret.getSerialization(schema),
+      }),
+    );
+  }
+
   processUuidSchema(name: string, schema: OpenAPI.Schema): UuidSchema {
     return this.codeModel.schemas.add(
       new UuidSchema(this.interpret.getName(name, schema), this.interpret.getDescription("", schema), {
@@ -1278,6 +1295,8 @@ export class ModelerFour {
           case StringFormat.Url:
           case StringFormat.Uri:
             return this.processUriSchema(name, schema);
+          case StringFormat.ArmId:
+            return this.processArmId(name, schema);
 
           case StringFormat.Password:
             return this.processCredentialSchema(name, schema);

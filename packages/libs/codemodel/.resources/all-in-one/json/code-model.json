@@ -2139,6 +2139,13 @@
             "$ref": "#/definitions/UriSchema"
           }
         },
+        "armIds": {
+          "description": "an URI of some kind",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArmIdSchema"
+          }
+        },
         "credentials": {
           "description": "a password or credential",
           "type": "array",

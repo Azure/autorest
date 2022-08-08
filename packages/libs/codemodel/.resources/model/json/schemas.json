@@ -958,6 +958,13 @@
             "$ref": "./schemas.json#/definitions/UriSchema"
           }
         },
+        "armIds": {
+          "description": "an URI of some kind",
+          "type": "array",
+          "items": {
+            "$ref": "./schemas.json#/definitions/ArmIdSchema"
+          }
+        },
         "credentials": {
           "description": "a password or credential",
           "type": "array",
