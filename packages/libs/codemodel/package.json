@@ -1,6 +1,6 @@
 {
   "name": "@autorest/codemodel",
-  "version": "4.19.0",
+  "version": "4.19.1",
   "description": "AutoRest code model library",
   "directories": {
     "doc": "docs"

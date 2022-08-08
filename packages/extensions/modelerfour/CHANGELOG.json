@@ -2,6 +2,23 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.24.1",
+      "tag": "@autorest/modelerfour_v4.24.1",
+      "date": "Mon, 08 Aug 2022 16:48:55 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix `format: arm-id` wasn't doing anything"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/codemodel\" from `~4.19.0` to `~4.19.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.24.0",
       "tag": "@autorest/modelerfour_v4.24.0",
       "date": "Tue, 19 Jul 2022 15:09:55 GMT",
