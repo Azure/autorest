@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/codemodel",
+      "comment": "Missing `armIds` in schemas",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/codemodel"
+}

@@ -515,6 +515,11 @@ definitions:
         type: array
         items:
           $ref: ./schemas.yaml#/definitions/AnyObjectSchema
+      armIds:
+        type: array
+        description: an URI of some kind
+        items:
+          $ref: ./schemas.yaml#/definitions/ArmIdSchema
       arrays:
         type: array
         description: a collection of items
