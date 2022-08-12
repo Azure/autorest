@@ -2,6 +2,23 @@
   "name": "@autorest/modelerfour",
   "entries": [
     {
+      "version": "4.24.2",
+      "tag": "@autorest/modelerfour_v4.24.2",
+      "date": "Fri, 12 Aug 2022 19:53:22 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @autorest/codemodel with missing `ArmIdSchema` from yaml schema"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/codemodel\" from `~4.19.1` to `~4.19.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.24.1",
       "tag": "@autorest/modelerfour_v4.24.1",
       "date": "Mon, 08 Aug 2022 16:48:55 GMT",

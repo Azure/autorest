@@ -1,6 +1,13 @@
 # Change Log - @autorest/codemodel
 
-This log was last generated on Mon, 08 Aug 2022 16:48:55 GMT and should not be manually modified.
+This log was last generated on Fri, 12 Aug 2022 19:53:22 GMT and should not be manually modified.
+
+## 4.19.2
+Fri, 12 Aug 2022 19:53:22 GMT
+
+### Patches
+
+- Fix: missing `ArmIdSchema` from yaml schema
 
 ## 4.19.1
 Mon, 08 Aug 2022 16:48:55 GMT

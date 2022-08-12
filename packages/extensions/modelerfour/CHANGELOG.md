@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Mon, 08 Aug 2022 16:48:55 GMT and should not be manually modified.
+This log was last generated on Fri, 12 Aug 2022 19:53:22 GMT and should not be manually modified.
+
+## 4.24.2
+Fri, 12 Aug 2022 19:53:22 GMT
+
+### Patches
+
+- Bump @autorest/codemodel with missing `ArmIdSchema` from yaml schema
 
 ## 4.24.1
 Mon, 08 Aug 2022 16:48:55 GMT
