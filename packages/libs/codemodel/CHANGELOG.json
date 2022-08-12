@@ -2,6 +2,18 @@
   "name": "@autorest/codemodel",
   "entries": [
     {
+      "version": "4.19.2",
+      "tag": "@autorest/codemodel_v4.19.2",
+      "date": "Fri, 12 Aug 2022 19:53:22 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix: missing `ArmIdSchema` from yaml schema"
+          }
+        ]
+      }
+    },
+    {
       "version": "4.19.1",
       "tag": "@autorest/codemodel_v4.19.1",
       "date": "Mon, 08 Aug 2022 16:48:55 GMT",
