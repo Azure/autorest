@@ -2,6 +2,18 @@
   "name": "@autorest/common",
   "entries": [
     {
+      "version": "1.5.4",
+      "tag": "@autorest/common_v1.5.4",
+      "date": "Fri, 19 Aug 2022 16:52:58 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix suppression not working"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.5.3",
       "tag": "@autorest/common_v1.5.3",
       "date": "Tue, 19 Jul 2022 15:09:55 GMT",

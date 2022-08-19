@@ -2,6 +2,23 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.9.2",
+      "tag": "@autorest/core_v3.9.2",
+      "date": "Fri, 19 Aug 2022 16:52:58 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix suppression not working"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@autorest/common\" from `~1.5.3` to `~1.5.4`"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.9.1",
       "tag": "@autorest/core_v3.9.1",
       "date": "Wed, 27 Jul 2022 17:44:10 GMT",

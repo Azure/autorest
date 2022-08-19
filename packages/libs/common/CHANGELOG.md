@@ -1,6 +1,13 @@
 # Change Log - @autorest/common
 
-This log was last generated on Tue, 19 Jul 2022 15:09:55 GMT and should not be manually modified.
+This log was last generated on Fri, 19 Aug 2022 16:52:58 GMT and should not be manually modified.
+
+## 1.5.4
+Fri, 19 Aug 2022 16:52:58 GMT
+
+### Patches
+
+- Fix suppression not working
 
 ## 1.5.3
 Tue, 19 Jul 2022 15:09:55 GMT
