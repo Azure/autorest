@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/core",
+      "comment": "Fix suppression not working",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/core"
+}

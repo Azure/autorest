@@ -1,7 +1,7 @@
 {
   "name": "@autorest/core",
   "version": "3.9.1",
-  "description": "AutoRest core module2",
+  "description": "AutoRest core module",
   "engines": {
     "node": ">=12.0.0"
   },
