@@ -80,7 +80,6 @@ export class FilterLogger implements LoggerProcessor {
     const where = arrayify(supression.where);
     const matchesWhere = where.length === 0 || (path && where.find((w) => matches(w, path))) || false;
 
-    console.log("Match source", matchesFrom, matchesWhere, Boolean(matchesFrom && matchesWhere));
     return Boolean(matchesFrom && matchesWhere);
   }
 }
