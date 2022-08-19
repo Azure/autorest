@@ -366,6 +366,10 @@ The OpenAPI definitions for management plane code also live in the `resource-man
 
 Directives are used to change the code generated from your OpenAPI definition. For example, if you want to change the name of a parameter in an operation without changing the swagger. See [our directives section][directives] if this is something you're interested in.
 
+## Warning suppressions
+
+[Suppression documentation](./suppress-warnings.md)
+
 ## Generating Multi API Code
 
 Only Python supports generating multiapi code, see [the Python docs][python_multiapi] for how to generate.
