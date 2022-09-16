@@ -320,7 +320,7 @@ directive:
   from: swagger-document
   where: "$.definitions.VM.properties.id"
   transform: >
-    $["description"] = $["description].replace("'id'", "'identifier'");
+    $["description"] = $["description"].replace("'id'", "'identifier'");
 ```
 
 For language-specific directives, see the ones for:
