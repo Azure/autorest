@@ -3,6 +3,7 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
+import { ok } from "assert";
 import { Parameter, SchemaResponse, ConstantSchema, SealedChoiceSchema } from "@autorest/codemodel";
 import {
   addOperation,
@@ -937,6 +938,67 @@ describe("Modeler", () => {
       const value = codeModel.operationGroups[0]?.operations[0]?.responses?.[0];
       expect(value).not.toBeNull();
       expect(value?.language.default.description).toEqual("Foo bar test description");
+    });
+  });
+
+  describe("$host parameter", () => {
+    it("using {nextLink} path doesn't create a duplicate host", async () => {
+      const spec = createTestSpec();
+      const servers = [{ url: "https://example.com/" }];
+      addOperation(spec, "/list", {
+        get: {
+          servers,
+          operationId: "test",
+          description: "Post it.",
+          responses: {
+            "200": {
+              content: {
+                "application/json": {
+                  schema: {
+                    type: "string",
+                    nullable: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      });
+
+      addOperation(spec, "{nextLink}", {
+        post: {
+          servers,
+          operationId: "test",
+          description: "Post it.",
+          parameters: [
+            {
+              name: "nextLink",
+              in: "path",
+              required: true,
+              schema: { type: "string" },
+              "x-ms-skip-url-encoding": true,
+            },
+          ],
+          responses: {
+            "200": {
+              content: {
+                "application/json": {
+                  schema: {
+                    type: "string",
+                    nullable: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      });
+
+      const codeModel = await runModeler(spec);
+
+      ok(codeModel.globalParameters);
+      const hostParameters = codeModel.globalParameters.filter((x) => x.language.default.name === "$host");
+      expect(hostParameters).toHaveLength(1);
     });
   });
 });

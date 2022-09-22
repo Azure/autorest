@@ -1738,8 +1738,7 @@ export class ModelerFour {
           const server = servers[0];
           // trim extraneous slash . if the path starts with `/` or start with a path parameter.
           const uri =
-            server.url.endsWith("/") && (path[0] === "0" || path[0] === "{") ? server.url.slice(0, -1) : server.url;
-
+            server.url.endsWith("/") && (path[0] === "/" || path[0] === "{") ? server.url.slice(0, -1) : server.url;
           if (server.variables === undefined || Object.keys(server.variables).length === 0) {
             // scenario 1 : single static value
 
