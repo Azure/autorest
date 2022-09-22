@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Fri, 12 Aug 2022 19:53:22 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Sep 2022 15:51:02 GMT and should not be manually modified.
+
+## 4.24.3
+Thu, 22 Sep 2022 15:51:02 GMT
+
+### Patches
+
+- Fix duplicate $host when using {nextLink} param
 
 ## 4.24.2
 Fri, 12 Aug 2022 19:53:22 GMT
