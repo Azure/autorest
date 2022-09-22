@@ -1736,13 +1736,13 @@ export class ModelerFour {
       case 1:
         {
           const server = servers[0];
-          // trim extraneous slash .
-          const uri = server.url.endsWith("/") && path.startsWith("/") ? server.url.slice(0, -1) : server.url;
-
+          // trim extraneous slash . if the path starts with `/` or start with a path parameter.
+          const uri =
+            server.url.endsWith("/") && (path[0] === "/" || path[0] === "{") ? server.url.slice(0, -1) : server.url;
           if (server.variables === undefined || Object.keys(server.variables).length === 0) {
             // scenario 1 : single static value
 
-            // check if we have the $host parameter foor this uri yet.
+            // check if we have the $host parameter for this uri yet.
             operation.addParameter(
               this.codeModel.addGlobalParameter(
                 (each) => each.language.default.name === "$host" && each.clientDefaultValue === uri,

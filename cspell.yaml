@@ -1,0 +1,9 @@
+version: "0.2"
+language: en
+allowCompoundWords: true
+dictionaries:
+  - node
+  - typescript
+words:
+  - autorest
+  - codemodel
