@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import fs from "fs";
 import path from "path";
-import Parser from "tree-sitter";
 import TypeScript from "tree-sitter-typescript/typescript";
+import Parser from "web-tree-sitter";
 import {
   CompareResult,
   FileDetails,
@@ -15,8 +15,14 @@ import {
   compareText,
 } from "../comparers";
 
-const parser = new Parser();
-parser.setLanguage(TypeScript);
+let parser: Parser;
+function getParser() {
+  if (parser === undefined) {
+    const parser = new Parser();
+    parser.setLanguage(TypeScript);
+  }
+  return parser;
+}
 
 export type ParameterDetails = {
   name: string;
@@ -90,7 +96,7 @@ export type SourceDetails = {
 
 export function parseFile(filePath: string): Parser.Tree {
   const contents = fs.readFileSync(filePath).toString();
-  return parser.parse(contents);
+  return getParser().parse(contents);
 }
 
 function extractField(fieldNode: Parser.SyntaxNode): FieldDetails {

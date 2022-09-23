@@ -2,6 +2,7 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 import "source-map-support/register";
+import Parser from "web-tree-sitter";
 
 import { getOperationFromArgs } from "./cli";
 import { runOperation } from "./operations";
@@ -9,6 +10,7 @@ import { AutoRestLanguages } from "./runner";
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
+  await Parser.init();
   const languageArgsString = ["", ...AutoRestLanguages].join("\n                                               - ");
 
   // First, check for the --help parameter, or no parameters at all

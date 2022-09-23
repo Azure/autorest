@@ -142,13 +142,17 @@ export function extractSourceDetails(parseTree: Parser.Tree): SourceDetails {
     classes: parseTree.rootNode.descendantsOfType("class_definition").map(extractClass),
   };
 }
-
-const parser = new Parser();
-parser.setLanguage(Python);
-
+let parser: Parser;
+function getParser() {
+  if (parser === undefined) {
+    const parser = new Parser();
+    parser.setLanguage(Python);
+  }
+  return parser;
+}
 export function parseFile(filePath: string): Parser.Tree {
   const contents = fs.readFileSync(filePath).toString().replace(/\r\n/g, "\n");
-  return parser.parse(contents);
+  return getParser().parse(contents);
 }
 
 export function compareFile(oldFile: FileDetails, newFile: FileDetails): CompareResult {
