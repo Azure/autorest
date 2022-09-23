@@ -82,7 +82,6 @@ specifiers:
   semver: ^7.3.5
   source-map: 0.7.3
   source-map-support: ^0.5.19
-  tree-sitter: '^0.20.0 '
   tree-sitter-python: 0.19.0
   tree-sitter-typescript: ~0.20.1
   ts-jest: ^28.0.3
@@ -94,6 +93,7 @@ specifiers:
   untildify: ^4.0.0
   vscode-jsonrpc: ^3.5.0
   vscode-languageserver: 3.5.1
+  web-tree-sitter: ^0.20.7
   webpack: ~5.40.0
   webpack-cli: ~4.7.2
   webpack-node-externals: ~3.0.0
@@ -184,7 +184,6 @@ dependencies:
   semver: 7.3.7
   source-map: 0.7.3
   source-map-support: 0.5.21
-  tree-sitter: 0.20.0
   tree-sitter-python: 0.19.0
   tree-sitter-typescript: 0.20.1
   ts-jest: 28.0.4_jest@28.1.0+typescript@4.7.2
@@ -196,6 +195,7 @@ dependencies:
   untildify: 4.0.0
   vscode-jsonrpc: 3.6.2
   vscode-languageserver: 3.5.1
+  web-tree-sitter: 0.20.7
   webpack: 5.40.0_webpack-cli@4.7.2
   webpack-cli: 4.7.2_webpack@5.40.0
   webpack-node-externals: 3.0.0
@@ -6434,7 +6434,7 @@ packages:
     dev: false
 
   /source-map/0.5.7:
-    resolution: {integrity: sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=}
+    resolution: {integrity: sha512-LbrmJOMUSdEVxIKvdcJzQC+nQhe8FUZQTXQy6+I75skNgn3OoQ0DZA8YnFa7gp8tqtL3KPf1kmo0R5DoApeSGQ==}
     engines: {node: '>=0.10.0'}
     dev: false
 
@@ -7185,7 +7185,7 @@ packages:
     dev: false
 
   /vscode-jsonrpc/3.5.0:
-    resolution: {integrity: sha1-hyOdnhZrLXNSJFuKgTWXgEwdY6o=}
+    resolution: {integrity: sha512-LeE9LS1IOIRDZy5Xugrbk2tKeMa64vkRODrXPZbwyn2l/Q0e/jyYq8ze/Lo96sjOFiRe3HHbTVN39Ta8KN2RpA==}
     engines: {node: '>=4.0.0 || >=6.0.0'}
     dev: false
 
@@ -7261,6 +7261,10 @@ packages:
   /web-streams-polyfill/3.2.1:
     resolution: {integrity: sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==}
     engines: {node: '>= 8'}
+    dev: false
+
+  /web-tree-sitter/0.20.7:
+    resolution: {integrity: sha512-flC9JJmTII9uAeeYpWF8hxDJ7bfY+leldQryetll8Nv4WgI+MXc6h7TiyAZASWl9uC9TvmfdgOjZn1DAQecb3A==}
     dev: false
 
   /webpack-cli/4.7.2_webpack@5.40.0:
@@ -7530,7 +7534,7 @@ packages:
     dev: false
 
   file:projects/autorest.tgz_ts-node@9.1.1:
-    resolution: {integrity: sha512-j9rQWUOKdNCZL1p/zlkZuTspQq4vx1pIRsz2VbkhaVv4JQVq5LXXzVluMtCLSjljFMu5AC504cEPMuL6t6abJw==, tarball: file:projects/autorest.tgz}
+    resolution: {integrity: sha512-d8L0UfNkmBO2GwN5PLWsKRKOTHGBUx+W+0gaptChcN0FQ2M1MtM0WzCfH4hWEfb3SYHOc+AW0ZLkddrmM6hyew==, tarball: file:projects/autorest.tgz}
     id: file:projects/autorest.tgz
     name: '@rush-temp/autorest'
     version: 0.0.0
@@ -7586,7 +7590,7 @@ packages:
     dev: false
 
   file:projects/cadl.tgz_ts-node@9.1.1+webpack@5.40.0:
-    resolution: {integrity: sha512-JVm9aV1AvspfcIx+go4abcYgb8/Lu7r3ujzt44L2vubjDko4VNaOh+MU+PYtkcEAZb1cQaTnk4iuACAT5CyEKg==, tarball: file:projects/cadl.tgz}
+    resolution: {integrity: sha512-Wv48fcc64stFA460C7HOdy8O0YzbD6yGFqcN5rA+Hmq06JtunusLJ0najAx0jMyWcp8UacmYxS8JDpMcLIma4A==, tarball: file:projects/cadl.tgz}
     id: file:projects/cadl.tgz
     name: '@rush-temp/cadl'
     version: 0.0.0
@@ -7694,7 +7698,7 @@ packages:
     dev: false
 
   file:projects/common.tgz_prettier@2.6.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-YZZmicGEe0GU+rYmrVOnePUMKEIjyaWsSQMW6sJpIyYP55/RzZOj53sRJsGOJrguzN9WkPaTiEbAUi8UAL2YdQ==, tarball: file:projects/common.tgz}
+    resolution: {integrity: sha512-1vcwkfYek5JHuSExfEXaL4V4LbKP/E2g1PiDH3R6aPXMKIPJOJpohhZd9NFEbIeNNClCqyXqO2uwrXYIWQBadA==, tarball: file:projects/common.tgz}
     id: file:projects/common.tgz
     name: '@rush-temp/common'
     version: 0.0.0
@@ -7725,7 +7729,7 @@ packages:
     dev: false
 
   file:projects/compare.tgz_prettier@2.6.2:
-    resolution: {integrity: sha512-hFU21/E/LCGl9/KSQh7jsVR4MqaulB51l4JAGuVeplAGXJwcA0mXhfqmwZRzOcYlZF7nG8FgTZIpjgez449o4w==, tarball: file:projects/compare.tgz}
+    resolution: {integrity: sha512-RgkYG09TJ98Mh8kCQ90s9+u0PzMy3Uocnrh4VES6MArZYMaGCWpljZNjDuktBwqaA9bgo2Hrn+0ZSIOM0rS3eg==, tarball: file:projects/compare.tgz}
     id: file:projects/compare.tgz
     name: '@rush-temp/compare'
     version: 0.0.0
@@ -7754,6 +7758,7 @@ packages:
       ts-jest: 28.0.4_jest@28.1.0+typescript@4.7.2
       ts-node: 9.1.1_typescript@4.7.2
       typescript: 4.7.2
+      web-tree-sitter: 0.20.7
     transitivePeerDependencies:
       - '@babel/core'
       - babel-jest
@@ -7765,7 +7770,7 @@ packages:
     dev: false
 
   file:projects/configuration.tgz_prettier@2.6.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-vHkArWvrECvPUbt0FTsoT5+Z0n+TGIL9LOHFokn86b0dauXZ+NO+jC8oC624EvfHqsxoZZeIwRffWivOnOZ8PA==, tarball: file:projects/configuration.tgz}
+    resolution: {integrity: sha512-8E8FsCcdPVf3vrHiWF5E7tYUG9Qo1KESpTfz2G1PO8iPWc4butVM3SpiFwq7+OG8iQNl07xvTqKW3vzPsSSb4Q==, tarball: file:projects/configuration.tgz}
     id: file:projects/configuration.tgz
     name: '@rush-temp/configuration'
     version: 0.0.0
@@ -7803,7 +7808,7 @@ packages:
     dev: false
 
   file:projects/core.tgz_ts-node@9.1.1:
-    resolution: {integrity: sha512-RVE9JyydW3Ns5PYMT4mz1+BureL9UVRZJZW9iDDz7oXF/zwk027yXmImmc+Il2TjLE6sJY8vTKFhKPGldwI6Xw==, tarball: file:projects/core.tgz}
+    resolution: {integrity: sha512-VD2RjmOA9KbSG41VXbH+g+yZ/6di8ZeK+ZAb/NBtHK8tjr3wH03vKIRj6GgSRw1T+VrGzUzc7g4fz5dwmd9DLg==, tarball: file:projects/core.tgz}
     id: file:projects/core.tgz
     name: '@rush-temp/core'
     version: 0.0.0
@@ -7904,7 +7909,7 @@ packages:
     dev: false
 
   file:projects/deduplication.tgz_prettier@2.6.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-slTvZ9X6jQZ7aqXd9MDFJwx2NFl+MQEthmZDk9+XycrPU7xtZmVYp+Izq2eV+cWhvczv8gbQZiOYGkKp6IqhbQ==, tarball: file:projects/deduplication.tgz}
+    resolution: {integrity: sha512-V4Mu0RGTHZNyK02Y72ku8BvuZNsk6vtXAHbmRDq+KIElnQEJzxwJnNGUjsbkyfo0UcJroroChbz7VtJ5lSbvuQ==, tarball: file:projects/deduplication.tgz}
     id: file:projects/deduplication.tgz
     name: '@rush-temp/deduplication'
     version: 0.0.0
@@ -8101,7 +8106,7 @@ packages:
     dev: false
 
   file:projects/modelerfour.tgz_ts-node@9.1.1:
-    resolution: {integrity: sha512-TqCn5WW9G33e/6vPUfKUC6dJf3EVXfgQ3ZXjCEV+8ctC/TTZG032wnYB5gDUWKXCbHyZnqFK7rEYW+X1SxlZag==, tarball: file:projects/modelerfour.tgz}
+    resolution: {integrity: sha512-poG89ehp5WeKN4a7wY8tK6Y9PKLTTLyhdW+xqciEThIVGynIr7tfI56BAKN+TPXv79DCIFj2T+SbM8aoInLQxg==, tarball: file:projects/modelerfour.tgz}
     id: file:projects/modelerfour.tgz
     name: '@rush-temp/modelerfour'
     version: 0.0.0
@@ -8150,7 +8155,7 @@ packages:
     dev: false
 
   file:projects/oai2-to-oai3.tgz_prettier@2.6.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-JO1KbjcIb+FN/xBC8E+CoIPHLCpvNPHqMBlw/JbezagokbRgVXpxTYD8yxZVbBUv4JSksTMfg1OlfGCVItRFLQ==, tarball: file:projects/oai2-to-oai3.tgz}
+    resolution: {integrity: sha512-6wNAM1DEyLFxAt3h2ZQTMwRWz1WgbZINNw4uUre6wkrwVvD9qEbuFOq+FH1byAmidtmVaGbdG0k1iaO68gHcuA==, tarball: file:projects/oai2-to-oai3.tgz}
     id: file:projects/oai2-to-oai3.tgz
     name: '@rush-temp/oai2-to-oai3'
     version: 0.0.0
@@ -8184,7 +8189,7 @@ packages:
     dev: false
 
   file:projects/openapi.tgz_prettier@2.6.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-zKZex4MxFGd1I+BYWJG647akAJNqZFbkHT51BSDBOlydXbiD+bUhCwVChNqp80kiEVeIvf+frK3pP5EGLTNLrQ==, tarball: file:projects/openapi.tgz}
+    resolution: {integrity: sha512-iNsJKgbcGztJR1eljfnA3UgSjae5bcqchbBpf8/+Z5Nrbbc7vvTxtBQoEhTPvV0SCwygAgS1JVg1JYFkNgpKfw==, tarball: file:projects/openapi.tgz}
     id: file:projects/openapi.tgz
     name: '@rush-temp/openapi'
     version: 0.0.0
@@ -8250,7 +8255,7 @@ packages:
     dev: false
 
   file:projects/test-public-packages.tgz_prettier@2.6.2:
-    resolution: {integrity: sha512-AswZmwyle7X5+PypxwHMA7d52F+b4Cs/MOrZW3nunaLfHGnm8Sa1W8NM5oR7e+vopk8sjgkqZrZacTLXWUOegw==, tarball: file:projects/test-public-packages.tgz}
+    resolution: {integrity: sha512-rMnGHFt1G8ILloaDiyR8HtmEuCFt0dg7fBE0/uLMITcKis9o49HEjIekErvbGO30mfSH7XoSU55jIrgMODl7FA==, tarball: file:projects/test-public-packages.tgz}
     id: file:projects/test-public-packages.tgz
     name: '@rush-temp/test-public-packages'
     version: 0.0.0
@@ -8270,7 +8275,7 @@ packages:
     dev: false
 
   file:projects/test-utils.tgz_4fc18e7d8b9820002d66c5f5513fa76c:
-    resolution: {integrity: sha512-iD++jGJO9DnBdbGu/sTQ9xUkP390zXWJfcJq3Q3oskooy5Mxcu+G6RkWyrvShPtDBTSBe+4+Ay4VUycrNj4uHA==, tarball: file:projects/test-utils.tgz}
+    resolution: {integrity: sha512-w6XQKYXmb8uK5LudfLz1VVpoAN6iqeGSTEUx9rtRhIQ4eDkgKPV9gfrKxpV1StHl2pyAuYFnbNQGPTGML7gtiA==, tarball: file:projects/test-utils.tgz}
     id: file:projects/test-utils.tgz
     name: '@rush-temp/test-utils'
     version: 0.0.0
