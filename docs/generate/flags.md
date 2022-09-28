@@ -68,7 +68,7 @@ Those are flags that affect autorest only
 | Flag                          | Description                                                                                                                      |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | `--use`                       | Specify an extension to load and use. Format: `--use=<packagename>[@<version>]` (e.g. `--use=@autorest/modelerfour@~4.19.0`)     |
-| `--output-converted-oai3`     | If enabled and the input-files are `swager 2.0` this will output the resulting OpenAPI3.0 converted files to the `output-folder` |
+| `--output-converted-oai3`     | If enabled and the input-files are `swagger 2.0` this will output the resulting OpenAPI3.0 converted files to the `output-folder` |
 | `--skip-semantics-validation` | Disable the semantic validator plugin.                                                                                           |
 | `--memory`                    | Configure the max memory allowed to the autorest core process. Usage: `--memory=8g` or `--memory=8192m` (to set to 8gb)          |
 
