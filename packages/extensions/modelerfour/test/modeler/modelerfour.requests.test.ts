@@ -5,7 +5,7 @@ import assert from "assert";
 import { CodeModel, DictionarySchema, HttpHeader, Operation, Parameter } from "@autorest/codemodel";
 import { JsonType, ParameterLocation } from "@azure-tools/openapi";
 import * as oai3 from "@azure-tools/openapi";
-import { addOperation, createTestSpec, findByName } from "../utils";
+import { addOperation, addSchema, createTestSpec, findByName } from "../utils";
 import { runModeler, runModelerWithOperation } from "./modelerfour-utils";
 
 describe("Modelerfour.Request", () => {
@@ -232,6 +232,72 @@ describe("Modelerfour.Request", () => {
       expect(parameters).toHaveLength(2);
       expect(parameters[1].language.default.serializedName).toEqual("bar");
       expect(parameters[1].protocol).toEqual({ http: { in: "header" } });
+    });
+  });
+
+  describe("final-result-schema in lro options", () => {
+    it("creates a 200 response from final-result-schema if one is not present", async () => {
+      const productSchema = {
+        type: "object",
+        properties: {
+          id: {
+            type: "string",
+          },
+        },
+      };
+
+      const oldSpec: oai3.Model = createTestSpec();
+      addOperation(oldSpec, "/products/{id}", {
+        put: {
+          operationId: "product_create",
+          description: "Create a Product",
+          "x-ms-long-running-operation": true,
+          "x-ms-long-running-operation-options": {
+            "final-state-via": "location",
+          },
+          responses: {
+            "200": {
+              description: "Success",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/Product" },
+                },
+              },
+            },
+            "202": {
+              description: "Accepted",
+            },
+          },
+        },
+      });
+      addSchema(oldSpec, "Product", productSchema);
+
+      const newSpec: oai3.Model = createTestSpec();
+      addOperation(newSpec, "/products/{id}", {
+        put: {
+          operationId: "product_create",
+          description: "Create a Product",
+          "x-ms-long-running-operation": true,
+          "x-ms-long-running-operation-options": {
+            "final-state-via": "location",
+            "final-state-schema": "#/components/schemas/Product",
+          },
+          responses: {
+            "202": {
+              description: "Accepted",
+            },
+          },
+        },
+      });
+      addSchema(newSpec, "Product", productSchema);
+
+      const oldModel = await runModeler(oldSpec);
+      const newModel = await runModeler(newSpec);
+      const oldResponses = oldModel.operationGroups[0].operations[0].responses;
+      const newResponses = newModel.operationGroups[0].operations[0].responses;
+      expect(oldResponses).toBeDefined();
+      expect(newResponses).toBeDefined();
+      expect(newResponses).toEqual(oldResponses);
     });
   });
 });
