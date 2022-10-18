@@ -105,4 +105,8 @@ describe("Scenario testings", () => {
   it("responses using ref keep reference", async () => {
     await expectInputsMatchSnapshots("responses-ref", ["swagger.json"]);
   });
+
+  it("final-state-schema is converted to oai3 ref", async () => {
+    await expectInputsMatchSnapshots("final-state-schema", ["swagger.json"]);
+  });
 });

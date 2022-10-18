@@ -1,0 +1,77 @@
+{
+  "servers": [
+    {
+      "url": "https://contoso.com/"
+    }
+  ],
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0",
+    "title": "final-state-schema Test v1",
+    "description": "This is a test of the final-state-schema",
+    "contact": {
+      "name": "John Doe",
+      "email": "johndoe@contoso.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "Products"
+    }
+  ],
+  "paths": {
+    "/products/{id}": {
+      "put": {
+        "operationId": "product_create",
+        "description": "Create a Product",
+        "tags": [
+          "Products"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/components/schemas/Product"
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Product object",
+          "required": true,
+          "x-ms-requestBody-name": "body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
