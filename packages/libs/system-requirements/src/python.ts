@@ -92,7 +92,7 @@ const tryPython = async (
   };
 
   try {
-    const result = await execute(command, [...additionalArgs, "-c", PRINT_PYTHON_VERSION_SCRIPT]);
+    const result = await execute(command, [...additionalArgs, "-c", `"${PRINT_PYTHON_VERSION_SCRIPT}"`]);
     return validateVersionRequirement(resolution, result.stdout.trim(), requirement);
   } catch (e) {
     return {
