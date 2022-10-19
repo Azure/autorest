@@ -1,6 +1,6 @@
 {
   "name": "@autorest/system-requirements",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "System requirement validation and resolution for autorest",
   "engines": {
     "node": ">=12.0.0"

@@ -2,6 +2,18 @@
   "name": "@autorest/core",
   "entries": [
     {
+      "version": "3.9.3",
+      "tag": "@autorest/core_v3.9.3",
+      "date": "Wed, 19 Oct 2022 16:18:27 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update system requirement package to fix issue with resolving python on windows"
+          }
+        ]
+      }
+    },
+    {
       "version": "3.9.2",
       "tag": "@autorest/core_v3.9.2",
       "date": "Fri, 19 Aug 2022 16:52:58 GMT",
