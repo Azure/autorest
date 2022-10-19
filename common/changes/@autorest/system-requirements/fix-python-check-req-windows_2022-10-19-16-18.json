@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/system-requirements",
+      "comment": "Fix issue resolving python on windows",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@autorest/system-requirements"
+}
