@@ -39,7 +39,7 @@
   "homepage": "https://github.com/Azure/autorest/tree/main/packages/libs/extension",
   "readme": "https://github.com/Azure/autorest/tree/main/packages/libs/extension/readme.md",
   "dependencies": {
-    "@autorest/system-requirements": "~1.0.0",
+    "@autorest/system-requirements": "~1.0.1",
     "@azure-tools/async-io": "~3.0.0",
     "@azure-tools/tasks": "~3.0.0",
     "@azure/logger": "^1.0.2",

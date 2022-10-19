@@ -1,6 +1,13 @@
 # Change Log - @autorest/core
 
-This log was last generated on Fri, 19 Aug 2022 16:52:58 GMT and should not be manually modified.
+This log was last generated on Wed, 19 Oct 2022 16:18:27 GMT and should not be manually modified.
+
+## 3.9.3
+Wed, 19 Oct 2022 16:18:27 GMT
+
+### Patches
+
+- Update system requirement package to fix issue with resolving python on windows
 
 ## 3.9.2
 Fri, 19 Aug 2022 16:52:58 GMT

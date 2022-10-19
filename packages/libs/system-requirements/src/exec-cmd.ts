@@ -24,7 +24,7 @@ export const execute = (
   options: MoreOptions = {},
 ): Promise<ExecResult> => {
   return new Promise((resolve, reject) => {
-    const cp = spawn(command, cmdlineargs, { ...options, stdio: "pipe" });
+    const cp = spawn(command, cmdlineargs, { ...options, stdio: "pipe", shell: true });
     if (options.onCreate) {
       options.onCreate(cp);
     }
