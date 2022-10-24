@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/modelerfour",
+      "comment": "Add support for specifying `api-version` parameter in the server variables",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/modelerfour"
+}
