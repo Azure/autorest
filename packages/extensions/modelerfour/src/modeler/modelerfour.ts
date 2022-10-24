@@ -1793,30 +1793,35 @@ export class ModelerFour {
               const originalParameter = this.resolve<OpenAPI.Parameter>(variable["x-ms-original"]);
 
               if (!p) {
-                p = new Parameter(variableName, variable.description || `${variableName} - server parameter`, sch, {
-                  required: true,
-                  implementation,
-                  protocol: {
-                    http: new HttpParameter(ParameterLocation.Uri),
-                  },
-                  language: {
-                    default: {
-                      serializedName: variableName,
+                if (this.apiVersionMode !== "none" && this.interpret.isApiVersionParameter(variable)) {
+                  this.processApiVersionParameter(variable, operation, pathItem);
+                } else {
+                  p = new Parameter(variableName, variable.description || `${variableName} - server parameter`, sch, {
+                    required: true,
+                    implementation,
+                    protocol: {
+                      http: new HttpParameter(ParameterLocation.Uri),
                     },
-                  },
-                  extensions: {
-                    ...this.interpret.getExtensionProperties(variable),
-                    "x-ms-priority": originalParameter?.instance?.["x-ms-priority"],
-                  },
-                  clientDefaultValue: clientdefault,
-                });
-                if (implementation === ImplementationLocation.Client) {
-                  // add it to the global parameter list (if it's a client parameter)
-                  this.codeModel.addGlobalParameter(p);
+                    language: {
+                      default: {
+                        serializedName: variableName,
+                      },
+                    },
+                    extensions: {
+                      ...this.interpret.getExtensionProperties(variable),
+                      "x-ms-priority": originalParameter?.instance?.["x-ms-priority"],
+                    },
+                    clientDefaultValue: clientdefault,
+                  });
+                  if (implementation === ImplementationLocation.Client) {
+                    // add it to the global parameter list (if it's a client parameter)
+                    this.codeModel.addGlobalParameter(p);
+                  }
+                  operation.addParameter(p);
                 }
+              } else {
+                operation.addParameter(p);
               }
-              // add the parameter to the operaiton
-              operation.addParameter(p);
             }
             // and update the path for the operation. (copy the template onto the path)
             // path = `${uri}${path}`;
@@ -1899,20 +1904,19 @@ export class ModelerFour {
   }
 
   addApiVersionParameter(
-    parameter: OpenAPI.Parameter,
+    parameter: OpenAPI.Parameter | OpenAPI.ServerVariable,
     operation: Operation,
-    pathItem: OpenAPI.PathItem,
     apiVersionParameterSchema: ChoiceSchema | ConstantSchema,
   ) {
     const p = new Parameter("ApiVersion", "Api Version", apiVersionParameterSchema, {
-      required: parameter.required ? true : undefined,
+      required: (parameter as any).required ? true : undefined,
       origin: "modelerfour:synthesized/api-version",
       protocol: {
         http: new HttpParameter(ParameterLocation.Query),
       },
       language: {
         default: {
-          serializedName: parameter.name,
+          serializedName: (parameter as any).name,
         },
       },
     });
@@ -1935,9 +1939,9 @@ export class ModelerFour {
   }
 
   processChoiceApiVersionParameter(
-    parameter: OpenAPI.Parameter,
+    parameter: OpenAPI.Parameter | OpenAPI.ServerVariable,
     operation: Operation,
-    pathItem: OpenAPI.PathItem,
+    pathItem: OpenAPI.PathItem | undefined,
     apiversions: Array<string>,
   ) {
     const apiVersionChoice = this.codeModel.schemas.add(
@@ -1947,14 +1951,14 @@ export class ModelerFour {
       }),
     );
 
-    return this.addApiVersionParameter(parameter, operation, pathItem, apiVersionChoice);
+    return this.addApiVersionParameter(parameter, operation, apiVersionChoice);
   }
 
   processConstantApiVersionParameter(
-    parameter: OpenAPI.Parameter,
+    parameter: OpenAPI.Parameter | OpenAPI.ServerVariable,
     operation: Operation,
-    pathItem: OpenAPI.PathItem,
-    apiversions: Array<string>,
+    pathItem: OpenAPI.PathItem | undefined,
+    apiversions: string[],
   ) {
     if (apiversions.length > 1) {
       throw new Error(
@@ -1968,11 +1972,15 @@ export class ModelerFour {
       }),
     );
 
-    return this.addApiVersionParameter(parameter, operation, pathItem, apiVersionConst);
+    return this.addApiVersionParameter(parameter, operation, apiVersionConst);
   }
 
-  processApiVersionParameter(parameter: OpenAPI.Parameter, operation: Operation, pathItem: OpenAPI.PathItem) {
-    const apiversions = this.interpret.getApiVersionValues(pathItem);
+  processApiVersionParameter(
+    parameter: OpenAPI.Parameter | OpenAPI.ServerVariable,
+    operation: Operation,
+    pathItem?: OpenAPI.PathItem,
+  ) {
+    const apiversions = this.interpret.getApiVersionValues(pathItem ?? this.input.info);
     if (apiversions.length === 0) {
       // !!!
       throw new Error(
