@@ -1884,8 +1884,7 @@ export class ModelerFour {
   }
 
   private getParameterLocation(parameter: OpenAPI.Parameter | OpenAPI.ServerVariable): EnumStr<ParameterLocation> {
-
-    if(isParameter(parameter)) {
+    if (isParameter(parameter)) {
       return parameter.in;
     }
 
@@ -2581,7 +2580,6 @@ export class ModelerFour {
   }
 }
 
-
 function isParameter(param: unknown): param is OpenAPI.Parameter {
   return Boolean((param as OpenAPI.Parameter).name) && Boolean((param as OpenAPI.Parameter).in);
-} 
+}
