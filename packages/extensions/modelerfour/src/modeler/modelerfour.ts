@@ -1908,7 +1908,7 @@ export class ModelerFour {
       required: parameter.required ? true : undefined,
       origin: "modelerfour:synthesized/api-version",
       protocol: {
-        http: new HttpParameter(ParameterLocation.Query),
+        http: parameter.in,
       },
       language: {
         default: {
