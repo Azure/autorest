@@ -73,6 +73,7 @@ import {
   MediaType,
   omitXDashProperties,
   OpenAPI3Document,
+  EnumStr,
 } from "@azure-tools/openapi";
 import * as OpenAPI from "@azure-tools/openapi";
 import { uniq, every } from "lodash";
@@ -1882,6 +1883,15 @@ export class ModelerFour {
     return baseUri;
   }
 
+  private getParameterLocation(parameter: OpenAPI.Parameter | OpenAPI.ServerVariable): EnumStr<ParameterLocation> {
+
+    if(isParameter(parameter)) {
+      return parameter.in;
+    }
+
+    return "path";
+  }
+
   private getServerVariableSchema(variableName: string, variable: OpenAPI.ServerVariable) {
     if (variable.enum) {
       return this.processChoiceSchema(variableName, <OpenAPI.Schema>{
@@ -1912,7 +1922,7 @@ export class ModelerFour {
       required: (parameter as any).required ? true : undefined,
       origin: "modelerfour:synthesized/api-version",
       protocol: {
-        http: (parameter as any).in ?? new HttpParameter(ParameterLocation.Query),
+        http: new HttpParameter(this.getParameterLocation(parameter)),
       },
       language: {
         default: {
@@ -2570,3 +2580,8 @@ export class ModelerFour {
     }
   }
 }
+
+
+function isParameter(param: unknown): param is OpenAPI.Parameter {
+  return Boolean((param as OpenAPI.Parameter).name) && Boolean((param as OpenAPI.Parameter).in);
+} 
