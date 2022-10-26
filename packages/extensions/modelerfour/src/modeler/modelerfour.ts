@@ -1938,7 +1938,10 @@ export class ModelerFour {
 
       case "client":
         // eslint-disable-next-line no-case-declarations
-        let pp = this.codeModel.findGlobalParameter((each) => each.language.default.name === "ApiVersion");
+        let pp = this.codeModel.findGlobalParameter(
+          (each) =>
+            each.language.default.name === "ApiVersion" || each.language.default.name === p.language.default.name,
+        );
         if (!pp) {
           p.implementation = ImplementationLocation.Client;
           pp = this.codeModel.addGlobalParameter(p);
