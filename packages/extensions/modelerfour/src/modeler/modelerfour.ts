@@ -115,7 +115,7 @@ function is(value: any): asserts value is object | string | number | boolean {
  */
 class ProcessingCache<In, Out> {
   private results = new Map<In, Out>();
-  constructor(private transform: (orig: In, ...args: Array<any>) => Out) {}
+  constructor(private transform: (orig: In, ...args: Array<any>) => Out) { }
   has(original: In | undefined) {
     return !!original && !!this.results.get(original);
   }
@@ -893,7 +893,7 @@ export class ModelerFour {
           new Property(
             this.interpret.getPreferredName(propertyDeclaration, propertyName),
             propertyDeclaration.description ||
-              this.interpret.getDescription(pType.language.default.description, pSchema),
+            this.interpret.getDescription(pType.language.default.description, pSchema),
             pType,
             {
               readOnly: propertyDeclaration.readOnly || pSchema.readOnly,
@@ -1100,8 +1100,7 @@ export class ModelerFour {
     if (isSchemaBinary(schema)) {
       // handle inconsistency in file format handling.
       this.session.warning(
-        `'The schema ${schema?.["x-ms-metadata"]?.name || name} with 'type: ${schema.type}', format: ${
-          schema.format
+        `'The schema ${schema?.["x-ms-metadata"]?.name || name} with 'type: ${schema.type}', format: ${schema.format
         }' will be treated as a binary blob for binary media types.`,
         ["Modeler", "Superflous type information"],
         schema,
@@ -1120,8 +1119,7 @@ export class ModelerFour {
           // but we're going to warn them anyway.
 
           this.session.warning(
-            `The schema '${
-              schema?.["x-ms-metadata"]?.name || name
+            `The schema '${schema?.["x-ms-metadata"]?.name || name
             }' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'`,
             ["Modeler", "MissingType"],
             schema,
@@ -1134,8 +1132,7 @@ export class ModelerFour {
           // this looks like it's going to be a dictionary
           // we'll mark it as object and let the processObjectSchema sort it out.
           this.session.warning(
-            `The schema '${
-              schema?.["x-ms-metadata"]?.name || name
+            `The schema '${schema?.["x-ms-metadata"]?.name || name
             }' with an undefined type and additionalProperties is a bit ambiguous. This has been auto-corrected to 'type:object'`,
             ["Modeler"],
             schema,
@@ -1148,8 +1145,7 @@ export class ModelerFour {
           // if the model has properties, then we're going to assume they meant to say JsonType.object
           // but we're going to warn them anyway.
           this.session.warning(
-            `The schema '${
-              schema?.["x-ms-metadata"]?.name || name
+            `The schema '${schema?.["x-ms-metadata"]?.name || name
             }' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'`,
             ["Modeler", "MissingType"],
             schema,
@@ -1162,8 +1158,7 @@ export class ModelerFour {
           // no type info at all!?
           // const err = `The schema '${name}' has no type or format information whatsoever. ${this.location(schema)}`;
           this.session.warning(
-            `The schema '${
-              schema?.["x-ms-metadata"]?.name || name
+            `The schema '${schema?.["x-ms-metadata"]?.name || name
             }' has no type or format information whatsoever. ${this.location(schema)}`,
             ["Modeler", "MissingType"],
             schema,
@@ -1181,8 +1176,7 @@ export class ModelerFour {
             return this.processArraySchema(name, schema);
           default:
             this.session.error(
-              `Array schema '${schema?.["x-ms-metadata"]?.name || name}' with unknown format: '${
-                schema.format
+              `Array schema '${schema?.["x-ms-metadata"]?.name || name}' with unknown format: '${schema.format
               } ' is not valid`,
               ["Modeler"],
               schema,
@@ -1545,13 +1539,13 @@ export class ModelerFour {
     const http: HttpWithBodyRequest =
       kmt === KnownMediaType.Multipart
         ? new HttpMultipartRequest({
-            knownMediaType: kmt,
-            mediaTypes: ["multipart/form-data"],
-          })
+          knownMediaType: kmt,
+          mediaTypes: ["multipart/form-data"],
+        })
         : new HttpWithBodyRequest({
-            knownMediaType: kmt,
-            mediaTypes: requestBodyGroup.mediaTypes,
-          });
+          knownMediaType: kmt,
+          mediaTypes: requestBodyGroup.mediaTypes,
+        });
 
     // create the request object
     const httpRequest = new Request({
@@ -1599,7 +1593,7 @@ export class ModelerFour {
             new Parameter(
               propertyName,
               propertyDeclaration.description ||
-                this.interpret.getDescription(pType.language.default.description, pSchema),
+              this.interpret.getDescription(pType.language.default.description, pSchema),
               pType,
               {
                 schema: pType,
@@ -1786,9 +1780,9 @@ export class ModelerFour {
               let p =
                 implementation === ImplementationLocation.Client
                   ? this.codeModel.findGlobalParameter(
-                      (each) =>
-                        each.language.default.name === variableName && each.clientDefaultValue === clientdefault,
-                    )
+                    (each) =>
+                      each.language.default.name === variableName && each.clientDefaultValue === clientdefault,
+                  )
                   : undefined;
 
               const originalParameter = this.resolve<OpenAPI.Parameter>(variable["x-ms-original"]);
@@ -1917,7 +1911,8 @@ export class ModelerFour {
     operation: Operation,
     apiVersionParameterSchema: ChoiceSchema | ConstantSchema,
   ) {
-    const p = new Parameter("ApiVersion", "Api Version", apiVersionParameterSchema, {
+    const parameterName = (parameter as any).name ?? (parameter as any)["x-name"];
+    const p = new Parameter(parameterName, "Api Version", apiVersionParameterSchema, {
       required: (parameter as any).required ? true : undefined,
       origin: "modelerfour:synthesized/api-version",
       protocol: {
@@ -1925,7 +1920,7 @@ export class ModelerFour {
       },
       language: {
         default: {
-          serializedName: (parameter as any).name ?? (parameter as any)["x-name"],
+          serializedName: parameterName,
         },
       },
     });
@@ -2049,8 +2044,8 @@ export class ModelerFour {
             ? ImplementationLocation.Method
             : ImplementationLocation.Client
           : "client" === parameter["x-ms-parameter-location"]
-          ? ImplementationLocation.Client
-          : ImplementationLocation.Method;
+            ? ImplementationLocation.Client
+            : ImplementationLocation.Method;
 
         const preferredName = this.interpret.getPreferredName(parameter, schema["x-ms-client-name"] || parameter.name);
         if (implementation === ImplementationLocation.Client) {
@@ -2091,9 +2086,9 @@ export class ModelerFour {
                 parameter.in,
                 parameter.style
                   ? {
-                      style: <SerializationStyle>(<unknown>parameter.style),
-                      explode: parameter.explode,
-                    }
+                    style: <SerializationStyle>(<unknown>parameter.style),
+                    explode: parameter.explode,
+                  }
                   : undefined,
               ),
             },
