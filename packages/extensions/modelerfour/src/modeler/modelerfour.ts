@@ -1925,7 +1925,7 @@ export class ModelerFour {
       },
       language: {
         default: {
-          serializedName: (parameter as any).name,
+          serializedName: (parameter as any).name ?? (parameter as any)["x-name"],
         },
       },
     });
