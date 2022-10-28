@@ -1888,7 +1888,7 @@ export class ModelerFour {
       return parameter.in;
     }
 
-    return "path";
+    return "uri";
   }
 
   private getServerVariableSchema(variableName: string, variable: OpenAPI.ServerVariable) {
