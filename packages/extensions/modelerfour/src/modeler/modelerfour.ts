@@ -1919,7 +1919,7 @@ export class ModelerFour {
   ) {
     const parameterName = (parameter as any).name ?? (parameter as any)["x-name"];
     const p = new Parameter(parameterName, "Api Version", apiVersionParameterSchema, {
-      required: (parameter as any).required ? true : undefined,
+      required: true, // ApiVersion parameter is always required
       origin: "modelerfour:synthesized/api-version",
       protocol: {
         http: new HttpParameter(this.getParameterLocation(parameter)),
