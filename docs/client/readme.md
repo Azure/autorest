@@ -12,4 +12,4 @@ This is highly-language specific, so please refer to the documentation we have f
 [python]: https://github.com/Azure/autorest.python/tree/autorestv3/docs/client/readme.md
 [java]: https://github.com/Azure/autorest.java/blob/main/docs/client/readme.md
 [csharp]: https://github.com/Azure/autorest.csharp/tree/feature/v3/docs/client/readme.md
-[typescript]: https://github.com/Azure/autorest.typescript/tree/v6/docs/client/readme.md
+[typescript]: https://github.com/Azure/autorest.typescript/blob/main/packages/autorest.typescript/docs/client/readme.md
