@@ -5,17 +5,15 @@
   "main": "dist/src/main.js",
   "typings": "dist/main.d.ts",
   "scripts": {
-    "test:adel": "autorest --openapi-to-cadl --input-file=./test/adel/adel.json --use=. --output-folder=./test/adel",
-    "test:bodycomplex": "autorest --openapi-to-cadl --input-file=./test/bodyComplex/body-complex.json --use=. --output-folder=./test/bodyComplex",
-    "test:url": "autorest --openapi-to-cadl --input-file=./test/url/url.json --use=. --output-folder=./test/url",
-    "test:pubsub": "autorest --openapi-to-cadl --input-file=./test/webpubsub/webpubsub.json --use=. --output-folder=./test/webpubsub",
-    "build": "tsc -p .",
     "generate": "ts-node ./test/utils/generateCadl.ts generate",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "test:ci": "npm run generate && node ./test/utils/check-clean-tree.js",
     "clean": "rimraf ./dist ./temp",
     "start": "node --max_old_space_size=4096 ./dist/src/main.js",
     "debug": "node --max_old_space_size=4096 --inspect-brk=localhost:9229 ./dist/src/main.js",
-    "watch": "tsc -p . --watch"
+    "watch": "tsc -p tsconfig.build.json --watch",
+    "build": "tsc -p tsconfig.build.json",
+    "build:prod": "webpack"
   },
   "repository": {
     "type": "git",
@@ -52,12 +50,15 @@
   "devDependencies": {
     "typescript": "^4.8.4",
     "@types/prettier": "^2.7.0",
+    "@types/webpack": "~4.41.26",
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
     "@types/node": "~14.14.20",
     "fs-extra": "^10.1.0",
     "@types/fs-extra": "^9.0.13",
     "chalk": "^4.1.0",
-    "@azure-tools/cadl-autorest": "^0.20.0"
+    "@azure-tools/cadl-autorest": "^0.20.0",
+    "webpack-cli": "~4.7.2",
+    "webpack": "~5.40.0"
   }
 }

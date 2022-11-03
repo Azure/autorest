@@ -39,22 +39,22 @@ function generate(path: string, debug = false) {
     overrideGuess = fileContent.includes("guessResourceKey: false");
   }
 
-  console.log(inputFile);
-  spawnSync(
-    "autorest",
-    [
-      "--openapi-to-cadl",
-      inputFile,
-      "--use=.",
-      `--output-folder=${dirname(path)}`,
-      "--src-path=cadl-output",
-      ...(debug ? ["--openapi-to-cadl.debugger"] : []),
-      ...(overrideGuess
-        ? ["--guessResourceKey=false"]
-        : ["--guessResourceKey=true"]),
-    ],
-    { stdio: "inherit" }
-  );
+  const args = [
+    "--openapi-to-cadl",
+    inputFile,
+    "--use=.",
+    `--output-folder=${dirname(path)}`,
+    "--src-path=cadl-output",
+    ...(debug ? ["--openapi-to-cadl.debugger"] : []),
+    ...(overrideGuess
+      ? ["--guessResourceKey=false"]
+      : ["--guessResourceKey=true"]),
+  ];
+  const spawn = spawnSync("autorest", args, { stdio: "inherit" });
+
+  if (spawn.status !== 0) {
+    throw new Error(`Generation failed, command:\n autorest ${args.join(" ")}`);
+  }
 }
 
 async function main() {
@@ -67,8 +67,14 @@ async function main() {
     : (await readdir(join(root, "test"))).filter((d) => d !== "utils");
 
   for (const folder of folders) {
-    generateCadl(folder, debug);
+    try {
+      generateCadl(folder, debug);
+    } catch (e) {
+      throw new Error(`Failed to generate ${folder}`);
+    }
   }
 }
 
-main();
+main().catch(() => {
+  process.exit(-1);
+});
