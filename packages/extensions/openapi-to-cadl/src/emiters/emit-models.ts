@@ -1,9 +1,9 @@
-import { CadlEnum, CadlProgram } from "../interfaces";
-import { generateEnums } from "../generate/generateEnums";
-import { generateObject } from "../generate/generateObject";
 import { writeFile } from "fs/promises";
-import { getModelsImports } from "../utils/imports";
+import { generateEnums } from "../generate/generate-enums";
+import { generateObject } from "../generate/generate-object";
+import { CadlEnum, CadlProgram } from "../interfaces";
 import { formatCadlFile } from "../utils/format";
+import { getModelsImports } from "../utils/imports";
 import { getNamespace } from "../utils/namespace";
 
 export async function emitModels(

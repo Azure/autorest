@@ -22,9 +22,7 @@ export function isChoiceSchema(schema: Schema): schema is ChoiceSchema {
   return schema.type === SchemaType.Choice;
 }
 
-export function isSealedChoiceSchema(
-  schema: Schema
-): schema is SealedChoiceSchema {
+export function isSealedChoiceSchema(schema: Schema): schema is SealedChoiceSchema {
   return schema.type === SchemaType.SealedChoice;
 }
 
@@ -32,8 +30,6 @@ export function isDictionarySchema(schema: Schema): schema is DictionarySchema {
   return schema.type === SchemaType.Dictionary;
 }
 
-export function isResponseSchema(
-  response: Response | SchemaResponse
-): response is SchemaResponse {
+export function isResponseSchema(response: Response | SchemaResponse): response is SchemaResponse {
   return (response as SchemaResponse).schema !== undefined;
 }

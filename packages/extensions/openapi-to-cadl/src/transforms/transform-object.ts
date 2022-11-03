@@ -6,7 +6,12 @@ import {
   Schema,
   SchemaType,
 } from "@autorest/codemodel";
+import { getDataTypes } from "../data-types";
 import { CadlObject, CadlObjectProperty } from "../interfaces";
+import { addCorePageAlias } from "../utils/alias";
+import { getModelDecorators, getPropertyDecorators } from "../utils/decorators";
+import { getDiscriminator, getOwnDiscriminator } from "../utils/discriminator";
+import { getLogger } from "../utils/logger";
 import {
   isArraySchema,
   isChoiceSchema,
@@ -15,11 +20,6 @@ import {
   isSealedChoiceSchema,
 } from "../utils/schemas";
 import { transformValue } from "../utils/values";
-import { getLogger } from "../utils/logger";
-import { getDataTypes } from "../dataTypes";
-import { getModelDecorators, getPropertyDecorators } from "../utils/decorators";
-import { getDiscriminator, getOwnDiscriminator } from "../utils/discriminator";
-import { addCorePageAlias } from "../utils/alias";
 
 const cadlTypes = new Map<SchemaType, string>([
   [SchemaType.Date, "plainDate"],
@@ -65,7 +65,7 @@ export function transformObject(
     .filter((p) => !p.isDiscriminator)
     .map((p) => transformObjectProperty(p, codeModel));
 
-  let ownDiscriminator = getOwnDiscriminator(schema);
+  const ownDiscriminator = getOwnDiscriminator(schema);
   if (!ownDiscriminator) {
     const discriminatorProperty = getDiscriminator(schema);
     discriminatorProperty && properties.push(discriminatorProperty);
@@ -96,7 +96,7 @@ function addFixmes(cadlObject: CadlObject): void {
     cadlObject.fixMe
       .push(`// FIXME: (multiple-inheritance) Multiple inheritance is not supported in CADL, so this type will only inherit from one parent.
      // this may happen because of multiple parents having discriminator properties.
-     // Parents not included ${cadlObject.extendedParents!.join(", ")}`);
+     // Parents not included ${cadlObject.extendedParents?.join(", ")}`);
   }
 }
 

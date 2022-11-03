@@ -1,14 +1,7 @@
-import {
-  CadlOperation,
-  CadlOperationGroup,
-  CadlParameter,
-} from "../interfaces";
+import { CadlOperation, CadlOperationGroup, CadlParameter } from "../interfaces";
 import { generateDocs, generateSummary } from "../utils/docs";
 
-export function generateOperation(
-  operation: CadlOperation,
-  operationGroup: CadlOperationGroup
-) {
+export function generateOperation(operation: CadlOperation, operationGroup: CadlOperationGroup) {
   const doc = generateDocs(operation);
   const summary = generateSummary(operation);
   const { verb, name, route, responses, parameters } = operation;
@@ -24,37 +17,30 @@ export function generateOperation(
   if (!operation.resource) {
     statements.push(`@route("${route}")`);
     statements.push(
-      `@${verb} op ${name} is Azure.Core.Foundations.Operation<{${
-        params ? params : ""
-      }}, ${responses.join(" | ")}>;\n\n\n`
+      `@${verb} op ${name} is Azure.Core.Foundations.Operation<{${params ? params : ""}}, ${responses.join(
+        " | ",
+      )}>;\n\n\n`,
     );
   } else {
     const { resource } = operation;
     const resourceParameters = generateParameters(
-      parameters.filter(
-        (param) => !["path", "body"].some((p) => p === param.location)
-      )
+      parameters.filter((param) => !["path", "body"].some((p) => p === param.location)),
     );
 
-    const parametersString = !resourceParameters
-      ? ``
-      : `, { parameters: {${resourceParameters}}}`;
+    const parametersString = !resourceParameters ? `` : `, { parameters: {${resourceParameters}}}`;
     statements.push(
       `${operationGroup.name ? "" : "op "}`,
-      `${name} is Azure.Core.${resource.kind}<${resource.response.name} ${parametersString}>;\n\n\n`
+      `${name} is Azure.Core.${resource.kind}<${resource.response.name} ${parametersString}>;\n\n\n`,
     );
   }
   return statements.join("\n");
 }
 
-function generateMultiResponseWarning(
-  responses: string[],
-  statements: string[]
-) {
+function generateMultiResponseWarning(responses: string[], statements: string[]) {
   responses.length > 2 &&
     statements.push(
       `// FIXME: (multi-response) Swagger defines multiple requests and responses. 
-       //      This needs to be revisited as CADL supports linking specific responses to each request`
+       //      This needs to be revisited as CADL supports linking specific responses to each request`,
     );
 }
 

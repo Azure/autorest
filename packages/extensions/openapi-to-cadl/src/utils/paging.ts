@@ -1,10 +1,4 @@
-import {
-  CodeModel,
-  Operation,
-  isObjectSchema,
-  Response,
-  Property,
-} from "@autorest/codemodel";
+import { CodeModel, Operation, isObjectSchema, Response, Property } from "@autorest/codemodel";
 import { getLanguageMetadata } from "./metadata";
 import { isResponseSchema } from "./schemas";
 
@@ -44,9 +38,7 @@ export function isPageableOperation(operation: Operation): boolean {
   return Boolean(paginationExtension);
 }
 
-export function getPageableResponse(
-  operation: Operation
-): Response | undefined {
+export function getPageableResponse(operation: Operation): Response | undefined {
   if (!isPageableOperation(operation)) {
     return undefined;
   }

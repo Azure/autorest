@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+import { existsSync, mkdirSync } from "fs";
+import { join } from "path";
 import { CodeModel, codeModelSchema } from "@autorest/codemodel";
 import {
   AutoRestExtension,
@@ -8,18 +10,16 @@ import {
   Session,
   startSession,
 } from "@autorest/extension-base";
-import { existsSync, mkdirSync } from "fs";
+import { markErrorModels } from "utils/errors";
+import { setSession } from "./autorest-session";
+import { emitCadlConfig } from "./emiters/emit-cadl-config";
+import { emitMain } from "./emiters/emit-main";
 
-import { join } from "path";
+import { emitModels } from "./emiters/emit-models";
+import { emitPackage } from "./emiters/emit-package";
+import { emitRoutes } from "./emiters/emit-routes";
 import { getModel } from "./model";
-import { emitModels } from "./emiters/emitModels";
-import { emitCadlConfig } from "./emiters/emitCadlConfig";
-import { emitRoutes } from "./emiters/emitRoutes";
-import { emitMain } from "./emiters/emitMain";
 import { markPagination } from "./utils/paging";
-import { markErrorModels } from "./utils/errors";
-import { setSession } from "./autorestSession";
-import { emitPackage } from "./emiters/emitPackage";
 import { markResources } from "./utils/resources";
 
 export async function processRequest(host: AutorestExtensionHost) {
@@ -60,4 +60,6 @@ async function main() {
   await pluginHost.run();
 }
 
-main();
+main().catch((e) => {
+  throw new Error(e);
+});

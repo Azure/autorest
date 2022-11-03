@@ -14,9 +14,7 @@ export function generateEnums(cadlEnum: CadlEnum) {
     enum ${cadlEnum.name}${cadlEnum.isExtensible ? "KnownValues" : ""} {
         ${cadlEnum.members
           .map((m) => {
-            return `"${m.name}"` !== m.value
-              ? `${m.name}: ${m.value}`
-              : m.value;
+            return `"${m.name}"` !== m.value ? `${m.name}: ${m.value}` : m.value;
           })
           .join(", ")}
     }\n`;

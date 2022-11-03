@@ -20,11 +20,7 @@ export function generateObject(cadlObject: CadlObject) {
   } else if (cadlObject.alias) {
     const { alias, params } = cadlObject.alias;
 
-    definitions.push(
-      `model ${cadlObject.name} is ${alias}${
-        params ? `<${params.join(",")}>` : ""
-      } {`
-    );
+    definitions.push(`model ${cadlObject.name} is ${alias}${params ? `<${params.join(",")}>` : ""} {`);
   } else {
     definitions.push(`model ${cadlObject.name} {`);
   }
@@ -39,9 +35,7 @@ export function generateObject(cadlObject: CadlObject) {
     const decorators = generateDecorators(property.decorators);
     decorators && definitions.push(decorators);
 
-    definitions.push(
-      `"${property.name}"${getOptionalOperator(property)}: ${property.type};`
-    );
+    definitions.push(`"${property.name}"${getOptionalOperator(property)}: ${property.type};`);
   }
   definitions.push("}");
 

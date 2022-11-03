@@ -9,7 +9,7 @@ export function formatFile(content: string, filepath: string) {
 export function formatCadlFile(
   content: string,
   filepath: string,
-  options: { skip?: boolean } = { skip: false }
+  options: { skip?: boolean } = { skip: false },
 ): string {
   if (options.skip) {
     return content;

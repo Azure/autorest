@@ -3,8 +3,8 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import * as chalk from "chalk";
 import * as path from "path";
+import * as chalk from "chalk";
 
 const printModes = ["info", "warn", "error", "success", "debug"] as const;
 
@@ -23,11 +23,7 @@ const DEV_TOOL_PATH = (() => {
   // to get the full directory part
   const baseDirectoryParts = parts.slice(0, -1);
   // Adding path.sep at the end makes the debug output a little cleaner by removing a leading "/"
-  return (
-    path.resolve(
-      baseDirectoryParts.join(directoryFragment) + directoryFragment
-    ) + path.sep
-  );
+  return path.resolve(baseDirectoryParts.join(directoryFragment) + directoryFragment) + path.sep;
 })();
 
 /**
@@ -152,14 +148,11 @@ const finalLogger: ModeMap<Fn> = {
  */
 export function createPrinter(name: string): Printer {
   const prefix = "[" + name + "]";
-  const base = ((...values: string[]) =>
-    console.log(chalk.reset(prefix, ...values))) as Printer;
+  const base = ((...values: string[]) => console.log(chalk.reset(prefix, ...values))) as Printer;
 
   for (const mode of printModes) {
     base[mode] = (...values: string[]) =>
-      finalLogger[mode](
-        ...[prefix, ...values].map((value: string) => colors[mode](value))
-      );
+      finalLogger[mode](...[prefix, ...values].map((value: string) => colors[mode](value)));
   }
   return base;
 }

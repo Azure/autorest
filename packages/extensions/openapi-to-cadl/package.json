@@ -5,7 +5,7 @@
   "main": "dist/src/main.js",
   "typings": "dist/main.d.ts",
   "scripts": {
-    "generate": "ts-node ./test/utils/generateCadl.ts generate",
+    "generate": "ts-node ./test/utils/generate-cadl.ts generate",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:ci": "npm run generate && node ./test/utils/check-clean-tree.js",
     "clean": "rimraf ./dist ./temp",
@@ -13,7 +13,9 @@
     "debug": "node --max_old_space_size=4096 --inspect-brk=localhost:9229 ./dist/src/main.js",
     "watch": "tsc -p tsconfig.build.json --watch",
     "build": "tsc -p tsconfig.build.json",
-    "build:prod": "webpack"
+    "build:prod": "webpack",
+    "lint:fix": "eslint  ./src ./test --fix --ext .ts",
+    "lint": "eslint  ./src ./test --ext .ts --max-warnings=0"
   },
   "repository": {
     "type": "git",
@@ -59,6 +61,14 @@
     "chalk": "^4.1.0",
     "@azure-tools/cadl-autorest": "^0.20.0",
     "webpack-cli": "~4.7.2",
-    "webpack": "~5.40.0"
+    "webpack": "~5.40.0",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "eslint-plugin-jest": "~26.4.6",
+    "eslint-plugin-node": "~11.1.0",
+    "eslint-plugin-prettier": "~4.0.0",
+    "eslint-plugin-unicorn": "~42.0.0",
+    "eslint-plugin-import": "~2.26.0",
+    "eslint": "^8.16.0"
   }
 }

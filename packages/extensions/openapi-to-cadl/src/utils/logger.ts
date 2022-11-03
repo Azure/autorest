@@ -1,4 +1,4 @@
-import { getSession } from "../autorestSession";
+import { getSession } from "../autorest-session";
 
 export interface Logger {
   info: (message: string) => void;

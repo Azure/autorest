@@ -80,11 +80,7 @@ export function generateDecorators(decorators: CadlDecorator[] = []): string {
       definitions.push(decorator.fixMe.join(`\n`));
     }
     if (decorator.arguments) {
-      definitions.push(
-        `@${decorator.name}(${decorator.arguments
-          ?.map((a) => `"${a}"`)
-          .join(", ")})`
-      );
+      definitions.push(`@${decorator.name}(${decorator.arguments?.map((a) => `"${a}"`).join(", ")})`);
     } else {
       definitions.push(`@${decorator.name}`);
     }

@@ -30,12 +30,8 @@ export function getModelsImports(program: CadlProgram) {
 }
 
 export function getRoutesImports(_program: CadlProgram) {
-  let imports: Imports = {
-    modules: [
-      `import "@azure-tools/cadl-azure-core";`,
-      `import "@cadl-lang/rest";`,
-      `import "./models.cadl";`,
-    ],
+  const imports: Imports = {
+    modules: [`import "@azure-tools/cadl-azure-core";`, `import "@cadl-lang/rest";`, `import "./models.cadl";`],
     namespaces: [`using Cadl.Rest;`, `using Cadl.Http;`],
   };
 

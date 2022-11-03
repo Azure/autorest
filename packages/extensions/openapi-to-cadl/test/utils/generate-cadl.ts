@@ -1,8 +1,8 @@
+import { spawnSync } from "child_process";
+import { readFileSync } from "fs";
 import { readdir } from "fs/promises";
 import { join, dirname, extname } from "path";
-import { spawnSync } from "child_process";
-import { resolveProject } from "./resolveRoot";
-import { readFileSync } from "fs";
+import { resolveProject } from "./resolve-root";
 
 export async function generateCadl(folder: string, debug = false) {
   const { path: root } = await resolveProject(__dirname);
@@ -68,13 +68,13 @@ async function main() {
 
   for (const folder of folders) {
     try {
-      generateCadl(folder, debug);
+      await generateCadl(folder, debug);
     } catch (e) {
       throw new Error(`Failed to generate ${folder}`);
     }
   }
 }
 
-main().catch(() => {
-  process.exit(-1);
+main().catch((e) => {
+  throw e;
 });

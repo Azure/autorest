@@ -1,11 +1,8 @@
-import { CadlProgram } from "../interfaces";
 import { writeFile } from "fs/promises";
+import { CadlProgram } from "../interfaces";
 import { formatFile } from "../utils/format";
 
-export async function emitPackage(
-  filePath: string,
-  program: CadlProgram
-): Promise<void> {
+export async function emitPackage(filePath: string, program: CadlProgram): Promise<void> {
   const name = program.serviceInformation.name.toLowerCase().replace(/ /g, "-");
   const description = program.serviceInformation.doc;
   const content = JSON.stringify(getPackage(name, description as string));

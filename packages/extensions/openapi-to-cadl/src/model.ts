@@ -1,13 +1,13 @@
 import { CodeModel, isObjectSchema, Schema } from "@autorest/codemodel";
-import { getDataTypes } from "./dataTypes";
+import { getDataTypes } from "./data-types";
 import { CadlDataType, CadlProgram } from "./interfaces";
-import { transformEnum } from "./transforms/transformChoices";
-import { getCadlType, transformObject } from "./transforms/transformObject";
-import { transformOperationGroup } from "./transforms/transformOperations";
-import { transformServiceInformation } from "./transforms/transformServiceInformation";
+import { transformEnum } from "./transforms/transform-choices";
+import { getCadlType, transformObject } from "./transforms/transform-object";
+import { transformOperationGroup } from "./transforms/transform-operations";
+import { transformServiceInformation } from "./transforms/transform-service-information";
 import { isChoiceSchema } from "./utils/schemas";
 
-let models: Map<CodeModel, CadlProgram> = new Map();
+const models: Map<CodeModel, CadlProgram> = new Map();
 
 export function getModel(codeModel: CodeModel): CadlProgram {
   let model = models.get(codeModel);

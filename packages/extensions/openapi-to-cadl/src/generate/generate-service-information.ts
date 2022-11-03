@@ -8,18 +8,11 @@ export function generateServiceInformation(program: CadlProgram) {
 
   definitions.push(`@serviceTitle("${serviceInformation.name}")`);
 
-  serviceInformation.version &&
-    definitions.push(`@serviceVersion("${serviceInformation.version}")`);
+  serviceInformation.version && definitions.push(`@serviceVersion("${serviceInformation.version}")`);
 
   if (serviceInformation.endpoint) {
-    definitions.push(
-      `@server("${serviceInformation.endpoint}", ${
-        JSON.stringify(serviceInformation.doc) ?? ""
-      }`
-    );
-    const hasParameters =
-      serviceInformation.endpointParameters &&
-      serviceInformation.endpointParameters.length;
+    definitions.push(`@server("${serviceInformation.endpoint}", ${JSON.stringify(serviceInformation.doc) ?? ""}`);
+    const hasParameters = serviceInformation.endpointParameters && serviceInformation.endpointParameters.length;
 
     if (hasParameters) {
       definitions.push(", {");

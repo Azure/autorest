@@ -1,4 +1,4 @@
-import { promises as fs } from "fs";
+import { writeFileSync } from "fs";
 import { formatFile } from "../utils/format";
 
 export async function emitCadlConfig(filePath: string): Promise<void> {
@@ -19,5 +19,5 @@ export async function emitCadlConfig(filePath: string): Promise<void> {
     # "@azure-tools/cadl-typescript": true
 `;
 
-  await fs.writeFile(filePath, formatFile(content, filePath));
+  writeFileSync(filePath, formatFile(content, filePath));
 }

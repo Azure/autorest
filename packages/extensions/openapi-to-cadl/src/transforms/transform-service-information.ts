@@ -4,7 +4,7 @@ import {
   ParameterLocation,
 } from "@autorest/codemodel";
 import { EndpointParameter, ServiceInformation } from "../interfaces";
-import { getFirstEndpoint } from "../utils/getEndpoint";
+import { getFirstEndpoint } from "../utils/get-endpoint";
 import { isConstantSchema } from "../utils/schemas";
 
 export function transformServiceInformation(

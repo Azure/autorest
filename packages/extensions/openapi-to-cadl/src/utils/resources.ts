@@ -10,7 +10,7 @@ import {
   Schema,
   SchemaResponse,
 } from "@autorest/codemodel";
-import { getDataTypes } from "../dataTypes";
+import { getDataTypes } from "../data-types";
 import { CadlResource } from "../interfaces";
 import { transformDataType } from "../model";
 import { getOptions } from "../options";
@@ -211,7 +211,7 @@ function handleResource(
     if (!markResource(operation, schema)) {
       return undefined;
     }
-    let cadlResponse =
+    const cadlResponse =
       dataTypes.get(schema) ?? transformDataType(schema, codeModel);
     return {
       kind,
@@ -288,7 +288,7 @@ function handleGetOperation(
       return undefined;
     }
     const dataTypes = getDataTypes(codeModel);
-    let cadlResponse =
+    const cadlResponse =
       dataTypes.get(nonPageableListResource.elementType) ??
       transformDataType(nonPageableListResource.elementType, codeModel);
     return {
@@ -333,7 +333,7 @@ function getPageableResource(
           return undefined;
         }
 
-        let cadlResponse =
+        const cadlResponse =
           dataTypes.get(elementType) ??
           transformDataType(elementType, codeModel);
         return {

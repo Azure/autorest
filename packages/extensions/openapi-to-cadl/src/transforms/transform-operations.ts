@@ -9,7 +9,7 @@ import {
   Schema,
   SchemaResponse,
 } from "@autorest/codemodel";
-import { getDataTypes } from "../dataTypes";
+import { getDataTypes } from "../data-types";
 import {
   CadlOperation,
   CadlOperationGroup,
@@ -41,11 +41,11 @@ export function transformOperationGroup(
   };
 }
 
-function transformRoute(protocol: Protocols) {
-  return protocol.http?.path;
+function transformRoute(protocol?: Protocols) {
+  return protocol?.http?.path;
 }
 
-function transformVerb(protocol: Protocols) {
+function transformVerb(protocol?: Protocols) {
   return protocol?.http?.method;
 }
 
@@ -76,7 +76,7 @@ export function transformOperation(
   operation: Operation,
   codeModel: CodeModel
 ): CadlOperation[] {
-  return operation.requests!.map((r) =>
+  return (operation.requests ?? []).map((r) =>
     transformRequest(r, operation, codeModel)
   );
 }
@@ -120,8 +120,8 @@ function transformRequest(
     doc,
     summary,
     parameters,
-    verb: transformVerb(requests![0].protocol),
-    route: transformRoute(requests![0].protocol),
+    verb: transformVerb(requests?.[0].protocol),
+    route: transformRoute(requests?.[0].protocol),
     responses: [...new Set(transformedResponses)],
     extensions: [],
     resource,
@@ -183,7 +183,7 @@ export function transformParameter(
   const doc = parameter.language.default.description;
 
   const dataTypes = getDataTypes(codeModel);
-  let visited =
+  const visited =
     dataTypes.get(parameter.schema) ??
     transformDataType(parameter.schema, codeModel);
 

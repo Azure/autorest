@@ -5,7 +5,7 @@ import {
   SchemaType,
   SealedChoiceSchema,
 } from "@autorest/codemodel";
-import { getDataTypes } from "../dataTypes";
+import { getDataTypes } from "../data-types";
 import { CadlChoiceValue, CadlEnum } from "../interfaces";
 import { transformValue } from "../utils/values";
 

@@ -1,9 +1,9 @@
-import { CadlProgram } from "../interfaces";
 import { writeFile } from "fs/promises";
-import { generateOperationGroup } from "../generate/generateOperations";
+import { generateOperationGroup } from "../generate/generate-operations";
+import { CadlProgram } from "../interfaces";
 import { formatCadlFile } from "../utils/format";
-import { getNamespace } from "../utils/namespace";
 import { getRoutesImports } from "../utils/imports";
+import { getNamespace } from "../utils/namespace";
 
 export async function emitRoutes(
   filePath: string,

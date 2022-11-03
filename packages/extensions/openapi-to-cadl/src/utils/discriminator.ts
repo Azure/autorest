@@ -2,15 +2,11 @@ import { ObjectSchema, Property } from "@autorest/codemodel";
 import { CadlObjectProperty } from "../interfaces";
 import { getLogger } from "./logger";
 
-export function getOwnDiscriminator(
-  schema: ObjectSchema
-): Property | undefined {
+export function getOwnDiscriminator(schema: ObjectSchema): Property | undefined {
   return schema.discriminator?.property;
 }
 
-export function getDiscriminator(
-  schema: ObjectSchema
-): CadlObjectProperty | undefined {
+export function getDiscriminator(schema: ObjectSchema): CadlObjectProperty | undefined {
   if (!schema.discriminatorValue) {
     return undefined;
   }
@@ -29,9 +25,7 @@ export function getDiscriminator(
 function getDiscriminatorProperty(schema: ObjectSchema): Property {
   const logger = getLogger("getDiscriminatorProperty");
 
-  logger.info(
-    `Getting discriminator property for ${schema.language.default.name}`
-  );
+  logger.info(`Getting discriminator property for ${schema.language.default.name}`);
 
   if (schema.discriminator?.property) {
     return schema.discriminator.property;

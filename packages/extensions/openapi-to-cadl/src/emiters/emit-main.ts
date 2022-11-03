@@ -1,6 +1,6 @@
-import { CadlProgram } from "../interfaces";
 import { writeFile } from "fs/promises";
-import { generateServiceInformation } from "../generate/generateServiceInformation";
+import { generateServiceInformation } from "../generate/generate-service-information";
+import { CadlProgram } from "../interfaces";
 import { formatCadlFile } from "../utils/format";
 
 export async function emitMain(

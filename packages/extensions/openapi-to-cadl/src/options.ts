@@ -1,6 +1,6 @@
 import { CodeModel } from "@autorest/codemodel";
 import { Session } from "@autorest/extension-base";
-import { getSession } from "./autorestSession";
+import { getSession } from "./autorest-session";
 import { CadlOptions } from "./interfaces";
 
 export let options: CadlOptions;
