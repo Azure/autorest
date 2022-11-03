@@ -1,6 +1,13 @@
 # Change Log - @autorest/modelerfour
 
-This log was last generated on Thu, 22 Sep 2022 15:51:02 GMT and should not be manually modified.
+This log was last generated on Thu, 03 Nov 2022 18:44:18 GMT and should not be manually modified.
+
+## 4.25.0
+Thu, 03 Nov 2022 18:44:18 GMT
+
+### Minor changes
+
+- Add support for specifying `api-version` parameter in the server variables
 
 ## 4.24.3
 Thu, 22 Sep 2022 15:51:02 GMT
