@@ -1,0 +1,17 @@
+import "@cadl-lang/rest";
+
+using Cadl.Rest;
+
+namespace AutoRestUrlTestService;
+
+enum UriColor {
+  RedColor: "red color",
+  GreenColor: "green color",
+  BlueColor: "blue color",
+}
+
+@error
+model Error {
+  status?: int32;
+  message?: string;
+}

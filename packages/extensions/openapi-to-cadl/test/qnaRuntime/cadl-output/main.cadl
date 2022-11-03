@@ -1,0 +1,19 @@
+import "@cadl-lang/rest";
+import "./routes.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+@serviceTitle("QnAMaker Runtime Client")
+@server(
+  "{RuntimeEndpoint}/qnamaker",
+  "An API for QnAMaker runtime",
+  {
+    @doc("""
+QnA Maker App Service endpoint (for example:
+https://{qnaservice-hostname}.azurewebsites.net).
+""")
+    RuntimeEndpoint: string,
+  }
+)
+@doc("An API for QnAMaker runtime")
+namespace QnAMakerRuntimeClient;

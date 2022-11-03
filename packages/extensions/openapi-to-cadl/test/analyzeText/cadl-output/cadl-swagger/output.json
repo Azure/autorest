@@ -1,0 +1,3580 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Microsoft Cognitive Language Service - Analyze Text Authoring",
+        "version": "2022-05-01",
+        "description": "The language service API is a suite of natural language processing (NLP) skills\nbuilt with best-in-class Microsoft machine learning algorithms. The API can be\nused to analyze unstructured text for tasks such as sentiment analysis, key\nphrase extraction, language detection and question answering. Further\ndocumentation can be found in <a\nhref=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.",
+        "x-cadl-generated": [
+            {
+                "emitter": "@azure-tools/cadl-autorest"
+            }
+        ]
+    },
+    "schemes": [
+        "https"
+    ],
+    "x-ms-parameterized-host": {
+        "hostTemplate": "{Endpoint}/language",
+        "useSchemePrefix": false,
+        "parameters": [
+            {
+                "name": "Endpoint",
+                "in": "path",
+                "required": true,
+                "description": "Supported Cognitive Services endpoint (e.g.,\nhttps://<resource-name>.api.cognitiveservices.azure.com).",
+                "type": "string"
+            }
+        ]
+    },
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "tags": [],
+    "paths": {
+        "/authoring/analyze-text/projects": {
+            "get": {
+                "operationId": "TextAnalysisAuthoringOperations_ListProjects",
+                "description": "Lists the existing projects.",
+                "parameters": [
+                    {
+                        "name": "top",
+                        "in": "query",
+                        "required": true,
+                        "description": "The maximum number of resources to return from the collection.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "skip",
+                        "in": "query",
+                        "required": true,
+                        "description": "An offset into the collection of the first resource to be returned.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "maxpagesize",
+                        "in": "query",
+                        "required": true,
+                        "description": "The maximum number of resources to include in a single response.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/ProjectMetadata"
+                                    },
+                                    "x-ms-identifiers": [],
+                                    "x-cadl-name": "ProjectMetadata[]",
+                                    "description": "The ProjectMetadata items on this page"
+                                },
+                                "nextLink": {
+                                    "type": "string",
+                                    "description": "The link to the next page of items",
+                                    "x-cadl-name": "Rest.ResourceLocation<ProjectMetadata>"
+                                }
+                            },
+                            "description": "Paged collection of ProjectMetadata items",
+                            "required": [
+                                "value"
+                            ],
+                            "x-cadl-name": "Azure.Core.Foundations.CustomPage<ProjectMetadata, (anonymous model)>"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/{storageInputContainerName}": {
+            "patch": {
+                "operationId": "TextAnalysisAuthoringOperations_CreateProject",
+                "description": "Creates a new project or updates an existing one.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ProjectMetadata.storageInputContainerName"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "createdDateTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Represents the project creation datetime."
+                                },
+                                "lastModifiedDateTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Represents the project last modification datetime."
+                                },
+                                "lastTrainedDateTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Represents the project last training datetime."
+                                },
+                                "lastDeployedDateTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Represents the project last deployment datetime."
+                                },
+                                "projectKind": {
+                                    "$ref": "#/definitions/ProjectKind",
+                                    "description": "The project kind."
+                                },
+                                "settings": {
+                                    "$ref": "#/definitions/object",
+                                    "description": "The project settings."
+                                },
+                                "projectName": {
+                                    "type": "string",
+                                    "description": "The new project name."
+                                },
+                                "multilingual": {
+                                    "type": "boolean",
+                                    "description": "Whether the project would be used for multiple languages or not."
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "description": "The project description."
+                                },
+                                "language": {
+                                    "type": "string",
+                                    "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+                                }
+                            },
+                            "description": "The template for adding optional properties.",
+                            "x-cadl-name": "OptionalProperties<UpdateableProperties<DefaultKeyVisibility<ProjectMetadata, read>>>"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "createdDateTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Represents the project creation datetime."
+                                },
+                                "lastModifiedDateTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Represents the project last modification datetime."
+                                },
+                                "lastTrainedDateTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Represents the project last training datetime."
+                                },
+                                "lastDeployedDateTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Represents the project last deployment datetime."
+                                },
+                                "projectKind": {
+                                    "$ref": "#/definitions/ProjectKind",
+                                    "description": "The project kind."
+                                },
+                                "storageInputContainerName": {
+                                    "type": "string",
+                                    "description": "The storage container name."
+                                },
+                                "settings": {
+                                    "$ref": "#/definitions/object",
+                                    "description": "The project settings."
+                                },
+                                "projectName": {
+                                    "type": "string",
+                                    "description": "The new project name."
+                                },
+                                "multilingual": {
+                                    "type": "boolean",
+                                    "description": "Whether the project would be used for multiple languages or not."
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "description": "The project description."
+                                },
+                                "language": {
+                                    "type": "string",
+                                    "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+                                }
+                            },
+                            "required": [
+                                "createdDateTime",
+                                "lastModifiedDateTime",
+                                "projectKind",
+                                "storageInputContainerName",
+                                "projectName",
+                                "language"
+                            ],
+                            "x-cadl-name": "Azure.Core.Foundations.ResourceOkResponse<(anonymous model)>"
+                        }
+                    },
+                    "201": {
+                        "description": "The request has succeeded and a new resource has been created as a result.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "createdDateTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Represents the project creation datetime."
+                                },
+                                "lastModifiedDateTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Represents the project last modification datetime."
+                                },
+                                "lastTrainedDateTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Represents the project last training datetime."
+                                },
+                                "lastDeployedDateTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Represents the project last deployment datetime."
+                                },
+                                "projectKind": {
+                                    "$ref": "#/definitions/ProjectKind",
+                                    "description": "The project kind."
+                                },
+                                "storageInputContainerName": {
+                                    "type": "string",
+                                    "description": "The storage container name."
+                                },
+                                "settings": {
+                                    "$ref": "#/definitions/object",
+                                    "description": "The project settings."
+                                },
+                                "projectName": {
+                                    "type": "string",
+                                    "description": "The new project name."
+                                },
+                                "multilingual": {
+                                    "type": "boolean",
+                                    "description": "Whether the project would be used for multiple languages or not."
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "description": "The project description."
+                                },
+                                "language": {
+                                    "type": "string",
+                                    "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+                                }
+                            },
+                            "description": "A  resource was successfully created.",
+                            "required": [
+                                "createdDateTime",
+                                "lastModifiedDateTime",
+                                "projectKind",
+                                "storageInputContainerName",
+                                "projectName",
+                                "language"
+                            ],
+                            "x-cadl-name": "Azure.Core.Foundations.ResourceCreatedResponse<(anonymous model)>"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/merge-patch+json"
+                ]
+            },
+            "get": {
+                "operationId": "TextAnalysisAuthoringOperations_GetProject",
+                "description": "Gets the details of a project.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ProjectMetadata.storageInputContainerName"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/ProjectMetadata"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "TextAnalysisAuthoringOperations_DeleteProject",
+                "description": "Deletes a project.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ProjectMetadata.storageInputContainerName"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "The request has been accepted for processing, but processing has not yet completed.",
+                        "headers": {
+                            "Operation-Location": {
+                                "description": "The location of an instance of OperationStatus",
+                                "type": "string"
+                            }
+                        },
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "description": "The unique ID of the operation."
+                                },
+                                "status": {
+                                    "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                                    "description": "The status of the operation"
+                                },
+                                "error": {
+                                    "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                                    "description": "Error object that describes the error when status is \"Failed\"."
+                                }
+                            },
+                            "x-cadl-name": "Azure.Core.Foundations.AcceptedResponse<(anonymous model)>"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/{storageInputContainerName}:export": {
+            "post": {
+                "operationId": "TextAnalysisAuthoringOperations_Export",
+                "description": "Triggers a job to export a project's data.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ProjectMetadata.storageInputContainerName"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "parameters": {
+                                    "type": "object",
+                                    "properties": {},
+                                    "x-cadl-name": "(anonymous model)"
+                                }
+                            },
+                            "required": [
+                                "parameters"
+                            ],
+                            "x-cadl-name": "(anonymous model)"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "The request has been accepted for processing, but processing has not yet completed.",
+                        "headers": {
+                            "Operation-Location": {
+                                "description": "The location of an instance of OperationStatus",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/{storageInputContainerName}:import": {
+            "post": {
+                "operationId": "TextAnalysisAuthoringOperations_Import",
+                "description": "Triggers a job to import a project. If a project with the same name already\nexists, the data of that project is replaced.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ProjectMetadata.storageInputContainerName"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "parameters": {
+                                    "type": "object",
+                                    "properties": {
+                                        "body": {
+                                            "$ref": "#/definitions/ExportedProject",
+                                            "description": "The project data to import."
+                                        }
+                                    },
+                                    "required": [
+                                        "body"
+                                    ],
+                                    "x-cadl-name": "(anonymous model)"
+                                }
+                            },
+                            "required": [
+                                "parameters"
+                            ],
+                            "x-cadl-name": "(anonymous model)"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "The request has been accepted for processing, but processing has not yet completed.",
+                        "headers": {
+                            "Operation-Location": {
+                                "description": "The location of an instance of OperationStatus",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/{storageInputContainerName}:train": {
+            "post": {
+                "operationId": "TextAnalysisAuthoringOperations_Train",
+                "description": "Triggers a training job for a project.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ProjectMetadata.storageInputContainerName"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "parameters": {
+                                    "type": "object",
+                                    "properties": {
+                                        "body": {
+                                            "$ref": "#/definitions/TrainingJobOptions",
+                                            "description": "The training input parameters."
+                                        }
+                                    },
+                                    "required": [
+                                        "body"
+                                    ],
+                                    "x-cadl-name": "(anonymous model)"
+                                }
+                            },
+                            "required": [
+                                "parameters"
+                            ],
+                            "x-cadl-name": "(anonymous model)"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "The request has been accepted for processing, but processing has not yet completed.",
+                        "headers": {
+                            "Operation-Location": {
+                                "description": "The location of an instance of OperationStatus",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/{projectName}/deployments": {
+            "get": {
+                "operationId": "TextAnalysisAuthoringOperations_ListDeployments",
+                "description": "Lists the deployments belonging to a project.",
+                "parameters": [
+                    {
+                        "name": "top",
+                        "in": "query",
+                        "required": true,
+                        "description": "The maximum number of resources to return from the collection.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "skip",
+                        "in": "query",
+                        "required": true,
+                        "description": "An offset into the collection of the first resource to be returned.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "maxpagesize",
+                        "in": "query",
+                        "required": true,
+                        "description": "The maximum number of resources to include in a single response.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/ProjectDeployment"
+                                    },
+                                    "x-ms-identifiers": [],
+                                    "x-cadl-name": "ProjectDeployment[]",
+                                    "description": "The ProjectDeployment items on this page"
+                                },
+                                "nextLink": {
+                                    "type": "string",
+                                    "description": "The link to the next page of items",
+                                    "x-cadl-name": "Rest.ResourceLocation<ProjectDeployment>"
+                                }
+                            },
+                            "description": "Paged collection of ProjectDeployment items",
+                            "required": [
+                                "value"
+                            ],
+                            "x-cadl-name": "Azure.Core.Foundations.CustomPage<ProjectDeployment, (anonymous model)>"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}:swapDeployments": {
+            "post": {
+                "operationId": "TextAnalysisAuthoringOperations_SwapDeployments",
+                "description": "Swaps two existing deployments with each other.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ProjectDeployment.deploymentName"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "parameters": {
+                                    "type": "object",
+                                    "properties": {
+                                        "body": {
+                                            "$ref": "#/definitions/SwapDeploymentsOptions",
+                                            "description": "The job object to swap two deployments."
+                                        }
+                                    },
+                                    "required": [
+                                        "body"
+                                    ],
+                                    "x-cadl-name": "(anonymous model)"
+                                }
+                            },
+                            "required": [
+                                "parameters"
+                            ],
+                            "x-cadl-name": "(anonymous model)"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "The request has been accepted for processing, but processing has not yet completed.",
+                        "headers": {
+                            "Operation-Location": {
+                                "description": "The location of an instance of OperationStatus",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}": {
+            "get": {
+                "operationId": "TextAnalysisAuthoringOperations_GetDeployment",
+                "description": "Gets the details of a deployment.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ProjectDeployment.deploymentName"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/ProjectDeployment"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "operationId": "TextAnalysisAuthoringOperations_DeployProject",
+                "description": "Creates a new deployment or replaces an existing one.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ProjectDeployment.deploymentName"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "modelId": {
+                                    "type": "string",
+                                    "description": "Represents deployment modelId."
+                                },
+                                "lastTrainedDateTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Represents deployment last trained time."
+                                },
+                                "lastDeployedDateTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Represents deployment last deployed time."
+                                },
+                                "deploymentExpirationDate": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "description": "Represents deployment expiration date in the runtime."
+                                },
+                                "modelTrainingConfigVersion": {
+                                    "type": "string",
+                                    "description": "Represents model training config version."
+                                }
+                            },
+                            "description": "The template for adding updateable properties.",
+                            "required": [
+                                "modelId",
+                                "lastTrainedDateTime",
+                                "lastDeployedDateTime",
+                                "deploymentExpirationDate",
+                                "modelTrainingConfigVersion"
+                            ],
+                            "x-cadl-name": "UpdateableProperties<DefaultKeyVisibility<ProjectDeployment, read>>"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "headers": {
+                            "Operation-Location": {
+                                "description": "The location of an instance of OperationStatus",
+                                "type": "string"
+                            }
+                        },
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "deploymentName": {
+                                    "type": "string",
+                                    "description": "Represents deployment name."
+                                },
+                                "modelId": {
+                                    "type": "string",
+                                    "description": "Represents deployment modelId."
+                                },
+                                "lastTrainedDateTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Represents deployment last trained time."
+                                },
+                                "lastDeployedDateTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Represents deployment last deployed time."
+                                },
+                                "deploymentExpirationDate": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "description": "Represents deployment expiration date in the runtime."
+                                },
+                                "modelTrainingConfigVersion": {
+                                    "type": "string",
+                                    "description": "Represents model training config version."
+                                }
+                            },
+                            "required": [
+                                "deploymentName",
+                                "modelId",
+                                "lastTrainedDateTime",
+                                "lastDeployedDateTime",
+                                "deploymentExpirationDate",
+                                "modelTrainingConfigVersion"
+                            ],
+                            "x-cadl-name": "Azure.Core.Foundations.ResourceOkResponse<(anonymous model)>"
+                        }
+                    },
+                    "201": {
+                        "description": "The request has succeeded and a new resource has been created as a result.",
+                        "headers": {
+                            "Operation-Location": {
+                                "description": "The location of an instance of OperationStatus",
+                                "type": "string"
+                            }
+                        },
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "deploymentName": {
+                                    "type": "string",
+                                    "description": "Represents deployment name."
+                                },
+                                "modelId": {
+                                    "type": "string",
+                                    "description": "Represents deployment modelId."
+                                },
+                                "lastTrainedDateTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Represents deployment last trained time."
+                                },
+                                "lastDeployedDateTime": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Represents deployment last deployed time."
+                                },
+                                "deploymentExpirationDate": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "description": "Represents deployment expiration date in the runtime."
+                                },
+                                "modelTrainingConfigVersion": {
+                                    "type": "string",
+                                    "description": "Represents model training config version."
+                                }
+                            },
+                            "description": "A  resource was successfully created.",
+                            "required": [
+                                "deploymentName",
+                                "modelId",
+                                "lastTrainedDateTime",
+                                "lastDeployedDateTime",
+                                "deploymentExpirationDate",
+                                "modelTrainingConfigVersion"
+                            ],
+                            "x-cadl-name": "Azure.Core.Foundations.ResourceCreatedResponse<(anonymous model)>"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "TextAnalysisAuthoringOperations_DeleteDeployment",
+                "description": "Deletes a project deployment.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ProjectDeployment.deploymentName"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "The request has been accepted for processing, but processing has not yet completed.",
+                        "headers": {
+                            "Operation-Location": {
+                                "description": "The location of an instance of OperationStatus",
+                                "type": "string"
+                            }
+                        },
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "description": "The unique ID of the operation."
+                                },
+                                "status": {
+                                    "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                                    "description": "The status of the operation"
+                                },
+                                "error": {
+                                    "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                                    "description": "Error object that describes the error when status is \"Failed\"."
+                                }
+                            },
+                            "x-cadl-name": "Azure.Core.Foundations.AcceptedResponse<(anonymous model)>"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}/{jobId}": {
+            "get": {
+                "operationId": "TextAnalysisAuthoringOperations_GetDeploymentStatus",
+                "description": "Gets the status of an existing deployment job.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/JobState.jobId"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/DeploymentJobState"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/{projectName}/deployments/swap/jobs/{jobId}/{jobId}": {
+            "get": {
+                "operationId": "TextAnalysisAuthoringOperations_GetSwapDeploymentsStatus",
+                "description": "Gets the status of an existing swap deployment job.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/JobState.jobId"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/DeploymentJobSwapState"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/{projectName}/export/jobs/{jobId}/{jobId}": {
+            "get": {
+                "operationId": "TextAnalysisAuthoringOperations_GetExportStatus",
+                "description": "Gets the status of an export job. Once job completes, returns the project\nmetadata, and assets.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/JobState.jobId"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/ExportProjectJobState"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/{projectName}/import/jobs/{jobId}/{jobId}": {
+            "get": {
+                "operationId": "TextAnalysisAuthoringOperations_GetImportStatus",
+                "description": "Gets the status for an import.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/JobState.jobId"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/ImportProjectJobState"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/{projectName}/models": {
+            "get": {
+                "operationId": "TextAnalysisAuthoringOperations_ListTrainedModels",
+                "description": "Lists the trained models belonging to a project.",
+                "parameters": [
+                    {
+                        "name": "top",
+                        "in": "query",
+                        "required": true,
+                        "description": "The maximum number of resources to return from the collection.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "skip",
+                        "in": "query",
+                        "required": true,
+                        "description": "An offset into the collection of the first resource to be returned.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "maxpagesize",
+                        "in": "query",
+                        "required": true,
+                        "description": "The maximum number of resources to include in a single response.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/ProjectTrainedModel"
+                                    },
+                                    "x-ms-identifiers": [],
+                                    "x-cadl-name": "ProjectTrainedModel[]",
+                                    "description": "The ProjectTrainedModel items on this page"
+                                },
+                                "nextLink": {
+                                    "type": "string",
+                                    "description": "The link to the next page of items",
+                                    "x-cadl-name": "Rest.ResourceLocation<ProjectTrainedModel>"
+                                }
+                            },
+                            "description": "Paged collection of ProjectTrainedModel items",
+                            "required": [
+                                "value"
+                            ],
+                            "x-cadl-name": "Azure.Core.Foundations.CustomPage<ProjectTrainedModel, (anonymous model)>"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/{projectName}/models/{modelId}": {
+            "get": {
+                "operationId": "TextAnalysisAuthoringOperations_GetTrainedModel",
+                "description": "Gets the details of a trained model.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ProjectTrainedModel.modelId"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/ProjectTrainedModel"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "TextAnalysisAuthoringOperations_DeleteTrainedModel",
+                "description": "Deletes an existing trained model.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ProjectTrainedModel.modelId"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "There is no content to send for this request, but the headers may be useful. "
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
+            "get": {
+                "operationId": "TextAnalysisAuthoringOperations_GetModelEvaluationResults",
+                "description": "Gets the detailed results of the evaluation for a trained model. This includes\nthe raw inference results for the data included in the evaluation process.",
+                "parameters": [
+                    {
+                        "name": "stringIndexType",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "Utf16CodeUnit"
+                        ],
+                        "x-ms-enum": {
+                            "name": "StringIndexType",
+                            "modelAsString": true
+                        }
+                    },
+                    {
+                        "name": "top",
+                        "in": "query",
+                        "required": true,
+                        "description": "The maximum number of resources to return from the collection.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "skip",
+                        "in": "query",
+                        "required": true,
+                        "description": "An offset into the collection of the first resource to be returned.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "maxpagesize",
+                        "in": "query",
+                        "required": true,
+                        "description": "The maximum number of resources to include in a single response.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/DocumentEvaluationResult"
+                                    },
+                                    "x-ms-identifiers": [],
+                                    "x-cadl-name": "DocumentEvaluationResult[]",
+                                    "description": "The DocumentEvaluationResult items on this page"
+                                },
+                                "nextLink": {
+                                    "type": "string",
+                                    "description": "The link to the next page of items",
+                                    "x-cadl-name": "Rest.ResourceLocation<DocumentEvaluationResult>"
+                                }
+                            },
+                            "description": "Paged collection of DocumentEvaluationResult items",
+                            "required": [
+                                "value"
+                            ],
+                            "x-cadl-name": "Azure.Core.Foundations.CustomPage<DocumentEvaluationResult, (anonymous model)>"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/{projectName}/models/{trainedModelLabel}/evaluation/summary-result/{evaluationOptions}": {
+            "get": {
+                "operationId": "TextAnalysisAuthoringOperations_GetModelEvaluationSummary",
+                "description": "Gets the evaluation summary of a trained model. The summary includes high level\nperformance measurements of the model e.g., F1, Precision, Recall, etc.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/EvaluationSummary"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/EvaluationSummary"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/{projectName}/train/jobs": {
+            "get": {
+                "operationId": "TextAnalysisAuthoringOperations_ListTrainingJobs",
+                "description": "Lists the non-expired training jobs created for a project.",
+                "parameters": [
+                    {
+                        "name": "top",
+                        "in": "query",
+                        "required": true,
+                        "description": "The maximum number of resources to return from the collection.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "skip",
+                        "in": "query",
+                        "required": true,
+                        "description": "An offset into the collection of the first resource to be returned.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "maxpagesize",
+                        "in": "query",
+                        "required": true,
+                        "description": "The maximum number of resources to include in a single response.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/TrainingJobState"
+                                    },
+                                    "x-ms-identifiers": [],
+                                    "x-cadl-name": "TrainingJobState[]",
+                                    "description": "The TrainingJobState items on this page"
+                                },
+                                "nextLink": {
+                                    "type": "string",
+                                    "description": "The link to the next page of items",
+                                    "x-cadl-name": "Rest.ResourceLocation<TrainingJobState>"
+                                }
+                            },
+                            "description": "Paged collection of TrainingJobState items",
+                            "required": [
+                                "value"
+                            ],
+                            "x-cadl-name": "Azure.Core.Foundations.CustomPage<TrainingJobState, (anonymous model)>"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/{projectName}/train/jobs/{jobId}": {
+            "get": {
+                "operationId": "TextAnalysisAuthoringOperations_GetTrainingStatus",
+                "description": "Gets the status for a training job.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/JobState.jobId"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/TrainingJobState"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/{projectName}/train/jobs/{jobId}:cancelTrainingJob": {
+            "post": {
+                "operationId": "TextAnalysisAuthoringOperations_CancelTrainingJob",
+                "description": "Triggers a cancellation for a running training job.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/JobState.jobId"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "parameters": {
+                                    "type": "object",
+                                    "properties": {},
+                                    "x-cadl-name": "(anonymous model)"
+                                }
+                            },
+                            "required": [
+                                "parameters"
+                            ],
+                            "x-cadl-name": "(anonymous model)"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "The request has been accepted for processing, but processing has not yet completed.",
+                        "headers": {
+                            "Operation-Location": {
+                                "description": "The location of an instance of OperationStatus",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/global/deletion-jobs/{jobId}/{jobId}": {
+            "get": {
+                "operationId": "TextAnalysisAuthoringOperations_GetProjectDeletionStatus",
+                "description": "Gets the status for a project deletion job.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/JobState.jobId"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/ProjectDeletionJobState"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/global/languages": {
+            "get": {
+                "operationId": "TextAnalysisAuthoringOperations_GetSupportedLanguages",
+                "description": "Lists the supported languages.",
+                "parameters": [
+                    {
+                        "name": "top",
+                        "in": "query",
+                        "required": true,
+                        "description": "The maximum number of resources to return from the collection.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "skip",
+                        "in": "query",
+                        "required": true,
+                        "description": "An offset into the collection of the first resource to be returned.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "maxpagesize",
+                        "in": "query",
+                        "required": true,
+                        "description": "The maximum number of resources to include in a single response.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/SupportedLanguage"
+                                    },
+                                    "x-ms-identifiers": [],
+                                    "x-cadl-name": "SupportedLanguage[]",
+                                    "description": "The SupportedLanguage items on this page"
+                                },
+                                "nextLink": {
+                                    "type": "string",
+                                    "description": "The link to the next page of items",
+                                    "x-cadl-name": "Rest.ResourceLocation<SupportedLanguage>"
+                                }
+                            },
+                            "description": "Paged collection of SupportedLanguage items",
+                            "required": [
+                                "value"
+                            ],
+                            "x-cadl-name": "Azure.Core.Foundations.CustomPage<SupportedLanguage, (anonymous model)>"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/authoring/analyze-text/projects/global/training-config-versions": {
+            "get": {
+                "operationId": "TextAnalysisAuthoringOperations_ListTrainingConfigVersions",
+                "description": "Lists the support training config version for a given project type.",
+                "parameters": [
+                    {
+                        "name": "projectKind",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "CustomSingleLabelClassification",
+                            "CustomMultiLabelClassification",
+                            "CustomEntityRecognition"
+                        ],
+                        "x-ms-enum": {
+                            "name": "ProjectKind",
+                            "modelAsString": true
+                        }
+                    },
+                    {
+                        "name": "top",
+                        "in": "query",
+                        "required": true,
+                        "description": "The maximum number of resources to return from the collection.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "skip",
+                        "in": "query",
+                        "required": true,
+                        "description": "An offset into the collection of the first resource to be returned.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "maxpagesize",
+                        "in": "query",
+                        "required": true,
+                        "description": "The maximum number of resources to include in a single response.",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The request has succeeded.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/TrainingConfigVersion"
+                                    },
+                                    "x-ms-identifiers": [],
+                                    "x-cadl-name": "TrainingConfigVersion[]",
+                                    "description": "The TrainingConfigVersion items on this page"
+                                },
+                                "nextLink": {
+                                    "type": "string",
+                                    "description": "The link to the next page of items",
+                                    "x-cadl-name": "Rest.ResourceLocation<TrainingConfigVersion>"
+                                }
+                            },
+                            "description": "Paged collection of TrainingConfigVersion items",
+                            "required": [
+                                "value"
+                            ],
+                            "x-cadl-name": "Azure.Core.Foundations.CustomPage<TrainingConfigVersion, (anonymous model)>"
+                        }
+                    },
+                    "default": {
+                        "description": "An unexpected error response.",
+                        "schema": {
+                            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Azure.Core.Foundations.Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "One of a server-defined set of error codes."
+                },
+                "message": {
+                    "type": "string",
+                    "description": "A human-readable representation of the error."
+                },
+                "target": {
+                    "type": "string",
+                    "description": "The target of the error."
+                },
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Azure.Core.Foundations.Error"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "Azure.Core.Foundations.Error[]",
+                    "description": "An array of details about specific errors that led to this reported error."
+                },
+                "innererror": {
+                    "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+                    "description": "An object containing more specific information than the current object about the error."
+                }
+            },
+            "description": "The error object.",
+            "required": [
+                "code",
+                "message",
+                "details"
+            ]
+        },
+        "Azure.Core.Foundations.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                    "description": "The error object."
+                }
+            },
+            "description": "A response containing error details.",
+            "required": [
+                "error"
+            ]
+        },
+        "Azure.Core.Foundations.InnerError": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "One of a server-defined set of error codes."
+                },
+                "innererror": {
+                    "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+                    "description": "Inner error."
+                }
+            },
+            "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+            "required": [
+                "code"
+            ]
+        },
+        "Azure.Core.Foundations.OperationState": {
+            "type": "string",
+            "enum": [
+                "InProgress",
+                "Succeeded",
+                "Failed",
+                "Canceled"
+            ],
+            "x-ms-enum": {
+                "name": "OperationState",
+                "modelAsString": true
+            }
+        },
+        "ConfusionMatrixCell": {
+            "type": "object",
+            "properties": {
+                "normalizedValue": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents normalized value in percentages."
+                },
+                "rawValue": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents raw value."
+                }
+            },
+            "description": "Represents a cell in a confusion matrix.",
+            "required": [
+                "normalizedValue",
+                "rawValue"
+            ]
+        },
+        "CreateProjectOptions": {
+            "type": "object",
+            "properties": {
+                "projectKind": {
+                    "$ref": "#/definitions/ProjectKind",
+                    "description": "The project kind."
+                },
+                "storageInputContainerName": {
+                    "type": "string",
+                    "description": "The storage container name."
+                },
+                "settings": {
+                    "$ref": "#/definitions/object",
+                    "description": "The project settings."
+                },
+                "projectName": {
+                    "type": "string",
+                    "description": "The new project name."
+                },
+                "multilingual": {
+                    "type": "boolean",
+                    "description": "Whether the project would be used for multiple languages or not."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The project description."
+                },
+                "language": {
+                    "type": "string",
+                    "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+                }
+            },
+            "description": "Represents the options used to create or update a project.",
+            "required": [
+                "projectKind",
+                "storageInputContainerName",
+                "projectName",
+                "language"
+            ]
+        },
+        "CustomEntityRecognitionDocumentEvaluationResult": {
+            "type": "object",
+            "properties": {
+                "customEntityRecognitionResult": {
+                    "$ref": "#/definitions/DocumentEntityRecognitionEvaluationResult",
+                    "description": "Represents the evaluation prediction for entity recognition."
+                }
+            },
+            "description": "Represents the document evaluation result for a custom entity recognition\nproject.",
+            "required": [
+                "customEntityRecognitionResult"
+            ],
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DocumentEvaluationResult"
+                }
+            ],
+            "x-ms-discriminator-value": "CustomEntityRecognition"
+        },
+        "CustomEntityRecognitionEvaluationSummary": {
+            "type": "object",
+            "properties": {
+                "customEntityRecognitionEvaluation": {
+                    "$ref": "#/definitions/EntityRecognitionEvaluationSummary",
+                    "description": "Contains the data related to extraction evaluation."
+                }
+            },
+            "description": "Represents the evaluation summary for a custom entity recognition project.",
+            "required": [
+                "customEntityRecognitionEvaluation"
+            ],
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EvaluationSummary"
+                }
+            ],
+            "x-ms-discriminator-value": "CustomEntityRecognition"
+        },
+        "CustomMultiLabelClassificationDocumentEvaluationResult": {
+            "type": "object",
+            "properties": {
+                "customMultiLabelClassificationResult": {
+                    "$ref": "#/definitions/DocumentMultiLabelClassificationEvaluationResult",
+                    "description": "Represents the evaluation prediction for multi label classification."
+                }
+            },
+            "description": "Represents the document evaluation result for a custom multi-label\nclassification project.",
+            "required": [
+                "customMultiLabelClassificationResult"
+            ],
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DocumentEvaluationResult"
+                }
+            ],
+            "x-ms-discriminator-value": "CustomMultiLabelClassification"
+        },
+        "CustomMultiLabelClassificationEvaluationSummary": {
+            "type": "object",
+            "properties": {
+                "customMultiLabelClassificationEvaluation": {
+                    "$ref": "#/definitions/MultiLabelClassificationEvaluationSummary",
+                    "description": "Contains the data related to multi label classification evaluation."
+                }
+            },
+            "description": "Represents the evaluation summary for a custom multi-label classification\nproject.",
+            "required": [
+                "customMultiLabelClassificationEvaluation"
+            ],
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EvaluationSummary"
+                }
+            ],
+            "x-ms-discriminator-value": "CustomMultiLabelClassification"
+        },
+        "CustomSingleLabelClassificationDocumentEvaluationResult": {
+            "type": "object",
+            "properties": {
+                "customSingleLabelClassificationResult": {
+                    "$ref": "#/definitions/DocumentSingleLabelClassificationEvaluationResult",
+                    "description": "Represents the evaluation prediction for single label classification."
+                }
+            },
+            "description": "Represents the document evaluation result for a custom single-label\nclassification project.",
+            "required": [
+                "customSingleLabelClassificationResult"
+            ],
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DocumentEvaluationResult"
+                }
+            ],
+            "x-ms-discriminator-value": "CustomSingleLabelClassification"
+        },
+        "CustomSingleLabelClassificationEvaluationSummary": {
+            "type": "object",
+            "properties": {
+                "customSingleLabelClassificationEvaluation": {
+                    "$ref": "#/definitions/SingleLabelClassificationEvaluationSummary",
+                    "description": "Contains the data related to single label classification evaluation."
+                }
+            },
+            "description": "Represents the evaluation summary for a custom single-label classification\nproject.",
+            "required": [
+                "customSingleLabelClassificationEvaluation"
+            ],
+            "allOf": [
+                {
+                    "$ref": "#/definitions/EvaluationSummary"
+                }
+            ],
+            "x-ms-discriminator-value": "CustomSingleLabelClassification"
+        },
+        "DeploymentJobState": {
+            "type": "object",
+            "properties": {
+                "jobId": {
+                    "type": "string",
+                    "description": "The job ID."
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The creation date time of the job."
+                },
+                "lastUpdatedDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The last date time the job was updated."
+                },
+                "expirationDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The expiration date time of the job."
+                },
+                "status": {
+                    "$ref": "#/definitions/JobStatus",
+                    "description": "The job status."
+                },
+                "warnings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Warning"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "Warning[]",
+                    "description": "The warnings that were encountered while executing the job."
+                },
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Error"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "Error[]",
+                    "description": "The errors encountered while executing the job."
+                }
+            },
+            "description": "Represents the state of a deployment job.",
+            "required": [
+                "jobId",
+                "createdDateTime",
+                "lastUpdatedDateTime",
+                "status"
+            ]
+        },
+        "DeploymentJobSwapState": {
+            "type": "object",
+            "properties": {
+                "jobId": {
+                    "type": "string",
+                    "description": "The job ID."
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The creation date time of the job."
+                },
+                "lastUpdatedDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The last date time the job was updated."
+                },
+                "expirationDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The expiration date time of the job."
+                },
+                "status": {
+                    "$ref": "#/definitions/JobStatus",
+                    "description": "The job status."
+                },
+                "warnings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Warning"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "Warning[]",
+                    "description": "The warnings that were encountered while executing the job."
+                },
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Error"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "Error[]",
+                    "description": "The errors encountered while executing the job."
+                }
+            },
+            "required": [
+                "jobId",
+                "createdDateTime",
+                "lastUpdatedDateTime",
+                "status"
+            ]
+        },
+        "DocumentEntityLabelEvaluationResult": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string",
+                    "description": "Represents the entity category."
+                },
+                "offset": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the entity offset index relative to the original text."
+                },
+                "length": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the entity length."
+                }
+            },
+            "description": "Represents an evaluation result entity label.",
+            "required": [
+                "category",
+                "offset",
+                "length"
+            ]
+        },
+        "DocumentEntityRecognitionEvaluationResult": {
+            "type": "object",
+            "properties": {
+                "entities": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DocumentEntityRegionEvaluationResult"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "DocumentEntityRegionEvaluationResult[]",
+                    "description": "Represents the document labelled entities."
+                }
+            },
+            "description": "Represents the entity recognition evaluation result for a document.",
+            "required": [
+                "entities"
+            ]
+        },
+        "DocumentEntityRegionEvaluationResult": {
+            "type": "object",
+            "properties": {
+                "expectedEntities": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DocumentEntityLabelEvaluationResult"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "DocumentEntityLabelEvaluationResult[]",
+                    "description": "Represents the region's expected entity labels."
+                },
+                "predictedEntities": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DocumentEntityLabelEvaluationResult"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "DocumentEntityLabelEvaluationResult[]",
+                    "description": "Represents the region's predicted entity labels."
+                },
+                "regionOffset": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the region offset."
+                },
+                "regionLength": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the region length."
+                }
+            },
+            "description": "Represents the evaluation comparison between the expected and predicted\nentities of a document region.",
+            "required": [
+                "expectedEntities",
+                "predictedEntities",
+                "regionOffset",
+                "regionLength"
+            ]
+        },
+        "DocumentEvaluationResult": {
+            "type": "object",
+            "properties": {
+                "projectKind": {
+                    "type": "string",
+                    "description": "Discriminator property for DocumentEvaluationResult."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Represents the document path."
+                },
+                "language": {
+                    "type": "string",
+                    "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for\nSpanish etc."
+                }
+            },
+            "description": "Represents the evaluation result of a document.",
+            "discriminator": "projectKind",
+            "required": [
+                "projectKind",
+                "location",
+                "language"
+            ]
+        },
+        "DocumentMultiLabelClassificationEvaluationResult": {
+            "type": "object",
+            "properties": {
+                "expectedClasses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "x-cadl-name": "string[]",
+                    "description": "Represents the document's expected classes."
+                },
+                "predictedClasses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "x-cadl-name": "string[]",
+                    "description": "Represents the document's predicted classes."
+                }
+            },
+            "description": "Represents the comparison between the expected and predicted classes that are\nresult from the evaluation operation.",
+            "required": [
+                "expectedClasses",
+                "predictedClasses"
+            ]
+        },
+        "DocumentSingleLabelClassificationEvaluationResult": {
+            "type": "object",
+            "properties": {
+                "expectedClass": {
+                    "type": "string",
+                    "description": "Represents the document's expected class."
+                },
+                "predictedClass": {
+                    "type": "string",
+                    "description": "Represents the document's predicted class."
+                }
+            },
+            "description": "Represents the comparison between the expected and predicted class that result\nfrom an evaluation operation.",
+            "required": [
+                "expectedClass",
+                "predictedClass"
+            ]
+        },
+        "EntityEvaluationSummary": {
+            "type": "object",
+            "properties": {
+                "f1": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the model precision"
+                },
+                "precision": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the model recall"
+                },
+                "recall": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the model F1 score"
+                },
+                "truePositiveCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the count of true positive"
+                },
+                "trueNegativeCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the count of true negative"
+                },
+                "falsePositiveCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the count of false positive"
+                },
+                "falseNegativeCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the count of false negative"
+                }
+            },
+            "description": "Represents the evaluation summary for an entity.",
+            "required": [
+                "f1",
+                "precision",
+                "recall",
+                "truePositiveCount",
+                "trueNegativeCount",
+                "falsePositiveCount",
+                "falseNegativeCount"
+            ]
+        },
+        "EntityRecognitionEvaluationSummary": {
+            "type": "object",
+            "properties": {
+                "confusionMatrix": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/definitions/ConfusionMatrixCell"
+                        },
+                        "x-cadl-name": "Record<ConfusionMatrixCell>"
+                    },
+                    "x-cadl-name": "Record<Record<ConfusionMatrixCell>>",
+                    "description": "Represents the confusion matrix between two entities (the two entities can be\nthe same). The matrix is between the entity that was labelled and the entity\nthat was predicted."
+                },
+                "entities": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/EntityEvaluationSummary"
+                    },
+                    "x-cadl-name": "Record<EntityEvaluationSummary>",
+                    "description": "Represents the entities evaluation"
+                },
+                "microF1": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the micro F1"
+                },
+                "microPrecision": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the micro precision"
+                },
+                "microRecall": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the micro recall"
+                },
+                "macroF1": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the macro F1"
+                },
+                "macroPrecision": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the macro precision"
+                },
+                "macroRecall": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the macro recall"
+                }
+            },
+            "description": "Represents the evaluation summary for a custom entity recognition project.",
+            "required": [
+                "confusionMatrix",
+                "entities",
+                "microF1",
+                "microPrecision",
+                "microRecall",
+                "macroF1",
+                "macroPrecision",
+                "macroRecall"
+            ]
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "$ref": "#/definitions/ErrorCode",
+                    "description": "One of a server-defined set of error codes."
+                },
+                "message": {
+                    "type": "string",
+                    "description": "A human-readable representation of the error."
+                },
+                "target": {
+                    "type": "string",
+                    "description": "The target of the error."
+                },
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Error"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "Error[]",
+                    "description": "An array of details about specific errors that led to this reported error."
+                },
+                "innererror": {
+                    "$ref": "#/definitions/InnerErrorModel",
+                    "description": "An object containing more specific information than the current object about\nthe error."
+                }
+            },
+            "description": "The error object.",
+            "required": [
+                "code",
+                "message"
+            ]
+        },
+        "ErrorCode": {
+            "type": "string",
+            "enum": [
+                "InvalidRequest",
+                "InvalidArgument",
+                "Unauthorized",
+                "Forbidden",
+                "NotFound",
+                "ProjectNotFound",
+                "OperationNotFound",
+                "AzureCognitiveSearchNotFound",
+                "AzureCognitiveSearchIndexNotFound",
+                "TooManyRequests",
+                "AzureCognitiveSearchThrottling",
+                "AzureCognitiveSearchIndexLimitReached",
+                "InternalServerError",
+                "ServiceUnavailable",
+                "Timeout",
+                "QuotaExceeded",
+                "Conflict",
+                "Warning"
+            ],
+            "x-ms-enum": {
+                "name": "ErrorCode",
+                "modelAsString": true
+            }
+        },
+        "EvaluationKind": {
+            "type": "string",
+            "enum": [
+                "percentage",
+                "manual"
+            ],
+            "x-ms-enum": {
+                "name": "EvaluationKind",
+                "modelAsString": true,
+                "values": [
+                    {
+                        "name": "Percentage",
+                        "value": "percentage"
+                    },
+                    {
+                        "name": "Manual",
+                        "value": "manual"
+                    }
+                ]
+            }
+        },
+        "EvaluationOptions": {
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "$ref": "#/definitions/EvaluationKind",
+                    "description": "Represents the evaluation kind. By default, the evaluation kind is set to\npercentage."
+                },
+                "trainingSplitPercentage": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the training dataset split percentage. Only needed in case the\nevaluation kind is percentage."
+                },
+                "testingSplitPercentage": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the testing dataset split percentage. Only needed in case the\nevaluation kind is percentage."
+                }
+            },
+            "description": "Represents the options used running the evaluation."
+        },
+        "EvaluationSummary": {
+            "type": "object",
+            "properties": {
+                "projectKind": {
+                    "type": "string",
+                    "description": "Discriminator property for EvaluationSummary."
+                },
+                "evaluationOptions": {
+                    "$ref": "#/definitions/EvaluationOptions",
+                    "description": "Represents the options used running the evaluation."
+                }
+            },
+            "description": "Represents the summary for an evaluation operation.",
+            "discriminator": "projectKind",
+            "required": [
+                "projectKind",
+                "evaluationOptions"
+            ]
+        },
+        "ExportProjectJobState": {
+            "type": "object",
+            "properties": {
+                "jobId": {
+                    "type": "string",
+                    "description": "The job ID."
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The creation date time of the job."
+                },
+                "lastUpdatedDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The last date time the job was updated."
+                },
+                "expirationDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The expiration date time of the job."
+                },
+                "status": {
+                    "$ref": "#/definitions/JobStatus",
+                    "description": "The job status."
+                },
+                "warnings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Warning"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "Warning[]",
+                    "description": "The warnings that were encountered while executing the job."
+                },
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Error"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "Error[]",
+                    "description": "The errors encountered while executing the job."
+                },
+                "resultUrl": {
+                    "type": "string",
+                    "description": "The URL to use in order to download the exported project."
+                }
+            },
+            "description": "Represents the state of an export job.",
+            "required": [
+                "jobId",
+                "createdDateTime",
+                "lastUpdatedDateTime",
+                "status"
+            ]
+        },
+        "ExportedClass": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string",
+                    "description": "The class category."
+                }
+            },
+            "description": "Represents a class of an exported project."
+        },
+        "ExportedCustomEntityRecognitionDocument": {
+            "type": "object",
+            "properties": {
+                "entities": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ExportedDocumentRegion"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "ExportedDocumentRegion[]",
+                    "description": "The list of entity labels belonging to the document."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "The location of the document in the storage."
+                },
+                "language": {
+                    "type": "string",
+                    "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for\nSpanish etc."
+                },
+                "dataset": {
+                    "type": "string",
+                    "description": "The dataset for this document. Allowed values are 'Train' and 'Test'."
+                }
+            },
+            "description": "Represents an exported document for a custom entity recognition project."
+        },
+        "ExportedCustomEntityRecognitionProjectAssets": {
+            "type": "object",
+            "properties": {
+                "entities": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ExportedEntity"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "ExportedEntity[]",
+                    "description": "The list of entities belonging to the project."
+                },
+                "documents": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ExportedCustomEntityRecognitionDocument"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "ExportedCustomEntityRecognitionDocument[]",
+                    "description": "The list of documents belonging to the project."
+                }
+            },
+            "description": "Represents the exported assets for a entity recognition project.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ExportedProjectAssets"
+                }
+            ],
+            "x-ms-discriminator-value": "CustomEntityRecognition"
+        },
+        "ExportedCustomMultiLabelClassificationDocument": {
+            "type": "object",
+            "properties": {
+                "classes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ExportedDocumentClass"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "ExportedDocumentClass[]",
+                    "description": "The document classes."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "The location of the document in the storage."
+                },
+                "language": {
+                    "type": "string",
+                    "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for\nSpanish etc."
+                },
+                "dataset": {
+                    "type": "string",
+                    "description": "The dataset for this document. Allowed values are 'Train' and 'Test'."
+                }
+            },
+            "description": "Represents an exported document of a custom multi-label classification project."
+        },
+        "ExportedCustomMultiLabelClassificationProjectAssets": {
+            "type": "object",
+            "properties": {
+                "classes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ExportedClass"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "ExportedClass[]",
+                    "description": "The list of classes in the project."
+                },
+                "documents": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ExportedCustomMultiLabelClassificationDocument"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "ExportedCustomMultiLabelClassificationDocument[]",
+                    "description": "The list of documents in the project."
+                }
+            },
+            "description": "Represents the exported assets for a custom multi-label classification project.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ExportedProjectAssets"
+                }
+            ],
+            "x-ms-discriminator-value": "CustomMultiLabelClassification"
+        },
+        "ExportedCustomSingleLabelClassificationDocument": {
+            "type": "object",
+            "properties": {
+                "class": {
+                    "$ref": "#/definitions/ExportedDocumentClass",
+                    "description": "The class of the documents."
+                },
+                "location": {
+                    "type": "string",
+                    "description": "The location of the document in the storage."
+                },
+                "language": {
+                    "type": "string",
+                    "description": "Represents the document language. This is BCP-47 representation of a language.\nFor example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for\nSpanish etc."
+                },
+                "dataset": {
+                    "type": "string",
+                    "description": "The dataset for this document. Allowed values are 'Train' and 'Test'."
+                }
+            },
+            "description": "Represents an exported document for a custom single-label classification\nproject."
+        },
+        "ExportedCustomSingleLabelClassificationProjectAssets": {
+            "type": "object",
+            "properties": {
+                "classes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ExportedClass"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "ExportedClass[]",
+                    "description": "The list of classes belonging to this project."
+                },
+                "documents": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ExportedCustomSingleLabelClassificationDocument"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "ExportedCustomSingleLabelClassificationDocument[]",
+                    "description": "The list of documents belonging to this project."
+                }
+            },
+            "description": "Represents the exported assets for a single-label classification project.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/ExportedProjectAssets"
+                }
+            ],
+            "x-ms-discriminator-value": "CustomSingleLabelClassification"
+        },
+        "ExportedDocumentClass": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string"
+                }
+            },
+            "description": "Represents a classification label for a document."
+        },
+        "ExportedDocumentEntityLabel": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string",
+                    "description": "The entity category."
+                },
+                "offset": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Start position for the entity text."
+                },
+                "length": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Length for the entity text."
+                }
+            },
+            "description": "Represents an entity label for a document."
+        },
+        "ExportedDocumentRegion": {
+            "type": "object",
+            "properties": {
+                "regionOffset": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Start position for the region."
+                },
+                "regionLength": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Length for the region text."
+                },
+                "labels": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ExportedDocumentEntityLabel"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "ExportedDocumentEntityLabel[]",
+                    "description": "The list of entity labels belonging to this region."
+                }
+            },
+            "description": "Represents a region in a document for entity labeling."
+        },
+        "ExportedEntity": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string",
+                    "description": "The entity category."
+                }
+            },
+            "description": "Represents an entity in an exported project."
+        },
+        "ExportedProject": {
+            "type": "object",
+            "properties": {
+                "projectFileVersion": {
+                    "type": "string",
+                    "description": "The version of the exported file."
+                },
+                "stringIndexType": {
+                    "$ref": "#/definitions/StringIndexTypeAutoGenerated",
+                    "description": "Specifies the method used to interpret string offsets. For additional\ninformation see https://aka.ms/text-analytics-offsets."
+                },
+                "metadata": {
+                    "$ref": "#/definitions/CreateProjectOptions",
+                    "description": "Represents the project metadata."
+                },
+                "assets": {
+                    "$ref": "#/definitions/ExportedProjectAssets",
+                    "description": "Represents the project assets."
+                }
+            },
+            "description": "Represents an exported project.",
+            "required": [
+                "projectFileVersion",
+                "stringIndexType",
+                "metadata"
+            ]
+        },
+        "ExportedProjectAssets": {
+            "type": "object",
+            "properties": {
+                "projectKind": {
+                    "type": "string",
+                    "description": "Discriminator property for ExportedProjectAssets."
+                }
+            },
+            "description": "Represents the assets of an exported project.",
+            "discriminator": "projectKind",
+            "required": [
+                "projectKind"
+            ]
+        },
+        "ImportProjectJobState": {
+            "type": "object",
+            "properties": {
+                "jobId": {
+                    "type": "string",
+                    "description": "The job ID."
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The creation date time of the job."
+                },
+                "lastUpdatedDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The last date time the job was updated."
+                },
+                "expirationDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The expiration date time of the job."
+                },
+                "status": {
+                    "$ref": "#/definitions/JobStatus",
+                    "description": "The job status."
+                },
+                "warnings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Warning"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "Warning[]",
+                    "description": "The warnings that were encountered while executing the job."
+                },
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Error"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "Error[]",
+                    "description": "The errors encountered while executing the job."
+                }
+            },
+            "description": "Represents the state of an import job.",
+            "required": [
+                "jobId",
+                "createdDateTime",
+                "lastUpdatedDateTime",
+                "status"
+            ]
+        },
+        "InnerErrorCode": {
+            "type": "string",
+            "enum": [
+                "InvalidRequest",
+                "InvalidParameterValue",
+                "KnowledgeBaseNotFound",
+                "AzureCognitiveSearchNotFound",
+                "AzureCognitiveSearchThrottling",
+                "ExtractionFailure",
+                "InvalidRequestBodyFormat",
+                "EmptyRequest",
+                "MissingInputDocuments",
+                "InvalidDocument",
+                "ModelVersionIncorrect",
+                "InvalidDocumentBatch",
+                "UnsupportedLanguageCode",
+                "InvalidCountryHint"
+            ],
+            "x-ms-enum": {
+                "name": "InnerErrorCode",
+                "modelAsString": true
+            }
+        },
+        "InnerErrorModel": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "$ref": "#/definitions/InnerErrorCode",
+                    "description": "One of a server-defined set of error codes."
+                },
+                "message": {
+                    "type": "string",
+                    "description": "Error message."
+                },
+                "details": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "x-cadl-name": "Record<string>",
+                    "description": "Error details."
+                },
+                "target": {
+                    "type": "string",
+                    "description": "Error target."
+                },
+                "innererror": {
+                    "$ref": "#/definitions/InnerErrorModel",
+                    "description": "An object containing more specific information than the current object about\nthe error."
+                }
+            },
+            "description": "An object containing more specific information about the error. As per\nMicrosoft One API guidelines -\nhttps://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+            "required": [
+                "code",
+                "message"
+            ]
+        },
+        "JobStatus": {
+            "type": "string",
+            "enum": [
+                "notStarted",
+                "running",
+                "succeeded",
+                "failed",
+                "cancelled",
+                "cancelling",
+                "partiallyCompleted"
+            ],
+            "x-ms-enum": {
+                "name": "JobStatus",
+                "modelAsString": true,
+                "values": [
+                    {
+                        "name": "NotStarted",
+                        "value": "notStarted"
+                    },
+                    {
+                        "name": "Running",
+                        "value": "running"
+                    },
+                    {
+                        "name": "Succeeded",
+                        "value": "succeeded"
+                    },
+                    {
+                        "name": "Failed",
+                        "value": "failed"
+                    },
+                    {
+                        "name": "Cancelled",
+                        "value": "cancelled"
+                    },
+                    {
+                        "name": "Cancelling",
+                        "value": "cancelling"
+                    },
+                    {
+                        "name": "PartiallyCompleted",
+                        "value": "partiallyCompleted"
+                    }
+                ]
+            }
+        },
+        "MultiLabelClassEvaluationSummary": {
+            "type": "object",
+            "properties": {
+                "f1": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the model precision"
+                },
+                "precision": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the model recall"
+                },
+                "recall": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the model F1 score"
+                },
+                "truePositiveCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the count of true positive"
+                },
+                "trueNegativeCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the count of true negative"
+                },
+                "falsePositiveCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the count of false positive"
+                },
+                "falseNegativeCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the count of false negative"
+                }
+            },
+            "description": "Represents the evaluation summary of a class in a multi-label classification\nproject.",
+            "required": [
+                "f1",
+                "precision",
+                "recall",
+                "truePositiveCount",
+                "trueNegativeCount",
+                "falsePositiveCount",
+                "falseNegativeCount"
+            ]
+        },
+        "MultiLabelClassificationEvaluationSummary": {
+            "type": "object",
+            "properties": {
+                "classes": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/MultiLabelClassEvaluationSummary"
+                    },
+                    "x-cadl-name": "Record<MultiLabelClassEvaluationSummary>",
+                    "description": "Represents the classes evaluation"
+                },
+                "microF1": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the micro F1"
+                },
+                "microPrecision": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the micro precision"
+                },
+                "microRecall": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the micro recall"
+                },
+                "macroF1": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the macro F1"
+                },
+                "macroPrecision": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the macro precision"
+                },
+                "macroRecall": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the macro recall"
+                }
+            },
+            "description": "Represents the evaluation summary for a multi-label classification project.",
+            "required": [
+                "classes",
+                "microF1",
+                "microPrecision",
+                "microRecall",
+                "macroF1",
+                "macroPrecision",
+                "macroRecall"
+            ]
+        },
+        "ProjectDeletionJobState": {
+            "type": "object",
+            "properties": {
+                "jobId": {
+                    "type": "string",
+                    "description": "The job ID."
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The creation date time of the job."
+                },
+                "lastUpdatedDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The last date time the job was updated."
+                },
+                "expirationDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The expiration date time of the job."
+                },
+                "status": {
+                    "$ref": "#/definitions/JobStatus",
+                    "description": "The job status."
+                },
+                "warnings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Warning"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "Warning[]",
+                    "description": "The warnings that were encountered while executing the job."
+                },
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Error"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "Error[]",
+                    "description": "The errors encountered while executing the job."
+                }
+            },
+            "description": "Represents the state of a project deletion job.",
+            "required": [
+                "jobId",
+                "createdDateTime",
+                "lastUpdatedDateTime",
+                "status"
+            ]
+        },
+        "ProjectDeployment": {
+            "type": "object",
+            "properties": {
+                "deploymentName": {
+                    "type": "string",
+                    "description": "Represents deployment name."
+                },
+                "modelId": {
+                    "type": "string",
+                    "description": "Represents deployment modelId."
+                },
+                "lastTrainedDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Represents deployment last trained time."
+                },
+                "lastDeployedDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Represents deployment last deployed time."
+                },
+                "deploymentExpirationDate": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Represents deployment expiration date in the runtime."
+                },
+                "modelTrainingConfigVersion": {
+                    "type": "string",
+                    "description": "Represents model training config version."
+                }
+            },
+            "description": "Represents a project deployment.",
+            "required": [
+                "deploymentName",
+                "modelId",
+                "lastTrainedDateTime",
+                "lastDeployedDateTime",
+                "deploymentExpirationDate",
+                "modelTrainingConfigVersion"
+            ]
+        },
+        "ProjectKind": {
+            "type": "string",
+            "enum": [
+                "CustomSingleLabelClassification",
+                "CustomMultiLabelClassification",
+                "CustomEntityRecognition"
+            ],
+            "x-ms-enum": {
+                "name": "ProjectKind",
+                "modelAsString": true
+            }
+        },
+        "ProjectMetadata": {
+            "type": "object",
+            "properties": {
+                "createdDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Represents the project creation datetime."
+                },
+                "lastModifiedDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Represents the project last modification datetime."
+                },
+                "lastTrainedDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Represents the project last training datetime."
+                },
+                "lastDeployedDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Represents the project last deployment datetime."
+                },
+                "projectKind": {
+                    "$ref": "#/definitions/ProjectKind",
+                    "description": "The project kind."
+                },
+                "storageInputContainerName": {
+                    "type": "string",
+                    "description": "The storage container name."
+                },
+                "settings": {
+                    "$ref": "#/definitions/object",
+                    "description": "The project settings."
+                },
+                "projectName": {
+                    "type": "string",
+                    "description": "The new project name."
+                },
+                "multilingual": {
+                    "type": "boolean",
+                    "description": "Whether the project would be used for multiple languages or not."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The project description."
+                },
+                "language": {
+                    "type": "string",
+                    "description": "The project language. This is BCP-47 representation of a language. For example,\nuse \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+                }
+            },
+            "description": "Represents the metadata of a project.",
+            "required": [
+                "createdDateTime",
+                "lastModifiedDateTime",
+                "projectKind",
+                "storageInputContainerName",
+                "projectName",
+                "language"
+            ]
+        },
+        "ProjectTrainedModel": {
+            "type": "object",
+            "properties": {
+                "label": {
+                    "type": "string",
+                    "description": "The trained model label."
+                },
+                "modelId": {
+                    "type": "string",
+                    "description": "The model ID."
+                },
+                "lastTrainedDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The last trained date time of the model."
+                },
+                "lastTrainingDurationInSeconds": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The duration of the model's last training request in seconds."
+                },
+                "modelExpirationDate": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The model expiration date."
+                },
+                "modelTrainingConfigVersion": {
+                    "type": "string",
+                    "description": "The model training config version."
+                }
+            },
+            "description": "Represents a trained model.",
+            "required": [
+                "label",
+                "modelId",
+                "lastTrainedDateTime",
+                "lastTrainingDurationInSeconds",
+                "modelExpirationDate",
+                "modelTrainingConfigVersion"
+            ]
+        },
+        "SingleLabelClassEvaluationSummary": {
+            "type": "object",
+            "properties": {
+                "f1": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the model precision"
+                },
+                "precision": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the model recall"
+                },
+                "recall": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the model F1 score"
+                },
+                "truePositiveCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the count of true positive"
+                },
+                "trueNegativeCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the count of true negative"
+                },
+                "falsePositiveCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the count of false positive"
+                },
+                "falseNegativeCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the count of false negative"
+                }
+            },
+            "description": "Represents the evaluation summary for a class in a single-label classification\nproject.",
+            "required": [
+                "f1",
+                "precision",
+                "recall",
+                "truePositiveCount",
+                "trueNegativeCount",
+                "falsePositiveCount",
+                "falseNegativeCount"
+            ]
+        },
+        "SingleLabelClassificationEvaluationSummary": {
+            "type": "object",
+            "properties": {
+                "confusionMatrix": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "$ref": "#/definitions/ConfusionMatrixCell"
+                        },
+                        "x-cadl-name": "Record<ConfusionMatrixCell>"
+                    },
+                    "x-cadl-name": "Record<Record<ConfusionMatrixCell>>",
+                    "description": "Represents the confusion matrix between two classes (the two classes can be the\nsame). The matrix is between the class that was labelled and the class that was\npredicted."
+                },
+                "classes": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/SingleLabelClassEvaluationSummary"
+                    },
+                    "x-cadl-name": "Record<SingleLabelClassEvaluationSummary>",
+                    "description": "Represents the classes evaluation"
+                },
+                "microF1": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the micro F1"
+                },
+                "microPrecision": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the micro precision"
+                },
+                "microRecall": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the micro recall"
+                },
+                "macroF1": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the macro F1"
+                },
+                "macroPrecision": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the macro precision"
+                },
+                "macroRecall": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Represents the macro recall"
+                }
+            },
+            "description": "Represents the evaluation summary for a custom single-label classification\nproject.",
+            "required": [
+                "confusionMatrix",
+                "classes",
+                "microF1",
+                "microPrecision",
+                "microRecall",
+                "macroF1",
+                "macroPrecision",
+                "macroRecall"
+            ]
+        },
+        "StringIndexTypeAutoGenerated": {
+            "type": "string",
+            "enum": [
+                "Utf16CodeUnit"
+            ],
+            "x-ms-enum": {
+                "name": "StringIndexTypeAutoGenerated",
+                "modelAsString": true
+            }
+        },
+        "SubTrainingJobState": {
+            "type": "object",
+            "properties": {
+                "percentComplete": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents progress percentage."
+                },
+                "startDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Represents the start date time."
+                },
+                "endDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Represents the end date time."
+                },
+                "status": {
+                    "$ref": "#/definitions/JobStatus",
+                    "description": "Represents the status of the sub-operation."
+                }
+            },
+            "description": "Represents the detailed state of a training sub-operation.",
+            "required": [
+                "percentComplete",
+                "status"
+            ]
+        },
+        "SupportedLanguage": {
+            "type": "object",
+            "properties": {
+                "languageName": {
+                    "type": "string",
+                    "description": "The language name."
+                },
+                "languageCode": {
+                    "type": "string",
+                    "description": "The language code. This is BCP-47 representation of a language. For example,\n\"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc."
+                }
+            },
+            "description": "Represents a supported language.",
+            "required": [
+                "languageName",
+                "languageCode"
+            ]
+        },
+        "SwapDeploymentsOptions": {
+            "type": "object",
+            "properties": {
+                "firstDeploymentName": {
+                    "type": "string",
+                    "description": "Represents the first deployment name."
+                },
+                "secondDeploymentName": {
+                    "type": "string",
+                    "description": "Represents the second deployment name."
+                }
+            },
+            "description": "Represents the options for swapping two deployments together.",
+            "required": [
+                "firstDeploymentName",
+                "secondDeploymentName"
+            ]
+        },
+        "TrainingConfigVersion": {
+            "type": "object",
+            "properties": {
+                "trainingConfigVersion": {
+                    "type": "string",
+                    "description": "Represents the version of the config."
+                },
+                "modelExpirationDate": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Represents the training config version expiration date."
+                }
+            },
+            "description": "Represents a training config version.",
+            "required": [
+                "trainingConfigVersion",
+                "modelExpirationDate"
+            ]
+        },
+        "TrainingJobOptions": {
+            "type": "object",
+            "properties": {
+                "modelLabel": {
+                    "type": "string",
+                    "description": "Represents the output model label."
+                },
+                "trainingConfigVersion": {
+                    "type": "string",
+                    "description": "Represents training config version."
+                },
+                "evaluationOptions": {
+                    "$ref": "#/definitions/EvaluationOptions",
+                    "description": "Represents the evaluation options. By default, the evaluation kind is\npercentage, with training split percentage as 80, and testing split percentage\nas 20."
+                }
+            },
+            "description": "Represents the options for starting a new training job.",
+            "required": [
+                "modelLabel",
+                "trainingConfigVersion"
+            ]
+        },
+        "TrainingJobResult": {
+            "type": "object",
+            "properties": {
+                "modelLabel": {
+                    "type": "string",
+                    "description": "Represents trained model label."
+                },
+                "trainingConfigVersion": {
+                    "type": "string",
+                    "description": "Represents training config version."
+                },
+                "trainingStatus": {
+                    "$ref": "#/definitions/SubTrainingJobState",
+                    "description": "Represents model train status."
+                },
+                "evaluationStatus": {
+                    "$ref": "#/definitions/SubTrainingJobState",
+                    "description": "Represents model evaluation status."
+                },
+                "estimatedEndDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Represents the estimate end date time for training and evaluation."
+                }
+            },
+            "description": "Represents the output of a training job.",
+            "required": [
+                "modelLabel",
+                "trainingConfigVersion",
+                "trainingStatus"
+            ]
+        },
+        "TrainingJobState": {
+            "type": "object",
+            "properties": {
+                "jobId": {
+                    "type": "string",
+                    "description": "The job ID."
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The creation date time of the job."
+                },
+                "lastUpdatedDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The last date time the job was updated."
+                },
+                "expirationDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The expiration date time of the job."
+                },
+                "status": {
+                    "$ref": "#/definitions/JobStatus",
+                    "description": "The job status."
+                },
+                "warnings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Warning"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "Warning[]",
+                    "description": "The warnings that were encountered while executing the job."
+                },
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Error"
+                    },
+                    "x-ms-identifiers": [],
+                    "x-cadl-name": "Error[]",
+                    "description": "The errors encountered while executing the job."
+                },
+                "result": {
+                    "$ref": "#/definitions/TrainingJobResult",
+                    "description": "Represents training tasks detailed result."
+                }
+            },
+            "description": "Represents the state of a training job.",
+            "required": [
+                "jobId",
+                "createdDateTime",
+                "lastUpdatedDateTime",
+                "status",
+                "result"
+            ]
+        },
+        "Warning": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "The warning code."
+                },
+                "message": {
+                    "type": "string",
+                    "description": "The warning message."
+                }
+            },
+            "description": "Represents a warning that was encountered while executing the request.",
+            "required": [
+                "code",
+                "message"
+            ]
+        },
+        "object": {
+            "type": "object",
+            "properties": {}
+        }
+    },
+    "parameters": {
+        "Azure.Core.Foundations.ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "minLength": 1,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "EvaluationSummary": {
+            "name": "evaluationOptions",
+            "in": "path",
+            "required": true,
+            "description": "Represents the options used running the evaluation.",
+            "type": "object",
+            "properties": {
+                "kind": {
+                    "$ref": "#/definitions/EvaluationKind",
+                    "description": "Represents the evaluation kind. By default, the evaluation kind is set to\npercentage."
+                },
+                "trainingSplitPercentage": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the training dataset split percentage. Only needed in case the\nevaluation kind is percentage."
+                },
+                "testingSplitPercentage": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Represents the testing dataset split percentage. Only needed in case the\nevaluation kind is percentage."
+                }
+            },
+            "x-ms-parameter-location": "method"
+        },
+        "JobState.jobId": {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The job ID.",
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "ProjectDeployment.deploymentName": {
+            "name": "deploymentName",
+            "in": "path",
+            "required": true,
+            "description": "Represents deployment name.",
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "ProjectMetadata.storageInputContainerName": {
+            "name": "storageInputContainerName",
+            "in": "path",
+            "required": true,
+            "description": "The storage container name.",
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        },
+        "ProjectTrainedModel.modelId": {
+            "name": "modelId",
+            "in": "path",
+            "required": true,
+            "description": "The model ID.",
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        }
+    }
+}

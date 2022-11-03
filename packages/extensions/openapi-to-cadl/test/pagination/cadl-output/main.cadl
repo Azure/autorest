@@ -1,0 +1,17 @@
+import "@cadl-lang/rest";
+import "./routes.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+@serviceTitle("AutoRest Paging Test Service")
+@serviceVersion("1.0.0")
+@server(
+  "{$host}",
+  "Long-running Operation for AutoRest",
+  {
+    @doc("server parameter")
+    $host: string,
+  }
+)
+@doc("Long-running Operation for AutoRest")
+namespace AutoRestPagingTestService;

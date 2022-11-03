@@ -1,0 +1,13 @@
+import "@cadl-lang/rest";
+import "./routes.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+@serviceTitle("OpenAI")
+@serviceVersion("2022-03-01-preview")
+@server(
+  "https://{endpoint}/openai",
+  "Azure OpenAI APIs for completions and search"
+)
+@doc("Azure OpenAI APIs for completions and search")
+namespace Azure.AI.OpenAI;

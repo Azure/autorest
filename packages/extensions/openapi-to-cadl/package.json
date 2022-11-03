@@ -1,0 +1,63 @@
+{
+  "name": "@autorest/openapi-to-cadl",
+  "version": "0.1.0",
+  "description": "Autorest plugin to scaffold a CADL definition from an OpenAPI document",
+  "main": "dist/src/main.js",
+  "typings": "dist/main.d.ts",
+  "scripts": {
+    "test:adel": "autorest --openapi-to-cadl --input-file=./test/adel/adel.json --use=. --output-folder=./test/adel",
+    "test:bodycomplex": "autorest --openapi-to-cadl --input-file=./test/bodyComplex/body-complex.json --use=. --output-folder=./test/bodyComplex",
+    "test:url": "autorest --openapi-to-cadl --input-file=./test/url/url.json --use=. --output-folder=./test/url",
+    "test:pubsub": "autorest --openapi-to-cadl --input-file=./test/webpubsub/webpubsub.json --use=. --output-folder=./test/webpubsub",
+    "build": "tsc -p .",
+    "generate": "ts-node ./test/utils/generateCadl.ts generate",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf ./dist ./temp",
+    "start": "node --max_old_space_size=4096 ./dist/src/main.js",
+    "debug": "node --max_old_space_size=4096 --inspect-brk=localhost:9229 ./dist/src/main.js",
+    "watch": "tsc -p . --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/autorest.git"
+  },
+  "keywords": [
+    "Autorest",
+    "cadl"
+  ],
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/autorest/issues"
+  },
+  "files": [
+    "src",
+    "dist/**",
+    "README.md",
+    "LICENSE"
+  ],
+  "homepage": "https://github.com/Azure/autorest#readme",
+  "dependencies": {
+    "@autorest/extension-base": "~3.5.0",
+    "@autorest/codemodel": "~4.19.2",
+    "@cadl-lang/compiler": "^0.35.0",
+    "@cadl-lang/openapi": "^0.11.0",
+    "@cadl-lang/openapi3": "^0.14.0",
+    "@cadl-lang/prettier-plugin-cadl": "^0.5.15",
+    "@cadl-lang/rest": "^0.17.0",
+    "prettier": "~2.6.2",
+    "@cadl-lang/versioning": "^0.7.0",
+    "@azure-tools/cadl-azure-core": "^0.7.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.8.4",
+    "@types/prettier": "^2.7.0",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "@types/node": "~14.14.20",
+    "fs-extra": "^10.1.0",
+    "@types/fs-extra": "^9.0.13",
+    "chalk": "^4.1.0",
+    "@azure-tools/cadl-autorest": "^0.20.0"
+  }
+}

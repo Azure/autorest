@@ -1,0 +1,23 @@
+import "@cadl-lang/rest";
+import "./routes.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+@serviceTitle("Azure Schema Registry")
+@serviceVersion("2021-10")
+@server(
+  "https://{endpoint}",
+  "Azure Schema Registry is as a central schema repository, with support for versioning, management, compatibility checking, and RBAC.",
+  {
+    @doc("""
+The Schema Registry service endpoint, for example
+my-namespace.servicebus.windows.net.
+""")
+    endpoint: string,
+  }
+)
+@doc("""
+Azure Schema Registry is as a central schema repository, with support for
+versioning, management, compatibility checking, and RBAC.
+""")
+namespace AzureSchemaRegistry;

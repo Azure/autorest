@@ -1,0 +1,17 @@
+{
+  "name": "@cadl-api-spec/autorest-url-test-service",
+  "author": "Microsoft Corporation",
+  "description": "Test Infrastructure for AutoRest",
+  "license": "MIT",
+  "dependencies": {
+    "@cadl-lang/compiler": "^0.35.0",
+    "@cadl-lang/rest": "^0.17.0",
+    "@cadl-lang/versioning": "^0.8.0",
+    "@cadl-lang/prettier-plugin-cadl": "^0.5.15",
+    "@azure-tools/cadl-azure-core": "^0.7.0",
+    "@azure-tools/cadl-autorest": "^0.20.0",
+    "@azure-tools/cadl-python": "^0.2.5",
+    "prettier": "^2.7.1"
+  },
+  "private": true
+}
