@@ -10,13 +10,7 @@ import {
   SchemaResponse,
 } from "@autorest/codemodel";
 import { getDataTypes } from "../data-types";
-import {
-  CadlOperation,
-  CadlOperationGroup,
-  CadlParameter,
-  CadlParameterLocation,
-  Extension,
-} from "../interfaces";
+import { CadlOperation, CadlOperationGroup, CadlParameter, CadlParameterLocation, Extension } from "../interfaces";
 import { transformDataType } from "../model";
 import { getLogger } from "../utils/logger";
 import { getLanguageMetadata } from "../utils/metadata";
@@ -24,11 +18,9 @@ import { isConstantSchema } from "../utils/schemas";
 
 export function transformOperationGroup(
   { language, operations }: OperationGroup,
-  codeModel: CodeModel
+  codeModel: CodeModel,
 ): CadlOperationGroup {
-  const name = language.default.name
-    ? `${language.default.name}Operations`
-    : "";
+  const name = language.default.name ? `${language.default.name}Operations` : "";
   const doc = language.default.description;
   const ops = operations.reduce<CadlOperation[]>((acc, op) => {
     acc = [...acc, ...transformOperation(op, codeModel)];
@@ -49,10 +41,7 @@ function transformVerb(protocol?: Protocols) {
   return protocol?.http?.method;
 }
 
-function transformResponses(
-  responses: SchemaResponse[] = [],
-  codeModel: CodeModel
-) {
+function transformResponses(responses: SchemaResponse[] = [], codeModel: CodeModel) {
   const dataTypes = getDataTypes(codeModel);
   return responses.map(({ schema }) => {
     const responseName = dataTypes.get(schema)?.name;
@@ -61,10 +50,7 @@ function transformResponses(
       return "void";
     }
 
-    if (
-      schema.language.default.paging?.isPageable &&
-      schema.language.default.resource
-    ) {
+    if (schema.language.default.paging?.isPageable && schema.language.default.resource) {
       return `Azure.Core.ResourceList<${responseName}>`;
     }
 
@@ -72,29 +58,17 @@ function transformResponses(
   });
 }
 
-export function transformOperation(
-  operation: Operation,
-  codeModel: CodeModel
-): CadlOperation[] {
-  return (operation.requests ?? []).map((r) =>
-    transformRequest(r, operation, codeModel)
-  );
+export function transformOperation(operation: Operation, codeModel: CodeModel): CadlOperation[] {
+  return (operation.requests ?? []).map((r) => transformRequest(r, operation, codeModel));
 }
 
-function transformRequest(
-  _request: Request,
-  operation: Operation,
-  codeModel: CodeModel
-): CadlOperation {
+function transformRequest(_request: Request, operation: Operation, codeModel: CodeModel): CadlOperation {
   const { language, responses, requests } = operation;
   const name = language.default.name;
   const doc = language.default.description;
   const summary = language.default.summary;
   const { paging } = getLanguageMetadata(operation.language);
-  const transformedResponses = transformResponses(
-    [...(responses ?? [])] as SchemaResponse[],
-    codeModel
-  );
+  const transformedResponses = transformResponses([...(responses ?? [])] as SchemaResponse[], codeModel);
   const visitedParameter: Set<Parameter> = new Set();
   let parameters = (operation.parameters ?? [])
     .filter((p) => filterOperationParameters(p, visitedParameter))
@@ -139,10 +113,7 @@ function constantValueEquals(schema: Schema, match: string) {
   return false;
 }
 
-function filterOperationParameters(
-  parameter: Parameter,
-  visitedParameters: Set<Parameter>
-): boolean {
+function filterOperationParameters(parameter: Parameter, visitedParameters: Set<Parameter>): boolean {
   if (
     parameter.protocol.http?.in === ParameterLocation.Query &&
     parameter.language.default.serializedName === "api-version"
@@ -161,9 +132,7 @@ function filterOperationParameters(
     return false;
   }
 
-  const shouldVisit = ["path", "body", "header", "query"].includes(
-    parameter.protocol.http?.in
-  );
+  const shouldVisit = ["path", "body", "header", "query"].includes(parameter.protocol.http?.in);
 
   if (shouldVisit) {
     visitedParameters.add(parameter);
@@ -172,20 +141,13 @@ function filterOperationParameters(
   return shouldVisit;
 }
 
-export function transformParameter(
-  parameter: Parameter,
-  codeModel: CodeModel
-): CadlParameter {
+export function transformParameter(parameter: Parameter, codeModel: CodeModel): CadlParameter {
   // Body parameter doesn't have a serializedName, in that case we get the name
-  const name =
-    parameter.language.default.serializedName ??
-    parameter.language.default.name;
+  const name = parameter.language.default.serializedName ?? parameter.language.default.name;
   const doc = parameter.language.default.description;
 
   const dataTypes = getDataTypes(codeModel);
-  const visited =
-    dataTypes.get(parameter.schema) ??
-    transformDataType(parameter.schema, codeModel);
+  const visited = dataTypes.get(parameter.schema) ?? transformDataType(parameter.schema, codeModel);
 
   return {
     kind: "parameter",
@@ -214,15 +176,11 @@ function getRequestParameters(operation: Operation): Parameter[] {
   return [...parameters, ...signatureParameters];
 }
 
-function transformParameterLocation(
-  parameter: Parameter
-): CadlParameterLocation {
+function transformParameterLocation(parameter: Parameter): CadlParameterLocation {
   const location: ParameterLocation = parameter.protocol.http?.in;
 
   if (!location) {
-    throw new Error(
-      `Parameter ${parameter.language.default.name} has no location defined`
-    );
+    throw new Error(`Parameter ${parameter.language.default.name} has no location defined`);
   }
 
   switch (location) {

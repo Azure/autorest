@@ -1,11 +1,4 @@
-import {
-  CodeModel,
-  isObjectSchema,
-  ObjectSchema,
-  Property,
-  Schema,
-  SchemaType,
-} from "@autorest/codemodel";
+import { CodeModel, isObjectSchema, ObjectSchema, Property, Schema, SchemaType } from "@autorest/codemodel";
 import { getDataTypes } from "../data-types";
 import { CadlObject, CadlObjectProperty } from "../interfaces";
 import { addCorePageAlias } from "../utils/alias";
@@ -39,10 +32,7 @@ const cadlTypes = new Map<SchemaType, string>([
   [SchemaType.AnyObject, "object"],
 ]);
 
-export function transformObject(
-  schema: ObjectSchema,
-  codeModel: CodeModel
-): CadlObject {
+export function transformObject(schema: ObjectSchema, codeModel: CodeModel): CadlObject {
   const cadlTypes = getDataTypes(codeModel);
   let visited: Partial<CadlObject> = cadlTypes.get(schema) as CadlObject;
   if (visited) {
@@ -100,10 +90,7 @@ function addFixmes(cadlObject: CadlObject): void {
   }
 }
 
-export function transformObjectProperty(
-  propertySchema: Property,
-  codeModel: CodeModel
-): CadlObjectProperty {
+export function transformObjectProperty(propertySchema: Property, codeModel: CodeModel): CadlObjectProperty {
   const name = propertySchema.serializedName;
   const doc = propertySchema.language.default.description;
   if (isObjectSchema(propertySchema.schema)) {
@@ -127,9 +114,7 @@ export function transformObjectProperty(
 
   const logger = getLogger("getDiscriminatorProperty");
 
-  logger.info(
-    `Transforming property ${propertySchema.language.default.name} of type ${propertySchema.schema.type}`
-  );
+  logger.info(`Transforming property ${propertySchema.language.default.name} of type ${propertySchema.schema.type}`);
   return {
     kind: "property",
     doc,

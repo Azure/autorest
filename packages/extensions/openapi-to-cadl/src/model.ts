@@ -21,10 +21,7 @@ export function getModel(codeModel: CodeModel): CadlProgram {
   return model;
 }
 
-export function transformDataType(
-  schema: Schema,
-  codeModel: CodeModel
-): CadlDataType {
+export function transformDataType(schema: Schema, codeModel: CodeModel): CadlDataType {
   if (isObjectSchema(schema)) {
     return transformObject(schema, codeModel);
   }
@@ -41,19 +38,15 @@ export function transformDataType(
 }
 
 function transformModel(codeModel: CodeModel): CadlProgram {
-  const caldEnums = [
-    ...(codeModel.schemas.choices ?? []),
-    ...(codeModel.schemas.sealedChoices ?? []),
-  ].map((c) => transformEnum(c, codeModel));
+  const caldEnums = [...(codeModel.schemas.choices ?? []), ...(codeModel.schemas.sealedChoices ?? [])].map((c) =>
+    transformEnum(c, codeModel),
+  );
 
-  const cadlObjects =
-    codeModel.schemas.objects?.map((o) => transformObject(o, codeModel)) ?? [];
+  const cadlObjects = codeModel.schemas.objects?.map((o) => transformObject(o, codeModel)) ?? [];
 
   const serviceInformation = transformServiceInformation(codeModel);
 
-  const cadlOperationGroups = codeModel.operationGroups.map((g) =>
-    transformOperationGroup(g, codeModel)
-  );
+  const cadlOperationGroups = codeModel.operationGroups.map((g) => transformOperationGroup(g, codeModel));
 
   return {
     serviceInformation,

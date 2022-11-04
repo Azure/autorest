@@ -13,11 +13,7 @@ export async function generateCadl(folder: string, debug = false) {
   }
 
   const firstSwagger = dir.find(
-    (f) =>
-      f.endsWith(".json") ||
-      f.endsWith(".yaml") ||
-      f.endsWith(".yml") ||
-      f.endsWith(".md")
+    (f) => f.endsWith(".json") || f.endsWith(".yaml") || f.endsWith(".yml") || f.endsWith(".md"),
   );
 
   if (!firstSwagger) {
@@ -30,8 +26,7 @@ export async function generateCadl(folder: string, debug = false) {
 
 function generate(path: string, debug = false) {
   const extension = extname(path);
-  const inputFile =
-    extension === ".json" ? `--input-file=${path}` : `--require=${path}`;
+  const inputFile = extension === ".json" ? `--input-file=${path}` : `--require=${path}`;
 
   let overrideGuess = false;
   if (extension === ".md") {
@@ -46,9 +41,7 @@ function generate(path: string, debug = false) {
     `--output-folder=${dirname(path)}`,
     "--src-path=cadl-output",
     ...(debug ? ["--openapi-to-cadl.debugger"] : []),
-    ...(overrideGuess
-      ? ["--guessResourceKey=false"]
-      : ["--guessResourceKey=true"]),
+    ...(overrideGuess ? ["--guessResourceKey=false"] : ["--guessResourceKey=true"]),
   ];
   const spawn = spawnSync("autorest", args, { stdio: "inherit" });
 

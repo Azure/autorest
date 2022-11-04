@@ -1,18 +1,9 @@
-import {
-  ChoiceSchema,
-  ChoiceValue,
-  CodeModel,
-  SchemaType,
-  SealedChoiceSchema,
-} from "@autorest/codemodel";
+import { ChoiceSchema, ChoiceValue, CodeModel, SchemaType, SealedChoiceSchema } from "@autorest/codemodel";
 import { getDataTypes } from "../data-types";
 import { CadlChoiceValue, CadlEnum } from "../interfaces";
 import { transformValue } from "../utils/values";
 
-export function transformEnum(
-  schema: SealedChoiceSchema | ChoiceSchema,
-  codeModel: CodeModel
-): CadlEnum {
+export function transformEnum(schema: SealedChoiceSchema | ChoiceSchema, codeModel: CodeModel): CadlEnum {
   const dataTypes = getDataTypes(codeModel);
 
   let cadlEnum = dataTypes.get(schema) as CadlEnum;

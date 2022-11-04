@@ -15,11 +15,7 @@ import { CadlResource } from "../interfaces";
 import { transformDataType } from "../model";
 import { getOptions } from "../options";
 import { hasLROExtension } from "./lro";
-import {
-  getPageableResponse,
-  isPageableOperation,
-  isPageValue,
-} from "./paging";
+import { getPageableResponse, isPageableOperation, isPageValue } from "./paging";
 import { isArraySchema, isResponseSchema } from "./schemas";
 
 const knownResourceSchema: Map<string, Schema> = new Map();
@@ -64,10 +60,7 @@ function isActionOperation(operation: Operation) {
   return lastPart.startsWith(":");
 }
 
-function getResourceKind(
-  codeModel: CodeModel,
-  operation: Operation
-): CadlResource | undefined {
+function getResourceKind(codeModel: CodeModel, operation: Operation): CadlResource | undefined {
   if (isActionOperation(operation)) {
     // Actions are not yet supported
     return undefined;
@@ -89,33 +82,21 @@ function getResourceKind(
   }
 
   if (operationMethod === HttpMethod.Patch) {
-    const resource = handleResource(
-      codeModel,
-      operation,
-      "ResourceCreateOrUpdate"
-    );
+    const resource = handleResource(codeModel, operation, "ResourceCreateOrUpdate");
     if (resource) {
       return resource;
     }
   }
 
   if (operationMethod === HttpMethod.Put) {
-    const resource = handleResource(
-      codeModel,
-      operation,
-      "ResourceCreateOrReplace"
-    );
+    const resource = handleResource(codeModel, operation, "ResourceCreateOrReplace");
     if (resource) {
       return resource;
     }
   }
 
   if (operationMethod === HttpMethod.Post) {
-    const resource = handleResource(
-      codeModel,
-      operation,
-      "ResourceCreateWithServiceProvidedName"
-    );
+    const resource = handleResource(codeModel, operation, "ResourceCreateWithServiceProvidedName");
     if (resource) {
       return resource;
     }
@@ -135,34 +116,19 @@ function getResourceKind(
   return undefined;
 }
 
-function handleLROResource(
-  codeModel: CodeModel,
-  operation: Operation
-): CadlResource | undefined {
+function handleLROResource(codeModel: CodeModel, operation: Operation): CadlResource | undefined {
   const operationMethod = getHttpMethod(codeModel, operation);
 
   if (operationMethod === HttpMethod.Patch) {
-    return handleResource(
-      codeModel,
-      operation,
-      "LongRunningResourceCreateOrUpdate"
-    );
+    return handleResource(codeModel, operation, "LongRunningResourceCreateOrUpdate");
   }
 
   if (operationMethod === HttpMethod.Put) {
-    return handleResource(
-      codeModel,
-      operation,
-      "LongRunningResourceCreateOrReplace"
-    );
+    return handleResource(codeModel, operation, "LongRunningResourceCreateOrReplace");
   }
 
   if (operationMethod === HttpMethod.Post) {
-    return handleResource(
-      codeModel,
-      operation,
-      "LongRunningResourceCreateWithServiceProvidedName"
-    );
+    return handleResource(codeModel, operation, "LongRunningResourceCreateWithServiceProvidedName");
   }
 
   if (operationMethod === HttpMethod.Delete) {
@@ -185,7 +151,7 @@ function handleResource(
     | "LongRunningResourceCreateOrUpdate"
     | "LongRunningResourceCreateWithServiceProvidedName"
     | "LongRunningResourceDelete"
-    | "ResourceAction"
+    | "ResourceAction",
 ): CadlResource | undefined {
   const dataTypes = getDataTypes(codeModel);
   for (const response of operation.responses ?? []) {
@@ -194,10 +160,7 @@ function handleResource(
       let resourcePath = getResourcePath(operation);
       schema = knownResourceSchema.get(resourcePath);
 
-      if (
-        kind === "ResourceAction" &&
-        operation.language.default.actionResource?.resource
-      ) {
+      if (kind === "ResourceAction" && operation.language.default.actionResource?.resource) {
         resourcePath = operation.language.default.actionResource.resource;
         schema = knownResourceSchema.get(resourcePath);
       }
@@ -211,8 +174,7 @@ function handleResource(
     if (!markResource(operation, schema)) {
       return undefined;
     }
-    const cadlResponse =
-      dataTypes.get(schema) ?? transformDataType(schema, codeModel);
+    const cadlResponse = dataTypes.get(schema) ?? transformDataType(schema, codeModel);
     return {
       kind,
       response: cadlResponse,
@@ -230,25 +192,16 @@ function getResourcePath(operation: Operation): string {
     }
   }
 
-  throw new Error(
-    `Couldn't find a resource path for operation ${operation.language.default.name}`
-  );
+  throw new Error(`Couldn't find a resource path for operation ${operation.language.default.name}`);
 }
 
-function getHttpMethod(
-  _codeModel: CodeModel,
-  operation: Operation
-): HttpMethod {
+function getHttpMethod(_codeModel: CodeModel, operation: Operation): HttpMethod {
   return operation.requests?.[0].protocol.http?.method;
 }
 
-function getNonPageableListResource(
-  operation: Operation
-): ArraySchema | undefined {
+function getNonPageableListResource(operation: Operation): ArraySchema | undefined {
   if (!operation.responses) {
-    throw new Error(
-      `Operation ${operation.language.default.name} has no defined responses`
-    );
+    throw new Error(`Operation ${operation.language.default.name} has no defined responses`);
   }
   for (const response of operation.responses) {
     let schema: Schema | undefined;
@@ -269,15 +222,10 @@ function getNonPageableListResource(
   }
 
   const firstResponse = operation.responses[0];
-  return isResponseSchema(firstResponse) && isArraySchema(firstResponse.schema)
-    ? firstResponse.schema
-    : undefined;
+  return isResponseSchema(firstResponse) && isArraySchema(firstResponse.schema) ? firstResponse.schema : undefined;
 }
 
-function handleGetOperation(
-  codeModel: CodeModel,
-  operation: Operation
-): CadlResource | undefined {
+function handleGetOperation(codeModel: CodeModel, operation: Operation): CadlResource | undefined {
   if (isPageableOperation(operation)) {
     return getPageableResource(codeModel, operation);
   }
@@ -314,10 +262,7 @@ function markResource(operation: Operation, elementType: Schema) {
   return false;
 }
 
-function getPageableResource(
-  codeModel: CodeModel,
-  operation: Operation
-): CadlResource | undefined {
+function getPageableResource(codeModel: CodeModel, operation: Operation): CadlResource | undefined {
   const response = getPageableResponse(operation) as SchemaResponse;
   if (isObjectSchema(response.schema)) {
     for (const property of response.schema.properties ?? []) {
@@ -333,9 +278,7 @@ function getPageableResource(
           return undefined;
         }
 
-        const cadlResponse =
-          dataTypes.get(elementType) ??
-          transformDataType(elementType, codeModel);
+        const cadlResponse = dataTypes.get(elementType) ?? transformDataType(elementType, codeModel);
         return {
           kind: "ResourceList",
           response: cadlResponse,
@@ -344,9 +287,7 @@ function getPageableResource(
     }
   }
 
-  throw new Error(
-    `Couldn't determine the Pageable resource for the operation: ${operation.language.default.name}`
-  );
+  throw new Error(`Couldn't determine the Pageable resource for the operation: ${operation.language.default.name}`);
 }
 
 function markModelWithResource(elementType: Schema, resource: string) {
@@ -391,10 +332,7 @@ function hasParentWithKey(parents: ComplexSchema[]) {
   return false;
 }
 
-function markParents(
-  parents: ComplexSchema[],
-  defaultToFirst = false
-): boolean {
+function markParents(parents: ComplexSchema[], defaultToFirst = false): boolean {
   for (const parent of parents) {
     if (!isObjectSchema(parent)) {
       continue;
@@ -417,21 +355,12 @@ function shouldTryDefaultKeyInParent(schema: ObjectSchema) {
   return true;
 }
 
-function markKeyProperty(
-  allProperties: Property[],
-  defaultToFirst = false
-): boolean {
-  const properties = allProperties.filter(
-    (p) => p.required && !p.isDiscriminator
-  );
+function markKeyProperty(allProperties: Property[], defaultToFirst = false): boolean {
+  const properties = allProperties.filter((p) => p.required && !p.isDiscriminator);
 
   for (const property of properties) {
     const serializedName = property.serializedName.toLowerCase();
-    if (
-      serializedName.endsWith("name") ||
-      serializedName.endsWith("key") ||
-      serializedName.endsWith("id")
-    ) {
+    if (serializedName.endsWith("name") || serializedName.endsWith("key") || serializedName.endsWith("id")) {
       property.language.default.isResourceKey = true;
       return true;
     }
