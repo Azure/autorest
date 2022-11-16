@@ -339,8 +339,8 @@ describe("Modelerfour.Request", () => {
       expect(newResponses).toEqual(oldResponses);
     });
 
-    // Modelerfour allows an LRO to have a 202 response without a 200 response.
-    it("does not error if an LRO does not have a 200 response", async () => {
+    // Modelerfour allows an LRO to have a 202 response without a 200 or 201 response.
+    it("does not error if an LRO does not have a 200 or 201 response", async () => {
       const spec: oai3.Model = createTestSpec();
       addOperation(spec, "/products/{id}", {
         put: {
