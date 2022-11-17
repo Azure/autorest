@@ -18,21 +18,10 @@ use-extension:
   "@microsoft.azure/openapi-validator": "^1.7.0"
 ```
 
-```yaml $(model-validator)
-# default the v2 generator to using the last stable @microsoft.azure/autorest-core
-version: ~2.0.4413
-
-use-extension:
-  "oav": "~0.4.20"
-```
-
 #### Validation
 
 ```yaml
 pipeline:
-  swagger-document/model-validator:
-    input: swagger-document/identity
-    scope: model-validator
   swagger-document/semantic-validator:
     input: swagger-document/identity
     scope: semantic-validator
@@ -40,9 +29,6 @@ pipeline:
 
 ```yaml $(notnow)
 pipeline:
-  openapi-document/model-validator:
-    input: openapi-document/identity
-    scope: model-validator
   openapi-document/semantic-validator:
     input: openapi-document/identity
     scope: semantic-validator
