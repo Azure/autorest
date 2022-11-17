@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@autorest/configuration",
+      "comment": "Remove `--model-validator` flag to load oav as oav autorest plugin is not supported anymore",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@autorest/configuration"
+}
