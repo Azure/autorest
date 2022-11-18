@@ -34,7 +34,6 @@ Those are flags that affect autorest only
 | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--azure-validator`                     | If set, runs the Azure specific validator plugin.                                                                                                        |
 | `--openapi-type=arm│default│data-plane` | Indicates the type of configuration file being passed to the `azure-validator` so that it can run the appropriate class of validation rules accordingly. |
-| `--model-validator`                     | If set, validates the provided OpenAPI definition(s) against provided `examples`.                                                                        |
 | `--skip-semantics-validation`           | Disable the semantic validator plugin.                                                                                                                   |
 
 ## Shared Flags
