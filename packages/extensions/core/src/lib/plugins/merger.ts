@@ -135,7 +135,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
         case "info":
           if (!this.isSecondaryFile) {
             const info = this.getOrCreateObject(target, "info", pointer);
-            this.visitInfo(info as any, children);
+            this.visitInfo(info, children);
           }
 
           break;
