@@ -370,7 +370,8 @@ export class Deduplicator {
         }
         break;
       default:
-        throw new Error(`Unknown component type: '${type}'`);
+        // Skip unknown component type
+        return;
     }
   }
 
