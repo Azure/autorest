@@ -7053,7 +7053,7 @@ packages:
       webpack: 5.40.0_webpack-cli@4.7.2
     dev: false
 
-  /ts-loader/9.2.9_typescript@4.8.4+webpack@5.40.0:
+  /ts-loader/9.2.9_typescript@4.9.3+webpack@5.40.0:
     resolution: {integrity: sha512-b0+vUY2/enb0qYtDQuNlDnJ9900NTiPiJcDJ6sY7ax1CCCwXfYIqPOMm/BwW7jsF1km+Oz8W9s31HLuD+FLIMg==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -7064,7 +7064,7 @@ packages:
       enhanced-resolve: 5.9.3
       micromatch: 4.0.5
       semver: 7.3.7
-      typescript: 4.8.4
+      typescript: 4.9.3
       webpack: 5.40.0_webpack-cli@4.7.2
     dev: false
 
@@ -7149,14 +7149,14 @@ packages:
       typescript: 4.9.3
     dev: false
 
-  /tsutils/3.21.0_typescript@4.8.4:
+  /tsutils/3.21.0_typescript@4.9.3:
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
     engines: {node: '>= 6'}
     peerDependencies:
       typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta'
     dependencies:
       tslib: 1.14.1
-      typescript: 4.8.4
+      typescript: 4.9.3
     dev: false
 
   /tunnel-agent/0.6.0:
@@ -7235,8 +7235,8 @@ packages:
     hasBin: true
     dev: false
 
-  /typescript/4.8.4:
-    resolution: {integrity: sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==}
+  /typescript/4.9.3:
+    resolution: {integrity: sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: false

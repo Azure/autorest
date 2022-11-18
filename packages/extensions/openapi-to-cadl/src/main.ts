@@ -4,12 +4,7 @@
 import { existsSync, mkdirSync } from "fs";
 import { join } from "path";
 import { CodeModel, codeModelSchema } from "@autorest/codemodel";
-import {
-  AutoRestExtension,
-  AutorestExtensionHost,
-  Session,
-  startSession,
-} from "@autorest/extension-base";
+import { AutoRestExtension, AutorestExtensionHost, Session, startSession } from "@autorest/extension-base";
 import { markErrorModels } from "./utils/errors";
 import { setSession } from "./autorest-session";
 import { emitCadlConfig } from "./emiters/emit-cadl-config";
