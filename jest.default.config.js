@@ -2,7 +2,12 @@
 
 const config = {
   transform: {
-    "^.+\\.ts$": "ts-jest",
+    "^.+\\.ts$": [
+      "ts-jest",
+      {
+        tsconfig: "tsconfig.json",
+      },
+    ],
   },
   moduleFileExtensions: ["ts", "js", "json", "node"],
   moduleNameMapper: {},
@@ -11,11 +16,6 @@ const config = {
   coverageReporters: ["json", "html", "cobertura"],
   coveragePathIgnorePatterns: ["/node_modules/", ".*/test/.*"],
   modulePathIgnorePatterns: ["<rootDir>/sdk"],
-  globals: {
-    "ts-jest": {
-      tsconfig: "tsconfig.json",
-    },
-  },
   setupFilesAfterEnv: [],
   verbose: true,
   testEnvironment: "node",

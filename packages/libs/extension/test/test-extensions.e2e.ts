@@ -81,7 +81,7 @@ describe("TestExtensions", () => {
     async () => {
       await expect(async () => {
         await extensionManager.findPackage("koooopasdpasdppasdpa");
-      }).rejects.toThrowError(UnresolvedPackageException);
+      }).rejects.toThrow(UnresolvedPackageException);
     },
     TEST_TIMEOUT,
   );
@@ -91,7 +91,7 @@ describe("TestExtensions", () => {
     async () => {
       await expect(async () => {
         await extensionManager.findPackage("LLLLl", "$DDFOIDFJIODFJ");
-      }).rejects.toThrowError(InvalidPackageIdentityException);
+      }).rejects.toThrow(InvalidPackageIdentityException);
     },
     TEST_TIMEOUT,
   );

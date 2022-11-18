@@ -20,6 +20,6 @@ describe("MemoryFileSystem", () => {
 
   it("should throw error if the file doesn't exists", async () => {
     const uri = MemoryFileSystem.DefaultVirtualRootUri + "unkown-file.md";
-    await expect(() => fs.read(uri)).rejects.toThrowError(UriNotFoundError);
+    await expect(() => fs.read(uri)).rejects.toThrow(UriNotFoundError);
   });
 });

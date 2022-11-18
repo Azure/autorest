@@ -20,7 +20,7 @@ describe("MemoryFileSystem", () => {
 
     it("should throw error if the local file doesn't exists", async () => {
       const uri = ResolveUri(baseDir + "/", "unkown-file.md");
-      await expect(() => fs.read(uri)).rejects.toThrowError(UriNotFoundError);
+      await expect(() => fs.read(uri)).rejects.toThrow(UriNotFoundError);
     });
   });
 
@@ -38,7 +38,7 @@ describe("MemoryFileSystem", () => {
     it("should throw error if the local file doesn't exists", async () => {
       await expect(() =>
         fs.read("https://github.com/Azure/autorest/blob/main/this-file-doesnot-exists.md"),
-      ).rejects.toThrowError(UriNotFoundError);
+      ).rejects.toThrow(UriNotFoundError);
     });
   });
 });

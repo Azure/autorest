@@ -29,7 +29,7 @@ describe("Semantic Validation > Paths", () => {
     expect(errors).toEqual([
       {
         level: "error",
-        code: SemanticErrorCodes.PathParameterEmtpy,
+        code: SemanticErrorCodes.PathParameterEmpty,
         message: "A path parameter in uri /my/{}/empty/param is empty.",
         params: { uri: "/my/{}/empty/param" },
         path: ["paths", "/my/{}/empty/param"],

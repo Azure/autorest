@@ -22,7 +22,7 @@ export function createSemanticValidationPlugin(): PipelinePlugin {
       specMap.set(file.identity[0], { spec, file });
     }
 
-    const resolveReference = <T>(item: Refable<T>, from: string): T => {
+    const resolveReference = <T extends {}>(item: Refable<T>, from: string): T => {
       if (!("$ref" in item)) {
         return item;
       }

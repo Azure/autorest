@@ -51,8 +51,8 @@ export class Transformer<TInput extends object = AnyObject, TOutput extends obje
     target: ProxyObject<TParent>,
     member: K,
     pointer: string,
-  ) {
-    return target[member] === undefined ? this.newObject(target, member, pointer) : target[member];
+  ): ProxyObject<TParent[K]> {
+    return target[member] === undefined ? this.newObject(target, member, pointer) : (target[member] as any);
   }
 
   public getOrCreateArray<TParent extends object, K extends keyof TParent>(
@@ -78,7 +78,7 @@ export class Transformer<TInput extends object = AnyObject, TOutput extends obje
       pointer,
     };
 
-    return <Real<TParent[K]>>value;
+    return value;
   }
 
   public newArray<TParent extends object, K extends keyof TParent>(

@@ -126,7 +126,7 @@ describe("Security Processor", () => {
           },
           security: [{ ThisIsNotDefined: ["https://myresource.com/.default"] }, {}],
         }),
-      ).rejects.toThrowError("Couldn't find a scheme defined in the securitySchemes with name: ThisIsNotDefined");
+      ).rejects.toThrow("Couldn't find a scheme defined in the securitySchemes with name: ThisIsNotDefined");
     });
   });
 
@@ -180,7 +180,7 @@ describe("Security Processor", () => {
         runSecurity(baseOpenapiSpec, {
           security: ["this-is-unknown"],
         }),
-      ).rejects.toThrowError(
+      ).rejects.toThrow(
         "Unexpected security scheme 'this-is-unknown'. Only known schemes are AADToken,AzureKey,Anonymous",
       );
     });

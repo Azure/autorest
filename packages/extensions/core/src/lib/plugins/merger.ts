@@ -55,7 +55,7 @@ import { PipelinePlugin } from "../pipeline/common";
  *        x-ms-key: "/store"
  *        ...
  *
- *  - rewrite all $refs to point to the new locaiton.
+ *  - rewrite all $refs to point to the new location.
  *
  *  - on files that are marked 'x-ms-secondary', this will only pull in things in /components (and it marks them x-ms-secondary-file: true)
  *
@@ -228,7 +228,7 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
     return getSpecHost(this.currentInput as DataHandle);
   }
 
-  visitInfo(info: ProxyObject<Record<string, oai.Info>>, nodes: Iterable<Node>) {
+  visitInfo(info: ProxyObject<oai.Info>, nodes: Iterable<Node>) {
     for (const { key, value, pointer } of nodes) {
       switch (key) {
         case "title":
@@ -244,8 +244,8 @@ export class MultiAPIMerger extends Transformer<any, oai.Model> {
           // do nothing. This is handled at finish()
           break;
         default:
-          if (!info[key]) {
-            this.clone(info, key, pointer, value);
+          if (!(info as any)[key]) {
+            this.clone(info, key as any, pointer, value);
           }
 
           break;

@@ -307,7 +307,7 @@ export class Oai2ToOai3 {
     }
   }
 
-  private isTargetReference<I, T>(
+  private isTargetReference<I extends {}, T extends {}>(
     target: MappingTreeObject<Refable<T>>,
     value: Refable<I>,
   ): target is MappingTreeObject<PathReference> {

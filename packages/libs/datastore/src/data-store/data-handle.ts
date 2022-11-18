@@ -162,7 +162,7 @@ export class DataHandle {
       return this.blamePath(position.path);
     } else {
       if (this.item.positionSourceMap) {
-        const mapping = await this.item.positionSourceMap.getOriginalLocation(position);
+        const mapping = await this.item.positionSourceMap.getOriginalLocation(position as any);
         if (mapping) {
           return [mapping];
         } else {

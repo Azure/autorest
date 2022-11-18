@@ -36,7 +36,7 @@ describe("AsyncLock", () => {
     }
 
     const r1 = run();
-    await expect(asyncLock.acquire(100)).rejects.toThrowError(ExclusiveLockUnavailableException);
+    await expect(asyncLock.acquire(100)).rejects.toThrow(ExclusiveLockUnavailableException);
     await r1;
   });
 });
