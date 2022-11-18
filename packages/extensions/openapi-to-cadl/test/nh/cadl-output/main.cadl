@@ -3,7 +3,9 @@ import "./routes.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
-@serviceTitle("NotificationHubsClient")
+@service({
+  title: "NotificationHubsClient",
+})
 @serviceVersion("2020-06-01")
 @server(
   "{namespaceBaseUrl}",

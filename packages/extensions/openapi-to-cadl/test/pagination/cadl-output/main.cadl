@@ -3,7 +3,9 @@ import "./routes.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
-@serviceTitle("AutoRest Paging Test Service")
+@service({
+  title: "AutoRest Paging Test Service",
+})
 @serviceVersion("1.0.0")
 @server(
   "{$host}",

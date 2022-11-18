@@ -3,7 +3,9 @@ import "./routes.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
-@serviceTitle("OpenAI")
+@service({
+  title: "OpenAI",
+})
 @serviceVersion("2022-03-01-preview")
 @server(
   "https://{endpoint}/openai",

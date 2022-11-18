@@ -3,7 +3,9 @@ import "./routes.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
-@serviceTitle("QnAMaker Runtime Client")
+@service({
+  title: "QnAMaker Runtime Client",
+})
 @server(
   "{RuntimeEndpoint}/qnamaker",
   "An API for QnAMaker runtime",

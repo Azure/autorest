@@ -3,7 +3,9 @@ import "./routes.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
-@serviceTitle("Azure Batch Service")
+@service({
+  title: "Azure Batch Service",
+})
 @serviceVersion("2022-01-01.15.0")
 @server(
   "{batchUrl}",

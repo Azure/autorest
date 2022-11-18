@@ -3,7 +3,9 @@ import "./routes.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
-@serviceTitle("Azure Schema Registry")
+@service({
+  title: "Azure Schema Registry",
+})
 @serviceVersion("2021-10")
 @server(
   "https://{endpoint}",

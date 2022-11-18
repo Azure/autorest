@@ -3,7 +3,9 @@ import "./routes.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
-@serviceTitle("Microsoft Cognitive Language Service - Question Answering - Authoring")
+@service({
+  title: "Microsoft Cognitive Language Service - Question Answering - Authoring",
+})
 @serviceVersion("2023-05-01")
 @server(
   "{Endpoint}/language",

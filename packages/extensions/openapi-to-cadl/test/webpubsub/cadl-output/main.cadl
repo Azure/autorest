@@ -3,7 +3,9 @@ import "./routes.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
-@serviceTitle("AzureMessagingWebPubSubServiceClient")
+@service({
+  title: "AzureMessagingWebPubSubServiceClient",
+})
 @serviceVersion("2022-11-01")
 @server(
   "{Endpoint}",

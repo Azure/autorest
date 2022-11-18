@@ -3,7 +3,9 @@ import "./routes.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
-@serviceTitle("AutoRest Url Test Service")
+@service({
+  title: "AutoRest Url Test Service",
+})
 @server(
   "{$host}",
   "Test Infrastructure for AutoRest",

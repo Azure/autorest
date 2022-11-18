@@ -3,7 +3,9 @@ import "./routes.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
-@serviceTitle("QnA Maker")
+@service({
+  title: "QnA Maker",
+})
 @serviceVersion("2022-07-01-preview")
 @server(
   "{Endpoint}/language",

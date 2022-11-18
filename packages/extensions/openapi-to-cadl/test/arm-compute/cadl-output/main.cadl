@@ -3,7 +3,9 @@ import "./routes.cadl";
 
 using Cadl.Rest;
 using Cadl.Http;
-@serviceTitle("Microsoft Azure Compute Management")
+@service({
+  title: "Microsoft Azure Compute Management",
+})
 @serviceVersion("2022-08-01")
 @server(
   "{$host}",
