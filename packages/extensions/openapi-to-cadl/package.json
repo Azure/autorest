@@ -49,7 +49,7 @@
     "@azure-tools/cadl-python": "^0.4.10",
     "@cadl-lang/openapi": "^0.11.0",
     "@cadl-lang/openapi3": "^0.14.0",
-    "prettier": "~2.6.2"
+    "prettier": "~2.7.1"
   },
   "devDependencies": {
     "typescript": "~4.9.3",
@@ -66,12 +66,12 @@
     "webpack": "~5.40.0",
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "@typescript-eslint/parser": "^5.27.0",
-    "eslint-plugin-jest": "~26.4.6",
+    "eslint-plugin-jest": "~27.1.5",
     "eslint-plugin-node": "~11.1.0",
-    "eslint-plugin-prettier": "~4.0.0",
-    "eslint-plugin-unicorn": "~42.0.0",
+    "eslint-plugin-prettier": "~4.2.1",
+    "eslint-plugin-unicorn": "~44.0.2",
     "eslint-plugin-import": "~2.26.0",
-    "eslint": "^8.16.0",
+    "eslint": "^8.28.0",
     "ts-loader": "~9.2.3"
   }
 }

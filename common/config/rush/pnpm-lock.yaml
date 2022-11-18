@@ -147,6 +147,7 @@ dependencies:
   '@rush-temp/modelerfour': file:projects/modelerfour.tgz_ts-node@9.1.1
   '@rush-temp/oai2-to-oai3': file:projects/oai2-to-oai3.tgz_prettier@2.7.1+ts-node@9.1.1
   '@rush-temp/openapi': file:projects/openapi.tgz_prettier@2.7.1+ts-node@9.1.1
+  '@rush-temp/openapi-to-cadl': file:projects/openapi-to-cadl.tgz_jest@29.3.1
   '@rush-temp/schemas': file:projects/schemas.tgz
   '@rush-temp/system-requirements': file:projects/system-requirements.tgz_prettier@2.7.1+ts-node@9.1.1
   '@rush-temp/test-public-packages': file:projects/test-public-packages.tgz_prettier@2.7.1
@@ -250,7 +251,7 @@ packages:
     dependencies:
       '@azure/logger': 1.0.3
       command-exists: 1.2.9
-      semver: 7.3.7
+      semver: 7.3.8
     dev: false
 
   /@azure-tools/async-io/3.0.254:
@@ -713,7 +714,7 @@ packages:
       '@babel/code-frame': 7.16.7
       ajv: 8.9.0
       change-case: 4.1.2
-      globby: 13.1.1
+      globby: 13.1.2
       js-yaml: 4.1.0
       mkdirp: 1.0.4
       mustache: 4.2.0
@@ -723,7 +724,7 @@ packages:
       prettier: 2.7.1
       prompts: 2.4.2
       vscode-languageserver: 7.0.0
-      vscode-languageserver-textdocument: 1.0.5
+      vscode-languageserver-textdocument: 1.0.7
       yargs: 17.3.1
     dev: false
 
@@ -1282,7 +1283,7 @@ packages:
   /@types/fs-extra/9.0.13:
     resolution: {integrity: sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==}
     dependencies:
-      '@types/node': 16.11.38
+      '@types/node': 14.14.45
     dev: false
 
   /@types/glob/7.2.0:
@@ -5274,7 +5275,7 @@ packages:
   /minipass/2.9.0:
     resolution: {integrity: sha512-wxfUjg9WebH+CUDX/CdbRlh5SmfZiy/hpkxaRI16Y9W56Pa75sWgd/rvFilSgrauD9NyFymP/+JFV3KwzIsJeg==}
     dependencies:
-      safe-buffer: 5.2.1
+      safe-buffer: 5.2.0
       yallist: 3.1.1
     dev: false
 
@@ -5435,6 +5436,15 @@ packages:
       formdata-polyfill: 4.0.10
     dev: false
 
+  /node-fetch/3.2.8:
+    resolution: {integrity: sha512-KtpD1YhGszhntMpBDyp5lyagk8KIMopC1LEb7cQUAh7zcosaX5uK8HnbNb2i3NTQK3sIawCItS0uFC3QzcLHdg==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dependencies:
+      data-uri-to-buffer: 4.0.0
+      fetch-blob: 3.2.0
+      formdata-polyfill: 4.0.10
+    dev: false
+
   /node-int64/0.4.0:
     resolution: {integrity: sha512-O5lz91xSOeoXP6DulyHfllpq+Eg00MWitZIbtPfoSEvqIHdl5gfcY6hYzDWnj0qD5tz52PI08u9qUvSVeUBeHw==}
     dev: false
@@ -5533,7 +5543,7 @@ packages:
       lru-cache: 5.1.1
       make-fetch-happen: 5.0.2
       npm-package-arg: 6.1.1
-      safe-buffer: 5.2.1
+      safe-buffer: 5.2.0
     dev: false
 
   /npm-run-path/2.0.2:
@@ -7087,26 +7097,42 @@ packages:
       webpack: 5.40.0_webpack-cli@4.7.2
     dev: false
 
-  /ts-loader/9.2.9_typescript@4.9.3+webpack@5.40.0:
-    resolution: {integrity: sha512-b0+vUY2/enb0qYtDQuNlDnJ9900NTiPiJcDJ6sY7ax1CCCwXfYIqPOMm/BwW7jsF1km+Oz8W9s31HLuD+FLIMg==}
-    engines: {node: '>=12.0.0'}
-    peerDependencies:
-      typescript: '*'
-      webpack: ^5.0.0
-    dependencies:
-      chalk: 4.1.2
-      enhanced-resolve: 5.9.3
-      micromatch: 4.0.5
-      semver: 7.3.7
-      typescript: 4.9.3
-      webpack: 5.40.0_webpack-cli@4.7.2
-    dev: false
-
   /ts-morph/13.0.3:
     resolution: {integrity: sha512-pSOfUMx8Ld/WUreoSzvMFQG5i9uEiWIsBYjpU9+TTASOeUa89j5HykomeqVULm1oqWtBdleI3KEFRLrlA3zGIw==}
     dependencies:
       '@ts-morph/common': 0.12.3
       code-block-writer: 11.0.3
+    dev: false
+
+  /ts-node/10.9.1_7d52a1ab8d3f8907f176d15392128f81:
+    resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': '>=1.2.50'
+      '@swc/wasm': '>=1.2.50'
+      '@types/node': '*'
+      typescript: '>=2.7'
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      '@swc/wasm':
+        optional: true
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.9
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.3
+      '@types/node': 14.14.45
+      acorn: 8.8.1
+      acorn-walk: 8.2.0
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 4.9.3
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
     dev: false
 
   /ts-node/10.9.1_fed3b4cb8104197fd8996158792567a5:
@@ -7171,16 +7197,6 @@ packages:
 
   /tslib/2.4.1:
     resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
-    dev: false
-
-  /tsutils/3.21.0_typescript@4.9.3:
-    resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
-    engines: {node: '>= 6'}
-    peerDependencies:
-      typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta'
-    dependencies:
-      tslib: 1.14.1
-      typescript: 4.9.3
     dev: false
 
   /tsutils/3.21.0_typescript@4.9.3:
@@ -7259,12 +7275,6 @@ packages:
 
   /typescript/4.6.4:
     resolution: {integrity: sha512-9ia/jWHIEbo49HfjrLGfKbZSuWo9iTMwXO+Ca3pRsSpbsMbc7/IU8NKdCZVRRBafVPGnoJeFL76ZOAA84I9fEg==}
-    engines: {node: '>=4.2.0'}
-    hasBin: true
-    dev: false
-
-  /typescript/4.9.3:
-    resolution: {integrity: sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: false
@@ -7617,7 +7627,7 @@ packages:
   /wide-align/1.1.5:
     resolution: {integrity: sha512-eDMORYaPNZ4sQIuuYPDHdQvf4gyCF9rEEV/yPxGfwPkRodwEgiMUUXTx/dex+Me0wxx53S+NgUHaP7y3MGlDmg==}
     dependencies:
-      string-width: 4.2.3
+      string-width: 1.0.2
     dev: false
 
   /wildcard/2.0.0:
@@ -8420,6 +8430,56 @@ packages:
       - prettier
       - supports-color
       - ts-node
+    dev: false
+
+  file:projects/openapi-to-cadl.tgz_jest@29.3.1:
+    resolution: {integrity: sha512-c71ROqaMniMzoKbd8ISUj8c8iJ+XphRy2vmBgNZ85XNz+Z8rKouRrZVThdA64eq2ftPy+Zzz0y40wWGzCAmEWA==, tarball: file:projects/openapi-to-cadl.tgz}
+    id: file:projects/openapi-to-cadl.tgz
+    name: '@rush-temp/openapi-to-cadl'
+    version: 0.0.0
+    dependencies:
+      '@azure-tools/cadl-autorest': 0.20.0_7bb8c157cd14650f0893a032b45ea3ab
+      '@azure-tools/cadl-azure-core': 0.9.0_d21a2f9719b9a9b97180252366891ee1
+      '@azure-tools/cadl-python': 0.4.10_e47e309b36bca5141b312b3070791b1c
+      '@cadl-lang/compiler': 0.37.0
+      '@cadl-lang/openapi': 0.11.0_d21a2f9719b9a9b97180252366891ee1
+      '@cadl-lang/openapi3': 0.14.0_54d7e0469b3f026a67a13d2bc5d9b3d4
+      '@cadl-lang/prettier-plugin-cadl': 0.5.17
+      '@cadl-lang/rest': 0.19.0_@cadl-lang+compiler@0.37.0
+      '@cadl-lang/versioning': 0.10.0
+      '@types/fs-extra': 9.0.13
+      '@types/node': 14.14.45
+      '@types/prettier': 2.7.1
+      '@types/webpack': 4.41.33
+      '@typescript-eslint/eslint-plugin': 5.43.0_6c13c08efc22ad2f80829ce4a7a0fc7e
+      '@typescript-eslint/parser': 5.43.0_eslint@8.28.0+typescript@4.9.3
+      chalk: 4.1.2
+      eslint: 8.28.0
+      eslint-plugin-import: 2.26.0_eslint@8.28.0
+      eslint-plugin-jest: 27.1.5_6ad5c3175fb58fda0c046c2cca2eca61
+      eslint-plugin-node: 11.1.0_eslint@8.28.0
+      eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
+      eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
+      fs-extra: 10.1.0
+      prettier: 2.7.1
+      rimraf: 3.0.2
+      ts-loader: 9.2.9_typescript@4.9.3+webpack@5.40.0
+      ts-node: 10.9.1_7d52a1ab8d3f8907f176d15392128f81
+      typescript: 4.9.3
+      webpack: 5.40.0_webpack-cli@4.7.2
+      webpack-cli: 4.7.2_webpack@5.40.0
+    transitivePeerDependencies:
+      - '@swc/core'
+      - '@swc/wasm'
+      - '@webpack-cli/generators'
+      - '@webpack-cli/migrate'
+      - esbuild
+      - eslint-config-prettier
+      - jest
+      - supports-color
+      - uglify-js
+      - webpack-bundle-analyzer
+      - webpack-dev-server
     dev: false
 
   file:projects/openapi.tgz_prettier@2.7.1+ts-node@9.1.1:
