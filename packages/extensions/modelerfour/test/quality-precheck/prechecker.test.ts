@@ -8,7 +8,7 @@ import { addSchema, createTestSessionFromModel, createTestSpec } from "../utils"
 class PreCheckerClient {
   private constructor(private input: Model, public result: Model) {}
 
-  resolve<T>(item: Refable<T>): Dereferenced<T> {
+  resolve<T extends {} | undefined>(item: Refable<T>): Dereferenced<T> {
     return dereference(this.input, item);
   }
 
