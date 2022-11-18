@@ -2,15 +2,15 @@
   "name": "@autorest/openapi-to-cadl",
   "version": "0.1.0",
   "description": "Autorest plugin to scaffold a CADL definition from an OpenAPI document",
-  "main": "dist/src/main.js",
+  "main": "dist/main.js",
   "typings": "dist/main.d.ts",
   "scripts": {
     "generate": "ts-node ./test/utils/generate-cadl.ts generate",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:ci": "npm run generate && node ./test/utils/check-clean-tree.js",
     "clean": "rimraf ./dist ./temp",
-    "start": "node --max_old_space_size=4096 ./dist/src/main.js",
-    "debug": "node --max_old_space_size=4096 --inspect-brk=localhost:9229 ./dist/src/main.js",
+    "start": "node --max_old_space_size=4096 ./dist/main.js",
+    "debug": "node --max_old_space_size=4096 --inspect-brk=localhost:9229 ./dist/main.js",
     "watch": "tsc -p tsconfig.build.json --watch",
     "build": "tsc -p tsconfig.build.json",
     "build:prod": "webpack",
@@ -69,6 +69,7 @@
     "eslint-plugin-prettier": "~4.0.0",
     "eslint-plugin-unicorn": "~42.0.0",
     "eslint-plugin-import": "~2.26.0",
-    "eslint": "^8.16.0"
+    "eslint": "^8.16.0",
+    "ts-loader": "~9.2.3"
   }
 }
