@@ -5,7 +5,6 @@ import { existsSync, mkdirSync } from "fs";
 import { join } from "path";
 import { CodeModel, codeModelSchema } from "@autorest/codemodel";
 import { AutoRestExtension, AutorestExtensionHost, Session, startSession } from "@autorest/extension-base";
-import { markErrorModels } from "./utils/errors";
 import { setSession } from "./autorest-session";
 import { emitCadlConfig } from "./emiters/emit-cadl-config";
 import { emitMain } from "./emiters/emit-main";
@@ -14,6 +13,7 @@ import { emitModels } from "./emiters/emit-models";
 import { emitPackage } from "./emiters/emit-package";
 import { emitRoutes } from "./emiters/emit-routes";
 import { getModel } from "./model";
+import { markErrorModels } from "./utils/errors";
 import { markPagination } from "./utils/paging";
 import { markResources } from "./utils/resources";
 
