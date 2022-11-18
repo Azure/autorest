@@ -57,7 +57,7 @@ export function omitXDashProperties<T extends {} | undefined>(
  * Identifies if a given refable is a reference or an instance
  * @param item Check if item is a reference.
  */
-export function isReference<T>(item: Refable<T>): item is PathReference {
+export function isReference<T extends {} | undefined>(item: Refable<T>): item is PathReference {
   return item && (<PathReference>item).$ref ? true : false;
 }
 
@@ -67,7 +67,11 @@ export function isReference<T>(item: Refable<T>): item is PathReference {
  * @param item Reference item.
  * @param stack Stack for circular dependencies.
  */
-export function dereference<T>(document: any, item: Refable<T>, stack: string[] = []): Dereferenced<T> {
+export function dereference<T extends {} | undefined>(
+  document: any,
+  item: Refable<T>,
+  stack: string[] = [],
+): Dereferenced<T> {
   let name: string | undefined;
 
   if (isReference(item)) {

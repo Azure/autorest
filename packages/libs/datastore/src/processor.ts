@@ -78,7 +78,7 @@ export class Transformer<TInput extends object = AnyObject, TOutput extends obje
       pointer,
     };
 
-    return <Real<TParent[K]>>value;
+    return value;
   }
 
   public newArray<TParent extends object, K extends keyof TParent>(

@@ -2,7 +2,7 @@ export interface PathReference {
   $ref: string;
 }
 
-export type Refable<T> = T | PathReference;
+export type Refable<T extends {} | undefined> = T | PathReference;
 
 export interface Dereferenced<T> {
   instance: T;

@@ -89,7 +89,7 @@ specifiers:
   ts-loader: ~9.2.3
   ts-morph: ~13.0.3
   ts-node: ^9.1.1
-  typescript: ~4.7.2
+  typescript: ~4.9.3
   typescript-json-schema: ~0.53.0
   untildify: ^4.0.0
   vscode-jsonrpc: ^3.5.0
@@ -147,8 +147,8 @@ dependencies:
   '@types/source-map-support': 0.5.4
   '@types/webpack': 4.41.32
   '@types/yargs': 17.0.10
-  '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-  '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+  '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+  '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
   ajv: 8.11.0
   ajv-errors: 3.0.0_ajv@8.11.0
   ajv-formats: 2.1.1
@@ -162,7 +162,7 @@ dependencies:
   diff: 4.0.2
   eslint: 8.16.0
   eslint-plugin-import: 2.26.0_eslint@8.16.0
-  eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+  eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
   eslint-plugin-node: 11.1.0_eslint@8.16.0
   eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
   eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
@@ -187,11 +187,11 @@ dependencies:
   tree-sitter: 0.20.0
   tree-sitter-python: 0.19.0
   tree-sitter-typescript: 0.20.1
-  ts-jest: 28.0.4_jest@28.1.0+typescript@4.7.2
-  ts-loader: 9.2.9_typescript@4.7.2+webpack@5.40.0
+  ts-jest: 28.0.4_jest@28.1.0+typescript@4.9.3
+  ts-loader: 9.2.9_typescript@4.9.3+webpack@5.40.0
   ts-morph: 13.0.3
-  ts-node: 9.1.1_typescript@4.7.2
-  typescript: 4.7.2
+  ts-node: 9.1.1_typescript@4.9.3
+  typescript: 4.9.3
   typescript-json-schema: 0.53.1
   untildify: 4.0.0
   vscode-jsonrpc: 3.6.2
@@ -1255,7 +1255,7 @@ packages:
       '@types/yargs-parser': 21.0.0
     dev: false
 
-  /@typescript-eslint/eslint-plugin/5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa:
+  /@typescript-eslint/eslint-plugin/5.27.0_edf2faa9de2abd3edce268e442e12112:
     resolution: {integrity: sha512-DDrIA7GXtmHXr1VCcx9HivA39eprYBIFxbQEHI6NyraRDxCGpxAFiYQAT/1Y0vh1C+o2vfBiy4IuPoXxtTZCAQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -1266,23 +1266,23 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       '@typescript-eslint/scope-manager': 5.27.0
-      '@typescript-eslint/type-utils': 5.27.0_eslint@8.16.0+typescript@4.7.2
-      '@typescript-eslint/utils': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/type-utils': 5.27.0_eslint@8.16.0+typescript@4.9.3
+      '@typescript-eslint/utils': 5.27.0_eslint@8.16.0+typescript@4.9.3
       debug: 4.3.4
       eslint: 8.16.0
       functional-red-black-tree: 1.0.1
       ignore: 5.2.0
       regexpp: 3.2.0
       semver: 7.3.7
-      tsutils: 3.21.0_typescript@4.7.2
-      typescript: 4.7.2
+      tsutils: 3.21.0_typescript@4.9.3
+      typescript: 4.9.3
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@typescript-eslint/parser/5.27.0_eslint@8.16.0+typescript@4.7.2:
+  /@typescript-eslint/parser/5.27.0_eslint@8.16.0+typescript@4.9.3:
     resolution: {integrity: sha512-8oGjQF46c52l7fMiPPvX4It3u3V3JipssqDfHQ2hcR0AeR8Zge+OYyKUCm5b70X72N1qXt0qgHenwN6Gc2SXZA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -1294,10 +1294,10 @@ packages:
     dependencies:
       '@typescript-eslint/scope-manager': 5.27.0
       '@typescript-eslint/types': 5.27.0
-      '@typescript-eslint/typescript-estree': 5.27.0_typescript@4.7.2
+      '@typescript-eslint/typescript-estree': 5.27.0_typescript@4.9.3
       debug: 4.3.4
       eslint: 8.16.0
-      typescript: 4.7.2
+      typescript: 4.9.3
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -1310,7 +1310,7 @@ packages:
       '@typescript-eslint/visitor-keys': 5.27.0
     dev: false
 
-  /@typescript-eslint/type-utils/5.27.0_eslint@8.16.0+typescript@4.7.2:
+  /@typescript-eslint/type-utils/5.27.0_eslint@8.16.0+typescript@4.9.3:
     resolution: {integrity: sha512-vpTvRRchaf628Hb/Xzfek+85o//zEUotr1SmexKvTfs7czXfYjXVT/a5yDbpzLBX1rhbqxjDdr1Gyo0x1Fc64g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -1320,11 +1320,11 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@typescript-eslint/utils': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/utils': 5.27.0_eslint@8.16.0+typescript@4.9.3
       debug: 4.3.4
       eslint: 8.16.0
-      tsutils: 3.21.0_typescript@4.7.2
-      typescript: 4.7.2
+      tsutils: 3.21.0_typescript@4.9.3
+      typescript: 4.9.3
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -1334,7 +1334,7 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: false
 
-  /@typescript-eslint/typescript-estree/5.27.0_typescript@4.7.2:
+  /@typescript-eslint/typescript-estree/5.27.0_typescript@4.9.3:
     resolution: {integrity: sha512-QywPMFvgZ+MHSLRofLI7BDL+UczFFHyj0vF5ibeChDAJgdTV8k4xgEwF0geFhVlPc1p8r70eYewzpo6ps+9LJQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -1349,13 +1349,13 @@ packages:
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.3.7
-      tsutils: 3.21.0_typescript@4.7.2
-      typescript: 4.7.2
+      tsutils: 3.21.0_typescript@4.9.3
+      typescript: 4.9.3
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@typescript-eslint/utils/5.27.0_eslint@8.16.0+typescript@4.7.2:
+  /@typescript-eslint/utils/5.27.0_eslint@8.16.0+typescript@4.9.3:
     resolution: {integrity: sha512-nZvCrkIJppym7cIbP3pOwIkAefXOmfGPnCM0LQfzNaKxJHI6VjI8NC662uoiPlaf5f6ymkTy9C3NQXev2mdXmA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -1364,7 +1364,7 @@ packages:
       '@types/json-schema': 7.0.11
       '@typescript-eslint/scope-manager': 5.27.0
       '@typescript-eslint/types': 5.27.0
-      '@typescript-eslint/typescript-estree': 5.27.0_typescript@4.7.2
+      '@typescript-eslint/typescript-estree': 5.27.0_typescript@4.9.3
       eslint: 8.16.0
       eslint-scope: 5.1.1
       eslint-utils: 3.0.0_eslint@8.16.0
@@ -2806,7 +2806,7 @@ packages:
       tsconfig-paths: 3.14.1
     dev: false
 
-  /eslint-plugin-jest/26.4.6_338a179387076c2cf184368cdb6f5ffc:
+  /eslint-plugin-jest/26.4.6_941bfebc302777726c947b34b6d8182f:
     resolution: {integrity: sha512-R3mq1IepnhtsukHQsWxdyKra3OVwYB+N4k8i45ndqSfr8p9KZV6G+EIUt1Z7hzAh4KlsbXG+nCTlNeGFLFLNvA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -2819,8 +2819,8 @@ packages:
       jest:
         optional: true
     dependencies:
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/utils': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/utils': 5.27.0_eslint@8.16.0+typescript@4.9.3
       eslint: 8.16.0
       jest: 28.1.0_5076b77de2277d7bd3e529e70437d1c6
     transitivePeerDependencies:
@@ -4157,7 +4157,7 @@ packages:
       pretty-format: 28.1.0
       slash: 3.0.0
       strip-json-comments: 3.1.1
-      ts-node: 9.1.1_typescript@4.7.2
+      ts-node: 9.1.1_typescript@4.9.3
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -4197,7 +4197,7 @@ packages:
       pretty-format: 28.1.0
       slash: 3.0.0
       strip-json-comments: 3.1.1
-      ts-node: 9.1.1_typescript@4.7.2
+      ts-node: 9.1.1_typescript@4.9.3
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -6434,7 +6434,7 @@ packages:
     dev: false
 
   /source-map/0.5.7:
-    resolution: {integrity: sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=}
+    resolution: {integrity: sha512-LbrmJOMUSdEVxIKvdcJzQC+nQhe8FUZQTXQy6+I75skNgn3OoQ0DZA8YnFa7gp8tqtL3KPf1kmo0R5DoApeSGQ==}
     engines: {node: '>=0.10.0'}
     dev: false
 
@@ -6856,7 +6856,7 @@ packages:
     resolution: {integrity: sha512-XrHUvV5HpdLmIj4uVMxHggLbFSZYIn7HEWsqePZcI50pco+MPqJ50wMGY794X7AOOhxOBAjbkqfAbEe/QMp2Lw==}
     dev: false
 
-  /ts-jest/28.0.4_jest@28.1.0+typescript@4.7.2:
+  /ts-jest/28.0.4_jest@28.1.0+typescript@4.9.3:
     resolution: {integrity: sha512-S6uRDDdCJBvnZqyGjB4VCnwbQrbgdL8WPeP4jevVSpYsBaeGRQAIS08o3Svav2Ex+oXwLgJ/m7F24TNq62kA1A==}
     engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
     hasBin: true
@@ -6882,11 +6882,11 @@ packages:
       lodash.memoize: 4.1.2
       make-error: 1.3.6
       semver: 7.3.7
-      typescript: 4.7.2
+      typescript: 4.9.3
       yargs-parser: 20.2.9
     dev: false
 
-  /ts-loader/9.2.9_typescript@4.7.2+webpack@5.40.0:
+  /ts-loader/9.2.9_typescript@4.9.3+webpack@5.40.0:
     resolution: {integrity: sha512-b0+vUY2/enb0qYtDQuNlDnJ9900NTiPiJcDJ6sY7ax1CCCwXfYIqPOMm/BwW7jsF1km+Oz8W9s31HLuD+FLIMg==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -6897,7 +6897,7 @@ packages:
       enhanced-resolve: 5.9.3
       micromatch: 4.0.5
       semver: 7.3.7
-      typescript: 4.7.2
+      typescript: 4.9.3
       webpack: 5.40.0_webpack-cli@4.7.2
     dev: false
 
@@ -6939,7 +6939,7 @@ packages:
       yn: 3.1.1
     dev: false
 
-  /ts-node/9.1.1_typescript@4.7.2:
+  /ts-node/9.1.1_typescript@4.9.3:
     resolution: {integrity: sha512-hPlt7ZACERQGf03M253ytLY3dHbGNGrAq9qIHWUY9XHYl1z7wYngSr3OQ5xmui8o2AaxsONxIzjafLUiWBo1Fg==}
     engines: {node: '>=10.0.0'}
     hasBin: true
@@ -6951,7 +6951,7 @@ packages:
       diff: 4.0.2
       make-error: 1.3.6
       source-map-support: 0.5.21
-      typescript: 4.7.2
+      typescript: 4.9.3
       yn: 3.1.1
     dev: false
 
@@ -6976,14 +6976,14 @@ packages:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
     dev: false
 
-  /tsutils/3.21.0_typescript@4.7.2:
+  /tsutils/3.21.0_typescript@4.9.3:
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
     engines: {node: '>= 6'}
     peerDependencies:
       typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta'
     dependencies:
       tslib: 1.14.1
-      typescript: 4.7.2
+      typescript: 4.9.3
     dev: false
 
   /tunnel-agent/0.6.0:
@@ -7056,8 +7056,8 @@ packages:
     hasBin: true
     dev: false
 
-  /typescript/4.7.2:
-    resolution: {integrity: sha512-Mamb1iX2FDUpcTRzltPxgWMKy3fhg0TN378ylbktPGPK/99KbDtMQ4W1hwgsbPAsG3a0xKa1vmw4VKZQbkvz5A==}
+  /typescript/4.9.3:
+    resolution: {integrity: sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: false
@@ -7185,7 +7185,7 @@ packages:
     dev: false
 
   /vscode-jsonrpc/3.5.0:
-    resolution: {integrity: sha1-hyOdnhZrLXNSJFuKgTWXgEwdY6o=}
+    resolution: {integrity: sha512-LeE9LS1IOIRDZy5Xugrbk2tKeMa64vkRODrXPZbwyn2l/Q0e/jyYq8ze/Lo96sjOFiRe3HHbTVN39Ta8KN2RpA==}
     engines: {node: '>=4.0.0 || >=6.0.0'}
     dev: false
 
@@ -7530,7 +7530,7 @@ packages:
     dev: false
 
   file:projects/autorest.tgz_ts-node@9.1.1:
-    resolution: {integrity: sha512-j9rQWUOKdNCZL1p/zlkZuTspQq4vx1pIRsz2VbkhaVv4JQVq5LXXzVluMtCLSjljFMu5AC504cEPMuL6t6abJw==, tarball: file:projects/autorest.tgz}
+    resolution: {integrity: sha512-J0RfagPmA1Qo8OgW5BeDz3aVQP4f2X0qf9dtc+KnyyN/rhINBv5u62Nb2Eg4PKCUH3cm1G8C7izWpyjGXzTpug==, tarball: file:projects/autorest.tgz}
     id: file:projects/autorest.tgz
     name: '@rush-temp/autorest'
     version: 0.0.0
@@ -7544,14 +7544,14 @@ packages:
       '@types/semver': 5.5.0
       '@types/source-map-support': 0.5.4
       '@types/webpack': 4.41.32
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       chalk: 4.1.2
       copy-webpack-plugin: 7.0.0_webpack@5.40.0
       cpy-cli: 4.1.0
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
@@ -7563,9 +7563,9 @@ packages:
       semver: 7.3.7
       source-map: 0.7.3
       source-map-support: 0.5.21
-      ts-jest: 28.0.4_jest@28.1.0+typescript@4.7.2
-      ts-loader: 9.2.9_typescript@4.7.2+webpack@5.40.0
-      typescript: 4.7.2
+      ts-jest: 28.0.4_jest@28.1.0+typescript@4.9.3
+      ts-loader: 9.2.9_typescript@4.9.3+webpack@5.40.0
+      typescript: 4.9.3
       untildify: 4.0.0
       webpack: 5.40.0_webpack-cli@4.7.2
       webpack-cli: 4.7.2_webpack@5.40.0
@@ -7586,7 +7586,7 @@ packages:
     dev: false
 
   file:projects/cadl.tgz_ts-node@9.1.1+webpack@5.40.0:
-    resolution: {integrity: sha512-JVm9aV1AvspfcIx+go4abcYgb8/Lu7r3ujzt44L2vubjDko4VNaOh+MU+PYtkcEAZb1cQaTnk4iuACAT5CyEKg==, tarball: file:projects/cadl.tgz}
+    resolution: {integrity: sha512-8viSNgnCqYSTpUn0WzuKJdrwrVXYvT5fsGWf146KkeZYlFu65nW2aKGS249ypGiLBQBBNkfM/YyoGfIiknXdYQ==, tarball: file:projects/cadl.tgz}
     id: file:projects/cadl.tgz
     name: '@rush-temp/cadl'
     version: 0.0.0
@@ -7597,12 +7597,12 @@ packages:
       '@types/node': 14.14.45
       '@types/source-map-support': 0.5.4
       '@types/webpack': 4.41.32
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       chalk: 4.1.2
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
@@ -7611,9 +7611,9 @@ packages:
       prettier: 2.6.2
       rimraf: 3.0.2
       source-map-support: 0.5.21
-      ts-jest: 28.0.4_jest@28.1.0+typescript@4.7.2
-      ts-loader: 9.2.9_typescript@4.7.2+webpack@5.40.0
-      typescript: 4.7.2
+      ts-jest: 28.0.4_jest@28.1.0+typescript@4.9.3
+      ts-loader: 9.2.9_typescript@4.9.3+webpack@5.40.0
+      typescript: 4.9.3
     transitivePeerDependencies:
       - '@babel/core'
       - babel-jest
@@ -7626,7 +7626,7 @@ packages:
     dev: false
 
   file:projects/codegen.tgz_prettier@2.6.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-EHFcwN5b7ZCPBU2j5+tje+8/fp1khyZv0mTIXNGiGP0hqWI2kBHl8AeftLDlTnx6jcvvzIIwS6pRxWEu0FXgBg==, tarball: file:projects/codegen.tgz}
+    resolution: {integrity: sha512-tSaUhqO2fT4nCGQswIiCqXaL8VJuJSR2l0GW1PfedtcOd51kuNLz7AQ2KvknNg/XTLGU3CQXSAVM74Q/heAvKg==, tarball: file:projects/codegen.tgz}
     id: file:projects/codegen.tgz
     name: '@rush-temp/codegen'
     version: 0.0.0
@@ -7636,11 +7636,11 @@ packages:
       '@types/js-yaml': 4.0.5
       '@types/node': 14.14.45
       '@types/semver': 5.5.0
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
@@ -7649,8 +7649,8 @@ packages:
       rimraf: 3.0.2
       semver: 7.3.7
       source-map-support: 0.5.21
-      ts-jest: 28.0.4_jest@28.1.0+typescript@4.7.2
-      typescript: 4.7.2
+      ts-jest: 28.0.4_jest@28.1.0+typescript@4.9.3
+      typescript: 4.9.3
     transitivePeerDependencies:
       - '@babel/core'
       - babel-jest
@@ -7663,18 +7663,18 @@ packages:
     dev: false
 
   file:projects/codemodel.tgz_jest@28.1.0+prettier@2.6.2:
-    resolution: {integrity: sha512-wV2U/e4UGynEHGaP3VMEqFZf6+8BRSNchisAqy3Awbn7MWvD0nMTqk4J+P31PHZfXZfddcDhU2MRUTm8I+LQPQ==, tarball: file:projects/codemodel.tgz}
+    resolution: {integrity: sha512-CeR7oGZiVtBYDcSjz3DCvxvbrpcPmW1rxCz6YjwuWuYr9XMGrz8WHhHPaXP6w8sd7B8HrXzYLV2E3KZAgriyjQ==, tarball: file:projects/codemodel.tgz}
     id: file:projects/codemodel.tgz
     name: '@rush-temp/codemodel'
     version: 0.0.0
     dependencies:
       '@types/js-yaml': 4.0.5
       '@types/node': 14.14.45
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
@@ -7682,7 +7682,7 @@ packages:
       js-yaml: 4.0.0
       rimraf: 3.0.2
       ts-morph: 13.0.3
-      typescript: 4.7.2
+      typescript: 4.9.3
       typescript-json-schema: 0.53.1
     transitivePeerDependencies:
       - '@swc/core'
@@ -7694,7 +7694,7 @@ packages:
     dev: false
 
   file:projects/common.tgz_prettier@2.6.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-YZZmicGEe0GU+rYmrVOnePUMKEIjyaWsSQMW6sJpIyYP55/RzZOj53sRJsGOJrguzN9WkPaTiEbAUi8UAL2YdQ==, tarball: file:projects/common.tgz}
+    resolution: {integrity: sha512-cEGCEl4bRXlO1Tr6KzHfD7mNv24G9vfdLeX1dSRdCtkqFbvrqTyt1vm/VgocSPVILy0bx4LEOByxK5xjDi+B9A==, tarball: file:projects/common.tgz}
     id: file:projects/common.tgz
     name: '@rush-temp/common'
     version: 0.0.0
@@ -7703,19 +7703,19 @@ packages:
       '@types/cli-progress': 3.9.2
       '@types/jest': 28.1.0
       '@types/node': 14.14.45
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       chalk: 4.1.2
       cli-progress: 3.10.0
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
       jest: 28.1.0_5076b77de2277d7bd3e529e70437d1c6
       rimraf: 3.0.2
-      typescript: 4.7.2
+      typescript: 4.9.3
     transitivePeerDependencies:
       - eslint-config-prettier
       - node-notifier
@@ -7725,7 +7725,7 @@ packages:
     dev: false
 
   file:projects/compare.tgz_prettier@2.6.2:
-    resolution: {integrity: sha512-hFU21/E/LCGl9/KSQh7jsVR4MqaulB51l4JAGuVeplAGXJwcA0mXhfqmwZRzOcYlZF7nG8FgTZIpjgez449o4w==, tarball: file:projects/compare.tgz}
+    resolution: {integrity: sha512-MX5XGYlgCjWNsM+4wYvtbaqaqGIxASP3AHqKHrmdJbstjbYXNcX+F23dtyyD4b7MiHNdOw5DSey/pu7EGn8SfQ==, tarball: file:projects/compare.tgz}
     id: file:projects/compare.tgz
     name: '@rush-temp/compare'
     version: 0.0.0
@@ -7735,13 +7735,13 @@ packages:
       '@types/js-yaml': 4.0.5
       '@types/node': 14.14.45
       '@types/source-map-support': 0.5.4
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       chalk: 4.1.2
       diff: 4.0.2
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
@@ -7751,9 +7751,9 @@ packages:
       tree-sitter: 0.20.0
       tree-sitter-python: 0.19.0
       tree-sitter-typescript: 0.20.1
-      ts-jest: 28.0.4_jest@28.1.0+typescript@4.7.2
-      ts-node: 9.1.1_typescript@4.7.2
-      typescript: 4.7.2
+      ts-jest: 28.0.4_jest@28.1.0+typescript@4.9.3
+      ts-node: 9.1.1_typescript@4.9.3
+      typescript: 4.9.3
     transitivePeerDependencies:
       - '@babel/core'
       - babel-jest
@@ -7765,7 +7765,7 @@ packages:
     dev: false
 
   file:projects/configuration.tgz_prettier@2.6.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-vHkArWvrECvPUbt0FTsoT5+Z0n+TGIL9LOHFokn86b0dauXZ+NO+jC8oC624EvfHqsxoZZeIwRffWivOnOZ8PA==, tarball: file:projects/configuration.tgz}
+    resolution: {integrity: sha512-Ecu/4OSJ0xZJRvTWidSr18HMsGr4dA5feXgXyXokbjUQQ6osGaD8jhWnDjXP3licuh01XCk0a1j8H1Wx/eAbGg==, tarball: file:projects/configuration.tgz}
     id: file:projects/configuration.tgz
     name: '@rush-temp/configuration'
     version: 0.0.0
@@ -7776,20 +7776,20 @@ packages:
       '@types/jest': 28.1.0
       '@types/lodash': 4.14.182
       '@types/node': 14.14.45
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       commonmark: 0.27.0
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
       jest: 28.1.0_5076b77de2277d7bd3e529e70437d1c6
       lodash: 4.17.21
       rimraf: 3.0.2
-      ts-jest: 28.0.4_jest@28.1.0+typescript@4.7.2
-      typescript: 4.7.2
+      ts-jest: 28.0.4_jest@28.1.0+typescript@4.9.3
+      typescript: 4.9.3
       untildify: 4.0.0
     transitivePeerDependencies:
       - '@babel/core'
@@ -7803,7 +7803,7 @@ packages:
     dev: false
 
   file:projects/core.tgz_ts-node@9.1.1:
-    resolution: {integrity: sha512-RVE9JyydW3Ns5PYMT4mz1+BureL9UVRZJZW9iDDz7oXF/zwk027yXmImmc+Il2TjLE6sJY8vTKFhKPGldwI6Xw==, tarball: file:projects/core.tgz}
+    resolution: {integrity: sha512-wXaGnCGGpE5C8GkCPsFOAWoAV8V9NT/OXdxL83tmyacU6pNnUGvmV4DK0Db39plHfbdya4Z+/JDZHsqI/I3+qQ==, tarball: file:projects/core.tgz}
     id: file:projects/core.tgz
     name: '@rush-temp/core'
     version: 0.0.0
@@ -7817,8 +7817,8 @@ packages:
       '@types/lodash': 4.14.182
       '@types/node': 14.14.45
       '@types/webpack': 4.41.32
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       ajv: 8.11.0
       ajv-errors: 3.0.0_ajv@8.11.0
       ajv-formats: 2.1.1
@@ -7828,7 +7828,7 @@ packages:
       cpy-cli: 4.1.0
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
@@ -7840,9 +7840,9 @@ packages:
       safe-buffer: 5.2.0
       source-map: 0.7.3
       source-map-support: 0.5.21
-      ts-jest: 28.0.4_jest@28.1.0+typescript@4.7.2
-      ts-loader: 9.2.9_typescript@4.7.2+webpack@5.40.0
-      typescript: 4.7.2
+      ts-jest: 28.0.4_jest@28.1.0+typescript@4.9.3
+      ts-loader: 9.2.9_typescript@4.9.3+webpack@5.40.0
+      typescript: 4.9.3
       vscode-jsonrpc: 3.6.2
       vscode-languageserver: 3.5.1
       webpack: 5.40.0_webpack-cli@4.7.2
@@ -7866,7 +7866,7 @@ packages:
     dev: false
 
   file:projects/datastore.tgz_prettier@2.6.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-85HxheZegY/DCDdBYISzO+KxDCbbH2oY9t83tL1GHuqYpHkUfeLMQl51zGmDNgWSkzXmzEHg9hzQo1UC3ffEtw==, tarball: file:projects/datastore.tgz}
+    resolution: {integrity: sha512-yHEmhUkaFPd8PRo7AKasvwsd2F3Ek338HUIQPmG66Ngk3erMAd+NBhRv5kFzLGc9m5wTNRQgdsuK+0/BtvfE1A==, tarball: file:projects/datastore.tgz}
     id: file:projects/datastore.tgz
     name: '@rush-temp/datastore'
     version: 0.0.0
@@ -7877,11 +7877,11 @@ packages:
       '@types/jest': 28.1.0
       '@types/lodash': 4.14.182
       '@types/node': 14.14.45
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
@@ -7890,8 +7890,8 @@ packages:
       lodash: 4.17.21
       rimraf: 3.0.2
       source-map: 0.7.3
-      ts-jest: 28.0.4_jest@28.1.0+typescript@4.7.2
-      typescript: 4.7.2
+      ts-jest: 28.0.4_jest@28.1.0+typescript@4.9.3
+      typescript: 4.9.3
     transitivePeerDependencies:
       - '@babel/core'
       - babel-jest
@@ -7904,7 +7904,7 @@ packages:
     dev: false
 
   file:projects/deduplication.tgz_prettier@2.6.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-slTvZ9X6jQZ7aqXd9MDFJwx2NFl+MQEthmZDk9+XycrPU7xtZmVYp+Izq2eV+cWhvczv8gbQZiOYGkKp6IqhbQ==, tarball: file:projects/deduplication.tgz}
+    resolution: {integrity: sha512-QfuvezKctcvMJl8iuy1bs3uMeQGz+PGqzQ0hg6HuySpiGiPJkigeNm9JmDK6Yo9uCAM70zclhNRIFzGkDEycdQ==, tarball: file:projects/deduplication.tgz}
     id: file:projects/deduplication.tgz
     name: '@rush-temp/deduplication'
     version: 0.0.0
@@ -7914,19 +7914,19 @@ packages:
       '@types/jest': 28.1.0
       '@types/lodash': 4.14.182
       '@types/node': 14.14.45
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       compare-versions: 3.6.0
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
       jest: 28.1.0_5076b77de2277d7bd3e529e70437d1c6
       lodash: 4.17.21
       rimraf: 3.0.2
-      typescript: 4.7.2
+      typescript: 4.9.3
     transitivePeerDependencies:
       - eslint-config-prettier
       - node-notifier
@@ -7936,24 +7936,24 @@ packages:
     dev: false
 
   file:projects/extension-base.tgz_jest@28.1.0+prettier@2.6.2:
-    resolution: {integrity: sha512-t89AhEpnQfEWG4mtoaF6Z/XTiuZor4yy9dPYBpMju4tAf3/iCHrc0Z1hLMDBbhvXsPcEhQQ33W4zjZs3e5OdqQ==, tarball: file:projects/extension-base.tgz}
+    resolution: {integrity: sha512-e20c0O7QQQIKAtXhNOZU6RsJHlO7zl2kFhLI0CP0BCHjivAPNIE9T7gCqI2MdStZ2/WgHw7ElFLsKIf1t6WTQA==, tarball: file:projects/extension-base.tgz}
     id: file:projects/extension-base.tgz
     name: '@rush-temp/extension-base'
     version: 0.0.0
     dependencies:
       '@types/js-yaml': 4.0.5
       '@types/node': 14.14.45
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
       js-yaml: 4.0.0
       rimraf: 3.0.2
-      typescript: 4.7.2
+      typescript: 4.9.3
       vscode-jsonrpc: 3.6.2
     transitivePeerDependencies:
       - eslint-config-prettier
@@ -7963,7 +7963,7 @@ packages:
     dev: false
 
   file:projects/extension.tgz_prettier@2.6.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-kx74evFraBJyQ1tQInRLmuGfu+YBhaBi1zX6z8f9/4xgamskB6gmBPMaTQPvv7gDXHpVwcX4qVkhaeyOrjl1JA==, tarball: file:projects/extension.tgz}
+    resolution: {integrity: sha512-ZG+5jnmTUJwihWn2E+0wIzIjxGLTxnGv5P6Guq9aObX+YVg4TkqeOLYA5Lv1lWAYcJBUYgBWqxWfZmCzgoGEvQ==, tarball: file:projects/extension.tgz}
     id: file:projects/extension.tgz
     name: '@rush-temp/extension'
     version: 0.0.0
@@ -7977,13 +7977,13 @@ packages:
       '@types/npm-package-arg': 6.1.1
       '@types/pacote': 11.1.3
       '@types/semver': 5.5.0
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       command-exists: 1.2.9
       cpy-cli: 4.1.0
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
@@ -7995,7 +7995,7 @@ packages:
       rimraf: 3.0.2
       semver: 7.3.7
       source-map-support: 0.5.21
-      typescript: 4.7.2
+      typescript: 4.9.3
       yarn: 1.22.17
     transitivePeerDependencies:
       - eslint-config-prettier
@@ -8006,7 +8006,7 @@ packages:
     dev: false
 
   file:projects/fixer.tgz_ts-node@9.1.1:
-    resolution: {integrity: sha512-ian+CXg2s1YNzFI6F8Rij6LFO7R6HAm6jvY8ETTyz+VCjUs9k0O14K8NEZ7ghaKc3cbJYttrvz1QF6nK5k72WQ==, tarball: file:projects/fixer.tgz}
+    resolution: {integrity: sha512-ZQkvmWwZRsbcR6wexsxu3SnkyfF0iGm5BT+AMfLgV5qnokPNsG0e9L6ByuISssJ/wRsfy1f5n/iN/QkSuRtReg==, tarball: file:projects/fixer.tgz}
     id: file:projects/fixer.tgz
     name: '@rush-temp/fixer'
     version: 0.0.0
@@ -8017,12 +8017,12 @@ packages:
       '@types/lodash': 4.14.182
       '@types/node': 14.14.45
       '@types/yargs': 17.0.10
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       chalk: 4.1.2
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
@@ -8032,8 +8032,8 @@ packages:
       prettier: 2.6.2
       rimraf: 3.0.2
       source-map-support: 0.5.21
-      ts-jest: 28.0.4_jest@28.1.0+typescript@4.7.2
-      typescript: 4.7.2
+      ts-jest: 28.0.4_jest@28.1.0+typescript@4.9.3
+      typescript: 4.9.3
       winston: 3.7.2
       yargs: 17.2.1
     transitivePeerDependencies:
@@ -8047,24 +8047,24 @@ packages:
     dev: false
 
   file:projects/json.tgz_prettier@2.6.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-rL/N/1FnzjoEkWC7pX6v+wBqAt3M/JI48szVlUTHHM+taCorcwIs+WbY755cSjGMsr6/imCsUsRzYAjAnZcl1A==, tarball: file:projects/json.tgz}
+    resolution: {integrity: sha512-g7Kq8GIZXxES2gRdJmTqpk9d9ePggXsuQ1F1iYEle+oB9OQvEQ3ChoA5Nid/q5BVrR+LdLHU38ccYKPyeTyxdA==, tarball: file:projects/json.tgz}
     id: file:projects/json.tgz
     name: '@rush-temp/json'
     version: 0.0.0
     dependencies:
       '@types/jest': 28.1.0
       '@types/node': 14.14.45
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
       jest: 28.1.0_5076b77de2277d7bd3e529e70437d1c6
       rimraf: 3.0.2
-      typescript: 4.7.2
+      typescript: 4.9.3
     transitivePeerDependencies:
       - eslint-config-prettier
       - node-notifier
@@ -8074,24 +8074,24 @@ packages:
     dev: false
 
   file:projects/jsonschema.tgz_prettier@2.6.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-/We24BCTPkmOlTRBPhAXjzJNOC0g/rngK2Ka7906lYfv7wvwN6QtBGqEfx3Nzb2wdI9NDLuUZ4pSJ1LRjuiHTw==, tarball: file:projects/jsonschema.tgz}
+    resolution: {integrity: sha512-BCRvL081Yjr/LnXDO+jLLXOHSia64zHFR0sz5wBx8cciQ0fYa5X8J/eqByDGRTAQJvsEl11N4Q5Acn0q/oTD0g==, tarball: file:projects/jsonschema.tgz}
     id: file:projects/jsonschema.tgz
     name: '@rush-temp/jsonschema'
     version: 0.0.0
     dependencies:
       '@types/jest': 28.1.0
       '@types/node': 14.14.45
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
       jest: 28.1.0_5076b77de2277d7bd3e529e70437d1c6
       rimraf: 3.0.2
-      typescript: 4.7.2
+      typescript: 4.9.3
     transitivePeerDependencies:
       - eslint-config-prettier
       - node-notifier
@@ -8101,7 +8101,7 @@ packages:
     dev: false
 
   file:projects/modelerfour.tgz_ts-node@9.1.1:
-    resolution: {integrity: sha512-TqCn5WW9G33e/6vPUfKUC6dJf3EVXfgQ3ZXjCEV+8ctC/TTZG032wnYB5gDUWKXCbHyZnqFK7rEYW+X1SxlZag==, tarball: file:projects/modelerfour.tgz}
+    resolution: {integrity: sha512-Ps3ENcEJeCpSSOFQNvHYm+6vpy9hsW8gLHlk2g49dLNCRTxY3Whk0W7A8SgO25GKCEfIoEi6L3Bubs+ShWTf+g==, tarball: file:projects/modelerfour.tgz}
     id: file:projects/modelerfour.tgz
     name: '@rush-temp/modelerfour'
     version: 0.0.0
@@ -8113,12 +8113,12 @@ packages:
       '@types/lodash': 4.14.182
       '@types/node': 14.14.45
       '@types/webpack': 4.41.32
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       chalk: 4.1.2
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
@@ -8128,9 +8128,9 @@ packages:
       recursive-diff: 1.0.8
       rimraf: 3.0.2
       source-map-support: 0.5.21
-      ts-jest: 28.0.4_jest@28.1.0+typescript@4.7.2
-      ts-loader: 9.2.9_typescript@4.7.2+webpack@5.40.0
-      typescript: 4.7.2
+      ts-jest: 28.0.4_jest@28.1.0+typescript@4.9.3
+      ts-loader: 9.2.9_typescript@4.9.3+webpack@5.40.0
+      typescript: 4.9.3
       webpack: 5.40.0_webpack-cli@4.7.2
       webpack-cli: 4.7.2_webpack@5.40.0
     transitivePeerDependencies:
@@ -8150,7 +8150,7 @@ packages:
     dev: false
 
   file:projects/oai2-to-oai3.tgz_prettier@2.6.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-JO1KbjcIb+FN/xBC8E+CoIPHLCpvNPHqMBlw/JbezagokbRgVXpxTYD8yxZVbBUv4JSksTMfg1OlfGCVItRFLQ==, tarball: file:projects/oai2-to-oai3.tgz}
+    resolution: {integrity: sha512-ceirH9MWJt8rOYzmhBUPAoi3HAG5DHDcFcUHf6wtF7cFVLvuwf/U/U43lV1Su2AycbH+HvYClDHrEo+LLEY7qQ==, tarball: file:projects/oai2-to-oai3.tgz}
     id: file:projects/oai2-to-oai3.tgz
     name: '@rush-temp/oai2-to-oai3'
     version: 0.0.0
@@ -8158,11 +8158,11 @@ packages:
       '@types/jest': 28.1.0
       '@types/js-yaml': 4.0.5
       '@types/node': 14.14.45
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
@@ -8170,8 +8170,8 @@ packages:
       rimraf: 3.0.2
       source-map: 0.7.3
       source-map-support: 0.5.21
-      ts-jest: 28.0.4_jest@28.1.0+typescript@4.7.2
-      typescript: 4.7.2
+      ts-jest: 28.0.4_jest@28.1.0+typescript@4.9.3
+      typescript: 4.9.3
     transitivePeerDependencies:
       - '@babel/core'
       - babel-jest
@@ -8184,24 +8184,24 @@ packages:
     dev: false
 
   file:projects/openapi.tgz_prettier@2.6.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-zKZex4MxFGd1I+BYWJG647akAJNqZFbkHT51BSDBOlydXbiD+bUhCwVChNqp80kiEVeIvf+frK3pP5EGLTNLrQ==, tarball: file:projects/openapi.tgz}
+    resolution: {integrity: sha512-aglLCkM3HERjTHHCcpJHxF8YEg8/GZ0NMrxAthz/pV/H6vJKI8xopFj1j89MrH4a5oos2rKqF5I+9oyYp5bcIw==, tarball: file:projects/openapi.tgz}
     id: file:projects/openapi.tgz
     name: '@rush-temp/openapi'
     version: 0.0.0
     dependencies:
       '@types/jest': 28.1.0
       '@types/node': 14.14.45
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
       jest: 28.1.0_5076b77de2277d7bd3e529e70437d1c6
       rimraf: 3.0.2
-      typescript: 4.7.2
+      typescript: 4.9.3
     transitivePeerDependencies:
       - eslint-config-prettier
       - node-notifier
@@ -8217,7 +8217,7 @@ packages:
     dev: false
 
   file:projects/system-requirements.tgz_prettier@2.6.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-OYLTYhbCFjnb9PAgBpgAbzwjFS+9Lb/qHKevMXRm5S7TTmY2dt8mffWsBFgE2jH9nV/giHms5vcx+pov4Z1W/A==, tarball: file:projects/system-requirements.tgz}
+    resolution: {integrity: sha512-4Y1VYWsN8EExRVHAp9bopyz26E4bEfPkRgVzzpL/Am/CGOs6zsMd9OT8PCpK1cfXpJfDCkCTzzbC9JfY5oUlfw==, tarball: file:projects/system-requirements.tgz}
     id: file:projects/system-requirements.tgz
     name: '@rush-temp/system-requirements'
     version: 0.0.0
@@ -8227,12 +8227,12 @@ packages:
       '@types/jest': 28.1.0
       '@types/node': 14.14.45
       '@types/semver': 5.5.0
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       command-exists: 1.2.9
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
@@ -8240,7 +8240,7 @@ packages:
       rimraf: 3.0.2
       semver: 7.3.7
       source-map-support: 0.5.21
-      typescript: 4.7.2
+      typescript: 4.9.3
     transitivePeerDependencies:
       - eslint-config-prettier
       - node-notifier
@@ -8250,7 +8250,7 @@ packages:
     dev: false
 
   file:projects/test-public-packages.tgz_prettier@2.6.2:
-    resolution: {integrity: sha512-AswZmwyle7X5+PypxwHMA7d52F+b4Cs/MOrZW3nunaLfHGnm8Sa1W8NM5oR7e+vopk8sjgkqZrZacTLXWUOegw==, tarball: file:projects/test-public-packages.tgz}
+    resolution: {integrity: sha512-He1mUrwCIRCOzypexpE+BK+rORCS44UPRi9si4/tlM+QkHAsmfRImxlXXfuMkfl08OVHsTHf9nuNAUYAr1CJig==, tarball: file:projects/test-public-packages.tgz}
     id: file:projects/test-public-packages.tgz
     name: '@rush-temp/test-public-packages'
     version: 0.0.0
@@ -8270,7 +8270,7 @@ packages:
     dev: false
 
   file:projects/test-utils.tgz_4fc18e7d8b9820002d66c5f5513fa76c:
-    resolution: {integrity: sha512-iD++jGJO9DnBdbGu/sTQ9xUkP390zXWJfcJq3Q3oskooy5Mxcu+G6RkWyrvShPtDBTSBe+4+Ay4VUycrNj4uHA==, tarball: file:projects/test-utils.tgz}
+    resolution: {integrity: sha512-w6XQKYXmb8uK5LudfLz1VVpoAN6iqeGSTEUx9rtRhIQ4eDkgKPV9gfrKxpV1StHl2pyAuYFnbNQGPTGML7gtiA==, tarball: file:projects/test-utils.tgz}
     id: file:projects/test-utils.tgz
     name: '@rush-temp/test-utils'
     version: 0.0.0
@@ -8295,7 +8295,7 @@ packages:
     dev: false
 
   file:projects/yaml.tgz_prettier@2.6.2+ts-node@9.1.1:
-    resolution: {integrity: sha512-juP5kzgBPIWZgT8ORfJcGvJrnfnZwhZoWj9xFxl60PtY2cu1XluZDw1AVxXm+MamL+35vbG/CLeGPvOZ8PtUoQ==, tarball: file:projects/yaml.tgz}
+    resolution: {integrity: sha512-vUIId5rI/S8DyVsICkTRjTIqQeptPrR9ivyPQXQfITGmQsqDDA4Bso8484+mMfraRFrP3Jl8Fzv+ff7FRXF+Qw==, tarball: file:projects/yaml.tgz}
     id: file:projects/yaml.tgz
     name: '@rush-temp/yaml'
     version: 0.0.0
@@ -8304,11 +8304,11 @@ packages:
       '@types/js-yaml': 4.0.5
       '@types/lodash': 4.14.182
       '@types/node': 14.14.45
-      '@typescript-eslint/eslint-plugin': 5.27.0_1cb21ecc3f04eca4a509631d5e40e8fa
-      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.7.2
+      '@typescript-eslint/eslint-plugin': 5.27.0_edf2faa9de2abd3edce268e442e12112
+      '@typescript-eslint/parser': 5.27.0_eslint@8.16.0+typescript@4.9.3
       eslint: 8.16.0
       eslint-plugin-import: 2.26.0_eslint@8.16.0
-      eslint-plugin-jest: 26.4.6_338a179387076c2cf184368cdb6f5ffc
+      eslint-plugin-jest: 26.4.6_941bfebc302777726c947b34b6d8182f
       eslint-plugin-node: 11.1.0_eslint@8.16.0
       eslint-plugin-prettier: 4.0.0_eslint@8.16.0+prettier@2.6.2
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
@@ -8316,7 +8316,7 @@ packages:
       js-yaml: 4.0.0
       lodash: 4.17.21
       rimraf: 3.0.2
-      typescript: 4.7.2
+      typescript: 4.9.3
       yaml-ast-parser: 0.0.43
     transitivePeerDependencies:
       - eslint-config-prettier
