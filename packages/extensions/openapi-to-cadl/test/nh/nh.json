@@ -1,0 +1,1549 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NotificationHubsClient",
+    "description": "The Notification Hubs client performs operations to register and query devices, and send notifications",
+    "version": "2020-06-01"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{namespaceBaseUrl}",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "$ref": "#/parameters/NamespaceBaseUrl"
+      }
+    ]
+  },
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/{hubName}": {
+      "delete": {
+        "operationId": "DeleteNotificationHub",
+        "description": "Deletes a notification hub.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The hub deleted successfully."
+          },
+          "400": {
+            "description": "Invalid request body. The notification hub could not be deleted because the request was malformed (or the validation failed)."
+          },
+          "401": {
+            "description": "Authorization failure. The access key was incorrect."
+          },
+          "404": {
+            "description": "Not found. The node does not contain a notification hub."
+          }
+        }
+      },
+      "get": {
+        "operationId": "GetNotificationHub",
+        "description": "Retrieves information about a notification hub.",
+        "produces": ["application/atom+xml;type=entry;charset=utf-8"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Notifications hub retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/NotificationHubEntryModel"
+            }
+          },
+          "400": {
+            "description": "Invalid request body. The notification hub could not be read because the request was malformed (or the validation failed)."
+          },
+          "401": {
+            "description": "Authorization failure. The access key was incorrect."
+          },
+          "404": {
+            "description": "Not found. The node does not contain a notification hub."
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateOrUpdateNotificationHub",
+        "description": "Create or update a notification hub.",
+        "consumes": ["application/atom+xml;type=entry;charset=utf-8"],
+        "produces": ["application/atom+xml;type=entry;charset=utf-8"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchOptionalParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NotificationHubEntryModel"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Notification topic created successfully.",
+            "schema": {
+              "$ref": "#/definitions/NotificationHubEntryModel"
+            }
+          },
+          "400": {
+            "description": "Invalid request body. The notification topic could not be created because the request was malformed (or the validation failed)."
+          },
+          "401": {
+            "description": "Authorization failure. The access key was incorrect."
+          },
+          "403": {
+            "description": "Quota exceeded; too many notification hubs in this namespace. Notification hub not created."
+          },
+          "409": {
+            "description": "The node already contains another entity."
+          }
+        }
+      }
+    },
+    "/{hubName}/tags/{tag}/registrations": {
+      "get": {
+        "operationId": "GetRegistrationsByTag",
+        "description": "Retrieves all registrations with a specific tag.",
+        "produces": ["application/atom+xml;type=entry;charset=utf-8"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          },
+          {
+            "$ref": "#/parameters/TagPathParameter"
+          },
+          {
+            "$ref": "#/parameters/ContinuationTokenQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registrations retrieved successfully.",
+            "headers": {
+              "X-MS-ContinuationToken": {
+                "description": "Contains the token to continue the enumeration of registrations, in case there are more.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/RegistrationFeedModel"
+            }
+          },
+          "401": {
+            "description": "Authorization failure. The access key was incorrect."
+          },
+          "403": {
+            "description": "Quota exceeded. Request rejected because registration operations rate is too high."
+          },
+          "404": {
+            "description": "Not found."
+          }
+        }
+      }
+    },
+    "/{hubName}/registrationIDs": {
+      "post": {
+        "operationId": "CreateRegistrationId",
+        "description": "Create a registration ID",
+        "parameters": [
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          }
+        ],
+        "produces": ["application/atom+xml;type=entry;charset=utf-8"],
+        "responses": {
+          "201": {
+            "description": "Registration created successfully.",
+            "headers": {
+              "Content-Location": {
+                "description": "The location of the registration in the format: https://{namespace}.servicebus.windows.net/{NotificationHub}/registrations/<registrationId>",
+                "type": "string"
+              },
+              "ETag": {
+                "description": "Weak ETag",
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body. The registration could not be created because the request was malformed."
+          },
+          "401": {
+            "description": "Authorization failure. The access key was incorrect."
+          },
+          "403": {
+            "description": "Quota exceeded; too many registrations in this namespace. Registration not created."
+          }
+        }
+      }
+    },
+    "/{hubName}/registrations": {
+      "get": {
+        "operationId": "GetRegistrations",
+        "description": "Get registrations by the specified criteria",
+        "produces": ["application/atom+xml;type=entry;charset=utf-8"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          },
+          {
+            "$ref": "#/parameters/ContinuationTokenQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registrations retrieved successfully.",
+            "headers": {
+              "X-MS-ContinuationToken": {
+                "description": "Contains the token to continue the enumeration of registrations, in case there are more.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/RegistrationFeedModel"
+            }
+          },
+          "401": {
+            "description": "Authorization failure. The access key was incorrect."
+          },
+          "403": {
+            "description": "Quota exceeded. Request rejected because registration operations rate is too high."
+          },
+          "404": {
+            "description": "Not found. The channel hash does not exist."
+          }
+        }
+      },
+      "post": {
+        "operationId": "CreateRegistration",
+        "description": "Creates a registration",
+        "consumes": ["application/atom+xml;type=entry;charset=utf-8"],
+        "produces": ["application/atom+xml;type=entry;charset=utf-8"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Registration created successfully.",
+            "headers": {
+              "ETag": {
+                "description": "Weak ETag",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/RegistrationEntryModel"
+            }
+          },
+          "400": {
+            "description": "Invalid request body. The registration could not be created because the request was malformed."
+          },
+          "401": {
+            "description": "Authorization failure. The access key was incorrect."
+          },
+          "403": {
+            "description": "Quota exceeded; too many registrations in this namespace. Registration not created."
+          },
+          "409": {
+            "description": "Request rejected because registration operations rate is too high"
+          }
+        }
+      }
+    },
+    "/{hubName}/registrations/{registrationId}": {
+      "delete": {
+        "operationId": "DeleteRegistration",
+        "description": "Deletes a registration",
+        "parameters": [
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistrationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registration deleted successfully."
+          },
+          "400": {
+            "description": "Invalid request body. The registration could not be deleted because the request was malformed (or the validation failed)."
+          },
+          "401": {
+            "description": "Authorization failure. The access key was incorrect."
+          },
+          "403": {
+            "description": "Quota exceeded. Request rejected because registration operations rate is too high."
+          },
+          "404": {
+            "description": "Not found. The registration does not exist."
+          },
+          "409": {
+            "description": "Request rejected because registration operations rate is too high"
+          },
+          "412": {
+            "description": "Precondition failed. The current version of the registration does not have specified ETag."
+          }
+        }
+      },
+      "get": {
+        "operationId": "GetRegistration",
+        "description": "Get a registration by registration ID",
+        "produces": ["application/atom+xml;type=entry;charset=utf-8"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistrationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Registration retrieved successfully.",
+            "headers": {
+              "ETag": {
+                "description": "Weak ETag",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/RegistrationEntryModel"
+            }
+          },
+          "401": {
+            "description": "Authorization failure. The access key was incorrect."
+          },
+          "403": {
+            "description": "Quota exceeded. Request rejected because registration operations rate is too high."
+          },
+          "404": {
+            "description": "Not found. The registration does not exist."
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateOrUpdateRegistration",
+        "description": "Create or update a registration",
+        "consumes": ["application/atom+xml;type=entry;charset=utf-8"],
+        "produces": ["application/atom+xml;type=entry;charset=utf-8"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistrationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegistrationEntryModel"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Registration updated successfully.",
+            "headers": {
+              "ETag": {
+                "description": "Weak ETag",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/RegistrationEntryModel"
+            }
+          },
+          "400": {
+            "description": "Invalid request body. The registration could not be created because the request was malformed."
+          },
+          "401": {
+            "description": "Authorization failure. The access key was incorrect."
+          },
+          "403": {
+            "description": "Quota exceeded; too many registrations in this namespace. Registration not created."
+          },
+          "404": {
+            "description": "No notification hub exists at this location."
+          },
+          "409": {
+            "description": "Request rejected because registration operations rate is too high."
+          },
+          "410": {
+            "description": "Cannot use specified location. Use a different registration ID."
+          }
+        }
+      }
+    },
+    "/{hubName}/installations/{installationId}": {
+      "delete": {
+        "operationId": "DeleteInstallation",
+        "description": "Delete an installation by ID",
+        "parameters": [
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InstallationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The installation was successfully deleted."
+          },
+          "400": {
+            "description": "The installation could not be created/overwritten because the request was malformed."
+          },
+          "401": {
+            "description": "Authorization failure. The access key was incorrect."
+          },
+          "403": {
+            "description": "Quota exceeded. Request rejected because registration operations rate is too high."
+          }
+        },
+        "summary": "Delete Installation",
+        "tags": ["installations"]
+      },
+      "get": {
+        "operationId": "GetInstallation",
+        "description": "Get an Installation by Installation ID",
+        "parameters": [
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InstallationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "The installation was retrieved successfully.",
+            "headers": {
+              "Content-Location": {
+                "description": "The location of the installation in the format: https://{namespace}.servicebus.windows.net/{NotificationHub}/installations/<installationId>",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/InstallationModel"
+            }
+          },
+          "400": {
+            "description": "The installation could not be retrieved because the request was malformed."
+          },
+          "401": {
+            "description": "Authorization failure. The access key was incorrect."
+          },
+          "403": {
+            "description": "Quota exceeded. Request rejected because registration operations rate is too high."
+          },
+          "404": {
+            "description": "Installation Not Found."
+          }
+        }
+      },
+      "patch": {
+        "operationId": "PatchInstallation",
+        "description": "Azure Notification Hubs supports partial updates to an installation using the JSON-Patch standard in [RFC6902](https://tools.ietf.org/html/rfc6902).",
+        "consumes": ["application/json-patch+json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InstallationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InstallationPatchModel"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The installation was patched successfully"
+          },
+          "400": {
+            "description": "The installation could not be patched because the request was malformed."
+          },
+          "401": {
+            "description": "Authorization failure. The access key was incorrect."
+          },
+          "403": {
+            "description": "Quota exceeded; too many registrations in this namespace."
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateOrUpdateInstallation",
+        "description": "Creates or overwrites an installation.",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/InstallationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InstallationModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The installation was queued successfully and will be processed in the background."
+          },
+          "400": {
+            "description": "The installation could not be created/overwritten because the request was malformed."
+          },
+          "401": {
+            "description": "Authorization failure. The access key was incorrect."
+          },
+          "403": {
+            "description": "Too many installations in this namespace - Installations not created."
+          }
+        }
+      }
+    },
+    "/{hubName}/messages": {
+      "post": {
+        "operationId": "SendMessage",
+        "description": "Sends a notification to the specified targets.",
+        "consumes": ["application/json;charset=utf-8", "application/xml;charset=utf-8", "application/octet-stream"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/MessageBodyParameter"
+          },
+          {
+            "$ref": "#/parameters/HubNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationHeaderParameter"
+          },
+          {
+            "$ref": "#/parameters/DeviceHandleParameter"
+          },
+          {
+            "$ref": "#/parameters/FormatParameter"
+          },
+          {
+            "$ref": "#/parameters/TagsParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DirectSendParameter"
+          },
+          {
+            "$ref": "#/parameters/ApnsTopicHeader"
+          },
+          {
+            "$ref": "#/parameters/ApnsPriority"
+          },
+          {
+            "$ref": "#/parameters/ApnsPushType"
+          },
+          {
+            "$ref": "#/parameters/WnsCachePolicyParameter"
+          },
+          {
+            "$ref": "#/parameters/WnsPriorityParameter"
+          },
+          {
+            "$ref": "#/parameters/WnsRequestForStatusParameter"
+          },
+          {
+            "$ref": "#/parameters/WnsTagParameter"
+          },
+          {
+            "$ref": "#/parameters/WnsTtlParameter"
+          },
+          {
+            "$ref": "#/parameters/WnsTypeParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Message successfully sent.",
+            "headers": {
+              "Location": {
+                "description": "This header will contain the Notification Message ID.",
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "The request is malformed (for example, not valid routing headers, not valid content-type, message exceeds size, bad message format)."
+          },
+          "401": {
+            "description": "Authorization failure. The access key was incorrect."
+          },
+          "403": {
+            "description": "Quota exceeded or message too large; message was rejected."
+          },
+          "404": {
+            "description": "No message branch at the URI."
+          },
+          "413": {
+            "description": "Requested entity too large. The message size cannot be over 64 Kb."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NotificationHubEntryModel": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/NotificationHubContentModel"
+        }
+      },
+      "xml": {
+        "name": "entry",
+        "namespace": "http://www.w3.org/2005/Atom"
+      }
+    },
+    "NotificationHubContentModel": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          },
+          "enum": ["application/xml"]
+        },
+        "NotificationHubDescription": {
+          "$ref": "#/definitions/NotificationHubDescriptionModel"
+        }
+      }
+    },
+    "NotificationHubDescriptionModel": {
+      "type": "object",
+      "properties": {
+        "xmlns:i": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          },
+          "enum": ["http://www.w3.org/2001/XMLSchema-instance"]
+        },
+        "RegistrationTtl": {
+          "type": "string"
+        },
+        "Location": {
+          "type": "string"
+        },
+        "ApnsCredential": {
+          "$ref": "#/definitions/PropertyBagModel"
+        },
+        "GcmCredential": {
+          "$ref": "#/definitions/PropertyBagModel"
+        },
+        "WnsCredential": {
+          "$ref": "#/definitions/PropertyBagModel"
+        },
+        "AuthorizationRules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "xml": {
+              "name": "AuthorizationRule"
+            },
+            "properties": {
+              "i:type": {
+                "type": "string",
+                "xml": {
+                  "attribute": true
+                },
+                "enum": ["http://www.w3.org/2001/XMLSchema-instance"]
+              },
+              "ClaimType": {
+                "type": "string",
+                "enum": ["SharedAccessAuthorizationRule"]
+              },
+              "ClaimValue": {
+                "type": "string"
+              },
+              "Rights": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "xml": {
+                    "name": "AccessRights"
+                  }
+                }
+              },
+              "CreatedTime": {
+                "type": "string"
+              },
+              "ModifiedTime": {
+                "type": "string"
+              },
+              "KeyName": {
+                "type": "string"
+              },
+              "PrimaryKey": {
+                "type": "string"
+              },
+              "SecondaryKey": {
+                "type": "string"
+              }
+            }
+          },
+          "xml": {
+            "name": "AuthorizationRules",
+            "wrapped": true
+          }
+        }
+      },
+      "xml": {
+        "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+      }
+    },
+    "PropertyBagModel": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "xml": {
+          "name": "Property"
+        },
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Value": {
+            "type": "string"
+          }
+        }
+      },
+      "xml": {
+        "name": "Properties",
+        "wrapped": true
+      }
+    },
+    "InstallationModel": {
+      "type": "object",
+      "required": ["installationId", "platform", "pushChannel"],
+      "properties": {
+        "installationId": {
+          "description": "Installation Unique Identifier",
+          "type": "string"
+        },
+        "userId": {
+          "description": "The user ID for the installation",
+          "type": "string"
+        },
+        "lastActiveOn": {
+          "description": "The date when the installation was made inactivate by the PNS.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastUpdate": {
+          "description": "Date in W3C format of last update to this installation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "platform": {
+          "description": "PNS Platform for the installation",
+          "type": "string",
+          "enum": ["apns", "wns", "gcm", "baidu", "adm"],
+          "x-ms-enum": {
+            "name": "PlatformType",
+            "modelAsString": true
+          }
+        },
+        "pushChannel": {
+          "description": "The unique device handle for the PNS.",
+          "type": "string"
+        },
+        "expiredPushChannel": {
+          "description": "This is true if the PNS expired the channel.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "The tags for the installation for targeting",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "templates": {
+          "description": "Set of named templates associated with the installation.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/InstallationTemplateModel"
+          }
+        },
+        "secondaryTiles": {
+          "description": "Set of secondary tiles associated with the installation. Applies only to the 'wns' platform.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/InstallationSecondaryTileModel"
+          }
+        }
+      }
+    },
+    "InstallationTemplateModel": {
+      "type": "object",
+      "required": ["body"],
+      "properties": {
+        "body": {
+          "description": "Template for the body of the notification.",
+          "type": "string"
+        },
+        "headers": {
+          "description": "Set of named headers associated with the template. Header values can contain template parameters.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "expiry": {
+          "description": "Template expression evaluating in W3D date format.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "The tags for the installation for targeting",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "InstallationSecondaryTileModel": {
+      "type": "object",
+      "required": ["pushChannel"],
+      "properties": {
+        "pushChannel": {
+          "description": "ChannelUri for the secondary tile. Applies only to the 'wns' platform.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "The tags for the installation for targeting",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "templates": {
+          "description": "Set of named templates associated with the secondary tile. Applies only to the 'wns' platform.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/InstallationTemplateModel"
+          }
+        }
+      }
+    },
+    "InstallationPatchModel": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "op": {
+            "type": "string",
+            "enum": ["add", "remove", "replace"],
+            "x-ms-enum": {
+              "name": "InstallationPatchType",
+              "modelAsString": true
+            }
+          },
+          "path": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": ["op", "path"]
+      }
+    },
+    "RegistrationFeedModel": {
+      "type": "array",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string"
+        }
+      },
+      "items": {
+        "$ref": "#/definitions/RegistrationEntryModel"
+      },
+      "xml": {
+        "name": "feed",
+        "namespace": "http://www.w3.org/2005/Atom"
+      }
+    },
+    "RegistrationEntryModel": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/NotificationHubContentModel"
+        },
+        "xmlns:m": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          },
+          "enum": ["http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"]
+        },
+        "m:etag": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          }
+        }
+      },
+      "xml": {
+        "name": "entry",
+        "namespace": "http://www.w3.org/2005/Atom"
+      }
+    },
+    "RegistrationContentModel": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          },
+          "enum": ["application/xml"]
+        },
+        "AppleRegistrationDescription": {
+          "$ref": "#/definitions/AppleRegistrationContentModel"
+        },
+        "AppleTemplateRegistrationDescription": {
+          "$ref": "#/definitions/AppleTemplateRegistrationContentModel"
+        },
+        "BaiduRegistrationDescription": {
+          "$ref": "#/definitions/BaiduRegistrationContentModel"
+        },
+        "BaiduTemplateRegistrationDescription": {
+          "$ref": "#/definitions/BaiduTemplateRegistrationContentModel"
+        },
+        "GcmRegistrationDescription": {
+          "$ref": "#/definitions/GcmRegistrationContentModel"
+        },
+        "GcmTemplateRegistrationDescription": {
+          "$ref": "#/definitions/GcmTemplateRegistrationContentModel"
+        },
+        "WindowsRegistrationDescription": {
+          "$ref": "#/definitions/WindowsRegistrationContentModel"
+        },
+        "WindowsTemplateRegistrationDescription": {
+          "$ref": "#/definitions/WindowsTemplateRegistrationContentModel"
+        }
+      }
+    },
+    "AppleRegistrationContentModel": {
+      "type": "object",
+      "xml": {
+        "name": "AppleRegistrationDescription",
+        "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+      },
+      "properties": {
+        "xmlns:i": {
+          "xml": {
+            "attribute": true
+          },
+          "type": "string",
+          "enum": ["http://www.w3.org/2001/XMLSchema-instance"]
+        },
+        "Tags": {
+          "type": "string"
+        },
+        "DeviceToken": {
+          "type": "string"
+        }
+      },
+      "required": ["DeviceToken"]
+    },
+    "AppleTemplateRegistrationContentModel": {
+      "type": "object",
+      "xml": {
+        "name": "AppleTemplateRegistrationDescription",
+        "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+      },
+      "properties": {
+        "xmlns:i": {
+          "xml": {
+            "attribute": true
+          },
+          "type": "string",
+          "enum": ["http://www.w3.org/2001/XMLSchema-instance"]
+        },
+        "Tags": {
+          "type": "string"
+        },
+        "DeviceToken": {
+          "type": "string"
+        },
+        "BodyTemplate": {
+          "type": "string"
+        },
+        "Expiry": {
+          "type": "string"
+        }
+      },
+      "required": ["BodyTemplate", "DeviceToken"]
+    },
+    "BaiduRegistrationContentModel": {
+      "type": "object",
+      "xml": {
+        "name": "BaiduRegistrationDescription",
+        "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+      },
+      "properties": {
+        "xmlns:i": {
+          "xml": {
+            "attribute": true
+          },
+          "type": "string",
+          "enum": ["http://www.w3.org/2001/XMLSchema-instance"]
+        },
+        "Tags": {
+          "type": "string"
+        },
+        "BaiduUserId": {
+          "type": "string"
+        },
+        "BaiduChannelId": {
+          "type": "string"
+        }
+      },
+      "required": ["BaiduUserId", "BaiduChannelId"]
+    },
+    "BaiduTemplateRegistrationContentModel": {
+      "type": "object",
+      "xml": {
+        "name": "BaiduTemplateRegistrationDescription",
+        "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+      },
+      "properties": {
+        "xmlns:i": {
+          "xml": {
+            "attribute": true
+          },
+          "type": "string",
+          "enum": ["http://www.w3.org/2001/XMLSchema-instance"]
+        },
+        "Tags": {
+          "type": "string"
+        },
+        "BaiduUserId": {
+          "type": "string"
+        },
+        "BaiduChannelId": {
+          "type": "string"
+        },
+        "BodyTemplate": {
+          "type": "string"
+        }
+      },
+      "required": ["BaiduUserId", "BaiduChannelId", "BodyTemplate"]
+    },
+    "GcmRegistrationContentModel": {
+      "type": "object",
+      "xml": {
+        "name": "GcmRegistrationDescription",
+        "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+      },
+      "properties": {
+        "xmlns:i": {
+          "xml": {
+            "attribute": true
+          },
+          "type": "string",
+          "enum": ["http://www.w3.org/2001/XMLSchema-instance"]
+        },
+        "Tags": {
+          "type": "string"
+        },
+        "GcmRegistrationId": {
+          "type": "string"
+        }
+      }
+    },
+    "GcmTemplateRegistrationContentModel": {
+      "type": "object",
+      "xml": {
+        "name": "GcmTemplateRegistrationDescription",
+        "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+      },
+      "properties": {
+        "xmlns:i": {
+          "xml": {
+            "attribute": true
+          },
+          "type": "string",
+          "enum": ["http://www.w3.org/2001/XMLSchema-instance"]
+        },
+        "Tags": {
+          "type": "string"
+        },
+        "GcmRegistrationId": {
+          "type": "string"
+        },
+        "BodyTemplate": {
+          "type": "string"
+        }
+      },
+      "required": ["GcmRegistrationId", "BodyTemplate"]
+    },
+    "WindowsRegistrationContentModel": {
+      "type": "object",
+      "xml": {
+        "name": "WindowsRegistrationDescription",
+        "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+      },
+      "properties": {
+        "xmlns:i": {
+          "xml": {
+            "attribute": true
+          },
+          "type": "string",
+          "enum": ["http://www.w3.org/2001/XMLSchema-instance"]
+        },
+        "Tags": {
+          "type": "string"
+        },
+        "ChannelUri": {
+          "type": "string"
+        }
+      },
+      "required": ["ChannelUri"]
+    },
+    "WindowsTemplateRegistrationContentModel": {
+      "type": "object",
+      "xml": {
+        "name": "WindowsTemplateRegistrationDescription",
+        "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
+      },
+      "properties": {
+        "xmlns:i": {
+          "xml": {
+            "attribute": true
+          },
+          "type": "string",
+          "enum": ["http://www.w3.org/2001/XMLSchema-instance"]
+        },
+        "Tags": {
+          "type": "string"
+        },
+        "ChannelUri": {
+          "type": "string"
+        },
+        "BodyTemplate": {
+          "type": "string"
+        },
+        "WnsHeaders": {
+          "type": "array",
+          "xml": {
+            "wrapped": true
+          },
+          "items": {
+            "type": "object",
+            "properties": {
+              "Header": {
+                "type": "string"
+              },
+              "Value": {
+                "type": "string"
+              }
+            },
+            "xml": {
+              "name": "WnsHeader"
+            }
+          }
+        }
+      },
+      "required": ["ChannelUri", "BodyTemplate"]
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "description": "API Version",
+      "in": "query",
+      "name": "api-version",
+      "required": true,
+      "type": "string",
+      "enum": ["2015-01", "2015-04", "2015-08", "2016-07", "2020-06"],
+      "x-ms-enum": {
+        "name": "ApiVersionType",
+        "modelAsString": true
+      }
+    },
+    "MSVersionParameter": {
+      "description": "API Version",
+      "in": "header",
+      "name": "x-ms-version",
+      "required": true,
+      "type": "string",
+      "enum": ["2015-01", "2015-04", "2015-08", "2016-07"],
+      "x-ms-enum": {
+        "name": "MSApiVersionType",
+        "modelAsString": true
+      }
+    },
+    "AuthorizationHeaderParameter": {
+      "description": "Authorization Header value",
+      "in": "header",
+      "name": "Authorization",
+      "required": true,
+      "type": "string"
+    },
+    "ContinuationTokenQueryParameter": {
+      "description": "Contains the token to continue the enumeration of registrations, in case there are more.",
+      "in": "query",
+      "name": "ContinuationToken",
+      "required": false,
+      "type": "string"
+    },
+    "DeviceHandleParameter": {
+      "description": "Device handle for the PNS",
+      "in": "header",
+      "name": "ServiceBusNotification-DeviceHandle",
+      "required": false,
+      "type": "string"
+    },
+    "DirectSendParameter": {
+      "description": "Direct Send",
+      "in": "query",
+      "name": "direct",
+      "required": false,
+      "type": "boolean"
+    },
+    "FilterQueryParameter": {
+      "description": "OData filter parameter",
+      "in": "query",
+      "name": "$filter",
+      "required": false,
+      "type": "string"
+    },
+    "FormatParameter": {
+      "description": "Platform type for the notification",
+      "in": "header",
+      "name": "ServiceBusNotification-Format",
+      "required": true,
+      "type": "string",
+      "enum": ["apple", "baidu", "gcm", "windows"],
+      "x-ms-enum": {
+        "name": "FormatParameterType",
+        "modelAsString": true
+      }
+    },
+    "InstallationIdParameter": {
+      "description": "Installation ID parameter",
+      "in": "path",
+      "name": "installationId",
+      "required": true,
+      "type": "string"
+    },
+    "RegistrationIdParameter": {
+      "description": "Registration ID parameter",
+      "in": "path",
+      "name": "registrationId",
+      "required": true,
+      "type": "string"
+    },
+    "IfMatchParameter": {
+      "description": "ETag as returned by creation, update, and retrieval, or * (overwrite).",
+      "in": "header",
+      "name": "If-Match",
+      "required": true,
+      "type": "string"
+    },
+    "IfMatchOptionalParameter": {
+      "description": "ETag as returned by creation, update, and retrieval, or * (overwrite).",
+      "in": "header",
+      "name": "If-Match",
+      "required": false,
+      "type": "string"
+    },
+    "HubNameParameter": {
+      "description": "Notification Hub Name",
+      "in": "path",
+      "name": "hubName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "MessageBodyParameter": {
+      "description": "The notification message body",
+      "in": "body",
+      "name": "body",
+      "required": true,
+      "schema": {
+        "type": "string"
+      }
+    },
+    "NamespaceBaseUrl": {
+      "name": "namespaceBaseUrl",
+      "description": "The namespace name, for example https://mynamespace.servicebus.windows.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
+    "TagPathParameter": {
+      "name": "tag",
+      "description": "The path for the tag to query",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "TagsParameter": {
+      "description": "Notification message tags for targeting",
+      "in": "header",
+      "name": "ServiceBusNotification-Tags",
+      "required": false,
+      "type": "string"
+    },
+    "TopQueryParameter": {
+      "description": "OData top parameter",
+      "in": "query",
+      "name": "$top",
+      "required": false,
+      "type": "string"
+    },
+    "ApnsTopicHeader": {
+      "description": "The apns-topic header",
+      "in": "header",
+      "name": "apns-topic",
+      "required": false,
+      "type": "string"
+    },
+    "ApnsPriority": {
+      "description": "The apns-priority header",
+      "in": "header",
+      "name": "apns-priority",
+      "required": false,
+      "type": "string"
+    },
+    "ApnsPushType": {
+      "description": "The apns-push-type header",
+      "in": "header",
+      "name": "apns-push-type",
+      "required": false,
+      "type": "string"
+    },
+    "WnsCachePolicyParameter": {
+      "description": " X-WNS-Cache-Policy header parameter",
+      "in": "header",
+      "name": "X-WNS-Cache-Policy",
+      "required": false,
+      "type": "string"
+    },
+    "WnsPriorityParameter": {
+      "description": "X-WNS-PRIORITY header parameter",
+      "in": "header",
+      "name": "X-WNS-PRIORITY",
+      "required": false,
+      "type": "string"
+    },
+    "WnsRequestForStatusParameter": {
+      "description": "X-WNS-RequestForStatus header parameter",
+      "in": "header",
+      "name": "X-WNS-RequestForStatus",
+      "required": false,
+      "type": "string"
+    },
+    "WnsTagParameter": {
+      "description": "X-WNS-Tag header parameter",
+      "in": "header",
+      "name": "X-WNS-Tag",
+      "required": false,
+      "type": "string"
+    },
+    "WnsTtlParameter": {
+      "description": "X-WNS-TTL header parameter",
+      "in": "header",
+      "name": "X-WNS-TTL",
+      "required": false,
+      "type": "string"
+    },
+    "WnsTypeParameter": {
+      "description": "X-WNS-Type header parameter",
+      "in": "header",
+      "name": "X-WNS-Type",
+      "required": false,
+      "type": "string"
+    }
+  }
+}

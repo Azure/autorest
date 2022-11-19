@@ -158,6 +158,12 @@
       "projectFolder": "packages/extensions/cadl",
       "reviewCategory": "production",
       "shouldPublish": true
+    },
+    {
+      "packageName": "@autorest/openapi-to-cadl",
+      "projectFolder": "packages/extensions/openapi-to-cadl",
+      "reviewCategory": "production",
+      "shouldPublish": true
     }
   ]
 }
