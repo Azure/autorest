@@ -61,7 +61,7 @@
     "fs-extra": "^10.1.0",
     "@types/fs-extra": "^9.0.13",
     "chalk": "^4.1.0",
-    "@azure-tools/cadl-autorest": "^0.20.0",
+    "@azure-tools/cadl-autorest": "^0.22.0",
     "webpack-cli": "~4.7.2",
     "webpack": "~5.40.0",
     "@typescript-eslint/eslint-plugin": "^5.27.0",

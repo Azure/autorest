@@ -29,9 +29,9 @@ export async function compileCadl(
 
   const baseDir = resolve(dirname(entrypoint));
   try {
-    const { createProgram, NodeHost } = await importCadl(baseDir);
-    const program = await createProgram(createCadlHost(logger, writeFile, NodeHost), entrypoint, {
-      emitters: ["@azure-tools/cadl-autorest"],
+    const { compile, NodeHost } = await importCadl(baseDir);
+    const program = await compile(createCadlHost(logger, writeFile, NodeHost), entrypoint, {
+      emitters: { "@azure-tools/cadl-autorest": {} },
     });
     if (program.diagnostics.length > 0) {
       return { diagnostics: program.diagnostics };
