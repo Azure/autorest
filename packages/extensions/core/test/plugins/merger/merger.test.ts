@@ -59,14 +59,14 @@ describe("MultiAPIMerger", () => {
       const errorMessage = `Couldn't resolve the server url. Spec doesn't contain a server definition and specs are hosted on different hosts:
  - https://example.com
  - https://other.com`;
-      await expect(() => merger.getOutput()).rejects.toThrowError(errorMessage);
+      await expect(() => merger.getOutput()).rejects.toThrow(errorMessage);
     });
 
     it("throws error if spec is loaded locally and server url is relative", async () => {
       const inputs = await Promise.all([readData("server-relative-url/input1.json", "file://localpath/input1.json")]);
       const merger = new MultiAPIMerger(inputs, undefined, undefined);
       const errorMessage = `Server url '/endpoint1' cannot be resolved to an absolute url. Update to be an absolute url or load OpenAPI document from host to automatically resolve the url relative to it.`;
-      await expect(() => merger.getOutput()).rejects.toThrowError(errorMessage);
+      await expect(() => merger.getOutput()).rejects.toThrow(errorMessage);
     });
   });
 });

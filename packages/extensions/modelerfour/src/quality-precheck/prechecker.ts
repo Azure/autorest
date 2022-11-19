@@ -65,7 +65,7 @@ export class QualityPreChecker {
     this.interpret = new Interpretations(session);
   }
 
-  private resolve<T>(item: Refable<T>): Dereferenced<T> {
+  private resolve<T extends {} | undefined>(item: Refable<T>): Dereferenced<T> {
     return dereference(this.input, item);
   }
 

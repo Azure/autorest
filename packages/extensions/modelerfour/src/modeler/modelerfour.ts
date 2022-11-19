@@ -302,11 +302,11 @@ export class ModelerFour {
     return this;
   }
 
-  private resolve<T>(item: Refable<T>): Dereferenced<T> {
+  private resolve<T extends {} | undefined>(item: Refable<T>): Dereferenced<T> {
     return dereference(this.input, item);
   }
 
-  private use<T, Q = void>(item: Refable<T> | undefined, action: (name: string, instance: T) => Q): Q {
+  private use<T extends {}, Q = void>(item: Refable<T | undefined>, action: (name: string, instance: T) => Q): Q {
     const i = dereference(this.input, item);
     if (i.instance) {
       return action(i.name, i.instance);
@@ -314,11 +314,11 @@ export class ModelerFour {
     throw new Error(`Unresolved item '${item}'`);
   }
 
-  resolveArray<T>(source: Array<Refable<T>> | undefined) {
+  resolveArray<T extends {}>(source: Array<Refable<T>> | undefined) {
     return (source ?? []).map((each) => dereference(this.input, each).instance);
   }
 
-  resolveDictionary<T>(source?: Record<string, Refable<T>>) {
+  resolveDictionary<T extends {}>(source?: Record<string, Refable<T>>) {
     return Object.entries(source ?? {})
       .map(([key, value]) => ({
         key,

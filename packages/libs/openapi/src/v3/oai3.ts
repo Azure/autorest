@@ -73,12 +73,12 @@ export function isQueryParameter(parameter: Parameter): parameter is InQuery & P
 /**
  * Properties have additional data when referencing them
  */
-export type PropertyReference<T> = PropertyDetails & Refable<T>;
+export type PropertyReference<T extends {}> = PropertyDetails & Refable<T>;
 
 /**
  * Parameter references could have additional data to override the shared parameter value.
  */
-export type ParameterReference<T> = ParameterDetails & Refable<T>;
+export type ParameterReference<T extends {}> = ParameterDetails & Refable<T>;
 
 /**
  * @description common ways of serializing simple parameters

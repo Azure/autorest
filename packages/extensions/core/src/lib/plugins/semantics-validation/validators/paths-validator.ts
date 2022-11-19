@@ -66,7 +66,7 @@ function findPathParameter(
 function createPathParameterEmptyError(uri: string): SemanticError {
   return {
     level: "error",
-    code: SemanticErrorCodes.PathParameterEmtpy,
+    code: SemanticErrorCodes.PathParameterEmpty,
     message: `A path parameter in uri ${uri} is empty.`,
     params: { uri },
     path: ["paths", uri],

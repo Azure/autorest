@@ -1,0 +1,19 @@
+import "@cadl-lang/rest";
+import "./routes.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+@service({
+  title: "Azure Batch Service",
+})
+@serviceVersion("2022-01-01.15.0")
+@server(
+  "{batchUrl}",
+  "A client for issuing REST requests to the Azure Batch service.",
+  {
+    @doc("The base URL for all Azure Batch service requests.")
+    batchUrl: string,
+  }
+)
+@doc("A client for issuing REST requests to the Azure Batch service.")
+namespace Azure.Batch;

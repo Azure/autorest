@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "autorest",
+      "comment": "Update dependencies",
+      "type": "patch"
+    }
+  ],
+  "packageName": "autorest"
+}

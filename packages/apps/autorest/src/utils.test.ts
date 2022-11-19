@@ -10,9 +10,9 @@ describe("autorest: Utils", () => {
   });
 
   it("throws if in invalid format", () => {
-    expect(() => parseMemory("1024k")).toThrowError();
-    expect(() => parseMemory("abdef")).toThrowError();
-    expect(() => parseMemory("4096")).toThrowError();
+    expect(() => parseMemory("1024k")).toThrow();
+    expect(() => parseMemory("abdef")).toThrow();
+    expect(() => parseMemory("4096")).toThrow();
   });
 
   describe("getRequestedCoreVersion", () => {

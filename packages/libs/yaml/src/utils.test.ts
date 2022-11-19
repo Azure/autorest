@@ -26,7 +26,7 @@ describe("Utils", () => {
     });
 
     it("Throws an error if path doesn't exists", () => {
-      expect(() => getYamlNodeByPath(ast, ["bar", "invalid"])).toThrowError(
+      expect(() => getYamlNodeByPath(ast, ["bar", "invalid"])).toThrow(
         "Error retrieving 'bar>invalid' (Error: Trying to retrieve 'invalid' from mapping that contains no such key)",
       );
     });

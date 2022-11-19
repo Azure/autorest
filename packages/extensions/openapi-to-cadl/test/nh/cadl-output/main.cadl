@@ -1,0 +1,22 @@
+import "@cadl-lang/rest";
+import "./routes.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+@service({
+  title: "NotificationHubsClient",
+})
+@serviceVersion("2020-06-01")
+@server(
+  "{namespaceBaseUrl}",
+  "The Notification Hubs client performs operations to register and query devices, and send notifications",
+  {
+    @doc("The namespace name, for example https://mynamespace.servicebus.windows.net.")
+    namespaceBaseUrl: string,
+  }
+)
+@doc("""
+The Notification Hubs client performs operations to register and query devices,
+and send notifications
+""")
+namespace NotificationHubsClient;

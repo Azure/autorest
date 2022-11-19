@@ -33,7 +33,7 @@ describe("MappingTree", () => {
 
   it("cannot assign property", () => {
     const root = createMappingTree<Model>("foo", {}, mappings);
-    expect(() => ((root as any).foo = 123)).toThrowError(
+    expect(() => ((root as any).foo = 123)).toThrow(
       "Use __set__ or __push__ to modify proxy graph. Trying to set foo with value: 123",
     );
   });
