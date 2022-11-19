@@ -6,7 +6,7 @@ specifiers:
   '@azure-tools/tasks': ~3.0.0
   '@azure-tools/uri': ~3.1.1
   '@azure/logger': ^1.0.2
-  '@cadl-lang/compiler': ~0.31.0
+  '@cadl-lang/compiler': ~0.37.0
   '@rush-temp/autorest': file:./projects/autorest.tgz
   '@rush-temp/cadl': file:./projects/cadl.tgz
   '@rush-temp/codegen': file:./projects/codegen.tgz
@@ -88,7 +88,7 @@ specifiers:
   ts-jest: ^29.0.3
   ts-loader: ~9.2.3
   ts-morph: ~13.0.3
-  ts-node: ^9.1.1
+  ts-node: ^10.9.1
   typescript: ~4.9.3
   typescript-json-schema: ~0.53.0
   untildify: ^4.0.0
@@ -108,30 +108,30 @@ dependencies:
   '@azure-tools/tasks': 3.0.255
   '@azure-tools/uri': 3.1.1
   '@azure/logger': 1.0.3
-  '@cadl-lang/compiler': 0.31.0
-  '@rush-temp/autorest': file:projects/autorest.tgz_ts-node@9.1.1
-  '@rush-temp/cadl': file:projects/cadl.tgz_ts-node@9.1.1+webpack@5.40.0
-  '@rush-temp/codegen': file:projects/codegen.tgz_prettier@2.7.1+ts-node@9.1.1
+  '@cadl-lang/compiler': 0.37.0
+  '@rush-temp/autorest': file:projects/autorest.tgz_ts-node@10.9.1
+  '@rush-temp/cadl': file:projects/cadl.tgz_ts-node@10.9.1+webpack@5.40.0
+  '@rush-temp/codegen': file:projects/codegen.tgz_prettier@2.7.1+ts-node@10.9.1
   '@rush-temp/codemodel': file:projects/codemodel.tgz_jest@29.3.1+prettier@2.7.1
-  '@rush-temp/common': file:projects/common.tgz_prettier@2.7.1+ts-node@9.1.1
+  '@rush-temp/common': file:projects/common.tgz_prettier@2.7.1+ts-node@10.9.1
   '@rush-temp/compare': file:projects/compare.tgz_prettier@2.7.1
-  '@rush-temp/configuration': file:projects/configuration.tgz_prettier@2.7.1+ts-node@9.1.1
-  '@rush-temp/core': file:projects/core.tgz_ts-node@9.1.1
-  '@rush-temp/datastore': file:projects/datastore.tgz_prettier@2.7.1+ts-node@9.1.1
-  '@rush-temp/deduplication': file:projects/deduplication.tgz_prettier@2.7.1+ts-node@9.1.1
-  '@rush-temp/extension': file:projects/extension.tgz_prettier@2.7.1+ts-node@9.1.1
+  '@rush-temp/configuration': file:projects/configuration.tgz_prettier@2.7.1+ts-node@10.9.1
+  '@rush-temp/core': file:projects/core.tgz_ts-node@10.9.1
+  '@rush-temp/datastore': file:projects/datastore.tgz_prettier@2.7.1+ts-node@10.9.1
+  '@rush-temp/deduplication': file:projects/deduplication.tgz_prettier@2.7.1+ts-node@10.9.1
+  '@rush-temp/extension': file:projects/extension.tgz_prettier@2.7.1+ts-node@10.9.1
   '@rush-temp/extension-base': file:projects/extension-base.tgz_jest@29.3.1+prettier@2.7.1
-  '@rush-temp/fixer': file:projects/fixer.tgz_ts-node@9.1.1
-  '@rush-temp/json': file:projects/json.tgz_prettier@2.7.1+ts-node@9.1.1
-  '@rush-temp/jsonschema': file:projects/jsonschema.tgz_prettier@2.7.1+ts-node@9.1.1
-  '@rush-temp/modelerfour': file:projects/modelerfour.tgz_ts-node@9.1.1
-  '@rush-temp/oai2-to-oai3': file:projects/oai2-to-oai3.tgz_prettier@2.7.1+ts-node@9.1.1
-  '@rush-temp/openapi': file:projects/openapi.tgz_prettier@2.7.1+ts-node@9.1.1
+  '@rush-temp/fixer': file:projects/fixer.tgz_ts-node@10.9.1
+  '@rush-temp/json': file:projects/json.tgz_prettier@2.7.1+ts-node@10.9.1
+  '@rush-temp/jsonschema': file:projects/jsonschema.tgz_prettier@2.7.1+ts-node@10.9.1
+  '@rush-temp/modelerfour': file:projects/modelerfour.tgz_ts-node@10.9.1
+  '@rush-temp/oai2-to-oai3': file:projects/oai2-to-oai3.tgz_prettier@2.7.1+ts-node@10.9.1
+  '@rush-temp/openapi': file:projects/openapi.tgz_prettier@2.7.1+ts-node@10.9.1
   '@rush-temp/schemas': file:projects/schemas.tgz
-  '@rush-temp/system-requirements': file:projects/system-requirements.tgz_prettier@2.7.1+ts-node@9.1.1
+  '@rush-temp/system-requirements': file:projects/system-requirements.tgz_prettier@2.7.1+ts-node@10.9.1
   '@rush-temp/test-public-packages': file:projects/test-public-packages.tgz_prettier@2.7.1
-  '@rush-temp/test-utils': file:projects/test-utils.tgz_1601d8441375ec1ced01fee8d6117df6
-  '@rush-temp/yaml': file:projects/yaml.tgz_prettier@2.7.1+ts-node@9.1.1
+  '@rush-temp/test-utils': file:projects/test-utils.tgz_1ebd90c6d335d7d97a346a0f4e26ad19
+  '@rush-temp/yaml': file:projects/yaml.tgz_prettier@2.7.1+ts-node@10.9.1
   '@types/cli-progress': 3.9.2
   '@types/command-exists': 1.2.0
   '@types/commonmark': 0.27.5
@@ -168,7 +168,7 @@ dependencies:
   eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
   expect: 26.6.2
   glob: 7.1.7
-  jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+  jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
   jest-snapshot: 26.6.2
   js-yaml: 4.0.0
   jsonpath-plus: 6.0.1
@@ -190,7 +190,7 @@ dependencies:
   ts-jest: 29.0.3_jest@29.3.1+typescript@4.9.3
   ts-loader: 9.2.9_typescript@4.9.3+webpack@5.40.0
   ts-morph: 13.0.3
-  ts-node: 9.1.1_typescript@4.9.3
+  ts-node: 10.9.1_7d52a1ab8d3f8907f176d15392128f81
   typescript: 4.9.3
   typescript-json-schema: 0.53.1
   untildify: 4.0.0
@@ -587,8 +587,8 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: false
 
-  /@cadl-lang/compiler/0.31.0:
-    resolution: {integrity: sha512-CuTITxHM8S/z7vAPhu1enpNuLsMuwBkI3PZmnqWGJhIQHKUE4SFKlAU8cePioUZF5A8vLcC5rNqDIzMsmkjNVg==}
+  /@cadl-lang/compiler/0.37.0:
+    resolution: {integrity: sha512-jHMqPZmM4evQlu7oY9vj6PEM+f+OhnfPqAdwxALrU2gwsLcwYG1h8rkjX/iK2KfeewCbXuRT/hztOTo3pcbYWA==}
     engines: {node: '>=16.0.0'}
     hasBin: true
     dependencies:
@@ -599,10 +599,10 @@ packages:
       js-yaml: 4.1.0
       mkdirp: 1.0.4
       mustache: 4.2.0
-      node-fetch: 3.2.10
+      node-fetch: 3.2.8
       node-watch: 0.7.3
       picocolors: 1.0.0
-      prettier: 2.6.2
+      prettier: 2.7.1
       prompts: 2.4.2
       vscode-languageserver: 7.0.0
       vscode-languageserver-textdocument: 1.0.7
@@ -708,7 +708,7 @@ packages:
       slash: 3.0.0
     dev: false
 
-  /@jest/core/29.3.1_ts-node@9.1.1:
+  /@jest/core/29.3.1_ts-node@10.9.1:
     resolution: {integrity: sha512-0ohVjjRex985w5MmO5L3u5GR1O30DexhBSpuwx2P+9ftyqHdJXnk7IUWiP80oHMvt7ubHCJHxV0a0vlKVuZirw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     peerDependencies:
@@ -729,7 +729,7 @@ packages:
       exit: 0.1.2
       graceful-fs: 4.2.10
       jest-changed-files: 29.2.0
-      jest-config: 29.3.1_85d853a5b112c2ca8635da935e3adb6c
+      jest-config: 29.3.1_1b5654bfedeade53353c1a0d6cb7a539
       jest-haste-map: 29.3.1
       jest-message-util: 29.3.1
       jest-regex-util: 29.2.0
@@ -2858,7 +2858,7 @@ packages:
       '@typescript-eslint/eslint-plugin': 5.43.0_6c13c08efc22ad2f80829ce4a7a0fc7e
       '@typescript-eslint/utils': 5.43.0_eslint@8.28.0+typescript@4.9.3
       eslint: 8.28.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -4133,7 +4133,7 @@ packages:
       - supports-color
     dev: false
 
-  /jest-cli/29.3.1_5076b77de2277d7bd3e529e70437d1c6:
+  /jest-cli/29.3.1_905ff7f381d7c2725cb1589b742e410c:
     resolution: {integrity: sha512-TO/ewvwyvPOiBBuWZ0gm04z3WWP8TIK8acgPzE4IxgsLKQgb377NYGrQLc3Wl/7ndWzIH2CDNNsUjGxwLL43VQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
@@ -4143,14 +4143,14 @@ packages:
       node-notifier:
         optional: true
     dependencies:
-      '@jest/core': 29.3.1_ts-node@9.1.1
+      '@jest/core': 29.3.1_ts-node@10.9.1
       '@jest/test-result': 29.3.1
       '@jest/types': 29.3.1
       chalk: 4.1.2
       exit: 0.1.2
       graceful-fs: 4.2.10
       import-local: 3.1.0
-      jest-config: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest-config: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       jest-util: 29.3.1
       jest-validate: 29.3.1
       prompts: 2.4.2
@@ -4161,47 +4161,7 @@ packages:
       - ts-node
     dev: false
 
-  /jest-config/29.3.1_5076b77de2277d7bd3e529e70437d1c6:
-    resolution: {integrity: sha512-y0tFHdj2WnTEhxmGUK1T7fgLen7YK4RtfvpLFBXfQkh2eMJAQq24Vx9472lvn5wg0MAO6B+iPfJfzdR9hJYalg==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    peerDependencies:
-      '@types/node': '*'
-      ts-node: '>=9.0.0'
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      ts-node:
-        optional: true
-    dependencies:
-      '@babel/core': 7.20.2
-      '@jest/test-sequencer': 29.3.1
-      '@jest/types': 29.3.1
-      '@types/node': 14.14.45
-      babel-jest: 29.3.1_@babel+core@7.20.2
-      chalk: 4.1.2
-      ci-info: 3.6.1
-      deepmerge: 4.2.2
-      glob: 7.1.7
-      graceful-fs: 4.2.10
-      jest-circus: 29.3.1
-      jest-environment-node: 29.3.1
-      jest-get-type: 29.2.0
-      jest-regex-util: 29.2.0
-      jest-resolve: 29.3.1
-      jest-runner: 29.3.1
-      jest-util: 29.3.1
-      jest-validate: 29.3.1
-      micromatch: 4.0.5
-      parse-json: 5.2.0
-      pretty-format: 29.3.1
-      slash: 3.0.0
-      strip-json-comments: 3.1.1
-      ts-node: 9.1.1_typescript@4.9.3
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /jest-config/29.3.1_85d853a5b112c2ca8635da935e3adb6c:
+  /jest-config/29.3.1_1b5654bfedeade53353c1a0d6cb7a539:
     resolution: {integrity: sha512-y0tFHdj2WnTEhxmGUK1T7fgLen7YK4RtfvpLFBXfQkh2eMJAQq24Vx9472lvn5wg0MAO6B+iPfJfzdR9hJYalg==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     peerDependencies:
@@ -4236,7 +4196,47 @@ packages:
       pretty-format: 29.3.1
       slash: 3.0.0
       strip-json-comments: 3.1.1
-      ts-node: 9.1.1_typescript@4.9.3
+      ts-node: 10.9.1_7d52a1ab8d3f8907f176d15392128f81
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /jest-config/29.3.1_905ff7f381d7c2725cb1589b742e410c:
+    resolution: {integrity: sha512-y0tFHdj2WnTEhxmGUK1T7fgLen7YK4RtfvpLFBXfQkh2eMJAQq24Vx9472lvn5wg0MAO6B+iPfJfzdR9hJYalg==}
+    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
+    peerDependencies:
+      '@types/node': '*'
+      ts-node: '>=9.0.0'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      ts-node:
+        optional: true
+    dependencies:
+      '@babel/core': 7.20.2
+      '@jest/test-sequencer': 29.3.1
+      '@jest/types': 29.3.1
+      '@types/node': 14.14.45
+      babel-jest: 29.3.1_@babel+core@7.20.2
+      chalk: 4.1.2
+      ci-info: 3.6.1
+      deepmerge: 4.2.2
+      glob: 7.1.7
+      graceful-fs: 4.2.10
+      jest-circus: 29.3.1
+      jest-environment-node: 29.3.1
+      jest-get-type: 29.2.0
+      jest-regex-util: 29.2.0
+      jest-resolve: 29.3.1
+      jest-runner: 29.3.1
+      jest-util: 29.3.1
+      jest-validate: 29.3.1
+      micromatch: 4.0.5
+      parse-json: 5.2.0
+      pretty-format: 29.3.1
+      slash: 3.0.0
+      strip-json-comments: 3.1.1
+      ts-node: 10.9.1_7d52a1ab8d3f8907f176d15392128f81
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -4680,7 +4680,7 @@ packages:
       supports-color: 8.1.1
     dev: false
 
-  /jest/29.3.1_5076b77de2277d7bd3e529e70437d1c6:
+  /jest/29.3.1_905ff7f381d7c2725cb1589b742e410c:
     resolution: {integrity: sha512-6iWfL5DTT0Np6UYs/y5Niu7WIfNv/wRTtN5RSXt2DIEft3dx3zPuw/3WJQBCJfmEzvDiEKwoqMbGD9n49+qLSA==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
@@ -4690,10 +4690,10 @@ packages:
       node-notifier:
         optional: true
     dependencies:
-      '@jest/core': 29.3.1_ts-node@9.1.1
+      '@jest/core': 29.3.1_ts-node@10.9.1
       '@jest/types': 29.3.1
       import-local: 3.1.0
-      jest-cli: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest-cli: 29.3.1_905ff7f381d7c2725cb1589b742e410c
     transitivePeerDependencies:
       - '@types/node'
       - supports-color
@@ -5228,8 +5228,8 @@ packages:
       safe-buffer: 5.2.1
     dev: false
 
-  /node-fetch/3.2.10:
-    resolution: {integrity: sha512-MhuzNwdURnZ1Cp4XTazr69K0BTizsBroX7Zx3UgDSVcZYKF/6p0CBe4EUb/hLqmzVhl0UpYfgRljQ4yxE+iCxA==}
+  /node-fetch/3.2.8:
+    resolution: {integrity: sha512-KtpD1YhGszhntMpBDyp5lyagk8KIMopC1LEb7cQUAh7zcosaX5uK8HnbNb2i3NTQK3sIawCItS0uFC3QzcLHdg==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       data-uri-to-buffer: 4.0.0
@@ -5797,12 +5797,6 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       fast-diff: 1.2.0
-    dev: false
-
-  /prettier/2.6.2:
-    resolution: {integrity: sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew==}
-    engines: {node: '>=10.13.0'}
-    hasBin: true
     dev: false
 
   /prettier/2.7.1:
@@ -6864,7 +6858,7 @@ packages:
     dependencies:
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       jest-util: 29.3.1
       json5: 2.2.1
       lodash.memoize: 4.1.2
@@ -6896,6 +6890,37 @@ packages:
       code-block-writer: 11.0.3
     dev: false
 
+  /ts-node/10.9.1_7d52a1ab8d3f8907f176d15392128f81:
+    resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': '>=1.2.50'
+      '@swc/wasm': '>=1.2.50'
+      '@types/node': '*'
+      typescript: '>=2.7'
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      '@swc/wasm':
+        optional: true
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.9
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.3
+      '@types/node': 14.14.45
+      acorn: 8.8.1
+      acorn-walk: 8.2.0
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 4.9.3
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    dev: false
+
   /ts-node/10.9.1_fed3b4cb8104197fd8996158792567a5:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
@@ -6924,22 +6949,6 @@ packages:
       make-error: 1.3.6
       typescript: 4.6.4
       v8-compile-cache-lib: 3.0.1
-      yn: 3.1.1
-    dev: false
-
-  /ts-node/9.1.1_typescript@4.9.3:
-    resolution: {integrity: sha512-hPlt7ZACERQGf03M253ytLY3dHbGNGrAq9qIHWUY9XHYl1z7wYngSr3OQ5xmui8o2AaxsONxIzjafLUiWBo1Fg==}
-    engines: {node: '>=10.0.0'}
-    hasBin: true
-    peerDependencies:
-      typescript: '>=2.7'
-    dependencies:
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.2
-      make-error: 1.3.6
-      source-map-support: 0.5.21
-      typescript: 4.9.3
       yn: 3.1.1
     dev: false
 
@@ -7524,7 +7533,7 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  file:projects/autorest.tgz_ts-node@9.1.1:
+  file:projects/autorest.tgz_ts-node@10.9.1:
     resolution: {integrity: sha512-1FNvkOehfzS198xbtk326pdxZpw3C3/hBvSYrRoT2XabKqBRp1QmozdUinFSqq5NaLy6DqQlQOiblF8rwAqRPg==, tarball: file:projects/autorest.tgz}
     id: file:projects/autorest.tgz
     name: '@rush-temp/autorest'
@@ -7550,7 +7559,7 @@ packages:
       eslint-plugin-node: 11.1.0_eslint@8.28.0
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       mkdirp: 0.5.6
       prettier: 2.7.1
       rimraf: 3.0.2
@@ -7581,13 +7590,13 @@ packages:
       - webpack-dev-server
     dev: false
 
-  file:projects/cadl.tgz_ts-node@9.1.1+webpack@5.40.0:
-    resolution: {integrity: sha512-SrM6Qgni/jgP2yiZXtuLLf2PX6Y71FG2ljF8UkUXS6DQ0DkgHhsC70FvnsgWdgMVggoAHgOTrCmumQEKbKxd3A==, tarball: file:projects/cadl.tgz}
+  file:projects/cadl.tgz_ts-node@10.9.1+webpack@5.40.0:
+    resolution: {integrity: sha512-TxzOdWixCLLIR/qowemQawaayAhQXXCyavba6H3mOXH2BE0BgfFbuPZatjP0GXhV/m9VwrkY+N/CLKMZK7uo2A==, tarball: file:projects/cadl.tgz}
     id: file:projects/cadl.tgz
     name: '@rush-temp/cadl'
     version: 0.0.0
     dependencies:
-      '@cadl-lang/compiler': 0.31.0
+      '@cadl-lang/compiler': 0.37.0
       '@types/jest': 29.2.3
       '@types/lodash': 4.14.189
       '@types/node': 14.14.45
@@ -7602,7 +7611,7 @@ packages:
       eslint-plugin-node: 11.1.0_eslint@8.28.0
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       lodash: 4.17.21
       prettier: 2.7.1
       rimraf: 3.0.2
@@ -7622,7 +7631,7 @@ packages:
       - webpack
     dev: false
 
-  file:projects/codegen.tgz_prettier@2.7.1+ts-node@9.1.1:
+  file:projects/codegen.tgz_prettier@2.7.1+ts-node@10.9.1:
     resolution: {integrity: sha512-dhFQ3edn6Uuh05WJRhBkEFy3Db+Ne/T9uTwtOiPdNhS/+AhEvJRS/D/aJUYZb7Yl3loEb7uO+omhH/bpKDkfXg==, tarball: file:projects/codegen.tgz}
     id: file:projects/codegen.tgz
     name: '@rush-temp/codegen'
@@ -7641,7 +7650,7 @@ packages:
       eslint-plugin-node: 11.1.0_eslint@8.28.0
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       js-yaml: 4.0.0
       rimraf: 3.0.2
       semver: 7.3.8
@@ -7691,7 +7700,7 @@ packages:
       - supports-color
     dev: false
 
-  file:projects/common.tgz_prettier@2.7.1+ts-node@9.1.1:
+  file:projects/common.tgz_prettier@2.7.1+ts-node@10.9.1:
     resolution: {integrity: sha512-fxyr3u7g/Dj0o4xvkEiDxx+M30xN+6bODNtqeyFoISFFq3NEycZ6u2j80J7zN3cuCx0OP4uesxkcyW4sHoCA6Q==, tarball: file:projects/common.tgz}
     id: file:projects/common.tgz
     name: '@rush-temp/common'
@@ -7711,7 +7720,7 @@ packages:
       eslint-plugin-node: 11.1.0_eslint@8.28.0
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       rimraf: 3.0.2
       typescript: 4.9.3
     transitivePeerDependencies:
@@ -7723,7 +7732,7 @@ packages:
     dev: false
 
   file:projects/compare.tgz_prettier@2.7.1:
-    resolution: {integrity: sha512-ApTp51Na1dAvSv2MHzY5Xu6ejPH7LeTxJABcVyIECOj0oPxQ3i7J0hBqNhTl451nKc01lpHJ1Xkoayz1smxW8g==, tarball: file:projects/compare.tgz}
+    resolution: {integrity: sha512-2uWbzC6XEF3uayAEmBpXzbx2D/y6Wc0rOZc8a5Gmt1LeAvCwG11MlcYHwbiWC1qcIMkVyWIDfK4EOrvIMRPp+g==, tarball: file:projects/compare.tgz}
     id: file:projects/compare.tgz
     name: '@rush-temp/compare'
     version: 0.0.0
@@ -7743,18 +7752,20 @@ packages:
       eslint-plugin-node: 11.1.0_eslint@8.28.0
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       js-yaml: 4.0.0
       source-map-support: 0.5.21
       tree-sitter: 0.20.1
       tree-sitter-python: 0.20.1
       tree-sitter-typescript: 0.20.1
       ts-jest: 29.0.3_jest@29.3.1+typescript@4.9.3
-      ts-node: 9.1.1_typescript@4.9.3
+      ts-node: 10.9.1_7d52a1ab8d3f8907f176d15392128f81
       typescript: 4.9.3
     transitivePeerDependencies:
       - '@babel/core'
       - '@jest/types'
+      - '@swc/core'
+      - '@swc/wasm'
       - babel-jest
       - esbuild
       - eslint-config-prettier
@@ -7763,7 +7774,7 @@ packages:
       - supports-color
     dev: false
 
-  file:projects/configuration.tgz_prettier@2.7.1+ts-node@9.1.1:
+  file:projects/configuration.tgz_prettier@2.7.1+ts-node@10.9.1:
     resolution: {integrity: sha512-PvBCSFJbzLme85gRyCSlvsYyvi53aNj19VmhCxtQxf04cyFj9vZ1nLx+NRPbH9fqFqfh9TAEdOGcEi1L8n/g9g==, tarball: file:projects/configuration.tgz}
     id: file:projects/configuration.tgz
     name: '@rush-temp/configuration'
@@ -7784,7 +7795,7 @@ packages:
       eslint-plugin-node: 11.1.0_eslint@8.28.0
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       lodash: 4.17.21
       rimraf: 3.0.2
       ts-jest: 29.0.3_jest@29.3.1+typescript@4.9.3
@@ -7802,7 +7813,7 @@ packages:
       - ts-node
     dev: false
 
-  file:projects/core.tgz_ts-node@9.1.1:
+  file:projects/core.tgz_ts-node@10.9.1:
     resolution: {integrity: sha512-y11XoS2qG1e/nQ7GRJ46KSFc7Q/CbdWbNptqKNenCgI/7x/KRt96yz8dvj/Rml4TaNGNTVx5q11UVNZPxXp07w==, tarball: file:projects/core.tgz}
     id: file:projects/core.tgz
     name: '@rush-temp/core'
@@ -7832,7 +7843,7 @@ packages:
       eslint-plugin-node: 11.1.0_eslint@8.28.0
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       lodash: 4.17.21
       mkdirp: 0.5.6
       prettier: 2.7.1
@@ -7866,7 +7877,7 @@ packages:
       - webpack-dev-server
     dev: false
 
-  file:projects/datastore.tgz_prettier@2.7.1+ts-node@9.1.1:
+  file:projects/datastore.tgz_prettier@2.7.1+ts-node@10.9.1:
     resolution: {integrity: sha512-bSEtJPt7m8Ftko2QuXQMDBmKZE38hHzJw+56ee4m0VN21C+2ifpyUB0hv1j4HIrOsIYqh+KXw998OD3TI8jXiQ==, tarball: file:projects/datastore.tgz}
     id: file:projects/datastore.tgz
     name: '@rush-temp/datastore'
@@ -7886,7 +7897,7 @@ packages:
       eslint-plugin-node: 11.1.0_eslint@8.28.0
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       jsonpath-plus: 6.0.1
       lodash: 4.17.21
       rimraf: 3.0.2
@@ -7905,7 +7916,7 @@ packages:
       - ts-node
     dev: false
 
-  file:projects/deduplication.tgz_prettier@2.7.1+ts-node@9.1.1:
+  file:projects/deduplication.tgz_prettier@2.7.1+ts-node@10.9.1:
     resolution: {integrity: sha512-WN/+LCiosX9JWhs3THFpob/OGKuSAgdPQllJoJTQ67aQOwd+rNE8CuSzr06wn8qLVBWHDjEtyZYvhiN8Mf+UYQ==, tarball: file:projects/deduplication.tgz}
     id: file:projects/deduplication.tgz
     name: '@rush-temp/deduplication'
@@ -7925,7 +7936,7 @@ packages:
       eslint-plugin-node: 11.1.0_eslint@8.28.0
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       lodash: 4.17.21
       rimraf: 3.0.2
       typescript: 4.9.3
@@ -7964,7 +7975,7 @@ packages:
       - supports-color
     dev: false
 
-  file:projects/extension.tgz_prettier@2.7.1+ts-node@9.1.1:
+  file:projects/extension.tgz_prettier@2.7.1+ts-node@10.9.1:
     resolution: {integrity: sha512-xPDgC1jVlYY9zk32c2ESxkX1YvsQPdfY+H/luvF/9ihrHIt5rrkQ1PJAA264F2uYbRd8sZsxZDefb8+Z8ioEcA==, tarball: file:projects/extension.tgz}
     id: file:projects/extension.tgz
     name: '@rush-temp/extension'
@@ -7989,7 +8000,7 @@ packages:
       eslint-plugin-node: 11.1.0_eslint@8.28.0
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       mkdirp: 0.5.6
       npm: 8.12.2
       npm-package-arg: 9.1.2
@@ -8007,7 +8018,7 @@ packages:
       - ts-node
     dev: false
 
-  file:projects/fixer.tgz_ts-node@9.1.1:
+  file:projects/fixer.tgz_ts-node@10.9.1:
     resolution: {integrity: sha512-M1ZzAx/OYOaNUlXVFyREeST2f8VnDwWgQVvm8toFPIiCFTZAdLeeUdgRsMhwf5nChSB8K1J8B7wchBUIb+eLSQ==, tarball: file:projects/fixer.tgz}
     id: file:projects/fixer.tgz
     name: '@rush-temp/fixer'
@@ -8029,7 +8040,7 @@ packages:
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
       glob: 7.1.7
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       lodash: 4.17.21
       prettier: 2.7.1
       rimraf: 3.0.2
@@ -8049,7 +8060,7 @@ packages:
       - ts-node
     dev: false
 
-  file:projects/json.tgz_prettier@2.7.1+ts-node@9.1.1:
+  file:projects/json.tgz_prettier@2.7.1+ts-node@10.9.1:
     resolution: {integrity: sha512-OgDZwUMO9HiawZc4EuANDskXreZejUmb+D/+8T2j4jxLD0KC4uemfhlSfqhaO7P44u1VLCHHe1+sLgI3ZqhNyg==, tarball: file:projects/json.tgz}
     id: file:projects/json.tgz
     name: '@rush-temp/json'
@@ -8065,7 +8076,7 @@ packages:
       eslint-plugin-node: 11.1.0_eslint@8.28.0
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       rimraf: 3.0.2
       typescript: 4.9.3
     transitivePeerDependencies:
@@ -8076,7 +8087,7 @@ packages:
       - ts-node
     dev: false
 
-  file:projects/jsonschema.tgz_prettier@2.7.1+ts-node@9.1.1:
+  file:projects/jsonschema.tgz_prettier@2.7.1+ts-node@10.9.1:
     resolution: {integrity: sha512-QM0ZYTN5eRjWteutD3ouuaW1knJyXOnbMQQNDRiw1GXMRIDAMYdtnPlIyTis0mNAwQ3N0GWlyAJurbr8QMZDEg==, tarball: file:projects/jsonschema.tgz}
     id: file:projects/jsonschema.tgz
     name: '@rush-temp/jsonschema'
@@ -8092,7 +8103,7 @@ packages:
       eslint-plugin-node: 11.1.0_eslint@8.28.0
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       rimraf: 3.0.2
       typescript: 4.9.3
     transitivePeerDependencies:
@@ -8103,7 +8114,7 @@ packages:
       - ts-node
     dev: false
 
-  file:projects/modelerfour.tgz_ts-node@9.1.1:
+  file:projects/modelerfour.tgz_ts-node@10.9.1:
     resolution: {integrity: sha512-TfevYoJis5aIUitoNqoRt4Zkpmw8E6Wg7xoJchfUrW9fpGULWUFxem1Q73A1BwKSbwktoLl1NCv1nHlg/x7xQQ==, tarball: file:projects/modelerfour.tgz}
     id: file:projects/modelerfour.tgz
     name: '@rush-temp/modelerfour'
@@ -8125,7 +8136,7 @@ packages:
       eslint-plugin-node: 11.1.0_eslint@8.28.0
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       lodash: 4.17.21
       prettier: 2.7.1
       recursive-diff: 1.0.8
@@ -8153,7 +8164,7 @@ packages:
       - webpack-dev-server
     dev: false
 
-  file:projects/oai2-to-oai3.tgz_prettier@2.7.1+ts-node@9.1.1:
+  file:projects/oai2-to-oai3.tgz_prettier@2.7.1+ts-node@10.9.1:
     resolution: {integrity: sha512-VjwPE2YA4UI0B2SRoHZmnPan7oqpCXZ4Ylrs/qxKCfjr9m6YCqCgiwyvxAnc6yce05mtR8mBJTMFPrxzfOGyQg==, tarball: file:projects/oai2-to-oai3.tgz}
     id: file:projects/oai2-to-oai3.tgz
     name: '@rush-temp/oai2-to-oai3'
@@ -8170,7 +8181,7 @@ packages:
       eslint-plugin-node: 11.1.0_eslint@8.28.0
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       rimraf: 3.0.2
       source-map: 0.7.3
       source-map-support: 0.5.21
@@ -8188,7 +8199,7 @@ packages:
       - ts-node
     dev: false
 
-  file:projects/openapi.tgz_prettier@2.7.1+ts-node@9.1.1:
+  file:projects/openapi.tgz_prettier@2.7.1+ts-node@10.9.1:
     resolution: {integrity: sha512-1gIAqFdMdAvRBIiSVAM6fBrtubwici8zW6/WPWJDhSpCEK6fziN5vdcwp5c7v2CK4Aecc3jgl+dNpLip5CgDCQ==, tarball: file:projects/openapi.tgz}
     id: file:projects/openapi.tgz
     name: '@rush-temp/openapi'
@@ -8204,7 +8215,7 @@ packages:
       eslint-plugin-node: 11.1.0_eslint@8.28.0
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       rimraf: 3.0.2
       typescript: 4.9.3
     transitivePeerDependencies:
@@ -8221,7 +8232,7 @@ packages:
     version: 0.0.0
     dev: false
 
-  file:projects/system-requirements.tgz_prettier@2.7.1+ts-node@9.1.1:
+  file:projects/system-requirements.tgz_prettier@2.7.1+ts-node@10.9.1:
     resolution: {integrity: sha512-vFAjihFtLBsY7SEmx4OI1DvJxJI6xAeh36VWCkigtM0zIIwXRsWM0JXy84Bufv9mF8/TpveEntVhnJM+Z8MK1g==, tarball: file:projects/system-requirements.tgz}
     id: file:projects/system-requirements.tgz
     name: '@rush-temp/system-requirements'
@@ -8241,7 +8252,7 @@ packages:
       eslint-plugin-node: 11.1.0_eslint@8.28.0
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       rimraf: 3.0.2
       semver: 7.3.8
       source-map-support: 0.5.21
@@ -8274,7 +8285,7 @@ packages:
       - supports-color
     dev: false
 
-  file:projects/test-utils.tgz_1601d8441375ec1ced01fee8d6117df6:
+  file:projects/test-utils.tgz_1ebd90c6d335d7d97a346a0f4e26ad19:
     resolution: {integrity: sha512-p0q2wolCx4kN6dAMyS197NZoKOkwWX4ZGwRlwaLZvZUUkf/YzewlTBUqfzxo/QkNeBXrCtx8BgVz6KbD/MbOeg==, tarball: file:projects/test-utils.tgz}
     id: file:projects/test-utils.tgz
     name: '@rush-temp/test-utils'
@@ -8287,7 +8298,7 @@ packages:
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
       expect: 26.6.2
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       jest-snapshot: 26.6.2
       rimraf: 3.0.2
     transitivePeerDependencies:
@@ -8299,7 +8310,7 @@ packages:
       - ts-node
     dev: false
 
-  file:projects/yaml.tgz_prettier@2.7.1+ts-node@9.1.1:
+  file:projects/yaml.tgz_prettier@2.7.1+ts-node@10.9.1:
     resolution: {integrity: sha512-W6B1Bq4tXAd9KMCXxOMvCAeTnl9JRCT2D91uxU5v40rh4FeOQiO4Buyfze9ryDGsuKxlFH0+9cSJbXiGe4IAOQ==, tarball: file:projects/yaml.tgz}
     id: file:projects/yaml.tgz
     name: '@rush-temp/yaml'
@@ -8317,7 +8328,7 @@ packages:
       eslint-plugin-node: 11.1.0_eslint@8.28.0
       eslint-plugin-prettier: 4.2.1_eslint@8.28.0+prettier@2.7.1
       eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
-      jest: 29.3.1_5076b77de2277d7bd3e529e70437d1c6
+      jest: 29.3.1_905ff7f381d7c2725cb1589b742e410c
       js-yaml: 4.0.0
       lodash: 4.17.21
       rimraf: 3.0.2
