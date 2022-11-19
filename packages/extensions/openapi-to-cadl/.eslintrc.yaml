@@ -1,0 +1,6 @@
+parser: "@typescript-eslint/parser"
+extends:
+  - "../../../.default-eslintrc.yaml"
+rules:
+  # Due to the need for logging. TODO: change to winston logger.
+  no-console: off

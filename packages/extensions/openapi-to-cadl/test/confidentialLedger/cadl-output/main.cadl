@@ -1,0 +1,25 @@
+import "@cadl-lang/rest";
+import "./routes.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+@service({
+  title: "Microsoft Cognitive Language Service - Analyze Text Authoring",
+})
+@serviceVersion("2022-05-13")
+@server(
+  "{ledgerEndpoint}",
+  "The ConfidentialLedgerClient writes and retrieves ledger entries against the Confidential Ledger service.",
+  {
+    @doc("""
+The Confidential Ledger URL, for example
+https://contoso.confidentialledger.azure.com
+""")
+    ledgerEndpoint: string,
+  }
+)
+@doc("""
+The ConfidentialLedgerClient writes and retrieves ledger entries against the
+Confidential Ledger service.
+""")
+namespace Azure.Language.Authoring;

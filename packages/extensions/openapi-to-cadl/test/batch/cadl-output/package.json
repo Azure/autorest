@@ -1,0 +1,17 @@
+{
+  "name": "@cadl-api-spec/azure-batch-service",
+  "author": "Microsoft Corporation",
+  "description": "A client for issuing REST requests to the Azure Batch service.",
+  "license": "MIT",
+  "dependencies": {
+    "@cadl-lang/compiler": "^0.37.0",
+    "@cadl-lang/rest": "^0.19.0",
+    "@cadl-lang/versioning": "^0.10.0",
+    "@cadl-lang/prettier-plugin-cadl": "^0.5.17",
+    "@azure-tools/cadl-azure-core": "^0.9.0",
+    "@azure-tools/cadl-autorest": "^0.22.0",
+    "@azure-tools/cadl-python": "^0.4.10",
+    "prettier": "^2.7.1"
+  },
+  "private": true
+}

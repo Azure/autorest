@@ -1,0 +1,18 @@
+import "@cadl-lang/rest";
+import "./routes.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+@service({
+  title: "AutoRest Url Test Service",
+})
+@server(
+  "{$host}",
+  "Test Infrastructure for AutoRest",
+  {
+    @doc("server parameter")
+    $host: string,
+  }
+)
+@doc("Test Infrastructure for AutoRest")
+namespace AutoRestUrlTestService;
