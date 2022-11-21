@@ -370,6 +370,10 @@ export class Deduplicator {
         }
         break;
       default:
+        if (isExtensionKey(type)) {
+          // Skip unknown extension type
+          return;
+        }
         throw new Error(`Unknown component type: '${type}'`);
     }
   }
@@ -454,4 +458,13 @@ export class Deduplicator {
     }
     return this.mappings;
   }
+}
+
+type ExtensionKey = `x-${string}`;
+
+/**
+ * Returns true if the key starts with `x-`
+ */
+function isExtensionKey(key: string | ExtensionKey): key is ExtensionKey {
+  return key.startsWith("x-");
 }

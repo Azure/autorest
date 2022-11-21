@@ -254,7 +254,7 @@ class UnsuedComponentFinder {
         const refParts = value.split("/");
         const componentUid = refParts.pop() as string;
         const t: ComponentType = refParts.pop() as ComponentType;
-        if (!this.visitedComponents[t].has(componentUid)) {
+        if (this.visitedComponents[t] && !this.visitedComponents[t].has(componentUid)) {
           this.visitedComponents[t].add(componentUid);
           this.componentsToKeep[t].add(componentUid);
           const componentTypes = this.components[t];
