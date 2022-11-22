@@ -1089,7 +1089,10 @@ See [Azure RPC Spec](https://github.com/Azure/azure-resource-manager-rpc/blob/ma
 **Schema**:
 Field Name | Type | Description
 ---|:---:|---
-final-state-via | `string` - one of `azure-async-operation` or `location` or `original-uri` or `operation-location` | `final-state-via` SHOULD BE one of
+final-state-via | `string` - one of `azure-async-operation` or `location` or `original-uri` or `operation-location` | see below
+final-state-schema | A `ref` to the schema of the final result | For languages that make this the result of the LRO
+
+`final-state-via` SHOULD BE one of
 
 - `azure-async-operation` - poll until terminal state, skip any final GET on Location or Origin-URI and use the final response at the uri pointed to by the header `Azure-AsyncOperation`.
 - `location` - poll until terminal state, if the initial response had a `Location` header, a final GET will be done. Default behavior for POST operation.
@@ -1097,6 +1100,8 @@ final-state-via | `string` - one of `azure-async-operation` or `location` or `or
 - `operation-location` - poll until terminal state, skip any final GET on Location or Origin-URI and use the final response at the uri pointed to by the header `Operation-Location`
 
 The polling mechanism in itself remains unchanged, the only impact of this option could be to do an additional final GET, or skip a final GET.
+
+The `final-state-schema` can be used to specify the schema of the response of whichever means is indicated in `final-state-via` for obtaining the final result.
 
 **Parent element**: [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
 
@@ -1109,9 +1114,10 @@ The polling mechanism in itself remains unchanged, the only impact of this optio
       "operationId": "products_create",
       "x-ms-long-running-operation": true,
       "x-ms-long-running-operation-options" : {
-          "final-state-via" : "location"
+          "final-state-via" : "location",
+          "final-state-schema": "#/definitions/Product"
       },
-      "description": "A pageable list of Products."
+      "description": "Create a Product."
     }
   }
 }

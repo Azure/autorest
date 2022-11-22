@@ -5,7 +5,8 @@ import assert from "assert";
 import { CodeModel, DictionarySchema, HttpHeader, Operation, Parameter } from "@autorest/codemodel";
 import { JsonType, ParameterLocation } from "@azure-tools/openapi";
 import * as oai3 from "@azure-tools/openapi";
-import { addOperation, createTestSpec, findByName } from "../utils";
+import { cloneDeep } from "lodash";
+import { addOperation, addSchema, createTestSpec, findByName } from "../utils";
 import { runModeler, runModelerWithOperation } from "./modelerfour-utils";
 
 describe("Modelerfour.Request", () => {
@@ -232,6 +233,143 @@ describe("Modelerfour.Request", () => {
       expect(parameters).toHaveLength(2);
       expect(parameters[1].language.default.serializedName).toEqual("bar");
       expect(parameters[1].protocol).toEqual({ http: { in: "header" } });
+    });
+  });
+
+  describe("final-state-schema in lro options", () => {
+    it("creates a 200 response from final-state-schema if one is not present", async () => {
+      const oldSpec: oai3.Model = createTestSpec();
+      addOperation(oldSpec, "/products/{id}", {
+        put: {
+          operationId: "product_create",
+          description: "Create a Product",
+          "x-ms-long-running-operation": true,
+          "x-ms-long-running-operation-options": {
+            "final-state-via": "location",
+          },
+          responses: {
+            "200": {
+              description: "Success",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/Product" },
+                },
+              },
+            },
+            "202": {
+              description: "Accepted",
+            },
+          },
+        },
+      });
+      addSchema(oldSpec, "Product", {
+        type: "object",
+        properties: {
+          id: {
+            type: "string",
+          },
+        },
+      });
+
+      const customizer = (spec: any): any => {
+        const operation = spec.paths["/products/{id}"]["put"];
+        delete operation["responses"]["200"];
+        operation["x-ms-long-running-operation-options"]["final-state-schema"] = "#/components/schemas/Product";
+        return spec;
+      };
+
+      const newSpec = customizer(cloneDeep(oldSpec));
+
+      const oldModel = await runModeler(oldSpec);
+      const newModel = await runModeler(newSpec);
+      const oldResponses = oldModel.operationGroups[0].operations[0].responses;
+      const newResponses = newModel.operationGroups[0].operations[0].responses;
+      expect(oldResponses).toBeDefined();
+      expect(newResponses).toBeDefined();
+      expect(newResponses).toEqual(oldResponses);
+    });
+
+    it("does not modify 200 response from final-state-schema if one is present", async () => {
+      const oldSpec: oai3.Model = createTestSpec();
+      addOperation(oldSpec, "/products/{id}", {
+        put: {
+          operationId: "product_create",
+          description: "Create a Product",
+          "x-ms-long-running-operation": true,
+          "x-ms-long-running-operation-options": {
+            "final-state-via": "location",
+          },
+          responses: {
+            "200": {
+              description: "Success",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/Product" },
+                },
+              },
+            },
+            "202": {
+              description: "Accepted",
+            },
+          },
+        },
+      });
+      addSchema(oldSpec, "Product", {
+        type: "object",
+        properties: {
+          id: {
+            type: "string",
+          },
+        },
+      });
+
+      const customizer = (spec: any): any => {
+        const operation = spec.paths["/products/{id}"]["put"];
+        operation["x-ms-long-running-operation-options"]["final-state-schema"] = "#/components/schemas/Widget";
+        return spec;
+      };
+      const newSpec = customizer(cloneDeep(oldSpec));
+
+      const oldModel = await runModeler(oldSpec);
+      const newModel = await runModeler(newSpec);
+      const oldResponses = oldModel.operationGroups[0].operations[0].responses;
+      const newResponses = newModel.operationGroups[0].operations[0].responses;
+      expect(oldResponses).toBeDefined();
+      expect(newResponses).toBeDefined();
+      expect(newResponses).toEqual(oldResponses);
+    });
+
+    // Modelerfour allows an LRO to have a 202 response without a 200 or 201 response.
+    it("does not error if an LRO does not have a 200 or 201 response", async () => {
+      const spec: oai3.Model = createTestSpec();
+      addOperation(spec, "/products/{id}", {
+        put: {
+          operationId: "product_create",
+          description: "Create a Product",
+          "x-ms-long-running-operation": true,
+          "x-ms-long-running-operation-options": {
+            "final-state-via": "location",
+          },
+          responses: {
+            "202": {
+              description: "Accepted",
+            },
+          },
+        },
+      });
+      addSchema(spec, "Product", {
+        type: "object",
+        properties: {
+          id: {
+            type: "string",
+          },
+        },
+      });
+
+      const model = await runModeler(spec);
+      const responses = model.operationGroups[0].operations[0].responses;
+      expect(responses).toBeDefined();
+      expect(responses).toHaveLength(1);
     });
   });
 });

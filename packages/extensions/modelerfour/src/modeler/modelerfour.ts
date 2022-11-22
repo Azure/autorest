@@ -76,7 +76,7 @@ import {
   EnumStr,
 } from "@azure-tools/openapi";
 import * as OpenAPI from "@azure-tools/openapi";
-import { uniq, every } from "lodash";
+import { uniq, every, Dictionary } from "lodash";
 import { isDefined } from "../utils";
 import { BodyProcessor, KnownMediaTypeGroupItem, RequestBodyGroup } from "./body-processor";
 import { KnownSpecialHeaders } from "./constants";
@@ -2146,8 +2146,27 @@ export class ModelerFour {
   processResponses(httpOperation: OpenAPI.HttpOperation, operation: Operation) {
     const acceptTypes = new Set<string>();
 
+    const modelerResponses = httpOperation.responses;
+
+    // If the operation has final-state-schema lro option, add a "200" response if there isn't one already
+    if (httpOperation["x-ms-long-running-operation-options"]?.["final-state-schema"]) {
+      const finalStateSchema = httpOperation["x-ms-long-running-operation-options"]?.["final-state-schema"] as string;
+      if (!Object.keys(modelerResponses).some((k) => k === "200")) {
+        modelerResponses["200"] = {
+          description: "Success",
+          content: {
+            "application/json": {
+              schema: {
+                $ref: finalStateSchema,
+              },
+            },
+          },
+        };
+      }
+    }
+
     // === Response ===
-    for (const { key: responseCode, value: response } of this.resolveDictionary(httpOperation.responses)) {
+    for (const { key: responseCode, value: response } of this.resolveDictionary(modelerResponses)) {
       const isErr = responseCode === "default" || response["x-ms-error-response"];
 
       const knownMediaTypes = this.filterMediaTypes(response.content);
